@@ -1,0 +1,278 @@
+{
+  "at": "2026-10-01T00:52:55.022Z",
+  "locale": "ar",
+  "walks": [
+    {
+      "id": "F1-upload",
+      "title": "Upload a file into a folder and find it there",
+      "as": "mona.adel@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open My files",
+          "ok": true,
+          "note": "",
+          "ms": 2948,
+          "url": "/ar/my-files",
+          "screenshot": "F1-upload/01-open-my-files.png"
+        },
+        {
+          "n": 2,
+          "name": "Open Upload files",
+          "ok": true,
+          "note": "",
+          "ms": 799,
+          "url": "/ar/my-files",
+          "screenshot": "F1-upload/02-open-upload-files.png"
+        },
+        {
+          "n": 3,
+          "name": "Choose Contracts",
+          "ok": true,
+          "note": "picker shows \"Contracts\" (one destination)",
+          "ms": 915,
+          "url": "/ar/my-files",
+          "screenshot": "F1-upload/03-choose-contracts.png"
+        },
+        {
+          "n": 4,
+          "name": "Open the file chooser from the keyboard",
+          "ok": true,
+          "note": "Enter on the focused drop zone opened the file chooser",
+          "ms": 757,
+          "url": "/ar/my-files",
+          "screenshot": "F1-upload/04-open-the-file-chooser-from-the-keyboard.png"
+        },
+        {
+          "n": 5,
+          "name": "Add a file",
+          "ok": true,
+          "note": "the file is listed in the dialog",
+          "ms": 697,
+          "url": "/ar/my-files",
+          "screenshot": "F1-upload/05-add-a-file.png"
+        },
+        {
+          "n": 6,
+          "name": "Upload now",
+          "ok": true,
+          "note": "toast: تم رفع الملفات بنجاح",
+          "ms": 3664,
+          "url": "/ar/my-files",
+          "screenshot": "F1-upload/06-upload-now.png"
+        },
+        {
+          "n": 7,
+          "name": "Open the Contracts folder",
+          "ok": true,
+          "note": "the uploaded file is in the folder's file list",
+          "ms": 3280,
+          "url": "/ar/my-files/ae66229d-18a9-549f-9d9f-c109259d082b",
+          "screenshot": "F1-upload/07-open-the-contracts-folder.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "F1b-upload-two-folders",
+      "title": "Upload one file to two folders at once",
+      "as": "mona.adel@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open My files",
+          "ok": true,
+          "note": "",
+          "ms": 2898,
+          "url": "/ar/my-files",
+          "screenshot": "F1b-upload-two-folders/01-open-my-files.png"
+        },
+        {
+          "n": 2,
+          "name": "Open Upload files",
+          "ok": true,
+          "note": "",
+          "ms": 807,
+          "url": "/ar/my-files",
+          "screenshot": "F1b-upload-two-folders/02-open-upload-files.png"
+        },
+        {
+          "n": 3,
+          "name": "Choose Contracts and Invoices 2026",
+          "ok": true,
+          "note": "picker shows \"Invoices 2026\" (one destination)",
+          "ms": 1066,
+          "url": "/ar/my-files",
+          "screenshot": "F1b-upload-two-folders/03-choose-contracts-and-invoices-2026.png"
+        },
+        {
+          "n": 4,
+          "name": "Open the file chooser from the keyboard",
+          "ok": true,
+          "note": "Enter on the focused drop zone opened the file chooser",
+          "ms": 731,
+          "url": "/ar/my-files",
+          "screenshot": "F1b-upload-two-folders/04-open-the-file-chooser-from-the-keyboard.png"
+        },
+        {
+          "n": 5,
+          "name": "Add a file",
+          "ok": true,
+          "note": "the file is listed in the dialog",
+          "ms": 703,
+          "url": "/ar/my-files",
+          "screenshot": "F1b-upload-two-folders/05-add-a-file.png"
+        },
+        {
+          "n": 6,
+          "name": "Upload now",
+          "ok": true,
+          "note": "toast: تم رفع الملفات بنجاح",
+          "ms": 3664,
+          "url": "/ar/my-files",
+          "screenshot": "F1b-upload-two-folders/06-upload-now.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "F2-archive",
+      "title": "Create a folder, archive it, restore it",
+      "as": "mona.adel@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open My files",
+          "ok": true,
+          "note": "",
+          "ms": 2880,
+          "url": "/ar/my-files",
+          "screenshot": "F2-archive/01-open-my-files.png"
+        },
+        {
+          "n": 2,
+          "name": "Create folder",
+          "ok": true,
+          "note": "toast: تم إنشاء المجلد «Audit walk folder»",
+          "ms": 2779,
+          "url": "/ar/my-files",
+          "screenshot": "F2-archive/02-create-folder.png"
+        },
+        {
+          "n": 3,
+          "name": "Archive it from its menu",
+          "ok": true,
+          "note": "toast: نُقل إلى الملفات المؤرشفة",
+          "ms": 3372,
+          "url": "/ar/my-files",
+          "screenshot": "F2-archive/03-archive-it-from-its-menu.png"
+        },
+        {
+          "n": 4,
+          "name": "Find it in Archived files",
+          "ok": true,
+          "note": "listed in the archive",
+          "ms": 1198,
+          "url": "/ar/archived-files",
+          "screenshot": "F2-archive/04-find-it-in-archived-files.png"
+        },
+        {
+          "n": 5,
+          "name": "Open it directly in a new tab",
+          "ok": true,
+          "note": "the folder's own name as the title; back goes to Archived files",
+          "ms": 2200,
+          "url": "/ar/archived-files",
+          "screenshot": "F2-archive/05-open-it-directly-in-a-new-tab.png"
+        },
+        {
+          "n": 6,
+          "name": "Restore it",
+          "ok": true,
+          "note": "toast: تمت استعادة «Audit walk folder»",
+          "ms": 2900,
+          "url": "/ar/archived-files",
+          "screenshot": "F2-archive/06-restore-it.png"
+        },
+        {
+          "n": 7,
+          "name": "Back in My files",
+          "ok": true,
+          "note": "the folder is back",
+          "ms": 2599,
+          "url": "/ar/my-files",
+          "screenshot": "F2-archive/07-back-in-my-files.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "F3-share",
+      "title": "Share a file with an external link, open it signed out, revoke it",
+      "as": "mona.adel@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open My files",
+          "ok": true,
+          "note": "",
+          "ms": 2919,
+          "url": "/ar/my-files",
+          "screenshot": "F3-share/01-open-my-files.png"
+        },
+        {
+          "n": 2,
+          "name": "Share with › External links",
+          "ok": true,
+          "note": "",
+          "ms": 1037,
+          "url": "/ar/my-files",
+          "screenshot": "F3-share/02-share-with-external-links.png"
+        },
+        {
+          "n": 3,
+          "name": "Create a view-only link",
+          "ok": true,
+          "note": "expiry time shows 03:52; Cairo time now 03:52",
+          "ms": 902,
+          "url": "/ar/my-files",
+          "screenshot": "F3-share/03-create-a-view-only-link.png"
+        },
+        {
+          "n": 4,
+          "name": "Open the link signed out",
+          "ok": true,
+          "note": "guest sees: Q3 2026 Executive Summary.pdf / عرض فقط — تنزيل الملف الأصلي معطّل / 1.2 م.ب",
+          "ms": 1970,
+          "url": "/ar/my-files",
+          "screenshot": "F3-share/04-open-the-link-signed-out.png"
+        },
+        {
+          "n": 5,
+          "name": "Revoke the link",
+          "ok": true,
+          "note": "تم إلغاء الرابط",
+          "ms": 2085,
+          "url": "/ar/my-files",
+          "screenshot": "F3-share/05-revoke-the-link.png"
+        },
+        {
+          "n": 6,
+          "name": "Open the link again signed out",
+          "ok": true,
+          "note": "guest sees: هذا الرابط المشترك غير متاح. / ربما انتهت صلاحيته أو أُلغي، أو لم يعد المحتوى مشتركًا.",
+          "ms": 1518,
+          "url": "/ar/my-files",
+          "screenshot": "F3-share/06-open-the-link-again-signed-out.png"
+        }
+      ],
+      "console": [
+        "Error encountered handling the endpoint revokeShare.\n                  `baseQuery` returned an object containing neither a valid `error` and `result`. At least one of them should not be `undefined`\n                  It needs to return an object with either the shape `{ data: <value> }` or `{ error: "
+      ],
+      "api": []
+    }
+  ]
+}

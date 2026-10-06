@@ -1,0 +1,303 @@
+{
+  "at": "2026-10-01T23:57:47.817Z",
+  "locale": "en",
+  "walks": [
+    {
+      "id": "C0-from-suite",
+      "title": "Open Chats from the suite",
+      "locale": "en",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open Chats from SOS (/go/hq)",
+          "ok": true,
+          "note": "via a one-time code, 7 addresses, none with a token",
+          "ms": 3870,
+          "url": "http://localhost:3000/hq/office",
+          "screenshot": "C0-from-suite/01-open-chats-from-sos-go-hq.png"
+        },
+        {
+          "n": 2,
+          "name": "Mona is the person in Chats",
+          "ok": true,
+          "note": "account menu: Mona Adel",
+          "ms": 731,
+          "url": "http://localhost:3000/hq/office",
+          "screenshot": "C0-from-suite/02-mona-is-the-person-in-chats.png"
+        },
+        {
+          "n": 3,
+          "name": "The page is in the reader's language",
+          "ok": true,
+          "note": "lang en, dir ltr",
+          "ms": 669,
+          "url": "http://localhost:3000/hq/office",
+          "screenshot": "C0-from-suite/03-the-page-is-in-the-reader-s-language.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "C1-file",
+      "title": "Send a message with a file",
+      "locale": "en",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open #design",
+          "ok": true,
+          "note": "",
+          "ms": 2383,
+          "url": "http://localhost:3000/hq/chat/c-design?__quiet=1",
+          "screenshot": "C1-file/01-open-design.png"
+        },
+        {
+          "n": 2,
+          "name": "Attach Q3-forecast.xlsx from Files",
+          "ok": true,
+          "note": "",
+          "ms": 667,
+          "url": "http://localhost:3000/hq/chat/c-design?__quiet=1",
+          "screenshot": "C1-file/02-attach-q3-forecast-xlsx-from-files.png"
+        },
+        {
+          "n": 3,
+          "name": "Write and send",
+          "ok": true,
+          "note": "the message carries the file",
+          "ms": 638,
+          "url": "http://localhost:3000/hq/chat/c-design?__quiet=1",
+          "screenshot": "C1-file/03-write-and-send.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "C2-group",
+      "title": "Start a group, then again with the same people",
+      "locale": "en",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Start a group with Sara and Lena",
+          "ok": true,
+          "note": "/hq/chat/grp-1",
+          "ms": 2782,
+          "url": "http://localhost:3000/hq/chat/grp-1",
+          "screenshot": "C2-group/01-start-a-group-with-sara-and-lena.png"
+        },
+        {
+          "n": 2,
+          "name": "Again with the same two",
+          "ok": true,
+          "note": "the same group opens",
+          "ms": 2766,
+          "url": "http://localhost:3000/hq/chat/grp-1",
+          "screenshot": "C2-group/02-again-with-the-same-two.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "C3-guest",
+      "title": "Meet now and a guest",
+      "locale": "en",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Meet now",
+          "ok": true,
+          "note": "",
+          "ms": 2871,
+          "url": "http://localhost:3000/hq/meetings/mt-muq718qn/call",
+          "screenshot": "C3-guest/01-meet-now.png"
+        },
+        {
+          "n": 2,
+          "name": "The link carries a secret, not the meeting id",
+          "ok": true,
+          "note": "/guest/MBnTnJ… (32 characters)",
+          "ms": 570,
+          "url": "http://localhost:3000/hq/meetings/mt-muq718qn/call",
+          "screenshot": "C3-guest/02-the-link-carries-a-secret-not-the-meeting-id.png"
+        },
+        {
+          "n": 3,
+          "name": "A guest joins by the link",
+          "ok": true,
+          "note": "the guest is in, or waiting for the host",
+          "ms": 5204,
+          "url": "http://localhost:3000/hq/meetings/mt-muq718qn/call",
+          "screenshot": "C3-guest/03-a-guest-joins-by-the-link.png"
+        },
+        {
+          "n": 4,
+          "name": "Reset the link (confirmed)",
+          "ok": true,
+          "note": "a new secret",
+          "ms": 1537,
+          "url": "http://localhost:3000/hq/meetings/mt-muq718qn/call",
+          "screenshot": "C3-guest/04-reset-the-link-confirmed.png"
+        },
+        {
+          "n": 5,
+          "name": "The old link no longer works",
+          "ok": true,
+          "note": "This link is no longer active",
+          "ms": 3829,
+          "url": "http://localhost:3000/hq/meetings/mt-muq718qn/call",
+          "screenshot": "C3-guest/05-the-old-link-no-longer-works.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "C4-leave-end",
+      "title": "Leave, or end for everyone",
+      "locale": "en",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Meet now and join",
+          "ok": true,
+          "note": "",
+          "ms": 2717,
+          "url": "http://localhost:3000/hq/meetings/mt-muq71ni8/call",
+          "screenshot": "C4-leave-end/01-meet-now-and-join.png"
+        },
+        {
+          "n": 2,
+          "name": "Leave: the meeting is still on",
+          "ok": true,
+          "note": "Join meeting is still offered",
+          "ms": 1168,
+          "url": "http://localhost:3000/hq/meetings/mt-muq71ni8",
+          "screenshot": "C4-leave-end/02-leave-the-meeting-is-still-on.png"
+        },
+        {
+          "n": 3,
+          "name": "End for everyone (confirmed)",
+          "ok": true,
+          "note": "ended: no way to join",
+          "ms": 1666,
+          "url": "http://localhost:3000/hq/meetings/mt-muq71ni8",
+          "screenshot": "C4-leave-end/03-end-for-everyone-confirmed.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "C5-status",
+      "title": "Set your status",
+      "locale": "en",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open Set your status",
+          "ok": true,
+          "note": "",
+          "ms": 702,
+          "url": "http://localhost:3000/hq/office?__quiet=1",
+          "screenshot": "C5-status/01-open-set-your-status.png"
+        },
+        {
+          "n": 2,
+          "name": "Focus for 25 minutes",
+          "ok": true,
+          "note": "Your status: Focus",
+          "ms": 1328,
+          "url": "http://localhost:3000/hq/office?__quiet=1",
+          "screenshot": "C5-status/02-focus-for-25-minutes.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "C6-search",
+      "title": "Search, on a desk and on a phone",
+      "locale": "en",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Search \"invoice\" at 1440",
+          "ok": true,
+          "note": "5 matches on the page",
+          "ms": 2067,
+          "url": "http://localhost:3000/hq/chat/search?q=invoice",
+          "screenshot": "C6-search/01-search-invoice-at-1440.png"
+        },
+        {
+          "n": 2,
+          "name": "Back goes to Chat at 1440",
+          "ok": true,
+          "note": "/hq/chat/catch-up",
+          "ms": 766,
+          "url": "http://localhost:3000/hq/chat/catch-up",
+          "screenshot": "C6-search/02-back-goes-to-chat-at-1440.png"
+        },
+        {
+          "n": 3,
+          "name": "Search \"invoice\" at 390",
+          "ok": true,
+          "note": "5 matches on the page",
+          "ms": 2053,
+          "url": "http://localhost:3000/hq/chat/search?q=invoice",
+          "screenshot": "C6-search/03-search-invoice-at-390.png"
+        },
+        {
+          "n": 4,
+          "name": "Back goes to Chat at 390",
+          "ok": true,
+          "note": "/hq/chat",
+          "ms": 804,
+          "url": "http://localhost:3000/hq/chat",
+          "screenshot": "C6-search/04-back-goes-to-chat-at-390.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "C7-view-as",
+      "title": "View as someone in Chats",
+      "locale": "en",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open Chats with the viewing session",
+          "ok": true,
+          "note": "Viewing as Aya Hamed · read-only",
+          "ms": 1861,
+          "url": "http://localhost:3000/hq/chat/c-design",
+          "screenshot": "C7-view-as/01-open-chats-with-the-viewing-session.png"
+        },
+        {
+          "n": 2,
+          "name": "Sending is refused, with the reason",
+          "ok": true,
+          "note": "Changes are turned off",
+          "ms": 637,
+          "url": "http://localhost:3000/hq/chat/c-design",
+          "screenshot": "C7-view-as/02-sending-is-refused-with-the-reason.png"
+        },
+        {
+          "n": 3,
+          "name": "Stop viewing: back as Mona",
+          "ok": true,
+          "note": "Mona again",
+          "ms": 7464,
+          "url": "http://localhost:3000/hq/office",
+          "screenshot": "C7-view-as/03-stop-viewing-back-as-mona.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    }
+  ]
+}

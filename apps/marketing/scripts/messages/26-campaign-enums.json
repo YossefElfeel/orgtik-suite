@@ -1,0 +1,450 @@
+{
+ "CampaignEnums.type.GOOGLE_SEARCH": {
+  "en": "Google Search ads",
+  "ar": "إعلانات بحث Google",
+  "de": "Google-Suchanzeigen",
+  "fr": "Annonces Google Search",
+  "it": "Annunci Google Search"
+ },
+ "CampaignEnums.type.PAID_SOCIAL": {
+  "en": "Paid social ads",
+  "ar": "إعلانات اجتماعية مدفوعة",
+  "de": "Bezahlte Social-Anzeigen",
+  "fr": "Annonces sociales payantes",
+  "it": "Annunci social a pagamento"
+ },
+ "CampaignEnums.type.SOCIAL_MEDIA": {
+  "en": "Social media posts",
+  "ar": "منشورات التواصل الاجتماعي",
+  "de": "Social-Media-Beiträge",
+  "fr": "Publications sur les réseaux sociaux",
+  "it": "Post sui social"
+ },
+ "CampaignEnums.type.MESSAGING": {
+  "en": "Messaging",
+  "ar": "المراسلة",
+  "de": "Nachrichten",
+  "fr": "Messagerie",
+  "it": "Messaggistica"
+ },
+ "CampaignEnums.typeDescription.GOOGLE_SEARCH": {
+  "en": "Ads on Google results for the keywords you choose.",
+  "ar": "إعلانات في نتائج Google للكلمات المفتاحية التي تختارها.",
+  "de": "Anzeigen in den Google-Ergebnissen zu Ihren Keywords.",
+  "fr": "Des annonces dans les résultats Google pour vos mots clés.",
+  "it": "Annunci nei risultati Google per le parole chiave scelte."
+ },
+ "CampaignEnums.typeDescription.PAID_SOCIAL": {
+  "en": "Paid ads on social platforms, in ad sets.",
+  "ar": "إعلانات مدفوعة على المنصات الاجتماعية ضمن مجموعات إعلانات.",
+  "de": "Bezahlte Anzeigen auf sozialen Plattformen, in Anzeigensets.",
+  "fr": "Des annonces payantes sur les réseaux sociaux, en ensembles d’annonces.",
+  "it": "Annunci a pagamento sui social, in set di annunci."
+ },
+ "CampaignEnums.typeDescription.SOCIAL_MEDIA": {
+  "en": "Organic posts grouped and scheduled together.",
+  "ar": "منشورات غير مدفوعة تُجمع وتُجدول معًا.",
+  "de": "Organische Beiträge, gemeinsam gebündelt und geplant.",
+  "fr": "Des publications organiques regroupées et planifiées ensemble.",
+  "it": "Post organici raggruppati e programmati insieme."
+ },
+ "CampaignEnums.typeDescription.MESSAGING": {
+  "en": "Email, SMS or WhatsApp to your contacts.",
+  "ar": "بريد إلكتروني أو رسائل SMS أو WhatsApp إلى جهات اتصالك.",
+  "de": "E-Mail, SMS oder WhatsApp an Ihre Kontakte.",
+  "fr": "E-mail, SMS ou WhatsApp à vos contacts.",
+  "it": "Email, SMS o WhatsApp ai tuoi contatti."
+ },
+ "CampaignEnums.category.ECOMMERCE": {
+  "en": "E-commerce",
+  "ar": "التجارة الإلكترونية",
+  "de": "E-Commerce",
+  "fr": "E-commerce",
+  "it": "E-commerce"
+ },
+ "CampaignEnums.category.REAL_ESTATE": {
+  "en": "Real estate",
+  "ar": "العقارات",
+  "de": "Immobilien",
+  "fr": "Immobilier",
+  "it": "Immobiliare"
+ },
+ "CampaignEnums.category.AUTOMOTIVE": {
+  "en": "Automotive",
+  "ar": "السيارات",
+  "de": "Automobil",
+  "fr": "Automobile",
+  "it": "Automotive"
+ },
+ "CampaignEnums.category.SERVICES": {
+  "en": "Services",
+  "ar": "الخدمات",
+  "de": "Dienstleistungen",
+  "fr": "Services",
+  "it": "Servizi"
+ },
+ "CampaignEnums.category.FOOD_BEVERAGE": {
+  "en": "Food and drink",
+  "ar": "الأطعمة والمشروبات",
+  "de": "Essen und Trinken",
+  "fr": "Alimentation et boissons",
+  "it": "Cibo e bevande"
+ },
+ "CampaignEnums.category.HEALTH": {
+  "en": "Health",
+  "ar": "الصحة",
+  "de": "Gesundheit",
+  "fr": "Santé",
+  "it": "Salute"
+ },
+ "CampaignEnums.googleObjective.WEBSITE_TRAFFIC": {
+  "en": "Website traffic",
+  "ar": "زيارات الموقع",
+  "de": "Websitezugriffe",
+  "fr": "Trafic vers le site",
+  "it": "Traffico al sito"
+ },
+ "CampaignEnums.googleObjective.CONVERSIONS": {
+  "en": "Conversions",
+  "ar": "التحويلات",
+  "de": "Conversions",
+  "fr": "Conversions",
+  "it": "Conversioni"
+ },
+ "CampaignEnums.googleObjective.LEADS": {
+  "en": "Leads",
+  "ar": "العملاء المحتملون",
+  "de": "Leads",
+  "fr": "Prospects",
+  "it": "Lead"
+ },
+ "CampaignEnums.bidding.MAXIMIZE_CONVERSIONS": {
+  "en": "Maximize conversions",
+  "ar": "زيادة التحويلات إلى أقصى حد",
+  "de": "Conversions maximieren",
+  "fr": "Maximiser les conversions",
+  "it": "Massimizza le conversioni"
+ },
+ "CampaignEnums.bidding.MAXIMIZE_CLICKS": {
+  "en": "Maximize clicks",
+  "ar": "زيادة النقرات إلى أقصى حد",
+  "de": "Klicks maximieren",
+  "fr": "Maximiser les clics",
+  "it": "Massimizza i clic"
+ },
+ "CampaignEnums.bidding.TARGET_CPA": {
+  "en": "Target cost per action",
+  "ar": "التكلفة المستهدفة لكل إجراء",
+  "de": "Ziel-CPA",
+  "fr": "CPA cible",
+  "it": "CPA target"
+ },
+ "CampaignEnums.bidding.MANUAL_CPC": {
+  "en": "Manual cost per click",
+  "ar": "التكلفة اليدوية لكل نقرة",
+  "de": "Manueller CPC",
+  "fr": "CPC manuel",
+  "it": "CPC manuale"
+ },
+ "CampaignEnums.network.GOOGLE_SEARCH": {
+  "en": "Google Search",
+  "ar": "بحث Google",
+  "de": "Google-Suche",
+  "fr": "Recherche Google",
+  "it": "Ricerca Google"
+ },
+ "CampaignEnums.network.SEARCH_PARTNERS": {
+  "en": "Search partners",
+  "ar": "شركاء البحث",
+  "de": "Suchnetzwerk-Partner",
+  "fr": "Partenaires du Réseau de Recherche",
+  "it": "Partner di ricerca"
+ },
+ "CampaignEnums.network.DISPLAY_NETWORK": {
+  "en": "Display Network",
+  "ar": "الشبكة الإعلانية",
+  "de": "Displaynetzwerk",
+  "fr": "Réseau Display",
+  "it": "Rete Display"
+ },
+ "CampaignEnums.budgetType.DAILY": {
+  "en": "Per day",
+  "ar": "يوميًا",
+  "de": "Pro Tag",
+  "fr": "Par jour",
+  "it": "Al giorno"
+ },
+ "CampaignEnums.budgetType.LIFETIME": {
+  "en": "In total",
+  "ar": "إجمالًا",
+  "de": "Insgesamt",
+  "fr": "Au total",
+  "it": "In totale"
+ },
+ "CampaignEnums.paidObjective.CONVERSIONS": {
+  "en": "Sales",
+  "ar": "المبيعات",
+  "de": "Umsätze",
+  "fr": "Ventes",
+  "it": "Vendite"
+ },
+ "CampaignEnums.paidObjective.TRAFFIC": {
+  "en": "Traffic",
+  "ar": "الزيارات",
+  "de": "Zugriffe",
+  "fr": "Trafic",
+  "it": "Traffico"
+ },
+ "CampaignEnums.paidObjective.AWARENESS": {
+  "en": "Awareness",
+  "ar": "الوعي",
+  "de": "Bekanntheit",
+  "fr": "Notoriété",
+  "it": "Notorietà"
+ },
+ "CampaignEnums.paidObjective.ENGAGEMENT": {
+  "en": "Engagement",
+  "ar": "التفاعل",
+  "de": "Interaktion",
+  "fr": "Interactions",
+  "it": "Interazione"
+ },
+ "CampaignEnums.paidObjective.LEADS": {
+  "en": "Leads",
+  "ar": "العملاء المحتملون",
+  "de": "Leads",
+  "fr": "Prospects",
+  "it": "Lead"
+ },
+ "CampaignEnums.paidObjective.APP_INSTALLS": {
+  "en": "App installs",
+  "ar": "تثبيت التطبيق",
+  "de": "App-Installationen",
+  "fr": "Installations d’application",
+  "it": "Installazioni dell’app"
+ },
+ "CampaignEnums.gender.ALL": {
+  "en": "All",
+  "ar": "الجميع",
+  "de": "Alle",
+  "fr": "Tous",
+  "it": "Tutti"
+ },
+ "CampaignEnums.gender.MALE": {
+  "en": "Men",
+  "ar": "الرجال",
+  "de": "Männer",
+  "fr": "Hommes",
+  "it": "Uomini"
+ },
+ "CampaignEnums.gender.FEMALE": {
+  "en": "Women",
+  "ar": "النساء",
+  "de": "Frauen",
+  "fr": "Femmes",
+  "it": "Donne"
+ },
+ "CampaignEnums.cta.LEARN_MORE": {
+  "en": "Learn more",
+  "ar": "اعرف المزيد",
+  "de": "Mehr dazu",
+  "fr": "En savoir plus",
+  "it": "Scopri di più"
+ },
+ "CampaignEnums.cta.SHOP_NOW": {
+  "en": "Shop now",
+  "ar": "تسوّق الآن",
+  "de": "Jetzt einkaufen",
+  "fr": "Acheter",
+  "it": "Acquista ora"
+ },
+ "CampaignEnums.cta.SIGN_UP": {
+  "en": "Sign up",
+  "ar": "سجّل الآن",
+  "de": "Registrieren",
+  "fr": "S’inscrire",
+  "it": "Iscriviti"
+ },
+ "CampaignEnums.cta.CONTACT_US": {
+  "en": "Contact us",
+  "ar": "تواصل معنا",
+  "de": "Kontakt",
+  "fr": "Nous contacter",
+  "it": "Contattaci"
+ },
+ "CampaignEnums.cta.BOOK_NOW": {
+  "en": "Book now",
+  "ar": "احجز الآن",
+  "de": "Jetzt buchen",
+  "fr": "Réserver",
+  "it": "Prenota ora"
+ },
+ "CampaignEnums.cta.GET_QUOTE": {
+  "en": "Get a quote",
+  "ar": "اطلب عرض سعر",
+  "de": "Angebot anfordern",
+  "fr": "Demander un devis",
+  "it": "Richiedi un preventivo"
+ },
+ "CampaignEnums.cta.APPLY_NOW": {
+  "en": "Apply now",
+  "ar": "قدّم الآن",
+  "de": "Jetzt bewerben",
+  "fr": "Postuler",
+  "it": "Candidati ora"
+ },
+ "CampaignEnums.cta.DOWNLOAD": {
+  "en": "Download",
+  "ar": "تنزيل",
+  "de": "Herunterladen",
+  "fr": "Télécharger",
+  "it": "Scarica"
+ },
+ "CampaignEnums.cta.GET_OFFER": {
+  "en": "Get offer",
+  "ar": "احصل على العرض",
+  "de": "Angebot sichern",
+  "fr": "Profiter de l’offre",
+  "it": "Ottieni l’offerta"
+ },
+ "CampaignEnums.cta.SUBSCRIBE": {
+  "en": "Subscribe",
+  "ar": "اشترك",
+  "de": "Abonnieren",
+  "fr": "S’abonner",
+  "it": "Iscriviti"
+ },
+ "CampaignEnums.cta.WATCH_MORE": {
+  "en": "Watch more",
+  "ar": "شاهد المزيد",
+  "de": "Mehr ansehen",
+  "fr": "Regarder plus",
+  "it": "Guarda altro"
+ },
+ "CampaignEnums.matchType.PHRASE": {
+  "en": "Phrase",
+  "ar": "عبارة",
+  "de": "Passende Wortgruppe",
+  "fr": "Expression exacte",
+  "it": "Frase"
+ },
+ "CampaignEnums.matchType.BROAD": {
+  "en": "Broad",
+  "ar": "واسعة",
+  "de": "Weitgehend passend",
+  "fr": "Requête large",
+  "it": "Generica"
+ },
+ "CampaignEnums.matchType.EXACT": {
+  "en": "Exact",
+  "ar": "مطابقة تامة",
+  "de": "Genau passend",
+  "fr": "Mot clé exact",
+  "it": "Esatta"
+ },
+ "CampaignEnums.channel.EMAIL": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "CampaignEnums.channel.SMS": {
+  "en": "SMS",
+  "ar": "رسائل SMS",
+  "de": "SMS",
+  "fr": "SMS",
+  "it": "SMS"
+ },
+ "CampaignEnums.channel.WHATSAPP": {
+  "en": "WhatsApp",
+  "ar": "WhatsApp",
+  "de": "WhatsApp",
+  "fr": "WhatsApp",
+  "it": "WhatsApp"
+ },
+ "CampaignEnums.interest.ONLINE_SHOPPING": {
+  "en": "Online shopping",
+  "ar": "التسوّق عبر الإنترنت",
+  "de": "Online-Shopping",
+  "fr": "Achats en ligne",
+  "it": "Shopping online"
+ },
+ "CampaignEnums.interest.FOOD_AND_DRINK": {
+  "en": "Food and drink",
+  "ar": "الأطعمة والمشروبات",
+  "de": "Essen und Trinken",
+  "fr": "Alimentation et boissons",
+  "it": "Cibo e bevande"
+ },
+ "CampaignEnums.interest.COOKING": {
+  "en": "Cooking",
+  "ar": "الطبخ",
+  "de": "Kochen",
+  "fr": "Cuisine",
+  "it": "Cucina"
+ },
+ "CampaignEnums.interest.FITNESS": {
+  "en": "Fitness",
+  "ar": "اللياقة البدنية",
+  "de": "Fitness",
+  "fr": "Fitness",
+  "it": "Fitness"
+ },
+ "CampaignEnums.interest.AUTOMOTIVE": {
+  "en": "Automotive",
+  "ar": "السيارات",
+  "de": "Automobil",
+  "fr": "Automobile",
+  "it": "Automotive"
+ },
+ "CampaignEnums.interest.TRAVEL": {
+  "en": "Travel",
+  "ar": "السفر",
+  "de": "Reisen",
+  "fr": "Voyages",
+  "it": "Viaggi"
+ },
+ "CampaignEnums.interest.HEALTHY_EATING": {
+  "en": "Healthy eating",
+  "ar": "الأكل الصحي",
+  "de": "Gesunde Ernährung",
+  "fr": "Alimentation saine",
+  "it": "Alimentazione sana"
+ },
+ "CampaignEnums.interest.BEACH_VACATIONS": {
+  "en": "Beach holidays",
+  "ar": "عطلات الشاطئ",
+  "de": "Strandurlaub",
+  "fr": "Vacances à la plage",
+  "it": "Vacanze al mare"
+ },
+ "CampaignEnums.interest.LUXURY_TRAVEL": {
+  "en": "Luxury travel",
+  "ar": "السفر الفاخر",
+  "de": "Luxusreisen",
+  "fr": "Voyages de luxe",
+  "it": "Viaggi di lusso"
+ },
+ "CampaignEnums.interest.SAAS": {
+  "en": "Business software",
+  "ar": "برمجيات الأعمال",
+  "de": "Unternehmenssoftware",
+  "fr": "Logiciels d’entreprise",
+  "it": "Software aziendale"
+ },
+ "CampaignEnums.interest.HR_SOFTWARE": {
+  "en": "HR software",
+  "ar": "برمجيات الموارد البشرية",
+  "de": "HR-Software",
+  "fr": "Logiciels RH",
+  "it": "Software HR"
+ },
+ "CampaignEnums.interest.SMALL_BUSINESS": {
+  "en": "Small business",
+  "ar": "الأعمال الصغيرة",
+  "de": "Kleinunternehmen",
+  "fr": "Petites entreprises",
+  "it": "Piccole imprese"
+ }
+}

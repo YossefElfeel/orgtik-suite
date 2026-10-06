@@ -1,0 +1,126 @@
+{
+  "Team": {
+    "title": "Team",
+    "description": "Everyone in {name}, their role and the tools they use. Invite people and change their access here.",
+    "readOnly": "Everyone in {name} and the tools they use. Only the owner and admins can invite people or change access.",
+    "failedTitle": "The team couldn't be loaded",
+    "failedBody": "Check your connection and try again.",
+    "tableLabel": "People in {name}",
+    "emptyTitle": "Nobody here yet",
+    "emptyBody": "Invite your colleagues so they can use the workspace's tools.",
+    "you": "you",
+    "colPerson": "Person",
+    "colRole": "Role",
+    "colStatus": "Status",
+    "colSeat": "Seat",
+    "colTools": "Tool access",
+    "colJoined": "Joined",
+    "colActions": "Actions",
+    "invited": "Invited",
+    "active": "Active",
+    "seatPaid": "Paid seat",
+    "seatGuest": "Guest, free",
+    "allTools": "All tools",
+    "noTools": "No tools",
+    "moreTools": "+{count} more",
+    "notJoined": "Not yet",
+    "actionsFor": "Actions for {name}",
+    "makeRole": {
+      "admin": "Make admin",
+      "member": "Make member",
+      "guest": "Make guest"
+    },
+    "changeAccess": "Change tool access",
+    "withdraw": "Withdraw invitation",
+    "remove": "Remove from workspace",
+    "errors": {
+      "ownerOnly": "Only the workspace owner can make someone an admin."
+    },
+    "roleWhat": {
+      "admin": "{name} will be able to invite people and change their access, but not billing.",
+      "member": "{name} will use the tools they have access to and won't manage the team.",
+      "guest": "{name} will see only what's shared with them."
+    },
+    "impact": {
+      "seatsSame": "Seats don't change.",
+      "invitedPaid": "Once they accept, they take a paid seat.",
+      "invitedGuest": "Once they accept, they won't take a paid seat.",
+      "addsSeatCost": "Adds a paid seat: {before} → {after} seats, {cost} more on the per-user lines.",
+      "addsSeat": "Adds a paid seat: {before} → {after} seats.",
+      "freesSeat": "Frees a paid seat: {before} → {after} seats.",
+      "withdraw": "The invitation sent to {email} stops working. You can invite them again later.",
+      "remove": "{name} loses access to {workspace} and all its tools straight away.",
+      "guestNoSeat": "Guests don't take a seat, so the price doesn't change."
+    },
+    "roleTitle": "Make {name} {role}?",
+    "roleChanged": "{name} is now {role}",
+    "withdrawTitle": "Withdraw the invitation to {email}?",
+    "removeTitle": "Remove {name} from the workspace?",
+    "withdrawn": "Invitation to {email} withdrawn",
+    "removed": "{name} removed",
+    "accessChanged": "Tool access changed for {name}",
+    "seats": {
+      "title": "Seats",
+      "modelA": "Each active member or admin is one seat, and that one seat count applies to every tool billed per user, whatever tools they use. Guests are free. An invitation takes a seat once it's accepted.",
+      "modelB": "Each tool billed per user counts only the people who have access to it. Guests are free. An invitation takes a seat once it's accepted.",
+      "paid": "Paid seats",
+      "guests": "Guests",
+      "invited": "Pending invitations",
+      "linesTitle": "Tools billed per seat",
+      "perSeat": "{price} per seat × {seats}",
+      "linesNote": "Prices per billing period, before tax.",
+      "noLines": "No tool is billed per seat right now, so adding people doesn't change the price."
+    },
+    "invite": {
+      "open": "Invite people",
+      "title": "Invite someone",
+      "body": "They get an email to join {name}. You see what it costs before you send.",
+      "email": "Email",
+      "role": "Role",
+      "adminOwnerOnly": "Only the owner can make someone an admin.",
+      "roleAdmin": "Invites people and changes their access. No billing.",
+      "roleMember": "Uses the tools you give them access to.",
+      "roleGuest": "Sees only what's shared with them. Free.",
+      "cancel": "Cancel",
+      "send": "Send invitation",
+      "sent": "Invitation sent to {email}",
+      "sentGuest": "Guests are free: the seats don't change.",
+      "sentSeats": "When they accept, the workspace counts {seats} paid seats.",
+      "errors": {
+        "ownerOnly": "Only the workspace owner can make someone an admin. Choose another role, or ask the owner.",
+        "role": "Choose a role.",
+        "taken": "This person is already in the workspace or invited.",
+        "email": "Enter an email address like name@company.com.",
+        "tools": "Choose at least one tool, or give access to all tools."
+      }
+    },
+    "access": {
+      "label": "Tool access",
+      "all": "All tools",
+      "allHint": "Every tool the workspace has, including ones added later.",
+      "some": "Only some tools",
+      "someHint": "Choose which ones.",
+      "which": "Tools"
+    },
+    "accessDialog": {
+      "title": "Tool access for {name}",
+      "body": "Choose which of the workspace's tools they can open.",
+      "impactGuest": "Guests are free, so seats don't change.",
+      "impactSame": "Seats don't change: one seat count applies to every tool billed per user.",
+      "impactMore": "{count, plural, one {Adds a seat on # tool billed per user.} other {Adds a seat on # tools billed per user.}}",
+      "impactFewer": "{count, plural, one {Frees a seat on # tool billed per user.} other {Frees a seat on # tools billed per user.}}",
+      "errorEmpty": "Choose at least one tool, or give access to all tools.",
+      "cancel": "Cancel",
+      "save": "Save access"
+    },
+    "cost": {
+      "guestTitle": "Free",
+      "guestBody": "Guests don't take a paid seat.",
+      "title": "Adds a paid seat when they accept: {before} → {after} seats",
+      "linesIntro": "Each tool billed per user goes up by one seat:",
+      "total": "Added per billing period",
+      "when": "Only once they accept. Prices before tax.",
+      "noLines": "No tool is billed per seat right now, so the price doesn't change."
+    }
+  }
+}

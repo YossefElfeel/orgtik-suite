@@ -1,0 +1,1995 @@
+{
+ "Customers.title": {
+  "en": "Customers and leads",
+  "ar": "العملاء والعملاء المحتملون",
+  "de": "Kunden und Leads",
+  "fr": "Clients et prospects",
+  "it": "Clienti e lead"
+ },
+ "Customers.description": {
+  "en": "Every lead and customer, from the first contact to won or lost.",
+  "ar": "كل العملاء المحتملين والعملاء، من أول تواصل حتى النجاح أو عدمه.",
+  "de": "Alle Leads und Kunden, vom ersten Kontakt bis gewonnen oder verloren.",
+  "fr": "Tous les prospects et clients, du premier contact jusqu'à gagné ou perdu.",
+  "it": "Tutti i lead e i clienti, dal primo contatto fino ad acquisito o perso."
+ },
+ "Customers.pipelineDescription": {
+  "en": "Move leads through the stages. Drag a card, or use its Move to menu.",
+  "ar": "انقل العملاء المحتملين بين المراحل. اسحب البطاقة أو استخدم قائمة «نقل إلى».",
+  "de": "Verschieben Sie Leads durch die Phasen. Ziehen Sie eine Karte oder nutzen Sie ihr Menü „Verschieben nach“.",
+  "fr": "Faites avancer les prospects d'étape en étape. Faites glisser une carte ou utilisez son menu « Déplacer vers ».",
+  "it": "Sposta i lead tra le fasi. Trascina una scheda o usa il suo menu «Sposta in»."
+ },
+ "Customers.listLabel": {
+  "en": "Customers and leads",
+  "ar": "العملاء والعملاء المحتملون",
+  "de": "Kunden und Leads",
+  "fr": "Clients et prospects",
+  "it": "Clienti e lead"
+ },
+ "Customers.boardLabel": {
+  "en": "Leads pipeline",
+  "ar": "مسار العملاء المحتملين",
+  "de": "Lead-Pipeline",
+  "fr": "Pipeline des prospects",
+  "it": "Pipeline dei lead"
+ },
+ "Customers.leadCount": {
+  "en": "{count, plural, one {# lead} other {# leads}}",
+  "ar": "{count, plural, =0 {لا عملاء محتملون} one {عميل محتمل واحد} two {عميلان محتملان} few {# عملاء محتملين} many {# عميلًا محتملًا} other {# عميل محتمل}}",
+  "de": "{count, plural, one {# Lead} other {# Leads}}",
+  "fr": "{count, plural, one {# prospect} other {# prospects}}",
+  "it": "{count, plural, one {# lead} other {# lead}}"
+ },
+ "Customers.moveTo": {
+  "en": "Move {title} to",
+  "ar": "نقل {title} إلى",
+  "de": "{title} verschieben nach",
+  "fr": "Déplacer {title} vers",
+  "it": "Sposta {title} in"
+ },
+ "Customers.truncated": {
+  "en": "Showing the newest {count} records. Search or filter to find older ones.",
+  "ar": "تُعرض أحدث {count} سجل. ابحث أو استخدم عوامل التصفية للعثور على الأقدم.",
+  "de": "Die neuesten {count} Einträge werden angezeigt. Suchen oder filtern Sie, um ältere zu finden.",
+  "fr": "Affichage des {count} fiches les plus récentes. Recherchez ou filtrez pour trouver les plus anciennes.",
+  "it": "Sono mostrati i {count} record più recenti. Cerca o filtra per trovare quelli più vecchi."
+ },
+ "Customers.noAccessTitle": {
+  "en": "You can't open customers",
+  "ar": "لا يمكنك فتح العملاء",
+  "de": "Sie können die Kunden nicht öffnen",
+  "fr": "Vous ne pouvez pas ouvrir les clients",
+  "it": "Non puoi aprire i clienti"
+ },
+ "Customers.noAccessBody": {
+  "en": "Customers and leads are for the sales team. Your own offers and projects are in your portal.",
+  "ar": "العملاء والعملاء المحتملون مخصصون لفريق المبيعات. عروضك ومشروعاتك موجودة في بوابتك.",
+  "de": "Kunden und Leads sind für das Vertriebsteam. Ihre eigenen Angebote und Projekte finden Sie in Ihrem Portal.",
+  "fr": "Les clients et prospects sont réservés à l'équipe commerciale. Vos offres et projets se trouvent dans votre portail.",
+  "it": "Clienti e lead sono per il team vendite. Le tue offerte e i tuoi progetti sono nel tuo portale."
+ },
+ "Customers.errorTitle": {
+  "en": "Customers didn't load",
+  "ar": "تعذّر تحميل العملاء",
+  "de": "Kunden konnten nicht geladen werden",
+  "fr": "Les clients n'ont pas pu être chargés",
+  "it": "Impossibile caricare i clienti"
+ },
+ "Customers.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Customers.noMatchTitle": {
+  "en": "Nothing matches these filters",
+  "ar": "لا توجد نتائج تطابق عوامل التصفية هذه",
+  "de": "Nichts passt zu diesen Filtern",
+  "fr": "Aucun résultat pour ces filtres",
+  "it": "Nessun risultato per questi filtri"
+ },
+ "Customers.noMatchBody": {
+  "en": "Try another search, or clear the filters.",
+  "ar": "جرّب بحثًا آخر أو امسح عوامل التصفية.",
+  "de": "Versuchen Sie eine andere Suche oder setzen Sie die Filter zurück.",
+  "fr": "Essayez une autre recherche ou effacez les filtres.",
+  "it": "Prova un'altra ricerca o cancella i filtri."
+ },
+ "Customers.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella filtri"
+ },
+ "Customers.emptyTitle": {
+  "en": "No customers or leads yet",
+  "ar": "لا يوجد عملاء أو عملاء محتملون بعد",
+  "de": "Noch keine Kunden oder Leads",
+  "fr": "Aucun client ni prospect pour l'instant",
+  "it": "Ancora nessun cliente o lead"
+ },
+ "Customers.emptyBody": {
+  "en": "Add your first customer, or wait for leads from the website.",
+  "ar": "أضف أول عميل لك، أو انتظر العملاء المحتملين القادمين من الموقع.",
+  "de": "Legen Sie Ihren ersten Kunden an oder warten Sie auf Leads von der Website.",
+  "fr": "Ajoutez votre premier client ou attendez les prospects venus du site.",
+  "it": "Aggiungi il tuo primo cliente o attendi i lead dal sito."
+ },
+ "Customers.emptyBodyViewer": {
+  "en": "Customers and leads will show here.",
+  "ar": "سيظهر العملاء والعملاء المحتملون هنا.",
+  "de": "Kunden und Leads erscheinen hier.",
+  "fr": "Les clients et prospects apparaîtront ici.",
+  "it": "Clienti e lead appariranno qui."
+ },
+ "Customers.filters.search": {
+  "en": "Search by name, email, company or phone",
+  "ar": "ابحث بالاسم أو البريد الإلكتروني أو الشركة أو الهاتف",
+  "de": "Nach Name, E-Mail, Firma oder Telefon suchen",
+  "fr": "Rechercher par nom, e-mail, entreprise ou téléphone",
+  "it": "Cerca per nome, email, azienda o telefono"
+ },
+ "Customers.filters.view": {
+  "en": "View",
+  "ar": "طريقة العرض",
+  "de": "Ansicht",
+  "fr": "Affichage",
+  "it": "Vista"
+ },
+ "Customers.filters.viewList": {
+  "en": "List",
+  "ar": "قائمة",
+  "de": "Liste",
+  "fr": "Liste",
+  "it": "Elenco"
+ },
+ "Customers.filters.viewPipeline": {
+  "en": "Pipeline",
+  "ar": "مسار المبيعات",
+  "de": "Pipeline",
+  "fr": "Pipeline",
+  "it": "Pipeline"
+ },
+ "Customers.filters.stage": {
+  "en": "Stage",
+  "ar": "المرحلة",
+  "de": "Phase",
+  "fr": "Étape",
+  "it": "Fase"
+ },
+ "Customers.filters.source": {
+  "en": "Source",
+  "ar": "المصدر",
+  "de": "Quelle",
+  "fr": "Source",
+  "it": "Origine"
+ },
+ "Customers.filters.allSources": {
+  "en": "All sources",
+  "ar": "كل المصادر",
+  "de": "Alle Quellen",
+  "fr": "Toutes les sources",
+  "it": "Tutte le origini"
+ },
+ "Customers.filters.owner": {
+  "en": "Salesperson",
+  "ar": "مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter",
+  "fr": "Commercial",
+  "it": "Commerciale"
+ },
+ "Customers.filters.allOwners": {
+  "en": "All salespeople",
+  "ar": "كل مندوبي المبيعات",
+  "de": "Alle Vertriebsmitarbeiter",
+  "fr": "Tous les commerciaux",
+  "it": "Tutti i commerciali"
+ },
+ "Customers.filters.unassigned": {
+  "en": "Not assigned",
+  "ar": "غير مُسنَد",
+  "de": "Nicht zugewiesen",
+  "fr": "Non attribué",
+  "it": "Non assegnato"
+ },
+ "Customers.filters.age": {
+  "en": "Age",
+  "ar": "العمر",
+  "de": "Alter",
+  "fr": "Ancienneté",
+  "it": "Età"
+ },
+ "Customers.filters.anyAge": {
+  "en": "Any age",
+  "ar": "أي عمر",
+  "de": "Beliebiges Alter",
+  "fr": "Toute ancienneté",
+  "it": "Qualsiasi età"
+ },
+ "Customers.filters.age_week": {
+  "en": "Last 7 days",
+  "ar": "آخر 7 أيام",
+  "de": "Letzte 7 Tage",
+  "fr": "7 derniers jours",
+  "it": "Ultimi 7 giorni"
+ },
+ "Customers.filters.age_month": {
+  "en": "8 to 30 days old",
+  "ar": "من 8 إلى 30 يومًا",
+  "de": "8 bis 30 Tage alt",
+  "fr": "De 8 à 30 jours",
+  "it": "Da 8 a 30 giorni"
+ },
+ "Customers.filters.age_quarter": {
+  "en": "31 to 90 days old",
+  "ar": "من 31 إلى 90 يومًا",
+  "de": "31 bis 90 Tage alt",
+  "fr": "De 31 à 90 jours",
+  "it": "Da 31 a 90 giorni"
+ },
+ "Customers.filters.age_older": {
+  "en": "Older than 90 days",
+  "ar": "أقدم من 90 يومًا",
+  "de": "Älter als 90 Tage",
+  "fr": "Plus de 90 jours",
+  "it": "Più di 90 giorni"
+ },
+ "Customers.source.website": {
+  "en": "Website",
+  "ar": "الموقع الإلكتروني",
+  "de": "Website",
+  "fr": "Site web",
+  "it": "Sito web"
+ },
+ "Customers.source.manual": {
+  "en": "Added by staff",
+  "ar": "أضافه فريق العمل",
+  "de": "Vom Team angelegt",
+  "fr": "Ajouté par l'équipe",
+  "it": "Aggiunto dal team"
+ },
+ "Customers.source.referral": {
+  "en": "Referral",
+  "ar": "إحالة",
+  "de": "Empfehlung",
+  "fr": "Recommandation",
+  "it": "Segnalazione"
+ },
+ "Customers.source.partner": {
+  "en": "Partner",
+  "ar": "شريك",
+  "de": "Partner",
+  "fr": "Partenaire",
+  "it": "Partner"
+ },
+ "Customers.source.event": {
+  "en": "Event",
+  "ar": "فعالية",
+  "de": "Veranstaltung",
+  "fr": "Événement",
+  "it": "Evento"
+ },
+ "Customers.source.import": {
+  "en": "Import",
+  "ar": "استيراد",
+  "de": "Import",
+  "fr": "Import",
+  "it": "Importazione"
+ },
+ "Customers.source.pageValue": {
+  "en": "Page: {page}",
+  "ar": "الصفحة: {page}",
+  "de": "Seite: {page}",
+  "fr": "Page : {page}",
+  "it": "Pagina: {page}"
+ },
+ "Customers.source.bundleValue": {
+  "en": "Bundle: {bundle}",
+  "ar": "حزمة الأدوات: {bundle}",
+  "de": "Bundle: {bundle}",
+  "fr": "Offre groupée : {bundle}",
+  "it": "Bundle: {bundle}"
+ },
+ "Customers.source.campaignValue": {
+  "en": "Campaign: {campaign}",
+  "ar": "الحملة: {campaign}",
+  "de": "Kampagne: {campaign}",
+  "fr": "Campagne : {campaign}",
+  "it": "Campagna: {campaign}"
+ },
+ "Customers.sourceDetails.title": {
+  "en": "Where this lead came from",
+  "ar": "مصدر هذا العميل المحتمل",
+  "de": "Woher dieser Lead kommt",
+  "fr": "Origine de ce prospect",
+  "it": "Da dove arriva questo lead"
+ },
+ "Customers.sourceDetails.description": {
+  "en": "What the website sent with the request.",
+  "ar": "ما أرسله الموقع مع الطلب.",
+  "de": "Was die Website mit der Anfrage gesendet hat.",
+  "fr": "Ce que le site a envoyé avec la demande.",
+  "it": "Cosa ha inviato il sito con la richiesta."
+ },
+ "Customers.sourceDetails.source": {
+  "en": "Source",
+  "ar": "المصدر",
+  "de": "Quelle",
+  "fr": "Source",
+  "it": "Origine"
+ },
+ "Customers.sourceDetails.received": {
+  "en": "Received",
+  "ar": "تاريخ الاستلام",
+  "de": "Eingegangen",
+  "fr": "Reçu le",
+  "it": "Ricevuto"
+ },
+ "Customers.sourceDetails.page": {
+  "en": "Page",
+  "ar": "الصفحة",
+  "de": "Seite",
+  "fr": "Page",
+  "it": "Pagina"
+ },
+ "Customers.sourceDetails.bundle": {
+  "en": "Bundle asked about",
+  "ar": "حزمة الأدوات المطلوبة",
+  "de": "Angefragtes Bundle",
+  "fr": "Offre groupée demandée",
+  "it": "Bundle richiesto"
+ },
+ "Customers.sourceDetails.language": {
+  "en": "Website language",
+  "ar": "لغة الموقع",
+  "de": "Sprache der Website",
+  "fr": "Langue du site",
+  "it": "Lingua del sito"
+ },
+ "Customers.sourceDetails.campaign": {
+  "en": "Campaign (UTM)",
+  "ar": "الحملة (UTM)",
+  "de": "Kampagne (UTM)",
+  "fr": "Campagne (UTM)",
+  "it": "Campagna (UTM)"
+ },
+ "Customers.sourceDetails.message": {
+  "en": "Message",
+  "ar": "الرسالة",
+  "de": "Nachricht",
+  "fr": "Message",
+  "it": "Messaggio"
+ },
+ "Customers.stage.change": {
+  "en": "Change stage",
+  "ar": "تغيير المرحلة",
+  "de": "Phase ändern",
+  "fr": "Changer d'étape",
+  "it": "Cambia fase"
+ },
+ "Customers.lost.title": {
+  "en": "Mark {name} as lost?",
+  "ar": "هل تريد وضع {name} في حالة «غير ناجح»؟",
+  "de": "{name} als verloren markieren?",
+  "fr": "Marquer {name} comme perdu ?",
+  "it": "Segnare {name} come perso?"
+ },
+ "Customers.lost.impact": {
+  "en": "The lead leaves the open pipeline. The reason is kept on the record, and you can reopen it later.",
+  "ar": "سيخرج العميل المحتمل من المسار المفتوح. يُحفظ السبب في السجل، ويمكنك إعادة فتحه لاحقًا.",
+  "de": "Der Lead verlässt die offene Pipeline. Der Grund bleibt im Datensatz, und Sie können ihn später wieder öffnen.",
+  "fr": "Le prospect quitte le pipeline ouvert. La raison est conservée dans la fiche, et vous pourrez le rouvrir plus tard.",
+  "it": "Il lead esce dalla pipeline aperta. Il motivo resta nella scheda e potrai riaprirlo in seguito."
+ },
+ "Customers.lost.reason": {
+  "en": "Why was it lost?",
+  "ar": "لماذا لم ينجح؟",
+  "de": "Warum wurde er verloren?",
+  "fr": "Pourquoi a-t-il été perdu ?",
+  "it": "Perché è stato perso?"
+ },
+ "Customers.lost.reasonPlaceholder": {
+  "en": "For example: chose another provider, no budget this year",
+  "ar": "مثلًا: اختار مزوّدًا آخر، لا توجد ميزانية هذا العام",
+  "de": "Zum Beispiel: anderer Anbieter gewählt, kein Budget in diesem Jahr",
+  "fr": "Par exemple : a choisi un autre prestataire, pas de budget cette année",
+  "it": "Ad esempio: ha scelto un altro fornitore, nessun budget quest'anno"
+ },
+ "Customers.lost.confirm": {
+  "en": "Mark as lost",
+  "ar": "وضعه في حالة «غير ناجح»",
+  "de": "Als verloren markieren",
+  "fr": "Marquer comme perdu",
+  "it": "Segna come perso"
+ },
+ "Customers.lost.cancel": {
+  "en": "Keep it open",
+  "ar": "إبقاؤه مفتوحًا",
+  "de": "Offen lassen",
+  "fr": "Le garder ouvert",
+  "it": "Lascialo aperto"
+ },
+ "Customers.assign.title": {
+  "en": "Assign {name}",
+  "ar": "إسناد {name}",
+  "de": "{name} zuweisen",
+  "fr": "Attribuer {name}",
+  "it": "Assegna {name}"
+ },
+ "Customers.assign.description": {
+  "en": "The salesperson sees this customer in their own list and works it from now on.",
+  "ar": "سيرى مندوب المبيعات هذا العميل في قائمته ويتابعه من الآن.",
+  "de": "Der Vertriebsmitarbeiter sieht diesen Kunden in seiner Liste und betreut ihn ab jetzt.",
+  "fr": "Le commercial verra ce client dans sa liste et le suivra désormais.",
+  "it": "Il commerciale vedrà questo cliente nel proprio elenco e lo seguirà da ora."
+ },
+ "Customers.assign.owner": {
+  "en": "Salesperson",
+  "ar": "مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter",
+  "fr": "Commercial",
+  "it": "Commerciale"
+ },
+ "Customers.assign.placeholder": {
+  "en": "Choose a salesperson",
+  "ar": "اختر مندوب مبيعات",
+  "de": "Vertriebsmitarbeiter wählen",
+  "fr": "Choisir un commercial",
+  "it": "Scegli un commerciale"
+ },
+ "Customers.assign.unassigned": {
+  "en": "Not assigned",
+  "ar": "غير مُسنَد",
+  "de": "Nicht zugewiesen",
+  "fr": "Non attribué",
+  "it": "Non assegnato"
+ },
+ "Customers.assign.loading": {
+  "en": "Loading salespeople…",
+  "ar": "جارٍ تحميل مندوبي المبيعات…",
+  "de": "Vertriebsmitarbeiter werden geladen…",
+  "fr": "Chargement des commerciaux…",
+  "it": "Caricamento dei commerciali…"
+ },
+ "Customers.assign.loadFailed": {
+  "en": "Salespeople didn't load. Close and try again.",
+  "ar": "تعذّر تحميل مندوبي المبيعات. أغلق النافذة وحاول مرة أخرى.",
+  "de": "Vertriebsmitarbeiter konnten nicht geladen werden. Schließen und erneut versuchen.",
+  "fr": "Les commerciaux n'ont pas pu être chargés. Fermez et réessayez.",
+  "it": "Impossibile caricare i commerciali. Chiudi e riprova."
+ },
+ "Customers.assign.noMatch": {
+  "en": "No salesperson by that name",
+  "ar": "لا يوجد مندوب مبيعات بهذا الاسم",
+  "de": "Kein Vertriebsmitarbeiter mit diesem Namen",
+  "fr": "Aucun commercial à ce nom",
+  "it": "Nessun commerciale con questo nome"
+ },
+ "Customers.assign.required": {
+  "en": "Choose a salesperson, or Not assigned.",
+  "ar": "اختر مندوب مبيعات أو «غير مُسنَد».",
+  "de": "Wählen Sie einen Vertriebsmitarbeiter oder „Nicht zugewiesen“.",
+  "fr": "Choisissez un commercial ou « Non attribué ».",
+  "it": "Scegli un commerciale o «Non assegnato»."
+ },
+ "Customers.assign.submit": {
+  "en": "Assign",
+  "ar": "إسناد",
+  "de": "Zuweisen",
+  "fr": "Attribuer",
+  "it": "Assegna"
+ },
+ "Customers.assign.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Customers.delete.title": {
+  "en": "Delete {name}?",
+  "ar": "هل تريد حذف {name}؟",
+  "de": "{name} löschen?",
+  "fr": "Supprimer {name} ?",
+  "it": "Eliminare {name}?"
+ },
+ "Customers.delete.impact": {
+  "en": "Their details, notes, documents and meeting are deleted. Projects and offers already made stay.",
+  "ar": "ستُحذف بياناته وملاحظاته ومستنداته واجتماعه. تبقى المشروعات والعروض التي أُنشئت بالفعل.",
+  "de": "Daten, Notizen, Dokumente und Termin werden gelöscht. Bestehende Projekte und Angebote bleiben erhalten.",
+  "fr": "Ses coordonnées, notes, documents et rendez-vous sont supprimés. Les projets et offres existants sont conservés.",
+  "it": "Dati, note, documenti e riunione vengono eliminati. Progetti e offerte già creati restano."
+ },
+ "Customers.delete.confirm": {
+  "en": "Delete customer",
+  "ar": "حذف العميل",
+  "de": "Kunden löschen",
+  "fr": "Supprimer le client",
+  "it": "Elimina cliente"
+ },
+ "Customers.delete.cancel": {
+  "en": "Keep customer",
+  "ar": "الإبقاء على العميل",
+  "de": "Kunden behalten",
+  "fr": "Garder le client",
+  "it": "Mantieni cliente"
+ },
+ "Customers.actions.for": {
+  "en": "Actions for {name}",
+  "ar": "إجراءات {name}",
+  "de": "Aktionen für {name}",
+  "fr": "Actions pour {name}",
+  "it": "Azioni per {name}"
+ },
+ "Customers.actions.open": {
+  "en": "Open",
+  "ar": "فتح",
+  "de": "Öffnen",
+  "fr": "Ouvrir",
+  "it": "Apri"
+ },
+ "Customers.actions.edit": {
+  "en": "Edit details",
+  "ar": "تعديل البيانات",
+  "de": "Daten bearbeiten",
+  "fr": "Modifier les informations",
+  "it": "Modifica dati"
+ },
+ "Customers.actions.meeting": {
+  "en": "Schedule a meeting",
+  "ar": "تحديد موعد اجتماع",
+  "de": "Termin planen",
+  "fr": "Planifier un rendez-vous",
+  "it": "Pianifica una riunione"
+ },
+ "Customers.actions.reschedule": {
+  "en": "Change the meeting",
+  "ar": "تغيير موعد الاجتماع",
+  "de": "Termin ändern",
+  "fr": "Modifier le rendez-vous",
+  "it": "Modifica la riunione"
+ },
+ "Customers.actions.assign": {
+  "en": "Assign to a salesperson",
+  "ar": "إسناد إلى مندوب مبيعات",
+  "de": "Vertriebsmitarbeiter zuweisen",
+  "fr": "Attribuer à un commercial",
+  "it": "Assegna a un commerciale"
+ },
+ "Customers.actions.reassign": {
+  "en": "Change the salesperson",
+  "ar": "تغيير مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter ändern",
+  "fr": "Changer de commercial",
+  "it": "Cambia commerciale"
+ },
+ "Customers.actions.delete": {
+  "en": "Delete",
+  "ar": "حذف",
+  "de": "Löschen",
+  "fr": "Supprimer",
+  "it": "Elimina"
+ },
+ "Customers.actions.more": {
+  "en": "More",
+  "ar": "المزيد",
+  "de": "Mehr",
+  "fr": "Plus",
+  "it": "Altro"
+ },
+ "Customers.list.colName": {
+  "en": "Name",
+  "ar": "الاسم",
+  "de": "Name",
+  "fr": "Nom",
+  "it": "Nome"
+ },
+ "Customers.list.colContact": {
+  "en": "Contact",
+  "ar": "التواصل",
+  "de": "Kontakt",
+  "fr": "Contact",
+  "it": "Contatto"
+ },
+ "Customers.list.colStage": {
+  "en": "Stage",
+  "ar": "المرحلة",
+  "de": "Phase",
+  "fr": "Étape",
+  "it": "Fase"
+ },
+ "Customers.list.colSource": {
+  "en": "Source",
+  "ar": "المصدر",
+  "de": "Quelle",
+  "fr": "Source",
+  "it": "Origine"
+ },
+ "Customers.list.colOwner": {
+  "en": "Salesperson",
+  "ar": "مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter",
+  "fr": "Commercial",
+  "it": "Commerciale"
+ },
+ "Customers.list.colAccess": {
+  "en": "Sign-in",
+  "ar": "تسجيل الدخول",
+  "de": "Anmeldung",
+  "fr": "Connexion",
+  "it": "Accesso"
+ },
+ "Customers.list.colCreated": {
+  "en": "Added",
+  "ar": "تاريخ الإضافة",
+  "de": "Hinzugefügt",
+  "fr": "Ajouté",
+  "it": "Aggiunto"
+ },
+ "Customers.list.colActions": {
+  "en": "Actions",
+  "ar": "الإجراءات",
+  "de": "Aktionen",
+  "fr": "Actions",
+  "it": "Azioni"
+ },
+ "Customers.list.unassigned": {
+  "en": "Not assigned",
+  "ar": "غير مُسنَد",
+  "de": "Nicht zugewiesen",
+  "fr": "Non attribué",
+  "it": "Non assegnato"
+ },
+ "Customers.card.lostReason": {
+  "en": "Lost:",
+  "ar": "سبب عدم النجاح:",
+  "de": "Verloren:",
+  "fr": "Perdu :",
+  "it": "Perso:"
+ },
+ "Customers.card.unassigned": {
+  "en": "Not assigned",
+  "ar": "غير مُسنَد",
+  "de": "Nicht zugewiesen",
+  "fr": "Non attribué",
+  "it": "Non assegnato"
+ },
+ "Customers.create.open": {
+  "en": "New customer",
+  "ar": "عميل جديد",
+  "de": "Neuer Kunde",
+  "fr": "Nouveau client",
+  "it": "Nuovo cliente"
+ },
+ "Customers.create.title": {
+  "en": "New customer",
+  "ar": "عميل جديد",
+  "de": "Neuer Kunde",
+  "fr": "Nouveau client",
+  "it": "Nuovo cliente"
+ },
+ "Customers.create.description": {
+  "en": "Add a lead or customer you're in touch with. Website leads arrive by themselves.",
+  "ar": "أضف عميلًا محتملًا أو عميلًا تتواصل معه. يصل العملاء المحتملون من الموقع تلقائيًا.",
+  "de": "Legen Sie einen Lead oder Kunden an, mit dem Sie in Kontakt sind. Leads von der Website kommen automatisch.",
+  "fr": "Ajoutez un prospect ou un client avec qui vous êtes en contact. Les prospects du site arrivent d'eux-mêmes.",
+  "it": "Aggiungi un lead o un cliente con cui sei in contatto. I lead dal sito arrivano da soli."
+ },
+ "Customers.create.submit": {
+  "en": "Add customer",
+  "ar": "إضافة العميل",
+  "de": "Kunden anlegen",
+  "fr": "Ajouter le client",
+  "it": "Aggiungi cliente"
+ },
+ "Customers.create.submitInvite": {
+  "en": "Add and create invitation",
+  "ar": "إضافة وإنشاء دعوة",
+  "de": "Anlegen und Einladung erstellen",
+  "fr": "Ajouter et créer l'invitation",
+  "it": "Aggiungi e crea invito"
+ },
+ "Customers.create.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Customers.edit.title": {
+  "en": "Edit details",
+  "ar": "تعديل البيانات",
+  "de": "Daten bearbeiten",
+  "fr": "Modifier les informations",
+  "it": "Modifica dati"
+ },
+ "Customers.edit.description": {
+  "en": "Changes to {name} apply to all their offers and projects.",
+  "ar": "تنطبق التغييرات على {name} في كل عروضه ومشروعاته.",
+  "de": "Änderungen an {name} gelten für alle Angebote und Projekte.",
+  "fr": "Les modifications de {name} s'appliquent à toutes ses offres et projets.",
+  "it": "Le modifiche a {name} valgono per tutte le sue offerte e progetti."
+ },
+ "Customers.edit.submit": {
+  "en": "Save changes",
+  "ar": "حفظ التغييرات",
+  "de": "Änderungen speichern",
+  "fr": "Enregistrer",
+  "it": "Salva modifiche"
+ },
+ "Customers.edit.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Customers.edit.loadFailed": {
+  "en": "The customer's details didn't load.",
+  "ar": "تعذّر تحميل بيانات العميل.",
+  "de": "Die Kundendaten konnten nicht geladen werden.",
+  "fr": "Les informations du client n'ont pas pu être chargées.",
+  "it": "Impossibile caricare i dati del cliente."
+ },
+ "Customers.form.contactSection": {
+  "en": "Contact",
+  "ar": "بيانات التواصل",
+  "de": "Kontakt",
+  "fr": "Contact",
+  "it": "Contatto"
+ },
+ "Customers.form.businessSection": {
+  "en": "Business",
+  "ar": "النشاط التجاري",
+  "de": "Unternehmen",
+  "fr": "Entreprise",
+  "it": "Azienda"
+ },
+ "Customers.form.fullName": {
+  "en": "Full name",
+  "ar": "الاسم الكامل",
+  "de": "Vollständiger Name",
+  "fr": "Nom complet",
+  "it": "Nome completo"
+ },
+ "Customers.form.email": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Customers.form.phone": {
+  "en": "Phone",
+  "ar": "الهاتف",
+  "de": "Telefon",
+  "fr": "Téléphone",
+  "it": "Telefono"
+ },
+ "Customers.form.address": {
+  "en": "Address",
+  "ar": "العنوان",
+  "de": "Adresse",
+  "fr": "Adresse",
+  "it": "Indirizzo"
+ },
+ "Customers.form.country": {
+  "en": "Country",
+  "ar": "الدولة",
+  "de": "Land",
+  "fr": "Pays",
+  "it": "Paese"
+ },
+ "Customers.form.countryPlaceholder": {
+  "en": "Choose a country",
+  "ar": "اختر دولة",
+  "de": "Land wählen",
+  "fr": "Choisir un pays",
+  "it": "Scegli un paese"
+ },
+ "Customers.form.language": {
+  "en": "Preferred language",
+  "ar": "اللغة المفضلة",
+  "de": "Bevorzugte Sprache",
+  "fr": "Langue préférée",
+  "it": "Lingua preferita"
+ },
+ "Customers.form.languageHint": {
+  "en": "Emails and offers go out in this language.",
+  "ar": "تُرسل الرسائل والعروض بهذه اللغة.",
+  "de": "E-Mails und Angebote werden in dieser Sprache versendet.",
+  "fr": "Les e-mails et les offres sont envoyés dans cette langue.",
+  "it": "Email e offerte vengono inviate in questa lingua."
+ },
+ "Customers.form.company": {
+  "en": "Company",
+  "ar": "الشركة",
+  "de": "Firma",
+  "fr": "Entreprise",
+  "it": "Azienda"
+ },
+ "Customers.form.register": {
+  "en": "Commercial register number",
+  "ar": "رقم السجل التجاري",
+  "de": "Handelsregisternummer",
+  "fr": "Numéro du registre du commerce",
+  "it": "Numero di registro delle imprese"
+ },
+ "Customers.form.website": {
+  "en": "Website",
+  "ar": "الموقع الإلكتروني",
+  "de": "Website",
+  "fr": "Site web",
+  "it": "Sito web"
+ },
+ "Customers.form.owner": {
+  "en": "Salesperson",
+  "ar": "مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter",
+  "fr": "Commercial",
+  "it": "Commerciale"
+ },
+ "Customers.form.ownerPlaceholder": {
+  "en": "Choose a salesperson",
+  "ar": "اختر مندوب مبيعات",
+  "de": "Vertriebsmitarbeiter wählen",
+  "fr": "Choisir un commercial",
+  "it": "Scegli un commerciale"
+ },
+ "Customers.form.unassigned": {
+  "en": "Not assigned",
+  "ar": "غير مُسنَد",
+  "de": "Nicht zugewiesen",
+  "fr": "Non attribué",
+  "it": "Non assegnato"
+ },
+ "Customers.form.loading": {
+  "en": "Loading…",
+  "ar": "جارٍ التحميل…",
+  "de": "Wird geladen…",
+  "fr": "Chargement…",
+  "it": "Caricamento…"
+ },
+ "Customers.form.noMatch": {
+  "en": "Nothing matches",
+  "ar": "لا توجد نتائج مطابقة",
+  "de": "Keine Treffer",
+  "fr": "Aucun résultat",
+  "it": "Nessun risultato"
+ },
+ "Customers.form.documentsHint": {
+  "en": "Add the ID and business documents on the customer's page after saving.",
+  "ar": "أضف مستند الهوية والمستند التجاري في صفحة العميل بعد الحفظ.",
+  "de": "Ausweis- und Firmendokumente fügen Sie nach dem Speichern auf der Kundenseite hinzu.",
+  "fr": "Ajoutez la pièce d'identité et le document d'entreprise sur la page du client après l'enregistrement.",
+  "it": "Aggiungi il documento d'identità e quello aziendale nella pagina del cliente dopo il salvataggio."
+ },
+ "Customers.form.sendInvite": {
+  "en": "Invite them to sign in",
+  "ar": "دعوته لتسجيل الدخول",
+  "de": "Zur Anmeldung einladen",
+  "fr": "L'inviter à se connecter",
+  "it": "Invitalo ad accedere"
+ },
+ "Customers.form.sendInviteHint": {
+  "en": "You get a link to send them, to set a password and see their offers and projects.",
+  "ar": "ستحصل على رابط ترسله إليه ليعيّن كلمة مرور ويطّلع على عروضه ومشروعاته.",
+  "de": "Sie erhalten einen Link zum Versenden, damit der Kunde ein Passwort festlegt und seine Angebote und Projekte sieht.",
+  "fr": "Vous obtenez un lien à lui envoyer pour définir un mot de passe et voir ses offres et projets.",
+  "it": "Ricevi un link da inviargli per impostare una password e vedere offerte e progetti."
+ },
+ "Customers.form.nameRequired": {
+  "en": "Enter the customer's name.",
+  "ar": "أدخل اسم العميل.",
+  "de": "Geben Sie den Namen des Kunden ein.",
+  "fr": "Saisissez le nom du client.",
+  "it": "Inserisci il nome del cliente."
+ },
+ "Customers.form.emailRequired": {
+  "en": "Enter an email address.",
+  "ar": "أدخل عنوان بريد إلكتروني.",
+  "de": "Geben Sie eine E-Mail-Adresse ein.",
+  "fr": "Saisissez une adresse e-mail.",
+  "it": "Inserisci un indirizzo email."
+ },
+ "Customers.form.emailInvalid": {
+  "en": "Enter an email address like name@company.com.",
+  "ar": "أدخل بريدًا إلكترونيًا مثل name@company.com.",
+  "de": "Geben Sie eine E-Mail-Adresse wie name@firma.de ein.",
+  "fr": "Saisissez une adresse comme nom@entreprise.fr.",
+  "it": "Inserisci un indirizzo come nome@azienda.it."
+ },
+ "Customers.form.phoneRequired": {
+  "en": "Enter a phone number.",
+  "ar": "أدخل رقم هاتف.",
+  "de": "Geben Sie eine Telefonnummer ein.",
+  "fr": "Saisissez un numéro de téléphone.",
+  "it": "Inserisci un numero di telefono."
+ },
+ "Customers.form.addressRequired": {
+  "en": "Enter an address.",
+  "ar": "أدخل العنوان.",
+  "de": "Geben Sie eine Adresse ein.",
+  "fr": "Saisissez une adresse.",
+  "it": "Inserisci un indirizzo."
+ },
+ "Customers.form.countryRequired": {
+  "en": "Choose the country. It sets the prices and the currency of offers.",
+  "ar": "اختر الدولة. تحدّد الأسعار وعملة العروض.",
+  "de": "Wählen Sie das Land. Es bestimmt Preise und Währung der Angebote.",
+  "fr": "Choisissez le pays. Il fixe les prix et la devise des offres.",
+  "it": "Scegli il paese. Determina prezzi e valuta delle offerte."
+ },
+ "Customers.form.companyRequired": {
+  "en": "Enter the company name.",
+  "ar": "أدخل اسم الشركة.",
+  "de": "Geben Sie den Firmennamen ein.",
+  "fr": "Saisissez le nom de l'entreprise.",
+  "it": "Inserisci il nome dell'azienda."
+ },
+ "Customers.form.websiteInvalid": {
+  "en": "Enter a web address like company.com.",
+  "ar": "أدخل عنوان موقع مثل company.com.",
+  "de": "Geben Sie eine Webadresse wie firma.de ein.",
+  "fr": "Saisissez une adresse comme entreprise.fr.",
+  "it": "Inserisci un indirizzo come azienda.it."
+ },
+ "Customers.form.languageRequired": {
+  "en": "Choose a language.",
+  "ar": "اختر لغة.",
+  "de": "Wählen Sie eine Sprache.",
+  "fr": "Choisissez une langue.",
+  "it": "Scegli una lingua."
+ },
+ "Customers.form.meetingRequired": {
+  "en": "Choose the date and time.",
+  "ar": "اختر التاريخ والوقت.",
+  "de": "Wählen Sie Datum und Uhrzeit.",
+  "fr": "Choisissez la date et l'heure.",
+  "it": "Scegli data e ora."
+ },
+ "Customers.form.meetingInPast": {
+  "en": "Choose a time that hasn't passed.",
+  "ar": "اختر وقتًا لم يمضِ بعد.",
+  "de": "Wählen Sie einen Zeitpunkt in der Zukunft.",
+  "fr": "Choisissez un moment à venir.",
+  "it": "Scegli un orario non ancora passato."
+ },
+ "Customers.invite.title": {
+  "en": "Invitation ready",
+  "ar": "الدعوة جاهزة",
+  "de": "Einladung bereit",
+  "fr": "Invitation prête",
+  "it": "Invito pronto"
+ },
+ "Customers.invite.description": {
+  "en": "Send this link to the customer. With it they set a password and sign in.",
+  "ar": "أرسل هذا الرابط إلى العميل ليعيّن كلمة مرور ويسجّل الدخول.",
+  "de": "Senden Sie diesen Link an den Kunden. Damit legt er ein Passwort fest und meldet sich an.",
+  "fr": "Envoyez ce lien au client. Il lui permet de définir un mot de passe et de se connecter.",
+  "it": "Invia questo link al cliente. Con esso imposta una password e accede."
+ },
+ "Customers.invite.link": {
+  "en": "Invitation link",
+  "ar": "رابط الدعوة",
+  "de": "Einladungslink",
+  "fr": "Lien d'invitation",
+  "it": "Link di invito"
+ },
+ "Customers.invite.expires": {
+  "en": "Works until {date}.",
+  "ar": "صالح حتى {date}.",
+  "de": "Gültig bis {date}.",
+  "fr": "Valable jusqu'au {date}.",
+  "it": "Valido fino al {date}."
+ },
+ "Customers.invite.expiresSoon": {
+  "en": "The link works for a limited time.",
+  "ar": "الرابط صالح لمدة محدودة.",
+  "de": "Der Link ist begrenzt gültig.",
+  "fr": "Le lien est valable pour une durée limitée.",
+  "it": "Il link è valido per un tempo limitato."
+ },
+ "Customers.invite.copy": {
+  "en": "Copy link",
+  "ar": "نسخ الرابط",
+  "de": "Link kopieren",
+  "fr": "Copier le lien",
+  "it": "Copia link"
+ },
+ "Customers.invite.copied": {
+  "en": "Link copied",
+  "ar": "تم نسخ الرابط",
+  "de": "Link kopiert",
+  "fr": "Lien copié",
+  "it": "Link copiato"
+ },
+ "Customers.invite.copyFailed": {
+  "en": "The link couldn't be copied. Select it and copy it yourself.",
+  "ar": "تعذّر نسخ الرابط. حدّده وانسخه يدويًا.",
+  "de": "Der Link konnte nicht kopiert werden. Markieren und kopieren Sie ihn selbst.",
+  "fr": "Le lien n'a pas pu être copié. Sélectionnez-le et copiez-le vous-même.",
+  "it": "Impossibile copiare il link. Selezionalo e copialo tu."
+ },
+ "Customers.invite.done": {
+  "en": "Done",
+  "ar": "تم",
+  "de": "Fertig",
+  "fr": "Terminé",
+  "it": "Fatto"
+ },
+ "Customers.meeting.title": {
+  "en": "Schedule a meeting",
+  "ar": "تحديد موعد اجتماع",
+  "de": "Termin planen",
+  "fr": "Planifier un rendez-vous",
+  "it": "Pianifica una riunione"
+ },
+ "Customers.meeting.titleWith": {
+  "en": "Meeting with {name}",
+  "ar": "اجتماع مع {name}",
+  "de": "Termin mit {name}",
+  "fr": "Rendez-vous avec {name}",
+  "it": "Riunione con {name}"
+ },
+ "Customers.meeting.description": {
+  "en": "The time is in the organisation's time zone. A new lead moves to Contacted.",
+  "ar": "الوقت بالمنطقة الزمنية للمؤسسة. ينتقل العميل المحتمل الجديد إلى «تم التواصل».",
+  "de": "Die Zeit gilt in der Zeitzone der Organisation. Ein neuer Lead wechselt zu „Kontaktiert“.",
+  "fr": "L'heure est celle du fuseau de l'organisation. Un nouveau prospect passe à « Contacté ».",
+  "it": "L'orario è nel fuso dell'organizzazione. Un nuovo lead passa a «Contattato»."
+ },
+ "Customers.meeting.when": {
+  "en": "When",
+  "ar": "الموعد",
+  "de": "Wann",
+  "fr": "Quand",
+  "it": "Quando"
+ },
+ "Customers.meeting.date": {
+  "en": "Date",
+  "ar": "التاريخ",
+  "de": "Datum",
+  "fr": "Date",
+  "it": "Data"
+ },
+ "Customers.meeting.time": {
+  "en": "Time",
+  "ar": "الوقت",
+  "de": "Uhrzeit",
+  "fr": "Heure",
+  "it": "Ora"
+ },
+ "Customers.meeting.notes": {
+  "en": "Agenda",
+  "ar": "جدول الأعمال",
+  "de": "Tagesordnung",
+  "fr": "Ordre du jour",
+  "it": "Ordine del giorno"
+ },
+ "Customers.meeting.notesPlaceholder": {
+  "en": "What you'll talk about, the budget, who joins",
+  "ar": "ما الذي ستناقشونه، والميزانية، ومن سيحضر",
+  "de": "Worüber Sie sprechen, Budget, wer teilnimmt",
+  "fr": "Les sujets, le budget, les participants",
+  "it": "Di cosa parlerete, il budget, chi partecipa"
+ },
+ "Customers.meeting.submit": {
+  "en": "Schedule",
+  "ar": "تحديد الموعد",
+  "de": "Planen",
+  "fr": "Planifier",
+  "it": "Pianifica"
+ },
+ "Customers.meeting.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Customers.detail.loading": {
+  "en": "Loading the customer",
+  "ar": "جارٍ تحميل العميل",
+  "de": "Kunde wird geladen",
+  "fr": "Chargement du client",
+  "it": "Caricamento del cliente"
+ },
+ "Customers.detail.backToList": {
+  "en": "Back to customers",
+  "ar": "العودة إلى العملاء",
+  "de": "Zurück zu den Kunden",
+  "fr": "Retour aux clients",
+  "it": "Torna ai clienti"
+ },
+ "Customers.detail.notFoundTitle": {
+  "en": "This customer isn't here",
+  "ar": "هذا العميل غير موجود",
+  "de": "Dieser Kunde ist nicht vorhanden",
+  "fr": "Ce client est introuvable",
+  "it": "Questo cliente non c'è"
+ },
+ "Customers.detail.notFoundBody": {
+  "en": "They may have been deleted, or they're assigned to another salesperson.",
+  "ar": "ربما حُذف، أو أنه مُسنَد إلى مندوب مبيعات آخر.",
+  "de": "Er wurde vielleicht gelöscht oder ist einem anderen Vertriebsmitarbeiter zugewiesen.",
+  "fr": "Il a peut-être été supprimé, ou il est attribué à un autre commercial.",
+  "it": "Potrebbe essere stato eliminato o essere assegnato a un altro commerciale."
+ },
+ "Customers.detail.noAccessTitle": {
+  "en": "You can't open this customer",
+  "ar": "لا يمكنك فتح هذا العميل",
+  "de": "Sie können diesen Kunden nicht öffnen",
+  "fr": "Vous ne pouvez pas ouvrir ce client",
+  "it": "Non puoi aprire questo cliente"
+ },
+ "Customers.detail.noAccessBody": {
+  "en": "Ask a sales manager to assign them to you.",
+  "ar": "اطلب من مدير المبيعات إسناده إليك.",
+  "de": "Bitten Sie eine Vertriebsleitung, ihn Ihnen zuzuweisen.",
+  "fr": "Demandez à un responsable commercial de vous l'attribuer.",
+  "it": "Chiedi a un responsabile vendite di assegnartelo."
+ },
+ "Customers.detail.errorTitle": {
+  "en": "The customer didn't load",
+  "ar": "تعذّر تحميل العميل",
+  "de": "Der Kunde konnte nicht geladen werden",
+  "fr": "Le client n'a pas pu être chargé",
+  "it": "Impossibile caricare il cliente"
+ },
+ "Customers.detail.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Customers.detail.subtitle": {
+  "en": "Added {date}",
+  "ar": "أُضيف في {date}",
+  "de": "Hinzugefügt am {date}",
+  "fr": "Ajouté le {date}",
+  "it": "Aggiunto il {date}"
+ },
+ "Customers.detail.subtitleCompany": {
+  "en": "{company} · added {date}",
+  "ar": "{company} · أُضيف في {date}",
+  "de": "{company} · hinzugefügt am {date}",
+  "fr": "{company} · ajouté le {date}",
+  "it": "{company} · aggiunto il {date}"
+ },
+ "Customers.detail.lostTitle": {
+  "en": "Lost",
+  "ar": "غير ناجح",
+  "de": "Verloren",
+  "fr": "Perdu",
+  "it": "Perso"
+ },
+ "Customers.detail.lostNoReason": {
+  "en": "No reason was given.",
+  "ar": "لم يُذكر سبب.",
+  "de": "Es wurde kein Grund angegeben.",
+  "fr": "Aucune raison n'a été indiquée.",
+  "it": "Nessun motivo indicato."
+ },
+ "Customers.detail.meetingUpcoming": {
+  "en": "Meeting on {date}",
+  "ar": "اجتماع في {date}",
+  "de": "Termin am {date}",
+  "fr": "Rendez-vous le {date}",
+  "it": "Riunione il {date}"
+ },
+ "Customers.detail.meetingPast": {
+  "en": "Last meeting: {date}",
+  "ar": "آخر اجتماع: {date}",
+  "de": "Letzter Termin: {date}",
+  "fr": "Dernier rendez-vous : {date}",
+  "it": "Ultima riunione: {date}"
+ },
+ "Customers.detail.meetingBy": {
+  "en": "Set by {name}",
+  "ar": "حدّده {name}",
+  "de": "Geplant von {name}",
+  "fr": "Planifié par {name}",
+  "it": "Pianificata da {name}"
+ },
+ "Customers.detail.system": {
+  "en": "the system",
+  "ar": "النظام",
+  "de": "dem System",
+  "fr": "le système",
+  "it": "il sistema"
+ },
+ "Customers.overview.projects": {
+  "en": "Projects",
+  "ar": "المشروعات",
+  "de": "Projekte",
+  "fr": "Projets",
+  "it": "Progetti"
+ },
+ "Customers.overview.pending": {
+  "en": "{count, plural, =0 {None waiting for a contract} one {# waiting for a contract} other {# waiting for a contract}}",
+  "ar": "{count, plural, =0 {لا مشروع بانتظار عقد} one {مشروع واحد بانتظار عقد} two {مشروعان بانتظار عقد} few {# مشروعات بانتظار عقد} many {# مشروعًا بانتظار عقد} other {# مشروع بانتظار عقد}}",
+  "de": "{count, plural, =0 {Keines wartet auf einen Vertrag} one {# wartet auf einen Vertrag} other {# warten auf einen Vertrag}}",
+  "fr": "{count, plural, =0 {Aucun en attente de contrat} one {# en attente de contrat} other {# en attente de contrat}}",
+  "it": "{count, plural, =0 {Nessuno in attesa di contratto} one {# in attesa di contratto} other {# in attesa di contratto}}"
+ },
+ "Customers.overview.vsLastMonth": {
+  "en": "new this month vs last month",
+  "ar": "الجديد هذا الشهر مقارنة بالشهر الماضي",
+  "de": "neu in diesem Monat ggü. Vormonat",
+  "fr": "nouveaux ce mois-ci par rapport au mois dernier",
+  "it": "nuovi questo mese rispetto al mese scorso"
+ },
+ "Customers.overview.paid": {
+  "en": "Paid",
+  "ar": "المدفوع",
+  "de": "Bezahlt",
+  "fr": "Payé",
+  "it": "Pagato"
+ },
+ "Customers.overview.contracted": {
+  "en": "Contracted",
+  "ar": "قيمة العقود",
+  "de": "Vertraglich vereinbart",
+  "fr": "Sous contrat",
+  "it": "Contrattualizzato"
+ },
+ "Customers.overview.collected": {
+  "en": "{zone}: {percent} collected",
+  "ar": "{zone}: تم تحصيل {percent}",
+  "de": "{zone}: {percent} eingezogen",
+  "fr": "{zone} : {percent} encaissé",
+  "it": "{zone}: {percent} incassato"
+ },
+ "Customers.overview.nothingYet": {
+  "en": "Nothing contracted yet",
+  "ar": "لا توجد عقود بعد",
+  "de": "Noch nichts vereinbart",
+  "fr": "Rien sous contrat pour l'instant",
+  "it": "Ancora nulla di contrattualizzato"
+ },
+ "Customers.overview.lastActivity": {
+  "en": "Last contact",
+  "ar": "آخر تواصل",
+  "de": "Letzter Kontakt",
+  "fr": "Dernier contact",
+  "it": "Ultimo contatto"
+ },
+ "Customers.overview.checkInTitle": {
+  "en": "{count, plural, one {No contact for # day} other {No contact for # days}}",
+  "ar": "{count, plural, =0 {لا تواصل اليوم} one {لا تواصل منذ يوم واحد} two {لا تواصل منذ يومين} few {لا تواصل منذ # أيام} many {لا تواصل منذ # يومًا} other {لا تواصل منذ # يوم}}",
+  "de": "{count, plural, one {Seit # Tag kein Kontakt} other {Seit # Tagen kein Kontakt}}",
+  "fr": "{count, plural, one {Aucun contact depuis # jour} other {Aucun contact depuis # jours}}",
+  "it": "{count, plural, one {Nessun contatto da # giorno} other {Nessun contatto da # giorni}}"
+ },
+ "Customers.overview.checkInBody": {
+  "en": "Consider a call or an email to keep them warm.",
+  "ar": "فكّر في اتصال أو رسالة للحفاظ على التواصل.",
+  "de": "Ein Anruf oder eine E-Mail hält den Kontakt warm.",
+  "fr": "Un appel ou un e-mail permettra de garder le lien.",
+  "it": "Una chiamata o un'email aiuta a mantenere il contatto."
+ },
+ "Customers.details.title": {
+  "en": "Contact details",
+  "ar": "بيانات التواصل",
+  "de": "Kontaktdaten",
+  "fr": "Coordonnées",
+  "it": "Dati di contatto"
+ },
+ "Customers.details.email": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Customers.details.phone": {
+  "en": "Phone",
+  "ar": "الهاتف",
+  "de": "Telefon",
+  "fr": "Téléphone",
+  "it": "Telefono"
+ },
+ "Customers.details.address": {
+  "en": "Address",
+  "ar": "العنوان",
+  "de": "Adresse",
+  "fr": "Adresse",
+  "it": "Indirizzo"
+ },
+ "Customers.details.country": {
+  "en": "Country",
+  "ar": "الدولة",
+  "de": "Land",
+  "fr": "Pays",
+  "it": "Paese"
+ },
+ "Customers.details.language": {
+  "en": "Preferred language",
+  "ar": "اللغة المفضلة",
+  "de": "Bevorzugte Sprache",
+  "fr": "Langue préférée",
+  "it": "Lingua preferita"
+ },
+ "Customers.details.owner": {
+  "en": "Salesperson",
+  "ar": "مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter",
+  "fr": "Commercial",
+  "it": "Commerciale"
+ },
+ "Customers.details.unassigned": {
+  "en": "Not assigned",
+  "ar": "غير مُسنَد",
+  "de": "Nicht zugewiesen",
+  "fr": "Non attribué",
+  "it": "Non assegnato"
+ },
+ "Customers.details.created": {
+  "en": "Added",
+  "ar": "تاريخ الإضافة",
+  "de": "Hinzugefügt",
+  "fr": "Ajouté le",
+  "it": "Aggiunto il"
+ },
+ "Customers.details.createdBy": {
+  "en": "Added by",
+  "ar": "أضافه",
+  "de": "Angelegt von",
+  "fr": "Ajouté par",
+  "it": "Aggiunto da"
+ },
+ "Customers.business.title": {
+  "en": "Business",
+  "ar": "النشاط التجاري",
+  "de": "Unternehmen",
+  "fr": "Entreprise",
+  "it": "Azienda"
+ },
+ "Customers.business.company": {
+  "en": "Company",
+  "ar": "الشركة",
+  "de": "Firma",
+  "fr": "Entreprise",
+  "it": "Azienda"
+ },
+ "Customers.business.register": {
+  "en": "Commercial register number",
+  "ar": "رقم السجل التجاري",
+  "de": "Handelsregisternummer",
+  "fr": "Numéro du registre du commerce",
+  "it": "Numero di registro delle imprese"
+ },
+ "Customers.business.website": {
+  "en": "Website",
+  "ar": "الموقع الإلكتروني",
+  "de": "Website",
+  "fr": "Site web",
+  "it": "Sito web"
+ },
+ "Customers.business.documents": {
+  "en": "Documents",
+  "ar": "المستندات",
+  "de": "Dokumente",
+  "fr": "Documents",
+  "it": "Documenti"
+ },
+ "Customers.business.idDoc": {
+  "en": "ID document",
+  "ar": "مستند الهوية",
+  "de": "Ausweisdokument",
+  "fr": "Pièce d'identité",
+  "it": "Documento d'identità"
+ },
+ "Customers.business.businessDoc": {
+  "en": "Business document",
+  "ar": "المستند التجاري",
+  "de": "Firmendokument",
+  "fr": "Document d'entreprise",
+  "it": "Documento aziendale"
+ },
+ "Customers.business.docIn": {
+  "en": "{doc} received",
+  "ar": "{doc}: تم الاستلام",
+  "de": "{doc} liegt vor",
+  "fr": "{doc} reçu",
+  "it": "{doc} ricevuto"
+ },
+ "Customers.business.docMissing": {
+  "en": "{doc} missing",
+  "ar": "{doc}: غير موجود",
+  "de": "{doc} fehlt",
+  "fr": "{doc} manquant",
+  "it": "{doc} mancante"
+ },
+ "Customers.documents.title": {
+  "en": "Documents",
+  "ar": "المستندات",
+  "de": "Dokumente",
+  "fr": "Documents",
+  "it": "Documenti"
+ },
+ "Customers.documents.description": {
+  "en": "PDF or image files, checked before the first contract.",
+  "ar": "ملفات PDF أو صور، تُراجَع قبل العقد الأول.",
+  "de": "PDF- oder Bilddateien, geprüft vor dem ersten Vertrag.",
+  "fr": "Fichiers PDF ou images, vérifiés avant le premier contrat.",
+  "it": "File PDF o immagini, verificati prima del primo contratto."
+ },
+ "Customers.documents.idDoc": {
+  "en": "ID document",
+  "ar": "مستند الهوية",
+  "de": "Ausweisdokument",
+  "fr": "Pièce d'identité",
+  "it": "Documento d'identità"
+ },
+ "Customers.documents.businessDoc": {
+  "en": "Business document",
+  "ar": "المستند التجاري",
+  "de": "Firmendokument",
+  "fr": "Document d'entreprise",
+  "it": "Documento aziendale"
+ },
+ "Customers.documents.none": {
+  "en": "Not uploaded yet",
+  "ar": "لم يُرفع بعد",
+  "de": "Noch nicht hochgeladen",
+  "fr": "Pas encore téléversé",
+  "it": "Non ancora caricato"
+ },
+ "Customers.documents.upload": {
+  "en": "Upload",
+  "ar": "رفع",
+  "de": "Hochladen",
+  "fr": "Téléverser",
+  "it": "Carica"
+ },
+ "Customers.documents.preview": {
+  "en": "Preview {name}",
+  "ar": "معاينة {name}",
+  "de": "Vorschau von {name}",
+  "fr": "Aperçu de {name}",
+  "it": "Anteprima di {name}"
+ },
+ "Customers.documents.download": {
+  "en": "Download {name}",
+  "ar": "تنزيل {name}",
+  "de": "{name} herunterladen",
+  "fr": "Télécharger {name}",
+  "it": "Scarica {name}"
+ },
+ "Customers.documents.replace": {
+  "en": "Replace {name}",
+  "ar": "استبدال {name}",
+  "de": "{name} ersetzen",
+  "fr": "Remplacer {name}",
+  "it": "Sostituisci {name}"
+ },
+ "Customers.documents.delete": {
+  "en": "Delete {name}",
+  "ar": "حذف {name}",
+  "de": "{name} löschen",
+  "fr": "Supprimer {name}",
+  "it": "Elimina {name}"
+ },
+ "Customers.documents.deleteTitle": {
+  "en": "Delete {name}?",
+  "ar": "هل تريد حذف {name}؟",
+  "de": "{name} löschen?",
+  "fr": "Supprimer {name} ?",
+  "it": "Eliminare {name}?"
+ },
+ "Customers.documents.deleteImpact": {
+  "en": "The customer will have no {kind} until one is uploaded again.",
+  "ar": "لن يكون لدى العميل {kind} حتى يُرفع مستند جديد.",
+  "de": "Der Kunde hat kein {kind}, bis wieder eines hochgeladen wird.",
+  "fr": "Le client n'aura plus de {kind} jusqu'à un nouveau téléversement.",
+  "it": "Il cliente non avrà un {kind} finché non ne viene caricato un altro."
+ },
+ "Customers.documents.deleteConfirm": {
+  "en": "Delete document",
+  "ar": "حذف المستند",
+  "de": "Dokument löschen",
+  "fr": "Supprimer le document",
+  "it": "Elimina documento"
+ },
+ "Customers.documents.cancel": {
+  "en": "Keep it",
+  "ar": "الإبقاء عليه",
+  "de": "Behalten",
+  "fr": "Le garder",
+  "it": "Mantienilo"
+ },
+ "Customers.documents.loadingPreview": {
+  "en": "Loading the preview",
+  "ar": "جارٍ تحميل المعاينة",
+  "de": "Vorschau wird geladen",
+  "fr": "Chargement de l'aperçu",
+  "it": "Caricamento dell'anteprima"
+ },
+ "Customers.documents.previewFailed": {
+  "en": "The preview couldn't be loaded.",
+  "ar": "تعذّر تحميل المعاينة.",
+  "de": "Die Vorschau konnte nicht geladen werden.",
+  "fr": "L'aperçu n'a pas pu être chargé.",
+  "it": "Impossibile caricare l'anteprima."
+ },
+ "Customers.documents.downloadInstead": {
+  "en": "Download to view it",
+  "ar": "نزّله لعرضه",
+  "de": "Zum Ansehen herunterladen",
+  "fr": "Télécharger pour l'afficher",
+  "it": "Scarica per visualizzarlo"
+ },
+ "Customers.documents.downloadFailed": {
+  "en": "The file couldn't be downloaded. Try again.",
+  "ar": "تعذّر تنزيل الملف. حاول مرة أخرى.",
+  "de": "Die Datei konnte nicht heruntergeladen werden. Versuchen Sie es erneut.",
+  "fr": "Le fichier n'a pas pu être téléchargé. Réessayez.",
+  "it": "Impossibile scaricare il file. Riprova."
+ },
+ "Customers.projects.title": {
+  "en": "Projects",
+  "ar": "المشروعات",
+  "de": "Projekte",
+  "fr": "Projets",
+  "it": "Progetti"
+ },
+ "Customers.projects.count": {
+  "en": "{count, plural, =0 {No projects} one {# project} other {# projects}}",
+  "ar": "{count, plural, =0 {لا مشروعات} one {مشروع واحد} two {مشروعان} few {# مشروعات} many {# مشروعًا} other {# مشروع}}",
+  "de": "{count, plural, =0 {Keine Projekte} one {# Projekt} other {# Projekte}}",
+  "fr": "{count, plural, =0 {Aucun projet} one {# projet} other {# projets}}",
+  "it": "{count, plural, =0 {Nessun progetto} one {# progetto} other {# progetti}}"
+ },
+ "Customers.projects.unnamed": {
+  "en": "Untitled project",
+  "ar": "مشروع بلا اسم",
+  "de": "Projekt ohne Namen",
+  "fr": "Projet sans nom",
+  "it": "Progetto senza nome"
+ },
+ "Customers.projects.plansCount": {
+  "en": "{count, plural, =0 {No plans} one {# plan} other {# plans}}",
+  "ar": "{count, plural, =0 {لا خطط} one {خطة واحدة} two {خطتان} few {# خطط} many {# خطة} other {# خطة}}",
+  "de": "{count, plural, =0 {Keine Pläne} one {# Plan} other {# Pläne}}",
+  "fr": "{count, plural, =0 {Aucune formule} one {# formule} other {# formules}}",
+  "it": "{count, plural, =0 {Nessun piano} one {# piano} other {# piani}}"
+ },
+ "Customers.projects.plans": {
+  "en": "Plans",
+  "ar": "الخطط",
+  "de": "Pläne",
+  "fr": "Formules",
+  "it": "Piani"
+ },
+ "Customers.projects.contract": {
+  "en": "Contract",
+  "ar": "العقد",
+  "de": "Vertrag",
+  "fr": "Contrat",
+  "it": "Contratto"
+ },
+ "Customers.projects.contractStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Customers.projects.contractCreated": {
+  "en": "Created",
+  "ar": "تاريخ الإنشاء",
+  "de": "Erstellt",
+  "fr": "Créé le",
+  "it": "Creato il"
+ },
+ "Customers.projects.signed": {
+  "en": "Signed by the customer",
+  "ar": "وقّعه العميل",
+  "de": "Vom Kunden unterschrieben",
+  "fr": "Signé par le client",
+  "it": "Firmato dal cliente"
+ },
+ "Customers.projects.signedYes": {
+  "en": "Yes",
+  "ar": "نعم",
+  "de": "Ja",
+  "fr": "Oui",
+  "it": "Sì"
+ },
+ "Customers.projects.signedNo": {
+  "en": "Not yet",
+  "ar": "ليس بعد",
+  "de": "Noch nicht",
+  "fr": "Pas encore",
+  "it": "Non ancora"
+ },
+ "Customers.projects.noContract": {
+  "en": "No contract yet.",
+  "ar": "لا يوجد عقد بعد.",
+  "de": "Noch kein Vertrag.",
+  "fr": "Pas encore de contrat.",
+  "it": "Ancora nessun contratto."
+ },
+ "Customers.projects.open": {
+  "en": "Open the project",
+  "ar": "فتح المشروع",
+  "de": "Projekt öffnen",
+  "fr": "Ouvrir le projet",
+  "it": "Apri il progetto"
+ },
+ "Customers.projects.openToReview": {
+  "en": "Open the project to approve or reject the contract",
+  "ar": "افتح المشروع لاعتماد العقد أو رفضه",
+  "de": "Projekt öffnen, um den Vertrag freizugeben oder abzulehnen",
+  "fr": "Ouvrir le projet pour approuver ou refuser le contrat",
+  "it": "Apri il progetto per approvare o rifiutare il contratto"
+ },
+ "Customers.projects.emptyTitle": {
+  "en": "No projects yet",
+  "ar": "لا توجد مشروعات بعد",
+  "de": "Noch keine Projekte",
+  "fr": "Aucun projet pour l'instant",
+  "it": "Ancora nessun progetto"
+ },
+ "Customers.projects.emptyBody": {
+  "en": "A project starts when the customer accepts an offer.",
+  "ar": "يبدأ المشروع عندما يقبل العميل عرضًا.",
+  "de": "Ein Projekt beginnt, wenn der Kunde ein Angebot annimmt.",
+  "fr": "Un projet démarre quand le client accepte une offre.",
+  "it": "Un progetto inizia quando il cliente accetta un'offerta."
+ },
+ "Customers.priority.high": {
+  "en": "High",
+  "ar": "عالية",
+  "de": "Hoch",
+  "fr": "Haute",
+  "it": "Alta"
+ },
+ "Customers.priority.medium": {
+  "en": "Medium",
+  "ar": "متوسطة",
+  "de": "Mittel",
+  "fr": "Moyenne",
+  "it": "Media"
+ },
+ "Customers.priority.low": {
+  "en": "Low",
+  "ar": "منخفضة",
+  "de": "Niedrig",
+  "fr": "Basse",
+  "it": "Bassa"
+ },
+ "Customers.access.title": {
+  "en": "Sign-in",
+  "ar": "تسجيل الدخول",
+  "de": "Anmeldung",
+  "fr": "Connexion",
+  "it": "Accesso"
+ },
+ "Customers.access.activeBody": {
+  "en": "This customer has an account and can sign in to see their offers and projects.",
+  "ar": "لدى هذا العميل حساب ويمكنه تسجيل الدخول للاطلاع على عروضه ومشروعاته.",
+  "de": "Dieser Kunde hat ein Konto und kann sich anmelden, um Angebote und Projekte zu sehen.",
+  "fr": "Ce client a un compte et peut se connecter pour voir ses offres et projets.",
+  "it": "Questo cliente ha un account e può accedere per vedere offerte e progetti."
+ },
+ "Customers.access.invitedBody": {
+  "en": "An invitation was created. It works until {date}.",
+  "ar": "أُنشئت دعوة صالحة حتى {date}.",
+  "de": "Eine Einladung wurde erstellt. Sie gilt bis {date}.",
+  "fr": "Une invitation a été créée. Elle est valable jusqu'au {date}.",
+  "it": "È stato creato un invito. È valido fino al {date}."
+ },
+ "Customers.access.invitedExpired": {
+  "en": "The invitation stopped working on {date}.",
+  "ar": "انتهت صلاحية الدعوة في {date}.",
+  "de": "Die Einladung ist am {date} abgelaufen.",
+  "fr": "L'invitation a expiré le {date}.",
+  "it": "L'invito è scaduto il {date}."
+ },
+ "Customers.access.invitedNoDate": {
+  "en": "An invitation was created and hasn't been used yet.",
+  "ar": "أُنشئت دعوة ولم تُستخدم بعد.",
+  "de": "Eine Einladung wurde erstellt und noch nicht genutzt.",
+  "fr": "Une invitation a été créée et n'a pas encore été utilisée.",
+  "it": "È stato creato un invito non ancora usato."
+ },
+ "Customers.access.noAccountBody": {
+  "en": "This customer has no account yet.",
+  "ar": "ليس لدى هذا العميل حساب بعد.",
+  "de": "Dieser Kunde hat noch kein Konto.",
+  "fr": "Ce client n'a pas encore de compte.",
+  "it": "Questo cliente non ha ancora un account."
+ },
+ "Customers.access.showLink": {
+  "en": "Show invitation link",
+  "ar": "عرض رابط الدعوة",
+  "de": "Einladungslink anzeigen",
+  "fr": "Afficher le lien d'invitation",
+  "it": "Mostra link di invito"
+ },
+ "Customers.access.copyLink": {
+  "en": "Copy link",
+  "ar": "نسخ الرابط",
+  "de": "Link kopieren",
+  "fr": "Copier le lien",
+  "it": "Copia link"
+ },
+ "Customers.access.copied": {
+  "en": "Link copied",
+  "ar": "تم نسخ الرابط",
+  "de": "Link kopiert",
+  "fr": "Lien copié",
+  "it": "Link copiato"
+ },
+ "Customers.access.copyFailed": {
+  "en": "The link couldn't be copied. Open it and copy it yourself.",
+  "ar": "تعذّر نسخ الرابط. اعرضه وانسخه يدويًا.",
+  "de": "Der Link konnte nicht kopiert werden. Zeigen Sie ihn an und kopieren Sie ihn selbst.",
+  "fr": "Le lien n'a pas pu être copié. Affichez-le et copiez-le vous-même.",
+  "it": "Impossibile copiare il link. Mostralo e copialo tu."
+ },
+ "Customers.access.viewAs": {
+  "en": "View as this customer",
+  "ar": "العرض بصفة هذا العميل",
+  "de": "Als dieser Kunde ansehen",
+  "fr": "Voir en tant que ce client",
+  "it": "Visualizza come questo cliente"
+ },
+ "Customers.notes.title": {
+  "en": "Notes",
+  "ar": "الملاحظات",
+  "de": "Notizen",
+  "fr": "Notes",
+  "it": "Note"
+ },
+ "Customers.notes.count": {
+  "en": "{count, plural, =0 {No notes} one {# note} other {# notes}}",
+  "ar": "{count, plural, =0 {لا ملاحظات} one {ملاحظة واحدة} two {ملاحظتان} few {# ملاحظات} many {# ملاحظة} other {# ملاحظة}}",
+  "de": "{count, plural, =0 {Keine Notizen} one {# Notiz} other {# Notizen}}",
+  "fr": "{count, plural, =0 {Aucune note} one {# note} other {# notes}}",
+  "it": "{count, plural, =0 {Nessuna nota} one {# nota} other {# note}}"
+ },
+ "Customers.notes.emptyTitle": {
+  "en": "No notes yet",
+  "ar": "لا توجد ملاحظات بعد",
+  "de": "Noch keine Notizen",
+  "fr": "Aucune note pour l'instant",
+  "it": "Ancora nessuna nota"
+ },
+ "Customers.notes.emptyBody": {
+  "en": "Write down what was said, so the next person knows.",
+  "ar": "دوّن ما قيل ليعرفه الشخص التالي.",
+  "de": "Halten Sie fest, was besprochen wurde, damit die Nächsten Bescheid wissen.",
+  "fr": "Notez ce qui a été dit pour que la personne suivante le sache.",
+  "it": "Annota cosa è stato detto, così chi viene dopo lo sa."
+ },
+ "Customers.notes.newLabel": {
+  "en": "New note",
+  "ar": "ملاحظة جديدة",
+  "de": "Neue Notiz",
+  "fr": "Nouvelle note",
+  "it": "Nuova nota"
+ },
+ "Customers.notes.placeholder": {
+  "en": "What happened, what's next",
+  "ar": "ما الذي حدث، وما الخطوة التالية",
+  "de": "Was passiert ist, was als Nächstes kommt",
+  "fr": "Ce qui s'est passé, la suite",
+  "it": "Cosa è successo, cosa viene dopo"
+ },
+ "Customers.notes.add": {
+  "en": "Add note",
+  "ar": "إضافة ملاحظة",
+  "de": "Notiz hinzufügen",
+  "fr": "Ajouter la note",
+  "it": "Aggiungi nota"
+ },
+ "Customers.notes.edit": {
+  "en": "Edit the note from {date}",
+  "ar": "تعديل ملاحظة {date}",
+  "de": "Notiz vom {date} bearbeiten",
+  "fr": "Modifier la note du {date}",
+  "it": "Modifica la nota del {date}"
+ },
+ "Customers.notes.delete": {
+  "en": "Delete the note from {date}",
+  "ar": "حذف ملاحظة {date}",
+  "de": "Notiz vom {date} löschen",
+  "fr": "Supprimer la note du {date}",
+  "it": "Elimina la nota del {date}"
+ },
+ "Customers.notes.editLabel": {
+  "en": "Note",
+  "ar": "الملاحظة",
+  "de": "Notiz",
+  "fr": "Note",
+  "it": "Nota"
+ },
+ "Customers.notes.save": {
+  "en": "Save note",
+  "ar": "حفظ الملاحظة",
+  "de": "Notiz speichern",
+  "fr": "Enregistrer la note",
+  "it": "Salva nota"
+ },
+ "Customers.notes.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Customers.notes.deleteTitle": {
+  "en": "Delete this note?",
+  "ar": "هل تريد حذف هذه الملاحظة؟",
+  "de": "Diese Notiz löschen?",
+  "fr": "Supprimer cette note ?",
+  "it": "Eliminare questa nota?"
+ },
+ "Customers.notes.deleteImpact": {
+  "en": "The note from {date} is removed for everyone.",
+  "ar": "ستُحذف ملاحظة {date} لدى الجميع.",
+  "de": "Die Notiz vom {date} wird für alle entfernt.",
+  "fr": "La note du {date} est supprimée pour tout le monde.",
+  "it": "La nota del {date} viene eliminata per tutti."
+ },
+ "Customers.notes.deleteConfirm": {
+  "en": "Delete note",
+  "ar": "حذف الملاحظة",
+  "de": "Notiz löschen",
+  "fr": "Supprimer la note",
+  "it": "Elimina nota"
+ },
+ "Customers.notes.gone": {
+  "en": "Someone else changed or deleted this note. The latest notes are shown.",
+  "ar": "غيّر شخص آخر هذه الملاحظة أو حذفها. تُعرض أحدث الملاحظات.",
+  "de": "Jemand anderes hat diese Notiz geändert oder gelöscht. Die aktuellen Notizen werden angezeigt.",
+  "fr": "Quelqu'un d'autre a modifié ou supprimé cette note. Les notes à jour sont affichées.",
+  "it": "Qualcun altro ha modificato o eliminato questa nota. Sono mostrate le note aggiornate."
+ },
+ "customers.editCustomer": null,
+ "customers.deleteCustomer": null,
+ "customers.fullName": null,
+ "customers.customerName": null,
+ "customers.phoneNumber": null,
+ "customers.customerPhone": null,
+ "customers.address": null,
+ "customers.customerAddress": null,
+ "customers.preferredLanguage": null,
+ "customers.selectLanguage": null,
+ "customers.companyName": null,
+ "customers.companyNamePlaceholder": null,
+ "customers.commercialRegister": null,
+ "customers.commercialRegisterPlaceholder": null,
+ "customers.website": null,
+ "customers.websitePlaceholder": null,
+ "customers.customerNotFound": null,
+ "customers.detailsTitle": null,
+ "customers.detailsDescription": null,
+ "customers.backToCustomers": null,
+ "customers.scheduleMeeting": null,
+ "customers.schedule": null,
+ "customers.meetingDateTime": null,
+ "customers.meetingNotes": null,
+ "customers.meetingNotesPlaceholder": null,
+ "customers.inviteLinkCopied": null,
+ "customers.inviteLinkCopyFailed": null,
+ "customers.inviteLinkGenerated": null,
+ "customers.inviteLinkDesc": null,
+ "customers.magicLink": null,
+ "customers.copyLink": null,
+ "customers.inviteLinkExpiryMsg": null,
+ "customers.joined": null,
+ "customers.description": null,
+ "customers.searchPlaceholder": null,
+ "customers.columnCustomerName": null,
+ "customers.columnEmail": null,
+ "customers.columnPhone": null,
+ "customers.columnSalesName": null,
+ "customers.columnAccess": null,
+ "customers.columnCreatedDate": null,
+ "customers.columnStatus": null,
+ "customers.columnActions": null,
+ "customers.statusNew": null,
+ "customers.statusContacted": null,
+ "customers.statusQualified": null,
+ "customers.statusUnqualified": null,
+ "customers.statusScheduled": null,
+ "customers.accessNoAccount": null,
+ "customers.accessInvited": null,
+ "customers.accessActive": null,
+ "customers.customerEmail": null,
+ "customers.overviewProjects": null,
+ "customers.overviewPendingProjects": null,
+ "customers.overviewFromPreviousMonth": null,
+ "customers.overviewLifetimeValue": null,
+ "customers.overviewTotalPaid": null,
+ "customers.overviewContracted": null,
+ "customers.overviewCollectedPercentage": null,
+ "customers.overviewZoneCollected": null,
+ "customers.overviewLastActivity": null,
+ "customers.monthsAgo": null,
+ "customers.daysAgo": null,
+ "customers.overviewRecentContact": null,
+ "customers.overviewUpcomingMeeting": null,
+ "customers.overviewCreatedByUser": null,
+ "customers.system": null,
+ "customers.overviewNoContactAlert": null,
+ "customers.overviewLastTouch": null,
+ "customers.overviewActiveCustomer": null,
+ "customers.detailsSectionTitle": null,
+ "customers.detailsFullName": null,
+ "customers.detailsAddress": null,
+ "customers.detailsEmail": null,
+ "customers.detailsCreatedDate": null,
+ "customers.detailsPhone": null,
+ "customers.detailsPreferredLanguage": null,
+ "customers.detailsStatus": null,
+ "customers.detailsScheduledMeeting": null,
+ "customers.businessDetailsTitle": null,
+ "customers.businessCompanyName": null,
+ "customers.businessCommercialRegNo": null,
+ "customers.businessWebsite": null,
+ "customers.businessDocuments": null,
+ "customers.businessId": null,
+ "customers.businessBusiness": null,
+ "customers.documentsDetailsTitle": null,
+ "customers.documentsIdDocument": null,
+ "customers.documentsBusinessDocument": null,
+ "customers.projectsTitle": null,
+ "customers.projectsPlansCount": null,
+ "customers.projectsPlans": null,
+ "customers.projectsAddPlan": null,
+ "customers.projectsContractDetails": null,
+ "customers.projectsCreatedAt": null,
+ "customers.projectsStatus": null,
+ "customers.projectsIdDocument": null,
+ "customers.projectsApprove": null,
+ "customers.projectsProjectApproved": null,
+ "customers.projectsReject": null,
+ "customers.projectsProjectRejected": null,
+ "customers.projectsViewFullDetails": null,
+ "customers.projectsNoProjectsYet": null,
+ "customers.projectsUnnamedProject": null,
+ "customers.accessTitle": null,
+ "customers.accessLinkCopied": null,
+ "customers.accessLinkCopyFailed": null,
+ "customers.accessViewLink": null,
+ "customers.accessCopyLink": null,
+ "customers.accessResendInvite": null,
+ "customers.accessRevoke": null,
+ "customers.accessSignInAsCustomer": null,
+ "customers.accessInvitedDesc": null,
+ "customers.accessActiveDesc": null,
+ "customers.accessNoAccountDesc": null,
+ "customers.accessInviteViewed": null,
+ "customers.accessInviteResent": null,
+ "customers.accessInviteRevoked": null,
+ "customers.accessSignedIn": null,
+ "customers.notesTitle": null,
+ "customers.notesEditNote": null,
+ "customers.notesCancel": null,
+ "customers.notesSaveNote": null,
+ "customers.personalInformation": null,
+ "customers.enterCustomerName": null,
+ "customers.enterCustomerEmail": null,
+ "customers.enterCustomerPhone": null,
+ "customers.enterCustomerAddress": null,
+ "customers.selectPreferredLanguage": null,
+ "customers.businessInformation": null,
+ "customers.enterCompanyName": null,
+ "customers.commercialRegisterNumber": null,
+ "customers.enterCustomerCommercialRegisterNumber": null,
+ "customers.addUrlWebsite": null,
+ "customers.initialPassword": null,
+ "customers.passwordOptional": null,
+ "customers.sendInviteToSetPassword": null,
+ "customers.addNewCustomer": null
+}

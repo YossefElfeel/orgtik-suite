@@ -1,0 +1,2746 @@
+{
+ "Deal.titleNewOffer": {
+  "en": "New offer",
+  "ar": "عرض جديد",
+  "de": "Neues Angebot",
+  "fr": "Nouvelle offre",
+  "it": "Nuova offerta"
+ },
+ "Deal.titleEditOffer": {
+  "en": "Edit offer",
+  "ar": "تعديل العرض",
+  "de": "Angebot bearbeiten",
+  "fr": "Modifier l’offre",
+  "it": "Modifica offerta"
+ },
+ "Deal.titleNewProject": {
+  "en": "New project",
+  "ar": "مشروع جديد",
+  "de": "Neues Projekt",
+  "fr": "Nouveau projet",
+  "it": "Nuovo progetto"
+ },
+ "Deal.titleEditPlans": {
+  "en": "Change the project's plans",
+  "ar": "تغيير خطط المشروع",
+  "de": "Tarife des Projekts ändern",
+  "fr": "Modifier les formules du projet",
+  "it": "Modifica i piani del progetto"
+ },
+ "Deal.descriptionOffer": {
+  "en": "Choose the customer, the plans and the terms. Prices come from the catalog for the customer's country.",
+  "ar": "اختر العميل والخطط والشروط. تأتي الأسعار من الكتالوج الخاص ببلد العميل.",
+  "de": "Wählen Sie Kunde, Tarife und Bedingungen. Die Preise stammen aus dem Katalog für das Land des Kunden.",
+  "fr": "Choisissez le client, les formules et les conditions. Les prix viennent du catalogue du pays du client.",
+  "it": "Scegli il cliente, i piani e le condizioni. I prezzi vengono dal catalogo del paese del cliente."
+ },
+ "Deal.descriptionProject": {
+  "en": "Name the project, choose the customer, the plans and the terms. A contract is created for the customer to sign.",
+  "ar": "سمِّ المشروع واختر العميل والخطط والشروط. يُنشأ عقد ليوقّعه العميل.",
+  "de": "Benennen Sie das Projekt und wählen Sie Kunde, Tarife und Bedingungen. Es entsteht ein Vertrag, den der Kunde unterschreibt.",
+  "fr": "Nommez le projet, choisissez le client, les formules et les conditions. Un contrat est créé pour que le client le signe.",
+  "it": "Dai un nome al progetto, scegli il cliente, i piani e le condizioni. Viene creato un contratto da far firmare al cliente."
+ },
+ "Deal.loading": {
+  "en": "Loading the deal…",
+  "ar": "جارٍ تحميل الصفقة…",
+  "de": "Deal wird geladen…",
+  "fr": "Chargement de l’affaire…",
+  "it": "Caricamento della trattativa…"
+ },
+ "Deal.loadErrorTitle": {
+  "en": "The deal couldn't be loaded",
+  "ar": "تعذّر تحميل الصفقة",
+  "de": "Der Deal konnte nicht geladen werden",
+  "fr": "Impossible de charger l’affaire",
+  "it": "Impossibile caricare la trattativa"
+ },
+ "Deal.loadErrorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقّق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Deal.plansLockedTitle": {
+  "en": "These plans can't change any more",
+  "ar": "لم يعد بالإمكان تغيير هذه الخطط",
+  "de": "Diese Tarife können nicht mehr geändert werden",
+  "fr": "Ces formules ne peuvent plus être modifiées",
+  "it": "Questi piani non possono più essere modificati"
+ },
+ "Deal.plansLockedBody": {
+  "en": "Plans change only while the contract waits for approval.",
+  "ar": "لا تتغيّر الخطط إلا أثناء انتظار العقد للاعتماد.",
+  "de": "Tarife lassen sich nur ändern, solange der Vertrag auf Freigabe wartet.",
+  "fr": "Les formules ne changent que tant que le contrat attend son approbation.",
+  "it": "I piani si possono cambiare solo finché il contratto è in attesa di approvazione."
+ },
+ "Deal.discardTitle": {
+  "en": "Discard your changes?",
+  "ar": "هل تريد تجاهل تغييراتك؟",
+  "de": "Änderungen verwerfen?",
+  "fr": "Abandonner vos modifications ?",
+  "it": "Annullare le modifiche?"
+ },
+ "Deal.discardBody": {
+  "en": "What you entered in this deal isn't saved and will be lost.",
+  "ar": "ما أدخلته في هذه الصفقة غير محفوظ وسيُفقد.",
+  "de": "Ihre Eingaben in diesem Deal sind nicht gespeichert und gehen verloren.",
+  "fr": "Ce que vous avez saisi dans cette affaire n’est pas enregistré et sera perdu.",
+  "it": "Quanto inserito in questa trattativa non è salvato e andrà perso."
+ },
+ "Deal.discardConfirm": {
+  "en": "Discard changes",
+  "ar": "تجاهل التغييرات",
+  "de": "Änderungen verwerfen",
+  "fr": "Abandonner les modifications",
+  "it": "Annulla le modifiche"
+ },
+ "Deal.discardCancel": {
+  "en": "Keep editing",
+  "ar": "متابعة التعديل",
+  "de": "Weiter bearbeiten",
+  "fr": "Continuer la modification",
+  "it": "Continua a modificare"
+ },
+ "Deal.stepsLabel": {
+  "en": "Deal steps",
+  "ar": "خطوات الصفقة",
+  "de": "Schritte des Deals",
+  "fr": "Étapes de l’affaire",
+  "it": "Passaggi della trattativa"
+ },
+ "Deal.stepLocked": {
+  "en": "Finish the current step first",
+  "ar": "أكمل الخطوة الحالية أولًا",
+  "de": "Schließen Sie zuerst den aktuellen Schritt ab",
+  "fr": "Terminez d’abord l’étape en cours",
+  "it": "Completa prima il passaggio attuale"
+ },
+ "Deal.stepCustomer": {
+  "en": "Customer",
+  "ar": "العميل",
+  "de": "Kunde",
+  "fr": "Client",
+  "it": "Cliente"
+ },
+ "Deal.stepProject": {
+  "en": "Project and customer",
+  "ar": "المشروع والعميل",
+  "de": "Projekt und Kunde",
+  "fr": "Projet et client",
+  "it": "Progetto e cliente"
+ },
+ "Deal.stepPlans": {
+  "en": "Plans",
+  "ar": "الخطط",
+  "de": "Tarife",
+  "fr": "Formules",
+  "it": "Piani"
+ },
+ "Deal.stepTerms": {
+  "en": "Terms",
+  "ar": "الشروط",
+  "de": "Bedingungen",
+  "fr": "Conditions",
+  "it": "Condizioni"
+ },
+ "Deal.stepReview": {
+  "en": "Review",
+  "ar": "المراجعة",
+  "de": "Prüfen",
+  "fr": "Vérification",
+  "it": "Riepilogo"
+ },
+ "Deal.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Deal.back": {
+  "en": "Back",
+  "ar": "رجوع",
+  "de": "Zurück",
+  "fr": "Retour",
+  "it": "Indietro"
+ },
+ "Deal.next": {
+  "en": "Next",
+  "ar": "التالي",
+  "de": "Weiter",
+  "fr": "Suivant",
+  "it": "Avanti"
+ },
+ "Deal.sendOffer": {
+  "en": "Send offer",
+  "ar": "إرسال العرض",
+  "de": "Angebot senden",
+  "fr": "Envoyer l’offre",
+  "it": "Invia offerta"
+ },
+ "Deal.saveOffer": {
+  "en": "Save offer",
+  "ar": "حفظ العرض",
+  "de": "Angebot speichern",
+  "fr": "Enregistrer l’offre",
+  "it": "Salva offerta"
+ },
+ "Deal.createProject": {
+  "en": "Create project",
+  "ar": "إنشاء المشروع",
+  "de": "Projekt anlegen",
+  "fr": "Créer le projet",
+  "it": "Crea progetto"
+ },
+ "Deal.savePlans": {
+  "en": "Save plans",
+  "ar": "حفظ الخطط",
+  "de": "Tarife speichern",
+  "fr": "Enregistrer les formules",
+  "it": "Salva i piani"
+ },
+ "Deal.projectSection": {
+  "en": "Project",
+  "ar": "المشروع",
+  "de": "Projekt",
+  "fr": "Projet",
+  "it": "Progetto"
+ },
+ "Deal.customerSection": {
+  "en": "Customer",
+  "ar": "العميل",
+  "de": "Kunde",
+  "fr": "Client",
+  "it": "Cliente"
+ },
+ "Deal.customerSearch": {
+  "en": "Search customers by name, company or email",
+  "ar": "ابحث عن العملاء بالاسم أو الشركة أو البريد الإلكتروني",
+  "de": "Kunden nach Name, Firma oder E-Mail suchen",
+  "fr": "Rechercher des clients par nom, entreprise ou e-mail",
+  "it": "Cerca clienti per nome, azienda o email"
+ },
+ "Deal.customerLabel": {
+  "en": "Customer",
+  "ar": "العميل",
+  "de": "Kunde",
+  "fr": "Client",
+  "it": "Cliente"
+ },
+ "Deal.customerLocked": {
+  "en": "The customer of a saved deal stays the same.",
+  "ar": "يبقى عميل الصفقة المحفوظة كما هو.",
+  "de": "Der Kunde eines gespeicherten Deals bleibt gleich.",
+  "fr": "Le client d’une affaire enregistrée ne change pas.",
+  "it": "Il cliente di una trattativa salvata non cambia."
+ },
+ "Deal.customersErrorTitle": {
+  "en": "Customers couldn't be loaded",
+  "ar": "تعذّر تحميل العملاء",
+  "de": "Kunden konnten nicht geladen werden",
+  "fr": "Impossible de charger les clients",
+  "it": "Impossibile caricare i clienti"
+ },
+ "Deal.customersErrorBody": {
+  "en": "Try again in a moment.",
+  "ar": "حاول مرة أخرى بعد قليل.",
+  "de": "Versuchen Sie es gleich noch einmal.",
+  "fr": "Réessayez dans un instant.",
+  "it": "Riprova tra poco."
+ },
+ "Deal.customersNoMatch": {
+  "en": "No customer matches this search",
+  "ar": "لا يوجد عميل يطابق هذا البحث",
+  "de": "Kein Kunde passt zu dieser Suche",
+  "fr": "Aucun client ne correspond à cette recherche",
+  "it": "Nessun cliente corrisponde alla ricerca"
+ },
+ "Deal.customersEmptyTitle": {
+  "en": "No customers yet",
+  "ar": "لا يوجد عملاء بعد",
+  "de": "Noch keine Kunden",
+  "fr": "Pas encore de clients",
+  "it": "Ancora nessun cliente"
+ },
+ "Deal.customersEmptyBody": {
+  "en": "Add a customer on the Customers page first.",
+  "ar": "أضف عميلًا من صفحة العملاء أولًا.",
+  "de": "Legen Sie zuerst auf der Seite Kunden einen Kunden an.",
+  "fr": "Ajoutez d’abord un client depuis la page Clients.",
+  "it": "Aggiungi prima un cliente dalla pagina Clienti."
+ },
+ "Deal.countryLabel": {
+  "en": "Customer's country",
+  "ar": "بلد العميل",
+  "de": "Land des Kunden",
+  "fr": "Pays du client",
+  "it": "Paese del cliente"
+ },
+ "Deal.countryHint": {
+  "en": "It sets the prices and the currency of the deal.",
+  "ar": "يحدّد أسعار الصفقة وعملتها.",
+  "de": "Es bestimmt die Preise und die Währung des Deals.",
+  "fr": "Il fixe les prix et la devise de l’affaire.",
+  "it": "Determina i prezzi e la valuta della trattativa."
+ },
+ "Deal.countryPlaceholder": {
+  "en": "Choose a country",
+  "ar": "اختر بلدًا",
+  "de": "Land wählen",
+  "fr": "Choisir un pays",
+  "it": "Scegli un paese"
+ },
+ "Deal.noCountryTitle": {
+  "en": "Choose the customer's country first",
+  "ar": "اختر بلد العميل أولًا",
+  "de": "Wählen Sie zuerst das Land des Kunden",
+  "fr": "Choisissez d’abord le pays du client",
+  "it": "Scegli prima il paese del cliente"
+ },
+ "Deal.noCountryBody": {
+  "en": "Prices depend on it. Go back to the first step to choose it.",
+  "ar": "تعتمد الأسعار عليه. ارجع إلى الخطوة الأولى لاختياره.",
+  "de": "Die Preise hängen davon ab. Wählen Sie es im ersten Schritt.",
+  "fr": "Les prix en dépendent. Revenez à la première étape pour le choisir.",
+  "it": "I prezzi dipendono da questo. Torna al primo passaggio per sceglierlo."
+ },
+ "Deal.loadingCatalog": {
+  "en": "Loading prices…",
+  "ar": "جارٍ تحميل الأسعار…",
+  "de": "Preise werden geladen…",
+  "fr": "Chargement des prix…",
+  "it": "Caricamento dei prezzi…"
+ },
+ "Deal.catalogErrorTitle": {
+  "en": "Prices couldn't be loaded",
+  "ar": "تعذّر تحميل الأسعار",
+  "de": "Preise konnten nicht geladen werden",
+  "fr": "Impossible de charger les prix",
+  "it": "Impossibile caricare i prezzi"
+ },
+ "Deal.catalogErrorBody": {
+  "en": "The deal can't be priced without them. Try again.",
+  "ar": "لا يمكن تسعير الصفقة دونها. حاول مرة أخرى.",
+  "de": "Ohne sie lässt sich der Deal nicht bepreisen. Versuchen Sie es erneut.",
+  "fr": "L’affaire ne peut pas être chiffrée sans eux. Réessayez.",
+  "it": "Senza di essi la trattativa non può essere prezzata. Riprova."
+ },
+ "Deal.pricesFor": {
+  "en": "Prices for {zone}, in {currency}.",
+  "ar": "الأسعار لمنطقة {zone}، بعملة {currency}.",
+  "de": "Preise für {zone}, in {currency}.",
+  "fr": "Prix pour {zone}, en {currency}.",
+  "it": "Prezzi per {zone}, in {currency}."
+ },
+ "Deal.pricesForCurrency": {
+  "en": "Prices in {currency}.",
+  "ar": "الأسعار بعملة {currency}.",
+  "de": "Preise in {currency}.",
+  "fr": "Prix en {currency}.",
+  "it": "Prezzi in {currency}."
+ },
+ "Deal.lockedCustom": {
+  "en": "This offer has a custom plan whose features the catalog doesn't describe, so its plans and VAT stay as they are. You can remove that custom plan, or change the note.",
+  "ar": "يحتوي هذا العرض على خطة مخصّصة لا يصف الكتالوج ميزاتها، لذلك تبقى خططه وضريبته كما هي. يمكنك إزالة تلك الخطة المخصّصة أو تغيير الملاحظة.",
+  "de": "Dieses Angebot enthält einen individuellen Tarif, dessen Funktionen der Katalog nicht beschreibt. Tarife und MwSt. bleiben deshalb unverändert. Sie können diesen Tarif entfernen oder die Notiz ändern.",
+  "fr": "Cette offre contient une formule sur mesure dont le catalogue ne décrit pas les fonctionnalités : ses formules et sa TVA restent telles quelles. Vous pouvez retirer cette formule ou modifier la note.",
+  "it": "Questa offerta ha un piano personalizzato le cui funzionalità non sono descritte dal catalogo, quindi piani e IVA restano invariati. Puoi rimuovere quel piano o modificare la nota."
+ },
+ "Deal.standardSection": {
+  "en": "Standard plans",
+  "ar": "الخطط القياسية",
+  "de": "Standardtarife",
+  "fr": "Formules standard",
+  "it": "Piani standard"
+ },
+ "Deal.standardHint": {
+  "en": "From the catalog, priced for the customer's country.",
+  "ar": "من الكتالوج، مسعّرة لبلد العميل.",
+  "de": "Aus dem Katalog, bepreist für das Land des Kunden.",
+  "fr": "Du catalogue, au prix du pays du client.",
+  "it": "Dal catalogo, con i prezzi del paese del cliente."
+ },
+ "Deal.addPlan": {
+  "en": "Add a plan",
+  "ar": "إضافة خطة",
+  "de": "Tarif hinzufügen",
+  "fr": "Ajouter une formule",
+  "it": "Aggiungi un piano"
+ },
+ "Deal.noMorePlans": {
+  "en": "No other plan is sold in this country",
+  "ar": "لا تُباع خطة أخرى في هذا البلد",
+  "de": "In diesem Land wird kein weiterer Tarif angeboten",
+  "fr": "Aucune autre formule n’est vendue dans ce pays",
+  "it": "Nessun altro piano è in vendita in questo paese"
+ },
+ "Deal.standardEmpty": {
+  "en": "No standard plan yet. Add one from the list.",
+  "ar": "لا توجد خطة قياسية بعد. أضف واحدة من القائمة.",
+  "de": "Noch kein Standardtarif. Fügen Sie einen aus der Liste hinzu.",
+  "fr": "Pas encore de formule standard. Ajoutez-en une depuis la liste.",
+  "it": "Ancora nessun piano standard. Aggiungine uno dall’elenco."
+ },
+ "Deal.standardNone": {
+  "en": "No standard plan is sold in this country. Build a custom plan instead.",
+  "ar": "لا تُباع أي خطة قياسية في هذا البلد. أنشئ خطة مخصّصة بدلًا منها.",
+  "de": "In diesem Land wird kein Standardtarif angeboten. Stellen Sie stattdessen einen individuellen Tarif zusammen.",
+  "fr": "Aucune formule standard n’est vendue dans ce pays. Composez plutôt une formule sur mesure.",
+  "it": "In questo paese non è in vendita alcun piano standard. Crea invece un piano personalizzato."
+ },
+ "Deal.customSection": {
+  "en": "Custom plans",
+  "ar": "الخطط المخصّصة",
+  "de": "Individuelle Tarife",
+  "fr": "Formules sur mesure",
+  "it": "Piani personalizzati"
+ },
+ "Deal.customHint": {
+  "en": "Built from features, at their prices in the customer's country.",
+  "ar": "تُبنى من الميزات، بأسعارها في بلد العميل.",
+  "de": "Aus Funktionen zusammengestellt, zu ihren Preisen im Land des Kunden.",
+  "fr": "Composées de fonctionnalités, à leurs prix dans le pays du client.",
+  "it": "Composti da funzionalità, ai loro prezzi nel paese del cliente."
+ },
+ "Deal.addCustom": {
+  "en": "Add a custom plan",
+  "ar": "إضافة خطة مخصّصة",
+  "de": "Individuellen Tarif hinzufügen",
+  "fr": "Ajouter une formule sur mesure",
+  "it": "Aggiungi un piano personalizzato"
+ },
+ "Deal.customEmpty": {
+  "en": "No custom plan.",
+  "ar": "لا توجد خطة مخصّصة.",
+  "de": "Kein individueller Tarif.",
+  "fr": "Aucune formule sur mesure.",
+  "it": "Nessun piano personalizzato."
+ },
+ "Deal.customDefaultName": {
+  "en": "Custom plan {n}",
+  "ar": "خطة مخصّصة {n}",
+  "de": "Individueller Tarif {n}",
+  "fr": "Formule sur mesure {n}",
+  "it": "Piano personalizzato {n}"
+ },
+ "Deal.standardBadge": {
+  "en": "Standard",
+  "ar": "قياسية",
+  "de": "Standard",
+  "fr": "Standard",
+  "it": "Standard"
+ },
+ "Deal.customBadge": {
+  "en": "Custom",
+  "ar": "مخصّصة",
+  "de": "Individuell",
+  "fr": "Sur mesure",
+  "it": "Personalizzato"
+ },
+ "Deal.keptPrice": {
+  "en": "Agreed price kept",
+  "ar": "السعر المتفق عليه محفوظ",
+  "de": "Vereinbarter Preis bleibt",
+  "fr": "Prix convenu conservé",
+  "it": "Prezzo concordato mantenuto"
+ },
+ "Deal.removePlan": {
+  "en": "Remove {name}",
+  "ar": "إزالة {name}",
+  "de": "{name} entfernen",
+  "fr": "Retirer {name}",
+  "it": "Rimuovi {name}"
+ },
+ "Deal.notSoldHere": {
+  "en": "This plan isn't sold in the customer's country. Remove it or choose another country.",
+  "ar": "هذه الخطة لا تُباع في بلد العميل. أزلها أو اختر بلدًا آخر.",
+  "de": "Dieser Tarif wird im Land des Kunden nicht angeboten. Entfernen Sie ihn oder wählen Sie ein anderes Land.",
+  "fr": "Cette formule n’est pas vendue dans le pays du client. Retirez-la ou choisissez un autre pays.",
+  "it": "Questo piano non è in vendita nel paese del cliente. Rimuovilo o scegli un altro paese."
+ },
+ "Deal.durationLabel": {
+  "en": "Duration",
+  "ar": "المدة",
+  "de": "Laufzeit",
+  "fr": "Durée",
+  "it": "Durata"
+ },
+ "Deal.durationPlaceholder": {
+  "en": "Choose a duration",
+  "ar": "اختر مدة",
+  "de": "Laufzeit wählen",
+  "fr": "Choisir une durée",
+  "it": "Scegli una durata"
+ },
+ "Deal.durationOption": {
+  "en": "{months, plural, one {# month} other {# months}} · {total}",
+  "ar": "{months, plural, zero {# أشهر} one {شهر واحد} two {شهران} few {# أشهر} many {# شهرًا} other {# شهر}} · {total}",
+  "de": "{months, plural, one {# Monat} other {# Monate}} · {total}",
+  "fr": "{months, plural, one {# mois} other {# mois}} · {total}",
+  "it": "{months, plural, one {# mese} other {# mesi}} · {total}"
+ },
+ "Deal.durationOptionOff": {
+  "en": "{months, plural, one {# month} other {# months}} · {discount} off · {total}",
+  "ar": "{months, plural, zero {# أشهر} one {شهر واحد} two {شهران} few {# أشهر} many {# شهرًا} other {# شهر}} · خصم {discount} · {total}",
+  "de": "{months, plural, one {# Monat} other {# Monate}} · {discount} Rabatt · {total}",
+  "fr": "{months, plural, one {# mois} other {# mois}} · {discount} de remise · {total}",
+  "it": "{months, plural, one {# mese} other {# mesi}} · sconto {discount} · {total}"
+ },
+ "Deal.customDurationOff": {
+  "en": "{months, plural, one {# month} other {# months}} · {discount} off",
+  "ar": "{months, plural, zero {# أشهر} one {شهر واحد} two {شهران} few {# أشهر} many {# شهرًا} other {# شهر}} · خصم {discount}",
+  "de": "{months, plural, one {# Monat} other {# Monate}} · {discount} Rabatt",
+  "fr": "{months, plural, one {# mois} other {# mois}} · {discount} de remise",
+  "it": "{months, plural, one {# mese} other {# mesi}} · sconto {discount}"
+ },
+ "Deal.monthsCount": {
+  "en": "{months, plural, one {# month} other {# months}}",
+  "ar": "{months, plural, zero {# أشهر} one {شهر واحد} two {شهران} few {# أشهر} many {# شهرًا} other {# شهر}}",
+  "de": "{months, plural, one {# Monat} other {# Monate}}",
+  "fr": "{months, plural, one {# mois} other {# mois}}",
+  "it": "{months, plural, one {# mese} other {# mesi}}"
+ },
+ "Deal.paymentLabel": {
+  "en": "Payment",
+  "ar": "الدفع",
+  "de": "Zahlung",
+  "fr": "Paiement",
+  "it": "Pagamento"
+ },
+ "Deal.payUpfront": {
+  "en": "Paid upfront",
+  "ar": "يُدفع مقدّمًا",
+  "de": "Vorauszahlung",
+  "fr": "Payé d’avance",
+  "it": "Pagato in anticipo"
+ },
+ "Deal.payInstallments": {
+  "en": "In installments",
+  "ar": "على أقساط",
+  "de": "In Raten",
+  "fr": "En plusieurs versements",
+  "it": "A rate"
+ },
+ "Deal.termLabel": {
+  "en": "Installment term",
+  "ar": "مدة التقسيط",
+  "de": "Ratenlaufzeit",
+  "fr": "Échelonnement",
+  "it": "Piano di rateizzazione"
+ },
+ "Deal.termPlaceholder": {
+  "en": "Choose a term",
+  "ar": "اختر مدة التقسيط",
+  "de": "Laufzeit wählen",
+  "fr": "Choisir un échelonnement",
+  "it": "Scegli una rateizzazione"
+ },
+ "Deal.termOption": {
+  "en": "{months, plural, one {# monthly payment} other {# monthly payments}} of {monthly}",
+  "ar": "{months, plural, zero {# دفعات} one {دفعة شهرية واحدة} two {دفعتان شهريتان} few {# دفعات شهرية} many {# دفعة شهرية} other {# دفعة شهرية}} بقيمة {monthly}",
+  "de": "{months, plural, one {# Monatsrate} other {# Monatsraten}} zu {monthly}",
+  "fr": "{months, plural, one {# mensualité} other {# mensualités}} de {monthly}",
+  "it": "{months, plural, one {# rata mensile} other {# rate mensili}} da {monthly}"
+ },
+ "Deal.termOptionMarkup": {
+  "en": "{months, plural, one {# monthly payment} other {# monthly payments}} of {monthly} · +{markup}",
+  "ar": "{months, plural, zero {# دفعات} one {دفعة شهرية واحدة} two {دفعتان شهريتان} few {# دفعات شهرية} many {# دفعة شهرية} other {# دفعة شهرية}} بقيمة {monthly} · +{markup}",
+  "de": "{months, plural, one {# Monatsrate} other {# Monatsraten}} zu {monthly} · +{markup}",
+  "fr": "{months, plural, one {# mensualité} other {# mensualités}} de {monthly} · +{markup}",
+  "it": "{months, plural, one {# rata mensile} other {# rate mensili}} da {monthly} · +{markup}"
+ },
+ "Deal.customTermMarkup": {
+  "en": "{months, plural, one {# monthly payment} other {# monthly payments}} · +{markup}",
+  "ar": "{months, plural, zero {# دفعات} one {دفعة شهرية واحدة} two {دفعتان شهريتان} few {# دفعات شهرية} many {# دفعة شهرية} other {# دفعة شهرية}} · +{markup}",
+  "de": "{months, plural, one {# Monatsrate} other {# Monatsraten}} · +{markup}",
+  "fr": "{months, plural, one {# mensualité} other {# mensualités}} · +{markup}",
+  "it": "{months, plural, one {# rata mensile} other {# rate mensili}} · +{markup}"
+ },
+ "Deal.paymentsCount": {
+  "en": "{months, plural, one {# monthly payment} other {# monthly payments}}",
+  "ar": "{months, plural, zero {# دفعات} one {دفعة شهرية واحدة} two {دفعتان شهريتان} few {# دفعات شهرية} many {# دفعة شهرية} other {# دفعة شهرية}}",
+  "de": "{months, plural, one {# Monatsrate} other {# Monatsraten}}",
+  "fr": "{months, plural, one {# mensualité} other {# mensualités}}",
+  "it": "{months, plural, one {# rata mensile} other {# rate mensili}}"
+ },
+ "Deal.customName": {
+  "en": "Plan name",
+  "ar": "اسم الخطة",
+  "de": "Name des Tarifs",
+  "fr": "Nom de la formule",
+  "it": "Nome del piano"
+ },
+ "Deal.featuresLabel": {
+  "en": "Features",
+  "ar": "الميزات",
+  "de": "Funktionen",
+  "fr": "Fonctionnalités",
+  "it": "Funzionalità"
+ },
+ "Deal.featuresPlaceholder": {
+  "en": "Choose features",
+  "ar": "اختر الميزات",
+  "de": "Funktionen wählen",
+  "fr": "Choisir des fonctionnalités",
+  "it": "Scegli le funzionalità"
+ },
+ "Deal.featureHint": {
+  "en": "{category} · {price} a month",
+  "ar": "{category} · {price} شهريًا",
+  "de": "{category} · {price} pro Monat",
+  "fr": "{category} · {price} par mois",
+  "it": "{category} · {price} al mese"
+ },
+ "Deal.featureNotSold": {
+  "en": "{category} · not sold in this country",
+  "ar": "{category} · لا تُباع في هذا البلد",
+  "de": "{category} · in diesem Land nicht erhältlich",
+  "fr": "{category} · non vendue dans ce pays",
+  "it": "{category} · non in vendita in questo paese"
+ },
+ "Deal.linePending": {
+  "en": "Choose a duration to see the price.",
+  "ar": "اختر مدة لعرض السعر.",
+  "de": "Wählen Sie eine Laufzeit, um den Preis zu sehen.",
+  "fr": "Choisissez une durée pour voir le prix.",
+  "it": "Scegli una durata per vedere il prezzo."
+ },
+ "Deal.lineTotal": {
+  "en": "Price",
+  "ar": "السعر",
+  "de": "Preis",
+  "fr": "Prix",
+  "it": "Prezzo"
+ },
+ "Deal.lineMarkup": {
+  "en": "Installment markup ({percent})",
+  "ar": "زيادة التقسيط ({percent})",
+  "de": "Ratenaufschlag ({percent})",
+  "fr": "Majoration d’échelonnement ({percent})",
+  "it": "Maggiorazione per rate ({percent})"
+ },
+ "Deal.lineMonthly": {
+  "en": "Monthly",
+  "ar": "شهريًا",
+  "de": "Monatlich",
+  "fr": "Par mois",
+  "it": "Mensile"
+ },
+ "Deal.monthlyTimes": {
+  "en": "{months} × {amount}",
+  "ar": "{months} × {amount}",
+  "de": "{months} × {amount}",
+  "fr": "{months} × {amount}",
+  "it": "{months} × {amount}"
+ },
+ "Deal.plusMarkup": {
+  "en": "+ {amount} markup",
+  "ar": "+ {amount} زيادة",
+  "de": "+ {amount} Aufschlag",
+  "fr": "+ {amount} de majoration",
+  "it": "+ {amount} di maggiorazione"
+ },
+ "Deal.discountOff": {
+  "en": "{discount} off",
+  "ar": "خصم {discount}",
+  "de": "{discount} Rabatt",
+  "fr": "{discount} de remise",
+  "it": "sconto {discount}"
+ },
+ "Deal.vatLabel": {
+  "en": "VAT country",
+  "ar": "بلد ضريبة القيمة المضافة",
+  "de": "MwSt.-Land",
+  "fr": "Pays de TVA",
+  "it": "Paese IVA"
+ },
+ "Deal.vatHint": {
+  "en": "VAT is added on top of the net, at that country's rate.",
+  "ar": "تُضاف ضريبة القيمة المضافة إلى الصافي بنسبة ذلك البلد.",
+  "de": "Die MwSt. kommt zum Nettobetrag hinzu, zum Satz dieses Landes.",
+  "fr": "La TVA s’ajoute au montant net, au taux de ce pays.",
+  "it": "L’IVA si aggiunge al netto, con l’aliquota di quel paese."
+ },
+ "Deal.vatPlaceholder": {
+  "en": "Choose the VAT country",
+  "ar": "اختر بلد الضريبة",
+  "de": "MwSt.-Land wählen",
+  "fr": "Choisir le pays de TVA",
+  "it": "Scegli il paese IVA"
+ },
+ "Deal.noVat": {
+  "en": "No VAT",
+  "ar": "دون ضريبة قيمة مضافة",
+  "de": "Keine MwSt.",
+  "fr": "Sans TVA",
+  "it": "Senza IVA"
+ },
+ "Deal.vatOption": {
+  "en": "{country} · {rate}",
+  "ar": "{country} · {rate}",
+  "de": "{country} · {rate}",
+  "fr": "{country} · {rate}",
+  "it": "{country} · {rate}"
+ },
+ "Deal.noteLabel": {
+  "en": "Note to the customer",
+  "ar": "ملاحظة للعميل",
+  "de": "Notiz an den Kunden",
+  "fr": "Note au client",
+  "it": "Nota per il cliente"
+ },
+ "Deal.noteHint": {
+  "en": "The customer reads it with the offer.",
+  "ar": "يقرؤها العميل مع العرض.",
+  "de": "Der Kunde liest sie mit dem Angebot.",
+  "fr": "Le client la lit avec l’offre.",
+  "it": "Il cliente la legge insieme all’offerta."
+ },
+ "Deal.couponLabel": {
+  "en": "Coupon code",
+  "ar": "رمز كوبون الخصم",
+  "de": "Gutscheincode",
+  "fr": "Code promo",
+  "it": "Codice sconto"
+ },
+ "Deal.couponHint": {
+  "en": "Checked when you save; the contract shows the discount.",
+  "ar": "يُتحقق منه عند الحفظ، ويظهر الخصم في العقد.",
+  "de": "Wird beim Speichern geprüft; der Vertrag zeigt den Rabatt.",
+  "fr": "Vérifié à l’enregistrement ; le contrat affiche la remise.",
+  "it": "Viene verificato al salvataggio; il contratto mostra lo sconto."
+ },
+ "Deal.reviewPlans": {
+  "en": "Plans in this deal",
+  "ar": "الخطط في هذه الصفقة",
+  "de": "Tarife in diesem Deal",
+  "fr": "Formules de cette affaire",
+  "it": "Piani di questa trattativa"
+ },
+ "Deal.colPlan": {
+  "en": "Plan",
+  "ar": "الخطة",
+  "de": "Tarif",
+  "fr": "Formule",
+  "it": "Piano"
+ },
+ "Deal.colTerms": {
+  "en": "Terms",
+  "ar": "الشروط",
+  "de": "Bedingungen",
+  "fr": "Conditions",
+  "it": "Condizioni"
+ },
+ "Deal.colAmount": {
+  "en": "Price",
+  "ar": "السعر",
+  "de": "Preis",
+  "fr": "Prix",
+  "it": "Prezzo"
+ },
+ "Deal.subtotal": {
+  "en": "Subtotal",
+  "ar": "المجموع الفرعي",
+  "de": "Zwischensumme",
+  "fr": "Sous-total",
+  "it": "Subtotale"
+ },
+ "Deal.markupTotal": {
+  "en": "Installment markup",
+  "ar": "زيادة التقسيط",
+  "de": "Ratenaufschlag",
+  "fr": "Majoration d’échelonnement",
+  "it": "Maggiorazione per rate"
+ },
+ "Deal.net": {
+  "en": "Net",
+  "ar": "الصافي",
+  "de": "Netto",
+  "fr": "Net",
+  "it": "Netto"
+ },
+ "Deal.vatRow": {
+  "en": "VAT {rate} ({country})",
+  "ar": "ضريبة القيمة المضافة {rate} ({country})",
+  "de": "MwSt. {rate} ({country})",
+  "fr": "TVA {rate} ({country})",
+  "it": "IVA {rate} ({country})"
+ },
+ "Deal.vatNone": {
+  "en": "No VAT",
+  "ar": "دون ضريبة قيمة مضافة",
+  "de": "Keine MwSt.",
+  "fr": "Sans TVA",
+  "it": "Senza IVA"
+ },
+ "Deal.total": {
+  "en": "Total",
+  "ar": "الإجمالي",
+  "de": "Gesamt",
+  "fr": "Total",
+  "it": "Totale"
+ },
+ "Deal.dueUpfront": {
+  "en": "Due upfront (before VAT)",
+  "ar": "مستحق مقدّمًا (قبل الضريبة)",
+  "de": "Im Voraus fällig (ohne MwSt.)",
+  "fr": "Dû d’avance (hors TVA)",
+  "it": "Dovuto in anticipo (IVA esclusa)"
+ },
+ "Deal.monthlyTotal": {
+  "en": "Paid monthly (before VAT)",
+  "ar": "يُدفع شهريًا (قبل الضريبة)",
+  "de": "Monatlich (ohne MwSt.)",
+  "fr": "Payé chaque mois (hors TVA)",
+  "it": "Pagato ogni mese (IVA esclusa)"
+ },
+ "Deal.previewNote": {
+  "en": "These are the catalog's prices. The deal is priced again when you save it, and the saved record is what counts.",
+  "ar": "هذه أسعار الكتالوج. يُعاد تسعير الصفقة عند حفظها، والسجل المحفوظ هو المعتمد.",
+  "de": "Dies sind die Katalogpreise. Der Deal wird beim Speichern neu bepreist; maßgeblich ist der gespeicherte Datensatz.",
+  "fr": "Ce sont les prix du catalogue. L’affaire est chiffrée de nouveau à l’enregistrement, et c’est l’enregistrement qui fait foi.",
+  "it": "Questi sono i prezzi del catalogo. La trattativa viene ricalcolata al salvataggio e vale quanto salvato."
+ },
+ "Deal.unpriced": {
+  "en": "{count, plural, one {One plan has} other {# plans have}} no price yet: choose a duration in the Plans step.",
+  "ar": "{count, plural, zero {لا خطط بلا سعر} one {خطة واحدة بلا سعر بعد} two {خطتان بلا سعر بعد} few {# خطط بلا سعر بعد} many {# خطة بلا سعر بعد} other {# خطة بلا سعر بعد}}: اختر مدة في خطوة الخطط.",
+  "de": "{count, plural, one {Ein Tarif hat} other {# Tarife haben}} noch keinen Preis: Wählen Sie im Schritt Tarife eine Laufzeit.",
+  "fr": "{count, plural, one {Une formule n’a} other {# formules n’ont}} pas encore de prix : choisissez une durée à l’étape Formules.",
+  "it": "{count, plural, one {Un piano non ha} other {# piani non hanno}} ancora un prezzo: scegli una durata nel passaggio Piani."
+ },
+ "Deal.couponOnSave": {
+  "en": "Coupon {code} is checked and applied when you save.",
+  "ar": "يُتحقق من الكوبون {code} ويُطبّق عند الحفظ.",
+  "de": "Der Gutscheincode {code} wird beim Speichern geprüft und angewendet.",
+  "fr": "Le code promo {code} est vérifié et appliqué à l’enregistrement.",
+  "it": "Il codice sconto {code} viene verificato e applicato al salvataggio."
+ },
+ "Deal.resignNote": {
+  "en": "The customer already signed this contract. Changing its plans asks them to sign the new one.",
+  "ar": "وقّع العميل هذا العقد بالفعل. تغيير خططه يطلب منه توقيع العقد الجديد.",
+  "de": "Der Kunde hat diesen Vertrag bereits unterschrieben. Wenn Sie die Tarife ändern, muss er den neuen unterschreiben.",
+  "fr": "Le client a déjà signé ce contrat. Modifier ses formules lui demande de signer le nouveau.",
+  "it": "Il cliente ha già firmato questo contratto. Cambiando i piani dovrà firmare quello nuovo."
+ },
+ "Deal.plansCount": {
+  "en": "{count, plural, one {# plan} other {# plans}}",
+  "ar": "{count, plural, zero {لا خطط} one {خطة واحدة} two {خطتان} few {# خطط} many {# خطة} other {# خطة}}",
+  "de": "{count, plural, one {# Tarif} other {# Tarife}}",
+  "fr": "{count, plural, one {# formule} other {# formules}}",
+  "it": "{count, plural, one {# piano} other {# piani}}"
+ },
+ "Deal.errors.customer": {
+  "en": "Choose a customer.",
+  "ar": "اختر عميلًا.",
+  "de": "Wählen Sie einen Kunden.",
+  "fr": "Choisissez un client.",
+  "it": "Scegli un cliente."
+ },
+ "Deal.errors.country": {
+  "en": "Choose the customer's country.",
+  "ar": "اختر بلد العميل.",
+  "de": "Wählen Sie das Land des Kunden.",
+  "fr": "Choisissez le pays du client.",
+  "it": "Scegli il paese del cliente."
+ },
+ "Deal.errors.name": {
+  "en": "Give the project a name.",
+  "ar": "أدخل اسمًا للمشروع.",
+  "de": "Geben Sie dem Projekt einen Namen.",
+  "fr": "Donnez un nom au projet.",
+  "it": "Dai un nome al progetto."
+ },
+ "Deal.errors.nameLong": {
+  "en": "Keep the name under 160 characters.",
+  "ar": "اجعل الاسم أقل من 160 حرفًا.",
+  "de": "Der Name darf höchstens 160 Zeichen haben.",
+  "fr": "Le nom doit faire moins de 160 caractères.",
+  "it": "Il nome deve restare sotto i 160 caratteri."
+ },
+ "Deal.errors.textLong": {
+  "en": "This text is too long.",
+  "ar": "هذا النص طويل جدًا.",
+  "de": "Dieser Text ist zu lang.",
+  "fr": "Ce texte est trop long.",
+  "it": "Questo testo è troppo lungo."
+ },
+ "Deal.errors.plan": {
+  "en": "Choose a plan.",
+  "ar": "اختر خطة.",
+  "de": "Wählen Sie einen Tarif.",
+  "fr": "Choisissez une formule.",
+  "it": "Scegli un piano."
+ },
+ "Deal.errors.duration": {
+  "en": "Choose a duration.",
+  "ar": "اختر مدة.",
+  "de": "Wählen Sie eine Laufzeit.",
+  "fr": "Choisissez une durée.",
+  "it": "Scegli una durata."
+ },
+ "Deal.errors.installment": {
+  "en": "Choose an installment term.",
+  "ar": "اختر مدة التقسيط.",
+  "de": "Wählen Sie eine Ratenlaufzeit.",
+  "fr": "Choisissez un échelonnement.",
+  "it": "Scegli una rateizzazione."
+ },
+ "Deal.errors.label": {
+  "en": "Give the custom plan a name.",
+  "ar": "أدخل اسمًا للخطة المخصّصة.",
+  "de": "Geben Sie dem individuellen Tarif einen Namen.",
+  "fr": "Donnez un nom à la formule sur mesure.",
+  "it": "Dai un nome al piano personalizzato."
+ },
+ "Deal.errors.labelLong": {
+  "en": "Keep the name under 120 characters.",
+  "ar": "اجعل الاسم أقل من 120 حرفًا.",
+  "de": "Der Name darf höchstens 120 Zeichen haben.",
+  "fr": "Le nom doit faire moins de 120 caractères.",
+  "it": "Il nome deve restare sotto i 120 caratteri."
+ },
+ "Deal.errors.features": {
+  "en": "Choose at least one feature.",
+  "ar": "اختر ميزة واحدة على الأقل.",
+  "de": "Wählen Sie mindestens eine Funktion.",
+  "fr": "Choisissez au moins une fonctionnalité.",
+  "it": "Scegli almeno una funzionalità."
+ },
+ "Deal.errors.noPlans": {
+  "en": "Add at least one plan.",
+  "ar": "أضف خطة واحدة على الأقل.",
+  "de": "Fügen Sie mindestens einen Tarif hinzu.",
+  "fr": "Ajoutez au moins une formule.",
+  "it": "Aggiungi almeno un piano."
+ },
+ "Deal.errors.vat": {
+  "en": "Choose the VAT country, or No VAT.",
+  "ar": "اختر بلد الضريبة أو «دون ضريبة».",
+  "de": "Wählen Sie das MwSt.-Land oder „Keine MwSt.“.",
+  "fr": "Choisissez le pays de TVA, ou « Sans TVA ».",
+  "it": "Scegli il paese IVA, oppure «Senza IVA»."
+ },
+ "Deal.errors.couponLong": {
+  "en": "This code is too long.",
+  "ar": "هذا الرمز طويل جدًا.",
+  "de": "Dieser Code ist zu lang.",
+  "fr": "Ce code est trop long.",
+  "it": "Questo codice è troppo lungo."
+ },
+ "Deal.errors.amount": {
+  "en": "Enter an amount above zero.",
+  "ar": "أدخل مبلغًا أكبر من صفر.",
+  "de": "Geben Sie einen Betrag über null ein.",
+  "fr": "Saisissez un montant supérieur à zéro.",
+  "it": "Inserisci un importo maggiore di zero."
+ },
+ "Offers.title": {
+  "en": "Offers",
+  "ar": "العروض",
+  "de": "Angebote",
+  "fr": "Offres",
+  "it": "Offerte"
+ },
+ "Offers.titleCustomer": {
+  "en": "My offers",
+  "ar": "عروضي",
+  "de": "Meine Angebote",
+  "fr": "Mes offres",
+  "it": "Le mie offerte"
+ },
+ "Offers.description": {
+  "en": "Offers sent to customers, their answers and counter-offers.",
+  "ar": "العروض المرسلة إلى العملاء وردودهم وعروضهم المقابلة.",
+  "de": "An Kunden gesendete Angebote, ihre Antworten und Gegenangebote.",
+  "fr": "Les offres envoyées aux clients, leurs réponses et contre-offres.",
+  "it": "Le offerte inviate ai clienti, le loro risposte e controproposte."
+ },
+ "Offers.descriptionCustomer": {
+  "en": "Offers made to you. Accept one, decline it, or propose another total.",
+  "ar": "العروض المقدَّمة إليك. اقبل عرضًا أو ارفضه أو اقترح إجماليًا آخر.",
+  "de": "Angebote an Sie. Nehmen Sie eines an, lehnen Sie es ab oder schlagen Sie einen anderen Betrag vor.",
+  "fr": "Les offres qui vous sont faites. Acceptez-en une, refusez-la ou proposez un autre total.",
+  "it": "Le offerte ricevute. Accettale, rifiutale o proponi un altro totale."
+ },
+ "Offers.newOffer": {
+  "en": "New offer",
+  "ar": "عرض جديد",
+  "de": "Neues Angebot",
+  "fr": "Nouvelle offre",
+  "it": "Nuova offerta"
+ },
+ "Offers.tabAll": {
+  "en": "All",
+  "ar": "الكل",
+  "de": "Alle",
+  "fr": "Toutes",
+  "it": "Tutte"
+ },
+ "Offers.search": {
+  "en": "Search offers or companies",
+  "ar": "ابحث في العروض أو الشركات",
+  "de": "Angebote oder Firmen suchen",
+  "fr": "Rechercher des offres ou des entreprises",
+  "it": "Cerca offerte o aziende"
+ },
+ "Offers.colOffer": {
+  "en": "Offer",
+  "ar": "العرض",
+  "de": "Angebot",
+  "fr": "Offre",
+  "it": "Offerta"
+ },
+ "Offers.colCustomer": {
+  "en": "Customer",
+  "ar": "العميل",
+  "de": "Kunde",
+  "fr": "Client",
+  "it": "Cliente"
+ },
+ "Offers.colPlans": {
+  "en": "Plans",
+  "ar": "الخطط",
+  "de": "Tarife",
+  "fr": "Formules",
+  "it": "Piani"
+ },
+ "Offers.colTotal": {
+  "en": "Total",
+  "ar": "الإجمالي",
+  "de": "Gesamt",
+  "fr": "Total",
+  "it": "Totale"
+ },
+ "Offers.colStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Offers.colSubmitted": {
+  "en": "Sent",
+  "ar": "تاريخ الإرسال",
+  "de": "Gesendet",
+  "fr": "Envoyée le",
+  "it": "Inviata il"
+ },
+ "Offers.colActions": {
+  "en": "Actions",
+  "ar": "الإجراءات",
+  "de": "Aktionen",
+  "fr": "Actions",
+  "it": "Azioni"
+ },
+ "Offers.plansCount": {
+  "en": "{count, plural, one {# plan} other {# plans}}",
+  "ar": "{count, plural, zero {لا خطط} one {خطة واحدة} two {خطتان} few {# خطط} many {# خطة} other {# خطة}}",
+  "de": "{count, plural, one {# Tarif} other {# Tarife}}",
+  "fr": "{count, plural, one {# formule} other {# formules}}",
+  "it": "{count, plural, one {# piano} other {# piani}}"
+ },
+ "Offers.rowActions": {
+  "en": "Actions for {name}",
+  "ar": "إجراءات {name}",
+  "de": "Aktionen für {name}",
+  "fr": "Actions pour {name}",
+  "it": "Azioni per {name}"
+ },
+ "Offers.view": {
+  "en": "Open",
+  "ar": "فتح",
+  "de": "Öffnen",
+  "fr": "Ouvrir",
+  "it": "Apri"
+ },
+ "Offers.edit": {
+  "en": "Edit",
+  "ar": "تعديل",
+  "de": "Bearbeiten",
+  "fr": "Modifier",
+  "it": "Modifica"
+ },
+ "Offers.delete": {
+  "en": "Delete",
+  "ar": "حذف",
+  "de": "Löschen",
+  "fr": "Supprimer",
+  "it": "Elimina"
+ },
+ "Offers.deleteTitle": {
+  "en": "Delete the offer {name}?",
+  "ar": "هل تريد حذف العرض {name}؟",
+  "de": "Angebot {name} löschen?",
+  "fr": "Supprimer l’offre {name} ?",
+  "it": "Eliminare l’offerta {name}?"
+ },
+ "Offers.deleteImpact": {
+  "en": "{customer} can no longer see it, and its negotiation history is deleted with it.",
+  "ar": "لن يتمكّن {customer} من رؤيته بعد الآن، ويُحذف معه سجل التفاوض.",
+  "de": "{customer} sieht es nicht mehr, und der Verhandlungsverlauf wird mitgelöscht.",
+  "fr": "{customer} ne pourra plus la voir, et l’historique de négociation est supprimé avec elle.",
+  "it": "{customer} non potrà più vederla e lo storico della trattativa viene eliminato con essa."
+ },
+ "Offers.deleteConfirm": {
+  "en": "Delete offer",
+  "ar": "حذف العرض",
+  "de": "Angebot löschen",
+  "fr": "Supprimer l’offre",
+  "it": "Elimina offerta"
+ },
+ "Offers.errorTitle": {
+  "en": "Offers couldn't be loaded",
+  "ar": "تعذّر تحميل العروض",
+  "de": "Angebote konnten nicht geladen werden",
+  "fr": "Impossible de charger les offres",
+  "it": "Impossibile caricare le offerte"
+ },
+ "Offers.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقّق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Offers.forbiddenTitle": {
+  "en": "You can't see this offer",
+  "ar": "لا يمكنك عرض هذا العرض",
+  "de": "Sie können dieses Angebot nicht sehen",
+  "fr": "Vous ne pouvez pas voir cette offre",
+  "it": "Non puoi vedere questa offerta"
+ },
+ "Offers.forbiddenBody": {
+  "en": "It belongs to a customer you don't look after. Ask a manager if you need it.",
+  "ar": "يخصّ عميلًا لا تتابعه. اطلب من مدير إن كنت تحتاج إليه.",
+  "de": "Es gehört zu einem Kunden, den Sie nicht betreuen. Fragen Sie bei Bedarf eine Führungskraft.",
+  "fr": "Elle concerne un client que vous ne suivez pas. Demandez à un responsable si besoin.",
+  "it": "Riguarda un cliente che non segui. Chiedi a un responsabile se ti serve."
+ },
+ "Offers.noMatchTitle": {
+  "en": "No offer matches",
+  "ar": "لا يوجد عرض مطابق",
+  "de": "Kein Angebot passt",
+  "fr": "Aucune offre ne correspond",
+  "it": "Nessuna offerta corrisponde"
+ },
+ "Offers.noMatchBody": {
+  "en": "Try another search or status.",
+  "ar": "جرّب بحثًا أو حالة أخرى.",
+  "de": "Versuchen Sie eine andere Suche oder einen anderen Status.",
+  "fr": "Essayez une autre recherche ou un autre statut.",
+  "it": "Prova un’altra ricerca o un altro stato."
+ },
+ "Offers.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella i filtri"
+ },
+ "Offers.emptyTitle": {
+  "en": "No offers yet",
+  "ar": "لا توجد عروض بعد",
+  "de": "Noch keine Angebote",
+  "fr": "Pas encore d’offres",
+  "it": "Ancora nessuna offerta"
+ },
+ "Offers.emptyBody": {
+  "en": "Send a customer an offer: choose plans and terms, and they can accept, decline or counter it.",
+  "ar": "أرسل عرضًا إلى عميل: اختر الخطط والشروط، ويمكنه القبول أو الرفض أو تقديم عرض مقابل.",
+  "de": "Senden Sie einem Kunden ein Angebot: Tarife und Bedingungen wählen, der Kunde kann annehmen, ablehnen oder ein Gegenangebot machen.",
+  "fr": "Envoyez une offre à un client : choisissez les formules et les conditions ; il pourra accepter, refuser ou faire une contre-offre.",
+  "it": "Invia un’offerta a un cliente: scegli piani e condizioni; potrà accettarla, rifiutarla o fare una controproposta."
+ },
+ "Offers.emptyBodyCustomer": {
+  "en": "When the sales team sends you an offer, it appears here.",
+  "ar": "عندما يرسل إليك فريق المبيعات عرضًا، سيظهر هنا.",
+  "de": "Wenn Ihnen das Vertriebsteam ein Angebot sendet, erscheint es hier.",
+  "fr": "Quand l’équipe commerciale vous envoie une offre, elle apparaît ici.",
+  "it": "Quando il team vendite ti invia un’offerta, compare qui."
+ },
+ "Offers.loading": {
+  "en": "Loading the offer",
+  "ar": "جارٍ تحميل العرض",
+  "de": "Angebot wird geladen",
+  "fr": "Chargement de l’offre",
+  "it": "Caricamento dell’offerta"
+ },
+ "Offers.backToOffers": {
+  "en": "Back to offers",
+  "ar": "العودة إلى العروض",
+  "de": "Zurück zu den Angeboten",
+  "fr": "Retour aux offres",
+  "it": "Torna alle offerte"
+ },
+ "Offers.notFoundTitle": {
+  "en": "This offer doesn't exist",
+  "ar": "هذا العرض غير موجود",
+  "de": "Dieses Angebot gibt es nicht",
+  "fr": "Cette offre n’existe pas",
+  "it": "Questa offerta non esiste"
+ },
+ "Offers.notFoundBody": {
+  "en": "It may have been deleted, or it belongs to a customer you don't look after.",
+  "ar": "ربما حُذف، أو يخصّ عميلًا لا تتابعه.",
+  "de": "Es wurde vielleicht gelöscht oder gehört zu einem Kunden, den Sie nicht betreuen.",
+  "fr": "Elle a peut-être été supprimée, ou elle concerne un client que vous ne suivez pas.",
+  "it": "Potrebbe essere stata eliminata o riguardare un cliente che non segui."
+ },
+ "Offers.submittedOn": {
+  "en": "Sent on {date}",
+  "ar": "أُرسل في {date}",
+  "de": "Gesendet am {date}",
+  "fr": "Envoyée le {date}",
+  "it": "Inviata il {date}"
+ },
+ "Offers.acceptedBanner": {
+  "en": "Accepted at {amount}. A project with a contract to sign was created.",
+  "ar": "قُبل بمبلغ {amount}. أُنشئ مشروع مع عقد للتوقيع.",
+  "de": "Angenommen zu {amount}. Ein Projekt mit einem zu unterschreibenden Vertrag wurde angelegt.",
+  "fr": "Acceptée à {amount}. Un projet avec un contrat à signer a été créé.",
+  "it": "Accettata a {amount}. È stato creato un progetto con un contratto da firmare."
+ },
+ "Offers.openProject": {
+  "en": "Open the project",
+  "ar": "فتح المشروع",
+  "de": "Projekt öffnen",
+  "fr": "Ouvrir le projet",
+  "it": "Apri il progetto"
+ },
+ "Offers.declinedBanner": {
+  "en": "This offer was declined.",
+  "ar": "رُفض هذا العرض.",
+  "de": "Dieses Angebot wurde abgelehnt.",
+  "fr": "Cette offre a été refusée.",
+  "it": "Questa offerta è stata rifiutata."
+ },
+ "Offers.yourTurn": {
+  "en": "It's your turn to answer.",
+  "ar": "حان دورك للرد.",
+  "de": "Sie sind am Zug.",
+  "fr": "C’est à vous de répondre.",
+  "it": "Tocca a te rispondere."
+ },
+ "Offers.waitingCustomer": {
+  "en": "Waiting for the customer's answer.",
+  "ar": "بانتظار رد العميل.",
+  "de": "Wartet auf die Antwort des Kunden.",
+  "fr": "En attente de la réponse du client.",
+  "it": "In attesa della risposta del cliente."
+ },
+ "Offers.waitingStaff": {
+  "en": "Waiting for the sales team's answer.",
+  "ar": "بانتظار رد فريق المبيعات.",
+  "de": "Wartet auf die Antwort des Vertriebs.",
+  "fr": "En attente de la réponse de l’équipe commerciale.",
+  "it": "In attesa della risposta del team vendite."
+ },
+ "Offers.respondTitle": {
+  "en": "Your answer",
+  "ar": "ردّك",
+  "de": "Ihre Antwort",
+  "fr": "Votre réponse",
+  "it": "La tua risposta"
+ },
+ "Offers.respondBody": {
+  "en": "On the table: {amount}.",
+  "ar": "المبلغ المطروح: {amount}.",
+  "de": "Aktueller Betrag: {amount}.",
+  "fr": "Montant proposé : {amount}.",
+  "it": "Importo proposto: {amount}."
+ },
+ "Offers.accept": {
+  "en": "Accept",
+  "ar": "قبول",
+  "de": "Annehmen",
+  "fr": "Accepter",
+  "it": "Accetta"
+ },
+ "Offers.counter": {
+  "en": "Counter",
+  "ar": "عرض مقابل",
+  "de": "Gegenangebot",
+  "fr": "Contre-offre",
+  "it": "Controproposta"
+ },
+ "Offers.decline": {
+  "en": "Decline",
+  "ar": "رفض",
+  "de": "Ablehnen",
+  "fr": "Refuser",
+  "it": "Rifiuta"
+ },
+ "Offers.acceptTitle": {
+  "en": "Accept at {amount}?",
+  "ar": "هل تقبل بمبلغ {amount}؟",
+  "de": "Zu {amount} annehmen?",
+  "fr": "Accepter à {amount} ?",
+  "it": "Accettare a {amount}?"
+ },
+ "Offers.acceptImpactCustomer": {
+  "en": "You agree to {amount}. A contract is prepared for you to sign.",
+  "ar": "أنت توافق على {amount}. يُجهَّز عقد لتوقّعه.",
+  "de": "Sie stimmen {amount} zu. Ein Vertrag wird für Ihre Unterschrift vorbereitet.",
+  "fr": "Vous acceptez {amount}. Un contrat est préparé pour votre signature.",
+  "it": "Accetti {amount}. Viene preparato un contratto da firmare."
+ },
+ "Offers.acceptImpactStaff": {
+  "en": "{customer} gets a project at {amount}, with a contract for them to sign.",
+  "ar": "يحصل {customer} على مشروع بمبلغ {amount} مع عقد ليوقّعه.",
+  "de": "{customer} erhält ein Projekt zu {amount} mit einem Vertrag zur Unterschrift.",
+  "fr": "{customer} obtient un projet à {amount}, avec un contrat à signer.",
+  "it": "{customer} ottiene un progetto a {amount}, con un contratto da firmare."
+ },
+ "Offers.acceptConfirm": {
+  "en": "Accept at {amount}",
+  "ar": "القبول بمبلغ {amount}",
+  "de": "Zu {amount} annehmen",
+  "fr": "Accepter à {amount}",
+  "it": "Accetta a {amount}"
+ },
+ "Offers.declineTitle": {
+  "en": "Decline the offer {name}?",
+  "ar": "هل تريد رفض العرض {name}؟",
+  "de": "Angebot {name} ablehnen?",
+  "fr": "Refuser l’offre {name} ?",
+  "it": "Rifiutare l’offerta {name}?"
+ },
+ "Offers.declineImpact": {
+  "en": "The negotiation ends; {other} is told it was declined.",
+  "ar": "ينتهي التفاوض، ويُبلَّغ {other} بالرفض.",
+  "de": "Die Verhandlung endet; {other} wird über die Ablehnung informiert.",
+  "fr": "La négociation s’arrête ; {other} est informé du refus.",
+  "it": "La trattativa si chiude; {other} viene informato del rifiuto."
+ },
+ "Offers.declineReason": {
+  "en": "Reason (optional)",
+  "ar": "السبب (اختياري)",
+  "de": "Grund (optional)",
+  "fr": "Motif (facultatif)",
+  "it": "Motivo (facoltativo)"
+ },
+ "Offers.declineConfirm": {
+  "en": "Decline offer",
+  "ar": "رفض العرض",
+  "de": "Angebot ablehnen",
+  "fr": "Refuser l’offre",
+  "it": "Rifiuta offerta"
+ },
+ "Offers.sideStaff": {
+  "en": "the sales team",
+  "ar": "فريق المبيعات",
+  "de": "das Vertriebsteam",
+  "fr": "l’équipe commerciale",
+  "it": "il team vendite"
+ },
+ "Offers.sideTeam": {
+  "en": "Your team",
+  "ar": "فريقك",
+  "de": "Ihr Team",
+  "fr": "Votre équipe",
+  "it": "Il tuo team"
+ },
+ "Offers.sideCustomer": {
+  "en": "The customer",
+  "ar": "العميل",
+  "de": "Der Kunde",
+  "fr": "Le client",
+  "it": "Il cliente"
+ },
+ "Offers.sideYou": {
+  "en": "You",
+  "ar": "أنت",
+  "de": "Sie",
+  "fr": "Vous",
+  "it": "Tu"
+ },
+ "Offers.counterTitle": {
+  "en": "Counter the offer {name}",
+  "ar": "عرض مقابل على {name}",
+  "de": "Gegenangebot zu {name}",
+  "fr": "Contre-offre pour {name}",
+  "it": "Controproposta per {name}"
+ },
+ "Offers.counterBody": {
+  "en": "On the table now: {amount}. Propose the total you want instead.",
+  "ar": "المطروح الآن: {amount}. اقترح الإجمالي الذي تريده بدلًا منه.",
+  "de": "Aktuell: {amount}. Schlagen Sie stattdessen Ihren Gesamtbetrag vor.",
+  "fr": "Proposé actuellement : {amount}. Proposez le total que vous souhaitez.",
+  "it": "Proposta attuale: {amount}. Proponi il totale che preferisci."
+ },
+ "Offers.counterAmount": {
+  "en": "Your total ({currency})",
+  "ar": "إجماليك ({currency})",
+  "de": "Ihr Gesamtbetrag ({currency})",
+  "fr": "Votre total ({currency})",
+  "it": "Il tuo totale ({currency})"
+ },
+ "Offers.counterNote": {
+  "en": "Note",
+  "ar": "ملاحظة",
+  "de": "Notiz",
+  "fr": "Note",
+  "it": "Nota"
+ },
+ "Offers.counterSubmit": {
+  "en": "Send counter",
+  "ar": "إرسال العرض المقابل",
+  "de": "Gegenangebot senden",
+  "fr": "Envoyer la contre-offre",
+  "it": "Invia controproposta"
+ },
+ "Offers.counterSubmitAmount": {
+  "en": "Send counter of {amount}",
+  "ar": "إرسال عرض مقابل بمبلغ {amount}",
+  "de": "Gegenangebot über {amount} senden",
+  "fr": "Envoyer une contre-offre de {amount}",
+  "it": "Invia controproposta di {amount}"
+ },
+ "Offers.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Offers.dealTitle": {
+  "en": "What's in the offer",
+  "ar": "محتوى العرض",
+  "de": "Inhalt des Angebots",
+  "fr": "Contenu de l’offre",
+  "it": "Contenuto dell’offerta"
+ },
+ "Offers.discount": {
+  "en": "Discount",
+  "ar": "الخصم",
+  "de": "Rabatt",
+  "fr": "Remise",
+  "it": "Sconto"
+ },
+ "Offers.vatRate": {
+  "en": "VAT {rate}",
+  "ar": "ضريبة القيمة المضافة {rate}",
+  "de": "MwSt. {rate}",
+  "fr": "TVA {rate}",
+  "it": "IVA {rate}"
+ },
+ "Offers.quotedTotal": {
+  "en": "Quoted total",
+  "ar": "الإجمالي المعروض",
+  "de": "Angebotener Betrag",
+  "fr": "Total proposé",
+  "it": "Totale proposto"
+ },
+ "Offers.counterOnTable": {
+  "en": "Counter-offer",
+  "ar": "العرض المقابل",
+  "de": "Gegenangebot",
+  "fr": "Contre-offre",
+  "it": "Controproposta"
+ },
+ "Offers.agreedTotal": {
+  "en": "Agreed total",
+  "ar": "الإجمالي المتفق عليه",
+  "de": "Vereinbarter Betrag",
+  "fr": "Total convenu",
+  "it": "Totale concordato"
+ },
+ "Offers.noteToCustomer": {
+  "en": "Note to the customer",
+  "ar": "ملاحظة للعميل",
+  "de": "Notiz an den Kunden",
+  "fr": "Note au client",
+  "it": "Nota per il cliente"
+ },
+ "Offers.customerTitle": {
+  "en": "Customer",
+  "ar": "العميل",
+  "de": "Kunde",
+  "fr": "Client",
+  "it": "Cliente"
+ },
+ "Offers.openCustomer": {
+  "en": "Open customer",
+  "ar": "فتح العميل",
+  "de": "Kunde öffnen",
+  "fr": "Ouvrir le client",
+  "it": "Apri il cliente"
+ },
+ "Offers.customerName": {
+  "en": "Name",
+  "ar": "الاسم",
+  "de": "Name",
+  "fr": "Nom",
+  "it": "Nome"
+ },
+ "Offers.customerCompany": {
+  "en": "Company",
+  "ar": "الشركة",
+  "de": "Firma",
+  "fr": "Entreprise",
+  "it": "Azienda"
+ },
+ "Offers.customerEmail": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Offers.customerPhone": {
+  "en": "Phone",
+  "ar": "الهاتف",
+  "de": "Telefon",
+  "fr": "Téléphone",
+  "it": "Telefono"
+ },
+ "Offers.customerAddress": {
+  "en": "Address",
+  "ar": "العنوان",
+  "de": "Adresse",
+  "fr": "Adresse",
+  "it": "Indirizzo"
+ },
+ "Offers.historyTitle": {
+  "en": "Negotiation",
+  "ar": "التفاوض",
+  "de": "Verhandlung",
+  "fr": "Négociation",
+  "it": "Trattativa"
+ },
+ "Offers.historyEmpty": {
+  "en": "Nothing has happened yet.",
+  "ar": "لم يحدث شيء بعد.",
+  "de": "Bisher ist nichts passiert.",
+  "fr": "Rien ne s’est encore passé.",
+  "it": "Non è ancora successo nulla."
+ },
+ "Offers.event.quote_created": {
+  "en": "Offer sent at {amount}",
+  "ar": "أُرسل العرض بمبلغ {amount}",
+  "de": "Angebot über {amount} gesendet",
+  "fr": "Offre envoyée à {amount}",
+  "it": "Offerta inviata a {amount}"
+ },
+ "Offers.event.quote_updated": {
+  "en": "Offer updated to {amount}",
+  "ar": "عُدّل العرض إلى {amount}",
+  "de": "Angebot auf {amount} geändert",
+  "fr": "Offre modifiée à {amount}",
+  "it": "Offerta aggiornata a {amount}"
+ },
+ "Offers.event.counter_offer": {
+  "en": "Counter-offer at {amount}",
+  "ar": "عرض مقابل بمبلغ {amount}",
+  "de": "Gegenangebot über {amount}",
+  "fr": "Contre-offre à {amount}",
+  "it": "Controproposta di {amount}"
+ },
+ "Offers.event.accepted": {
+  "en": "Accepted at {amount}",
+  "ar": "قُبل بمبلغ {amount}",
+  "de": "Zu {amount} angenommen",
+  "fr": "Acceptée à {amount}",
+  "it": "Accettata a {amount}"
+ },
+ "Offers.event.rejected": {
+  "en": "Declined",
+  "ar": "رُفض",
+  "de": "Abgelehnt",
+  "fr": "Refusée",
+  "it": "Rifiutata"
+ },
+ "Offers.event.other": {
+  "en": "Offer changed ({amount})",
+  "ar": "تغيّر العرض ({amount})",
+  "de": "Angebot geändert ({amount})",
+  "fr": "Offre modifiée ({amount})",
+  "it": "Offerta modificata ({amount})"
+ },
+ "Offers.sideSalesTeam": {
+  "en": "Sales team",
+  "ar": "فريق المبيعات",
+  "de": "Vertriebsteam",
+  "fr": "Équipe commerciale",
+  "it": "Team vendite"
+ },
+ "Projects.title": {
+  "en": "Projects",
+  "ar": "المشاريع",
+  "de": "Projekte",
+  "fr": "Projets",
+  "it": "Progetti"
+ },
+ "Projects.titleSalesman": {
+  "en": "My deals",
+  "ar": "صفقاتي",
+  "de": "Meine Deals",
+  "fr": "Mes affaires",
+  "it": "Le mie trattative"
+ },
+ "Projects.titleCustomer": {
+  "en": "My projects",
+  "ar": "مشاريعي",
+  "de": "Meine Projekte",
+  "fr": "Mes projets",
+  "it": "I miei progetti"
+ },
+ "Projects.description": {
+  "en": "Every deal with its contract, payments and delivery.",
+  "ar": "كل صفقة مع عقدها ومدفوعاتها وتنفيذها.",
+  "de": "Jeder Deal mit Vertrag, Zahlungen und Umsetzung.",
+  "fr": "Chaque affaire avec son contrat, ses paiements et sa livraison.",
+  "it": "Ogni trattativa con contratto, pagamenti e consegna."
+ },
+ "Projects.descriptionCustomer": {
+  "en": "Your projects, their contracts and what you have paid.",
+  "ar": "مشاريعك وعقودها وما دفعته.",
+  "de": "Ihre Projekte, die Verträge und was Sie bezahlt haben.",
+  "fr": "Vos projets, leurs contrats et ce que vous avez payé.",
+  "it": "I tuoi progetti, i contratti e quanto hai pagato."
+ },
+ "Projects.newProject": {
+  "en": "New project",
+  "ar": "مشروع جديد",
+  "de": "Neues Projekt",
+  "fr": "Nouveau projet",
+  "it": "Nuovo progetto"
+ },
+ "Projects.newDeal": {
+  "en": "New deal",
+  "ar": "صفقة جديدة",
+  "de": "Neuer Deal",
+  "fr": "Nouvelle affaire",
+  "it": "Nuova trattativa"
+ },
+ "Projects.search": {
+  "en": "Search projects, customers or numbers",
+  "ar": "ابحث في المشاريع أو العملاء أو الأرقام",
+  "de": "Projekte, Kunden oder Nummern suchen",
+  "fr": "Rechercher des projets, clients ou numéros",
+  "it": "Cerca progetti, clienti o numeri"
+ },
+ "Projects.filterStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Projects.filterPriority": {
+  "en": "Priority",
+  "ar": "الأولوية",
+  "de": "Priorität",
+  "fr": "Priorité",
+  "it": "Priorità"
+ },
+ "Projects.allStatuses": {
+  "en": "All statuses",
+  "ar": "كل الحالات",
+  "de": "Alle Status",
+  "fr": "Tous les statuts",
+  "it": "Tutti gli stati"
+ },
+ "Projects.allPriorities": {
+  "en": "All priorities",
+  "ar": "كل الأولويات",
+  "de": "Alle Prioritäten",
+  "fr": "Toutes les priorités",
+  "it": "Tutte le priorità"
+ },
+ "Projects.priority.low": {
+  "en": "Low",
+  "ar": "منخفضة",
+  "de": "Niedrig",
+  "fr": "Basse",
+  "it": "Bassa"
+ },
+ "Projects.priority.medium": {
+  "en": "Medium",
+  "ar": "متوسطة",
+  "de": "Mittel",
+  "fr": "Moyenne",
+  "it": "Media"
+ },
+ "Projects.priority.high": {
+  "en": "High",
+  "ar": "عالية",
+  "de": "Hoch",
+  "fr": "Haute",
+  "it": "Alta"
+ },
+ "Projects.colProject": {
+  "en": "Project",
+  "ar": "المشروع",
+  "de": "Projekt",
+  "fr": "Projet",
+  "it": "Progetto"
+ },
+ "Projects.colCustomer": {
+  "en": "Customer",
+  "ar": "العميل",
+  "de": "Kunde",
+  "fr": "Client",
+  "it": "Cliente"
+ },
+ "Projects.colSalesman": {
+  "en": "Salesperson",
+  "ar": "مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter",
+  "fr": "Commercial",
+  "it": "Commerciale"
+ },
+ "Projects.colTotal": {
+  "en": "Contract total",
+  "ar": "إجمالي العقد",
+  "de": "Vertragssumme",
+  "fr": "Total du contrat",
+  "it": "Totale del contratto"
+ },
+ "Projects.colStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Projects.colPriority": {
+  "en": "Priority",
+  "ar": "الأولوية",
+  "de": "Priorität",
+  "fr": "Priorité",
+  "it": "Priorità"
+ },
+ "Projects.colCreated": {
+  "en": "Created",
+  "ar": "تاريخ الإنشاء",
+  "de": "Angelegt",
+  "fr": "Créé le",
+  "it": "Creato il"
+ },
+ "Projects.colActions": {
+  "en": "Actions",
+  "ar": "الإجراءات",
+  "de": "Aktionen",
+  "fr": "Actions",
+  "it": "Azioni"
+ },
+ "Projects.unassigned": {
+  "en": "Unassigned",
+  "ar": "غير مُسنَد",
+  "de": "Nicht zugewiesen",
+  "fr": "Non attribué",
+  "it": "Non assegnato"
+ },
+ "Projects.noContract": {
+  "en": "No contract",
+  "ar": "لا يوجد عقد",
+  "de": "Kein Vertrag",
+  "fr": "Aucun contrat",
+  "it": "Nessun contratto"
+ },
+ "Projects.rowActions": {
+  "en": "Actions for {name}",
+  "ar": "إجراءات {name}",
+  "de": "Aktionen für {name}",
+  "fr": "Actions pour {name}",
+  "it": "Azioni per {name}"
+ },
+ "Projects.view": {
+  "en": "Open",
+  "ar": "فتح",
+  "de": "Öffnen",
+  "fr": "Ouvrir",
+  "it": "Apri"
+ },
+ "Projects.delete": {
+  "en": "Delete",
+  "ar": "حذف",
+  "de": "Löschen",
+  "fr": "Supprimer",
+  "it": "Elimina"
+ },
+ "Projects.deleteTitle": {
+  "en": "Delete the project {name}?",
+  "ar": "هل تريد حذف المشروع {name}؟",
+  "de": "Projekt {name} löschen?",
+  "fr": "Supprimer le projet {name} ?",
+  "it": "Eliminare il progetto {name}?"
+ },
+ "Projects.deleteImpact": {
+  "en": "Its contract, which isn't approved, is deleted with it.",
+  "ar": "يُحذف معه عقده غير المعتمد.",
+  "de": "Sein noch nicht freigegebener Vertrag wird mitgelöscht.",
+  "fr": "Son contrat, non approuvé, est supprimé avec lui.",
+  "it": "Il suo contratto, non approvato, viene eliminato con esso."
+ },
+ "Projects.deleteImpactApproved": {
+  "en": "Its contract is approved: the contract, its subscriptions, invoices and the salesperson's commission stay, but no longer belong to a project.",
+  "ar": "عقده معتمد: يبقى العقد واشتراكاته وفواتيره وعمولة مندوب المبيعات، لكنها لن تتبع أي مشروع.",
+  "de": "Sein Vertrag ist freigegeben: Vertrag, Abonnements, Rechnungen und die Provision bleiben, gehören aber zu keinem Projekt mehr.",
+  "fr": "Son contrat est approuvé : le contrat, ses abonnements, ses factures et la commission restent, mais ne sont plus liés à un projet.",
+  "it": "Il suo contratto è approvato: contratto, abbonamenti, fatture e provvigione restano, ma non appartengono più a un progetto."
+ },
+ "Projects.deleteAcknowledge": {
+  "en": "I understand the approved contract and its billing stay without a project.",
+  "ar": "أفهم أن العقد المعتمد وفواتيره ستبقى دون مشروع.",
+  "de": "Mir ist klar, dass der freigegebene Vertrag und seine Abrechnung ohne Projekt bleiben.",
+  "fr": "Je comprends que le contrat approuvé et sa facturation restent sans projet.",
+  "it": "Capisco che il contratto approvato e la sua fatturazione restano senza progetto."
+ },
+ "Projects.deleteConfirm": {
+  "en": "Delete project",
+  "ar": "حذف المشروع",
+  "de": "Projekt löschen",
+  "fr": "Supprimer le projet",
+  "it": "Elimina progetto"
+ },
+ "Projects.errorTitle": {
+  "en": "Projects couldn't be loaded",
+  "ar": "تعذّر تحميل المشاريع",
+  "de": "Projekte konnten nicht geladen werden",
+  "fr": "Impossible de charger les projets",
+  "it": "Impossibile caricare i progetti"
+ },
+ "Projects.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقّق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Projects.forbiddenTitle": {
+  "en": "You can't see this project",
+  "ar": "لا يمكنك عرض هذا المشروع",
+  "de": "Sie können dieses Projekt nicht sehen",
+  "fr": "Vous ne pouvez pas voir ce projet",
+  "it": "Non puoi vedere questo progetto"
+ },
+ "Projects.forbiddenBody": {
+  "en": "It belongs to someone else's deals. Ask a manager if you need it.",
+  "ar": "يخصّ صفقات شخص آخر. اطلب من مدير إن كنت تحتاج إليه.",
+  "de": "Es gehört zu den Deals einer anderen Person. Fragen Sie bei Bedarf eine Führungskraft.",
+  "fr": "Il fait partie des affaires de quelqu’un d’autre. Demandez à un responsable si besoin.",
+  "it": "Fa parte delle trattative di un’altra persona. Chiedi a un responsabile se ti serve."
+ },
+ "Projects.noMatchTitle": {
+  "en": "No project matches",
+  "ar": "لا يوجد مشروع مطابق",
+  "de": "Kein Projekt passt",
+  "fr": "Aucun projet ne correspond",
+  "it": "Nessun progetto corrisponde"
+ },
+ "Projects.noMatchBody": {
+  "en": "Try another search, status or priority.",
+  "ar": "جرّب بحثًا أو حالة أو أولوية أخرى.",
+  "de": "Versuchen Sie eine andere Suche, einen anderen Status oder eine andere Priorität.",
+  "fr": "Essayez une autre recherche, un autre statut ou une autre priorité.",
+  "it": "Prova un’altra ricerca, stato o priorità."
+ },
+ "Projects.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella i filtri"
+ },
+ "Projects.emptyTitle": {
+  "en": "No projects yet",
+  "ar": "لا توجد مشاريع بعد",
+  "de": "Noch keine Projekte",
+  "fr": "Pas encore de projets",
+  "it": "Ancora nessun progetto"
+ },
+ "Projects.emptyBody": {
+  "en": "Create a project for a customer, or send them an offer: an accepted offer becomes a project.",
+  "ar": "أنشئ مشروعًا لعميل أو أرسل إليه عرضًا: العرض المقبول يصبح مشروعًا.",
+  "de": "Legen Sie ein Projekt für einen Kunden an oder senden Sie ein Angebot: Ein angenommenes Angebot wird zum Projekt.",
+  "fr": "Créez un projet pour un client ou envoyez-lui une offre : une offre acceptée devient un projet.",
+  "it": "Crea un progetto per un cliente o inviagli un’offerta: un’offerta accettata diventa un progetto."
+ },
+ "Projects.emptyBodyCustomer": {
+  "en": "When you accept an offer, its project appears here.",
+  "ar": "عندما تقبل عرضًا، يظهر مشروعه هنا.",
+  "de": "Wenn Sie ein Angebot annehmen, erscheint das Projekt hier.",
+  "fr": "Quand vous acceptez une offre, son projet apparaît ici.",
+  "it": "Quando accetti un’offerta, il progetto compare qui."
+ },
+ "Projects.loading": {
+  "en": "Loading the project",
+  "ar": "جارٍ تحميل المشروع",
+  "de": "Projekt wird geladen",
+  "fr": "Chargement du projet",
+  "it": "Caricamento del progetto"
+ },
+ "Projects.backToList": {
+  "en": "Back to {list}",
+  "ar": "العودة إلى {list}",
+  "de": "Zurück zu {list}",
+  "fr": "Retour à {list}",
+  "it": "Torna a {list}"
+ },
+ "Projects.notFoundTitle": {
+  "en": "This project doesn't exist",
+  "ar": "هذا المشروع غير موجود",
+  "de": "Dieses Projekt gibt es nicht",
+  "fr": "Ce projet n’existe pas",
+  "it": "Questo progetto non esiste"
+ },
+ "Projects.notFoundBody": {
+  "en": "It may have been deleted, or it belongs to someone else's deals.",
+  "ar": "ربما حُذف، أو يخصّ صفقات شخص آخر.",
+  "de": "Es wurde vielleicht gelöscht oder gehört zu den Deals einer anderen Person.",
+  "fr": "Il a peut-être été supprimé, ou il fait partie des affaires de quelqu’un d’autre.",
+  "it": "Potrebbe essere stato eliminato o appartenere alle trattative di un’altra persona."
+ },
+ "Projects.createdOn": {
+  "en": "{id} · created on {date}",
+  "ar": "{id} · أُنشئ في {date}",
+  "de": "{id} · angelegt am {date}",
+  "fr": "{id} · créé le {date}",
+  "it": "{id} · creato il {date}"
+ },
+ "Projects.statTotal": {
+  "en": "Contract total",
+  "ar": "إجمالي العقد",
+  "de": "Vertragssumme",
+  "fr": "Total du contrat",
+  "it": "Totale del contratto"
+ },
+ "Projects.statTotalHint": {
+  "en": "{count, plural, one {# plan, VAT included} other {# plans, VAT included}}",
+  "ar": "{count, plural, zero {لا خطط، شامل الضريبة} one {خطة واحدة، شامل الضريبة} two {خطتان، شامل الضريبة} few {# خطط، شامل الضريبة} many {# خطة، شامل الضريبة} other {# خطة، شامل الضريبة}}",
+  "de": "{count, plural, one {# Tarif, inkl. MwSt.} other {# Tarife, inkl. MwSt.}}",
+  "fr": "{count, plural, one {# formule, TVA comprise} other {# formules, TVA comprise}}",
+  "it": "{count, plural, one {# piano, IVA inclusa} other {# piani, IVA inclusa}}"
+ },
+ "Projects.statPaid": {
+  "en": "Paid",
+  "ar": "المدفوع",
+  "de": "Bezahlt",
+  "fr": "Payé",
+  "it": "Pagato"
+ },
+ "Projects.statRemaining": {
+  "en": "{amount} left to pay",
+  "ar": "المتبقي للدفع: {amount}",
+  "de": "Noch {amount} offen",
+  "fr": "Reste à payer : {amount}",
+  "it": "Restano da pagare {amount}"
+ },
+ "Projects.statPaidPercent": {
+  "en": "Paid so far",
+  "ar": "نسبة المدفوع حتى الآن",
+  "de": "Bisher bezahlt",
+  "fr": "Payé à ce jour",
+  "it": "Pagato finora"
+ },
+ "Projects.statPaymentsError": {
+  "en": "Payments couldn't be loaded",
+  "ar": "تعذّر تحميل المدفوعات",
+  "de": "Zahlungen konnten nicht geladen werden",
+  "fr": "Impossible de charger les paiements",
+  "it": "Impossibile caricare i pagamenti"
+ },
+ "Projects.statCommission": {
+  "en": "Commission",
+  "ar": "العمولة",
+  "de": "Provision",
+  "fr": "Commission",
+  "it": "Provvigione"
+ },
+ "Projects.commissionPercent": {
+  "en": "{percent} of the net",
+  "ar": "{percent} من الصافي",
+  "de": "{percent} vom Nettobetrag",
+  "fr": "{percent} du net",
+  "it": "{percent} del netto"
+ },
+ "Projects.commissionFixed": {
+  "en": "Fixed amount",
+  "ar": "مبلغ ثابت",
+  "de": "Fester Betrag",
+  "fr": "Montant fixe",
+  "it": "Importo fisso"
+ },
+ "Projects.commissionOnApproval": {
+  "en": "Set when the contract is approved",
+  "ar": "تُحدَّد عند اعتماد العقد",
+  "de": "Wird bei der Freigabe des Vertrags festgelegt",
+  "fr": "Fixée à l’approbation du contrat",
+  "it": "Stabilita all’approvazione del contratto"
+ },
+ "Projects.commissionNoSalesman": {
+  "en": "No salesperson on this project",
+  "ar": "لا يوجد مندوب مبيعات لهذا المشروع",
+  "de": "Kein Vertriebsmitarbeiter für dieses Projekt",
+  "fr": "Aucun commercial sur ce projet",
+  "it": "Nessun commerciale su questo progetto"
+ },
+ "Projects.statDue": {
+  "en": "Due date",
+  "ar": "تاريخ الاستحقاق",
+  "de": "Fälligkeitsdatum",
+  "fr": "Échéance",
+  "it": "Scadenza"
+ },
+ "Projects.noDueDate": {
+  "en": "Not set",
+  "ar": "غير محدّد",
+  "de": "Nicht festgelegt",
+  "fr": "Non définie",
+  "it": "Non impostata"
+ },
+ "Projects.contractTitle": {
+  "en": "Contract",
+  "ar": "العقد",
+  "de": "Vertrag",
+  "fr": "Contrat",
+  "it": "Contratto"
+ },
+ "Projects.noContractBody": {
+  "en": "This project has no contract yet. Add plans to create one.",
+  "ar": "لا يوجد عقد لهذا المشروع بعد. أضف خططًا لإنشائه.",
+  "de": "Dieses Projekt hat noch keinen Vertrag. Fügen Sie Tarife hinzu, um einen zu erstellen.",
+  "fr": "Ce projet n’a pas encore de contrat. Ajoutez des formules pour en créer un.",
+  "it": "Questo progetto non ha ancora un contratto. Aggiungi dei piani per crearlo."
+ },
+ "Projects.contractCreated": {
+  "en": "Issued on {date}",
+  "ar": "صدر في {date}",
+  "de": "Ausgestellt am {date}",
+  "fr": "Émis le {date}",
+  "it": "Emesso il {date}"
+ },
+ "Projects.contractFileName": {
+  "en": "Contract {id}",
+  "ar": "العقد {id}",
+  "de": "Vertrag {id}",
+  "fr": "Contrat {id}",
+  "it": "Contratto {id}"
+ },
+ "Projects.signed": {
+  "en": "Signed by the customer",
+  "ar": "وقّعه العميل",
+  "de": "Vom Kunden unterschrieben",
+  "fr": "Signé par le client",
+  "it": "Firmato dal cliente"
+ },
+ "Projects.signedOn": {
+  "en": "Signed by the customer on {date}",
+  "ar": "وقّعه العميل في {date}",
+  "de": "Am {date} vom Kunden unterschrieben",
+  "fr": "Signé par le client le {date}",
+  "it": "Firmato dal cliente il {date}"
+ },
+ "Projects.notSigned": {
+  "en": "Not signed yet",
+  "ar": "لم يُوقَّع بعد",
+  "de": "Noch nicht unterschrieben",
+  "fr": "Pas encore signé",
+  "it": "Non ancora firmato"
+ },
+ "Projects.approvedOn": {
+  "en": "Approved on {date} by {who}",
+  "ar": "اعتُمد في {date} من قِبل {who}",
+  "de": "Am {date} von {who} freigegeben",
+  "fr": "Approuvé le {date} par {who}",
+  "it": "Approvato il {date} da {who}"
+ },
+ "Projects.rejectionReason": {
+  "en": "Reason for rejection",
+  "ar": "سبب الرفض",
+  "de": "Ablehnungsgrund",
+  "fr": "Motif du refus",
+  "it": "Motivo del rifiuto"
+ },
+ "Projects.viewContract": {
+  "en": "View contract",
+  "ar": "عرض العقد",
+  "de": "Vertrag ansehen",
+  "fr": "Voir le contrat",
+  "it": "Visualizza contratto"
+ },
+ "Projects.downloadContract": {
+  "en": "Download contract",
+  "ar": "تنزيل العقد",
+  "de": "Vertrag herunterladen",
+  "fr": "Télécharger le contrat",
+  "it": "Scarica contratto"
+ },
+ "Projects.uploadSigned": {
+  "en": "Upload the signed contract",
+  "ar": "رفع العقد الموقّع",
+  "de": "Unterschriebenen Vertrag hochladen",
+  "fr": "Téléverser le contrat signé",
+  "it": "Carica il contratto firmato"
+ },
+ "Projects.replaceSigned": {
+  "en": "Replace the signed contract",
+  "ar": "استبدال العقد الموقّع",
+  "de": "Unterschriebenen Vertrag ersetzen",
+  "fr": "Remplacer le contrat signé",
+  "it": "Sostituisci il contratto firmato"
+ },
+ "Projects.reviewReady": {
+  "en": "The customer signed. Approve the contract to start billing, or reject it.",
+  "ar": "وقّع العميل. اعتمد العقد لبدء الفوترة أو ارفضه.",
+  "de": "Der Kunde hat unterschrieben. Geben Sie den Vertrag frei, um die Abrechnung zu starten, oder lehnen Sie ihn ab.",
+  "fr": "Le client a signé. Approuvez le contrat pour lancer la facturation, ou refusez-le.",
+  "it": "Il cliente ha firmato. Approva il contratto per avviare la fatturazione o rifiutalo."
+ },
+ "Projects.reviewWaiting": {
+  "en": "Approval opens once the customer uploads the signed contract.",
+  "ar": "يُتاح الاعتماد بعد أن يرفع العميل العقد الموقّع.",
+  "de": "Die Freigabe ist möglich, sobald der Kunde den unterschriebenen Vertrag hochlädt.",
+  "fr": "L’approbation sera possible dès que le client aura téléversé le contrat signé.",
+  "it": "L’approvazione sarà possibile quando il cliente caricherà il contratto firmato."
+ },
+ "Projects.approve": {
+  "en": "Approve",
+  "ar": "اعتماد",
+  "de": "Freigeben",
+  "fr": "Approuver",
+  "it": "Approva"
+ },
+ "Projects.reject": {
+  "en": "Reject",
+  "ar": "رفض",
+  "de": "Ablehnen",
+  "fr": "Refuser",
+  "it": "Rifiuta"
+ },
+ "Projects.rejectTitle": {
+  "en": "Reject the contract for {name}?",
+  "ar": "هل تريد رفض عقد {name}؟",
+  "de": "Vertrag für {name} ablehnen?",
+  "fr": "Refuser le contrat de {name} ?",
+  "it": "Rifiutare il contratto di {name}?"
+ },
+ "Projects.rejectImpact": {
+  "en": "The {amount} contract is rejected and the project with it. The customer and the salesperson are told why.",
+  "ar": "يُرفض العقد بقيمة {amount} ويُرفض المشروع معه، ويُبلَّغ العميل ومندوب المبيعات بالسبب.",
+  "de": "Der Vertrag über {amount} und damit das Projekt werden abgelehnt. Kunde und Vertrieb erfahren den Grund.",
+  "fr": "Le contrat de {amount} est refusé, et le projet avec lui. Le client et le commercial sont informés du motif.",
+  "it": "Il contratto da {amount} viene rifiutato, e con esso il progetto. Cliente e commerciale ricevono il motivo."
+ },
+ "Projects.rejectReason": {
+  "en": "Reason",
+  "ar": "السبب",
+  "de": "Grund",
+  "fr": "Motif",
+  "it": "Motivo"
+ },
+ "Projects.rejectConfirm": {
+  "en": "Reject contract",
+  "ar": "رفض العقد",
+  "de": "Vertrag ablehnen",
+  "fr": "Refuser le contrat",
+  "it": "Rifiuta contratto"
+ },
+ "Projects.commissionTitle": {
+  "en": "Set the commission",
+  "ar": "تحديد العمولة",
+  "de": "Provision festlegen",
+  "fr": "Fixer la commission",
+  "it": "Imposta la provvigione"
+ },
+ "Projects.commissionBody": {
+  "en": "For {salesman}, on a net of {net} (before VAT).",
+  "ar": "لـ {salesman}، على صافٍ قدره {net} (قبل الضريبة).",
+  "de": "Für {salesman}, auf einen Nettobetrag von {net} (ohne MwSt.).",
+  "fr": "Pour {salesman}, sur un net de {net} (hors TVA).",
+  "it": "Per {salesman}, su un netto di {net} (IVA esclusa)."
+ },
+ "Projects.commissionMode": {
+  "en": "Commission",
+  "ar": "العمولة",
+  "de": "Provision",
+  "fr": "Commission",
+  "it": "Provvigione"
+ },
+ "Projects.commissionPercentage": {
+  "en": "A percent of the net",
+  "ar": "نسبة من الصافي",
+  "de": "Prozent vom Nettobetrag",
+  "fr": "Un pourcentage du net",
+  "it": "Una percentuale del netto"
+ },
+ "Projects.commissionPercentageHint": {
+  "en": "Follows the contract's net amount.",
+  "ar": "تتبع صافي مبلغ العقد.",
+  "de": "Richtet sich nach dem Nettobetrag des Vertrags.",
+  "fr": "Suit le montant net du contrat.",
+  "it": "Segue l’importo netto del contratto."
+ },
+ "Projects.commissionFixedAmount": {
+  "en": "A fixed amount in {currency}",
+  "ar": "مبلغ ثابت بعملة {currency}",
+  "de": "Ein fester Betrag in {currency}",
+  "fr": "Un montant fixe en {currency}",
+  "it": "Un importo fisso in {currency}"
+ },
+ "Projects.commissionFixedHint": {
+  "en": "In the contract's currency.",
+  "ar": "بعملة العقد.",
+  "de": "In der Währung des Vertrags.",
+  "fr": "Dans la devise du contrat.",
+  "it": "Nella valuta del contratto."
+ },
+ "Projects.commissionPercentLabel": {
+  "en": "Percent",
+  "ar": "النسبة",
+  "de": "Prozentsatz",
+  "fr": "Pourcentage",
+  "it": "Percentuale"
+ },
+ "Projects.commissionAmountLabel": {
+  "en": "Amount ({currency})",
+  "ar": "المبلغ ({currency})",
+  "de": "Betrag ({currency})",
+  "fr": "Montant ({currency})",
+  "it": "Importo ({currency})"
+ },
+ "Projects.commissionPreview": {
+  "en": "Commission: {amount}",
+  "ar": "العمولة: {amount}",
+  "de": "Provision: {amount}",
+  "fr": "Commission : {amount}",
+  "it": "Provvigione: {amount}"
+ },
+ "Projects.continue": {
+  "en": "Continue",
+  "ar": "متابعة",
+  "de": "Weiter",
+  "fr": "Continuer",
+  "it": "Continua"
+ },
+ "Projects.back": {
+  "en": "Back",
+  "ar": "رجوع",
+  "de": "Zurück",
+  "fr": "Retour",
+  "it": "Indietro"
+ },
+ "Projects.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Projects.approveTitle": {
+  "en": "Approve the contract for {name}?",
+  "ar": "هل تريد اعتماد عقد {name}؟",
+  "de": "Vertrag für {name} freigeben?",
+  "fr": "Approuver le contrat de {name} ?",
+  "it": "Approvare il contratto di {name}?"
+ },
+ "Projects.approveImpact": {
+  "en": "{salesman} earns a commission of {commission}. The subscriptions and the first invoices for the {total} contract are created.",
+  "ar": "يحصل {salesman} على عمولة قدرها {commission}. تُنشأ الاشتراكات والفواتير الأولى للعقد بقيمة {total}.",
+  "de": "{salesman} erhält eine Provision von {commission}. Abonnements und erste Rechnungen für den Vertrag über {total} werden angelegt.",
+  "fr": "{salesman} touche une commission de {commission}. Les abonnements et les premières factures du contrat de {total} sont créés.",
+  "it": "{salesman} riceve una provvigione di {commission}. Vengono creati gli abbonamenti e le prime fatture del contratto da {total}."
+ },
+ "Projects.approveImpactNoSalesman": {
+  "en": "The subscriptions and the first invoices for the {total} contract are created. There's no salesperson, so no commission.",
+  "ar": "تُنشأ الاشتراكات والفواتير الأولى للعقد بقيمة {total}. لا يوجد مندوب مبيعات، لذا لا عمولة.",
+  "de": "Abonnements und erste Rechnungen für den Vertrag über {total} werden angelegt. Ohne Vertriebsmitarbeiter gibt es keine Provision.",
+  "fr": "Les abonnements et les premières factures du contrat de {total} sont créés. Sans commercial, pas de commission.",
+  "it": "Vengono creati gli abbonamenti e le prime fatture del contratto da {total}. Senza commerciale non c’è provvigione."
+ },
+ "Projects.approveConfirm": {
+  "en": "Approve contract",
+  "ar": "اعتماد العقد",
+  "de": "Vertrag freigeben",
+  "fr": "Approuver le contrat",
+  "it": "Approva contratto"
+ },
+ "Projects.uploadSignedTitle": {
+  "en": "Upload the signed contract",
+  "ar": "رفع العقد الموقّع",
+  "de": "Unterschriebenen Vertrag hochladen",
+  "fr": "Téléverser le contrat signé",
+  "it": "Carica il contratto firmato"
+ },
+ "Projects.replaceSignedTitle": {
+  "en": "Replace the signed contract",
+  "ar": "استبدال العقد الموقّع",
+  "de": "Unterschriebenen Vertrag ersetzen",
+  "fr": "Remplacer le contrat signé",
+  "it": "Sostituisci il contratto firmato"
+ },
+ "Projects.uploadSignedBody": {
+  "en": "For {name}. Download the contract, sign it, then upload it here.",
+  "ar": "لمشروع {name}. نزّل العقد ووقّعه ثم ارفعه هنا.",
+  "de": "Für {name}. Laden Sie den Vertrag herunter, unterschreiben Sie ihn und laden Sie ihn hier hoch.",
+  "fr": "Pour {name}. Téléchargez le contrat, signez-le, puis téléversez-le ici.",
+  "it": "Per {name}. Scarica il contratto, firmalo e caricalo qui."
+ },
+ "Projects.uploadSignedSubmit": {
+  "en": "Upload",
+  "ar": "رفع",
+  "de": "Hochladen",
+  "fr": "Téléverser",
+  "it": "Carica"
+ },
+ "Projects.signedFile": {
+  "en": "Signed contract",
+  "ar": "العقد الموقّع",
+  "de": "Unterschriebener Vertrag",
+  "fr": "Contrat signé",
+  "it": "Contratto firmato"
+ },
+ "Projects.signedFileHint": {
+  "en": "A PDF or a photo (PNG, JPG), up to 10 MB.",
+  "ar": "ملف PDF أو صورة (PNG أو JPG) حتى 10 ميغابايت.",
+  "de": "Ein PDF oder Foto (PNG, JPG), bis 10 MB.",
+  "fr": "Un PDF ou une photo (PNG, JPG), 10 Mo maximum.",
+  "it": "Un PDF o una foto (PNG, JPG), fino a 10 MB."
+ },
+ "Projects.signedFileMissing": {
+  "en": "Choose the signed contract to upload.",
+  "ar": "اختر العقد الموقّع لرفعه.",
+  "de": "Wählen Sie den unterschriebenen Vertrag aus.",
+  "fr": "Choisissez le contrat signé à téléverser.",
+  "it": "Scegli il contratto firmato da caricare."
+ },
+ "Projects.documentError": {
+  "en": "The contract couldn't be opened",
+  "ar": "تعذّر فتح العقد",
+  "de": "Der Vertrag konnte nicht geöffnet werden",
+  "fr": "Impossible d’ouvrir le contrat",
+  "it": "Impossibile aprire il contratto"
+ },
+ "Projects.documentLoading": {
+  "en": "Opening the contract…",
+  "ar": "جارٍ فتح العقد…",
+  "de": "Vertrag wird geöffnet…",
+  "fr": "Ouverture du contrat…",
+  "it": "Apertura del contratto…"
+ },
+ "Projects.plansTitle": {
+  "en": "Plans",
+  "ar": "الخطط",
+  "de": "Tarife",
+  "fr": "Formules",
+  "it": "Piani"
+ },
+ "Projects.changePlans": {
+  "en": "Change plans",
+  "ar": "تغيير الخطط",
+  "de": "Tarife ändern",
+  "fr": "Modifier les formules",
+  "it": "Modifica i piani"
+ },
+ "Projects.partOfBundle": {
+  "en": "Part of {name}",
+  "ar": "ضمن {name}",
+  "de": "Teil von {name}",
+  "fr": "Inclus dans {name}",
+  "it": "Parte di {name}"
+ },
+ "Projects.includes": {
+  "en": "Includes: {features}",
+  "ar": "يشمل: {features}",
+  "de": "Enthält: {features}",
+  "fr": "Comprend : {features}",
+  "it": "Include: {features}"
+ },
+ "Projects.planPaid": {
+  "en": "Paid",
+  "ar": "مدفوعة",
+  "de": "Bezahlt",
+  "fr": "Payée",
+  "it": "Pagato"
+ },
+ "Projects.planUnpaid": {
+  "en": "Not paid yet",
+  "ar": "لم تُدفع بعد",
+  "de": "Noch nicht bezahlt",
+  "fr": "Pas encore payée",
+  "it": "Non ancora pagato"
+ },
+ "Projects.installmentsPaid": {
+  "en": "Installments paid",
+  "ar": "الأقساط المدفوعة",
+  "de": "Bezahlte Raten",
+  "fr": "Versements payés",
+  "it": "Rate pagate"
+ },
+ "Projects.infoTitle": {
+  "en": "Customer and team",
+  "ar": "العميل والفريق",
+  "de": "Kunde und Team",
+  "fr": "Client et équipe",
+  "it": "Cliente e team"
+ },
+ "Projects.openCustomer": {
+  "en": "Open customer",
+  "ar": "فتح العميل",
+  "de": "Kunde öffnen",
+  "fr": "Ouvrir le client",
+  "it": "Apri il cliente"
+ },
+ "Projects.customer": {
+  "en": "Customer",
+  "ar": "العميل",
+  "de": "Kunde",
+  "fr": "Client",
+  "it": "Cliente"
+ },
+ "Projects.company": {
+  "en": "Company",
+  "ar": "الشركة",
+  "de": "Firma",
+  "fr": "Entreprise",
+  "it": "Azienda"
+ },
+ "Projects.email": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Projects.phone": {
+  "en": "Phone",
+  "ar": "الهاتف",
+  "de": "Telefon",
+  "fr": "Téléphone",
+  "it": "Telefono"
+ },
+ "Projects.salesman": {
+  "en": "Salesperson",
+  "ar": "مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter",
+  "fr": "Commercial",
+  "it": "Commerciale"
+ },
+ "Projects.department": {
+  "en": "Department",
+  "ar": "القسم",
+  "de": "Abteilung",
+  "fr": "Service",
+  "it": "Reparto"
+ },
+ "Projects.fieldName": {
+  "en": "Project name",
+  "ar": "اسم المشروع",
+  "de": "Projektname",
+  "fr": "Nom du projet",
+  "it": "Nome del progetto"
+ },
+ "Projects.fieldDescription": {
+  "en": "Description",
+  "ar": "الوصف",
+  "de": "Beschreibung",
+  "fr": "Description",
+  "it": "Descrizione"
+ },
+ "Projects.fieldPriority": {
+  "en": "Priority",
+  "ar": "الأولوية",
+  "de": "Priorität",
+  "fr": "Priorité",
+  "it": "Priorità"
+ },
+ "Projects.timelineTitle": {
+  "en": "History",
+  "ar": "السجل",
+  "de": "Verlauf",
+  "fr": "Historique",
+  "it": "Cronologia"
+ },
+ "Projects.eventCreated": {
+  "en": "Project created",
+  "ar": "أُنشئ المشروع",
+  "de": "Projekt angelegt",
+  "fr": "Projet créé",
+  "it": "Progetto creato"
+ },
+ "Projects.eventContract": {
+  "en": "Contract issued for {amount}",
+  "ar": "صدر العقد بقيمة {amount}",
+  "de": "Vertrag über {amount} ausgestellt",
+  "fr": "Contrat émis pour {amount}",
+  "it": "Contratto emesso per {amount}"
+ },
+ "Projects.eventSigned": {
+  "en": "Customer signed the contract",
+  "ar": "وقّع العميل العقد",
+  "de": "Kunde hat den Vertrag unterschrieben",
+  "fr": "Le client a signé le contrat",
+  "it": "Il cliente ha firmato il contratto"
+ },
+ "Projects.eventApproved": {
+  "en": "Contract approved",
+  "ar": "اعتُمد العقد",
+  "de": "Vertrag freigegeben",
+  "fr": "Contrat approuvé",
+  "it": "Contratto approvato"
+ },
+ "Projects.eventApprovedBy": {
+  "en": "Contract approved by {who}",
+  "ar": "اعتمد {who} العقد",
+  "de": "Vertrag von {who} freigegeben",
+  "fr": "Contrat approuvé par {who}",
+  "it": "Contratto approvato da {who}"
+ },
+ "Projects.eventRejected": {
+  "en": "Contract rejected",
+  "ar": "رُفض العقد",
+  "de": "Vertrag abgelehnt",
+  "fr": "Contrat refusé",
+  "it": "Contratto rifiutato"
+ },
+ "Projects.notesTitle": {
+  "en": "Contact notes",
+  "ar": "ملاحظات التواصل",
+  "de": "Kontaktnotizen",
+  "fr": "Notes de contact",
+  "it": "Note di contatto"
+ },
+ "Projects.notesEmpty": {
+  "en": "No notes yet. Note calls, meetings and what was agreed.",
+  "ar": "لا توجد ملاحظات بعد. دوّن المكالمات والاجتماعات وما اتُّفق عليه.",
+  "de": "Noch keine Notizen. Halten Sie Anrufe, Termine und Absprachen fest.",
+  "fr": "Pas encore de notes. Notez les appels, réunions et ce qui a été convenu.",
+  "it": "Ancora nessuna nota. Annota chiamate, incontri e accordi."
+ },
+ "Projects.notesError": {
+  "en": "Notes couldn't be loaded",
+  "ar": "تعذّر تحميل الملاحظات",
+  "de": "Notizen konnten nicht geladen werden",
+  "fr": "Impossible de charger les notes",
+  "it": "Impossibile caricare le note"
+ },
+ "Projects.noteAdd": {
+  "en": "Add note",
+  "ar": "إضافة ملاحظة",
+  "de": "Notiz hinzufügen",
+  "fr": "Ajouter une note",
+  "it": "Aggiungi nota"
+ },
+ "Projects.noteAddTitle": {
+  "en": "Add a contact note",
+  "ar": "إضافة ملاحظة تواصل",
+  "de": "Kontaktnotiz hinzufügen",
+  "fr": "Ajouter une note de contact",
+  "it": "Aggiungi una nota di contatto"
+ },
+ "Projects.noteEdit": {
+  "en": "Edit note",
+  "ar": "تعديل الملاحظة",
+  "de": "Notiz bearbeiten",
+  "fr": "Modifier la note",
+  "it": "Modifica nota"
+ },
+ "Projects.noteEditTitle": {
+  "en": "Edit the contact note",
+  "ar": "تعديل ملاحظة التواصل",
+  "de": "Kontaktnotiz bearbeiten",
+  "fr": "Modifier la note de contact",
+  "it": "Modifica la nota di contatto"
+ },
+ "Projects.noteSave": {
+  "en": "Save note",
+  "ar": "حفظ الملاحظة",
+  "de": "Notiz speichern",
+  "fr": "Enregistrer la note",
+  "it": "Salva nota"
+ },
+ "Projects.noteLabel": {
+  "en": "Note",
+  "ar": "الملاحظة",
+  "de": "Notiz",
+  "fr": "Note",
+  "it": "Nota"
+ },
+ "Projects.noteDelete": {
+  "en": "Delete note",
+  "ar": "حذف الملاحظة",
+  "de": "Notiz löschen",
+  "fr": "Supprimer la note",
+  "it": "Elimina nota"
+ },
+ "Projects.noteDeleteTitle": {
+  "en": "Delete this note?",
+  "ar": "هل تريد حذف هذه الملاحظة؟",
+  "de": "Diese Notiz löschen?",
+  "fr": "Supprimer cette note ?",
+  "it": "Eliminare questa nota?"
+ },
+ "Projects.noteDeleteImpact": {
+  "en": "The team will no longer see it on this project.",
+  "ar": "لن يراها الفريق بعد الآن في هذا المشروع.",
+  "de": "Das Team sieht sie in diesem Projekt nicht mehr.",
+  "fr": "L’équipe ne la verra plus sur ce projet.",
+  "it": "Il team non la vedrà più in questo progetto."
+ },
+ "Projects.noteDeleteConfirm": {
+  "en": "Delete note",
+  "ar": "حذف الملاحظة",
+  "de": "Notiz löschen",
+  "fr": "Supprimer la note",
+  "it": "Elimina nota"
+ },
+ "Projects.editDetails": {
+  "en": "Edit details",
+  "ar": "تعديل التفاصيل",
+  "de": "Details bearbeiten",
+  "fr": "Modifier les détails",
+  "it": "Modifica dettagli"
+ },
+ "Projects.editDetailsTitle": {
+  "en": "Edit the project details",
+  "ar": "تعديل تفاصيل المشروع",
+  "de": "Projektdetails bearbeiten",
+  "fr": "Modifier les détails du projet",
+  "it": "Modifica i dettagli del progetto"
+ },
+ "Projects.save": {
+  "en": "Save",
+  "ar": "حفظ",
+  "de": "Speichern",
+  "fr": "Enregistrer",
+  "it": "Salva"
+ },
+ "Projects.more": {
+  "en": "More",
+  "ar": "المزيد",
+  "de": "Mehr",
+  "fr": "Plus",
+  "it": "Altro"
+ },
+ "Projects.setDueDate": {
+  "en": "Set due date",
+  "ar": "تحديد تاريخ الاستحقاق",
+  "de": "Fälligkeitsdatum festlegen",
+  "fr": "Définir l’échéance",
+  "it": "Imposta la scadenza"
+ },
+ "Projects.changeDueDate": {
+  "en": "Change due date",
+  "ar": "تغيير تاريخ الاستحقاق",
+  "de": "Fälligkeitsdatum ändern",
+  "fr": "Modifier l’échéance",
+  "it": "Modifica la scadenza"
+ },
+ "Projects.dueDateTitle": {
+  "en": "Due date",
+  "ar": "تاريخ الاستحقاق",
+  "de": "Fälligkeitsdatum",
+  "fr": "Échéance",
+  "it": "Scadenza"
+ },
+ "Projects.dueDateBody": {
+  "en": "When {name} should be delivered.",
+  "ar": "متى يجب تسليم {name}.",
+  "de": "Bis wann {name} fertig sein soll.",
+  "fr": "Quand {name} doit être livré.",
+  "it": "Quando {name} deve essere consegnato."
+ },
+ "Projects.dueDateLabel": {
+  "en": "Due date",
+  "ar": "تاريخ الاستحقاق",
+  "de": "Fälligkeitsdatum",
+  "fr": "Échéance",
+  "it": "Scadenza"
+ },
+ "Projects.delivery": {
+  "en": "Delivery",
+  "ar": "التنفيذ",
+  "de": "Umsetzung",
+  "fr": "Livraison",
+  "it": "Consegna"
+ },
+ "Projects.moveTo": {
+  "en": "Move to {status}",
+  "ar": "نقل إلى {status}",
+  "de": "Zu „{status}“ verschieben",
+  "fr": "Passer à {status}",
+  "it": "Passa a {status}"
+ },
+ "Projects.moveBackTo": {
+  "en": "Move back to {status}",
+  "ar": "إرجاع إلى {status}",
+  "de": "Zurück zu „{status}“",
+  "fr": "Revenir à {status}",
+  "it": "Torna a {status}"
+ },
+ "Projects.moveTitle": {
+  "en": "Move {name} to {status}?",
+  "ar": "هل تريد نقل {name} إلى {status}؟",
+  "de": "{name} zu „{status}“ verschieben?",
+  "fr": "Passer {name} à {status} ?",
+  "it": "Passare {name} a {status}?"
+ },
+ "Projects.moveImpact": {
+  "en": "The customer and the salesperson are told about the change.",
+  "ar": "يُبلَّغ العميل ومندوب المبيعات بالتغيير.",
+  "de": "Kunde und Vertrieb werden über die Änderung informiert.",
+  "fr": "Le client et le commercial sont informés du changement.",
+  "it": "Cliente e commerciale vengono informati del cambiamento."
+ },
+ "Projects.errors.name": {
+  "en": "Give the project a name.",
+  "ar": "أدخل اسمًا للمشروع.",
+  "de": "Geben Sie dem Projekt einen Namen.",
+  "fr": "Donnez un nom au projet.",
+  "it": "Dai un nome al progetto."
+ },
+ "Projects.errors.nameLong": {
+  "en": "Keep the name under 160 characters.",
+  "ar": "اجعل الاسم أقل من 160 حرفًا.",
+  "de": "Der Name darf höchstens 160 Zeichen haben.",
+  "fr": "Le nom doit faire moins de 160 caractères.",
+  "it": "Il nome deve restare sotto i 160 caratteri."
+ },
+ "Projects.errors.textLong": {
+  "en": "This text is too long.",
+  "ar": "هذا النص طويل جدًا.",
+  "de": "Dieser Text ist zu lang.",
+  "fr": "Ce texte est trop long.",
+  "it": "Questo testo è troppo lungo."
+ },
+ "Projects.errors.dueDate": {
+  "en": "Choose a due date.",
+  "ar": "اختر تاريخ الاستحقاق.",
+  "de": "Wählen Sie ein Fälligkeitsdatum.",
+  "fr": "Choisissez une échéance.",
+  "it": "Scegli una scadenza."
+ },
+ "Projects.errors.note": {
+  "en": "Write the note first.",
+  "ar": "اكتب الملاحظة أولًا.",
+  "de": "Schreiben Sie zuerst die Notiz.",
+  "fr": "Écrivez d’abord la note.",
+  "it": "Scrivi prima la nota."
+ },
+ "Projects.errors.commissionMode": {
+  "en": "Choose how the commission is set.",
+  "ar": "اختر طريقة تحديد العمولة.",
+  "de": "Wählen Sie, wie die Provision festgelegt wird.",
+  "fr": "Choisissez comment la commission est fixée.",
+  "it": "Scegli come stabilire la provvigione."
+ },
+ "Projects.errors.commissionValue": {
+  "en": "Enter the commission, zero or more.",
+  "ar": "أدخل العمولة، صفرًا أو أكثر.",
+  "de": "Geben Sie die Provision ein (null oder mehr).",
+  "fr": "Saisissez la commission, zéro ou plus.",
+  "it": "Inserisci la provvigione, zero o più."
+ },
+ "Projects.errors.percentRange": {
+  "en": "A percent is between 0 and 100.",
+  "ar": "النسبة بين 0 و100.",
+  "de": "Ein Prozentsatz liegt zwischen 0 und 100.",
+  "fr": "Un pourcentage est compris entre 0 et 100.",
+  "it": "Una percentuale è compresa tra 0 e 100."
+ }
+}

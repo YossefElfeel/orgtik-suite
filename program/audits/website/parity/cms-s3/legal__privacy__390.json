@@ -1,0 +1,20 @@
+{
+  "route": "/legal#/privacy",
+  "width": 390,
+  "rendered": true,
+  "errors": [],
+  "text": "Skip to content\nView project\nEN\nMenu\nLEGAL & SITE INFORMATION\nClear information.\nOne place to find it.\nFind company details, privacy information and terms, or use the sitemap to explore every part of OrgTik.\nImprint\nPrivacy policy\nTerms and conditions\nSitemap\n(01)\nLEGAL\nPrivacy policy\nA structured placeholder for owner-reviewed privacy wording.\nData controller\nThe legal data-controller identity and contact details must be supplied and reviewed before publication.\nData in this preview\nThe frontend demonstrations do not submit contact, account, roadmap, or plan information to a server.\nFinal policy\nPurposes, legal bases, third parties, retention, rights, transfers, and cookie details require approved source wording.\nTemplate text pending owner and legal review before publication.\nBack to top\nMake the next move matter.\nStrategy, design, and technology brought together around one clear ambition: moving your business forward.\nTalk to us\nExplore\nSoftware\nServices\nSelected work\nInsights\nAbout OrgTik\nStart here\nBuild a software plan\nTell us about your project\nRoadmap\nSitemap\nMade in Switzerland\n© 2026 OrgTik.\nIndependent digital partner\nStrategy. Design. Technology.",
+  "headings": [
+    "h1 Clear information. One place to find it.",
+    "h2 Privacy policy",
+    "h3 Data controller",
+    "h3 Data in this preview",
+    "h3 Final policy",
+    "h2 Make the next move matter.",
+    "h3 Explore",
+    "h3 Start here"
+  ],
+  "aria": "- link \"Skip to content\":\n- text: View project\n- banner:\n  - link \"OrgTik\":\n    - img \"OrgTik\"\n  - button \"Language, English\": EN\n  - button \"Open menu\": Menu\n- main:\n  - paragraph: Legal & site information\n  - heading \"Clear information. One place to find it.\" [level=1]\n  - paragraph: Find company details, privacy information and terms, or use the sitemap to explore every part of OrgTik.\n  - tablist \"Legal documents\":\n    - tab \"Imprint\"\n    - tab \"Privacy policy\" [selected]\n    - tab \"Terms and conditions\"\n    - tab \"Sitemap\"\n  - text: (01) Legal\n  - heading \"Privacy policy\" [level=2]\n  - paragraph: A structured placeholder for owner-reviewed privacy wording.\n  - heading \"Data controller\" [level=3]\n  - paragraph: The legal data-controller identity and contact details must be supplied and reviewed before publication.\n  - heading \"Data in this preview\" [level=3]\n  - paragraph: The frontend demonstrations do not submit contact, account, roadmap, or plan information to a server.\n  - heading \"Final policy\" [level=3]\n  - paragraph: Purposes, legal bases, third parties, retention, rights, transfers, and cookie details require approved source wording.\n  - text: Template text pending owner and legal review before publication.\n- contentinfo:\n  - link \"OrgTik home\":\n    - img \"OrgTik\"\n  - link \"Back to top\":\n  - heading \"Make the next move matter.\" [level=2]:\n    - text: Make the next move\n    - emphasis: matter.\n  - paragraph: \"Strategy, design, and technology brought together around one clear ambition: moving your business forward.\"\n  - button \"Talk to us\"\n  - navigation:\n    - heading \"Explore\" [level=3]\n    - link \"Software\":\n    - link \"Services\":\n    - link \"Selected work\":\n    - link \"Insights\":\n    - link \"About OrgTik\":\n    - heading \"Start here\" [level=3]\n    - link \"Build a software plan\":\n    - link \"Tell us about your project\":\n    - link \"Roadmap\":\n    - link \"Sitemap\":\n  - text: Made in Switzerland © 2026 OrgTik. Independent digital partner Strategy. Design. Technology.",
+  "title": "legal | OrgTik",
+  "url": "/legal/privacy"
+}

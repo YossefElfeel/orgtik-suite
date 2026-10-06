@@ -1,0 +1,72 @@
+{
+  "Workspace": {
+    "switchLabel": "Workspace: {name}. Switch workspace",
+    "yourWorkspaces": "Your workspaces",
+    "roles": {
+      "owner": "Owner",
+      "admin": "Admin",
+      "member": "Member",
+      "guest": "Guest"
+    },
+    "nav": {
+      "tools": "Tools and plans",
+      "team": "Team",
+      "services": "Services",
+      "support": "Support",
+      "notifications": "Notifications",
+      "billingSection": "Billing",
+      "subscriptions": "Subscriptions",
+      "invoices": "Invoices",
+      "paymentMethods": "Payment methods",
+      "billingDetails": "Billing details",
+      "settingsSection": "Workspace",
+      "workspaceSettings": "Workspace settings",
+      "adminSection": "OrgTik administration"
+    },
+    "banner": {
+      "suspended": {
+        "title": "This workspace is suspended",
+        "body": "Nothing can be changed until it's reactivated. Contact support to sort it out."
+      },
+      "read_only": {
+        "title": "{tool} is read-only",
+        "body": "The renewal wasn't paid, so your team can view but not change anything in {tool}. Pay to unlock it."
+      },
+      "payment_failed": {
+        "title": "The {tool} renewal didn't go through",
+        "body": "Update your card or pay by {date} to keep full access."
+      },
+      "trial_ending": {
+        "title": "Your {tool} trial ends on {date}",
+        "body": "Choose a plan to keep using it without a break."
+      },
+      "beta_billing": {
+        "title": "{tool} is in beta",
+        "body": "Paid plans start when it goes live. The code {coupon} gives early users a discount."
+      },
+      "price_change": {
+        "title": "The {tool} price changes on {date}",
+        "body": "Your current price stays until then. See what changes."
+      },
+      "downgrade_scheduled": {
+        "title": "{tool} moves to a lower plan on {date}",
+        "body": "Until then you keep everything in your current plan."
+      },
+      "actions": {
+        "pay_now": "Pay now",
+        "choose_plan": "Choose a plan",
+        "view_plans": "See plans",
+        "details": "See details",
+        "cancel_downgrade": "Keep my plan",
+        "contact_support": "Contact support"
+      }
+    },
+    "gate": {
+      "title": "This page is for the workspace {role}",
+      "body": "Your role in {name} doesn't include it. Ask the owner if you need it.",
+      "toHome": "Back to home",
+      "failedTitle": "Your workspace couldn't be loaded",
+      "failedBody": "Check your connection and try again."
+    }
+  }
+}

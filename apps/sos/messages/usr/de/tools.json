@@ -1,0 +1,296 @@
+{
+  "Tools": {
+    "home": {
+      "title": "Ihre Tools",
+      "allTools": "Alle Tools und Tarife",
+      "otherApps": "Weitere Apps, die Sie öffnen können.",
+      "apps": {
+        "platform_admin": "OrgTik-Verwaltung"
+      }
+    },
+    "line": {
+      "daysLeft": "{count, plural, =0 {endet heute} one {noch # Tag} other {noch # Tage}}",
+      "freePlan": "Kostenloser Tarif",
+      "paymentDue": "Zahlung fällig",
+      "cancelling": "Endet bei Verlängerung"
+    },
+    "actions": {
+      "open": "Öffnen",
+      "seePlans": "Tarife ansehen",
+      "choosePlan": "Tarif wählen",
+      "startTrial": "{days} Tage kostenlos testen",
+      "payNow": "Jetzt bezahlen",
+      "askOwner": "Bitten Sie die Inhaberin oder den Inhaber des Arbeitsbereichs, es zu abonnieren.",
+      "askOwnerToPay": "Bitten Sie die Inhaberin oder den Inhaber des Arbeitsbereichs, zu bezahlen und es freizuschalten.",
+      "askAdmin": "Bitten Sie eine Admin-Person des Arbeitsbereichs um Zugriff.",
+      "joinWaitlist": "Auf die Warteliste",
+      "joinedWaitlist": "Sie stehen auf der Warteliste für {tool}. Wir melden uns zum Start.",
+      "onWaitlist": "Sie stehen auf der Warteliste"
+    },
+    "catalog": {
+      "title": "Tools und Tarife",
+      "description": "Alle OrgTik-Tools und was sie {workspace} kosten, in {currency}.",
+      "customPlan": "Individuellen Tarif anfragen",
+      "ownerBuys": "Nur die Inhaberin oder der Inhaber des Arbeitsbereichs kann Testphasen starten und Tarife kaufen. Ansehen können Sie hier alles.",
+      "included": "In jedem Arbeitsbereich enthalten",
+      "from": "Ab <price>{amount}</price> pro Monat",
+      "fromPerUser": "Ab <price>{amount}</price> pro Person und Monat",
+      "trial": "{days} Tage kostenlos testen",
+      "free": "Kostenloser Tarif verfügbar",
+      "onRequest": "Preis auf Anfrage",
+      "empty": "Noch keine Tools",
+      "failed": "Die Tools konnten nicht geladen werden"
+    },
+    "plans": {
+      "title": "Tarife",
+      "pricesFor": "Preise pro Person gelten für {count, plural, one {# Person} other {# Personen}} in Ihrem Arbeitsbereich, in {currency}.",
+      "cycle": "Abrechnungszeitraum",
+      "monthly": "Monatlich",
+      "yearly": "Jährlich",
+      "yearlySave": "Jährlich · {pct} % sparen",
+      "current": "Ihr Tarif",
+      "currentTrial": "In der Testphase",
+      "recommended": "Empfohlen",
+      "free": "Kostenlos",
+      "noPrice": "Noch kein Preis in Ihrer Währung",
+      "per": {
+        "month": "pro Monat",
+        "year": "pro Jahr"
+      },
+      "perUser": {
+        "month": "pro Person und Monat",
+        "year": "pro Person und Jahr"
+      },
+      "seatsTotal": {
+        "month": "{count, plural, one {# Person} other {# Personen}}: <total>{amount}</total> pro Monat",
+        "year": "{count, plural, one {# Person} other {# Personen}}: <total>{amount}</total> pro Jahr"
+      },
+      "yearlySaving": "Sie sparen {pct} % gegenüber monatlicher Zahlung",
+      "minSeats": "Mindestens {count, plural, one {# Person} other {# Personen}}",
+      "whatYouGet": "Was {plan} enthält",
+      "included": "enthalten",
+      "notIncluded": "nicht enthalten",
+      "unlimited": "{feature}: unbegrenzt",
+      "choose": "{plan} wählen",
+      "startTrial": "{days} Tage kostenlos testen",
+      "youHaveIt": "Das ist Ihr aktueller Tarif.",
+      "toFree": "Den Wechsel zum kostenlosen Tarif nehmen Sie unter <link>Abonnements</link> vor.",
+      "askOwner": "Bitten Sie die Inhaberin oder den Inhaber des Arbeitsbereichs, diesen Tarif zu wählen.",
+      "ownerOnly": "Nur die Inhaberin oder der Inhaber von {workspace} kann Testphasen starten und Tarife kaufen. Fragen Sie dort nach, wenn Sie einen brauchen.",
+      "customHint": "Mehr Personen oder mehrere Tools in einem Vertrag? <link>Individuellen Tarif anfragen</link>.",
+      "onTrial": "Ihre Testphase für {tool} endet am {date} ({count, plural, =0 {das ist heute} one {noch # Tag} other {noch # Tage}})",
+      "onTrialBody": "Wählen Sie einen Tarif, um ohne Unterbrechung weiterzuarbeiten.",
+      "trialUsedNote": "Dieser Arbeitsbereich hatte bereits eine Testphase für {tool}. Pro Tool gibt es eine Testphase je Arbeitsbereich.",
+      "trialUsedTitle": "Dieser Arbeitsbereich hatte bereits eine Testphase für {tool}",
+      "trialUsedBody": "Pro Tool gibt es eine kostenlose Testphase je Arbeitsbereich. Es hat sich nichts geändert; wählen Sie einen Tarif, um weiterzumachen.",
+      "trialFailed": "Die Testphase wurde nicht gestartet",
+      "trialStarted": "Ihre Testphase für {tool} läuft. Sie endet am {date}.",
+      "trialConfirmTitle": "{days} Tage {tool} {plan} testen?",
+      "trialConfirmBody": "Bis {date} kostenlos, ohne Karte.",
+      "trialThenFree": "Danach wechselt {tool} in den kostenlosen Tarif, wenn Sie keinen Tarif wählen.",
+      "trialThenStop": "Danach endet {tool}, wenn Sie keinen Tarif wählen.",
+      "oneTrial": "Pro Tool gibt es eine Testphase je Arbeitsbereich.",
+      "trialConfirm": "Testphase starten",
+      "cancel": "Abbrechen",
+      "comingSoon": "{tool} kommt bald",
+      "comingSoonBody": "Tragen Sie sich in die Warteliste ein, und wir melden uns zum Start.",
+      "noPlans": "Hier sind noch keine Tarife zu kaufen",
+      "noPlansBody": "Dieses Tool gibt es auf Anfrage. Fragen Sie einen individuellen Tarif an, und wir senden Ihnen ein Angebot.",
+      "notFound": "Dieses Tool gibt es nicht",
+      "backToTools": "Zurück zu Tools und Tarifen",
+      "failed": "Die Tarife konnten nicht geladen werden"
+    },
+    "features": {
+      "general": {
+        "users": {
+          "name": "Personen",
+          "limit": "{value, plural, one {# Person} other {# Personen}}"
+        },
+        "custom_roles": {
+          "name": "Eigene Rollen"
+        },
+        "audit_days": {
+          "name": "Prüfprotokoll",
+          "limit": "Prüfprotokoll für {value, plural, one {# Tag} other {# Tage}}"
+        }
+      },
+      "tasks": {
+        "projects": {
+          "name": "Projekte",
+          "limit": "{value, plural, one {# Projekt} other {# Projekte}}"
+        },
+        "guests": {
+          "name": "Gäste",
+          "limit": "{value, plural, =0 {Keine Gäste} one {# Gast} other {# Gäste}}"
+        },
+        "automations": {
+          "name": "Automatisierungen"
+        }
+      },
+      "files": {
+        "storage_gb": {
+          "name": "Speicher",
+          "limit": "{value} GB Speicher"
+        },
+        "share_links": {
+          "name": "Freigabelinks"
+        }
+      },
+      "chat": {
+        "history_days": {
+          "name": "Nachrichtenverlauf",
+          "limit": "Nachrichtenverlauf für {value, plural, one {# Tag} other {# Tage}}"
+        },
+        "meetings": {
+          "name": "Meetings und Anrufe"
+        }
+      },
+      "hr": {
+        "employees": {
+          "name": "Mitarbeiter",
+          "limit": "{value, plural, one {# Mitarbeiter} other {# Mitarbeiter}}"
+        },
+        "payroll": {
+          "name": "Lohnabrechnung"
+        }
+      },
+      "crm": {
+        "contacts": {
+          "name": "Kontakte",
+          "limit": "{value, plural, one {# Kontakt} other {# Kontakte}}"
+        },
+        "pipelines": {
+          "name": "Pipelines",
+          "limit": "{value, plural, one {# Pipeline} other {# Pipelines}}"
+        }
+      },
+      "marketing": {
+        "channels": {
+          "name": "Kanäle",
+          "limit": "{value, plural, one {# Kanal} other {# Kanäle}}"
+        },
+        "ads": {
+          "name": "Anzeigen"
+        }
+      }
+    },
+    "checkout": {
+      "title": "Kasse",
+      "description": "Zahlung für {workspace}.",
+      "toolsCrumb": "Tools und Tarife",
+      "emptyTitle": "Noch nichts zu bezahlen",
+      "emptyBody": "Wählen Sie zuerst einen Tarif und kommen Sie dann zum Bezahlen hierher.",
+      "toTools": "Tools und Tarife ansehen",
+      "cantBuyTitle": "Dieser Tarif kann hier nicht gekauft werden",
+      "order": "Ihre Bestellung",
+      "lineName": "{tool} · {plan}",
+      "perSeat": {
+        "monthly": "<unit>{amount}</unit> × {count, plural, one {# Person} other {# Personen}}, monatliche Abrechnung",
+        "yearly": "<unit>{amount}</unit> × {count, plural, one {# Person} other {# Personen}}, jährliche Abrechnung"
+      },
+      "billed": {
+        "monthly": "Monatliche Abrechnung",
+        "yearly": "Jährliche Abrechnung"
+      },
+      "credit": "Gutschrift für den ungenutzten Teil Ihres aktuellen Tarifs",
+      "alreadyOnPlan": "{tool} läuft bereits in diesem Tarif. Erneutes Bezahlen startet heute einen neuen Zeitraum; der ungenutzte Teil des aktuellen wird gutgeschrieben.",
+      "codeTitle": "Rabattcode",
+      "codeLabel": "Code",
+      "apply": "Einlösen",
+      "codeApplied": "Code <c>{code}</c> eingelöst",
+      "removeCode": "Rabattcode entfernen",
+      "summary": "Übersicht",
+      "subtotal": "Tarife",
+      "creditIncluded": "Gutschrift",
+      "bundle": "{name} ({pct} % Rabatt)",
+      "coupon": "Code <c>{code}</c>",
+      "tax": "Steuer: <c>{label}</c>",
+      "noTax": "Steuer",
+      "total": "Gesamt",
+      "taxUndecided": "Wie die Steuer bei Preisen angezeigt wird, ist noch nicht entschieden (G-12). Diese Summe rechnet sie auf die Tarifpreise auf; die Darstellung kann sich bis zum Start ändern.",
+      "paymentMethod": "Bezahlen mit",
+      "default": "(Standard)",
+      "expires": "Gültig bis {date}",
+      "noMethods": "Noch keine Karte, mit der Sie bezahlen können. Abgelaufene Karten werden nicht angeboten.",
+      "addMethod": "Zahlungsmethode hinzufügen",
+      "billingName": "Rechnungsname",
+      "billingNameHelp": "Die Firma oder Person, auf die die Rechnung lautet.",
+      "nameRequired": "Geben Sie den Rechnungsnamen ein; die Rechnung braucht ihn.",
+      "currencyLock": "Das ist die erste Zahlung des Arbeitsbereichs: Sie legt die Abrechnungswährung auf {currency} fest. Danach lässt sie sich nur noch über den Support ändern.",
+      "failedTitle": "Die Zahlung ist nicht durchgegangen",
+      "failedBody": "Es hat sich nichts geändert: Es wurde kein Tarif gekauft, und Ihre Tools sind wie vorher. Wählen Sie eine andere Karte oder fügen Sie eine hinzu und versuchen Sie es erneut.",
+      "declined": "Die Bank hat die Karte abgelehnt.",
+      "notPaidTitle": "Noch nicht bezahlt",
+      "pay": "{total} bezahlen",
+      "renews": {
+        "monthly": "Verlängert sich monatlich zum selben Preis, bis Sie ihn ändern oder kündigen.",
+        "yearly": "Verlängert sich jährlich zum selben Preis, bis Sie ihn ändern oder kündigen."
+      },
+      "doneTitle": "Zahlung erhalten",
+      "doneBody": "{tool} läuft jetzt im Tarif {plan}.",
+      "doneBodyShort": "Ihr Tarif ist aktiv.",
+      "invoiceNumber": "Rechnung",
+      "paid": "Bezahlt",
+      "whereInvoice": "Die Rechnung finden Sie jederzeit unter <link>Abrechnung › Rechnungen</link>.",
+      "openTool": "{tool} öffnen",
+      "toHome": "Zurück zur Startseite"
+    },
+    "custom": {
+      "title": "Individueller Tarif",
+      "description": "Für Bedarf, den die Preisliste nicht abdeckt: viele Personen, mehrere Tools in einem Vertrag, besondere Konditionen. Wir antworten mit einem Angebot.",
+      "formTitle": "Individuellen Tarif anfragen",
+      "formBody": "Sagen Sie uns, was Sie brauchen. Das OrgTik-Team antwortet mit einem Angebot, meist innerhalb von zwei Werktagen.",
+      "tools": "Tools",
+      "toolsRequired": "Wählen Sie mindestens ein Tool.",
+      "seats": "Anzahl Personen",
+      "seatsHelp": "Alle, die die Tools nutzen, ohne Gäste.",
+      "seatsRequired": "Geben Sie mindestens 1 Person ein.",
+      "notes": "Sonstiges",
+      "notesHelp": "Standorte, Vertragsbedingungen, eine Frist.",
+      "send": "Anfrage senden",
+      "sent": "Anfrage gesendet. Wir antworten mit einem Angebot.",
+      "yourRequests": "Ihre Anfragen",
+      "summary": "{seats, plural, one {# Person} other {# Personen}} · {cycle} · angefragt am {date}",
+      "state": {
+        "new": "Wartet auf ein Angebot",
+        "quoted": "Angebot zu prüfen",
+        "accepted": "Angenommen",
+        "declined": "Abgelehnt",
+        "expired": "Angebot abgelaufen"
+      },
+      "quote": "Angebot",
+      "validUntil": "Gültig bis {date}",
+      "expiredOn": "Abgelaufen am {date}",
+      "waiting": "Wir bereiten das Angebot vor.",
+      "accept": "Angebot annehmen",
+      "acceptTitle": "Dieses Angebot annehmen?",
+      "acceptImpact": "OrgTik richtet den Tarif für {seats, plural, one {# Person} other {# Personen}} ein, Abrechnung {cycle}, und sendet die Rechnung über {amount}.",
+      "accepted": "Angebot angenommen. Wir richten den Tarif ein und senden die Rechnung.",
+      "acceptedBody": "Angenommen. OrgTik richtet den Tarif ein und sendet die Rechnung.",
+      "quoteExpired": "Dieses Angebot ist abgelaufen. Senden Sie eine neue Anfrage für ein aktuelles Angebot.",
+      "emptyTitle": "Noch keine Anfragen",
+      "emptyBody": "Ihre Anfragen erscheinen hier mit ihren Angeboten.",
+      "failed": "Ihre Anfragen konnten nicht geladen werden"
+    },
+    "errors": {
+      "general": "Etwas ist schiefgelaufen. Versuchen Sie es gleich noch einmal.",
+      "offline": "Sie scheinen offline zu sein. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
+      "forbidden": "Ihre Rolle in diesem Arbeitsbereich erlaubt das nicht. Fragen Sie die Inhaberin oder den Inhaber.",
+      "suspended": "Dieser Arbeitsbereich ist gesperrt; es lässt sich nichts ändern. Wenden Sie sich an den Support.",
+      "trial_used": "Dieser Arbeitsbereich hatte bereits eine Testphase für dieses Tool.",
+      "wrong_state": "Im aktuellen Zustand des Tools geht das nicht. Laden Sie die Seite neu.",
+      "payment_failed": "Die Zahlung ist nicht durchgegangen. Es hat sich nichts geändert.",
+      "expired": "Das ist abgelaufen.",
+      "not_found": "Das gibt es nicht mehr. Laden Sie die Seite neu.",
+      "coupon_invalid": "Diesen Code gibt es nicht, oder er ist nicht aktiv.",
+      "coupon_expired": "Dieser Code ist abgelaufen.",
+      "coupon_used_up": "Dieser Code wurde so oft eingelöst wie erlaubt und gilt nicht mehr.",
+      "coupon_not_applicable": "Dieser Code gilt nicht für den Tarif, den Sie kaufen.",
+      "coupon_currency": "Dieser Code gilt nicht in der Währung Ihres Arbeitsbereichs.",
+      "no_trial": "Dieser Tarif hat keine kostenlose Testphase.",
+      "no_price": "Dieser Tarif hat noch keinen Preis in Ihrer Währung.",
+      "mismatch": "Dieser Tarif hat einen Preis in einer anderen Währung als Ihr Arbeitsbereich.",
+      "paymentMethodId": "Wählen Sie eine Karte zum Bezahlen."
+    }
+  }
+}

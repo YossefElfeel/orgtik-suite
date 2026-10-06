@@ -1,0 +1,2685 @@
+{
+  "createUpdateEmployee": {
+    "title": {
+      "create": "Mitarbeiter anlegen",
+      "edit": "Mitarbeiter bearbeiten"
+    },
+    "addEmployee": "Mitarbeiter hinzufügen",
+    "editEmployee": "Mitarbeiter bearbeiten",
+    "stepLabel": "Schritt {current} von {total}",
+    "nav": {
+      "back": "Zurück",
+      "next": "Weiter",
+      "submit": "Mitarbeiter anlegen",
+      "save": "Änderungen speichern",
+      "close": "Schließen"
+    },
+    "avatar": {
+      "upload": "Foto hochladen",
+      "change": "Foto ändern",
+      "delete": "Foto löschen",
+      "deleteTitle": "Foto entfernen?",
+      "deleteImpact": "Stattdessen erscheinen überall in der Suite die Initialen.",
+      "uploading": "Foto wird hochgeladen...",
+      "fallbackName": "Mitarbeiter"
+    },
+    "errors": {
+      "passwordRequired": "Passwort ist erforderlich und muss mindestens 6 Zeichen lang sein",
+      "invalidPhoneNumber": "Ungültiges Telefonnummernformat",
+      "invalidPostCode": "Postleitzahl muss 5-stellig sein",
+      "postCodeFor": "Eine Postleitzahl in {country} sieht so aus: {example}.",
+      "postCode": "Geben Sie eine gültige Postleitzahl ein.",
+      "firstNameRequired": "Vorname ist erforderlich",
+      "lastNameRequired": "Nachname ist erforderlich",
+      "passwordMin": "Das Passwort muss mindestens 6 Zeichen lang sein",
+      "birthDateRequired": "Geburtsdatum ist erforderlich",
+      "phoneRequired": "Telefonnummer ist erforderlich",
+      "invalidEmail": "Ungültige E-Mail-Adresse",
+      "genderRequired": "Geschlecht ist erforderlich",
+      "nationalityRequired": "Staatsangehörigkeit ist erforderlich",
+      "accommodationRequired": "Unterkunftsart ist erforderlich",
+      "postCodeRequired": "Postleitzahl ist erforderlich",
+      "countryRequired": "Land ist erforderlich",
+      "cityRequired": "Ort ist erforderlich",
+      "addressRequired": "Adresse ist erforderlich",
+      "nationalIdRequired": "Ausweisnummer ist erforderlich",
+      "jobTitleRequired": "Berufsbezeichnung ist erforderlich",
+      "departmentRequired": "Abteilung ist erforderlich",
+      "employeeTypeRequired": "Beschäftigungsart ist erforderlich",
+      "experienceLevelRequired": "Erfahrungsstufe ist erforderlich",
+      "statusRequired": "Status ist erforderlich",
+      "workTypeRequired": "Arbeitsmodell ist erforderlich",
+      "joinDateRequired": "Eintrittsdatum ist erforderlich",
+      "bankNameRequired": "Name der Bank ist erforderlich",
+      "accountNumberRequired": "Kontonummer ist erforderlich",
+      "accountHolderRequired": "Kontoinhaber ist erforderlich",
+      "ibanRequired": "IBAN ist erforderlich",
+      "invalidIban": "Ungültiges IBAN-Format",
+      "instapayNumberRequired": "Instapay-Nummer ist erforderlich",
+      "invalidEgyptianPhone": "Ungültiges Format für eine ägyptische Telefonnummer (z. B. +2012... oder 012...)",
+      "walletNameRequired": "Wallet ist erforderlich",
+      "baseSalaryRequired": "Grundgehalt ist erforderlich",
+      "contractTypeRequired": "Vertragsart ist erforderlich",
+      "startDateRequired": "Startdatum ist erforderlich",
+      "noticePeriodRequired": "Kündigungsfrist ist erforderlich",
+      "sectionTitleRequired": "Abschnittstitel ist erforderlich",
+      "sectionContentRequired": "Inhalt ist erforderlich",
+      "contractSectionsRequired": "Mindestens ein Vertragsabschnitt ist erforderlich",
+      "annualLeaveRequired": "Jahresurlaub ist erforderlich",
+      "casualLeaveRequired": "Sonderurlaub ist erforderlich",
+      "sickLeaveRequired": "Krankheitstage sind erforderlich",
+      "unpaidLeaveRequired": "Regelung für unbezahlten Urlaub ist erforderlich",
+      "noEmployeeId": "Dieser Mitarbeiter wurde noch nicht angelegt. Gehen Sie zurück zum ersten Schritt und speichern Sie ihn."
+    },
+    "steps": {
+      "personal": {
+        "nav": "Persönliche Daten",
+        "heading": "Persönliche Daten",
+        "description": "Diese Informationen helfen uns, Ihre Identität zu bestätigen und die notwendigen Schritte zur Erfassung Ihrer persönlichen Daten abzuschließen.",
+        "addressHeading": "Wohnadresse",
+        "addressDescription": "Diese muss mit der Adresse auf Ihrem amtlichen Ausweis übereinstimmen.",
+        "accommodationHeading": "Unterkunftsart",
+        "accommodationDescription": "Diese muss mit der Adresse auf Ihrem amtlichen Ausweis übereinstimmen.",
+        "accommodationOptions": {
+          "company": {
+            "label": "Firmenunterkunft",
+            "description": "Vom Arbeitgeber gestellte Einheit"
+          },
+          "allowance": {
+            "label": "Wohnpauschale",
+            "description": "Monatliche Geldzulage"
+          },
+          "own": {
+            "label": "Eigene Unterkunft",
+            "description": "Keine Unterstützung durch das Unternehmen"
+          }
+        }
+      },
+      "employee": {
+        "nav": "Mitarbeiterdaten",
+        "heading": "Mitarbeiterdaten",
+        "description": "Diese Informationen helfen uns, Ihre Identität zu bestätigen und die notwendigen Schritte zur Erfassung Ihrer Mitarbeiterdaten abzuschließen.",
+        "skillsHeading": "Fähigkeiten",
+        "skillsDescription": "Diese Informationen helfen uns, Ihre Fähigkeiten zu bestätigen."
+      },
+      "bank": {
+        "nav": "Bankdaten",
+        "heading": "Bankdaten",
+        "description": "Bankdaten für Gehaltsabrechnung und Erstattungen.",
+        "instapay": "Instapay",
+        "instapayDescription": "Überweisungen erfolgen in Echtzeit über das InstaPay-Netzwerk der Zentralbank von Ägypten.",
+        "wallet": "Wallet-Informationen",
+        "walletDescription": "Diese Informationen helfen uns, Ihre Identität zu bestätigen und die notwendigen Schritte zur Erfassung Ihrer Finanzdaten abzuschließen."
+      },
+      "attachments": {
+        "nav": "Anhänge",
+        "heading": "Anhänge",
+        "description": "Laden Sie unterstützende Dokumente für Compliance und Onboarding hoch.",
+        "avatarHint": "Formelles Profilbild"
+      },
+      "salary": {
+        "nav": "Gehaltsdaten",
+        "heading": "Gehaltsdaten",
+        "description": "Diese Informationen helfen uns, Ihre Identität zu bestätigen und die notwendigen Schritte zur Erfassung Ihrer Gehaltsdaten abzuschließen."
+      },
+      "contract": {
+        "nav": "Vertrag",
+        "heading": "Vertrag",
+        "description": "Diese Informationen helfen uns, Ihre Identität zu bestätigen und die notwendigen Schritte zur Erfassung Ihrer Gehaltsdaten abzuschließen."
+      },
+      "daysOff": {
+        "nav": "Abwesenheitstage",
+        "heading": "Abwesenheitsinformationen",
+        "description": "Diese Informationen helfen uns, Ihre Identität zu bestätigen und die notwendigen Schritte zur Erfassung Ihrer Gehaltsdaten abzuschließen."
+      },
+      "permissions": {
+        "nav": "Berechtigungen",
+        "heading": "Berechtigungen",
+        "description": "Steuern Sie den Modulzugriff und die Aktionen, die dieser Mitarbeiter ausführen kann."
+      }
+    },
+    "fields": {
+      "birthDate": "Geburtsdatum",
+      "nationality": "Staatsangehörigkeit",
+      "password": "Passwort",
+      "addressLine1": "Straße",
+      "addressCity": "Stadt",
+      "addressState": "Land",
+      "addressPostal": "Postleitzahl",
+      "department": "Abteilung",
+      "departmentPlaceholder": "Abteilung auswählen",
+      "employmentTypePlaceholder": "Typ auswählen",
+      "bankName": "Bankname",
+      "accountHolder": "Kontoinhabername",
+      "accountNumber": "Kontonummer",
+      "iban": "IBAN",
+      "salaryChf": "Gehalt in CHF",
+      "bankCode": "Bankleitzahl",
+      "salaryCurrency": "Währung",
+      "basicSalary": "Grundgehalt",
+      "transportationAllowance": "Fahrtkostenzuschuss",
+      "housingAllowance": "Wohnzuschuss",
+      "otherAllowances": "Sonstige Zulagen",
+      "totalGross": "Bruttogesamt",
+      "socialSecurity": "Sozialversicherungsbeitrag",
+      "taxableIncome": "Steuerpflichtiges Einkommen",
+      "annualLeaveDays": "Jahresurlaub",
+      "casualLeaveDays": "Gelegenheitsurlaub",
+      "sickLeaveDays": "Krankheitsurlaub",
+      "unpaidLeave": "Unbezahlter Urlaub",
+      "unpaidLeavePlaceholder": "Richtlinie auswählen",
+      "contractAddsDays": "Vertragstage",
+      "totalDaysOff": "Abwesenheitstage insgesamt",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "phoneNumber": "Telefonnummer",
+      "email": "E-Mail",
+      "personalTaxId": "Persönliche Steuer-ID",
+      "gender": "Geschlecht",
+      "maritalStatus": "Familienstand",
+      "nationalId": "Personalausweisnummer",
+      "jobTitle": "Jobtitel",
+      "employeeType": "Mitarbeiterart",
+      "experienceLevel": "Erfahrungsstufe",
+      "manager": "Vorgesetzte(r)",
+      "status": "Status",
+      "employeeSkills": "Mitarbeiterfähigkeiten",
+      "workType": "Arbeitsart",
+      "joinDate": "Eintrittsdatum",
+      "baseSalary": "Grundgehalt",
+      "totalSalary": "Gesamtgehalt",
+      "insurance": "Versicherungsprozentsatz",
+      "tax": "Steuer",
+      "netSalary": "Nettogehalt",
+      "employeeCode": "Mitarbeiter-Code",
+      "contractType": "Vertragsart",
+      "contractStartDate": "Startdatum",
+      "contractEndDate": "Enddatum",
+      "trainingPeriod": "Einarbeitungszeit",
+      "noticePeriod": "Kündigungsfrist",
+      "contractBody": "Vertragstext",
+      "paymentType": "Zahlungsart",
+      "instapayNumber": "Registrierte Nummer",
+      "instapayAccountName": "Kontoname",
+      "instapayLinkedAccount": "Verknüpftes Konto (QR-Code-Link)",
+      "walletName": "Wallet-Name",
+      "walletPhoneNumber": "Telefonnummer",
+      "walletAccountName": "Kontoname",
+      "managerOptional": "Vorgesetzte(r) (optional)",
+      "paymentCycle": "Zahlungsrhythmus"
+    },
+    "placeholders": {
+      "fullName": "Name wie auf dem Ausweis",
+      "email": "Email@example.com",
+      "phone": "+1 234 567 890",
+      "nationality": "Land",
+      "address": "Straße",
+      "city": "Stadt",
+      "state": "Land auswählen",
+      "postal": "Postleitzahl",
+      "employeeCode": "Interne ID",
+      "position": "Rollenbezeichnung",
+      "branch": "Büro oder Standort",
+      "selectManager": "Vorgesetzte(n) auswählen",
+      "search": "Suchen…",
+      "skills": "Fähigkeit hinzufügen",
+      "searchSkills": "Fähigkeiten suchen…",
+      "bankName": "Rechtlicher Bankname",
+      "accountHolder": "Name des Kontoinhabers",
+      "accountNumber": "Inländische Kontonummer",
+      "iban": "Internationale Kontonummer",
+      "salaryChf": "Betrag in Schweizer Franken",
+      "bankCode": "Bankleitzahl",
+      "remotePolicy": "Optionale Hinweise zu Zeitzone oder hybridem Modell",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "password": "SicheresPasswort123!",
+      "personalTaxId": "xxxx-xxxx-xxxx",
+      "gender": "Geschlecht auswählen",
+      "maritalStatus": "Familienstand auswählen",
+      "nationalId": "Personalausweisnummer",
+      "jobTitle": "Jobtitel",
+      "department": "Abteilung",
+      "employeeType": "Typ auswählen",
+      "workType": "Arbeitsart auswählen",
+      "joinDate": "Datum auswählen",
+      "value": "Wert",
+      "percentage": "Prozentsatz (%)",
+      "instapayNumber": "(+02) 0105 352 245",
+      "instapayAccountName": "Ahmed mahmoud mohamed",
+      "instapayLinkedAccount": "Ahmed223@instapay",
+      "walletName": "Wallet auswählen",
+      "walletPhoneNumber": "(+02) 0105 352 245",
+      "walletAccountName": "Ahmed mahmoud mohamed",
+      "contractType": "Vertragsart auswählen",
+      "trainingPeriod": "Einarbeitungszeit auswählen",
+      "noticePeriod": "Kündigungsfrist auswählen",
+      "status": "Status auswählen",
+      "experienceLevel": "Erfahrungsstufe auswählen",
+      "paymentCycle": "Rhythmus auswählen",
+      "currency": "Währung auswählen",
+      "sectionTitle": "Abschnittstitel",
+      "sectionContent": "Inhalt hier eingeben..."
+    },
+    "options": {
+      "gender": {
+        "male": "Männlich",
+        "female": "Weiblich",
+        "other": "Divers"
+      },
+      "marital": {
+        "single": "Ledig",
+        "married": "Verheiratet",
+        "divorced": "Geschieden",
+        "widowed": "Verwitwet"
+      },
+      "employment": {
+        "fullTime": "Vollzeit",
+        "partTime": "Teilzeit",
+        "contract": "Vertrag",
+        "intern": "Praktikum"
+      },
+      "department": {
+        "engineering": "Entwicklung",
+        "hr": "Personalwesen",
+        "finance": "Finanzen",
+        "sales": "Vertrieb"
+      },
+      "weekday": {
+        "mon": "Mo",
+        "tue": "Di",
+        "wed": "Mi",
+        "thu": "Do",
+        "fri": "Fr",
+        "sat": "Sa",
+        "sun": "So"
+      },
+      "workType": {
+        "remote": "Remote",
+        "onSite": "Vor Ort",
+        "hybrid": "Hybrid"
+      },
+      "paymentTypes": {
+        "bank": "Bankdaten",
+        "instapay": "Instapay",
+        "wallet": "Wallet"
+      },
+      "wallets": {
+        "vodafone": "Vodafone Cash",
+        "orange": "Orange Cash",
+        "etisalat": "Etisalat Cash",
+        "we": "WE Pay"
+      },
+      "unpaidLeave": {
+        "allowed": "Erlaubt",
+        "notAllowed": "Nicht erlaubt"
+      },
+      "contractType": {
+        "permanent": "Unbefristet",
+        "fixed": "Befristet"
+      },
+      "trainingPeriod": {
+        "3months": "3 Monate",
+        "6months": "6 Monate"
+      },
+      "noticePeriod": {
+        "15days": "15 Tage",
+        "30days": "30 Tage",
+        "60days": "60 Tage",
+        "90days": "90 Tage"
+      },
+      "status": {
+        "active": "Aktiv",
+        "inactive": "Inaktiv",
+        "probation": "Probezeit",
+        "terminated": "Ausgeschieden"
+      },
+      "skills": {
+        "ui": "UI-Design",
+        "ux": "UX-Research",
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "hrOps": "HR-Administration"
+      },
+      "experienceLevel": {
+        "intern": "Praktikant",
+        "junior": "Junior",
+        "midLevel": "Mittlere Stufe",
+        "senior": "Senior",
+        "lead": "Lead",
+        "principal": "Principal"
+      },
+      "paymentCycle": {
+        "monthly": "Monatlich",
+        "biweekly": "Zweiwöchentlich",
+        "weekly": "Wöchentlich"
+      },
+      "amountType": {
+        "fixed": "Fester Betrag",
+        "percentage": "Prozentsatz (%)"
+      }
+    },
+    "attachments": {
+      "avatar": "Mitarbeiterfoto",
+      "avatarHint": "Formelles Profilbild",
+      "nationalId": "Personalausweis",
+      "nationalIdHint": "Staatlich ausgestellter Identifikationsnachweis",
+      "education": "Bildungsnachweis",
+      "educationHint": "Höchster relevanter Abschluss",
+      "cv": "Lebenslauf",
+      "cvHint": "Beruflicher Werdegang",
+      "identity": "Identität / Personalausweis",
+      "contract": "Arbeitsvertrag",
+      "certificate": "Bildung / Zeugnis",
+      "other": "Sonstiges / Lebenslauf",
+      "dropTitle": "Dateien hier ablegen",
+      "maxSizeHint": "Maximal zulässige Dateigröße: 20 MB",
+      "uploadCta": "Dateien hochladen",
+      "emptyHint": "Noch keine Dateien hinzugefügt. Legen Sie Dateien oben ab, um sie anzuhängen.",
+      "uploading": "{name} wird hochgeladen...",
+      "uploadingGroup": "Anhänge für {category} werden hochgeladen...",
+      "uploadingLabel": "Lade hoch...",
+      "removing": "Anhang wird entfernt...",
+      "saving": "Schritt wird gespeichert...",
+      "removeFile": "{name} entfernen",
+      "deleteTitle": "{name} löschen?",
+      "deleteImpact": "Die Datei wird aus den Unterlagen der Person entfernt.",
+      "deleteConfirm": "Datei löschen",
+      "pendingUpload": "(Upload ausstehend)"
+    },
+    "hints": {
+      "socialSecurity": "Gesetzliche Abzüge gegebenenfalls berücksichtigen.",
+      "taxableIncome": "Markieren, wenn Beträge der Lohnsteuer unterliegen."
+    },
+    "permissions": {
+      "enableHeading": "Optionen aktivieren",
+      "enableHelper": "Alle Module umschalten oder alle Berechtigungen auf einmal erteilen.",
+      "enableAll": "Alle Module aktivieren",
+      "selectAll": "Alle auswählen",
+      "actions": {
+        "read": "Lesen",
+        "write": "Schreiben",
+        "create": "Erstellen",
+        "delete": "Löschen"
+      },
+      "modules": {
+        "dashboard": "Dashboard",
+        "employee": "Mitarbeiter",
+        "attendance": "Anwesenheit & Abwesenheit",
+        "projects": "Projekte",
+        "recruitment": "Recruiting & Einstellung",
+        "tickets": "Tickets & Compliance",
+        "finance": "Finanzen & Dienstleistungen",
+        "departments": "Abteilungen",
+        "messaging": "Nachrichten"
+      }
+    },
+    "success": {
+      "title": "Erfolg",
+      "messageCreate": "Mitarbeiter wurde erfolgreich hinzugefügt.",
+      "messageEdit": "Mitarbeiter wurde erfolgreich aktualisiert.",
+      "primary": "Fertig"
+    },
+    "loading": "Wird geladen...",
+    "toasts": {
+      "creatingEmployee": "Mitarbeiter wird angelegt...",
+      "updatingEmployeeInfo": "Mitarbeiterdaten werden aktualisiert...",
+      "updatingPaymentInfo": "Zahlungsdaten werden aktualisiert...",
+      "updatingSalaryInfo": "Gehaltsdaten werden aktualisiert...",
+      "updatingContract": "Vertragsdaten werden aktualisiert...",
+      "sendingContract": "Vertrag wird zur Unterschrift gesendet...",
+      "updatingDaysOff": "Abwesenheitstage werden aktualisiert...",
+      "updatingPermissions": "Berechtigungen werden aktualisiert..."
+    },
+    "contract": {
+      "newClause": "Neue Klausel",
+      "endDateHint": "Nur bei befristetem Vertrag",
+      "addPoint": "Neuen Vertragspunkt hinzufügen",
+      "sendForSignature": "Zur Unterschrift senden",
+      "downloadPdf": "PDF herunterladen"
+    }
+  },
+  "employees": {
+    "title": "Mitarbeiterverzeichnis",
+    "export": "Exportieren",
+    "tabs": {
+      "people": "Mitarbeiterverzeichnis",
+      "org": "Organigramm"
+    },
+    "page": {
+      "allDepartments": "Alle Abteilungen",
+      "searchPlaceholder": "Suchen..."
+    },
+    "details": {
+      "notFound": "Mitarbeiter nicht gefunden",
+      "sections": {
+        "personal": "Persönliche Daten",
+        "employee": "Mitarbeiterdaten",
+        "activity": "Aktivität",
+        "attachment": "Anhänge",
+        "bank": "Bankdaten",
+        "instapay": "Instapay-Daten",
+        "wallet": "Wallet-Daten",
+        "finance": "Finanzen",
+        "salary": "Gehaltsdaten",
+        "timeOff": "Abwesenheit & Anwesenheit",
+        "skills": "Fähigkeiten",
+        "notes": "Notizen",
+        "payslips": "Lohnabrechnungen"
+      },
+      "activity": {
+        "allTime": "Gesamtzeit",
+        "entries": {
+          "created": "<who>{name}</who> hat erstellt: <what>{entity}</what>",
+          "assignedPeopleOn": "<who>{name}</who> hat Personen zugewiesen: <what>{entity}</what>",
+          "updatedStatusOf": "<who>{name}</who> hat den Status aktualisiert: <what>{entity}</what>",
+          "repliedOn": "<who>{name}</who> hat geantwortet: <what>{entity}</what>",
+          "requested": "<who>{name}</who> hat beantragt: <what>{entity}</what>",
+          "cancelled": "<who>{name}</who> hat storniert: <what>{entity}</what>",
+          "deleted": "<who>{name}</who> hat gelöscht: <what>{entity}</what>",
+          "posted": "<who>{name}</who> hat veröffentlicht: <what>{entity}</what>",
+          "scheduled": "<who>{name}</who> hat geplant: <what>{entity}</what>",
+          "updated": "<who>{name}</who> hat aktualisiert: <what>{entity}</what>",
+          "approved": "<who>{name}</who> hat genehmigt: <what>{entity}</what>",
+          "rejected": "<who>{name}</who> hat abgelehnt: <what>{entity}</what>"
+        },
+        "entities": {
+          "ticket": "Ticket",
+          "timeOffRequest": "Urlaubsantrag",
+          "employee": "Mitarbeiter",
+          "department": "Abteilung",
+          "job": "Stelle",
+          "meeting": "Meeting",
+          "settings": "Einstellungen",
+          "payrollBatch": "Lohnlauf"
+        }
+      },
+      "attachment": {
+        "upload": "Hochladen",
+        "delete": {
+          "title": "Anhang löschen",
+          "description": "Sind Sie sicher, dass Sie diesen Anhang löschen möchten?",
+          "confirm": "Löschen",
+          "cancel": "Abbrechen"
+        },
+        "success": {
+          "upload": "Anhang erfolgreich hochgeladen",
+          "delete": "Anhang erfolgreich gelöscht"
+        },
+        "error": {
+          "upload": "Anhang konnte nicht hochgeladen werden",
+          "delete": "Anhang konnte nicht gelöscht werden"
+        },
+        "deleting": "Wird gelöscht...",
+        "viewFile": "{name} ansehen",
+        "deleteFile": "{name} löschen"
+      },
+      "salary": {
+        "title": "Gehaltsdaten",
+        "upgradeHistory": "Gehaltsentwicklung",
+        "noHistory": "Noch keine Gehaltsentwicklung vorhanden.",
+        "bankAccount": "Bankkonto",
+        "columns": {
+          "date": "Datum",
+          "baseSalary": "Grundgehalt",
+          "totalSalary": "Gesamtgehalt",
+          "netSalary": "Nettogehalt"
+        },
+        "paymentMethod": "Zahlungsmethode"
+      },
+      "payslips": {
+        "title": "Lohnabrechnungen",
+        "empty": "Noch keine Lohnabrechnungen verfügbar.",
+        "columns": {
+          "period": "Zeitraum",
+          "periodRange": "Zeitraum",
+          "netPay": "Nettolohn",
+          "paidAt": "Bezahlt am",
+          "generatedAt": "Erstellt am",
+          "action": "Aktion"
+        }
+      },
+      "timeOff": {
+        "title": "Abwesenheit & Anwesenheit",
+        "attendance": "Anwesenheit",
+        "leaveBalances": "Urlaubs- und Abwesenheitskonten",
+        "noAttendance": "Noch keine Anwesenheitslogs vorhanden.",
+        "noLeave": "Noch keine Abwesenheitseinträge vorhanden.",
+        "labels": {
+          "paidTimeOff": "bezahlter Urlaub",
+          "pendingApproval": "ausstehende Genehmigung",
+          "booked": "gebucht",
+          "used": "genutzt",
+          "daysPerYear": "Tage pro Jahr",
+          "nationalHolidays": "gesetzliche Feiertage",
+          "inContract": "im Vertrag"
+        },
+        "subs": {
+          "availableToBook": "Buchbar",
+          "awaitingApproval": "Warte auf Genehmigung",
+          "used": "{count} T. genutzt",
+          "remainingBalance": "Verbleibendes Guthaben",
+          "currentQueue": "Aktuelle Warteschlange",
+          "takenDays": "Genommene Tage",
+          "inContract": "Im Vertrag",
+          "holidayList": "Feiertagsliste ansehen",
+          "totalContract": "Vertragstage insgesamt"
+        },
+        "columns": {
+          "dateFrom": "Von",
+          "dateTo": "Bis",
+          "startWork": "Arbeitsbeginn",
+          "endWork": "Arbeitsende",
+          "status": "Status",
+          "logHours": "Stunden",
+          "overtime": "Überstunden",
+          "action": "Aktion",
+          "leaveType": "Abwesenheitsart",
+          "duration": "Dauer",
+          "note": "Notiz"
+        },
+        "selectLeaveEntry": "Abwesenheitseintrag auswählen",
+        "values": {
+          "paidTimeOff": "{count, plural, one {# Tag bezahlter Urlaub} other {# Tage bezahlter Urlaub}}",
+          "pendingApproval": "{count, plural, one {# Tag wartet auf Genehmigung} other {# Tage warten auf Genehmigung}}",
+          "booked": "{count, plural, one {# Tag gebucht} other {# Tage gebucht}}",
+          "used": "{count, plural, one {# Tag genutzt} other {# Tage genutzt}}",
+          "daysPerYear": "{count, plural, one {# Tag pro Jahr} other {# Tage pro Jahr}}",
+          "nationalHolidays": "{count, plural, one {# gesetzlicher Feiertag} other {# gesetzliche Feiertage}}",
+          "inContract": "{count, plural, one {# Tag laut Vertrag} other {# Tage laut Vertrag}}"
+        }
+      },
+      "notes": {
+        "title": "Notizen",
+        "empty": "Noch keine Notizen für diesen Mitarbeiter.",
+        "toasts": {
+          "adding": "Notiz wird hinzugefügt",
+          "updating": "Notiz wird aktualisiert",
+          "deleting": "Notiz wird gelöscht"
+        },
+        "placeholder": "Notiz schreiben...",
+        "post": "Notiz speichern",
+        "update": "Aktualisieren",
+        "validation": {
+          "required": "Bitte geben Sie einen Notiztext ein",
+          "tooLong": "Die Notiz ist zu lang"
+        }
+      },
+      "loadingName": "Mitarbeiter wird geladen…",
+      "personal": {
+        "fullName": "Vollständiger Name"
+      }
+    },
+    "card": {
+      "joinedAt": "Eintritt am"
+    },
+    "orgChart": {
+      "zoomIn": "Vergrößern",
+      "zoomOut": "Verkleinern",
+      "fitView": "Ansicht anpassen",
+      "details": {
+        "title": "Mitarbeiterdetails",
+        "manager": "Vorgesetzte(r)",
+        "none": "Keine"
+      },
+      "assign": {
+        "title": "Vorgesetzte(n) zuweisen",
+        "description": "Wählen Sie eine(n) Vorgesetzte(n) für {name}",
+        "cancel": "Abbrechen",
+        "submit": "Zuweisen",
+        "selectPlaceholder": "Vorgesetzte(n) auswählen",
+        "noManagers": "Keine verfügbaren Vorgesetzten.",
+        "willReportTo": "{name} wird berichten an:"
+      },
+      "remove": {
+        "title": "Aus der Führung entfernen",
+        "description": "{name} von der aktuellen Führungskraft trennen?",
+        "confirm": "Entfernen",
+        "cancel": "Abbrechen"
+      },
+      "zoomLevel": "Zoomstufe"
+    },
+    "exportFile": "personen",
+    "exported": "{count, plural, one {# Person exportiert} other {# Personen exportiert}}",
+    "exportFailed": "Der Export hat nicht funktioniert. Versuchen Sie es erneut."
+  },
+  "employeeTable": {
+    "columns": {
+      "selectAll": "Alle Mitarbeiter auswählen",
+      "selectRow": "Zeile auswählen",
+      "employeeName": "Mitarbeitername",
+      "email": "E-Mail-Adresse",
+      "department": "Abteilung",
+      "jobTitle": "Jobtitel",
+      "jobType": "Beschäftigungsart",
+      "joinedDate": "Eintrittsdatum",
+      "action": "Aktion"
+    },
+    "tooltips": {
+      "edit": "Bearbeiten",
+      "delete": "Löschen"
+    },
+    "noDepartment": "Keine Abteilung",
+    "empty": "Keine Mitarbeiter gefunden.",
+    "delete": {
+      "title": "Mitarbeiter löschen",
+      "description": "Sind Sie sicher, dass Sie diesen Mitarbeiter löschen möchten?",
+      "softDeleteNote": "Bitte beachten: Dies ist ein Soft-Delete. Die Daten des Mitarbeiters bleiben erhalten, aber er wird nicht mehr in der aktiven Mitarbeiterliste angezeigt.",
+      "confirmationLabel": "Bitte geben Sie \"{text}\" ein, um das Löschen zu bestätigen",
+      "confirm": "Löschen",
+      "cancel": "Abbrechen",
+      "success": "Mitarbeiter erfolgreich gelöscht.",
+      "error": "Fehler beim Löschen des Mitarbeiters."
+    }
+  },
+  "ticketsTable": {
+    "columns": {
+      "selectAll": "Alle Tickets auswählen",
+      "selectRow": "Ticket auswählen",
+      "ticketId": "Ticket-ID",
+      "subject": "Betreff",
+      "assignTo": "Zugewiesen an",
+      "employeeName": "Mitarbeitername",
+      "createdDate": "Erstellungsdatum",
+      "emailAddress": "E-Mail-Adresse",
+      "status": "Status",
+      "action": "Aktion"
+    },
+    "tooltips": {
+      "viewDetails": "Details anzeigen",
+      "deleteTicket": "Ticket löschen"
+    }
+  },
+  "employeeDetails": {
+    "title": "Mitarbeiterdetails",
+    "header": {
+      "back": "Zurück",
+      "statusActive": "Aktiv",
+      "sendEmail": "E-Mail senden",
+      "metrics": {
+        "lastClockedIn": "Letzte Stempelung",
+        "lastMessaged": "Letzte Nachricht",
+        "employeeId": "Mitarbeiter-ID"
+      },
+      "metricsValues": {
+        "lastClockedIn": "Vor wenigen Sekunden",
+        "lastMessaged": "Vor 2 Tagen"
+      }
+    },
+    "sections": {
+      "contact": "Kontakt",
+      "employment": "Anstellung"
+    },
+    "fields": {
+      "workEmail": "Dienstliche E-Mail",
+      "personalEmail": "Private E-Mail",
+      "phone": "Telefon",
+      "department": "Abteilung",
+      "position": "Position",
+      "branch": "Niederlassung",
+      "reportingManager": "Vorgesetzte(r)",
+      "joinDate": "Eintrittsdatum",
+      "employmentType": "Beschäftigungsart"
+    },
+    "employeeId": "Mitarbeiter-ID"
+  },
+  "candidateDetails": {
+    "header": {
+      "back": "Zurück",
+      "appliedIn": "Beworben für",
+      "industry": "Branche",
+      "scheduleInterview": "Interview planen",
+      "sendEmail": "E-Mail senden",
+      "appliedDate": "Bewerbungsdatum"
+    },
+    "tabs": {
+      "personalInfo": "Persönliche Daten",
+      "resume": "Lebenslauf",
+      "hiringSteps": "Einstellungsschritte"
+    },
+    "about": {
+      "title": "Über den Kandidaten",
+      "readMore": "Mehr lesen",
+      "label": "Über",
+      "showLess": "Weniger anzeigen"
+    },
+    "personalInfo": {
+      "title": "Persönliche Daten",
+      "fullName": "Vollständiger Name",
+      "emailAddress": "E-Mail-Adresse",
+      "phoneNumber": "Telefonnummer",
+      "address": "Adresse",
+      "gender": "Geschlecht",
+      "nationality": "Staatsangehörigkeit",
+      "dateOfBirth": "Geburtsdatum"
+    },
+    "education": {
+      "title": "Ausbildung",
+      "university": "Universität",
+      "graduationDate": "Abschlussdatum",
+      "qualification": "Abschluss"
+    },
+    "jobApplication": {
+      "title": "Bewerbung",
+      "jobTitle": "Jobtitel",
+      "industry": "Branche",
+      "experienceLevel": "Erfahrungsstufe",
+      "experience": "Erfahrung",
+      "expectedSalary": "Gehaltsvorstellung",
+      "salary": "Gehalt",
+      "currentStage": "Aktuelle Phase",
+      "department": "Abteilung"
+    },
+    "skills": {
+      "title": "Fähigkeiten",
+      "candidateTitle": "Fähigkeiten des Kandidaten",
+      "empty": "Keine Fähigkeiten vorhanden."
+    },
+    "sidebar": {
+      "level": "Mittlere Stufe",
+      "notes": "Notizen",
+      "leaveNote": "Notiz hinterlassen",
+      "notesCount": "Notizen ({count})",
+      "loadingNotes": "Notizen werden geladen...",
+      "noNotes": "Noch keine Notizen.",
+      "leaveNotePlaceholder": "Notiz hinterlassen"
+    },
+    "scheduleInterviewDialog": {
+      "title": "Interview planen",
+      "trigger": "Interview planen",
+      "actions": {
+        "cancel": "Abbrechen",
+        "submit": "Interview planen",
+        "submitting": "Wird gesendet..."
+      },
+      "fields": {
+        "date": "Datum",
+        "datePlaceholder": "13. Nov. 2024",
+        "startTime": "Startzeit",
+        "startTimePlaceholder": "11:30",
+        "endTime": "Endzeit",
+        "endTimePlaceholder": "12:30",
+        "meetingLink": "Meeting-Link (optional)",
+        "meetingLinkPlaceholder": "Meeting-Link",
+        "selectDate": "Datum auswählen",
+        "selectStartTime": "Startzeit auswählen",
+        "selectEndTime": "Endzeit auswählen",
+        "meetingLinkLabel": "Meeting-Link",
+        "enterMeetingLink": "Meeting-Link eingeben",
+        "interviewWith": "Interview mit",
+        "interviewWithPlaceholder": "Namen der interviewenden Person eingeben",
+        "note": "Notiz",
+        "notePlaceholder": "Notiz zum Interview hinzufügen"
+      },
+      "validation": {
+        "dateRequired": "Datum ist erforderlich",
+        "startTimeRequired": "Startzeit ist erforderlich",
+        "endTimeRequired": "Endzeit ist erforderlich",
+        "interviewWithRequired": "Bitte geben Sie an, wer das Interview führt",
+        "meetingLinkInvalid": "Geben Sie einen gültigen Link ein, beginnend mit https://",
+        "noteRequired": "Notiz ist erforderlich",
+        "endAfterStart": "Die Endzeit muss nach der Startzeit liegen",
+        "noPastDate": "Sie können kein Datum und keine Uhrzeit in der Vergangenheit wählen"
+      }
+    }
+  },
+  "ticketDetails": {
+    "title": "Ticket-Details",
+    "labels": {
+      "ticketId": "Ticket-ID",
+      "ticketCreator": "Ticket-Ersteller",
+      "jobTitle": "Jobtitel",
+      "department": "Abteilung",
+      "email": "E-Mail",
+      "subject": "Betreff",
+      "status": "Status",
+      "createdAt": "Erstellt am"
+    }
+  },
+  "ticketDetailsPage": {
+    "title": "Ticket-Details"
+  },
+  "ticketsPage": {
+    "title": "Tickets",
+    "tabs": {
+      "supportTickets": "Support-Tickets",
+      "myTickets": "Meine Tickets"
+    },
+    "filters": {
+      "all": "Alle",
+      "open": "Offen",
+      "closed": "Geschlossen",
+      "inProgress": "In Bearbeitung"
+    },
+    "stats": {
+      "newTickets": {
+        "title": "Neue Tickets",
+        "delta": "{count, plural, one {{signed} neu seit letzter Woche} other {{signed} neu seit letzter Woche}}"
+      },
+      "openTickets": {
+        "title": "Offene Tickets",
+        "delta": "{count, plural, one {{signed} offen seit letzter Woche} other {{signed} offen seit letzter Woche}}"
+      },
+      "solvedTickets": {
+        "title": "Gelöste Tickets",
+        "delta": "{count, plural, one {{signed} gelöst seit letzter Woche} other {{signed} gelöst seit letzter Woche}}"
+      },
+      "totalTickets": {
+        "title": "Tickets gesamt",
+        "delta": "{count, plural, one {{signed} insgesamt seit letzter Woche} other {{signed} insgesamt seit letzter Woche}}"
+      }
+    }
+  },
+  "timeOffPage": {
+    "title": "Abwesenheit",
+    "metrics": {
+      "totalRequests": {
+        "title": "Anfragen insgesamt",
+        "subtitle": "Alle Abwesenheitsanträge"
+      },
+      "approved": {
+        "title": "Genehmigt",
+        "subtitle": "Genehmigte Anträge"
+      },
+      "pending": {
+        "title": "Ausstehend",
+        "subtitle": "Anträge, die auf eine Entscheidung warten"
+      },
+      "declined": {
+        "title": "Abgelehnt",
+        "subtitle": "Abgelehnte Anträge"
+      }
+    },
+    "filters": {
+      "all": "Alle",
+      "pending": "Ausstehend",
+      "approved": "Genehmigt",
+      "rejected": "Abgelehnt",
+      "cancelled": "Storniert"
+    }
+  },
+  "timeOffTable": {
+    "columns": {
+      "employee": "Mitarbeiter",
+      "department": "Abteilung",
+      "type": "Art",
+      "from": "Von",
+      "to": "Bis",
+      "duration": "Dauer",
+      "status": "Status",
+      "action": "Aktion"
+    },
+    "tooltips": {
+      "viewEdit": "Ansehen / Bearbeiten"
+    },
+    "duration": {
+      "days": "{count} Tag(e)",
+      "hours": "{count} Stunde(n)",
+      "daysCount": "{count, plural, one {# Tag} other {# Tage}}",
+      "hoursCount": "{count, plural, one {# Stunde} other {# Stunden}}"
+    },
+    "fallback": {
+      "na": "N/A"
+    }
+  },
+  "timeOffDialog": {
+    "title": "Abwesenheitsantrag",
+    "submitted": "Eingereicht",
+    "sections": {
+      "managerDecision": "Entscheidung Vorgesetzte(r)",
+      "hrDecision": "Entscheidung HR"
+    },
+    "fields": {
+      "leaveType": "Abwesenheitsart",
+      "dates": "Datum/Daten",
+      "duration": "Dauer",
+      "attachments": "Anhänge",
+      "noFileAdded": "Keine Datei hinzugefügt",
+      "noteReason": "Notiz / Grund",
+      "notePlaceholder": "Fügen Sie hier Ihre Entscheidungsnotiz ein...",
+      "note": "Notiz"
+    },
+    "actions": {
+      "approve": "Genehmigen",
+      "reject": "Ablehnen",
+      "submitDecision": "Entscheidung einreichen",
+      "cancel": "Abbrechen",
+      "changeDecision": "Entscheidung ändern"
+    },
+    "decision": {
+      "label": "Entscheidung: {status}",
+      "waitingForAction": "Warte auf Aktion...",
+      "noNotesProvided": "Keine Notizen vorhanden.",
+      "status": {
+        "approved": "Genehmigt",
+        "rejected": "Abgelehnt",
+        "pending": "Ausstehend"
+      },
+      "choose": "Wählen Sie zuerst Genehmigen oder Ablehnen.",
+      "tooLong": "Die Notiz darf höchstens 500 Zeichen lang sein."
+    },
+    "durations": {
+      "full_day": "Ganzer Tag",
+      "half_day": "Halber Tag",
+      "partial": "Teil des Tages",
+      "custom_hours": "Eigene Stunden"
+    }
+  },
+  "ticketStatusCard": {
+    "title": "Ticketstatus",
+    "updating": "Ticket wird aktualisiert",
+    "saveChanges": "Änderungen speichern",
+    "statusOptions": {
+      "open": "Offen",
+      "inProgress": "In Bearbeitung",
+      "closed": "Geschlossen"
+    },
+    "fields": {
+      "changeStatus": "Status ändern",
+      "selectStatus": "Status auswählen",
+      "department": "Abteilung",
+      "selectDepartment": "Abteilung auswählen",
+      "searchDepartments": "Abteilungen suchen...",
+      "assignTo": "Zuweisen an",
+      "selectAssignees": "Zuständige auswählen",
+      "searchPeople": "Personen suchen..."
+    },
+    "unnamedEmployee": "Mitarbeiter",
+    "validation": {
+      "statusRequired": "Status ist erforderlich"
+    }
+  },
+  "ticketActivity": {
+    "title": "Ticketaktivität",
+    "allTitle": "Alle Ticketaktivitäten",
+    "viewAll": "Alle Aktivitäten anzeigen",
+    "noActivity": "Noch keine Aktivitäten.",
+    "actions": {
+      "created": "hat dieses Ticket erstellt.",
+      "assigned": "hat zugewiesen",
+      "assignedUsers": "{count, plural, one {Benutzer} other {Benutzer}} zu diesem Ticket.",
+      "updatedStatusFrom": "hat Status geändert von",
+      "to": "zu",
+      "addedMessage": "hat eine Nachricht zu diesem Ticket hinzugefügt.",
+      "performedAction": "hat eine Aktion durchgeführt"
+    },
+    "unknownUser": "Unbekannter Benutzer"
+  },
+  "ticketThread": {
+    "loadingMore": "Laden...",
+    "loadMore": "Mehr laden",
+    "unknownUser": "Unbekannter Benutzer",
+    "ticketUser": "Ticket-Benutzer"
+  },
+  "addTicketDialog": {
+    "title": "Neues Ticket hinzufügen",
+    "trigger": "Neues Ticket hinzufügen",
+    "cancel": "Abbrechen",
+    "submit": "Neues Ticket hinzufügen",
+    "subjectLabel": "Ticketbetreff",
+    "subjectPlaceholder": "Ticketbetreff eingeben",
+    "departmentLabel": "Abteilung",
+    "departmentPlaceholder": "Abteilung wählen",
+    "assignToLabel": "Zuweisen an",
+    "assignToPlaceholder": "Mitarbeiter auswählen",
+    "descriptionLabel": "Ticketbeschreibung",
+    "attachmentLabel": "Anhang",
+    "sendingMessage": "Senden...",
+    "sendMessage": "Nachricht senden",
+    "validation": {
+      "subjectRequired": "Betreff ist erforderlich",
+      "departmentRequired": "Abteilung ist erforderlich",
+      "assigneeRequired": "Mindestens eine zuständige Person ist erforderlich",
+      "descriptionRequired": "Beschreibung ist erforderlich"
+    }
+  },
+  "subscriptions": {
+    "pageTitle": "Abonnements",
+    "stats": {
+      "totalSubscription": "Abonnements insgesamt",
+      "totalPrice": "Gesamtpreis"
+    }
+  },
+  "subscriptionsTable": {
+    "columns": {
+      "toolName": "Toolname",
+      "department": "Abteilung",
+      "amount": "Betrag",
+      "billing": "Abrechnung",
+      "status": "Status",
+      "action": "Aktion"
+    },
+    "tooltips": {
+      "edit": "Bearbeiten",
+      "delete": "Löschen"
+    },
+    "billingCycles": {
+      "weekly": "Wöchentlich",
+      "monthly": "Monatlich",
+      "quarterly": "Vierteljährlich",
+      "yearly": "Jährlich"
+    }
+  },
+  "subscriptionsSheet": {
+    "title": "Neues Abonnement hinzufügen",
+    "trigger": "Neues Abonnement hinzufügen",
+    "actions": {
+      "cancel": "Abbrechen",
+      "submit": "Hinzufügen"
+    },
+    "fields": {
+      "subscriptionTool": "Tool",
+      "subscriptionToolPlaceholder": "Figma",
+      "department": "Abteilung",
+      "departmentPlaceholder": "Abteilung auswählen",
+      "billing": "Abrechnung",
+      "billingPlaceholder": "Abrechnung eingeben",
+      "amount": "Betrag",
+      "amountPlaceholder": "Betrag eingeben",
+      "note": "Notiz",
+      "notePlaceholder": "Notiz eingeben",
+      "activation": "Aktivierung"
+    },
+    "options": {
+      "departments": {
+        "engineering": "Entwicklung",
+        "hr": "Personalwesen",
+        "finance": "Finanzen"
+      },
+      "billing": {
+        "monthly": "Monatlich",
+        "yearly": "Jährlich",
+        "oneTime": "Einmalig"
+      }
+    },
+    "validation": {
+      "subscriptionToolRequired": "Tool ist erforderlich",
+      "subscriptionToolMax": "Toolname darf höchstens 120 Zeichen lang sein",
+      "departmentRequired": "Abteilung ist erforderlich",
+      "billingRequired": "Abrechnungsart ist erforderlich",
+      "amountRequired": "Betrag ist erforderlich",
+      "amountInvalid": "Geben Sie einen gültigen Betrag ein",
+      "noteMax": "Notiz darf höchstens 2000 Zeichen lang sein"
+    }
+  },
+  "projectsPage": {
+    "filters": {
+      "all": "Alle Status",
+      "inProgress": "In Bearbeitung",
+      "done": "Abgeschlossen",
+      "rejected": "Abgelehnt",
+      "cancelled": "Storniert"
+    },
+    "states": {
+      "loading": "Projekte werden geladen...",
+      "failedToLoad": "Projekte konnten nicht geladen werden",
+      "somethingWentWrong": "Etwas ist schiefgelaufen",
+      "empty": "Keine Projekte gefunden"
+    }
+  },
+  "projectCard": {
+    "progressComplete": "{progress}% abgeschlossen"
+  },
+  "payroll": {
+    "title": "Abrechnung",
+    "tabs": {
+      "all": "Alle",
+      "bonus": "Bonus",
+      "deduction": "Abzug",
+      "loans": "Darlehen"
+    },
+    "filters": {
+      "monthly": "Monatlich",
+      "biWeekly": "Zweiwöchentlich",
+      "weekly": "Wöchentlich",
+      "hourly": "Stündlich"
+    },
+    "status": {
+      "freezeRun": "Lauf einfrieren",
+      "reOpen": "Wieder öffnen",
+      "submit": "Einreichen ({count})",
+      "pay": "An die Buchhaltung senden",
+      "loading": "Abrechnungsdaten werden geladen...",
+      "editsAllowed": "Änderungen erlaubt · automatisches Einfrieren an Tag 25, sofern HR nicht früher einfriert",
+      "draftCount": "{count} Entwurf"
+    },
+    "columns": {
+      "employeeName": "Mitarbeitername",
+      "basicSalary": "Grundgehalt",
+      "bonus": "Bonus",
+      "deduction": "Abzug",
+      "loans": "Darlehen",
+      "totalSalary": "Gesamtgehalt",
+      "date": "Datum",
+      "status": "Status",
+      "action": "Aktion",
+      "bonusReason": "Bonusgrund",
+      "deductionReason": "Abzugsgrund",
+      "startDate": "Startdatum",
+      "paidLoans": "Gezahlte Darlehen",
+      "remainsLoans": "Verbleibende Darlehen",
+      "selectAll": "Alle Mitarbeiter auswählen",
+      "selectEmployee": "{name} auswählen"
+    },
+    "tooltips": {
+      "edit": "Bearbeiten",
+      "viewDetails": "Details anzeigen",
+      "view": "Ansehen"
+    },
+    "actions": {
+      "addBonus": "Bonus hinzufügen",
+      "addDeduction": "Abzug hinzufügen",
+      "addLoan": "Darlehen hinzufügen",
+      "previewPayslip": "Vorschau Gehaltsabrechnung",
+      "downloadPayslip": "PDF herunterladen",
+      "sendPayslip": "Gehaltsabrechnung senden",
+      "bulkSend": "Sammelversand Gehaltsabrechnungen"
+    },
+    "payslip": {
+      "previewTitle": "Vorschau Gehaltsabrechnung",
+      "sendSuccess": "Gehaltsabrechnung erfolgreich gesendet",
+      "sendError": "Fehler beim Senden der Gehaltsabrechnung",
+      "bulkSendSuccess": "Massen-Gehaltsabrechnungen zum Senden in die Warteschlange gestellt",
+      "bulkSendError": "Fehler beim Auslösen des Massen-Gehaltsabrechnungsversands",
+      "downloadError": "Fehler beim Herunterladen der Gehaltsabrechnung",
+      "previewError": "Fehler beim Laden der Gehaltsabrechnungsvorschau",
+      "loading": "Wird geladen..."
+    },
+    "adjustmentSheet": {
+      "title": {
+        "bonus": "Bonus hinzufügen",
+        "deduction": "Abzug hinzufügen"
+      },
+      "fields": {
+        "employee": "Mitarbeiter",
+        "employeePlaceholder": "Mitarbeiter auswählen…",
+        "nameLabel": {
+          "bonus": "Bonus",
+          "deduction": "Abzug"
+        },
+        "namePlaceholder": {
+          "bonus": "Bonusname eingeben",
+          "deduction": "Abzugsname eingeben"
+        },
+        "reasonLabel": {
+          "bonus": "Bonusgrund",
+          "deduction": "Abzugsgrund"
+        },
+        "reasonPlaceholder": {
+          "bonus": "Bonusgrund hinzufügen",
+          "deduction": "Abzugsgrund hinzufügen"
+        },
+        "typeLabel": {
+          "bonus": "Bonusart",
+          "deduction": "Abzugsart"
+        },
+        "inputMode": "Eingabemodus",
+        "amount": "Betrag",
+        "dayUnits": "Tage",
+        "notes": "Grund / Notizen",
+        "notesPlaceholder": "Grund für die Anpassung hier hinzufügen...",
+        "description": "Beschreibung",
+        "fixedAmount": "Festbetrag",
+        "daysValue": "Tageswert",
+        "percentValue": "Prozentwert",
+        "monthsValue": "Monatswert"
+      },
+      "modes": {
+        "fixed": {
+          "label": "Fest",
+          "subtext": "Ein pauschaler CHF-Betrag."
+        },
+        "days": {
+          "label": "Tage",
+          "subtext": "Basierend auf dem Tagessatz des Mitarbeiters."
+        },
+        "percent": {
+          "label": "Prozent",
+          "subtext": "Ein Prozentsatz des Grundgehalts des Mitarbeiters."
+        },
+        "months": {
+          "label": "Monate",
+          "subtext": "Basierend auf dem Monatssatz des Mitarbeiters."
+        }
+      },
+      "actions": {
+        "cancel": "Abbrechen",
+        "submit": {
+          "bonus": "Bonus hinzufügen",
+          "deduction": "Abzug hinzufügen"
+        },
+        "submitting": "Wird eingereicht..."
+      },
+      "validation": {
+        "employeeRequired": "Wählen Sie einen Mitarbeiter aus",
+        "nameRequired": "Dieses Feld ist erforderlich",
+        "nameMax": "Darf höchstens 120 Zeichen lang sein",
+        "reasonMax": "Darf höchstens 2000 Zeichen lang sein",
+        "valuePositive": "Der Wert darf nicht negativ sein"
+      }
+    },
+    "detailPage": {
+      "title": "Mitarbeiterabrechnung",
+      "subtitle": "Diese Informationen helfen uns, Ihre Identität zu bestätigen und die notwendigen Schritte zur Erfassung Ihrer persönlichen Daten abzuschließen.",
+      "sections": {
+        "bankInformation": "Bankdaten",
+        "loans": "Darlehen",
+        "salaryDetails": "Gehaltsdetails"
+      },
+      "fields": {
+        "employee": "Mitarbeiter",
+        "employeePlaceholder": "Mitarbeiter auswählen…",
+        "employeeId": "Mitarbeiter-ID",
+        "department": "Abteilung",
+        "employeeType": "Mitarbeiterart",
+        "emailAddress": "E-Mail-Adresse",
+        "phoneNumber": "Telefonnummer",
+        "bankName": "Bankname",
+        "accountName": "Kontoinhabername",
+        "accountNo": "Kontonummer",
+        "iban": "IBAN",
+        "salary": "Gehalt",
+        "loanMonthly": "Darlehen (monatlich)",
+        "bonus": "Bonus",
+        "deduction": "Abzug",
+        "total": "Gesamt",
+        "note": "Notiz",
+        "notePlaceholder": "Nachricht..."
+      },
+      "loans": {
+        "total": "Darlehen insgesamt",
+        "paid": "Getilgte Darlehen",
+        "paidMonthly": "Monatlich getilgt",
+        "remains": "Restschuld"
+      },
+      "validation": {
+        "employeeRequired": "Wählen Sie einen Mitarbeiter aus",
+        "loanMonthlyMin": "Darlehensbetrag muss 0 oder mehr sein",
+        "noteMax": "Darf höchstens 250 Zeichen lang sein"
+      }
+    },
+    "loansSheet": {
+      "title": "Darlehen hinzufügen",
+      "fields": {
+        "employee": "Mitarbeiter",
+        "employeePlaceholder": "Mitarbeiter auswählen…",
+        "totalLoans": "Darlehenssumme",
+        "totalLoansPlaceholder": "0",
+        "duration": "Laufzeit",
+        "durationPlaceholder": "Laufzeit auswählen…",
+        "paidMonthly": "Monatliche Tilgung",
+        "reason": "Darlehensgrund",
+        "reasonPlaceholder": "Darlehensgrund hinzufügen"
+      },
+      "duration": {
+        "6": "6 Monate",
+        "12": "12 Monate",
+        "18": "18 Monate",
+        "24": "24 Monate"
+      },
+      "actions": {
+        "cancel": "Abbrechen",
+        "submit": "Hinzufügen"
+      },
+      "validation": {
+        "employeeRequired": "Wählen Sie einen Mitarbeiter aus",
+        "totalRequired": "Geben Sie die Darlehenssumme ein",
+        "totalPositive": "Geben Sie einen Betrag größer als 0 ein",
+        "durationRequired": "Wählen Sie eine Laufzeit"
+      },
+      "trigger": "Darlehen"
+    },
+    "loanDetail": {
+      "schedule": {
+        "date": "Datum",
+        "paidLoan": "Getilgter Betrag",
+        "remainsLoan": "Restschuld"
+      },
+      "addAmountSheet": {
+        "title": "Betrag hinzufügen",
+        "trigger": "Betrag hinzufügen",
+        "fields": {
+          "totalLoans": "Darlehenssumme",
+          "paidMonthly": "Monatliche Tilgung",
+          "addedAmount": "Hinzugefügter Betrag",
+          "addedAmountPlaceholder": "0",
+          "remainingAmount": "Verbleibender Betrag"
+        },
+        "helper": {
+          "remainingCalculated": "wird automatisch berechnet"
+        },
+        "actions": {
+          "cancel": "Abbrechen",
+          "submit": "Hinzufügen"
+        },
+        "validation": {
+          "addedMin": "Betrag muss 0 oder mehr sein",
+          "addedMax": "Betrag darf die Darlehenssumme nicht überschreiten"
+        }
+      },
+      "title": "Darlehensdetails"
+    },
+    "adminDetail": {
+      "hrNote": "Hinweis von HR:",
+      "hrNoteDescription": "HR hat diesen Lauf am {date} eingefroren. Genehmigen Sie jede Person oder schicken Sie sie mit der gewünschten Änderung zurück.",
+      "title": "Ausstehende Genehmigungen",
+      "description": "Jede Karte ist der aktuell offene Stapel, den die Personalabteilung zur Überprüfung gesendet hat. Ein einziger Lauf kann mehrere Stapel über Tage hinweg erzeugen.",
+      "approveAll": "Alle genehmigen ({count})",
+      "submitReview": "Überprüfung einreichen",
+      "noteToHr": "Hinweis an HR",
+      "optional": "(optional)",
+      "messagePlaceholder": "Nachricht...",
+      "approveAllConfirm": {
+        "title": "{period} vollständig genehmigen?",
+        "impact": "{count, plural, one {# Person} other {# Personen}}, netto {amount}. Genehmigte Löhne gehen zurück an HR, die sie zur Auszahlung an die Buchhaltung senden.",
+        "confirm": "Alle genehmigen",
+        "cancel": "Abbrechen"
+      },
+      "hrNoteNoDate": "HR hat diesen Lauf eingefroren. Genehmigen Sie jede Person oder schicken Sie sie mit der gewünschten Änderung zurück.",
+      "system": "System",
+      "activity": "Aktivität",
+      "noActivity": "Keine aktuellen Aktivitäten.",
+      "activityActions": {
+        "runStarted": "Lohnlauf gestartet",
+        "runFrozen": "Lauf eingefroren",
+        "runReopened": "Lauf wieder geöffnet",
+        "runReopenedWithdrawn": "Lauf wieder geöffnet ({count, plural, one {# Einreichung} other {# Einreichungen}} zurückgezogen)",
+        "submitted": "{count, plural, one {# Mitarbeiter} other {# Mitarbeitende}} zur Genehmigung eingereicht",
+        "approvedAll": "Alle Zeilen genehmigt",
+        "approvedRows": "{count, plural, one {# Zeile} other {# Zeilen}} genehmigt",
+        "changeRequested": "Änderung angefordert für <who>{name}</who>",
+        "resubmitted": "<who>{name}</who> erneut eingereicht",
+        "bonusAdded": "Bonus für <who>{name}</who> hinzugefügt",
+        "deductionAdded": "Abzug für <who>{name}</who> hinzugefügt",
+        "queuedAll": "Zur Auszahlung eingereiht",
+        "queued": "{count, plural, one {# Zahlung} other {# Zahlungen}} zur Auszahlung eingereiht",
+        "markedPaidAll": "Als bezahlt markiert",
+        "markedPaid": "{count, plural, one {# Zahlung} other {# Zahlungen}} als bezahlt markiert",
+        "paidEmployee": "<who>{name}</who> bezahlt",
+        "bankFileExported": "Bankdatei exportiert",
+        "payslipsSent": "{count, plural, one {# Gehaltsabrechnung} other {# Gehaltsabrechnungen}} per E-Mail gesendet",
+        "imported": "{count, plural, one {# Anpassung} other {# Anpassungen}} aus <who>{name}</who> importiert"
+      }
+    },
+    "run": {
+      "cancel": "Abbrechen",
+      "freeze": {
+        "title": "{period} einfrieren?",
+        "impact": "{count, plural, one {# Person} other {# Personen}}, netto {amount}. Boni und Abzüge können erst wieder erfasst werden, wenn der Lauf wieder geöffnet ist.",
+        "confirm": "Lauf einfrieren"
+      },
+      "reopen": {
+        "title": "{period} wieder öffnen?",
+        "impact": "{count, plural, =0 {Nichts Eingereichtes wird zurückgesetzt.} one {# Einreichung wird wieder zum Entwurf.} other {# Einreichungen werden wieder zu Entwürfen.}} Boni und Abzüge können wieder erfasst werden.",
+        "confirm": "Lauf wieder öffnen"
+      },
+      "queue": {
+        "title": "{period} an die Buchhaltung senden?",
+        "impact": "{count, plural, one {# genehmigte Person} other {# genehmigte Personen}}, {amount}, gehen in die Auszahlungswarteschlange. Die Buchhaltung wird benachrichtigt und zahlt aus.",
+        "confirm": "An die Buchhaltung senden",
+        "noneApproved": "Noch niemand genehmigt"
+      },
+      "payslips": {
+        "title": "Lohnabrechnungen für {period} per E-Mail senden?",
+        "impact": "{count, plural, one {# Person erhält} other {# Personen erhalten}} die Lohnabrechnung per E-Mail.",
+        "confirm": "Lohnabrechnungen senden"
+      },
+      "empty": {
+        "title": "Kein Lohnlauf für {period}",
+        "body": "Starten Sie einen Lauf, um Boni, Abzüge und Darlehen zu erfassen; frieren Sie ihn dann ein und reichen Sie ihn zur Genehmigung ein.",
+        "start": "Lauf für {period} starten",
+        "switchMonthly": "Zu monatlich wechseln"
+      },
+      "week": "Woche {week} · {range}"
+    },
+    "admin": {
+      "title": "Ausstehende Genehmigungen",
+      "description": "Jede Karte ist ein Stapel, den HR zur Prüfung geschickt hat. Ein Lauf kann über mehrere Tage mehrere Stapel ergeben.",
+      "emptyTitle": "Alles erledigt",
+      "emptyBody": "Derzeit wartet nichts auf Genehmigung.",
+      "review": "Prüfen",
+      "pendingReview": "Zu prüfen",
+      "netPay": "Nettolohn",
+      "decided": "Bereits entschieden",
+      "people": "{count, plural, one {# Person} other {# Personen}}",
+      "decidedValue": "{decided, plural, one {# Person} other {# Personen}} · {flagged} markiert"
+    },
+    "review": {
+      "totalThisRun": "Summe dieses Laufs",
+      "basic": "Grundlohn",
+      "bonus": "Bonus",
+      "deduction": "Abzug",
+      "loan": "Darlehen",
+      "items": {
+        "bonus": "Bonus",
+        "deduction": "Abzug",
+        "loan": "Darlehen (automatisch abgezogen)"
+      },
+      "loanInstallment": "Darlehensrate",
+      "approve": "Genehmigen",
+      "requestChange": "Änderung anfordern",
+      "decisionFor": "Entscheidung für {name}",
+      "whatToChange": "Was soll HR ändern?",
+      "whatToChangePlaceholder": "Zum Beispiel: Abzug entfernen oder den Bonus auf 50 setzen"
+    },
+    "submit": {
+      "title": "{count, plural, =0 {Personen zur Genehmigung einreichen} one {# Person zur Genehmigung einreichen} other {# Personen zur Genehmigung einreichen}}",
+      "cancel": "Abbrechen",
+      "confirm": "An Admin senden",
+      "noneSelected": "Wählen Sie zuerst Personen in der Tabelle aus (Zeilen ankreuzen) und reichen Sie dann ein.",
+      "total": "Summe",
+      "note": "Notiz an den Admin",
+      "optional": "(optional)",
+      "notePlaceholder": "Was der Admin wissen sollte"
+    },
+    "adjustmentRow": {
+      "edit": "Bearbeiten",
+      "bonusTitle": "Bonus „{title}“ ({amount}) entfernen?",
+      "deductionTitle": "Abzug „{title}“ ({amount}) entfernen?",
+      "adjustmentImpact": "Der Nettolohn dieses Laufs ändert sich um diesen Betrag.",
+      "bonusConfirm": "Bonus entfernen",
+      "deductionConfirm": "Abzug entfernen"
+    },
+    "unknownEmployee": "Unbekannter Mitarbeiter",
+    "draftSheet": {
+      "title": "Mitarbeiterdetails",
+      "loading": "Details werden geladen...",
+      "generalDepartment": "Allgemein",
+      "adminNote": "Admin: {note}",
+      "locked": "Diese Zeile ist gesperrt. Sobald ein Mitarbeiter eingereicht, genehmigt oder bezahlt wurde, sind keine Änderungen mehr möglich.",
+      "payslipPdf": "Gehaltsabrechnung (PDF)",
+      "salaryBreakdown": "Gehaltsaufschlüsselung",
+      "bonusesSubtotal": "+ Boni ({count}) · Zwischensumme",
+      "deductionsSubtotal": "− Abzüge ({count}) · Zwischensumme",
+      "net": "Netto",
+      "bonuses": "Boni",
+      "deductions": "Abzüge",
+      "loanDeductions": "Darlehensabzüge (automatisch)",
+      "loanInstallmentAuto": "Darlehensrate (automatisch)",
+      "reasonPlaceholder": "Grund / Titel",
+      "saveItem": "Speichern"
+    }
+  },
+  "myPayslips": {
+    "title": "Meine Lohnabrechnungen",
+    "description": "Zeigen und laden Sie Ihre bezahlten monatlichen Lohnabrechnungen herunter.",
+    "empty": "Noch keine Lohnabrechnungen verfügbar.",
+    "columns": {
+      "period": "Zeitraum",
+      "periodRange": "Zeitraum",
+      "netPay": "Nettolohn",
+      "paidAt": "Bezahlt am",
+      "generatedAt": "Erstellt am",
+      "action": "Aktion"
+    }
+  },
+  "loans": {
+    "title": "Darlehen",
+    "details": {
+      "sheetTitle": "Darlehensdetails & Verwaltung",
+      "loading": "Wird geladen...",
+      "loadingData": "Daten werden geladen...",
+      "failedLoad": "Darlehensdaten konnten nicht geladen werden.",
+      "manageFor": "Darlehen verwalten für: {name}",
+      "tabs": {
+        "details": "Darlehensdetails & Raten",
+        "edit": "Darlehen bearbeiten"
+      },
+      "cards": {
+        "totalAmount": "Gesamtbetrag",
+        "remainingAmount": "Restbetrag",
+        "paidAmount": "Gezahlter Betrag",
+        "monthlyInstallment": "Monatliche Rate"
+      },
+      "fields": {
+        "employeeCode": "Mitarbeiter-Code",
+        "loanStatus": "Darlehensstatus",
+        "startDate": "Startdatum",
+        "loanTitle": "Darlehenstitel",
+        "reasonNotes": "Grund / Notizen",
+        "quickActions": "Schnellaktionen zum Status:",
+        "activate": "Darlehen aktivieren",
+        "pause": "Darlehen pausieren",
+        "saveChanges": "Änderungen speichern",
+        "saving": "Wird gespeichert..."
+      },
+      "statusOptions": {
+        "active": "Aktiv",
+        "paused": "Pausiert",
+        "closed": "Geschlossen",
+        "cancelled": "Storniert"
+      },
+      "validation": {
+        "titleRequired": "Geben Sie einen Darlehenstitel ein"
+      }
+    },
+    "filters": {
+      "all": "Alle",
+      "active": "Aktiv",
+      "paused": "Pausiert",
+      "closed": "Geschlossen",
+      "cancelled": "Storniert"
+    },
+    "columns": {
+      "id": "ID",
+      "employee": "Mitarbeiter",
+      "title": "Darlehenstitel",
+      "amount": "Betrag",
+      "installment": "Rate",
+      "remaining": "Verbleibend",
+      "startDate": "Startdatum",
+      "status": "Status",
+      "action": "Aktion"
+    }
+  },
+  "financeQueue": {
+    "title": "Zahlungswarteschlange",
+    "detailsTitle": "Zahlungswarteschlange · Lauf {id}",
+    "backToQueue": "Zurück zur Zahlungswarteschlange",
+    "exportFile": "Datei exportieren",
+    "exportFinanceSheet": "Finanzblatt exportieren",
+    "exportPayslipsZip": "Lohnabrechnungen als ZIP exportieren",
+    "payAll": "Alle auszahlen",
+    "filters": {
+      "period": "Zeitraum",
+      "showAll": "Alle anzeigen",
+      "monthly": "Monatlich",
+      "biWeekly": "Zweiwöchentlich",
+      "weekly": "Wöchentlich",
+      "hourly": "Stündlich",
+      "approved": "Genehmigt",
+      "queued": "In Warteschlange",
+      "paid": "Bezahlt"
+    },
+    "card": {
+      "items": "Positionen",
+      "queued": "In Warteschlange",
+      "netPayable": "Netto zahlbar",
+      "openDetails": "Details öffnen"
+    },
+    "empty": {
+      "noPayments": "Keine Zahlungen für {month}."
+    },
+    "table": {
+      "columns": {
+        "employee": "Mitarbeiter",
+        "iban": "IBAN",
+        "amount": "Betrag",
+        "jobTitle": "Jobtitel",
+        "status": "Status",
+        "action": "Aktion"
+      },
+      "actions": {
+        "markPaid": "Als bezahlt markieren"
+      },
+      "noItems": "Keine Auszahlungspositionen für diesen Lauf gefunden."
+    },
+    "import": {
+      "title": "Historischer Lohnimport",
+      "description": "Laden Sie die Vorlage herunter, tragen Sie historische Lohndaten ein und laden Sie Excel- oder CSV-Dateien hoch.",
+      "downloadTemplate": "Vorlage herunterladen",
+      "importFile": "Datei importieren",
+      "importing": "Lohndaten werden importiert...",
+      "empty": "Noch keine Importvorgänge.",
+      "columns": {
+        "filename": "Datei",
+        "format": "Format",
+        "runId": "Lauf-ID",
+        "rowCount": "Zeilen",
+        "createdCount": "Erstellt",
+        "errorCount": "Fehler",
+        "importedBy": "Importiert von",
+        "createdAt": "Importiert am",
+        "action": "Aktion"
+      },
+      "actions": {
+        "view": "Lauf anzeigen"
+      }
+    }
+  },
+  "monthYearFilter": {
+    "prevMonth": "Vorheriger Monat",
+    "nextMonth": "Nächster Monat",
+    "selectRange": "Datumsbereich auswählen"
+  },
+  "test1": {
+    "footer2": {
+      "brand": "Untitled UI",
+      "description": "Gestalten Sie beeindruckende digitale Erlebnisse, die mehr Freude in die Welt bringen.",
+      "getApp": "App herunterladen",
+      "links": {
+        "overview": "Überblick",
+        "features": "Funktionen",
+        "pricing": "Preise",
+        "careers": "Karriere",
+        "help": "Hilfe",
+        "privacy": "Datenschutz"
+      },
+      "storeButtons": {
+        "downloadOn": "Laden im",
+        "appStore": "App Store",
+        "getItOn": "Holen bei",
+        "googlePlay": "Google Play"
+      },
+      "copyright": "© {year} Untitled UI. Alle Rechte vorbehalten."
+    }
+  },
+  "attendance": {
+    "pageTitle": "Anwesenheit",
+    "export": "Exportieren"
+  },
+  "addTimeDialog": {
+    "title": "Abwesenheit hinzufügen",
+    "trigger": "Abwesenheit beantragen",
+    "cancel": "Abbrechen",
+    "submit": "Abwesenheit beantragen",
+    "submitRequest": "Antrag stellen",
+    "employeeName": "Mitarbeitername",
+    "employeePlaceholder": "Mitarbeiter auswählen",
+    "employeeId": "Mitarbeiter-ID (optional)",
+    "employeeIdPlaceholder": "Mitarbeiter-ID eingeben",
+    "department": "Abteilung",
+    "departmentPlaceholder": "Abteilung auswählen",
+    "manager": "Vorgesetzte(r)",
+    "managerPlaceholder": "Vorgesetzte(r) wird automatisch angezeigt",
+    "partialDay": "Teilzeitoption",
+    "timeOffType": "Abwesenheitsart",
+    "timeOffTypePlaceholder": "Abwesenheitsart auswählen",
+    "dates": "Daten",
+    "datesPlaceholder": "Datum und Uhrzeit auswählen",
+    "note": "Notiz",
+    "notePlaceholder": "Zusätzliche Informationen",
+    "noFile": "Keine Datei hinzugefügt",
+    "duration": "Dauer",
+    "oneDay": "1 Tag",
+    "durationType": "Dauertyp",
+    "startDate": "Startdatum",
+    "endDate": "Enddatum",
+    "period": "Zeitraum",
+    "attachments": "Anhänge",
+    "periods": {
+      "morning": "Vormittag",
+      "afternoon": "Nachmittag"
+    },
+    "durationTypes": {
+      "fullDay": "Ganzer Tag",
+      "halfDay": "Halber Tag",
+      "customHours": "Benutzerdefinierte Stunden",
+      "startTime": "Startzeit",
+      "endTime": "Endzeit"
+    },
+    "timeOffTypes": {
+      "annualLeave": "Jahresurlaub",
+      "sickLeave": "Krankheitsurlaub",
+      "personalLeave": "Persönlicher Urlaub",
+      "vacationDay": "Urlaubstag",
+      "unpaidLeave": "Unbezahlter Urlaub",
+      "other": "Sonstiges"
+    },
+    "validation": {
+      "typeRequired": "Bitte wählen Sie eine Abwesenheitsart",
+      "startDateRequired": "Bitte wählen Sie ein Startdatum",
+      "endDateRequired": "Bitte wählen Sie ein Enddatum",
+      "customHoursRequired": "Für benutzerdefinierte Stunden sind Start- und Endzeit erforderlich"
+    }
+  },
+  "attendanceCard": {
+    "title": "Anwesenheit",
+    "today": "Heute",
+    "thisWeek": "Diese Woche",
+    "selectDate": "Datum auswählen",
+    "attendanceRate": "Anwesenheitsquote",
+    "onTime": "Pünktlich",
+    "late": "Verspätet",
+    "notAttendYet": "Noch nicht erschienen"
+  },
+  "statsCard": {
+    "employeeAttend": "Mitarbeiteranwesenheit",
+    "totalLogHours": "Gesamtstunden",
+    "lastWeek": "Letzte Woche"
+  },
+  "workingHourPerformance": {
+    "title": "Arbeitszeitleistung",
+    "allDepartments": "Alle Abteilungen",
+    "employeePerf": "Mitarbeiterleistung",
+    "workingHour": "Arbeitsstunden",
+    "categories": {
+      "marketing": "Marketing",
+      "developer": "Entwicklung",
+      "creative": "Kreativ",
+      "hr": "Personalwesen"
+    },
+    "status": {
+      "excellentPerformance": "Hervorragende Leistung",
+      "needsImprovement": "Verbesserungsbedarf",
+      "marketing": "Ist bereits großartig!",
+      "developer": "Hervorragende Fortschritte!",
+      "creative": "Gute Arbeit!",
+      "hr": "Macht sich gut!",
+      "noData": "Keine Daten"
+    }
+  },
+  "insight": {
+    "title": "Anwesenheitseinblicke",
+    "absenteeismRate": "Abwesenheitsrate",
+    "lateOccurrences": "Verspätungen",
+    "totalWorkTime": "Gesamtarbeitszeit",
+    "attendanceRate": "Anwesenheitsquote",
+    "earlyDepartures": "Frühabgänge",
+    "overtimeHours": "Überstunden",
+    "averageLateness": "Durchschnittliche Verspätung",
+    "daysCount": "{count, plural, one {# Tag} other {# Tage}}"
+  },
+  "attendanceTable": {
+    "sections": {
+      "attendance": "Anwesenheit",
+      "leave": "Abwesenheit",
+      "absence": "Fehlzeit",
+      "daysOff": "Abwesenheitstage"
+    },
+    "dateRange": {
+      "fromDate": "Von",
+      "toDate": "Bis",
+      "to": "bis"
+    },
+    "statuses": {
+      "pending": "Ausstehend",
+      "approved": "Genehmigt",
+      "rejected": "Abgelehnt",
+      "cancelled": "Storniert"
+    },
+    "columns": {
+      "employee": "Mitarbeiter",
+      "employeeName": "Mitarbeitername",
+      "jobTitle": "Jobtitel",
+      "department": "Abteilung",
+      "startWork": "Arbeitsbeginn",
+      "endWork": "Arbeitsende",
+      "status": "Status",
+      "logHours": "Stunden",
+      "overtime": "Überstunden",
+      "late": "Verspätung",
+      "leaveDate": "Abwesenheitsdatum",
+      "type": "Art",
+      "note": "Notiz",
+      "date": "Datum",
+      "duration": "Dauer",
+      "dateFrom": "Von"
+    },
+    "duration": {
+      "minutes": "{count} Min.",
+      "hoursMinutes": "{hours}h {minutes}m",
+      "halfDay": "0,5 Tag",
+      "oneDay": "1 Tag"
+    },
+    "fallback": {
+      "na": "N/A",
+      "unknown": "Unbekannt",
+      "noTitle": "Kein Titel",
+      "noDepartment": "Keine Abteilung"
+    },
+    "emptyMessage": "Keine Einträge gefunden",
+    "dayOffTypes": {
+      "weekend": "Wochenende",
+      "public_holiday": "Feiertag",
+      "company_closure": "Betriebsschließung",
+      "approved_leave": "Genehmigter Urlaub",
+      "approved_special_off": "Sonderurlaubstag",
+      "manual_override": "Manuelle Änderung"
+    },
+    "inProgress": "Läuft"
+  },
+  "attendanceLegacyTable": {
+    "columns": {
+      "ticketId": "Ticket-ID",
+      "subject": "Betreff",
+      "employeeName": "Mitarbeitername",
+      "createdDate": "Erstellungsdatum",
+      "emailAddress": "E-Mail-Adresse",
+      "status": "Status",
+      "action": "Aktion"
+    },
+    "tooltips": {
+      "viewDetails": "Details anzeigen",
+      "deleteTicket": "Ticket löschen"
+    }
+  },
+  "configuration": {
+    "pageTitle": "Konfiguration",
+    "pageDescription": "Verwalten Sie Ihr Firmenprofil und Ihre Anwesenheitseinstellungen.",
+    "companyProfile": "Firmenprofil",
+    "companyLogo": "Firmenlogo",
+    "companyName": "Firmenname",
+    "preferredLanguage": "Bevorzugte Sprache",
+    "phone": "Telefonnummer",
+    "email": "E-Mail-Adresse",
+    "location": "Standort",
+    "attendanceSettings": "Anwesenheitseinstellungen",
+    "attendanceSchedule": "Anwesenheitszeitplan",
+    "effectiveFrom": "Gültig ab",
+    "gracePeriodMinutes": "Karenzzeit (Minuten)",
+    "dayStartTime": "Tagesbeginn",
+    "dayEndTime": "Tagesende",
+    "workingDays": "Arbeitstage",
+    "uploadLogo": "Logo hochladen",
+    "cancel": "Abbrechen",
+    "saveChanges": "Änderungen speichern",
+    "publicHolidays": "Gesetzliche Feiertage",
+    "holidayName": "Feiertagsname",
+    "date": "Datum",
+    "addHoliday": "Feiertag hinzufügen",
+    "noHolidays": "Noch keine gesetzlichen Feiertage hinzugefügt.",
+    "successUpdate": "Konfiguration erfolgreich aktualisiert",
+    "errorUpdate": "Konfiguration konnte nicht aktualisiert werden",
+    "logoUploaded": "Logo erfolgreich hochgeladen",
+    "logoDeleted": "Logo erfolgreich gelöscht",
+    "logoError": "Logo konnte nicht aktualisiert werden",
+    "options": {
+      "languages": {
+        "en": "Englisch",
+        "de": "Deutsch",
+        "fr": "Französisch",
+        "it": "Italienisch"
+      }
+    },
+    "placeholders": {
+      "companyName": "Firmenname eingeben",
+      "language": "Sprache auswählen",
+      "phone": "+1 234 567 890",
+      "email": "kontakt@firma.de",
+      "location": "Stadt, Land",
+      "holidayName": "z. B. Neujahr"
+    },
+    "days": {
+      "Monday": "Mo",
+      "Tuesday": "Di",
+      "Wednesday": "Mi",
+      "Thursday": "Do",
+      "Friday": "Fr",
+      "Saturday": "Sa",
+      "Sunday": "So"
+    },
+    "removeLogo": "Logo entfernen",
+    "toasts": {
+      "updating": "Wird aktualisiert...",
+      "uploading": "Wird hochgeladen..."
+    },
+    "validation": {
+      "companyNameRequired": "Firmenname ist erforderlich",
+      "preferredLanguageRequired": "Bevorzugte Sprache ist erforderlich",
+      "phoneRequired": "Telefonnummer ist erforderlich",
+      "emailInvalid": "Ungültige E-Mail-Adresse",
+      "locationRequired": "Standort ist erforderlich",
+      "effectiveDateRequired": "Gültigkeitsdatum ist erforderlich",
+      "workingDaysMin": "Mindestens ein Arbeitstag ist erforderlich",
+      "startTimeRequired": "Startzeit ist erforderlich",
+      "endTimeRequired": "Endzeit ist erforderlich",
+      "gracePeriodMin": "Die Karenzzeit muss mindestens 0 betragen",
+      "holidayNameRequired": "Feiertagsname ist erforderlich",
+      "dateRequired": "Datum ist erforderlich"
+    }
+  },
+  "jobs": {
+    "common": {
+      "loading": "Laden...",
+      "na": "N/A",
+      "pending": "Ausstehend",
+      "createJob": "Stelle anlegen",
+      "yes": "Ja",
+      "no": "Nein",
+      "viewProfile": "Profil ansehen",
+      "failedLoadCandidates": "Kandidaten für diese Stelle konnten nicht geladen werden.",
+      "noCandidatesForJob": "Noch keine Kandidaten für diese Stelle verfügbar.",
+      "noCandidatesYet": "Noch keine Kandidaten verfügbar."
+    },
+    "stages": {
+      "applying": "Bewerbung",
+      "screening": "Screening",
+      "interview": "Interview",
+      "hiring": "Einstellung",
+      "accepted": "Akzeptiert",
+      "offer": "Angebot",
+      "hired": "Eingestellt",
+      "rejected": "Abgelehnt"
+    },
+    "candidatesPage": {
+      "title": "Kandidaten"
+    },
+    "rejectedPage": {
+      "title": "Abgelehnte Kandidaten"
+    },
+    "hiringJobs": {
+      "title": "Offene Stellen",
+      "failedLoadJobs": "Stellen konnten nicht geladen werden. Bitte aktualisieren Sie die Seite.",
+      "tabs": {
+        "all": "Alle",
+        "publishSoon": "Bald veröffentlicht"
+      },
+      "stats": {
+        "totalApplied": "Bewerbungen insgesamt",
+        "totalInterview": "Interviews insgesamt"
+      },
+      "dateRange": {
+        "from": "Von",
+        "to": "bis",
+        "fromTo": "Vom {start} bis {end}"
+      },
+      "empty": {
+        "title": "Keine Stellen gefunden",
+        "description": "Keine Stellenanzeigen entsprechen den aktuellen Filtern. Versuchen Sie, den Status-Tab zu ändern, oder erstellen Sie eine neue Stelle."
+      }
+    },
+    "hiringOverall": {
+      "title": "Stellen-Dashboard",
+      "interview": "Interview",
+      "interviewLink": "Interview-Link",
+      "noDetailsProvided": "Keine Details angegeben",
+      "forLast": "für den/die letzten {view}",
+      "moreEvents": "+{count} weitere",
+      "views": {
+        "day": "Tag",
+        "week": "Woche",
+        "month": "Monat"
+      },
+      "metrics": {
+        "totalOpenJobs": "Offene Stellen",
+        "totalApplicants": "Bewerber insgesamt",
+        "totalReviews": "Bewertungen insgesamt",
+        "rejected": "Abgelehnt",
+        "accepted": "Akzeptiert"
+      }
+    },
+    "candidateDetails": {
+      "sendEmail": "E-Mail senden",
+      "candidate": "Kandidat",
+      "resume": "Lebenslauf",
+      "downloadPdf": "PDF herunterladen",
+      "resumeUnavailable": "Lebenslauf nicht verfügbar",
+      "cvPreviewUnavailable": "Lebenslauf-Vorschau nicht verfügbar.",
+      "stageOf": "Phase:",
+      "appointments": "Termine",
+      "date": "Datum",
+      "interviewWith": "Interview mit",
+      "interviewLink": "Interview-Link",
+      "noAppointmentsYet": "Noch keine Termine.",
+      "tabs": {
+        "personalInfo": "Persönliche Daten",
+        "resume": "Lebenslauf",
+        "hiringSteps": "Einstellungsschritte"
+      }
+    },
+    "jobDetails": {
+      "deleteJobOffer": "Stellenangebot löschen",
+      "deleteConfirmDescription": "Sind Sie sicher, dass Sie dieses Stellenangebot löschen möchten?",
+      "failedLoadJobDetails": "Stellendetails konnten nicht geladen werden.",
+      "tabs": {
+        "jobDetails": "Stellendetails",
+        "salary": "Gehaltsdetails & Zusatzleistungen",
+        "descriptions": "Stellenbeschreibung & Anforderungen"
+      },
+      "status": {
+        "open": "Offen",
+        "hold": "Zurückgestellt",
+        "closed": "Geschlossen",
+        "cancelled": "Storniert"
+      },
+      "sections": {
+        "jobApplication": "Bewerbung",
+        "postDate": "Veröffentlichungsdatum",
+        "salaryDetails": "Gehaltsdetails",
+        "benefits": "Zusatzleistungen",
+        "aboutCompany": "Über das Unternehmen",
+        "jobRequirements": "Stellenanforderungen",
+        "skills": "Fähigkeiten"
+      },
+      "labels": {
+        "jobTitle": "Jobtitel",
+        "location": "Standort",
+        "jobType": "Beschäftigungsart",
+        "requiredExperience": "Erforderliche Erfahrung",
+        "jobMode": "Arbeitsmodus",
+        "experienceLevel": "Erfahrungsstufe",
+        "industry": "Branche",
+        "startDate": "Startdatum",
+        "endDate": "Enddatum",
+        "currency": "Währung",
+        "salaryRange": "Gehaltsspanne",
+        "bonusAvailability": "Bonus verfügbar",
+        "paidTimeOff": "Bezahlter Urlaub",
+        "healthInsurance": "Krankenversicherung"
+      }
+    },
+    "addJobSheet": {
+      "addNewJob": "Neue Stelle anlegen",
+      "close": "Schließen",
+      "back": "Zurück",
+      "next": "Weiter",
+      "submit": "Absenden",
+      "creatingJob": "Stelle wird angelegt",
+      "optional": "optional",
+      "accommodationHelp": "Muss mit der Adresse auf Ihrem amtlichen Ausweis übereinstimmen.",
+      "steps": {
+        "step1": "Schritt 1",
+        "step2": "Schritt 2",
+        "step3": "Schritt 3",
+        "currentStep": "Aktueller Schritt",
+        "jobDetails": "Stellendetails",
+        "salaryDetailsBenefits": "Gehaltsdetails & Zusatzleistungen",
+        "jobDescriptionsRequirements": "Stellenbeschreibung & Anforderungen"
+      },
+      "sections": {
+        "jobDetails": "Stellendetails",
+        "salaryDetails": "Gehaltsdetails",
+        "benefits": "Zusatzleistungen",
+        "jobDescriptionsRequirements": "Stellenbeschreibung & Anforderungen"
+      },
+      "fields": {
+        "jobTitle": "Jobtitel",
+        "jobType": "Beschäftigungsart",
+        "jobMode": "Arbeitsmodus",
+        "industry": "Branche",
+        "location": "Standort",
+        "experienceLevel": "Erfahrungsstufe",
+        "requiredExperience": "Erforderliche Erfahrung",
+        "jobPostDate": "Veröffentlichungsdatum",
+        "startDate": "Startdatum",
+        "untilClosed": "Bis zur Schließung",
+        "endDate": "Enddatum",
+        "currencyType": "Währungsart",
+        "salaryRange": "Gehaltsspanne",
+        "accommodationType": "Unterkunftsart",
+        "bonusAvailability": "Bonus verfügbar",
+        "healthInsurance": "Krankenversicherung",
+        "paidTimeOff": "Bezahlter Urlaub",
+        "aboutCompanyDescription": "Unternehmensbeschreibung",
+        "jobRequirements": "Stellenanforderungen",
+        "jobSkills": "Fähigkeiten"
+      },
+      "placeholders": {
+        "enterJobTitle": "Jobtitel eingeben",
+        "selectJobType": "Beschäftigungsart auswählen",
+        "selectJobMode": "Arbeitsmodus auswählen",
+        "selectIndustry": "Branche auswählen",
+        "enterLocation": "Standort eingeben",
+        "selectLevel": "Stufe auswählen",
+        "selectExperience": "Erfahrung auswählen",
+        "selectCurrency": "Währung auswählen",
+        "descriptionForCompany": "Beschreibung für das Unternehmen",
+        "selectJobSkills": "Fähigkeiten auswählen",
+        "searchSkills": "Fähigkeiten suchen..."
+      },
+      "options": {
+        "jobType": {
+          "full_time": "Vollzeit",
+          "part_time": "Teilzeit",
+          "contract": "Vertrag",
+          "internship": "Praktikum"
+        },
+        "jobMode": {
+          "on_site": "Vor Ort",
+          "remote": "Remote",
+          "hybrid": "Hybrid"
+        },
+        "experienceLevel": {
+          "intern_level": "Praktikumsniveau",
+          "entry_level": "Einsteiger",
+          "mid_level": "Mittlere Stufe",
+          "senior_level": "Senior"
+        },
+        "accommodation": {
+          "company": "Firmenunterkunft",
+          "companyDescription": "Vom Arbeitgeber gestellte Einheit",
+          "allowance": "Wohnpauschale",
+          "allowanceDescription": "Monatliche Geldzulage",
+          "own": "Eigene Unterkunft",
+          "ownDescription": "Keine Unterstützung durch das Unternehmen"
+        },
+        "requiredExperienceYears": "+{count, plural, one {# Jahr} other {# Jahre}}",
+        "skills": {
+          "creative": "Kreativität",
+          "design": "Design",
+          "teamwork": "Teamarbeit",
+          "communication": "Kommunikation",
+          "problemSolving": "Problemlösung",
+          "leadership": "Führung"
+        }
+      },
+      "validation": {
+        "jobTitleRequired": "Jobtitel ist erforderlich.",
+        "jobTypeRequired": "Beschäftigungsart ist erforderlich.",
+        "jobModeRequired": "Arbeitsmodus ist erforderlich.",
+        "industryRequired": "Branche ist erforderlich.",
+        "locationRequired": "Standort ist erforderlich.",
+        "experienceLevelRequired": "Erfahrungsstufe ist erforderlich.",
+        "currencyTypeRequired": "Währungsart ist erforderlich.",
+        "startSalaryGreaterThanZero": "Startgehalt muss größer als 0 sein.",
+        "endSalaryGreaterThanZero": "Endgehalt muss größer als 0 sein.",
+        "accommodationTypeRequired": "Unterkunftsart ist erforderlich.",
+        "bonusAvailabilityRequired": "Bonuszugang ist erforderlich.",
+        "healthInsuranceRequired": "Krankenversicherung ist erforderlich.",
+        "paidTimeOffRequired": "Bezahlter Urlaub ist erforderlich.",
+        "companyDescriptionRequired": "Unternehmensbeschreibung ist erforderlich.",
+        "jobRequirementsRequired": "Stellenanforderungen sind erforderlich.",
+        "jobSkillRequired": "Bitte wählen Sie mindestens eine erforderliche Fähigkeit aus.",
+        "startDateRequired": "Startdatum ist erforderlich.",
+        "endDateRequiredUntilClosedDisabled": "Enddatum ist erforderlich, wenn 'Bis zur Schließung' deaktiviert ist.",
+        "endDateMustBeValid": "Enddatum muss ein gültiges Datum sein.",
+        "endDateMustBeAfterStartDate": "Enddatum muss am oder nach dem Startdatum liegen.",
+        "startSalaryLessThanOrEqualEndSalary": "Startgehalt muss kleiner oder gleich dem Endgehalt sein.",
+        "endSalaryGreaterThanOrEqualStartSalary": "Endgehalt muss größer oder gleich dem Startgehalt sein."
+      }
+    }
+  },
+  "calendar": {
+    "title": "Mitarbeiterabwesenheit",
+    "tabs": {
+      "calendar": "Kalender",
+      "leaveBalances": "Urlaub & Kontostände"
+    },
+    "description": "Verwalten Sie Ihre Termine und Abwesenheitsanträge",
+    "sidebar": {
+      "eventTypes": "Ereignistypen",
+      "departments": "Abteilungen",
+      "noDepartments": "Keine Abteilungen gefunden"
+    },
+    "eventTypes": {
+      "meetings": "Besprechungen",
+      "timeOff": "Abwesenheit",
+      "publicHolidays": "Feiertage"
+    },
+    "views": {
+      "day": "Tag",
+      "week": "Woche",
+      "month": "Monat"
+    },
+    "days": {
+      "sun": "So",
+      "mon": "Mo",
+      "tue": "Di",
+      "wed": "Mi",
+      "thu": "Do",
+      "fri": "Fr",
+      "sat": "Sa"
+    },
+    "errors": {
+      "loadingData": "Fehler beim Laden der Daten. Bitte versuchen Sie es erneut."
+    },
+    "scheduleMeeting": {
+      "title": "Besprechung planen",
+      "trigger": "Besprechung planen",
+      "cancel": "Abbrechen",
+      "submit": "Besprechung planen",
+      "fields": {
+        "title": "Titel",
+        "date": "Datum",
+        "time": "Uhrzeit",
+        "duration": "Dauer (Minuten)",
+        "link": "Link",
+        "employees": "Mitarbeitername",
+        "description": "Beschreibung"
+      },
+      "placeholders": {
+        "title": "z. B. Q2-Planungssitzung",
+        "date": "Datum auswählen",
+        "link": "https://meet.google.com/...",
+        "employees": "Mitarbeiter auswählen",
+        "description": "Agenda, Themen oder Notizen..."
+      },
+      "tabs": {
+        "company": "Firma",
+        "department": "Abteilung",
+        "employees": "Mitarbeiter"
+      },
+      "messages": {
+        "companyHint": "Diese Besprechung wird an alle Mitarbeiter des Unternehmens gesendet.",
+        "deptsSelected": "{count} Abteilungen ausgewählt"
+      },
+      "validation": {
+        "titleRequired": "Titel ist erforderlich",
+        "dateRequired": "Datum ist erforderlich",
+        "timeRequired": "Uhrzeit ist erforderlich",
+        "durationMin": "Dauer muss mindestens 15 Minuten betragen"
+      }
+    },
+    "view": "Kalenderansicht",
+    "eventKinds": {
+      "meeting": "Besprechung",
+      "timeOff": "Abwesenheit",
+      "task": "Aufgabe",
+      "publicHoliday": "Feiertag"
+    },
+    "timeOff": {
+      "title": "{name} · {type}",
+      "loadingTitle": "Abwesenheitsantrag",
+      "dates": "Zeitraum",
+      "employee": "Mitarbeitende Person",
+      "type": "Abwesenheitsart",
+      "duration": "Dauer",
+      "days": "{count, plural, one {# Tag} other {# Tage}}",
+      "hours": "{count, plural, one {# Stunde} other {# Stunden}}"
+    },
+    "meeting": {
+      "date": "Datum",
+      "time": "Uhrzeit",
+      "with": "Mit",
+      "job": "Stelle",
+      "join": "Besprechung beitreten",
+      "noLink": "Noch kein Besprechungslink"
+    },
+    "holiday": {
+      "title": "Feiertag",
+      "name": "Feiertag",
+      "date": "Datum"
+    }
+  },
+  "departmentPage": {
+    "title": "Abteilung",
+    "table": {
+      "columns": {
+        "name": "Abteilungsname",
+        "manager": "Vorgesetzte(r)",
+        "totalEmployees": "Mitarbeiter insgesamt",
+        "absenteeRate": "Abwesenheitsquote",
+        "creationDate": "Erstellungsdatum",
+        "action": "Aktion"
+      },
+      "tooltips": {
+        "viewDetails": "Details anzeigen",
+        "deleteDepartment": "Abteilung löschen"
+      },
+      "employeesCount": "{count, plural, one {# Mitarbeiter} other {# Mitarbeitende}}"
+    },
+    "management": {
+      "sheet": {
+        "title": {
+          "edit": "Abteilung bearbeiten",
+          "add": "Neue Abteilung hinzufügen"
+        },
+        "trigger": {
+          "edit": "Abteilung bearbeiten",
+          "add": "Neue Abteilung hinzufügen"
+        },
+        "footer": {
+          "cancel": "Abbrechen",
+          "saveChanges": "Änderungen speichern",
+          "addDepartment": "Abteilung hinzufügen"
+        }
+      },
+      "fields": {
+        "name": {
+          "label": "Abteilungsname",
+          "placeholder": "Abteilungsname eingeben"
+        },
+        "manager": {
+          "label": "Vorgesetzte(r)",
+          "placeholder": "Vorgesetzte(n) auswählen"
+        },
+        "employees": {
+          "label": "Mitarbeiter",
+          "placeholder": "Mitarbeiter auswählen"
+        },
+        "description": {
+          "label": "Beschreibung",
+          "placeholder": "Beschreibung eingeben"
+        }
+      },
+      "validation": {
+        "nameRequired": "Abteilungsname ist erforderlich",
+        "nameMax": "Abteilungsname darf höchstens 120 Zeichen lang sein",
+        "managerRequired": "Vorgesetzte(r) ist erforderlich",
+        "descriptionMax": "Beschreibung darf höchstens 2000 Zeichen lang sein"
+      },
+      "notifications": {
+        "creating": "Abteilung wird erstellt",
+        "updating": "Abteilung wird aktualisiert",
+        "assigningManager": "Vorgesetzte(r) wird zugewiesen"
+      },
+      "employeeFallback": "Mitarbeiter"
+    },
+    "cards": {
+      "totalDepartments": {
+        "title": "Abteilungen insgesamt",
+        "newDepartmentsHint": "{count, plural, =0 {Keine neuen Abteilungen in diesem Jahr} one {# neue Abteilung in diesem Jahr} other {# neue Abteilungen in diesem Jahr}}",
+        "fallbackName": "Abteilung"
+      },
+      "absenceRate": {
+        "title": "Abwesenheitsquote nach Abteilung",
+        "noData": "Keine Abteilungsdaten",
+        "absence": "Abwesenheit",
+        "absentDays": "{count, plural, one {# Abwesenheitstag} other {# Abwesenheitstage}}"
+      },
+      "mostEmployees": {
+        "title": "Abteilung mit den meisten Mitarbeitern",
+        "employeesCount": "{count, plural, one {# Mitarbeiter} other {# Mitarbeitende}}",
+        "noData": "Keine Mitarbeiterdaten"
+      }
+    },
+    "details": {
+      "title": "Abteilungsdetails",
+      "budget": "Budget",
+      "employeesHeading": "Mitarbeiter in der Abteilung"
+    },
+    "addEmployees": {
+      "trigger": "Mitarbeiter hinzufügen",
+      "title": "Mitarbeiter hinzufügen",
+      "description": "Wählen Sie Mitarbeiter aus, die dieser Abteilung derzeit nicht zugeordnet sind.",
+      "searchPlaceholder": "Nach Name oder Mitarbeiter-ID suchen",
+      "employeeId": "ID: {id}",
+      "submit": "Auswahl hinzufügen ({count})",
+      "adding": "Mitarbeiter werden hinzugefügt",
+      "noMatches": "Keine Mitarbeiter entsprechen Ihrer Suche.",
+      "noneAvailable": "Keine Mitarbeiter zum Hinzufügen verfügbar."
+    }
+  },
+  "sidebar": {
+    "sections": {
+      "main": "Hauptmenü",
+      "management": "Verwaltung",
+      "hiring": "Einstellung",
+      "communication": "Kommunikation",
+      "settings": "Einstellungen",
+      "finance": "Finanzen"
+    },
+    "items": {
+      "attendance": "Anwesenheit",
+      "calendar": "Kalender",
+      "employee": "Mitarbeiter",
+      "projects": "Projekte",
+      "department": "Abteilung",
+      "timeOff": "Urlaub",
+      "overall": "Überblick",
+      "jobHiring": "Stellenausschreibungen",
+      "candidates": "Bewerber",
+      "rejected": "Abgelehnt",
+      "tickets": "Tickets",
+      "configuration": "Konfiguration",
+      "payroll": "Lohn",
+      "myPayslips": "Meine Lohnabrechnungen",
+      "loans": "Hilfsleihen",
+      "financeQueue": "Zahlungswarteschlange"
+    },
+    "navigationMenu": "Navigationsmenü"
+  },
+  "searchDialog": {
+    "title": "Seiten suchen",
+    "placeholder": "Seiten suchen...",
+    "triggerPlaceholder": "Alles durchsuchen",
+    "triggerAriaLabel": "Seitensuche öffnen",
+    "noResults": "Keine Seiten gefunden",
+    "shortcut": "Strg K"
+  },
+  "notificationBell": {
+    "title": "Benachrichtigungen",
+    "markAllRead": "Alle als gelesen markieren",
+    "empty": "Noch keine Benachrichtigungen",
+    "loadMore": "Mehr laden",
+    "filterAll": "Alle",
+    "filterUnread": "Ungelesen",
+    "priorityAll": "Alle Prioritäten",
+    "priorityLow": "Niedrig",
+    "priorityNormal": "Normal",
+    "priorityHigh": "Hoch",
+    "priorityUrgent": "Dringend",
+    "priorityLabel": "Priorität",
+    "listMeta": "{loaded} von {total} angezeigt",
+    "unreadIndicator": "Ungelesen"
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Seite nicht gefunden",
+    "description": "Die von Ihnen gesuchte Seite ist nicht verfügbar!",
+    "backHome": "Zurück zur Startseite"
+  },
+  "pagination": {
+    "showing": "Zeige",
+    "to": "bis",
+    "of": "von",
+    "entries": "Einträge",
+    "items": "Elemente",
+    "show": "Anzeigen",
+    "noItems": "Keine Elemente gefunden"
+  },
+  "suite": {
+    "opening": "HR wird geöffnet…",
+    "handoffTitle": "Dieser Link ist abgelaufen",
+    "handoffBody": "Links aus der Suite funktionieren einmal und eine Minute lang. Öffnen Sie HR erneut aus OrgTik.",
+    "backToSuite": "Aus OrgTik öffnen",
+    "noAccessTitle": "Sie haben keinen Zugriff auf HR",
+    "noAccessBody": "Bitten Sie einen Admin in OrgTik, Ihnen eine HR-Rolle zu geben.",
+    "toSuite": "Zurück zu OrgTik",
+    "appName": "HR",
+    "apps": {
+      "global": "Start",
+      "file_manager": "Dateien",
+      "task_manager": "Aufgaben",
+      "hq": "Chats",
+      "hr_system": "HR",
+      "digital_marketing": "Marketing",
+      "sales": "CRM",
+      "website_manager": "Website",
+      "website_manager_legacy": "Altes CMS"
+    },
+    "greeting": {
+      "morning": "Guten Morgen, {name}",
+      "afternoon": "Guten Tag, {name}",
+      "evening": "Guten Abend, {name}",
+      "night": "Gute Nacht, {name}"
+    }
+  },
+  "feedback": {
+    "saved": "Änderungen gespeichert",
+    "added": "Hinzugefügt",
+    "deleted": "Gelöscht",
+    "uploaded": "Hochgeladen",
+    "employeeAdded": "Mitarbeitende hinzugefügt",
+    "employeeRemoved": "Mitarbeitende entfernt",
+    "requestSent": "Antrag gesendet",
+    "decisionSaved": "Entscheidung gespeichert",
+    "runStarted": "Lohnlauf gestartet",
+    "runFrozen": "Lauf eingefroren",
+    "runReopened": "Lauf wieder geöffnet",
+    "sentForApproval": "Zur Freigabe gesendet",
+    "reviewSubmitted": "Prüfung abgeschickt",
+    "allApproved": "Alle Positionen freigegeben",
+    "paymentsRecorded": "Zahlungen erfasst",
+    "paymentRecorded": "Zahlung erfasst",
+    "payslipsSent": "Lohnabrechnungen gesendet",
+    "payslipSent": "Lohnabrechnung gesendet",
+    "ticketCreated": "Ticket erstellt",
+    "readOnly": "Sie sehen die Ansicht einer anderen Person, deshalb sind Änderungen abgeschaltet.",
+    "forbidden": "Dazu fehlt Ihnen die Berechtigung.",
+    "gone": "Das gibt es nicht mehr. Laden Sie die Seite neu.",
+    "conflict": "Jemand hat das gleichzeitig geändert. Laden Sie neu und versuchen Sie es erneut.",
+    "tooLarge": "Die Datei ist zu groß.",
+    "tooMany": "Zu viele Versuche. Warten Sie kurz und versuchen Sie es erneut.",
+    "offline": "Der Server ist nicht erreichbar. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "invalid": "Einige Angaben stimmen nicht. Prüfen Sie das Formular und versuchen Sie es erneut.",
+    "failed": "Das hat nicht funktioniert. Versuchen Sie es erneut.",
+    "pleaseWait": "Einen Moment bitte …"
+  },
+  "errors": {
+    "notFoundTitle": "Diese Seite gibt es nicht",
+    "notFoundBody": "Der Link ist vielleicht veraltet, oder die Seite wurde verschoben.",
+    "toHome": "Zur HR-Startseite",
+    "crashTitle": "Diese Seite funktioniert nicht mehr",
+    "crashBody": "Bei uns ist etwas schiefgelaufen. Versuchen Sie es erneut oder gehen Sie zur HR-Startseite.",
+    "reference": "Referenz:",
+    "retry": "Erneut versuchen",
+    "noAccessTitle": "Sie haben keinen Zugriff auf diese Seite",
+    "noAccessBody": "Sie ist für andere HR-Rollen. Fragen Sie einen HR-Admin, wenn Sie sie brauchen."
+  },
+  "actions": {
+    "view": "Ansehen",
+    "viewDetails": "Details ansehen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "download": "Herunterladen",
+    "send": "Senden",
+    "call": "Anrufen",
+    "email": "E-Mail senden",
+    "remove": "Entfernen",
+    "moreActions": "Weitere Aktionen",
+    "addNote": "Notiz hinzufügen",
+    "makeManager": "Zur Leitung machen",
+    "isManager": "Leitung",
+    "managerCantBeRemoved": "Die Leitung kann nicht entfernt werden",
+    "removeEmployee": "Aus der Abteilung entfernen",
+    "reviewRequest": "Antrag prüfen",
+    "previewPayslip": "Lohnabrechnung ansehen",
+    "downloadFile": "{name} herunterladen",
+    "removeHoliday": "Feiertag entfernen",
+    "openEmployee": "{name} öffnen",
+    "openTicket": "Ticket {id} öffnen",
+    "openDepartment": "{name} öffnen",
+    "openRun": "Lohnlauf öffnen",
+    "month": "Monat",
+    "year": "Jahr",
+    "rowsPerPage": "Zeilen pro Seite",
+    "filterBy": "Filtern",
+    "enabled": "Aktiv",
+    "ticketReply": "Antwort",
+    "pagination": "Seitennavigation",
+    "moveUp": "Nach oben",
+    "moveDown": "Nach unten",
+    "removeSection": "Abschnitt entfernen",
+    "previousPage": "Vorherige Seite",
+    "nextPage": "Nächste Seite",
+    "previousMonth": "Vorheriger Monat",
+    "nextMonth": "Nächster Monat"
+  },
+  "leaveTypes": {
+    "annual_leave": "Jahresurlaub",
+    "sick_leave": "Krankheitsurlaub",
+    "personal_leave": "Persönlicher Urlaub",
+    "vacation_day": "Urlaubstag",
+    "bereavement_leave": "Trauerurlaub",
+    "medical_appointment": "Arzttermin",
+    "mental_health_day": "Tag für psychische Gesundheit",
+    "training_day": "Weiterbildungstag",
+    "public_holiday": "Feiertag",
+    "unpaid_leave": "Unbezahlter Urlaub",
+    "other": "Sonstiges",
+    "discord_voice_leave": "Pause vom Sprachkanal"
+  },
+  "deleteDialog": {
+    "title": "Wirklich löschen?",
+    "impact": "Es wird für alle entfernt.",
+    "confirm": "Löschen",
+    "cancel": "Abbrechen",
+    "department": {
+      "title": "Abteilung {name} löschen?",
+      "impact": "{count, plural, =0 {Niemand ist darin.} one {# Person ist darin. Sie behält ihre Stelle und verlässt die Abteilung.} other {# Personen sind darin. Sie behalten ihre Stellen und verlassen die Abteilung.}}",
+      "confirm": "Abteilung löschen"
+    },
+    "ticket": {
+      "title": "Ticket #{id} „{subject}“ löschen?",
+      "impact": "Seine Nachrichten und Anhänge werden mit gelöscht.",
+      "confirm": "Ticket löschen"
+    },
+    "member": {
+      "title": "{name} aus dieser Abteilung entfernen?",
+      "impact": "Die Person behält ihre Stelle und kann wieder einer Abteilung zugeordnet werden.",
+      "confirm": "Entfernen"
+    },
+    "noteTitle": "Diese Notiz löschen?",
+    "noteImpact": "Alle, die die Notizen zu dieser Person sehen, verlieren sie.",
+    "noteConfirm": "Notiz löschen"
+  },
+  "common": {
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "confirm": "Bestätigen",
+    "close": "Schließen",
+    "open": "Öffnen",
+    "noResults": "Keine Ergebnisse.",
+    "search": "Suchen",
+    "searchPlaceholder": "Suchen...",
+    "allFilters": "Alle Filter",
+    "viewBoard": "Board",
+    "viewList": "Liste",
+    "userAvatar": "Profilbild",
+    "avatarFallback": "k. A."
+  },
+  "statusBadge": {
+    "pending": "Ausstehend",
+    "approved": "Genehmigt",
+    "rejected": "Abgelehnt",
+    "solved": "Gelöst",
+    "new_tickets": "Neue Tickets",
+    "open": "Offen",
+    "todo": "Zu erledigen",
+    "in_progress": "In Bearbeitung",
+    "completed": "Abgeschlossen",
+    "on_hold": "Zurückgestellt",
+    "cancelled": "Storniert",
+    "backlog": "Backlog",
+    "in_review": "In Prüfung",
+    "done": "Erledigt",
+    "closed": "Geschlossen",
+    "unknown": "Unbekannt",
+    "late": "Verspätet",
+    "frozen": "Eingefroren",
+    "queued": "In Warteschlange",
+    "paid": "Bezahlt",
+    "draft": "Entwurf",
+    "auto": "Automatisch",
+    "submitted": "Eingereicht",
+    "change": "Änderung",
+    "active": "Aktiv",
+    "paused": "Pausiert",
+    "change_requested": "Änderung angefordert",
+    "new": "Neu",
+    "failed": "Fehlgeschlagen",
+    "absent": "Abwesend",
+    "on_leave": "Im Urlaub"
+  },
+  "jobOpeningCard": {
+    "showDetails": "Details anzeigen",
+    "shareOpening": "Stelle teilen",
+    "linkCopied": "Link kopiert",
+    "linkCopiedToClipboard": "Link in die Zwischenablage kopiert"
+  },
+  "attachmentList": {
+    "fileBadge": "DATEI"
+  },
+  "textEditor": {
+    "placeholder": "Hier tippen oder Inhalt einfügen …",
+    "toolbar": {
+      "bold": "Fett",
+      "italic": "Kursiv",
+      "underline": "Unterstrichen",
+      "heading1": "Überschrift 1",
+      "heading2": "Überschrift 2",
+      "heading3": "Überschrift 3",
+      "numberedList": "Nummerierte Liste",
+      "bulletedList": "Aufzählung",
+      "alignLeft": "Linksbündig",
+      "alignCenter": "Zentriert",
+      "alignRight": "Rechtsbündig",
+      "justify": "Blocksatz",
+      "lineBreak": "Zeilenumbruch",
+      "horizontalRule": "Horizontale Linie",
+      "signatures": "Unterschriftsvarianten",
+      "quickStyles": "Schnellformate"
+    },
+    "signatures": {
+      "sideBySide": "Nebeneinander (klassisch)",
+      "verticalList": "Untereinander (offiziell)",
+      "single": "Einzelne Unterschrift (kompakt)",
+      "threeColumns": "Drei Spalten (mit Zeuge)"
+    },
+    "quickStyles": {
+      "flexBetween": "Zwei Seiten",
+      "twoColumnGrid": "Raster mit 2 Spalten",
+      "sectionCard": "Abschnittskarte",
+      "infoNote": "Hinweis"
+    }
+  },
+  "uploadField": {
+    "title": "Belege hierher ziehen und ablegen",
+    "changeTitle": "Belegdatei ändern",
+    "maxSize": "Maximale Dateigröße: {size} MB",
+    "button": "Dateien hochladen",
+    "previewAlt": "Logo-Vorschau"
+  }
+}

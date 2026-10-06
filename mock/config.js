@@ -1,0 +1,41 @@
+// Ports and folders for every app. MOCK_PORT_OFFSET shifts all API ports (handy for isolated tests).
+const offset = Number(process.env.MOCK_PORT_OFFSET || 0);
+
+const apps = {
+  sos: { dir: "somion-sos-frontend-main", web: 3013, api: 4000 },
+  tasks: { dir: "task-manager-front-main", web: 3001, api: 4001 },
+  files: { dir: "file-manager-dashboard-main", web: 3002, api: 4002 },
+  sales: { dir: "sales-dashboardv2-main", web: 3003, api: 4003 },
+  hr: { dir: "somion-hr-dashboard-main", web: 3004, api: 4004 },
+  marketing: { dir: "digital-marketing-frontend-main", web: 3014, api: 4005 },
+  content: { dir: "content-dashboard-somion-main", web: 3006, api: 4006 },
+  // Somion HQ (chat, calls, virtual office): a prototype with its own built-in mock data, so no API.
+  chats: { dir: "somion-hq", web: 3000, api: null, devArgs: ["run", "dev", "--", "-p", "3000"] },
+  // The public website is frontend-only (no API). devArgs: Vite takes --port, not -p.
+  website: { dir: "orgtik-website/landing-directions", web: 4173, api: null, devArgs: ["run", "dev", "--", "--host", "127.0.0.1", "--port", "4173", "--strictPort"] },
+  // Reserved for apps the program will build. They're skipped until they exist (reserved: true).
+  wm: { dir: "orgtik-website-manager", web: 3007, api: 4007 }, // Website Manager (CMS), D-034
+  admin: { dir: "orgtik-admin", web: 3008, api: 4008 }, // Admin back-office (ADM) + platform API (Phase E)
+};
+
+for (const a of Object.values(apps)) if (a.api != null) a.api += offset;
+
+const icons = { port: 4099 + offset };
+
+// Hosted prototype (Vercel): one function serves every API under /<key>, and each web app has
+// its own domain. MOCK_PUBLIC_URL is the function's origin; SUITE_WEB_URLS is a JSON map
+// {key: origin}. Writable data goes to /tmp there, since the deployment itself is read-only.
+const PUBLIC = (process.env.MOCK_PUBLIC_URL || "").replace(/\/$/, "");
+let WEB = {};
+try {
+  WEB = JSON.parse(process.env.SUITE_WEB_URLS || "{}");
+} catch {
+  WEB = {};
+}
+const hosted = Boolean(PUBLIC);
+const dataDir = process.env.VERCEL ? "/tmp/orgtik-mock" : __dirname;
+
+const webUrl = (key) => (WEB[key] ? WEB[key].replace(/\/$/, "") : `http://localhost:${apps[key].web}`);
+const apiUrl = (key) => (hosted ? `${PUBLIC}/${key}` : `http://localhost:${apps[key].api}`);
+
+module.exports = { apps, icons, webUrl, apiUrl, offset, hosted, dataDir };

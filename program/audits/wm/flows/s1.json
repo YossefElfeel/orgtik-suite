@@ -1,0 +1,102 @@
+[
+  {
+    "title": "Editor saves and submits; approver approves and publishes; the site's API changes",
+    "ok": true,
+    "passed": 5,
+    "steps": 5,
+    "detail": [
+      {
+        "name": "edit-goal",
+        "ok": true,
+        "note": "the save bar appears"
+      },
+      {
+        "name": "save-draft",
+        "ok": true,
+        "note": "state draft, v3"
+      },
+      {
+        "name": "submit",
+        "ok": true,
+        "note": "in review; the editor sees 0 Approve buttons"
+      },
+      {
+        "name": "approve",
+        "ok": true,
+        "note": ""
+      },
+      {
+        "name": "publish",
+        "ok": true,
+        "note": "public goal: Grow qualified leads from the website without growing ad spe"
+      }
+    ]
+  },
+  {
+    "title": "A translation starts from English; numbers stay English's",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "arabic-not-started",
+        "ok": true,
+        "note": "empty state offers Start from English"
+      },
+      {
+        "name": "start-and-save",
+        "ok": true,
+        "note": "ar in_progress"
+      },
+      {
+        "name": "numbers-locked",
+        "ok": true,
+        "note": "9 of 9 number fields locked in Arabic"
+      }
+    ]
+  },
+  {
+    "title": "Two people edit at once: the second save says so instead of overwriting",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "first-save",
+        "ok": true,
+        "note": ""
+      },
+      {
+        "name": "second-save-conflict",
+        "ok": true,
+        "note": "Someone else changed this Karim Hassan saved a newer version while you were editing. Reload to see it; your unsaved chan"
+      }
+    ]
+  },
+  {
+    "title": "Four eyes: whoever wrote the draft can't approve it",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "own-draft-in-review",
+        "ok": true,
+        "note": "Approve disabled: true; explanation shown: true"
+      }
+    ]
+  },
+  {
+    "title": "A viewer can read a case study but not change it",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "read-only",
+        "ok": true,
+        "note": "0 write buttons; Name read-only: true"
+      }
+    ]
+  }
+]

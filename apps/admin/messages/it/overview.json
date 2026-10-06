@@ -1,0 +1,24 @@
+{
+  "Overview": {
+    "title": "Panoramica",
+    "description": "Come va la piattaforma e il lavoro che attende il team.",
+    "numbers": "Numeri chiave",
+    "mrr": "Ricavi ricorrenti mensili",
+    "mrrHint": "Tutte le valute, in USD al cambio di oggi",
+    "workspaces": "Spazi di lavoro clienti",
+    "workspacesHint": "{active} attivi · {pastDue} in ritardo · {suspended} sospesi",
+    "trials": "Prove in corso",
+    "trialsHint": "{count, plural, =0 {Nessuna scade nei prossimi 3 giorni} one {# scade nei prossimi 3 giorni} other {# scadono nei prossimi 3 giorni}}",
+    "pastDue": "Fatture non pagate",
+    "pastDueHint": "Scadute; altre {open} aperte",
+    "queue": "In attesa del team",
+    "q": {
+      "pastDue": "Fatture scadute",
+      "newRequests": "Nuove richieste di servizio",
+      "openTickets": "Ticket di assistenza aperti",
+      "customPlans": "Richieste di piano personalizzato da quotare",
+      "migrations": "Migrazioni di valuta da esaminare",
+      "waitlist": "Persone in lista d'attesa"
+    }
+  }
+}

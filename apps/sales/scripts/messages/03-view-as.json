@@ -1,0 +1,5 @@
+{
+ "Shell.viewingAs": {"en": "Viewing as {name}", "ar": "تعرض بصفة {name}", "de": "Ansicht als {name}", "fr": "Vue en tant que {name}", "it": "Vista come {name}"},
+ "Shell.viewingAsBody": {"en": "Read-only: nothing can be changed in this session.", "ar": "للقراءة فقط: لا يمكن تغيير أي شيء في هذه الجلسة.", "de": "Nur Lesen: In dieser Sitzung lässt sich nichts ändern.", "fr": "Lecture seule : rien ne peut être modifié dans cette session.", "it": "Sola lettura: in questa sessione non si può modificare nulla."},
+ "Shell.viewingAsExit": {"en": "End in SOS", "ar": "الإنهاء من SOS", "de": "In SOS beenden", "fr": "Terminer dans SOS", "it": "Termina in SOS"}
+}

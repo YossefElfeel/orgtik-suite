@@ -1,0 +1,7 @@
+{
+ "Shell.sectionTeam": {"en": "Team and rewards", "ar": "الفريق والمكافآت", "de": "Team und Prämien", "fr": "Équipe et récompenses", "it": "Team e premi"},
+ "Shell.sectionMoving": {"en": "Moving to Admin", "ar": "تنتقل إلى الإدارة", "de": "Wechselt zu Admin", "fr": "Bientôt dans Admin", "it": "In passaggio ad Admin"},
+ "Shell.movingNote": {"en": "These move to the Admin app. They keep working here until then.", "ar": "تنتقل هذه الأقسام إلى تطبيق الإدارة، وتبقى تعمل هنا حتى ذلك الحين.", "de": "Diese Bereiche wechseln in die Admin-App. Bis dahin funktionieren sie weiter hier.", "fr": "Ces sections passeront dans l’application Admin. Elles fonctionnent ici d’ici là.", "it": "Queste sezioni passeranno all’app Admin. Fino ad allora funzionano qui."},
+ "Shell.movingBanner": {"en": "This section moves to the Admin app. It keeps working here until then, and isn't being redesigned.", "ar": "ينتقل هذا القسم إلى تطبيق الإدارة. يبقى يعمل هنا حتى ذلك الحين، ولن يُعاد تصميمه.", "de": "Dieser Bereich wechselt in die Admin-App. Bis dahin funktioniert er hier weiter und wird nicht neu gestaltet.", "fr": "Cette section passera dans l’application Admin. Elle fonctionne ici d’ici là et n’est pas redessinée.", "it": "Questa sezione passerà all’app Admin. Fino ad allora funziona qui e non viene ridisegnata."},
+ "Shell.profile": {"en": "My profile", "ar": "ملفي الشخصي", "de": "Mein Profil", "fr": "Mon profil", "it": "Il mio profilo"}
+}

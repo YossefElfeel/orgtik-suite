@@ -1,0 +1,16 @@
+{
+  "route": "/sign-in",
+  "width": 1440,
+  "rendered": true,
+  "errors": [],
+  "text": "Skip to content\nView project\nHome\nServices\nSoftware\nWork\nAbout\nInsights\nEN\nSign in\nStart a project\nSign in\nCreate account\nReset password\nSign in\nUse the email linked to your OrgTik workspace.\nWork email\nPassword\nSign in\nAccount preview · nothing is authenticated, created, sent, or stored.\nBack to top\nMake the next move matter.\nStrategy, design, and technology brought together around one clear ambition: moving your business forward.\nTalk to us\nExplore\nSoftware\nServices\nSelected work\nInsights\nAbout OrgTik\nStart here\nBuild a software plan\nTell us about your project\nRoadmap\nSitemap\nMade in Switzerland\n© 2026 OrgTik.\nIndependent digital partner\nStrategy. Design. Technology.",
+  "headings": [
+    "h1 Sign in",
+    "h2 Make the next move matter.",
+    "h3 Explore",
+    "h3 Start here"
+  ],
+  "aria": "- link \"Skip to content\":\n- text: View project\n- banner:\n  - link \"OrgTik\":\n    - img \"OrgTik\"\n  - navigation:\n    - link \"Home\":\n    - link \"Services\":\n    - link \"Software\":\n    - link \"Work\":\n    - link \"About\":\n    - link \"Insights\":\n  - button \"Language, English\": EN\n  - link \"Sign in\":\n  - link \"Start a project\":\n- main:\n  - button \"Sign in\" [pressed]\n  - button \"Create account\"\n  - button \"Reset password\"\n  - heading \"Sign in\" [level=1]\n  - paragraph: Use the email linked to your OrgTik workspace.\n  - text: Work email\n  - textbox \"Work email\":\n    - /placeholder: alex@example.com\n  - text: Password\n  - textbox \"Password\":\n    - /placeholder: ••••••••\n  - button \"Sign in\"\n  - paragraph: Account preview · nothing is authenticated, created, sent, or stored.\n- contentinfo:\n  - link \"OrgTik home\":\n    - img \"OrgTik\"\n  - link \"Back to top\":\n  - heading \"Make the next move matter.\" [level=2]:\n    - text: Make the next move\n    - emphasis: matter.\n  - paragraph: \"Strategy, design, and technology brought together around one clear ambition: moving your business forward.\"\n  - button \"Talk to us\"\n  - navigation:\n    - heading \"Explore\" [level=3]\n    - link \"Software\":\n    - link \"Services\":\n    - link \"Selected work\":\n    - link \"Insights\":\n    - link \"About OrgTik\":\n    - heading \"Start here\" [level=3]\n    - link \"Build a software plan\":\n    - link \"Tell us about your project\":\n    - link \"Roadmap\":\n    - link \"Sitemap\":\n  - text: Made in Switzerland © 2026 OrgTik. Independent digital partner Strategy. Design. Technology.",
+  "title": "sign in | OrgTik",
+  "url": "/sign-in"
+}

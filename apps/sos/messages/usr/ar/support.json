@@ -1,0 +1,70 @@
+{
+  "Support": {
+    "title": "الدعم",
+    "descriptionAdmin": "كل التذاكر المفتوحة في {name}. يردّ دعم OrgTik هنا وعبر البريد الإلكتروني.",
+    "descriptionMember": "التذاكر التي فتحتها. يردّ دعم OrgTik هنا وعبر البريد الإلكتروني.",
+    "newTicket": "تذكرة جديدة",
+    "new": {
+      "title": "تذكرة جديدة",
+      "description": "أخبر دعم OrgTik بما يحدث. يصلك الرد هنا وعبر البريد الإلكتروني.",
+      "sent": "فُتحت التذكرة {number}",
+      "subject": "الموضوع",
+      "subjectMissing": "اكتب موضوعًا للتذكرة.",
+      "category": "الفئة",
+      "categoryMissing": "اختر فئة.",
+      "categoryPlaceholder": "اختر فئة",
+      "message": "الرسالة",
+      "messageMissing": "صِف المشكلة أو السؤال.",
+      "messageHint": "ما الذي حدث، وما الذي توقعته، وأين. تفيد أرقام الفواتير أو الطلبات.",
+      "cancel": "إلغاء",
+      "submit": "فتح التذكرة"
+    },
+    "tableLabel": "تذاكر الدعم",
+    "emptyTitle": "لا تذاكر",
+    "emptyBody": "اسأل دعم OrgTik عن أي شيء يخص الفوترة أو إحدى الأدوات أو خدمة ما.",
+    "colNumber": "الرقم",
+    "colSubject": "الموضوع",
+    "colCategory": "الفئة",
+    "colStatus": "الحالة",
+    "colLastReply": "آخر رد",
+    "colCreated": "تاريخ الفتح",
+    "noReply": "لا رد بعد",
+    "categories": {
+      "billing": "الفوترة",
+      "product": "المنتج",
+      "sales": "المبيعات",
+      "technical": "مشكلة تقنية",
+      "other": "أخرى"
+    },
+    "thread": {
+      "staff": "دعم OrgTik",
+      "you": "أنت",
+      "empty": "اكتب شيئًا أولًا."
+    },
+    "detail": {
+      "missingTitle": "هذه التذكرة غير موجودة هنا",
+      "failedTitle": "تعذّر تحميل التذكرة",
+      "missingBody": "ربما تتبع مساحة عمل أخرى، أو فتحها شخص آخر.",
+      "failedBody": "تحقّق من اتصالك وحاول مرة أخرى.",
+      "toTickets": "العودة إلى التذاكر",
+      "meta": "{category} · فُتحت في {date}",
+      "resolve": "وضع علامة «تم الحل»",
+      "waitingUntil": "ينتظر دعم OrgTik ردك. إن لم ترد، تُغلق التذكرة في {date}.",
+      "waiting": "ينتظر دعم OrgTik ردك.",
+      "conversation": "المحادثة",
+      "noMessages": "لا رسائل بعد.",
+      "closedTitle": "هذه التذكرة مغلقة",
+      "openNew": "فتح تذكرة جديدة",
+      "closedBody": "لا يمكن إضافة ردود إلى تذكرة مغلقة. افتح تذكرة جديدة واذكر رقم هذه التذكرة.",
+      "replyLabel": "ردك",
+      "reply": "إرسال الرد",
+      "reopensUntil": "حُلّت هذه التذكرة. الرد قبل {date} يعيد فتحها.",
+      "reopens": "حُلّت هذه التذكرة. الرد يعيد فتحها.",
+      "reopened": "أُرسل الرد. فُتحت التذكرة من جديد.",
+      "replied": "أُرسل الرد",
+      "resolveTitle": "وضع علامة «تم الحل» على {number}؟",
+      "resolveImpact": "يعرف دعم OrgTik أن المشكلة حُلّت. إن عادت المشكلة، رُدّ هنا لإعادة فتحها.",
+      "resolved": "حُلّت التذكرة"
+    }
+  }
+}

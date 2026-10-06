@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-05T19:23:08.272Z",
+  "results": [
+    {
+      "name": "Forms live in the Website Manager",
+      "ok": true,
+      "note": "privacy 0.2 in force"
+    },
+    {
+      "name": "Pull the content into the website",
+      "ok": true,
+      "note": "content: unchanged since the last pull"
+    },
+    {
+      "name": "Contact form sends a lead",
+      "ok": true,
+      "note": "lead ld_06, utm {\"source\":\"walk\",\"campaign\":\"s6\"}"
+    },
+    {
+      "name": "Roadmap suggestion arrives as a pending idea",
+      "ok": true,
+      "note": "idea idea_muvn0eld pending"
+    },
+    {
+      "name": "Back to preview: reset and pull",
+      "ok": true,
+      "note": "content: 14 page, 7 global, 13 strings, 1 caseStudy, 5 serviceFamily, 11 service, 6 softwareModule, 6 article, 3 legalDocument, 6 roadmapItem, 2 pricing, 7 ideas -> src/content/snapshot.js"
+    },
+    {
+      "name": "In preview the form sends nothing",
+      "ok": true,
+      "note": "no request; the page shows its sent state as before"
+    }
+  ]
+}

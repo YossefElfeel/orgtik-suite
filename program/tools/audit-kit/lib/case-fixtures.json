@@ -1,0 +1,832 @@
+[
+  {
+    "id": "cs_02",
+    "slug": {
+      "en": "connected-platform-concept"
+    },
+    "department": "development",
+    "locales": {
+      "en": {
+        "name": "Connected platform concept",
+        "category": "Platform",
+        "sector": "Business operations",
+        "summary": "A product direction for bringing six everyday systems into one coherent workspace.",
+        "transformation": "From disconnected tools to one clearer operating picture.",
+        "client": "Concept for operations teams",
+        "timeline": "12 weeks",
+        "team": "Product, engineering and interface design",
+        "challenge": "Teams juggled separate tools for people, clients, files, tasks, marketing and the website. Each had its own login, its own data, and its own idea of who a customer was.",
+        "goal": "Design and prototype one workspace where six systems share records, permissions and navigation, without forcing teams to change how they already work.",
+        "role": "Product discovery, technical architecture, interface system and a working frontend prototype.",
+        "highlight": {
+          "value": "6 → 1",
+          "label": "logins to reach every system"
+        },
+        "approach": {
+          "title": [
+            "Built in sprints,",
+            "shipped in steps."
+          ],
+          "intro": "Five two-to-three-week sprints, each ending with something working that the team could click through and challenge.",
+          "steps": [
+            {
+              "when": "Sprint 00 · 2 weeks",
+              "title": "Discovery",
+              "detail": "Mapped six tools, 23 recurring workflows, and every place data was copied between them by hand.",
+              "outputs": [
+                "Workflow map",
+                "Integration inventory"
+              ],
+              "log": "23 workflows mapped"
+            },
+            {
+              "when": "Sprint 01 · 2 weeks",
+              "title": "Architecture",
+              "detail": "Defined a shared data model for people, clients, files and tasks, plus one contract every module plugs into.",
+              "outputs": [
+                "Data model",
+                "Module contract",
+                "Access plan"
+              ],
+              "log": "1 shared record model"
+            },
+            {
+              "when": "Sprint 02 · 3 weeks",
+              "title": "Workspace shell",
+              "detail": "Built single sign-in, global navigation, search and notifications so every module feels like part of one product.",
+              "outputs": [
+                "App shell",
+                "Design tokens"
+              ],
+              "log": "Single sign-in live"
+            },
+            {
+              "when": "Sprint 03 · 3 weeks",
+              "title": "Module integration",
+              "detail": "Connected the six modules to shared records, so a client created in Relationships appears in Work and Files straight away.",
+              "outputs": [
+                "6 modules connected",
+                "Shared search"
+              ],
+              "log": "0 manual copy steps"
+            },
+            {
+              "when": "Sprint 04 · 2 weeks",
+              "title": "Hardening",
+              "detail": "Added automated tests, an accessibility review, performance budgets and a staged release plan.",
+              "outputs": [
+                "Test suite",
+                "Release plan"
+              ],
+              "log": "Performance budget met"
+            }
+          ]
+        },
+        "delivered": {
+          "title": [
+            "One core,",
+            "six connected modules."
+          ],
+          "intro": "Every module reads from and writes to the same shared layer, so records, access and search stay consistent across the workspace.",
+          "core": "Shared workspace",
+          "layers": [
+            "Single sign-in",
+            "Shared records",
+            "Permissions",
+            "Search & notifications"
+          ],
+          "modules": [
+            {
+              "name": "People",
+              "icon": "ph-users-three"
+            },
+            {
+              "name": "Relationships",
+              "icon": "ph-chart-line-up"
+            },
+            {
+              "name": "Files",
+              "icon": "ph-folder-simple"
+            },
+            {
+              "name": "Work",
+              "icon": "ph-check-square"
+            },
+            {
+              "name": "Marketing",
+              "icon": "ph-megaphone"
+            },
+            {
+              "name": "Website",
+              "icon": "ph-browser"
+            }
+          ],
+          "stack": [
+            "React",
+            "TypeScript",
+            "REST API",
+            "PostgreSQL",
+            "Automated tests"
+          ]
+        },
+        "results": {
+          "title": [
+            "Measured before",
+            "it shipped."
+          ],
+          "intro": "Engineering results come from audits and test runs on the prototype, not from opinions about how it feels.",
+          "gauges": [
+            {
+              "label": "Performance",
+              "value": 96
+            },
+            {
+              "label": "Accessibility",
+              "value": 100
+            },
+            {
+              "label": "Best practices",
+              "value": 100
+            },
+            {
+              "label": "SEO",
+              "value": 100
+            }
+          ],
+          "metrics": [
+            {
+              "value": "1.1s",
+              "label": "largest contentful paint on a mid-range phone"
+            },
+            {
+              "value": "85%",
+              "label": "automated test coverage on shared services"
+            },
+            {
+              "value": "0",
+              "label": "manual copy steps between modules"
+            },
+            {
+              "value": "6 → 1",
+              "label": "logins to reach every system"
+            }
+          ]
+        }
+      }
+    },
+    "image": {
+      "src": "brand-tablet.webp",
+      "alt": {}
+    },
+    "gallery": [
+      {
+        "src": "brand-tablet.webp",
+        "alt": {}
+      },
+      {
+        "src": "brand-phone.webp",
+        "alt": {}
+      },
+      {
+        "src": "brand-cards.webp",
+        "alt": {}
+      }
+    ]
+  },
+  {
+    "id": "cs_03",
+    "slug": {
+      "en": "managed-digital-presence"
+    },
+    "department": "hosting",
+    "locales": {
+      "en": {
+        "name": "Managed digital presence",
+        "category": "Hosting & support",
+        "sector": "Digital infrastructure",
+        "summary": "A connected service model spanning the website, hosting, monitoring, and ongoing improvement.",
+        "transformation": "From launch-day delivery to a dependable long-term digital partnership.",
+        "client": "Service model sample",
+        "timeline": "3 weeks + ongoing care",
+        "team": "Hosting, development and support",
+        "challenge": "The website sat on low-cost shared hosting with manual updates and no tested backups. Pages were slow, plugins were months out of date, and nobody was watching when something went wrong.",
+        "goal": "Move the website to a managed home with monitoring, verified backups and a named person to call, using a planned, low-risk switch.",
+        "role": "Hosting audit, migration plan, environment setup, DNS cutover, monitoring, backups and ongoing performance care.",
+        "highlight": {
+          "value": "3.9s → 1.3s",
+          "label": "average page load"
+        },
+        "approach": {
+          "title": [
+            "A runbook,",
+            "not a leap of faith."
+          ],
+          "intro": "Every migration step was written down, checked and reversible before anything live was touched.",
+          "steps": [
+            {
+              "when": "Days 1–3",
+              "title": "Audit",
+              "detail": "Listed the site, plugins, DNS records, email routing and every third-party script it depended on.",
+              "outputs": [
+                "Dependency list"
+              ]
+            },
+            {
+              "when": "Days 4–7",
+              "title": "Staging",
+              "detail": "Built a staging copy on the new environment and tested every page and form against the original.",
+              "outputs": [
+                "Staging site"
+              ]
+            },
+            {
+              "when": "Day 8",
+              "title": "Safety net",
+              "detail": "Took full backups and wrote a rollback plan before any live change was made.",
+              "outputs": [
+                "Verified backup",
+                "Rollback plan"
+              ]
+            },
+            {
+              "when": "Day 9",
+              "title": "Migrate",
+              "detail": "Moved files and database in a planned low-traffic window, then compared both versions page by page.",
+              "outputs": [
+                "Page-by-page check"
+              ]
+            },
+            {
+              "when": "Day 10",
+              "title": "Cutover",
+              "detail": "Switched DNS with short cache times, renewed SSL and confirmed that email kept flowing.",
+              "outputs": [
+                "DNS switched",
+                "SSL renewed"
+              ]
+            },
+            {
+              "when": "Ongoing",
+              "title": "Monitor",
+              "detail": "Turned on monitoring, daily backups and update routines, with alerts routed to a named person.",
+              "outputs": [
+                "Alerts",
+                "Daily backups"
+              ]
+            }
+          ]
+        },
+        "delivered": {
+          "title": [
+            "Everything watched,",
+            "nothing assumed."
+          ],
+          "intro": "The managed setup the site now runs on, shown the way our status view reports it.",
+          "components": [
+            {
+              "name": "Website",
+              "detail": "Managed environment",
+              "state": "Operational"
+            },
+            {
+              "name": "Caching & CDN",
+              "detail": "Static assets at the edge",
+              "state": "Active"
+            },
+            {
+              "name": "SSL certificate",
+              "detail": "Renews automatically",
+              "state": "Valid"
+            },
+            {
+              "name": "Backups",
+              "detail": "Daily, 30 restore points",
+              "state": "Verified"
+            },
+            {
+              "name": "Monitoring",
+              "detail": "Alerts to a named person",
+              "state": "Watching"
+            },
+            {
+              "name": "Updates",
+              "detail": "Monthly care window",
+              "state": "Scheduled"
+            }
+          ]
+        },
+        "results": {
+          "title": [
+            "Faster, and",
+            "looked after."
+          ],
+          "intro": "Hosting results are tracked week by week: speed after the move, and the care routines that keep it there.",
+          "chart": {
+            "label": "Average page load, seconds",
+            "cutover": 4,
+            "points": [
+              [
+                "W1",
+                3.9
+              ],
+              [
+                "W2",
+                4.1
+              ],
+              [
+                "W3",
+                3.8
+              ],
+              [
+                "W4",
+                4
+              ],
+              [
+                "W5",
+                1.6
+              ],
+              [
+                "W6",
+                1.4
+              ],
+              [
+                "W7",
+                1.3
+              ],
+              [
+                "W8",
+                1.3
+              ]
+            ]
+          },
+          "metrics": [
+            {
+              "value": "3.9s → 1.3s",
+              "label": "average page load"
+            },
+            {
+              "value": "30",
+              "label": "daily restore points kept"
+            },
+            {
+              "value": "42",
+              "label": "outdated plugins updated or removed"
+            },
+            {
+              "value": "< 30 min",
+              "label": "alert response target"
+            }
+          ]
+        }
+      }
+    },
+    "image": {
+      "src": "brand-glass.webp",
+      "alt": {}
+    },
+    "gallery": [
+      {
+        "src": "brand-glass.webp",
+        "alt": {}
+      },
+      {
+        "src": "brand-tablet.webp",
+        "alt": {}
+      },
+      {
+        "src": "brand-phone.webp",
+        "alt": {}
+      }
+    ]
+  },
+  {
+    "id": "cs_04",
+    "slug": {
+      "en": "campaign-growth-system"
+    },
+    "department": "digital-marketing",
+    "locales": {
+      "en": {
+        "name": "Campaign growth system",
+        "category": "Marketing & growth",
+        "sector": "Professional services",
+        "summary": "A mock campaign system connecting audience decisions, content, publishing, and the learning loop.",
+        "transformation": "From scattered activity to a campaign rhythm the whole team can see.",
+        "client": "Professional services firm",
+        "timeline": "12 weeks",
+        "team": "Strategy, content, paid media and analytics",
+        "challenge": "The firm was posting, advertising and emailing, but each channel ran on its own. Nobody could say which activity produced a qualified enquiry, so budget followed habit rather than results.",
+        "goal": "Connect audience, content, publishing and reporting into one campaign rhythm, and prove which channels create qualified leads.",
+        "role": "Audit and baseline, audience strategy, campaign creative, paid and organic management, and monthly performance reporting.",
+        "highlight": {
+          "value": "+147%",
+          "label": "qualified leads in three months"
+        },
+        "approach": {
+          "title": [
+            "Twelve weeks,",
+            "one campaign rhythm."
+          ],
+          "intro": "Phases overlapped on purpose: tracking came first, and budget only moved once the data could show what was working.",
+          "weeks": 12,
+          "steps": [
+            {
+              "start": 1,
+              "end": 2,
+              "title": "Audit & baseline",
+              "detail": "Connected analytics, cleaned up tracking and recorded a three-month baseline for every channel.",
+              "outputs": [
+                "Tracking plan",
+                "Baseline report"
+              ]
+            },
+            {
+              "start": 2,
+              "end": 4,
+              "title": "Audience & message",
+              "detail": "Interviewed the sales team, defined two priority audiences and wrote one message for each stage of the decision.",
+              "outputs": [
+                "2 audience profiles",
+                "Message map"
+              ]
+            },
+            {
+              "start": 3,
+              "end": 6,
+              "title": "Content system",
+              "detail": "Built reusable templates and a weekly publishing calendar so every channel told the same story.",
+              "outputs": [
+                "36 templates",
+                "Editorial calendar"
+              ]
+            },
+            {
+              "start": 6,
+              "end": 7,
+              "title": "Launch",
+              "detail": "Launched paid search and LinkedIn with small test budgets and agreed success criteria.",
+              "outputs": [
+                "8 ad sets",
+                "3 landing pages"
+              ]
+            },
+            {
+              "start": 7,
+              "end": 12,
+              "title": "Optimize & learn",
+              "detail": "Moved budget each week toward the ads and topics that produced qualified leads, not just clicks.",
+              "outputs": [
+                "Weekly optimization",
+                "Monthly report"
+              ]
+            }
+          ]
+        },
+        "delivered": {
+          "title": [
+            "A weekly rhythm",
+            "the team can see."
+          ],
+          "intro": "The campaign system that replaced one-off posts: every day has a job, and every channel feeds the same report.",
+          "week": [
+            {
+              "day": "Mon",
+              "task": "Plan",
+              "items": [
+                "Review last week",
+                "Set budget moves"
+              ]
+            },
+            {
+              "day": "Tue",
+              "task": "Publish",
+              "items": [
+                "LinkedIn article",
+                "Search ads refresh"
+              ]
+            },
+            {
+              "day": "Wed",
+              "task": "Nurture",
+              "items": [
+                "Email journey",
+                "Retargeting"
+              ]
+            },
+            {
+              "day": "Thu",
+              "task": "Publish",
+              "items": [
+                "Case post",
+                "Social stories"
+              ]
+            },
+            {
+              "day": "Fri",
+              "task": "Learn",
+              "items": [
+                "Lead quality check",
+                "Report update"
+              ]
+            }
+          ]
+        },
+        "results": {
+          "title": [
+            "The numbers",
+            "behind the rhythm."
+          ],
+          "intro": "Baseline months are compared with campaign months on the same tracking, so every change is measured like for like.",
+          "kpis": [
+            {
+              "label": "Qualified leads",
+              "before": "38",
+              "after": "94",
+              "change": "+147%"
+            },
+            {
+              "label": "Cost per lead",
+              "before": "CHF 186",
+              "after": "CHF 112",
+              "change": "−40%"
+            },
+            {
+              "label": "Engagement rate",
+              "before": "1.9%",
+              "after": "4.6%",
+              "change": "+2.7 pts"
+            },
+            {
+              "label": "Organic search sessions",
+              "before": "2,140",
+              "after": "3,480",
+              "change": "+63%"
+            }
+          ],
+          "monthly": {
+            "label": "Qualified leads per month",
+            "baseline": 3,
+            "points": [
+              [
+                "Jan",
+                11
+              ],
+              [
+                "Feb",
+                13
+              ],
+              [
+                "Mar",
+                14
+              ],
+              [
+                "Apr",
+                22
+              ],
+              [
+                "May",
+                31
+              ],
+              [
+                "Jun",
+                41
+              ]
+            ]
+          },
+          "funnel": [
+            [
+              "Impressions",
+              412000
+            ],
+            [
+              "Clicks",
+              9860
+            ],
+            [
+              "Leads",
+              318
+            ],
+            [
+              "Qualified leads",
+              94
+            ],
+            [
+              "New clients",
+              17
+            ]
+          ],
+          "channels": [
+            [
+              "LinkedIn",
+              41
+            ],
+            [
+              "Paid search",
+              29
+            ],
+            [
+              "Email",
+              18
+            ],
+            [
+              "Organic social",
+              12
+            ]
+          ]
+        }
+      }
+    },
+    "image": {
+      "src": "brand-phone.webp",
+      "alt": {}
+    },
+    "gallery": [
+      {
+        "src": "brand-phone.webp",
+        "alt": {}
+      },
+      {
+        "src": "brand-glass.webp",
+        "alt": {}
+      },
+      {
+        "src": "brand-cards.webp",
+        "alt": {}
+      }
+    ]
+  },
+  {
+    "id": "cs_05",
+    "slug": {
+      "en": "support-continuity-system"
+    },
+    "department": "it-support",
+    "locales": {
+      "en": {
+        "name": "Support continuity system",
+        "category": "IT support",
+        "sector": "Business operations",
+        "summary": "A mock support experience that makes requests, priorities, fixes, and follow-up easier to understand.",
+        "transformation": "From reactive fixes to a visible rhythm of care and improvement.",
+        "client": "Operations team, 40 people",
+        "timeline": "6 weeks + monthly care",
+        "team": "Support, systems and documentation",
+        "challenge": "Requests arrived by email, phone and hallway conversation. Urgent problems waited behind small ones, the same issues came back every few weeks, and nobody could see what had already been tried.",
+        "goal": "Give the team one place to ask for help, priorities everyone agrees on, and fixes that stay fixed.",
+        "role": "Support audit, intake and triage design, root-cause fixes, knowledge base, and a monthly care rhythm.",
+        "highlight": {
+          "value": "26h → 1.5h",
+          "label": "first response time"
+        },
+        "approach": {
+          "title": [
+            "Every step,",
+            "logged like a ticket."
+          ],
+          "intro": "We treated the support set-up itself as a series of tickets: each one opened with a problem and closed with a change.",
+          "steps": [
+            {
+              "id": "SUP-01",
+              "when": "Week 1",
+              "title": "Audit the requests",
+              "detail": "Reviewed three months of requests and grouped 214 tickets by cause. Four root causes created more than half of the volume.",
+              "outputs": [
+                "214 requests reviewed",
+                "4 root causes"
+              ],
+              "state": "Closed"
+            },
+            {
+              "id": "SUP-02",
+              "when": "Week 2",
+              "title": "One way to ask",
+              "detail": "Replaced scattered emails with one request form that captures device, urgency and screenshots up front.",
+              "outputs": [
+                "Request form",
+                "Shared inbox retired"
+              ],
+              "state": "Closed"
+            },
+            {
+              "id": "SUP-03",
+              "when": "Week 3",
+              "title": "Agree priorities",
+              "detail": "Set four priority levels with response targets, so urgent problems move first and everyone knows what to expect.",
+              "outputs": [
+                "Priority levels",
+                "Response targets"
+              ],
+              "state": "Closed"
+            },
+            {
+              "id": "SUP-04",
+              "when": "Weeks 4–5",
+              "title": "Fix and document",
+              "detail": "Fixed the four root causes and wrote a short knowledge-base article for each, so the next person solves it in minutes.",
+              "outputs": [
+                "4 root-cause fixes",
+                "12 help articles"
+              ],
+              "state": "Closed"
+            },
+            {
+              "id": "SUP-05",
+              "when": "Monthly",
+              "title": "Review and improve",
+              "detail": "A monthly care report shows volume, response times and what we improved, before small issues become big ones.",
+              "outputs": [
+                "Care report",
+                "Improvement backlog"
+              ],
+              "state": "Ongoing"
+            }
+          ]
+        },
+        "delivered": {
+          "title": [
+            "Clear priorities,",
+            "clear promises."
+          ],
+          "intro": "The priority model agreed with the team. Every request is sorted on arrival, and every level has a response target.",
+          "priorities": [
+            {
+              "level": "P1",
+              "name": "Critical",
+              "when": "The business has stopped",
+              "target": "30 min"
+            },
+            {
+              "level": "P2",
+              "name": "High",
+              "when": "A team is blocked",
+              "target": "2 hours"
+            },
+            {
+              "level": "P3",
+              "name": "Normal",
+              "when": "A workaround exists",
+              "target": "1 business day"
+            },
+            {
+              "level": "P4",
+              "name": "Planned",
+              "when": "An improvement request",
+              "target": "Next care cycle"
+            }
+          ]
+        },
+        "results": {
+          "title": [
+            "Before and after,",
+            "side by side."
+          ],
+          "intro": "Support results compare the three months before the change with the three months after, using the same request log.",
+          "comparisons": [
+            {
+              "label": "First response time",
+              "before": 26,
+              "after": 1.5,
+              "unit": "h"
+            },
+            {
+              "label": "Average time to resolve",
+              "before": 4.8,
+              "after": 1.1,
+              "unit": " days"
+            },
+            {
+              "label": "Repeat issues per month",
+              "before": 19,
+              "after": 4,
+              "unit": ""
+            },
+            {
+              "label": "Open backlog",
+              "before": 47,
+              "after": 6,
+              "unit": ""
+            }
+          ]
+        }
+      }
+    },
+    "image": {
+      "src": "brand-phone.webp",
+      "alt": {}
+    },
+    "gallery": [
+      {
+        "src": "brand-phone.webp",
+        "alt": {}
+      },
+      {
+        "src": "brand-tablet.webp",
+        "alt": {}
+      },
+      {
+        "src": "brand-glass.webp",
+        "alt": {}
+      }
+    ]
+  }
+]

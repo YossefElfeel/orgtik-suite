@@ -1,0 +1,70 @@
+{
+  "Support": {
+    "title": "Support",
+    "descriptionAdmin": "Tous les tickets ouverts dans {name}. Le support OrgTik répond ici et par e-mail.",
+    "descriptionMember": "Les tickets que vous avez ouverts. Le support OrgTik répond ici et par e-mail.",
+    "newTicket": "Nouveau ticket",
+    "new": {
+      "title": "Nouveau ticket",
+      "description": "Expliquez au support OrgTik ce qui se passe. La réponse arrive ici et par e-mail.",
+      "sent": "Ticket {number} ouvert",
+      "subject": "Objet",
+      "subjectMissing": "Donnez un objet au ticket.",
+      "category": "Catégorie",
+      "categoryMissing": "Choisissez une catégorie.",
+      "categoryPlaceholder": "Choisir une catégorie",
+      "message": "Message",
+      "messageMissing": "Décrivez le problème ou la question.",
+      "messageHint": "Ce qui s'est passé, ce que vous attendiez, et où. Les numéros de facture ou de demande aident.",
+      "cancel": "Annuler",
+      "submit": "Ouvrir le ticket"
+    },
+    "tableLabel": "Tickets de support",
+    "emptyTitle": "Aucun ticket",
+    "emptyBody": "Posez au support OrgTik toute question sur la facturation, un outil ou un service.",
+    "colNumber": "Numéro",
+    "colSubject": "Objet",
+    "colCategory": "Catégorie",
+    "colStatus": "Statut",
+    "colLastReply": "Dernière réponse",
+    "colCreated": "Ouvert le",
+    "noReply": "Pas encore de réponse",
+    "categories": {
+      "billing": "Facturation",
+      "product": "Produit",
+      "sales": "Commercial",
+      "technical": "Technique",
+      "other": "Autre"
+    },
+    "thread": {
+      "staff": "Support OrgTik",
+      "you": "Vous",
+      "empty": "Écrivez d'abord quelque chose."
+    },
+    "detail": {
+      "missingTitle": "Ce ticket n'est pas ici",
+      "failedTitle": "Impossible de charger le ticket",
+      "missingBody": "Il appartient peut-être à un autre espace de travail, ou quelqu'un d'autre l'a ouvert.",
+      "failedBody": "Vérifiez votre connexion et réessayez.",
+      "toTickets": "Retour aux tickets",
+      "meta": "{category} · ouvert le {date}",
+      "resolve": "Marquer comme résolu",
+      "waitingUntil": "Le support OrgTik attend votre réponse. Sans réponse, le ticket sera fermé le {date}.",
+      "waiting": "Le support OrgTik attend votre réponse.",
+      "conversation": "Conversation",
+      "noMessages": "Aucun message pour l'instant.",
+      "closedTitle": "Ce ticket est fermé",
+      "openNew": "Ouvrir un nouveau ticket",
+      "closedBody": "On ne peut plus répondre à un ticket fermé. Ouvrez-en un nouveau en indiquant le numéro de celui-ci.",
+      "replyLabel": "Votre réponse",
+      "reply": "Envoyer la réponse",
+      "reopensUntil": "Ce ticket est résolu. Une réponse avant le {date} le rouvre.",
+      "reopens": "Ce ticket est résolu. Une réponse le rouvre.",
+      "reopened": "Réponse envoyée. Le ticket est rouvert.",
+      "replied": "Réponse envoyée",
+      "resolveTitle": "Marquer {number} comme résolu ?",
+      "resolveImpact": "Le support OrgTik voit que c'est réglé. Si le problème revient, répondez ici pour le rouvrir.",
+      "resolved": "Ticket résolu"
+    }
+  }
+}

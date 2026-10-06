@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-06T05:43:27.284Z",
+  "passed": 5,
+  "total": 5,
+  "results": [
+    {
+      "name": "explicit template copying retains department and starts with a disabled sample narrative",
+      "ok": true,
+      "note": "cs_06",
+      "checkedAt": "2026-10-06T05:42:07.902Z"
+    },
+    {
+      "name": "editor narrative control is disabled with a permission explanation",
+      "ok": true,
+      "note": "Editor cannot change narrative publication.",
+      "checkedAt": "2026-10-06T05:43:25.866Z"
+    },
+    {
+      "name": "approver must confirm figures before enabling the narrative",
+      "ok": true,
+      "note": "Approved figures unlock the approver switch; enabled draft saved.",
+      "checkedAt": "2026-10-06T05:42:13.671Z"
+    },
+    {
+      "name": "eligible narrative renders in all Website Manager preview frames",
+      "ok": true,
+      "note": "Approved enabled narrative appears in three draft preview widths.",
+      "checkedAt": "2026-10-06T05:42:15.925Z"
+    },
+    {
+      "name": "figure edits revoke draft approval while leaving the published narrative intact",
+      "ok": true,
+      "note": "Draft disabled; previous approved published content remains identical.",
+      "checkedAt": "2026-10-06T05:42:15.941Z"
+    }
+  ]
+}

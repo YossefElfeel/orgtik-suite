@@ -1,0 +1,126 @@
+{
+  "Team": {
+    "title": "Équipe",
+    "description": "Toutes les personnes de {name}, leur rôle et les outils qu'elles utilisent. Invitez des personnes et modifiez leurs accès ici.",
+    "readOnly": "Toutes les personnes de {name} et les outils qu'elles utilisent. Seuls le propriétaire et les admins peuvent inviter des personnes ou modifier les accès.",
+    "failedTitle": "Impossible de charger l'équipe",
+    "failedBody": "Vérifiez votre connexion et réessayez.",
+    "tableLabel": "Personnes de {name}",
+    "emptyTitle": "Personne pour l'instant",
+    "emptyBody": "Invitez vos collègues pour qu'ils utilisent les outils de l'espace de travail.",
+    "you": "vous",
+    "colPerson": "Personne",
+    "colRole": "Rôle",
+    "colStatus": "Statut",
+    "colSeat": "Place",
+    "colTools": "Accès aux outils",
+    "colJoined": "Arrivée",
+    "colActions": "Actions",
+    "invited": "Invitée",
+    "active": "Active",
+    "seatPaid": "Place payante",
+    "seatGuest": "Invité, gratuit",
+    "allTools": "Tous les outils",
+    "noTools": "Aucun outil",
+    "moreTools": "+{count} autres",
+    "notJoined": "Pas encore",
+    "actionsFor": "Actions pour {name}",
+    "makeRole": {
+      "admin": "Nommer admin",
+      "member": "Nommer membre",
+      "guest": "Passer en invité"
+    },
+    "changeAccess": "Modifier l'accès aux outils",
+    "withdraw": "Retirer l'invitation",
+    "remove": "Retirer de l'espace de travail",
+    "errors": {
+      "ownerOnly": "Seul le propriétaire de l'espace de travail peut nommer un admin."
+    },
+    "roleWhat": {
+      "admin": "{name} pourra inviter des personnes et modifier leurs accès, mais pas la facturation.",
+      "member": "{name} utilisera les outils auxquels il a accès et ne gérera pas l'équipe.",
+      "guest": "{name} ne verra que ce qui est partagé avec lui."
+    },
+    "impact": {
+      "seatsSame": "Le nombre de places ne change pas.",
+      "invitedPaid": "Une fois l'invitation acceptée, la personne occupe une place payante.",
+      "invitedGuest": "Une fois l'invitation acceptée, la personne n'occupe pas de place payante.",
+      "addsSeatCost": "Ajoute une place payante : {before} → {after} places, {cost} de plus sur les outils facturés par utilisateur.",
+      "addsSeat": "Ajoute une place payante : {before} → {after} places.",
+      "freesSeat": "Libère une place payante : {before} → {after} places.",
+      "withdraw": "L'invitation envoyée à {email} ne fonctionnera plus. Vous pourrez réinviter cette personne plus tard.",
+      "remove": "{name} perd immédiatement l'accès à {workspace} et à tous ses outils.",
+      "guestNoSeat": "Les invités n'occupent pas de place, le prix ne change donc pas."
+    },
+    "roleTitle": "Donner le rôle {role} à {name} ?",
+    "roleChanged": "{name} a maintenant le rôle {role}",
+    "withdrawTitle": "Retirer l'invitation envoyée à {email} ?",
+    "removeTitle": "Retirer {name} de l'espace de travail ?",
+    "withdrawn": "Invitation à {email} retirée",
+    "removed": "{name} retiré",
+    "accessChanged": "Accès aux outils modifié pour {name}",
+    "seats": {
+      "title": "Places",
+      "modelA": "Chaque membre ou admin actif compte pour une place, et ce même nombre de places s'applique à chaque outil facturé par utilisateur, quels que soient les outils utilisés. Les invités sont gratuits. Une invitation occupe une place une fois acceptée.",
+      "modelB": "Chaque outil facturé par utilisateur ne compte que les personnes qui y ont accès. Les invités sont gratuits. Une invitation occupe une place une fois acceptée.",
+      "paid": "Places payantes",
+      "guests": "Invités",
+      "invited": "Invitations en attente",
+      "linesTitle": "Outils facturés par place",
+      "perSeat": "{price} par place × {seats}",
+      "linesNote": "Prix par période de facturation, hors taxes.",
+      "noLines": "Aucun outil n'est facturé par place pour l'instant : ajouter des personnes ne change pas le prix."
+    },
+    "invite": {
+      "open": "Inviter des personnes",
+      "title": "Inviter quelqu'un",
+      "body": "La personne reçoit un e-mail pour rejoindre {name}. Vous voyez le coût avant l'envoi.",
+      "email": "E-mail",
+      "role": "Rôle",
+      "adminOwnerOnly": "Seul le propriétaire peut nommer un admin.",
+      "roleAdmin": "Invite des personnes et modifie leurs accès. Pas de facturation.",
+      "roleMember": "Utilise les outils auxquels vous lui donnez accès.",
+      "roleGuest": "Ne voit que ce qui est partagé avec lui. Gratuit.",
+      "cancel": "Annuler",
+      "send": "Envoyer l'invitation",
+      "sent": "Invitation envoyée à {email}",
+      "sentGuest": "Les invités sont gratuits : le nombre de places ne change pas.",
+      "sentSeats": "Une fois l'invitation acceptée, l'espace de travail compte {seats} places payantes.",
+      "errors": {
+        "ownerOnly": "Seul le propriétaire de l'espace de travail peut nommer un admin. Choisissez un autre rôle ou demandez au propriétaire.",
+        "role": "Choisissez un rôle.",
+        "taken": "Cette personne est déjà dans l'espace de travail ou invitée.",
+        "email": "Saisissez une adresse e-mail comme name@company.com.",
+        "tools": "Choisissez au moins un outil, ou donnez accès à tous les outils."
+      }
+    },
+    "access": {
+      "label": "Accès aux outils",
+      "all": "Tous les outils",
+      "allHint": "Tous les outils de l'espace de travail, y compris ceux ajoutés plus tard.",
+      "some": "Certains outils seulement",
+      "someHint": "Choisissez lesquels.",
+      "which": "Outils"
+    },
+    "accessDialog": {
+      "title": "Accès aux outils pour {name}",
+      "body": "Choisissez les outils de l'espace de travail que cette personne peut ouvrir.",
+      "impactGuest": "Les invités sont gratuits, le nombre de places ne change donc pas.",
+      "impactSame": "Le nombre de places ne change pas : un seul nombre s'applique à chaque outil facturé par utilisateur.",
+      "impactMore": "{count, plural, one {Ajoute une place sur # outil facturé par utilisateur.} other {Ajoute une place sur # outils facturés par utilisateur.}}",
+      "impactFewer": "{count, plural, one {Libère une place sur # outil facturé par utilisateur.} other {Libère une place sur # outils facturés par utilisateur.}}",
+      "errorEmpty": "Choisissez au moins un outil, ou donnez accès à tous les outils.",
+      "cancel": "Annuler",
+      "save": "Enregistrer l'accès"
+    },
+    "cost": {
+      "guestTitle": "Gratuit",
+      "guestBody": "Les invités n'occupent pas de place payante.",
+      "title": "Ajoute une place payante une fois l'invitation acceptée : {before} → {after} places",
+      "linesIntro": "Chaque outil facturé par utilisateur augmente d'une place :",
+      "total": "En plus par période de facturation",
+      "when": "Seulement une fois l'invitation acceptée. Prix hors taxes.",
+      "noLines": "Aucun outil n'est facturé par place pour l'instant : le prix ne change pas."
+    }
+  }
+}

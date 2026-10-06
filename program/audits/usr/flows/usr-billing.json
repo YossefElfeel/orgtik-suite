@@ -1,0 +1,353 @@
+{
+  "at": "2026-10-03T06:50:41.527Z",
+  "locale": "en",
+  "walks": [
+    {
+      "id": "B1-retry",
+      "title": "Retry a failed renewal: it fails, then it goes through",
+      "locale": "en",
+      "as": "nour.khaled@nilefoods.test",
+      "workaround": "sales scope dropped from the SOS scopes cookie (middleware sends customers to the Sales portal)",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open subscriptions",
+          "ok": true,
+          "note": "Files past due, payment-failed banner",
+          "ms": 2224,
+          "url": "http://localhost:3013/billing",
+          "screenshot": "B1-retry/01-open-subscriptions.png"
+        },
+        {
+          "n": 2,
+          "name": "Retry: the card is declined",
+          "ok": true,
+          "note": "failure said: true, link to cards: true, still past due: true",
+          "ms": 1429,
+          "url": "http://localhost:3013/billing",
+          "screenshot": "B1-retry/02-retry-the-card-is-declined.png"
+        },
+        {
+          "n": 3,
+          "name": "Retry again: paid",
+          "ok": true,
+          "note": "toast: Payment received. Files is active again.; banner now trial ending for Chat: true",
+          "ms": 1354,
+          "url": "http://localhost:3013/billing",
+          "screenshot": "B1-retry/03-retry-again-paid.png"
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 402 (Payment Required)"
+      ],
+      "api": [
+        {
+          "status": 402,
+          "method": "POST",
+          "url": ":4000/v1/app/subscriptions/ln_1011/retry"
+        }
+      ]
+    },
+    {
+      "id": "B2-cancel-resume",
+      "title": "Cancel a line, then resume it",
+      "locale": "en",
+      "as": "mona.adel@orgtik.test",
+      "workaround": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open subscriptions",
+          "ok": true,
+          "note": "",
+          "ms": 2393,
+          "url": "http://localhost:3013/billing",
+          "screenshot": "B2-cancel-resume/01-open-subscriptions.png"
+        },
+        {
+          "n": 2,
+          "name": "Cancel Tasks",
+          "ok": true,
+          "note": "toast: Tasks is cancelled. You keep it until 21 Oct 2026.",
+          "ms": 1387,
+          "url": "http://localhost:3013/billing",
+          "screenshot": "B2-cancel-resume/02-cancel-tasks.png"
+        },
+        {
+          "n": 3,
+          "name": "Resume Tasks",
+          "ok": true,
+          "note": "toast: Tasks will renew as before.",
+          "ms": 1368,
+          "url": "http://localhost:3013/billing",
+          "screenshot": "B2-cancel-resume/03-resume-tasks.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "B3-downgrade",
+      "title": "Schedule a downgrade, then cancel it",
+      "locale": "en",
+      "as": "mona.adel@orgtik.test",
+      "workaround": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open subscriptions",
+          "ok": true,
+          "note": "",
+          "ms": 2389,
+          "url": "http://localhost:3013/billing",
+          "screenshot": "B3-downgrade/01-open-subscriptions.png"
+        },
+        {
+          "n": 2,
+          "name": "Schedule the move to Free",
+          "ok": true,
+          "note": "toast: Tasks moves to Free on 21 Oct 2026.",
+          "ms": 1407,
+          "url": "http://localhost:3013/billing",
+          "screenshot": "B3-downgrade/02-schedule-the-move-to-free.png"
+        },
+        {
+          "n": 3,
+          "name": "Keep my plan",
+          "ok": true,
+          "note": "toast: Tasks stays on Pro.",
+          "ms": 1393,
+          "url": "http://localhost:3013/billing",
+          "screenshot": "B3-downgrade/03-keep-my-plan.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "B4-invoices",
+      "title": "Open the invoice list and an invoice",
+      "locale": "en",
+      "as": "mona.adel@orgtik.test",
+      "workaround": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open invoices",
+          "ok": true,
+          "note": "4 rows, first INV-2026-001044",
+          "ms": 2282,
+          "url": "http://localhost:3013/billing/invoices",
+          "screenshot": "B4-invoices/01-open-invoices.png"
+        },
+        {
+          "n": 2,
+          "name": "Open the newest invoice",
+          "ok": true,
+          "note": "Invoice INV-2026-001044",
+          "ms": 1162,
+          "url": "http://localhost:3013/billing/invoices/inv_1030",
+          "screenshot": "B4-invoices/02-open-the-newest-invoice.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "B5-cards",
+      "title": "Add a card (expired refused), make it default, remove the old one",
+      "locale": "en",
+      "as": "mona.adel@orgtik.test",
+      "workaround": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open payment methods",
+          "ok": true,
+          "note": "",
+          "ms": 2319,
+          "url": "http://localhost:3013/billing/payment-methods",
+          "screenshot": "B5-cards/01-open-payment-methods.png"
+        },
+        {
+          "n": 2,
+          "name": "Add a card with a past expiry: refused",
+          "ok": true,
+          "note": "said on the expiry field",
+          "ms": 837,
+          "url": "http://localhost:3013/billing/payment-methods",
+          "screenshot": "B5-cards/02-add-a-card-with-a-past-expiry-refused.png"
+        },
+        {
+          "n": 3,
+          "name": "Add a valid card",
+          "ok": true,
+          "note": "toast: Visa ending in 1111 added.",
+          "ms": 717,
+          "url": "http://localhost:3013/billing/payment-methods",
+          "screenshot": "B5-cards/03-add-a-valid-card.png"
+        },
+        {
+          "n": 4,
+          "name": "Make it the default",
+          "ok": true,
+          "note": "toast: Visa •••• 1111 is now the default.",
+          "ms": 1118,
+          "url": "http://localhost:3013/billing/payment-methods",
+          "screenshot": "B5-cards/04-make-it-the-default.png"
+        },
+        {
+          "n": 5,
+          "name": "Remove the old card",
+          "ok": true,
+          "note": "toast: Visa •••• 4242 removed.",
+          "ms": 1290,
+          "url": "http://localhost:3013/billing/payment-methods",
+          "screenshot": "B5-cards/05-remove-the-old-card.png"
+        },
+        {
+          "n": 6,
+          "name": "Remove the last working card: refused, with why",
+          "ok": true,
+          "note": "409 last_method said on the card",
+          "ms": 1287,
+          "url": "http://localhost:3013/billing/payment-methods",
+          "screenshot": "B5-cards/06-remove-the-last-working-card-refused-with-why.png"
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 409 (Conflict)"
+      ],
+      "api": [
+        {
+          "status": 409,
+          "method": "DELETE",
+          "url": ":4000/v1/app/payment-methods/pm_1057"
+        }
+      ]
+    },
+    {
+      "id": "B6-details",
+      "title": "Edit billing details",
+      "locale": "en",
+      "as": "nour.khaled@nilefoods.test",
+      "workaround": "sales scope dropped from the SOS scopes cookie (middleware sends customers to the Sales portal)",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open billing details",
+          "ok": true,
+          "note": "tax rule shown",
+          "ms": 2318,
+          "url": "http://localhost:3013/billing/details",
+          "screenshot": "B6-details/01-open-billing-details.png"
+        },
+        {
+          "n": 2,
+          "name": "Change the address and tax ID, save",
+          "ok": true,
+          "note": "toast: Billing details saved.",
+          "ms": 748,
+          "url": "http://localhost:3013/billing/details",
+          "screenshot": "B6-details/02-change-the-address-and-tax-id-save.png"
+        },
+        {
+          "n": 3,
+          "name": "Reload: the change is kept",
+          "ok": true,
+          "note": "",
+          "ms": 1982,
+          "url": "http://localhost:3013/billing/details",
+          "screenshot": "B6-details/03-reload-the-change-is-kept.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "B7-country",
+      "title": "A country change with a locked currency queues a migration",
+      "locale": "en",
+      "as": "mona.adel@orgtik.test",
+      "workaround": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open billing details",
+          "ok": true,
+          "note": "",
+          "ms": 2222,
+          "url": "http://localhost:3013/billing/details",
+          "screenshot": "B7-country/01-open-billing-details.png"
+        },
+        {
+          "n": 2,
+          "name": "Choose Saudi Arabia",
+          "ok": true,
+          "note": "says it goes through support",
+          "ms": 785,
+          "url": "http://localhost:3013/billing/details",
+          "screenshot": "B7-country/02-choose-saudi-arabia.png"
+        },
+        {
+          "n": 3,
+          "name": "Save and request the move",
+          "ok": true,
+          "note": "queued: true; billing country still Egypt",
+          "ms": 1133,
+          "url": "http://localhost:3013/billing/details",
+          "screenshot": "B7-country/03-save-and-request-the-move.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "B8-gate",
+      "title": "An admin is refused by the owner gate",
+      "locale": "en",
+      "as": "karim.hassan@orgtik.test",
+      "workaround": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open /billing",
+          "ok": true,
+          "note": "gate shown; nothing of billing on the page",
+          "ms": 2175,
+          "url": "http://localhost:3013/billing",
+          "screenshot": "B8-gate/01-open-billing.png"
+        },
+        {
+          "n": 2,
+          "name": "Open /billing/invoices",
+          "ok": true,
+          "note": "gate shown; nothing of billing on the page",
+          "ms": 2042,
+          "url": "http://localhost:3013/billing/invoices",
+          "screenshot": "B8-gate/02-open-billing-invoices.png"
+        },
+        {
+          "n": 3,
+          "name": "Open /billing/payment-methods",
+          "ok": true,
+          "note": "gate shown; nothing of billing on the page",
+          "ms": 1924,
+          "url": "http://localhost:3013/billing/payment-methods",
+          "screenshot": "B8-gate/03-open-billing-payment-methods.png"
+        },
+        {
+          "n": 4,
+          "name": "Open /billing/details",
+          "ok": true,
+          "note": "gate shown; nothing of billing on the page",
+          "ms": 1963,
+          "url": "http://localhost:3013/billing/details",
+          "screenshot": "B8-gate/04-open-billing-details.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    }
+  ]
+}

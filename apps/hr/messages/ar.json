@@ -1,0 +1,2685 @@
+{
+  "createUpdateEmployee": {
+    "title": {
+      "create": "إنشاء موظف",
+      "edit": "تعديل الموظف"
+    },
+    "addEmployee": "إضافة موظف",
+    "editEmployee": "تعديل الموظف",
+    "stepLabel": "الخطوة {current} من {total}",
+    "nav": {
+      "back": "رجوع",
+      "next": "التالي",
+      "submit": "إنشاء الموظف",
+      "save": "حفظ التغييرات",
+      "close": "إغلاق"
+    },
+    "avatar": {
+      "upload": "رفع صورة",
+      "change": "تغيير الصورة",
+      "delete": "حذف الصورة",
+      "deleteTitle": "هل تريد إزالة الصورة؟",
+      "deleteImpact": "ستظهر الأحرف الأولى من الاسم بدلًا منها في كل أنحاء المنصة.",
+      "uploading": "جارٍ رفع الصورة…",
+      "fallbackName": "موظف"
+    },
+    "errors": {
+      "passwordRequired": "كلمة المرور مطلوبة ويجب ألا تقل عن 6 أحرف",
+      "invalidPhoneNumber": "صيغة رقم الهاتف غير صحيحة",
+      "invalidPostCode": "الرمز البريدي غير صحيح",
+      "postCodeFor": "الرمز البريدي في {country} يكون مثل {example}.",
+      "postCode": "أدخل رمزًا بريديًا صحيحًا.",
+      "firstNameRequired": "الاسم الأول مطلوب",
+      "lastNameRequired": "اسم العائلة مطلوب",
+      "passwordMin": "يجب ألا تقل كلمة المرور عن 6 أحرف",
+      "birthDateRequired": "تاريخ الميلاد مطلوب",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "invalidEmail": "عنوان البريد الإلكتروني غير صالح",
+      "genderRequired": "الجنس مطلوب",
+      "nationalityRequired": "الجنسية مطلوبة",
+      "accommodationRequired": "نوع السكن مطلوب",
+      "postCodeRequired": "الرمز البريدي مطلوب",
+      "countryRequired": "الدولة مطلوبة",
+      "cityRequired": "المدينة مطلوبة",
+      "addressRequired": "العنوان مطلوب",
+      "nationalIdRequired": "الرقم القومي مطلوب",
+      "jobTitleRequired": "المسمى الوظيفي مطلوب",
+      "departmentRequired": "القسم مطلوب",
+      "employeeTypeRequired": "نوع الموظف مطلوب",
+      "experienceLevelRequired": "مستوى الخبرة مطلوب",
+      "statusRequired": "الحالة مطلوبة",
+      "workTypeRequired": "نوع العمل مطلوب",
+      "joinDateRequired": "تاريخ الالتحاق مطلوب",
+      "bankNameRequired": "اسم البنك مطلوب",
+      "accountNumberRequired": "رقم الحساب مطلوب",
+      "accountHolderRequired": "اسم صاحب الحساب مطلوب",
+      "ibanRequired": "رقم الآيبان (IBAN) مطلوب",
+      "invalidIban": "صيغة الآيبان (IBAN) غير صحيحة",
+      "instapayNumberRequired": "رقم إنستاباي مطلوب",
+      "invalidEgyptianPhone": "صيغة رقم الهاتف المصري غير صحيحة (مثل ‎+2012…‎ أو ‎012…‎)",
+      "walletNameRequired": "اسم المحفظة مطلوب",
+      "baseSalaryRequired": "الراتب الأساسي مطلوب",
+      "contractTypeRequired": "نوع العقد مطلوب",
+      "startDateRequired": "تاريخ البدء مطلوب",
+      "noticePeriodRequired": "فترة الإشعار مطلوبة",
+      "sectionTitleRequired": "عنوان البند مطلوب",
+      "sectionContentRequired": "المحتوى مطلوب",
+      "contractSectionsRequired": "يلزم بند واحد على الأقل في العقد",
+      "annualLeaveRequired": "الإجازة السنوية مطلوبة",
+      "casualLeaveRequired": "الإجازة العارضة مطلوبة",
+      "sickLeaveRequired": "الإجازة المرضية مطلوبة",
+      "unpaidLeaveRequired": "سياسة الإجازة غير مدفوعة الأجر مطلوبة",
+      "noEmployeeId": "لم يُنشأ هذا الموظف بعد. ارجع إلى الخطوة الأولى واحفظه."
+    },
+    "steps": {
+      "personal": {
+        "nav": "البيانات الشخصية",
+        "heading": "البيانات الشخصية",
+        "description": "تساعدنا هذه البيانات على التحقق من الهوية وإكمال الخطوات اللازمة لإضافة البيانات الشخصية.",
+        "addressHeading": "عنوان السكن",
+        "addressDescription": "يجب أن يطابق العنوان المدوّن في بطاقة الهوية الرسمية.",
+        "accommodationHeading": "نوع السكن",
+        "accommodationDescription": "يجب أن يطابق العنوان المدوّن في بطاقة الهوية الرسمية.",
+        "accommodationOptions": {
+          "company": {
+            "label": "سكن تابع للشركة",
+            "description": "وحدة يوفّرها صاحب العمل"
+          },
+          "allowance": {
+            "label": "بدل سكن",
+            "description": "بدل نقدي شهري"
+          },
+          "own": {
+            "label": "سكن خاص",
+            "description": "دون دعم من الشركة"
+          }
+        }
+      },
+      "employee": {
+        "nav": "بيانات الوظيفة",
+        "heading": "بيانات الوظيفة",
+        "description": "تساعدنا هذه البيانات على إكمال الخطوات اللازمة لإضافة بيانات الموظف الوظيفية.",
+        "skillsHeading": "المهارات",
+        "skillsDescription": "أضف مهارات الموظف."
+      },
+      "bank": {
+        "nav": "البيانات المصرفية",
+        "heading": "البيانات المصرفية",
+        "description": "البيانات المصرفية المستخدمة لصرف الرواتب والمبالغ المستردّة.",
+        "instapay": "إنستاباي",
+        "instapayDescription": "تُنفَّذ التحويلات فورًا عبر شبكة إنستاباي التابعة للبنك المركزي المصري.",
+        "wallet": "بيانات المحفظة",
+        "walletDescription": "تساعدنا هذه البيانات على إكمال الخطوات اللازمة لإضافة البيانات المالية."
+      },
+      "attachments": {
+        "nav": "المرفقات",
+        "heading": "المرفقات",
+        "description": "ارفع المستندات الداعمة لأغراض الامتثال والتعيين.",
+        "avatarHint": "صورة شخصية رسمية"
+      },
+      "salary": {
+        "nav": "بيانات الراتب",
+        "heading": "بيانات الراتب",
+        "description": "تساعدنا هذه البيانات على إكمال الخطوات اللازمة لإضافة بيانات الراتب."
+      },
+      "contract": {
+        "nav": "العقد",
+        "heading": "العقد",
+        "description": "تساعدنا هذه البيانات على إكمال الخطوات اللازمة لإعداد عقد العمل."
+      },
+      "daysOff": {
+        "nav": "الإجازات",
+        "heading": "بيانات الإجازات",
+        "description": "تساعدنا هذه البيانات على إكمال الخطوات اللازمة لإعداد رصيد الإجازات."
+      },
+      "permissions": {
+        "nav": "الصلاحيات",
+        "heading": "الصلاحيات",
+        "description": "تحكّم في الوحدات التي يصل إليها هذا الموظف والإجراءات التي يمكنه تنفيذها."
+      }
+    },
+    "fields": {
+      "birthDate": "تاريخ الميلاد",
+      "nationality": "الجنسية",
+      "password": "كلمة المرور",
+      "addressLine1": "الشارع",
+      "addressCity": "المدينة",
+      "addressState": "الدولة",
+      "addressPostal": "الرمز البريدي",
+      "department": "القسم",
+      "departmentPlaceholder": "اختر القسم",
+      "employmentTypePlaceholder": "اختر النوع",
+      "bankName": "اسم البنك",
+      "accountHolder": "اسم صاحب الحساب",
+      "accountNumber": "رقم الحساب",
+      "iban": "رقم الحساب الدولي (IBAN)",
+      "salaryChf": "الراتب بالفرنك السويسري",
+      "bankCode": "رمز البنك",
+      "salaryCurrency": "العملة",
+      "basicSalary": "الراتب الأساسي",
+      "transportationAllowance": "بدل المواصلات",
+      "housingAllowance": "بدل السكن",
+      "otherAllowances": "بدلات أخرى",
+      "totalGross": "إجمالي الراتب",
+      "socialSecurity": "اشتراك التأمينات الاجتماعية",
+      "taxableIncome": "الدخل الخاضع للضريبة",
+      "annualLeaveDays": "الإجازة السنوية",
+      "casualLeaveDays": "الإجازة العارضة",
+      "sickLeaveDays": "الإجازة المرضية",
+      "unpaidLeave": "الإجازة غير المدفوعة",
+      "unpaidLeavePlaceholder": "اختر السياسة",
+      "contractAddsDays": "أيام يضيفها العقد",
+      "totalDaysOff": "إجمالي أيام الإجازة",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "phoneNumber": "رقم الهاتف",
+      "email": "البريد الإلكتروني",
+      "personalTaxId": "الرقم الضريبي الشخصي",
+      "gender": "النوع",
+      "maritalStatus": "الحالة الاجتماعية",
+      "nationalId": "الرقم القومي",
+      "jobTitle": "المسمّى الوظيفي",
+      "employeeType": "نوع التوظيف",
+      "experienceLevel": "مستوى الخبرة",
+      "manager": "المدير",
+      "status": "الحالة",
+      "employeeSkills": "مهارات الموظف",
+      "workType": "نمط العمل",
+      "joinDate": "تاريخ الالتحاق",
+      "baseSalary": "الراتب الأساسي",
+      "totalSalary": "إجمالي الراتب",
+      "insurance": "نسبة التأمين",
+      "tax": "الضريبة",
+      "netSalary": "صافي الراتب",
+      "employeeCode": "كود الموظف",
+      "contractType": "نوع العقد",
+      "contractStartDate": "تاريخ البداية",
+      "contractEndDate": "تاريخ النهاية",
+      "trainingPeriod": "فترة الاختبار",
+      "noticePeriod": "فترة الإخطار",
+      "contractBody": "نص العقد",
+      "paymentType": "طريقة الدفع",
+      "instapayNumber": "الرقم المسجّل",
+      "instapayAccountName": "اسم الحساب",
+      "instapayLinkedAccount": "الحساب المرتبط (رابط رمز QR)",
+      "walletName": "اسم المحفظة",
+      "walletPhoneNumber": "رقم الهاتف",
+      "walletAccountName": "اسم الحساب",
+      "managerOptional": "المدير (اختياري)",
+      "paymentCycle": "دورة الدفع"
+    },
+    "placeholders": {
+      "fullName": "الاسم كما في بطاقة الهوية",
+      "email": "name@example.com",
+      "phone": "+20 100 123 4567",
+      "nationality": "الدولة",
+      "address": "الشارع",
+      "city": "المدينة",
+      "state": "اختر الدولة",
+      "postal": "الرمز البريدي",
+      "employeeCode": "الرقم الداخلي",
+      "position": "المسمّى الوظيفي",
+      "branch": "المكتب أو الموقع",
+      "selectManager": "اختر المدير",
+      "search": "بحث…",
+      "skills": "أضف مهارة",
+      "searchSkills": "ابحث في المهارات…",
+      "bankName": "الاسم الرسمي للبنك",
+      "accountHolder": "الاسم المسجّل على الحساب",
+      "accountNumber": "رقم الحساب المحلي",
+      "iban": "رقم الحساب المصرفي الدولي",
+      "salaryChf": "المبلغ بالفرنك السويسري",
+      "bankCode": "رمز البنك",
+      "remotePolicy": "ملاحظات اختيارية عن المنطقة الزمنية أو نظام العمل المختلط",
+      "firstName": "الاسم الأول",
+      "lastName": "اسم العائلة",
+      "password": "كلمة مرور قوية",
+      "personalTaxId": "xxxx-xxxx-xxxx",
+      "gender": "اختر النوع",
+      "maritalStatus": "اختر الحالة الاجتماعية",
+      "nationalId": "الرقم القومي",
+      "jobTitle": "المسمّى الوظيفي",
+      "department": "القسم",
+      "employeeType": "اختر النوع",
+      "workType": "اختر نمط العمل",
+      "joinDate": "اختر تاريخًا",
+      "value": "القيمة",
+      "percentage": "النسبة (%)",
+      "instapayNumber": "(+20) 0105 352 245",
+      "instapayAccountName": "أحمد محمود محمد",
+      "instapayLinkedAccount": "Ahmed223@instapay",
+      "walletName": "اختر المحفظة",
+      "walletPhoneNumber": "(+20) 0105 352 245",
+      "walletAccountName": "أحمد محمود محمد",
+      "contractType": "اختر نوع العقد",
+      "trainingPeriod": "اختر فترة الاختبار",
+      "noticePeriod": "اختر فترة الإخطار",
+      "status": "اختر الحالة",
+      "experienceLevel": "اختر مستوى الخبرة",
+      "paymentCycle": "اختر الدورة",
+      "currency": "اختر العملة",
+      "sectionTitle": "عنوان البند",
+      "sectionContent": "اكتب المحتوى هنا…"
+    },
+    "options": {
+      "gender": {
+        "male": "ذكر",
+        "female": "أنثى",
+        "other": "آخر"
+      },
+      "marital": {
+        "single": "أعزب",
+        "married": "متزوج",
+        "divorced": "مطلّق",
+        "widowed": "أرمل"
+      },
+      "employment": {
+        "fullTime": "دوام كامل",
+        "partTime": "دوام جزئي",
+        "contract": "بعقد",
+        "intern": "متدرّب"
+      },
+      "department": {
+        "engineering": "الهندسة",
+        "hr": "الموارد البشرية",
+        "finance": "المالية",
+        "sales": "المبيعات"
+      },
+      "weekday": {
+        "mon": "الاثنين",
+        "tue": "الثلاثاء",
+        "wed": "الأربعاء",
+        "thu": "الخميس",
+        "fri": "الجمعة",
+        "sat": "السبت",
+        "sun": "الأحد"
+      },
+      "workType": {
+        "remote": "عن بُعد",
+        "onSite": "من المقر",
+        "hybrid": "مختلط"
+      },
+      "paymentTypes": {
+        "bank": "حساب بنكي",
+        "instapay": "إنستاباي",
+        "wallet": "محفظة إلكترونية"
+      },
+      "wallets": {
+        "vodafone": "فودافون كاش",
+        "orange": "أورنج كاش",
+        "etisalat": "اتصالات كاش",
+        "we": "WE Pay"
+      },
+      "unpaidLeave": {
+        "allowed": "مسموح بها",
+        "notAllowed": "غير مسموح بها"
+      },
+      "contractType": {
+        "permanent": "تعيين دائم",
+        "fixed": "عقد محدد المدة"
+      },
+      "trainingPeriod": {
+        "3months": "3 أشهر",
+        "6months": "6 أشهر"
+      },
+      "noticePeriod": {
+        "15days": "15 يومًا",
+        "30days": "30 يومًا",
+        "60days": "60 يومًا",
+        "90days": "90 يومًا"
+      },
+      "status": {
+        "active": "نشط",
+        "inactive": "غير نشط",
+        "probation": "فترة اختبار",
+        "terminated": "منتهية خدمته"
+      },
+      "skills": {
+        "ui": "تصميم الواجهات",
+        "ux": "أبحاث تجربة المستخدم",
+        "frontend": "الواجهة الأمامية",
+        "backend": "الواجهة الخلفية",
+        "hrOps": "عمليات الموارد البشرية"
+      },
+      "experienceLevel": {
+        "intern": "متدرب",
+        "junior": "مبتدئ",
+        "midLevel": "متوسط الخبرة",
+        "senior": "خبير",
+        "lead": "قائد فريق",
+        "principal": "خبير رئيسي"
+      },
+      "paymentCycle": {
+        "monthly": "شهريًا",
+        "biweekly": "كل أسبوعين",
+        "weekly": "أسبوعيًا"
+      },
+      "amountType": {
+        "fixed": "مبلغ ثابت",
+        "percentage": "نسبة مئوية (%)"
+      }
+    },
+    "attachments": {
+      "avatar": "صورة الموظف",
+      "avatarHint": "صورة شخصية رسمية",
+      "nationalId": "الرقم القومي",
+      "nationalIdHint": "بطاقة هوية صادرة عن جهة حكومية",
+      "education": "الشهادة الدراسية",
+      "educationHint": "أعلى مؤهل أو شهادة ذات صلة",
+      "cv": "السيرة الذاتية",
+      "cvHint": "الخبرات المهنية",
+      "identity": "الهوية / الرقم القومي",
+      "contract": "عقد العمل",
+      "certificate": "المؤهل / الشهادة",
+      "other": "أخرى / السيرة الذاتية",
+      "dropTitle": "اسحب الملفات وأفلتها هنا",
+      "maxSizeHint": "الحد الأقصى لحجم الملف 20 ميجابايت",
+      "uploadCta": "ارفع ملفاتك",
+      "emptyHint": "لم تُضَف ملفات بعد. أفلت الملفات أعلاه لإرفاقها.",
+      "uploading": "جارٍ رفع {name}...",
+      "uploadingGroup": "جارٍ رفع مرفقات {category}...",
+      "uploadingLabel": "جارٍ الرفع...",
+      "removing": "جارٍ إزالة المرفق...",
+      "saving": "جارٍ حفظ الخطوة...",
+      "removeFile": "إزالة {name}",
+      "deleteTitle": "هل تريد حذف {name}؟",
+      "deleteImpact": "سيُحذف من ملفات الموظف.",
+      "deleteConfirm": "حذف الملف",
+      "pendingUpload": "(بانتظار الرفع)"
+    },
+    "hints": {
+      "socialSecurity": "أدرج الاستقطاعات القانونية حيثما وُجدت.",
+      "taxableIncome": "حدّد ما إذا كانت المبالغ خاضعة لضريبة الرواتب."
+    },
+    "permissions": {
+      "enableHeading": "خيارات التفعيل",
+      "enableHelper": "فعّل كل الوحدات أو امنح كل الصلاحيات بنقرة واحدة.",
+      "enableAll": "تفعيل كل الوحدات",
+      "selectAll": "تحديد الكل",
+      "actions": {
+        "read": "قراءة",
+        "write": "تعديل",
+        "create": "إنشاء",
+        "delete": "حذف"
+      },
+      "modules": {
+        "dashboard": "لوحة التحكم",
+        "employee": "الموظفون",
+        "attendance": "الحضور والإجازات",
+        "projects": "المشروعات",
+        "recruitment": "التوظيف",
+        "tickets": "التذاكر والامتثال",
+        "finance": "المالية والخدمات",
+        "departments": "الأقسام",
+        "messaging": "الرسائل"
+      }
+    },
+    "success": {
+      "title": "تم بنجاح",
+      "messageCreate": "أُضيف الموظف بنجاح.",
+      "messageEdit": "حُدِّثت بيانات الموظف بنجاح.",
+      "primary": "تم"
+    },
+    "loading": "جارٍ التحميل…",
+    "toasts": {
+      "creatingEmployee": "جارٍ إنشاء الموظف…",
+      "updatingEmployeeInfo": "جارٍ تحديث بيانات الموظف…",
+      "updatingPaymentInfo": "جارٍ تحديث بيانات الدفع…",
+      "updatingSalaryInfo": "جارٍ تحديث بيانات الراتب…",
+      "updatingContract": "جارٍ تحديث بيانات العقد…",
+      "sendingContract": "جارٍ إرسال العقد للتوقيع…",
+      "updatingDaysOff": "جارٍ تحديث بيانات الإجازات…",
+      "updatingPermissions": "جارٍ تحديث الصلاحيات…"
+    },
+    "contract": {
+      "newClause": "بند جديد",
+      "endDateHint": "للعقود محددة المدة فقط",
+      "addPoint": "إضافة بند جديد للعقد",
+      "sendForSignature": "إرسال للتوقيع",
+      "downloadPdf": "تنزيل PDF"
+    }
+  },
+  "employees": {
+    "title": "دليل الموظفين",
+    "export": "تصدير",
+    "tabs": {
+      "people": "دليل الموظفين",
+      "org": "الهيكل التنظيمي"
+    },
+    "page": {
+      "allDepartments": "كل الأقسام",
+      "searchPlaceholder": "بحث..."
+    },
+    "details": {
+      "notFound": "الموظف غير موجود",
+      "sections": {
+        "personal": "البيانات الشخصية",
+        "employee": "بيانات الوظيفة",
+        "activity": "النشاط",
+        "attachment": "المرفقات",
+        "bank": "البيانات المصرفية",
+        "instapay": "بيانات إنستاباي",
+        "wallet": "بيانات المحفظة",
+        "finance": "المالية",
+        "salary": "بيانات الراتب",
+        "timeOff": "الإجازات والحضور",
+        "skills": "المهارات",
+        "notes": "الملاحظات",
+        "payslips": "قسائم الرواتب"
+      },
+      "activity": {
+        "allTime": "كل الفترات",
+        "entries": {
+          "created": "<who>{name}</who>: إنشاء <what>{entity}</what>",
+          "assignedPeopleOn": "<who>{name}</who>: إسناد أشخاص إلى <what>{entity}</what>",
+          "updatedStatusOf": "<who>{name}</who>: تحديث حالة <what>{entity}</what>",
+          "repliedOn": "<who>{name}</who>: الرد على <what>{entity}</what>",
+          "requested": "<who>{name}</who>: تقديم <what>{entity}</what>",
+          "cancelled": "<who>{name}</who>: إلغاء <what>{entity}</what>",
+          "deleted": "<who>{name}</who>: حذف <what>{entity}</what>",
+          "posted": "<who>{name}</who>: نشر <what>{entity}</what>",
+          "scheduled": "<who>{name}</who>: جدولة <what>{entity}</what>",
+          "updated": "<who>{name}</who>: تحديث <what>{entity}</what>",
+          "approved": "<who>{name}</who>: الموافقة على <what>{entity}</what>",
+          "rejected": "<who>{name}</who>: رفض <what>{entity}</what>"
+        },
+        "entities": {
+          "ticket": "تذكرة",
+          "timeOffRequest": "طلب إجازة",
+          "employee": "ملف موظف",
+          "department": "قسم",
+          "job": "وظيفة شاغرة",
+          "meeting": "اجتماع",
+          "settings": "الإعدادات",
+          "payrollBatch": "مسيرة رواتب"
+        }
+      },
+      "attachment": {
+        "upload": "رفع",
+        "delete": {
+          "title": "حذف المرفق",
+          "description": "هل تريد حذف هذا المرفق؟",
+          "confirm": "حذف",
+          "cancel": "إلغاء"
+        },
+        "success": {
+          "upload": "رُفع المرفق بنجاح",
+          "delete": "حُذف المرفق بنجاح"
+        },
+        "error": {
+          "upload": "تعذّر رفع المرفق",
+          "delete": "تعذّر حذف المرفق"
+        },
+        "deleting": "جارٍ الحذف…",
+        "viewFile": "عرض {name}",
+        "deleteFile": "حذف {name}"
+      },
+      "salary": {
+        "title": "بيانات الراتب",
+        "upgradeHistory": "سجل زيادات الراتب",
+        "noHistory": "لا توجد زيادات مسجّلة بعد.",
+        "bankAccount": "الحساب البنكي",
+        "columns": {
+          "date": "التاريخ",
+          "baseSalary": "الراتب الأساسي",
+          "totalSalary": "إجمالي الراتب",
+          "netSalary": "صافي الراتب"
+        },
+        "paymentMethod": "طريقة الدفع"
+      },
+      "payslips": {
+        "title": "قسائم الرواتب",
+        "empty": "لا توجد قسائم رواتب بعد.",
+        "columns": {
+          "period": "الفترة",
+          "periodRange": "نطاق الفترة",
+          "netPay": "صافي الأجر",
+          "paidAt": "تاريخ الصرف",
+          "generatedAt": "تاريخ الإصدار",
+          "action": "إجراء"
+        }
+      },
+      "timeOff": {
+        "title": "الإجازات والحضور",
+        "attendance": "الحضور",
+        "leaveBalances": "الإجازات والأرصدة",
+        "noAttendance": "لا توجد سجلات حضور بعد.",
+        "noLeave": "لا توجد سجلات إجازات بعد.",
+        "labels": {
+          "paidTimeOff": "إجازة مدفوعة",
+          "pendingApproval": "بانتظار الموافقة",
+          "booked": "محجوزة",
+          "used": "مستخدمة",
+          "daysPerYear": "يومًا في السنة",
+          "nationalHolidays": "العطلات الرسمية",
+          "inContract": "في العقد"
+        },
+        "subs": {
+          "availableToBook": "متاحة للحجز",
+          "awaitingApproval": "بانتظار الموافقة",
+          "used": "المستخدم: {count} يوم",
+          "remainingBalance": "الرصيد المتبقي",
+          "currentQueue": "الطلبات الحالية",
+          "takenDays": "الأيام المأخوذة",
+          "inContract": "في العقد",
+          "holidayList": "عرض قائمة العطلات",
+          "totalContract": "إجمالي أيام العقد"
+        },
+        "columns": {
+          "dateFrom": "من تاريخ",
+          "dateTo": "إلى تاريخ",
+          "startWork": "بداية العمل",
+          "endWork": "نهاية العمل",
+          "status": "الحالة",
+          "logHours": "الساعات المسجّلة",
+          "overtime": "العمل الإضافي",
+          "action": "إجراء",
+          "leaveType": "نوع الإجازة",
+          "duration": "المدة",
+          "note": "ملاحظة"
+        },
+        "selectLeaveEntry": "اختر سجل الإجازة",
+        "values": {
+          "paidTimeOff": "{count, plural, zero {لا أيام إجازة مدفوعة} one {يوم إجازة مدفوعة واحد} two {يوما إجازة مدفوعة} few {# أيام إجازة مدفوعة} many {# يومًا إجازة مدفوعة} other {# يوم إجازة مدفوعة}}",
+          "pendingApproval": "{count, plural, zero {لا أيام بانتظار الموافقة} one {يوم واحد بانتظار الموافقة} two {يومان بانتظار الموافقة} few {# أيام بانتظار الموافقة} many {# يومًا بانتظار الموافقة} other {# يوم بانتظار الموافقة}}",
+          "booked": "{count, plural, zero {لا أيام محجوزة} one {يوم واحد محجوز} two {يومان محجوزان} few {# أيام محجوزة} many {# يومًا محجوزًا} other {# يوم محجوز}}",
+          "used": "{count, plural, zero {لا أيام مستخدمة} one {يوم واحد مستخدم} two {يومان مستخدمان} few {# أيام مستخدمة} many {# يومًا مستخدمًا} other {# يوم مستخدم}}",
+          "daysPerYear": "{count, plural, zero {لا أيام في السنة} one {يوم واحد في السنة} two {يومان في السنة} few {# أيام في السنة} many {# يومًا في السنة} other {# يوم في السنة}}",
+          "nationalHolidays": "{count, plural, zero {لا عطلات رسمية} one {عطلة رسمية واحدة} two {عطلتان رسميتان} few {# عطلات رسمية} many {# عطلة رسمية} other {# عطلة رسمية}}",
+          "inContract": "{count, plural, zero {لا أيام في العقد} one {يوم واحد في العقد} two {يومان في العقد} few {# أيام في العقد} many {# يومًا في العقد} other {# يوم في العقد}}"
+        }
+      },
+      "notes": {
+        "title": "الملاحظات",
+        "empty": "لا توجد ملاحظات عن هذا الموظف بعد.",
+        "toasts": {
+          "adding": "جارٍ إضافة ملاحظة",
+          "updating": "جارٍ تحديث الملاحظة",
+          "deleting": "جارٍ حذف الملاحظة"
+        },
+        "placeholder": "اكتب ملاحظة…",
+        "post": "نشر الملاحظة",
+        "update": "تحديث",
+        "validation": {
+          "required": "محتوى الملاحظة مطلوب",
+          "tooLong": "الملاحظة طويلة جدًا"
+        }
+      },
+      "loadingName": "جارٍ تحميل بيانات الموظف…",
+      "personal": {
+        "fullName": "الاسم الكامل"
+      }
+    },
+    "card": {
+      "joinedAt": "تاريخ الالتحاق"
+    },
+    "orgChart": {
+      "zoomIn": "تكبير",
+      "zoomOut": "تصغير",
+      "fitView": "ملاءمة الهيكل للشاشة",
+      "details": {
+        "title": "بيانات الموظف",
+        "manager": "المدير",
+        "none": "لا يوجد"
+      },
+      "assign": {
+        "title": "تعيين مدير",
+        "description": "اختر مديرًا لـ{name}",
+        "cancel": "إلغاء",
+        "submit": "تعيين",
+        "selectPlaceholder": "اختر المدير",
+        "noManagers": "لا يوجد مديرون متاحون.",
+        "willReportTo": "سيتبع {name} إلى:"
+      },
+      "remove": {
+        "title": "إزالة من الإدارة",
+        "description": "هل تريد فصل {name} عن مديره الحالي؟",
+        "confirm": "إزالة",
+        "cancel": "إلغاء"
+      },
+      "zoomLevel": "مستوى التكبير"
+    },
+    "exportFile": "الموظفون",
+    "exported": "{count, plural, zero {لم يُصدَّر أي موظف} one {صُدِّر موظف واحد} two {صُدِّر موظفان} few {صُدِّر # موظفين} many {صُدِّر # موظفًا} other {صُدِّر # موظف}}",
+    "exportFailed": "تعذّر التصدير. حاول مرة أخرى."
+  },
+  "employeeTable": {
+    "columns": {
+      "selectAll": "تحديد كل الموظفين",
+      "selectRow": "تحديد الصف",
+      "employeeName": "اسم الموظف",
+      "email": "البريد الإلكتروني",
+      "department": "القسم",
+      "jobTitle": "المسمّى الوظيفي",
+      "jobType": "نوع التوظيف",
+      "joinedDate": "تاريخ الالتحاق",
+      "action": "إجراء"
+    },
+    "tooltips": {
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "noDepartment": "بلا قسم",
+    "empty": "لم يُعثَر على موظفين.",
+    "delete": {
+      "title": "حذف الموظف",
+      "description": "هل تريد حذف هذا الموظف؟",
+      "softDeleteNote": "ملاحظة: هذا حذف مؤقت. تُحفَظ بيانات الموظف لكنه لن يظهر في قائمة الموظفين النشطين.",
+      "confirmationLabel": "اكتب \"{text}\" لتأكيد الحذف",
+      "confirm": "حذف",
+      "cancel": "إلغاء",
+      "success": "حُذف الموظف بنجاح.",
+      "error": "تعذّر حذف الموظف."
+    }
+  },
+  "ticketsTable": {
+    "columns": {
+      "selectAll": "تحديد كل التذاكر",
+      "selectRow": "تحديد التذكرة",
+      "ticketId": "رقم التذكرة",
+      "subject": "الموضوع",
+      "assignTo": "المُسنَدة إلى",
+      "employeeName": "اسم الموظف",
+      "createdDate": "تاريخ الإنشاء",
+      "emailAddress": "البريد الإلكتروني",
+      "status": "الحالة",
+      "action": "إجراء"
+    },
+    "tooltips": {
+      "viewDetails": "عرض التفاصيل",
+      "deleteTicket": "حذف التذكرة"
+    }
+  },
+  "employeeDetails": {
+    "title": "بيانات الموظف",
+    "header": {
+      "back": "رجوع",
+      "statusActive": "نشط",
+      "sendEmail": "إرسال بريد إلكتروني",
+      "metrics": {
+        "lastClockedIn": "آخر تسجيل حضور",
+        "lastMessaged": "آخر مراسلة",
+        "employeeId": "رقم الموظف"
+      },
+      "metricsValues": {
+        "lastClockedIn": "منذ ثوانٍ",
+        "lastMessaged": "منذ يومين"
+      }
+    },
+    "sections": {
+      "contact": "بيانات الاتصال",
+      "employment": "بيانات التوظيف"
+    },
+    "fields": {
+      "workEmail": "بريد العمل",
+      "personalEmail": "البريد الشخصي",
+      "phone": "الهاتف",
+      "department": "القسم",
+      "position": "الوظيفة",
+      "branch": "الفرع",
+      "reportingManager": "المدير المباشر",
+      "joinDate": "تاريخ الالتحاق",
+      "employmentType": "نوع التوظيف"
+    },
+    "employeeId": "رقم الموظف"
+  },
+  "candidateDetails": {
+    "header": {
+      "back": "رجوع",
+      "appliedIn": "تقدّم في",
+      "industry": "المجال",
+      "scheduleInterview": "تحديد موعد مقابلة",
+      "sendEmail": "إرسال بريد إلكتروني",
+      "appliedDate": "تاريخ التقديم"
+    },
+    "tabs": {
+      "personalInfo": "البيانات الشخصية",
+      "resume": "السيرة الذاتية",
+      "hiringSteps": "مراحل التوظيف"
+    },
+    "about": {
+      "title": "نبذة عن المرشّح",
+      "readMore": "اقرأ المزيد",
+      "label": "نبذة",
+      "showLess": "عرض أقل"
+    },
+    "personalInfo": {
+      "title": "البيانات الشخصية",
+      "fullName": "الاسم الكامل",
+      "emailAddress": "البريد الإلكتروني",
+      "phoneNumber": "رقم الهاتف",
+      "address": "العنوان",
+      "gender": "النوع",
+      "nationality": "الجنسية",
+      "dateOfBirth": "تاريخ الميلاد"
+    },
+    "education": {
+      "title": "المؤهلات الدراسية",
+      "university": "الجامعة",
+      "graduationDate": "تاريخ التخرّج",
+      "qualification": "المؤهل"
+    },
+    "jobApplication": {
+      "title": "طلب التوظيف",
+      "jobTitle": "المسمّى الوظيفي",
+      "industry": "المجال",
+      "experienceLevel": "مستوى الخبرة",
+      "experience": "الخبرة",
+      "expectedSalary": "الراتب المتوقّع",
+      "salary": "الراتب",
+      "currentStage": "المرحلة الحالية",
+      "department": "القسم"
+    },
+    "skills": {
+      "title": "المهارات",
+      "candidateTitle": "مهارات المرشح",
+      "empty": "لا توجد مهارات."
+    },
+    "sidebar": {
+      "level": "مستوى متوسط",
+      "notes": "الملاحظات",
+      "leaveNote": "اكتب ملاحظة",
+      "notesCount": "الملاحظات ({count})",
+      "loadingNotes": "جارٍ تحميل الملاحظات…",
+      "noNotes": "لا توجد ملاحظات بعد.",
+      "leaveNotePlaceholder": "اكتب ملاحظة"
+    },
+    "scheduleInterviewDialog": {
+      "title": "تحديد موعد مقابلة",
+      "trigger": "تحديد موعد مقابلة",
+      "actions": {
+        "cancel": "إلغاء",
+        "submit": "تحديد الموعد",
+        "submitting": "جارٍ الإرسال…"
+      },
+      "fields": {
+        "date": "التاريخ",
+        "datePlaceholder": "13 نوفمبر 2024",
+        "startTime": "وقت البداية",
+        "startTimePlaceholder": "11:30 ص",
+        "endTime": "وقت النهاية",
+        "endTimePlaceholder": "12:30 م",
+        "meetingLink": "رابط الاجتماع (اختياري)",
+        "meetingLinkPlaceholder": "رابط الاجتماع",
+        "selectDate": "اختر التاريخ",
+        "selectStartTime": "اختر وقت البدء",
+        "selectEndTime": "اختر وقت الانتهاء",
+        "meetingLinkLabel": "رابط الاجتماع",
+        "enterMeetingLink": "أدخل رابط الاجتماع",
+        "interviewWith": "المقابلة مع",
+        "interviewWithPlaceholder": "أدخل اسم من سيجري المقابلة",
+        "note": "ملاحظة",
+        "notePlaceholder": "أضف ملاحظة عن المقابلة"
+      },
+      "validation": {
+        "dateRequired": "التاريخ مطلوب",
+        "startTimeRequired": "وقت البداية مطلوب",
+        "endTimeRequired": "وقت النهاية مطلوب",
+        "interviewWithRequired": "حدد من سيجري المقابلة",
+        "meetingLinkInvalid": "أدخل رابطًا صالحًا يبدأ بـ https://",
+        "noteRequired": "الملاحظة مطلوبة",
+        "endAfterStart": "يجب أن يكون وقت الانتهاء بعد وقت البدء",
+        "noPastDate": "لا يمكن اختيار تاريخ أو وقت في الماضي"
+      }
+    }
+  },
+  "ticketDetails": {
+    "title": "تفاصيل التذكرة",
+    "labels": {
+      "ticketId": "رقم التذكرة",
+      "ticketCreator": "منشئ التذكرة",
+      "jobTitle": "المسمّى الوظيفي",
+      "department": "القسم",
+      "email": "البريد الإلكتروني",
+      "subject": "الموضوع",
+      "status": "الحالة",
+      "createdAt": "تاريخ الإنشاء"
+    }
+  },
+  "ticketDetailsPage": {
+    "title": "تفاصيل التذكرة"
+  },
+  "ticketsPage": {
+    "title": "التذاكر",
+    "tabs": {
+      "supportTickets": "تذاكر الدعم",
+      "myTickets": "تذاكري"
+    },
+    "filters": {
+      "all": "الكل",
+      "open": "مفتوحة",
+      "closed": "مغلقة",
+      "inProgress": "قيد التنفيذ"
+    },
+    "stats": {
+      "newTickets": {
+        "title": "التذاكر الجديدة",
+        "delta": "{count, plural, zero {دون تغيير عن الأسبوع الماضي} one {{signed} تذكرة جديدة مقارنة بالأسبوع الماضي} two {{signed} تذكرتان جديدتان مقارنة بالأسبوع الماضي} few {{signed} تذاكر جديدة مقارنة بالأسبوع الماضي} many {{signed} تذكرة جديدة مقارنة بالأسبوع الماضي} other {{signed} تذكرة جديدة مقارنة بالأسبوع الماضي}}"
+      },
+      "openTickets": {
+        "title": "التذاكر المفتوحة",
+        "delta": "{count, plural, zero {دون تغيير عن الأسبوع الماضي} one {{signed} تذكرة مفتوحة مقارنة بالأسبوع الماضي} two {{signed} تذكرتان مفتوحتان مقارنة بالأسبوع الماضي} few {{signed} تذاكر مفتوحة مقارنة بالأسبوع الماضي} many {{signed} تذكرة مفتوحة مقارنة بالأسبوع الماضي} other {{signed} تذكرة مفتوحة مقارنة بالأسبوع الماضي}}"
+      },
+      "solvedTickets": {
+        "title": "التذاكر المحلولة",
+        "delta": "{count, plural, zero {دون تغيير عن الأسبوع الماضي} one {{signed} تذكرة محلولة مقارنة بالأسبوع الماضي} two {{signed} تذكرتان محلولتان مقارنة بالأسبوع الماضي} few {{signed} تذاكر محلولة مقارنة بالأسبوع الماضي} many {{signed} تذكرة محلولة مقارنة بالأسبوع الماضي} other {{signed} تذكرة محلولة مقارنة بالأسبوع الماضي}}"
+      },
+      "totalTickets": {
+        "title": "إجمالي التذاكر",
+        "delta": "{count, plural, zero {دون تغيير عن الأسبوع الماضي} one {{signed} تذكرة إجمالًا مقارنة بالأسبوع الماضي} two {{signed} تذكرتان إجمالًا مقارنة بالأسبوع الماضي} few {{signed} تذاكر إجمالًا مقارنة بالأسبوع الماضي} many {{signed} تذكرة إجمالًا مقارنة بالأسبوع الماضي} other {{signed} تذكرة إجمالًا مقارنة بالأسبوع الماضي}}"
+      }
+    }
+  },
+  "timeOffPage": {
+    "title": "الإجازات",
+    "metrics": {
+      "totalRequests": {
+        "title": "إجمالي الطلبات",
+        "subtitle": "كل طلبات الإجازة"
+      },
+      "approved": {
+        "title": "مقبولة",
+        "subtitle": "الطلبات التي قُبلت"
+      },
+      "pending": {
+        "title": "معلّقة",
+        "subtitle": "طلبات بانتظار القرار"
+      },
+      "declined": {
+        "title": "مرفوضة",
+        "subtitle": "الطلبات التي رُفضت"
+      }
+    },
+    "filters": {
+      "all": "الكل",
+      "pending": "معلّقة",
+      "approved": "مقبولة",
+      "rejected": "مرفوضة",
+      "cancelled": "ملغاة"
+    }
+  },
+  "timeOffTable": {
+    "columns": {
+      "employee": "الموظف",
+      "department": "القسم",
+      "type": "النوع",
+      "from": "من",
+      "to": "إلى",
+      "duration": "المدة",
+      "status": "الحالة",
+      "action": "إجراء"
+    },
+    "tooltips": {
+      "viewEdit": "عرض / تعديل"
+    },
+    "duration": {
+      "days": "{count, plural, zero {# يوم} one {يوم واحد} two {يومان} few {# أيام} many {# يومًا} other {# يوم}}",
+      "hours": "{count, plural, zero {# ساعة} one {ساعة واحدة} two {ساعتان} few {# ساعات} many {# ساعة} other {# ساعة}}",
+      "daysCount": "{count, plural, zero {لا أيام} one {يوم واحد} two {يومان} few {# أيام} many {# يومًا} other {# يوم}}",
+      "hoursCount": "{count, plural, zero {لا ساعات} one {ساعة واحدة} two {ساعتان} few {# ساعات} many {# ساعة} other {# ساعة}}"
+    },
+    "fallback": {
+      "na": "غير متاح"
+    }
+  },
+  "timeOffDialog": {
+    "title": "طلب إجازة",
+    "submitted": "مُقدَّم",
+    "sections": {
+      "managerDecision": "قرار المدير",
+      "hrDecision": "قرار الموارد البشرية"
+    },
+    "fields": {
+      "leaveType": "نوع الإجازة",
+      "dates": "التاريخ",
+      "duration": "المدة",
+      "attachments": "المرفقات",
+      "noFileAdded": "لا توجد ملفات",
+      "noteReason": "ملاحظة / سبب",
+      "notePlaceholder": "اكتب ملاحظة القرار هنا...",
+      "note": "ملاحظة"
+    },
+    "actions": {
+      "approve": "قبول",
+      "reject": "رفض",
+      "submitDecision": "إرسال القرار",
+      "cancel": "إلغاء",
+      "changeDecision": "تغيير القرار"
+    },
+    "decision": {
+      "label": "القرار: {status}",
+      "waitingForAction": "بانتظار الإجراء...",
+      "noNotesProvided": "لا توجد ملاحظات.",
+      "status": {
+        "approved": "مقبول",
+        "rejected": "مرفوض",
+        "pending": "معلّق"
+      },
+      "choose": "اختر القبول أو الرفض أولًا.",
+      "tooLong": "اجعل الملاحظة أقل من 500 حرف."
+    },
+    "durations": {
+      "full_day": "يوم كامل",
+      "half_day": "نصف يوم",
+      "partial": "جزء من اليوم",
+      "custom_hours": "ساعات محددة"
+    }
+  },
+  "ticketStatusCard": {
+    "title": "حالة التذكرة",
+    "updating": "جارٍ تحديث التذكرة",
+    "saveChanges": "حفظ التغييرات",
+    "statusOptions": {
+      "open": "مفتوحة",
+      "inProgress": "قيد التنفيذ",
+      "closed": "مغلقة"
+    },
+    "fields": {
+      "changeStatus": "تغيير الحالة",
+      "selectStatus": "اختر الحالة",
+      "department": "القسم",
+      "selectDepartment": "اختر القسم",
+      "searchDepartments": "ابحث في الأقسام...",
+      "assignTo": "إسناد إلى",
+      "selectAssignees": "اختر المسؤولين",
+      "searchPeople": "ابحث عن الأشخاص..."
+    },
+    "unnamedEmployee": "موظف",
+    "validation": {
+      "statusRequired": "الحالة مطلوبة"
+    }
+  },
+  "ticketActivity": {
+    "title": "نشاط التذكرة",
+    "allTitle": "كل نشاط التذكرة",
+    "viewAll": "عرض كل النشاط",
+    "noActivity": "لا يوجد نشاط بعد.",
+    "actions": {
+      "created": "أنشأ هذه التذكرة.",
+      "assigned": "أسند",
+      "assignedUsers": "{count, plural, one {مستخدمًا} two {مستخدمَين} few {مستخدمين} many {مستخدمًا} other {مستخدم}} إلى هذه التذكرة.",
+      "updatedStatusFrom": "غيّر الحالة من",
+      "to": "إلى",
+      "addedMessage": "أضاف رسالة إلى هذه التذكرة.",
+      "performedAction": "نفّذ إجراء"
+    },
+    "unknownUser": "مستخدم غير معروف"
+  },
+  "ticketThread": {
+    "loadingMore": "جارٍ التحميل...",
+    "loadMore": "تحميل المزيد",
+    "unknownUser": "مستخدم غير معروف",
+    "ticketUser": "صاحب التذكرة"
+  },
+  "addTicketDialog": {
+    "title": "إضافة تذكرة جديدة",
+    "trigger": "إضافة تذكرة جديدة",
+    "cancel": "إلغاء",
+    "submit": "إضافة التذكرة",
+    "subjectLabel": "موضوع التذكرة",
+    "subjectPlaceholder": "اكتب موضوع التذكرة",
+    "departmentLabel": "القسم",
+    "departmentPlaceholder": "اختر القسم",
+    "assignToLabel": "إسناد إلى",
+    "assignToPlaceholder": "اختر موظفًا",
+    "descriptionLabel": "وصف التذكرة",
+    "attachmentLabel": "المرفق",
+    "sendingMessage": "جارٍ الإرسال...",
+    "sendMessage": "إرسال الرسالة",
+    "validation": {
+      "subjectRequired": "الموضوع مطلوب",
+      "departmentRequired": "القسم مطلوب",
+      "assigneeRequired": "يلزم تعيين شخص واحد على الأقل",
+      "descriptionRequired": "الوصف مطلوب"
+    }
+  },
+  "subscriptions": {
+    "pageTitle": "الاشتراكات",
+    "stats": {
+      "totalSubscription": "إجمالي الاشتراكات",
+      "totalPrice": "إجمالي التكلفة"
+    }
+  },
+  "subscriptionsTable": {
+    "columns": {
+      "toolName": "اسم الأداة",
+      "department": "القسم",
+      "amount": "المبلغ",
+      "billing": "دورة الفوترة",
+      "status": "الحالة",
+      "action": "إجراء"
+    },
+    "tooltips": {
+      "edit": "تعديل",
+      "delete": "حذف"
+    },
+    "billingCycles": {
+      "weekly": "أسبوعي",
+      "monthly": "شهري",
+      "quarterly": "ربع سنوي",
+      "yearly": "سنوي"
+    }
+  },
+  "subscriptionsSheet": {
+    "title": "إضافة اشتراك جديد",
+    "trigger": "إضافة اشتراك جديد",
+    "actions": {
+      "cancel": "إلغاء",
+      "submit": "إضافة"
+    },
+    "fields": {
+      "subscriptionTool": "أداة الاشتراك",
+      "subscriptionToolPlaceholder": "Figma",
+      "department": "القسم",
+      "departmentPlaceholder": "اختر القسم",
+      "billing": "دورة الفوترة",
+      "billingPlaceholder": "اختر دورة الفوترة",
+      "amount": "المبلغ",
+      "amountPlaceholder": "أدخل المبلغ",
+      "note": "ملاحظة",
+      "notePlaceholder": "اكتب ملاحظة",
+      "activation": "تفعيل أداة الاشتراك"
+    },
+    "options": {
+      "departments": {
+        "engineering": "الهندسة",
+        "hr": "الموارد البشرية",
+        "finance": "المالية"
+      },
+      "billing": {
+        "monthly": "شهري",
+        "yearly": "سنوي",
+        "oneTime": "مرة واحدة"
+      }
+    },
+    "validation": {
+      "subscriptionToolRequired": "أداة الاشتراك مطلوبة",
+      "subscriptionToolMax": "يجب ألا تزيد أداة الاشتراك على 120 حرفًا",
+      "departmentRequired": "القسم مطلوب",
+      "billingRequired": "دورة الفوترة مطلوبة",
+      "amountRequired": "المبلغ مطلوب",
+      "amountInvalid": "أدخل مبلغًا صحيحًا",
+      "noteMax": "يجب ألا تزيد الملاحظة على 2000 حرف"
+    }
+  },
+  "projectsPage": {
+    "filters": {
+      "all": "كل الحالات",
+      "inProgress": "قيد التنفيذ",
+      "done": "مكتملة",
+      "rejected": "مرفوضة",
+      "cancelled": "ملغاة"
+    },
+    "states": {
+      "loading": "جارٍ تحميل المشروعات...",
+      "failedToLoad": "تعذّر تحميل المشروعات",
+      "somethingWentWrong": "حدث خطأ ما",
+      "empty": "لم يُعثَر على مشروعات"
+    }
+  },
+  "projectCard": {
+    "progressComplete": "اكتمل {progress}%"
+  },
+  "payroll": {
+    "title": "الرواتب",
+    "tabs": {
+      "all": "الكل",
+      "bonus": "المكافآت",
+      "deduction": "الخصومات",
+      "loans": "السُّلَف"
+    },
+    "filters": {
+      "monthly": "شهري",
+      "biWeekly": "كل أسبوعين",
+      "weekly": "أسبوعي",
+      "hourly": "بالساعة"
+    },
+    "status": {
+      "freezeRun": "تجميد الدورة",
+      "reOpen": "إعادة الفتح",
+      "submit": "إرسال ({count})",
+      "pay": "إرسال إلى الحسابات",
+      "loading": "جارٍ تحميل بيانات الرواتب...",
+      "editsAllowed": "التعديل متاح · تُجمَّد الدورة تلقائيًا يوم 25 ما لم تجمّدها الموارد البشرية قبل ذلك",
+      "draftCount": "{count, plural, zero {لا مسودات} one {مسودة واحدة} two {مسودتان} few {# مسودات} many {# مسودة} other {# مسودة}}"
+    },
+    "columns": {
+      "employeeName": "اسم الموظف",
+      "basicSalary": "الراتب الأساسي",
+      "bonus": "المكافأة",
+      "deduction": "الخصم",
+      "loans": "السُّلَف",
+      "totalSalary": "إجمالي الراتب",
+      "date": "التاريخ",
+      "status": "الحالة",
+      "action": "إجراء",
+      "bonusReason": "سبب المكافأة",
+      "deductionReason": "سبب الخصم",
+      "startDate": "تاريخ البداية",
+      "paidLoans": "المسدَّد من السُّلَف",
+      "remainsLoans": "المتبقي من السُّلَف",
+      "selectAll": "تحديد كل الموظفين",
+      "selectEmployee": "تحديد {name}"
+    },
+    "tooltips": {
+      "edit": "تعديل",
+      "viewDetails": "عرض التفاصيل",
+      "view": "عرض"
+    },
+    "actions": {
+      "addBonus": "إضافة مكافأة",
+      "addDeduction": "إضافة خصم",
+      "addLoan": "إضافة سلفة",
+      "previewPayslip": "معاينة قسيمة الراتب",
+      "downloadPayslip": "تنزيل PDF",
+      "sendPayslip": "إرسال قسيمة الراتب",
+      "bulkSend": "إرسال قسائم الرواتب"
+    },
+    "payslip": {
+      "previewTitle": "معاينة قسيمة الراتب",
+      "sendSuccess": "أُرسلت قسيمة الراتب",
+      "sendError": "تعذّر إرسال قسيمة الراتب",
+      "bulkSendSuccess": "وُضعت قسائم الرواتب في قائمة الإرسال",
+      "bulkSendError": "تعذّر بدء إرسال قسائم الرواتب",
+      "downloadError": "تعذّر تنزيل قسيمة الراتب",
+      "previewError": "تعذّر تحميل معاينة قسيمة الراتب",
+      "loading": "جارٍ التحميل…"
+    },
+    "adjustmentSheet": {
+      "title": {
+        "bonus": "إضافة مكافأة",
+        "deduction": "إضافة خصم"
+      },
+      "fields": {
+        "employee": "الموظف",
+        "employeePlaceholder": "اختر موظفًا…",
+        "nameLabel": {
+          "bonus": "المكافأة",
+          "deduction": "الخصم"
+        },
+        "namePlaceholder": {
+          "bonus": "اكتب اسم المكافأة",
+          "deduction": "اكتب اسم الخصم"
+        },
+        "reasonLabel": {
+          "bonus": "سبب المكافأة",
+          "deduction": "سبب الخصم"
+        },
+        "reasonPlaceholder": {
+          "bonus": "أضف سبب المكافأة",
+          "deduction": "أضف سبب الخصم"
+        },
+        "typeLabel": {
+          "bonus": "نوع المكافأة",
+          "deduction": "نوع الخصم"
+        },
+        "inputMode": "طريقة الإدخال",
+        "amount": "المبلغ",
+        "dayUnits": "عدد الأيام",
+        "notes": "السبب / الملاحظات",
+        "notesPlaceholder": "اكتب سبب التعديل هنا...",
+        "description": "الوصف",
+        "fixedAmount": "مبلغ ثابت",
+        "daysValue": "عدد الأيام",
+        "percentValue": "النسبة",
+        "monthsValue": "عدد الأشهر"
+      },
+      "modes": {
+        "fixed": {
+          "label": "ثابت",
+          "subtext": "مبلغ ثابت."
+        },
+        "days": {
+          "label": "أيام",
+          "subtext": "حسب الأجر اليومي للموظف."
+        },
+        "percent": {
+          "label": "نسبة",
+          "subtext": "نسبة من الراتب الأساسي للموظف."
+        },
+        "months": {
+          "label": "أشهر",
+          "subtext": "حسب الأجر الشهري للموظف."
+        }
+      },
+      "actions": {
+        "cancel": "إلغاء",
+        "submit": {
+          "bonus": "إضافة المكافأة",
+          "deduction": "إضافة الخصم"
+        },
+        "submitting": "جارٍ الإرسال..."
+      },
+      "validation": {
+        "employeeRequired": "اختر موظفًا",
+        "nameRequired": "هذا الحقل مطلوب",
+        "nameMax": "يجب ألا يزيد على 120 حرفًا",
+        "reasonMax": "يجب ألا يزيد على 2000 حرف",
+        "valuePositive": "لا يمكن أن تكون القيمة سالبة"
+      }
+    },
+    "detailPage": {
+      "title": "راتب الموظف",
+      "subtitle": "تفاصيل راتب الموظف في هذه الدورة.",
+      "sections": {
+        "bankInformation": "البيانات المصرفية",
+        "loans": "السُّلَف",
+        "salaryDetails": "تفاصيل الراتب"
+      },
+      "fields": {
+        "employee": "الموظف",
+        "employeePlaceholder": "اختر موظفًا…",
+        "employeeId": "رقم الموظف",
+        "department": "القسم",
+        "employeeType": "نوع التوظيف",
+        "emailAddress": "البريد الإلكتروني",
+        "phoneNumber": "رقم الهاتف",
+        "bankName": "اسم البنك",
+        "accountName": "اسم الحساب",
+        "accountNo": "رقم الحساب",
+        "iban": "رقم الحساب الدولي (IBAN)",
+        "salary": "الراتب",
+        "loanMonthly": "قسط السلفة (شهريًا)",
+        "bonus": "المكافأة",
+        "deduction": "الخصم",
+        "total": "الإجمالي",
+        "note": "ملاحظة",
+        "notePlaceholder": "اكتب رسالة..."
+      },
+      "loans": {
+        "total": "إجمالي السُّلَف",
+        "paid": "المسدَّد",
+        "paidMonthly": "القسط الشهري",
+        "remains": "المتبقي"
+      },
+      "validation": {
+        "employeeRequired": "اختر موظفًا",
+        "loanMonthlyMin": "يجب أن يكون قسط السلفة صفرًا أو أكثر",
+        "noteMax": "يجب ألا يزيد على 250 حرفًا"
+      }
+    },
+    "loansSheet": {
+      "title": "إضافة سلفة",
+      "fields": {
+        "employee": "الموظف",
+        "employeePlaceholder": "اختر موظفًا…",
+        "totalLoans": "إجمالي السلفة",
+        "totalLoansPlaceholder": "0",
+        "duration": "المدة",
+        "durationPlaceholder": "اختر المدة…",
+        "paidMonthly": "القسط الشهري",
+        "reason": "سبب السلفة",
+        "reasonPlaceholder": "أضف سبب السلفة"
+      },
+      "duration": {
+        "6": "6 أشهر",
+        "12": "12 شهرًا",
+        "18": "18 شهرًا",
+        "24": "24 شهرًا"
+      },
+      "actions": {
+        "cancel": "إلغاء",
+        "submit": "إضافة"
+      },
+      "validation": {
+        "employeeRequired": "اختر موظفًا",
+        "totalRequired": "أدخل إجمالي مبلغ السلفة",
+        "totalPositive": "أدخل مبلغًا صحيحًا أكبر من صفر",
+        "durationRequired": "اختر المدة"
+      },
+      "trigger": "سلفة"
+    },
+    "loanDetail": {
+      "schedule": {
+        "date": "التاريخ",
+        "paidLoan": "المسدَّد",
+        "remainsLoan": "المتبقي"
+      },
+      "addAmountSheet": {
+        "title": "إضافة مبلغ",
+        "trigger": "إضافة مبلغ",
+        "fields": {
+          "totalLoans": "إجمالي السلفة",
+          "paidMonthly": "القسط الشهري",
+          "addedAmount": "المبلغ المضاف",
+          "addedAmountPlaceholder": "0",
+          "remainingAmount": "المبلغ المتبقي"
+        },
+        "helper": {
+          "remainingCalculated": "يُحسَب تلقائيًا"
+        },
+        "actions": {
+          "cancel": "إلغاء",
+          "submit": "إضافة"
+        },
+        "validation": {
+          "addedMin": "يجب أن يكون المبلغ صفرًا أو أكثر",
+          "addedMax": "لا يمكن أن يتجاوز المبلغ إجمالي السلفة"
+        }
+      },
+      "title": "تفاصيل السلفة"
+    },
+    "adminDetail": {
+      "hrNote": "ملاحظة الموارد البشرية:",
+      "hrNoteDescription": "جمّدت الموارد البشرية هذه الدورة في {date}. اقبل كل شخص أو أعده مع توضيح المطلوب تعديله.",
+      "title": "بانتظار الموافقة",
+      "description": "كل بطاقة دفعة أرسلتها الموارد البشرية للمراجعة. قد تُنتج الدورة الواحدة عدة دفعات على مدى أيام.",
+      "approveAll": "قبول الكل ({count})",
+      "submitReview": "إرسال المراجعة",
+      "noteToHr": "ملاحظة للموارد البشرية",
+      "optional": "(اختياري)",
+      "messagePlaceholder": "اكتب رسالة...",
+      "approveAllConfirm": {
+        "title": "هل تريد قبول كل رواتب {period}؟",
+        "impact": "{count, plural, zero {لا أحد} one {شخص واحد} two {شخصان} few {# أشخاص} many {# شخصًا} other {# شخص}}، والصافي {amount}. تعود الرواتب المقبولة إلى الموارد البشرية لترسلها إلى الحسابات للصرف.",
+        "confirm": "قبول الكل",
+        "cancel": "إلغاء"
+      },
+      "hrNoteNoDate": "جمّدت الموارد البشرية هذه الدورة. اقبل كل شخص أو أعده مع توضيح المطلوب تعديله.",
+      "system": "النظام",
+      "activity": "النشاط",
+      "noActivity": "لا يوجد نشاط حديث.",
+      "activityActions": {
+        "runStarted": "بدأت مسيرة الرواتب",
+        "runFrozen": "جُمّدت المسيرة",
+        "runReopened": "أُعيد فتح المسيرة",
+        "runReopenedWithdrawn": "أُعيد فتح المسيرة ({count, plural, zero {دون سحب أي إرسال} one {سُحب إرسال واحد} two {سُحب إرسالان} few {سُحبت # إرسالات} many {سُحب # إرسالًا} other {سُحب # إرسال}})",
+        "submitted": "{count, plural, zero {لم يُرسَل أي موظف للموافقة} one {أُرسل موظف واحد للموافقة} two {أُرسل موظفان للموافقة} few {أُرسل # موظفين للموافقة} many {أُرسل # موظفًا للموافقة} other {أُرسل # موظف للموافقة}}",
+        "approvedAll": "الموافقة على جميع الصفوف",
+        "approvedRows": "{count, plural, zero {لم يُوافَق على أي صف} one {الموافقة على صف واحد} two {الموافقة على صفّين} few {الموافقة على # صفوف} many {الموافقة على # صفًا} other {الموافقة على # صف}}",
+        "changeRequested": "طُلب تعديل بخصوص <who>{name}</who>",
+        "resubmitted": "أُعيد إرسال <who>{name}</who>",
+        "bonusAdded": "أُضيفت مكافأة إلى <who>{name}</who>",
+        "deductionAdded": "أُضيف خصم على <who>{name}</who>",
+        "queuedAll": "أُدرجت في قائمة الصرف",
+        "queued": "{count, plural, zero {لم تُدرج أي دفعة للصرف} one {أُدرجت دفعة واحدة للصرف} two {أُدرجت دفعتان للصرف} few {أُدرجت # دفعات للصرف} many {أُدرجت # دفعةً للصرف} other {أُدرجت # دفعة للصرف}}",
+        "markedPaidAll": "عُلّمت كمدفوعة",
+        "markedPaid": "{count, plural, zero {لم تُعلَّم أي دفعة كمدفوعة} one {عُلّمت دفعة واحدة كمدفوعة} two {عُلّمت دفعتان كمدفوعتين} few {عُلّمت # دفعات كمدفوعة} many {عُلّمت # دفعةً كمدفوعة} other {عُلّمت # دفعة كمدفوعة}}",
+        "paidEmployee": "صُرف راتب <who>{name}</who>",
+        "bankFileExported": "صُدّر ملف البنك",
+        "payslipsSent": "{count, plural, zero {لم تُرسل أي قسيمة راتب} one {أُرسلت قسيمة راتب واحدة بالبريد الإلكتروني} two {أُرسلت قسيمتا راتب بالبريد الإلكتروني} few {أُرسلت # قسائم رواتب بالبريد الإلكتروني} many {أُرسلت # قسيمةً بالبريد الإلكتروني} other {أُرسلت # قسيمة راتب بالبريد الإلكتروني}}",
+        "imported": "{count, plural, zero {لم يُستورد أي تعديل} one {استُورد تعديل واحد} two {استُورد تعديلان} few {استُوردت # تعديلات} many {استُورد # تعديلًا} other {استُورد # تعديل}} من <who>{name}</who>"
+      }
+    },
+    "run": {
+      "cancel": "إلغاء",
+      "freeze": {
+        "title": "هل تريد تجميد دورة {period}؟",
+        "impact": "{count, plural, zero {لا أحد} one {شخص واحد} two {شخصان} few {# أشخاص} many {# شخصًا} other {# شخص}}، والصافي {amount}. لا يمكن إضافة مكافآت أو خصومات حتى يُعاد فتح الدورة.",
+        "confirm": "تجميد الدورة"
+      },
+      "reopen": {
+        "title": "هل تريد إعادة فتح دورة {period}؟",
+        "impact": "{count, plural, =0 {لن يعود أي طلب مُرسَل.} one {سيعود طلب مُرسَل واحد إلى المسودة.} two {سيعود طلبان مُرسَلان إلى المسودة.} few {ستعود # طلبات مُرسَلة إلى المسودة.} many {سيعود # طلبًا مُرسَلًا إلى المسودة.} other {سيعود # طلب مُرسَل إلى المسودة.}} ويمكن إضافة المكافآت والخصومات من جديد.",
+        "confirm": "إعادة فتح الدورة"
+      },
+      "queue": {
+        "title": "هل تريد إرسال دورة {period} إلى الحسابات؟",
+        "impact": "{count, plural, zero {لا أحد من المقبولين} one {شخص مقبول واحد} two {شخصان مقبولان} few {# أشخاص مقبولين} many {# شخصًا مقبولًا} other {# شخص مقبول}}، بمبلغ {amount}، إلى قائمة الصرف. تُبلَّغ الحسابات وتتولّى الدفع.",
+        "confirm": "إرسال إلى الحسابات",
+        "noneApproved": "لم يُقبَل أحد بعد"
+      },
+      "payslips": {
+        "title": "هل تريد إرسال قسائم رواتب {period} بالبريد؟",
+        "impact": "{count, plural, zero {لن يتلقّى أحد} one {سيتلقّى شخص واحد} two {سيتلقّى شخصان} few {سيتلقّى # أشخاص} many {سيتلقّى # شخصًا} other {سيتلقّى # شخص}} قسيمة راتبه بالبريد الإلكتروني.",
+        "confirm": "إرسال القسائم"
+      },
+      "empty": {
+        "title": "لا توجد دورة رواتب لـ{period}",
+        "body": "ابدأ دورة لإضافة المكافآت والخصومات والسُّلَف، ثم جمّدها وأرسلها للموافقة.",
+        "start": "بدء دورة {period}",
+        "switchMonthly": "التبديل إلى الشهري"
+      },
+      "week": "الأسبوع {week} · {range}"
+    },
+    "admin": {
+      "title": "بانتظار الموافقة",
+      "description": "كل بطاقة دفعة أرسلتها الموارد البشرية للمراجعة. قد تُنتج الدورة الواحدة عدة دفعات على مدى أيام.",
+      "emptyTitle": "لا شيء معلّق",
+      "emptyBody": "لا يوجد ما ينتظر الموافقة الآن.",
+      "review": "مراجعة",
+      "pendingReview": "بانتظار المراجعة",
+      "netPay": "صافي الأجر",
+      "decided": "تم البتّ فيه",
+      "people": "{count, plural, zero {لا أحد} one {شخص واحد} two {شخصان} few {# أشخاص} many {# شخصًا} other {# شخص}}",
+      "decidedValue": "{decided, plural, zero {لا أحد} one {شخص واحد} two {شخصان} few {# أشخاص} many {# شخصًا} other {# شخص}} · {flagged} مُعلَّم"
+    },
+    "review": {
+      "totalThisRun": "إجمالي هذه الدورة",
+      "basic": "الأساسي",
+      "bonus": "المكافأة",
+      "deduction": "الخصم",
+      "loan": "السلفة",
+      "items": {
+        "bonus": "مكافأة",
+        "deduction": "خصم",
+        "loan": "سلفة (تُخصم تلقائيًا)"
+      },
+      "loanInstallment": "قسط السلفة",
+      "approve": "قبول",
+      "requestChange": "طلب تعديل",
+      "decisionFor": "القرار بشأن {name}",
+      "whatToChange": "ما الذي يجب أن تعدّله الموارد البشرية؟",
+      "whatToChangePlaceholder": "مثلًا: احذف الخصم، أو اجعل المكافأة 50"
+    },
+    "submit": {
+      "title": "{count, plural, =0 {إرسال أشخاص للموافقة} one {إرسال شخص واحد للموافقة} two {إرسال شخصين للموافقة} few {إرسال # أشخاص للموافقة} many {إرسال # شخصًا للموافقة} other {إرسال # شخص للموافقة}}",
+      "cancel": "إلغاء",
+      "confirm": "إرسال إلى المسؤول",
+      "noneSelected": "اختر الأشخاص من الجدول أولًا بتحديد صفوفهم، ثم أرسل.",
+      "total": "الإجمالي",
+      "note": "ملاحظة للمسؤول",
+      "optional": "(اختياري)",
+      "notePlaceholder": "ما يجب أن يعرفه المسؤول"
+    },
+    "adjustmentRow": {
+      "edit": "تعديل",
+      "bonusTitle": "هل تريد إزالة المكافأة «{title}» ({amount})؟",
+      "deductionTitle": "هل تريد إزالة الخصم «{title}» ({amount})؟",
+      "adjustmentImpact": "سيتغيّر صافي الأجر في هذه الدورة بهذا المبلغ.",
+      "bonusConfirm": "إزالة المكافأة",
+      "deductionConfirm": "إزالة الخصم"
+    },
+    "unknownEmployee": "موظف غير معروف",
+    "draftSheet": {
+      "title": "تفاصيل الموظف",
+      "loading": "جارٍ تحميل التفاصيل…",
+      "generalDepartment": "عام",
+      "adminNote": "المسؤول: {note}",
+      "locked": "هذا الصف مقفل. لا يمكن التعديل بعد إرسال الموظف أو اعتماده أو صرف راتبه.",
+      "payslipPdf": "قسيمة الراتب (PDF)",
+      "salaryBreakdown": "تفاصيل الراتب",
+      "bonusesSubtotal": "+ المكافآت ({count}) · المجموع الفرعي",
+      "deductionsSubtotal": "− الخصومات ({count}) · المجموع الفرعي",
+      "net": "الصافي",
+      "bonuses": "المكافآت",
+      "deductions": "الخصومات",
+      "loanDeductions": "خصومات السلف (تلقائي)",
+      "loanInstallmentAuto": "قسط السلفة (تلقائي)",
+      "reasonPlaceholder": "السبب / العنوان",
+      "saveItem": "حفظ"
+    }
+  },
+  "myPayslips": {
+    "title": "قسائم راتبي",
+    "description": "اعرض قسائم رواتبك الشهرية المصروفة ونزّلها.",
+    "empty": "لا توجد قسائم رواتب بعد.",
+    "columns": {
+      "period": "الفترة",
+      "periodRange": "نطاق الفترة",
+      "netPay": "صافي الأجر",
+      "paidAt": "تاريخ الصرف",
+      "generatedAt": "تاريخ الإصدار",
+      "action": "إجراء"
+    }
+  },
+  "loans": {
+    "title": "السُّلَف",
+    "details": {
+      "sheetTitle": "تفاصيل السلفة وإدارتها",
+      "loading": "جارٍ التحميل...",
+      "loadingData": "جارٍ تحميل البيانات...",
+      "failedLoad": "تعذّر تحميل بيانات السلفة.",
+      "manageFor": "إدارة سلفة الموظف: {name}",
+      "tabs": {
+        "details": "تفاصيل السلفة والأقساط",
+        "edit": "تعديل السلفة"
+      },
+      "cards": {
+        "totalAmount": "المبلغ الإجمالي",
+        "remainingAmount": "المبلغ المتبقي",
+        "paidAmount": "المبلغ المسدَّد",
+        "monthlyInstallment": "القسط الشهري"
+      },
+      "fields": {
+        "employeeCode": "كود الموظف",
+        "loanStatus": "حالة السلفة",
+        "startDate": "تاريخ البداية",
+        "loanTitle": "عنوان السلفة",
+        "reasonNotes": "السبب / الملاحظات",
+        "quickActions": "تغيير سريع للحالة:",
+        "activate": "تفعيل السلفة",
+        "pause": "إيقاف السلفة مؤقتًا",
+        "saveChanges": "حفظ التغييرات",
+        "saving": "جارٍ الحفظ..."
+      },
+      "statusOptions": {
+        "active": "نشطة",
+        "paused": "متوقفة مؤقتًا",
+        "closed": "مغلقة",
+        "cancelled": "ملغاة"
+      },
+      "validation": {
+        "titleRequired": "أدخل عنوان السلفة"
+      }
+    },
+    "filters": {
+      "all": "الكل",
+      "active": "نشطة",
+      "paused": "موقوفة مؤقتًا",
+      "closed": "مغلقة",
+      "cancelled": "ملغاة"
+    },
+    "columns": {
+      "id": "الرقم",
+      "employee": "الموظف",
+      "title": "عنوان السلفة",
+      "amount": "المبلغ",
+      "installment": "القسط",
+      "remaining": "المتبقي",
+      "startDate": "تاريخ البداية",
+      "status": "الحالة",
+      "action": "إجراء"
+    }
+  },
+  "financeQueue": {
+    "title": "قائمة الصرف",
+    "detailsTitle": "قائمة الصرف · الدورة {id}",
+    "backToQueue": "العودة إلى قائمة الصرف",
+    "exportFile": "تصدير ملف",
+    "exportFinanceSheet": "تصدير كشف الحسابات",
+    "exportPayslipsZip": "تصدير قسائم الرواتب (ZIP)",
+    "payAll": "صرف الكل",
+    "filters": {
+      "period": "الفترة",
+      "showAll": "عرض الكل",
+      "monthly": "شهري",
+      "biWeekly": "كل أسبوعين",
+      "weekly": "أسبوعي",
+      "hourly": "بالساعة",
+      "approved": "مقبولة",
+      "queued": "في القائمة",
+      "paid": "مصروفة"
+    },
+    "card": {
+      "items": "البنود",
+      "queued": "في القائمة",
+      "netPayable": "صافي المستحق",
+      "openDetails": "عرض التفاصيل"
+    },
+    "empty": {
+      "noPayments": "لا توجد مدفوعات لشهر {month}."
+    },
+    "table": {
+      "columns": {
+        "employee": "الموظف",
+        "iban": "رقم الحساب الدولي (IBAN)",
+        "amount": "المبلغ",
+        "jobTitle": "المسمّى الوظيفي",
+        "status": "الحالة",
+        "action": "إجراء"
+      },
+      "actions": {
+        "markPaid": "تعليم كمصروف"
+      },
+      "noItems": "لا توجد بنود صرف في هذه الدورة."
+    },
+    "import": {
+      "title": "استيراد رواتب سابقة",
+      "description": "نزّل القالب واملأ بيانات الرواتب السابقة، ثم ارفع ملفات Excel أو CSV.",
+      "downloadTemplate": "تنزيل القالب",
+      "importFile": "استيراد ملف",
+      "importing": "جارٍ استيراد بيانات الرواتب...",
+      "empty": "لا توجد دفعات مستوردة بعد.",
+      "columns": {
+        "filename": "الملف",
+        "format": "الصيغة",
+        "runId": "رقم الدورة",
+        "rowCount": "الصفوف",
+        "createdCount": "المُنشأة",
+        "errorCount": "الأخطاء",
+        "importedBy": "استوردها",
+        "createdAt": "تاريخ الاستيراد",
+        "action": "إجراء"
+      },
+      "actions": {
+        "view": "عرض الدورة"
+      }
+    }
+  },
+  "monthYearFilter": {
+    "prevMonth": "الشهر السابق",
+    "nextMonth": "الشهر التالي",
+    "selectRange": "اختر نطاقًا زمنيًا"
+  },
+  "test1": {
+    "footer2": {
+      "brand": "Untitled UI",
+      "description": "صمّم تجارب رقمية مذهلة تنشر السعادة في العالم.",
+      "getApp": "احصل على التطبيق",
+      "links": {
+        "overview": "نظرة عامة",
+        "features": "المزايا",
+        "pricing": "الأسعار",
+        "careers": "الوظائف",
+        "help": "المساعدة",
+        "privacy": "الخصوصية"
+      },
+      "storeButtons": {
+        "downloadOn": "نزّله من",
+        "appStore": "App Store",
+        "getItOn": "احصل عليه من",
+        "googlePlay": "Google Play"
+      },
+      "copyright": "© {year} Untitled UI. جميع الحقوق محفوظة."
+    }
+  },
+  "attendance": {
+    "pageTitle": "الحضور",
+    "export": "تصدير"
+  },
+  "addTimeDialog": {
+    "title": "إضافة إجازة",
+    "trigger": "طلب إجازة",
+    "cancel": "إلغاء",
+    "submit": "طلب إجازة",
+    "submitRequest": "إرسال الطلب",
+    "employeeName": "اسم الموظف",
+    "employeePlaceholder": "اختر موظفًا",
+    "employeeId": "رقم الموظف (اختياري)",
+    "employeeIdPlaceholder": "أدخل رقم الموظف",
+    "department": "القسم",
+    "departmentPlaceholder": "اختر قسمًا",
+    "manager": "المدير",
+    "managerPlaceholder": "سيظهر المدير تلقائيًا",
+    "partialDay": "خيار جزء من اليوم",
+    "timeOffType": "نوع الإجازة",
+    "timeOffTypePlaceholder": "اختر نوع الإجازة",
+    "dates": "التواريخ",
+    "datesPlaceholder": "اختر التاريخ والوقت",
+    "note": "ملاحظة",
+    "notePlaceholder": "أضف أي معلومات إضافية",
+    "noFile": "لا توجد ملفات",
+    "duration": "المدة",
+    "oneDay": "يوم واحد",
+    "durationType": "نوع المدة",
+    "startDate": "تاريخ البداية",
+    "endDate": "تاريخ النهاية",
+    "period": "الفترة",
+    "attachments": "المرفقات",
+    "periods": {
+      "morning": "الصباح",
+      "afternoon": "بعد الظهر"
+    },
+    "durationTypes": {
+      "fullDay": "يوم كامل",
+      "halfDay": "نصف يوم",
+      "customHours": "ساعات محددة",
+      "startTime": "وقت البداية",
+      "endTime": "وقت النهاية"
+    },
+    "timeOffTypes": {
+      "annualLeave": "إجازة سنوية",
+      "sickLeave": "إجازة مرضية",
+      "personalLeave": "إجازة شخصية",
+      "vacationDay": "يوم عطلة",
+      "unpaidLeave": "إجازة غير مدفوعة",
+      "other": "أخرى"
+    },
+    "validation": {
+      "typeRequired": "النوع مطلوب",
+      "startDateRequired": "تاريخ البدء مطلوب",
+      "endDateRequired": "تاريخ الانتهاء مطلوب",
+      "customHoursRequired": "يلزم تحديد وقتي البدء والانتهاء للساعات المخصصة"
+    }
+  },
+  "attendanceCard": {
+    "title": "الحضور",
+    "today": "اليوم",
+    "thisWeek": "هذا الأسبوع",
+    "selectDate": "اختر تاريخًا",
+    "attendanceRate": "نسبة الحضور",
+    "onTime": "في الموعد",
+    "late": "متأخر",
+    "notAttendYet": "لم يحضر بعد"
+  },
+  "statsCard": {
+    "employeeAttend": "حضور الموظفين",
+    "totalLogHours": "إجمالي الساعات المسجّلة",
+    "lastWeek": "الأسبوع الماضي"
+  },
+  "workingHourPerformance": {
+    "title": "أداء ساعات العمل",
+    "allDepartments": "كل الأقسام",
+    "employeePerf": "أداء الموظفين",
+    "workingHour": "ساعات العمل",
+    "categories": {
+      "marketing": "التسويق",
+      "developer": "التطوير",
+      "creative": "الإبداع",
+      "hr": "الموارد البشرية"
+    },
+    "status": {
+      "excellentPerformance": "أداء ممتاز",
+      "needsImprovement": "يحتاج إلى تحسين",
+      "marketing": "أداء رائع بالفعل!",
+      "developer": "تقدّم ممتاز!",
+      "creative": "عمل جيد!",
+      "hr": "أداء جيد!",
+      "noData": "لا توجد بيانات"
+    }
+  },
+  "insight": {
+    "title": "مؤشرات الحضور",
+    "absenteeismRate": "نسبة الغياب",
+    "lateOccurrences": "مرات التأخير",
+    "totalWorkTime": "إجمالي وقت العمل",
+    "attendanceRate": "نسبة الحضور",
+    "earlyDepartures": "الانصراف المبكر",
+    "overtimeHours": "ساعات العمل الإضافي",
+    "averageLateness": "متوسط التأخير",
+    "daysCount": "{count, plural, zero {لا أيام} one {يوم واحد} two {يومان} few {# أيام} many {# يومًا} other {# يوم}}"
+  },
+  "attendanceTable": {
+    "sections": {
+      "attendance": "الحضور",
+      "leave": "الإجازات",
+      "absence": "الغياب",
+      "daysOff": "أيام الراحة"
+    },
+    "dateRange": {
+      "fromDate": "من تاريخ",
+      "toDate": "إلى تاريخ",
+      "to": "إلى"
+    },
+    "statuses": {
+      "pending": "معلّقة",
+      "approved": "مقبولة",
+      "rejected": "مرفوضة",
+      "cancelled": "ملغاة"
+    },
+    "columns": {
+      "employee": "الموظف",
+      "employeeName": "اسم الموظف",
+      "jobTitle": "المسمّى الوظيفي",
+      "department": "القسم",
+      "startWork": "بداية العمل",
+      "endWork": "نهاية العمل",
+      "status": "الحالة",
+      "logHours": "الساعات المسجّلة",
+      "overtime": "العمل الإضافي",
+      "late": "التأخير",
+      "leaveDate": "تاريخ الإجازة",
+      "type": "النوع",
+      "note": "ملاحظة",
+      "date": "التاريخ",
+      "duration": "المدة",
+      "dateFrom": "من تاريخ"
+    },
+    "duration": {
+      "minutes": "{count} دقيقة",
+      "hoursMinutes": "{hours} س {minutes} د",
+      "halfDay": "نصف يوم",
+      "oneDay": "يوم واحد"
+    },
+    "fallback": {
+      "na": "غير متاح",
+      "unknown": "غير معروف",
+      "noTitle": "بلا عنوان",
+      "noDepartment": "بلا قسم"
+    },
+    "emptyMessage": "لم يُعثَر على سجلات",
+    "dayOffTypes": {
+      "weekend": "عطلة نهاية الأسبوع",
+      "public_holiday": "عطلة رسمية",
+      "company_closure": "إغلاق الشركة",
+      "approved_leave": "إجازة معتمدة",
+      "approved_special_off": "يوم إجازة خاص",
+      "manual_override": "تعديل يدوي"
+    },
+    "inProgress": "قيد التقدم"
+  },
+  "attendanceLegacyTable": {
+    "columns": {
+      "ticketId": "رقم التذكرة",
+      "subject": "الموضوع",
+      "employeeName": "اسم الموظف",
+      "createdDate": "تاريخ الإنشاء",
+      "emailAddress": "البريد الإلكتروني",
+      "status": "الحالة",
+      "action": "إجراء"
+    },
+    "tooltips": {
+      "viewDetails": "عرض التفاصيل",
+      "deleteTicket": "حذف التذكرة"
+    }
+  },
+  "configuration": {
+    "pageTitle": "الإعدادات",
+    "pageDescription": "أدر ملف شركتك وإعدادات الحضور.",
+    "companyProfile": "ملف الشركة",
+    "companyLogo": "شعار الشركة",
+    "companyName": "اسم الشركة",
+    "preferredLanguage": "اللغة المفضّلة",
+    "phone": "رقم الهاتف",
+    "email": "البريد الإلكتروني",
+    "location": "الموقع",
+    "attendanceSettings": "إعدادات الحضور",
+    "attendanceSchedule": "جدول الحضور",
+    "effectiveFrom": "يسري اعتبارًا من",
+    "gracePeriodMinutes": "فترة السماح (بالدقائق)",
+    "dayStartTime": "بداية يوم العمل",
+    "dayEndTime": "نهاية يوم العمل",
+    "workingDays": "أيام العمل",
+    "uploadLogo": "رفع الشعار",
+    "cancel": "إلغاء",
+    "saveChanges": "حفظ التغييرات",
+    "publicHolidays": "العطلات الرسمية",
+    "holidayName": "اسم العطلة",
+    "date": "التاريخ",
+    "addHoliday": "إضافة عطلة",
+    "noHolidays": "لم تُضَف عطلات رسمية بعد.",
+    "successUpdate": "حُدِّثت الإعدادات بنجاح",
+    "errorUpdate": "تعذّر تحديث الإعدادات",
+    "logoUploaded": "رُفع الشعار بنجاح",
+    "logoDeleted": "حُذف الشعار بنجاح",
+    "logoError": "تعذّر تحديث الشعار",
+    "options": {
+      "languages": {
+        "en": "الإنجليزية",
+        "de": "الألمانية",
+        "fr": "الفرنسية",
+        "it": "الإيطالية"
+      }
+    },
+    "placeholders": {
+      "companyName": "أدخل اسم الشركة",
+      "language": "اختر اللغة",
+      "phone": "+20 100 123 4567",
+      "email": "contact@company.com",
+      "location": "المدينة، الدولة",
+      "holidayName": "مثلًا: رأس السنة الميلادية"
+    },
+    "days": {
+      "Monday": "الاثنين",
+      "Tuesday": "الثلاثاء",
+      "Wednesday": "الأربعاء",
+      "Thursday": "الخميس",
+      "Friday": "الجمعة",
+      "Saturday": "السبت",
+      "Sunday": "الأحد"
+    },
+    "removeLogo": "إزالة الشعار",
+    "toasts": {
+      "updating": "جارٍ التحديث…",
+      "uploading": "جارٍ الرفع…"
+    },
+    "validation": {
+      "companyNameRequired": "اسم الشركة مطلوب",
+      "preferredLanguageRequired": "اللغة المفضلة مطلوبة",
+      "phoneRequired": "رقم الهاتف مطلوب",
+      "emailInvalid": "عنوان البريد الإلكتروني غير صالح",
+      "locationRequired": "الموقع مطلوب",
+      "effectiveDateRequired": "تاريخ السريان مطلوب",
+      "workingDaysMin": "يلزم يوم عمل واحد على الأقل",
+      "startTimeRequired": "وقت البدء مطلوب",
+      "endTimeRequired": "وقت الانتهاء مطلوب",
+      "gracePeriodMin": "يجب ألا تقل فترة السماح عن 0",
+      "holidayNameRequired": "اسم العطلة مطلوب",
+      "dateRequired": "التاريخ مطلوب"
+    }
+  },
+  "jobs": {
+    "common": {
+      "loading": "جارٍ التحميل...",
+      "na": "غير متاح",
+      "pending": "معلّق",
+      "createJob": "إنشاء وظيفة",
+      "yes": "نعم",
+      "no": "لا",
+      "viewProfile": "عرض الملف",
+      "failedLoadCandidates": "تعذّر تحميل المرشّحين لهذه الوظيفة.",
+      "noCandidatesForJob": "لا يوجد مرشّحون لهذه الوظيفة بعد.",
+      "noCandidatesYet": "لا يوجد مرشّحون بعد."
+    },
+    "stages": {
+      "applying": "تقديم الطلب",
+      "screening": "الفرز",
+      "interview": "المقابلة",
+      "hiring": "التعيين",
+      "accepted": "مقبول",
+      "offer": "العرض",
+      "hired": "تم التعيين",
+      "rejected": "مرفوض"
+    },
+    "candidatesPage": {
+      "title": "المرشّحون"
+    },
+    "rejectedPage": {
+      "title": "المرشّحون المرفوضون"
+    },
+    "hiringJobs": {
+      "title": "الوظائف الشاغرة",
+      "failedLoadJobs": "تعذّر تحميل الوظائف. حدّث الصفحة وحاول مرة أخرى.",
+      "tabs": {
+        "all": "الكل",
+        "publishSoon": "تُنشر قريبًا"
+      },
+      "stats": {
+        "totalApplied": "إجمالي المتقدّمين",
+        "totalInterview": "إجمالي المقابلات"
+      },
+      "dateRange": {
+        "from": "من",
+        "to": "إلى",
+        "fromTo": "من {start} إلى {end}"
+      },
+      "empty": {
+        "title": "لم يُعثَر على وظائف",
+        "description": "لا توجد وظائف تطابق عوامل التصفية الحالية. غيّر تبويب الحالة أو أنشئ وظيفة جديدة."
+      }
+    },
+    "hiringOverall": {
+      "title": "لوحة التوظيف",
+      "interview": "مقابلة",
+      "interviewLink": "رابط المقابلة",
+      "noDetailsProvided": "لا توجد تفاصيل",
+      "forLast": "خلال آخر {view}",
+      "moreEvents": "+{count} أخرى",
+      "views": {
+        "day": "يوم",
+        "week": "أسبوع",
+        "month": "شهر"
+      },
+      "metrics": {
+        "totalOpenJobs": "إجمالي الوظائف المفتوحة",
+        "totalApplicants": "إجمالي المتقدّمين",
+        "totalReviews": "إجمالي المراجعات",
+        "rejected": "مرفوضون",
+        "accepted": "مقبولون"
+      }
+    },
+    "candidateDetails": {
+      "sendEmail": "إرسال بريد إلكتروني",
+      "candidate": "المرشّح",
+      "resume": "السيرة الذاتية",
+      "downloadPdf": "تنزيل PDF",
+      "resumeUnavailable": "السيرة الذاتية غير متاحة",
+      "cvPreviewUnavailable": "معاينة السيرة الذاتية غير متاحة.",
+      "stageOf": "مرحلة:",
+      "appointments": "المواعيد",
+      "date": "التاريخ",
+      "interviewWith": "المقابلة مع",
+      "interviewLink": "رابط المقابلة",
+      "noAppointmentsYet": "لا توجد مواعيد بعد.",
+      "tabs": {
+        "personalInfo": "البيانات الشخصية",
+        "resume": "السيرة الذاتية",
+        "hiringSteps": "مراحل التوظيف"
+      }
+    },
+    "jobDetails": {
+      "deleteJobOffer": "حذف عرض الوظيفة",
+      "deleteConfirmDescription": "هل تريد حذف عرض الوظيفة هذا؟",
+      "failedLoadJobDetails": "تعذّر تحميل تفاصيل الوظيفة.",
+      "tabs": {
+        "jobDetails": "تفاصيل الوظيفة",
+        "salary": "الراتب والمزايا",
+        "descriptions": "الوصف الوظيفي والمتطلبات"
+      },
+      "status": {
+        "open": "مفتوحة",
+        "hold": "معلّقة",
+        "closed": "مغلقة",
+        "cancelled": "ملغاة"
+      },
+      "sections": {
+        "jobApplication": "طلب التوظيف",
+        "postDate": "تاريخ النشر",
+        "salaryDetails": "تفاصيل الراتب",
+        "benefits": "المزايا",
+        "aboutCompany": "عن الشركة",
+        "jobRequirements": "متطلبات الوظيفة",
+        "skills": "المهارات"
+      },
+      "labels": {
+        "jobTitle": "المسمّى الوظيفي",
+        "location": "الموقع",
+        "jobType": "نوع الوظيفة",
+        "requiredExperience": "الخبرة المطلوبة",
+        "jobMode": "نمط العمل",
+        "experienceLevel": "مستوى الخبرة",
+        "industry": "المجال",
+        "startDate": "تاريخ البداية",
+        "endDate": "تاريخ النهاية",
+        "currency": "العملة",
+        "salaryRange": "نطاق الراتب",
+        "bonusAvailability": "توفّر المكافآت",
+        "paidTimeOff": "إجازة مدفوعة",
+        "healthInsurance": "تأمين صحي"
+      }
+    },
+    "addJobSheet": {
+      "addNewJob": "إضافة وظيفة جديدة",
+      "close": "إغلاق",
+      "back": "رجوع",
+      "next": "التالي",
+      "submit": "إرسال",
+      "creatingJob": "جارٍ إنشاء الوظيفة",
+      "optional": "اختياري",
+      "accommodationHelp": "اختر ما توفّره الشركة لهذه الوظيفة.",
+      "steps": {
+        "step1": "الخطوة 1",
+        "step2": "الخطوة 2",
+        "step3": "الخطوة 3",
+        "currentStep": "الخطوة الحالية",
+        "jobDetails": "تفاصيل الوظيفة",
+        "salaryDetailsBenefits": "الراتب والمزايا",
+        "jobDescriptionsRequirements": "الوصف الوظيفي والمتطلبات"
+      },
+      "sections": {
+        "jobDetails": "تفاصيل الوظيفة",
+        "salaryDetails": "تفاصيل الراتب",
+        "benefits": "المزايا",
+        "jobDescriptionsRequirements": "الوصف الوظيفي والمتطلبات"
+      },
+      "fields": {
+        "jobTitle": "المسمّى الوظيفي",
+        "jobType": "نوع الوظيفة",
+        "jobMode": "نمط العمل",
+        "industry": "المجال",
+        "location": "الموقع",
+        "experienceLevel": "مستوى الخبرة",
+        "requiredExperience": "الخبرة المطلوبة",
+        "jobPostDate": "تاريخ نشر الوظيفة",
+        "startDate": "تاريخ البداية",
+        "untilClosed": "حتى الإغلاق",
+        "endDate": "تاريخ النهاية",
+        "currencyType": "العملة",
+        "salaryRange": "نطاق الراتب",
+        "accommodationType": "نوع السكن",
+        "bonusAvailability": "توفّر المكافآت",
+        "healthInsurance": "التأمين الصحي",
+        "paidTimeOff": "الإجازة المدفوعة",
+        "aboutCompanyDescription": "نبذة عن الشركة",
+        "jobRequirements": "متطلبات الوظيفة",
+        "jobSkills": "مهارات الوظيفة"
+      },
+      "placeholders": {
+        "enterJobTitle": "أدخل المسمّى الوظيفي",
+        "selectJobType": "اختر نوع الوظيفة",
+        "selectJobMode": "اختر نمط العمل",
+        "selectIndustry": "اختر المجال",
+        "enterLocation": "أدخل الموقع",
+        "selectLevel": "اختر المستوى",
+        "selectExperience": "اختر الخبرة",
+        "selectCurrency": "اختر العملة",
+        "descriptionForCompany": "نبذة عن الشركة",
+        "selectJobSkills": "اختر مهارات الوظيفة",
+        "searchSkills": "ابحث في المهارات..."
+      },
+      "options": {
+        "jobType": {
+          "full_time": "دوام كامل",
+          "part_time": "دوام جزئي",
+          "contract": "بعقد",
+          "internship": "تدريب"
+        },
+        "jobMode": {
+          "on_site": "من المقر",
+          "remote": "عن بُعد",
+          "hybrid": "مختلط"
+        },
+        "experienceLevel": {
+          "intern_level": "متدرّب",
+          "entry_level": "مبتدئ",
+          "mid_level": "متوسط",
+          "senior_level": "خبير"
+        },
+        "accommodation": {
+          "company": "سكن تابع للشركة",
+          "companyDescription": "وحدة يوفّرها صاحب العمل",
+          "allowance": "بدل سكن",
+          "allowanceDescription": "بدل نقدي شهري",
+          "own": "سكن خاص",
+          "ownDescription": "دون دعم من الشركة"
+        },
+        "requiredExperienceYears": "{count, plural, zero {+‎0 سنوات} one {+‎سنة واحدة} two {+‎سنتان} few {+‎# سنوات} many {+‎# سنة} other {+‎# سنة}}",
+        "skills": {
+          "creative": "الإبداع",
+          "design": "التصميم",
+          "teamwork": "العمل الجماعي",
+          "communication": "التواصل",
+          "problemSolving": "حل المشكلات",
+          "leadership": "القيادة"
+        }
+      },
+      "validation": {
+        "jobTitleRequired": "المسمّى الوظيفي مطلوب.",
+        "jobTypeRequired": "نوع الوظيفة مطلوب.",
+        "jobModeRequired": "نمط العمل مطلوب.",
+        "industryRequired": "المجال مطلوب.",
+        "locationRequired": "الموقع مطلوب.",
+        "experienceLevelRequired": "مستوى الخبرة مطلوب.",
+        "currencyTypeRequired": "العملة مطلوبة.",
+        "startSalaryGreaterThanZero": "يجب أن يكون الحد الأدنى للراتب أكبر من 0.",
+        "endSalaryGreaterThanZero": "يجب أن يكون الحد الأقصى للراتب أكبر من 0.",
+        "accommodationTypeRequired": "نوع السكن مطلوب.",
+        "bonusAvailabilityRequired": "حدّد توفّر المكافآت.",
+        "healthInsuranceRequired": "حدّد التأمين الصحي.",
+        "paidTimeOffRequired": "حدّد الإجازة المدفوعة.",
+        "companyDescriptionRequired": "نبذة الشركة مطلوبة.",
+        "jobRequirementsRequired": "مسؤوليات الوظيفة ومتطلباتها مطلوبة.",
+        "jobSkillRequired": "اختر مهارة واحدة مطلوبة على الأقل.",
+        "startDateRequired": "تاريخ البداية مطلوب.",
+        "endDateRequiredUntilClosedDisabled": "تاريخ النهاية مطلوب عند إيقاف خيار «حتى الإغلاق».",
+        "endDateMustBeValid": "يجب أن يكون تاريخ النهاية صحيحًا.",
+        "endDateMustBeAfterStartDate": "يجب أن يكون تاريخ النهاية في يوم البداية أو بعده.",
+        "startSalaryLessThanOrEqualEndSalary": "يجب ألا يتجاوز الحد الأدنى للراتب حدّه الأقصى.",
+        "endSalaryGreaterThanOrEqualStartSalary": "يجب ألا يقل الحد الأقصى للراتب عن حدّه الأدنى."
+      }
+    }
+  },
+  "calendar": {
+    "title": "إجازات الموظفين",
+    "tabs": {
+      "calendar": "التقويم",
+      "leaveBalances": "الإجازات والأرصدة"
+    },
+    "description": "أدر الأحداث وطلبات الإجازة",
+    "sidebar": {
+      "eventTypes": "أنواع الأحداث",
+      "departments": "الأقسام",
+      "noDepartments": "لم يُعثَر على أقسام"
+    },
+    "eventTypes": {
+      "meetings": "الاجتماعات",
+      "timeOff": "الإجازات",
+      "publicHolidays": "العطلات الرسمية"
+    },
+    "views": {
+      "day": "يوم",
+      "week": "أسبوع",
+      "month": "شهر"
+    },
+    "days": {
+      "sun": "الأحد",
+      "mon": "الاثنين",
+      "tue": "الثلاثاء",
+      "wed": "الأربعاء",
+      "thu": "الخميس",
+      "fri": "الجمعة",
+      "sat": "السبت"
+    },
+    "errors": {
+      "loadingData": "تعذّر تحميل البيانات. حاول مرة أخرى."
+    },
+    "scheduleMeeting": {
+      "title": "تحديد موعد اجتماع",
+      "trigger": "تحديد اجتماع",
+      "cancel": "إلغاء",
+      "submit": "تحديد الاجتماع",
+      "fields": {
+        "title": "العنوان",
+        "date": "التاريخ",
+        "time": "الوقت",
+        "duration": "المدة (بالدقائق)",
+        "link": "الرابط",
+        "employees": "اسم الموظف",
+        "description": "الوصف"
+      },
+      "placeholders": {
+        "title": "مثلًا: اجتماع تخطيط الربع الثاني",
+        "date": "اختر التاريخ",
+        "link": "https://meet.google.com/...",
+        "employees": "اختر موظفًا",
+        "description": "جدول الأعمال أو الموضوعات أو الملاحظات..."
+      },
+      "tabs": {
+        "company": "الشركة",
+        "department": "القسم",
+        "employees": "الموظفون"
+      },
+      "messages": {
+        "companyHint": "سيُرسَل هذا الاجتماع إلى جميع موظفي الشركة.",
+        "deptsSelected": "{count, plural, zero {لم يُختر أي قسم} one {اختير قسم واحد} two {اختير قسمان} few {اختيرت # أقسام} many {اختير # قسمًا} other {اختير # قسم}}"
+      },
+      "validation": {
+        "titleRequired": "العنوان مطلوب",
+        "dateRequired": "التاريخ مطلوب",
+        "timeRequired": "الوقت مطلوب",
+        "durationMin": "يجب ألا تقل المدة عن 15 دقيقة"
+      }
+    },
+    "view": "طريقة عرض التقويم",
+    "eventKinds": {
+      "meeting": "اجتماع",
+      "timeOff": "إجازة",
+      "task": "مهمة",
+      "publicHoliday": "عطلة رسمية"
+    },
+    "timeOff": {
+      "title": "{name} · {type}",
+      "loadingTitle": "طلب إجازة",
+      "dates": "التواريخ",
+      "employee": "الموظف",
+      "type": "نوع الإجازة",
+      "duration": "المدة",
+      "days": "{count, plural, zero {# يوم} one {يوم واحد} two {يومان} few {# أيام} many {# يومًا} other {# يوم}}",
+      "hours": "{count, plural, zero {# ساعة} one {ساعة واحدة} two {ساعتان} few {# ساعات} many {# ساعة} other {# ساعة}}"
+    },
+    "meeting": {
+      "date": "التاريخ",
+      "time": "الوقت",
+      "with": "مع",
+      "job": "الوظيفة",
+      "join": "الانضمام إلى الاجتماع",
+      "noLink": "لا يوجد رابط للاجتماع بعد"
+    },
+    "holiday": {
+      "title": "عطلة رسمية",
+      "name": "العطلة",
+      "date": "التاريخ"
+    }
+  },
+  "departmentPage": {
+    "title": "الأقسام",
+    "table": {
+      "columns": {
+        "name": "اسم القسم",
+        "manager": "المدير",
+        "totalEmployees": "عدد الموظفين",
+        "absenteeRate": "نسبة الغياب",
+        "creationDate": "تاريخ الإنشاء",
+        "action": "إجراء"
+      },
+      "tooltips": {
+        "viewDetails": "عرض التفاصيل",
+        "deleteDepartment": "حذف القسم"
+      },
+      "employeesCount": "{count, plural, zero {لا موظفين} one {موظف واحد} two {موظفان} few {# موظفين} many {# موظفًا} other {# موظف}}"
+    },
+    "management": {
+      "sheet": {
+        "title": {
+          "edit": "تعديل القسم",
+          "add": "إضافة قسم جديد"
+        },
+        "trigger": {
+          "edit": "تعديل القسم",
+          "add": "إضافة قسم جديد"
+        },
+        "footer": {
+          "cancel": "إلغاء",
+          "saveChanges": "حفظ التغييرات",
+          "addDepartment": "إضافة القسم"
+        }
+      },
+      "fields": {
+        "name": {
+          "label": "اسم القسم",
+          "placeholder": "أدخل اسم القسم"
+        },
+        "manager": {
+          "label": "المدير",
+          "placeholder": "اختر مديرًا"
+        },
+        "employees": {
+          "label": "الموظفون",
+          "placeholder": "اختر الموظفين"
+        },
+        "description": {
+          "label": "الوصف",
+          "placeholder": "أدخل الوصف"
+        }
+      },
+      "validation": {
+        "nameRequired": "اسم القسم مطلوب",
+        "nameMax": "يجب ألا يزيد اسم القسم على 120 حرفًا",
+        "managerRequired": "المدير مطلوب",
+        "descriptionMax": "يجب ألا يزيد الوصف على 2000 حرف"
+      },
+      "notifications": {
+        "creating": "جارٍ إنشاء القسم",
+        "updating": "جارٍ تحديث القسم",
+        "assigningManager": "جارٍ تعيين المدير"
+      },
+      "employeeFallback": "موظف"
+    },
+    "cards": {
+      "totalDepartments": {
+        "title": "إجمالي الأقسام",
+        "newDepartmentsHint": "{count, plural, zero {لا أقسام جديدة هذا العام} one {قسم جديد واحد هذا العام} two {قسمان جديدان هذا العام} few {# أقسام جديدة هذا العام} many {# قسمًا جديدًا هذا العام} other {# قسم جديد هذا العام}}",
+        "fallbackName": "قسم"
+      },
+      "absenceRate": {
+        "title": "نسبة الغياب حسب القسم",
+        "noData": "لا توجد بيانات للأقسام",
+        "absence": "الغياب",
+        "absentDays": "{count, plural, zero {لا أيام غياب} one {يوم غياب واحد} two {يوما غياب} few {# أيام غياب} many {# يومًا غياب} other {# يوم غياب}}"
+      },
+      "mostEmployees": {
+        "title": "القسم الأكبر عددًا",
+        "employeesCount": "{count, plural, zero {لا موظفين} one {موظف واحد} two {موظفان} few {# موظفين} many {# موظفًا} other {# موظف}}",
+        "noData": "لا توجد بيانات للموظفين"
+      }
+    },
+    "details": {
+      "title": "تفاصيل القسم",
+      "budget": "الميزانية",
+      "employeesHeading": "موظفو القسم"
+    },
+    "addEmployees": {
+      "trigger": "إضافة موظف",
+      "title": "إضافة موظفين",
+      "description": "اختر موظفين غير منضمين حاليًا إلى هذا القسم.",
+      "searchPlaceholder": "ابحث بالاسم أو الرقم الوظيفي",
+      "employeeId": "الرقم: {id}",
+      "submit": "إضافة المحدَّدين ({count})",
+      "adding": "جارٍ إضافة الموظفين",
+      "noMatches": "لا يوجد موظفون يطابقون بحثك.",
+      "noneAvailable": "لا يوجد موظفون متاحون للإضافة."
+    }
+  },
+  "sidebar": {
+    "sections": {
+      "main": "الرئيسية",
+      "management": "الإدارة",
+      "hiring": "التوظيف",
+      "communication": "التواصل",
+      "settings": "الإعدادات",
+      "finance": "المالية"
+    },
+    "items": {
+      "attendance": "الحضور",
+      "calendar": "التقويم",
+      "employee": "الموظفون",
+      "projects": "المشروعات",
+      "department": "الأقسام",
+      "timeOff": "الإجازات",
+      "overall": "نظرة عامة",
+      "jobHiring": "الوظائف",
+      "candidates": "المرشّحون",
+      "rejected": "المرفوضون",
+      "tickets": "التذاكر",
+      "configuration": "الإعدادات",
+      "payroll": "الرواتب",
+      "myPayslips": "قسائم راتبي",
+      "loans": "السُّلَف",
+      "financeQueue": "قائمة الصرف"
+    },
+    "navigationMenu": "قائمة التنقّل"
+  },
+  "searchDialog": {
+    "title": "البحث في الصفحات",
+    "placeholder": "ابحث في الصفحات...",
+    "triggerPlaceholder": "ابحث عن أي شيء",
+    "triggerAriaLabel": "فتح البحث في الصفحات",
+    "noResults": "لم يُعثَر على صفحات",
+    "shortcut": "Ctrl K"
+  },
+  "notificationBell": {
+    "title": "الإشعارات",
+    "markAllRead": "تعليم الكل كمقروء",
+    "empty": "لا توجد إشعارات بعد",
+    "loadMore": "تحميل المزيد",
+    "filterAll": "الكل",
+    "filterUnread": "غير المقروءة",
+    "priorityAll": "كل الأولويات",
+    "priorityLow": "منخفضة",
+    "priorityNormal": "عادية",
+    "priorityHigh": "مرتفعة",
+    "priorityUrgent": "عاجلة",
+    "priorityLabel": "الأولوية",
+    "listMeta": "عرض {loaded} من {total}",
+    "unreadIndicator": "غير مقروء"
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "الصفحة غير موجودة",
+    "description": "الصفحة التي تبحث عنها غير متاحة.",
+    "backHome": "العودة إلى الرئيسية"
+  },
+  "pagination": {
+    "showing": "عرض",
+    "to": "إلى",
+    "of": "من",
+    "entries": "سجل",
+    "items": "عنصر",
+    "show": "عرض",
+    "noItems": "لم يُعثَر على عناصر"
+  },
+  "suite": {
+    "opening": "جارٍ فتح الموارد البشرية…",
+    "handoffTitle": "انتهت صلاحية هذا الرابط",
+    "handoffBody": "روابط المنصة تعمل مرة واحدة ولمدة دقيقة. افتح الموارد البشرية مجددًا من OrgTik.",
+    "backToSuite": "الفتح من OrgTik",
+    "noAccessTitle": "ليست لديك صلاحية الوصول إلى الموارد البشرية",
+    "noAccessBody": "اطلب من أحد المسؤولين في OrgTik منحك دورًا في الموارد البشرية.",
+    "toSuite": "العودة إلى OrgTik",
+    "appName": "الموارد البشرية",
+    "apps": {
+      "global": "الرئيسية",
+      "file_manager": "الملفات",
+      "task_manager": "المهام",
+      "hq": "المحادثات",
+      "hr_system": "الموارد البشرية",
+      "digital_marketing": "التسويق",
+      "sales": "إدارة العملاء",
+      "website_manager": "الموقع",
+      "website_manager_legacy": "نظام المحتوى القديم"
+    },
+    "greeting": {
+      "morning": "صباح الخير، {name}",
+      "afternoon": "طاب يومك، {name}",
+      "evening": "مساء الخير، {name}",
+      "night": "تصبح على خير، {name}"
+    }
+  },
+  "feedback": {
+    "saved": "حُفظت التغييرات",
+    "added": "تمت الإضافة",
+    "deleted": "تم الحذف",
+    "uploaded": "تم الرفع",
+    "employeeAdded": "أُضيف الموظف",
+    "employeeRemoved": "أُزيل الموظف",
+    "requestSent": "أُرسل الطلب",
+    "decisionSaved": "حُفظ القرار",
+    "runStarted": "بدأت دورة الرواتب",
+    "runFrozen": "جُمّدت الدورة",
+    "runReopened": "أُعيد فتح الدورة",
+    "sentForApproval": "أُرسل للموافقة",
+    "reviewSubmitted": "أُرسلت المراجعة",
+    "allApproved": "قُبلت كل البنود",
+    "paymentsRecorded": "سُجّلت المدفوعات",
+    "paymentRecorded": "سُجّلت الدفعة",
+    "payslipsSent": "أُرسلت قسائم الرواتب",
+    "payslipSent": "أُرسلت قسيمة الراتب",
+    "ticketCreated": "أُنشئت التذكرة",
+    "readOnly": "أنت تعرض الحساب بصفة شخص آخر، لذا التعديل غير متاح.",
+    "forbidden": "ليست لديك صلاحية لذلك.",
+    "gone": "لم يعد هذا موجودًا. حدّث الصفحة.",
+    "conflict": "عدّل شخص آخر هذا في الوقت نفسه. حدّث الصفحة وحاول مرة أخرى.",
+    "tooLarge": "حجم الملف كبير جدًا.",
+    "tooMany": "محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى.",
+    "offline": "تعذّر الاتصال بالخادم. تحقّق من اتصالك وحاول مرة أخرى.",
+    "invalid": "بعض البيانات غير صحيحة. راجع النموذج وحاول مرة أخرى.",
+    "failed": "لم تنجح العملية. حاول مرة أخرى.",
+    "pleaseWait": "يُرجى الانتظار قليلًا…"
+  },
+  "errors": {
+    "notFoundTitle": "هذه الصفحة غير موجودة",
+    "notFoundBody": "ربما يكون الرابط قديمًا أو نُقلت الصفحة.",
+    "toHome": "العودة إلى رئيسية الموارد البشرية",
+    "crashTitle": "توقّفت هذه الصفحة عن العمل",
+    "crashBody": "حدث خطأ من جهتنا. حاول مرة أخرى أو عد إلى رئيسية الموارد البشرية.",
+    "reference": "المرجع:",
+    "retry": "حاول مرة أخرى",
+    "noAccessTitle": "ليست لديك صلاحية الوصول إلى هذه الصفحة",
+    "noAccessBody": "هذه الصفحة لأدوار أخرى في الموارد البشرية. اطلبها من مسؤول الموارد البشرية إن احتجت إليها."
+  },
+  "actions": {
+    "view": "عرض",
+    "viewDetails": "عرض التفاصيل",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "download": "تنزيل",
+    "send": "إرسال",
+    "call": "اتصال",
+    "email": "بريد إلكتروني",
+    "remove": "إزالة",
+    "moreActions": "إجراءات أخرى",
+    "addNote": "إضافة ملاحظة",
+    "makeManager": "تعيين مديرًا",
+    "isManager": "المدير",
+    "managerCantBeRemoved": "لا يمكن إزالة المدير",
+    "removeEmployee": "إزالة من القسم",
+    "reviewRequest": "مراجعة الطلب",
+    "previewPayslip": "معاينة قسيمة الراتب",
+    "downloadFile": "تنزيل {name}",
+    "removeHoliday": "إزالة العطلة",
+    "openEmployee": "فتح {name}",
+    "openTicket": "فتح التذكرة {id}",
+    "openDepartment": "فتح {name}",
+    "openRun": "فتح دورة الرواتب",
+    "month": "الشهر",
+    "year": "السنة",
+    "rowsPerPage": "عدد الصفوف في الصفحة",
+    "filterBy": "تصفية",
+    "enabled": "مفعّل",
+    "ticketReply": "الرد",
+    "pagination": "التنقّل بين الصفحات",
+    "moveUp": "نقل لأعلى",
+    "moveDown": "نقل لأسفل",
+    "removeSection": "إزالة القسم",
+    "previousPage": "الصفحة السابقة",
+    "nextPage": "الصفحة التالية",
+    "previousMonth": "الشهر السابق",
+    "nextMonth": "الشهر التالي"
+  },
+  "leaveTypes": {
+    "annual_leave": "إجازة سنوية",
+    "sick_leave": "إجازة مرضية",
+    "personal_leave": "إجازة شخصية",
+    "vacation_day": "يوم عطلة",
+    "bereavement_leave": "إجازة وفاة",
+    "medical_appointment": "موعد طبي",
+    "mental_health_day": "يوم للصحة النفسية",
+    "training_day": "يوم تدريب",
+    "public_holiday": "عطلة رسمية",
+    "unpaid_leave": "إجازة غير مدفوعة",
+    "other": "أخرى",
+    "discord_voice_leave": "استراحة من القناة الصوتية"
+  },
+  "deleteDialog": {
+    "title": "هل تريد الحذف؟",
+    "impact": "سيُحذف لدى الجميع.",
+    "confirm": "حذف",
+    "cancel": "إلغاء",
+    "department": {
+      "title": "هل تريد حذف قسم {name}؟",
+      "impact": "{count, plural, =0 {لا يوجد أحد في هذا القسم.} one {فيه شخص واحد، وسيحتفظ بوظيفته ويغادر القسم.} two {فيه شخصان، وسيحتفظان بوظيفتيهما ويغادران القسم.} few {فيه # أشخاص، وسيحتفظون بوظائفهم ويغادرون القسم.} many {فيه # شخصًا، وسيحتفظون بوظائفهم ويغادرون القسم.} other {فيه # شخص، وسيحتفظون بوظائفهم ويغادرون القسم.}}",
+      "confirm": "حذف القسم"
+    },
+    "ticket": {
+      "title": "هل تريد حذف التذكرة رقم {id} «{subject}»؟",
+      "impact": "ستُحذف رسائلها ومرفقاتها معها.",
+      "confirm": "حذف التذكرة"
+    },
+    "member": {
+      "title": "هل تريد إزالة {name} من هذا القسم؟",
+      "impact": "سيحتفظ بوظيفته ويمكن إضافته إلى قسم مرة أخرى.",
+      "confirm": "إزالة"
+    },
+    "noteTitle": "هل تريد حذف هذه الملاحظة؟",
+    "noteImpact": "لن تظهر بعد الآن لأي شخص يرى ملاحظات الموظف.",
+    "noteConfirm": "حذف الملاحظة"
+  },
+  "common": {
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "confirm": "تأكيد",
+    "close": "إغلاق",
+    "open": "فتح",
+    "noResults": "لا توجد نتائج.",
+    "search": "بحث",
+    "searchPlaceholder": "بحث…",
+    "allFilters": "كل عوامل التصفية",
+    "viewBoard": "لوحة",
+    "viewList": "قائمة",
+    "userAvatar": "صورة المستخدم",
+    "avatarFallback": "؟"
+  },
+  "statusBadge": {
+    "pending": "قيد الانتظار",
+    "approved": "مُعتمد",
+    "rejected": "مرفوض",
+    "solved": "تم الحل",
+    "new_tickets": "تذاكر جديدة",
+    "open": "مفتوح",
+    "todo": "للتنفيذ",
+    "in_progress": "قيد التنفيذ",
+    "completed": "مكتمل",
+    "on_hold": "معلّق",
+    "cancelled": "ملغى",
+    "backlog": "قائمة الانتظار",
+    "in_review": "قيد المراجعة",
+    "done": "منجز",
+    "closed": "مغلق",
+    "unknown": "غير معروف",
+    "late": "متأخر",
+    "frozen": "مجمّد",
+    "queued": "في قائمة الانتظار",
+    "paid": "مدفوع",
+    "draft": "مسودة",
+    "auto": "تلقائي",
+    "submitted": "مُرسَل",
+    "change": "تغيير",
+    "active": "نشط",
+    "paused": "متوقف مؤقتًا",
+    "change_requested": "طُلب تعديل",
+    "new": "جديد",
+    "failed": "فشل",
+    "absent": "غائب",
+    "on_leave": "في إجازة"
+  },
+  "jobOpeningCard": {
+    "showDetails": "عرض التفاصيل",
+    "shareOpening": "مشاركة الوظيفة",
+    "linkCopied": "تم نسخ الرابط",
+    "linkCopiedToClipboard": "تم نسخ الرابط إلى الحافظة"
+  },
+  "attachmentList": {
+    "fileBadge": "ملف"
+  },
+  "textEditor": {
+    "placeholder": "ابدأ الكتابة هنا أو الصق المحتوى…",
+    "toolbar": {
+      "bold": "غامق",
+      "italic": "مائل",
+      "underline": "تسطير",
+      "heading1": "عنوان 1",
+      "heading2": "عنوان 2",
+      "heading3": "عنوان 3",
+      "numberedList": "قائمة مرقّمة",
+      "bulletedList": "قائمة نقطية",
+      "alignLeft": "محاذاة لليسار",
+      "alignCenter": "توسيط",
+      "alignRight": "محاذاة لليمين",
+      "justify": "ضبط",
+      "lineBreak": "فاصل سطر",
+      "horizontalRule": "خط أفقي",
+      "signatures": "نماذج التوقيع",
+      "quickStyles": "أنماط سريعة"
+    },
+    "signatures": {
+      "sideBySide": "جنبًا إلى جنب (كلاسيكي)",
+      "verticalList": "قائمة عمودية (رسمي)",
+      "single": "توقيع واحد (مضغوط)",
+      "threeColumns": "ثلاثة أعمدة (شاهد)"
+    },
+    "quickStyles": {
+      "flexBetween": "جانبان متقابلان",
+      "twoColumnGrid": "شبكة من عمودين",
+      "sectionCard": "بطاقة قسم",
+      "infoNote": "ملاحظة معلومات"
+    }
+  },
+  "uploadField": {
+    "title": "اسحب إيصالاتك وأفلتها هنا",
+    "changeTitle": "غيّر ملف الإيصال",
+    "maxSize": "الحد الأقصى لحجم الملف {size} ميغابايت",
+    "button": "ارفع ملفاتك",
+    "previewAlt": "معاينة الشعار"
+  }
+}

@@ -1,0 +1,3013 @@
+{
+  "app": "hr",
+  "as": "mona.adel@orgtik.test",
+  "from": "baseline",
+  "at": "2026-10-03T00:36:41.574Z",
+  "signIn": {
+    "ok": true,
+    "restoredFromState": true
+  },
+  "pages": [
+    {
+      "route": "/candidates",
+      "url": "/en/candidates",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/candidates",
+          "url": "/en/candidates",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates",
+          "url": "/en/candidates",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates",
+          "url": "/en/candidates",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates",
+          "url": "/en/candidates",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Profile",
+          "outcome": "navigated",
+          "detail": "/en/candidates/6",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates",
+          "url": "/en/candidates",
+          "session": "signed-in",
+          "role": "button",
+          "control": "2",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates",
+          "url": "/en/candidates",
+          "session": "signed-in",
+          "role": "button",
+          "control": "3",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates",
+          "url": "/en/candidates",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next page",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hiring/jobs",
+      "url": "/en/hiring/jobs",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 9,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/hiring/jobs",
+          "url": "/en/hiring/jobs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/jobs",
+          "url": "/en/hiring/jobs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/jobs",
+          "url": "/en/hiring/jobs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/jobs",
+          "url": "/en/hiring/jobs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Create Job",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/jobs",
+          "url": "/en/hiring/jobs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Cancelled",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/jobs",
+          "url": "/en/hiring/jobs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Share opening",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/jobs",
+          "url": "/en/hiring/jobs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/jobs",
+          "url": "/en/hiring/jobs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Hold",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/jobs",
+          "url": "/en/hiring/jobs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Closed",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hiring/overall",
+      "url": "/en/hiring/overall",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/hiring/overall",
+          "url": "/en/hiring/overall",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/overall",
+          "url": "/en/hiring/overall",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/overall",
+          "url": "/en/hiring/overall",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/overall",
+          "url": "/en/hiring/overall",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Create Job",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/overall",
+          "url": "/en/hiring/overall",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Day",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/overall",
+          "url": "/en/hiring/overall",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Month",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/rejected",
+      "url": "/en/rejected",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 4,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/rejected",
+          "url": "/en/rejected",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/rejected",
+          "url": "/en/rejected",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/rejected",
+          "url": "/en/rejected",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/rejected",
+          "url": "/en/rejected",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Profile",
+          "outcome": "navigated",
+          "detail": "/en/candidates/12",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/attendance",
+      "url": "/en/attendance",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 17,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add Time Off",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Engineering",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Design",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Sales",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Marketing",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Finance",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Human Resources",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Operations",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Management",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All filters",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "2",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "3",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "4",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/attendance",
+          "url": "/en/attendance",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next page",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/calendar/leave-balances",
+      "url": "/en/calendar/leave-balances",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 9,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/calendar/leave-balances",
+          "url": "/en/calendar/leave-balances",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar/leave-balances",
+          "url": "/en/calendar/leave-balances",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar/leave-balances",
+          "url": "/en/calendar/leave-balances",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar/leave-balances",
+          "url": "/en/calendar/leave-balances",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Schedule Meeting",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar/leave-balances",
+          "url": "/en/calendar/leave-balances",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar/leave-balances",
+          "url": "/en/calendar/leave-balances",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View / Edit",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar/leave-balances",
+          "url": "/en/calendar/leave-balances",
+          "session": "signed-in",
+          "role": "button",
+          "control": "2",
+          "outcome": "navigated",
+          "detail": "/en/calendar/leave-balances",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar/leave-balances",
+          "url": "/en/calendar/leave-balances",
+          "session": "signed-in",
+          "role": "button",
+          "control": "3",
+          "outcome": "navigated",
+          "detail": "/en/calendar/leave-balances",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar/leave-balances",
+          "url": "/en/calendar/leave-balances",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next page",
+          "outcome": "navigated",
+          "detail": "/en/calendar/leave-balances",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/calendar",
+      "url": "/en/calendar",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 23,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Schedule Meeting",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Week",
+          "outcome": "navigated",
+          "detail": "/en/calendar",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Previous month",
+          "outcome": "navigated",
+          "detail": "/en/calendar",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next month",
+          "outcome": "navigated",
+          "detail": "/en/calendar",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Aya Hamed - Personal Leave, 1 Oct 2026",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Salma Nabil - Personal Leave, 1 Oct 2026",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Payroll Cut-off Review, 2 Oct 2026",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "1:1 Salma & Sherif, 3 Oct 2026",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Hoda Ashraf - Sick Leave, 3 Oct 2026",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Ahmed Tarek - Annual Leave, 4 – 8 Oct 2026",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Monthly Finance Close, 4 Oct 2026",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Weekly Engineering Sync, 4 Oct 2026",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Omar Farouk - Unpaid Leave, 5 – 6 Oct 2026",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Design System Launch Review, 5 Oct 2026",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "+1 more",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Armed Forces Day, 6 Oct 2026",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Marketing Campaign Brainstorm, 7 Oct 2026",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Laila Mostafa - Annual Leave, 11 – 15 Oct 2026",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Rana Saad - Annual Leave, 18 – 20 Oct 2026",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/calendar",
+          "url": "/en/calendar",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Youssef Ibrahim - Annual Leave, 25 – 29 Oct 2026",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/configuration",
+      "url": "/en/configuration",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 9,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/configuration",
+          "url": "/en/configuration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/configuration",
+          "url": "/en/configuration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/configuration",
+          "url": "/en/configuration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/configuration",
+          "url": "/en/configuration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Upload Logo",
+          "outcome": "opened",
+          "detail": "file chooser",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/configuration",
+          "url": "/en/configuration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Effective From",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/configuration",
+          "url": "/en/configuration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add Holiday",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/configuration",
+          "url": "/en/configuration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Date",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/configuration",
+          "url": "/en/configuration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Remove holiday",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/configuration",
+          "url": "/en/configuration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Save Changes",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/department",
+      "url": "/en/department",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 8,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/department",
+          "url": "/en/department",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department",
+          "url": "/en/department",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department",
+          "url": "/en/department",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department",
+          "url": "/en/department",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add New Department",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department",
+          "url": "/en/department",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Previous month",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department",
+          "url": "/en/department",
+          "session": "signed-in",
+          "role": "button",
+          "control": "October 1 – 31",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department",
+          "url": "/en/department",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next month",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department",
+          "url": "/en/department",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Department",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/employees/org-chart",
+      "url": "/en/employees/org-chart",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/employees/org-chart",
+          "url": "/en/employees/org-chart",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/org-chart",
+          "url": "/en/employees/org-chart",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/org-chart",
+          "url": "/en/employees/org-chart",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/org-chart",
+          "url": "/en/employees/org-chart",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Export",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/org-chart",
+          "url": "/en/employees/org-chart",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add employee",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/org-chart",
+          "url": "/en/employees/org-chart",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Zoom out",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/org-chart",
+          "url": "/en/employees/org-chart",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Zoom in",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/employees",
+      "url": "/en/employees",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 10,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/employees",
+          "url": "/en/employees",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees",
+          "url": "/en/employees",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees",
+          "url": "/en/employees",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees",
+          "url": "/en/employees",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Export",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees",
+          "url": "/en/employees",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add employee",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees",
+          "url": "/en/employees",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All Departments",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees",
+          "url": "/en/employees",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit",
+          "outcome": "navigated",
+          "detail": "/en/employees",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees",
+          "url": "/en/employees",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees",
+          "url": "/en/employees",
+          "session": "signed-in",
+          "role": "button",
+          "control": "2",
+          "outcome": "navigated",
+          "detail": "/en/employees",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees",
+          "url": "/en/employees",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next page",
+          "outcome": "navigated",
+          "detail": "/en/employees",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/finance-queue",
+      "url": "/en/finance-queue",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 8,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/finance-queue",
+          "url": "/en/finance-queue",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue",
+          "url": "/en/finance-queue",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue",
+          "url": "/en/finance-queue",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue",
+          "url": "/en/finance-queue",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download template",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue",
+          "url": "/en/finance-queue",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Import file",
+          "outcome": "opened",
+          "detail": "file chooser",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue",
+          "url": "/en/finance-queue",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Previous month",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue",
+          "url": "/en/finance-queue",
+          "session": "signed-in",
+          "role": "button",
+          "control": "October 1 – 31",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue",
+          "url": "/en/finance-queue",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next month",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/loans",
+      "url": "/en/loans",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/loans",
+          "url": "/en/loans",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/loans",
+          "url": "/en/loans",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/loans",
+          "url": "/en/loans",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/loans",
+          "url": "/en/loans",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Loan",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/loans",
+          "url": "/en/loans",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/loans",
+          "url": "/en/loans",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View details",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/my-payslips",
+      "url": "/en/my-payslips",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 3,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/my-payslips",
+          "url": "/en/my-payslips",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/my-payslips",
+          "url": "/en/my-payslips",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/my-payslips",
+          "url": "/en/my-payslips",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "url": "/en",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 17,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add Time Off",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Engineering",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Design",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Sales",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Marketing",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Finance",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Human Resources",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Operations",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Management",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All filters",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "2",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "3",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "4",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next page",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/payroll",
+      "url": "/en/payroll",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 5,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/payroll",
+          "url": "/en/payroll",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/payroll",
+          "url": "/en/payroll",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/payroll",
+          "url": "/en/payroll",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/payroll",
+          "url": "/en/payroll",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Previous month",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/payroll",
+          "url": "/en/payroll",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next month",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/projects",
+      "url": "/en/projects",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 4,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/projects",
+          "url": "/en/projects",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/projects",
+          "url": "/en/projects",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/projects",
+          "url": "/en/projects",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/projects",
+          "url": "/en/projects",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All statuses",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/subscriptions",
+      "url": "/en/subscriptions",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 5,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/subscriptions",
+          "url": "/en/subscriptions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/subscriptions",
+          "url": "/en/subscriptions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/subscriptions",
+          "url": "/en/subscriptions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/subscriptions",
+          "url": "/en/subscriptions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add New Subscription",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/subscriptions",
+          "url": "/en/subscriptions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/tickets",
+      "url": "/en/tickets",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add New Ticket",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All filters",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Ticket",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/time-off",
+      "url": "/en/time-off",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 8,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/time-off",
+          "url": "/en/time-off",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/time-off",
+          "url": "/en/time-off",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/time-off",
+          "url": "/en/time-off",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/time-off",
+          "url": "/en/time-off",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/time-off",
+          "url": "/en/time-off",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View / Edit",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/time-off",
+          "url": "/en/time-off",
+          "session": "signed-in",
+          "role": "button",
+          "control": "2",
+          "outcome": "navigated",
+          "detail": "/en/time-off",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/time-off",
+          "url": "/en/time-off",
+          "session": "signed-in",
+          "role": "button",
+          "control": "3",
+          "outcome": "navigated",
+          "detail": "/en/time-off",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/time-off",
+          "url": "/en/time-off",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next page",
+          "outcome": "navigated",
+          "detail": "/en/time-off",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/candidates/:id",
+      "url": "/en/candidates/6",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/candidates/:id",
+          "url": "/en/candidates/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates/:id",
+          "url": "/en/candidates/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates/:id",
+          "url": "/en/candidates/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates/:id",
+          "url": "/en/candidates/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Back",
+          "outcome": "navigated",
+          "detail": "/en/candidates",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates/:id",
+          "url": "/en/candidates/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Schedule Interview",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/candidates/:id",
+          "url": "/en/candidates/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Read More",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hiring/overall/:openingId",
+      "url": "/en/hiring/overall/6",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/hiring/overall/:openingId",
+          "url": "/en/hiring/overall/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/overall/:openingId",
+          "url": "/en/hiring/overall/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/overall/:openingId",
+          "url": "/en/hiring/overall/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/overall/:openingId",
+          "url": "/en/hiring/overall/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Back",
+          "outcome": "navigated",
+          "detail": "/en/hiring/jobs",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/overall/:openingId",
+          "url": "/en/hiring/overall/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Cancelled",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/hiring/overall/:openingId",
+          "url": "/en/hiring/overall/6",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Job Offer",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/department/:id",
+      "url": "/en/department/1",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 8,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/department/:id",
+          "url": "/en/department/1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department/:id",
+          "url": "/en/department/1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department/:id",
+          "url": "/en/department/1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department/:id",
+          "url": "/en/department/1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Back",
+          "outcome": "navigated",
+          "detail": "/en/department",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department/:id",
+          "url": "/en/department/1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add Employee",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department/:id",
+          "url": "/en/department/1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Department",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department/:id",
+          "url": "/en/department/1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Make manager",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/department/:id",
+          "url": "/en/department/1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Remove from department",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/employees/:id",
+      "url": "/en/employees/16",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 13,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Back",
+          "outcome": "navigated",
+          "detail": "/en/en/employees",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview Payslip",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download PDF",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "2",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "3",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "4",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next page",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Upload",
+          "outcome": "opened",
+          "detail": "file chooser",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Post Note",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/employees/:id",
+          "url": "/en/employees/16",
+          "session": "signed-in",
+          "role": "button",
+          "control": "More actions",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/finance-queue/:id",
+      "url": "/en/finance-queue/2",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 10,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/finance-queue/:id",
+          "url": "/en/finance-queue/2",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue/:id",
+          "url": "/en/finance-queue/2",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue/:id",
+          "url": "/en/finance-queue/2",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue/:id",
+          "url": "/en/finance-queue/2",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Back",
+          "outcome": "navigated",
+          "detail": "/en/finance-queue",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue/:id",
+          "url": "/en/finance-queue/2",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Export finance sheet",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue/:id",
+          "url": "/en/finance-queue/2",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Export payslips ZIP",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue/:id",
+          "url": "/en/finance-queue/2",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Pay all",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue/:id",
+          "url": "/en/finance-queue/2",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All filters",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue/:id",
+          "url": "/en/finance-queue/2",
+          "session": "signed-in",
+          "role": "button",
+          "control": "2",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/finance-queue/:id",
+          "url": "/en/finance-queue/2",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next page",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/payroll/:id",
+      "url": "/en/payroll/5",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/payroll/:id",
+          "url": "/en/payroll/5",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/payroll/:id",
+          "url": "/en/payroll/5",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/payroll/:id",
+          "url": "/en/payroll/5",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/payroll/:id",
+          "url": "/en/payroll/5",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Approve all (2)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/payroll/:id",
+          "url": "/en/payroll/5",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Approve",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/payroll/:id",
+          "url": "/en/payroll/5",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Request a change",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/tickets/:id",
+      "url": "/en/tickets/1010",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 21,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open page search",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Account",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Back",
+          "outcome": "navigated",
+          "detail": "/en/tickets",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Bold",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Italic",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Underline",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Heading 1",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Heading 2",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Heading 3",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Numbered list",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Bulleted list",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Align center",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Align right",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Justify",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Line Break",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Horizontal Rule",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Signature Variants",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Quick Styles",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Drag or Drop your Receipts Maximum file size allowed is 20MB Upload your files",
+          "outcome": "opened",
+          "detail": "file chooser",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/1010",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Send message",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/*rest",
+      "url": "/en/audit-missing-page",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 0,
+      "truncated": 0,
+      "results": []
+    },
+    {
+      "route": "/auth/not-allowed",
+      "url": "/en/auth/not-allowed",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 1,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/auth/not-allowed",
+          "url": "/en/auth/not-allowed",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Back to OrgTik",
+          "outcome": "navigated",
+          "detail": "sos app: /auth/login",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/auth",
+      "url": "/en/auth",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 2,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "hr",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Show password",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "hr",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Sign in",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    }
+  ],
+  "tally": {
+    "app": "hr",
+    "pages": 30,
+    "pressed": 228,
+    "dead end": 0,
+    "copied silently": 0,
+    "not clickable": 0,
+    "stuck": 0,
+    "not found": 0,
+    "sign-in wall": 0,
+    "left the app": 0,
+    "current page": 0,
+    "active option": 0,
+    "skipped": 16,
+    "broken link": 0,
+    "unnamed buttons": 0,
+    "over the limit": 0
+  }
+}

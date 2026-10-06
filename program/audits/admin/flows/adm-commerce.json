@@ -1,0 +1,174 @@
+[
+  {
+    "title": "[en] Mona: a fixed coupon in SAR and AED, and a used coupon that keeps its discount",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "fixed-coupon-sar-aed",
+        "ok": true,
+        "note": "notice \"This coupon works only for customers who pay in SAR and AED. Customers paying in any other currency can't use it.\"; saved {\"SAR\":50,\"AED\":50}; row \"GULF50 SAR 50.00 · AED 50.00 Only in SAR and AED All plans 0 of 100 3 Oct 2026 – 3 Nov 2026 Active End coupon\"",
+        "at": "http://localhost:3008/en/coupons",
+        "shot": "101-fixed-coupon-sar-aed.png"
+      },
+      {
+        "name": "used-coupon-discount-locked",
+        "ok": true,
+        "note": "discount shown read-only with \"The discount can't change\"; percent/fixed choice shown: 0",
+        "at": "http://localhost:3008/en/coupons",
+        "shot": "102-used-coupon-discount-locked.png"
+      },
+      {
+        "name": "api-refuses-change-409",
+        "ok": true,
+        "note": "PATCH value 30 → 409 redeemed; value stays 20",
+        "at": "http://localhost:3008/en/coupons",
+        "shot": "103-api-refuses-change-409.png"
+      },
+      {
+        "name": "end-used-coupon",
+        "ok": true,
+        "note": "active false, value 20; row says \"Ended\"",
+        "at": "http://localhost:3008/en/coupons",
+        "shot": "104-end-used-coupon.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Finance: G-12 is an open question; Saudi Arabia's tax rule; the EG/EGP route",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "g12-open-question",
+        "ok": true,
+        "note": "\"Are prices shown with tax included? Open question G-12 Not decided yet This is still an open question. Until it's decide…\"; 6 rules say \"Not decided\"",
+        "at": "http://localhost:3008/en/tax",
+        "shot": "201-g12-open-question.png"
+      },
+      {
+        "name": "set-sa-rule",
+        "ok": true,
+        "note": "saved rate 15.5, inclusive null (still open); row \"Saudi Arabia VAT 15.5% Not decided No ZATCA phase 2: B2B invoices cleared before they're sent Applied \"",
+        "at": "http://localhost:3008/en/tax",
+        "shot": "202-set-sa-rule.png"
+      },
+      {
+        "name": "route-eg-egp",
+        "ok": true,
+        "note": "1 Paymob Card · Mobile wallet Automatic Offered first | 2 Fawry Cash code By payment link",
+        "at": "http://localhost:3008/en/tax",
+        "shot": "203-route-eg-egp.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Mona: bundles with their example prices in SA, AE, EG and DE",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "bundle-examples",
+        "ok": true,
+        "note": "columns Saudi Arabia, United Arab Emirates, Egypt, Germany; first row \"Operations bundle On sale Tasks · Pro Files · Pro HR · Pro 15% SAR 450.00 Summed price SAR 450.00, bundle price: SAR 382.50 AED 440.00 Summed price AED 440.00, \"",
+        "at": "http://localhost:3008/en/bundles",
+        "shot": "301-bundle-examples.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Mona: a fixed coupon in SAR and AED, and a used coupon that keeps its discount",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "fixed-coupon-sar-aed",
+        "ok": true,
+        "note": "notice \"يعمل هذا الكوبون فقط للعملاء الذين يدفعون بـ SAR وAED. ولا يمكن للعملاء الذين يدفعون بأي عملة أخرى استخدامه.\"; saved {\"SAR\":50,\"AED\":50}; row \"GULFAR50 ‏50.00 ر.س.‏ · ‏50.00 د.إ.‏ SAR وAED فقط كل الخطط 0 من 100 03‏/10‏/2026 – 03‏/11‏/2026 نشط إنهاء الكوبون\"",
+        "at": "http://localhost:3008/ar/coupons",
+        "shot": "401-fixed-coupon-sar-aed.png"
+      },
+      {
+        "name": "used-coupon-discount-locked",
+        "ok": true,
+        "note": "discount shown read-only with \"لا يمكن تغيير الخصم\"; percent/fixed choice shown: 0",
+        "at": "http://localhost:3008/ar/coupons",
+        "shot": "402-used-coupon-discount-locked.png"
+      },
+      {
+        "name": "api-refuses-change-409",
+        "ok": true,
+        "note": "PATCH value 30 → 409 redeemed; value stays 20",
+        "at": "http://localhost:3008/ar/coupons",
+        "shot": "403-api-refuses-change-409.png"
+      },
+      {
+        "name": "end-used-coupon",
+        "ok": true,
+        "note": "active false, value 20; row says \"أُنهي\"",
+        "at": "http://localhost:3008/ar/coupons",
+        "shot": "404-end-used-coupon.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Finance: G-12 is an open question; Saudi Arabia's tax rule; the EG/EGP route",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "g12-open-question",
+        "ok": true,
+        "note": "\"هل تُعرض الأسعار شاملة الضريبة؟ سؤال مفتوح G-12 لم يُحسم بعد لا تزال هذه مسألة مفتوحة. وإلى حين البت فيها، لا تعامل أي ق…\"; 6 rules say \"لم يُحسم\"",
+        "at": "http://localhost:3008/ar/tax",
+        "shot": "501-g12-open-question.png"
+      },
+      {
+        "name": "set-sa-rule",
+        "ok": true,
+        "note": "saved rate 15.5, inclusive null (still open); row \"المملكة العربية السعودية VAT 15‎%‎ لم يُحسم لا ZATCA (Fatoora): QR on simplified invoices; B2B clearance in phase 2 مطبّ\"",
+        "at": "http://localhost:3008/ar/tax",
+        "shot": "502-set-sa-rule.png"
+      },
+      {
+        "name": "route-eg-egp",
+        "ok": true,
+        "note": "1 Paymob بطاقة · محفظة إلكترونية تلقائي تُعرض أولًا | 2 Fawry رمز دفع نقدي عبر رابط دفع",
+        "at": "http://localhost:3008/ar/tax",
+        "shot": "503-route-eg-egp.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Mona: bundles with their example prices in SA, AE, EG and DE",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "bundle-examples",
+        "ok": true,
+        "note": "columns المملكة العربية السعودية, الإمارات العربية المتحدة, مصر, ألمانيا; first row \"باقة العمليات معروضة للبيع المهام · احترافي الملفات · احترافي الموارد البشرية · احترافي 15‎%‎ ‏450.00 ر.س.‏ مجموع الأسعار ‏450.00 ر.س.‏، وسعر الباقة: ‏382.50 ر.\"",
+        "at": "http://localhost:3008/ar/bundles",
+        "shot": "601-bundle-examples.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  }
+]

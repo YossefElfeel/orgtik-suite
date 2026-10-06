@@ -1,0 +1,8 @@
+{
+ "Feedback.integrationTurnedOff": {"en": "Account turned off", "ar": "تم إيقاف الحساب", "de": "Konto deaktiviert", "fr": "Compte désactivé", "it": "Account disattivato"},
+ "Feedback.integrationTurnedOn": {"en": "Account turned on", "ar": "تم تشغيل الحساب", "de": "Konto aktiviert", "fr": "Compte activé", "it": "Account attivato"},
+ "Feedback.logoUpdated": {"en": "Logo updated", "ar": "تم تحديث الشعار", "de": "Logo aktualisiert", "fr": "Logo mis à jour", "it": "Logo aggiornato"},
+ "Feedback.logoRemoved": {"en": "Logo removed", "ar": "تمت إزالة الشعار", "de": "Logo entfernt", "fr": "Logo retiré", "it": "Logo rimosso"},
+ "Feedback.avatarUpdated": null,
+ "Feedback.avatarRemoved": null
+}

@@ -1,0 +1,6 @@
+{
+ "Feedback.mediaUploaded": {"en": "Media uploaded", "ar": "تم رفع الوسائط", "de": "Medien hochgeladen", "fr": "Médias importés", "it": "Contenuti multimediali caricati"},
+ "Feedback.mediaDeleted": {"en": "Media deleted", "ar": "تم حذف الوسائط", "de": "Medien gelöscht", "fr": "Médias supprimés", "it": "Contenuti multimediali eliminati"},
+ "Feedback.publishNowConflict": {"en": "This post can't be published now: it's waiting for approval or already published.", "ar": "لا يمكن نشر هذا المنشور الآن: إنه بانتظار الموافقة أو منشور بالفعل.", "de": "Dieser Beitrag kann jetzt nicht veröffentlicht werden: Er wartet auf Freigabe oder ist bereits veröffentlicht.", "fr": "Cette publication ne peut pas être mise en ligne maintenant : elle attend une approbation ou est déjà publiée.", "it": "Questo post non può essere pubblicato ora: è in attesa di approvazione o è già pubblicato."},
+ "Status.post.SYNCED": {"en": "Imported", "ar": "مستورد", "de": "Importiert", "fr": "Importée", "it": "Importato"}
+}

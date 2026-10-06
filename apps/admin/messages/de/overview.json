@@ -1,0 +1,24 @@
+{
+  "Overview": {
+    "title": "Übersicht",
+    "description": "Wie es der Plattform geht und welche Arbeit auf das Team wartet.",
+    "numbers": "Kennzahlen",
+    "mrr": "Monatlich wiederkehrender Umsatz",
+    "mrrHint": "Alle Währungen, in USD zum heutigen Kurs",
+    "workspaces": "Kunden-Arbeitsbereiche",
+    "workspacesHint": "{active} aktiv · {pastDue} überfällig · {suspended} gesperrt",
+    "trials": "Laufende Testphasen",
+    "trialsHint": "{count, plural, =0 {Keine endet in den nächsten 3 Tagen} one {# endet in den nächsten 3 Tagen} other {# enden in den nächsten 3 Tagen}}",
+    "pastDue": "Unbezahlte Rechnungen",
+    "pastDueHint": "Überfällig; {open} weitere offen",
+    "queue": "Wartet auf das Team",
+    "q": {
+      "pastDue": "Überfällige Rechnungen",
+      "newRequests": "Neue Serviceanfragen",
+      "openTickets": "Offene Support-Tickets",
+      "customPlans": "Individuelle Tarifanfragen ohne Angebot",
+      "migrations": "Währungsumstellungen zur Prüfung",
+      "waitlist": "Personen auf Wartelisten"
+    }
+  }
+}

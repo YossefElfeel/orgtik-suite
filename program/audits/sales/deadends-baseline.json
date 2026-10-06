@@ -1,0 +1,3402 @@
+{
+  "app": "sales",
+  "as": "mona.adel@orgtik.test",
+  "from": "baseline",
+  "at": "2026-09-30T08:22:10.284Z",
+  "signIn": {
+    "ok": true,
+    "restoredFromState": true
+  },
+  "pages": [
+    {
+      "route": "/activity-feed",
+      "url": "/en/activity-feed",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 4,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/activity-feed",
+          "url": "/en/activity-feed",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/activity-feed",
+          "url": "/en/activity-feed",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/activity-feed",
+          "url": "/en/activity-feed",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/activity-feed",
+          "url": "/en/activity-feed",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Mark all Read",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/archive",
+      "url": "/en/archive",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 4,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/archive",
+          "url": "/en/archive",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/archive",
+          "url": "/en/archive",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/archive",
+          "url": "/en/archive",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/archive",
+          "url": "/en/archive",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Restore",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/commissions",
+      "url": "/en/commissions",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 4,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/commissions",
+          "url": "/en/commissions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/commissions",
+          "url": "/en/commissions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/commissions",
+          "url": "/en/commissions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/commissions",
+          "url": "/en/commissions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Pay Commission",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/coupons",
+      "url": "/en/coupons",
+      "session": "signed-in",
+      "unnamedButtons": 9,
+      "found": 4,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/coupons",
+          "url": "/en/coupons",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/coupons",
+          "url": "/en/coupons",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/coupons",
+          "url": "/en/coupons",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/coupons",
+          "url": "/en/coupons",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add Coupon",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/coupons",
+          "url": "/en/coupons",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon 743519)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(2) > main:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(9) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/customers",
+      "url": "/en/customers",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 5,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/customers",
+          "url": "/en/customers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/customers",
+          "url": "/en/customers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/customers",
+          "url": "/en/customers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/customers",
+          "url": "/en/customers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Customer",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/customers",
+          "url": "/en/customers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Actions",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/demo",
+      "url": "/en/demo",
+      "session": "signed-in",
+      "unnamedButtons": 8,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/demo",
+          "url": "/en/demo",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/demo",
+          "url": "/en/demo",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/demo",
+          "url": "/en/demo",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/demo",
+          "url": "/en/demo",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Customer",
+          "outcome": "dead end",
+          "detail": "nothing visible happened",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/demo",
+          "url": "/en/demo",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Drop your files here, or click to browse",
+          "outcome": "opened",
+          "detail": "file chooser",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/demo",
+          "url": "/en/demo",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Submit",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/demo",
+          "url": "/en/demo",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: eye)",
+          "outcome": "dead end",
+          "detail": "nothing visible happened",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(2) > main:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(3)"
+        },
+        {
+          "app": "sales",
+          "route": "/demo",
+          "url": "/en/demo",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: circle-plus)",
+          "outcome": "dead end",
+          "detail": "nothing visible happened",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(2) > main:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(4)"
+        },
+        {
+          "app": "sales",
+          "route": "/demo",
+          "url": "/en/demo",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: trash)",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(2) > main:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(9) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/invoices",
+      "url": "/en/invoices",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 25,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Create Invoice",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Create Custom Invoice",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View INV-2026-0051",
+          "outcome": "navigated",
+          "detail": "/en/invoices/INV-2026-0051",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download INV-2026-0051",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View INV-2026-0035",
+          "outcome": "navigated",
+          "detail": "/en/invoices/INV-2026-0035",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download INV-2026-0035",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View INV-2026-0031",
+          "outcome": "navigated",
+          "detail": "/en/invoices/INV-2026-0031",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download INV-2026-0031",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View INV-2026-0010",
+          "outcome": "navigated",
+          "detail": "/en/invoices/INV-2026-0010",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download INV-2026-0010",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View INV-2026-0054",
+          "outcome": "navigated",
+          "detail": "/en/invoices/INV-2026-0054",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download INV-2026-0054",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View INV-2026-0062",
+          "outcome": "navigated",
+          "detail": "/en/invoices/INV-2026-0062",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download INV-2026-0062",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View INV-2026-0012",
+          "outcome": "navigated",
+          "detail": "/en/invoices/INV-2026-0012",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download INV-2026-0012",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View INV-2026-0057",
+          "outcome": "navigated",
+          "detail": "/en/invoices/INV-2026-0057",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download INV-2026-0057",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View INV-2026-0030",
+          "outcome": "navigated",
+          "detail": "/en/invoices/INV-2026-0030",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download INV-2026-0030",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View INV-2026-0050",
+          "outcome": "navigated",
+          "detail": "/en/invoices/INV-2026-0050",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices",
+          "url": "/en/invoices",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Download INV-2026-0050",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/loyalty",
+      "url": "/en/loyalty",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 11,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Remove USD rate",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Remove EGP rate",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Remove SAR rate",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Remove AED rate",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Remove EUR rate",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Remove KWD rate",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Remove QAR rate",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/loyalty",
+          "url": "/en/loyalty",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Save Changes",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/offers",
+      "url": "/en/offers",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/offers",
+          "url": "/en/offers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/offers",
+          "url": "/en/offers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/offers",
+          "url": "/en/offers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/offers",
+          "url": "/en/offers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Offer",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/offers",
+          "url": "/en/offers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View",
+          "outcome": "navigated",
+          "detail": "/en/offers/d762e025-b974-4461-b892-192bd28f398a",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/offers",
+          "url": "/en/offers",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/packages",
+      "url": "/en/packages",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/packages",
+          "url": "/en/packages",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages",
+          "url": "/en/packages",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages",
+          "url": "/en/packages",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages",
+          "url": "/en/packages",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Packages",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages",
+          "url": "/en/packages",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Details",
+          "outcome": "navigated",
+          "detail": "/en/packages/ce82a2d2-abc7-4729-b8b3-4db4686fd175",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages",
+          "url": "/en/packages",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Details",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages",
+          "url": "/en/packages",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "url": "/en",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Salesman",
+          "outcome": "dead end",
+          "detail": "nothing visible happened",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Project",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Project",
+          "outcome": "navigated",
+          "detail": "/en/projects/ea3cdabb-a4f4-4014-8fa1-3dd06170ed64",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Project",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/plan-management/categories",
+      "url": "/en/plan-management/categories",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 20,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Department",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add Category",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Design",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Design",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View UI/UX Design",
+          "outcome": "navigated",
+          "detail": "/en/plan-management/categories/21af6594-144c-4110-a664-6227bce6cd92",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit UI/UX Design",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete UI/UX Design",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Brand Identity",
+          "outcome": "navigated",
+          "detail": "/en/plan-management/categories/1bb7457e-736c-422b-9243-f0d07f23ee0d",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Brand Identity",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Brand Identity",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Motion & Video",
+          "outcome": "navigated",
+          "detail": "/en/plan-management/categories/fd3aefa0-6621-4086-aabc-8f40b072c258",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Motion & Video",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Motion & Video",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Development",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Development",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Marketing",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories",
+          "url": "/en/plan-management/categories",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Marketing",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/plan-management/departments",
+      "url": "/en/plan-management/departments",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 20,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Department",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add Category",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Design",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Design",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View UI/UX Design",
+          "outcome": "navigated",
+          "detail": "/en/plan-management/categories/21af6594-144c-4110-a664-6227bce6cd92",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit UI/UX Design",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete UI/UX Design",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Brand Identity",
+          "outcome": "navigated",
+          "detail": "/en/plan-management/categories/1bb7457e-736c-422b-9243-f0d07f23ee0d",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Brand Identity",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Brand Identity",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Motion & Video",
+          "outcome": "navigated",
+          "detail": "/en/plan-management/categories/fd3aefa0-6621-4086-aabc-8f40b072c258",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Motion & Video",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Motion & Video",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Development",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Development",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Marketing",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/departments",
+          "url": "/en/plan-management/departments",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Marketing",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/plan-management/duration",
+      "url": "/en/plan-management/duration",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 14,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Duration",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit 1 Month",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete 1 Month",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit 3 Months",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete 3 Months",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit 6 Months",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete 6 Months",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit 12 Months",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete 12 Months",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit 24 Months",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/duration",
+          "url": "/en/plan-management/duration",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete 24 Months",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/plan-management/features",
+      "url": "/en/plan-management/features",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 24,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Feature",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit UX Research & Personas",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete UX Research & Personas",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Wireframes & Prototypes",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Wireframes & Prototypes",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit UI Design System",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete UI Design System",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Usability Testing",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Usability Testing",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Logo Design",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Logo Design",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Brand Guidelines",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Brand Guidelines",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Stationery & Print Kit",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Stationery & Print Kit",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Packaging Design",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Packaging Design",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Explainer Video (60s)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Explainer Video (60s)",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Social Media Reels (x8)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/features",
+          "url": "/en/plan-management/features",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Social Media Reels (x8)",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/plan-management",
+      "url": "/en/plan-management",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 9,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/plan-management",
+          "url": "/en/plan-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management",
+          "url": "/en/plan-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management",
+          "url": "/en/plan-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management",
+          "url": "/en/plan-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Plan",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management",
+          "url": "/en/plan-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "List view",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management",
+          "url": "/en/plan-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Grid view",
+          "outcome": "active option",
+          "detail": "already selected, so pressing it again does nothing; not marked aria-pressed or aria-selected",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management",
+          "url": "/en/plan-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Plan",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management",
+          "url": "/en/plan-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Full Details",
+          "outcome": "navigated",
+          "detail": "/en/plan-management/51e52159-469a-400c-93b1-380a89f7b63c",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management",
+          "url": "/en/plan-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete plan",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/plan-management/zones",
+      "url": "/en/plan-management/zones",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 12,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Zone",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Egypt",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Egypt",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit GCC",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete GCC",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Europe",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Europe",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Rest of World",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/zones",
+          "url": "/en/plan-management/zones",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Rest of World",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/profile",
+      "url": "/en/profile",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 5,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/profile",
+          "url": "/en/profile",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/profile",
+          "url": "/en/profile",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/profile",
+          "url": "/en/profile",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/profile",
+          "url": "/en/profile",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Upload New Photo",
+          "outcome": "opened",
+          "detail": "file chooser",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/profile",
+          "url": "/en/profile",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Save Changes",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/projects",
+      "url": "/en/projects",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/projects",
+          "url": "/en/projects",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/projects",
+          "url": "/en/projects",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/projects",
+          "url": "/en/projects",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/projects",
+          "url": "/en/projects",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Project",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/projects",
+          "url": "/en/projects",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Project",
+          "outcome": "navigated",
+          "detail": "/en/projects/2f1f0463-dcfe-455e-bf9e-25927d3a09d2",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/projects",
+          "url": "/en/projects",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Project",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/salesman",
+      "url": "/en/salesman",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 5,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/salesman",
+          "url": "/en/salesman",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman",
+          "url": "/en/salesman",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman",
+          "url": "/en/salesman",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman",
+          "url": "/en/salesman",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Salesman",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman",
+          "url": "/en/salesman",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Details",
+          "outcome": "navigated",
+          "detail": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/subscriptions",
+      "url": "/en/subscriptions",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 4,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/subscriptions",
+          "url": "/en/subscriptions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/subscriptions",
+          "url": "/en/subscriptions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/subscriptions",
+          "url": "/en/subscriptions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/subscriptions",
+          "url": "/en/subscriptions",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Details",
+          "outcome": "navigated",
+          "detail": "/en/subscriptions/5b083a4f-ef27-4c13-a692-db8f89f02865",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/tickets",
+      "url": "/en/tickets",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 5,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Ticket",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/tickets",
+          "url": "/en/tickets",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View",
+          "outcome": "navigated",
+          "detail": "/en/tickets/a2fae557-c1fe-4394-ad8f-f22a60f5fd28",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/user-management",
+      "url": "/en/user-management",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 5,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/user-management",
+          "url": "/en/user-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/user-management",
+          "url": "/en/user-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/user-management",
+          "url": "/en/user-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/user-management",
+          "url": "/en/user-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New User",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/user-management",
+          "url": "/en/user-management",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View user",
+          "outcome": "navigated",
+          "detail": "/en/user-management/ada3ed05-40ef-4c67-a2ad-1194c4c25805",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/customers/:id",
+      "url": "/en/customers/affd074f-16b2-4091-ac71-9c890988ff41",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/customers/:id",
+          "url": "/en/customers/affd074f-16b2-4091-ac71-9c890988ff41",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/customers/:id",
+          "url": "/en/customers/affd074f-16b2-4091-ac71-9c890988ff41",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/customers/:id",
+          "url": "/en/customers/affd074f-16b2-4091-ac71-9c890988ff41",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/customers/:id",
+          "url": "/en/customers/affd074f-16b2-4091-ac71-9c890988ff41",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Schedule Meeting",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/customers/:id",
+          "url": "/en/customers/affd074f-16b2-4091-ac71-9c890988ff41",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/customers/:id",
+          "url": "/en/customers/affd074f-16b2-4091-ac71-9c890988ff41",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Upload",
+          "outcome": "opened",
+          "detail": "file chooser",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/customers/:id",
+          "url": "/en/customers/affd074f-16b2-4091-ac71-9c890988ff41",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add note",
+          "outcome": "not clickable",
+          "detail": "elementHandle.click: Timeout 3000ms exceeded.",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/invoices/:id",
+      "url": "/en/invoices/INV-2026-0051",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/invoices/:id",
+          "url": "/en/invoices/INV-2026-0051",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices/:id",
+          "url": "/en/invoices/INV-2026-0051",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices/:id",
+          "url": "/en/invoices/INV-2026-0051",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices/:id",
+          "url": "/en/invoices/INV-2026-0051",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Void",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices/:id",
+          "url": "/en/invoices/INV-2026-0051",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View",
+          "outcome": "opened",
+          "detail": "download, new tab",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices/:id",
+          "url": "/en/invoices/INV-2026-0051",
+          "session": "signed-in",
+          "role": "button",
+          "control": "PDF",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/invoices/:id",
+          "url": "/en/invoices/INV-2026-0051",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Mark as Paid",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/offers/:id",
+      "url": "/en/offers/67d0b0fa-fc96-4fca-9d48-a2d513a778e9",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 0,
+      "truncated": 0,
+      "results": []
+    },
+    {
+      "route": "/packages/:id",
+      "url": "/en/packages/ce82a2d2-abc7-4729-b8b3-4db4686fd175",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/packages/:id",
+          "url": "/en/packages/ce82a2d2-abc7-4729-b8b3-4db4686fd175",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages/:id",
+          "url": "/en/packages/ce82a2d2-abc7-4729-b8b3-4db4686fd175",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages/:id",
+          "url": "/en/packages/ce82a2d2-abc7-4729-b8b3-4db4686fd175",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages/:id",
+          "url": "/en/packages/ce82a2d2-abc7-4729-b8b3-4db4686fd175",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages/:id",
+          "url": "/en/packages/ce82a2d2-abc7-4729-b8b3-4db4686fd175",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Package",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages/:id",
+          "url": "/en/packages/ce82a2d2-abc7-4729-b8b3-4db4686fd175",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Brand Identity EGP 46,500.00 Base",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/packages/:id",
+          "url": "/en/packages/ce82a2d2-abc7-4729-b8b3-4db4686fd175",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Web Development EGP 70,500.00 Base",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/plan-management/categories/:id",
+      "url": "/en/plan-management/categories/21af6594-144c-4110-a664-6227bce6cd92",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/plan-management/categories/:id",
+          "url": "/en/plan-management/categories/21af6594-144c-4110-a664-6227bce6cd92",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories/:id",
+          "url": "/en/plan-management/categories/21af6594-144c-4110-a664-6227bce6cd92",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories/:id",
+          "url": "/en/plan-management/categories/21af6594-144c-4110-a664-6227bce6cd92",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories/:id",
+          "url": "/en/plan-management/categories/21af6594-144c-4110-a664-6227bce6cd92",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete Category",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories/:id",
+          "url": "/en/plan-management/categories/21af6594-144c-4110-a664-6227bce6cd92",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Category",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories/:id",
+          "url": "/en/plan-management/categories/21af6594-144c-4110-a664-6227bce6cd92",
+          "session": "signed-in",
+          "role": "button",
+          "control": "View Details",
+          "outcome": "navigated",
+          "detail": "/en/plan-management/09424b2f-4595-4e43-9c58-6b51ed48c35f",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/plan-management/categories/:id",
+          "url": "/en/plan-management/categories/21af6594-144c-4110-a664-6227bce6cd92",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open in Features",
+          "outcome": "navigated",
+          "detail": "/en/plan-management/features",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/projects/:id",
+      "url": "/en/projects/bee15862-50f6-4cd3-9f8e-623f75faeb68",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 3,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/projects/:id",
+          "url": "/en/projects/bee15862-50f6-4cd3-9f8e-623f75faeb68",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/projects/:id",
+          "url": "/en/projects/bee15862-50f6-4cd3-9f8e-623f75faeb68",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/projects/:id",
+          "url": "/en/projects/bee15862-50f6-4cd3-9f8e-623f75faeb68",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/salesman/:id",
+      "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 12,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Pay All",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Salesman Finance",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit personal details for Khaled Mansour",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Sign in as Salesman",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Salesman Deals",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Salesman performance",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Latest customers",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/salesman/:id",
+          "url": "/en/salesman/5ce6c61f-e197-4d41-8f98-aebb7ae2c1fb",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Salesman Notes",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/subscriptions/:id",
+      "url": "/en/subscriptions/746b95ba-737a-4b99-a3d5-48591f23f45f",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 3,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/subscriptions/:id",
+          "url": "/en/subscriptions/746b95ba-737a-4b99-a3d5-48591f23f45f",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/subscriptions/:id",
+          "url": "/en/subscriptions/746b95ba-737a-4b99-a3d5-48591f23f45f",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/subscriptions/:id",
+          "url": "/en/subscriptions/746b95ba-737a-4b99-a3d5-48591f23f45f",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/tickets/:id",
+      "url": "/en/tickets/a2fae557-c1fe-4394-ad8f-f22a60f5fd28",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/a2fae557-c1fe-4394-ad8f-f22a60f5fd28",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/a2fae557-c1fe-4394-ad8f-f22a60f5fd28",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/a2fae557-c1fe-4394-ad8f-f22a60f5fd28",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/a2fae557-c1fe-4394-ad8f-f22a60f5fd28",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Start",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/a2fae557-c1fe-4394-ad8f-f22a60f5fd28",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Resolved",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/a2fae557-c1fe-4394-ad8f-f22a60f5fd28",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Attach file",
+          "outcome": "opened",
+          "detail": "file chooser",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/tickets/:id",
+          "url": "/en/tickets/a2fae557-c1fe-4394-ad8f-f22a60f5fd28",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add note",
+          "outcome": "not clickable",
+          "detail": "elementHandle.click: Timeout 3000ms exceeded.",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/user-management/:id",
+      "url": "/en/user-management/ada3ed05-40ef-4c67-a2ad-1194c4c25805",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sales",
+          "route": "/user-management/:id",
+          "url": "/en/user-management/ada3ed05-40ef-4c67-a2ad-1194c4c25805",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/user-management/:id",
+          "url": "/en/user-management/ada3ed05-40ef-4c67-a2ad-1194c4c25805",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/user-management/:id",
+          "url": "/en/user-management/ada3ed05-40ef-4c67-a2ad-1194c4c25805",
+          "session": "signed-in",
+          "role": "button",
+          "control": "User menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/user-management/:id",
+          "url": "/en/user-management/ada3ed05-40ef-4c67-a2ad-1194c4c25805",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/user-management/:id",
+          "url": "/en/user-management/ada3ed05-40ef-4c67-a2ad-1194c4c25805",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Enable user",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sales",
+          "route": "/user-management/:id",
+          "url": "/en/user-management/ada3ed05-40ef-4c67-a2ad-1194c4c25805",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete user",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/*rest",
+      "url": "/en/audit-missing-page",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 0,
+      "truncated": 0,
+      "results": []
+    },
+    {
+      "route": "/auth",
+      "url": "/en/auth",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 0,
+      "truncated": 0,
+      "results": []
+    }
+  ],
+  "tally": {
+    "app": "sales",
+    "pages": 35,
+    "pressed": 224,
+    "dead end": 4,
+    "copied silently": 0,
+    "not clickable": 2,
+    "stuck": 0,
+    "not found": 0,
+    "sign-in wall": 0,
+    "left the app": 0,
+    "current page": 0,
+    "active option": 1,
+    "skipped": 51,
+    "broken link": 0,
+    "unnamed buttons": 17,
+    "over the limit": 0
+  }
+}

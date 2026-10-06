@@ -1,0 +1,353 @@
+{
+  "at": "2026-10-01T23:31:15.243Z",
+  "locale": "en",
+  "walks": [
+    {
+      "id": "T1-open-from-suite",
+      "title": "Open Tasks from the suite",
+      "locale": "en",
+      "as": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Arrive with a one-time code",
+          "ok": true,
+          "note": "landed on /en (\"Dashboard\")",
+          "ms": 3935,
+          "url": "http://localhost:3001/en",
+          "screenshot": "T1-open-from-suite/01-arrive-with-a-one-time-code.png"
+        },
+        {
+          "n": 2,
+          "name": "Back doesn't reopen the hand-off",
+          "ok": true,
+          "note": "",
+          "ms": 598,
+          "url": "about:blank",
+          "screenshot": "T1-open-from-suite/02-back-doesn-t-reopen-the-hand-off.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "T2-add-to-column",
+      "title": "Add a task to a column",
+      "locale": "en",
+      "as": "karim.hassan@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open the board",
+          "ok": true,
+          "note": "",
+          "ms": 4456,
+          "url": "http://localhost:3001/en/projects/2/board",
+          "screenshot": "T2-add-to-column/01-open-the-board.png"
+        },
+        {
+          "n": 2,
+          "name": "Add task to a column",
+          "ok": true,
+          "note": "in column 20 (expected 20)",
+          "ms": 2170,
+          "url": "http://localhost:3001/en/projects/2/board",
+          "screenshot": "T2-add-to-column/02-add-task-to-a-column.png"
+        },
+        {
+          "n": 3,
+          "name": "The card shows in that column",
+          "ok": true,
+          "note": "",
+          "ms": 1117,
+          "url": "http://localhost:3001/en/projects/2/board",
+          "screenshot": "T2-add-to-column/03-the-card-shows-in-that-column.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "T3-move",
+      "title": "Move a task with the keyboard; a refused move puts it back",
+      "locale": "en",
+      "as": "salma.nabil@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open the board",
+          "ok": true,
+          "note": "",
+          "ms": 4799,
+          "url": "http://localhost:3001/en/projects/2/board",
+          "screenshot": "T3-move/01-open-the-board.png"
+        },
+        {
+          "n": 2,
+          "name": "Lift, move to the next column, drop (keyboard)",
+          "ok": true,
+          "note": "now in IN_PROGRESS (expected IN_PROGRESS)",
+          "ms": 2964,
+          "url": "http://localhost:3001/en/projects/2/board",
+          "screenshot": "T3-move/02-lift-move-to-the-next-column-drop-keyboard.png"
+        },
+        {
+          "n": 3,
+          "name": "Reload: still there",
+          "ok": true,
+          "note": "",
+          "ms": 4029,
+          "url": "http://localhost:3001/en/projects/2/board",
+          "screenshot": "T3-move/03-reload-still-there.png"
+        },
+        {
+          "n": 4,
+          "name": "The API refuses the next move: the card goes back and a toast says so",
+          "ok": true,
+          "note": "server column IN_PROGRESS; toast \"The task didn't move. It's back where it was.\"",
+          "ms": 2429,
+          "url": "http://localhost:3001/en/projects/2/board",
+          "screenshot": "T3-move/04-the-api-refuses-the-next-move-the-card-goes-back-and-a-toast-says-so.png"
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+      ],
+      "uncaught": [],
+      "api": [
+        {
+          "status": 500,
+          "method": "POST",
+          "url": ":4001/api/tasks/1028/move"
+        }
+      ]
+    },
+    {
+      "id": "T4-task-sheet",
+      "title": "Work inside a task, then delete it",
+      "locale": "en",
+      "as": "karim.hassan@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open the task from its link",
+          "ok": true,
+          "note": "",
+          "ms": 11244,
+          "url": "http://localhost:3001/en/projects/2/board?task-id=1030",
+          "screenshot": "T4-task-sheet/01-open-the-task-from-its-link.png"
+        },
+        {
+          "n": 2,
+          "name": "Comment",
+          "ok": true,
+          "note": "",
+          "ms": 2124,
+          "url": "http://localhost:3001/en/projects/2/board?task-id=1030",
+          "screenshot": "T4-task-sheet/02-comment.png"
+        },
+        {
+          "n": 3,
+          "name": "Delete the task (confirmed)",
+          "ok": true,
+          "note": "deleted, sheet closed",
+          "ms": 2866,
+          "url": "http://localhost:3001/en/projects/2/board",
+          "screenshot": "T4-task-sheet/03-delete-the-task-confirmed.png"
+        },
+        {
+          "n": 4,
+          "name": "The board is still usable",
+          "ok": true,
+          "note": "",
+          "ms": 665,
+          "url": "http://localhost:3001/en/projects/2/board?task-id=1028",
+          "screenshot": "T4-task-sheet/04-the-board-is-still-usable.png"
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "uncaught": [],
+      "api": [
+        {
+          "status": 404,
+          "method": "GET",
+          "url": ":4001/api/tasks/1030"
+        }
+      ]
+    },
+    {
+      "id": "T5-start-project",
+      "title": "Start a project",
+      "locale": "en",
+      "as": "karim.hassan@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Projects",
+          "ok": true,
+          "note": "",
+          "ms": 4666,
+          "url": "http://localhost:3001/en/projects",
+          "screenshot": "T5-start-project/01-projects.png"
+        },
+        {
+          "n": 2,
+          "name": "Create project",
+          "ok": true,
+          "note": "",
+          "ms": 1706,
+          "url": "http://localhost:3001/en/projects",
+          "screenshot": "T5-start-project/02-create-project.png"
+        },
+        {
+          "n": 3,
+          "name": "Open it from the toast",
+          "ok": true,
+          "note": "",
+          "ms": 2123,
+          "url": "http://localhost:3001/en/projects/9/board",
+          "screenshot": "T5-start-project/03-open-it-from-the-toast.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "T6-open-team",
+      "title": "Open a team",
+      "locale": "en",
+      "as": "karim.hassan@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Teams",
+          "ok": true,
+          "note": "",
+          "ms": 4598,
+          "url": "http://localhost:3001/en/teams",
+          "screenshot": "T6-open-team/01-teams.png"
+        },
+        {
+          "n": 2,
+          "name": "Open the team by its name",
+          "ok": true,
+          "note": "",
+          "ms": 1584,
+          "url": "http://localhost:3001/en/teams/1/overview",
+          "screenshot": "T6-open-team/02-open-the-team-by-its-name.png"
+        },
+        {
+          "n": 3,
+          "name": "Tab: priority",
+          "ok": true,
+          "note": "",
+          "ms": 1338,
+          "url": "http://localhost:3001/en/teams/1/priority",
+          "screenshot": "T6-open-team/03-tab-priority.png"
+        },
+        {
+          "n": 4,
+          "name": "Tab: feed",
+          "ok": true,
+          "note": "",
+          "ms": 1624,
+          "url": "http://localhost:3001/en/teams/1/feed",
+          "screenshot": "T6-open-team/04-tab-feed.png"
+        },
+        {
+          "n": 5,
+          "name": "Tab: team",
+          "ok": true,
+          "note": "",
+          "ms": 1434,
+          "url": "http://localhost:3001/en/teams/1/team",
+          "screenshot": "T6-open-team/05-tab-team.png"
+        },
+        {
+          "n": 6,
+          "name": "Back to Teams by the breadcrumb",
+          "ok": true,
+          "note": "",
+          "ms": 808,
+          "url": "http://localhost:3001/en/teams",
+          "screenshot": "T6-open-team/06-back-to-teams-by-the-breadcrumb.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "T7-read-only",
+      "title": "A viewer reads, and isn't offered changes",
+      "locale": "en",
+      "as": "omar.farouk@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Board",
+          "ok": true,
+          "note": "13 cards, 0 handles, 0 add buttons",
+          "ms": 4948,
+          "url": "http://localhost:3001/en/projects/2/board",
+          "screenshot": "T7-read-only/01-board.png"
+        },
+        {
+          "n": 2,
+          "name": "My tasks",
+          "ok": true,
+          "note": "",
+          "ms": 22780,
+          "url": "http://localhost:3001/en/my-tasks/overview",
+          "screenshot": "T7-read-only/02-my-tasks.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "T8-calendar",
+      "title": "Plan in the calendar",
+      "locale": "en",
+      "as": "salma.nabil@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "My tasks › Calendar",
+          "ok": true,
+          "note": "",
+          "ms": 12407,
+          "url": "http://localhost:3001/en/my-tasks/calendar",
+          "screenshot": "T8-calendar/01-my-tasks-calendar.png"
+        },
+        {
+          "n": 2,
+          "name": "Next month with the keyboard",
+          "ok": true,
+          "note": "",
+          "ms": 31402,
+          "url": "http://localhost:3001/en/my-tasks/calendar?date=2026-11-01",
+          "screenshot": "T8-calendar/02-next-month-with-the-keyboard.png"
+        },
+        {
+          "n": 3,
+          "name": "Week starts where the language starts it",
+          "ok": true,
+          "note": "first day \"Mon\nMonday\"",
+          "ms": 671,
+          "url": "http://localhost:3001/en/my-tasks/calendar?date=2026-11-01",
+          "screenshot": "T8-calendar/03-week-starts-where-the-language-starts-it.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "name": "a published article name shows on the website",
+    "ok": true,
+    "note": "CMS article name renders on /insights"
+  },
+  {
+    "name": "code-owned purchasing prices reject a CMS price edit",
+    "ok": true,
+    "note": "423 managed_in_website; purchasing prices remain code-owned"
+  },
+  {
+    "name": "an edited page heading keeps its styling and shows the new words",
+    "ok": true,
+    "note": "closing heading: \"What could we make together?\" (3 styled parts kept)"
+  },
+  {
+    "name": "an edited message built in code fills in its parts",
+    "ok": true,
+    "note": "/services: \"6 of 11 services shown\""
+  },
+  {
+    "name": "after the reset the Website Manager matches the committed snapshot",
+    "ok": true,
+    "note": "content: unchanged since the last pull"
+  },
+  {
+    "name": "the site's pre-flow snapshot and host configuration are restored",
+    "ok": true,
+    "note": "Compared with exact pre-flow bytes, including uncommitted follow-up work"
+  }
+]

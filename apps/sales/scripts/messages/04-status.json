@@ -1,0 +1,184 @@
+{
+ "Status.unknown": {
+  "en": "Unknown",
+  "ar": "غير معروف",
+  "de": "Unbekannt",
+  "fr": "Inconnu",
+  "it": "Sconosciuto"
+ },
+ "Status.offer.pending": {
+  "en": "Sent",
+  "ar": "مُرسَل",
+  "de": "Gesendet",
+  "fr": "Envoyée",
+  "it": "Inviata"
+ },
+ "Status.offer.countered": {
+  "en": "Countered",
+  "ar": "عُرض مقابل",
+  "de": "Gegenangebot",
+  "fr": "Contre-offre",
+  "it": "Controproposta"
+ },
+ "Status.offer.accepted": {
+  "en": "Accepted",
+  "ar": "مقبول",
+  "de": "Angenommen",
+  "fr": "Acceptée",
+  "it": "Accettata"
+ },
+ "Status.offer.rejected": {
+  "en": "Declined",
+  "ar": "مرفوض",
+  "de": "Abgelehnt",
+  "fr": "Refusée",
+  "it": "Rifiutata"
+ },
+ "Status.project.pending": {
+  "en": "Waiting for the contract",
+  "ar": "بانتظار العقد",
+  "de": "Wartet auf Vertrag",
+  "fr": "En attente du contrat",
+  "it": "In attesa del contratto"
+ },
+ "Status.project.confirmed": {
+  "en": "Contract signed",
+  "ar": "تم توقيع العقد",
+  "de": "Vertrag unterschrieben",
+  "fr": "Contrat signé",
+  "it": "Contratto firmato"
+ },
+ "Status.project.approved": {
+  "en": "Approved",
+  "ar": "معتمد",
+  "de": "Freigegeben",
+  "fr": "Approuvé",
+  "it": "Approvato"
+ },
+ "Status.project.rejected": {
+  "en": "Rejected",
+  "ar": "مرفوض",
+  "de": "Abgelehnt",
+  "fr": "Refusé",
+  "it": "Rifiutato"
+ },
+ "Status.project.in_progress": {
+  "en": "In progress",
+  "ar": "قيد التنفيذ",
+  "de": "In Arbeit",
+  "fr": "En cours",
+  "it": "In corso"
+ },
+ "Status.project.testing": {
+  "en": "Testing",
+  "ar": "قيد الاختبار",
+  "de": "Im Test",
+  "fr": "En test",
+  "it": "In test"
+ },
+ "Status.project.completed": {
+  "en": "Completed",
+  "ar": "مكتمل",
+  "de": "Abgeschlossen",
+  "fr": "Terminé",
+  "it": "Completato"
+ },
+ "Status.contract.pending": {
+  "en": "Waiting for approval",
+  "ar": "بانتظار الموافقة",
+  "de": "Wartet auf Freigabe",
+  "fr": "En attente d’approbation",
+  "it": "In attesa di approvazione"
+ },
+ "Status.contract.approved": {
+  "en": "Approved",
+  "ar": "معتمد",
+  "de": "Freigegeben",
+  "fr": "Approuvé",
+  "it": "Approvato"
+ },
+ "Status.contract.rejected": {
+  "en": "Rejected",
+  "ar": "مرفوض",
+  "de": "Abgelehnt",
+  "fr": "Refusé",
+  "it": "Rifiutato"
+ },
+ "Status.commission.unpaid": {
+  "en": "Unpaid",
+  "ar": "غير مدفوعة",
+  "de": "Offen",
+  "fr": "Non payée",
+  "it": "Non pagata"
+ },
+ "Status.commission.partially_paid": {
+  "en": "Partly paid",
+  "ar": "مدفوعة جزئيًا",
+  "de": "Teilweise bezahlt",
+  "fr": "Payée en partie",
+  "it": "Pagata in parte"
+ },
+ "Status.commission.paid": {
+  "en": "Paid",
+  "ar": "مدفوعة",
+  "de": "Bezahlt",
+  "fr": "Payée",
+  "it": "Pagata"
+ },
+ "Status.commission.pending": {
+  "en": "Waiting for approval",
+  "ar": "بانتظار الموافقة",
+  "de": "Wartet auf Freigabe",
+  "fr": "En attente d’approbation",
+  "it": "In attesa di approvazione"
+ },
+ "Status.commission.approved": {
+  "en": "Approved",
+  "ar": "معتمدة",
+  "de": "Freigegeben",
+  "fr": "Approuvée",
+  "it": "Approvata"
+ },
+ "Status.commission.rejected": {
+  "en": "Rejected",
+  "ar": "مرفوضة",
+  "de": "Abgelehnt",
+  "fr": "Refusée",
+  "it": "Rifiutata"
+ },
+ "Status.access.active": {
+  "en": "Can sign in",
+  "ar": "يمكنه تسجيل الدخول",
+  "de": "Kann sich anmelden",
+  "fr": "Peut se connecter",
+  "it": "Può accedere"
+ },
+ "Status.access.invited": {
+  "en": "Invited",
+  "ar": "تمت دعوته",
+  "de": "Eingeladen",
+  "fr": "Invité",
+  "it": "Invitato"
+ },
+ "Status.access.disabled": {
+  "en": "Turned off",
+  "ar": "موقوف",
+  "de": "Deaktiviert",
+  "fr": "Désactivé",
+  "it": "Disattivato"
+ },
+ "Status.access.no_account": {
+  "en": "No account",
+  "ar": "لا يوجد حساب",
+  "de": "Kein Konto",
+  "fr": "Pas de compte",
+  "it": "Nessun account"
+ },
+ "Status.access.none": {
+  "en": "No account",
+  "ar": "لا يوجد حساب",
+  "de": "Kein Konto",
+  "fr": "Pas de compte",
+  "it": "Nessun account"
+ }
+}

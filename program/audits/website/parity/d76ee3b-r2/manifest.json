@@ -1,0 +1,1070 @@
+{
+  "label": "d76ee3b-r2",
+  "site": "http://localhost:4173",
+  "commit": {
+    "head": "d76ee3b",
+    "dirty": false
+  },
+  "at": "2026-09-30T15:14:13.179Z",
+  "clock": {
+    "start": "2026-09-29T06:00:00.000Z",
+    "settleMs": 15000
+  },
+  "widths": [
+    390,
+    768,
+    1440
+  ],
+  "captures": [
+    {
+      "name": "home__390",
+      "route": "/",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "home__768",
+      "route": "/",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "home__1440",
+      "route": "/",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "about__390",
+      "route": "/about",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "about__768",
+      "route": "/about",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "about__1440",
+      "route": "/about",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "contact__390",
+      "route": "/contact",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "contact__768",
+      "route": "/contact",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "contact__1440",
+      "route": "/contact",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__390",
+      "route": "/insights",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__768",
+      "route": "/insights",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__1440",
+      "route": "/insights",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_brand-system-that-scales__390",
+      "route": "/insights#/article/brand-system-that-scales",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_brand-system-that-scales__768",
+      "route": "/insights#/article/brand-system-that-scales",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_brand-system-that-scales__1440",
+      "route": "/insights#/article/brand-system-that-scales",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_campaigns-with-a-system__390",
+      "route": "/insights#/article/campaigns-with-a-system",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_campaigns-with-a-system__768",
+      "route": "/insights#/article/campaigns-with-a-system",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_campaigns-with-a-system__1440",
+      "route": "/insights#/article/campaigns-with-a-system",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_connected-digital-system__390",
+      "route": "/insights#/article/connected-digital-system",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_connected-digital-system__768",
+      "route": "/insights#/article/connected-digital-system",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_connected-digital-system__1440",
+      "route": "/insights#/article/connected-digital-system",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_designing-for-change__390",
+      "route": "/insights#/article/designing-for-change",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_designing-for-change__768",
+      "route": "/insights#/article/designing-for-change",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_designing-for-change__1440",
+      "route": "/insights#/article/designing-for-change",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_frontend-performance-budget__390",
+      "route": "/insights#/article/frontend-performance-budget",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_frontend-performance-budget__768",
+      "route": "/insights#/article/frontend-performance-budget",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_frontend-performance-budget__1440",
+      "route": "/insights#/article/frontend-performance-budget",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_managed-hosting-questions__390",
+      "route": "/insights#/article/managed-hosting-questions",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_managed-hosting-questions__768",
+      "route": "/insights#/article/managed-hosting-questions",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "insights__article_managed-hosting-questions__1440",
+      "route": "/insights#/article/managed-hosting-questions",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__390",
+      "route": "/legal",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__768",
+      "route": "/legal",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__1440",
+      "route": "/legal",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__imprint__390",
+      "route": "/legal#/imprint",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__imprint__768",
+      "route": "/legal#/imprint",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__imprint__1440",
+      "route": "/legal#/imprint",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__privacy__390",
+      "route": "/legal#/privacy",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__privacy__768",
+      "route": "/legal#/privacy",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__privacy__1440",
+      "route": "/legal#/privacy",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__sitemap__390",
+      "route": "/legal#/sitemap",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__sitemap__768",
+      "route": "/legal#/sitemap",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__sitemap__1440",
+      "route": "/legal#/sitemap",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__terms__390",
+      "route": "/legal#/terms",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__terms__768",
+      "route": "/legal#/terms",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "legal__terms__1440",
+      "route": "/legal#/terms",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "roadmap__390",
+      "route": "/roadmap",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "roadmap__768",
+      "route": "/roadmap",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "roadmap__1440",
+      "route": "/roadmap",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__390",
+      "route": "/services",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__768",
+      "route": "/services",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__1440",
+      "route": "/services",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_design__390",
+      "route": "/services#/family/design",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_design__768",
+      "route": "/services#/family/design",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_design__1440",
+      "route": "/services#/family/design",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_development__390",
+      "route": "/services#/family/development",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_development__768",
+      "route": "/services#/family/development",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_development__1440",
+      "route": "/services#/family/development",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_hosting__390",
+      "route": "/services#/family/hosting",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_hosting__768",
+      "route": "/services#/family/hosting",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_hosting__1440",
+      "route": "/services#/family/hosting",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_it-support__390",
+      "route": "/services#/family/it-support",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_it-support__768",
+      "route": "/services#/family/it-support",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_it-support__1440",
+      "route": "/services#/family/it-support",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_marketing__390",
+      "route": "/services#/family/marketing",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_marketing__768",
+      "route": "/services#/family/marketing",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__family_marketing__1440",
+      "route": "/services#/family/marketing",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_design_brand-development__390",
+      "route": "/services#/service/design/brand-development",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_design_brand-development__768",
+      "route": "/services#/service/design/brand-development",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_design_brand-development__1440",
+      "route": "/services#/service/design/brand-development",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_design_graphic-design__390",
+      "route": "/services#/service/design/graphic-design",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_design_graphic-design__768",
+      "route": "/services#/service/design/graphic-design",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_design_graphic-design__1440",
+      "route": "/services#/service/design/graphic-design",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_design_web-and-app-design__390",
+      "route": "/services#/service/design/web-and-app-design",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_design_web-and-app-design__768",
+      "route": "/services#/service/design/web-and-app-design",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_design_web-and-app-design__1440",
+      "route": "/services#/service/design/web-and-app-design",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_development_custom-app-development__390",
+      "route": "/services#/service/development/custom-app-development",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_development_custom-app-development__768",
+      "route": "/services#/service/development/custom-app-development",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_development_custom-app-development__1440",
+      "route": "/services#/service/development/custom-app-development",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_development_web-development__390",
+      "route": "/services#/service/development/web-development",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_development_web-development__768",
+      "route": "/services#/service/development/web-development",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_development_web-development__1440",
+      "route": "/services#/service/development/web-development",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_hosting_managed-hosting__390",
+      "route": "/services#/service/hosting/managed-hosting",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_hosting_managed-hosting__768",
+      "route": "/services#/service/hosting/managed-hosting",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_hosting_managed-hosting__1440",
+      "route": "/services#/service/hosting/managed-hosting",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_it-support_software-support__390",
+      "route": "/services#/service/it-support/software-support",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_it-support_software-support__768",
+      "route": "/services#/service/it-support/software-support",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_it-support_software-support__1440",
+      "route": "/services#/service/it-support/software-support",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_it-support_website-management__390",
+      "route": "/services#/service/it-support/website-management",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_it-support_website-management__768",
+      "route": "/services#/service/it-support/website-management",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_it-support_website-management__1440",
+      "route": "/services#/service/it-support/website-management",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_marketing_digital-advertising-switzerland__390",
+      "route": "/services#/service/marketing/digital-advertising-switzerland",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_marketing_digital-advertising-switzerland__768",
+      "route": "/services#/service/marketing/digital-advertising-switzerland",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_marketing_digital-advertising-switzerland__1440",
+      "route": "/services#/service/marketing/digital-advertising-switzerland",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_marketing_seo-services__390",
+      "route": "/services#/service/marketing/seo-services",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_marketing_seo-services__768",
+      "route": "/services#/service/marketing/seo-services",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_marketing_seo-services__1440",
+      "route": "/services#/service/marketing/seo-services",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_marketing_social-media-marketing__390",
+      "route": "/services#/service/marketing/social-media-marketing",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_marketing_social-media-marketing__768",
+      "route": "/services#/service/marketing/social-media-marketing",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__service_marketing_social-media-marketing__1440",
+      "route": "/services#/service/marketing/social-media-marketing",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "sign-in__390",
+      "route": "/sign-in",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "sign-in__768",
+      "route": "/sign-in",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "sign-in__1440",
+      "route": "/sign-in",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "sign-up__390",
+      "route": "/sign-up",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "sign-up__768",
+      "route": "/sign-up",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "sign-up__1440",
+      "route": "/sign-up",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__390",
+      "route": "/software",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__768",
+      "route": "/software",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__1440",
+      "route": "/software",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__plans_single_annual_hr__390",
+      "route": "/software#/plans/single/annual/hr",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__plans_single_annual_hr__768",
+      "route": "/software#/plans/single/annual/hr",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__plans_single_annual_hr__1440",
+      "route": "/software#/plans/single/annual/hr",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_crm__390",
+      "route": "/software#/product/crm",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_crm__768",
+      "route": "/software#/product/crm",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_crm__1440",
+      "route": "/software#/product/crm",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_files__390",
+      "route": "/software#/product/files",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_files__768",
+      "route": "/software#/product/files",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_files__1440",
+      "route": "/software#/product/files",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_hr__390",
+      "route": "/software#/product/hr",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_hr__768",
+      "route": "/software#/product/hr",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_hr__1440",
+      "route": "/software#/product/hr",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_marketing__390",
+      "route": "/software#/product/marketing",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_marketing__768",
+      "route": "/software#/product/marketing",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_marketing__1440",
+      "route": "/software#/product/marketing",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_tasks__390",
+      "route": "/software#/product/tasks",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_tasks__768",
+      "route": "/software#/product/tasks",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_tasks__1440",
+      "route": "/software#/product/tasks",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_website__390",
+      "route": "/software#/product/website",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_website__768",
+      "route": "/software#/product/website",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_website__1440",
+      "route": "/software#/product/website",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__390",
+      "route": "/work",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__768",
+      "route": "/work",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__1440",
+      "route": "/work",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_campaign-growth-system__390",
+      "route": "/work#/project/campaign-growth-system",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_campaign-growth-system__768",
+      "route": "/work#/project/campaign-growth-system",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_campaign-growth-system__1440",
+      "route": "/work#/project/campaign-growth-system",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_connected-platform-concept__390",
+      "route": "/work#/project/connected-platform-concept",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_connected-platform-concept__768",
+      "route": "/work#/project/connected-platform-concept",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_connected-platform-concept__1440",
+      "route": "/work#/project/connected-platform-concept",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_managed-digital-presence__390",
+      "route": "/work#/project/managed-digital-presence",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_managed-digital-presence__768",
+      "route": "/work#/project/managed-digital-presence",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_managed-digital-presence__1440",
+      "route": "/work#/project/managed-digital-presence",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_orgtik-identity-system__390",
+      "route": "/work#/project/orgtik-identity-system",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_orgtik-identity-system__768",
+      "route": "/work#/project/orgtik-identity-system",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_orgtik-identity-system__1440",
+      "route": "/work#/project/orgtik-identity-system",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_support-continuity-system__390",
+      "route": "/work#/project/support-continuity-system",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_support-continuity-system__768",
+      "route": "/work#/project/support-continuity-system",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "work__project_support-continuity-system__1440",
+      "route": "/work#/project/support-continuity-system",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "audit-missing-page__390",
+      "route": "/audit-missing-page",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "audit-missing-page__768",
+      "route": "/audit-missing-page",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "audit-missing-page__1440",
+      "route": "/audit-missing-page",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    }
+  ]
+}

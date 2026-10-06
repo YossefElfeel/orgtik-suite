@@ -1,0 +1,72 @@
+{
+  "Workspace": {
+    "switchLabel": "Espace de travail : {name}. Changer d'espace",
+    "yourWorkspaces": "Vos espaces de travail",
+    "roles": {
+      "owner": "Propriétaire",
+      "admin": "Administrateur",
+      "member": "Membre",
+      "guest": "Invité"
+    },
+    "nav": {
+      "tools": "Outils et formules",
+      "team": "Équipe",
+      "services": "Services",
+      "support": "Support",
+      "notifications": "Notifications",
+      "billingSection": "Facturation",
+      "subscriptions": "Abonnements",
+      "invoices": "Factures",
+      "paymentMethods": "Moyens de paiement",
+      "billingDetails": "Coordonnées de facturation",
+      "settingsSection": "Espace de travail",
+      "workspaceSettings": "Paramètres de l'espace",
+      "adminSection": "Administration OrgTik"
+    },
+    "banner": {
+      "suspended": {
+        "title": "Cet espace de travail est suspendu",
+        "body": "Rien ne peut être modifié avant sa réactivation. Contactez le support."
+      },
+      "read_only": {
+        "title": "{tool} est en lecture seule",
+        "body": "Le renouvellement n'a pas été payé : votre équipe peut consulter {tool} sans rien modifier. Payez pour le débloquer."
+      },
+      "payment_failed": {
+        "title": "Le renouvellement de {tool} a échoué",
+        "body": "Mettez à jour votre carte ou payez avant le {date} pour garder l'accès complet."
+      },
+      "trial_ending": {
+        "title": "Votre essai de {tool} se termine le {date}",
+        "body": "Choisissez une formule pour continuer sans interruption."
+      },
+      "beta_billing": {
+        "title": "{tool} est en bêta",
+        "body": "Les formules payantes commencent au lancement. Le code {coupon} offre une remise aux premiers utilisateurs."
+      },
+      "price_change": {
+        "title": "Le prix de {tool} change le {date}",
+        "body": "Votre prix actuel reste valable jusque-là. Voyez ce qui change."
+      },
+      "downgrade_scheduled": {
+        "title": "{tool} passe à une formule inférieure le {date}",
+        "body": "D'ici là, vous gardez tout ce que comprend votre formule actuelle."
+      },
+      "actions": {
+        "pay_now": "Payer maintenant",
+        "choose_plan": "Choisir une formule",
+        "view_plans": "Voir les formules",
+        "details": "Voir le détail",
+        "cancel_downgrade": "Garder ma formule",
+        "contact_support": "Contacter le support"
+      }
+    },
+    "gate": {
+      "title": "Cette page est réservée au rôle « {role} »",
+      "body": "Votre rôle dans {name} ne l'inclut pas. Demandez au propriétaire si vous en avez besoin.",
+      "toHome": "Retour à l'accueil",
+      "failedTitle": "Impossible de charger votre espace",
+      "failedBody": "Vérifiez votre connexion et réessayez."
+    }
+  }
+}

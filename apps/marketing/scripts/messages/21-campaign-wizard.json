@@ -1,0 +1,989 @@
+{
+ "CampaignWizard.newTitle": {
+  "en": "New campaign",
+  "ar": "حملة جديدة",
+  "de": "Neue Kampagne",
+  "fr": "Nouvelle campagne",
+  "it": "Nuova campagna"
+ },
+ "CampaignWizard.newDescription": {
+  "en": "Each step is saved when you press Next.",
+  "ar": "تُحفظ كل خطوة عند الضغط على التالي.",
+  "de": "Jeder Schritt wird gespeichert, wenn Sie auf Weiter klicken.",
+  "fr": "Chaque étape est enregistrée quand vous cliquez sur Suivant.",
+  "it": "Ogni passaggio viene salvato quando premi Avanti."
+ },
+ "CampaignWizard.editDescription": {
+  "en": "Editing a saved campaign. Each step is saved when you press Next.",
+  "ar": "تعديل حملة محفوظة. تُحفظ كل خطوة عند الضغط على التالي.",
+  "de": "Sie bearbeiten eine gespeicherte Kampagne. Jeder Schritt wird mit Weiter gespeichert.",
+  "fr": "Modification d’une campagne enregistrée. Chaque étape est enregistrée avec Suivant.",
+  "it": "Stai modificando una campagna salvata. Ogni passaggio viene salvato con Avanti."
+ },
+ "CampaignWizard.crumbCampaigns": {
+  "en": "Campaigns",
+  "ar": "الحملات",
+  "de": "Kampagnen",
+  "fr": "Campagnes",
+  "it": "Campagne"
+ },
+ "CampaignWizard.crumbNew": {
+  "en": "New campaign",
+  "ar": "حملة جديدة",
+  "de": "Neue Kampagne",
+  "fr": "Nouvelle campagne",
+  "it": "Nuova campagna"
+ },
+ "CampaignWizard.crumbEdit": {
+  "en": "Edit",
+  "ar": "تعديل",
+  "de": "Bearbeiten",
+  "fr": "Modifier",
+  "it": "Modifica"
+ },
+ "CampaignWizard.stepsLabel": {
+  "en": "Campaign steps",
+  "ar": "خطوات الحملة",
+  "de": "Schritte der Kampagne",
+  "fr": "Étapes de la campagne",
+  "it": "Passaggi della campagna"
+ },
+ "CampaignWizard.lockedHint": {
+  "en": "Save the earlier steps first",
+  "ar": "احفظ الخطوات السابقة أولًا",
+  "de": "Speichern Sie zuerst die vorherigen Schritte",
+  "fr": "Enregistrez d’abord les étapes précédentes",
+  "it": "Salva prima i passaggi precedenti"
+ },
+ "CampaignWizard.steps.details": {
+  "en": "Details",
+  "ar": "التفاصيل",
+  "de": "Details",
+  "fr": "Détails",
+  "it": "Dettagli"
+ },
+ "CampaignWizard.steps.settings": {
+  "en": "Settings",
+  "ar": "الإعدادات",
+  "de": "Einstellungen",
+  "fr": "Paramètres",
+  "it": "Impostazioni"
+ },
+ "CampaignWizard.steps.ad-groups": {
+  "en": "Ad groups",
+  "ar": "المجموعات الإعلانية",
+  "de": "Anzeigengruppen",
+  "fr": "Groupes d’annonces",
+  "it": "Gruppi di annunci"
+ },
+ "CampaignWizard.steps.ad-sets": {
+  "en": "Ad sets",
+  "ar": "مجموعات الإعلانات",
+  "de": "Anzeigensets",
+  "fr": "Ensembles d’annonces",
+  "it": "Set di annunci"
+ },
+ "CampaignWizard.steps.posts": {
+  "en": "Posts",
+  "ar": "المنشورات",
+  "de": "Beiträge",
+  "fr": "Publications",
+  "it": "Post"
+ },
+ "CampaignWizard.steps.audience": {
+  "en": "Audience",
+  "ar": "الجمهور",
+  "de": "Zielgruppe",
+  "fr": "Audience",
+  "it": "Pubblico"
+ },
+ "CampaignWizard.steps.message": {
+  "en": "Message",
+  "ar": "الرسالة",
+  "de": "Nachricht",
+  "fr": "Message",
+  "it": "Messaggio"
+ },
+ "CampaignWizard.steps.review": {
+  "en": "Review",
+  "ar": "المراجعة",
+  "de": "Prüfen",
+  "fr": "Vérification",
+  "it": "Revisione"
+ },
+ "CampaignWizard.next": {
+  "en": "Next",
+  "ar": "التالي",
+  "de": "Weiter",
+  "fr": "Suivant",
+  "it": "Avanti"
+ },
+ "CampaignWizard.back": {
+  "en": "Back",
+  "ar": "رجوع",
+  "de": "Zurück",
+  "fr": "Retour",
+  "it": "Indietro"
+ },
+ "CampaignWizard.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "CampaignWizard.keepEditing": {
+  "en": "Keep editing",
+  "ar": "متابعة التعديل",
+  "de": "Weiter bearbeiten",
+  "fr": "Continuer à modifier",
+  "it": "Continua a modificare"
+ },
+ "CampaignWizard.cancelTitle": {
+  "en": "Leave the campaign wizard?",
+  "ar": "هل تريد مغادرة معالج الحملة؟",
+  "de": "Den Kampagnen-Assistenten verlassen?",
+  "fr": "Quitter l’assistant de campagne ?",
+  "it": "Uscire dalla procedura della campagna?"
+ },
+ "CampaignWizard.cancelImpactSaved": {
+  "en": "Your draft is saved. You can continue it from the campaign's page.",
+  "ar": "مسودتك محفوظة. يمكنك متابعتها من صفحة الحملة.",
+  "de": "Ihr Entwurf ist gespeichert. Sie können ihn auf der Seite der Kampagne fortsetzen.",
+  "fr": "Votre brouillon est enregistré. Vous pouvez le reprendre depuis la page de la campagne.",
+  "it": "La bozza è salvata. Puoi riprenderla dalla pagina della campagna."
+ },
+ "CampaignWizard.cancelImpactSavedDirty": {
+  "en": "Your draft is saved up to the last step you finished. The changes on this step aren't saved.",
+  "ar": "مسودتك محفوظة حتى آخر خطوة أنهيتها. التغييرات في هذه الخطوة غير محفوظة.",
+  "de": "Ihr Entwurf ist bis zum zuletzt abgeschlossenen Schritt gespeichert. Die Änderungen in diesem Schritt sind nicht gespeichert.",
+  "fr": "Votre brouillon est enregistré jusqu’à la dernière étape terminée. Les modifications de cette étape ne le sont pas.",
+  "it": "La bozza è salvata fino all’ultimo passaggio completato. Le modifiche di questo passaggio non sono salvate."
+ },
+ "CampaignWizard.cancelImpactNew": {
+  "en": "Nothing is saved yet: the campaign is created when you press Next on Details.",
+  "ar": "لم يُحفظ شيء بعد: تُنشأ الحملة عند الضغط على التالي في التفاصيل.",
+  "de": "Noch ist nichts gespeichert: Die Kampagne entsteht, wenn Sie bei Details auf Weiter klicken.",
+  "fr": "Rien n’est encore enregistré : la campagne est créée quand vous cliquez sur Suivant dans Détails.",
+  "it": "Non è ancora salvato nulla: la campagna viene creata quando premi Avanti in Dettagli."
+ },
+ "CampaignWizard.cancelConfirm": {
+  "en": "Leave",
+  "ar": "مغادرة",
+  "de": "Verlassen",
+  "fr": "Quitter",
+  "it": "Esci"
+ },
+ "CampaignWizard.leave.title": {
+  "en": "Save your changes?",
+  "ar": "هل تريد حفظ تغييراتك؟",
+  "de": "Änderungen speichern?",
+  "fr": "Enregistrer vos modifications ?",
+  "it": "Salvare le modifiche?"
+ },
+ "CampaignWizard.leave.body": {
+  "en": "This step has changes that aren't saved yet.",
+  "ar": "في هذه الخطوة تغييرات لم تُحفظ بعد.",
+  "de": "Dieser Schritt hat noch nicht gespeicherte Änderungen.",
+  "fr": "Cette étape contient des modifications non enregistrées.",
+  "it": "Questo passaggio ha modifiche non ancora salvate."
+ },
+ "CampaignWizard.leave.save": {
+  "en": "Save and continue",
+  "ar": "حفظ ومتابعة",
+  "de": "Speichern und fortfahren",
+  "fr": "Enregistrer et continuer",
+  "it": "Salva e continua"
+ },
+ "CampaignWizard.leave.discard": {
+  "en": "Discard changes",
+  "ar": "تجاهل التغييرات",
+  "de": "Änderungen verwerfen",
+  "fr": "Ignorer les modifications",
+  "it": "Scarta le modifiche"
+ },
+ "CampaignWizard.leave.keepEditing": {
+  "en": "Keep editing",
+  "ar": "متابعة التعديل",
+  "de": "Weiter bearbeiten",
+  "fr": "Continuer à modifier",
+  "it": "Continua a modificare"
+ },
+ "CampaignWizard.noAccessTitle": {
+  "en": "You can't create or edit campaigns",
+  "ar": "لا يمكنك إنشاء الحملات أو تعديلها",
+  "de": "Sie können keine Kampagnen erstellen oder bearbeiten",
+  "fr": "Vous ne pouvez pas créer ni modifier de campagnes",
+  "it": "Non puoi creare né modificare campagne"
+ },
+ "CampaignWizard.noAccessBody": {
+  "en": "Your role can view campaigns. Ask a marketing manager to change your role.",
+  "ar": "يتيح لك دورك عرض الحملات فقط. اطلب من مدير التسويق تغيير دورك.",
+  "de": "Ihre Rolle kann Kampagnen ansehen. Bitten Sie eine Marketingleitung, Ihre Rolle zu ändern.",
+  "fr": "Votre rôle permet de consulter les campagnes. Demandez à un responsable marketing de le changer.",
+  "it": "Il tuo ruolo può vedere le campagne. Chiedi a un responsabile marketing di cambiarlo."
+ },
+ "CampaignWizard.noAccessReadOnly": {
+  "en": "You're viewing as someone else: nothing can be changed in this session.",
+  "ar": "أنت تعرض الصفحة بصفة شخص آخر: لا يمكن تغيير أي شيء في هذه الجلسة.",
+  "de": "Sie sehen die Ansicht einer anderen Person: In dieser Sitzung lässt sich nichts ändern.",
+  "fr": "Vous consultez en tant qu’une autre personne : rien ne peut être modifié dans cette session.",
+  "it": "Stai visualizzando come un’altra persona: in questa sessione non si può modificare nulla."
+ },
+ "CampaignWizard.backToCampaigns": {
+  "en": "Back to campaigns",
+  "ar": "العودة إلى الحملات",
+  "de": "Zurück zu den Kampagnen",
+  "fr": "Retour aux campagnes",
+  "it": "Torna alle campagne"
+ },
+ "CampaignWizard.notFoundTitle": {
+  "en": "This campaign doesn't exist",
+  "ar": "هذه الحملة غير موجودة",
+  "de": "Diese Kampagne gibt es nicht",
+  "fr": "Cette campagne n’existe pas",
+  "it": "Questa campagna non esiste"
+ },
+ "CampaignWizard.notFoundBody": {
+  "en": "It may have been deleted, or it belongs to another project. Start a new one from Campaigns.",
+  "ar": "ربما حُذفت أو أنها تتبع مشروعًا آخر. ابدأ حملة جديدة من الحملات.",
+  "de": "Sie wurde vielleicht gelöscht oder gehört zu einem anderen Projekt. Starten Sie eine neue unter Kampagnen.",
+  "fr": "Elle a peut-être été supprimée ou appartient à un autre projet. Créez-en une nouvelle depuis Campagnes.",
+  "it": "Potrebbe essere stata eliminata o appartenere a un altro progetto. Creane una nuova da Campagne."
+ },
+ "CampaignWizard.loadErrorTitle": {
+  "en": "Couldn't load this campaign",
+  "ar": "تعذّر تحميل هذه الحملة",
+  "de": "Diese Kampagne konnte nicht geladen werden",
+  "fr": "Impossible de charger cette campagne",
+  "it": "Impossibile caricare questa campagna"
+ },
+ "CampaignWizard.loadErrorBody": {
+  "en": "Check your connection and try again. Nothing was changed.",
+  "ar": "تحقّق من اتصالك وحاول مرة أخرى. لم يتغيّر شيء.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut. Nichts wurde geändert.",
+  "fr": "Vérifiez votre connexion et réessayez. Rien n’a été modifié.",
+  "it": "Controlla la connessione e riprova. Non è stato modificato nulla."
+ },
+ "CampaignWizard.startWithDetailsTitle": {
+  "en": "Start with the details",
+  "ar": "ابدأ بالتفاصيل",
+  "de": "Beginnen Sie mit den Details",
+  "fr": "Commencez par les détails",
+  "it": "Inizia dai dettagli"
+ },
+ "CampaignWizard.startWithDetailsBody": {
+  "en": "This step belongs to a saved campaign. Give the campaign a name and a type first.",
+  "ar": "هذه الخطوة تخصّ حملة محفوظة. أعطِ الحملة اسمًا ونوعًا أولًا.",
+  "de": "Dieser Schritt gehört zu einer gespeicherten Kampagne. Geben Sie ihr zuerst einen Namen und einen Typ.",
+  "fr": "Cette étape concerne une campagne enregistrée. Donnez d’abord un nom et un type à la campagne.",
+  "it": "Questo passaggio riguarda una campagna salvata. Dai prima un nome e un tipo alla campagna."
+ },
+ "CampaignWizard.goToDetails": {
+  "en": "Go to Details",
+  "ar": "الانتقال إلى التفاصيل",
+  "de": "Zu den Details",
+  "fr": "Aller aux détails",
+  "it": "Vai ai dettagli"
+ },
+ "CampaignWizard.loadingStep": {
+  "en": "Loading this step",
+  "ar": "جارٍ تحميل هذه الخطوة",
+  "de": "Schritt wird geladen",
+  "fr": "Chargement de l’étape",
+  "it": "Caricamento del passaggio"
+ },
+ "CampaignWizard.selected": {
+  "en": "Selected",
+  "ar": "محدّد",
+  "de": "Ausgewählt",
+  "fr": "Sélectionné",
+  "it": "Selezionato"
+ },
+ "CampaignWizard.addItem": {
+  "en": "Add",
+  "ar": "إضافة",
+  "de": "Hinzufügen",
+  "fr": "Ajouter",
+  "it": "Aggiungi"
+ },
+ "CampaignWizard.noMatch": {
+  "en": "Nothing matches",
+  "ar": "لا توجد نتائج مطابقة",
+  "de": "Keine Treffer",
+  "fr": "Aucun résultat",
+  "it": "Nessun risultato"
+ },
+ "CampaignWizard.tryAgainLater": {
+  "en": "Try again in a moment.",
+  "ar": "حاول مرة أخرى بعد قليل.",
+  "de": "Versuchen Sie es gleich noch einmal.",
+  "fr": "Réessayez dans un instant.",
+  "it": "Riprova tra poco."
+ },
+ "CampaignWizard.dateOf": {
+  "en": "{field}: date",
+  "ar": "{field}: التاريخ",
+  "de": "{field}: Datum",
+  "fr": "{field} : date",
+  "it": "{field}: data"
+ },
+ "CampaignWizard.timeOf": {
+  "en": "{field}: time",
+  "ar": "{field}: الوقت",
+  "de": "{field}: Uhrzeit",
+  "fr": "{field} : heure",
+  "it": "{field}: ora"
+ },
+ "CampaignWizard.clearDate": {
+  "en": "Clear {field}",
+  "ar": "مسح {field}",
+  "de": "{field} leeren",
+  "fr": "Effacer {field}",
+  "it": "Cancella {field}"
+ },
+ "CampaignWizard.schedule.title": {
+  "en": "Schedule",
+  "ar": "الجدول الزمني",
+  "de": "Zeitraum",
+  "fr": "Calendrier",
+  "it": "Programmazione"
+ },
+ "CampaignWizard.schedule.optionalHint": {
+  "en": "Leave it empty to start as soon as it's published, with no end.",
+  "ar": "اتركه فارغًا لتبدأ فور النشر دون موعد انتهاء.",
+  "de": "Leer lassen, um direkt nach dem Veröffentlichen ohne Ende zu starten.",
+  "fr": "Laissez vide pour démarrer dès la publication, sans fin.",
+  "it": "Lascia vuoto per partire alla pubblicazione, senza fine."
+ },
+ "CampaignWizard.schedule.start": {
+  "en": "Start",
+  "ar": "البداية",
+  "de": "Beginn",
+  "fr": "Début",
+  "it": "Inizio"
+ },
+ "CampaignWizard.schedule.end": {
+  "en": "End",
+  "ar": "النهاية",
+  "de": "Ende",
+  "fr": "Fin",
+  "it": "Fine"
+ },
+ "CampaignWizard.schedule.required": {
+  "en": "Choose a date and time",
+  "ar": "اختر تاريخًا ووقتًا",
+  "de": "Wählen Sie Datum und Uhrzeit",
+  "fr": "Choisissez une date et une heure",
+  "it": "Scegli data e ora"
+ },
+ "CampaignWizard.schedule.past": {
+  "en": "This time has passed. Choose a later one.",
+  "ar": "هذا الوقت قد مضى. اختر وقتًا لاحقًا.",
+  "de": "Dieser Zeitpunkt ist vorbei. Wählen Sie einen späteren.",
+  "fr": "Cette heure est passée. Choisissez-en une plus tardive.",
+  "it": "Questo orario è passato. Scegline uno successivo."
+ },
+ "CampaignWizard.schedule.beforeStart": {
+  "en": "The end must be after the start",
+  "ar": "يجب أن تكون النهاية بعد البداية",
+  "de": "Das Ende muss nach dem Beginn liegen",
+  "fr": "La fin doit être après le début",
+  "it": "La fine deve essere dopo l’inizio"
+ },
+ "CampaignWizard.audienceKeptUntilMessage": {
+  "en": "The audience is saved with the message, on the next step.",
+  "ar": "يُحفظ الجمهور مع الرسالة في الخطوة التالية.",
+  "de": "Die Zielgruppe wird im nächsten Schritt mit der Nachricht gespeichert.",
+  "fr": "L’audience est enregistrée avec le message, à l’étape suivante.",
+  "it": "Il pubblico viene salvato con il messaggio, al passaggio successivo."
+ },
+ "CampaignDetailsStep.title": {
+  "en": "Campaign details",
+  "ar": "تفاصيل الحملة",
+  "de": "Kampagnendetails",
+  "fr": "Détails de la campagne",
+  "it": "Dettagli della campagna"
+ },
+ "CampaignDetailsStep.description": {
+  "en": "Choose the type, then name the campaign.",
+  "ar": "اختر النوع ثم سمِّ الحملة.",
+  "de": "Wählen Sie den Typ und benennen Sie die Kampagne.",
+  "fr": "Choisissez le type, puis nommez la campagne.",
+  "it": "Scegli il tipo, poi dai un nome alla campagna."
+ },
+ "CampaignDetailsStep.typeLegend": {
+  "en": "Campaign type",
+  "ar": "نوع الحملة",
+  "de": "Kampagnentyp",
+  "fr": "Type de campagne",
+  "it": "Tipo di campagna"
+ },
+ "CampaignDetailsStep.name": {
+  "en": "Name",
+  "ar": "الاسم",
+  "de": "Name",
+  "fr": "Nom",
+  "it": "Nome"
+ },
+ "CampaignDetailsStep.namePlaceholder": {
+  "en": "e.g. Ramadan sale",
+  "ar": "مثال: تخفيضات رمضان",
+  "de": "z. B. Ramadan-Aktion",
+  "fr": "p. ex. Soldes du ramadan",
+  "it": "es. Saldi di Ramadan"
+ },
+ "CampaignDetailsStep.nameRequired": {
+  "en": "Give the campaign a name",
+  "ar": "أعطِ الحملة اسمًا",
+  "de": "Geben Sie der Kampagne einen Namen",
+  "fr": "Donnez un nom à la campagne",
+  "it": "Dai un nome alla campagna"
+ },
+ "CampaignDetailsStep.nameTooLong": {
+  "en": "Keep the name to 120 characters",
+  "ar": "اجعل الاسم 120 حرفًا على الأكثر",
+  "de": "Der Name darf höchstens 120 Zeichen haben",
+  "fr": "Le nom ne doit pas dépasser 120 caractères",
+  "it": "Il nome può avere al massimo 120 caratteri"
+ },
+ "CampaignDetailsStep.category": {
+  "en": "Category",
+  "ar": "الفئة",
+  "de": "Kategorie",
+  "fr": "Catégorie",
+  "it": "Categoria"
+ },
+ "CampaignDetailsStep.otherCategory": {
+  "en": "Other",
+  "ar": "أخرى",
+  "de": "Andere",
+  "fr": "Autre",
+  "it": "Altra"
+ },
+ "CampaignDetailsStep.otherCategoryLabel": {
+  "en": "Category name",
+  "ar": "اسم الفئة",
+  "de": "Name der Kategorie",
+  "fr": "Nom de la catégorie",
+  "it": "Nome della categoria"
+ },
+ "CampaignDetailsStep.otherCategoryRequired": {
+  "en": "Name the category, or pick one above",
+  "ar": "سمِّ الفئة أو اختر واحدة أعلاه",
+  "de": "Benennen Sie die Kategorie oder wählen Sie oben eine",
+  "fr": "Nommez la catégorie ou choisissez-en une ci-dessus",
+  "it": "Dai un nome alla categoria o scegline una sopra"
+ },
+ "CampaignDetailsStep.descriptionLabel": {
+  "en": "Description",
+  "ar": "الوصف",
+  "de": "Beschreibung",
+  "fr": "Description",
+  "it": "Descrizione"
+ },
+ "CampaignDetailsStep.descriptionPlaceholder": {
+  "en": "What is this campaign about?",
+  "ar": "ما موضوع هذه الحملة؟",
+  "de": "Worum geht es in dieser Kampagne?",
+  "fr": "De quoi parle cette campagne ?",
+  "it": "Di cosa tratta questa campagna?"
+ },
+ "CampaignDetailsStep.typeChangeTitle": {
+  "en": "Change it from {from} to {to}?",
+  "ar": "هل تريد تغييرها من {from} إلى {to}؟",
+  "de": "Von {from} zu {to} wechseln?",
+  "fr": "Passer de {from} à {to} ?",
+  "it": "Passare da {from} a {to}?"
+ },
+ "CampaignDetailsStep.typeChangeIntro": {
+  "en": "When you save, these parts of {name} are deleted:",
+  "ar": "عند الحفظ، تُحذف هذه الأجزاء من {name}:",
+  "de": "Beim Speichern werden diese Teile von {name} gelöscht:",
+  "fr": "À l’enregistrement, ces éléments de {name} sont supprimés :",
+  "it": "Al salvataggio, queste parti di {name} vengono eliminate:"
+ },
+ "CampaignDetailsStep.typeChangeKept": {
+  "en": "Its name, category, description and approvers are kept.",
+  "ar": "يُحتفظ باسمها وفئتها ووصفها ومراجعيها.",
+  "de": "Name, Kategorie, Beschreibung und Prüfer bleiben erhalten.",
+  "fr": "Son nom, sa catégorie, sa description et ses réviseurs sont conservés.",
+  "it": "Nome, categoria, descrizione e revisori restano."
+ },
+ "CampaignDetailsStep.lostSettings": {
+  "en": "Its settings: budget, schedule and targeting",
+  "ar": "إعداداتها: الميزانية والجدول الزمني والاستهداف",
+  "de": "Ihre Einstellungen: Budget, Zeitraum und Ausrichtung",
+  "fr": "Ses paramètres : budget, calendrier et ciblage",
+  "it": "Le impostazioni: budget, programmazione e targeting"
+ },
+ "CampaignDetailsStep.lostAdGroups": {
+  "en": "{count, plural, one {# ad group, with its keywords and ads} other {# ad groups, with their keywords and ads}}",
+  "ar": "{count, plural, zero {لا مجموعات إعلانية} one {مجموعة إعلانية واحدة بكلماتها المفتاحية وإعلاناتها} two {مجموعتان إعلانيتان بكلماتهما المفتاحية وإعلاناتهما} few {# مجموعات إعلانية بكلماتها المفتاحية وإعلاناتها} many {# مجموعة إعلانية بكلماتها المفتاحية وإعلاناتها} other {# مجموعة إعلانية بكلماتها المفتاحية وإعلاناتها}}",
+  "de": "{count, plural, one {# Anzeigengruppe mit Keywords und Anzeigen} other {# Anzeigengruppen mit Keywords und Anzeigen}}",
+  "fr": "{count, plural, one {# groupe d’annonces, avec ses mots clés et annonces} other {# groupes d’annonces, avec leurs mots clés et annonces}}",
+  "it": "{count, plural, one {# gruppo di annunci, con parole chiave e annunci} other {# gruppi di annunci, con parole chiave e annunci}}"
+ },
+ "CampaignDetailsStep.lostAdSets": {
+  "en": "{count, plural, one {# ad set, with its ads} other {# ad sets, with their ads}}",
+  "ar": "{count, plural, zero {لا مجموعات إعلانات} one {مجموعة إعلانات واحدة بإعلاناتها} two {مجموعتا إعلانات بإعلاناتهما} few {# مجموعات إعلانات بإعلاناتها} many {# مجموعة إعلانات بإعلاناتها} other {# مجموعة إعلانات بإعلاناتها}}",
+  "de": "{count, plural, one {# Anzeigenset mit seinen Anzeigen} other {# Anzeigensets mit ihren Anzeigen}}",
+  "fr": "{count, plural, one {# ensemble d’annonces, avec ses annonces} other {# ensembles d’annonces, avec leurs annonces}}",
+  "it": "{count, plural, one {# set di annunci, con i suoi annunci} other {# set di annunci, con i loro annunci}}"
+ },
+ "CampaignDetailsStep.lostPlatforms": {
+  "en": "{count, plural, one {# platform, with its posts} other {# platforms, with their posts}}",
+  "ar": "{count, plural, zero {لا منصات} one {منصة واحدة بمنشوراتها} two {منصتان بمنشوراتهما} few {# منصات بمنشوراتها} many {# منصة بمنشوراتها} other {# منصة بمنشوراتها}}",
+  "de": "{count, plural, one {# Plattform mit ihren Beiträgen} other {# Plattformen mit ihren Beiträgen}}",
+  "fr": "{count, plural, one {# plateforme, avec ses publications} other {# plateformes, avec leurs publications}}",
+  "it": "{count, plural, one {# piattaforma, con i suoi post} other {# piattaforme, con i loro post}}"
+ },
+ "CampaignDetailsStep.lostMessage": {
+  "en": "The audience and the message",
+  "ar": "الجمهور والرسالة",
+  "de": "Zielgruppe und Nachricht",
+  "fr": "L’audience et le message",
+  "it": "Il pubblico e il messaggio"
+ },
+ "CampaignDetailsStep.typeChangeConfirm": {
+  "en": "Change to {to}",
+  "ar": "التغيير إلى {to}",
+  "de": "Zu {to} wechseln",
+  "fr": "Passer à {to}",
+  "it": "Passa a {to}"
+ },
+ "CampaignDetailsStep.typeChangeKeep": {
+  "en": "Keep {from}",
+  "ar": "الإبقاء على {from}",
+  "de": "{from} behalten",
+  "fr": "Garder {from}",
+  "it": "Mantieni {from}"
+ },
+ "CampaignDetailsStep.typeChanged": {
+  "en": "The campaign is now {type}. Set up its steps again.",
+  "ar": "أصبحت الحملة من نوع {type}. أعِد إعداد خطواتها.",
+  "de": "Die Kampagne ist jetzt {type}. Richten Sie die Schritte neu ein.",
+  "fr": "La campagne est maintenant {type}. Configurez à nouveau ses étapes.",
+  "it": "Ora la campagna è {type}. Configura di nuovo i passaggi."
+ },
+ "CampaignReview.title": {
+  "en": "Review",
+  "ar": "المراجعة",
+  "de": "Prüfen",
+  "fr": "Vérification",
+  "it": "Revisione"
+ },
+ "CampaignReview.description": {
+  "en": "Check the campaign, choose who approves it, then publish or keep it as a draft.",
+  "ar": "راجع الحملة واختر من يوافق عليها، ثم انشرها أو احتفظ بها مسودة.",
+  "de": "Prüfen Sie die Kampagne, wählen Sie die Prüfer und veröffentlichen Sie sie oder behalten Sie sie als Entwurf.",
+  "fr": "Vérifiez la campagne, choisissez qui l’approuve, puis publiez-la ou gardez-la en brouillon.",
+  "it": "Controlla la campagna, scegli chi la approva, poi pubblicala o tienila come bozza."
+ },
+ "CampaignReview.missingTitle": {
+  "en": "{count, plural, one {One step isn't finished} other {# steps aren't finished}}",
+  "ar": "{count, plural, zero {كل الخطوات مكتملة} one {هناك خطوة غير مكتملة} two {هناك خطوتان غير مكتملتين} few {هناك # خطوات غير مكتملة} many {هناك # خطوة غير مكتملة} other {هناك # خطوة غير مكتملة}}",
+  "de": "{count, plural, one {Ein Schritt ist nicht fertig} other {# Schritte sind nicht fertig}}",
+  "fr": "{count, plural, one {Une étape n’est pas terminée} other {# étapes ne sont pas terminées}}",
+  "it": "{count, plural, one {Un passaggio non è completo} other {# passaggi non sono completi}}"
+ },
+ "CampaignReview.missingBody": {
+  "en": "You can save a draft now, and publish once these are done:",
+  "ar": "يمكنك حفظ مسودة الآن، والنشر بعد إكمال ما يلي:",
+  "de": "Sie können jetzt einen Entwurf speichern und veröffentlichen, sobald Folgendes erledigt ist:",
+  "fr": "Vous pouvez enregistrer un brouillon maintenant et publier une fois ces étapes terminées :",
+  "it": "Puoi salvare una bozza ora e pubblicare quando hai completato:"
+ },
+ "CampaignReview.finishStep": {
+  "en": "Finish {step}",
+  "ar": "إكمال {step}",
+  "de": "{step} abschließen",
+  "fr": "Terminer {step}",
+  "it": "Completa {step}"
+ },
+ "CampaignReview.category": {
+  "en": "Category",
+  "ar": "الفئة",
+  "de": "Kategorie",
+  "fr": "Catégorie",
+  "it": "Categoria"
+ },
+ "CampaignReview.descriptionLabel": {
+  "en": "Description",
+  "ar": "الوصف",
+  "de": "Beschreibung",
+  "fr": "Description",
+  "it": "Descrizione"
+ },
+ "CampaignReview.note": {
+  "en": "Note for the approvers",
+  "ar": "ملاحظة للمراجعين",
+  "de": "Hinweis für die Prüfer",
+  "fr": "Note pour les réviseurs",
+  "it": "Nota per i revisori"
+ },
+ "CampaignReview.noteHint": {
+  "en": "Saved with the campaign; the approvers see it.",
+  "ar": "تُحفظ مع الحملة ويراها المراجعون.",
+  "de": "Wird mit der Kampagne gespeichert; die Prüfer sehen ihn.",
+  "fr": "Enregistrée avec la campagne ; les réviseurs la voient.",
+  "it": "Salvata con la campagna; i revisori la vedono."
+ },
+ "CampaignReview.notePlaceholder": {
+  "en": "What should the approvers look at?",
+  "ar": "ما الذي يجب أن ينتبه إليه المراجعون؟",
+  "de": "Worauf sollen die Prüfer achten?",
+  "fr": "Sur quoi les réviseurs doivent-ils se pencher ?",
+  "it": "A cosa devono fare attenzione i revisori?"
+ },
+ "CampaignReview.saveDraft": {
+  "en": "Save as draft",
+  "ar": "حفظ كمسودة",
+  "de": "Als Entwurf speichern",
+  "fr": "Enregistrer comme brouillon",
+  "it": "Salva come bozza"
+ },
+ "CampaignReview.publish": {
+  "en": "Publish",
+  "ar": "نشر",
+  "de": "Veröffentlichen",
+  "fr": "Publier",
+  "it": "Pubblica"
+ },
+ "CampaignReview.sendForApproval": {
+  "en": "{count, plural, one {Send for approval} other {Send to # approvers}}",
+  "ar": "{count, plural, zero {إرسال للموافقة} one {إرسال للموافقة} two {إرسال إلى مراجعَين} few {إرسال إلى # مراجعين} many {إرسال إلى # مراجعًا} other {إرسال إلى # مراجع}}",
+  "de": "{count, plural, one {Zur Freigabe senden} other {An # Prüfer senden}}",
+  "fr": "{count, plural, one {Envoyer pour approbation} other {Envoyer à # réviseurs}}",
+  "it": "{count, plural, one {Invia per approvazione} other {Invia a # revisori}}"
+ },
+ "CampaignReview.draftSaved": {
+  "en": "{name} is saved as a draft",
+  "ar": "حُفظت {name} كمسودة",
+  "de": "{name} ist als Entwurf gespeichert",
+  "fr": "{name} est enregistrée comme brouillon",
+  "it": "{name} è salvata come bozza"
+ },
+ "CampaignReview.whatHappensApproval": {
+  "en": "{count, plural, one {The approver is asked first. It goes live on its schedule once they approve.} other {The # approvers are asked first. It goes live on its schedule once all of them approve.}}",
+  "ar": "{count, plural, zero {ستبدأ في موعدها.} one {سيُطلب رأي المراجع أولًا. ستبدأ في موعدها بعد موافقته.} two {سيُطلب رأي المراجعَين أولًا. ستبدأ في موعدها بعد موافقتهما.} few {سيُطلب رأي المراجعين الـ# أولًا. ستبدأ في موعدها بعد موافقتهم جميعًا.} many {سيُطلب رأي الـ# مراجعًا أولًا. ستبدأ في موعدها بعد موافقتهم جميعًا.} other {سيُطلب رأي الـ# مراجع أولًا. ستبدأ في موعدها بعد موافقتهم جميعًا.}}",
+  "de": "{count, plural, one {Zuerst wird der Prüfer gefragt. Nach der Freigabe startet sie zum geplanten Zeitpunkt.} other {Zuerst werden die # Prüfer gefragt. Wenn alle freigegeben haben, startet sie zum geplanten Zeitpunkt.}}",
+  "fr": "{count, plural, one {Le réviseur est d’abord sollicité. Elle démarre à la date prévue après son approbation.} other {Les # réviseurs sont d’abord sollicités. Elle démarre à la date prévue quand tous ont approuvé.}}",
+  "it": "{count, plural, one {Prima viene chiesto al revisore. Parte alla data prevista dopo l’approvazione.} other {Prima viene chiesto ai # revisori. Parte alla data prevista quando tutti hanno approvato.}}"
+ },
+ "CampaignReview.whatHappensScheduled": {
+  "en": "Once published, it starts on {start}.",
+  "ar": "بعد النشر، تبدأ في {start}.",
+  "de": "Nach dem Veröffentlichen startet sie am {start}.",
+  "fr": "Une fois publiée, elle démarre le {start}.",
+  "it": "Una volta pubblicata, parte il {start}."
+ },
+ "CampaignReview.whatHappensNow": {
+  "en": "Once published, it starts right away.",
+  "ar": "بعد النشر، تبدأ فورًا.",
+  "de": "Nach dem Veröffentlichen startet sie sofort.",
+  "fr": "Une fois publiée, elle démarre aussitôt.",
+  "it": "Una volta pubblicata, parte subito."
+ },
+ "CampaignReview.confirmTitle": {
+  "en": "Publish {name}?",
+  "ar": "هل تريد نشر {name}؟",
+  "de": "{name} veröffentlichen?",
+  "fr": "Publier {name} ?",
+  "it": "Pubblicare {name}?"
+ },
+ "CampaignReview.confirmSpend": {
+  "en": "It starts spending {budget} on the ad account.",
+  "ar": "ستبدأ بإنفاق {budget} من الحساب الإعلاني.",
+  "de": "Sie beginnt, {budget} über das Werbekonto auszugeben.",
+  "fr": "Elle commence à dépenser {budget} sur le compte publicitaire.",
+  "it": "Inizia a spendere {budget} sull’account pubblicitario."
+ },
+ "CampaignReview.confirmPublish": {
+  "en": "Publish campaign",
+  "ar": "نشر الحملة",
+  "de": "Kampagne veröffentlichen",
+  "fr": "Publier la campagne",
+  "it": "Pubblica campagna"
+ },
+ "CampaignSummary.settings": {
+  "en": "Settings",
+  "ar": "الإعدادات",
+  "de": "Einstellungen",
+  "fr": "Paramètres",
+  "it": "Impostazioni"
+ },
+ "CampaignSummary.objective": {
+  "en": "Objective",
+  "ar": "الهدف",
+  "de": "Ziel",
+  "fr": "Objectif",
+  "it": "Obiettivo"
+ },
+ "CampaignSummary.budget": {
+  "en": "Budget",
+  "ar": "الميزانية",
+  "de": "Budget",
+  "fr": "Budget",
+  "it": "Budget"
+ },
+ "CampaignSummary.budgetDaily": {
+  "en": "{amount} a day",
+  "ar": "{amount} يوميًا",
+  "de": "{amount} pro Tag",
+  "fr": "{amount} par jour",
+  "it": "{amount} al giorno"
+ },
+ "CampaignSummary.budgetLifetime": {
+  "en": "{amount} in total",
+  "ar": "{amount} إجمالًا",
+  "de": "{amount} insgesamt",
+  "fr": "{amount} au total",
+  "it": "{amount} in totale"
+ },
+ "CampaignSummary.bidding": {
+  "en": "Bidding",
+  "ar": "عروض الأسعار",
+  "de": "Gebotsstrategie",
+  "fr": "Enchères",
+  "it": "Offerte"
+ },
+ "CampaignSummary.networks": {
+  "en": "Networks",
+  "ar": "الشبكات",
+  "de": "Netzwerke",
+  "fr": "Réseaux",
+  "it": "Reti"
+ },
+ "CampaignSummary.locations": {
+  "en": "Locations",
+  "ar": "المواقع",
+  "de": "Standorte",
+  "fr": "Zones",
+  "it": "Località"
+ },
+ "CampaignSummary.languages": {
+  "en": "Languages",
+  "ar": "اللغات",
+  "de": "Sprachen",
+  "fr": "Langues",
+  "it": "Lingue"
+ },
+ "CampaignSummary.schedule": {
+  "en": "Schedule",
+  "ar": "الجدول الزمني",
+  "de": "Zeitraum",
+  "fr": "Calendrier",
+  "it": "Programmazione"
+ },
+ "CampaignSummary.scheduleRange": {
+  "en": "{start} to {end}",
+  "ar": "من {start} إلى {end}",
+  "de": "{start} bis {end}",
+  "fr": "Du {start} au {end}",
+  "it": "Dal {start} al {end}"
+ },
+ "CampaignSummary.scheduleFrom": {
+  "en": "From {start}",
+  "ar": "من {start}",
+  "de": "Ab {start}",
+  "fr": "À partir du {start}",
+  "it": "Dal {start}"
+ },
+ "CampaignSummary.scheduleUntil": {
+  "en": "Until {end}",
+  "ar": "حتى {end}",
+  "de": "Bis {end}",
+  "fr": "Jusqu’au {end}",
+  "it": "Fino al {end}"
+ },
+ "CampaignSummary.noSchedule": {
+  "en": "Starts when published, no end",
+  "ar": "تبدأ عند النشر دون نهاية",
+  "de": "Startet beim Veröffentlichen, ohne Ende",
+  "fr": "Démarre à la publication, sans fin",
+  "it": "Parte alla pubblicazione, senza fine"
+ },
+ "CampaignSummary.adGroups": {
+  "en": "{count, plural, one {# ad group} other {# ad groups}}",
+  "ar": "{count, plural, zero {لا مجموعات إعلانية} one {مجموعة إعلانية واحدة} two {مجموعتان إعلانيتان} few {# مجموعات إعلانية} many {# مجموعة إعلانية} other {# مجموعة إعلانية}}",
+  "de": "{count, plural, one {# Anzeigengruppe} other {# Anzeigengruppen}}",
+  "fr": "{count, plural, one {# groupe d’annonces} other {# groupes d’annonces}}",
+  "it": "{count, plural, one {# gruppo di annunci} other {# gruppi di annunci}}"
+ },
+ "CampaignSummary.noAdGroups": {
+  "en": "No ad groups yet.",
+  "ar": "لا توجد مجموعات إعلانية بعد.",
+  "de": "Noch keine Anzeigengruppen.",
+  "fr": "Aucun groupe d’annonces pour l’instant.",
+  "it": "Ancora nessun gruppo di annunci."
+ },
+ "CampaignSummary.keywords": {
+  "en": "Keywords",
+  "ar": "الكلمات المفتاحية",
+  "de": "Keywords",
+  "fr": "Mots clés",
+  "it": "Parole chiave"
+ },
+ "CampaignSummary.keywordsCount": {
+  "en": "{count, plural, one {# keyword} other {# keywords}}",
+  "ar": "{count, plural, zero {لا كلمات مفتاحية} one {كلمة مفتاحية واحدة} two {كلمتان مفتاحيتان} few {# كلمات مفتاحية} many {# كلمة مفتاحية} other {# كلمة مفتاحية}}",
+  "de": "{count, plural, one {# Keyword} other {# Keywords}}",
+  "fr": "{count, plural, one {# mot clé} other {# mots clés}}",
+  "it": "{count, plural, one {# parola chiave} other {# parole chiave}}"
+ },
+ "CampaignSummary.bid": {
+  "en": "default bid {amount}",
+  "ar": "عرض السعر الافتراضي {amount}",
+  "de": "Standardgebot {amount}",
+  "fr": "enchère par défaut {amount}",
+  "it": "offerta predefinita {amount}"
+ },
+ "CampaignSummary.adSummary": {
+  "en": "{headlines, plural, one {# headline} other {# headlines}} · {descriptions, plural, one {# description} other {# descriptions}}",
+  "ar": "{headlines, plural, zero {لا عناوين} one {عنوان واحد} two {عنوانان} few {# عناوين} many {# عنوانًا} other {# عنوان}} · {descriptions, plural, zero {لا أوصاف} one {وصف واحد} two {وصفان} few {# أوصاف} many {# وصفًا} other {# وصف}}",
+  "de": "{headlines, plural, one {# Anzeigentitel} other {# Anzeigentitel}} · {descriptions, plural, one {# Beschreibung} other {# Beschreibungen}}",
+  "fr": "{headlines, plural, one {# titre} other {# titres}} · {descriptions, plural, one {# description} other {# descriptions}}",
+  "it": "{headlines, plural, one {# titolo} other {# titoli}} · {descriptions, plural, one {# descrizione} other {# descrizioni}}"
+ },
+ "CampaignSummary.previewAd": {
+  "en": "Preview {name}",
+  "ar": "معاينة {name}",
+  "de": "Vorschau von {name}",
+  "fr": "Aperçu de {name}",
+  "it": "Anteprima di {name}"
+ },
+ "CampaignSummary.audience": {
+  "en": "Audience",
+  "ar": "الجمهور",
+  "de": "Zielgruppe",
+  "fr": "Audience",
+  "it": "Pubblico"
+ },
+ "CampaignSummary.ages": {
+  "en": "Ages {min}–{max}",
+  "ar": "الأعمار {min}–{max}",
+  "de": "Alter {min}–{max}",
+  "fr": "{min}–{max} ans",
+  "it": "Età {min}–{max}"
+ },
+ "CampaignSummary.adSets": {
+  "en": "{count, plural, one {# ad set} other {# ad sets}}",
+  "ar": "{count, plural, zero {لا مجموعات إعلانات} one {مجموعة إعلانات واحدة} two {مجموعتا إعلانات} few {# مجموعات إعلانات} many {# مجموعة إعلانات} other {# مجموعة إعلانات}}",
+  "de": "{count, plural, one {# Anzeigenset} other {# Anzeigensets}}",
+  "fr": "{count, plural, one {# ensemble d’annonces} other {# ensembles d’annonces}}",
+  "it": "{count, plural, one {# set di annunci} other {# set di annunci}}"
+ },
+ "CampaignSummary.noAdSets": {
+  "en": "No ad sets yet.",
+  "ar": "لا توجد مجموعات إعلانات بعد.",
+  "de": "Noch keine Anzeigensets.",
+  "fr": "Aucun ensemble d’annonces pour l’instant.",
+  "it": "Ancora nessun set di annunci."
+ },
+ "CampaignSummary.adsCount": {
+  "en": "{count, plural, one {# ad} other {# ads}}",
+  "ar": "{count, plural, zero {لا إعلانات} one {إعلان واحد} two {إعلانان} few {# إعلانات} many {# إعلانًا} other {# إعلان}}",
+  "de": "{count, plural, one {# Anzeige} other {# Anzeigen}}",
+  "fr": "{count, plural, one {# annonce} other {# annonces}}",
+  "it": "{count, plural, one {# annuncio} other {# annunci}}"
+ },
+ "CampaignSummary.ownBudget": {
+  "en": "Own budget: {budget}",
+  "ar": "ميزانية خاصة: {budget}",
+  "de": "Eigenes Budget: {budget}",
+  "fr": "Budget propre : {budget}",
+  "it": "Budget proprio: {budget}"
+ },
+ "CampaignSummary.ownAudience": {
+  "en": "Own audience: {audience}",
+  "ar": "جمهور خاص: {audience}",
+  "de": "Eigene Zielgruppe: {audience}",
+  "fr": "Audience propre : {audience}",
+  "it": "Pubblico proprio: {audience}"
+ },
+ "CampaignSummary.ownSchedule": {
+  "en": "Own schedule: {schedule}",
+  "ar": "جدول زمني خاص: {schedule}",
+  "de": "Eigener Zeitraum: {schedule}",
+  "fr": "Calendrier propre : {schedule}",
+  "it": "Programmazione propria: {schedule}"
+ },
+ "CampaignSummary.usesCampaignSettings": {
+  "en": "Uses the campaign's budget, audience and schedule.",
+  "ar": "تستخدم ميزانية الحملة وجمهورها وجدولها الزمني.",
+  "de": "Nutzt Budget, Zielgruppe und Zeitraum der Kampagne.",
+  "fr": "Utilise le budget, l’audience et le calendrier de la campagne.",
+  "it": "Usa budget, pubblico e programmazione della campagna."
+ },
+ "CampaignSummary.platforms": {
+  "en": "{count, plural, one {# platform} other {# platforms}}",
+  "ar": "{count, plural, zero {لا منصات} one {منصة واحدة} two {منصتان} few {# منصات} many {# منصة} other {# منصة}}",
+  "de": "{count, plural, one {# Plattform} other {# Plattformen}}",
+  "fr": "{count, plural, one {# plateforme} other {# plateformes}}",
+  "it": "{count, plural, one {# piattaforma} other {# piattaforme}}"
+ },
+ "CampaignSummary.noPlatforms": {
+  "en": "No platforms yet.",
+  "ar": "لا توجد منصات بعد.",
+  "de": "Noch keine Plattformen.",
+  "fr": "Aucune plateforme pour l’instant.",
+  "it": "Ancora nessuna piattaforma."
+ },
+ "CampaignSummary.postsCount": {
+  "en": "{count, plural, one {# post} other {# posts}}",
+  "ar": "{count, plural, zero {لا منشورات} one {منشور واحد} two {منشوران} few {# منشورات} many {# منشورًا} other {# منشور}}",
+  "de": "{count, plural, one {# Beitrag} other {# Beiträge}}",
+  "fr": "{count, plural, one {# publication} other {# publications}}",
+  "it": "{count, plural, one {# post} other {# post}}"
+ },
+ "CampaignSummary.message": {
+  "en": "Message",
+  "ar": "الرسالة",
+  "de": "Nachricht",
+  "fr": "Message",
+  "it": "Messaggio"
+ },
+ "CampaignSummary.previewMessage": {
+  "en": "Preview message",
+  "ar": "معاينة الرسالة",
+  "de": "Nachricht ansehen",
+  "fr": "Aperçu du message",
+  "it": "Anteprima del messaggio"
+ },
+ "CampaignSummary.channel": {
+  "en": "Channel",
+  "ar": "القناة",
+  "de": "Kanal",
+  "fr": "Canal",
+  "it": "Canale"
+ },
+ "CampaignSummary.sender": {
+  "en": "Sent from",
+  "ar": "يُرسل من",
+  "de": "Absender",
+  "fr": "Expéditeur",
+  "it": "Mittente"
+ },
+ "CampaignSummary.template": {
+  "en": "Template",
+  "ar": "القالب",
+  "de": "Vorlage",
+  "fr": "Modèle",
+  "it": "Modello"
+ },
+ "CampaignSummary.sendTime": {
+  "en": "Sends",
+  "ar": "موعد الإرسال",
+  "de": "Versand",
+  "fr": "Envoi",
+  "it": "Invio"
+ },
+ "CampaignSummary.noSendTime": {
+  "en": "Not scheduled yet",
+  "ar": "لم يُجدول بعد",
+  "de": "Noch nicht geplant",
+  "fr": "Pas encore planifié",
+  "it": "Non ancora programmato"
+ }
+}

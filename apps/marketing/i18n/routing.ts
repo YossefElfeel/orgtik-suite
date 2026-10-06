@@ -1,0 +1,12 @@
+import { defineRouting } from "next-intl/routing";
+import { createNavigation } from "next-intl/navigation";
+
+export const routing = defineRouting({
+  // The suite's five languages (D-001); Arabic reads right to left (MKT-023).
+  locales: ["en", "ar", "de", "fr", "it"],
+  defaultLocale: "en",
+  localePrefix: "always",
+});
+
+export const { Link, redirect, usePathname, useRouter, getPathname } = createNavigation(routing);
+export type Locale = (typeof routing)["locales"][number];

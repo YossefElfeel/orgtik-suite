@@ -1,0 +1,104 @@
+[
+  {
+    "title": "A lead moves through the pipeline; personal data is for those allowed",
+    "ok": true,
+    "passed": 6,
+    "steps": 6,
+    "detail": [
+      {
+        "name": "editor-sees-masked",
+        "ok": true,
+        "note": "names masked, no actions, export without emails"
+      },
+      {
+        "name": "contact-qualify-quote",
+        "ok": true,
+        "note": "submitted → contact → qualify → quote"
+      },
+      {
+        "name": "owner-and-note",
+        "ok": true,
+        "note": "owner Dina Fathy, 1 note"
+      },
+      {
+        "name": "lose-needs-reason",
+        "ok": true,
+        "note": "confirm disabled without reason: true"
+      },
+      {
+        "name": "erase-personal-data",
+        "ok": true,
+        "note": "erased and recorded in the audit log"
+      },
+      {
+        "name": "no-errors",
+        "ok": true,
+        "note": "clean"
+      }
+    ]
+  },
+  {
+    "title": "A translation is reviewed by someone else before it goes live",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "translate-and-submit",
+        "ok": true,
+        "note": "ar needs_review; the translator sees 0 approve buttons"
+      },
+      {
+        "name": "matrix-to-review",
+        "ok": true,
+        "note": "ar published"
+      }
+    ]
+  },
+  {
+    "title": "An approved change publishes itself at its time; an old version comes back as a draft",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "schedule",
+        "ok": true,
+        "note": "scheduled for 2026-10-05T20:59:00.000Z"
+      },
+      {
+        "name": "publishes-at-its-time",
+        "ok": true,
+        "note": "after a day: published; versions scheduler, Karim Hassan, Karim Hassan"
+      },
+      {
+        "name": "restore-old-version",
+        "ok": true,
+        "note": "draft from v1; the change shown as 3 marks"
+      }
+    ]
+  },
+  {
+    "title": "Site settings: the dated privacy policy permits local mock form activation",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "dated-policy-allows-local-forms",
+        "ok": true,
+        "note": "The 0.2 policy is dated 2026-10-05; only the isolated mock is activated."
+      },
+      {
+        "name": "title-template-saved",
+        "ok": true,
+        "note": "{page} · OrgTik"
+      },
+      {
+        "name": "no-errors",
+        "ok": true,
+        "note": "clean"
+      }
+    ]
+  }
+]

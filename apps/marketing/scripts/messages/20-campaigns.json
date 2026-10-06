@@ -1,0 +1,737 @@
+{
+ "Campaigns.title": {
+  "en": "Campaigns",
+  "ar": "الحملات",
+  "de": "Kampagnen",
+  "fr": "Campagnes",
+  "it": "Campagne"
+ },
+ "Campaigns.description": {
+  "en": "Plan, approve and run the project's campaigns.",
+  "ar": "خطّط لحملات المشروع واعتمدها وشغّلها.",
+  "de": "Kampagnen des Projekts planen, freigeben und ausführen.",
+  "fr": "Planifiez, approuvez et lancez les campagnes du projet.",
+  "it": "Pianifica, approva ed esegui le campagne del progetto."
+ },
+ "Campaigns.create": {
+  "en": "New campaign",
+  "ar": "حملة جديدة",
+  "de": "Neue Kampagne",
+  "fr": "Nouvelle campagne",
+  "it": "Nuova campagna"
+ },
+ "Campaigns.search": {
+  "en": "Search campaigns",
+  "ar": "ابحث في الحملات",
+  "de": "Kampagnen durchsuchen",
+  "fr": "Rechercher des campagnes",
+  "it": "Cerca campagne"
+ },
+ "Campaigns.filterType": {
+  "en": "Type",
+  "ar": "النوع",
+  "de": "Typ",
+  "fr": "Type",
+  "it": "Tipo"
+ },
+ "Campaigns.filterStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Campaigns.allTypes": {
+  "en": "All types",
+  "ar": "كل الأنواع",
+  "de": "Alle Typen",
+  "fr": "Tous les types",
+  "it": "Tutti i tipi"
+ },
+ "Campaigns.allStatuses": {
+  "en": "All statuses",
+  "ar": "كل الحالات",
+  "de": "Alle Status",
+  "fr": "Tous les statuts",
+  "it": "Tutti gli stati"
+ },
+ "Campaigns.colName": {
+  "en": "Campaign",
+  "ar": "الحملة",
+  "de": "Kampagne",
+  "fr": "Campagne",
+  "it": "Campagna"
+ },
+ "Campaigns.colSchedule": {
+  "en": "Schedule",
+  "ar": "الجدول الزمني",
+  "de": "Zeitraum",
+  "fr": "Calendrier",
+  "it": "Programmazione"
+ },
+ "Campaigns.colStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Campaigns.colApproval": {
+  "en": "Approval",
+  "ar": "الموافقة",
+  "de": "Freigabe",
+  "fr": "Approbation",
+  "it": "Approvazione"
+ },
+ "Campaigns.colUpdated": {
+  "en": "Updated",
+  "ar": "آخر تحديث",
+  "de": "Aktualisiert",
+  "fr": "Mise à jour",
+  "it": "Aggiornata"
+ },
+ "Campaigns.colActions": {
+  "en": "Actions",
+  "ar": "الإجراءات",
+  "de": "Aktionen",
+  "fr": "Actions",
+  "it": "Azioni"
+ },
+ "Campaigns.noSchedule": {
+  "en": "Not scheduled",
+  "ar": "غير مجدولة",
+  "de": "Nicht geplant",
+  "fr": "Non planifiée",
+  "it": "Non programmata"
+ },
+ "Campaigns.range": {
+  "en": "{start} – {end}",
+  "ar": "{start} – {end}",
+  "de": "{start} – {end}",
+  "fr": "{start} – {end}",
+  "it": "{start} – {end}"
+ },
+ "Campaigns.from": {
+  "en": "From {start}",
+  "ar": "من {start}",
+  "de": "Ab {start}",
+  "fr": "À partir du {start}",
+  "it": "Dal {start}"
+ },
+ "Campaigns.until": {
+  "en": "Until {end}",
+  "ar": "حتى {end}",
+  "de": "Bis {end}",
+  "fr": "Jusqu’au {end}",
+  "it": "Fino al {end}"
+ },
+ "Campaigns.actionsFor": {
+  "en": "Actions for {name}",
+  "ar": "إجراءات {name}",
+  "de": "Aktionen für {name}",
+  "fr": "Actions pour {name}",
+  "it": "Azioni per {name}"
+ },
+ "Campaigns.open": {
+  "en": "Open",
+  "ar": "فتح",
+  "de": "Öffnen",
+  "fr": "Ouvrir",
+  "it": "Apri"
+ },
+ "Campaigns.edit": {
+  "en": "Edit",
+  "ar": "تعديل",
+  "de": "Bearbeiten",
+  "fr": "Modifier",
+  "it": "Modifica"
+ },
+ "Campaigns.continueSetup": {
+  "en": "Continue setup",
+  "ar": "متابعة الإعداد",
+  "de": "Einrichtung fortsetzen",
+  "fr": "Continuer la configuration",
+  "it": "Continua la configurazione"
+ },
+ "Campaigns.delete": {
+  "en": "Delete",
+  "ar": "حذف",
+  "de": "Löschen",
+  "fr": "Supprimer",
+  "it": "Elimina"
+ },
+ "Campaigns.deleteTitle": {
+  "en": "Delete {name}?",
+  "ar": "هل تريد حذف {name}؟",
+  "de": "{name} löschen?",
+  "fr": "Supprimer {name} ?",
+  "it": "Eliminare {name}?"
+ },
+ "Campaigns.deleteImpact": {
+  "en": "The campaign, its settings, ad sets and comments are deleted. Its posts stay in Posts.",
+  "ar": "ستُحذف الحملة وإعداداتها ومجموعات إعلاناتها وتعليقاتها. تبقى منشوراتها في المنشورات.",
+  "de": "Die Kampagne, ihre Einstellungen, Anzeigengruppen und Kommentare werden gelöscht. Ihre Beiträge bleiben unter Beiträge.",
+  "fr": "La campagne, ses paramètres, ses ensembles d’annonces et ses commentaires sont supprimés. Ses publications restent dans Publications.",
+  "it": "La campagna, le sue impostazioni, i gruppi di annunci e i commenti vengono eliminati. I suoi post restano in Post."
+ },
+ "Campaigns.deleteImpactLive": {
+  "en": "This campaign is live. Deleting it stops it, and its settings, ad sets and comments are deleted. Its posts stay in Posts.",
+  "ar": "هذه الحملة قيد التشغيل. حذفها يوقفها، وتُحذف إعداداتها ومجموعات إعلاناتها وتعليقاتها. تبقى منشوراتها في المنشورات.",
+  "de": "Diese Kampagne läuft. Beim Löschen endet sie, und ihre Einstellungen, Anzeigengruppen und Kommentare werden gelöscht. Ihre Beiträge bleiben unter Beiträge.",
+  "fr": "Cette campagne est en ligne. La supprimer l’arrête, et ses paramètres, ensembles d’annonces et commentaires sont supprimés. Ses publications restent dans Publications.",
+  "it": "Questa campagna è attiva. Eliminarla la interrompe e ne elimina impostazioni, gruppi di annunci e commenti. I suoi post restano in Post."
+ },
+ "Campaigns.deleteConfirm": {
+  "en": "Delete campaign",
+  "ar": "حذف الحملة",
+  "de": "Kampagne löschen",
+  "fr": "Supprimer la campagne",
+  "it": "Elimina campagna"
+ },
+ "Campaigns.keep": {
+  "en": "Keep it",
+  "ar": "الإبقاء عليها",
+  "de": "Behalten",
+  "fr": "La garder",
+  "it": "Mantienila"
+ },
+ "Campaigns.emptyTitle": {
+  "en": "No campaigns yet",
+  "ar": "لا توجد حملات بعد",
+  "de": "Noch keine Kampagnen",
+  "fr": "Aucune campagne pour l’instant",
+  "it": "Ancora nessuna campagna"
+ },
+ "Campaigns.emptyBody": {
+  "en": "Create a campaign to run ads, organise posts or send messages.",
+  "ar": "أنشئ حملة لتشغيل الإعلانات أو تنظيم المنشورات أو إرسال الرسائل.",
+  "de": "Erstellen Sie eine Kampagne, um Anzeigen zu schalten, Beiträge zu bündeln oder Nachrichten zu senden.",
+  "fr": "Créez une campagne pour diffuser des annonces, organiser des publications ou envoyer des messages.",
+  "it": "Crea una campagna per pubblicare annunci, organizzare post o inviare messaggi."
+ },
+ "Campaigns.emptyBodyViewer": {
+  "en": "Campaigns created for this project appear here.",
+  "ar": "تظهر هنا الحملات التي تُنشأ لهذا المشروع.",
+  "de": "Kampagnen dieses Projekts erscheinen hier.",
+  "fr": "Les campagnes créées pour ce projet apparaissent ici.",
+  "it": "Qui compaiono le campagne create per questo progetto."
+ },
+ "Campaigns.noMatchTitle": {
+  "en": "No campaigns match",
+  "ar": "لا توجد حملات مطابقة",
+  "de": "Keine passenden Kampagnen",
+  "fr": "Aucune campagne ne correspond",
+  "it": "Nessuna campagna corrisponde"
+ },
+ "Campaigns.noMatchBody": {
+  "en": "Try other words or clear the filters.",
+  "ar": "جرّب كلمات أخرى أو امسح عوامل التصفية.",
+  "de": "Versuchen Sie andere Wörter oder setzen Sie die Filter zurück.",
+  "fr": "Essayez d’autres mots ou effacez les filtres.",
+  "it": "Prova altre parole o cancella i filtri."
+ },
+ "Campaigns.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella i filtri"
+ },
+ "Campaigns.errorTitle": {
+  "en": "Couldn't load campaigns",
+  "ar": "تعذّر تحميل الحملات",
+  "de": "Kampagnen konnten nicht geladen werden",
+  "fr": "Impossible de charger les campagnes",
+  "it": "Impossibile caricare le campagne"
+ },
+ "Campaigns.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقّق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "CampaignDetails.crumbCampaigns": {
+  "en": "Campaigns",
+  "ar": "الحملات",
+  "de": "Kampagnen",
+  "fr": "Campagnes",
+  "it": "Campagne"
+ },
+ "CampaignDetails.loading": {
+  "en": "Loading the campaign",
+  "ar": "جارٍ تحميل الحملة",
+  "de": "Kampagne wird geladen",
+  "fr": "Chargement de la campagne",
+  "it": "Caricamento della campagna"
+ },
+ "CampaignDetails.notFoundTitle": {
+  "en": "This campaign doesn't exist",
+  "ar": "هذه الحملة غير موجودة",
+  "de": "Diese Kampagne gibt es nicht",
+  "fr": "Cette campagne n’existe pas",
+  "it": "Questa campagna non esiste"
+ },
+ "CampaignDetails.notFoundBody": {
+  "en": "It may have been deleted, or it belongs to another project.",
+  "ar": "ربما حُذفت، أو أنها تتبع مشروعًا آخر.",
+  "de": "Sie wurde vielleicht gelöscht oder gehört zu einem anderen Projekt.",
+  "fr": "Elle a peut-être été supprimée, ou elle appartient à un autre projet.",
+  "it": "Potrebbe essere stata eliminata o appartenere a un altro progetto."
+ },
+ "CampaignDetails.backToCampaigns": {
+  "en": "Back to campaigns",
+  "ar": "العودة إلى الحملات",
+  "de": "Zurück zu den Kampagnen",
+  "fr": "Retour aux campagnes",
+  "it": "Torna alle campagne"
+ },
+ "CampaignDetails.noAccessTitle": {
+  "en": "You can't open this campaign",
+  "ar": "لا يمكنك فتح هذه الحملة",
+  "de": "Sie können diese Kampagne nicht öffnen",
+  "fr": "Vous ne pouvez pas ouvrir cette campagne",
+  "it": "Non puoi aprire questa campagna"
+ },
+ "CampaignDetails.noAccessBody": {
+  "en": "Ask a marketing manager for access to its project.",
+  "ar": "اطلب من مدير التسويق صلاحية الوصول إلى مشروعها.",
+  "de": "Bitten Sie eine Marketingleitung um Zugriff auf das Projekt.",
+  "fr": "Demandez l’accès à son projet à un responsable marketing.",
+  "it": "Chiedi l’accesso al progetto a un responsabile marketing."
+ },
+ "CampaignDetails.errorTitle": {
+  "en": "Couldn't load this campaign",
+  "ar": "تعذّر تحميل هذه الحملة",
+  "de": "Diese Kampagne konnte nicht geladen werden",
+  "fr": "Impossible de charger cette campagne",
+  "it": "Impossibile caricare questa campagna"
+ },
+ "CampaignDetails.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقّق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "CampaignDetails.continueSetup": {
+  "en": "Continue setup",
+  "ar": "متابعة الإعداد",
+  "de": "Einrichtung fortsetzen",
+  "fr": "Continuer la configuration",
+  "it": "Continua la configurazione"
+ },
+ "CampaignDetails.editAndResubmit": {
+  "en": "Edit and send again",
+  "ar": "تعديل وإعادة الإرسال",
+  "de": "Bearbeiten und erneut senden",
+  "fr": "Modifier et renvoyer",
+  "it": "Modifica e invia di nuovo"
+ },
+ "CampaignDetails.edit": {
+  "en": "Edit",
+  "ar": "تعديل",
+  "de": "Bearbeiten",
+  "fr": "Modifier",
+  "it": "Modifica"
+ },
+ "CampaignDetails.requestApproval": {
+  "en": "{count, plural, one {Request approval} other {Request approval from #}}",
+  "ar": "{count, plural, zero {طلب الموافقة} one {طلب الموافقة} two {طلب الموافقة من مراجعَين} few {طلب الموافقة من # مراجعين} many {طلب الموافقة من # مراجعًا} other {طلب الموافقة من # مراجع}}",
+  "de": "{count, plural, one {Freigabe anfordern} other {Freigabe von # anfordern}}",
+  "fr": "{count, plural, one {Demander l’approbation} other {Demander l’approbation à #}}",
+  "it": "{count, plural, one {Richiedi approvazione} other {Richiedi approvazione a #}}"
+ },
+ "CampaignDetails.publish": {
+  "en": "Publish",
+  "ar": "نشر",
+  "de": "Veröffentlichen",
+  "fr": "Publier",
+  "it": "Pubblica"
+ },
+ "CampaignDetails.publishTitle": {
+  "en": "Publish {name}?",
+  "ar": "هل تريد نشر {name}؟",
+  "de": "{name} veröffentlichen?",
+  "fr": "Publier {name} ?",
+  "it": "Pubblicare {name}?"
+ },
+ "CampaignDetails.publishImpact": {
+  "en": "It starts spending {budget} on the ad account. {schedule}.",
+  "ar": "ستبدأ بإنفاق {budget} من الحساب الإعلاني. {schedule}.",
+  "de": "Sie beginnt, {budget} über das Werbekonto auszugeben. {schedule}.",
+  "fr": "Elle commence à dépenser {budget} sur le compte publicitaire. {schedule}.",
+  "it": "Inizia a spendere {budget} sull’account pubblicitario. {schedule}."
+ },
+ "CampaignDetails.publishConfirm": {
+  "en": "Publish campaign",
+  "ar": "نشر الحملة",
+  "de": "Kampagne veröffentlichen",
+  "fr": "Publier la campagne",
+  "it": "Pubblica campagna"
+ },
+ "CampaignDetails.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "CampaignDetails.awaitingNote": {
+  "en": "Waiting for the approvers. It goes live once all of them approve.",
+  "ar": "بانتظار المراجعين. ستبدأ بعد موافقتهم جميعًا.",
+  "de": "Wartet auf die Prüfer. Sie startet, sobald alle freigegeben haben.",
+  "fr": "En attente des réviseurs. Elle démarre dès que tous ont approuvé.",
+  "it": "In attesa dei revisori. Parte quando tutti hanno approvato."
+ },
+ "CampaignDetails.rejectedNote": {
+  "en": "An approver rejected this campaign. Read their reason under Approval, edit it, and send it again.",
+  "ar": "رفض أحد المراجعين هذه الحملة. اقرأ السبب في قسم الموافقة، ثم عدّلها وأعد إرسالها.",
+  "de": "Ein Prüfer hat diese Kampagne abgelehnt. Lesen Sie die Begründung unter Freigabe, bearbeiten Sie sie und senden Sie sie erneut.",
+  "fr": "Un réviseur a refusé cette campagne. Lisez son motif sous Approbation, modifiez-la et renvoyez-la.",
+  "it": "Un revisore ha rifiutato questa campagna. Leggi il motivo in Approvazione, modificala e inviala di nuovo."
+ },
+ "CampaignDetails.providerError": {
+  "en": "The ad platform reported:",
+  "ar": "أبلغت منصة الإعلانات:",
+  "de": "Die Werbeplattform meldet:",
+  "fr": "La plateforme publicitaire signale :",
+  "it": "La piattaforma pubblicitaria segnala:"
+ },
+ "CampaignDetails.setup": {
+  "en": "Setup",
+  "ar": "الإعداد",
+  "de": "Einrichtung",
+  "fr": "Configuration",
+  "it": "Configurazione"
+ },
+ "CampaignDetails.type": {
+  "en": "Type",
+  "ar": "النوع",
+  "de": "Typ",
+  "fr": "Type",
+  "it": "Tipo"
+ },
+ "CampaignDetails.category": {
+  "en": "Category",
+  "ar": "الفئة",
+  "de": "Kategorie",
+  "fr": "Catégorie",
+  "it": "Categoria"
+ },
+ "CampaignDetails.budget": {
+  "en": "Budget",
+  "ar": "الميزانية",
+  "de": "Budget",
+  "fr": "Budget",
+  "it": "Budget"
+ },
+ "CampaignDetails.schedule": {
+  "en": "Schedule",
+  "ar": "الجدول الزمني",
+  "de": "Zeitraum",
+  "fr": "Calendrier",
+  "it": "Programmazione"
+ },
+ "CampaignDetails.created": {
+  "en": "Created",
+  "ar": "تاريخ الإنشاء",
+  "de": "Erstellt",
+  "fr": "Créée le",
+  "it": "Creata il"
+ },
+ "CampaignDetails.updated": {
+  "en": "Last change",
+  "ar": "آخر تغيير",
+  "de": "Letzte Änderung",
+  "fr": "Dernière modification",
+  "it": "Ultima modifica"
+ },
+ "CampaignDetails.sideLabel": {
+  "en": "Approval and comments",
+  "ar": "الموافقة والتعليقات",
+  "de": "Freigabe und Kommentare",
+  "fr": "Approbation et commentaires",
+  "it": "Approvazione e commenti"
+ },
+ "CampaignApproval.title": {
+  "en": "Approval",
+  "ar": "الموافقة",
+  "de": "Freigabe",
+  "fr": "Approbation",
+  "it": "Approvazione"
+ },
+ "CampaignApproval.approvers": {
+  "en": "Approvers",
+  "ar": "المراجعون",
+  "de": "Prüfer",
+  "fr": "Réviseurs",
+  "it": "Revisori"
+ },
+ "CampaignApproval.approversHint": {
+  "en": "{count, plural, one {This person is asked to approve before it goes live.} other {These # people are asked to approve before it goes live.}}",
+  "ar": "{count, plural, zero {لن يُطلب من أحد الموافقة.} one {سيُطلب من هذا الشخص الموافقة قبل التشغيل.} two {سيُطلب من هذين الشخصين الموافقة قبل التشغيل.} few {سيُطلب من هؤلاء الأشخاص الـ# الموافقة قبل التشغيل.} many {سيُطلب من هؤلاء الـ# شخصًا الموافقة قبل التشغيل.} other {سيُطلب من هؤلاء الـ# شخص الموافقة قبل التشغيل.}}",
+  "de": "{count, plural, one {Diese Person gibt vor dem Start frei.} other {Diese # Personen geben vor dem Start frei.}}",
+  "fr": "{count, plural, one {Cette personne doit approuver avant la mise en ligne.} other {Ces # personnes doivent approuver avant la mise en ligne.}}",
+  "it": "{count, plural, one {Questa persona deve approvare prima dell’avvio.} other {Queste # persone devono approvare prima dell’avvio.}}"
+ },
+ "CampaignApproval.noApproversHint": {
+  "en": "No approval needed: it goes live when you publish. Add approvers to have it checked first.",
+  "ar": "لا حاجة إلى موافقة: ستبدأ عند النشر. أضف مراجعين ليتحققوا منها أولًا.",
+  "de": "Keine Freigabe nötig: Sie startet beim Veröffentlichen. Fügen Sie Prüfer hinzu, um sie vorher prüfen zu lassen.",
+  "fr": "Aucune approbation : elle démarre à la publication. Ajoutez des réviseurs pour la faire vérifier d’abord.",
+  "it": "Nessuna approvazione: parte alla pubblicazione. Aggiungi revisori per farla controllare prima."
+ },
+ "CampaignApproval.addApprovers": {
+  "en": "Add approvers",
+  "ar": "إضافة مراجعين",
+  "de": "Prüfer hinzufügen",
+  "fr": "Ajouter des réviseurs",
+  "it": "Aggiungi revisori"
+ },
+ "CampaignApproval.changeApprovers": {
+  "en": "Change approvers",
+  "ar": "تغيير المراجعين",
+  "de": "Prüfer ändern",
+  "fr": "Modifier les réviseurs",
+  "it": "Modifica revisori"
+ },
+ "CampaignApproval.removeApprover": {
+  "en": "Remove {name} from the approvers",
+  "ar": "إزالة {name} من المراجعين",
+  "de": "{name} als Prüfer entfernen",
+  "fr": "Retirer {name} des réviseurs",
+  "it": "Rimuovi {name} dai revisori"
+ },
+ "CampaignApproval.noApprovers": {
+  "en": "No approvers. Publishing doesn't wait for anyone.",
+  "ar": "لا يوجد مراجعون. النشر لا ينتظر أحدًا.",
+  "de": "Keine Prüfer. Das Veröffentlichen wartet auf niemanden.",
+  "fr": "Aucun réviseur. La publication n’attend personne.",
+  "it": "Nessun revisore. La pubblicazione non attende nessuno."
+ },
+ "CampaignApproval.progress": {
+  "en": "{approved} of {total} approved",
+  "ar": "وافق {approved} من {total}",
+  "de": "{approved} von {total} freigegeben",
+  "fr": "{approved} sur {total} ont approuvé",
+  "it": "{approved} su {total} hanno approvato"
+ },
+ "CampaignApproval.noteLabel": {
+  "en": "Note for the approvers",
+  "ar": "ملاحظة للمراجعين",
+  "de": "Hinweis für die Prüfer",
+  "fr": "Note pour les réviseurs",
+  "it": "Nota per i revisori"
+ },
+ "CampaignApproval.you": {
+  "en": "(you)",
+  "ar": "(أنت)",
+  "de": "(Sie)",
+  "fr": "(vous)",
+  "it": "(tu)"
+ },
+ "CampaignApproval.reason": {
+  "en": "Reason:",
+  "ar": "السبب:",
+  "de": "Begründung:",
+  "fr": "Motif :",
+  "it": "Motivo:"
+ },
+ "CampaignApproval.noteFrom": {
+  "en": "Note:",
+  "ar": "ملاحظة:",
+  "de": "Hinweis:",
+  "fr": "Note :",
+  "it": "Nota:"
+ },
+ "CampaignApproval.yourDecision": {
+  "en": "Your decision is needed on this campaign.",
+  "ar": "مطلوب قرارك بشأن هذه الحملة.",
+  "de": "Ihre Entscheidung zu dieser Kampagne wird benötigt.",
+  "fr": "Votre décision est attendue sur cette campagne.",
+  "it": "Serve la tua decisione su questa campagna."
+ },
+ "CampaignApproval.approve": {
+  "en": "Approve",
+  "ar": "موافقة",
+  "de": "Freigeben",
+  "fr": "Approuver",
+  "it": "Approva"
+ },
+ "CampaignApproval.reject": {
+  "en": "Reject",
+  "ar": "رفض",
+  "de": "Ablehnen",
+  "fr": "Refuser",
+  "it": "Rifiuta"
+ },
+ "CampaignApproval.approveTitle": {
+  "en": "Approve {name}?",
+  "ar": "هل توافق على {name}؟",
+  "de": "{name} freigeben?",
+  "fr": "Approuver {name} ?",
+  "it": "Approvare {name}?"
+ },
+ "CampaignApproval.approveImpactLast": {
+  "en": "You are the last approver: it goes live on its schedule once you approve.",
+  "ar": "أنت آخر المراجعين: ستبدأ في موعدها بعد موافقتك.",
+  "de": "Sie geben als Letzte frei: Sie startet nach Ihrer Freigabe zum geplanten Zeitpunkt.",
+  "fr": "Vous êtes le dernier réviseur : elle démarre à la date prévue dès votre approbation.",
+  "it": "Sei l’ultimo revisore: parte alla data prevista dopo la tua approvazione."
+ },
+ "CampaignApproval.approveImpact": {
+  "en": "{count, plural, one {One more approver still has to decide.} other {# more approvers still have to decide.}}",
+  "ar": "{count, plural, zero {لا ينتظر أي مراجع آخر.} one {ما زال مراجع آخر لم يقرّر.} two {ما زال مراجعان آخران لم يقرّرا.} few {ما زال # مراجعين لم يقرّروا.} many {ما زال # مراجعًا لم يقرّروا.} other {ما زال # مراجع لم يقرّروا.}}",
+  "de": "{count, plural, one {Ein weiterer Prüfer muss noch entscheiden.} other {# weitere Prüfer müssen noch entscheiden.}}",
+  "fr": "{count, plural, one {Un autre réviseur doit encore décider.} other {# autres réviseurs doivent encore décider.}}",
+  "it": "{count, plural, one {Un altro revisore deve ancora decidere.} other {Altri # revisori devono ancora decidere.}}"
+ },
+ "CampaignApproval.approveNote": {
+  "en": "Note (optional)",
+  "ar": "ملاحظة (اختيارية)",
+  "de": "Hinweis (optional)",
+  "fr": "Note (facultative)",
+  "it": "Nota (facoltativa)"
+ },
+ "CampaignApproval.approveNotePlaceholder": {
+  "en": "Anything the author should know",
+  "ar": "أي شيء يجب أن يعرفه الكاتب",
+  "de": "Was die Autorin oder der Autor wissen sollte",
+  "fr": "Ce que l’auteur doit savoir",
+  "it": "Ciò che l’autore deve sapere"
+ },
+ "CampaignApproval.approveConfirm": {
+  "en": "Approve campaign",
+  "ar": "الموافقة على الحملة",
+  "de": "Kampagne freigeben",
+  "fr": "Approuver la campagne",
+  "it": "Approva campagna"
+ },
+ "CampaignApproval.rejectTitle": {
+  "en": "Reject {name}?",
+  "ar": "هل تريد رفض {name}؟",
+  "de": "{name} ablehnen?",
+  "fr": "Refuser {name} ?",
+  "it": "Rifiutare {name}?"
+ },
+ "CampaignApproval.rejectImpact": {
+  "en": "It goes back to a draft and doesn't run. The author sees your reason.",
+  "ar": "ستعود إلى مسودة ولن تعمل. سيرى الكاتب سببك.",
+  "de": "Sie wird wieder ein Entwurf und läuft nicht. Die Autorin oder der Autor sieht Ihre Begründung.",
+  "fr": "Elle redevient un brouillon et ne démarre pas. L’auteur voit votre motif.",
+  "it": "Torna bozza e non parte. L’autore vede il tuo motivo."
+ },
+ "CampaignApproval.rejectReason": {
+  "en": "Reason",
+  "ar": "السبب",
+  "de": "Begründung",
+  "fr": "Motif",
+  "it": "Motivo"
+ },
+ "CampaignApproval.rejectReasonPlaceholder": {
+  "en": "What should change before you approve?",
+  "ar": "ما الذي يجب تغييره قبل موافقتك؟",
+  "de": "Was muss sich vor Ihrer Freigabe ändern?",
+  "fr": "Que faut-il changer avant votre approbation ?",
+  "it": "Cosa deve cambiare prima della tua approvazione?"
+ },
+ "CampaignApproval.rejectConfirm": {
+  "en": "Reject campaign",
+  "ar": "رفض الحملة",
+  "de": "Kampagne ablehnen",
+  "fr": "Refuser la campagne",
+  "it": "Rifiuta campagna"
+ },
+ "CampaignApproval.requestApproval": {
+  "en": "{count, plural, one {Request approval} other {Request approval from #}}",
+  "ar": "{count, plural, zero {طلب الموافقة} one {طلب الموافقة} two {طلب الموافقة من مراجعَين} few {طلب الموافقة من # مراجعين} many {طلب الموافقة من # مراجعًا} other {طلب الموافقة من # مراجع}}",
+  "de": "{count, plural, one {Freigabe anfordern} other {Freigabe von # anfordern}}",
+  "fr": "{count, plural, one {Demander l’approbation} other {Demander l’approbation à #}}",
+  "it": "{count, plural, one {Richiedi approvazione} other {Richiedi approvazione a #}}"
+ },
+ "CampaignApproval.rollback": {
+  "en": "Go back to the approved version",
+  "ar": "العودة إلى النسخة المعتمدة",
+  "de": "Zur freigegebenen Version zurück",
+  "fr": "Revenir à la version approuvée",
+  "it": "Torna alla versione approvata"
+ },
+ "CampaignApproval.rollbackTitle": {
+  "en": "Go back to the last approved version of {name}?",
+  "ar": "هل تريد العودة إلى آخر نسخة معتمدة من {name}؟",
+  "de": "Zur zuletzt freigegebenen Version von {name} zurück?",
+  "fr": "Revenir à la dernière version approuvée de {name} ?",
+  "it": "Tornare all’ultima versione approvata di {name}?"
+ },
+ "CampaignApproval.rollbackImpact": {
+  "en": "Its name, schedule, settings and ad sets are replaced by the last approved ones. Changes made since then are lost.",
+  "ar": "سيُستبدل اسمها وجدولها الزمني وإعداداتها ومجموعات إعلاناتها بآخر نسخة معتمدة. ستضيع التغييرات التي أُجريت بعدها.",
+  "de": "Name, Zeitraum, Einstellungen und Anzeigengruppen werden durch die zuletzt freigegebenen ersetzt. Spätere Änderungen gehen verloren.",
+  "fr": "Son nom, son calendrier, ses paramètres et ses ensembles d’annonces sont remplacés par ceux de la dernière version approuvée. Les modifications faites depuis sont perdues.",
+  "it": "Nome, programmazione, impostazioni e gruppi di annunci vengono sostituiti da quelli dell’ultima versione approvata. Le modifiche successive vanno perse."
+ },
+ "CampaignApproval.rollbackConfirm": {
+  "en": "Go back to approved version",
+  "ar": "العودة إلى النسخة المعتمدة",
+  "de": "Zur freigegebenen Version",
+  "fr": "Revenir à la version approuvée",
+  "it": "Torna alla versione approvata"
+ },
+ "CampaignApproval.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "CampaignComments.title": {
+  "en": "Comments and activity",
+  "ar": "التعليقات والنشاط",
+  "de": "Kommentare und Aktivität",
+  "fr": "Commentaires et activité",
+  "it": "Commenti e attività"
+ },
+ "CampaignComments.write": {
+  "en": "Write a comment",
+  "ar": "اكتب تعليقًا",
+  "de": "Kommentar schreiben",
+  "fr": "Écrire un commentaire",
+  "it": "Scrivi un commento"
+ },
+ "CampaignComments.placeholder": {
+  "en": "Write a comment for the team",
+  "ar": "اكتب تعليقًا للفريق",
+  "de": "Kommentar für das Team schreiben",
+  "fr": "Écrivez un commentaire pour l’équipe",
+  "it": "Scrivi un commento per il team"
+ },
+ "CampaignComments.send": {
+  "en": "Send",
+  "ar": "إرسال",
+  "de": "Senden",
+  "fr": "Envoyer",
+  "it": "Invia"
+ },
+ "CampaignComments.emptyTitle": {
+  "en": "No comments yet",
+  "ar": "لا توجد تعليقات بعد",
+  "de": "Noch keine Kommentare",
+  "fr": "Aucun commentaire pour l’instant",
+  "it": "Ancora nessun commento"
+ },
+ "CampaignComments.emptyBody": {
+  "en": "Comments and approvals appear here.",
+  "ar": "تظهر هنا التعليقات والموافقات.",
+  "de": "Kommentare und Freigaben erscheinen hier.",
+  "fr": "Les commentaires et les approbations apparaissent ici.",
+  "it": "Qui compaiono commenti e approvazioni."
+ },
+ "CampaignComments.errorTitle": {
+  "en": "Couldn't load the comments",
+  "ar": "تعذّر تحميل التعليقات",
+  "de": "Kommentare konnten nicht geladen werden",
+  "fr": "Impossible de charger les commentaires",
+  "it": "Impossibile caricare i commenti"
+ }
+}

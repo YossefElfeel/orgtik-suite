@@ -1,0 +1,13 @@
+﻿term_en,term_ar,definition_en,definition_ar,source
+Currency,العملة,"ISO code, symbol, decimals (0/2/3) and a rounding rule.",كود ISO، رمز، كسور عشرية (0/2/3)، وقاعدة تقريب.,03 · Terms
+Zone,المنطقة,Group of countries with a base currency and a price per plan and cycle.,مجموعة دول بعملة أساسية وسعر لكل باقة ودورة.,03 · Terms
+Default zone,المنطقة الافتراضية,“Rest of World”; catches countries not assigned anywhere.,“باقي العالم”؛ بتاخد الدول اللي مش متعينة في أي منطقة.,03 · Terms
+Default price,السعر الافتراضي,USD monthly price stored on the plan; used when no zone or country price exists.,السعر الشهري بالدولار على الباقة؛ بيستخدم لو مفيش سعر منطقة أو دولة.,03 · Terms
+Currency override,تعديل العملة,"Country shows the zone price in its own currency: zone price × rate, then rounded.",الدولة بتعرض سعر المنطقة بعملتها: سعر المنطقة × سعر الصرف وبعدين التقريب.,03 · Terms
+Price override,السعر الخاص,"Fixed price for a country, plan and cycle in the country currency.",سعر ثابت لدولة وباقة ودورة بعملة الدولة.,03 · Terms
+Exchange rate,سعر الصرف,"Admin-set rate from the zone currency to the country currency, with an effective date. Not a live market rate.",سعر بيحدده الأدمن من عملة المنطقة لعملة الدولة بتاريخ سريان. مش سعر السوق اللحظي.,03 · Terms
+Rounding rule,قاعدة التقريب,"Step (0.01, 0.05, 1, 5 …) + mode (nearest / up). Applied only to converted prices.",خطوة (0.01، 0.05، 1، 5 …) + طريقة (لأقرب / لأعلى). بتطبق على الأسعار المحوّلة بس.,03 · Terms
+Resolved price,السعر النهائي,"The unit price for one country, plan and cycle after all rules.",سعر الوحدة لدولة وباقة ودورة بعد كل القواعد.,03 · Terms
+Price source,مصدر السعر,Private · Country · Zone · Zone (converted) · Default.,خاص · دولة · منطقة · منطقة (محوّل) · افتراضي.,03 · Terms
+Price snapshot,السعر المحفوظ,"Price, currency, source and version saved on each subscription line at purchase/renewal.",السعر والعملة والمصدر والإصدار محفوظين على كل سطر اشتراك عند الشراء/التجديد.,03 · Terms
+Workspace currency,عملة مساحة العمل,Locked at the first successful payment; changed only by an admin migration.,بتتثبت مع أول دفعة ناجحة؛ ومتتغيرش إلا بنقل من الأدمن.,03 · Terms

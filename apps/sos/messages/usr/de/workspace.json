@@ -1,0 +1,72 @@
+{
+  "Workspace": {
+    "switchLabel": "Arbeitsbereich: {name}. Arbeitsbereich wechseln",
+    "yourWorkspaces": "Ihre Arbeitsbereiche",
+    "roles": {
+      "owner": "Inhaber",
+      "admin": "Admin",
+      "member": "Mitglied",
+      "guest": "Gast"
+    },
+    "nav": {
+      "tools": "Tools und Tarife",
+      "team": "Team",
+      "services": "Services",
+      "support": "Support",
+      "notifications": "Benachrichtigungen",
+      "billingSection": "Abrechnung",
+      "subscriptions": "Abonnements",
+      "invoices": "Rechnungen",
+      "paymentMethods": "Zahlungsmethoden",
+      "billingDetails": "Rechnungsdaten",
+      "settingsSection": "Arbeitsbereich",
+      "workspaceSettings": "Einstellungen des Arbeitsbereichs",
+      "adminSection": "OrgTik-Verwaltung"
+    },
+    "banner": {
+      "suspended": {
+        "title": "Dieser Arbeitsbereich ist gesperrt",
+        "body": "Bis zur Reaktivierung kann nichts geändert werden. Wenden Sie sich an den Support."
+      },
+      "read_only": {
+        "title": "{tool} ist schreibgeschützt",
+        "body": "Die Verlängerung wurde nicht bezahlt: Ihr Team kann {tool} ansehen, aber nichts ändern. Bezahlen Sie, um es freizuschalten."
+      },
+      "payment_failed": {
+        "title": "Die Verlängerung von {tool} ist fehlgeschlagen",
+        "body": "Aktualisieren Sie Ihre Karte oder zahlen Sie bis {date}, um vollen Zugriff zu behalten."
+      },
+      "trial_ending": {
+        "title": "Ihre Testphase für {tool} endet am {date}",
+        "body": "Wählen Sie einen Tarif, um es ohne Unterbrechung weiter zu nutzen."
+      },
+      "beta_billing": {
+        "title": "{tool} ist in der Beta",
+        "body": "Bezahlte Tarife beginnen mit dem Start. Der Code {coupon} gibt frühen Nutzern einen Rabatt."
+      },
+      "price_change": {
+        "title": "Der Preis für {tool} ändert sich am {date}",
+        "body": "Bis dahin gilt Ihr aktueller Preis. Sehen Sie, was sich ändert."
+      },
+      "downgrade_scheduled": {
+        "title": "{tool} wechselt am {date} in einen kleineren Tarif",
+        "body": "Bis dahin behalten Sie alles aus Ihrem aktuellen Tarif."
+      },
+      "actions": {
+        "pay_now": "Jetzt bezahlen",
+        "choose_plan": "Tarif wählen",
+        "view_plans": "Tarife ansehen",
+        "details": "Details ansehen",
+        "cancel_downgrade": "Tarif behalten",
+        "contact_support": "Support kontaktieren"
+      }
+    },
+    "gate": {
+      "title": "Diese Seite ist für die Rolle „{role}“",
+      "body": "Ihre Rolle in {name} umfasst sie nicht. Fragen Sie den Inhaber, wenn Sie sie brauchen.",
+      "toHome": "Zur Startseite",
+      "failedTitle": "Ihr Arbeitsbereich konnte nicht geladen werden",
+      "failedBody": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
+    }
+  }
+}

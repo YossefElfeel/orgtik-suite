@@ -1,0 +1,4 @@
+{
+ "invoices.cardLast4": {"en": "Card's last 4 digits", "ar": "آخر 4 أرقام من البطاقة", "de": "Letzte 4 Ziffern der Karte", "fr": "4 derniers chiffres de la carte", "it": "Ultime 4 cifre della carta"},
+ "subscriptions.refundToCard": {"en": "The refund goes back to the card the customer paid with.", "ar": "يُرد المبلغ إلى البطاقة التي دفع بها العميل.", "de": "Die Erstattung geht auf die Karte zurück, mit der der Kunde bezahlt hat.", "fr": "Le remboursement est versé sur la carte utilisée par le client.", "it": "Il rimborso torna sulla carta con cui il cliente ha pagato."}
+}

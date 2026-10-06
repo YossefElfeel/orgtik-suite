@@ -1,0 +1,327 @@
+{
+  "at": "2026-10-03T06:48:39.936Z",
+  "locale": "en",
+  "walks": [
+    {
+      "id": "T0-customer-lands",
+      "title": "Nour signs in to SOS",
+      "locale": "en",
+      "as": null,
+      "workaround": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Sign in as Nour, no workaround",
+          "ok": true,
+          "note": "on /tools",
+          "ms": 4323,
+          "url": "http://localhost:3013/tools",
+          "screenshot": "T0-customer-lands/01-sign-in-as-nour-no-workaround.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "T1-home",
+      "title": "Nour's home: tool states and the banner",
+      "locale": "en",
+      "as": "nour.khaled@nilefoods.test",
+      "workaround": "sales scope dropped from the SOS scopes cookie (middleware sends customers to the Sales portal)",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open home",
+          "ok": true,
+          "note": "",
+          "ms": 2425,
+          "url": "http://localhost:3013/",
+          "screenshot": "T1-home/01-open-home.png"
+        },
+        {
+          "n": 2,
+          "name": "Tool states",
+          "ok": true,
+          "note": "chat: 2 days left; tasks free plan; files payment due",
+          "ms": 602,
+          "url": "http://localhost:3013/",
+          "screenshot": "T1-home/02-tool-states.png"
+        },
+        {
+          "n": 3,
+          "name": "One way forward per tool",
+          "ok": true,
+          "note": "tasks: Open; files: Pay now; hr: Start trial; email: Join the waitlist",
+          "ms": 576,
+          "url": "http://localhost:3013/",
+          "screenshot": "T1-home/03-one-way-forward-per-tool.png"
+        },
+        {
+          "n": 4,
+          "name": "The banner",
+          "ok": true,
+          "note": "The Files renewal didn't go through",
+          "ms": 566,
+          "url": "http://localhost:3013/",
+          "screenshot": "T1-home/04-the-banner.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "T2-checkout",
+      "title": "Tasks Pro: code, failed payment, pay, invoice",
+      "locale": "en",
+      "as": "nour.khaled@nilefoods.test",
+      "workaround": "sales scope dropped from the SOS scopes cookie (middleware sends customers to the Sales portal)",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Tasks plans",
+          "ok": true,
+          "note": "",
+          "ms": 3233,
+          "url": "http://localhost:3013/tools/tasks",
+          "screenshot": "T2-checkout/01-tasks-plans.png"
+        },
+        {
+          "n": 2,
+          "name": "Choose Pro",
+          "ok": true,
+          "note": "total EGP 294.12",
+          "ms": 1228,
+          "url": "http://localhost:3013/checkout?plan=tasks_pro&cycle=monthly",
+          "screenshot": "T2-checkout/02-choose-pro.png"
+        },
+        {
+          "n": 3,
+          "name": "Apply WELCOME100",
+          "ok": true,
+          "note": "applied; total EGP 0.00",
+          "ms": 667,
+          "url": "http://localhost:3013/checkout?plan=tasks_pro&cycle=monthly",
+          "screenshot": "T2-checkout/03-apply-welcome100.png"
+        },
+        {
+          "n": 4,
+          "name": "The next payment fails",
+          "ok": true,
+          "note": "The payment didn't go through; Tasks still tasks_free",
+          "ms": 638,
+          "url": "http://localhost:3013/checkout?plan=tasks_pro&cycle=monthly",
+          "screenshot": "T2-checkout/04-the-next-payment-fails.png"
+        },
+        {
+          "n": 5,
+          "name": "Pay",
+          "ok": true,
+          "note": "invoice INV-2026-001050; link to invoices shown; says Tasks is on Pro",
+          "ms": 629,
+          "url": "http://localhost:3013/checkout?plan=tasks_pro&cycle=monthly",
+          "screenshot": "T2-checkout/05-pay.png"
+        },
+        {
+          "n": 6,
+          "name": "Tasks is active on home",
+          "ok": true,
+          "note": "home: Active Open Tasks; line tasks_pro active",
+          "ms": 2132,
+          "url": "http://localhost:3013/",
+          "screenshot": "T2-checkout/06-tasks-is-active-on-home.png"
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 402 (Payment Required)"
+      ],
+      "api": [
+        {
+          "status": 402,
+          "method": "POST",
+          "url": ":4000/v1/app/checkout/confirm"
+        }
+      ]
+    },
+    {
+      "id": "T3-used-up-code",
+      "title": "SUMMER10 is used up",
+      "locale": "en",
+      "as": "nour.khaled@nilefoods.test",
+      "workaround": "sales scope dropped from the SOS scopes cookie (middleware sends customers to the Sales portal)",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Checkout Tasks Pro",
+          "ok": true,
+          "note": "",
+          "ms": 2969,
+          "url": "http://localhost:3013/checkout?plan=tasks_pro&cycle=monthly",
+          "screenshot": "T3-used-up-code/01-checkout-tasks-pro.png"
+        },
+        {
+          "n": 2,
+          "name": "Apply SUMMER10",
+          "ok": true,
+          "note": "This code has been used the most times it can be. It no longer works.",
+          "ms": 675,
+          "url": "http://localhost:3013/checkout?plan=tasks_pro&cycle=monthly",
+          "screenshot": "T3-used-up-code/02-apply-summer10.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "T4-trial",
+      "title": "HR trial, then the refused second trial",
+      "locale": "en",
+      "as": "nour.khaled@nilefoods.test",
+      "workaround": "sales scope dropped from the SOS scopes cookie (middleware sends customers to the Sales portal)",
+      "steps": [
+        {
+          "n": 1,
+          "name": "HR plans",
+          "ok": true,
+          "note": "",
+          "ms": 4236,
+          "url": "http://localhost:3013/tools/hr",
+          "screenshot": "T4-trial/01-hr-plans.png"
+        },
+        {
+          "n": 2,
+          "name": "Start the trial",
+          "ok": true,
+          "note": "HR trialing, hr_pro",
+          "ms": 755,
+          "url": "http://localhost:3013/tools/hr",
+          "screenshot": "T4-trial/02-start-the-trial.png"
+        },
+        {
+          "n": 3,
+          "name": "A second trial is refused",
+          "ok": true,
+          "note": "This workspace has already had its HR trial",
+          "ms": 716,
+          "url": "http://localhost:3013/tools/hr",
+          "screenshot": "T4-trial/03-a-second-trial-is-refused.png"
+        },
+        {
+          "n": 4,
+          "name": "The page now says the trial is used",
+          "ok": true,
+          "note": "no trial offered",
+          "ms": 10047,
+          "url": "http://localhost:3013/tools/hr",
+          "screenshot": "T4-trial/04-the-page-now-says-the-trial-is-used.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "T5-member",
+      "title": "A member asks the owner",
+      "locale": "en",
+      "as": "salma.nabil@orgtik.test",
+      "workaround": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Home",
+          "ok": true,
+          "note": "Ask the workspace owner to subscribe.; 0 buy links",
+          "ms": 2257,
+          "url": "http://localhost:3013/",
+          "screenshot": "T5-member/01-home.png"
+        },
+        {
+          "n": 2,
+          "name": "Chat plans",
+          "ok": true,
+          "note": "ask the owner shown; 0 choose, 0 trial buttons",
+          "ms": 2085,
+          "url": "http://localhost:3013/tools/chat",
+          "screenshot": "T5-member/02-chat-plans.png"
+        },
+        {
+          "n": 3,
+          "name": "Checkout is the owner's",
+          "ok": true,
+          "note": "Your role in OrgTik Egypt doesn't include it. Ask the owner if you need it.; 0 pay buttons",
+          "ms": 1915,
+          "url": "http://localhost:3013/checkout?plan=chat_pro&cycle=monthly",
+          "screenshot": "T5-member/03-checkout-is-the-owner-s.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "T6-waitlist",
+      "title": "Join the Email waitlist",
+      "locale": "en",
+      "as": "nour.khaled@nilefoods.test",
+      "workaround": "sales scope dropped from the SOS scopes cookie (middleware sends customers to the Sales portal)",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Tools and plans",
+          "ok": true,
+          "note": "",
+          "ms": 2215,
+          "url": "http://localhost:3013/tools",
+          "screenshot": "T6-waitlist/01-tools-and-plans.png"
+        },
+        {
+          "n": 2,
+          "name": "Join the Email waitlist",
+          "ok": true,
+          "note": "You're on the waitlist",
+          "ms": 678,
+          "url": "http://localhost:3013/tools",
+          "screenshot": "T6-waitlist/02-join-the-email-waitlist.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "T7-custom-plan",
+      "title": "Custom plan: request and accept a quote",
+      "locale": "en",
+      "as": "mona.adel@orgtik.test",
+      "workaround": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Custom plan",
+          "ok": true,
+          "note": "",
+          "ms": 3186,
+          "url": "http://localhost:3013/tools/custom-plan",
+          "screenshot": "T7-custom-plan/01-custom-plan.png"
+        },
+        {
+          "n": 2,
+          "name": "Ask for CRM and Marketing for 40 people",
+          "ok": true,
+          "note": "request cpr_1057, yearly",
+          "ms": 834,
+          "url": "http://localhost:3013/tools/custom-plan",
+          "screenshot": "T7-custom-plan/02-ask-for-crm-and-marketing-for-40-people.png"
+        },
+        {
+          "n": 3,
+          "name": "Accept the quote",
+          "ok": true,
+          "note": "cpr_2 accepted",
+          "ms": 748,
+          "url": "http://localhost:3013/tools/custom-plan",
+          "screenshot": "T7-custom-plan/03-accept-the-quote.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    }
+  ]
+}

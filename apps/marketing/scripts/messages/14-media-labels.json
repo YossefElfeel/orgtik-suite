@@ -1,0 +1,639 @@
+{
+ "MediaLibrary.title": {
+  "en": "Gallery",
+  "ar": "المعرض",
+  "de": "Galerie",
+  "fr": "Galerie",
+  "it": "Galleria"
+ },
+ "MediaLibrary.description": {
+  "en": "Images and videos for this project's posts.",
+  "ar": "صور وفيديوهات لمنشورات هذا المشروع.",
+  "de": "Bilder und Videos für die Beiträge dieses Projekts.",
+  "fr": "Images et vidéos pour les publications de ce projet.",
+  "it": "Immagini e video per i post di questo progetto."
+ },
+ "MediaLibrary.library": {
+  "en": "Media",
+  "ar": "الوسائط",
+  "de": "Medien",
+  "fr": "Médias",
+  "it": "Media"
+ },
+ "MediaLibrary.search": {
+  "en": "Search by description",
+  "ar": "ابحث حسب الوصف",
+  "de": "Nach Beschreibung suchen",
+  "fr": "Rechercher par description",
+  "it": "Cerca per descrizione"
+ },
+ "MediaLibrary.type": {
+  "en": "Type",
+  "ar": "النوع",
+  "de": "Typ",
+  "fr": "Type",
+  "it": "Tipo"
+ },
+ "MediaLibrary.all": {
+  "en": "All",
+  "ar": "الكل",
+  "de": "Alle",
+  "fr": "Tout",
+  "it": "Tutti"
+ },
+ "MediaLibrary.allCount": {
+  "en": "{count, plural, one {All (#)} other {All (#)}}",
+  "ar": "{count, plural, zero {الكل (#)} one {الكل (#)} two {الكل (#)} few {الكل (#)} many {الكل (#)} other {الكل (#)}}",
+  "de": "{count, plural, one {Alle (#)} other {Alle (#)}}",
+  "fr": "{count, plural, one {Tout (#)} other {Tout (#)}}",
+  "it": "{count, plural, one {Tutti (#)} other {Tutti (#)}}"
+ },
+ "MediaLibrary.imagesCount": {
+  "en": "{count, plural, one {Images (#)} other {Images (#)}}",
+  "ar": "{count, plural, zero {الصور (#)} one {الصور (#)} two {الصور (#)} few {الصور (#)} many {الصور (#)} other {الصور (#)}}",
+  "de": "{count, plural, one {Bilder (#)} other {Bilder (#)}}",
+  "fr": "{count, plural, one {Images (#)} other {Images (#)}}",
+  "it": "{count, plural, one {Immagini (#)} other {Immagini (#)}}"
+ },
+ "MediaLibrary.videosCount": {
+  "en": "{count, plural, one {Videos (#)} other {Videos (#)}}",
+  "ar": "{count, plural, zero {الفيديوهات (#)} one {الفيديوهات (#)} two {الفيديوهات (#)} few {الفيديوهات (#)} many {الفيديوهات (#)} other {الفيديوهات (#)}}",
+  "de": "{count, plural, one {Videos (#)} other {Videos (#)}}",
+  "fr": "{count, plural, one {Vidéos (#)} other {Vidéos (#)}}",
+  "it": "{count, plural, one {Video (#)} other {Video (#)}}"
+ },
+ "MediaLibrary.total": {
+  "en": "{count, plural, one {# item} other {# items}}",
+  "ar": "{count, plural, zero {لا عناصر} one {عنصر واحد} two {عنصران} few {# عناصر} many {# عنصرًا} other {# عنصر}}",
+  "de": "{count, plural, one {# Element} other {# Elemente}}",
+  "fr": "{count, plural, one {# élément} other {# éléments}}",
+  "it": "{count, plural, one {# elemento} other {# elementi}}"
+ },
+ "MediaLibrary.image": {
+  "en": "Image",
+  "ar": "صورة",
+  "de": "Bild",
+  "fr": "Image",
+  "it": "Immagine"
+ },
+ "MediaLibrary.video": {
+  "en": "Video",
+  "ar": "فيديو",
+  "de": "Video",
+  "fr": "Vidéo",
+  "it": "Video"
+ },
+ "MediaLibrary.untitled": {
+  "en": "No description",
+  "ar": "بلا وصف",
+  "de": "Ohne Beschreibung",
+  "fr": "Sans description",
+  "it": "Senza descrizione"
+ },
+ "MediaLibrary.upload": {
+  "en": "Upload",
+  "ar": "رفع",
+  "de": "Hochladen",
+  "fr": "Importer",
+  "it": "Carica"
+ },
+ "MediaLibrary.uploadTitle": {
+  "en": "Upload media",
+  "ar": "رفع وسائط",
+  "de": "Medien hochladen",
+  "fr": "Importer des médias",
+  "it": "Carica media"
+ },
+ "MediaLibrary.uploadDescription": {
+  "en": "Images and videos up to 50 MB each.",
+  "ar": "صور وفيديوهات حتى 50 ميغابايت لكل ملف.",
+  "de": "Bilder und Videos bis je 50 MB.",
+  "fr": "Images et vidéos jusqu’à 50 Mo chacune.",
+  "it": "Immagini e video fino a 50 MB ciascuno."
+ },
+ "MediaLibrary.uploadCount": {
+  "en": "{count, plural, one {Upload # file} other {Upload # files}}",
+  "ar": "{count, plural, zero {رفع} one {رفع ملف واحد} two {رفع ملفين} few {رفع # ملفات} many {رفع # ملفًا} other {رفع # ملف}}",
+  "de": "{count, plural, one {# Datei hochladen} other {# Dateien hochladen}}",
+  "fr": "{count, plural, one {Importer # fichier} other {Importer # fichiers}}",
+  "it": "{count, plural, one {Carica # file} other {Carica # file}}"
+ },
+ "MediaLibrary.filesLabel": {
+  "en": "Files",
+  "ar": "الملفات",
+  "de": "Dateien",
+  "fr": "Fichiers",
+  "it": "File"
+ },
+ "MediaLibrary.filesHint": {
+  "en": "Drop files here or choose them.",
+  "ar": "أفلت الملفات هنا أو اخترها.",
+  "de": "Dateien hier ablegen oder auswählen.",
+  "fr": "Déposez des fichiers ici ou choisissez-les.",
+  "it": "Trascina qui i file o sceglili."
+ },
+ "MediaLibrary.altLabel": {
+  "en": "Description",
+  "ar": "الوصف",
+  "de": "Beschreibung",
+  "fr": "Description",
+  "it": "Descrizione"
+ },
+ "MediaLibrary.altHint": {
+  "en": "Says what it shows, for people who can't see it.",
+  "ar": "يصف ما تعرضه لمن لا يستطيع رؤيته.",
+  "de": "Beschreibt, was zu sehen ist, für Menschen, die es nicht sehen können.",
+  "fr": "Décrit ce qu’on y voit, pour les personnes qui ne le voient pas.",
+  "it": "Descrive cosa mostra, per chi non può vederlo."
+ },
+ "MediaLibrary.editAlt": {
+  "en": "Edit description",
+  "ar": "تعديل الوصف",
+  "de": "Beschreibung bearbeiten",
+  "fr": "Modifier la description",
+  "it": "Modifica descrizione"
+ },
+ "MediaLibrary.editAltTitle": {
+  "en": "Edit the description",
+  "ar": "تعديل الوصف",
+  "de": "Beschreibung bearbeiten",
+  "fr": "Modifier la description",
+  "it": "Modifica la descrizione"
+ },
+ "MediaLibrary.save": {
+  "en": "Save",
+  "ar": "حفظ",
+  "de": "Speichern",
+  "fr": "Enregistrer",
+  "it": "Salva"
+ },
+ "MediaLibrary.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "MediaLibrary.preview": {
+  "en": "Preview",
+  "ar": "معاينة",
+  "de": "Vorschau",
+  "fr": "Aperçu",
+  "it": "Anteprima"
+ },
+ "MediaLibrary.previewOf": {
+  "en": "Preview {name}",
+  "ar": "معاينة {name}",
+  "de": "Vorschau: {name}",
+  "fr": "Aperçu de {name}",
+  "it": "Anteprima di {name}"
+ },
+ "MediaLibrary.copyLink": {
+  "en": "Copy link",
+  "ar": "نسخ الرابط",
+  "de": "Link kopieren",
+  "fr": "Copier le lien",
+  "it": "Copia link"
+ },
+ "MediaLibrary.linkCopied": {
+  "en": "Link copied",
+  "ar": "تم نسخ الرابط",
+  "de": "Link kopiert",
+  "fr": "Lien copié",
+  "it": "Link copiato"
+ },
+ "MediaLibrary.linkNotCopied": {
+  "en": "The link couldn't be copied",
+  "ar": "تعذّر نسخ الرابط",
+  "de": "Der Link konnte nicht kopiert werden",
+  "fr": "Le lien n’a pas pu être copié",
+  "it": "Impossibile copiare il link"
+ },
+ "MediaLibrary.actionsFor": {
+  "en": "Actions for {name}",
+  "ar": "إجراءات {name}",
+  "de": "Aktionen für {name}",
+  "fr": "Actions pour {name}",
+  "it": "Azioni per {name}"
+ },
+ "MediaLibrary.delete": {
+  "en": "Delete",
+  "ar": "حذف",
+  "de": "Löschen",
+  "fr": "Supprimer",
+  "it": "Elimina"
+ },
+ "MediaLibrary.deleteTitle": {
+  "en": "Delete {name}?",
+  "ar": "حذف {name}؟",
+  "de": "{name} löschen?",
+  "fr": "Supprimer {name} ?",
+  "it": "Eliminare {name}?"
+ },
+ "MediaLibrary.deleteImpact": {
+  "en": "It's taken out of every post that uses it. Posts already live keep it on the platforms.",
+  "ar": "يُزال من كل منشور يستخدمه، وتحتفظ به المنشورات الظاهرة على المنصات.",
+  "de": "Es wird aus allen Beiträgen entfernt, die es nutzen. Bereits veröffentlichte Beiträge behalten es auf den Plattformen.",
+  "fr": "Il est retiré de toutes les publications qui l’utilisent. Celles déjà en ligne le gardent sur les plateformes.",
+  "it": "Viene tolto da tutti i post che lo usano. Quelli già online lo mantengono sulle piattaforme."
+ },
+ "MediaLibrary.deleteConfirm": {
+  "en": "Delete",
+  "ar": "حذف",
+  "de": "Löschen",
+  "fr": "Supprimer",
+  "it": "Elimina"
+ },
+ "MediaLibrary.keep": {
+  "en": "Keep",
+  "ar": "إبقاء",
+  "de": "Behalten",
+  "fr": "Garder",
+  "it": "Mantieni"
+ },
+ "MediaLibrary.errorTitle": {
+  "en": "Couldn't load media",
+  "ar": "تعذّر تحميل الوسائط",
+  "de": "Medien konnten nicht geladen werden",
+  "fr": "Impossible de charger les médias",
+  "it": "Impossibile caricare i media"
+ },
+ "MediaLibrary.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "MediaLibrary.forbiddenTitle": {
+  "en": "You can't see this gallery",
+  "ar": "لا يمكنك عرض هذا المعرض",
+  "de": "Sie können diese Galerie nicht sehen",
+  "fr": "Vous ne pouvez pas voir cette galerie",
+  "it": "Non puoi vedere questa galleria"
+ },
+ "MediaLibrary.forbiddenBody": {
+  "en": "It belongs to a project you don't have access to.",
+  "ar": "يتبع مشروعًا لا تملك الوصول إليه.",
+  "de": "Sie gehört zu einem Projekt, auf das Sie keinen Zugriff haben.",
+  "fr": "Elle appartient à un projet auquel vous n’avez pas accès.",
+  "it": "Appartiene a un progetto a cui non hai accesso."
+ },
+ "MediaLibrary.noMatchTitle": {
+  "en": "Nothing matches",
+  "ar": "لا شيء مطابق",
+  "de": "Nichts passt",
+  "fr": "Rien ne correspond",
+  "it": "Nessun risultato"
+ },
+ "MediaLibrary.noMatchBody": {
+  "en": "Try other words or clear the search.",
+  "ar": "جرّب كلمات أخرى أو امسح البحث.",
+  "de": "Versuchen Sie andere Wörter oder leeren Sie die Suche.",
+  "fr": "Essayez d’autres mots ou effacez la recherche.",
+  "it": "Prova altre parole o cancella la ricerca."
+ },
+ "MediaLibrary.clearFilters": {
+  "en": "Clear search",
+  "ar": "مسح البحث",
+  "de": "Suche zurücksetzen",
+  "fr": "Effacer la recherche",
+  "it": "Cancella ricerca"
+ },
+ "MediaLibrary.emptyTitle": {
+  "en": "No media yet",
+  "ar": "لا وسائط بعد",
+  "de": "Noch keine Medien",
+  "fr": "Aucun média pour l’instant",
+  "it": "Ancora nessun media"
+ },
+ "MediaLibrary.emptyBodyUpload": {
+  "en": "Upload images and videos to use them in posts.",
+  "ar": "ارفع صورًا وفيديوهات لاستخدامها في المنشورات.",
+  "de": "Laden Sie Bilder und Videos hoch, um sie in Beiträgen zu nutzen.",
+  "fr": "Importez des images et des vidéos pour les utiliser dans vos publications.",
+  "it": "Carica immagini e video da usare nei post."
+ },
+ "MediaLibrary.emptyBody": {
+  "en": "Images and videos your team uploads appear here.",
+  "ar": "تظهر هنا الصور والفيديوهات التي يرفعها فريقك.",
+  "de": "Bilder und Videos, die Ihr Team hochlädt, erscheinen hier.",
+  "fr": "Les images et vidéos importées par votre équipe apparaissent ici.",
+  "it": "Le immagini e i video caricati dal tuo team compaiono qui."
+ },
+ "MediaLibrary.pickerTitle": {
+  "en": "Choose media",
+  "ar": "اختيار وسائط",
+  "de": "Medien wählen",
+  "fr": "Choisir des médias",
+  "it": "Scegli media"
+ },
+ "MediaLibrary.pickerTitleFor": {
+  "en": "Choose media for {name}",
+  "ar": "اختيار وسائط لـ{name}",
+  "de": "Medien für {name} wählen",
+  "fr": "Choisir des médias pour {name}",
+  "it": "Scegli media per {name}"
+ },
+ "MediaLibrary.pickerDescription": {
+  "en": "Pick the images and videos to post.",
+  "ar": "اختر الصور والفيديوهات المراد نشرها.",
+  "de": "Wählen Sie die Bilder und Videos zum Posten.",
+  "fr": "Choisissez les images et vidéos à publier.",
+  "it": "Scegli le immagini e i video da pubblicare."
+ },
+ "MediaLibrary.pickerLimits": {
+  "en": "Up to {items} items, of which up to {videos} videos.",
+  "ar": "حتى {items} عناصر، منها حتى {videos} فيديو.",
+  "de": "Bis zu {items} Elemente, davon bis zu {videos} Videos.",
+  "fr": "Jusqu’à {items} éléments, dont {videos} vidéos au plus.",
+  "it": "Fino a {items} elementi, di cui al massimo {videos} video."
+ },
+ "MediaLibrary.limitItems": {
+  "en": "You've chosen the most this platform takes ({count}).",
+  "ar": "اخترت الحد الأقصى الذي تقبله هذه المنصة ({count}).",
+  "de": "Sie haben das Maximum dieser Plattform gewählt ({count}).",
+  "fr": "Vous avez atteint le maximum de cette plateforme ({count}).",
+  "it": "Hai scelto il massimo per questa piattaforma ({count})."
+ },
+ "MediaLibrary.limitVideos": {
+  "en": "This platform takes up to {count} videos per post.",
+  "ar": "تقبل هذه المنصة حتى {count} فيديو في المنشور.",
+  "de": "Diese Plattform erlaubt bis zu {count} Videos pro Beitrag.",
+  "fr": "Cette plateforme accepte jusqu’à {count} vidéos par publication.",
+  "it": "Questa piattaforma accetta fino a {count} video per post."
+ },
+ "MediaLibrary.chosen": {
+  "en": "Chosen",
+  "ar": "مختار",
+  "de": "Gewählt",
+  "fr": "Choisi",
+  "it": "Scelto"
+ },
+ "MediaLibrary.chosenCount": {
+  "en": "{count, plural, one {# chosen} other {# chosen}}",
+  "ar": "{count, plural, zero {لم يُختر شيء} one {تم اختيار عنصر واحد} two {تم اختيار عنصرين} few {تم اختيار # عناصر} many {تم اختيار # عنصرًا} other {تم اختيار # عنصر}}",
+  "de": "{count, plural, one {# gewählt} other {# gewählt}}",
+  "fr": "{count, plural, one {# choisi} other {# choisis}}",
+  "it": "{count, plural, one {# scelto} other {# scelti}}"
+ },
+ "MediaLibrary.useChosen": {
+  "en": "Use these",
+  "ar": "استخدام المختار",
+  "de": "Diese verwenden",
+  "fr": "Utiliser la sélection",
+  "it": "Usa questi"
+ },
+ "Labels.title": {
+  "en": "Labels",
+  "ar": "التصنيفات",
+  "de": "Labels",
+  "fr": "Étiquettes",
+  "it": "Etichette"
+ },
+ "Labels.description": {
+  "en": "Sort posts by topic or audience, and filter the posts list by them.",
+  "ar": "صنّف المنشورات حسب الموضوع أو الجمهور، وصفِّ قائمة المنشورات بها.",
+  "de": "Ordnen Sie Beiträge nach Thema oder Zielgruppe und filtern Sie die Liste danach.",
+  "fr": "Classez les publications par sujet ou audience, et filtrez la liste avec.",
+  "it": "Ordina i post per tema o pubblico e filtra l’elenco in base a essi."
+ },
+ "Labels.newLabel": {
+  "en": "New label",
+  "ar": "تصنيف جديد",
+  "de": "Neues Label",
+  "fr": "Nouvelle étiquette",
+  "it": "Nuova etichetta"
+ },
+ "Labels.createTitle": {
+  "en": "Create a label",
+  "ar": "إنشاء تصنيف",
+  "de": "Label erstellen",
+  "fr": "Créer une étiquette",
+  "it": "Crea un’etichetta"
+ },
+ "Labels.editTitle": {
+  "en": "Rename the label",
+  "ar": "إعادة تسمية التصنيف",
+  "de": "Label umbenennen",
+  "fr": "Renommer l’étiquette",
+  "it": "Rinomina l’etichetta"
+ },
+ "Labels.formDescription": {
+  "en": "Posts with this label show it in the list and can be filtered by it.",
+  "ar": "تُعرض المنشورات بهذا التصنيف في القائمة ويمكن تصفيتها به.",
+  "de": "Beiträge mit diesem Label zeigen es in der Liste und lassen sich danach filtern.",
+  "fr": "Les publications portant cette étiquette l’affichent dans la liste et peuvent être filtrées.",
+  "it": "I post con questa etichetta la mostrano nell’elenco e si possono filtrare."
+ },
+ "Labels.nameLabel": {
+  "en": "Name",
+  "ar": "الاسم",
+  "de": "Name",
+  "fr": "Nom",
+  "it": "Nome"
+ },
+ "Labels.colorLabel": {
+  "en": "Colour",
+  "ar": "اللون",
+  "de": "Farbe",
+  "fr": "Couleur",
+  "it": "Colore"
+ },
+ "Labels.colorAuto": {
+  "en": "Not chosen: one is picked for you.",
+  "ar": "لم يُختر لون: سيُختار واحد تلقائيًا.",
+  "de": "Nicht gewählt: Es wird eine für Sie ausgewählt.",
+  "fr": "Non choisie : une couleur est choisie pour vous.",
+  "it": "Non scelto: ne viene scelto uno per te."
+ },
+ "Labels.colorReset": {
+  "en": "Pick for me",
+  "ar": "اختر عني",
+  "de": "Für mich wählen",
+  "fr": "Choisir pour moi",
+  "it": "Scegli tu"
+ },
+ "Labels.create": {
+  "en": "Create label",
+  "ar": "إنشاء التصنيف",
+  "de": "Label erstellen",
+  "fr": "Créer l’étiquette",
+  "it": "Crea etichetta"
+ },
+ "Labels.save": {
+  "en": "Save",
+  "ar": "حفظ",
+  "de": "Speichern",
+  "fr": "Enregistrer",
+  "it": "Salva"
+ },
+ "Labels.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Labels.errShort": {
+  "en": "Use at least 2 characters.",
+  "ar": "استخدم حرفين على الأقل.",
+  "de": "Mindestens 2 Zeichen.",
+  "fr": "Au moins 2 caractères.",
+  "it": "Almeno 2 caratteri."
+ },
+ "Labels.errLong": {
+  "en": "Keep it under {max} characters.",
+  "ar": "اجعله أقل من {max} حرفًا.",
+  "de": "Höchstens {max} Zeichen.",
+  "fr": "Moins de {max} caractères.",
+  "it": "Meno di {max} caratteri."
+ },
+ "Labels.errTaken": {
+  "en": "There's already a label with this name.",
+  "ar": "يوجد تصنيف بهذا الاسم بالفعل.",
+  "de": "Es gibt bereits ein Label mit diesem Namen.",
+  "fr": "Une étiquette porte déjà ce nom.",
+  "it": "Esiste già un’etichetta con questo nome."
+ },
+ "Labels.errFailed": {
+  "en": "It wasn't saved. Try again.",
+  "ar": "لم يُحفظ. حاول مرة أخرى.",
+  "de": "Nicht gespeichert. Versuchen Sie es erneut.",
+  "fr": "Non enregistrée. Réessayez.",
+  "it": "Non salvata. Riprova."
+ },
+ "Labels.colNumber": {
+  "en": "Number",
+  "ar": "الرقم",
+  "de": "Nummer",
+  "fr": "Numéro",
+  "it": "Numero"
+ },
+ "Labels.colLabel": {
+  "en": "Label",
+  "ar": "التصنيف",
+  "de": "Label",
+  "fr": "Étiquette",
+  "it": "Etichetta"
+ },
+ "Labels.colCreated": {
+  "en": "Created",
+  "ar": "تاريخ الإنشاء",
+  "de": "Erstellt",
+  "fr": "Créée le",
+  "it": "Creata il"
+ },
+ "Labels.colActions": {
+  "en": "Actions",
+  "ar": "الإجراءات",
+  "de": "Aktionen",
+  "fr": "Actions",
+  "it": "Azioni"
+ },
+ "Labels.actionsFor": {
+  "en": "Actions for {name}",
+  "ar": "إجراءات {name}",
+  "de": "Aktionen für {name}",
+  "fr": "Actions pour {name}",
+  "it": "Azioni per {name}"
+ },
+ "Labels.edit": {
+  "en": "Rename",
+  "ar": "إعادة تسمية",
+  "de": "Umbenennen",
+  "fr": "Renommer",
+  "it": "Rinomina"
+ },
+ "Labels.delete": {
+  "en": "Delete",
+  "ar": "حذف",
+  "de": "Löschen",
+  "fr": "Supprimer",
+  "it": "Elimina"
+ },
+ "Labels.deleteTitle": {
+  "en": "Delete {name}?",
+  "ar": "حذف {name}؟",
+  "de": "{name} löschen?",
+  "fr": "Supprimer {name} ?",
+  "it": "Eliminare {name}?"
+ },
+ "Labels.deleteImpact": {
+  "en": "It's taken off every post that has it. The posts stay.",
+  "ar": "يُزال من كل منشور يحمله، وتبقى المنشورات.",
+  "de": "Es wird von allen Beiträgen entfernt, die Beiträge bleiben.",
+  "fr": "Elle est retirée de toutes les publications, qui restent.",
+  "it": "Viene tolta da tutti i post, che restano."
+ },
+ "Labels.deleteConfirm": {
+  "en": "Delete label",
+  "ar": "حذف التصنيف",
+  "de": "Label löschen",
+  "fr": "Supprimer l’étiquette",
+  "it": "Elimina etichetta"
+ },
+ "Labels.keep": {
+  "en": "Keep",
+  "ar": "إبقاء",
+  "de": "Behalten",
+  "fr": "Garder",
+  "it": "Mantieni"
+ },
+ "Labels.errorTitle": {
+  "en": "Couldn't load labels",
+  "ar": "تعذّر تحميل التصنيفات",
+  "de": "Labels konnten nicht geladen werden",
+  "fr": "Impossible de charger les étiquettes",
+  "it": "Impossibile caricare le etichette"
+ },
+ "Labels.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Labels.emptyTitle": {
+  "en": "No labels yet",
+  "ar": "لا تصنيفات بعد",
+  "de": "Noch keine Labels",
+  "fr": "Aucune étiquette pour l’instant",
+  "it": "Ancora nessuna etichetta"
+ },
+ "Labels.emptyBody": {
+  "en": "Create one, then add it to posts as you write them.",
+  "ar": "أنشئ تصنيفًا، ثم أضفه إلى المنشورات أثناء كتابتها.",
+  "de": "Erstellen Sie eins und fügen Sie es beim Schreiben zu Beiträgen hinzu.",
+  "fr": "Créez-en une, puis ajoutez-la aux publications en les rédigeant.",
+  "it": "Creane una, poi aggiungila ai post mentre li scrivi."
+ },
+ "Labels.noAccessTitle": {
+  "en": "You can't manage labels",
+  "ar": "لا يمكنك إدارة التصنيفات",
+  "de": "Sie können keine Labels verwalten",
+  "fr": "Vous ne pouvez pas gérer les étiquettes",
+  "it": "Non puoi gestire le etichette"
+ },
+ "Labels.noAccessBody": {
+  "en": "Marketing managers and specialists manage labels. You can still use them on posts.",
+  "ar": "يدير مديرو التسويق والمختصون التصنيفات، ويمكنك استخدامها في المنشورات.",
+  "de": "Marketingleitung und Fachleute verwalten Labels. Sie können sie trotzdem in Beiträgen nutzen.",
+  "fr": "Les responsables et spécialistes marketing gèrent les étiquettes. Vous pouvez quand même les utiliser.",
+  "it": "Responsabili e specialisti marketing gestiscono le etichette. Puoi comunque usarle nei post."
+ },
+ "Labels.noAccessReadOnly": {
+  "en": "You're viewing as someone else, so changes are turned off.",
+  "ar": "أنت تعرض بصفة شخص آخر، لذا التغييرات معطلة.",
+  "de": "Sie sehen die Ansicht einer anderen Person, Änderungen sind deaktiviert.",
+  "fr": "Vous consultez en tant qu’une autre personne : les modifications sont désactivées.",
+  "it": "Stai visualizzando come un’altra persona, quindi le modifiche sono disattivate."
+ },
+ "Labels.toPosts": {
+  "en": "Open posts",
+  "ar": "فتح المنشورات",
+  "de": "Beiträge öffnen",
+  "fr": "Ouvrir les publications",
+  "it": "Apri i post"
+ }
+}

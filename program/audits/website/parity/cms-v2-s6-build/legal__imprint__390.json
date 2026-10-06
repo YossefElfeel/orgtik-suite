@@ -1,0 +1,21 @@
+{
+  "route": "/legal#/imprint",
+  "width": 390,
+  "rendered": true,
+  "errors": [],
+  "text": "Skip to content\nView project\n0\nEN\nLEGAL & SITE INFORMATION\nClear information.\nOne place to find it.\nFind company details, privacy information and terms, or use the sitemap to explore every part of OrgTik.\nImprint\nPrivacy policy\nTerms and conditions\nSitemap\n(01)\nLEGAL\nImprint\nCompany and contact information for this frontend preview.\nOrganisation\nOrgTik. Final legal entity, registration details, and authorized representation require owner approval before publication.\nContact\nMuristrasse 3, 3123 Belp, Switzerland. Phone: +41 31 812 74 84. Email ownership must be verified before launch.\nPublication status\nThis page demonstrates the approved legal template. It is not final legal wording.\nTemplate text pending owner and legal review before publication.\nBack to top\nMake the next move matter.\nStrategy, design, and technology brought together around one clear ambition: moving your business forward.\nTalk to us\nExplore\nSoftware\nServices\nSelected work\nInsights\nAbout OrgTik\nStart here\nBuild a software plan\nPlans & pricing\nTell us about your project\nRoadmap\nSitemap\nMade in Switzerland\n© 2026 OrgTik.\nIndependent digital partner\nStrategy. Design. Technology.",
+  "headings": [
+    "h1 Clear information. One place to find it.",
+    "h2 Imprint",
+    "h3 Organisation",
+    "h3 Contact",
+    "h3 Publication status",
+    "h2 Make the next move matter.",
+    "h3 Explore",
+    "h3 Start here",
+    "h2 Already in your cart"
+  ],
+  "aria": "- link \"Skip to content\":\n- text: View project\n- banner:\n  - link \"OrgTik\":\n    - img \"OrgTik\"\n  - link \"Cart, 0 plans\":\n    - text: \"0\"\n  - button \"Language, English\": EN\n  - button \"Open menu\"\n- main:\n  - paragraph: Legal & site information\n  - heading \"Clear information. One place to find it.\" [level=1]\n  - paragraph: Find company details, privacy information and terms, or use the sitemap to explore every part of OrgTik.\n  - tablist \"Legal documents\":\n    - tab \"Imprint\" [selected]\n    - tab \"Privacy policy\"\n    - tab \"Terms and conditions\"\n    - tab \"Sitemap\"\n  - text: (01) Legal\n  - heading \"Imprint\" [level=2]\n  - paragraph: Company and contact information for this frontend preview.\n  - heading \"Organisation\" [level=3]\n  - paragraph: OrgTik. Final legal entity, registration details, and authorized representation require owner approval before publication.\n  - heading \"Contact\" [level=3]\n  - paragraph: \"Muristrasse 3, 3123 Belp, Switzerland. Phone: +41 31 812 74 84. Email ownership must be verified before launch.\"\n  - heading \"Publication status\" [level=3]\n  - paragraph: This page demonstrates the approved legal template. It is not final legal wording.\n  - text: Template text pending owner and legal review before publication.\n- contentinfo:\n  - link \"OrgTik home\":\n    - img \"OrgTik\"\n  - link \"Back to top\":\n  - heading \"Make the next move matter.\" [level=2]:\n    - text: Make the next move\n    - emphasis: matter.\n  - paragraph: \"Strategy, design, and technology brought together around one clear ambition: moving your business forward.\"\n  - button \"Talk to us\"\n  - navigation:\n    - heading \"Explore\" [level=3]\n    - link \"Software\":\n    - link \"Services\":\n    - link \"Selected work\":\n    - link \"Insights\":\n    - link \"About OrgTik\":\n    - heading \"Start here\" [level=3]\n    - link \"Build a software plan\":\n    - link \"Plans & pricing\":\n    - link \"Tell us about your project\":\n    - link \"Roadmap\":\n    - link \"Sitemap\":\n  - text: Made in Switzerland © 2026 OrgTik. Independent digital partner Strategy. Design. Technology.",
+  "title": "Imprint | OrgTik",
+  "url": "/legal/imprint"
+}

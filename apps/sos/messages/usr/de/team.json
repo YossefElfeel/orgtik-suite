@@ -1,0 +1,126 @@
+{
+  "Team": {
+    "title": "Team",
+    "description": "Alle in {name}, ihre Rolle und die Tools, die sie nutzen. Hier laden Sie Personen ein und ändern ihren Zugriff.",
+    "readOnly": "Alle in {name} und die Tools, die sie nutzen. Nur der Inhaber und Admins können Personen einladen oder den Zugriff ändern.",
+    "failedTitle": "Das Team konnte nicht geladen werden",
+    "failedBody": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "tableLabel": "Personen in {name}",
+    "emptyTitle": "Noch niemand hier",
+    "emptyBody": "Laden Sie Ihre Kolleginnen und Kollegen ein, damit sie die Tools des Workspace nutzen können.",
+    "you": "Sie",
+    "colPerson": "Person",
+    "colRole": "Rolle",
+    "colStatus": "Status",
+    "colSeat": "Platz",
+    "colTools": "Tool-Zugriff",
+    "colJoined": "Beigetreten",
+    "colActions": "Aktionen",
+    "invited": "Eingeladen",
+    "active": "Aktiv",
+    "seatPaid": "Bezahlter Platz",
+    "seatGuest": "Gast, kostenlos",
+    "allTools": "Alle Tools",
+    "noTools": "Keine Tools",
+    "moreTools": "+{count} weitere",
+    "notJoined": "Noch nicht",
+    "actionsFor": "Aktionen für {name}",
+    "makeRole": {
+      "admin": "Zum Admin machen",
+      "member": "Zum Mitglied machen",
+      "guest": "Zum Gast machen"
+    },
+    "changeAccess": "Tool-Zugriff ändern",
+    "withdraw": "Einladung zurückziehen",
+    "remove": "Aus dem Workspace entfernen",
+    "errors": {
+      "ownerOnly": "Nur der Inhaber des Workspace kann jemanden zum Admin machen."
+    },
+    "roleWhat": {
+      "admin": "{name} kann dann Personen einladen und ihren Zugriff ändern, aber nicht die Abrechnung.",
+      "member": "{name} nutzt dann die freigegebenen Tools und verwaltet das Team nicht.",
+      "guest": "{name} sieht dann nur, was mit dieser Person geteilt wird."
+    },
+    "impact": {
+      "seatsSame": "Die Plätze ändern sich nicht.",
+      "invitedPaid": "Nach der Annahme belegt die Person einen bezahlten Platz.",
+      "invitedGuest": "Nach der Annahme belegt die Person keinen bezahlten Platz.",
+      "addsSeatCost": "Fügt einen bezahlten Platz hinzu: {before} → {after} Plätze, {cost} mehr bei den Tools pro Nutzer.",
+      "addsSeat": "Fügt einen bezahlten Platz hinzu: {before} → {after} Plätze.",
+      "freesSeat": "Gibt einen bezahlten Platz frei: {before} → {after} Plätze.",
+      "withdraw": "Die Einladung an {email} gilt nicht mehr. Sie können später erneut einladen.",
+      "remove": "{name} verliert sofort den Zugriff auf {workspace} und alle Tools.",
+      "guestNoSeat": "Gäste belegen keinen Platz, der Preis ändert sich also nicht."
+    },
+    "roleTitle": "{name} zur Rolle {role} machen?",
+    "roleChanged": "{name} hat jetzt die Rolle {role}",
+    "withdrawTitle": "Einladung an {email} zurückziehen?",
+    "removeTitle": "{name} aus dem Workspace entfernen?",
+    "withdrawn": "Einladung an {email} zurückgezogen",
+    "removed": "{name} entfernt",
+    "accessChanged": "Tool-Zugriff für {name} geändert",
+    "seats": {
+      "title": "Plätze",
+      "modelA": "Jedes aktive Mitglied und jeder Admin ist ein Platz, und diese eine Platzzahl gilt für jedes Tool, das pro Nutzer abgerechnet wird, egal welche Tools die Person nutzt. Gäste sind kostenlos. Eine Einladung belegt einen Platz, sobald sie angenommen ist.",
+      "modelB": "Jedes pro Nutzer abgerechnete Tool zählt nur die Personen mit Zugriff darauf. Gäste sind kostenlos. Eine Einladung belegt einen Platz, sobald sie angenommen ist.",
+      "paid": "Bezahlte Plätze",
+      "guests": "Gäste",
+      "invited": "Offene Einladungen",
+      "linesTitle": "Pro Platz abgerechnete Tools",
+      "perSeat": "{price} pro Platz × {seats}",
+      "linesNote": "Preise pro Abrechnungszeitraum, ohne Steuer.",
+      "noLines": "Derzeit wird kein Tool pro Platz abgerechnet; weitere Personen ändern den Preis nicht."
+    },
+    "invite": {
+      "open": "Personen einladen",
+      "title": "Jemanden einladen",
+      "body": "Die Person erhält eine E-Mail, um {name} beizutreten. Sie sehen die Kosten vor dem Senden.",
+      "email": "E-Mail",
+      "role": "Rolle",
+      "adminOwnerOnly": "Nur der Inhaber kann jemanden zum Admin machen.",
+      "roleAdmin": "Lädt Personen ein und ändert ihren Zugriff. Keine Abrechnung.",
+      "roleMember": "Nutzt die Tools, für die Sie Zugriff geben.",
+      "roleGuest": "Sieht nur, was mit ihr geteilt wird. Kostenlos.",
+      "cancel": "Abbrechen",
+      "send": "Einladung senden",
+      "sent": "Einladung an {email} gesendet",
+      "sentGuest": "Gäste sind kostenlos: Die Plätze ändern sich nicht.",
+      "sentSeats": "Nach der Annahme zählt der Workspace {seats} bezahlte Plätze.",
+      "errors": {
+        "ownerOnly": "Nur der Inhaber des Workspace kann jemanden zum Admin machen. Wählen Sie eine andere Rolle oder fragen Sie den Inhaber.",
+        "role": "Wählen Sie eine Rolle.",
+        "taken": "Diese Person ist bereits im Workspace oder eingeladen.",
+        "email": "Geben Sie eine E-Mail-Adresse wie name@company.com ein.",
+        "tools": "Wählen Sie mindestens ein Tool oder geben Sie Zugriff auf alle Tools."
+      }
+    },
+    "access": {
+      "label": "Tool-Zugriff",
+      "all": "Alle Tools",
+      "allHint": "Alle Tools des Workspace, auch später hinzugefügte.",
+      "some": "Nur einige Tools",
+      "someHint": "Wählen Sie aus, welche.",
+      "which": "Tools"
+    },
+    "accessDialog": {
+      "title": "Tool-Zugriff für {name}",
+      "body": "Wählen Sie, welche Tools des Workspace die Person öffnen kann.",
+      "impactGuest": "Gäste sind kostenlos, die Plätze ändern sich also nicht.",
+      "impactSame": "Die Plätze ändern sich nicht: Eine Platzzahl gilt für jedes pro Nutzer abgerechnete Tool.",
+      "impactMore": "{count, plural, one {Fügt einen Platz bei # pro Nutzer abgerechneten Tool hinzu.} other {Fügt einen Platz bei # pro Nutzer abgerechneten Tools hinzu.}}",
+      "impactFewer": "{count, plural, one {Gibt einen Platz bei # pro Nutzer abgerechneten Tool frei.} other {Gibt einen Platz bei # pro Nutzer abgerechneten Tools frei.}}",
+      "errorEmpty": "Wählen Sie mindestens ein Tool oder geben Sie Zugriff auf alle Tools.",
+      "cancel": "Abbrechen",
+      "save": "Zugriff speichern"
+    },
+    "cost": {
+      "guestTitle": "Kostenlos",
+      "guestBody": "Gäste belegen keinen bezahlten Platz.",
+      "title": "Fügt nach der Annahme einen bezahlten Platz hinzu: {before} → {after} Plätze",
+      "linesIntro": "Jedes pro Nutzer abgerechnete Tool steigt um einen Platz:",
+      "total": "Mehr pro Abrechnungszeitraum",
+      "when": "Erst nach der Annahme. Preise ohne Steuer.",
+      "noLines": "Derzeit wird kein Tool pro Platz abgerechnet; der Preis ändert sich nicht."
+    }
+  }
+}

@@ -1,0 +1,91 @@
+[
+  {
+    "title": "Prices are the website's: Pricing mirrors its catalog read-only",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "mirror-read-only",
+        "ok": true,
+        "note": "catalog note 1; save 0; hr 49 a month"
+      },
+      {
+        "name": "api-refuses-content",
+        "ok": true,
+        "note": "423 managed_in_website"
+      },
+      {
+        "name": "seo-still-here",
+        "ok": true,
+        "note": "SEO 200; words 423"
+      }
+    ]
+  },
+  {
+    "title": "A file gets its description, rights and focal point; uploads and deletes follow usage",
+    "ok": true,
+    "passed": 5,
+    "steps": 5,
+    "detail": [
+      {
+        "name": "licence-needs-holder",
+        "ok": true,
+        "note": ""
+      },
+      {
+        "name": "described-and-cleared",
+        "ok": true,
+        "note": "issues [], focal 30/40"
+      },
+      {
+        "name": "in-use-not-deleted",
+        "ok": true,
+        "note": "Delete brand-glass.webp? It’s used in 20 places on the website. Take it out there first. This can't be undone."
+      },
+      {
+        "name": "upload-then-delete",
+        "ok": true,
+        "note": "md_23 uploaded, then deleted"
+      },
+      {
+        "name": "no-errors",
+        "ok": true,
+        "note": "clean"
+      }
+    ]
+  },
+  {
+    "title": "Redirects are checked; search visibility needs its own permission",
+    "ok": true,
+    "passed": 5,
+    "steps": 5,
+    "detail": [
+      {
+        "name": "chain-refused-then-added",
+        "ok": true,
+        "note": "19 public redirects"
+      },
+      {
+        "name": "health-filter",
+        "ok": true,
+        "note": "10 pages without a search description, matching the API"
+      },
+      {
+        "name": "seo-cannot-change-visibility",
+        "ok": true,
+        "note": "SEO role sees 0 visibility buttons"
+      },
+      {
+        "name": "admin-shows-in-search",
+        "ok": true,
+        "note": "Allow: /"
+      },
+      {
+        "name": "no-errors",
+        "ok": true,
+        "note": "clean"
+      }
+    ]
+  }
+]

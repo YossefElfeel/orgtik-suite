@@ -1,0 +1,434 @@
+{
+  "at": "2026-10-03T01:01:14.896Z",
+  "locale": "ar",
+  "walks": [
+    {
+      "id": "H0-from-suite",
+      "title": "Open HR from the suite",
+      "as": "mona.adel@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open HR from SOS (/go/hr_system)",
+          "ok": true,
+          "note": "via a one-time code, 8 addresses, none with a token",
+          "ms": 4666,
+          "url": "http://localhost:3004/ar/attendance",
+          "screenshot": "H0-from-suite/01-open-hr-from-sos-go-hr-system.png"
+        },
+        {
+          "n": 2,
+          "name": "The page is in the reader's language",
+          "ok": true,
+          "note": "lang ar, dir rtl",
+          "ms": 567,
+          "url": "http://localhost:3004/ar/attendance",
+          "screenshot": "H0-from-suite/02-the-page-is-in-the-reader-s-language.png"
+        },
+        {
+          "n": 3,
+          "name": "A deep link opened through SOS lands on its page",
+          "ok": true,
+          "note": "http://localhost:3004/ar/payroll?tab=monthly",
+          "ms": 2565,
+          "url": "http://localhost:3004/ar/payroll?tab=monthly",
+          "screenshot": "H0-from-suite/03-a-deep-link-opened-through-sos-lands-on-its-page.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "H4-payroll-run",
+      "title": "Payroll run: start, freeze, submit, approve, send to finance",
+      "as": "rana.saad@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open Payroll",
+          "ok": true,
+          "note": "no run for أكتوبر 2026 yet",
+          "ms": 4229,
+          "url": "http://localhost:3004/ar/payroll",
+          "screenshot": "H4-payroll-run/01-open-payroll.png"
+        },
+        {
+          "n": 2,
+          "name": "A click on the empty state doesn't start a run",
+          "ok": true,
+          "note": "no run created",
+          "ms": 2113,
+          "url": "http://localhost:3004/ar/payroll",
+          "screenshot": "H4-payroll-run/02-a-click-on-the-empty-state-doesn-t-start-a-run.png"
+        },
+        {
+          "n": 3,
+          "name": "Start the run",
+          "ok": true,
+          "note": "October 2026: 12 people, open",
+          "ms": 730,
+          "url": "http://localhost:3004/ar/payroll",
+          "screenshot": "H4-payroll-run/03-start-the-run.png"
+        },
+        {
+          "n": 4,
+          "name": "Freeze asks first, with the people and the money",
+          "ok": true,
+          "note": "هل تريد تجميد دورة 1–31 أكتوبر 2026؟ 12 شخصًا، والصافي ‏660,000.00 ج.م.‏. لا يمكن إضافة مكافآت أو خصومات حتى يُعاد فتح الدورة. إلغاء تجميد الدورة",
+          "ms": 700,
+          "url": "http://localhost:3004/ar/payroll",
+          "screenshot": "H4-payroll-run/04-freeze-asks-first-with-the-people-and-the-money.png"
+        },
+        {
+          "n": 5,
+          "name": "Confirm: the run is frozen",
+          "ok": true,
+          "note": "status frozen",
+          "ms": 847,
+          "url": "http://localhost:3004/ar/payroll",
+          "screenshot": "H4-payroll-run/05-confirm-the-run-is-frozen.png"
+        },
+        {
+          "n": 6,
+          "name": "Select the page's rows and submit them to the admin",
+          "ok": true,
+          "note": "10 of 12 submitted",
+          "ms": 1048,
+          "url": "http://localhost:3004/ar/payroll",
+          "screenshot": "H4-payroll-run/06-select-the-page-s-rows-and-submit-them-to-the-admin.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "H4b-approve",
+      "title": "Payroll run: the admin approves all (confirmed)",
+      "as": "mona.adel@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open the batch from Pending approvals",
+          "ok": true,
+          "note": "http://localhost:3004/ar/payroll/8",
+          "ms": 3724,
+          "url": "http://localhost:3004/ar/payroll/8",
+          "screenshot": "H4b-approve/01-open-the-batch-from-pending-approvals.png"
+        },
+        {
+          "n": 2,
+          "name": "Approve all asks first, with the people and the money",
+          "ok": true,
+          "note": "هل تريد قبول كل رواتب 1–31 أكتوبر 2026؟ 10 أشخاص، والصافي ‏587,000.00 ج.م.‏. تعود الرواتب المقبولة إلى الموارد البشرية لترسلها إلى الحسابات للصرف. إلغاء قبول ال",
+          "ms": 680,
+          "url": "http://localhost:3004/ar/payroll/8",
+          "screenshot": "H4b-approve/02-approve-all-asks-first-with-the-people-and-the-money.png"
+        },
+        {
+          "n": 3,
+          "name": "Confirm: everyone is approved",
+          "ok": true,
+          "note": "10 approved",
+          "ms": 3185,
+          "url": "http://localhost:3004/ar/payroll/8",
+          "screenshot": "H4b-approve/03-confirm-everyone-is-approved.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "H4c-to-finance",
+      "title": "Payroll run: HR sends the approved pay to finance (confirmed)",
+      "as": "rana.saad@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Send to finance asks first, with the amount",
+          "ok": true,
+          "note": "هل تريد إرسال دورة 1–31 أكتوبر 2026 إلى الحسابات؟ 10 أشخاص مقبولين، بمبلغ ‏587,000.00 ج.م.‏، إلى قائمة الصرف. تُبلَّغ الحسابات وتتولّى الدفع. لا يمكن التراجع عن هذا الإجراء. إلغاء ",
+          "ms": 4444,
+          "url": "http://localhost:3004/ar/payroll",
+          "screenshot": "H4c-to-finance/01-send-to-finance-asks-first-with-the-amount.png"
+        },
+        {
+          "n": 2,
+          "name": "Cancel: nothing is sent",
+          "ok": true,
+          "note": "0 queued",
+          "ms": 1444,
+          "url": "http://localhost:3004/ar/payroll",
+          "screenshot": "H4c-to-finance/02-cancel-nothing-is-sent.png"
+        },
+        {
+          "n": 3,
+          "name": "Confirm: the approved pay is in the finance queue",
+          "ok": true,
+          "note": "10 queued for payout",
+          "ms": 3185,
+          "url": "http://localhost:3004/ar/payroll",
+          "screenshot": "H4c-to-finance/03-confirm-the-approved-pay-is-in-the-finance-queue.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "H1-add-employee",
+      "title": "Add an employee with a Swiss address",
+      "as": "rana.saad@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open Add employee: one sheet",
+          "ok": true,
+          "note": "1 sheet(s)",
+          "ms": 3930,
+          "url": "http://localhost:3004/ar/employees",
+          "screenshot": "H1-add-employee/01-open-add-employee-one-sheet.png"
+        },
+        {
+          "n": 2,
+          "name": "Fill the personal details, Zürich, post code 801",
+          "ok": true,
+          "note": "الرمز البريدي في سويسرا يكون مثل 8001.",
+          "ms": 2733,
+          "url": "http://localhost:3004/ar/employees",
+          "screenshot": "H1-add-employee/02-fill-the-personal-details-z-rich-post-code-801.png"
+        },
+        {
+          "n": 3,
+          "name": "Post code 8001: on to step 2, still one sheet",
+          "ok": true,
+          "note": "1 sheet(s), ?employee_id=17&step=employee",
+          "ms": 2581,
+          "url": "http://localhost:3004/ar/employees?employee_id=17&step=employee",
+          "screenshot": "H1-add-employee/03-post-code-8001-on-to-step-2-still-one-sheet.png"
+        },
+        {
+          "n": 4,
+          "name": "Lea Keller exists",
+          "ok": true,
+          "note": "Lea Keller, lea.keller.muroqlc0@orgtik.test",
+          "ms": 610,
+          "url": "http://localhost:3004/ar/employees?employee_id=17&step=employee",
+          "screenshot": "H1-add-employee/04-lea-keller-exists.png"
+        },
+        {
+          "n": 5,
+          "name": "Close: the list is back, the wizard's place is gone from the address",
+          "ok": true,
+          "note": "/ar/employees",
+          "ms": 1416,
+          "url": "http://localhost:3004/ar/employees",
+          "screenshot": "H1-add-employee/05-close-the-list-is-back-the-wizard-s-place-is-gone-from-the-address.png"
+        },
+        {
+          "n": 6,
+          "name": "A row's edit action opens the edit sheet, and only it",
+          "ok": true,
+          "note": "1 sheet(s), ?view=table&mode=edit&employee_id=17&step=personal",
+          "ms": 1110,
+          "url": "http://localhost:3004/ar/employees?view=table&mode=edit&employee_id=17&step=personal",
+          "screenshot": "H1-add-employee/06-a-row-s-edit-action-opens-the-edit-sheet-and-only-it.png"
+        }
+      ],
+      "console": [
+        "Cannot update a component (`%s`) while rendering a different component (`%s`). To locate the bad setState() call inside `%s`, follow the stack trace as described in https://react.dev/link/setstate-in-render Router EmployeeWizardProvider EmployeeWizardProvider"
+      ],
+      "api": []
+    },
+    {
+      "id": "H1b-export",
+      "title": "Export the filtered people list",
+      "as": "rana.saad@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Search for Salma, then Export",
+          "ok": true,
+          "note": "UTF-8 with BOM, 1 row(s): \"Salma Nabil\",\"salma.nabil@orgtik.test\",\"Engineering\",\"Frontend Developer\",\"دوام",
+          "ms": 3611,
+          "url": "http://localhost:3004/ar/employees?q=salma",
+          "screenshot": "H1b-export/01-search-for-salma-then-export.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "H3-decide-leave",
+      "title": "Decide on a leave request (HR)",
+      "as": "rana.saad@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open a pending request",
+          "ok": true,
+          "note": "TOR-2026-0011, Hoda Ashraf",
+          "ms": 5083,
+          "url": "http://localhost:3004/ar/time-off",
+          "screenshot": "H3-decide-leave/01-open-a-pending-request.png"
+        },
+        {
+          "n": 2,
+          "name": "Submit is off until a decision is chosen",
+          "ok": true,
+          "note": "اختر القبول أو الرفض أولًا.",
+          "ms": 670,
+          "url": "http://localhost:3004/ar/time-off",
+          "screenshot": "H3-decide-leave/02-submit-is-off-until-a-decision-is-chosen.png"
+        },
+        {
+          "n": 3,
+          "name": "Choose Approve: it says it's on, Submit turns on",
+          "ok": true,
+          "note": "aria-pressed true, Submit on",
+          "ms": 713,
+          "url": "http://localhost:3004/ar/time-off",
+          "screenshot": "H3-decide-leave/03-choose-approve-it-says-it-s-on-submit-turns-on.png"
+        },
+        {
+          "n": 4,
+          "name": "Submit: HR's decision is approved",
+          "ok": true,
+          "note": "HR approved, request approved",
+          "ms": 893,
+          "url": "http://localhost:3004/ar/time-off",
+          "screenshot": "H3-decide-leave/04-submit-hr-s-decision-is-approved.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "H3b-admin-decides",
+      "title": "The admin can decide on leave",
+      "as": "mona.adel@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open a pending request as the admin",
+          "ok": true,
+          "note": "TOR-2026-0010",
+          "ms": 3868,
+          "url": "http://localhost:3004/ar/time-off",
+          "screenshot": "H3b-admin-decides/01-open-a-pending-request-as-the-admin.png"
+        },
+        {
+          "n": 2,
+          "name": "Reject with a note",
+          "ok": true,
+          "note": "HR rejected, request rejected",
+          "ms": 978,
+          "url": "http://localhost:3004/ar/time-off",
+          "screenshot": "H3b-admin-decides/02-reject-with-a-note.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "H6-delete-department",
+      "title": "Delete a department",
+      "as": "rana.saad@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open Department, press the row's delete",
+          "ok": true,
+          "note": "هل تريد حذف قسم Engineering؟ فيه 5 أشخاص، وسيحتفظون بوظائفهم ويغادرون القسم. لا يمكن التراجع عن هذا الإجراء. إلغاء حذف القسم",
+          "ms": 3744,
+          "url": "http://localhost:3004/ar/department",
+          "screenshot": "H6-delete-department/01-open-department-press-the-row-s-delete.png"
+        },
+        {
+          "n": 2,
+          "name": "Cancel: it's still there",
+          "ok": true,
+          "note": "Engineering kept",
+          "ms": 1469,
+          "url": "http://localhost:3004/ar/department",
+          "screenshot": "H6-delete-department/02-cancel-it-s-still-there.png"
+        },
+        {
+          "n": 3,
+          "name": "Delete: it's gone, its people stay",
+          "ok": true,
+          "note": "Engineering deleted",
+          "ms": 933,
+          "url": "http://localhost:3004/ar/department",
+          "screenshot": "H6-delete-department/03-delete-it-s-gone-its-people-stay.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "H6b-list-in-address",
+      "title": "A list keeps its page through a reload",
+      "as": "rana.saad@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Employees, page 2, reload",
+          "ok": true,
+          "note": "current page 2, ?view=table&limit=5&page=2",
+          "ms": 5765,
+          "url": "http://localhost:3004/ar/employees?view=table&limit=5&page=2",
+          "screenshot": "H6b-list-in-address/01-employees-page-2-reload.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "H8-ticket-markup",
+      "title": "A ticket message with script doesn't run it",
+      "as": "rana.saad@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Post a message carrying script, open the ticket",
+          "ok": true,
+          "note": "script didn't run, formatting kept, javascript: links 0",
+          "ms": 5144,
+          "url": "http://localhost:3004/ar/tickets/1010",
+          "screenshot": "H8-ticket-markup/01-post-a-message-carrying-script-open-the-ticket.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "H7-no-access",
+      "title": "A manager opens payroll",
+      "as": "karim.hassan@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open Payroll as a manager",
+          "ok": true,
+          "note": "ليست لديك صلاحية الوصول إلى هذه الصفحة",
+          "ms": 3882,
+          "url": "http://localhost:3004/ar/payroll",
+          "screenshot": "H7-no-access/01-open-payroll-as-a-manager.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    }
+  ]
+}

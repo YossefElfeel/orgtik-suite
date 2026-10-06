@@ -1,0 +1,884 @@
+{
+ "PostCalendar.title": {
+  "en": "Calendar",
+  "ar": "التقويم",
+  "de": "Kalender",
+  "fr": "Calendrier",
+  "it": "Calendario"
+ },
+ "PostCalendar.description": {
+  "en": "Posts on the day they go out. Times are in {zone}.",
+  "ar": "المنشورات في يوم نشرها. الأوقات بتوقيت {zone}.",
+  "de": "Beiträge an dem Tag, an dem sie erscheinen. Zeiten in {zone}.",
+  "fr": "Les publications au jour de leur parution. Heures en {zone}.",
+  "it": "I post nel giorno in cui escono. Orari in {zone}."
+ },
+ "PostCalendar.newPost": {
+  "en": "New post",
+  "ar": "منشور جديد",
+  "de": "Neuer Beitrag",
+  "fr": "Nouvelle publication",
+  "it": "Nuovo post"
+ },
+ "PostCalendar.view": {
+  "en": "View",
+  "ar": "العرض",
+  "de": "Ansicht",
+  "fr": "Affichage",
+  "it": "Vista"
+ },
+ "PostCalendar.month": {
+  "en": "Month",
+  "ar": "شهر",
+  "de": "Monat",
+  "fr": "Mois",
+  "it": "Mese"
+ },
+ "PostCalendar.week": {
+  "en": "Week",
+  "ar": "أسبوع",
+  "de": "Woche",
+  "fr": "Semaine",
+  "it": "Settimana"
+ },
+ "PostCalendar.untitled": {
+  "en": "Untitled post",
+  "ar": "منشور بلا عنوان",
+  "de": "Beitrag ohne Titel",
+  "fr": "Publication sans titre",
+  "it": "Post senza titolo"
+ },
+ "PostCalendar.dayCount": {
+  "en": "{count, plural, =0 {Nothing goes out this day} one {# post goes out this day} other {# posts go out this day}}",
+  "ar": "{count, plural, zero {لا يُنشر شيء في هذا اليوم} one {يُنشر منشور واحد في هذا اليوم} two {يُنشر منشوران في هذا اليوم} few {تُنشر # منشورات في هذا اليوم} many {يُنشر # منشورًا في هذا اليوم} other {يُنشر # منشور في هذا اليوم}}",
+  "de": "{count, plural, =0 {An diesem Tag erscheint nichts} one {# Beitrag erscheint an diesem Tag} other {# Beiträge erscheinen an diesem Tag}}",
+  "fr": "{count, plural, =0 {Rien ne paraît ce jour-là} one {# publication paraît ce jour-là} other {# publications paraissent ce jour-là}}",
+  "it": "{count, plural, =0 {Niente esce questo giorno} one {# post esce questo giorno} other {# post escono questo giorno}}"
+ },
+ "PostCalendar.emptyDay": {
+  "en": "Nothing scheduled",
+  "ar": "لا شيء مجدول",
+  "de": "Nichts geplant",
+  "fr": "Rien de programmé",
+  "it": "Niente in programma"
+ },
+ "PostCalendar.emptyDayBody": {
+  "en": "Write a post and schedule it for this day.",
+  "ar": "اكتب منشورًا وجدوِله لهذا اليوم.",
+  "de": "Schreiben Sie einen Beitrag und planen Sie ihn für diesen Tag.",
+  "fr": "Rédigez une publication et programmez-la ce jour-là.",
+  "it": "Scrivi un post e programmalo per questo giorno."
+ },
+ "PostCalendar.emptyDayReader": {
+  "en": "Posts your team schedules for this day appear here.",
+  "ar": "تظهر هنا المنشورات التي يجدولها فريقك لهذا اليوم.",
+  "de": "Beiträge, die Ihr Team für diesen Tag plant, erscheinen hier.",
+  "fr": "Les publications programmées ce jour-là par votre équipe apparaissent ici.",
+  "it": "I post che il tuo team programma per questo giorno compaiono qui."
+ },
+ "Boost.title": {
+  "en": "Boost this post",
+  "ar": "ترويج هذا المنشور",
+  "de": "Diesen Beitrag bewerben",
+  "fr": "Promouvoir cette publication",
+  "it": "Promuovi questo post"
+ },
+ "Boost.description": {
+  "en": "Pay to show {name} to more people. Nothing is charged until you confirm.",
+  "ar": "ادفع لعرض {name} على عدد أكبر من الناس. لا يُخصم أي مبلغ قبل تأكيدك.",
+  "de": "Zahlen Sie, damit mehr Menschen {name} sehen. Belastet wird erst nach Ihrer Bestätigung.",
+  "fr": "Payez pour montrer {name} à plus de monde. Rien n’est facturé avant votre confirmation.",
+  "it": "Paga per mostrare {name} a più persone. Non viene addebitato nulla prima della conferma."
+ },
+ "Boost.platformLabel": {
+  "en": "Platform",
+  "ar": "المنصة",
+  "de": "Plattform",
+  "fr": "Plateforme",
+  "it": "Piattaforma"
+ },
+ "Boost.account": {
+  "en": "Charged to {account}, in {currency}.",
+  "ar": "يُخصم من {account} بعملة {currency}.",
+  "de": "Belastet wird {account}, in {currency}.",
+  "fr": "Facturé sur {account}, en {currency}.",
+  "it": "Addebitato su {account}, in {currency}."
+ },
+ "Boost.dailyBudget": {
+  "en": "Daily budget",
+  "ar": "الميزانية اليومية",
+  "de": "Tagesbudget",
+  "fr": "Budget quotidien",
+  "it": "Budget giornaliero"
+ },
+ "Boost.dailyBudgetHint": {
+  "en": "Spent each day the boost runs.",
+  "ar": "يُنفق في كل يوم من أيام الترويج.",
+  "de": "Wird an jedem Tag der Laufzeit ausgegeben.",
+  "fr": "Dépensé chaque jour de la promotion.",
+  "it": "Speso ogni giorno della promozione."
+ },
+ "Boost.days": {
+  "en": "Days",
+  "ar": "عدد الأيام",
+  "de": "Tage",
+  "fr": "Jours",
+  "it": "Giorni"
+ },
+ "Boost.totalLine": {
+  "en": "{daily} a day for {days, plural, one {# day} other {# days}}: {total} in total",
+  "ar": "{daily} يوميًا لمدة {days, plural, zero {# يوم} one {يوم واحد} two {يومين} few {# أيام} many {# يومًا} other {# يوم}}: الإجمالي {total}",
+  "de": "{daily} pro Tag für {days, plural, one {# Tag} other {# Tage}}: insgesamt {total}",
+  "fr": "{daily} par jour pendant {days, plural, one {# jour} other {# jours}} : {total} au total",
+  "it": "{daily} al giorno per {days, plural, one {# giorno} other {# giorni}}: {total} in totale"
+ },
+ "Boost.totalEmpty": {
+  "en": "Enter a daily budget and the number of days to see the total.",
+  "ar": "أدخل الميزانية اليومية وعدد الأيام لترى الإجمالي.",
+  "de": "Geben Sie Tagesbudget und Tage ein, um die Summe zu sehen.",
+  "fr": "Saisissez un budget quotidien et un nombre de jours pour voir le total.",
+  "it": "Inserisci budget giornaliero e giorni per vedere il totale."
+ },
+ "Boost.objective": {
+  "en": "Goal",
+  "ar": "الهدف",
+  "de": "Ziel",
+  "fr": "Objectif",
+  "it": "Obiettivo"
+ },
+ "Boost.cta": {
+  "en": "Button",
+  "ar": "الزر",
+  "de": "Schaltfläche",
+  "fr": "Bouton",
+  "it": "Pulsante"
+ },
+ "Boost.country": {
+  "en": "Country",
+  "ar": "الدولة",
+  "de": "Land",
+  "fr": "Pays",
+  "it": "Paese"
+ },
+ "Boost.countryPlaceholder": {
+  "en": "Choose a country",
+  "ar": "اختر دولة",
+  "de": "Land wählen",
+  "fr": "Choisir un pays",
+  "it": "Scegli un paese"
+ },
+ "Boost.noCountry": {
+  "en": "No country matches",
+  "ar": "لا دولة مطابقة",
+  "de": "Kein passendes Land",
+  "fr": "Aucun pays ne correspond",
+  "it": "Nessun paese corrisponde"
+ },
+ "Boost.ageFrom": {
+  "en": "Age from",
+  "ar": "العمر من",
+  "de": "Alter ab",
+  "fr": "Âge de",
+  "it": "Età da"
+ },
+ "Boost.ageTo": {
+  "en": "Age to",
+  "ar": "العمر حتى",
+  "de": "Alter bis",
+  "fr": "Âge jusqu’à",
+  "it": "Età fino a"
+ },
+ "Boost.placements": {
+  "en": "Where it shows",
+  "ar": "أماكن الظهور",
+  "de": "Wo er erscheint",
+  "fr": "Emplacements",
+  "it": "Dove appare"
+ },
+ "Boost.startLabel": {
+  "en": "Start",
+  "ar": "البدء",
+  "de": "Start",
+  "fr": "Début",
+  "it": "Inizio"
+ },
+ "Boost.startNow": {
+  "en": "Now",
+  "ar": "الآن",
+  "de": "Sofort",
+  "fr": "Maintenant",
+  "it": "Subito"
+ },
+ "Boost.startLater": {
+  "en": "Later",
+  "ar": "لاحقًا",
+  "de": "Später",
+  "fr": "Plus tard",
+  "it": "Più tardi"
+ },
+ "Boost.startDate": {
+  "en": "Start date",
+  "ar": "تاريخ البدء",
+  "de": "Startdatum",
+  "fr": "Date de début",
+  "it": "Data di inizio"
+ },
+ "Boost.startTime": {
+  "en": "Start time",
+  "ar": "وقت البدء",
+  "de": "Startzeit",
+  "fr": "Heure de début",
+  "it": "Ora di inizio"
+ },
+ "Boost.adText": {
+  "en": "Ad text (optional)",
+  "ar": "نص الإعلان (اختياري)",
+  "de": "Anzeigentext (optional)",
+  "fr": "Texte de l’annonce (facultatif)",
+  "it": "Testo dell’annuncio (facoltativo)"
+ },
+ "Boost.headline": {
+  "en": "Headline",
+  "ar": "العنوان الرئيسي",
+  "de": "Überschrift",
+  "fr": "Titre",
+  "it": "Titolo"
+ },
+ "Boost.primaryText": {
+  "en": "Main text",
+  "ar": "النص الرئيسي",
+  "de": "Haupttext",
+  "fr": "Texte principal",
+  "it": "Testo principale"
+ },
+ "Boost.destination": {
+  "en": "Link",
+  "ar": "الرابط",
+  "de": "Link",
+  "fr": "Lien",
+  "it": "Link"
+ },
+ "Boost.destinationHint": {
+  "en": "Where the button leads. Starts with https://",
+  "ar": "وجهة الزر. يبدأ بـ https://",
+  "de": "Wohin die Schaltfläche führt. Beginnt mit https://",
+  "fr": "Où mène le bouton. Commence par https://",
+  "it": "Dove porta il pulsante. Inizia con https://"
+ },
+ "Boost.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Boost.back": {
+  "en": "Back",
+  "ar": "رجوع",
+  "de": "Zurück",
+  "fr": "Retour",
+  "it": "Indietro"
+ },
+ "Boost.boost": {
+  "en": "Boost",
+  "ar": "ترويج",
+  "de": "Bewerben",
+  "fr": "Promouvoir",
+  "it": "Promuovi"
+ },
+ "Boost.boostFor": {
+  "en": "Boost for {total}",
+  "ar": "روّج مقابل {total}",
+  "de": "Für {total} bewerben",
+  "fr": "Promouvoir pour {total}",
+  "it": "Promuovi per {total}"
+ },
+ "Boost.confirmTitle": {
+  "en": "Spend {total} on this boost?",
+  "ar": "إنفاق {total} على هذا الترويج؟",
+  "de": "{total} für diese Bewerbung ausgeben?",
+  "fr": "Dépenser {total} pour cette promotion ?",
+  "it": "Spendere {total} per questa promozione?"
+ },
+ "Boost.confirmImpact": {
+  "en": "{total} ({daily} a day for {days, plural, one {# day} other {# days}}) is charged to {account} to promote {name} on {platform}. It starts {start}.",
+  "ar": "يُخصم {total} ({daily} يوميًا لمدة {days, plural, zero {# يوم} one {يوم واحد} two {يومين} few {# أيام} many {# يومًا} other {# يوم}}) من {account} لترويج {name} على {platform}. يبدأ {start}.",
+  "de": "{total} ({daily} pro Tag für {days, plural, one {# Tag} other {# Tage}}) werden {account} belastet, um {name} auf {platform} zu bewerben. Start: {start}.",
+  "fr": "{total} ({daily} par jour pendant {days, plural, one {# jour} other {# jours}}) sont facturés sur {account} pour promouvoir {name} sur {platform}. Début : {start}.",
+  "it": "{total} ({daily} al giorno per {days, plural, one {# giorno} other {# giorni}}) vengono addebitati su {account} per promuovere {name} su {platform}. Inizio: {start}."
+ },
+ "Boost.confirmStartNow": {
+  "en": "now",
+  "ar": "الآن",
+  "de": "sofort",
+  "fr": "maintenant",
+  "it": "subito"
+ },
+ "Boost.refusedTitle": {
+  "en": "{platform} didn't start the boost",
+  "ar": "لم يبدأ {platform} الترويج",
+  "de": "{platform} hat die Bewerbung nicht gestartet",
+  "fr": "{platform} n’a pas lancé la promotion",
+  "it": "{platform} non ha avviato la promozione"
+ },
+ "Boost.refusedNoReason": {
+  "en": "No reason was given. Check the ad account and try again.",
+  "ar": "لم يُذكر سبب. تحقق من الحساب الإعلاني وحاول مرة أخرى.",
+  "de": "Kein Grund angegeben. Prüfen Sie das Werbekonto und versuchen Sie es erneut.",
+  "fr": "Aucune raison donnée. Vérifiez le compte publicitaire et réessayez.",
+  "it": "Nessun motivo indicato. Controlla l’account pubblicitario e riprova."
+ },
+ "Boost.refusedToast": {
+  "en": "The boost didn't start. Nothing was charged.",
+  "ar": "لم يبدأ الترويج، ولم يُخصم أي مبلغ.",
+  "de": "Die Bewerbung ist nicht gestartet. Nichts wurde belastet.",
+  "fr": "La promotion n’a pas démarré. Rien n’a été facturé.",
+  "it": "La promozione non è partita. Non è stato addebitato nulla."
+ },
+ "Boost.failedBody": {
+  "en": "The boost wasn't sent. Check the details and try again.",
+  "ar": "لم يُرسل الترويج. تحقق من التفاصيل وحاول مرة أخرى.",
+  "de": "Die Bewerbung wurde nicht gesendet. Prüfen Sie die Angaben und versuchen Sie es erneut.",
+  "fr": "La promotion n’a pas été envoyée. Vérifiez les informations et réessayez.",
+  "it": "La promozione non è stata inviata. Controlla i dati e riprova."
+ },
+ "Boost.errBudget": {
+  "en": "Enter a daily budget of at least {min}.",
+  "ar": "أدخل ميزانية يومية لا تقل عن {min}.",
+  "de": "Geben Sie ein Tagesbudget von mindestens {min} ein.",
+  "fr": "Saisissez un budget quotidien d’au moins {min}.",
+  "it": "Inserisci un budget giornaliero di almeno {min}."
+ },
+ "Boost.errDays": {
+  "en": "Choose 1 to 365 days.",
+  "ar": "اختر من 1 إلى 365 يومًا.",
+  "de": "Wählen Sie 1 bis 365 Tage.",
+  "fr": "Choisissez de 1 à 365 jours.",
+  "it": "Scegli da 1 a 365 giorni."
+ },
+ "Boost.errAge": {
+  "en": "Choose ages from 13 to 65, the first no higher than the second.",
+  "ar": "اختر أعمارًا من 13 إلى 65، على ألا يزيد الأول عن الثاني.",
+  "de": "Wählen Sie ein Alter von 13 bis 65, das erste nicht höher als das zweite.",
+  "fr": "Choisissez des âges de 13 à 65, le premier ne dépassant pas le second.",
+  "it": "Scegli età da 13 a 65, la prima non superiore alla seconda."
+ },
+ "Boost.errPlacements": {
+  "en": "Choose at least one place for it to show.",
+  "ar": "اختر مكانًا واحدًا على الأقل للظهور.",
+  "de": "Wählen Sie mindestens einen Platz.",
+  "fr": "Choisissez au moins un emplacement.",
+  "it": "Scegli almeno un posizionamento."
+ },
+ "Boost.errCountry": {
+  "en": "Choose a country.",
+  "ar": "اختر دولة.",
+  "de": "Wählen Sie ein Land.",
+  "fr": "Choisissez un pays.",
+  "it": "Scegli un paese."
+ },
+ "Boost.errStart": {
+  "en": "Pick a start time that hasn't passed.",
+  "ar": "اختر وقت بدء لم يمضِ.",
+  "de": "Wählen Sie eine Startzeit in der Zukunft.",
+  "fr": "Choisissez une heure de début à venir.",
+  "it": "Scegli un orario di inizio futuro."
+ },
+ "Boost.errUrl": {
+  "en": "Enter a link that starts with https://",
+  "ar": "أدخل رابطًا يبدأ بـ https://",
+  "de": "Geben Sie einen Link ein, der mit https:// beginnt",
+  "fr": "Saisissez un lien qui commence par https://",
+  "it": "Inserisci un link che inizia con https://"
+ },
+ "Boost.objective_OUTCOME_AWARENESS": {
+  "en": "Get seen by more people",
+  "ar": "الوصول إلى عدد أكبر من الناس",
+  "de": "Von mehr Menschen gesehen werden",
+  "fr": "Être vu par plus de monde",
+  "it": "Farsi vedere da più persone"
+ },
+ "Boost.objective_OUTCOME_TRAFFIC": {
+  "en": "Get visits to a link",
+  "ar": "زيارات إلى رابط",
+  "de": "Besuche auf einem Link",
+  "fr": "Obtenir des visites sur un lien",
+  "it": "Ottenere visite a un link"
+ },
+ "Boost.objective_OUTCOME_ENGAGEMENT": {
+  "en": "Get likes, comments and shares",
+  "ar": "إعجابات وتعليقات ومشاركات",
+  "de": "Likes, Kommentare und Shares",
+  "fr": "Obtenir des J’aime, commentaires et partages",
+  "it": "Ottenere Mi piace, commenti e condivisioni"
+ },
+ "Boost.objective_OUTCOME_LEADS": {
+  "en": "Collect leads",
+  "ar": "جمع عملاء محتملين",
+  "de": "Leads sammeln",
+  "fr": "Collecter des prospects",
+  "it": "Raccogliere contatti"
+ },
+ "Boost.objective_OUTCOME_APP_PROMOTION": {
+  "en": "Get app installs",
+  "ar": "تثبيت التطبيق",
+  "de": "App-Installationen",
+  "fr": "Obtenir des installations d’app",
+  "it": "Ottenere installazioni dell’app"
+ },
+ "Boost.objective_OUTCOME_SALES": {
+  "en": "Get sales",
+  "ar": "تحقيق مبيعات",
+  "de": "Verkäufe erzielen",
+  "fr": "Générer des ventes",
+  "it": "Ottenere vendite"
+ },
+ "Boost.cta_LEARN_MORE": {
+  "en": "Learn more",
+  "ar": "اعرف المزيد",
+  "de": "Mehr erfahren",
+  "fr": "En savoir plus",
+  "it": "Scopri di più"
+ },
+ "Boost.cta_SHOP_NOW": {
+  "en": "Shop now",
+  "ar": "تسوّق الآن",
+  "de": "Jetzt einkaufen",
+  "fr": "Acheter",
+  "it": "Acquista ora"
+ },
+ "Boost.cta_SIGN_UP": {
+  "en": "Sign up",
+  "ar": "سجّل",
+  "de": "Registrieren",
+  "fr": "S’inscrire",
+  "it": "Iscriviti"
+ },
+ "Boost.cta_CONTACT_US": {
+  "en": "Contact us",
+  "ar": "تواصل معنا",
+  "de": "Kontakt",
+  "fr": "Nous contacter",
+  "it": "Contattaci"
+ },
+ "Boost.cta_BOOK_NOW": {
+  "en": "Book now",
+  "ar": "احجز الآن",
+  "de": "Jetzt buchen",
+  "fr": "Réserver",
+  "it": "Prenota ora"
+ },
+ "Boost.cta_APPLY_NOW": {
+  "en": "Apply now",
+  "ar": "قدّم الآن",
+  "de": "Jetzt bewerben",
+  "fr": "Postuler",
+  "it": "Candidati ora"
+ },
+ "Boost.cta_DOWNLOAD": {
+  "en": "Download",
+  "ar": "تنزيل",
+  "de": "Herunterladen",
+  "fr": "Télécharger",
+  "it": "Scarica"
+ },
+ "Boost.cta_GET_OFFER": {
+  "en": "Get offer",
+  "ar": "احصل على العرض",
+  "de": "Angebot sichern",
+  "fr": "Profiter de l’offre",
+  "it": "Ottieni l’offerta"
+ },
+ "Boost.cta_GET_QUOTE": {
+  "en": "Get a quote",
+  "ar": "اطلب عرض سعر",
+  "de": "Angebot anfordern",
+  "fr": "Demander un devis",
+  "it": "Richiedi un preventivo"
+ },
+ "Boost.cta_SUBSCRIBE": {
+  "en": "Subscribe",
+  "ar": "اشترك",
+  "de": "Abonnieren",
+  "fr": "S’abonner",
+  "it": "Iscriviti al canale"
+ },
+ "Boost.cta_WATCH_MORE": {
+  "en": "Watch more",
+  "ar": "شاهد المزيد",
+  "de": "Mehr ansehen",
+  "fr": "Regarder plus",
+  "it": "Guarda altro"
+ },
+ "Boost.placement_facebook_feed": {
+  "en": "Facebook feed",
+  "ar": "موجز Facebook",
+  "de": "Facebook-Feed",
+  "fr": "Fil Facebook",
+  "it": "Feed di Facebook"
+ },
+ "Boost.placement_facebook_stories": {
+  "en": "Facebook stories",
+  "ar": "قصص Facebook",
+  "de": "Facebook-Stories",
+  "fr": "Stories Facebook",
+  "it": "Storie di Facebook"
+ },
+ "Boost.placement_facebook_reels": {
+  "en": "Facebook reels",
+  "ar": "ريلز Facebook",
+  "de": "Facebook-Reels",
+  "fr": "Reels Facebook",
+  "it": "Reel di Facebook"
+ },
+ "Boost.placement_instagram_feed": {
+  "en": "Instagram feed",
+  "ar": "موجز Instagram",
+  "de": "Instagram-Feed",
+  "fr": "Fil Instagram",
+  "it": "Feed di Instagram"
+ },
+ "Boost.placement_instagram_stories": {
+  "en": "Instagram stories",
+  "ar": "قصص Instagram",
+  "de": "Instagram-Stories",
+  "fr": "Stories Instagram",
+  "it": "Storie di Instagram"
+ },
+ "Boost.placement_instagram_reels": {
+  "en": "Instagram reels",
+  "ar": "ريلز Instagram",
+  "de": "Instagram-Reels",
+  "fr": "Reels Instagram",
+  "it": "Reel di Instagram"
+ },
+ "Boost.placement_messenger": {
+  "en": "Messenger",
+  "ar": "Messenger",
+  "de": "Messenger",
+  "fr": "Messenger",
+  "it": "Messenger"
+ },
+ "Boost.placement_audience_network": {
+  "en": "Audience Network",
+  "ar": "Audience Network",
+  "de": "Audience Network",
+  "fr": "Audience Network",
+  "it": "Audience Network"
+ },
+ "Boost.placement_youtube_home": {
+  "en": "YouTube home",
+  "ar": "الصفحة الرئيسية في YouTube",
+  "de": "YouTube-Startseite",
+  "fr": "Accueil YouTube",
+  "it": "Home di YouTube"
+ },
+ "Boost.placement_youtube_search": {
+  "en": "YouTube search",
+  "ar": "البحث في YouTube",
+  "de": "YouTube-Suche",
+  "fr": "Recherche YouTube",
+  "it": "Ricerca di YouTube"
+ },
+ "Boost.placement_youtube_watch": {
+  "en": "Next to YouTube videos",
+  "ar": "بجانب فيديوهات YouTube",
+  "de": "Neben YouTube-Videos",
+  "fr": "À côté des vidéos YouTube",
+  "it": "Accanto ai video di YouTube"
+ },
+ "Boost.listTitle": {
+  "en": "Boosts",
+  "ar": "الترويج المدفوع",
+  "de": "Beworbene Beiträge",
+  "fr": "Promotions",
+  "it": "Promozioni"
+ },
+ "Boost.listDescription": {
+  "en": "Every paid boost in this project: what it costs, where it runs, and how it's doing.",
+  "ar": "كل ترويج مدفوع في هذا المشروع: تكلفته وأين يعمل وحالته.",
+  "de": "Jede bezahlte Bewerbung in diesem Projekt: Kosten, Ort und Stand.",
+  "fr": "Chaque promotion payante de ce projet : son coût, où elle tourne et où elle en est.",
+  "it": "Ogni promozione a pagamento di questo progetto: costo, dove gira e come va."
+ },
+ "Boost.platformFilter": {
+  "en": "Platform",
+  "ar": "المنصة",
+  "de": "Plattform",
+  "fr": "Plateforme",
+  "it": "Piattaforma"
+ },
+ "Boost.allPlatforms": {
+  "en": "All platforms",
+  "ar": "كل المنصات",
+  "de": "Alle Plattformen",
+  "fr": "Toutes les plateformes",
+  "it": "Tutte le piattaforme"
+ },
+ "Boost.statusFilter": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Boost.sortLabel": {
+  "en": "Order",
+  "ar": "الترتيب",
+  "de": "Reihenfolge",
+  "fr": "Ordre",
+  "it": "Ordine"
+ },
+ "Boost.sort_newest": {
+  "en": "Newest first",
+  "ar": "الأحدث أولًا",
+  "de": "Neueste zuerst",
+  "fr": "Plus récentes d’abord",
+  "it": "Più recenti prima"
+ },
+ "Boost.sort_oldest": {
+  "en": "Oldest first",
+  "ar": "الأقدم أولًا",
+  "de": "Älteste zuerst",
+  "fr": "Plus anciennes d’abord",
+  "it": "Meno recenti prima"
+ },
+ "Boost.sort_started": {
+  "en": "Latest start first",
+  "ar": "آخر بدء أولًا",
+  "de": "Zuletzt gestartet zuerst",
+  "fr": "Dernier démarrage d’abord",
+  "it": "Avvio più recente prima"
+ },
+ "Boost.sort_budget": {
+  "en": "Highest budget first",
+  "ar": "الميزانية الأعلى أولًا",
+  "de": "Höchstes Budget zuerst",
+  "fr": "Budget le plus élevé d’abord",
+  "it": "Budget più alto prima"
+ },
+ "Boost.colPost": {
+  "en": "Post",
+  "ar": "المنشور",
+  "de": "Beitrag",
+  "fr": "Publication",
+  "it": "Post"
+ },
+ "Boost.colPlatform": {
+  "en": "Platform",
+  "ar": "المنصة",
+  "de": "Plattform",
+  "fr": "Plateforme",
+  "it": "Piattaforma"
+ },
+ "Boost.colStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Boost.colObjective": {
+  "en": "Goal",
+  "ar": "الهدف",
+  "de": "Ziel",
+  "fr": "Objectif",
+  "it": "Obiettivo"
+ },
+ "Boost.colBudget": {
+  "en": "Budget",
+  "ar": "الميزانية",
+  "de": "Budget",
+  "fr": "Budget",
+  "it": "Budget"
+ },
+ "Boost.colDuration": {
+  "en": "Duration",
+  "ar": "المدة",
+  "de": "Dauer",
+  "fr": "Durée",
+  "it": "Durata"
+ },
+ "Boost.colAudience": {
+  "en": "Audience",
+  "ar": "الجمهور",
+  "de": "Zielgruppe",
+  "fr": "Audience",
+  "it": "Pubblico"
+ },
+ "Boost.colStart": {
+  "en": "Start",
+  "ar": "البدء",
+  "de": "Start",
+  "fr": "Début",
+  "it": "Inizio"
+ },
+ "Boost.untitledPost": {
+  "en": "A post",
+  "ar": "منشور",
+  "de": "Ein Beitrag",
+  "fr": "Une publication",
+  "it": "Un post"
+ },
+ "Boost.whyFailed": {
+  "en": "Why",
+  "ar": "السبب",
+  "de": "Warum",
+  "fr": "Pourquoi",
+  "it": "Perché"
+ },
+ "Boost.whyFailedTitle": {
+  "en": "Why it didn't run",
+  "ar": "سبب عدم التشغيل",
+  "de": "Warum sie nicht lief",
+  "fr": "Pourquoi elle n’a pas tourné",
+  "it": "Perché non è partita"
+ },
+ "Boost.perDay": {
+  "en": "{amount} a day",
+  "ar": "{amount} يوميًا",
+  "de": "{amount} pro Tag",
+  "fr": "{amount} par jour",
+  "it": "{amount} al giorno"
+ },
+ "Boost.totalShort": {
+  "en": "{amount} in total",
+  "ar": "الإجمالي {amount}",
+  "de": "{amount} insgesamt",
+  "fr": "{amount} au total",
+  "it": "{amount} in totale"
+ },
+ "Boost.daysCount": {
+  "en": "{count, plural, one {# day} other {# days}}",
+  "ar": "{count, plural, zero {# يوم} one {يوم واحد} two {يومان} few {# أيام} many {# يومًا} other {# يوم}}",
+  "de": "{count, plural, one {# Tag} other {# Tage}}",
+  "fr": "{count, plural, one {# jour} other {# jours}}",
+  "it": "{count, plural, one {# giorno} other {# giorni}}"
+ },
+ "Boost.ages": {
+  "en": "Ages {min} to {max}",
+  "ar": "الأعمار من {min} إلى {max}",
+  "de": "Alter {min} bis {max}",
+  "fr": "{min} à {max} ans",
+  "it": "Età da {min} a {max}"
+ },
+ "Boost.anyone": {
+  "en": "Anyone",
+  "ar": "الجميع",
+  "de": "Alle",
+  "fr": "Tout le monde",
+  "it": "Chiunque"
+ },
+ "Boost.startsAt": {
+  "en": "Starts {when}",
+  "ar": "يبدأ {when}",
+  "de": "Startet {when}",
+  "fr": "Début le {when}",
+  "it": "Inizia il {when}"
+ },
+ "Boost.notStarted": {
+  "en": "Not started",
+  "ar": "لم يبدأ",
+  "de": "Nicht gestartet",
+  "fr": "Non démarrée",
+  "it": "Non avviata"
+ },
+ "Boost.errorTitle": {
+  "en": "Couldn't load boosts",
+  "ar": "تعذّر تحميل الترويجات",
+  "de": "Bewerbungen konnten nicht geladen werden",
+  "fr": "Impossible de charger les promotions",
+  "it": "Impossibile caricare le promozioni"
+ },
+ "Boost.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Boost.noAccessTitle": {
+  "en": "You can't see boosts",
+  "ar": "لا يمكنك عرض الترويج المدفوع",
+  "de": "Sie können beworbene Beiträge nicht sehen",
+  "fr": "Vous ne pouvez pas voir les promotions",
+  "it": "Non puoi vedere le promozioni"
+ },
+ "Boost.noAccessBody": {
+  "en": "Boosts spend money, so only marketing managers and specialists see them.",
+  "ar": "الترويج ينفق المال، لذا يراه مديرو التسويق والمختصون فقط.",
+  "de": "Bewerbungen kosten Geld, daher sehen sie nur Marketingleitung und Fachleute.",
+  "fr": "Les promotions coûtent de l’argent : seuls les responsables et spécialistes marketing les voient.",
+  "it": "Le promozioni costano: le vedono solo responsabili e specialisti marketing."
+ },
+ "Boost.noAccessReadOnly": {
+  "en": "You're viewing as someone else, so changes are turned off.",
+  "ar": "أنت تعرض بصفة شخص آخر، لذا التغييرات معطلة.",
+  "de": "Sie sehen die Ansicht einer anderen Person, Änderungen sind deaktiviert.",
+  "fr": "Vous consultez en tant qu’une autre personne : les modifications sont désactivées.",
+  "it": "Stai visualizzando come un’altra persona, quindi le modifiche sono disattivate."
+ },
+ "Boost.toPosts": {
+  "en": "Open posts",
+  "ar": "فتح المنشورات",
+  "de": "Beiträge öffnen",
+  "fr": "Ouvrir les publications",
+  "it": "Apri i post"
+ },
+ "Boost.noProjectTitle": {
+  "en": "Choose a project",
+  "ar": "اختر مشروعًا",
+  "de": "Projekt wählen",
+  "fr": "Choisissez un projet",
+  "it": "Scegli un progetto"
+ },
+ "Boost.noProjectBody": {
+  "en": "Boosts belong to a project. Pick one in the top bar.",
+  "ar": "الترويج يتبع مشروعًا. اختر واحدًا من الشريط العلوي.",
+  "de": "Bewerbungen gehören zu einem Projekt. Wählen Sie oben eines aus.",
+  "fr": "Les promotions appartiennent à un projet. Choisissez-en un en haut.",
+  "it": "Le promozioni appartengono a un progetto. Scegline uno in alto."
+ },
+ "Boost.noMatchTitle": {
+  "en": "No boosts match",
+  "ar": "لا ترويجات مطابقة",
+  "de": "Keine passenden Bewerbungen",
+  "fr": "Aucune promotion ne correspond",
+  "it": "Nessuna promozione corrisponde"
+ },
+ "Boost.noMatchBody": {
+  "en": "Try another platform or status.",
+  "ar": "جرّب منصة أو حالة أخرى.",
+  "de": "Versuchen Sie eine andere Plattform oder einen anderen Status.",
+  "fr": "Essayez une autre plateforme ou un autre statut.",
+  "it": "Prova un’altra piattaforma o un altro stato."
+ },
+ "Boost.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella filtri"
+ },
+ "Boost.emptyTitle": {
+  "en": "No boosts yet",
+  "ar": "لا ترويجات بعد",
+  "de": "Noch keine Bewerbungen",
+  "fr": "Aucune promotion pour l’instant",
+  "it": "Ancora nessuna promozione"
+ },
+ "Boost.emptyBody": {
+  "en": "Boost a published post from its page to reach more people.",
+  "ar": "روّج منشورًا منشورًا من صفحته للوصول إلى عدد أكبر من الناس.",
+  "de": "Bewerben Sie einen veröffentlichten Beitrag auf seiner Seite, um mehr Menschen zu erreichen.",
+  "fr": "Promouvez une publication publiée depuis sa page pour toucher plus de monde.",
+  "it": "Promuovi un post pubblicato dalla sua pagina per raggiungere più persone."
+ },
+ "Boost.openPublished": {
+  "en": "Open published posts",
+  "ar": "فتح المنشورات المنشورة",
+  "de": "Veröffentlichte Beiträge öffnen",
+  "fr": "Ouvrir les publications publiées",
+  "it": "Apri i post pubblicati"
+ }
+}

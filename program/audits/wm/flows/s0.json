@@ -1,0 +1,145 @@
+[
+  {
+    "title": "Admin: launcher hand-off, token leaves the address, full navigation",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "lands-on-overview",
+        "ok": true,
+        "note": "address http://localhost:3007/en",
+        "at": "http://localhost:3007/en",
+        "shot": "101-lands-on-overview.png"
+      },
+      {
+        "name": "history-has-no-token",
+        "ok": true,
+        "note": "history entries 2; the hand-off entry was replaced",
+        "at": "http://localhost:3007/en",
+        "shot": "102-history-has-no-token.png"
+      },
+      {
+        "name": "admin-navigation",
+        "ok": true,
+        "note": "Overview · Pages · Global · Strings · Translations · Preview · Services · Software · Work · Insights · Legal · Pricing · Library · SEO health · Redirects · Indexing · Roadmap · Leads · Ideas · Site · Roles and permissions · Audit log",
+        "at": "http://localhost:3007/en",
+        "shot": "103-admin-navigation.png"
+      },
+      {
+        "name": "roles-page",
+        "ok": true,
+        "note": "6 roles, \"Your role\" on 1",
+        "at": "http://localhost:3007/en/settings/roles",
+        "shot": "104-roles-page.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "Viewer: no Settings in the navigation; the page itself says which permission it needs",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "viewer-overview",
+        "ok": true,
+        "note": "Overview · Pages · Global · Strings · Translations · Preview · Services · Software · Work · Insights · Legal · Pricing · Library · SEO health · Redirects · Indexing · Roadmap · Leads · Ideas",
+        "at": "http://localhost:3007/en",
+        "shot": "201-viewer-overview.png"
+      },
+      {
+        "name": "direct-link-to-roles",
+        "ok": true,
+        "note": "Your role can't open this It needs the “settings:view” permission. Ask an admin if you need it.",
+        "at": "http://localhost:3007/en/settings/roles",
+        "shot": "202-direct-link-to-roles.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "Not a member (Omar, sales): the no-access page, with a way back",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "no-access",
+        "ok": true,
+        "note": "no-access page with Back to OrgTik",
+        "at": "http://localhost:3007/en/auth",
+        "shot": "301-no-access.png"
+      }
+    ],
+    "console": 1,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+    ]
+  },
+  {
+    "title": "Expired or forged link: says so, points to the launcher",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "expired",
+        "ok": true,
+        "note": "address http://localhost:3007/en/auth",
+        "at": "http://localhost:3007/en/auth",
+        "shot": "401-expired.png"
+      }
+    ],
+    "console": 1,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+    ]
+  },
+  {
+    "title": "Signed out: the Website Manager asks to sign in",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "signed-out",
+        "ok": true,
+        "note": "http://localhost:3007/en/signed-out",
+        "at": "http://localhost:3007/en/signed-out",
+        "shot": "501-signed-out.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "From SOS: sign in, then the launcher's Website tile opens the Website Manager",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "launcher-tile",
+        "ok": true,
+        "note": "/go/website_manager",
+        "at": "http://localhost:3013/",
+        "shot": "601-launcher-tile.png"
+      },
+      {
+        "name": "opens-website-manager",
+        "ok": true,
+        "note": "opened with a one-time code; no token in any address",
+        "at": "http://localhost:3007/en",
+        "shot": "602-opens-website-manager.png"
+      }
+    ],
+    "console": 1,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    ]
+  }
+]

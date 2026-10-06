@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-05T19:21:51.576Z",
+  "seedEquivalentExcludingBuiltAt": true,
+  "source": {
+    "repo": "orgtik-website",
+    "commit": "3a66678",
+    "overrides": {
+      "roadmap": {
+        "commit": "c8be7fe3cd863a7f8f04cd4fdd91e8e8e318b76e",
+        "file": "src/reference/Roadmap.jsx",
+        "reason": "Approved restoration of public sample timeline and moderated ideas"
+      }
+    },
+    "dirty": false,
+    "files": [
+      "src/reference/projects.js",
+      "src/reference/case-studies.js",
+      "src/reference/service-catalog.js",
+      "src/reference/software-catalog.js",
+      "src/reference/purchase-catalog.js",
+      "src/reference/Insights.jsx#INS,ART,SVC",
+      "src/reference/*.jsx (page copy)",
+      "src/reference/navigation.js"
+    ],
+    "builtAt": "2026-10-05T19:21:51.452Z"
+  },
+  "bindings": {
+    "copy": 588,
+    "strings": 537
+  }
+}

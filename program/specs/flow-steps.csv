@@ -1,0 +1,74 @@
+﻿flow_id,step,actor,step_en,step_ar,screen
+F-01,1,Visitor,Opens the pricing page.,بيفتح صفحة الأسعار.,USR-01
+F-01,2,System,Detects country from IP (or the saved selector choice).,بيحدد الدولة من الـ IP (أو الاختيار المحفوظ).,—
+F-01,3,System,Resolves each plan price: private → country → zone (converted) → default USD; applies rounding.,بيحدد سعر كل باقة: خاص ← دولة ← منطقة (محوّل) ← افتراضي بالدولار، وبيطبق التقريب.,File 03 §3
+F-01,4,Visitor,Optionally changes country; prices refresh.,ممكن يغير الدولة، والأسعار بتتحدث.,USR-01
+F-01,5,Visitor,Picks a plan → sign-up (new) or checkout (logged in).,بيختار باقة ← تسجيل (جديد) أو دفع (مسجل).,USR-02 / 09
+F-01,6,System,"At checkout the billing country re-resolves prices; if different, shows “Prices updated for <country>”.",في الدفع، دولة الفوترة بتعيد تحديد الأسعار، ولو اختلفت بيظهر “الأسعار اتحدثت لـ <الدولة>”.,USR-09
+F-02,1,Visitor,Signs up with email or Google.,بيسجل بالإيميل أو جوجل.,USR-02
+F-02,2,System,Email only: sends verification link; user verifies.,للإيميل بس: بيبعت لينك تأكيد، والمستخدم بيأكد.,—
+F-02,3,Owner,"Creates workspace (name, URL, country, language, time zone). General Free is activated.",بيعمل مساحة العمل (الاسم، الرابط، الدولة، اللغة، المنطقة الزمنية). “عام” المجاني بيتفعل.,USR-04 step 1
+F-02,4,Owner,Picks tools: Start free / Start trial / Try beta / Notify me.,بيختار الأدوات: ابدأ مجاناً / ابدأ تجربة / جرّب التجريبي / بلّغني.,USR-04 step 2
+F-02,5,Owner,Invites team or skips.,بيدعو الفريق أو بيتخطى.,USR-04 step 3
+F-02,6,System,Opens Home with the setup checklist; sends welcome email in the chosen language.,بيفتح الرئيسية بقائمة الإعداد، وبيبعت إيميل ترحيب باللغة المختارة.,USR-05
+F-03,1,Owner,Adds tools/plans to the cart.,بيضيف أدوات/باقات للسلة.,USR-06 / 07
+F-03,2,Owner,"Fills billing details if missing (country, legal name, tax ID…).",بيكمل بيانات الفوترة لو ناقصة (الدولة، الاسم القانوني، الرقم الضريبي…).,USR-09
+F-03,3,Owner,"Enters a coupon (optional); system checks code, currency, scope, limits.",بيدخل كوبون (اختياري)، والنظام بيتحقق من الكود والعملة والنطاق والحدود.,USR-09
+F-03,4,System,Calculates: line totals → bundle discount → coupon → proration → tax → total.,بيحسب: إجمالي السطور ← خصم الباقة المجمعة ← الكوبون ← التناسب ← الضريبة ← الإجمالي.,USR-09
+F-03,5,Owner,Chooses a payment method (only routed ones) and pays (3-D Secure if needed).,بيختار وسيلة دفع (المتاحة بس) وبيدفع (3-D Secure لو لازم).,USR-09
+F-03,6,Gateway,Returns success / pending / failed via webhook.,بترجع نجاح / معلّق / فشل عن طريق الـ webhook.,—
+F-03,7,System,"Success: issues invoice (+ e-invoice where required), activates lines with a price snapshot, locks workspace currency on the first payment, emails receipt AR/EN.",النجاح: بيعمل الفاتورة (+ الإلكترونية لو مطلوبة)، بيفعّل السطور بسعر محفوظ، بيثبت العملة مع أول دفعة، وبيبعت الإيصال بالعربي والإنجليزي.,USR-10
+F-03,7b,System,"Pending (Fawry code): shows reference and expiry; activates on confirmation. Failed: keeps the cart, shows reason, offers retry / another method.",معلّق (كود فوري): بيعرض الكود والصلاحية ويفعّل بعد التأكيد. فشل: السلة بتفضل، بيعرض السبب، ويعرض إعادة المحاولة / وسيلة تانية.,USR-10
+F-04,1,Owner,Starts a 14-day Pro trial (no card). Line state = Trialing.,بيبدأ تجربة Pro لمدة 14 يوم (من غير كارت). حالة السطر = تجربة.,USR-04 / 06
+F-04,2,System,Day −3 and −1: email + in-app + banner.,يوم −3 و−1: إيميل وإشعار وشريط تنبيه.,USR-00
+F-04,3a,Owner,Chooses a plan and pays before the end → line becomes Active at trial end (or now if they choose).,بيختار باقة ويدفع قبل النهاية ← السطر بيبقى نشط في نهاية التجربة (أو دلوقتي لو اختار).,USR-07 / 09
+F-04,3b,System,No plan at the end → tool moves to Free (if it has one; data over Free limits is read-only) or becomes Ended with data kept 30 days.,مفيش باقة عند النهاية ← الأداة بتنزل للمجاني (لو فيه، والبيانات الزيادة قراءة فقط) أو بتنتهي والبيانات تتحفظ 30 يوم.,USR-06
+F-04,4,System,Ended + 30 days with no subscription → tool data deleted (email 7 days before).,بعد الانتهاء بـ 30 يوم من غير اشتراك ← بيانات الأداة بتتمسح (إيميل قبلها بـ 7 أيام).,—
+F-05,1,Owner,Upgrade: picks a higher plan / more seats / monthly → yearly; sees the proration summary.,الترقية: بيختار باقة أعلى / مقاعد أكتر / من شهري لسنوي، وبيشوف ملخص التناسب.,USR-07
+F-05,2,System,Charges the prorated amount now; new limits apply at once; the period end stays the same (monthly → yearly starts a new yearly period).,بيخصم مبلغ التناسب دلوقتي، والحدود الجديدة على طول، ونهاية الفترة زي ما هي (من شهري لسنوي بيبدأ فترة سنوية جديدة).,USR-10
+F-05,3,Owner,Downgrade: picks a lower plan / fewer seats / yearly → monthly; confirms the read-only warning.,التخفيض: بيختار باقة أقل / مقاعد أقل / من سنوي لشهري، وبيأكد تنبيه القراءة فقط.,USR-07
+F-05,4,System,Schedules the change for period end; banner “Downgrade scheduled”; owner may cancel until then.,بيجدول التغيير لآخر الفترة، وشريط “تخفيض مجدول”، والمالك يقدر يلغيه لحد الميعاد.,USR-06
+F-05,5,Owner,Remove tool: confirms; the tool works until period end.,إلغاء أداة: بيأكد، والأداة شغالة لحد آخر الفترة.,USR-15
+F-05,6,System,"At period end: line Ended, data kept 30 days, “Restore” available; cross-tool links show “unavailable”.",في آخر الفترة: السطر منتهي، البيانات 30 يوم، و“استرجاع” متاح، والروابط مع الأدوات التانية “غير متاح”.,USR-06
+F-06,1,System,"Reminders: monthly −7 and −1 days; yearly −30, −7, −1. Non-recurring methods get a pay link at −7.",التذكيرات: الشهري قبل 7 أيام ويوم؛ السنوي قبل 30 و7 ويوم. الوسائل من غير تجديد تلقائي بيوصلها لينك دفع قبل 7 أيام.,Email
+F-06,2,System,Renewal day: builds one invoice for all lines on that billing date using each line’s snapshot price (or the new price if a notice period has passed).,يوم التجديد: فاتورة واحدة لكل السطور في الميعاد ده بالسعر المحفوظ لكل سطر (أو السعر الجديد لو فترة التنبيه عدّت).,—
+F-06,3,System,Charges the default card. Success → receipt; lines continue.,بيخصم من الكارت الافتراضي. نجاح ← إيصال والسطور مستمرة.,—
+F-06,4,System,"Fail → invoice Past due, lines Past due, red banner, email; retries on days 1, 3, 5.",فشل ← الفاتورة متأخرة، السطور متأخرة، شريط أحمر، إيميل، ومحاولات أيام 1 و3 و5.,USR-00
+F-06,5,Owner,Pays any time with a saved or new method → everything back to Active.,بيدفع في أي وقت بوسيلة محفوظة أو جديدة ← كل حاجة ترجع نشطة.,USR-11
+F-06,6,System,Day 7 unpaid → all paid tools Read-only (General stays usable).,يوم 7 من غير دفع ← كل الأدوات المدفوعة قراءة فقط (“عام” بتفضل شغالة).,—
+F-06,7,System,"Day 37 unpaid (7 + 30) → workspace Cancelled; data kept 30 days for export, then deleted.",يوم 37 من غير دفع (7 + 30) ← مساحة العمل ملغاة، والبيانات 30 يوم للتصدير وبعدين تتمسح.,—
+F-07,1,Pricing admin,"Edits cells in the pricing grid (zone prices, country overrides, yearly). Cells turn yellow (draft).",بيعدل خانات في جدول الأسعار (أسعار المناطق، الأسعار الخاصة، السنوي). الخانات بتبقى صفرا (مسودة).,ADM-12
+F-07,2,Pricing admin,Checks results per country with “Include draft changes”.,بيراجع النتيجة لكل دولة بـ “تضمين المسودات”.,ADM-13
+F-07,3,Pricing admin,"Review & publish: effective date, apply mode, notice days, customer message, reason.",مراجعة ونشر: تاريخ السريان، طريقة التطبيق، أيام التنبيه، رسالة العميل، السبب.,ADM-12
+F-07,4,Approver,(Optional) approves; change becomes Scheduled.,(اختياري) بيعتمد، والتغيير بيبقى مجدول.,ADM-14
+F-07,5,System,On the effective date: new prices for new purchases.,في تاريخ السريان: الأسعار الجديدة للمشتريات الجديدة.,—
+F-07,6,System,If “existing”: notice emails now; renewals after the notice window use the new price and update the snapshot.,لو “الحاليين”: إيميلات التنبيه دلوقتي، والتجديدات بعد فترة التنبيه بالسعر الجديد وبيتحدث السعر المحفوظ.,Email
+F-07,7,System,Writes the pricing log.,بيسجل في سجل الأسعار.,ADM-14
+F-08,1,Super admin,Moves a country to another zone or sets a currency override.,بينقل دولة لمنطقة تانية أو بيغير عملتها.,ADM-10 / 11
+F-08,2,System,"Impact screen: workspaces in that country, currency differences, price differences.",شاشة التأثير: مساحات العمل في الدولة، اختلاف العملات، اختلاف الأسعار.,ADM-10
+F-08,3,System,New sign-ups use the new setup immediately.,التسجيلات الجديدة بتستخدم الإعداد الجديد على طول.,—
+F-08,4,System,Existing workspaces whose currency no longer matches → “Needs currency migration” filter; they keep their snapshot prices.,مساحات العمل الحالية اللي عملتها مبقتش مطابقة ← فلتر “محتاجة نقل عملة”، وبتفضل على أسعارها المحفوظة.,ADM-20
+F-08,5,Super admin,Migrates selected workspaces; owners get a notice; new currency starts at next renewal.,بينقل مساحات العمل المختارة، والمالكين بيوصلهم تنبيه، والعملة الجديدة من التجديد الجاي.,ADM-21
+F-09,1,Customer,Submits a request (or “Request a similar project”).,بيبعت طلب (أو “اطلب مشروع مشابه”).,USR-17
+F-09,2,Sales,Reviews; may ask questions via messages (status Under review).,بيراجع، وممكن يسأل برسائل (الحالة قيد المراجعة).,ADM-25
+F-09,3,Sales,Sends a quote (fixed package price or custom). Status Quoted.,بيبعت عرض سعر (سعر الباقة أو مخصص). الحالة تم عرض السعر.,ADM-25
+F-09,4,Customer,Accepts → pays full or first milestone; or Rejects; or the quote Expires.,بيقبل ← يدفع كامل أو أول مرحلة؛ أو بيرفض؛ أو العرض بينتهي.,USR-18
+F-09,5,Service mgr,After payment: assigns a team. Status In progress.,بعد الدفع: بيسند فريق. الحالة جاري التنفيذ.,ADM-25
+F-09,6,Service team,Uploads a deliverable → status In review; customer notified.,بيرفع تسليم ← الحالة قيد المراجعة، والعميل بيتبلغ.,ADM-25
+F-09,7,Customer,"Approves, or requests a revision (counter −1; back to In progress). Extra revisions need a new quote line.",بيوافق، أو بيطلب تعديل (العداد −1 ويرجع جاري التنفيذ). التعديلات الزيادة محتاجة بند جديد.,USR-19
+F-09,8,System,Milestone invoices are issued on their trigger; final approval (or auto-approve after 7 days) → Completed.,فواتير المراحل بتطلع مع ميعادها؛ والموافقة النهائية (أو التلقائية بعد 7 أيام) ← مكتمل.,—
+F-09,9,Customer,Rates the service; may allow it on the portfolio.,بيقيّم الخدمة، وممكن يسمح بعرضها في الأعمال.,USR-19
+F-10,1,Owner,Requests a refund from the cancel flow or a billing ticket.,بيطلب استرداد من خطوات الإلغاء أو تذكرة فوترة.,USR-15 / 25
+F-10,2,Finance,Opens the invoice; the system shows the policy rule and max refundable.,بيفتح الفاتورة، والنظام بيعرض قاعدة السياسة وأقصى مبلغ.,ADM-23
+F-10,3,Finance,Enters amount + reason; optionally cancels the line.,بيدخل المبلغ والسبب، واختياري يلغي السطر.,ADM-23
+F-10,4,System,Refunds via the original gateway in the original currency; issues a credit note AR/EN; updates invoice status.,بيرد عن طريق نفس البوابة وبنفس العملة، وبيعمل إشعار دائن بالعربي والإنجليزي، وبيحدث حالة الفاتورة.,—
+F-10,5,System,Notifies the owner (5–14 business days to arrive).,بيبلغ المالك (5–14 يوم عمل لوصول المبلغ).,Email
+F-11,1,Super admin,Sets Coming Soon (+ expected date). Visitors and users join the waitlist.,بيحدد قريباً (+ التاريخ المتوقع)، والزوار والمستخدمين بيسجلوا في قائمة الانتظار.,ADM-04
+F-11,2,Super admin,Moves to Beta: open or invite-only; invites from the waitlist.,بينقلها لتجريبي: مفتوح أو بدعوة، وبيدعو من قائمة الانتظار.,ADM-04 / 29
+F-11,3,Beta users,Use the tool free/discounted and send feedback.,بيستخدموا الأداة مجاناً/بخصم وبيبعتوا ملاحظات.,USR-26
+F-11,4,Super admin,"Moves to Available: billing start date (+14 days), launch coupon, message.",بينقلها لمتاح: تاريخ بدء الدفع (+14 يوم)، كوبون الإطلاق، الرسالة.,ADM-04
+F-11,5,System,Beta users get the notice; at billing start they choose a plan or drop to Free / Ended. Waitlist gets the launch email + in-app notice.,مستخدمين التجريبي بيوصلهم التنبيه، وعند بدء الدفع بيختاروا باقة أو ينزلوا للمجاني / ينتهي. وقائمة الانتظار بيوصلها إيميل وإشعار الإطلاق.,Email
+F-12,1,Visitor / owner,Sends “Contact us” for a Custom plan.,بيبعت “تواصل معنا” لباقة مخصصة.,USR-01
+F-12,2,Sales,"Contacts, agrees on limits and price.",بيتواصل ويتفق على الحدود والسعر.,ADM-22
+F-12,3,Sales,Creates a private plan for the workspace (asks the visitor to sign up first).,بيعمل باقة خاصة لمساحة العمل (وبيطلب من الزائر يسجل الأول).,ADM-07
+F-12,4,Owner,"Sees the private plan in the tool’s plans, checks out.",بيشوف الباقة الخاصة في باقات الأداة وبيدفع.,USR-07 / 09

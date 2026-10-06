@@ -1,0 +1,544 @@
+[
+  {
+    "title": "[en] Super Admin: find Nile Foods, extend its chat trial, View as with a reason",
+    "ok": true,
+    "passed": 6,
+    "steps": 6,
+    "detail": [
+      {
+        "name": "search-nile",
+        "ok": true,
+        "note": "1 row(s) for \"nile\"; the address keeps ?q",
+        "at": "http://localhost:3008/en/workspaces",
+        "shot": "101-search-nile.png"
+      },
+      {
+        "name": "open-detail",
+        "ok": true,
+        "note": "10 sections (summary, lines, invoices, members, payment, billing, tickets, requests, notes, audit)",
+        "at": "http://localhost:3008/en/workspaces/ws_nile",
+        "shot": "102-open-detail.png"
+      },
+      {
+        "name": "extend-trial-asks-reason",
+        "ok": true,
+        "note": "submitting without a reason shows Required on the field",
+        "at": "http://localhost:3008/en/workspaces/ws_nile",
+        "shot": "103-extend-trial-asks-reason.png"
+      },
+      {
+        "name": "extend-trial-new-end",
+        "ok": true,
+        "note": "Trial ends: 5 Oct 2026 → 12 Oct 2026",
+        "at": "http://localhost:3008/en/workspaces/ws_nile",
+        "shot": "104-extend-trial-new-end.png"
+      },
+      {
+        "name": "view-as-needs-reason",
+        "ok": true,
+        "note": "confirm disabled until a reason: true; opened http://localhost:3013/auth/login?redirect=%2Fpeople%3FviewAs%3D5",
+        "at": "http://localhost:3008/en/workspaces/ws_nile",
+        "shot": "105-view-as-needs-reason.png"
+      },
+      {
+        "name": "audit-records-view-as",
+        "ok": true,
+        "note": "Audit trail Viewed as the owner Ticket TK-3301: check what the owner sees 3 Oct 2026, 09:43 · Mona Adel Trial extended · 7 days Customer asked for more time to ",
+        "at": "http://localhost:3008/en/workspaces/ws_nile",
+        "shot": "106-audit-records-view-as.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Super Admin: suspend Gulf Retail, then reactivate it",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "suspend",
+        "ok": true,
+        "note": "badge \"Suspended\"",
+        "at": "http://localhost:3008/en/workspaces/ws_gulf",
+        "shot": "201-suspend.png"
+      },
+      {
+        "name": "reactivate",
+        "ok": true,
+        "note": "both recorded in the audit trail with their reasons",
+        "at": "http://localhost:3008/en/workspaces/ws_gulf",
+        "shot": "202-reactivate.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Super Admin: approve mig_1, quote cpr_1",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "approve-migration",
+        "ok": true,
+        "note": "impact: Approve the migration of Gulf Retail? From the next renewal on 21 Oct 2026, it's billed in SAR. The customer gets a notice now; open invoices stay in AED. Cancel Approve",
+        "at": "http://localhost:3008/en/migrations",
+        "shot": "301-approve-migration.png"
+      },
+      {
+        "name": "quote-custom-plan",
+        "ok": true,
+        "note": "Gulf Retail 1 Oct 2026 CRM, Marketing, Chat 60 seats · Yearly Retail chain with 12 branches; wants one annual contract. Quoted AED 90,000.00 Valid until 2 Nov 2",
+        "at": "http://localhost:3008/en/custom-plans",
+        "shot": "302-quote-custom-plan.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Super Admin: refund over the cap, then within it; void; mark Nile paid",
+    "ok": true,
+    "passed": 7,
+    "steps": 7,
+    "detail": [
+      {
+        "name": "open-paid-invoice",
+        "ok": true,
+        "note": "one credit note before",
+        "at": "http://localhost:3008/en/invoices/inv_1033",
+        "shot": "401-open-paid-invoice.png"
+      },
+      {
+        "name": "refund-over-max",
+        "ok": true,
+        "note": "422 with max 602.1; dialog says: Refund INV-2026-001046 The refund is in the invoice's currency and creates a numbered credit note. Amount (AED)* Up to AED 602.10. That's more than can be refunded. At most AED 602.10. Reason* It goes",
+        "at": "http://localhost:3008/en/invoices/inv_1033",
+        "shot": "402-refund-over-max.png"
+      },
+      {
+        "name": "refund-partial-credit-note",
+        "ok": true,
+        "note": "Credit notes CN-2026-000014 AED 30.00 Duplicate seat charged in September 3 Sept 2026, 09:43 CN-2026-000016 AED 50.00 Service outage credit 3 Oct 2026, 09:44",
+        "at": "http://localhost:3008/en/invoices/inv_1033",
+        "shot": "403-refund-partial-credit-note.png"
+      },
+      {
+        "name": "void-open-invoice",
+        "ok": true,
+        "note": "INV-2026-001044 is void",
+        "at": "http://localhost:3008/en/invoices/inv_1030",
+        "shot": "404-void-open-invoice.png"
+      },
+      {
+        "name": "mark-nile-paid",
+        "ok": true,
+        "note": "Payments EGP 112.86 Failed 30 Sept 2026, 09:43 Card · via gw_paymob Card declined EGP 112.86 Succeeded 3 Oct 2026, 09:44 Bank transfer · via manual · reference BT-20261003-118 USD rate 48.5 · US$2.33",
+        "at": "http://localhost:3008/en/invoices/inv_1031",
+        "shot": "405-mark-nile-paid.png"
+      },
+      {
+        "name": "manual-invoice-draft",
+        "ok": true,
+        "note": "Lines Item Amount Onboarding workshop SAR 1,200.00 Subtotal SAR 1,200.00 Tax · VAT 15% SAR 180.00 Total SAR 1,380.00",
+        "at": "http://localhost:3008/en/invoices/inv_1059",
+        "shot": "406-manual-invoice-draft.png"
+      },
+      {
+        "name": "files-line-active",
+        "ok": true,
+        "note": "Files · Pro Active Cycle Monthly Price EGP 99.00 Price snapshot from the zone price, price version 1 Period ends 2 Nov 2",
+        "at": "http://localhost:3008/en/workspaces/ws_nile",
+        "shot": "407-files-line-active.png"
+      }
+    ],
+    "console": 1,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)"
+    ]
+  },
+  {
+    "title": "[en] Service Manager (view only): no actions anywhere, no invoices",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "workspace-no-actions",
+        "ok": true,
+        "note": "0 action buttons; says view only",
+        "at": "http://localhost:3008/en/workspaces/ws_nile",
+        "shot": "501-workspace-no-actions.png"
+      },
+      {
+        "name": "migrations-no-actions",
+        "ok": true,
+        "note": "no Approve/Reject",
+        "at": "http://localhost:3008/en/migrations",
+        "shot": "502-migrations-no-actions.png"
+      },
+      {
+        "name": "custom-plans-no-actions",
+        "ok": true,
+        "note": "no Send quote",
+        "at": "http://localhost:3008/en/custom-plans",
+        "shot": "503-custom-plans-no-actions.png"
+      },
+      {
+        "name": "invoices-no-permission",
+        "ok": true,
+        "note": "Your role can't open this It needs the “billing:view” permission. Ask a Super Admin if you need it.",
+        "at": "http://localhost:3008/en/invoices",
+        "shot": "504-invoices-no-permission.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Finance: workspaces view only, invoices with actions",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "workspace-no-actions",
+        "ok": true,
+        "note": "no View as / note / suspend",
+        "at": "http://localhost:3008/en/workspaces/ws_spree",
+        "shot": "601-workspace-no-actions.png"
+      },
+      {
+        "name": "invoice-actions",
+        "ok": true,
+        "note": "Mark paid offered to Finance",
+        "at": "http://localhost:3008/en/invoices/inv_1036",
+        "shot": "602-invoice-actions.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Sales: invoices view only",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "invoice-list-view-only",
+        "ok": true,
+        "note": "no New invoice; says view only",
+        "at": "http://localhost:3008/en/invoices",
+        "shot": "701-invoice-list-view-only.png"
+      },
+      {
+        "name": "invoice-detail-no-actions",
+        "ok": true,
+        "note": "0 invoice actions",
+        "at": "http://localhost:3008/en/invoices/inv_1036",
+        "shot": "702-invoice-detail-no-actions.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Support (Rana): invoices view only",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "invoice-list-view-only",
+        "ok": true,
+        "note": "no New invoice; says view only",
+        "at": "http://localhost:3008/en/invoices",
+        "shot": "801-invoice-list-view-only.png"
+      },
+      {
+        "name": "invoice-detail-no-actions",
+        "ok": true,
+        "note": "0 invoice actions",
+        "at": "http://localhost:3008/en/invoices/inv_1036",
+        "shot": "802-invoice-detail-no-actions.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Super Admin: find Nile Foods, extend its chat trial, View as with a reason",
+    "ok": true,
+    "passed": 6,
+    "steps": 6,
+    "detail": [
+      {
+        "name": "search-nile",
+        "ok": true,
+        "note": "1 row(s) for \"nile\"; the address keeps ?q",
+        "at": "http://localhost:3008/ar/workspaces",
+        "shot": "901-search-nile.png"
+      },
+      {
+        "name": "open-detail",
+        "ok": true,
+        "note": "10 sections (summary, lines, invoices, members, payment, billing, tickets, requests, notes, audit)",
+        "at": "http://localhost:3008/ar/workspaces/ws_nile",
+        "shot": "902-open-detail.png"
+      },
+      {
+        "name": "extend-trial-asks-reason",
+        "ok": true,
+        "note": "submitting without a reason shows Required on the field",
+        "at": "http://localhost:3008/ar/workspaces/ws_nile",
+        "shot": "903-extend-trial-asks-reason.png"
+      },
+      {
+        "name": "extend-trial-new-end",
+        "ok": true,
+        "note": "تنتهي الفترة التجريبية: 05‏/10‏/2026 → 12‏/10‏/2026",
+        "at": "http://localhost:3008/ar/workspaces/ws_nile",
+        "shot": "904-extend-trial-new-end.png"
+      },
+      {
+        "name": "view-as-needs-reason",
+        "ok": true,
+        "note": "confirm disabled until a reason: true; opened http://localhost:3013/auth/login?redirect=%2Fpeople%3FviewAs%3D5",
+        "at": "http://localhost:3008/ar/workspaces/ws_nile",
+        "shot": "905-view-as-needs-reason.png"
+      },
+      {
+        "name": "audit-records-view-as",
+        "ok": true,
+        "note": "سجل التدقيق عُرضت بصفة المالك تذكرة TK-3301: مراجعة ما يراه المالك 03‏/10‏/2026، 9:45 ص · Mona Adel مُدّدت الفترة التجريبية · 7 أيام طلب العميل وقتًا إضافيًا لل",
+        "at": "http://localhost:3008/ar/workspaces/ws_nile",
+        "shot": "906-audit-records-view-as.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Super Admin: suspend Gulf Retail, then reactivate it",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "suspend",
+        "ok": true,
+        "note": "badge \"موقوفة\"",
+        "at": "http://localhost:3008/ar/workspaces/ws_gulf",
+        "shot": "1001-suspend.png"
+      },
+      {
+        "name": "reactivate",
+        "ok": true,
+        "note": "both recorded in the audit trail with their reasons",
+        "at": "http://localhost:3008/ar/workspaces/ws_gulf",
+        "shot": "1002-reactivate.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Super Admin: approve mig_1, quote cpr_1",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "approve-migration",
+        "ok": true,
+        "note": "impact: هل تريد اعتماد نقل Gulf Retail؟ اعتبارًا من التجديد التالي في 21‏/10‏/2026 تصبح الفوترة بـ SAR. يتلقى العميل إشعارًا الآن، وتبقى الفواتير المفتوحة بـ AED. إلغاء اعتماد",
+        "at": "http://localhost:3008/ar/migrations",
+        "shot": "1101-approve-migration.png"
+      },
+      {
+        "name": "quote-custom-plan",
+        "ok": true,
+        "note": "Gulf Retail 01‏/10‏/2026 إدارة العملاء، التسويق، المحادثات 60 مقعدًا · سنوي Retail chain with 12 branches; wants one annual contract. أُرسل عرض السعر ‏90,000.00",
+        "at": "http://localhost:3008/ar/custom-plans",
+        "shot": "1102-quote-custom-plan.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Super Admin: refund over the cap, then within it; void; mark Nile paid",
+    "ok": true,
+    "passed": 7,
+    "steps": 7,
+    "detail": [
+      {
+        "name": "open-paid-invoice",
+        "ok": true,
+        "note": "one credit note before",
+        "at": "http://localhost:3008/ar/invoices/inv_1033",
+        "shot": "1201-open-paid-invoice.png"
+      },
+      {
+        "name": "refund-over-max",
+        "ok": true,
+        "note": "422 with max 602.1; dialog says: استرداد INV-2026-001046 يكون الاسترداد بعملة الفاتورة، ويُنشئ إشعارًا دائنًا مرقّمًا. المبلغ (AED)* حتى ‏602.10 د.إ.‏. هذا أكثر مما يمكن استرداده. الحد الأقصى ‏602.10 د.إ.‏. السبب* يُسجَّل في سجل التد",
+        "at": "http://localhost:3008/ar/invoices/inv_1033",
+        "shot": "1202-refund-over-max.png"
+      },
+      {
+        "name": "refund-partial-credit-note",
+        "ok": true,
+        "note": "الإشعارات الدائنة CN-2026-000014 ‏30.00 د.إ.‏ Duplicate seat charged in September 03‏/09‏/2026، 9:44 ص CN-2026-000016 ‏50.00 د.إ.‏ تعويض عن انقطاع الخدمة 03‏/10‏/2026، 9:45 ص",
+        "at": "http://localhost:3008/ar/invoices/inv_1033",
+        "shot": "1203-refund-partial-credit-note.png"
+      },
+      {
+        "name": "void-open-invoice",
+        "ok": true,
+        "note": "INV-2026-001044 is void",
+        "at": "http://localhost:3008/ar/invoices/inv_1030",
+        "shot": "1204-void-open-invoice.png"
+      },
+      {
+        "name": "mark-nile-paid",
+        "ok": true,
+        "note": "المدفوعات ‏112.86 ج.م.‏ فاشلة 30‏/09‏/2026، 9:44 ص بطاقة · عبر gw_paymob رُفضت البطاقة ‏112.86 ج.م.‏ ناجحة 03‏/10‏/2026، 9:45 ص تحويل مصرفي · عبر manual · المرجع BT-20261003-118 سعر الدولار 48.5 · ‏2.",
+        "at": "http://localhost:3008/ar/invoices/inv_1031",
+        "shot": "1205-mark-nile-paid.png"
+      },
+      {
+        "name": "manual-invoice-draft",
+        "ok": true,
+        "note": "البنود البند المبلغ ورشة تدريب ‏1,200.00 ر.س.‏ المجموع الفرعي ‏1,200.00 ر.س.‏ الضريبة · VAT 15% ‏180.00 ر.س.‏ الإجمالي ‏1,380.00 ر.س.‏",
+        "at": "http://localhost:3008/ar/invoices/inv_1059",
+        "shot": "1206-manual-invoice-draft.png"
+      },
+      {
+        "name": "files-line-active",
+        "ok": true,
+        "note": "الملفات · احترافي نشط دورة الفوترة شهري السعر ‏99.00 ج.م.‏ لقطة السعر من سعر المنطقة، إصدار الأسعار 1 تنتهي الفترة 02‏/1",
+        "at": "http://localhost:3008/ar/workspaces/ws_nile",
+        "shot": "1207-files-line-active.png"
+      }
+    ],
+    "console": 1,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)"
+    ]
+  },
+  {
+    "title": "[ar] Service Manager (view only): no actions anywhere, no invoices",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "workspace-no-actions",
+        "ok": true,
+        "note": "0 action buttons; says view only",
+        "at": "http://localhost:3008/ar/workspaces/ws_nile",
+        "shot": "1301-workspace-no-actions.png"
+      },
+      {
+        "name": "migrations-no-actions",
+        "ok": true,
+        "note": "no Approve/Reject",
+        "at": "http://localhost:3008/ar/migrations",
+        "shot": "1302-migrations-no-actions.png"
+      },
+      {
+        "name": "custom-plans-no-actions",
+        "ok": true,
+        "note": "no Send quote",
+        "at": "http://localhost:3008/ar/custom-plans",
+        "shot": "1303-custom-plans-no-actions.png"
+      },
+      {
+        "name": "invoices-no-permission",
+        "ok": true,
+        "note": "دورك لا يسمح بفتح هذه الصفحة تحتاج إلى صلاحية «billing:view». اطلبها من المدير العام إن كنت تحتاجها.",
+        "at": "http://localhost:3008/ar/invoices",
+        "shot": "1304-invoices-no-permission.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Finance: workspaces view only, invoices with actions",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "workspace-no-actions",
+        "ok": true,
+        "note": "no View as / note / suspend",
+        "at": "http://localhost:3008/ar/workspaces/ws_spree",
+        "shot": "1401-workspace-no-actions.png"
+      },
+      {
+        "name": "invoice-actions",
+        "ok": true,
+        "note": "Mark paid offered to Finance",
+        "at": "http://localhost:3008/ar/invoices/inv_1036",
+        "shot": "1402-invoice-actions.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Sales: invoices view only",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "invoice-list-view-only",
+        "ok": true,
+        "note": "no New invoice; says view only",
+        "at": "http://localhost:3008/ar/invoices",
+        "shot": "1501-invoice-list-view-only.png"
+      },
+      {
+        "name": "invoice-detail-no-actions",
+        "ok": true,
+        "note": "0 invoice actions",
+        "at": "http://localhost:3008/ar/invoices/inv_1036",
+        "shot": "1502-invoice-detail-no-actions.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Support (Rana): invoices view only",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "invoice-list-view-only",
+        "ok": true,
+        "note": "no New invoice; says view only",
+        "at": "http://localhost:3008/ar/invoices",
+        "shot": "1601-invoice-list-view-only.png"
+      },
+      {
+        "name": "invoice-detail-no-actions",
+        "ok": true,
+        "note": "0 invoice actions",
+        "at": "http://localhost:3008/ar/invoices/inv_1036",
+        "shot": "1602-invoice-detail-no-actions.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  }
+]

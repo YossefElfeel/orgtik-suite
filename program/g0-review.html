@@ -1,0 +1,246 @@
+<title>OrgTik G0 Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: an RTL decision sheet. A short summary of what P0 produced, then decision cards grouped
+   by topic, each with three choices and a note that saves to the artifact's store. Tokens v0. */
+:root {
+  --bg: #F6F1FA; --raised: #FFFFFF; --sunken: #EEE8F7; --line: #DCD0E6; --fg: #190B25; --muted: #4A3A57;
+  --subtle: #6E6178; --brand: #6C3CAA; --on-brand: #FFFFFF; --chip: #EEE3F7; --ok: #086A35; --ok-bg: #EEFBF1;
+  --warn: #5E3904; --warn-bg: #FFF5EB; --info: #394BC6; --info-bg: #F3F4FF;
+  --font: "Noto Kufi Arabic", Arial, sans-serif; --latin: Montserrat, "Noto Kufi Arabic", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0D0814; --raised: #1A0D27; --sunken: #120A1B; --line: #FFFFFF1F; --fg: #F6F1FA; --muted: #CFC2DB;
+    --subtle: #B5A6C4; --brand: #EEE3F7; --on-brand: #28123B; --chip: #28123B; --ok: #8BD59F; --ok-bg: #12301F;
+    --warn: #EEB474; --warn-bg: #33240B; --info: #92A1FB; --info-bg: #171B45; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0D0814; --raised: #1A0D27; --sunken: #120A1B; --line: #FFFFFF1F; --fg: #F6F1FA; --muted: #CFC2DB;
+  --subtle: #B5A6C4; --brand: #EEE3F7; --on-brand: #28123B; --chip: #28123B; --ok: #8BD59F; --ok-bg: #12301F;
+  --warn: #EEB474; --warn-bg: #33240B; --info: #92A1FB; --info-bg: #171B45; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font); }
+.page { max-width: 980px; margin: 0 auto; padding-inline: 20px; padding-block: 32px 64px; display: grid; gap: 28px; }
+header { display: grid; gap: 10px; }
+.eyebrow { font: 600 12px/1 var(--latin); letter-spacing: .14em; text-transform: uppercase; color: var(--subtle); }
+h1 { margin: 0; font-size: clamp(26px, 4vw, 36px); line-height: 1.35; text-wrap: balance; }
+h2 { margin: 0; font-size: 20px; line-height: 1.5; }
+p { margin: 0; line-height: 1.85; }
+.lead { color: var(--muted); font-size: 16px; max-width: 68ch; }
+.status { font-size: 13px; color: var(--subtle); }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.fact { background: var(--raised); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; display: grid; gap: 4px; }
+.fact b { font: 700 22px/1.2 var(--latin); color: var(--brand); font-variant-numeric: tabular-nums; }
+.fact span { font-size: 13px; line-height: 1.7; color: var(--muted); }
+section { display: grid; gap: 12px; }
+.card { background: var(--raised); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; display: grid; gap: 10px; }
+.card .top { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: baseline; justify-content: space-between; }
+.card h3 { margin: 0; font-size: 16px; line-height: 1.6; }
+.id { font: 600 11px/1 var(--latin); color: var(--subtle); letter-spacing: .06em; }
+.rec { font-size: 14px; line-height: 1.8; color: var(--muted); }
+.rec strong { color: var(--fg); font-weight: 600; }
+.choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.choices button { font: 500 14px/1 var(--font); padding: 10px 16px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; }
+.choices button[aria-pressed="true"][data-choice="approve"] { background: var(--ok-bg); color: var(--ok); border-color: var(--ok); }
+.choices button[aria-pressed="true"][data-choice="change"] { background: var(--warn-bg); color: var(--warn); border-color: var(--warn); }
+.choices button[aria-pressed="true"][data-choice="discuss"] { background: var(--info-bg); color: var(--info); border-color: var(--info); }
+.choices button:disabled { opacity: .55; cursor: default; }
+button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+textarea { font: 14px/1.7 var(--font); width: 100%; min-height: 44px; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--sunken); color: var(--fg); resize: vertical; }
+.saved { font-size: 12px; color: var(--subtle); min-height: 1em; }
+.ref { font: 12px/1.6 ui-monospace, Consolas, monospace; color: var(--subtle); direction: ltr; unicode-bidi: isolate; }
+a { color: var(--brand); }
+.note { background: var(--chip); border-radius: 14px; padding: 12px 16px; font-size: 14px; line-height: 1.8; }
+footer { font-size: 13px; line-height: 1.8; color: var(--subtle); }
+@media (prefers-reduced-motion: no-preference) { .choices button { transition: background-color .2s cubic-bezier(.22,1,.36,1); } }
+</style>
+
+<div class="page" dir="rtl" lang="ar">
+  <header>
+    <span class="eyebrow" dir="ltr">OrgTik · Gate G0</span>
+    <h1>مراجعة G0: قرارات قبل ما نبدأ المكتبة</h1>
+    <p class="lead">المرحلة الأولى (P0) خلصت كلها ماعدا المراجعة دي. تحت ملخص اللي اتعمل، وبعده القرارات اللي محتاجاك. على كل قرار اختار «موافق» أو «غيّر» أو «نتناقش»، واكتب ملاحظة لو حابب. اختياراتك بتتحفظ هنا، وأنا هقراها وأكمّل عليها.</p>
+    <p class="status" id="store-status">جاري الاتصال بمكان الحفظ…</p>
+  </header>
+
+  <section aria-labelledby="h-done">
+    <h2 id="h-done">اللي اتعمل في P0</h2>
+    <div class="facts">
+      <div class="fact"><b>150/150</b><span>لقطة للويبسايت متطابقة بين مرتين تشغيل، يعني الـ gate بتاع «ولا بيكسل يتغير» شغّال</span></div>
+      <div class="fact"><b>76/76</b><span>زوج ألوان في tokens v0 عدّى WCAG في الثيمين</span></div>
+      <div class="fact"><b>4/4</b><span>spikes نجحوا: الـ @source، وBase UI في RTL، وyalc، والخطوط من المكتبة</span></div>
+      <div class="fact"><b>82</b><span>مصطلح في الـ glossary بخمس لغات، و200 label في التطبيقات محتاجة تتغيّر</span></div>
+      <div class="fact"><b>94</b><span>حالة في الـ status matrix، وفيها ترتيب أولوية الـ banners</span></div>
+      <div class="fact"><b>228</b><span>بند من الـ spec في الـ gap matrix: 58 جزئي، و14 فيهم تعارض، و156 ناقصين</span></div>
+      <div class="fact"><b>23</b><span>مشكلة في Files من أول audit تجريبي، ومعاهم 4 flows اتمشوا فعلًا</span></div>
+    </div>
+    <h3 style="margin: 28px 0 12px; font-size: 16px;">الـ baseline بتاع الـ 8 داشبوردات خلص</h3>
+    <div class="facts">
+      <div class="fact"><b>164/191</b><span>صفحة فتحت فعلًا، و3 بس وقعت. ومفيش أي صفحة بتسيب الـ token في اللينك</span></div>
+      <div class="fact"><b>117</b><span>dead end من 1,858 زرار اتداس: Content ‏40، وMarketing ‏38، وHR ‏28</span></div>
+      <div class="fact"><b>1,894</b><span>زرار أو control من غير اسم مسموع، وده أكبر مشكلة accessibility متكررة</span></div>
+      <div class="fact"><b>135</b><span>صفحة فيها مشكلة axe خطيرة. الـ contrast فاشل في 115 صفحة</span></div>
+      <div class="fact"><b>427</b><span>console error، منهم 298 في HR لوحده</span></div>
+    </div>
+    <p class="note">التحديث الأخير (30 سبتمبر): الويبسايت اتعدّل على GitHub (PR #26، دراسات حالة لكل قسم). قارنّا الموقع كله: اتغيرت صفحات المشاريع الخمسة بس. الخطة اتعدّلت (D-031 وD-032)، والـ baseline بقى على <span dir="ltr">d76ee3b</span>. G0 اتقفل، والمكتبة <span dir="ltr">@orgtik/ui</span> شغّالة: مكونات P1a كلها، وStorybook، و138 render بتعدّي الـ visual وaxe.</p>
+  </section>
+
+  <section aria-labelledby="h-visual">
+    <h2 id="h-visual">اللغة البصرية (G1a)</h2>
+    <div id="visual"></div>
+  </section>
+  <section aria-labelledby="h-arch">
+    <h2 id="h-arch">قرارات المعمار اللي عندك</h2>
+    <div id="arch"></div>
+  </section>
+  <section aria-labelledby="h-words">
+    <h2 id="h-words">المصطلحات والحالات</h2>
+    <div id="words"></div>
+  </section>
+  <section aria-labelledby="h-scope">
+    <h2 id="h-scope">نطاق أول نسخة من المكتبة (P1)</h2>
+    <div id="scope"></div>
+  </section>
+
+  <footer>
+    <p>الملفات كلها في <span class="ref">orgtik-program/</span>: الـ decisions، والـ glossary، والـ status-matrix، والـ design-tokens، والـ spikes، والـ gap-analysis، وp1-scope.md. قرارات الـ PM (زي G-04 اللي معطّل 100 بند) رايحة في PM packet 01، مش هنا.</p>
+  </footer>
+</div>
+
+<template id="card">
+  <article class="card">
+    <div class="top"><h3></h3><span class="id"></span></div>
+    <p class="rec"></p>
+    <div class="choices" role="group">
+      <button type="button" data-choice="approve" aria-pressed="false">موافق</button>
+      <button type="button" data-choice="change" aria-pressed="false">غيّر</button>
+      <button type="button" data-choice="discuss" aria-pressed="false">نتناقش</button>
+    </div>
+    <textarea rows="2" placeholder="ملاحظة (اختياري)"></textarea>
+    <span class="saved" aria-live="polite"></span>
+  </article>
+</template>
+
+<script>
+(function () {
+  var ITEMS = {
+    visual: [
+      { id: "d010-font", ref: "D-010", title: "الخط العربي", rec: 'الترشيح: <strong>Noto Kufi Arabic</strong>. قارن التلاتة في <a href="https://claude.ai/artifact/7hp3zuDCpknVZvzuThLZZn" target="_blank" rel="noopener">صفحة الـ specimen</a>، ولو «غيّر» اكتب الخط اللي اخترته.' },
+      { id: "g1a-pills", ref: "G1a", title: "الـ pill على كل الأزرار، حتى في الجداول الكثيفة", rec: "الترشيح: <strong>أيوه للأزرار</strong>، والـ fields بـ radius 12px. الـ pill هو توقيع البراند في الويبسايت (246 استخدام)." },
+      { id: "g1a-theme", ref: "G1a", title: "الثيم الافتراضي", rec: "الترشيح: <strong>زي النظام (system)</strong>، والمستخدم يغيّر من قايمة الـ user." },
+      { id: "tokens-v0", ref: "design-tokens", title: "ألوان tokens v0 والـ chrome البرقوقي في الثيمين", rec: "الـ ramps مبنية على ألوان البراند والويبسايت بالظبط. الـ borders بتاعة الـ controls أقوى من الويبسايت عشان تعدّي 3:1. الـ status fills في الغامق نصها غامق." }
+    ],
+    arch: [
+      { id: "d012-snapshot", ref: "D-012", title: "الويبسايت يقرا الـ CMS من snapshot وقت الـ build", rec: "من غير أي اعتماد على الـ CMS وقت التشغيل، والويبسايت مش هياخد المكتبة في المرحلة دي." },
+      { id: "d013-parity", ref: "D-013", title: "الـ parity في الإنجليزي هو الـ gate", rec: "0 بيكسل فرق على 50 route × 3 مقاسات. الـ real paths والـ prerender وشيل الـ noindex كل واحد منهم يتوافق عليه لوحده." },
+      { id: "d016-digits", ref: "D-016", title: "أرقام لاتيني في الواجهة العربي", rec: "في التواريخ والفلوس والـ IDs، وحقول الأرقام تفضل LTR جوه الـ RTL." },
+      { id: "d021-charts", ref: "D-021", title: "recharts 3 بس، ومحور الوقت معكوس في RTL", rec: "البداية على اليمين. البديل (الوقت دايمًا شمال ← يمين) مفتوح لحد ما قرّاء عرب يبصوا على الاتنين." },
+      { id: "d009-baseui", ref: "D-009", title: "Base UI طبقة الـ primitives الوحيدة", rec: "الـ spike: 33 من 33 نجحوا في RTL. التواريخ هتبقى React Aria Calendar جوه Popover من Base UI." }
+    ],
+    words: [
+      { id: "gl-de-neutral", ref: "Glossary Q1", title: "الألماني gender-neutral؟", rec: "«Mitarbeitende/Nutzende» ولا «Mitarbeiter/Benutzer» زي دلوقتي؟ ده قرار register، زي MSA للعربي." },
+      { id: "gl-de-tarif", ref: "Glossary Q2", title: "«Tarif» ولا «Plan» في الألماني", rec: "الترشيح: <strong>Tarif</strong> لأنه الكلمة الطبيعية للتسعير. Sales بتقول Plan دلوقتي." },
+      { id: "gl-fr-formule", ref: "Glossary Q3", title: "«Formule» للـ plan في الفرنساوي", rec: "عشان «Forfait» تفضل للـ service packages، ومتبقاش كلمة واحدة بمعنيين." },
+      { id: "gl-save", ref: "Glossary Q4", title: "«Save» بس، من غير «Save changes»", rec: "أقصر في الخمس لغات، وبتدخل في زرار 32px." },
+      { id: "sm-banners", ref: "Status matrix Q1", title: "ترتيب أولوية الـ banners", rec: "موقوفة ← للقراءة فقط ← فشل الدفع ← التجربة هتخلص ← … ، و«عرض بصفة العميل» شريط ثابت برّه القاعدة." },
+      { id: "sm-labels", ref: "Status matrix Q4", title: "اسم الحالة واحد للعميل وللـ staff", rec: "زي «بانتظار الرد» بدل «في انتظارك»، عشان تبقى صح من الناحيتين." }
+    ],
+    scope: [
+      { id: "p1-vs1", ref: "P1 Q1", title: "قايمة P1a هي الـ VS-1 slice", rec: "SOS login ← الـ shell ← قايمة Files، ومفيش حاجة تانية تتسلّم قبل ما الـ VS-1 تعدّي في 5 لغات × ثيمين." },
+      { id: "p1-big", ref: "P1 Q2", title: "StatusBadge وConfirmDialog وDataTable وSuiteShell جوه P1a", rec: "أكبر من الباقي، بس كل شاشة في الـ pilot محتاجاهم." },
+      { id: "p1-order", ref: "P1 Q3", title: "ترتيب P1b", rec: "زي ما هو في p1-scope.md، إلا لو الـ Files pilot طلّع حاجة ناقصة." }
+    ]
+  };
+  var LABEL = { approve: "موافق", change: "غيّر", discuss: "نتناقش" };
+  var tpl = document.getElementById("card");
+  var cards = {};
+  var state = {};
+  var db = null;
+  var writing = {};
+
+  Object.keys(ITEMS).forEach(function (group) {
+    var host = document.getElementById(group);
+    host.style.display = "grid";
+    host.style.gap = "12px";
+    ITEMS[group].forEach(function (item) {
+      var node = tpl.content.firstElementChild.cloneNode(true);
+      node.querySelector("h3").textContent = item.title;
+      node.querySelector(".id").textContent = item.ref;
+      node.querySelector(".rec").innerHTML = item.rec;
+      node.querySelector(".choices").setAttribute("aria-label", item.title);
+      var ta = node.querySelector("textarea");
+      ta.id = "note-" + item.id;
+      ta.setAttribute("aria-label", "ملاحظة: " + item.title);
+      node.querySelectorAll(".choices button").forEach(function (b) {
+        b.id = "choice-" + item.id + "-" + b.getAttribute("data-choice");
+        b.disabled = true;
+        b.addEventListener("click", function () { save(item.id, { choice: b.getAttribute("data-choice") }); });
+      });
+      ta.disabled = true;
+      ta.addEventListener("change", function () { save(item.id, { note: ta.value.trim() }); });
+      host.appendChild(node);
+      cards[item.id] = node;
+    });
+  });
+
+  function render(id) {
+    var node = cards[id];
+    var s = state[id] || {};
+    if (!node) return;
+    node.querySelectorAll(".choices button").forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-choice") === s.choice ? "true" : "false");
+    });
+    var ta = node.querySelector("textarea");
+    if (document.activeElement !== ta) ta.value = s.note || "";
+    node.querySelector(".saved").textContent = s.choice ? "اتحفظ: " + LABEL[s.choice] : "";
+  }
+
+  function save(id, patch) {
+    if (!db) return;
+    var next = Object.assign({}, state[id] || {}, patch, { updatedAt: new Date().toISOString() });
+    state[id] = next;
+    render(id);
+    var prev = writing[id] || Promise.resolve();
+    writing[id] = prev.then(function () {
+      return db.doc("decisions/" + id).set(next);
+    }).catch(function (e) {
+      cards[id].querySelector(".saved").textContent = e && e.code === "invalid_argument" ? "مش مسموح لك تحفظ هنا" : "ماتحفظش، جرّب تاني";
+    });
+  }
+
+  function enable() {
+    Object.keys(cards).forEach(function (id) {
+      cards[id].querySelectorAll("button, textarea").forEach(function (el) { el.disabled = false; });
+    });
+  }
+
+  var statusEl = document.getElementById("store-status");
+  if (!window.claude || !window.claude.use) {
+    statusEl.textContent = "الحفظ مش متاح هنا. قولّي اختياراتك في الشات.";
+    return;
+  }
+  window.claude.use("db").then(function (d) {
+    if (!d) {
+      statusEl.textContent = "الحفظ مش متاح في العرض ده. قولّي اختياراتك في الشات.";
+      return;
+    }
+    db = d;
+    statusEl.textContent = "اختياراتك بتتحفظ أول ما تدوس.";
+    enable();
+    db.collection("decisions").onSnapshot(function (snap) {
+      snap.docs.forEach(function (doc) {
+        if (!cards[doc.id]) return;
+        state[doc.id] = Object.assign({}, doc.data());
+        render(doc.id);
+      });
+    }, function () {
+      statusEl.textContent = "الاتصال بمكان الحفظ وقف. اعمل reload للصفحة.";
+    });
+  });
+})();
+</script>

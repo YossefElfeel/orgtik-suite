@@ -1,0 +1,9 @@
+{
+  "name": "orgtik-ui",
+  "private": true,
+  "packageManager": "pnpm@11.3.0",
+  "scripts": {
+    "build": "pnpm -r --filter ./packages/** build",
+    "tokens": "pnpm --filter @orgtik/ui tokens"
+  }
+}

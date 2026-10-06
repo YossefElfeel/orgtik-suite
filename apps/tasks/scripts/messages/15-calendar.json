@@ -1,0 +1,7 @@
+{
+  "Calendar.view": { "en": "View", "ar": "العرض", "de": "Ansicht", "fr": "Vue", "it": "Vista" },
+  "Calendar.month": { "en": "Month", "ar": "شهر", "de": "Monat", "fr": "Mois", "it": "Mese" },
+  "Calendar.week": { "en": "Week", "ar": "أسبوع", "de": "Woche", "fr": "Semaine", "it": "Settimana" },
+  "Calendar.project": { "en": "Project", "ar": "المشروع", "de": "Projekt", "fr": "Projet", "it": "Progetto" },
+  "Calendar.allProjects": { "en": "All projects", "ar": "كل المشاريع", "de": "Alle Projekte", "fr": "Tous les projets", "it": "Tutti i progetti" }
+}

@@ -1,0 +1,99 @@
+[
+  {
+    "title": "A new article: off the site until published, then at its own address",
+    "ok": true,
+    "passed": 5,
+    "steps": 5,
+    "detail": [
+      {
+        "name": "create-from-existing",
+        "ok": true,
+        "note": "ar_07 at /insights/designing-one-site-for-five-languages"
+      },
+      {
+        "name": "not-on-site-until-published",
+        "ok": true,
+        "note": "6 public articles, the new one not among them"
+      },
+      {
+        "name": "published-and-on-the-site",
+        "ok": true,
+        "note": "visibility live; “Designing one site for five languages | OrgTik”; in the sitemap"
+      },
+      {
+        "name": "in-the-insights-list",
+        "ok": true,
+        "note": "listed on /insights; no overflow"
+      },
+      {
+        "name": "console-clean",
+        "ok": true,
+        "note": "no errors"
+      }
+    ]
+  },
+  {
+    "title": "Taken off the site, its address goes to the list; it can come back",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "take-off",
+        "ok": true,
+        "note": "/insights/designing-one-site-for-five-languages will redirect to /insights. It stays here with its history and can go back on the site."
+      },
+      {
+        "name": "address-redirects",
+        "ok": true,
+        "note": "308 → /insights"
+      },
+      {
+        "name": "put-back",
+        "ok": true,
+        "note": "its redirect is gone"
+      }
+    ]
+  },
+  {
+    "title": "Deleting is for what never reached the site; fixed sets can't grow",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "delete-never-published",
+        "ok": true,
+        "note": "create 201, delete 204, then 404; a published one: 409 published_before"
+      },
+      {
+        "name": "fixed-set-note",
+        "ok": true,
+        "note": "no New button; API 405 not_creatable"
+      },
+      {
+        "name": "slug-taken",
+        "ok": true,
+        "note": "422 {\"slug.en\":\"slug_taken\"}"
+      }
+    ]
+  },
+  {
+    "title": "A new case study joins the Work page",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "work-index",
+        "ok": true,
+        "note": "2 public projects; new card visible; overflow false"
+      },
+      {
+        "name": "its-page",
+        "ok": true,
+        "note": "200; project header renders with its copied narrative disabled (0 editor-only notices on the website)"
+      }
+    ]
+  }
+]

@@ -1,0 +1,78 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/client",
+  "redirects": [
+    {
+      "source": "/platform",
+      "destination": "/software#plan-builder",
+      "permanent": true
+    },
+    {
+      "source": "/pricing",
+      "destination": "/software#plan-builder",
+      "permanent": true
+    },
+    {
+      "source": "/platform/:path*",
+      "destination": "/software/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/projects",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/projects/:path*",
+      "destination": "/work/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/legal/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/terms",
+      "destination": "/legal/terms",
+      "permanent": true
+    },
+    {
+      "source": "/imprint",
+      "destination": "/legal/imprint",
+      "permanent": true
+    },
+    {
+      "source": "/sitemap",
+      "destination": "/legal/sitemap",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/software/plans/:path*",
+      "destination": "/software/plans/index.html"
+    },
+    {
+      "source": "/pricing/plans",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/:file*.dc.html",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
+  ]
+}

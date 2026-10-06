@@ -1,0 +1,10 @@
+{
+ "Stepper.stepOf": {"en": "Step {n} of {total}", "ar": "الخطوة {n} من {total}", "de": "Schritt {n} von {total}", "fr": "Étape {n} sur {total}", "it": "Passaggio {n} di {total}"},
+ "Stepper.complete": {"en": "done", "ar": "مكتملة", "de": "erledigt", "fr": "terminée", "it": "completato"},
+ "Stepper.current": {"en": "current step", "ar": "الخطوة الحالية", "de": "aktueller Schritt", "fr": "étape en cours", "it": "passaggio attuale"},
+ "Stepper.upcoming": {"en": "not reached yet", "ar": "لم تصل إليها بعد", "de": "noch nicht erreicht", "fr": "pas encore atteinte", "it": "non ancora raggiunto"},
+ "Stepper.error": {"en": "has errors", "ar": "بها أخطاء", "de": "enthält Fehler", "fr": "contient des erreurs", "it": "contiene errori"},
+ "Stepper.optional": {"en": "Optional", "ar": "اختيارية", "de": "Optional", "fr": "Facultative", "it": "Facoltativo"},
+ "Stepper.allSteps": {"en": "All steps", "ar": "كل الخطوات", "de": "Alle Schritte", "fr": "Toutes les étapes", "it": "Tutti i passaggi"},
+ "Stepper.locked": {"en": "Finish the earlier steps first", "ar": "أكمل الخطوات السابقة أولًا", "de": "Schließen Sie zuerst die vorherigen Schritte ab", "fr": "Terminez d’abord les étapes précédentes", "it": "Completa prima i passaggi precedenti"}
+}

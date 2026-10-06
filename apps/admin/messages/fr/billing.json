@@ -1,0 +1,137 @@
+{
+  "Billing": {
+    "reason": "Motif",
+    "list": {
+      "title": "Factures",
+      "description": "Toutes les factures, leurs paiements et remboursements, dans la devise du client et en USD.",
+      "filters": "Filtrer les factures",
+      "state": "État",
+      "allStates": "Tous les états",
+      "workspace": "Espace de travail",
+      "allWorkspaces": "Tous les espaces de travail",
+      "currency": "Devise",
+      "allCurrencies": "Toutes les devises",
+      "clear": "Effacer les filtres",
+      "colNumber": "Facture",
+      "colWorkspace": "Espace de travail",
+      "colState": "État",
+      "colIssued": "Émise le",
+      "notIssued": "Non émise",
+      "colDue": "Échéance",
+      "colTotal": "Total",
+      "colUsd": "En USD",
+      "pageTotal": "Facturé sur cette page, en USD (hors brouillons et factures annulées) :",
+      "noMatch": "Aucune facture ne correspond à ces filtres",
+      "empty": "Aucune facture pour l'instant",
+      "emptyBody": "Les factures apparaissent ici dès que les clients sont facturés, ou quand vous en créez une."
+    },
+    "kind": {
+      "subscription": "Abonnement",
+      "manual": "Manuelle"
+    },
+    "method": {
+      "bank_transfer": "Virement bancaire",
+      "cash": "Espèces",
+      "cheque": "Chèque",
+      "card": "Carte",
+      "wallet": "Portefeuille",
+      "other": "Autre"
+    },
+    "payment": {
+      "succeeded": "Réussi",
+      "failed": "Échoué"
+    },
+    "failure": {
+      "card_declined": "Carte refusée",
+      "card_expired": "Carte expirée",
+      "insufficient_funds": "Fonds insuffisants"
+    },
+    "actions": {
+      "issue": "Émettre la facture",
+      "markPaid": "Marquer payée",
+      "retry": "Relancer le paiement",
+      "refund": "Rembourser",
+      "void": "Annuler la facture",
+      "more": "Autres actions pour {number}"
+    },
+    "confirm": {
+      "issueTitle": "Émettre {number} ?",
+      "issueImpact": "Le client reçoit cette facture de {amount}, payable sous 7 jours. Elle ne peut plus être modifiée ensuite.",
+      "retryTitle": "Relancer le paiement de {number} ?",
+      "retryImpact": "Débite maintenant {amount} sur le moyen de paiement par défaut de l'espace de travail.",
+      "voidTitle": "Annuler {number} ?",
+      "voidImpact": "Les {amount} ne seront pas encaissés ; la facture reste enregistrée comme annulée."
+    },
+    "done": {
+      "issue": "{number} émise",
+      "retry": "Le paiement de {number} est passé",
+      "retryFailed": "Le paiement de {number} a de nouveau échoué",
+      "void": "{number} annulée",
+      "markPaid": "{number} marquée payée",
+      "refund": "{amount} remboursé ; avoir {note}"
+    },
+    "markPaid": {
+      "title": "Marquer {number} comme payée",
+      "impact": "Enregistre un paiement de {amount} effectué hors de la passerelle. Ses outils redeviennent actifs.",
+      "method": "Moyen de paiement",
+      "reference": "Référence",
+      "referenceHint": "La référence bancaire ou du reçu, pour retrouver le paiement plus tard."
+    },
+    "refund": {
+      "title": "Rembourser {number}",
+      "impact": "Le remboursement se fait dans la devise de la facture et crée un avoir numéroté.",
+      "amount": "Montant ({currency})",
+      "upTo": "Jusqu'à {max}.",
+      "amountMin": "Saisissez un montant supérieur à 0.",
+      "overMax": "C'est plus que ce qui peut être remboursé. Au maximum {max}."
+    },
+    "create": {
+      "open": "Nouvelle facture",
+      "title": "Nouvelle facture manuelle",
+      "description": "Elle est enregistrée comme brouillon dans la devise de l'espace de travail, avec la taxe de son pays. Émettez-la quand elle est prête.",
+      "workspace": "Espace de travail",
+      "pickWorkspace": "Choisir un espace de travail",
+      "noWorkspace": "Aucun espace de travail de ce nom",
+      "currency": "Facturé en {currency}.",
+      "lines": "Lignes",
+      "lineLabel": "Ligne {n} : description",
+      "lineAmount": "Ligne {n} : montant",
+      "pickFirst": "Choisissez d'abord un espace de travail",
+      "removeLine": "Supprimer la ligne {n}",
+      "addLine": "Ajouter une ligne",
+      "linesInvalid": "Chaque ligne doit avoir une description et un montant supérieur à 0.",
+      "subtotal": "Sous-total hors taxe : {amount}",
+      "submit": "Enregistrer le brouillon",
+      "done": "Brouillon {number} enregistré"
+    },
+    "detail": {
+      "notFound": "Facture introuvable",
+      "notFoundBody": "Le lien est peut-être erroné.",
+      "back": "Retour aux factures",
+      "summary": "Résumé",
+      "workspace": "Espace de travail",
+      "kind": "Type",
+      "currency": "Devise",
+      "issued": "Émise le",
+      "due": "Échéance",
+      "paid": "Payée le",
+      "voided": "Annulée le",
+      "refundable": "Remboursable",
+      "lines": "Lignes",
+      "item": "Article",
+      "amount": "Montant",
+      "subtotal": "Sous-total",
+      "tax": "Taxe",
+      "noTax": "Sans taxe",
+      "total": "Total",
+      "refunded": "Remboursé",
+      "payments": "Paiements",
+      "gateway": "via",
+      "reference": "référence",
+      "usdRate": "Taux USD {rate}",
+      "noPayments": "Aucun paiement pour l'instant.",
+      "creditNotes": "Avoirs",
+      "noCreditNotes": "Aucun avoir."
+    }
+  }
+}

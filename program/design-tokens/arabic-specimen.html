@@ -1,0 +1,340 @@
+<title>OrgTik Arabic Type Specimen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Montserrat:wght@500;600;700&family=Noto+Kufi+Arabic:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: an RTL review sheet. A sticky control bar, then one column per candidate typeface,
+   each a stack of real dashboard fragments on light or dark specimen surfaces (tokens v0). */
+:root {
+  /* The page shell follows the viewer's theme. */
+  --pg-bg: #F6F1FA;
+  --pg-panel: #FFFFFF;
+  --pg-fg: #190B25;
+  --pg-muted: #4A3A57;
+  --pg-line: #DCD0E6;
+  --pg-accent: #6C3CAA;
+  --pg-accent-fg: #FFFFFF;
+  --pg-chip: #EEE3F7;
+  --font-ui: system-ui, "Segoe UI", Tahoma, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --pg-bg: #0D0814; --pg-panel: #1A0D27; --pg-fg: #F6F1FA; --pg-muted: #CFC2DB; --pg-line: #FFFFFF1F;
+    --pg-accent: #EEE3F7; --pg-accent-fg: #28123B; --pg-chip: #21132D; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --pg-bg: #0D0814; --pg-panel: #1A0D27; --pg-fg: #F6F1FA; --pg-muted: #CFC2DB; --pg-line: #FFFFFF1F;
+  --pg-accent: #EEE3F7; --pg-accent-fg: #28123B; --pg-chip: #21132D; color-scheme: dark;
+}
+body { background: var(--pg-bg); color: var(--pg-fg); font-family: var(--font-ui); }
+
+/* Specimen surfaces: tokens v0, set explicitly so each theme can be judged on any page theme. */
+.grid[data-surface="light"] .surface {
+  --canvas: #F6F1FA; --raised: #FFFFFF; --sunken: #EEE8F7; --line: #DCD0E6; --line-control: #8E7FA0;
+  --fg: #190B25; --muted: #4A3A57; --subtle: #6E6178; --brand: #6C3CAA; --focus: #6C3CAA;
+  --primary-bg: #6C3CAA; --primary-fg: #FFFFFF; --pill-bg: #190B25; --pill-fg: #F6F1FA; --chip-bg: #F6F1FA; --chip-fg: #190B25;
+  --chrome: #190B25; --chrome-fg: #F6F1FA; --chrome-muted: #CFC2DB; --chrome-hover: #FFFFFF14;
+  --ok-fg: #086A35; --ok-bg: #EEFBF1; --warn-fg: #5E3904; --warn-bg: #FFF5EB; --bad-fg: #8A1F3A; --bad-bg: #FFF4F4;
+  --info-fg: #394BC6; --info-bg: #F3F4FF; --brand-bg: #EEE3F7; --neutral-bg: #EEE8F7;
+  --bad-solid: #A02544; --bad-on-solid: #FFFFFF;
+}
+.grid[data-surface="dark"] .surface {
+  --canvas: #0D0814; --raised: #1A0D27; --sunken: #120A1B; --line: #FFFFFF14; --line-control: #FFFFFF66;
+  --fg: #F6F1FA; --muted: #CFC2DB; --subtle: #B5A6C4; --brand: #C9A0F3; --focus: #B98AF7;
+  --primary-bg: #EEE3F7; --primary-fg: #28123B; --pill-bg: #EEE3F7; --pill-fg: #28123B; --chip-bg: #28123B; --chip-fg: #EEE3F7;
+  --chrome: #120A1B; --chrome-fg: #F6F1FA; --chrome-muted: #CFC2DB; --chrome-hover: #FFFFFF14;
+  --ok-fg: #8BD59F; --ok-bg: #12301F; --warn-fg: #EEB474; --warn-bg: #33240B; --bad-fg: #FEA4AB; --bad-bg: #3A1320;
+  --info-fg: #92A1FB; --info-bg: #171B45; --brand-bg: #28123B; --neutral-bg: #21132D;
+  --bad-solid: #E44A63; --bad-on-solid: #0D0814;
+}
+
+* { box-sizing: border-box; }
+.page { max-width: 1480px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 56px; display: grid; gap: 24px; }
+.intro { display: grid; gap: 14px; max-width: 70ch; }
+.intro h1 { margin: 0; font-size: clamp(24px, 3vw, 34px); line-height: 1.3; text-wrap: balance; }
+.intro .en { font-family: Montserrat, Arial, sans-serif; font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--pg-muted); }
+.intro p { margin: 0; font-size: 16px; line-height: 1.8; color: var(--pg-muted); }
+.intro ol { margin: 0; padding-inline-start: 22px; display: grid; gap: 6px; font-size: 15px; line-height: 1.7; }
+
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 2; display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center;
+  padding: 12px 14px; background: var(--pg-panel); border: 1px solid var(--pg-line); border-radius: 16px; }
+.seg { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.seg > span { font-size: 13px; color: var(--pg-muted); }
+.seg button { font: 500 14px/1 var(--font-ui); padding: 9px 14px; border-radius: 999px; border: 1px solid var(--pg-line); background: transparent; color: var(--pg-fg); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--pg-accent); color: var(--pg-accent-fg); border-color: var(--pg-accent); }
+.seg button:focus-visible, .surface :focus-visible { outline: 2px solid var(--pg-accent); outline-offset: 2px; }
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.grid[data-focus]:not([data-focus="all"]) { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+.grid[data-focus="noto"] .col:not([data-font="noto"]),
+.grid[data-focus="alexandria"] .col:not([data-font="alexandria"]),
+.grid[data-focus="plex"] .col:not([data-font="plex"]) { display: none; }
+@media (max-width: 1100px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+.col { display: grid; gap: 12px; min-width: 0; }
+.col[data-font="noto"] { --ar: "Noto Kufi Arabic"; }
+.col[data-font="alexandria"] { --ar: "Alexandria"; }
+.col[data-font="plex"] { --ar: "IBM Plex Sans Arabic"; }
+.font-head { display: grid; gap: 4px; padding-inline: 4px; }
+.font-head h2 { margin: 0; font-family: var(--ar), Arial, sans-serif; font-weight: 600; font-size: 20px; }
+.font-head .latin { font-family: var(--font-mono); font-size: 12px; color: var(--pg-muted); }
+.font-head p { margin: 0; font-size: 14px; line-height: 1.7; color: var(--pg-muted); }
+.font-head .tag { justify-self: start; font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--pg-chip); color: var(--pg-fg); }
+
+/* ---- The specimen itself: Arabic in the candidate face, Latin headings in Montserrat. ---- */
+.surface { background: var(--canvas); color: var(--fg); border-radius: 20px; padding: 18px; display: grid; gap: 18px; min-width: 0;
+  font-family: var(--ar), Arial, sans-serif; letter-spacing: 0; border: 1px solid var(--line); }
+.surface .display { font-family: Montserrat, var(--ar), Arial, sans-serif; }
+.block { background: var(--raised); border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: grid; gap: 10px; min-width: 0; }
+.label { font-family: var(--font-mono); font-size: 11px; color: var(--subtle); direction: ltr; text-align: end; }
+.scale { display: grid; gap: 10px; }
+.scale div { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 12px; }
+.scale .s { color: var(--fg); }
+.t-display { font-size: 40px; font-weight: 700; line-height: 1.3; }
+.t-title-lg { font-size: 28px; font-weight: 600; line-height: 1.35; }
+.t-title { font-size: 20px; font-weight: 600; line-height: 1.45; }
+.t-body-lg { font-size: 16px; line-height: 1.75; }
+.t-body { font-size: 14px; line-height: 1.75; }
+.t-body-sm { font-size: 13px; line-height: 1.7; color: var(--muted); }
+.t-caption { font-size: 12px; line-height: 1.6; color: var(--muted); }
+.t-micro { font-size: 11px; font-weight: 600; line-height: 1.5; color: var(--subtle); }
+.weights { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 12px; font-size: 18px; }
+.weights span small { font-family: var(--font-mono); font-size: 11px; color: var(--subtle); margin-inline-start: 6px; }
+
+.app { display: grid; grid-template-columns: 170px minmax(0, 1fr); border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+.side { background: var(--chrome, #190B25); color: var(--chrome-fg, #F6F1FA); padding: 12px 10px; display: grid; gap: 4px; align-content: start; font-size: 13px; }
+.side .ws { font-weight: 600; font-size: 13px; padding: 4px 8px 10px; border-bottom: 1px solid #FFFFFF1F; margin-bottom: 4px; }
+.side .it { display: flex; justify-content: space-between; align-items: center; gap: 6px; padding: 7px 8px; border-radius: 10px; }
+.side .it.on { background: var(--chrome-hover); }
+.side .it b { font-weight: 500; }
+.side .it i { font-style: normal; font-size: 11px; color: var(--chrome-muted, #CFC2DB); white-space: nowrap; }
+/* Tools the workspace doesn't have: dimmed by colour, not opacity. They still open the plan page,
+   so their text keeps full contrast. */
+.side .it.lock b { color: var(--chrome-muted, #CFC2DB); font-weight: 400; }
+.main { background: var(--raised); padding: 14px; min-width: 0; display: grid; gap: 10px; align-content: start; }
+.main h3 { margin: 0; font-size: 16px; font-weight: 600; }
+.tbl { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: start; font-weight: 600; font-size: 12px; color: var(--muted); padding: 8px 6px; background: var(--sunken); }
+td { padding: 9px 6px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+td.n { font-variant-numeric: tabular-nums; }
+.badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; padding: 3px 9px; border-radius: 999px; }
+.badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.ok { color: var(--ok-fg); background: var(--ok-bg); }
+.warn { color: var(--warn-fg); background: var(--warn-bg); }
+.bad { color: var(--bad-fg); background: var(--bad-bg); }
+.info { color: var(--info-fg); background: var(--info-bg); }
+.brandb { color: var(--brand); background: var(--brand-bg); }
+.neutral { color: var(--muted); background: var(--neutral-bg); }
+
+.buttons { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn { font: inherit; font-size: 14px; font-weight: 600; height: 40px; padding-inline: 18px; border-radius: 999px; border: 1px solid transparent; cursor: pointer; display: inline-flex; align-items: center; gap: 10px; }
+.btn.primary { background: var(--primary-bg); color: var(--primary-fg); }
+.btn.secondary { background: transparent; color: var(--fg); border-color: var(--line-control); }
+.btn.pill { background: var(--pill-bg); color: var(--pill-fg); padding-inline: 18px 6px; }
+.btn.pill .chip { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: var(--chip-bg); color: var(--chip-fg); font-size: 15px; }
+.btn.link { background: none; color: var(--brand); padding-inline: 4px; text-decoration: underline; text-underline-offset: 4px; }
+
+.field { display: grid; gap: 6px; }
+.field label { font-size: 13px; font-weight: 600; }
+.field input { font: 14px/1.4 Arial, sans-serif; height: 40px; padding-inline: 12px; border-radius: 12px; border: 1px solid var(--line-control); background: var(--raised); color: var(--fg); direction: ltr; text-align: left; width: 100%; }
+.field input.err { border-color: var(--bad-fg); }
+.field .help { font-size: 12px; color: var(--muted); }
+.field .msg { font-size: 12px; color: var(--bad-fg); }
+
+.banner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 14px; border-radius: 14px; background: var(--bad-bg); color: var(--fg); border: 1px solid var(--line); }
+.banner strong { display: block; font-size: 14px; color: var(--bad-fg); margin-bottom: 2px; }
+.banner p { margin: 0; font-size: 13px; line-height: 1.7; }
+.banner .btn { height: 36px; background: var(--bad-solid); color: var(--bad-on-solid); font-size: 13px; }
+.para { margin: 0; font-size: 16px; line-height: 1.85; max-width: 62ch; }
+.mixed { margin: 0; font-size: 14px; line-height: 1.7; color: var(--muted); }
+.ltr { direction: ltr; unicode-bidi: isolate; }
+
+footer { font-size: 13px; line-height: 1.8; color: var(--pg-muted); max-width: 80ch; display: grid; gap: 6px; }
+@media (max-width: 560px) {
+  .app { grid-template-columns: minmax(0, 1fr); }
+  .t-display { font-size: 32px; }
+  .banner { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) { .seg button { transition: background-color .2s cubic-bezier(.22,1,.36,1), color .2s; } }
+</style>
+
+<div class="page" dir="rtl" lang="ar">
+  <header class="intro">
+    <span class="en" dir="ltr">D-010 · Arabic typeface</span>
+    <h1>إيه الخط العربي اللي يمشي مع Montserrat؟</h1>
+    <p>كل عمود فيه نفس المحتوى بخط مختلف. المحتوى مأخوذ من شاشات حقيقية في الداشبوردات: الـ sidebar وحالات الأدوات، جدول الفواتير، الأزرار، الـ form، والـ banner. الكلام نفسه بالفصحى، زي ما هيظهر في المنتج. العناوين اللاتيني Montserrat، والنص اللاتيني Arial، زي الويبسايت.</p>
+    <ol>
+      <li>القراءة في 12 و13 و14px، جوه الجدول والـ badges.</li>
+      <li>الخط جنب Montserrat في نفس السطر، زي «مساحة عمل OrgTik».</li>
+      <li>الوزن 500 و600 على الأزرار والعناوين.</li>
+      <li>الأرقام اللاتيني والمبالغ بالـ CHF جوه الكلام العربي.</li>
+      <li>الخلفية الغامقة: هل الحروف بتسيح أو بتتقل؟ غيّر الخلفية من الشريط اللي تحت.</li>
+    </ol>
+  </header>
+
+  <div class="bar" role="toolbar" aria-label="عرض الصفحة">
+    <div class="seg" role="group" aria-label="الخلفية">
+      <span>الخلفية</span>
+      <button type="button" id="surface-light" data-surface="light" aria-pressed="true">فاتحة</button>
+      <button type="button" id="surface-dark" data-surface="dark" aria-pressed="false">غامقة</button>
+    </div>
+    <div class="seg" role="group" aria-label="الخط">
+      <span>الخط</span>
+      <button type="button" id="focus-all" data-focus="all" aria-pressed="true">التلاتة</button>
+      <button type="button" id="focus-noto" data-focus="noto" aria-pressed="false">Noto Kufi</button>
+      <button type="button" id="focus-alexandria" data-focus="alexandria" aria-pressed="false">Alexandria</button>
+      <button type="button" id="focus-plex" data-focus="plex" aria-pressed="false">IBM Plex</button>
+    </div>
+  </div>
+
+  <main class="grid" id="grid" data-surface="light" data-focus="all">
+    <section class="col" data-font="noto" aria-labelledby="h-noto">
+      <div class="font-head">
+        <h2 id="h-noto">نوتو كوفي العربي</h2>
+        <span class="latin" dir="ltr">Noto Kufi Arabic · 400 500 600 700</span>
+        <p>كوفي هندسي، وأقرب حاجة لهندسة Montserrat. متين في الأحجام الصغيرة، بس ممكن يحس رسمي شوية في النصوص الطويلة.</p>
+        <span class="tag">ترشيح الخطة</span>
+      </div>
+    </section>
+    <section class="col" data-font="alexandria" aria-labelledby="h-alexandria">
+      <div class="font-head">
+        <h2 id="h-alexandria">الإسكندرية</h2>
+        <span class="latin" dir="ltr">Alexandria · 400 500 600 700</span>
+        <p>هندسي برضه، ومرسوم للعربي واللاتيني مع بعض. روحه عصرية أكتر. بص عليه كويس في الجداول على 12 و13px.</p>
+      </div>
+    </section>
+    <section class="col" data-font="plex" aria-labelledby="h-plex">
+      <div class="font-head">
+        <h2 id="h-plex">آي بي إم بلكس العربي</h2>
+        <span class="latin" dir="ltr">IBM Plex Sans Arabic · 400 500 600 700</span>
+        <p>Humanist، ومقروء جدًا في الأحجام الصغيرة. بس روحه أقرب لعيلة Plex منها لـ Montserrat.</p>
+      </div>
+    </section>
+  </main>
+
+  <template id="specimen">
+    <div class="surface">
+      <div class="block scale">
+        <div><span class="s t-display display">أدواتك في مساحة عمل واحدة</span><span class="label">display 40</span></div>
+        <div><span class="s t-title-lg display">الاشتراكات والفوترة</span><span class="label">title-lg 28</span></div>
+        <div><span class="s t-title display">فواتير هذا الشهر</span><span class="label">title 20</span></div>
+        <div><span class="s t-body-lg">تابِع حالة كل أداة واشتراكها، وادفع الفواتير المستحقة من مكان واحد.</span><span class="label">body-lg 16</span></div>
+        <div><span class="s t-body">يعرض الجدول الفواتير الصادرة خلال آخر ثلاثين يومًا وحالة كل منها.</span><span class="label">body 14</span></div>
+        <div><span class="s t-body-sm">آخر تحديث قبل خمس دقائق</span><span class="label">body-sm 13</span></div>
+        <div><span class="s t-caption">المبلغ شامل ضريبة القيمة المضافة</span><span class="label">caption 12</span></div>
+        <div><span class="s t-micro">قيد المراجعة</span><span class="label">micro 11</span></div>
+      </div>
+
+      <div class="block">
+        <span class="label">weights</span>
+        <div class="weights">
+          <span style="font-weight:400">مساحة العمل<small>400</small></span>
+          <span style="font-weight:500">مساحة العمل<small>500</small></span>
+          <span style="font-weight:600">مساحة العمل<small>600</small></span>
+          <span style="font-weight:700">مساحة العمل<small>700</small></span>
+        </div>
+      </div>
+
+      <div class="app">
+        <nav class="side" aria-label="الأدوات">
+          <div class="ws">مساحة عمل <span class="ltr display">OrgTik</span></div>
+          <div class="it on"><b>المهام</b><i>مفعّلة</i></div>
+          <div class="it"><b>الملفات</b><i>تجربة · 5 أيام</i></div>
+          <div class="it"><b>الموارد البشرية</b><i>إصدار تجريبي</i></div>
+          <div class="it"><b>المبيعات</b><i>للقراءة فقط</i></div>
+          <div class="it lock"><b>التسويق</b><i>غير مشترك</i></div>
+          <div class="it lock"><b>المحادثات</b><i>قريبًا</i></div>
+        </nav>
+        <div class="main">
+          <h3>الفواتير</h3>
+          <div class="tbl">
+            <table>
+              <thead><tr><th>رقم الفاتورة</th><th>التاريخ</th><th>المبلغ</th><th>الحالة</th></tr></thead>
+              <tbody>
+                <tr><td class="n"><bdi>INV-2026-0142</bdi></td><td class="n"><bdi>29/09/2026</bdi></td><td class="n"><bdi>1,250.00 CHF</bdi></td><td><span class="badge ok">مدفوعة</span></td></tr>
+                <tr><td class="n"><bdi>INV-2026-0139</bdi></td><td class="n"><bdi>15/09/2026</bdi></td><td class="n"><bdi>480.00 CHF</bdi></td><td><span class="badge warn">متأخرة</span></td></tr>
+                <tr><td class="n"><bdi>INV-2026-0131</bdi></td><td class="n"><bdi>01/09/2026</bdi></td><td class="n"><bdi>2,900.00 CHF</bdi></td><td><span class="badge info">مفتوحة</span></td></tr>
+                <tr><td class="n"><bdi>INV-2026-0120</bdi></td><td class="n"><bdi>18/08/2026</bdi></td><td class="n"><bdi>75.50 CHF</bdi></td><td><span class="badge neutral">مستردة</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="buttons"><span class="badge brandb">إصدار تجريبي</span><span class="badge bad">للقراءة فقط</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="label">buttons</span>
+        <div class="buttons">
+          <button type="button" class="btn primary">حفظ</button>
+          <button type="button" class="btn secondary">إلغاء</button>
+          <button type="button" class="btn pill">ابدأ التجربة<span class="chip" aria-hidden="true">←</span></button>
+          <button type="button" class="btn link">عرض الخطط</button>
+        </div>
+      </div>
+
+      <div class="block">
+        <span class="label">field</span>
+        <div class="field">
+          <label>البريد الإلكتروني</label>
+          <input type="email" value="mona.adel@orgtik.test" aria-label="البريد الإلكتروني">
+          <span class="help">سنرسل الفواتير إلى هذا العنوان.</span>
+        </div>
+        <div class="field">
+          <label>البريد الإلكتروني</label>
+          <input class="err" type="email" value="mona.adel@" aria-label="البريد الإلكتروني" aria-invalid="true">
+          <span class="msg">أدخِل بريدًا إلكترونيًا صحيحًا، مثل <bdi>name@company.com</bdi></span>
+        </div>
+      </div>
+
+      <div class="banner" role="note">
+        <div>
+          <strong>فشل الدفع</strong>
+          <p>تعذّر تحصيل <bdi>49.00 CHF</bdi> لاشتراك المهام. حدِّث وسيلة الدفع قبل <bdi>06/10/2026</bdi> حتى لا تتحول الأداة إلى القراءة فقط.</p>
+        </div>
+        <button type="button" class="btn">ادفع الآن</button>
+      </div>
+
+      <div class="block">
+        <span class="label">body 16 · line-height 1.85</span>
+        <p class="para">يجمع <span class="ltr">OrgTik</span> أدوات العمل اليومية في مساحة واحدة: المهام والملفات والموارد البشرية والمبيعات والتسويق. يختار كل فريق الأدوات التي يحتاجها ويدفع مقابلها فقط، ويضيف أعضاءه بدعوة عبر البريد الإلكتروني. وتبقى البيانات محفوظة ثلاثين يومًا بعد إلغاء الاشتراك، يمكن خلالها تصديرها أو استعادة الأداة.</p>
+        <p class="mixed"><span class="ltr display">OrgTik Tasks</span> · الإصدار <bdi>2.4</bdi> · اكتملت <bdi>1,250</bdi> مهمة هذا الشهر</p>
+      </div>
+    </div>
+  </template>
+
+  <footer>
+    <span>الألوان والمقاسات من tokens v0 في <bdi dir="ltr">design-tokens/tokens.v0.json</bdi>، وكل ألوان النص على الخلفية عدّت شروط WCAG في الثيمين.</span>
+    <span>في المنتج، الخط العربي هيتحمّل بـ unicode-range عربي بس، فالصفحات اللاتيني مش هتنزّله، والنص اللاتيني جوه الكلام العربي هيطلع Arial. هنا بيطلع بحروف الخط العربي اللاتيني، لأن الخطوط جاية من Google Fonts.</span>
+    <span>الأرقام لاتيني في كل مكان (D-016).</span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var tpl = document.getElementById("specimen");
+    document.querySelectorAll(".col").forEach(function (col) {
+      col.appendChild(tpl.content.cloneNode(true));
+    });
+    var grid = document.getElementById("grid");
+    function wire(attr) {
+      var buttons = document.querySelectorAll(".bar button[data-" + attr + "]");
+      buttons.forEach(function (b) {
+        b.addEventListener("click", function () {
+          grid.setAttribute("data-" + attr, b.getAttribute("data-" + attr));
+          buttons.forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+          try { localStorage.setItem("specimen-" + attr, b.getAttribute("data-" + attr)); } catch (e) {}
+        });
+      });
+      try {
+        var saved = localStorage.getItem("specimen-" + attr);
+        var match = saved && document.querySelector('.bar button[data-' + attr + '="' + saved + '"]');
+        if (match) match.click();
+      } catch (e) {}
+    }
+    wire("surface");
+    wire("focus");
+  })();
+</script>

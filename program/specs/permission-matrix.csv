@@ -1,0 +1,18 @@
+﻿module_en,module_ar,Super Admin,Finance,Sales,Support,Service Mgr,Service Team,Content,Product Mgr
+Overview,نظرة عامة,F,V,V,V,V,—,—,V
+Tools & Status,الأدوات والحالة,F,—,V,V,—,—,—,E
+Plans & Features,الباقات والمميزات,F,V,V,V,—,—,—,E
+"Zones, Currencies & Pricing",المناطق والعملات والأسعار,F,E,V,—,—,—,—,—
+Bundles & Coupons,الباقات المجمعة والكوبونات,F,E,E,—,—,—,—,—
+Workspaces,مساحات العمل,F,V,E,E,V,—,—,V
+"Billing (invoices, payments, refunds)",الفوترة,F,F,V,V,—,—,—,—
+Tax & Gateways,الضرائب وبوابات الدفع,F,E,—,—,—,—,—,—
+Services,الخدمات,F,V,E,V,F,E*,—,—
+Support tickets,تذاكر الدعم,F,V,E,F,V,—,—,V
+"Content (pages, blog, portfolio)",المحتوى,F,—,—,—,V,—,F,E
+Suggestions & Roadmap,الاقتراحات وخطة التطوير,F,—,V,E,—,—,—,F
+Waitlist,قائمة الانتظار,F,—,V,—,—,—,—,F
+Templates,القوالب,F,—,—,E,—,—,E,—
+Staff & Roles,الموظفين والصلاحيات,F,—,—,—,—,—,—,—
+Reports,التقارير,F,F,V,—,V,—,V,V
+Settings,الإعدادات,F,V,—,—,—,—,—,—

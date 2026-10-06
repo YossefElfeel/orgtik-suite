@@ -1,0 +1,137 @@
+{
+  "Billing": {
+    "reason": "Grund",
+    "list": {
+      "title": "Rechnungen",
+      "description": "Alle Rechnungen mit Zahlungen und Erstattungen, in der Währung des Kunden und in USD.",
+      "filters": "Rechnungen filtern",
+      "state": "Status",
+      "allStates": "Alle Status",
+      "workspace": "Workspace",
+      "allWorkspaces": "Alle Workspaces",
+      "currency": "Währung",
+      "allCurrencies": "Alle Währungen",
+      "clear": "Filter zurücksetzen",
+      "colNumber": "Rechnung",
+      "colWorkspace": "Workspace",
+      "colState": "Status",
+      "colIssued": "Ausgestellt",
+      "notIssued": "Nicht ausgestellt",
+      "colDue": "Fällig",
+      "colTotal": "Gesamt",
+      "colUsd": "In USD",
+      "pageTotal": "Auf dieser Seite abgerechnet, in USD (ohne Entwürfe und stornierte Rechnungen):",
+      "noMatch": "Keine Rechnung passt zu diesen Filtern",
+      "empty": "Noch keine Rechnungen",
+      "emptyBody": "Rechnungen erscheinen hier, sobald Kunden abgerechnet werden oder Sie eine erstellen."
+    },
+    "kind": {
+      "subscription": "Abo",
+      "manual": "Manuell"
+    },
+    "method": {
+      "bank_transfer": "Banküberweisung",
+      "cash": "Bargeld",
+      "cheque": "Scheck",
+      "card": "Karte",
+      "wallet": "Wallet",
+      "other": "Sonstiges"
+    },
+    "payment": {
+      "succeeded": "Erfolgreich",
+      "failed": "Fehlgeschlagen"
+    },
+    "failure": {
+      "card_declined": "Karte abgelehnt",
+      "card_expired": "Karte abgelaufen",
+      "insufficient_funds": "Deckung nicht ausreichend"
+    },
+    "actions": {
+      "issue": "Rechnung ausstellen",
+      "markPaid": "Als bezahlt markieren",
+      "retry": "Zahlung erneut versuchen",
+      "refund": "Erstatten",
+      "void": "Rechnung stornieren",
+      "more": "Weitere Aktionen für {number}"
+    },
+    "confirm": {
+      "issueTitle": "{number} ausstellen?",
+      "issueImpact": "Der Kunde erhält diese Rechnung über {amount}, fällig in 7 Tagen. Danach kann sie nicht mehr bearbeitet werden.",
+      "retryTitle": "Zahlung von {number} erneut versuchen?",
+      "retryImpact": "Belastet jetzt {amount} auf die Standard-Zahlungsmethode des Workspaces.",
+      "voidTitle": "{number} stornieren?",
+      "voidImpact": "Die {amount} werden nicht eingezogen; die Rechnung bleibt als storniert erhalten."
+    },
+    "done": {
+      "issue": "{number} ausgestellt",
+      "retry": "Zahlung von {number} ist durchgegangen",
+      "retryFailed": "Die Zahlung von {number} ist erneut fehlgeschlagen",
+      "void": "{number} storniert",
+      "markPaid": "{number} als bezahlt markiert",
+      "refund": "{amount} erstattet; Gutschrift {note}"
+    },
+    "markPaid": {
+      "title": "{number} als bezahlt markieren",
+      "impact": "Erfasst eine Zahlung über {amount} außerhalb des Zahlungsanbieters. Die Tools werden wieder aktiv.",
+      "method": "Zahlungsmethode",
+      "reference": "Referenz",
+      "referenceHint": "Die Bank- oder Belegreferenz, um die Zahlung später zu finden."
+    },
+    "refund": {
+      "title": "{number} erstatten",
+      "impact": "Die Erstattung erfolgt in der Währung der Rechnung und erzeugt eine nummerierte Gutschrift.",
+      "amount": "Betrag ({currency})",
+      "upTo": "Bis zu {max}.",
+      "amountMin": "Geben Sie einen Betrag über 0 ein.",
+      "overMax": "Das ist mehr, als erstattet werden kann. Höchstens {max}."
+    },
+    "create": {
+      "open": "Neue Rechnung",
+      "title": "Neue manuelle Rechnung",
+      "description": "Sie wird als Entwurf in der Währung des Workspaces mit der Steuer seines Landes gespeichert. Stellen Sie sie aus, wenn sie fertig ist.",
+      "workspace": "Workspace",
+      "pickWorkspace": "Workspace wählen",
+      "noWorkspace": "Kein Workspace mit diesem Namen",
+      "currency": "Abgerechnet in {currency}.",
+      "lines": "Positionen",
+      "lineLabel": "Position {n}: Beschreibung",
+      "lineAmount": "Position {n}: Betrag",
+      "pickFirst": "Zuerst einen Workspace wählen",
+      "removeLine": "Position {n} entfernen",
+      "addLine": "Position hinzufügen",
+      "linesInvalid": "Jede Position braucht eine Beschreibung und einen Betrag über 0.",
+      "subtotal": "Zwischensumme vor Steuer: {amount}",
+      "submit": "Entwurf speichern",
+      "done": "Entwurf {number} gespeichert"
+    },
+    "detail": {
+      "notFound": "Rechnung nicht gefunden",
+      "notFoundBody": "Der Link ist vielleicht falsch.",
+      "back": "Zurück zu den Rechnungen",
+      "summary": "Übersicht",
+      "workspace": "Workspace",
+      "kind": "Art",
+      "currency": "Währung",
+      "issued": "Ausgestellt",
+      "due": "Fällig",
+      "paid": "Bezahlt",
+      "voided": "Storniert",
+      "refundable": "Erstattbar",
+      "lines": "Positionen",
+      "item": "Position",
+      "amount": "Betrag",
+      "subtotal": "Zwischensumme",
+      "tax": "Steuer",
+      "noTax": "Keine Steuer",
+      "total": "Gesamt",
+      "refunded": "Erstattet",
+      "payments": "Zahlungen",
+      "gateway": "über",
+      "reference": "Referenz",
+      "usdRate": "USD-Kurs {rate}",
+      "noPayments": "Noch keine Zahlungen.",
+      "creditNotes": "Gutschriften",
+      "noCreditNotes": "Keine Gutschriften."
+    }
+  }
+}

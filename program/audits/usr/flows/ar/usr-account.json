@@ -1,0 +1,334 @@
+{
+  "at": "2026-10-03T06:53:44.546Z",
+  "locale": "ar",
+  "walks": [
+    {
+      "id": "U1-invite",
+      "title": "Invite with the seat cost; admins can't make admins",
+      "as": "karim.hassan@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open Team",
+          "ok": true,
+          "note": "الفريق; 15 paid seats",
+          "ms": 2241,
+          "url": "http://localhost:3013/team",
+          "screenshot": "U1-invite/01-open-team.png"
+        },
+        {
+          "n": 2,
+          "name": "Open the invitation; Admin is the owner's",
+          "ok": true,
+          "note": "admin option disabled: true; says \"لا يعيّن المشرفين إلا المالك.\"",
+          "ms": 792,
+          "url": "http://localhost:3013/team",
+          "screenshot": "U1-invite/02-open-the-invitation-admin-is-the-owner-s.png"
+        },
+        {
+          "n": 3,
+          "name": "The API refuses an admin invite from an admin (422 owner_only)",
+          "ok": true,
+          "note": "422 owner_only",
+          "ms": 568,
+          "url": "http://localhost:3013/team",
+          "screenshot": "U1-invite/03-the-api-refuses-an-admin-invite-from-an-admin-422-owner-only.png"
+        },
+        {
+          "n": 4,
+          "name": "Fill email; the seat cost shows before sending",
+          "ok": true,
+          "note": "يضيف مقعدًا مدفوعًا عند قبول الدعوة: من 15 إلى 16 مقعدًا",
+          "ms": 618,
+          "url": "http://localhost:3013/team",
+          "screenshot": "U1-invite/04-fill-email-the-seat-cost-shows-before-sending.png"
+        },
+        {
+          "n": 5,
+          "name": "A guest is free",
+          "ok": true,
+          "note": "لا يشغل الضيوف مقاعد مدفوعة.",
+          "ms": 634,
+          "url": "http://localhost:3013/team",
+          "screenshot": "U1-invite/05-a-guest-is-free.png"
+        },
+        {
+          "n": 6,
+          "name": "Send as a member",
+          "ok": true,
+          "note": "toast: أُرسلت الدعوة إلى nadia.new@orgtik.test  عند قبول الدعوة تحتسب مساحة العمل 16 مقعدًا مدفوعًا.",
+          "ms": 5929,
+          "url": "http://localhost:3013/team",
+          "screenshot": "U1-invite/06-send-as-a-member.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "U2-service",
+      "title": "Request, quote, accept, pay, approve the delivery",
+      "as": "mona.adel@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open Services and request Brand identity",
+          "ok": true,
+          "note": "?service=svc_brand",
+          "ms": 2795,
+          "url": "http://localhost:3013/services/new?service=svc_brand",
+          "screenshot": "U2-service/01-open-services-and-request-brand-identity.png"
+        },
+        {
+          "n": 2,
+          "name": "A brief under 20 characters is refused on the field",
+          "ok": true,
+          "note": "اكتب 20 حرفًا على الأقل لنتمكّن من تسعيره.",
+          "ms": 697,
+          "url": "http://localhost:3013/services/new?service=svc_brand",
+          "screenshot": "U2-service/02-a-brief-under-20-characters-is-refused-on-the-field.png"
+        },
+        {
+          "n": 3,
+          "name": "Send with a full brief",
+          "ok": true,
+          "note": "SR-217 (sr_1057); toast: أُرسل الطلب SR-217",
+          "ms": 1403,
+          "url": "http://localhost:3013/services/requests/sr_1057",
+          "screenshot": "U2-service/03-send-with-a-full-brief.png"
+        },
+        {
+          "n": 4,
+          "name": "OrgTik reviews and quotes (staff, admin API)",
+          "ok": true,
+          "note": "quote lines, the subscriber discount line and its validity shown",
+          "ms": 2134,
+          "url": "http://localhost:3013/services/requests/sr_1057",
+          "screenshot": "U2-service/04-orgtik-reviews-and-quotes-staff-admin-api.png"
+        },
+        {
+          "n": 5,
+          "name": "Accept the quote",
+          "ok": true,
+          "note": "ادفع لبدء العمل",
+          "ms": 753,
+          "url": "http://localhost:3013/services/requests/sr_1057",
+          "screenshot": "U2-service/05-accept-the-quote.png"
+        },
+        {
+          "n": 6,
+          "name": "A declined payment is said, with the way to the cards (402)",
+          "ok": true,
+          "note": "لم تتم عملية الدفع ولم يُخصم أي مبلغ. جرّب بطاقة أخرى.",
+          "ms": 765,
+          "url": "http://localhost:3013/services/requests/sr_1057",
+          "screenshot": "U2-service/06-a-declined-payment-is-said-with-the-way-to-the-cards-402.png"
+        },
+        {
+          "n": 7,
+          "name": "Pay again",
+          "ok": true,
+          "note": "toast: تم الدفع. بدأ العمل.",
+          "ms": 750,
+          "url": "http://localhost:3013/services/requests/sr_1057",
+          "screenshot": "U2-service/07-pay-again.png"
+        },
+        {
+          "n": 8,
+          "name": "OrgTik delivers (staff); the auto-approve date shows",
+          "ok": true,
+          "note": "auto-approve date (G-30) shown",
+          "ms": 2150,
+          "url": "http://localhost:3013/services/requests/sr_1057",
+          "screenshot": "U2-service/08-orgtik-delivers-staff-the-auto-approve-date-shows.png"
+        },
+        {
+          "n": 9,
+          "name": "Approve the delivery",
+          "ok": true,
+          "note": "toast: تمت الموافقة على التسليم",
+          "ms": 751,
+          "url": "http://localhost:3013/services/requests/sr_1057",
+          "screenshot": "U2-service/09-approve-the-delivery.png"
+        },
+        {
+          "n": 10,
+          "name": "The request lists as completed",
+          "ok": true,
+          "note": "SR-217",
+          "ms": 2061,
+          "url": "http://localhost:3013/services/requests",
+          "screenshot": "U2-service/10-the-request-lists-as-completed.png"
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 402 (Payment Required)"
+      ],
+      "api": [
+        {
+          "status": 402,
+          "method": "POST",
+          "url": ":4000/v1/app/service-requests/sr_1057/actions"
+        }
+      ]
+    },
+    {
+      "id": "U3-support",
+      "title": "Open a ticket and reply",
+      "as": "mona.adel@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open a new ticket",
+          "ok": true,
+          "note": "toast: فُتحت التذكرة TK-3306",
+          "ms": 3270,
+          "url": "http://localhost:3013/support/tk_1057",
+          "screenshot": "U3-support/01-open-a-new-ticket.png"
+        },
+        {
+          "n": 2,
+          "name": "Reply",
+          "ok": true,
+          "note": "toast: أُرسل الرد",
+          "ms": 656,
+          "url": "http://localhost:3013/support/tk_1057",
+          "screenshot": "U3-support/02-reply.png"
+        },
+        {
+          "n": 3,
+          "name": "Mark resolved, then a reply reopens it",
+          "ok": true,
+          "note": "toast: أُرسل الرد. فُتحت التذكرة من جديد.",
+          "ms": 841,
+          "url": "http://localhost:3013/support/tk_1057",
+          "screenshot": "U3-support/03-mark-resolved-then-a-reply-reopens-it.png"
+        },
+        {
+          "n": 4,
+          "name": "A closed ticket says to open a new one",
+          "ok": true,
+          "note": "هذه التذكرة مغلقة",
+          "ms": 2474,
+          "url": "http://localhost:3013/support/tk_1050",
+          "screenshot": "U3-support/04-a-closed-ticket-says-to-open-a-new-one.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "U4-notifications",
+      "title": "Mark notifications read; the sidebar count drops",
+      "as": "mona.adel@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open Notifications",
+          "ok": true,
+          "note": "sidebar count 1",
+          "ms": 2231,
+          "url": "http://localhost:3013/notifications",
+          "screenshot": "U4-notifications/01-open-notifications.png"
+        },
+        {
+          "n": 2,
+          "name": "Mark all as read",
+          "ok": true,
+          "note": "sidebar count 1 → 0",
+          "ms": 1840,
+          "url": "http://localhost:3013/notifications",
+          "screenshot": "U4-notifications/02-mark-all-as-read.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    },
+    {
+      "id": "U5-workspace",
+      "title": "Rename; delete blocked by an open invoice",
+      "as": "mona.adel@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Rename the workspace",
+          "ok": true,
+          "note": "switcher shows OrgTik Egypt HQ",
+          "ms": 3768,
+          "url": "http://localhost:3013/workspace",
+          "screenshot": "U5-workspace/01-rename-the-workspace.png"
+        },
+        {
+          "n": 2,
+          "name": "Delete asks for the exact name",
+          "ok": true,
+          "note": "confirm stays off until the name matches",
+          "ms": 658,
+          "url": "http://localhost:3013/workspace",
+          "screenshot": "U5-workspace/02-delete-asks-for-the-exact-name.png"
+        },
+        {
+          "n": 3,
+          "name": "Type the name; the open invoice blocks it, with the reason",
+          "ok": true,
+          "note": "لا يمكن حذف OrgTik Egypt HQ ما دامت هناك فواتير مفتوحة. ادفعها أو سوِّها، ثم حاول مرة أخرى.",
+          "ms": 691,
+          "url": "http://localhost:3013/workspace",
+          "screenshot": "U5-workspace/03-type-the-name-the-open-invoice-blocks-it-with-the-reason.png"
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 409 (Conflict)"
+      ],
+      "api": [
+        {
+          "status": 409,
+          "method": "POST",
+          "url": ":4000/v1/app/workspace/delete"
+        }
+      ]
+    },
+    {
+      "id": "U6-member",
+      "title": "A member reads the team; no request button",
+      "as": "salma.nabil@orgtik.test",
+      "locale": "ar",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Team is read-only",
+          "ok": true,
+          "note": "invite buttons 0, row menus 0",
+          "ms": 2252,
+          "url": "http://localhost:3013/team",
+          "screenshot": "U6-member/01-team-is-read-only.png"
+        },
+        {
+          "n": 2,
+          "name": "Services has no request button",
+          "ok": true,
+          "note": "request links 0",
+          "ms": 2016,
+          "url": "http://localhost:3013/services",
+          "screenshot": "U6-member/02-services-has-no-request-button.png"
+        },
+        {
+          "n": 3,
+          "name": "Requesting directly says it's not for members",
+          "ok": true,
+          "note": "no form; هذه الصفحة مخصصة لـمسؤول مساحة العمل",
+          "ms": 2003,
+          "url": "http://localhost:3013/services/new?service=svc_brand",
+          "screenshot": "U6-member/03-requesting-directly-says-it-s-not-for-members.png"
+        }
+      ],
+      "console": [],
+      "api": []
+    }
+  ]
+}

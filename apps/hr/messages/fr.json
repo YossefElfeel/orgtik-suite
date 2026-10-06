@@ -1,0 +1,2685 @@
+{
+  "createUpdateEmployee": {
+    "title": {
+      "create": "Créer un employé",
+      "edit": "Modifier l'employé"
+    },
+    "addEmployee": "Ajouter un employé",
+    "editEmployee": "Modifier l'employé",
+    "stepLabel": "Étape {current} sur {total}",
+    "nav": {
+      "back": "Retour",
+      "next": "Suivant",
+      "submit": "Créer l'employé",
+      "save": "Enregistrer les modifications",
+      "close": "Fermer"
+    },
+    "avatar": {
+      "upload": "Télécharger la photo",
+      "change": "Changer la photo",
+      "delete": "Supprimer la photo",
+      "deleteTitle": "Retirer la photo ?",
+      "deleteImpact": "Les initiales s’affichent à la place, partout dans la suite.",
+      "uploading": "Envoi de la photo...",
+      "fallbackName": "Employé"
+    },
+    "errors": {
+      "passwordRequired": "Le mot de passe est requis et doit contenir au moins 6 caractères",
+      "invalidPhoneNumber": "Format de numéro de téléphone invalide",
+      "invalidPostCode": "Le code postal doit comporter 5 chiffres",
+      "postCodeFor": "Un code postal en {country} ressemble à {example}.",
+      "postCode": "Saisissez un code postal valide.",
+      "firstNameRequired": "Le prénom est requis",
+      "lastNameRequired": "Le nom est requis",
+      "passwordMin": "Le mot de passe doit contenir au moins 6 caractères",
+      "birthDateRequired": "La date de naissance est requise",
+      "phoneRequired": "Le numéro de téléphone est requis",
+      "invalidEmail": "Adresse e-mail invalide",
+      "genderRequired": "Le genre est requis",
+      "nationalityRequired": "La nationalité est requise",
+      "accommodationRequired": "Le type de logement est requis",
+      "postCodeRequired": "Le code postal est requis",
+      "countryRequired": "Le pays est requis",
+      "cityRequired": "La ville est requise",
+      "addressRequired": "L'adresse est requise",
+      "nationalIdRequired": "Le numéro d'identité est requis",
+      "jobTitleRequired": "L'intitulé du poste est requis",
+      "departmentRequired": "Le département est requis",
+      "employeeTypeRequired": "Le type d'emploi est requis",
+      "experienceLevelRequired": "Le niveau d'expérience est requis",
+      "statusRequired": "Le statut est requis",
+      "workTypeRequired": "Le mode de travail est requis",
+      "joinDateRequired": "La date d'entrée est requise",
+      "bankNameRequired": "Le nom de la banque est requis",
+      "accountNumberRequired": "Le numéro de compte est requis",
+      "accountHolderRequired": "Le titulaire du compte est requis",
+      "ibanRequired": "L'IBAN est requis",
+      "invalidIban": "Format d'IBAN invalide",
+      "instapayNumberRequired": "Le numéro Instapay est requis",
+      "invalidEgyptianPhone": "Format de numéro de téléphone égyptien invalide (p. ex. +2012... ou 012...)",
+      "walletNameRequired": "Le portefeuille est requis",
+      "baseSalaryRequired": "Le salaire de base est requis",
+      "contractTypeRequired": "Le type de contrat est requis",
+      "startDateRequired": "La date de début est requise",
+      "noticePeriodRequired": "Le préavis est requis",
+      "sectionTitleRequired": "Le titre de la section est requis",
+      "sectionContentRequired": "Le contenu est requis",
+      "contractSectionsRequired": "Au moins une section de contrat est requise",
+      "annualLeaveRequired": "Les congés annuels sont requis",
+      "casualLeaveRequired": "Les congés exceptionnels sont requis",
+      "sickLeaveRequired": "Les jours de maladie sont requis",
+      "unpaidLeaveRequired": "La règle de congé sans solde est requise",
+      "noEmployeeId": "Cet employé n'a pas encore été créé. Revenez à la première étape et enregistrez-le."
+    },
+    "steps": {
+      "personal": {
+        "nav": "Informations personnelles",
+        "heading": "Informations personnelles",
+        "description": "Ces informations nous aideront à confirmer votre identité et à compléter les étapes nécessaires à l'ajout de vos données personnelles.",
+        "addressHeading": "Adresse personnelle",
+        "addressDescription": "Celle-ci doit correspondre à l'adresse figurant sur votre pièce d'identité officielle.",
+        "accommodationHeading": "Type d'hébergement",
+        "accommodationDescription": "Cela doit correspondre à l'adresse sur votre pièce d'identité officielle.",
+        "accommodationOptions": {
+          "company": {
+            "label": "Logement de fonction",
+            "description": "Logement fourni par l'employeur"
+          },
+          "allowance": {
+            "label": "Allocation logement",
+            "description": "Allocation mensuelle en espèces"
+          },
+          "own": {
+            "label": "Propre logement",
+            "description": "Aucune aide de l'entreprise"
+          }
+        }
+      },
+      "employee": {
+        "nav": "Informations professionnelles",
+        "heading": "Informations professionnelles",
+        "description": "Ces informations nous aideront à confirmer votre identité et à compléter les étapes nécessaires à l'ajout des détails de vos employés.",
+        "skillsHeading": "Compétences",
+        "skillsDescription": "Ces informations nous aideront à confirmer vos compétences."
+      },
+      "bank": {
+        "nav": "Coordonnées bancaires",
+        "heading": "Coordonnées bancaires",
+        "description": "Coordonnées bancaires utilisées pour la paie et les remboursements.",
+        "instapay": "Instapay",
+        "instapayDescription": "Les transferts sont effectués en temps réel via le réseau InstaPay de la Banque centrale d'Égypte.",
+        "wallet": "Informations du portefeuille",
+        "walletDescription": "Ces informations nous aideront à confirmer votre identité et à compléter les étapes nécessaires à l'ajout de vos données financières."
+      },
+      "attachments": {
+        "nav": "Pièces jointes",
+        "heading": "Pièces jointes",
+        "description": "Téléchargez les documents justificatifs pour la conformité et l'intégration.",
+        "avatarHint": "Photo de profil formelle"
+      },
+      "salary": {
+        "nav": "Informations salariales",
+        "heading": "Informations salariales",
+        "description": "Ces informations nous aideront à confirmer votre identité et à compléter les étapes nécessaires à l'ajout de vos données salariales."
+      },
+      "contract": {
+        "nav": "Contrat",
+        "heading": "Contrat",
+        "description": "Ces informations nous aideront à confirmer votre identité et à compléter les étapes nécessaires à l'ajout de vos données salariales."
+      },
+      "daysOff": {
+        "nav": "Congés",
+        "heading": "Informations sur les congés",
+        "description": "Ces informations nous aideront à confirmer votre identité et à compléter les étapes nécessaires à l'ajout de vos données salariales."
+      },
+      "permissions": {
+        "nav": "Autorisations",
+        "heading": "Autorisations",
+        "description": "Contrôlez l'accès aux modules et les actions que cet employé peut effectuer."
+      }
+    },
+    "fields": {
+      "birthDate": "Date de naissance",
+      "nationality": "Nationalité",
+      "password": "Mot de passe",
+      "addressLine1": "Rue",
+      "addressCity": "Ville",
+      "addressState": "Pays",
+      "addressPostal": "Code postal",
+      "department": "Département",
+      "departmentPlaceholder": "Sélectionner un département",
+      "employmentTypePlaceholder": "Sélectionner un type",
+      "bankName": "Nom de la banque",
+      "accountHolder": "Nom du titulaire du compte",
+      "accountNumber": "Numéro de compte",
+      "iban": "IBAN",
+      "salaryChf": "Salaire en CHF",
+      "bankCode": "Code banque",
+      "salaryCurrency": "Devise",
+      "basicSalary": "Salaire de base",
+      "transportationAllowance": "Indemnité de transport",
+      "housingAllowance": "Allocation logement",
+      "otherAllowances": "Autres indemnités",
+      "totalGross": "Total brut",
+      "socialSecurity": "Cotisation de sécurité sociale",
+      "taxableIncome": "Revenu imposable",
+      "annualLeaveDays": "Congés annuels",
+      "casualLeaveDays": "Congés occasionnels",
+      "sickLeaveDays": "Congés maladie",
+      "unpaidLeave": "Congé sans solde",
+      "unpaidLeavePlaceholder": "Sélectionner la politique",
+      "contractAddsDays": "Jours contractuels",
+      "totalDaysOff": "Total des jours de congé",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "phoneNumber": "Numéro de téléphone",
+      "email": "E-mail",
+      "personalTaxId": "Numéro fiscal personnel",
+      "gender": "Genre",
+      "maritalStatus": "Situation familiale",
+      "nationalId": "Carte d'identité nationale",
+      "jobTitle": "Titre du poste",
+      "employeeType": "Type d'employé",
+      "experienceLevel": "Niveau d'expérience",
+      "manager": "Responsable",
+      "status": "Statut",
+      "employeeSkills": "Compétences de l'employé",
+      "workType": "Type de travail",
+      "joinDate": "Date d'arrivée",
+      "baseSalary": "Salaire de base",
+      "totalSalary": "Salaire total",
+      "insurance": "Pourcentage d'assurance",
+      "tax": "Impôt",
+      "netSalary": "Salaire net",
+      "employeeCode": "Code employé",
+      "contractType": "Type de contrat",
+      "contractStartDate": "Date de début",
+      "contractEndDate": "Date de fin",
+      "trainingPeriod": "Période d'essai",
+      "noticePeriod": "Préavis",
+      "contractBody": "Corps du contrat",
+      "paymentType": "Type de paiement",
+      "instapayNumber": "Numéro enregistré",
+      "instapayAccountName": "Nom du compte",
+      "instapayLinkedAccount": "Compte lié (Lien QR code)",
+      "walletName": "Nom du portefeuille",
+      "walletPhoneNumber": "Numéro de téléphone",
+      "walletAccountName": "Nom du compte",
+      "managerOptional": "Responsable (facultatif)",
+      "paymentCycle": "Fréquence de paiement"
+    },
+    "placeholders": {
+      "fullName": "Nom comme sur la pièce d'identité",
+      "email": "Email@exemple.com",
+      "phone": "+1 234 567 890",
+      "nationality": "Pays",
+      "address": "Rue",
+      "city": "Ville",
+      "state": "Sélectionner un pays",
+      "postal": "Code postal",
+      "employeeCode": "ID interne",
+      "position": "Titre du rôle",
+      "branch": "Bureau ou site",
+      "selectManager": "Choisir le responsable",
+      "search": "Rechercher…",
+      "skills": "Ajouter une compétence",
+      "searchSkills": "Rechercher des compétences…",
+      "bankName": "Nom légal de la banque",
+      "accountHolder": "Nom sur le compte",
+      "accountNumber": "Numéro de compte national",
+      "iban": "Numéro de compte bancaire international",
+      "salaryChf": "Montant en francs suisses",
+      "bankCode": "Code banque",
+      "remotePolicy": "Notes optionnelles sur le fuseau horaire ou le système hybride",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "password": "MotDePasseFort123!",
+      "personalTaxId": "xxxx-xxxx-xxxx",
+      "gender": "Sélectionner le genre",
+      "maritalStatus": "Sélectionner la situation familiale",
+      "nationalId": "Carte d'identité nationale",
+      "jobTitle": "Titre du poste",
+      "department": "Département",
+      "employeeType": "Sélectionner le type",
+      "workType": "Sélectionner le type de travail",
+      "joinDate": "Choisir une date",
+      "value": "Valeur",
+      "percentage": "pourcentage (%)",
+      "instapayNumber": "(+02) 0105 352 245",
+      "instapayAccountName": "Ahmed mahmoud mohamed",
+      "instapayLinkedAccount": "Ahmed223@instapay",
+      "walletName": "Sélectionner le portefeuille",
+      "walletPhoneNumber": "(+02) 0105 352 245",
+      "walletAccountName": "Ahmed mahmoud mohamed",
+      "contractType": "Sélectionner le type de contrat",
+      "trainingPeriod": "Sélectionner la période d'essai",
+      "noticePeriod": "Sélectionner le préavis",
+      "status": "Sélectionner le statut",
+      "experienceLevel": "Sélectionner le niveau d'expérience",
+      "paymentCycle": "Sélectionner la fréquence",
+      "currency": "Sélectionner la devise",
+      "sectionTitle": "Titre de la section",
+      "sectionContent": "Saisissez le contenu ici..."
+    },
+    "options": {
+      "gender": {
+        "male": "Masculin",
+        "female": "Féminin",
+        "other": "Autre"
+      },
+      "marital": {
+        "single": "Célibataire",
+        "married": "Marié(e)",
+        "divorced": "Divorcé(e)",
+        "widowed": "Veuf/Veuve"
+      },
+      "employment": {
+        "fullTime": "Temps plein",
+        "partTime": "Temps partiel",
+        "contract": "Contrat",
+        "intern": "Stagiaire"
+      },
+      "department": {
+        "engineering": "Ingénierie",
+        "hr": "Ressources humaines",
+        "finance": "Finances",
+        "sales": "Ventes"
+      },
+      "weekday": {
+        "mon": "Lun",
+        "tue": "Mar",
+        "wed": "Mer",
+        "thu": "Jeu",
+        "fri": "Ven",
+        "sat": "Sam",
+        "sun": "Dim"
+      },
+      "workType": {
+        "remote": "À distance",
+        "onSite": "Sur site",
+        "hybrid": "Hybride"
+      },
+      "paymentTypes": {
+        "bank": "Coordonnées bancaires",
+        "instapay": "Instapay",
+        "wallet": "Portefeuille"
+      },
+      "wallets": {
+        "vodafone": "Vodafone Cash",
+        "orange": "Orange Cash",
+        "etisalat": "Etisalat Cash",
+        "we": "WE Pay"
+      },
+      "unpaidLeave": {
+        "allowed": "Autorisé",
+        "notAllowed": "Non autorisé"
+      },
+      "contractType": {
+        "permanent": "Contrat à durée indéterminée",
+        "fixed": "Contrat à durée déterminée"
+      },
+      "trainingPeriod": {
+        "3months": "3 mois",
+        "6months": "6 mois"
+      },
+      "noticePeriod": {
+        "15days": "15 jours",
+        "30days": "30 jours",
+        "60days": "60 jours",
+        "90days": "90 jours"
+      },
+      "status": {
+        "active": "Actif",
+        "inactive": "Inactif",
+        "probation": "Période d'essai",
+        "terminated": "Parti"
+      },
+      "skills": {
+        "ui": "Design d'interface",
+        "ux": "Recherche UX",
+        "frontend": "Frontend",
+        "backend": "Backend",
+        "hrOps": "Gestion RH"
+      },
+      "experienceLevel": {
+        "intern": "Stagiaire",
+        "junior": "Junior",
+        "midLevel": "Confirmé",
+        "senior": "Senior",
+        "lead": "Lead",
+        "principal": "Principal"
+      },
+      "paymentCycle": {
+        "monthly": "Mensuel",
+        "biweekly": "Toutes les deux semaines",
+        "weekly": "Hebdomadaire"
+      },
+      "amountType": {
+        "fixed": "Montant fixe",
+        "percentage": "Pourcentage (%)"
+      }
+    },
+    "attachments": {
+      "avatar": "Photo de l'employé",
+      "avatarHint": "Photo de profil formelle",
+      "nationalId": "Carte d'identité nationale",
+      "nationalIdHint": "Justificatif d'identité délivré par le gouvernement",
+      "education": "Diplôme",
+      "educationHint": "Diplôme ou certificat le plus élevé et pertinent",
+      "cv": "CV",
+      "cvHint": "Parcours professionnel",
+      "identity": "Identité / CNI",
+      "contract": "Contrat de travail",
+      "certificate": "Diplôme / Certificat",
+      "other": "Autre / CV",
+      "dropTitle": "Glissez-déposez vos reçus",
+      "maxSizeHint": "La taille maximale autorisée pour un fichier est de 20 Mo",
+      "uploadCta": "Téléchargez vos fichiers",
+      "emptyHint": "Aucun fichier ajouté pour le moment. Déposez des fichiers ci-dessus pour les joindre.",
+      "uploading": "Téléchargement de {name}...",
+      "uploadingGroup": "Téléchargement des pièces jointes pour {category}...",
+      "uploadingLabel": "Téléchargement...",
+      "removing": "Suppression de la pièce jointe...",
+      "saving": "Enregistrement de l'étape...",
+      "removeFile": "Retirer {name}",
+      "deleteTitle": "Supprimer {name} ?",
+      "deleteImpact": "Le fichier est retiré du dossier de la personne.",
+      "deleteConfirm": "Supprimer le fichier",
+      "pendingUpload": "(En attente d'envoi)"
+    },
+    "hints": {
+      "socialSecurity": "Incluez les déductions légales le cas échéant.",
+      "taxableIncome": "Marquez si les montants sont soumis à l'impôt sur les salaires."
+    },
+    "permissions": {
+      "enableHeading": "Activer les options",
+      "enableHelper": "Activez tous les modules ou accordez toutes les autorisations en un clic.",
+      "enableAll": "Activer tous les modules",
+      "selectAll": "Tout sélectionner",
+      "actions": {
+        "read": "Lecture",
+        "write": "Écriture",
+        "create": "Création",
+        "delete": "Suppression"
+      },
+      "modules": {
+        "dashboard": "Tableau de bord",
+        "employee": "Employés",
+        "attendance": "Présence et congés",
+        "projects": "Projets",
+        "recruitment": "Recrutement et embauche",
+        "tickets": "Tickets et conformité",
+        "finance": "Finances et services",
+        "departments": "Départements",
+        "messaging": "Messagerie"
+      }
+    },
+    "success": {
+      "title": "Succès",
+      "messageCreate": "L'employé a été ajouté avec succès.",
+      "messageEdit": "L'employé a été mis à jour avec succès.",
+      "primary": "Terminé"
+    },
+    "loading": "Chargement...",
+    "toasts": {
+      "creatingEmployee": "Création de l'employé...",
+      "updatingEmployeeInfo": "Mise à jour des informations de l'employé...",
+      "updatingPaymentInfo": "Mise à jour des informations de paiement...",
+      "updatingSalaryInfo": "Mise à jour des informations salariales...",
+      "updatingContract": "Mise à jour des informations du contrat...",
+      "sendingContract": "Envoi du contrat pour signature...",
+      "updatingDaysOff": "Mise à jour des jours de congé...",
+      "updatingPermissions": "Mise à jour des autorisations..."
+    },
+    "contract": {
+      "newClause": "Nouvelle clause",
+      "endDateHint": "Contrat à durée déterminée uniquement",
+      "addPoint": "Ajouter un point au contrat",
+      "sendForSignature": "Envoyer pour signature",
+      "downloadPdf": "Télécharger le PDF"
+    }
+  },
+  "employees": {
+    "title": "Annuaire du personnel",
+    "export": "Exporter",
+    "tabs": {
+      "people": "Annuaire du personnel",
+      "org": "Organigramme"
+    },
+    "page": {
+      "allDepartments": "Tous les départements",
+      "searchPlaceholder": "Rechercher..."
+    },
+    "details": {
+      "notFound": "Employé non trouvé",
+      "sections": {
+        "personal": "Informations personnelles",
+        "employee": "Informations professionnelles",
+        "activity": "Activité",
+        "attachment": "Pièces jointes",
+        "bank": "Coordonnées bancaires",
+        "instapay": "Informations Instapay",
+        "wallet": "Informations portefeuille",
+        "finance": "Finances",
+        "salary": "Informations salariales",
+        "timeOff": "Congés et présence",
+        "skills": "Compétences",
+        "notes": "Notes",
+        "payslips": "Fiches de paie"
+      },
+      "activity": {
+        "allTime": "Toutes les périodes",
+        "entries": {
+          "created": "<who>{name}</who> a créé : <what>{entity}</what>",
+          "assignedPeopleOn": "<who>{name}</who> a assigné des personnes : <what>{entity}</what>",
+          "updatedStatusOf": "<who>{name}</who> a mis à jour le statut : <what>{entity}</what>",
+          "repliedOn": "<who>{name}</who> a répondu : <what>{entity}</what>",
+          "requested": "<who>{name}</who> a demandé : <what>{entity}</what>",
+          "cancelled": "<who>{name}</who> a annulé : <what>{entity}</what>",
+          "deleted": "<who>{name}</who> a supprimé : <what>{entity}</what>",
+          "posted": "<who>{name}</who> a publié : <what>{entity}</what>",
+          "scheduled": "<who>{name}</who> a planifié : <what>{entity}</what>",
+          "updated": "<who>{name}</who> a mis à jour : <what>{entity}</what>",
+          "approved": "<who>{name}</who> a approuvé : <what>{entity}</what>",
+          "rejected": "<who>{name}</who> a refusé : <what>{entity}</what>"
+        },
+        "entities": {
+          "ticket": "Ticket",
+          "timeOffRequest": "Demande de congé",
+          "employee": "Employé",
+          "department": "Département",
+          "job": "Offre d'emploi",
+          "meeting": "Réunion",
+          "settings": "Paramètres",
+          "payrollBatch": "Cycle de paie"
+        }
+      },
+      "attachment": {
+        "upload": "Télécharger",
+        "delete": {
+          "title": "Supprimer la pièce jointe",
+          "description": "Êtes-vous sûr de vouloir supprimer cette pièce jointe ?",
+          "confirm": "Supprimer",
+          "cancel": "Annuler"
+        },
+        "success": {
+          "upload": "Pièce jointe téléchargée avec succès",
+          "delete": "Pièce jointe supprimée avec succès"
+        },
+        "error": {
+          "upload": "Échec du téléchargement de la pièce jointe",
+          "delete": "Échec de la suppression de la pièce jointe"
+        },
+        "deleting": "Suppression...",
+        "viewFile": "Voir {name}",
+        "deleteFile": "Supprimer {name}"
+      },
+      "salary": {
+        "title": "Informations salariales",
+        "upgradeHistory": "Historique des augmentations",
+        "noHistory": "Pas encore d'historique d'augmentation.",
+        "bankAccount": "Compte bancaire",
+        "columns": {
+          "date": "Date",
+          "baseSalary": "Salaire de base",
+          "totalSalary": "Salaire total",
+          "netSalary": "Salaire net"
+        },
+        "paymentMethod": "Mode de paiement"
+      },
+      "payslips": {
+        "title": "Fiches de paie",
+        "empty": "Aucune fiche de paie disponible pour le moment.",
+        "columns": {
+          "period": "Période",
+          "periodRange": "Plage de période",
+          "netPay": "Salaire net",
+          "paidAt": "Payé le",
+          "generatedAt": "Généré le",
+          "action": "Action"
+        }
+      },
+      "timeOff": {
+        "title": "Congés et présence",
+        "attendance": "Présence",
+        "leaveBalances": "Soldes de congés",
+        "noAttendance": "Aucun journal de présence pour le moment.",
+        "noLeave": "Aucun enregistrement de congé pour le moment.",
+        "labels": {
+          "paidTimeOff": "congés payés",
+          "pendingApproval": "en attente d'approbation",
+          "booked": "réservé",
+          "used": "utilisé",
+          "daysPerYear": "jours par an",
+          "nationalHolidays": "jours fériés",
+          "inContract": "dans le contrat"
+        },
+        "subs": {
+          "availableToBook": "Disponible à réserver",
+          "awaitingApproval": "En attente d'approbation",
+          "used": "{count}j utilisé",
+          "remainingBalance": "Solde restant",
+          "currentQueue": "File d'attente actuelle",
+          "takenDays": "Jours pris",
+          "inContract": "Dans le contrat",
+          "holidayList": "Voir la liste des jours fériés",
+          "totalContract": "Total des jours contractuels"
+        },
+        "columns": {
+          "dateFrom": "Date de début",
+          "dateTo": "Date de fin",
+          "startWork": "Début du travail",
+          "endWork": "Fin du travail",
+          "status": "Statut",
+          "logHours": "Heures enregistrées",
+          "overtime": "Heures supplémentaires",
+          "action": "Action",
+          "leaveType": "Type de congé",
+          "duration": "Durée",
+          "note": "Note"
+        },
+        "selectLeaveEntry": "Sélectionner cette absence",
+        "values": {
+          "paidTimeOff": "{count, plural, one {# jour de congés payés} other {# jours de congés payés}}",
+          "pendingApproval": "{count, plural, one {# jour en attente d'approbation} other {# jours en attente d'approbation}}",
+          "booked": "{count, plural, one {# jour réservé} other {# jours réservés}}",
+          "used": "{count, plural, one {# jour utilisé} other {# jours utilisés}}",
+          "daysPerYear": "{count, plural, one {# jour par an} other {# jours par an}}",
+          "nationalHolidays": "{count, plural, one {# jour férié} other {# jours fériés}}",
+          "inContract": "{count, plural, one {# jour prévu au contrat} other {# jours prévus au contrat}}"
+        }
+      },
+      "notes": {
+        "title": "Notes",
+        "empty": "Aucune note pour cet employé pour le moment.",
+        "toasts": {
+          "adding": "Ajout d'une nouvelle note",
+          "updating": "Mise à jour de la note",
+          "deleting": "Suppression de la note"
+        },
+        "placeholder": "Écrivez une note...",
+        "post": "Publier la note",
+        "update": "Mettre à jour",
+        "validation": {
+          "required": "Le contenu de la note est obligatoire",
+          "tooLong": "La note est trop longue"
+        }
+      },
+      "loadingName": "Chargement de l’employé…",
+      "personal": {
+        "fullName": "Nom complet"
+      }
+    },
+    "card": {
+      "joinedAt": "A rejoint le"
+    },
+    "orgChart": {
+      "zoomIn": "Zoom avant",
+      "zoomOut": "Zoom arrière",
+      "fitView": "Ajuster le schéma à la vue",
+      "details": {
+        "title": "Détails de l'employé",
+        "manager": "Responsable",
+        "none": "Aucun"
+      },
+      "assign": {
+        "title": "Attribuer un responsable",
+        "description": "Choisissez un responsable pour {name}",
+        "cancel": "Annuler",
+        "submit": "Attribuer",
+        "selectPlaceholder": "Sélectionner le responsable",
+        "noManagers": "Aucun responsable disponible.",
+        "willReportTo": "{name} relèvera de :"
+      },
+      "remove": {
+        "title": "Retirer de l'encadrement",
+        "description": "Détacher {name} de son responsable actuel ?",
+        "confirm": "Retirer",
+        "cancel": "Annuler"
+      },
+      "zoomLevel": "Niveau de zoom"
+    },
+    "exportFile": "personnes",
+    "exported": "{count, plural, one {# personne exportée} other {# personnes exportées}}",
+    "exportFailed": "L’export n’a pas fonctionné. Réessayez."
+  },
+  "employeeTable": {
+    "columns": {
+      "selectAll": "Sélectionner tous les employés",
+      "selectRow": "Sélectionner la ligne",
+      "employeeName": "Nom de l'employé",
+      "email": "Adresse e-mail",
+      "department": "Département",
+      "jobTitle": "Titre du poste",
+      "jobType": "Type d'emploi",
+      "joinedDate": "Date d'arrivée",
+      "action": "Action"
+    },
+    "tooltips": {
+      "edit": "Modifier",
+      "delete": "Supprimer"
+    },
+    "noDepartment": "Aucun département",
+    "empty": "Aucun employé trouvé.",
+    "delete": {
+      "title": "Supprimer l'employé",
+      "description": "Êtes-vous sûr de vouloir supprimer cet employé ?",
+      "softDeleteNote": "Veuillez noter qu'il s'agit d'une suppression douce. Les données de l'employé seront conservées mais il n'apparaîtra plus dans la liste des employés actifs.",
+      "confirmationLabel": "Veuillez taper \"{text}\" pour confirmer la suppression",
+      "confirm": "Supprimer",
+      "cancel": "Annuler",
+      "success": "Employé supprimé avec succès.",
+      "error": "Échec de la suppression de l'employé."
+    }
+  },
+  "ticketsTable": {
+    "columns": {
+      "selectAll": "Sélectionner tous les tickets",
+      "selectRow": "Sélectionner le ticket",
+      "ticketId": "ID du ticket",
+      "subject": "Sujet",
+      "assignTo": "Attribué à",
+      "employeeName": "Nom de l'employé",
+      "createdDate": "Date de création",
+      "emailAddress": "Adresse e-mail",
+      "status": "Statut",
+      "action": "Action"
+    },
+    "tooltips": {
+      "viewDetails": "Voir les détails",
+      "deleteTicket": "Supprimer le ticket"
+    }
+  },
+  "employeeDetails": {
+    "title": "Détails de l'employé",
+    "header": {
+      "back": "Retour",
+      "statusActive": "Actif",
+      "sendEmail": "Envoyer un e-mail",
+      "metrics": {
+        "lastClockedIn": "Dernier pointage",
+        "lastMessaged": "Dernier message",
+        "employeeId": "ID employé"
+      },
+      "metricsValues": {
+        "lastClockedIn": "Il y a quelques secondes",
+        "lastMessaged": "Il y a 2 jours"
+      }
+    },
+    "sections": {
+      "contact": "Contact",
+      "employment": "Emploi"
+    },
+    "fields": {
+      "workEmail": "E-mail professionnel",
+      "personalEmail": "E-mail personnel",
+      "phone": "Téléphone",
+      "department": "Département",
+      "position": "Poste",
+      "branch": "Agence",
+      "reportingManager": "Responsable hiérarchique",
+      "joinDate": "Date d'arrivée",
+      "employmentType": "Type d'emploi"
+    },
+    "employeeId": "ID employé"
+  },
+  "candidateDetails": {
+    "header": {
+      "back": "Retour",
+      "appliedIn": "Postulé chez",
+      "industry": "Secteur",
+      "scheduleInterview": "Planifier un entretien",
+      "sendEmail": "Envoyer un e-mail",
+      "appliedDate": "Date de candidature"
+    },
+    "tabs": {
+      "personalInfo": "Informations personnelles",
+      "resume": "CV",
+      "hiringSteps": "Étapes d'embauche"
+    },
+    "about": {
+      "title": "À propos du candidat",
+      "readMore": "Lire la suite",
+      "label": "À propos",
+      "showLess": "Afficher moins"
+    },
+    "personalInfo": {
+      "title": "Informations personnelles",
+      "fullName": "Nom complet",
+      "emailAddress": "Adresse e-mail",
+      "phoneNumber": "Numéro de téléphone",
+      "address": "Adresse",
+      "gender": "Genre",
+      "nationality": "Nationalité",
+      "dateOfBirth": "Date de naissance"
+    },
+    "education": {
+      "title": "Formation",
+      "university": "Université",
+      "graduationDate": "Date d'obtention du diplôme",
+      "qualification": "Qualification"
+    },
+    "jobApplication": {
+      "title": "Candidature",
+      "jobTitle": "Titre du poste",
+      "industry": "Secteur",
+      "experienceLevel": "Niveau d'expérience",
+      "experience": "Expérience",
+      "expectedSalary": "Salaire souhaité",
+      "salary": "Salaire",
+      "currentStage": "Étape actuelle",
+      "department": "Département"
+    },
+    "skills": {
+      "title": "Compétences",
+      "candidateTitle": "Compétences du candidat",
+      "empty": "Aucune compétence renseignée."
+    },
+    "sidebar": {
+      "level": "Niveau intermédiaire",
+      "notes": "Notes",
+      "leaveNote": "laisser une note",
+      "notesCount": "Notes ({count})",
+      "loadingNotes": "Chargement des notes...",
+      "noNotes": "Aucune note pour l'instant.",
+      "leaveNotePlaceholder": "Laisser une note"
+    },
+    "scheduleInterviewDialog": {
+      "title": "Planifier un entretien",
+      "trigger": "Planifier un entretien",
+      "actions": {
+        "cancel": "Annuler",
+        "submit": "Planifier l'entretien",
+        "submitting": "Envoi en cours..."
+      },
+      "fields": {
+        "date": "Date",
+        "datePlaceholder": "13 nov. 2024",
+        "startTime": "Heure de début",
+        "startTimePlaceholder": "11h30",
+        "endTime": "Heure de fin",
+        "endTimePlaceholder": "12h30",
+        "meetingLink": "Lien de réunion (optionnel)",
+        "meetingLinkPlaceholder": "Lien de réunion",
+        "selectDate": "Sélectionner une date",
+        "selectStartTime": "Sélectionner l'heure de début",
+        "selectEndTime": "Sélectionner l'heure de fin",
+        "meetingLinkLabel": "Lien de réunion",
+        "enterMeetingLink": "Saisissez le lien de réunion",
+        "interviewWith": "Entretien avec",
+        "interviewWithPlaceholder": "Saisissez le nom de l'intervieweur",
+        "note": "Note",
+        "notePlaceholder": "Ajoutez une note sur l'entretien"
+      },
+      "validation": {
+        "dateRequired": "La date est requise",
+        "startTimeRequired": "L'heure de début est requise",
+        "endTimeRequired": "L'heure de fin est requise",
+        "interviewWithRequired": "Veuillez indiquer qui mène l'entretien",
+        "meetingLinkInvalid": "Saisissez un lien valide commençant par https://",
+        "noteRequired": "La note est requise",
+        "endAfterStart": "L'heure de fin doit être postérieure à l'heure de début",
+        "noPastDate": "Vous ne pouvez pas choisir une date ou une heure passée"
+      }
+    }
+  },
+  "ticketDetails": {
+    "title": "Détails du ticket",
+    "labels": {
+      "ticketId": "ID du ticket",
+      "ticketCreator": "Créateur du ticket",
+      "jobTitle": "Titre du poste",
+      "department": "Département",
+      "email": "E-mail",
+      "subject": "Sujet",
+      "status": "Statut",
+      "createdAt": "Créé le"
+    }
+  },
+  "ticketDetailsPage": {
+    "title": "Détails du ticket"
+  },
+  "ticketsPage": {
+    "title": "Tickets",
+    "tabs": {
+      "supportTickets": "Tickets de support",
+      "myTickets": "Mes tickets"
+    },
+    "filters": {
+      "all": "Tous",
+      "open": "Ouverts",
+      "closed": "Fermés",
+      "inProgress": "En cours"
+    },
+    "stats": {
+      "newTickets": {
+        "title": "Nouveaux tickets",
+        "delta": "{count, plural, one {{signed} nouveau depuis la semaine dernière} other {{signed} nouveaux depuis la semaine dernière}}"
+      },
+      "openTickets": {
+        "title": "Tickets ouverts",
+        "delta": "{count, plural, one {{signed} ouvert depuis la semaine dernière} other {{signed} ouverts depuis la semaine dernière}}"
+      },
+      "solvedTickets": {
+        "title": "Tickets résolus",
+        "delta": "{count, plural, one {{signed} résolu depuis la semaine dernière} other {{signed} résolus depuis la semaine dernière}}"
+      },
+      "totalTickets": {
+        "title": "Total des tickets",
+        "delta": "{count, plural, one {{signed} au total depuis la semaine dernière} other {{signed} au total depuis la semaine dernière}}"
+      }
+    }
+  },
+  "timeOffPage": {
+    "title": "Congés",
+    "metrics": {
+      "totalRequests": {
+        "title": "Demandes totales",
+        "subtitle": "Toutes les demandes d’absence"
+      },
+      "approved": {
+        "title": "Approuvées",
+        "subtitle": "Demandes approuvées"
+      },
+      "pending": {
+        "title": "En attente",
+        "subtitle": "Demandes en attente de décision"
+      },
+      "declined": {
+        "title": "Refusées",
+        "subtitle": "Demandes refusées"
+      }
+    },
+    "filters": {
+      "all": "Tous",
+      "pending": "En attente",
+      "approved": "Approuvés",
+      "rejected": "Refusés",
+      "cancelled": "Annulés"
+    }
+  },
+  "timeOffTable": {
+    "columns": {
+      "employee": "Employé",
+      "department": "Département",
+      "type": "Type",
+      "from": "Du",
+      "to": "Au",
+      "duration": "Durée",
+      "status": "Statut",
+      "action": "Action"
+    },
+    "tooltips": {
+      "viewEdit": "Voir / Modifier"
+    },
+    "duration": {
+      "days": "{count} jour(s)",
+      "hours": "{count} heure(s)",
+      "daysCount": "{count, plural, one {# jour} other {# jours}}",
+      "hoursCount": "{count, plural, one {# heure} other {# heures}}"
+    },
+    "fallback": {
+      "na": "N/A"
+    }
+  },
+  "timeOffDialog": {
+    "title": "Demande de congé",
+    "submitted": "Soumise",
+    "sections": {
+      "managerDecision": "Décision du responsable",
+      "hrDecision": "Décision des RH"
+    },
+    "fields": {
+      "leaveType": "Type de congé",
+      "dates": "Date(s)",
+      "duration": "Durée",
+      "attachments": "Pièces jointes",
+      "noFileAdded": "Aucun fichier ajouté",
+      "noteReason": "Note / Raison",
+      "notePlaceholder": "Ajoutez votre note de décision ici...",
+      "note": "Note"
+    },
+    "actions": {
+      "approve": "Approuver",
+      "reject": "Refuser",
+      "submitDecision": "Soumettre la décision",
+      "cancel": "Annuler",
+      "changeDecision": "Modifier la décision"
+    },
+    "decision": {
+      "label": "Décision : {status}",
+      "waitingForAction": "En attente d'une action...",
+      "noNotesProvided": "Aucune note fournie.",
+      "status": {
+        "approved": "Approuvé",
+        "rejected": "Refusé",
+        "pending": "En attente"
+      },
+      "choose": "Choisissez d’abord Approuver ou Refuser.",
+      "tooLong": "La note ne doit pas dépasser 500 caractères."
+    },
+    "durations": {
+      "full_day": "Journée entière",
+      "half_day": "Demi-journée",
+      "partial": "Partie de la journée",
+      "custom_hours": "Heures personnalisées"
+    }
+  },
+  "ticketStatusCard": {
+    "title": "Statut du ticket",
+    "updating": "Mise à jour du ticket",
+    "saveChanges": "Enregistrer les modifications",
+    "statusOptions": {
+      "open": "Ouvert",
+      "inProgress": "En cours",
+      "closed": "Fermé"
+    },
+    "fields": {
+      "changeStatus": "Changer le statut",
+      "selectStatus": "Sélectionner le statut",
+      "department": "Département",
+      "selectDepartment": "Sélectionner le département",
+      "searchDepartments": "Rechercher des départements...",
+      "assignTo": "Attribuer à",
+      "selectAssignees": "Sélectionner les personnes assignées",
+      "searchPeople": "Rechercher des personnes..."
+    },
+    "unnamedEmployee": "Employé",
+    "validation": {
+      "statusRequired": "Le statut est requis"
+    }
+  },
+  "ticketActivity": {
+    "title": "Activité du ticket",
+    "allTitle": "Toute l'activité du ticket",
+    "viewAll": "Voir toute l'activité",
+    "noActivity": "Aucune activité pour le moment.",
+    "actions": {
+      "created": "a créé ce ticket.",
+      "assigned": "a assigné",
+      "assignedUsers": "{count, plural, one {utilisateur} other {utilisateurs}} à ce ticket.",
+      "updatedStatusFrom": "a changé le statut de",
+      "to": "à",
+      "addedMessage": "a ajouté un message à ce ticket.",
+      "performedAction": "a effectué une action"
+    },
+    "unknownUser": "Utilisateur inconnu"
+  },
+  "ticketThread": {
+    "loadingMore": "Chargement...",
+    "loadMore": "Charger plus",
+    "unknownUser": "Utilisateur inconnu",
+    "ticketUser": "Utilisateur du ticket"
+  },
+  "addTicketDialog": {
+    "title": "Ajouter un nouveau ticket",
+    "trigger": "Ajouter un nouveau ticket",
+    "cancel": "Annuler",
+    "submit": "Ajouter un nouveau ticket",
+    "subjectLabel": "Sujet du ticket",
+    "subjectPlaceholder": "Entrez le sujet du ticket",
+    "departmentLabel": "Département",
+    "departmentPlaceholder": "Choisir le département",
+    "assignToLabel": "Attribuer à",
+    "assignToPlaceholder": "Choisir un employé",
+    "descriptionLabel": "Description du ticket",
+    "attachmentLabel": "Pièce jointe",
+    "sendingMessage": "Envoi en cours...",
+    "sendMessage": "Envoyer le message",
+    "validation": {
+      "subjectRequired": "Le sujet est requis",
+      "departmentRequired": "Le département est requis",
+      "assigneeRequired": "Au moins une personne assignée est requise",
+      "descriptionRequired": "La description est requise"
+    }
+  },
+  "subscriptions": {
+    "pageTitle": "Abonnements",
+    "stats": {
+      "totalSubscription": "Abonnement total",
+      "totalPrice": "Prix total"
+    }
+  },
+  "subscriptionsTable": {
+    "columns": {
+      "toolName": "Nom de l'outil",
+      "department": "Département",
+      "amount": "Montant",
+      "billing": "Facturation",
+      "status": "Statut",
+      "action": "Action"
+    },
+    "tooltips": {
+      "edit": "Modifier",
+      "delete": "Supprimer"
+    },
+    "billingCycles": {
+      "weekly": "Hebdomadaire",
+      "monthly": "Mensuel",
+      "quarterly": "Trimestriel",
+      "yearly": "Annuel"
+    }
+  },
+  "subscriptionsSheet": {
+    "title": "Ajouter un nouvel abonnement",
+    "trigger": "Ajouter un nouvel abonnement",
+    "actions": {
+      "cancel": "Annuler",
+      "submit": "Ajouter"
+    },
+    "fields": {
+      "subscriptionTool": "Outil",
+      "subscriptionToolPlaceholder": "Figma",
+      "department": "Département",
+      "departmentPlaceholder": "Sélectionner le département",
+      "billing": "Facturation",
+      "billingPlaceholder": "Entrez la facturation",
+      "amount": "Montant",
+      "amountPlaceholder": "Entrez le montant",
+      "note": "Note",
+      "notePlaceholder": "Entrez une note",
+      "activation": "Activation de l'outil"
+    },
+    "options": {
+      "departments": {
+        "engineering": "Ingénierie",
+        "hr": "Ressources humaines",
+        "finance": "Finances"
+      },
+      "billing": {
+        "monthly": "Mensuel",
+        "yearly": "Annuel",
+        "oneTime": "Unique"
+      }
+    },
+    "validation": {
+      "subscriptionToolRequired": "L'outil est requis",
+      "subscriptionToolMax": "Le nom de l'outil doit comporter au maximum 120 caractères",
+      "departmentRequired": "Le département est requis",
+      "billingRequired": "La facturation est requise",
+      "amountRequired": "Le montant est requis",
+      "amountInvalid": "Entrez un montant valide",
+      "noteMax": "La note doit comporter au maximum 2000 caractères"
+    }
+  },
+  "projectsPage": {
+    "filters": {
+      "all": "Tous les statuts",
+      "inProgress": "En cours",
+      "done": "Terminé",
+      "rejected": "Refusé",
+      "cancelled": "Annulé"
+    },
+    "states": {
+      "loading": "Chargement des projets...",
+      "failedToLoad": "Échec du chargement des projets",
+      "somethingWentWrong": "Une erreur s'est produite",
+      "empty": "Aucun projet trouvé"
+    }
+  },
+  "projectCard": {
+    "progressComplete": "Progression : {progress}%"
+  },
+  "payroll": {
+    "title": "Paie",
+    "tabs": {
+      "all": "Tout",
+      "bonus": "Prime",
+      "deduction": "Déduction",
+      "loans": "Prêts"
+    },
+    "filters": {
+      "monthly": "Mensuel",
+      "biWeekly": "Bi-hebdomadaire",
+      "weekly": "Hebdomadaire",
+      "hourly": "Horaire"
+    },
+    "status": {
+      "freezeRun": "Figer le cycle",
+      "reOpen": "Rouvrir",
+      "submit": "Soumettre ({count})",
+      "pay": "Envoyer à la comptabilité",
+      "loading": "Chargement des données de paie...",
+      "editsAllowed": "Modifications autorisées · gel automatique au jour 25 sauf si les RH gèlent plus tôt",
+      "draftCount": "{count} Brouillon"
+    },
+    "columns": {
+      "employeeName": "Nom de l'employé",
+      "basicSalary": "Salaire de base",
+      "bonus": "Prime",
+      "deduction": "Déduction",
+      "loans": "Prêts",
+      "totalSalary": "Salaire total",
+      "date": "Date",
+      "status": "Statut",
+      "action": "Action",
+      "bonusReason": "Motif de la prime",
+      "deductionReason": "Motif de la déduction",
+      "startDate": "Date de début",
+      "paidLoans": "Prêts remboursés",
+      "remainsLoans": "Prêts restants",
+      "selectAll": "Sélectionner tous les employés",
+      "selectEmployee": "Sélectionner {name}"
+    },
+    "tooltips": {
+      "edit": "Modifier",
+      "viewDetails": "Voir les détails",
+      "view": "Voir"
+    },
+    "actions": {
+      "addBonus": "Ajouter une prime",
+      "addDeduction": "Ajouter une déduction",
+      "addLoan": "Ajouter un prêt",
+      "previewPayslip": "Aperçu de la fiche de paie",
+      "downloadPayslip": "Télécharger le PDF",
+      "sendPayslip": "Envoyer la fiche de paie",
+      "bulkSend": "Envoi groupé des fiches de paie"
+    },
+    "payslip": {
+      "previewTitle": "Aperçu de la fiche de paie",
+      "sendSuccess": "Fiche de paie envoyée avec succès",
+      "sendError": "Échec de l'envoi de la fiche de paie",
+      "bulkSendSuccess": "Fiches de paie groupées mises en attente pour envoi",
+      "bulkSendError": "Échec du déclenchement de l'envoi groupé des fiches de paie",
+      "downloadError": "Échec du téléchargement de la fiche de paie",
+      "previewError": "Échec du chargement de l'aperçu de la fiche de paie",
+      "loading": "Chargement..."
+    },
+    "adjustmentSheet": {
+      "title": {
+        "bonus": "Ajouter une prime",
+        "deduction": "Ajouter une déduction"
+      },
+      "fields": {
+        "employee": "Employé",
+        "employeePlaceholder": "Sélectionner un employé…",
+        "nameLabel": {
+          "bonus": "Prime",
+          "deduction": "Déduction"
+        },
+        "namePlaceholder": {
+          "bonus": "Entrez le nom de la prime",
+          "deduction": "Entrez le nom de la déduction"
+        },
+        "reasonLabel": {
+          "bonus": "Motif de la prime",
+          "deduction": "Motif de la déduction"
+        },
+        "reasonPlaceholder": {
+          "bonus": "Ajouter le motif de la prime",
+          "deduction": "Ajouter le motif de la déduction"
+        },
+        "typeLabel": {
+          "bonus": "Type de prime",
+          "deduction": "Type de déduction"
+        },
+        "inputMode": "Mode de saisie",
+        "amount": "Montant",
+        "dayUnits": "Unités journalières",
+        "notes": "Motif / Notes",
+        "notesPlaceholder": "Ajouter le motif de l'ajustement ici...",
+        "description": "Description",
+        "fixedAmount": "Montant fixe",
+        "daysValue": "Valeur en jours",
+        "percentValue": "Valeur en pourcentage",
+        "monthsValue": "Valeur en mois"
+      },
+      "modes": {
+        "fixed": {
+          "label": "Fixe",
+          "subtext": "Un montant forfaitaire en CHF."
+        },
+        "days": {
+          "label": "Jours",
+          "subtext": "Basé sur le taux journalier de l'employé."
+        },
+        "percent": {
+          "label": "Pourcentage",
+          "subtext": "Un pourcentage du salaire de base de l'employé."
+        },
+        "months": {
+          "label": "Mois",
+          "subtext": "Basé sur le taux mensuel de l'employé."
+        }
+      },
+      "actions": {
+        "cancel": "Annuler",
+        "submit": {
+          "bonus": "Ajouter une prime",
+          "deduction": "Ajouter une déduction"
+        },
+        "submitting": "Envoi en cours..."
+      },
+      "validation": {
+        "employeeRequired": "Sélectionnez un employé",
+        "nameRequired": "Ce champ est requis",
+        "nameMax": "Doit comporter au maximum 120 caractères",
+        "reasonMax": "Doit comporter au maximum 2000 caractères",
+        "valuePositive": "La valeur ne peut pas être négative"
+      }
+    },
+    "detailPage": {
+      "title": "Paie de l'employé",
+      "subtitle": "Ces informations nous aideront à confirmer votre identité et à compléter les étapes nécessaires à l'ajout de vos données personnelles.",
+      "sections": {
+        "bankInformation": "Coordonnées bancaires",
+        "loans": "Prêts",
+        "salaryDetails": "Détails du salaire"
+      },
+      "fields": {
+        "employee": "Employé",
+        "employeePlaceholder": "Sélectionner un employé…",
+        "employeeId": "ID employé",
+        "department": "Département",
+        "employeeType": "Type d'employé",
+        "emailAddress": "Adresse e-mail",
+        "phoneNumber": "Numéro de téléphone",
+        "bankName": "Nom de la banque",
+        "accountName": "Nom du compte",
+        "accountNo": "Numéro de compte",
+        "iban": "IBAN",
+        "salary": "Salaire",
+        "loanMonthly": "Prêt (mensuel)",
+        "bonus": "Prime",
+        "deduction": "Déduction",
+        "total": "Total",
+        "note": "Note",
+        "notePlaceholder": "Message..."
+      },
+      "loans": {
+        "total": "Total des prêts",
+        "paid": "Prêts remboursés",
+        "paidMonthly": "Remboursement mensuel",
+        "remains": "Prêts restants"
+      },
+      "validation": {
+        "employeeRequired": "Sélectionnez un employé",
+        "loanMonthlyMin": "Le montant du prêt doit être 0 ou plus",
+        "noteMax": "Doit comporter au maximum 250 caractères"
+      }
+    },
+    "loansSheet": {
+      "title": "Ajouter un prêt",
+      "fields": {
+        "employee": "Employé",
+        "employeePlaceholder": "Sélectionner un employé…",
+        "totalLoans": "Montant total du prêt",
+        "totalLoansPlaceholder": "0",
+        "duration": "Durée",
+        "durationPlaceholder": "Sélectionner la durée…",
+        "paidMonthly": "Remboursement mensuel",
+        "reason": "Motif du prêt",
+        "reasonPlaceholder": "Ajoutez le motif du prêt"
+      },
+      "duration": {
+        "6": "6 mois",
+        "12": "12 mois",
+        "18": "18 mois",
+        "24": "24 mois"
+      },
+      "actions": {
+        "cancel": "Annuler",
+        "submit": "Ajouter"
+      },
+      "validation": {
+        "employeeRequired": "Sélectionnez un employé",
+        "totalRequired": "Entrez le montant total du prêt",
+        "totalPositive": "Entrez un montant valide supérieur à zéro",
+        "durationRequired": "Sélectionnez une durée"
+      },
+      "trigger": "Prêt"
+    },
+    "loanDetail": {
+      "schedule": {
+        "date": "Date",
+        "paidLoan": "Prêt remboursé",
+        "remainsLoan": "Prêt restant"
+      },
+      "addAmountSheet": {
+        "title": "Ajouter un montant",
+        "trigger": "Ajouter un montant",
+        "fields": {
+          "totalLoans": "Montant total du prêt",
+          "paidMonthly": "Remboursement mensuel",
+          "addedAmount": "Montant ajouté",
+          "addedAmountPlaceholder": "0",
+          "remainingAmount": "Montant restant"
+        },
+        "helper": {
+          "remainingCalculated": "sera calculé automatiquement"
+        },
+        "actions": {
+          "cancel": "Annuler",
+          "submit": "Ajouter"
+        },
+        "validation": {
+          "addedMin": "Le montant doit être de 0 ou plus",
+          "addedMax": "Le montant ne peut pas dépasser le total des prêts"
+        }
+      },
+      "title": "Détails du prêt"
+    },
+    "adminDetail": {
+      "hrNote": "Note des RH :",
+      "hrNoteDescription": "Les RH ont figé ce cycle le {date}. Approuvez chaque personne ou renvoyez-la avec la modification attendue.",
+      "title": "Approbations en attente",
+      "description": "Chaque carte représente le lot ouvert actuel envoyé par les RH pour examen. Un seul cycle peut produire plusieurs lots sur plusieurs jours.",
+      "approveAll": "Tout approuver ({count})",
+      "submitReview": "Soumettre l'examen",
+      "noteToHr": "Note aux RH",
+      "optional": "(optionnel)",
+      "messagePlaceholder": "Message...",
+      "approveAllConfirm": {
+        "title": "Tout approuver pour {period} ?",
+        "impact": "{count, plural, one {# personne} other {# personnes}}, net {amount}. La paie approuvée retourne aux RH, qui l’envoient à la comptabilité pour paiement.",
+        "confirm": "Tout approuver",
+        "cancel": "Annuler"
+      },
+      "hrNoteNoDate": "Les RH ont figé ce cycle. Approuvez chaque personne ou renvoyez-la avec la modification attendue.",
+      "system": "Système",
+      "activity": "Activité",
+      "noActivity": "Aucune activité récente.",
+      "activityActions": {
+        "runStarted": "Cycle de paie lancé",
+        "runFrozen": "Cycle gelé",
+        "runReopened": "Cycle rouvert",
+        "runReopenedWithdrawn": "Cycle rouvert ({count, plural, one {# soumission retirée} other {# soumissions retirées}})",
+        "submitted": "{count, plural, one {# employé soumis} other {# employés soumis}} pour approbation",
+        "approvedAll": "Toutes les lignes approuvées",
+        "approvedRows": "{count, plural, one {# ligne approuvée} other {# lignes approuvées}}",
+        "changeRequested": "Modification demandée pour <who>{name}</who>",
+        "resubmitted": "<who>{name}</who> soumis à nouveau",
+        "bonusAdded": "Prime ajoutée pour <who>{name}</who>",
+        "deductionAdded": "Retenue ajoutée pour <who>{name}</who>",
+        "queuedAll": "Mis en file pour versement",
+        "queued": "{count, plural, one {# paiement mis} other {# paiements mis}} en file pour versement",
+        "markedPaidAll": "Marqué comme payé",
+        "markedPaid": "{count, plural, one {# paiement marqué comme payé} other {# paiements marqués comme payés}}",
+        "paidEmployee": "Paiement versé à <who>{name}</who>",
+        "bankFileExported": "Fichier bancaire exporté",
+        "payslipsSent": "{count, plural, one {# fiche de paie envoyée} other {# fiches de paie envoyées}} par e-mail",
+        "imported": "{count, plural, one {# ajustement importé} other {# ajustements importés}} depuis <who>{name}</who>"
+      }
+    },
+    "run": {
+      "cancel": "Annuler",
+      "freeze": {
+        "title": "Figer {period} ?",
+        "impact": "{count, plural, one {# personne} other {# personnes}}, net {amount}. Les primes et retenues ne pourront plus être ajoutées tant que le cycle n’est pas rouvert.",
+        "confirm": "Figer le cycle"
+      },
+      "reopen": {
+        "title": "Rouvrir {period} ?",
+        "impact": "{count, plural, =0 {Aucune soumission ne revient en brouillon.} one {# soumission revient en brouillon.} other {# soumissions reviennent en brouillon.}} Les primes et retenues peuvent de nouveau être ajoutées.",
+        "confirm": "Rouvrir le cycle"
+      },
+      "queue": {
+        "title": "Envoyer {period} à la comptabilité ?",
+        "impact": "{count, plural, one {# personne approuvée} other {# personnes approuvées}}, {amount}, passent dans la file de paiement. La comptabilité est prévenue et effectue le paiement.",
+        "confirm": "Envoyer à la comptabilité",
+        "noneApproved": "Personne n’est encore approuvé"
+      },
+      "payslips": {
+        "title": "Envoyer les fiches de paie de {period} par e-mail ?",
+        "impact": "{count, plural, one {# personne reçoit} other {# personnes reçoivent}} sa fiche de paie par e-mail.",
+        "confirm": "Envoyer les fiches de paie"
+      },
+      "empty": {
+        "title": "Aucun cycle de paie pour {period}",
+        "body": "Lancez-en un pour ajouter primes, retenues et prêts, puis figez-le et soumettez-le à approbation.",
+        "start": "Lancer le cycle de {period}",
+        "switchMonthly": "Passer au mensuel"
+      },
+      "week": "Semaine {week} · {range}"
+    },
+    "admin": {
+      "title": "Approbations en attente",
+      "description": "Chaque carte est un lot envoyé par les RH pour examen. Un cycle peut produire plusieurs lots sur quelques jours.",
+      "emptyTitle": "Tout est traité",
+      "emptyBody": "Rien n’attend d’approbation pour le moment.",
+      "review": "Examiner",
+      "pendingReview": "À examiner",
+      "netPay": "Salaire net",
+      "decided": "Déjà décidé",
+      "people": "{count, plural, one {# personne} other {# personnes}}",
+      "decidedValue": "{decided, plural, one {# personne} other {# personnes}} · {flagged} signalé(s)"
+    },
+    "review": {
+      "totalThisRun": "Total de ce cycle",
+      "basic": "Salaire de base",
+      "bonus": "Prime",
+      "deduction": "Retenue",
+      "loan": "Prêt",
+      "items": {
+        "bonus": "Prime",
+        "deduction": "Retenue",
+        "loan": "Prêt (retenu automatiquement)"
+      },
+      "loanInstallment": "Échéance de prêt",
+      "approve": "Approuver",
+      "requestChange": "Demander une modification",
+      "decisionFor": "Décision pour {name}",
+      "whatToChange": "Que doivent modifier les RH ?",
+      "whatToChangePlaceholder": "Par exemple : supprimer la retenue, ou ramener la prime à 50"
+    },
+    "submit": {
+      "title": "{count, plural, =0 {Soumettre des personnes à approbation} one {Soumettre # personne à approbation} other {Soumettre # personnes à approbation}}",
+      "cancel": "Annuler",
+      "confirm": "Envoyer à l’admin",
+      "noneSelected": "Sélectionnez d’abord des personnes dans le tableau (cochez leurs lignes), puis soumettez.",
+      "total": "Total",
+      "note": "Note à l’admin",
+      "optional": "(facultatif)",
+      "notePlaceholder": "Ce que l’admin doit savoir"
+    },
+    "adjustmentRow": {
+      "edit": "Modifier",
+      "bonusTitle": "Retirer la prime « {title} » ({amount}) ?",
+      "deductionTitle": "Retirer la retenue « {title} » ({amount}) ?",
+      "adjustmentImpact": "Le salaire net de ce cycle change de ce montant.",
+      "bonusConfirm": "Retirer la prime",
+      "deductionConfirm": "Retirer la retenue"
+    },
+    "unknownEmployee": "Employé inconnu",
+    "draftSheet": {
+      "title": "Détails de l'employé",
+      "loading": "Chargement des détails...",
+      "generalDepartment": "Général",
+      "adminNote": "Admin : {note}",
+      "locked": "Cette ligne est verrouillée. Aucune modification n'est possible une fois qu'un employé a été soumis, approuvé ou payé.",
+      "payslipPdf": "Fiche de paie (PDF)",
+      "salaryBreakdown": "Détail du salaire",
+      "bonusesSubtotal": "+ Primes ({count}) · sous-total",
+      "deductionsSubtotal": "− Déductions ({count}) · sous-total",
+      "net": "Net",
+      "bonuses": "Primes",
+      "deductions": "Déductions",
+      "loanDeductions": "Retenues de prêt (automatiques)",
+      "loanInstallmentAuto": "Échéance de prêt (automatique)",
+      "reasonPlaceholder": "Motif / Titre",
+      "saveItem": "Enregistrer"
+    }
+  },
+  "myPayslips": {
+    "title": "Mes fiches de paie",
+    "description": "Consultez et téléchargez vos fiches de paie mensuelles payées.",
+    "empty": "Aucune fiche de paie disponible pour le moment.",
+    "columns": {
+      "period": "Période",
+      "periodRange": "Plage de période",
+      "netPay": "Salaire net",
+      "paidAt": "Payé le",
+      "generatedAt": "Généré le",
+      "action": "Action"
+    }
+  },
+  "loans": {
+    "title": "Prêts",
+    "details": {
+      "sheetTitle": "Détails et gestion du prêt",
+      "loading": "Chargement...",
+      "loadingData": "Chargement des données...",
+      "failedLoad": "Échec du chargement des données du prêt.",
+      "manageFor": "Gérer le prêt pour l'employé : {name}",
+      "tabs": {
+        "details": "Détails du prêt et mensualités",
+        "edit": "Modifier le prêt"
+      },
+      "cards": {
+        "totalAmount": "Montant total",
+        "remainingAmount": "Montant restant",
+        "paidAmount": "Montant payé",
+        "monthlyInstallment": "Mensualité"
+      },
+      "fields": {
+        "employeeCode": "Code employé",
+        "loanStatus": "Statut du prêt",
+        "startDate": "Date de début",
+        "loanTitle": "Titre du prêt",
+        "reasonNotes": "Motif / Notes",
+        "quickActions": "Actions rapides sur le statut :",
+        "activate": "Activer le prêt",
+        "pause": "Suspendre le prêt",
+        "saveChanges": "Enregistrer les modifications",
+        "saving": "Enregistrement..."
+      },
+      "statusOptions": {
+        "active": "Actif",
+        "paused": "En pause",
+        "closed": "Clôturé",
+        "cancelled": "Annulé"
+      },
+      "validation": {
+        "titleRequired": "Saisissez un titre de prêt"
+      }
+    },
+    "filters": {
+      "all": "Tout",
+      "active": "Actif",
+      "paused": "En pause",
+      "closed": "Clôturé",
+      "cancelled": "Annulé"
+    },
+    "columns": {
+      "id": "ID",
+      "employee": "Employé",
+      "title": "Titre du prêt",
+      "amount": "Montant",
+      "installment": "Mensualité",
+      "remaining": "Restant",
+      "startDate": "Date de début",
+      "status": "Statut",
+      "action": "Action"
+    }
+  },
+  "financeQueue": {
+    "title": "File d'attente des paiements",
+    "detailsTitle": "File d'attente des paiements · Cycle {id}",
+    "backToQueue": "Retour à la file d'attente des paiements",
+    "exportFile": "Exporter le fichier",
+    "exportFinanceSheet": "Exporter la feuille finance",
+    "exportPayslipsZip": "Exporter les fiches de paie (ZIP)",
+    "payAll": "Payer tout",
+    "filters": {
+      "period": "Période",
+      "showAll": "Tout afficher",
+      "monthly": "Mensuel",
+      "biWeekly": "Bi-hebdomadaire",
+      "weekly": "Hebdomadaire",
+      "hourly": "Horaire",
+      "approved": "Approuvé",
+      "queued": "En file d'attente",
+      "paid": "Payé"
+    },
+    "card": {
+      "items": "Articles",
+      "queued": "En file d'attente",
+      "netPayable": "Net à payer",
+      "openDetails": "Ouvrir les détails"
+    },
+    "empty": {
+      "noPayments": "Aucun paiement pour {month}."
+    },
+    "table": {
+      "columns": {
+        "employee": "Employé",
+        "iban": "IBAN",
+        "amount": "Montant",
+        "jobTitle": "Titre du poste",
+        "status": "Statut",
+        "action": "Action"
+      },
+      "actions": {
+        "markPaid": "Marquer comme payé"
+      },
+      "noItems": "Aucun élément de paiement trouvé pour ce cycle."
+    },
+    "import": {
+      "title": "Import de paie historique",
+      "description": "Téléchargez le modèle, renseignez les données de paie historiques, puis importez des fichiers Excel ou CSV.",
+      "downloadTemplate": "Télécharger le modèle",
+      "importFile": "Importer un fichier",
+      "importing": "Importation des données de paie...",
+      "empty": "Aucun lot d'import pour le moment.",
+      "columns": {
+        "filename": "Fichier",
+        "format": "Format",
+        "runId": "ID du cycle",
+        "rowCount": "Lignes",
+        "createdCount": "Créées",
+        "errorCount": "Erreurs",
+        "importedBy": "Importé par",
+        "createdAt": "Importé le",
+        "action": "Action"
+      },
+      "actions": {
+        "view": "Voir le cycle"
+      }
+    }
+  },
+  "monthYearFilter": {
+    "prevMonth": "Mois précédent",
+    "nextMonth": "Mois suivant",
+    "selectRange": "Sélectionner une plage de dates"
+  },
+  "test1": {
+    "footer2": {
+      "brand": "Untitled UI",
+      "description": "Concevez des expériences numériques exceptionnelles qui créent plus de bonheur dans le monde.",
+      "getApp": "Obtenir l'application",
+      "links": {
+        "overview": "Aperçu",
+        "features": "Fonctionnalités",
+        "pricing": "Tarifs",
+        "careers": "Carrières",
+        "help": "Aide",
+        "privacy": "Confidentialité"
+      },
+      "storeButtons": {
+        "downloadOn": "Télécharger sur",
+        "appStore": "l'App Store",
+        "getItOn": "Obtenez-le sur",
+        "googlePlay": "Google Play"
+      },
+      "copyright": "© {year} Untitled UI. Tous droits réservés."
+    }
+  },
+  "attendance": {
+    "pageTitle": "Présence",
+    "export": "Exporter"
+  },
+  "addTimeDialog": {
+    "title": "Ajouter un congé",
+    "trigger": "Demander un congé",
+    "cancel": "Annuler",
+    "submit": "Demander un congé",
+    "submitRequest": "Soumettre la demande",
+    "employeeName": "Nom de l'employé",
+    "employeePlaceholder": "Choisir un employé",
+    "employeeId": "ID employé (optionnel)",
+    "employeeIdPlaceholder": "Entrez l'ID employé",
+    "department": "Département",
+    "departmentPlaceholder": "Choisir un département",
+    "manager": "Responsable",
+    "managerPlaceholder": "Le responsable apparaîtra automatiquement",
+    "partialDay": "Option demi-journée",
+    "timeOffType": "Type de congé",
+    "timeOffTypePlaceholder": "Choisir le type de congé",
+    "dates": "Dates",
+    "datesPlaceholder": "Sélectionner la date et l'heure",
+    "note": "Note",
+    "notePlaceholder": "Ajoutez toute information supplémentaire",
+    "noFile": "Aucun fichier ajouté",
+    "duration": "Durée",
+    "oneDay": "1 jour",
+    "durationType": "Type de durée",
+    "startDate": "Date de début",
+    "endDate": "Date de fin",
+    "period": "Période",
+    "attachments": "Pièces jointes",
+    "periods": {
+      "morning": "Matin",
+      "afternoon": "Après-midi"
+    },
+    "durationTypes": {
+      "fullDay": "Journée complète",
+      "halfDay": "Demi-journée",
+      "customHours": "Heures personnalisées",
+      "startTime": "Heure de début",
+      "endTime": "Heure de fin"
+    },
+    "timeOffTypes": {
+      "annualLeave": "Congés annuels",
+      "sickLeave": "Congés maladie",
+      "personalLeave": "Congés personnels",
+      "vacationDay": "Jour de vacances",
+      "unpaidLeave": "Congé sans solde",
+      "other": "Autre"
+    },
+    "validation": {
+      "typeRequired": "Le type de congé est obligatoire",
+      "startDateRequired": "La date de début est obligatoire",
+      "endDateRequired": "La date de fin est obligatoire",
+      "customHoursRequired": "Les heures de début et de fin sont obligatoires pour des heures personnalisées"
+    }
+  },
+  "attendanceCard": {
+    "title": "Présence",
+    "today": "Aujourd'hui",
+    "thisWeek": "Cette semaine",
+    "selectDate": "Sélectionner une date",
+    "attendanceRate": "Taux de présence",
+    "onTime": "À l'heure",
+    "late": "En retard",
+    "notAttendYet": "Pas encore présent"
+  },
+  "statsCard": {
+    "employeeAttend": "Présence des employés",
+    "totalLogHours": "Total des heures enregistrées",
+    "lastWeek": "Semaine dernière"
+  },
+  "workingHourPerformance": {
+    "title": "Performance des heures de travail",
+    "allDepartments": "Tous les départements",
+    "employeePerf": "Performance employé",
+    "workingHour": "Heures de travail",
+    "categories": {
+      "marketing": "Marketing",
+      "developer": "Développeur",
+      "creative": "Créatif",
+      "hr": "Ressources humaines"
+    },
+    "status": {
+      "excellentPerformance": "Performance excellente",
+      "needsImprovement": "À améliorer",
+      "marketing": "C'est déjà génial !",
+      "developer": "Progrès excellents !",
+      "creative": "Bon travail !",
+      "hr": "Ça avance bien !",
+      "noData": "Aucune donnée"
+    }
+  },
+  "insight": {
+    "title": "Aperçus de la présence",
+    "absenteeismRate": "Taux d'absentéisme",
+    "lateOccurrences": "Occurrences de retard",
+    "totalWorkTime": "Temps de travail total",
+    "attendanceRate": "Taux de présence",
+    "earlyDepartures": "Départs anticipés",
+    "overtimeHours": "Heures supplémentaires",
+    "averageLateness": "Retard moyen",
+    "daysCount": "{count, plural, one {# jour} other {# jours}}"
+  },
+  "attendanceTable": {
+    "sections": {
+      "attendance": "Présence",
+      "leave": "Congé",
+      "absence": "Absence",
+      "daysOff": "Congés"
+    },
+    "dateRange": {
+      "fromDate": "Date de début",
+      "toDate": "Date de fin",
+      "to": "à"
+    },
+    "statuses": {
+      "pending": "En attente",
+      "approved": "Approuvé",
+      "rejected": "Refusé",
+      "cancelled": "Annulé"
+    },
+    "columns": {
+      "employee": "Employé",
+      "employeeName": "Nom employé",
+      "jobTitle": "Titre du poste",
+      "department": "Département",
+      "startWork": "Début du travail",
+      "endWork": "Fin du travail",
+      "status": "Statut",
+      "logHours": "Heures enregistrées",
+      "overtime": "Heures supplémentaires",
+      "late": "Retard",
+      "leaveDate": "Date du congé",
+      "type": "Type",
+      "note": "Note",
+      "date": "Date",
+      "duration": "Durée",
+      "dateFrom": "Date de début"
+    },
+    "duration": {
+      "minutes": "{count} min",
+      "hoursMinutes": "{hours}h {minutes}m",
+      "halfDay": "0,5 jour",
+      "oneDay": "1 jour"
+    },
+    "fallback": {
+      "na": "N/A",
+      "unknown": "Inconnu",
+      "noTitle": "Pas de titre",
+      "noDepartment": "Aucun département"
+    },
+    "emptyMessage": "Aucun enregistrement trouvé",
+    "dayOffTypes": {
+      "weekend": "Week-end",
+      "public_holiday": "Jour férié",
+      "company_closure": "Fermeture de l'entreprise",
+      "approved_leave": "Congé approuvé",
+      "approved_special_off": "Jour de congé spécial",
+      "manual_override": "Modification manuelle"
+    },
+    "inProgress": "En cours"
+  },
+  "attendanceLegacyTable": {
+    "columns": {
+      "ticketId": "ID du ticket",
+      "subject": "Sujet",
+      "employeeName": "Nom de l'employé",
+      "createdDate": "Date de création",
+      "emailAddress": "Adresse e-mail",
+      "status": "Statut",
+      "action": "Action"
+    },
+    "tooltips": {
+      "viewDetails": "Voir les détails",
+      "deleteTicket": "Supprimer le ticket"
+    }
+  },
+  "configuration": {
+    "pageTitle": "Configuration",
+    "pageDescription": "Gérez le profil de votre entreprise et les paramètres de présence.",
+    "companyProfile": "Profil de l'entreprise",
+    "companyLogo": "Logo de l'entreprise",
+    "companyName": "Nom de l'entreprise",
+    "preferredLanguage": "Langue préférée",
+    "phone": "Numéro de téléphone",
+    "email": "Adresse e-mail",
+    "location": "Lieu",
+    "attendanceSettings": "Paramètres de présence",
+    "attendanceSchedule": "Planning de présence",
+    "effectiveFrom": "Effectif à partir du",
+    "gracePeriodMinutes": "Période de grâce (minutes)",
+    "dayStartTime": "Heure de début de journée",
+    "dayEndTime": "Heure de fin de journée",
+    "workingDays": "Jours ouvrables",
+    "uploadLogo": "Télécharger le logo",
+    "cancel": "Annuler",
+    "saveChanges": "Enregistrer les modifications",
+    "publicHolidays": "Jours fériés",
+    "holidayName": "Nom du jour férié",
+    "date": "Date",
+    "addHoliday": "Ajouter un jour férié",
+    "noHolidays": "Aucun jour férié ajouté pour le moment.",
+    "successUpdate": "Configuration mise à jour avec succès",
+    "errorUpdate": "Échec de la mise à jour de la configuration",
+    "logoUploaded": "Logo téléchargé avec succès",
+    "logoDeleted": "Logo supprimé avec succès",
+    "logoError": "Échec de la mise à jour du logo",
+    "options": {
+      "languages": {
+        "en": "Anglais",
+        "de": "Allemand",
+        "fr": "Français",
+        "it": "Italien"
+      }
+    },
+    "placeholders": {
+      "companyName": "Entrez le nom de l'entreprise",
+      "language": "Sélectionner la langue",
+      "phone": "+1 234 567 890",
+      "email": "contact@entreprise.com",
+      "location": "Ville, Pays",
+      "holidayName": "ex. Jour de l'An"
+    },
+    "days": {
+      "Monday": "Lun",
+      "Tuesday": "Mar",
+      "Wednesday": "Mer",
+      "Thursday": "Jeu",
+      "Friday": "Ven",
+      "Saturday": "Sam",
+      "Sunday": "Dim"
+    },
+    "removeLogo": "Supprimer le logo",
+    "toasts": {
+      "updating": "Mise à jour...",
+      "uploading": "Téléversement..."
+    },
+    "validation": {
+      "companyNameRequired": "Le nom de l'entreprise est obligatoire",
+      "preferredLanguageRequired": "La langue préférée est obligatoire",
+      "phoneRequired": "Le numéro de téléphone est obligatoire",
+      "emailInvalid": "Adresse e-mail invalide",
+      "locationRequired": "Le lieu est obligatoire",
+      "effectiveDateRequired": "La date d'entrée en vigueur est obligatoire",
+      "workingDaysMin": "Sélectionnez au moins un jour ouvré",
+      "startTimeRequired": "L'heure de début est obligatoire",
+      "endTimeRequired": "L'heure de fin est obligatoire",
+      "gracePeriodMin": "La période de grâce doit être d'au moins 0",
+      "holidayNameRequired": "Le nom du jour férié est obligatoire",
+      "dateRequired": "La date est obligatoire"
+    }
+  },
+  "jobs": {
+    "common": {
+      "loading": "Chargement...",
+      "na": "N/A",
+      "pending": "En attente",
+      "createJob": "Créer un poste",
+      "yes": "Oui",
+      "no": "Non",
+      "viewProfile": "Voir le profil",
+      "failedLoadCandidates": "Échec du chargement des candidats pour ce poste.",
+      "noCandidatesForJob": "Aucun candidat disponible pour ce poste pour le moment.",
+      "noCandidatesYet": "Aucun candidat disponible pour le moment."
+    },
+    "stages": {
+      "applying": "Candidature",
+      "screening": "Présélection",
+      "interview": "Entretien",
+      "hiring": "Recrutement",
+      "accepted": "Accepté",
+      "offer": "Offre",
+      "hired": "Embauché",
+      "rejected": "Refusé"
+    },
+    "candidatesPage": {
+      "title": "Candidats"
+    },
+    "rejectedPage": {
+      "title": "Candidats refusés"
+    },
+    "hiringJobs": {
+      "title": "Postes à pourvoir",
+      "failedLoadJobs": "Échec du chargement des postes. Veuillez actualiser et réessayer.",
+      "tabs": {
+        "all": "Tous",
+        "publishSoon": "Publication imminente"
+      },
+      "stats": {
+        "totalApplied": "Total des candidatures",
+        "totalInterview": "Total des entretiens"
+      },
+      "dateRange": {
+        "from": "Du",
+        "to": "au",
+        "fromTo": "Du {start} au {end}"
+      },
+      "empty": {
+        "title": "Aucun poste trouvé",
+        "description": "Aucune offre d'emploi ne correspond aux filtres actuels. Essayez de changer l'onglet de statut ou créez une nouvelle offre."
+      }
+    },
+    "hiringOverall": {
+      "title": "Tableau de bord des recrutements",
+      "interview": "Entretien",
+      "interviewLink": "Lien d'entretien",
+      "noDetailsProvided": "Aucun détail fourni",
+      "forLast": "pour les derniers {view}",
+      "moreEvents": "+{count} autres",
+      "views": {
+        "day": "Jour",
+        "week": "Semaine",
+        "month": "Mois"
+      },
+      "metrics": {
+        "totalOpenJobs": "Postes ouverts",
+        "totalApplicants": "Candidats totaux",
+        "totalReviews": "Évaluations totales",
+        "rejected": "Refusés",
+        "accepted": "Acceptés"
+      }
+    },
+    "candidateDetails": {
+      "sendEmail": "Envoyer un e-mail",
+      "candidate": "Candidat",
+      "resume": "CV",
+      "downloadPdf": "Télécharger le PDF",
+      "resumeUnavailable": "CV indisponible",
+      "cvPreviewUnavailable": "Aperçu du CV indisponible.",
+      "stageOf": "Étape de :",
+      "appointments": "Rendez-vous",
+      "date": "Date",
+      "interviewWith": "Entretien avec",
+      "interviewLink": "Lien d'entretien",
+      "noAppointmentsYet": "Pas encore de rendez-vous.",
+      "tabs": {
+        "personalInfo": "Infos personnelles",
+        "resume": "CV",
+        "hiringSteps": "Étapes d'embauche"
+      }
+    },
+    "jobDetails": {
+      "deleteJobOffer": "Supprimer l'offre d'emploi",
+      "deleteConfirmDescription": "Êtes-vous sûr de vouloir supprimer cette offre d'emploi ?",
+      "failedLoadJobDetails": "Échec du chargement des détails du poste.",
+      "tabs": {
+        "jobDetails": "Détails du poste",
+        "salary": "Détails du salaire et avantages",
+        "descriptions": "Descriptions et exigences du poste"
+      },
+      "status": {
+        "open": "Ouvert",
+        "hold": "En attente",
+        "closed": "Fermé",
+        "cancelled": "Annulé"
+      },
+      "sections": {
+        "jobApplication": "Candidature",
+        "postDate": "Date de publication",
+        "salaryDetails": "Détails du salaire",
+        "benefits": "Avantages",
+        "aboutCompany": "À propos de l'entreprise",
+        "jobRequirements": "Exigences du poste",
+        "skills": "Compétences"
+      },
+      "labels": {
+        "jobTitle": "Titre du poste",
+        "location": "Lieu",
+        "jobType": "Type d'emploi",
+        "requiredExperience": "Expérience requise",
+        "jobMode": "Mode de travail",
+        "experienceLevel": "Niveau d'expérience",
+        "industry": "Secteur",
+        "startDate": "Date de début",
+        "endDate": "Date de fin",
+        "currency": "Devise",
+        "salaryRange": "Fourchette de salaire",
+        "bonusAvailability": "Prime disponible",
+        "paidTimeOff": "Congés payés",
+        "healthInsurance": "Assurance maladie"
+      }
+    },
+    "addJobSheet": {
+      "addNewJob": "Ajouter un nouveau poste",
+      "close": "Fermer",
+      "back": "Retour",
+      "next": "Suivant",
+      "submit": "Soumettre",
+      "creatingJob": "Création du poste",
+      "optional": "optionnel",
+      "accommodationHelp": "Cela doit correspondre à l'adresse sur votre pièce d'identité officielle.",
+      "steps": {
+        "step1": "Étape 1",
+        "step2": "Étape 2",
+        "step3": "Étape 3",
+        "currentStep": "Étape actuelle",
+        "jobDetails": "Détails du poste",
+        "salaryDetailsBenefits": "Détails du salaire et avantages",
+        "jobDescriptionsRequirements": "Descriptions et exigences du poste"
+      },
+      "sections": {
+        "jobDetails": "Détails du poste",
+        "salaryDetails": "Détails du salaire",
+        "benefits": "Avantages",
+        "jobDescriptionsRequirements": "Descriptions et exigences du poste"
+      },
+      "fields": {
+        "jobTitle": "Titre du poste",
+        "jobType": "Type d'emploi",
+        "jobMode": "Mode de travail",
+        "industry": "Secteur",
+        "location": "Lieu",
+        "experienceLevel": "Niveau d'expérience",
+        "requiredExperience": "Expérience requise",
+        "jobPostDate": "Date de publication",
+        "startDate": "Date de début",
+        "untilClosed": "Jusqu'à clôture",
+        "endDate": "Date de fin",
+        "currencyType": "Type de devise",
+        "salaryRange": "Fourchette de salaire",
+        "accommodationType": "Type d'hébergement",
+        "bonusAvailability": "Prime disponible",
+        "healthInsurance": "Assurance maladie",
+        "paidTimeOff": "Congés payés",
+        "aboutCompanyDescription": "Description de l'entreprise",
+        "jobRequirements": "Exigences du poste",
+        "jobSkills": "Compétences requises"
+      },
+      "placeholders": {
+        "enterJobTitle": "Entrez le titre du poste",
+        "selectJobType": "Sélectionnez le type d'emploi",
+        "selectJobMode": "Sélectionnez le mode de travail",
+        "selectIndustry": "Sélectionnez le secteur",
+        "enterLocation": "Entrez le lieu",
+        "selectLevel": "Sélectionnez le niveau",
+        "selectExperience": "Sélectionnez l'expérience",
+        "selectCurrency": "Sélectionnez la devise",
+        "descriptionForCompany": "Description de l'entreprise",
+        "selectJobSkills": "Sélectionnez les compétences",
+        "searchSkills": "Rechercher des compétences..."
+      },
+      "options": {
+        "jobType": {
+          "full_time": "Temps plein",
+          "part_time": "Temps partiel",
+          "contract": "Contrat",
+          "internship": "Stage"
+        },
+        "jobMode": {
+          "on_site": "Sur site",
+          "remote": "À distance",
+          "hybrid": "Hybride"
+        },
+        "experienceLevel": {
+          "intern_level": "Niveau stagiaire",
+          "entry_level": "Débutant",
+          "mid_level": "Niveau intermédiaire",
+          "senior_level": "Senior"
+        },
+        "accommodation": {
+          "company": "Logement de fonction",
+          "companyDescription": "Logement fourni par l'employeur",
+          "allowance": "Allocation logement",
+          "allowanceDescription": "Allocation mensuelle en espèces",
+          "own": "Propre logement",
+          "ownDescription": "Aucune aide de l'entreprise"
+        },
+        "requiredExperienceYears": "+{count, plural, one {# an} other {# ans}}",
+        "skills": {
+          "creative": "Créativité",
+          "design": "Design",
+          "teamwork": "Travail d'équipe",
+          "communication": "Communication",
+          "problemSolving": "Résolution de problèmes",
+          "leadership": "Leadership"
+        }
+      },
+      "validation": {
+        "jobTitleRequired": "Le titre du poste est requis.",
+        "jobTypeRequired": "Le type d'emploi est requis.",
+        "jobModeRequired": "Le mode de travail est requis.",
+        "industryRequired": "Le secteur est requis.",
+        "locationRequired": "Le lieu est requis.",
+        "experienceLevelRequired": "Le niveau d'expérience est requis.",
+        "currencyTypeRequired": "Le type de devise est requis.",
+        "startSalaryGreaterThanZero": "Le salaire de début doit être supérieur à 0.",
+        "endSalaryGreaterThanZero": "Le salaire de fin doit être supérieur à 0.",
+        "accommodationTypeRequired": "Le type d'hébergement est requis.",
+        "bonusAvailabilityRequired": "La disponibilité de la prime est requise.",
+        "healthInsuranceRequired": "La sélection de l'assurance maladie est requise.",
+        "paidTimeOffRequired": "La sélection des congés payés est requise.",
+        "companyDescriptionRequired": "La description de l'entreprise est requise.",
+        "jobRequirementsRequired": "Les responsabilités et exigences du poste sont requises.",
+        "jobSkillRequired": "Veuillez sélectionner au moins une compétence requise.",
+        "startDateRequired": "La date de début est requise.",
+        "endDateRequiredUntilClosedDisabled": "La date de fin est requise lorsque 'Jusqu'à clôture' est désactivé.",
+        "endDateMustBeValid": "La date de fin doit être une date valide.",
+        "endDateMustBeAfterStartDate": "La date de fin doit être égale ou postérieure à la date de début.",
+        "startSalaryLessThanOrEqualEndSalary": "Le salaire de début doit être inférieur ou égal au salaire de fin.",
+        "endSalaryGreaterThanOrEqualStartSalary": "Le salaire de fin doit être supérieur ou égal au salaire de début."
+      }
+    }
+  },
+  "calendar": {
+    "title": "Congés des employés",
+    "tabs": {
+      "calendar": "Calendrier",
+      "leaveBalances": "Soldes de congés"
+    },
+    "description": "Gérez vos événements et demandes de congé",
+    "sidebar": {
+      "eventTypes": "Types d'événements",
+      "departments": "Départements",
+      "noDepartments": "Aucun département trouvé"
+    },
+    "eventTypes": {
+      "meetings": "Réunions",
+      "timeOff": "Congés",
+      "publicHolidays": "Jours fériés"
+    },
+    "views": {
+      "day": "Jour",
+      "week": "Semaine",
+      "month": "Mois"
+    },
+    "days": {
+      "sun": "Dim",
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mer",
+      "thu": "Jeu",
+      "fri": "Ven",
+      "sat": "Sam"
+    },
+    "errors": {
+      "loadingData": "Erreur lors du chargement des données. Veuillez réessayer."
+    },
+    "scheduleMeeting": {
+      "title": "Planifier une réunion",
+      "trigger": "Planifier une réunion",
+      "cancel": "Annuler",
+      "submit": "Planifier la réunion",
+      "fields": {
+        "title": "Titre",
+        "date": "Date",
+        "time": "Heure",
+        "duration": "Durée (minutes)",
+        "link": "Lien",
+        "employees": "Nom de l'employé",
+        "description": "Description"
+      },
+      "placeholders": {
+        "title": "ex. Réunion de planification Q2",
+        "date": "Sélectionnez une date",
+        "link": "https://meet.google.com/...",
+        "employees": "Sélectionnez un employé",
+        "description": "Ordre du jour, sujets ou notes..."
+      },
+      "tabs": {
+        "company": "Entreprise",
+        "department": "Département",
+        "employees": "Employés"
+      },
+      "messages": {
+        "companyHint": "Cette réunion sera envoyée à tous les employés de l'entreprise.",
+        "deptsSelected": "{count} départements sélectionnés"
+      },
+      "validation": {
+        "titleRequired": "Le titre est requis",
+        "dateRequired": "La date est requise",
+        "timeRequired": "L'heure est requise",
+        "durationMin": "La durée doit être d'au moins 15 minutes"
+      }
+    },
+    "view": "Vue du calendrier",
+    "eventKinds": {
+      "meeting": "Réunion",
+      "timeOff": "Absence",
+      "task": "Tâche",
+      "publicHoliday": "Jour férié"
+    },
+    "timeOff": {
+      "title": "{name} · {type}",
+      "loadingTitle": "Demande d’absence",
+      "dates": "Dates",
+      "employee": "Collaborateur",
+      "type": "Type de congé",
+      "duration": "Durée",
+      "days": "{count, plural, one {# jour} other {# jours}}",
+      "hours": "{count, plural, one {# heure} other {# heures}}"
+    },
+    "meeting": {
+      "date": "Date",
+      "time": "Heure",
+      "with": "Avec",
+      "job": "Poste",
+      "join": "Rejoindre la réunion",
+      "noLink": "Pas encore de lien de réunion"
+    },
+    "holiday": {
+      "title": "Jour férié",
+      "name": "Jour férié",
+      "date": "Date"
+    }
+  },
+  "departmentPage": {
+    "title": "Département",
+    "table": {
+      "columns": {
+        "name": "Nom du département",
+        "manager": "Responsable",
+        "totalEmployees": "Nombre total d'employés",
+        "absenteeRate": "Taux d'absentéisme",
+        "creationDate": "Date de création",
+        "action": "Action"
+      },
+      "tooltips": {
+        "viewDetails": "Voir les détails",
+        "deleteDepartment": "Supprimer le département"
+      },
+      "employeesCount": "{count, plural, one {# employé} other {# employés}}"
+    },
+    "management": {
+      "sheet": {
+        "title": {
+          "edit": "Modifier le département",
+          "add": "Ajouter un nouveau département"
+        },
+        "trigger": {
+          "edit": "Modifier le département",
+          "add": "Ajouter un nouveau département"
+        },
+        "footer": {
+          "cancel": "Annuler",
+          "saveChanges": "Enregistrer les modifications",
+          "addDepartment": "Ajouter le département"
+        }
+      },
+      "fields": {
+        "name": {
+          "label": "Nom du département",
+          "placeholder": "Entrez le nom du département"
+        },
+        "manager": {
+          "label": "Responsable",
+          "placeholder": "Sélectionnez un responsable"
+        },
+        "employees": {
+          "label": "Employés",
+          "placeholder": "Sélectionnez les employés"
+        },
+        "description": {
+          "label": "Description",
+          "placeholder": "Entrez la description"
+        }
+      },
+      "validation": {
+        "nameRequired": "Le nom du département est requis",
+        "nameMax": "Le nom du département doit comporter au maximum 120 caractères",
+        "managerRequired": "Le responsable est requis",
+        "descriptionMax": "La description doit comporter au maximum 2000 caractères"
+      },
+      "notifications": {
+        "creating": "Création du département",
+        "updating": "Mise à jour du département",
+        "assigningManager": "Attribution du responsable"
+      },
+      "employeeFallback": "Employé"
+    },
+    "cards": {
+      "totalDepartments": {
+        "title": "Départements totaux",
+        "newDepartmentsHint": "{count, plural, =0 {Aucun nouveau département cette année} one {# nouveau département cette année} other {# nouveaux départements cette année}}",
+        "fallbackName": "Département"
+      },
+      "absenceRate": {
+        "title": "Taux d'absentéisme par département",
+        "noData": "Aucune donnée de département",
+        "absence": "Absence",
+        "absentDays": "{count, plural, one {# jour d'absence} other {# jours d'absence}}"
+      },
+      "mostEmployees": {
+        "title": "Département avec le plus d'employés",
+        "employeesCount": "{count, plural, one {# employé} other {# employés}}",
+        "noData": "Aucune donnée employé"
+      }
+    },
+    "details": {
+      "title": "Détails du département",
+      "budget": "Budget",
+      "employeesHeading": "Employés du département"
+    },
+    "addEmployees": {
+      "trigger": "Ajouter des employés",
+      "title": "Ajouter des employés",
+      "description": "Sélectionnez les employés qui ne sont pas encore rattachés à ce département.",
+      "searchPlaceholder": "Rechercher par nom ou matricule",
+      "employeeId": "ID : {id}",
+      "submit": "Ajouter la sélection ({count})",
+      "adding": "Ajout des employés",
+      "noMatches": "Aucun employé ne correspond à votre recherche.",
+      "noneAvailable": "Aucun employé disponible à ajouter."
+    }
+  },
+  "sidebar": {
+    "sections": {
+      "main": "Principal",
+      "management": "Gestion",
+      "hiring": "Recrutement",
+      "communication": "Communication",
+      "settings": "Paramètres",
+      "finance": "Finances"
+    },
+    "items": {
+      "attendance": "Présence",
+      "calendar": "Calendrier",
+      "employee": "Employé",
+      "projects": "Projets",
+      "department": "Département",
+      "timeOff": "Congés",
+      "overall": "Général",
+      "jobHiring": "Offres d'emploi",
+      "candidates": "Candidats",
+      "rejected": "Rejetés",
+      "tickets": "Tickets",
+      "configuration": "Configuration",
+      "payroll": "Lohn",
+      "myPayslips": "Mes fiches de paie",
+      "loans": "Hilfsleihen",
+      "financeQueue": "File d'attente des paiements"
+    },
+    "navigationMenu": "Menu de navigation"
+  },
+  "searchDialog": {
+    "title": "Rechercher des pages",
+    "placeholder": "Rechercher des pages...",
+    "triggerPlaceholder": "Rechercher n'importe quoi",
+    "triggerAriaLabel": "Ouvrir la recherche de pages",
+    "noResults": "Aucune page trouvée",
+    "shortcut": "Ctrl K"
+  },
+  "notificationBell": {
+    "title": "Notifications",
+    "markAllRead": "Tout marquer comme lu",
+    "empty": "Aucune notification pour le moment",
+    "loadMore": "Charger plus",
+    "filterAll": "Toutes",
+    "filterUnread": "Non lues",
+    "priorityAll": "Toutes les priorités",
+    "priorityLow": "Faible",
+    "priorityNormal": "Normale",
+    "priorityHigh": "Élevée",
+    "priorityUrgent": "Urgente",
+    "priorityLabel": "Priorité",
+    "listMeta": "{loaded} sur {total} affichées",
+    "unreadIndicator": "Non lu"
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Page non trouvée",
+    "description": "La page que vous recherchez n'est pas disponible !",
+    "backHome": "Retour à l'accueil"
+  },
+  "pagination": {
+    "showing": "Affichage de",
+    "to": "à",
+    "of": "sur",
+    "entries": "entrées",
+    "items": "éléments",
+    "show": "Afficher",
+    "noItems": "Aucun élément trouvé"
+  },
+  "suite": {
+    "opening": "Ouverture de RH…",
+    "handoffTitle": "Ce lien a expiré",
+    "handoffBody": "Les liens de la suite ne fonctionnent qu’une fois, pendant une minute. Rouvrez RH depuis OrgTik.",
+    "backToSuite": "Ouvrir depuis OrgTik",
+    "noAccessTitle": "Vous n’avez pas accès à RH",
+    "noAccessBody": "Demandez à un administrateur dans OrgTik de vous attribuer un rôle RH.",
+    "toSuite": "Retour à OrgTik",
+    "appName": "RH",
+    "apps": {
+      "global": "Accueil",
+      "file_manager": "Fichiers",
+      "task_manager": "Tâches",
+      "hq": "Discussions",
+      "hr_system": "RH",
+      "digital_marketing": "Marketing",
+      "sales": "CRM",
+      "website_manager": "Site web",
+      "website_manager_legacy": "Ancien CMS"
+    },
+    "greeting": {
+      "morning": "Bonjour, {name}",
+      "afternoon": "Bon après-midi, {name}",
+      "evening": "Bonsoir, {name}",
+      "night": "Bonne nuit, {name}"
+    }
+  },
+  "feedback": {
+    "saved": "Modifications enregistrées",
+    "added": "Ajouté",
+    "deleted": "Supprimé",
+    "uploaded": "Téléversé",
+    "employeeAdded": "Employé ajouté",
+    "employeeRemoved": "Employé retiré",
+    "requestSent": "Demande envoyée",
+    "decisionSaved": "Décision enregistrée",
+    "runStarted": "Cycle de paie lancé",
+    "runFrozen": "Cycle gelé",
+    "runReopened": "Cycle rouvert",
+    "sentForApproval": "Envoyé pour approbation",
+    "reviewSubmitted": "Revue envoyée",
+    "allApproved": "Tous les éléments approuvés",
+    "paymentsRecorded": "Paiements enregistrés",
+    "paymentRecorded": "Paiement enregistré",
+    "payslipsSent": "Bulletins de paie envoyés",
+    "payslipSent": "Bulletin de paie envoyé",
+    "ticketCreated": "Ticket créé",
+    "readOnly": "Vous consultez en tant qu’une autre personne : les modifications sont désactivées.",
+    "forbidden": "Vous n’avez pas l’autorisation de faire cela.",
+    "gone": "Cela n’existe plus. Actualisez la page.",
+    "conflict": "Quelqu’un l’a modifié en même temps. Actualisez et réessayez.",
+    "tooLarge": "Ce fichier est trop volumineux.",
+    "tooMany": "Trop de tentatives. Patientez un instant et réessayez.",
+    "offline": "Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.",
+    "invalid": "Certaines informations ne sont pas correctes. Vérifiez le formulaire et réessayez.",
+    "failed": "Cela n’a pas fonctionné. Réessayez.",
+    "pleaseWait": "Un instant, s'il vous plaît…"
+  },
+  "errors": {
+    "notFoundTitle": "Cette page n’existe pas",
+    "notFoundBody": "Le lien est peut-être ancien, ou la page a été déplacée.",
+    "toHome": "Accueil RH",
+    "crashTitle": "Cette page a cessé de fonctionner",
+    "crashBody": "Un problème est survenu de notre côté. Réessayez, ou revenez à l’accueil RH.",
+    "reference": "Référence :",
+    "retry": "Réessayer",
+    "noAccessTitle": "Vous n’avez pas accès à cette page",
+    "noAccessBody": "Elle est réservée à d’autres rôles RH. Demandez à un administrateur RH si vous en avez besoin."
+  },
+  "actions": {
+    "view": "Voir",
+    "viewDetails": "Voir les détails",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "download": "Télécharger",
+    "send": "Envoyer",
+    "call": "Appeler",
+    "email": "Envoyer un e-mail",
+    "remove": "Retirer",
+    "moreActions": "Plus d’actions",
+    "addNote": "Ajouter une note",
+    "makeManager": "Nommer responsable",
+    "isManager": "Responsable",
+    "managerCantBeRemoved": "Le responsable ne peut pas être retiré",
+    "removeEmployee": "Retirer du département",
+    "reviewRequest": "Examiner la demande",
+    "previewPayslip": "Voir la fiche de paie",
+    "downloadFile": "Télécharger {name}",
+    "removeHoliday": "Supprimer le jour férié",
+    "openEmployee": "Ouvrir {name}",
+    "openTicket": "Ouvrir le ticket {id}",
+    "openDepartment": "Ouvrir {name}",
+    "openRun": "Ouvrir le cycle de paie",
+    "month": "Mois",
+    "year": "Année",
+    "rowsPerPage": "Lignes par page",
+    "filterBy": "Filtrer",
+    "enabled": "Activé",
+    "ticketReply": "Réponse",
+    "pagination": "Pagination",
+    "moveUp": "Monter",
+    "moveDown": "Descendre",
+    "removeSection": "Supprimer la section",
+    "previousPage": "Page précédente",
+    "nextPage": "Page suivante",
+    "previousMonth": "Mois précédent",
+    "nextMonth": "Mois suivant"
+  },
+  "leaveTypes": {
+    "annual_leave": "Congés annuels",
+    "sick_leave": "Congé maladie",
+    "personal_leave": "Congé personnel",
+    "vacation_day": "Jour de vacances",
+    "bereavement_leave": "Congé de deuil",
+    "medical_appointment": "Rendez-vous médical",
+    "mental_health_day": "Journée santé mentale",
+    "training_day": "Journée de formation",
+    "public_holiday": "Jour férié",
+    "unpaid_leave": "Congé sans solde",
+    "other": "Autre",
+    "discord_voice_leave": "Pause hors du salon vocal"
+  },
+  "deleteDialog": {
+    "title": "Supprimer ?",
+    "impact": "C’est supprimé pour tout le monde.",
+    "confirm": "Supprimer",
+    "cancel": "Annuler",
+    "department": {
+      "title": "Supprimer le département {name} ?",
+      "impact": "{count, plural, =0 {Personne n’en fait partie.} one {# personne en fait partie. Elle garde son poste et quitte le département.} other {# personnes en font partie. Elles gardent leur poste et quittent le département.}}",
+      "confirm": "Supprimer le département"
+    },
+    "ticket": {
+      "title": "Supprimer le ticket #{id}, « {subject} » ?",
+      "impact": "Ses messages et pièces jointes sont supprimés avec lui.",
+      "confirm": "Supprimer le ticket"
+    },
+    "member": {
+      "title": "Retirer {name} de ce département ?",
+      "impact": "La personne garde son poste et peut être ajoutée à nouveau à un département.",
+      "confirm": "Retirer"
+    },
+    "noteTitle": "Supprimer cette note ?",
+    "noteImpact": "Toutes les personnes qui voient les notes de ce collaborateur la perdent.",
+    "noteConfirm": "Supprimer la note"
+  },
+  "common": {
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "confirm": "Confirmer",
+    "close": "Fermer",
+    "open": "Ouvrir",
+    "noResults": "Aucun résultat.",
+    "search": "Rechercher",
+    "searchPlaceholder": "Rechercher...",
+    "allFilters": "Tous les filtres",
+    "viewBoard": "Tableau",
+    "viewList": "Liste",
+    "userAvatar": "Photo de profil",
+    "avatarFallback": "N/D"
+  },
+  "statusBadge": {
+    "pending": "En attente",
+    "approved": "Approuvé",
+    "rejected": "Refusé",
+    "solved": "Résolu",
+    "new_tickets": "Nouveaux tickets",
+    "open": "Ouvert",
+    "todo": "À faire",
+    "in_progress": "En cours",
+    "completed": "Terminé",
+    "on_hold": "Suspendu",
+    "cancelled": "Annulé",
+    "backlog": "Backlog",
+    "in_review": "En revue",
+    "done": "Terminé",
+    "closed": "Fermé",
+    "unknown": "Inconnu",
+    "late": "En retard",
+    "frozen": "Gelé",
+    "queued": "En file d'attente",
+    "paid": "Payé",
+    "draft": "Brouillon",
+    "auto": "Automatique",
+    "submitted": "Soumis",
+    "change": "Modification",
+    "active": "Actif",
+    "paused": "En pause",
+    "change_requested": "Modification demandée",
+    "new": "Nouveau",
+    "failed": "Échec",
+    "absent": "Absent",
+    "on_leave": "En congé"
+  },
+  "jobOpeningCard": {
+    "showDetails": "Voir les détails",
+    "shareOpening": "Partager l'offre",
+    "linkCopied": "Lien copié",
+    "linkCopiedToClipboard": "Lien copié dans le presse-papiers"
+  },
+  "attachmentList": {
+    "fileBadge": "FICHIER"
+  },
+  "textEditor": {
+    "placeholder": "Commencez à écrire ici ou collez du contenu…",
+    "toolbar": {
+      "bold": "Gras",
+      "italic": "Italique",
+      "underline": "Souligné",
+      "heading1": "Titre 1",
+      "heading2": "Titre 2",
+      "heading3": "Titre 3",
+      "numberedList": "Liste numérotée",
+      "bulletedList": "Liste à puces",
+      "alignLeft": "Aligner à gauche",
+      "alignCenter": "Centrer",
+      "alignRight": "Aligner à droite",
+      "justify": "Justifier",
+      "lineBreak": "Saut de ligne",
+      "horizontalRule": "Ligne horizontale",
+      "signatures": "Modèles de signature",
+      "quickStyles": "Styles rapides"
+    },
+    "signatures": {
+      "sideBySide": "Côte à côte (classique)",
+      "verticalList": "Liste verticale (officielle)",
+      "single": "Signature unique (compacte)",
+      "threeColumns": "Trois colonnes (témoin)"
+    },
+    "quickStyles": {
+      "flexBetween": "Deux côtés",
+      "twoColumnGrid": "Grille à 2 colonnes",
+      "sectionCard": "Carte de section",
+      "infoNote": "Note d'information"
+    }
+  },
+  "uploadField": {
+    "title": "Glissez-déposez vos reçus",
+    "changeTitle": "Changer le fichier du reçu",
+    "maxSize": "Taille maximale autorisée : {size} Mo",
+    "button": "Téléverser vos fichiers",
+    "previewAlt": "Aperçu du logo"
+  }
+}

@@ -1,0 +1,296 @@
+{
+  "Tools": {
+    "home": {
+      "title": "Vos outils",
+      "allTools": "Tous les outils et les offres",
+      "otherApps": "Autres applications que vous pouvez ouvrir.",
+      "apps": {
+        "platform_admin": "Administration OrgTik"
+      }
+    },
+    "line": {
+      "daysLeft": "{count, plural, =0 {se termine aujourd’hui} one {# jour restant} other {# jours restants}}",
+      "freePlan": "Offre gratuite",
+      "paymentDue": "Paiement en attente",
+      "cancelling": "Se termine au renouvellement"
+    },
+    "actions": {
+      "open": "Ouvrir",
+      "seePlans": "Voir les offres",
+      "choosePlan": "Choisir une offre",
+      "startTrial": "Essai gratuit de {days} jours",
+      "payNow": "Payer maintenant",
+      "askOwner": "Demandez au propriétaire de l’espace de s’abonner.",
+      "askOwnerToPay": "Demandez au propriétaire de l’espace de payer pour le débloquer.",
+      "askAdmin": "Demandez l’accès à un administrateur de l’espace.",
+      "joinWaitlist": "Rejoindre la liste d’attente",
+      "joinedWaitlist": "Vous êtes sur la liste d’attente de {tool}. Nous vous écrirons à son ouverture.",
+      "onWaitlist": "Vous êtes sur la liste d’attente"
+    },
+    "catalog": {
+      "title": "Outils et offres",
+      "description": "Tous les outils OrgTik et leur coût pour {workspace}, en {currency}.",
+      "customPlan": "Demander une offre sur mesure",
+      "ownerBuys": "Seul le propriétaire de l’espace peut démarrer des essais et acheter des offres. Vous pouvez tout consulter ici.",
+      "included": "Inclus dans chaque espace",
+      "from": "À partir de <price>{amount}</price> par mois",
+      "fromPerUser": "À partir de <price>{amount}</price> par utilisateur et par mois",
+      "trial": "Essai gratuit de {days} jours",
+      "free": "Offre gratuite disponible",
+      "onRequest": "Prix sur demande",
+      "empty": "Aucun outil pour l’instant",
+      "failed": "Les outils n’ont pas pu être chargés"
+    },
+    "plans": {
+      "title": "Offres",
+      "pricesFor": "Les prix par utilisateur sont calculés pour {count, plural, one {# personne} other {# personnes}} dans votre espace, en {currency}.",
+      "cycle": "Périodicité de facturation",
+      "monthly": "Mensuel",
+      "yearly": "Annuel",
+      "yearlySave": "Annuel · {pct} % d’économie",
+      "current": "Votre offre",
+      "currentTrial": "En essai",
+      "recommended": "Recommandée",
+      "free": "Gratuite",
+      "noPrice": "Pas encore de prix dans votre devise",
+      "per": {
+        "month": "par mois",
+        "year": "par an"
+      },
+      "perUser": {
+        "month": "par utilisateur et par mois",
+        "year": "par utilisateur et par an"
+      },
+      "seatsTotal": {
+        "month": "{count, plural, one {# utilisateur} other {# utilisateurs}} : <total>{amount}</total> par mois",
+        "year": "{count, plural, one {# utilisateur} other {# utilisateurs}} : <total>{amount}</total> par an"
+      },
+      "yearlySaving": "Vous économisez {pct} % par rapport au paiement mensuel",
+      "minSeats": "Au moins {count, plural, one {# utilisateur} other {# utilisateurs}}",
+      "whatYouGet": "Ce que comprend {plan}",
+      "included": "inclus",
+      "notIncluded": "non inclus",
+      "unlimited": "{feature} : illimité",
+      "choose": "Choisir {plan}",
+      "startTrial": "Essai gratuit de {days} jours",
+      "youHaveIt": "C’est votre offre actuelle.",
+      "toFree": "Pour passer à l’offre gratuite, modifiez-la dans <link>Abonnements</link>.",
+      "askOwner": "Demandez au propriétaire de l’espace de choisir cette offre.",
+      "ownerOnly": "Seul le propriétaire de {workspace} peut démarrer des essais et acheter des offres. Adressez-vous à lui si vous en avez besoin.",
+      "customHint": "Plus de personnes ou plusieurs outils dans un seul contrat ? <link>Demandez une offre sur mesure</link>.",
+      "onTrial": "Votre essai de {tool} se termine le {date} ({count, plural, =0 {c’est aujourd’hui} one {# jour restant} other {# jours restants}})",
+      "onTrialBody": "Choisissez une offre pour continuer sans interruption.",
+      "trialUsedNote": "Cet espace a déjà eu son essai de {tool}. Chaque outil a un seul essai par espace.",
+      "trialUsedTitle": "Cet espace a déjà eu un essai de {tool}",
+      "trialUsedBody": "Chaque outil a un seul essai gratuit par espace. Rien n’a changé ; choisissez une offre pour continuer.",
+      "trialFailed": "L’essai n’a pas démarré",
+      "trialStarted": "Votre essai de {tool} a commencé. Il se termine le {date}.",
+      "trialConfirmTitle": "Démarrer un essai de {days} jours de {tool} {plan} ?",
+      "trialConfirmBody": "Gratuit jusqu’au {date}, sans carte.",
+      "trialThenFree": "À la fin, {tool} passe à son offre gratuite si vous ne choisissez pas d’offre.",
+      "trialThenStop": "À la fin, {tool} s’arrête si vous ne choisissez pas d’offre.",
+      "oneTrial": "Chaque outil a un seul essai par espace.",
+      "trialConfirm": "Démarrer l’essai",
+      "cancel": "Annuler",
+      "comingSoon": "{tool} arrive bientôt",
+      "comingSoonBody": "Rejoignez la liste d’attente et nous vous écrirons à son ouverture.",
+      "noPlans": "Aucune offre à acheter ici pour l’instant",
+      "noPlansBody": "Cet outil est vendu sur demande. Demandez une offre sur mesure et nous vous enverrons un devis.",
+      "notFound": "Cet outil n’existe pas",
+      "backToTools": "Retour aux outils et offres",
+      "failed": "Les offres n’ont pas pu être chargées"
+    },
+    "features": {
+      "general": {
+        "users": {
+          "name": "Utilisateurs",
+          "limit": "{value, plural, one {# utilisateur} other {# utilisateurs}}"
+        },
+        "custom_roles": {
+          "name": "Rôles personnalisés"
+        },
+        "audit_days": {
+          "name": "Journal d’audit",
+          "limit": "Journal d’audit conservé {value, plural, one {# jour} other {# jours}}"
+        }
+      },
+      "tasks": {
+        "projects": {
+          "name": "Projets",
+          "limit": "{value, plural, one {# projet} other {# projets}}"
+        },
+        "guests": {
+          "name": "Invités",
+          "limit": "{value, plural, =0 {Aucun invité} one {# invité} other {# invités}}"
+        },
+        "automations": {
+          "name": "Automatisations"
+        }
+      },
+      "files": {
+        "storage_gb": {
+          "name": "Stockage",
+          "limit": "{value} Go de stockage"
+        },
+        "share_links": {
+          "name": "Liens de partage"
+        }
+      },
+      "chat": {
+        "history_days": {
+          "name": "Historique des messages",
+          "limit": "Historique des messages sur {value, plural, one {# jour} other {# jours}}"
+        },
+        "meetings": {
+          "name": "Réunions et appels"
+        }
+      },
+      "hr": {
+        "employees": {
+          "name": "Salariés",
+          "limit": "{value, plural, one {# salarié} other {# salariés}}"
+        },
+        "payroll": {
+          "name": "Paie"
+        }
+      },
+      "crm": {
+        "contacts": {
+          "name": "Contacts",
+          "limit": "{value, plural, one {# contact} other {# contacts}}"
+        },
+        "pipelines": {
+          "name": "Pipelines",
+          "limit": "{value, plural, one {# pipeline} other {# pipelines}}"
+        }
+      },
+      "marketing": {
+        "channels": {
+          "name": "Canaux",
+          "limit": "{value, plural, one {# canal} other {# canaux}}"
+        },
+        "ads": {
+          "name": "Publicités"
+        }
+      }
+    },
+    "checkout": {
+      "title": "Paiement",
+      "description": "Paiement pour {workspace}.",
+      "toolsCrumb": "Outils et offres",
+      "emptyTitle": "Rien à payer pour l’instant",
+      "emptyBody": "Choisissez d’abord une offre, puis revenez ici pour payer.",
+      "toTools": "Voir les outils et offres",
+      "cantBuyTitle": "Cette offre ne peut pas être achetée ici",
+      "order": "Votre commande",
+      "lineName": "{tool} · {plan}",
+      "perSeat": {
+        "monthly": "<unit>{amount}</unit> × {count, plural, one {# utilisateur} other {# utilisateurs}}, facturé chaque mois",
+        "yearly": "<unit>{amount}</unit> × {count, plural, one {# utilisateur} other {# utilisateurs}}, facturé chaque année"
+      },
+      "billed": {
+        "monthly": "Facturé chaque mois",
+        "yearly": "Facturé chaque année"
+      },
+      "credit": "Avoir pour la partie non utilisée de votre offre actuelle",
+      "alreadyOnPlan": "{tool} est déjà sur cette offre. Payer à nouveau démarre une nouvelle période aujourd’hui, avec un avoir pour la partie non utilisée de la période en cours.",
+      "codeTitle": "Code de réduction",
+      "codeLabel": "Code",
+      "apply": "Appliquer",
+      "codeApplied": "Code <c>{code}</c> appliqué",
+      "removeCode": "Retirer le code de réduction",
+      "summary": "Récapitulatif",
+      "subtotal": "Offres",
+      "creditIncluded": "Avoir",
+      "bundle": "{name} ({pct} % de remise)",
+      "coupon": "Code <c>{code}</c>",
+      "tax": "Taxe : <c>{label}</c>",
+      "noTax": "Taxe",
+      "total": "Total",
+      "taxUndecided": "L’affichage de la taxe dans les prix n’est pas encore décidé (G-12). Ce total l’ajoute aux prix des offres ; la présentation peut changer avant le lancement.",
+      "paymentMethod": "Payer avec",
+      "default": "(par défaut)",
+      "expires": "Expire le {date}",
+      "noMethods": "Aucune carte utilisable pour l’instant. Les cartes expirées ne sont pas proposées.",
+      "addMethod": "Ajouter un moyen de paiement",
+      "billingName": "Nom de facturation",
+      "billingNameHelp": "La société ou la personne au nom de laquelle la facture est établie.",
+      "nameRequired": "Saisissez le nom de facturation ; la facture en a besoin.",
+      "currencyLock": "C’est le premier paiement de l’espace : il fixe la devise de facturation à {currency}. Elle ne pourra ensuite être changée qu’en passant par le support.",
+      "failedTitle": "Le paiement n’est pas passé",
+      "failedBody": "Rien n’a changé : aucune offre n’a été achetée et vos outils sont tels qu’avant. Choisissez une autre carte ou ajoutez-en une, puis réessayez.",
+      "declined": "La banque a refusé la carte.",
+      "notPaidTitle": "Pas encore payé",
+      "pay": "Payer {total}",
+      "renews": {
+        "monthly": "Se renouvelle chaque mois au même prix jusqu’à ce que vous la modifiiez ou la résiliiez.",
+        "yearly": "Se renouvelle chaque année au même prix jusqu’à ce que vous la modifiiez ou la résiliiez."
+      },
+      "doneTitle": "Paiement reçu",
+      "doneBody": "{tool} est maintenant sur l’offre {plan}.",
+      "doneBodyShort": "Votre offre est active.",
+      "invoiceNumber": "Facture",
+      "paid": "Payé",
+      "whereInvoice": "La facture est disponible à tout moment dans <link>Facturation › Factures</link>.",
+      "openTool": "Ouvrir {tool}",
+      "toHome": "Retour à l’accueil"
+    },
+    "custom": {
+      "title": "Offre sur mesure",
+      "description": "Pour les besoins que la grille tarifaire ne couvre pas : beaucoup de personnes, plusieurs outils dans un seul contrat, des conditions particulières. Nous répondons par un devis.",
+      "formTitle": "Demander une offre sur mesure",
+      "formBody": "Dites-nous ce dont vous avez besoin. L’équipe OrgTik répond par un devis, en général sous deux jours ouvrés.",
+      "tools": "Outils",
+      "toolsRequired": "Choisissez au moins un outil.",
+      "seats": "Nombre de personnes",
+      "seatsHelp": "Toutes les personnes qui utiliseront les outils, hors invités.",
+      "seatsRequired": "Saisissez au moins 1 personne.",
+      "notes": "Autres précisions",
+      "notesHelp": "Agences, conditions du contrat, une échéance.",
+      "send": "Envoyer la demande",
+      "sent": "Demande envoyée. Nous répondrons par un devis.",
+      "yourRequests": "Vos demandes",
+      "summary": "{seats, plural, one {# personne} other {# personnes}} · {cycle} · demandée le {date}",
+      "state": {
+        "new": "En attente de devis",
+        "quoted": "Devis à examiner",
+        "accepted": "Accepté",
+        "declined": "Refusé",
+        "expired": "Devis expiré"
+      },
+      "quote": "Devis",
+      "validUntil": "Valable jusqu’au {date}",
+      "expiredOn": "Expiré le {date}",
+      "waiting": "Nous préparons le devis.",
+      "accept": "Accepter le devis",
+      "acceptTitle": "Accepter ce devis ?",
+      "acceptImpact": "OrgTik met en place l’offre pour {seats, plural, one {# personne} other {# personnes}}, facturation {cycle}, et envoie la facture de {amount}.",
+      "accepted": "Devis accepté. Nous mettons en place l’offre et envoyons la facture.",
+      "acceptedBody": "Accepté. OrgTik met en place l’offre et enverra la facture.",
+      "quoteExpired": "Ce devis a expiré. Envoyez une nouvelle demande pour un devis à jour.",
+      "emptyTitle": "Aucune demande pour l’instant",
+      "emptyBody": "Vos demandes apparaissent ici avec leurs devis.",
+      "failed": "Vos demandes n’ont pas pu être chargées"
+    },
+    "errors": {
+      "general": "Une erreur s’est produite. Réessayez dans un instant.",
+      "offline": "Vous semblez hors ligne. Vérifiez votre connexion et réessayez.",
+      "forbidden": "Votre rôle dans cet espace ne le permet pas. Adressez-vous au propriétaire.",
+      "suspended": "Cet espace est suspendu : rien ne peut être modifié. Contactez le support.",
+      "trial_used": "Cet espace a déjà eu un essai de cet outil.",
+      "wrong_state": "C’est impossible dans l’état actuel de l’outil. Actualisez la page.",
+      "payment_failed": "Le paiement n’est pas passé. Rien n’a changé.",
+      "expired": "Cela a expiré.",
+      "not_found": "Cela n’existe plus. Actualisez la page.",
+      "coupon_invalid": "Ce code n’existe pas ou n’est pas actif.",
+      "coupon_expired": "Ce code a expiré.",
+      "coupon_used_up": "Ce code a été utilisé le nombre maximal de fois et n’est plus valable.",
+      "coupon_not_applicable": "Ce code ne s’applique pas à l’offre que vous achetez.",
+      "coupon_currency": "Ce code ne fonctionne pas dans la devise de votre espace.",
+      "no_trial": "Cette offre n’a pas d’essai gratuit.",
+      "no_price": "Cette offre n’a pas encore de prix dans votre devise.",
+      "mismatch": "Cette offre est tarifée dans une autre devise que celle de votre espace.",
+      "paymentMethodId": "Choisissez une carte pour payer."
+    }
+  }
+}

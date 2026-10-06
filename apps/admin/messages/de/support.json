@@ -1,0 +1,73 @@
+{
+  "Support": {
+    "priorities": {
+      "low": "Niedrig",
+      "normal": "Normal",
+      "high": "Hoch",
+      "urgent": "Dringend"
+    },
+    "categories": {
+      "billing": "Abrechnung",
+      "sales": "Vertrieb",
+      "product": "Produkt",
+      "technical": "Technik"
+    },
+    "list": {
+      "title": "Support-Tickets",
+      "description": "Fragen und Probleme der Kundschaft, neueste Aktivität zuerst.",
+      "ticket": "Ticket",
+      "priority": "Priorität",
+      "state": "Status",
+      "assignee": "Zugewiesen an",
+      "unassigned": "Nicht zugewiesen",
+      "updated": "Letzte Aktivität",
+      "allStates": "Alle Status",
+      "whose": "Wessen Tickets",
+      "everyone": "Alle",
+      "mine": "Mir zugewiesen",
+      "none": "Noch keine Tickets",
+      "noneBody": "Tickets, die die Kundschaft aus ihrem Workspace eröffnet, erscheinen hier.",
+      "noneFiltered": "Keine Tickets passen zu diesen Filtern",
+      "noneFilteredBody": "Wählen Sie einen anderen Status oder zeigen Sie die Tickets aller an."
+    },
+    "detail": {
+      "notFound": "Dieses Ticket existiert nicht",
+      "notFoundBody": "Es wurde möglicherweise entfernt. Kehren Sie zur Ticketliste zurück.",
+      "about": "Details",
+      "conversation": "Unterhaltung",
+      "staff": "OrgTik-Team",
+      "customer": "Kundschaft",
+      "internalBadge": "Interne Notiz",
+      "replyLabel": "Antwort an die Kundschaft",
+      "replyHelp": "Die Kundschaft sieht sie und wird benachrichtigt.",
+      "noteLabel": "Interne Notiz",
+      "noteHelp": "Nur OrgTik-Mitarbeiter sehen interne Notizen. Die Kundschaft wird nicht benachrichtigt.",
+      "internal": "Interne Notiz",
+      "internalHelp": "Bleibt unter Mitarbeitern.",
+      "send": "Antwort senden",
+      "sendWait": "Senden und auf die Kundschaft warten",
+      "addNote": "Interne Notiz hinzufügen",
+      "sent": "Antwort gesendet",
+      "sentWaiting": "Antwort gesendet; Warten auf die Kundschaft",
+      "noteAdded": "Interne Notiz hinzugefügt",
+      "writeFirst": "Schreiben Sie zuerst die Nachricht.",
+      "resolve": "Als gelöst markieren",
+      "resolveTitle": "{number} als gelöst markieren?",
+      "resolveImpact": "Die Kundschaft wird informiert, dass das Ticket gelöst ist, und kann es 7 Tage lang wieder öffnen.",
+      "resolved": "Ticket gelöst",
+      "close": "Ticket schließen",
+      "closeTitle": "{number} schließen?",
+      "closeImpact": "Die Unterhaltung endet. Die Kundschaft kann nicht mehr darauf antworten und eröffnet stattdessen ein neues Ticket.",
+      "closed": "Ticket geschlossen",
+      "closedBody": "Dieses Ticket ist geschlossen.",
+      "assign": "Zuweisen",
+      "reassign": "Neu zuweisen",
+      "assignTitle": "{number} zuweisen",
+      "assigned": "Zugewiesen an {name}",
+      "prioritySaved": "Priorität auf {priority} gesetzt",
+      "opened": "Eröffnet",
+      "autoClose": "Wird automatisch geschlossen am",
+      "reopenUntil": "Kundschaft kann wieder öffnen bis"
+    }
+  }
+}

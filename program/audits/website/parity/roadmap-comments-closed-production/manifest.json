@@ -1,0 +1,41 @@
+{
+  "label": "roadmap-comments-closed-production",
+  "site": "http://127.0.0.1:4280",
+  "commit": {
+    "head": "02dc5d0",
+    "dirty": true
+  },
+  "at": "2026-10-05T19:08:27.045Z",
+  "clock": {
+    "start": "2026-09-29T06:00:00.000Z",
+    "settleMs": 15000
+  },
+  "widths": [
+    390,
+    768,
+    1440
+  ],
+  "captures": [
+    {
+      "name": "roadmap__390",
+      "route": "/roadmap",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "roadmap__768",
+      "route": "/roadmap",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "roadmap__1440",
+      "route": "/roadmap",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    }
+  ]
+}

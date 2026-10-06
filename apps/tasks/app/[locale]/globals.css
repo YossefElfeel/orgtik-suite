@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "@orgtik/ui/tailwind.css";
+
+/* Tasks is on @orgtik/ui end to end (wave 3, migration step 8): the shadcn token bridge, the old
+   brand variables, the text-NN sizes and the sheet animations are gone (D-020). What's left is the
+   page base. */
+@theme inline {
+  --font-sans: var(--ot-font-body);
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  body {
+    @apply bg-canvas text-fg;
+    font-family: var(--ot-font-body);
+  }
+}

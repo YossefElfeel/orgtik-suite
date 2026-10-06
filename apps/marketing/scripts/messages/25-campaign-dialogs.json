@@ -1,0 +1,646 @@
+{
+ "CampaignDialogs.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "CampaignDialogs.close": {
+  "en": "Close",
+  "ar": "إغلاق",
+  "de": "Schließen",
+  "fr": "Fermer",
+  "it": "Chiudi"
+ },
+ "CampaignDialogs.rsa.title": {
+  "en": "New search ad",
+  "ar": "إعلان بحث جديد",
+  "de": "Neue Suchanzeige",
+  "fr": "Nouvelle annonce",
+  "it": "Nuovo annuncio di ricerca"
+ },
+ "CampaignDialogs.rsa.editTitle": {
+  "en": "Edit search ad",
+  "ar": "تعديل إعلان البحث",
+  "de": "Suchanzeige bearbeiten",
+  "fr": "Modifier l’annonce",
+  "it": "Modifica annuncio di ricerca"
+ },
+ "CampaignDialogs.rsa.description": {
+  "en": "Google combines your headlines and descriptions to fit each search.",
+  "ar": "يجمع Google العناوين والأوصاف لتناسب كل عملية بحث.",
+  "de": "Google kombiniert Ihre Anzeigentitel und Beschreibungen passend zu jeder Suche.",
+  "fr": "Google combine vos titres et descriptions selon chaque recherche.",
+  "it": "Google combina titoli e descrizioni in base a ogni ricerca."
+ },
+ "CampaignDialogs.rsa.name": {
+  "en": "Ad name",
+  "ar": "اسم الإعلان",
+  "de": "Name der Anzeige",
+  "fr": "Nom de l’annonce",
+  "it": "Nome dell’annuncio"
+ },
+ "CampaignDialogs.rsa.namePlaceholder": {
+  "en": "e.g. Car wash – Jeddah",
+  "ar": "مثال: غسيل سيارات – جدة",
+  "de": "z. B. Autowäsche – Dschidda",
+  "fr": "p. ex. Lavage auto – Djeddah",
+  "it": "es. Autolavaggio – Gedda"
+ },
+ "CampaignDialogs.rsa.nameRequired": {
+  "en": "Name the ad",
+  "ar": "سمِّ الإعلان",
+  "de": "Benennen Sie die Anzeige",
+  "fr": "Nommez l’annonce",
+  "it": "Dai un nome all’annuncio"
+ },
+ "CampaignDialogs.rsa.finalUrl": {
+  "en": "Final URL",
+  "ar": "عنوان URL النهائي",
+  "de": "Finale URL",
+  "fr": "URL finale",
+  "it": "URL finale"
+ },
+ "CampaignDialogs.rsa.finalUrlHint": {
+  "en": "The page people land on when they click the ad.",
+  "ar": "الصفحة التي يصل إليها الأشخاص عند النقر على الإعلان.",
+  "de": "Die Seite, auf die Personen nach dem Klick gelangen.",
+  "fr": "La page où arrivent les personnes après un clic.",
+  "it": "La pagina su cui arrivano le persone dopo il clic."
+ },
+ "CampaignDialogs.rsa.finalUrlPlaceholder": {
+  "en": "https://example.com/offers",
+  "ar": "https://example.com/offers",
+  "de": "https://example.com/angebote",
+  "fr": "https://example.com/offres",
+  "it": "https://example.com/offerte"
+ },
+ "CampaignDialogs.rsa.urlInvalid": {
+  "en": "Enter a full web address, such as https://example.com",
+  "ar": "أدخل عنوان ويب كاملًا، مثل https://example.com",
+  "de": "Geben Sie eine vollständige Webadresse ein, z. B. https://example.com",
+  "fr": "Saisissez une adresse web complète, comme https://example.com",
+  "it": "Inserisci un indirizzo web completo, come https://example.com"
+ },
+ "CampaignDialogs.rsa.headlines": {
+  "en": "Headlines",
+  "ar": "العناوين",
+  "de": "Anzeigentitel",
+  "fr": "Titres",
+  "it": "Titoli"
+ },
+ "CampaignDialogs.rsa.headlinePlaceholder": {
+  "en": "Type a headline and press Enter",
+  "ar": "اكتب عنوانًا واضغط Enter",
+  "de": "Anzeigentitel eingeben und Eingabe drücken",
+  "fr": "Saisissez un titre et appuyez sur Entrée",
+  "it": "Scrivi un titolo e premi Invio"
+ },
+ "CampaignDialogs.rsa.headlinesHint": {
+  "en": "{min} to {max} headlines, up to {length} characters each. Added: {count}.",
+  "ar": "من {min} إلى {max} عناوين، حتى {length} حرفًا لكل عنوان. المُضاف: {count}.",
+  "de": "{min} bis {max} Anzeigentitel, je bis zu {length} Zeichen. Hinzugefügt: {count}.",
+  "fr": "De {min} à {max} titres, {length} caractères maximum chacun. Ajoutés : {count}.",
+  "it": "Da {min} a {max} titoli, fino a {length} caratteri ciascuno. Aggiunti: {count}."
+ },
+ "CampaignDialogs.rsa.headlinesMin": {
+  "en": "{count, plural, one {Add at least # headline} other {Add at least # headlines}}",
+  "ar": "{count, plural, zero {أضف عناوين} one {أضف عنوانًا واحدًا على الأقل} two {أضف عنوانين على الأقل} few {أضف # عناوين على الأقل} many {أضف # عنوانًا على الأقل} other {أضف # عنوان على الأقل}}",
+  "de": "{count, plural, one {Fügen Sie mindestens # Anzeigentitel hinzu} other {Fügen Sie mindestens # Anzeigentitel hinzu}}",
+  "fr": "{count, plural, one {Ajoutez au moins # titre} other {Ajoutez au moins # titres}}",
+  "it": "{count, plural, one {Aggiungi almeno # titolo} other {Aggiungi almeno # titoli}}"
+ },
+ "CampaignDialogs.rsa.descriptions": {
+  "en": "Descriptions",
+  "ar": "الأوصاف",
+  "de": "Beschreibungen",
+  "fr": "Descriptions",
+  "it": "Descrizioni"
+ },
+ "CampaignDialogs.rsa.descriptionPlaceholder": {
+  "en": "Type a description and press Enter",
+  "ar": "اكتب وصفًا واضغط Enter",
+  "de": "Beschreibung eingeben und Eingabe drücken",
+  "fr": "Saisissez une description et appuyez sur Entrée",
+  "it": "Scrivi una descrizione e premi Invio"
+ },
+ "CampaignDialogs.rsa.descriptionsHint": {
+  "en": "{min} to {max} descriptions, up to {length} characters each. Added: {count}.",
+  "ar": "من {min} إلى {max} أوصاف، حتى {length} حرفًا لكل وصف. المُضاف: {count}.",
+  "de": "{min} bis {max} Beschreibungen, je bis zu {length} Zeichen. Hinzugefügt: {count}.",
+  "fr": "De {min} à {max} descriptions, {length} caractères maximum chacune. Ajoutées : {count}.",
+  "it": "Da {min} a {max} descrizioni, fino a {length} caratteri ciascuna. Aggiunte: {count}."
+ },
+ "CampaignDialogs.rsa.descriptionsMin": {
+  "en": "{count, plural, one {Add at least # description} other {Add at least # descriptions}}",
+  "ar": "{count, plural, zero {أضف أوصافًا} one {أضف وصفًا واحدًا على الأقل} two {أضف وصفين على الأقل} few {أضف # أوصاف على الأقل} many {أضف # وصفًا على الأقل} other {أضف # وصف على الأقل}}",
+  "de": "{count, plural, one {Fügen Sie mindestens # Beschreibung hinzu} other {Fügen Sie mindestens # Beschreibungen hinzu}}",
+  "fr": "{count, plural, one {Ajoutez au moins # description} other {Ajoutez au moins # descriptions}}",
+  "it": "{count, plural, one {Aggiungi almeno # descrizione} other {Aggiungi almeno # descrizioni}}"
+ },
+ "CampaignDialogs.rsa.displayPath": {
+  "en": "Display path",
+  "ar": "مسار العرض",
+  "de": "Anzeigepfad",
+  "fr": "Chemin d’affichage",
+  "it": "Percorso visualizzato"
+ },
+ "CampaignDialogs.rsa.displayPathHint": {
+  "en": "Optional words shown after the domain, up to {length} characters each.",
+  "ar": "كلمات اختيارية تظهر بعد النطاق، حتى {length} حرفًا لكل منها.",
+  "de": "Optionale Wörter nach der Domain, je bis zu {length} Zeichen.",
+  "fr": "Mots facultatifs affichés après le domaine, {length} caractères maximum chacun.",
+  "it": "Parole facoltative dopo il dominio, fino a {length} caratteri ciascuna."
+ },
+ "CampaignDialogs.rsa.path1": {
+  "en": "First path",
+  "ar": "المسار الأول",
+  "de": "Erster Pfad",
+  "fr": "Premier chemin",
+  "it": "Primo percorso"
+ },
+ "CampaignDialogs.rsa.path2": {
+  "en": "Second path",
+  "ar": "المسار الثاني",
+  "de": "Zweiter Pfad",
+  "fr": "Second chemin",
+  "it": "Secondo percorso"
+ },
+ "CampaignDialogs.rsa.add": {
+  "en": "Add ad",
+  "ar": "إضافة الإعلان",
+  "de": "Anzeige hinzufügen",
+  "fr": "Ajouter l’annonce",
+  "it": "Aggiungi annuncio"
+ },
+ "CampaignDialogs.rsa.save": {
+  "en": "Save ad",
+  "ar": "حفظ الإعلان",
+  "de": "Anzeige speichern",
+  "fr": "Enregistrer l’annonce",
+  "it": "Salva annuncio"
+ },
+ "CampaignDialogs.rsaPreview.description": {
+  "en": "One way Google may show this ad. Headlines and descriptions are combined differently for each search.",
+  "ar": "إحدى طرق عرض Google لهذا الإعلان. تُجمع العناوين والأوصاف بشكل مختلف لكل عملية بحث.",
+  "de": "Eine Möglichkeit, wie Google diese Anzeige zeigen kann. Titel und Beschreibungen werden je nach Suche anders kombiniert.",
+  "fr": "Une façon dont Google peut afficher cette annonce. Les titres et descriptions sont combinés différemment à chaque recherche.",
+  "it": "Un modo in cui Google può mostrare questo annuncio. Titoli e descrizioni vengono combinati in modo diverso per ogni ricerca."
+ },
+ "CampaignDialogs.rsaPreview.adBadge": {
+  "en": "Ad",
+  "ar": "إعلان",
+  "de": "Anzeige",
+  "fr": "Annonce",
+  "it": "Annuncio"
+ },
+ "CampaignDialogs.rsaPreview.headlines": {
+  "en": "{count, plural, one {# headline} other {# headlines}}",
+  "ar": "{count, plural, zero {لا عناوين} one {عنوان واحد} two {عنوانان} few {# عناوين} many {# عنوانًا} other {# عنوان}}",
+  "de": "{count, plural, one {# Anzeigentitel} other {# Anzeigentitel}}",
+  "fr": "{count, plural, one {# titre} other {# titres}}",
+  "it": "{count, plural, one {# titolo} other {# titoli}}"
+ },
+ "CampaignDialogs.rsaPreview.descriptions": {
+  "en": "{count, plural, one {# description} other {# descriptions}}",
+  "ar": "{count, plural, zero {لا أوصاف} one {وصف واحد} two {وصفان} few {# أوصاف} many {# وصفًا} other {# وصف}}",
+  "de": "{count, plural, one {# Beschreibung} other {# Beschreibungen}}",
+  "fr": "{count, plural, one {# description} other {# descriptions}}",
+  "it": "{count, plural, one {# descrizione} other {# descrizioni}}"
+ },
+ "CampaignDialogs.rsaPreview.finalUrl": {
+  "en": "Final URL:",
+  "ar": "عنوان URL النهائي:",
+  "de": "Finale URL:",
+  "fr": "URL finale :",
+  "it": "URL finale:"
+ },
+ "CampaignDialogs.pickExisting": {
+  "en": "Pick a post",
+  "ar": "اختيار منشور",
+  "de": "Beitrag wählen",
+  "fr": "Choisir une publication",
+  "it": "Scegli un post"
+ },
+ "CampaignDialogs.createNew": {
+  "en": "Write a new post",
+  "ar": "كتابة منشور جديد",
+  "de": "Neuen Beitrag schreiben",
+  "fr": "Rédiger une publication",
+  "it": "Scrivi un nuovo post"
+ },
+ "CampaignDialogs.pickFor": {
+  "en": "Pick a post for {context}",
+  "ar": "اختيار منشور لـ{context}",
+  "de": "Beitrag wählen für {context}",
+  "fr": "Choisir une publication pour {context}",
+  "it": "Scegli un post per {context}"
+ },
+ "CampaignDialogs.createFor": {
+  "en": "Write a new post for {context}",
+  "ar": "كتابة منشور جديد لـ{context}",
+  "de": "Neuen Beitrag schreiben für {context}",
+  "fr": "Rédiger une publication pour {context}",
+  "it": "Scrivi un nuovo post per {context}"
+ },
+ "CampaignDialogs.pick.title": {
+  "en": "Pick a {platform} post",
+  "ar": "اختر منشورًا على {platform}",
+  "de": "{platform}-Beitrag wählen",
+  "fr": "Choisir une publication {platform}",
+  "it": "Scegli un post {platform}"
+ },
+ "CampaignDialogs.pick.description": {
+  "en": "Posts from this project that go out on this platform.",
+  "ar": "منشورات هذا المشروع التي تُنشر على هذه المنصة.",
+  "de": "Beiträge dieses Projekts, die auf dieser Plattform erscheinen.",
+  "fr": "Publications de ce projet diffusées sur cette plateforme.",
+  "it": "Post di questo progetto pubblicati su questa piattaforma."
+ },
+ "CampaignDialogs.pick.search": {
+  "en": "Search posts",
+  "ar": "ابحث في المنشورات",
+  "de": "Beiträge durchsuchen",
+  "fr": "Rechercher des publications",
+  "it": "Cerca post"
+ },
+ "CampaignDialogs.pick.listLabel": {
+  "en": "Posts",
+  "ar": "المنشورات",
+  "de": "Beiträge",
+  "fr": "Publications",
+  "it": "Post"
+ },
+ "CampaignDialogs.pick.platforms": {
+  "en": "{count, plural, one {On # platform} other {On # platforms}}",
+  "ar": "{count, plural, zero {على أي منصة} one {على منصة واحدة} two {على منصتين} few {على # منصات} many {على # منصة} other {على # منصة}}",
+  "de": "{count, plural, one {Auf # Plattform} other {Auf # Plattformen}}",
+  "fr": "{count, plural, one {Sur # plateforme} other {Sur # plateformes}}",
+  "it": "{count, plural, one {Su # piattaforma} other {Su # piattaforme}}"
+ },
+ "CampaignDialogs.pick.use": {
+  "en": "Use this post",
+  "ar": "استخدام هذا المنشور",
+  "de": "Diesen Beitrag verwenden",
+  "fr": "Utiliser cette publication",
+  "it": "Usa questo post"
+ },
+ "CampaignDialogs.pick.errorTitle": {
+  "en": "Couldn't load the posts",
+  "ar": "تعذّر تحميل المنشورات",
+  "de": "Beiträge konnten nicht geladen werden",
+  "fr": "Impossible de charger les publications",
+  "it": "Impossibile caricare i post"
+ },
+ "CampaignDialogs.pick.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقّق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "CampaignDialogs.pick.emptyTitle": {
+  "en": "No {platform} posts yet",
+  "ar": "لا توجد منشورات على {platform} بعد",
+  "de": "Noch keine {platform}-Beiträge",
+  "fr": "Aucune publication {platform} pour l’instant",
+  "it": "Ancora nessun post {platform}"
+ },
+ "CampaignDialogs.pick.emptyBody": {
+  "en": "Write a new post here, or create one in Posts.",
+  "ar": "اكتب منشورًا جديدًا هنا أو أنشئه في المنشورات.",
+  "de": "Schreiben Sie hier einen neuen Beitrag oder erstellen Sie einen unter Beiträge.",
+  "fr": "Rédigez une publication ici ou créez-en une dans Publications.",
+  "it": "Scrivi un nuovo post qui o creane uno in Post."
+ },
+ "CampaignDialogs.pick.createInPosts": {
+  "en": "Open Posts",
+  "ar": "فتح المنشورات",
+  "de": "Beiträge öffnen",
+  "fr": "Ouvrir Publications",
+  "it": "Apri Post"
+ },
+ "CampaignDialogs.pick.noMatchTitle": {
+  "en": "No posts match",
+  "ar": "لا توجد منشورات مطابقة",
+  "de": "Keine passenden Beiträge",
+  "fr": "Aucune publication ne correspond",
+  "it": "Nessun post corrisponde"
+ },
+ "CampaignDialogs.pick.noMatchBody": {
+  "en": "Try other words.",
+  "ar": "جرّب كلمات أخرى.",
+  "de": "Versuchen Sie andere Wörter.",
+  "fr": "Essayez d’autres mots.",
+  "it": "Prova altre parole."
+ },
+ "CampaignDialogs.create.title": {
+  "en": "New {platform} post",
+  "ar": "منشور جديد على {platform}",
+  "de": "Neuer {platform}-Beitrag",
+  "fr": "Nouvelle publication {platform}",
+  "it": "Nuovo post {platform}"
+ },
+ "CampaignDialogs.create.description": {
+  "en": "It's saved as a draft in Posts and linked to this campaign.",
+  "ar": "يُحفظ كمسودة في المنشورات ويُربط بهذه الحملة.",
+  "de": "Er wird als Entwurf unter Beiträge gespeichert und mit dieser Kampagne verknüpft.",
+  "fr": "Elle est enregistrée comme brouillon dans Publications et liée à cette campagne.",
+  "it": "Viene salvato come bozza in Post e collegato a questa campagna."
+ },
+ "CampaignDialogs.create.postTitle": {
+  "en": "Title",
+  "ar": "العنوان",
+  "de": "Titel",
+  "fr": "Titre",
+  "it": "Titolo"
+ },
+ "CampaignDialogs.create.titleRequired": {
+  "en": "Give the post a title",
+  "ar": "أعطِ المنشور عنوانًا",
+  "de": "Geben Sie dem Beitrag einen Titel",
+  "fr": "Donnez un titre à la publication",
+  "it": "Dai un titolo al post"
+ },
+ "CampaignDialogs.create.text": {
+  "en": "Text",
+  "ar": "النص",
+  "de": "Text",
+  "fr": "Texte",
+  "it": "Testo"
+ },
+ "CampaignDialogs.create.textHint": {
+  "en": "Add media and a schedule later, in Posts.",
+  "ar": "أضف الوسائط والجدول الزمني لاحقًا في المنشورات.",
+  "de": "Medien und Zeitplan fügen Sie später unter Beiträge hinzu.",
+  "fr": "Ajoutez des médias et un calendrier plus tard, dans Publications.",
+  "it": "Aggiungi contenuti multimediali e programmazione più tardi, in Post."
+ },
+ "CampaignDialogs.create.textRequired": {
+  "en": "Write the post's text",
+  "ar": "اكتب نص المنشور",
+  "de": "Schreiben Sie den Text des Beitrags",
+  "fr": "Rédigez le texte de la publication",
+  "it": "Scrivi il testo del post"
+ },
+ "CampaignDialogs.create.submit": {
+  "en": "Create and add",
+  "ar": "إنشاء وإضافة",
+  "de": "Erstellen und hinzufügen",
+  "fr": "Créer et ajouter",
+  "it": "Crea e aggiungi"
+ },
+ "CampaignDialogs.postPreview.description": {
+  "en": "The text that goes out. Media and per-platform changes are in Posts.",
+  "ar": "النص الذي سيُنشر. الوسائط والتعديلات لكل منصة في المنشورات.",
+  "de": "Der Text, der veröffentlicht wird. Medien und Änderungen je Plattform finden Sie unter Beiträge.",
+  "fr": "Le texte publié. Les médias et les variantes par plateforme sont dans Publications.",
+  "it": "Il testo che viene pubblicato. Contenuti multimediali e varianti per piattaforma sono in Post."
+ },
+ "CampaignDialogs.postPreview.titleOnly": {
+  "en": "Only the title is known here. Open the post to see its text and media.",
+  "ar": "العنوان فقط معروف هنا. افتح المنشور لرؤية نصه ووسائطه.",
+  "de": "Hier ist nur der Titel bekannt. Öffnen Sie den Beitrag für Text und Medien.",
+  "fr": "Seul le titre est connu ici. Ouvrez la publication pour voir son texte et ses médias.",
+  "it": "Qui è noto solo il titolo. Apri il post per vederne testo e contenuti."
+ },
+ "CampaignDialogs.postPreview.openPost": {
+  "en": "Open post",
+  "ar": "فتح المنشور",
+  "de": "Beitrag öffnen",
+  "fr": "Ouvrir la publication",
+  "it": "Apri post"
+ },
+ "CampaignDialogs.ad.title": {
+  "en": "New ad",
+  "ar": "إعلان جديد",
+  "de": "Neue Anzeige",
+  "fr": "Nouvelle annonce",
+  "it": "Nuovo annuncio"
+ },
+ "CampaignDialogs.ad.description": {
+  "en": "An ad promotes one post, with a call to action.",
+  "ar": "يروّج الإعلان لمنشور واحد مع عبارة حثّ على اتخاذ إجراء.",
+  "de": "Eine Anzeige bewirbt einen Beitrag mit einem Call-to-Action.",
+  "fr": "Une annonce promeut une publication, avec un appel à l’action.",
+  "it": "Un annuncio promuove un post, con un invito all’azione."
+ },
+ "CampaignDialogs.ad.name": {
+  "en": "Ad name",
+  "ar": "اسم الإعلان",
+  "de": "Name der Anzeige",
+  "fr": "Nom de l’annonce",
+  "it": "Nome dell’annuncio"
+ },
+ "CampaignDialogs.ad.namePlaceholder": {
+  "en": "e.g. White Friday – day 1",
+  "ar": "مثال: الجمعة البيضاء – اليوم الأول",
+  "de": "z. B. White Friday – Tag 1",
+  "fr": "p. ex. White Friday – jour 1",
+  "it": "es. White Friday – giorno 1"
+ },
+ "CampaignDialogs.ad.nameRequired": {
+  "en": "Name the ad",
+  "ar": "سمِّ الإعلان",
+  "de": "Benennen Sie die Anzeige",
+  "fr": "Nommez l’annonce",
+  "it": "Dai un nome all’annuncio"
+ },
+ "CampaignDialogs.ad.post": {
+  "en": "Post",
+  "ar": "المنشور",
+  "de": "Beitrag",
+  "fr": "Publication",
+  "it": "Post"
+ },
+ "CampaignDialogs.ad.noPost": {
+  "en": "No post yet.",
+  "ar": "لم يُختر منشور بعد.",
+  "de": "Noch kein Beitrag.",
+  "fr": "Aucune publication pour l’instant.",
+  "it": "Ancora nessun post."
+ },
+ "CampaignDialogs.ad.selectedPost": {
+  "en": "Post:",
+  "ar": "المنشور:",
+  "de": "Beitrag:",
+  "fr": "Publication :",
+  "it": "Post:"
+ },
+ "CampaignDialogs.ad.postRequired": {
+  "en": "Pick or write the post this ad promotes",
+  "ar": "اختر أو اكتب المنشور الذي يروّج له الإعلان",
+  "de": "Wählen oder schreiben Sie den beworbenen Beitrag",
+  "fr": "Choisissez ou rédigez la publication promue",
+  "it": "Scegli o scrivi il post promosso"
+ },
+ "CampaignDialogs.ad.cta": {
+  "en": "Call to action",
+  "ar": "عبارة الحثّ على الإجراء",
+  "de": "Call-to-Action",
+  "fr": "Appel à l’action",
+  "it": "Invito all’azione"
+ },
+ "CampaignDialogs.ad.add": {
+  "en": "Add ad",
+  "ar": "إضافة الإعلان",
+  "de": "Anzeige hinzufügen",
+  "fr": "Ajouter l’annonce",
+  "it": "Aggiungi annuncio"
+ },
+ "CampaignDialogs.platform.notConnected": {
+  "en": "Not connected",
+  "ar": "غير مرتبطة",
+  "de": "Nicht verbunden",
+  "fr": "Non connecté",
+  "it": "Non collegato"
+ },
+ "CampaignDialogs.platform.added": {
+  "en": "Already added",
+  "ar": "مُضافة بالفعل",
+  "de": "Bereits hinzugefügt",
+  "fr": "Déjà ajouté",
+  "it": "Già aggiunto"
+ },
+ "CampaignDialogs.platform.connectMore": {
+  "en": "Connect a platform",
+  "ar": "ربط منصة",
+  "de": "Plattform verbinden",
+  "fr": "Connecter une plateforme",
+  "it": "Collega una piattaforma"
+ },
+ "CampaignDialogs.messagePreview.title": {
+  "en": "Message preview",
+  "ar": "معاينة الرسالة",
+  "de": "Nachrichtenvorschau",
+  "fr": "Aperçu du message",
+  "it": "Anteprima del messaggio"
+ },
+ "CampaignDialogs.messagePreview.from": {
+  "en": "From {sender}",
+  "ar": "من {sender}",
+  "de": "Von {sender}",
+  "fr": "De {sender}",
+  "it": "Da {sender}"
+ },
+ "CampaignDialogs.messagePreview.to": {
+  "en": "To {recipient}",
+  "ar": "إلى {recipient}",
+  "de": "An {recipient}",
+  "fr": "À {recipient}",
+  "it": "A {recipient}"
+ },
+ "CampaignDialogs.messagePreview.chatFrom": {
+  "en": "{channel} from {sender}",
+  "ar": "{channel} من {sender}",
+  "de": "{channel} von {sender}",
+  "fr": "{channel} de {sender}",
+  "it": "{channel} da {sender}"
+ },
+ "CampaignDialogs.messagePreview.variables": {
+  "en": "Each '{{variable}}' is replaced with the contact's details when it's sent.",
+  "ar": "يُستبدل كل '{{variable}}' ببيانات جهة الاتصال عند الإرسال.",
+  "de": "Jede '{{variable}}' wird beim Senden durch die Daten des Kontakts ersetzt.",
+  "fr": "Chaque '{{variable}}' est remplacée par les données du contact à l’envoi.",
+  "it": "Ogni '{{variable}}' viene sostituita con i dati del contatto all’invio."
+ },
+ "CampaignDialogs.segment.title": {
+  "en": "Create segment",
+  "ar": "إنشاء شريحة",
+  "de": "Segment erstellen",
+  "fr": "Créer un segment",
+  "it": "Crea segmento"
+ },
+ "CampaignDialogs.segment.description": {
+  "en": "Keep the contacts that match all the rules you fill in.",
+  "ar": "تُبقي جهات الاتصال المطابقة لكل القواعد التي تملؤها.",
+  "de": "Behält die Kontakte, die zu allen ausgefüllten Regeln passen.",
+  "fr": "Conserve les contacts qui correspondent à toutes les règles renseignées.",
+  "it": "Mantiene i contatti che corrispondono a tutte le regole compilate."
+ },
+ "CampaignDialogs.segment.name": {
+  "en": "Name",
+  "ar": "الاسم",
+  "de": "Name",
+  "fr": "Nom",
+  "it": "Nome"
+ },
+ "CampaignDialogs.segment.namePlaceholder": {
+  "en": "e.g. Qualified leads",
+  "ar": "مثال: عملاء محتملون مؤهلون",
+  "de": "z. B. Qualifizierte Leads",
+  "fr": "p. ex. Prospects qualifiés",
+  "it": "es. Lead qualificati"
+ },
+ "CampaignDialogs.segment.nameRequired": {
+  "en": "Name the segment",
+  "ar": "سمِّ الشريحة",
+  "de": "Benennen Sie das Segment",
+  "fr": "Nommez le segment",
+  "it": "Dai un nome al segmento"
+ },
+ "CampaignDialogs.segment.descriptionLabel": {
+  "en": "Description",
+  "ar": "الوصف",
+  "de": "Beschreibung",
+  "fr": "Description",
+  "it": "Descrizione"
+ },
+ "CampaignDialogs.segment.source": {
+  "en": "Source",
+  "ar": "المصدر",
+  "de": "Quelle",
+  "fr": "Source",
+  "it": "Origine"
+ },
+ "CampaignDialogs.segment.sourcePlaceholder": {
+  "en": "e.g. Lead form",
+  "ar": "مثال: نموذج تسجيل",
+  "de": "z. B. Lead-Formular",
+  "fr": "p. ex. Formulaire",
+  "it": "es. Modulo"
+ },
+ "CampaignDialogs.segment.type": {
+  "en": "Type",
+  "ar": "النوع",
+  "de": "Typ",
+  "fr": "Type",
+  "it": "Tipo"
+ },
+ "CampaignDialogs.segment.typePlaceholder": {
+  "en": "e.g. Lead",
+  "ar": "مثال: عميل محتمل",
+  "de": "z. B. Lead",
+  "fr": "p. ex. Prospect",
+  "it": "es. Lead"
+ },
+ "CampaignDialogs.segment.interest": {
+  "en": "Interest",
+  "ar": "الاهتمام",
+  "de": "Interesse",
+  "fr": "Centre d’intérêt",
+  "it": "Interesse"
+ },
+ "CampaignDialogs.segment.interestPlaceholder": {
+  "en": "e.g. Automotive",
+  "ar": "مثال: السيارات",
+  "de": "z. B. Automobil",
+  "fr": "p. ex. Automobile",
+  "it": "es. Automotive"
+ },
+ "CampaignDialogs.segment.qualifiedOnly": {
+  "en": "Qualified contacts only",
+  "ar": "جهات الاتصال المؤهلة فقط",
+  "de": "Nur qualifizierte Kontakte",
+  "fr": "Contacts qualifiés uniquement",
+  "it": "Solo contatti qualificati"
+ },
+ "CampaignDialogs.segment.create": {
+  "en": "Create segment",
+  "ar": "إنشاء الشريحة",
+  "de": "Segment erstellen",
+  "fr": "Créer le segment",
+  "it": "Crea segmento"
+ }
+}

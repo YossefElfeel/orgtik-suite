@@ -1,0 +1,259 @@
+{
+  "System": {
+    "actions": "Azioni",
+    "staff": {
+      "title": "Staff e ruoli",
+      "description": "Chi in OrgTik può usare l'amministrazione OrgTik e cosa può fare ogni ruolo.",
+      "people": "Persone",
+      "person": "Persona",
+      "roles": "Ruoli",
+      "you": "Tu",
+      "noAccess": "Nessun accesso",
+      "empty": "Ancora nessun membro dello staff",
+      "editFor": "Modifica i ruoli di {name}",
+      "editTitle": "Ruoli di {name}",
+      "dialogHelp": "Le modifiche valgono dalla prossima pagina che la persona apre. Il registro attività le registra.",
+      "noRolesWarning": "Senza un ruolo, la persona non può aprire l'amministrazione OrgTik.",
+      "saveRoles": "Salva ruoli",
+      "saved": "Ruoli di {name} salvati",
+      "selfLocked": "Non puoi rimuovere il tuo ruolo di Super amministratore. Chiedi a un'altra persona con questo ruolo.",
+      "selfLockout": "Non puoi rimuovere il tuo ruolo di Super amministratore. Chiedi a un'altra persona con questo ruolo di farlo.",
+      "roleHelp": {
+        "super_admin": "Tutto, compresi staff e impostazioni.",
+        "finance": "Fatturazione, prezzi, imposte e report.",
+        "sales": "Clienti, pacchetti e coupon, preventivi.",
+        "support": "Ticket e spazi di lavoro dei clienti, per aiutarli.",
+        "service_mgr": "Servizi e tutte le richieste di servizio.",
+        "service_team": "Solo le richieste di servizio assegnate.",
+        "content": "Contenuti del sito web e modelli di messaggio.",
+        "product_mgr": "Strumenti, piani, suggerimenti e roadmap."
+      },
+      "matrixTitle": "Cosa può fare ogni ruolo",
+      "matrixHelp": "Definito dalla matrice dei permessi di OrgTik. Non si può modificare qui.",
+      "module": "Area",
+      "modules": {
+        "overview": "Panoramica",
+        "tools": "Strumenti e stato",
+        "plans": "Piani e funzioni",
+        "pricing": "Zone, valute e prezzi",
+        "bundles": "Pacchetti e coupon",
+        "workspaces": "Spazi di lavoro",
+        "billing": "Fatturazione",
+        "tax": "Imposte e gateway",
+        "services": "Servizi",
+        "tickets": "Ticket di assistenza",
+        "content": "Contenuti",
+        "suggestions": "Suggerimenti e roadmap",
+        "waitlist": "Lista d'attesa",
+        "templates": "Modelli",
+        "staff": "Staff e ruoli",
+        "reports": "Report",
+        "settings": "Impostazioni"
+      },
+      "levels": {
+        "full": "Completo",
+        "edit": "Modifica",
+        "assigned": "Solo assegnate",
+        "view": "Visualizzazione",
+        "none": "Nessun accesso"
+      }
+    },
+    "templates": {
+      "pageTitle": "Modelli di messaggio",
+      "description": "Le email e le notifiche che OrgTik invia ai clienti, in ogni lingua.",
+      "template": "Modello",
+      "languages": "Lingue",
+      "updated": "Ultima modifica",
+      "empty": "Nessun modello",
+      "editFor": "Modifica {name}",
+      "langMissing": "{lang}: mancante",
+      "fallsBack": "Le lingue mancanti vengono inviate in inglese ({count, plural, one {# lingua} other {# lingue}}).",
+      "missingNow": "Mancanti: {langs}. Chi usa queste lingue riceve la versione inglese.",
+      "allDone": "Scritto in tutte le lingue.",
+      "subject": "Oggetto",
+      "title": "Titolo",
+      "body": "Messaggio",
+      "bodyHelp": "Testo semplice. Inserisci una variabile tra doppie parentesi graffe, come indicato sopra.",
+      "variables": "Variabili disponibili",
+      "variablesHelp": "Ognuna viene sostituita con i dati del cliente all'invio del messaggio.",
+      "unknownVars": "Non è una variabile di questo modello: {vars}",
+      "saved": "Modello salvato",
+      "names": {
+        "trial_ending": "Fine della prova",
+        "payment_failed": "Pagamento non riuscito",
+        "read_only": "Spazio di lavoro in sola lettura",
+        "invoice_issued": "Fattura emessa",
+        "price_change": "Avviso di variazione prezzo",
+        "quote_ready": "Preventivo pronto",
+        "ticket_reply": "Risposta al ticket",
+        "invite": "Invito al team"
+      },
+      "channels": {
+        "email": "Email",
+        "in_app": "Nell'app",
+        "push": "Notifica push",
+        "sms": "SMS"
+      },
+      "langs": {
+        "en": "Inglese",
+        "ar": "Arabo",
+        "de": "Tedesco",
+        "fr": "Francese",
+        "it": "Italiano"
+      }
+    },
+    "reports": {
+      "title": "Report",
+      "description": "Ricavi ricorrenti, pagamenti, prove e abbandoni in tutti gli spazi di lavoro.",
+      "allUsd": "Tutti gli importi in USD",
+      "numbers": "Dati principali",
+      "mrr": "Ricavi ricorrenti mensili",
+      "mrrHint": "Righe a pagamento, al tasso di reporting di oggi",
+      "revenue": "Ricavi",
+      "revenueHint": "Pagamenti ricevuti, ciascuno al tasso del suo giorno",
+      "refunds": "Rimborsi",
+      "refundsHint": "Rimborsati ai clienti",
+      "trials": "Prove",
+      "trialsHint": "In corso ora",
+      "churn": "Abbandoni",
+      "churnHint": "{cancelling} in disdetta, {ended} terminati",
+      "byTool": "Ricavi ricorrenti per strumento",
+      "byCountry": "Ricavi ricorrenti per paese",
+      "chartHint": "Mensile, in USD",
+      "tool": "Strumento",
+      "country": "Paese",
+      "payments": "Pagamenti",
+      "rateNote": "Ogni pagamento mantiene il tasso di cambio del giorno in cui è stato pagato, quindi gli importi passati in USD non cambiano quando cambiano i tassi.",
+      "paidOn": "Pagato il",
+      "invoice": "Fattura",
+      "gateway": "Gateway",
+      "amount": "Importo pagato",
+      "rate": "Tasso del giorno",
+      "rateValue": "1 USD = {rate} {currency}",
+      "usdAmount": "In USD",
+      "noPayments": "Ancora nessun pagamento"
+    },
+    "settings": {
+      "title": "Impostazioni della piattaforma",
+      "description": "Regole valide per tutti gli spazi di lavoro e le domande ancora aperte.",
+      "viewOnly": "Sola lettura: solo il ruolo Super amministratore può modificare le impostazioni della piattaforma.",
+      "save": "Salva impostazioni",
+      "saved": "Impostazioni salvate",
+      "retention": "Conservazione dei dati",
+      "retentionHelp": "Per quanto tempo i dati rimossi vengono conservati prima dell'eliminazione definitiva.",
+      "toolDays": "Strumento rimosso",
+      "workspaceDays": "Spazio di lavoro disdetto",
+      "trashDays": "Cestino",
+      "backupDays": "Backup",
+      "daysUnit": "Giorni, da 0 a 365",
+      "dunning": "Pagamenti non riusciti",
+      "dunningHelp": "Cosa succede quando un pagamento di rinnovo non va a buon fine.",
+      "graceDays": "Periodo di tolleranza",
+      "graceDaysHelp": "Giorni in cui lo spazio di lavoro continua a funzionare",
+      "readOnlyAfterDays": "Sola lettura per",
+      "readOnlyAfterDaysHelp": "Giorni dopo il periodo di tolleranza",
+      "cancelAfterDays": "Disdici dopo",
+      "cancelAfterDaysHelp": "Giorni dal pagamento non riuscito; dopo il periodo di tolleranza",
+      "customers": "Prove, limiti, servizi e prezzi",
+      "trialReminders": "Promemoria della prova",
+      "trialRemindersHelp": "Giorni prima della fine di una prova, separati da virgole, ad es. 3, 1",
+      "limitWarnings": "Avvisi sui limiti",
+      "limitWarningsHelp": "Percentuali di utilizzo di un limite, separate da virgole, ad es. 80, 100",
+      "autoApproveDays": "Approvazione delle consegne di servizio",
+      "autoApproveDaysHelp": "Giorni prima che una consegna senza risposta del cliente venga approvata",
+      "noticeDays": "Preavviso di variazione prezzo",
+      "noticeDaysHelp": "Giorni di preavviso ai clienti prima di un aumento di prezzo",
+      "onePerTool": "Una prova per strumento per spazio di lavoro",
+      "onePerToolHelp": "Uno spazio di lavoro non può avviare una seconda prova dello stesso strumento.",
+      "gapsTitle": "Domande aperte",
+      "gapsHelp": "Decisioni ancora in attesa del product owner. Fino a ciascuna decisione la piattaforma usa il valore provvisorio.",
+      "decided": "Deciso",
+      "workingValue": "Valore provvisorio",
+      "workingValueHelp": "Usato finché la domanda non viene decisa.",
+      "noValue": "Ancora nessuno: non viene applicato nulla.",
+      "errors": {
+        "retention": "Inserisci da 0 a 365 giorni.",
+        "dunning": "Il periodo di tolleranza richiede almeno 1 giorno e la disdetta deve venire dopo.",
+        "cancelAfter": "Deve superare il periodo di tolleranza.",
+        "trial": "Inserisci giorni interi da 1 a 60, separati da virgole.",
+        "limits": "Inserisci percentuali da 1 a 100, separate da virgole.",
+        "services": "Inserisci almeno 1 giorno.",
+        "priceChange": "Inserisci 0 giorni o più."
+      },
+      "gaps": {
+        "seatModel": {
+          "title": "Come si contano le licenze",
+          "note": "A: un unico numero di licenze per lo spazio di lavoro su ogni strumento a utente. B: ogni strumento a utente fattura solo le persone che vi hanno accesso.",
+          "options": {
+            "0": "A: un unico numero di licenze per lo spazio di lavoro",
+            "1": "B: ogni strumento conta le persone che vi hanno accesso"
+          }
+        },
+        "taxDisplay": {
+          "title": "Prezzi con o senza imposte",
+          "note": "Se i prezzi vengono mostrati con le imposte incluse. La fatturazione elettronica dipende anche dalle entità legali di OrgTik.",
+          "options": {
+            "0": "Imposte incluse nei prezzi",
+            "1": "Imposte aggiunte al pagamento"
+          }
+        },
+        "addOns": {
+          "title": "Componenti aggiuntivi ed eccedenze",
+          "note": "Spazio di archiviazione, caselle email, crediti SMS e WhatsApp extra, venduti in aggiunta ai piani.",
+          "options": {
+            "0": "Offri componenti aggiuntivi",
+            "1": "Nessun componente aggiuntivo"
+          }
+        },
+        "generalPaid": {
+          "title": "Cosa sbloccano i piani a pagamento di General",
+          "note": "Gli extra che un piano General a pagamento offre a uno spazio di lavoro.",
+          "options": {
+            "0": "Più licenze, ruoli personalizzati, accesso in due passaggi obbligatorio, registro attività più lungo"
+          }
+        },
+        "hostingOps": {
+          "title": "Operazioni di hosting",
+          "note": "L'infrastruttura di hosting ed email richiede una specifica operativa dedicata.",
+          "options": {
+            "0": "Fuori ambito per ora"
+          }
+        },
+        "mailboxes": {
+          "title": "A chi appartengono le caselle email",
+          "note": "Consigliato: lo strumento Email gestisce ogni casella, e Hosting si collega a esso.",
+          "options": {
+            "0": "Lo strumento Email",
+            "1": "Hosting"
+          }
+        }
+      }
+    },
+    "audit": {
+      "title": "Registro attività",
+      "description": "Cosa ha modificato e consultato lo staff, dal più recente.",
+      "when": "Quando",
+      "who": "Chi",
+      "action": "Azione",
+      "target": "Su",
+      "detail": "Motivo e dettagli",
+      "empty": "Ancora nulla di registrato",
+      "emptyBody": "Qui compaiono le azioni dello staff, come le modifiche ai ruoli e la visualizzazione di uno spazio di lavoro.",
+      "actions": {
+        "view_as": "Visualizzazione di uno spazio di lavoro come cliente",
+        "tax_rule": "Modifica di una regola fiscale",
+        "staff_roles": "Modifica dei ruoli dello staff",
+        "settings": "Modifica delle impostazioni della piattaforma",
+        "service_assign": "Assegnazione di una richiesta di servizio",
+        "service_review": "Avvio della revisione di una richiesta",
+        "service_quote": "Invio di un preventivo",
+        "service_start": "Avvio del lavoro sul servizio",
+        "service_hold": "Messa in attesa di una richiesta",
+        "service_deliver": "Consegna di un servizio",
+        "service_milestone": "Aggiornamento di una fase",
+        "service_message": "Invio di un messaggio al cliente",
+        "service_cancel": "Annullamento di una richiesta di servizio"
+      }
+    }
+  }
+}

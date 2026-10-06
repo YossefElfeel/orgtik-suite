@@ -1,0 +1,184 @@
+{
+ "Suite.apps.global": {
+  "en": "Home",
+  "ar": "الرئيسية",
+  "de": "Start",
+  "fr": "Accueil",
+  "it": "Home"
+ },
+ "Suite.apps.file_manager": {
+  "en": "Files",
+  "ar": "الملفات",
+  "de": "Dateien",
+  "fr": "Fichiers",
+  "it": "File"
+ },
+ "Suite.apps.task_manager": {
+  "en": "Tasks",
+  "ar": "المهام",
+  "de": "Aufgaben",
+  "fr": "Tâches",
+  "it": "Attività"
+ },
+ "Suite.apps.hq": {
+  "en": "Chats",
+  "ar": "المحادثات",
+  "de": "Chats",
+  "fr": "Discussions",
+  "it": "Chat"
+ },
+ "Suite.apps.hr_system": {
+  "en": "HR",
+  "ar": "الموارد البشرية",
+  "de": "Personal",
+  "fr": "RH",
+  "it": "Risorse umane"
+ },
+ "Suite.apps.digital_marketing": {
+  "en": "Marketing",
+  "ar": "التسويق",
+  "de": "Marketing",
+  "fr": "Marketing",
+  "it": "Marketing"
+ },
+ "Suite.apps.sales": {
+  "en": "CRM",
+  "ar": "إدارة العملاء",
+  "de": "CRM",
+  "fr": "CRM",
+  "it": "CRM"
+ },
+ "Suite.apps.website_manager": {
+  "en": "Website",
+  "ar": "الموقع",
+  "de": "Website",
+  "fr": "Site web",
+  "it": "Sito web"
+ },
+ "Suite.apps.website_manager_legacy": {
+  "en": "Old CMS",
+  "ar": "نظام المحتوى القديم",
+  "de": "Altes CMS",
+  "fr": "Ancien CMS",
+  "it": "Vecchio CMS"
+ },
+ "Suite.appName": {
+  "en": "Marketing",
+  "ar": "التسويق",
+  "de": "Marketing",
+  "fr": "Marketing",
+  "it": "Marketing"
+ },
+ "Errors.reference": {
+  "en": "Reference:",
+  "ar": "المرجع:",
+  "de": "Referenz:",
+  "fr": "Référence :",
+  "it": "Riferimento:"
+ },
+ "Errors.retry": {
+  "en": "Try again",
+  "ar": "حاول مرة أخرى",
+  "de": "Erneut versuchen",
+  "fr": "Réessayer",
+  "it": "Riprova"
+ },
+ "Errors.toDashboard": {
+  "en": "Go to the dashboard",
+  "ar": "الذهاب إلى لوحة التحكم",
+  "de": "Zum Dashboard",
+  "fr": "Aller au tableau de bord",
+  "it": "Vai alla dashboard"
+ },
+ "Errors.toSuite": {
+  "en": "Go to your apps",
+  "ar": "الذهاب إلى تطبيقاتك",
+  "de": "Zu Ihren Apps",
+  "fr": "Aller à vos applications",
+  "it": "Vai alle tue app"
+ },
+ "Errors.handoffTitle": {
+  "en": "This sign-in link has expired",
+  "ar": "انتهت صلاحية رابط تسجيل الدخول هذا",
+  "de": "Dieser Anmeldelink ist abgelaufen",
+  "fr": "Ce lien de connexion a expiré",
+  "it": "Questo link di accesso è scaduto"
+ },
+ "Errors.noAccessTitle": {
+  "en": "You can't open this page",
+  "ar": "لا يمكنك فتح هذه الصفحة",
+  "de": "Sie können diese Seite nicht öffnen",
+  "fr": "Vous ne pouvez pas ouvrir cette page",
+  "it": "Non puoi aprire questa pagina"
+ },
+ "Feedback.saved": {
+  "en": "Changes saved",
+  "ar": "تم حفظ التغييرات",
+  "de": "Änderungen gespeichert",
+  "fr": "Modifications enregistrées",
+  "it": "Modifiche salvate"
+ },
+ "Feedback.forbidden": {
+  "en": "Your role doesn't allow this change",
+  "ar": "دورك لا يسمح بهذا التغيير",
+  "de": "Ihre Rolle erlaubt diese Änderung nicht",
+  "fr": "Votre rôle ne permet pas cette modification",
+  "it": "Il tuo ruolo non consente questa modifica"
+ },
+ "Feedback.gone": {
+  "en": "This no longer exists. Reload to see the latest.",
+  "ar": "هذا العنصر لم يعد موجودًا. أعد التحميل لترى أحدث نسخة.",
+  "de": "Das gibt es nicht mehr. Laden Sie neu, um den aktuellen Stand zu sehen.",
+  "fr": "Cet élément n’existe plus. Rechargez pour voir la dernière version.",
+  "it": "Questo elemento non esiste più. Ricarica per vedere la versione più recente."
+ },
+ "Feedback.conflict": {
+  "en": "Someone changed this at the same time. Reload and try again.",
+  "ar": "غيّر شخص آخر هذا العنصر في الوقت نفسه. أعد التحميل وحاول مرة أخرى.",
+  "de": "Jemand hat das gleichzeitig geändert. Laden Sie neu und versuchen Sie es erneut.",
+  "fr": "Quelqu’un a modifié cet élément en même temps. Rechargez et réessayez.",
+  "it": "Qualcuno l’ha modificato nello stesso momento. Ricarica e riprova."
+ },
+ "Feedback.tooLarge": {
+  "en": "The file is too large",
+  "ar": "الملف كبير جدًا",
+  "de": "Die Datei ist zu groß",
+  "fr": "Le fichier est trop volumineux",
+  "it": "Il file è troppo grande"
+ },
+ "Feedback.tooMany": {
+  "en": "Too many requests. Wait a moment and try again.",
+  "ar": "طلبات كثيرة جدًا. انتظر قليلًا ثم حاول مرة أخرى.",
+  "de": "Zu viele Anfragen. Warten Sie einen Moment und versuchen Sie es erneut.",
+  "fr": "Trop de requêtes. Patientez un instant et réessayez.",
+  "it": "Troppe richieste. Attendi un momento e riprova."
+ },
+ "Feedback.offline": {
+  "en": "Can't reach the server. Check your connection and try again.",
+  "ar": "تعذّر الوصول إلى الخادم. تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Der Server ist nicht erreichbar. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.",
+  "it": "Impossibile raggiungere il server. Controlla la connessione e riprova."
+ },
+ "Feedback.invalid": {
+  "en": "Some details aren't valid. Check the form and try again.",
+  "ar": "بعض البيانات غير صالحة. راجع النموذج وحاول مرة أخرى.",
+  "de": "Einige Angaben sind ungültig. Prüfen Sie das Formular und versuchen Sie es erneut.",
+  "fr": "Certaines informations ne sont pas valides. Vérifiez le formulaire et réessayez.",
+  "it": "Alcuni dati non sono validi. Controlla il modulo e riprova."
+ },
+ "Feedback.failed": {
+  "en": "That didn't work. Try again.",
+  "ar": "لم تنجح العملية. حاول مرة أخرى.",
+  "de": "Das hat nicht geklappt. Versuchen Sie es erneut.",
+  "fr": "Cela n’a pas fonctionné. Réessayez.",
+  "it": "Non ha funzionato. Riprova."
+ },
+ "Feedback.readOnly": {
+  "en": "You're viewing as someone else, so changes are turned off.",
+  "ar": "أنت تعرض بصفة شخص آخر، لذلك التعديل متوقف.",
+  "de": "Sie sehen die Ansicht einer anderen Person, deshalb sind Änderungen abgeschaltet.",
+  "fr": "Vous consultez en tant qu’une autre personne : les modifications sont désactivées.",
+  "it": "Stai visualizzando come un’altra persona, quindi le modifiche sono disattivate."
+ }
+}

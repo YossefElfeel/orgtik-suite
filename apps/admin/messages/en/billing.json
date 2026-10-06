@@ -1,0 +1,137 @@
+{
+  "Billing": {
+    "reason": "Reason",
+    "list": {
+      "title": "Invoices",
+      "description": "Every invoice, its payments and refunds, in the customer's currency and in USD.",
+      "filters": "Filter invoices",
+      "state": "State",
+      "allStates": "All states",
+      "workspace": "Workspace",
+      "allWorkspaces": "All workspaces",
+      "currency": "Currency",
+      "allCurrencies": "All currencies",
+      "clear": "Clear filters",
+      "colNumber": "Invoice",
+      "colWorkspace": "Workspace",
+      "colState": "State",
+      "colIssued": "Issued",
+      "notIssued": "Not issued",
+      "colDue": "Due",
+      "colTotal": "Total",
+      "colUsd": "In USD",
+      "pageTotal": "Billed on this page, in USD (drafts and void invoices left out):",
+      "noMatch": "No invoice matches these filters",
+      "empty": "No invoices yet",
+      "emptyBody": "Invoices show here once customers are billed, or when you create one."
+    },
+    "kind": {
+      "subscription": "Subscription",
+      "manual": "Manual"
+    },
+    "method": {
+      "bank_transfer": "Bank transfer",
+      "cash": "Cash",
+      "cheque": "Cheque",
+      "card": "Card",
+      "wallet": "Wallet",
+      "other": "Other"
+    },
+    "payment": {
+      "succeeded": "Succeeded",
+      "failed": "Failed"
+    },
+    "failure": {
+      "card_declined": "Card declined",
+      "card_expired": "Card expired",
+      "insufficient_funds": "Insufficient funds"
+    },
+    "actions": {
+      "issue": "Issue invoice",
+      "markPaid": "Mark paid",
+      "retry": "Retry payment",
+      "refund": "Refund",
+      "void": "Void invoice",
+      "more": "More actions for {number}"
+    },
+    "confirm": {
+      "issueTitle": "Issue {number}?",
+      "issueImpact": "The customer is sent this invoice for {amount}, due in 7 days. It can't be edited after that.",
+      "retryTitle": "Retry the payment of {number}?",
+      "retryImpact": "Charges {amount} to the workspace's default payment method now.",
+      "voidTitle": "Void {number}?",
+      "voidImpact": "The {amount} won't be collected; the invoice stays on record as void."
+    },
+    "done": {
+      "issue": "{number} issued",
+      "retry": "Payment of {number} went through",
+      "retryFailed": "The payment of {number} failed again",
+      "void": "{number} voided",
+      "markPaid": "{number} marked paid",
+      "refund": "Refunded {amount}; credit note {note}"
+    },
+    "markPaid": {
+      "title": "Mark {number} paid",
+      "impact": "Records a payment of {amount} made outside the gateway. Its tools become active again.",
+      "method": "Payment method",
+      "reference": "Reference",
+      "referenceHint": "The bank or receipt reference, to find the payment later."
+    },
+    "refund": {
+      "title": "Refund {number}",
+      "impact": "The refund is in the invoice's currency and creates a numbered credit note.",
+      "amount": "Amount ({currency})",
+      "upTo": "Up to {max}.",
+      "amountMin": "Enter an amount above 0.",
+      "overMax": "That's more than can be refunded. At most {max}."
+    },
+    "create": {
+      "open": "New invoice",
+      "title": "New manual invoice",
+      "description": "It's saved as a draft in the workspace's currency, with its country's tax. Issue it when it's ready.",
+      "workspace": "Workspace",
+      "pickWorkspace": "Choose a workspace",
+      "noWorkspace": "No workspace with that name",
+      "currency": "Billed in {currency}.",
+      "lines": "Lines",
+      "lineLabel": "Line {n}: description",
+      "lineAmount": "Line {n}: amount",
+      "pickFirst": "Choose a workspace first",
+      "removeLine": "Remove line {n}",
+      "addLine": "Add line",
+      "linesInvalid": "Each line needs a description and an amount above 0.",
+      "subtotal": "Subtotal before tax: {amount}",
+      "submit": "Save draft",
+      "done": "Draft {number} saved"
+    },
+    "detail": {
+      "notFound": "Invoice not found",
+      "notFoundBody": "The link may be wrong.",
+      "back": "Back to invoices",
+      "summary": "Summary",
+      "workspace": "Workspace",
+      "kind": "Kind",
+      "currency": "Currency",
+      "issued": "Issued",
+      "due": "Due",
+      "paid": "Paid",
+      "voided": "Voided",
+      "refundable": "Refundable",
+      "lines": "Lines",
+      "item": "Item",
+      "amount": "Amount",
+      "subtotal": "Subtotal",
+      "tax": "Tax",
+      "noTax": "No tax",
+      "total": "Total",
+      "refunded": "Refunded",
+      "payments": "Payments",
+      "gateway": "via",
+      "reference": "reference",
+      "usdRate": "USD rate {rate}",
+      "noPayments": "No payments yet.",
+      "creditNotes": "Credit notes",
+      "noCreditNotes": "No credit notes."
+    }
+  }
+}

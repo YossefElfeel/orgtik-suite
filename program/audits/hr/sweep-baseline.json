@@ -1,0 +1,1680 @@
+{
+  "app": "hr",
+  "as": "mona.adel@orgtik.test",
+  "combo": "en-light-1440",
+  "frozen": false,
+  "at": "2026-09-30T07:00:54.540Z",
+  "signIn": {
+    "ok": true,
+    "landed": "http://localhost:3004/en",
+    "ms": 3758
+  },
+  "results": [
+    {
+      "app": "hr",
+      "route": "/candidates",
+      "session": "signed-in",
+      "url": "/en/candidates",
+      "status": 200,
+      "final": "/en/candidates",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4170,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 1,
+      "axe_serious": 16,
+      "axe_rules": "color-contrast nested-interactive select-name",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 20,
+      "screenshot": "hr/shots/candidates__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/hiring/jobs",
+      "session": "signed-in",
+      "url": "/en/hiring/jobs",
+      "status": 200,
+      "final": "/en/hiring/jobs",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 5772,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 25,
+      "axe_rules": "color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 11,
+      "screenshot": "hr/shots/hiring_jobs__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 17,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 8,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/hiring/overall",
+      "session": "signed-in",
+      "url": "/en/hiring/overall",
+      "status": 200,
+      "final": "/en/hiring/overall",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3492,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 27,
+      "axe_rules": "color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/hiring_overall__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 25,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/rejected",
+      "session": "signed-in",
+      "url": "/en/rejected",
+      "status": 200,
+      "final": "/en/rejected",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3042,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 12,
+      "axe_rules": "color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 10,
+      "screenshot": "hr/shots/rejected__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 11,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/attendance",
+      "session": "signed-in",
+      "url": "/en/attendance",
+      "status": 200,
+      "final": "/en/attendance",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 5702,
+      "console_errors": 10,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 29,
+      "axe_rules": "color-contrast list nested-interactive scrollable-region-focusable select-name",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/attendance__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "list",
+          "impact": "serious",
+          "nodes": 3,
+          "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Scrollable region must have keyboard access"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 3,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/calendar/leave-balances",
+      "session": "signed-in",
+      "url": "/en/calendar/leave-balances",
+      "status": 200,
+      "final": "/en/calendar/leave-balances",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 6426,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 11,
+      "axe_serious": 39,
+      "axe_rules": "aria-command-name button-name color-contrast nested-interactive select-name",
+      "h1": 1,
+      "unnamed_controls": 28,
+      "img_no_alt": 0,
+      "small_targets": 12,
+      "screenshot": "hr/shots/calendar_leave-balances__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-command-name",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "ARIA commands must have an accessible name"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 10,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 16,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 13,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/calendar",
+      "session": "signed-in",
+      "url": "/en/calendar",
+      "status": 200,
+      "final": "/en/calendar",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4199,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 1,
+      "axe_serious": 8,
+      "axe_rules": "button-name color-contrast nested-interactive",
+      "h1": 2,
+      "unnamed_controls": 9,
+      "img_no_alt": 0,
+      "small_targets": 18,
+      "screenshot": "hr/shots/calendar__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/configuration",
+      "session": "signed-in",
+      "url": "/en/configuration",
+      "status": 200,
+      "final": "/en/configuration",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3696,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 17,
+      "axe_serious": 25,
+      "axe_rules": "button-name color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 26,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/configuration__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 17,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 19,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/department",
+      "session": "signed-in",
+      "url": "/en/department",
+      "status": 200,
+      "final": "/en/department",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4691,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 20,
+      "axe_serious": 33,
+      "axe_rules": "aria-command-name button-name color-contrast link-name nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 44,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/department__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-command-name",
+          "impact": "serious",
+          "nodes": 8,
+          "help": "ARIA commands must have an accessible name"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 20,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 7,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "nodes": 8,
+          "help": "Links must have discernible text"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/employees/org-chart",
+      "session": "signed-in",
+      "url": "/en/employees/org-chart",
+      "status": 200,
+      "final": "/en/employees/org-chart",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4579,
+      "console_errors": 20,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 8,
+      "axe_rules": "color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 2,
+      "screenshot": "hr/shots/employees_org-chart__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/employees",
+      "session": "signed-in",
+      "url": "/en/employees",
+      "status": 200,
+      "final": "/en/employees",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3964,
+      "console_errors": 20,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 21,
+      "axe_serious": 29,
+      "axe_rules": "aria-command-name button-name color-contrast nested-interactive select-name",
+      "h1": 1,
+      "unnamed_controls": 49,
+      "img_no_alt": 0,
+      "small_targets": 12,
+      "screenshot": "hr/shots/employees__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-command-name",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "ARIA commands must have an accessible name"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 20,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 13,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/finance-queue",
+      "session": "signed-in",
+      "url": "/en/finance-queue",
+      "status": 200,
+      "final": "/en/finance-queue",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4440,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 10,
+      "axe_rules": "aria-toggle-field-name button-name color-contrast link-name nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 14,
+      "img_no_alt": 0,
+      "small_targets": 6,
+      "screenshot": "hr/shots/finance-queue__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-toggle-field-name",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "ARIA toggle fields must have an accessible name"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 3,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Links must have discernible text"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/loans",
+      "session": "signed-in",
+      "url": "/en/loans",
+      "status": 200,
+      "final": "/en/loans",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 6710,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 6,
+      "axe_serious": 32,
+      "axe_rules": "aria-command-name button-name color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 20,
+      "img_no_alt": 0,
+      "small_targets": 6,
+      "screenshot": "hr/shots/loans__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-command-name",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "ARIA commands must have an accessible name"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 6,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 17,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 9,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/my-payslips",
+      "session": "signed-in",
+      "url": "/en/my-payslips",
+      "status": 200,
+      "final": "/en/my-payslips",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3281,
+      "console_errors": 10,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 6,
+      "axe_serious": 7,
+      "axe_rules": "aria-allowed-attr button-name color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 12,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/my-payslips__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 4,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/",
+      "session": "signed-in",
+      "url": "/en",
+      "status": 200,
+      "final": "/en/attendance",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4362,
+      "console_errors": 28,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 29,
+      "axe_rules": "color-contrast list nested-interactive scrollable-region-focusable select-name",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/root__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "list",
+          "impact": "serious",
+          "nodes": 3,
+          "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Scrollable region must have keyboard access"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 3,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/payroll",
+      "session": "signed-in",
+      "url": "/en/payroll",
+      "status": 200,
+      "final": "/en/payroll",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3584,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 2,
+      "axe_serious": 8,
+      "axe_rules": "color-contrast nested-interactive select-name",
+      "h1": 0,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/payroll__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 7,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/projects",
+      "session": "signed-in",
+      "url": "/en/projects",
+      "status": 200,
+      "final": "/en/projects",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3362,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 1,
+      "axe_serious": 12,
+      "axe_rules": "color-contrast nested-interactive select-name",
+      "h1": 0,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/projects__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/subscriptions",
+      "session": "signed-in",
+      "url": "/en/subscriptions",
+      "status": 200,
+      "final": "/en/subscriptions",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4758,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 16,
+      "axe_serious": 16,
+      "axe_rules": "aria-toggle-field-name button-name color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 32,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/subscriptions__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-toggle-field-name",
+          "impact": "serious",
+          "nodes": 8,
+          "help": "ARIA toggle fields must have an accessible name"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 16,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/tickets",
+      "session": "signed-in",
+      "url": "/en/tickets",
+      "status": 200,
+      "final": "/en/tickets",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3542,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 20,
+      "axe_serious": 57,
+      "axe_rules": "aria-command-name button-name color-contrast link-name nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 48,
+      "img_no_alt": 0,
+      "small_targets": 12,
+      "screenshot": "hr/shots/tickets__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-command-name",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "ARIA commands must have an accessible name"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 20,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 24,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "Links must have discernible text"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 13,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/time-off",
+      "session": "signed-in",
+      "url": "/en/time-off",
+      "status": 200,
+      "final": "/en/time-off",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4129,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 11,
+      "axe_serious": 39,
+      "axe_rules": "aria-command-name button-name color-contrast nested-interactive select-name",
+      "h1": 1,
+      "unnamed_controls": 28,
+      "img_no_alt": 0,
+      "small_targets": 10,
+      "screenshot": "hr/shots/time-off__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-command-name",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "ARIA commands must have an accessible name"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 10,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 17,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 12,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/candidates/:id",
+      "session": "signed-in",
+      "url": "/en/candidates/6",
+      "status": 200,
+      "final": "/en/candidates/6",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3865,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 8,
+      "axe_rules": "button-name color-contrast nested-interactive",
+      "h1": 0,
+      "unnamed_controls": 11,
+      "img_no_alt": 0,
+      "small_targets": 3,
+      "screenshot": "hr/shots/candidates_id__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 3,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/hiring/overall/:openingId",
+      "session": "signed-in",
+      "url": "/en/hiring/overall/6",
+      "status": 200,
+      "final": "/en/hiring/overall/6",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3718,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 11,
+      "axe_rules": "color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 4,
+      "screenshot": "hr/shots/hiring_overall_openingId__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 8,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 3,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/department/:id",
+      "session": "signed-in",
+      "url": "/en/department/1",
+      "status": 200,
+      "final": "/en/department/1",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4156,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 15,
+      "axe_serious": 28,
+      "axe_rules": "aria-command-name button-name color-contrast link-name nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 33,
+      "img_no_alt": 0,
+      "small_targets": 5,
+      "screenshot": "hr/shots/department_id__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-command-name",
+          "impact": "serious",
+          "nodes": 5,
+          "help": "ARIA commands must have an accessible name"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 15,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 11,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "nodes": 5,
+          "help": "Links must have discernible text"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 7,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/employees/:id",
+      "session": "signed-in",
+      "url": "/en/employees/16",
+      "status": 200,
+      "final": "/en/employees/16",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4720,
+      "console_errors": 12,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 2,
+      "axe_serious": 10,
+      "axe_rules": "aria-allowed-attr color-contrast list nested-interactive select-name",
+      "h1": 1,
+      "unnamed_controls": 9,
+      "img_no_alt": 0,
+      "small_targets": 2,
+      "screenshot": "hr/shots/employees_id__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "list",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 3,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/finance-queue/:id",
+      "session": "signed-in",
+      "url": "/en/finance-queue/2",
+      "status": 200,
+      "final": "/en/finance-queue/2",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4380,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 1,
+      "axe_serious": 28,
+      "axe_rules": "color-contrast nested-interactive select-name",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/finance-queue_id__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 26,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/payroll/:id",
+      "session": "signed-in",
+      "url": "/en/payroll/5",
+      "status": 200,
+      "final": "/en/payroll/5",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4123,
+      "console_errors": 9,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 11,
+      "axe_rules": "color-contrast nested-interactive",
+      "h1": 2,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/payroll_id__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/payroll/loans/:id",
+      "session": "signed-in",
+      "url": "",
+      "status": "",
+      "final": "",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "no sample link found",
+      "load_ms": "",
+      "console_errors": "",
+      "page_errors": "",
+      "api_errors": "",
+      "api_error_sample": "",
+      "axe_critical": "",
+      "axe_serious": "",
+      "axe_rules": "",
+      "h1": "",
+      "unnamed_controls": "",
+      "img_no_alt": "",
+      "small_targets": "",
+      "screenshot": ""
+    },
+    {
+      "app": "hr",
+      "route": "/tickets/:id",
+      "session": "signed-in",
+      "url": "/en/tickets/1010",
+      "status": 200,
+      "final": "/en/tickets/1010",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3688,
+      "console_errors": 18,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 22,
+      "axe_rules": "aria-input-field-name color-contrast dlitem nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/tickets_id__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js",
+        "IntlError: MISSING_MESSAGE: Could not resolve `sidebar.Finance` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js:22594:23)\n    at translateBaseFn (http://localhost:3004/_next/static/chunks/node_modules_0nqr88_._.js"
+      ],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-input-field-name",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "ARIA input fields must have an accessible name"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 8,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "dlitem",
+          "impact": "serious",
+          "nodes": 12,
+          "help": "<dt> and <dd> elements must be contained by a <dl>"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "hr",
+      "route": "/*rest",
+      "session": "signed-in",
+      "url": "/en/audit-missing-page",
+      "status": 200,
+      "final": "/en/audit-missing-page",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 6167,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_rules": "",
+      "h1": 1,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "hr/shots/_rest__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": []
+    },
+    {
+      "app": "hr",
+      "route": "/auth/not-allowed",
+      "session": "signed-out",
+      "url": "/en/auth/not-allowed",
+      "status": 200,
+      "final": "/en/auth/not-allowed",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2630,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_rules": "",
+      "h1": 1,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/auth_not-allowed__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": []
+    },
+    {
+      "app": "hr",
+      "route": "/auth",
+      "session": "signed-out",
+      "url": "/en/auth",
+      "status": 200,
+      "final": "/",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 1917,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 2,
+      "axe_rules": "document-title html-has-lang",
+      "h1": 0,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "hr/shots/auth__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "document-title",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Documents must have <title> element to aid in navigation"
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "<html> element must have a lang attribute"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1159 @@
+{
+  "app": "content",
+  "as": "mona.adel@orgtik.test",
+  "combo": "en-light-1440",
+  "frozen": false,
+  "at": "2026-09-30T08:36:23.205Z",
+  "signIn": {
+    "ok": true,
+    "landed": "http://localhost:3006/en",
+    "ms": 4508
+  },
+  "results": [
+    {
+      "app": "content",
+      "route": "/blogs/add",
+      "session": "signed-in",
+      "url": "/en/blogs/add",
+      "status": 200,
+      "final": "/en/blogs/add",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4893,
+      "console_errors": 0,
+      "page_errors": 2,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 5,
+      "axe_serious": 4,
+      "axe_rules": "aria-allowed-attr button-name color-contrast nested-interactive target-size",
+      "h1": 1,
+      "unnamed_controls": 11,
+      "img_no_alt": 0,
+      "small_targets": 2,
+      "screenshot": "content/shots/blogs_add__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random",
+        "Property description must be an object: undefined"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 3,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "target-size",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "All touch targets must be 24px large, or leave sufficient space"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/blogs",
+      "session": "signed-in",
+      "url": "/en/blogs",
+      "status": 200,
+      "final": "/en/blogs",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2902,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 16,
+      "axe_serious": 11,
+      "axe_rules": "aria-allowed-attr aria-valid-attr-value button-name color-contrast link-name select-name",
+      "h1": 1,
+      "unnamed_controls": 29,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "content/shots/blogs__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "aria-valid-attr-value",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "ARIA attributes must conform to valid values"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 13,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "Links must have discernible text"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/contacts",
+      "session": "signed-in",
+      "url": "/en/contacts",
+      "status": 200,
+      "final": "/en/contacts",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3332,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 23,
+      "axe_serious": 21,
+      "axe_rules": "aria-allowed-attr button-name color-contrast link-name select-name",
+      "h1": 1,
+      "unnamed_controls": 38,
+      "img_no_alt": 0,
+      "small_targets": 11,
+      "screenshot": "content/shots/contacts__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 21,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 11,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "Links must have discernible text"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/gallery",
+      "session": "signed-in",
+      "url": "/en/gallery",
+      "status": 200,
+      "final": "/en/gallery",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3337,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 9,
+      "axe_rules": "aria-allowed-attr button-name color-contrast select-name",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "content/shots/gallery__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 9,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/jobs",
+      "session": "signed-in",
+      "url": "/en/jobs",
+      "status": 200,
+      "final": "/en/jobs",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3096,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 2,
+      "axe_serious": 1,
+      "axe_rules": "aria-allowed-attr button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "content/shots/jobs__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/",
+      "session": "signed-in",
+      "url": "/en",
+      "status": 200,
+      "final": "/en",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2651,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 2,
+      "axe_serious": 5,
+      "axe_rules": "aria-allowed-attr button-name color-contrast scrollable-region-focusable",
+      "h1": 0,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "content/shots/root__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 4,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Scrollable region must have keyboard access"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/projects/add",
+      "session": "signed-in",
+      "url": "/en/projects/add",
+      "status": 200,
+      "final": "/en/projects/add",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3245,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 3,
+      "axe_rules": "aria-allowed-attr button-name color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 10,
+      "img_no_alt": 0,
+      "small_targets": 2,
+      "screenshot": "content/shots/projects_add__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/projects",
+      "session": "signed-in",
+      "url": "/en/projects",
+      "status": 200,
+      "final": "/en/projects",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3452,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 14,
+      "axe_serious": 1,
+      "axe_rules": "aria-allowed-attr aria-valid-attr-value button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 19,
+      "img_no_alt": 0,
+      "small_targets": 11,
+      "screenshot": "content/shots/projects__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "aria-valid-attr-value",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "ARIA attributes must conform to valid values"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 12,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/reviews",
+      "session": "signed-in",
+      "url": "/en/reviews",
+      "status": 200,
+      "final": "/en/reviews",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3206,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 33,
+      "axe_serious": 16,
+      "axe_rules": "aria-allowed-attr button-name color-contrast select-name",
+      "h1": 1,
+      "unnamed_controls": 38,
+      "img_no_alt": 0,
+      "small_targets": 11,
+      "screenshot": "content/shots/reviews__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 31,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 16,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/seo",
+      "session": "signed-in",
+      "url": "/en/seo",
+      "status": 200,
+      "final": "/en/seo",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3765,
+      "console_errors": 68,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 1,
+      "axe_rules": "aria-allowed-attr button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 9,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "content/shots/seo__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `SeoPage.blog_seo_title` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3006/_next/static/chunks/node_modules_1kz1h66._.js:17954:23)\n    at translateBaseFn (http://localhost:3006/_next/static/chunks/node_modules_1kz1h",
+        "IntlError: MISSING_MESSAGE: Could not resolve `SeoPage.blog_seo_title` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3006/_next/static/chunks/node_modules_1kz1h66._.js:17954:23)\n    at translateBaseFn (http://localhost:3006/_next/static/chunks/node_modules_1kz1h",
+        "IntlError: MISSING_MESSAGE: Could not resolve `SeoPage.blog_seo_desc` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3006/_next/static/chunks/node_modules_1kz1h66._.js:17954:23)\n    at translateBaseFn (http://localhost:3006/_next/static/chunks/node_modules_1kz1h6",
+        "IntlError: MISSING_MESSAGE: Could not resolve `SeoPage.blog_seo_desc` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3006/_next/static/chunks/node_modules_1kz1h66._.js:17954:23)\n    at translateBaseFn (http://localhost:3006/_next/static/chunks/node_modules_1kz1h6",
+        "IntlError: MISSING_MESSAGE: Could not resolve `SeoPage.blog_seo_title` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3006/_next/static/chunks/node_modules_1kz1h66._.js:17954:23)\n    at translateBaseFn (http://localhost:3006/_next/static/chunks/node_modules_1kz1h"
+      ],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/services",
+      "session": "signed-in",
+      "url": "/en/services",
+      "status": 200,
+      "final": "/en/services",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3652,
+      "console_errors": 1,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 13,
+      "axe_serious": 1,
+      "axe_rules": "aria-allowed-attr aria-valid-attr-value button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 18,
+      "img_no_alt": 0,
+      "small_targets": 6,
+      "screenshot": "content/shots/services__en-light-1440.png",
+      "console": [
+        "Each child in a list should have a unique \"key\" prop.%s%s See https://react.dev/link/warning-keys for more information. \n\nCheck the render method of `ForwardRef(motion.div)`.  It was passed a child from DemoPage."
+      ],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "aria-valid-attr-value",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "ARIA attributes must conform to valid values"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 11,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/sitemap/blogs/add",
+      "session": "signed-in",
+      "url": "/en/sitemap/blogs/add",
+      "status": 200,
+      "final": "/en/sitemap/blogs/add",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3569,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 3,
+      "axe_rules": "aria-allowed-attr button-name color-contrast nested-interactive target-size",
+      "h1": 1,
+      "unnamed_controls": 9,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "content/shots/sitemap_blogs_add__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "target-size",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "All touch targets must be 24px large, or leave sufficient space"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/sitemap/blogs",
+      "session": "signed-in",
+      "url": "/en/sitemap/blogs",
+      "status": 200,
+      "final": "/en/sitemap/blogs",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2802,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 4,
+      "axe_serious": 1,
+      "axe_rules": "aria-allowed-attr aria-valid-attr-value button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "content/shots/sitemap_blogs__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "aria-valid-attr-value",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "ARIA attributes must conform to valid values"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/sitemap/categories",
+      "session": "signed-in",
+      "url": "/en/sitemap/categories",
+      "status": 200,
+      "final": "/en/sitemap/categories",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2897,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 1,
+      "axe_rules": "aria-allowed-attr aria-valid-attr-value button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "content/shots/sitemap_categories__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "aria-valid-attr-value",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "ARIA attributes must conform to valid values"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/blogs/edit/:id",
+      "session": "signed-in",
+      "url": "",
+      "status": "",
+      "final": "",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "no sample link found",
+      "load_ms": "",
+      "console_errors": "",
+      "page_errors": "",
+      "api_errors": "",
+      "api_error_sample": "",
+      "axe_critical": "",
+      "axe_serious": "",
+      "axe_rules": "",
+      "h1": "",
+      "unnamed_controls": "",
+      "img_no_alt": "",
+      "small_targets": "",
+      "screenshot": ""
+    },
+    {
+      "app": "content",
+      "route": "/contacts/:contactsId",
+      "session": "signed-in",
+      "url": "/en/contacts/18",
+      "status": 200,
+      "final": "/en/contacts/18",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3221,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 1,
+      "axe_rules": "aria-allowed-attr button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 9,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "content/shots/contacts_contactsId__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/content/:sectionId",
+      "session": "signed-in",
+      "url": "",
+      "status": "",
+      "final": "",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "no sample link found",
+      "load_ms": "",
+      "console_errors": "",
+      "page_errors": "",
+      "api_errors": "",
+      "api_error_sample": "",
+      "axe_critical": "",
+      "axe_serious": "",
+      "axe_rules": "",
+      "h1": "",
+      "unnamed_controls": "",
+      "img_no_alt": "",
+      "small_targets": "",
+      "screenshot": ""
+    },
+    {
+      "app": "content",
+      "route": "/projects/edit/:id",
+      "session": "signed-in",
+      "url": "/en/projects/edit/10",
+      "status": 200,
+      "final": "/en/projects/edit/10",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3373,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 3,
+      "axe_rules": "aria-allowed-attr button-name color-contrast nested-interactive",
+      "h1": 1,
+      "unnamed_controls": 9,
+      "img_no_alt": 0,
+      "small_targets": 2,
+      "screenshot": "content/shots/projects_edit_id__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Interactive controls must not be nested"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/services/:serviceId/sub-services/:id",
+      "session": "signed-in",
+      "url": "",
+      "status": "",
+      "final": "",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "no sample link found",
+      "load_ms": "",
+      "console_errors": "",
+      "page_errors": "",
+      "api_errors": "",
+      "api_error_sample": "",
+      "axe_critical": "",
+      "axe_serious": "",
+      "axe_rules": "",
+      "h1": "",
+      "unnamed_controls": "",
+      "img_no_alt": "",
+      "small_targets": "",
+      "screenshot": ""
+    },
+    {
+      "app": "content",
+      "route": "/services/:serviceId/sub-services",
+      "session": "signed-in",
+      "url": "/en/services/1/sub-services",
+      "status": 200,
+      "final": "/en/services/1/sub-services",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3268,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 6,
+      "axe_serious": 3,
+      "axe_rules": "aria-allowed-attr aria-valid-attr-value button-name color-contrast target-size",
+      "h1": 1,
+      "unnamed_controls": 11,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "content/shots/services_serviceId_sub-services__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "aria-valid-attr-value",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "ARIA attributes must conform to valid values"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 4,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "target-size",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "All touch targets must be 24px large, or leave sufficient space"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/sitemap/blogs/edit/:id",
+      "session": "signed-in",
+      "url": "/en/sitemap/blogs/edit/3",
+      "status": 200,
+      "final": "/en/sitemap/blogs/edit/3",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3609,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 3,
+      "axe_serious": 2,
+      "axe_rules": "aria-allowed-attr button-name nested-interactive target-size",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "content/shots/sitemap_blogs_edit_id__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "nested-interactive",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Interactive controls must not be nested"
+        },
+        {
+          "id": "target-size",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "All touch targets must be 24px large, or leave sufficient space"
+        }
+      ]
+    },
+    {
+      "app": "content",
+      "route": "/auth/not-allowed",
+      "session": "signed-out",
+      "url": "/en/auth/not-allowed",
+      "status": 0,
+      "final": "",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "page.goto: net::ERR_CONNECTION_REFUSED at http://localhost:3006/en/auth/not-allowed",
+      "load_ms": 18,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": "",
+      "axe_serious": "",
+      "axe_rules": "",
+      "h1": "",
+      "unnamed_controls": "",
+      "img_no_alt": "",
+      "small_targets": "",
+      "screenshot": "",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": []
+    },
+    {
+      "app": "content",
+      "route": "/auth",
+      "session": "signed-out",
+      "url": "/en/auth",
+      "status": 200,
+      "final": "/en/auth",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 1919,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_rules": "",
+      "h1": 0,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "content/shots/auth__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": []
+    }
+  ]
+}

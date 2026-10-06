@@ -1,0 +1,72 @@
+{
+  "Workspace": {
+    "switchLabel": "Spazio di lavoro: {name}. Cambia spazio",
+    "yourWorkspaces": "I tuoi spazi di lavoro",
+    "roles": {
+      "owner": "Proprietario",
+      "admin": "Amministratore",
+      "member": "Membro",
+      "guest": "Ospite"
+    },
+    "nav": {
+      "tools": "Strumenti e piani",
+      "team": "Team",
+      "services": "Servizi",
+      "support": "Assistenza",
+      "notifications": "Notifiche",
+      "billingSection": "Fatturazione",
+      "subscriptions": "Abbonamenti",
+      "invoices": "Fatture",
+      "paymentMethods": "Metodi di pagamento",
+      "billingDetails": "Dati di fatturazione",
+      "settingsSection": "Spazio di lavoro",
+      "workspaceSettings": "Impostazioni dello spazio",
+      "adminSection": "Amministrazione OrgTik"
+    },
+    "banner": {
+      "suspended": {
+        "title": "Questo spazio di lavoro è sospeso",
+        "body": "Non si può modificare nulla finché non viene riattivato. Contatta l'assistenza."
+      },
+      "read_only": {
+        "title": "{tool} è in sola lettura",
+        "body": "Il rinnovo non è stato pagato: il team può vedere {tool} ma non modificarlo. Paga per sbloccarlo."
+      },
+      "payment_failed": {
+        "title": "Il rinnovo di {tool} non è andato a buon fine",
+        "body": "Aggiorna la carta o paga entro il {date} per mantenere l'accesso completo."
+      },
+      "trial_ending": {
+        "title": "La prova di {tool} termina il {date}",
+        "body": "Scegli un piano per continuare senza interruzioni."
+      },
+      "beta_billing": {
+        "title": "{tool} è in beta",
+        "body": "I piani a pagamento partono al lancio. Il codice {coupon} dà uno sconto ai primi utenti."
+      },
+      "price_change": {
+        "title": "Il prezzo di {tool} cambia il {date}",
+        "body": "Fino ad allora resta il prezzo attuale. Scopri cosa cambia."
+      },
+      "downgrade_scheduled": {
+        "title": "{tool} passa a un piano inferiore il {date}",
+        "body": "Fino ad allora mantieni tutto ciò che include il piano attuale."
+      },
+      "actions": {
+        "pay_now": "Paga ora",
+        "choose_plan": "Scegli un piano",
+        "view_plans": "Vedi i piani",
+        "details": "Vedi dettagli",
+        "cancel_downgrade": "Mantieni il piano",
+        "contact_support": "Contatta l'assistenza"
+      }
+    },
+    "gate": {
+      "title": "Questa pagina è per il ruolo “{role}”",
+      "body": "Il tuo ruolo in {name} non la include. Chiedi al proprietario se ti serve.",
+      "toHome": "Torna alla home",
+      "failedTitle": "Impossibile caricare il tuo spazio",
+      "failedBody": "Controlla la connessione e riprova."
+    }
+  }
+}

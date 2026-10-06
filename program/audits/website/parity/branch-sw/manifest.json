@@ -1,0 +1,81 @@
+{
+  "label": "branch-sw",
+  "site": "http://localhost:4173",
+  "commit": {
+    "head": "e6c6c58",
+    "dirty": false
+  },
+  "at": "2026-09-30T15:06:22.029Z",
+  "clock": {
+    "start": "2026-09-29T06:00:00.000Z",
+    "settleMs": 15000
+  },
+  "widths": [
+    1440
+  ],
+  "captures": [
+    {
+      "name": "services__service_it-support_software-support__1440",
+      "route": "/services#/service/it-support/software-support",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__1440",
+      "route": "/software",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__plans_single_annual_hr__1440",
+      "route": "/software#/plans/single/annual/hr",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_crm__1440",
+      "route": "/software#/product/crm",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_files__1440",
+      "route": "/software#/product/files",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_hr__1440",
+      "route": "/software#/product/hr",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_marketing__1440",
+      "route": "/software#/product/marketing",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_tasks__1440",
+      "route": "/software#/product/tasks",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "software__product_website__1440",
+      "route": "/software#/product/website",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    }
+  ]
+}

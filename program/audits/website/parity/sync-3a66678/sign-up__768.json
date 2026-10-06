@@ -1,0 +1,17 @@
+{
+  "route": "/sign-up",
+  "width": 768,
+  "rendered": true,
+  "errors": [],
+  "text": "Skip to content\nView project\n0\nEN\nMenu\nSign in\nSign up\nCreate your account\nCreate your OrgTik customer account.\nYour name\nWork email\nPassword\nConfirm password\nCreate account\nAccount access is simulated in this environment.\nBack to top\nMake the next move matter.\nStrategy, design, and technology brought together around one clear ambition: moving your business forward.\nTalk to us\nExplore\nSoftware\nServices\nSelected work\nInsights\nAbout OrgTik\nStart here\nBuild a software plan\nPlans & pricing\nTell us about your project\nRoadmap\nSitemap\nMade in Switzerland\n© 2026 OrgTik.\nIndependent digital partner\nStrategy. Design. Technology.",
+  "headings": [
+    "h1 Create your account",
+    "h2 Make the next move matter.",
+    "h3 Explore",
+    "h3 Start here",
+    "h2 Choose a version"
+  ],
+  "aria": "- link \"Skip to content\":\n- text: View project\n- banner:\n  - link \"OrgTik\":\n    - img \"OrgTik\"\n  - link \"Cart, 0 plans\":\n    - text: \"0\"\n  - button \"Language, English\": EN\n  - button \"Open menu\": Menu\n- main:\n  - tablist \"Account access\":\n    - tab \"Sign in\"\n    - tab \"Sign up\" [selected]\n  - tabpanel \"Sign up\":\n    - heading \"Create your account\" [level=1]\n    - paragraph: Create your OrgTik customer account.\n    - text: Your name\n    - textbox \"Your name\":\n      - /placeholder: Alex Morgan\n    - text: Work email\n    - textbox \"Work email\":\n      - /placeholder: alex@example.com\n    - text: Password\n    - textbox \"Password\":\n      - /placeholder: ••••••••\n    - text: Confirm password\n    - textbox \"Confirm password\":\n      - /placeholder: ••••••••\n    - button \"Create account\"\n    - paragraph: Account access is simulated in this environment.\n- contentinfo:\n  - link \"OrgTik home\":\n    - img \"OrgTik\"\n  - link \"Back to top\":\n  - heading \"Make the next move matter.\" [level=2]:\n    - text: Make the next move\n    - emphasis: matter.\n  - paragraph: \"Strategy, design, and technology brought together around one clear ambition: moving your business forward.\"\n  - button \"Talk to us\"\n  - navigation:\n    - heading \"Explore\" [level=3]\n    - link \"Software\":\n    - link \"Services\":\n    - link \"Selected work\":\n    - link \"Insights\":\n    - link \"About OrgTik\":\n    - heading \"Start here\" [level=3]\n    - link \"Build a software plan\":\n    - link \"Plans & pricing\":\n    - link \"Tell us about your project\":\n    - link \"Roadmap\":\n    - link \"Sitemap\":\n  - text: Made in Switzerland © 2026 OrgTik. Independent digital partner Strategy. Design. Technology.",
+  "title": "sign up | OrgTik",
+  "url": "/sign-up"
+}

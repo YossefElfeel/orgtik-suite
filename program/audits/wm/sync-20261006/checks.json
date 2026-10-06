@@ -1,0 +1,296 @@
+{
+  "results": [
+    {
+      "name": "http://localhost:4173 /work 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/orgtik-identity-system 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/connected-platform-concept 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/managed-digital-presence 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/campaign-growth-system 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/support-continuity-system 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/orgtik-identity-system 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/connected-platform-concept 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/managed-digital-presence 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/campaign-growth-system 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/support-continuity-system 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/orgtik-identity-system 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/connected-platform-concept 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/managed-digital-presence 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/campaign-growth-system 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/support-continuity-system 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/orgtik-identity-system 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/connected-platform-concept 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/managed-digital-presence 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/campaign-growth-system 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://localhost:4173 /work/support-continuity-system 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/orgtik-identity-system 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/connected-platform-concept 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/managed-digital-presence 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/campaign-growth-system 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/support-continuity-system 320",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/orgtik-identity-system 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/connected-platform-concept 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/managed-digital-presence 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/campaign-growth-system 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/support-continuity-system 390",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/orgtik-identity-system 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/connected-platform-concept 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/managed-digital-presence 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/campaign-growth-system 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/support-continuity-system 768",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/orgtik-identity-system 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/connected-platform-concept 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/managed-digital-presence 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/campaign-growth-system 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "http://127.0.0.1:4280 /work/support-continuity-system 1440",
+      "ok": true,
+      "note": "200, complete story, sample labels, no overflow/runtime errors/critical accessibility findings."
+    },
+    {
+      "name": "five CMS projects retain full stories, sample status and unapproved figures",
+      "ok": true,
+      "note": "Five complete department stories, explicitly samples."
+    },
+    {
+      "name": "CMS sample switch saves a draft and all preview widths render CMS edits",
+      "ok": true,
+      "note": "Draft edits visible in three CMS preview frames; live content unchanged."
+    },
+    {
+      "name": "turning off a sample story hides only its narrative in draft preview",
+      "ok": true,
+      "note": "Project remains visible; narrative disabled in preview."
+    },
+    {
+      "name": "editors cannot change sample-story publication permission",
+      "ok": true,
+      "note": "Content approval permission required."
+    },
+    {
+      "name": "approved narrative preview drops sample labels and keeps approved figures",
+      "ok": true,
+      "note": "Approved story renders without sample disclosures."
+    },
+    {
+      "name": "CMS editor accessible: en light",
+      "ok": true,
+      "note": "Theme confirmed; zero critical accessibility findings."
+    },
+    {
+      "name": "CMS editor accessible: en dark",
+      "ok": true,
+      "note": "Theme confirmed; zero critical accessibility findings."
+    },
+    {
+      "name": "CMS editor accessible: ar light",
+      "ok": true,
+      "note": "Theme confirmed; zero critical accessibility findings."
+    },
+    {
+      "name": "CMS editor accessible: ar dark",
+      "ok": true,
+      "note": "Theme confirmed; zero critical accessibility findings."
+    },
+    {
+      "name": "restored URLs, legacy aliases, 404, Sign-up SEO and sitemap",
+      "ok": true,
+      "note": "Five canonical project routes and legacy redirects; real 404; Sign-up excluded."
+    }
+  ],
+  "passed": 58,
+  "failed": 0
+}

@@ -1,0 +1,316 @@
+{
+  "at": "2026-10-05T19:07:49.405Z",
+  "passed": 21,
+  "total": 21,
+  "results": [
+    {
+      "name": "public sample threads match counts and never expose pending ideas",
+      "ok": true,
+      "note": "Seven idea-specific threads, 31 sample comments; three pending ideas remain private."
+    },
+    {
+      "name": "comments button shows the correct thread: workspace-guide",
+      "ok": true,
+      "note": "4 matching comments; Escape returns focus to the original button."
+    },
+    {
+      "name": "comments button shows the correct thread: request-view",
+      "ok": true,
+      "note": "2 matching comments; Escape returns focus to the original button."
+    },
+    {
+      "name": "comments button shows the correct thread: accessible-review",
+      "ok": true,
+      "note": "6 matching comments; Escape returns focus to the original button."
+    },
+    {
+      "name": "comments button shows the correct thread: project-summary",
+      "ok": true,
+      "note": "3 matching comments; Escape returns focus to the original button."
+    },
+    {
+      "name": "comments button shows the correct thread: continuity-view",
+      "ok": true,
+      "note": "8 matching comments; Escape returns focus to the original button."
+    },
+    {
+      "name": "comments button shows the correct thread: consent-view",
+      "ok": true,
+      "note": "5 matching comments; Escape returns focus to the original button."
+    },
+    {
+      "name": "comments button shows the correct thread: delivery-checks",
+      "ok": true,
+      "note": "3 matching comments; Escape returns focus to the original button."
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://localhost:4173 en 320",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://localhost:4173 en 390",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://localhost:4173 en 768",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://localhost:4173 en 1440",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://localhost:4173 ar 320",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://localhost:4173 ar 390",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://localhost:4173 ar 768",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://localhost:4173 ar 1440",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://127.0.0.1:4280 en 320",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://127.0.0.1:4280 en 390",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://127.0.0.1:4280 en 768",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "comment dialog fits and remains accessible: http://127.0.0.1:4280 en 1440",
+      "ok": true,
+      "note": {
+        "comments": 6,
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "an empty thread shows an honest empty state",
+      "ok": true,
+      "note": "The browser-only fixture does not invent comments or alter the mock/snapshot."
+    }
+  ]
+}

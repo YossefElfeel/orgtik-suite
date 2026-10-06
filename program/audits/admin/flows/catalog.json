@@ -1,0 +1,267 @@
+[
+  {
+    "title": "EN: a status change says whom it notifies, and General can't be retired",
+    "ok": true,
+    "passed": 5,
+    "steps": 5,
+    "detail": [
+      {
+        "name": "general-retire-blocked",
+        "ok": true,
+        "note": "Retire disabled true; \"Retire Every workspace has it\""
+      },
+      {
+        "name": "email-to-beta-impact",
+        "ok": true,
+        "note": "menu: Move to beta | Make live; dialog: Move Email to beta? Customers can start trying it. Notifies 2 people on its waitlist. Cancel Move to beta"
+      },
+      {
+        "name": "email-to-beta-confirmed",
+        "ok": true,
+        "note": "email beta; 2/2 on its waitlist notified"
+      },
+      {
+        "name": "waitlist-shows-notified",
+        "ok": true,
+        "note": "2 notified rows, filter in the address"
+      },
+      {
+        "name": "no-console-errors",
+        "ok": true,
+        "note": ""
+      }
+    ]
+  },
+  {
+    "title": "AR: making a tool live from its page, with the impact in Arabic",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "confirm-impact-ar",
+        "ok": true,
+        "note": "إتاحة الموقع للعملاء؟ يمكن للعملاء شراؤها. سيُبلَّغ شخص واحد من قائمة انتظارها. إلغاء إتاحة الأداة"
+      },
+      {
+        "name": "live-saved",
+        "ok": true,
+        "note": "website live, next: retired"
+      },
+      {
+        "name": "no-console-errors",
+        "ok": true,
+        "note": ""
+      }
+    ]
+  },
+  {
+    "title": "EN: a new tool without its Arabic name is refused on the field, then saved",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "arabic-name-missing",
+        "ok": true,
+        "note": "Arabic name tab open and invalid (true), \"Required\" shown, nothing created"
+      },
+      {
+        "name": "fixed-and-saved",
+        "ok": true,
+        "note": "calendar: Calendar / التقويم, coming_soon"
+      },
+      {
+        "name": "no-console-errors",
+        "ok": true,
+        "note": ""
+      }
+    ]
+  },
+  {
+    "title": "AR: a new tool without its Arabic name is refused on the field, then saved",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "arabic-name-missing",
+        "ok": true,
+        "note": "Arabic name tab open and invalid (true), \"مطلوب\" shown, nothing created"
+      },
+      {
+        "name": "fixed-and-saved",
+        "ok": true,
+        "note": "bookings: Bookings / الحجوزات, coming_soon"
+      },
+      {
+        "name": "no-console-errors",
+        "ok": true,
+        "note": ""
+      }
+    ]
+  },
+  {
+    "title": "EN: editing a plan's limits saves one value per limit",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "price-not-here",
+        "ok": true,
+        "note": "price grid link /en/pricing?tool=chat; no price input"
+      },
+      {
+        "name": "limit-saved",
+        "ok": true,
+        "note": "history_days 7300, trial 30, flags kept"
+      },
+      {
+        "name": "english-name-required",
+        "ok": true,
+        "note": "English name invalid (true); still \"Pro\" in the API"
+      },
+      {
+        "name": "no-console-errors",
+        "ok": true,
+        "note": ""
+      }
+    ]
+  },
+  {
+    "title": "AR: a limit set to unlimited",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "unlimited-saved",
+        "ok": true,
+        "note": "number field disabled true; tasks.projects null, guests 5"
+      },
+      {
+        "name": "no-console-errors",
+        "ok": true,
+        "note": ""
+      }
+    ]
+  },
+  {
+    "title": "EN: a feature added then deleted; an in-use delete refused with its plans",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "added",
+        "ok": true,
+        "note": "key prefilled \"chat.\"; chat.polls is flag"
+      },
+      {
+        "name": "deleted",
+        "ok": true,
+        "note": "impact: Delete chat.polls? No plan uses it. This can't be undone. Cancel Delete feature; gone from the API true"
+      },
+      {
+        "name": "in-use-refused",
+        "ok": true,
+        "note": "refused; plans linked: /en/plans/chat_free, /en/plans/chat_starter, /en/plans/chat_pro"
+      },
+      {
+        "name": "no-console-errors",
+        "ok": true,
+        "note": ""
+      }
+    ]
+  },
+  {
+    "title": "AR: a feature added then deleted; an in-use delete refused with its plans",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "added",
+        "ok": true,
+        "note": "key prefilled \"chat.\"; chat.reactions is flag"
+      },
+      {
+        "name": "deleted",
+        "ok": true,
+        "note": "impact: حذف chat.reactions؟ لا تستخدمها أي خطة. لا يمكن التراجع عن هذا الإجراء. إلغاء حذف الميزة; gone from the API true"
+      },
+      {
+        "name": "in-use-refused",
+        "ok": true,
+        "note": "refused; plans linked: /ar/plans/chat_free, /ar/plans/chat_starter, /ar/plans/chat_pro"
+      },
+      {
+        "name": "no-console-errors",
+        "ok": true,
+        "note": ""
+      }
+    ]
+  },
+  {
+    "title": "EN: Sales sees the catalog with no edit controls and a view-only note",
+    "ok": true,
+    "passed": 6,
+    "steps": 6,
+    "detail": [
+      {
+        "name": "tools-view-only",
+        "ok": true,
+        "note": "status buttons 0, add 0, view-only note 1"
+      },
+      {
+        "name": "tool-view-only",
+        "ok": true,
+        "note": "save 0, text inputs 0, texts table 1"
+      },
+      {
+        "name": "plan-view-only",
+        "ok": true,
+        "note": "save 0, limit read-only true, note 1"
+      },
+      {
+        "name": "features-view-only",
+        "ok": true,
+        "note": "delete buttons 0, add 0"
+      },
+      {
+        "name": "not-found",
+        "ok": true,
+        "note": "tool and plan 404 pages; back link /en/tools"
+      },
+      {
+        "name": "no-console-errors",
+        "ok": true,
+        "note": ""
+      }
+    ]
+  },
+  {
+    "title": "AR: Support can view tools but not the waitlist",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "tools-view-only-ar",
+        "ok": true,
+        "note": "status buttons 0, view-only note 1"
+      },
+      {
+        "name": "waitlist-no-permission",
+        "ok": true,
+        "note": "دورك لا يسمح بفتح هذه الصفحة تحتاج إلى صلاحية «waitlist:view». اطلبها من المدير العام إن كنت تحتاجها."
+      },
+      {
+        "name": "no-console-errors",
+        "ok": true,
+        "note": ""
+      }
+    ]
+  }
+]

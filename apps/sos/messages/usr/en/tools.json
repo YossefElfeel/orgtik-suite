@@ -1,0 +1,296 @@
+{
+  "Tools": {
+    "home": {
+      "title": "Your tools",
+      "allTools": "All tools and plans",
+      "otherApps": "Other apps you can open.",
+      "apps": {
+        "platform_admin": "OrgTik Admin"
+      }
+    },
+    "line": {
+      "daysLeft": "{count, plural, =0 {ends today} one {# day left} other {# days left}}",
+      "freePlan": "Free plan",
+      "paymentDue": "Payment due",
+      "cancelling": "Ends at renewal"
+    },
+    "actions": {
+      "open": "Open",
+      "seePlans": "See plans",
+      "choosePlan": "Choose a plan",
+      "startTrial": "Start {days}-day free trial",
+      "payNow": "Pay now",
+      "askOwner": "Ask the workspace owner to subscribe.",
+      "askOwnerToPay": "Ask the workspace owner to pay and unlock it.",
+      "askAdmin": "Ask a workspace admin for access.",
+      "joinWaitlist": "Join the waitlist",
+      "joinedWaitlist": "You're on the {tool} waitlist. We'll write when it opens.",
+      "onWaitlist": "You're on the waitlist"
+    },
+    "catalog": {
+      "title": "Tools and plans",
+      "description": "Every OrgTik tool and what it costs {workspace}, in {currency}.",
+      "customPlan": "Ask for a custom plan",
+      "ownerBuys": "Only the workspace owner can start trials and buy plans. You can look at everything here.",
+      "included": "Included with every workspace",
+      "from": "From <price>{amount}</price> a month",
+      "fromPerUser": "From <price>{amount}</price> per user a month",
+      "trial": "{days}-day free trial",
+      "free": "Free plan available",
+      "onRequest": "Priced on request",
+      "empty": "No tools to show yet",
+      "failed": "The tools couldn't be loaded"
+    },
+    "plans": {
+      "title": "Plans",
+      "pricesFor": "Per-user prices are for the {count, plural, one {# person} other {# people}} in your workspace, in {currency}.",
+      "cycle": "Billing cycle",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "yearlySave": "Yearly · save {pct}%",
+      "current": "Your plan",
+      "currentTrial": "On trial",
+      "recommended": "Recommended",
+      "free": "Free",
+      "noPrice": "No price in your currency yet",
+      "per": {
+        "month": "a month",
+        "year": "a year"
+      },
+      "perUser": {
+        "month": "per user a month",
+        "year": "per user a year"
+      },
+      "seatsTotal": {
+        "month": "{count, plural, one {# user} other {# users}}: <total>{amount}</total> a month",
+        "year": "{count, plural, one {# user} other {# users}}: <total>{amount}</total> a year"
+      },
+      "yearlySaving": "You save {pct}% compared with paying monthly",
+      "minSeats": "At least {count, plural, one {# user} other {# users}}",
+      "whatYouGet": "What {plan} includes",
+      "included": "included",
+      "notIncluded": "not included",
+      "unlimited": "{feature}: unlimited",
+      "choose": "Choose {plan}",
+      "startTrial": "Start {days}-day free trial",
+      "youHaveIt": "This is your current plan.",
+      "toFree": "To move to the free plan, change it in <link>Subscriptions</link>.",
+      "askOwner": "Ask the workspace owner to choose this plan.",
+      "ownerOnly": "Only the owner of {workspace} can start trials and buy plans. Ask them if you need one.",
+      "customHint": "Need more people or several tools on one contract? <link>Ask for a custom plan</link>.",
+      "onTrial": "Your {tool} trial ends on {date} ({count, plural, =0 {that’s today} one {# day left} other {# days left}})",
+      "onTrialBody": "Choose a plan to keep using it without a break.",
+      "trialUsedNote": "This workspace has already had its {tool} trial. Each tool has one trial per workspace.",
+      "trialUsedTitle": "This workspace has already had its {tool} trial",
+      "trialUsedBody": "Each tool has one free trial per workspace. Nothing changed; choose a plan to keep going.",
+      "trialFailed": "The trial didn't start",
+      "trialStarted": "Your {tool} trial has started. It ends on {date}.",
+      "trialConfirmTitle": "Start a {days}-day {tool} {plan} trial?",
+      "trialConfirmBody": "It's free until {date} and needs no card.",
+      "trialThenFree": "When it ends, {tool} moves to its free plan unless you choose a plan.",
+      "trialThenStop": "When it ends, {tool} stops unless you choose a plan.",
+      "oneTrial": "Each tool has one trial per workspace.",
+      "trialConfirm": "Start trial",
+      "cancel": "Cancel",
+      "comingSoon": "{tool} is coming soon",
+      "comingSoonBody": "Join the waitlist and we'll write to you when it opens.",
+      "noPlans": "No plans to buy here yet",
+      "noPlansBody": "This tool is sold on request. Ask for a custom plan and we'll send you a quote.",
+      "notFound": "This tool doesn't exist",
+      "backToTools": "Back to tools and plans",
+      "failed": "The plans couldn't be loaded"
+    },
+    "features": {
+      "general": {
+        "users": {
+          "name": "Users",
+          "limit": "{value, plural, one {# user} other {# users}}"
+        },
+        "custom_roles": {
+          "name": "Custom roles"
+        },
+        "audit_days": {
+          "name": "Audit log",
+          "limit": "Audit log kept {value, plural, one {# day} other {# days}}"
+        }
+      },
+      "tasks": {
+        "projects": {
+          "name": "Projects",
+          "limit": "{value, plural, one {# project} other {# projects}}"
+        },
+        "guests": {
+          "name": "Guests",
+          "limit": "{value, plural, =0 {No guests} one {# guest} other {# guests}}"
+        },
+        "automations": {
+          "name": "Automations"
+        }
+      },
+      "files": {
+        "storage_gb": {
+          "name": "Storage",
+          "limit": "{value} GB of storage"
+        },
+        "share_links": {
+          "name": "Share links"
+        }
+      },
+      "chat": {
+        "history_days": {
+          "name": "Message history",
+          "limit": "Message history for {value, plural, one {# day} other {# days}}"
+        },
+        "meetings": {
+          "name": "Meetings and calls"
+        }
+      },
+      "hr": {
+        "employees": {
+          "name": "Employees",
+          "limit": "{value, plural, one {# employee} other {# employees}}"
+        },
+        "payroll": {
+          "name": "Payroll"
+        }
+      },
+      "crm": {
+        "contacts": {
+          "name": "Contacts",
+          "limit": "{value, plural, one {# contact} other {# contacts}}"
+        },
+        "pipelines": {
+          "name": "Pipelines",
+          "limit": "{value, plural, one {# pipeline} other {# pipelines}}"
+        }
+      },
+      "marketing": {
+        "channels": {
+          "name": "Channels",
+          "limit": "{value, plural, one {# channel} other {# channels}}"
+        },
+        "ads": {
+          "name": "Ads"
+        }
+      }
+    },
+    "checkout": {
+      "title": "Checkout",
+      "description": "Paying for {workspace}.",
+      "toolsCrumb": "Tools and plans",
+      "emptyTitle": "Nothing to pay for yet",
+      "emptyBody": "Choose a plan first, then come back here to pay.",
+      "toTools": "See tools and plans",
+      "cantBuyTitle": "This plan can't be bought here",
+      "order": "Your order",
+      "lineName": "{tool} · {plan}",
+      "perSeat": {
+        "monthly": "<unit>{amount}</unit> × {count, plural, one {# user} other {# users}}, billed monthly",
+        "yearly": "<unit>{amount}</unit> × {count, plural, one {# user} other {# users}}, billed yearly"
+      },
+      "billed": {
+        "monthly": "Billed monthly",
+        "yearly": "Billed yearly"
+      },
+      "credit": "Credit for the unused part of your current plan",
+      "alreadyOnPlan": "{tool} is already on this plan. Paying again starts a new period today, with the unused part of the current one credited.",
+      "codeTitle": "Discount code",
+      "codeLabel": "Code",
+      "apply": "Apply",
+      "codeApplied": "Code <c>{code}</c> applied",
+      "removeCode": "Remove the discount code",
+      "summary": "Summary",
+      "subtotal": "Plans",
+      "creditIncluded": "Credit",
+      "bundle": "{name} ({pct}% off)",
+      "coupon": "Code <c>{code}</c>",
+      "tax": "Tax: <c>{label}</c>",
+      "noTax": "Tax",
+      "total": "Total",
+      "taxUndecided": "How tax shows on prices isn't decided yet (G-12). This total adds it on top of the plan prices; the way it's shown may change before launch.",
+      "paymentMethod": "Pay with",
+      "default": "(default)",
+      "expires": "Expires {date}",
+      "noMethods": "No card that can pay yet. Expired cards aren't offered.",
+      "addMethod": "Add a payment method",
+      "billingName": "Billing name",
+      "billingNameHelp": "The company or person the invoice is made out to.",
+      "nameRequired": "Enter the billing name; the invoice needs it.",
+      "currencyLock": "This is the workspace's first payment: it fixes the billing currency to {currency}. It can't be changed afterwards without asking support.",
+      "failedTitle": "The payment didn't go through",
+      "failedBody": "Nothing changed: no plan was bought and your tools are as they were. Choose another card or add one, then try again.",
+      "declined": "The bank declined the card.",
+      "notPaidTitle": "Not paid yet",
+      "pay": "Pay {total}",
+      "renews": {
+        "monthly": "Renews every month at the same price until you change or cancel it.",
+        "yearly": "Renews every year at the same price until you change or cancel it."
+      },
+      "doneTitle": "Payment received",
+      "doneBody": "{tool} is now on the {plan} plan.",
+      "doneBodyShort": "Your plan is active.",
+      "invoiceNumber": "Invoice",
+      "paid": "Paid",
+      "whereInvoice": "The invoice is in <link>Billing › Invoices</link> whenever you need it.",
+      "openTool": "Open {tool}",
+      "toHome": "Back to home"
+    },
+    "custom": {
+      "title": "Custom plan",
+      "description": "For needs the price list doesn't cover: many people, several tools on one contract, special terms. We reply with a quote.",
+      "formTitle": "Ask for a custom plan",
+      "formBody": "Tell us what you need. OrgTik's team replies with a quote, usually within two working days.",
+      "tools": "Tools",
+      "toolsRequired": "Choose at least one tool.",
+      "seats": "Number of people",
+      "seatsHelp": "Everyone who'll use the tools, not guests.",
+      "seatsRequired": "Enter at least 1 person.",
+      "notes": "Anything else",
+      "notesHelp": "Branches, contract terms, a deadline.",
+      "send": "Send the request",
+      "sent": "Request sent. We'll reply with a quote.",
+      "yourRequests": "Your requests",
+      "summary": "{seats, plural, one {# person} other {# people}} · {cycle} · asked on {date}",
+      "state": {
+        "new": "Waiting for a quote",
+        "quoted": "Quote to review",
+        "accepted": "Accepted",
+        "declined": "Declined",
+        "expired": "Quote expired"
+      },
+      "quote": "Quote",
+      "validUntil": "Valid until {date}",
+      "expiredOn": "Expired on {date}",
+      "waiting": "We're preparing the quote.",
+      "accept": "Accept the quote",
+      "acceptTitle": "Accept this quote?",
+      "acceptImpact": "OrgTik sets up the plan for {seats, plural, one {# person} other {# people}}, billed {cycle}, and sends the invoice for {amount}.",
+      "accepted": "Quote accepted. We'll set up the plan and send the invoice.",
+      "acceptedBody": "Accepted. OrgTik is setting up the plan and will send the invoice.",
+      "quoteExpired": "This quote has expired. Send a new request for an updated one.",
+      "emptyTitle": "No requests yet",
+      "emptyBody": "Requests you send appear here with their quotes.",
+      "failed": "Your requests couldn't be loaded"
+    },
+    "errors": {
+      "general": "Something went wrong. Try again in a moment.",
+      "offline": "You seem to be offline. Check your connection and try again.",
+      "forbidden": "Your role in this workspace doesn't allow this. Ask the owner.",
+      "suspended": "This workspace is suspended, so nothing can be changed. Contact support.",
+      "trial_used": "This workspace already had a trial of this tool.",
+      "wrong_state": "This can't be done in the tool's current state. Refresh the page.",
+      "payment_failed": "The payment didn't go through. Nothing changed.",
+      "expired": "This has expired.",
+      "not_found": "It isn't there any more. Refresh the page.",
+      "coupon_invalid": "This code doesn't exist or isn't active.",
+      "coupon_expired": "This code has expired.",
+      "coupon_used_up": "This code has been used the most times it can be. It no longer works.",
+      "coupon_not_applicable": "This code doesn't apply to the plan you're buying.",
+      "coupon_currency": "This code doesn't work in your workspace's currency.",
+      "no_trial": "This plan has no free trial.",
+      "no_price": "This plan has no price in your currency yet.",
+      "mismatch": "This plan is priced in another currency than your workspace's.",
+      "paymentMethodId": "Choose a card to pay with."
+    }
+  }
+}

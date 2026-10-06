@@ -1,0 +1,3606 @@
+{
+ "Team.form.tooLong": {
+  "en": "That's too long.",
+  "ar": "هذا النص أطول من المسموح.",
+  "de": "Das ist zu lang.",
+  "fr": "C'est trop long.",
+  "it": "È troppo lungo."
+ },
+ "Team.form.nameRequired": {
+  "en": "Enter a name.",
+  "ar": "أدخل اسمًا.",
+  "de": "Geben Sie einen Namen ein.",
+  "fr": "Saisissez un nom.",
+  "it": "Inserisci un nome."
+ },
+ "Team.form.emailRequired": {
+  "en": "Enter an email address.",
+  "ar": "أدخل عنوان بريد إلكتروني.",
+  "de": "Geben Sie eine E-Mail-Adresse ein.",
+  "fr": "Saisissez une adresse e-mail.",
+  "it": "Inserisci un indirizzo email."
+ },
+ "Team.form.emailInvalid": {
+  "en": "Enter a valid email address, like name@company.com.",
+  "ar": "أدخل عنوان بريد إلكتروني صحيحًا، مثل name@company.com.",
+  "de": "Geben Sie eine gültige E-Mail-Adresse ein, z. B. name@firma.ch.",
+  "fr": "Saisissez une adresse e-mail valide, par exemple nom@entreprise.ch.",
+  "it": "Inserisci un indirizzo email valido, ad esempio nome@azienda.ch."
+ },
+ "Team.form.ibanInvalid": {
+  "en": "Enter the IBAN or account number: 6 to 34 letters and digits.",
+  "ar": "أدخل رقم IBAN أو رقم الحساب: من 6 إلى 34 حرفًا ورقمًا.",
+  "de": "Geben Sie die IBAN oder Kontonummer ein: 6 bis 34 Buchstaben und Ziffern.",
+  "fr": "Saisissez l'IBAN ou le numéro de compte : 6 à 34 lettres et chiffres.",
+  "it": "Inserisci l'IBAN o il numero di conto: da 6 a 34 lettere e cifre."
+ },
+ "Team.form.ibanRequired": {
+  "en": "Enter the IBAN or account number.",
+  "ar": "أدخل رقم IBAN أو رقم الحساب.",
+  "de": "Geben Sie die IBAN oder Kontonummer ein.",
+  "fr": "Saisissez l'IBAN ou le numéro de compte.",
+  "it": "Inserisci l'IBAN o il numero di conto."
+ },
+ "Team.form.swiftInvalid": {
+  "en": "A SWIFT/BIC code has 8 or 11 letters and digits.",
+  "ar": "رمز SWIFT/BIC من 8 أو 11 حرفًا ورقمًا.",
+  "de": "Ein SWIFT/BIC-Code hat 8 oder 11 Buchstaben und Ziffern.",
+  "fr": "Un code SWIFT/BIC compte 8 ou 11 lettres et chiffres.",
+  "it": "Un codice SWIFT/BIC ha 8 o 11 lettere e cifre."
+ },
+ "Team.form.accountNameRequired": {
+  "en": "Enter the account holder's name.",
+  "ar": "أدخل اسم صاحب الحساب.",
+  "de": "Geben Sie den Namen des Kontoinhabers ein.",
+  "fr": "Saisissez le nom du titulaire du compte.",
+  "it": "Inserisci il nome dell'intestatario del conto."
+ },
+ "Team.form.bankNameRequired": {
+  "en": "Enter the bank's name.",
+  "ar": "أدخل اسم البنك.",
+  "de": "Geben Sie den Namen der Bank ein.",
+  "fr": "Saisissez le nom de la banque.",
+  "it": "Inserisci il nome della banca."
+ },
+ "Team.form.firstNameRequired": {
+  "en": "Enter your first name.",
+  "ar": "أدخل اسمك الأول.",
+  "de": "Geben Sie Ihren Vornamen ein.",
+  "fr": "Saisissez votre prénom.",
+  "it": "Inserisci il tuo nome."
+ },
+ "Team.form.lastNameRequired": {
+  "en": "Enter your last name.",
+  "ar": "أدخل اسم العائلة.",
+  "de": "Geben Sie Ihren Nachnamen ein.",
+  "fr": "Saisissez votre nom.",
+  "it": "Inserisci il tuo cognome."
+ },
+ "Team.form.noteRequired": {
+  "en": "Write the note first.",
+  "ar": "اكتب الملاحظة أولًا.",
+  "de": "Schreiben Sie zuerst die Notiz.",
+  "fr": "Rédigez d'abord la note.",
+  "it": "Scrivi prima la nota."
+ },
+ "Team.form.amountRequired": {
+  "en": "Enter an amount above zero.",
+  "ar": "أدخل مبلغًا أكبر من صفر.",
+  "de": "Geben Sie einen Betrag über null ein.",
+  "fr": "Saisissez un montant supérieur à zéro.",
+  "it": "Inserisci un importo superiore a zero."
+ },
+ "Team.form.amountTooHigh": {
+  "en": "That's more than the {due} due.",
+  "ar": "هذا أكثر من المبلغ المستحق {due}.",
+  "de": "Das ist mehr als die fälligen {due}.",
+  "fr": "C'est plus que les {due} dus.",
+  "it": "È più dei {due} dovuti."
+ },
+ "Team.form.referenceRequired": {
+  "en": "Enter the payment reference.",
+  "ar": "أدخل مرجع الدفع.",
+  "de": "Geben Sie die Zahlungsreferenz ein.",
+  "fr": "Saisissez la référence du paiement.",
+  "it": "Inserisci il riferimento del pagamento."
+ },
+ "Team.form.referenceTooLong": {
+  "en": "Keep the reference to 64 characters or fewer.",
+  "ar": "اجعل المرجع 64 حرفًا أو أقل.",
+  "de": "Die Referenz darf höchstens 64 Zeichen haben.",
+  "fr": "La référence ne doit pas dépasser 64 caractères.",
+  "it": "Il riferimento può avere al massimo 64 caratteri."
+ },
+ "Team.form.referenceCard": {
+  "en": "This looks like a card number. Enter the transfer's reference instead; card numbers are never stored.",
+  "ar": "يبدو هذا رقم بطاقة. أدخل مرجع التحويل بدلًا منه؛ لا تُحفظ أرقام البطاقات أبدًا.",
+  "de": "Das sieht nach einer Kartennummer aus. Geben Sie stattdessen die Überweisungsreferenz ein; Kartennummern werden nie gespeichert.",
+  "fr": "Cela ressemble à un numéro de carte. Saisissez plutôt la référence du virement ; les numéros de carte ne sont jamais enregistrés.",
+  "it": "Sembra un numero di carta. Inserisci invece il riferimento del bonifico; i numeri di carta non vengono mai salvati."
+ },
+ "Team.form.numberRequired": {
+  "en": "Enter a number.",
+  "ar": "أدخل رقمًا.",
+  "de": "Geben Sie eine Zahl ein.",
+  "fr": "Saisissez un nombre.",
+  "it": "Inserisci un numero."
+ },
+ "Team.form.wholeNumber": {
+  "en": "Use a whole number.",
+  "ar": "استخدم عددًا صحيحًا.",
+  "de": "Verwenden Sie eine ganze Zahl.",
+  "fr": "Utilisez un nombre entier.",
+  "it": "Usa un numero intero."
+ },
+ "Team.form.pointsPerUnitPositive": {
+  "en": "Points per unit must be above zero.",
+  "ar": "يجب أن تكون النقاط لكل وحدة أكبر من صفر.",
+  "de": "Die Punkte pro Einheit müssen über null liegen.",
+  "fr": "Les points par unité doivent être supérieurs à zéro.",
+  "it": "I punti per unità devono essere superiori a zero."
+ },
+ "Team.form.currencyRequired": {
+  "en": "Choose a currency.",
+  "ar": "اختر عملة.",
+  "de": "Wählen Sie eine Währung.",
+  "fr": "Choisissez une devise.",
+  "it": "Scegli una valuta."
+ },
+ "Team.form.expiryMin": {
+  "en": "Points must last at least one month.",
+  "ar": "يجب أن تبقى النقاط شهرًا واحدًا على الأقل.",
+  "de": "Punkte müssen mindestens einen Monat gültig sein.",
+  "fr": "Les points doivent rester valables au moins un mois.",
+  "it": "I punti devono valere almeno un mese."
+ },
+ "Team.form.rateRequired": {
+  "en": "Enter a rate above zero.",
+  "ar": "أدخل سعرًا أكبر من صفر.",
+  "de": "Geben Sie einen Kurs über null ein.",
+  "fr": "Saisissez un taux supérieur à zéro.",
+  "it": "Inserisci un tasso superiore a zero."
+ },
+ "Team.form.pointsPositive": {
+  "en": "Enter at least one point.",
+  "ar": "أدخل نقطة واحدة على الأقل.",
+  "de": "Geben Sie mindestens einen Punkt ein.",
+  "fr": "Saisissez au moins un point.",
+  "it": "Inserisci almeno un punto."
+ },
+ "Team.form.daysMin": {
+  "en": "Use at least one day.",
+  "ar": "استخدم يومًا واحدًا على الأقل.",
+  "de": "Mindestens ein Tag.",
+  "fr": "Au moins un jour.",
+  "it": "Almeno un giorno."
+ },
+ "Team.form.discountPositive": {
+  "en": "Enter a discount above zero.",
+  "ar": "أدخل خصمًا أكبر من صفر.",
+  "de": "Geben Sie einen Rabatt über null ein.",
+  "fr": "Saisissez une remise supérieure à zéro.",
+  "it": "Inserisci uno sconto superiore a zero."
+ },
+ "Team.form.percentMax": {
+  "en": "A percentage can't be more than 100.",
+  "ar": "لا يمكن أن تتجاوز النسبة المئوية 100.",
+  "de": "Ein Prozentsatz kann nicht über 100 liegen.",
+  "fr": "Un pourcentage ne peut pas dépasser 100.",
+  "it": "Una percentuale non può superare 100."
+ },
+ "Team.form.prefixInvalid": {
+  "en": "Use 2 to 12 letters or digits.",
+  "ar": "استخدم من 2 إلى 12 حرفًا أو رقمًا.",
+  "de": "Verwenden Sie 2 bis 12 Buchstaben oder Ziffern.",
+  "fr": "Utilisez 2 à 12 lettres ou chiffres.",
+  "it": "Usa da 2 a 12 lettere o cifre."
+ },
+ "Team.form.reasonRequired": {
+  "en": "Give a reason; the customer sees it.",
+  "ar": "اذكر السبب؛ سيراه العميل.",
+  "de": "Geben Sie einen Grund an; der Kunde sieht ihn.",
+  "fr": "Indiquez un motif ; le client le voit.",
+  "it": "Indica un motivo; il cliente lo vede."
+ },
+ "Team.form.deductTooMany": {
+  "en": "The customer has only {balance} points.",
+  "ar": "لدى العميل {balance} نقطة فقط.",
+  "de": "Der Kunde hat nur {balance} Punkte.",
+  "fr": "Le client n'a que {balance} points.",
+  "it": "Il cliente ha solo {balance} punti."
+ },
+ "Team.commissions.title": {
+  "en": "Commissions",
+  "ar": "العمولات",
+  "de": "Provisionen",
+  "fr": "Commissions",
+  "it": "Provvigioni"
+ },
+ "Team.commissions.descriptionOwn": {
+  "en": "Your commissions, what has been paid and what is still due.",
+  "ar": "عمولاتك وما دُفع منها وما زال مستحقًا.",
+  "de": "Ihre Provisionen: was bezahlt ist und was noch offen ist.",
+  "fr": "Vos commissions : ce qui est payé et ce qui reste dû.",
+  "it": "Le tue provvigioni: quanto è stato pagato e quanto è ancora dovuto."
+ },
+ "Team.commissions.descriptionAdmin": {
+  "en": "Every salesperson's commissions. Pay what is due, in full or in part.",
+  "ar": "عمولات جميع مندوبي المبيعات. ادفع المستحق كاملًا أو جزءًا منه.",
+  "de": "Die Provisionen aller Vertriebsmitarbeitenden. Zahlen Sie das Fällige ganz oder teilweise.",
+  "fr": "Les commissions de tous les commerciaux. Payez le dû, en totalité ou en partie.",
+  "it": "Le provvigioni di tutti i venditori. Paga il dovuto, in tutto o in parte."
+ },
+ "Team.commissions.descriptionManager": {
+  "en": "Every salesperson's commissions. Admins pay them.",
+  "ar": "عمولات جميع مندوبي المبيعات. يدفعها المسؤولون.",
+  "de": "Die Provisionen aller Vertriebsmitarbeitenden. Administratoren zahlen sie aus.",
+  "fr": "Les commissions de tous les commerciaux. Les administrateurs les paient.",
+  "it": "Le provvigioni di tutti i venditori. Le pagano gli amministratori."
+ },
+ "Team.commissions.summary": {
+  "en": "Commission summary",
+  "ar": "ملخص العمولات",
+  "de": "Provisionsübersicht",
+  "fr": "Résumé des commissions",
+  "it": "Riepilogo provvigioni"
+ },
+ "Team.commissions.summaryError": {
+  "en": "The summary didn't load.",
+  "ar": "لم يُحمَّل الملخص.",
+  "de": "Die Übersicht wurde nicht geladen.",
+  "fr": "Le résumé ne s'est pas chargé.",
+  "it": "Il riepilogo non è stato caricato."
+ },
+ "Team.commissions.statDueCount": {
+  "en": "Due for payout",
+  "ar": "مستحقة الدفع",
+  "de": "Zur Auszahlung fällig",
+  "fr": "À payer",
+  "it": "Da pagare"
+ },
+ "Team.commissions.statDueCountHint": {
+  "en": "{count, plural, one {{paid} paid in full} other {{paid} paid in full}}",
+  "ar": "{count, plural, zero {لا توجد عمولات مدفوعة بالكامل} one {عمولة واحدة مدفوعة بالكامل} two {عمولتان مدفوعتان بالكامل} few {{paid} عمولات مدفوعة بالكامل} many {{paid} عمولة مدفوعة بالكامل} other {{paid} عمولة مدفوعة بالكامل}}",
+  "de": "{count, plural, one {{paid} vollständig bezahlt} other {{paid} vollständig bezahlt}}",
+  "fr": "{count, plural, one {{paid} payée en totalité} other {{paid} payées en totalité}}",
+  "it": "{count, plural, one {{paid} pagata per intero} other {{paid} pagate per intero}}"
+ },
+ "Team.commissions.statDueAmount": {
+  "en": "Still to pay",
+  "ar": "المتبقي للدفع",
+  "de": "Noch zu zahlen",
+  "fr": "Reste à payer",
+  "it": "Ancora da pagare"
+ },
+ "Team.commissions.statPaid": {
+  "en": "Paid out",
+  "ar": "المدفوع",
+  "de": "Ausbezahlt",
+  "fr": "Versé",
+  "it": "Pagato"
+ },
+ "Team.commissions.statEarned": {
+  "en": "Earned",
+  "ar": "المكتسب",
+  "de": "Verdient",
+  "fr": "Gagné",
+  "it": "Maturato"
+ },
+ "Team.commissions.statEarnedHint": {
+  "en": "{percent} paid out so far",
+  "ar": "دُفع {percent} حتى الآن",
+  "de": "Bisher {percent} ausbezahlt",
+  "fr": "{percent} versé à ce jour",
+  "it": "{percent} pagato finora"
+ },
+ "Team.commissions.search": {
+  "en": "Search by project, reference or salesperson",
+  "ar": "ابحث بالمشروع أو المرجع أو مندوب المبيعات",
+  "de": "Nach Projekt, Referenz oder Vertriebsmitarbeitenden suchen",
+  "fr": "Rechercher par projet, référence ou commercial",
+  "it": "Cerca per progetto, riferimento o venditore"
+ },
+ "Team.commissions.filterStatus": {
+  "en": "Payout status",
+  "ar": "حالة الدفع",
+  "de": "Auszahlungsstatus",
+  "fr": "Statut du paiement",
+  "it": "Stato del pagamento"
+ },
+ "Team.commissions.statusAll": {
+  "en": "All statuses",
+  "ar": "كل الحالات",
+  "de": "Alle Status",
+  "fr": "Tous les statuts",
+  "it": "Tutti gli stati"
+ },
+ "Team.commissions.statusDue": {
+  "en": "Due (unpaid or partly paid)",
+  "ar": "مستحقة (غير مدفوعة أو مدفوعة جزئيًا)",
+  "de": "Fällig (offen oder teilweise bezahlt)",
+  "fr": "Dues (non payées ou payées en partie)",
+  "it": "Dovute (non pagate o pagate in parte)"
+ },
+ "Team.commissions.filterSalesperson": {
+  "en": "Salesperson",
+  "ar": "مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter/in",
+  "fr": "Commercial",
+  "it": "Venditore"
+ },
+ "Team.commissions.salespersonAll": {
+  "en": "All salespeople",
+  "ar": "كل مندوبي المبيعات",
+  "de": "Alle Vertriebsmitarbeitenden",
+  "fr": "Tous les commerciaux",
+  "it": "Tutti i venditori"
+ },
+ "Team.commissions.colReference": {
+  "en": "Reference",
+  "ar": "المرجع",
+  "de": "Referenz",
+  "fr": "Référence",
+  "it": "Riferimento"
+ },
+ "Team.commissions.colSalesperson": {
+  "en": "Salesperson",
+  "ar": "مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter/in",
+  "fr": "Commercial",
+  "it": "Venditore"
+ },
+ "Team.commissions.colProject": {
+  "en": "Project",
+  "ar": "المشروع",
+  "de": "Projekt",
+  "fr": "Projet",
+  "it": "Progetto"
+ },
+ "Team.commissions.colAmount": {
+  "en": "Commission",
+  "ar": "العمولة",
+  "de": "Provision",
+  "fr": "Commission",
+  "it": "Provvigione"
+ },
+ "Team.commissions.colPaid": {
+  "en": "Paid",
+  "ar": "المدفوع",
+  "de": "Bezahlt",
+  "fr": "Payé",
+  "it": "Pagato"
+ },
+ "Team.commissions.colDue": {
+  "en": "Due",
+  "ar": "المستحق",
+  "de": "Fällig",
+  "fr": "Dû",
+  "it": "Dovuto"
+ },
+ "Team.commissions.colStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Team.commissions.colEarned": {
+  "en": "Earned on",
+  "ar": "تاريخ الاستحقاق",
+  "de": "Verdient am",
+  "fr": "Gagnée le",
+  "it": "Maturata il"
+ },
+ "Team.commissions.colActions": {
+  "en": "Actions",
+  "ar": "الإجراءات",
+  "de": "Aktionen",
+  "fr": "Actions",
+  "it": "Azioni"
+ },
+ "Team.commissions.untitledProject": {
+  "en": "Untitled project",
+  "ar": "مشروع بلا اسم",
+  "de": "Projekt ohne Namen",
+  "fr": "Projet sans nom",
+  "it": "Progetto senza nome"
+ },
+ "Team.commissions.rateHint": {
+  "en": "{rate} of the contract",
+  "ar": "{rate} من قيمة العقد",
+  "de": "{rate} des Vertrags",
+  "fr": "{rate} du contrat",
+  "it": "{rate} del contratto"
+ },
+ "Team.commissions.pay": {
+  "en": "Pay",
+  "ar": "دفع",
+  "de": "Zahlen",
+  "fr": "Payer",
+  "it": "Paga"
+ },
+ "Team.commissions.payAria": {
+  "en": "Pay commission {reference}",
+  "ar": "دفع العمولة {reference}",
+  "de": "Provision {reference} zahlen",
+  "fr": "Payer la commission {reference}",
+  "it": "Paga la provvigione {reference}"
+ },
+ "Team.commissions.receipt": {
+  "en": "Receipt",
+  "ar": "الإيصال",
+  "de": "Beleg",
+  "fr": "Reçu",
+  "it": "Ricevuta"
+ },
+ "Team.commissions.receiptAria": {
+  "en": "Open the receipt for {reference}",
+  "ar": "افتح إيصال {reference}",
+  "de": "Beleg für {reference} öffnen",
+  "fr": "Ouvrir le reçu de {reference}",
+  "it": "Apri la ricevuta di {reference}"
+ },
+ "Team.commissions.errorTitle": {
+  "en": "Commissions didn't load",
+  "ar": "لم تُحمَّل العمولات",
+  "de": "Provisionen wurden nicht geladen",
+  "fr": "Les commissions ne se sont pas chargées",
+  "it": "Le provvigioni non sono state caricate"
+ },
+ "Team.commissions.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من الاتصال وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Team.commissions.emptyTitle": {
+  "en": "No commissions yet",
+  "ar": "لا توجد عمولات بعد",
+  "de": "Noch keine Provisionen",
+  "fr": "Aucune commission pour l'instant",
+  "it": "Ancora nessuna provvigione"
+ },
+ "Team.commissions.emptyBody": {
+  "en": "A commission appears here when a manager approves a contract.",
+  "ar": "تظهر العمولة هنا عندما يعتمد مدير عقدًا.",
+  "de": "Eine Provision erscheint hier, sobald eine Führungskraft einen Vertrag freigibt.",
+  "fr": "Une commission apparaît ici quand un responsable approuve un contrat.",
+  "it": "Una provvigione compare qui quando un responsabile approva un contratto."
+ },
+ "Team.commissions.emptyBodyOwn": {
+  "en": "Your commission appears here when a manager approves one of your contracts.",
+  "ar": "تظهر عمولتك هنا عندما يعتمد مدير أحد عقودك.",
+  "de": "Ihre Provision erscheint hier, sobald eine Führungskraft einen Ihrer Verträge freigibt.",
+  "fr": "Votre commission apparaît ici quand un responsable approuve l'un de vos contrats.",
+  "it": "La tua provvigione compare qui quando un responsabile approva uno dei tuoi contratti."
+ },
+ "Team.commissions.noMatchTitle": {
+  "en": "No commissions match",
+  "ar": "لا توجد عمولات مطابقة",
+  "de": "Keine passenden Provisionen",
+  "fr": "Aucune commission ne correspond",
+  "it": "Nessuna provvigione corrispondente"
+ },
+ "Team.commissions.noMatchBody": {
+  "en": "Try another search, status or salesperson.",
+  "ar": "جرّب بحثًا أو حالة أو مندوبًا آخر.",
+  "de": "Versuchen Sie eine andere Suche, einen anderen Status oder eine andere Person.",
+  "fr": "Essayez une autre recherche, un autre statut ou un autre commercial.",
+  "it": "Prova un'altra ricerca, un altro stato o un altro venditore."
+ },
+ "Team.commissions.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella i filtri"
+ },
+ "Team.payout.titleCommission": {
+  "en": "Pay commission {reference}",
+  "ar": "دفع العمولة {reference}",
+  "de": "Provision {reference} zahlen",
+  "fr": "Payer la commission {reference}",
+  "it": "Paga la provvigione {reference}"
+ },
+ "Team.payout.titleWallet": {
+  "en": "Pay {name}'s wallet",
+  "ar": "دفع رصيد محفظة {name}",
+  "de": "Guthaben von {name} auszahlen",
+  "fr": "Payer le portefeuille de {name}",
+  "it": "Paga il portafoglio di {name}"
+ },
+ "Team.payout.commissionHint": {
+  "en": "For {name}, on {project}.",
+  "ar": "لصالح {name}، عن مشروع {project}.",
+  "de": "Für {name}, zum Projekt {project}.",
+  "fr": "Pour {name}, sur le projet {project}.",
+  "it": "Per {name}, sul progetto {project}."
+ },
+ "Team.payout.walletHint": {
+  "en": "Pays the whole balance, oldest unpaid commissions first.",
+  "ar": "يدفع الرصيد كاملًا، بدءًا بأقدم العمولات غير المدفوعة.",
+  "de": "Zahlt das gesamte Guthaben aus, die ältesten offenen Provisionen zuerst.",
+  "fr": "Verse tout le solde, en commençant par les commissions impayées les plus anciennes.",
+  "it": "Paga l'intero saldo, a partire dalle provvigioni non pagate più vecchie."
+ },
+ "Team.payout.walletBalance": {
+  "en": "Wallet balance",
+  "ar": "رصيد المحفظة",
+  "de": "Guthaben",
+  "fr": "Solde du portefeuille",
+  "it": "Saldo del portafoglio"
+ },
+ "Team.payout.summaryAmount": {
+  "en": "Commission",
+  "ar": "العمولة",
+  "de": "Provision",
+  "fr": "Commission",
+  "it": "Provvigione"
+ },
+ "Team.payout.summaryPaid": {
+  "en": "Paid so far",
+  "ar": "المدفوع حتى الآن",
+  "de": "Bisher bezahlt",
+  "fr": "Déjà payé",
+  "it": "Già pagato"
+ },
+ "Team.payout.summaryDue": {
+  "en": "Due now",
+  "ar": "المستحق الآن",
+  "de": "Jetzt fällig",
+  "fr": "Dû maintenant",
+  "it": "Dovuto ora"
+ },
+ "Team.payout.amount": {
+  "en": "Amount to pay",
+  "ar": "المبلغ المراد دفعه",
+  "de": "Zu zahlender Betrag",
+  "fr": "Montant à payer",
+  "it": "Importo da pagare"
+ },
+ "Team.payout.amountHint": {
+  "en": "Up to {due}. Less leaves the commission partly paid.",
+  "ar": "حتى {due}. المبلغ الأقل يترك العمولة مدفوعة جزئيًا.",
+  "de": "Bis zu {due}. Weniger lässt die Provision teilweise bezahlt.",
+  "fr": "Jusqu'à {due}. Un montant inférieur laisse la commission payée en partie.",
+  "it": "Fino a {due}. Un importo inferiore lascia la provvigione pagata in parte."
+ },
+ "Team.payout.reference": {
+  "en": "Payment reference",
+  "ar": "مرجع الدفع",
+  "de": "Zahlungsreferenz",
+  "fr": "Référence du paiement",
+  "it": "Riferimento del pagamento"
+ },
+ "Team.payout.referenceHint": {
+  "en": "The bank transfer's reference. Never a card number.",
+  "ar": "مرجع التحويل البنكي. ليس رقم بطاقة أبدًا.",
+  "de": "Die Referenz der Banküberweisung. Nie eine Kartennummer.",
+  "fr": "La référence du virement bancaire. Jamais un numéro de carte.",
+  "it": "Il riferimento del bonifico. Mai un numero di carta."
+ },
+ "Team.payout.receipt": {
+  "en": "Receipt",
+  "ar": "الإيصال",
+  "de": "Beleg",
+  "fr": "Reçu",
+  "it": "Ricevuta"
+ },
+ "Team.payout.receiptHint": {
+  "en": "Optional. A PDF or an image of the transfer receipt, up to 10 MB.",
+  "ar": "اختياري. ملف PDF أو صورة لإيصال التحويل، حتى 10 ميغابايت.",
+  "de": "Optional. Ein PDF oder Bild des Überweisungsbelegs, bis 10 MB.",
+  "fr": "Facultatif. Un PDF ou une image du reçu de virement, jusqu'à 10 Mo.",
+  "it": "Facoltativo. Un PDF o un'immagine della ricevuta del bonifico, fino a 10 MB."
+ },
+ "Team.payout.review": {
+  "en": "Review payment",
+  "ar": "مراجعة الدفع",
+  "de": "Zahlung prüfen",
+  "fr": "Vérifier le paiement",
+  "it": "Controlla il pagamento"
+ },
+ "Team.payout.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Team.payout.back": {
+  "en": "Back",
+  "ar": "رجوع",
+  "de": "Zurück",
+  "fr": "Retour",
+  "it": "Indietro"
+ },
+ "Team.payout.confirmTitle": {
+  "en": "Pay {amount} to {name}?",
+  "ar": "دفع {amount} إلى {name}؟",
+  "de": "{amount} an {name} zahlen?",
+  "fr": "Payer {amount} à {name} ?",
+  "it": "Pagare {amount} a {name}?"
+ },
+ "Team.payout.confirmImpactPartial": {
+  "en": "{reference} will still have {left} due.",
+  "ar": "سيبقى على {reference} مبلغ {left} مستحقًا.",
+  "de": "Bei {reference} bleiben dann {left} offen.",
+  "fr": "{reference} aura encore {left} dû.",
+  "it": "{reference} avrà ancora {left} da pagare."
+ },
+ "Team.payout.confirmImpactFull": {
+  "en": "{reference} will be paid in full.",
+  "ar": "ستُدفع {reference} بالكامل.",
+  "de": "{reference} ist dann vollständig bezahlt.",
+  "fr": "{reference} sera payée en totalité.",
+  "it": "{reference} sarà pagata per intero."
+ },
+ "Team.payout.confirmImpactWallet": {
+  "en": "This settles {name}'s wallet: every unpaid commission is marked paid.",
+  "ar": "سيُسدَّد رصيد محفظة {name}: تُعلَّم كل العمولات غير المدفوعة كمدفوعة.",
+  "de": "Damit ist das Guthaben von {name} ausgeglichen: Alle offenen Provisionen gelten als bezahlt.",
+  "fr": "Le portefeuille de {name} sera soldé : toutes les commissions impayées seront marquées payées.",
+  "it": "Il portafoglio di {name} sarà saldato: tutte le provvigioni non pagate risulteranno pagate."
+ },
+ "Team.payout.confirmLabel": {
+  "en": "Pay {amount}",
+  "ar": "دفع {amount}",
+  "de": "{amount} zahlen",
+  "fr": "Payer {amount}",
+  "it": "Paga {amount}"
+ },
+ "Team.salespeople.title": {
+  "en": "Salespeople",
+  "ar": "مندوبو المبيعات",
+  "de": "Vertriebsteam",
+  "fr": "Commerciaux",
+  "it": "Venditori"
+ },
+ "Team.salespeople.description": {
+  "en": "The sales team: their deals, customers, commissions and wallets.",
+  "ar": "فريق المبيعات: صفقاتهم وعملاؤهم وعمولاتهم ومحافظهم.",
+  "de": "Das Vertriebsteam: Deals, Kunden, Provisionen und Guthaben.",
+  "fr": "L'équipe commerciale : affaires, clients, commissions et portefeuilles.",
+  "it": "Il team vendite: trattative, clienti, provvigioni e portafogli."
+ },
+ "Team.salespeople.descriptionManager": {
+  "en": "The sales team: their deals, customers and commissions. Admins add and edit salespeople.",
+  "ar": "فريق المبيعات: صفقاتهم وعملاؤهم وعمولاتهم. يضيف المسؤولون مندوبي المبيعات ويعدّلونهم.",
+  "de": "Das Vertriebsteam: Deals, Kunden und Provisionen. Administratoren fügen Mitarbeitende hinzu und bearbeiten sie.",
+  "fr": "L'équipe commerciale : affaires, clients et commissions. Les administrateurs ajoutent et modifient les commerciaux.",
+  "it": "Il team vendite: trattative, clienti e provvigioni. Gli amministratori aggiungono e modificano i venditori."
+ },
+ "Team.salespeople.search": {
+  "en": "Search by name, email or phone",
+  "ar": "ابحث بالاسم أو البريد الإلكتروني أو الهاتف",
+  "de": "Nach Name, E-Mail oder Telefon suchen",
+  "fr": "Rechercher par nom, e-mail ou téléphone",
+  "it": "Cerca per nome, email o telefono"
+ },
+ "Team.salespeople.add": {
+  "en": "New salesperson",
+  "ar": "مندوب مبيعات جديد",
+  "de": "Neue/r Vertriebsmitarbeiter/in",
+  "fr": "Nouveau commercial",
+  "it": "Nuovo venditore"
+ },
+ "Team.salespeople.addTitle": {
+  "en": "Add a salesperson",
+  "ar": "إضافة مندوب مبيعات",
+  "de": "Vertriebsmitarbeiter/in hinzufügen",
+  "fr": "Ajouter un commercial",
+  "it": "Aggiungi un venditore"
+ },
+ "Team.salespeople.addHint": {
+  "en": "This adds them to the CRM so customers and deals can be assigned to them. Signing in is granted in SOS.",
+  "ar": "يضيفه هذا إلى نظام CRM لكي تُسند إليه العملاء والصفقات. يُمنح تسجيل الدخول من SOS.",
+  "de": "Damit kommt die Person ins CRM, und ihr können Kunden und Deals zugewiesen werden. Die Anmeldung wird in SOS vergeben.",
+  "fr": "Le commercial est ajouté au CRM pour pouvoir lui attribuer des clients et des affaires. La connexion s'accorde dans SOS.",
+  "it": "Il venditore viene aggiunto al CRM per potergli assegnare clienti e trattative. L'accesso si concede in SOS."
+ },
+ "Team.salespeople.editTitle": {
+  "en": "Edit salesperson",
+  "ar": "تعديل مندوب المبيعات",
+  "de": "Vertriebsmitarbeiter/in bearbeiten",
+  "fr": "Modifier le commercial",
+  "it": "Modifica venditore"
+ },
+ "Team.salespeople.edit": {
+  "en": "Edit",
+  "ar": "تعديل",
+  "de": "Bearbeiten",
+  "fr": "Modifier",
+  "it": "Modifica"
+ },
+ "Team.salespeople.save": {
+  "en": "Save changes",
+  "ar": "حفظ التغييرات",
+  "de": "Änderungen speichern",
+  "fr": "Enregistrer",
+  "it": "Salva le modifiche"
+ },
+ "Team.salespeople.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Team.salespeople.loading": {
+  "en": "Loading…",
+  "ar": "جارٍ التحميل…",
+  "de": "Wird geladen…",
+  "fr": "Chargement…",
+  "it": "Caricamento…"
+ },
+ "Team.salespeople.fullName": {
+  "en": "Full name",
+  "ar": "الاسم الكامل",
+  "de": "Vollständiger Name",
+  "fr": "Nom complet",
+  "it": "Nome completo"
+ },
+ "Team.salespeople.email": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Team.salespeople.phone": {
+  "en": "Phone",
+  "ar": "الهاتف",
+  "de": "Telefon",
+  "fr": "Téléphone",
+  "it": "Telefono"
+ },
+ "Team.salespeople.address": {
+  "en": "Address",
+  "ar": "العنوان",
+  "de": "Adresse",
+  "fr": "Adresse",
+  "it": "Indirizzo"
+ },
+ "Team.salespeople.department": {
+  "en": "Department",
+  "ar": "القسم",
+  "de": "Abteilung",
+  "fr": "Service",
+  "it": "Reparto"
+ },
+ "Team.salespeople.noDepartment": {
+  "en": "No department",
+  "ar": "بلا قسم",
+  "de": "Keine Abteilung",
+  "fr": "Aucun service",
+  "it": "Nessun reparto"
+ },
+ "Team.salespeople.zone": {
+  "en": "Zone",
+  "ar": "المنطقة",
+  "de": "Zone",
+  "fr": "Zone",
+  "it": "Zona"
+ },
+ "Team.salespeople.noZone": {
+  "en": "No zone",
+  "ar": "بلا منطقة",
+  "de": "Keine Zone",
+  "fr": "Aucune zone",
+  "it": "Nessuna zona"
+ },
+ "Team.salespeople.zoneHint": {
+  "en": "Their wallet is kept in this zone's currency.",
+  "ar": "تُحفظ محفظته بعملة هذه المنطقة.",
+  "de": "Das Guthaben wird in der Währung dieser Zone geführt.",
+  "fr": "Son portefeuille est tenu dans la devise de cette zone.",
+  "it": "Il portafoglio è tenuto nella valuta di questa zona."
+ },
+ "Team.salespeople.since": {
+  "en": "In the team since",
+  "ar": "في الفريق منذ",
+  "de": "Im Team seit",
+  "fr": "Dans l'équipe depuis",
+  "it": "Nel team dal"
+ },
+ "Team.salespeople.bankDetails": {
+  "en": "Bank account",
+  "ar": "الحساب البنكي",
+  "de": "Bankkonto",
+  "fr": "Compte bancaire",
+  "it": "Conto bancario"
+ },
+ "Team.salespeople.noBankDetails": {
+  "en": "No bank account yet. The salesperson adds it on their profile.",
+  "ar": "لا يوجد حساب بنكي بعد. يضيفه مندوب المبيعات من ملفه الشخصي.",
+  "de": "Noch kein Bankkonto. Die Person trägt es in ihrem Profil ein.",
+  "fr": "Pas encore de compte bancaire. Le commercial l'ajoute dans son profil.",
+  "it": "Nessun conto bancario. Il venditore lo aggiunge nel suo profilo."
+ },
+ "Team.salespeople.accountName": {
+  "en": "Account holder",
+  "ar": "صاحب الحساب",
+  "de": "Kontoinhaber/in",
+  "fr": "Titulaire du compte",
+  "it": "Intestatario"
+ },
+ "Team.salespeople.bankName": {
+  "en": "Bank",
+  "ar": "البنك",
+  "de": "Bank",
+  "fr": "Banque",
+  "it": "Banca"
+ },
+ "Team.salespeople.iban": {
+  "en": "IBAN or account number",
+  "ar": "رقم IBAN أو رقم الحساب",
+  "de": "IBAN oder Kontonummer",
+  "fr": "IBAN ou numéro de compte",
+  "it": "IBAN o numero di conto"
+ },
+ "Team.salespeople.swift": {
+  "en": "SWIFT/BIC",
+  "ar": "SWIFT/BIC",
+  "de": "SWIFT/BIC",
+  "fr": "SWIFT/BIC",
+  "it": "SWIFT/BIC"
+ },
+ "Team.salespeople.colName": {
+  "en": "Name",
+  "ar": "الاسم",
+  "de": "Name",
+  "fr": "Nom",
+  "it": "Nome"
+ },
+ "Team.salespeople.colEmail": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Team.salespeople.colPhone": {
+  "en": "Phone",
+  "ar": "الهاتف",
+  "de": "Telefon",
+  "fr": "Téléphone",
+  "it": "Telefono"
+ },
+ "Team.salespeople.colDeals": {
+  "en": "Deals",
+  "ar": "الصفقات",
+  "de": "Deals",
+  "fr": "Affaires",
+  "it": "Trattative"
+ },
+ "Team.salespeople.colSales": {
+  "en": "Sales (USD)",
+  "ar": "المبيعات (دولار)",
+  "de": "Umsatz (USD)",
+  "fr": "Ventes (USD)",
+  "it": "Vendite (USD)"
+ },
+ "Team.salespeople.colCommission": {
+  "en": "Commission",
+  "ar": "العمولة",
+  "de": "Provision",
+  "fr": "Commission",
+  "it": "Provvigione"
+ },
+ "Team.salespeople.colPerformance": {
+  "en": "Performance",
+  "ar": "الأداء",
+  "de": "Leistung",
+  "fr": "Performance",
+  "it": "Rendimento"
+ },
+ "Team.salespeople.performanceLabel": {
+  "en": "Performance",
+  "ar": "الأداء",
+  "de": "Leistung",
+  "fr": "Performance",
+  "it": "Rendimento"
+ },
+ "Team.salespeople.performance.top_performance": {
+  "en": "Top performer",
+  "ar": "الأفضل أداءً",
+  "de": "Top-Leistung",
+  "fr": "Meilleur résultat",
+  "it": "Migliore"
+ },
+ "Team.salespeople.performance.on_track": {
+  "en": "On track",
+  "ar": "على المسار",
+  "de": "Im Plan",
+  "fr": "Dans les objectifs",
+  "it": "In linea"
+ },
+ "Team.salespeople.performance.under_performance": {
+  "en": "Below target",
+  "ar": "دون الهدف",
+  "de": "Unter Ziel",
+  "fr": "Sous l'objectif",
+  "it": "Sotto obiettivo"
+ },
+ "Team.salespeople.performance.inactive": {
+  "en": "Inactive",
+  "ar": "غير نشط",
+  "de": "Inaktiv",
+  "fr": "Inactif",
+  "it": "Inattivo"
+ },
+ "Team.salespeople.errorTitle": {
+  "en": "Salespeople didn't load",
+  "ar": "لم يُحمَّل مندوبو المبيعات",
+  "de": "Vertriebsteam wurde nicht geladen",
+  "fr": "Les commerciaux ne se sont pas chargés",
+  "it": "I venditori non sono stati caricati"
+ },
+ "Team.salespeople.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من الاتصال وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Team.salespeople.emptyTitle": {
+  "en": "No salespeople yet",
+  "ar": "لا يوجد مندوبو مبيعات بعد",
+  "de": "Noch keine Vertriebsmitarbeitenden",
+  "fr": "Aucun commercial pour l'instant",
+  "it": "Ancora nessun venditore"
+ },
+ "Team.salespeople.emptyBody": {
+  "en": "Add the first salesperson to assign customers and deals.",
+  "ar": "أضف أول مندوب مبيعات لإسناد العملاء والصفقات.",
+  "de": "Fügen Sie die erste Person hinzu, um Kunden und Deals zuzuweisen.",
+  "fr": "Ajoutez le premier commercial pour attribuer des clients et des affaires.",
+  "it": "Aggiungi il primo venditore per assegnare clienti e trattative."
+ },
+ "Team.salespeople.emptyBodyManager": {
+  "en": "An admin adds salespeople.",
+  "ar": "يضيف المسؤول مندوبي المبيعات.",
+  "de": "Administratoren fügen Vertriebsmitarbeitende hinzu.",
+  "fr": "Un administrateur ajoute les commerciaux.",
+  "it": "Un amministratore aggiunge i venditori."
+ },
+ "Team.salespeople.noMatchTitle": {
+  "en": "Nothing matches",
+  "ar": "لا توجد نتائج مطابقة",
+  "de": "Keine Treffer",
+  "fr": "Aucun résultat",
+  "it": "Nessun risultato"
+ },
+ "Team.salespeople.noMatchBody": {
+  "en": "Try another name, email or phone.",
+  "ar": "جرّب اسمًا أو بريدًا أو هاتفًا آخر.",
+  "de": "Versuchen Sie einen anderen Namen, eine andere E-Mail oder Telefonnummer.",
+  "fr": "Essayez un autre nom, e-mail ou téléphone.",
+  "it": "Prova un altro nome, email o telefono."
+ },
+ "Team.salespeople.clearSearch": {
+  "en": "Clear search",
+  "ar": "مسح البحث",
+  "de": "Suche zurücksetzen",
+  "fr": "Effacer la recherche",
+  "it": "Cancella la ricerca"
+ },
+ "Team.salespeople.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella i filtri"
+ },
+ "Team.salespeople.detailLoading": {
+  "en": "Loading the salesperson…",
+  "ar": "جارٍ تحميل مندوب المبيعات…",
+  "de": "Person wird geladen…",
+  "fr": "Chargement du commercial…",
+  "it": "Caricamento del venditore…"
+ },
+ "Team.salespeople.notFoundTitle": {
+  "en": "This salesperson isn't here",
+  "ar": "مندوب المبيعات هذا غير موجود",
+  "de": "Diese Person gibt es nicht",
+  "fr": "Ce commercial est introuvable",
+  "it": "Questo venditore non c'è"
+ },
+ "Team.salespeople.notFoundBody": {
+  "en": "They may have been deleted, or the link is wrong.",
+  "ar": "ربما حُذف، أو أن الرابط غير صحيح.",
+  "de": "Sie wurde vielleicht gelöscht, oder der Link ist falsch.",
+  "fr": "Il a peut-être été supprimé, ou le lien est erroné.",
+  "it": "Potrebbe essere stato eliminato, o il link è errato."
+ },
+ "Team.salespeople.backToList": {
+  "en": "Back to salespeople",
+  "ar": "العودة إلى مندوبي المبيعات",
+  "de": "Zurück zum Vertriebsteam",
+  "fr": "Retour aux commerciaux",
+  "it": "Torna ai venditori"
+ },
+ "Team.salespeople.noAccessTitle": {
+  "en": "You can't open this salesperson",
+  "ar": "لا يمكنك فتح مندوب المبيعات هذا",
+  "de": "Sie können diese Person nicht öffnen",
+  "fr": "Vous ne pouvez pas ouvrir ce commercial",
+  "it": "Non puoi aprire questo venditore"
+ },
+ "Team.salespeople.noAccessBody": {
+  "en": "Salespeople are visible to admins and managers.",
+  "ar": "يظهر مندوبو المبيعات للمسؤولين والمديرين.",
+  "de": "Das Vertriebsteam sehen Administratoren und Führungskräfte.",
+  "fr": "Les commerciaux sont visibles des administrateurs et des responsables.",
+  "it": "I venditori sono visibili ad amministratori e responsabili."
+ },
+ "Team.salespeople.detailErrorTitle": {
+  "en": "The salesperson didn't load",
+  "ar": "لم يُحمَّل مندوب المبيعات",
+  "de": "Die Person wurde nicht geladen",
+  "fr": "Le commercial ne s'est pas chargé",
+  "it": "Il venditore non è stato caricato"
+ },
+ "Team.salespeople.tab.overview": {
+  "en": "Overview",
+  "ar": "نظرة عامة",
+  "de": "Überblick",
+  "fr": "Vue d'ensemble",
+  "it": "Panoramica"
+ },
+ "Team.salespeople.tab.deals": {
+  "en": "Deals",
+  "ar": "الصفقات",
+  "de": "Deals",
+  "fr": "Affaires",
+  "it": "Trattative"
+ },
+ "Team.salespeople.tab.customers": {
+  "en": "Customers",
+  "ar": "العملاء",
+  "de": "Kunden",
+  "fr": "Clients",
+  "it": "Clienti"
+ },
+ "Team.salespeople.tab.performance": {
+  "en": "Performance",
+  "ar": "الأداء",
+  "de": "Leistung",
+  "fr": "Performance",
+  "it": "Rendimento"
+ },
+ "Team.salespeople.tab.notes": {
+  "en": "Notes",
+  "ar": "الملاحظات",
+  "de": "Notizen",
+  "fr": "Notes",
+  "it": "Note"
+ },
+ "Team.salespeople.detailsTitle": {
+  "en": "Details",
+  "ar": "التفاصيل",
+  "de": "Angaben",
+  "fr": "Informations",
+  "it": "Dettagli"
+ },
+ "Team.salespeople.financeTitle": {
+  "en": "Money",
+  "ar": "الأموال",
+  "de": "Finanzen",
+  "fr": "Finances",
+  "it": "Importi"
+ },
+ "Team.salespeople.financeHint": {
+  "en": "Sales and commissions per zone currency. The wallet is in {currency}.",
+  "ar": "المبيعات والعمولات بعملة كل منطقة. المحفظة بعملة {currency}.",
+  "de": "Umsatz und Provisionen je Zonenwährung. Das Guthaben ist in {currency}.",
+  "fr": "Ventes et commissions par devise de zone. Le portefeuille est en {currency}.",
+  "it": "Vendite e provvigioni per valuta di zona. Il portafoglio è in {currency}."
+ },
+ "Team.salespeople.seeCommissions": {
+  "en": "See commissions",
+  "ar": "عرض العمولات",
+  "de": "Provisionen ansehen",
+  "fr": "Voir les commissions",
+  "it": "Vedi le provvigioni"
+ },
+ "Team.salespeople.payAll": {
+  "en": "Pay all · {amount}",
+  "ar": "دفع الكل · {amount}",
+  "de": "Alles zahlen · {amount}",
+  "fr": "Tout payer · {amount}",
+  "it": "Paga tutto · {amount}"
+ },
+ "Team.salespeople.statSales": {
+  "en": "Sales",
+  "ar": "المبيعات",
+  "de": "Umsatz",
+  "fr": "Ventes",
+  "it": "Vendite"
+ },
+ "Team.salespeople.statSalesHint": {
+  "en": "{count, plural, one {From {deals} approved deal} other {From {deals} approved deals}}",
+  "ar": "{count, plural, zero {لا توجد صفقات معتمدة} one {من صفقة معتمدة واحدة} two {من صفقتين معتمدتين} few {من {deals} صفقات معتمدة} many {من {deals} صفقة معتمدة} other {من {deals} صفقة معتمدة}}",
+  "de": "{count, plural, one {Aus {deals} freigegebenen Deal} other {Aus {deals} freigegebenen Deals}}",
+  "fr": "{count, plural, one {Sur {deals} affaire approuvée} other {Sur {deals} affaires approuvées}}",
+  "it": "{count, plural, one {Da {deals} trattativa approvata} other {Da {deals} trattative approvate}}"
+ },
+ "Team.salespeople.statEarned": {
+  "en": "Commission earned",
+  "ar": "العمولة المكتسبة",
+  "de": "Verdiente Provision",
+  "fr": "Commission gagnée",
+  "it": "Provvigione maturata"
+ },
+ "Team.salespeople.statPaidOut": {
+  "en": "Paid out",
+  "ar": "المدفوع",
+  "de": "Ausbezahlt",
+  "fr": "Versé",
+  "it": "Pagato"
+ },
+ "Team.salespeople.statWallet": {
+  "en": "Wallet balance",
+  "ar": "رصيد المحفظة",
+  "de": "Guthaben",
+  "fr": "Solde du portefeuille",
+  "it": "Saldo del portafoglio"
+ },
+ "Team.salespeople.statWalletHint": {
+  "en": "Still to pay",
+  "ar": "متبقٍ للدفع",
+  "de": "Noch zu zahlen",
+  "fr": "Reste à payer",
+  "it": "Ancora da pagare"
+ },
+ "Team.salespeople.statWalletClear": {
+  "en": "Nothing to pay",
+  "ar": "لا شيء مستحق",
+  "de": "Nichts offen",
+  "fr": "Rien à payer",
+  "it": "Niente da pagare"
+ },
+ "Team.salespeople.delete": {
+  "en": "Delete",
+  "ar": "حذف",
+  "de": "Löschen",
+  "fr": "Supprimer",
+  "it": "Elimina"
+ },
+ "Team.salespeople.deleteTitle": {
+  "en": "Delete {name}?",
+  "ar": "حذف {name}؟",
+  "de": "{name} löschen?",
+  "fr": "Supprimer {name} ?",
+  "it": "Eliminare {name}?"
+ },
+ "Team.salespeople.deleteImpact": {
+  "en": "{count, plural, =0 {They have no customers.} one {Their customer becomes unassigned.} other {Their {customers} customers become unassigned.}}",
+  "ar": "{count, plural, zero {ليس لديه عملاء.} one {سيصبح عميله بلا مندوب.} two {سيصبح عميلاه بلا مندوب.} few {سيصبح عملاؤه الـ{customers} بلا مندوب.} many {سيصبح عملاؤه الـ{customers} بلا مندوب.} other {سيصبح عملاؤه الـ{customers} بلا مندوب.}}",
+  "de": "{count, plural, =0 {Die Person hat keine Kunden.} one {Ihr Kunde hat dann niemanden zugewiesen.} other {Ihre {customers} Kunden haben dann niemanden zugewiesen.}}",
+  "fr": "{count, plural, =0 {Il n'a aucun client.} one {Son client n'aura plus de commercial.} other {Ses {customers} clients n'auront plus de commercial.}}",
+  "it": "{count, plural, =0 {Non ha clienti.} one {Il suo cliente resterà senza venditore.} other {I suoi {customers} clienti resteranno senza venditore.}}"
+ },
+ "Team.salespeople.deleteConfirm": {
+  "en": "Delete salesperson",
+  "ar": "حذف مندوب المبيعات",
+  "de": "Person löschen",
+  "fr": "Supprimer le commercial",
+  "it": "Elimina il venditore"
+ },
+ "Team.salespeople.colProject": {
+  "en": "Project",
+  "ar": "المشروع",
+  "de": "Projekt",
+  "fr": "Projet",
+  "it": "Progetto"
+ },
+ "Team.salespeople.colPlans": {
+  "en": "Plans",
+  "ar": "الخطط",
+  "de": "Pläne",
+  "fr": "Offres",
+  "it": "Piani"
+ },
+ "Team.salespeople.morePlans": {
+  "en": "+{more} more",
+  "ar": "+{more} أخرى",
+  "de": "+{more} weitere",
+  "fr": "+{more} autres",
+  "it": "+{more} altri"
+ },
+ "Team.salespeople.colTotal": {
+  "en": "Total",
+  "ar": "الإجمالي",
+  "de": "Gesamt",
+  "fr": "Total",
+  "it": "Totale"
+ },
+ "Team.salespeople.colStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Team.salespeople.colSigned": {
+  "en": "Contract",
+  "ar": "العقد",
+  "de": "Vertrag",
+  "fr": "Contrat",
+  "it": "Contratto"
+ },
+ "Team.salespeople.signedYes": {
+  "en": "Signed",
+  "ar": "موقَّع",
+  "de": "Unterschrieben",
+  "fr": "Signé",
+  "it": "Firmato"
+ },
+ "Team.salespeople.signedNo": {
+  "en": "Not signed",
+  "ar": "غير موقَّع",
+  "de": "Nicht unterschrieben",
+  "fr": "Non signé",
+  "it": "Non firmato"
+ },
+ "Team.salespeople.colCreated": {
+  "en": "Created",
+  "ar": "تاريخ الإنشاء",
+  "de": "Erstellt",
+  "fr": "Créé le",
+  "it": "Creato il"
+ },
+ "Team.salespeople.rateOfContract": {
+  "en": "{rate} of the contract",
+  "ar": "{rate} من قيمة العقد",
+  "de": "{rate} des Vertrags",
+  "fr": "{rate} du contrat",
+  "it": "{rate} del contratto"
+ },
+ "Team.salespeople.untitledProject": {
+  "en": "Untitled project",
+  "ar": "مشروع بلا اسم",
+  "de": "Projekt ohne Namen",
+  "fr": "Projet sans nom",
+  "it": "Progetto senza nome"
+ },
+ "Team.salespeople.dealsSearch": {
+  "en": "Search by project or plan",
+  "ar": "ابحث بالمشروع أو الخطة",
+  "de": "Nach Projekt oder Plan suchen",
+  "fr": "Rechercher par projet ou offre",
+  "it": "Cerca per progetto o piano"
+ },
+ "Team.salespeople.filterStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Team.salespeople.statusAll": {
+  "en": "All statuses",
+  "ar": "كل الحالات",
+  "de": "Alle Status",
+  "fr": "Tous les statuts",
+  "it": "Tutti gli stati"
+ },
+ "Team.salespeople.dealsErrorTitle": {
+  "en": "Deals didn't load",
+  "ar": "لم تُحمَّل الصفقات",
+  "de": "Deals wurden nicht geladen",
+  "fr": "Les affaires ne se sont pas chargées",
+  "it": "Le trattative non sono state caricate"
+ },
+ "Team.salespeople.dealsEmptyTitle": {
+  "en": "No deals yet",
+  "ar": "لا توجد صفقات بعد",
+  "de": "Noch keine Deals",
+  "fr": "Aucune affaire pour l'instant",
+  "it": "Ancora nessuna trattativa"
+ },
+ "Team.salespeople.dealsEmptyBody": {
+  "en": "A deal appears here when one of their offers is accepted.",
+  "ar": "تظهر الصفقة هنا عند قبول أحد عروضه.",
+  "de": "Ein Deal erscheint hier, sobald eines ihrer Angebote angenommen wird.",
+  "fr": "Une affaire apparaît ici quand l'une de ses offres est acceptée.",
+  "it": "Una trattativa compare qui quando una sua offerta viene accettata."
+ },
+ "Team.salespeople.dealsNoMatchBody": {
+  "en": "Try another search or status.",
+  "ar": "جرّب بحثًا أو حالة أخرى.",
+  "de": "Versuchen Sie eine andere Suche oder einen anderen Status.",
+  "fr": "Essayez une autre recherche ou un autre statut.",
+  "it": "Prova un'altra ricerca o un altro stato."
+ },
+ "Team.salespeople.colCustomer": {
+  "en": "Customer",
+  "ar": "العميل",
+  "de": "Kunde",
+  "fr": "Client",
+  "it": "Cliente"
+ },
+ "Team.salespeople.colCompany": {
+  "en": "Company",
+  "ar": "الشركة",
+  "de": "Firma",
+  "fr": "Entreprise",
+  "it": "Azienda"
+ },
+ "Team.salespeople.customersSearch": {
+  "en": "Search by name, email or company",
+  "ar": "ابحث بالاسم أو البريد أو الشركة",
+  "de": "Nach Name, E-Mail oder Firma suchen",
+  "fr": "Rechercher par nom, e-mail ou entreprise",
+  "it": "Cerca per nome, email o azienda"
+ },
+ "Team.salespeople.filterStage": {
+  "en": "Stage",
+  "ar": "المرحلة",
+  "de": "Phase",
+  "fr": "Étape",
+  "it": "Fase"
+ },
+ "Team.salespeople.stageAll": {
+  "en": "All stages",
+  "ar": "كل المراحل",
+  "de": "Alle Phasen",
+  "fr": "Toutes les étapes",
+  "it": "Tutte le fasi"
+ },
+ "Team.salespeople.customersErrorTitle": {
+  "en": "Customers didn't load",
+  "ar": "لم يُحمَّل العملاء",
+  "de": "Kunden wurden nicht geladen",
+  "fr": "Les clients ne se sont pas chargés",
+  "it": "I clienti non sono stati caricati"
+ },
+ "Team.salespeople.customersEmptyTitle": {
+  "en": "No customers yet",
+  "ar": "لا يوجد عملاء بعد",
+  "de": "Noch keine Kunden",
+  "fr": "Aucun client pour l'instant",
+  "it": "Ancora nessun cliente"
+ },
+ "Team.salespeople.customersEmptyBody": {
+  "en": "Customers and leads assigned to them appear here.",
+  "ar": "يظهر هنا العملاء والعملاء المحتملون المسندون إليه.",
+  "de": "Hier erscheinen die zugewiesenen Kunden und Leads.",
+  "fr": "Les clients et prospects qui lui sont attribués apparaissent ici.",
+  "it": "Qui compaiono i clienti e i lead assegnati."
+ },
+ "Team.salespeople.customersNoMatchBody": {
+  "en": "Try another search or stage.",
+  "ar": "جرّب بحثًا أو مرحلة أخرى.",
+  "de": "Versuchen Sie eine andere Suche oder Phase.",
+  "fr": "Essayez une autre recherche ou étape.",
+  "it": "Prova un'altra ricerca o fase."
+ },
+ "Team.salespeople.performanceEmptyTitle": {
+  "en": "No performance data yet",
+  "ar": "لا توجد بيانات أداء بعد",
+  "de": "Noch keine Leistungsdaten",
+  "fr": "Pas encore de données de performance",
+  "it": "Ancora nessun dato sul rendimento"
+ },
+ "Team.salespeople.performanceEmptyBody": {
+  "en": "It appears once they have customers and deals.",
+  "ar": "تظهر بعد أن يصبح لديه عملاء وصفقات.",
+  "de": "Sie erscheinen, sobald Kunden und Deals vorhanden sind.",
+  "fr": "Elles apparaissent dès qu'il a des clients et des affaires.",
+  "it": "Compaiono quando ci sono clienti e trattative."
+ },
+ "Team.salespeople.statProjects": {
+  "en": "Projects",
+  "ar": "المشاريع",
+  "de": "Projekte",
+  "fr": "Projets",
+  "it": "Progetti"
+ },
+ "Team.salespeople.statCustomers": {
+  "en": "Customers",
+  "ar": "العملاء",
+  "de": "Kunden",
+  "fr": "Clients",
+  "it": "Clienti"
+ },
+ "Team.salespeople.statPlans": {
+  "en": "Plans sold",
+  "ar": "الخطط المبيعة",
+  "de": "Verkaufte Pläne",
+  "fr": "Offres vendues",
+  "it": "Piani venduti"
+ },
+ "Team.salespeople.vsLastMonth": {
+  "en": "vs last month",
+  "ar": "مقارنةً بالشهر الماضي",
+  "de": "ggü. Vormonat",
+  "fr": "par rapport au mois dernier",
+  "it": "rispetto al mese scorso"
+ },
+ "Team.salespeople.zoneSwitch": {
+  "en": "Zone and currency",
+  "ar": "المنطقة والعملة",
+  "de": "Zone und Währung",
+  "fr": "Zone et devise",
+  "it": "Zona e valuta"
+ },
+ "Team.salespeople.chartSales": {
+  "en": "Sales over 12 months",
+  "ar": "المبيعات خلال 12 شهرًا",
+  "de": "Umsatz über 12 Monate",
+  "fr": "Ventes sur 12 mois",
+  "it": "Vendite in 12 mesi"
+ },
+ "Team.salespeople.chartSalesHint": {
+  "en": "{zone}, in {currency}",
+  "ar": "{zone}، بعملة {currency}",
+  "de": "{zone}, in {currency}",
+  "fr": "{zone}, en {currency}",
+  "it": "{zone}, in {currency}"
+ },
+ "Team.salespeople.chartSalesSeries": {
+  "en": "Sales",
+  "ar": "المبيعات",
+  "de": "Umsatz",
+  "fr": "Ventes",
+  "it": "Vendite"
+ },
+ "Team.salespeople.chartMonth": {
+  "en": "Month",
+  "ar": "الشهر",
+  "de": "Monat",
+  "fr": "Mois",
+  "it": "Mese"
+ },
+ "Team.salespeople.chartDeals": {
+  "en": "Deals by stage",
+  "ar": "الصفقات حسب المرحلة",
+  "de": "Deals nach Phase",
+  "fr": "Affaires par étape",
+  "it": "Trattative per fase"
+ },
+ "Team.salespeople.chartDealsTotal": {
+  "en": "deals",
+  "ar": "صفقة",
+  "de": "Deals",
+  "fr": "affaires",
+  "it": "trattative"
+ },
+ "Team.salespeople.chartDealsCount": {
+  "en": "Deals",
+  "ar": "الصفقات",
+  "de": "Deals",
+  "fr": "Affaires",
+  "it": "Trattative"
+ },
+ "Team.salespeople.chartStage": {
+  "en": "Stage",
+  "ar": "المرحلة",
+  "de": "Phase",
+  "fr": "Étape",
+  "it": "Fase"
+ },
+ "Team.salespeople.chartCustomers": {
+  "en": "Customers by stage",
+  "ar": "العملاء حسب المرحلة",
+  "de": "Kunden nach Phase",
+  "fr": "Clients par étape",
+  "it": "Clienti per fase"
+ },
+ "Team.salespeople.chartCustomersTotal": {
+  "en": "customers",
+  "ar": "عميل",
+  "de": "Kunden",
+  "fr": "clients",
+  "it": "clienti"
+ },
+ "Team.salespeople.chartCustomersCount": {
+  "en": "Customers",
+  "ar": "العملاء",
+  "de": "Kunden",
+  "fr": "Clients",
+  "it": "Clienti"
+ },
+ "Team.salespeople.chartPlans": {
+  "en": "Top plans by revenue",
+  "ar": "أعلى الخطط إيرادًا",
+  "de": "Top-Pläne nach Umsatz",
+  "fr": "Offres les plus rentables",
+  "it": "Piani con più ricavi"
+ },
+ "Team.salespeople.chartPlan": {
+  "en": "Plan",
+  "ar": "الخطة",
+  "de": "Plan",
+  "fr": "Offre",
+  "it": "Piano"
+ },
+ "Team.salespeople.chartRevenue": {
+  "en": "Revenue",
+  "ar": "الإيرادات",
+  "de": "Umsatz",
+  "fr": "Chiffre d'affaires",
+  "it": "Ricavi"
+ },
+ "Team.salespeople.notesTitle": {
+  "en": "Notes",
+  "ar": "الملاحظات",
+  "de": "Notizen",
+  "fr": "Notes",
+  "it": "Note"
+ },
+ "Team.salespeople.notesReadOnly": {
+  "en": "Admins add notes.",
+  "ar": "يضيف المسؤولون الملاحظات.",
+  "de": "Notizen fügen Administratoren hinzu.",
+  "fr": "Les administrateurs ajoutent les notes.",
+  "it": "Le note le aggiungono gli amministratori."
+ },
+ "Team.salespeople.noteLabel": {
+  "en": "New note",
+  "ar": "ملاحظة جديدة",
+  "de": "Neue Notiz",
+  "fr": "Nouvelle note",
+  "it": "Nuova nota"
+ },
+ "Team.salespeople.notePlaceholder": {
+  "en": "What should the team know?",
+  "ar": "ما الذي يجب أن يعرفه الفريق؟",
+  "de": "Was soll das Team wissen?",
+  "fr": "Que doit savoir l'équipe ?",
+  "it": "Cosa deve sapere il team?"
+ },
+ "Team.salespeople.addNote": {
+  "en": "Add note",
+  "ar": "إضافة ملاحظة",
+  "de": "Notiz hinzufügen",
+  "fr": "Ajouter la note",
+  "it": "Aggiungi nota"
+ },
+ "Team.salespeople.notesErrorTitle": {
+  "en": "Notes didn't load",
+  "ar": "لم تُحمَّل الملاحظات",
+  "de": "Notizen wurden nicht geladen",
+  "fr": "Les notes ne se sont pas chargées",
+  "it": "Le note non sono state caricate"
+ },
+ "Team.salespeople.notesEmptyTitle": {
+  "en": "No notes yet",
+  "ar": "لا توجد ملاحظات بعد",
+  "de": "Noch keine Notizen",
+  "fr": "Aucune note pour l'instant",
+  "it": "Ancora nessuna nota"
+ },
+ "Team.salespeople.notesEmptyBody": {
+  "en": "Add the first note above.",
+  "ar": "أضف أول ملاحظة أعلاه.",
+  "de": "Fügen Sie oben die erste Notiz hinzu.",
+  "fr": "Ajoutez la première note ci-dessus.",
+  "it": "Aggiungi la prima nota qui sopra."
+ },
+ "Team.salespeople.someone": {
+  "en": "Someone",
+  "ar": "شخص ما",
+  "de": "Jemand",
+  "fr": "Quelqu'un",
+  "it": "Qualcuno"
+ },
+ "Team.users.title": {
+  "en": "User management",
+  "ar": "إدارة المستخدمين",
+  "de": "Benutzerverwaltung",
+  "fr": "Gestion des utilisateurs",
+  "it": "Gestione utenti"
+ },
+ "Team.users.description": {
+  "en": "Who has the CRM, with which role.",
+  "ar": "من لديه صلاحية CRM وبأي دور.",
+  "de": "Wer das CRM nutzt, mit welcher Rolle.",
+  "fr": "Qui a accès au CRM, avec quel rôle.",
+  "it": "Chi ha il CRM, con quale ruolo."
+ },
+ "Team.users.sosNoteAdmin": {
+  "en": "Roles and access come from SOS. To give someone the CRM, change a role or turn access off, open SOS.",
+  "ar": "الأدوار والصلاحيات مصدرها SOS. لمنح شخص صلاحية CRM أو تغيير دوره أو إيقاف وصوله، افتح SOS.",
+  "de": "Rollen und Zugriff kommen aus SOS. Um jemandem das CRM zu geben, eine Rolle zu ändern oder den Zugriff zu beenden, öffnen Sie SOS.",
+  "fr": "Les rôles et les accès viennent de SOS. Pour donner le CRM à quelqu'un, changer un rôle ou couper un accès, ouvrez SOS.",
+  "it": "Ruoli e accessi arrivano da SOS. Per dare il CRM a qualcuno, cambiare un ruolo o togliere l'accesso, apri SOS."
+ },
+ "Team.users.sosNoteManager": {
+  "en": "Roles and access come from SOS; admins change them there.",
+  "ar": "الأدوار والصلاحيات مصدرها SOS؛ يغيّرها المسؤولون هناك.",
+  "de": "Rollen und Zugriff kommen aus SOS; Administratoren ändern sie dort.",
+  "fr": "Les rôles et les accès viennent de SOS ; les administrateurs les y modifient.",
+  "it": "Ruoli e accessi arrivano da SOS; li cambiano lì gli amministratori."
+ },
+ "Team.users.manageInSos": {
+  "en": "Manage access in SOS",
+  "ar": "إدارة الصلاحيات في SOS",
+  "de": "Zugriff in SOS verwalten",
+  "fr": "Gérer les accès dans SOS",
+  "it": "Gestisci gli accessi in SOS"
+ },
+ "Team.users.viewAs": {
+  "en": "View as",
+  "ar": "العرض بصفته",
+  "de": "Ansehen als",
+  "fr": "Voir en tant que",
+  "it": "Visualizza come"
+ },
+ "Team.users.viewAsAria": {
+  "en": "View the CRM as {name}, read-only, in SOS",
+  "ar": "عرض CRM بصفة {name}، للقراءة فقط، في SOS",
+  "de": "Das CRM als {name} ansehen, nur lesend, in SOS",
+  "fr": "Voir le CRM en tant que {name}, en lecture seule, dans SOS",
+  "it": "Visualizza il CRM come {name}, in sola lettura, in SOS"
+ },
+ "Team.users.statsLabel": {
+  "en": "People with the CRM",
+  "ar": "الأشخاص الذين لديهم CRM",
+  "de": "Personen mit CRM",
+  "fr": "Personnes ayant le CRM",
+  "it": "Persone con il CRM"
+ },
+ "Team.users.statTotal": {
+  "en": "Staff records",
+  "ar": "سجلات الموظفين",
+  "de": "Mitarbeitereinträge",
+  "fr": "Fiches du personnel",
+  "it": "Schede del personale"
+ },
+ "Team.users.statAdmins": {
+  "en": "Admins",
+  "ar": "المسؤولون",
+  "de": "Administratoren",
+  "fr": "Administrateurs",
+  "it": "Amministratori"
+ },
+ "Team.users.statManagers": {
+  "en": "Managers",
+  "ar": "المديرون",
+  "de": "Führungskräfte",
+  "fr": "Responsables",
+  "it": "Responsabili"
+ },
+ "Team.users.statSalespeople": {
+  "en": "Salespeople",
+  "ar": "مندوبو المبيعات",
+  "de": "Vertriebsmitarbeitende",
+  "fr": "Commerciaux",
+  "it": "Venditori"
+ },
+ "Team.users.search": {
+  "en": "Search by name, email or phone",
+  "ar": "ابحث بالاسم أو البريد الإلكتروني أو الهاتف",
+  "de": "Nach Name, E-Mail oder Telefon suchen",
+  "fr": "Rechercher par nom, e-mail ou téléphone",
+  "it": "Cerca per nome, email o telefono"
+ },
+ "Team.users.filterRole": {
+  "en": "Role",
+  "ar": "الدور",
+  "de": "Rolle",
+  "fr": "Rôle",
+  "it": "Ruolo"
+ },
+ "Team.users.roleAll": {
+  "en": "All roles",
+  "ar": "كل الأدوار",
+  "de": "Alle Rollen",
+  "fr": "Tous les rôles",
+  "it": "Tutti i ruoli"
+ },
+ "Team.users.role.admin": {
+  "en": "Admin",
+  "ar": "مسؤول",
+  "de": "Administrator",
+  "fr": "Administrateur",
+  "it": "Amministratore"
+ },
+ "Team.users.role.manager": {
+  "en": "Manager",
+  "ar": "مدير",
+  "de": "Führungskraft",
+  "fr": "Responsable",
+  "it": "Responsabile"
+ },
+ "Team.users.role.salesman": {
+  "en": "Salesperson",
+  "ar": "مندوب مبيعات",
+  "de": "Vertriebsmitarbeiter/in",
+  "fr": "Commercial",
+  "it": "Venditore"
+ },
+ "Team.users.colName": {
+  "en": "Name",
+  "ar": "الاسم",
+  "de": "Name",
+  "fr": "Nom",
+  "it": "Nome"
+ },
+ "Team.users.colEmail": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Team.users.colRole": {
+  "en": "Role",
+  "ar": "الدور",
+  "de": "Rolle",
+  "fr": "Rôle",
+  "it": "Ruolo"
+ },
+ "Team.users.colAccess": {
+  "en": "CRM access",
+  "ar": "الوصول إلى CRM",
+  "de": "CRM-Zugriff",
+  "fr": "Accès au CRM",
+  "it": "Accesso al CRM"
+ },
+ "Team.users.colDepartment": {
+  "en": "Department",
+  "ar": "القسم",
+  "de": "Abteilung",
+  "fr": "Service",
+  "it": "Reparto"
+ },
+ "Team.users.errorTitle": {
+  "en": "People didn't load",
+  "ar": "لم يُحمَّل الأشخاص",
+  "de": "Personen wurden nicht geladen",
+  "fr": "Les personnes ne se sont pas chargées",
+  "it": "Le persone non sono state caricate"
+ },
+ "Team.users.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من الاتصال وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Team.users.noAccessTitle": {
+  "en": "You can't open user management",
+  "ar": "لا يمكنك فتح إدارة المستخدمين",
+  "de": "Sie können die Benutzerverwaltung nicht öffnen",
+  "fr": "Vous ne pouvez pas ouvrir la gestion des utilisateurs",
+  "it": "Non puoi aprire la gestione utenti"
+ },
+ "Team.users.noAccessBody": {
+  "en": "It is for admins and managers.",
+  "ar": "إنها للمسؤولين والمديرين.",
+  "de": "Sie ist für Administratoren und Führungskräfte.",
+  "fr": "Elle est réservée aux administrateurs et aux responsables.",
+  "it": "È per amministratori e responsabili."
+ },
+ "Team.users.emptyTitle": {
+  "en": "No one has the CRM yet",
+  "ar": "لا أحد لديه CRM بعد",
+  "de": "Noch niemand hat das CRM",
+  "fr": "Personne n'a encore le CRM",
+  "it": "Nessuno ha ancora il CRM"
+ },
+ "Team.users.emptyBody": {
+  "en": "People get the CRM from SOS.",
+  "ar": "يحصل الأشخاص على CRM من SOS.",
+  "de": "Personen erhalten das CRM über SOS.",
+  "fr": "Les personnes reçoivent le CRM depuis SOS.",
+  "it": "Le persone ricevono il CRM da SOS."
+ },
+ "Team.users.noMatchTitle": {
+  "en": "Nothing matches",
+  "ar": "لا توجد نتائج مطابقة",
+  "de": "Keine Treffer",
+  "fr": "Aucun résultat",
+  "it": "Nessun risultato"
+ },
+ "Team.users.noMatchBody": {
+  "en": "Try another search or role.",
+  "ar": "جرّب بحثًا أو دورًا آخر.",
+  "de": "Versuchen Sie eine andere Suche oder Rolle.",
+  "fr": "Essayez une autre recherche ou un autre rôle.",
+  "it": "Prova un'altra ricerca o un altro ruolo."
+ },
+ "Team.users.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella i filtri"
+ },
+ "Team.users.loading": {
+  "en": "Loading…",
+  "ar": "جارٍ التحميل…",
+  "de": "Wird geladen…",
+  "fr": "Chargement…",
+  "it": "Caricamento…"
+ },
+ "Team.users.notFoundTitle": {
+  "en": "This person isn't here",
+  "ar": "هذا الشخص غير موجود",
+  "de": "Diese Person gibt es nicht",
+  "fr": "Cette personne est introuvable",
+  "it": "Questa persona non c'è"
+ },
+ "Team.users.notFoundBody": {
+  "en": "Their record may have been removed, or the link is wrong.",
+  "ar": "ربما أُزيل سجله، أو أن الرابط غير صحيح.",
+  "de": "Der Eintrag wurde vielleicht entfernt, oder der Link ist falsch.",
+  "fr": "Sa fiche a peut-être été retirée, ou le lien est erroné.",
+  "it": "La scheda potrebbe essere stata rimossa, o il link è errato."
+ },
+ "Team.users.backToList": {
+  "en": "Back to user management",
+  "ar": "العودة إلى إدارة المستخدمين",
+  "de": "Zurück zur Benutzerverwaltung",
+  "fr": "Retour à la gestion des utilisateurs",
+  "it": "Torna alla gestione utenti"
+ },
+ "Team.users.detailErrorTitle": {
+  "en": "This person didn't load",
+  "ar": "لم يُحمَّل هذا الشخص",
+  "de": "Die Person wurde nicht geladen",
+  "fr": "Cette personne ne s'est pas chargée",
+  "it": "Questa persona non è stata caricata"
+ },
+ "Team.users.openSalesperson": {
+  "en": "Salesperson page",
+  "ar": "صفحة مندوب المبيعات",
+  "de": "Seite im Vertriebsteam",
+  "fr": "Page du commercial",
+  "it": "Pagina del venditore"
+ },
+ "Team.users.accessTitle": {
+  "en": "Access",
+  "ar": "الوصول",
+  "de": "Zugriff",
+  "fr": "Accès",
+  "it": "Accesso"
+ },
+ "Team.users.accessActive": {
+  "en": "{name} can sign in to the CRM with this role.",
+  "ar": "يمكن لـ{name} تسجيل الدخول إلى CRM بهذا الدور.",
+  "de": "{name} kann sich mit dieser Rolle im CRM anmelden.",
+  "fr": "{name} peut se connecter au CRM avec ce rôle.",
+  "it": "{name} può accedere al CRM con questo ruolo."
+ },
+ "Team.users.accessInvited": {
+  "en": "{name} has been invited and can't sign in yet.",
+  "ar": "تمت دعوة {name} ولا يمكنه تسجيل الدخول بعد.",
+  "de": "{name} wurde eingeladen und kann sich noch nicht anmelden.",
+  "fr": "{name} a été invité et ne peut pas encore se connecter.",
+  "it": "{name} è stato invitato e non può ancora accedere."
+ },
+ "Team.users.accessNone": {
+  "en": "{name} has a CRM record but no account, so can't sign in.",
+  "ar": "لدى {name} سجل في CRM لكن بلا حساب، لذا لا يمكنه تسجيل الدخول.",
+  "de": "{name} hat einen CRM-Eintrag, aber kein Konto, und kann sich nicht anmelden.",
+  "fr": "{name} a une fiche dans le CRM mais pas de compte, et ne peut donc pas se connecter.",
+  "it": "{name} ha una scheda nel CRM ma nessun account, quindi non può accedere."
+ },
+ "Team.users.accessChangeAdmin": {
+  "en": "Roles and access are changed in SOS.",
+  "ar": "تُغيَّر الأدوار والصلاحيات في SOS.",
+  "de": "Rollen und Zugriff ändern Sie in SOS.",
+  "fr": "Les rôles et les accès se modifient dans SOS.",
+  "it": "Ruoli e accessi si cambiano in SOS."
+ },
+ "Team.users.accessChangeManager": {
+  "en": "An admin changes roles and access in SOS.",
+  "ar": "يغيّر المسؤول الأدوار والصلاحيات في SOS.",
+  "de": "Rollen und Zugriff ändern Administratoren in SOS.",
+  "fr": "Un administrateur modifie les rôles et les accès dans SOS.",
+  "it": "Ruoli e accessi li cambia un amministratore in SOS."
+ },
+ "Team.users.detailsTitle": {
+  "en": "Details",
+  "ar": "التفاصيل",
+  "de": "Angaben",
+  "fr": "Informations",
+  "it": "Dettagli"
+ },
+ "Team.users.email": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Team.users.phone": {
+  "en": "Phone",
+  "ar": "الهاتف",
+  "de": "Telefon",
+  "fr": "Téléphone",
+  "it": "Telefono"
+ },
+ "Team.users.department": {
+  "en": "Department",
+  "ar": "القسم",
+  "de": "Abteilung",
+  "fr": "Service",
+  "it": "Reparto"
+ },
+ "Team.users.zone": {
+  "en": "Zone",
+  "ar": "المنطقة",
+  "de": "Zone",
+  "fr": "Zone",
+  "it": "Zona"
+ },
+ "Team.users.address": {
+  "en": "Address",
+  "ar": "العنوان",
+  "de": "Adresse",
+  "fr": "Adresse",
+  "it": "Indirizzo"
+ },
+ "Team.users.since": {
+  "en": "Record created",
+  "ar": "تاريخ إنشاء السجل",
+  "de": "Eintrag erstellt",
+  "fr": "Fiche créée le",
+  "it": "Scheda creata il"
+ },
+ "Team.loyalty.title": {
+  "en": "Loyalty",
+  "ar": "برنامج الولاء",
+  "de": "Treueprogramm",
+  "fr": "Fidélité",
+  "it": "Fedeltà"
+ },
+ "Team.loyalty.titleCustomer": {
+  "en": "Rewards",
+  "ar": "المكافآت",
+  "de": "Prämien",
+  "fr": "Récompenses",
+  "it": "Premi"
+ },
+ "Team.loyalty.descriptionAdmin": {
+  "en": "The points programme: how customers earn points, the rewards they redeem them for, and every customer's balance.",
+  "ar": "برنامج النقاط: كيف يكسب العملاء النقاط، والمكافآت التي يستبدلونها بها، ورصيد كل عميل.",
+  "de": "Das Punkteprogramm: wie Kunden Punkte sammeln, welche Prämien sie einlösen und der Stand jedes Kunden.",
+  "fr": "Le programme de points : comment les clients gagnent des points, les récompenses qu'ils obtiennent et le solde de chacun.",
+  "it": "Il programma a punti: come i clienti guadagnano punti, i premi che riscattano e il saldo di ciascuno."
+ },
+ "Team.loyalty.descriptionManager": {
+  "en": "Every customer's points and their history. Admins run the programme.",
+  "ar": "نقاط كل عميل وسجلها. يدير المسؤولون البرنامج.",
+  "de": "Die Punkte jedes Kunden und ihr Verlauf. Administratoren führen das Programm.",
+  "fr": "Les points de chaque client et leur historique. Les administrateurs gèrent le programme.",
+  "it": "I punti di ogni cliente e la loro cronologia. Il programma lo gestiscono gli amministratori."
+ },
+ "Team.loyalty.descriptionCustomer": {
+  "en": "Earn points on every payment and turn them into discount codes.",
+  "ar": "اكسب نقاطًا مع كل دفعة وحوّلها إلى أكواد خصم.",
+  "de": "Sammeln Sie bei jeder Zahlung Punkte und lösen Sie sie gegen Rabattcodes ein.",
+  "fr": "Gagnez des points à chaque paiement et transformez-les en codes de réduction.",
+  "it": "Guadagna punti a ogni pagamento e trasformali in codici sconto."
+ },
+ "Team.loyalty.loading": {
+  "en": "Loading…",
+  "ar": "جارٍ التحميل…",
+  "de": "Wird geladen…",
+  "fr": "Chargement…",
+  "it": "Caricamento…"
+ },
+ "Team.loyalty.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من الاتصال وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Team.loyalty.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Team.loyalty.discard": {
+  "en": "Discard changes",
+  "ar": "تجاهل التغييرات",
+  "de": "Änderungen verwerfen",
+  "fr": "Annuler les modifications",
+  "it": "Annulla le modifiche"
+ },
+ "Team.loyalty.adminTab.program": {
+  "en": "Programme",
+  "ar": "البرنامج",
+  "de": "Programm",
+  "fr": "Programme",
+  "it": "Programma"
+ },
+ "Team.loyalty.adminTab.rewards": {
+  "en": "Rewards",
+  "ar": "المكافآت",
+  "de": "Prämien",
+  "fr": "Récompenses",
+  "it": "Premi"
+ },
+ "Team.loyalty.adminTab.customers": {
+  "en": "Customers",
+  "ar": "العملاء",
+  "de": "Kunden",
+  "fr": "Clients",
+  "it": "Clienti"
+ },
+ "Team.loyalty.portalTab.rewards": {
+  "en": "Redeem",
+  "ar": "الاستبدال",
+  "de": "Einlösen",
+  "fr": "Échanger",
+  "it": "Riscatta"
+ },
+ "Team.loyalty.portalTab.coupons": {
+  "en": "My coupons",
+  "ar": "كوبوناتي",
+  "de": "Meine Gutscheincodes",
+  "fr": "Mes codes promo",
+  "it": "I miei codici sconto"
+ },
+ "Team.loyalty.portalTab.history": {
+  "en": "History",
+  "ar": "السجل",
+  "de": "Verlauf",
+  "fr": "Historique",
+  "it": "Cronologia"
+ },
+ "Team.loyalty.overviewLabel": {
+  "en": "Programme at a glance",
+  "ar": "البرنامج باختصار",
+  "de": "Programm auf einen Blick",
+  "fr": "Le programme en bref",
+  "it": "Il programma in breve"
+ },
+ "Team.loyalty.overviewError": {
+  "en": "The programme summary didn't load.",
+  "ar": "لم يُحمَّل ملخص البرنامج.",
+  "de": "Die Programmübersicht wurde nicht geladen.",
+  "fr": "Le résumé du programme ne s'est pas chargé.",
+  "it": "Il riepilogo del programma non è stato caricato."
+ },
+ "Team.loyalty.statProgram": {
+  "en": "Programme",
+  "ar": "البرنامج",
+  "de": "Programm",
+  "fr": "Programme",
+  "it": "Programma"
+ },
+ "Team.loyalty.programOn": {
+  "en": "Running",
+  "ar": "يعمل",
+  "de": "Aktiv",
+  "fr": "Actif",
+  "it": "Attivo"
+ },
+ "Team.loyalty.programOff": {
+  "en": "Paused",
+  "ar": "متوقف مؤقتًا",
+  "de": "Pausiert",
+  "fr": "En pause",
+  "it": "In pausa"
+ },
+ "Team.loyalty.statEarning": {
+  "en": "Earning",
+  "ar": "الكسب",
+  "de": "Sammeln",
+  "fr": "Gain",
+  "it": "Guadagno"
+ },
+ "Team.loyalty.earningValue": {
+  "en": "{points} per {currency}",
+  "ar": "{points} لكل {currency}",
+  "de": "{points} pro {currency}",
+  "fr": "{points} par {currency}",
+  "it": "{points} per {currency}"
+ },
+ "Team.loyalty.earningHint": {
+  "en": "{count, plural, one {Points last {months} month} other {Points last {months} months}}",
+  "ar": "{count, plural, zero {النقاط لا تبقى} one {تبقى النقاط شهرًا واحدًا} two {تبقى النقاط شهرين} few {تبقى النقاط {months} أشهر} many {تبقى النقاط {months} شهرًا} other {تبقى النقاط {months} شهر}}",
+  "de": "{count, plural, one {Punkte gelten {months} Monat} other {Punkte gelten {months} Monate}}",
+  "fr": "{count, plural, one {Les points valent {months} mois} other {Les points valent {months} mois}}",
+  "it": "{count, plural, one {I punti valgono {months} mese} other {I punti valgono {months} mesi}}"
+ },
+ "Team.loyalty.statOutstanding": {
+  "en": "Points held by customers",
+  "ar": "النقاط لدى العملاء",
+  "de": "Punkte bei Kunden",
+  "fr": "Points détenus par les clients",
+  "it": "Punti dei clienti"
+ },
+ "Team.loyalty.statWithBalance": {
+  "en": "Customers with points",
+  "ar": "العملاء الذين لديهم نقاط",
+  "de": "Kunden mit Punkten",
+  "fr": "Clients avec des points",
+  "it": "Clienti con punti"
+ },
+ "Team.loyalty.programTitle": {
+  "en": "Programme settings",
+  "ar": "إعدادات البرنامج",
+  "de": "Programmeinstellungen",
+  "fr": "Paramètres du programme",
+  "it": "Impostazioni del programma"
+ },
+ "Team.loyalty.programHint": {
+  "en": "Changes apply to payments from now on; points already earned keep their value.",
+  "ar": "تسري التغييرات على الدفعات من الآن؛ تحتفظ النقاط المكتسبة بقيمتها.",
+  "de": "Änderungen gelten für künftige Zahlungen; bereits gesammelte Punkte behalten ihren Wert.",
+  "fr": "Les changements s'appliquent aux paiements à venir ; les points déjà gagnés gardent leur valeur.",
+  "it": "Le modifiche valgono per i pagamenti futuri; i punti già guadagnati mantengono il loro valore."
+ },
+ "Team.loyalty.programErrorTitle": {
+  "en": "The programme settings didn't load",
+  "ar": "لم تُحمَّل إعدادات البرنامج",
+  "de": "Die Programmeinstellungen wurden nicht geladen",
+  "fr": "Les paramètres du programme ne se sont pas chargés",
+  "it": "Le impostazioni del programma non sono state caricate"
+ },
+ "Team.loyalty.programActive": {
+  "en": "The programme is running",
+  "ar": "البرنامج يعمل",
+  "de": "Das Programm läuft",
+  "fr": "Le programme est actif",
+  "it": "Il programma è attivo"
+ },
+ "Team.loyalty.programActiveHint": {
+  "en": "While it's paused, customers earn no points and can't redeem rewards.",
+  "ar": "أثناء الإيقاف المؤقت لا يكسب العملاء نقاطًا ولا يستطيعون استبدال المكافآت.",
+  "de": "Solange es pausiert ist, sammeln Kunden keine Punkte und können keine Prämien einlösen.",
+  "fr": "En pause, les clients ne gagnent pas de points et ne peuvent pas échanger de récompenses.",
+  "it": "In pausa, i clienti non guadagnano punti e non possono riscattare premi."
+ },
+ "Team.loyalty.pointsPerUnit": {
+  "en": "Points per 1 {currency}",
+  "ar": "النقاط لكل 1 {currency}",
+  "de": "Punkte pro 1 {currency}",
+  "fr": "Points pour 1 {currency}",
+  "it": "Punti per 1 {currency}"
+ },
+ "Team.loyalty.pointsPerUnitHint": {
+  "en": "Awarded on the net amount paid.",
+  "ar": "تُمنح على صافي المبلغ المدفوع.",
+  "de": "Vergeben auf den bezahlten Nettobetrag.",
+  "fr": "Attribués sur le montant net payé.",
+  "it": "Assegnati sull'importo netto pagato."
+ },
+ "Team.loyalty.baseCurrency": {
+  "en": "Base currency",
+  "ar": "العملة الأساسية",
+  "de": "Basiswährung",
+  "fr": "Devise de base",
+  "it": "Valuta di base"
+ },
+ "Team.loyalty.baseCurrencyHint": {
+  "en": "Payments in other currencies are converted to it first.",
+  "ar": "تُحوَّل الدفعات بالعملات الأخرى إليها أولًا.",
+  "de": "Zahlungen in anderen Währungen werden zuerst darin umgerechnet.",
+  "fr": "Les paiements dans d'autres devises y sont d'abord convertis.",
+  "it": "I pagamenti in altre valute vengono prima convertiti in questa."
+ },
+ "Team.loyalty.expiry": {
+  "en": "Points expire after (months)",
+  "ar": "تنتهي صلاحية النقاط بعد (أشهر)",
+  "de": "Punkte verfallen nach (Monaten)",
+  "fr": "Les points expirent après (mois)",
+  "it": "I punti scadono dopo (mesi)"
+ },
+ "Team.loyalty.expiryHint": {
+  "en": "At least one month.",
+  "ar": "شهر واحد على الأقل.",
+  "de": "Mindestens ein Monat.",
+  "fr": "Au moins un mois.",
+  "it": "Almeno un mese."
+ },
+ "Team.loyalty.ratesTitle": {
+  "en": "Exchange rates for points",
+  "ar": "أسعار الصرف للنقاط",
+  "de": "Wechselkurse für Punkte",
+  "fr": "Taux de change pour les points",
+  "it": "Tassi di cambio per i punti"
+ },
+ "Team.loyalty.ratesHint": {
+  "en": "How many of each currency make 1 {currency}. Changing the base currency keeps these numbers, so update them too.",
+  "ar": "كم من كل عملة يساوي 1 {currency}. تغيير العملة الأساسية يُبقي هذه الأرقام، لذا حدّثها أيضًا.",
+  "de": "Wie viel jeder Währung 1 {currency} ergibt. Beim Wechsel der Basiswährung bleiben die Zahlen gleich; passen Sie sie an.",
+  "fr": "Combien de chaque devise font 1 {currency}. Changer la devise de base conserve ces chiffres : mettez-les à jour aussi.",
+  "it": "Quanto di ogni valuta fa 1 {currency}. Cambiando la valuta di base questi numeri restano: aggiornali."
+ },
+ "Team.loyalty.baseRow": {
+  "en": "1 {currency} = 1 {currency} (base)",
+  "ar": "1 {currency} = 1 {currency} (أساسية)",
+  "de": "1 {currency} = 1 {currency} (Basis)",
+  "fr": "1 {currency} = 1 {currency} (base)",
+  "it": "1 {currency} = 1 {currency} (base)"
+ },
+ "Team.loyalty.rateLabel": {
+  "en": "{code} per 1 {base}",
+  "ar": "{code} لكل 1 {base}",
+  "de": "{code} pro 1 {base}",
+  "fr": "{code} pour 1 {base}",
+  "it": "{code} per 1 {base}"
+ },
+ "Team.loyalty.removeRate": {
+  "en": "Remove the {code} rate",
+  "ar": "إزالة سعر {code}",
+  "de": "Kurs für {code} entfernen",
+  "fr": "Retirer le taux {code}",
+  "it": "Rimuovi il tasso {code}"
+ },
+ "Team.loyalty.addCurrency": {
+  "en": "Add currency",
+  "ar": "إضافة عملة",
+  "de": "Währung hinzufügen",
+  "fr": "Ajouter une devise",
+  "it": "Aggiungi valuta"
+ },
+ "Team.loyalty.chooseCurrency": {
+  "en": "Choose a currency",
+  "ar": "اختر عملة",
+  "de": "Währung wählen",
+  "fr": "Choisir une devise",
+  "it": "Scegli una valuta"
+ },
+ "Team.loyalty.noMoreCurrencies": {
+  "en": "Every currency has a rate",
+  "ar": "لكل العملات سعر",
+  "de": "Alle Währungen haben einen Kurs",
+  "fr": "Toutes les devises ont un taux",
+  "it": "Tutte le valute hanno un tasso"
+ },
+ "Team.loyalty.saveProgram": {
+  "en": "Save settings",
+  "ar": "حفظ الإعدادات",
+  "de": "Einstellungen speichern",
+  "fr": "Enregistrer les paramètres",
+  "it": "Salva le impostazioni"
+ },
+ "Team.loyalty.rewardsTitle": {
+  "en": "Rewards",
+  "ar": "المكافآت",
+  "de": "Prämien",
+  "fr": "Récompenses",
+  "it": "Premi"
+ },
+ "Team.loyalty.rewardsHint": {
+  "en": "What customers can redeem their points for. Each redemption gives a coupon code.",
+  "ar": "ما يمكن للعملاء استبدال نقاطهم به. كل استبدال يمنح كود خصم.",
+  "de": "Wofür Kunden ihre Punkte einlösen können. Jede Einlösung ergibt einen Gutscheincode.",
+  "fr": "Ce que les clients peuvent obtenir avec leurs points. Chaque échange donne un code promo.",
+  "it": "Cosa possono riscattare i clienti con i punti. Ogni riscatto dà un codice sconto."
+ },
+ "Team.loyalty.rewardsErrorTitle": {
+  "en": "Rewards didn't load",
+  "ar": "لم تُحمَّل المكافآت",
+  "de": "Prämien wurden nicht geladen",
+  "fr": "Les récompenses ne se sont pas chargées",
+  "it": "I premi non sono stati caricati"
+ },
+ "Team.loyalty.rewardsEmptyTitle": {
+  "en": "No rewards yet",
+  "ar": "لا توجد مكافآت بعد",
+  "de": "Noch keine Prämien",
+  "fr": "Aucune récompense pour l'instant",
+  "it": "Ancora nessun premio"
+ },
+ "Team.loyalty.rewardsEmptyBody": {
+  "en": "Add a reward so customers have something to redeem points for.",
+  "ar": "أضف مكافأة ليجد العملاء ما يستبدلون نقاطهم به.",
+  "de": "Fügen Sie eine Prämie hinzu, damit Kunden Punkte einlösen können.",
+  "fr": "Ajoutez une récompense pour que les clients puissent utiliser leurs points.",
+  "it": "Aggiungi un premio così i clienti possono riscattare i punti."
+ },
+ "Team.loyalty.addReward": {
+  "en": "Add reward",
+  "ar": "إضافة مكافأة",
+  "de": "Prämie hinzufügen",
+  "fr": "Ajouter une récompense",
+  "it": "Aggiungi premio"
+ },
+ "Team.loyalty.editReward": {
+  "en": "Edit reward",
+  "ar": "تعديل المكافأة",
+  "de": "Prämie bearbeiten",
+  "fr": "Modifier la récompense",
+  "it": "Modifica premio"
+ },
+ "Team.loyalty.saveReward": {
+  "en": "Save reward",
+  "ar": "حفظ المكافأة",
+  "de": "Prämie speichern",
+  "fr": "Enregistrer la récompense",
+  "it": "Salva premio"
+ },
+ "Team.loyalty.rewardHint": {
+  "en": "A redeemed reward gives the customer a coupon code.",
+  "ar": "تمنح المكافأة المستبدلة العميل كود خصم.",
+  "de": "Eine eingelöste Prämie gibt dem Kunden einen Gutscheincode.",
+  "fr": "Une récompense échangée donne au client un code promo.",
+  "it": "Un premio riscattato dà al cliente un codice sconto."
+ },
+ "Team.loyalty.rewardName": {
+  "en": "Name",
+  "ar": "الاسم",
+  "de": "Name",
+  "fr": "Nom",
+  "it": "Nome"
+ },
+ "Team.loyalty.pointCost": {
+  "en": "Cost in points",
+  "ar": "التكلفة بالنقاط",
+  "de": "Kosten in Punkten",
+  "fr": "Coût en points",
+  "it": "Costo in punti"
+ },
+ "Team.loyalty.validForDays": {
+  "en": "Code valid for (days)",
+  "ar": "صلاحية الكود (أيام)",
+  "de": "Code gültig für (Tage)",
+  "fr": "Code valable pendant (jours)",
+  "it": "Codice valido per (giorni)"
+ },
+ "Team.loyalty.validForDaysHint": {
+  "en": "From the day it's redeemed.",
+  "ar": "من يوم الاستبدال.",
+  "de": "Ab dem Tag der Einlösung.",
+  "fr": "À partir du jour de l'échange.",
+  "it": "Dal giorno del riscatto."
+ },
+ "Team.loyalty.discountType": {
+  "en": "Discount",
+  "ar": "الخصم",
+  "de": "Rabatt",
+  "fr": "Remise",
+  "it": "Sconto"
+ },
+ "Team.loyalty.discountPercent": {
+  "en": "Percentage",
+  "ar": "نسبة مئوية",
+  "de": "Prozent",
+  "fr": "Pourcentage",
+  "it": "Percentuale"
+ },
+ "Team.loyalty.discountFixed": {
+  "en": "Fixed amount ({currency})",
+  "ar": "مبلغ ثابت ({currency})",
+  "de": "Fester Betrag ({currency})",
+  "fr": "Montant fixe ({currency})",
+  "it": "Importo fisso ({currency})"
+ },
+ "Team.loyalty.discountValue": {
+  "en": "Discount value",
+  "ar": "قيمة الخصم",
+  "de": "Rabattwert",
+  "fr": "Valeur de la remise",
+  "it": "Valore dello sconto"
+ },
+ "Team.loyalty.validOn": {
+  "en": "Valid on",
+  "ar": "صالح على",
+  "de": "Gültig für",
+  "fr": "Valable sur",
+  "it": "Valido su"
+ },
+ "Team.loyalty.anyCategory": {
+  "en": "Any plan",
+  "ar": "أي خطة",
+  "de": "Jeden Plan",
+  "fr": "Toutes les offres",
+  "it": "Qualsiasi piano"
+ },
+ "Team.loyalty.prefix": {
+  "en": "Code prefix",
+  "ar": "بادئة الكود",
+  "de": "Code-Präfix",
+  "fr": "Préfixe du code",
+  "it": "Prefisso del codice"
+ },
+ "Team.loyalty.prefixHint": {
+  "en": "Letters and digits; made from the name if left empty.",
+  "ar": "حروف وأرقام؛ يُشتق من الاسم إن تُرك فارغًا.",
+  "de": "Buchstaben und Ziffern; leer bleibt der Name die Grundlage.",
+  "fr": "Lettres et chiffres ; s'il est vide, il est tiré du nom.",
+  "it": "Lettere e cifre; se vuoto si ricava dal nome."
+ },
+ "Team.loyalty.rewardActive": {
+  "en": "Customers can redeem it",
+  "ar": "يمكن للعملاء استبدالها",
+  "de": "Kunden können sie einlösen",
+  "fr": "Les clients peuvent l'échanger",
+  "it": "I clienti possono riscattarlo"
+ },
+ "Team.loyalty.rewardActiveHint": {
+  "en": "Turn it off to hide it without deleting it.",
+  "ar": "أوقفها لإخفائها دون حذفها.",
+  "de": "Deaktivieren, um sie auszublenden, ohne sie zu löschen.",
+  "fr": "Désactivez-la pour la masquer sans la supprimer.",
+  "it": "Disattivalo per nasconderlo senza eliminarlo."
+ },
+ "Team.loyalty.rewardOn": {
+  "en": "On",
+  "ar": "مفعّلة",
+  "de": "Aktiv",
+  "fr": "Active",
+  "it": "Attivo"
+ },
+ "Team.loyalty.rewardOff": {
+  "en": "Off",
+  "ar": "متوقفة",
+  "de": "Inaktiv",
+  "fr": "Inactive",
+  "it": "Disattivo"
+ },
+ "Team.loyalty.colReward": {
+  "en": "Reward",
+  "ar": "المكافأة",
+  "de": "Prämie",
+  "fr": "Récompense",
+  "it": "Premio"
+ },
+ "Team.loyalty.colCost": {
+  "en": "Cost",
+  "ar": "التكلفة",
+  "de": "Kosten",
+  "fr": "Coût",
+  "it": "Costo"
+ },
+ "Team.loyalty.colDiscount": {
+  "en": "Discount",
+  "ar": "الخصم",
+  "de": "Rabatt",
+  "fr": "Remise",
+  "it": "Sconto"
+ },
+ "Team.loyalty.colCategory": {
+  "en": "Valid on",
+  "ar": "صالح على",
+  "de": "Gültig für",
+  "fr": "Valable sur",
+  "it": "Valido su"
+ },
+ "Team.loyalty.colValid": {
+  "en": "Valid for",
+  "ar": "مدة الصلاحية",
+  "de": "Gültig",
+  "fr": "Validité",
+  "it": "Validità"
+ },
+ "Team.loyalty.colPrefix": {
+  "en": "Prefix",
+  "ar": "البادئة",
+  "de": "Präfix",
+  "fr": "Préfixe",
+  "it": "Prefisso"
+ },
+ "Team.loyalty.colRedemptions": {
+  "en": "Redeemed",
+  "ar": "مرات الاستبدال",
+  "de": "Eingelöst",
+  "fr": "Échangée",
+  "it": "Riscattato"
+ },
+ "Team.loyalty.colStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Team.loyalty.colActions": {
+  "en": "Actions",
+  "ar": "الإجراءات",
+  "de": "Aktionen",
+  "fr": "Actions",
+  "it": "Azioni"
+ },
+ "Team.loyalty.pointsValue": {
+  "en": "{count, plural, one {{points} point} other {{points} points}}",
+  "ar": "{count, plural, zero {لا نقاط} one {نقطة واحدة} two {نقطتان} few {{points} نقاط} many {{points} نقطة} other {{points} نقطة}}",
+  "de": "{count, plural, one {{points} Punkt} other {{points} Punkte}}",
+  "fr": "{count, plural, one {{points} point} other {{points} points}}",
+  "it": "{count, plural, one {{points} punto} other {{points} punti}}"
+ },
+ "Team.loyalty.daysValue": {
+  "en": "{count, plural, one {{days} day} other {{days} days}}",
+  "ar": "{count, plural, zero {لا أيام} one {يوم واحد} two {يومان} few {{days} أيام} many {{days} يومًا} other {{days} يوم}}",
+  "de": "{count, plural, one {{days} Tag} other {{days} Tage}}",
+  "fr": "{count, plural, one {{days} jour} other {{days} jours}}",
+  "it": "{count, plural, one {{days} giorno} other {{days} giorni}}"
+ },
+ "Team.loyalty.editRewardAria": {
+  "en": "Edit {name}",
+  "ar": "تعديل {name}",
+  "de": "{name} bearbeiten",
+  "fr": "Modifier {name}",
+  "it": "Modifica {name}"
+ },
+ "Team.loyalty.deleteRewardAria": {
+  "en": "Delete {name}",
+  "ar": "حذف {name}",
+  "de": "{name} löschen",
+  "fr": "Supprimer {name}",
+  "it": "Elimina {name}"
+ },
+ "Team.loyalty.deleteRewardTitle": {
+  "en": "Delete {name}?",
+  "ar": "حذف {name}؟",
+  "de": "{name} löschen?",
+  "fr": "Supprimer {name} ?",
+  "it": "Eliminare {name}?"
+ },
+ "Team.loyalty.deleteRewardImpact": {
+  "en": "Customers can no longer redeem it. Codes already given keep working.",
+  "ar": "لن يتمكن العملاء من استبدالها بعد الآن. تظل الأكواد الممنوحة سابقًا صالحة.",
+  "de": "Kunden können sie nicht mehr einlösen. Bereits vergebene Codes bleiben gültig.",
+  "fr": "Les clients ne pourront plus l'échanger. Les codes déjà donnés restent valables.",
+  "it": "I clienti non potranno più riscattarlo. I codici già dati restano validi."
+ },
+ "Team.loyalty.deleteReward": {
+  "en": "Delete reward",
+  "ar": "حذف المكافأة",
+  "de": "Prämie löschen",
+  "fr": "Supprimer la récompense",
+  "it": "Elimina premio"
+ },
+ "Team.loyalty.customersTitle": {
+  "en": "Customers' points",
+  "ar": "نقاط العملاء",
+  "de": "Punkte der Kunden",
+  "fr": "Points des clients",
+  "it": "Punti dei clienti"
+ },
+ "Team.loyalty.customersHint": {
+  "en": "Balances and lifetime totals. Add or deduct points by hand with a reason.",
+  "ar": "الأرصدة والإجماليات. أضف نقاطًا أو اخصمها يدويًا مع ذكر السبب.",
+  "de": "Stände und Gesamtsummen. Punkte manuell mit Begründung gutschreiben oder abziehen.",
+  "fr": "Soldes et totaux. Ajoutez ou retirez des points à la main avec un motif.",
+  "it": "Saldi e totali. Aggiungi o togli punti a mano con un motivo."
+ },
+ "Team.loyalty.customersHintManager": {
+  "en": "Balances and each customer's history.",
+  "ar": "الأرصدة وسجل كل عميل.",
+  "de": "Stände und der Verlauf jedes Kunden.",
+  "fr": "Soldes et historique de chaque client.",
+  "it": "Saldi e cronologia di ogni cliente."
+ },
+ "Team.loyalty.customersErrorTitle": {
+  "en": "Customers' points didn't load",
+  "ar": "لم تُحمَّل نقاط العملاء",
+  "de": "Punkte der Kunden wurden nicht geladen",
+  "fr": "Les points des clients ne se sont pas chargés",
+  "it": "I punti dei clienti non sono stati caricati"
+ },
+ "Team.loyalty.customersEmptyTitle": {
+  "en": "No customers in the programme yet",
+  "ar": "لا يوجد عملاء في البرنامج بعد",
+  "de": "Noch keine Kunden im Programm",
+  "fr": "Aucun client dans le programme pour l'instant",
+  "it": "Ancora nessun cliente nel programma"
+ },
+ "Team.loyalty.customersEmptyBody": {
+  "en": "Customers join when they pay their first invoice.",
+  "ar": "ينضم العملاء عند دفع أول فاتورة.",
+  "de": "Kunden kommen mit ihrer ersten bezahlten Rechnung dazu.",
+  "fr": "Les clients entrent dans le programme en payant leur première facture.",
+  "it": "I clienti entrano pagando la prima fattura."
+ },
+ "Team.loyalty.colCustomer": {
+  "en": "Customer",
+  "ar": "العميل",
+  "de": "Kunde",
+  "fr": "Client",
+  "it": "Cliente"
+ },
+ "Team.loyalty.colCompany": {
+  "en": "Company",
+  "ar": "الشركة",
+  "de": "Firma",
+  "fr": "Entreprise",
+  "it": "Azienda"
+ },
+ "Team.loyalty.colEmail": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Team.loyalty.colBalance": {
+  "en": "Balance",
+  "ar": "الرصيد",
+  "de": "Stand",
+  "fr": "Solde",
+  "it": "Saldo"
+ },
+ "Team.loyalty.colEarned": {
+  "en": "Earned",
+  "ar": "المكتسب",
+  "de": "Gesammelt",
+  "fr": "Gagnés",
+  "it": "Guadagnati"
+ },
+ "Team.loyalty.colRedeemed": {
+  "en": "Redeemed",
+  "ar": "المستبدل",
+  "de": "Eingelöst",
+  "fr": "Échangés",
+  "it": "Riscattati"
+ },
+ "Team.loyalty.historyAria": {
+  "en": "Points history of {name}",
+  "ar": "سجل نقاط {name}",
+  "de": "Punkteverlauf von {name}",
+  "fr": "Historique des points de {name}",
+  "it": "Cronologia punti di {name}"
+ },
+ "Team.loyalty.adjustAria": {
+  "en": "Adjust the points of {name}",
+  "ar": "تعديل نقاط {name}",
+  "de": "Punkte von {name} anpassen",
+  "fr": "Ajuster les points de {name}",
+  "it": "Modifica i punti di {name}"
+ },
+ "Team.loyalty.historyTitle": {
+  "en": "Points history",
+  "ar": "سجل النقاط",
+  "de": "Punkteverlauf",
+  "fr": "Historique des points",
+  "it": "Cronologia punti"
+ },
+ "Team.loyalty.historyOf": {
+  "en": "Points history of {name}",
+  "ar": "سجل نقاط {name}",
+  "de": "Punkteverlauf von {name}",
+  "fr": "Historique des points de {name}",
+  "it": "Cronologia punti di {name}"
+ },
+ "Team.loyalty.balanceNow": {
+  "en": "Balance now: {points}",
+  "ar": "الرصيد الحالي: {points}",
+  "de": "Aktueller Stand: {points}",
+  "fr": "Solde actuel : {points}",
+  "it": "Saldo attuale: {points}"
+ },
+ "Team.loyalty.historyErrorTitle": {
+  "en": "The history didn't load",
+  "ar": "لم يُحمَّل السجل",
+  "de": "Der Verlauf wurde nicht geladen",
+  "fr": "L'historique ne s'est pas chargé",
+  "it": "La cronologia non è stata caricata"
+ },
+ "Team.loyalty.historyEmptyTitle": {
+  "en": "No points yet",
+  "ar": "لا توجد نقاط بعد",
+  "de": "Noch keine Punkte",
+  "fr": "Pas encore de points",
+  "it": "Ancora nessun punto"
+ },
+ "Team.loyalty.historyEmptyBody": {
+  "en": "Points are earned on paid invoices.",
+  "ar": "تُكتسب النقاط مع الفواتير المدفوعة.",
+  "de": "Punkte gibt es für bezahlte Rechnungen.",
+  "fr": "Les points s'obtiennent sur les factures payées.",
+  "it": "I punti si guadagnano con le fatture pagate."
+ },
+ "Team.loyalty.colDate": {
+  "en": "Date",
+  "ar": "التاريخ",
+  "de": "Datum",
+  "fr": "Date",
+  "it": "Data"
+ },
+ "Team.loyalty.colType": {
+  "en": "What",
+  "ar": "النوع",
+  "de": "Art",
+  "fr": "Type",
+  "it": "Tipo"
+ },
+ "Team.loyalty.colReason": {
+  "en": "Reason",
+  "ar": "السبب",
+  "de": "Grund",
+  "fr": "Motif",
+  "it": "Motivo"
+ },
+ "Team.loyalty.colPoints": {
+  "en": "Points",
+  "ar": "النقاط",
+  "de": "Punkte",
+  "fr": "Points",
+  "it": "Punti"
+ },
+ "Team.loyalty.colBalanceAfter": {
+  "en": "Balance after",
+  "ar": "الرصيد بعدها",
+  "de": "Stand danach",
+  "fr": "Solde après",
+  "it": "Saldo dopo"
+ },
+ "Team.loyalty.colExpires": {
+  "en": "Expires",
+  "ar": "تنتهي في",
+  "de": "Läuft ab",
+  "fr": "Expire le",
+  "it": "Scade il"
+ },
+ "Team.loyalty.historyType.earned": {
+  "en": "Earned",
+  "ar": "مكتسبة",
+  "de": "Gesammelt",
+  "fr": "Gagnés",
+  "it": "Guadagnati"
+ },
+ "Team.loyalty.historyType.redeemed": {
+  "en": "Redeemed",
+  "ar": "مستبدلة",
+  "de": "Eingelöst",
+  "fr": "Échangés",
+  "it": "Riscattati"
+ },
+ "Team.loyalty.historyType.adjusted": {
+  "en": "Adjusted",
+  "ar": "معدّلة",
+  "de": "Angepasst",
+  "fr": "Ajustés",
+  "it": "Modificati"
+ },
+ "Team.loyalty.historyType.expired": {
+  "en": "Expired",
+  "ar": "منتهية الصلاحية",
+  "de": "Verfallen",
+  "fr": "Expirés",
+  "it": "Scaduti"
+ },
+ "Team.loyalty.adjustTitle": {
+  "en": "Adjust the points of {name}",
+  "ar": "تعديل نقاط {name}",
+  "de": "Punkte von {name} anpassen",
+  "fr": "Ajuster les points de {name}",
+  "it": "Modifica i punti di {name}"
+ },
+ "Team.loyalty.adjustDirection": {
+  "en": "Change",
+  "ar": "التغيير",
+  "de": "Änderung",
+  "fr": "Modification",
+  "it": "Modifica"
+ },
+ "Team.loyalty.directionAdd": {
+  "en": "Add points",
+  "ar": "إضافة نقاط",
+  "de": "Punkte gutschreiben",
+  "fr": "Ajouter des points",
+  "it": "Aggiungi punti"
+ },
+ "Team.loyalty.directionDeduct": {
+  "en": "Deduct points",
+  "ar": "خصم نقاط",
+  "de": "Punkte abziehen",
+  "fr": "Retirer des points",
+  "it": "Togli punti"
+ },
+ "Team.loyalty.adjustPoints": {
+  "en": "Points",
+  "ar": "النقاط",
+  "de": "Punkte",
+  "fr": "Points",
+  "it": "Punti"
+ },
+ "Team.loyalty.adjustPointsMax": {
+  "en": "At most {points}.",
+  "ar": "بحد أقصى {points}.",
+  "de": "Höchstens {points}.",
+  "fr": "Au plus {points}.",
+  "it": "Al massimo {points}."
+ },
+ "Team.loyalty.adjustReason": {
+  "en": "Reason",
+  "ar": "السبب",
+  "de": "Grund",
+  "fr": "Motif",
+  "it": "Motivo"
+ },
+ "Team.loyalty.adjustReasonHint": {
+  "en": "The customer sees it in their history.",
+  "ar": "سيراه العميل في سجله.",
+  "de": "Der Kunde sieht ihn in seinem Verlauf.",
+  "fr": "Le client le voit dans son historique.",
+  "it": "Il cliente lo vede nella sua cronologia."
+ },
+ "Team.loyalty.adjustAdd": {
+  "en": "Add points",
+  "ar": "إضافة النقاط",
+  "de": "Punkte gutschreiben",
+  "fr": "Ajouter les points",
+  "it": "Aggiungi i punti"
+ },
+ "Team.loyalty.adjustDeduct": {
+  "en": "Deduct points",
+  "ar": "خصم النقاط",
+  "de": "Punkte abziehen",
+  "fr": "Retirer les points",
+  "it": "Togli i punti"
+ },
+ "Team.loyalty.myPoints": {
+  "en": "Your points",
+  "ar": "نقاطك",
+  "de": "Ihre Punkte",
+  "fr": "Vos points",
+  "it": "I tuoi punti"
+ },
+ "Team.loyalty.myPointsError": {
+  "en": "Your points didn't load.",
+  "ar": "لم تُحمَّل نقاطك.",
+  "de": "Ihre Punkte wurden nicht geladen.",
+  "fr": "Vos points ne se sont pas chargés.",
+  "it": "I tuoi punti non sono stati caricati."
+ },
+ "Team.loyalty.programPaused": {
+  "en": "The rewards programme is paused. You keep your points, but can't redeem rewards for now.",
+  "ar": "برنامج المكافآت متوقف مؤقتًا. تحتفظ بنقاطك، لكن لا يمكنك استبدال المكافآت حاليًا.",
+  "de": "Das Prämienprogramm ist pausiert. Ihre Punkte bleiben, aber Prämien können Sie gerade nicht einlösen.",
+  "fr": "Le programme de récompenses est en pause. Vous gardez vos points, mais ne pouvez pas les échanger pour l'instant.",
+  "it": "Il programma premi è in pausa. Mantieni i punti, ma per ora non puoi riscattare premi."
+ },
+ "Team.loyalty.statBalance": {
+  "en": "Your balance",
+  "ar": "رصيدك",
+  "de": "Ihr Stand",
+  "fr": "Votre solde",
+  "it": "Il tuo saldo"
+ },
+ "Team.loyalty.earnHint": {
+  "en": "{points} points for every {currency} paid",
+  "ar": "{points} نقطة لكل {currency} مدفوع",
+  "de": "{points} Punkte pro bezahltem {currency}",
+  "fr": "{points} points par {currency} payé",
+  "it": "{points} punti per ogni {currency} pagato"
+ },
+ "Team.loyalty.statLifetimeEarned": {
+  "en": "Earned in total",
+  "ar": "إجمالي المكتسب",
+  "de": "Insgesamt gesammelt",
+  "fr": "Gagnés au total",
+  "it": "Guadagnati in totale"
+ },
+ "Team.loyalty.statLifetimeRedeemed": {
+  "en": "Redeemed in total",
+  "ar": "إجمالي المستبدل",
+  "de": "Insgesamt eingelöst",
+  "fr": "Échangés au total",
+  "it": "Riscattati in totale"
+ },
+ "Team.loyalty.statExpiring": {
+  "en": "Expiring within 60 days",
+  "ar": "تنتهي خلال 60 يومًا",
+  "de": "Verfallen in 60 Tagen",
+  "fr": "Expirent dans les 60 jours",
+  "it": "Scadono entro 60 giorni"
+ },
+ "Team.loyalty.nextExpiry": {
+  "en": "Next on {date}",
+  "ar": "التالية في {date}",
+  "de": "Nächste am {date}",
+  "fr": "Prochaine le {date}",
+  "it": "Prossima il {date}"
+ },
+ "Team.loyalty.nothingExpiring": {
+  "en": "Nothing expires soon",
+  "ar": "لا شيء ينتهي قريبًا",
+  "de": "Nichts verfällt bald",
+  "fr": "Rien n'expire bientôt",
+  "it": "Niente scade a breve"
+ },
+ "Team.loyalty.redeemTitleSection": {
+  "en": "Rewards you can redeem",
+  "ar": "المكافآت المتاحة للاستبدال",
+  "de": "Prämien zum Einlösen",
+  "fr": "Récompenses à échanger",
+  "it": "Premi da riscattare"
+ },
+ "Team.loyalty.myRewardsEmptyTitle": {
+  "en": "No rewards right now",
+  "ar": "لا توجد مكافآت حاليًا",
+  "de": "Gerade keine Prämien",
+  "fr": "Aucune récompense pour l'instant",
+  "it": "Nessun premio al momento"
+ },
+ "Team.loyalty.myRewardsEmptyBody": {
+  "en": "Keep earning points; new rewards appear here.",
+  "ar": "واصل كسب النقاط؛ تظهر المكافآت الجديدة هنا.",
+  "de": "Sammeln Sie weiter Punkte; neue Prämien erscheinen hier.",
+  "fr": "Continuez à gagner des points ; les nouvelles récompenses apparaîtront ici.",
+  "it": "Continua a guadagnare punti; i nuovi premi compaiono qui."
+ },
+ "Team.loyalty.rewardGives": {
+  "en": "{count, plural, one {{discount} off, with a code valid for {days} day.} other {{discount} off, with a code valid for {days} days.}}",
+  "ar": "{count, plural, zero {خصم {discount}.} one {خصم {discount} بكود صالح ليوم واحد.} two {خصم {discount} بكود صالح ليومين.} few {خصم {discount} بكود صالح لـ{days} أيام.} many {خصم {discount} بكود صالح لـ{days} يومًا.} other {خصم {discount} بكود صالح لـ{days} يوم.}}",
+  "de": "{count, plural, one {{discount} Rabatt, Code {days} Tag gültig.} other {{discount} Rabatt, Code {days} Tage gültig.}}",
+  "fr": "{count, plural, one {{discount} de remise, code valable {days} jour.} other {{discount} de remise, code valable {days} jours.}}",
+  "it": "{count, plural, one {{discount} di sconto, codice valido {days} giorno.} other {{discount} di sconto, codice valido {days} giorni.}}"
+ },
+ "Team.loyalty.rewardValidOn": {
+  "en": "On {category}.",
+  "ar": "على {category}.",
+  "de": "Für {category}.",
+  "fr": "Sur {category}.",
+  "it": "Su {category}."
+ },
+ "Team.loyalty.redeem": {
+  "en": "Redeem",
+  "ar": "استبدال",
+  "de": "Einlösen",
+  "fr": "Échanger",
+  "it": "Riscatta"
+ },
+ "Team.loyalty.redeemTitle": {
+  "en": "{count, plural, one {Redeem {name} for {points} point?} other {Redeem {name} for {points} points?}}",
+  "ar": "{count, plural, zero {استبدال {name}؟} one {استبدال {name} مقابل نقطة واحدة؟} two {استبدال {name} مقابل نقطتين؟} few {استبدال {name} مقابل {points} نقاط؟} many {استبدال {name} مقابل {points} نقطة؟} other {استبدال {name} مقابل {points} نقطة؟}}",
+  "de": "{count, plural, one {{name} für {points} Punkt einlösen?} other {{name} für {points} Punkte einlösen?}}",
+  "fr": "{count, plural, one {Échanger {name} contre {points} point ?} other {Échanger {name} contre {points} points ?}}",
+  "it": "{count, plural, one {Riscattare {name} per {points} punto?} other {Riscattare {name} per {points} punti?}}"
+ },
+ "Team.loyalty.redeemImpact": {
+  "en": "{count, plural, one {Your balance goes from {before} to {after}. You get a coupon code valid for {days} day.} other {Your balance goes from {before} to {after}. You get a coupon code valid for {days} days.}}",
+  "ar": "{count, plural, zero {ينتقل رصيدك من {before} إلى {after}. تحصل على كود خصم.} one {ينتقل رصيدك من {before} إلى {after}. تحصل على كود خصم صالح ليوم واحد.} two {ينتقل رصيدك من {before} إلى {after}. تحصل على كود خصم صالح ليومين.} few {ينتقل رصيدك من {before} إلى {after}. تحصل على كود خصم صالح لـ{days} أيام.} many {ينتقل رصيدك من {before} إلى {after}. تحصل على كود خصم صالح لـ{days} يومًا.} other {ينتقل رصيدك من {before} إلى {after}. تحصل على كود خصم صالح لـ{days} يوم.}}",
+  "de": "{count, plural, one {Ihr Stand sinkt von {before} auf {after}. Sie erhalten einen Gutscheincode, {days} Tag gültig.} other {Ihr Stand sinkt von {before} auf {after}. Sie erhalten einen Gutscheincode, {days} Tage gültig.}}",
+  "fr": "{count, plural, one {Votre solde passe de {before} à {after}. Vous recevez un code promo valable {days} jour.} other {Votre solde passe de {before} à {after}. Vous recevez un code promo valable {days} jours.}}",
+  "it": "{count, plural, one {Il saldo passa da {before} a {after}. Ricevi un codice sconto valido {days} giorno.} other {Il saldo passa da {before} a {after}. Ricevi un codice sconto valido {days} giorni.}}"
+ },
+ "Team.loyalty.redeemConfirm": {
+  "en": "{count, plural, one {Spend {points} point} other {Spend {points} points}}",
+  "ar": "{count, plural, zero {استبدال} one {استخدام نقطة واحدة} two {استخدام نقطتين} few {استخدام {points} نقاط} many {استخدام {points} نقطة} other {استخدام {points} نقطة}}",
+  "de": "{count, plural, one {{points} Punkt einlösen} other {{points} Punkte einlösen}}",
+  "fr": "{count, plural, one {Utiliser {points} point} other {Utiliser {points} points}}",
+  "it": "{count, plural, one {Usa {points} punto} other {Usa {points} punti}}"
+ },
+ "Team.loyalty.pointsShort": {
+  "en": "{count, plural, one {{points} more point needed} other {{points} more points needed}}",
+  "ar": "{count, plural, zero {لا تحتاج نقاطًا إضافية} one {تحتاج نقطة واحدة إضافية} two {تحتاج نقطتين إضافيتين} few {تحتاج {points} نقاط إضافية} many {تحتاج {points} نقطة إضافية} other {تحتاج {points} نقطة إضافية}}",
+  "de": "{count, plural, one {Noch {points} Punkt nötig} other {Noch {points} Punkte nötig}}",
+  "fr": "{count, plural, one {Encore {points} point nécessaire} other {Encore {points} points nécessaires}}",
+  "it": "{count, plural, one {Serve ancora {points} punto} other {Servono ancora {points} punti}}"
+ },
+ "Team.loyalty.redeemPaused": {
+  "en": "Paused for now",
+  "ar": "متوقف حاليًا",
+  "de": "Derzeit pausiert",
+  "fr": "En pause pour l'instant",
+  "it": "In pausa per ora"
+ },
+ "Team.loyalty.redeemedTitle": {
+  "en": "Here's your code",
+  "ar": "هذا هو كودك",
+  "de": "Ihr Code",
+  "fr": "Voici votre code",
+  "it": "Ecco il tuo codice"
+ },
+ "Team.loyalty.redeemedBody": {
+  "en": "{count, plural, one {You spent {points} point; {balance} left. Use the code before {date}.} other {You spent {points} points; {balance} left. Use the code before {date}.}}",
+  "ar": "{count, plural, zero {تبقى لك {balance}. استخدم الكود قبل {date}.} one {استخدمت نقطة واحدة؛ تبقى {balance}. استخدم الكود قبل {date}.} two {استخدمت نقطتين؛ تبقى {balance}. استخدم الكود قبل {date}.} few {استخدمت {points} نقاط؛ تبقى {balance}. استخدم الكود قبل {date}.} many {استخدمت {points} نقطة؛ تبقى {balance}. استخدم الكود قبل {date}.} other {استخدمت {points} نقطة؛ تبقى {balance}. استخدم الكود قبل {date}.}}",
+  "de": "{count, plural, one {Sie haben {points} Punkt eingelöst; {balance} bleiben. Nutzen Sie den Code vor dem {date}.} other {Sie haben {points} Punkte eingelöst; {balance} bleiben. Nutzen Sie den Code vor dem {date}.}}",
+  "fr": "{count, plural, one {Vous avez utilisé {points} point ; il en reste {balance}. Utilisez le code avant le {date}.} other {Vous avez utilisé {points} points ; il en reste {balance}. Utilisez le code avant le {date}.}}",
+  "it": "{count, plural, one {Hai usato {points} punto; ne restano {balance}. Usa il codice entro il {date}.} other {Hai usato {points} punti; ne restano {balance}. Usa il codice entro il {date}.}}"
+ },
+ "Team.loyalty.copyCode": {
+  "en": "Copy code",
+  "ar": "نسخ الكود",
+  "de": "Code kopieren",
+  "fr": "Copier le code",
+  "it": "Copia il codice"
+ },
+ "Team.loyalty.copyCodeAria": {
+  "en": "Copy {code}",
+  "ar": "نسخ {code}",
+  "de": "{code} kopieren",
+  "fr": "Copier {code}",
+  "it": "Copia {code}"
+ },
+ "Team.loyalty.copied": {
+  "en": "Code copied.",
+  "ar": "تم نسخ الكود.",
+  "de": "Code kopiert.",
+  "fr": "Code copié.",
+  "it": "Codice copiato."
+ },
+ "Team.loyalty.copyFailed": {
+  "en": "The code couldn't be copied. Select it and copy it by hand.",
+  "ar": "تعذّر نسخ الكود. حدّده وانسخه يدويًا.",
+  "de": "Der Code konnte nicht kopiert werden. Markieren und kopieren Sie ihn selbst.",
+  "fr": "Le code n'a pas pu être copié. Sélectionnez-le et copiez-le à la main.",
+  "it": "Il codice non è stato copiato. Selezionalo e copialo a mano."
+ },
+ "Team.loyalty.done": {
+  "en": "Done",
+  "ar": "تم",
+  "de": "Fertig",
+  "fr": "Terminé",
+  "it": "Fatto"
+ },
+ "Team.loyalty.couponsTitle": {
+  "en": "My coupons",
+  "ar": "كوبوناتي",
+  "de": "Meine Gutscheincodes",
+  "fr": "Mes codes promo",
+  "it": "I miei codici sconto"
+ },
+ "Team.loyalty.couponsErrorTitle": {
+  "en": "Your coupons didn't load",
+  "ar": "لم تُحمَّل كوبوناتك",
+  "de": "Ihre Gutscheincodes wurden nicht geladen",
+  "fr": "Vos codes promo ne se sont pas chargés",
+  "it": "I tuoi codici sconto non sono stati caricati"
+ },
+ "Team.loyalty.couponsEmptyTitle": {
+  "en": "No coupons yet",
+  "ar": "لا توجد كوبونات بعد",
+  "de": "Noch keine Gutscheincodes",
+  "fr": "Pas encore de code promo",
+  "it": "Ancora nessun codice sconto"
+ },
+ "Team.loyalty.couponsEmptyBody": {
+  "en": "Redeem a reward to get a coupon code.",
+  "ar": "استبدل مكافأة لتحصل على كود خصم.",
+  "de": "Lösen Sie eine Prämie ein, um einen Gutscheincode zu erhalten.",
+  "fr": "Échangez une récompense pour obtenir un code promo.",
+  "it": "Riscatta un premio per ottenere un codice sconto."
+ },
+ "Team.loyalty.colCode": {
+  "en": "Code",
+  "ar": "الكود",
+  "de": "Code",
+  "fr": "Code",
+  "it": "Codice"
+ },
+ "Team.loyalty.couponStatus.active": {
+  "en": "Ready to use",
+  "ar": "جاهز للاستخدام",
+  "de": "Einlösbar",
+  "fr": "Utilisable",
+  "it": "Utilizzabile"
+ },
+ "Team.loyalty.couponStatus.used": {
+  "en": "Used",
+  "ar": "مستخدم",
+  "de": "Verwendet",
+  "fr": "Utilisé",
+  "it": "Usato"
+ },
+ "Team.loyalty.couponStatus.expired": {
+  "en": "Expired",
+  "ar": "منتهي الصلاحية",
+  "de": "Abgelaufen",
+  "fr": "Expiré",
+  "it": "Scaduto"
+ },
+ "Team.profile.title": {
+  "en": "Your profile",
+  "ar": "ملفك الشخصي",
+  "de": "Ihr Profil",
+  "fr": "Votre profil",
+  "it": "Il tuo profilo"
+ },
+ "Team.profile.description": {
+  "en": "Your details, which notifications reach you and, for salespeople, where commissions are paid.",
+  "ar": "بياناتك، والإشعارات التي تصلك، ولمندوبي المبيعات: أين تُدفع العمولات.",
+  "de": "Ihre Angaben, welche Benachrichtigungen Sie erhalten und, im Vertrieb, wohin Provisionen gezahlt werden.",
+  "fr": "Vos informations, les notifications que vous recevez et, pour les commerciaux, où les commissions sont versées.",
+  "it": "I tuoi dati, le notifiche che ricevi e, per i venditori, dove vengono pagate le provvigioni."
+ },
+ "Team.profile.passwordInSos": {
+  "en": "Password and sign-in in SOS",
+  "ar": "كلمة المرور وتسجيل الدخول في SOS",
+  "de": "Passwort und Anmeldung in SOS",
+  "fr": "Mot de passe et connexion dans SOS",
+  "it": "Password e accesso in SOS"
+ },
+ "Team.profile.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من الاتصال وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Team.profile.discard": {
+  "en": "Discard changes",
+  "ar": "تجاهل التغييرات",
+  "de": "Änderungen verwerfen",
+  "fr": "Annuler les modifications",
+  "it": "Annulla le modifiche"
+ },
+ "Team.profile.tab.personal": {
+  "en": "Personal details",
+  "ar": "البيانات الشخصية",
+  "de": "Persönliche Angaben",
+  "fr": "Informations personnelles",
+  "it": "Dati personali"
+ },
+ "Team.profile.tab.notifications": {
+  "en": "Notifications",
+  "ar": "الإشعارات",
+  "de": "Benachrichtigungen",
+  "fr": "Notifications",
+  "it": "Notifiche"
+ },
+ "Team.profile.tab.bank": {
+  "en": "Bank account",
+  "ar": "الحساب البنكي",
+  "de": "Bankkonto",
+  "fr": "Compte bancaire",
+  "it": "Conto bancario"
+ },
+ "Team.profile.profileErrorTitle": {
+  "en": "Your profile didn't load",
+  "ar": "لم يُحمَّل ملفك الشخصي",
+  "de": "Ihr Profil wurde nicht geladen",
+  "fr": "Votre profil ne s'est pas chargé",
+  "it": "Il tuo profilo non è stato caricato"
+ },
+ "Team.profile.photoTitle": {
+  "en": "Photo",
+  "ar": "الصورة",
+  "de": "Foto",
+  "fr": "Photo",
+  "it": "Foto"
+ },
+ "Team.profile.photoHint": {
+  "en": "A JPG, PNG or GIF up to 2 MB. It shows across the suite.",
+  "ar": "صورة JPG أو PNG أو GIF حتى 2 ميغابايت. تظهر في كل تطبيقات المنظومة.",
+  "de": "Ein JPG, PNG oder GIF bis 2 MB. Es erscheint in der ganzen Suite.",
+  "fr": "Un JPG, PNG ou GIF jusqu'à 2 Mo. Elle apparaît dans toute la suite.",
+  "it": "Un JPG, PNG o GIF fino a 2 MB. Compare in tutta la suite."
+ },
+ "Team.profile.uploadPhoto": {
+  "en": "Upload photo",
+  "ar": "رفع صورة",
+  "de": "Foto hochladen",
+  "fr": "Téléverser une photo",
+  "it": "Carica foto"
+ },
+ "Team.profile.changePhoto": {
+  "en": "Change photo",
+  "ar": "تغيير الصورة",
+  "de": "Foto ändern",
+  "fr": "Changer la photo",
+  "it": "Cambia foto"
+ },
+ "Team.profile.removePhoto": {
+  "en": "Remove photo",
+  "ar": "إزالة الصورة",
+  "de": "Foto entfernen",
+  "fr": "Retirer la photo",
+  "it": "Rimuovi foto"
+ },
+ "Team.profile.removePhotoTitle": {
+  "en": "Remove your photo?",
+  "ar": "إزالة صورتك؟",
+  "de": "Ihr Foto entfernen?",
+  "fr": "Retirer votre photo ?",
+  "it": "Rimuovere la tua foto?"
+ },
+ "Team.profile.removePhotoImpact": {
+  "en": "Your initials show instead, across the suite.",
+  "ar": "ستظهر الأحرف الأولى من اسمك بدلًا منها في كل المنظومة.",
+  "de": "Stattdessen erscheinen Ihre Initialen in der ganzen Suite.",
+  "fr": "Vos initiales s'afficheront à la place dans toute la suite.",
+  "it": "Al suo posto compariranno le tue iniziali in tutta la suite."
+ },
+ "Team.profile.photoType": {
+  "en": "Choose an image file.",
+  "ar": "اختر ملف صورة.",
+  "de": "Wählen Sie eine Bilddatei.",
+  "fr": "Choisissez un fichier image.",
+  "it": "Scegli un file immagine."
+ },
+ "Team.profile.photoTooLarge": {
+  "en": "That photo is over 2 MB.",
+  "ar": "حجم هذه الصورة أكبر من 2 ميغابايت.",
+  "de": "Das Foto ist größer als 2 MB.",
+  "fr": "Cette photo dépasse 2 Mo.",
+  "it": "Questa foto supera i 2 MB."
+ },
+ "Team.profile.personalTitle": {
+  "en": "Personal details",
+  "ar": "البيانات الشخصية",
+  "de": "Persönliche Angaben",
+  "fr": "Informations personnelles",
+  "it": "Dati personali"
+ },
+ "Team.profile.personalHint": {
+  "en": "Saved to your suite profile, so every app shows the same.",
+  "ar": "تُحفظ في ملفك على المنظومة، فتظهر نفسها في كل التطبيقات.",
+  "de": "Gespeichert in Ihrem Suite-Profil, damit jede App dasselbe zeigt.",
+  "fr": "Enregistrées dans votre profil de la suite, pour que chaque application affiche la même chose.",
+  "it": "Salvati nel tuo profilo della suite, così ogni app mostra gli stessi dati."
+ },
+ "Team.profile.firstName": {
+  "en": "First name",
+  "ar": "الاسم الأول",
+  "de": "Vorname",
+  "fr": "Prénom",
+  "it": "Nome"
+ },
+ "Team.profile.lastName": {
+  "en": "Last name",
+  "ar": "اسم العائلة",
+  "de": "Nachname",
+  "fr": "Nom",
+  "it": "Cognome"
+ },
+ "Team.profile.email": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Team.profile.emailHint": {
+  "en": "Your sign-in email; it is changed in SOS.",
+  "ar": "بريد تسجيل الدخول؛ يُغيَّر من SOS.",
+  "de": "Ihre Anmelde-E-Mail; sie wird in SOS geändert.",
+  "fr": "Votre e-mail de connexion ; il se modifie dans SOS.",
+  "it": "La tua email di accesso; si cambia in SOS."
+ },
+ "Team.profile.phone": {
+  "en": "Phone",
+  "ar": "الهاتف",
+  "de": "Telefon",
+  "fr": "Téléphone",
+  "it": "Telefono"
+ },
+ "Team.profile.jobTitle": {
+  "en": "Job title",
+  "ar": "المسمى الوظيفي",
+  "de": "Funktion",
+  "fr": "Poste",
+  "it": "Ruolo lavorativo"
+ },
+ "Team.profile.department": {
+  "en": "Department",
+  "ar": "القسم",
+  "de": "Abteilung",
+  "fr": "Service",
+  "it": "Reparto"
+ },
+ "Team.profile.bio": {
+  "en": "About you",
+  "ar": "نبذة عنك",
+  "de": "Über Sie",
+  "fr": "À propos de vous",
+  "it": "Su di te"
+ },
+ "Team.profile.save": {
+  "en": "Save details",
+  "ar": "حفظ البيانات",
+  "de": "Angaben speichern",
+  "fr": "Enregistrer",
+  "it": "Salva i dati"
+ },
+ "Team.profile.notificationsTitle": {
+  "en": "Notifications",
+  "ar": "الإشعارات",
+  "de": "Benachrichtigungen",
+  "fr": "Notifications",
+  "it": "Notifiche"
+ },
+ "Team.profile.notificationsHint": {
+  "en": "Choose how each kind of notification reaches you. Each needs at least one way.",
+  "ar": "اختر كيف يصلك كل نوع من الإشعارات. كل نوع يحتاج طريقة واحدة على الأقل.",
+  "de": "Wählen Sie, wie Sie jede Art von Benachrichtigung erhalten. Jede braucht mindestens einen Weg.",
+  "fr": "Choisissez comment chaque type de notification vous parvient. Chacun en demande au moins un.",
+  "it": "Scegli come ti arriva ogni tipo di notifica. Ognuno richiede almeno un canale."
+ },
+ "Team.profile.notificationsErrorTitle": {
+  "en": "Your notification settings didn't load",
+  "ar": "لم تُحمَّل إعدادات الإشعارات",
+  "de": "Ihre Benachrichtigungseinstellungen wurden nicht geladen",
+  "fr": "Vos réglages de notification ne se sont pas chargés",
+  "it": "Le impostazioni delle notifiche non sono state caricate"
+ },
+ "Team.profile.saveNotifications": {
+  "en": "Save notifications",
+  "ar": "حفظ الإشعارات",
+  "de": "Benachrichtigungen speichern",
+  "fr": "Enregistrer les notifications",
+  "it": "Salva le notifiche"
+ },
+ "Team.profile.channel.in_app": {
+  "en": "In the app",
+  "ar": "داخل التطبيق",
+  "de": "In der App",
+  "fr": "Dans l'application",
+  "it": "Nell'app"
+ },
+ "Team.profile.channel.email": {
+  "en": "Email",
+  "ar": "البريد الإلكتروني",
+  "de": "E-Mail",
+  "fr": "E-mail",
+  "it": "Email"
+ },
+ "Team.profile.channel.websocket": {
+  "en": "Pop-up",
+  "ar": "تنبيه منبثق",
+  "de": "Pop-up",
+  "fr": "Fenêtre surgissante",
+  "it": "Pop-up"
+ },
+ "Team.profile.bankTitle": {
+  "en": "Bank account",
+  "ar": "الحساب البنكي",
+  "de": "Bankkonto",
+  "fr": "Compte bancaire",
+  "it": "Conto bancario"
+ },
+ "Team.profile.bankHint": {
+  "en": "Where your commissions are paid. Admins see it when they pay you.",
+  "ar": "حيث تُدفع عمولاتك. يراه المسؤولون عند الدفع لك.",
+  "de": "Hierhin werden Ihre Provisionen gezahlt. Administratoren sehen es bei der Auszahlung.",
+  "fr": "Là où vos commissions sont versées. Les administrateurs le voient quand ils vous paient.",
+  "it": "Dove vengono pagate le tue provvigioni. Gli amministratori lo vedono quando ti pagano."
+ },
+ "Team.profile.bankErrorTitle": {
+  "en": "Your bank account didn't load",
+  "ar": "لم يُحمَّل حسابك البنكي",
+  "de": "Ihr Bankkonto wurde nicht geladen",
+  "fr": "Votre compte bancaire ne s'est pas chargé",
+  "it": "Il tuo conto bancario non è stato caricato"
+ },
+ "Team.profile.bankNoRecordTitle": {
+  "en": "No salesperson record yet",
+  "ar": "لا يوجد سجل مندوب مبيعات بعد",
+  "de": "Noch kein Eintrag im Vertriebsteam",
+  "fr": "Pas encore de fiche commercial",
+  "it": "Ancora nessuna scheda venditore"
+ },
+ "Team.profile.bankNoRecordBody": {
+  "en": "Ask an admin to add you to the salespeople; then add your bank account here.",
+  "ar": "اطلب من مسؤول إضافتك إلى مندوبي المبيعات، ثم أضف حسابك البنكي هنا.",
+  "de": "Bitten Sie eine/n Administrator/in, Sie ins Vertriebsteam aufzunehmen; dann tragen Sie hier Ihr Bankkonto ein.",
+  "fr": "Demandez à un administrateur de vous ajouter aux commerciaux, puis ajoutez ici votre compte bancaire.",
+  "it": "Chiedi a un amministratore di aggiungerti ai venditori, poi aggiungi qui il tuo conto bancario."
+ },
+ "Team.profile.accountName": {
+  "en": "Account holder",
+  "ar": "صاحب الحساب",
+  "de": "Kontoinhaber/in",
+  "fr": "Titulaire du compte",
+  "it": "Intestatario"
+ },
+ "Team.profile.bankName": {
+  "en": "Bank",
+  "ar": "البنك",
+  "de": "Bank",
+  "fr": "Banque",
+  "it": "Banca"
+ },
+ "Team.profile.iban": {
+  "en": "IBAN or account number",
+  "ar": "رقم IBAN أو رقم الحساب",
+  "de": "IBAN oder Kontonummer",
+  "fr": "IBAN ou numéro de compte",
+  "it": "IBAN o numero di conto"
+ },
+ "Team.profile.ibanHint": {
+  "en": "Letters and digits; spaces are fine.",
+  "ar": "حروف وأرقام؛ المسافات مقبولة.",
+  "de": "Buchstaben und Ziffern; Leerzeichen sind erlaubt.",
+  "fr": "Lettres et chiffres ; les espaces sont acceptés.",
+  "it": "Lettere e cifre; gli spazi vanno bene."
+ },
+ "Team.profile.swift": {
+  "en": "SWIFT/BIC",
+  "ar": "SWIFT/BIC",
+  "de": "SWIFT/BIC",
+  "fr": "SWIFT/BIC",
+  "it": "SWIFT/BIC"
+ },
+ "Team.profile.saveBank": {
+  "en": "Save bank account",
+  "ar": "حفظ الحساب البنكي",
+  "de": "Bankkonto speichern",
+  "fr": "Enregistrer le compte",
+  "it": "Salva il conto"
+ },
+ "Team.profile.event.project.created": {
+  "en": "A project is created",
+  "ar": "إنشاء مشروع",
+  "de": "Ein Projekt wird erstellt",
+  "fr": "Un projet est créé",
+  "it": "Viene creato un progetto"
+ },
+ "Team.profile.event.project.status_changed": {
+  "en": "A project's status changes",
+  "ar": "تغيّر حالة مشروع",
+  "de": "Der Status eines Projekts ändert sich",
+  "fr": "Le statut d'un projet change",
+  "it": "Cambia lo stato di un progetto"
+ },
+ "Team.profile.event.project.priority_changed": {
+  "en": "A project's priority changes",
+  "ar": "تغيّر أولوية مشروع",
+  "de": "Die Priorität eines Projekts ändert sich",
+  "fr": "La priorité d'un projet change",
+  "it": "Cambia la priorità di un progetto"
+ },
+ "Team.profile.event.contract.created": {
+  "en": "A contract is created",
+  "ar": "إنشاء عقد",
+  "de": "Ein Vertrag wird erstellt",
+  "fr": "Un contrat est créé",
+  "it": "Viene creato un contratto"
+ },
+ "Team.profile.event.contract.awaiting_confirmation": {
+  "en": "A contract waits for signing",
+  "ar": "عقد بانتظار التوقيع",
+  "de": "Ein Vertrag wartet auf Unterschrift",
+  "fr": "Un contrat attend sa signature",
+  "it": "Un contratto attende la firma"
+ },
+ "Team.profile.event.contract.confirmed": {
+  "en": "A contract is signed",
+  "ar": "توقيع عقد",
+  "de": "Ein Vertrag wird unterschrieben",
+  "fr": "Un contrat est signé",
+  "it": "Un contratto viene firmato"
+ },
+ "Team.profile.event.contract.approved": {
+  "en": "A contract is approved",
+  "ar": "اعتماد عقد",
+  "de": "Ein Vertrag wird freigegeben",
+  "fr": "Un contrat est approuvé",
+  "it": "Un contratto viene approvato"
+ },
+ "Team.profile.event.contract.rejected": {
+  "en": "A contract is rejected",
+  "ar": "رفض عقد",
+  "de": "Ein Vertrag wird abgelehnt",
+  "fr": "Un contrat est refusé",
+  "it": "Un contratto viene rifiutato"
+ },
+ "Team.profile.event.invoice.created": {
+  "en": "An invoice is issued",
+  "ar": "إصدار فاتورة",
+  "de": "Eine Rechnung wird erstellt",
+  "fr": "Une facture est émise",
+  "it": "Viene emessa una fattura"
+ },
+ "Team.profile.event.invoice.due_soon": {
+  "en": "An invoice is due soon",
+  "ar": "اقتراب موعد استحقاق فاتورة",
+  "de": "Eine Rechnung ist bald fällig",
+  "fr": "Une facture arrive à échéance",
+  "it": "Una fattura sta per scadere"
+ },
+ "Team.profile.event.invoice.overdue": {
+  "en": "An invoice is overdue",
+  "ar": "تأخّر سداد فاتورة",
+  "de": "Eine Rechnung ist überfällig",
+  "fr": "Une facture est en retard",
+  "it": "Una fattura è scaduta"
+ },
+ "Team.profile.event.invoice.paid": {
+  "en": "An invoice is paid",
+  "ar": "سداد فاتورة",
+  "de": "Eine Rechnung wird bezahlt",
+  "fr": "Une facture est payée",
+  "it": "Una fattura viene pagata"
+ },
+ "Team.profile.event.custom_invoice.created": {
+  "en": "A custom invoice is issued",
+  "ar": "إصدار فاتورة مخصصة",
+  "de": "Eine individuelle Rechnung wird erstellt",
+  "fr": "Une facture personnalisée est émise",
+  "it": "Viene emessa una fattura personalizzata"
+ },
+ "Team.profile.event.custom_invoice.paid": {
+  "en": "A custom invoice is paid",
+  "ar": "سداد فاتورة مخصصة",
+  "de": "Eine individuelle Rechnung wird bezahlt",
+  "fr": "Une facture personnalisée est payée",
+  "it": "Una fattura personalizzata viene pagata"
+ },
+ "Team.profile.event.payment.received": {
+  "en": "A payment arrives",
+  "ar": "استلام دفعة",
+  "de": "Eine Zahlung geht ein",
+  "fr": "Un paiement arrive",
+  "it": "Arriva un pagamento"
+ },
+ "Team.profile.event.wallet.commission_added": {
+  "en": "A commission is credited",
+  "ar": "إضافة عمولة إلى المحفظة",
+  "de": "Eine Provision wird gutgeschrieben",
+  "fr": "Une commission est créditée",
+  "it": "Viene accreditata una provvigione"
+ },
+ "Team.profile.event.wallet.commission_paid": {
+  "en": "A commission is paid out",
+  "ar": "دفع عمولة",
+  "de": "Eine Provision wird ausbezahlt",
+  "fr": "Une commission est versée",
+  "it": "Viene pagata una provvigione"
+ },
+ "Team.profile.event.customer.document_uploaded": {
+  "en": "A customer uploads a document",
+  "ar": "رفع عميل مستندًا",
+  "de": "Ein Kunde lädt ein Dokument hoch",
+  "fr": "Un client téléverse un document",
+  "it": "Un cliente carica un documento"
+ },
+ "Team.profile.event.customer.meeting_scheduled": {
+  "en": "A meeting is scheduled",
+  "ar": "تحديد موعد اجتماع",
+  "de": "Ein Termin wird geplant",
+  "fr": "Une réunion est planifiée",
+  "it": "Viene fissata una riunione"
+ },
+ "Team.profile.event.customer.registered": {
+  "en": "A customer signs up",
+  "ar": "تسجيل عميل",
+  "de": "Ein Kunde registriert sich",
+  "fr": "Un client s'inscrit",
+  "it": "Un cliente si registra"
+ },
+ "Team.profile.eventGroup.project": {
+  "en": "Projects",
+  "ar": "المشاريع",
+  "de": "Projekte",
+  "fr": "Projets",
+  "it": "Progetti"
+ },
+ "Team.profile.eventGroup.contract": {
+  "en": "Contracts",
+  "ar": "العقود",
+  "de": "Verträge",
+  "fr": "Contrats",
+  "it": "Contratti"
+ },
+ "Team.profile.eventGroup.invoice": {
+  "en": "Invoices",
+  "ar": "الفواتير",
+  "de": "Rechnungen",
+  "fr": "Factures",
+  "it": "Fatture"
+ },
+ "Team.profile.eventGroup.custom_invoice": {
+  "en": "Custom invoices",
+  "ar": "الفواتير المخصصة",
+  "de": "Individuelle Rechnungen",
+  "fr": "Factures personnalisées",
+  "it": "Fatture personalizzate"
+ },
+ "Team.profile.eventGroup.payment": {
+  "en": "Payments",
+  "ar": "الدفعات",
+  "de": "Zahlungen",
+  "fr": "Paiements",
+  "it": "Pagamenti"
+ },
+ "Team.profile.eventGroup.wallet": {
+  "en": "Commissions",
+  "ar": "العمولات",
+  "de": "Provisionen",
+  "fr": "Commissions",
+  "it": "Provvigioni"
+ },
+ "Team.profile.eventGroup.customer": {
+  "en": "Customers",
+  "ar": "العملاء",
+  "de": "Kunden",
+  "fr": "Clients",
+  "it": "Clienti"
+ },
+ "commissions": null,
+ "salesman": null,
+ "loyalty": null,
+ "profile": null,
+ "userManagement": null,
+ "users": null
+}

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/yosse/.claude/skills/ui-ux-pro-max/**)",
+      "Bash(python scripts/search.py \"team chat collaboration workspace productivity SaaS\" --design-system --variance 5 --motion 5 --density 8 -p \"Somion HQ\")"
+    ]
+  }
+}

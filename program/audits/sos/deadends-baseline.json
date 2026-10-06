@@ -1,0 +1,618 @@
+{
+  "app": "sos",
+  "as": "mona.adel@orgtik.test",
+  "from": "baseline",
+  "at": "2026-09-30T05:14:54.256Z",
+  "signIn": {
+    "ok": true,
+    "restoredFromState": true
+  },
+  "pages": [
+    {
+      "route": "/chat",
+      "url": "/chat",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 2,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/chat",
+          "url": "/chat",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Logout",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/chat",
+          "url": "/chat",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Chat",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/content",
+      "url": "/content",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 2,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/content",
+          "url": "/content",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Logout",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/content",
+          "url": "/content",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Go Home",
+          "outcome": "navigated",
+          "detail": "/",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/icons-test",
+      "url": "/icons-test",
+      "session": "signed-in",
+      "unnamedButtons": 1,
+      "found": 1,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/icons-test",
+          "url": "/icons-test",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Logout",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/icons-test",
+          "url": "/icons-test",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: x)",
+          "outcome": "changed",
+          "detail": "",
+          "where": "body > section:nth-of-type(1) > section:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/people",
+      "url": "/people",
+      "session": "signed-in",
+      "unnamedButtons": 20,
+      "found": 5,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/people",
+          "url": "/people",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Logout",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/people",
+          "url": "/people",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add User",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/people",
+          "url": "/people",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All scopes",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/people",
+          "url": "/people",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All (types)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/people",
+          "url": "/people",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All (status)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/people",
+          "url": "/people",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: no icon)",
+          "outcome": "changed",
+          "detail": "",
+          "where": "body > section:nth-of-type(1) > section:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(5) > button:nth-of-type(1)"
+        },
+        {
+          "app": "sos",
+          "route": "/people",
+          "url": "/people",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon 743519)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > section:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(7) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/profile",
+      "url": "/profile",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 3,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/profile",
+          "url": "/profile",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Logout",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/profile",
+          "url": "/profile",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Edit Avatar",
+          "outcome": "opened",
+          "detail": "file chooser",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/profile",
+          "url": "/profile",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Save Changes",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/systems/cms",
+      "url": "/systems/cms",
+      "session": "signed-in",
+      "unnamedButtons": 4,
+      "found": 3,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/systems/cms",
+          "url": "/systems/cms",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Logout",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/systems/cms",
+          "url": "/systems/cms",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Back",
+          "outcome": "navigated",
+          "detail": "/systems",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/systems/cms",
+          "url": "/systems/cms",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New CMS",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/systems/cms",
+          "url": "/systems/cms",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon 743519)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > section:nth-of-type(1) > main:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(5) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/systems/internal",
+      "url": "/systems/internal",
+      "session": "signed-in",
+      "unnamedButtons": 8,
+      "found": 4,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/systems/internal",
+          "url": "/systems/internal",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Logout",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/systems/internal",
+          "url": "/systems/internal",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Back",
+          "outcome": "navigated",
+          "detail": "/systems",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/systems/internal",
+          "url": "/systems/internal",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New System",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/systems/internal",
+          "url": "/systems/internal",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open menu",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/systems/internal",
+          "url": "/systems/internal",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: no icon)",
+          "outcome": "changed",
+          "detail": "",
+          "where": "body > section:nth-of-type(1) > section:nth-of-type(1) > main:nth-of-type(1) > section:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > table:nth-of-type(1) > tbody:nth-of-type(1) > tr:nth-of-type(1) > td:nth-of-type(6) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/systems",
+      "url": "/systems",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 1,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/systems",
+          "url": "/systems",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Logout",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/chat/:id",
+      "url": "/chat/3",
+      "session": "signed-in",
+      "unnamedButtons": 8,
+      "found": 2,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/chat/:id",
+          "url": "/chat/3",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Logout",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/chat/:id",
+          "url": "/chat/3",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New Chat",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/chat/:id",
+          "url": "/chat/3",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: trash2)",
+          "outcome": "not found",
+          "detail": "not on the page after a reload",
+          "where": "body > section:nth-of-type(1) > section:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > button:nth-of-type(1)"
+        },
+        {
+          "app": "sos",
+          "route": "/chat/:id",
+          "url": "/chat/3",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: download)",
+          "outcome": "opened",
+          "detail": "download, new tab",
+          "where": "body > section:nth-of-type(1) > section:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        },
+        {
+          "app": "sos",
+          "route": "/chat/:id",
+          "url": "/chat/3",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: mic)",
+          "outcome": "changed",
+          "detail": "",
+          "where": "body > section:nth-of-type(1) > section:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(1)"
+        },
+        {
+          "app": "sos",
+          "route": "/chat/:id",
+          "url": "/chat/3",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: paperclip)",
+          "outcome": "opened",
+          "detail": "file chooser",
+          "where": "body > section:nth-of-type(1) > section:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > button:nth-of-type(2)"
+        }
+      ]
+    },
+    {
+      "route": "/auth/forgot-password",
+      "url": "/auth/forgot-password",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 1,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/auth/forgot-password",
+          "url": "/auth/forgot-password",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Send Code",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/auth/invite",
+      "url": "/auth/invite",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 0,
+      "truncated": 0,
+      "results": []
+    },
+    {
+      "route": "/auth/login",
+      "url": "/auth/login",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 2,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/auth/login",
+          "url": "/auth/login",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Show password",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/auth/login",
+          "url": "/auth/login",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Login",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/auth",
+      "url": "/auth",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 2,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/auth",
+          "url": "/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Show password",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/auth",
+          "url": "/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Login",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/auth/redirecting",
+      "url": "/auth/redirecting",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 2,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/auth/redirecting",
+          "url": "/auth/redirecting",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Show password",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "sos",
+          "route": "/auth/redirecting",
+          "url": "/auth/redirecting",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Login",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/auth/reset-password",
+      "url": "/auth/reset-password",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 1,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "sos",
+          "route": "/auth/reset-password",
+          "url": "/auth/reset-password",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Show password",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    }
+  ],
+  "tally": {
+    "app": "sos",
+    "pages": 15,
+    "pressed": 31,
+    "dead end": 0,
+    "copied silently": 0,
+    "not clickable": 0,
+    "not found": 1,
+    "sign-in wall": 0,
+    "left the app": 0,
+    "current page": 0,
+    "active option": 0,
+    "skipped": 9,
+    "broken link": 0,
+    "unnamed buttons": 41,
+    "over the limit": 0
+  }
+}

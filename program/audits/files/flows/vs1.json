@@ -1,0 +1,188 @@
+[
+  {
+    "title": "Sign in on SOS → launcher → Files shell → the Files list (en)",
+    "locale": "en",
+    "passed": 6,
+    "steps": 6,
+    "ok": true,
+    "steps_detail": [
+      {
+        "step": 1,
+        "name": "sos-sign-in-page",
+        "ok": true,
+        "note": "lang=en",
+        "at": "http://localhost:3013/auth/login",
+        "shot": "101-sos-sign-in-page.png"
+      },
+      {
+        "step": 2,
+        "name": "wrong-password-says-so",
+        "ok": true,
+        "note": "That email and password don't match an account. Check them and try again.",
+        "at": "http://localhost:3013/auth/login",
+        "shot": "102-wrong-password-says-so.png"
+      },
+      {
+        "step": 3,
+        "name": "sign-in",
+        "ok": true,
+        "note": "/",
+        "at": "http://localhost:3013/",
+        "shot": "103-sign-in.png"
+      },
+      {
+        "step": 4,
+        "name": "launcher-has-files",
+        "ok": true,
+        "note": "a Files tile links to http://localhost:3002/en/auth",
+        "at": "http://localhost:3013/",
+        "shot": "104-launcher-has-files.png"
+      },
+      {
+        "step": 5,
+        "name": "open-files",
+        "ok": true,
+        "note": "landed /en (lang=en), suite rail present",
+        "at": "http://localhost:3002/en",
+        "shot": "105-open-files.png"
+      },
+      {
+        "step": 6,
+        "name": "my-files",
+        "ok": true,
+        "note": "25 rows; current nav item: Files",
+        "at": "http://localhost:3002/en",
+        "shot": "106-my-files.png"
+      }
+    ],
+    "console": 2,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "Login failed: {error: Object, isUnhandledError: false, meta: Object}"
+    ],
+    "uncaught": 0
+  },
+  {
+    "title": "Sign in on SOS → launcher → Files shell → the Files list (ar)",
+    "locale": "ar",
+    "passed": 6,
+    "steps": 6,
+    "ok": true,
+    "steps_detail": [
+      {
+        "step": 1,
+        "name": "sos-sign-in-page",
+        "ok": true,
+        "note": "lang=ar",
+        "at": "http://localhost:3013/auth/login",
+        "shot": "201-sos-sign-in-page.png"
+      },
+      {
+        "step": 2,
+        "name": "wrong-password-says-so",
+        "ok": true,
+        "note": "البريد الإلكتروني وكلمة المرور لا يطابقان أي حساب. تحقّق منهما وحاول مرة أخرى.",
+        "at": "http://localhost:3013/auth/login",
+        "shot": "202-wrong-password-says-so.png"
+      },
+      {
+        "step": 3,
+        "name": "sign-in",
+        "ok": true,
+        "note": "/",
+        "at": "http://localhost:3013/",
+        "shot": "203-sign-in.png"
+      },
+      {
+        "step": 4,
+        "name": "launcher-has-files",
+        "ok": true,
+        "note": "a Files tile links to http://localhost:3002/ar/auth",
+        "at": "http://localhost:3013/",
+        "shot": "204-launcher-has-files.png"
+      },
+      {
+        "step": 5,
+        "name": "open-files",
+        "ok": true,
+        "note": "landed /ar (lang=ar), suite rail present",
+        "at": "http://localhost:3002/ar",
+        "shot": "205-open-files.png"
+      },
+      {
+        "step": 6,
+        "name": "my-files",
+        "ok": true,
+        "note": "25 rows; current nav item: الملفات",
+        "at": "http://localhost:3002/ar",
+        "shot": "206-my-files.png"
+      }
+    ],
+    "console": 2,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+      "Login failed: {error: Object, isUnhandledError: false, meta: Object}"
+    ],
+    "uncaught": 0
+  },
+  {
+    "title": "?redirect=/people after sign-in",
+    "locale": "en",
+    "passed": 1,
+    "steps": 1,
+    "ok": true,
+    "steps_detail": [
+      {
+        "step": 1,
+        "name": "redirect-to-sos-path",
+        "ok": true,
+        "note": "landed http://localhost:3013/people",
+        "at": "http://localhost:3013/people",
+        "shot": "301-redirect-to-sos-path.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": [],
+    "uncaught": 0
+  },
+  {
+    "title": "?redirect=https://example.com/phish after sign-in",
+    "locale": "en",
+    "passed": 1,
+    "steps": 1,
+    "ok": true,
+    "steps_detail": [
+      {
+        "step": 1,
+        "name": "redirect-to-other-site-refused",
+        "ok": true,
+        "note": "landed http://localhost:3013/",
+        "at": "http://localhost:3013/",
+        "shot": "401-redirect-to-other-site-refused.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": [],
+    "uncaught": 0
+  },
+  {
+    "title": "?redirect=//example.com/phish after sign-in",
+    "locale": "en",
+    "passed": 1,
+    "steps": 1,
+    "ok": true,
+    "steps_detail": [
+      {
+        "step": 1,
+        "name": "redirect-protocol-relative-refused",
+        "ok": true,
+        "note": "landed http://localhost:3013/",
+        "at": "http://localhost:3013/",
+        "shot": "501-redirect-protocol-relative-refused.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": [],
+    "uncaught": 0
+  }
+]

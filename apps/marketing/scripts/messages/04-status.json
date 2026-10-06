@@ -1,0 +1,268 @@
+{
+ "Status.unknown": {
+  "en": "Unknown",
+  "ar": "غير معروف",
+  "de": "Unbekannt",
+  "fr": "Inconnu",
+  "it": "Sconosciuto"
+ },
+ "Status.post.DRAFT": {
+  "en": "Draft",
+  "ar": "مسودة",
+  "de": "Entwurf",
+  "fr": "Brouillon",
+  "it": "Bozza"
+ },
+ "Status.post.PENDING": {
+  "en": "Waiting for approval",
+  "ar": "بانتظار الموافقة",
+  "de": "Wartet auf Freigabe",
+  "fr": "En attente d’approbation",
+  "it": "In attesa di approvazione"
+ },
+ "Status.post.PENDING_APPROVAL": {
+  "en": "Waiting for approval",
+  "ar": "بانتظار الموافقة",
+  "de": "Wartet auf Freigabe",
+  "fr": "En attente d’approbation",
+  "it": "In attesa di approvazione"
+ },
+ "Status.post.APPROVED": {
+  "en": "Approved",
+  "ar": "معتمد",
+  "de": "Freigegeben",
+  "fr": "Approuvée",
+  "it": "Approvato"
+ },
+ "Status.post.REJECTED": {
+  "en": "Rejected",
+  "ar": "مرفوض",
+  "de": "Abgelehnt",
+  "fr": "Refusée",
+  "it": "Rifiutato"
+ },
+ "Status.post.SCHEDULED": {
+  "en": "Scheduled",
+  "ar": "مجدول",
+  "de": "Geplant",
+  "fr": "Programmée",
+  "it": "Programmato"
+ },
+ "Status.post.PUBLISHED": {
+  "en": "Published",
+  "ar": "منشور",
+  "de": "Veröffentlicht",
+  "fr": "Publiée",
+  "it": "Pubblicato"
+ },
+ "Status.post.PARTIAL": {
+  "en": "Partly published",
+  "ar": "منشور جزئيًا",
+  "de": "Teilweise veröffentlicht",
+  "fr": "Publiée en partie",
+  "it": "Pubblicato in parte"
+ },
+ "Status.post.FAILED": {
+  "en": "Failed",
+  "ar": "فشل النشر",
+  "de": "Fehlgeschlagen",
+  "fr": "Échec",
+  "it": "Non riuscito"
+ },
+ "Status.post.CANCELED": {
+  "en": "Canceled",
+  "ar": "ملغى",
+  "de": "Abgebrochen",
+  "fr": "Annulée",
+  "it": "Annullato"
+ },
+ "Status.campaign.DRAFT": {
+  "en": "Draft",
+  "ar": "مسودة",
+  "de": "Entwurf",
+  "fr": "Brouillon",
+  "it": "Bozza"
+ },
+ "Status.campaign.AWAITING_REVIEW": {
+  "en": "Waiting for approval",
+  "ar": "بانتظار الموافقة",
+  "de": "Wartet auf Freigabe",
+  "fr": "En attente d’approbation",
+  "it": "In attesa di approvazione"
+ },
+ "Status.campaign.REAPPROVAL_REQUIRED": {
+  "en": "Needs approval again",
+  "ar": "تحتاج إلى موافقة جديدة",
+  "de": "Erneute Freigabe nötig",
+  "fr": "Nouvelle approbation requise",
+  "it": "Serve una nuova approvazione"
+ },
+ "Status.campaign.APPROVED": {
+  "en": "Approved",
+  "ar": "معتمدة",
+  "de": "Freigegeben",
+  "fr": "Approuvée",
+  "it": "Approvata"
+ },
+ "Status.campaign.REJECTED": {
+  "en": "Rejected",
+  "ar": "مرفوضة",
+  "de": "Abgelehnt",
+  "fr": "Refusée",
+  "it": "Rifiutata"
+ },
+ "Status.campaign.READY": {
+  "en": "Ready to start",
+  "ar": "جاهزة للبدء",
+  "de": "Startbereit",
+  "fr": "Prête à démarrer",
+  "it": "Pronta a partire"
+ },
+ "Status.campaign.RUNNING": {
+  "en": "Running",
+  "ar": "قيد التشغيل",
+  "de": "Läuft",
+  "fr": "En cours",
+  "it": "In corso"
+ },
+ "Status.campaign.PAUSED": {
+  "en": "Paused",
+  "ar": "متوقفة مؤقتًا",
+  "de": "Pausiert",
+  "fr": "En pause",
+  "it": "In pausa"
+ },
+ "Status.campaign.STOPPED": {
+  "en": "Stopped",
+  "ar": "متوقفة",
+  "de": "Beendet",
+  "fr": "Arrêtée",
+  "it": "Interrotta"
+ },
+ "Status.campaign.COMPLETED": {
+  "en": "Completed",
+  "ar": "مكتملة",
+  "de": "Abgeschlossen",
+  "fr": "Terminée",
+  "it": "Completata"
+ },
+ "Status.campaign.FAILED": {
+  "en": "Failed",
+  "ar": "فشلت",
+  "de": "Fehlgeschlagen",
+  "fr": "Échec",
+  "it": "Non riuscita"
+ },
+ "Status.approval.NOT_REQUIRED": {
+  "en": "No approval needed",
+  "ar": "لا تحتاج إلى موافقة",
+  "de": "Keine Freigabe nötig",
+  "fr": "Aucune approbation requise",
+  "it": "Nessuna approvazione necessaria"
+ },
+ "Status.approval.PENDING_APPROVAL": {
+  "en": "Waiting",
+  "ar": "بالانتظار",
+  "de": "Ausstehend",
+  "fr": "En attente",
+  "it": "In attesa"
+ },
+ "Status.approval.PENDING": {
+  "en": "Waiting",
+  "ar": "بالانتظار",
+  "de": "Ausstehend",
+  "fr": "En attente",
+  "it": "In attesa"
+ },
+ "Status.approval.APPROVED": {
+  "en": "Approved",
+  "ar": "تمت الموافقة",
+  "de": "Freigegeben",
+  "fr": "Approuvé",
+  "it": "Approvato"
+ },
+ "Status.approval.REJECTED": {
+  "en": "Rejected",
+  "ar": "مرفوض",
+  "de": "Abgelehnt",
+  "fr": "Refusé",
+  "it": "Rifiutato"
+ },
+ "Status.boost.QUEUED": {
+  "en": "Queued",
+  "ar": "في قائمة الانتظار",
+  "de": "In Warteschlange",
+  "fr": "En file d’attente",
+  "it": "In coda"
+ },
+ "Status.boost.ACTIVE": {
+  "en": "Running",
+  "ar": "قيد التشغيل",
+  "de": "Läuft",
+  "fr": "En cours",
+  "it": "In corso"
+ },
+ "Status.boost.RUNNING": {
+  "en": "Running",
+  "ar": "قيد التشغيل",
+  "de": "Läuft",
+  "fr": "En cours",
+  "it": "In corso"
+ },
+ "Status.boost.PAUSED": {
+  "en": "Paused",
+  "ar": "متوقف مؤقتًا",
+  "de": "Pausiert",
+  "fr": "En pause",
+  "it": "In pausa"
+ },
+ "Status.boost.STOPPED": {
+  "en": "Ended",
+  "ar": "انتهى",
+  "de": "Beendet",
+  "fr": "Terminée",
+  "it": "Terminata"
+ },
+ "Status.boost.COMPLETED": {
+  "en": "Completed",
+  "ar": "مكتمل",
+  "de": "Abgeschlossen",
+  "fr": "Terminée",
+  "it": "Completata"
+ },
+ "Status.boost.FAILED": {
+  "en": "Failed",
+  "ar": "فشل",
+  "de": "Fehlgeschlagen",
+  "fr": "Échec",
+  "it": "Non riuscita"
+ },
+ "Status.integration.CONNECTED": {
+  "en": "Connected",
+  "ar": "مرتبط",
+  "de": "Verbunden",
+  "fr": "Connecté",
+  "it": "Collegato"
+ },
+ "Status.integration.NEEDS_RECONNECT": {
+  "en": "Reconnect needed",
+  "ar": "تجب إعادة الربط",
+  "de": "Neu verbinden",
+  "fr": "Reconnexion requise",
+  "it": "Ricollegamento necessario"
+ },
+ "Status.integration.DISABLED": {
+  "en": "Turned off",
+  "ar": "متوقف",
+  "de": "Deaktiviert",
+  "fr": "Désactivé",
+  "it": "Disattivato"
+ },
+ "Status.integration.DISCONNECTED": {
+  "en": "Disconnected",
+  "ar": "غير مرتبط",
+  "de": "Getrennt",
+  "fr": "Déconnecté",
+  "it": "Scollegato"
+ }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "wm-s2",
+    "exitCode": 0,
+    "durationSeconds": 22
+  },
+  {
+    "name": "wm-s3",
+    "exitCode": 0,
+    "durationSeconds": 32
+  },
+  {
+    "name": "wm-lifecycle",
+    "exitCode": 0,
+    "durationSeconds": 31
+  },
+  {
+    "name": "site-connection",
+    "exitCode": 0,
+    "durationSeconds": 7
+  }
+]

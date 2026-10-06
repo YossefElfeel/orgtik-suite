@@ -1,0 +1,44 @@
+{
+  "name": "somion_new_dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack -p 3013",
+    "build": "next build --turbopack",
+    "start": "next start -p 3013",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
+    "@orgtik/ui": "file:.yalc/@orgtik/ui",
+    "@phosphor-icons/react": "^2.1.10",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@somion/sos-bar": "^3.11.2",
+    "@tanstack/react-table": "^8.21.3",
+    "clsx": "^2.1.1",
+    "cookies-next": "^6.1.0",
+    "next": "^15.5.9",
+    "next-intl": "^4.8.3",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.62.0",
+    "react-redux": "^9.2.0",
+    "tailwind-merge": "^3.3.1",
+    "zod": "^4.1.5"
+  },
+  "overrides": {
+    "postcss": "^8.5.26"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^0.1.0",
+    "@swc/core": "^1.15.21",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
+    "tailwindcss": "^4",
+    "tw-animate-css": "^1.3.7",
+    "typescript": "^5"
+  }
+}

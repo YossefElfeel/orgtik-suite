@@ -1,0 +1,520 @@
+{
+ "Posts.title": {
+  "en": "Posts",
+  "ar": "المنشورات",
+  "de": "Beiträge",
+  "fr": "Publications",
+  "it": "Post"
+ },
+ "Posts.description": {
+  "en": "Everything you post on your connected accounts, scheduled or published.",
+  "ar": "كل ما تنشره على حساباتك المرتبطة، مجدولًا أو منشورًا.",
+  "de": "Alles, was Sie auf Ihren verbundenen Konten posten, geplant oder veröffentlicht.",
+  "fr": "Tout ce que vous publiez sur vos comptes connectés, programmé ou publié.",
+  "it": "Tutto ciò che pubblichi sui tuoi account collegati, programmato o pubblicato."
+ },
+ "Posts.newPost": {
+  "en": "New post",
+  "ar": "منشور جديد",
+  "de": "Neuer Beitrag",
+  "fr": "Nouvelle publication",
+  "it": "Nuovo post"
+ },
+ "Posts.tableLabel": {
+  "en": "Posts in this project",
+  "ar": "منشورات هذا المشروع",
+  "de": "Beiträge in diesem Projekt",
+  "fr": "Publications de ce projet",
+  "it": "Post di questo progetto"
+ },
+ "Posts.search": {
+  "en": "Search posts",
+  "ar": "ابحث في المنشورات",
+  "de": "Beiträge suchen",
+  "fr": "Rechercher des publications",
+  "it": "Cerca post"
+ },
+ "Posts.month": {
+  "en": "Month",
+  "ar": "الشهر",
+  "de": "Monat",
+  "fr": "Mois",
+  "it": "Mese"
+ },
+ "Posts.anyDate": {
+  "en": "Any date",
+  "ar": "أي تاريخ",
+  "de": "Beliebiges Datum",
+  "fr": "Toutes les dates",
+  "it": "Qualsiasi data"
+ },
+ "Posts.thisMonth": {
+  "en": "This month",
+  "ar": "هذا الشهر",
+  "de": "Dieser Monat",
+  "fr": "Ce mois-ci",
+  "it": "Questo mese"
+ },
+ "Posts.previousMonth": {
+  "en": "Previous month",
+  "ar": "الشهر السابق",
+  "de": "Vorheriger Monat",
+  "fr": "Mois précédent",
+  "it": "Mese precedente"
+ },
+ "Posts.nextMonth": {
+  "en": "Next month",
+  "ar": "الشهر التالي",
+  "de": "Nächster Monat",
+  "fr": "Mois suivant",
+  "it": "Mese successivo"
+ },
+ "Posts.labels": {
+  "en": "Labels",
+  "ar": "التصنيفات",
+  "de": "Labels",
+  "fr": "Étiquettes",
+  "it": "Etichette"
+ },
+ "Posts.labelsPlaceholder": {
+  "en": "All labels",
+  "ar": "كل التصنيفات",
+  "de": "Alle Labels",
+  "fr": "Toutes les étiquettes",
+  "it": "Tutte le etichette"
+ },
+ "Posts.noLabels": {
+  "en": "No labels match",
+  "ar": "لا تصنيفات مطابقة",
+  "de": "Keine passenden Labels",
+  "fr": "Aucune étiquette ne correspond",
+  "it": "Nessuna etichetta corrisponde"
+ },
+ "Posts.platforms": {
+  "en": "Platforms",
+  "ar": "المنصات",
+  "de": "Plattformen",
+  "fr": "Plateformes",
+  "it": "Piattaforme"
+ },
+ "Posts.status": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Posts.imported": {
+  "en": "Imported",
+  "ar": "مستورد",
+  "de": "Importiert",
+  "fr": "Importée",
+  "it": "Importato"
+ },
+ "Posts.colPost": {
+  "en": "Post",
+  "ar": "المنشور",
+  "de": "Beitrag",
+  "fr": "Publication",
+  "it": "Post"
+ },
+ "Posts.colWhen": {
+  "en": "Goes out",
+  "ar": "موعد النشر",
+  "de": "Erscheint",
+  "fr": "Parution",
+  "it": "Uscita"
+ },
+ "Posts.colStatus": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "Posts.colPlatforms": {
+  "en": "Platforms",
+  "ar": "المنصات",
+  "de": "Plattformen",
+  "fr": "Plateformes",
+  "it": "Piattaforme"
+ },
+ "Posts.colLabels": {
+  "en": "Labels",
+  "ar": "التصنيفات",
+  "de": "Labels",
+  "fr": "Étiquettes",
+  "it": "Etichette"
+ },
+ "Posts.colApprovers": {
+  "en": "Approvers",
+  "ar": "المعتمِدون",
+  "de": "Freigebende",
+  "fr": "Approbateurs",
+  "it": "Approvatori"
+ },
+ "Posts.colActions": {
+  "en": "Actions",
+  "ar": "الإجراءات",
+  "de": "Aktionen",
+  "fr": "Actions",
+  "it": "Azioni"
+ },
+ "Posts.notScheduled": {
+  "en": "Not scheduled",
+  "ar": "غير مجدول",
+  "de": "Nicht geplant",
+  "fr": "Non programmée",
+  "it": "Non programmato"
+ },
+ "Posts.noLabelsShort": {
+  "en": "None",
+  "ar": "لا يوجد",
+  "de": "Keine",
+  "fr": "Aucune",
+  "it": "Nessuna"
+ },
+ "Posts.untitled": {
+  "en": "Untitled post",
+  "ar": "منشور بلا عنوان",
+  "de": "Beitrag ohne Titel",
+  "fr": "Publication sans titre",
+  "it": "Post senza titolo"
+ },
+ "Posts.platformsOf": {
+  "en": "{count, plural, one {# platform} other {# platforms}}",
+  "ar": "{count, plural, zero {لا منصات} one {منصة واحدة} two {منصتان} few {# منصات} many {# منصة} other {# منصة}}",
+  "de": "{count, plural, one {# Plattform} other {# Plattformen}}",
+  "fr": "{count, plural, one {# plateforme} other {# plateformes}}",
+  "it": "{count, plural, one {# piattaforma} other {# piattaforme}}"
+ },
+ "Posts.approversOf": {
+  "en": "{count, plural, one {# approver} other {# approvers}}",
+  "ar": "{count, plural, zero {لا معتمِدين} one {معتمِد واحد} two {معتمِدان} few {# معتمِدين} many {# معتمِدًا} other {# معتمِد}}",
+  "de": "{count, plural, one {# freigebende Person} other {# freigebende Personen}}",
+  "fr": "{count, plural, one {# approbateur} other {# approbateurs}}",
+  "it": "{count, plural, one {# approvatore} other {# approvatori}}"
+ },
+ "Posts.actionsFor": {
+  "en": "Actions for {name}",
+  "ar": "إجراءات {name}",
+  "de": "Aktionen für {name}",
+  "fr": "Actions pour {name}",
+  "it": "Azioni per {name}"
+ },
+ "Posts.view": {
+  "en": "Open",
+  "ar": "فتح",
+  "de": "Öffnen",
+  "fr": "Ouvrir",
+  "it": "Apri"
+ },
+ "Posts.edit": {
+  "en": "Edit",
+  "ar": "تعديل",
+  "de": "Bearbeiten",
+  "fr": "Modifier",
+  "it": "Modifica"
+ },
+ "Posts.duplicate": {
+  "en": "Duplicate",
+  "ar": "تكرار",
+  "de": "Duplizieren",
+  "fr": "Dupliquer",
+  "it": "Duplica"
+ },
+ "Posts.delete": {
+  "en": "Delete",
+  "ar": "حذف",
+  "de": "Löschen",
+  "fr": "Supprimer",
+  "it": "Elimina"
+ },
+ "Posts.errorTitle": {
+  "en": "Couldn't load posts",
+  "ar": "تعذّر تحميل المنشورات",
+  "de": "Beiträge konnten nicht geladen werden",
+  "fr": "Impossible de charger les publications",
+  "it": "Impossibile caricare i post"
+ },
+ "Posts.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "Posts.forbiddenTitle": {
+  "en": "You can't see these posts",
+  "ar": "لا يمكنك عرض هذه المنشورات",
+  "de": "Sie können diese Beiträge nicht sehen",
+  "fr": "Vous ne pouvez pas voir ces publications",
+  "it": "Non puoi vedere questi post"
+ },
+ "Posts.forbiddenBody": {
+  "en": "Ask a marketing manager to give you access to this project.",
+  "ar": "اطلب من مدير التسويق منحك الوصول إلى هذا المشروع.",
+  "de": "Bitten Sie eine Marketingleitung um Zugriff auf dieses Projekt.",
+  "fr": "Demandez à un responsable marketing l’accès à ce projet.",
+  "it": "Chiedi a un responsabile marketing l’accesso a questo progetto."
+ },
+ "Posts.noMatchTitle": {
+  "en": "No posts match",
+  "ar": "لا منشورات مطابقة",
+  "de": "Keine passenden Beiträge",
+  "fr": "Aucune publication ne correspond",
+  "it": "Nessun post corrisponde"
+ },
+ "Posts.noMatchBody": {
+  "en": "Try another month or clear the filters.",
+  "ar": "جرّب شهرًا آخر أو امسح عوامل التصفية.",
+  "de": "Wählen Sie einen anderen Monat oder setzen Sie die Filter zurück.",
+  "fr": "Essayez un autre mois ou effacez les filtres.",
+  "it": "Prova un altro mese o cancella i filtri."
+ },
+ "Posts.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella filtri"
+ },
+ "Posts.emptyTitle": {
+  "en": "No posts yet",
+  "ar": "لا منشورات بعد",
+  "de": "Noch keine Beiträge",
+  "fr": "Aucune publication pour l’instant",
+  "it": "Ancora nessun post"
+ },
+ "Posts.emptyBody": {
+  "en": "Write your first post and schedule it for your connected accounts.",
+  "ar": "اكتب أول منشور وجدوِله لحساباتك المرتبطة.",
+  "de": "Schreiben Sie Ihren ersten Beitrag und planen Sie ihn für Ihre verbundenen Konten.",
+  "fr": "Rédigez votre première publication et programmez-la sur vos comptes connectés.",
+  "it": "Scrivi il tuo primo post e programmalo sui tuoi account collegati."
+ },
+ "Posts.emptyBodyReader": {
+  "en": "Posts appear here when your team writes them.",
+  "ar": "تظهر المنشورات هنا عندما يكتبها فريقك.",
+  "de": "Beiträge erscheinen hier, sobald Ihr Team sie schreibt.",
+  "fr": "Les publications apparaissent ici quand votre équipe les rédige.",
+  "it": "I post compaiono qui quando il tuo team li scrive."
+ },
+ "PostShared.nobody": {
+  "en": "None",
+  "ar": "لا أحد",
+  "de": "Niemand",
+  "fr": "Personne",
+  "it": "Nessuno"
+ },
+ "PostShared.people": {
+  "en": "{count, plural, one {# person} other {# people}}",
+  "ar": "{count, plural, zero {لا أحد} one {شخص واحد} two {شخصان} few {# أشخاص} many {# شخصًا} other {# شخص}}",
+  "de": "{count, plural, one {# Person} other {# Personen}}",
+  "fr": "{count, plural, one {# personne} other {# personnes}}",
+  "it": "{count, plural, one {# persona} other {# persone}}"
+ },
+ "PostShared.andMore": {
+  "en": "and {count} more",
+  "ar": "و{count} آخرون",
+  "de": "und {count} weitere",
+  "fr": "et {count} de plus",
+  "it": "e altri {count}"
+ },
+ "PostShared.imported": {
+  "en": "Imported",
+  "ar": "مستورد",
+  "de": "Importiert",
+  "fr": "Importée",
+  "it": "Importato"
+ },
+ "PostDelete.title": {
+  "en": "Delete {name}?",
+  "ar": "حذف {name}؟",
+  "de": "{name} löschen?",
+  "fr": "Supprimer {name} ?",
+  "it": "Eliminare {name}?"
+ },
+ "PostDelete.impactDraft": {
+  "en": "It isn't live anywhere, so only the post in OrgTik goes, with its comments.",
+  "ar": "المنشور غير منشور على أي منصة، لذا يُحذف من OrgTik فقط مع تعليقاته.",
+  "de": "Er ist nirgends live, daher wird nur der Beitrag in OrgTik mit seinen Kommentaren gelöscht.",
+  "fr": "Elle n’est en ligne nulle part : seule la publication dans OrgTik est supprimée, avec ses commentaires.",
+  "it": "Non è online da nessuna parte: viene eliminato solo il post in OrgTik, con i suoi commenti."
+ },
+ "PostDelete.liveOn": {
+  "en": "It's live on {platforms}. Choose what happens there.",
+  "ar": "المنشور ظاهر الآن على {platforms}. اختر ما يحدث هناك.",
+  "de": "Er ist live auf {platforms}. Wählen Sie, was dort passiert.",
+  "fr": "Elle est en ligne sur {platforms}. Choisissez ce qui s’y passe.",
+  "it": "È online su {platforms}. Scegli cosa succede lì."
+ },
+ "PostDelete.modeLabel": {
+  "en": "What to delete",
+  "ar": "ما الذي تريد حذفه",
+  "de": "Was gelöscht wird",
+  "fr": "Ce qui est supprimé",
+  "it": "Cosa eliminare"
+ },
+ "PostDelete.recordOnly": {
+  "en": "Remove from OrgTik only",
+  "ar": "الإزالة من OrgTik فقط",
+  "de": "Nur aus OrgTik entfernen",
+  "fr": "Retirer d’OrgTik uniquement",
+  "it": "Rimuovi solo da OrgTik"
+ },
+ "PostDelete.recordOnlyHint": {
+  "en": "The post stays live on {platforms}. OrgTik stops tracking it.",
+  "ar": "يبقى المنشور ظاهرًا على {platforms}، ويتوقف OrgTik عن متابعته.",
+  "de": "Der Beitrag bleibt auf {platforms} live. OrgTik verfolgt ihn nicht mehr.",
+  "fr": "La publication reste en ligne sur {platforms}. OrgTik arrête de la suivre.",
+  "it": "Il post resta online su {platforms}. OrgTik smette di seguirlo."
+ },
+ "PostDelete.both": {
+  "en": "Delete here and on {platforms}",
+  "ar": "الحذف هنا وعلى {platforms}",
+  "de": "Hier und auf {platforms} löschen",
+  "fr": "Supprimer ici et sur {platforms}",
+  "it": "Elimina qui e su {platforms}"
+ },
+ "PostDelete.bothHint": {
+  "en": "The post is taken down from {platforms} too. Its likes and comments there are lost.",
+  "ar": "يُحذف المنشور من {platforms} أيضًا، وتضيع الإعجابات والتعليقات هناك.",
+  "de": "Der Beitrag wird auch von {platforms} entfernt. Likes und Kommentare dort gehen verloren.",
+  "fr": "La publication est aussi retirée de {platforms}. Ses mentions J’aime et commentaires y sont perdus.",
+  "it": "Il post viene tolto anche da {platforms}. I like e i commenti lì vanno persi."
+ },
+ "PostDelete.confirmDelete": {
+  "en": "Delete post",
+  "ar": "حذف المنشور",
+  "de": "Beitrag löschen",
+  "fr": "Supprimer la publication",
+  "it": "Elimina post"
+ },
+ "PostDelete.confirmRecordOnly": {
+  "en": "Remove from OrgTik",
+  "ar": "الإزالة من OrgTik",
+  "de": "Aus OrgTik entfernen",
+  "fr": "Retirer d’OrgTik",
+  "it": "Rimuovi da OrgTik"
+ },
+ "PostDelete.confirmBoth": {
+  "en": "Delete everywhere",
+  "ar": "الحذف من كل مكان",
+  "de": "Überall löschen",
+  "fr": "Supprimer partout",
+  "it": "Elimina ovunque"
+ },
+ "PostDelete.keep": {
+  "en": "Keep post",
+  "ar": "الإبقاء على المنشور",
+  "de": "Beitrag behalten",
+  "fr": "Garder la publication",
+  "it": "Mantieni post"
+ },
+ "PostDelete.failed": {
+  "en": "It wasn't deleted. Try again.",
+  "ar": "لم يُحذف المنشور. حاول مرة أخرى.",
+  "de": "Er wurde nicht gelöscht. Versuchen Sie es erneut.",
+  "fr": "Elle n’a pas été supprimée. Réessayez.",
+  "it": "Non è stato eliminato. Riprova."
+ },
+ "ApproversDialog.title": {
+  "en": "Choose approvers",
+  "ar": "اختيار المعتمِدين",
+  "de": "Freigebende wählen",
+  "fr": "Choisir les approbateurs",
+  "it": "Scegli gli approvatori"
+ },
+ "ApproversDialog.description": {
+  "en": "They review it before it goes live. Untick someone to remove them.",
+  "ar": "يراجعونه قبل نشره. ألغِ تحديد أي شخص لإزالته.",
+  "de": "Sie prüfen es, bevor es live geht. Entfernen Sie das Häkchen, um jemanden zu entfernen.",
+  "fr": "Ils le relisent avant sa mise en ligne. Décochez une personne pour la retirer.",
+  "it": "Lo rivedono prima che vada online. Togli la spunta per rimuovere qualcuno."
+ },
+ "ApproversDialog.search": {
+  "en": "Search people",
+  "ar": "ابحث عن أشخاص",
+  "de": "Personen suchen",
+  "fr": "Rechercher des personnes",
+  "it": "Cerca persone"
+ },
+ "ApproversDialog.loading": {
+  "en": "Loading people",
+  "ar": "جارٍ تحميل الأشخاص",
+  "de": "Personen werden geladen",
+  "fr": "Chargement des personnes",
+  "it": "Caricamento delle persone"
+ },
+ "ApproversDialog.errorTitle": {
+  "en": "Couldn't load your team",
+  "ar": "تعذّر تحميل فريقك",
+  "de": "Ihr Team konnte nicht geladen werden",
+  "fr": "Impossible de charger votre équipe",
+  "it": "Impossibile caricare il tuo team"
+ },
+ "ApproversDialog.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "ApproversDialog.noMatch": {
+  "en": "No one matches",
+  "ar": "لا أحد مطابق",
+  "de": "Niemand passt",
+  "fr": "Personne ne correspond",
+  "it": "Nessuno corrisponde"
+ },
+ "ApproversDialog.noMatchBody": {
+  "en": "Try a name or an email address.",
+  "ar": "جرّب اسمًا أو بريدًا إلكترونيًا.",
+  "de": "Versuchen Sie einen Namen oder eine E-Mail-Adresse.",
+  "fr": "Essayez un nom ou une adresse e-mail.",
+  "it": "Prova un nome o un indirizzo email."
+ },
+ "ApproversDialog.emptyTitle": {
+  "en": "No one to choose yet",
+  "ar": "لا أحد للاختيار بعد",
+  "de": "Noch niemand zur Auswahl",
+  "fr": "Personne à choisir pour l’instant",
+  "it": "Ancora nessuno da scegliere"
+ },
+ "ApproversDialog.emptyBody": {
+  "en": "People appear here once they have access to Marketing.",
+  "ar": "يظهر الأشخاص هنا بعد حصولهم على الوصول إلى التسويق.",
+  "de": "Personen erscheinen hier, sobald sie Zugriff auf Marketing haben.",
+  "fr": "Les personnes apparaissent ici dès qu’elles ont accès à Marketing.",
+  "it": "Le persone compaiono qui quando hanno accesso a Marketing."
+ },
+ "ApproversDialog.people": {
+  "en": "Team members",
+  "ar": "أعضاء الفريق",
+  "de": "Teammitglieder",
+  "fr": "Membres de l’équipe",
+  "it": "Membri del team"
+ },
+ "ApproversDialog.selectedCount": {
+  "en": "{count, plural, =0 {No one chosen} one {# chosen} other {# chosen}}",
+  "ar": "{count, plural, zero {لم يُختر أحد} one {تم اختيار شخص واحد} two {تم اختيار شخصين} few {تم اختيار # أشخاص} many {تم اختيار # شخصًا} other {تم اختيار # شخص}}",
+  "de": "{count, plural, =0 {Niemand gewählt} one {# gewählt} other {# gewählt}}",
+  "fr": "{count, plural, =0 {Personne n’est choisi} one {# choisi} other {# choisis}}",
+  "it": "{count, plural, =0 {Nessuno scelto} one {# scelto} other {# scelti}}"
+ },
+ "ApproversDialog.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "ApproversDialog.apply": {
+  "en": "Save approvers",
+  "ar": "حفظ المعتمِدين",
+  "de": "Freigebende speichern",
+  "fr": "Enregistrer les approbateurs",
+  "it": "Salva approvatori"
+ }
+}

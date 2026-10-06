@@ -1,0 +1,259 @@
+{
+  "System": {
+    "actions": "Aktionen",
+    "staff": {
+      "title": "Mitarbeiter und Rollen",
+      "description": "Wer bei OrgTik OrgTik Admin nutzen kann und was jede Rolle darf.",
+      "people": "Personen",
+      "person": "Person",
+      "roles": "Rollen",
+      "you": "Sie",
+      "noAccess": "Kein Zugriff",
+      "empty": "Noch keine Mitarbeiter",
+      "editFor": "Rollen von {name} bearbeiten",
+      "editTitle": "Rollen von {name}",
+      "dialogHelp": "Änderungen gelten, sobald die Person das nächste Mal eine Seite öffnet. Das Audit-Protokoll erfasst sie.",
+      "noRolesWarning": "Ohne Rolle kann die Person OrgTik Admin nicht öffnen.",
+      "saveRoles": "Rollen speichern",
+      "saved": "Rollen von {name} gespeichert",
+      "selfLocked": "Sie können Ihre eigene Super-Admin-Rolle nicht entfernen. Fragen Sie eine andere Person mit dieser Rolle.",
+      "selfLockout": "Sie können Ihre eigene Super-Admin-Rolle nicht entfernen. Bitten Sie eine andere Person mit dieser Rolle darum.",
+      "roleHelp": {
+        "super_admin": "Alles, einschließlich Mitarbeiter und Einstellungen.",
+        "finance": "Abrechnung, Preise, Steuern und Berichte.",
+        "sales": "Kunden, Pakete und Gutscheine, Angebote.",
+        "support": "Tickets sowie Kunden-Arbeitsbereiche, um zu helfen.",
+        "service_mgr": "Services und alle Serviceanfragen.",
+        "service_team": "Nur die zugewiesenen Serviceanfragen.",
+        "content": "Website-Inhalte und Nachrichtenvorlagen.",
+        "product_mgr": "Tools, Tarife, Vorschläge und die Roadmap."
+      },
+      "matrixTitle": "Was jede Rolle darf",
+      "matrixHelp": "Festgelegt durch die Berechtigungsmatrix von OrgTik. Hier nicht änderbar.",
+      "module": "Bereich",
+      "modules": {
+        "overview": "Übersicht",
+        "tools": "Tools und Status",
+        "plans": "Tarife und Funktionen",
+        "pricing": "Zonen, Währungen und Preise",
+        "bundles": "Pakete und Gutscheine",
+        "workspaces": "Arbeitsbereiche",
+        "billing": "Abrechnung",
+        "tax": "Steuern und Zahlungsanbieter",
+        "services": "Services",
+        "tickets": "Support-Tickets",
+        "content": "Inhalte",
+        "suggestions": "Vorschläge und Roadmap",
+        "waitlist": "Warteliste",
+        "templates": "Vorlagen",
+        "staff": "Mitarbeiter und Rollen",
+        "reports": "Berichte",
+        "settings": "Einstellungen"
+      },
+      "levels": {
+        "full": "Voll",
+        "edit": "Bearbeiten",
+        "assigned": "Nur zugewiesene",
+        "view": "Ansehen",
+        "none": "Kein Zugriff"
+      }
+    },
+    "templates": {
+      "pageTitle": "Nachrichtenvorlagen",
+      "description": "Die E-Mails und Benachrichtigungen, die OrgTik an Kunden sendet, in jeder Sprache.",
+      "template": "Vorlage",
+      "languages": "Sprachen",
+      "updated": "Zuletzt geändert",
+      "empty": "Keine Vorlagen",
+      "editFor": "{name} bearbeiten",
+      "langMissing": "{lang}: fehlt",
+      "fallsBack": "Fehlende Sprachen werden auf Englisch gesendet ({count, plural, one {# Sprache} other {# Sprachen}}).",
+      "missingNow": "Fehlt: {langs}. Wer diese Sprachen nutzt, erhält die englische Fassung.",
+      "allDone": "In jeder Sprache verfasst.",
+      "subject": "Betreff",
+      "title": "Titel",
+      "body": "Nachricht",
+      "bodyHelp": "Nur Text. Setzen Sie eine Variable wie oben aufgeführt in doppelte geschweifte Klammern.",
+      "variables": "Verfügbare Variablen",
+      "variablesHelp": "Jede wird beim Senden durch die Kundendaten ersetzt.",
+      "unknownVars": "Keine Variable dieser Vorlage: {vars}",
+      "saved": "Vorlage gespeichert",
+      "names": {
+        "trial_ending": "Testphase endet",
+        "payment_failed": "Zahlung fehlgeschlagen",
+        "read_only": "Arbeitsbereich schreibgeschützt",
+        "invoice_issued": "Rechnung ausgestellt",
+        "price_change": "Hinweis auf Preisänderung",
+        "quote_ready": "Angebot bereit",
+        "ticket_reply": "Antwort auf Ticket",
+        "invite": "Team-Einladung"
+      },
+      "channels": {
+        "email": "E-Mail",
+        "in_app": "In der App",
+        "push": "Push-Benachrichtigung",
+        "sms": "SMS"
+      },
+      "langs": {
+        "en": "Englisch",
+        "ar": "Arabisch",
+        "de": "Deutsch",
+        "fr": "Französisch",
+        "it": "Italienisch"
+      }
+    },
+    "reports": {
+      "title": "Berichte",
+      "description": "Wiederkehrender Umsatz, Zahlungen, Testphasen und Abwanderung über alle Arbeitsbereiche.",
+      "allUsd": "Alle Beträge in USD",
+      "numbers": "Kennzahlen",
+      "mrr": "Monatlich wiederkehrender Umsatz",
+      "mrrHint": "Bezahlte Positionen, zum heutigen Berichtskurs",
+      "revenue": "Umsatz",
+      "revenueHint": "Erhaltene Zahlungen, jeweils zum Kurs des Zahltags",
+      "refunds": "Erstattungen",
+      "refundsHint": "An Kunden erstattet",
+      "trials": "Testphasen",
+      "trialsHint": "Laufen gerade",
+      "churn": "Abwanderung",
+      "churnHint": "{cancelling} in Kündigung, {ended} beendet",
+      "byTool": "Wiederkehrender Umsatz nach Tool",
+      "byCountry": "Wiederkehrender Umsatz nach Land",
+      "chartHint": "Monatlich, in USD",
+      "tool": "Tool",
+      "country": "Land",
+      "payments": "Zahlungen",
+      "rateNote": "Jede Zahlung behält den Wechselkurs ihres Zahltags. Frühere USD-Beträge ändern sich also nicht, wenn sich die Kurse ändern.",
+      "paidOn": "Bezahlt am",
+      "invoice": "Rechnung",
+      "gateway": "Zahlungsanbieter",
+      "amount": "Bezahlter Betrag",
+      "rate": "Kurs am Zahltag",
+      "rateValue": "1 USD = {rate} {currency}",
+      "usdAmount": "In USD",
+      "noPayments": "Noch keine Zahlungen"
+    },
+    "settings": {
+      "title": "Plattformeinstellungen",
+      "description": "Regeln für alle Arbeitsbereiche und die noch offenen Fragen.",
+      "viewOnly": "Nur Ansicht: Nur die Rolle Super-Admin kann Plattformeinstellungen ändern.",
+      "save": "Einstellungen speichern",
+      "saved": "Einstellungen gespeichert",
+      "retention": "Datenaufbewahrung",
+      "retentionHelp": "Wie lange entfernte Daten aufbewahrt werden, bevor sie endgültig gelöscht werden.",
+      "toolDays": "Entferntes Tool",
+      "workspaceDays": "Gekündigter Arbeitsbereich",
+      "trashDays": "Papierkorb",
+      "backupDays": "Backups",
+      "daysUnit": "Tage, von 0 bis 365",
+      "dunning": "Fehlgeschlagene Zahlungen",
+      "dunningHelp": "Was nach einer fehlgeschlagenen Verlängerungszahlung passiert.",
+      "graceDays": "Kulanzzeit",
+      "graceDaysHelp": "Tage, die der Arbeitsbereich weiter funktioniert",
+      "readOnlyAfterDays": "Schreibgeschützt für",
+      "readOnlyAfterDaysHelp": "Tage nach der Kulanzzeit",
+      "cancelAfterDays": "Kündigen nach",
+      "cancelAfterDaysHelp": "Tage ab der fehlgeschlagenen Zahlung; nach der Kulanzzeit",
+      "customers": "Testphasen, Limits, Services und Preise",
+      "trialReminders": "Erinnerungen zur Testphase",
+      "trialRemindersHelp": "Tage vor Ende einer Testphase, durch Kommas getrennt, z. B. 3, 1",
+      "limitWarnings": "Limit-Warnungen",
+      "limitWarningsHelp": "Genutzter Anteil eines Limits in Prozent, durch Kommas getrennt, z. B. 80, 100",
+      "autoApproveDays": "Freigabe von Service-Lieferungen",
+      "autoApproveDaysHelp": "Tage, bis eine Lieferung ohne Antwort der Kundschaft als freigegeben gilt",
+      "noticeDays": "Hinweis auf Preisänderung",
+      "noticeDaysHelp": "Wie viele Tage vor einer Preiserhöhung die Kundschaft informiert wird",
+      "onePerTool": "Eine Testphase pro Tool und Arbeitsbereich",
+      "onePerToolHelp": "Ein Arbeitsbereich kann keine zweite Testphase desselben Tools starten.",
+      "gapsTitle": "Offene Fragen",
+      "gapsHelp": "Entscheidungen, die noch beim Product Owner liegen. Bis dahin nutzt die Plattform jeweils den vorläufigen Wert.",
+      "decided": "Entschieden",
+      "workingValue": "Vorläufiger Wert",
+      "workingValueHelp": "Gilt, bis die Frage entschieden ist.",
+      "noValue": "Noch keiner: Es wird nichts angewendet.",
+      "errors": {
+        "retention": "Geben Sie 0 bis 365 Tage ein.",
+        "dunning": "Die Kulanzzeit braucht mindestens 1 Tag, und die Kündigung muss danach kommen.",
+        "cancelAfter": "Muss mehr Tage als die Kulanzzeit umfassen.",
+        "trial": "Geben Sie ganze Tage von 1 bis 60 ein, durch Kommas getrennt.",
+        "limits": "Geben Sie Prozentwerte von 1 bis 100 ein, durch Kommas getrennt.",
+        "services": "Geben Sie mindestens 1 Tag ein.",
+        "priceChange": "Geben Sie 0 oder mehr Tage ein."
+      },
+      "gaps": {
+        "seatModel": {
+          "title": "Wie Nutzerplätze gezählt werden",
+          "note": "A: eine Platzzahl für den Arbeitsbereich in jedem nutzerbasierten Tool. B: Jedes nutzerbasierte Tool berechnet nur die Personen mit Zugriff darauf.",
+          "options": {
+            "0": "A: eine Platzzahl für den Arbeitsbereich",
+            "1": "B: Jedes Tool zählt die Personen mit Zugriff"
+          }
+        },
+        "taxDisplay": {
+          "title": "Preise mit oder ohne Steuer",
+          "note": "Ob Preise inklusive Steuer angezeigt werden. E-Rechnungen hängen auch von den Rechtseinheiten von OrgTik ab.",
+          "options": {
+            "0": "Steuer im Preis enthalten",
+            "1": "Steuer wird an der Kasse hinzugefügt"
+          }
+        },
+        "addOns": {
+          "title": "Add-ons und Mehrverbrauch",
+          "note": "Zusätzlicher Speicher, Postfächer sowie SMS- und WhatsApp-Guthaben, zusätzlich zu den Tarifen verkauft.",
+          "options": {
+            "0": "Add-ons anbieten",
+            "1": "Keine Add-ons"
+          }
+        },
+        "generalPaid": {
+          "title": "Was die bezahlten Tarife von General freischalten",
+          "note": "Die Extras, die ein bezahlter General-Tarif einem Arbeitsbereich bietet.",
+          "options": {
+            "0": "Mehr Nutzerplätze, eigene Rollen, verpflichtende Zwei-Schritt-Anmeldung, ein längeres Audit-Protokoll"
+          }
+        },
+        "hostingOps": {
+          "title": "Hosting-Betrieb",
+          "note": "Hosting- und E-Mail-Infrastruktur brauchen eine eigene Betriebsspezifikation.",
+          "options": {
+            "0": "Vorerst nicht im Umfang"
+          }
+        },
+        "mailboxes": {
+          "title": "Wem Postfächer gehören",
+          "note": "Empfohlen: Das E-Mail-Tool verwaltet jedes Postfach, und Hosting verknüpft es.",
+          "options": {
+            "0": "Das E-Mail-Tool",
+            "1": "Hosting"
+          }
+        }
+      }
+    },
+    "audit": {
+      "title": "Audit-Protokoll",
+      "description": "Was Mitarbeiter geändert und angesehen haben, neueste zuerst.",
+      "when": "Wann",
+      "who": "Wer",
+      "action": "Aktion",
+      "target": "Betrifft",
+      "detail": "Grund und Details",
+      "empty": "Noch nichts erfasst",
+      "emptyBody": "Aktionen von Mitarbeitern wie Rollenänderungen und das Ansehen eines Arbeitsbereichs erscheinen hier.",
+      "actions": {
+        "view_as": "Arbeitsbereich aus Kundensicht angesehen",
+        "tax_rule": "Steuerregel geändert",
+        "staff_roles": "Rollen von Mitarbeitern geändert",
+        "settings": "Plattformeinstellungen geändert",
+        "service_assign": "Serviceanfrage zugewiesen",
+        "service_review": "Prüfung einer Anfrage begonnen",
+        "service_quote": "Angebot gesendet",
+        "service_start": "Servicearbeit begonnen",
+        "service_hold": "Anfrage pausiert",
+        "service_deliver": "Service geliefert",
+        "service_milestone": "Meilenstein aktualisiert",
+        "service_message": "Nachricht an die Kundschaft gesendet",
+        "service_cancel": "Serviceanfrage storniert"
+      }
+    }
+  }
+}

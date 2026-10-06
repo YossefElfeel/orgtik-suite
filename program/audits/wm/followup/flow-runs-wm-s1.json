@@ -1,0 +1,37 @@
+[
+  {
+    "name": "wm-s1",
+    "exitCode": 0,
+    "durationSeconds": 28
+  },
+  {
+    "name": "wm-s1b",
+    "exitCode": 0,
+    "durationSeconds": 18
+  },
+  {
+    "name": "wm-s1c",
+    "exitCode": 0,
+    "durationSeconds": 21
+  },
+  {
+    "name": "wm-s1d",
+    "exitCode": 0,
+    "durationSeconds": 38
+  },
+  {
+    "name": "wm-s2",
+    "exitCode": 0,
+    "durationSeconds": 30
+  },
+  {
+    "name": "wm-s3",
+    "exitCode": 1,
+    "durationSeconds": 64
+  },
+  {
+    "name": "wm-overview",
+    "exitCode": 0,
+    "durationSeconds": 6
+  }
+]

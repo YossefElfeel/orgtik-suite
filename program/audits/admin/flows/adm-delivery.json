@@ -1,0 +1,338 @@
+[
+  {
+    "title": "[en] Service Manager: SR-211 from new to under review to quoted",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "review",
+        "ok": true,
+        "note": "state under_review",
+        "at": "http://localhost:3008/en/service-requests/sr_1040",
+        "shot": "101-review.png"
+      },
+      {
+        "name": "quote-with-discount-line",
+        "ok": true,
+        "note": "state quoted; EGP lines [{\"label\":\"Website build\",\"amount\":80000},{\"label\":\"Subscriber discount 10%\",\"amount\":-8000}] total 72000; dialog summary \"Subtotal EGP 80,000.00 Subscriber discount 10% -EGP 8,000.00 Total EGP 72,000.00\"",
+        "at": "http://localhost:3008/en/service-requests/sr_1040",
+        "shot": "102-quote-with-discount-line.png"
+      },
+      {
+        "name": "quote-shown",
+        "ok": true,
+        "note": "Quote Item Amount (EGP) Website build EGP 80,000.00 Subscriber discount 10% -EGP 8,000.00 Total EGP 72,000.00",
+        "at": "http://localhost:3008/en/service-requests/sr_1040",
+        "shot": "103-quote-shown.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Laila (Service Team): her own request yes, Youssef's no",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "acts-on-own-request",
+        "ok": true,
+        "note": "deliver button 1; message saved by u8",
+        "at": "http://localhost:3008/en/service-requests/sr_1042",
+        "shot": "201-acts-on-own-request.png"
+      },
+      {
+        "name": "no-actions-on-youssefs",
+        "ok": true,
+        "note": "\"This request is assigned to Youssef Ibrahim. Only they and the service managers can act on it.\"; action buttons 0, composer 0; API 403 forbidden",
+        "at": "http://localhost:3008/en/service-requests/sr_1043",
+        "shot": "202-no-actions-on-youssefs.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Support: a reply and an internal note on TK-3301; the customer sees only the reply",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "reply",
+        "ok": true,
+        "note": "reply in the conversation",
+        "at": "http://localhost:3008/en/tickets/tk_1046",
+        "shot": "301-reply.png"
+      },
+      {
+        "name": "internal-note",
+        "ok": true,
+        "note": "the note carries \"Internal note\"",
+        "at": "http://localhost:3008/en/tickets/tk_1046",
+        "shot": "302-internal-note.png"
+      },
+      {
+        "name": "customer-view-hides-note",
+        "ok": true,
+        "note": "customer sees 2 messages (reply true, note false); staff see 3",
+        "at": "http://localhost:3008/en/tickets/tk_1046",
+        "shot": "303-customer-view-hides-note.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Mona: staff roles, and her own Super Admin role stays",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "give-salma-content",
+        "ok": true,
+        "note": "roles [\"content\"]; row \"Salma Nabil salma.nabil@orgtik.test Content \"",
+        "at": "http://localhost:3008/en/staff",
+        "shot": "401-give-salma-content.png"
+      },
+      {
+        "name": "self-lockout",
+        "ok": true,
+        "note": "checkbox disabled true, explained true; API 409 self_lockout; roles [\"super_admin\"]",
+        "at": "http://localhost:3008/en/staff",
+        "shot": "402-self-lockout.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Mona saves platform settings",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "save-settings",
+        "ok": true,
+        "note": "autoApprove 10, notice 45; 6 open questions say \"Not decided yet\"",
+        "at": "http://localhost:3008/en/settings",
+        "shot": "501-save-settings.png"
+      },
+      {
+        "name": "dunning-order-refused",
+        "ok": true,
+        "note": "\"The grace period needs at least 1 day, and cancelling must come after it.\"; saved value stays 37",
+        "at": "http://localhost:3008/en/settings",
+        "shot": "502-dunning-order-refused.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Finance: platform settings are view-only",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "finance-view-only",
+        "ok": true,
+        "note": "no Save button (0); fields disabled true",
+        "at": "http://localhost:3008/en/settings",
+        "shot": "601-finance-view-only.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Mona: reports in USD",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "reports-render",
+        "ok": true,
+        "note": "charts 2; 4 payments; first \"6 Jul 2026 INV-2026-001041 Paymob EGP 7,635.72 1 USD = 48.5 EGP US$157.44\"",
+        "at": "http://localhost:3008/en/reports",
+        "shot": "701-reports-render.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Service Manager: SR-211 from new to under review to quoted",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "review",
+        "ok": true,
+        "note": "state under_review",
+        "at": "http://localhost:3008/ar/service-requests/sr_1040",
+        "shot": "801-review.png"
+      },
+      {
+        "name": "quote-with-discount-line",
+        "ok": true,
+        "note": "state quoted; EGP lines [{\"label\":\"تطوير موقع\",\"amount\":80000},{\"label\":\"خصم المشتركين 10%\",\"amount\":-8000}] total 72000; dialog summary \"المجموع الفرعي ‏80,000.00 ج.م.‏ خصم المشتركين 10% ‏‎-8,000.00 ج.م.‏ الإجمالي ‏72,000.00 ج.م.‏\"",
+        "at": "http://localhost:3008/ar/service-requests/sr_1040",
+        "shot": "802-quote-with-discount-line.png"
+      },
+      {
+        "name": "quote-shown",
+        "ok": true,
+        "note": "عرض السعر البند المبلغ (EGP) تطوير موقع ‏80,000.00 ج.م.‏ خصم المشتركين 10% ‏‎-8,000.00 ج.م.‏ الإجمالي ‏72,000.00 ج.م.‏",
+        "at": "http://localhost:3008/ar/service-requests/sr_1040",
+        "shot": "803-quote-shown.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Laila (Service Team): her own request yes, Youssef's no",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "acts-on-own-request",
+        "ok": true,
+        "note": "deliver button 1; message saved by u8",
+        "at": "http://localhost:3008/ar/service-requests/sr_1042",
+        "shot": "901-acts-on-own-request.png"
+      },
+      {
+        "name": "no-actions-on-youssefs",
+        "ok": true,
+        "note": "\"هذا الطلب مُسنَد إلى Youssef Ibrahim. ولا يستطيع اتخاذ إجراء عليه إلا هذا الشخص ومديرو الخدمات.\"; action buttons 0, composer 0; API 403 forbidden",
+        "at": "http://localhost:3008/ar/service-requests/sr_1043",
+        "shot": "902-no-actions-on-youssefs.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Support: a reply and an internal note on TK-3301; the customer sees only the reply",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "reply",
+        "ok": true,
+        "note": "reply in the conversation",
+        "at": "http://localhost:3008/ar/tickets/tk_1046",
+        "shot": "1001-reply.png"
+      },
+      {
+        "name": "internal-note",
+        "ok": true,
+        "note": "the note carries \"ملاحظة داخلية\"",
+        "at": "http://localhost:3008/ar/tickets/tk_1046",
+        "shot": "1002-internal-note.png"
+      },
+      {
+        "name": "customer-view-hides-note",
+        "ok": true,
+        "note": "customer sees 2 messages (reply true, note false); staff see 3",
+        "at": "http://localhost:3008/ar/tickets/tk_1046",
+        "shot": "1003-customer-view-hides-note.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Mona: staff roles, and her own Super Admin role stays",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "give-salma-content",
+        "ok": true,
+        "note": "roles [\"content\"]; row \"Salma Nabil salma.nabil@orgtik.test المحتوى \"",
+        "at": "http://localhost:3008/ar/staff",
+        "shot": "1101-give-salma-content.png"
+      },
+      {
+        "name": "self-lockout",
+        "ok": true,
+        "note": "checkbox disabled true, explained true; API 409 self_lockout; roles [\"super_admin\"]",
+        "at": "http://localhost:3008/ar/staff",
+        "shot": "1102-self-lockout.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Mona saves platform settings",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "save-settings",
+        "ok": true,
+        "note": "autoApprove 10, notice 45; 6 open questions say \"لم يُحسم بعد\"",
+        "at": "http://localhost:3008/ar/settings",
+        "shot": "1201-save-settings.png"
+      },
+      {
+        "name": "dunning-order-refused",
+        "ok": true,
+        "note": "\"تحتاج فترة السماح إلى يوم واحد على الأقل، ويجب أن يأتي الإلغاء بعدها.\"; saved value stays 37",
+        "at": "http://localhost:3008/ar/settings",
+        "shot": "1202-dunning-order-refused.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Finance: platform settings are view-only",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "finance-view-only",
+        "ok": true,
+        "note": "no Save button (0); fields disabled true",
+        "at": "http://localhost:3008/ar/settings",
+        "shot": "1301-finance-view-only.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Mona: reports in USD",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "reports-render",
+        "ok": true,
+        "note": "charts 2; 4 payments; first \"06‏/07‏/2026 INV-2026-001041 Paymob ‏7,635.72 ج.م.‏ 1 USD = 48.5 EGP ‏157.44 US$\"",
+        "at": "http://localhost:3008/ar/reports",
+        "shot": "1401-reports-render.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  }
+]

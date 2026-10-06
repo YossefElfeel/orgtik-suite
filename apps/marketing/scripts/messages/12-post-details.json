@@ -1,0 +1,877 @@
+{
+ "PostDetails.crumbPosts": {
+  "en": "Posts",
+  "ar": "المنشورات",
+  "de": "Beiträge",
+  "fr": "Publications",
+  "it": "Post"
+ },
+ "PostDetails.untitled": {
+  "en": "Untitled post",
+  "ar": "منشور بلا عنوان",
+  "de": "Beitrag ohne Titel",
+  "fr": "Publication sans titre",
+  "it": "Post senza titolo"
+ },
+ "PostDetails.loading": {
+  "en": "Loading the post",
+  "ar": "جارٍ تحميل المنشور",
+  "de": "Beitrag wird geladen",
+  "fr": "Chargement de la publication",
+  "it": "Caricamento del post"
+ },
+ "PostDetails.notFoundTitle": {
+  "en": "This post doesn't exist",
+  "ar": "هذا المنشور غير موجود",
+  "de": "Diesen Beitrag gibt es nicht",
+  "fr": "Cette publication n’existe pas",
+  "it": "Questo post non esiste"
+ },
+ "PostDetails.notFoundBody": {
+  "en": "It may have been deleted, or it belongs to another project.",
+  "ar": "ربما حُذف، أو أنه يتبع مشروعًا آخر.",
+  "de": "Er wurde vielleicht gelöscht oder gehört zu einem anderen Projekt.",
+  "fr": "Elle a peut-être été supprimée, ou appartient à un autre projet.",
+  "it": "Potrebbe essere stato eliminato o appartenere a un altro progetto."
+ },
+ "PostDetails.noAccessTitle": {
+  "en": "You can't open this post",
+  "ar": "لا يمكنك فتح هذا المنشور",
+  "de": "Sie können diesen Beitrag nicht öffnen",
+  "fr": "Vous ne pouvez pas ouvrir cette publication",
+  "it": "Non puoi aprire questo post"
+ },
+ "PostDetails.noAccessBody": {
+  "en": "It belongs to a project you don't have access to.",
+  "ar": "يتبع مشروعًا لا تملك الوصول إليه.",
+  "de": "Er gehört zu einem Projekt, auf das Sie keinen Zugriff haben.",
+  "fr": "Elle appartient à un projet auquel vous n’avez pas accès.",
+  "it": "Appartiene a un progetto a cui non hai accesso."
+ },
+ "PostDetails.errorTitle": {
+  "en": "Couldn't load the post",
+  "ar": "تعذّر تحميل المنشور",
+  "de": "Beitrag konnte nicht geladen werden",
+  "fr": "Impossible de charger la publication",
+  "it": "Impossibile caricare il post"
+ },
+ "PostDetails.errorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "PostDetails.toPosts": {
+  "en": "Open posts",
+  "ar": "فتح المنشورات",
+  "de": "Beiträge öffnen",
+  "fr": "Ouvrir les publications",
+  "it": "Apri i post"
+ },
+ "PostDetails.boost": {
+  "en": "Boost",
+  "ar": "ترويج",
+  "de": "Bewerben",
+  "fr": "Promouvoir",
+  "it": "Promuovi"
+ },
+ "PostDetails.edit": {
+  "en": "Edit",
+  "ar": "تعديل",
+  "de": "Bearbeiten",
+  "fr": "Modifier",
+  "it": "Modifica"
+ },
+ "PostDetails.moreActions": {
+  "en": "More actions",
+  "ar": "إجراءات أخرى",
+  "de": "Weitere Aktionen",
+  "fr": "Autres actions",
+  "it": "Altre azioni"
+ },
+ "PostDetails.duplicate": {
+  "en": "Duplicate",
+  "ar": "تكرار",
+  "de": "Duplizieren",
+  "fr": "Dupliquer",
+  "it": "Duplica"
+ },
+ "PostDetails.delete": {
+  "en": "Delete",
+  "ar": "حذف",
+  "de": "Löschen",
+  "fr": "Supprimer",
+  "it": "Elimina"
+ },
+ "PostDetails.publishNow": {
+  "en": "Publish now",
+  "ar": "انشر الآن",
+  "de": "Jetzt veröffentlichen",
+  "fr": "Publier maintenant",
+  "it": "Pubblica ora"
+ },
+ "PostDetails.tryAgain": {
+  "en": "Try publishing again",
+  "ar": "أعد محاولة النشر",
+  "de": "Erneut veröffentlichen",
+  "fr": "Réessayer de publier",
+  "it": "Riprova a pubblicare"
+ },
+ "PostDetails.notNow": {
+  "en": "Not now",
+  "ar": "ليس الآن",
+  "de": "Nicht jetzt",
+  "fr": "Pas maintenant",
+  "it": "Non ora"
+ },
+ "PostDetails.publishTitle": {
+  "en": "Publish {name} now?",
+  "ar": "نشر {name} الآن؟",
+  "de": "{name} jetzt veröffentlichen?",
+  "fr": "Publier {name} maintenant ?",
+  "it": "Pubblicare {name} ora?"
+ },
+ "PostDetails.publishImpact": {
+  "en": "{count, plural, one {It goes out on {platforms} right away, instead of at its scheduled time.} other {It goes out on {platforms} right away, instead of at its scheduled time.}}",
+  "ar": "{count, plural, zero {يُنشر على {platforms} فورًا.} one {يُنشر على {platforms} فورًا بدل موعده.} two {يُنشر على {platforms} فورًا بدل موعده.} few {يُنشر على {platforms} فورًا بدل موعده.} many {يُنشر على {platforms} فورًا بدل موعده.} other {يُنشر على {platforms} فورًا بدل موعده.}}",
+  "de": "{count, plural, one {Er erscheint sofort auf {platforms} statt zur geplanten Zeit.} other {Er erscheint sofort auf {platforms} statt zur geplanten Zeit.}}",
+  "fr": "{count, plural, one {Elle paraît tout de suite sur {platforms}, au lieu de l’heure prévue.} other {Elle paraît tout de suite sur {platforms}, au lieu de l’heure prévue.}}",
+  "it": "{count, plural, one {Esce subito su {platforms}, invece che all’ora prevista.} other {Esce subito su {platforms}, invece che all’ora prevista.}}"
+ },
+ "PostDetails.rollback": {
+  "en": "Go back to the approved version",
+  "ar": "الرجوع إلى النسخة المعتمدة",
+  "de": "Zur freigegebenen Version zurück",
+  "fr": "Revenir à la version approuvée",
+  "it": "Torna alla versione approvata"
+ },
+ "PostDetails.rollbackTitle": {
+  "en": "Go back to the approved version?",
+  "ar": "الرجوع إلى النسخة المعتمدة؟",
+  "de": "Zur freigegebenen Version zurückkehren?",
+  "fr": "Revenir à la version approuvée ?",
+  "it": "Tornare alla versione approvata?"
+ },
+ "PostDetails.rollbackImpact": {
+  "en": "The changes made since it was approved are replaced by that version, and it no longer needs approval again.",
+  "ar": "تُستبدل التغييرات التي أُجريت بعد الموافقة بتلك النسخة، ولن يحتاج إلى موافقة جديدة.",
+  "de": "Die Änderungen seit der Freigabe werden durch diese Version ersetzt, eine erneute Freigabe ist nicht mehr nötig.",
+  "fr": "Les modifications faites depuis l’approbation sont remplacées par cette version, sans nouvelle approbation.",
+  "it": "Le modifiche fatte dopo l’approvazione vengono sostituite da quella versione e non serve una nuova approvazione."
+ },
+ "PostDetails.rollbackConfirm": {
+  "en": "Go back",
+  "ar": "رجوع",
+  "de": "Zurückkehren",
+  "fr": "Revenir",
+  "it": "Torna indietro"
+ },
+ "PostDetails.keepChanges": {
+  "en": "Keep my changes",
+  "ar": "الإبقاء على تغييراتي",
+  "de": "Änderungen behalten",
+  "fr": "Garder mes modifications",
+  "it": "Mantieni le modifiche"
+ },
+ "PostDetails.rollbackHint": {
+  "en": "It was changed after it was approved. You can go back to the approved version.",
+  "ar": "عُدّل بعد الموافقة عليه. يمكنك الرجوع إلى النسخة المعتمدة.",
+  "de": "Er wurde nach der Freigabe geändert. Sie können zur freigegebenen Version zurückkehren.",
+  "fr": "Elle a été modifiée après approbation. Vous pouvez revenir à la version approuvée.",
+  "it": "È stato modificato dopo l’approvazione. Puoi tornare alla versione approvata."
+ },
+ "PostDetails.bannerReapproval": {
+  "en": "Changes need approval again",
+  "ar": "التغييرات تحتاج إلى موافقة جديدة",
+  "de": "Änderungen brauchen erneut eine Freigabe",
+  "fr": "Les modifications doivent être réapprouvées",
+  "it": "Le modifiche vanno riapprovate"
+ },
+ "PostDetails.bannerReapprovalBody": {
+  "en": "The approvers approved an earlier version and have been asked to review the changes.",
+  "ar": "وافق المعتمِدون على نسخة سابقة، وطُلب منهم مراجعة التغييرات.",
+  "de": "Die Freigebenden haben eine frühere Version freigegeben und wurden gebeten, die Änderungen zu prüfen.",
+  "fr": "Les approbateurs avaient approuvé une version antérieure ; ils doivent relire les modifications.",
+  "it": "Gli approvatori avevano approvato una versione precedente e devono rivedere le modifiche."
+ },
+ "PostDetails.bannerRejected": {
+  "en": "An approver rejected this post",
+  "ar": "رفض أحد المعتمِدين هذا المنشور",
+  "de": "Eine freigebende Person hat diesen Beitrag abgelehnt",
+  "fr": "Un approbateur a refusé cette publication",
+  "it": "Un approvatore ha rifiutato questo post"
+ },
+ "PostDetails.bannerRejectedBody": {
+  "en": "Read the reason under Approval, edit the post, and send it again.",
+  "ar": "اقرأ السبب في قسم الموافقة، وعدّل المنشور، ثم أرسله مجددًا.",
+  "de": "Lesen Sie den Grund unter Freigabe, bearbeiten Sie den Beitrag und senden Sie ihn erneut.",
+  "fr": "Lisez la raison sous Approbation, modifiez la publication et renvoyez-la.",
+  "it": "Leggi il motivo in Approvazione, modifica il post e invialo di nuovo."
+ },
+ "PostDetails.bannerPending": {
+  "en": "Waiting for approval",
+  "ar": "بانتظار الموافقة",
+  "de": "Wartet auf Freigabe",
+  "fr": "En attente d’approbation",
+  "it": "In attesa di approvazione"
+ },
+ "PostDetails.bannerPendingBody": {
+  "en": "{approved} of {total} approvers have approved it.",
+  "ar": "وافق عليه {approved} من أصل {total}.",
+  "de": "{approved} von {total} Freigebenden haben zugestimmt.",
+  "fr": "{approved} approbateurs sur {total} l’ont approuvée.",
+  "it": "{approved} approvatori su {total} l’hanno approvato."
+ },
+ "PostDetails.bannerPendingYou": {
+  "en": "Your review is needed. Approve or reject it under Approval.",
+  "ar": "مراجعتك مطلوبة. وافق عليه أو ارفضه في قسم الموافقة.",
+  "de": "Ihre Prüfung ist nötig. Geben Sie ihn unter Freigabe frei oder lehnen Sie ihn ab.",
+  "fr": "Votre avis est attendu. Approuvez-la ou refusez-la sous Approbation.",
+  "it": "Serve la tua revisione. Approvalo o rifiutalo in Approvazione."
+ },
+ "PostDetails.bannerScheduled": {
+  "en": "Scheduled for {when}",
+  "ar": "مجدول في {when}",
+  "de": "Geplant für {when}",
+  "fr": "Programmée pour le {when}",
+  "it": "Programmato per {when}"
+ },
+ "PostDetails.bannerScheduledNoTime": {
+  "en": "Scheduled",
+  "ar": "مجدول",
+  "de": "Geplant",
+  "fr": "Programmée",
+  "it": "Programmato"
+ },
+ "PostDetails.bannerScheduledBody": {
+  "en": "It goes out by itself at that time.",
+  "ar": "يُنشر تلقائيًا في ذلك الوقت.",
+  "de": "Er erscheint zu dieser Zeit von selbst.",
+  "fr": "Elle paraît toute seule à cette heure-là.",
+  "it": "Esce da solo a quell’ora."
+ },
+ "PostDetails.bannerDraft": {
+  "en": "Draft",
+  "ar": "مسودة",
+  "de": "Entwurf",
+  "fr": "Brouillon",
+  "it": "Bozza"
+ },
+ "PostDetails.bannerDraftBody": {
+  "en": "It isn't scheduled. Schedule it below or publish it now.",
+  "ar": "غير مجدول. جدوِله أدناه أو انشره الآن.",
+  "de": "Er ist nicht geplant. Planen Sie ihn unten oder veröffentlichen Sie ihn jetzt.",
+  "fr": "Elle n’est pas programmée. Programmez-la ci-dessous ou publiez-la maintenant.",
+  "it": "Non è programmato. Programmalo qui sotto o pubblicalo ora."
+ },
+ "PostDetails.bannerFailed": {
+  "en": "Publishing failed",
+  "ar": "فشل النشر",
+  "de": "Veröffentlichung fehlgeschlagen",
+  "fr": "La publication a échoué",
+  "it": "Pubblicazione non riuscita"
+ },
+ "PostDetails.bannerPartial": {
+  "en": "Published on some platforms only",
+  "ar": "نُشر على بعض المنصات فقط",
+  "de": "Nur auf einigen Plattformen veröffentlicht",
+  "fr": "Publiée sur certaines plateformes seulement",
+  "it": "Pubblicato solo su alcune piattaforme"
+ },
+ "PostDetails.noReason": {
+  "en": "No reason was given.",
+  "ar": "لم يُذكر سبب.",
+  "de": "Kein Grund angegeben.",
+  "fr": "Aucune raison donnée.",
+  "it": "Nessun motivo indicato."
+ },
+ "PostDetails.bannerPublished": {
+  "en": "Published on {when}",
+  "ar": "نُشر في {when}",
+  "de": "Veröffentlicht am {when}",
+  "fr": "Publiée le {when}",
+  "it": "Pubblicato il {when}"
+ },
+ "PostDetails.bannerPublishedNoTime": {
+  "en": "Published",
+  "ar": "منشور",
+  "de": "Veröffentlicht",
+  "fr": "Publiée",
+  "it": "Pubblicato"
+ },
+ "PostDetails.bannerPublishedBody": {
+  "en": "It's live. Its results appear below as the platforms report them.",
+  "ar": "المنشور ظاهر الآن. تظهر نتائجه أدناه عندما تُرسلها المنصات.",
+  "de": "Er ist live. Die Ergebnisse erscheinen unten, sobald die Plattformen sie melden.",
+  "fr": "Elle est en ligne. Ses résultats s’affichent ci-dessous dès que les plateformes les transmettent.",
+  "it": "È online. I risultati compaiono qui sotto quando le piattaforme li inviano."
+ },
+ "PostDetails.bannerCanceled": {
+  "en": "Canceled",
+  "ar": "ملغى",
+  "de": "Abgebrochen",
+  "fr": "Annulée",
+  "it": "Annullato"
+ },
+ "PostDetails.bannerCanceledBody": {
+  "en": "It won't go out. Set its status to Draft to work on it again.",
+  "ar": "لن يُنشر. غيّر حالته إلى مسودة للعمل عليه مجددًا.",
+  "de": "Er erscheint nicht. Setzen Sie den Status auf Entwurf, um weiterzuarbeiten.",
+  "fr": "Elle ne paraîtra pas. Repassez-la en brouillon pour la retravailler.",
+  "it": "Non uscirà. Riportalo in bozza per lavorarci di nuovo."
+ },
+ "PostDetails.contentTitle": {
+  "en": "Content",
+  "ar": "المحتوى",
+  "de": "Inhalt",
+  "fr": "Contenu",
+  "it": "Contenuto"
+ },
+ "PostDetails.contentEditable": {
+  "en": "Changes are saved when you press Save.",
+  "ar": "تُحفظ التغييرات عند الضغط على حفظ.",
+  "de": "Änderungen werden beim Speichern übernommen.",
+  "fr": "Les modifications sont enregistrées avec Enregistrer.",
+  "it": "Le modifiche si salvano con Salva."
+ },
+ "PostDetails.contentReadOnly": {
+  "en": "It can't be changed any more.",
+  "ar": "لم يعد ممكنًا تغييره.",
+  "de": "Er kann nicht mehr geändert werden.",
+  "fr": "Elle ne peut plus être modifiée.",
+  "it": "Non si può più modificare."
+ },
+ "PostDetails.titleLabel": {
+  "en": "Title",
+  "ar": "العنوان",
+  "de": "Titel",
+  "fr": "Titre",
+  "it": "Titolo"
+ },
+ "PostDetails.textLabel": {
+  "en": "Text",
+  "ar": "النص",
+  "de": "Text",
+  "fr": "Texte",
+  "it": "Testo"
+ },
+ "PostDetails.noText": {
+  "en": "No text",
+  "ar": "لا نص",
+  "de": "Kein Text",
+  "fr": "Aucun texte",
+  "it": "Nessun testo"
+ },
+ "PostDetails.perPlatformNote": {
+  "en": "Each platform has its own text. Change them in the composer.",
+  "ar": "لكل منصة نصها الخاص. غيّرها في محرر المنشور.",
+  "de": "Jede Plattform hat eigenen Text. Ändern Sie ihn im Editor.",
+  "fr": "Chaque plateforme a son propre texte. Modifiez-le dans l’éditeur.",
+  "it": "Ogni piattaforma ha il suo testo. Modificalo nell’editor."
+ },
+ "PostDetails.openComposer": {
+  "en": "Edit the post",
+  "ar": "تعديل المنشور",
+  "de": "Beitrag bearbeiten",
+  "fr": "Modifier la publication",
+  "it": "Modifica il post"
+ },
+ "PostDetails.labelsLabel": {
+  "en": "Labels",
+  "ar": "التصنيفات",
+  "de": "Labels",
+  "fr": "Étiquettes",
+  "it": "Etichette"
+ },
+ "PostDetails.labelsPlaceholder": {
+  "en": "Choose labels",
+  "ar": "اختر تصنيفات",
+  "de": "Labels wählen",
+  "fr": "Choisir des étiquettes",
+  "it": "Scegli etichette"
+ },
+ "PostDetails.noLabels": {
+  "en": "No labels match",
+  "ar": "لا تصنيفات مطابقة",
+  "de": "Keine passenden Labels",
+  "fr": "Aucune étiquette ne correspond",
+  "it": "Nessuna etichetta corrisponde"
+ },
+ "PostDetails.statusLabel": {
+  "en": "Status",
+  "ar": "الحالة",
+  "de": "Status",
+  "fr": "Statut",
+  "it": "Stato"
+ },
+ "PostDetails.statusHint": {
+  "en": "To publish it, use Publish now.",
+  "ar": "للنشر، استخدم انشر الآن.",
+  "de": "Zum Veröffentlichen nutzen Sie „Jetzt veröffentlichen“.",
+  "fr": "Pour la publier, utilisez Publier maintenant.",
+  "it": "Per pubblicarlo usa Pubblica ora."
+ },
+ "PostDetails.errTitle": {
+  "en": "Give the post a title.",
+  "ar": "أضف عنوانًا للمنشور.",
+  "de": "Geben Sie dem Beitrag einen Titel.",
+  "fr": "Donnez un titre à la publication.",
+  "it": "Dai un titolo al post."
+ },
+ "PostDetails.discard": {
+  "en": "Discard changes",
+  "ar": "تجاهل التغييرات",
+  "de": "Änderungen verwerfen",
+  "fr": "Annuler les modifications",
+  "it": "Annulla modifiche"
+ },
+ "PostDetails.save": {
+  "en": "Save",
+  "ar": "حفظ",
+  "de": "Speichern",
+  "fr": "Enregistrer",
+  "it": "Salva"
+ },
+ "PostDetails.previewTitle": {
+  "en": "Preview",
+  "ar": "معاينة",
+  "de": "Vorschau",
+  "fr": "Aperçu",
+  "it": "Anteprima"
+ },
+ "PostDetails.previewHint": {
+  "en": "Each platform may show it a little differently.",
+  "ar": "قد تعرضه كل منصة بشكل مختلف قليلًا.",
+  "de": "Jede Plattform zeigt ihn eventuell etwas anders.",
+  "fr": "Chaque plateforme peut l’afficher un peu différemment.",
+  "it": "Ogni piattaforma può mostrarlo in modo leggermente diverso."
+ },
+ "PostDetails.previewOn": {
+  "en": "Preview on {platform}",
+  "ar": "معاينة على {platform}",
+  "de": "Vorschau auf {platform}",
+  "fr": "Aperçu sur {platform}",
+  "it": "Anteprima su {platform}"
+ },
+ "PostDetails.followers": {
+  "en": "{count, plural, one {# follower} other {# followers}}",
+  "ar": "{count, plural, zero {لا متابعين} one {متابع واحد} two {متابعان} few {# متابعين} many {# متابعًا} other {# متابع}}",
+  "de": "{count, plural, one {# Follower} other {# Follower}}",
+  "fr": "{count, plural, one {# abonné} other {# abonnés}}",
+  "it": "{count, plural, one {# follower} other {# follower}}"
+ },
+ "PostDetails.mediaOf": {
+  "en": "{count, plural, one {# media item} other {# media items}}",
+  "ar": "{count, plural, zero {لا وسائط} one {عنصر وسائط واحد} two {عنصرا وسائط} few {# عناصر وسائط} many {# عنصر وسائط} other {# عنصر وسائط}}",
+  "de": "{count, plural, one {# Medium} other {# Medien}}",
+  "fr": "{count, plural, one {# média} other {# médias}}",
+  "it": "{count, plural, one {# media} other {# media}}"
+ },
+ "PostDetails.likes": {
+  "en": "{count, plural, one {# like} other {# likes}}",
+  "ar": "{count, plural, zero {لا إعجابات} one {إعجاب واحد} two {إعجابان} few {# إعجابات} many {# إعجابًا} other {# إعجاب}}",
+  "de": "{count, plural, one {# Like} other {# Likes}}",
+  "fr": "{count, plural, one {# mention J’aime} other {# mentions J’aime}}",
+  "it": "{count, plural, one {# Mi piace} other {# Mi piace}}"
+ },
+ "PostDetails.comments": {
+  "en": "{count, plural, one {# comment} other {# comments}}",
+  "ar": "{count, plural, zero {لا تعليقات} one {تعليق واحد} two {تعليقان} few {# تعليقات} many {# تعليقًا} other {# تعليق}}",
+  "de": "{count, plural, one {# Kommentar} other {# Kommentare}}",
+  "fr": "{count, plural, one {# commentaire} other {# commentaires}}",
+  "it": "{count, plural, one {# commento} other {# commenti}}"
+ },
+ "PostDetails.shares": {
+  "en": "{count, plural, one {# share} other {# shares}}",
+  "ar": "{count, plural, zero {لا مشاركات} one {مشاركة واحدة} two {مشاركتان} few {# مشاركات} many {# مشاركة} other {# مشاركة}}",
+  "de": "{count, plural, one {# Mal geteilt} other {# Mal geteilt}}",
+  "fr": "{count, plural, one {# partage} other {# partages}}",
+  "it": "{count, plural, one {# condivisione} other {# condivisioni}}"
+ },
+ "PostDetails.notScheduled": {
+  "en": "Not scheduled",
+  "ar": "غير مجدول",
+  "de": "Nicht geplant",
+  "fr": "Non programmée",
+  "it": "Non programmato"
+ },
+ "PostDetails.scheduleTitle": {
+  "en": "Schedule",
+  "ar": "الجدولة",
+  "de": "Planung",
+  "fr": "Programmation",
+  "it": "Programmazione"
+ },
+ "PostDetails.scheduledFor": {
+  "en": "Goes out on {when}",
+  "ar": "يُنشر في {when}",
+  "de": "Erscheint am {when}",
+  "fr": "Paraît le {when}",
+  "it": "Esce il {when}"
+ },
+ "PostDetails.publishedAt": {
+  "en": "Published on {when}",
+  "ar": "نُشر في {when}",
+  "de": "Veröffentlicht am {when}",
+  "fr": "Publiée le {when}",
+  "it": "Pubblicato il {when}"
+ },
+ "PostDetails.openOn": {
+  "en": "Open on {platform}",
+  "ar": "فتح على {platform}",
+  "de": "Auf {platform} öffnen",
+  "fr": "Ouvrir sur {platform}",
+  "it": "Apri su {platform}"
+ },
+ "PostDetails.schedule": {
+  "en": "Schedule it",
+  "ar": "جدولته",
+  "de": "Planen",
+  "fr": "La programmer",
+  "it": "Programmalo"
+ },
+ "PostDetails.reschedule": {
+  "en": "Move to another time",
+  "ar": "نقله إلى وقت آخر",
+  "de": "Auf eine andere Zeit verschieben",
+  "fr": "Déplacer à une autre heure",
+  "it": "Sposta a un altro orario"
+ },
+ "PostDetails.scheduleSave": {
+  "en": "Schedule",
+  "ar": "جدولة",
+  "de": "Planen",
+  "fr": "Programmer",
+  "it": "Programma"
+ },
+ "PostDetails.scheduleAndSend": {
+  "en": "Schedule and send for approval",
+  "ar": "جدولة وإرسال للموافقة",
+  "de": "Planen und zur Freigabe senden",
+  "fr": "Programmer et envoyer pour approbation",
+  "it": "Programma e invia per approvazione"
+ },
+ "PostDetails.rescheduleSave": {
+  "en": "Save the new time",
+  "ar": "حفظ الوقت الجديد",
+  "de": "Neue Zeit speichern",
+  "fr": "Enregistrer la nouvelle heure",
+  "it": "Salva il nuovo orario"
+ },
+ "PostDetails.date": {
+  "en": "Date",
+  "ar": "التاريخ",
+  "de": "Datum",
+  "fr": "Date",
+  "it": "Data"
+ },
+ "PostDetails.time": {
+  "en": "Time",
+  "ar": "الوقت",
+  "de": "Uhrzeit",
+  "fr": "Heure",
+  "it": "Ora"
+ },
+ "PostDetails.errWhen": {
+  "en": "Pick a date and time.",
+  "ar": "اختر تاريخًا ووقتًا.",
+  "de": "Wählen Sie Datum und Uhrzeit.",
+  "fr": "Choisissez une date et une heure.",
+  "it": "Scegli data e ora."
+ },
+ "PostDetails.errPast": {
+  "en": "That time has passed. Pick a later one.",
+  "ar": "هذا الوقت مضى. اختر وقتًا لاحقًا.",
+  "de": "Diese Zeit ist vorbei. Wählen Sie eine spätere.",
+  "fr": "Cette heure est passée. Choisissez-en une plus tard.",
+  "it": "Quell’ora è passata. Scegline una più tardi."
+ },
+ "PostDetails.performanceTitle": {
+  "en": "Results",
+  "ar": "النتائج",
+  "de": "Ergebnisse",
+  "fr": "Résultats",
+  "it": "Risultati"
+ },
+ "PostDetails.performanceHint": {
+  "en": "{count, plural, one {From # platform, as it last reported.} other {From # platforms, as they last reported.}}",
+  "ar": "{count, plural, zero {من المنصات.} one {من منصة واحدة، حسب آخر تحديث.} two {من منصتين، حسب آخر تحديث.} few {من # منصات، حسب آخر تحديث.} many {من # منصة، حسب آخر تحديث.} other {من # منصة، حسب آخر تحديث.}}",
+  "de": "{count, plural, one {Von # Plattform, Stand der letzten Meldung.} other {Von # Plattformen, Stand der letzten Meldung.}}",
+  "fr": "{count, plural, one {D’après # plateforme, à sa dernière mise à jour.} other {D’après # plateformes, à leur dernière mise à jour.}}",
+  "it": "{count, plural, one {Da # piattaforma, all’ultimo aggiornamento.} other {Da # piattaforme, all’ultimo aggiornamento.}}"
+ },
+ "PostDetails.metric_impressions": {
+  "en": "Impressions",
+  "ar": "مرات الظهور",
+  "de": "Impressionen",
+  "fr": "Impressions",
+  "it": "Impression"
+ },
+ "PostDetails.metric_reach": {
+  "en": "Reach",
+  "ar": "الوصول",
+  "de": "Reichweite",
+  "fr": "Portée",
+  "it": "Copertura"
+ },
+ "PostDetails.metric_likes": {
+  "en": "Likes",
+  "ar": "الإعجابات",
+  "de": "Likes",
+  "fr": "J’aime",
+  "it": "Mi piace"
+ },
+ "PostDetails.metric_comments": {
+  "en": "Comments",
+  "ar": "التعليقات",
+  "de": "Kommentare",
+  "fr": "Commentaires",
+  "it": "Commenti"
+ },
+ "PostDetails.metric_shares": {
+  "en": "Shares",
+  "ar": "المشاركات",
+  "de": "Geteilt",
+  "fr": "Partages",
+  "it": "Condivisioni"
+ },
+ "PostDetails.noResultsTitle": {
+  "en": "No results yet",
+  "ar": "لا نتائج بعد",
+  "de": "Noch keine Ergebnisse",
+  "fr": "Pas encore de résultats",
+  "it": "Ancora nessun risultato"
+ },
+ "PostDetails.noResultsBody": {
+  "en": "They appear once it's published and the platforms report back.",
+  "ar": "تظهر بعد النشر وعندما تُرسل المنصات بياناتها.",
+  "de": "Sie erscheinen nach der Veröffentlichung, sobald die Plattformen melden.",
+  "fr": "Ils apparaissent après la publication, quand les plateformes les transmettent.",
+  "it": "Compaiono dopo la pubblicazione, quando le piattaforme li inviano."
+ },
+ "PostDetails.approvalsTitle": {
+  "en": "Approval",
+  "ar": "الموافقة",
+  "de": "Freigabe",
+  "fr": "Approbation",
+  "it": "Approvazione"
+ },
+ "PostDetails.approvalsProgress": {
+  "en": "{approved} of {total} have approved",
+  "ar": "وافق {approved} من أصل {total}",
+  "de": "{approved} von {total} haben freigegeben",
+  "fr": "{approved} sur {total} ont approuvé",
+  "it": "{approved} su {total} hanno approvato"
+ },
+ "PostDetails.approvalsNone": {
+  "en": "No approvers. It can go out without approval.",
+  "ar": "لا معتمِدين، فيمكن نشره دون موافقة.",
+  "de": "Keine Freigebenden. Er kann ohne Freigabe erscheinen.",
+  "fr": "Aucun approbateur : elle peut paraître sans approbation.",
+  "it": "Nessun approvatore: può uscire senza approvazione."
+ },
+ "PostDetails.addApprovers": {
+  "en": "Add approvers",
+  "ar": "إضافة معتمِدين",
+  "de": "Freigebende hinzufügen",
+  "fr": "Ajouter des approbateurs",
+  "it": "Aggiungi approvatori"
+ },
+ "PostDetails.changeApprovers": {
+  "en": "Change approvers",
+  "ar": "تغيير المعتمِدين",
+  "de": "Freigebende ändern",
+  "fr": "Modifier les approbateurs",
+  "it": "Cambia approvatori"
+ },
+ "PostDetails.yourReview": {
+  "en": "You're one of the approvers. Approve it, or reject it with a reason for the author.",
+  "ar": "أنت أحد المعتمِدين. وافق عليه، أو ارفضه مع ذكر السبب للكاتب.",
+  "de": "Sie sind freigebende Person. Geben Sie ihn frei oder lehnen Sie ihn mit einem Grund für die Autorin oder den Autor ab.",
+  "fr": "Vous êtes approbateur. Approuvez-la, ou refusez-la en indiquant la raison à l’auteur.",
+  "it": "Sei uno degli approvatori. Approvalo o rifiutalo con un motivo per l’autore."
+ },
+ "PostDetails.approve": {
+  "en": "Approve",
+  "ar": "موافقة",
+  "de": "Freigeben",
+  "fr": "Approuver",
+  "it": "Approva"
+ },
+ "PostDetails.reject": {
+  "en": "Reject",
+  "ar": "رفض",
+  "de": "Ablehnen",
+  "fr": "Refuser",
+  "it": "Rifiuta"
+ },
+ "PostDetails.approveTitle": {
+  "en": "Approve {name}?",
+  "ar": "الموافقة على {name}؟",
+  "de": "{name} freigeben?",
+  "fr": "Approuver {name} ?",
+  "it": "Approvare {name}?"
+ },
+ "PostDetails.approveImpact": {
+  "en": "Once everyone approves, it goes out at its scheduled time.",
+  "ar": "بعد موافقة الجميع، يُنشر في موعده.",
+  "de": "Sobald alle zugestimmt haben, erscheint er zur geplanten Zeit.",
+  "fr": "Une fois approuvée par tous, elle paraît à l’heure prévue.",
+  "it": "Quando tutti approvano, esce all’ora prevista."
+ },
+ "PostDetails.approveImpactNow": {
+  "en": "Once everyone approves, it goes out right away.",
+  "ar": "بعد موافقة الجميع، يُنشر فورًا.",
+  "de": "Sobald alle zugestimmt haben, erscheint er sofort.",
+  "fr": "Une fois approuvée par tous, elle paraît tout de suite.",
+  "it": "Quando tutti approvano, esce subito."
+ },
+ "PostDetails.approveNote": {
+  "en": "Note for the author",
+  "ar": "ملاحظة للكاتب",
+  "de": "Notiz für die Autorin oder den Autor",
+  "fr": "Note pour l’auteur",
+  "it": "Nota per l’autore"
+ },
+ "PostDetails.approveNotePlaceholder": {
+  "en": "Optional",
+  "ar": "اختياري",
+  "de": "Optional",
+  "fr": "Facultatif",
+  "it": "Facoltativa"
+ },
+ "PostDetails.rejectTitle": {
+  "en": "Reject {name}?",
+  "ar": "رفض {name}؟",
+  "de": "{name} ablehnen?",
+  "fr": "Refuser {name} ?",
+  "it": "Rifiutare {name}?"
+ },
+ "PostDetails.rejectImpact": {
+  "en": "It goes back to a draft. The author sees your reason and can send it again.",
+  "ar": "يعود مسودة، ويرى الكاتب سببك ويمكنه إرساله مجددًا.",
+  "de": "Er wird wieder zum Entwurf. Die Autorin oder der Autor sieht Ihren Grund und kann ihn erneut senden.",
+  "fr": "Elle repasse en brouillon. L’auteur voit votre raison et peut la renvoyer.",
+  "it": "Torna in bozza. L’autore vede il tuo motivo e può inviarlo di nuovo."
+ },
+ "PostDetails.rejectReason": {
+  "en": "What needs to change",
+  "ar": "ما الذي يجب تغييره",
+  "de": "Was geändert werden muss",
+  "fr": "Ce qu’il faut changer",
+  "it": "Cosa va cambiato"
+ },
+ "PostDetails.rejectReasonPlaceholder": {
+  "en": "Tell the author what to fix",
+  "ar": "أخبر الكاتب بما يجب إصلاحه",
+  "de": "Sagen Sie, was zu korrigieren ist",
+  "fr": "Dites à l’auteur quoi corriger",
+  "it": "Di’ all’autore cosa correggere"
+ },
+ "PostDetails.youApproved": {
+  "en": "You approved it.",
+  "ar": "لقد وافقت عليه.",
+  "de": "Sie haben ihn freigegeben.",
+  "fr": "Vous l’avez approuvée.",
+  "it": "L’hai approvato."
+ },
+ "PostDetails.youRejected": {
+  "en": "You rejected it.",
+  "ar": "لقد رفضته.",
+  "de": "Sie haben ihn abgelehnt.",
+  "fr": "Vous l’avez refusée.",
+  "it": "L’hai rifiutato."
+ },
+ "PostDetails.youSuffix": {
+  "en": "(you)",
+  "ar": "(أنت)",
+  "de": "(Sie)",
+  "fr": "(vous)",
+  "it": "(tu)"
+ },
+ "PostDetails.requestNote": {
+  "en": "Note from the author",
+  "ar": "ملاحظة من الكاتب",
+  "de": "Notiz der Autorin oder des Autors",
+  "fr": "Note de l’auteur",
+  "it": "Nota dell’autore"
+ },
+ "PostDetails.commentsTitle": {
+  "en": "Comments",
+  "ar": "التعليقات",
+  "de": "Kommentare",
+  "fr": "Commentaires",
+  "it": "Commenti"
+ },
+ "PostDetails.commentLabel": {
+  "en": "Add a comment",
+  "ar": "أضف تعليقًا",
+  "de": "Kommentar hinzufügen",
+  "fr": "Ajouter un commentaire",
+  "it": "Aggiungi un commento"
+ },
+ "PostDetails.commentPlaceholder": {
+  "en": "Write to your team",
+  "ar": "اكتب لفريقك",
+  "de": "An Ihr Team schreiben",
+  "fr": "Écrivez à votre équipe",
+  "it": "Scrivi al tuo team"
+ },
+ "PostDetails.addComment": {
+  "en": "Comment",
+  "ar": "تعليق",
+  "de": "Kommentieren",
+  "fr": "Commenter",
+  "it": "Commenta"
+ },
+ "PostDetails.loadingComments": {
+  "en": "Loading comments",
+  "ar": "جارٍ تحميل التعليقات",
+  "de": "Kommentare werden geladen",
+  "fr": "Chargement des commentaires",
+  "it": "Caricamento dei commenti"
+ },
+ "PostDetails.commentsErrorTitle": {
+  "en": "Couldn't load comments",
+  "ar": "تعذّر تحميل التعليقات",
+  "de": "Kommentare konnten nicht geladen werden",
+  "fr": "Impossible de charger les commentaires",
+  "it": "Impossibile caricare i commenti"
+ },
+ "PostDetails.commentsErrorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "PostDetails.noComments": {
+  "en": "No comments yet",
+  "ar": "لا تعليقات بعد",
+  "de": "Noch keine Kommentare",
+  "fr": "Pas encore de commentaires",
+  "it": "Ancora nessun commento"
+ },
+ "PostDetails.noCommentsBody": {
+  "en": "Questions and notes about this post go here.",
+  "ar": "تُكتب هنا الأسئلة والملاحظات حول هذا المنشور.",
+  "de": "Fragen und Notizen zu diesem Beitrag gehören hierher.",
+  "fr": "Les questions et notes sur cette publication vont ici.",
+  "it": "Domande e note su questo post vanno qui."
+ },
+ "PostDetails.someone": {
+  "en": "Someone",
+  "ar": "شخص ما",
+  "de": "Jemand",
+  "fr": "Quelqu’un",
+  "it": "Qualcuno"
+ },
+ "PostDetails.you": {
+  "en": "You",
+  "ar": "أنت",
+  "de": "Sie",
+  "fr": "Vous",
+  "it": "Tu"
+ }
+}

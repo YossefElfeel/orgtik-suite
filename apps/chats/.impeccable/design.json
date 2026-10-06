@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-06T00:00:00.000Z",
+  "title": "Design System: Somion HQ",
+  "extensions": {
+    "colorMeta": {
+      "brand-600": {
+        "role": "primary",
+        "displayName": "Somion Rose",
+        "canonical": "#a62e5c",
+        "tonalRamp": ["#4e1430", "#6e1c40", "#8e2450", "#a62e5c", "#c04170", "#e894b5", "#fae3ec", "#fdf3f7"]
+      },
+      "presence-available": {
+        "role": "secondary",
+        "displayName": "Presence Teal",
+        "canonical": "#0c9083",
+        "tonalRamp": ["#03332e", "#054a43", "#086c62", "#0c9083", "#2bb3a5", "#6fcfc4", "#a9e3dc", "#d2f0ec"]
+      },
+      "presence-busy": {
+        "role": "secondary",
+        "displayName": "Presence Amber",
+        "canonical": "#be7208",
+        "tonalRamp": ["#3d2503", "#5c3705", "#8d5506", "#be7208", "#dc9020", "#eab35e", "#f3d29c", "#faebd3"]
+      },
+      "presence-focus": {
+        "role": "secondary",
+        "displayName": "Presence Violet",
+        "canonical": "#7a46de",
+        "tonalRamp": ["#231045", "#341868", "#57289f", "#7a46de", "#9670e6", "#b294ee", "#cebbf5", "#e8e0fb"]
+      },
+      "presence-meeting": {
+        "role": "secondary",
+        "displayName": "Presence Blue",
+        "canonical": "#2260e8",
+        "tonalRamp": ["#0a1c47", "#0f2c6b", "#1745a4", "#2260e8", "#5382ee", "#84a5f3", "#b1c6f8", "#dae5fd"]
+      },
+      "presence-away": {
+        "role": "secondary",
+        "displayName": "Presence Stone",
+        "canonical": "#877f71",
+        "tonalRamp": ["#2b2823", "#403c35", "#615b50", "#877f71", "#a49d91", "#c0bab1", "#d6d2cb", "#eae7e0"]
+      },
+      "presence-offline": {
+        "role": "secondary",
+        "displayName": "Presence Ash",
+        "canonical": "#787061",
+        "tonalRamp": ["#26231e", "#39352d", "#565045", "#787061", "#989082", "#b7b1a5", "#d3cfc7", "#edeae4"]
+      },
+      "paper-50": {
+        "role": "neutral",
+        "displayName": "Warm Ground",
+        "canonical": "#fcfbf9",
+        "tonalRamp": ["#1a1713", "#2b2620", "#4a443b", "#787061", "#9a9284", "#c0b9aa", "#e7e2d8", "#fcfbf9"]
+      },
+      "paper-950": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#1a1713",
+        "tonalRamp": ["#1a1713", "#2b2620", "#4a443b", "#6e6659", "#787061", "#9a9284", "#d9d3c6", "#f7f5f1"]
+      },
+      "floor": {
+        "role": "neutral",
+        "displayName": "Floor Paper",
+        "canonical": "#efebe3",
+        "tonalRamp": ["#2b2620", "#4a443b", "#787061", "#9a9284", "#c0b9aa", "#d9d3c6", "#efebe3", "#ffffff"]
+      },
+      "mat-oak": {
+        "role": "tertiary",
+        "displayName": "Oak",
+        "canonical": "#e2d3bb",
+        "tonalRamp": ["#3a3327", "#574d3a", "#7d6f54", "#a5936f", "#c9b896", "#e2d3bb", "#efe4d2", "#f8f2e8"]
+      },
+      "mat-soft": {
+        "role": "tertiary",
+        "displayName": "Soft Upholstery",
+        "canonical": "#d8cdbb",
+        "tonalRamp": ["#37312a", "#524a3e", "#786e5c", "#9e937c", "#beb19b", "#d8cdbb", "#e6ded0", "#f4efe7"]
+      },
+      "mat-metal": {
+        "role": "tertiary",
+        "displayName": "Brushed Metal",
+        "canonical": "#cbc3b6",
+        "tonalRamp": ["#332f2b", "#4c473f", "#6f695e", "#918a7c", "#ada396", "#cbc3b6", "#dcd6cc", "#eeeae4"]
+      },
+      "mat-glass": {
+        "role": "tertiary",
+        "displayName": "Pale Glazing",
+        "canonical": "#dae6ea",
+        "tonalRamp": ["#2c3538", "#414e52", "#61747a", "#8ea3a9", "#bfcfd4", "#dae6ea", "#e8f0f2", "#f4f8f9"]
+      },
+      "mat-leaf": {
+        "role": "tertiary",
+        "displayName": "Foliage Sage",
+        "canonical": "#8b9c72",
+        "tonalRamp": ["#242918", "#374026", "#525f38", "#71835a", "#8b9c72", "#9fb086", "#bfcbaf", "#dee5d5"]
+      },
+      "mat-pot": {
+        "role": "tertiary",
+        "displayName": "Planter Clay",
+        "canonical": "#c9b49c",
+        "tonalRamp": ["#332a20", "#4d3f2f", "#725e46", "#96805f", "#ac9679", "#c9b49c", "#d8c6b2", "#eae0d3"]
+      },
+      "scale-6": {
+        "role": "tertiary",
+        "displayName": "Magnitude Peak",
+        "canonical": "#a62e5c",
+        "tonalRamp": ["#f7f1f3", "#efdce4", "#e2c0cd", "#ce9aae", "#b96a88", "#a62e5c", "#8e2450", "#4e1430"]
+      },
+      "danger": {
+        "role": "tertiary",
+        "displayName": "Danger Red",
+        "canonical": "#b03127",
+        "tonalRamp": ["#38100c", "#541813", "#7d231c", "#b03127", "#cc5a50", "#e0897f", "#f0b7b0", "#fbe6e3"]
+      },
+      "success": {
+        "role": "tertiary",
+        "displayName": "Success Green",
+        "canonical": "#14764c",
+        "tonalRamp": ["#062618", "#093a25", "#0d5637", "#14764c", "#2f9a6a", "#67bd94", "#a3d8bd", "#d7efe2"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Page-level titles. One per view, set tight at -0.035em." },
+      "title": { "displayName": "Title", "purpose": "Section heads inside panels and on the floor." },
+      "heading": { "displayName": "Heading", "purpose": "Sub-section and card headings." },
+      "body": { "displayName": "Body", "purpose": "Message text, field values, button labels." },
+      "secondary": { "displayName": "Secondary", "purpose": "Metadata, hints, small-button labels." },
+      "label": { "displayName": "Label", "purpose": "Chips, keys, dense rail labels. Sentence case." },
+      "numeric": { "displayName": "Numeric", "purpose": "Counts, times and durations. Always tabular." },
+      "mono": { "displayName": "Mono", "purpose": "Code and fixed-width identifiers." }
+    },
+    "shadows": [
+      { "name": "raise", "value": "0 1px 1px rgb(43 38 32 / 0.04), 0 1px 3px rgb(43 38 32 / 0.05)", "purpose": "Lightest lift. Secondary buttons and panels at rest." },
+      { "name": "panel", "value": "0 1px 2px rgb(43 38 32 / 0.04), 0 4px 10px -2px rgb(43 38 32 / 0.06), 0 12px 26px -8px rgb(43 38 32 / 0.08)", "purpose": "Raised interface surfaces that own their content." },
+      { "name": "room", "value": "0 1px 2px rgb(43 38 32 / 0.04), 0 6px 14px -4px rgb(43 38 32 / 0.07), 0 18px 36px -14px rgb(43 38 32 / 0.09)", "purpose": "A room platform sitting on the floor." },
+      { "name": "float", "value": "0 2px 4px rgb(43 38 32 / 0.05), 0 12px 22px -6px rgb(43 38 32 / 0.11), 0 28px 56px -18px rgb(43 38 32 / 0.16)", "purpose": "Popovers, dialogs, your own room, a hovered room." },
+      { "name": "lit", "value": "inset 0 1px 0 rgb(255 255 255 / 0.75)", "purpose": "The 1px top-edge light. Never used alone; always with one of the four above." },
+      { "name": "contact", "value": "0 2px 3px -1px rgb(43 38 32 / 0.16)", "purpose": "Tight anchor under a small object that must read as resting on a surface." }
+    ],
+    "motion": [
+      { "name": "ease-out-soft", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Default easing for every state and movement transition." },
+      { "name": "ease-spring", "value": "cubic-bezier(0.34, 1.4, 0.64, 1)", "purpose": "Reserved for things that should feel physical: a tile arriving, a popover opening." },
+      { "name": "duration-tile", "value": "200ms", "purpose": "Avatar tile enter and exit." },
+      { "name": "duration-move", "value": "350ms", "purpose": "Movement across the floor." },
+      { "name": "duration-state", "value": "140ms", "purpose": "Hover, active, selection and other state changes." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single accented action on a surface. A lit gradient face, not a flat fill.",
+      "html": "<button class=\"ds-btn-primary\">Start a call</button>",
+      "css": ".ds-btn-primary { background: linear-gradient(180deg, var(--color-brand-500, #c04170) 0%, var(--color-accent, #a62e5c) 100%); color: #fff; border: 1px solid var(--color-brand-700, #8e2450); border-radius: var(--radius-control, 10px); padding: 8px 14px; min-height: 36px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size: 13.5px; font-weight: 500; line-height: 1.2; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.22), 0 1px 2px rgb(43 38 32 / 0.16); cursor: pointer; transition: background 140ms cubic-bezier(0.16,1,0.3,1), box-shadow 140ms cubic-bezier(0.16,1,0.3,1), transform 140ms cubic-bezier(0.16,1,0.3,1); } .ds-btn-primary:hover { filter: brightness(0.975); } .ds-btn-primary:active { transform: translateY(1px) scale(0.985); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-focus-ring, #a62e5c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "The default control. White surface, strong hairline, raise plus the 1px top light.",
+      "html": "<button class=\"ds-btn-secondary\">Cancel</button>",
+      "css": ".ds-btn-secondary { background: var(--color-surface, #ffffff); color: var(--color-ink, #1a1713); border: 1px solid var(--color-hairline-strong, #d9d3c6); border-radius: var(--radius-control, 10px); padding: 8px 14px; min-height: 36px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size: 13.5px; font-weight: 500; line-height: 1.2; box-shadow: 0 1px 1px rgb(43 38 32 / 0.04), 0 1px 3px rgb(43 38 32 / 0.05), inset 0 1px 0 rgb(255 255 255 / 0.75); cursor: pointer; transition: background 140ms cubic-bezier(0.16,1,0.3,1), box-shadow 140ms cubic-bezier(0.16,1,0.3,1), transform 140ms cubic-bezier(0.16,1,0.3,1); } .ds-btn-secondary:hover { filter: brightness(0.975); } .ds-btn-secondary:active { transform: translateY(1px) scale(0.985); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--color-focus-ring, #a62e5c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "A raised interface surface: tonal step, layered shadow and the 1px top light, applied as a set.",
+      "html": "<section class=\"ds-panel\"><h2 class=\"ds-panel-title\">Today</h2><p class=\"ds-panel-body\">Four meetings, two of them back to back.</p></section>",
+      "css": ".ds-panel { background: var(--color-surface, #ffffff); border: 1px solid var(--color-hairline, #e7e2d8); border-radius: var(--radius-panel, 16px); padding: 18px; box-shadow: 0 1px 1px rgb(43 38 32 / 0.04), 0 1px 3px rgb(43 38 32 / 0.05), inset 0 1px 0 rgb(255 255 255 / 0.75); font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-panel-title { margin: 0 0 6px; font-size: 19px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.2; color: var(--color-ink, #1a1713); } .ds-panel-body { margin: 0; font-size: 13.5px; line-height: 1.55; color: var(--color-ink-muted, #6e6659); }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Label above, hint between, error below. A placeholder never stands in for a label.",
+      "html": "<div class=\"ds-field\"><label class=\"ds-field-label\" for=\"ds-room\">Room name</label><span class=\"ds-field-hint\">Everyone in the workspace can see this.</span><input class=\"ds-field-input\" id=\"ds-room\" value=\"Design sync\" /></div>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-field-label { font-size: 12.5px; font-weight: 500; color: var(--color-ink, #1a1713); } .ds-field-hint { font-size: 12px; color: var(--color-ink-muted, #6e6659); } .ds-field-input { background: var(--color-surface, #ffffff); border: 1px solid var(--color-hairline-strong, #d9d3c6); border-radius: var(--radius-control, 10px); padding: 8px 11px; min-height: 36px; font-size: 13.5px; color: var(--color-ink, #1a1713); } .ds-field-input:focus-visible { outline: 2px solid var(--color-focus-ring, #a62e5c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Row Navigation Item",
+      "kind": "nav",
+      "refersTo": "button-ghost",
+      "description": "The shared row control: channels, presence rows, meeting rows, search results. Active is background plus colour, never colour alone.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-row\" href=\"#\">general</a><a class=\"ds-nav-row\" href=\"#\" aria-current=\"true\">design</a><a class=\"ds-nav-row\" href=\"#\">clients</a></nav>",
+      "css": ".ds-nav { display: flex; flex-direction: column; gap: 2px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; } .ds-nav-row { display: flex; align-items: center; padding: 6px 10px; min-height: 28px; border-radius: var(--radius-control, 10px); font-size: 13.5px; color: var(--color-ink-muted, #6e6659); text-decoration: none; transition: background 140ms cubic-bezier(0.16,1,0.3,1), color 140ms cubic-bezier(0.16,1,0.3,1); } .ds-nav-row:hover { background: var(--color-surface-sunken, #f7f5f1); } .ds-nav-row[aria-current=\"true\"] { background: var(--color-accent-soft, #fdf3f7); color: var(--color-ink-brand, #a62e5c); font-weight: 500; } .ds-nav-row:focus-visible { outline: 2px solid var(--color-focus-ring, #a62e5c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip-accent",
+      "description": "Fully rounded soft-tinted label. Never the only carrier of a status.",
+      "html": "<span class=\"ds-chip ds-chip-neutral\">Guest</span> <span class=\"ds-chip ds-chip-accent\">Pinned</span>",
+      "css": ".ds-chip { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 999px; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size: 11.5px; font-weight: 500; white-space: nowrap; } .ds-chip-neutral { background: var(--color-surface-sunken, #f7f5f1); color: var(--color-ink-muted, #6e6659); } .ds-chip-accent { background: var(--color-accent-soft, #fdf3f7); color: var(--color-ink-brand, #a62e5c); }"
+    },
+    {
+      "name": "Avatar with Presence Mark",
+      "kind": "custom",
+      "refersTo": "avatar-40",
+      "description": "The atomic unit of presence. A tint lit from the upper left, with a mark whose SHAPE carries the state.",
+      "html": "<span class=\"ds-avatar\"><span class=\"ds-avatar-initials\">RM</span><span class=\"ds-avatar-mark\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"8\" fill=\"#ffffff\"/><circle cx=\"8\" cy=\"8\" r=\"5.5\" fill=\"#0c9083\"/></svg></span></span> <span class=\"ds-avatar ds-avatar-offline\"><span class=\"ds-avatar-initials\">TK</span><span class=\"ds-avatar-mark\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 16 16\" aria-hidden=\"true\"><circle cx=\"8\" cy=\"8\" r=\"8\" fill=\"#ffffff\"/><circle cx=\"8\" cy=\"8\" r=\"5\" fill=\"none\" stroke=\"#787061\" stroke-width=\"1.5\"/></svg></span></span>",
+      "css": ".ds-avatar { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: radial-gradient(circle at 32% 26%, #f4ece4, #eadfd3 78%); color: #5c4a38; font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.01em; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.55), 0 1px 2px rgb(43 38 32 / 0.12); } .ds-avatar-offline { opacity: 0.55; box-shadow: none; } .ds-avatar-mark { position: absolute; right: -1px; bottom: -1px; line-height: 0; }"
+    },
+    {
+      "name": "Room Platform",
+      "kind": "card",
+      "refersTo": "room-platform",
+      "description": "A room on the floor: a raised platform with the layered room shadow and the 1px top light, lifting 1px on hover.",
+      "html": "<div class=\"ds-floor\"><button class=\"ds-room\"><span class=\"ds-room-name\">Meeting room</span><span class=\"ds-room-meta\">3 of 8</span></button></div>",
+      "css": ".ds-floor { background: var(--color-floor, #efebe3); background-image: radial-gradient(120% 90% at 12% 0%, rgb(255 255 255 / 0.85) 0%, rgb(255 255 255 / 0) 62%), radial-gradient(circle at 1px 1px, rgb(154 146 132 / 0.22) 1px, transparent 0); background-size: auto, 24px 24px; padding: 28px; border-radius: 16px; } .ds-room { display: flex; flex-direction: column; gap: 2px; width: 190px; padding: 10px; text-align: start; background: var(--color-floor-room, #ffffff); border: 1px solid var(--color-floor-room-stroke, #e7e2d8); border-radius: var(--radius-room, 22px); box-shadow: 0 1px 2px rgb(43 38 32 / 0.04), 0 6px 14px -4px rgb(43 38 32 / 0.07), 0 18px 36px -14px rgb(43 38 32 / 0.09), inset 0 1px 0 rgb(255 255 255 / 0.75); cursor: pointer; font-family: Geist, ui-sans-serif, system-ui, sans-serif; transition: box-shadow 140ms cubic-bezier(0.16,1,0.3,1), border-color 140ms cubic-bezier(0.16,1,0.3,1), transform 140ms cubic-bezier(0.16,1,0.3,1); } .ds-room:hover { border-color: var(--color-paper-400, #d9d3c6); box-shadow: 0 2px 4px rgb(43 38 32 / 0.05), 0 12px 22px -6px rgb(43 38 32 / 0.11), 0 28px 56px -18px rgb(43 38 32 / 0.16), inset 0 1px 0 rgb(255 255 255 / 0.75); transform: translateY(-1px); } .ds-room:focus-visible { outline: 2px solid var(--color-focus-ring, #a62e5c); outline-offset: 2px; } .ds-room-name { font-size: 13.5px; font-weight: 600; color: var(--color-ink, #1a1713); } .ds-room-meta { font-size: 11.5px; color: var(--color-ink-muted, #6e6659); font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Dimensional Floor Object",
+      "kind": "custom",
+      "refersTo": "room-platform",
+      "description": "The Solid extrusion primitive every piece of furniture is built from: contact shadow, side face, lit top face, 1px leading highlight.",
+      "html": "<span class=\"ds-solid\"><span class=\"ds-solid-contact\"></span><span class=\"ds-solid-side\"></span><span class=\"ds-solid-top\"></span></span>",
+      "css": ".ds-solid { position: relative; display: block; width: 74px; height: 39px; } .ds-solid-contact { position: absolute; left: 2px; right: 2px; top: 34px; height: 8px; border-radius: 50%; background: rgb(43 38 32 / 0.13); filter: blur(4px); } .ds-solid-side { position: absolute; inset-inline: 0; top: 7px; height: 32px; background: var(--mat-oak-side, #c9b896); border-radius: var(--radius-object, 5px); } .ds-solid-top { position: absolute; inset-inline: 0; top: 0; height: 32px; background: linear-gradient(150deg, var(--mat-oak-top, #efe4d2) 0%, var(--mat-oak, #e2d3bb) 78%); border-radius: var(--radius-object, 5px); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.6); }"
+    },
+    {
+      "name": "Count Badge",
+      "kind": "chip",
+      "refersTo": "count-mention",
+      "description": "Unread and mention counts. Tabular so a sidebar never jitters.",
+      "html": "<span class=\"ds-count\">12</span> <span class=\"ds-count ds-count-mention\">3</span>",
+      "css": ".ds-count { display: inline-flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 6px; border-radius: 999px; background: var(--color-paper-400, #d9d3c6); color: var(--color-paper-900, #2b2620); font-family: Geist, ui-sans-serif, system-ui, sans-serif; font-size: 11px; font-weight: 600; font-variant-numeric: tabular-nums; } .ds-count-mention { background: var(--color-accent, #a62e5c); color: #ffffff; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lit Room",
+    "overview": "Somion HQ is a warm daylight office rendered as software. The world is light, friendly and unhurried, because people sit inside it for eight hours; nothing here is a conceptual statement. What separates it from a plain beige admin panel is not more colour, it is craft: crisp value steps between surfaces, an elevation scale that is genuinely used, a type ramp with a real top end, and a single direction of light obeyed by every raised object in the product, interface chrome and drawn furniture alike.\n\nThe floor is the signature. Rooms are raised platforms on a warm ground with ambient daylight falling from the upper left, and the furniture inside them is built rather than drawn: each piece is an extrusion with a contact shadow, a darker side face, a lit top face and a 1px leading highlight. Because those four moves are identical on all fifteen piece kinds, a floor of them reads as designed instead of assembled. Every object is token-coloured CSS, so it restyles with the brand and there is no asset to redraw.\n\nSaturation is a scarce, governed resource. Six presence hues are the only saturated colour in the product; the rose brand sits far enough from all of them that it can never be mistaken for a status; furniture materials, avatar tints and room zones are all desaturated warm neutrals that stay above muted ink in value, so a person always outranks the room they are standing in. Density is high but not airless: 14px base body on a 4px rhythm, tabular numerals wherever counts change.",
+    "keyCharacteristics": [
+      "Warm paper neutrals with deliberately separable value steps, so surfaces stack without a border on every edge.",
+      "Presence is the only saturated material; six states, six hues, six distinct mark shapes.",
+      "One light direction for the whole product, from the upper left.",
+      "Elevation always travels as a set: tonal step, layered shadow, 1px top light.",
+      "Dimensional floor furniture built from one extrusion primitive and six material triplets.",
+      "Light theme only, as an explicit decision."
+    ],
+    "rules": [
+      { "name": "The Presence Owns Saturation Rule", "body": "The six presence hues are the only saturated colour in the product. Nothing decorative, illustrative, or furniture-related may reuse them, and nothing else may reach their chroma.", "section": "colors" },
+      { "name": "The Brand Is Not A Status Rule", "body": "The rose sits at hue 337, at least 58 degrees from every presence hue. Never place the accent where a status mark could be expected, and never introduce an accent variant that closes that gap.", "section": "colors" },
+      { "name": "The Never Colour Alone Rule", "body": "Every one of the six states carries a distinct mark shape and a text label alongside its hue. Offline is a hollow ring, not a pale fill. A state that only differs by colour is not shipped.", "section": "colors" },
+      { "name": "The Three-Background Rule", "body": "A presence mark must clear 3:1 as a UI component against all three surfaces it can land on - ground, floor and white room surface - not only the one in the current mock. Any new presence value is tested against all three before it exists.", "section": "colors" },
+      { "name": "The Value-Not-Hue Zoning Rule", "body": "Room zones separate from the floor by value on the warm ramp, never by hue. A cool tint on this world reads as a mistake, and a desaturated presence hue reads as a status.", "section": "colors" },
+      { "name": "The Sequential Delivery Rule", "body": "The magnitude ramp's two lightest steps fall below 3:1 by nature. It therefore never ships alone: always with a table view, per-cell values on hover and focus, and a separating gap between cells. The ramp is not darkened to hide the finding.", "section": "colors" },
+      { "name": "The Real Top End Rule", "body": "Display and title are set tight (-0.035em, -0.025em) and are the only steps allowed to break 15px. A screen where everything sits between 11px and 13.5px reads as flat regardless of its colour.", "section": "typography" },
+      { "name": "The Tabular Rule", "body": "Any number that changes in place - counts, times, durations - carries tabular numerals, so a sidebar never jitters.", "section": "typography" },
+      { "name": "The Self-Carrying Heading Rule", "body": "Section headings carry their own weight. No eyebrow, no kicker, no section number, no floating explainer beside the title.", "section": "typography" },
+      { "name": "The Designed Floor Plan Rule", "body": "Room layouts are hand-composed per room - desks in rows with circulation between them, a table centred under a wall screen - never generated. A randomised floor plan looks randomised.", "section": "layout" },
+      { "name": "The One Light Direction Rule", "body": "The whole product is lit from the upper left, once. Raised interface surfaces take the 1px top light; drawn floor objects take a lit top face over a darker extruded side. There is no second light source, and no object may cast a shadow that contradicts the first.", "section": "elevation" },
+      { "name": "The Elevation Travels As A Set Rule", "body": "Tonal step + layered shadow + 1px top light are one decision, applied together. Applying one without the others is exactly what makes depth read as inconsistent.", "section": "elevation" },
+      { "name": "The Person Outranks The Furniture Rule", "body": "Materials stay above muted ink in value and add no saturation, so a person - white ring, dark initial, saturated presence lamp, name plate - always wins the depth contest against the room. On hover, rooms lift by 1px; people scale by 7%. Furniture that competes with people defeats the product.", "section": "elevation" },
+      { "name": "The Decorative Layer Is Silent Rule", "body": "The whole furniture layer is aria-hidden and non-interactive. It never enters the accessibility tree, never intercepts a click meant for the room, and never adds a tab stop.", "section": "elevation" },
+      { "name": "The Two Radius Scales Rule", "body": "Interface radius (10 / 16 / 22 / full) and object radius (2 / 3 / 5 / 7) never cross. Picking from the wrong scale is the fastest way to make a drawn object look like a button, or a button look like a tile.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do apply elevation as a set - tonal step, layered shadow, and the 1px top light - or don't raise the surface at all.",
+      "Do light every new raised object from the upper left: a lit top face over a darker side for drawn objects, the 1px top light for interface surfaces.",
+      "Do give every new presence-bearing state a distinct mark shape and a text label, and test its colour against ground, floor and white surface.",
+      "Do separate floor zones by value on the warm ramp (#efebe3 / #f6f3ed / #f4eee2 / #faf8f4 / #ffffff).",
+      "Do pick radius from the correct scale: 10 / 16 / 22 / full for interface, 2 / 3 / 5 / 7 for drawn objects.",
+      "Do ship the sequential ramp with a table view, per-cell values on hover and focus, and a separating gap.",
+      "Do use tabular numerals for any number that updates in place.",
+      "Do keep furniture and avatar tints above muted ink in value, so the person outranks the room.",
+      "Do treat light-theme-only as an explicit decision for an eight-hour daylight operate surface, declared with color-scheme: light."
+    ],
+    "donts": [
+      "Don't put a raw hex value in feature code. Every colour comes from a token; the single sanctioned exception is Excalidraw's initialData, whose API takes literals rather than CSS variables.",
+      "Don't reuse a presence hue for anything decorative, or introduce a new saturated colour anywhere outside the six states.",
+      "Don't place the rose accent where a status could be expected, or add an accent variant that narrows the 58-degree gap to the presence hues.",
+      "Don't convey status, activity or selection by colour alone.",
+      "Don't tint the floor or a room cool, or use a desaturated presence hue as a surface.",
+      "Don't darken the sequential ramp's light steps to make a contrast finding disappear; fix it in delivery, not in the ramp.",
+      "Don't give an interactive element a hover state without an active and a :focus-visible state, and never remove the focus ring.",
+      "Don't add an eyebrow, kicker or section number above a heading; headings carry their own weight.",
+      "Don't let furniture gain saturation, contrast or height that competes with a person standing next to it.",
+      "Don't generate floor layouts procedurally; a floor plan is designed."
+    ]
+  }
+}

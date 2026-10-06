@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "@orgtik/ui/tailwind.css";
+
+/* OrgTik Admin is built on @orgtik/ui from its first line: no bridge, no local palette. */
+html,
+body {
+  background: var(--ot-bg-canvas);
+  color: var(--ot-fg);
+  font-family: var(--ot-font-body);
+}

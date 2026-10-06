@@ -1,0 +1,320 @@
+[
+  {
+    "title": "[en] Finance: draft, a refused publish (P5), a publish with notice, the log and the preview",
+    "ok": true,
+    "passed": 5,
+    "steps": 5,
+    "detail": [
+      {
+        "name": "draft-gcc-chat-pro",
+        "ok": true,
+        "note": "cell \"Change Chat · Pro, GCC, Monthly: SAR 45.00 → SAR 50.00\", draft {\"key\":\"chat_pro:monthly:gcc\",\"from\":45,\"to\":50}",
+        "at": "http://localhost:3008/en/pricing",
+        "shot": "101-draft-gcc-chat-pro.png"
+      },
+      {
+        "name": "publish-existing-now-refused",
+        "ok": true,
+        "note": "refusal on the field; warned before submit: true; draft kept (1 change)",
+        "at": "http://localhost:3008/en/pricing",
+        "shot": "102-publish-existing-now-refused.png"
+      },
+      {
+        "name": "publish-with-notice",
+        "ok": true,
+        "note": "Price version 2 is published. It applies to: Existing customers at their next renewal. 2 subscriptions get a notice. See the pricing log · notified 2",
+        "at": "http://localhost:3008/en/pricing",
+        "shot": "103-publish-with-notice.png"
+      },
+      {
+        "name": "log-shows-it",
+        "ok": true,
+        "note": "3 Oct 2026, 09:41 Hany Samir Prices published chat_pro:monthly:gcc 45 → 50 Existing customers at their next renewal GCC price review 2 2",
+        "at": "http://localhost:3008/en/pricing/log",
+        "shot": "104-log-shows-it.png"
+      },
+      {
+        "name": "preview-ae-49-kw-4.100",
+        "ok": true,
+        "note": "SA \"Saudi Arabia SA GCC SAR 50.00 SAR Zone\" · AE \"United Arab Emirates AE GCC AED 49.00 AED Zone (converted)\" · KW \"Kuwait KW GCC KWD 4.100 KWD Zone (converted)\"",
+        "at": "http://localhost:3008/en/pricing/preview",
+        "shot": "105-preview-ae-49-kw-4.100.png"
+      }
+    ],
+    "console": 1,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)"
+    ]
+  },
+  {
+    "title": "[en] Finance: a currency override without a rate is refused (X2), then saved after adding the rate",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "add-currency-jod",
+        "ok": true,
+        "note": "{\"code\":\"JOD\",\"name\":\"Jordanian dinar\",\"decimals\":2,\"step\":1,\"mode\":\"nearest\",\"active\":true,\"inUse\":false,\"workspaces\":0}",
+        "at": "http://localhost:3008/en/pricing/currencies",
+        "shot": "201-add-currency-jod.png"
+      },
+      {
+        "name": "override-without-rate-refused",
+        "ok": true,
+        "note": "message on the field, 2 link(s) to the rates; BH still BHD",
+        "at": "http://localhost:3008/en/pricing/zones",
+        "shot": "202-override-without-rate-refused.png"
+      },
+      {
+        "name": "add-rate-from-the-link",
+        "ok": true,
+        "note": "rate {\"from\":\"SAR\",\"to\":\"JOD\",\"rate\":0.189,\"updatedAt\":\"2026-10-03T06:42:17.451Z\",\"by\":\"finance\"}",
+        "at": "http://localhost:3008/en/pricing/currencies",
+        "shot": "203-add-rate-from-the-link.png"
+      },
+      {
+        "name": "override-saves-with-rate",
+        "ok": true,
+        "note": "row \"Bahrain BH GCC JOD Own currency None Edit : Bahrain\"",
+        "at": "http://localhost:3008/en/pricing/zones",
+        "shot": "204-override-saves-with-rate.png"
+      }
+    ],
+    "console": 1,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)"
+    ]
+  },
+  {
+    "title": "[en] Finance: a currency's rounding (CHF nearest → up), and the preview follows",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "chf-rounding-up",
+        "ok": true,
+        "note": "CHF up, step 1; row \"CHF Swiss Franc 2 Up · 1 CHF 45.00 By zones or countries Active Edit : CHF\"",
+        "at": "http://localhost:3008/en/pricing/currencies",
+        "shot": "301-chf-rounding-up.png"
+      },
+      {
+        "name": "preview-ch-follows",
+        "ok": true,
+        "note": "CH 10 → \"Switzerland CH Europe CHF 11.00 CHF Zone (converted)\"",
+        "at": "http://localhost:3008/en/pricing/preview",
+        "shot": "302-preview-ch-follows.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Sales: the grid is view-only",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "view-only-grid",
+        "ok": true,
+        "note": "7 plans, 0 editable cells, 0 publish buttons, view-only note 1",
+        "at": "http://localhost:3008/en/pricing",
+        "shot": "401-view-only-grid.png"
+      },
+      {
+        "name": "view-only-zones",
+        "ok": true,
+        "note": "add 0, turn-off 0",
+        "at": "http://localhost:3008/en/pricing/zones",
+        "shot": "402-view-only-zones.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[en] Support: no pricing in the navigation; the page says which permission it needs",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "nav-hides-pricing",
+        "ok": true,
+        "note": " · Home · Tasks · Files · HR · Admin · Chats · Overview · Tools · Plans and features · Workspaces · Migrations · Custom plans · Invoices · Services · Service requests · Support tickets · Suggestions a",
+        "at": "http://localhost:3008/en",
+        "shot": "501-nav-hides-pricing.png"
+      },
+      {
+        "name": "page-no-permission",
+        "ok": true,
+        "note": "Your role can't open this It needs the “pricing:view” permission. Ask a Super Admin if you need it.",
+        "at": "http://localhost:3008/en/pricing",
+        "shot": "502-page-no-permission.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Finance: draft, a refused publish (P5), a publish with notice, the log and the preview",
+    "ok": true,
+    "passed": 5,
+    "steps": 5,
+    "detail": [
+      {
+        "name": "draft-gcc-chat-pro",
+        "ok": true,
+        "note": "cell \"تغيير سعر المحادثات · احترافي، GCC، شهري: ‏45.00 ر.س.‏ → ‏50.00 ر.س.‏\", draft {\"key\":\"chat_pro:monthly:gcc\",\"from\":45,\"to\":50}",
+        "at": "http://localhost:3008/ar/pricing",
+        "shot": "601-draft-gcc-chat-pro.png"
+      },
+      {
+        "name": "publish-existing-now-refused",
+        "ok": true,
+        "note": "refusal on the field; warned before submit: true; draft kept (1 change)",
+        "at": "http://localhost:3008/ar/pricing",
+        "shot": "602-publish-existing-now-refused.png"
+      },
+      {
+        "name": "publish-with-notice",
+        "ok": true,
+        "note": "نُشر إصدار الأسعار 2، ويُطبَّق على: العملاء الحاليين عند التجديد التالي. سيصل إشعار إلى اشتراكين. عرض سجل الأسعار · notified 2",
+        "at": "http://localhost:3008/ar/pricing",
+        "shot": "603-publish-with-notice.png"
+      },
+      {
+        "name": "log-shows-it",
+        "ok": true,
+        "note": "03‏/10‏/2026، 9:42 ص Hany Samir نشر أسعار chat_pro:monthly:gcc 45 → 50 العملاء الحاليين عند التجديد التالي مراجعة أسعار الخليج 2 2",
+        "at": "http://localhost:3008/ar/pricing/log",
+        "shot": "604-log-shows-it.png"
+      },
+      {
+        "name": "preview-ae-49-kw-4.100",
+        "ok": true,
+        "note": "SA \"المملكة العربية السعودية SA GCC ‏50.00 ر.س.‏ SAR المنطقة\" · AE \"الإمارات العربية المتحدة AE GCC ‏49.00 د.إ.‏ AED المنطقة (محوَّل)\" · KW \"الكويت KW GCC ‏4.100 د.ك.‏ KWD المنطقة (محوَّل)\"",
+        "at": "http://localhost:3008/ar/pricing/preview",
+        "shot": "605-preview-ae-49-kw-4.100.png"
+      }
+    ],
+    "console": 1,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)"
+    ]
+  },
+  {
+    "title": "[ar] Finance: a currency override without a rate is refused (X2), then saved after adding the rate",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "add-currency-jod",
+        "ok": true,
+        "note": "{\"code\":\"JOD\",\"name\":\"دينار أردني\",\"decimals\":2,\"step\":1,\"mode\":\"nearest\",\"active\":true,\"inUse\":false,\"workspaces\":0}",
+        "at": "http://localhost:3008/ar/pricing/currencies",
+        "shot": "701-add-currency-jod.png"
+      },
+      {
+        "name": "override-without-rate-refused",
+        "ok": true,
+        "note": "message on the field, 2 link(s) to the rates; BH still BHD",
+        "at": "http://localhost:3008/ar/pricing/zones",
+        "shot": "702-override-without-rate-refused.png"
+      },
+      {
+        "name": "add-rate-from-the-link",
+        "ok": true,
+        "note": "rate {\"from\":\"SAR\",\"to\":\"JOD\",\"rate\":0.189,\"updatedAt\":\"2026-10-03T06:43:17.100Z\",\"by\":\"finance\"}",
+        "at": "http://localhost:3008/ar/pricing/currencies",
+        "shot": "703-add-rate-from-the-link.png"
+      },
+      {
+        "name": "override-saves-with-rate",
+        "ok": true,
+        "note": "row \"البحرين BH GCC JOD عملة خاصة لا يوجد تعديل : البحرين\"",
+        "at": "http://localhost:3008/ar/pricing/zones",
+        "shot": "704-override-saves-with-rate.png"
+      }
+    ],
+    "console": 1,
+    "consoleSample": [
+      "Failed to load resource: the server responded with a status of 422 (Unprocessable Entity)"
+    ]
+  },
+  {
+    "title": "[ar] Finance: a currency's rounding (CHF nearest → up), and the preview follows",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "chf-rounding-up",
+        "ok": true,
+        "note": "CHF up, step 1; row \"CHF فرنك سويسري 2 لأعلى · 1 ‏45.00 CHF في مناطق أو دول نشطة تعديل : CHF\"",
+        "at": "http://localhost:3008/ar/pricing/currencies",
+        "shot": "801-chf-rounding-up.png"
+      },
+      {
+        "name": "preview-ch-follows",
+        "ok": true,
+        "note": "CH 10 → \"سويسرا CH Europe ‏11.00 CHF CHF المنطقة (محوَّل)\"",
+        "at": "http://localhost:3008/ar/pricing/preview",
+        "shot": "802-preview-ch-follows.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Sales: the grid is view-only",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "view-only-grid",
+        "ok": true,
+        "note": "7 plans, 0 editable cells, 0 publish buttons, view-only note 1",
+        "at": "http://localhost:3008/ar/pricing",
+        "shot": "901-view-only-grid.png"
+      },
+      {
+        "name": "view-only-zones",
+        "ok": true,
+        "note": "add 0, turn-off 0",
+        "at": "http://localhost:3008/ar/pricing/zones",
+        "shot": "902-view-only-zones.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  },
+  {
+    "title": "[ar] Support: no pricing in the navigation; the page says which permission it needs",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "nav-hides-pricing",
+        "ok": true,
+        "note": " · الرئيسية · المهام · الملفات · الموارد البشرية · الإدارة · المحادثات · نظرة عامة · الأدوات · الخطط والميزات · مساحات العمل · طلبات النقل · الخطط المخصصة · الفواتير · الخدمات · طلبات الخدمة · تذاكر ا",
+        "at": "http://localhost:3008/ar",
+        "shot": "1001-nav-hides-pricing.png"
+      },
+      {
+        "name": "page-no-permission",
+        "ok": true,
+        "note": "دورك لا يسمح بفتح هذه الصفحة تحتاج إلى صلاحية «pricing:view». اطلبها من المدير العام إن كنت تحتاجها.",
+        "at": "http://localhost:3008/ar/pricing",
+        "shot": "1002-page-no-permission.png"
+      }
+    ],
+    "console": 0,
+    "consoleSample": []
+  }
+]

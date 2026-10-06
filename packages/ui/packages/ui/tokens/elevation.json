@@ -1,0 +1,13 @@
+{
+  "$description": "Elevation and scrim per theme. Light shadows are tinted with plum-950; dark ones add a hairline, because a shadow alone disappears on night surfaces.",
+  "light": {
+    "shadow-raised": { "$type": "shadow", "$value": "0 1px 2px rgb(25 11 37 / 0.06), 0 2px 8px -2px rgb(25 11 37 / 0.08)" },
+    "shadow-overlay": { "$type": "shadow", "$value": "0 1px 2px rgb(25 11 37 / 0.08), 0 16px 40px -12px rgb(25 11 37 / 0.28)" },
+    "scrim": { "$type": "color", "$value": "rgb(25 11 37 / 0.48)" }
+  },
+  "dark": {
+    "shadow-raised": { "$type": "shadow", "$value": "0 0 0 1px rgb(255 255 255 / 0.05), 0 2px 8px -2px rgb(0 0 0 / 0.5)" },
+    "shadow-overlay": { "$type": "shadow", "$value": "0 0 0 1px rgb(255 255 255 / 0.08), 0 20px 48px -12px rgb(0 0 0 / 0.7)" },
+    "scrim": { "$type": "color", "$value": "rgb(6 3 10 / 0.66)" }
+  }
+}

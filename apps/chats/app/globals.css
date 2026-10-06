@@ -1,0 +1,749 @@
+@import "tailwindcss";
+@import "@orgtik/ui/tailwind.css";
+
+/* ============================================================================
+   CHATS (HQ) - THE BRIDGE ONTO @orgtik/ui (Chats wave, FS-CHT-2, D-020)
+
+   Feature code reads HQ's own names (--color-surface, --color-ink, --color-accent …). Those names
+   stay, and their values now come from the OrgTik tokens (--ot-*), so one block re-skins the app and
+   follows the light and dark themes. What only HQ has - the office floor, its furniture, daylight,
+   presence and the data ramp - keeps HQ names and gets a value per theme here.
+
+   The accent is per person (D-046): with no preset it is the OrgTik brand ramp; a preset re-points
+   the seven brand steps and everything accent-coloured follows, in both themes.
+   ========================================================================== */
+
+@theme {
+  /* ---- Brand ramp: OrgTik plum by default; presets override these seven steps. ---- */
+  --color-brand-50: var(--ot-color-plum-50);
+  --color-brand-100: var(--ot-color-plum-100);
+  --color-brand-300: var(--ot-color-plum-300);
+  --color-brand-500: var(--ot-color-plum-500);
+  --color-brand-600: var(--ot-color-plum-600);
+  --color-brand-700: var(--ot-color-plum-700);
+  --color-brand-900: var(--ot-color-plum-900);
+
+  /* ---- The neutral ramp feature code still reads directly (paper-*), on the brand's mauve. ---- */
+  --color-paper-0: var(--ot-bg-raised);
+  --color-paper-50: var(--ot-bg-canvas);
+  --color-paper-100: var(--ot-bg-sunken);
+  --color-paper-200: var(--ot-color-mauve-100);
+  --color-paper-300: var(--ot-color-mauve-200);
+  --color-paper-400: var(--ot-color-mauve-300);
+  --color-paper-500: var(--ot-color-mauve-400);
+  --color-paper-600: var(--ot-color-mauve-500);
+  --color-paper-700: var(--ot-color-mauve-600);
+  --color-paper-800: var(--ot-color-mauve-700);
+  --color-paper-900: var(--ot-color-mauve-900);
+  --color-paper-950: var(--ot-color-plum-950);
+
+  /* ---- Presence: six states, each also carries its icon and label, so hue never works alone.
+     Focus moved off the brand violet to magenta (Gate A): 63° from the brand, 36° from the nearest
+     preset (orchid), and clear of available teal, busy amber and meeting blue. ---- */
+  --color-presence-available: #0c9083;
+  --color-presence-busy: #be7208;
+  --color-presence-focus: #be185d;
+  --color-presence-meeting: #2260e8;
+  --color-presence-away: var(--ot-color-mauve-500);
+  --color-presence-offline: var(--ot-color-mauve-600);
+
+  --color-presence-available-soft: color-mix(in oklab, var(--color-presence-available) 16%, var(--ot-bg-raised));
+  --color-presence-busy-soft: color-mix(in oklab, var(--color-presence-busy) 16%, var(--ot-bg-raised));
+  --color-presence-focus-soft: color-mix(in oklab, var(--color-presence-focus) 14%, var(--ot-bg-raised));
+  --color-presence-meeting-soft: color-mix(in oklab, var(--color-presence-meeting) 14%, var(--ot-bg-raised));
+  --color-presence-away-soft: color-mix(in oklab, var(--color-presence-away) 14%, var(--ot-bg-raised));
+  --color-presence-offline-soft: color-mix(in oklab, var(--color-presence-offline) 12%, var(--ot-bg-raised));
+
+  /* ---- Data: four steps of the accent ramp, light to dark (dark theme: dark to light). ---- */
+  --color-scale-1: var(--color-brand-300);
+  --color-scale-2: var(--color-brand-500);
+  --color-scale-3: var(--color-brand-700);
+  --color-scale-4: var(--color-brand-900);
+  --color-scale-empty: var(--ot-bg-sunken);
+  --color-scale-wash: color-mix(in oklab, var(--color-brand-500) 8%, var(--ot-bg-raised));
+  --color-bar: var(--color-brand-500);
+  --color-bar-zero: var(--ot-line);
+
+  /* ---- Functional ---- */
+  --color-danger-600: var(--ot-danger-fg);
+  --color-danger-soft: var(--ot-danger-subtle);
+  --color-success-600: var(--ot-success-fg);
+  --color-success-soft: var(--ot-success-subtle);
+
+  /* ---- Surfaces ---- */
+  --color-ground: var(--ot-bg-canvas);
+  --color-surface: var(--ot-bg-raised);
+  --color-surface-sunken: var(--ot-bg-sunken);
+  --color-rail: var(--ot-bg-sunken);
+  --color-hairline: var(--ot-line);
+  --color-hairline-strong: var(--ot-line-strong);
+
+  /* ---- Floor: rooms separate from the floor by value; the zones are tints of the same ramp. ---- */
+  --color-floor: var(--color-paper-200);
+  --color-floor-room: var(--color-paper-0);
+  --color-floor-room-stroke: var(--color-paper-300);
+  --color-floor-desk: color-mix(in oklab, var(--color-paper-0) 70%, var(--color-paper-100));
+  --color-floor-lounge: color-mix(in oklab, var(--color-paper-100) 85%, var(--mat-oak));
+  --color-floor-focus-zone: color-mix(in oklab, var(--color-paper-0) 85%, var(--color-paper-100));
+  --color-floor-prayer: color-mix(in oklab, var(--color-paper-0) 60%, var(--color-paper-100));
+  --color-floor-outdoor: color-mix(in oklab, var(--color-paper-100) 85%, var(--mat-leaf));
+  --color-floor-label: var(--color-paper-700);
+
+  /* ---- Furniture: lit top, body, shaded side. Real materials, so they keep their own hues; the
+     dark theme dims them toward the night ramp (below). ---- */
+  --mat-oak-top: #efe4d2;
+  --mat-oak: #e2d3bb;
+  --mat-oak-side: #c9b896;
+  --mat-soft-top: #e6ded0;
+  --mat-soft: #d8cdbb;
+  --mat-soft-side: #beb19b;
+  --mat-metal-top: #dcd6cc;
+  --mat-metal: #cbc3b6;
+  --mat-metal-side: #ada396;
+  --mat-glass-top: #e8f0f2;
+  --mat-glass: #dae6ea;
+  --mat-glass-side: #bfcfd4;
+  --mat-leaf-top: #9fb086;
+  --mat-leaf: #8b9c72;
+  --mat-leaf-side: #71835a;
+  --mat-pot-top: #d8c6b2;
+  --mat-pot: #c9b49c;
+  --mat-pot-side: #ac9679;
+
+  /* ---- Architecture ---- */
+  --color-wall: color-mix(in oklab, var(--color-paper-300) 70%, var(--color-paper-400));
+  --color-wall-inner: var(--color-paper-100);
+  --mat-line-wood: rgb(150 122 84 / 0.1);
+  --mat-line-tile: rgb(110 97 120 / 0.11);
+  --mat-line-carpet: rgb(110 97 120 / 0.07);
+  --mat-line-rug: rgb(172 150 121 / 0.1);
+
+  /* ---- Daylight: tints laid over the floor, never surfaces. ---- */
+  --light-morning: rgb(255 214 150 / 0.22);
+  --light-noon: rgb(255 255 255 / 0.85);
+  --light-evening: rgb(255 176 120 / 0.2);
+  --light-night: rgb(120 132 160 / 0.16);
+  /* Daylight through a window, falling on the wall and floor next to it. */
+  --light-window: rgb(255 255 255 / 0.55);
+
+  /* ---- Ink ---- */
+  --color-ink: var(--ot-fg);
+  --color-ink-muted: var(--ot-fg-muted);
+  --color-ink-subtle: var(--ot-fg-subtle);
+  --color-ink-inverse: var(--ot-action-primary-fg);
+  --color-ink-brand: var(--color-brand-600);
+
+  /* ---- Interactive: the accent follows the person's preset. ---- */
+  --color-accent: var(--color-brand-600);
+  --color-accent-hover: var(--color-brand-700);
+  --color-accent-soft: var(--color-brand-50);
+  --color-focus-ring: var(--color-accent);
+
+  /* ---- Radius: the brand's roles. Furniture keeps its own small scale. ---- */
+  --radius-control: var(--ot-radius-field);
+  --radius-room: var(--ot-radius-card);
+  --radius-chip: var(--ot-radius-pill);
+  --radius-object-xs: 2px;
+  --radius-object-sm: 3px;
+  --radius-object: 5px;
+  --radius-object-lg: 7px;
+
+  /* ---- Elevation: layered, tinted to the theme's ink (--shadow-ink), never pure black in light. ---- */
+  --shadow-raise:
+    0 1px 1px rgb(var(--shadow-ink) / 0.04),
+    0 1px 3px rgb(var(--shadow-ink) / 0.05);
+  --shadow-panel:
+    0 1px 2px rgb(var(--shadow-ink) / 0.04),
+    0 4px 10px -2px rgb(var(--shadow-ink) / 0.06),
+    0 12px 26px -8px rgb(var(--shadow-ink) / 0.08);
+  --shadow-room:
+    0 1px 2px rgb(var(--shadow-ink) / 0.04),
+    0 6px 14px -4px rgb(var(--shadow-ink) / 0.07),
+    0 18px 36px -14px rgb(var(--shadow-ink) / 0.09);
+  --shadow-float:
+    0 2px 4px rgb(var(--shadow-ink) / 0.05),
+    0 12px 22px -6px rgb(var(--shadow-ink) / 0.11),
+    0 28px 56px -18px rgb(var(--shadow-ink) / 0.16);
+  --shadow-lit: inset 0 1px 0 rgb(255 255 255 / var(--shadow-lit-alpha));
+  --shadow-contact: 0 2px 3px -1px rgb(var(--shadow-ink) / 0.16);
+
+  /* ---- Motion: the brand's easings and HQ's three timings. ---- */
+  --ease-out-soft: var(--ot-ease-out-strong);
+  --ease-out-strong: var(--ot-ease-out);
+  --duration-tile: 200ms;
+  --duration-move: 350ms;
+  --duration-state: 140ms;
+
+  /* ---- Type: the brand's faces (Arabic companion first, so Arabic text gets its font). ---- */
+  --font-sans: var(--ot-font-body);
+
+  /* ---- Accent swatches: each preset's own colour, for the picker. ---- */
+  --color-swatch-brand: var(--ot-color-plum-600);
+  --color-swatch-rose: #a62e5c;
+  --color-swatch-orchid: #8e3a93;
+  --color-swatch-olive: #5d6b00;
+  --color-swatch-midnight: #596377;
+  --color-swatch-graphite: #68615c;
+}
+
+:root {
+  --shadow-ink: 25 11 37;
+  --shadow-lit-alpha: 0.75;
+}
+
+/* ============================================================================
+   DARK THEME
+   The OrgTik tokens switch on [data-theme="dark"]; this block switches what only HQ has.
+   ========================================================================== */
+html[data-theme="dark"] {
+  --shadow-ink: 0 0 0;
+  --shadow-lit-alpha: 0.05;
+
+  --color-paper-200: var(--ot-color-night-800);
+  --color-paper-300: var(--ot-color-night-700);
+  --color-paper-400: var(--ot-color-night-600);
+  --color-paper-500: var(--ot-color-mauve-700);
+  --color-paper-600: var(--ot-color-mauve-600);
+  --color-paper-700: var(--ot-color-mauve-400);
+  --color-paper-800: var(--ot-color-mauve-300);
+  --color-paper-900: var(--ot-color-mauve-100);
+  --color-paper-950: var(--ot-color-plum-50);
+
+  --color-presence-available: #2dd4bf;
+  --color-presence-busy: var(--ot-color-amber-300);
+  --color-presence-focus: #f472b6;
+  --color-presence-meeting: #7aa7ff;
+  --color-presence-away: var(--ot-color-mauve-400);
+  --color-presence-offline: var(--ot-color-mauve-600);
+
+  --color-scale-1: var(--color-brand-900);
+  --color-scale-2: var(--color-brand-700);
+  --color-scale-3: var(--color-brand-500);
+  --color-scale-4: var(--color-brand-300);
+  --color-bar: var(--color-brand-300);
+
+  --color-ink-brand: var(--color-brand-300);
+  --color-accent: var(--color-brand-300);
+  --color-accent-hover: var(--color-brand-100);
+  --color-accent-soft: color-mix(in oklab, var(--color-brand-300) 16%, var(--ot-bg-raised));
+
+  --mat-oak-top: color-mix(in oklab, #efe4d2 42%, #120a1b);
+  --mat-oak: color-mix(in oklab, #e2d3bb 36%, #120a1b);
+  --mat-oak-side: color-mix(in oklab, #c9b896 30%, #120a1b);
+  --mat-soft-top: color-mix(in oklab, #e6ded0 40%, #120a1b);
+  --mat-soft: color-mix(in oklab, #d8cdbb 34%, #120a1b);
+  --mat-soft-side: color-mix(in oklab, #beb19b 28%, #120a1b);
+  --mat-metal-top: color-mix(in oklab, #dcd6cc 40%, #120a1b);
+  --mat-metal: color-mix(in oklab, #cbc3b6 34%, #120a1b);
+  --mat-metal-side: color-mix(in oklab, #ada396 28%, #120a1b);
+  --mat-glass-top: color-mix(in oklab, #e8f0f2 34%, #120a1b);
+  --mat-glass: color-mix(in oklab, #dae6ea 28%, #120a1b);
+  --mat-glass-side: color-mix(in oklab, #bfcfd4 22%, #120a1b);
+  --mat-leaf-top: color-mix(in oklab, #9fb086 62%, #120a1b);
+  --mat-leaf: color-mix(in oklab, #8b9c72 56%, #120a1b);
+  --mat-leaf-side: color-mix(in oklab, #71835a 50%, #120a1b);
+  --mat-pot-top: color-mix(in oklab, #d8c6b2 40%, #120a1b);
+  --mat-pot: color-mix(in oklab, #c9b49c 34%, #120a1b);
+  --mat-pot-side: color-mix(in oklab, #ac9679 28%, #120a1b);
+
+  --mat-line-wood: rgb(255 255 255 / 0.04);
+  --mat-line-tile: rgb(255 255 255 / 0.05);
+  --mat-line-carpet: rgb(255 255 255 / 0.03);
+  --mat-line-rug: rgb(255 255 255 / 0.04);
+
+  --light-morning: rgb(255 214 150 / 0.06);
+  --light-noon: rgb(255 255 255 / 0.03);
+  --light-evening: rgb(255 176 120 / 0.06);
+  --light-night: rgb(120 132 160 / 0.1);
+  --light-window: rgb(255 240 214 / 0.06);
+}
+
+/* ============================================================================
+   BASE
+   ========================================================================== */
+
+:root {
+  /* Browser surfaces belong to the design system too. color-scheme comes from the theme. */
+  accent-color: var(--color-accent);
+  scrollbar-color: var(--color-paper-500) transparent;
+  scrollbar-width: thin;
+}
+
+/* ============================================================================
+   ACCENT PRESETS (D-046)
+   The accent is the person's choice, applied as data-accent on the root before first paint (see
+   lib/appearance.ts). Each preset re-points the seven brand steps and nothing else; the data ramp,
+   rings, primary buttons and the dark theme's lighter accent all derive from them. Rose is the old
+   HQ accent, kept so nobody who chose nothing loses the look they knew by asking for it.
+   ========================================================================== */
+
+html[data-accent="rose"] {
+  --color-brand-50: #fdf3f7;
+  --color-brand-100: #fae3ec;
+  --color-brand-300: #e894b5;
+  --color-brand-500: #c04170;
+  --color-brand-600: #a62e5c;
+  --color-brand-700: #8e2450;
+  --color-brand-900: #4e1430;
+}
+
+html[data-accent="orchid"] {
+  --color-brand-50: #faf4fb;
+  --color-brand-100: #f4e4f5;
+  --color-brand-300: #d599d7;
+  --color-brand-500: #a54dab;
+  --color-brand-600: #8e3a93;
+  --color-brand-700: #792f7e;
+  --color-brand-900: #431946;
+}
+
+html[data-accent="olive"] {
+  --color-brand-50: #f5f7ee;
+  --color-brand-100: #e8edd9;
+  --color-brand-300: #abbb69;
+  --color-brand-500: #708002;
+  --color-brand-600: #5d6b00;
+  --color-brand-700: #4f5a00;
+  --color-brand-900: #2a3200;
+}
+
+html[data-accent="midnight"] {
+  --color-brand-50: #f5f6f8;
+  --color-brand-100: #e8eaee;
+  --color-brand-300: #aab2c1;
+  --color-brand-500: #6c768d;
+  --color-brand-600: #596377;
+  --color-brand-700: #4b5365;
+  --color-brand-900: #282d38;
+}
+
+html[data-accent="graphite"] {
+  --color-brand-50: #f6f6f5;
+  --color-brand-100: #ebeae9;
+  --color-brand-300: #b5b0ac;
+  --color-brand-500: #7c756f;
+  --color-brand-600: #68615c;
+  --color-brand-700: #58524d;
+  --color-brand-900: #302d2a;
+}
+
+/* Element defaults sit in the base layer, so the library's component classes (a link styled as
+   a button, a pill's radius on focus) win over them. */
+@layer base {
+  * {
+    min-width: 0;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-ground);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-brand-100);
+    color: var(--color-brand-900);
+  }
+
+  textarea,
+  input {
+    caret-color: var(--color-accent);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-paper-400);
+    border: 3px solid transparent;
+    background-clip: content-box;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-paper-500);
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+
+  /* One focus ring for the whole product. Never removed, only styled. */
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-control);
+  }
+
+  /* Numerals line up in every dense surface: counts, times, durations. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Display and title type is set tighter, which is most of what separates a
+     considered heading from a merely large one. */
+  .hq-display {
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+  .hq-title {
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+}
+
+/* ============================================================================
+   MOTION
+   ========================================================================== */
+
+@keyframes hq-knock-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-brand-600) 36%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 9px color-mix(in srgb, var(--color-brand-600) 0%, transparent);
+  }
+}
+
+/* Exactly three pulses, then it stops. A knock is a request, not an alarm. */
+.hq-knock-pulse {
+  animation: hq-knock-pulse 900ms var(--ease-out-soft) 3;
+}
+
+@keyframes hq-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* One authored entrance, on things that genuinely appear: popovers, toasts,
+   the focus summary. Not on every element on the page. */
+.hq-rise {
+  animation: hq-rise 240ms var(--ease-out-strong) both;
+}
+
+/* A person at rest is not a statue. A 2px breathing bob on a slow cycle,
+   phase-shifted per person so the floor never bobs in unison. Everything here
+   collapses under prefers-reduced-motion with the rest of the product. */
+@keyframes hq-idle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+.hq-idle {
+  animation: hq-idle 3.6s ease-in-out infinite;
+}
+
+/* Speaking: the ring breathes with the voice rather than sitting there. */
+@keyframes hq-speak {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 2px var(--color-presence-available),
+      0 0 0 5px color-mix(in srgb, var(--color-presence-available) 22%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2.5px var(--color-presence-available),
+      0 0 0 9px color-mix(in srgb, var(--color-presence-available) 10%, transparent);
+  }
+}
+.hq-speak {
+  animation: hq-speak 1.1s ease-in-out infinite;
+}
+
+/* A step while walking: a small lean, over exactly the move duration. */
+@keyframes hq-walk {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  30% {
+    transform: rotate(-3deg) scale(1.03);
+  }
+  70% {
+    transform: rotate(3deg) scale(1.03);
+  }
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+}
+.hq-walk {
+  animation: hq-walk var(--duration-move) var(--ease-out-soft) 1;
+}
+
+@keyframes hq-shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.hq-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-paper-200) 25%,
+    var(--color-paper-100) 50%,
+    var(--color-paper-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: hq-shimmer 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hq-skeleton {
+    animation: none;
+    background: var(--color-paper-200);
+  }
+  .hq-rise,
+  .hq-idle,
+  .hq-speak,
+  .hq-walk {
+    animation: none;
+  }
+}
+
+/* ============================================================================
+   UTILITIES
+   ========================================================================== */
+
+.hq-hairline {
+  border-color: var(--color-hairline);
+}
+
+/* A raised interface surface: tonal step, layered shadow and the 1px top
+   light, applied as a set. Elevation reads consistently when these three
+   travel together instead of being three unrelated decisions. */
+.hq-raised {
+  background: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  box-shadow: var(--shadow-panel), var(--shadow-lit);
+}
+
+/* Anything that opens from the top bar must fit under it on a short window
+   and scroll inside itself rather than run off the bottom of the screen. */
+.hq-dropdown {
+  max-height: calc(100dvh - 68px);
+  overflow-y: auto;
+}
+
+/* Floating surfaces sit above content and take a little of it with them. */
+.hq-floating {
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--color-hairline-strong);
+  box-shadow: var(--shadow-float), var(--shadow-lit);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .hq-floating {
+    background: var(--color-surface);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================================================
+   INTERACTION STATES
+   Inline style objects cannot express :hover or :active, so the tactile layer
+   for shared controls lives here. Every interactive surface gets feedback.
+   ========================================================================== */
+
+.hq-btn {
+  transition:
+    background var(--duration-state) var(--ease-out-soft),
+    border-color var(--duration-state) var(--ease-out-soft),
+    box-shadow var(--duration-state) var(--ease-out-soft),
+    transform var(--duration-state) var(--ease-out-soft);
+}
+.hq-btn:hover:not(:disabled) {
+  filter: brightness(0.975);
+}
+.hq-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.985);
+}
+.hq-btn:disabled {
+  opacity: 0.45;
+}
+
+/* Row-shaped controls: channels, presence rows, meeting rows, search results. */
+.hq-row {
+  transition:
+    background var(--duration-state) var(--ease-out-soft),
+    color var(--duration-state) var(--ease-out-soft);
+}
+.hq-row:hover {
+  background: var(--color-surface-sunken);
+}
+.hq-row[aria-current="true"],
+.hq-row[data-active="true"] {
+  background: var(--color-accent-soft);
+  color: var(--color-ink-brand);
+}
+
+/* Message hover actions stay hidden until the row is hovered or focused
+   within, so a dense transcript is not a wall of buttons. */
+.hq-msg .hq-msg-actions {
+  opacity: 0;
+  transform: translateY(2px);
+  /* An invisible toolbar still swallows clicks: without this, the hidden
+     actions of one message intercept clicks meant for the message below it,
+     and any menu opened from a message above. */
+  pointer-events: none;
+  transition:
+    opacity var(--duration-state) var(--ease-out-soft),
+    transform var(--duration-state) var(--ease-out-soft);
+}
+.hq-msg:hover .hq-msg-actions,
+.hq-msg:focus-within .hq-msg-actions {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* The actions bar uses a transform, which creates a stacking context and traps
+   any menu opened from it beneath the messages that follow. Lifting the whole
+   row while it is active is what lets that menu escape. */
+.hq-msg:hover,
+.hq-msg:focus-within {
+  z-index: 30;
+}
+@media (hover: none) {
+  .hq-msg .hq-msg-actions {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+}
+
+/* Floor pieces. Rooms lift on hover; people lift more, so the person always
+   wins the depth contest against the furniture. */
+.hq-room {
+  transition:
+    box-shadow var(--duration-state) var(--ease-out-soft),
+    border-color var(--duration-state) var(--ease-out-soft),
+    transform var(--duration-state) var(--ease-out-soft);
+}
+.hq-room:hover {
+  border-color: var(--color-paper-400);
+  box-shadow: var(--shadow-float), var(--shadow-lit);
+  transform: translateY(-1px);
+}
+
+.hq-tile {
+  transition:
+    left var(--duration-move) var(--ease-out-soft),
+    top var(--duration-move) var(--ease-out-soft),
+    transform var(--duration-state) var(--ease-out-strong);
+  will-change: left, top;
+}
+.hq-tile:hover {
+  transform: translate(-50%, -50%) scale(1.07);
+  z-index: 20;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hq-tile {
+    transition: opacity var(--duration-state) linear;
+    will-change: auto;
+  }
+  .hq-btn:active:not(:disabled),
+  .hq-room:hover {
+    transform: none;
+  }
+}
+
+/* A message a link landed on: lit for a moment, then it fades into the
+   conversation like any other. */
+.hq-msg.hq-target {
+  background: var(--color-accent-soft);
+  transition: background 1.6s var(--ease-out-soft) 0.8s;
+}
+
+/* The route-change bar: two pixels of accent sweeping the top edge from the
+   click until the next page is on screen. */
+.hq-navbar {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  background-size: 40% 100%;
+  background-repeat: no-repeat;
+  animation: hq-navbar 1s linear infinite;
+}
+@keyframes hq-navbar {
+  from {
+    background-position: -40% 0;
+  }
+  to {
+    background-position: 140% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hq-navbar {
+    animation: none;
+    background: var(--color-accent);
+  }
+}

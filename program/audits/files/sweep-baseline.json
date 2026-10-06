@@ -1,0 +1,496 @@
+{
+  "app": "files",
+  "as": "mona.adel@orgtik.test",
+  "combo": "en-light-1440",
+  "frozen": false,
+  "at": "2026-09-30T05:08:07.595Z",
+  "signIn": {
+    "ok": true,
+    "landed": "http://localhost:3002/en",
+    "ms": 2602
+  },
+  "results": [
+    {
+      "app": "files",
+      "route": "/activity-logs",
+      "session": "signed-in",
+      "url": "/en/activity-logs",
+      "status": 200,
+      "final": "/en/activity-logs",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3037,
+      "console_errors": 4,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 10,
+      "axe_serious": 26,
+      "axe_rules": "aria-allowed-attr button-name color-contrast label link-name list select-name",
+      "h1": 1,
+      "unnamed_controls": 26,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "files/shots/activity-logs__en-light-1440.png",
+      "console": [
+        "IntlError: MISSING_MESSAGE: Could not resolve `Common.from` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3002/_next/static/chunks/node_modules_04tjsfj._.js:22361:23)\n    at translateBaseFn (http://localhost:3002/_next/static/chunks/node_modules_04tjsfj._.js:223",
+        "IntlError: MISSING_MESSAGE: Could not resolve `Common.to` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3002/_next/static/chunks/node_modules_04tjsfj._.js:22361:23)\n    at translateBaseFn (http://localhost:3002/_next/static/chunks/node_modules_04tjsfj._.js:22391",
+        "IntlError: MISSING_MESSAGE: Could not resolve `Common.from` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3002/_next/static/chunks/node_modules_04tjsfj._.js:22361:23)\n    at translateBaseFn (http://localhost:3002/_next/static/chunks/node_modules_04tjsfj._.js:223",
+        "IntlError: MISSING_MESSAGE: Could not resolve `Common.to` in messages for locale `en`.\n    at getFallbackFromErrorAndNotify (http://localhost:3002/_next/static/chunks/node_modules_04tjsfj._.js:22361:23)\n    at translateBaseFn (http://localhost:3002/_next/static/chunks/node_modules_04tjsfj._.js:22391"
+      ],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 6,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 15,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "label",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Form elements must have labels"
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "Links must have discernible text"
+        },
+        {
+          "id": "list",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "files",
+      "route": "/archived-files",
+      "session": "signed-in",
+      "url": "/en/archived-files",
+      "status": 200,
+      "final": "/en/archived-files",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4542,
+      "console_errors": 1,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 15,
+      "axe_serious": 13,
+      "axe_rules": "aria-allowed-attr button-name color-contrast",
+      "h1": 2,
+      "unnamed_controls": 20,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "files/shots/archived-files__en-light-1440.png",
+      "console": [
+        "called `injectEndpoints` to override already-existing endpointName restoreFile without specifying `overrideExisting: true`"
+      ],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 3,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 12,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 13,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "files",
+      "route": "/my-files",
+      "session": "signed-in",
+      "url": "/en/my-files",
+      "status": 200,
+      "final": "/en/my-files",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3565,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 45,
+      "axe_serious": 22,
+      "axe_rules": "aria-allowed-attr button-name color-contrast list select-name",
+      "h1": 1,
+      "unnamed_controls": 39,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "files/shots/my-files__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 12,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 31,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 21,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "list",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "files",
+      "route": "/",
+      "session": "signed-in",
+      "url": "/en",
+      "status": 200,
+      "final": "/en",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2067,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 52,
+      "axe_serious": 31,
+      "axe_rules": "aria-allowed-attr button-name color-contrast link-name list select-name",
+      "h1": 2,
+      "unnamed_controls": 44,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "files/shots/root__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 20,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 31,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 25,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "link-name",
+          "impact": "serious",
+          "nodes": 5,
+          "help": "Links must have discernible text"
+        },
+        {
+          "id": "list",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "<ul> and <ol> must only directly contain <li>, <script> or <template> elements"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "files",
+      "route": "/archived-files/*path",
+      "session": "signed-in",
+      "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+      "status": 200,
+      "final": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3973,
+      "console_errors": 2,
+      "page_errors": 1,
+      "api_errors": 1,
+      "api_error_sample": "404 GET :4002/api/v1/folders/fa53fb81-2b48-5d82-9ba6-aafe689904bf?",
+      "axe_critical": 10,
+      "axe_serious": 7,
+      "axe_rules": "aria-allowed-attr button-name color-contrast",
+      "h1": 0,
+      "unnamed_controls": 16,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "files/shots/archived-files_path__en-light-1440.png",
+      "console": [
+        "called `injectEndpoints` to override already-existing endpointName restoreFile without specifying `overrideExisting: true`",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [
+        {
+          "status": 404,
+          "method": "GET",
+          "url": ":4002/api/v1/folders/fa53fb81-2b48-5d82-9ba6-aafe689904bf?"
+        }
+      ],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 8,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 7,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "files",
+      "route": "/my-files/*path",
+      "session": "signed-in",
+      "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+      "status": 200,
+      "final": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4013,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 12,
+      "axe_serious": 13,
+      "axe_rules": "aria-allowed-attr button-name color-contrast select-name",
+      "h1": 1,
+      "unnamed_controls": 17,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "files/shots/my-files_path__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 2,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 9,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 13,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "files",
+      "route": "/auth/not-allowed",
+      "session": "signed-out",
+      "url": "/en/auth/not-allowed",
+      "status": 200,
+      "final": "/en/auth/not-allowed",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2653,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_rules": "",
+      "h1": 1,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "files/shots/auth_not-allowed__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": []
+    },
+    {
+      "app": "files",
+      "route": "/auth",
+      "session": "signed-out",
+      "url": "/en/auth",
+      "status": 200,
+      "final": "/",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2243,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 2,
+      "axe_rules": "document-title html-has-lang",
+      "h1": 0,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "files/shots/auth__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "document-title",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Documents must have <title> element to aid in navigation"
+        },
+        {
+          "id": "html-has-lang",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "<html> element must have a lang attribute"
+        }
+      ]
+    },
+    {
+      "app": "files",
+      "route": "/share/:shareId",
+      "session": "signed-out",
+      "url": "/en/share/5f1c7a52-9d0e-4b6a-8e1f-2a9c3b7d4e01?secret=[redacted]",
+      "status": 200,
+      "final": "/en/share/5f1c7a52-9d0e-4b6a-8e1f-2a9c3b7d4e01",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4155,
+      "console_errors": 1,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 3,
+      "axe_rules": "color-contrast scrollable-region-focusable",
+      "h1": 1,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "files/shots/share_shareId__en-light-1440.png",
+      "console": [
+        "Error encountered handling the endpoint createShareSession.\n                  `baseQuery` returned an object containing neither a valid `error` and `result`. At least one of them should not be `undefined`\n                  It needs to return an object with either the shape `{ data: <value> }` or `{ "
+      ],
+      "pageErrors": [],
+      "api": [],
+      "axe": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 2,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "scrollable-region-focusable",
+          "impact": "serious",
+          "nodes": 1,
+          "help": "Scrollable region must have keyboard access"
+        }
+      ]
+    }
+  ]
+}

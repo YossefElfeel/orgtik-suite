@@ -1,0 +1,2388 @@
+{
+  "app": "chats",
+  "as": "mona.adel@orgtik.test",
+  "from": "baseline",
+  "at": "2026-09-30T06:47:59.236Z",
+  "signIn": {
+    "ok": true,
+    "restoredFromState": true
+  },
+  "pages": [
+    {
+      "route": "/hq/activate",
+      "url": "/hq/activate",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/activate",
+          "url": "/hq/activate",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/activate",
+          "url": "/hq/activate",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/activate",
+          "url": "/hq/activate",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/activate",
+          "url": "/hq/activate",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/activate",
+          "url": "/hq/activate",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Activate on Business",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/activate",
+          "url": "/hq/activate",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Manage in Business OS",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/chat/catch-up",
+      "url": "/hq/chat/catch-up",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/chat/catch-up",
+          "url": "/hq/chat/catch-up",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/catch-up",
+          "url": "/hq/chat/catch-up",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/catch-up",
+          "url": "/hq/chat/catch-up",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/catch-up",
+          "url": "/hq/chat/catch-up",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/catch-up",
+          "url": "/hq/chat/catch-up",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New channel",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/catch-up",
+          "url": "/hq/chat/catch-up",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New message",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/catch-up",
+          "url": "/hq/chat/catch-up",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Mark all read",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/chat",
+      "url": "/hq/chat",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/chat",
+          "url": "/hq/chat",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat",
+          "url": "/hq/chat",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat",
+          "url": "/hq/chat",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat",
+          "url": "/hq/chat",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat",
+          "url": "/hq/chat",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New channel",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat",
+          "url": "/hq/chat",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New message",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat",
+          "url": "/hq/chat",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Mark all read",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/chat/search",
+      "url": "/hq/chat/search",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 10,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/chat/search",
+          "url": "/hq/chat/search",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/search",
+          "url": "/hq/chat/search",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/search",
+          "url": "/hq/chat/search",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/search",
+          "url": "/hq/chat/search",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/search",
+          "url": "/hq/chat/search",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New channel",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/search",
+          "url": "/hq/chat/search",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New message",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/search",
+          "url": "/hq/chat/search",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Back",
+          "outcome": "left the app",
+          "detail": "went back in browser history; opened from a link, this leaves the app",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/search",
+          "url": "/hq/chat/search",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Messages 0",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/search",
+          "url": "/hq/chat/search",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Files 0",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/search",
+          "url": "/hq/chat/search",
+          "session": "signed-in",
+          "role": "button",
+          "control": "People 0",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/insights",
+      "url": "/hq/insights",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 10,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/insights",
+          "url": "/hq/insights",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights",
+          "url": "/hq/insights",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights",
+          "url": "/hq/insights",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights",
+          "url": "/hq/insights",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights",
+          "url": "/hq/insights",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Last 30 days 1 Sept – 30 Sept 2026",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights",
+          "url": "/hq/insights",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Everyone",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights",
+          "url": "/hq/insights",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Table view",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights",
+          "url": "/hq/insights",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Export CSV",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights",
+          "url": "/hq/insights",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Table",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights",
+          "url": "/hq/insights",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Export my time",
+          "outcome": "opened",
+          "detail": "download",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/insights/transparency",
+      "url": "/hq/insights/transparency",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 4,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/insights/transparency",
+          "url": "/hq/insights/transparency",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights/transparency",
+          "url": "/hq/insights/transparency",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights/transparency",
+          "url": "/hq/insights/transparency",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/insights/transparency",
+          "url": "/hq/insights/transparency",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/me",
+      "url": "/hq/me",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 8,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/me",
+          "url": "/hq/me",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/me",
+          "url": "/hq/me",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/me",
+          "url": "/hq/me",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/me",
+          "url": "/hq/me",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/me",
+          "url": "/hq/me",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Busy Working on something. Prefers a message.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/me",
+          "url": "/hq/me",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Focus Knocks are held and delivered afterwards. Nothing is lost.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/me",
+          "url": "/hq/me",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Away Idle for more than ten minutes.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/me",
+          "url": "/hq/me",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Sign out",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/meetings",
+      "url": "/hq/meetings",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 8,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/meetings",
+          "url": "/hq/meetings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings",
+          "url": "/hq/meetings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings",
+          "url": "/hq/meetings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings",
+          "url": "/hq/meetings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings",
+          "url": "/hq/meetings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Past",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings",
+          "url": "/hq/meetings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Calendar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings",
+          "url": "/hq/meetings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Meet now",
+          "outcome": "navigated",
+          "detail": "/hq/meetings/mt-munqxw0k/call",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings",
+          "url": "/hq/meetings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Schedule",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/office",
+      "url": "/hq/office",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 38,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add a room",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Desks you 5/16",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Settings for Desks",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Library empty",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Settings for Library",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Room A empty",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Settings for Room A",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Room B 2/6",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Settings for Room B",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Prayer Room empty",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Settings for Prayer Room",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Quiet Room 1/3",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Settings for Quiet Room",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Kitchen 1/10",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Settings for Kitchen",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "This week",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "List",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Desks, Desk area, 5 of 16 people. Leave.",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Library, Focus room, 0 of 4 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Room A, Meeting room, 0 of 8 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Room B, Meeting room, 2 of 6 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Prayer Room, Prayer room, 0 of 6 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Quiet Room, Focus room, 1 of 3 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Kitchen, Lounge, 1 of 10 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Lena Brunner, Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Sara Lindqvist, Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Tomás Rebelo, Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Yousef El Fil, Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Marc Oberholzer, In a meeting",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Nadia Kovač, In a meeting",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Inés Caballero, Busy, Client review, back at 11",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Omar Haddad, Focus, Shipping the export job",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Priya Raghunathan, Away",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/office",
+          "url": "/hq/office",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Zoom in",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/settings/emails",
+      "url": "/hq/settings/emails",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/settings/emails",
+          "url": "/hq/settings/emails",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings/emails",
+          "url": "/hq/settings/emails",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings/emails",
+          "url": "/hq/settings/emails",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings/emails",
+          "url": "/hq/settings/emails",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings/emails",
+          "url": "/hq/settings/emails",
+          "session": "signed-in",
+          "role": "button",
+          "control": "DE",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings/emails",
+          "url": "/hq/settings/emails",
+          "session": "signed-in",
+          "role": "button",
+          "control": "FR",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/settings",
+      "url": "/hq/settings",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/settings",
+          "url": "/hq/settings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings",
+          "url": "/hq/settings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings",
+          "url": "/hq/settings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings",
+          "url": "/hq/settings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings",
+          "url": "/hq/settings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Connect",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings",
+          "url": "/hq/settings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Reconnect",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/settings",
+          "url": "/hq/settings",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Manage in Business OS",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/setup",
+      "url": "/hq/setup",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/setup",
+          "url": "/hq/setup",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/setup",
+          "url": "/hq/setup",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/setup",
+          "url": "/hq/setup",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/setup",
+          "url": "/hq/setup",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/setup",
+          "url": "/hq/setup",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Skip setup",
+          "outcome": "navigated",
+          "detail": "/hq/office",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/setup",
+          "url": "/hq/setup",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Next",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/whiteboard",
+      "url": "/hq/whiteboard",
+      "session": "signed-in",
+      "unnamedButtons": 1,
+      "found": 9,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/whiteboard",
+          "url": "/hq/whiteboard",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/whiteboard",
+          "url": "/hq/whiteboard",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/whiteboard",
+          "url": "/hq/whiteboard",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/whiteboard",
+          "url": "/hq/whiteboard",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/whiteboard",
+          "url": "/hq/whiteboard",
+          "session": "signed-in",
+          "role": "button",
+          "control": "More tools",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/whiteboard",
+          "url": "/hq/whiteboard",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Zoom out",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/whiteboard",
+          "url": "/hq/whiteboard",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Reset zoom",
+          "outcome": "active option",
+          "detail": "already selected, so pressing it again does nothing; not marked aria-pressed or aria-selected",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/whiteboard",
+          "url": "/hq/whiteboard",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Zoom in",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/whiteboard",
+          "url": "/hq/whiteboard",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Help",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/whiteboard",
+          "url": "/hq/whiteboard",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon a9d492)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > div:nth-of-type(2) > div:nth-of-type(1) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/hq/chat/:channelId",
+      "url": "/hq/chat/c-general",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 18,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New channel",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "New message",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Meet now",
+          "outcome": "navigated",
+          "detail": "/hq/meetings/mt-munr2r26/call",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Details",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add people",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "👍, 4 people",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add reaction",
+          "outcome": "skipped",
+          "detail": "only reachable on hover (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Reply in thread",
+          "outcome": "skipped",
+          "detail": "only reachable on hover (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Unpin",
+          "outcome": "skipped",
+          "detail": "only reachable on hover (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "More actions",
+          "outcome": "skipped",
+          "detail": "only reachable on hover (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Pin to channel",
+          "outcome": "skipped",
+          "detail": "only reachable on hover (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Attach from File Manager",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Mention someone",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/chat/:channelId",
+          "url": "/hq/chat/c-general",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Add emoji",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/meetings/:meetingId/call",
+      "url": "/hq/meetings/mt-1/call",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId/call",
+          "url": "/hq/meetings/mt-1/call",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId/call",
+          "url": "/hq/meetings/mt-1/call",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId/call",
+          "url": "/hq/meetings/mt-1/call",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId/call",
+          "url": "/hq/meetings/mt-1/call",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId/call",
+          "url": "/hq/meetings/mt-1/call",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Turn on camera",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId/call",
+          "url": "/hq/meetings/mt-1/call",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Join now",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/hq/meetings/:meetingId",
+      "url": "/hq/meetings/mt-1",
+      "session": "signed-in",
+      "unnamedButtons": 0,
+      "found": 6,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId",
+          "url": "/hq/meetings/mt-1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId",
+          "url": "/hq/meetings/mt-1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId",
+          "url": "/hq/meetings/mt-1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId",
+          "url": "/hq/meetings/mt-1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId",
+          "url": "/hq/meetings/mt-1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Open",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/hq/meetings/:meetingId",
+          "url": "/hq/meetings/mt-1",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Copy link",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/auth",
+      "url": "/en/auth",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 43,
+      "truncated": 3,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Admin",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Preview text expansion (currently en)",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Notifications",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Sales CRM",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Invoicing",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "HR",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "File Manager",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Marketing Hub",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Add a room",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Desks you 5/16",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Settings for Desks",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Library empty",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Settings for Library",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Room A empty",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Settings for Room A",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Room B 2/6",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Settings for Room B",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Prayer Room empty",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Settings for Prayer Room",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Quiet Room 1/3",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Settings for Quiet Room",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Kitchen 1/10",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Settings for Kitchen",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "This week",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "List",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Desks, Desk area, 5 of 16 people. Leave.",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Library, Focus room, 0 of 4 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Room A, Meeting room, 0 of 8 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Room B, Meeting room, 2 of 6 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Prayer Room, Prayer room, 0 of 6 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Quiet Room, Focus room, 1 of 3 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Kitchen, Lounge, 1 of 10 people. Enter.",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Lena Brunner, Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Sara Lindqvist, Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Tomás Rebelo, Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Yousef El Fil, Available",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Marc Oberholzer, In a meeting",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Nadia Kovač, In a meeting",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "chats",
+          "route": "/auth",
+          "url": "/en/auth",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Inés Caballero, Busy, Client review, back at 11",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/guest/:token",
+      "url": "/guest/mt-1",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 1,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "chats",
+          "route": "/guest/:token",
+          "url": "/guest/mt-1",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Turn on camera",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        }
+      ]
+    }
+  ],
+  "tally": {
+    "app": "chats",
+    "pages": 18,
+    "pressed": 190,
+    "dead end": 0,
+    "copied silently": 0,
+    "not clickable": 0,
+    "stuck": 0,
+    "not found": 0,
+    "sign-in wall": 0,
+    "left the app": 1,
+    "current page": 0,
+    "active option": 1,
+    "skipped": 8,
+    "broken link": 0,
+    "unnamed buttons": 1,
+    "over the limit": 3
+  }
+}

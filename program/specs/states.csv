@@ -1,0 +1,49 @@
+﻿entity,state_en,state_ar,meaning_en,meaning_ar,next_states,source
+Tool state (USR-00),Active,مفعّلة,Normal item.,عنصر عادي.,,05 · USR-00
+Tool state (USR-00),Trial,تجربة,Badge “Trial · 5d”.,علامة “تجربة · 5 أيام”.,,05 · USR-00
+Tool state (USR-00),Beta,تجريبي,Badge “Beta”; “Send feedback” inside the tool.,علامة “تجريبي”، وزرار “أرسل ملاحظاتك” جوه الأداة.,,05 · USR-00
+Tool state (USR-00),Read-only,قراءة فقط,Warning icon; tooltip with the reason (past due / over limit).,أيقونة تحذير وتلميح بالسبب (دفع متأخر / فوق الحد).,,05 · USR-00
+Tool state (USR-00),Not subscribed,غير مشترك,Lock + “Upgrade” (owner) or “Ask your admin” (others); opens the tool’s plan page.,قفل + “ترقية” (المالك) أو “كلّم المدير” (الباقي)؛ بيفتح صفحة باقات الأداة.,,05 · USR-00
+Tool state (USR-00),Coming Soon,قريباً,Lock + “Soon”; opens a card with “Notify me”.,قفل + “قريباً”؛ بيفتح كارت فيه “بلّغني”.,,05 · USR-00
+Tool state (USR-00),No access (member),بدون صلاحية (عضو),Hidden.,مخفية.,,05 · USR-00
+Banner (USR-00),Trial ending,التجربة قربت تخلص,Blue · owner · “Choose plan” (from 3 days before).,أزرق · المالك · “اختار باقة” (من قبلها بـ 3 أيام).,,05 · USR-00
+Banner (USR-00),Payment failed,فشل الدفع,Red · owner (admins see a softer note) · “Pay now”.,أحمر · المالك (المديرين بيشوفوا تنبيه أخف) · “ادفع دلوقتي”.,,05 · USR-00
+Banner (USR-00),Read-only,قراءة فقط,Red · everyone · owner gets “Pay now”.,أحمر · الكل · المالك بيشوف “ادفع دلوقتي”.,,05 · USR-00
+Banner (USR-00),Beta billing notice,تنبيه دفع التجريبي,Amber · owner · “View plans” + launch discount.,برتقالي · المالك · “شوف الباقات” + خصم الإطلاق.,,05 · USR-00
+Banner (USR-00),Price change notice,تنبيه تغيير السعر,Amber · owner · “Details”.,برتقالي · المالك · “التفاصيل”.,,05 · USR-00
+Banner (USR-00),Downgrade scheduled,تخفيض مجدول,Grey · owner · “Cancel downgrade”.,رمادي · المالك · “إلغاء التخفيض”.,,05 · USR-00
+Banner (USR-00),Suspended,موقوفة,"Red, blocking page · everyone · “Contact support”.",أحمر وصفحة كاملة · الكل · “كلّم الدعم”.,,05 · USR-00
+Banner (USR-00),Staff viewing,موظف بيشوف الحساب,Purple · staff only · “Exit”.,بنفسجي · الموظف بس · “خروج”.,,05 · USR-00
+Subscription line (per tool),Trialing,تجربة,"Pro trial, no card.",تجربة Pro من غير كارت.,"Active, Free, Ended",06 · State tables
+Subscription line (per tool),Active,نشط,Paid and usable. May carry a scheduled change.,مدفوع وشغال. ممكن يكون عليه تغيير مجدول.,"Past due, Cancelling",06 · State tables
+Subscription line (per tool),Past due,متأخر,Renewal failed; grace period (7 days).,التجديد فشل؛ فترة مهلة (7 أيام).,"Active, Read-only",06 · State tables
+Subscription line (per tool),Read-only,قراءة فقط,Unpaid after grace; view and export only.,مش مدفوع بعد المهلة؛ عرض وتصدير بس.,"Active, Ended",06 · State tables
+Subscription line (per tool),Cancelling,جاري الإلغاء,Removal requested; works until period end.,اتطلب الإلغاء؛ شغال لآخر الفترة.,"Active (undo), Ended",06 · State tables
+Subscription line (per tool),Free,مجاني,On the Free plan.,على الباقة المجانية.,"Active, Trialing",06 · State tables
+Subscription line (per tool),Ended,منتهي,Not usable; data kept 30 days; can be restored.,مش شغال؛ البيانات 30 يوم؛ ممكن يترجع.,"Active (restore), Deleted",06 · State tables
+Subscription line (per tool),Deleted,اتمسح,Data removed.,البيانات اتمسحت.,—,06 · State tables
+Service request,New,جديد,Submitted.,اتبعت.,"Under review, Cancelled",06 · State tables
+Service request,Under review,قيد المراجعة,Sales is evaluating.,المبيعات بتقيّم.,"Quoted, Cancelled",06 · State tables
+Service request,Quoted,تم عرض السعر,Waiting for the customer.,مستني العميل.,"Awaiting payment, Rejected, Expired",06 · State tables
+Service request,Awaiting payment,في انتظار الدفع,Accepted; first payment due.,اتقبل؛ أول دفعة مستحقة.,"In progress, Cancelled",06 · State tables
+Service request,In progress,جاري التنفيذ,Team is working.,الفريق شغال.,"In review, On hold",06 · State tables
+Service request,In review,قيد مراجعة العميل,Deliverable waiting for the customer.,تسليم مستني العميل.,"In progress (revision), Completed",06 · State tables
+Service request,On hold,متوقف مؤقتاً,Waiting for customer input or payment.,مستني رد أو دفع من العميل.,"In progress, Cancelled",06 · State tables
+Service request,Completed,مكتمل,Approved (or auto-approved).,اتوافق عليه (أو تلقائياً).,—,06 · State tables
+Service request,Rejected / Expired / Cancelled,مرفوض / منتهي / ملغي,Closed without work (refund per policy if paid).,اتقفل من غير شغل (استرداد حسب السياسة لو اتدفع).,New quote → Quoted,06 · State tables
+Invoice,Draft,مسودة,Manual invoice not sent yet.,فاتورة يدوية لسه متبعتتش.,"Open, Void",06 · State tables
+Invoice,Open,مفتوحة,"Issued, waiting for payment.",اتعملت ومستنية الدفع.,"Paid, Past due, Void",06 · State tables
+Invoice,Past due,متأخرة,Payment failed or due date passed.,الدفع فشل أو الميعاد عدّى.,"Paid, Void",06 · State tables
+Invoice,Paid,مدفوعة,Fully paid.,مدفوعة بالكامل.,"Partially refunded, Refunded",06 · State tables
+Invoice,Partially refunded / Refunded,مستردة جزئياً / مستردة,Credit note(s) issued.,اتعمل إشعار دائن.,—,06 · State tables
+Invoice,Void,ملغاة,Cancelled before payment (kept for numbering).,اتلغت قبل الدفع (بتفضل عشان الترقيم).,—,06 · State tables
+Support ticket,Open,مفتوحة,"New, not picked up.",جديدة ومحدش مسكها.,In progress,06 · State tables
+Support ticket,In progress,جاري العمل,Assigned and being handled.,مسندة وبيتشتغل عليها.,"Waiting for you, Resolved",06 · State tables
+Support ticket,Waiting for you,في انتظارك,Needs the customer’s reply; auto-closes after 7 days.,محتاجة رد العميل؛ بتتقفل تلقائي بعد 7 أيام.,"In progress, Closed",06 · State tables
+Support ticket,Resolved,اتحلت,Answered; customer can reopen within 7 days.,اترد عليها؛ العميل يقدر يفتحها تاني خلال 7 أيام.,"In progress, Closed",06 · State tables
+Support ticket,Closed,مقفولة,Final.,نهائي.,—,06 · State tables
+Workspace,Active,نشطة,Normal.,عادي.,"Past due, Suspended, Cancelled",06 · State tables
+Workspace,Past due,متأخرة,At least one line past due or read-only.,سطر واحد على الأقل متأخر أو قراءة فقط.,"Active, Cancelled",06 · State tables
+Workspace,Suspended,موقوفة,"Blocked by OrgTik (terms violation, fraud).",موقوفة من أورج تك (مخالفة شروط، احتيال).,"Active, Cancelled",06 · State tables
+Workspace,Cancelled,ملغاة,Closed by owner or dunning; data kept 30 days for export.,اتقفلت من المالك أو بسبب عدم الدفع؛ البيانات 30 يوم للتصدير.,"Active (reactivate), Deleted",06 · State tables
+Workspace,Deleted,اتمسحت,All data removed.,كل البيانات اتمسحت.,—,06 · State tables

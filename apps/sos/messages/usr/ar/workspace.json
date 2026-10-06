@@ -1,0 +1,72 @@
+{
+  "Workspace": {
+    "switchLabel": "مساحة العمل: {name}. تبديل مساحة العمل",
+    "yourWorkspaces": "مساحات عملك",
+    "roles": {
+      "owner": "المالك",
+      "admin": "مسؤول",
+      "member": "عضو",
+      "guest": "ضيف"
+    },
+    "nav": {
+      "tools": "الأدوات والخطط",
+      "team": "الفريق",
+      "services": "الخدمات",
+      "support": "الدعم",
+      "notifications": "الإشعارات",
+      "billingSection": "الفوترة",
+      "subscriptions": "الاشتراكات",
+      "invoices": "الفواتير",
+      "paymentMethods": "طرق الدفع",
+      "billingDetails": "بيانات الفوترة",
+      "settingsSection": "مساحة العمل",
+      "workspaceSettings": "إعدادات مساحة العمل",
+      "adminSection": "إدارة OrgTik"
+    },
+    "banner": {
+      "suspended": {
+        "title": "مساحة العمل هذه موقوفة",
+        "body": "لا يمكن تغيير أي شيء حتى يُعاد تفعيلها. تواصل مع الدعم لحل الأمر."
+      },
+      "read_only": {
+        "title": "{tool} للقراءة فقط",
+        "body": "لم يُدفع التجديد، لذا يمكن لفريقك العرض دون التعديل في {tool}. ادفع لفتحها."
+      },
+      "payment_failed": {
+        "title": "لم يتم تجديد {tool}",
+        "body": "حدّث بطاقتك أو ادفع قبل {date} للحفاظ على الوصول الكامل."
+      },
+      "trial_ending": {
+        "title": "تنتهي تجربتك لـ {tool} في {date}",
+        "body": "اختر خطة لتواصل استخدامها دون انقطاع."
+      },
+      "beta_billing": {
+        "title": "{tool} في مرحلة تجريبية",
+        "body": "تبدأ الخطط المدفوعة عند الإطلاق الرسمي. الرمز {coupon} يمنح المستخدمين الأوائل خصمًا."
+      },
+      "price_change": {
+        "title": "يتغير سعر {tool} في {date}",
+        "body": "يبقى سعرك الحالي حتى ذلك الحين. اطّلع على التغيير."
+      },
+      "downgrade_scheduled": {
+        "title": "ينتقل {tool} إلى خطة أقل في {date}",
+        "body": "حتى ذلك الحين تحتفظ بكل ما في خطتك الحالية."
+      },
+      "actions": {
+        "pay_now": "ادفع الآن",
+        "choose_plan": "اختر خطة",
+        "view_plans": "عرض الخطط",
+        "details": "عرض التفاصيل",
+        "cancel_downgrade": "الإبقاء على خطتي",
+        "contact_support": "تواصل مع الدعم"
+      }
+    },
+    "gate": {
+      "title": "هذه الصفحة مخصصة لـ{role} مساحة العمل",
+      "body": "دورك في {name} لا يشملها. اطلبها من المالك إن كنت تحتاجها.",
+      "toHome": "العودة إلى الرئيسية",
+      "failedTitle": "تعذّر تحميل مساحة عملك",
+      "failedBody": "تحقق من اتصالك وحاول مرة أخرى."
+    }
+  }
+}

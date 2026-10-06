@@ -1,0 +1,107 @@
+[
+  {
+    "name": "wm-s0",
+    "exitCode": 0,
+    "durationSeconds": 13,
+    "passed": 11,
+    "total": 11
+  },
+  {
+    "name": "wm-s1",
+    "exitCode": 0,
+    "durationSeconds": 22,
+    "passed": 12,
+    "total": 12
+  },
+  {
+    "name": "wm-s1b",
+    "exitCode": 0,
+    "durationSeconds": 15,
+    "passed": 9,
+    "total": 9
+  },
+  {
+    "name": "wm-s1c",
+    "exitCode": 0,
+    "durationSeconds": 17,
+    "passed": 8,
+    "total": 8
+  },
+  {
+    "name": "wm-s1d",
+    "exitCode": 0,
+    "durationSeconds": 32,
+    "passed": 15,
+    "total": 15
+  },
+  {
+    "name": "wm-s2",
+    "exitCode": 0,
+    "durationSeconds": 22,
+    "passed": 13,
+    "total": 13
+  },
+  {
+    "name": "wm-s3",
+    "exitCode": 0,
+    "durationSeconds": 29,
+    "passed": 14,
+    "total": 14
+  },
+  {
+    "name": "wm-seo",
+    "exitCode": 0,
+    "durationSeconds": 15,
+    "passed": 11,
+    "total": 11
+  },
+  {
+    "name": "wm-preview",
+    "exitCode": 0,
+    "durationSeconds": 12,
+    "passed": 10,
+    "total": 10
+  },
+  {
+    "name": "wm-lifecycle",
+    "exitCode": 0,
+    "durationSeconds": 28,
+    "passed": 13,
+    "total": 13
+  },
+  {
+    "name": "wm-overview",
+    "exitCode": 0,
+    "durationSeconds": 6,
+    "passed": 6,
+    "total": 6
+  },
+  {
+    "name": "site-paths",
+    "exitCode": 0,
+    "durationSeconds": 222,
+    "passed": 7,
+    "total": 7
+  },
+  {
+    "name": "site-heads",
+    "exitCode": 0,
+    "durationSeconds": 11,
+    "passed": 6,
+    "total": 6
+  },
+  {
+    "name": "site-forms",
+    "exitCode": 0,
+    "durationSeconds": 16,
+    "passed": 6,
+    "total": 6
+  },
+  {
+    "name": "site-connection",
+    "exitCode": 0,
+    "durationSeconds": 6,
+    "passed": 6,
+    "total": 6
+  }
+]

@@ -1,0 +1,368 @@
+{
+  "at": "2026-10-03T06:40:55.024Z",
+  "locale": "ar",
+  "walks": [
+    {
+      "id": "S1-open-from-suite",
+      "title": "Open Sales from the suite",
+      "locale": "ar",
+      "as": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Arrive with a one-time code",
+          "ok": true,
+          "note": "landed on /ar",
+          "ms": 2876,
+          "url": "http://localhost:3003/ar",
+          "screenshot": "S1-open-from-suite/01-arrive-with-a-one-time-code.png"
+        },
+        {
+          "n": 2,
+          "name": "Back doesn't reopen the hand-off",
+          "ok": true,
+          "note": "",
+          "ms": 554,
+          "url": "about:blank",
+          "screenshot": "S1-open-from-suite/02-back-doesn-t-reopen-the-hand-off.png"
+        },
+        {
+          "n": 3,
+          "name": "A forged redirect is ignored",
+          "ok": true,
+          "note": "",
+          "ms": 1321,
+          "url": "http://localhost:3003/ar",
+          "screenshot": "S1-open-from-suite/03-a-forged-redirect-is-ignored.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "S1b-deep-link-after-sign-in",
+      "title": "Sign in again and land on the page you opened",
+      "locale": "ar",
+      "as": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open a Sales link while signed out",
+          "ok": true,
+          "note": "",
+          "ms": 1475,
+          "url": "http://localhost:3013/auth/login?redirect=%2Fgo%2Fsales%3Fredirect%3D%252Far%252Fcustomers",
+          "screenshot": "S1b-deep-link-after-sign-in/01-open-a-sales-link-while-signed-out.png"
+        },
+        {
+          "n": 2,
+          "name": "Sign in",
+          "ok": true,
+          "note": "landed on /ar/customers",
+          "ms": 3193,
+          "url": "http://localhost:3003/ar/customers",
+          "screenshot": "S1b-deep-link-after-sign-in/02-sign-in.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "S1c-no-access",
+      "title": "No access without the CRM",
+      "locale": "ar",
+      "as": "salma.nabil@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open the dashboard",
+          "ok": true,
+          "note": "ليست لديك صلاحية الوصول إلى إدارة العملاء",
+          "ms": 1656,
+          "url": "http://localhost:3003/ar/auth/not-allowed",
+          "screenshot": "S1c-no-access/01-open-the-dashboard.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "S2-create-offer",
+      "title": "Create and send an offer",
+      "locale": "ar",
+      "as": "omar.farouk@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "New offer for Nile Foods",
+          "ok": true,
+          "note": "",
+          "ms": 2644,
+          "url": "http://localhost:3003/ar/offers",
+          "screenshot": "S2-create-offer/01-new-offer-for-nile-foods.png"
+        },
+        {
+          "n": 2,
+          "name": "A standard plan, 12 months, in installments",
+          "ok": true,
+          "note": "1 payment option(s) selected; term 12 دفعة شهرية بقيمة ‏62,921.25 ج.م.‏ · +5‎%‎",
+          "ms": 1198,
+          "url": "http://localhost:3003/ar/offers",
+          "screenshot": "S2-create-offer/02-a-standard-plan-12-months-in-installments.png"
+        },
+        {
+          "n": 3,
+          "name": "Terms, then review",
+          "ok": true,
+          "note": "ضريبة القيمة المضافة 14‎%‎ (مصر)",
+          "ms": 739,
+          "url": "http://localhost:3003/ar/offers",
+          "screenshot": "S2-create-offer/03-terms-then-review.png"
+        },
+        {
+          "n": 4,
+          "name": "Send",
+          "ok": true,
+          "note": "pending; 12 months, installments × 12; VAT EG; total 860762.70",
+          "ms": 822,
+          "url": "http://localhost:3003/ar/offers/b5f1b275-8411-46b0-82a0-993d5f885873",
+          "screenshot": "S2-create-offer/04-send.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "S3-counter-accept",
+      "title": "Counter and accept",
+      "locale": "ar",
+      "as": "nour.khaled@nilefoods.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Nour counters at 90%",
+          "ok": true,
+          "note": "countered; counter 774686.00",
+          "ms": 3968,
+          "url": "http://localhost:3003/ar/offers/b5f1b275-8411-46b0-82a0-993d5f885873",
+          "screenshot": "S3-counter-accept/01-nour-counters-at-90.png"
+        },
+        {
+          "n": 2,
+          "name": "Omar accepts (with a confirmation)",
+          "ok": true,
+          "note": "accepted; project created; counter shown: true",
+          "ms": 4499,
+          "url": "http://localhost:3003/ar/offers/b5f1b275-8411-46b0-82a0-993d5f885873",
+          "screenshot": "S3-counter-accept/02-omar-accepts-with-a-confirmation.png"
+        },
+        {
+          "n": 3,
+          "name": "The project shows on Projects without a reload",
+          "ok": true,
+          "note": "",
+          "ms": 712,
+          "url": "http://localhost:3003/ar/offers/b5f1b275-8411-46b0-82a0-993d5f885873",
+          "screenshot": "S3-counter-accept/03-the-project-shows-on-projects-without-a-reload.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "S4-approve-contract",
+      "title": "Approve a contract",
+      "locale": "ar",
+      "as": "nour.khaled@nilefoods.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Nour uploads the signed contract",
+          "ok": true,
+          "note": "contract pending, signed true",
+          "ms": 4451,
+          "url": "http://localhost:3003/ar/projects/7dcfddc6-71c0-4da1-97a4-ce67057fe4a7",
+          "screenshot": "S4-approve-contract/01-nour-uploads-the-signed-contract.png"
+        },
+        {
+          "n": 2,
+          "name": "Sherif approves with 8% (preview, then confirm)",
+          "ok": true,
+          "note": "approved; percentage 8.00; 54363.93",
+          "ms": 4772,
+          "url": "http://localhost:3003/ar/projects/7dcfddc6-71c0-4da1-97a4-ce67057fe4a7",
+          "screenshot": "S4-approve-contract/02-sherif-approves-with-8-preview-then-confirm.png"
+        },
+        {
+          "n": 3,
+          "name": "Omar's commissions show it as money",
+          "ok": true,
+          "note": "COM-0015 الحضور الرقمي للشركات ‏54,363.93 ج.م.‏ 8‎%‎ من قيمة العقد ‏0.00 ج.م.‏ ‏54,363.93 ج.م.‏ غير مدفوعة 03‏/10‏/2026 ",
+          "ms": 2158,
+          "url": "http://localhost:3003/ar/projects/7dcfddc6-71c0-4da1-97a4-ce67057fe4a7",
+          "screenshot": "S4-approve-contract/03-omar-s-commissions-show-it-as-money.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "S5-pay-commission",
+      "title": "Pay a commission",
+      "locale": "ar",
+      "as": "mona.adel@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Pay a third, with a reference",
+          "ok": true,
+          "note": "partially_paid; paid 5272.00 of 15817.50",
+          "ms": 4787,
+          "url": "http://localhost:3003/ar/commissions",
+          "screenshot": "S5-pay-commission/01-pay-a-third-with-a-reference.png"
+        },
+        {
+          "n": 2,
+          "name": "Sherif (manager) is offered no Pay",
+          "ok": true,
+          "note": "",
+          "ms": 2279,
+          "url": "http://localhost:3003/ar/commissions",
+          "screenshot": "S5-pay-commission/02-sherif-manager-is-offered-no-pay.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "S6-website-lead",
+      "title": "A website lead",
+      "locale": "ar",
+      "as": "sherif.magdy@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "The website sends a lead",
+          "ok": true,
+          "note": "new, website",
+          "ms": 546,
+          "url": "about:blank",
+          "screenshot": "S6-website-lead/01-the-website-sends-a-lead.png"
+        },
+        {
+          "n": 2,
+          "name": "It's in the pipeline, marked Website, with its page",
+          "ok": true,
+          "note": "Laila Hassan uh8e Delta Bakeries الموقع الإلكتروني الصفحة: ⁨/pricing⁩ حزمة الأدوات: ⁨starter⁩ غير مُسنَد الآن",
+          "ms": 2270,
+          "url": "http://localhost:3003/ar/customers/pipeline",
+          "screenshot": "S6-website-lead/02-it-s-in-the-pipeline-marked-website-with-its-page.png"
+        },
+        {
+          "n": 3,
+          "name": "Move it to Qualified",
+          "ok": true,
+          "note": "",
+          "ms": 2412,
+          "url": "http://localhost:3003/ar/customers/pipeline",
+          "screenshot": "S6-website-lead/03-move-it-to-qualified.png"
+        },
+        {
+          "n": 4,
+          "name": "Lose it: a reason is required",
+          "ok": true,
+          "note": "lost: Chose another provider",
+          "ms": 2509,
+          "url": "http://localhost:3003/ar/customers/pipeline",
+          "screenshot": "S6-website-lead/04-lose-it-a-reason-is-required.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "S7-view-as",
+      "title": "View as, read-only",
+      "locale": "ar",
+      "as": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Start View as from SOS and open Sales",
+          "ok": true,
+          "note": "",
+          "ms": 2606,
+          "url": "http://localhost:3003/ar",
+          "screenshot": "S7-view-as/01-start-view-as-from-sos-and-open-sales.png"
+        },
+        {
+          "n": 2,
+          "name": "Customers: nothing to create or change",
+          "ok": true,
+          "note": "",
+          "ms": 16384,
+          "url": "http://localhost:3003/ar/customers",
+          "screenshot": "S7-view-as/02-customers-nothing-to-create-or-change.png"
+        },
+        {
+          "n": 3,
+          "name": "Offers: no New offer",
+          "ok": true,
+          "note": "",
+          "ms": 2141,
+          "url": "http://localhost:3003/ar/offers",
+          "screenshot": "S7-view-as/03-offers-no-new-offer.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "S8-customer-lifecycle",
+      "title": "A customer's lifecycle",
+      "locale": "ar",
+      "as": "omar.farouk@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Create a customer with an invitation",
+          "ok": true,
+          "note": "access invited",
+          "ms": 5159,
+          "url": "http://localhost:3003/ar/customers?new=1",
+          "screenshot": "S8-customer-lifecycle/01-create-a-customer-with-an-invitation.png"
+        },
+        {
+          "n": 2,
+          "name": "Add a note",
+          "ok": true,
+          "note": "",
+          "ms": 3675,
+          "url": "http://localhost:3003/ar/customers/b56de2fb-e1ae-46ba-86ff-faf33abf7e32",
+          "screenshot": "S8-customer-lifecycle/02-add-a-note.png"
+        },
+        {
+          "n": 3,
+          "name": "A meeting names the org time zone",
+          "ok": true,
+          "note": "المنطقة الزمنية: توقيت شرق أوروبا (غرينتش+3)",
+          "ms": 637,
+          "url": "http://localhost:3003/ar/customers/b56de2fb-e1ae-46ba-86ff-faf33abf7e32",
+          "screenshot": "S8-customer-lifecycle/03-a-meeting-names-the-org-time-zone.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    }
+  ]
+}

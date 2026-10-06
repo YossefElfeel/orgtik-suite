@@ -1,0 +1,821 @@
+{
+ "PostComposer.newTitle": {
+  "en": "New post",
+  "ar": "منشور جديد",
+  "de": "Neuer Beitrag",
+  "fr": "Nouvelle publication",
+  "it": "Nuovo post"
+ },
+ "PostComposer.editTitle": {
+  "en": "Edit post",
+  "ar": "تعديل المنشور",
+  "de": "Beitrag bearbeiten",
+  "fr": "Modifier la publication",
+  "it": "Modifica post"
+ },
+ "PostComposer.newDescription": {
+  "en": "Write it once, choose where it goes, and when.",
+  "ar": "اكتبه مرة واحدة، واختر أين ومتى يُنشر.",
+  "de": "Einmal schreiben, dann wählen, wo und wann er erscheint.",
+  "fr": "Rédigez-la une fois, puis choisissez où et quand elle paraît.",
+  "it": "Scrivilo una volta, poi scegli dove e quando esce."
+ },
+ "PostComposer.crumbPosts": {
+  "en": "Posts",
+  "ar": "المنشورات",
+  "de": "Beiträge",
+  "fr": "Publications",
+  "it": "Post"
+ },
+ "PostComposer.stepsLabel": {
+  "en": "Post steps",
+  "ar": "خطوات المنشور",
+  "de": "Schritte des Beitrags",
+  "fr": "Étapes de la publication",
+  "it": "Passaggi del post"
+ },
+ "PostComposer.lockedHint": {
+  "en": "Finish the step before this one first",
+  "ar": "أكمل الخطوة السابقة أولًا",
+  "de": "Schließen Sie zuerst den vorherigen Schritt ab",
+  "fr": "Terminez d’abord l’étape précédente",
+  "it": "Completa prima il passaggio precedente"
+ },
+ "PostComposer.stepContent": {
+  "en": "Content",
+  "ar": "المحتوى",
+  "de": "Inhalt",
+  "fr": "Contenu",
+  "it": "Contenuto"
+ },
+ "PostComposer.stepMedia": {
+  "en": "Media",
+  "ar": "الوسائط",
+  "de": "Medien",
+  "fr": "Médias",
+  "it": "Media"
+ },
+ "PostComposer.stepSchedule": {
+  "en": "Schedule",
+  "ar": "الجدولة",
+  "de": "Planung",
+  "fr": "Programmation",
+  "it": "Programmazione"
+ },
+ "PostComposer.next": {
+  "en": "Next: {step}",
+  "ar": "التالي: {step}",
+  "de": "Weiter: {step}",
+  "fr": "Suivant : {step}",
+  "it": "Avanti: {step}"
+ },
+ "PostComposer.back": {
+  "en": "Back",
+  "ar": "رجوع",
+  "de": "Zurück",
+  "fr": "Retour",
+  "it": "Indietro"
+ },
+ "PostComposer.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "PostComposer.submitNow": {
+  "en": "Publish now",
+  "ar": "انشر الآن",
+  "de": "Jetzt veröffentlichen",
+  "fr": "Publier maintenant",
+  "it": "Pubblica ora"
+ },
+ "PostComposer.submitSchedule": {
+  "en": "Schedule post",
+  "ar": "جدولة المنشور",
+  "de": "Beitrag planen",
+  "fr": "Programmer la publication",
+  "it": "Programma post"
+ },
+ "PostComposer.submitDraft": {
+  "en": "Save draft",
+  "ar": "حفظ المسودة",
+  "de": "Entwurf speichern",
+  "fr": "Enregistrer le brouillon",
+  "it": "Salva bozza"
+ },
+ "PostComposer.submitApproval": {
+  "en": "Send for approval",
+  "ar": "إرسال للموافقة",
+  "de": "Zur Freigabe senden",
+  "fr": "Envoyer pour approbation",
+  "it": "Invia per approvazione"
+ },
+ "PostComposer.saveChanges": {
+  "en": "Save changes",
+  "ar": "حفظ التغييرات",
+  "de": "Änderungen speichern",
+  "fr": "Enregistrer les modifications",
+  "it": "Salva modifiche"
+ },
+ "PostComposer.saveAndPublish": {
+  "en": "Save and publish",
+  "ar": "حفظ ونشر",
+  "de": "Speichern und veröffentlichen",
+  "fr": "Enregistrer et publier",
+  "it": "Salva e pubblica"
+ },
+ "PostComposer.discardTitle": {
+  "en": "Discard this post?",
+  "ar": "تجاهل هذا المنشور؟",
+  "de": "Diesen Beitrag verwerfen?",
+  "fr": "Abandonner cette publication ?",
+  "it": "Scartare questo post?"
+ },
+ "PostComposer.discardImpact": {
+  "en": "Nothing has been saved yet, so what you wrote is lost.",
+  "ar": "لم يُحفظ شيء بعد، لذا سيضيع ما كتبته.",
+  "de": "Noch ist nichts gespeichert, Ihr Text geht verloren.",
+  "fr": "Rien n’a encore été enregistré : ce que vous avez écrit sera perdu.",
+  "it": "Non è stato ancora salvato nulla: ciò che hai scritto andrà perso."
+ },
+ "PostComposer.discardEditTitle": {
+  "en": "Discard your changes?",
+  "ar": "تجاهل تغييراتك؟",
+  "de": "Änderungen verwerfen?",
+  "fr": "Abandonner vos modifications ?",
+  "it": "Annullare le modifiche?"
+ },
+ "PostComposer.discardEditImpact": {
+  "en": "The post stays as it was before you opened it.",
+  "ar": "يبقى المنشور كما كان قبل فتحه.",
+  "de": "Der Beitrag bleibt, wie er vorher war.",
+  "fr": "La publication reste telle qu’elle était.",
+  "it": "Il post resta com’era prima."
+ },
+ "PostComposer.discardConfirm": {
+  "en": "Discard",
+  "ar": "تجاهل",
+  "de": "Verwerfen",
+  "fr": "Abandonner",
+  "it": "Scarta"
+ },
+ "PostComposer.keepEditing": {
+  "en": "Keep editing",
+  "ar": "متابعة التعديل",
+  "de": "Weiter bearbeiten",
+  "fr": "Continuer",
+  "it": "Continua a modificare"
+ },
+ "PostComposer.titleLabel": {
+  "en": "Title",
+  "ar": "العنوان",
+  "de": "Titel",
+  "fr": "Titre",
+  "it": "Titolo"
+ },
+ "PostComposer.titleHint": {
+  "en": "For your team only. It isn't posted.",
+  "ar": "لفريقك فقط، ولا يُنشر.",
+  "de": "Nur für Ihr Team, wird nicht gepostet.",
+  "fr": "Pour votre équipe uniquement. Il n’est pas publié.",
+  "it": "Solo per il tuo team. Non viene pubblicato."
+ },
+ "PostComposer.platformsLabel": {
+  "en": "Where it goes",
+  "ar": "أين يُنشر",
+  "de": "Wo er erscheint",
+  "fr": "Où elle paraît",
+  "it": "Dove esce"
+ },
+ "PostComposer.loadingPlatforms": {
+  "en": "Loading your connected accounts",
+  "ar": "جارٍ تحميل حساباتك المرتبطة",
+  "de": "Verbundene Konten werden geladen",
+  "fr": "Chargement de vos comptes connectés",
+  "it": "Caricamento degli account collegati"
+ },
+ "PostComposer.platformsErrorTitle": {
+  "en": "Couldn't load your accounts",
+  "ar": "تعذّر تحميل حساباتك",
+  "de": "Konten konnten nicht geladen werden",
+  "fr": "Impossible de charger vos comptes",
+  "it": "Impossibile caricare gli account"
+ },
+ "PostComposer.platformsErrorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "PostComposer.noAccountsTitle": {
+  "en": "No connected accounts",
+  "ar": "لا حسابات مرتبطة",
+  "de": "Keine verbundenen Konten",
+  "fr": "Aucun compte connecté",
+  "it": "Nessun account collegato"
+ },
+ "PostComposer.noAccountsBody": {
+  "en": "Connect a Facebook, Instagram, LinkedIn, X, TikTok or YouTube account to post to it.",
+  "ar": "اربط حساب Facebook أو Instagram أو LinkedIn أو X أو TikTok أو YouTube للنشر عليه.",
+  "de": "Verbinden Sie ein Facebook-, Instagram-, LinkedIn-, X-, TikTok- oder YouTube-Konto, um darauf zu posten.",
+  "fr": "Connectez un compte Facebook, Instagram, LinkedIn, X, TikTok ou YouTube pour y publier.",
+  "it": "Collega un account Facebook, Instagram, LinkedIn, X, TikTok o YouTube per pubblicarci."
+ },
+ "PostComposer.noAccountsBodyAsk": {
+  "en": "Ask a marketing manager to connect the project's accounts.",
+  "ar": "اطلب من مدير التسويق ربط حسابات المشروع.",
+  "de": "Bitten Sie eine Marketingleitung, die Konten des Projekts zu verbinden.",
+  "fr": "Demandez à un responsable marketing de connecter les comptes du projet.",
+  "it": "Chiedi a un responsabile marketing di collegare gli account del progetto."
+ },
+ "PostComposer.connectAccount": {
+  "en": "Connect an account",
+  "ar": "ربط حساب",
+  "de": "Konto verbinden",
+  "fr": "Connecter un compte",
+  "it": "Collega un account"
+ },
+ "PostComposer.notConnected": {
+  "en": "Not connected any more",
+  "ar": "لم يعد مرتبطًا",
+  "de": "Nicht mehr verbunden",
+  "fr": "N’est plus connecté",
+  "it": "Non più collegato"
+ },
+ "PostComposer.formatFor": {
+  "en": "Format on {name}",
+  "ar": "الشكل على {name}",
+  "de": "Format auf {name}",
+  "fr": "Format sur {name}",
+  "it": "Formato su {name}"
+ },
+ "PostComposer.formatPOST": {
+  "en": "Post",
+  "ar": "منشور",
+  "de": "Beitrag",
+  "fr": "Publication",
+  "it": "Post"
+ },
+ "PostComposer.formatREEL": {
+  "en": "Reel",
+  "ar": "ريل",
+  "de": "Reel",
+  "fr": "Reel",
+  "it": "Reel"
+ },
+ "PostComposer.formatSTORY": {
+  "en": "Story",
+  "ar": "قصة",
+  "de": "Story",
+  "fr": "Story",
+  "it": "Storia"
+ },
+ "PostComposer.formatARTICLE": {
+  "en": "Article",
+  "ar": "مقال",
+  "de": "Artikel",
+  "fr": "Article",
+  "it": "Articolo"
+ },
+ "PostComposer.formatVIDEO": {
+  "en": "Video",
+  "ar": "فيديو",
+  "de": "Video",
+  "fr": "Vidéo",
+  "it": "Video"
+ },
+ "PostComposer.formatSHORT": {
+  "en": "Short",
+  "ar": "فيديو قصير",
+  "de": "Short",
+  "fr": "Short",
+  "it": "Short"
+ },
+ "PostComposer.sameText": {
+  "en": "Same text on every platform",
+  "ar": "النص نفسه على كل المنصات",
+  "de": "Gleicher Text auf allen Plattformen",
+  "fr": "Même texte sur chaque plateforme",
+  "it": "Stesso testo su ogni piattaforma"
+ },
+ "PostComposer.sameTextOn": {
+  "en": "One text for all. Turn off to write one per platform.",
+  "ar": "نص واحد للجميع. أوقفه لكتابة نص لكل منصة.",
+  "de": "Ein Text für alle. Ausschalten, um pro Plattform zu schreiben.",
+  "fr": "Un seul texte pour toutes. Désactivez pour en écrire un par plateforme.",
+  "it": "Un testo per tutte. Disattiva per scriverne uno per piattaforma."
+ },
+ "PostComposer.sameTextOff": {
+  "en": "Each platform has its own text.",
+  "ar": "لكل منصة نصها الخاص.",
+  "de": "Jede Plattform hat ihren eigenen Text.",
+  "fr": "Chaque plateforme a son propre texte.",
+  "it": "Ogni piattaforma ha il suo testo."
+ },
+ "PostComposer.textLabel": {
+  "en": "Text",
+  "ar": "النص",
+  "de": "Text",
+  "fr": "Texte",
+  "it": "Testo"
+ },
+ "PostComposer.textFor": {
+  "en": "Text for {name}",
+  "ar": "نص {name}",
+  "de": "Text für {name}",
+  "fr": "Texte pour {name}",
+  "it": "Testo per {name}"
+ },
+ "PostComposer.counter": {
+  "en": "{used} of {max} characters ({platform})",
+  "ar": "{used} من {max} حرفًا ({platform})",
+  "de": "{used} von {max} Zeichen ({platform})",
+  "fr": "{used} sur {max} caractères ({platform})",
+  "it": "{used} di {max} caratteri ({platform})"
+ },
+ "PostComposer.labelsLabel": {
+  "en": "Labels",
+  "ar": "التصنيفات",
+  "de": "Labels",
+  "fr": "Étiquettes",
+  "it": "Etichette"
+ },
+ "PostComposer.labelsPlaceholder": {
+  "en": "Choose labels",
+  "ar": "اختر تصنيفات",
+  "de": "Labels wählen",
+  "fr": "Choisir des étiquettes",
+  "it": "Scegli etichette"
+ },
+ "PostComposer.noLabels": {
+  "en": "No labels match",
+  "ar": "لا تصنيفات مطابقة",
+  "de": "Keine passenden Labels",
+  "fr": "Aucune étiquette ne correspond",
+  "it": "Nessuna etichetta corrisponde"
+ },
+ "PostComposer.campaignsLabel": {
+  "en": "Campaigns",
+  "ar": "الحملات",
+  "de": "Kampagnen",
+  "fr": "Campagnes",
+  "it": "Campagne"
+ },
+ "PostComposer.campaignsHint": {
+  "en": "Its results count towards these campaigns.",
+  "ar": "تُحتسب نتائجه ضمن هذه الحملات.",
+  "de": "Seine Ergebnisse zählen zu diesen Kampagnen.",
+  "fr": "Ses résultats comptent pour ces campagnes.",
+  "it": "I suoi risultati contano per queste campagne."
+ },
+ "PostComposer.campaignsPlaceholder": {
+  "en": "Choose campaigns",
+  "ar": "اختر حملات",
+  "de": "Kampagnen wählen",
+  "fr": "Choisir des campagnes",
+  "it": "Scegli campagne"
+ },
+ "PostComposer.noCampaigns": {
+  "en": "No campaigns match",
+  "ar": "لا حملات مطابقة",
+  "de": "Keine passenden Kampagnen",
+  "fr": "Aucune campagne ne correspond",
+  "it": "Nessuna campagna corrisponde"
+ },
+ "PostComposer.mediaIntro": {
+  "en": "Add images or videos from the gallery. You can also upload new ones there.",
+  "ar": "أضف صورًا أو فيديوهات من المعرض، ويمكنك رفع جديدة منه أيضًا.",
+  "de": "Fügen Sie Bilder oder Videos aus der Galerie hinzu. Dort können Sie auch neue hochladen.",
+  "fr": "Ajoutez des images ou des vidéos de la galerie. Vous pouvez aussi en importer de nouvelles.",
+  "it": "Aggiungi immagini o video dalla galleria. Puoi anche caricarne di nuovi."
+ },
+ "PostComposer.sameMedia": {
+  "en": "Same media on every platform",
+  "ar": "الوسائط نفسها على كل المنصات",
+  "de": "Gleiche Medien auf allen Plattformen",
+  "fr": "Mêmes médias sur chaque plateforme",
+  "it": "Stessi media su ogni piattaforma"
+ },
+ "PostComposer.sameMediaOn": {
+  "en": "One set for all. Turn off to choose per platform.",
+  "ar": "مجموعة واحدة للجميع. أوقفه للاختيار لكل منصة.",
+  "de": "Eine Auswahl für alle. Ausschalten, um pro Plattform zu wählen.",
+  "fr": "Une sélection pour toutes. Désactivez pour choisir par plateforme.",
+  "it": "Una selezione per tutte. Disattiva per scegliere per piattaforma."
+ },
+ "PostComposer.sameMediaOff": {
+  "en": "Each platform has its own media.",
+  "ar": "لكل منصة وسائطها الخاصة.",
+  "de": "Jede Plattform hat eigene Medien.",
+  "fr": "Chaque plateforme a ses propres médias.",
+  "it": "Ogni piattaforma ha i suoi media."
+ },
+ "PostComposer.mediaAll": {
+  "en": "Media",
+  "ar": "الوسائط",
+  "de": "Medien",
+  "fr": "Médias",
+  "it": "Media"
+ },
+ "PostComposer.mediaFor": {
+  "en": "Media for {name}",
+  "ar": "وسائط {name}",
+  "de": "Medien für {name}",
+  "fr": "Médias pour {name}",
+  "it": "Media per {name}"
+ },
+ "PostComposer.mediaCount": {
+  "en": "{count, plural, =0 {None chosen} one {# item} other {# items}}",
+  "ar": "{count, plural, zero {لم يُختر شيء} one {عنصر واحد} two {عنصران} few {# عناصر} many {# عنصرًا} other {# عنصر}}",
+  "de": "{count, plural, =0 {Nichts gewählt} one {# Element} other {# Elemente}}",
+  "fr": "{count, plural, =0 {Aucun choisi} one {# élément} other {# éléments}}",
+  "it": "{count, plural, =0 {Nessuno scelto} one {# elemento} other {# elementi}}"
+ },
+ "PostComposer.chooseMedia": {
+  "en": "Choose media",
+  "ar": "اختيار وسائط",
+  "de": "Medien wählen",
+  "fr": "Choisir des médias",
+  "it": "Scegli media"
+ },
+ "PostComposer.changeMedia": {
+  "en": "Change media",
+  "ar": "تغيير الوسائط",
+  "de": "Medien ändern",
+  "fr": "Modifier les médias",
+  "it": "Cambia media"
+ },
+ "PostComposer.chosenMedia": {
+  "en": "Chosen media",
+  "ar": "الوسائط المختارة",
+  "de": "Gewählte Medien",
+  "fr": "Médias choisis",
+  "it": "Media scelti"
+ },
+ "PostComposer.noMedia": {
+  "en": "No media. The post goes out as text.",
+  "ar": "لا وسائط. يُنشر المنشور نصًا فقط.",
+  "de": "Keine Medien. Der Beitrag erscheint als Text.",
+  "fr": "Aucun média. La publication paraît en texte seul.",
+  "it": "Nessun media. Il post esce come testo."
+ },
+ "PostComposer.removeMedia": {
+  "en": "Remove {name}",
+  "ar": "إزالة {name}",
+  "de": "{name} entfernen",
+  "fr": "Retirer {name}",
+  "it": "Rimuovi {name}"
+ },
+ "PostComposer.untitledMedia": {
+  "en": "untitled media",
+  "ar": "وسائط بلا عنوان",
+  "de": "Medium ohne Titel",
+  "fr": "média sans titre",
+  "it": "media senza titolo"
+ },
+ "PostComposer.whenLabel": {
+  "en": "When it goes out",
+  "ar": "موعد النشر",
+  "de": "Wann er erscheint",
+  "fr": "Quand elle paraît",
+  "it": "Quando esce"
+ },
+ "PostComposer.modeNow": {
+  "en": "Publish now",
+  "ar": "النشر الآن",
+  "de": "Jetzt veröffentlichen",
+  "fr": "Publier maintenant",
+  "it": "Pubblica ora"
+ },
+ "PostComposer.modeNowHint": {
+  "en": "It goes out on every platform as soon as you save.",
+  "ar": "يُنشر على كل المنصات فور الحفظ.",
+  "de": "Er erscheint auf allen Plattformen, sobald Sie speichern.",
+  "fr": "Elle paraît sur chaque plateforme dès l’enregistrement.",
+  "it": "Esce su ogni piattaforma appena salvi."
+ },
+ "PostComposer.modeNowApproval": {
+  "en": "It goes out as soon as every approver approves it.",
+  "ar": "يُنشر فور موافقة كل المعتمِدين.",
+  "de": "Er erscheint, sobald alle Freigebenden zugestimmt haben.",
+  "fr": "Elle paraît dès que tous les approbateurs l’ont approuvée.",
+  "it": "Esce appena tutti gli approvatori lo approvano."
+ },
+ "PostComposer.modeNowBlocked": {
+  "en": "A post with approvers can be scheduled or kept as a draft. Remove the approvers to publish it now.",
+  "ar": "المنشور الذي له معتمِدون يُجدول أو يبقى مسودة. أزل المعتمِدين لنشره الآن.",
+  "de": "Ein Beitrag mit Freigebenden kann geplant oder als Entwurf behalten werden. Entfernen Sie die Freigebenden, um ihn jetzt zu veröffentlichen.",
+  "fr": "Une publication avec approbateurs peut être programmée ou gardée en brouillon. Retirez les approbateurs pour la publier maintenant.",
+  "it": "Un post con approvatori può essere programmato o tenuto in bozza. Rimuovi gli approvatori per pubblicarlo ora."
+ },
+ "PostComposer.modeSchedule": {
+  "en": "Schedule",
+  "ar": "جدولة",
+  "de": "Planen",
+  "fr": "Programmer",
+  "it": "Programma"
+ },
+ "PostComposer.modeScheduleHint": {
+  "en": "Pick a date and time. It goes out by itself.",
+  "ar": "اختر تاريخًا ووقتًا، ويُنشر تلقائيًا.",
+  "de": "Wählen Sie Datum und Uhrzeit. Er erscheint von selbst.",
+  "fr": "Choisissez une date et une heure. Elle paraît toute seule.",
+  "it": "Scegli data e ora. Esce da solo."
+ },
+ "PostComposer.modeScheduleApproval": {
+  "en": "It goes out at that time once every approver approves it.",
+  "ar": "يُنشر في ذلك الوقت بعد موافقة كل المعتمِدين.",
+  "de": "Er erscheint zu dieser Zeit, sobald alle Freigebenden zugestimmt haben.",
+  "fr": "Elle paraît à cette heure-là une fois approuvée par tous.",
+  "it": "Esce a quell’ora dopo l’approvazione di tutti."
+ },
+ "PostComposer.modeDraft": {
+  "en": "Save as a draft",
+  "ar": "حفظ كمسودة",
+  "de": "Als Entwurf speichern",
+  "fr": "Enregistrer en brouillon",
+  "it": "Salva come bozza"
+ },
+ "PostComposer.modeDraftHint": {
+  "en": "Nothing goes out and no one is asked to approve yet.",
+  "ar": "لا يُنشر شيء ولا يُطلب من أحد الموافقة بعد.",
+  "de": "Nichts wird veröffentlicht, niemand wird schon um Freigabe gebeten.",
+  "fr": "Rien ne paraît et personne n’est encore sollicité.",
+  "it": "Non esce nulla e nessuno deve ancora approvare."
+ },
+ "PostComposer.perPlatformTime": {
+  "en": "A different time per platform",
+  "ar": "وقت مختلف لكل منصة",
+  "de": "Eigene Uhrzeit pro Plattform",
+  "fr": "Une heure différente par plateforme",
+  "it": "Un orario diverso per piattaforma"
+ },
+ "PostComposer.perPlatformTimeHint": {
+  "en": "Off: one date and time for all.",
+  "ar": "عند الإيقاف: تاريخ ووقت واحد للجميع.",
+  "de": "Aus: ein Datum und eine Uhrzeit für alle.",
+  "fr": "Désactivé : une date et une heure pour toutes.",
+  "it": "Disattivato: una data e un orario per tutte."
+ },
+ "PostComposer.scheduleLabel": {
+  "en": "Date and time",
+  "ar": "التاريخ والوقت",
+  "de": "Datum und Uhrzeit",
+  "fr": "Date et heure",
+  "it": "Data e ora"
+ },
+ "PostComposer.date": {
+  "en": "Date",
+  "ar": "التاريخ",
+  "de": "Datum",
+  "fr": "Date",
+  "it": "Data"
+ },
+ "PostComposer.time": {
+  "en": "Time",
+  "ar": "الوقت",
+  "de": "Uhrzeit",
+  "fr": "Heure",
+  "it": "Ora"
+ },
+ "PostComposer.dateFor": {
+  "en": "Date on {name}",
+  "ar": "التاريخ على {name}",
+  "de": "Datum auf {name}",
+  "fr": "Date sur {name}",
+  "it": "Data su {name}"
+ },
+ "PostComposer.timeFor": {
+  "en": "Time on {name}",
+  "ar": "الوقت على {name}",
+  "de": "Uhrzeit auf {name}",
+  "fr": "Heure sur {name}",
+  "it": "Ora su {name}"
+ },
+ "PostComposer.approversTitle": {
+  "en": "Approval",
+  "ar": "الموافقة",
+  "de": "Freigabe",
+  "fr": "Approbation",
+  "it": "Approvazione"
+ },
+ "PostComposer.approversNone": {
+  "en": "No approvers. It goes out without approval.",
+  "ar": "لا معتمِدين، فيُنشر دون موافقة.",
+  "de": "Keine Freigebenden. Er erscheint ohne Freigabe.",
+  "fr": "Aucun approbateur : elle paraît sans approbation.",
+  "it": "Nessun approvatore: esce senza approvazione."
+ },
+ "PostComposer.approversHint": {
+  "en": "{count, plural, one {It waits for this person to approve it.} other {It waits for all # people to approve it.}}",
+  "ar": "{count, plural, zero {ينتظر الموافقة.} one {ينتظر موافقة هذا الشخص.} two {ينتظر موافقة الشخصين.} few {ينتظر موافقة الأشخاص الـ#.} many {ينتظر موافقة الـ# شخصًا.} other {ينتظر موافقة الـ# شخص.}}",
+  "de": "{count, plural, one {Er wartet auf die Freigabe dieser Person.} other {Er wartet auf die Freigabe aller # Personen.}}",
+  "fr": "{count, plural, one {Elle attend l’approbation de cette personne.} other {Elle attend l’approbation des # personnes.}}",
+  "it": "{count, plural, one {Attende l’approvazione di questa persona.} other {Attende l’approvazione di tutte le # persone.}}"
+ },
+ "PostComposer.addApprovers": {
+  "en": "Add approvers",
+  "ar": "إضافة معتمِدين",
+  "de": "Freigebende hinzufügen",
+  "fr": "Ajouter des approbateurs",
+  "it": "Aggiungi approvatori"
+ },
+ "PostComposer.changeApprovers": {
+  "en": "Change approvers",
+  "ar": "تغيير المعتمِدين",
+  "de": "Freigebende ändern",
+  "fr": "Modifier les approbateurs",
+  "it": "Cambia approvatori"
+ },
+ "PostComposer.removeApprover": {
+  "en": "Remove {name}",
+  "ar": "إزالة {name}",
+  "de": "{name} entfernen",
+  "fr": "Retirer {name}",
+  "it": "Rimuovi {name}"
+ },
+ "PostComposer.noteLabel": {
+  "en": "Note for the approvers",
+  "ar": "ملاحظة للمعتمِدين",
+  "de": "Notiz für die Freigebenden",
+  "fr": "Note pour les approbateurs",
+  "it": "Nota per gli approvatori"
+ },
+ "PostComposer.noteHint": {
+  "en": "They see it with the post.",
+  "ar": "يرونها مع المنشور.",
+  "de": "Sie sehen sie beim Beitrag.",
+  "fr": "Ils la voient avec la publication.",
+  "it": "La vedono con il post."
+ },
+ "PostComposer.errTitle": {
+  "en": "Give the post a title.",
+  "ar": "أضف عنوانًا للمنشور.",
+  "de": "Geben Sie dem Beitrag einen Titel.",
+  "fr": "Donnez un titre à la publication.",
+  "it": "Dai un titolo al post."
+ },
+ "PostComposer.errTitleLong": {
+  "en": "Keep the title under {max} characters.",
+  "ar": "اجعل العنوان أقل من {max} حرفًا.",
+  "de": "Halten Sie den Titel unter {max} Zeichen.",
+  "fr": "Le titre doit faire moins de {max} caractères.",
+  "it": "Il titolo deve stare sotto i {max} caratteri."
+ },
+ "PostComposer.errPlatforms": {
+  "en": "Choose at least one platform.",
+  "ar": "اختر منصة واحدة على الأقل.",
+  "de": "Wählen Sie mindestens eine Plattform.",
+  "fr": "Choisissez au moins une plateforme.",
+  "it": "Scegli almeno una piattaforma."
+ },
+ "PostComposer.errText": {
+  "en": "Write the text.",
+  "ar": "اكتب النص.",
+  "de": "Schreiben Sie den Text.",
+  "fr": "Rédigez le texte.",
+  "it": "Scrivi il testo."
+ },
+ "PostComposer.errTextLong": {
+  "en": "{platform} takes up to {max} characters. Shorten it, or write a separate text for {platform}.",
+  "ar": "يقبل {platform} حتى {max} حرف. اختصره أو اكتب نصًا منفصلًا لـ{platform}.",
+  "de": "{platform} erlaubt bis zu {max} Zeichen. Kürzen Sie ihn oder schreiben Sie einen eigenen Text für {platform}.",
+  "fr": "{platform} accepte jusqu’à {max} caractères. Raccourcissez-le ou rédigez un texte à part pour {platform}.",
+  "it": "{platform} accetta fino a {max} caratteri. Accorcialo o scrivi un testo a parte per {platform}."
+ },
+ "PostComposer.errMediaMany": {
+  "en": "{platform} takes up to {max} items.",
+  "ar": "يقبل {platform} حتى {max} عناصر.",
+  "de": "{platform} erlaubt bis zu {max} Elemente.",
+  "fr": "{platform} accepte jusqu’à {max} éléments.",
+  "it": "{platform} accetta fino a {max} elementi."
+ },
+ "PostComposer.errVideosMany": {
+  "en": "{platform} takes up to {max} videos per post.",
+  "ar": "يقبل {platform} حتى {max} فيديو في المنشور.",
+  "de": "{platform} erlaubt bis zu {max} Videos pro Beitrag.",
+  "fr": "{platform} accepte jusqu’à {max} vidéos par publication.",
+  "it": "{platform} accetta fino a {max} video per post."
+ },
+ "PostComposer.errNeedsVideo": {
+  "en": "{platform} needs a video.",
+  "ar": "يحتاج {platform} إلى فيديو.",
+  "de": "{platform} braucht ein Video.",
+  "fr": "{platform} a besoin d’une vidéo.",
+  "it": "{platform} richiede un video."
+ },
+ "PostComposer.errNeedsMedia": {
+  "en": "{platform} needs at least one image or video.",
+  "ar": "يحتاج {platform} إلى صورة أو فيديو على الأقل.",
+  "de": "{platform} braucht mindestens ein Bild oder Video.",
+  "fr": "{platform} a besoin d’au moins une image ou vidéo.",
+  "it": "{platform} richiede almeno un’immagine o un video."
+ },
+ "PostComposer.errWhen": {
+  "en": "Pick a date and time.",
+  "ar": "اختر تاريخًا ووقتًا.",
+  "de": "Wählen Sie Datum und Uhrzeit.",
+  "fr": "Choisissez une date et une heure.",
+  "it": "Scegli data e ora."
+ },
+ "PostComposer.errPast": {
+  "en": "That time has passed. Pick a later one.",
+  "ar": "هذا الوقت مضى. اختر وقتًا لاحقًا.",
+  "de": "Diese Zeit ist vorbei. Wählen Sie eine spätere.",
+  "fr": "Cette heure est passée. Choisissez-en une plus tard.",
+  "it": "Quell’ora è passata. Scegline una più tardi."
+ },
+ "PostComposer.errNowBlocked": {
+  "en": "Schedule it or save it as a draft, or remove the approvers to publish it now.",
+  "ar": "جدوِله أو احفظه مسودة، أو أزل المعتمِدين لنشره الآن.",
+  "de": "Planen Sie ihn, speichern Sie ihn als Entwurf oder entfernen Sie die Freigebenden, um ihn jetzt zu veröffentlichen.",
+  "fr": "Programmez-la, gardez-la en brouillon, ou retirez les approbateurs pour la publier maintenant.",
+  "it": "Programmalo, salvalo in bozza o rimuovi gli approvatori per pubblicarlo ora."
+ },
+ "PostComposer.noAccessTitle": {
+  "en": "You can't write posts",
+  "ar": "لا يمكنك كتابة منشورات",
+  "de": "Sie können keine Beiträge schreiben",
+  "fr": "Vous ne pouvez pas rédiger de publications",
+  "it": "Non puoi scrivere post"
+ },
+ "PostComposer.noAccessBody": {
+  "en": "Your role in Marketing lets you read and review posts. Ask a marketing manager if you need to write them.",
+  "ar": "دورك في التسويق يتيح لك قراءة المنشورات ومراجعتها. اطلب من مدير التسويق إن احتجت إلى كتابتها.",
+  "de": "Ihre Rolle in Marketing erlaubt Lesen und Prüfen. Fragen Sie eine Marketingleitung, wenn Sie schreiben müssen.",
+  "fr": "Votre rôle dans Marketing permet de lire et relire les publications. Demandez à un responsable marketing si vous devez en rédiger.",
+  "it": "Il tuo ruolo in Marketing permette di leggere e rivedere i post. Chiedi a un responsabile marketing se devi scriverli."
+ },
+ "PostComposer.noAccessReadOnly": {
+  "en": "You're viewing as someone else, so changes are turned off.",
+  "ar": "أنت تعرض بصفة شخص آخر، لذا التغييرات معطلة.",
+  "de": "Sie sehen die Ansicht einer anderen Person, Änderungen sind deaktiviert.",
+  "fr": "Vous consultez en tant qu’une autre personne : les modifications sont désactivées.",
+  "it": "Stai visualizzando come un’altra persona, quindi le modifiche sono disattivate."
+ },
+ "PostComposer.toPosts": {
+  "en": "Open posts",
+  "ar": "فتح المنشورات",
+  "de": "Beiträge öffnen",
+  "fr": "Ouvrir les publications",
+  "it": "Apri i post"
+ },
+ "PostComposer.toPost": {
+  "en": "Open the post",
+  "ar": "فتح المنشور",
+  "de": "Beitrag öffnen",
+  "fr": "Ouvrir la publication",
+  "it": "Apri il post"
+ },
+ "PostComposer.loadingPost": {
+  "en": "Loading the post",
+  "ar": "جارٍ تحميل المنشور",
+  "de": "Beitrag wird geladen",
+  "fr": "Chargement de la publication",
+  "it": "Caricamento del post"
+ },
+ "PostComposer.notFoundTitle": {
+  "en": "This post doesn't exist",
+  "ar": "هذا المنشور غير موجود",
+  "de": "Diesen Beitrag gibt es nicht",
+  "fr": "Cette publication n’existe pas",
+  "it": "Questo post non esiste"
+ },
+ "PostComposer.notFoundBody": {
+  "en": "It may have been deleted, or it belongs to another project.",
+  "ar": "ربما حُذف، أو أنه يتبع مشروعًا آخر.",
+  "de": "Er wurde vielleicht gelöscht oder gehört zu einem anderen Projekt.",
+  "fr": "Elle a peut-être été supprimée, ou appartient à un autre projet.",
+  "it": "Potrebbe essere stato eliminato o appartenere a un altro progetto."
+ },
+ "PostComposer.loadErrorTitle": {
+  "en": "Couldn't load the post",
+  "ar": "تعذّر تحميل المنشور",
+  "de": "Beitrag konnte nicht geladen werden",
+  "fr": "Impossible de charger la publication",
+  "it": "Impossibile caricare il post"
+ },
+ "PostComposer.loadErrorBody": {
+  "en": "Check your connection and try again.",
+  "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Vérifiez votre connexion et réessayez.",
+  "it": "Controlla la connessione e riprova."
+ },
+ "PostComposer.lockedTitle": {
+  "en": "This post can't be edited",
+  "ar": "لا يمكن تعديل هذا المنشور",
+  "de": "Dieser Beitrag kann nicht bearbeitet werden",
+  "fr": "Cette publication ne peut pas être modifiée",
+  "it": "Questo post non si può modificare"
+ },
+ "PostComposer.lockedBody": {
+  "en": "Published and canceled posts stay as they are. Duplicate it to start a new one from it.",
+  "ar": "المنشورات المنشورة والملغاة تبقى كما هي. كرّره لبدء منشور جديد منه.",
+  "de": "Veröffentlichte und abgebrochene Beiträge bleiben, wie sie sind. Duplizieren Sie ihn, um daraus einen neuen zu beginnen.",
+  "fr": "Les publications publiées ou annulées restent telles quelles. Dupliquez-la pour en créer une nouvelle.",
+  "it": "I post pubblicati o annullati restano così. Duplicalo per crearne uno nuovo."
+ }
+}

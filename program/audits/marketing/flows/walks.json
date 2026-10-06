@@ -1,0 +1,392 @@
+{
+  "at": "2026-10-02T10:39:01.352Z",
+  "locale": "en",
+  "walks": [
+    {
+      "id": "M1-open-from-suite",
+      "title": "Open Marketing from the suite",
+      "locale": "en",
+      "as": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Arrive with a one-time code",
+          "ok": true,
+          "note": "landed on /en/dashboard",
+          "ms": 1703,
+          "url": "http://localhost:3014/en/dashboard",
+          "screenshot": "M1-open-from-suite/01-arrive-with-a-one-time-code.png"
+        },
+        {
+          "n": 2,
+          "name": "Back doesn't reopen the hand-off",
+          "ok": true,
+          "note": "",
+          "ms": 549,
+          "url": "about:blank",
+          "screenshot": "M1-open-from-suite/02-back-doesn-t-reopen-the-hand-off.png"
+        },
+        {
+          "n": 3,
+          "name": "A forged redirect is ignored",
+          "ok": true,
+          "note": "",
+          "ms": 961,
+          "url": "http://localhost:3014/en/dashboard",
+          "screenshot": "M1-open-from-suite/03-a-forged-redirect-is-ignored.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "M1b-deep-link-after-sign-in",
+      "title": "Sign in again and land on the page you opened",
+      "locale": "en",
+      "as": null,
+      "steps": [
+        {
+          "n": 1,
+          "name": "Open a Marketing link while signed out",
+          "ok": true,
+          "note": "",
+          "ms": 1235,
+          "url": "http://localhost:3013/auth/login?redirect=%2Fgo%2Fdigital_marketing%3Fredirect%3D%252Fen%252Fposts",
+          "screenshot": "M1b-deep-link-after-sign-in/01-open-a-marketing-link-while-signed-out.png"
+        },
+        {
+          "n": 2,
+          "name": "Sign in",
+          "ok": true,
+          "note": "landed on /en/posts",
+          "ms": 2397,
+          "url": "http://localhost:3014/en/posts",
+          "screenshot": "M1b-deep-link-after-sign-in/02-sign-in.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "M7-switch-project",
+      "title": "Switch project",
+      "locale": "en",
+      "as": "karim.hassan@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Dashboard of the active project",
+          "ok": true,
+          "note": "Nile Foods",
+          "ms": 2105,
+          "url": "http://localhost:3014/en/dashboard",
+          "screenshot": "M7-switch-project/01-dashboard-of-the-active-project.png"
+        },
+        {
+          "n": 2,
+          "name": "Switch to Sahel Resorts",
+          "ok": true,
+          "note": "Sahel Resorts",
+          "ms": 2481,
+          "url": "http://localhost:3014/en/dashboard",
+          "screenshot": "M7-switch-project/02-switch-to-sahel-resorts.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "M2-google-search",
+      "title": "Run a Google Search campaign",
+      "locale": "en",
+      "as": "dina.fathy@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Details: Google Search, a name, a category",
+          "ok": true,
+          "note": "",
+          "ms": 3027,
+          "url": "http://localhost:3014/en/campaigns/new/google-search/settings?id=3133d8f3-d292-443f-801b-bd3de706d54b",
+          "screenshot": "M2-google-search/01-details-google-search-a-name-a-category.png"
+        },
+        {
+          "n": 2,
+          "name": "Settings: the Google Ads account; the budget is in its currency",
+          "ok": true,
+          "note": "In SAR, the currency of Nile Foods KSA (482-915-3307).",
+          "ms": 966,
+          "url": "http://localhost:3014/en/campaigns/new/google-search/settings?id=3133d8f3-d292-443f-801b-bd3de706d54b",
+          "screenshot": "M2-google-search/02-settings-the-google-ads-account-the-budget-is-in-its-currency.png"
+        },
+        {
+          "n": 3,
+          "name": "Next, then reload: still there",
+          "ok": true,
+          "note": "Flow search xdoo; DRAFT",
+          "ms": 1597,
+          "url": "http://localhost:3014/en/campaigns/new/google-search/ad-groups?id=3133d8f3-d292-443f-801b-bd3de706d54b",
+          "screenshot": "M2-google-search/03-next-then-reload-still-there.png"
+        },
+        {
+          "n": 4,
+          "name": "An ad group with a keyword and a search ad",
+          "ok": true,
+          "note": "",
+          "ms": 1054,
+          "url": "http://localhost:3014/en/campaigns/new/google-search/ad-groups?id=3133d8f3-d292-443f-801b-bd3de706d54b",
+          "screenshot": "M2-google-search/04-an-ad-group-with-a-keyword-and-a-search-ad.png"
+        },
+        {
+          "n": 5,
+          "name": "Review, and a reload keeps everything",
+          "ok": true,
+          "note": "",
+          "ms": 1485,
+          "url": "http://localhost:3014/en/campaigns/new/google-search/review?id=3133d8f3-d292-443f-801b-bd3de706d54b",
+          "screenshot": "M2-google-search/05-review-and-a-reload-keeps-everything.png"
+        },
+        {
+          "n": 6,
+          "name": "Publish: the confirm names the spend",
+          "ok": true,
+          "note": "READY / READY",
+          "ms": 3227,
+          "url": "http://localhost:3014/en/campaigns/3133d8f3-d292-443f-801b-bd3de706d54b",
+          "screenshot": "M2-google-search/06-publish-the-confirm-names-the-spend.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "M3-schedule-with-approval",
+      "title": "Schedule a post with approval",
+      "locale": "en",
+      "as": "hoda.ashraf@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Write the post",
+          "ok": true,
+          "note": "",
+          "ms": 2667,
+          "url": "http://localhost:3014/en/posts/create-post",
+          "screenshot": "M3-schedule-with-approval/01-write-the-post.png"
+        },
+        {
+          "n": 2,
+          "name": "Tomorrow 10:00, in the project's time zone",
+          "ok": true,
+          "note": "Time zone: Eastern European Time (GMT+3)",
+          "ms": 819,
+          "url": "http://localhost:3014/en/posts/create-post",
+          "screenshot": "M3-schedule-with-approval/02-tomorrow-10-00-in-the-project-s-time-zone.png"
+        },
+        {
+          "n": 3,
+          "name": "Nour approves it first",
+          "ok": true,
+          "note": "",
+          "ms": 766,
+          "url": "http://localhost:3014/en/posts/create-post",
+          "screenshot": "M3-schedule-with-approval/03-nour-approves-it-first.png"
+        },
+        {
+          "n": 4,
+          "name": "Send for approval",
+          "ok": true,
+          "note": "PENDING; 10:00 Cairo",
+          "ms": 789,
+          "url": "http://localhost:3014/en/posts/cc758834-281d-4d48-854f-35c7867c7d1d",
+          "screenshot": "M3-schedule-with-approval/04-send-for-approval.png"
+        },
+        {
+          "n": 5,
+          "name": "Nour approves with a note",
+          "ok": true,
+          "note": "SCHEDULED",
+          "ms": 3812,
+          "url": "http://localhost:3014/en/posts/cc758834-281d-4d48-854f-35c7867c7d1d",
+          "screenshot": "M3-schedule-with-approval/05-nour-approves-with-a-note.png"
+        },
+        {
+          "n": 6,
+          "name": "It's on the calendar at 10:00",
+          "ok": true,
+          "note": "10:00 +1 Flow post xdoo",
+          "ms": 1782,
+          "url": "http://localhost:3014/en/calendar",
+          "screenshot": "M3-schedule-with-approval/06-it-s-on-the-calendar-at-10-00.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "M6-client-reviewer",
+      "title": "Review as the client",
+      "locale": "en",
+      "as": "nour.khaled@nilefoods.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Only Nile Foods, and no setup in the menu",
+          "ok": true,
+          "note": "Nile Foods",
+          "ms": 2187,
+          "url": "http://localhost:3014/en/dashboard",
+          "screenshot": "M6-client-reviewer/01-only-nile-foods-and-no-setup-in-the-menu.png"
+        },
+        {
+          "n": 2,
+          "name": "Posts: no Create",
+          "ok": true,
+          "note": "",
+          "ms": 1907,
+          "url": "http://localhost:3014/en/posts",
+          "screenshot": "M6-client-reviewer/02-posts-no-create.png"
+        },
+        {
+          "n": 3,
+          "name": "Writing a post isn't offered",
+          "ok": true,
+          "note": "You can't write posts",
+          "ms": 2037,
+          "url": "http://localhost:3014/en/posts/create-post",
+          "screenshot": "M6-client-reviewer/03-writing-a-post-isn-t-offered.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "M4-boost",
+      "title": "Boost a post",
+      "locale": "en",
+      "as": "dina.fathy@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "200 a day for 7 days, in the account's currency",
+          "ok": true,
+          "note": "Boost for SAR 1,400.00",
+          "ms": 2788,
+          "url": "http://localhost:3014/en/posts/7e708f81-ae99-402b-af5a-103c0b4b82f9",
+          "screenshot": "M4-boost/01-200-a-day-for-7-days-in-the-account-s-currency.png"
+        },
+        {
+          "n": 2,
+          "name": "Confirm the spend",
+          "ok": true,
+          "note": "1 new boost; dialog closed",
+          "ms": 2885,
+          "url": "http://localhost:3014/en/posts/7e708f81-ae99-402b-af5a-103c0b4b82f9",
+          "screenshot": "M4-boost/02-confirm-the-spend.png"
+        },
+        {
+          "n": 3,
+          "name": "A refused boost: an error, and the dialog stays",
+          "ok": true,
+          "note": "dialog open; That didn't work. Try again.",
+          "ms": 5349,
+          "url": "http://localhost:3014/en/posts/7e708f81-ae99-402b-af5a-103c0b4b82f9",
+          "screenshot": "M4-boost/03-a-refused-boost-an-error-and-the-dialog-stays.png"
+        }
+      ],
+      "console": [
+        "Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+      ],
+      "uncaught": [],
+      "api": [
+        {
+          "status": 500,
+          "method": "POST",
+          "url": ":4005/ads/boost"
+        }
+      ]
+    },
+    {
+      "id": "M5-connect-account",
+      "title": "Connect a social account",
+      "locale": "en",
+      "as": "karim.hassan@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Sign in to Facebook and come back",
+          "ok": true,
+          "note": "/en/integrations/wizard/FACEBOOK/2",
+          "ms": 3232,
+          "url": "http://localhost:3014/en/integrations/wizard/FACEBOOK/2?session=tmp_G3-LNPoCcHmoslf5ZzJPGS4SD1QKxqHZ",
+          "screenshot": "M5-connect-account/01-sign-in-to-facebook-and-come-back.png"
+        },
+        {
+          "n": 2,
+          "name": "Refresh keeps the connection going",
+          "ok": true,
+          "note": "",
+          "ms": 1285,
+          "url": "http://localhost:3014/en/integrations/wizard/FACEBOOK/2?session=tmp_G3-LNPoCcHmoslf5ZzJPGS4SD1QKxqHZ",
+          "screenshot": "M5-connect-account/02-refresh-keeps-the-connection-going.png"
+        },
+        {
+          "n": 3,
+          "name": "Pick the page, review and connect",
+          "ok": true,
+          "note": "/en/integrations; Facebook accounts 1 → 1",
+          "ms": 890,
+          "url": "http://localhost:3014/en/integrations",
+          "screenshot": "M5-connect-account/03-pick-the-page-review-and-connect.png"
+        },
+        {
+          "n": 4,
+          "name": "A forged return is refused",
+          "ok": true,
+          "note": "",
+          "ms": 1281,
+          "url": "http://localhost:3014/en/integrations/platform/FACEBOOK/callback",
+          "screenshot": "M5-connect-account/04-a-forged-return-is-refused.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    },
+    {
+      "id": "M8-monthly-report",
+      "title": "Monthly report",
+      "locale": "en",
+      "as": "karim.hassan@orgtik.test",
+      "steps": [
+        {
+          "n": 1,
+          "name": "Reports, last month",
+          "ok": true,
+          "note": "",
+          "ms": 4265,
+          "url": "http://localhost:3014/en/our-reports?from=2026-09-01&to=2026-09-30",
+          "screenshot": "M8-monthly-report/01-reports-last-month.png"
+        },
+        {
+          "n": 2,
+          "name": "Export the daily figures as CSV",
+          "ok": true,
+          "note": "31 lines",
+          "ms": 711,
+          "url": "http://localhost:3014/en/our-reports?from=2026-09-01&to=2026-09-30",
+          "screenshot": "M8-monthly-report/02-export-the-daily-figures-as-csv.png"
+        }
+      ],
+      "console": [],
+      "uncaught": [],
+      "api": []
+    }
+  ]
+}

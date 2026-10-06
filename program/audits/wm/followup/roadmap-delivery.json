@@ -1,0 +1,214 @@
+{
+  "at": "2026-10-05T19:20:31.446Z",
+  "passed": 15,
+  "total": 15,
+  "results": [
+    {
+      "name": "CMS forms are enabled through the existing dashboard setting",
+      "ok": true,
+      "note": "Local live delivery; dated privacy version 0.2."
+    },
+    {
+      "name": "submission saves one pending idea and blocks duplicate clicks while sending",
+      "ok": true,
+      "note": {
+        "id": "idea_muvmwqs2",
+        "status": "pending",
+        "requests": 1
+      }
+    },
+    {
+      "name": "the submitted idea is visible in the CMS Ideas dashboard",
+      "ok": true,
+      "note": "Pending row and the full submitted suggestion rendered in Website Manager."
+    },
+    {
+      "name": "the submitted idea is absent from public lists",
+      "ok": true,
+      "note": "No automatic publication or public submitter details."
+    },
+    {
+      "name": "pausing forms in CMS rejects delivery without false success",
+      "ok": true,
+      "note": "CMS pause remains authoritative even when the pulled snapshot was live."
+    },
+    {
+      "name": "delivery failure keeps fields and retry saves a pending idea",
+      "ok": true,
+      "note": "503 handled, inputs preserved, one successful retry with its own ID."
+    },
+    {
+      "name": "concurrent submissions keep distinct IDs and none are overwritten",
+      "ok": true,
+      "note": "Eight accepted ideas, eight distinct stored IDs."
+    },
+    {
+      "name": "form note removed and layout fits: http://localhost:4173 320",
+      "ok": true,
+      "note": {
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "form note removed and layout fits: http://localhost:4173 390",
+      "ok": true,
+      "note": {
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "form note removed and layout fits: http://localhost:4173 768",
+      "ok": true,
+      "note": {
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "form note removed and layout fits: http://localhost:4173 1440",
+      "ok": true,
+      "note": {
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "form note removed and layout fits: http://127.0.0.1:4280 320",
+      "ok": true,
+      "note": {
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "form note removed and layout fits: http://127.0.0.1:4280 390",
+      "ok": true,
+      "note": {
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "form note removed and layout fits: http://127.0.0.1:4280 768",
+      "ok": true,
+      "note": {
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    },
+    {
+      "name": "form note removed and layout fits: http://127.0.0.1:4280 1440",
+      "ok": true,
+      "note": {
+        "overflow": false,
+        "accessibility": {
+          "violations": [
+            {
+              "id": "color-contrast",
+              "impact": "serious",
+              "nodes": 1,
+              "help": "Elements must meet minimum color contrast ratio thresholds"
+            }
+          ],
+          "critical": 0,
+          "serious": 1,
+          "moderate": 0,
+          "minor": 0
+        }
+      }
+    }
+  ]
+}

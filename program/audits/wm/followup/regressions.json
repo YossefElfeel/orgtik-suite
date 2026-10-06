@@ -1,0 +1,961 @@
+{
+  "at": "2026-10-05T12:57:40.257Z",
+  "passed": 81,
+  "total": 81,
+  "results": [
+    {
+      "name": "six milestone and seven moderated idea examples; three pending examples private",
+      "ok": true,
+      "note": {
+        "milestones": 6,
+        "publicIdeas": 7,
+        "pending": 3
+      },
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "timeline period, theme, year, search and empty-state reset",
+      "ok": true,
+      "note": "All timeline controls and both empty states work.",
+      "checkedAt": "2026-10-05T10:08:07.984Z"
+    },
+    {
+      "name": "details dialog traps focus, closes with Escape and returns focus",
+      "ok": true,
+      "note": "Dialog focus wraps and returns to the triggering card.",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "votes toggle locally and reset on reload without network writes",
+      "ok": true,
+      "note": "Toggle, untoggle, reload reset; zero POSTs.",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "idea form validates topic and email without sending",
+      "ok": true,
+      "note": "Topic and native email validation enforced.",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "submission failure preserves fields; retry creates a private pending idea",
+      "ok": true,
+      "note": "503 handled; second attempt succeeded and remained pending/private.",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "empty filtered list creates blank design case",
+      "ok": true,
+      "note": "cs_02",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "empty filtered list creates blank development case",
+      "ok": true,
+      "note": "cs_03",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "empty filtered list creates blank hosting case",
+      "ok": true,
+      "note": "cs_04",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "empty filtered list creates blank digital-marketing case",
+      "ok": true,
+      "note": "cs_05",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "empty filtered list creates blank it-support case",
+      "ok": true,
+      "note": "cs_06",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "blank article and roadmap creation survives an empty filtered list",
+      "ok": true,
+      "note": "Both blank types can be created with no available templates.",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "explicit template copying retains department and starts with a disabled sample narrative",
+      "ok": true,
+      "note": "cs_02",
+      "checkedAt": "2026-10-05T12:57:33.111Z"
+    },
+    {
+      "name": "editor narrative control is disabled with a permission explanation",
+      "ok": true,
+      "note": "Editor cannot change narrative publication.",
+      "checkedAt": "2026-10-05T12:57:34.272Z"
+    },
+    {
+      "name": "approver must confirm figures before enabling the narrative",
+      "ok": true,
+      "note": "Approved figures unlock the approver switch; enabled draft saved.",
+      "checkedAt": "2026-10-05T12:57:38.016Z"
+    },
+    {
+      "name": "eligible narrative renders in all Website Manager preview frames",
+      "ok": true,
+      "note": "Approved enabled narrative appears in three draft preview widths.",
+      "checkedAt": "2026-10-05T12:57:39.855Z"
+    },
+    {
+      "name": "figure edits revoke draft approval while leaving the published narrative intact",
+      "ok": true,
+      "note": "Draft disabled; previous approved published content remains identical.",
+      "checkedAt": "2026-10-05T12:57:39.870Z"
+    },
+    {
+      "name": "CMS payment messages and shared header resolve after preview overrides",
+      "ok": true,
+      "note": "Draft payment labels, validation and header shown; all four fixed values correct.",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "fixed placeholders are visible in the editor and cannot be removed",
+      "ok": true,
+      "note": "All placeholders preserved by the API; fixed values displayed read-only.",
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "WM en light 390: no critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "WM en light 1440: no critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "WM en dark 390: no critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "WM en dark 1440: no critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "WM ar light 390: no critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "WM ar light 1440: no critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "WM ar dark 390: no critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "WM ar dark 1440: no critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:04:46.719Z"
+    },
+    {
+      "name": "site en /roadmap 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:14:50.467Z"
+    },
+    {
+      "name": "site en /checkout 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:14:52.050Z"
+    },
+    {
+      "name": "site en /sign-in 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:14:53.723Z"
+    },
+    {
+      "name": "site en / 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:14:59.335Z"
+    },
+    {
+      "name": "site en /roadmap 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:01.297Z"
+    },
+    {
+      "name": "site en /checkout 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:02.917Z"
+    },
+    {
+      "name": "site en /sign-in 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:04.557Z"
+    },
+    {
+      "name": "site en / 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:10.259Z"
+    },
+    {
+      "name": "site en /roadmap 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:12.397Z"
+    },
+    {
+      "name": "site en /checkout 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:14.059Z"
+    },
+    {
+      "name": "site en /sign-in 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:15.729Z"
+    },
+    {
+      "name": "site en / 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:22.437Z"
+    },
+    {
+      "name": "site en /roadmap 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:24.853Z"
+    },
+    {
+      "name": "site en /checkout 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:26.580Z"
+    },
+    {
+      "name": "site en /sign-in 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:28.390Z"
+    },
+    {
+      "name": "site en / 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:35.534Z"
+    },
+    {
+      "name": "site ar /roadmap 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:37.491Z"
+    },
+    {
+      "name": "site ar /checkout 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:39.115Z"
+    },
+    {
+      "name": "site ar /sign-in 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:40.738Z"
+    },
+    {
+      "name": "site ar / 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:46.673Z"
+    },
+    {
+      "name": "site ar /roadmap 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:48.740Z"
+    },
+    {
+      "name": "site ar /checkout 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:50.365Z"
+    },
+    {
+      "name": "site ar /sign-in 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:52.004Z"
+    },
+    {
+      "name": "site ar / 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:57.843Z"
+    },
+    {
+      "name": "site ar /roadmap 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:59.931Z"
+    },
+    {
+      "name": "site ar /checkout 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:01.575Z"
+    },
+    {
+      "name": "site ar /sign-in 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:03.263Z"
+    },
+    {
+      "name": "site ar / 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:09.540Z"
+    },
+    {
+      "name": "site ar /roadmap 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:11.937Z"
+    },
+    {
+      "name": "site ar /checkout 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:13.665Z"
+    },
+    {
+      "name": "site ar /sign-in 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:15.505Z"
+    },
+    {
+      "name": "site ar / 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:22.537Z"
+    },
+    {
+      "name": "RTL account panel clamp and stable focus return 320",
+      "ok": true,
+      "note": {
+        "left": 16,
+        "expected": 16,
+        "width": 288
+      },
+      "checkedAt": "2026-10-05T10:10:36.301Z"
+    },
+    {
+      "name": "RTL account panel clamp and stable focus return 390",
+      "ok": true,
+      "note": {
+        "left": 70,
+        "expected": 70,
+        "width": 304
+      },
+      "checkedAt": "2026-10-05T10:10:38.601Z"
+    },
+    {
+      "name": "RTL account panel clamp and stable focus return 768",
+      "ok": true,
+      "note": {
+        "left": 148.046875,
+        "expected": 148.046875,
+        "width": 304
+      },
+      "checkedAt": "2026-10-05T10:10:40.901Z"
+    },
+    {
+      "name": "RTL account panel clamp and stable focus return 1440",
+      "ok": true,
+      "note": {
+        "left": 252.203125,
+        "expected": 252.203125,
+        "width": 304
+      },
+      "checkedAt": "2026-10-05T10:10:43.257Z"
+    },
+    {
+      "name": "moderation keeps pending, declined, merged and hidden ideas outside public lists",
+      "ok": true,
+      "note": "All four private moderation states remain excluded.",
+      "checkedAt": "2026-10-05T10:13:56.624Z"
+    },
+    {
+      "name": "Sign-up metadata, eight deleted-project redirects, sitemap, robots and 404s",
+      "ok": true,
+      "note": "Shared Sign-in body, metadata-only Sign-up, permanent redirects, English-only build and noindex 404s verified.",
+      "checkedAt": "2026-10-05T10:14:05.204Z"
+    },
+    {
+      "name": "site en /sign-up 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:14:55.387Z"
+    },
+    {
+      "name": "site en /work/orgtik-identity-system 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:14:57.129Z"
+    },
+    {
+      "name": "site en /sign-up 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:06.175Z"
+    },
+    {
+      "name": "site en /work/orgtik-identity-system 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:07.991Z"
+    },
+    {
+      "name": "site en /sign-up 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:17.421Z"
+    },
+    {
+      "name": "site en /work/orgtik-identity-system 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:19.346Z"
+    },
+    {
+      "name": "site en /sign-up 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:30.246Z"
+    },
+    {
+      "name": "site en /work/orgtik-identity-system 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:32.358Z"
+    },
+    {
+      "name": "site ar /sign-up 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:42.457Z"
+    },
+    {
+      "name": "site ar /work/orgtik-identity-system 320: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:44.383Z"
+    },
+    {
+      "name": "site ar /sign-up 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:53.690Z"
+    },
+    {
+      "name": "site ar /work/orgtik-identity-system 390: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:15:55.502Z"
+    },
+    {
+      "name": "site ar /sign-up 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:04.993Z"
+    },
+    {
+      "name": "site ar /work/orgtik-identity-system 768: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:06.920Z"
+    },
+    {
+      "name": "site ar /sign-up 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:17.344Z"
+    },
+    {
+      "name": "site ar /work/orgtik-identity-system 1440: fits and zero critical accessibility issues",
+      "ok": true,
+      "note": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      },
+      "checkedAt": "2026-10-05T10:16:19.475Z"
+    }
+  ]
+}

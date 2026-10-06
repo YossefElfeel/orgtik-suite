@@ -1,0 +1,70 @@
+{
+  "Support": {
+    "title": "Support",
+    "descriptionAdmin": "Every ticket opened in {name}. OrgTik support answers here and by email.",
+    "descriptionMember": "The tickets you opened. OrgTik support answers here and by email.",
+    "newTicket": "New ticket",
+    "new": {
+      "title": "New ticket",
+      "description": "Tell OrgTik support what's going on. You get an answer here and by email.",
+      "sent": "Ticket {number} opened",
+      "subject": "Subject",
+      "subjectMissing": "Give the ticket a subject.",
+      "category": "Category",
+      "categoryMissing": "Choose a category.",
+      "categoryPlaceholder": "Choose a category",
+      "message": "Message",
+      "messageMissing": "Describe the problem or question.",
+      "messageHint": "What happened, what you expected, and where. Invoice or request numbers help.",
+      "cancel": "Cancel",
+      "submit": "Open ticket"
+    },
+    "tableLabel": "Support tickets",
+    "emptyTitle": "No tickets",
+    "emptyBody": "Ask OrgTik support anything about billing, a tool or a service.",
+    "colNumber": "Number",
+    "colSubject": "Subject",
+    "colCategory": "Category",
+    "colStatus": "Status",
+    "colLastReply": "Last reply",
+    "colCreated": "Opened",
+    "noReply": "No reply yet",
+    "categories": {
+      "billing": "Billing",
+      "product": "Product",
+      "sales": "Sales",
+      "technical": "Technical",
+      "other": "Other"
+    },
+    "thread": {
+      "staff": "OrgTik support",
+      "you": "You",
+      "empty": "Write something first."
+    },
+    "detail": {
+      "missingTitle": "This ticket isn't here",
+      "failedTitle": "The ticket couldn't be loaded",
+      "missingBody": "It may belong to another workspace, or someone else opened it.",
+      "failedBody": "Check your connection and try again.",
+      "toTickets": "Back to tickets",
+      "meta": "{category} · opened {date}",
+      "resolve": "Mark resolved",
+      "waitingUntil": "OrgTik support is waiting for your answer. Without one, the ticket closes on {date}.",
+      "waiting": "OrgTik support is waiting for your answer.",
+      "conversation": "Conversation",
+      "noMessages": "No messages yet.",
+      "closedTitle": "This ticket is closed",
+      "openNew": "Open a new ticket",
+      "closedBody": "Replies can't be added to a closed ticket. Open a new one and mention this ticket's number.",
+      "replyLabel": "Your reply",
+      "reply": "Send reply",
+      "reopensUntil": "This ticket is resolved. Replying before {date} reopens it.",
+      "reopens": "This ticket is resolved. Replying reopens it.",
+      "reopened": "Reply sent. The ticket is open again.",
+      "replied": "Reply sent",
+      "resolveTitle": "Mark {number} resolved?",
+      "resolveImpact": "OrgTik support sees it's sorted. If the problem comes back, reply here to reopen it.",
+      "resolved": "Ticket resolved"
+    }
+  }
+}

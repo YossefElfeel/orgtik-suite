@@ -1,0 +1,137 @@
+{
+  "Billing": {
+    "reason": "Motivo",
+    "list": {
+      "title": "Fatture",
+      "description": "Tutte le fatture, con pagamenti e rimborsi, nella valuta del cliente e in USD.",
+      "filters": "Filtra le fatture",
+      "state": "Stato",
+      "allStates": "Tutti gli stati",
+      "workspace": "Workspace",
+      "allWorkspaces": "Tutti i workspace",
+      "currency": "Valuta",
+      "allCurrencies": "Tutte le valute",
+      "clear": "Cancella i filtri",
+      "colNumber": "Fattura",
+      "colWorkspace": "Workspace",
+      "colState": "Stato",
+      "colIssued": "Emessa il",
+      "notIssued": "Non emessa",
+      "colDue": "Scadenza",
+      "colTotal": "Totale",
+      "colUsd": "In USD",
+      "pageTotal": "Fatturato in questa pagina, in USD (escluse bozze e fatture annullate):",
+      "noMatch": "Nessuna fattura corrisponde a questi filtri",
+      "empty": "Ancora nessuna fattura",
+      "emptyBody": "Le fatture compaiono qui quando i clienti vengono fatturati o quando ne crei una."
+    },
+    "kind": {
+      "subscription": "Abbonamento",
+      "manual": "Manuale"
+    },
+    "method": {
+      "bank_transfer": "Bonifico bancario",
+      "cash": "Contanti",
+      "cheque": "Assegno",
+      "card": "Carta",
+      "wallet": "Portafoglio",
+      "other": "Altro"
+    },
+    "payment": {
+      "succeeded": "Riuscito",
+      "failed": "Non riuscito"
+    },
+    "failure": {
+      "card_declined": "Carta rifiutata",
+      "card_expired": "Carta scaduta",
+      "insufficient_funds": "Fondi insufficienti"
+    },
+    "actions": {
+      "issue": "Emetti fattura",
+      "markPaid": "Segna come pagata",
+      "retry": "Riprova il pagamento",
+      "refund": "Rimborsa",
+      "void": "Annulla fattura",
+      "more": "Altre azioni per {number}"
+    },
+    "confirm": {
+      "issueTitle": "Emettere {number}?",
+      "issueImpact": "Il cliente riceve questa fattura di {amount}, con scadenza a 7 giorni. Dopo non si può più modificare.",
+      "retryTitle": "Riprovare il pagamento di {number}?",
+      "retryImpact": "Addebita ora {amount} sul metodo di pagamento predefinito del workspace.",
+      "voidTitle": "Annullare {number}?",
+      "voidImpact": "I {amount} non verranno incassati; la fattura resta registrata come annullata."
+    },
+    "done": {
+      "issue": "{number} emessa",
+      "retry": "Il pagamento di {number} è andato a buon fine",
+      "retryFailed": "Il pagamento di {number} non è riuscito di nuovo",
+      "void": "{number} annullata",
+      "markPaid": "{number} segnata come pagata",
+      "refund": "Rimborsati {amount}; nota di credito {note}"
+    },
+    "markPaid": {
+      "title": "Segna {number} come pagata",
+      "impact": "Registra un pagamento di {amount} effettuato fuori dal gateway. I suoi strumenti tornano attivi.",
+      "method": "Metodo di pagamento",
+      "reference": "Riferimento",
+      "referenceHint": "Il riferimento bancario o della ricevuta, per ritrovare il pagamento in seguito."
+    },
+    "refund": {
+      "title": "Rimborsa {number}",
+      "impact": "Il rimborso è nella valuta della fattura e crea una nota di credito numerata.",
+      "amount": "Importo ({currency})",
+      "upTo": "Fino a {max}.",
+      "amountMin": "Inserisci un importo superiore a 0.",
+      "overMax": "È più di quanto si possa rimborsare. Al massimo {max}."
+    },
+    "create": {
+      "open": "Nuova fattura",
+      "title": "Nuova fattura manuale",
+      "description": "Viene salvata come bozza nella valuta del workspace, con l'imposta del suo paese. Emettila quando è pronta.",
+      "workspace": "Workspace",
+      "pickWorkspace": "Scegli un workspace",
+      "noWorkspace": "Nessun workspace con questo nome",
+      "currency": "Fatturato in {currency}.",
+      "lines": "Righe",
+      "lineLabel": "Riga {n}: descrizione",
+      "lineAmount": "Riga {n}: importo",
+      "pickFirst": "Scegli prima un workspace",
+      "removeLine": "Rimuovi la riga {n}",
+      "addLine": "Aggiungi riga",
+      "linesInvalid": "Ogni riga richiede una descrizione e un importo superiore a 0.",
+      "subtotal": "Subtotale al netto delle imposte: {amount}",
+      "submit": "Salva bozza",
+      "done": "Bozza {number} salvata"
+    },
+    "detail": {
+      "notFound": "Fattura non trovata",
+      "notFoundBody": "Il link potrebbe essere sbagliato.",
+      "back": "Torna alle fatture",
+      "summary": "Riepilogo",
+      "workspace": "Workspace",
+      "kind": "Tipo",
+      "currency": "Valuta",
+      "issued": "Emessa il",
+      "due": "Scadenza",
+      "paid": "Pagata il",
+      "voided": "Annullata il",
+      "refundable": "Rimborsabile",
+      "lines": "Righe",
+      "item": "Voce",
+      "amount": "Importo",
+      "subtotal": "Subtotale",
+      "tax": "Imposta",
+      "noTax": "Senza imposta",
+      "total": "Totale",
+      "refunded": "Rimborsato",
+      "payments": "Pagamenti",
+      "gateway": "tramite",
+      "reference": "riferimento",
+      "usdRate": "Cambio USD {rate}",
+      "noPayments": "Ancora nessun pagamento.",
+      "creditNotes": "Note di credito",
+      "noCreditNotes": "Nessuna nota di credito."
+    }
+  }
+}

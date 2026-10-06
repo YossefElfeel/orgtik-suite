@@ -1,0 +1,261 @@
+{
+ "Suite.apps.global": {
+  "en": "Home",
+  "ar": "الرئيسية",
+  "de": "Start",
+  "fr": "Accueil",
+  "it": "Home"
+ },
+ "Suite.apps.file_manager": {
+  "en": "Files",
+  "ar": "الملفات",
+  "de": "Dateien",
+  "fr": "Fichiers",
+  "it": "File"
+ },
+ "Suite.apps.task_manager": {
+  "en": "Tasks",
+  "ar": "المهام",
+  "de": "Aufgaben",
+  "fr": "Tâches",
+  "it": "Attività"
+ },
+ "Suite.apps.hq": {
+  "en": "Chats",
+  "ar": "المحادثات",
+  "de": "Chats",
+  "fr": "Discussions",
+  "it": "Chat"
+ },
+ "Suite.apps.hr_system": {
+  "en": "HR",
+  "ar": "الموارد البشرية",
+  "de": "Personal",
+  "fr": "RH",
+  "it": "Risorse umane"
+ },
+ "Suite.apps.digital_marketing": {
+  "en": "Marketing",
+  "ar": "التسويق",
+  "de": "Marketing",
+  "fr": "Marketing",
+  "it": "Marketing"
+ },
+ "Suite.apps.sales": {
+  "en": "CRM",
+  "ar": "إدارة العملاء",
+  "de": "CRM",
+  "fr": "CRM",
+  "it": "CRM"
+ },
+ "Suite.apps.website_manager": {
+  "en": "Website",
+  "ar": "الموقع",
+  "de": "Website",
+  "fr": "Site web",
+  "it": "Sito web"
+ },
+ "Suite.apps.website_manager_legacy": {
+  "en": "Old CMS",
+  "ar": "نظام المحتوى القديم",
+  "de": "Altes CMS",
+  "fr": "Ancien CMS",
+  "it": "Vecchio CMS"
+ },
+ "Suite.appName": {
+  "en": "CRM",
+  "ar": "إدارة العملاء",
+  "de": "CRM",
+  "fr": "CRM",
+  "it": "CRM"
+ },
+ "Errors.crashTitle": {
+  "en": "This page stopped working",
+  "ar": "توقفت هذه الصفحة عن العمل",
+  "de": "Diese Seite funktioniert nicht mehr",
+  "fr": "Cette page a cessé de fonctionner",
+  "it": "Questa pagina ha smesso di funzionare"
+ },
+ "Errors.reference": {
+  "en": "Reference:",
+  "ar": "المرجع:",
+  "de": "Referenz:",
+  "fr": "Référence :",
+  "it": "Riferimento:"
+ },
+ "Errors.retry": {
+  "en": "Try again",
+  "ar": "حاول مرة أخرى",
+  "de": "Erneut versuchen",
+  "fr": "Réessayer",
+  "it": "Riprova"
+ },
+ "Errors.toDashboard": {
+  "en": "Go to the dashboard",
+  "ar": "الذهاب إلى لوحة التحكم",
+  "de": "Zum Dashboard",
+  "fr": "Aller au tableau de bord",
+  "it": "Vai alla dashboard"
+ },
+ "Errors.toSuite": {
+  "en": "Go to your apps",
+  "ar": "الذهاب إلى تطبيقاتك",
+  "de": "Zu Ihren Apps",
+  "fr": "Aller à vos applications",
+  "it": "Vai alle tue app"
+ },
+ "Errors.handoffTitle": {
+  "en": "This sign-in link has expired",
+  "ar": "انتهت صلاحية رابط تسجيل الدخول هذا",
+  "de": "Dieser Anmeldelink ist abgelaufen",
+  "fr": "Ce lien de connexion a expiré",
+  "it": "Questo link di accesso è scaduto"
+ },
+ "Errors.notFoundTitle": {
+  "en": "This page doesn't exist",
+  "ar": "هذه الصفحة غير موجودة",
+  "de": "Diese Seite gibt es nicht",
+  "fr": "Cette page n’existe pas",
+  "it": "Questa pagina non esiste"
+ },
+ "Errors.appNoAccessTitle": {
+  "en": "You don't have access to CRM",
+  "ar": "ليست لديك صلاحية الوصول إلى إدارة العملاء",
+  "de": "Sie haben keinen Zugriff auf CRM",
+  "fr": "Vous n’avez pas accès à CRM",
+  "it": "Non hai accesso a CRM"
+ },
+ "Errors.noAccessTitle": {
+  "en": "You can't open this page",
+  "ar": "لا يمكنك فتح هذه الصفحة",
+  "de": "Sie können diese Seite nicht öffnen",
+  "fr": "Vous ne pouvez pas ouvrir cette page",
+  "it": "Non puoi aprire questa pagina"
+ },
+ "Feedback.saved": {
+  "en": "Changes saved",
+  "ar": "تم حفظ التغييرات",
+  "de": "Änderungen gespeichert",
+  "fr": "Modifications enregistrées",
+  "it": "Modifiche salvate"
+ },
+ "Feedback.forbidden": {
+  "en": "Your role doesn't allow this change",
+  "ar": "دورك لا يسمح بهذا التغيير",
+  "de": "Ihre Rolle erlaubt diese Änderung nicht",
+  "fr": "Votre rôle ne permet pas cette modification",
+  "it": "Il tuo ruolo non consente questa modifica"
+ },
+ "Feedback.gone": {
+  "en": "This no longer exists. Reload to see the latest.",
+  "ar": "هذا العنصر لم يعد موجودًا. أعد التحميل لترى أحدث نسخة.",
+  "de": "Das gibt es nicht mehr. Laden Sie neu, um den aktuellen Stand zu sehen.",
+  "fr": "Cet élément n’existe plus. Rechargez pour voir la dernière version.",
+  "it": "Questo elemento non esiste più. Ricarica per vedere la versione più recente."
+ },
+ "Feedback.conflict": {
+  "en": "Someone changed this at the same time. Reload and try again.",
+  "ar": "غيّر شخص آخر هذا العنصر في الوقت نفسه. أعد التحميل وحاول مرة أخرى.",
+  "de": "Jemand hat das gleichzeitig geändert. Laden Sie neu und versuchen Sie es erneut.",
+  "fr": "Quelqu’un a modifié cet élément en même temps. Rechargez et réessayez.",
+  "it": "Qualcuno l’ha modificato nello stesso momento. Ricarica e riprova."
+ },
+ "Feedback.tooLarge": {
+  "en": "The file is too large",
+  "ar": "الملف كبير جدًا",
+  "de": "Die Datei ist zu groß",
+  "fr": "Le fichier est trop volumineux",
+  "it": "Il file è troppo grande"
+ },
+ "Feedback.tooMany": {
+  "en": "Too many requests. Wait a moment and try again.",
+  "ar": "طلبات كثيرة جدًا. انتظر قليلًا ثم حاول مرة أخرى.",
+  "de": "Zu viele Anfragen. Warten Sie einen Moment und versuchen Sie es erneut.",
+  "fr": "Trop de requêtes. Patientez un instant et réessayez.",
+  "it": "Troppe richieste. Attendi un momento e riprova."
+ },
+ "Feedback.offline": {
+  "en": "Can't reach the server. Check your connection and try again.",
+  "ar": "تعذّر الوصول إلى الخادم. تحقق من اتصالك وحاول مرة أخرى.",
+  "de": "Der Server ist nicht erreichbar. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+  "fr": "Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.",
+  "it": "Impossibile raggiungere il server. Controlla la connessione e riprova."
+ },
+ "Feedback.invalid": {
+  "en": "Some details aren't valid. Check the form and try again.",
+  "ar": "بعض البيانات غير صالحة. راجع النموذج وحاول مرة أخرى.",
+  "de": "Einige Angaben sind ungültig. Prüfen Sie das Formular und versuchen Sie es erneut.",
+  "fr": "Certaines informations ne sont pas valides. Vérifiez le formulaire et réessayez.",
+  "it": "Alcuni dati non sono validi. Controlla il modulo e riprova."
+ },
+ "Feedback.failed": {
+  "en": "That didn't work. Try again.",
+  "ar": "لم تنجح العملية. حاول مرة أخرى.",
+  "de": "Das hat nicht geklappt. Versuchen Sie es erneut.",
+  "fr": "Cela n’a pas fonctionné. Réessayez.",
+  "it": "Non ha funzionato. Riprova."
+ },
+ "Feedback.readOnly": {
+  "en": "You're viewing as someone else, so changes are turned off.",
+  "ar": "أنت تعرض بصفة شخص آخر، لذلك التعديل متوقف.",
+  "de": "Sie sehen die Ansicht einer anderen Person, deshalb sind Änderungen abgeschaltet.",
+  "fr": "Vous consultez en tant qu’une autre personne : les modifications sont désactivées.",
+  "it": "Stai visualizzando come un’altra persona, quindi le modifiche sono disattivate."
+ },
+ "Errors.crashBody": {
+  "en": "Something went wrong on our side. Your customers and deals are safe. Try again, or go back to the dashboard.",
+  "ar": "حدث خطأ من جهتنا. عملاؤك وصفقاتك محفوظة. حاول مرة أخرى، أو ارجع إلى لوحة التحكم.",
+  "de": "Bei uns ist etwas schiefgelaufen. Ihre Kunden und Deals sind sicher. Versuchen Sie es erneut oder kehren Sie zum Dashboard zurück.",
+  "fr": "Un problème est survenu de notre côté. Vos clients et affaires sont en sécurité. Réessayez ou revenez au tableau de bord.",
+  "it": "Si è verificato un problema da parte nostra. I tuoi clienti e le tue trattative sono al sicuro. Riprova o torna alla dashboard."
+ },
+ "Errors.notFoundBody": {
+  "en": "The link may be old, or the record may have been deleted. Start from the dashboard or from your customers.",
+  "ar": "ربما يكون الرابط قديمًا، أو حُذف السجل. ابدأ من لوحة التحكم أو من عملائك.",
+  "de": "Der Link ist vielleicht veraltet, oder der Eintrag wurde gelöscht. Beginnen Sie im Dashboard oder bei Ihren Kunden.",
+  "fr": "Le lien est peut-être ancien, ou l’élément a été supprimé. Repartez du tableau de bord ou de vos clients.",
+  "it": "Il link potrebbe essere vecchio o il record potrebbe essere stato eliminato. Riparti dalla dashboard o dai tuoi clienti."
+ },
+ "Errors.toCustomers": {
+  "en": "Open customers",
+  "ar": "فتح العملاء",
+  "de": "Kunden öffnen",
+  "fr": "Ouvrir les clients",
+  "it": "Apri i clienti"
+ },
+ "Errors.handoffBody": {
+  "en": "Links from the launcher work once and for a minute. Open CRM again from your apps.",
+  "ar": "روابط مشغّل التطبيقات تعمل مرة واحدة ولمدة دقيقة. افتح إدارة العملاء مرة أخرى من تطبيقاتك.",
+  "de": "Links aus dem Launcher funktionieren einmal und eine Minute lang. Öffnen Sie CRM erneut über Ihre Apps.",
+  "fr": "Les liens du lanceur ne fonctionnent qu’une fois et pendant une minute. Rouvrez CRM depuis vos applications.",
+  "it": "I link del launcher funzionano una sola volta e per un minuto. Riapri CRM dalle tue app."
+ },
+ "Errors.appNoAccessBody": {
+  "en": "Your account isn't set up for this app. Open the apps you can use from the suite, or ask your workspace admin to give you access to CRM.",
+  "ar": "حسابك غير مُعدّ لهذا التطبيق. افتح التطبيقات المتاحة لك من مجموعة التطبيقات، أو اطلب من مسؤول مساحة العمل منحك صلاحية الوصول إلى إدارة العملاء.",
+  "de": "Ihr Konto ist für diese App nicht eingerichtet. Öffnen Sie Ihre Apps in der Suite oder bitten Sie die Workspace-Administration um Zugriff auf CRM.",
+  "fr": "Votre compte n’est pas configuré pour cette application. Ouvrez vos applications depuis la suite, ou demandez à l’administrateur de l’espace de travail de vous donner accès à CRM.",
+  "it": "Il tuo account non è configurato per questa app. Apri le app che puoi usare dalla suite o chiedi all’amministratore dello spazio di lavoro di darti accesso a CRM."
+ },
+ "Errors.noAccessBody": {
+  "en": "Your role in CRM doesn't include it. Ask a sales manager or your workspace admin if you need it.",
+  "ar": "دورك في إدارة العملاء لا يشملها. اطلبها من مدير المبيعات أو من مسؤول مساحة العمل إن كنت تحتاج إليها.",
+  "de": "Ihre Rolle im CRM umfasst sie nicht. Wenden Sie sich an die Vertriebsleitung oder die Workspace-Administration, wenn Sie sie brauchen.",
+  "fr": "Votre rôle dans CRM ne l’inclut pas. Demandez à un responsable commercial ou à l’administrateur de l’espace de travail si vous en avez besoin.",
+  "it": "Il tuo ruolo in CRM non la include. Chiedi a un responsabile vendite o all’amministratore dello spazio di lavoro se ti serve."
+ },
+ "Feedback.deleted": {
+  "en": "Deleted",
+  "ar": "تم الحذف",
+  "de": "Gelöscht",
+  "fr": "Supprimé",
+  "it": "Eliminato"
+ },
+ "Feedback.added": {
+  "en": "Added",
+  "ar": "تمت الإضافة",
+  "de": "Hinzugefügt",
+  "fr": "Ajouté",
+  "it": "Aggiunto"
+ }
+}

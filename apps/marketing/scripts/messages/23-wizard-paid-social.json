@@ -1,0 +1,415 @@
+{
+ "CampaignPaid.settingsTitle": {
+  "en": "Paid social settings",
+  "ar": "إعدادات الإعلانات الاجتماعية المدفوعة",
+  "de": "Einstellungen für bezahlte Social-Anzeigen",
+  "fr": "Paramètres des annonces sociales payantes",
+  "it": "Impostazioni degli annunci social a pagamento"
+ },
+ "CampaignPaid.settingsDescription": {
+  "en": "Every ad set uses these, unless it overrides them on the next step.",
+  "ar": "تستخدمها كل مجموعات الإعلانات ما لم تتجاوزها في الخطوة التالية.",
+  "de": "Jedes Anzeigenset nutzt diese, außer es überschreibt sie im nächsten Schritt.",
+  "fr": "Chaque ensemble d’annonces les utilise, sauf s’il les remplace à l’étape suivante.",
+  "it": "Ogni set di annunci le usa, a meno che non le sostituisca al passaggio successivo."
+ },
+ "CampaignPaid.objectiveTitle": {
+  "en": "Objective",
+  "ar": "الهدف",
+  "de": "Ziel",
+  "fr": "Objectif",
+  "it": "Obiettivo"
+ },
+ "CampaignPaid.budgetTitle": {
+  "en": "Budget",
+  "ar": "الميزانية",
+  "de": "Budget",
+  "fr": "Budget",
+  "it": "Budget"
+ },
+ "CampaignPaid.budgetAmount": {
+  "en": "Amount",
+  "ar": "المبلغ",
+  "de": "Betrag",
+  "fr": "Montant",
+  "it": "Importo"
+ },
+ "CampaignPaid.budgetType": {
+  "en": "Budget period",
+  "ar": "مدة الميزانية",
+  "de": "Budgetzeitraum",
+  "fr": "Période du budget",
+  "it": "Periodo del budget"
+ },
+ "CampaignPaid.budgetRequired": {
+  "en": "Enter a budget above zero",
+  "ar": "أدخل ميزانية أكبر من صفر",
+  "de": "Geben Sie ein Budget über null ein",
+  "fr": "Saisissez un budget supérieur à zéro",
+  "it": "Inserisci un budget maggiore di zero"
+ },
+ "CampaignPaid.currencyNote": {
+  "en": "In {currency}, the campaign's currency.",
+  "ar": "بعملة {currency}، عملة الحملة.",
+  "de": "In {currency}, der Währung der Kampagne.",
+  "fr": "En {currency}, la devise de la campagne.",
+  "it": "In {currency}, la valuta della campagna."
+ },
+ "CampaignPaid.audienceTitle": {
+  "en": "Audience",
+  "ar": "الجمهور",
+  "de": "Zielgruppe",
+  "fr": "Audience",
+  "it": "Pubblico"
+ },
+ "CampaignPaid.locations": {
+  "en": "Countries",
+  "ar": "الدول",
+  "de": "Länder",
+  "fr": "Pays",
+  "it": "Paesi"
+ },
+ "CampaignPaid.locationsPlaceholder": {
+  "en": "Choose countries",
+  "ar": "اختر الدول",
+  "de": "Länder wählen",
+  "fr": "Choisissez des pays",
+  "it": "Scegli i paesi"
+ },
+ "CampaignPaid.locationsRequired": {
+  "en": "Choose at least one country",
+  "ar": "اختر دولة واحدة على الأقل",
+  "de": "Wählen Sie mindestens ein Land",
+  "fr": "Choisissez au moins un pays",
+  "it": "Scegli almeno un paese"
+ },
+ "CampaignPaid.age": {
+  "en": "Age",
+  "ar": "العمر",
+  "de": "Alter",
+  "fr": "Âge",
+  "it": "Età"
+ },
+ "CampaignPaid.ageMin": {
+  "en": "From",
+  "ar": "من",
+  "de": "Von",
+  "fr": "De",
+  "it": "Da"
+ },
+ "CampaignPaid.ageMax": {
+  "en": "To",
+  "ar": "إلى",
+  "de": "Bis",
+  "fr": "À",
+  "it": "A"
+ },
+ "CampaignPaid.ageOrder": {
+  "en": "The upper age must be at least the lower one",
+  "ar": "يجب ألا يقل الحد الأعلى للعمر عن الحد الأدنى",
+  "de": "Das Höchstalter muss mindestens dem Mindestalter entsprechen",
+  "fr": "L’âge maximum doit être au moins égal à l’âge minimum",
+  "it": "L’età massima deve essere almeno pari alla minima"
+ },
+ "CampaignPaid.gender": {
+  "en": "Gender",
+  "ar": "الجنس",
+  "de": "Geschlecht",
+  "fr": "Genre",
+  "it": "Genere"
+ },
+ "CampaignPaid.interests": {
+  "en": "Interests",
+  "ar": "الاهتمامات",
+  "de": "Interessen",
+  "fr": "Centres d’intérêt",
+  "it": "Interessi"
+ },
+ "CampaignPaid.interestsPlaceholder": {
+  "en": "Type an interest and press Enter",
+  "ar": "اكتب اهتمامًا واضغط Enter",
+  "de": "Interesse eingeben und Eingabe drücken",
+  "fr": "Saisissez un centre d’intérêt et appuyez sur Entrée",
+  "it": "Scrivi un interesse e premi Invio"
+ },
+ "CampaignPaid.interestSuggestions": {
+  "en": "Suggestions",
+  "ar": "اقتراحات",
+  "de": "Vorschläge",
+  "fr": "Suggestions",
+  "it": "Suggerimenti"
+ },
+ "CampaignPaid.adSetsTitle": {
+  "en": "Ad sets",
+  "ar": "مجموعات الإعلانات",
+  "de": "Anzeigensets",
+  "fr": "Ensembles d’annonces",
+  "it": "Set di annunci"
+ },
+ "CampaignPaid.adSetsDescription": {
+  "en": "An ad set per platform, each with its ads. A platform can have several.",
+  "ar": "مجموعة إعلانات لكل منصة، ولكل منها إعلاناتها. يمكن أن يكون للمنصة أكثر من مجموعة.",
+  "de": "Ein Anzeigenset pro Plattform mit eigenen Anzeigen. Eine Plattform kann mehrere haben.",
+  "fr": "Un ensemble d’annonces par plateforme, chacun avec ses annonces. Une plateforme peut en avoir plusieurs.",
+  "it": "Un set di annunci per piattaforma, ognuno con i suoi annunci. Una piattaforma può averne diversi."
+ },
+ "CampaignPaid.addAdSet": {
+  "en": "Add ad set",
+  "ar": "إضافة مجموعة إعلانات",
+  "de": "Anzeigenset hinzufügen",
+  "fr": "Ajouter un ensemble d’annonces",
+  "it": "Aggiungi set di annunci"
+ },
+ "CampaignPaid.adSetDefaultName": {
+  "en": "{platform} ad set",
+  "ar": "مجموعة إعلانات {platform}",
+  "de": "{platform}-Anzeigenset",
+  "fr": "Ensemble d’annonces {platform}",
+  "it": "Set di annunci {platform}"
+ },
+ "CampaignPaid.adSetName": {
+  "en": "Ad set name",
+  "ar": "اسم مجموعة الإعلانات",
+  "de": "Name des Anzeigensets",
+  "fr": "Nom de l’ensemble d’annonces",
+  "it": "Nome del set di annunci"
+ },
+ "CampaignPaid.adSetNameRequired": {
+  "en": "Name the ad set",
+  "ar": "سمِّ مجموعة الإعلانات",
+  "de": "Benennen Sie das Anzeigenset",
+  "fr": "Nommez l’ensemble d’annonces",
+  "it": "Dai un nome al set di annunci"
+ },
+ "CampaignPaid.adSetNoAccount": {
+  "en": "{platform} isn't connected to this project. Connect it in Integrations or remove this ad set.",
+  "ar": "{platform} غير مرتبطة بهذا المشروع. اربطها في التكاملات أو أزِل مجموعة الإعلانات هذه.",
+  "de": "{platform} ist nicht mit diesem Projekt verbunden. Verbinden Sie die Plattform unter Integrationen oder entfernen Sie dieses Anzeigenset.",
+  "fr": "{platform} n’est pas connecté à ce projet. Connectez-le dans Intégrations ou retirez cet ensemble d’annonces.",
+  "it": "{platform} non è collegato a questo progetto. Collegalo in Integrazioni o rimuovi questo set di annunci."
+ },
+ "CampaignPaid.adSetsRequired": {
+  "en": "Add at least one ad set",
+  "ar": "أضف مجموعة إعلانات واحدة على الأقل",
+  "de": "Fügen Sie mindestens ein Anzeigenset hinzu",
+  "fr": "Ajoutez au moins un ensemble d’annonces",
+  "it": "Aggiungi almeno un set di annunci"
+ },
+ "CampaignPaid.noAdSetsTitle": {
+  "en": "No ad sets yet",
+  "ar": "لا توجد مجموعات إعلانات بعد",
+  "de": "Noch keine Anzeigensets",
+  "fr": "Aucun ensemble d’annonces pour l’instant",
+  "it": "Ancora nessun set di annunci"
+ },
+ "CampaignPaid.noAdSetsBody": {
+  "en": "Add an ad set for a connected platform, then its ads.",
+  "ar": "أضف مجموعة إعلانات لمنصة مرتبطة، ثم إعلاناتها.",
+  "de": "Fügen Sie ein Anzeigenset für eine verbundene Plattform hinzu, dann seine Anzeigen.",
+  "fr": "Ajoutez un ensemble d’annonces pour une plateforme connectée, puis ses annonces.",
+  "it": "Aggiungi un set di annunci per una piattaforma collegata, poi i suoi annunci."
+ },
+ "CampaignPaid.removeAdSet": {
+  "en": "Remove ad set {name}",
+  "ar": "إزالة مجموعة الإعلانات {name}",
+  "de": "Anzeigenset {name} entfernen",
+  "fr": "Retirer l’ensemble d’annonces {name}",
+  "it": "Rimuovi il set di annunci {name}"
+ },
+ "CampaignPaid.adsCount": {
+  "en": "{count, plural, one {# ad} other {# ads}}",
+  "ar": "{count, plural, zero {لا إعلانات} one {إعلان واحد} two {إعلانان} few {# إعلانات} many {# إعلانًا} other {# إعلان}}",
+  "de": "{count, plural, one {# Anzeige} other {# Anzeigen}}",
+  "fr": "{count, plural, one {# annonce} other {# annonces}}",
+  "it": "{count, plural, one {# annuncio} other {# annunci}}"
+ },
+ "CampaignPaid.override": {
+  "en": "Use its own",
+  "ar": "استخدام إعداد خاص",
+  "de": "Eigene verwenden",
+  "fr": "Utiliser les siens",
+  "it": "Usa i propri"
+ },
+ "CampaignPaid.usingBudgetDaily": {
+  "en": "Uses the campaign's {amount} a day",
+  "ar": "تستخدم ميزانية الحملة {amount} يوميًا",
+  "de": "Nutzt die {amount} pro Tag der Kampagne",
+  "fr": "Utilise les {amount} par jour de la campagne",
+  "it": "Usa i {amount} al giorno della campagna"
+ },
+ "CampaignPaid.usingBudgetLifetime": {
+  "en": "Uses the campaign's {amount} in total",
+  "ar": "تستخدم ميزانية الحملة {amount} إجمالًا",
+  "de": "Nutzt die {amount} insgesamt der Kampagne",
+  "fr": "Utilise les {amount} au total de la campagne",
+  "it": "Usa i {amount} in totale della campagna"
+ },
+ "CampaignPaid.usingCampaignBudget": {
+  "en": "Uses the campaign's budget",
+  "ar": "تستخدم ميزانية الحملة",
+  "de": "Nutzt das Budget der Kampagne",
+  "fr": "Utilise le budget de la campagne",
+  "it": "Usa il budget della campagna"
+ },
+ "CampaignPaid.usingAudience": {
+  "en": "{count, plural, one {Uses the campaign's audience: # country, ages {min}–{max}} other {Uses the campaign's audience: # countries, ages {min}–{max}}}",
+  "ar": "{count, plural, zero {تستخدم جمهور الحملة: الأعمار {min}–{max}} one {تستخدم جمهور الحملة: دولة واحدة، الأعمار {min}–{max}} two {تستخدم جمهور الحملة: دولتان، الأعمار {min}–{max}} few {تستخدم جمهور الحملة: # دول، الأعمار {min}–{max}} many {تستخدم جمهور الحملة: # دولة، الأعمار {min}–{max}} other {تستخدم جمهور الحملة: # دولة، الأعمار {min}–{max}}}",
+  "de": "{count, plural, one {Nutzt die Zielgruppe der Kampagne: # Land, Alter {min}–{max}} other {Nutzt die Zielgruppe der Kampagne: # Länder, Alter {min}–{max}}}",
+  "fr": "{count, plural, one {Utilise l’audience de la campagne : # pays, {min}–{max} ans} other {Utilise l’audience de la campagne : # pays, {min}–{max} ans}}",
+  "it": "{count, plural, one {Usa il pubblico della campagna: # paese, età {min}–{max}} other {Usa il pubblico della campagna: # paesi, età {min}–{max}}}"
+ },
+ "CampaignPaid.usingSchedule": {
+  "en": "Uses the campaign's schedule",
+  "ar": "تستخدم الجدول الزمني للحملة",
+  "de": "Nutzt den Zeitraum der Kampagne",
+  "fr": "Utilise le calendrier de la campagne",
+  "it": "Usa la programmazione della campagna"
+ },
+ "CampaignPaid.usingScheduleFrom": {
+  "en": "Uses the campaign's schedule, from {date}",
+  "ar": "تستخدم الجدول الزمني للحملة، من {date}",
+  "de": "Nutzt den Zeitraum der Kampagne, ab {date}",
+  "fr": "Utilise le calendrier de la campagne, à partir du {date}",
+  "it": "Usa la programmazione della campagna, dal {date}"
+ },
+ "CampaignPaid.ads": {
+  "en": "Ads",
+  "ar": "الإعلانات",
+  "de": "Anzeigen",
+  "fr": "Annonces",
+  "it": "Annunci"
+ },
+ "CampaignPaid.addAd": {
+  "en": "Add ad",
+  "ar": "إضافة إعلان",
+  "de": "Anzeige hinzufügen",
+  "fr": "Ajouter une annonce",
+  "it": "Aggiungi annuncio"
+ },
+ "CampaignPaid.adsRequired": {
+  "en": "Add at least one ad",
+  "ar": "أضف إعلانًا واحدًا على الأقل",
+  "de": "Fügen Sie mindestens eine Anzeige hinzu",
+  "fr": "Ajoutez au moins une annonce",
+  "it": "Aggiungi almeno un annuncio"
+ },
+ "CampaignPaid.previewAd": {
+  "en": "Preview {name}",
+  "ar": "معاينة {name}",
+  "de": "Vorschau von {name}",
+  "fr": "Aperçu de {name}",
+  "it": "Anteprima di {name}"
+ },
+ "CampaignPaid.removeAd": {
+  "en": "Remove {name}",
+  "ar": "إزالة {name}",
+  "de": "{name} entfernen",
+  "fr": "Retirer {name}",
+  "it": "Rimuovi {name}"
+ },
+ "CampaignSocial.title": {
+  "en": "Posts",
+  "ar": "المنشورات",
+  "de": "Beiträge",
+  "fr": "Publications",
+  "it": "Post"
+ },
+ "CampaignSocial.description": {
+  "en": "The campaign's schedule, and the posts it holds on each platform.",
+  "ar": "الجدول الزمني للحملة والمنشورات التي تضمها على كل منصة.",
+  "de": "Der Zeitraum der Kampagne und ihre Beiträge auf jeder Plattform.",
+  "fr": "Le calendrier de la campagne et ses publications sur chaque plateforme.",
+  "it": "La programmazione della campagna e i suoi post su ogni piattaforma."
+ },
+ "CampaignSocial.platformsTitle": {
+  "en": "Platforms and posts",
+  "ar": "المنصات والمنشورات",
+  "de": "Plattformen und Beiträge",
+  "fr": "Plateformes et publications",
+  "it": "Piattaforme e post"
+ },
+ "CampaignSocial.platformsDescription": {
+  "en": "Pick posts from Posts or write new drafts for each platform.",
+  "ar": "اختر منشورات من المنشورات أو اكتب مسودات جديدة لكل منصة.",
+  "de": "Wählen Sie Beiträge aus Beiträge oder schreiben Sie neue Entwürfe für jede Plattform.",
+  "fr": "Choisissez des publications dans Publications ou rédigez de nouveaux brouillons pour chaque plateforme.",
+  "it": "Scegli post da Post o scrivi nuove bozze per ogni piattaforma."
+ },
+ "CampaignSocial.addPlatform": {
+  "en": "Add platform",
+  "ar": "إضافة منصة",
+  "de": "Plattform hinzufügen",
+  "fr": "Ajouter une plateforme",
+  "it": "Aggiungi piattaforma"
+ },
+ "CampaignSocial.setName": {
+  "en": "{platform} posts",
+  "ar": "منشورات {platform}",
+  "de": "{platform}-Beiträge",
+  "fr": "Publications {platform}",
+  "it": "Post {platform}"
+ },
+ "CampaignSocial.noPlatformsTitle": {
+  "en": "No platforms yet",
+  "ar": "لا توجد منصات بعد",
+  "de": "Noch keine Plattformen",
+  "fr": "Aucune plateforme pour l’instant",
+  "it": "Ancora nessuna piattaforma"
+ },
+ "CampaignSocial.noPlatformsBody": {
+  "en": "Add a connected platform, then its posts.",
+  "ar": "أضف منصة مرتبطة، ثم منشوراتها.",
+  "de": "Fügen Sie eine verbundene Plattform hinzu, dann ihre Beiträge.",
+  "fr": "Ajoutez une plateforme connectée, puis ses publications.",
+  "it": "Aggiungi una piattaforma collegata, poi i suoi post."
+ },
+ "CampaignSocial.platformsRequired": {
+  "en": "Add at least one platform with a post",
+  "ar": "أضف منصة واحدة على الأقل بها منشور",
+  "de": "Fügen Sie mindestens eine Plattform mit einem Beitrag hinzu",
+  "fr": "Ajoutez au moins une plateforme avec une publication",
+  "it": "Aggiungi almeno una piattaforma con un post"
+ },
+ "CampaignSocial.postsRequired": {
+  "en": "Add a post, or remove this platform",
+  "ar": "أضف منشورًا أو أزِل هذه المنصة",
+  "de": "Fügen Sie einen Beitrag hinzu oder entfernen Sie diese Plattform",
+  "fr": "Ajoutez une publication ou retirez cette plateforme",
+  "it": "Aggiungi un post o rimuovi questa piattaforma"
+ },
+ "CampaignSocial.noAccount": {
+  "en": "{platform} isn't connected to this project. Connect it in Integrations or remove it.",
+  "ar": "{platform} غير مرتبطة بهذا المشروع. اربطها في التكاملات أو أزِلها.",
+  "de": "{platform} ist nicht mit diesem Projekt verbunden. Verbinden Sie die Plattform unter Integrationen oder entfernen Sie sie.",
+  "fr": "{platform} n’est pas connecté à ce projet. Connectez-le dans Intégrations ou retirez-le.",
+  "it": "{platform} non è collegato a questo progetto. Collegalo in Integrazioni o rimuovilo."
+ },
+ "CampaignSocial.postsCount": {
+  "en": "{count, plural, one {# post} other {# posts}}",
+  "ar": "{count, plural, zero {لا منشورات} one {منشور واحد} two {منشوران} few {# منشورات} many {# منشورًا} other {# منشور}}",
+  "de": "{count, plural, one {# Beitrag} other {# Beiträge}}",
+  "fr": "{count, plural, one {# publication} other {# publications}}",
+  "it": "{count, plural, one {# post} other {# post}}"
+ },
+ "CampaignSocial.removePlatform": {
+  "en": "Remove {platform}",
+  "ar": "إزالة {platform}",
+  "de": "{platform} entfernen",
+  "fr": "Retirer {platform}",
+  "it": "Rimuovi {platform}"
+ },
+ "CampaignSocial.previewPost": {
+  "en": "Preview {title}",
+  "ar": "معاينة {title}",
+  "de": "Vorschau von {title}",
+  "fr": "Aperçu de {title}",
+  "it": "Anteprima di {title}"
+ },
+ "CampaignSocial.removePost": {
+  "en": "Remove {title}",
+  "ar": "إزالة {title}",
+  "de": "{title} entfernen",
+  "fr": "Retirer {title}",
+  "it": "Rimuovi {title}"
+ }
+}

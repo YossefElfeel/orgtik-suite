@@ -1,0 +1,1850 @@
+{
+ "Insights.export": {
+  "en": "Export",
+  "ar": "تصدير",
+  "de": "Exportieren",
+  "fr": "Exporter",
+  "it": "Esporta"
+ },
+ "Insights.exported": {
+  "en": "{count, plural, one {Exported # row as CSV} other {Exported # rows as CSV}}",
+  "ar": "تم تصدير {count, plural, zero {لا صفوف} one {صف واحد} two {صفين} few {# صفوف} many {# صفًا} other {# صف}} بصيغة CSV",
+  "de": "{count, plural, one {# Zeile als CSV exportiert} other {# Zeilen als CSV exportiert}}",
+  "fr": "{count, plural, one {# ligne exportée en CSV} other {# lignes exportées en CSV}}",
+  "it": "{count, plural, one {# riga esportata in CSV} other {# righe esportate in CSV}}"
+ },
+ "Insights.period": {
+  "en": "Report period",
+  "ar": "فترة التقرير",
+  "de": "Berichtszeitraum",
+  "fr": "Période du rapport",
+  "it": "Periodo del report"
+ },
+ "Insights.periodPreset": {
+  "en": "Period",
+  "ar": "الفترة",
+  "de": "Zeitraum",
+  "fr": "Période",
+  "it": "Periodo"
+ },
+ "Insights.preset.last7": {
+  "en": "Last 7 days",
+  "ar": "آخر 7 أيام",
+  "de": "Letzte 7 Tage",
+  "fr": "7 derniers jours",
+  "it": "Ultimi 7 giorni"
+ },
+ "Insights.preset.last30": {
+  "en": "Last 30 days",
+  "ar": "آخر 30 يومًا",
+  "de": "Letzte 30 Tage",
+  "fr": "30 derniers jours",
+  "it": "Ultimi 30 giorni"
+ },
+ "Insights.preset.last90": {
+  "en": "Last 90 days",
+  "ar": "آخر 90 يومًا",
+  "de": "Letzte 90 Tage",
+  "fr": "90 derniers jours",
+  "it": "Ultimi 90 giorni"
+ },
+ "Insights.preset.thisMonth": {
+  "en": "This month",
+  "ar": "هذا الشهر",
+  "de": "Dieser Monat",
+  "fr": "Ce mois-ci",
+  "it": "Questo mese"
+ },
+ "Insights.preset.lastMonth": {
+  "en": "Last month",
+  "ar": "الشهر الماضي",
+  "de": "Letzter Monat",
+  "fr": "Le mois dernier",
+  "it": "Il mese scorso"
+ },
+ "Insights.preset.custom": {
+  "en": "Custom dates",
+  "ar": "تواريخ مخصصة",
+  "de": "Eigene Daten",
+  "fr": "Dates personnalisées",
+  "it": "Date personalizzate"
+ },
+ "Insights.periodOrder": {
+  "en": "The end date is before the start date. Pick the period again.",
+  "ar": "تاريخ النهاية يسبق تاريخ البداية. اختر الفترة من جديد.",
+  "de": "Das Enddatum liegt vor dem Startdatum. Wählen Sie den Zeitraum erneut.",
+  "fr": "La date de fin précède la date de début. Choisissez à nouveau la période.",
+  "it": "La data di fine è precedente a quella di inizio. Scegli di nuovo il periodo."
+ },
+ "Insights.periodReset": {
+  "en": "Use the last 30 days",
+  "ar": "استخدم آخر 30 يومًا",
+  "de": "Letzte 30 Tage verwenden",
+  "fr": "Utiliser les 30 derniers jours",
+  "it": "Usa gli ultimi 30 giorni"
+ },
+ "Insights.vsPrevious": {
+  "en": "{count, plural, one {vs the previous day} other {vs the previous # days}}",
+  "ar": "مقارنة {count, plural, zero {بالفترة السابقة} one {باليوم السابق} two {باليومين السابقين} few {بالأيام الـ# السابقة} many {بالـ# يومًا السابقة} other {بالـ# يوم السابقة}}",
+  "de": "{count, plural, one {ggü. dem Vortag} other {ggü. den vorherigen # Tagen}}",
+  "fr": "{count, plural, one {par rapport à la veille} other {par rapport aux # jours précédents}}",
+  "it": "{count, plural, one {rispetto al giorno precedente} other {rispetto ai # giorni precedenti}}"
+ },
+ "Insights.noComparison": {
+  "en": "No earlier figures to compare with",
+  "ar": "لا توجد أرقام سابقة للمقارنة",
+  "de": "Keine früheren Zahlen zum Vergleich",
+  "fr": "Aucun chiffre antérieur à comparer",
+  "it": "Nessun dato precedente da confrontare"
+ },
+ "Insights.syncFailed": {
+  "en": "{count, plural, one {# account stopped syncing, so its figures are missing from this report.} other {# accounts stopped syncing, so their figures are missing from this report.}}",
+  "ar": "{count, plural, zero {لا حسابات متوقفة عن المزامنة.} one {توقف حساب واحد عن المزامنة، لذا أرقامه غير موجودة في هذا التقرير.} two {توقف حسابان عن المزامنة، لذا أرقامهما غير موجودة في هذا التقرير.} few {توقفت # حسابات عن المزامنة، لذا أرقامها غير موجودة في هذا التقرير.} many {توقف # حسابًا عن المزامنة، لذا أرقامها غير موجودة في هذا التقرير.} other {توقف # حساب عن المزامنة، لذا أرقامها غير موجودة في هذا التقرير.}}",
+  "de": "{count, plural, one {# Konto synchronisiert nicht mehr; seine Zahlen fehlen in diesem Bericht.} other {# Konten synchronisieren nicht mehr; ihre Zahlen fehlen in diesem Bericht.}}",
+  "fr": "{count, plural, one {# compte ne se synchronise plus : ses chiffres manquent dans ce rapport.} other {# comptes ne se synchronisent plus : leurs chiffres manquent dans ce rapport.}}",
+  "it": "{count, plural, one {# account non si sincronizza più: i suoi dati mancano in questo report.} other {# account non si sincronizzano più: i loro dati mancano in questo report.}}"
+ },
+ "Insights.syncFailedItem": {
+  "en": "Reconnect {name}",
+  "ar": "أعد ربط {name}",
+  "de": "{name} erneut verbinden",
+  "fr": "Reconnecter {name}",
+  "it": "Ricollega {name}"
+ },
+ "Insights.metric.impressions": {
+  "en": "Impressions",
+  "ar": "مرات الظهور",
+  "de": "Impressionen",
+  "fr": "Impressions",
+  "it": "Impression"
+ },
+ "Insights.metric.reach": {
+  "en": "Reach",
+  "ar": "الوصول",
+  "de": "Reichweite",
+  "fr": "Portée",
+  "it": "Copertura"
+ },
+ "Insights.metric.engagements": {
+  "en": "Engagements",
+  "ar": "التفاعلات",
+  "de": "Interaktionen",
+  "fr": "Interactions",
+  "it": "Interazioni"
+ },
+ "Insights.metric.followers": {
+  "en": "Followers",
+  "ar": "المتابعون",
+  "de": "Follower",
+  "fr": "Abonnés",
+  "it": "Follower"
+ },
+ "Insights.metric.followersGained": {
+  "en": "New followers",
+  "ar": "متابعون جدد",
+  "de": "Neue Follower",
+  "fr": "Nouveaux abonnés",
+  "it": "Nuovi follower"
+ },
+ "Insights.metric.profileViews": {
+  "en": "Profile views",
+  "ar": "مشاهدات الملف",
+  "de": "Profilaufrufe",
+  "fr": "Vues du profil",
+  "it": "Visite al profilo"
+ },
+ "Insights.metric.clicks": {
+  "en": "Clicks",
+  "ar": "النقرات",
+  "de": "Klicks",
+  "fr": "Clics",
+  "it": "Clic"
+ },
+ "Insights.metric.likes": {
+  "en": "Likes",
+  "ar": "الإعجابات",
+  "de": "Likes",
+  "fr": "J’aime",
+  "it": "Mi piace"
+ },
+ "Insights.metric.comments": {
+  "en": "Comments",
+  "ar": "التعليقات",
+  "de": "Kommentare",
+  "fr": "Commentaires",
+  "it": "Commenti"
+ },
+ "Insights.metric.shares": {
+  "en": "Shares",
+  "ar": "المشاركات",
+  "de": "Geteilt",
+  "fr": "Partages",
+  "it": "Condivisioni"
+ },
+ "Insights.metric.saves": {
+  "en": "Saves",
+  "ar": "مرات الحفظ",
+  "de": "Gespeichert",
+  "fr": "Enregistrements",
+  "it": "Salvataggi"
+ },
+ "Insights.metric.videoViews": {
+  "en": "Video views",
+  "ar": "مشاهدات الفيديو",
+  "de": "Videoaufrufe",
+  "fr": "Vues des vidéos",
+  "it": "Visualizzazioni video"
+ },
+ "Insights.metric.sessions": {
+  "en": "Sessions",
+  "ar": "الجلسات",
+  "de": "Sitzungen",
+  "fr": "Sessions",
+  "it": "Sessioni"
+ },
+ "Insights.metric.activeUsers": {
+  "en": "Active users",
+  "ar": "المستخدمون النشطون",
+  "de": "Aktive Nutzer",
+  "fr": "Utilisateurs actifs",
+  "it": "Utenti attivi"
+ },
+ "Insights.metric.following": {
+  "en": "Following",
+  "ar": "يتابع",
+  "de": "Folgt",
+  "fr": "Abonnements",
+  "it": "Seguiti"
+ },
+ "Insights.metric.posts": {
+  "en": "Posts",
+  "ar": "المنشورات",
+  "de": "Beiträge",
+  "fr": "Publications",
+  "it": "Post"
+ },
+ "Insights.metric.engagementRate": {
+  "en": "Engagement rate",
+  "ar": "معدل التفاعل",
+  "de": "Interaktionsrate",
+  "fr": "Taux d’interaction",
+  "it": "Tasso di interazione"
+ },
+ "Insights.metric.postsPublished": {
+  "en": "Posts published",
+  "ar": "المنشورات المنشورة",
+  "de": "Veröffentlichte Beiträge",
+  "fr": "Publications publiées",
+  "it": "Post pubblicati"
+ },
+ "Reports.title": {
+  "en": "Reports",
+  "ar": "التقارير",
+  "de": "Berichte",
+  "fr": "Rapports",
+  "it": "Report"
+ },
+ "Reports.description": {
+  "en": "How the project's connected accounts performed in a period, against the period before.",
+  "ar": "أداء الحسابات المرتبطة بالمشروع خلال فترة، مقارنةً بالفترة التي سبقتها.",
+  "de": "Wie die verbundenen Konten des Projekts in einem Zeitraum abgeschnitten haben, verglichen mit dem Zeitraum davor.",
+  "fr": "Les performances des comptes connectés du projet sur une période, comparées à la période précédente.",
+  "it": "Il rendimento degli account collegati del progetto in un periodo, rispetto al periodo precedente."
+ },
+ "Reports.tabOverview": {
+  "en": "Overview",
+  "ar": "نظرة عامة",
+  "de": "Überblick",
+  "fr": "Vue d’ensemble",
+  "it": "Panoramica"
+ },
+ "Reports.tabProfiles": {
+  "en": "Profiles",
+  "ar": "الملفات",
+  "de": "Profile",
+  "fr": "Profils",
+  "it": "Profili"
+ },
+ "Reports.loadError": {
+  "en": "We couldn't load this report.",
+  "ar": "تعذّر تحميل هذا التقرير.",
+  "de": "Dieser Bericht konnte nicht geladen werden.",
+  "fr": "Impossible de charger ce rapport.",
+  "it": "Impossibile caricare questo report."
+ },
+ "Reports.noAccountsTitle": {
+  "en": "No connected accounts yet",
+  "ar": "لا توجد حسابات مرتبطة بعد",
+  "de": "Noch keine verbundenen Konten",
+  "fr": "Aucun compte connecté pour l’instant",
+  "it": "Ancora nessun account collegato"
+ },
+ "Reports.noAccountsBody": {
+  "en": "Reports show the figures of the accounts connected to this project. Connect one to start.",
+  "ar": "تعرض التقارير أرقام الحسابات المرتبطة بهذا المشروع. اربط حسابًا للبدء.",
+  "de": "Berichte zeigen die Zahlen der mit diesem Projekt verbundenen Konten. Verbinden Sie eines, um zu beginnen.",
+  "fr": "Les rapports affichent les chiffres des comptes connectés à ce projet. Connectez-en un pour commencer.",
+  "it": "I report mostrano i dati degli account collegati a questo progetto. Collegane uno per iniziare."
+ },
+ "Reports.connectAccount": {
+  "en": "Connect an account",
+  "ar": "اربط حسابًا",
+  "de": "Konto verbinden",
+  "fr": "Connecter un compte",
+  "it": "Collega un account"
+ },
+ "Reports.kpiTitle": {
+  "en": "Key figures",
+  "ar": "الأرقام الرئيسية",
+  "de": "Kennzahlen",
+  "fr": "Chiffres clés",
+  "it": "Dati principali"
+ },
+ "Reports.trendTitle": {
+  "en": "Day by day",
+  "ar": "يومًا بيوم",
+  "de": "Tag für Tag",
+  "fr": "Jour par jour",
+  "it": "Giorno per giorno"
+ },
+ "Reports.exportDaily": {
+  "en": "Export daily figures",
+  "ar": "تصدير الأرقام اليومية",
+  "de": "Tageswerte exportieren",
+  "fr": "Exporter les chiffres quotidiens",
+  "it": "Esporta i dati giornalieri"
+ },
+ "Reports.day": {
+  "en": "Day",
+  "ar": "اليوم",
+  "de": "Tag",
+  "fr": "Jour",
+  "it": "Giorno"
+ },
+ "Reports.noTrend": {
+  "en": "No figures for this period yet.",
+  "ar": "لا توجد أرقام لهذه الفترة بعد.",
+  "de": "Noch keine Zahlen für diesen Zeitraum.",
+  "fr": "Pas encore de chiffres pour cette période.",
+  "it": "Ancora nessun dato per questo periodo."
+ },
+ "Reports.chartFollowers": {
+  "en": "Audience growth",
+  "ar": "نمو الجمهور",
+  "de": "Wachstum der Zielgruppe",
+  "fr": "Croissance de l’audience",
+  "it": "Crescita del pubblico"
+ },
+ "Reports.chartFollowersHint": {
+  "en": "Followers at the end of each day",
+  "ar": "المتابعون في نهاية كل يوم",
+  "de": "Follower am Ende jedes Tages",
+  "fr": "Abonnés à la fin de chaque jour",
+  "it": "Follower alla fine di ogni giorno"
+ },
+ "Reports.chartGained": {
+  "en": "New followers",
+  "ar": "متابعون جدد",
+  "de": "Neue Follower",
+  "fr": "Nouveaux abonnés",
+  "it": "Nuovi follower"
+ },
+ "Reports.chartGainedHint": {
+  "en": "Followers gained each day",
+  "ar": "المتابعون المكتسبون كل يوم",
+  "de": "Täglich gewonnene Follower",
+  "fr": "Abonnés gagnés chaque jour",
+  "it": "Follower guadagnati ogni giorno"
+ },
+ "Reports.chartReach": {
+  "en": "Impressions and reach",
+  "ar": "مرات الظهور والوصول",
+  "de": "Impressionen und Reichweite",
+  "fr": "Impressions et portée",
+  "it": "Impression e copertura"
+ },
+ "Reports.chartReachHint": {
+  "en": "How often posts were seen, and by how many people",
+  "ar": "عدد مرات مشاهدة المنشورات وعدد من شاهدوها",
+  "de": "Wie oft Beiträge gesehen wurden und von wie vielen Personen",
+  "fr": "Combien de fois les publications ont été vues, et par combien de personnes",
+  "it": "Quante volte i post sono stati visti e da quante persone"
+ },
+ "Reports.chartEngagement": {
+  "en": "Engagement",
+  "ar": "التفاعل",
+  "de": "Interaktion",
+  "fr": "Interaction",
+  "it": "Interazione"
+ },
+ "Reports.chartEngagementHint": {
+  "en": "Likes, comments, shares and saves, and link clicks",
+  "ar": "الإعجابات والتعليقات والمشاركات ومرات الحفظ، ونقرات الروابط",
+  "de": "Likes, Kommentare, geteilte und gespeicherte Beiträge sowie Link-Klicks",
+  "fr": "J’aime, commentaires, partages, enregistrements et clics sur les liens",
+  "it": "Mi piace, commenti, condivisioni, salvataggi e clic sui link"
+ },
+ "Reports.filterPlatforms": {
+  "en": "Platforms",
+  "ar": "المنصات",
+  "de": "Plattformen",
+  "fr": "Plateformes",
+  "it": "Piattaforme"
+ },
+ "Reports.allPlatforms": {
+  "en": "All platforms",
+  "ar": "كل المنصات",
+  "de": "Alle Plattformen",
+  "fr": "Toutes les plateformes",
+  "it": "Tutte le piattaforme"
+ },
+ "Reports.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella i filtri"
+ },
+ "Reports.colProfile": {
+  "en": "Profile",
+  "ar": "الملف",
+  "de": "Profil",
+  "fr": "Profil",
+  "it": "Profilo"
+ },
+ "Reports.colPlatform": {
+  "en": "Platform",
+  "ar": "المنصة",
+  "de": "Plattform",
+  "fr": "Plateforme",
+  "it": "Piattaforma"
+ },
+ "Reports.profilesTable": {
+  "en": "Profiles in this period",
+  "ar": "الملفات في هذه الفترة",
+  "de": "Profile in diesem Zeitraum",
+  "fr": "Profils sur cette période",
+  "it": "Profili in questo periodo"
+ },
+ "Reports.chartByProfile": {
+  "en": "Engagements by profile",
+  "ar": "التفاعلات حسب الملف",
+  "de": "Interaktionen nach Profil",
+  "fr": "Interactions par profil",
+  "it": "Interazioni per profilo"
+ },
+ "Reports.chartByProfileHint": {
+  "en": "In the order of the table below",
+  "ar": "بترتيب الجدول أدناه",
+  "de": "In der Reihenfolge der Tabelle unten",
+  "fr": "Dans l’ordre du tableau ci-dessous",
+  "it": "Nell’ordine della tabella qui sotto"
+ },
+ "Reports.noProfiles": {
+  "en": "No profile figures for this period",
+  "ar": "لا توجد أرقام للملفات في هذه الفترة",
+  "de": "Keine Profilzahlen für diesen Zeitraum",
+  "fr": "Aucun chiffre de profil sur cette période",
+  "it": "Nessun dato dei profili in questo periodo"
+ },
+ "Reports.noProfilesBody": {
+  "en": "Try a longer period.",
+  "ar": "جرّب فترة أطول.",
+  "de": "Versuchen Sie einen längeren Zeitraum.",
+  "fr": "Essayez une période plus longue.",
+  "it": "Prova un periodo più lungo."
+ },
+ "Reports.noProfilesMatch": {
+  "en": "No profile on these platforms",
+  "ar": "لا يوجد ملف على هذه المنصات",
+  "de": "Kein Profil auf diesen Plattformen",
+  "fr": "Aucun profil sur ces plateformes",
+  "it": "Nessun profilo su queste piattaforme"
+ },
+ "Reports.profileLoadError": {
+  "en": "We couldn't load this profile.",
+  "ar": "تعذّر تحميل هذا الملف.",
+  "de": "Dieses Profil konnte nicht geladen werden.",
+  "fr": "Impossible de charger ce profil.",
+  "it": "Impossibile caricare questo profilo."
+ },
+ "Reports.profileNotFound": {
+  "en": "We couldn't find this profile",
+  "ar": "لم نعثر على هذا الملف",
+  "de": "Dieses Profil wurde nicht gefunden",
+  "fr": "Profil introuvable",
+  "it": "Profilo non trovato"
+ },
+ "Reports.profileNotFoundBody": {
+  "en": "It isn't connected to this project, or it was removed.",
+  "ar": "الملف غير مرتبط بهذا المشروع، أو تمت إزالته.",
+  "de": "Es ist nicht mit diesem Projekt verbunden oder wurde entfernt.",
+  "fr": "Il n’est pas connecté à ce projet, ou il a été retiré.",
+  "it": "Non è collegato a questo progetto o è stato rimosso."
+ },
+ "Reports.backToReports": {
+  "en": "Back to reports",
+  "ar": "العودة إلى التقارير",
+  "de": "Zurück zu den Berichten",
+  "fr": "Retour aux rapports",
+  "it": "Torna ai report"
+ },
+ "Reports.profileSections": {
+  "en": "Profile report sections",
+  "ar": "أقسام تقرير الملف",
+  "de": "Bereiche des Profilberichts",
+  "fr": "Sections du rapport du profil",
+  "it": "Sezioni del report del profilo"
+ },
+ "Reports.navPosts": {
+  "en": "Posts",
+  "ar": "المنشورات",
+  "de": "Beiträge",
+  "fr": "Publications",
+  "it": "Post"
+ },
+ "Reports.navPerformance": {
+  "en": "Performance",
+  "ar": "الأداء",
+  "de": "Leistung",
+  "fr": "Performances",
+  "it": "Prestazioni"
+ },
+ "Reports.navFollowers": {
+  "en": "Followers",
+  "ar": "المتابعون",
+  "de": "Follower",
+  "fr": "Abonnés",
+  "it": "Follower"
+ },
+ "Reports.navMentions": {
+  "en": "Mentions",
+  "ar": "الإشارات",
+  "de": "Erwähnungen",
+  "fr": "Mentions",
+  "it": "Menzioni"
+ },
+ "Reports.postsTitle": {
+  "en": "Published posts",
+  "ar": "المنشورات المنشورة",
+  "de": "Veröffentlichte Beiträge",
+  "fr": "Publications publiées",
+  "it": "Post pubblicati"
+ },
+ "Reports.postsTable": {
+  "en": "Posts published in this period",
+  "ar": "المنشورات المنشورة في هذه الفترة",
+  "de": "In diesem Zeitraum veröffentlichte Beiträge",
+  "fr": "Publications publiées sur cette période",
+  "it": "Post pubblicati in questo periodo"
+ },
+ "Reports.colPost": {
+  "en": "Post",
+  "ar": "المنشور",
+  "de": "Beitrag",
+  "fr": "Publication",
+  "it": "Post"
+ },
+ "Reports.colPublished": {
+  "en": "Published",
+  "ar": "تاريخ النشر",
+  "de": "Veröffentlicht",
+  "fr": "Publiée le",
+  "it": "Pubblicato"
+ },
+ "Reports.colLink": {
+  "en": "Link",
+  "ar": "الرابط",
+  "de": "Link",
+  "fr": "Lien",
+  "it": "Link"
+ },
+ "Reports.openOnPlatform": {
+  "en": "View on {platform}",
+  "ar": "عرض على {platform}",
+  "de": "Auf {platform} ansehen",
+  "fr": "Voir sur {platform}",
+  "it": "Vedi su {platform}"
+ },
+ "Reports.opensNewTab": {
+  "en": "(opens in a new tab)",
+  "ar": "(يُفتح في علامة تبويب جديدة)",
+  "de": "(öffnet in einem neuen Tab)",
+  "fr": "(s’ouvre dans un nouvel onglet)",
+  "it": "(si apre in una nuova scheda)"
+ },
+ "Reports.chartTopPosts": {
+  "en": "Top posts",
+  "ar": "أفضل المنشورات",
+  "de": "Top-Beiträge",
+  "fr": "Meilleures publications",
+  "it": "Post migliori"
+ },
+ "Reports.chartTopPostsHint": {
+  "en": "The eight posts with the most engagements",
+  "ar": "المنشورات الثمانية الأكثر تفاعلًا",
+  "de": "Die acht Beiträge mit den meisten Interaktionen",
+  "fr": "Les huit publications avec le plus d’interactions",
+  "it": "Gli otto post con più interazioni"
+ },
+ "Reports.noPostsInPeriod": {
+  "en": "No posts published in this period",
+  "ar": "لا توجد منشورات منشورة في هذه الفترة",
+  "de": "In diesem Zeitraum wurden keine Beiträge veröffentlicht",
+  "fr": "Aucune publication sur cette période",
+  "it": "Nessun post pubblicato in questo periodo"
+ },
+ "Reports.noPostsInPeriodBody": {
+  "en": "Pick a longer period, or publish from Posts.",
+  "ar": "اختر فترة أطول، أو انشر من صفحة المنشورات.",
+  "de": "Wählen Sie einen längeren Zeitraum oder veröffentlichen Sie unter Beiträge.",
+  "fr": "Choisissez une période plus longue, ou publiez depuis Publications.",
+  "it": "Scegli un periodo più lungo o pubblica da Post."
+ },
+ "Reports.followersNow": {
+  "en": "Followers now",
+  "ar": "المتابعون حاليًا",
+  "de": "Follower aktuell",
+  "fr": "Abonnés actuels",
+  "it": "Follower attuali"
+ },
+ "Reports.inPeriod": {
+  "en": "{count, plural, one {in # day} other {in # days}}",
+  "ar": "خلال {count, plural, zero {لا أيام} one {يوم واحد} two {يومين} few {# أيام} many {# يومًا} other {# يوم}}",
+  "de": "{count, plural, one {in # Tag} other {in # Tagen}}",
+  "fr": "{count, plural, one {en # jour} other {en # jours}}",
+  "it": "{count, plural, one {in # giorno} other {in # giorni}}"
+ },
+ "Reports.followersGrowth": {
+  "en": "Growth",
+  "ar": "النمو",
+  "de": "Wachstum",
+  "fr": "Croissance",
+  "it": "Crescita"
+ },
+ "Reports.growthHint": {
+  "en": "New followers against the followers at the start of the period",
+  "ar": "المتابعون الجدد مقارنةً بعدد المتابعين في بداية الفترة",
+  "de": "Neue Follower im Verhältnis zu den Followern zu Beginn des Zeitraums",
+  "fr": "Nouveaux abonnés par rapport aux abonnés au début de la période",
+  "it": "Nuovi follower rispetto ai follower all’inizio del periodo"
+ },
+ "Reports.followersTitle": {
+  "en": "Followers day by day",
+  "ar": "المتابعون يومًا بيوم",
+  "de": "Follower Tag für Tag",
+  "fr": "Abonnés jour par jour",
+  "it": "Follower giorno per giorno"
+ },
+ "Reports.noFollowersTitle": {
+  "en": "No follower figures for this account",
+  "ar": "لا توجد أرقام متابعين لهذا الحساب",
+  "de": "Keine Follower-Zahlen für dieses Konto",
+  "fr": "Aucun chiffre d’abonnés pour ce compte",
+  "it": "Nessun dato sui follower per questo account"
+ },
+ "Reports.noFollowersBody": {
+  "en": "{platform} doesn't report followers for this kind of account.",
+  "ar": "لا تُبلغ {platform} عن المتابعين لهذا النوع من الحسابات.",
+  "de": "{platform} meldet für diese Art von Konto keine Follower.",
+  "fr": "{platform} ne fournit pas d’abonnés pour ce type de compte.",
+  "it": "{platform} non fornisce i follower per questo tipo di account."
+ },
+ "Reports.mentionsTitle": {
+  "en": "Recent mentions",
+  "ar": "أحدث الإشارات",
+  "de": "Neueste Erwähnungen",
+  "fr": "Mentions récentes",
+  "it": "Menzioni recenti"
+ },
+ "Reports.mentionsHint": {
+  "en": "Posts on {platform} that mention the project. Not limited to the report period.",
+  "ar": "منشورات على {platform} تشير إلى المشروع، غير مقيدة بفترة التقرير.",
+  "de": "Beiträge auf {platform}, die das Projekt erwähnen. Nicht auf den Berichtszeitraum beschränkt.",
+  "fr": "Publications sur {platform} qui mentionnent le projet. Non limitées à la période du rapport.",
+  "it": "Post su {platform} che menzionano il progetto. Non limitati al periodo del report."
+ },
+ "Reports.noMentions": {
+  "en": "No mentions found",
+  "ar": "لم يتم العثور على إشارات",
+  "de": "Keine Erwähnungen gefunden",
+  "fr": "Aucune mention trouvée",
+  "it": "Nessuna menzione trovata"
+ },
+ "Reports.noMentionsBody": {
+  "en": "Nobody has mentioned the project on {platform} recently.",
+  "ar": "لم يُشر أحد إلى المشروع على {platform} مؤخرًا.",
+  "de": "Niemand hat das Projekt kürzlich auf {platform} erwähnt.",
+  "fr": "Personne n’a mentionné le projet sur {platform} récemment.",
+  "it": "Nessuno ha menzionato il progetto su {platform} di recente."
+ },
+ "Reports.colAuthor": {
+  "en": "Author",
+  "ar": "الكاتب",
+  "de": "Autor",
+  "fr": "Auteur",
+  "it": "Autore"
+ },
+ "Reports.colHandle": {
+  "en": "Handle",
+  "ar": "المعرّف",
+  "de": "Handle",
+  "fr": "Identifiant",
+  "it": "Handle"
+ },
+ "Reports.colMention": {
+  "en": "Mention",
+  "ar": "الإشارة",
+  "de": "Erwähnung",
+  "fr": "Mention",
+  "it": "Menzione"
+ },
+ "Reports.colSentiment": {
+  "en": "Sentiment",
+  "ar": "الانطباع",
+  "de": "Stimmung",
+  "fr": "Sentiment",
+  "it": "Sentiment"
+ },
+ "Reports.colLikes": {
+  "en": "Likes",
+  "ar": "الإعجابات",
+  "de": "Likes",
+  "fr": "J’aime",
+  "it": "Mi piace"
+ },
+ "Reports.colReplies": {
+  "en": "Replies",
+  "ar": "الردود",
+  "de": "Antworten",
+  "fr": "Réponses",
+  "it": "Risposte"
+ },
+ "Reports.colReposts": {
+  "en": "Reposts",
+  "ar": "إعادات النشر",
+  "de": "Reposts",
+  "fr": "Republications",
+  "it": "Ricondivisioni"
+ },
+ "Reports.colPosted": {
+  "en": "Posted",
+  "ar": "تاريخ النشر",
+  "de": "Gepostet",
+  "fr": "Publiée le",
+  "it": "Pubblicato"
+ },
+ "Reports.sentiment.POSITIVE": {
+  "en": "Positive",
+  "ar": "إيجابي",
+  "de": "Positiv",
+  "fr": "Positif",
+  "it": "Positivo"
+ },
+ "Reports.sentiment.NEUTRAL": {
+  "en": "Neutral",
+  "ar": "محايد",
+  "de": "Neutral",
+  "fr": "Neutre",
+  "it": "Neutro"
+ },
+ "Reports.sentiment.NEGATIVE": {
+  "en": "Negative",
+  "ar": "سلبي",
+  "de": "Negativ",
+  "fr": "Négatif",
+  "it": "Negativo"
+ },
+ "Reports.sentiment.UNKNOWN": {
+  "en": "Not rated",
+  "ar": "غير مصنّف",
+  "de": "Nicht bewertet",
+  "fr": "Non évalué",
+  "it": "Non valutato"
+ },
+ "Competitors.title": {
+  "en": "Competitors",
+  "ar": "المنافسون",
+  "de": "Wettbewerber",
+  "fr": "Concurrents",
+  "it": "Concorrenti"
+ },
+ "Competitors.description": {
+  "en": "Public figures of the brands this project benchmarks against, per platform.",
+  "ar": "الأرقام العامة للعلامات التجارية التي يُقارَن بها هذا المشروع، لكل منصة.",
+  "de": "Öffentliche Zahlen der Marken, mit denen sich dieses Projekt vergleicht, je Plattform.",
+  "fr": "Les chiffres publics des marques auxquelles ce projet se compare, par plateforme.",
+  "it": "I dati pubblici dei brand con cui si confronta questo progetto, per piattaforma."
+ },
+ "Competitors.loadError": {
+  "en": "We couldn't load the competitors.",
+  "ar": "تعذّر تحميل المنافسين.",
+  "de": "Die Wettbewerber konnten nicht geladen werden.",
+  "fr": "Impossible de charger les concurrents.",
+  "it": "Impossibile caricare i concorrenti."
+ },
+ "Competitors.emptyTitle": {
+  "en": "No competitors to compare yet",
+  "ar": "لا يوجد منافسون للمقارنة بعد",
+  "de": "Noch keine Wettbewerber zum Vergleichen",
+  "fr": "Aucun concurrent à comparer pour l’instant",
+  "it": "Ancora nessun concorrente da confrontare"
+ },
+ "Competitors.emptyBody": {
+  "en": "Competitors set up for this project will appear here with their figures.",
+  "ar": "سيظهر هنا المنافسون المُعدّون لهذا المشروع مع أرقامهم.",
+  "de": "Für dieses Projekt eingerichtete Wettbewerber erscheinen hier mit ihren Zahlen.",
+  "fr": "Les concurrents configurés pour ce projet apparaîtront ici avec leurs chiffres.",
+  "it": "I concorrenti impostati per questo progetto appariranno qui con i loro dati."
+ },
+ "Competitors.filters": {
+  "en": "Filter competitors",
+  "ar": "تصفية المنافسين",
+  "de": "Wettbewerber filtern",
+  "fr": "Filtrer les concurrents",
+  "it": "Filtra i concorrenti"
+ },
+ "Competitors.search": {
+  "en": "Search",
+  "ar": "بحث",
+  "de": "Suchen",
+  "fr": "Rechercher",
+  "it": "Cerca"
+ },
+ "Competitors.searchPlaceholder": {
+  "en": "Name or handle",
+  "ar": "الاسم أو المعرّف",
+  "de": "Name oder Handle",
+  "fr": "Nom ou identifiant",
+  "it": "Nome o handle"
+ },
+ "Competitors.platform": {
+  "en": "Platform",
+  "ar": "المنصة",
+  "de": "Plattform",
+  "fr": "Plateforme",
+  "it": "Piattaforma"
+ },
+ "Competitors.allPlatforms": {
+  "en": "All platforms",
+  "ar": "كل المنصات",
+  "de": "Alle Plattformen",
+  "fr": "Toutes les plateformes",
+  "it": "Tutte le piattaforme"
+ },
+ "Competitors.sortBy": {
+  "en": "Sort by",
+  "ar": "الترتيب حسب",
+  "de": "Sortieren nach",
+  "fr": "Trier par",
+  "it": "Ordina per"
+ },
+ "Competitors.order": {
+  "en": "Order",
+  "ar": "الترتيب",
+  "de": "Reihenfolge",
+  "fr": "Ordre",
+  "it": "Ordine"
+ },
+ "Competitors.desc": {
+  "en": "Highest first",
+  "ar": "الأعلى أولًا",
+  "de": "Höchste zuerst",
+  "fr": "Plus élevé d’abord",
+  "it": "Prima il più alto"
+ },
+ "Competitors.asc": {
+  "en": "Lowest first",
+  "ar": "الأدنى أولًا",
+  "de": "Niedrigste zuerst",
+  "fr": "Plus bas d’abord",
+  "it": "Prima il più basso"
+ },
+ "Competitors.clearFilters": {
+  "en": "Clear filters",
+  "ar": "مسح عوامل التصفية",
+  "de": "Filter zurücksetzen",
+  "fr": "Effacer les filtres",
+  "it": "Cancella i filtri"
+ },
+ "Competitors.noMatch": {
+  "en": "No competitor matches these filters",
+  "ar": "لا يوجد منافس يطابق عوامل التصفية هذه",
+  "de": "Kein Wettbewerber passt zu diesen Filtern",
+  "fr": "Aucun concurrent ne correspond à ces filtres",
+  "it": "Nessun concorrente corrisponde a questi filtri"
+ },
+ "Competitors.colCompetitor": {
+  "en": "Competitor",
+  "ar": "المنافس",
+  "de": "Wettbewerber",
+  "fr": "Concurrent",
+  "it": "Concorrente"
+ },
+ "Competitors.colHandle": {
+  "en": "Handle",
+  "ar": "المعرّف",
+  "de": "Handle",
+  "fr": "Identifiant",
+  "it": "Handle"
+ },
+ "Competitors.colPlatforms": {
+  "en": "Platforms",
+  "ar": "المنصات",
+  "de": "Plattformen",
+  "fr": "Plateformes",
+  "it": "Piattaforme"
+ },
+ "Competitors.table": {
+  "en": "Competitors",
+  "ar": "المنافسون",
+  "de": "Wettbewerber",
+  "fr": "Concurrents",
+  "it": "Concorrenti"
+ },
+ "Competitors.chartFollowers": {
+  "en": "Followers by competitor",
+  "ar": "المتابعون حسب المنافس",
+  "de": "Follower nach Wettbewerber",
+  "fr": "Abonnés par concurrent",
+  "it": "Follower per concorrente"
+ },
+ "Competitors.chartFollowersOn": {
+  "en": "Followers on {platform}",
+  "ar": "المتابعون على {platform}",
+  "de": "Follower auf {platform}",
+  "fr": "Abonnés sur {platform}",
+  "it": "Follower su {platform}"
+ },
+ "Competitors.chartFollowersHint": {
+  "en": "The first ten, in the order of the table",
+  "ar": "أول عشرة، بترتيب الجدول",
+  "de": "Die ersten zehn, in der Reihenfolge der Tabelle",
+  "fr": "Les dix premiers, dans l’ordre du tableau",
+  "it": "I primi dieci, nell’ordine della tabella"
+ },
+ "Competitors.notFound": {
+  "en": "We couldn't find this competitor",
+  "ar": "لم نعثر على هذا المنافس",
+  "de": "Dieser Wettbewerber wurde nicht gefunden",
+  "fr": "Concurrent introuvable",
+  "it": "Concorrente non trovato"
+ },
+ "Competitors.notFoundBody": {
+  "en": "It isn't one of this project's competitors, or it was removed.",
+  "ar": "ليس من منافسي هذا المشروع، أو تمت إزالته.",
+  "de": "Er gehört nicht zu den Wettbewerbern dieses Projekts oder wurde entfernt.",
+  "fr": "Il ne fait pas partie des concurrents de ce projet, ou il a été retiré.",
+  "it": "Non è tra i concorrenti di questo progetto o è stato rimosso."
+ },
+ "Competitors.backToCompetitors": {
+  "en": "Back to competitors",
+  "ar": "العودة إلى المنافسين",
+  "de": "Zurück zu den Wettbewerbern",
+  "fr": "Retour aux concurrents",
+  "it": "Torna ai concorrenti"
+ },
+ "Competitors.chartByPlatform": {
+  "en": "Followers by platform",
+  "ar": "المتابعون حسب المنصة",
+  "de": "Follower nach Plattform",
+  "fr": "Abonnés par plateforme",
+  "it": "Follower per piattaforma"
+ },
+ "Competitors.chartByPlatformHint": {
+  "en": "Where this competitor's audience is",
+  "ar": "أين يوجد جمهور هذا المنافس",
+  "de": "Wo die Zielgruppe dieses Wettbewerbers ist",
+  "fr": "Où se trouve l’audience de ce concurrent",
+  "it": "Dove si trova il pubblico di questo concorrente"
+ },
+ "Competitors.platformsTable": {
+  "en": "{name} by platform",
+  "ar": "{name} حسب المنصة",
+  "de": "{name} nach Plattform",
+  "fr": "{name} par plateforme",
+  "it": "{name} per piattaforma"
+ },
+ "Competitors.noPlatforms": {
+  "en": "No platform figures",
+  "ar": "لا توجد أرقام للمنصات",
+  "de": "Keine Plattformzahlen",
+  "fr": "Aucun chiffre par plateforme",
+  "it": "Nessun dato per piattaforma"
+ },
+ "Dashboard.title": {
+  "en": "Dashboard",
+  "ar": "لوحة التحكم",
+  "de": "Dashboard",
+  "fr": "Tableau de bord",
+  "it": "Dashboard"
+ },
+ "Dashboard.description": {
+  "en": "The project's last 30 days, its accounts, and what's next.",
+  "ar": "آخر 30 يومًا للمشروع وحساباته وما هو قادم.",
+  "de": "Die letzten 30 Tage des Projekts, seine Konten und was als Nächstes kommt.",
+  "fr": "Les 30 derniers jours du projet, ses comptes et la suite.",
+  "it": "Gli ultimi 30 giorni del progetto, i suoi account e i prossimi passi."
+ },
+ "Dashboard.descriptionNamed": {
+  "en": "Dashboard: the last 30 days, the connected accounts, and what's next.",
+  "ar": "لوحة التحكم: آخر 30 يومًا والحسابات المرتبطة وما هو قادم.",
+  "de": "Dashboard: die letzten 30 Tage, die verbundenen Konten und was als Nächstes kommt.",
+  "fr": "Tableau de bord : les 30 derniers jours, les comptes connectés et la suite.",
+  "it": "Dashboard: gli ultimi 30 giorni, gli account collegati e i prossimi passi."
+ },
+ "Dashboard.openReports": {
+  "en": "Open reports",
+  "ar": "فتح التقارير",
+  "de": "Berichte öffnen",
+  "fr": "Ouvrir les rapports",
+  "it": "Apri i report"
+ },
+ "Dashboard.createPost": {
+  "en": "Create post",
+  "ar": "إنشاء منشور",
+  "de": "Beitrag erstellen",
+  "fr": "Créer une publication",
+  "it": "Crea post"
+ },
+ "Dashboard.kpiTitle": {
+  "en": "Last 30 days",
+  "ar": "آخر 30 يومًا",
+  "de": "Letzte 30 Tage",
+  "fr": "30 derniers jours",
+  "it": "Ultimi 30 giorni"
+ },
+ "Dashboard.viewReports": {
+  "en": "View reports",
+  "ar": "عرض التقارير",
+  "de": "Berichte ansehen",
+  "fr": "Voir les rapports",
+  "it": "Vedi i report"
+ },
+ "Dashboard.kpiError": {
+  "en": "We couldn't load the figures.",
+  "ar": "تعذّر تحميل الأرقام.",
+  "de": "Die Zahlen konnten nicht geladen werden.",
+  "fr": "Impossible de charger les chiffres.",
+  "it": "Impossibile caricare i dati."
+ },
+ "Dashboard.noAccountsTitle": {
+  "en": "No connected accounts yet",
+  "ar": "لا توجد حسابات مرتبطة بعد",
+  "de": "Noch keine verbundenen Konten",
+  "fr": "Aucun compte connecté pour l’instant",
+  "it": "Ancora nessun account collegato"
+ },
+ "Dashboard.noAccountsBody": {
+  "en": "Connect a social or ad account to publish from here and see its figures.",
+  "ar": "اربط حسابًا اجتماعيًا أو إعلانيًا للنشر من هنا ورؤية أرقامه.",
+  "de": "Verbinden Sie ein Social-Media- oder Werbekonto, um von hier aus zu veröffentlichen und seine Zahlen zu sehen.",
+  "fr": "Connectez un compte social ou publicitaire pour publier d’ici et voir ses chiffres.",
+  "it": "Collega un account social o pubblicitario per pubblicare da qui e vederne i dati."
+ },
+ "Dashboard.noAccountsAsk": {
+  "en": "Ask a marketing manager to connect the project's social accounts.",
+  "ar": "اطلب من مدير التسويق ربط الحسابات الاجتماعية للمشروع.",
+  "de": "Bitten Sie eine Marketingleitung, die Social-Media-Konten des Projekts zu verbinden.",
+  "fr": "Demandez à un responsable marketing de connecter les comptes sociaux du projet.",
+  "it": "Chiedi a un responsabile marketing di collegare gli account social del progetto."
+ },
+ "Dashboard.connectAccount": {
+  "en": "Connect an account",
+  "ar": "اربط حسابًا",
+  "de": "Konto verbinden",
+  "fr": "Connecter un compte",
+  "it": "Collega un account"
+ },
+ "Dashboard.accountsTitle": {
+  "en": "Connected accounts",
+  "ar": "الحسابات المرتبطة",
+  "de": "Verbundene Konten",
+  "fr": "Comptes connectés",
+  "it": "Account collegati"
+ },
+ "Dashboard.accountsSummary": {
+  "en": "{count, plural, one {# account} other {# accounts}}",
+  "ar": "{count, plural, zero {لا حسابات} one {حساب واحد} two {حسابان} few {# حسابات} many {# حسابًا} other {# حساب}}",
+  "de": "{count, plural, one {# Konto} other {# Konten}}",
+  "fr": "{count, plural, one {# compte} other {# comptes}}",
+  "it": "{count, plural, one {# account} other {# account}}"
+ },
+ "Dashboard.accountsSummaryReconnect": {
+  "en": "{count, plural, one {# account} other {# accounts}}, {reconnect, plural, one {# needs attention} other {# need attention}}",
+  "ar": "{count, plural, zero {لا حسابات} one {حساب واحد} two {حسابان} few {# حسابات} many {# حسابًا} other {# حساب}}، {reconnect, plural, zero {لا شيء يحتاج إلى متابعة} one {واحد يحتاج إلى متابعة} two {اثنان يحتاجان إلى متابعة} few {# تحتاج إلى متابعة} many {# تحتاج إلى متابعة} other {# تحتاج إلى متابعة}}",
+  "de": "{count, plural, one {# Konto} other {# Konten}}, {reconnect, plural, one {# braucht Aufmerksamkeit} other {# brauchen Aufmerksamkeit}}",
+  "fr": "{count, plural, one {# compte} other {# comptes}}, dont {reconnect, plural, one {# à vérifier} other {# à vérifier}}",
+  "it": "{count, plural, one {# account} other {# account}}, {reconnect, plural, one {# richiede attenzione} other {# richiedono attenzione}}"
+ },
+ "Dashboard.followers": {
+  "en": "{count, plural, one {{value} follower} other {{value} followers}}",
+  "ar": "{count, plural, zero {{value} متابع} one {متابع واحد} two {متابعان} few {{value} متابعين} many {{value} متابعًا} other {{value} متابع}}",
+  "de": "{count, plural, one {{value} Follower} other {{value} Follower}}",
+  "fr": "{count, plural, one {{value} abonné} other {{value} abonnés}}",
+  "it": "{count, plural, one {{value} follower} other {{value} follower}}"
+ },
+ "Dashboard.accountsError": {
+  "en": "We couldn't load the accounts.",
+  "ar": "تعذّر تحميل الحسابات.",
+  "de": "Die Konten konnten nicht geladen werden.",
+  "fr": "Impossible de charger les comptes.",
+  "it": "Impossibile caricare gli account."
+ },
+ "Dashboard.manageAccounts": {
+  "en": "Manage accounts",
+  "ar": "إدارة الحسابات",
+  "de": "Konten verwalten",
+  "fr": "Gérer les comptes",
+  "it": "Gestisci gli account"
+ },
+ "Dashboard.viewAccounts": {
+  "en": "View accounts",
+  "ar": "عرض الحسابات",
+  "de": "Konten ansehen",
+  "fr": "Voir les comptes",
+  "it": "Vedi gli account"
+ },
+ "Dashboard.publishingToday": {
+  "en": "Publishing today",
+  "ar": "النشر اليوم",
+  "de": "Heute veröffentlicht",
+  "fr": "Publications du jour",
+  "it": "In pubblicazione oggi"
+ },
+ "Dashboard.publishingNext": {
+  "en": "Next to publish",
+  "ar": "التالي في النشر",
+  "de": "Als Nächstes veröffentlicht",
+  "fr": "Prochaines publications",
+  "it": "Prossimi post"
+ },
+ "Dashboard.publishingTodayCount": {
+  "en": "{count, plural, one {# post goes out today} other {# posts go out today}}",
+  "ar": "{count, plural, zero {لا منشورات اليوم} one {يُنشر منشور واحد اليوم} two {يُنشر منشوران اليوم} few {تُنشر # منشورات اليوم} many {يُنشر # منشورًا اليوم} other {يُنشر # منشور اليوم}}",
+  "de": "{count, plural, one {# Beitrag geht heute raus} other {# Beiträge gehen heute raus}}",
+  "fr": "{count, plural, one {# publication part aujourd’hui} other {# publications partent aujourd’hui}}",
+  "it": "{count, plural, one {# post esce oggi} other {# post escono oggi}}"
+ },
+ "Dashboard.postsError": {
+  "en": "We couldn't load the scheduled posts.",
+  "ar": "تعذّر تحميل المنشورات المجدولة.",
+  "de": "Die geplanten Beiträge konnten nicht geladen werden.",
+  "fr": "Impossible de charger les publications programmées.",
+  "it": "Impossibile caricare i post programmati."
+ },
+ "Dashboard.nothingScheduled": {
+  "en": "Nothing scheduled",
+  "ar": "لا يوجد شيء مجدول",
+  "de": "Nichts geplant",
+  "fr": "Rien de programmé",
+  "it": "Niente in programma"
+ },
+ "Dashboard.nothingScheduledBody": {
+  "en": "Scheduled posts will show here.",
+  "ar": "ستظهر المنشورات المجدولة هنا.",
+  "de": "Geplante Beiträge erscheinen hier.",
+  "fr": "Les publications programmées s’afficheront ici.",
+  "it": "I post programmati appariranno qui."
+ },
+ "Dashboard.allPosts": {
+  "en": "All posts",
+  "ar": "كل المنشورات",
+  "de": "Alle Beiträge",
+  "fr": "Toutes les publications",
+  "it": "Tutti i post"
+ },
+ "Dashboard.openCalendar": {
+  "en": "Open calendar",
+  "ar": "فتح التقويم",
+  "de": "Kalender öffnen",
+  "fr": "Ouvrir le calendrier",
+  "it": "Apri il calendario"
+ },
+ "Dashboard.approvalsTitle": {
+  "en": "Waiting for your approval",
+  "ar": "بانتظار موافقتك",
+  "de": "Wartet auf Ihre Freigabe",
+  "fr": "En attente de votre approbation",
+  "it": "In attesa della tua approvazione"
+ },
+ "Dashboard.approvalsCount": {
+  "en": "{count, plural, one {# post} other {# posts}}",
+  "ar": "{count, plural, zero {لا منشورات} one {منشور واحد} two {منشوران} few {# منشورات} many {# منشورًا} other {# منشور}}",
+  "de": "{count, plural, one {# Beitrag} other {# Beiträge}}",
+  "fr": "{count, plural, one {# publication} other {# publications}}",
+  "it": "{count, plural, one {# post} other {# post}}"
+ },
+ "Dashboard.approvalsError": {
+  "en": "We couldn't load your approvals.",
+  "ar": "تعذّر تحميل الموافقات المطلوبة منك.",
+  "de": "Ihre Freigaben konnten nicht geladen werden.",
+  "fr": "Impossible de charger vos approbations.",
+  "it": "Impossibile caricare le tue approvazioni."
+ },
+ "Dashboard.noApprovals": {
+  "en": "Nothing is waiting for you",
+  "ar": "لا يوجد شيء بانتظارك",
+  "de": "Nichts wartet auf Sie",
+  "fr": "Rien ne vous attend",
+  "it": "Niente in attesa per te"
+ },
+ "Dashboard.noApprovalsBody": {
+  "en": "Posts sent to you for approval will show here.",
+  "ar": "ستظهر هنا المنشورات المرسلة إليك للموافقة.",
+  "de": "Ihnen zur Freigabe gesendete Beiträge erscheinen hier.",
+  "fr": "Les publications qui vous sont envoyées pour approbation s’afficheront ici.",
+  "it": "I post inviati a te per l’approvazione appariranno qui."
+ },
+ "Dashboard.approvalFor": {
+  "en": "Scheduled for {when}",
+  "ar": "مجدول في {when}",
+  "de": "Geplant für {when}",
+  "fr": "Programmée le {when}",
+  "it": "Programmato per {when}"
+ },
+ "Dashboard.approvalNoDate": {
+  "en": "Not scheduled",
+  "ar": "غير مجدول",
+  "de": "Nicht geplant",
+  "fr": "Non programmée",
+  "it": "Non programmato"
+ },
+ "Audience.title": {
+  "en": "Our audience",
+  "ar": "جمهورنا",
+  "de": "Unsere Zielgruppe",
+  "fr": "Notre audience",
+  "it": "Il nostro pubblico"
+ },
+ "Audience.description": {
+  "en": "The project's contact lists and the segments built on them.",
+  "ar": "قوائم جهات الاتصال الخاصة بالمشروع والشرائح المبنية عليها.",
+  "de": "Die Kontaktlisten des Projekts und die darauf aufgebauten Segmente.",
+  "fr": "Les listes de contacts du projet et les segments construits dessus.",
+  "it": "Le liste di contatti del progetto e i segmenti costruiti su di esse."
+ },
+ "Audience.search": {
+  "en": "Search",
+  "ar": "بحث",
+  "de": "Suchen",
+  "fr": "Rechercher",
+  "it": "Cerca"
+ },
+ "Audience.searchAudiences": {
+  "en": "Audience name or description",
+  "ar": "اسم الجمهور أو وصفه",
+  "de": "Name oder Beschreibung der Zielgruppe",
+  "fr": "Nom ou description de l’audience",
+  "it": "Nome o descrizione del pubblico"
+ },
+ "Audience.searchSegments": {
+  "en": "Segment name or description",
+  "ar": "اسم الشريحة أو وصفها",
+  "de": "Name oder Beschreibung des Segments",
+  "fr": "Nom ou description du segment",
+  "it": "Nome o descrizione del segmento"
+ },
+ "Audience.clearSearch": {
+  "en": "Clear search",
+  "ar": "مسح البحث",
+  "de": "Suche zurücksetzen",
+  "fr": "Effacer la recherche",
+  "it": "Cancella la ricerca"
+ },
+ "Audience.tabAudiences": {
+  "en": "Audiences",
+  "ar": "الجماهير",
+  "de": "Zielgruppen",
+  "fr": "Audiences",
+  "it": "Pubblici"
+ },
+ "Audience.tabSegments": {
+  "en": "Segments",
+  "ar": "الشرائح",
+  "de": "Segmente",
+  "fr": "Segments",
+  "it": "Segmenti"
+ },
+ "Audience.audiencesTable": {
+  "en": "Audiences",
+  "ar": "الجماهير",
+  "de": "Zielgruppen",
+  "fr": "Audiences",
+  "it": "Pubblici"
+ },
+ "Audience.segmentsTable": {
+  "en": "Segments",
+  "ar": "الشرائح",
+  "de": "Segmente",
+  "fr": "Segments",
+  "it": "Segmenti"
+ },
+ "Audience.audiencesError": {
+  "en": "We couldn't load the audiences.",
+  "ar": "تعذّر تحميل الجماهير.",
+  "de": "Die Zielgruppen konnten nicht geladen werden.",
+  "fr": "Impossible de charger les audiences.",
+  "it": "Impossibile caricare i pubblici."
+ },
+ "Audience.segmentsError": {
+  "en": "We couldn't load the segments.",
+  "ar": "تعذّر تحميل الشرائح.",
+  "de": "Die Segmente konnten nicht geladen werden.",
+  "fr": "Impossible de charger les segments.",
+  "it": "Impossibile caricare i segmenti."
+ },
+ "Audience.colAudience": {
+  "en": "Audience",
+  "ar": "الجمهور",
+  "de": "Zielgruppe",
+  "fr": "Audience",
+  "it": "Pubblico"
+ },
+ "Audience.colContacts": {
+  "en": "Contacts",
+  "ar": "جهات الاتصال",
+  "de": "Kontakte",
+  "fr": "Contacts",
+  "it": "Contatti"
+ },
+ "Audience.colUpdated": {
+  "en": "Updated",
+  "ar": "آخر تحديث",
+  "de": "Aktualisiert",
+  "fr": "Mise à jour",
+  "it": "Aggiornato"
+ },
+ "Audience.colSegment": {
+  "en": "Segment",
+  "ar": "الشريحة",
+  "de": "Segment",
+  "fr": "Segment",
+  "it": "Segmento"
+ },
+ "Audience.colRules": {
+  "en": "Rules",
+  "ar": "القواعد",
+  "de": "Regeln",
+  "fr": "Règles",
+  "it": "Regole"
+ },
+ "Audience.colMatching": {
+  "en": "Matching contacts",
+  "ar": "جهات الاتصال المطابقة",
+  "de": "Passende Kontakte",
+  "fr": "Contacts correspondants",
+  "it": "Contatti corrispondenti"
+ },
+ "Audience.colCreated": {
+  "en": "Created",
+  "ar": "تاريخ الإنشاء",
+  "de": "Erstellt",
+  "fr": "Créé le",
+  "it": "Creato"
+ },
+ "Audience.colActions": {
+  "en": "Actions",
+  "ar": "الإجراءات",
+  "de": "Aktionen",
+  "fr": "Actions",
+  "it": "Azioni"
+ },
+ "Audience.allAudiences": {
+  "en": "All audiences",
+  "ar": "كل الجماهير",
+  "de": "Alle Zielgruppen",
+  "fr": "Toutes les audiences",
+  "it": "Tutti i pubblici"
+ },
+ "Audience.unknownAudience": {
+  "en": "An audience no longer listed",
+  "ar": "جمهور لم يعد مدرجًا",
+  "de": "Eine nicht mehr aufgeführte Zielgruppe",
+  "fr": "Une audience qui n’est plus listée",
+  "it": "Un pubblico non più elencato"
+ },
+ "Audience.noRules": {
+  "en": "Every contact",
+  "ar": "كل جهات الاتصال",
+  "de": "Alle Kontakte",
+  "fr": "Tous les contacts",
+  "it": "Tutti i contatti"
+ },
+ "Audience.ruleSourceIs": {
+  "en": "Source: {value}",
+  "ar": "المصدر: {value}",
+  "de": "Quelle: {value}",
+  "fr": "Source : {value}",
+  "it": "Origine: {value}"
+ },
+ "Audience.ruleTypeIs": {
+  "en": "Type: {value}",
+  "ar": "النوع: {value}",
+  "de": "Typ: {value}",
+  "fr": "Type : {value}",
+  "it": "Tipo: {value}"
+ },
+ "Audience.ruleInterestIs": {
+  "en": "Interest: {value}",
+  "ar": "الاهتمام: {value}",
+  "de": "Interesse: {value}",
+  "fr": "Intérêt : {value}",
+  "it": "Interesse: {value}"
+ },
+ "Audience.ruleQualified": {
+  "en": "Qualified leads only",
+  "ar": "العملاء المحتملون المؤهلون فقط",
+  "de": "Nur qualifizierte Leads",
+  "fr": "Prospects qualifiés uniquement",
+  "it": "Solo lead qualificati"
+ },
+ "Audience.noAudiences": {
+  "en": "No audiences yet",
+  "ar": "لا توجد جماهير بعد",
+  "de": "Noch keine Zielgruppen",
+  "fr": "Aucune audience pour l’instant",
+  "it": "Ancora nessun pubblico"
+ },
+ "Audience.noAudiencesBody": {
+  "en": "Import a CSV or Excel file of contacts to create the first one.",
+  "ar": "استورد ملف CSV أو Excel لجهات الاتصال لإنشاء أول جمهور.",
+  "de": "Importieren Sie eine CSV- oder Excel-Datei mit Kontakten, um die erste zu erstellen.",
+  "fr": "Importez un fichier CSV ou Excel de contacts pour créer la première.",
+  "it": "Importa un file CSV o Excel di contatti per creare il primo."
+ },
+ "Audience.noAudiencesReadOnly": {
+  "en": "Audiences imported by the team will show here.",
+  "ar": "ستظهر هنا الجماهير التي يستوردها الفريق.",
+  "de": "Vom Team importierte Zielgruppen erscheinen hier.",
+  "fr": "Les audiences importées par l’équipe s’afficheront ici.",
+  "it": "I pubblici importati dal team appariranno qui."
+ },
+ "Audience.noAudiencesMatch": {
+  "en": "No audience matches this search",
+  "ar": "لا يوجد جمهور يطابق هذا البحث",
+  "de": "Keine Zielgruppe passt zu dieser Suche",
+  "fr": "Aucune audience ne correspond à cette recherche",
+  "it": "Nessun pubblico corrisponde a questa ricerca"
+ },
+ "Audience.noSegments": {
+  "en": "No segments yet",
+  "ar": "لا توجد شرائح بعد",
+  "de": "Noch keine Segmente",
+  "fr": "Aucun segment pour l’instant",
+  "it": "Ancora nessun segmento"
+ },
+ "Audience.noSegmentsBody": {
+  "en": "A segment narrows an audience by source, type or interest, for campaigns.",
+  "ar": "تُضيّق الشريحة الجمهور حسب المصدر أو النوع أو الاهتمام لاستخدامه في الحملات.",
+  "de": "Ein Segment grenzt eine Zielgruppe nach Quelle, Typ oder Interesse für Kampagnen ein.",
+  "fr": "Un segment restreint une audience par source, type ou intérêt, pour les campagnes.",
+  "it": "Un segmento restringe un pubblico per origine, tipo o interesse, per le campagne."
+ },
+ "Audience.noSegmentsReadOnly": {
+  "en": "Segments created by the team will show here.",
+  "ar": "ستظهر هنا الشرائح التي ينشئها الفريق.",
+  "de": "Vom Team erstellte Segmente erscheinen hier.",
+  "fr": "Les segments créés par l’équipe s’afficheront ici.",
+  "it": "I segmenti creati dal team appariranno qui."
+ },
+ "Audience.noSegmentsMatch": {
+  "en": "No segment matches this search",
+  "ar": "لا توجد شريحة تطابق هذا البحث",
+  "de": "Kein Segment passt zu dieser Suche",
+  "fr": "Aucun segment ne correspond à cette recherche",
+  "it": "Nessun segmento corrisponde a questa ricerca"
+ },
+ "Audience.cancel": {
+  "en": "Cancel",
+  "ar": "إلغاء",
+  "de": "Abbrechen",
+  "fr": "Annuler",
+  "it": "Annulla"
+ },
+ "Audience.deleteSegment": {
+  "en": "Delete segment",
+  "ar": "حذف الشريحة",
+  "de": "Segment löschen",
+  "fr": "Supprimer le segment",
+  "it": "Elimina segmento"
+ },
+ "Audience.deleteSegmentLabel": {
+  "en": "Delete segment {name}",
+  "ar": "حذف الشريحة {name}",
+  "de": "Segment {name} löschen",
+  "fr": "Supprimer le segment {name}",
+  "it": "Elimina il segmento {name}"
+ },
+ "Audience.deleteSegmentTitle": {
+  "en": "Delete the segment {name}?",
+  "ar": "هل تريد حذف الشريحة {name}؟",
+  "de": "Segment {name} löschen?",
+  "fr": "Supprimer le segment {name} ?",
+  "it": "Eliminare il segmento {name}?"
+ },
+ "Audience.deleteSegmentImpact": {
+  "en": "{count, plural, =0 {Its rules are deleted. No contact is deleted: contacts stay in their audiences.} one {Its rules are deleted. Its # matching contact stays in its audience.} other {Its rules are deleted. Its # matching contacts stay in their audiences.}}",
+  "ar": "{count, plural, zero {ستُحذف قواعدها. لن تُحذف أي جهة اتصال، فهي تبقى في جماهيرها.} one {ستُحذف قواعدها. تبقى جهة الاتصال المطابقة في جمهورها.} two {ستُحذف قواعدها. تبقى جهتا الاتصال المطابقتان في جماهيرهما.} few {ستُحذف قواعدها. تبقى # جهات اتصال مطابقة في جماهيرها.} many {ستُحذف قواعدها. تبقى # جهة اتصال مطابقة في جماهيرها.} other {ستُحذف قواعدها. تبقى # جهة اتصال مطابقة في جماهيرها.}}",
+  "de": "{count, plural, =0 {Seine Regeln werden gelöscht. Kein Kontakt wird gelöscht: Kontakte bleiben in ihren Zielgruppen.} one {Seine Regeln werden gelöscht. Der # passende Kontakt bleibt in seiner Zielgruppe.} other {Seine Regeln werden gelöscht. Die # passenden Kontakte bleiben in ihren Zielgruppen.}}",
+  "fr": "{count, plural, =0 {Ses règles sont supprimées. Aucun contact n’est supprimé : les contacts restent dans leurs audiences.} one {Ses règles sont supprimées. Son # contact correspondant reste dans son audience.} other {Ses règles sont supprimées. Ses # contacts correspondants restent dans leurs audiences.}}",
+  "it": "{count, plural, =0 {Le sue regole vengono eliminate. Nessun contatto viene eliminato: i contatti restano nei loro pubblici.} one {Le sue regole vengono eliminate. Il suo # contatto corrispondente resta nel suo pubblico.} other {Le sue regole vengono eliminate. I suoi # contatti corrispondenti restano nei loro pubblici.}}"
+ },
+ "Audience.createSegment": {
+  "en": "Create segment",
+  "ar": "إنشاء شريحة",
+  "de": "Segment erstellen",
+  "fr": "Créer un segment",
+  "it": "Crea segmento"
+ },
+ "Audience.createSegmentTitle": {
+  "en": "Create a segment",
+  "ar": "إنشاء شريحة",
+  "de": "Segment erstellen",
+  "fr": "Créer un segment",
+  "it": "Crea un segmento"
+ },
+ "Audience.createSegmentDescription": {
+  "en": "Contacts that match every rule you fill in belong to the segment.",
+  "ar": "تنتمي إلى الشريحة جهات الاتصال التي تطابق كل القواعد التي تحددها.",
+  "de": "Kontakte, die alle ausgefüllten Regeln erfüllen, gehören zum Segment.",
+  "fr": "Les contacts qui remplissent toutes les règles indiquées font partie du segment.",
+  "it": "I contatti che soddisfano tutte le regole compilate fanno parte del segmento."
+ },
+ "Audience.segmentName": {
+  "en": "Name",
+  "ar": "الاسم",
+  "de": "Name",
+  "fr": "Nom",
+  "it": "Nome"
+ },
+ "Audience.needSegmentName": {
+  "en": "Give the segment a name.",
+  "ar": "أدخل اسمًا للشريحة.",
+  "de": "Geben Sie dem Segment einen Namen.",
+  "fr": "Donnez un nom au segment.",
+  "it": "Dai un nome al segmento."
+ },
+ "Audience.segmentDescription": {
+  "en": "Description",
+  "ar": "الوصف",
+  "de": "Beschreibung",
+  "fr": "Description",
+  "it": "Descrizione"
+ },
+ "Audience.segmentAudience": {
+  "en": "Audience",
+  "ar": "الجمهور",
+  "de": "Zielgruppe",
+  "fr": "Audience",
+  "it": "Pubblico"
+ },
+ "Audience.segmentAudienceHint": {
+  "en": "The list the segment narrows down.",
+  "ar": "القائمة التي تُضيّقها الشريحة.",
+  "de": "Die Liste, die das Segment eingrenzt.",
+  "fr": "La liste que le segment restreint.",
+  "it": "La lista che il segmento restringe."
+ },
+ "Audience.ruleSource": {
+  "en": "Source",
+  "ar": "المصدر",
+  "de": "Quelle",
+  "fr": "Source",
+  "it": "Origine"
+ },
+ "Audience.ruleSourcePlaceholder": {
+  "en": "e.g. Mobile App",
+  "ar": "مثل: تطبيق الجوال",
+  "de": "z. B. Mobile App",
+  "fr": "ex. Application mobile",
+  "it": "es. App mobile"
+ },
+ "Audience.ruleType": {
+  "en": "Contact type",
+  "ar": "نوع جهة الاتصال",
+  "de": "Kontakttyp",
+  "fr": "Type de contact",
+  "it": "Tipo di contatto"
+ },
+ "Audience.ruleTypePlaceholder": {
+  "en": "e.g. Customer",
+  "ar": "مثل: عميل",
+  "de": "z. B. Kunde",
+  "fr": "ex. Client",
+  "it": "es. Cliente"
+ },
+ "Audience.ruleInterest": {
+  "en": "Interest",
+  "ar": "الاهتمام",
+  "de": "Interesse",
+  "fr": "Intérêt",
+  "it": "Interesse"
+ },
+ "Audience.ruleInterestPlaceholder": {
+  "en": "e.g. Ready meals",
+  "ar": "مثل: الوجبات الجاهزة",
+  "de": "z. B. Fertiggerichte",
+  "fr": "ex. Plats préparés",
+  "it": "es. Piatti pronti"
+ },
+ "Audience.ruleQualifiedHint": {
+  "en": "Leave out leads that sales hasn't qualified.",
+  "ar": "استبعد العملاء المحتملين الذين لم يؤهلهم فريق المبيعات.",
+  "de": "Leads ausschließen, die der Vertrieb nicht qualifiziert hat.",
+  "fr": "Exclure les prospects que les ventes n’ont pas qualifiés.",
+  "it": "Escludi i lead non qualificati dalle vendite."
+ },
+ "Audience.importContacts": {
+  "en": "Import contacts",
+  "ar": "استيراد جهات الاتصال",
+  "de": "Kontakte importieren",
+  "fr": "Importer des contacts",
+  "it": "Importa contatti"
+ },
+ "Audience.importTitle": {
+  "en": "Import contacts",
+  "ar": "استيراد جهات الاتصال",
+  "de": "Kontakte importieren",
+  "fr": "Importer des contacts",
+  "it": "Importa contatti"
+ },
+ "Audience.importDescription": {
+  "en": "Upload a file, say which columns hold the name, email and phone, and save the contacts as a new audience.",
+  "ar": "ارفع ملفًا، وحدّد الأعمدة التي تحوي الاسم والبريد الإلكتروني والهاتف، ثم احفظ جهات الاتصال كجمهور جديد.",
+  "de": "Laden Sie eine Datei hoch, geben Sie an, welche Spalten Name, E-Mail und Telefon enthalten, und speichern Sie die Kontakte als neue Zielgruppe.",
+  "fr": "Chargez un fichier, indiquez les colonnes du nom, de l’e-mail et du téléphone, et enregistrez les contacts comme nouvelle audience.",
+  "it": "Carica un file, indica quali colonne contengono nome, e-mail e telefono e salva i contatti come nuovo pubblico."
+ },
+ "Audience.importSteps": {
+  "en": "Import steps",
+  "ar": "خطوات الاستيراد",
+  "de": "Importschritte",
+  "fr": "Étapes de l’import",
+  "it": "Passaggi dell’importazione"
+ },
+ "Audience.stepUpload": {
+  "en": "Upload file",
+  "ar": "رفع الملف",
+  "de": "Datei hochladen",
+  "fr": "Charger le fichier",
+  "it": "Carica il file"
+ },
+ "Audience.stepMap": {
+  "en": "Map columns",
+  "ar": "مطابقة الأعمدة",
+  "de": "Spalten zuordnen",
+  "fr": "Associer les colonnes",
+  "it": "Associa le colonne"
+ },
+ "Audience.stepDone": {
+  "en": "Done",
+  "ar": "تم",
+  "de": "Fertig",
+  "fr": "Terminé",
+  "it": "Fatto"
+ },
+ "Audience.stepLocked": {
+  "en": "Finish the step before it first.",
+  "ar": "أكمل الخطوة السابقة أولًا.",
+  "de": "Schließen Sie zuerst den vorherigen Schritt ab.",
+  "fr": "Terminez d’abord l’étape précédente.",
+  "it": "Completa prima il passaggio precedente."
+ },
+ "Audience.file": {
+  "en": "Contacts file",
+  "ar": "ملف جهات الاتصال",
+  "de": "Kontaktdatei",
+  "fr": "Fichier de contacts",
+  "it": "File dei contatti"
+ },
+ "Audience.fileHint": {
+  "en": "CSV or Excel, up to 10 MB, with a header row.",
+  "ar": "ملف CSV أو Excel، حتى 10 ميغابايت، مع صف للعناوين.",
+  "de": "CSV oder Excel, bis 10 MB, mit Kopfzeile.",
+  "fr": "CSV ou Excel, 10 Mo maximum, avec une ligne d’en-tête.",
+  "it": "CSV o Excel, fino a 10 MB, con una riga di intestazione."
+ },
+ "Audience.needFile": {
+  "en": "Choose a file to import.",
+  "ar": "اختر ملفًا للاستيراد.",
+  "de": "Wählen Sie eine Datei zum Importieren.",
+  "fr": "Choisissez un fichier à importer.",
+  "it": "Scegli un file da importare."
+ },
+ "Audience.next": {
+  "en": "Next",
+  "ar": "التالي",
+  "de": "Weiter",
+  "fr": "Suivant",
+  "it": "Avanti"
+ },
+ "Audience.back": {
+  "en": "Back",
+  "ar": "رجوع",
+  "de": "Zurück",
+  "fr": "Retour",
+  "it": "Indietro"
+ },
+ "Audience.foundRows": {
+  "en": "{count, plural, one {# contact found in {file}.} other {# contacts found in {file}.}}",
+  "ar": "{count, plural, zero {لم يتم العثور على جهات اتصال في {file}.} one {تم العثور على جهة اتصال واحدة في {file}.} two {تم العثور على جهتي اتصال في {file}.} few {تم العثور على # جهات اتصال في {file}.} many {تم العثور على # جهة اتصال في {file}.} other {تم العثور على # جهة اتصال في {file}.}}",
+  "de": "{count, plural, one {# Kontakt in {file} gefunden.} other {# Kontakte in {file} gefunden.}}",
+  "fr": "{count, plural, one {# contact trouvé dans {file}.} other {# contacts trouvés dans {file}.}}",
+  "it": "{count, plural, one {# contatto trovato in {file}.} other {# contatti trovati in {file}.}}"
+ },
+ "Audience.nameColumn": {
+  "en": "Name column",
+  "ar": "عمود الاسم",
+  "de": "Namensspalte",
+  "fr": "Colonne du nom",
+  "it": "Colonna del nome"
+ },
+ "Audience.emailColumn": {
+  "en": "Email column",
+  "ar": "عمود البريد الإلكتروني",
+  "de": "E-Mail-Spalte",
+  "fr": "Colonne de l’e-mail",
+  "it": "Colonna dell’e-mail"
+ },
+ "Audience.phoneColumn": {
+  "en": "Phone column",
+  "ar": "عمود الهاتف",
+  "de": "Telefonspalte",
+  "fr": "Colonne du téléphone",
+  "it": "Colonna del telefono"
+ },
+ "Audience.pickColumn": {
+  "en": "Choose a column",
+  "ar": "اختر عمودًا",
+  "de": "Spalte wählen",
+  "fr": "Choisir une colonne",
+  "it": "Scegli una colonna"
+ },
+ "Audience.notInFile": {
+  "en": "Not in the file",
+  "ar": "غير موجود في الملف",
+  "de": "Nicht in der Datei",
+  "fr": "Absente du fichier",
+  "it": "Non presente nel file"
+ },
+ "Audience.needName": {
+  "en": "Choose the column that holds the contact's name.",
+  "ar": "اختر العمود الذي يحوي اسم جهة الاتصال.",
+  "de": "Wählen Sie die Spalte mit dem Namen des Kontakts.",
+  "fr": "Choisissez la colonne qui contient le nom du contact.",
+  "it": "Scegli la colonna che contiene il nome del contatto."
+ },
+ "Audience.needReach": {
+  "en": "Map an email or a phone column, so the contacts can be reached.",
+  "ar": "طابق عمود البريد الإلكتروني أو الهاتف ليمكن التواصل مع جهات الاتصال.",
+  "de": "Ordnen Sie eine E-Mail- oder Telefonspalte zu, damit die Kontakte erreichbar sind.",
+  "fr": "Associez une colonne e-mail ou téléphone pour pouvoir joindre les contacts.",
+  "it": "Associa una colonna e-mail o telefono, così i contatti sono raggiungibili."
+ },
+ "Audience.audienceName": {
+  "en": "New audience name",
+  "ar": "اسم الجمهور الجديد",
+  "de": "Name der neuen Zielgruppe",
+  "fr": "Nom de la nouvelle audience",
+  "it": "Nome del nuovo pubblico"
+ },
+ "Audience.audienceNameHint": {
+  "en": "The imported contacts are saved as this audience.",
+  "ar": "تُحفظ جهات الاتصال المستوردة في هذا الجمهور.",
+  "de": "Die importierten Kontakte werden als diese Zielgruppe gespeichert.",
+  "fr": "Les contacts importés sont enregistrés dans cette audience.",
+  "it": "I contatti importati vengono salvati in questo pubblico."
+ },
+ "Audience.needAudienceName": {
+  "en": "Give the new audience a name.",
+  "ar": "أدخل اسمًا للجمهور الجديد.",
+  "de": "Geben Sie der neuen Zielgruppe einen Namen.",
+  "fr": "Donnez un nom à la nouvelle audience.",
+  "it": "Dai un nome al nuovo pubblico."
+ },
+ "Audience.previewTitle": {
+  "en": "{count, plural, one {First row of the file} other {First # rows of the file}}",
+  "ar": "{count, plural, zero {لا صفوف في الملف} one {الصف الأول من الملف} two {أول صفين من الملف} few {أول # صفوف من الملف} many {أول # صفًا من الملف} other {أول # صف من الملف}}",
+  "de": "{count, plural, one {Erste Zeile der Datei} other {Erste # Zeilen der Datei}}",
+  "fr": "{count, plural, one {Première ligne du fichier} other {# premières lignes du fichier}}",
+  "it": "{count, plural, one {Prima riga del file} other {Prime # righe del file}}"
+ },
+ "Audience.asName": {
+  "en": "(name)",
+  "ar": "(الاسم)",
+  "de": "(Name)",
+  "fr": "(nom)",
+  "it": "(nome)"
+ },
+ "Audience.asEmail": {
+  "en": "(email)",
+  "ar": "(البريد الإلكتروني)",
+  "de": "(E-Mail)",
+  "fr": "(e-mail)",
+  "it": "(e-mail)"
+ },
+ "Audience.asPhone": {
+  "en": "(phone)",
+  "ar": "(الهاتف)",
+  "de": "(Telefon)",
+  "fr": "(téléphone)",
+  "it": "(telefono)"
+ },
+ "Audience.importNow": {
+  "en": "{count, plural, one {Import # contact} other {Import # contacts}}",
+  "ar": "استيراد {count, plural, zero {جهات الاتصال} one {جهة اتصال واحدة} two {جهتي اتصال} few {# جهات اتصال} many {# جهة اتصال} other {# جهة اتصال}}",
+  "de": "{count, plural, one {# Kontakt importieren} other {# Kontakte importieren}}",
+  "fr": "{count, plural, one {Importer # contact} other {Importer # contacts}}",
+  "it": "{count, plural, one {Importa # contatto} other {Importa # contatti}}"
+ },
+ "Audience.doneInto": {
+  "en": "The contacts were saved to the audience {name}.",
+  "ar": "تم حفظ جهات الاتصال في الجمهور {name}.",
+  "de": "Die Kontakte wurden in der Zielgruppe {name} gespeichert.",
+  "fr": "Les contacts ont été enregistrés dans l’audience {name}.",
+  "it": "I contatti sono stati salvati nel pubblico {name}."
+ },
+ "Audience.donePlain": {
+  "en": "The contacts were imported.",
+  "ar": "تم استيراد جهات الاتصال.",
+  "de": "Die Kontakte wurden importiert.",
+  "fr": "Les contacts ont été importés.",
+  "it": "I contatti sono stati importati."
+ },
+ "Audience.imported": {
+  "en": "Imported",
+  "ar": "تم استيرادها",
+  "de": "Importiert",
+  "fr": "Importés",
+  "it": "Importati"
+ },
+ "Audience.skipped": {
+  "en": "Skipped",
+  "ar": "تم تخطيها",
+  "de": "Übersprungen",
+  "fr": "Ignorés",
+  "it": "Saltati"
+ },
+ "Audience.skippedHint": {
+  "en": "Rows with no name, or with neither a valid email nor a phone number.",
+  "ar": "صفوف بلا اسم، أو بلا بريد إلكتروني صالح ولا رقم هاتف.",
+  "de": "Zeilen ohne Namen oder ohne gültige E-Mail und Telefonnummer.",
+  "fr": "Lignes sans nom, ou sans e-mail valide ni numéro de téléphone.",
+  "it": "Righe senza nome o senza e-mail valida né numero di telefono."
+ },
+ "Audience.importAnother": {
+  "en": "Import another file",
+  "ar": "استيراد ملف آخر",
+  "de": "Weitere Datei importieren",
+  "fr": "Importer un autre fichier",
+  "it": "Importa un altro file"
+ },
+ "Audience.done": {
+  "en": "Done",
+  "ar": "تم",
+  "de": "Fertig",
+  "fr": "Terminé",
+  "it": "Fatto"
+ }
+}

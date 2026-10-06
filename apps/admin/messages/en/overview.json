@@ -1,0 +1,24 @@
+{
+  "Overview": {
+    "title": "Overview",
+    "description": "How the platform is doing, and the work waiting for the team.",
+    "numbers": "Key numbers",
+    "mrr": "Monthly recurring revenue",
+    "mrrHint": "All currencies, in USD at today's rate",
+    "workspaces": "Customer workspaces",
+    "workspacesHint": "{active} active · {pastDue} past due · {suspended} suspended",
+    "trials": "Trials running",
+    "trialsHint": "{count, plural, =0 {None end in the next 3 days} one {# ends in the next 3 days} other {# end in the next 3 days}}",
+    "pastDue": "Unpaid invoices",
+    "pastDueHint": "Past due; {open} more open",
+    "queue": "Waiting for the team",
+    "q": {
+      "pastDue": "Invoices past due",
+      "newRequests": "New service requests",
+      "openTickets": "Open support tickets",
+      "customPlans": "Custom plan requests to quote",
+      "migrations": "Currency migrations to review",
+      "waitlist": "People on waitlists"
+    }
+  }
+}

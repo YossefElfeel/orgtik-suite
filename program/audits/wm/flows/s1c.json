@@ -1,0 +1,74 @@
+[
+  {
+    "title": "A page's copy changes with its marks kept; dropping them is refused",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "marks-dropped-refused",
+        "ok": true,
+        "note": "422 shown on the field; nothing saved"
+      },
+      {
+        "name": "marks-kept-saved",
+        "ok": true,
+        "note": "v3, draft"
+      },
+      {
+        "name": "arabic-section",
+        "ok": true,
+        "note": "ar in_progress"
+      },
+      {
+        "name": "no-errors",
+        "ok": true,
+        "note": "no console errors besides the expected 422"
+      }
+    ]
+  },
+  {
+    "title": "The footer's links go through review to the website",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "edit-and-submit",
+        "ok": true,
+        "note": "in review; SEO tab on a global element: 0"
+      },
+      {
+        "name": "approve-publish",
+        "ok": true,
+        "note": "public: {\"label\":\"Our work\",\"href\":\"/work\"}"
+      }
+    ]
+  },
+  {
+    "title": "A social network's icon is the same in every language",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "icon-locked-in-arabic",
+        "ok": true,
+        "note": "icon locked true, name editable true"
+      }
+    ]
+  },
+  {
+    "title": "A page's search description closes an SEO gap",
+    "ok": true,
+    "passed": 1,
+    "steps": 1,
+    "detail": [
+      {
+        "name": "seo-description",
+        "ok": true,
+        "note": "address fixed true; SEO issues 14 → 13"
+      }
+    ]
+  }
+]

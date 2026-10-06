@@ -1,0 +1,429 @@
+{
+ "CampaignGoogle.settingsTitle": {
+  "en": "Google Search settings",
+  "ar": "إعدادات بحث Google",
+  "de": "Einstellungen für die Google-Suche",
+  "fr": "Paramètres Google Search",
+  "it": "Impostazioni di Google Search"
+ },
+ "CampaignGoogle.settingsDescription": {
+  "en": "The ad account, budget and who sees the ads.",
+  "ar": "الحساب الإعلاني والميزانية ومن يرى الإعلانات.",
+  "de": "Werbekonto, Budget und wer die Anzeigen sieht.",
+  "fr": "Le compte publicitaire, le budget et qui voit les annonces.",
+  "it": "L’account pubblicitario, il budget e chi vede gli annunci."
+ },
+ "CampaignGoogle.accountTitle": {
+  "en": "Google Ads account",
+  "ar": "حساب Google Ads",
+  "de": "Google-Ads-Konto",
+  "fr": "Compte Google Ads",
+  "it": "Account Google Ads"
+ },
+ "CampaignGoogle.accountDescription": {
+  "en": "The campaign runs and is billed on this account.",
+  "ar": "تعمل الحملة على هذا الحساب وتُحتسب تكلفتها عليه.",
+  "de": "Die Kampagne läuft über dieses Konto und wird darüber abgerechnet.",
+  "fr": "La campagne est diffusée et facturée sur ce compte.",
+  "it": "La campagna gira e viene addebitata su questo account."
+ },
+ "CampaignGoogle.account": {
+  "en": "Account",
+  "ar": "الحساب",
+  "de": "Konto",
+  "fr": "Compte",
+  "it": "Account"
+ },
+ "CampaignGoogle.accountPlaceholder": {
+  "en": "Choose an account",
+  "ar": "اختر حسابًا",
+  "de": "Konto wählen",
+  "fr": "Choisissez un compte",
+  "it": "Scegli un account"
+ },
+ "CampaignGoogle.accountRequired": {
+  "en": "Choose the Google Ads account",
+  "ar": "اختر حساب Google Ads",
+  "de": "Wählen Sie das Google-Ads-Konto",
+  "fr": "Choisissez le compte Google Ads",
+  "it": "Scegli l’account Google Ads"
+ },
+ "CampaignGoogle.accountsError": {
+  "en": "Couldn't load the connected accounts",
+  "ar": "تعذّر تحميل الحسابات المرتبطة",
+  "de": "Verbundene Konten konnten nicht geladen werden",
+  "fr": "Impossible de charger les comptes connectés",
+  "it": "Impossibile caricare gli account collegati"
+ },
+ "CampaignGoogle.noAccountTitle": {
+  "en": "No Google Ads account is connected",
+  "ar": "لا يوجد حساب Google Ads مرتبط",
+  "de": "Kein Google-Ads-Konto verbunden",
+  "fr": "Aucun compte Google Ads connecté",
+  "it": "Nessun account Google Ads collegato"
+ },
+ "CampaignGoogle.noAccountBody": {
+  "en": "Connect one for this project in Integrations, then come back to this step.",
+  "ar": "اربط حسابًا لهذا المشروع في التكاملات، ثم عُد إلى هذه الخطوة.",
+  "de": "Verbinden Sie unter Integrationen eines für dieses Projekt und kehren Sie dann zu diesem Schritt zurück.",
+  "fr": "Connectez-en un pour ce projet dans Intégrations, puis revenez à cette étape.",
+  "it": "Collegane uno per questo progetto in Integrazioni, poi torna a questo passaggio."
+ },
+ "CampaignGoogle.connectAccount": {
+  "en": "Go to Integrations",
+  "ar": "الانتقال إلى التكاملات",
+  "de": "Zu den Integrationen",
+  "fr": "Aller aux intégrations",
+  "it": "Vai a Integrazioni"
+ },
+ "CampaignGoogle.objectiveTitle": {
+  "en": "Objective",
+  "ar": "الهدف",
+  "de": "Ziel",
+  "fr": "Objectif",
+  "it": "Obiettivo"
+ },
+ "CampaignGoogle.budgetTitle": {
+  "en": "Budget",
+  "ar": "الميزانية",
+  "de": "Budget",
+  "fr": "Budget",
+  "it": "Budget"
+ },
+ "CampaignGoogle.budgetAmount": {
+  "en": "Amount",
+  "ar": "المبلغ",
+  "de": "Betrag",
+  "fr": "Montant",
+  "it": "Importo"
+ },
+ "CampaignGoogle.budgetType": {
+  "en": "Budget period",
+  "ar": "مدة الميزانية",
+  "de": "Budgetzeitraum",
+  "fr": "Période du budget",
+  "it": "Periodo del budget"
+ },
+ "CampaignGoogle.budgetRequired": {
+  "en": "Enter a budget above zero",
+  "ar": "أدخل ميزانية أكبر من صفر",
+  "de": "Geben Sie ein Budget über null ein",
+  "fr": "Saisissez un budget supérieur à zéro",
+  "it": "Inserisci un budget maggiore di zero"
+ },
+ "CampaignGoogle.currencyFromAccount": {
+  "en": "In {currency}, the currency of {account}.",
+  "ar": "بعملة {currency}، عملة {account}.",
+  "de": "In {currency}, der Währung von {account}.",
+  "fr": "En {currency}, la devise de {account}.",
+  "it": "In {currency}, la valuta di {account}."
+ },
+ "CampaignGoogle.currencyNote": {
+  "en": "In {currency}, the ad account's currency.",
+  "ar": "بعملة {currency}، عملة الحساب الإعلاني.",
+  "de": "In {currency}, der Währung des Werbekontos.",
+  "fr": "En {currency}, la devise du compte publicitaire.",
+  "it": "In {currency}, la valuta dell’account pubblicitario."
+ },
+ "CampaignGoogle.searchTitle": {
+  "en": "Search targeting",
+  "ar": "استهداف البحث",
+  "de": "Ausrichtung der Suche",
+  "fr": "Ciblage de la recherche",
+  "it": "Targeting della ricerca"
+ },
+ "CampaignGoogle.bidding": {
+  "en": "Bidding strategy",
+  "ar": "استراتيجية عروض الأسعار",
+  "de": "Gebotsstrategie",
+  "fr": "Stratégie d’enchères",
+  "it": "Strategia di offerta"
+ },
+ "CampaignGoogle.networks": {
+  "en": "Networks",
+  "ar": "الشبكات",
+  "de": "Netzwerke",
+  "fr": "Réseaux",
+  "it": "Reti"
+ },
+ "CampaignGoogle.networksRequired": {
+  "en": "Choose at least one network",
+  "ar": "اختر شبكة واحدة على الأقل",
+  "de": "Wählen Sie mindestens ein Netzwerk",
+  "fr": "Choisissez au moins un réseau",
+  "it": "Scegli almeno una rete"
+ },
+ "CampaignGoogle.locations": {
+  "en": "Countries",
+  "ar": "الدول",
+  "de": "Länder",
+  "fr": "Pays",
+  "it": "Paesi"
+ },
+ "CampaignGoogle.locationsHint": {
+  "en": "Ads show to people in these countries.",
+  "ar": "تظهر الإعلانات للأشخاص في هذه الدول.",
+  "de": "Anzeigen erscheinen für Personen in diesen Ländern.",
+  "fr": "Les annonces s’affichent pour les personnes dans ces pays.",
+  "it": "Gli annunci compaiono alle persone in questi paesi."
+ },
+ "CampaignGoogle.locationsPlaceholder": {
+  "en": "Choose countries",
+  "ar": "اختر الدول",
+  "de": "Länder wählen",
+  "fr": "Choisissez des pays",
+  "it": "Scegli i paesi"
+ },
+ "CampaignGoogle.locationsRequired": {
+  "en": "Choose at least one country",
+  "ar": "اختر دولة واحدة على الأقل",
+  "de": "Wählen Sie mindestens ein Land",
+  "fr": "Choisissez au moins un pays",
+  "it": "Scegli almeno un paese"
+ },
+ "CampaignGoogle.locationId": {
+  "en": "Location {id}",
+  "ar": "الموقع {id}",
+  "de": "Standort {id}",
+  "fr": "Zone {id}",
+  "it": "Località {id}"
+ },
+ "CampaignGoogle.languages": {
+  "en": "Languages",
+  "ar": "اللغات",
+  "de": "Sprachen",
+  "fr": "Langues",
+  "it": "Lingue"
+ },
+ "CampaignGoogle.languagesHint": {
+  "en": "Leave it empty to reach every language.",
+  "ar": "اتركه فارغًا للوصول إلى كل اللغات.",
+  "de": "Leer lassen, um alle Sprachen zu erreichen.",
+  "fr": "Laissez vide pour toutes les langues.",
+  "it": "Lascia vuoto per tutte le lingue."
+ },
+ "CampaignGoogle.languagesPlaceholder": {
+  "en": "Choose languages",
+  "ar": "اختر اللغات",
+  "de": "Sprachen wählen",
+  "fr": "Choisissez des langues",
+  "it": "Scegli le lingue"
+ },
+ "CampaignGoogle.languageId": {
+  "en": "Language {id}",
+  "ar": "اللغة {id}",
+  "de": "Sprache {id}",
+  "fr": "Langue {id}",
+  "it": "Lingua {id}"
+ },
+ "CampaignGoogle.adGroupsTitle": {
+  "en": "Ad groups",
+  "ar": "المجموعات الإعلانية",
+  "de": "Anzeigengruppen",
+  "fr": "Groupes d’annonces",
+  "it": "Gruppi di annunci"
+ },
+ "CampaignGoogle.adGroupsDescription": {
+  "en": "Group keywords with the search ads that answer them.",
+  "ar": "اجمع الكلمات المفتاحية مع إعلانات البحث التي تطابقها.",
+  "de": "Bündeln Sie Keywords mit den passenden Suchanzeigen.",
+  "fr": "Regroupez les mots clés avec les annonces qui y répondent.",
+  "it": "Raggruppa le parole chiave con gli annunci di ricerca che le servono."
+ },
+ "CampaignGoogle.addAdGroup": {
+  "en": "Add ad group",
+  "ar": "إضافة مجموعة إعلانية",
+  "de": "Anzeigengruppe hinzufügen",
+  "fr": "Ajouter un groupe d’annonces",
+  "it": "Aggiungi gruppo di annunci"
+ },
+ "CampaignGoogle.adGroupDefaultName": {
+  "en": "Ad group {n}",
+  "ar": "المجموعة الإعلانية {n}",
+  "de": "Anzeigengruppe {n}",
+  "fr": "Groupe d’annonces {n}",
+  "it": "Gruppo di annunci {n}"
+ },
+ "CampaignGoogle.adGroupUnnamed": {
+  "en": "Unnamed ad group",
+  "ar": "مجموعة إعلانية بلا اسم",
+  "de": "Anzeigengruppe ohne Namen",
+  "fr": "Groupe d’annonces sans nom",
+  "it": "Gruppo di annunci senza nome"
+ },
+ "CampaignGoogle.adGroupName": {
+  "en": "Ad group name",
+  "ar": "اسم المجموعة الإعلانية",
+  "de": "Name der Anzeigengruppe",
+  "fr": "Nom du groupe d’annonces",
+  "it": "Nome del gruppo di annunci"
+ },
+ "CampaignGoogle.adGroupNameRequired": {
+  "en": "Name the ad group",
+  "ar": "سمِّ المجموعة الإعلانية",
+  "de": "Benennen Sie die Anzeigengruppe",
+  "fr": "Nommez le groupe d’annonces",
+  "it": "Dai un nome al gruppo di annunci"
+ },
+ "CampaignGoogle.adGroupsRequired": {
+  "en": "Add at least one ad group",
+  "ar": "أضف مجموعة إعلانية واحدة على الأقل",
+  "de": "Fügen Sie mindestens eine Anzeigengruppe hinzu",
+  "fr": "Ajoutez au moins un groupe d’annonces",
+  "it": "Aggiungi almeno un gruppo di annunci"
+ },
+ "CampaignGoogle.noAdGroupsTitle": {
+  "en": "No ad groups yet",
+  "ar": "لا توجد مجموعات إعلانية بعد",
+  "de": "Noch keine Anzeigengruppen",
+  "fr": "Aucun groupe d’annonces pour l’instant",
+  "it": "Ancora nessun gruppo di annunci"
+ },
+ "CampaignGoogle.noAdGroupsBody": {
+  "en": "Add an ad group, then its keywords and ads.",
+  "ar": "أضف مجموعة إعلانية، ثم كلماتها المفتاحية وإعلاناتها.",
+  "de": "Fügen Sie eine Anzeigengruppe hinzu, dann ihre Keywords und Anzeigen.",
+  "fr": "Ajoutez un groupe d’annonces, puis ses mots clés et ses annonces.",
+  "it": "Aggiungi un gruppo di annunci, poi le parole chiave e gli annunci."
+ },
+ "CampaignGoogle.removeAdGroup": {
+  "en": "Remove ad group {name}",
+  "ar": "إزالة المجموعة الإعلانية {name}",
+  "de": "Anzeigengruppe {name} entfernen",
+  "fr": "Retirer le groupe d’annonces {name}",
+  "it": "Rimuovi il gruppo di annunci {name}"
+ },
+ "CampaignGoogle.adsCount": {
+  "en": "{count, plural, one {# ad} other {# ads}}",
+  "ar": "{count, plural, zero {لا إعلانات} one {إعلان واحد} two {إعلانان} few {# إعلانات} many {# إعلانًا} other {# إعلان}}",
+  "de": "{count, plural, one {# Anzeige} other {# Anzeigen}}",
+  "fr": "{count, plural, one {# annonce} other {# annonces}}",
+  "it": "{count, plural, one {# annuncio} other {# annunci}}"
+ },
+ "CampaignGoogle.keywords": {
+  "en": "Keywords",
+  "ar": "الكلمات المفتاحية",
+  "de": "Keywords",
+  "fr": "Mots clés",
+  "it": "Parole chiave"
+ },
+ "CampaignGoogle.keywordPlaceholder": {
+  "en": "e.g. car wash",
+  "ar": "مثال: غسيل سيارات",
+  "de": "z. B. Autowäsche",
+  "fr": "p. ex. lavage auto",
+  "it": "es. autolavaggio"
+ },
+ "CampaignGoogle.keywordsRequired": {
+  "en": "Add at least one keyword",
+  "ar": "أضف كلمة مفتاحية واحدة على الأقل",
+  "de": "Fügen Sie mindestens ein Keyword hinzu",
+  "fr": "Ajoutez au moins un mot clé",
+  "it": "Aggiungi almeno una parola chiave"
+ },
+ "CampaignGoogle.negativeKeywords": {
+  "en": "Negative keywords",
+  "ar": "الكلمات المفتاحية السلبية",
+  "de": "Ausschließende Keywords",
+  "fr": "Mots clés à exclure",
+  "it": "Parole chiave escluse"
+ },
+ "CampaignGoogle.negativeKeywordPlaceholder": {
+  "en": "e.g. free",
+  "ar": "مثال: مجاني",
+  "de": "z. B. kostenlos",
+  "fr": "p. ex. gratuit",
+  "it": "es. gratis"
+ },
+ "CampaignGoogle.matchType": {
+  "en": "Match type",
+  "ar": "نوع المطابقة",
+  "de": "Keyword-Option",
+  "fr": "Type de correspondance",
+  "it": "Tipo di corrispondenza"
+ },
+ "CampaignGoogle.addKeyword": {
+  "en": "Add keyword",
+  "ar": "إضافة كلمة مفتاحية",
+  "de": "Keyword hinzufügen",
+  "fr": "Ajouter le mot clé",
+  "it": "Aggiungi parola chiave"
+ },
+ "CampaignGoogle.addNegativeKeyword": {
+  "en": "Add negative keyword",
+  "ar": "إضافة كلمة مفتاحية سلبية",
+  "de": "Ausschließendes Keyword hinzufügen",
+  "fr": "Ajouter le mot clé à exclure",
+  "it": "Aggiungi parola chiave esclusa"
+ },
+ "CampaignGoogle.removeKeyword": {
+  "en": "Remove {keyword}",
+  "ar": "إزالة {keyword}",
+  "de": "{keyword} entfernen",
+  "fr": "Retirer {keyword}",
+  "it": "Rimuovi {keyword}"
+ },
+ "CampaignGoogle.defaultBid": {
+  "en": "Default bid",
+  "ar": "عرض السعر الافتراضي",
+  "de": "Standardgebot",
+  "fr": "Enchère par défaut",
+  "it": "Offerta predefinita"
+ },
+ "CampaignGoogle.defaultBidHint": {
+  "en": "Per click, in {currency}. Leave it empty to let the bidding strategy decide.",
+  "ar": "لكل نقرة، بعملة {currency}. اتركه فارغًا لتقرّر استراتيجية العروض.",
+  "de": "Pro Klick, in {currency}. Leer lassen, damit die Gebotsstrategie entscheidet.",
+  "fr": "Par clic, en {currency}. Laissez vide pour laisser la stratégie d’enchères décider.",
+  "it": "Per clic, in {currency}. Lascia vuoto per far decidere la strategia di offerta."
+ },
+ "CampaignGoogle.responsiveAds": {
+  "en": "Responsive search ads",
+  "ar": "إعلانات البحث المتجاوبة",
+  "de": "Responsive Suchanzeigen",
+  "fr": "Annonces responsives sur le Réseau de Recherche",
+  "it": "Annunci adattabili della rete di ricerca"
+ },
+ "CampaignGoogle.addResponsiveAd": {
+  "en": "Add search ad",
+  "ar": "إضافة إعلان بحث",
+  "de": "Suchanzeige hinzufügen",
+  "fr": "Ajouter une annonce",
+  "it": "Aggiungi annuncio di ricerca"
+ },
+ "CampaignGoogle.adsRequired": {
+  "en": "Add at least one search ad",
+  "ar": "أضف إعلان بحث واحدًا على الأقل",
+  "de": "Fügen Sie mindestens eine Suchanzeige hinzu",
+  "fr": "Ajoutez au moins une annonce",
+  "it": "Aggiungi almeno un annuncio di ricerca"
+ },
+ "CampaignGoogle.adSummary": {
+  "en": "{headlines, plural, one {# headline} other {# headlines}} · {descriptions, plural, one {# description} other {# descriptions}}",
+  "ar": "{headlines, plural, zero {لا عناوين} one {عنوان واحد} two {عنوانان} few {# عناوين} many {# عنوانًا} other {# عنوان}} · {descriptions, plural, zero {لا أوصاف} one {وصف واحد} two {وصفان} few {# أوصاف} many {# وصفًا} other {# وصف}}",
+  "de": "{headlines, plural, one {# Anzeigentitel} other {# Anzeigentitel}} · {descriptions, plural, one {# Beschreibung} other {# Beschreibungen}}",
+  "fr": "{headlines, plural, one {# titre} other {# titres}} · {descriptions, plural, one {# description} other {# descriptions}}",
+  "it": "{headlines, plural, one {# titolo} other {# titoli}} · {descriptions, plural, one {# descrizione} other {# descrizioni}}"
+ },
+ "CampaignGoogle.previewAd": {
+  "en": "Preview {name}",
+  "ar": "معاينة {name}",
+  "de": "Vorschau von {name}",
+  "fr": "Aperçu de {name}",
+  "it": "Anteprima di {name}"
+ },
+ "CampaignGoogle.editAd": {
+  "en": "Edit {name}",
+  "ar": "تعديل {name}",
+  "de": "{name} bearbeiten",
+  "fr": "Modifier {name}",
+  "it": "Modifica {name}"
+ },
+ "CampaignGoogle.removeAd": {
+  "en": "Remove {name}",
+  "ar": "إزالة {name}",
+  "de": "{name} entfernen",
+  "fr": "Retirer {name}",
+  "it": "Rimuovi {name}"
+ }
+}

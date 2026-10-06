@@ -1,0 +1,109 @@
+[
+  {
+    "title": "A message keeps its numbered parts, in English and in translation",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "placeholder-dropped-refused",
+        "ok": true,
+        "note": "refused on the field; nothing saved"
+      },
+      {
+        "name": "placeholder-kept-saved",
+        "ok": true,
+        "note": "v2"
+      },
+      {
+        "name": "arabic-keeps-placeholder",
+        "ok": true,
+        "note": "ar in_progress"
+      },
+      {
+        "name": "no-errors",
+        "ok": true,
+        "note": "clean"
+      }
+    ]
+  },
+  {
+    "title": "A legal document gets a new version; only a legal approver publishes it",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "new-version-submitted",
+        "ok": true,
+        "note": "draft 1.0 from 2026-10-05"
+      },
+      {
+        "name": "legal-approver-publishes",
+        "ok": true,
+        "note": "1.0@2026-10-05, 0.2@2026-10-05, 0.1@null"
+      },
+      {
+        "name": "same-version-refused",
+        "ok": true,
+        "note": "still approved; 2 published version"
+      },
+      {
+        "name": "no-legal-approval-no-publish",
+        "ok": true,
+        "note": "marketing sees 0 approve/publish buttons"
+      }
+    ]
+  },
+  {
+    "title": "A roadmap item moves on; its status is the same in every language",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "move-to-planned",
+        "ok": true,
+        "note": "planned, 25%"
+      },
+      {
+        "name": "status-locked-in-arabic",
+        "ok": true,
+        "note": "status locked true, progress locked true"
+      }
+    ]
+  },
+  {
+    "title": "Ideas are moderated before the roadmap page shows them",
+    "ok": true,
+    "passed": 5,
+    "steps": 5,
+    "detail": [
+      {
+        "name": "publish-pending",
+        "ok": true,
+        "note": "public ideas: 8"
+      },
+      {
+        "name": "merge-duplicate",
+        "ok": true,
+        "note": "merged into workspace-guide; votes 53 → 53"
+      },
+      {
+        "name": "decline-with-reason",
+        "ok": true,
+        "note": "declined with reason; pending left 0"
+      },
+      {
+        "name": "no-errors",
+        "ok": true,
+        "note": "clean"
+      },
+      {
+        "name": "viewer-cannot-moderate",
+        "ok": true,
+        "note": "viewer sees 0 moderation buttons"
+      }
+    ]
+  }
+]

@@ -1,0 +1,35 @@
+{
+  "recordedAt": "2026-10-05T13:13:53Z",
+  "websiteBranch": "cms/connect",
+  "websiteMain": "3a6667876e960469e073eda26c08d633d64cf32a",
+  "sourceOverrides": {"roadmap": "c8be7fe3cd863a7f8f04cd4fdd91e8e8e318b76e"},
+  "recoveryCommits": {
+    "websiteSync": "d32eb8c88dced364ef3670f62822bc473f27171f",
+    "websiteBackup": "76e565ff1c57123ab286547cb97f7a003c3b04f2",
+    "websiteFollowup": "02dc5d01b57a809cce1bde66f57d8e81cd88427d",
+    "mockFollowup": "91020b6d870092f08eae88ac8bd5a8ad6a47af7a",
+    "managerFollowup": "f439b5cbad48ae9fefa19f67e1493b12c8e40a1a",
+    "programA9": "3741915"
+  },
+  "observedChecks": {
+    "purchasing": {"existingDistinct": 39, "regressions": 3, "passed": 42, "total": 42, "command": "node --test tests/cart.test.mjs"},
+    "contentModel": {"passed": 12, "total": 12, "command": "node --test apps/wm/content-followup.test.js"},
+    "existingFlows": {"suites": 15, "passed": 147, "total": 147, "evidence": "flow-runs-wm-s0.json"},
+    "focusedRegressions": {"passed": 81, "total": 81, "evidence": "regressions.json", "timestamps": "Each result records checkedAt; corrected selector checks were rerun with dependencies."},
+    "productionResponsive": {"passed": 24, "total": 24, "evidence": "production-responsive.json"},
+    "adapters": {"passed": 35, "total": 35, "baseline": "3a66678", "roadmapBaseline": "c8be7fe"},
+    "devParity": {"identical": 144, "total": 144, "widths": [390, 768, 1440], "excluded": ["/roadmap"]},
+    "productionParity": {"identical": 144, "total": 144, "widths": [390, 768, 1440], "excluded": ["/roadmap"]},
+    "roadmapRepeat": {"identical": 3, "total": 3},
+    "roadmapProduction": {"identical": 3, "total": 3},
+    "cleanRouteDiscovery": {"routes": 49, "legacyAliases": 95, "commit": "02dc5d0", "dirty": false, "evidence": "audits/website/routes.json"},
+    "seedAndTemplateBindings": {"passed": true, "evidence": "regeneration.json", "excludeFromSeedComparison": ["source.builtAt"]},
+    "formatting": "passed",
+    "websiteBuild": "passed; existing large-chunk warning retained",
+    "managerTypecheck": "passed",
+    "accessibility": "Zero critical issues in checked EN/AR routes and WM themes; serious contrast findings remain in raw reports.",
+    "seo": "48 heads, 43 sitemap URLs, Sign-up noindex/excluded, eight permanent deleted-project redirects, unknown and unpublished-locale 404/noindex, robots Disallow: /"
+  },
+  "cleanup": "Every mutation flow holds mock.lock, resets fixtures and restores exact pre-flow snapshot/vercel bytes in finally; final lock released.",
+  "constraints": {"publicLocales": ["en"], "push": false, "externalPublication": false, "deployment": false, "realVotingOrPaymentsOrAuthOrCRM": false}
+}

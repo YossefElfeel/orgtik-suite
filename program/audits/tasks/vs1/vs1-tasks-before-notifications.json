@@ -1,0 +1,418 @@
+[
+  {
+    "locale": "en",
+    "theme": null,
+    "width": 390,
+    "lang": "en",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": 0,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 3,
+    "serious": 0,
+    "rules": [
+      "aria-allowed-attr(2)",
+      "button-name(1)"
+    ],
+    "console": 0,
+    "uncaught": 1,
+    "api": 0,
+    "firstError": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+  },
+  {
+    "locale": "en",
+    "theme": null,
+    "width": 1440,
+    "lang": "en",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": 0,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 3,
+    "serious": 2,
+    "rules": [
+      "aria-allowed-attr(2)",
+      "button-name(1)",
+      "color-contrast(1)",
+      "target-size(1)"
+    ],
+    "console": 0,
+    "uncaught": 1,
+    "api": 0,
+    "firstError": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+  },
+  {
+    "locale": "en",
+    "theme": null,
+    "width": 390,
+    "lang": "en",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": 0,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 3,
+    "serious": 0,
+    "rules": [
+      "aria-allowed-attr(2)",
+      "button-name(1)"
+    ],
+    "console": 0,
+    "uncaught": 1,
+    "api": 0,
+    "firstError": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+  },
+  {
+    "locale": "en",
+    "theme": null,
+    "width": 1440,
+    "lang": "en",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": 0,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 3,
+    "serious": 2,
+    "rules": [
+      "aria-allowed-attr(2)",
+      "button-name(1)",
+      "color-contrast(1)",
+      "target-size(1)"
+    ],
+    "console": 0,
+    "uncaught": 1,
+    "api": 0,
+    "firstError": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+  },
+  {
+    "locale": "ar",
+    "theme": null,
+    "width": 390,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "ar",
+    "theme": null,
+    "width": 1440,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "ar",
+    "theme": null,
+    "width": 390,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "ar",
+    "theme": null,
+    "width": 1440,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "de",
+    "theme": null,
+    "width": 390,
+    "lang": "de",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": 0,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 3,
+    "serious": 0,
+    "rules": [
+      "aria-allowed-attr(2)",
+      "button-name(1)"
+    ],
+    "console": 0,
+    "uncaught": 1,
+    "api": 0,
+    "firstError": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+  },
+  {
+    "locale": "de",
+    "theme": null,
+    "width": 1440,
+    "lang": "de",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": 0,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 3,
+    "serious": 2,
+    "rules": [
+      "aria-allowed-attr(2)",
+      "button-name(1)",
+      "color-contrast(1)",
+      "target-size(1)"
+    ],
+    "console": 0,
+    "uncaught": 1,
+    "api": 0,
+    "firstError": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+  },
+  {
+    "locale": "de",
+    "theme": null,
+    "width": 390,
+    "lang": "de",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": 0,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 3,
+    "serious": 0,
+    "rules": [
+      "aria-allowed-attr(2)",
+      "button-name(1)"
+    ],
+    "console": 0,
+    "uncaught": 1,
+    "api": 0,
+    "firstError": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+  },
+  {
+    "locale": "de",
+    "theme": null,
+    "width": 1440,
+    "lang": "de",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": 0,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 3,
+    "serious": 2,
+    "rules": [
+      "aria-allowed-attr(2)",
+      "button-name(1)",
+      "color-contrast(1)",
+      "target-size(1)"
+    ],
+    "console": 0,
+    "uncaught": 1,
+    "api": 0,
+    "firstError": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+  },
+  {
+    "locale": "fr",
+    "theme": null,
+    "width": 390,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "fr",
+    "theme": null,
+    "width": 1440,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "fr",
+    "theme": null,
+    "width": 390,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "fr",
+    "theme": null,
+    "width": 1440,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "it",
+    "theme": null,
+    "width": 390,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "it",
+    "theme": null,
+    "width": 1440,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "it",
+    "theme": null,
+    "width": 390,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "locale": "it",
+    "theme": null,
+    "width": 1440,
+    "lang": "",
+    "dir": "",
+    "overflow": 0,
+    "mainOverflow": null,
+    "latin": [],
+    "brokenImages": [],
+    "critical": 0,
+    "serious": 1,
+    "rules": [
+      "html-has-lang(1)"
+    ],
+    "console": 1,
+    "uncaught": 0,
+    "api": 0,
+    "firstError": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  }
+]

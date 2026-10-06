@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-06T05:49:22.676Z",
+  "upstream": "dc7735f10cf24e34d31c590dfb0a651945dc00a7",
+  "commits": {
+    "website": "443f5d0",
+    "cms": "b61cba2",
+    "manager": "5d2089f"
+  },
+  "checks": {
+    "purchasingUnit": 42,
+    "roadmapTransport": 3,
+    "cmsModel": 15,
+    "dataAdapters": 35,
+    "sync": 58,
+    "roadmapComments": 21,
+    "roadmapDelivery": 15,
+    "narrative": 5,
+    "wmPreviewScenarios": 3,
+    "wmPreviewSteps": 10,
+    "siteForms": 6
+  },
+  "cleanup": {
+    "fixturesReset": true,
+    "snapshotAndHostFilesRestored": true
+  },
+  "publicLanguages": [
+    "en"
+  ],
+  "pushed": false,
+  "deployed": false
+}

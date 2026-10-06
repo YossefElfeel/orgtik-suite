@@ -1,0 +1,73 @@
+{
+  "Support": {
+    "priorities": {
+      "low": "Low",
+      "normal": "Normal",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "categories": {
+      "billing": "Billing",
+      "sales": "Sales",
+      "product": "Product",
+      "technical": "Technical"
+    },
+    "list": {
+      "title": "Support tickets",
+      "description": "Customers' questions and problems, newest activity first.",
+      "ticket": "Ticket",
+      "priority": "Priority",
+      "state": "Status",
+      "assignee": "Assigned to",
+      "unassigned": "Not assigned",
+      "updated": "Last activity",
+      "allStates": "All statuses",
+      "whose": "Whose tickets",
+      "everyone": "Everyone's",
+      "mine": "Assigned to me",
+      "none": "No tickets yet",
+      "noneBody": "Tickets customers open from their workspace appear here.",
+      "noneFiltered": "No tickets match these filters",
+      "noneFilteredBody": "Choose another status, or show everyone's tickets."
+    },
+    "detail": {
+      "notFound": "This ticket doesn't exist",
+      "notFoundBody": "It may have been removed. Go back to the list of tickets.",
+      "about": "Details",
+      "conversation": "Conversation",
+      "staff": "OrgTik team",
+      "customer": "Customer",
+      "internalBadge": "Internal note",
+      "replyLabel": "Reply to the customer",
+      "replyHelp": "The customer sees it and is notified.",
+      "noteLabel": "Internal note",
+      "noteHelp": "Only OrgTik staff see internal notes. The customer isn't notified.",
+      "internal": "Internal note",
+      "internalHelp": "Keep this between staff.",
+      "send": "Send reply",
+      "sendWait": "Send and wait for the customer",
+      "addNote": "Add internal note",
+      "sent": "Reply sent",
+      "sentWaiting": "Reply sent; waiting for the customer",
+      "noteAdded": "Internal note added",
+      "writeFirst": "Write the message first.",
+      "resolve": "Resolve",
+      "resolveTitle": "Resolve {number}?",
+      "resolveImpact": "The customer is told it's resolved and can reopen it for 7 days.",
+      "resolved": "Ticket resolved",
+      "close": "Close ticket",
+      "closeTitle": "Close {number}?",
+      "closeImpact": "The conversation ends. The customer can't reply to it and opens a new ticket instead.",
+      "closed": "Ticket closed",
+      "closedBody": "This ticket is closed.",
+      "assign": "Assign",
+      "reassign": "Reassign",
+      "assignTitle": "Assign {number}",
+      "assigned": "Assigned to {name}",
+      "prioritySaved": "Priority set to {priority}",
+      "opened": "Opened",
+      "autoClose": "Closes automatically on",
+      "reopenUntil": "Customer can reopen until"
+    }
+  }
+}

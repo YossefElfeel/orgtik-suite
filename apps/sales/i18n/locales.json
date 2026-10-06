@@ -1,0 +1,10 @@
+{
+  "locales": [
+    "en",
+    "de",
+    "fr",
+    "it",
+    "ar"
+  ],
+  "defaultLocale": "en"
+}

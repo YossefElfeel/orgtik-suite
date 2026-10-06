@@ -1,0 +1,8 @@
+@import "tailwindcss";
+@import "@orgtik/ui/tailwind.css";
+
+body {
+  background: var(--ot-bg-canvas);
+  color: var(--ot-fg);
+  font-family: var(--ot-font-body);
+}

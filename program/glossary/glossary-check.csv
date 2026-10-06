@@ -1,0 +1,197 @@
+﻿concept,lang,chosen,found,app,key
+admin,ar,مسؤول,مدير,sales,userManagement.roleAdmin
+admin,ar,مسؤول,المديرين,sales,userManagement.admins
+admin,ar,مسؤول,مدير,sales,users.roles.admin
+bundle,de,Bundle,Bündel,sales,nav.bundles
+company,de,Unternehmen,Firma,hr,calendar.scheduleMeeting.tabs.company
+coupon,fr,Code promo,Coupons,sales,nav.coupons
+coupon,fr,Code promo,Coupon,sales,projects.coupon
+coupon,fr,Code promo,Coupon,sales,planManagement.subscribe.coupon
+coupon,it,Codice sconto,Coupon,sales,nav.coupons
+coupon,it,Codice sconto,Coupon,sales,projects.coupon
+coupon,it,Codice sconto,Coupon,sales,planManagement.subscribe.coupon
+create,ar,إنشاء,جديد,sales,common.new
+create,ar,إنشاء,جديد,sales,customers.statusNew
+create,de,Erstellen,Neu,sales,common.new
+create,de,Erstellen,Neu,sales,customers.statusNew
+create,de,Erstellen,Neu hinzufügen,content,BlogsPage.add_new
+create,de,Erstellen,Neu,content,ContactsPage.filter_new
+create,de,Erstellen,Neu,content,ContactsPage.status_new
+create,fr,Créer,Nouveau,sales,common.new
+create,fr,Créer,Nouveau,sales,customers.statusNew
+create,fr,Créer,Ajouter nouveau,content,BlogsPage.add_new
+create,fr,Créer,Nouveau,content,ContactsPage.filter_new
+create,fr,Créer,Nouveau,content,ContactsPage.status_new
+create,it,Crea,Nuovo,sales,common.new
+create,it,Crea,Nuovo,sales,customers.statusNew
+create,it,Crea,Aggiungi nuovo,content,BlogsPage.add_new
+create,it,Crea,Nuovo,content,ContactsPage.filter_new
+create,it,Crea,Nuovo,content,ContactsPage.status_new
+dashboard,ar,لوحة التحكم,لوحة القيادة,sales,nav.dashboard
+dashboard,de,Dashboard,Übersicht,content,dashboard
+deal,de,Deal,Angebote,sales,nav.deals
+deal,fr,Affaire,Offres,sales,nav.deals
+deal,fr,Affaire,Contrat,sales,offers.deal
+deal,it,Trattativa,Offerte,sales,nav.deals
+deal,it,Trattativa,Accordo,sales,offers.deal
+delete,fr,Supprimer,Suppression,hr,createUpdateEmployee.permissions.actions.delete
+department,it,Reparto,Dipartimento,sales,projects.form.department
+department,it,Reparto,Dipartimento,sales,planManagement.columnDepartment
+department,it,Reparto,Dipartimento,sales,planManagement.filterDepartment
+department,it,Reparto,Dipartimento,sales,planManagement.form.department
+department,it,Reparto,Dipartimenti,sales,planManagement.departments.title
+department,it,Reparto,Dipartimento,sales,salesman.department
+department,it,Reparto,Dipartimento,sales,userManagement.columnDepartment
+department,it,Reparto,Dipartimento,sales,userManagement.fieldDepartment
+department,it,Reparto,Dipartimento,sales,profile.department
+department,it,Reparto,Dipartimento,hr,createUpdateEmployee.fields.department
+department,it,Reparto,Dipartimento,hr,createUpdateEmployee.placeholders.department
+department,it,Reparto,Dipartimento,hr,timeOffTable.columns.department
+department,it,Reparto,Dipartimento,hr,subscriptionsTable.columns.department
+department,it,Reparto,Dipartimento,hr,subscriptionsSheet.fields.department
+department,it,Reparto,Dipartimento,hr,payroll.detailPage.fields.department
+department,it,Reparto,Dipartimento,hr,addTimeDialog.department
+department,it,Reparto,Dipartimenti,hr,calendar.sidebar.departments
+department,it,Reparto,Dipartimento,hr,calendar.scheduleMeeting.tabs.department
+department,it,Reparto,Dipartimento,hr,departmentPage.title
+department,it,Reparto,Dipartimento,hr,departmentPage.cards.totalDepartments.fallbackName
+leave,de,Abwesenheit,Urlaub,hr,sidebar.items.timeOff
+leave,it,Assenza,Congedi,hr,timeOffPage.title
+leave,it,Assenza,Permessi,hr,attendanceTable.sections.leave
+leave,it,Assenza,Ferie,hr,calendar.eventTypes.timeOff
+leave,it,Assenza,Permessi,hr,sidebar.items.timeOff
+payment,ar,دفعة,المدفوعات,sales,planManagement.filterPayments
+payroll,de,Lohnabrechnung,Abrechnung,hr,payroll.title
+payroll,fr,Paie,Fiches de paie,hr,employees.details.sections.payslips
+payroll,fr,Paie,Fiches de paie,hr,employees.details.payslips.title
+payroll,fr,Paie,Lohn,hr,sidebar.items.payroll
+payroll,it,Paghe,Buste paga,hr,employees.details.sections.payslips
+payroll,it,Paghe,Buste paga,hr,employees.details.payslips.title
+payroll,it,Paghe,Libro paga,hr,payroll.title
+payroll,it,Paghe,Lohn,hr,sidebar.items.payroll
+permission,it,Autorizzazione,Permessi,hr,createUpdateEmployee.steps.permissions.nav
+permission,it,Autorizzazione,Permessi,hr,createUpdateEmployee.steps.permissions.heading
+plan,de,Tarif,Pläne,sales,nav.plans
+plan,de,Tarif,Pläne,sales,archive.columnPlans
+plan,de,Tarif,Plan,sales,archive.columnPlan
+plan,de,Tarif,Pläne,sales,archive.resource.plans
+plan,de,Tarif,Pläne,sales,customers.projectsPlans
+plan,de,Tarif,Pläne,sales,projects.details.plans
+plan,de,Tarif,Plan,sales,projects.planLabel
+plan,de,Tarif,Pläne,sales,projects.steps.plans
+plan,de,Tarif,Pläne,sales,planManagement.title
+plan,de,Tarif,Pläne,sales,planManagement.titleSmall
+plan,de,Tarif,Pläne,sales,planManagement.tabs.plans
+plan,de,Tarif,Plan,sales,packages.columnPlan
+plan,de,Tarif,Pläne,sales,packages.plansStats
+plan,de,Tarif,Plan,sales,subscriptions.columnPlan
+plan,de,Tarif,Plan,sales,invoices.columnPlan
+plan,de,Tarif,Pläne,sales,offers.plans
+plan,fr,Formule,Plans,sales,nav.plans
+plan,fr,Formule,Plans,sales,archive.columnPlans
+plan,fr,Formule,Plan,sales,archive.columnPlan
+plan,fr,Formule,Plans,sales,archive.resource.plans
+plan,fr,Formule,Forfaits,sales,customers.projectsPlans
+plan,fr,Formule,Plans,sales,projects.details.plans
+plan,fr,Formule,plan,sales,projects.planLabel
+plan,fr,Formule,Plans,sales,projects.steps.plans
+plan,fr,Formule,Plans,sales,planManagement.title
+plan,fr,Formule,Plans,sales,planManagement.titleSmall
+plan,fr,Formule,Plans,sales,planManagement.tabs.plans
+plan,fr,Formule,Plan,sales,packages.columnPlan
+plan,fr,Formule,Plans,sales,packages.plansStats
+plan,fr,Formule,Plan,sales,subscriptions.columnPlan
+plan,fr,Formule,Plan,sales,invoices.columnPlan
+plan,fr,Formule,Plans,sales,offers.plans
+post,fr,Publication,articles,content,BlogsPage.posts
+post,it,Post,articoli,content,BlogsPage.posts
+price,ar,السعر,التسعير,sales,planManagement.details.pricing
+price,fr,Prix,Tarification,sales,planManagement.details.pricing
+price,fr,Prix,Tarifs,hr,test1.footer2.links.pricing
+quote,ar,عرض سعر,اقتباس,sales,common.quote
+quote,de,Angebot,Zitat,sales,common.quote
+quote,fr,Devis,Citation,sales,common.quote
+quote,it,Preventivo,Citazione,sales,common.quote
+refund,de,Rückerstattung,Erstatten,sales,common.refund
+remove,fr,Retirer,Supprimer,sales,common.remove
+save,ar,حفظ,حفظ التغييرات,sales,common.saveChanges
+save,ar,حفظ,حفظ التغييرات,sales,planManagement.categories.saveChanges
+save,ar,حفظ,حفظ التغييرات,sales,planManagement.departments.saveChanges
+save,ar,حفظ,حفظ التغييرات,sales,planManagement.durations.saveChanges
+save,ar,حفظ,حفظ التغييرات,sales,planManagement.features.saveChanges
+save,ar,حفظ,حفظ التغييرات,sales,planManagement.zones.saveChanges
+save,ar,حفظ,حفظ التغييرات,sales,loyalty.saveChanges
+save,de,Speichern,Änderungen speichern,tasks,Profile.buttons.saveChanges
+save,de,Speichern,Änderungen speichern,tasks,NewTaskSheet.saveChanges
+save,de,Speichern,Änderungen speichern,tasks,UpdateTaskSheet.buttons.save
+save,de,Speichern,Änderungen speichern,sales,common.saveChanges
+save,de,Speichern,Änderungen speichern,sales,planManagement.categories.saveChanges
+save,de,Speichern,Änderungen speichern,sales,planManagement.departments.saveChanges
+save,de,Speichern,Änderungen speichern,sales,planManagement.durations.saveChanges
+save,de,Speichern,Änderungen speichern,sales,planManagement.features.saveChanges
+save,de,Speichern,Änderungen speichern,sales,planManagement.zones.saveChanges
+save,de,Speichern,Änderungen speichern,sales,loyalty.saveChanges
+save,de,Speichern,Änderungen speichern,hr,createUpdateEmployee.nav.save
+save,de,Speichern,Änderungen speichern,hr,ticketStatusCard.saveChanges
+save,de,Speichern,Änderungen speichern,hr,loans.details.fields.saveChanges
+save,de,Speichern,Änderungen speichern,hr,configuration.saveChanges
+save,de,Speichern,Änderungen speichern,hr,departmentPage.management.sheet.footer.saveChanges
+save,de,Speichern,Änderungen speichern,content,BlogsPage.save_changes
+save,de,Speichern,Änderungen speichern,content,ReviewsPage.save_changes_btn
+save,de,Speichern,Änderungen speichern,content,ProjectsPage.save_btn
+save,de,Speichern,Änderungen speichern,content,ServicesPage.save_changes
+save,de,Speichern,Änderungen speichern,content,ContentPage.save_changes
+save,de,Speichern,Änderungen speichern,content,SeoPage.save_changes
+save,de,Speichern,Änderungen speichern,content,SitemapPage.save_changes_btn
+save,fr,Enregistrer,Enregistrer les modifications,sales,common.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,sales,planManagement.categories.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,sales,planManagement.departments.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,sales,planManagement.durations.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,sales,planManagement.features.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,sales,planManagement.zones.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,sales,loyalty.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,hr,createUpdateEmployee.nav.save
+save,fr,Enregistrer,Enregistrer les modifications,hr,ticketStatusCard.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,hr,loans.details.fields.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,hr,configuration.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,hr,departmentPage.management.sheet.footer.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,content,ReviewsPage.save_changes_btn
+save,fr,Enregistrer,Enregistrer les modifications,content,ProjectsPage.save_btn
+save,fr,Enregistrer,Enregistrer les modifications,content,ServicesPage.save_changes
+save,fr,Enregistrer,Enregistrer les modifications,content,ContentPage.save_changes
+save,fr,Enregistrer,Enregistrer les modifications,content,SeoPage.save_changes
+save,fr,Enregistrer,Enregistrer les modifications,content,SitemapPage.save_changes_btn
+save,it,Salva,Salva modifiche,sales,common.saveChanges
+save,it,Salva,Salva modifiche,sales,planManagement.categories.saveChanges
+save,it,Salva,Salva modifiche,sales,planManagement.departments.saveChanges
+save,it,Salva,Salva modifiche,sales,planManagement.durations.saveChanges
+save,it,Salva,Salva modifiche,sales,planManagement.features.saveChanges
+save,it,Salva,Salva modifiche,sales,planManagement.zones.saveChanges
+save,it,Salva,Salva modifiche,sales,loyalty.saveChanges
+save,it,Salva,Salva modifiche,hr,createUpdateEmployee.nav.save
+save,it,Salva,Salva modifiche,hr,ticketStatusCard.saveChanges
+save,it,Salva,Salva modifiche,hr,loans.details.fields.saveChanges
+save,it,Salva,Salva Modifiche,hr,configuration.saveChanges
+save,it,Salva,Salva modifiche,hr,departmentPage.management.sheet.footer.saveChanges
+save,it,Salva,Salva modifiche,content,ReviewsPage.save_changes_btn
+save,it,Salva,Salva modifiche,content,ProjectsPage.save_btn
+save,it,Salva,Salva modifiche,content,ServicesPage.save_changes
+save,it,Salva,Salva modifiche,content,ContentPage.save_changes
+save,it,Salva,Salva modifiche,content,SeoPage.save_changes
+save,it,Salva,Salva modifiche,content,SitemapPage.save_changes_btn
+service_package,ar,باقة خدمات,الحزم,sales,archive.resource.packages
+service_package,de,Servicepaket,Pakete,sales,nav.packages
+service_package,de,Servicepaket,Pakete,sales,archive.resource.packages
+service_package,de,Servicepaket,Pakete,sales,packages.title
+submit,ar,تقديم,إرسال,sales,common.submit
+submit,de,Einreichen,Absenden,hr,jobs.addJobSheet.submit
+team,it,Team,squadra,sales,offers.teamRole
+team,it,Team,Squadra,sales,offers.actorTeam
+ticket,de,Support-Ticket,Tickets,sales,nav.tickets
+ticket,de,Support-Ticket,Tickets,sales,tickets.title
+ticket,de,Support-Ticket,Tickets,hr,ticketsPage.title
+ticket,de,Support-Ticket,Tickets,hr,sidebar.items.tickets
+ticket,fr,Ticket d'assistance,Billets,sales,nav.tickets
+ticket,fr,Ticket d'assistance,Billets,sales,tickets.title
+zone,ar,منطقة,النطاقات,sales,planManagement.tabs.zones
+zone,ar,منطقة,النطاق,sales,salesman.zone

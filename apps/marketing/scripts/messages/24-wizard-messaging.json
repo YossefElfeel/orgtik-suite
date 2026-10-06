@@ -1,0 +1,548 @@
+{
+ "CampaignMessaging.audienceTitle": {
+  "en": "Audience",
+  "ar": "الجمهور",
+  "de": "Zielgruppe",
+  "fr": "Audience",
+  "it": "Pubblico"
+ },
+ "CampaignMessaging.audienceDescription": {
+  "en": "Who receives the message: a company audience, or a list you upload.",
+  "ar": "من يتلقّى الرسالة: جمهور الشركة أو قائمة ترفعها.",
+  "de": "Wer die Nachricht erhält: eine Zielgruppe des Unternehmens oder eine hochgeladene Liste.",
+  "fr": "Qui reçoit le message : une audience de l’entreprise ou une liste importée.",
+  "it": "Chi riceve il messaggio: un pubblico aziendale o un elenco che carichi."
+ },
+ "CampaignMessaging.sourceLegend": {
+  "en": "Where the contacts come from",
+  "ar": "مصدر جهات الاتصال",
+  "de": "Woher die Kontakte stammen",
+  "fr": "Origine des contacts",
+  "it": "Da dove arrivano i contatti"
+ },
+ "CampaignMessaging.sourceCompany": {
+  "en": "Company audience",
+  "ar": "جمهور الشركة",
+  "de": "Zielgruppe des Unternehmens",
+  "fr": "Audience de l’entreprise",
+  "it": "Pubblico aziendale"
+ },
+ "CampaignMessaging.sourceCompanyHint": {
+  "en": "A saved audience, optionally narrowed by a segment.",
+  "ar": "جمهور محفوظ، ويمكن تضييقه بشريحة.",
+  "de": "Eine gespeicherte Zielgruppe, optional durch ein Segment eingegrenzt.",
+  "fr": "Une audience enregistrée, éventuellement affinée par un segment.",
+  "it": "Un pubblico salvato, eventualmente ristretto da un segmento."
+ },
+ "CampaignMessaging.sourceUpload": {
+  "en": "Upload a list",
+  "ar": "رفع قائمة",
+  "de": "Liste hochladen",
+  "fr": "Importer une liste",
+  "it": "Carica un elenco"
+ },
+ "CampaignMessaging.sourceUploadHint": {
+  "en": "A CSV or Excel file of contacts.",
+  "ar": "ملف CSV أو Excel لجهات الاتصال.",
+  "de": "Eine CSV- oder Excel-Datei mit Kontakten.",
+  "fr": "Un fichier CSV ou Excel de contacts.",
+  "it": "Un file CSV o Excel di contatti."
+ },
+ "CampaignMessaging.pickAudience": {
+  "en": "Company audience",
+  "ar": "جمهور الشركة",
+  "de": "Zielgruppe des Unternehmens",
+  "fr": "Audience de l’entreprise",
+  "it": "Pubblico aziendale"
+ },
+ "CampaignMessaging.audiencesError": {
+  "en": "Couldn't load the audiences",
+  "ar": "تعذّر تحميل الجماهير",
+  "de": "Zielgruppen konnten nicht geladen werden",
+  "fr": "Impossible de charger les audiences",
+  "it": "Impossibile caricare i pubblici"
+ },
+ "CampaignMessaging.noAudiencesTitle": {
+  "en": "No company audiences yet",
+  "ar": "لا توجد جماهير للشركة بعد",
+  "de": "Noch keine Zielgruppen des Unternehmens",
+  "fr": "Aucune audience d’entreprise pour l’instant",
+  "it": "Ancora nessun pubblico aziendale"
+ },
+ "CampaignMessaging.noAudiencesBody": {
+  "en": "Upload a list instead, and save it as an audience.",
+  "ar": "ارفع قائمة بدلًا من ذلك واحفظها كجمهور.",
+  "de": "Laden Sie stattdessen eine Liste hoch und speichern Sie sie als Zielgruppe.",
+  "fr": "Importez plutôt une liste et enregistrez-la comme audience.",
+  "it": "Carica invece un elenco e salvalo come pubblico."
+ },
+ "CampaignMessaging.noAudiencesBodyReadOnly": {
+  "en": "Ask a marketing manager to add one in Our audience.",
+  "ar": "اطلب من مدير التسويق إضافة جمهور في جمهورنا.",
+  "de": "Bitten Sie eine Marketingleitung, unter Unsere Zielgruppe eine anzulegen.",
+  "fr": "Demandez à un responsable marketing d’en ajouter une dans Notre audience.",
+  "it": "Chiedi a un responsabile marketing di aggiungerne uno in Il nostro pubblico."
+ },
+ "CampaignMessaging.audienceRequired": {
+  "en": "Choose an audience",
+  "ar": "اختر جمهورًا",
+  "de": "Wählen Sie eine Zielgruppe",
+  "fr": "Choisissez une audience",
+  "it": "Scegli un pubblico"
+ },
+ "CampaignMessaging.contacts": {
+  "en": "{count, plural, one {# contact} other {# contacts}}",
+  "ar": "{count, plural, zero {لا جهات اتصال} one {جهة اتصال واحدة} two {جهتا اتصال} few {# جهات اتصال} many {# جهة اتصال} other {# جهة اتصال}}",
+  "de": "{count, plural, one {# Kontakt} other {# Kontakte}}",
+  "fr": "{count, plural, one {# contact} other {# contacts}}",
+  "it": "{count, plural, one {# contatto} other {# contatti}}"
+ },
+ "CampaignMessaging.pickSegment": {
+  "en": "Segment",
+  "ar": "الشريحة",
+  "de": "Segment",
+  "fr": "Segment",
+  "it": "Segmento"
+ },
+ "CampaignMessaging.pickSegmentHint": {
+  "en": "Optional: send only to the contacts that match a segment.",
+  "ar": "اختياري: أرسل فقط إلى جهات الاتصال المطابقة لشريحة.",
+  "de": "Optional: nur an Kontakte senden, die zu einem Segment passen.",
+  "fr": "Facultatif : n’envoyer qu’aux contacts correspondant à un segment.",
+  "it": "Facoltativo: invia solo ai contatti che corrispondono a un segmento."
+ },
+ "CampaignMessaging.createSegment": {
+  "en": "Create segment",
+  "ar": "إنشاء شريحة",
+  "de": "Segment erstellen",
+  "fr": "Créer un segment",
+  "it": "Crea segmento"
+ },
+ "CampaignMessaging.segmentsError": {
+  "en": "Couldn't load the segments",
+  "ar": "تعذّر تحميل الشرائح",
+  "de": "Segmente konnten nicht geladen werden",
+  "fr": "Impossible de charger les segments",
+  "it": "Impossibile caricare i segmenti"
+ },
+ "CampaignMessaging.noSegmentsTitle": {
+  "en": "No segments for this audience",
+  "ar": "لا توجد شرائح لهذا الجمهور",
+  "de": "Keine Segmente für diese Zielgruppe",
+  "fr": "Aucun segment pour cette audience",
+  "it": "Nessun segmento per questo pubblico"
+ },
+ "CampaignMessaging.noSegmentsBody": {
+  "en": "The message goes to everyone in the audience.",
+  "ar": "ستصل الرسالة إلى كل أفراد الجمهور.",
+  "de": "Die Nachricht geht an alle in der Zielgruppe.",
+  "fr": "Le message est envoyé à toute l’audience.",
+  "it": "Il messaggio va a tutto il pubblico."
+ },
+ "CampaignMessaging.allContacts": {
+  "en": "Everyone in the audience",
+  "ar": "كل أفراد الجمهور",
+  "de": "Alle in der Zielgruppe",
+  "fr": "Toute l’audience",
+  "it": "Tutto il pubblico"
+ },
+ "CampaignMessaging.allContactsHint": {
+  "en": "No segment",
+  "ar": "دون شريحة",
+  "de": "Kein Segment",
+  "fr": "Aucun segment",
+  "it": "Nessun segmento"
+ },
+ "CampaignMessaging.matching": {
+  "en": "{count, plural, one {# matching contact} other {# matching contacts}}",
+  "ar": "{count, plural, zero {لا جهات اتصال مطابقة} one {جهة اتصال مطابقة واحدة} two {جهتا اتصال مطابقتان} few {# جهات اتصال مطابقة} many {# جهة اتصال مطابقة} other {# جهة اتصال مطابقة}}",
+  "de": "{count, plural, one {# passender Kontakt} other {# passende Kontakte}}",
+  "fr": "{count, plural, one {# contact correspondant} other {# contacts correspondants}}",
+  "it": "{count, plural, one {# contatto corrispondente} other {# contatti corrispondenti}}"
+ },
+ "CampaignMessaging.uploadTitle": {
+  "en": "Contact list",
+  "ar": "قائمة جهات الاتصال",
+  "de": "Kontaktliste",
+  "fr": "Liste de contacts",
+  "it": "Elenco di contatti"
+ },
+ "CampaignMessaging.uploadHint": {
+  "en": "Upload the file, then say which columns hold the name, email and phone.",
+  "ar": "ارفع الملف، ثم حدّد الأعمدة التي تحتوي على الاسم والبريد الإلكتروني والهاتف.",
+  "de": "Laden Sie die Datei hoch und geben Sie an, welche Spalten Name, E-Mail und Telefon enthalten.",
+  "fr": "Importez le fichier, puis indiquez les colonnes du nom, de l’e-mail et du téléphone.",
+  "it": "Carica il file, poi indica le colonne con nome, email e telefono."
+ },
+ "CampaignMessaging.uploadLabel": {
+  "en": "File",
+  "ar": "الملف",
+  "de": "Datei",
+  "fr": "Fichier",
+  "it": "File"
+ },
+ "CampaignMessaging.uploadFormats": {
+  "en": "CSV or XLSX, up to 10 MB.",
+  "ar": "CSV أو XLSX، حتى 10 ميغابايت.",
+  "de": "CSV oder XLSX, bis 10 MB.",
+  "fr": "CSV ou XLSX, jusqu’à 10 Mo.",
+  "it": "CSV o XLSX, fino a 10 MB."
+ },
+ "CampaignMessaging.uploadFailed": {
+  "en": "The file couldn't be read. Check that it's a CSV or XLSX with a header row.",
+  "ar": "تعذّرت قراءة الملف. تأكّد أنه CSV أو XLSX بصف عناوين.",
+  "de": "Die Datei konnte nicht gelesen werden. Prüfen Sie, ob es eine CSV- oder XLSX-Datei mit Kopfzeile ist.",
+  "fr": "Le fichier n’a pas pu être lu. Vérifiez qu’il s’agit d’un CSV ou XLSX avec une ligne d’en-tête.",
+  "it": "Impossibile leggere il file. Verifica che sia un CSV o XLSX con una riga di intestazione."
+ },
+ "CampaignMessaging.uploadRequired": {
+  "en": "Upload a contact list",
+  "ar": "ارفع قائمة جهات اتصال",
+  "de": "Laden Sie eine Kontaktliste hoch",
+  "fr": "Importez une liste de contacts",
+  "it": "Carica un elenco di contatti"
+ },
+ "CampaignMessaging.uploadedList": {
+  "en": "Uploaded list:",
+  "ar": "القائمة المرفوعة:",
+  "de": "Hochgeladene Liste:",
+  "fr": "Liste importée :",
+  "it": "Elenco caricato:"
+ },
+ "CampaignMessaging.nameColumn": {
+  "en": "Name column",
+  "ar": "عمود الاسم",
+  "de": "Spalte für den Namen",
+  "fr": "Colonne du nom",
+  "it": "Colonna del nome"
+ },
+ "CampaignMessaging.emailColumn": {
+  "en": "Email column",
+  "ar": "عمود البريد الإلكتروني",
+  "de": "Spalte für die E-Mail",
+  "fr": "Colonne de l’e-mail",
+  "it": "Colonna dell’email"
+ },
+ "CampaignMessaging.phoneColumn": {
+  "en": "Phone column",
+  "ar": "عمود الهاتف",
+  "de": "Spalte für das Telefon",
+  "fr": "Colonne du téléphone",
+  "it": "Colonna del telefono"
+ },
+ "CampaignMessaging.chooseColumn": {
+  "en": "Choose a column",
+  "ar": "اختر عمودًا",
+  "de": "Spalte wählen",
+  "fr": "Choisissez une colonne",
+  "it": "Scegli una colonna"
+ },
+ "CampaignMessaging.noColumn": {
+  "en": "None",
+  "ar": "لا شيء",
+  "de": "Keine",
+  "fr": "Aucune",
+  "it": "Nessuna"
+ },
+ "CampaignMessaging.nameColumnRequired": {
+  "en": "Choose the column with the names",
+  "ar": "اختر العمود الذي يحتوي على الأسماء",
+  "de": "Wählen Sie die Spalte mit den Namen",
+  "fr": "Choisissez la colonne des noms",
+  "it": "Scegli la colonna con i nomi"
+ },
+ "CampaignMessaging.previewCaption": {
+  "en": "{count, plural, one {First rows of # row} other {First rows of # rows}}",
+  "ar": "{count, plural, zero {لا صفوف} one {الصفوف الأولى من صف واحد} two {الصفوف الأولى من صفين} few {الصفوف الأولى من # صفوف} many {الصفوف الأولى من # صفًا} other {الصفوف الأولى من # صف}}",
+  "de": "{count, plural, one {Erste Zeilen von # Zeile} other {Erste Zeilen von # Zeilen}}",
+  "fr": "{count, plural, one {Premières lignes sur # ligne} other {Premières lignes sur # lignes}}",
+  "it": "{count, plural, one {Prime righe di # riga} other {Prime righe di # righe}}"
+ },
+ "CampaignMessaging.saveAsAudience": {
+  "en": "Save this list as a company audience",
+  "ar": "حفظ هذه القائمة كجمهور للشركة",
+  "de": "Diese Liste als Zielgruppe des Unternehmens speichern",
+  "fr": "Enregistrer cette liste comme audience de l’entreprise",
+  "it": "Salva questo elenco come pubblico aziendale"
+ },
+ "CampaignMessaging.saveAsAudienceHint": {
+  "en": "Other campaigns can use it too.",
+  "ar": "يمكن لحملات أخرى استخدامها أيضًا.",
+  "de": "Andere Kampagnen können sie ebenfalls nutzen.",
+  "fr": "D’autres campagnes pourront aussi l’utiliser.",
+  "it": "Anche altre campagne potranno usarlo."
+ },
+ "CampaignMessaging.audienceName": {
+  "en": "Audience name",
+  "ar": "اسم الجمهور",
+  "de": "Name der Zielgruppe",
+  "fr": "Nom de l’audience",
+  "it": "Nome del pubblico"
+ },
+ "CampaignMessaging.audienceNameRequired": {
+  "en": "Name the audience",
+  "ar": "سمِّ الجمهور",
+  "de": "Benennen Sie die Zielgruppe",
+  "fr": "Nommez l’audience",
+  "it": "Dai un nome al pubblico"
+ },
+ "CampaignMessaging.importOnNext": {
+  "en": "{count, plural, one {Next imports the contact.} other {Next imports the {rows} contacts.}}",
+  "ar": "{count, plural, zero {لا توجد جهات اتصال للاستيراد.} one {عند الضغط على التالي تُستورد جهة الاتصال.} two {عند الضغط على التالي تُستورد جهتا الاتصال.} few {عند الضغط على التالي تُستورد {rows} جهات اتصال.} many {عند الضغط على التالي تُستورد {rows} جهة اتصال.} other {عند الضغط على التالي تُستورد {rows} جهة اتصال.}}",
+  "de": "{count, plural, one {Weiter importiert den Kontakt.} other {Weiter importiert die {rows} Kontakte.}}",
+  "fr": "{count, plural, one {Suivant importe le contact.} other {Suivant importe les {rows} contacts.}}",
+  "it": "{count, plural, one {Avanti importa il contatto.} other {Avanti importa i {rows} contatti.}}"
+ },
+ "CampaignMessaging.messageTitle": {
+  "en": "Message",
+  "ar": "الرسالة",
+  "de": "Nachricht",
+  "fr": "Message",
+  "it": "Messaggio"
+ },
+ "CampaignMessaging.messageDescription": {
+  "en": "The channel, who it's sent from, the template and when it's sent.",
+  "ar": "القناة والمُرسِل والقالب وموعد الإرسال.",
+  "de": "Kanal, Absender, Vorlage und Versandzeitpunkt.",
+  "fr": "Le canal, l’expéditeur, le modèle et l’heure d’envoi.",
+  "it": "Il canale, il mittente, il modello e l’orario di invio."
+ },
+ "CampaignMessaging.noAudienceTitle": {
+  "en": "Choose the audience first",
+  "ar": "اختر الجمهور أولًا",
+  "de": "Wählen Sie zuerst die Zielgruppe",
+  "fr": "Choisissez d’abord l’audience",
+  "it": "Scegli prima il pubblico"
+ },
+ "CampaignMessaging.noAudienceBody": {
+  "en": "The message is saved with its audience. Pick who receives it on the previous step.",
+  "ar": "تُحفظ الرسالة مع جمهورها. اختر من يتلقّاها في الخطوة السابقة.",
+  "de": "Die Nachricht wird mit ihrer Zielgruppe gespeichert. Wählen Sie im vorigen Schritt die Empfänger.",
+  "fr": "Le message est enregistré avec son audience. Choisissez qui le reçoit à l’étape précédente.",
+  "it": "Il messaggio viene salvato con il suo pubblico. Scegli chi lo riceve al passaggio precedente."
+ },
+ "CampaignMessaging.goToAudience": {
+  "en": "Go to Audience",
+  "ar": "الانتقال إلى الجمهور",
+  "de": "Zur Zielgruppe",
+  "fr": "Aller à l’audience",
+  "it": "Vai a Pubblico"
+ },
+ "CampaignMessaging.audienceFallbackName": {
+  "en": "Audience",
+  "ar": "الجمهور",
+  "de": "Zielgruppe",
+  "fr": "Audience",
+  "it": "Pubblico"
+ },
+ "CampaignMessaging.channel": {
+  "en": "Channel",
+  "ar": "القناة",
+  "de": "Kanal",
+  "fr": "Canal",
+  "it": "Canale"
+ },
+ "CampaignMessaging.sendFrom.EMAIL": {
+  "en": "Send from",
+  "ar": "الإرسال من",
+  "de": "Senden von",
+  "fr": "Envoyer depuis",
+  "it": "Invia da"
+ },
+ "CampaignMessaging.sendFrom.SMS": {
+  "en": "Sender ID",
+  "ar": "اسم المُرسِل",
+  "de": "Absenderkennung",
+  "fr": "Identifiant d’expéditeur",
+  "it": "ID mittente"
+ },
+ "CampaignMessaging.sendFrom.WHATSAPP": {
+  "en": "WhatsApp number",
+  "ar": "رقم WhatsApp",
+  "de": "WhatsApp-Nummer",
+  "fr": "Numéro WhatsApp",
+  "it": "Numero WhatsApp"
+ },
+ "CampaignMessaging.sendersError": {
+  "en": "Couldn't load the senders",
+  "ar": "تعذّر تحميل المُرسِلين",
+  "de": "Absender konnten nicht geladen werden",
+  "fr": "Impossible de charger les expéditeurs",
+  "it": "Impossibile caricare i mittenti"
+ },
+ "CampaignMessaging.noSendersTitle": {
+  "en": "No {channel} senders are set up",
+  "ar": "لا يوجد مُرسِلون مُعدّون لـ{channel}",
+  "de": "Keine Absender für {channel} eingerichtet",
+  "fr": "Aucun expéditeur {channel} configuré",
+  "it": "Nessun mittente {channel} configurato"
+ },
+ "CampaignMessaging.noSendersBody": {
+  "en": "Ask an administrator to add one, or choose another channel.",
+  "ar": "اطلب من المسؤول إضافة مُرسِل، أو اختر قناة أخرى.",
+  "de": "Bitten Sie eine Administration, einen hinzuzufügen, oder wählen Sie einen anderen Kanal.",
+  "fr": "Demandez à un administrateur d’en ajouter un, ou choisissez un autre canal.",
+  "it": "Chiedi a un amministratore di aggiungerne uno o scegli un altro canale."
+ },
+ "CampaignMessaging.senderRequired": {
+  "en": "Choose who it's sent from",
+  "ar": "اختر المُرسِل",
+  "de": "Wählen Sie den Absender",
+  "fr": "Choisissez l’expéditeur",
+  "it": "Scegli il mittente"
+ },
+ "CampaignMessaging.template": {
+  "en": "Template",
+  "ar": "القالب",
+  "de": "Vorlage",
+  "fr": "Modèle",
+  "it": "Modello"
+ },
+ "CampaignMessaging.templateMode": {
+  "en": "Template",
+  "ar": "القالب",
+  "de": "Vorlage",
+  "fr": "Modèle",
+  "it": "Modello"
+ },
+ "CampaignMessaging.useSaved": {
+  "en": "Use a saved template",
+  "ar": "استخدام قالب محفوظ",
+  "de": "Gespeicherte Vorlage verwenden",
+  "fr": "Utiliser un modèle enregistré",
+  "it": "Usa un modello salvato"
+ },
+ "CampaignMessaging.writeNew": {
+  "en": "Write a new one",
+  "ar": "كتابة قالب جديد",
+  "de": "Neue schreiben",
+  "fr": "En rédiger un nouveau",
+  "it": "Scrivine uno nuovo"
+ },
+ "CampaignMessaging.whatsappNotice": {
+  "en": "WhatsApp only sends templates it has approved, so pick a saved one.",
+  "ar": "لا يرسل WhatsApp إلا القوالب التي وافق عليها، لذا اختر قالبًا محفوظًا.",
+  "de": "WhatsApp sendet nur freigegebene Vorlagen; wählen Sie eine gespeicherte.",
+  "fr": "WhatsApp n’envoie que les modèles qu’il a approuvés : choisissez-en un enregistré.",
+  "it": "WhatsApp invia solo i modelli approvati: scegline uno salvato."
+ },
+ "CampaignMessaging.templatesError": {
+  "en": "Couldn't load the templates",
+  "ar": "تعذّر تحميل القوالب",
+  "de": "Vorlagen konnten nicht geladen werden",
+  "fr": "Impossible de charger les modèles",
+  "it": "Impossibile caricare i modelli"
+ },
+ "CampaignMessaging.noTemplatesTitle": {
+  "en": "No saved templates for this sender",
+  "ar": "لا توجد قوالب محفوظة لهذا المُرسِل",
+  "de": "Keine gespeicherten Vorlagen für diesen Absender",
+  "fr": "Aucun modèle enregistré pour cet expéditeur",
+  "it": "Nessun modello salvato per questo mittente"
+ },
+ "CampaignMessaging.noTemplatesBody": {
+  "en": "Write a new one: it's saved for this sender.",
+  "ar": "اكتب قالبًا جديدًا: سيُحفظ لهذا المُرسِل.",
+  "de": "Schreiben Sie eine neue; sie wird für diesen Absender gespeichert.",
+  "fr": "Rédigez-en un : il est enregistré pour cet expéditeur.",
+  "it": "Scrivine uno nuovo: viene salvato per questo mittente."
+ },
+ "CampaignMessaging.noTemplatesWhatsapp": {
+  "en": "Templates for WhatsApp are approved in WhatsApp Manager first.",
+  "ar": "تُعتمد قوالب WhatsApp أولًا في WhatsApp Manager.",
+  "de": "WhatsApp-Vorlagen werden zuerst im WhatsApp Manager freigegeben.",
+  "fr": "Les modèles WhatsApp sont d’abord approuvés dans WhatsApp Manager.",
+  "it": "I modelli WhatsApp vengono approvati prima in WhatsApp Manager."
+ },
+ "CampaignMessaging.templateRequired": {
+  "en": "Choose a template",
+  "ar": "اختر قالبًا",
+  "de": "Wählen Sie eine Vorlage",
+  "fr": "Choisissez un modèle",
+  "it": "Scegli un modello"
+ },
+ "CampaignMessaging.saveTemplateFirst": {
+  "en": "Save the new template first",
+  "ar": "احفظ القالب الجديد أولًا",
+  "de": "Speichern Sie zuerst die neue Vorlage",
+  "fr": "Enregistrez d’abord le nouveau modèle",
+  "it": "Salva prima il nuovo modello"
+ },
+ "CampaignMessaging.templateName": {
+  "en": "Template name",
+  "ar": "اسم القالب",
+  "de": "Name der Vorlage",
+  "fr": "Nom du modèle",
+  "it": "Nome del modello"
+ },
+ "CampaignMessaging.templateNamePlaceholder": {
+  "en": "e.g. September newsletter",
+  "ar": "مثال: نشرة سبتمبر",
+  "de": "z. B. Newsletter September",
+  "fr": "p. ex. Newsletter de septembre",
+  "it": "es. Newsletter di settembre"
+ },
+ "CampaignMessaging.subject": {
+  "en": "Subject",
+  "ar": "الموضوع",
+  "de": "Betreff",
+  "fr": "Objet",
+  "it": "Oggetto"
+ },
+ "CampaignMessaging.body": {
+  "en": "Message",
+  "ar": "نص الرسالة",
+  "de": "Nachricht",
+  "fr": "Message",
+  "it": "Messaggio"
+ },
+ "CampaignMessaging.variablesHint": {
+  "en": "Write '{{name}}' where each contact's name goes.",
+  "ar": "اكتب '{{name}}' حيث يظهر اسم كل جهة اتصال.",
+  "de": "Schreiben Sie '{{name}}' dort, wo der Name des Kontakts stehen soll.",
+  "fr": "Écrivez '{{name}}' là où doit apparaître le nom de chaque contact.",
+  "it": "Scrivi '{{name}}' dove va il nome di ogni contatto."
+ },
+ "CampaignMessaging.templateFieldsRequired": {
+  "en": "Give the template a name and a message",
+  "ar": "أعطِ القالب اسمًا ونصًا",
+  "de": "Geben Sie der Vorlage einen Namen und einen Text",
+  "fr": "Donnez un nom et un message au modèle",
+  "it": "Dai un nome e un testo al modello"
+ },
+ "CampaignMessaging.senderFirst": {
+  "en": "Choose who it's sent from first",
+  "ar": "اختر المُرسِل أولًا",
+  "de": "Wählen Sie zuerst den Absender",
+  "fr": "Choisissez d’abord l’expéditeur",
+  "it": "Scegli prima il mittente"
+ },
+ "CampaignMessaging.saveTemplate": {
+  "en": "Save template",
+  "ar": "حفظ القالب",
+  "de": "Vorlage speichern",
+  "fr": "Enregistrer le modèle",
+  "it": "Salva modello"
+ },
+ "CampaignMessaging.preview": {
+  "en": "Preview",
+  "ar": "معاينة",
+  "de": "Vorschau",
+  "fr": "Aperçu",
+  "it": "Anteprima"
+ },
+ "CampaignMessaging.sendTime": {
+  "en": "When it's sent",
+  "ar": "موعد الإرسال",
+  "de": "Versandzeitpunkt",
+  "fr": "Heure d’envoi",
+  "it": "Orario di invio"
+ },
+ "CampaignMessaging.sendAt": {
+  "en": "Send on",
+  "ar": "الإرسال في",
+  "de": "Senden am",
+  "fr": "Envoyer le",
+  "it": "Invia il"
+ }
+}

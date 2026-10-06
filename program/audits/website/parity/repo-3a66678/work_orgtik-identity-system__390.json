@@ -1,0 +1,21 @@
+{
+  "route": "/work/orgtik-identity-system",
+  "width": 390,
+  "rendered": true,
+  "errors": [],
+  "text": "Skip to content\nView project\n0\nEN\nWORK · BRAND & DIGITAL DESIGN\nOrgTik identity system\nOrgTik-owned work\nDesign journal\nTechnology\n(01)\nTHE BRIEF\nFrom a strong mark to a complete, flexible brand experience.\nA connected identity built to move from strategy into every useful touchpoint.\nSECTOR\nTechnology\nSTATUS\nOrgTik-owned work\n(02)\nGALLERY\nThe work,\nup close.\nOrgTik brand applications across print, digital screens, and signage.\nYOUR PROJECT NEXT\nMake the next\nstory yours.\nTell us what needs to change and we’ll shape the first step together.\nStart a project\nAll work\nBack to top\nMake the next move matter.\nStrategy, design, and technology brought together around one clear ambition: moving your business forward.\nTalk to us\nExplore\nSoftware\nServices\nSelected work\nInsights\nAbout OrgTik\nStart here\nBuild a software plan\nPlans & pricing\nTell us about your project\nRoadmap\nSitemap\nMade in Switzerland\n© 2026 OrgTik.\nIndependent digital partner\nStrategy. Design. Technology.",
+  "headings": [
+    "h1 OrgTik identity system",
+    "h2 From a strong mark to a complete, flexible brand experience.",
+    "h2 The work, up close.",
+    "h2 Keepexploring.",
+    "h2 Make the next story yours.",
+    "h2 Make the next move matter.",
+    "h3 Explore",
+    "h3 Start here",
+    "h2 Choose a version"
+  ],
+  "aria": "- link \"Skip to content\":\n- text: View project\n- banner:\n  - link \"OrgTik\":\n    - img \"OrgTik\"\n  - link \"Cart, 0 plans\":\n    - text: \"0\"\n  - button \"Language, English\": EN\n  - button \"Open menu\"\n- main:\n  - paragraph: Work · Brand & digital design\n  - heading \"OrgTik identity system\" [level=1]\n  - list \"Project labels\":\n    - listitem: OrgTik-owned work\n    - listitem: Design journal\n    - listitem: Technology\n  - region \"From a strong mark to a complete, flexible brand experience.\":\n    - paragraph: (01) The brief\n    - heading \"From a strong mark to a complete, flexible brand experience.\" [level=2]\n    - paragraph: A connected identity built to move from strategy into every useful touchpoint.\n    - complementary:\n      - term: Sector\n      - definition: Technology\n      - term: Status\n      - definition: OrgTik-owned work\n  - text: (02) Gallery\n  - heading \"The work, up close.\" [level=2]\n  - paragraph: OrgTik brand applications across print, digital screens, and signage.\n  - img \"Project image\"\n  - img \"Project image\"\n  - img \"Project image\"\n  - text: Your project next\n  - heading \"Make the next story yours.\" [level=2]\n  - paragraph: Tell us what needs to change and we’ll shape the first step together.\n  - button \"Start a project\"\n  - button \"All work\"\n- contentinfo:\n  - link \"OrgTik home\":\n    - img \"OrgTik\"\n  - link \"Back to top\":\n  - heading \"Make the next move matter.\" [level=2]:\n    - text: Make the next move\n    - emphasis: matter.\n  - paragraph: \"Strategy, design, and technology brought together around one clear ambition: moving your business forward.\"\n  - button \"Talk to us\"\n  - navigation:\n    - heading \"Explore\" [level=3]\n    - link \"Software\":\n    - link \"Services\":\n    - link \"Selected work\":\n    - link \"Insights\":\n    - link \"About OrgTik\":\n    - heading \"Start here\" [level=3]\n    - link \"Build a software plan\":\n    - link \"Plans & pricing\":\n    - link \"Tell us about your project\":\n    - link \"Roadmap\":\n    - link \"Sitemap\":\n  - text: Made in Switzerland © 2026 OrgTik. Independent digital partner Strategy. Design. Technology.",
+  "title": "work | OrgTik",
+  "url": "/work#/project/orgtik-identity-system"
+}

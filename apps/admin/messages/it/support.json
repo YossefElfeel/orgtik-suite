@@ -1,0 +1,73 @@
+{
+  "Support": {
+    "priorities": {
+      "low": "Bassa",
+      "normal": "Normale",
+      "high": "Alta",
+      "urgent": "Urgente"
+    },
+    "categories": {
+      "billing": "Fatturazione",
+      "sales": "Vendite",
+      "product": "Prodotto",
+      "technical": "Tecnica"
+    },
+    "list": {
+      "title": "Ticket di assistenza",
+      "description": "Domande e problemi della clientela, a partire dall'attività più recente.",
+      "ticket": "Ticket",
+      "priority": "Priorità",
+      "state": "Stato",
+      "assignee": "Assegnato a",
+      "unassigned": "Non assegnato",
+      "updated": "Ultima attività",
+      "allStates": "Tutti gli stati",
+      "whose": "Ticket di chi",
+      "everyone": "Di tutti",
+      "mine": "Assegnati a me",
+      "none": "Ancora nessun ticket",
+      "noneBody": "Qui compaiono i ticket aperti dalla clientela dal proprio workspace.",
+      "noneFiltered": "Nessun ticket corrisponde a questi filtri",
+      "noneFilteredBody": "Scegli un altro stato o mostra i ticket di tutti."
+    },
+    "detail": {
+      "notFound": "Questo ticket non esiste",
+      "notFoundBody": "Potrebbe essere stato rimosso. Torna all'elenco dei ticket.",
+      "about": "Dettagli",
+      "conversation": "Conversazione",
+      "staff": "Team OrgTik",
+      "customer": "Clientela",
+      "internalBadge": "Nota interna",
+      "replyLabel": "Risposta alla clientela",
+      "replyHelp": "La clientela la vede e riceve una notifica.",
+      "noteLabel": "Nota interna",
+      "noteHelp": "Solo il personale OrgTik vede le note interne. La clientela non riceve notifiche.",
+      "internal": "Nota interna",
+      "internalHelp": "Resta all'interno del personale.",
+      "send": "Invia risposta",
+      "sendWait": "Invia e attendi la clientela",
+      "addNote": "Aggiungi nota interna",
+      "sent": "Risposta inviata",
+      "sentWaiting": "Risposta inviata; in attesa della clientela",
+      "noteAdded": "Nota interna aggiunta",
+      "writeFirst": "Scrivi prima il messaggio.",
+      "resolve": "Risolvi",
+      "resolveTitle": "Risolvere {number}?",
+      "resolveImpact": "La clientela viene informata della risoluzione e può riaprire il ticket per 7 giorni.",
+      "resolved": "Ticket risolto",
+      "close": "Chiudi ticket",
+      "closeTitle": "Chiudere {number}?",
+      "closeImpact": "La conversazione termina. La clientela non può più rispondere e dovrà aprire un nuovo ticket.",
+      "closed": "Ticket chiuso",
+      "closedBody": "Questo ticket è chiuso.",
+      "assign": "Assegna",
+      "reassign": "Riassegna",
+      "assignTitle": "Assegna {number}",
+      "assigned": "Assegnato a {name}",
+      "prioritySaved": "Priorità impostata su {priority}",
+      "opened": "Aperto il",
+      "autoClose": "Chiusura automatica il",
+      "reopenUntil": "Riapribile fino al"
+    }
+  }
+}

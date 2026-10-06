@@ -1,0 +1,1500 @@
+{
+  "SalesNotify.title": {
+    "en": "Notifications",
+    "ar": "الإشعارات",
+    "de": "Benachrichtigungen",
+    "fr": "Notifications",
+    "it": "Notifiche"
+  },
+  "SalesNotify.bell": {
+    "en": "Notifications",
+    "ar": "الإشعارات",
+    "de": "Benachrichtigungen",
+    "fr": "Notifications",
+    "it": "Notifiche"
+  },
+  "SalesNotify.bellUnread": {
+    "en": "Notifications, {count, plural, one {# unread} other {# unread}}",
+    "ar": "الإشعارات، {count, plural, zero {لا إشعارات غير مقروءة} one {إشعار واحد غير مقروء} two {إشعاران غير مقروءين} few {# إشعارات غير مقروءة} many {# إشعارًا غير مقروء} other {# إشعار غير مقروء}}",
+    "de": "Benachrichtigungen, {count, plural, one {# ungelesen} other {# ungelesen}}",
+    "fr": "Notifications, {count, plural, one {# non lue} other {# non lues}}",
+    "it": "Notifiche, {count, plural, one {# non letta} other {# non lette}}"
+  },
+  "SalesNotify.markAllRead": {
+    "en": "Mark all as read",
+    "ar": "تعليم الكل كمقروء",
+    "de": "Alle als gelesen markieren",
+    "fr": "Tout marquer comme lu",
+    "it": "Segna tutte come lette"
+  },
+  "SalesNotify.markReadNamed": {
+    "en": "Mark “{title}” as read",
+    "ar": "تعليم «{title}» كمقروء",
+    "de": "„{title}“ als gelesen markieren",
+    "fr": "Marquer « {title} » comme lu",
+    "it": "Segna «{title}» come letta"
+  },
+  "SalesNotify.unread": {
+    "en": "Unread",
+    "ar": "غير مقروء",
+    "de": "Ungelesen",
+    "fr": "Non lu",
+    "it": "Non letta"
+  },
+  "SalesNotify.loading": {
+    "en": "Loading notifications",
+    "ar": "جارٍ تحميل الإشعارات",
+    "de": "Benachrichtigungen werden geladen",
+    "fr": "Chargement des notifications",
+    "it": "Caricamento delle notifiche"
+  },
+  "SalesNotify.loadError": {
+    "en": "Notifications couldn't be loaded.",
+    "ar": "تعذّر تحميل الإشعارات.",
+    "de": "Die Benachrichtigungen konnten nicht geladen werden.",
+    "fr": "Impossible de charger les notifications.",
+    "it": "Impossibile caricare le notifiche."
+  },
+  "SalesNotify.emptyTitle": {
+    "en": "You're all caught up",
+    "ar": "لا جديد لديك",
+    "de": "Sie sind auf dem neuesten Stand",
+    "fr": "Vous êtes à jour",
+    "it": "Sei aggiornato"
+  },
+  "SalesNotify.emptyBody": {
+    "en": "New offers, contracts and payments will show here.",
+    "ar": "ستظهر هنا العروض والعقود والمدفوعات الجديدة.",
+    "de": "Neue Angebote, Verträge und Zahlungen erscheinen hier.",
+    "fr": "Les nouvelles offres, contrats et paiements s'afficheront ici.",
+    "it": "Nuove offerte, contratti e pagamenti appariranno qui."
+  },
+  "SalesNotify.viewAll": {
+    "en": "View all activity",
+    "ar": "عرض كل النشاط",
+    "de": "Alle Aktivitäten anzeigen",
+    "fr": "Voir toute l'activité",
+    "it": "Vedi tutta l'attività"
+  },
+  "SalesNotify.context.moved": {
+    "en": "Moved from {from} to {to}",
+    "ar": "انتقل من «{from}» إلى «{to}»",
+    "de": "Von „{from}“ zu „{to}“ verschoben",
+    "fr": "Passé de « {from} » à « {to} »",
+    "it": "Passato da «{from}» a «{to}»"
+  },
+  "SalesNotify.context.invoice": {
+    "en": "Invoice {number}",
+    "ar": "الفاتورة {number}",
+    "de": "Rechnung {number}",
+    "fr": "Facture {number}",
+    "it": "Fattura {number}"
+  },
+  "SalesNotify.context.ticket": {
+    "en": "Ticket: {subject}",
+    "ar": "التذكرة: {subject}",
+    "de": "Ticket: {subject}",
+    "fr": "Ticket : {subject}",
+    "it": "Ticket: {subject}"
+  },
+  "SalesNotify.context.coupon": {
+    "en": "Coupon {code}",
+    "ar": "القسيمة {code}",
+    "de": "Gutschein {code}",
+    "fr": "Coupon {code}",
+    "it": "Coupon {code}"
+  },
+  "SalesNotify.context.project": {
+    "en": "Project: {name}",
+    "ar": "المشروع: {name}",
+    "de": "Projekt: {name}",
+    "fr": "Projet : {name}",
+    "it": "Progetto: {name}"
+  },
+  "SalesNotify.types.contract_approved": {
+    "en": "A contract was approved",
+    "ar": "تمت الموافقة على عقد",
+    "de": "Ein Vertrag wurde genehmigt",
+    "fr": "Un contrat a été approuvé",
+    "it": "Un contratto è stato approvato"
+  },
+  "SalesNotify.types.contract_awaiting_confirmation": {
+    "en": "A contract is waiting for confirmation",
+    "ar": "عقد بانتظار التأكيد",
+    "de": "Ein Vertrag wartet auf Bestätigung",
+    "fr": "Un contrat attend une confirmation",
+    "it": "Un contratto è in attesa di conferma"
+  },
+  "SalesNotify.types.contract_confirmed": {
+    "en": "A signed contract was uploaded",
+    "ar": "تم رفع عقد موقّع",
+    "de": "Ein unterschriebener Vertrag wurde hochgeladen",
+    "fr": "Un contrat signé a été téléversé",
+    "it": "È stato caricato un contratto firmato"
+  },
+  "SalesNotify.types.contract_created": {
+    "en": "A contract is ready to sign",
+    "ar": "عقد جاهز للتوقيع",
+    "de": "Ein Vertrag ist bereit zur Unterschrift",
+    "fr": "Un contrat est prêt à être signé",
+    "it": "Un contratto è pronto per la firma"
+  },
+  "SalesNotify.types.contract_rejected": {
+    "en": "A contract was rejected",
+    "ar": "تم رفض عقد",
+    "de": "Ein Vertrag wurde abgelehnt",
+    "fr": "Un contrat a été refusé",
+    "it": "Un contratto è stato rifiutato"
+  },
+  "SalesNotify.types.coupon_shared": {
+    "en": "A coupon was shared with you",
+    "ar": "تمت مشاركة قسيمة معك",
+    "de": "Ein Gutschein wurde mit Ihnen geteilt",
+    "fr": "Un coupon a été partagé avec vous",
+    "it": "Un coupon è stato condiviso con te"
+  },
+  "SalesNotify.types.custom_invoice_created": {
+    "en": "A new invoice was issued",
+    "ar": "صدرت فاتورة جديدة",
+    "de": "Eine neue Rechnung wurde ausgestellt",
+    "fr": "Une nouvelle facture a été émise",
+    "it": "È stata emessa una nuova fattura"
+  },
+  "SalesNotify.types.custom_invoice_paid": {
+    "en": "An invoice was paid",
+    "ar": "تم دفع فاتورة",
+    "de": "Eine Rechnung wurde bezahlt",
+    "fr": "Une facture a été payée",
+    "it": "Una fattura è stata pagata"
+  },
+  "SalesNotify.types.customer_document_uploaded": {
+    "en": "A customer uploaded a document",
+    "ar": "رفع عميل مستندًا",
+    "de": "Ein Kunde hat ein Dokument hochgeladen",
+    "fr": "Un client a téléversé un document",
+    "it": "Un cliente ha caricato un documento"
+  },
+  "SalesNotify.types.customer_meeting_scheduled": {
+    "en": "A meeting was scheduled",
+    "ar": "تمت جدولة اجتماع",
+    "de": "Ein Termin wurde geplant",
+    "fr": "Une réunion a été planifiée",
+    "it": "È stata pianificata una riunione"
+  },
+  "SalesNotify.types.customer_registered": {
+    "en": "A new customer was assigned to you",
+    "ar": "أُسند إليك عميل جديد",
+    "de": "Ihnen wurde ein neuer Kunde zugewiesen",
+    "fr": "Un nouveau client vous a été attribué",
+    "it": "Ti è stato assegnato un nuovo cliente"
+  },
+  "SalesNotify.types.invoice_created": {
+    "en": "A new invoice was issued",
+    "ar": "صدرت فاتورة جديدة",
+    "de": "Eine neue Rechnung wurde ausgestellt",
+    "fr": "Une nouvelle facture a été émise",
+    "it": "È stata emessa una nuova fattura"
+  },
+  "SalesNotify.types.invoice_due_soon": {
+    "en": "An invoice is due soon",
+    "ar": "موعد استحقاق فاتورة قريب",
+    "de": "Eine Rechnung ist bald fällig",
+    "fr": "Une facture arrive bientôt à échéance",
+    "it": "Una fattura è in scadenza"
+  },
+  "SalesNotify.types.invoice_overdue": {
+    "en": "An invoice is overdue",
+    "ar": "فاتورة متأخرة السداد",
+    "de": "Eine Rechnung ist überfällig",
+    "fr": "Une facture est en retard",
+    "it": "Una fattura è scaduta"
+  },
+  "SalesNotify.types.invoice_paid": {
+    "en": "An invoice was paid",
+    "ar": "تم دفع فاتورة",
+    "de": "Eine Rechnung wurde bezahlt",
+    "fr": "Une facture a été payée",
+    "it": "Una fattura è stata pagata"
+  },
+  "SalesNotify.types.lead_created": {
+    "en": "A new lead came in",
+    "ar": "وصل عميل محتمل جديد",
+    "de": "Ein neuer Lead ist eingegangen",
+    "fr": "Un nouveau prospect est arrivé",
+    "it": "È arrivato un nuovo lead"
+  },
+  "SalesNotify.types.loyalty_points_adjusted": {
+    "en": "Loyalty points were adjusted",
+    "ar": "تم تعديل نقاط الولاء",
+    "de": "Treuepunkte wurden angepasst",
+    "fr": "Les points de fidélité ont été ajustés",
+    "it": "I punti fedeltà sono stati modificati"
+  },
+  "SalesNotify.types.offer_accepted": {
+    "en": "An offer was accepted",
+    "ar": "تم قبول عرض",
+    "de": "Ein Angebot wurde angenommen",
+    "fr": "Une offre a été acceptée",
+    "it": "Un'offerta è stata accettata"
+  },
+  "SalesNotify.types.offer_countered": {
+    "en": "A counter-offer came in",
+    "ar": "وصل عرض مضاد",
+    "de": "Ein Gegenangebot ist eingegangen",
+    "fr": "Une contre-offre est arrivée",
+    "it": "È arrivata una controfferta"
+  },
+  "SalesNotify.types.offer_created": {
+    "en": "A new offer is waiting for you",
+    "ar": "عرض جديد بانتظارك",
+    "de": "Ein neues Angebot wartet auf Sie",
+    "fr": "Une nouvelle offre vous attend",
+    "it": "Una nuova offerta ti aspetta"
+  },
+  "SalesNotify.types.offer_rejected": {
+    "en": "An offer was declined",
+    "ar": "تم رفض عرض",
+    "de": "Ein Angebot wurde abgelehnt",
+    "fr": "Une offre a été refusée",
+    "it": "Un'offerta è stata rifiutata"
+  },
+  "SalesNotify.types.payment_received": {
+    "en": "A payment was received",
+    "ar": "تم استلام دفعة",
+    "de": "Eine Zahlung ist eingegangen",
+    "fr": "Un paiement a été reçu",
+    "it": "È stato ricevuto un pagamento"
+  },
+  "SalesNotify.types.project_created": {
+    "en": "A new project was created",
+    "ar": "تم إنشاء مشروع جديد",
+    "de": "Ein neues Projekt wurde erstellt",
+    "fr": "Un nouveau projet a été créé",
+    "it": "È stato creato un nuovo progetto"
+  },
+  "SalesNotify.types.project_priority_changed": {
+    "en": "A project's priority changed",
+    "ar": "تغيّرت أولوية مشروع",
+    "de": "Die Priorität eines Projekts wurde geändert",
+    "fr": "La priorité d'un projet a changé",
+    "it": "La priorità di un progetto è cambiata"
+  },
+  "SalesNotify.types.project_status_changed": {
+    "en": "A project moved to a new stage",
+    "ar": "انتقل مشروع إلى مرحلة جديدة",
+    "de": "Ein Projekt ist in eine neue Phase gewechselt",
+    "fr": "Un projet est passé à une nouvelle étape",
+    "it": "Un progetto è passato a una nuova fase"
+  },
+  "SalesNotify.types.salesman_created": {
+    "en": "A salesperson joined the team",
+    "ar": "انضم مندوب مبيعات إلى الفريق",
+    "de": "Ein Verkäufer ist dem Team beigetreten",
+    "fr": "Un commercial a rejoint l'équipe",
+    "it": "Un venditore si è unito al team"
+  },
+  "SalesNotify.types.salesman_note_added": {
+    "en": "A note was added to a salesperson",
+    "ar": "أُضيفت ملاحظة إلى مندوب مبيعات",
+    "de": "Zu einem Verkäufer wurde eine Notiz hinzugefügt",
+    "fr": "Une note a été ajoutée à un commercial",
+    "it": "È stata aggiunta una nota a un venditore"
+  },
+  "SalesNotify.types.subscription_cancelled": {
+    "en": "A subscription was cancelled",
+    "ar": "تم إلغاء اشتراك",
+    "de": "Ein Abonnement wurde gekündigt",
+    "fr": "Un abonnement a été résilié",
+    "it": "Un abbonamento è stato annullato"
+  },
+  "SalesNotify.types.subscription_paused": {
+    "en": "A subscription was paused",
+    "ar": "تم إيقاف اشتراك مؤقتًا",
+    "de": "Ein Abonnement wurde pausiert",
+    "fr": "Un abonnement a été suspendu",
+    "it": "Un abbonamento è stato sospeso"
+  },
+  "SalesNotify.types.subscription_refunded": {
+    "en": "A subscription was refunded",
+    "ar": "تم رد مبلغ اشتراك",
+    "de": "Ein Abonnement wurde erstattet",
+    "fr": "Un abonnement a été remboursé",
+    "it": "Un abbonamento è stato rimborsato"
+  },
+  "SalesNotify.types.subscription_renewed": {
+    "en": "A subscription was renewed",
+    "ar": "تم تجديد اشتراك",
+    "de": "Ein Abonnement wurde verlängert",
+    "fr": "Un abonnement a été renouvelé",
+    "it": "Un abbonamento è stato rinnovato"
+  },
+  "SalesNotify.types.subscription_resumed": {
+    "en": "A subscription was resumed",
+    "ar": "تم استئناف اشتراك",
+    "de": "Ein Abonnement wurde fortgesetzt",
+    "fr": "Un abonnement a repris",
+    "it": "Un abbonamento è stato ripreso"
+  },
+  "SalesNotify.types.ticket_assigned": {
+    "en": "A ticket was assigned to you",
+    "ar": "أُسندت إليك تذكرة",
+    "de": "Ihnen wurde ein Ticket zugewiesen",
+    "fr": "Un ticket vous a été attribué",
+    "it": "Ti è stato assegnato un ticket"
+  },
+  "SalesNotify.types.ticket_created": {
+    "en": "A new support ticket was opened",
+    "ar": "تم فتح تذكرة دعم جديدة",
+    "de": "Ein neues Support-Ticket wurde eröffnet",
+    "fr": "Un nouveau ticket d'assistance a été ouvert",
+    "it": "È stato aperto un nuovo ticket di assistenza"
+  },
+  "SalesNotify.types.ticket_note_added": {
+    "en": "There's a new reply on a ticket",
+    "ar": "رد جديد على تذكرة",
+    "de": "Es gibt eine neue Antwort auf ein Ticket",
+    "fr": "Nouvelle réponse sur un ticket",
+    "it": "C'è una nuova risposta a un ticket"
+  },
+  "SalesNotify.types.ticket_status_changed": {
+    "en": "A ticket's status changed",
+    "ar": "تغيّرت حالة تذكرة",
+    "de": "Der Status eines Tickets wurde geändert",
+    "fr": "Le statut d'un ticket a changé",
+    "it": "Lo stato di un ticket è cambiato"
+  },
+  "SalesNotify.types.wallet_commission_added": {
+    "en": "A commission was added to a wallet",
+    "ar": "أُضيفت عمولة إلى محفظة",
+    "de": "Einer Wallet wurde eine Provision gutgeschrieben",
+    "fr": "Une commission a été ajoutée à un portefeuille",
+    "it": "Una commissione è stata aggiunta a un portafoglio"
+  },
+  "SalesNotify.types.wallet_commission_paid": {
+    "en": "A commission was paid",
+    "ar": "تم دفع عمولة",
+    "de": "Eine Provision wurde ausgezahlt",
+    "fr": "Une commission a été versée",
+    "it": "Una commissione è stata pagata"
+  },
+  "SalesNotify.types.other": {
+    "en": "Something changed",
+    "ar": "حدث تغيير",
+    "de": "Etwas hat sich geändert",
+    "fr": "Quelque chose a changé",
+    "it": "Qualcosa è cambiato"
+  },
+  "SalesActivity.title": {
+    "en": "Activity",
+    "ar": "النشاط",
+    "de": "Aktivität",
+    "fr": "Activité",
+    "it": "Attività"
+  },
+  "SalesActivity.description": {
+    "en": "What changed across customers, deals, offers and commissions, newest first.",
+    "ar": "ما تغيّر في العملاء والصفقات والعروض والعمولات، الأحدث أولًا.",
+    "de": "Was sich bei Kunden, Deals, Angeboten und Provisionen geändert hat, das Neueste zuerst.",
+    "fr": "Ce qui a changé dans les clients, affaires, offres et commissions, du plus récent au plus ancien.",
+    "it": "Cosa è cambiato tra clienti, trattative, offerte e commissioni, dal più recente."
+  },
+  "SalesActivity.markAllRead": {
+    "en": "Mark all as read",
+    "ar": "تعليم الكل كمقروء",
+    "de": "Alle als gelesen markieren",
+    "fr": "Tout marquer comme lu",
+    "it": "Segna tutto come letto"
+  },
+  "SalesActivity.showRead": {
+    "en": "Show read items",
+    "ar": "إظهار العناصر المقروءة",
+    "de": "Gelesene anzeigen",
+    "fr": "Afficher les éléments lus",
+    "it": "Mostra gli elementi letti"
+  },
+  "SalesActivity.loading": {
+    "en": "Loading activity",
+    "ar": "جارٍ تحميل النشاط",
+    "de": "Aktivität wird geladen",
+    "fr": "Chargement de l'activité",
+    "it": "Caricamento dell'attività"
+  },
+  "SalesActivity.loadError": {
+    "en": "Activity couldn't be loaded",
+    "ar": "تعذّر تحميل النشاط",
+    "de": "Die Aktivität konnte nicht geladen werden",
+    "fr": "Impossible de charger l'activité",
+    "it": "Impossibile caricare l'attività"
+  },
+  "SalesActivity.loadErrorBody": {
+    "en": "Check your connection and try again.",
+    "ar": "تحقق من اتصالك وحاول مرة أخرى.",
+    "de": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "fr": "Vérifiez votre connexion et réessayez.",
+    "it": "Controlla la connessione e riprova."
+  },
+  "SalesActivity.noMatchTitle": {
+    "en": "Nothing matches these filters",
+    "ar": "لا شيء يطابق عوامل التصفية هذه",
+    "de": "Nichts passt zu diesen Filtern",
+    "fr": "Rien ne correspond à ces filtres",
+    "it": "Nessun risultato con questi filtri"
+  },
+  "SalesActivity.noMatchBody": {
+    "en": "Try another category, or show the items you've already read.",
+    "ar": "جرّب فئة أخرى، أو أظهر العناصر التي قرأتها.",
+    "de": "Wählen Sie eine andere Kategorie oder zeigen Sie bereits gelesene Einträge an.",
+    "fr": "Essayez une autre catégorie ou affichez les éléments déjà lus.",
+    "it": "Prova un'altra categoria o mostra gli elementi già letti."
+  },
+  "SalesActivity.showEverything": {
+    "en": "Show everything",
+    "ar": "إظهار الكل",
+    "de": "Alles anzeigen",
+    "fr": "Tout afficher",
+    "it": "Mostra tutto"
+  },
+  "SalesActivity.emptyTitle": {
+    "en": "No activity yet",
+    "ar": "لا يوجد نشاط بعد",
+    "de": "Noch keine Aktivität",
+    "fr": "Aucune activité pour l'instant",
+    "it": "Ancora nessuna attività"
+  },
+  "SalesActivity.emptyBody": {
+    "en": "New offers, contracts, payments and commissions will show here as they happen.",
+    "ar": "ستظهر هنا العروض والعقود والمدفوعات والعمولات الجديدة فور حدوثها.",
+    "de": "Neue Angebote, Verträge, Zahlungen und Provisionen erscheinen hier, sobald sie passieren.",
+    "fr": "Les nouvelles offres, contrats, paiements et commissions s'afficheront ici dès qu'ils arrivent.",
+    "it": "Nuove offerte, contratti, pagamenti e commissioni appariranno qui man mano."
+  },
+  "SalesActivity.eventCount": {
+    "en": "{count, plural, one {# event} other {# events}}",
+    "ar": "{count, plural, zero {لا أحداث} one {حدث واحد} two {حدثان} few {# أحداث} many {# حدثًا} other {# حدث}}",
+    "de": "{count, plural, one {# Ereignis} other {# Ereignisse}}",
+    "fr": "{count, plural, one {# événement} other {# événements}}",
+    "it": "{count, plural, one {# evento} other {# eventi}}"
+  },
+  "SalesActivity.category.all": {
+    "en": "All",
+    "ar": "الكل",
+    "de": "Alle",
+    "fr": "Tout",
+    "it": "Tutto"
+  },
+  "SalesActivity.category.projects": {
+    "en": "Projects",
+    "ar": "المشاريع",
+    "de": "Projekte",
+    "fr": "Projets",
+    "it": "Progetti"
+  },
+  "SalesActivity.category.offers": {
+    "en": "Offers",
+    "ar": "العروض",
+    "de": "Angebote",
+    "fr": "Offres",
+    "it": "Offerte"
+  },
+  "SalesActivity.category.customers": {
+    "en": "Customers",
+    "ar": "العملاء",
+    "de": "Kunden",
+    "fr": "Clients",
+    "it": "Clienti"
+  },
+  "SalesActivity.category.commissions": {
+    "en": "Commissions",
+    "ar": "العمولات",
+    "de": "Provisionen",
+    "fr": "Commissions",
+    "it": "Commissioni"
+  },
+  "SalesActivity.category.salesman": {
+    "en": "Salespeople",
+    "ar": "مندوبو المبيعات",
+    "de": "Verkäufer",
+    "fr": "Commerciaux",
+    "it": "Venditori"
+  },
+  "SalesActivity.category.invoices": {
+    "en": "Invoices",
+    "ar": "الفواتير",
+    "de": "Rechnungen",
+    "fr": "Factures",
+    "it": "Fatture"
+  },
+  "SalesActivity.category.subscriptions": {
+    "en": "Subscriptions",
+    "ar": "الاشتراكات",
+    "de": "Abonnements",
+    "fr": "Abonnements",
+    "it": "Abbonamenti"
+  },
+  "SalesActivity.category.tickets": {
+    "en": "Tickets",
+    "ar": "التذاكر",
+    "de": "Tickets",
+    "fr": "Tickets",
+    "it": "Ticket"
+  },
+  "SalesArchive.title": {
+    "en": "Archive",
+    "ar": "الأرشيف",
+    "de": "Archiv",
+    "fr": "Archives",
+    "it": "Archivio"
+  },
+  "SalesArchive.description": {
+    "en": "Archived plans, features, categories, durations and packages, to look up.",
+    "ar": "الخطط والميزات والفئات والمدد والباقات المؤرشفة، للاطلاع.",
+    "de": "Archivierte Tarife, Funktionen, Kategorien, Laufzeiten und Pakete zum Nachschlagen.",
+    "fr": "Formules, fonctionnalités, catégories, durées et forfaits archivés, à consulter.",
+    "it": "Piani, funzionalità, categorie, durate e pacchetti archiviati, da consultare."
+  },
+  "SalesArchive.movingNote": {
+    "en": "This is a read-only record of the product catalog. The catalog moves to the Admin app, where archived items can be restored.",
+    "ar": "هذا سجل للاطلاع فقط على كتالوج المنتجات. ينتقل الكتالوج إلى تطبيق الإدارة، وهناك يمكن استعادة العناصر المؤرشفة.",
+    "de": "Dies ist eine schreibgeschützte Übersicht des Produktkatalogs. Der Katalog zieht in die Admin-App um, wo archivierte Einträge wiederhergestellt werden können.",
+    "fr": "Ceci est une consultation en lecture seule du catalogue. Le catalogue passe dans l'application Admin, où les éléments archivés pourront être restaurés.",
+    "it": "Questo è un registro di sola lettura del catalogo. Il catalogo passa all'app Admin, dove gli elementi archiviati potranno essere ripristinati."
+  },
+  "SalesArchive.searchLabel": {
+    "en": "Search the archive",
+    "ar": "البحث في الأرشيف",
+    "de": "Archiv durchsuchen",
+    "fr": "Rechercher dans les archives",
+    "it": "Cerca nell'archivio"
+  },
+  "SalesArchive.searchPlaceholder": {
+    "en": "Name",
+    "ar": "الاسم",
+    "de": "Name",
+    "fr": "Nom",
+    "it": "Nome"
+  },
+  "SalesArchive.clearSearch": {
+    "en": "Clear the search",
+    "ar": "مسح البحث",
+    "de": "Suche zurücksetzen",
+    "fr": "Effacer la recherche",
+    "it": "Cancella la ricerca"
+  },
+  "SalesArchive.kindLabel": {
+    "en": "Duration type",
+    "ar": "نوع المدة",
+    "de": "Art der Laufzeit",
+    "fr": "Type de durée",
+    "it": "Tipo di durata"
+  },
+  "SalesArchive.kindPlan": {
+    "en": "Plan lengths",
+    "ar": "مدد الخطط",
+    "de": "Tariflaufzeiten",
+    "fr": "Durées de formule",
+    "it": "Durate dei piani"
+  },
+  "SalesArchive.kindInstallment": {
+    "en": "Installment terms",
+    "ar": "مدد التقسيط",
+    "de": "Ratenlaufzeiten",
+    "fr": "Durées d'échelonnement",
+    "it": "Durate delle rate"
+  },
+  "SalesArchive.loadError": {
+    "en": "The archive couldn't be loaded",
+    "ar": "تعذّر تحميل الأرشيف",
+    "de": "Das Archiv konnte nicht geladen werden",
+    "fr": "Impossible de charger les archives",
+    "it": "Impossibile caricare l'archivio"
+  },
+  "SalesArchive.noMatchTitle": {
+    "en": "Nothing matches your search",
+    "ar": "لا شيء يطابق بحثك",
+    "de": "Nichts passt zu Ihrer Suche",
+    "fr": "Aucun résultat pour votre recherche",
+    "it": "Nessun risultato per la ricerca"
+  },
+  "SalesArchive.noMatchBody": {
+    "en": "Check the spelling, or clear the search.",
+    "ar": "تحقق من الكتابة، أو امسح البحث.",
+    "de": "Prüfen Sie die Schreibweise oder setzen Sie die Suche zurück.",
+    "fr": "Vérifiez l'orthographe ou effacez la recherche.",
+    "it": "Controlla l'ortografia o cancella la ricerca."
+  },
+  "SalesArchive.emptyBody": {
+    "en": "Items archived in the catalog show here.",
+    "ar": "تظهر هنا العناصر المؤرشفة في الكتالوج.",
+    "de": "Im Katalog archivierte Einträge erscheinen hier.",
+    "fr": "Les éléments archivés du catalogue s'affichent ici.",
+    "it": "Gli elementi archiviati nel catalogo appaiono qui."
+  },
+  "SalesArchive.resource.plans": {
+    "en": "Plans",
+    "ar": "الخطط",
+    "de": "Tarife",
+    "fr": "Formules",
+    "it": "Piani"
+  },
+  "SalesArchive.archived.plans": {
+    "en": "Archived plans",
+    "ar": "الخطط المؤرشفة",
+    "de": "Archivierte Tarife",
+    "fr": "Formules archivées",
+    "it": "Piani archiviati"
+  },
+  "SalesArchive.empty.plans": {
+    "en": "No archived plans",
+    "ar": "لا توجد خطط مؤرشفة",
+    "de": "Keine archivierten Tarife",
+    "fr": "Aucune formule archivée",
+    "it": "Nessun piano archiviato"
+  },
+  "SalesArchive.resource.features": {
+    "en": "Features",
+    "ar": "الميزات",
+    "de": "Funktionen",
+    "fr": "Fonctionnalités",
+    "it": "Funzionalità"
+  },
+  "SalesArchive.archived.features": {
+    "en": "Archived features",
+    "ar": "الميزات المؤرشفة",
+    "de": "Archivierte Funktionen",
+    "fr": "Fonctionnalités archivées",
+    "it": "Funzionalità archiviate"
+  },
+  "SalesArchive.empty.features": {
+    "en": "No archived features",
+    "ar": "لا توجد ميزات مؤرشفة",
+    "de": "Keine archivierten Funktionen",
+    "fr": "Aucune fonctionnalité archivée",
+    "it": "Nessuna funzionalità archiviata"
+  },
+  "SalesArchive.resource.categories": {
+    "en": "Categories",
+    "ar": "الفئات",
+    "de": "Kategorien",
+    "fr": "Catégories",
+    "it": "Categorie"
+  },
+  "SalesArchive.archived.categories": {
+    "en": "Archived categories",
+    "ar": "الفئات المؤرشفة",
+    "de": "Archivierte Kategorien",
+    "fr": "Catégories archivées",
+    "it": "Categorie archiviate"
+  },
+  "SalesArchive.empty.categories": {
+    "en": "No archived categories",
+    "ar": "لا توجد فئات مؤرشفة",
+    "de": "Keine archivierten Kategorien",
+    "fr": "Aucune catégorie archivée",
+    "it": "Nessuna categoria archiviata"
+  },
+  "SalesArchive.resource.durations": {
+    "en": "Durations",
+    "ar": "المدد",
+    "de": "Laufzeiten",
+    "fr": "Durées",
+    "it": "Durate"
+  },
+  "SalesArchive.archived.durations": {
+    "en": "Archived durations",
+    "ar": "المدد المؤرشفة",
+    "de": "Archivierte Laufzeiten",
+    "fr": "Durées archivées",
+    "it": "Durate archiviate"
+  },
+  "SalesArchive.empty.durations": {
+    "en": "No archived durations",
+    "ar": "لا توجد مدد مؤرشفة",
+    "de": "Keine archivierten Laufzeiten",
+    "fr": "Aucune durée archivée",
+    "it": "Nessuna durata archiviata"
+  },
+  "SalesArchive.resource.packages": {
+    "en": "Packages",
+    "ar": "الباقات",
+    "de": "Pakete",
+    "fr": "Forfaits",
+    "it": "Pacchetti"
+  },
+  "SalesArchive.archived.packages": {
+    "en": "Archived packages",
+    "ar": "الباقات المؤرشفة",
+    "de": "Archivierte Pakete",
+    "fr": "Forfaits archivés",
+    "it": "Pacchetti archiviati"
+  },
+  "SalesArchive.empty.packages": {
+    "en": "No archived packages",
+    "ar": "لا توجد باقات مؤرشفة",
+    "de": "Keine archivierten Pakete",
+    "fr": "Aucun forfait archivé",
+    "it": "Nessun pacchetto archiviato"
+  },
+  "SalesArchive.columnArchivedAt": {
+    "en": "Archived",
+    "ar": "تاريخ الأرشفة",
+    "de": "Archiviert",
+    "fr": "Archivé le",
+    "it": "Archiviato il"
+  },
+  "SalesArchive.columnName": {
+    "en": "Name",
+    "ar": "الاسم",
+    "de": "Name",
+    "fr": "Nom",
+    "it": "Nome"
+  },
+  "SalesArchive.columnCategory": {
+    "en": "Category",
+    "ar": "الفئة",
+    "de": "Kategorie",
+    "fr": "Catégorie",
+    "it": "Categoria"
+  },
+  "SalesArchive.columnDepartment": {
+    "en": "Department",
+    "ar": "القسم",
+    "de": "Abteilung",
+    "fr": "Département",
+    "it": "Reparto"
+  },
+  "SalesArchive.columnPlans": {
+    "en": "Plans",
+    "ar": "الخطط",
+    "de": "Tarife",
+    "fr": "Formules",
+    "it": "Piani"
+  },
+  "SalesArchive.columnFeatures": {
+    "en": "Features",
+    "ar": "الميزات",
+    "de": "Funktionen",
+    "fr": "Fonctionnalités",
+    "it": "Funzionalità"
+  },
+  "SalesArchive.columnDescription": {
+    "en": "Description",
+    "ar": "الوصف",
+    "de": "Beschreibung",
+    "fr": "Description",
+    "it": "Descrizione"
+  },
+  "SalesArchive.columnPaymentType": {
+    "en": "Payment",
+    "ar": "طريقة الدفع",
+    "de": "Zahlung",
+    "fr": "Paiement",
+    "it": "Pagamento"
+  },
+  "SalesArchive.paymentInstallment": {
+    "en": "In installments",
+    "ar": "بالتقسيط",
+    "de": "In Raten",
+    "fr": "En plusieurs fois",
+    "it": "A rate"
+  },
+  "SalesArchive.paymentFull": {
+    "en": "In full",
+    "ar": "دفعة واحدة",
+    "de": "Vollständig",
+    "fr": "En une fois",
+    "it": "In un'unica soluzione"
+  },
+  "SalesArchive.columnLength": {
+    "en": "Length",
+    "ar": "المدة",
+    "de": "Laufzeit",
+    "fr": "Durée",
+    "it": "Durata"
+  },
+  "SalesArchive.columnDiscount": {
+    "en": "Discount",
+    "ar": "الخصم",
+    "de": "Rabatt",
+    "fr": "Remise",
+    "it": "Sconto"
+  },
+  "SalesArchive.months": {
+    "en": "{count, plural, one {# month} other {# months}}",
+    "ar": "{count, plural, zero {لا أشهر} one {شهر واحد} two {شهران} few {# أشهر} many {# شهرًا} other {# شهر}}",
+    "de": "{count, plural, one {# Monat} other {# Monate}}",
+    "fr": "{count, plural, one {# mois} other {# mois}}",
+    "it": "{count, plural, one {# mese} other {# mesi}}"
+  },
+  "SalesHome.welcome": {
+    "en": "Welcome back, {name}",
+    "ar": "مرحبًا بعودتك يا {name}",
+    "de": "Willkommen zurück, {name}",
+    "fr": "Bon retour, {name}",
+    "it": "Bentornato, {name}"
+  },
+  "SalesHome.welcomeNoName": {
+    "en": "Welcome back",
+    "ar": "مرحبًا بعودتك",
+    "de": "Willkommen zurück",
+    "fr": "Bon retour",
+    "it": "Bentornato"
+  },
+  "SalesHome.descriptionTeam": {
+    "en": "Your team's sales, pipeline and projects at a glance.",
+    "ar": "مبيعات فريقك ومسار العملاء والمشاريع في لمحة.",
+    "de": "Umsatz, Pipeline und Projekte Ihres Teams auf einen Blick.",
+    "fr": "Les ventes, le pipeline et les projets de votre équipe en un coup d'œil.",
+    "it": "Vendite, pipeline e progetti del tuo team a colpo d'occhio."
+  },
+  "SalesHome.descriptionSalesman": {
+    "en": "Your customers, deals and commissions at a glance.",
+    "ar": "عملاؤك وصفقاتك وعمولاتك في لمحة.",
+    "de": "Ihre Kunden, Deals und Provisionen auf einen Blick.",
+    "fr": "Vos clients, affaires et commissions en un coup d'œil.",
+    "it": "I tuoi clienti, trattative e commissioni a colpo d'occhio."
+  },
+  "SalesHome.descriptionCustomer": {
+    "en": "Your projects, the offers waiting for your answer, and your points.",
+    "ar": "مشاريعك والعروض التي تنتظر ردك ونقاطك.",
+    "de": "Ihre Projekte, die Angebote, die auf Ihre Antwort warten, und Ihre Punkte.",
+    "fr": "Vos projets, les offres qui attendent votre réponse et vos points.",
+    "it": "I tuoi progetti, le offerte in attesa della tua risposta e i tuoi punti."
+  },
+  "SalesHome.newSalesman": {
+    "en": "New salesperson",
+    "ar": "مندوب مبيعات جديد",
+    "de": "Neuer Verkäufer",
+    "fr": "Nouveau commercial",
+    "it": "Nuovo venditore"
+  },
+  "SalesHome.newCustomer": {
+    "en": "New customer",
+    "ar": "عميل جديد",
+    "de": "Neuer Kunde",
+    "fr": "Nouveau client",
+    "it": "Nuovo cliente"
+  },
+  "SalesHome.newProject": {
+    "en": "New project",
+    "ar": "مشروع جديد",
+    "de": "Neues Projekt",
+    "fr": "Nouveau projet",
+    "it": "Nuovo progetto"
+  },
+  "SalesHome.loadError": {
+    "en": "The dashboard couldn't be loaded",
+    "ar": "تعذّر تحميل لوحة التحكم",
+    "de": "Das Dashboard konnte nicht geladen werden",
+    "fr": "Impossible de charger le tableau de bord",
+    "it": "Impossibile caricare la dashboard"
+  },
+  "SalesHome.loadErrorBody": {
+    "en": "Your customers and deals are safe. Check your connection and try again.",
+    "ar": "عملاؤك وصفقاتك في أمان. تحقق من اتصالك وحاول مرة أخرى.",
+    "de": "Ihre Kunden und Deals sind sicher. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "fr": "Vos clients et vos affaires sont en sécurité. Vérifiez votre connexion et réessayez.",
+    "it": "I tuoi clienti e le trattative sono al sicuro. Controlla la connessione e riprova."
+  },
+  "SalesHome.listError": {
+    "en": "This list couldn't be loaded.",
+    "ar": "تعذّر تحميل هذه القائمة.",
+    "de": "Diese Liste konnte nicht geladen werden.",
+    "fr": "Impossible de charger cette liste.",
+    "it": "Impossibile caricare questo elenco."
+  },
+  "SalesHome.kpiProjects": {
+    "en": "Projects",
+    "ar": "المشاريع",
+    "de": "Projekte",
+    "fr": "Projets",
+    "it": "Progetti"
+  },
+  "SalesHome.kpiMyDeals": {
+    "en": "My deals",
+    "ar": "صفقاتي",
+    "de": "Meine Deals",
+    "fr": "Mes affaires",
+    "it": "Le mie trattative"
+  },
+  "SalesHome.kpiCustomers": {
+    "en": "Customers and leads",
+    "ar": "العملاء والعملاء المحتملون",
+    "de": "Kunden und Leads",
+    "fr": "Clients et prospects",
+    "it": "Clienti e lead"
+  },
+  "SalesHome.kpiMyCustomers": {
+    "en": "My customers and leads",
+    "ar": "عملائي والعملاء المحتملون",
+    "de": "Meine Kunden und Leads",
+    "fr": "Mes clients et prospects",
+    "it": "I miei clienti e lead"
+  },
+  "SalesHome.kpiSalespeople": {
+    "en": "Salespeople",
+    "ar": "مندوبو المبيعات",
+    "de": "Verkäufer",
+    "fr": "Commerciaux",
+    "it": "Venditori"
+  },
+  "SalesHome.kpiPlansSold": {
+    "en": "Plans sold",
+    "ar": "الخطط المباعة",
+    "de": "Verkaufte Tarife",
+    "fr": "Formules vendues",
+    "it": "Piani venduti"
+  },
+  "SalesHome.kpiSales": {
+    "en": "Sales, last 12 months",
+    "ar": "المبيعات، آخر 12 شهرًا",
+    "de": "Umsatz, letzte 12 Monate",
+    "fr": "Ventes, 12 derniers mois",
+    "it": "Vendite, ultimi 12 mesi"
+  },
+  "SalesHome.kpiMySales": {
+    "en": "My sales, last 12 months",
+    "ar": "مبيعاتي، آخر 12 شهرًا",
+    "de": "Mein Umsatz, letzte 12 Monate",
+    "fr": "Mes ventes, 12 derniers mois",
+    "it": "Le mie vendite, ultimi 12 mesi"
+  },
+  "SalesHome.kpiCommissions": {
+    "en": "Commissions",
+    "ar": "العمولات",
+    "de": "Provisionen",
+    "fr": "Commissions",
+    "it": "Commissioni"
+  },
+  "SalesHome.kpiMyCommissions": {
+    "en": "My commissions",
+    "ar": "عمولاتي",
+    "de": "Meine Provisionen",
+    "fr": "Mes commissions",
+    "it": "Le mie commissioni"
+  },
+  "SalesHome.kpiNet": {
+    "en": "Sales after commissions",
+    "ar": "المبيعات بعد العمولات",
+    "de": "Umsatz nach Provisionen",
+    "fr": "Ventes après commissions",
+    "it": "Vendite al netto delle commissioni"
+  },
+  "SalesHome.againstNew.month": {
+    "en": "{count, plural, one {# new this month} other {# new this month}}, compared with last month",
+    "ar": "{count, plural, zero {لا جديد هذا الشهر} one {جديد واحد هذا الشهر} two {اثنان جديدان هذا الشهر} few {# جديدة هذا الشهر} many {# جديدًا هذا الشهر} other {# جديد هذا الشهر}}، مقارنةً بالشهر الماضي",
+    "de": "{count, plural, one {# neu in diesem Monat} other {# neu in diesem Monat}}, verglichen mit dem Vormonat",
+    "fr": "{count, plural, one {# nouveau ce mois-ci} other {# nouveaux ce mois-ci}}, par rapport au mois dernier",
+    "it": "{count, plural, one {# nuovo questo mese} other {# nuovi questo mese}}, rispetto al mese scorso"
+  },
+  "SalesHome.againstNew.week": {
+    "en": "{count, plural, one {# new this week} other {# new this week}}, compared with last week",
+    "ar": "{count, plural, zero {لا جديد هذا الأسبوع} one {جديد واحد هذا الأسبوع} two {اثنان جديدان هذا الأسبوع} few {# جديدة هذا الأسبوع} many {# جديدًا هذا الأسبوع} other {# جديد هذا الأسبوع}}، مقارنةً بالأسبوع الماضي",
+    "de": "{count, plural, one {# neu in dieser Woche} other {# neu in dieser Woche}}, verglichen mit der Vorwoche",
+    "fr": "{count, plural, one {# nouveau cette semaine} other {# nouveaux cette semaine}}, par rapport à la semaine dernière",
+    "it": "{count, plural, one {# nuovo questa settimana} other {# nuovi questa settimana}}, rispetto alla settimana scorsa"
+  },
+  "SalesHome.against.month": {
+    "en": "this month, compared with last month",
+    "ar": "هذا الشهر مقارنةً بالشهر الماضي",
+    "de": "in diesem Monat, verglichen mit dem Vormonat",
+    "fr": "ce mois-ci, par rapport au mois dernier",
+    "it": "questo mese, rispetto al mese scorso"
+  },
+  "SalesHome.against.week": {
+    "en": "this week, compared with last week",
+    "ar": "هذا الأسبوع مقارنةً بالأسبوع الماضي",
+    "de": "in dieser Woche, verglichen mit der Vorwoche",
+    "fr": "cette semaine, par rapport à la semaine dernière",
+    "it": "questa settimana, rispetto alla settimana scorsa"
+  },
+  "SalesHome.notConverted.month": {
+    "en": "One total per currency, not converted. Changes compare this month with last month.",
+    "ar": "إجمالي لكل عملة دون تحويل. التغيّرات تقارن هذا الشهر بالشهر الماضي.",
+    "de": "Eine Summe pro Währung, nicht umgerechnet. Veränderungen vergleichen diesen Monat mit dem Vormonat.",
+    "fr": "Un total par devise, sans conversion. Les variations comparent ce mois-ci au mois dernier.",
+    "it": "Un totale per valuta, non convertito. Le variazioni confrontano questo mese con il mese scorso."
+  },
+  "SalesHome.notConverted.week": {
+    "en": "One total per currency, not converted. Changes compare this week with last week.",
+    "ar": "إجمالي لكل عملة دون تحويل. التغيّرات تقارن هذا الأسبوع بالأسبوع الماضي.",
+    "de": "Eine Summe pro Währung, nicht umgerechnet. Veränderungen vergleichen diese Woche mit der Vorwoche.",
+    "fr": "Un total par devise, sans conversion. Les variations comparent cette semaine à la semaine dernière.",
+    "it": "Un totale per valuta, non convertito. Le variazioni confrontano questa settimana con la settimana scorsa."
+  },
+  "SalesHome.noMoneyYet": {
+    "en": "Nothing yet",
+    "ar": "لا شيء بعد",
+    "de": "Noch nichts",
+    "fr": "Rien pour l'instant",
+    "it": "Ancora niente"
+  },
+  "SalesHome.salesTrendTitle": {
+    "en": "Sales over the last 12 months",
+    "ar": "المبيعات خلال آخر 12 شهرًا",
+    "de": "Umsatz der letzten 12 Monate",
+    "fr": "Ventes des 12 derniers mois",
+    "it": "Vendite degli ultimi 12 mesi"
+  },
+  "SalesHome.mySalesTrendTitle": {
+    "en": "My sales over the last 12 months",
+    "ar": "مبيعاتي خلال آخر 12 شهرًا",
+    "de": "Mein Umsatz der letzten 12 Monate",
+    "fr": "Mes ventes des 12 derniers mois",
+    "it": "Le mie vendite degli ultimi 12 mesi"
+  },
+  "SalesHome.salesTrendBody": {
+    "en": "In {currency}. Each currency is shown on its own, not converted.",
+    "ar": "بعملة {currency}. تُعرض كل عملة على حدة دون تحويل.",
+    "de": "In {currency}. Jede Währung wird einzeln gezeigt, nicht umgerechnet.",
+    "fr": "En {currency}. Chaque devise est affichée séparément, sans conversion.",
+    "it": "In {currency}. Ogni valuta è mostrata a parte, non convertita."
+  },
+  "SalesHome.salesTrendEmpty": {
+    "en": "No sales in the last 12 months yet.",
+    "ar": "لا توجد مبيعات في آخر 12 شهرًا بعد.",
+    "de": "In den letzten 12 Monaten gibt es noch keinen Umsatz.",
+    "fr": "Aucune vente sur les 12 derniers mois pour l'instant.",
+    "it": "Ancora nessuna vendita negli ultimi 12 mesi."
+  },
+  "SalesHome.currency": {
+    "en": "Currency",
+    "ar": "العملة",
+    "de": "Währung",
+    "fr": "Devise",
+    "it": "Valuta"
+  },
+  "SalesHome.month": {
+    "en": "Month",
+    "ar": "الشهر",
+    "de": "Monat",
+    "fr": "Mois",
+    "it": "Mese"
+  },
+  "SalesHome.sales": {
+    "en": "Sales",
+    "ar": "المبيعات",
+    "de": "Umsatz",
+    "fr": "Ventes",
+    "it": "Vendite"
+  },
+  "SalesHome.pipelineTitle": {
+    "en": "Leads by stage",
+    "ar": "العملاء المحتملون حسب المرحلة",
+    "de": "Leads nach Phase",
+    "fr": "Prospects par étape",
+    "it": "Lead per fase"
+  },
+  "SalesHome.pipelineBody": {
+    "en": "Where customers and leads are in the pipeline.",
+    "ar": "موقع العملاء والعملاء المحتملين في مسار المبيعات.",
+    "de": "Wo Kunden und Leads in der Pipeline stehen.",
+    "fr": "Où en sont les clients et prospects dans le pipeline.",
+    "it": "A che punto sono clienti e lead nella pipeline."
+  },
+  "SalesHome.pipelineEmpty": {
+    "en": "No customers or leads yet.",
+    "ar": "لا يوجد عملاء أو عملاء محتملون بعد.",
+    "de": "Noch keine Kunden oder Leads.",
+    "fr": "Aucun client ni prospect pour l'instant.",
+    "it": "Ancora nessun cliente o lead."
+  },
+  "SalesHome.stage": {
+    "en": "Stage",
+    "ar": "المرحلة",
+    "de": "Phase",
+    "fr": "Étape",
+    "it": "Fase"
+  },
+  "SalesHome.leads": {
+    "en": "Leads",
+    "ar": "العملاء المحتملون",
+    "de": "Leads",
+    "fr": "Prospects",
+    "it": "Lead"
+  },
+  "SalesHome.stagesTitle": {
+    "en": "Projects by stage",
+    "ar": "المشاريع حسب المرحلة",
+    "de": "Projekte nach Phase",
+    "fr": "Projets par étape",
+    "it": "Progetti per fase"
+  },
+  "SalesHome.stagesBody": {
+    "en": "From the contract to delivery.",
+    "ar": "من العقد حتى التسليم.",
+    "de": "Vom Vertrag bis zur Lieferung.",
+    "fr": "Du contrat à la livraison.",
+    "it": "Dal contratto alla consegna."
+  },
+  "SalesHome.stagesEmpty": {
+    "en": "No projects yet.",
+    "ar": "لا توجد مشاريع بعد.",
+    "de": "Noch keine Projekte.",
+    "fr": "Aucun projet pour l'instant.",
+    "it": "Ancora nessun progetto."
+  },
+  "SalesHome.projects": {
+    "en": "Projects",
+    "ar": "المشاريع",
+    "de": "Projekte",
+    "fr": "Projets",
+    "it": "Progetti"
+  },
+  "SalesHome.attentionTitle": {
+    "en": "Needs attention",
+    "ar": "يحتاج إلى متابعة",
+    "de": "Erfordert Aufmerksamkeit",
+    "fr": "À traiter",
+    "it": "Da seguire"
+  },
+  "SalesHome.attentionBody": {
+    "en": "Amounts are per currency, not converted.",
+    "ar": "المبالغ لكل عملة دون تحويل.",
+    "de": "Beträge pro Währung, nicht umgerechnet.",
+    "fr": "Montants par devise, sans conversion.",
+    "it": "Importi per valuta, non convertiti."
+  },
+  "SalesHome.attentionEmpty": {
+    "en": "Nothing needs attention right now.",
+    "ar": "لا شيء يحتاج إلى متابعة الآن.",
+    "de": "Im Moment ist nichts zu tun.",
+    "fr": "Rien à traiter pour le moment.",
+    "it": "Al momento non c'è nulla da seguire."
+  },
+  "SalesHome.attentionCommissions": {
+    "en": "{count, plural, one {# commission to pay} other {# commissions to pay}}",
+    "ar": "{count, plural, zero {لا عمولات للدفع} one {عمولة واحدة للدفع} two {عمولتان للدفع} few {# عمولات للدفع} many {# عمولةً للدفع} other {# عمولة للدفع}}",
+    "de": "{count, plural, one {# Provision auszuzahlen} other {# Provisionen auszuzahlen}}",
+    "fr": "{count, plural, one {# commission à verser} other {# commissions à verser}}",
+    "it": "{count, plural, one {# commissione da pagare} other {# commissioni da pagare}}"
+  },
+  "SalesHome.attentionInvoices": {
+    "en": "{count, plural, one {# overdue invoice} other {# overdue invoices}}",
+    "ar": "{count, plural, zero {لا فواتير متأخرة} one {فاتورة متأخرة واحدة} two {فاتورتان متأخرتان} few {# فواتير متأخرة} many {# فاتورةً متأخرة} other {# فاتورة متأخرة}}",
+    "de": "{count, plural, one {# überfällige Rechnung} other {# überfällige Rechnungen}}",
+    "fr": "{count, plural, one {# facture en retard} other {# factures en retard}}",
+    "it": "{count, plural, one {# fattura scaduta} other {# fatture scadute}}"
+  },
+  "SalesHome.openCommissions": {
+    "en": "Open commissions",
+    "ar": "فتح العمولات",
+    "de": "Provisionen öffnen",
+    "fr": "Ouvrir les commissions",
+    "it": "Apri le commissioni"
+  },
+  "SalesHome.openInvoices": {
+    "en": "Open invoices",
+    "ar": "فتح الفواتير",
+    "de": "Rechnungen öffnen",
+    "fr": "Ouvrir les factures",
+    "it": "Apri le fatture"
+  },
+  "SalesHome.latestCustomers": {
+    "en": "Newest customers and leads",
+    "ar": "أحدث العملاء والعملاء المحتملين",
+    "de": "Neueste Kunden und Leads",
+    "fr": "Derniers clients et prospects",
+    "it": "Clienti e lead più recenti"
+  },
+  "SalesHome.viewAllCustomers": {
+    "en": "View all customers",
+    "ar": "عرض كل العملاء",
+    "de": "Alle Kunden anzeigen",
+    "fr": "Voir tous les clients",
+    "it": "Vedi tutti i clienti"
+  },
+  "SalesHome.noCustomersTitle": {
+    "en": "No customers yet",
+    "ar": "لا يوجد عملاء بعد",
+    "de": "Noch keine Kunden",
+    "fr": "Aucun client pour l'instant",
+    "it": "Ancora nessun cliente"
+  },
+  "SalesHome.noCustomersBody": {
+    "en": "Add a customer, or wait for leads from the website.",
+    "ar": "أضف عميلًا، أو انتظر العملاء المحتملين من الموقع.",
+    "de": "Fügen Sie einen Kunden hinzu oder warten Sie auf Leads von der Website.",
+    "fr": "Ajoutez un client ou attendez les prospects du site web.",
+    "it": "Aggiungi un cliente o attendi i lead dal sito web."
+  },
+  "SalesHome.columnCustomer": {
+    "en": "Customer",
+    "ar": "العميل",
+    "de": "Kunde",
+    "fr": "Client",
+    "it": "Cliente"
+  },
+  "SalesHome.columnStage": {
+    "en": "Stage",
+    "ar": "المرحلة",
+    "de": "Phase",
+    "fr": "Étape",
+    "it": "Fase"
+  },
+  "SalesHome.columnOwner": {
+    "en": "Salesperson",
+    "ar": "مندوب المبيعات",
+    "de": "Verkäufer",
+    "fr": "Commercial",
+    "it": "Venditore"
+  },
+  "SalesHome.unassigned": {
+    "en": "Not assigned",
+    "ar": "غير مُسند",
+    "de": "Nicht zugewiesen",
+    "fr": "Non attribué",
+    "it": "Non assegnato"
+  },
+  "SalesHome.columnAdded": {
+    "en": "Added",
+    "ar": "تاريخ الإضافة",
+    "de": "Hinzugefügt",
+    "fr": "Ajouté le",
+    "it": "Aggiunto il"
+  },
+  "SalesHome.latestProjects": {
+    "en": "Newest projects",
+    "ar": "أحدث المشاريع",
+    "de": "Neueste Projekte",
+    "fr": "Derniers projets",
+    "it": "Progetti più recenti"
+  },
+  "SalesHome.myProjects": {
+    "en": "My projects",
+    "ar": "مشاريعي",
+    "de": "Meine Projekte",
+    "fr": "Mes projets",
+    "it": "I miei progetti"
+  },
+  "SalesHome.viewAllProjects": {
+    "en": "View all projects",
+    "ar": "عرض كل المشاريع",
+    "de": "Alle Projekte anzeigen",
+    "fr": "Voir tous les projets",
+    "it": "Vedi tutti i progetti"
+  },
+  "SalesHome.noProjectsTitle": {
+    "en": "No projects yet",
+    "ar": "لا توجد مشاريع بعد",
+    "de": "Noch keine Projekte",
+    "fr": "Aucun projet pour l'instant",
+    "it": "Ancora nessun progetto"
+  },
+  "SalesHome.noProjectsBody": {
+    "en": "A project starts when a customer accepts an offer, or when you create one.",
+    "ar": "يبدأ المشروع عندما يقبل العميل عرضًا، أو عندما تنشئه أنت.",
+    "de": "Ein Projekt beginnt, wenn ein Kunde ein Angebot annimmt oder wenn Sie eines anlegen.",
+    "fr": "Un projet démarre quand un client accepte une offre, ou quand vous en créez un.",
+    "it": "Un progetto inizia quando un cliente accetta un'offerta o quando ne crei uno."
+  },
+  "SalesHome.noMyProjectsTitle": {
+    "en": "No projects yet",
+    "ar": "لا توجد مشاريع بعد",
+    "de": "Noch keine Projekte",
+    "fr": "Aucun projet pour l'instant",
+    "it": "Ancora nessun progetto"
+  },
+  "SalesHome.noMyProjectsBody": {
+    "en": "Your projects show here once you accept an offer.",
+    "ar": "تظهر مشاريعك هنا بعد قبولك عرضًا.",
+    "de": "Ihre Projekte erscheinen hier, sobald Sie ein Angebot annehmen.",
+    "fr": "Vos projets s'afficheront ici dès que vous accepterez une offre.",
+    "it": "I tuoi progetti appariranno qui dopo che avrai accettato un'offerta."
+  },
+  "SalesHome.columnProject": {
+    "en": "Project",
+    "ar": "المشروع",
+    "de": "Projekt",
+    "fr": "Projet",
+    "it": "Progetto"
+  },
+  "SalesHome.columnDue": {
+    "en": "Due",
+    "ar": "تاريخ الاستحقاق",
+    "de": "Fällig",
+    "fr": "Échéance",
+    "it": "Scadenza"
+  },
+  "SalesHome.offersAwaitingTitle": {
+    "en": "Offers waiting for your answer",
+    "ar": "عروض تنتظر ردك",
+    "de": "Angebote, die auf Ihre Antwort warten",
+    "fr": "Offres en attente de votre réponse",
+    "it": "Offerte in attesa della tua risposta"
+  },
+  "SalesHome.offersAwaitingBody": {
+    "en": "Open an offer to accept it, make a counter-offer or decline it.",
+    "ar": "افتح العرض لقبوله أو تقديم عرض مضاد أو رفضه.",
+    "de": "Öffnen Sie ein Angebot, um es anzunehmen, ein Gegenangebot zu machen oder es abzulehnen.",
+    "fr": "Ouvrez une offre pour l'accepter, faire une contre-offre ou la refuser.",
+    "it": "Apri un'offerta per accettarla, fare una controfferta o rifiutarla."
+  },
+  "SalesHome.viewAllOffers": {
+    "en": "View all offers",
+    "ar": "عرض كل العروض",
+    "de": "Alle Angebote anzeigen",
+    "fr": "Voir toutes les offres",
+    "it": "Vedi tutte le offerte"
+  },
+  "SalesHome.noOffersAwaitingTitle": {
+    "en": "No offers waiting for you",
+    "ar": "لا توجد عروض بانتظارك",
+    "de": "Keine Angebote warten auf Sie",
+    "fr": "Aucune offre ne vous attend",
+    "it": "Nessuna offerta in attesa"
+  },
+  "SalesHome.noOffersAwaitingBody": {
+    "en": "When your salesperson sends you an offer, it shows here.",
+    "ar": "عندما يرسل إليك مندوب المبيعات عرضًا، يظهر هنا.",
+    "de": "Wenn Ihr Verkäufer Ihnen ein Angebot sendet, erscheint es hier.",
+    "fr": "Quand votre commercial vous envoie une offre, elle s'affiche ici.",
+    "it": "Quando il tuo venditore ti invia un'offerta, appare qui."
+  },
+  "SalesHome.columnOffer": {
+    "en": "Offer",
+    "ar": "العرض",
+    "de": "Angebot",
+    "fr": "Offre",
+    "it": "Offerta"
+  },
+  "SalesHome.columnTotal": {
+    "en": "Total",
+    "ar": "الإجمالي",
+    "de": "Gesamt",
+    "fr": "Total",
+    "it": "Totale"
+  },
+  "SalesHome.columnSent": {
+    "en": "Sent",
+    "ar": "تاريخ الإرسال",
+    "de": "Gesendet",
+    "fr": "Envoyée le",
+    "it": "Inviata il"
+  },
+  "SalesHome.kpiMyProjects": {
+    "en": "My projects",
+    "ar": "مشاريعي",
+    "de": "Meine Projekte",
+    "fr": "Mes projets",
+    "it": "I miei progetti"
+  },
+  "SalesHome.kpiOffersAwaiting": {
+    "en": "Offers waiting for you",
+    "ar": "عروض بانتظارك",
+    "de": "Angebote für Sie",
+    "fr": "Offres en attente",
+    "it": "Offerte in attesa"
+  },
+  "SalesHome.kpiPoints": {
+    "en": "Loyalty points",
+    "ar": "نقاط الولاء",
+    "de": "Treuepunkte",
+    "fr": "Points de fidélité",
+    "it": "Punti fedeltà"
+  },
+  "SalesHome.loyaltyError": {
+    "en": "Your points couldn't be loaded.",
+    "ar": "تعذّر تحميل نقاطك.",
+    "de": "Ihre Punkte konnten nicht geladen werden.",
+    "fr": "Impossible de charger vos points.",
+    "it": "Impossibile caricare i tuoi punti."
+  },
+  "SalesHome.loyaltyPaused": {
+    "en": "The rewards programme is paused.",
+    "ar": "برنامج المكافآت متوقف مؤقتًا.",
+    "de": "Das Prämienprogramm ist pausiert.",
+    "fr": "Le programme de récompenses est en pause.",
+    "it": "Il programma premi è in pausa."
+  },
+  "SalesHome.loyaltyExpiring": {
+    "en": "{count, plural, one {# point expires} other {# points expire}} on {date}",
+    "ar": "{count, plural, zero {لا نقاط تنتهي} one {تنتهي نقطة واحدة} two {تنتهي نقطتان} few {تنتهي # نقاط} many {تنتهي # نقطةً} other {تنتهي # نقطة}} في {date}",
+    "de": "{count, plural, one {# Punkt verfällt} other {# Punkte verfallen}} am {date}",
+    "fr": "{count, plural, one {# point expire} other {# points expirent}} le {date}",
+    "it": "{count, plural, one {# punto scade} other {# punti scadono}} il {date}"
+  },
+  "SalesHome.openRewards": {
+    "en": "Open rewards",
+    "ar": "فتح المكافآت",
+    "de": "Prämien öffnen",
+    "fr": "Ouvrir les récompenses",
+    "it": "Apri i premi"
+  },
+  "dashboard.allDepartmentProjects": null,
+  "dashboard.commissionsReadyToPay": null,
+  "dashboard.customerStatus": null,
+  "dashboard.customerStatusBreakdownMsg": null,
+  "dashboard.dashboardDescription": null,
+  "dashboard.dealStage": null,
+  "dashboard.description": null,
+  "dashboard.fromPreviousMonth": null,
+  "dashboard.fromPreviousSemester": null,
+  "dashboard.fromPreviousWeek": null,
+  "dashboard.latestCustomers": null,
+  "dashboard.latestProjects": null,
+  "dashboard.latestSubscriptions": null,
+  "dashboard.needAttentions": null,
+  "dashboard.netProfit": null,
+  "dashboard.newCustomer": null,
+  "dashboard.newDeal": null,
+  "dashboard.newProject": null,
+  "dashboard.newSalesman": null,
+  "dashboard.noCustomerDataAvailable": null,
+  "dashboard.noDataAvailable": null,
+  "dashboard.noPerformingPlansToDisplay": null,
+  "dashboard.noPlansFound": null,
+  "dashboard.noSalesData": null,
+  "dashboard.noSalesRecordsAvailable": null,
+  "dashboard.overdueInvoices": null,
+  "dashboard.paymentRowsCount": null,
+  "dashboard.projectStage": null,
+  "dashboard.salesGrowth": null,
+  "dashboard.salesTrends": null,
+  "dashboard.subscriptionsExpirySoon": null,
+  "dashboard.topPerformingPlans": null,
+  "dashboard.totalAmount": null,
+  "dashboard.totalCommissions": null,
+  "dashboard.totalCustomers": null,
+  "dashboard.totalPlanSales": null,
+  "dashboard.totalProjects": null,
+  "dashboard.totalQualifiedCustomers": null,
+  "dashboard.totalRevenueSales": null,
+  "dashboard.totalSales": null,
+  "dashboard.totalSalesmans": null,
+  "dashboard.totalUnqualifiedCustomers": null,
+  "dashboard.welcome": null,
+  "dashboard.welcomeBack": null,
+  "activityFeed.title": null,
+  "activityFeed.description": null,
+  "activityFeed.noNotificationsYet": null,
+  "activityFeed.eventCount": null,
+  "archive.title": null,
+  "archive.description": null,
+  "archive.searchPlaceholder": null,
+  "archive.resourceTabsLabel": null,
+  "archive.durationTypeTabsLabel": null,
+  "archive.durationTypePlan": null,
+  "archive.durationTypeInstallment": null,
+  "archive.columnArchivedAt": null,
+  "archive.columnActions": null,
+  "archive.columnName": null,
+  "archive.columnCategory": null,
+  "archive.columnDepartment": null,
+  "archive.columnPlans": null,
+  "archive.columnFeatures": null,
+  "archive.columnMonths": null,
+  "archive.columnPercentage": null,
+  "archive.columnPrice": null,
+  "archive.columnPaymentType": null,
+  "archive.columnPackageName": null,
+  "archive.columnDescription": null,
+  "archive.columnPlan": null,
+  "archive.restoreAction": null,
+  "archive.restoreTitle": null,
+  "archive.restoreDescription": null,
+  "archive.resource": null,
+  "notifications.notifications": null,
+  "notifications.markAllAsRead": null,
+  "notifications.noNewNotifications": null,
+  "notifications.viewAllActivity": null
+}

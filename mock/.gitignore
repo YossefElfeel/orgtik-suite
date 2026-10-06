@@ -1,0 +1,4 @@
+node_modules/
+# Runtime data: seeds regenerate their files at boot, and uploads made while testing are throwaway.
+uploads/
+logs/

@@ -1,0 +1,592 @@
+{
+  "apps": {
+    "sos": {
+      "folder": "somion-sos-frontend-main",
+      "routes": 19,
+      "dynamic_routes": 4,
+      "unlinked_routes": [
+        "/icons-test",
+        "/systems/cms/:cmsId/accounts/:accountId/members"
+      ],
+      "without_loading_boundary": 0,
+      "without_error_boundary": 0,
+      "ui_components": 26,
+      "shared_components": 25,
+      "unused_components": [
+        "sonner",
+        "AdminBadge",
+        "AuthSlider",
+        "DeleteDialog",
+        "FormWrapper",
+        "ProgressBar",
+        "ResuableSheet",
+        "RoleBadge",
+        "UnifiedTokenValidation"
+      ]
+    },
+    "tasks": {
+      "folder": "task-manager-front-main",
+      "routes": 18,
+      "dynamic_routes": 8,
+      "unlinked_routes": [
+        "/teams/:teamId/feed",
+        "/teams/:teamId/priority",
+        "/teams/:teamId/team"
+      ],
+      "without_loading_boundary": 0,
+      "without_error_boundary": 0,
+      "ui_components": 33,
+      "shared_components": 41,
+      "unused_components": [
+        "collapsible",
+        "context-menu",
+        "progress",
+        "sonner",
+        "BubbleSeparator",
+        "EmptyKanbanBoard",
+        "PageHeader",
+        "RoleBadge"
+      ]
+    },
+    "files": {
+      "folder": "file-manager-dashboard-main",
+      "routes": 9,
+      "dynamic_routes": 3,
+      "unlinked_routes": [
+        "/share/:shareId"
+      ],
+      "without_loading_boundary": 3,
+      "without_error_boundary": 0,
+      "ui_components": 31,
+      "shared_components": 24,
+      "unused_components": [
+        "checkbox",
+        "command",
+        "radio-group",
+        "reusable-dialog",
+        "sonner",
+        "texture-button",
+        "CustomAvatar",
+        "FileContextMenu",
+        "ToolbarSearchAndFilter"
+      ]
+    },
+    "sales": {
+      "folder": "sales-dashboardv2-main",
+      "routes": 37,
+      "dynamic_routes": 12,
+      "unlinked_routes": [],
+      "without_loading_boundary": 0,
+      "without_error_boundary": 0,
+      "ui_components": 19,
+      "shared_components": 22,
+      "unused_components": []
+    },
+    "hr": {
+      "folder": "somion-hr-dashboard-main",
+      "routes": 31,
+      "dynamic_routes": 9,
+      "unlinked_routes": [
+        "/subscriptions"
+      ],
+      "without_loading_boundary": 0,
+      "without_error_boundary": 31,
+      "ui_components": 30,
+      "shared_components": 22,
+      "unused_components": [
+        "benefits-list-card",
+        "collapsible"
+      ]
+    },
+    "marketing": {
+      "folder": "digital-marketing-frontend-main",
+      "routes": 34,
+      "dynamic_routes": 12,
+      "unlinked_routes": [
+        "/integrations/platform/:platformid/callback"
+      ],
+      "without_loading_boundary": 34,
+      "without_error_boundary": 0,
+      "ui_components": 28,
+      "shared_components": 18,
+      "unused_components": []
+    },
+    "content": {
+      "folder": "content-dashboard-somion-main",
+      "routes": 23,
+      "dynamic_routes": 7,
+      "unlinked_routes": [],
+      "without_loading_boundary": 23,
+      "without_error_boundary": 0,
+      "ui_components": 27,
+      "shared_components": 16,
+      "unused_components": [
+        "scroll-area",
+        "GalleryInput",
+        "RoleGuard",
+        "ToolbarSearchAndFilter"
+      ]
+    },
+    "chats": {
+      "folder": "somion-hq",
+      "routes": 20,
+      "dynamic_routes": 5,
+      "unlinked_routes": [],
+      "without_loading_boundary": 20,
+      "without_error_boundary": 20,
+      "ui_components": 6,
+      "shared_components": 0,
+      "unused_components": []
+    }
+  },
+  "ui_by_name": {
+    "button": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 569
+    },
+    "form": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 428
+    },
+    "badge": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 113
+    },
+    "input": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 99
+    },
+    "dialog": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 97
+    },
+    "avatar": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 59
+    },
+    "popover": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 54
+    },
+    "checkbox": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 38
+    },
+    "label": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 35
+    },
+    "switch": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 27
+    },
+    "textarea": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 27
+    },
+    "sheet": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 17
+    },
+    "card": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 59
+    },
+    "skeleton": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 43
+    },
+    "dropdown-menu": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 40
+    },
+    "select": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 29
+    },
+    "tooltip": {
+      "apps": [
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 13
+    },
+    "pagination": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 10
+    },
+    "calendar": {
+      "apps": [
+        "sos",
+        "tasks",
+        "sales",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 9
+    },
+    "sonner": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "sales",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 3
+    },
+    "chart": {
+      "apps": [
+        "tasks",
+        "files",
+        "sales",
+        "hr",
+        "marketing"
+      ],
+      "import_sites": 12
+    },
+    "radio-group": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "hr",
+        "marketing"
+      ],
+      "import_sites": 8
+    },
+    "collapsible": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "hr",
+        "content"
+      ],
+      "import_sites": 3
+    },
+    "tabs": {
+      "apps": [
+        "files",
+        "hr",
+        "marketing",
+        "content"
+      ],
+      "import_sites": 33
+    },
+    "reusable-dialog": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files",
+        "marketing"
+      ],
+      "import_sites": 22
+    },
+    "scroll-area": {
+      "apps": [
+        "tasks",
+        "sales",
+        "hr",
+        "content"
+      ],
+      "import_sites": 6
+    },
+    "accordion": {
+      "apps": [
+        "tasks",
+        "sales",
+        "marketing"
+      ],
+      "import_sites": 9
+    },
+    "command": {
+      "apps": [
+        "sos",
+        "files",
+        "marketing"
+      ],
+      "import_sites": 4
+    },
+    "context-menu": {
+      "apps": [
+        "sos",
+        "tasks",
+        "files"
+      ],
+      "import_sites": 2
+    },
+    "progress": {
+      "apps": [
+        "tasks",
+        "files"
+      ],
+      "import_sites": 3
+    },
+    "separator": {
+      "apps": [
+        "tasks",
+        "content"
+      ],
+      "import_sites": 3
+    },
+    "alert": {
+      "apps": [
+        "sos",
+        "tasks"
+      ],
+      "import_sites": 2
+    },
+    "Primitives": {
+      "apps": [
+        "chats"
+      ],
+      "import_sites": 48
+    },
+    "Avatar": {
+      "apps": [
+        "chats"
+      ],
+      "import_sites": 33
+    },
+    "info-card": {
+      "apps": [
+        "hr"
+      ],
+      "import_sites": 17
+    },
+    "Overlays": {
+      "apps": [
+        "chats"
+      ],
+      "import_sites": 6
+    },
+    "text-editor": {
+      "apps": [
+        "hr"
+      ],
+      "import_sites": 5
+    },
+    "breadcrumb": {
+      "apps": [
+        "files"
+      ],
+      "import_sites": 2
+    },
+    "wizard-step": {
+      "apps": [
+        "hr"
+      ],
+      "import_sites": 2
+    },
+    "toggle": {
+      "apps": [
+        "content"
+      ],
+      "import_sites": 2
+    },
+    "resizable": {
+      "apps": [
+        "tasks"
+      ],
+      "import_sites": 1
+    },
+    "status-info": {
+      "apps": [
+        "tasks"
+      ],
+      "import_sites": 1
+    },
+    "input-group": {
+      "apps": [
+        "files"
+      ],
+      "import_sites": 1
+    },
+    "calendar-rac": {
+      "apps": [
+        "hr"
+      ],
+      "import_sites": 1
+    },
+    "carousel": {
+      "apps": [
+        "marketing"
+      ],
+      "import_sites": 1
+    },
+    "alert-dialog": {
+      "apps": [
+        "content"
+      ],
+      "import_sites": 1
+    },
+    "Calendar": {
+      "apps": [
+        "chats"
+      ],
+      "import_sites": 1
+    },
+    "DateRangePicker": {
+      "apps": [
+        "chats"
+      ],
+      "import_sites": 1
+    },
+    "Stat": {
+      "apps": [
+        "chats"
+      ],
+      "import_sites": 1
+    },
+    "texture-button": {
+      "apps": [
+        "files"
+      ],
+      "import_sites": 0
+    },
+    "benefits-list-card": {
+      "apps": [
+        "hr"
+      ],
+      "import_sites": 0
+    }
+  }
+}

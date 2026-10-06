@@ -1,0 +1,71 @@
+[
+  {
+    "title": "An article's shared fields and image description go through review to the website",
+    "ok": true,
+    "passed": 4,
+    "steps": 4,
+    "detail": [
+      {
+        "name": "edit-shared",
+        "ok": true,
+        "note": "minutes 8, alt.en set: true"
+      },
+      {
+        "name": "arabic-shared-locked-alt-open",
+        "ok": true,
+        "note": "minutes locked true; alt editable true; alt.ar saved true ({\"en\":\"A tablet showing a connected dashboard on a desk.\",\"ar\":\"جهاز لوحي يعرض لوحة معلومات متصلة على مكتب.\"}, state draft, v5)"
+      },
+      {
+        "name": "submit",
+        "ok": true,
+        "note": ""
+      },
+      {
+        "name": "approve-publish",
+        "ok": true,
+        "note": "public: 8 min, alt en/ar set"
+      }
+    ]
+  },
+  {
+    "title": "Services: families and services, filtered by family, at the website's addresses",
+    "ok": true,
+    "passed": 3,
+    "steps": 3,
+    "detail": [
+      {
+        "name": "families",
+        "ok": true,
+        "note": "5 families; Development shows 2 services: true"
+      },
+      {
+        "name": "services-by-family",
+        "ok": true,
+        "note": "2 services; address /services/development/web-development shown: true"
+      },
+      {
+        "name": "service-read-only",
+        "ok": true,
+        "note": "viewer: Name read-only true, 0 write buttons"
+      }
+    ]
+  },
+  {
+    "title": "A software product shows its catalog price and is read-only here",
+    "ok": true,
+    "passed": 2,
+    "steps": 2,
+    "detail": [
+      {
+        "name": "price-note",
+        "ok": true,
+        "note": "CHF 49.00 a month on the web ite, from it  purcha ing catalog ( hown in Pricing)."
+      },
+      {
+        "name": "read-only-mirror",
+        "ok": true,
+        "note": "catalog note 1; save buttons 0"
+      }
+    ]
+  }
+]

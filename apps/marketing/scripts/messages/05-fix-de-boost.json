@@ -1,0 +1,4 @@
+{
+ "Shell.boosts": {"en": "Boosts", "ar": "الترويج المدفوع", "de": "Beworbene Beiträge", "fr": "Promotions", "it": "Promozioni"},
+ "Feedback.boostStarted": {"en": "Boost started", "ar": "بدأ الترويج", "de": "Beitrag wird beworben", "fr": "Promotion lancée", "it": "Promozione avviata"}
+}

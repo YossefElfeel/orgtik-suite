@@ -1,0 +1,16 @@
+{
+  "name": "orgtik-audit-kit",
+  "private": true,
+  "type": "module",
+  "description": "Browser audits for the OrgTik suite: route sweeps, dead-end detection, accessibility checks, against local-dev.",
+  "scripts": {
+    "sweep": "node sweep.mjs",
+    "deadends": "node deadends.mjs",
+    "report": "node report.mjs",
+    "baseline": "node baseline.mjs"
+  },
+  "dependencies": {
+    "axe-core": "4.11.0",
+    "playwright": "1.63.0"
+  }
+}

@@ -1,0 +1,732 @@
+{
+  "app": "sos",
+  "as": "mona.adel@orgtik.test",
+  "combo": "en-light-1440",
+  "frozen": false,
+  "at": "2026-09-30T05:13:51.102Z",
+  "signIn": {
+    "ok": true,
+    "landed": "http://localhost:3013/",
+    "ms": 2913
+  },
+  "results": [
+    {
+      "app": "sos",
+      "route": "/chat",
+      "session": "signed-in",
+      "url": "/chat",
+      "status": 200,
+      "final": "/chat",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3489,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 1,
+      "axe_serious": 5,
+      "axe_rules": "aria-allowed-attr color-contrast",
+      "h1": 3,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "sos/shots/chat__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 5,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "sos",
+      "route": "/content",
+      "session": "signed-in",
+      "url": "/content",
+      "status": 200,
+      "final": "/content",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2917,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 1,
+      "axe_serious": 5,
+      "axe_rules": "aria-allowed-attr color-contrast",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "sos/shots/content__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 5,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "sos",
+      "route": "/icons-test",
+      "session": "signed-in",
+      "url": "/icons-test",
+      "status": 200,
+      "final": "/icons-test",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3340,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 2,
+      "axe_serious": 5,
+      "axe_rules": "aria-allowed-attr button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 9,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "sos/shots/icons-test__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 5,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "sos",
+      "route": "/",
+      "session": "signed-in",
+      "url": "",
+      "status": 200,
+      "final": "/",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2238,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 1,
+      "axe_serious": 4,
+      "axe_rules": "aria-allowed-attr color-contrast",
+      "h1": 1,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "sos/shots/root__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 4,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "sos",
+      "route": "/people",
+      "session": "signed-in",
+      "url": "/people",
+      "status": 200,
+      "final": "/people",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4107,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 22,
+      "axe_serious": 6,
+      "axe_rules": "aria-allowed-attr button-name color-contrast select-name",
+      "h1": 1,
+      "unnamed_controls": 28,
+      "img_no_alt": 0,
+      "small_targets": 11,
+      "screenshot": "sos/shots/people__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 20,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        },
+        {
+          "id": "select-name",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Select element must have an accessible name"
+        }
+      ]
+    },
+    {
+      "app": "sos",
+      "route": "/profile",
+      "session": "signed-in",
+      "url": "/profile",
+      "status": 200,
+      "final": "/profile",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3037,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 1,
+      "axe_serious": 6,
+      "axe_rules": "aria-allowed-attr color-contrast",
+      "h1": 1,
+      "unnamed_controls": 9,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "sos/shots/profile__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 6,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "sos",
+      "route": "/systems/cms",
+      "session": "signed-in",
+      "url": "/systems/cms",
+      "status": 200,
+      "final": "/systems/cms",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 3007,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 5,
+      "axe_serious": 5,
+      "axe_rules": "aria-allowed-attr button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 12,
+      "img_no_alt": 0,
+      "small_targets": 6,
+      "screenshot": "sos/shots/systems_cms__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 4,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 5,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "sos",
+      "route": "/systems/internal",
+      "session": "signed-in",
+      "url": "/systems/internal",
+      "status": 200,
+      "final": "/systems/internal",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2967,
+      "console_errors": 3,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 9,
+      "axe_serious": 5,
+      "axe_rules": "aria-allowed-attr button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 16,
+      "img_no_alt": 0,
+      "small_targets": 18,
+      "screenshot": "sos/shots/systems_internal__en-light-1440.png",
+      "console": [
+        "Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props. type",
+        "Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props. type",
+        "Invalid prop `%s` supplied to `React.Fragment`. React.Fragment can only have `key` and `children` props. type"
+      ],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 8,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 5,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "sos",
+      "route": "/systems",
+      "session": "signed-in",
+      "url": "/systems",
+      "status": 200,
+      "final": "/systems",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2592,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 1,
+      "axe_serious": 4,
+      "axe_rules": "aria-allowed-attr color-contrast",
+      "h1": 2,
+      "unnamed_controls": 8,
+      "img_no_alt": 0,
+      "small_targets": 0,
+      "screenshot": "sos/shots/systems__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 4,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "sos",
+      "route": "/chat/:id",
+      "session": "signed-in",
+      "url": "/chat/3",
+      "status": 200,
+      "final": "/chat/3",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 4012,
+      "console_errors": 0,
+      "page_errors": 1,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 10,
+      "axe_serious": 10,
+      "axe_rules": "aria-allowed-attr button-name color-contrast",
+      "h1": 1,
+      "unnamed_controls": 17,
+      "img_no_alt": 0,
+      "small_targets": 2,
+      "screenshot": "sos/shots/chat_id__en-light-1440.png",
+      "console": [],
+      "pageErrors": [
+        "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random"
+      ],
+      "api": [],
+      "axe": [
+        {
+          "id": "aria-allowed-attr",
+          "impact": "critical",
+          "nodes": 1,
+          "help": "Elements must only use supported ARIA attributes"
+        },
+        {
+          "id": "button-name",
+          "impact": "critical",
+          "nodes": 9,
+          "help": "Buttons must have discernible text"
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": 10,
+          "help": "Elements must meet minimum color contrast ratio thresholds"
+        }
+      ]
+    },
+    {
+      "app": "sos",
+      "route": "/people/:userId/scopes",
+      "session": "signed-in",
+      "url": "",
+      "status": "",
+      "final": "",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "no sample link found",
+      "load_ms": "",
+      "console_errors": "",
+      "page_errors": "",
+      "api_errors": "",
+      "api_error_sample": "",
+      "axe_critical": "",
+      "axe_serious": "",
+      "axe_rules": "",
+      "h1": "",
+      "unnamed_controls": "",
+      "img_no_alt": "",
+      "small_targets": "",
+      "screenshot": ""
+    },
+    {
+      "app": "sos",
+      "route": "/systems/cms/:cmsId/accounts/:accountId/members",
+      "session": "signed-in",
+      "url": "",
+      "status": "",
+      "final": "",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "no sample link found",
+      "load_ms": "",
+      "console_errors": "",
+      "page_errors": "",
+      "api_errors": "",
+      "api_error_sample": "",
+      "axe_critical": "",
+      "axe_serious": "",
+      "axe_rules": "",
+      "h1": "",
+      "unnamed_controls": "",
+      "img_no_alt": "",
+      "small_targets": "",
+      "screenshot": ""
+    },
+    {
+      "app": "sos",
+      "route": "/systems/cms/:cmsId/accounts",
+      "session": "signed-in",
+      "url": "",
+      "status": "",
+      "final": "",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "no sample link found",
+      "load_ms": "",
+      "console_errors": "",
+      "page_errors": "",
+      "api_errors": "",
+      "api_error_sample": "",
+      "axe_critical": "",
+      "axe_serious": "",
+      "axe_rules": "",
+      "h1": "",
+      "unnamed_controls": "",
+      "img_no_alt": "",
+      "small_targets": "",
+      "screenshot": ""
+    },
+    {
+      "app": "sos",
+      "route": "/auth/forgot-password",
+      "session": "signed-out",
+      "url": "/auth/forgot-password",
+      "status": 200,
+      "final": "/auth/forgot-password",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2483,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_rules": "",
+      "h1": 1,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "sos/shots/auth_forgot-password__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": []
+    },
+    {
+      "app": "sos",
+      "route": "/auth/invite",
+      "session": "signed-out",
+      "url": "/auth/invite",
+      "status": 200,
+      "final": "/auth/invite",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2446,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_rules": "",
+      "h1": 1,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 1,
+      "screenshot": "sos/shots/auth_invite__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": []
+    },
+    {
+      "app": "sos",
+      "route": "/auth/login",
+      "session": "signed-out",
+      "url": "/auth/login",
+      "status": 200,
+      "final": "/auth/login",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2534,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_rules": "",
+      "h1": 1,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 2,
+      "screenshot": "sos/shots/auth_login__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": []
+    },
+    {
+      "app": "sos",
+      "route": "/auth",
+      "session": "signed-out",
+      "url": "/auth",
+      "status": 200,
+      "final": "/auth/login",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2742,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_rules": "",
+      "h1": 1,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 2,
+      "screenshot": "sos/shots/auth__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": []
+    },
+    {
+      "app": "sos",
+      "route": "/auth/redirecting",
+      "session": "signed-out",
+      "url": "/auth/redirecting",
+      "status": 200,
+      "final": "/auth/login",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2851,
+      "console_errors": 1,
+      "page_errors": 0,
+      "api_errors": 1,
+      "api_error_sample": "401 GET :4000/api/scopes?page=1&limit=100",
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_rules": "",
+      "h1": 1,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 2,
+      "screenshot": "sos/shots/auth_redirecting__en-light-1440.png",
+      "console": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "pageErrors": [],
+      "api": [
+        {
+          "status": 401,
+          "method": "GET",
+          "url": ":4000/api/scopes?page=1&limit=100"
+        }
+      ],
+      "axe": []
+    },
+    {
+      "app": "sos",
+      "route": "/auth/reset-password",
+      "session": "signed-out",
+      "url": "/auth/reset-password",
+      "status": 200,
+      "final": "/auth/reset-password",
+      "auth_redirect": "",
+      "token_in_url": "",
+      "error": "",
+      "load_ms": 2428,
+      "console_errors": 0,
+      "page_errors": 0,
+      "api_errors": 0,
+      "api_error_sample": "",
+      "axe_critical": 0,
+      "axe_serious": 0,
+      "axe_rules": "",
+      "h1": 1,
+      "unnamed_controls": 0,
+      "img_no_alt": 0,
+      "small_targets": 3,
+      "screenshot": "sos/shots/auth_reset-password__en-light-1440.png",
+      "console": [],
+      "pageErrors": [],
+      "api": [],
+      "axe": []
+    }
+  ]
+}

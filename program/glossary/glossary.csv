@@ -1,0 +1,83 @@
+﻿key,group,definition,en,ar,de,fr,it,forbidden_synonyms,usage_rule,spec_refs,status,review_notes
+plan,commercial,"A priced offer for one tool (for example Tasks Pro), billed per cycle.",Plan,خطة,Tarif,Formule,Piano,"package, bundle (en); باقة (ar); Paket (de); Forfait (fr); Pacchetto (it)",The Arabic «باقة» is never used for a plan.,03 · Terms,approved (D-025),"de Tarif and fr Formule decided at G0 (D-025). Catalogs today: de Plan/Pläne, fr Plans/Forfaits."
+tier,commercial,"A level within a tool's plans (Free, Pro, Business).",Tier,مستوى الخطة,Stufe,Niveau,Livello,level (en),Use it only when the level itself is discussed; the level's name (Pro) is usually enough.,,proposed,
+custom_plan,commercial,"A plan negotiated for one workspace, with its own price or limits.",Custom plan,خطة مخصصة,Individueller Tarif,Formule sur mesure,Piano personalizzato,"private plan, enterprise plan (en); باقة خاصة (ar)",,03 · Terms,proposed,The spec calls it «باقة» 7 times.
+bundle,commercial,Several tools sold together at one price.,Bundle,حزمة أدوات,Bundle,Offre groupée,Bundle,"package (en); باقة (ar); Bündel, Paket (de); Forfait (fr); Pacchetto (it)",,,proposed,"ar: catalogs use الحزم for both bundles and packages. de: Bündel (current) reads oddly; Bundle is the usual SaaS term. Native review: de, it."
+service_package,commercial,A fixed-scope service engagement OrgTik sells (the website's engagement packages).,Service package,باقة خدمات,Servicepaket,Forfait de services,Pacchetto di servizi,"plan, bundle (en)",The only use of «باقة» in Arabic.,,proposed,"fr: Forfait fits a fixed-price engagement, which is why plans become Formule."
+subscription,commercial,"A workspace's paid access to one or more tools, renewed every billing cycle.",Subscription,اشتراك,Abonnement,Abonnement,Abbonamento,"membership, license (en)",,US-C-11 · 06,proposed,
+subscription_line,commercial,"One tool's entry in a subscription, with its own plan, state and price snapshot.",Subscription line,بند اشتراك,Abonnementposition,Ligne d'abonnement,Voce di abbonamento,subscription item (en); سطر اشتراك (ar),,03 · Terms · 06,proposed,"The spec's Arabic definitions say «سطر اشتراك»; «بند» is the MSA term for a line item. Native review: de, it."
+seat,commercial,One paid user slot in a plan.,Seat,مقعد,Nutzerlizenz,Siège,Licenza utente,"license, user (en)",,,proposed,"No app names seats yet. Native review: de, it."
+workspace,commercial,"A customer organization's account in the suite: its members, tools, data and billing.",Workspace,مساحة عمل,Arbeitsbereich,Espace de travail,Spazio di lavoro,"account, organization, tenant, company (en)",The customer-facing name for the tenant. Company stays the HR/CRM record of a business.,USR-00,proposed,Only Chats names it today.
+tool,commercial,"One product of the suite a workspace can subscribe to (Tasks, Files, HR, Sales, Marketing, Chats).",Tool,أداة,Tool,Outil,Strumento,"app, module, system, dashboard (en); تطبيق، نظام (ar)",In product copy. The website's marketing copy ('software modules') stays as it is.,USR-00,proposed,"The apps say app, system and dashboard for the same thing; SOS calls tools 'systems'."
+trial,commercial,"Free, time-limited use of a paid plan.",Trial,فترة تجربة,Testphase,Essai,Prova,demo (en); تجريبي (ar),The badge reads 'Trial · 5 days'.,USR-00 · 06,proposed,"«تجريبي» is kept for Beta, so the trial uses «تجربة»."
+beta,commercial,A tool released before general availability.,Beta,إصدار تجريبي,Beta,Bêta,Beta,preview (en); تجربة (ar),,USR-00,proposed,
+test_mode,commercial,Payments and emails are simulated; nothing is charged.,Test mode,وضع الاختبار,Testmodus,Mode test,Modalità test,"sandbox, demo (en); تجريبي (ar)",,,proposed,The spec uses «تجريبي» for both Beta and Test mode.
+invoice,commercial,A bill for a subscription or a service.,Invoice,فاتورة,Rechnung,Facture,Fattura,bill (en),,06,proposed,
+credit_note,commercial,A document that cancels all or part of an invoice.,Credit note,إشعار دائن,Gutschrift,Avoir,Nota di credito,refund invoice (en),,06,proposed,
+coupon,commercial,A code that applies a discount at checkout.,Coupon,كوبون خصم,Gutscheincode,Code promo,Codice sconto,"voucher, promo code (en)",,ADM,proposed,"de: catalogs say Gutschein (a voucher, not a code). Native review: de."
+discount,commercial,A reduction of a price.,Discount,خصم,Rabatt,Remise,Sconto,,,,proposed,
+zone,commercial,A group of countries with a base currency and a price per plan and cycle.,Zone,منطقة,Zone,Zone,Zona,"region, area (en); نطاق (ar)",,03 · Terms,proposed,ar: Sales mixes مناطق and النطاقات.
+currency,commercial,"ISO code, symbol, decimals (0/2/3) and a rounding rule.",Currency,العملة,Währung,Devise,Valuta,,,03 · Terms,proposed,
+price,commercial,What one unit of a plan costs per cycle.,Price,السعر,Preis,Prix,Prezzo,"rate, cost (en)",,03 · Terms,proposed,
+resolved_price,commercial,"The unit price for one country, plan and cycle after all pricing rules.",Resolved price,السعر النهائي,Endpreis,Prix final,Prezzo finale,,,03 · Terms,proposed,
+price_override,commercial,"A fixed price for a country, plan and cycle, in the country's currency.",Price override,سعر خاص,Preisüberschreibung,Prix spécifique,Prezzo specifico,,,03 · Terms,proposed,"Native review: de, fr, it."
+exchange_rate,commercial,"An admin-set rate from the zone currency to the country currency, with an effective date (not a live market rate).",Exchange rate,سعر الصرف,Wechselkurs,Taux de change,Tasso di cambio,,,03 · Terms,proposed,
+rounding_rule,commercial,"A step (0.01, 0.05, 1, 5 …) and a mode (nearest or up), applied only to converted prices.",Rounding rule,قاعدة التقريب,Rundungsregel,Règle d'arrondi,Regola di arrotondamento,,,03 · Terms,proposed,
+price_snapshot,commercial,"The price, currency, source and version saved on a subscription line at purchase or renewal.",Price snapshot,السعر المحفوظ,Preis-Snapshot,Prix figé,Prezzo registrato,,,03 · Terms,proposed,"Native review: de, fr, it."
+billing,commercial,"Everything about paying for a subscription: plans, invoices, payment methods.",Billing,الفوترة,Abrechnung,Facturation,Fatturazione,"payments (en, as a section name)",,,proposed,
+billing_cycle,commercial,"How often a subscription renews and is charged (monthly, yearly).",Billing cycle,دورة الفوترة,Abrechnungszeitraum,Cycle de facturation,Ciclo di fatturazione,"period, interval (en)",,03,proposed,
+payment,commercial,Money paid by a customer.,Payment,دفعة,Zahlung,Paiement,Pagamento,,As a section name: Payments.,06,proposed,
+refund,commercial,Money returned to a customer.,Refund,استرداد,Rückerstattung,Remboursement,Rimborso,,A noun on labels and columns. The button is the verb (Refund / استرداد المبلغ / Erstatten / Rembourser / Rimborsa).,06,proposed,"The catalogs put the verb where the noun belongs (Erstatten, Rembourser, Rimborsa)."
+quote,commercial,A priced offer sent to a customer before they buy.,Quote,عرض سعر,Angebot,Devis,Preventivo,quotation (en); اقتباس (ar); Zitat (de); Citation (fr); Citazione (it),,06,proposed,"Bug: Sales translates Quote as a text quotation in all four languages (Zitat, Citation, Citazione, اقتباس)."
+user,people,Anyone who can sign in to the suite.,User,مستخدم,Benutzer,Utilisateur,Utente,account (en),"Prefer the specific word (member, employee, customer) when there is one.",,approved for de (D-025),de: generic form kept (D-025).
+member,people,A user who belongs to a workspace or a team.,Member,عضو,Mitglied,Membre,Membro,"user (en, when membership is meant)",,USR,proposed,
+employee,people,A person on the payroll of the company using HR.,Employee,موظف,Mitarbeiter,Employé,Dipendente,"staff, worker (en)",HR only.,,approved for de (D-025),de: generic form kept (D-025).
+owner,people,The one member who holds a workspace's billing rights; also the creator of a file or folder.,Owner,المالك,Inhaber,Propriétaire,Proprietario,creator (en),,USR · 01,proposed,de: Files says Besitzer; Inhaber is the usual account term.
+admin,people,A member who manages a workspace's settings and people.,Admin,مسؤول,Administrator,Administrateur,Amministratore,manager (en); مدير (ar),«مدير» means manager and stays for the HR/Tasks manager role.,USR · 01,proposed,"ar: Sales says مدير for admin, which collides with the manager role."
+manager,people,"The person an employee reports to (HR, Tasks).",Manager,مدير,Führungskraft,Responsable,Responsabile,admin (en); مسؤول (ar),,,proposed,Native review: de.
+staff,people,An OrgTik employee using the admin back office (ADM).,OrgTik staff,فريق OrgTik,OrgTik-Team,Équipe OrgTik,Staff OrgTik,"support, admin (en)",,ADM · 01,proposed,
+role,people,A named set of permissions.,Role,الدور,Rolle,Rôle,Ruolo,,,01,proposed,
+permission,people,The right to see or do one thing.,Permission,صلاحية,Berechtigung,Autorisation,Autorizzazione,"access, right (en); Permessi (it)",,01,proposed,it: HR uses Permessi for both permissions and leave.
+team,people,A group of members who work together.,Team,فريق,Team,Équipe,Team,"squad, group (en); squadra (it)",,,proposed,it: Tasks says squadra (sports). Native review: it.
+department,people,A unit of a company's organization chart.,Department,القسم,Abteilung,Département,Reparto,"division, unit (en)",,,proposed,it: Dipartimento (18) and Reparto (8); Reparto is the usual business word. Native review: it.
+customer,people,A business that buys from the workspace (Sales) or from OrgTik (ADM).,Customer,العميل,Kunde,Client,Cliente,"client (en, in the dashboards)",The website's marketing copy keeps 'clients'.,,proposed,"en: Sales says Customer, Content and Chats say Client."
+lead,people,A potential customer who hasn't bought yet.,Lead,عميل محتمل,Lead,Prospect,Lead,prospect (en),,,proposed,
+contact,people,A person at a customer or a lead.,Contact,جهة اتصال,Kontakt,Contact,Contatto,,,,proposed,
+company,people,A business record in HR or the CRM.,Company,الشركة,Unternehmen,Entreprise,Azienda,"organization, firm (en)",Not the customer-facing name for the tenant (that's workspace).,,proposed,de: Unternehmen and Firma both used.
+dashboard,work,A tool's overview page of figures and shortcuts.,Dashboard,لوحة التحكم,Dashboard,Tableau de bord,Dashboard,"overview, home (en); لوحة القيادة (ar)",Not a name for a tool.,,proposed,ar: Sales says لوحة القيادة; لوحة التحكم is the common MSA term.
+project,work,"A body of work with tasks, members and dates.",Project,مشروع,Projekt,Projet,Progetto,,,,proposed,
+task,work,One piece of work someone can finish.,Task,مهمة,Aufgabe,Tâche,Attività,"to-do, ticket (en)",,,proposed,
+board,work,Tasks shown as cards in columns.,Board,لوحة مهام,Board,Tableau,Bacheca,kanban (en),,,proposed,
+folder,work,A container of files and folders.,Folder,مجلد,Ordner,Dossier,Cartella,directory (en),,,proposed,
+file,work,"A stored document, image or video.",File,ملف,Datei,Fichier,File,"document (en, for any file)",,,proposed,
+share_link,work,A link that gives people outside the workspace access to a file or folder.,Share link,رابط مشاركة,Freigabelink,Lien de partage,Link di condivisione,"public link, external link (en)",,,proposed,
+ticket,work,A customer's support request.,Support ticket,تذكرة دعم,Support-Ticket,Ticket d'assistance,Ticket di assistenza,"issue, case (en); Billet (fr)",HR's tickets are internal requests: see the status matrix before reusing the word.,06,proposed,fr: Sales says Billets (event tickets).
+deal,work,A sales opportunity with a value and a stage.,Deal,صفقة,Deal,Affaire,Trattativa,opportunity (en); Angebot (de); Offre (fr),,,proposed,"de: Angebote collides with quote. Native review: de, fr, it."
+campaign,work,A coordinated set of marketing posts and ads.,Campaign,حملة,Kampagne,Campagne,Campagna,,,,proposed,
+post,work,One social-media publication.,Post,منشور,Beitrag,Publication,Post,"article (en, for social posts)",Website articles are 'Article'.,,proposed,
+article,work,A website Insights article.,Article,مقال,Artikel,Article,Articolo,"blog, post (en)",,,proposed,
+leave,work,Time off an employee requests.,Leave,إجازة,Abwesenheit,Congé,Assenza,"time off, vacation (en); Permessi (it)",,,proposed,"it: HR mixes Permessi, Congedi and Ferie. Native review: it."
+payroll,work,Calculating and paying employees' salaries.,Payroll,الرواتب,Lohnabrechnung,Paie,Paghe,"salary (en, for the process)",,,proposed,Bug: the fr and it catalogs contain the German word 'Lohn'.
+payslip,work,One employee's salary statement for a period.,Payslip,قسيمة الراتب,Lohnzettel,Fiche de paie,Busta paga,,,,proposed,Native review: de.
+attendance,work,"Recorded working time: check-ins, check-outs, absences.",Attendance,الحضور,Anwesenheit,Présence,Presenze,,,,proposed,
+report,work,A generated view of figures for a period.,Report,تقرير,Bericht,Rapport,Report,,,,proposed,
+notification,work,A message the suite shows about something that happened.,Notification,إشعار,Benachrichtigung,Notification,Notifica,alert (en),,,proposed,
+settings,work,Where a tool or workspace is configured.,Settings,الإعدادات,Einstellungen,Paramètres,Impostazioni,"preferences, configuration (en)",,,proposed,
+delete,action,"Destroy permanently, after confirmation.",Delete,حذف,Löschen,Supprimer,Elimina,"remove (en, when data is destroyed)",Only for something that can't be restored.,,proposed,
+remove,action,Take something out of a list or group without destroying it.,Remove,إزالة,Entfernen,Retirer,Rimuovi,"delete (en, when nothing is destroyed)",Remove a member from a team; the member still exists.,,proposed,fr: one catalog says Supprimer for Remove.
+archive,action,Move out of active lists; can be restored.,Archive,أرشفة,Archivieren,Archiver,Archivia,hide (en),The noun (the Archive section) is الأرشيف / Archiv / Archive / Archivio.,,proposed,
+restore,action,Bring an archived or ended item back.,Restore,استعادة,Wiederherstellen,Restaurer,Ripristina,"recover, undelete (en)",,,proposed,
+cancel,action,Close without saving or doing anything.,Cancel,إلغاء,Abbrechen,Annuler,Annulla,"close, dismiss (en, on dialogs with changes)",Cancelling a subscription is a different action; see the status matrix.,,proposed,
+save,action,Store the changes on the screen.,Save,حفظ,Speichern,Enregistrer,Salva,"submit, apply, update (en)",One word everywhere; 'Save changes' is dropped (D-025).,,approved (D-025),en: 'Save' and 'Save changes' are both used in 6 apps.
+submit,action,Send something for someone else to review or approve.,Submit,تقديم,Einreichen,Soumettre,Invia,send (en),,,proposed,ar: إرسال means send.
+share,action,Give other people access.,Share,مشاركة,Teilen,Partager,Condividi,,,,proposed,
+invite,action,Ask someone to join a workspace or team by email.,Invite,دعوة,Einladen,Inviter,Invita,"add (en, when an email is sent)",,,proposed,
+upgrade,action,Move to a higher plan.,Upgrade,ترقية,Upgrade,Passer à une formule supérieure,Passa a un piano superiore,,,USR-00,proposed,"Native review: de, fr, it (length on buttons)."
+edit,action,Open something for changes.,Edit,تعديل,Bearbeiten,Modifier,Modifica,"modify, update (en)",,,proposed,
+create,action,Make a new object that gets its own page.,Create,إنشاء,Erstellen,Créer,Crea,"new, add new (en)","'Create project'. For an item added to a list, use Add.",,proposed,"en: New, Create and Add New are all used."
+add,action,Put an item into a list or group.,Add,إضافة,Hinzufügen,Ajouter,Aggiungi,create (en),"'Add member', 'Add tool'.",,proposed,
+export,action,"Download data as a file (CSV, PDF).",Export,تصدير,Exportieren,Exporter,Esporta,"download (en, for data)",,,proposed,
+search,action,Find by typing.,Search,بحث,Suchen,Rechercher,Cerca,"find, lookup (en)",,,proposed,
+filter,action,Narrow a list by conditions.,Filter,تصفية,Filtern,Filtrer,Filtra,,The noun (the Filters button) is فلاتر / Filter / Filtres / Filtri.,,proposed,
+case_study,website,A published piece of OrgTik's client work on the website: a shared brief plus the department's own presentation (D-032).,Case study,دراسة حالة,Fallstudie,Étude de cas,Caso di studio,"project, portfolio item (en, in the Website Manager)","In the Website Manager a Work entry is a Case study, never a Project: Project is Tasks' work item. The website's own copy and legacy /projects URLs stay as they are.",website d76ee3b (PR #26); D-032,proposed,"Added with the D-031 drift review, 2026-09-30"
+sample_figure,website,"A number, chart or result shown on the website as an example until an approver confirms the real project figure.",Sample figure,رقم توضيحي,Beispielwert,Chiffre d'exemple,Dato di esempio,"placeholder, dummy, fake (en)",Every unapproved figure keeps its visible label. Removing it needs claims:approve (four-eyes). Approved figures are called results.,website AGENTS.md 2026-09-30; plan: Provenance,proposed,"Added with the D-031 drift review, 2026-09-30"

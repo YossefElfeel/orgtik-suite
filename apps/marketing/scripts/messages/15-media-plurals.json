@@ -1,0 +1,30 @@
+{
+  "MediaLibrary.pickerLimits": {
+    "en": "{items, plural, one {Up to # item} other {Up to # items}}, {videos, plural, =0 {no videos} one {of which up to # video} other {of which up to # videos}}.",
+    "ar": "{items, plural, zero {دون عناصر} one {عنصر واحد كحد أقصى} two {عنصران كحد أقصى} few {حتى # عناصر} many {حتى # عنصرًا} other {حتى # عنصر}}، {videos, plural, zero {دون فيديو} one {منها فيديو واحد كحد أقصى} two {منها فيديوهان كحد أقصى} few {منها حتى # فيديوهات} many {منها حتى # فيديو} other {منها حتى # فيديو}}.",
+    "de": "Bis zu {items, plural, one {# Element} other {# Elemente}}, davon {videos, plural, =0 {keine Videos} one {höchstens # Video} other {bis zu # Videos}}.",
+    "fr": "Jusqu’à {items, plural, one {# élément} other {# éléments}}, dont {videos, plural, =0 {aucune vidéo} one {# vidéo au plus} other {# vidéos au plus}}.",
+    "it": "Fino a {items, plural, one {# elemento} other {# elementi}}, di cui {videos, plural, =0 {nessun video} one {al massimo # video} other {al massimo # video}}."
+  },
+  "PostComposer.errVideosMany": {
+    "en": "{platform} takes {max, plural, one {only # video} other {up to # videos}} per post.",
+    "ar": "يقبل {platform} {max, plural, zero {منشورات دون فيديو} one {فيديو واحدًا فقط} two {فيديوهين كحد أقصى} few {حتى # فيديوهات} many {حتى # فيديو} other {حتى # فيديو}} في المنشور.",
+    "de": "{platform} erlaubt {max, plural, one {nur # Video} other {bis zu # Videos}} pro Beitrag.",
+    "fr": "{platform} accepte {max, plural, one {une seule vidéo} other {jusqu’à # vidéos}} par publication.",
+    "it": "{platform} accetta {max, plural, one {un solo video} other {fino a # video}} per post."
+  },
+  "PostComposer.errMediaMany": {
+    "en": "{platform} takes {max, plural, one {only # item} other {up to # items}}.",
+    "ar": "يقبل {platform} {max, plural, zero {منشورات دون عناصر} one {عنصرًا واحدًا فقط} two {عنصرين كحد أقصى} few {حتى # عناصر} many {حتى # عنصرًا} other {حتى # عنصر}}.",
+    "de": "{platform} erlaubt {max, plural, one {nur # Element} other {bis zu # Elemente}}.",
+    "fr": "{platform} accepte {max, plural, one {un seul élément} other {jusqu’à # éléments}}.",
+    "it": "{platform} accetta {max, plural, one {un solo elemento} other {fino a # elementi}}."
+  },
+  "MediaLibrary.limitVideos": {
+    "en": "This platform takes {count, plural, one {only # video} other {up to # videos}} per post.",
+    "ar": "تقبل هذه المنصة {count, plural, zero {منشورات دون فيديو} one {فيديو واحدًا فقط} two {فيديوهين كحد أقصى} few {حتى # فيديوهات} many {حتى # فيديو} other {حتى # فيديو}} في المنشور.",
+    "de": "Diese Plattform erlaubt {count, plural, one {nur # Video} other {bis zu # Videos}} pro Beitrag.",
+    "fr": "Cette plateforme accepte {count, plural, one {une seule vidéo} other {jusqu’à # vidéos}} par publication.",
+    "it": "Questa piattaforma accetta {count, plural, one {un solo video} other {fino a # video}} per post."
+  }
+}

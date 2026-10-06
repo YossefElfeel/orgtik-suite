@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@import "@orgtik/ui/tailwind.css";
+
+/* Files is on @orgtik/ui end to end (wave 1, migration step 8): the shadcn token bridge, the
+   shadcn and tw-animate imports and the old .dark palette are gone. What's left is the page base. */
+@theme inline {
+  --font-sans: var(--ot-font-body);
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  body {
+    @apply bg-canvas text-fg;
+    font-family: var(--ot-font-body);
+  }
+}

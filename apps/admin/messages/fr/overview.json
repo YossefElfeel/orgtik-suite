@@ -1,0 +1,24 @@
+{
+  "Overview": {
+    "title": "Vue d'ensemble",
+    "description": "L'état de la plateforme et le travail qui attend l'équipe.",
+    "numbers": "Chiffres clés",
+    "mrr": "Revenu mensuel récurrent",
+    "mrrHint": "Toutes devises, en USD au taux du jour",
+    "workspaces": "Espaces de travail clients",
+    "workspacesHint": "{active} actifs · {pastDue} en retard · {suspended} suspendus",
+    "trials": "Essais en cours",
+    "trialsHint": "{count, plural, =0 {Aucun ne se termine dans les 3 jours} one {# se termine dans les 3 jours} other {# se terminent dans les 3 jours}}",
+    "pastDue": "Factures impayées",
+    "pastDueHint": "En retard ; {open} autres ouvertes",
+    "queue": "En attente de l'équipe",
+    "q": {
+      "pastDue": "Factures en retard",
+      "newRequests": "Nouvelles demandes de service",
+      "openTickets": "Tickets de support ouverts",
+      "customPlans": "Demandes de formule sur mesure à chiffrer",
+      "migrations": "Migrations de devise à examiner",
+      "waitlist": "Personnes en liste d'attente"
+    }
+  }
+}

@@ -1,0 +1,375 @@
+{
+  "at": "2026-10-05T12:58:19.608Z",
+  "passed": 24,
+  "total": 24,
+  "results": [
+    {
+      "route": "/",
+      "width": 320,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/roadmap",
+      "width": 320,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/checkout",
+      "width": 320,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/sign-in",
+      "width": 320,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/sign-up",
+      "width": 320,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/work/orgtik-identity-system",
+      "width": 320,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/roadmap",
+      "width": 390,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/checkout",
+      "width": 390,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/sign-in",
+      "width": 390,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/sign-up",
+      "width": 390,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/work/orgtik-identity-system",
+      "width": 390,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/",
+      "width": 768,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/roadmap",
+      "width": 768,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/checkout",
+      "width": 768,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/sign-in",
+      "width": 768,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/sign-up",
+      "width": 768,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/work/orgtik-identity-system",
+      "width": 768,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/",
+      "width": 1440,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 3,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 3,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/roadmap",
+      "width": 1440,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [
+          {
+            "id": "color-contrast",
+            "impact": "serious",
+            "nodes": 1,
+            "help": "Elements must meet minimum color contrast ratio thresholds"
+          }
+        ],
+        "critical": 0,
+        "serious": 1,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/checkout",
+      "width": 1440,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/sign-in",
+      "width": 1440,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/sign-up",
+      "width": 1440,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    },
+    {
+      "route": "/work/orgtik-identity-system",
+      "width": 1440,
+      "ok": true,
+      "overflow": false,
+      "accessibility": {
+        "violations": [],
+        "critical": 0,
+        "serious": 0,
+        "moderate": 0,
+        "minor": 0
+      }
+    }
+  ]
+}

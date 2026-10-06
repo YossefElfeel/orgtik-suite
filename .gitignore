@@ -1,0 +1,12 @@
+node_modules/
+.next/
+.next-*/
+/apps/website/landing-directions/dist/
+.vercel
+.env*.local
+.env
+*.log
+mock/uploads/
+mock/logs/
+.turbo/
+storybook-static/

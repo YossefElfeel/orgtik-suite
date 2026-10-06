@@ -1,0 +1,14 @@
+---
+description: Dialog components use children-as-trigger and live in components/dialogs
+globs: **/components/dialogs/**/*.{tsx,ts},**/components/**/*Dialog*.tsx
+alwaysApply: false
+---
+
+# Dialog conventions
+
+- Put reusable dialogs in `components/dialogs/`.
+- Expose the trigger via `children` and wrap with `DialogTrigger asChild`.
+- Prefer:
+  `<DialogComponent><Button /></DialogComponent>`
+- Avoid page-owned `open` state + separate trigger `onClick` when the dialog can manage itself.
+- See `AGENTS.md` for examples.

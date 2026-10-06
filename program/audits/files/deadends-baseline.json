@@ -1,0 +1,843 @@
+{
+  "app": "files",
+  "as": "mona.adel@orgtik.test",
+  "from": "baseline",
+  "at": "2026-09-30T05:08:52.843Z",
+  "signIn": {
+    "ok": true,
+    "restoredFromState": true
+  },
+  "pages": [
+    {
+      "route": "/activity-logs",
+      "url": "/en/activity-logs",
+      "session": "signed-in",
+      "unnamedButtons": 5,
+      "found": 5,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "files",
+          "route": "/activity-logs",
+          "url": "/en/activity-logs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/activity-logs",
+          "url": "/en/activity-logs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Dashboard",
+          "outcome": "navigated",
+          "detail": "/en",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/activity-logs",
+          "url": "/en/activity-logs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "My Files",
+          "outcome": "navigated",
+          "detail": "/en/my-files",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/activity-logs",
+          "url": "/en/activity-logs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Archived Files",
+          "outcome": "navigated",
+          "detail": "/en/archived-files",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/activity-logs",
+          "url": "/en/activity-logs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Activity Logs",
+          "outcome": "current page",
+          "detail": "leads to the page it's on; not marked aria-current",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/activity-logs",
+          "url": "/en/activity-logs",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon b589f5)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > aside:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/archived-files",
+      "url": "/en/archived-files",
+      "session": "signed-in",
+      "unnamedButtons": 11,
+      "found": 8,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "files",
+          "route": "/archived-files",
+          "url": "/en/archived-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files",
+          "url": "/en/archived-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Dashboard",
+          "outcome": "navigated",
+          "detail": "/en",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files",
+          "url": "/en/archived-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "My Files",
+          "outcome": "navigated",
+          "detail": "/en/my-files",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files",
+          "url": "/en/archived-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Archived Files",
+          "outcome": "current page",
+          "detail": "leads to the page it's on; not marked aria-current",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files",
+          "url": "/en/archived-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Activity Logs",
+          "outcome": "navigated",
+          "detail": "/en/activity-logs",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files",
+          "url": "/en/archived-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Delete",
+          "outcome": "skipped",
+          "detail": "destructive or session-ending (covered by flow tests)",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files",
+          "url": "/en/archived-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Table view",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files",
+          "url": "/en/archived-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Grid view",
+          "outcome": "active option",
+          "detail": "already selected, so pressing it again does nothing; not marked aria-pressed or aria-selected",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files",
+          "url": "/en/archived-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon b589f5)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > aside:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        },
+        {
+          "app": "files",
+          "route": "/archived-files",
+          "url": "/en/archived-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon f2a206)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/my-files",
+      "url": "/en/my-files",
+      "session": "signed-in",
+      "unnamedButtons": 30,
+      "found": 11,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Dashboard",
+          "outcome": "navigated",
+          "detail": "/en",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "My Files",
+          "outcome": "current page",
+          "detail": "leads to the page it's on; not marked aria-current",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Archived Files",
+          "outcome": "navigated",
+          "detail": "/en/archived-files",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Activity Logs",
+          "outcome": "navigated",
+          "detail": "/en/activity-logs",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Upload Files",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Create Folder",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All Folders",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All Status",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Table view",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Grid view",
+          "outcome": "active option",
+          "detail": "already selected, so pressing it again does nothing; not marked aria-pressed or aria-selected",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon b589f5)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > aside:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        },
+        {
+          "app": "files",
+          "route": "/my-files",
+          "url": "/en/my-files",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon f2a206)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "url": "/en",
+      "session": "signed-in",
+      "unnamedButtons": 30,
+      "found": 11,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Dashboard",
+          "outcome": "current page",
+          "detail": "leads to the page it's on; not marked aria-current",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "My Files",
+          "outcome": "navigated",
+          "detail": "/en/my-files",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Archived Files",
+          "outcome": "navigated",
+          "detail": "/en/archived-files",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Activity Logs",
+          "outcome": "navigated",
+          "detail": "/en/activity-logs",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Upload Files",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Create Folder",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All Folders",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All Status",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Table view",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Grid view",
+          "outcome": "active option",
+          "detail": "already selected, so pressing it again does nothing; not marked aria-pressed or aria-selected",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon b589f5)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > aside:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        },
+        {
+          "app": "files",
+          "route": "/",
+          "url": "/en",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon f2a206)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/archived-files/*path",
+      "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+      "session": "signed-in",
+      "unnamedButtons": 7,
+      "found": 7,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "files",
+          "route": "/archived-files/*path",
+          "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files/*path",
+          "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Dashboard",
+          "outcome": "navigated",
+          "detail": "/en",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files/*path",
+          "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+          "session": "signed-in",
+          "role": "button",
+          "control": "My Files",
+          "outcome": "navigated",
+          "detail": "/en/my-files",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files/*path",
+          "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Archived Files",
+          "outcome": "navigated",
+          "detail": "/en/archived-files",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files/*path",
+          "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Activity Logs",
+          "outcome": "navigated",
+          "detail": "/en/activity-logs",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files/*path",
+          "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Table view",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files/*path",
+          "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Grid view",
+          "outcome": "active option",
+          "detail": "already selected, so pressing it again does nothing; not marked aria-pressed or aria-selected",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/archived-files/*path",
+          "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon b589f5)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > aside:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        },
+        {
+          "app": "files",
+          "route": "/archived-files/*path",
+          "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: chevron-left)",
+          "outcome": "left the app",
+          "detail": "went back in browser history; opened from a link, this leaves the app",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        },
+        {
+          "app": "files",
+          "route": "/archived-files/*path",
+          "url": "/en/archived-files/fa53fb81-2b48-5d82-9ba6-aafe689904bf",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon f2a206)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/my-files/*path",
+      "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+      "session": "signed-in",
+      "unnamedButtons": 8,
+      "found": 11,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Collapse sidebar",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Dashboard",
+          "outcome": "navigated",
+          "detail": "/en",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "My Files",
+          "outcome": "navigated",
+          "detail": "/en/my-files",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Archived Files",
+          "outcome": "navigated",
+          "detail": "/en/archived-files",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Activity Logs",
+          "outcome": "navigated",
+          "detail": "/en/activity-logs",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Upload Files",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Create Folder",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All Folders",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "All Status",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Table view",
+          "outcome": "changed",
+          "detail": "",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "Grid view",
+          "outcome": "active option",
+          "detail": "already selected, so pressing it again does nothing; not marked aria-pressed or aria-selected",
+          "where": ""
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon b589f5)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > aside:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > button:nth-of-type(1)"
+        },
+        {
+          "app": "files",
+          "route": "/my-files/*path",
+          "url": "/en/my-files/cbe469e7-5edb-56a6-8fdc-7664382832ac",
+          "session": "signed-in",
+          "role": "button",
+          "control": "(unnamed: icon f2a206)",
+          "outcome": "opened",
+          "detail": "dialog, menu or listbox",
+          "where": "body > section:nth-of-type(1) > div:nth-of-type(2) > main:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > button:nth-of-type(1)"
+        }
+      ]
+    },
+    {
+      "route": "/auth/not-allowed",
+      "url": "/en/auth/not-allowed",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 1,
+      "truncated": 0,
+      "results": [
+        {
+          "app": "files",
+          "route": "/auth/not-allowed",
+          "url": "/en/auth/not-allowed",
+          "session": "signed-out",
+          "role": "button",
+          "control": "Try Again with Token",
+          "outcome": "left the app",
+          "detail": "went back in browser history; opened from a link, this leaves the app",
+          "where": ""
+        }
+      ]
+    },
+    {
+      "route": "/auth",
+      "url": "/en/auth",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 0,
+      "truncated": 0,
+      "results": []
+    },
+    {
+      "route": "/share/:shareId",
+      "url": "/en/share/5f1c7a52-9d0e-4b6a-8e1f-2a9c3b7d4e01?secret=[redacted]",
+      "session": "signed-out",
+      "unnamedButtons": 0,
+      "found": 0,
+      "truncated": 0,
+      "results": []
+    }
+  ],
+  "tally": {
+    "app": "files",
+    "pages": 9,
+    "pressed": 65,
+    "dead end": 0,
+    "copied silently": 0,
+    "not clickable": 0,
+    "not found": 0,
+    "sign-in wall": 0,
+    "left the app": 2,
+    "current page": 4,
+    "active option": 5,
+    "skipped": 1,
+    "broken link": 0,
+    "unnamed buttons": 91,
+    "over the limit": 0
+  }
+}

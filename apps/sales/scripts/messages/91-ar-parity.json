@@ -1,0 +1,16 @@
+{
+ "common.noMoneyInZones": {
+  "en": "No amounts in any zone",
+  "ar": "لا توجد مبالغ في أي منطقة",
+  "de": "Keine Beträge in einer Zone",
+  "fr": "Aucun montant dans aucune zone",
+  "it": "Nessun importo in alcuna zona"
+ },
+ "planManagement.form.configureFeaturePrices": {
+  "en": "Configure {count} feature {count, plural, one {price} other {prices}} in this zone first.",
+  "ar": "{count, plural, zero {لا توجد أسعار ميزات لتهيئتها في هذه المنطقة.} one {هيّئ سعر ميزة واحدة في هذه المنطقة أولًا.} two {هيّئ سعري ميزتين في هذه المنطقة أولًا.} few {هيّئ أسعار # ميزات في هذه المنطقة أولًا.} many {هيّئ أسعار # ميزة في هذه المنطقة أولًا.} other {هيّئ أسعار # ميزة في هذه المنطقة أولًا.}}",
+  "de": "Konfigurieren Sie zuerst {count} Feature-{count, plural, one {Preis} other {Preise}} in dieser Zone.",
+  "fr": "Configurez d’abord {count} prix de fonctionnalité dans cette zone.",
+  "it": "Configura prima {count} {count, plural, one {prezzo} other {prezzi}} delle funzionalità in questa zona."
+ }
+}

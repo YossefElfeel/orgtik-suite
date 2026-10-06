@@ -1,0 +1,284 @@
+﻿screen_id,field_en,field_ar,type,required,rules_en,rules_ar
+ADM-01,Email,البريد الإلكتروني,Email,Yes,Must belong to an active staff account.,لازم يكون لحساب موظف نشط.
+ADM-01,Password,كلمة المرور,Password,Yes,Lock 15 min after 5 failed tries.,قفل 15 دقيقة بعد 5 محاولات فاشلة.
+ADM-01,2FA code,كود التحقق,Text (6 digits),Yes,Authenticator app or a backup code.,من تطبيق التحقق أو كود احتياطي.
+ADM-04,Tool key,مفتاح الأداة,Read-only,—,"Set by developers, e.g. task_manager.",بيحدده المطورين، مثلاً task_manager.
+ADM-04,Name,الاسم,Text AR/EN,Yes,Max 40 chars each.,40 حرف كحد أقصى لكل لغة.
+ADM-04,Short description,وصف مختصر,Text AR/EN,Yes,Max 140 chars; shown on cards.,140 حرف كحد أقصى؛ بيظهر في الكروت.
+ADM-04,Long description,وصف تفصيلي,Rich text AR/EN,No,Tool page on the website.,صفحة الأداة في الموقع.
+ADM-04,Icon,الأيقونة,File (SVG/PNG),Yes,"Square, max 200 KB.",مربعة، 200 كيلوبايت كحد أقصى.
+ADM-04,Brand color,اللون,Color,No,Used on badges and charts.,بيستخدم في العلامات والرسوم.
+ADM-04,Status,الحالة,Select,Yes,Coming Soon / Beta / Available.,قريباً / تجريبي / متاح.
+ADM-04,Expected launch date,تاريخ الإطلاق المتوقع,Date,No,Coming Soon only; shown as month/year.,لحالة قريباً بس؛ بيظهر شهر/سنة.
+ADM-04,Beta access mode,طريقة الوصول التجريبي,Select,If Beta,Open to all / Invite only.,مفتوح للكل / بدعوة.
+ADM-04,Beta pricing,تسعير التجريبي,Select + Percent,If Beta,Free / Discount %.,مجاني / خصم %.
+ADM-04,Billing notice days,أيام التنبيه قبل الدفع,Number,If Beta,Default 14.,افتراضي 14.
+ADM-04,Launch coupon,كوبون الإطلاق,Select (coupon),No,Offered to beta users at launch.,بيتعرض على مستخدمين التجريبي عند الإطلاق.
+ADM-04,Feedback button,زرار الملاحظات,Toggle,Yes,Default on for Beta.,مفعّل افتراضياً في التجريبي.
+ADM-04,Show on website,يظهر في الموقع,Toggle,Yes,Hide during internal testing.,إخفاء أثناء الاختبار الداخلي.
+ADM-04,Mandatory,إجبارية,Read-only,—,On only for General.,مفعّلة لأداة “عام” بس.
+ADM-05,Feature key,مفتاح الميزة,Text,Yes,"snake_case, unique per tool; locked once used by a plan.",snake_case ومميز للأداة، وبيتقفل بعد ما باقة تستخدمه.
+ADM-05,Name,الاسم,Text AR/EN,Yes,Shown in plan comparison.,بيظهر في مقارنة الباقات.
+ADM-05,Type,النوع,Select,Yes,On/Off or Numeric limit.,تشغيل/إيقاف أو حد رقمي.
+ADM-05,Unit,الوحدة,Select,If limit,"projects, contacts, GB, emails/month, mailboxes, sites, days of history…",مشاريع، جهات اتصال، جيجا، إيميل/شهر، صناديق، مواقع، أيام سجل…
+ADM-05,Reset period,فترة التصفير,Select,If limit,None / Monthly.,بدون / شهري.
+ADM-05,Enforcement,طريقة التطبيق,Select,If limit,Hard (block) / Soft (warn only).,صارم (منع) / مرن (تنبيه بس).
+ADM-05,Warning threshold,حد التنبيه,Percent,No,Default 80%.,افتراضي 80%.
+ADM-05,Show in comparison,يظهر في المقارنة,Toggle,Yes,Hide technical features.,إخفاء المميزات التقنية.
+ADM-05,Sort order,الترتيب,Number,Yes,,
+ADM-07,Tier,المستوى,Select,Yes,Free / Starter / Pro / Custom.,مجاني / أساسي / احترافي / مخصص.
+ADM-07,Plan name,اسم الباقة,Text AR/EN,Yes,Unique per tool.,مميز للأداة.
+ADM-07,Description,الوصف,Text AR/EN,No,One line under the name.,سطر تحت الاسم.
+ADM-07,Pricing unit,وحدة التسعير,Select,Yes,Flat per workspace / Per user.,ثابت لمساحة العمل / لكل مستخدم.
+ADM-07,Min seats,أقل عدد مقاعد,Number,If per user,≥ 1.,1 على الأقل.
+ADM-07,Max seats,أكتر عدد مقاعد,Number,No,Empty = no max.,فاضي = بدون حد.
+ADM-07,Guests included,الضيوف المسموحين,Number,No,Extra guests take a seat.,الضيوف الزيادة بياخدوا مقعد.
+ADM-07,Billing cycles,دورات الفوترة,Multi-select,Yes,"Monthly, Yearly.",شهري، سنوي.
+ADM-07,Yearly discount,خصم السنوي,Percent,If yearly,Default 16.67% (2 months free).,افتراضي 16.67% (شهرين مجاناً).
+ADM-07,Default price (USD/month),السعر الافتراضي (دولار/شهر),Money (USD),If paid,Used when no zone or country price exists.,بيستخدم لو مفيش سعر منطقة أو دولة.
+ADM-07,Trial allowed,تجربة مسموحة,Toggle,Yes,Usually Pro only.,غالباً لـ Pro بس.
+ADM-07,Trial days,أيام التجربة,Number,If trial,Default 14.,افتراضي 14.
+ADM-07,Visibility,الظهور,Select,Yes,Public / Private.,عام / خاص.
+ADM-07,Private workspace,مساحة العمل الخاصة,Select (workspace),If private,Plan is visible only to this workspace.,الباقة بتظهر لمساحة العمل دي بس.
+ADM-07,Offer expiry,انتهاء العرض,Date,No,Private plans only.,للباقات الخاصة بس.
+ADM-07,Badge,علامة مميزة,Text AR/EN,No,e.g. “Most popular”.,مثلاً “الأكثر طلباً”.
+ADM-07,Sort order,الترتيب,Number,Yes,,
+ADM-07,Status,الحالة,Select,Yes,Draft / Active / Archived. Can’t delete a plan with subscribers.,مسودة / نشطة / مؤرشفة. مينفعش حذف باقة عليها مشتركين.
+ADM-08,ISO code,كود ISO,Select,Yes,"ISO 4217: EGP, SAR, AED, KWD, QAR, BHD, OMR, EUR, USD…",ISO 4217: جنيه، ريال سعودي، درهم، دينار كويتي، ريال قطري، دينار بحريني، ريال عماني، يورو، دولار…
+ADM-08,Name,الاسم,Text AR/EN,Yes,,
+ADM-08,Symbol,الرمز,Text AR/EN,Yes,"e.g. EGP / ج.م, SAR / ر.س.",مثلاً EGP / ج.م، SAR / ر.س.
+ADM-08,Symbol position,مكان الرمز,Select,Yes,"Before / After, per language.",قبل / بعد، لكل لغة.
+ADM-08,Decimals,الكسور العشرية,Select,Yes,"0, 2 or 3 (KWD, BHD, OMR = 3).",0 أو 2 أو 3 (الدينار الكويتي والبحريني والريال العماني = 3).
+ADM-08,Rounding step,خطوة التقريب,Number,Yes,"For converted prices: 0.01, 0.05, 1, 5…",للأسعار المحوّلة: 0.01، 0.05، 1، 5…
+ADM-08,Rounding mode,طريقة التقريب,Select,Yes,Nearest / Up.,لأقرب قيمة / لأعلى.
+ADM-08,Active,نشطة,Toggle,Yes,Needs ≥1 active gateway; can’t turn off while in use.,محتاجة بوابة نشطة واحدة على الأقل، ومينفعش تتقفل وهي مستخدمة.
+ADM-10,Zone name,اسم المنطقة,Text AR/EN,Yes,Unique.,مميز.
+ADM-10,Base currency,العملة الأساسية,Select (currency),Yes,Zone prices are entered in it.,أسعار المنطقة بتتكتب بيها.
+ADM-10,Countries,الدول,Multi-select + search,Yes,A country from another zone shows “will move from <zone>”.,الدولة اللي في منطقة تانية بيظهر عليها “هتتنقل من <المنطقة>”.
+ADM-10,Default zone,المنطقة الافتراضية,Toggle,Yes,Exactly one zone; catches unassigned countries.,منطقة واحدة بس؛ بتاخد الدول اللي مش متعينة.
+ADM-10,Active,نشطة,Toggle,Yes,Inactive → countries use the Default zone for new customers.,مقفولة ← الدول بتستخدم المنطقة الافتراضية للعملاء الجدد.
+ADM-10,Internal notes,ملاحظات داخلية,Text,No,,
+ADM-11,Zone,المنطقة,Select,Yes,Exactly one.,واحدة بس.
+ADM-11,Currency,العملة,Select,Yes,Default = zone base currency.,الافتراضي = عملة المنطقة.
+ADM-11,Exchange rate,سعر الصرف,Number (6 dp) + date,If currency ≠ zone,1 zone currency = X country currency; effective date; history kept.,1 من عملة المنطقة = X من عملة الدولة؛ بتاريخ سريان؛ والسجل بيتحفظ.
+ADM-11,Tax rule,قاعدة الضريبة,Select,No,Empty = no tax.,فاضي = بدون ضريبة.
+ADM-11,Sign-up allowed,التسجيل مسموح,Toggle,Yes,Block sales in a country if needed.,منع البيع في دولة لو محتاج.
+ADM-11,Payment routing,توجيه الدفع,Read-only,—,Gateways that will be used.,البوابات اللي هتستخدم.
+ADM-11,Price overrides,الأسعار الخاصة,Link,—,Opens ADM-12 in country view.,بيفتح ADM-12 بعرض الدولة.
+ADM-12,Effective date,تاريخ السريان,Date-time,Yes,Now or a future date. (Review & publish dialog.),دلوقتي أو تاريخ قدام. (نافذة المراجعة والنشر.)
+ADM-12,Apply to,يطبق على,Select,Yes,New customers only / Existing at next renewal after notice.,العملاء الجدد بس / الحاليين في التجديد الجاي بعد التنبيه.
+ADM-12,Notice days,أيام التنبيه,Number,If existing,Default 30; renewals inside the window keep the old price.,افتراضي 30؛ التجديدات جوه الفترة بالسعر القديم.
+ADM-12,Customer message,رسالة للعميل,Text AR/EN,If existing,Added to the notice email.,بتتضاف لإيميل التنبيه.
+ADM-12,Internal reason,السبب الداخلي,Text,Yes,Saved in the pricing log.,بيتحفظ في سجل الأسعار.
+ADM-12,Change summary,ملخص التغييرات,Read-only table,—,"Each cell old → new, and affected subscriptions count.",كل خانة القديم ← الجديد، وعدد الاشتراكات المتأثرة.
+ADM-13,Country,الدولة,Select,Yes,,
+ADM-13,Cycle,الدورة,Select,Yes,Monthly / Yearly.,شهري / سنوي.
+ADM-13,Seats,المقاعد,Number,No,Default 1.,افتراضي 1.
+ADM-13,Coupon,الكوبون,Text,No,,
+ADM-13,Include draft changes,تضمين المسودات,Toggle,No,Preview unpublished prices.,معاينة الأسعار اللي لسه متنشرتش.
+ADM-15,From currency,من عملة,Select,Yes,,
+ADM-15,To currency,إلى عملة,Select,Yes,Different from “From”.,مختلفة عن “من”.
+ADM-15,Rate,السعر,Number (6 dp),Yes,> 0.,أكبر من 0.
+ADM-15,Purpose,الغرض,Select,Yes,Pricing / Reporting.,تسعير / تقارير.
+ADM-15,Effective from,ساري من,Date,Yes,,
+ADM-15,Note,ملاحظة,Text,No,e.g. source of the rate.,مثلاً مصدر السعر.
+ADM-16,Bundle name,اسم الباقة المجمعة,Text AR/EN,Yes,,
+ADM-16,Description,الوصف,Text AR/EN,No,,
+ADM-16,Included plans,الباقات المضمنة,Repeater (tool + plan),Yes,≥ 2 tools; one plan per tool.,أداتين على الأقل، وباقة واحدة لكل أداة.
+ADM-16,Discount,الخصم,Percent,Yes,On the sum of resolved plan prices.,على مجموع أسعار الباقات بعد التحديد.
+ADM-16,Cycles,الدورات,Multi-select,Yes,,
+ADM-16,Zones offered,المناطق المتاحة,Multi-select,No,Empty = all.,فاضي = الكل.
+ADM-16,Start / end date,تاريخ البداية / النهاية,Date,No,,
+ADM-16,Visibility,الظهور,Select,Yes,Public / Private link.,عام / لينك خاص.
+ADM-16,Status,الحالة,Select,Yes,Draft / Active / Archived.,مسودة / نشطة / مؤرشفة.
+ADM-17,Code,الكود,Text,Yes,"Uppercase, unique, 4–20 chars.",حروف كبيرة، مميز، 4–20 حرف.
+ADM-17,Internal name,الاسم الداخلي,Text,Yes,,
+ADM-17,Type,النوع,Select,Yes,Percentage / Fixed amount.,نسبة / مبلغ ثابت.
+ADM-17,Percentage,النسبة,Percent,If %,1–100.,1–100.
+ADM-17,Amount per currency,المبلغ لكل عملة,Repeater (currency + money),If fixed,Invalid in currencies not listed.,مش صالح بعملة مش موجودة.
+ADM-17,Applies to,ينطبق على,Select + Multi-select,Yes,All / Tools / Plans / Bundles / Services.,الكل / أدوات / باقات / باقات مجمعة / خدمات.
+ADM-17,Duration,المدة,Select,Yes,Once / N cycles / Forever.,مرة / عدد دورات / دايماً.
+ADM-17,Number of cycles,عدد الدورات,Number,If N cycles,,
+ADM-17,Max redemptions,أقصى استخدام,Number,No,,
+ADM-17,Per workspace,لكل مساحة عمل,Number,No,Default 1.,افتراضي 1.
+ADM-17,New customers only,للعملاء الجدد بس,Toggle,No,,
+ADM-17,Zones,المناطق,Multi-select,No,Empty = all.,فاضي = الكل.
+ADM-17,Start / end,البداية / النهاية,Date-time,No,,
+ADM-17,Status,الحالة,Select,Yes,Active / Paused / Expired.,نشط / موقوف / منتهي.
+ADM-18,Country,الدولة,Select,Yes,,
+ADM-18,Tax name,اسم الضريبة,Text AR/EN,Yes,e.g. VAT / ضريبة القيمة المضافة.,مثلاً VAT / ضريبة القيمة المضافة.
+ADM-18,Rate,النسبة,Percent,Yes,,
+ADM-18,Price display,عرض السعر,Select,Yes,Inclusive / Exclusive.,شامل / غير شامل.
+ADM-18,B2B reverse charge,الاحتساب العكسي للشركات,Toggle,No,With a valid customer tax ID.,برقم ضريبي صحيح للعميل.
+ADM-18,Tax ID format,صيغة الرقم الضريبي,Text (regex),No,Validates the customer field.,بيتحقق من خانة العميل.
+ADM-18,E-invoicing,الفاتورة الإلكترونية,Select,Yes,None / ZATCA / ETA.,لا يوجد / زاتكا / مصلحة الضرائب المصرية.
+ADM-18,OrgTik tax number,الرقم الضريبي لأورج تك,Text,If rate > 0,Printed on invoices.,بيتطبع على الفواتير.
+ADM-18,Effective from,ساري من,Date,Yes,History kept.,السجل بيتحفظ.
+ADM-19,Gateway,البوابة,Select,Yes,"Paymob, Fawry, Stripe, Tap, HyperPay.",Paymob، فوري، Stripe، Tap، HyperPay.
+ADM-19,Display name,اسم العرض,Text AR/EN,Yes,,
+ADM-19,Mode,الوضع,Select,Yes,Test / Live.,تجريبي / فعلي.
+ADM-19,Credentials,بيانات الربط,Secret,Yes,Masked after save.,بتتخفى بعد الحفظ.
+ADM-19,Webhook URL,رابط الإشعارات,Read-only,—,Copy to the provider dashboard.,انسخه في لوحة المزود.
+ADM-19,Currencies,العملات,Multi-select,Yes,,
+ADM-19,Methods,وسائل الدفع,Multi-select,Yes,"Card, mada, Apple Pay, Google Pay, wallet, KNET, cash code.",كارت، مدى، Apple Pay، Google Pay، محفظة، KNET، كود كاش.
+ADM-19,Supports recurring,يدعم التجديد التلقائي,Toggle per method,Yes,No → renewal by pay link.,لأ ← التجديد بلينك دفع.
+ADM-19,Routing: scope,التوجيه: النطاق,Select,Yes,Country or zone.,دولة أو منطقة.
+ADM-19,Routing: currency,التوجيه: العملة,Select,Yes,,
+ADM-19,Routing: gateways,التوجيه: البوابات,Sortable list,Yes,Priority order + fallback.,بالأولوية + بوابة بديلة.
+ADM-21,Action,الإجراء,Read-only,—,Common dialog for all admin actions.,نافذة موحدة لكل إجراءات الأدمن.
+ADM-21,Reason,السبب,Text,Yes,Logged.,بيتسجل.
+ADM-21,Effective,التطبيق,Select,Yes,Now / End of period.,دلوقتي / آخر الفترة.
+ADM-21,Notify owner,إبلاغ المالك,Toggle,Yes,Default on.,مفعّل افتراضياً.
+ADM-21,New currency,العملة الجديدة,Select,Migration,Shows new resolved prices before confirming.,بيعرض الأسعار الجديدة قبل التأكيد.
+ADM-21,Credit amount,مبلغ الرصيد,Money,Credit,In workspace currency; used on next invoices.,بعملة مساحة العمل؛ بيتخصم من الفواتير الجاية.
+ADM-23,Policy rule,قاعدة السياسة,Read-only,—,Refund dialog: rule from 7.1 detected automatically.,نافذة الاسترداد: القاعدة من 7.1 بتتحدد تلقائياً.
+ADM-23,Max refundable,أقصى مبلغ للاسترداد,Read-only,—,Paid − already refunded.,المدفوع − اللي اترد قبل كده.
+ADM-23,Refund amount,مبلغ الاسترداد,Money,Yes,≤ max; original currency.,أقل من أو يساوي الأقصى؛ بالعملة الأصلية.
+ADM-23,Reason,السبب,Select + Text,Yes,Within 14 days / Service not started / Goodwill / Error / Other.,خلال 14 يوم / الخدمة مابدأتش / مجاملة / خطأ / أخرى.
+ADM-23,Cancel the line,إلغاء السطر,Toggle,No,Ends the subscription line now.,بينهي سطر الاشتراك دلوقتي.
+ADM-23,Notify customer,إبلاغ العميل,Toggle,Yes,Sends credit note AR/EN.,بيبعت الإشعار الدائن بالعربي والإنجليزي.
+ADM-23,Manual invoice lines,بنود الفاتورة اليدوية,Repeater,Manual,"Description AR/EN, qty, unit price, tax rule.",الوصف بالعربي والإنجليزي، الكمية، سعر الوحدة، قاعدة الضريبة.
+ADM-23,Due date,تاريخ الاستحقاق,Date,Manual,,
+ADM-24,Category,الفئة,Select,Yes,Marketing / Development (editable list).,تسويق / تطوير (قائمة قابلة للتعديل).
+ADM-24,Package name,اسم الباقة,Text AR/EN,Yes,,
+ADM-24,Short description,وصف مختصر,Text AR/EN,Yes,,
+ADM-24,Deliverables,التسليمات,Repeater AR/EN,Yes,e.g. “12 posts / month”.,مثلاً “12 بوست / شهر”.
+ADM-24,Duration (days),المدة (أيام),Number,No,,
+ADM-24,Revisions included,التعديلات المسموحة,Number,Yes,Default 2.,افتراضي 2.
+ADM-24,Pricing type,نوع التسعير,Select,Yes,Fixed package / Monthly retainer / Quote only.,باقة ثابتة / عقد شهري / بعرض سعر بس.
+ADM-24,Price per zone,السعر لكل منطقة,Pricing grid,If not quote,Same logic as plans (file 03).,نفس منطق الباقات (ملف 03).
+ADM-24,Milestone template,قالب المراحل,Repeater (name + %),No,Must total 100%.,مجموعها لازم 100%.
+ADM-24,Subscriber discount,خصم المشتركين,Percent,No,,
+ADM-24,Show on website,يظهر في الموقع,Toggle,Yes,,
+ADM-24,Status,الحالة,Select,Yes,Draft / Active / Archived.,مسودة / نشطة / مؤرشفة.
+ADM-25,Quote line items,بنود عرض السعر,Repeater,Yes,"Description AR/EN, qty, unit price.",الوصف بالعربي والإنجليزي، الكمية، سعر الوحدة.
+ADM-25,Currency,العملة,Read-only,—,Customer’s workspace or billing currency.,عملة مساحة عمل العميل أو دولة الفوترة.
+ADM-25,Subscriber discount,خصم المشتركين,Read-only,—,Auto from package.,تلقائي من الباقة.
+ADM-25,Extra discount,خصم إضافي,Money / Percent,No,Needs a reason.,محتاج سبب.
+ADM-25,Tax,الضريبة,Read-only,—,From the billing country rule.,من قاعدة دولة الفوترة.
+ADM-25,Payment terms,شروط الدفع,Select,Yes,Full / Milestones.,كامل / مراحل.
+ADM-25,Milestones,المراحل,Repeater,If milestones,"Name, % or amount, trigger (on acceptance / on delivery / date). Total 100%.",الاسم، النسبة أو المبلغ، الاستحقاق (عند القبول / عند التسليم / تاريخ). المجموع 100%.
+ADM-25,Valid until,صالح لحد,Date,Yes,Default +14 days.,افتراضي بعد 14 يوم.
+ADM-25,Revisions included,التعديلات المسموحة,Number,Yes,"From package, editable.",من الباقة وقابل للتعديل.
+ADM-25,Terms note,ملاحظة الشروط,Text AR/EN,No,,
+ADM-25,Deliverable,التسليم,Title + files + note,Upload,Creates a new version; moves status to In review.,بيعمل إصدار جديد ويحوّل الحالة لقيد المراجعة.
+ADM-30,Full name,الاسم,Text,Yes,,
+ADM-30,Email,الإيميل,Email,Yes,Unique; invite sent.,مميز؛ بتتبعت دعوة.
+ADM-30,Roles,الأدوار,Multi-select,Yes,See file 02 matrix.,شوف مصفوفة ملف 02.
+ADM-30,Service categories,فئات الخدمات,Multi-select,Service team,Limits which requests they can be assigned.,بتحدد الطلبات اللي ممكن تتسند ليهم.
+ADM-30,Author profile,ملف الكاتب,Text AR/EN + photo,No,For blog authors.,لكتّاب المدونة.
+ADM-30,Active,نشط,Toggle,Yes,2FA must be set on first login.,لازم يفعّل التحقق بخطوتين أول دخول.
+ADM-31,Event,الحدث,Select,Yes,,
+ADM-31,Channel,القناة,Select,Yes,Email / In-app / Push / SMS.,إيميل / داخل التطبيق / Push / SMS.
+ADM-31,Subject,العنوان,Text AR/EN,Email,,
+ADM-31,Body,المحتوى,Rich text AR/EN,Yes,"Variables like {{workspace}}, {{amount}}, {{currency}}, {{date}}.",متغيرات زي {{workspace}} و{{amount}} و{{currency}} و{{date}}.
+ADM-31,Active,نشط,Toggle,Yes,,
+ADM-31,Send test to,إرسال تجربة إلى,Email,No,,
+ADM-33,Legal entity,الكيان القانوني,Text AR/EN + address,Yes,Printed on invoices; one per invoicing country if needed.,بيتطبع على الفواتير؛ واحد لكل دولة فوترة لو لازم.
+ADM-33,Invoice number format,صيغة رقم الفاتورة,Text,Yes,"e.g. INV-{YYYY}-{000000}; sequential, no gaps.",مثلاً INV-{YYYY}-{000000}؛ متسلسل ومن غير فجوات.
+ADM-33,Credit note format,صيغة الإشعار الدائن,Text,Yes,e.g. CN-{YYYY}-{000000}.,مثلاً CN-{YYYY}-{000000}.
+ADM-33,Reporting currency,عملة التقارير,Select,Yes,USD.,دولار.
+ADM-33,Grace period (days),مهلة الدفع (أيام),Number,Yes,Default 7.,افتراضي 7.
+ADM-33,Retry schedule,جدول إعادة المحاولة,Text,Yes,"Default days 1, 3, 5.",افتراضي أيام 1، 3، 5.
+ADM-33,Renewal reminders,تذكيرات التجديد,Text,Yes,"Monthly 7, 1; yearly 30, 7, 1.",شهري 7، 1؛ سنوي 30، 7، 1.
+ADM-33,Default trial days,أيام التجربة الافتراضية,Number,Yes,Default 14.,افتراضي 14.
+ADM-33,Data retention,الاحتفاظ بالبيانات,Numbers,Yes,Removed tool 30 days · cancelled workspace 30 days · trash 30 days · backups 30 days.,أداة ملغاة 30 يوم · مساحة عمل ملغاة 30 يوم · سلة المهملات 30 يوم · النسخ الاحتياطي 30 يوم.
+ADM-33,Price change notice,تنبيه تغيير السعر,Number,Yes,Default 30 days.,افتراضي 30 يوم.
+ADM-33,Service auto-approve,موافقة تلقائية للخدمات,Number,Yes,Default 7 days after delivery.,افتراضي 7 أيام بعد التسليم.
+ADM-33,Quote validity,صلاحية عرض السعر,Number,Yes,Default 14 days.,افتراضي 14 يوم.
+ADM-33,SLA hours,ساعات الاستجابة,Matrix,Yes,Priority × plan tier.,الأولوية × مستوى الباقة.
+USR-01,Country,الدولة,Select + search,Yes,Default from IP; remembered in a cookie.,افتراضي من الـ IP، وبيتحفظ في الكوكيز.
+USR-01,Cycle,الدورة,Toggle,Yes,Default Monthly.,افتراضي شهري.
+USR-01,Seats,المقاعد,Number / slider,No,1–500; per-user plans only.,1–500؛ للباقات بالمستخدم بس.
+USR-01,Notify me email,إيميل بلّغني,Email,Yes,Visitors only; one per tool.,للزوار بس؛ مرة لكل أداة.
+USR-02,Full name,الاسم بالكامل,Text,Yes,2–60 chars.,2–60 حرف.
+USR-02,Work email,إيميل العمل,Email,Yes,Unique; verification link sent.,مميز؛ بيتبعت لينك تأكيد.
+USR-02,Password,كلمة المرور,Password,Yes,Min 8 chars incl. a number; strength meter.,8 حروف على الأقل منها رقم؛ مؤشر القوة.
+USR-02,Country,الدولة,Select,Yes,Pre-filled from IP.,متعبأة من الـ IP.
+USR-02,Language,اللغة,Select,Yes,AR / EN; follows the site.,عربي / إنجليزي؛ بلغة الموقع.
+USR-02,Accept terms & privacy,الموافقة على الشروط والخصوصية,Checkbox,Yes,Links to the current legal versions; version saved.,روابط للإصدارات الحالية، والإصدار بيتحفظ.
+USR-02,Continue with Google,التسجيل بجوجل,Button,—,Skips password and verification.,من غير باسورد وتأكيد.
+USR-03,Email,الإيميل,Email,Yes,,
+USR-03,Password,كلمة المرور,Password,Yes,,
+USR-03,Remember me,تذكرني,Checkbox,No,30 days.,30 يوم.
+USR-03,2FA code,كود التحقق,Text (6 digits),If enabled,Or a backup code.,أو كود احتياطي.
+USR-04,Workspace name,اسم مساحة العمل,Text,Yes,2–50 chars.,2–50 حرف.
+USR-04,Workspace URL,رابط مساحة العمل,Text (slug),Yes,"a–z, 0–9, “-”; unique; live check.",حروف إنجليزي صغيرة وأرقام و“-”، مميز، وبيتفحص فوراً.
+USR-04,Company size,حجم الشركة,Select,No,"1–5, 6–20, 21–50, 51–200, 200+.",1–5، 6–20، 21–50، 51–200، أكتر من 200.
+USR-04,Industry,المجال,Select,No,,
+USR-04,Country,الدولة,Select,Yes,"Decides currency (shown, not locked).",بتحدد العملة (بتظهر ومش متثبتة).
+USR-04,Language,اللغة,Select,Yes,Workspace default.,الافتراضية لمساحة العمل.
+USR-04,Time zone,المنطقة الزمنية,Select,Yes,From browser.,من المتصفح.
+USR-04,Tools,الأدوات,Multi-select cards,No,General is always included.,“عام” دايماً موجودة.
+USR-04,Invites,الدعوات,Repeater (email + role),No,Up to 20; “Skip”.,لحد 20؛ و“تخطي”.
+USR-07,New plan,الباقة الجديدة,Radio cards,Yes,Only public plans + private plans for this workspace.,الباقات العامة + الخاصة بمساحة العمل دي بس.
+USR-07,Cycle,الدورة,Toggle,Yes,,
+USR-07,Seats,المقاعد,Number,Per user,"≥ max(active users, plan min).",أكبر من أو يساوي الأكبر من (المستخدمين النشطين، حد الباقة الأدنى).
+USR-07,Confirm checkbox,تأكيد,Checkbox,Downgrade,“I understand data over the limit becomes read-only”.,“فاهم إن البيانات الزيادة هتبقى قراءة فقط”.
+USR-09,Cart line,سطر السلة,Row,—,"Tool, plan, cycle, seats, unit price, total, remove.",الأداة، الباقة، الدورة، المقاعد، سعر الوحدة، الإجمالي، حذف.
+USR-09,Legal / company name,الاسم القانوني / الشركة,Text,Yes,,
+USR-09,Billing email,إيميل الفوترة,Email,Yes,Invoices are sent here.,الفواتير بتتبعت عليه.
+USR-09,Billing country,دولة الفوترة,Select,Yes,Locked after first payment.,بتتقفل بعد أول دفعة.
+USR-09,"Address, city, postal code",العنوان، المدينة، الرمز البريدي,Text,Yes / No,Postal code optional where not used.,الرمز البريدي اختياري في الدول اللي مش بتستخدمه.
+USR-09,Tax / VAT number,الرقم الضريبي,Text,No,Format per country tax rule; enables B2B rules.,الصيغة حسب قاعدة الدولة؛ وبيفعّل قواعد الشركات.
+USR-09,Coupon,الكوبون,Text + Apply,No,"Errors: invalid, expired, not for this currency, not for these items.",الأخطاء: غير صحيح، منتهي، مش لعملتك، مش للمنتجات دي.
+USR-09,Payment method,وسيلة الدفع,Radio,Yes,Saved cards · new card (gateway fields) · wallet · mada · Apple Pay · KNET · Fawry code.,كروت محفوظة · كارت جديد (حقول البوابة) · محفظة · مدى · Apple Pay · KNET · كود فوري.
+USR-09,Save card for renewals,حفظ الكارت للتجديد,Checkbox,Yes (recurring),Required for auto-renew.,مطلوب للتجديد التلقائي.
+USR-09,Accept terms,الموافقة على الشروط,Checkbox,Yes,Includes refund policy link.,فيها لينك سياسة الاسترداد.
+USR-15,Cancel scope,نطاق الإلغاء,Radio,Yes,,
+USR-15,Reason,السبب,Select,No,Too expensive / Missing features / Switching / Not using / Other.,غالي / مميزات ناقصة / هنقل لغيره / مش بستخدمه / أخرى.
+USR-15,Details,تفاصيل,Text,No,,
+USR-15,Request refund,طلب استرداد,Toggle,If eligible,Creates a billing ticket.,بيعمل تذكرة فوترة.
+USR-15,Password,كلمة المرور,Password,Whole workspace,,
+USR-17,Category,الفئة,Select,Yes,Marketing / Development.,تسويق / تطوير.
+USR-17,Service / package,الخدمة / الباقة,Select,Yes,Shows package price in my currency or “Quote”.,بيعرض سعر الباقة بعملتي أو “عرض سعر”.
+USR-17,Title,العنوان,Text,Yes,5–100 chars.,5–100 حرف.
+USR-17,Description,الوصف,Rich text,Yes,Min 30 chars.,30 حرف على الأقل.
+USR-17,Budget range,الميزانية التقريبية,Select,No,Ranges in my currency.,نطاقات بعملتي.
+USR-17,Deadline,الموعد,Date,No,Future date.,تاريخ قدام.
+USR-17,Attachments,المرفقات,File (multiple),No,"Up to 10 files, 25 MB each; counts toward storage.",لحد 10 ملفات، 25 ميجا للملف، وبتتحسب من المساحة.
+USR-17,Preferred contact,طريقة التواصل,Select,No,Platform messages / Email / Phone / WhatsApp.,رسائل المنصة / إيميل / تليفون / واتساب.
+USR-17,Phone,الموبايل,Phone,If phone/WhatsApp,With country code.,بكود الدولة.
+USR-17,Pre-filled from,متعبأ من,Read-only,—,Portfolio project when using “Request a similar project”.,مشروع الأعمال لما يستخدم “اطلب مشروع مشابه”.
+USR-19,Revision: deliverable,التعديل: التسليم,Select,Yes,Latest version by default.,آخر إصدار افتراضياً.
+USR-19,Revision: what to change,التعديل: المطلوب,Text,Yes,,
+USR-19,Revision: attachments,التعديل: مرفقات,File,No,,
+USR-19,Rating,التقييم,Stars 1–5,Yes,,
+USR-19,Review,المراجعة,Text,No,,
+USR-19,Allow on portfolio,السماح بالعرض في الأعمال,Checkbox,No,,
+USR-20,Emails,الإيميلات,Email tags,Yes,Up to 20 per invite.,لحد 20 في المرة.
+USR-20,Role,الدور,Select,Yes,Admin / Member / Guest / custom roles.,مدير / عضو / ضيف / أدوار مخصصة.
+USR-20,Tool access,صلاحية الأدوات,Matrix (tool × None / Use / Manage),Yes,Only active tools.,الأدوات المفعّلة بس.
+USR-20,Guest scope,نطاق الضيف,Multi-select,If guest,"Specific projects, folders or files.",مشاريع أو مجلدات أو ملفات معينة.
+USR-20,Personal message,رسالة شخصية,Text,No,,
+USR-20,Seat cost notice,تنبيه تكلفة المقعد,Read-only,—,“Adds 2 paid seats: +140 SAR/month (prorated today 93.33 SAR)”.,“هيضيف مقعدين مدفوعين: +140 ريال/شهر (بالتناسب النهارده 93.33 ريال)”.
+USR-21,Role name,اسم الدور,Text AR/EN,Yes,Unique in workspace.,مميز في مساحة العمل.
+USR-21,Description,الوصف,Text,No,,
+USR-21,Permissions,الصلاحيات,Matrix (tool × view / create / edit / delete / manage settings),Yes,,
+USR-22,Company name,اسم الشركة,Text AR/EN,Yes,,
+USR-22,Logo,اللوجو,File,No,"PNG/SVG, max 1 MB.",PNG/SVG، 1 ميجا كحد أقصى.
+USR-22,Default language,اللغة الافتراضية,Select,Yes,For new users and emails.,للمستخدمين الجدد والإيميلات.
+USR-22,Time zone,المنطقة الزمنية,Select,Yes,,
+USR-22,Date format / week start,صيغة التاريخ / بداية الأسبوع,Select,Yes,Sat / Sun / Mon.,سبت / أحد / اتنين.
+USR-22,Currency,العملة,Read-only,—,Locked after first payment.,متثبتة بعد أول دفعة.
+USR-22,Require 2FA,إجبار التحقق بخطوتين,Toggle,No,For all users.,لكل المستخدمين.
+USR-22,Departments / teams,الأقسام / الفرق,List,No,"Name AR/EN, lead, members.",الاسم بالعربي والإنجليزي، المسؤول، الأعضاء.
+USR-23,"Name, photo, phone",الاسم، الصورة، الموبايل,Text / File / Phone,Name,,
+USR-23,Email,الإيميل,Email,Yes,Change needs verification of the new email.,التغيير محتاج تأكيد الإيميل الجديد.
+USR-23,Language,اللغة,Select,Yes,Flips RTL/LTR instantly.,بتقلب الاتجاه فوراً.
+USR-23,Time zone,المنطقة الزمنية,Select,Yes,,
+USR-23,Change password,تغيير كلمة المرور,Password ×3,No,Current + new + confirm.,الحالية + الجديدة + التأكيد.
+USR-23,2FA,التحقق بخطوتين,QR + code,No,Shows 10 backup codes once.,بيعرض 10 أكواد احتياطية مرة واحدة.
+USR-23,Sessions,الجلسات,List,—,"Device, location, last active, sign out / sign out all.",الجهاز، المكان، آخر نشاط، خروج / خروج من الكل.
+USR-25,Category,الفئة,Select,Yes,Billing / Technical / Service / Other.,فوترة / فني / خدمة / أخرى.
+USR-25,Related tool,الأداة,Select,No,,
+USR-25,Related invoice / request,فاتورة / طلب مرتبط,Select,No,,
+USR-25,Subject,العنوان,Text,Yes,,
+USR-25,Description,الوصف,Rich text,Yes,,
+USR-25,Priority,الأولوية,Select,Yes,Low / Normal / High / Urgent.,منخفضة / عادية / عالية / عاجلة.
+USR-25,Attachments,المرفقات,File,No,Up to 5.,لحد 5.
+USR-26,Tool,الأداة,Select,Yes,Pre-selected when opened from a tool.,متختارة لو اتفتحت من جوه أداة.
+USR-26,Type,النوع,Select,Yes,New feature / Improvement / Bug / Other.,ميزة جديدة / تحسين / مشكلة / أخرى.
+USR-26,Title,العنوان,Text,Yes,Similar suggestions shown while typing.,الاقتراحات الشبه بتظهر وأنت بتكتب.
+USR-26,Description,الوصف,Text,Yes,,
+USR-26,Screenshots,صور,File (images),No,Up to 5.,لحد 5.

@@ -1,0 +1,8 @@
+/* What an app adds, once, after its own @import "tailwindcss":
+     @import "@orgtik/ui/tailwind.css";
+   It brings the tokens, the Tailwind theme that maps onto them, and registers the library's
+   components with Tailwind (paths below are relative to this file; spike: source-registration). */
+@import "./dist/fonts.css";
+@import "./dist/tokens.css";
+@import "./dist/theme.css";
+@source "./dist";

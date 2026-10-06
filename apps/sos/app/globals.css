@@ -1,0 +1,19 @@
+@import "tailwindcss";
+@import "@orgtik/ui/tailwind.css";
+
+/* SOS is on @orgtik/ui end to end (SOS wave, 2026-10-01): with its chat retired (D-018), the shadcn
+   token bridge, the old brand colours and the text-NN scale are gone. What's left is the page base. */
+@theme inline {
+  --font-sans: var(--ot-font-body);
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  body {
+    @apply bg-canvas text-fg;
+    font-family: var(--ot-font-body);
+  }
+}
