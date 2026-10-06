@@ -13,6 +13,7 @@ import {
   subscribePreviewCustomer,
   signInPreviewCustomer,
 } from "./purchase-identity.js";
+import { signInToSuite } from "./suite-session.js";
 
 let accountTabToFocus = null;
 
@@ -624,6 +625,32 @@ export default class SignIn extends ReferencePage {
         }
         if (signup && pw !== confirm) {
           this.setState({ error: msg("SignIn:38") });
+          return;
+        }
+        // Sign in opens the suite, signed in with the same account.
+        if (!rec && !signup) {
+          if (this.signingIn) return;
+          this.signingIn = true;
+          signInToSuite(em, pw)
+            .then(({ user, href }) => {
+              signInPreviewCustomer({
+                name: [user?.firstName, user?.lastName]
+                  .filter(Boolean)
+                  .join(" "),
+                email: em,
+                company: "",
+              });
+              window.location.assign(href);
+            })
+            .catch((err) => {
+              this.signingIn = false;
+              this.setState({
+                error:
+                  err.message === "credentials"
+                    ? msg("SuiteSignIn:1")
+                    : msg("SuiteSignIn:2"),
+              });
+            });
           return;
         }
         if (!rec) signInPreviewCustomer({ name, email: em, company: "" });

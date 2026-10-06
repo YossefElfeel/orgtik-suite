@@ -10,6 +10,7 @@ const AuthRoutes = [
   "/auth/forgot-password",
   "/auth/redirecting",
   "/auth/invite",
+  "/auth/handoff",
 ];
 export function middleware(request: NextRequest) {
   const token = request.cookies.get(TOKEN_COOKIE)?.value;
@@ -20,12 +21,14 @@ export function middleware(request: NextRequest) {
 
   // If user is logged in and tries to access auth routes (except redirecting), redirect to home
   // Allow customers with sales scope to stay on redirecting page
-  // Allow /auth?token= so cross-dashboard SSO can replace the current session
+  // Allow /auth?token= so cross-dashboard SSO can replace the current session, and
+  // /auth/handoff?code= so signing in on the website replaces it too
   if (
     token &&
     isAuthRoute &&
     pathname !== "/auth/redirecting" &&
     pathname !== "/auth/invite" &&
+    pathname !== "/auth/handoff" &&
     !(pathname === "/auth" && hasIncomingToken)
   ) {
     return NextResponse.redirect(new URL("/", request.url));

@@ -3834,4 +3834,20 @@ export default {
     lead: "",
     trail: "",
   },
+  "SuiteSignIn:1": {
+    k: "st_signIn|b4|s1",
+    seed: "That email and password don't match an OrgTik account.",
+    shape: ["That email and password don't match an OrgTik account."],
+    lead: "",
+    trail: "",
+  },
+  "SuiteSignIn:2": {
+    k: "st_signIn|b4|s2",
+    seed: "We couldn't reach OrgTik right now. Please try again in a moment.",
+    shape: [
+      "We couldn't reach OrgTik right now. Please try again in a moment.",
+    ],
+    lead: "",
+    trail: "",
+  },
 };
