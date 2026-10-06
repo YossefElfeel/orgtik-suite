@@ -48,9 +48,15 @@ function advance(S) {
   }
 }
 
+// A tool that isn't open in the suite yet, already bought (on the website) by this workspace.
+function beingSetUp(ws, tool) {
+  return tool.status === "coming_soon" && ws.lines.some((x) => x.tool === tool.key && x.state !== "deleted" && x.state !== "ended");
+}
+
 // Customer-side tool state (USR-00) from the catalogue, the workspace's line and the person's role.
 function toolState(S, ws, tool, member) {
-  if (tool.status === "coming_soon") return "coming_soon";
+  // Coming soon, except for a workspace that bought it on the website: paid, and being set up.
+  if (tool.status === "coming_soon") return beingSetUp(ws, tool) ? "active" : "coming_soon";
   if (tool.status === "retired") return null;
   if (member?.role === "member" || member?.role === "guest") {
     if (member.tools && !member.tools.includes(tool.key) && !tool.mandatory) return "no_access";
@@ -87,4 +93,4 @@ function banners(S, ws, member) {
   return out.sort((a, b) => BANNER_ORDER.indexOf(a.kind) - BANNER_ORDER.indexOf(b.kind));
 }
 
-module.exports = { advance, toolState, banners, BANNER_ORDER };
+module.exports = { advance, toolState, beingSetUp, banners, BANNER_ORDER };

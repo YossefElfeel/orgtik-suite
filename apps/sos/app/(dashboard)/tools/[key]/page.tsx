@@ -222,7 +222,12 @@ export default function ToolPlansPage() {
       ) : null}
       {!canBuy ? <Notice tone="info">{t("ownerOnly", { workspace: ws.me.workspace.name })}</Notice> : null}
 
-      {tool.status === "coming_soon" ? (
+      {tool.setup ? (
+        <Card padding="lg" className="flex flex-col items-start gap-3">
+          <h2 className="font-display text-title-sm text-fg">{t("settingUp", { tool: name })}</h2>
+          <p className="text-body-sm text-fg-muted">{t("settingUpBody", { tool: name })}</p>
+        </Card>
+      ) : tool.status === "coming_soon" ? (
         <Card padding="lg" className="flex flex-col items-start gap-3">
           <h2 className="font-display text-title-sm text-fg">{t("comingSoon", { tool: name })}</h2>
           <p className="text-body-sm text-fg-muted">{t("comingSoonBody")}</p>

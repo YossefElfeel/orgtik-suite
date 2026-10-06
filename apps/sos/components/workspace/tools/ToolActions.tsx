@@ -1,7 +1,8 @@
 "use client";
 // One way forward per tool, by its state and the person's role (USR-00, USR-04, spec 05 §1):
 // open it, start a trial or choose a plan (the owner buys; others ask them), pay to unlock a
-// read-only tool, or join the waitlist of one that's coming.
+// read-only tool, or join the waitlist of one that's coming (or wait for one bought on the website
+// to be set up).
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ArrowRight, CheckCircle } from "@phosphor-icons/react";
@@ -11,7 +12,7 @@ import type { ToolState, WorkspaceRole } from "@/redux/features/platform/platfor
 import { platformError, useJoinWaitlistMutation } from "@/redux/features/platform/tools";
 import { useToolsError } from "./shared";
 
-export type ActionTool = { key: string; name: string; state: ToolState; scope?: string | null; trialDays?: number; onWaitlist?: boolean; /** The subscription line's state: a failed renewal (past_due) offers Pay now too. */ lineState?: string };
+export type ActionTool = { key: string; name: string; state: ToolState; scope?: string | null; trialDays?: number; onWaitlist?: boolean; /** The subscription line's state: a failed renewal (past_due) offers Pay now too. */ lineState?: string; /** Bought on the website, being set up: nothing to open or buy yet. */ setup?: boolean };
 
 /** Where a tool opens: SOS's /go/<scope> hand-over (no token in the address). General is SOS itself. */
 export const openHref = (scope: string | null | undefined) => (scope && scope !== CURRENT_SCOPE ? buildScopeHref({ name: scope } as Scope) : null);
@@ -72,6 +73,7 @@ function AskOwner({ text }: { text: string }) {
 export function ToolActions({ tool, role, canBuy }: { tool: ActionTool; role: WorkspaceRole; canBuy: boolean }) {
   const t = useTranslations("Tools.actions");
   const open = openHref(tool.scope);
+  if (tool.setup) return <AskOwner text={t("settingUp")} />;
   switch (tool.state) {
     case "coming_soon":
       return role === "guest" ? null : <WaitlistButton toolKey={tool.key} name={tool.name} onWaitlist={tool.onWaitlist} />;

@@ -61,6 +61,7 @@ function Facts({ tool }: { tool: CatalogTool }) {
 export default function ToolsPage() {
   const t = useTranslations("Tools.catalog");
   const ta = useTranslations("Tools.actions");
+  const tl = useTranslations("Tools.line");
   const loc = useLocalized();
   const mounted = useMounted();
   const ws = useWorkspace();
@@ -98,11 +99,13 @@ export default function ToolsPage() {
                     </div>
                   </div>
                   <div>
-                    <StatusBadge entity="tool_state" state={tool.state} viewer="customer" />
+                    <StatusBadge entity="tool_state" state={tool.state} viewer="customer" detail={tool.setup ? tl("beingSetUp") : undefined} />
                   </div>
                   <Facts tool={tool} />
                   <div className="mt-auto flex flex-wrap items-center gap-2 pt-1">
-                    {tool.status === "coming_soon" ? (
+                    {tool.setup ? (
+                      <p className="text-body-sm text-fg-muted">{ta("settingUp")}</p>
+                    ) : tool.status === "coming_soon" ? (
                       role === "guest" ? null : <WaitlistButton toolKey={tool.key} name={name} onWaitlist={tool.onWaitlist} />
                     ) : (
                       <Link href={`/tools/${tool.key}`} className={buttonVariants({ size: "sm", variant: tool.state === "not_subscribed" ? "primary" : "secondary" })}>

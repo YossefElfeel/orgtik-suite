@@ -12,7 +12,8 @@
       "daysLeft": "{count, plural, =0 {termina oggi} one {manca # giorno} other {mancano # giorni}}",
       "freePlan": "Piano gratuito",
       "paymentDue": "Pagamento in sospeso",
-      "cancelling": "Termina al rinnovo"
+      "cancelling": "Termina al rinnovo",
+      "beingSetUp": "In configurazione"
     },
     "actions": {
       "open": "Apri",
@@ -25,7 +26,8 @@
       "askAdmin": "Chiedi l’accesso a un amministratore dello spazio.",
       "joinWaitlist": "Iscriviti alla lista d’attesa",
       "joinedWaitlist": "Sei nella lista d’attesa di {tool}. Ti scriveremo quando sarà disponibile.",
-      "onWaitlist": "Sei nella lista d’attesa"
+      "onWaitlist": "Sei nella lista d’attesa",
+      "settingUp": "Lo stiamo configurando per te e ti avviseremo quando sarà pronto."
     },
     "catalog": {
       "title": "Strumenti e piani",
@@ -98,7 +100,9 @@
       "noPlansBody": "Questo strumento è venduto su richiesta. Richiedi un piano su misura e ti invieremo un preventivo.",
       "notFound": "Questo strumento non esiste",
       "backToTools": "Torna a strumenti e piani",
-      "failed": "Non è stato possibile caricare i piani"
+      "failed": "Non è stato possibile caricare i piani",
+      "settingUp": "{tool} è in configurazione",
+      "settingUpBody": "Hai acquistato {tool} sul nostro sito. Il nostro team lo sta configurando per il tuo spazio e ti avviserà quando sarà pronto. Pagamento e fattura sono in Fatturazione."
     },
     "features": {
       "general": {

@@ -13,6 +13,7 @@ import { daysUntil, ToolIcon, useLocalized } from "./shared";
 function useLineDetail() {
   const t = useTranslations("Tools.line");
   return (tool: AppTool) => {
+    if (tool.setup) return t("beingSetUp");
     const l = tool.line;
     if (!l) return undefined;
     if (l.state === "trialing" && l.trialEndsAt) return t("daysLeft", { count: daysUntil(l.trialEndsAt) });
@@ -58,7 +59,7 @@ export function MyTools({ me }: { me: AppMe }) {
                     <StatusBadge entity="tool_state" state={tool.state} viewer="customer" detail={detail(tool)} />
                   </div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <ToolActions tool={{ key: tool.key, name, state: tool.state, scope: tool.scope, trialDays: c?.trialDays, onWaitlist: c?.onWaitlist, lineState: tool.line?.state }} role={me.workspace.role} canBuy={me.can.buy} />
+                    <ToolActions tool={{ key: tool.key, name, state: tool.state, scope: tool.scope, trialDays: c?.trialDays, onWaitlist: c?.onWaitlist, lineState: tool.line?.state, setup: tool.setup }} role={me.workspace.role} canBuy={me.can.buy} />
                   </div>
                 </div>
               </Card>

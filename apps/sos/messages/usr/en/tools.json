@@ -12,7 +12,8 @@
       "daysLeft": "{count, plural, =0 {ends today} one {# day left} other {# days left}}",
       "freePlan": "Free plan",
       "paymentDue": "Payment due",
-      "cancelling": "Ends at renewal"
+      "cancelling": "Ends at renewal",
+      "beingSetUp": "Being set up"
     },
     "actions": {
       "open": "Open",
@@ -25,7 +26,8 @@
       "askAdmin": "Ask a workspace admin for access.",
       "joinWaitlist": "Join the waitlist",
       "joinedWaitlist": "You're on the {tool} waitlist. We'll write when it opens.",
-      "onWaitlist": "You're on the waitlist"
+      "onWaitlist": "You're on the waitlist",
+      "settingUp": "We’re setting it up for you and will let you know when it’s ready."
     },
     "catalog": {
       "title": "Tools and plans",
@@ -98,7 +100,9 @@
       "noPlansBody": "This tool is sold on request. Ask for a custom plan and we'll send you a quote.",
       "notFound": "This tool doesn't exist",
       "backToTools": "Back to tools and plans",
-      "failed": "The plans couldn't be loaded"
+      "failed": "The plans couldn't be loaded",
+      "settingUp": "{tool} is being set up",
+      "settingUpBody": "You bought {tool} on our website. Our team is setting it up for your workspace and will let you know when it’s ready. The payment and invoice are in Billing."
     },
     "features": {
       "general": {
