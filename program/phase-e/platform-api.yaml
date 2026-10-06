@@ -3980,6 +3980,60 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+  "/v1/app/website-orders":
+    post:
+      tags:
+        - Billing
+      summary: Bring in an order paid on the public website
+      description: "Spec: WEB-checkout."
+      operationId: post_app_website_orders
+      parameters:
+        - $ref: "#/components/parameters/Workspace"
+      x-workspace-role: admin
+      x-role-text: workspace admin or owner
+      requestBody:
+        required: false
+        content:
+          "application/json":
+            schema:
+              type: object
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Envelope"
+        "401":
+          description: No session
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Wrong state
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "422":
+          description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "423":
+          description: The workspace is suspended
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/services":
     get:
       tags:

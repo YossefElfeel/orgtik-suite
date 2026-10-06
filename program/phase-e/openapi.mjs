@@ -123,6 +123,7 @@ const SUMMARY = {
   "GET /v1/app/services": ["Service catalogue with prices and the subscriber discount", "USR-16", "Services"],
   "GET /v1/app/service-requests": ["The workspace's service requests, paged", "USR-18", "Services"],
   "POST /v1/app/service-requests": ["Request a service", "USR-17", "Services"],
+  "POST /v1/app/website-orders": ["Bring in an order paid on the public website", "WEB-checkout", "Billing"],
   "GET /v1/app/service-requests/{id}": ["One request with quote, milestones, deliveries and messages", "USR-19", "Services"],
   "POST /v1/app/service-requests/{id}/actions": ["accept, pay, decline, approve, revise, message, cancel", "USR-19, USR-20", "Services"],
   "GET /v1/app/tickets": ["Tickets (admins see all, others their own), paged", "USR-21", "Support"],

@@ -21,7 +21,6 @@ import { EmptyPurchaseCart } from "./PurchaseCart";
 import { PurchaseAction, PurchaseDialog } from "./PurchaseControls";
 import {
   simulatePayment,
-  provisionCRM,
   validateCustomer,
   savePurchaseSession,
   loadPurchaseSession,
@@ -32,6 +31,11 @@ import {
   subscribePreviewCustomer,
   signOutPreviewCustomer,
 } from "./purchase-identity.js";
+import {
+  setupInSuite,
+  suiteAccountHref,
+  hasSuiteSession,
+} from "./suite-session.js";
 import {
   PAYMENT_METHODS,
   getPaymentMethod,
@@ -54,7 +58,7 @@ function Confirmation({ order, crm, onCRM, verified, onRestart }) {
     if (busy) return;
     setBusy(true);
     try {
-      onCRM(await provisionCRM(order, { scenario: "ready", verified }));
+      onCRM(await setupInSuite(order, { scenario: "ready", verified }));
     } finally {
       setBusy(false);
     }
@@ -64,6 +68,20 @@ function Confirmation({ order, crm, onCRM, verified, onRestart }) {
     const url = new URL(CRM_PORTAL_URL);
     if (url.protocol === "https:") portal = url.href;
   } catch {}
+  // The customer account is the OrgTik suite: signed in, open it signed in; as a guest, create
+  // the account (or sign in from there), which brings this order into it.
+  const openAccount = () => {
+    if (crm.access === "verified-existing" && hasSuiteSession()) {
+      suiteAccountHref().then((href) => window.location.assign(href));
+      return;
+    }
+    if (crm.access !== "verified-existing") {
+      if (window.__orgNav) window.__orgNav("/sign-up");
+      else window.location.assign("/sign-up");
+      return;
+    }
+    setHandoff(true);
+  };
   return (
     <div className="purchase-confirmation">
       <section className="purchase-checkout-panel">
@@ -106,7 +124,7 @@ function Confirmation({ order, crm, onCRM, verified, onRestart }) {
         </div>
         <div className="purchase-confirmation-actions">
           {crm.status === "ready" ? (
-            <PurchaseAction onClick={() => setHandoff(true)}>
+            <PurchaseAction onClick={openAccount}>
               {crm.access === "verified-existing"
                 ? msg("PurchaseCheckout:6")
                 : msg("PurchaseCheckout:7")}
@@ -328,7 +346,7 @@ export default function PurchaseCheckout() {
       setSessionSaved(savePurchaseSession(purchase, pending));
       completeCartPurchase(purchase.groups.map((g) => g.id));
       dismissCartNotice();
-      const setup = await provisionCRM(purchase, {
+      const setup = await setupInSuite(purchase, {
         scenario: crmScenario,
         verified,
         customer,

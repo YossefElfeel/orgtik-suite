@@ -339,6 +339,56 @@ module.exports = function appApi(app, ctx, S, H) {
     ok(res, m);
   });
 
+  // ---- An order paid on the public website (orgtik.ch checkout, 2026-10-07) ----
+  // The website charged it already; the suite turns it on: software becomes an active line on the
+  // tool's Pro plan for the paid term, each service opens a request (onboarding starts its period),
+  // and a paid invoice records it. Idempotent by the website's order reference.
+  const WEBSITE_SERVICE = (id) => (id.startsWith("design/web-") || id.startsWith("development/") ? "svc_website" : id.startsWith("design/") ? "svc_brand" : id.startsWith("marketing/") ? "svc_social" : id.startsWith("it-support/") ? "svc_support" : null);
+  app.post("/v1/app/website-orders", as("admin", { write: true }), (req, res) => {
+    const { ws } = req.p;
+    const b = req.body ?? {};
+    const ref = String(b.reference ?? "").trim();
+    const lines = Array.isArray(b.lines) ? b.lines : [];
+    if (!ref || !lines.length) return fail(res, 422, "invalid", "An order needs its reference and lines.", { fieldErrors: { reference: ref ? undefined : "required", lines: lines.length ? undefined : "required" } });
+    db.websiteOrders ??= [];
+    const prior = db.websiteOrders.find((o) => o.reference === ref);
+    if (prior) return prior.workspaceId === ws.id ? ok(res, prior) : fail(res, 409, "conflict", "This order is already linked to another workspace.");
+    const cur = String(b.currency || "CHF");
+    const now = S.iso(S.now());
+    const out = { reference: ref, workspaceId: ws.id, at: now, tools: [], requests: [], skipped: [], invoice: null };
+    const invLines = [];
+    for (const l of lines) {
+      const amount = Math.round(Number(l.total) || 0) / 100;
+      const months = Math.max(1, Number(l.months) || 1);
+      invLines.push({ label: `${l.name} · ${months} month${months === 1 ? "" : "s"}`, amount });
+      if (l.kind === "software") {
+        const plan = db.plans.find((p) => p.id === `${l.catalogId}_pro` && p.tool);
+        if (!plan) { out.skipped.push({ catalogId: l.catalogId, reason: "not_in_suite_yet" }); continue; }
+        const old = ws.lines.find((x) => x.tool === plan.tool && live(x));
+        if (old) Object.assign(old, { state: "ended", endedAt: now, replacedBy: "pending" });
+        const nl = { id: S.id("ln"), tool: plan.tool, planId: plan.id, cycle: "monthly", state: "active", startedAt: now, periodEnd: S.iso(S.now() + months * 30 * DAY), snapshot: { amount, unit: amount, quantity: 1, currency: cur, source: "Website order", priceVersion: db.priceVersion }, autoRenew: Boolean(l.autoRenew), source: { kind: "website_order", reference: ref } };
+        if (old) old.replacedBy = nl.id;
+        const at = ws.lines.findIndex((x) => x.tool === plan.tool);
+        ws.lines.splice(at < 0 ? ws.lines.length : at, 0, nl);
+        out.tools.push({ tool: plan.tool, lineId: nl.id, periodEnd: nl.periodEnd });
+      } else {
+        const serviceId = WEBSITE_SERVICE(String(l.catalogId));
+        if (!serviceId) { out.skipped.push({ catalogId: l.catalogId, reason: "unknown_service" }); continue; }
+        const r = { id: S.id("sr"), number: `SR-${210 + db.serviceRequests.length + 1}`, workspaceId: ws.id, serviceId, title: l.name, brief: `Bought on the website (order ${ref}): ${l.name} for ${months} month${months === 1 ? "" : "s"}. The period starts once onboarding confirms it.`, budget: null, deadline: null, state: "new", createdAt: now, assignee: null, quote: null, milestones: [], deliveries: [], messages: [], source: { kind: "website_order", reference: ref } };
+        db.serviceRequests.push(r);
+        out.requests.push({ id: r.id, number: r.number });
+      }
+    }
+    const total = Math.round(invLines.reduce((sum, l) => sum + l.amount, 0) * 100) / 100;
+    const inv = { id: S.id("inv"), number: `INV-2026-${String(1040 + db.invoices.length + 1).padStart(6, "0")}`, workspaceId: ws.id, kind: "website_order", state: "paid", currency: cur, issuedAt: now, dueAt: now, paidAt: now, lines: invLines, subtotal: total, taxLabel: null, tax: 0, total, payments: [{ id: S.id("pay"), amount: total, currency: cur, method: String(b.paymentMethod || "card"), gateway: "website", at: now, status: "succeeded" }], creditNotes: [], refunded: 0, reference: ref };
+    db.invoices.push(inv);
+    out.invoice = { id: inv.id, number: inv.number, total, currency: cur };
+    db.notifications.push({ id: S.id("nt"), workspaceId: ws.id, userKey: req.p.key, kind: "service_update", title: `Your website order ${ref} is in your workspace`, at: now, read: false });
+    db.websiteOrders.push(out);
+    S.log(req.p.key, "website_order", ws.id, { reference: ref, invoice: inv.number });
+    ok(res, out, {}, 201);
+  });
+
   // ---- USR-16..20 services: catalogue, request, quote accept/decline, delivery approve/revise ----
   app.get("/v1/app/services", as("member"), (req, res) => {
     const { ws } = req.p;

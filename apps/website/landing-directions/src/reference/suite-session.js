@@ -4,20 +4,29 @@
 // once and never kept here. Reset password starts the suite's own reset and opens its next step.
 // The website keeps the suite session it was given (the access token, in this browser) so its
 // header shows the person on every visit; Sign out forgets it here (the suite keeps its own).
+// Checkout uses the same account: a paid order goes into that person's suite workspace, and an
+// order paid as a guest joins the account they sign in to or create next (in the same tab).
 //   VITE_SUITE_URL   the suite's home (SOS), e.g. https://orgtik-suite-sos.vercel.app
 //   VITE_SUITE_API   its identity API, e.g. https://orgtik-suite-mock.vercel.app/sos/api
+import {
+  getPreviewCustomer,
+  signInPreviewCustomer,
+  subscribePreviewCustomer,
+} from "./purchase-identity.js";
+import {
+  provisionCRM,
+  loadPurchaseSession,
+  savePurchaseSession,
+} from "./purchase-adapter.js";
+
 export const SUITE_URL = (
   import.meta.env?.VITE_SUITE_URL || "http://localhost:3013"
 ).replace(/\/$/, "");
 const SUITE_API = (
   import.meta.env?.VITE_SUITE_API || "http://localhost:4000/api"
 ).replace(/\/$/, "");
-
-import {
-  getPreviewCustomer,
-  signInPreviewCustomer,
-  subscribePreviewCustomer,
-} from "./purchase-identity.js";
+// The platform's customer API sits beside the identity API (…/api → …/v1/app).
+const PLATFORM_API = `${SUITE_API.replace(/\/api$/, "")}/v1/app`;
 
 const SESSION_KEY = "orgtik.suite-session.v1";
 const readToken = () => {
@@ -61,13 +70,91 @@ async function handoffHref(token) {
 }
 
 // Opens the suite signed in with the session in `res` (a login or sign-up response), and keeps
-// that session for the website's header.
+// that session for the website's header. An order this tab paid as a guest joins the account.
 async function openSuite(res) {
   const { data } = await res.json();
   const token = data?.tokens?.accessToken;
+  const saved = loadPurchaseSession();
+  if (saved && token && !linked().includes(saved.order.reference))
+    await sendOrder(saved.order, token)
+      .then(() =>
+        savePurchaseSession(saved.order, {
+          status: "ready",
+          access: "verified-existing",
+        }),
+      )
+      .catch(() => {}); // The account still opens; the order can be linked from checkout later.
   const href = await handoffHref(token);
   writeToken(token);
   return { user: data.user, href };
+}
+
+// Orders this tab already brought into the suite (the suite also ignores repeats).
+const LINKED_KEY = "orgtik.suite-orders.v1";
+const linked = () => {
+  try {
+    return JSON.parse(sessionStorage.getItem(LINKED_KEY) || "[]");
+  } catch {
+    return [];
+  }
+};
+async function sendOrder(order, token) {
+  const lines = order.groups.flatMap((g) =>
+    g.lines.map((l) => ({
+      catalogId: l.catalogId,
+      kind: l.kind || g.kind,
+      name: l.name,
+      months: l.months,
+      total: l.total,
+      autoRenew: Boolean(l.autoRenew),
+    })),
+  );
+  const res = await fetch(`${PLATFORM_API}/website-orders`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      reference: order.reference,
+      currency: order.currency,
+      paymentMethod: order.paymentMethod,
+      lines,
+    }),
+  }).catch(() => null);
+  if (!res?.ok) throw new Error("unavailable");
+  try {
+    sessionStorage.setItem(
+      LINKED_KEY,
+      JSON.stringify([...new Set([...linked(), order.reference])]),
+    );
+  } catch {
+    // Without storage the suite's own check stops a second copy.
+  }
+}
+
+// Checkout's account setup: signed in to the suite, the paid order goes into the person's
+// workspace (software on, services requested, invoice paid); a guest gets the simulated setup
+// and joins an account through Sign in or Create account. Same answer shape as provisionCRM.
+export async function setupInSuite(order, options = {}) {
+  const token = readToken();
+  if (!options.verified || !token) return provisionCRM(order, options);
+  try {
+    await sendOrder(order, token);
+    return {
+      purchaseReference: order.reference,
+      destination: SUITE_URL,
+      status: "ready",
+      access: "verified-existing",
+    };
+  } catch {
+    return {
+      purchaseReference: order.reference,
+      destination: SUITE_URL,
+      status: "failed",
+      access: "verified-existing",
+    };
+  }
 }
 
 // My account: the suite, signed in with the kept session (its home if that fails).
