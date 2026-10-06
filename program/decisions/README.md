@@ -56,7 +56,7 @@ Each decision gets a `D-###.md` file with its context, options, decision, conseq
 | [D-041](D-041.md) | The website's forms (contact, idea suggestions) go live **locally on the mock** now: leads and ideas reach the Website Manager. Going live in production still needs a real privacy policy and a retention period. | Yossef | 2026-10-01 |
 | [D-042](D-042.md) | The Arabic website (D-036) is built after the dashboard waves | Yossef | 2026-10-01 |
 | [D-043](D-043.md) | Waves run in parallel sessions: another session runs Tasks; this session runs Chats (HQ) next, as the plan pairs them | Yossef | 2026-10-01 |
-| [D-044](D-044.md) | Everything stays local: no pushes, and @orgtik/ui isn't published, until GitLab access and sdk.orgtik.org publish rights exist | Yossef | 2026-10-01 |
+| [D-044](D-044.md) | Everything stays local: no pushes, and @orgtik/ui isn't published, until GitLab access and sdk.orgtik.org publish rights exist. *Exception 2026-10-07: one fresh-history snapshot in the private repo orgtik-suite, hosted on Vercel as a prototype* | Yossef | 2026-10-01 |
 | [D-045](D-045.md) | The pricing-override colour is the brand violet (brand tone, with an icon and a word), not the spec's orange | Yossef | 2026-10-01 |
 | [D-046](D-046.md) | Chats keeps its accent presets (each person chooses Chats' accent colour); the rest of Chats follows the brand | Yossef | 2026-10-01 |
 
