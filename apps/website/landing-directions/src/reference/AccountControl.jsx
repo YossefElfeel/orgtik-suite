@@ -13,6 +13,11 @@ import {
   signOutPreviewCustomer,
 } from "./purchase-identity.js";
 import { CRM_PORTAL_URL } from "./purchase-catalog.js";
+import {
+  hasSuiteSession,
+  suiteAccountHref,
+  SUITE_URL,
+} from "./suite-session.js";
 import { PurchaseAction, PurchaseDialog } from "./PurchaseControls";
 import { LanguageMenu } from "./LanguageMenu";
 import "./account-control.css";
@@ -42,6 +47,15 @@ export function AccountControl({
     const url = new URL(CRM_PORTAL_URL);
     if (url.protocol === "https:") portal = url.href;
   } catch {}
+  // Signed in to the suite: My account opens it signed in, through a fresh one-time code.
+  const suite = Boolean(customer) && hasSuiteSession();
+  if (suite && !portal) portal = SUITE_URL;
+  const openAccount = (event) => {
+    if (!suite) return navigate();
+    event.preventDefault();
+    navigate();
+    suiteAccountHref().then((href) => window.location.assign(href));
+  };
 
   useLayoutEffect(() => {
     if (!open) return;
@@ -160,7 +174,7 @@ export function AccountControl({
       </div>
       <div className="site-account__links">
         {portal ? (
-          <a href={portal} onClick={navigate}>
+          <a href={portal} onClick={openAccount}>
             <i className="ph ph-user-circle" aria-hidden="true" />
             {run("gl_commerce|accountControl-intro|a-2", 1)}
             <i className="ph ph-arrow-up-right" aria-hidden="true" />
