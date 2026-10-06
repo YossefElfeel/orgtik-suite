@@ -21,7 +21,7 @@ const nextConfig = {
   },
   images: {
     domains: ["salesback.orgtik.xyz", "salesback.orgtik.org"],
-    remotePatterns: [{ protocol: "https", hostname: "*.vercel.app" }, // hosted prototype mock API uploads],
+    remotePatterns: [{ protocol: "https", hostname: "*.vercel.app" }], // hosted prototype mock API uploads
   },
 };
 

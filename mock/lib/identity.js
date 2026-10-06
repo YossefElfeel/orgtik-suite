@@ -223,20 +223,42 @@ function routes(app) {
   app.post("/api/auth/handoff", (req, res) => {
     const token = tokenFrom(req);
     if (!token || !userFromToken(token)) return fail(res, 401, "Unauthorized");
-    const code = require("crypto").randomBytes(24).toString("base64url");
-    handoffs.set(code, { token, expiresAt: Date.now() + 60 * 1000 });
+    const expiresAt = Date.now() + 60 * 1000;
+    // Hosted (Vercel), requests can land on different instances, so the code carries the token
+    // itself, encrypted; locally it's a random key into memory.
+    const code = config.hosted ? sealHandoff({ token, expiresAt }) : require("crypto").randomBytes(24).toString("base64url");
+    if (!config.hosted) handoffs.set(code, { token, expiresAt });
     return ok(res, { code, expiresIn: 60 }, "Hand-off code created");
   });
 
   app.post("/api/auth/handoff/exchange", (req, res) => {
     const code = String(req.body?.code || "");
-    const h = handoffs.get(code);
+    const h = config.hosted ? openHandoff(code) : handoffs.get(code);
     handoffs.delete(code);
     if (!h || h.expiresAt < Date.now() || !userFromToken(h.token)) return fail(res, 400, "This sign-in link has expired or was already used.");
     return ok(res, { accessToken: h.token }, "Signed in");
   });
 }
 const handoffs = new Map(); // code -> { token, expiresAt }
+
+const handoffKey = () => require("crypto").createHash("sha256").update(process.env.MOCK_HANDOFF_SECRET || "orgtik-suite-prototype").digest();
+function sealHandoff(data) {
+  const crypto = require("crypto");
+  const iv = crypto.randomBytes(12);
+  const cipher = crypto.createCipheriv("aes-256-gcm", handoffKey(), iv);
+  const body = Buffer.concat([cipher.update(JSON.stringify(data), "utf8"), cipher.final()]);
+  return Buffer.concat([iv, cipher.getAuthTag(), body]).toString("base64url");
+}
+function openHandoff(code) {
+  try {
+    const buf = Buffer.from(code, "base64url");
+    const decipher = require("crypto").createDecipheriv("aes-256-gcm", handoffKey(), buf.subarray(0, 12));
+    decipher.setAuthTag(buf.subarray(12, 28));
+    return JSON.parse(Buffer.concat([decipher.update(buf.subarray(28)), decipher.final()]).toString("utf8"));
+  } catch {
+    return null;
+  }
+}
 
 module.exports = {
   LOCAL_PASSWORD, users, scopes, grants,
