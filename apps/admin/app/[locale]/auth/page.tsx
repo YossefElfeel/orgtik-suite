@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuthSuccess } from "@orgtik/ui/auth";
+
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -23,6 +25,7 @@ function Handoff() {
   const t = useTranslations("Auth");
   const tn = useTranslations("NoAccess");
   const router = useRouter();
+  const { confirm, success } = useAuthSuccess();
   const params = useSearchParams();
   const [result, setResult] = useState<Result>("checking");
   const [attempt, setAttempt] = useState(0);
@@ -73,7 +76,7 @@ function Handoff() {
           if (!live) return;
           if (r.ok) {
             setToken(value);
-            router.replace(landing.current ?? "/");
+            confirm(() => router.replace(landing.current ?? "/"));
           } else setResult(r.status === 403 ? "forbidden" : "expired");
         });
       })
@@ -84,6 +87,7 @@ function Handoff() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [attempt]);
 
+  if (success) return success;
   if (result === "checking") {
     return (
       <div className="flex justify-center py-6">

@@ -27,7 +27,8 @@ export function looksLikeText(s) {
   if (/^[a-z0-9_-]+$/.test(s.replace(/\{\d+\}/g, "").trim())) return false; // a generated DOM id
   if (/^[a-z]{2}(?:-[A-Z]{2})?$/.test(t)) return false; // a locale code
   if (/^[a-z]+[A-Z][A-Za-z]*$/.test(t)) return false; // camelCase
-  if (t === 'IntersectionObserver') return false; // browser capability, never editable copy
+  if (['IntersectionObserver', 'ResizeObserver', 'CHF'].includes(t)) return false;
+  if (/^orgtik\.[a-z0-9.-]+$/i.test(t) || /^ORG-\{\d+\}$/.test(s)) return false;
   if (/\b\d+ \/ span \d+\b|(?:px|rem|vw|vh|svh|deg|ms)\b|#[0-9a-f]{3,8}\b|var\(|rgba?\(|cubic-bezier|gradient\(|translate|scale[XY]?\(|blur\(|minmax\(|repeat\(/i.test(t)) return false;
   if (/\((?:prefers|hover|pointer|min-width|max-width)|^[.#[]|\bimg\b|\[data-|image-slot|:hover|:focus/.test(t)) return false;
   if (/\.(?:webp|svg|png|jpe?g|mp4|webm|html)\b|^\/|^https?:|^#\/|^ph(?:-fill)? ph-|^ph-/.test(t)) return false;
@@ -119,7 +120,7 @@ export function extractStrings(file) {
         return walk(n.callee, method, props, false);
       }
     }
-    if (n.type === "BinaryExpression" && ["===", "!==", "==", "!="].includes(n.operator)) return; // comparisons with keys
+    if (n.type === "BinaryExpression" && ["===", "!==", "==", "!=", "in"].includes(n.operator)) return; // comparisons with keys and browser capabilities
     if (n.type === "SwitchCase") return walk(n.consequent, method, props, false);
     for (const [k, v] of Object.entries(n)) {
       if (k === "loc" || k === "leadingComments" || k === "trailingComments" || k === "extra") continue;

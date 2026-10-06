@@ -197,4 +197,4 @@ function makeOps({ store, now }) {
   return { leads, view, move, assign, note, erase, submit, csv, OPEN, LEAD_ACTIONS, site, readiness, updateSite };
 }
 
-module.exports = { makeOps };
+module.exports = { makeOps, mask, maskEmail };

@@ -9,6 +9,8 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@orgtik/ui": "file:.yalc/@orgtik/ui",
+    "@phosphor-icons/react": "2.1.10",
     "@hookform/resolvers": "^5.2.2",
     "@monaco-editor/react": "^4.7.0",
     "@radix-ui/react-alert-dialog": "^1.1.15",

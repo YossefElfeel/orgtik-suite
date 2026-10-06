@@ -31,7 +31,7 @@ for(const kind of ['copy','strings']) {
   const full=path.join(app,`src/content/${kind}-templates.js`);
   const templates=(await import(`${pathToFileURL(full)}?t=${Date.now()}`)).default;
   if(kind==='strings')for(const [id,t] of Object.entries(templates)) {
-    if(!/\{\d+\}/.test(t.seed)||!/^[a-z0-9_-]+$/.test(t.seed.replace(/\{\d+\}/g,'')))continue;
+    if(!new Set(['purchase-adapter:1','purchase-adapter:5','PurchaseCheckout:19','CaseStudy:18']).has(id) && (!/\{\d+\}/.test(t.seed)||!/^[a-z0-9_-]+$/.test(t.seed.replace(/\{\d+\}/g,''))))continue;
     const base=id.split(':')[0], file=['.jsx','.js'].map(ext=>path.join(ref,base+ext)).find(f=>fs.existsSync(f));
     if(file){let source=fs.readFileSync(file,'utf8');const edits=[];
       const visit=n=>{if(!n||typeof n!=='object')return;if(Array.isArray(n))return n.forEach(visit);
@@ -61,7 +61,7 @@ for(const kind of ['copy','strings']) {
 }
 // Technical values cannot be edited as reader copy.
 const checkout=path.join(ref,'PurchaseCheckout.jsx');
-fs.writeFileSync(checkout,fs.readFileSync(checkout,'utf8').replace('msg("PurchaseCheckout:36", [method.id])','`purchase-method-${method.id}-description`'));
+fs.writeFileSync(checkout,fs.readFileSync(checkout,'utf8').replace(/msg\("PurchaseCheckout:36",\s*\[\s*method.id,?\s*\]\)/g,'`purchase-method-${method.id}-description`'));
 const signIn=path.join(ref,'SignIn.jsx');
 fs.writeFileSync(signIn,fs.readFileSync(signIn,'utf8').replace('msg("SignIn:17", [signup ? "signup" : "signin"])','`account-${signup ? "signup" : "signin"}-tab`'));
 execFileSync(process.execPath,[path.join(import.meta.dirname,'connect-copy.mjs')],{stdio:'inherit'});

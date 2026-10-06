@@ -21,6 +21,7 @@ export function WebsiteNumbers() {
   const { data, isLoading, isError, refetch } = useAnalyticsQuery(period);
   const change = (now: number, before: number) => (before ? now / before - 1 : 0);
   const against = t(`against.${period}`);
+  const rankingHeight = Math.max(240, Math.max(data?.pages.length ?? 0, data?.services.length ?? 0) * 36 + 24);
   const bucket = (v: string | number) => {
     const s = String(v);
     if (data?.bucket === "month") return f.date(`${s}-01T00:00:00`, { month: "short", year: "2-digit" });
@@ -76,12 +77,12 @@ export function WebsiteNumbers() {
           />
 
           <div className="grid gap-4 xl:grid-cols-2">
-            <BarChart loading={isLoading} layout="rows" title={t("topPages")} data={data?.pages ?? []} x={{ key: "path", label: t("page") }} series={[{ key: "visits", label: t("visits") }]} />
-            <BarChart loading={isLoading} layout="rows" title={t("topServices")} description={t("topServicesHint")} data={data?.services ?? []} x={{ key: "name", label: t("service") }} series={[{ key: "leads", label: t("leadsSample"), color: 2 }]} />
+            <BarChart loading={isLoading} layout="rows" height={rankingHeight} labelWidth={100} maxBarSize={24} className="[&>div:first-child]:min-h-16" title={t("topPages")} data={data?.pages ?? []} x={{ key: "path", label: t("page") }} series={[{ key: "visits", label: t("visits") }]} />
+            <BarChart loading={isLoading} layout="rows" height={rankingHeight} labelWidth={148} maxBarSize={24} className="[&>div:first-child]:min-h-16" title={t("topServices")} description={t("topServicesHint")} data={data?.services ?? []} x={{ key: "name", label: t("service") }} series={[{ key: "leads", label: t("leadsSample"), color: 2 }]} />
           </div>
 
           <div className="grid gap-4 xl:grid-cols-2">
-            <Card className="flex flex-col gap-4">
+            <Card className="flex min-w-0 flex-col gap-4">
               <h3 className="font-display text-title-sm text-fg">{t("topArticles")}</h3>
               {isLoading || !data ? null : (
                 <ol className="flex flex-col divide-y divide-line">

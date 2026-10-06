@@ -70,6 +70,8 @@ export function VersionRow({ entry, index, onError }: { entry: Entry; index: num
   const v = entry.versions[index];
   const before = entry.versions[index + 1]?.version ?? null;
   const current = index === 0;
+  const previousContent = useEntryVersionQuery({ type: entry.type, id: entry.id, version: v.version }, { skip: current || entry.type !== "caseStudy" || can("content:approve") });
+  const needsApproval = entry.type === "caseStudy" && !can("content:approve") && (!previousContent.data?.content || ["narrativePublished", "sampleNarrativePublished"].some(key => previousContent.data?.content?.[key] !== entry.content[key]));
   return (
     <li className="flex flex-col gap-1 border-b border-line pb-3 last:border-0">
       <span className="flex items-center gap-2">
@@ -84,7 +86,7 @@ export function VersionRow({ entry, index, onError }: { entry: Entry; index: num
         <Button size="sm" variant="ghost" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
           {open ? t("hideChanges") : t("showChanges")}
         </Button>
-        {!current && can("content:edit") ? (
+        {!current && can("content:edit") && !needsApproval ? (
           <ConfirmDialog
             trigger={<Button size="sm" variant="secondary">{t("restore")}</Button>}
             tone="primary"
@@ -102,6 +104,7 @@ export function VersionRow({ entry, index, onError }: { entry: Entry; index: num
             }
           />
         ) : null}
+        {!current && needsApproval ? <span className="text-body-sm text-fg-muted">{t("narrativePermission")}</span> : null}
       </span>
       {open ? <VersionChanges entry={entry} version={v.version} before={before} /> : null}
     </li>
@@ -142,7 +145,7 @@ export function TranslationBar({ entry, lang, dirty, onError }: { entry: Entry; 
 }
 
 /** Publishing at a chosen time instead of now; the mock's clock publishes it then. */
-export function ScheduleButton({ onSchedule }: { onSchedule: (publishAt: string) => Promise<unknown> }) {
+export function ScheduleButton({ onSchedule, onError }: { onSchedule: (publishAt: string) => Promise<unknown>; onError: (error: unknown) => void }) {
   const t = useTranslations("Editor");
   const [open, setOpen] = useState(false);
   const [date, setDate] = useState<string | null>(null);
@@ -157,7 +160,13 @@ export function ScheduleButton({ onSchedule }: { onSchedule: (publishAt: string)
     setError(false);
     onSchedule(at.toISOString())
       .then(() => setOpen(false))
-      .catch((e: ApiError) => setError(e?.fieldErrors?.publishAt === "future"))
+      .catch((e: ApiError) => {
+        if (e?.fieldErrors?.publishAt === "future") setError(true);
+        else {
+          setOpen(false);
+          onError(e);
+        }
+      })
       .finally(() => setBusy(false));
   };
   return (

@@ -7,6 +7,14 @@
     "*.css"
   ],
   "exports": {
+    "./auth": {
+      "types": "./dist/components/AuthSuccess.d.ts",
+      "default": "./dist/components/AuthSuccess.js"
+    },
+    "./provider": {
+      "types": "./dist/provider/OrgtikProvider.d.ts",
+      "default": "./dist/provider/OrgtikProvider.js"
+    },
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"

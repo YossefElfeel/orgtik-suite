@@ -8,7 +8,7 @@ import {
 import { getPaymentMethod } from "./purchase-payment.js";
 import { msg } from "../content/strings.js";
 
-export const ORDER_SESSION_KEY = msg("purchase-adapter:1");
+export const ORDER_SESSION_KEY = "orgtik.purchase-preview.v1";
 const payments = new Map();
 const setups = new Map();
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -40,7 +40,7 @@ export function createPurchaseSnapshot(
     paymentStatus: "succeeded",
     paymentMethod: method.id,
     createdAt: new Date().toISOString(),
-    currency: msg("purchase-adapter:5"),
+    currency: "CHF",
     groups: groups.map((g) => ({
       id: g.id,
       name: groupName(g),

@@ -61,6 +61,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
     search: search || undefined,
     ...(filterKey && filter !== "all" ? { [filterKey]: filter } : {}),
   });
+  const templates = useEntriesQuery({ type: key, pageSize: 100 }, { skip: !CREATABLE.has(key) || !can("content:edit") });
   const needsFamilies =
     key === "service" || key === "article" || key === "serviceFamily";
   const families = useEntriesQuery(
@@ -386,7 +387,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
           />
         ) : null}
         {CREATABLE.has(key) && can("content:edit") ? (
-          <NewEntry type={key} entries={data?.items ?? []} />
+          <NewEntry type={key} entries={templates.data?.items ?? []} />
         ) : null}
       </div>
       {FIXED_SET.has(key) ? (

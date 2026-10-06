@@ -9,6 +9,11 @@ type Plural = Partial<Record<Intl.LDMLPluralRule, string>> & { other: string };
 type Message = string | Plural;
 
 const en = {
+  authSuccessTitle: "Authentication Successful",
+  authSuccessBody: "Your credentials have been verified. Redirecting you to the dashboard…",
+  authVerified: "Verified Successfully",
+  authAccessGranted: "Access granted",
+  authSecureAccess: "Secure access verified",
   pickDate: "Pick a date",
   pickRange: "Pick a start and end date",
   pickTime: "Time",
@@ -126,6 +131,11 @@ export type StringKey = keyof typeof en;
 export type Strings = Record<StringKey, Message>;
 
 const ar: Strings = {
+  authSuccessTitle: "تم تسجيل الدخول بنجاح",
+  authSuccessBody: "تم التحقق من بياناتك. جارٍ نقلك إلى لوحة التحكم…",
+  authVerified: "تم التحقق بنجاح",
+  authAccessGranted: "تم السماح بالدخول",
+  authSecureAccess: "تم التحقق من الوصول الآمن",
   pickDate: "اختر تاريخًا",
   pickRange: "اختر تاريخي البداية والنهاية",
   pickTime: "الوقت",
@@ -262,6 +272,11 @@ const ar: Strings = {
 
 // D-025: German uses the generic register (Mitarbeiter, Benutzer) and "Sie".
 const de: Strings = {
+  authSuccessTitle: "Anmeldung erfolgreich",
+  authSuccessBody: "Ihre Zugangsdaten wurden bestätigt. Sie werden zum Dashboard weitergeleitet…",
+  authVerified: "Erfolgreich bestätigt",
+  authAccessGranted: "Zugriff gewährt",
+  authSecureAccess: "Sicherer Zugang bestätigt",
   pickDate: "Datum wählen",
   pickRange: "Start- und Enddatum wählen",
   pickTime: "Uhrzeit",
@@ -376,6 +391,11 @@ const de: Strings = {
 };
 
 const fr: Strings = {
+  authSuccessTitle: "Authentification réussie",
+  authSuccessBody: "Vos identifiants ont été vérifiés. Redirection vers le tableau de bord…",
+  authVerified: "Vérification réussie",
+  authAccessGranted: "Accès autorisé",
+  authSecureAccess: "Accès sécurisé vérifié",
   pickDate: "Choisir une date",
   pickRange: "Choisir les dates de début et de fin",
   pickTime: "Heure",
@@ -490,6 +510,11 @@ const fr: Strings = {
 };
 
 const it: Strings = {
+  authSuccessTitle: "Autenticazione riuscita",
+  authSuccessBody: "Le tue credenziali sono state verificate. Reindirizzamento alla dashboard…",
+  authVerified: "Verifica completata",
+  authAccessGranted: "Accesso consentito",
+  authSecureAccess: "Accesso sicuro verificato",
   pickDate: "Scegli una data",
   pickRange: "Scegli le date di inizio e fine",
   pickTime: "Ora",

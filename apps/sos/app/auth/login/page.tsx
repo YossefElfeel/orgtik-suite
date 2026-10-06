@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuthSuccess } from "@orgtik/ui/auth";
+
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -24,6 +26,7 @@ export default function LoginPage() {
   const t = useTranslations("Auth");
   const locale = useLocale();
   const router = useRouter();
+  const { confirm, success } = useAuthSuccess("OrgTik", true);
   const searchParams = useSearchParams();
   const [login, { isLoading }] = useLoginMutation();
   const [formError, setFormError] = useState<string | null>(null);
@@ -63,18 +66,21 @@ export default function LoginPage() {
       if (back && token) {
         try {
           const href = await handoffHref(back.domain, token, { scope: back.scope, locale });
-          return window.location.assign(`${href}&redirect=${encodeURIComponent(back.path)}`);
+          return window.location.assign(`${href}&fresh=1&redirect=${encodeURIComponent(back.path)}`);
         } catch {
-          // The hand-off failed: stay in SOS, where the app can be opened from the rail.
+          setFormError(t("failed"));
+          return;
         }
       }
-      return router.push(next);
+      return confirm(() => router.replace(next));
     } catch (err) {
       // The API's own messages are English only; show ours, in the person's language.
       const status = (err as FetchBaseQueryError)?.status;
       setFormError(status === 401 ? t("invalidCredentials") : status === 400 ? t("validationFailed") : t("failed"));
     }
   };
+
+  if (success) return success;
 
   return (
     <AuthPanel title={t("title")} subtitle={t("subtitle")} error={formError} success={formError ? null : welcome}>

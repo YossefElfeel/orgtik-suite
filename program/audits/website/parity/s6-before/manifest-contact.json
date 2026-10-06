@@ -1,0 +1,41 @@
+{
+  "label": "s6-before",
+  "site": "http://localhost:4173",
+  "commit": {
+    "head": "6b849ee",
+    "dirty": false
+  },
+  "at": "2026-10-01T06:52:30.166Z",
+  "clock": {
+    "start": "2026-09-29T06:00:00.000Z",
+    "settleMs": 15000
+  },
+  "widths": [
+    390,
+    768,
+    1440
+  ],
+  "captures": [
+    {
+      "name": "contact__390",
+      "route": "/contact",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "contact__768",
+      "route": "/contact",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "contact__1440",
+      "route": "/contact",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    }
+  ]
+}
