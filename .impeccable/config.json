@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "low-contrast",
+        "value": "*",
+        "files": [
+          "program/audits/suite-review/readout.html"
+        ],
+        "createdAt": "2026-10-06T23:48:21.133Z",
+        "reason": "Claude verified: every token pair computed at >= 4.66:1 in light and dark (WCAG AA); the hook can't resolve CSS custom properties"
+      }
+    ]
+  }
+}
