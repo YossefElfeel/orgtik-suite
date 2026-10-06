@@ -13,7 +13,7 @@ import {
   subscribePreviewCustomer,
   signInPreviewCustomer,
 } from "./purchase-identity.js";
-import { signInToSuite, signUpToSuite } from "./suite-session.js";
+import { resetInSuite, signInToSuite, signUpToSuite } from "./suite-session.js";
 
 let accountTabToFocus = null;
 
@@ -627,40 +627,44 @@ export default class SignIn extends ReferencePage {
           this.setState({ error: msg("SignIn:38") });
           return;
         }
-        // Sign in and Create account open the suite, signed in with that account.
-        if (!rec) {
+        // Reset password continues in the suite: it sends the code, its page takes the new password.
+        if (rec) {
           if (this.signingIn) return;
           this.signingIn = true;
-          (signup
-            ? signUpToSuite({ name, email: em, password: pw })
-            : signInToSuite(em, pw)
-          )
-            .then(({ user, href }) => {
-              signInPreviewCustomer({
-                name: [user?.firstName, user?.lastName]
-                  .filter(Boolean)
-                  .join(" "),
-                email: em,
-                company: "",
-              });
-              window.location.assign(href);
-            })
-            .catch((err) => {
+          resetInSuite(em)
+            .then((href) => window.location.assign(href))
+            .catch(() => {
               this.signingIn = false;
-              this.setState({
-                error:
-                  err.message === "credentials"
-                    ? msg("SuiteSignIn:1")
-                    : err.message === "exists"
-                      ? msg("SuiteSignIn:3")
-                      : msg("SuiteSignIn:2"),
-              });
+              this.setState({ error: msg("SuiteSignIn:2") });
             });
           return;
         }
-        if (!rec) signInPreviewCustomer({ name, email: em, company: "" });
-        e.currentTarget.reset();
-        this.setState({ done: true, error: "" });
+        // Sign in and Create account open the suite, signed in with that account.
+        if (this.signingIn) return;
+        this.signingIn = true;
+        (signup
+          ? signUpToSuite({ name, email: em, password: pw })
+          : signInToSuite(em, pw)
+        )
+          .then(({ user, href }) => {
+            signInPreviewCustomer({
+              name: [user?.firstName, user?.lastName].filter(Boolean).join(" "),
+              email: em,
+              company: "",
+            });
+            window.location.assign(href);
+          })
+          .catch((err) => {
+            this.signingIn = false;
+            this.setState({
+              error:
+                err.message === "credentials"
+                  ? msg("SuiteSignIn:1")
+                  : err.message === "exists"
+                    ? msg("SuiteSignIn:3")
+                    : msg("SuiteSignIn:2"),
+            });
+          });
       },
     };
     Object.assign(hero, {

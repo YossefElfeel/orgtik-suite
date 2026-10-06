@@ -21,14 +21,16 @@ export function middleware(request: NextRequest) {
 
   // If user is logged in and tries to access auth routes (except redirecting), redirect to home
   // Allow customers with sales scope to stay on redirecting page
-  // Allow /auth?token= so cross-dashboard SSO can replace the current session, and
-  // /auth/handoff?code= so signing in on the website replaces it too
+  // Allow /auth?token= so cross-dashboard SSO can replace the current session,
+  // /auth/handoff?code= so signing in on the website replaces it too, and the
+  // reset step the website's Reset password opens, even with a session here
   if (
     token &&
     isAuthRoute &&
     pathname !== "/auth/redirecting" &&
     pathname !== "/auth/invite" &&
     pathname !== "/auth/handoff" &&
+    pathname !== "/auth/reset-password" &&
     !(pathname === "/auth" && hasIncomingToken)
   ) {
     return NextResponse.redirect(new URL("/", request.url));

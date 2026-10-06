@@ -1,7 +1,7 @@
 // Signing in or creating an account on the website opens the OrgTik suite (2026-10-07): the
 // suite's identity API checks (or creates) the account, gives a one-time code for the session,
 // and SOS takes it at /auth/handoff, so no token travels in the address. The password is sent
-// once and never kept here.
+// once and never kept here. Reset password starts the suite's own reset and opens its next step.
 //   VITE_SUITE_URL   the suite's home (SOS), e.g. https://orgtik-suite-sos.vercel.app
 //   VITE_SUITE_API   its identity API, e.g. https://orgtik-suite-mock.vercel.app/sos/api
 export const SUITE_URL = (
@@ -58,4 +58,13 @@ export async function signUpToSuite({ name, email, password }) {
   if (res.status === 409) throw new Error("exists");
   if (!res.ok) throw new Error("unavailable");
   return openSuite(res);
+}
+
+// Starts a password reset in the suite (it emails a code) and resolves to the suite page where
+// the code and a new password are entered. The suite answers the same for unknown emails, so
+// this never reveals whether an account exists. Rejects with Error("unavailable").
+export async function resetInSuite(email) {
+  const res = await send("/auth/forgot-password", { email });
+  if (!res.ok) throw new Error("unavailable");
+  return `${SUITE_URL}/auth/reset-password`;
 }
