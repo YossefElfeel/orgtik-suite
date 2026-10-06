@@ -120,6 +120,23 @@ Other startup switches: `MOCK_STRICT_SCOPES=1` turns strict access on from the s
 - Each app has a `.env.local` pointing it at its local API. Delete an app's `.env.local` to point it back at its normal configuration.
 - Requests the mock doesn't handle return 404 and are logged to `logs/unhandled.log`.
 
+## Data that survives restarts (the write journal, D-053)
+
+By default the data lives in memory, as above. With a journal store, every successful change (POST, PUT, PATCH, DELETE) is recorded and replayed after the seed, so the data survives a restart and every Vercel instance shows the same data. Changes to the mock's own controls and anything about sign-in, passwords or tokens are never recorded.
+
+| Setting | Effect |
+|---|---|
+| `KV_REST_API_URL` + `KV_REST_API_TOKEN` (or `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`) | Upstash Redis. The Vercel Marketplace integration sets these on the mock project. |
+| `MOCK_JOURNAL=file` | A file in `journal/<sandbox>.json`. Useful for trying a "cold start" locally. |
+| `MOCK_JOURNAL=memory` | In this process only (tests). |
+| `MOCK_SANDBOX=<name>` | Which data set (default `demo`). Each mock deployment uses one sandbox. |
+
+- **How it stays identical:** the seed is built at the instant stored with the journal, and each change is replayed with its own recorded instant and random seed (`lib/clock.js` `runPinned`).
+- **One request at a time:** while a journal is on, the mock answers one request at a time, so the order applied equals the order recorded. Changes go through a loopback HTTP server inside the process.
+- **Status and reset:** `GET /__mock/status` shows `journal` (sandbox, store, entries, skipped). `POST /__mock/reset` starts a new journal and a fresh seed for that sandbox only. `skipped` above 0 after a cold start means a replay didn't reproduce; report it.
+- **Limits:** 5,000 changes per sandbox (`MOCK_JOURNAL_MAX`), and request bodies up to 512 KB. Larger uploads still work, but they aren't recorded. A response header `x-mock-journal` says when a change wasn't recorded.
+- **Test:** `node lib/journal.test.js` (cold starts in separate processes, 8 checks).
+
 ## Known issues that come from the apps themselves
 
 These show up locally but are bugs in the app code, not in the mock:
