@@ -50,6 +50,10 @@ Short and mechanical; the review needs a hosted suite whose data survives a mult
 - That uncommitted work belongs to the open work order `orgtik-program/plans/2026-10-06-bugs-and-remaining.md` (detail in `2026-10-06-review-findings.md`), whose user decisions stand: **D-049** restored projects + `sampleNarrativePublished`, **D-050** Roadmap follows the owner's GitHub version, **D-051** the "Authentication successful" screen stays, only on a successful sign-in. Its WIP: `AuthSuccess` in `@orgtik/ui` + `useAuthSuccess()` in every app's auth page, SOS layout, WM overview chart, WM/mock ideas (M1–M3), website checkout/case-study files, program evidence files.
 - It is finished **inside the monorepo** as the first PRs (one per section of that work order), so nothing is lost and it gets preview checks.
 
+**Amendments found while running Phase 0 (2026-10-07):**
+- **Vercel Hobby deployment limit hit:** every push creates 12 deployments (one per project, even when its build is skipped), and the daily cap was reached. Phase 0.4 must make a push deploy only the affected apps — either Vercel Pro, or git auto-deploy turned off and GitHub Actions deploying only `turbo`-affected apps with the Vercel CLI (needs a `VERCEL_TOKEN` secret the user creates). The user decides. Until then: few pushes, batched.
+- **Sandboxes are separate mock deployments, not URL prefixes:** the mock's modules are process-wide singletons, so two sandboxes can't share one process. Each sandbox is the same `mock/` code deployed with its own `MOCK_SANDBOX` (journal key): `demo` = `orgtik-suite-mock`, `preview`/`review` = a second mock project. Replay pins the mock clock to each entry's time and seeds `Math.random` per entry (177 uses of time/randomness in the mock).
+
 Working rules from here on: branch `<area>/<topic>` → PR → green checks → squash-merge; each parallel session in its own worktree; never touch the owner's `orgtik-website` repo or Vercel project; drift protocol D-031 runs inside the monorepo; ask the user whenever work stops on their decision.
 
 ---
