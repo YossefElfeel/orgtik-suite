@@ -136,6 +136,7 @@ function makeToken(user, type, ttlSec, extra = {}) {
 }
 function issueTokens(user, extra = {}) {
   const expiresIn = 30 * 24 * 3600;
+  if (user.signupSeal) extra = { ...extra, signup: user.signupSeal }; // see addSignupUser
   return { accessToken: makeToken(user, "access", expiresIn, extra), refreshToken: makeToken(user, "refresh", 90 * 24 * 3600, extra), expiresIn };
 }
 function decode(token) {
@@ -163,7 +164,12 @@ function tokenFrom(req) {
 // Deactivated or deleted users are signed out even if they still hold a token.
 function userFromToken(token) {
   const p = token && decode(token);
-  const u = p ? findUser(p.sub ?? p.id) : null;
+  let u = p ? findUser(p.sub ?? p.id) : null;
+  // Hosted, a sign-up made on another instance of the mock: rebuild it from the token.
+  if (!u && p?.signup && config.hosted) {
+    const s = openHandoff(p.signup);
+    if (s?.user && String(s.user.id) === String(p.sub ?? p.id) && !findByEmail(s.user.email)) u = addSignupUser(s.user, s.info);
+  }
   return u && u.isActive !== false && !u.deletedAt ? u : null;
 }
 const userFromReq = (req) => userFromToken(tokenFrom(req));
@@ -190,6 +196,32 @@ function routes(app) {
     if (!u || password !== u.password) return fail(res, 401, "Invalid email or password. Please try again.");
     if (!u.isActive) return fail(res, 403, "This account is deactivated.");
     return ok(res, authPayload(u), "Login successful");
+  });
+
+  // Sign-up from the public website (2026-10-07): a new customer account, signed in at once.
+  // Modules that give a customer somewhere to land (the platform's workspace) listen through
+  // onRegister. Like everything here, the account lives in memory until the next reset.
+  app.post("/api/auth/register", (req, res) => {
+    const b = req.body || {};
+    const email = String(b.email || "").trim().toLowerCase();
+    const name = String(b.name || "").trim();
+    const password = String(b.password || "");
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail(res, 400, "Please enter a valid email.");
+    if (!name) return fail(res, 400, "Please enter your name.");
+    if (password.length < 8) return fail(res, 400, "Use at least 8 characters for your password.");
+    if (findByEmail(email)) return fail(res, 409, "An account with this email already exists. Sign in instead.");
+    const [firstName, ...rest] = name.split(/\s+/);
+    const at = new Date().toISOString();
+    // Hosted, several instances hand out ids, so a sign-up takes a random one there.
+    const id = config.hosted ? 1e6 + require("crypto").randomInt(9e8) : Math.max(0, ...users.map((x) => x.id)) + 1;
+    const u = {
+      id, key: `signup_${id}`, email, username: email.split("@")[0], firstName, lastName: rest.join(" "),
+      avatar: null, isActive: true, isEmailVerified: true, managerId: null, userType: "customer", phone: null,
+      password, createdAt: at, updatedAt: at,
+      profile: { id, jobTitle: null, department: String(b.company || "").trim() || null, about: null, language: "en", timeZone: "Europe/Zurich", weekStartDay: "monday", dateFormat: "DD/MM/YYYY", timeFormat: "24h", flyoutToastMessage: true, timezoneChangeNotification: true, createdAt: at, updatedAt: at },
+    };
+    addSignupUser(u, { company: String(b.company || "").trim() });
+    return ok(res, authPayload(u), "Account created", 201);
   });
 
   app.get("/api/auth/me", (req, res) => {
@@ -240,6 +272,24 @@ function routes(app) {
   });
 }
 const handoffs = new Map(); // code -> { token, expiresAt }
+const registerHooks = [];
+const onRegister = (fn) => registerHooks.push(fn);
+// Adds a signed-up person and lets modules give them somewhere to land. Hosted, the person also
+// gets a sealed copy of themselves that rides in every token (issueTokens), so another instance
+// of the mock can rebuild them (userFromToken); it's non-enumerable, so it never reaches a response.
+function addSignupUser(u, info = {}) {
+  if (config.hosted) Object.defineProperty(u, "signupSeal", { value: sealHandoff({ user: u, info }), enumerable: false });
+  users.push(u);
+  (grants.global || (grants.global = {}))[u.key] = { roles: [], permissions: [] };
+  for (const fn of registerHooks) {
+    try {
+      fn(u, info);
+    } catch (e) {
+      console.error("[identity] a sign-up hook failed:", e);
+    }
+  }
+  return u;
+}
 
 const handoffKey = () => require("crypto").createHash("sha256").update(process.env.MOCK_HANDOFF_SECRET || "orgtik-suite-prototype").digest();
 function sealHandoff(data) {
@@ -261,7 +311,7 @@ function openHandoff(code) {
 }
 
 module.exports = {
-  LOCAL_PASSWORD, users, scopes, grants,
+  LOCAL_PASSWORD, users, scopes, grants, onRegister,
   registerModules, userScopes, scopeByName,
   findUser, findByKey, findByEmail, fullName, publicUser,
   issueTokens, decode, tokenFrom, userFromToken, userFromReq, requireUser, authPayload,

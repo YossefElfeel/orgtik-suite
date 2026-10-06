@@ -1,6 +1,6 @@
-## Sign-in opens the suite — 2026-10-07
+## Sign-in and sign-up open the suite — 2026-10-07
 
-The user asked that signing in on the website takes the customer into the OrgTik suite. This supersedes the in-memory-only sign-in above, for Sign in only: the form sends the email and password once to the suite's identity API (`src/reference/suite-session.js`, `VITE_SUITE_API`), gets a one-time code, and opens SOS at `VITE_SUITE_URL/auth/handoff?code=…` signed in; no token goes in the address and nothing is stored. A wrong email or password, or an unreachable suite, shows the form's existing error line. Create account and Reset password stay local previews (the suite has no sign-up yet). Point `VITE_CRM_PORTAL_URL` at the suite so My account and the post-purchase account link open it too.
+The user asked that signing in on the website takes the customer into the OrgTik suite. This supersedes the in-memory-only sign-in above. Sign in: the form sends the email and password once to the suite's identity API (`src/reference/suite-session.js`, `VITE_SUITE_API`), gets a one-time code, and opens SOS at `VITE_SUITE_URL/auth/handoff?code=…` signed in; no token goes in the address and nothing is stored. A wrong email or password, or an unreachable suite, shows the form's existing error line. Create account works the same way (same day): it creates a customer account with its own workspace in the suite (`/auth/register`) and opens SOS signed in; an email that already has an account shows "Sign in instead". Reset password stays a local preview. Point `VITE_CRM_PORTAL_URL` at the suite so My account and the post-purchase account link open it too.
 
 ## GitHub content sync — 2026-10-06
 

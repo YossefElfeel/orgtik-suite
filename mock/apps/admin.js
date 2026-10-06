@@ -59,6 +59,12 @@ module.exports = {
     // A reset re-requires this module, so S starts empty; the SOS mount (built first) may have made it.
     const s = store(ctx);
     const H = helpers();
+    // Someone who signs up on the website lands in their own workspace (USR).
+    ctx.identity.onRegister?.((u, { company }) => {
+      // A fixed id, so the same workspace is rebuilt if another hosted instance rebuilds the person.
+      const ws = s.createWorkspace({ wsId: `ws_${u.key}`, ownerKey: u.key, name: company || `${u.firstName}'s workspace`, email: u.email });
+      s.log(u.key, "sign_up", ws.id);
+    });
     adminApi(app, ctx, s, H);
     appApi(app, ctx, s, H);
     controls(app, s, H);

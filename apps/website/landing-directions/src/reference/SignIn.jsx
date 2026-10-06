@@ -13,7 +13,7 @@ import {
   subscribePreviewCustomer,
   signInPreviewCustomer,
 } from "./purchase-identity.js";
-import { signInToSuite } from "./suite-session.js";
+import { signInToSuite, signUpToSuite } from "./suite-session.js";
 
 let accountTabToFocus = null;
 
@@ -627,11 +627,14 @@ export default class SignIn extends ReferencePage {
           this.setState({ error: msg("SignIn:38") });
           return;
         }
-        // Sign in opens the suite, signed in with the same account.
-        if (!rec && !signup) {
+        // Sign in and Create account open the suite, signed in with that account.
+        if (!rec) {
           if (this.signingIn) return;
           this.signingIn = true;
-          signInToSuite(em, pw)
+          (signup
+            ? signUpToSuite({ name, email: em, password: pw })
+            : signInToSuite(em, pw)
+          )
             .then(({ user, href }) => {
               signInPreviewCustomer({
                 name: [user?.firstName, user?.lastName]
@@ -648,7 +651,9 @@ export default class SignIn extends ReferencePage {
                 error:
                   err.message === "credentials"
                     ? msg("SuiteSignIn:1")
-                    : msg("SuiteSignIn:2"),
+                    : err.message === "exists"
+                      ? msg("SuiteSignIn:3")
+                      : msg("SuiteSignIn:2"),
               });
             });
           return;

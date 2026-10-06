@@ -3841,6 +3841,13 @@ export default {
     lead: "",
     trail: "",
   },
+  "SuiteSignIn:3": {
+    k: "st_signIn|b4|s3",
+    seed: "An account with this email already exists. Sign in instead.",
+    shape: ["An account with this email already exists. Sign in instead."],
+    lead: "",
+    trail: "",
+  },
   "SuiteSignIn:2": {
     k: "st_signIn|b4|s2",
     seed: "We couldn't reach OrgTik right now. Please try again in a moment.",

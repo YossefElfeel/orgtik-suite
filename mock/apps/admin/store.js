@@ -292,6 +292,14 @@ function makeStore({ identity }) {
     seats: (ws) => ws.members.filter((m) => m.role !== "guest" && m.status === "active").length,
     log: (by, action, target, extra = {}) => db.audit.unshift({ at: iso(now()), by, action, target, ...extra }),
     resolve: (planId, country, cycle, seats) => pricing.resolveLine(db, { planId, cycle, country, seats }),
+    // A customer who signs up on the website: their own workspace on the free General plan.
+    createWorkspace: ({ wsId, ownerKey, name, email, country = "CH", currency = "CHF" }) => {
+      const slug = `${String(name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "workspace"}-${seq + 1}`;
+      const ws = workspace({ id: wsId ?? id("ws"), name, slug, country, currency, createdAt: iso(now()), members: [{ userKey: ownerKey, role: "owner", status: "active", tools: null, joinedAt: iso(now()) }], billing: { legalName: name, email, address: "", taxId: "", country } });
+      ws.lines = [line(ws, "general_free", "free", { startedAt: iso(now()) })];
+      db.workspaces.push(ws);
+      return ws;
+    },
   };
   return S;
 }
