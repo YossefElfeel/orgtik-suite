@@ -1,7 +1,18 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/index.js": { "includeFiles": "{apps,lib,config.js,server.js}/**", "maxDuration": 60, "memory": 2048 }
+    "api/index.js": {
+      "includeFiles": "{apps,lib,config.js,server.js}/**",
+      "maxDuration": 60,
+      "memory": 2048
+    }
   },
-  "rewrites": [{ "source": "/(.*)", "destination": "/api/index" }]
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/index"
+    }
+  ],
+  "installCommand": "cd .. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
+  "ignoreCommand": "cd .. && npx --yes turbo@2.11.7 query affected --packages orgtik-local-dev --exit-code --base \"${VERCEL_GIT_PREVIOUS_SHA:-HEAD^}\""
 }

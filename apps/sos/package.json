@@ -5,40 +5,42 @@
   "scripts": {
     "dev": "next dev --turbopack -p 3013",
     "build": "next build --turbopack",
+    "typecheck": "node ../../tools/next-env.cjs && tsc --noEmit",
+    "i18n:check": "node ../../tools/i18n/check-catalogs.mjs",
     "start": "next start -p 3013",
     "lint": "eslint"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.2.1",
-    "@orgtik/ui": "file:.yalc/@orgtik/ui",
-    "@phosphor-icons/react": "^2.1.10",
-    "@reduxjs/toolkit": "^2.8.2",
-    "@somion/sos-bar": "^3.11.2",
-    "@tanstack/react-table": "^8.21.3",
-    "clsx": "^2.1.1",
-    "cookies-next": "^6.1.0",
-    "next": "^15.5.9",
-    "next-intl": "^4.8.3",
+    "@hookform/resolvers": "5.2.1",
+    "@orgtik/ui": "workspace:*",
+    "@phosphor-icons/react": "2.1.10",
+    "@reduxjs/toolkit": "2.8.2",
+    "@somion/sos-bar": "3.11.2",
+    "@tanstack/react-table": "8.21.3",
+    "clsx": "2.1.1",
+    "cookies-next": "6.1.0",
+    "next": "15.5.25",
+    "next-intl": "4.8.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-hook-form": "^7.62.0",
-    "react-redux": "^9.2.0",
-    "tailwind-merge": "^3.3.1",
-    "zod": "^4.1.5"
+    "react-hook-form": "7.62.0",
+    "react-redux": "9.2.0",
+    "tailwind-merge": "3.7.0",
+    "zod": "4.1.5"
   },
   "overrides": {
     "postcss": "^8.5.26"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^0.1.0",
-    "@swc/core": "^1.15.21",
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "cross-env": "^10.1.0",
-    "tailwindcss": "^4",
-    "tw-animate-css": "^1.3.7",
-    "typescript": "^5"
+    "@eslint/eslintrc": "0.1.0",
+    "@swc/core": "1.15.21",
+    "@tailwindcss/postcss": "4.1.12",
+    "@types/node": "20.19.11",
+    "@types/react": "19.1.12",
+    "@types/react-dom": "19.1.9",
+    "cross-env": "10.1.0",
+    "tailwindcss": "4.1.12",
+    "tw-animate-css": "1.3.7",
+    "typescript": "5.9.2"
   }
 }

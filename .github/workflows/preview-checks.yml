@@ -1,0 +1,75 @@
+# Runs the audit kit against a Vercel preview when it finishes deploying (Plan v2, Phase 0.4).
+# Off until the repository variable PREVIEW_CHECKS is "on" and PREVIEW_MOCK_URL points at the
+# mock deployment that serves the "preview" sandbox (D-053). Vercel's GitHub integration sends the
+# deployment_status event, so no Vercel token is needed here.
+name: Preview checks
+
+on: deployment_status
+
+concurrency:
+  group: preview-mock # one run at a time: they share the preview sandbox's data
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    if: >-
+      github.event.deployment_status.state == 'success' &&
+      vars.PREVIEW_CHECKS == 'on' &&
+      contains(github.event.deployment.environment, 'orgtik-suite-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+
+      - name: Which app deployed
+        id: app
+        run: |
+          env_name='${{ github.event.deployment.environment }}'
+          key=$(echo "$env_name" | sed -E 's/.*orgtik-suite-([a-z]+).*/\1/')
+          echo "key=$key" >> "$GITHUB_OUTPUT"
+          echo "url=${{ github.event.deployment_status.environment_url || github.event.deployment_status.target_url }}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        if: steps.app.outputs.key != 'mock' && steps.app.outputs.key != 'website'
+        with:
+          node-version: 22
+
+      - name: Audit kit
+        if: steps.app.outputs.key != 'mock' && steps.app.outputs.key != 'website'
+        working-directory: program/tools/audit-kit
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+          node ../../../tools/dev/old-layout-links.mjs
+
+      - name: Golden flows and VS-1 against the preview
+        if: steps.app.outputs.key != 'mock' && steps.app.outputs.key != 'website'
+        working-directory: program/tools/audit-kit
+        env:
+          KEY: ${{ steps.app.outputs.key }}
+          PREVIEW_URL: ${{ steps.app.outputs.url }}
+          MOCK_PUBLIC_URL: ${{ vars.PREVIEW_MOCK_URL }}
+          SUITE_WEB_URLS_BASE: ${{ vars.SUITE_WEB_URLS }}
+        run: |
+          # The deployed app's preview replaces its production address; the others stay.
+          export SUITE_WEB_URLS=$(node -e 'const m=JSON.parse(process.env.SUITE_WEB_URLS_BASE||"{}");m[process.env.KEY]=process.env.PREVIEW_URL;console.log(JSON.stringify(m))')
+          curl -fsS -X POST "$MOCK_PUBLIC_URL/sos/__mock/reset" > /dev/null
+          status=0
+          node vs1.mjs --app "$KEY" --route / --label "preview-${GITHUB_SHA::7}" || status=1
+          if [ -f "flows/$KEY.mjs" ]; then
+            node "flows/$KEY.mjs" || status=1
+            node "flows/$KEY.mjs" --locale ar || status=1
+          fi
+          exit $status
+
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.app.outputs.key != 'mock' && steps.app.outputs.key != 'website'
+        with:
+          name: audit-${{ steps.app.outputs.key }}-${{ github.event.deployment.sha }}
+          path: program/audits/${{ steps.app.outputs.key }}/
+          retention-days: 14

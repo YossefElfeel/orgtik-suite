@@ -1,0 +1,58 @@
+# Checks every pull request (and main) for the packages the change affects (Plan v2, Phase 0.4).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # turbo's --affected compares with the base branch
+
+      - uses: pnpm/action-setup@v4 # version from package.json "packageManager"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Old folder names for the program tools
+        run: node tools/dev/old-layout-links.mjs
+
+      - name: Vercel project settings are current
+        run: node tools/vercel/configure.mjs --check
+
+      - name: Typecheck, message catalogs and tests (affected packages)
+        run: pnpm turbo run typecheck i18n:check test --affected --continue
+        env:
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+
+      - name: Platform OpenAPI matches the mock
+        run: node program/phase-e/openapi.mjs --check
+
+      - name: Library visual gate (when @orgtik/ui changed)
+        run: |
+          if pnpm turbo query affected --packages @orgtik/ui --exit-code > /dev/null; then
+            echo "@orgtik/ui unchanged: skipped"
+          else
+            pnpm exec playwright install --with-deps chromium
+            pnpm --filter docs build && pnpm --filter docs check
+          fi
+        env:
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+
+      - name: No secrets or tokens in URLs
+        run: node tools/ci/secret-scan.mjs

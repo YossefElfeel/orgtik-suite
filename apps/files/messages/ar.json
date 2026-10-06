@@ -355,7 +355,6 @@
   "Restore": {
     "titleSingle": "استعادة {type}",
     "titleBulk": "استعادة {type}",
-    "confirmMessage": "هل تريد بالتأكيد استعادة",
     "confirmDescription": "سيُعاد إلى {type} الرئيسية.",
     "files": "الملفات",
     "folders": "المجلدات",
