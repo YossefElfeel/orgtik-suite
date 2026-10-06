@@ -41,6 +41,29 @@ monorepo. Copied from the working trees, each file keeping the monorepo's line-e
 
 **Not carried (user's rule):** `audits/tasks/flows/{walks.json,ar/walks.json}` (overwritten by a partial T9 run), `tools/audit-kit/_sales-vs1-final.mjs`, `tools/audit-kit/probe.tmp.mjs`, WM's `AGENTS.md`/`CLAUDE.md` (next-dev notes). The 104 Arabic mirror screenshots (117 MB) stay out of git and are now ignored like the other screenshot folders.
 
-## Freeze: waiting
+## Freeze: done (2026-10-07)
 
-The user's decision (2026-10-07): the local repos are frozen (tag `archive/pre-monorepo-2026-10-07`, `FROZEN.md`) **only after the "GitHub repo and Vercel deployment" session stops**, since it still commits there and copies into `main`. Its later commits on `main` are merged into the Phase 0 branches.
+As the user asked, the freeze waited until the "GitHub repo and Vercel deployment" session had stopped committing to the local repos. That session's last change went to the monorepo (PR #1). Before freezing, no repo had a new commit, and no uncommitted file had changed after the carry.
+
+Each of the 14 local repos then got:
+- the tag `archive/pre-monorepo-2026-10-07` on its last working commit (local only, never pushed);
+- one commit that adds only `FROZEN.md`, pointing to its folder here.
+
+The uncommitted files were left in place, and nothing was deleted. `local-dev/node_modules` stays, because the shared checkout's `mock/node_modules` is a junction to it.
+
+| Repo | Tagged commit | Freeze commit |
+|---|---|---|
+| somion-sos-frontend-main | a0f54a2 | a01713a |
+| task-manager-front-main | 27651e8 | 80a81cb |
+| file-manager-dashboard-main | 8f16d6c | 8f766f1 |
+| sales-dashboardv2-main | 29f3dd3 | 2794d1c |
+| somion-hr-dashboard-main | 963842d | 13826e2 |
+| digital-marketing-frontend-main | 172f73a | 491a2c7 |
+| content-dashboard-somion-main | fd1ff83 | 10b4ad5 |
+| somion-hq | 5372018 | 609667a |
+| orgtik-website-manager | 5d2089f | 5c83ec0 |
+| orgtik-admin | 76f1102 | 9b462fb |
+| orgtik-website (`cms/connect`) | 19bf963 | 0a32bea |
+| local-dev | a203454 | 13b0418 |
+| orgtik-ui | 5e01f9a | a18467c |
+| orgtik-program | 74d4298 | f6b3146 |
