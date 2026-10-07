@@ -74,6 +74,10 @@ Each decision gets a `D-###.md` file with its context, options, decision, conseq
 - [D-060](D-060.md): G-12 tax display is per region: GCC prices include VAT; Europe and Switzerland show prices excluding VAT, labelled; EU business customers with a valid VAT ID get reverse charge (2026-10-07).
 - [D-061](D-061.md): G-04 seat model: seats per tool. The owner buys a seat count for each per-user tool and assigns seats to members; an invitation or a tool grant needs a free seat in that tool (2026-10-07).
 - [D-062](D-062.md): Gulf payment gateways follow spec 03: Tap and HyperPay (2026-10-07).
+- [D-063](D-063.md): Persistent hosted prototype; preserve R0–R4 and deliver prerequisites when needed, with task-based UI/UX acceptance and explicit live-provider deferrals (2026-10-07).
+- [D-064](D-064.md): Platform-priced website offers retain 1/3/6/12-month terms and existing greater-of duration/item savings; paid mock orders precede idempotent account linking (2026-10-07).
+- [D-065](D-065.md): Automatic mock visitor-region detection, Switzerland fallback and controlled test overrides; signed-in workspace billing context wins; no new country selector (2026-10-07).
+- [D-066](D-066.md): Packaged file bytes only, with persistent scoped metadata/references/versions and structured whiteboard state exposed through Files; arbitrary uploads remain deferred (2026-10-07).
 
 ## Proposed
 
