@@ -85,6 +85,8 @@ else {
 const VERCEL = path.join(here, "..", "vercel.json");
 const star = (x) => x.replace(/\/\*$/, "/:path*");
 const vercel = {
+  // Keep host settings (including response headers) when regenerating CMS redirects.
+  ...(fs.existsSync(VERCEL) ? JSON.parse(fs.readFileSync(VERCEL, "utf8")) : {}),
   $schema: "https://openapi.vercel.sh/vercel.json",
   framework: "vite",
   buildCommand: "npm run build",
