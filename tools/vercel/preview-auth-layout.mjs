@@ -84,6 +84,21 @@ try {
   });
 
   browser = await chromium.launch();
+  await check("unhydrated auth forms cannot put credentials into a navigation URL", async () => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    try {
+      const page = await context.newPage();
+      for (const route of ["login", "forgot-password", "reset-password"]) {
+        await page.goto(`${urls.sos}/auth/${route}`, { waitUntil: "domcontentloaded" });
+        const form = page.locator("form");
+        await form.waitFor({ state: "attached" });
+        assert.equal(await form.getAttribute("method"), "post");
+        for (const field of await form.locator("input").all()) assert.equal(await field.isDisabled(), true);
+        assert.equal(await form.locator('button[type="submit"]').isDisabled(), true);
+        assert.equal(new URL(page.url()).search, "");
+      }
+    } finally { await context.close(); }
+  });
   const userCookie = async context => {
     const cookie = (await context.cookies(urls.sos)).find(item => item.name === "SOMION_SOS.user");
     assert.ok(cookie, "SOS user cookie remains present");

@@ -187,7 +187,7 @@ export default function InvitePage() {
 
   return (
     <AuthPanel title={t("passwordTitle")} subtitle={t("passwordBody", { email: invite.invitee.email })} error={error}>
-      <form noValidate onSubmit={onSubmit} className="flex flex-col gap-5">
+      <form method="post" noValidate onSubmit={onSubmit} className="flex flex-col gap-5">
         <PasswordField
           control={control}
           name="password"
