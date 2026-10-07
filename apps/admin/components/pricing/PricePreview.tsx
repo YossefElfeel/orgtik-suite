@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Field, NumberField, PageHeader, SegmentedControl, Select } from "@orgtik/ui";
+import { Field, NumberField, PageHeader, SegmentedControl, Select, useFormatter } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { statusOf } from "@/store/api";
 import { useCountriesQuery, useGridQuery, usePreviewQuery, useZonesQuery, type Cycle, type PreviewRow } from "@/store/pricing";
@@ -18,6 +18,7 @@ export function PricePreview() {
   const tn = useTranslations("Nav");
   const locale = useLocale();
   const money = useMoney();
+  const f = useFormatter();
   const names = useNames();
   const planLabel = usePlanLabel();
   const url = useUrlState();
@@ -64,6 +65,7 @@ export function PricePreview() {
                 {t("perSeat", { quantity: row.original.quantity })} <span dir="ltr">{money(row.original.unit, row.original.currency)}</span>
               </span>
             ) : null}
+            {row.original.taxDisplay ? <span className="text-caption text-fg-muted">{t(row.original.reverseCharge ? "taxReverseCharge" : row.original.taxRate === 0 ? "taxNone" : row.original.taxDisplay === "inclusive" ? "taxInclusive" : "taxExclusive", { rate: f.percent((row.original.taxRate ?? 0) / 100) })}</span> : null}
           </span>
         ),
       },
@@ -72,7 +74,7 @@ export function PricePreview() {
     ],
     // zoneName reads the zone and country lists, which the deps below cover.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [t, names, money, zones.data, countries.data],
+    [t, names, money, f, zones.data, countries.data],
   );
 
   const status = grid.isLoading || preview.isLoading ? "loading" : grid.isError || preview.isError ? (statusOf(preview.error ?? grid.error) === 403 ? "forbidden" : "error") : "ready";

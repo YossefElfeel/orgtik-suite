@@ -98,7 +98,9 @@
       "lastFailure": "Last failed payment",
       "scheduled": "Scheduled change",
       "noScheduled": "None",
-      "otherCurrency": "Priced in {currency}, not the workspace's currency."
+      "otherCurrency": "Priced in {currency}, not the workspace's currency.",
+      "term": "for {count, plural, one {# month} other {# months}}",
+      "capacity": "Seat capacity: {count}"
     },
     "source": {
       "private": "a private plan",
@@ -259,7 +261,7 @@
     },
     "quote": {
       "title": "Quote for {name}",
-      "description": "{seats, plural, one {For # seat.} other {For # seats.}} The price is in the workspace's own currency.",
+      "description": "Seats per tool: {seats}. The price is in the workspace’s currency.",
       "amount": "Price ({currency})",
       "amountHint": "For the whole cycle the customer asked for.",
       "amountMin": "Enter a price above 0.",
@@ -267,7 +269,12 @@
       "validUntil": "Valid until {date}",
       "daysRange": "Between 1 and 90 days.",
       "send": "Send quote",
-      "sent": "Quote sent to {name}"
+      "sent": "Quote sent to {name}",
+      "allocations": "Allocate the full-cycle price",
+      "allocationHint": "Enter each tool’s full-cycle amount. The amounts must equal the quoted total. Zero is allowed for an included tool.",
+      "allocationFor": "{tool} allocation",
+      "allocationRequired": "Allocate every requested tool. The rounded sum must equal the quoted total.",
+      "allocated": "Allocated {amount} of {total}"
     }
   }
 }

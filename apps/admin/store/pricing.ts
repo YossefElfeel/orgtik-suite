@@ -37,7 +37,7 @@ export type Draft = { id: string; state: "draft" | "published"; createdBy: strin
 export type Grid = { zones: Omit<Zone, "countries">[]; plans: GridPlan[]; draft?: Draft; priceVersion: number };
 export type Published = Draft & { notified: number; priceVersion: number; applyMode: ApplyMode; effectiveAt: string };
 
-export type PreviewRow = { country: string; amount: number; currency: string; source: PriceSource; unit: number; quantity: number };
+export type PreviewRow = { country: string; amount: number; currency: string; source: PriceSource; unit: number; quantity: number; taxDisplay?: "inclusive" | "exclusive"; taxRate?: number; reverseCharge?: boolean };
 
 export type LogEntry = {
   id: string;

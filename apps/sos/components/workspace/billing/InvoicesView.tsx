@@ -32,10 +32,6 @@ export function InvoicesView() {
         </Link>
       ),
     },
-    { id: "state", header: t("state"), cell: ({ row }) => <StatusBadge entity="invoice" state={row.original.state} viewer="customer" /> },
-    { id: "issued", header: t("issued"), meta: { numeric: true }, cell: ({ row }) => day(row.original.issuedAt) },
-    { id: "due", header: t("due"), meta: { numeric: true }, cell: ({ row }) => day(row.original.dueAt) },
-    { id: "paid", header: t("paid"), meta: { numeric: true }, cell: ({ row }) => (row.original.paidAt ? day(row.original.paidAt) : <span className="text-fg-muted">{t("notPaid")}</span>) },
     {
       id: "total",
       header: t("total"),
@@ -49,6 +45,10 @@ export function InvoicesView() {
         </span>
       ),
     },
+    { id: "state", header: t("state"), cell: ({ row }) => <StatusBadge entity="invoice" state={row.original.state} viewer="customer" /> },
+    { id: "issued", header: t("issued"), meta: { numeric: true }, cell: ({ row }) => day(row.original.issuedAt) },
+    { id: "due", header: t("due"), meta: { numeric: true }, cell: ({ row }) => day(row.original.dueAt) },
+    { id: "paid", header: t("paid"), meta: { numeric: true }, cell: ({ row }) => (row.original.paidAt ? day(row.original.paidAt) : <span className="text-fg-muted">{t("notPaid")}</span>) },
   ];
 
   const pagination: PaginationState = { pageIndex: page - 1, pageSize };
@@ -77,7 +77,7 @@ export function InvoicesView() {
         status={isLoading ? "loading" : isError ? "error" : "ready"}
         onRetry={refetch}
         error={{ title: t("failed"), description: tb("tryAgain") }}
-        className={isFetching && !isLoading ? "opacity-70 transition-opacity" : undefined}
+        className={`[&_th:first-child]:sticky [&_th:first-child]:start-0 [&_th:first-child]:z-10 [&_th:first-child]:bg-raised [&_td:first-child]:sticky [&_td:first-child]:start-0 [&_td:first-child]:bg-raised ${isFetching && !isLoading ? "opacity-70 transition-opacity" : ""}`}
         empty={{ title: t("emptyTitle"), description: t("emptyBody") }}
       />
     </div>

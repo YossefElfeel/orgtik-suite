@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Button, Dialog, DialogBody, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, Field, MoneyField, NumberField, Skeleton, toast, useFormatter } from "@orgtik/ui";
 import type { ApiError } from "@/store/api";
 import { useQuoteCustomPlanMutation, useWorkspaceQuery, type CustomPlanRequest } from "@/store/customers";
-import { useErrorText } from "./shared";
+import { useErrorText, useToolName } from "./shared";
 
 const DAY = 86400000;
 
@@ -15,12 +15,18 @@ export function QuoteDialog({ request, onClose }: { request: CustomPlanRequest; 
   const tc = useTranslations("Common");
   const f = useFormatter();
   const errorText = useErrorText();
+  const toolName = useToolName();
   const ws = useWorkspaceQuery(request.workspaceId);
   const currency = ws.data?.currency ?? request.quote?.currency;
   const [quote, state] = useQuoteCustomPlanMutation();
   const [amount, setAmount] = useState<number | null>(request.quote?.amount ?? null);
   const [days, setDays] = useState<number | null>(30);
-  const [errors, setErrors] = useState<{ amount?: string; days?: string; form?: string }>({});
+  const [allocations, setAllocations] = useState<Record<string, number | null>>(() => Object.fromEntries(request.tools.map(tool => [tool, request.quote?.lines?.find(line => line.tool === tool)?.amount ?? null])));
+  const [errors, setErrors] = useState<{ amount?: string; days?: string; allocations?: string; form?: string }>({});
+  const separate = request.tools.length > 1;
+  const decimals = currency ? new Intl.NumberFormat("en", { style: "currency", currency }).resolvedOptions().maximumFractionDigits ?? 2 : 2;
+  const scale = 10 ** decimals;
+  const allocatedMinor = request.tools.reduce((sum, tool) => sum + Math.round((allocations[tool] ?? 0) * scale), 0);
   const name = request.workspace ?? request.workspaceId;
   const until = days && days >= 1 && days <= 90 ? new Date(Date.now() + days * DAY) : null;
 
@@ -28,9 +34,10 @@ export function QuoteDialog({ request, onClose }: { request: CustomPlanRequest; 
     const e: typeof errors = {};
     if (!(amount && amount > 0)) e.amount = t("quote.amountMin");
     if (!(days && days >= 1 && days <= 90)) e.days = t("quote.daysRange");
+    if (separate && (request.tools.some(tool => allocations[tool] == null || !Number.isFinite(allocations[tool]) || allocations[tool]! < 0) || allocatedMinor !== Math.round((amount ?? 0) * scale))) e.allocations = t("quote.allocationRequired");
     setErrors(e);
     if (Object.keys(e).length) return;
-    quote({ id: request.id, amount: amount!, validDays: days! })
+    quote({ id: request.id, amount: amount!, validDays: days!, ...(separate ? { lines: request.tools.map(tool => ({ tool, amount: allocations[tool]! })) } : {}) })
       .unwrap()
       .then(() => {
         toast.success(t("quote.sent", { name }));
@@ -38,7 +45,7 @@ export function QuoteDialog({ request, onClose }: { request: CustomPlanRequest; 
       })
       .catch((err: ApiError) => {
         const fe = err.fieldErrors ?? {};
-        setErrors({ amount: fe.amount ? t("quote.amountMin") : undefined, form: fe.amount ? undefined : errorText(err) });
+        setErrors({ amount: fe.amount ? t("quote.amountMin") : undefined, allocations: fe.lines ? t("quote.allocationRequired") : undefined, form: fe.amount || fe.lines ? undefined : errorText(err) });
       });
   };
 
@@ -59,6 +66,18 @@ export function QuoteDialog({ request, onClose }: { request: CustomPlanRequest; 
           ) : (
             <Skeleton className="h-16" aria-busy="true" />
           )}
+          {separate && currency ? (
+            <Field group label={t("quote.allocations")} description={t("quote.allocationHint")} error={errors.allocations} required>
+              <div className="flex flex-col gap-3">
+                {request.tools.map(tool => (
+                  <Field key={tool} label={t("quote.allocationFor", { tool: toolName(tool) })} required>
+                    <MoneyField currency={currency} value={allocations[tool]} onValueChange={value => setAllocations(current => ({ ...current, [tool]: value }))} min={0} required />
+                  </Field>
+                ))}
+                <p className="text-body-sm text-fg-muted" aria-live="polite">{t("quote.allocated", { amount: f.money(allocatedMinor / scale, currency), total: amount == null ? "—" : f.money(amount, currency) })}</p>
+              </div>
+            </Field>
+          ) : null}
           <Field label={t("quote.validDays")} description={until ? t("quote.validUntil", { date: f.date(until, { dateStyle: "medium" }) }) : t("quote.daysRange")} error={errors.days} required>
             <NumberField value={days} onValueChange={setDays} min={1} max={90} required />
           </Field>

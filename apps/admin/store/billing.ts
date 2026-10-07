@@ -20,7 +20,7 @@ export type Payment = {
   reference?: string | null;
 };
 export type CreditNote = { id: string; number: string; amount: number; reason: string; at: string; by: string };
-export type InvoiceLine = { label: string; amount: number; lineId?: string };
+export type InvoiceLine = { label: string; amount: number; lineId?: string; planId?: string; kind?: "charge" | "period_credit" | "account_credit" | "bundle_discount" | "coupon_discount" | "credit_carried" | string };
 
 export type Invoice = {
   id: string;
@@ -38,6 +38,9 @@ export type Invoice = {
   lines: InvoiceLine[];
   subtotal: number;
   taxLabel: string | null;
+  taxDisplay?: "inclusive" | "exclusive";
+  taxRate?: number;
+  reverseCharge?: boolean;
   tax: number;
   total: number;
   totalUsd?: number;

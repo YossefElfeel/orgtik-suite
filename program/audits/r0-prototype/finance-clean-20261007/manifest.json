@@ -1,0 +1,44 @@
+{
+  "runId": "20261007132312-2beb0151",
+  "kind": "local prototype evidence",
+  "acceptance": "single uninterrupted pass",
+  "checks": 406,
+  "capturesGenerated": 57,
+  "representativeCaptures": [
+    "private-contract-checkout-en-light-1440.png",
+    "ordinary-checkout-recovered-en-light-1440.png",
+    "sos-invoice-2-ar-dark-390.png",
+    "allocation-dialog-ar-dark-390.png"
+  ],
+  "completeCaptureMetadata": "finance-qa.json",
+  "capturePolicy": "Four inspected representatives are tracked; full 57 captures remain in the original local run directory and can be reproduced.",
+  "noReset": true,
+  "noClockMutation": true,
+  "noHostedActions": true,
+  "hashes": [
+    {
+      "file": "../finance-runner.cjs",
+      "sha256": "61504f04c57bd1adbf330d682b5b64e1b9a12074af849f03058e14812aa9be4b"
+    },
+    {
+      "file": "finance-qa.json",
+      "sha256": "2e5eed1a09ae9545a0d535902a481e32b05a8bc9bc9d65c69e253231fffd7fe9"
+    },
+    {
+      "file": "private-contract-checkout-en-light-1440.png",
+      "sha256": "2c72bb3abf3e0f66344b1cb753f4c551559b8cd6aab885fde5d3c633ffc6a83b"
+    },
+    {
+      "file": "ordinary-checkout-recovered-en-light-1440.png",
+      "sha256": "cbee57c636737e279258be9f8decbae45f3fbdd82d0da6929dbc96e7c02056ee"
+    },
+    {
+      "file": "sos-invoice-2-ar-dark-390.png",
+      "sha256": "ac5c93832550941c8c6acd8dbf6cb3f08577dcbfc26eaef170a6893136afe746"
+    },
+    {
+      "file": "allocation-dialog-ar-dark-390.png",
+      "sha256": "08188a1c2612eefc4ffa5734bd9efa85e4fcc6911caa4291553cecab1708fb6d"
+    }
+  ]
+}

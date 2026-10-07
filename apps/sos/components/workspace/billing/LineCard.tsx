@@ -47,7 +47,7 @@ export function LineCard({
   const plans = useBillingToolPlansQuery(line.tool, { skip: !canDowngrade && !downgrading });
   const lower = (plans.data ?? []).filter((p) => p.id !== line.planId && rank(p.tier) < rank(line.tier)).sort((a, b) => rank(b.tier) - rank(a.tier));
   const target = downgrading ? plans.data?.find((p) => p.id === downgrading.planId) : undefined;
-  const cycleWord = t(line.cycle === "yearly" ? "perYear" : "perMonth");
+  const cycleWord = line.termMonths ? t("perTerm", { count: line.termMonths }) : t(line.cycle === "yearly" ? "perYear" : "perMonth");
 
   const facts: { label: string; value: React.ReactNode }[] = [];
   facts.push({
@@ -71,6 +71,8 @@ export function LineCard({
     // Bought without automatic renewal: it ends at the period end unless the owner renews it.
     if (line.autoRenew === false) facts.push({ label: t("endsOn"), value: day(line.periodEnd) }, { label: t("renewal"), value: t("manualRenewal") });
     else facts.push({ label: t("renewsOn"), value: day(line.periodEnd) });
+    if (line.autoRenew !== false && line.renewalMonths) facts.push({ label: t("renewal"), value: t("everyTerm", { count: line.renewalMonths }) });
+    if (line.prepaidTerms?.length) facts.push({ label: t("prepaidTerms"), value: <span className="flex flex-col gap-1">{line.prepaidTerms.map(term => <span key={term.reference}><Money amount={term.amount} currency={s.currency} /> {t("perTerm", { count: term.months })} · {day(term.start)}–{day(term.end)}</span>)}</span> });
   }
   if (line.state === "cancelling") facts.push({ label: t("endsOn"), value: day(line.cancelAt ?? line.periodEnd) });
   if (line.state === "trialing") facts.push({ label: t("trialEnds"), value: day(line.trialEndsAt ?? line.periodEnd) });
@@ -95,7 +97,7 @@ export function LineCard({
             <h2 id={`line-${line.id}`} className="font-display text-title-sm text-fg">
               {tool}
             </h2>
-            <p className="text-body-sm text-fg-muted">{t("planCycle", { plan, cycle: t(line.cycle) })}</p>
+            <p className="text-body-sm text-fg-muted">{t("planCycle", { plan, cycle: line.termMonths ? t("perTerm", { count: line.termMonths }) : t(line.cycle) })}</p>
           </div>
           <StatusBadge entity="subscription_line" state={line.state} viewer="customer" />
         </div>

@@ -16,6 +16,7 @@
     },
     "actions": {
       "open": "Ouvrir",
+      "openTool": "Ouvrir {tool}",
       "seePlans": "Voir les offres",
       "choosePlan": "Choisir une offre",
       "startTrial": "Essai gratuit de {days} jours",
@@ -43,7 +44,7 @@
     },
     "plans": {
       "title": "Offres",
-      "pricesFor": "Les prix par utilisateur sont calculés pour {count, plural, one {# personne} other {# personnes}} dans votre espace, en {currency}.",
+      "pricesFor": "Les offres par place utilisent {count, plural, one {# place achetée} other {# places achetées}}, en {currency}.",
       "cycle": "Périodicité de facturation",
       "monthly": "Mensuel",
       "yearly": "Annuel",
@@ -62,8 +63,8 @@
         "year": "par utilisateur et par an"
       },
       "seatsTotal": {
-        "month": "{count, plural, one {# utilisateur} other {# utilisateurs}} : <total>{amount}</total> par mois",
-        "year": "{count, plural, one {# utilisateur} other {# utilisateurs}} : <total>{amount}</total> par an"
+        "month": "{count, plural, one {# place achetée} other {# places achetées}}: <total>{amount}</total> par mois",
+        "year": "{count, plural, one {# place achetée} other {# places achetées}}: <total>{amount}</total> par an"
       },
       "yearlySaving": "Vous économisez {pct} % par rapport au paiement mensuel",
       "minSeats": "Au moins {count, plural, one {# utilisateur} other {# utilisateurs}}",
@@ -98,7 +99,12 @@
       "noPlansBody": "Cet outil est vendu sur demande. Demandez une offre sur mesure et nous vous enverrons un devis.",
       "notFound": "Cet outil n’existe pas",
       "backToTools": "Retour aux outils et offres",
-      "failed": "Les offres n’ont pas pu être chargées"
+      "failed": "Les offres n’ont pas pu être chargées",
+      "contractCapacity": "Comprend {count, plural, one {# place achetée} other {# places achetées}}.",
+      "taxInclusive": "Prix comprenant {rate} de taxe.",
+      "taxExclusive": "Prix hors taxe de {rate}.",
+      "taxReverseCharge": "Autoliquidation; aucune taxe ajoutée.",
+      "taxNone": "Aucune taxe ajoutée selon la règle configurée."
     },
     "features": {
       "general": {
@@ -185,8 +191,8 @@
       "order": "Votre commande",
       "lineName": "{tool} · {plan}",
       "perSeat": {
-        "monthly": "<unit>{amount}</unit> × {count, plural, one {# utilisateur} other {# utilisateurs}}, facturé chaque mois",
-        "yearly": "<unit>{amount}</unit> × {count, plural, one {# utilisateur} other {# utilisateurs}}, facturé chaque année"
+        "monthly": "<unit>{amount}</unit> × {count, plural, one {# place achetée} other {# places achetées}}, facturation mensuelle",
+        "yearly": "<unit>{amount}</unit> × {count, plural, one {# place achetée} other {# places achetées}}, facturation annuelle"
       },
       "billed": {
         "monthly": "Facturé chaque mois",
@@ -233,7 +239,33 @@
       "paid": "Payé",
       "whereInvoice": "La facture est disponible à tout moment dans <link>Facturation › Factures</link>.",
       "openTool": "Ouvrir {tool}",
-      "toHome": "Retour à l’accueil"
+      "toHome": "Retour à l’accueil",
+      "taxInclusive": "Taxe comprise ({rate})",
+      "taxExclusive": "Taxe ajoutée ({rate})",
+      "taxReverseCharge": "Autoliquidation · aucune taxe ajoutée",
+      "taxInclusiveNote": "Les prix comprennent {rate} de taxe, déjà comprise dans ce total.",
+      "taxExclusiveNote": "Les prix excluent la taxe de {rate}, ajoutée à ce total.",
+      "taxReverseChargeNote": "Autoliquidation; aucune taxe ajoutée.",
+      "taxNoneNote": "Aucune taxe ajoutée selon la règle configurée.",
+      "accountCreditApplied": "Crédit de l’espace utilisé",
+      "creditCarried": "Un crédit de {amount} reste dans cet espace pour un prochain paiement.",
+      "contractCapacity": "Contrat ({cycle}), comprenant {count} places achetées.",
+      "doneBodyMany": "{count, plural, one {Votre offre est active.} other {Vos # offres sont actives.}}",
+      "unconfirmedTitle": "Statut du paiement non confirmé",
+      "unconfirmedBody": "Nous n’avons pas pu confirmer le résultat du paiement. Réessayez pour récupérer la même tentative avec la commande et le moyen de paiement d’origine.",
+      "recoverPayment": "Récupérer le paiement",
+      "recoveryWorkspace": "Récupération du paiement pour {workspace}",
+      "recoveryLocked": "La commande, le nom de facturation et le moyen de paiement d’origine restent verrouillés jusqu’à confirmation du statut du paiement.",
+      "recoveryContextMismatch": "Passez à {workspace} avec le même compte pour récupérer ce paiement. Aucun nouveau paiement ne sera lancé.",
+      "recoveryStorageError": "Ce navigateur ne peut pas enregistrer la récupération du paiement. Activez le stockage de session, puis réessayez.",
+      "savedRecoveryError": "Les données de récupération enregistrées n’ont pas pu être lues. Consultez vos factures avant de lancer un autre paiement.",
+      "reviewInvoices": "Consulter les factures",
+      "recoveryAccountMismatch": "Connectez-vous avec le compte qui a lancé ce paiement pour le récupérer. Aucun nouveau paiement ne sera lancé.",
+      "quoteExpiredTitle": "Devis expiré",
+      "quoteExpiredBody": "Vérifiez le total actualisé avant de payer. Le paiement nécessitera une nouvelle confirmation.",
+      "quoteReviewTitle": "Vérifier le devis actualisé",
+      "quoteReviewBody": "Ce devis ne peut plus être utilisé. Vérifiez le total actualisé et vos factures existantes avant de réessayer.",
+      "recoveryQuoteBlocked": "Le serveur n’a pas pu récupérer le devis d’origine. Consultez vos factures avant de lancer un autre paiement."
     },
     "custom": {
       "title": "Offre sur mesure",
@@ -242,15 +274,15 @@
       "formBody": "Dites-nous ce dont vous avez besoin. L’équipe OrgTik répond par un devis, en général sous deux jours ouvrés.",
       "tools": "Outils",
       "toolsRequired": "Choisissez au moins un outil.",
-      "seats": "Nombre de personnes",
-      "seatsHelp": "Toutes les personnes qui utiliseront les outils, hors invités.",
-      "seatsRequired": "Saisissez au moins 1 personne.",
+      "seats": "Places nécessaires par outil",
+      "seatsHelp": "Capacité contractuelle de chaque outil choisi, distincte des membres actuels.",
+      "seatsRequired": "Indiquez au moins 1 place.",
       "notes": "Autres précisions",
       "notesHelp": "Agences, conditions du contrat, une échéance.",
       "send": "Envoyer la demande",
       "sent": "Demande envoyée. Nous répondrons par un devis.",
       "yourRequests": "Vos demandes",
-      "summary": "{seats, plural, one {# personne} other {# personnes}} · {cycle} · demandée le {date}",
+      "summary": "{seats} places par outil · {cycle} · demandé le {date}",
       "state": {
         "new": "En attente de devis",
         "quoted": "Devis à examiner",
@@ -264,13 +296,17 @@
       "waiting": "Nous préparons le devis.",
       "accept": "Accepter le devis",
       "acceptTitle": "Accepter ce devis ?",
-      "acceptImpact": "OrgTik met en place l’offre pour {seats, plural, one {# personne} other {# personnes}}, facturation {cycle}, et envoie la facture de {amount}.",
-      "accepted": "Devis accepté. Nous mettons en place l’offre et envoyons la facture.",
-      "acceptedBody": "Accepté. OrgTik met en place l’offre et enverra la facture.",
+      "acceptImpact": "Prépare un contrat ({cycle}) pour {seats} places par outil, au total de {amount}. Activation après paiement uniquement.",
+      "accepted": "Devis accepté. Passez au paiement pour activer les outils.",
+      "acceptedBody": "Les offres privées sont prêtes au paiement. Les outils s’activent après paiement réussi.",
       "quoteExpired": "Ce devis a expiré. Envoyez une nouvelle demande pour un devis à jour.",
       "emptyTitle": "Aucune demande pour l’instant",
       "emptyBody": "Vos demandes apparaissent ici avec leurs devis.",
-      "failed": "Vos demandes n’ont pas pu être chargées"
+      "failed": "Vos demandes n’ont pas pu être chargées",
+      "allocations": "Prix par outil pour le cycle complet",
+      "allocationRequired": "OrgTik doit répartir ce devis entre les outils avant son acceptation.",
+      "checkout": "Continuer vers le paiement",
+      "paidBody": "Paiement reçu. Les outils sous contrat sont actifs."
     },
     "errors": {
       "general": "Une erreur s’est produite. Réessayez dans un instant.",

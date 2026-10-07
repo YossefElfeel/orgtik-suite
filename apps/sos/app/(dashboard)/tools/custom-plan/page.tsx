@@ -4,8 +4,9 @@
 // tools, how many people, monthly or yearly, anything else), sees their requests and the quotes
 // sent back, and accepts a quote. OrgTik's team answers in the back office (ADM-22). Owner only.
 import { useState, type FormEvent } from "react";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { Badge, Button, Card, Checkbox, ConfirmDialog, Field, ListStates, NumberField, PageHeader, RadioGroup, Textarea, toast, useFormatter, type Tone } from "@orgtik/ui";
+import { Badge, Button, buttonVariants, Card, Checkbox, ConfirmDialog, Field, ListStates, NumberField, PageHeader, RadioGroup, Textarea, toast, useFormatter, type Tone } from "@orgtik/ui";
 import { RequireWorkspaceRole } from "@/components/workspace/RequireWorkspaceRole";
 import {
   platformError,
@@ -111,6 +112,11 @@ function RequestItem({ r }: { r: CustomPlanRequest }) {
   const expired = r.quote ? Date.parse(r.quote.validUntil) < Date.now() : false;
   const state = r.state === "quoted" && expired ? "expired" : r.state;
   const stateLabel = t.has(`state.${state}`) ? t(`state.${state}`) : state;
+  const allocations = r.quote?.lines ?? (r.tools.length === 1 && r.quote ? [{ tool: r.tools[0], amount: r.quote.amount }] : []);
+  const canAccept = allocations.length === r.tools.length;
+  const paid = (r.lineIds?.length ?? 0) >= r.tools.length;
+  const checkout = new URLSearchParams({ cycle: r.cycle });
+  for (const id of r.privatePlanIds ?? []) checkout.append("plan", id);
   return (
     <li>
       <Card padding="md" className="flex flex-col gap-3" data-request={r.id}>
@@ -137,14 +143,21 @@ function RequestItem({ r }: { r: CustomPlanRequest }) {
               </p>
               <p className="text-body-sm text-fg-muted">{t(expired ? "expiredOn" : "validUntil", { date: f.date(r.quote.validUntil, { dateStyle: "medium" }) })}</p>
             </div>
-            {r.state === "quoted" && !expired ? (
+            {r.state === "quoted" && !expired && canAccept ? (
               <Button onClick={() => setOpen(true)}>{t("accept")}</Button>
             ) : null}
           </div>
         ) : r.state === "new" ? (
           <p className="text-body-sm text-fg-muted">{t("waiting")}</p>
         ) : null}
-        {r.state === "accepted" ? <Notice tone="success">{t("acceptedBody")}</Notice> : null}
+        {r.quote && allocations.length ? (
+          <dl className="flex flex-col gap-2 text-body-sm" aria-label={t("allocations")}>
+            {allocations.map(line => <div key={line.tool} className="flex items-baseline justify-between gap-4"><dt>{loc(catalog?.find(tool => tool.key === line.tool)?.name) || line.tool}</dt><dd className="shrink-0 tabular-nums"><bdi>{f.money(line.amount, r.quote!.currency)}</bdi></dd></div>)}
+          </dl>
+        ) : null}
+        {r.quote && !canAccept ? <Notice tone="warning">{t("allocationRequired")}</Notice> : null}
+        {r.state === "accepted" ? <Notice tone={paid ? "success" : "info"}>{t(paid ? "paidBody" : "acceptedBody")}</Notice> : null}
+        {r.state === "accepted" && !paid && r.privatePlanIds?.length ? <Link href={`/checkout?${checkout}`} className={buttonVariants({ variant: "primary" })}>{t("checkout")}</Link> : null}
         {error ? <Notice tone="danger">{error}</Notice> : null}
       </Card>
       {r.quote ? (

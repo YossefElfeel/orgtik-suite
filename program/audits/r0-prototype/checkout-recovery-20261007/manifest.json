@@ -1,0 +1,222 @@
+{
+  "kind": "local prototype evidence",
+  "runs": [
+    {
+      "id": "muy6ry59-ad886e",
+      "checks": 65,
+      "capturesGenerated": 7,
+      "report": "recovery-qa.json"
+    },
+    {
+      "id": "muy6q5s6-3c426e",
+      "checks": 14,
+      "capturesGenerated": 2,
+      "report": "edge-qa.json"
+    }
+  ],
+  "backend": "dedicated frozen loopback API; final held quote/nonce source reported ready by integration owner",
+  "sourceQualification": "Run source was the primary workspace draft, not a PR revision. Current PR copies were compared byte-for-byte with that workspace at packaging. The earlier 406 finance run predates held quotes and uncertainty correction.",
+  "originalRunnerHash": "aa87aec151b35410075c824372c94f76767122b7c4775f4be6e75cc713b7aab4",
+  "runnerAdaptations": "Repository/env path resolution and loopback/frozen sandbox safety guards only; no assertions or flows changed.",
+  "representativeCaptures": [
+    "unconfirmed-ar-light-390.png",
+    "different-account-protected-390.png",
+    "expired-reviewed-390.png"
+  ],
+  "capturePolicy": "Three inspected representatives are tracked; all nine capture facts remain in the reports. The complete images remain in the original local directories.",
+  "noReset": true,
+  "noClockMutation": true,
+  "noDeployment": true,
+  "hashes": [
+    {
+      "file": "recovery-qa.json",
+      "sha256": "10cfc2692ad32194cd3488a71d790958eae82259a577f84202ad557becb097c9"
+    },
+    {
+      "file": "edge-qa.json",
+      "sha256": "7b2be7902ec5d59e35e36fff0c297c4a3d7f1d3ffdbc837f530826b48c0f6a73"
+    },
+    {
+      "file": "unconfirmed-ar-light-390.png",
+      "sha256": "7750940b2f924079faa6478b2a3daeaaeedb07f56f340d2d81b52f05cef1ac13"
+    },
+    {
+      "file": "different-account-protected-390.png",
+      "sha256": "6c5a0065f91a13a67330772c31d03d64fdd0fde026a6ffb7dc9bade3e1d87b0e"
+    },
+    {
+      "file": "expired-reviewed-390.png",
+      "sha256": "337aac39a6b82e6cb5f7afbcc12178385b103c9512b4bd8860bf2717bb1d418f"
+    },
+    {
+      "file": "../checkout-recovery-runner.cjs",
+      "sha256": "6744ec25c9420ca9a9b8bae3fdca3d72acd96eb178259836eb428d4676e490a0"
+    }
+  ],
+  "sourceHashesAtPackaging": [
+    {
+      "file": "apps/admin/components/billing/InvoiceDetail.tsx",
+      "sha256": "11e5244a7646e8fc79ff0bce4c5edae3732c9a8f816197608efaccacdd33223a"
+    },
+    {
+      "file": "apps/admin/components/customers/QuoteDialog.tsx",
+      "sha256": "837e97ad6366e99bdbba0467b7c78637f7dcdfe217b56c4655a38b9850a11cd4"
+    },
+    {
+      "file": "apps/admin/components/customers/WorkspaceDetail.tsx",
+      "sha256": "3fb7e99704c88bd48d2600f47a5a67e2fa111cc6cd2ac8e4db797f6e1759f841"
+    },
+    {
+      "file": "apps/admin/components/pricing/PricePreview.tsx",
+      "sha256": "fe2676447cde29e6d9a1926054919e69307fddd241a66b4c200c7b0f8f136c12"
+    },
+    {
+      "file": "apps/admin/store/billing.ts",
+      "sha256": "8c97df7049fe9a6e9500514dd296e56eb455f3d8cbd0b2f3519ea77e2f2f2677"
+    },
+    {
+      "file": "apps/admin/store/customers.ts",
+      "sha256": "b420ca4a97acd8c8345d6164215f3b64fe0451ac4b2ec6dd43d17c2923bc145f"
+    },
+    {
+      "file": "apps/admin/store/pricing.ts",
+      "sha256": "c5d2a616b6485e11a58afc771936afab1387ffd506925b2c1d5d175623b49576"
+    },
+    {
+      "file": "apps/sos/app/(dashboard)/checkout/page.tsx",
+      "sha256": "2d35bb476ecf4f38233355a86349a19a6905ca18e7c4e7d8bbd50b66cd2402ba"
+    },
+    {
+      "file": "apps/sos/app/(dashboard)/tools/[key]/page.tsx",
+      "sha256": "17d9f10412004dff384123efa7346845cc4e8e4e0f56ea010f5c95e40076bae6"
+    },
+    {
+      "file": "apps/sos/app/(dashboard)/tools/custom-plan/page.tsx",
+      "sha256": "5727008aeb266f8dd706f45a55dde80666a2284a76cc40f65290a1242a020079"
+    },
+    {
+      "file": "apps/sos/components/workspace/billing/InvoiceView.tsx",
+      "sha256": "49baefe62fd7a81205d37a5266cab5cd2925895b472b93c440e5fccbdd427f6d"
+    },
+    {
+      "file": "apps/sos/components/workspace/billing/InvoicesView.tsx",
+      "sha256": "3ba31631a22d373eacd4b662c7ebbdf9d233358f84827129943bea7ff46fb77c"
+    },
+    {
+      "file": "apps/sos/components/workspace/billing/LineCard.tsx",
+      "sha256": "ceb5249cc41112bc1696833244170c448e5451d59202df64fd8dc2fd57362086"
+    },
+    {
+      "file": "apps/sos/components/workspace/billing/SubscriptionsView.tsx",
+      "sha256": "e9c04b0e60927cc568542e7d4a42de8d9a92f17cc10f46af6617573faf3cd471"
+    },
+    {
+      "file": "apps/sos/redux/features/platform/billing.ts",
+      "sha256": "3764a49fcbed49f3176647993733fda86ed9da41032aebf338bef4c0af237dd6"
+    },
+    {
+      "file": "apps/sos/redux/features/platform/tools.ts",
+      "sha256": "903f9d69dc61f8f01a3d1a701f45d00e1cfdc5ccf014890263a6f4ad11a634e8"
+    },
+    {
+      "file": "apps/admin/messages/en/billing.json",
+      "sha256": "d8c7cdaeddd6ccf3b2839de9530169bbcac3516dabe9ab04fc9f6f4101d53651"
+    },
+    {
+      "file": "apps/admin/messages/en/customers.json",
+      "sha256": "4ecfb440f38cd53e90698e48fee0a4f08649ee62ffc97172c567b6a2616fe861"
+    },
+    {
+      "file": "apps/admin/messages/en/pricing.json",
+      "sha256": "15fa2ac889446296a60b7ea9a36f3076e5de90273effc3f018bb64f910cdc077"
+    },
+    {
+      "file": "apps/sos/messages/usr/en/billing.json",
+      "sha256": "ce50a3533e828c2b550844298c1349631aaeaabb2da2278da5c9be764218947b"
+    },
+    {
+      "file": "apps/sos/messages/usr/en/tools.json",
+      "sha256": "79a4f169bb5bbe907037f4f096667105f0cf240878d67ec298b7fdfe6b9cb918"
+    },
+    {
+      "file": "apps/admin/messages/ar/billing.json",
+      "sha256": "8dd72de49c01b30a6eaa158e16e67053ffbd2a2438fe5634036628105b4b0e8d"
+    },
+    {
+      "file": "apps/admin/messages/ar/customers.json",
+      "sha256": "40bd991116d55557b7bc4370d245157e9b488a0b79d86bf7aacd8ce1a13bb11f"
+    },
+    {
+      "file": "apps/admin/messages/ar/pricing.json",
+      "sha256": "f25c3c548ebd9c4ee041a1dd96ae62b174e3e81a9e9f4047d2526a56e1c511d7"
+    },
+    {
+      "file": "apps/sos/messages/usr/ar/billing.json",
+      "sha256": "366f7c120a51bce2449c58f9770dd243801afb526509eeac6b3a607f099671b0"
+    },
+    {
+      "file": "apps/sos/messages/usr/ar/tools.json",
+      "sha256": "5809c35c95824f26e7610130d2c30139344d02c83d627bc788ec2198f82947df"
+    },
+    {
+      "file": "apps/admin/messages/de/billing.json",
+      "sha256": "88ba61e00ddf9d68c27e5425b512c0cbaa1d09e98b096f2c491be93fd2ffc8f9"
+    },
+    {
+      "file": "apps/admin/messages/de/customers.json",
+      "sha256": "002bb00433987f6e3b68eb9999c8f978050a7ea44edfff20c40fbc7a462eaf9b"
+    },
+    {
+      "file": "apps/admin/messages/de/pricing.json",
+      "sha256": "c7798fac9e99f17d2947fb43e1770b2bb0f39eb4eceeaf46548e84b8815ef1d4"
+    },
+    {
+      "file": "apps/sos/messages/usr/de/billing.json",
+      "sha256": "5c6abd824a880e8c2a3849e3d2ae5e611bc3018567f84b251e61752b3dde9e37"
+    },
+    {
+      "file": "apps/sos/messages/usr/de/tools.json",
+      "sha256": "4785d1afabb83126d770e9df50174c25a127372eebad3af8ab756fdf02b7c7b4"
+    },
+    {
+      "file": "apps/admin/messages/fr/billing.json",
+      "sha256": "07975ef1e768f4a644e22502d64a05343c05fffac1564acd91c019c74218c81e"
+    },
+    {
+      "file": "apps/admin/messages/fr/customers.json",
+      "sha256": "710c2872a57ba334ae9bca3a00785cbce6ba0cd1aa0a4ac22bf0faa1f056d3a7"
+    },
+    {
+      "file": "apps/admin/messages/fr/pricing.json",
+      "sha256": "9a94c0feed0681893cdb0a93014a6d93ecb0c0ab14c208694de1e2f2853b34e4"
+    },
+    {
+      "file": "apps/sos/messages/usr/fr/billing.json",
+      "sha256": "8a7f8aa1338341f4b008444e52747d3c12e3c2098892d46dd50c9d5f8eb300eb"
+    },
+    {
+      "file": "apps/sos/messages/usr/fr/tools.json",
+      "sha256": "fe21c5e5aa4cae1e89d1ea9263e67404c8aaafebcb07887bd67a3e710f4e2906"
+    },
+    {
+      "file": "apps/admin/messages/it/billing.json",
+      "sha256": "e64d2e6e5b641b1499ff5ec165d5b3a7438ec42282e77c25e688c7f0d4ec328d"
+    },
+    {
+      "file": "apps/admin/messages/it/customers.json",
+      "sha256": "4e1704e0f13dfc59e14f953de2c11bf10a119c8ffe432a568e0cd9b26c4972b7"
+    },
+    {
+      "file": "apps/admin/messages/it/pricing.json",
+      "sha256": "fa734a2d813919a3fefc426fc11c0aa7e8d77b1d005fcd270eb9bd1eddd6ee4f"
+    },
+    {
+      "file": "apps/sos/messages/usr/it/billing.json",
+      "sha256": "8d2841883ab428d9d5aec596b7032786cedbcedd412e6c166a01a6ec9068f0c6"
+    },
+    {
+      "file": "apps/sos/messages/usr/it/tools.json",
+      "sha256": "0e67f4fb25eadf9792f89e5521d2336246b4e354021ae9d6ddaaa3c971187256"
+    }
+  ]
+}

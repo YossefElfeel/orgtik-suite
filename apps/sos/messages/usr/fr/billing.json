@@ -13,7 +13,7 @@
     "summary": {
       "label": "Résumé",
       "monthly": "Total mensuel",
-      "monthlyHint": "Outils payants uniquement. Les forfaits annuels comptent pour un douzième ; les essais ne sont pas inclus.",
+      "monthlyHint": "Outils payants uniquement, répartis sur la durée achetée ; les essais sont exclus.",
       "seats": "Places",
       "seatsHint": "Membres actifs qui occupent une place. Les forfaits par place facturent chacun d'eux.",
       "currency": "Devise",
@@ -66,7 +66,10 @@
       "moveTo": "Passer à {plan}",
       "moveLower": "Passer à un forfait inférieur",
       "endTrial": "Mettre fin à l'essai",
-      "cancel": "Résilier"
+      "cancel": "Résilier",
+      "perTerm": "pour {count, plural, one {# mois} other {# mois}}",
+      "everyTerm": "Tous les {count, plural, one {# mois} other {# mois}}",
+      "prepaidTerms": "Périodes futures déjà payées"
     },
     "done": {
       "trialEnded": "L'essai de {tool} est terminé.",
@@ -180,7 +183,18 @@
         "refunded": "Remboursé"
       },
       "refunds": "Remboursements",
-      "creditNotes": "Avoirs"
+      "creditNotes": "Avoirs",
+      "ledger": {
+        "period_credit": "Crédit pour la période inutilisée",
+        "account_credit": "Crédit de l’espace utilisé",
+        "bundle_discount": "Remise du pack",
+        "coupon_discount": "Remise du code",
+        "credit_carried": "Crédit reporté"
+      },
+      "taxIncluded": "Taxe comprise ({rate})",
+      "taxAdded": "Taxe ajoutée ({rate})",
+      "taxReverseCharge": "Autoliquidation · aucune taxe ajoutée",
+      "lineCapacity": "{count, plural, one {# place achetée} other {# places achetées}}"
     },
     "cards": {
       "title": "Moyens de paiement",

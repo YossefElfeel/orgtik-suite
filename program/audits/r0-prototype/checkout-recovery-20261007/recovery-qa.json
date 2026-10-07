@@ -1,0 +1,427 @@
+{
+  "run": "muy6ry59-ad886e",
+  "checks": [
+    {
+      "name": "First confirmation actually succeeded before response loss",
+      "pass": true,
+      "details": {
+        "total": 120
+      }
+    },
+    {
+      "name": "Unknown response never claims unpaid",
+      "pass": true
+    },
+    {
+      "name": "Original billing is locked en/1440",
+      "pass": true
+    },
+    {
+      "name": "Original card selection is locked en/1440",
+      "pass": true
+    },
+    {
+      "name": "Discount removal is locked en/1440",
+      "pass": true
+    },
+    {
+      "name": "Billing cycle is locked en/1440",
+      "pass": true
+    },
+    {
+      "name": "Original amount remains visible en/1440",
+      "pass": true
+    },
+    {
+      "name": "Safe attempt stores the exact original confirmation",
+      "pass": true
+    },
+    {
+      "name": "Safe attempt excludes credentials and tokens",
+      "pass": true
+    },
+    {
+      "name": "Displayed server quote is included in original request",
+      "pass": true
+    },
+    {
+      "name": "Lost response created exactly one new invoice",
+      "pass": true
+    },
+    {
+      "name": "unconfirmed-en-light-1440 fits viewport",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "unconfirmed-en-light-1440 has no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "unconfirmed-en-light-1440 locale/theme",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "Original billing is locked en/390",
+      "pass": true
+    },
+    {
+      "name": "Original card selection is locked en/390",
+      "pass": true
+    },
+    {
+      "name": "Discount removal is locked en/390",
+      "pass": true
+    },
+    {
+      "name": "Billing cycle is locked en/390",
+      "pass": true
+    },
+    {
+      "name": "Original amount remains visible en/390",
+      "pass": true
+    },
+    {
+      "name": "Reload ignores changed URL en/390",
+      "pass": true
+    },
+    {
+      "name": "unconfirmed-en-dark-390 fits viewport",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "unconfirmed-en-dark-390 has no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "unconfirmed-en-dark-390 locale/theme",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "Original billing is locked ar/390",
+      "pass": true
+    },
+    {
+      "name": "Original card selection is locked ar/390",
+      "pass": true
+    },
+    {
+      "name": "Discount removal is locked ar/390",
+      "pass": true
+    },
+    {
+      "name": "Billing cycle is locked ar/390",
+      "pass": true
+    },
+    {
+      "name": "Original amount remains visible ar/390",
+      "pass": true
+    },
+    {
+      "name": "Reload ignores changed URL ar/390",
+      "pass": true
+    },
+    {
+      "name": "unconfirmed-ar-light-390 fits viewport",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "unconfirmed-ar-light-390 has no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "unconfirmed-ar-light-390 locale/theme",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "Original billing is locked ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Original card selection is locked ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Discount removal is locked ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Billing cycle is locked ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Original amount remains visible ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Reload ignores changed URL ar/1440",
+      "pass": true
+    },
+    {
+      "name": "unconfirmed-ar-dark-1440 fits viewport",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "unconfirmed-ar-dark-1440 has no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "unconfirmed-ar-dark-1440 locale/theme",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "Invalid workspace cannot send a confirmation",
+      "pass": true
+    },
+    {
+      "name": "Invalid workspace retains the original attempt",
+      "pass": true
+    },
+    {
+      "name": "Reload restores original billing",
+      "pass": true
+    },
+    {
+      "name": "A later role rejection retains the uncertain nonce",
+      "pass": true
+    },
+    {
+      "name": "Recovery sends identical nonce, workspace and body after reload",
+      "pass": true
+    },
+    {
+      "name": "Recovery returns the original paid invoice",
+      "pass": true
+    },
+    {
+      "name": "Recovery produces no second invoice",
+      "pass": true
+    },
+    {
+      "name": "Confirmed recovery clears its safe session record",
+      "pass": true
+    },
+    {
+      "name": "recovered-en-light-1440 fits viewport",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "recovered-en-light-1440 has no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "recovered-en-light-1440 locale/theme",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "Known decline leaves billing editable",
+      "pass": true
+    },
+    {
+      "name": "Known decline clears pending recovery",
+      "pass": true
+    },
+    {
+      "name": "Known decline creates no invoice",
+      "pass": true
+    },
+    {
+      "name": "declined-editable-en-light-1440 fits viewport",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "declined-editable-en-light-1440 has no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "declined-editable-en-light-1440 locale/theme",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "Different actor cannot view original billing/card/total",
+      "pass": true
+    },
+    {
+      "name": "Different actor cannot start a new payment while recovery is pending",
+      "pass": true
+    },
+    {
+      "name": "different-account-protected-390 fits viewport",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "different-account-protected-390 has no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "different-account-protected-390 locale/theme",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "Corrupt recovery record blocks a new payment",
+      "pass": true
+    },
+    {
+      "name": "Original workspace and actor remain the tested context",
+      "pass": true,
+      "details": {
+        "currency": "CHF"
+      }
+    }
+  ],
+  "shots": [
+    {
+      "name": "unconfirmed-en-light-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "unconfirmed-en-dark-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "unconfirmed-ar-light-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "unconfirmed-ar-dark-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "recovered-en-light-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "declined-editable-en-light-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "different-account-protected-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    }
+  ]
+}

@@ -20,6 +20,9 @@ export type SubscriptionLine = {
   tool: string;
   planId: string;
   cycle: "monthly" | "yearly";
+  termMonths?: number;
+  renewalMonths?: number;
+  prepaidTerms?: { reference: string; start: string; end: string; months: number; amount: number; quantity: number; autoRenew: boolean }[];
   state: LineState;
   snapshot: PriceSnapshot;
   startedAt: string;
@@ -48,12 +51,16 @@ export type InvoicePayment = { id: string; amount: number; currency: string; met
 export type CreditNote = { id: string; number: string; amount: number; reason?: string; at: string };
 export type Refund = { id?: string; amount: number; at?: string; reason?: string };
 export type BuyerDetails = { legalName: string; email: string; address: string; taxId: string; country: string };
+export type InvoiceLine = { label: string; amount: number; lineId?: string; planId?: string; kind?: "charge" | "period_credit" | "account_credit" | "bundle_discount" | "coupon_discount" | "credit_carried" | string };
 
 export type Invoice = InvoiceSummary & {
   kind: string;
-  lines: { label: string; amount: number; lineId?: string }[];
+  lines: InvoiceLine[];
   subtotal: number;
   taxLabel: string | null;
+  taxDisplay?: "inclusive" | "exclusive";
+  taxRate?: number;
+  reverseCharge?: boolean;
   tax: number;
   payments: InvoicePayment[];
   creditNotes: CreditNote[];

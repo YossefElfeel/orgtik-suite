@@ -9,13 +9,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Check, Minus } from "@phosphor-icons/react";
+import { ArrowRight, Check, Minus } from "@phosphor-icons/react";
 import { Badge, Button, buttonVariants, Card, ConfirmDialog, ErrorState, LoadingState, PageHeader, SegmentedControl, StatusBadge, toast, useFormatter } from "@orgtik/ui";
 import useWorkspace from "@/hooks/use-workspace";
 import { useMounted } from "@/hooks/use-mounted";
 import { platformError, useStartTrialMutation, useToolCatalogQuery, useToolDetailQuery, type Cycle, type ToolDetail, type ToolPlan } from "@/redux/features/platform/tools";
 import type { PlatformError } from "@/redux/features/platform/platformApi";
-import { WaitlistButton } from "@/components/workspace/tools/ToolActions";
+import { openHref, WaitlistButton } from "@/components/workspace/tools/ToolActions";
 import { daysUntil, Notice, ToolIcon, useLocalized, useToolsError } from "@/components/workspace/tools/shared";
 
 function useFeatureText() {
@@ -78,6 +78,7 @@ function PlanCard({
           <p className="text-body-sm text-fg-muted">{t("noPrice")}</p>
         )}
         {plan.perUser && plan.minSeats > 1 ? <p className="text-body-sm text-fg-muted">{t("minSeats", { count: plan.minSeats })}</p> : null}
+        {plan.contractedQuantity ? <p className="text-body-sm text-fg-muted">{t("contractCapacity", { count: plan.contractedQuantity })}</p> : null}
       </div>
 
       <ul className="flex flex-col gap-2 text-body-sm" aria-label={t("whatYouGet", { plan: loc(plan.name) })}>
@@ -131,6 +132,7 @@ function PlanCard({
 
 export default function ToolPlansPage() {
   const t = useTranslations("Tools.plans");
+  const ta = useTranslations("Tools.actions");
   const tc = useTranslations("Tools.catalog");
   const loc = useLocalized();
   const f = useFormatter();
@@ -173,6 +175,8 @@ export default function ToolPlansPage() {
   const name = loc(tool.name);
   const canBuy = ws.me.can.buy;
   const line = tool.line;
+  const appTool = ws.me.tools.find((item) => item.key === tool.key);
+  const open = appTool && ["active", "trial", "beta", "read_only"].includes(appTool.state) ? openHref(appTool.scope) : null;
   // A trial can start when the tool isn't paid for or on trial now (the API says why otherwise).
   const canTrial = canBuy && (!line || line.state === "free");
   const offered = catalog?.find((c) => c.key === tool.key)?.trialDays ?? 0;
@@ -206,6 +210,12 @@ export default function ToolPlansPage() {
         }
         description={loc(tool.short)}
         status={<StatusBadge entity="tool_state" state={tool.state} viewer="customer" />}
+        actions={open ? (
+          <Link href={open} className={buttonVariants({ variant: "primary" })}>
+            {ta("openTool", { tool: name })}
+            <ArrowRight aria-hidden="true" className="size-4 rtl:-scale-x-100" />
+          </Link>
+        ) : undefined}
       />
 
       {trialError ? (
@@ -246,6 +256,7 @@ export default function ToolPlansPage() {
                 {t("title")}
               </h2>
               <p className="text-body-sm text-fg-muted">{t("pricesFor", { count: tool.seats, currency: ws.me.workspace.currency })}</p>
+              {tool.taxDisplay ? <p className="text-caption text-fg-muted">{t(tool.reverseCharge ? "taxReverseCharge" : tool.taxRate === 0 ? "taxNone" : tool.taxDisplay === "inclusive" ? "taxInclusive" : "taxExclusive", { rate: f.percent((tool.taxRate ?? 0) / 100) })}</p> : null}
             </div>
             {paid.length ? (
               <SegmentedControl
