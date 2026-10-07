@@ -1,0 +1,574 @@
+{
+  "run": "muy4nyzh",
+  "checks": [
+    {
+      "name": "No payment method selected by default",
+      "pass": true
+    },
+    {
+      "name": "Pay remains disabled before a payment method",
+      "pass": true
+    },
+    {
+      "name": "The full taxed server quote is visible before Pay",
+      "pass": true,
+      "details": {
+        "total": 11505,
+        "tax": 0
+      }
+    },
+    {
+      "name": "Quote contains only configuration, without browser amounts",
+      "pass": true
+    },
+    {
+      "name": "checkout-guest-ch-1440: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "checkout-guest-ch-1440: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "checkout-guest-ch-1440: summary regional caption meets text contrast",
+      "pass": true,
+      "details": {
+        "ratio": 11.825418963328026
+      }
+    },
+    {
+      "name": "Receipt comes from the confirmed server quote",
+      "pass": true,
+      "details": {
+        "reference": "ORG-7092173B",
+        "quoteId": "wq_vwbcl4K87JzvEmMf8s7FjwqMwO3v73mQs2uVG0cOVKg",
+        "currency": "CHF",
+        "decimals": 2,
+        "total": 11505,
+        "tax": 0,
+        "region": {
+          "country": "CH",
+          "currency": "CHF",
+          "source": "fallback"
+        },
+        "paymentStatus": "succeeded",
+        "proofPresent": true
+      }
+    },
+    {
+      "name": "Tool activation is pending the workspace link",
+      "pass": true
+    },
+    {
+      "name": "Website management is a service onboarding request",
+      "pass": true
+    },
+    {
+      "name": "Confirmation retains six/three month terms and renewal choices",
+      "pass": true
+    },
+    {
+      "name": "Confirm transmits proof/configuration only",
+      "pass": true
+    },
+    {
+      "name": "receipt-guest-ch-1440: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Purchase confirmed.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "receipt-guest-ch-1440: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Password mismatch prevents registration",
+      "pass": true
+    },
+    {
+      "name": "password-setup-1440: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Purchase confirmed.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "password-setup-1440: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Setup registers once and links only the server claim",
+      "pass": true
+    },
+    {
+      "name": "Handoff opens the dashboard without credentials in the address",
+      "pass": true
+    },
+    {
+      "name": "Guest claim initializes its empty workspace in the paid currency",
+      "pass": true,
+      "details": {
+        "currency": "CHF"
+      }
+    },
+    {
+      "name": "Linked invoice agrees with the immutable receipt exactly once",
+      "pass": true,
+      "details": {
+        "count": 1,
+        "currency": "CHF",
+        "total": 115.05
+      }
+    },
+    {
+      "name": "Purchased tool has the six-month renewal boundary",
+      "pass": true,
+      "details": {
+        "termMonths": 6,
+        "state": "active"
+      }
+    },
+    {
+      "name": "Website purchase opens one managed request without CMS entitlement",
+      "pass": true,
+      "details": {
+        "serviceRequests": 1
+      }
+    },
+    {
+      "name": "linked-invoice-ch-1440: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Invoice INV-2026-001058",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "linked-invoice-ch-1440: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Receipt refresh confirms activation without duplicating the invoice",
+      "pass": true
+    },
+    {
+      "name": "Receipt survives reload without passwords or card details",
+      "pass": true
+    },
+    {
+      "name": "KWD uses the server currency and three decimals",
+      "pass": true
+    },
+    {
+      "name": "TWINT is absent outside the supported server region",
+      "pass": true
+    },
+    {
+      "name": "checkout-kw-390: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "checkout-kw-390: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "receipt-kw-390: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Purchase confirmed.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "receipt-kw-390: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "password-setup-390: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Purchase confirmed.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "password-setup-390: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Declined payment preserves entered billing and cart",
+      "pass": true
+    },
+    {
+      "name": "Decline never creates a paid claim",
+      "pass": true
+    },
+    {
+      "name": "declined-payment-390: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "declined-payment-390: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Confirmed decline uses a new attempt reference for retry",
+      "pass": true,
+      "details": {
+        "failedReference": "ORG-3131F7D1",
+        "paidReference": "ORG-EB3DAABF"
+      }
+    },
+    {
+      "name": "Unknown result keeps the original pending proof and billing",
+      "pass": true
+    },
+    {
+      "name": "Recovery is available after the cart was emptied",
+      "pass": true
+    },
+    {
+      "name": "payment-recovery-1440: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "payment-recovery-1440: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "payment-recovery-1440: summary regional caption meets text contrast",
+      "pass": true,
+      "details": {
+        "ratio": 11.825418963328026
+      }
+    },
+    {
+      "name": "Recovery reuses the identical request without requoting",
+      "pass": true
+    },
+    {
+      "name": "Lost response recovers the same server result",
+      "pass": true,
+      "details": {
+        "reference": "ORG-B93443A5",
+        "quoteId": "wq_HVhLfsylxW4wxIjs_E-yqWhh4wKjdeTua7uxsLU_gOQ",
+        "currency": "CHF",
+        "decimals": 2,
+        "total": 3240,
+        "tax": 0,
+        "region": {
+          "country": "CH",
+          "currency": "CHF",
+          "source": "fallback"
+        },
+        "paymentStatus": "succeeded",
+        "proofPresent": true
+      }
+    },
+    {
+      "name": "Expired quote refreshes before a second explicit Pay",
+      "pass": true,
+      "details": {
+        "confirmedOrders": 0,
+        "quoteRequests": 2,
+        "quoteRequestsBefore": 1
+      }
+    },
+    {
+      "name": "quote-expired-1440: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "quote-expired-1440: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "quote-expired-1440: summary regional caption meets text contrast",
+      "pass": true,
+      "details": {
+        "ratio": 11.825418963328026
+      }
+    },
+    {
+      "name": "Signed-in workspace billing wins over the mock country override",
+      "pass": true,
+      "details": {
+        "currency": "EGP",
+        "region": {
+          "country": "EG",
+          "currency": "EGP",
+          "source": "workspace",
+          "workspaceId": "ws_nile"
+        }
+      }
+    },
+    {
+      "name": "Workspace tax is included in the Pay total before payment",
+      "pass": true
+    },
+    {
+      "name": "checkout-workspace-egp-1440: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "checkout-workspace-egp-1440: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "checkout-workspace-egp-1440: summary regional caption meets text contrast",
+      "pass": true,
+      "details": {
+        "ratio": 11.825418963328026
+      }
+    },
+    {
+      "name": "Signed-in confirmation reflects actual platform activation",
+      "pass": true
+    },
+    {
+      "name": "Frozen tax is explained in the receipt",
+      "pass": true
+    },
+    {
+      "name": "receipt-workspace-egp-1440: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Purchase confirmed.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "receipt-workspace-egp-1440: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Partners and Imprint remain in the legal navigation",
+      "pass": true
+    },
+    {
+      "name": "partners-preserved-390: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Clear information.One place to find it.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "partners-preserved-390: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Mock Partners strip remains between Two sides and Work",
+      "pass": true
+    },
+    {
+      "name": "home-partners-preserved-390: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Build thebusiness.Run it better.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "home-partners-preserved-390: no runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "shots": [
+    {
+      "name": "checkout-guest-ch-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "receipt-guest-ch-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Purchase confirmed.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "password-setup-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Purchase confirmed.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "linked-invoice-ch-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Invoice INV-2026-001058",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "checkout-kw-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "receipt-kw-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Purchase confirmed.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "password-setup-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Purchase confirmed.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "declined-payment-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "payment-recovery-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "quote-expired-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "checkout-workspace-egp-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "receipt-workspace-egp-1440",
+      "facts": {
+        "width": 1440,
+        "scroll": 1440,
+        "heading": "Purchase confirmed.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "partners-preserved-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Clear information.One place to find it.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "home-partners-preserved-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Build thebusiness.Run it better.",
+        "direction": "ltr"
+      }
+    }
+  ]
+}

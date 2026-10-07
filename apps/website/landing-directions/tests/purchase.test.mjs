@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import { createRequire } from "node:module";
 import {
   CATALOG,
   BUNDLES,
@@ -15,6 +16,9 @@ import {
   configurationHref,
   groupFromLocation,
   migrateLegacy,
+  installPublicCatalog,
+  getPricingSnapshot,
+  money,
 } from "../src/reference/purchase-catalog.js";
 import {
   simulatePayment as simulatePaymentRequest,
@@ -23,6 +27,8 @@ import {
   savePurchaseSession,
   loadPurchaseSession,
   ORDER_SESSION_KEY,
+  quoteWebsite,
+  getPendingPayment,
 } from "../src/reference/purchase-adapter.js";
 import {
   getPreviewCustomer,
@@ -36,12 +42,43 @@ import {
   createTestPaymentAuthorization,
 } from "../src/reference/purchase-payment.js";
 
-// Existing adapter scenarios begin after the payment-details step is completed.
-const simulatePayment = (request) =>
-  simulatePaymentRequest({
+// The fixture runs the actual platform pricing/order helpers in memory. The browser receives
+// their JSON responses; no test or client-side helper can mint a paid order from cart totals.
+const require = createRequire(import.meta.url);
+const { makeStore } = require("../../../../mock/apps/admin/store.js");
+const sharedIdentity = require("../../../../mock/lib/identity.js");
+const { registerCatalog, publicCatalog, resolveRegion, createQuote, confirmOrder } = require("../../../../mock/apps/admin/website-offers.js");
+const backend = makeStore({ identity: sharedIdentity });
+backend.now = () => Date.parse("2026-10-07T09:00:00Z");
+registerCatalog(backend);
+const backendContext = { config: { hosted: false }, websiteOrderSecret: "isolated-website-test-order-key", identity: { userFromReq: () => null, tokenFrom: () => null } };
+const backendRequest = (body = {}, headers = {}) => ({ body, headers, get: name => headers[name.toLowerCase()] });
+const visitor = resolveRegion(backendRequest(), backendContext, backend);
+const approvedCatalog = publicCatalog(backend, visitor);
+installPublicCatalog(approvedCatalog);
+const requests = [];
+globalThis.fetch = async (url, options = {}) => {
+  if (options.signal?.aborted) throw new DOMException("The operation was aborted", "AbortError");
+  const route = new URL(url).pathname;
+  const body = options.body ? JSON.parse(options.body) : undefined;
+  requests.push({ route, body, headers: options.headers || {} });
+  let status = 200, data, failure;
+  try {
+    if (route.endsWith("/v1/public/catalog")) data = publicCatalog(backend, visitor);
+    else if (route.endsWith("/v1/public/website-quotes")) data = createQuote(backend, backendContext, body, visitor);
+    else if (route.endsWith("/v1/public/website-orders")) data = confirmOrder(backend, backendContext, backendRequest(body, options.headers), visitor);
+    else throw new Error(`Unexpected website purchase request: ${route}`);
+  } catch (error) { if (!error.status) throw error; status = error.status; failure = { code: error.code, message: error.message }; }
+  return { ok: status >= 200 && status < 300, status, json: async () => JSON.parse(JSON.stringify(failure ? { error: failure } : { data })) };
+};
+// Existing adapter scenarios begin after the synthetic payment-details step is completed.
+const simulatePayment = (request) => {
+  if (request.outcome === "declined") backend.failNext = 1;
+  return simulatePaymentRequest({
     authorization: { method: request.paymentMethod || "card", approved: true },
     ...request,
   });
+};
 const local = new Map(),
   session = new Map(),
   events = new Map();
@@ -57,6 +94,8 @@ globalThis.window = {
   },
   addEventListener: (type, fn) => events.set(type, fn),
 };
+Object.defineProperty(globalThis, "localStorage", { value: window.localStorage, configurable: true, writable: true });
+Object.defineProperty(globalThis, "sessionStorage", { value: window.sessionStorage, configurable: true, writable: true });
 const store = await import("../src/reference/purchase-store.js");
 const reset = (groups = []) =>
   events.get("storage")({
@@ -106,7 +145,8 @@ test("catalog has exactly the approved purchasable items, prices, and capabiliti
   assert.equal(CATALOG.length, 16);
   assert.equal(CATALOG.filter((i) => i.kind === "service").length, 10);
   assert.equal(findItem(graphic).monthlyMinor, 90000);
-  assert.equal(findItem("hr").monthlyMinor, 4900);
+  assert.equal(findItem("hr").monthlyMinor, 6500);
+  assert.equal(getPricingSnapshot().items.find(item => item.id === "hr").quantity, 5);
   assert.ok(
     CATALOG.every(
       (i) => i.capabilities.length === 3 && Number.isInteger(i.monthlyMinor),
@@ -127,8 +167,8 @@ test("single-package features do not change across all four durations", () => {
 });
 test("duration prices use minor units and round only the full period", () => {
   assert.equal(quoteGroup(group([graphic], 3)).total, 256500);
-  assert.equal(quoteGroup(groupFromIds("software", ["hr"], 3)).total, 13965);
-  assert.equal(quoteGroup(groupFromIds("software", ["hr"], 12)).total, 49980);
+  assert.equal(quoteGroup(groupFromIds("software", ["hr"], 3)).total, 18525);
+  assert.equal(quoteGroup(groupFromIds("software", ["hr"], 12)).total, 66300);
 });
 test("best discount wins; rates never stack and duration wins a tie", () => {
   const g = group([graphic, brand], 3);
@@ -148,7 +188,7 @@ test("mixed periods price independently and totals sum every purchased period", 
   assert.equal(quoteGroup(g).total, 1276500);
   assert.equal(
     quoteCart([g, groupFromIds("software", ["files"], 6)]).total,
-    1286760,
+    1279740,
   );
 });
 test("count thresholds and savings stay monotonic for every available subset", () => {
@@ -507,7 +547,7 @@ test("card authorization never passes card details into receipts or CRM and refr
     /payment details or approval/,
   );
 });
-test("declined and cancelled payment never produce an order or account", async () => {
+test("declined and cancelled payment never produce a paid receipt or account", async () => {
   await assert.rejects(
     simulatePayment({
       groups: [group()],
@@ -526,12 +566,149 @@ test("declined and cancelled payment never produce an order or account", async (
       reference: "cancelled",
       signal: controller.signal,
     }),
-    /cancelled/,
+    error => error.name === "AbortError" || error.message === "cancelled",
   );
   await assert.rejects(
     provisionCRM({ paymentStatus: "failed" }),
     /successful payment/,
   );
+});
+
+test("quotes and confirmations send configuration and proof only, never browser prices or credentials", async () => {
+  const configured = group([graphic], 3);
+  configured.lines[0].total = 1;
+  const displayed = await quoteWebsite({ groups: [configured] });
+  const quoting = requests.at(-1);
+  assert.deepEqual(Object.keys(quoting.body), ["groups"]);
+  assert.deepEqual(quoting.body.groups[0].lines[0], { catalogId: graphic, months: 3, autoRenew: false });
+  const order = await simulatePayment({ groups: [configured], customer, reference: "server-proof-only", quote: displayed, paymentDetails: { cardNumber: "must-not-send", cvv: "must-not-send" } });
+  const confirming = requests.at(-1);
+  assert.deepEqual(Object.keys(confirming.body).sort(), ["billing", "paymentMethod", "quoteId", "reference"]);
+  assert.equal(confirming.body.quoteId, displayed.quoteId);
+  assert.equal(JSON.stringify(confirming.body).includes("must-not-send"), false);
+  assert.deepEqual(order.quote, displayed.quote);
+  assert.equal(order.currency, displayed.currency); assert.equal(order.decimals, displayed.decimals);
+});
+
+test("raw cart totals cannot be promoted to a paid purchase snapshot", async () => {
+  const { createPurchaseSnapshot } = await import("../src/reference/purchase-adapter.js");
+  assert.throws(() => createPurchaseSnapshot([group()], "client-reference"), error => error.code === "server_order_required");
+  assert.throws(() => createPurchaseSnapshot({ version: 1, paymentStatus: "succeeded", groups: [group()], quote: { total: 1 }, currency: "CHF", decimals: 2 }), error => error.code === "server_order_required");
+  const paid = await simulatePayment({ groups: [groupFromIds("software", ["website"])], customer, reference: "managed-website-proof" });
+  assert.equal(paid.groups[0].lines[0].activation, "awaiting-onboarding");
+  assert.equal(paid.groups[0].lines[0].fulfillment, "managed-service");
+  assert.ok(Object.isFrozen(paid.quote));
+});
+
+test("unknown payment outcome recovers the immutable server attempt without requoting or recharging", async () => {
+  const transport = globalThis.fetch, reference = "lost-response-recovery";
+  const request = { groups: [group([graphic], 3)], customer, reference, paymentMethod: "paypal" };
+  let lost = false, submitted;
+  globalThis.fetch = async (url, options) => {
+    const response = await transport(url, options);
+    if (new URL(url).pathname.endsWith("/v1/public/website-orders") && !lost) {
+      lost = true; submitted = JSON.parse(options.body); throw new TypeError("Isolated lost payment response");
+    }
+    return response;
+  };
+  try { await assert.rejects(simulatePayment(request), error => error.code === "transport_unavailable"); }
+  finally { globalThis.fetch = transport; }
+  assert.deepEqual(getPendingPayment().payload, submitted);
+  const beforeQuotes = backend.db.publicWebsiteQuotes.length, beforeOrders = backend.db.publicWebsiteOrders.length;
+  const recovered = await simulatePayment({ ...request, groups: [group([brand], 12)], paymentMethod: "card" });
+  assert.deepEqual(requests.at(-1).body, submitted);
+  assert.equal(recovered.paymentMethod, "paypal");
+  assert.equal(backend.db.publicWebsiteQuotes.length, beforeQuotes); assert.equal(backend.db.publicWebsiteOrders.length, beforeOrders);
+  assert.equal(getPendingPayment(), null);
+});
+
+test("a first owner-policy rejection confirms no payment and clears the pending attempt", async () => {
+  const transport = globalThis.fetch, reference = "first-owner-policy-rejection";
+  const ordersBefore = backend.db.publicWebsiteOrders.length;
+  globalThis.fetch = async (url, options) => new URL(url).pathname.endsWith("/v1/public/website-orders")
+    ? { ok: false, status: 403, json: async () => ({ error: { code: "owner_required", message: "Only the owner can confirm payment." } }) }
+    : transport(url, options);
+  try {
+    await assert.rejects(
+      simulatePayment({ groups: [group([graphic], 3)], customer, reference }),
+      error => error.code === "owner_required" && error.status === 403 && error.confirmed === true,
+    );
+    assert.equal(backend.db.publicWebsiteOrders.length, ordersBefore);
+    assert.equal(getPendingPayment(), null);
+    assert.equal(session.has("orgtik.purchase-attempt.v1"), false);
+  } finally { globalThis.fetch = transport; }
+});
+
+test("a recovery permission rejection preserves a previously uncertain paid attempt", async () => {
+  const transport = globalThis.fetch, reference = "lost-response-owner-recovery";
+  const request = { groups: [group([graphic], 3)], customer, reference, paymentMethod: "paypal" };
+  let submitted;
+  globalThis.fetch = async (url, options) => {
+    const response = await transport(url, options);
+    if (new URL(url).pathname.endsWith("/v1/public/website-orders")) {
+      submitted = JSON.parse(options.body);
+      throw new TypeError("Isolated paid-response loss before permission recovery");
+    }
+    return response;
+  };
+  try {
+    await assert.rejects(simulatePayment(request), error => error.code === "transport_unavailable");
+    const stored = backend.db.publicWebsiteOrders.find(row => row.snapshot.reference === reference);
+    assert.equal(stored.snapshot.paymentStatus, "succeeded");
+    assert.deepEqual(getPendingPayment().payload, submitted);
+    const quotesBefore = backend.db.publicWebsiteQuotes.length, ordersBefore = backend.db.publicWebsiteOrders.length;
+    let rejectedPayload;
+    globalThis.fetch = async (url, options) => {
+      assert.ok(new URL(url).pathname.endsWith("/v1/public/website-orders"), "Recovery must reuse the original quote, not request another.");
+      rejectedPayload = JSON.parse(options.body);
+      return { ok: false, status: 403, json: async () => ({ error: { code: "owner_required", message: "Owner permission was temporarily unavailable." } }) };
+    };
+    await assert.rejects(
+      simulatePayment({ ...request, groups: [group([brand], 12)], paymentMethod: "card" }),
+      error => error.code === "owner_required" && error.status === 403 && error.confirmed !== true,
+    );
+    assert.deepEqual(rejectedPayload, submitted);
+    assert.deepEqual(getPendingPayment().payload, submitted);
+    assert.equal(session.has("orgtik.purchase-attempt.v1"), true);
+    assert.equal(backend.db.publicWebsiteQuotes.length, quotesBefore);
+    assert.equal(backend.db.publicWebsiteOrders.length, ordersBefore);
+    globalThis.fetch = transport;
+    const recovered = await simulatePayment({ ...request, groups: [group([brand], 12)], paymentMethod: "card" });
+    assert.equal(recovered.quoteId, stored.snapshot.quoteId);
+    assert.equal(recovered.claimToken, stored.snapshot.claimToken);
+    assert.equal(recovered.paymentMethod, "paypal");
+    assert.deepEqual(requests.at(-1).body, submitted);
+    assert.equal(backend.db.publicWebsiteQuotes.length, quotesBefore);
+    assert.equal(backend.db.publicWebsiteOrders.length, ordersBefore);
+    assert.equal(getPendingPayment(), null);
+  } finally { globalThis.fetch = transport; }
+});
+
+test("expired displayed quotes cannot silently fetch and charge a different price", async () => {
+  const configured = [group([graphic], 3)], displayed = await quoteWebsite({ groups: configured });
+  const now = backend.now, count = backend.db.publicWebsiteOrders.length;
+  backend.now = () => Date.parse(displayed.expiresAt) + 1;
+  try {
+    await assert.rejects(simulatePayment({ groups: configured, customer, reference: "expired-displayed-quote", quote: displayed }), error => error.code === "quote_expired");
+    assert.equal(backend.db.publicWebsiteOrders.length, count);
+    assert.equal(getPendingPayment(), null);
+  } finally { backend.now = now; }
+});
+
+test("missing catalog prices stay unavailable and KWD matrices preserve server precision", () => {
+  try {
+    installPublicCatalog({ ...approvedCatalog, items: approvedCatalog.items.filter(item => item.id !== "files") });
+    assert.equal(findItem("files").monthlyMinor, null);
+    assert.equal(quoteGroup(groupFromIds("software", ["files"])).valid, false);
+    assert.equal(quoteGroup(groupFromIds("software", ["files"])).total, null);
+    const kuwait = { workspace: { country: "KW", currency: "KWD", billing: { country: "KW" }, members: [], lines: [] }, buyerKey: null, region: { country: "KW", currency: "KWD", source: "fixture" } };
+    const matrix = publicCatalog(backend, kuwait); installPublicCatalog(matrix);
+    const configured = groupFromIds("software", ["files"], 6);
+    const approved = createQuote(backend, backendContext, { groups: [configured] }, kuwait);
+    assert.equal(quoteGroup(configured).total, approved.quote.offerTotal);
+    assert.equal(getPricingSnapshot().decimals, 3);
+    assert.ok(money(approved.quote.total).startsWith("KWD "));
+  } finally { installPublicCatalog(approvedCatalog); }
 });
 test("successful payment is idempotent, immutable, and records different activation states", async () => {
   const request = {
@@ -546,7 +723,7 @@ test("successful payment is idempotent, immutable, and records different activat
   assert.equal(a, b);
   assert.ok(Object.isFrozen(a.groups[0].lines));
   assert.equal(a.groups[0].lines[0].activation, "awaiting-onboarding");
-  assert.equal(a.groups[1].lines[0].activation, "active-preview");
+  assert.equal(a.groups[1].lines[0].activation, "awaiting-link");
   assert.equal("customer" in a, false);
 });
 test("all payment methods survive receipt refresh and CRM handoff without payment credentials", async () => {
@@ -584,8 +761,8 @@ test("a declined payment can switch method on retry and never changes after succ
     }),
     /declined/,
   );
-  const order = await simulatePayment({ ...request, paymentMethod: "paypal" });
-  const repeated = await simulatePayment({ ...request, paymentMethod: "card" });
+  const order = await simulatePayment({ ...request, reference: "method-retry-new-attempt", paymentMethod: "paypal" });
+  const repeated = await simulatePayment({ ...request, reference: "method-retry-new-attempt", paymentMethod: "card" });
   assert.equal(repeated, order);
   assert.equal(repeated.paymentMethod, "paypal");
 });
@@ -601,7 +778,8 @@ test("unsupported methods cannot create a purchase; older card receipts remain r
     }),
     /available payment method/,
   );
-  const legacy = { ...createPurchaseSnapshot([group()], "legacy-method") };
+  const approved = await simulatePayment({ groups: [group()], customer, reference: "legacy-method" });
+  const legacy = { ...createPurchaseSnapshot(approved) };
   delete legacy.paymentMethod;
   session.set(ORDER_SESSION_KEY, JSON.stringify({ order: legacy }));
   assert.equal(loadPurchaseSession().order.paymentMethod, "card");
@@ -692,7 +870,8 @@ test("explicit simulated cancellation permits a later successful retry", async (
 test("CRM handoff contract carries customer context and canonical purchase amounts without persisting identity", async () => {
   const { createCRMHandoffRequest, createPurchaseSnapshot } =
     await import("../src/reference/purchase-adapter.js");
-  const order = createPurchaseSnapshot([group([graphic], 6)], "DEMO-CONTRACT");
+  const paid = await simulatePayment({ groups: [group([graphic], 6)], customer, reference: "DEMO-CONTRACT" });
+  const order = createPurchaseSnapshot(paid);
   const request = createCRMHandoffRequest(order, customer, true);
   assert.equal(request.customerContext.email, customer.email);
   assert.equal(request.customerContext.verified, true);

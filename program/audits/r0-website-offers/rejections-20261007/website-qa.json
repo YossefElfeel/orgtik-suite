@@ -1,0 +1,83 @@
+{
+  "run": "muy4vmht",
+  "checks": [
+    {
+      "name": "A first explicit rejection leaves billing editable and no pending attempt",
+      "pass": true
+    },
+    {
+      "name": "Rejected request never creates a paid receipt",
+      "pass": true
+    },
+    {
+      "name": "owner-rejection-editable-390: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "owner-rejection-editable-390: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "A new permitted confirmation uses a new reference",
+      "pass": true
+    },
+    {
+      "name": "A recovery rejection preserves the previously uncertain reference",
+      "pass": true
+    },
+    {
+      "name": "Uncertain recovery keeps its original billing immutable",
+      "pass": true
+    },
+    {
+      "name": "owner-rejection-uncertain-recovery-390: no page overflow",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "owner-rejection-uncertain-recovery-390: no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Recovered permission reuses the paid server order without requoting",
+      "pass": true
+    },
+    {
+      "name": "All uncertain recovery requests retain the exact payload",
+      "pass": true
+    }
+  ],
+  "shots": [
+    {
+      "name": "owner-rejection-editable-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    },
+    {
+      "name": "owner-rejection-uncertain-recovery-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "heading": "Checkout.",
+        "direction": "ltr"
+      }
+    }
+  ]
+}

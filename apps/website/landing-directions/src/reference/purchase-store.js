@@ -9,6 +9,7 @@ import {
   migrateLegacy,
   MONTHS,
   money,
+  currencyScale,
 } from "./purchase-catalog.js";
 export const CART_STORAGE_KEY = "orgtik.cart.v2";
 const listeners = new Set();
@@ -214,7 +215,8 @@ export function dismissMigrationMessages() {
 export const dismissRepricedNote = dismissMigrationMessages;
 export const cancelCartEdit = () => publish({ editingId: null });
 export const beginCartEdit = (id) => publish({ editingId: id });
-export const formatCHF = (amount) => money(Math.round(amount * 100));
+export const formatCHF = (amount) =>
+  money(Math.round(amount * currencyScale()));
 export const itemLabel = groupName;
 export const formatItemEstimate = (group) =>
   `${money(quoteGroup(group).total)} upfront`;
@@ -222,10 +224,10 @@ export function cartTotals(items) {
   const q = quoteCart(items);
   return {
     ...q,
-    monthly: q.monthlyEquivalent / 100,
+    monthly: q.monthlyEquivalent / currencyScale(),
     project: 0,
-    periodTotal: q.total / 100,
-    savings: q.saving / 100,
+    periodTotal: q.total / currencyScale(),
+    savings: q.saving / currencyScale(),
     onRequest: !q.valid,
   };
 }
@@ -247,7 +249,7 @@ export function createCartItem(input) {
   return {
     ...group,
     name: groupName(group),
-    estimate: quoteGroup(group).monthlyEquivalent / 100,
+    estimate: quoteGroup(group).monthlyEquivalent / currencyScale(),
     selections: input.selections || [],
   };
 }
