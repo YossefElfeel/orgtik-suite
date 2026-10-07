@@ -1,5 +1,13 @@
 # Purchasing flow
 
+## Purchase account setup — 2026-10-07
+
+After successful guest payment, **Set up my account** opens Password and Confirm password fields. Both must match and contain at least eight characters before any registration request. Reuse the billing name and email, register through the suite identity API, connect the saved order to that workspace, and redirect through a one-time session handoff to the dashboard. No email-verification step is shown. An email with an existing account must sign in; setup never changes that account's password.
+
+Keep the new session immediately after registration. Order-linking and handoff failures retry without another registration or payment. The receipt may retain only billing name, email and company in this tab's sessionStorage so password setup still works after reload. Restoring a receipt never authenticates a customer. Passwords and payment credentials are never stored. This replaces the older guest-verification and identity-free receipt descriptions below; payment remains a no-charge test checkout.
+
+The HTML Sitemap page and legal-page tab are removed. Marketing footers link to `/legal/imprint`. The crawler's `sitemap.xml` remains generated and excludes the removed HTML page.
+
 The journey is `/plans` or a service/software page → builder → `/cart` → `/checkout` → CRM account handoff. Services and software have separate builders and share one cart. Hosting is an external purchase at https://orgtik.ch. The storefront uses production-style wording, with payment, authentication, and CRM integration simulated locally. No real charges, accounts, or messages are created.
 
 ## Architecture

@@ -661,7 +661,7 @@ export default class Contact extends ReferencePage {
           ["Plans & pricing", "/plans"],
           ["Tell us about your project", "Contact.dc.html"],
           ["Roadmap", "Roadmap.dc.html"],
-          ["Sitemap", "Legal.dc.html#/sitemap"],
+          ["Imprint", "/legal/imprint"],
         ].map((x) => ({ label: x[0], href: x[1] })),
         footTalk: () => this.go("enquiry"),
         showHero: false,

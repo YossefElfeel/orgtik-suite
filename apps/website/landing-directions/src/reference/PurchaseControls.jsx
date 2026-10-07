@@ -26,6 +26,7 @@ export function PurchaseAction({
   href,
   disabled = false,
   secondary = false,
+  type = "button",
   ...props
 }) {
   const contents = (
@@ -48,7 +49,7 @@ export function PurchaseAction({
   ) : (
     <button
       {...props}
-      type="button"
+      type={type}
       onClick={onClick}
       disabled={disabled}
       className={`commerce-action purchase-action ${secondary ? "purchase-action--secondary" : ""}`}
@@ -244,6 +245,11 @@ export function CartLink() {
 }
 export function CartNotice() {
   const { notice, conflict } = useCart();
+  useEffect(() => {
+    if (!notice) return;
+    const timeout = setTimeout(dismissCartNotice, 10000);
+    return () => clearTimeout(timeout);
+  }, [notice]);
   useEffect(() => {
     const key = (e) => {
       if (e.key === "Escape" && !conflict) dismissCartNotice();

@@ -626,7 +626,7 @@ test("CRM failure and pending states recover idempotently without another paymen
     "pending",
   );
   const ready = await provisionCRM(order);
-  assert.equal(ready.access, "verification-required");
+  assert.equal(ready.access, "setup-required");
   assert.deepEqual(await provisionCRM(order), ready);
 });
 test("verified demo customers reuse their account; session restoration never implies verified identity", async () => {
@@ -643,9 +643,9 @@ test("verified demo customers reuse their account; session restoration never imp
   assert.ok(!text.includes(customer.name));
   const restored = loadPurchaseSession();
   assert.equal(restored.order.reference, order.reference);
-  assert.equal(restored.crm.access, "verification-required");
+  assert.equal(restored.crm.access, "setup-required");
   const unverifiedRetry = await provisionCRM(order, { verified: false });
-  assert.equal(unverifiedRetry.access, "verification-required");
+  assert.equal(unverifiedRetry.access, "setup-required");
 });
 
 test("legacy module, mode and hash links retain their selected software and periods", () => {
