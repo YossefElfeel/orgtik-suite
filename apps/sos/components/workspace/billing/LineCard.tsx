@@ -67,7 +67,11 @@ export function LineCard({
       t("free")
     ),
   });
-  if (line.state === "active" && paid) facts.push({ label: t("renewsOn"), value: day(line.periodEnd) });
+  if (line.state === "active" && paid) {
+    // Bought without automatic renewal: it ends at the period end unless the owner renews it.
+    if (line.autoRenew === false) facts.push({ label: t("endsOn"), value: day(line.periodEnd) }, { label: t("renewal"), value: t("manualRenewal") });
+    else facts.push({ label: t("renewsOn"), value: day(line.periodEnd) });
+  }
   if (line.state === "cancelling") facts.push({ label: t("endsOn"), value: day(line.cancelAt ?? line.periodEnd) });
   if (line.state === "trialing") facts.push({ label: t("trialEnds"), value: day(line.trialEndsAt ?? line.periodEnd) });
   if (line.state === "past_due") {

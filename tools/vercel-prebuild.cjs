@@ -22,5 +22,8 @@ let src = fs.readFileSync(file, "utf8");
 src = src
   .replace(/export const SOS_URL = [^\n]*/, `export const SOS_URL = ${JSON.stringify(SOS_URL)}; // [vercel prebuild]`)
   .replace(/export const API_URL = [^\n]*/, `export const API_URL = ${JSON.stringify(SOS_API)}; // [vercel prebuild]`);
+// pnpm hard-links installed files to its shared store: replace the file instead of writing
+// through the link, so the store itself stays untouched.
+fs.rmSync(file);
 fs.writeFileSync(file, src);
 console.log(`[prebuild] sos-bar -> ${SOS_URL} (API ${SOS_API})`);

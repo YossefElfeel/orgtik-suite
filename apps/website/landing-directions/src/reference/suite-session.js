@@ -29,7 +29,9 @@ const SUITE_API = (
 const PLATFORM_API = `${SUITE_API.replace(/\/api$/, "")}/v1/app`;
 
 const SESSION_KEY = "orgtik.suite-session.v1";
+let memoryToken = null;
 const readToken = () => {
+  if (memoryToken) return memoryToken;
   try {
     return (
       JSON.parse(localStorage.getItem(SESSION_KEY) || "null")?.token || null
@@ -39,6 +41,7 @@ const readToken = () => {
   }
 };
 const writeToken = (token) => {
+  memoryToken = token;
   try {
     if (token) localStorage.setItem(SESSION_KEY, JSON.stringify({ token }));
     else localStorage.removeItem(SESSION_KEY);
@@ -134,8 +137,8 @@ async function sendOrder(order, token) {
 }
 
 // Checkout's account setup: signed in to the suite, the paid order goes into the person's
-// workspace (software on, services requested, invoice paid); a guest gets the simulated setup
-// and joins an account through Sign in or Create account. Same answer shape as provisionCRM.
+// workspace (software on, services requested, invoice paid); a guest finishes password setup
+// after payment. Same answer shape as provisionCRM.
 export async function setupInSuite(order, options = {}) {
   const token = readToken();
   if (!options.verified || !token) return provisionCRM(order, options);
@@ -178,9 +181,11 @@ export async function restoreSuiteSession() {
   } catch {
     return; // The suite is unreachable: keep the session for the next visit.
   }
-  if (!res.ok) return writeToken(null);
-  const user = (await res.json())?.data?.user;
-  if (!user?.email) return writeToken(null);
+  if (res.status === 401 || res.status === 403) return writeToken(null);
+  if (!res.ok) return; // Retry next visit; a service outage does not invalidate this account.
+  let user;
+  try { user = (await res.json())?.data?.user; } catch { return; }
+  if (!user?.email) return;
   signInPreviewCustomer({
     name: [user.firstName, user.lastName].filter(Boolean).join(" "),
     email: user.email,
@@ -214,6 +219,46 @@ export async function signUpToSuite({ name, email, password }) {
   if (res.status === 409) throw new Error("exists");
   if (!res.ok) throw new Error("unavailable");
   return openSuite(res);
+}
+
+// Post-purchase setup reuses the billing details. Keep the session as soon as registration
+// succeeds so an order or handoff retry never creates another account or asks for payment.
+export function validatePurchasePassword(password, confirmation) {
+  if (String(password || "").length < 8) return "password";
+  if (password !== confirmation) return "confirmation";
+  return null;
+}
+
+export async function setupPurchaseAccount(order, customer, password) {
+  if (order?.paymentStatus !== "succeeded") throw new Error("purchase");
+  const email = customer?.email?.trim().toLowerCase();
+  const name = customer?.name?.trim();
+  if (!name || !email) throw new Error("billing");
+  let token = readToken();
+  let user;
+  if (!token || getPreviewCustomer()?.email?.toLowerCase() !== email) {
+    if (String(password || "").length < 8) throw new Error("password");
+    const res = await send("/auth/register", { name, email, password });
+    if (res.status === 409) throw new Error("exists");
+    if (!res.ok) throw new Error("unavailable");
+    const { data } = await res.json();
+    token = data?.tokens?.accessToken;
+    user = data?.user;
+    if (!token || !user) throw new Error("unavailable");
+    writeToken(token);
+    signInPreviewCustomer({ name, email, company: customer.company || "" });
+  }
+  try {
+    if (!linked().includes(order.reference)) await sendOrder(order, token);
+  } catch {
+    throw new Error("order");
+  }
+  savePurchaseSession(
+    order,
+    { status: "ready", access: "verified-existing" },
+    customer,
+  );
+  return { user, href: await handoffHref(token) };
 }
 
 // Starts a password reset in the suite (it emails a code) and resolves to the suite page where

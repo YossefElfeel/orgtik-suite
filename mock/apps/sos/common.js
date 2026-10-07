@@ -20,7 +20,7 @@ function createHelpers(S) {
   const fail = (req, res, status, message, errors) =>
     res.status(status).json({ success: false, statusCode: status, message, ...(errors ? { errors } : {}), path: req.originalUrl, timestamp: nowIso() });
 
-  const isDeleted = (u) => !!u && S.deletedUserIds.has(u.id);
+  const isDeleted = (u) => !!u && (!!u.deletedAt || S.deletedUserIds.has(u.id));
   const liveUsers = () => identity.users.filter((u) => !isDeleted(u));
   const findLiveUser = (id) => {
     const u = identity.findUser(id);

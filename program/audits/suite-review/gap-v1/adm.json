@@ -1,0 +1,822 @@
+[
+  {
+    "gap_id": "GAP-046",
+    "spec_id": "US-A-01",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/tools/:key",
+    "evidence": "apps/admin/components/catalog/ToolForm.tsx:27-122; apps/admin/app/[locale]/(app)/tools/[key]/page.tsx:132; mock/apps/admin/admin-api.js:87-101; mock/apps/admin/app-api.js:44,69-75; apps/website/landing-directions/src/reference/suite-session.js:29,112",
+    "missing": "Website does not read tools from the platform (only posts website-orders), so edits don't show on the website; ADM-04 fields long description, icon upload (SVG/PNG), brand colour, 'show on website' are absent (icon is a Phosphor preset).",
+    "notes": "Bilingual name/short description (EN+AR required, D-014 5-language tabs), icon, order editable; key fixed after create; USR shell reads db.tools live."
+  },
+  {
+    "gap_id": "GAP-047",
+    "spec_id": "US-A-02",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/tools",
+    "evidence": "apps/admin/components/catalog/ToolStatusAction.tsx:16-88; mock/apps/admin/admin-api.js:67,91-97; mock/apps/admin/app-api.js:106-123,125-131",
+    "missing": "No expected launch date for Coming Soon; 'Available needs >=1 active public plan with a default price' not enforced (PATCH only checks STATUS_NEXT); trial/checkout APIs don't refuse plans of a coming_soon tool.",
+    "notes": "Status changes are guarded and logged (S.log tool_status); statuses are coming_soon/beta/live/retired."
+  },
+  {
+    "gap_id": "GAP-048",
+    "spec_id": "US-A-03",
+    "status": "Missing",
+    "current_app": "admin",
+    "current_route": "/en/waitlist",
+    "evidence": "apps/admin/app/[locale]/(app)/waitlist/page.tsx:30-88; mock/apps/admin/admin-api.js:636; mock/apps/admin/admin-api.js:91-97",
+    "missing": "No open vs invite-only beta mode, no 'invite selected from waitlist', no invited/accepted counts or endpoints.",
+    "notes": "Going beta only sets waitlist.notified=true for everyone."
+  },
+  {
+    "gap_id": "GAP-049",
+    "spec_id": "US-A-04",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/waitlist",
+    "evidence": "apps/admin/app/[locale]/(app)/waitlist/page.tsx:30-88; apps/admin/app/[locale]/(app)/tools/page.tsx:63-75; mock/apps/admin/admin-api.js:68,95,636",
+    "missing": "No count split by country and visitor/subscriber; no CSV export; no 'Notify all' action (beta/live only flips a notified flag, no email or in-app notice is created).",
+    "notes": "Per-tool list with tool filter and total count; tools list shows the waitlist count."
+  },
+  {
+    "gap_id": "GAP-050",
+    "spec_id": "US-A-05",
+    "status": "Missing",
+    "current_app": "admin",
+    "current_route": "/en/tools/:key",
+    "evidence": "apps/admin/components/catalog/ToolStatusAction.tsx:75-85; mock/apps/admin/admin-api.js:91-97; mock/apps/admin/lifecycle.js:81-82",
+    "missing": "No launch dialog: billing start date (+14d), launch coupon, AR/EN message; Beta to Live is a plain confirm. Beta users get no notice.",
+    "notes": "USR beta_billing banner exists but with a hard-coded coupon LAUNCH20, not driven by ADM."
+  },
+  {
+    "gap_id": "GAP-051",
+    "spec_id": "US-A-06",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/plans/features",
+    "evidence": "apps/admin/app/[locale]/(app)/plans/features/page.tsx:62-83; apps/admin/components/catalog/FeatureDialog.tsx:84-116; mock/apps/admin/admin-api.js:103-123; mock/apps/admin/app-api.js:88",
+    "missing": "Feature name AR/EN and reset period missing; features can't be edited (add/delete only); feature keys are not enforced anywhere server-side (limits only displayed in USR plans).",
+    "notes": "Key '<tool>.<feature>' (G-20), type flag/limit, unit, hard/soft enforcement, used-by count, in-use delete refused (409)."
+  },
+  {
+    "gap_id": "GAP-052",
+    "spec_id": "US-A-07",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/plans/:id",
+    "evidence": "apps/admin/components/catalog/PlanForm.tsx:166-251; mock/apps/admin/admin-api.js:133-165",
+    "missing": "Max seats and billing cycles fields missing; default USD price not editable in the plan editor (create sets 0, PATCH ignores price; grid only edits zone cells).",
+    "notes": "Tier, name EN/AR, flat/per-user, min seats, guest limit, trial days, yearly discount, visibility, status. No delete endpoint, so subscribed plans can only be archived."
+  },
+  {
+    "gap_id": "GAP-053",
+    "spec_id": "US-A-08",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/plans/:id",
+    "evidence": "apps/admin/components/catalog/PlanForm.tsx:34-66,253-288; mock/apps/admin/admin-api.js:143",
+    "missing": "Lowering a limit does not show how many workspaces are already above it.",
+    "notes": "Each limit: number / Unlimited / not in plan; flags on/off."
+  },
+  {
+    "gap_id": "GAP-054",
+    "spec_id": "US-A-09",
+    "status": "Exists-OK",
+    "current_app": "admin",
+    "current_route": "/en/plans/:id",
+    "evidence": "apps/admin/components/catalog/PlanForm.tsx:189-191; mock/apps/admin/app-api.js:72,86; mock/apps/admin/admin-api.js:155-165",
+    "missing": "",
+    "notes": "Archived plans hidden from USR catalog/plans; existing lines untouched. Optional 'move subscribers at renewal' not built. Checkout quote() does not itself refuse an archived planId (app-api.js:125-131)."
+  },
+  {
+    "gap_id": "GAP-055",
+    "spec_id": "US-A-10",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/currencies",
+    "evidence": "apps/admin/components/pricing/CurrenciesPage.tsx:17-133,245-313; mock/apps/admin/admin-api.js:168-189",
+    "missing": "No AR/EN name, symbol or symbol position; no 'gateways supporting it' column; activation is not blocked when no active gateway supports the currency (only deactivation-in-use is blocked).",
+    "notes": "ISO code, decimals 0/2/3, rounding step and mode with live example; in-use currency can't be turned off (R03-C5)."
+  },
+  {
+    "gap_id": "GAP-056",
+    "spec_id": "US-A-11",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/zones",
+    "evidence": "apps/admin/components/pricing/ZonesPage.tsx:15-101,104-148; mock/apps/admin/admin-api.js:190-210; mock/apps/admin/pricing.js:41-45",
+    "missing": "Zone name is a single string (not AR/EN); countries can't be picked from the zone editor (assigned one by one in the country sheet).",
+    "notes": "Base currency, active toggle, Default zone that can't be turned off and catches unassigned countries. The old Sales-app conflict no longer applies (ADM follows spec 03)."
+  },
+  {
+    "gap_id": "GAP-057",
+    "spec_id": "US-A-12",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/zones?country=XX",
+    "evidence": "apps/admin/components/pricing/CountrySheet.tsx:123-130; mock/apps/admin/admin-api.js:211-224",
+    "missing": "Moving a country shows no confirmation ('will move from <zone>') and no affected workspaces; the move does not queue migrations (only turning a zone off does, admin-api.js:204-207).",
+    "notes": "Data model gives each country exactly one zone (countries[iso].zone); workspaces keep their currency."
+  },
+  {
+    "gap_id": "GAP-058",
+    "spec_id": "US-A-13",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing",
+    "evidence": "apps/admin/components/pricing/PriceGrid.tsx:151-271; apps/admin/components/pricing/PriceGrid.tsx:208,220-233; mock/apps/admin/admin-api.js:238-254",
+    "missing": "Empty cell shows the default USD price (grey) only in the Default zone column, other zones show a dash; no bulk change of selected cells by %; no country view toggle.",
+    "notes": "Rows = plans, column pairs = zones x monthly/yearly in zone currency, tool filter, draft cells 'from -> to'."
+  },
+  {
+    "gap_id": "GAP-059",
+    "spec_id": "US-A-14",
+    "status": "Exists-OK",
+    "current_app": "admin",
+    "current_route": "/en/pricing/zones?country=XX",
+    "evidence": "apps/admin/components/pricing/CountrySheet.tsx:131-214; mock/apps/admin/admin-api.js:212-224; mock/apps/admin/pricing.js:60-77; apps/admin/components/pricing/PriceGrid.tsx:252-261",
+    "missing": "",
+    "notes": "Currency-only override (converted + rounded, needs rate R03-X2) or fixed price; fixed wins over zone; grid tags it (violet per D-045, not orange); trash removes it. Note: overrides save immediately, bypassing the draft/publish of F-07."
+  },
+  {
+    "gap_id": "GAP-060",
+    "spec_id": "US-A-15",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/currencies",
+    "evidence": "apps/admin/components/pricing/CurrenciesPage.tsx:136-217,315-362; mock/apps/admin/admin-api.js:225-235; mock/apps/admin/pricing.js:27-39",
+    "missing": "No effective date; the rate row is overwritten (history only as text in the pricing log); no warning or age column for rates older than 30 days; no pricing/reporting purpose.",
+    "notes": "New rates affect new purchases only (snapshots kept, P6)."
+  },
+  {
+    "gap_id": "GAP-061",
+    "spec_id": "US-A-16",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/preview",
+    "evidence": "apps/admin/components/pricing/PricePreview.tsx:15-118; mock/apps/admin/admin-api.js:306-312",
+    "missing": "Inverted: picks a plan and lists countries, not 'pick a country -> every plan'; no tax, total, rate used or discount; no 'Explain' step view; no 'include draft changes'.",
+    "notes": "Plan, cycle, seats; price, currency and source per country from the real resolver."
+  },
+  {
+    "gap_id": "GAP-062",
+    "spec_id": "US-A-17",
+    "status": "Exists-flawed",
+    "current_app": "admin",
+    "current_route": "/en/pricing",
+    "evidence": "apps/admin/components/pricing/PublishDialog.tsx:99-139,142-182; mock/apps/admin/admin-api.js:240-247,274-305; mock/apps/admin/admin-api.js:286; mock/apps/admin/lifecycle.js:7-49",
+    "missing": "A future effective date is ignored: publish writes db.grid immediately (admin-api.js:286), so a 'scheduled' change applies to new purchases at once; scheduled price changes on existing lines are never applied at renewal (lifecycle has no renewal step); affected-subscriptions count is computed (draft.affects) but not shown in the review dialog; no notice email/notification to owners; no customer message or notice-days field.",
+    "notes": "Draft -> review (old vs new, increase/decrease) -> apply mode new_only / existing_next_renewal / existing_now (increase refused, P5), reason required. Old Sales conflict gone."
+  },
+  {
+    "gap_id": "GAP-063",
+    "spec_id": "US-A-18",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/log",
+    "evidence": "apps/admin/components/pricing/PricingLog.tsx:14-96; mock/apps/admin/admin-api.js:181,222,233,303",
+    "missing": "No effective date, approver or status (Scheduled/Applied/Cancelled) column; plan/zone/cycle/old/new only inside a free-text summary; no cancel of a scheduled change.",
+    "notes": "Who, when, action, apply mode, reason, notified count, price version; currency/country/rate edits logged too."
+  },
+  {
+    "gap_id": "GAP-064",
+    "spec_id": "US-A-19",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing",
+    "evidence": "mock/apps/admin/pricing.js:59-69; apps/admin/components/pricing/PriceGrid.tsx:220-221; apps/admin/components/catalog/PlanForm.tsx:216-219",
+    "missing": "Grid shows 'from monthly' text instead of the computed yearly amount; a manual yearly cell is not tagged 'Manual'.",
+    "notes": "Resolver: yearly = monthly x 12 x (1 - plan.yearlyDiscountPct) unless a yearly cell is set; discount per plan (default 2 months free, G-03)."
+  },
+  {
+    "gap_id": "GAP-065",
+    "spec_id": "US-A-20",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/bundles",
+    "evidence": "apps/admin/components/commerce/BundleDialog.tsx:11-82; mock/apps/admin/admin-api.js:316-339; mock/apps/admin/app-api.js:141",
+    "missing": "No cycles, zones offered or start/end dates.",
+    "notes": "Name EN/AR, 2+ plans, discount %, active; price = sum of resolved plan prices - % (R03-B1), examples per country; auto-applied in checkout."
+  },
+  {
+    "gap_id": "GAP-066",
+    "spec_id": "US-A-21",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/coupons",
+    "evidence": "apps/admin/components/commerce/CouponDialog.tsx:82-238; mock/apps/admin/admin-api.js:340-361; mock/apps/admin/pricing.js:108-112; mock/apps/admin/app-api.js:143-151",
+    "missing": "Missing limits: per workspace, new customers only, zones, duration (once / N cycles / forever); validFrom is not checked at checkout.",
+    "notes": "Percent works in any currency; fixed needs an amount per currency and fails elsewhere (coupon_currency); total uses, end date, plan scope; redeemed coupon's discount locked (409)."
+  },
+  {
+    "gap_id": "GAP-067",
+    "spec_id": "US-A-22",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/workspaces",
+    "evidence": "apps/admin/app/[locale]/(app)/workspaces/page.tsx:43-100; apps/admin/components/customers/WorkspaceDetail.tsx:54,157-396; mock/apps/admin/admin-api.js:391-414",
+    "missing": "Search by invoice number missing (name and member email only); no usage view.",
+    "notes": "Detail shows tools/lines with price source and price version, members, invoices, tickets, requests. Old Sales conflict gone."
+  },
+  {
+    "gap_id": "GAP-068",
+    "spec_id": "US-A-23",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/workspaces/:id",
+    "evidence": "apps/admin/components/customers/WorkspaceActions.tsx:13-120; apps/admin/components/customers/ExtendTrialDialog.tsx:13-34; mock/apps/admin/admin-api.js:415-449; mock/apps/admin/lifecycle.js:74",
+    "missing": "No 'give credit' action (no credit balance in the model).",
+    "notes": "Extend trial (1-30 d), suspend, reactivate, cancel, note; reason required and audited; suspension banner to everyone in USR."
+  },
+  {
+    "gap_id": "GAP-069",
+    "spec_id": "US-A-24",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/migrations",
+    "evidence": "apps/admin/app/[locale]/(app)/migrations/page.tsx:23-58,78-129; mock/apps/admin/admin-api.js:450-462; mock/apps/admin/admin-api.js:204-207",
+    "missing": "Cannot start a migration from a workspace; approval shows currencies and date but not the new resolved prices; approved migrations are never applied at renewal; owner is not notified.",
+    "notes": "Queue with approve/reject (reason required on reject); migrations only created when a zone is turned off or seeded."
+  },
+  {
+    "gap_id": "GAP-070",
+    "spec_id": "US-A-25",
+    "status": "Partial",
+    "current_app": "admin + sos",
+    "current_route": "/en/workspaces/:id",
+    "evidence": "apps/admin/components/customers/WorkspaceActions.tsx:113-157; mock/apps/admin/admin-api.js:438-443; apps/sos/app/(dashboard)/people/page.tsx:107-118",
+    "missing": "Guarded by workspaces:edit, not a dedicated 'View as customer' permission; only session start is logged (no end); read-only session and banner live in SOS's View as, reachable only for owners with a local sign-in.",
+    "notes": "Reason required, audited, read-only by design (D-017 replaced Login as)."
+  },
+  {
+    "gap_id": "GAP-071",
+    "spec_id": "US-A-26",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/custom-plans",
+    "evidence": "apps/admin/app/[locale]/(app)/custom-plans/page.tsx:27-119; apps/admin/components/customers/QuoteDialog.tsx:13-40; mock/apps/admin/admin-api.js:465-476; mock/apps/admin/app-api.js:518-524",
+    "missing": "Statuses are new/quoted/accepted, not New/Contacted/Quoted/Won/Lost; no assign salesperson or notes; no 'Create private plan' (limits, cycle, workspace-only visibility); accepting a quote creates no private plan or subscription.",
+    "notes": "Sales can quote a price in the workspace currency with a validity."
+  },
+  {
+    "gap_id": "GAP-072",
+    "spec_id": "US-A-27",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/invoices",
+    "evidence": "apps/admin/app/[locale]/(app)/invoices/page.tsx:17-151; apps/admin/components/billing/InvoiceActions.tsx:165-243; mock/apps/admin/admin-api.js:479-485,503-514",
+    "missing": "No payments list or failed-payments tab; filters only state/workspace/currency (no gateway, date); no 'send pay link' or 'extend grace' actions.",
+    "notes": "Retry (simulated) and mark paid on open/past-due invoices; past_due filter acts as the queue."
+  },
+  {
+    "gap_id": "GAP-073",
+    "spec_id": "US-A-28",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/invoices/:id",
+    "evidence": "apps/admin/components/billing/InvoiceActions.tsx:92-146; apps/admin/components/billing/InvoiceDetail.tsx:75,197; mock/apps/admin/admin-api.js:515-526",
+    "missing": "Policy rule (7.1) not shown; refund not tied to the original gateway; credit note has a number but no AR/EN PDF; no 'cancel the line' or 'notify customer' option.",
+    "notes": "Max refundable shown and enforced, original currency, partial/full, reason required, invoice state updates."
+  },
+  {
+    "gap_id": "GAP-074",
+    "spec_id": "US-A-29",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/invoices",
+    "evidence": "apps/admin/components/billing/NewInvoiceDialog.tsx; mock/apps/admin/admin-api.js:530-545,500-502",
+    "missing": "No due date input (set to issue+7d), no pay link, currency not selectable, line description single-language without qty/unit price.",
+    "notes": "Draft manual invoice with lines in the workspace currency, tax from the country rule, then issue."
+  },
+  {
+    "gap_id": "GAP-075",
+    "spec_id": "US-A-30",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/tax?tab=gateways",
+    "evidence": "apps/admin/components/commerce/Gateways.tsx:42-66,87-155,172-229; mock/apps/admin/admin-api.js:375-383",
+    "missing": "No credentials (masked), test/live mode, or add-gateway; countries/currencies/methods not editable; routing is derived from each gateway's countries + priority, no routing rules by zone or explicit fallback.",
+    "notes": "Priority, recurring, active editable; route tester (country + currency -> ordered gateways); non-recurring gateways labelled 'renews by pay link'."
+  },
+  {
+    "gap_id": "GAP-076",
+    "spec_id": "US-A-31",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/tax",
+    "evidence": "apps/admin/components/commerce/TaxRules.tsx:56-122,145-192; mock/apps/admin/admin-api.js:364-374; mock/apps/admin/app-api.js:152-154; mock/apps/admin/admin-api.js:538",
+    "missing": "Tax name single-language; e-invoicing is free text not none/ZATCA/ETA; no OrgTik tax number or effective date; inclusive/exclusive left open (G-12); invoices use the workspace country's current rule, not the billing country at invoice date.",
+    "notes": "Country, rate, B2B reverse charge, active."
+  },
+  {
+    "gap_id": "GAP-077",
+    "spec_id": "US-A-32",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/reports",
+    "evidence": "apps/admin/app/[locale]/(app)/reports/page.tsx:33-80; mock/apps/admin/admin-api.js:675-689,507",
+    "missing": "No filter by currency to show original amounts; no date/zone/tool filters.",
+    "notes": "Payments keep their day's USD rate; revenue/refunds/MRR in USD; MRR divides yearly by 12."
+  },
+  {
+    "gap_id": "GAP-078",
+    "spec_id": "US-A-33",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/services",
+    "evidence": "apps/admin/app/[locale]/(app)/services/page.tsx:47-88,115-185; mock/apps/admin/admin-api.js:548-554",
+    "missing": "No categories tab or new package; no deliverables, duration/revisions, milestone template; zone prices are read-only (packages excluded from the grid, admin-api.js:239).",
+    "notes": "Name EN/AR, status, delivery days, subscriber discount; per-zone prices shown; 'quote only' label."
+  },
+  {
+    "gap_id": "GAP-079",
+    "spec_id": "US-A-34",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/service-requests/:id",
+    "evidence": "apps/admin/components/services/QuoteDialog.tsx:17-115; mock/apps/admin/admin-api.js:579-586",
+    "missing": "No payment terms (full vs milestones totalling 100%); quote versions not kept (r.quote overwritten).",
+    "notes": "Line items, validity, workspace currency, subscriber discount as its own line (default on)."
+  },
+  {
+    "gap_id": "GAP-080",
+    "spec_id": "US-A-35",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/service-requests/:id",
+    "evidence": "apps/admin/app/[locale]/(app)/service-requests/[id]/page.tsx:345-352; apps/admin/components/system/AssignDialog.tsx; mock/apps/admin/admin-api.js:577",
+    "missing": "Single assignee only (no lead + members); assignee is not notified.",
+    "notes": "Assigned requests appear under the 'mine' filter."
+  },
+  {
+    "gap_id": "GAP-081",
+    "spec_id": "US-A-36",
+    "status": "Exists-flawed",
+    "current_app": "admin",
+    "current_route": "/en/service-requests",
+    "evidence": "apps/admin/app/[locale]/(app)/service-requests/page.tsx:25-79; mock/apps/admin/admin-api.js:556-561,572; mock/apps/admin/permissions.js:22,32",
+    "missing": "Service Team sees every request (services:view lists all; 'mine' is only an optional filter), breaking 'I only see requests assigned to me'; delivering creates no customer notification; files are names only.",
+    "notes": "Edit actions are limited to own requests (E*, 403 otherwise); deliver moves to in_review; messages and status changes work."
+  },
+  {
+    "gap_id": "GAP-084",
+    "spec_id": "US-A-39",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/templates",
+    "evidence": "apps/admin/app/[locale]/(app)/templates/page.tsx:19-91,132-147; mock/apps/admin/store.js:96-105; mock/apps/admin/admin-api.js:662-672",
+    "missing": "Only 8 of the ~19 events seeded; no 'send test email'; no RTL/LTR preview.",
+    "notes": "Subject/body in 5 languages (D-014), variables with unknown-variable check, missing-language badges."
+  },
+  {
+    "gap_id": "GAP-085",
+    "spec_id": "US-A-40",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/staff",
+    "evidence": "apps/admin/app/[locale]/(app)/staff/page.tsx:27-30,79-86,200-205; mock/apps/admin/permissions.js:13-41; mock/apps/admin/admin-api.js:43,652-659",
+    "missing": "Roles are fixed (matrix read-only); no View/Edit/Approve level, no special permissions (approve pricing, issue refund, view as); 2FA not enforced (mock always reports verified).",
+    "notes": "Assign roles per staff member; module permissions enforced by the API (403 with the required permission); self-lockout guarded."
+  },
+  {
+    "gap_id": "GAP-086",
+    "spec_id": "US-A-41",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/tickets/:id",
+    "evidence": "apps/admin/app/[locale]/(app)/tickets/[id]/page.tsx:30-189; apps/admin/app/[locale]/(app)/tickets/page.tsx:33-53; mock/apps/admin/admin-api.js:617-633",
+    "missing": "No SLA timer or overdue highlight; no merge; no canned replies AR/EN; no link to invoice/request.",
+    "notes": "Assign, public reply, internal note (hidden from customer), priority, resolve/close."
+  },
+  {
+    "gap_id": "GAP-087",
+    "spec_id": "US-A-42",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en",
+    "evidence": "apps/admin/app/[locale]/(app)/page.tsx:36-66; mock/apps/admin/admin-api.js:48-64",
+    "missing": "No churn, new sign-ups or active-subscriptions KPI; no charts; no filters (date range, zone, tool).",
+    "notes": "MRR (USD), workspaces by state, trials, past-due invoices, and work queues (requests, tickets, custom plans, migrations, waitlist)."
+  },
+  {
+    "gap_id": "GAP-151",
+    "spec_id": "ADM-01",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/auth",
+    "evidence": "apps/admin/app/[locale]/auth/page.tsx:15-66; mock/apps/admin/admin-api.js:12-18,43",
+    "missing": "Mandatory staff 2FA is not implemented anywhere (ADM and SOS); /v1/admin/me hard-codes twoFactor verified; lockout rules N/A.",
+    "notes": "Per D-017 and phase-e README, staff sign in through SOS's one-time code hand-off instead of a separate email/password screen; non-staff get 403."
+  },
+  {
+    "gap_id": "GAP-152",
+    "spec_id": "ADM-02",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en",
+    "evidence": "apps/admin/app/[locale]/(app)/page.tsx:36-66; mock/apps/admin/admin-api.js:48-64",
+    "missing": "Charts (MRR trend, revenue by tool, sign-ups by country, conversion), lists (failed payments, waiting quotes, SLA breaches) and filters missing; churn and sign-ups KPIs missing.",
+    "notes": "KPI cards and queue links per permission."
+  },
+  {
+    "gap_id": "GAP-153",
+    "spec_id": "ADM-03",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/tools",
+    "evidence": "apps/admin/app/[locale]/(app)/tools/page.tsx:26-118; mock/apps/admin/admin-api.js:68",
+    "missing": "No drag reorder, beta mode, MRR or updated columns.",
+    "notes": "Order, icon, name, key, status badge, plans, workspaces, waitlist link; change status; open plans/waitlist."
+  },
+  {
+    "gap_id": "GAP-154",
+    "spec_id": "ADM-04",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/tools/:key",
+    "evidence": "apps/admin/app/[locale]/(app)/tools/[key]/page.tsx:54-162; apps/admin/components/catalog/ToolForm.tsx:83-109; apps/admin/components/catalog/ToolStatusAction.tsx:16-88",
+    "missing": "No Status & Beta tab (expected date, beta access mode, beta pricing, notice days, launch coupon, feedback, show on website); 'Available needs >=1 active public plan' not enforced; no launch dialog.",
+    "notes": "General fields, features and plans sections on one page."
+  },
+  {
+    "gap_id": "GAP-155",
+    "spec_id": "ADM-05",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/plans/features",
+    "evidence": "apps/admin/app/[locale]/(app)/plans/features/page.tsx:62-83; apps/admin/components/catalog/FeatureDialog.tsx:84-116",
+    "missing": "Name and reset columns/fields missing; no edit.",
+    "notes": "Key, tool, type, unit, enforcement, used by N plans; delete refused while used."
+  },
+  {
+    "gap_id": "GAP-156",
+    "spec_id": "ADM-06",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/plans",
+    "evidence": "apps/admin/app/[locale]/(app)/plans/page.tsx:28-107",
+    "missing": "No cycles column; filters only by tool (no status/visibility/tier); no duplicate action; archive and 'open in pricing grid' only from the editor.",
+    "notes": "Tier, name, unit, default USD, trial, visibility, subscribers, status."
+  },
+  {
+    "gap_id": "GAP-157",
+    "spec_id": "ADM-07",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/plans/:id",
+    "evidence": "apps/admin/app/[locale]/(app)/plans/[id]/page.tsx:15-46; apps/admin/components/catalog/PlanForm.tsx:166-288",
+    "missing": "No 'N workspaces above this limit'; no Pricing tab with the plan's grid slice (a link to /pricing instead); no max seats/cycles.",
+    "notes": "One page with general, price card, limits and flags."
+  },
+  {
+    "gap_id": "GAP-158",
+    "spec_id": "ADM-08",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/currencies",
+    "evidence": "apps/admin/components/pricing/CurrenciesPage.tsx:245-313; mock/apps/admin/admin-api.js:168-189",
+    "missing": "Symbol, symbol position, gateways supporting it and zones/countries using it are missing.",
+    "notes": "Code, name, decimals, rounding, example, in use (workspaces), active."
+  },
+  {
+    "gap_id": "GAP-159",
+    "spec_id": "ADM-09",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/zones",
+    "evidence": "apps/admin/components/pricing/ZonesPage.tsx:175-254; mock/apps/admin/admin-api.js:190",
+    "missing": "No active subscriptions or MRR (USD) columns (API returns a workspaces count that isn't shown); no 'open pricing grid filtered to zone'.",
+    "notes": "Name, key, currency, countries count/list, default flag, on/off."
+  },
+  {
+    "gap_id": "GAP-160",
+    "spec_id": "ADM-10",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/zones",
+    "evidence": "apps/admin/components/pricing/ZonesPage.tsx:15-101; mock/apps/admin/admin-api.js:191-210",
+    "missing": "Saving shows no impact summary (countries moved, workspaces affected, currency differences); name not AR/EN; no countries multi-select or internal notes.",
+    "notes": "Zone dialog: name, key, base currency; turning off queues migrations (X5)."
+  },
+  {
+    "gap_id": "GAP-161",
+    "spec_id": "ADM-11",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/zones",
+    "evidence": "apps/admin/components/pricing/ZonesPage.tsx:256-346,382-419; apps/admin/components/pricing/CountrySheet.tsx:33-235",
+    "missing": "Not its own screen (a table under Zones); missing exchange-rate, tax rule, gateways, sign-up allowed columns and fields; filters only by zone (no currency/has override/has tax rule).",
+    "notes": "Country, zone, currency with Override tag, fixed prices; side sheet edits zone/currency/fixed prices."
+  },
+  {
+    "gap_id": "GAP-162",
+    "spec_id": "ADM-12",
+    "status": "Exists-flawed",
+    "current_app": "admin",
+    "current_route": "/en/pricing",
+    "evidence": "apps/admin/components/pricing/PriceGrid.tsx:21-291; apps/admin/components/pricing/PublishDialog.tsx:25-206; mock/apps/admin/admin-api.js:286",
+    "missing": "Effective date ignored on publish (applies now); no By-country view, search or bulk %; review dialog lacks affected-subscription count, notice days and customer message; default USD grey only in Default zone.",
+    "notes": "Tool filter, monthly/yearly per zone, draft counter, source tags, override badges (violet, D-045)."
+  },
+  {
+    "gap_id": "GAP-163",
+    "spec_id": "ADM-13",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/preview",
+    "evidence": "apps/admin/components/pricing/PricePreview.tsx:38-118",
+    "missing": "No rate used, discount, tax or total columns; no Explain view; no tool column or per-country all-plans view.",
+    "notes": "Country, zone, amount (per-seat), currency, source."
+  },
+  {
+    "gap_id": "GAP-164",
+    "spec_id": "ADM-14",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/log",
+    "evidence": "apps/admin/components/pricing/PricingLog.tsx:14-96",
+    "missing": "Approver, plan, zone/country, cycle, old/new as columns, effective date and status missing; no cancel of a scheduled change.",
+    "notes": "Date, staff, summary, apply mode, reason, notified, version, server paging."
+  },
+  {
+    "gap_id": "GAP-165",
+    "spec_id": "ADM-15",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/currencies",
+    "evidence": "apps/admin/components/pricing/CurrenciesPage.tsx:315-362,402-422",
+    "missing": "No purpose (pricing/reporting), effective-from, updated-by or age columns; >30-day rates not highlighted; reporting conversion uses a separate usdRate, not these rates.",
+    "notes": "Pair, rate, updated date; add/edit rate."
+  },
+  {
+    "gap_id": "GAP-166",
+    "spec_id": "ADM-16",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/bundles",
+    "evidence": "apps/admin/app/[locale]/(app)/bundles/page.tsx:33-55; apps/admin/components/commerce/BundleDialog.tsx:11-82",
+    "missing": "Cycles, zones and subscribers columns missing.",
+    "notes": "Name, plans, discount, example prices, status."
+  },
+  {
+    "gap_id": "GAP-167",
+    "spec_id": "ADM-17",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/coupons",
+    "evidence": "apps/admin/app/[locale]/(app)/coupons/page.tsx:35-81; apps/admin/components/commerce/CouponDialog.tsx:82-238",
+    "missing": "Scope is plan-only (no zones, per-workspace or new-customer limits, duration).",
+    "notes": "Code, discount, applies to, used/max, validity, state; create/edit/end."
+  },
+  {
+    "gap_id": "GAP-168",
+    "spec_id": "ADM-18",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/tax",
+    "evidence": "apps/admin/components/commerce/TaxRules.tsx:145-192",
+    "missing": "No effective-from column; display (incl/excl) left 'not decided' (G-12); e-invoicing free text.",
+    "notes": "Country, name, rate, display, reverse charge, e-invoicing, state."
+  },
+  {
+    "gap_id": "GAP-169",
+    "spec_id": "ADM-19",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/tax?tab=gateways",
+    "evidence": "apps/admin/app/[locale]/(app)/tax/page.tsx; apps/admin/components/commerce/Gateways.tsx:87-229",
+    "missing": "No Routing rules tab (rules by country/zone + currency with fallback); only a route tester over gateway countries; no credentials/test-live.",
+    "notes": "Lives as a tab of Tax; gateways list with priority/recurring/active edit."
+  },
+  {
+    "gap_id": "GAP-170",
+    "spec_id": "ADM-20",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/workspaces",
+    "evidence": "apps/admin/app/[locale]/(app)/workspaces/page.tsx:43-100,122-160; mock/apps/admin/admin-api.js:391-399",
+    "missing": "Country, currency, zone and created columns missing; filters for zone, plan, created and 'needs currency migration' missing; MRR local+USD shown as one column.",
+    "notes": "Search, state/country/tool filters, owner, seats, tools with state. Old Sales conflict gone."
+  },
+  {
+    "gap_id": "GAP-171",
+    "spec_id": "ADM-21",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/workspaces/:id",
+    "evidence": "apps/admin/components/customers/WorkspaceDetail.tsx:157-396; apps/admin/components/customers/WorkspaceActions.tsx:13-120",
+    "missing": "No Usage tab; no add credit, change plan or migrate-currency actions; common action dialog lacks Effective (now/end of period) and Notify owner; lifetime value, tax ID, billing country missing.",
+    "notes": "Sections (not tabs) for summary, migration, lines (source + price version), invoices, members, payment methods, billing, tickets, requests, notes, audit."
+  },
+  {
+    "gap_id": "GAP-172",
+    "spec_id": "ADM-22",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/custom-plans",
+    "evidence": "apps/admin/app/[locale]/(app)/custom-plans/page.tsx:27-119; mock/apps/admin/admin-api.js:465-476",
+    "missing": "No assign salesperson, statuses Contacted/Won/Lost, notes or 'Create private plan' (opens ADM-07 pre-filled); company/contact/country columns.",
+    "notes": "Workspace, ask (tools, seats, cycle, notes), state, quote; quote/requote."
+  },
+  {
+    "gap_id": "GAP-173",
+    "spec_id": "ADM-23",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/invoices",
+    "evidence": "apps/admin/app/[locale]/(app)/invoices/page.tsx:17-151; apps/admin/components/billing/InvoiceDetail.tsx; apps/admin/components/billing/InvoiceActions.tsx:44-243",
+    "missing": "Only the Invoices list: no Payments, Failed payments or Refunds & credit notes tabs; no e-invoice status; no pay link/extend grace; refund dialog lacks policy rule, reason list, cancel line, notify.",
+    "notes": "Number, type, workspace, state, issued, due, total, USD; detail with payments (gateway + USD rate) and credit notes; issue/void/mark paid/retry/refund/new manual invoice."
+  },
+  {
+    "gap_id": "GAP-174",
+    "spec_id": "ADM-24",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/services",
+    "evidence": "apps/admin/app/[locale]/(app)/services/page.tsx:47-185",
+    "missing": "No Categories / Packages tabs, no create, no deliverables/revisions/milestone template, no price editing per zone.",
+    "notes": "Catalogue list with zone prices, delivery days, subscriber discount, requests, status; edit dialog."
+  },
+  {
+    "gap_id": "GAP-175",
+    "spec_id": "ADM-25",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/service-requests/:id",
+    "evidence": "apps/admin/app/[locale]/(app)/service-requests/page.tsx:25-79; apps/admin/app/[locale]/(app)/service-requests/[id]/page.tsx:90-352; mock/apps/admin/admin-api.js:567-602",
+    "missing": "No Revisions or Activity tab; Team is one assignee; files are names only; list lacks budget/deadline/value columns.",
+    "notes": "Brief, quote, milestones (state select), deliveries, messages; review/quote/start/hold/deliver/cancel guarded by SR_NEXT."
+  },
+  {
+    "gap_id": "GAP-176",
+    "spec_id": "ADM-26",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/tickets",
+    "evidence": "apps/admin/app/[locale]/(app)/tickets/page.tsx:33-53; apps/admin/app/[locale]/(app)/tickets/[id]/page.tsx:30-189",
+    "missing": "No SLA due column or settings; no category/tool columns; no merge, canned replies, link invoice/request.",
+    "notes": "Number/subject/workspace, priority, state, assignee, updated; reply, internal note, assign, priority, resolve/close."
+  },
+  {
+    "gap_id": "GAP-179",
+    "spec_id": "ADM-29",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/waitlist",
+    "evidence": "apps/admin/app/[locale]/(app)/waitlist/page.tsx:30-88",
+    "missing": "No visitor/subscriber, invited, accepted columns; no invite selected, export CSV or notify all actions.",
+    "notes": "Tool, name/email, country, date, notified; tool filter, paging."
+  },
+  {
+    "gap_id": "GAP-180",
+    "spec_id": "ADM-30",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/staff",
+    "evidence": "apps/admin/app/[locale]/(app)/staff/page.tsx:27-30,79-86,200-205; mock/apps/admin/permissions.js:13-41",
+    "missing": "No role editor (matrix is read-only, fixed in code); levels are View/Edit/Full, not View/Edit/Approve; special permissions missing.",
+    "notes": "Staff list with role assignment; matrix shown; enforced by the API. Moved from SOS /people to ADM."
+  },
+  {
+    "gap_id": "GAP-181",
+    "spec_id": "ADM-31",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/templates",
+    "evidence": "apps/admin/app/[locale]/(app)/templates/page.tsx:19-147; mock/apps/admin/store.js:96-105",
+    "missing": "Only 8 events (no welcome, verify email, trial ended, payment success, renewal reminder, downgrade, tool removed, limit 80/100%, milestone due, deliverable uploaded, suggestion status, waitlist launch, beta billing); no test send or preview.",
+    "notes": "Edit subject/body per language with variables."
+  },
+  {
+    "gap_id": "GAP-182",
+    "spec_id": "ADM-32",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/reports",
+    "evidence": "apps/admin/app/[locale]/(app)/reports/page.tsx:33-80; mock/apps/admin/admin-api.js:675-689",
+    "missing": "No filters, no Excel export; no revenue by plan/zone/currency, trial conversion, coupon usage, service revenue, waitlist, suggestions or blog views.",
+    "notes": "MRR, revenue, refunds, trials, churn count; MRR by tool and by country charts; payments with day rate."
+  },
+  {
+    "gap_id": "GAP-183",
+    "spec_id": "ADM-33",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/settings",
+    "evidence": "apps/admin/app/[locale]/(app)/settings/page.tsx:102-173; mock/apps/admin/store.js:112-128; mock/apps/admin/admin-api.js:692-703",
+    "missing": "No legal entity, invoice/credit-note number formats, reporting currency, retry schedule, renewal reminders, default trial days, quote validity or SLA hours matrix.",
+    "notes": "Retention, dunning (grace, read-only, cancel), trial reminders, limit warnings, auto-approve days, price-change notice days, open-gap switches (G-04, G-12, ...)."
+  },
+  {
+    "gap_id": "GAP-218",
+    "spec_id": "F-07",
+    "status": "Exists-flawed",
+    "current_app": "admin",
+    "current_route": "/en/pricing",
+    "evidence": "apps/admin/components/pricing/PriceGrid.tsx:21-291; apps/admin/components/pricing/PublishDialog.tsx:25-206; mock/apps/admin/admin-api.js:255-305; mock/apps/admin/lifecycle.js:7-49",
+    "missing": "Step 2 'include draft changes' in preview missing; step 3 lacks notice days and customer message; step 4 approver/Scheduled state missing; step 5 broken: future effective date applies immediately (admin-api.js:286); step 6: no notice email, and scheduled lines never switch price at renewal.",
+    "notes": "Draft -> review -> publish with apply mode and reason works and is logged (step 7). Proven by flows/adm-pricing.mjs."
+  },
+  {
+    "gap_id": "GAP-219",
+    "spec_id": "F-08",
+    "status": "Partial",
+    "current_app": "admin",
+    "current_route": "/en/pricing/zones",
+    "evidence": "apps/admin/components/pricing/CountrySheet.tsx:62-87; mock/apps/admin/admin-api.js:204-224,450-462",
+    "missing": "Step 2 impact screen missing; step 4: moving a country or overriding currency queues no migration and there is no 'needs currency migration' filter; step 5: no owner notice and approved migrations never apply at renewal.",
+    "notes": "Step 3 (new sign-ups use new setup) works via the resolver; existing workspaces keep currency and snapshots."
+  },
+  {
+    "gap_id": "GAP-220",
+    "spec_id": "F-09",
+    "status": "Partial",
+    "current_app": "admin + sos",
+    "current_route": "/en/service-requests/:id",
+    "evidence": "mock/apps/admin/admin-api.js:567-602; mock/apps/admin/app-api.js:420-466; mock/apps/admin/lifecycle.js:35-43; program/tools/audit-kit/flows/adm-delivery.mjs; program/tools/audit-kit/flows/usr-account.mjs",
+    "missing": "No milestone payments (customer pays the full quote); no revision counter; no notifications to customer/team; no rating or portfolio consent; team assignment is a single person and not tied to 'after payment'.",
+    "notes": "Submit -> under review -> quote -> accept -> pay -> in progress -> deliver (in review) -> approve/revise -> completed, auto-approve after 7 days."
+  },
+  {
+    "gap_id": "GAP-221",
+    "spec_id": "F-10",
+    "status": "Partial",
+    "current_app": "admin + sos",
+    "current_route": "/en/invoices/:id",
+    "evidence": "apps/admin/components/billing/InvoiceActions.tsx:92-146; mock/apps/admin/admin-api.js:515-526; mock/apps/admin/app-api.js:214-222",
+    "missing": "Step 1: owner can't request a refund (cancel takes only a reason, no eligibility); step 2: policy rule not shown; step 3: no cancel-line option; step 4: no gateway refund or AR/EN credit-note PDF; step 5: no notification.",
+    "notes": "Finance refund with cap, original currency, numbered credit note and invoice state update (adm-customers.mjs)."
+  },
+  {
+    "gap_id": "GAP-222",
+    "spec_id": "F-11",
+    "status": "Partial",
+    "current_app": "admin + sos",
+    "current_route": "/en/tools/:key",
+    "evidence": "apps/admin/components/catalog/ToolStatusAction.tsx:16-88; mock/apps/admin/admin-api.js:67,91-97; mock/apps/admin/app-api.js:97-103; mock/apps/admin/lifecycle.js:81-82",
+    "missing": "No expected date; no open/invite-only beta or invites; no launch settings (billing start, coupon, message); beta users aren't moved to a plan/Free at billing start; no launch email or in-app notice (only a notified flag).",
+    "notes": "Coming soon -> Beta -> Live transitions, waitlist join from USR, Beta badge and a hard-coded beta-billing banner."
+  },
+  {
+    "gap_id": "GAP-223",
+    "spec_id": "F-12",
+    "status": "Exists-flawed",
+    "current_app": "admin + sos",
+    "current_route": "/en/custom-plans",
+    "evidence": "apps/admin/app/[locale]/(app)/custom-plans/page.tsx:27-119; mock/apps/admin/admin-api.js:465-476; mock/apps/admin/app-api.js:507-524",
+    "missing": "Breaks at step 3-4: no private plan is created (from the request or ADM-07), and accepting a quote only sets state 'accepted'; nothing appears in the tool's plans or checkout. Step 1 comes from USR, not the website's Contact us.",
+    "notes": "Request (USR-25) -> ADM quote -> owner accepts works as a record only."
+  },
+  {
+    "gap_id": "GAP-224",
+    "spec_id": "ST-subscription-line-per-tool",
+    "status": "Partial",
+    "current_app": "mock",
+    "current_route": "/en/workspaces/:id",
+    "evidence": "mock/apps/admin/lifecycle.js:7-34; mock/apps/admin/app-api.js:106-123,166-200,214-250; mock/apps/admin/admin-api.js:503-514",
+    "missing": "Active -> Past due on a failed renewal never happens at runtime (no renewal step; only seeded data and checkout declines); Ended -> Active (restore) missing; scheduled changes (downgrade, price change) never applied at period end.",
+    "notes": "Trialing -> Free/Ended at trial end, Past due -> Read-only -> Ended, Cancelling -> Active (resume) / Ended, Ended -> Deleted after retention, Read-only/Past due -> Active on payment."
+  },
+  {
+    "gap_id": "GAP-225",
+    "spec_id": "ST-service-request",
+    "status": "Exists-OK",
+    "current_app": "mock",
+    "current_route": "/en/service-requests/:id",
+    "evidence": "mock/apps/admin/admin-api.js:567-602; mock/apps/admin/app-api.js:420-466; mock/apps/admin/lifecycle.js:35-43",
+    "missing": "",
+    "notes": "All 11 states with the spec's transitions (SR_NEXT). Quoted -> Expired happens only when the owner tries to accept; refund-if-paid on cancel is not modelled."
+  },
+  {
+    "gap_id": "GAP-226",
+    "spec_id": "ST-invoice",
+    "status": "Partial",
+    "current_app": "mock",
+    "current_route": "/en/invoices",
+    "evidence": "mock/apps/admin/admin-api.js:491-526; mock/apps/admin/lifecycle.js:7-49",
+    "missing": "Open -> Past due when the due date passes is not automatic (only a failed retry sets past_due).",
+    "notes": "Draft -> Open/Void, Open/Past due -> Paid/Void, Paid -> Partially refunded/Refunded with credit notes."
+  },
+  {
+    "gap_id": "GAP-227",
+    "spec_id": "ST-support-ticket",
+    "status": "Exists-flawed",
+    "current_app": "mock",
+    "current_route": "/en/tickets/:id",
+    "evidence": "mock/apps/admin/admin-api.js:617-633; mock/apps/admin/app-api.js:485-497; mock/apps/admin/lifecycle.js:44-48",
+    "missing": "A customer reply on Waiting for you / Resolved sets the ticket back to 'open' instead of 'In progress' (app-api.js reply), so an assigned ticket reads as not picked up; staff can close from any state.",
+    "notes": "Open -> In progress on first staff reply, Waiting for you auto-closes after 7 days, Resolved closes after the 7-day reopen window."
+  },
+  {
+    "gap_id": "GAP-228",
+    "spec_id": "ST-workspace",
+    "status": "Partial",
+    "current_app": "mock",
+    "current_route": "/en/workspaces/:id",
+    "evidence": "mock/apps/admin/lifecycle.js:30-33; mock/apps/admin/admin-api.js:422-430; mock/apps/admin/app-api.js:534-543",
+    "missing": "Cancelled -> Deleted after retention never happens (deleteAt is set but not processed); dunning never cancels a workspace (only lines end).",
+    "notes": "Active <-> Past due derived from lines; suspend/reactivate/cancel by staff with reason; owner deletion -> Cancelled with retention date."
+  }
+]

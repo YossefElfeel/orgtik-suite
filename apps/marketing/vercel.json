@@ -1,4 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "node ../../tools/vercel-prebuild.cjs && npm run build"
+  "buildCommand": "node ../../tools/vercel-prebuild.cjs && cd ../.. && npx --yes pnpm@11.3.0 --filter marketing-management-dashboard... run build",
+  "installCommand": "node ../../tools/vercel/validate-env.cjs marketing && cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
+  "ignoreCommand": "cd ../.. && npx --yes turbo@2.11.7 query affected --packages marketing-management-dashboard --exit-code --base \"${VERCEL_GIT_PREVIOUS_SHA:-HEAD^}\"",
+  "git": {
+    "deploymentEnabled": false
+  }
 }

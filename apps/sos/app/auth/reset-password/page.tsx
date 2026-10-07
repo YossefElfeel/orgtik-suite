@@ -16,6 +16,7 @@ import { useForgotPasswordMutation, useResetPasswordMutation } from "@/redux/fea
 import { AuthPanel } from "@/components/auth/AuthPanel";
 import { PASSWORD_MAX, PASSWORD_MIN } from "@/lib/password";
 import { RESEND_SECONDS, RESET_EMAIL_KEY } from "@/lib/recovery";
+import { useMounted } from "@/hooks/use-mounted";
 
 const TextField = createRHFField(Input);
 const PasswordField = createRHFField(PasswordInput);
@@ -23,6 +24,7 @@ const PasswordField = createRHFField(PasswordInput);
 type Values = { email: string; code: string; password: string; confirm: string };
 
 export default function ResetPasswordPage() {
+  const mounted = useMounted();
   const t = useTranslations("Recovery");
   const router = useRouter();
   const [resetPassword, { isLoading }] = useResetPasswordMutation();
@@ -87,7 +89,7 @@ export default function ResetPasswordPage() {
       error={error}
       success={notice}
     >
-      <form noValidate onSubmit={onSubmit} className="flex flex-col gap-5">
+      <form method="post" noValidate onSubmit={onSubmit} className="flex flex-col gap-5">
         {!known ? (
           <TextField
             control={control}
@@ -98,6 +100,7 @@ export default function ResetPasswordPage() {
             dir="ltr"
             autoComplete="username"
             required
+            disabled={!mounted}
           />
         ) : null}
         <TextField
@@ -110,6 +113,7 @@ export default function ResetPasswordPage() {
           dir="ltr"
           maxLength={8}
           required
+          disabled={!mounted}
         />
         <PasswordField
           control={control}
@@ -123,6 +127,7 @@ export default function ResetPasswordPage() {
           description={t("passwordRule", { min: PASSWORD_MIN })}
           autoComplete="new-password"
           required
+          disabled={!mounted}
         />
         <PasswordField
           control={control}
@@ -131,8 +136,9 @@ export default function ResetPasswordPage() {
           label={t("confirmPassword")}
           autoComplete="new-password"
           required
+          disabled={!mounted}
         />
-        <Button type="submit" size="lg" loading={isLoading} className="w-full">
+        <Button type="submit" size="lg" loading={isLoading} disabled={!mounted} className="w-full">
           {t("resetSubmit")}
         </Button>
         <div className="flex flex-wrap items-center justify-between gap-2 text-body-sm">

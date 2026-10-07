@@ -450,7 +450,6 @@
   "Restore": {
     "titleSingle": "Restaurer le {type}",
     "titleBulk": "Restaurer les {type}",
-    "confirmMessage": "Êtes-vous sûr de vouloir restaurer",
     "confirmDescription": "Il sera déplacé vers vos {type} principaux.",
     "files": "fichiers",
     "folders": "dossiers",

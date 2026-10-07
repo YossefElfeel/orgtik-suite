@@ -2,6 +2,7 @@ import { content } from "../content";
 import React from "react";
 import { LanguageMenu } from "./LanguageMenu";
 import { AccountControl } from "./AccountControl";
+import { PartnerDirectory } from "./Partners";
 import { CartLink } from "./CartControls";
 import { ReferencePage } from "./ReferencePage";
 import { routeHash, setRoute, toSiteHref } from "./navigation";
@@ -10,42 +11,6 @@ import { msg } from "../content/strings";
 
 export default class Legal extends ReferencePage {
   LG = content.LG();
-  SITE = [
-    ["Home", "OrgTik%20Home.dc.html", []],
-    [
-      "Services",
-      "Services.dc.html",
-      [
-        ["Design", "#/family/design"],
-        ["Development", "#/family/development"],
-        ["Marketing", "#/family/marketing"],
-        ["IT support", "#/family/it-support"],
-        ["Hosting", "#/family/hosting"],
-      ],
-    ],
-    [
-      "Software",
-      "Software.dc.html",
-      [
-        ["HR", "#/product/hr"],
-        ["CRM", "#/product/crm"],
-        ["Files", "#/product/files"],
-        ["Tasks", "#/product/tasks"],
-        ["Marketing", "#/product/marketing"],
-        ["Website Manager", "#/product/website"],
-      ],
-    ],
-    ["Plans & pricing", "/plans", []],
-    ["Work", "Work.dc.html", []],
-    ["Insights", "Insights.dc.html", []],
-    ["About", "About.dc.html", []],
-    ["Roadmap", "Roadmap.dc.html", []],
-    ["Contact", "Contact.dc.html", []],
-    ["Cart", "/cart", []],
-    ["Checkout", "/checkout", []],
-    ["Sign in", "SignIn.dc.html", []],
-    ["Create account", "/sign-up", []],
-  ];
   SOCIALS = content.SOCIALS();
   E = "cubic-bezier(.16,1,.3,1)";
   H = "OrgTik%20Home.dc.html";
@@ -73,7 +38,7 @@ export default class Legal extends ReferencePage {
     if (h === "" || h === "/") return { view: "index" };
     if (h.charAt(0) !== "/") return null;
     const p = h.slice(1).split("/");
-    if (["imprint", "privacy", "terms", "sitemap"].indexOf(p[0]) >= 0)
+    if (["imprint", "privacy", "terms", "partners"].indexOf(p[0]) >= 0)
       return { view: p[0] };
     return { view: "index" };
   }
@@ -543,39 +508,36 @@ export default class Legal extends ReferencePage {
       ticker = [],
       page = {};
     const k = v === "index" ? "imprint" : v,
-      isMap = k === "sitemap",
-      L = this.LG[k];
-    ticker = [
-      msg("Legal:1"),
-      msg("Legal:2"),
-      "Terms and conditions",
-      msg("Legal:3"),
-    ];
+      isPartners = k === "partners",
+      info = content.PARTNER_INFO(),
+      L = isPartners
+        ? { title: info.title, summary: info.summary, sections: [] }
+        : this.LG[k];
+    ticker = [msg("Legal:1"), msg("Legal:2"), "Terms and conditions"];
     hero = {
       hasCrumb: true,
       root: msg("Legal:4"),
-      crumb: isMap ? msg("Legal:5") : L.title,
+      crumb: L.title,
       crumbRootC: "#B5A6C4",
       eyebrow: msg("Legal:6"),
       l1: msg("Legal:7"),
       l2: "",
       acc: msg("Legal:8"),
-      body: "Imprint, privacy policy, terms and conditions and a map of every page, all in one place.",
+      body: "Imprint, privacy policy and terms and conditions, all in one place.",
       primary: msg("Legal:9"),
       primaryGo: () => this.go("legal"),
       secondary: msg("Legal:10"),
       secondaryGo: toContact,
     };
     page = {
+      isPartners,
       asidePos: s.narrow ? "static" : "sticky",
       docCols: s.narrow ? "minmax(0,1fr)" : "220px minmax(0,1fr)",
-      isDoc: !isMap,
-      isMap: isMap,
       tabs: [
         ["imprint", msg("Legal:11")],
         ["privacy", msg("Legal:12")],
         ["terms", "Terms and conditions"],
-        ["sitemap", msg("Legal:13")],
+        ["partners", info.title],
       ].map((t) => {
         const on = k === t[0];
         return {
@@ -589,24 +551,12 @@ export default class Legal extends ReferencePage {
           pick: () => this.pickTab(t[0]),
         };
       }),
-      doc: isMap
-        ? {
-            kicker: msg("Legal:14"),
-            title: msg("Legal:15"),
-            summary: msg("Legal:16"),
-            sections: [],
-          }
-        : {
-            kicker: msg("Legal:17"),
-            title: L.title,
-            summary: L.summary,
-            sections: L.sections.map((x) => ({ h: x[0], p: x[1] })),
-          },
-      site: this.SITE.map((g) => ({
-        label: g[0],
-        href: g[1],
-        kids: g[2].map((x) => ({ label: x[0], href: g[1] + x[1] })),
-      })),
+      doc: {
+        kicker: msg("Legal:17"),
+        title: L.title,
+        summary: L.summary,
+        sections: L.sections.map((x) => ({ h: x[0], p: x[1] })),
+      },
     };
     Object.assign(hero, {
       showStrip: false,
@@ -673,7 +623,7 @@ export default class Legal extends ReferencePage {
           ["Plans & pricing", "/plans"],
           ["Tell us about your project", "Contact.dc.html"],
           ["Roadmap", "Roadmap.dc.html"],
-          ["Sitemap", "Legal.dc.html#/sitemap"],
+          ["Imprint", "/legal/imprint"],
         ].map((x) => ({ label: x[0], href: x[1] })),
         footTalk: () => {
           if (window.__orgNav) window.__orgNav("Contact.dc.html");
@@ -1255,7 +1205,9 @@ export default class Legal extends ReferencePage {
                   >
                     {v.doc.summary}
                   </p>
-                  {v.isDoc && (
+                  {v.isPartners ? (
+                    <PartnerDirectory />
+                  ) : (
                     <>
                       <div
                         style={{
@@ -1315,67 +1267,6 @@ export default class Legal extends ReferencePage {
                           className={"ph ph-info"}
                         ></i>
                         {run("pg_legal|legal|div", 2)}
-                      </div>
-                    </>
-                  )}
-                  {v.isMap && (
-                    <>
-                      <div
-                        style={{
-                          marginTop: "36px",
-                          display: "grid",
-                          gridTemplateColumns:
-                            "repeat(auto-fill,minmax(min(100%,220px),1fr))",
-                          gap: "12px",
-                        }}
-                      >
-                        {(v.site || []).map((g, gIndex) => (
-                          <React.Fragment key={gIndex}>
-                            <div
-                              data-reveal={"up"}
-                              style={{
-                                padding: "20px",
-                                borderRadius: "18px",
-                                border: "1px solid #ffffff17",
-                                background: "#120A1B",
-                              }}
-                            >
-                              <a
-                                href={toSiteHref(g.href)}
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                  fontSize: "16px",
-                                  fontWeight: "600",
-                                  color: "#F6F1FA",
-                                }}
-                                className={"reference-state-153"}
-                              >
-                                {g.label}
-                                <i
-                                  aria-hidden={true}
-                                  className={"ph ph-arrow-up-right"}
-                                ></i>
-                              </a>
-                              {(g.kids || []).map((k, kIndex) => (
-                                <React.Fragment key={kIndex}>
-                                  <a
-                                    href={toSiteHref(k.href)}
-                                    style={{
-                                      display: "block",
-                                      marginTop: "10px",
-                                      fontSize: "14px",
-                                      color: "#CFC2DB",
-                                    }}
-                                    className={"reference-state-154"}
-                                  >
-                                    {k.label}
-                                  </a>
-                                </React.Fragment>
-                              ))}
-                            </div>
-                          </React.Fragment>
-                        ))}
                       </div>
                     </>
                   )}

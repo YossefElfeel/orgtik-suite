@@ -31,6 +31,7 @@ export function middleware(request: NextRequest) {
     pathname !== "/auth/invite" &&
     pathname !== "/auth/handoff" &&
     pathname !== "/auth/reset-password" &&
+    !(pathname === "/auth/login" && request.nextUrl.searchParams.get("switch") === "1") &&
     !(pathname === "/auth" && hasIncomingToken)
   ) {
     return NextResponse.redirect(new URL("/", request.url));

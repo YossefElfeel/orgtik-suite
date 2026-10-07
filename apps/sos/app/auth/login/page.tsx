@@ -16,11 +16,13 @@ import { handoffHref } from "@/lib/handoff";
 import { API_URL } from "@/constants/env";
 import { PASSWORD_MAX, PASSWORD_MIN } from "@/lib/password";
 import { AuthPanel } from "@/components/auth/AuthPanel";
+import { useMounted } from "@/hooks/use-mounted";
 
 const EmailField = createRHFField(Input);
 const PasswordField = createRHFField(PasswordInput);
 
 export default function LoginPage() {
+  const mounted = useMounted();
   const t = useTranslations("Auth");
   const locale = useLocale();
   const router = useRouter();
@@ -78,16 +80,16 @@ export default function LoginPage() {
 
   return (
     <AuthPanel title={t("title")} subtitle={t("subtitle")} error={formError} success={formError ? null : welcome}>
-      <form noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-        <EmailField control={control} name="email" label={t("email")} type="email" autoComplete="username" placeholder={t("emailPlaceholder")} required />
+      <form method="post" noValidate onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+        <EmailField control={control} name="email" label={t("email")} type="email" autoComplete="username" placeholder={t("emailPlaceholder")} required disabled={!mounted} />
         <div className="flex flex-col gap-2">
-          <PasswordField control={control} name="password" label={t("password")} autoComplete="current-password" required />
+          <PasswordField control={control} name="password" label={t("password")} autoComplete="current-password" required disabled={!mounted} />
           <Link href="/auth/forgot-password" className="self-end rounded-sm text-body-sm text-fg-brand hover:underline focus-visible:outline-2 focus-visible:outline-focus">
             {t("forgot")}
           </Link>
         </div>
 
-        <Button type="submit" size="lg" loading={isLoading} className="w-full">
+        <Button type="submit" size="lg" loading={isLoading} disabled={!mounted} className="w-full">
           {t("submit")}
         </Button>
       </form>

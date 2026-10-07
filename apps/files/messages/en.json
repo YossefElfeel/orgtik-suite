@@ -355,7 +355,6 @@
   "Restore": {
     "titleSingle": "Restore {type}",
     "titleBulk": "Restore {type}",
-    "confirmMessage": "Are you sure you want to restore",
     "confirmDescription": "It will be moved back to your main {type}.",
     "files": "files",
     "folders": "folders",

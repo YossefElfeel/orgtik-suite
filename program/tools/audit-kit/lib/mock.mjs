@@ -12,10 +12,10 @@ const STALE_MS = 15 * 60 * 1000;
 
 const BASE = `${apiUrl("sos")}/__mock`;
 
-async function call(method, p, body) {
+async function call(method, p, body, token) {
   const res = await fetch(BASE + p, {
     method,
-    headers: body ? { "Content-Type": "application/json" } : {},
+    headers: { ...(body ? { "Content-Type": "application/json" } : {}), ...(token ? { authorization: `Bearer ${token}` } : {}) },
     body: body ? JSON.stringify(body) : undefined,
   });
   const json = await res.json().catch(() => ({}));
@@ -58,7 +58,14 @@ export const mock = {
   status: () => call("GET", "/status"),
   async reset() {
     const before = (await call("GET", "/status")).generation;
-    await call("POST", "/reset");
+    let token;
+    const fixtures = process.env.MOCK_RESET_TEST_ACCOUNTS === "1";
+    if (fixtures) {
+      const response = await fetch(`${apiUrl("sos")}/api/auth/login`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: "mona.adel@orgtik.test", password: "Local@2026" }) });
+      if (!response.ok) throw new Error("Preview fixture administrator could not sign in");
+      token = (await response.json()).data.tokens.accessToken;
+    }
+    await call("POST", "/reset", fixtures ? { fixtures: true } : undefined, token);
     for (let i = 0; i < 60; i++) {
       await new Promise((r) => setTimeout(r, 150));
       if ((await call("GET", "/status").catch(() => ({ generation: before }))).generation > before) return;
