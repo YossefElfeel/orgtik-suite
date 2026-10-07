@@ -1,0 +1,369 @@
+{
+  "realm": "r1-people-local",
+  "clockMutation": false,
+  "businessDataReset": false,
+  "checks": [
+    {
+      "name": "business clock is frozen",
+      "pass": true
+    },
+    {
+      "name": "isolated realm verified before fixture writes",
+      "pass": true
+    },
+    {
+      "name": "HR en/1440: language direction",
+      "pass": true
+    },
+    {
+      "name": "HR en/1440: theme",
+      "pass": true
+    },
+    {
+      "name": "hr-en-1440-light-schedule: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "hr-en-1440-light-schedule: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "hr-en-1440-light-schedule: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "SOS en/1440: direction",
+      "pass": true
+    },
+    {
+      "name": "SOS en/1440: theme",
+      "pass": true
+    },
+    {
+      "name": "ownership-en-1440-light-review: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "ownership-en-1440-light-review: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "ownership-en-1440-light-review: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "HR en/390: language direction",
+      "pass": true
+    },
+    {
+      "name": "HR en/390: theme",
+      "pass": true
+    },
+    {
+      "name": "hr-en-390-light-schedule: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "hr-en-390-light-schedule: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "hr-en-390-light-schedule: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "SOS en/390: direction",
+      "pass": true
+    },
+    {
+      "name": "SOS en/390: theme",
+      "pass": true
+    },
+    {
+      "name": "ownership-en-390-light-review: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "ownership-en-390-light-review: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "ownership-en-390-light-review: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "HR ar/1440: language direction",
+      "pass": true
+    },
+    {
+      "name": "HR ar/1440: theme",
+      "pass": true
+    },
+    {
+      "name": "hr-ar-1440-dark-schedule: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "hr-ar-1440-dark-schedule: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "hr-ar-1440-dark-schedule: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "SOS ar/1440: direction",
+      "pass": true
+    },
+    {
+      "name": "SOS ar/1440: theme",
+      "pass": true
+    },
+    {
+      "name": "ownership-ar-1440-dark-review: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "ownership-ar-1440-dark-review: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "ownership-ar-1440-dark-review: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "HR ar/390: language direction",
+      "pass": true
+    },
+    {
+      "name": "HR ar/390: theme",
+      "pass": true
+    },
+    {
+      "name": "hr-ar-390-dark-schedule: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "hr-ar-390-dark-schedule: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "hr-ar-390-dark-schedule: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "SOS ar/390: direction",
+      "pass": true
+    },
+    {
+      "name": "SOS ar/390: theme",
+      "pass": true
+    },
+    {
+      "name": "ownership-ar-390-dark-review: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "ownership-ar-390-dark-review: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "ownership-ar-390-dark-review: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "scheduled civil date ends at next local midnight",
+      "pass": true
+    },
+    {
+      "name": "hr-scheduled-record: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "hr-scheduled-record: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "hr-scheduled-record: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "cancel preserves membership and records one cancellation action",
+      "pass": true
+    },
+    {
+      "name": "offboarding: backend committed before transport loss",
+      "pass": true
+    },
+    {
+      "name": "lost offboarding response still committed once",
+      "pass": true
+    },
+    {
+      "name": "unknown offboarding locks action fields",
+      "pass": true
+    },
+    {
+      "name": "hr-offboarding-unconfirmed: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "hr-offboarding-unconfirmed: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "hr-offboarding-unconfirmed: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "offboarding: backend committed before transport loss",
+      "pass": true
+    },
+    {
+      "name": "reload recovery reuses exact offboarding body/key",
+      "pass": true
+    },
+    {
+      "name": "same completed offboarding after recovery",
+      "pass": true
+    },
+    {
+      "name": "old workspace access revoked",
+      "pass": true
+    },
+    {
+      "name": "other workspace and global account remain active",
+      "pass": true
+    },
+    {
+      "name": "unknown tracking action locks note",
+      "pass": true
+    },
+    {
+      "name": "equipment action: backend committed before transport loss",
+      "pass": true
+    },
+    {
+      "name": "equipment action: backend committed before transport loss",
+      "pass": true
+    },
+    {
+      "name": "equipment replay reuses exact body/key",
+      "pass": true
+    },
+    {
+      "name": "equipment tracking recorded once",
+      "pass": true
+    },
+    {
+      "name": "equipment action: backend committed before transport loss",
+      "pass": true
+    },
+    {
+      "name": "final-pay tracking preserves employee currency",
+      "pass": true
+    },
+    {
+      "name": "hr-completed-tracking: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "hr-completed-tracking: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "hr-completed-tracking: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "unconfirmed handover locks selected person",
+      "pass": true
+    },
+    {
+      "name": "ownership-unconfirmed: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "ownership-unconfirmed: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "ownership-unconfirmed: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "ownership: backend committed before transport loss",
+      "pass": true
+    },
+    {
+      "name": "ownership: backend committed before transport loss",
+      "pass": true
+    },
+    {
+      "name": "former owner recovers exact handover after reload",
+      "pass": true
+    },
+    {
+      "name": "ownership roles changed once",
+      "pass": true
+    },
+    {
+      "name": "handover preserves purchased/assigned/reserved seats",
+      "pass": true
+    },
+    {
+      "name": "owner receives no free HR seat",
+      "pass": true
+    },
+    {
+      "name": "ownership-recovered: document has no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "ownership-recovered: dialog stays inside viewport",
+      "pass": true
+    },
+    {
+      "name": "ownership-recovered: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "shared business clock unchanged",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "hr-en-1440-light-schedule.png",
+    "ownership-en-1440-light-review.png",
+    "hr-en-390-light-schedule.png",
+    "ownership-en-390-light-review.png",
+    "hr-ar-1440-dark-schedule.png",
+    "ownership-ar-1440-dark-review.png",
+    "hr-ar-390-dark-schedule.png",
+    "ownership-ar-390-dark-review.png",
+    "hr-scheduled-record.png",
+    "hr-offboarding-unconfirmed.png",
+    "hr-completed-tracking.png",
+    "ownership-unconfirmed.png",
+    "ownership-recovered.png"
+  ],
+  "source": {
+    "apps/sos/components/workspace/team/OwnershipTransferDialog.tsx": "b6a3246d262257d40817ca104b6e2bd4a14829ceb8a868ca5345d3f92e5c2695",
+    "apps/sos/redux/features/platform/ownership.ts": "9b7d57128b4fde1177a86060d40ceb84f805715abbdd0da1e92552d8c4c251ab",
+    "apps/hr/components/sheets/EmployeeOffboardingSheet/index.tsx": "d6424b7d013577b27fcea56eb8f959c14f8f3a6763505a027d0e3e66845f0c62",
+    "apps/hr/redux/features/employee/employeeApi.ts": "cd4c455ff02cc68802983d0ad271f9c392aa65a11599ff43234c1af41752d24a",
+    "mock/lib/workspace-people-journeys.js": "292f50e8456c4a8586a18197b2df0ec441e9ced864b4cbc359024b3bab0c52cf",
+    "mock/lib/workspace-hr.js": "6fec4386143ace299b53c6603d1245dcef3a1857805b7f024c78cf0ce5c97f0c"
+  },
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "workspaceId": "ws_signup_22607652404354",
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "passed": 82,
+  "completed": true
+}

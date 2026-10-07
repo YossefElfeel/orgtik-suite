@@ -6,7 +6,7 @@ const hr = require('./workspace-hr');
 const people = require('./workspace-people');
 function fixture() {
   const owner = { id: 1, key: 'admin', email: 'owner@fixture.test', isActive: true }, employee = { id: 2, key: 'employee', email: 'worker@fixture.test', firstName: 'Existing', lastName: 'Person', isActive: true, passwordHash: 'preserved' };
-  const identity = { users: [owner, employee], grants: {}, findUser: id => identity.users.find(row => row.id === Number(id)), findByEmail: email => identity.users.find(row => row.email === email) };
+  const identity = { users: [owner, employee], grants: {}, findUser: id => identity.users.find(row => row.id === Number(id)), findByEmail: email => identity.users.find(row => row.email === email), findByKey: key => identity.users.find(row => row.key === key) };
   const S = makeStore({ identity }); let now = Date.parse('2026-10-07T09:00:00Z'); S.now = () => now;
   initializeWorkspaceAuthority(S, identity);
   const ws = S.createWorkspace({ wsId: 'hr-workspace', ownerKey: owner.key, name: 'People', email: owner.email, currency: 'CHF' });
@@ -63,6 +63,51 @@ test('scheduled offboarding still revokes a departed owner when the proposed suc
   assert.equal(f.workspace.state, 'suspended'); assert.equal(f.workspace.members[0].status, 'offboarded');
   assert.equal(f.workspace.flags.ownershipReview.offboardingId, row.id);
 });
+test('inactive, deleted or missing successor accounts cannot be scheduled or offered as owners', () => {
+  for (const unavailable of ['inactive', 'deleted', 'missing']) {
+    const f = fixture();
+    f.runtime.applyCommitted({ kind: 'hr.employee.upsert', payload: { employee: { id: 1, authUserId: 1, email: f.actor.email, salary: { currency: 'CHF' } } } });
+    f.workspace.members.push({ id: 'next-owner', userKey: f.employee.key, status: 'active', role: 'member', revision: 1, toolGrants: { hr: { assigned: true, roles: ['hr'] } } });
+    if (unavailable === 'inactive') f.employee.isActive = false;
+    if (unavailable === 'deleted') f.employee.deletedAt = '2026-10-07T09:00:00Z';
+    if (unavailable === 'missing') f.identity.users.splice(f.identity.users.indexOf(f.employee), 1);
+    const options = hr.offboardingOptions({ ...f, payload: { employeeId: 1 } });
+    assert.deepEqual(options.successors, [], unavailable);
+    assert.ok(options.custodyCoverage.every(row => row.eligibleSuccessorMemberIds.length === 0), unavailable);
+    assert.throws(() => hr.offboard({ ...f, payload: { employeeId: 1, transfer: { ownerMemberId: 'next-owner' } } }), { code: 'ownership_transfer_required' });
+    assert.deepEqual(f.workspace.offboardings, []);
+    assert.equal(f.workspace.members[0].status, 'active');
+  }
+});
+test('successor account deactivation after scheduling archives custody and revokes only the departed workspace', () => {
+  const custody = require('./workspace-custody');
+  for (const unavailable of ['inactive', 'deleted', 'missing']) {
+    const f = fixture(), other = f.S.createWorkspace({ wsId: 'other-owner-workspace', ownerKey: f.actor.key, name: 'Independent', email: f.actor.email });
+    const otherBefore = structuredClone(other), credentials = f.actor.passwordHash;
+    f.runtime.applyCommitted({ kind: 'hr.employee.upsert', payload: { employee: { id: 1, authUserId: 1, email: f.actor.email, salary: { currency: 'CHF' } } } });
+    const successor = { id: 'next-owner', userKey: f.employee.key, status: 'active', role: 'member', revision: 1, toolGrants: { hr: { assigned: true, roles: ['hr'] } } };
+    f.workspace.members.push(successor);
+    const row = hr.offboard({ ...f, payload: { employeeId: 1, effectiveAt: '2026-10-08', transfer: { ownerMemberId: successor.id } } });
+    if (unavailable === 'inactive') f.employee.isActive = false;
+    if (unavailable === 'deleted') f.employee.deletedAt = '2026-10-07T09:00:00Z';
+    if (unavailable === 'missing') f.identity.users.splice(f.identity.users.indexOf(f.employee), 1);
+    f.setNow(row.effectiveAt);
+    const targetKinds = [];
+    const transferOwned = () => {
+      const kind = custody.eligible(successor, 'hr', f.identity) ? 'member' : 'archive';
+      targetKinds.push(kind); return { hr: { transferred: [], archived: ['department:fixture'] } };
+    };
+    assert.deepEqual(hr.runOffboarding({ ...f, transferOwned }).completed, [1], unavailable);
+    assert.deepEqual(hr.runOffboarding({ ...f, transferOwned }).completed, [], unavailable);
+    assert.deepEqual(targetKinds, ['archive'], unavailable);
+    assert.equal(row.status, 'completed'); assert.deepEqual(row.custody.hr.archived, ['department:fixture']);
+    assert.equal(f.workspace.state, 'suspended'); assert.equal(f.workspace.flags.ownershipReview.offboardingId, row.id);
+    assert.equal(f.workspace.members[0].status, 'offboarded'); assert.equal(f.workspace.members[0].toolGrants.hr.assigned, false);
+    assert.equal(successor.status, 'active'); assert.equal(successor.role, 'member');
+    assert.equal(f.actor.isActive, true); assert.equal(f.actor.passwordHash, credentials);
+    assert.deepEqual(other, otherBefore, unavailable);
+  }
+});
 test('approved leave projection is workspace-scoped and withdrawn on rejection', () => {
   const f = fixture(); const snapshot = f.runtime.exportSnapshot();
   snapshot.data.timeOffs.push({ id: 9, employeeId: 2, startDate: '2026-10-09', endDate: '2026-10-10', status: 'pending', type: 'annual' });
@@ -70,4 +115,31 @@ test('approved leave projection is workspace-scoped and withdrawn on rejection',
   hr.approveLeave({ ...f, payload: { requestId: 9, status: 'approved' } });
   assert.equal(f.workspace.approvedLeave.length, 1); assert.equal(f.S.workspace('ws_orgtik').approvedLeave, undefined);
   hr.approveLeave({ ...f, payload: { requestId: 9, status: 'rejected' } }); assert.equal(f.workspace.approvedLeave.length, 0);
+});
+test('offboarding an unaccepted hire cancels its invitation and releases reserved capacity', () => {
+  const f = fixture();
+  const hired = hr.hire({ ...f, payload: { firstName: 'Pending', lastName: 'Worker', email: 'pending@fixture.test' } });
+  assert.equal(seatCounts(f.S, f.workspace, 'hr').reserved, 1);
+  const record = hr.offboard({ ...f, payload: { employeeId: hired.id } });
+  assert.equal(record.status, 'completed'); assert.equal(seatCounts(f.S, f.workspace, 'hr').reserved, 0);
+  assert.equal(f.workspace.invitations.find(row => row.id === hired.invitation.id).status, 'cancelled');
+});
+test('offboarding options use the workspace day and equipment/final-pay actions track mock completion', () => {
+  const f = fixture();
+  hr.hire({ ...f, payload: { firstName: 'Existing', lastName: 'Person', email: f.employee.email } });
+  const options = hr.offboardingOptions({ ...f, payload: { employeeId: f.employee.id } });
+  assert.equal(options.businessToday, '2026-10-07'); assert.equal(options.workspace.timeZone, 'Africa/Cairo');
+  const record = hr.offboard({ ...f, payload: { employeeId: f.employee.id, effectiveAt: '2026-10-10' } });
+  hr.offboardingAction({ ...f, payload: { employeeId: f.employee.id, offboardingId: record.id, action: 'equipment_returned', note: 'Sample equipment checked' } });
+  hr.offboardingAction({ ...f, payload: { employeeId: f.employee.id, offboardingId: record.id, action: 'final_pay_completed' } });
+  assert.equal(record.equipment.status, 'completed'); assert.equal(record.finalPay.mode, 'mock_tracking');
+  assert.equal(record.finalPay.currency, 'CHF'); assert.equal(record.actions.length, 2);
+  hr.offboardingAction({ ...f, payload: { employeeId: f.employee.id, offboardingId: record.id, action: 'cancel' } });
+  assert.equal(record.status, 'cancelled');
+});
+test('hiring command refuses credentials and nested personal fields before identity or receipt effects', () => {
+  const f = fixture(), payload = { firstName: 'Next', lastName: 'Worker', email: 'next@fixture.test' }, before = JSON.stringify(f.S.db), identities = f.identity.users.length;
+  assert.throws(() => hr.hire({ ...f, payload: { ...payload, password: 'UnwantedSecret!' } }), { code: 'invalid_employee' });
+  assert.throws(() => hr.hire({ ...f, payload: { ...payload, firstName: { password: 'UnwantedSecret!' } } }), { code: 'invalid_employee' });
+  assert.equal(f.identity.users.length, identities); assert.equal(JSON.stringify(f.S.db), before);
 });

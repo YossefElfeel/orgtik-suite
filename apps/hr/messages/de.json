@@ -660,7 +660,8 @@
     },
     "tooltips": {
       "edit": "Bearbeiten",
-      "delete": "Löschen"
+      "delete": "Löschen",
+      "offboard": "Mitarbeiter offboarden"
     },
     "noDepartment": "Keine Abteilung",
     "empty": "Keine Mitarbeiter gefunden.",
@@ -2684,5 +2685,102 @@
     "maxSize": "Maximale Dateigröße: {size} MB",
     "button": "Dateien hochladen",
     "previewAlt": "Logo-Vorschau"
+  },
+  "Offboarding": {
+    "open": "Mitarbeiter offboarden",
+    "title": "Mitarbeiter-Offboarding",
+    "description": "Beende den Arbeitszugriff von {name} in {workspace}.",
+    "loading": "Offboarding wird geladen…",
+    "close": "Schließen",
+    "retry": "Erneut versuchen",
+    "timezone": "Datums- und Zugriffsgrenzen verwenden {timeZone}.",
+    "ownershipReview": "Der gewählte Nachfolger ist nicht verfügbar. Das Workspace-Eigentum muss vor der Wiederaufnahme geprüft werden.",
+    "unconfirmed": "Das Ergebnis ist unbestätigt. Die ursprüngliche Anfrage bleibt gespeichert; Änderungen sind gesperrt. Prüfe dieses Ergebnis vor einer weiteren Änderung.",
+    "recover": "Ursprüngliches Ergebnis prüfen",
+    "effectiveAt": "Zugriff endet",
+    "successor": "Nachfolger für Verantwortung",
+    "successorRequired": "Neuer Workspace-Eigentümer · erforderlich",
+    "chooseSuccessor": "Aktives Mitglied wählen",
+    "archive": "Zur Prüfung archivieren",
+    "noSuccessor": "Kein geeignetes Mitglied kann das Eigentum übernehmen. Lade vor dem Offboarding des Eigentümers ein aktives Mitglied ein, das kein Gast ist.",
+    "scheduledImpact": "Der Zugriff bleibt bis zur Workspace-Endgrenze bestehen. Der ausdrückliche Mock-Lebenszykluslauf führt den Abschluss aus.",
+    "completedImpact": "Der Zugriff auf diesen Workspace und seine Tools ist beendet. Andere Workspaces dieser Person bleiben verfügbar.",
+    "actionsTitle": "Offene Schritte",
+    "equipment": "Geräterückgabe",
+    "finalPay": "Abschlussabrechnung prüfen · {currency}",
+    "markEquipment": "Geräte als zurückgegeben markieren",
+    "markFinalPay": "Prüfung als abgeschlossen markieren",
+    "finalPayMock": "Der Abschluss erfasst eine administrative Prüfung im Mock. Er löst keine Zahlung aus.",
+    "note": "Aktionsnotiz · optional",
+    "cancelSchedule": "Geplantes Offboarding abbrechen",
+    "history": "Aktionsverlauf",
+    "when": "Wann soll der Zugriff enden?",
+    "now": "Sofort",
+    "date": "Nach einem letzten Arbeitstag",
+    "lastDay": "Letzter Arbeitstag",
+    "lastDayHint": "Der Zugriff bleibt an diesem Datum in der Workspace-Zeitzone bestehen und endet zu Beginn des Folgetags.",
+    "nowImpact": "Die Bestätigung beendet den Zugriff sofort. Zugewiesene Plätze werden freigegeben und offene Einladungen storniert.",
+    "dateImpact": "Der geplante Termin beendet den Zugriff nach dem letzten Arbeitstag. Ein Abbruch ist vor Abschluss möglich.",
+    "preserve": "Das globale Konto, historische Daten und andere Workspace-Zugriffe bleiben erhalten.",
+    "seatImpact": "Eigentum vergibt keinen kostenlosen Tool-Platz. Vorhandene Tool-Zuweisungen bestimmen die übertragbaren Aufgaben.",
+    "custodyTitle": "Verantwortung prüfen",
+    "custodyHint": "Nur ein Nachfolger mit bestehendem Tool-Zugriff kann dessen Daten erhalten. Andere Daten werden zur Prüfung archiviert.",
+    "custodyTransfer": "An {name} übertragen",
+    "custodyArchive": "Zur Prüfung archivieren",
+    "confirmNow": "Workspace-Zugriff jetzt beenden",
+    "confirmSchedule": "Offboarding planen",
+    "status": {
+      "label": "Status",
+      "scheduled": "Geplant",
+      "completed": "Abgeschlossen",
+      "cancelled": "Abgebrochen"
+    },
+    "actionStatus": {
+      "pending": "Offen",
+      "completed": "Abgeschlossen"
+    },
+    "historyActions": {
+      "equipment_returned": "Geräterückgabe erfasst",
+      "final_pay_completed": "Abschlussabrechnung geprüft",
+      "cancel": "Geplantes Offboarding abgebrochen",
+      "recorded": "Aktion erfasst"
+    },
+    "success": {
+      "completed": "Workspace-Zugriff beendet. Geräte und Abschlussabrechnung können unten weiter verfolgt werden.",
+      "scheduled": "Offboarding geplant. Der Zugriff bleibt bis zur Endgrenze erhalten.",
+      "cancelled": "Geplantes Offboarding abgebrochen. Der Zugriff bleibt erhalten.",
+      "action": "Aktion erfasst."
+    },
+    "errors": {
+      "date": "Wähle ein gültiges Datum ab dem aktuellen Geschäftstag des Workspaces.",
+      "successor": "Wähle einen aktiven Nachfolger für den Eigentümer, der kein Gast ist.",
+      "note": "Die Notiz darf höchstens 1.000 Zeichen haben.",
+      "workspace": "Kehre zum ursprünglichen Workspace zurück, um diese Anfrage zu prüfen.",
+      "forbidden": "Dein aktueller Workspace-Zugriff erlaubt dieses Offboarding nicht.",
+      "readOnly": "Workspace oder Sitzung sind schreibgeschützt. Bitte einen berechtigten Admin um Prüfung.",
+      "gone": "Dieser Beschäftigungsdatensatz ist nicht mehr verfügbar.",
+      "conflict": "Der Beschäftigungsstatus hat sich geändert. Lade ihn neu und prüfe ihn.",
+      "invalid": "Prüfe Enddatum und Nachfolger und versuche es erneut.",
+      "failed": "Die Anfrage konnte nicht abgeschlossen werden. Prüfe die Angaben.",
+      "uncertain": "Das Ergebnis konnte nicht bestätigt werden. Prüfe die ursprüngliche Anfrage sicher.",
+      "load": "Offboarding konnte nicht geladen werden. Prüfe die Verbindung und versuche es erneut."
+    },
+    "tools": {
+      "tasks": "Tasks",
+      "hr": "HR",
+      "files": "Files",
+      "sales": "Sales",
+      "marketing": "Marketing",
+      "chats": "Chats",
+      "wm": "Website Manager",
+      "adm": "Admin",
+      "usr": "Workspace",
+      "whiteboards": "Whiteboards",
+      "crm": "Sales",
+      "chat": "Chats"
+    },
+    "successorUnavailable": "Nachfolger nicht verfügbar",
+    "successorWarning": "Der geplante Nachfolger ist nicht mehr geeignet. Brich den Zeitplan ab und wähle vor der Endgrenze einen aktiven Nachfolger.",
+    "working": "Ursprüngliche Anfrage wird gespeichert…"
   }
 }

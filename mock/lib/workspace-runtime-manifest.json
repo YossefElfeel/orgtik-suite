@@ -31,7 +31,9 @@
       "lib/workspace-command.js",
       "lib/workspace-commands.js",
       "lib/workspace-context.js",
+      "lib/workspace-custody.js",
       "lib/workspace-hr.js",
+      "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
       "lib/workspace-runtime.js"
@@ -66,7 +68,9 @@
       "lib/workspace-command.js",
       "lib/workspace-commands.js",
       "lib/workspace-context.js",
+      "lib/workspace-custody.js",
       "lib/workspace-hr.js",
+      "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
       "lib/workspace-runtime.js"
@@ -109,7 +113,9 @@
       "lib/workspace-command.js",
       "lib/workspace-commands.js",
       "lib/workspace-context.js",
+      "lib/workspace-custody.js",
       "lib/workspace-hr.js",
+      "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
       "lib/workspace-runtime.js"
@@ -150,7 +156,9 @@
       "lib/workspace-command.js",
       "lib/workspace-commands.js",
       "lib/workspace-context.js",
+      "lib/workspace-custody.js",
       "lib/workspace-hr.js",
+      "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
       "lib/workspace-runtime.js"
@@ -195,7 +203,9 @@
       "lib/workspace-command.js",
       "lib/workspace-commands.js",
       "lib/workspace-context.js",
+      "lib/workspace-custody.js",
       "lib/workspace-hr.js",
+      "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
       "lib/workspace-runtime.js"
@@ -227,7 +237,9 @@
       "lib/workspace-command.js",
       "lib/workspace-commands.js",
       "lib/workspace-context.js",
+      "lib/workspace-custody.js",
       "lib/workspace-hr.js",
+      "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
       "lib/workspace-runtime.js"
@@ -269,7 +281,9 @@
       "lib/workspace-command.js",
       "lib/workspace-commands.js",
       "lib/workspace-context.js",
+      "lib/workspace-custody.js",
       "lib/workspace-hr.js",
+      "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
       "lib/workspace-runtime.js"

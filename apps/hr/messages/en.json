@@ -660,7 +660,8 @@
     },
     "tooltips": {
       "edit": "Edit",
-      "delete": "Delete"
+      "delete": "Delete",
+      "offboard": "Offboard employee"
     },
     "noDepartment": "No Department",
     "empty": "No employees found.",
@@ -2684,5 +2685,102 @@
     "maxSize": "Maximum file size allowed is {size}MB",
     "button": "Upload your files",
     "previewAlt": "Logo preview"
+  },
+  "Offboarding": {
+    "open": "Offboard employee",
+    "title": "Employee offboarding",
+    "description": "End {name}’s employment access in {workspace}.",
+    "loading": "Loading offboarding details…",
+    "close": "Close",
+    "retry": "Try again",
+    "timezone": "Dates and access boundaries use {timeZone}.",
+    "ownershipReview": "The selected successor is unavailable. Workspace ownership needs review before normal access can resume.",
+    "unconfirmed": "The result is unconfirmed. The original request is kept and editing is locked. Recover that result before making another change.",
+    "recover": "Recover original result",
+    "effectiveAt": "Access ends",
+    "successor": "Responsibility successor",
+    "successorRequired": "New workspace owner · required",
+    "chooseSuccessor": "Choose an active member",
+    "archive": "Archive for review",
+    "noSuccessor": "No eligible member can receive ownership. Invite an active nonguest member before offboarding the owner.",
+    "scheduledImpact": "Access continues until the workspace’s end boundary. Completion is applied by the explicit mock lifecycle run.",
+    "completedImpact": "Access to this workspace and its tools has ended. The person’s other workspaces remain available.",
+    "actionsTitle": "Remaining actions",
+    "equipment": "Equipment return",
+    "finalPay": "Final-pay review · {currency}",
+    "markEquipment": "Mark equipment returned",
+    "markFinalPay": "Mark final-pay review complete",
+    "finalPayMock": "Final-pay completion records an administrative review in this mock. It does not issue a payment.",
+    "note": "Action note · optional",
+    "cancelSchedule": "Cancel scheduled offboarding",
+    "history": "Action history",
+    "when": "When should access end?",
+    "now": "Immediately",
+    "date": "After a last working day",
+    "lastDay": "Last working day",
+    "lastDayHint": "Access is retained through this date in the workspace timezone and ends at the start of the following day.",
+    "nowImpact": "Confirming ends workspace access immediately. Assigned seats are released and pending invitations are cancelled.",
+    "dateImpact": "The scheduled date ends workspace access after the last working day. You can cancel before completion.",
+    "preserve": "The global account, historical records and access to other workspaces are preserved.",
+    "seatImpact": "Ownership never grants a free tool seat. Existing tool assignments determine which responsibilities can be transferred.",
+    "custodyTitle": "Responsibility review",
+    "custodyHint": "Only a successor with existing access to each tool can receive its records. Other records are archived for review.",
+    "custodyTransfer": "Transfer to {name}",
+    "custodyArchive": "Archive for review",
+    "confirmNow": "End workspace access now",
+    "confirmSchedule": "Schedule offboarding",
+    "status": {
+      "label": "Status",
+      "scheduled": "Scheduled",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "actionStatus": {
+      "pending": "Pending",
+      "completed": "Completed"
+    },
+    "historyActions": {
+      "equipment_returned": "Equipment marked returned",
+      "final_pay_completed": "Final-pay review completed",
+      "cancel": "Scheduled offboarding cancelled",
+      "recorded": "Action recorded"
+    },
+    "success": {
+      "completed": "Workspace access ended. Equipment and final-pay actions can still be tracked below.",
+      "scheduled": "Offboarding scheduled. Access remains until the end boundary.",
+      "cancelled": "Scheduled offboarding cancelled. Access is preserved.",
+      "action": "Action recorded."
+    },
+    "errors": {
+      "date": "Choose a valid date from the workspace’s current business day onward.",
+      "successor": "Choose an active nonguest successor for the workspace owner.",
+      "note": "Keep the note within 1,000 characters.",
+      "workspace": "Return to the original workspace to review or recover this request.",
+      "forbidden": "You cannot manage offboarding for this employee with your current workspace access.",
+      "readOnly": "This workspace or session is read-only. Ask an authorized administrator to review access.",
+      "gone": "This employment record is no longer available.",
+      "conflict": "The employment state changed. Refresh and review it before trying again.",
+      "invalid": "Review the end date and successor, then try again.",
+      "failed": "The request could not be completed. Review the details and try again.",
+      "uncertain": "The result could not be confirmed. Recover the original request to check it safely.",
+      "load": "Offboarding details could not be loaded. Check your connection and try again."
+    },
+    "tools": {
+      "tasks": "Tasks",
+      "hr": "HR",
+      "files": "Files",
+      "sales": "Sales",
+      "marketing": "Marketing",
+      "chats": "Chats",
+      "wm": "Website Manager",
+      "adm": "Admin",
+      "usr": "Workspace",
+      "whiteboards": "Whiteboards",
+      "crm": "Sales",
+      "chat": "Chats"
+    },
+    "successorUnavailable": "Successor unavailable",
+    "successorWarning": "The planned successor is no longer eligible. Cancel the schedule and choose an active successor before the end boundary.",
+    "working": "Saving the original request…"
   }
 }

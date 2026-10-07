@@ -1157,6 +1157,30 @@
     },
     {
       "app": "hr",
+      "method": "POST",
+      "path": "/api/employees/:id/offboarding-actions",
+      "source": "apps/hr/routes/people.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "GET",
+      "path": "/api/employees/:id/offboarding-options",
+      "source": "apps/hr/routes/people.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "hr",
       "method": "PATCH",
       "path": "/api/employees/:id/onboarding",
       "source": "apps/hr/routes/people.js",
@@ -6641,6 +6665,18 @@
     },
     {
       "app": "shared",
+      "method": "GET",
+      "path": "/v1/app/invitations/:id/delivery",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "suite or identity route session",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current workspace administrator; owner for administrator appointment",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
       "method": "POST",
       "path": "/v1/app/invitations/:id/resend",
       "source": "lib/workspace-boundary.js",
@@ -6671,7 +6707,7 @@
       "authorization": {
         "audience": "suite or identity route session",
         "workspaceBinding": "signed selected workspace",
-        "permission": "current workspace owner",
+        "permission": "current workspace owner for a new transfer; exact original receipt may be recovered by its still-active administrator",
         "writes": "current write capability; billing and impersonation restrictions"
       }
     },

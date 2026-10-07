@@ -1,0 +1,52 @@
+{
+  "Mailbox": {
+    "nav": "Mock mailbox",
+    "title": "Mock mailbox",
+    "description": "Messages delivered to {email} in this hosted mock. No external email is sent.",
+    "refresh": "Refresh",
+    "scopeLabel": "Mailbox scope",
+    "personal": "My deliveries",
+    "workspace": "This workspace",
+    "personalHint": "Your own deliveries across workspaces, including invitations. Other recipients’ mail is private.",
+    "workspaceHint": "Your notices for the selected workspace only.",
+    "loading": "Loading mock deliveries…",
+    "failedTitle": "The mailbox couldn’t be loaded",
+    "failedBody": "Your saved deliveries remain on the server. Check your connection and retry.",
+    "emptyTitle": "No mock deliveries yet",
+    "emptyBody": "Invitations and workspace notices will appear here when they are delivered to you.",
+    "listLabel": "Mock deliveries",
+    "mock": "Mock delivery",
+    "readOnlyTitle": "Private mailbox unavailable while viewing as someone else",
+    "readOnlyBody": "Return to your own account to open your deliveries. This view does not expose another person’s private mailbox.",
+    "back": "Back to workspace",
+    "signInTitle": "Sign in to open your mailbox",
+    "signInBody": "Use the account that received the invitation or workspace notice.",
+    "signIn": "Sign in",
+    "invitationTitle": "Invitation to {workspace}",
+    "invitationBody": "Open the current invitation to check its access, expiry and acceptance steps.",
+    "acceptedTitle": "Invitation accepted",
+    "offboardingTitle": "Employment update",
+    "noticeTitle": "Workspace update",
+    "noticeBody": "A mock notice for {workspace} was delivered to your account.",
+    "unnamedWorkspace": "the workspace",
+    "expires": "Invitation expires {date}",
+    "openInvitation": "Open invitation",
+    "unknownStatus": "The current invitation state is unavailable. Refresh before opening its link.",
+    "status": {
+      "pending": "Pending acceptance",
+      "accepted": "Accepted",
+      "expired": "Expired",
+      "cancelled": "Cancelled",
+      "superseded": "Replaced by a newer invitation"
+    },
+    "sender": {
+      "show": "Show mock delivery",
+      "mockOnly": "This is the current invitation link saved in the mock mailbox. No external email was sent.",
+      "open": "Open current invitation",
+      "copy": "Copy invitation link",
+      "copied": "Link copied",
+      "unavailable": "This invitation has no current usable delivery link. Refresh its status or resend if eligible.",
+      "copyFallback": "Copy this link manually"
+    }
+  }
+}

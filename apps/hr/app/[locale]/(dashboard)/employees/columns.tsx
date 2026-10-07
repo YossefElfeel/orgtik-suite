@@ -1,5 +1,5 @@
 "use client";
-import { PencilSimple as Pencil, Trash as Trash2 } from "@phosphor-icons/react";
+import { PencilSimple as Pencil, UserMinus } from "@phosphor-icons/react";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { IconButton } from "@/components/shared/IconButton";
@@ -132,8 +132,8 @@ export const getColumns = (t: any, employmentType: (code?: string | null) => str
           </IconButton>
 
           <DeleteEmployeeDialog id={row.original.id}>
-            <IconButton label={t("tooltips.delete")} type="button" variant="outline-delete">
-              <Trash2 className="h-4 w-4" />
+            <IconButton label={t("tooltips.offboard")} type="button" variant="outline-delete">
+              <UserMinus className="h-4 w-4" />
             </IconButton>
           </DeleteEmployeeDialog>
         </div>

@@ -81,3 +81,11 @@ Outcomes are explained in `tools/audit-kit/README.md`.
 - Console errors in development include React's own warnings (hydration mismatches, missing keys); each one is still a defect.
 - Load times come from dev servers and mean something only relative to each other on a warm server.
 - Failing API calls are calls to the local mocks. Before logging one as an app bug, check whether the mock or the real backend contract is the gap.
+
+## Bounded R1 progress note — 2026-10-08
+
+The historical route, accessibility and load-time tables above are unchanged; no new baseline sweep or performance improvement is claimed. PR14 source025c834 merged main e74134f after Linux/Windows CI37691408296. Its309 checks and the PR15 follow-up325 checks are successive versions of one retained mock chain, not additive totals.
+
+Current invitation proof is30 actual linked UI/API checks plus20 controlled UI-state projections across EN/AR,1440/390px and light/dark. The final HR/ownership run passes82 bounded checks including layout/recovery assertions, with13 captures and6 matching reviewed source hashes; this is not82 journeys. See [people evidence](../phase-f/README.md), [invitation checks](r1-people/invitations/invitations-report.json), [state checks](r1-people/invitations/invitation-states-report.json) and [HR/ownership evidence](r1-people/hr-ownership).
+
+All15 isolated hosted journeys, J7 and automatic due-transition coordination remain open. R2-R4, live integrations and public Arabic website launch stay deferred/planned. Vercel remains paused; no business reset or shared-clock advancement was used.

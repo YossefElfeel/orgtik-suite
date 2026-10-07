@@ -135,6 +135,24 @@
       "confirmed": "Einladungsergebnis bestätigt",
       "uncertain": "Das Ergebnis wurde nicht bestätigt. Wiederhole die ursprüngliche Aktion zur Prüfung, bevor du etwas anderes tust.",
       "recover": "Aktionsergebnis prüfen"
+    },
+    "ownership": {
+      "open": "Eigentum übertragen",
+      "recover": "Übergabe prüfen",
+      "title": "Workspace-Eigentum übertragen",
+      "body": "Wähle ein aktives Mitglied als Eigentümer von {workspace}.",
+      "member": "Neuer Eigentümer",
+      "chooseMember": "Wähle ein aktives Mitglied.",
+      "newOwner": "der neue Eigentümer",
+      "review": "{name} wird Eigentümer. Du wirst Admin und behältst deinen bisherigen Tool-Zugriff.",
+      "seats": "Eigentum weist keinen Tool-Platz zu. Kapazität, Zuweisungen und Kosten bleiben gleich.",
+      "empty": "Vor der Übergabe muss ein aktives Mitglied beitreten. Gäste können keinen Workspace besitzen.",
+      "unconfirmed": "Das Ergebnis ist unbestätigt. Die ursprüngliche Person und Anfrage bleiben gespeichert. Prüfe das Ergebnis vor einer weiteren Übergabe.",
+      "confirm": "Eigentum übertragen",
+      "cancel": "Abbrechen",
+      "close": "Schließen",
+      "success": "Workspace-Eigentum übertragen.",
+      "workspaceChanged": "Kehre zum ursprünglichen Workspace zurück, um die Übergabe zu prüfen."
     }
   }
 }

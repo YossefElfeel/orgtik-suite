@@ -17,6 +17,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAuthRoute = AuthRoutes.includes(pathname);
   const isTokenValidationRoute = pathname === "/auth";
+  const isWorkspaceInvitation = /^\/invite\/[^/]+$/.test(pathname);
   const hasIncomingHandoff = request.nextUrl.searchParams.has("code");
   const staffLogin = pathname === "/auth/login" && request.nextUrl.searchParams.get("mode") === "staff" && ["admin", "wm"].includes(request.nextUrl.searchParams.get("target") || "");
 
@@ -42,7 +43,7 @@ export function middleware(request: NextRequest) {
   // If no token and not on auth route, redirect to login
   // The address they asked for comes along, so signing in takes them there (SOS-017: it was lost).
   // The sign-in page only follows paths on this site (lib/safe-redirect).
-  if (!token && !isAuthRoute && !isTokenValidationRoute) {
+  if (!token && !isAuthRoute && !isTokenValidationRoute && !isWorkspaceInvitation) {
     const login = new URL("/auth/login", request.url);
     if (pathname !== "/") login.searchParams.set("redirect", pathname + request.nextUrl.search);
     return NextResponse.redirect(login);

@@ -1,0 +1,52 @@
+{
+  "Mailbox": {
+    "nav": "Boîte simulée",
+    "title": "Boîte simulée",
+    "description": "Messages remis à {email} dans cette simulation hébergée. Aucun e-mail externe n’est envoyé.",
+    "refresh": "Actualiser",
+    "scopeLabel": "Portée de la boîte",
+    "personal": "Mes messages",
+    "workspace": "Cet espace",
+    "personalHint": "Vos messages dans les différents espaces, invitations comprises. Les messages des autres destinataires restent privés.",
+    "workspaceHint": "Vos notifications pour l’espace sélectionné uniquement.",
+    "loading": "Chargement des messages simulés…",
+    "failedTitle": "La boîte n’a pas pu être chargée",
+    "failedBody": "Vos messages enregistrés restent sur le serveur. Vérifiez la connexion et réessayez.",
+    "emptyTitle": "Aucun message simulé pour le moment",
+    "emptyBody": "Les invitations et notifications de l’espace apparaîtront ici lorsqu’elles vous seront remises.",
+    "listLabel": "Messages simulés",
+    "mock": "Message simulé",
+    "readOnlyTitle": "Boîte privée indisponible lors d’une consultation en tant qu’autre personne",
+    "readOnlyBody": "Revenez à votre compte pour ouvrir vos messages. Cette vue ne donne pas accès à la boîte privée d’une autre personne.",
+    "back": "Retour à l’espace",
+    "signInTitle": "Connectez-vous pour ouvrir votre boîte",
+    "signInBody": "Utilisez le compte destinataire de l’invitation ou de la notification.",
+    "signIn": "Se connecter",
+    "invitationTitle": "Invitation à {workspace}",
+    "invitationBody": "Ouvrez l’invitation actuelle pour vérifier les accès, l’expiration et les étapes d’acceptation.",
+    "acceptedTitle": "Invitation acceptée",
+    "offboardingTitle": "Mise à jour de l’emploi",
+    "noticeTitle": "Mise à jour de l’espace",
+    "noticeBody": "Une notification simulée pour {workspace} a été remise à votre compte.",
+    "unnamedWorkspace": "l’espace",
+    "expires": "L’invitation expire le {date}",
+    "openInvitation": "Ouvrir l’invitation",
+    "unknownStatus": "L’état actuel de l’invitation est indisponible. Actualisez avant d’ouvrir le lien.",
+    "status": {
+      "pending": "En attente d’acceptation",
+      "accepted": "Acceptée",
+      "expired": "Expirée",
+      "cancelled": "Annulée",
+      "superseded": "Remplacée par une invitation plus récente"
+    },
+    "sender": {
+      "show": "Afficher le message simulé",
+      "mockOnly": "Voici le lien d’invitation actuel enregistré dans la boîte simulée. Aucun e-mail externe n’a été envoyé.",
+      "open": "Ouvrir l’invitation actuelle",
+      "copy": "Copier le lien d’invitation",
+      "copied": "Lien copié",
+      "unavailable": "Cette invitation n’a pas de lien utilisable actuel. Actualisez son état ou renvoyez-la si possible.",
+      "copyFallback": "Copiez ce lien manuellement"
+    }
+  }
+}

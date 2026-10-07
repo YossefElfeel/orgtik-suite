@@ -128,6 +128,18 @@ module.exports = function peopleRoutes(app, h) {
     send(res, V.empDetail(e), "Employee updated successfully");
   });
 
+  app.get('/api/employees/:id/offboarding-options', async (req, res) => {
+    if (!h.guard(req, res, 'hr')) return;
+    const e = findEmp(req, res); if (!e) return;
+    try { return send(res, await h.command(req, 'hr.offboarding.options', { employeeId: e.id }), 'Offboarding options fetched'); }
+    catch (error) { return res.status(error.status || 503).json({ success: false, code: error.code, message: error.message }); }
+  });
+  app.post('/api/employees/:id/offboarding-actions', async (req, res) => {
+    if (!h.guard(req, res, 'hr')) return;
+    const e = findEmp(req, res); if (!e) return;
+    try { return send(res, await h.command(req, 'hr.offboarding.action', { employeeId: e.id, offboardingId: req.body?.offboardingId, action: req.body?.action, ...(req.body?.note !== undefined ? { note: req.body.note } : {}) }), 'Offboarding action recorded'); }
+    catch (error) { return res.status(error.status || 503).json({ success: false, code: error.code, message: error.message }); }
+  });
   app.delete("/api/employees/:id", async (req, res) => {
     if (!h.guard(req, res, "hr")) return;
     const e = findEmp(req, res);

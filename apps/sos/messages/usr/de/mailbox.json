@@ -1,0 +1,52 @@
+{
+  "Mailbox": {
+    "nav": "Mock-Postfach",
+    "title": "Mock-Postfach",
+    "description": "Nachrichten an {email} in diesem gehosteten Mock. Es wird keine externe E-Mail gesendet.",
+    "refresh": "Aktualisieren",
+    "scopeLabel": "Postfach-Bereich",
+    "personal": "Meine Zustellungen",
+    "workspace": "Dieser Arbeitsbereich",
+    "personalHint": "Deine eigenen Zustellungen über Arbeitsbereiche hinweg, einschließlich Einladungen. Nachrichten anderer Empfänger bleiben privat.",
+    "workspaceHint": "Nur deine Mitteilungen für den ausgewählten Arbeitsbereich.",
+    "loading": "Mock-Zustellungen werden geladen…",
+    "failedTitle": "Das Postfach konnte nicht geladen werden",
+    "failedBody": "Deine gespeicherten Zustellungen bleiben auf dem Server. Prüfe die Verbindung und versuche es erneut.",
+    "emptyTitle": "Noch keine Mock-Zustellungen",
+    "emptyBody": "Einladungen und Arbeitsbereich-Mitteilungen erscheinen hier, sobald sie dir zugestellt werden.",
+    "listLabel": "Mock-Zustellungen",
+    "mock": "Mock-Zustellung",
+    "readOnlyTitle": "Privates Postfach beim Ansehen als andere Person nicht verfügbar",
+    "readOnlyBody": "Kehre zu deinem eigenen Konto zurück, um deine Zustellungen zu öffnen. Diese Ansicht zeigt kein privates Postfach einer anderen Person.",
+    "back": "Zurück zum Arbeitsbereich",
+    "signInTitle": "Anmelden, um dein Postfach zu öffnen",
+    "signInBody": "Verwende das Konto, das die Einladung oder Mitteilung erhalten hat.",
+    "signIn": "Anmelden",
+    "invitationTitle": "Einladung zu {workspace}",
+    "invitationBody": "Öffne die aktuelle Einladung, um Zugriff, Ablauf und Annahmeschritte zu prüfen.",
+    "acceptedTitle": "Einladung angenommen",
+    "offboardingTitle": "Beschäftigungsaktualisierung",
+    "noticeTitle": "Arbeitsbereich-Aktualisierung",
+    "noticeBody": "Eine Mock-Mitteilung für {workspace} wurde deinem Konto zugestellt.",
+    "unnamedWorkspace": "den Arbeitsbereich",
+    "expires": "Einladung läuft am {date} ab",
+    "openInvitation": "Einladung öffnen",
+    "unknownStatus": "Der aktuelle Einladungsstatus ist nicht verfügbar. Aktualisiere vor dem Öffnen des Links.",
+    "status": {
+      "pending": "Annahme ausstehend",
+      "accepted": "Angenommen",
+      "expired": "Abgelaufen",
+      "cancelled": "Storniert",
+      "superseded": "Durch neuere Einladung ersetzt"
+    },
+    "sender": {
+      "show": "Mock-Zustellung anzeigen",
+      "mockOnly": "Dies ist der aktuelle Einladungslink im Mock-Postfach. Es wurde keine externe E-Mail gesendet.",
+      "open": "Aktuelle Einladung öffnen",
+      "copy": "Einladungslink kopieren",
+      "copied": "Link kopiert",
+      "unavailable": "Diese Einladung hat keinen aktuellen nutzbaren Link. Aktualisiere den Status oder sende sie erneut, sofern möglich.",
+      "copyFallback": "Diesen Link manuell kopieren"
+    }
+  }
+}

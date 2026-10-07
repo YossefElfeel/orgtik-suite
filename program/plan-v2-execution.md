@@ -1,16 +1,16 @@
 # OrgTik Suite — revised hosted-mock roadmap
 
-Maintained execution roadmap · 2026-10-07 · amendments A11 and [A12](phase-f/amendment-A12.md) · decisions D-063–D-069.
+Maintained execution roadmap · 2026-10-08 · amendments A11, [A12](phase-f/amendment-A12.md) and [A13](phase-f/amendment-A13.md) · decisions D-063–D-069.
 
 Source: `C:/Users/yosse/.claude/plans/we-have-old-plan-quiet-turing.md`, refined by the approved roadmap and the owner's request for parallel delivery of a senior UI/UX-quality prototype. This repository document is maintained from here; the external Claude plan is historical input.
 
-R1 is now in implementation from baseline main6032161; see [the package evidence and remaining gates](phase-f/README.md), [D-068](decisions/D-068.md) and [D-069](decisions/D-069.md). PR/CI and hosted release acceptance remain open until evidence is recorded. The R0 snapshot below remains historical evidence, not a claim that R1–R4 are complete.
+R1 foundations merged in [PR14](https://github.com/YossefElfeel/orgtik-suite/pull/14), main e74134f, after [Linux and Windows CI](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37691408296). The remaining people journeys are tracked in [A13](phase-f/amendment-A13.md) and [the package evidence](phase-f/README.md). Hosted release acceptance and R2–R4 remain open. The R0 snapshot below remains historical evidence, not a claim that the full roadmap is complete.
 
 ## الخلاصة بالمصري
 
 - الهدف **بروتوتايب متكامل محفوظ البيانات**: الدفع والبريد والتحليلات والـ AI والتكاملات الخارجية محاكاة، مع رحلات عميل وفريق OrgTik واضحة ومفيدة.
-- الترتيب **R0 → R1 → R2 → R3 → R4**، والـ ٧٢ التزام محفوظين. كود R0 الأساسي وواجهاته اتدمجوا بعد CI ناجح؛ **ده مش قبول release**، وR1–R4 لسه planned.
-- لقطة الدمج الحالية **main `0ba265e`**. الـ mock suite النهائي نجح في **١٤٨ فحص**. دليل المالية فيه ٤٠٦ فحوص تاريخية، وبعدها ٧٩ فحص recovery على السلوك المعدّل؛ الأرقام مش بتتجمع كإعادة كاملة على نفس revision.
+- الترتيب **R0 → R1 → R2 → R3 → R4**، والـ ٧٢ التزام محفوظين. كود R0 وأساس R1 اتدمجوا بعد CI ناجح؛ **ده مش قبول release**، وباقي R1 وR2–R4 لسه مفتوحين.
+- لقطة الدمج الحالية **main `e74134f`**، وفيها ٣٠٩ فحوص mock ناجحة لأساس R1. حزمة رحلات الأشخاص التالية فيها ٣٢٥ فحص محلي. دليل المالية فيه ٤٠٦ فحوص تاريخية، وبعدها ٧٩ فحص recovery؛ الأرقام مش بتتجمع كإعادة كاملة على نفس revision.
 - المالك سمح بدمج الكود قبل قبول الـ hosted ووقف نشر Vercel صراحةً. Native Git مقفول لكل الـ ١٢ مشروع، وworkflow النشر disabled. **مفيش نشر جديد، وقبول الـ ١٥ رحلة على revision منشور لسه مفتوح**.
 - PR #3/work order اتدمج بعد التصالح مع main وCI ناجح، مع الحفاظ على adapter الدفع الجديد. تطبيع نهايات السطور لسه حزمة منفصلة.
 - أسعار الويبسايت من المنصة مع مدد 1/3/6/12 شهر والخصومات الحالية؛ منطقة الزائر MOCK تلقائية مع Switzerland بديل واختبار override، من غير country selector جديد.
@@ -30,7 +30,7 @@ Deliver one persistent hosted prototype for customer workspaces and OrgTik staff
 
 ### Readiness and merged-code snapshot — hosted release acceptance open
 
-**Current recorded main: `0ba265e5a2fd0e8ce4960467862283c2e7d585c8` (2026-10-07).** PR #3 source`2364841` passed [CI37650247042](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247042) (Linux5m58s and Windows library15m18s) and [pause configuration37650247008](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247008). Earlier main`998d821` also passed CI37649449943. The owner authorized code merges while explicitly pausing Vercel deployment and waived hosted preview acceptance **before these code merges**. This operational exception does not waive release acceptance. Native Git deployment is disabled for all **12 projects**; deployment workflow **377190291** is disabled. No Vercel workflow run occurred after that disable. Existing resources, accounts and historical invoices remain in place.
+**Current recorded main: `e74134f01af95eca79920850789fe800468b0ee4` (2026-10-07).** R1 foundation source `025c834` passed [CI37691408296](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37691408296), including Linux checks and Windows library acceptance, before PR14 merged. PR #3 source`2364841` previously passed [CI37650247042](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247042) (Linux5m58s and Windows library15m18s) and [pause configuration37650247008](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247008). Earlier main`998d821` also passed CI37649449943. The owner authorized code merges while explicitly pausing Vercel deployment and waived hosted preview acceptance **before these code merges**. This operational exception does not waive release acceptance. Native Git deployment is disabled for all **12 projects**; deployment workflow **377190291** is disabled. No Vercel workflow run occurred after that disable. Existing resources, accounts and historical invoices remain in place.
 
 | Coherent package | Source → main merge | Successful CI evidence |
 |---|---|---|
@@ -61,7 +61,7 @@ Build-only runs [37638044509](https://github.com/YossefElfeel/orgtik-suite/actio
 | Credentials/projects | Existing Actions credential and project IDs; configuration checks pass; native Git/workflow deployment paused | Preserve setup; do not recreate resources or deploy without a new owner instruction |
 | Auth/assets/library | Corrected source, byte guards and strict visual harness landed through coherent PRs with green CI | Prove current release flows on a revision-specific isolated hosted deployment when deployment is authorized |
 | Website/work order | R0 offer adapter and PR #3/work order merged | Preserve website/WM work and visual identity; keep normalization separate |
-| Release gate | Code/CI accepted for merged packages; **no R0 exit or all-journey hosted acceptance** | All 15 journeys, consuming-app access/persistence and website parity at the release revision; R1–R4 remain planned |
+| Release gate | Code/CI accepted for R0 and R1 foundation packages; **no full release or all-journey hosted acceptance** | All 15 journeys, consuming-app access/persistence and website parity at the release revision; remaining R1–R4 stay open |
 
 ### R0 implementation and local evidence
 
@@ -114,7 +114,7 @@ This map defines the **minimum consuming apps to test**, even when only `mock` n
 
 Build packages in this order; app storage adapters can run in parallel after the workspace interface is stable.
 
-The workspace/runtime/session contract proposal is being prepared separately from these execution records. Shared authority, app adapters, independent fixtures and atomic commands must be stable before parallel R1 app work. Runtime implementation and R1 release acceptance remain open.
+The [workspace/runtime/session contract](phase-f/workspace-runtime-contract.md) and its foundation landed in PR14. Shared authority, six private app adapters, independent fixtures, atomic commands, persistent sessions and billing lifecycle now have code/CI evidence. The people-journey follow-up is recorded in A13. Approved-leave propagation and full R1 journey acceptance remain open; the checklist below retains their required behavior.
 
 1. **Workspace context/stores:** centrally resolve and validate selected workspace membership; carry it through login, refresh, switching and one-time handoff. Scope Tasks, Files, HR, Sales, Marketing and Chats data to that workspace. New workspaces begin empty; existing seeded fixtures remain independent. WM/ADM internal access stays separate.
 2. **Entitlements/roles:** launcher, UI role helpers and APIs use one current-workspace access calculation. No union of identity scopes across tenants may grant access in the selected workspace. Distinguish member/tool roles, seats and line state. Preserve staff grants independently. Useful no-access/ask-owner and read-only states accompany API enforcement.

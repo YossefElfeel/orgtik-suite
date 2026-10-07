@@ -1,0 +1,52 @@
+{
+  "Mailbox": {
+    "nav": "Casella simulata",
+    "title": "Casella simulata",
+    "description": "Messaggi recapitati a {email} in questa simulazione ospitata. Non vengono inviate email esterne.",
+    "refresh": "Aggiorna",
+    "scopeLabel": "Ambito della casella",
+    "personal": "I miei messaggi",
+    "workspace": "Questo spazio",
+    "personalHint": "I tuoi messaggi nei diversi spazi, inclusi gli inviti. I messaggi degli altri destinatari restano privati.",
+    "workspaceHint": "Solo i tuoi avvisi per lo spazio selezionato.",
+    "loading": "Caricamento dei messaggi simulati…",
+    "failedTitle": "Impossibile caricare la casella",
+    "failedBody": "I messaggi salvati restano sul server. Controlla la connessione e riprova.",
+    "emptyTitle": "Nessun messaggio simulato ancora",
+    "emptyBody": "Inviti e avvisi dello spazio appariranno qui quando ti verranno recapitati.",
+    "listLabel": "Messaggi simulati",
+    "mock": "Messaggio simulato",
+    "readOnlyTitle": "Casella privata non disponibile quando visualizzi come un’altra persona",
+    "readOnlyBody": "Torna al tuo account per aprire i tuoi messaggi. Questa vista non mostra la casella privata di un’altra persona.",
+    "back": "Torna allo spazio",
+    "signInTitle": "Accedi per aprire la casella",
+    "signInBody": "Usa l’account che ha ricevuto l’invito o l’avviso.",
+    "signIn": "Accedi",
+    "invitationTitle": "Invito a {workspace}",
+    "invitationBody": "Apri l’invito attuale per verificare accessi, scadenza e passaggi di accettazione.",
+    "acceptedTitle": "Invito accettato",
+    "offboardingTitle": "Aggiornamento del rapporto di lavoro",
+    "noticeTitle": "Aggiornamento dello spazio",
+    "noticeBody": "Un avviso simulato per {workspace} è stato recapitato al tuo account.",
+    "unnamedWorkspace": "lo spazio",
+    "expires": "L’invito scade il {date}",
+    "openInvitation": "Apri invito",
+    "unknownStatus": "Lo stato attuale dell’invito non è disponibile. Aggiorna prima di aprire il link.",
+    "status": {
+      "pending": "In attesa di accettazione",
+      "accepted": "Accettato",
+      "expired": "Scaduto",
+      "cancelled": "Annullato",
+      "superseded": "Sostituito da un invito più recente"
+    },
+    "sender": {
+      "show": "Mostra consegna simulata",
+      "mockOnly": "Questo è il link di invito attuale salvato nella casella simulata. Non è stata inviata alcuna email esterna.",
+      "open": "Apri invito attuale",
+      "copy": "Copia link di invito",
+      "copied": "Link copiato",
+      "unavailable": "Questo invito non ha un link attualmente utilizzabile. Aggiorna lo stato o reinvialo se consentito.",
+      "copyFallback": "Copia manualmente questo link"
+    }
+  }
+}

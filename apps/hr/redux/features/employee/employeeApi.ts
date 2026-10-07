@@ -22,8 +22,9 @@ import {
   IEmployeeLeavesResponse,
 } from "@/types/employee";
 import { INote, ICreateNoteDTO, IUpdateNoteDTO } from "@/types/notes";
+import type { OffboardingOptions, OffboardingRecord, OffboardingRequest, OffboardingActionRequest } from '@/types/offboarding';
 
-const EmployeeApi = baseApi.injectEndpoints({
+const EmployeeApi = baseApi.enhanceEndpoints({ addTagTypes: ['EmployeeOffboarding'] }).injectEndpoints({
   endpoints: (builder) => ({
     getEmployeeSelectOptions: builder.query<
       SuccessResponse<PaginatedData<IEmployeeSelectOption>>,
@@ -141,6 +142,18 @@ const EmployeeApi = baseApi.injectEndpoints({
         method: "DELETE",
       }),
       invalidatesTags: ["Employee"],
+    }),
+    getOffboardingOptions: builder.query<SuccessResponse<OffboardingOptions>, string | number>({
+      query: id => ({ url: `/employees/${id}/offboarding-options` }),
+      providesTags: (result, error, id) => [{ type: 'EmployeeOffboarding', id }],
+    }),
+    offboardEmployee: builder.mutation<SuccessResponse<OffboardingRecord>, OffboardingRequest>({
+      query: ({ id, body, operationId }) => ({ url: `/employees/${id}`, method: 'DELETE', body, headers: { 'Idempotency-Key': operationId } }),
+      invalidatesTags: (result, error, { id }) => [{ type: 'EmployeeOffboarding', id }],
+    }),
+    offboardingAction: builder.mutation<SuccessResponse<OffboardingRecord>, OffboardingActionRequest>({
+      query: ({ id, body, operationId }) => ({ url: `/employees/${id}/offboarding-actions`, method: 'POST', body, headers: { 'Idempotency-Key': operationId } }),
+      invalidatesTags: (result, error, { id }) => [{ type: 'EmployeeOffboarding', id }],
     }),
     getOrgChart: builder.query<
       SuccessResponse<IOrgChartNode[]>,
@@ -286,6 +299,9 @@ export const {
   useGetEmployeeQuery,
   useGetActivityLogsQuery,
   useDeleteEmployeeMutation,
+  useGetOffboardingOptionsQuery,
+  useOffboardEmployeeMutation,
+  useOffboardingActionMutation,
   useGetOrgChartQuery,
   useGetEmployeeAttendanceQuery,
   useGetEmployeeLeavesQuery,

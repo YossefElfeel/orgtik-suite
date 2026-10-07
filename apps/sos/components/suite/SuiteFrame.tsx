@@ -7,7 +7,7 @@
 import { useRef, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
-import { Bell, Buildings, CreditCard, EyeSlash, GearSix, Globe, Headset, House, Invoice, Receipt, Briefcase, SquaresFour, Storefront, UserCircle, UsersThree, UsersFour } from "@phosphor-icons/react";
+import { Bell, Buildings, CreditCard, EnvelopeSimple, EyeSlash, GearSix, Globe, Headset, House, Invoice, Receipt, Briefcase, SquaresFour, Storefront, UserCircle, UsersThree, UsersFour } from "@phosphor-icons/react";
 import { AppRail, BannerRegion, Button, MenuLinkItem, Sidebar, SuiteShell, UserMenu, toast, useStrings, type Banner, type Locale, type SidebarItem, type SidebarSection } from "@orgtik/ui";
 import { useAppDispatch } from "@/redux/app/hooks";
 import { useExitImpersonationMutation, useLogoutMutation } from "@/redux/features/auth/authApi";
@@ -60,6 +60,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   const tw = useTranslations("Workspace.nav");
   const workspaceText = useTranslations("Workspace");
   const ws = useWorkspace();
+  const mailboxText = useTranslations('Mailbox');
   const sections: SidebarSection[] = [{ items }];
   if (mounted && ws.me) {
     const unread = ws.me.unread || undefined;
@@ -84,6 +85,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   if (mounted && isAdmin) adminItems.push(item("/people", t("people"), <UsersThree />), item("/systems", t("systems"), <SquaresFour />));
   if (mounted && (isWebsiteManager || isAdmin)) adminItems.push(item("/content", t("content"), <Globe />));
   if (adminItems.length) sections.push({ label: tw("adminSection"), items: adminItems });
+  if (mounted && user) items.push(item('/mailbox', mailboxText('nav'), <EnvelopeSimple />));
   // Only the most specific item is current: on /billing/invoices that's Invoices, not Subscriptions.
   const hrefs = sections.flatMap((x) => x.items.map((i) => i.href)).filter(at).sort((a, b) => b.length - a.length);
   for (const sec of sections) for (const i of sec.items) i.active = i.href === hrefs[0];
