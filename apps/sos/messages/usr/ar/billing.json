@@ -32,6 +32,8 @@
       "planCycle": "{plan} · {cycle}",
       "renewsOn": "يتجدّد في",
       "endsOn": "ينتهي في",
+      "renewal": "التجديد",
+      "manualRenewal": "يدوي: ينتهي ما لم تجدّده",
       "trialEnds": "تنتهي التجربة في",
       "graceEnds": "وصول كامل حتى",
       "failedOn": "تعذّر الدفع",

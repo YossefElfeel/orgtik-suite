@@ -32,6 +32,8 @@
       "planCycle": "{plan} · {cycle}",
       "renewsOn": "Verlängert sich am",
       "endsOn": "Endet am",
+      "renewal": "Verlängerung",
+      "manualRenewal": "Manuell: endet, wenn Sie nicht verlängern",
       "trialEnds": "Testphase endet am",
       "graceEnds": "Voller Zugriff bis",
       "failedOn": "Zahlung fehlgeschlagen",

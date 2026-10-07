@@ -67,6 +67,17 @@ Each decision gets a `D-###.md` file with its context, options, decision, conseq
 - [D-053](D-053.md): The hosted mock keeps its data: write journal in Upstash Redis, sandboxes demo/preview/review/local (2026-10-07).
 - [D-054](D-054.md): `@orgtik/ui` is a workspace package; pnpm workspace + Turborepo; yalc retired (2026-10-07).
 - [D-055](D-055.md): Retire the Content dashboard, Sales' 17 frozen routes, SOS's superseded screens, the `components/ui` shims and `@somion/sos-bar` (2026-10-07).
+- [D-056](D-056.md): Build order after the review: R1 suite foundation → R2 apps working together → R3 tools complete (top 8 Expected features per tool) → R4 SaaS core completeness (2026-10-07).
+- [D-057](D-057.md): Website copy and flow fixes found by the review are made on our side (the CMS-connected website in this monorepo); the owner's repository is never changed (2026-10-07).
+- [D-058](D-058.md): The platform's price resolver (spec 03) is the single price authority; the website reads prices and products from the platform (2026-10-07).
+- [D-059](D-059.md): 'Website Manager' sold on the website is a managed website service: buying it opens a service request for OrgTik's team (2026-10-07).
+- [D-060](D-060.md): G-12 tax display is per region: GCC prices include VAT; Europe and Switzerland show prices excluding VAT, labelled; EU business customers with a valid VAT ID get reverse charge (2026-10-07).
+- [D-061](D-061.md): G-04 seat model: seats per tool. The owner buys a seat count for each per-user tool and assigns seats to members; an invitation or a tool grant needs a free seat in that tool (2026-10-07).
+- [D-062](D-062.md): Gulf payment gateways follow spec 03: Tap and HyperPay (2026-10-07).
+- [D-063](D-063.md): Persistent hosted prototype; preserve R0–R4 and deliver prerequisites when needed, with task-based UI/UX acceptance and explicit live-provider deferrals (2026-10-07).
+- [D-064](D-064.md): Platform-priced website offers retain 1/3/6/12-month terms and existing greater-of duration/item savings; paid mock orders precede idempotent account linking (2026-10-07).
+- [D-065](D-065.md): Automatic mock visitor-region detection, Switzerland fallback and controlled test overrides; signed-in workspace billing context wins; no new country selector (2026-10-07).
+- [D-066](D-066.md): Packaged file bytes only, with persistent scoped metadata/references/versions and structured whiteboard state exposed through Files; arbitrary uploads remain deferred (2026-10-07).
 
 ## Proposed
 

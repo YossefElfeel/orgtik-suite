@@ -1,0 +1,35 @@
+{
+  "generated": "2026-10-06T23:45:42.044Z",
+  "total": 407,
+  "bySource": {
+    "review": 26,
+    "benchmark": 176,
+    "spec": 205
+  },
+  "byTheme": {
+    "T2": 49,
+    "T6": 5,
+    "T1": 8,
+    "T4": 176,
+    "T5": 160,
+    "T3": 9
+  },
+  "byType": {
+    "Fix flow": 33,
+    "Decision (PM)": 3,
+    "Missing feature": 363,
+    "Missing flow": 8
+  },
+  "byDecision": {
+    "user": 296,
+    "PM": 111
+  },
+  "themes": {
+    "T1": "Suite foundation: workspaces in every tool, paid tools open, members join, billing state applies",
+    "T2": "Money and prices: one price authority, correct re-pricing, seats, tax",
+    "T3": "Apps working together: files, notifications, search, leads, publishing, preferences",
+    "T4": "Tools complete for their category (benchmark Expected features)",
+    "T5": "SaaS core completeness (ADM/USR spec rows)",
+    "T6": "Polish: copy, accessibility, responsive, performance"
+  }
+}
