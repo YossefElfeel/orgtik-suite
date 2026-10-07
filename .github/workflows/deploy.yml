@@ -2,7 +2,7 @@ name: Deploy affected projects
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened, labeled]
+    types: [opened, synchronize, reopened, labeled, ready_for_review]
   push:
     branches: [main]
   workflow_dispatch:
@@ -15,7 +15,7 @@ on:
       preview_projects:
         description: Preview scope (production always uses the affected graph)
         type: choice
-        options: [affected, milestone, verify-readiness]
+        options: [affected, milestone, verify-readiness, build-only]
         default: affected
 
 permissions:
@@ -27,7 +27,7 @@ concurrency:
 
 jobs:
   affected:
-    if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (inputs.environment != 'production' || github.ref == 'refs/heads/main')
+    if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (inputs.environment != 'production' || github.ref == 'refs/heads/main') && (github.event_name != 'pull_request' || github.event.pull_request.draft != true || contains(github.event.pull_request.labels.*.name, 'preview:deploy') || contains(github.event.pull_request.labels.*.name, 'preview:verify-only'))
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.affected.outputs.matrix }}
@@ -49,7 +49,7 @@ jobs:
       - id: affected
         env:
           DEPLOY_ENV: ${{ (github.event_name == 'push' || inputs.environment == 'production') && 'production' || 'preview' }}
-          DEPLOY_PROJECTS: ${{ github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'mock,sos,website' || '' }}
+          DEPLOY_PROJECTS: ${{ inputs.preview_projects == 'build-only' && 'mock' || github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'mock,sos,website' || '' }}
           TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
           TURBO_SCM_HEAD: HEAD
           PREVIEW_VERIFY_ONLY: ${{ github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'verify-readiness' || contains(github.event.pull_request.labels.*.name, 'preview:verify-only')) && '1' || '0' }}
@@ -94,7 +94,7 @@ jobs:
           node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs
 
   deploy:
-    name: Deploy ${{ matrix.key }}
+    name: ${{ inputs.preview_projects == 'build-only' && 'Build' || 'Deploy' }} ${{ matrix.key }}
     needs: [affected, production-validation]
     if: always() && needs.affected.result == 'success' && needs.affected.outputs.count != '0' && ((github.event_name != 'push' && inputs.environment != 'production') || needs.production-validation.result == 'success')
     runs-on: ubuntu-latest
@@ -143,6 +143,7 @@ jobs:
         if: matrix.key == 'mock'
         run: node tools/vercel/check-mock-bundle.mjs
       - name: Deploy
+        if: inputs.preview_projects != 'build-only'
         env:
           PROJECT_KEY: ${{ matrix.key }}
         run: |
@@ -160,13 +161,15 @@ jobs:
           node -e 'require("fs").writeFileSync("deployment.json",JSON.stringify({key:process.env.PROJECT_KEY,url:process.env.DEPLOY_URL}))'
           node tools/vercel/check-deploy.mjs deployment.json
       - uses: actions/upload-artifact@v4
+        if: inputs.preview_projects != 'build-only'
         with:
           name: deployment-${{ matrix.key }}
           path: deployment.json
 
   checks:
+    name: Preview acceptance
     needs: [affected, deploy]
-    if: always() && needs.affected.result == 'success' && (needs.affected.outputs.count != '0' || needs.affected.outputs.verify_only == '1')
+    if: always() && inputs.preview_projects != 'build-only' && needs.affected.result == 'success' && (needs.deploy.result == 'success' || needs.affected.outputs.verify_only == '1') && (needs.affected.outputs.count != '0' || needs.affected.outputs.verify_only == '1')
     runs-on: ubuntu-latest
     timeout-minutes: 120
     permissions:

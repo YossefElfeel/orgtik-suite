@@ -10,12 +10,7 @@ import {
   completeCartPurchase,
   dismissCartNotice,
 } from "./purchase-store.js";
-import {
-  quoteCart,
-  money,
-  termLabel,
-  CRM_PORTAL_URL,
-} from "./purchase-catalog.js";
+import { quoteCart, money, termLabel } from "./purchase-catalog.js";
 import { QuoteSummary, PreviewNote, OrderContents } from "./PurchaseUI";
 import { EmptyPurchaseCart } from "./PurchaseCart";
 import { PurchaseAction, PurchaseDialog } from "./PurchaseControls";
@@ -33,8 +28,9 @@ import {
 } from "./purchase-identity.js";
 import {
   setupInSuite,
-  suiteAccountHref,
   hasSuiteSession,
+  setupPurchaseAccount,
+  validatePurchasePassword,
 } from "./suite-session.js";
 import {
   PAYMENT_METHODS,
@@ -46,41 +42,100 @@ import { PaymentDetails } from "./PaymentDetails";
 import { attr, run } from "../content/copy";
 import { msg } from "../content/strings";
 
-function Confirmation({ order, crm, onCRM, verified, onRestart }) {
+function Confirmation({ order, crm, onCRM, customer, onRestart }) {
   const [busy, setBusy] = useState(false);
   const [handoff, setHandoff] = useState(false);
-  const [emailVerified, setEmailVerified] = useState(false);
+  const [accountError, setAccountError] = useState("");
+  const [existingAccount, setExistingAccount] = useState(false);
+  const passwordField = useRef(null);
+  const confirmationField = useRef(null);
+  const working = useRef(false);
+  const signedIn =
+    hasSuiteSession() &&
+    getPreviewCustomer()?.email?.toLowerCase() ===
+      customer?.email?.toLowerCase();
   const heading = useRef(null);
   useEffect(() => {
     heading.current?.focus();
   }, []);
+  useEffect(() => {
+    if (handoff) passwordField.current?.focus();
+  }, [handoff]);
   const retry = async () => {
     if (busy) return;
     setBusy(true);
     try {
-      onCRM(await setupInSuite(order, { scenario: "ready", verified }));
+      onCRM(
+        await setupInSuite(order, { scenario: "ready", verified: signedIn }),
+      );
     } finally {
       setBusy(false);
     }
   };
-  let portal = null;
-  try {
-    const url = new URL(CRM_PORTAL_URL);
-    if (url.protocol === "https:") portal = url.href;
-  } catch {}
-  // The customer account is the OrgTik suite: signed in, open it signed in; as a guest, create
-  // the account (or sign in from there), which brings this order into it.
-  const openAccount = () => {
-    if (crm.access === "verified-existing" && hasSuiteSession()) {
-      suiteAccountHref().then((href) => window.location.assign(href));
+  const openAccount = async () => {
+    if (!signedIn) {
+      setAccountError("");
+      setExistingAccount(false);
+      setHandoff(true);
       return;
     }
-    if (crm.access !== "verified-existing") {
-      if (window.__orgNav) window.__orgNav("/sign-up");
-      else window.location.assign("/sign-up");
+    if (working.current) return;
+    working.current = true;
+    setBusy(true);
+    setAccountError("");
+    try {
+      const { href } = await setupPurchaseAccount(order, customer);
+      window.location.assign(href);
+    } catch (error) {
+      setAccountError(
+        msg(error.message === "order" ? "PurchaseSetup:6" : "SuiteSignIn:2"),
+      );
+    } finally {
+      working.current = false;
+      setBusy(false);
+    }
+  };
+  const setupAccount = async (event) => {
+    event.preventDefault();
+    if (working.current) return;
+    const fields = new FormData(event.currentTarget);
+    const password = fields.get("password");
+    const problem = validatePurchasePassword(
+      password,
+      fields.get("confirmPassword"),
+    );
+    setAccountError("");
+    if (problem) {
+      setAccountError(msg(problem === "password" ? "SignIn:37" : "SignIn:38"));
+      (problem === "password"
+        ? passwordField
+        : confirmationField
+      ).current?.focus();
       return;
     }
-    setHandoff(true);
+    working.current = true;
+    setBusy(true);
+    event.currentTarget.reset();
+    try {
+      const { href } = await setupPurchaseAccount(order, customer, password);
+      window.location.assign(href);
+    } catch (error) {
+      setExistingAccount(error.message === "exists");
+      setAccountError(
+        msg(
+          error.message === "exists"
+            ? "SuiteSignIn:3"
+            : error.message === "billing"
+              ? "PurchaseSetup:7"
+              : error.message === "order"
+                ? "PurchaseSetup:6"
+                : "SuiteSignIn:2",
+        ),
+      );
+    } finally {
+      working.current = false;
+      setBusy(false);
+    }
   };
   return (
     <div className="purchase-confirmation">
@@ -110,24 +165,30 @@ function Confirmation({ order, crm, onCRM, verified, onRestart }) {
         </p>
         <div className="purchase-alert" role="status">
           <strong>
-            {crm.status === "ready"
-              ? msg("PurchaseCheckout:1")
-              : crm.status === "failed"
-                ? msg("PurchaseCheckout:2")
-                : msg("PurchaseCheckout:3")}
+            {crm.status === "ready" && !signedIn
+              ? msg("PurchaseSetup:8")
+              : crm.status === "ready"
+                ? msg("PurchaseCheckout:1")
+                : crm.status === "failed"
+                  ? msg("PurchaseCheckout:2")
+                  : msg("PurchaseCheckout:3")}
           </strong>
           <p>
-            {crm.status === "ready"
-              ? msg("PurchaseCheckout:4")
-              : msg("PurchaseCheckout:5")}
+            {crm.status === "ready" && !signedIn
+              ? msg("PurchaseSetup:2", [customer?.email || ""])
+              : crm.status === "ready"
+                ? msg("PurchaseCheckout:4")
+                : msg("PurchaseCheckout:5")}
           </p>
         </div>
         <div className="purchase-confirmation-actions">
           {crm.status === "ready" ? (
-            <PurchaseAction onClick={openAccount}>
-              {crm.access === "verified-existing"
-                ? msg("PurchaseCheckout:6")
-                : msg("PurchaseCheckout:7")}
+            <PurchaseAction onClick={openAccount} disabled={busy}>
+              {busy
+                ? msg("PurchaseCheckout:8")
+                : signedIn
+                  ? msg("PurchaseCheckout:6")
+                  : msg("PurchaseCheckout:7")}
             </PurchaseAction>
           ) : (
             <PurchaseAction onClick={retry} disabled={busy}>
@@ -146,6 +207,11 @@ function Confirmation({ order, crm, onCRM, verified, onRestart }) {
             {run("gl_commerce|purchaseCheckout-hero|button", 0)}
           </button>
         </div>
+        {!handoff && accountError && (
+          <p className="purchase-error" role="alert">
+            {accountError}
+          </p>
+        )}
         <p className="purchase-caption">
           {run("gl_commerce|purchaseCheckout-hero|p-5", 0)}
         </p>
@@ -210,26 +276,87 @@ function Confirmation({ order, crm, onCRM, verified, onRestart }) {
       </section>
       <PurchaseDialog
         open={handoff}
-        title={attr("gl_commerce|purchaseCheckout-intro|PurchaseDialog@title")}
-        onClose={() => setHandoff(false)}
+        title={msg("PurchaseSetup:1")}
+        onClose={() => {
+          if (!busy) {
+            passwordField.current?.form?.reset();
+            setAccountError("");
+            setExistingAccount(false);
+            setHandoff(false);
+          }
+        }}
+        descriptionId="purchase-setup-description"
       >
-        <p>
-          {verified || emailVerified
-            ? msg("PurchaseCheckout:15")
-            : msg("PurchaseCheckout:16")}
+        <p id="purchase-setup-description">
+          {msg("PurchaseSetup:2", [customer?.email || ""])}
         </p>
-        {!verified && !emailVerified ? (
-          <PurchaseAction onClick={() => setEmailVerified(true)}>
-            {run("gl_commerce|purchaseCheckout-intro|PurchaseAction", 0)}
-          </PurchaseAction>
-        ) : portal ? (
-          <PurchaseAction href={portal}>
-            {run("gl_commerce|purchaseCheckout-intro|PurchaseAction-2", 0)}
+        {signedIn ? (
+          <PurchaseAction onClick={openAccount} disabled={busy}>
+            {busy ? msg("PurchaseCheckout:8") : msg("PurchaseSetup:5")}
           </PurchaseAction>
         ) : (
-          <div className="purchase-alert">
-            {run("gl_commerce|purchaseCheckout-intro|div", 0)}
-          </div>
+          <form
+            className="purchase-account-setup"
+            onSubmit={setupAccount}
+            noValidate
+            aria-busy={busy}
+          >
+            <label>
+              {msg("PurchaseSetup:3")}
+              <input
+                ref={passwordField}
+                name="password"
+                type="password"
+                autoComplete="new-password"
+                minLength={8}
+                required
+                disabled={busy}
+                aria-invalid={!!accountError}
+                aria-describedby={
+                  accountError
+                    ? "purchase-setup-hint purchase-setup-error"
+                    : "purchase-setup-hint"
+                }
+              />
+            </label>
+            <label>
+              {msg("PurchaseSetup:10")}
+              <input
+                ref={confirmationField}
+                name="confirmPassword"
+                type="password"
+                autoComplete="new-password"
+                minLength={8}
+                required
+                disabled={busy}
+                aria-invalid={!!accountError}
+                aria-describedby={
+                  accountError ? "purchase-setup-error" : undefined
+                }
+              />
+            </label>
+            <p className="purchase-caption" id="purchase-setup-hint">
+              {msg("PurchaseSetup:4")}
+            </p>
+            <PurchaseAction type="submit" disabled={busy || existingAccount}>
+              {busy ? msg("PurchaseCheckout:8") : msg("PurchaseSetup:5")}
+            </PurchaseAction>
+          </form>
+        )}
+        {accountError && (
+          <p id="purchase-setup-error" className="purchase-error" role="alert">
+            {accountError}
+          </p>
+        )}
+        {existingAccount && (
+          <PurchaseAction href="/sign-in" secondary>
+            {msg("PurchaseSetup:9")}
+          </PurchaseAction>
+        )}
+        {!customer?.email && (
+          <PurchaseAction href="/sign-up" secondary>
+            {msg("PurchaseCheckout:7")}
+          </PurchaseAction>
         )}
       </PurchaseDialog>
     </div>
@@ -245,20 +372,24 @@ export default function PurchaseCheckout() {
   const [saved] = useState(() => (items.length ? null : loadPurchaseSession()));
   const [order, setOrder] = useState(saved?.order || null);
   const [crm, setCRM] = useState(
-    saved?.crm || { status: "pending", access: "verification-required" },
+    saved?.crm || { status: "pending", access: "setup-required" },
   );
-  const [customer, setCustomer] = useState(() =>
-    identity ? { ...identity } : { name: "", email: "", company: "" },
+  const [customer, setCustomer] = useState(
+    () =>
+      saved?.customer ||
+      (identity ? { ...identity } : { name: "", email: "", company: "" }),
   );
-  const verified = !saved && !!identity && customer.email === identity.email;
+  const verified =
+    !!identity && customer.email.toLowerCase() === identity.email.toLowerCase();
   const guestDraft = useRef({ name: "", email: "", company: "" });
   const previousIdentity = useRef(identity);
   useEffect(() => {
     if (previousIdentity.current === identity) return;
     previousIdentity.current = identity;
-    setCustomer(identity ? { ...identity } : { ...guestDraft.current });
+    if (!order)
+      setCustomer(identity ? { ...identity } : { ...guestDraft.current });
     setErrors({});
-  }, [identity]);
+  }, [identity, order]);
   const [errors, setErrors] = useState({});
   const [error, setError] = useState("");
   const [processing, setProcessing] = useState(false);
@@ -293,7 +424,7 @@ export default function PurchaseCheckout() {
   }, [items, order]);
   const updateCRM = (value) => {
     setCRM(value);
-    if (order) setSessionSaved(savePurchaseSession(order, value));
+    if (order) setSessionSaved(savePurchaseSession(order, value, customer));
   };
   const submit = async (event) => {
     event.preventDefault();
@@ -338,12 +469,12 @@ export default function PurchaseCheckout() {
       });
       const pending = {
         status: "pending",
-        access: verified ? "verified-existing" : "verification-required",
+        access: verified ? "verified-existing" : "setup-required",
       };
       setPaymentDetails({});
       setOrder(purchase);
       setCRM(pending);
-      setSessionSaved(savePurchaseSession(purchase, pending));
+      setSessionSaved(savePurchaseSession(purchase, pending, customer));
       completeCartPurchase(purchase.groups.map((g) => g.id));
       dismissCartNotice();
       const setup = await setupInSuite(purchase, {
@@ -352,7 +483,7 @@ export default function PurchaseCheckout() {
         customer,
       });
       setCRM(setup);
-      setSessionSaved(savePurchaseSession(purchase, setup));
+      setSessionSaved(savePurchaseSession(purchase, setup, customer));
     } catch (problem) {
       if (paymentMethod !== "card") setPaymentDetails({});
       setError(
@@ -414,7 +545,7 @@ export default function PurchaseCheckout() {
             order={order}
             crm={crm}
             onCRM={updateCRM}
-            verified={verified}
+            customer={customer}
             onRestart={() => {
               clearPurchaseSession();
               window.__orgNav?.("/plans");
