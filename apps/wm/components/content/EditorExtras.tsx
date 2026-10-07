@@ -71,7 +71,7 @@ export function VersionRow({ entry, index, onError }: { entry: Entry; index: num
   const before = entry.versions[index + 1]?.version ?? null;
   const current = index === 0;
   const previousContent = useEntryVersionQuery({ type: entry.type, id: entry.id, version: v.version }, { skip: current || entry.type !== "caseStudy" || can("content:approve") });
-  const needsApproval = entry.type === "caseStudy" && !can("content:approve") && (!previousContent.data?.content || ["narrativePublished", "sampleNarrativePublished"].some(key => previousContent.data?.content?.[key] !== entry.content[key]));
+  const needsApproval = entry.type === "caseStudy" && !can("content:approve") && (!previousContent.data?.content || (["narrativePublished", "sampleNarrativePublished"] as const).some(key => previousContent.data?.content?.[key] !== entry.content[key]));
   return (
     <li className="flex flex-col gap-1 border-b border-line pb-3 last:border-0">
       <span className="flex items-center gap-2">
