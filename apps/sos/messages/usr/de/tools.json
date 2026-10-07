@@ -12,8 +12,7 @@
       "daysLeft": "{count, plural, =0 {endet heute} one {noch # Tag} other {noch # Tage}}",
       "freePlan": "Kostenloser Tarif",
       "paymentDue": "Zahlung fällig",
-      "cancelling": "Endet bei Verlängerung",
-      "beingSetUp": "Wird eingerichtet"
+      "cancelling": "Endet bei Verlängerung"
     },
     "actions": {
       "open": "Öffnen",
@@ -26,8 +25,7 @@
       "askAdmin": "Bitten Sie eine Admin-Person des Arbeitsbereichs um Zugriff.",
       "joinWaitlist": "Auf die Warteliste",
       "joinedWaitlist": "Sie stehen auf der Warteliste für {tool}. Wir melden uns zum Start.",
-      "onWaitlist": "Sie stehen auf der Warteliste",
-      "settingUp": "Wir richten es für Sie ein und melden uns, sobald es bereit ist."
+      "onWaitlist": "Sie stehen auf der Warteliste"
     },
     "catalog": {
       "title": "Tools und Tarife",
@@ -100,9 +98,7 @@
       "noPlansBody": "Dieses Tool gibt es auf Anfrage. Fragen Sie einen individuellen Tarif an, und wir senden Ihnen ein Angebot.",
       "notFound": "Dieses Tool gibt es nicht",
       "backToTools": "Zurück zu Tools und Tarifen",
-      "failed": "Die Tarife konnten nicht geladen werden",
-      "settingUp": "{tool} wird eingerichtet",
-      "settingUpBody": "Sie haben {tool} auf unserer Website gekauft. Unser Team richtet es für Ihren Arbeitsbereich ein und meldet sich, sobald es bereit ist. Zahlung und Rechnung finden Sie unter Abrechnung."
+      "failed": "Die Tarife konnten nicht geladen werden"
     },
     "features": {
       "general": {

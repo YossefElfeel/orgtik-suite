@@ -12,8 +12,7 @@
       "daysLeft": "{count, plural, =0 {se termine aujourd’hui} one {# jour restant} other {# jours restants}}",
       "freePlan": "Offre gratuite",
       "paymentDue": "Paiement en attente",
-      "cancelling": "Se termine au renouvellement",
-      "beingSetUp": "En cours de configuration"
+      "cancelling": "Se termine au renouvellement"
     },
     "actions": {
       "open": "Ouvrir",
@@ -26,8 +25,7 @@
       "askAdmin": "Demandez l’accès à un administrateur de l’espace.",
       "joinWaitlist": "Rejoindre la liste d’attente",
       "joinedWaitlist": "Vous êtes sur la liste d’attente de {tool}. Nous vous écrirons à son ouverture.",
-      "onWaitlist": "Vous êtes sur la liste d’attente",
-      "settingUp": "Nous le configurons pour vous et vous préviendrons dès qu’il sera prêt."
+      "onWaitlist": "Vous êtes sur la liste d’attente"
     },
     "catalog": {
       "title": "Outils et offres",
@@ -100,9 +98,7 @@
       "noPlansBody": "Cet outil est vendu sur demande. Demandez une offre sur mesure et nous vous enverrons un devis.",
       "notFound": "Cet outil n’existe pas",
       "backToTools": "Retour aux outils et offres",
-      "failed": "Les offres n’ont pas pu être chargées",
-      "settingUp": "{tool} est en cours de configuration",
-      "settingUpBody": "Vous avez acheté {tool} sur notre site. Notre équipe le configure pour votre espace et vous préviendra dès qu’il sera prêt. Le paiement et la facture se trouvent dans Facturation."
+      "failed": "Les offres n’ont pas pu être chargées"
     },
     "features": {
       "general": {

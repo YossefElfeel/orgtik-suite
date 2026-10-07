@@ -15,8 +15,6 @@ export type CatalogTool = {
   status: "coming_soon" | "beta" | "live" | "retired";
   mandatory: boolean;
   state: ToolState;
-  /** Bought on the website before it opens in the suite: paid, and OrgTik is setting it up. */
-  setup?: boolean;
   hasFree: boolean;
   trialDays: number;
   fromUnit: { amount: number; currency: string; perUser: boolean } | null;

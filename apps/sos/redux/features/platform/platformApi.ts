@@ -70,8 +70,6 @@ export type AppTool = {
   status: "coming_soon" | "beta" | "live" | "retired";
   mandatory: boolean;
   state: ToolState;
-  /** Bought on the website before it opens in the suite: paid, and OrgTik is setting it up. */
-  setup?: boolean;
   /** The suite app that opens this tool (an SOS scope), when it has one. */
   scope: string | null;
   line: { id: string; planId: string; state: string; trialEndsAt: string | null } | null;

@@ -8,7 +8,8 @@
     "patch": "node patch.js",
     "unpatch": "node patch.js --restore",
     "start": "node start-all.js",
-    "smoke": "node smoke.js"
+    "smoke": "node smoke.js",
+    "test": "node --test apps/admin/website-managed-service.test.js"
   },
   "dependencies": {
     "@iconify-json/bi": "^1.2.7",

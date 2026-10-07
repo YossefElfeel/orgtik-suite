@@ -1,7 +1,7 @@
 // Customer API for USR (Phase E): /v1/app/*. The signed-in person acts inside one workspace
 // (X-Workspace header or ?workspace=, else their first). Roles in the workspace (spec 05 §1):
 // owner (billing and everything), admin (team and tools, no billing), member, guest.
-const { advance, toolState, beingSetUp, banners } = require("./lifecycle");
+const { advance, toolState, banners } = require("./lifecycle");
 
 module.exports = function appApi(app, ctx, S, H) {
   const { identity } = ctx;
@@ -45,7 +45,7 @@ module.exports = function appApi(app, ctx, S, H) {
       const state = toolState(S, ws, t, member);
       if (!state) return null;
       const l = ws.lines.find((x) => x.tool === t.key && live(x));
-      return { key: t.key, name: t.name, short: t.short, icon: t.icon, status: t.status, mandatory: Boolean(t.mandatory), state, setup: beingSetUp(ws, t), scope: t.scope, line: l ? { id: l.id, planId: l.planId, state: l.state, trialEndsAt: l.trialEndsAt ?? null } : null };
+      return { key: t.key, name: t.name, short: t.short, icon: t.icon, status: t.status, mandatory: Boolean(t.mandatory), state, scope: t.scope, line: l ? { id: l.id, planId: l.planId, state: l.state, trialEndsAt: l.trialEndsAt ?? null } : null };
     }).filter(Boolean);
     const all = banners(S, ws, member);
     ok(res, {
@@ -71,7 +71,7 @@ module.exports = function appApi(app, ctx, S, H) {
     ok(res, db.tools.filter((t) => t.status !== "retired").sort((a, b) => a.order - b.order).map((t) => {
       const plans = db.plans.filter((p) => p.tool === t.key && p.visibility !== "private" && p.status !== "archived");
       const from = plans.filter((p) => p.tier !== "free").map((p) => priced(p, ws, "monthly")).filter(Boolean).sort((a, b) => a.unit - b.unit)[0] ?? null;
-      return { key: t.key, name: t.name, short: t.short, icon: t.icon, status: t.status, mandatory: Boolean(t.mandatory), state: toolState(S, ws, t, member), setup: beingSetUp(ws, t), hasFree: plans.some((p) => p.tier === "free"), trialDays: Math.max(0, ...plans.map((p) => p.trialDays ?? 0)), fromUnit: from ? { amount: from.unit, currency: from.currency, perUser: plans.find((p) => priced(p, ws, "monthly")?.unit === from.unit)?.perUser ?? false } : null, onWaitlist: db.waitlist.some((w) => w.tool === t.key && w.workspaceId === ws.id) };
+      return { key: t.key, name: t.name, short: t.short, icon: t.icon, status: t.status, mandatory: Boolean(t.mandatory), state: toolState(S, ws, t, member), hasFree: plans.some((p) => p.tier === "free"), trialDays: Math.max(0, ...plans.map((p) => p.trialDays ?? 0)), fromUnit: from ? { amount: from.unit, currency: from.currency, perUser: plans.find((p) => priced(p, ws, "monthly")?.unit === from.unit)?.perUser ?? false } : null, onWaitlist: db.waitlist.some((w) => w.tool === t.key && w.workspaceId === ws.id) };
     }));
   });
   app.get("/v1/app/tools/:key", as("guest"), (req, res) => {
@@ -81,7 +81,7 @@ module.exports = function appApi(app, ctx, S, H) {
     const l = ws.lines.find((x) => x.tool === t.key && live(x));
     const usedTrial = ws.lines.some((x) => x.tool === t.key && x.trialUsed) || Boolean(l?.trialEndsAt);
     ok(res, {
-      key: t.key, name: t.name, short: t.short, icon: t.icon, status: t.status, mandatory: Boolean(t.mandatory), state: toolState(S, ws, t, member), setup: beingSetUp(ws, t),
+      key: t.key, name: t.name, short: t.short, icon: t.icon, status: t.status, mandatory: Boolean(t.mandatory), state: toolState(S, ws, t, member),
       line: l ?? null,
       plans: db.plans.filter((p) => p.tool === t.key && p.visibility !== "private" && p.status !== "archived").map((p) => ({
         id: p.id, name: p.name, tier: p.tier, perUser: p.perUser, minSeats: p.minSeats, trialDays: usedTrial ? 0 : p.trialDays ?? 0, recommended: Boolean(p.recommended),
@@ -343,7 +343,7 @@ module.exports = function appApi(app, ctx, S, H) {
   // The website charged it already; the suite turns it on: software becomes an active line on the
   // tool's Pro plan for the paid term, each service opens a request (onboarding starts its period),
   // and a paid invoice records it. Idempotent by the website's order reference.
-  const WEBSITE_SERVICE = (id) => (id.startsWith("design/web-") || id.startsWith("development/") ? "svc_website" : id.startsWith("design/") ? "svc_brand" : id.startsWith("marketing/") ? "svc_social" : id.startsWith("it-support/") ? "svc_support" : null);
+  const WEBSITE_SERVICE = (id) => (id === "website" || id.startsWith("design/web-") || id.startsWith("development/") ? "svc_website" : id.startsWith("design/") ? "svc_brand" : id.startsWith("marketing/") ? "svc_social" : id.startsWith("it-support/") ? "svc_support" : null);
   app.post("/v1/app/website-orders", as("admin", { write: true }), (req, res) => {
     const { ws } = req.p;
     const b = req.body ?? {};
@@ -361,7 +361,7 @@ module.exports = function appApi(app, ctx, S, H) {
       const amount = Math.round(Number(l.total) || 0) / 100;
       const months = Math.max(1, Number(l.months) || 1);
       invLines.push({ label: `${l.name} · ${months} month${months === 1 ? "" : "s"}`, amount });
-      if (l.kind === "software") {
+      if (l.kind === "software" && l.catalogId !== "website") {
         const plan = db.plans.find((p) => p.id === `${l.catalogId}_pro` && p.tool);
         if (!plan) { out.skipped.push({ catalogId: l.catalogId, reason: "not_in_suite_yet" }); continue; }
         const old = ws.lines.find((x) => x.tool === plan.tool && live(x));
@@ -371,13 +371,6 @@ module.exports = function appApi(app, ctx, S, H) {
         const at = ws.lines.findIndex((x) => x.tool === plan.tool);
         ws.lines.splice(at < 0 ? ws.lines.length : at, 0, nl);
         out.tools.push({ tool: plan.tool, lineId: nl.id, periodEnd: nl.periodEnd });
-        // Not open in the suite yet (Website): OrgTik's team sets it up; the customer sees it as being set up.
-        const tool = db.tools.find((t) => t.key === plan.tool);
-        if (tool?.status === "coming_soon") {
-          const r = { id: S.id("sr"), number: `SR-${210 + db.serviceRequests.length + 1}`, workspaceId: ws.id, serviceId: "svc_website", title: `${tool.name.en} setup`, brief: `Bought on the website (order ${ref}): ${l.name} for ${months} month${months === 1 ? "" : "s"}. Set it up for this workspace; it shows as being set up until then.`, budget: null, deadline: null, state: "new", createdAt: now, assignee: null, quote: null, milestones: [], deliveries: [], messages: [], source: { kind: "website_order", reference: ref } };
-          db.serviceRequests.push(r);
-          out.requests.push({ id: r.id, number: r.number });
-        }
       } else {
         const serviceId = WEBSITE_SERVICE(String(l.catalogId));
         if (!serviceId) { out.skipped.push({ catalogId: l.catalogId, reason: "unknown_service" }); continue; }

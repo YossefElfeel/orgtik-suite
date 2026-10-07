@@ -53,8 +53,6 @@ const plans = [
   plan("files_pro", "files", "pro", L("Pro", "احترافي", "Pro", "Pro", "Pro"), { trialDays: 14, defaultUsd: { monthly: 7 }, limits: { "files.storage_gb": 500 }, flags: { "files.share_links": true } }),
   plan("hr_pro", "hr", "pro", L("Pro", "احترافي", "Pro", "Pro", "Pro"), { perUser: true, minSeats: 5, trialDays: 14, defaultUsd: { monthly: 15 }, limits: { "hr.employees": 500 }, flags: { "hr.payroll": true } }),
   plan("crm_pro", "crm", "pro", L("Pro", "احترافي", "Pro", "Pro", "Pro"), { perUser: true, minSeats: 2, trialDays: 14, defaultUsd: { monthly: 18 }, limits: { "crm.contacts": 50000, "crm.pipelines": 10 }, flags: {} }),
-  // Bought only on the public website for now (2026-10-07): the suite shows it as being set up.
-  plan("website_pro", "website", "pro", L("Pro", "احترافي", "Pro", "Pro", "Pro"), { visibility: "private", defaultUsd: { monthly: 32 }, limits: {}, flags: {} }),
   plan("marketing_pro", "marketing", "pro", L("Pro", "احترافي", "Pro", "Pro", "Pro"), { trialDays: 14, defaultUsd: { monthly: 11 }, limits: { "marketing.channels": 10 }, flags: { "marketing.ads": true } }),
 ];
 
