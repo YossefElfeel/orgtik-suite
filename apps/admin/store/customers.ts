@@ -25,6 +25,10 @@ export type Line = {
   tool: string;
   planId: string;
   cycle: "monthly" | "yearly" | string;
+  termMonths?: number;
+  renewalMonths?: number;
+  perUser?: boolean;
+  contractedCapacity?: number | null;
   state: LineState;
   snapshot: { amount: number; unit: number; quantity: number; currency: string; source: string; priceVersion: number };
   startedAt: string;
@@ -92,7 +96,7 @@ export type CustomPlanRequest = {
   notes: string;
   state: "new" | "quoted" | string;
   createdAt: string;
-  quote?: { amount: number; currency: string; validUntil: string };
+  quote?: { amount: number; currency: string; validUntil: string; cycle?: string; capacity?: number; lines?: { tool: string; amount: number }[] };
 };
 
 const customersApi = api.injectEndpoints({
@@ -121,7 +125,7 @@ const customersApi = api.injectEndpoints({
       query: () => "/custom-plans",
       providesTags: ["CustomPlans"],
     }),
-    quoteCustomPlan: b.mutation<CustomPlanRequest, { id: string; amount: number; validDays: number }>({
+    quoteCustomPlan: b.mutation<CustomPlanRequest, { id: string; amount: number; validDays: number; lines?: { tool: string; amount: number }[] }>({
       query: ({ id, ...body }) => ({ url: `/custom-plans/${encodeURIComponent(id)}/quote`, method: "POST", body }),
       invalidatesTags: (_r, e) => (e ? [] : ["CustomPlans", "Overview"]),
     }),

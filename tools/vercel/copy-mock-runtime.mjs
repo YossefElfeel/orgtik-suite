@@ -33,6 +33,15 @@ export function copyMockRuntime(runtime = ".vercel/mock-runtime", output = ".ver
   if (!inside(packagedAssets)) throw new Error("Mock asset destination must stay inside its generated function");
   fs.cpSync(assets, packagedAssets, { recursive: true });
   console.log("mock: restored packaged Files sample assets byte-for-byte");
+  // VM-backed historical reducers are loaded by filename and can be omitted or rewritten by
+  // the function tracer. Their original source bytes are part of the financial data contract.
+  const legacy = path.resolve(import.meta.dirname, "../../mock/apps/admin/legacy-v1");
+  if (fs.existsSync(legacy)) {
+    const packagedLegacy = path.resolve(folder, "mock/apps/admin/legacy-v1");
+    if (!inside(packagedLegacy)) throw new Error("Historical reducer destination must stay inside its generated function");
+    fs.cpSync(legacy, packagedLegacy, { recursive: true });
+    console.log("mock: restored historical financial reducers byte-for-byte");
+  }
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) copyMockRuntime(process.argv[2], process.argv[3]);

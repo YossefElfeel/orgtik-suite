@@ -18,20 +18,22 @@ import {
   loadPurchaseSession,
   savePurchaseSession,
 } from "./purchase-adapter.js";
+import { loadPublicCatalog } from "./purchase-catalog.js";
+import {
+  PLATFORM_API,
+  SUITE_API,
+  purchaseHeaders,
+  setPurchaseTokenProvider,
+} from "./purchase-platform.js";
 
 export const SUITE_URL = (
   import.meta.env?.VITE_SUITE_URL || "http://localhost:3013"
 ).replace(/\/$/, "");
-const SUITE_API = (
-  import.meta.env?.VITE_SUITE_API || "http://localhost:4000/api"
-).replace(/\/$/, "");
-// The platform's customer API sits beside the identity API (…/api → …/v1/app).
-const PLATFORM_API = `${SUITE_API.replace(/\/api$/, "")}/v1/app`;
 
 const SESSION_KEY = "orgtik.suite-session.v1";
-let memoryToken = null;
+let memoryToken;
 const readToken = () => {
-  if (memoryToken) return memoryToken;
+  if (memoryToken !== undefined) return memoryToken;
   try {
     return (
       JSON.parse(localStorage.getItem(SESSION_KEY) || "null")?.token || null
@@ -41,6 +43,7 @@ const readToken = () => {
   }
 };
 const writeToken = (token) => {
+  const previous = readToken();
   memoryToken = token;
   try {
     if (token) localStorage.setItem(SESSION_KEY, JSON.stringify({ token }));
@@ -48,7 +51,22 @@ const writeToken = (token) => {
   } catch {
     // Storage blocked: the person stays signed in until the page is left.
   }
+  if (previous !== token && typeof document !== "undefined") {
+    const actor = (value) => {
+      try {
+        return JSON.parse(
+          atob(value.split(".")[1].replace(/-/g, "+").replace(/_/g, "/")),
+        ).sub;
+      } catch {
+        return null;
+      }
+    };
+    if (!previous || !token || actor(previous) !== actor(token))
+      document.cookie = "ot-workspace=; path=/; max-age=0; samesite=lax";
+    loadPublicCatalog({ force: true });
+  }
 };
+setPurchaseTokenProvider(readToken);
 export const hasSuiteSession = () => Boolean(readToken());
 
 const post = (path, body, token) =>
@@ -77,6 +95,7 @@ async function handoffHref(token) {
 async function openSuite(res) {
   const { data } = await res.json();
   const token = data?.tokens?.accessToken;
+  writeToken(token);
   const saved = loadPurchaseSession();
   if (saved && token && !linked().includes(saved.order.reference))
     await sendOrder(saved.order, token)
@@ -88,7 +107,6 @@ async function openSuite(res) {
       )
       .catch(() => {}); // The account still opens; the order can be linked from checkout later.
   const href = await handoffHref(token);
-  writeToken(token);
   return { user: data.user, href };
 }
 
@@ -102,30 +120,21 @@ const linked = () => {
   }
 };
 async function sendOrder(order, token) {
-  const lines = order.groups.flatMap((g) =>
-    g.lines.map((l) => ({
-      catalogId: l.catalogId,
-      kind: l.kind || g.kind,
-      name: l.name,
-      months: l.months,
-      total: l.total,
-      autoRenew: Boolean(l.autoRenew),
-    })),
-  );
+  if (!order?.quoteId || !order.claimToken) throw new Error("purchase");
   const res = await fetch(`${PLATFORM_API}/website-orders`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
       authorization: `Bearer ${token}`,
+      ...purchaseHeaders(),
     },
     body: JSON.stringify({
       reference: order.reference,
-      currency: order.currency,
-      paymentMethod: order.paymentMethod,
-      lines,
+      claimToken: order.claimToken,
     }),
   }).catch(() => null);
   if (!res?.ok) throw new Error("unavailable");
+  const result = (await res.json())?.data;
   try {
     sessionStorage.setItem(
       LINKED_KEY,
@@ -134,6 +143,8 @@ async function sendOrder(order, token) {
   } catch {
     // Without storage the suite's own check stops a second copy.
   }
+  if (typeof document !== "undefined") await loadPublicCatalog({ force: true });
+  return result;
 }
 
 // Checkout's account setup: signed in to the suite, the paid order goes into the person's
@@ -143,12 +154,13 @@ export async function setupInSuite(order, options = {}) {
   const token = readToken();
   if (!options.verified || !token) return provisionCRM(order, options);
   try {
-    await sendOrder(order, token);
+    const result = await sendOrder(order, token);
     return {
       purchaseReference: order.reference,
       destination: SUITE_URL,
       status: "ready",
       access: "verified-existing",
+      tools: result?.tools ?? [],
     };
   } catch {
     return {
@@ -184,7 +196,11 @@ export async function restoreSuiteSession() {
   if (res.status === 401 || res.status === 403) return writeToken(null);
   if (!res.ok) return; // Retry next visit; a service outage does not invalidate this account.
   let user;
-  try { user = (await res.json())?.data?.user; } catch { return; }
+  try {
+    user = (await res.json())?.data?.user;
+  } catch {
+    return;
+  }
   if (!user?.email) return;
   signInPreviewCustomer({
     name: [user.firstName, user.lastName].filter(Boolean).join(" "),
@@ -230,7 +246,12 @@ export function validatePurchasePassword(password, confirmation) {
 }
 
 export async function setupPurchaseAccount(order, customer, password) {
-  if (order?.paymentStatus !== "succeeded") throw new Error("purchase");
+  if (
+    order?.paymentStatus !== "succeeded" ||
+    !order.quoteId ||
+    !order.claimToken
+  )
+    throw new Error("purchase");
   const email = customer?.email?.trim().toLowerCase();
   const name = customer?.name?.trim();
   if (!name || !email) throw new Error("billing");

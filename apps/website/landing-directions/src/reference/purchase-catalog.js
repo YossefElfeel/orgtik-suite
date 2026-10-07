@@ -1,30 +1,11 @@
 import { SERVICE_FAMILIES } from "./service-catalog.js";
 import { SOFTWARE_PRODUCTS } from "./software-catalog.js";
+import { publicRequest, purchaseContextKey } from "./purchase-platform.js";
 
 export const MONTHS = [1, 3, 6, 12];
 export const HOSTING_URL = "https://orgtik.ch";
 export const CRM_PORTAL_URL = import.meta.env?.VITE_CRM_PORTAL_URL || "";
 export const TERM_SAVINGS = { 1: 0, 3: 5, 6: 10, 12: 15 };
-const servicePrices = {
-  "design/graphic-design": 900,
-  "design/brand-development": 1200,
-  "design/web-and-app-design": 1800,
-  "development/web-development": 2400,
-  "development/custom-app-development": 3200,
-  "marketing/social-media-marketing": 900,
-  "marketing/digital-advertising-switzerland": 1100,
-  "marketing/seo-services": 1000,
-  "it-support/website-management": 350,
-  "it-support/software-support": 600,
-};
-const softwarePrices = {
-  hr: 49,
-  crm: 59,
-  files: 19,
-  tasks: 29,
-  marketing: 39,
-  website: 29,
-};
 const serviceNames = {
   "design/graphic-design": "Graphic design",
   "design/brand-development": "Branding",
@@ -51,7 +32,7 @@ export const CATALOG = [
         icon: f.icon,
       })),
     )
-    .map((item) => ({ ...item, monthlyMinor: servicePrices[item.id] * 100 })),
+    .map((item) => ({ ...item, monthlyMinor: null })),
   ...SOFTWARE_PRODUCTS.map((p) => ({
     id: p.id,
     kind: "software",
@@ -61,7 +42,7 @@ export const CATALOG = [
     description: p.short,
     capabilities: p.tasks,
     icon: p.icon,
-    monthlyMinor: softwarePrices[p.id] * 100,
+    monthlyMinor: null,
   })),
 ];
 const bundle = (id, kind, department, name, ids, why, recommended = false) => ({
@@ -73,7 +54,7 @@ const bundle = (id, kind, department, name, ids, why, recommended = false) => ({
   why,
   recommended,
 });
-export const BUNDLES = [
+const BUNDLE_PRESENTATION = [
   bundle(
     "brand-presence",
     "service",
@@ -179,19 +160,106 @@ export const BUNDLES = [
     "All six products for a connected business workspace.",
   ),
 ];
+export let BUNDLES = BUNDLE_PRESENTATION;
 export const findItem = (id, kind) =>
   CATALOG.find((x) => x.id === id && (!kind || x.kind === kind));
-export const findBundle = (id) => BUNDLES.find((x) => x.id === id);
-export const money = (minor) =>
-  "CHF " +
-  new Intl.NumberFormat("de-CH", {
-    minimumFractionDigits: minor % 100 ? 2 : 0,
-    maximumFractionDigits: 2,
-  }).format(minor / 100);
+export const findBundle = (id) => BUNDLE_PRESENTATION.find((x) => x.id === id);
+const pricingListeners = new Set();
+let pricing = {
+  status: "idle",
+  version: 0,
+  currency: null,
+  decimals: null,
+  items: [],
+  error: null,
+};
+let loadedContext = null;
+let loading = null;
+const updatePricing = (value) => {
+  pricing = { ...value, version: pricing.version + 1 };
+  pricingListeners.forEach((listener) => listener());
+};
+export const getPricingSnapshot = () => pricing;
+export const subscribePricing = (listener) => {
+  pricingListeners.add(listener);
+  return () => pricingListeners.delete(listener);
+};
+export function installPublicCatalog(data) {
+  if (
+    !data?.currency ||
+    !Number.isInteger(data.decimals) ||
+    !Array.isArray(data.items)
+  )
+    throw new Error("invalid_catalog");
+  for (const item of CATALOG) {
+    const priced = data.items.find(
+      (row) => row.id === item.id && row.kind === item.kind,
+    );
+    item.monthlyMinor = priced?.monthlyMinor ?? null;
+  }
+  Object.assign(TERM_SAVINGS, data.policy?.durationSavings);
+  BUNDLES = BUNDLE_PRESENTATION.filter((bundle) =>
+    data.bundles?.some((available) => available.id === bundle.id),
+  );
+  updatePricing({ ...data, status: "ready", error: null });
+  return pricing;
+}
+export async function loadPublicCatalog({ force = false } = {}) {
+  const context = purchaseContextKey();
+  if (!force && loadedContext === context && pricing.status === "ready")
+    return pricing;
+  if (loading?.context === context)
+    return force
+      ? loading.promise.then(() => loadPublicCatalog({ force: true }))
+      : loading.promise;
+  for (const item of CATALOG) item.monthlyMinor = null;
+  updatePricing({
+    status: "loading",
+    currency: null,
+    decimals: null,
+    items: [],
+    error: null,
+  });
+  const promise = publicRequest("/catalog")
+    .then((data) => {
+      if (purchaseContextKey() !== context) return null;
+      loadedContext = context;
+      return installPublicCatalog(data);
+    })
+    .catch((error) => {
+      if (purchaseContextKey() === context)
+        updatePricing({
+          status: "error",
+          currency: null,
+          decimals: null,
+          items: [],
+          error: error.code || "unavailable",
+        });
+      return null;
+    })
+    .finally(() => {
+      if (loading?.promise === promise) loading = null;
+    });
+  loading = { context, promise };
+  return promise;
+}
+export const currencyScale = (context) =>
+  10 ** (context?.decimals ?? pricing.decimals ?? 2);
+export const money = (minor, context = pricing) => {
+  if (
+    !Number.isFinite(minor) ||
+    !context?.currency ||
+    !Number.isInteger(context.decimals)
+  )
+    return "—";
+  const places = context.decimals;
+  return `${context.currency} ${new Intl.NumberFormat("de-CH", { minimumFractionDigits: places > 2 || minor % currencyScale(context) ? places : 0, maximumFractionDigits: places }).format(minor / currencyScale(context))}`;
+};
 export const termLabel = (months) =>
   months ? `${months} month${months === 1 ? "" : "s"}` : "Choose duration";
 export const countSaving = (count) =>
-  count >= 5 ? 15 : count >= 3 ? 10 : count >= 2 ? 5 : 0;
+  (pricing.policy?.countBands ?? []).filter((band) => count >= band.min).at(-1)
+    ?.saving ?? 0;
 let sequence = 0;
 const newId = () =>
   globalThis.crypto?.randomUUID?.() || `group-${Date.now()}-${++sequence}`;
@@ -253,27 +321,32 @@ export const groupTerm = (group) =>
     : termLabel(group.lines[0]?.months);
 export function quoteGroup(group) {
   const normalized = createGroup(group);
-  const bundleRate = countSaving(normalized.lines.length);
+  const count = normalized.lines.length;
+  const band = count >= 5 ? 5 : count >= 3 ? 3 : count >= 2 ? 2 : 1;
   const lines = normalized.lines.map((line) => {
     const item = findItem(line.catalogId, normalized.kind);
-    const termRate = TERM_SAVINGS[line.months] || 0;
-    const discount = Math.max(termRate, bundleRate);
-    const subtotal = line.months ? item.monthlyMinor * line.months : 0;
-    const total = Math.round((subtotal * (100 - discount)) / 100);
+    const priced = pricing.items.find(
+      (row) => row.id === line.catalogId && row.kind === normalized.kind,
+    )?.prices?.[line.months]?.[band];
     return {
+      ...(priced ?? {
+        subtotal: null,
+        total: null,
+        saving: null,
+        monthlyEquivalent: null,
+        discount: null,
+        reason: null,
+      }),
       ...line,
       name: item.name,
       kind: item.kind,
       monthlyMinor: item.monthlyMinor,
-      subtotal,
-      total,
-      saving: subtotal - total,
-      discount,
-      reason: termRate >= bundleRate ? "duration" : "bundle",
-      monthlyEquivalent: line.months ? total / line.months : 0,
     };
   });
-  const sum = (key) => lines.reduce((n, l) => n + l[key], 0);
+  const sum = (key) =>
+    lines.every((line) => Number.isFinite(line[key]))
+      ? lines.reduce((n, line) => n + line[key], 0)
+      : null;
   return {
     lines,
     subtotal: sum("subtotal"),
@@ -282,6 +355,8 @@ export function quoteGroup(group) {
     monthlyEquivalent: sum("monthlyEquivalent"),
     valid:
       lines.length > 0 &&
+      pricing.status === "ready" &&
+      lines.every((line) => Number.isFinite(line.total)) &&
       lines.every((l) => MONTHS.includes(l.months)) &&
       !normalized.needsReview,
   };
@@ -289,7 +364,10 @@ export function quoteGroup(group) {
 export function quoteCart(groups) {
   const quotes = groups.map(quoteGroup);
   const ids = quotes.flatMap((q) => q.lines.map((l) => l.catalogId));
-  const sum = (key) => quotes.reduce((n, q) => n + q[key], 0);
+  const sum = (key) =>
+    quotes.every((quote) => Number.isFinite(quote[key]))
+      ? quotes.reduce((n, quote) => n + quote[key], 0)
+      : null;
   return {
     subtotal: sum("subtotal"),
     saving: sum("saving"),

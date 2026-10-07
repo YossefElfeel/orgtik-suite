@@ -13,8 +13,19 @@
 //             orgtik:mock:<sandbox>:log   list of entries {epoch, app, method, url, headers, body, at, seed}
 // An entry's position in the list (1-based) is its sequence number. A reset starts a new epoch and
 // empties the list; entries from an older epoch are skipped.
+//
+// R1 draft: snapshot + commit use epoch/revision CAS across instances. A 409 requires discarding
+// speculative state; a 503 must never return mutation success. Legacy push/setMeta/clear remain
+// only for the old server adapter; use initialize/reset/commit for the new mutation path.
+// Authenticate and validate current membership + operation-specific permission BEFORE receipt
+// lookup. An idempotency receipt never grants access. context.actor is audit attribution alone:
+// trusted internal replay must use a committed domain command or an original authorization
+// decision/snapshot (for example entry.authorization), not today's roles after revocation.
+// Trusted replay is a process-internal capability; no client x-mock-replay header is authority.
 const fs = require("fs");
 const path = require("path");
+const crypto = require("node:crypto");
+const { performance } = require("node:perf_hooks");
 
 const MAX_ENTRIES = Number(process.env.MOCK_JOURNAL_MAX || 5000);
 const MAX_BODY = 512 * 1024; // Upstash's free tier refuses requests over 1 MB
@@ -26,60 +37,282 @@ const CHANGES = new Set(["POST", "PUT", "PATCH", "DELETE"]);
 const KEEP_HEADERS = /^(authorization|cookie|content-type|accept|accept-language|origin|referer|user-agent|x-[a-z0-9-]+)$/i;
 const DROP_HEADERS = /^x-(vercel|forwarded|real-ip|middleware|matched)/i;
 
-function memoryStore() {
-  let meta = null;
-  let log = [];
+const copy = value => JSON.parse(JSON.stringify(value));
+const unavailable = (message = "Journal storage unavailable. Please try again.") => Object.assign(new Error(message), { status: 503, code: "journal_unavailable" });
+const conflict = (code = "journal_conflict") => Object.assign(new Error(code === "operation_conflict" ? "This operation ID was already used for a different request." : "Workspace data changed concurrently. Refresh before trying again."), { status: 409, code });
+const emptyData = () => ({ meta: null, log: [], operations: {} });
+
+function expectedState(expected) {
+  if (!expected || typeof expected.expectedEpoch !== "string" || !expected.expectedEpoch || !Number.isSafeInteger(expected.expectedRevision) || expected.expectedRevision < 0) throw new TypeError("Journal commit requires expectedEpoch and expectedRevision");
+}
+
+function operationMetadata(operation) {
+  if (!operation) return null;
+  const { id, workspaceId, actor, fingerprint, result } = operation;
+  const identifier = value => (typeof value === "string" && value.length > 0 && value.length <= 200) || (typeof value === "number" && Number.isSafeInteger(value));
+  if (typeof id !== "string" || !identifier(id) || typeof workspaceId !== "string" || !identifier(workspaceId) || !identifier(actor?.userId) || (actor.impersonatedBy !== undefined && !identifier(actor.impersonatedBy)) || typeof fingerprint !== "string" || !fingerprint || fingerprint.length > 256) throw new TypeError("Invalid committed operation metadata");
+  const cleanActor = { userId: actor.userId, ...(actor.impersonatedBy !== undefined ? { impersonatedBy: actor.impersonatedBy } : {}) };
+  const receipt = { fingerprint, ...(result !== undefined ? { result: copy(result) } : {}) };
+  const secrets = /^(password|passwordHash|oldPassword|newPassword|currentPassword|confirmPassword|token|accessToken|refreshToken|secret|authorization|cookie)$/i;
+  const inspect = value => {
+    if (!value || typeof value !== "object") return;
+    for (const [key, item] of Object.entries(value)) {
+      if (secrets.test(key)) throw new TypeError("Committed operation results must omit credentials");
+      inspect(item);
+    }
+  };
+  inspect(receipt.result);
   return {
-    kind: "memory",
-    async getMeta() { return meta; },
-    async setMeta(m) { meta = m; },
-    async read(from) { return log.slice(from); },
-    async push(entry) { log.push(JSON.stringify(entry)); return log.length; },
-    async clear() { log = []; },
+    key: crypto.createHash("sha256").update(JSON.stringify([workspaceId, String(cleanActor.userId), id])).digest("hex"),
+    context: { workspaceId, actor: cleanActor, operationId: id },
+    receipt,
   };
 }
 
-function fileStore(file) {
-  fs.mkdirSync(path.dirname(file), { recursive: true });
-  const load = () => {
-    try { return JSON.parse(fs.readFileSync(file, "utf8")); } catch { return { meta: null, log: [] }; }
+function prepareCommit(entry, expected) {
+  expectedState(expected);
+  if (!entry || entry.epoch !== expected.expectedEpoch) throw new TypeError("Journal entry must use the expected epoch");
+  const operation = operationMetadata(expected.operation);
+  const persisted = copy(entry);
+  if (operation) {
+    persisted.context = operation.context;
+    // New committed context replaces the old saved bearer token for trusted internal replay.
+    persisted.headers = Object.fromEntries(Object.entries(persisted.headers || {}).filter(([key]) => !/^(authorization|cookie|x-mock-replay)$/i.test(key)));
+  }
+  const raw = JSON.stringify(persisted);
+  if (Buffer.byteLength(raw) + Buffer.byteLength(JSON.stringify(operation?.receipt || {})) > MAX_BODY) throw unavailable("Journal entry is too large to persist. Nothing was committed.");
+  return { raw, operation };
+}
+
+function assertCurrent(data, expected) {
+  if (data.meta?.epoch !== expected.expectedEpoch || data.log.length !== expected.expectedRevision) throw conflict();
+}
+
+function commitData(data, entry, expected) {
+  const { raw, operation } = prepareCommit(entry, expected);
+  if (data.meta?.epoch !== expected.expectedEpoch) throw conflict();
+  const prior = operation && data.operations[operation.key];
+  if (prior) {
+    if (prior.fingerprint !== operation.receipt.fingerprint) throw conflict("operation_conflict");
+    return { sequence: prior.sequence, replayed: true, ...(prior.result !== undefined ? { result: copy(prior.result) } : {}) };
+  }
+  assertCurrent(data, expected);
+  if (data.log.length >= MAX_ENTRIES) throw unavailable("Journal is full. Nothing was committed.");
+  data.log.push(raw);
+  const sequence = data.log.length;
+  if (operation) data.operations[operation.key] = { ...operation.receipt, sequence };
+  return { sequence, replayed: false, ...(operation?.receipt.result !== undefined ? { result: copy(operation.receipt.result) } : {}) };
+}
+
+function lookupData(data, operation, { expectedEpoch } = {}) {
+  if (typeof expectedEpoch !== "string" || !expectedEpoch) throw new TypeError("Operation lookup requires expectedEpoch");
+  if (data.meta?.epoch !== expectedEpoch) throw conflict();
+  const normalized = operationMetadata(operation);
+  if (!normalized) throw new TypeError("Operation lookup requires operation metadata");
+  const prior = data.operations[normalized.key];
+  if (!prior) return null;
+  if (prior.fingerprint !== normalized.receipt.fingerprint) throw conflict("operation_conflict");
+  return { sequence: prior.sequence, replayed: true, ...(prior.result !== undefined ? { result: copy(prior.result) } : {}) };
+}
+
+function resetData(data, meta, expected) {
+  expectedState(expected);
+  assertCurrent(data, expected);
+  if (!meta?.epoch || meta.epoch === expected.expectedEpoch) throw new TypeError("Journal reset requires a new epoch");
+  data.meta = copy(meta); data.log = []; data.operations = {};
+  return { meta: copy(data.meta), revision: 0, entries: [] };
+}
+
+function snapshotData(data, from = 0) {
+  return { meta: data.meta ? copy(data.meta) : null, revision: data.log.length, entries: data.log.slice(from) };
+}
+
+function memoryStore() {
+  const data = emptyData();
+  return {
+    kind: "memory",
+    async getMeta() { return data.meta ? copy(data.meta) : null; },
+    async setMeta(meta) { if (data.meta?.epoch !== meta.epoch) data.operations = {}; data.meta = copy(meta); },
+    async initialize(meta) { if (!data.meta) { if (data.log.length) throw unavailable("Journal metadata is missing; existing history was preserved."); data.meta = copy(meta); } return copy(data.meta); },
+    async read(from) { return data.log.slice(from); },
+    async push(entry) { data.log.push(JSON.stringify(entry)); return data.log.length; },
+    async clear() { data.log = []; data.operations = {}; },
+    async snapshot(from) { return snapshotData(data, from); },
+    async poll(from) { return snapshotData(data, from); },
+    async commit(entry, expected) { return commitData(data, entry, expected); },
+    async lookupOperation(operation, expected) { return lookupData(data, operation, expected); },
+    async reset(meta, expected) { return resetData(data, meta, expected); },
   };
-  const save = (d) => fs.writeFileSync(file, JSON.stringify(d));
+}
+
+function fileStore(file, { io = fs, lockTimeoutMs = 5000 } = {}) {
+  io.mkdirSync(path.dirname(file), { recursive: true });
+  const lockFile = `${file}.lock`;
+  const load = () => {
+    let data;
+    try { data = JSON.parse(io.readFileSync(file, "utf8")); }
+    catch (error) { if (error.code === "ENOENT") return emptyData(); throw unavailable("Journal file could not be read. Existing history was preserved."); }
+    if (!data || !Array.isArray(data.log) || !Object.hasOwn(data, "meta")) throw unavailable("Journal file is invalid. Existing history was preserved.");
+    data.operations ||= {};
+    if (typeof data.operations !== "object" || Array.isArray(data.operations)) throw unavailable("Journal operation receipts are invalid. Existing history was preserved.");
+    return data;
+  };
+  const save = data => {
+    const temp = `${file}.${process.pid}.${crypto.randomUUID()}.tmp`;
+    try {
+      io.writeFileSync(temp, JSON.stringify(data), { mode: 0o600 });
+      io.renameSync(temp, file);
+    } catch { throw unavailable(); }
+    finally { try { io.rmSync(temp, { force: true }); } catch { /* A failed cleanup cannot acknowledge a write. */ } }
+  };
+  const mutate = async fn => {
+    const deadline = performance.now() + lockTimeoutMs;
+    let handle;
+    for (;;) {
+      try { handle = io.openSync(lockFile, "wx", 0o600); break; }
+      catch (error) {
+        if (error.code !== "EEXIST") throw unavailable();
+        if (performance.now() >= deadline) throw unavailable("Journal file is locked by another instance. Nothing was committed.");
+        await new Promise(resolve => setTimeout(resolve, 10));
+      }
+    }
+    try {
+      const data = load();
+      const result = fn(data);
+      save(data);
+      return result;
+    } finally {
+      io.closeSync(handle);
+      io.rmSync(lockFile, { force: true });
+    }
+  };
   return {
     kind: "file",
     async getMeta() { return load().meta; },
-    async setMeta(m) { const d = load(); d.meta = m; save(d); },
+    async setMeta(meta) { return mutate(data => { if (data.meta?.epoch !== meta.epoch) data.operations = {}; data.meta = copy(meta); }); },
+    async initialize(meta) { return mutate(data => { if (!data.meta) { if (data.log.length) throw unavailable("Journal metadata is missing; existing history was preserved."); data.meta = copy(meta); } return copy(data.meta); }); },
     async read(from) { return load().log.slice(from); },
-    async push(entry) { const d = load(); d.log.push(JSON.stringify(entry)); save(d); return d.log.length; },
-    async clear() { const d = load(); d.log = []; save(d); },
+    async push(entry) { return mutate(data => { data.log.push(JSON.stringify(entry)); return data.log.length; }); },
+    async clear() { return mutate(data => { data.log = []; data.operations = {}; }); },
+    async snapshot(from) { return snapshotData(load(), from); },
+    async poll(from) { return snapshotData(load(), from); },
+    async commit(entry, expected) { return mutate(data => commitData(data, entry, expected)); },
+    async lookupOperation(operation, expected) { return lookupData(load(), operation, expected); },
+    async reset(meta, expected) { return mutate(data => resetData(data, meta, expected)); },
   };
 }
 
-function redisStore(url, token, prefix) {
-  const metaKey = `${prefix}:meta`;
-  const logKey = `${prefix}:log`;
+// Lua scripts keep the snapshot, CAS append/receipt and reset atomic across Redis instances.
+const SNAPSHOT = `-- orgtik-journal-snapshot-v1
+local meta = redis.call('GET', KEYS[1])
+return {meta or '', redis.call('LLEN', KEYS[2]), redis.call('LRANGE', KEYS[2], ARGV[1], '-1')}`;
+const INITIALIZE = `-- orgtik-journal-initialize-v1
+local meta = redis.call('GET', KEYS[1])
+if meta then return meta end
+if redis.call('LLEN', KEYS[2]) > 0 then return '' end
+redis.call('SET', KEYS[1], ARGV[1])
+return ARGV[1]`;
+const LOOKUP = `-- orgtik-journal-lookup-v1
+local meta = redis.call('GET', KEYS[1])
+if not meta or cjson.decode(meta).epoch ~= ARGV[1] then return cjson.encode({status='conflict'}) end
+local raw = redis.call('HGET', KEYS[2], ARGV[2])
+if not raw then return cjson.encode({status='missing'}) end
+local prior = cjson.decode(raw)
+if prior.fingerprint ~= ARGV[3] then return cjson.encode({status='operation_conflict'}) end
+return cjson.encode({status='duplicate', sequence=prior.sequence, result=prior.result})`;
+const COMMIT = `-- orgtik-journal-commit-v1
+local rawMeta = redis.call('GET', KEYS[1])
+if not rawMeta or cjson.decode(rawMeta).epoch ~= ARGV[1] then return cjson.encode({status='conflict'}) end
+if ARGV[5] ~= '' then
+  local raw = redis.call('HGET', KEYS[3], ARGV[5])
+  if raw then
+    local prior = cjson.decode(raw)
+    if prior.fingerprint ~= ARGV[6] then return cjson.encode({status='operation_conflict'}) end
+    return cjson.encode({status='duplicate', sequence=prior.sequence, result=prior.result})
+  end
+end
+local length = redis.call('LLEN', KEYS[2])
+if length ~= tonumber(ARGV[2]) then return cjson.encode({status='conflict'}) end
+if length >= tonumber(ARGV[4]) then return cjson.encode({status='full'}) end
+local receipt = nil
+if ARGV[5] ~= '' then receipt = cjson.decode(ARGV[7]) end
+local sequence = redis.call('RPUSH', KEYS[2], ARGV[3])
+local result = nil
+if receipt then
+  receipt.sequence = sequence
+  redis.call('HSET', KEYS[3], ARGV[5], cjson.encode(receipt))
+  result = receipt.result
+end
+return cjson.encode({status='committed', sequence=sequence, result=result})`;
+const RESET = `-- orgtik-journal-reset-v1
+local raw = redis.call('GET', KEYS[1])
+if not raw or cjson.decode(raw).epoch ~= ARGV[1] or redis.call('LLEN', KEYS[2]) ~= tonumber(ARGV[2]) then return 0 end
+redis.call('DEL', KEYS[2], KEYS[3])
+redis.call('SET', KEYS[1], ARGV[3])
+return 1`;
+const SET_META = `-- orgtik-journal-set-meta-v1
+local prior = redis.call('GET', KEYS[1])
+if prior and cjson.decode(prior).epoch ~= cjson.decode(ARGV[1]).epoch then redis.call('DEL', KEYS[2]) end
+redis.call('SET', KEYS[1], ARGV[1])
+return 1`;
+
+function redisStore(url, token, prefix, { fetch: request = globalThis.fetch } = {}) {
+  const metaKey = `${prefix}:meta`, logKey = `${prefix}:log`, operationsKey = `${prefix}:operations`;
   async function pipeline(commands) {
-    const res = await fetch(`${url.replace(/\/$/, "")}/pipeline`, {
-      method: "POST",
-      headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
-      body: JSON.stringify(commands),
-    });
-    if (!res.ok) throw new Error(`journal store answered ${res.status}`);
-    const out = await res.json();
-    for (const r of out) if (r.error) throw new Error(`journal store: ${r.error}`);
-    return out.map((r) => r.result);
+    try {
+      const response = await request(`${url.replace(/\/$/, "")}/pipeline`, {
+        method: "POST", headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
+        body: JSON.stringify(commands), signal: AbortSignal.timeout(10000),
+      });
+      if (!response.ok) throw unavailable();
+      const out = await response.json();
+      if (!Array.isArray(out) || out.length !== commands.length || out.some(row => !row || row.error || !Object.hasOwn(row, "result"))) throw unavailable();
+      return out.map(row => row.result);
+    } catch { throw unavailable(); }
   }
+  const evaluate = async (script, keys, args) => (await pipeline([["EVAL", script, String(keys.length), ...keys, ...args]]))[0];
+  const snapshot = async (from = 0) => {
+    const [meta, revision, entries] = await evaluate(SNAPSHOT, [metaKey, logKey], [String(from)]);
+    return { meta: meta ? JSON.parse(meta) : null, revision: Number(revision), entries: entries || [] };
+  };
   return {
     kind: "redis",
-    async getMeta() { const [m] = await pipeline([["GET", metaKey]]); return m ? JSON.parse(m) : null; },
-    async setMeta(m) { await pipeline([["SET", metaKey, JSON.stringify(m)]]); },
+    async getMeta() { const [meta] = await pipeline([["GET", metaKey]]); return meta ? JSON.parse(meta) : null; },
+    async setMeta(meta) { await evaluate(SET_META, [metaKey, operationsKey], [JSON.stringify(meta)]); },
+    async initialize(meta) { const raw = await evaluate(INITIALIZE, [metaKey, logKey], [JSON.stringify(meta)]); if (!raw) throw unavailable("Journal metadata is missing; existing history was preserved."); return JSON.parse(raw); },
     async read(from) { const [list] = await pipeline([["LRANGE", logKey, String(from), "-1"]]); return list || []; },
-    async push(entry) { const [len] = await pipeline([["RPUSH", logKey, JSON.stringify(entry)]]); return Number(len); },
-    async clear() { await pipeline([["DEL", logKey]]); },
-    // One round trip for the check made before every request.
-    async poll(from) {
-      const [m, list] = await pipeline([["GET", metaKey], ["LRANGE", logKey, String(from), "-1"]]);
-      return { meta: m ? JSON.parse(m) : null, entries: list || [] };
+    async push(entry) { const [length] = await pipeline([["RPUSH", logKey, JSON.stringify(entry)]]); return Number(length); },
+    async clear() { await pipeline([["DEL", logKey, operationsKey]]); },
+    snapshot,
+    poll: snapshot,
+    async commit(entry, expected) {
+      const { raw, operation } = prepareCommit(entry, expected);
+      let reply;
+      try { reply = JSON.parse(await evaluate(COMMIT, [metaKey, logKey, operationsKey], [expected.expectedEpoch, String(expected.expectedRevision), raw, String(MAX_ENTRIES), operation?.key || "", operation?.receipt.fingerprint || "", JSON.stringify(operation?.receipt || {})])); }
+      catch { throw unavailable(); }
+      if (reply.status === "conflict" || reply.status === "operation_conflict") throw conflict(reply.status === "operation_conflict" ? reply.status : undefined);
+      if (reply.status === "full") throw unavailable("Journal is full. Nothing was committed.");
+      if (!["committed", "duplicate"].includes(reply.status) || !Number.isSafeInteger(reply.sequence) || reply.sequence < 1) throw unavailable();
+      return { sequence: reply.sequence, replayed: reply.status === "duplicate", ...(Object.hasOwn(reply, "result") ? { result: reply.result } : {}) };
+    },
+    async lookupOperation(operation, { expectedEpoch } = {}) {
+      if (typeof expectedEpoch !== "string" || !expectedEpoch) throw new TypeError("Operation lookup requires expectedEpoch");
+      const normalized = operationMetadata(operation);
+      if (!normalized) throw new TypeError("Operation lookup requires operation metadata");
+      let reply;
+      try { reply = JSON.parse(await evaluate(LOOKUP, [metaKey, operationsKey], [expectedEpoch, normalized.key, normalized.receipt.fingerprint])); }
+      catch { throw unavailable(); }
+      if (reply.status === "missing") return null;
+      if (reply.status === "conflict" || reply.status === "operation_conflict") throw conflict(reply.status === "operation_conflict" ? reply.status : undefined);
+      if (reply.status !== "duplicate" || !Number.isSafeInteger(reply.sequence) || reply.sequence < 1) throw unavailable();
+      return { sequence: reply.sequence, replayed: true, ...(Object.hasOwn(reply, "result") ? { result: reply.result } : {}) };
+    },
+    async reset(meta, expected) {
+      expectedState(expected);
+      if (!meta?.epoch || meta.epoch === expected.expectedEpoch) throw new TypeError("Journal reset requires a new epoch");
+      const result = await evaluate(RESET, [metaKey, logKey, operationsKey], [expected.expectedEpoch, String(expected.expectedRevision), JSON.stringify(meta)]);
+      if (result !== 1) throw conflict();
+      return { meta: copy(meta), revision: 0, entries: [] };
     },
   };
 }

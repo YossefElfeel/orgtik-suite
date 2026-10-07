@@ -131,7 +131,8 @@
     "digital_marketing": "التسويق",
     "sales": "العملاء",
     "website_manager": "مدير الموقع",
-    "website_manager_legacy": "النظام القديم"
+    "website_manager_legacy": "النظام القديم",
+    "platform_admin": "الإدارة"
   },
   "Roles": {
     "wm_admin": "مسؤول",

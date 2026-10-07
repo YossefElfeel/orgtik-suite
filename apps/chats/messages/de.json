@@ -33,7 +33,7 @@
   "appearance.accent": "Systemfarbe",
   "appearance.accentHint": "Nur für Sie, auf diesem Gerät. Türkis, Bernstein, Violett und Blau sind für die Anwesenheit reserviert und werden daher nicht angeboten: Eine Akzentfarbe, die wie ein Status aussieht, würde als Status gelesen.",
   "appearance.accentShort": "Nur für Sie, auf diesem Gerät.",
-  "boards.saved": "Wird beim Zeichnen in Dateien gespeichert",
+  "boards.saved": "Änderungen werden noch nicht gespeichert",
   "boards.subtitle": "Ein Whiteboard ohne Meeting",
   "boards.title": "Whiteboard",
   "calendar.free": "Nichts gebucht",

@@ -13,7 +13,7 @@
     "summary": {
       "label": "Übersicht",
       "monthly": "Monatlich gesamt",
-      "monthlyHint": "Nur kostenpflichtige Tools. Jahrespläne zählen mit einem Zwölftel; Testphasen sind nicht enthalten.",
+      "monthlyHint": "Nur bezahlte Tools, über die gekaufte Laufzeit gemittelt; Testphasen sind ausgeschlossen.",
       "seats": "Plätze",
       "seatsHint": "Aktive Mitglieder, die einen Platz belegen. Pläne pro Platz berechnen jeden einzeln.",
       "currency": "Währung",
@@ -66,7 +66,10 @@
       "moveTo": "Zu {plan} wechseln",
       "moveLower": "Zu einem kleineren Plan wechseln",
       "endTrial": "Testphase beenden",
-      "cancel": "Kündigen"
+      "cancel": "Kündigen",
+      "perTerm": "für {count, plural, one {# Monat} other {# Monate}}",
+      "everyTerm": "Alle {count, plural, one {# Monat} other {# Monate}}",
+      "prepaidTerms": "Bereits bezahlte zukünftige Zeiträume"
     },
     "done": {
       "trialEnded": "Die Testphase von {tool} ist beendet.",
@@ -180,7 +183,18 @@
         "refunded": "Erstattet"
       },
       "refunds": "Erstattungen",
-      "creditNotes": "Gutschriften"
+      "creditNotes": "Gutschriften",
+      "ledger": {
+        "period_credit": "Gutschrift für ungenutzten Zeitraum",
+        "account_credit": "Verwendetes Arbeitsbereichsguthaben",
+        "bundle_discount": "Bundle-Rabatt",
+        "coupon_discount": "Gutscheinrabatt",
+        "credit_carried": "Übertragenes Guthaben"
+      },
+      "taxIncluded": "Enthaltene Steuer ({rate})",
+      "taxAdded": "Zusätzliche Steuer ({rate})",
+      "taxReverseCharge": "Reverse Charge · keine zusätzliche Steuer",
+      "lineCapacity": "{count, plural, one {# gekaufter Platz} other {# gekaufte Plätze}}"
     },
     "cards": {
       "title": "Zahlungsmethoden",

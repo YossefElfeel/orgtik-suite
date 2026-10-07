@@ -1,4 +1,15 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
+import React, {
+  lazy,
+  Suspense,
+  useEffect,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import {
+  getPricingSnapshot,
+  loadPublicCatalog,
+  subscribePricing,
+} from "./reference/purchase-catalog.js";
 import {
   normalizeLocation,
   pageOf,
@@ -28,6 +39,14 @@ const pages = {
 normalizeLocation();
 
 export function App() {
+  useSyncExternalStore(
+    subscribePricing,
+    getPricingSnapshot,
+    getPricingSnapshot,
+  );
+  useEffect(() => {
+    loadPublicCatalog();
+  }, []);
   const [path, setPath] = useState(window.location.pathname);
   useEffect(() => {
     const update = () => {

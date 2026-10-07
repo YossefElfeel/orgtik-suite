@@ -39,6 +39,7 @@ function makeStore({ identity }) {
     gateways: [],
     templates: [],
     notifications: [],
+    mailbox: [],
     audit: [],
     migrations: [],
     staffRoles: {},
@@ -71,7 +72,7 @@ function makeStore({ identity }) {
     { code: "SUMMER10", kind: "percent", value: 10, appliesTo: "chat_pro", maxRedemptions: 100, redeemed: 100, validFrom: at(-120), validTo: at(-30), active: false, note: "Used up" },
   ];
 
-  // ---- tax rules (R03-TAX; G-12 open: whether prices show tax-inclusive is not decided) ----
+  // ---- tax rules (D-060: region display; regulatory integrations remain mock/deferred) ----
   db.taxRules = [
     { country: "SA", name: "VAT", rate: 15, inclusive: null, b2bReverseCharge: false, eInvoicing: "ZATCA (Fatoora): QR on simplified invoices; B2B clearance in phase 2", active: true },
     { country: "AE", name: "VAT", rate: 5, inclusive: null, b2bReverseCharge: false, eInvoicing: "OrgTik TRN and customer TRN on tax invoices", active: true },
@@ -82,6 +83,7 @@ function makeStore({ identity }) {
   ];
 
   // ---- gateways and routing (R03-PAY, G-11; simulated) ----
+  for (const rule of db.taxRules) rule.inclusive = ["SA", "AE", "KW", "QA", "BH", "OM"].includes(rule.country);
   db.gateways = [
     { id: "gw_paymob", name: "Paymob", methods: ["card", "wallet"], countries: ["EG"], currencies: ["EGP"], recurring: true, priority: 1, active: true },
     { id: "gw_fawry", name: "Fawry", methods: ["cash_code"], countries: ["EG"], currencies: ["EGP"], recurring: false, priority: 2, active: true, note: "Cash: renews by a pay link before the renewal date" },
@@ -92,6 +94,9 @@ function makeStore({ identity }) {
   ];
 
   // ---- templates (ADM-31): the messages the platform sends, in the 5 languages ----
+  // Keep retired gateway records for historical invoice/payment references, never new routing.
+  for (const gateway of db.gateways) if (["gw_moyasar", "gw_checkout", "gw_knet"].includes(gateway.id)) gateway.active = false;
+  for (const [id, name, priority] of [["gw_tap", "Tap", 1], ["gw_hyperpay", "HyperPay", 2]]) db.gateways.push({ id, name, methods: ["card", "mada", "knet", "apple_pay"], countries: ["SA", "AE", "QA", "BH", "OM", "KW"], currencies: ["SAR", "AED", "QAR", "BHD", "OMR", "KWD"], recurring: true, priority, active: true, note: "Simulated cards recur; KNET uses a pay link" });
   const T = (key, channel, name, subjectEn) => ({ key, channel, name, subject: L(subjectEn, "", "", "", ""), body: L(`${subjectEn}\n\n{{workspace}} · {{link}}`, "", "", "", ""), variables: ["workspace", "owner", "link"], updatedAt: at(-20), updatedBy: "seed" });
   db.templates = [
     T("trial_ending", "email", "Trial ending", "Your trial ends in {{days}} days"),
@@ -118,8 +123,8 @@ function makeStore({ identity }) {
     priceChange: { noticeDays: 30 }, // G-02
     cardCountryReviewAbove: { USD: 1000 }, // R03-X7
     switches: {
-      seatModel: { value: "A", decided: false, gap: "G-04", options: ["A", "B"], note: "A: one workspace seat count on every per-user line (as the files). B: each per-user tool bills only the users with access." },
-      taxDisplay: { value: null, decided: false, gap: "G-12", options: ["inclusive", "exclusive"], note: "Prices shown with or without tax; e-invoicing depends on OrgTik's legal entities." },
+      seatModel: { value: "B", decided: true, gap: "G-04", options: ["A", "B"], note: "D-061: purchased capacity per tool, assigned separately from pending reservations." },
+      taxDisplay: { value: "regional", decided: true, gap: "G-12", options: ["regional"], note: "D-060: GCC inclusive; Europe/CH exclusive; mock-valid EU business VAT IDs reverse-charge." },
       addOns: { value: false, decided: false, gap: "G-18", options: [true, false], note: "Add-ons and overage (storage, mailboxes, SMS/WhatsApp credits)." },
       generalPaid: { value: null, decided: false, gap: "G-21", options: ["more users, custom roles, 2FA enforcement, longer audit log"], note: "What General's paid plans unlock." },
       hostingOps: { value: "out_of_scope", decided: false, gap: "G-24", options: ["out_of_scope"], note: "Hosting and email infrastructure need their own ops spec." },
@@ -214,7 +219,10 @@ function makeStore({ identity }) {
 
   // ---- invoices and payments (state table "Invoice", R03-R1) ----
   let invNo = 1040;
-  const usdRate = (cur) => (cur === "USD" ? 1 : pricing.rate(db, "USD", cur) ?? 1);
+  const usdRate = cur => {
+    const value = cur === "USD" ? 1 : pricing.rate(db, "USD", cur);
+    return Number.isFinite(value) && value > 0 ? value : null;
+  };
   const invoice = (ws, state, lineItems, o = {}) => {
     const cur = ws.currency, dec = db.currencies[cur]?.decimals ?? 2;
     const rule = db.taxRules.find((t) => t.country === ws.country && t.active);
@@ -290,17 +298,72 @@ function makeStore({ identity }) {
     workspace: (wid) => db.workspaces.find((w) => w.id === wid),
     workspaceOfUser: (key) => db.workspaces.find((w) => w.members.some((m) => m.userKey === key && m.status === "active")),
     seats: (ws) => ws.members.filter((m) => m.role !== "guest" && m.status === "active").length,
+    assignedSeats: (ws, tool, planId) => {
+      const members = ws.members.filter(m => m.status === "active" && (!m.tools || m.tools.includes(tool)));
+      const guestLimit = db.plans.find(p => p.id === planId)?.guestLimit ?? 0;
+      return members.filter(m => m.role !== "guest").length + Math.max(0, members.filter(m => m.role === "guest").length - guestLimit);
+    },
+    reservedSeats: (ws, tool) => ws.members.filter(m => m.status === "invited" && m.role !== "guest" && (!m.tools || m.tools.includes(tool))).length,
+    purchasedSeats: (ws, tool, planId) => {
+      const plan = db.plans.find(p => p.id === planId) ?? db.plans.find(p => p.tool === tool && p.perUser);
+      if (!plan?.perUser) return plan?.contractedQuantity ?? 1;
+      const current = ws.lines.find(l => l.tool === tool && !["ended", "deleted"].includes(l.state));
+      return Math.max(plan.minSeats ?? 1, current?.snapshot.quantity ?? S.assignedSeats(ws, tool, plan.id));
+    },
     log: (by, action, target, extra = {}) => db.audit.unshift({ at: iso(now()), by, action, target, ...extra }),
     resolve: (planId, country, cycle, seats) => pricing.resolveLine(db, { planId, cycle, country, seats }),
+    resolveForWorkspace: (planId, ws, cycle = "monthly", quantity) => {
+      const plan = db.plans.find(p => p.id === planId);
+      if (plan?.private && (plan.workspaceId !== ws.id || plan.private.currency !== ws.currency || plan.private.cycle && plan.private.cycle !== cycle)) return null;
+      const resolved = pricing.resolveWorkspaceLine(db, { planId, cycle, workspace: ws, seats: quantity ?? S.purchasedSeats(ws, plan?.tool, planId) });
+      return resolved && plan?.contractedQuantity ? { ...resolved, quantity: plan.contractedQuantity } : resolved;
+    },
+    taxForWorkspace: ws => pricing.taxForWorkspace(db, ws),
+    routeGateways: (ws, { method, recurring = false } = {}) => db.gateways.filter(g => g.active && (!recurring || g.recurring && !["knet", "cash_code"].includes(method)) && (!method || g.methods.includes(method)) && (g.countries.includes(ws.country) || g.countries.includes("*")) && g.currencies.includes(ws.currency)).sort((a, b) => a.priority - b.priority),
+    notifyOwner: (ws, kind, details, eventKey) => {
+      if (eventKey && db.notifications.some(n => n.eventKey === eventKey)) return;
+      const owner = ws.members.find(m => m.role === "owner" && m.status === "active");
+      const at = iso(now());
+      db.notifications.push({ id: id("nt"), workspaceId: ws.id, userKey: owner?.userKey ?? null, kind, title: details.title ?? kind, ...details, eventKey, at, read: false });
+      db.mailbox.push({ id: id("mail"), workspaceId: ws.id, to: owner?.email ?? identity.findByKey(owner?.userKey)?.email ?? ws.billing?.email, template: kind, ...details, eventKey, at, delivery: "mock" });
+    },
     // A customer who signs up on the website: their own workspace on the free General plan.
-    createWorkspace: ({ wsId, ownerKey, name, email, country = "CH", currency = "CHF", createdAt }) => {
+    createWorkspace: ({ wsId, ownerKey, name, email, country = "CH", currency = "CHF", createdAt, registration = false }) => {
       const slug = `${String(name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "workspace"}-${seq + 1}`;
       const joinedAt = createdAt ?? iso(now());
       const ws = workspace({ id: wsId ?? id("ws"), name, slug, country, currency, createdAt: joinedAt, members: [{ userKey: ownerKey, role: "owner", status: "active", tools: null, joinedAt }], billing: { legalName: name, email, address: "", taxId: "", country } });
       ws.lines = [line(ws, "general_free", "free", { startedAt: joinedAt })];
+      ws.currencyLocked = false;
+      if (registration) ws.billingInitialized = false;
       db.workspaces.push(ws);
       return ws;
     },
+  };
+  const modernOperational = clone({ gateways: db.gateways, switches: db.settings.switches });
+  S.exportState = () => ({ platformVersion: 2, db: clone(db), sequence: seq, failNext: S.failNext ?? 0 });
+  S.importState = (snapshot) => {
+    if (!snapshot?.db || !Array.isArray(snapshot.db.workspaces) || !Array.isArray(snapshot.db.invoices) || !Number.isSafeInteger(snapshot.sequence) || snapshot.sequence < 1000) throw Object.assign(new Error("Committed platform state is incomplete."), { status: 503 });
+    const incoming = clone(snapshot.db);
+    for (const key of Object.keys(db)) delete db[key];
+    Object.assign(db, incoming);
+    seq = snapshot.sequence;
+    S.failNext = snapshot.failNext ?? 0;
+    db.mailbox ??= [];
+    if (snapshot.platformVersion !== 2) {
+      // Operational decisions change future behavior. Imported invoice/payment/line snapshots
+      // are historical facts and are never re-priced or re-issued by this migration.
+      Object.assign(db.settings.switches, modernOperational.switches);
+      db.gateways = clone(modernOperational.gateways);
+      for (const draft of db.priceDrafts) if (draft.state === "published") draft.appliedAt ??= draft.publishedAt;
+    }
+    return S;
+  };
+  S.ensureRegisteredWorkspaces = () => {
+    for (const user of identity.users) {
+      if (!user.signupInfo) continue;
+      const wsId = `ws_${user.key}`;
+      if (!S.workspace(wsId)) S.createWorkspace({ wsId, ownerKey: user.key, name: user.signupInfo.company || `${user.firstName}'s workspace`, email: user.email, createdAt: user.createdAt, registration: true });
+    }
   };
   return S;
 }

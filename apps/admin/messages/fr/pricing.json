@@ -122,7 +122,11 @@
       "source": "Source",
       "tableLabel": "Prix de {plan}",
       "empty": "Aucun pays à afficher",
-      "note": "Prix publiés uniquement, avant coupons et taxes."
+      "note": "Prix publiés avec l’affichage fiscal de chaque pays. Les codes s’appliquent au paiement.",
+      "taxInclusive": "Prix comprenant {rate} de taxe.",
+      "taxExclusive": "Prix hors taxe de {rate}.",
+      "taxReverseCharge": "Autoliquidation; aucune taxe ajoutée.",
+      "taxNone": "Aucune taxe ajoutée selon la règle configurée."
     },
     "zones": {
       "title": "Zones et pays",

@@ -38,7 +38,7 @@ test("mock artifact rejects missing startup imports and accepts a self-contained
     fs.mkdirSync(path.join(fn, "mock/api"), { recursive: true });
     fs.writeFileSync(path.join(fn, ".vc-config.json"), JSON.stringify({ handler: "mock/api/index.js" }));
     fs.writeFileSync(path.join(fn, "mock/api/index.js"), "module.exports = () => {};\n");
-    assert.throws(() => checkMockBundle(output), /Cannot find module 'express'/);
+    assert.throws(() => checkMockBundle(output), /Cannot find module 'express'|Mock dependency express resolves outside the uploaded artifact/);
     const runtime = path.join(folder, "runtime");
     for (const name of ["express", "cors", "multer", "socket.io", "@iconify/utils"]) {
       const pkg = path.join(runtime, "node_modules", name);
@@ -57,6 +57,14 @@ test("mock artifact rejects missing startup imports and accepts a self-contained
     copyMockRuntime(runtime, output);
     assert.doesNotThrow(() => checkMockBundle(output));
     assert.ok(fs.existsSync(path.join(fn, "mock/api/index.js")), "Copy preserves the existing handler and assets");
+    const historicalSource = new URL("../../mock/apps/admin/legacy-v1/identity.js", import.meta.url);
+    if (fs.existsSync(historicalSource)) {
+      const historical = path.join(fn, "mock/apps/admin/legacy-v1/identity.js");
+      fs.writeFileSync(historical, "A tracer rewrote historical financial authority\n");
+      assert.throws(() => checkMockBundle(output), /Historical financial reducer was altered or omitted/);
+      fs.copyFileSync(historicalSource, historical);
+      assert.doesNotThrow(() => checkMockBundle(output));
+    }
     const segment = path.join(media, "mp4_product_demo/segment-0.ts");
     fs.writeFileSync(segment, "Incorrect TypeScript treatment of a transport-stream asset");
     assert.throws(() => checkMockBundle(output), /HLS asset was altered or omitted/);

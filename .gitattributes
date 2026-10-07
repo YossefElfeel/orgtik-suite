@@ -21,3 +21,6 @@
 
 # HLS transport-stream segments use .ts but contain binary media, never TypeScript.
 mock/apps/files/assets/hls/**/*.ts binary
+
+# Historical financial reducers are fixtures pinned to their original Git blob bytes.
+mock/apps/admin/legacy-v1/* -text

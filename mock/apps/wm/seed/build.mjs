@@ -16,6 +16,7 @@ import { field } from "./fields.mjs";
 import { buildPages } from "./pages.mjs";
 import { buildCatalog } from "./catalog.mjs";
 import { buildPricing } from "./pricing.mjs";
+import { applyPlatformCommerceCopy, platformPricingEntry } from "./platform-pricing.mjs";
 import { buildMedia } from "./media.mjs";
 import { buildSeo } from "./seo.mjs";
 import { restoredRoadmap, followupSource, ROADMAP_REF, WEBSITE_REF } from "./source-overrides.mjs";
@@ -194,6 +195,7 @@ const articles = INS.map((a, i) => {
 // every page repeats. navigation.js turns the site's file links into paths.
 const { toSiteHref } = await load("navigation.js");
 const site_ = buildPages({ ref, toSiteHref, entry });
+applyPlatformCommerceCopy(site_.global);
 // Format labels exist even when no story of that department has been published.
 site_.global.push(entry("gl_caseFormats", "global", site_.global.length + 1,
   { name: "Case study formats", slug: {}, layout: [{ key: "formats", kind: "data", label: "caseFormats", node: { kind: "group", fields: Object.entries({design:"caseFormatDesign",development:"caseFormatDevelopment",hosting:"caseFormatHosting","digital-marketing":"caseFormatMarketing","it-support":"caseFormatSupport"}).map(([key,label]) => [key, { kind: "text", label }]).reduce((all,[key,value]) => ({...all,[key]:value}),{}) } }] },
@@ -217,7 +219,7 @@ const out = {
   },
   formats: CASE_STUDY_FORMATS,
   caseStudies,
-  entries: [...site_.pages, ...site_.global, ...cat.strings, ...cat.legal, ...cat.roadmap, ...pricingEntries, ...families, ...services, ...modules, ...articles],
+  entries: [...site_.pages, ...site_.global, ...cat.strings, platformPricingEntry(SEEDED_AT), ...cat.legal, ...cat.roadmap, ...pricingEntries, ...families, ...services, ...modules, ...articles],
   ideas: cat.ideas,
   media,
   seo: buildSeo({ ref, SEEDED_AT, read: (f) => fs.readFileSync(f, "utf8") }),

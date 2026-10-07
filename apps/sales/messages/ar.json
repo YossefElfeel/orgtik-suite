@@ -1171,7 +1171,8 @@
       "digital_marketing": "التسويق",
       "sales": "إدارة العملاء",
       "website_manager": "الموقع",
-      "website_manager_legacy": "نظام المحتوى القديم"
+      "website_manager_legacy": "نظام المحتوى القديم",
+      "platform_admin": "الإدارة"
     },
     "appName": "إدارة العملاء"
   },

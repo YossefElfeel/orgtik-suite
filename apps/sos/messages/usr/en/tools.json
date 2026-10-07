@@ -16,6 +16,7 @@
     },
     "actions": {
       "open": "Open",
+      "openTool": "Open {tool}",
       "seePlans": "See plans",
       "choosePlan": "Choose a plan",
       "startTrial": "Start {days}-day free trial",
@@ -43,7 +44,7 @@
     },
     "plans": {
       "title": "Plans",
-      "pricesFor": "Per-user prices are for the {count, plural, one {# person} other {# people}} in your workspace, in {currency}.",
+      "pricesFor": "Per-seat plans use {count, plural, one {# purchased seat} other {# purchased seats}}, in {currency}.",
       "cycle": "Billing cycle",
       "monthly": "Monthly",
       "yearly": "Yearly",
@@ -62,8 +63,8 @@
         "year": "per user a year"
       },
       "seatsTotal": {
-        "month": "{count, plural, one {# user} other {# users}}: <total>{amount}</total> a month",
-        "year": "{count, plural, one {# user} other {# users}}: <total>{amount}</total> a year"
+        "month": "{count, plural, one {# purchased seat} other {# purchased seats}}: <total>{amount}</total> a month",
+        "year": "{count, plural, one {# purchased seat} other {# purchased seats}}: <total>{amount}</total> a year"
       },
       "yearlySaving": "You save {pct}% compared with paying monthly",
       "minSeats": "At least {count, plural, one {# user} other {# users}}",
@@ -98,7 +99,12 @@
       "noPlansBody": "This tool is sold on request. Ask for a custom plan and we'll send you a quote.",
       "notFound": "This tool doesn't exist",
       "backToTools": "Back to tools and plans",
-      "failed": "The plans couldn't be loaded"
+      "failed": "The plans couldn't be loaded",
+      "contractCapacity": "Includes {count, plural, one {# purchased seat} other {# purchased seats}}.",
+      "taxInclusive": "Prices include {rate} tax.",
+      "taxExclusive": "Prices exclude {rate} tax.",
+      "taxReverseCharge": "Reverse charge applies; no tax added.",
+      "taxNone": "No tax added under the configured rule."
     },
     "features": {
       "general": {
@@ -185,8 +191,8 @@
       "order": "Your order",
       "lineName": "{tool} · {plan}",
       "perSeat": {
-        "monthly": "<unit>{amount}</unit> × {count, plural, one {# user} other {# users}}, billed monthly",
-        "yearly": "<unit>{amount}</unit> × {count, plural, one {# user} other {# users}}, billed yearly"
+        "monthly": "<unit>{amount}</unit> × {count, plural, one {# purchased seat} other {# purchased seats}}, billed monthly",
+        "yearly": "<unit>{amount}</unit> × {count, plural, one {# purchased seat} other {# purchased seats}}, billed yearly"
       },
       "billed": {
         "monthly": "Billed monthly",
@@ -233,7 +239,33 @@
       "paid": "Paid",
       "whereInvoice": "The invoice is in <link>Billing › Invoices</link> whenever you need it.",
       "openTool": "Open {tool}",
-      "toHome": "Back to home"
+      "toHome": "Back to home",
+      "taxInclusive": "Tax included ({rate})",
+      "taxExclusive": "Tax added ({rate})",
+      "taxReverseCharge": "Reverse charge · no tax added",
+      "taxInclusiveNote": "Plan prices include {rate} tax, already included in this total.",
+      "taxExclusiveNote": "Plan prices exclude {rate} tax, added to this total.",
+      "taxReverseChargeNote": "Reverse charge applies; no tax added.",
+      "taxNoneNote": "No tax added under the configured rule.",
+      "accountCreditApplied": "Workspace credit applied",
+      "creditCarried": "{amount} credit remains in this workspace for a future payment.",
+      "contractCapacity": "{cycle} contract, including {count} purchased seats.",
+      "doneBodyMany": "{count, plural, one {Your plan is active.} other {Your # plans are active.}}",
+      "unconfirmedTitle": "Payment status unconfirmed",
+      "unconfirmedBody": "We couldn’t confirm the payment result. Retry to recover the same attempt using your original order and payment method.",
+      "recoverPayment": "Recover payment",
+      "recoveryWorkspace": "Payment recovery for {workspace}",
+      "recoveryLocked": "The original order, billing name and payment method are locked until the payment status is confirmed.",
+      "recoveryContextMismatch": "Switch to {workspace} using the same account to recover this payment. No new payment will be started.",
+      "recoveryStorageError": "This browser can’t save payment recovery. Enable session storage, then try again.",
+      "savedRecoveryError": "The saved payment recovery could not be read. Review your invoices before starting another payment.",
+      "reviewInvoices": "Review invoices",
+      "recoveryAccountMismatch": "Sign in with the account that started this payment to recover it. No new payment will be started.",
+      "quoteExpiredTitle": "Quote expired",
+      "quoteExpiredBody": "Review the updated total before paying. Payment will require a new confirmation.",
+      "quoteReviewTitle": "Review the updated quote",
+      "quoteReviewBody": "This quote can no longer be used. Review the updated total and your existing invoices before trying again.",
+      "recoveryQuoteBlocked": "The server could not recover the original quote. Review your invoices before starting another payment."
     },
     "custom": {
       "title": "Custom plan",
@@ -242,15 +274,15 @@
       "formBody": "Tell us what you need. OrgTik's team replies with a quote, usually within two working days.",
       "tools": "Tools",
       "toolsRequired": "Choose at least one tool.",
-      "seats": "Number of people",
-      "seatsHelp": "Everyone who'll use the tools, not guests.",
-      "seatsRequired": "Enter at least 1 person.",
+      "seats": "Seats needed per tool",
+      "seatsHelp": "Contracted capacity for each selected tool, separate from current membership.",
+      "seatsRequired": "Enter at least 1 seat.",
       "notes": "Anything else",
       "notesHelp": "Branches, contract terms, a deadline.",
       "send": "Send the request",
       "sent": "Request sent. We'll reply with a quote.",
       "yourRequests": "Your requests",
-      "summary": "{seats, plural, one {# person} other {# people}} · {cycle} · asked on {date}",
+      "summary": "{seats} seats per tool · {cycle} · requested {date}",
       "state": {
         "new": "Waiting for a quote",
         "quoted": "Quote to review",
@@ -264,13 +296,17 @@
       "waiting": "We're preparing the quote.",
       "accept": "Accept the quote",
       "acceptTitle": "Accept this quote?",
-      "acceptImpact": "OrgTik sets up the plan for {seats, plural, one {# person} other {# people}}, billed {cycle}, and sends the invoice for {amount}.",
-      "accepted": "Quote accepted. We'll set up the plan and send the invoice.",
-      "acceptedBody": "Accepted. OrgTik is setting up the plan and will send the invoice.",
+      "acceptImpact": "Prepares a {cycle} contract for {seats} seats per tool, totaling {amount}. Tools activate only after payment.",
+      "accepted": "Quote accepted. Continue to checkout to activate the tools.",
+      "acceptedBody": "The private plans are ready for checkout. Tools activate after successful payment.",
       "quoteExpired": "This quote has expired. Send a new request for an updated one.",
       "emptyTitle": "No requests yet",
       "emptyBody": "Requests you send appear here with their quotes.",
-      "failed": "Your requests couldn't be loaded"
+      "failed": "Your requests couldn't be loaded",
+      "allocations": "Full-cycle price by tool",
+      "allocationRequired": "OrgTik needs to allocate this quote to each tool before it can be accepted.",
+      "checkout": "Continue to checkout",
+      "paidBody": "Payment received. The contracted tools are active."
     },
     "errors": {
       "general": "Something went wrong. Try again in a moment.",

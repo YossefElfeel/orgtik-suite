@@ -26,4 +26,3 @@
 | it | dark | 1440 | it/ltr | 0/0 | 0 | 0 | 0 | — | — |
 
 Clean renders: 20 of 20.
-

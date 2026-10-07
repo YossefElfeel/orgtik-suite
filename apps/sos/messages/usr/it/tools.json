@@ -16,6 +16,7 @@
     },
     "actions": {
       "open": "Apri",
+      "openTool": "Apri {tool}",
       "seePlans": "Vedi i piani",
       "choosePlan": "Scegli un piano",
       "startTrial": "Prova gratis per {days} giorni",
@@ -43,7 +44,7 @@
     },
     "plans": {
       "title": "Piani",
-      "pricesFor": "I prezzi per utente sono calcolati per {count, plural, one {# persona} other {# persone}} nel tuo spazio, in {currency}.",
+      "pricesFor": "I piani per posto usano {count, plural, one {# posto acquistato} other {# posti acquistati}}, in {currency}.",
       "cycle": "Periodo di fatturazione",
       "monthly": "Mensile",
       "yearly": "Annuale",
@@ -62,8 +63,8 @@
         "year": "per utente all’anno"
       },
       "seatsTotal": {
-        "month": "{count, plural, one {# utente} other {# utenti}}: <total>{amount}</total> al mese",
-        "year": "{count, plural, one {# utente} other {# utenti}}: <total>{amount}</total> all’anno"
+        "month": "{count, plural, one {# posto acquistato} other {# posti acquistati}}: <total>{amount}</total> al mese",
+        "year": "{count, plural, one {# posto acquistato} other {# posti acquistati}}: <total>{amount}</total> all’anno"
       },
       "yearlySaving": "Risparmi il {pct}% rispetto al pagamento mensile",
       "minSeats": "Almeno {count, plural, one {# utente} other {# utenti}}",
@@ -98,7 +99,12 @@
       "noPlansBody": "Questo strumento è venduto su richiesta. Richiedi un piano su misura e ti invieremo un preventivo.",
       "notFound": "Questo strumento non esiste",
       "backToTools": "Torna a strumenti e piani",
-      "failed": "Non è stato possibile caricare i piani"
+      "failed": "Non è stato possibile caricare i piani",
+      "contractCapacity": "Include {count, plural, one {# posto acquistato} other {# posti acquistati}}.",
+      "taxInclusive": "Prezzi comprensivi di imposta al {rate}.",
+      "taxExclusive": "Prezzi al netto dell’imposta al {rate}.",
+      "taxReverseCharge": "Inversione contabile; nessuna imposta aggiunta.",
+      "taxNone": "Nessuna imposta aggiunta secondo la regola configurata."
     },
     "features": {
       "general": {
@@ -185,8 +191,8 @@
       "order": "Il tuo ordine",
       "lineName": "{tool} · {plan}",
       "perSeat": {
-        "monthly": "<unit>{amount}</unit> × {count, plural, one {# utente} other {# utenti}}, fatturazione mensile",
-        "yearly": "<unit>{amount}</unit> × {count, plural, one {# utente} other {# utenti}}, fatturazione annuale"
+        "monthly": "<unit>{amount}</unit> × {count, plural, one {# posto acquistato} other {# posti acquistati}}, fatturazione mensile",
+        "yearly": "<unit>{amount}</unit> × {count, plural, one {# posto acquistato} other {# posti acquistati}}, fatturazione annuale"
       },
       "billed": {
         "monthly": "Fatturazione mensile",
@@ -233,7 +239,33 @@
       "paid": "Pagato",
       "whereInvoice": "Trovi la fattura quando vuoi in <link>Fatturazione › Fatture</link>.",
       "openTool": "Apri {tool}",
-      "toHome": "Torna alla home"
+      "toHome": "Torna alla home",
+      "taxInclusive": "Imposta inclusa ({rate})",
+      "taxExclusive": "Imposta aggiunta ({rate})",
+      "taxReverseCharge": "Inversione contabile · nessuna imposta aggiunta",
+      "taxInclusiveNote": "I prezzi comprendono l’imposta al {rate}, già inclusa in questo totale.",
+      "taxExclusiveNote": "I prezzi escludono l’imposta al {rate}, aggiunta a questo totale.",
+      "taxReverseChargeNote": "Inversione contabile; nessuna imposta aggiunta.",
+      "taxNoneNote": "Nessuna imposta aggiunta secondo la regola configurata.",
+      "accountCreditApplied": "Credito dello spazio applicato",
+      "creditCarried": "Il credito di {amount} rimane nello spazio per un pagamento futuro.",
+      "contractCapacity": "Contratto ({cycle}), con {count} posti acquistati.",
+      "doneBodyMany": "{count, plural, one {Il tuo piano è attivo.} other {I tuoi # piani sono attivi.}}",
+      "unconfirmedTitle": "Stato del pagamento non confermato",
+      "unconfirmedBody": "Non abbiamo potuto confermare l’esito del pagamento. Riprova per recuperare lo stesso tentativo con l’ordine e il metodo di pagamento originali.",
+      "recoverPayment": "Recupera il pagamento",
+      "recoveryWorkspace": "Recupero del pagamento per {workspace}",
+      "recoveryLocked": "L’ordine, il nome di fatturazione e il metodo di pagamento originali restano bloccati finché lo stato del pagamento non viene confermato.",
+      "recoveryContextMismatch": "Passa a {workspace} con lo stesso account per recuperare questo pagamento. Non verrà avviato un nuovo pagamento.",
+      "recoveryStorageError": "Questo browser non può salvare i dati di recupero del pagamento. Abilita l’archiviazione della sessione e riprova.",
+      "savedRecoveryError": "Impossibile leggere i dati di recupero salvati. Controlla le fatture prima di avviare un altro pagamento.",
+      "reviewInvoices": "Controlla le fatture",
+      "recoveryAccountMismatch": "Accedi con l’account che ha avviato questo pagamento per recuperarlo. Non verrà avviato un nuovo pagamento.",
+      "quoteExpiredTitle": "Preventivo scaduto",
+      "quoteExpiredBody": "Controlla il totale aggiornato prima di pagare. Il pagamento richiederà una nuova conferma.",
+      "quoteReviewTitle": "Controlla il preventivo aggiornato",
+      "quoteReviewBody": "Questo preventivo non può più essere utilizzato. Controlla il totale aggiornato e le fatture esistenti prima di riprovare.",
+      "recoveryQuoteBlocked": "Il server non ha potuto recuperare il preventivo originale. Controlla le fatture prima di avviare un altro pagamento."
     },
     "custom": {
       "title": "Piano su misura",
@@ -242,15 +274,15 @@
       "formBody": "Dicci di cosa hai bisogno. Il team OrgTik risponde con un preventivo, di solito entro due giorni lavorativi.",
       "tools": "Strumenti",
       "toolsRequired": "Scegli almeno uno strumento.",
-      "seats": "Numero di persone",
-      "seatsHelp": "Tutti quelli che useranno gli strumenti, ospiti esclusi.",
-      "seatsRequired": "Inserisci almeno 1 persona.",
+      "seats": "Posti necessari per strumento",
+      "seatsHelp": "Capacità contrattuale per ogni strumento scelto, separata dai membri attuali.",
+      "seatsRequired": "Inserisci almeno 1 posto.",
       "notes": "Altro",
       "notesHelp": "Sedi, condizioni del contratto, una scadenza.",
       "send": "Invia la richiesta",
       "sent": "Richiesta inviata. Risponderemo con un preventivo.",
       "yourRequests": "Le tue richieste",
-      "summary": "{seats, plural, one {# persona} other {# persone}} · {cycle} · richiesta il {date}",
+      "summary": "{seats} posti per strumento · {cycle} · richiesto il {date}",
       "state": {
         "new": "In attesa di preventivo",
         "quoted": "Preventivo da valutare",
@@ -264,13 +296,17 @@
       "waiting": "Stiamo preparando il preventivo.",
       "accept": "Accetta il preventivo",
       "acceptTitle": "Accettare questo preventivo?",
-      "acceptImpact": "OrgTik attiva il piano per {seats, plural, one {# persona} other {# persone}}, fatturazione {cycle}, e invia la fattura di {amount}.",
-      "accepted": "Preventivo accettato. Attiveremo il piano e invieremo la fattura.",
-      "acceptedBody": "Accettato. OrgTik sta attivando il piano e invierà la fattura.",
+      "acceptImpact": "Prepara un contratto ({cycle}) per {seats} posti per strumento, per {amount}. Attivazione solo dopo il pagamento.",
+      "accepted": "Preventivo accettato. Procedi al pagamento per attivare gli strumenti.",
+      "acceptedBody": "I piani privati sono pronti al pagamento. Gli strumenti si attivano dopo il pagamento.",
       "quoteExpired": "Questo preventivo è scaduto. Invia una nuova richiesta per averne uno aggiornato.",
       "emptyTitle": "Ancora nessuna richiesta",
       "emptyBody": "Le richieste che invii compaiono qui con i loro preventivi.",
-      "failed": "Non è stato possibile caricare le tue richieste"
+      "failed": "Non è stato possibile caricare le tue richieste",
+      "allocations": "Prezzo per strumento per l’intero ciclo",
+      "allocationRequired": "OrgTik deve ripartire il preventivo tra gli strumenti prima dell’accettazione.",
+      "checkout": "Continua al pagamento",
+      "paidBody": "Pagamento ricevuto. Gli strumenti contrattuali sono attivi."
     },
     "errors": {
       "general": "Qualcosa è andato storto. Riprova tra poco.",

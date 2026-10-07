@@ -93,7 +93,7 @@ export function SubscriptionsView() {
     const tool = name(l.toolName, l.tool);
     const plan = name(l.planName, l.planId);
     const amount = <Money amount={l.snapshot.amount} currency={l.snapshot.currency} />;
-    const cycle = t(l.cycle === "yearly" ? "lines.perYear" : "lines.perMonth");
+    const cycle = l.termMonths ? t("lines.perTerm", { count: l.termMonths }) : t(l.cycle === "yearly" ? "lines.perYear" : "lines.perMonth");
     switch (intent.kind) {
       case "cancel":
         return l.state === "trialing"
@@ -106,7 +106,7 @@ export function SubscriptionsView() {
         const price = p[l.cycle] ?? p.monthly;
         return {
           title: tc("downgradeTitle", { tool, plan: name(p.name) }),
-          impact: tc.rich("downgradeImpact", { plan: name(p.name), current: plan, date: day(l.periodEnd), amount: () => (price ? <Money amount={price.amount} currency={price.currency} /> : t("lines.free")), cycle }),
+          impact: tc.rich("downgradeImpact", { plan: name(p.name), current: plan, date: day(l.periodEnd), amount: () => (price ? <Money amount={price.amount} currency={price.currency} /> : t("lines.free")), cycle: t(l.cycle === "yearly" ? "lines.perYear" : "lines.perMonth") }),
           confirm: tc("downgrade"),
           tone: "primary" as const,
         };

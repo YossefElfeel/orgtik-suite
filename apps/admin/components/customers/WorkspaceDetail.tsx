@@ -37,14 +37,14 @@ function LineCard({ ws, line, editable, onExtend }: { ws: WS; line: Line; editab
   const toolName = useToolName();
   const s = line.snapshot;
   const items: { label: string; value: React.ReactNode }[] = [
-    { label: t("line.cycle"), value: t.has(`cycle.${line.cycle}`) ? t(`cycle.${line.cycle}`) : line.cycle },
+    { label: t("line.cycle"), value: line.termMonths ? t("line.term", { count: line.termMonths }) : t.has(`cycle.${line.cycle}`) ? t(`cycle.${line.cycle}`) : line.cycle },
     {
       label: t("line.price"),
       value: (
         <span className="flex flex-col gap-0.5">
           <span>
             <Money amount={s.amount} currency={s.currency} />
-            {s.quantity > 1 ? (
+            {line.contractedCapacity ? <span className="text-fg-muted"> · {t("line.capacity", { count: line.contractedCapacity })}</span> : line.perUser && s.quantity > 1 ? (
               <span className="text-fg-muted">
                 {" "}
                 (<Money amount={s.unit} currency={s.currency} /> × <span className="tabular-nums">{s.quantity}</span>)

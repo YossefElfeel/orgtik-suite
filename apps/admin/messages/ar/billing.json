@@ -27,7 +27,8 @@
     },
     "kind": {
       "subscription": "اشتراك",
-      "manual": "يدوية"
+      "manual": "يدوية",
+      "website_order": "طلب من الموقع"
     },
     "method": {
       "bank_transfer": "تحويل مصرفي",
@@ -131,7 +132,17 @@
       "usdRate": "سعر الدولار {rate}",
       "noPayments": "لا توجد مدفوعات بعد.",
       "creditNotes": "الإشعارات الدائنة",
-      "noCreditNotes": "لا توجد إشعارات دائنة."
+      "noCreditNotes": "لا توجد إشعارات دائنة.",
+      "ledger": {
+        "period_credit": "رصيد الفترة غير المستخدمة",
+        "account_credit": "رصيد مساحة العمل المستخدم",
+        "bundle_discount": "خصم الباقة المجمعة",
+        "coupon_discount": "خصم القسيمة",
+        "credit_carried": "الرصيد المرحّل"
+      },
+      "taxIncluded": "الضريبة المضمّنة ({rate})",
+      "taxAdded": "الضريبة المضافة ({rate})",
+      "taxReverseCharge": "الاحتساب العكسي · لا تُضاف ضريبة"
     }
   }
 }

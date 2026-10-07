@@ -27,7 +27,8 @@
     },
     "kind": {
       "subscription": "Abo",
-      "manual": "Manuell"
+      "manual": "Manuell",
+      "website_order": "Website-Bestellung"
     },
     "method": {
       "bank_transfer": "Banküberweisung",
@@ -131,7 +132,17 @@
       "usdRate": "USD-Kurs {rate}",
       "noPayments": "Noch keine Zahlungen.",
       "creditNotes": "Gutschriften",
-      "noCreditNotes": "Keine Gutschriften."
+      "noCreditNotes": "Keine Gutschriften.",
+      "ledger": {
+        "period_credit": "Gutschrift für ungenutzten Zeitraum",
+        "account_credit": "Verwendetes Arbeitsbereichsguthaben",
+        "bundle_discount": "Bundle-Rabatt",
+        "coupon_discount": "Gutscheinrabatt",
+        "credit_carried": "Übertragenes Guthaben"
+      },
+      "taxIncluded": "Enthaltene Steuer ({rate})",
+      "taxAdded": "Zusätzliche Steuer ({rate})",
+      "taxReverseCharge": "Reverse Charge · keine zusätzliche Steuer"
     }
   }
 }

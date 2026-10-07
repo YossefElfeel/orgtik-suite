@@ -1,6 +1,6 @@
 # OrgTik Suite — revised hosted-mock roadmap
 
-Maintained execution roadmap · 2026-10-07 · amendment A11 · decisions D-063–D-066.
+Maintained execution roadmap · 2026-10-07 · amendment A11 · decisions D-063–D-067.
 
 Source: `C:/Users/yosse/.claude/plans/we-have-old-plan-quiet-turing.md`, refined by the approved roadmap and the owner's request for parallel delivery of a senior UI/UX-quality prototype. This repository document is maintained from here; the external Claude plan is historical input.
 
@@ -8,8 +8,8 @@ Source: `C:/Users/yosse/.claude/plans/we-have-old-plan-quiet-turing.md`, refined
 
 - الهدف **بروتوتايب متكامل على Vercel**: رحلات حقيقية بين الأدوات، وداتا الموك محفوظة. الدفع والإيميلات والتحليلات والـ AI والتكاملات الخارجية محاكاة؛ ربط مزوّدين حقيقيين مؤجل.
 - الترتيب **R0 → R1 → R2 → R3 → R4**. بنقدّم الأساس اللي كل مرحلة محتاجاه: حساب المقاعد والـ proration في R0، والتجديد وفشل الدفع واسترجاع الوصول في R1، والـ limits وPDF و2FA قبل فيتشرز R3 اللي بتعتمد عليهم.
-- **بوابة التجهيز لسه مفتوحة**: أعطال authentication بـ `ECONNRESET` وملف HLS عند `64cd6c5` اتصلحت في `53562b9`. فحوص Linux ونشر الموك والـ smoke نجحوا، لكن اختبار تسجيل الدخول والـ shell كامل على hosted preview والـ library visual gate لسه محتاجين قبول.
-- Redis والمشاريع وبيانات نشر Actions متجهزين بالفعل. ما بنطلبش إعادة إنشائهم. اللي ناقص إصلاح الأعطال وإثبات تسجيل الدخول والـ shell على Linux والـ hosted preview.
+- **الفحوص التقنية للتجهيز نجحت**: اختبار الـ hosted preview رقم `37611824291` نجح، وCI رقم `37612798844` خلص بنجاح، بما فيه Linux و٢٦٤ مقارنة دقيقة للـ library والـ interactions. ترتيب الـ PRs وتسليم الـ work order لسه مطلوبين؛ مفيش release من R0–R4 مقفول.
+- Redis والمشاريع وبيانات نشر Actions متجهزين بالفعل. حد Vercel اليومي **١٠٠ deployment** اتوصل له؛ بنفحص الـ previews الموجودة من غير نشر جديد. تغييرات R0 لسه drafts محلية، ما اتنشرتش وما اتقبلتش كـ release.
 - أسعار الويبسايت من المنصة، مع الحفاظ على مدد **1/3/6/12 شهر** والخصومات الحالية. تحديد منطقة الزائر محاكاة تلقائية، وSwitzerland هي البديل؛ مفيش country selector جديد.
 - كل فيتشر لازم تبقى رحلة مفيدة، مع حالات تحميل وفراغ وخطأ وصلاحيات وقراءة فقط، ومكوّنات `@orgtik/ui`، وخمس لغات وRTL وثيمين وموبايل. تصميم الويبسايت الحالي محفوظ.
 - شغل متوازي بملكية واضحة للملفات، PR لكل حزمة، والنشر بحد أقصى مشروعين في نفس الوقت. الـ preview المشترك يتفحص بالتتابع؛ production يتفحص من غير reset أو تغيير الساعة.
@@ -26,26 +26,35 @@ Deliver one persistent hosted prototype for customer workspaces and OrgTik staff
 - Package sample file bytes; persist metadata, access, references, comments and versions. Whiteboards persist structured drawing state and a Files record with seeded previews. Arbitrary binary uploads remain deferred (D-066).
 - WM is OrgTik's internal CMS. A website-management purchase opens a managed-service request; it never grants the purchaser internal CMS access (D-002, D-059).
 
-### Readiness snapshot — gate open
+### Readiness snapshot — technical checks verified, delivery gate open
 
 Historical inspected revision `64cd6c5ec205dbbf2f8279d63bf84fe28a5db8f7`, on `fix/vercel-auth-layout`, had successful SOS/website deployments but failed mock authentication with `ECONNRESET` and HLS transport-stream artifact verification. The existing 16 pricing checks passed locally.
 
-The integration owner has now pushed **`53562b9`**: fresh `node:http` loopback dispatch with explicit 503 transport failure, copied reviewed Files assets after tracing, and marked binary HLS assets. Reported verification: local authentication **17**, journal **8**, transport/artifact **6** pass; Linux CI checks, mock deployment and hosted smoke are successful. **Full hosted authentication/layout acceptance and the library visual gate remain pending.** [PR #4](https://github.com/YossefElfeel/orgtik-suite/pull/4) still serves as an integration preview. These observed checks do not close the release gate or mark any R0–R4 package complete.
+Historical repair **`53562b9`** added fresh `node:http` loopback dispatch with explicit 503 transport failure, copied reviewed Files assets after tracing, and marked binary HLS assets. Local authentication **17**, journal **8**, transport/artifact **6**, Linux checks and hosted smoke passed then; full hosted auth/layout and library visual acceptance were still pending at that point.
+
+**Latest verified evidence (2026-10-07):** [hosted verification run 37611824291](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37611824291) succeeded using verification code **`993248a`** against existing preview builds **mock/SOS `33bd33e`** and **website `b35f55c`**. [CI run 37612798844](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37612798844) completed **SUCCESS**, including Linux checks, all **264 strict Windows library comparisons** and interactions. Cairo/locale/fixed-clock determinism and the explicitly reviewed 38 Windows renderer pairs retain the original 264 references, threshold 0.1 and zero changed pixels. These are readiness checks against the named builds, **not acceptance of the new R0 draft or of all 15 release journeys**.
+
+The observed Vercel limit of **100 deployments/day** has been reached. Continue verification against existing previews through the verify-only workflow; do not redeploy, recreate resources or reset production to bypass the limit. [PR #4](https://github.com/YossefElfeel/orgtik-suite/pull/4) remains an integration preview. Stack/work-order/normalization delivery rules below remain open.
 
 | Setup or dependency | Verified state / evidence | Remaining work |
 |---|---|---|
-| Redis persistence | Existing free Frankfurt Redis connected to both mock projects, recorded in `audits/auth-layout/readout.md`; D-053 journal implementation is present | Prove cold-start persistence and error behavior in the corrected hosted preview; do not create another database |
-| Deployment credentials | Existing `VERCEL_TOKEN` Actions secret used by successful SOS/website deployments; credential values are never copied into program records | Correct failing jobs using the existing credential; do not recreate or print it |
-| Project configuration | `tools/vercel/projects.json` records 12 existing projects and the preview mock project; deploy workflow already limits concurrency to 2 and serializes the preview group | Validate configuration and affected targets; do not create replacement projects |
-| Auth/runtime artifact | Historical failures at `64cd6c5` corrected in `53562b9`; integration owner reports local auth17/journal8/transport-artifact6 and Linux CI checks successful | Preserve the fixes through extracted PRs; attach revision-specific acceptance evidence |
-| Hosted acceptance | Mock deployment and smoke successful at `53562b9`; full hosted auth/layout and library visual acceptance pending | Verify cold starts, sign-in, handoff, refresh, account persistence and desktop/mobile shell behavior on the release revision |
+| Redis persistence | Existing free Frankfurt Redis connected to both mock projects; existing-preview auth/persistence evidence in run 37611824291 | Preserve the binding and accounts; no new database |
+| Deployment credentials | Existing Actions credential/protected-preview access used by successful verification; no values copied into program records | Preserve existing setup; no new credential |
+| Project configuration | Existing 12 project IDs plus preview mock; Linux CI 37612798844 passed configuration checks | Keep affected-only deploy selection and separate runtime consumer tests; verify existing previews while quota is exhausted |
+| Auth/runtime artifact | Failures at `64cd6c5` corrected in `53562b9`; hosted run 37611824291 and Linux CI 37612798844 now pass | Preserve fixes through extracted coherent PRs; keep historical invoice/account compatibility before any R0 deployment |
+| Hosted acceptance | Existing mock/SOS `33bd33e`, website `b35f55c` verified by test code `993248a`; strict library CI 37612798844 completed successfully | New R0 changes still need revision-specific preview acceptance; all 15 release journeys remain open |
 | Existing website work | PR #3/work-order changes and local website work remain carried into this checkout | Complete or rebase work-order delivery before dedicated line-ending normalization |
 
-**Before R0:** require green Linux mock artifact verification, hosted authentication, and desktop/mobile shell checks. Updating this roadmap and investigating readiness may run in parallel; release implementation/deployment must respect the gate. Evidence and dependency status live in `backlog/release-packages.csv`; blank acceptance evidence means not accepted.
+**Gate status:** technical readiness checks above are verified. Preserve stack reconciliation, work-order delivery and dedicated normalization before the corresponding merges/deployments. R0 work may be drafted locally; no R0–R4 exit is accepted. Evidence and dependency status live in `backlog/release-packages.csv`; local test counts do not substitute for preview acceptance.
+
+### R0 local draft evidence — no release acceptance
+
+Local work currently includes **40 backend**, **158 finance UI**, and **78 basic UI** regression checks reported by the integration owner. The platform draft includes scheduled pricing, per-tool quantities, discounts/proration/credit ledgers, regional tax/routing, downgrade metadata and assigned-only service reads; D-067 prepares workspace-private plans on acceptance and activates lines only after successful checkout. The public offer adapter creates immutable server-priced payment snapshots and links them with `{reference, claimToken}`. Generated R0 contract changes cover those interfaces. New release code has not been deployed or accepted; hosted journeys, runtime usage integration, historical invoice compatibility and website parity remain required evidence.
 
 ### Stack and delivery rules
 
 - Preserve the existing stack and work. Reconcile PR #1 with D-059 before landing it. Land foundation/review ancestors in dependency order, then extract the auth/deployment changes from PR #4 into coherent PRs. Do not merge its combined integration diff as a shortcut.
+- PR #1 has now been reconciled in **`96f8877`** as a **draft**: only managed-service mapping plus its focused regression remain (3 files, 35 insertions/3 deletions; isolated Express check passed). Newly introduced private Website subscriptions/setup entitlements were removed. It remains unmerged; ancestor/review landing and R0 preview acceptance still gate delivery.
 - Preserve PR #3 and the 2026-10-06 work order; complete/rebase that work before a separate line-ending normalization PR. Binary `.ts` HLS assets must remain binary, including in Linux checkout and Vercel tracing.
 - One PR per coherent package. Parallel agents own disjoint app areas. The integration owner owns shared APIs, `mock/lib`, server dispatch, shells and `@orgtik/ui`; coordinate shared edits through that owner.
 - Deploy affected projects only, at most two concurrently. Serialize preview deploy plus verification against the shared preview sandbox. Backend consumer testing is selected separately from deployment selection.
@@ -231,7 +240,9 @@ First deliver shared usage/limit evaluation, invoice PDF generation, audit retri
 
 - Shared workspace context contains workspace, member role, tool roles, access state and impersonation actor. Validate any selected-workspace hint against membership centrally. Handoff/refresh preserve it; scopes describe only that selected workspace.
 - Team responses expose per-tool capacity, assigned, reserved and available counts. Invitation metadata/acceptance and ownership-transfer operations enforce allocation and actor rules server-side.
-- Public catalog/offer quotes and simulated order confirmation use platform-resolved region/prices. Persist resolved region and pricing policy with the order. Authenticated linking is idempotent and cannot change a paid order's currency or let receipt/client totals mint paid invoices.
+- Public `/v1/public/catalog`, `/v1/public/website-quotes` and `/v1/public/website-orders` use platform-resolved region/prices and explicit currency minor units. Persist region/policy in an immutable payment snapshot. Authenticated `/v1/app/website-orders` linking accepts only `{reference, claimToken}`, is idempotent, and cannot change paid currency or let browser receipt/totals mint invoices. Public requests allow optional bearer workspace context; signed-in confirmation requires the owner.
+- D-067 custom quotes allocate full-term prices per tool with an exact rounded sum. Acceptance prepares scoped private plans for ordinary checkout; repeated acceptance is idempotent. A successful mock payment creates active lines, and foreign workspaces cannot see or buy those private plans.
+- Ordinary checkout optionally accepts `Idempotency-Key`; a receipt can be reused only for the same actor/workspace/body after current role/read-only guards pass. Cycle changes credit unused website terms and future prepaid periods. First guest-order billing initialization is restricted to a signup-marked, otherwise unused single-owner workspace; existing workspace currencies and paid snapshots are preserved.
 - Shared file references identify workspace-scoped Files records. Whiteboard records persist structured state; sample previews do not substitute for the saved drawing. Downloads retain packaged asset bytes.
 - Generate shared/tool contracts alongside the existing platform contract, including authorization metadata. Preserve the existing API envelope unless a versioned route requires change.
 - Cross-app operations journal once through shared services. Persistence failure returns failure; replay cannot repeat provisioning, seat allocation, transfers, charges or notifications. Validate concurrency across mock instances, not only one in-memory server.
@@ -257,4 +268,4 @@ Every touched suite flow has useful loading, empty, validation, error/retry, per
 
 Run all 15 journeys on an **isolated hosted verification deployment built from the release revision**. Use reset/clock/failure controls there only. Production receives non-destructive smoke checks; it must not reset business data or advance the clock. Capture revision, identity, workspace, URL, locale/theme/width and result alongside flow evidence.
 
-Update the gap matrix, benchmarks, original backlog evidence, Arabic readout and this roadmap/package register after verification. Leave an item open while its evidence is absent or stale; record simulation and external deferral separately. Preserve the source plan and earlier amendments as history. Final closure includes A11 and D-063–D-066 and keeps live integrations and public Arabic website launch visibly deferred.
+Update the gap matrix, benchmarks, original backlog evidence, Arabic readout and this roadmap/package register after verification. Leave an item open while its evidence is absent or stale; record simulation and external deferral separately. Preserve the source plan and earlier amendments as history. Final closure includes A11 and D-063–D-067 and keeps live integrations and public Arabic website launch visibly deferred.

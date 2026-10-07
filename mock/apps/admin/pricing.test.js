@@ -59,4 +59,24 @@ check("K1 fixed coupon only in its currencies; K2 never below 0", () => {
   assert.equal(P.totals({ lines: [{ amount: 45 }], currency: "SAR", coupon: c }).total, 0);
   assert.equal(P.totals({ lines: [{ amount: 44 }], currency: "AED", coupon: c }).couponError, "coupon_currency");
 });
+check("workspace currency stays locked while its country price is converted", () => {
+  const r = P.resolveWorkspaceLine(tables(), { planId: "chat_pro", cycle: "monthly", workspace: { country: "DE", currency: "CHF" } });
+  assert.equal(r.currency, "CHF"); assert.equal(r.unit, 10); assert.equal(r.amount, 10);
+});
+check("eligible-line discounts precede remaining-period credit", () => {
+  const r = P.totals({ lines: [{ amount: 100, prorationFactor: 0.5, credit: 20 }, { amount: 50, bundleEligible: false, couponEligible: false }], currency: "USD", bundlePct: 10, coupon: { kind: "percent", value: 20 } });
+  assert.deepEqual([r.bundleDiscount, r.couponDiscount, r.prorated], [10, 18, 66]);
+});
+check("cycle changes retain unused old-period credit, and surplus credit is explicit", () => {
+  const current = { cycle: "yearly", periodStart: "2026-01-01T00:00:00Z", periodEnd: "2027-01-01T00:00:00Z", snapshot: { amount: 1200 } };
+  const r = P.proration(current, "monthly", Date.parse("2026-07-02T12:00:00Z"));
+  assert.equal(r.factor, 1); assert.equal(r.credit, 600);
+  const total = P.totals({ lines: [{ amount: 100, credit: r.credit }], currency: "USD" });
+  assert.equal(total.total, 0); assert.equal(total.creditRemaining, 500);
+});
+check("small discounts allocate rounded cents without a negative final allocation", () => {
+  const total = P.totals({ lines: [{ amount: 0.1 }, { amount: 0.1 }, { amount: 0.1 }, { amount: 0.1 }], currency: "USD", coupon: { kind: "fixed", amounts: { USD: 0.02 } } });
+  assert.equal(total.couponDiscount, 0.02); assert.equal(total.total, 0.38);
+  assert.ok(total.lineAmounts.every(line => line.couponDiscount >= 0));
+});
 console.log(`\n${n} pricing checks passed (spec 03 worked examples and rules).`);

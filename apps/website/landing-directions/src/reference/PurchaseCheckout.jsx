@@ -9,8 +9,17 @@ import {
   useCart,
   completeCartPurchase,
   dismissCartNotice,
+  getCartSnapshot,
 } from "./purchase-store.js";
-import { quoteCart, money, termLabel } from "./purchase-catalog.js";
+import {
+  quoteCart,
+  money,
+  termLabel,
+  groupFingerprint,
+  getPricingSnapshot,
+  subscribePricing,
+} from "./purchase-catalog.js";
+import { PurchasePriceStatus, taxCaption } from "./PurchasePricing";
 import { QuoteSummary, PreviewNote, OrderContents } from "./PurchaseUI";
 import { EmptyPurchaseCart } from "./PurchaseCart";
 import { PurchaseAction, PurchaseDialog } from "./PurchaseControls";
@@ -20,6 +29,10 @@ import {
   savePurchaseSession,
   loadPurchaseSession,
   clearPurchaseSession,
+  quoteWebsite,
+  getPendingPayment,
+  purchaseFingerprint,
+  purchaseErrorText,
 } from "./purchase-adapter.js";
 import {
   getPreviewCustomer,
@@ -43,6 +56,7 @@ import { attr, run } from "../content/copy";
 import { msg } from "../content/strings";
 
 function Confirmation({ order, crm, onCRM, customer, onRestart }) {
+  const receiptMoney = (amount) => money(amount, order);
   const [busy, setBusy] = useState(false);
   const [handoff, setHandoff] = useState(false);
   const [accountError, setAccountError] = useState("");
@@ -50,6 +64,7 @@ function Confirmation({ order, crm, onCRM, customer, onRestart }) {
   const passwordField = useRef(null);
   const confirmationField = useRef(null);
   const working = useRef(false);
+  const activationChecked = useRef(false);
   const signedIn =
     hasSuiteSession() &&
     getPreviewCustomer()?.email?.toLowerCase() ===
@@ -61,6 +76,18 @@ function Confirmation({ order, crm, onCRM, customer, onRestart }) {
   useEffect(() => {
     if (handoff) passwordField.current?.focus();
   }, [handoff]);
+  useEffect(() => {
+    if (
+      !signedIn ||
+      handoff ||
+      crm.status !== "ready" ||
+      crm.tools ||
+      activationChecked.current
+    )
+      return;
+    activationChecked.current = true;
+    setupInSuite(order, { verified: true }).then(onCRM);
+  }, [signedIn, handoff, crm.status, crm.tools, order, onCRM]);
   const retry = async () => {
     if (busy) return;
     setBusy(true);
@@ -152,7 +179,7 @@ function Confirmation({ order, crm, onCRM, customer, onRestart }) {
         </h2>
         <p>
           {run("gl_commerce|purchaseCheckout-hero|p-2", 0)}
-          <strong>{order.reference}</strong> · {money(order.quote.total)}{" "}
+          <strong>{order.reference}</strong> · {receiptMoney(order.quote.total)}{" "}
           {run("gl_commerce|purchaseCheckout-hero|p-3", 0)}
         </p>
         <p className="purchase-receipt-method">
@@ -237,10 +264,25 @@ function Confirmation({ order, crm, onCRM, customer, onRestart }) {
                         ? msg("PurchaseCheckout:11")
                         : msg("PurchaseCheckout:12")}
                     </small>
+                    {line.perUser && Number.isFinite(line.quantity) && (
+                      <small>
+                        {msg("PlatformPricing:18", [line.quantity])}
+                      </small>
+                    )}
                     <small>
-                      {line.activation === "active-preview"
-                        ? msg("PurchaseCheckout:13")
-                        : msg("PurchaseCheckout:14")}
+                      {line.activation === "awaiting-link"
+                        ? msg(
+                            crm.tools?.some(
+                              (tool) =>
+                                tool.catalogId === line.catalogId &&
+                                tool.state === "active",
+                            )
+                              ? "PlatformPricing:12"
+                              : "PlatformPricing:11",
+                          )
+                        : line.activation === "active-preview"
+                          ? msg("PurchaseCheckout:13")
+                          : msg("PurchaseCheckout:14")}
                     </small>
                     {line.autoRenew && (
                       <small>
@@ -250,12 +292,12 @@ function Confirmation({ order, crm, onCRM, customer, onRestart }) {
                           "gl_commerce|purchaseCheckout-section-1|td-2",
                           0,
                         )}{" "}
-                        {money(line.total)}
+                        {receiptMoney(line.total)}
                       </small>
                     )}
                   </td>
                   <td>
-                    {money(line.total)}
+                    {receiptMoney(line.total)}
                     <small>
                       {line.discount}% {line.reason}
                       {run("gl_commerce|purchaseCheckout-section-1|td-3", 0)}
@@ -266,9 +308,15 @@ function Confirmation({ order, crm, onCRM, customer, onRestart }) {
             )}
           </tbody>
           <tfoot>
+            {order.quote.tax > 0 && (
+              <tr>
+                <th>{taxCaption(order)}</th>
+                <td>{receiptMoney(order.quote.tax)}</td>
+              </tr>
+            )}
             <tr>
               <th>{run("gl_commerce|purchaseCheckout-section-1|th-3", 0)}</th>
-              <th>{money(order.quote.total)}</th>
+              <th>{receiptMoney(order.quote.total)}</th>
             </tr>
           </tfoot>
         </table>
@@ -364,6 +412,19 @@ function Confirmation({ order, crm, onCRM, customer, onRestart }) {
 }
 export default function PurchaseCheckout() {
   const { items } = useCart();
+  const pricing = useSyncExternalStore(
+    subscribePricing,
+    getPricingSnapshot,
+    getPricingSnapshot,
+  );
+  const [initialAttempt] = useState(() => getPendingPayment());
+  const [quoted, setQuoted] = useState(initialAttempt?.quote || null);
+  const [quoting, setQuoting] = useState(false);
+  const [quoteError, setQuoteError] = useState("");
+  const [quoteRefresh, setQuoteRefresh] = useState(0);
+  const recovering = getPendingPayment();
+  const orderGroups = recovering?.quote.groups || items;
+  const configuration = purchaseFingerprint(orderGroups);
   const identity = useSyncExternalStore(
     subscribePreviewCustomer,
     getPreviewCustomer,
@@ -377,6 +438,7 @@ export default function PurchaseCheckout() {
   const [customer, setCustomer] = useState(
     () =>
       saved?.customer ||
+      initialAttempt?.payload.billing ||
       (identity ? { ...identity } : { name: "", email: "", company: "" }),
   );
   const verified =
@@ -386,20 +448,25 @@ export default function PurchaseCheckout() {
   useEffect(() => {
     if (previousIdentity.current === identity) return;
     previousIdentity.current = identity;
-    if (!order)
+    if (!order && !getPendingPayment())
       setCustomer(identity ? { ...identity } : { ...guestDraft.current });
     setErrors({});
   }, [identity, order]);
   const [errors, setErrors] = useState({});
-  const [error, setError] = useState("");
+  const [error, setError] = useState(
+    initialAttempt ? msg("PlatformPricing:16") : "",
+  );
   const [processing, setProcessing] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState(null);
+  const [paymentMethod, setPaymentMethod] = useState(
+    initialAttempt?.payload.paymentMethod || null,
+  );
   const [paymentDetails, setPaymentDetails] = useState({});
   const selectedMethod = paymentMethod ? getPaymentMethod(paymentMethod) : null;
   const paymentReady =
-    !!selectedMethod &&
-    !Object.keys(validateTestPaymentDetails(paymentMethod, paymentDetails))
-      .length;
+    !!recovering ||
+    (!!selectedMethod &&
+      !Object.keys(validateTestPaymentDetails(paymentMethod, paymentDetails))
+        .length);
   const [outcome, setOutcome] = useState("success");
   const [crmScenario, setCRMScenario] = useState("ready");
   const [sessionSaved, setSessionSaved] = useState(true);
@@ -408,16 +475,63 @@ export default function PurchaseCheckout() {
     new URLSearchParams(window.location.search).get("qa") === "1";
   const busy = useRef(false);
   const controller = useRef(null);
-  const attempt = useRef(null);
+  const attempt = useRef(initialAttempt?.payload.reference || null);
   const approvalCart = useRef(items);
   const form = useRef(null);
   useEffect(() => () => controller.current?.abort(), []);
+  useEffect(() => {
+    if (order || getPendingPayment()) return;
+    if (pricing.status !== "ready" || !quoteCart(items).valid) {
+      setQuoted(null);
+      setQuoting(false);
+      return;
+    }
+    const request = new AbortController();
+    setQuoting(true);
+    setQuoted(null);
+    setQuoteError("");
+    quoteWebsite({ groups: items, signal: request.signal })
+      .then((value) => {
+        if (!request.signal.aborted) setQuoted(value);
+      })
+      .catch((problem) => {
+        if (!request.signal.aborted) setQuoteError(purchaseErrorText(problem));
+      })
+      .finally(() => {
+        if (!request.signal.aborted) setQuoting(false);
+      });
+    return () => request.abort();
+  }, [configuration, pricing.version, quoteRefresh, order]);
+  useEffect(() => {
+    if (!quoted || order || getPendingPayment()) return;
+    const timer = setTimeout(
+      () => {
+        if (getPendingPayment()) return;
+        attempt.current = null;
+        setError(msg("PlatformPricing:5"));
+        setQuoteRefresh((value) => value + 1);
+      },
+      (quoted.expiresIn || 900) * 1000,
+    );
+    return () => clearTimeout(timer);
+  }, [quoted, order]);
+  useEffect(() => {
+    if (
+      !recovering &&
+      paymentMethod &&
+      pricing.paymentMethods &&
+      !pricing.paymentMethods.includes(paymentMethod)
+    ) {
+      setPaymentMethod(null);
+      setPaymentDetails({});
+    }
+  }, [pricing.version, paymentMethod, recovering]);
   useEffect(() => {
     if (approvalCart.current === items) return;
     approvalCart.current = items;
     if (!order) {
       controller.current?.abort();
-      attempt.current = null;
+      if (!getPendingPayment()) attempt.current = null;
       setPaymentDetails({});
       setErrors({});
     }
@@ -429,12 +543,14 @@ export default function PurchaseCheckout() {
   const submit = async (event) => {
     event.preventDefault();
     if (busy.current) return;
-    const problems = {
-      ...validateCustomer(customer),
-      ...(selectedMethod
-        ? validateTestPaymentDetails(paymentMethod, paymentDetails)
-        : { paymentMethod: msg("PurchaseCheckout:17") }),
-    };
+    const problems = recovering
+      ? {}
+      : {
+          ...validateCustomer(customer),
+          ...(selectedMethod
+            ? validateTestPaymentDetails(paymentMethod, paymentDetails)
+            : { paymentMethod: msg("PurchaseCheckout:17") }),
+        };
     setErrors(problems);
     setError("");
     if (Object.keys(problems).length) {
@@ -444,24 +560,25 @@ export default function PurchaseCheckout() {
       else form.current?.elements[firstError]?.focus();
       return;
     }
-    if (!quoteCart(items).valid) {
+    if (!quoted || quoting || (!recovering && !quoteCart(items).valid)) {
       setError(msg("PurchaseCheckout:18"));
       return;
     }
     busy.current = true;
     setProcessing(true);
     controller.current = new AbortController();
+    if (recovering) attempt.current = recovering.payload.reference;
     attempt.current ||= `ORG-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
     try {
       const purchase = await simulatePayment({
-        groups: items,
+        groups: orderGroups,
         customer,
         reference: attempt.current,
-        paymentMethod,
-        authorization: createTestPaymentAuthorization(
-          paymentMethod,
-          paymentDetails,
-        ),
+        paymentMethod: recovering?.payload.paymentMethod || paymentMethod,
+        quote: quoted,
+        authorization: recovering
+          ? { method: recovering.payload.paymentMethod, approved: true }
+          : createTestPaymentAuthorization(paymentMethod, paymentDetails),
         outcome,
         signal: controller.current.signal,
       });
@@ -473,7 +590,17 @@ export default function PurchaseCheckout() {
       setOrder(purchase);
       setCRM(pending);
       setSessionSaved(savePurchaseSession(purchase, pending, customer));
-      completeCartPurchase(purchase.groups.map((g) => g.id));
+      completeCartPurchase(
+        purchase.groups
+          .filter((group) =>
+            getCartSnapshot().items.some(
+              (current) =>
+                current.id === group.id &&
+                groupFingerprint(current) === groupFingerprint(group),
+            ),
+          )
+          .map((group) => group.id),
+      );
       dismissCartNotice();
       const setup = await setupInSuite(purchase, {
         scenario: crmScenario,
@@ -484,11 +611,11 @@ export default function PurchaseCheckout() {
       setSessionSaved(savePurchaseSession(purchase, setup, customer));
     } catch (problem) {
       if (paymentMethod !== "card") setPaymentDetails({});
-      setError(
-        problem.message === "cancelled"
-          ? msg("PurchaseCheckout:20")
-          : problem.message,
-      );
+      setError(purchaseErrorText(problem));
+      if (problem.confirmed || problem.code === "quote_expired")
+        attempt.current = null;
+      if (problem.code === "quote_expired")
+        setQuoteRefresh((value) => value + 1);
     } finally {
       busy.current = false;
       setProcessing(false);
@@ -549,7 +676,7 @@ export default function PurchaseCheckout() {
               window.__orgNav?.("/plans");
             }}
           />
-        ) : !items.length ? (
+        ) : !orderGroups.length ? (
           <EmptyPurchaseCart />
         ) : (
           <div className="purchase-layout purchase-checkout-layout">
@@ -557,19 +684,19 @@ export default function PurchaseCheckout() {
               <summary>
                 <span>
                   {run("gl_commerce|purchaseCheckout-intro|summary", 0)}{" "}
-                  {items.reduce((n, g) => n + g.lines.length, 0)}
+                  {orderGroups.reduce((n, g) => n + g.lines.length, 0)}
                   {run("gl_commerce|purchaseCheckout-intro|summary-2", 0)}
                   <strong>
-                    {money(quoteCart(items).total)}
+                    {money(quoted?.quote.total, quoted)}
                     {run("gl_commerce|purchaseCheckout-intro|summary-3", 0)}
                   </strong>
                 </span>
                 <i className="ph ph-caret-down" aria-hidden="true" />
               </summary>
-              <OrderContents groups={items} />
+              <OrderContents groups={orderGroups} pricedQuote={quoted} />
               <p>
                 {run("gl_commerce|purchaseCheckout-intro|p-2", 0)}{" "}
-                {money(quoteCart(items).saving)}
+                {money(quoted?.quote.saving, quoted)}
                 {run("gl_commerce|purchaseCheckout-intro|p-3", 0)}
               </p>
               <a href="/cart">
@@ -615,7 +742,7 @@ export default function PurchaseCheckout() {
                     : msg("PurchaseCheckout:32")}
                 </p>
                 <fieldset
-                  disabled={processing}
+                  disabled={processing || !!recovering}
                   className="purchase-billing-fields"
                 >
                   <div className="purchase-fields">
@@ -639,14 +766,19 @@ export default function PurchaseCheckout() {
                 </fieldset>
                 <fieldset
                   className="purchase-payment-methods"
-                  disabled={processing}
+                  disabled={processing || !!recovering}
                   aria-describedby="purchase-payment-disclosure"
                 >
                   <legend>
                     {run("gl_commerce|purchaseCheckout-section-2|legend", 0)}
                   </legend>
                   <div className="purchase-payment-options">
-                    {PAYMENT_METHODS.map((method) => (
+                    {PAYMENT_METHODS.filter(
+                      (method) =>
+                        !pricing.paymentMethods ||
+                        method.id === recovering?.payload.paymentMethod ||
+                        pricing.paymentMethods.includes(method.id),
+                    ).map((method) => (
                       <label
                         className="purchase-payment-option"
                         key={method.id}
@@ -688,7 +820,7 @@ export default function PurchaseCheckout() {
                     </p>
                   )}
                 </fieldset>
-                {paymentMethod === "card" && (
+                {paymentMethod === "card" && !recovering && (
                   <PaymentDetails
                     details={paymentDetails}
                     onChange={setPaymentDetails}
@@ -701,8 +833,26 @@ export default function PurchaseCheckout() {
                   <span>
                     {run("gl_commerce|purchaseCheckout-section-2|div", 0)}
                   </span>
-                  <strong>{money(quoteCart(items).total)}</strong>
+                  <strong>{money(quoted?.quote.total, quoted)}</strong>
                 </div>
+                <PurchasePriceStatus source={quoted} />
+                {quoting ? (
+                  <p className="purchase-caption" role="status">
+                    {msg("PlatformPricing:4")}
+                  </p>
+                ) : null}
+                {quoteError ? (
+                  <p className="purchase-error" role="alert">
+                    {quoteError}{" "}
+                    <button
+                      type="button"
+                      className="purchase-text-button"
+                      onClick={() => setQuoteRefresh((value) => value + 1)}
+                    >
+                      {msg("PlatformPricing:3")}
+                    </button>
+                  </p>
+                ) : null}
                 <p
                   id="purchase-payment-disclosure"
                   className="purchase-payment-disclosure"
@@ -717,16 +867,23 @@ export default function PurchaseCheckout() {
                 <button
                   type="submit"
                   disabled={
-                    processing || !quoteCart(items).valid || !paymentReady
+                    processing ||
+                    quoting ||
+                    !quoted ||
+                    !quoted.quote.valid ||
+                    (!recovering && !quoteCart(items).valid) ||
+                    !paymentReady
                   }
                   className="commerce-action purchase-action"
                 >
                   <span>
                     {processing && selectedMethod
                       ? msg("PurchaseCheckout:37", [selectedMethod.name])
-                      : msg("PurchaseCheckout:38", [
-                          money(quoteCart(items).total),
-                        ])}
+                      : recovering
+                        ? msg("PlatformPricing:19")
+                        : msg("PurchaseCheckout:38", [
+                            money(quoted?.quote.total, quoted),
+                          ])}
                   </span>
                   <span className="commerce-action__arrow">
                     <i className="ph ph-lock-simple" aria-hidden="true" />
@@ -744,7 +901,7 @@ export default function PurchaseCheckout() {
                     {run("gl_commerce|purchaseCheckout-section-2|button-2", 0)}
                   </button>
                 )}
-                {!quoteCart(items).valid && (
+                {!recovering && !quoteCart(items).valid && (
                   <p className="purchase-error">
                     {run("gl_commerce|purchaseCheckout-section-2|p-2", 0)}{" "}
                     <a href="/cart">
@@ -825,19 +982,20 @@ export default function PurchaseCheckout() {
               </form>
             </section>
             <QuoteSummary
-              groups={items}
+              groups={orderGroups}
+              pricedQuote={quoted}
               title={attr(
                 "gl_commerce|purchaseCheckout-intro|QuoteSummary@title",
               )}
             >
-              <OrderContents groups={items} />
+              <OrderContents groups={orderGroups} pricedQuote={quoted} />
               <a href="/cart">
                 {run("gl_commerce|purchaseCheckout-intro|a-2", 0)}
               </a>
             </QuoteSummary>
           </div>
         )}
-        <PreviewNote />
+        <PreviewNote source={order || quoted} />
       </div>
     </CommerceLayout>
   );

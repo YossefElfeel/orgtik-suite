@@ -7,7 +7,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { Printer } from "@phosphor-icons/react";
-import { Badge, Button, Card, ErrorState, LoadingState, PageHeader, StatusBadge, useStatusLabel } from "@orgtik/ui";
+import { Badge, Button, Card, ErrorState, LoadingState, PageHeader, StatusBadge, useFormatter, useStatusLabel } from "@orgtik/ui";
 import { statusOf } from "@/redux/features/platform/platformApi";
 import { useBillingInvoiceQuery, useBillingSubscriptionsQuery, type Invoice, type SubscriptionLine } from "@/redux/features/platform/billing";
 import { ButtonLink } from "@/components/shared/ButtonLink";
@@ -55,6 +55,7 @@ export function InvoiceView({ id }: { id: string }) {
 
 function InvoiceDocument({ invoice: inv, printing = false }: { invoice: Invoice; printing?: boolean }) {
   const t = useTranslations("Billing.invoice");
+  const f = useFormatter();
   const day = useDay();
   const country = useCountryName();
   const taxName = useTaxName();
@@ -63,10 +64,20 @@ function InvoiceDocument({ invoice: inv, printing = false }: { invoice: Invoice;
   // in the reader's language.
   const subs = useBillingSubscriptionsQuery();
   const statusLabel = useStatusLabel();
-  const lineLabel = (label: string, lineId?: string) => {
+  const lineLabel = (label: string, lineId?: string, kind?: string, amount = 0) => {
     const l: SubscriptionLine | undefined = subs.data?.lines.find((x) => x.id === lineId);
+    if (kind && t.has(`ledger.${kind}`)) return (
+      <>
+        {t(`ledger.${kind}`)}
+        {kind === "coupon_discount" && label !== "Coupon" ? <> · <bdi dir="ltr">{label}</bdi></> : null}
+        {l ? <span className="text-fg-muted"> · {name(l.toolName, l.tool)}</span> : null}
+      </>
+    );
+    if (kind && kind !== "charge") return <span dir="auto">{label}</span>;
+    if (!kind && amount < 0) return <><span className="text-fg-muted">{t("discount")}</span> <span dir="auto">{label}</span></>;
     if (!l) return <span dir="auto">{label}</span>;
     const qty = /×\s*(\d+)\s*$/.exec(label)?.[1];
+    const capacity = /\bcapacity\s+(\d+)\s*$/.exec(label)?.[1];
     return (
       <>
         {t("lineLabel", { tool: name(l.toolName, l.tool), plan: name(l.planName, l.planId) })}
@@ -76,14 +87,14 @@ function InvoiceDocument({ invoice: inv, printing = false }: { invoice: Invoice;
             <span dir="ltr">× {qty}</span>
           </>
         ) : null}
+        {capacity ? <> · {t("lineCapacity", { count: Number(capacity) })}</> : null}
       </>
     );
   };
-  const tax = /^(.*?)\s+([\d.]+)\s*%$/.exec(inv.taxLabel ?? "");
-  const taxText = inv.taxLabel ? (tax ? t("taxLine", { name: taxName(tax[1]), rate: tax[2] }) : inv.taxLabel) : t("noTax");
+  const tax = /^(.*?)\s+([\d.]+)\s*%(?:\s+\((?:included|excluded)\))?$/.exec(inv.taxLabel ?? "");
+  const rate = f.percent((inv.taxRate ?? Number(tax?.[2] ?? 0)) / 100);
+  const taxText = inv.reverseCharge ? t("taxReverseCharge") : inv.taxDisplay ? t(inv.taxDisplay === "inclusive" ? "taxIncluded" : "taxAdded", { rate }) : inv.taxLabel ? (tax ? t("taxLine", { name: taxName(tax[1]), rate: tax[2] }) : inv.taxLabel) : t("noTax");
   const cur = inv.currency;
-  const charges = inv.lines.filter((l) => l.amount >= 0);
-  const discounts = inv.lines.filter((l) => l.amount < 0);
   const refunds = inv.refunds ?? [];
   const H = printing ? "p" : "h2";
 
@@ -154,19 +165,9 @@ function InvoiceDocument({ invoice: inv, printing = false }: { invoice: Invoice;
             </tr>
           </thead>
           <tbody>
-            {charges.map((l, i) => (
-              <tr key={`c${i}`} className="border-b border-line">
-                <td className="py-2.5 pe-4">{lineLabel(l.label, l.lineId)}</td>
-                <td className="py-2.5 text-end">
-                  <Money amount={l.amount} currency={cur} />
-                </td>
-              </tr>
-            ))}
-            {discounts.map((l, i) => (
-              <tr key={`d${i}`} className="border-b border-line">
-                <td className="py-2.5 pe-4">
-                  <span className="text-fg-muted">{t("discount")}</span> <span dir="auto">{l.label}</span>
-                </td>
+            {inv.lines.map((l, i) => (
+              <tr key={i} className="border-b border-line">
+                <td className="py-2.5 pe-4">{lineLabel(l.label, l.lineId, l.kind, l.amount)}</td>
                 <td className="py-2.5 text-end">
                   <Money amount={l.amount} currency={cur} />
                 </td>

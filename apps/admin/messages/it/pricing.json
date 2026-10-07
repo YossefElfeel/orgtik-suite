@@ -122,7 +122,11 @@
       "source": "Origine",
       "tableLabel": "Prezzi di {plan}",
       "empty": "Nessun paese da mostrare",
-      "note": "Solo prezzi pubblicati, prima di coupon e imposte."
+      "note": "Prezzi pubblicati con le imposte del Paese. I codici si applicano al pagamento.",
+      "taxInclusive": "Prezzi comprensivi di imposta al {rate}.",
+      "taxExclusive": "Prezzi al netto dell’imposta al {rate}.",
+      "taxReverseCharge": "Inversione contabile; nessuna imposta aggiunta.",
+      "taxNone": "Nessuna imposta aggiunta secondo la regola configurata."
     },
     "zones": {
       "title": "Zone e paesi",

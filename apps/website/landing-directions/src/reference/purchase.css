@@ -570,6 +570,10 @@
   font-size: 14px;
   line-height: 1.6;
 }
+.purchase-summary > .purchase-caption,
+.purchase-summary .purchase-caption .purchase-text-button {
+  color: #ddd0e8;
+}
 .purchase-note {
   display: flex;
   gap: 10px;

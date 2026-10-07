@@ -79,6 +79,8 @@ Each decision gets a `D-###.md` file with its context, options, decision, conseq
 - [D-065](D-065.md): Automatic mock visitor-region detection, Switzerland fallback and controlled test overrides; signed-in workspace billing context wins; no new country selector (2026-10-07).
 - [D-066](D-066.md): Packaged file bytes only, with persistent scoped metadata/references/versions and structured whiteboard state exposed through Files; arbitrary uploads remain deferred (2026-10-07).
 
+- [D-067](D-067.md): Custom-plan quote totals are allocated explicitly to per-tool prices; the platform never invents a monetary split (2026-10-07).
+
 ## Proposed
 
 Each one has a full write-up: context, options with their trade-offs, the proposal, consequences, and the evidence still pending. They were drafted in session 5 for the G0 review.

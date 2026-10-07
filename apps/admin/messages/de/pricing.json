@@ -122,7 +122,11 @@
       "source": "Quelle",
       "tableLabel": "Preise für {plan}",
       "empty": "Keine Länder anzuzeigen",
-      "note": "Nur veröffentlichte Preise, vor Gutscheinen und Steuern."
+      "note": "Veröffentlichte Preise mit der Steuerdarstellung des Landes. Gutscheine gelten bei der Zahlung.",
+      "taxInclusive": "Preise inklusive {rate} Steuer.",
+      "taxExclusive": "Preise zuzüglich {rate} Steuer.",
+      "taxReverseCharge": "Reverse Charge; keine zusätzliche Steuer.",
+      "taxNone": "Keine zusätzliche Steuer gemäß der hinterlegten Regel."
     },
     "zones": {
       "title": "Zonen und Länder",
