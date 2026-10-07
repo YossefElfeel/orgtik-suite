@@ -21,7 +21,7 @@ const MAX_BODY = 512 * 1024; // Upstash's free tier refuses requests over 1 MB
 
 // Changes that are never recorded: the mock's own controls, and anything carrying a password or
 // creating a session (sign-up accounts already travel sealed inside their tokens).
-const NOT_RECORDED = /^\/__|\/(auth|login|logout|register|sign-?up|sign-?in|password|refresh|handoff|token|otp|verify-email)(\/|$|\?)/i;
+const NOT_RECORDED = /^\/__|\/api\/(users|rbac)(\/|$|\?)|\/(auth|login|logout|register|sign-?up|sign-?in|password|refresh|handoff|token|otp|verify-email)(\/|$|\?)/i;
 const CHANGES = new Set(["POST", "PUT", "PATCH", "DELETE"]);
 const KEEP_HEADERS = /^(authorization|cookie|content-type|accept|accept-language|origin|referer|user-agent|x-[a-z0-9-]+)$/i;
 const DROP_HEADERS = /^x-(vercel|forwarded|real-ip|middleware|matched)/i;
@@ -98,6 +98,19 @@ function pickStore(config) {
 
 const recordable = (method, url) => CHANGES.has(method) && !NOT_RECORDED.test(url);
 
+function redactBody(body) {
+  if (!body.length) return body;
+  try {
+    const data = JSON.parse(body.toString("utf8"));
+    const clean = (value) => {
+      if (Array.isArray(value)) return value.map(clean);
+      if (!value || typeof value !== "object") return value;
+      return Object.fromEntries(Object.entries(value).filter(([key]) => !/^(password|passwordHash|newPassword|oldPassword|currentPassword|confirmPassword)$/i.test(key)).map(([key, item]) => [key, clean(item)]));
+    };
+    return Buffer.from(JSON.stringify(clean(data)));
+  } catch { return body; }
+}
+
 function recordHeaders(headers) {
   const out = {};
   for (const [k, v] of Object.entries(headers || {})) if (KEEP_HEADERS.test(k) && !DROP_HEADERS.test(k)) out[k] = v;
@@ -115,4 +128,4 @@ function makeLock() {
   };
 }
 
-module.exports = { pickStore, recordable, recordHeaders, makeLock, MAX_ENTRIES, MAX_BODY, memoryStore, fileStore, redisStore };
+module.exports = { pickStore, recordable, recordHeaders, redactBody, makeLock, MAX_ENTRIES, MAX_BODY, memoryStore, fileStore, redisStore };

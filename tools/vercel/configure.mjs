@@ -35,10 +35,11 @@ export function commandsFor(dir, { prebuild = false, noBuild = false } = {}) {
   const name = JSON.parse(fs.readFileSync(path.join(ROOT, dir, "package.json"), "utf8")).name;
   const up = dir.split("/").map(() => "..").join("/");
   const out = {
-    installCommand: `cd ${up} && ${PNPM} install --frozen-lockfile`,
+    git: { deploymentEnabled: false },
+    installCommand: `node ${up}/tools/vercel/validate-env.cjs ${dir === "mock" ? "mock" : dir.includes("website") ? "website" : path.basename(dir)} && cd ${up} && ${PNPM} install --frozen-lockfile`,
     ignoreCommand: `cd ${up} && ${TURBO} query affected --packages ${name} --exit-code --base "\${VERCEL_GIT_PREVIOUS_SHA:-HEAD^}"`,
   };
-  if (!noBuild) out.buildCommand = `${prebuild ? `node ${up}/tools/vercel-prebuild.cjs && ` : ""}cd ${up} && ${PNPM} --filter "${name}..." run build`;
+  if (!noBuild) out.buildCommand = `${prebuild ? `node ${up}/tools/vercel-prebuild.cjs && ` : ""}cd ${up} && ${PNPM} --filter ${name}... run build`;
   return out;
 }
 

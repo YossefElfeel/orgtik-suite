@@ -6,6 +6,10 @@ process.env.ORGTIK_MOCK_NO_LISTEN = "1";
 const { slots, handle, ready } = require("../server");
 
 module.exports = async (req, res) => {
+  if (req.method === "OPTIONS") {
+    res.writeHead(204, { "access-control-allow-origin": req.headers.origin || "*", "access-control-allow-methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS", "access-control-allow-headers": req.headers["access-control-request-headers"] || "content-type,authorization", "access-control-allow-credentials": "true", vary: "Origin" });
+    return res.end();
+  }
   try {
     await ready();
   } catch (e) {

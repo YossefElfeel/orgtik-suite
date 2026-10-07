@@ -1,68 +1,59 @@
 "use client";
 
-// Arriving signed in from the public website (or anything else that holds a suite session) with
-// a one-time code instead of a token in the address (Q-004). The code is exchanged for the
-// session, which is then checked and stored the same way /auth?token= does.
+// Exchange once, then validate the profile. Keep the exchanged session for a profile retry:
+// consuming another handoff would fail, and an outage must not replace the existing account.
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { IUser as SosBarUser, UnifiedTokenValidation } from "@somion/sos-bar";
+import { useTranslations } from "next-intl";
+import { Button, ErrorState, LoadingState } from "@orgtik/ui";
 import { API_URL } from "@/constants/env";
 import { useAppDispatch } from "@/redux/app/hooks";
 import { switchSession } from "@/redux/features/auth/authThunks";
 import { safeRedirect } from "@/lib/safe-redirect";
-import { IScopeItem, IUser } from "@/types/user";
+import { IScopeItem, ITokens, IUser } from "@/types/user";
 
 export default function HandoffPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const [token, setToken] = useState<string | null>(null);
-
-  // Read once: the address is cleaned straight away, and a code works only once.
+  const t = useTranslations("Auth");
+  const [attempt, setAttempt] = useState(0);
+  const [failure, setFailure] = useState<"expired" | "unavailable" | null>(null);
+  const session = useRef<ITokens | null>(null);
   const first = useRef<{ code: string | null; redirect: string } | null>(null);
   if (!first.current) first.current = { code: searchParams.get("code"), redirect: safeRedirect(searchParams.get("redirect")) };
-  const started = useRef(false);
+  const started = useRef(-1);
 
   useEffect(() => {
-    if (started.current) return;
-    started.current = true;
+    if (started.current === attempt) return;
+    started.current = attempt;
     window.history.replaceState(null, "", window.location.pathname);
-    const { code } = first.current!;
-    if (!code) return router.replace("/auth/login");
-    fetch(`${API_URL}/auth/handoff/exchange`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ code }),
-    })
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((body) => setToken(body?.data?.accessToken ?? null))
-      .catch(() => router.replace("/auth/login"));
-  }, [router]);
-
-  const onSuccess = (data: { user: SosBarUser; token: string }) => {
-    const scopes: IScopeItem[] = (data.user.scopes || []).map((scope) => ({
-      scope: scope.scope,
-      roles: [...scope.roles],
-      permissions: [],
-    }));
-    const user: IUser = {
-      id: data.user.id,
-      email: data.user.email,
-      username: data.user.username,
-      firstName: data.user.firstName,
-      lastName: data.user.lastName,
-      avatar: data.user.avatar,
-      isActive: data.user.isActive,
-      isEmailVerified: data.user.isEmailVerified,
-      userType: data.user.userType,
-      createdAt: data.user.createdAt,
-      updatedAt: data.user.updatedAt,
-      profile: data.user.profile,
+    const complete = async () => {
+      setFailure(null);
+      if (!session.current) {
+        const code = first.current!.code;
+        if (!code) throw 400;
+        const response = await fetch(`${API_URL}/auth/handoff/exchange`, {
+          method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ code }),
+        });
+        if (!response.ok) throw response.status;
+        const body = await response.json();
+        if (!body.data?.accessToken) throw 503;
+        session.current = body.data.tokens || { accessToken: body.data.accessToken, refreshToken: "", expiresIn: 0 };
+      }
+      const tokens = session.current!;
+      const response = await fetch(`${API_URL}/auth/me`, { headers: { authorization: `Bearer ${tokens.accessToken}` } });
+      if (!response.ok) throw response.status;
+      const body = await response.json();
+      const { user, scopes } = body.data as { user: IUser; scopes: IScopeItem[] };
+      if (!user?.id || !Array.isArray(scopes)) throw 503;
+      dispatch(switchSession({ user, tokens, scopes }));
+      router.replace(first.current!.redirect);
     };
-    dispatch(switchSession({ user, tokens: { accessToken: data.token, refreshToken: "", expiresIn: 0 }, scopes }));
-    router.replace(first.current!.redirect);
-  };
+    complete().catch((status) => setFailure(status === 400 || status === 401 || status === 403 ? "expired" : "unavailable"));
+  }, [attempt, dispatch, router]);
 
-  if (!token) return null;
-  return <UnifiedTokenValidation baseApi={API_URL} token={token} onSuccess={onSuccess} />;
+  if (failure === "expired") return <ErrorState size="compact" title={t("handoffExpired")} description={t("handoffSignIn")} action={<Button onClick={() => router.replace("/auth/login?switch=1")}>{t("submit")}</Button>} />;
+  if (failure) return <ErrorState size="compact" title={t("failed")} onRetry={() => setAttempt((value) => value + 1)} />;
+  return <LoadingState rows={2} />;
 }

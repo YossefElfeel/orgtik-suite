@@ -178,9 +178,11 @@ export async function restoreSuiteSession() {
   } catch {
     return; // The suite is unreachable: keep the session for the next visit.
   }
-  if (!res.ok) return writeToken(null);
-  const user = (await res.json())?.data?.user;
-  if (!user?.email) return writeToken(null);
+  if (res.status === 401 || res.status === 403) return writeToken(null);
+  if (!res.ok) return; // Retry next visit; a service outage does not invalidate this account.
+  let user;
+  try { user = (await res.json())?.data?.user; } catch { return; }
+  if (!user?.email) return;
   signInPreviewCustomer({
     name: [user.firstName, user.lastName].filter(Boolean).join(" "),
     email: user.email,

@@ -9,7 +9,7 @@
     "unpatch": "node patch.js --restore",
     "start": "node start-all.js",
     "smoke": "node smoke.js",
-    "test": "node lib/journal.test.js && node apps/admin/pricing.test.js && node --test apps/wm/"
+    "test": "node lib/auth.test.js && node lib/journal.test.js && node apps/admin/pricing.test.js && node --test apps/wm/"
   },
   "dependencies": {
     "@iconify-json/bi": "1.2.7",

@@ -1,0 +1,149 @@
+name: Deploy affected projects
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ github.event_name == 'pull_request' && 'preview-mock' || 'production' }}
+  cancel-in-progress: false
+
+jobs:
+  affected:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.affected.outputs.matrix }}
+      count: ${{ steps.affected.outputs.count }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - id: affected
+        env:
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'HEAD^' }}
+          TURBO_SCM_HEAD: HEAD
+        run: |
+          node tools/vercel/affected.mjs > affected.json
+          echo "matrix=$(node -e 'const fs=require("fs");console.log(JSON.stringify({include:JSON.parse(fs.readFileSync("affected.json"))}))')" >> "$GITHUB_OUTPUT"
+          echo "count=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("affected.json")).length)')" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    needs: affected
+    if: needs.affected.outputs.count != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix: ${{ fromJSON(needs.affected.outputs.matrix) }}
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: team_Ypx8oiLDZi3PBNi8ht8fYPsm
+      VERCEL_PROJECT_ID: ${{ github.event_name == 'pull_request' && matrix.previewProjectId || matrix.projectId }}
+      DEPLOY_ENV: ${{ github.event_name == 'pull_request' && 'preview' || 'production' }}
+      PREVIEW_ALIAS: ${{ matrix.previewUrl }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Validate deployment credentials
+        run: test -n "$VERCEL_TOKEN" && test -n "$VERCEL_PROJECT_ID"
+      - name: Install Vercel CLI
+        run: npm install --global vercel@54.7.1
+      - name: Pull build settings
+        run: vercel pull --yes --environment="$DEPLOY_ENV" --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+      - name: Build
+        run: |
+          if [ "$DEPLOY_ENV" = production ]; then
+            vercel build --prod --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+          else
+            vercel build --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+          fi
+      - name: Deploy
+        env:
+          PROJECT_KEY: ${{ matrix.key }}
+        run: |
+          if [ "$DEPLOY_ENV" = production ]; then
+            vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects > deploy-output.txt
+            alias="orgtik-suite-$PROJECT_KEY.vercel.app"
+          else
+            vercel deploy --prebuilt --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects > deploy-output.txt
+            alias=${PREVIEW_ALIAS#https://}
+          fi
+          url=$(node tools/vercel/deploy-url.mjs < deploy-output.txt)
+          vercel alias set "$url" "$alias" --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+          url="https://$alias"
+          export DEPLOY_URL="$url"
+          node -e 'require("fs").writeFileSync("deployment.json",JSON.stringify({key:process.env.PROJECT_KEY,url:process.env.DEPLOY_URL}))'
+          node tools/vercel/check-deploy.mjs deployment.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deployment-${{ matrix.key }}
+          path: deployment.json
+
+  checks:
+    needs: [affected, deploy]
+    if: always() && needs.affected.outputs.count != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: deployment-*
+          path: deployments
+      - name: Preview golden flows and visual checks
+        if: github.event_name == 'pull_request'
+        env:
+          MOCK_PUBLIC_URL: ${{ vars.PREVIEW_MOCK_URL }}
+          SUITE_WEB_URLS: ${{ vars.SUITE_WEB_URLS }}
+        run: |
+          test -n "$MOCK_PUBLIC_URL"
+          node tools/dev/old-layout-links.mjs
+          cd program/tools/audit-kit
+          npm ci
+          npx playwright install --with-deps chromium
+          node ../../../tools/vercel/preview-checks.mjs
+      - name: Report deployments
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+          CHECK_RESULT: ${{ job.status }}
+        with:
+          script: |
+            const fs = require('fs');
+            const files = fs.existsSync('deployments') ? fs.readdirSync('deployments', { recursive: true }).filter(f => f.endsWith('deployment.json')) : [];
+            const deployments = files.map(f => JSON.parse(fs.readFileSync('deployments/' + f)));
+            const body = ['<!-- orgtik-deployments -->', 'Deployment result: ' + process.env.DEPLOY_RESULT, 'Checks: ' + process.env.CHECK_RESULT, ...deployments.map(d => '- ' + d.key + ': ' + d.url)].join('\n');
+            await core.summary.addRaw(body).write();
+            if (context.payload.pull_request) {
+              const issue_number = context.payload.pull_request.number;
+              const { data: comments } = await github.rest.issues.listComments({ ...context.repo, issue_number });
+              const previous = comments.find(c => c.user.type === 'Bot' && c.body.startsWith('<!-- orgtik-deployments -->'));
+              if (previous) await github.rest.issues.updateComment({ ...context.repo, comment_id: previous.id, body });
+              else await github.rest.issues.createComment({ ...context.repo, issue_number, body });
+            }

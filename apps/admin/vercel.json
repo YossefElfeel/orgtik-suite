@@ -1,6 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
+  "installCommand": "node ../../tools/vercel/validate-env.cjs admin && cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
   "ignoreCommand": "cd ../.. && npx --yes turbo@2.11.7 query affected --packages orgtik-admin --exit-code --base \"${VERCEL_GIT_PREVIOUS_SHA:-HEAD^}\"",
-  "buildCommand": "cd ../.. && npx --yes pnpm@11.3.0 --filter \"orgtik-admin...\" run build"
+  "buildCommand": "cd ../.. && npx --yes pnpm@11.3.0 --filter orgtik-admin... run build",
+  "git": {
+    "deploymentEnabled": false
+  }
 }

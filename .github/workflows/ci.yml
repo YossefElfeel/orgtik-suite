@@ -48,7 +48,7 @@ jobs:
           if pnpm turbo query affected --packages @orgtik/ui --exit-code > /dev/null; then
             echo "@orgtik/ui unchanged: skipped"
           else
-            pnpm exec playwright install --with-deps chromium
+            pnpm --filter docs exec playwright install --with-deps chromium
             pnpm --filter docs build && pnpm --filter docs check
           fi
         env:
