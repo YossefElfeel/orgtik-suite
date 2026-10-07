@@ -59,6 +59,15 @@ export function checkMockBundle(output = ".vercel/output") {
     if (!fs.existsSync(packaged) || digest(packaged) !== digest(path.join(source, file))) throw new Error(`Files HLS asset was altered or omitted: ${file}`);
   }
   console.log(`mock: ${segments.length} binary HLS segments match the source`);
+  const legacy = path.resolve(import.meta.dirname, "../../mock/apps/admin/legacy-v1");
+  if (fs.existsSync(legacy)) {
+    const files = fs.readdirSync(legacy).filter(file => file.endsWith(".js"));
+    for (const file of files) {
+      const packaged = path.join(fn.folder, "mock/apps/admin/legacy-v1", file);
+      if (!fs.existsSync(packaged) || digest(packaged) !== digest(path.join(legacy, file))) throw new Error(`Historical financial reducer was altered or omitted: ${file}`);
+    }
+    console.log(`mock: ${files.length} historical financial reducers match the source`);
+  }
   console.log("mock: self-contained Linux function artifact passed");
 }
 

@@ -11,10 +11,15 @@ const { GRANTS } = require("./admin/permissions");
 const { advance } = require("./admin/lifecycle");
 const adminApi = require("./admin/admin-api");
 const appApi = require("./admin/app-api");
+const websiteOffers = require("./admin/website-offers");
 
 const SCOPE = "platform_admin";
 let S = null;
-const store = (ctx) => (S ??= makeStore({ identity: ctx.identity }));
+const store = (ctx) => {
+  S ??= makeStore({ identity: ctx.identity });
+  websiteOffers.registerCatalog(S);
+  return S;
+};
 
 function helpers() {
   const rid = () => crypto.randomUUID();
@@ -64,17 +69,27 @@ module.exports = {
       // A fixed id, so the same workspace is rebuilt if another hosted instance rebuilds the person.
       const wsId = `ws_${u.key}`;
       if (s.db.workspaces.some((w) => w.id === wsId)) return;
-      const ws = s.createWorkspace({ wsId, ownerKey: u.key, name: company || `${u.firstName}'s workspace`, email: u.email, createdAt: u.createdAt });
+      const ws = s.createWorkspace({ wsId, ownerKey: u.key, name: company || `${u.firstName}'s workspace`, email: u.email, createdAt: u.createdAt, registration: true });
       s.log(u.key, "sign_up", ws.id);
     });
     adminApi(app, ctx, s, H);
+    websiteOffers.mountPublicRoutes(app, ctx, s, H);
     appApi(app, ctx, s, H);
     controls(app, s, H);
   },
   // USR grows in SOS (D-011): the same customer API on the SOS origin, sharing this store.
   mounts: {
     sos(app, ctx) {
-      appApi(app, ctx, store(ctx), helpers());
+      const s = store(ctx);
+      websiteOffers.mountPublicRoutes(app, ctx, s, helpers());
+      appApi(app, ctx, s, helpers());
     },
+  },
+  exportState: () => S?.exportState() ?? null,
+  importState(snapshot) {
+    if (!S) throw new Error("Platform runtime must be built before state import.");
+    S.importState(snapshot);
+    websiteOffers.registerCatalog(S);
+    S.ensureRegisteredWorkspaces();
   },
 };

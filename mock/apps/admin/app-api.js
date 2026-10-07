@@ -1,7 +1,9 @@
 // Customer API for USR (Phase E): /v1/app/*. The signed-in person acts inside one workspace
 // (X-Workspace header or ?workspace=, else their first). Roles in the workspace (spec 05 §1):
 // owner (billing and everything), admin (team and tools, no billing), member, guest.
-const { advance, toolState, banners } = require("./lifecycle");
+const { advance, toolState, banners, overLimits } = require("./lifecycle");
+const { linkWebsiteOrder } = require("./website-offers");
+const { makeWorkspaceOperation } = require("../../lib/workspace-command");
 
 module.exports = function appApi(app, ctx, S, H) {
   const { identity } = ctx;
@@ -35,7 +37,8 @@ module.exports = function appApi(app, ctx, S, H) {
   const money = (n, cur) => S.pricing.toDecimals(n, dec(cur));
   const nameOf = (m) => (m.userKey ? identity.fullName(identity.findByKey(m.userKey)) : m.name);
   const emailOf = (m) => (m.userKey ? identity.findByKey(m.userKey)?.email : m.email);
-  const taxFor = (ws) => db.taxRules.find((t) => t.country === (ws.billing?.country || ws.country) && t.active) ?? null;
+  const taxFor = ws => S.taxForWorkspace(ws);
+  const availablePlan = (p, ws) => p.status !== "archived" && ((!p.private && p.visibility !== "private") || p.workspaceId === ws.id);
   const live = (l) => l.state !== "deleted" && l.state !== "ended";
 
   // ---- USR-00 shell: who am I, which workspace, which tools, which banner ----
@@ -63,13 +66,13 @@ module.exports = function appApi(app, ctx, S, H) {
   // ---- USR-04 tools catalogue and USR-05 plans for one tool (prices from the resolver) ----
   const priced = (p, ws, cycle) => {
     if (p.tier === "free") return { amount: 0, unit: 0, currency: ws.currency, source: "Free", quantity: 1 };
-    const r = S.resolve(p.id, ws.country, cycle, S.seats(ws));
+    const r = S.resolveForWorkspace(p.id, ws, cycle);
     return r ? { amount: r.amount, unit: r.unit, currency: r.currency, source: r.source, quantity: r.quantity } : null;
   };
   app.get("/v1/app/tools", as("guest"), (req, res) => {
     const { ws, member } = req.p;
     ok(res, db.tools.filter((t) => t.status !== "retired").sort((a, b) => a.order - b.order).map((t) => {
-      const plans = db.plans.filter((p) => p.tool === t.key && p.visibility !== "private" && p.status !== "archived");
+      const plans = db.plans.filter(p => p.tool === t.key && availablePlan(p, ws));
       const from = plans.filter((p) => p.tier !== "free").map((p) => priced(p, ws, "monthly")).filter(Boolean).sort((a, b) => a.unit - b.unit)[0] ?? null;
       return { key: t.key, name: t.name, short: t.short, icon: t.icon, status: t.status, mandatory: Boolean(t.mandatory), state: toolState(S, ws, t, member), hasFree: plans.some((p) => p.tier === "free"), trialDays: Math.max(0, ...plans.map((p) => p.trialDays ?? 0)), fromUnit: from ? { amount: from.unit, currency: from.currency, perUser: plans.find((p) => priced(p, ws, "monthly")?.unit === from.unit)?.perUser ?? false } : null, onWaitlist: db.waitlist.some((w) => w.tool === t.key && w.workspaceId === ws.id) };
     }));
@@ -80,18 +83,21 @@ module.exports = function appApi(app, ctx, S, H) {
     if (!t) return fail(res, 404, "not_found", "No such tool.");
     const l = ws.lines.find((x) => x.tool === t.key && live(x));
     const usedTrial = ws.lines.some((x) => x.tool === t.key && x.trialUsed) || Boolean(l?.trialEndsAt);
+    const tax = S.taxForWorkspace(ws);
     ok(res, {
       key: t.key, name: t.name, short: t.short, icon: t.icon, status: t.status, mandatory: Boolean(t.mandatory), state: toolState(S, ws, t, member),
       line: l ?? null,
-      plans: db.plans.filter((p) => p.tool === t.key && p.visibility !== "private" && p.status !== "archived").map((p) => ({
+      plans: db.plans.filter(p => p.tool === t.key && availablePlan(p, ws)).map((p) => ({
         id: p.id, name: p.name, tier: p.tier, perUser: p.perUser, minSeats: p.minSeats, trialDays: usedTrial ? 0 : p.trialDays ?? 0, recommended: Boolean(p.recommended),
+        contractedQuantity: p.contractedQuantity ?? null, workspacePrivate: Boolean(p.private || p.visibility === "private"),
         limits: Object.entries(p.limits ?? {}).map(([k, v]) => ({ key: k, value: v, unit: db.features.find((f) => f.key === k)?.unit ?? null })),
         flags: Object.entries(p.flags ?? {}).filter(([, v]) => v).map(([k]) => k),
         monthly: priced(p, ws, "monthly"), yearly: p.tier === "free" ? null : priced(p, ws, "yearly"), yearlyDiscountPct: p.yearlyDiscountPct ?? 0,
         current: l?.planId === p.id,
       })),
-      seats: S.seats(ws),
+      seats: S.purchasedSeats(ws, t.key, l?.planId),
       seatModel: db.settings.switches.seatModel.value, // G-04
+      taxDisplay: tax.inclusive ? "inclusive" : "exclusive", taxInclusive: tax.inclusive, taxRate: tax.rate, reverseCharge: tax.reverseCharge,
     });
   });
   app.post("/v1/app/tools/:key/waitlist", as("member"), (req, res) => {
@@ -111,7 +117,7 @@ module.exports = function appApi(app, ctx, S, H) {
     // G-17: one trial per tool per workspace.
     if (ws.lines.some((l) => l.tool === p.tool && (l.trialUsed || l.trialEndsAt))) return fail(res, 409, "trial_used", "This workspace already had a trial of this tool.");
     if (existing && existing.state !== "free") return fail(res, 409, "wrong_state", "You already have this tool.");
-    const r = S.resolve(p.id, ws.country, "monthly", S.seats(ws));
+    const r = S.resolveForWorkspace(p.id, ws, "monthly");
     const end = S.iso(S.now() + p.trialDays * DAY);
     const line = { id: S.id("ln"), tool: p.tool, planId: p.id, cycle: "monthly", state: "trialing", trialEndsAt: end, periodEnd: end, startedAt: S.iso(S.now()), trialUsed: true, snapshot: { amount: r.amount, unit: r.unit, quantity: r.quantity, currency: r.currency, source: r.source, priceVersion: db.priceVersion } };
     if (existing) Object.assign(existing, { state: "ended", endedAt: S.iso(S.now()), replacedBy: line.id });
@@ -122,23 +128,37 @@ module.exports = function appApi(app, ctx, S, H) {
     ok(res, line, {}, 201);
   });
 
-  function quote(ws, items, { coupon, bundleId } = {}) {
+  function quote(ws, items, { coupon, bundleId, intent } = {}) {
     const cur = ws.currency;
     const lines = [];
+    if (ws.billingCredit > 0 && ws.billingCreditCurrency && ws.billingCreditCurrency !== cur) return { error: ["currency", "credit_migration_required"] };
+    if (!Array.isArray(items) || !items.length) return { error: ["items", "required"] };
+    const selectedTools = new Set();
     for (const it of items) {
       const p = db.plans.find((x) => x.id === it.planId);
-      if (!p) return { error: ["planId", "unknown"] };
+      if (!p || !availablePlan(p, ws) || !p.tool || ["coming_soon", "retired"].includes(db.tools.find(t => t.key === p.tool)?.status)) return { error: ["planId", "unknown"] };
+      if (selectedTools.has(p.tool)) return { error: ["items", "duplicate_tool"] };
+      selectedTools.add(p.tool);
       const cycle = it.cycle ?? "monthly";
-      const r = S.resolve(p.id, ws.country, cycle, it.seats ?? S.seats(ws));
+      if (!["monthly", "yearly"].includes(cycle) || p.private?.cycle && p.private.cycle !== cycle) return { error: ["cycle", "invalid"] };
+      let quantity = S.purchasedSeats(ws, p.tool, p.id);
+      if (it.intent === "seat_purchase" || intent === "seat_purchase") {
+        if (!p.perUser || !Number.isSafeInteger(it.quantity) || it.quantity < Math.max(p.minSeats ?? 1, S.assignedSeats(ws, p.tool, p.id) + S.reservedSeats(ws, p.tool))) return { error: ["quantity", "invalid"] };
+        quantity = it.quantity;
+      }
+      // Legacy browser seats never change paid capacity; quantity requires the explicit intent.
+      const r = S.resolveForWorkspace(p.id, ws, cycle, quantity);
       if (!r) return { error: ["planId", "no_price"] };
+      if (!Number.isSafeInteger(Math.round(r.amount * 10 ** dec(cur)))) return { error: ["quantity", "invalid"] };
       if (r.currency !== cur) return { error: ["currency", "mismatch"] }; // R03-C3: one currency per workspace
       const current = ws.lines.find((l) => l.tool === p.tool && (l.state === "active" || l.state === "cancelling"));
       // Proration (R03-ALG-8, G-01): an upgrade mid-period pays the remaining share now.
-      const factor = current && current.cycle === cycle && Date.parse(current.periodEnd) > S.now() ? Math.max(0, Math.min(1, (Date.parse(current.periodEnd) - S.now()) / ((cycle === "yearly" ? 365 : 30) * DAY))) : 1;
-      const credit = current && factor < 1 ? money(current.snapshot.amount * factor, cur) : 0;
-      lines.push({ planId: p.id, tool: p.tool, name: p.name, cycle, unit: r.unit, quantity: r.quantity, amount: r.amount, source: r.source, prorationFactor: Math.round(factor * 1000) / 1000, credit, replaces: current?.id ?? null });
+      const proration = S.pricing.proration(current, cycle, S.now(), dec(cur));
+      lines.push({ planId: p.id, tool: p.tool, name: p.name, cycle, unit: r.unit, quantity: r.quantity, amount: r.amount, source: r.source, prorationFactor: proration.factor, credit: proration.credit, replaces: current?.id ?? null, periodEnd: proration.periodEnd, periodStart: proration.periodStart, contractedCapacity: p.contractedQuantity ?? null });
     }
-    const bundle = bundleId ? db.bundles.find((b) => b.id === bundleId && b.active) : db.bundles.find((b) => b.active && b.planIds.every((id) => lines.some((l) => l.planId === id) || ws.lines.some((x) => x.planId === id && live(x))) && b.planIds.some((id) => lines.some((l) => l.planId === id)));
+    const covers = b => b.planIds.every(id => lines.some(l => l.planId === id) || ws.lines.some(x => x.planId === id && ["active", "cancelling"].includes(x.state) && !lines.some(selection => selection.tool === x.tool)));
+    const bundle = bundleId ? db.bundles.find(b => b.id === bundleId && b.active) : db.bundles.find(b => b.active && covers(b) && b.planIds.some(id => lines.some(l => l.planId === id)));
+    if (bundleId && (!bundle || !covers(bundle) || lines.some(l => !bundle.planIds.includes(l.planId)))) return { error: ["bundleId", "invalid"] };
     let c = null, couponError = null;
     if (coupon) {
       c = db.coupons.find((x) => x.code === String(coupon).toUpperCase());
@@ -146,58 +166,124 @@ module.exports = function appApi(app, ctx, S, H) {
       if (!c) couponError = "coupon_invalid";
       else if (c.redeemed >= c.maxRedemptions) couponError = "coupon_used_up";
       else if (!c.active) couponError = "coupon_invalid";
+      else if (Date.parse(c.validFrom) > S.now()) couponError = "coupon_not_started";
       else if (Date.parse(c.validTo) < S.now()) couponError = "coupon_expired";
       else if (c.appliesTo !== "all" && !lines.some((l) => l.planId === c.appliesTo)) couponError = "coupon_not_applicable";
       if (couponError) c = null;
     }
     const rule = taxFor(ws);
-    const inclusive = db.settings.switches.taxDisplay.value === "inclusive";
-    const t = S.pricing.totals({ lines: lines.map((l) => ({ amount: l.amount - l.credit })), currency: cur, decimals: dec(cur), bundlePct: bundle?.pct ?? 0, coupon: c, prorationFactor: 1, tax: rule ? { rate: rule.rate, inclusive } : null });
-    return { ...t, currency: cur, lines, bundle: bundle ? { id: bundle.id, name: bundle.name, pct: bundle.pct } : null, coupon: c ? { code: c.code, kind: c.kind } : null, couponError: couponError ?? t.couponError ?? null, taxLabel: rule ? `${rule.name} ${rule.rate}%` : null, taxDecided: db.settings.switches.taxDisplay.decided };
+    const t = S.pricing.totals({ lines: lines.map(l => ({ ...l, bundleEligible: Boolean(bundle?.planIds.includes(l.planId)), couponEligible: c?.appliesTo === "all" || c?.appliesTo === l.planId })), currency: cur, decimals: dec(cur), bundlePct: bundle?.pct ?? 0, coupon: c, tax: rule });
+    // Keep unused switch credit in the workspace currency instead of discarding a negative due.
+    const accountCreditUsed = Math.min(ws.billingCredit ?? 0, t.prorated);
+    if (accountCreditUsed > 0) {
+      const charged = S.pricing.totals({ lines: [{ amount: money(t.prorated - accountCreditUsed, cur) }], currency: cur, decimals: dec(cur), tax: rule });
+      Object.assign(t, { prorated: charged.prorated, net: charged.net, tax: charged.tax, total: charged.total });
+    }
+    t.accountCreditUsed = accountCreditUsed;
+    if (![t.total, t.net, t.tax, t.creditRemaining].every(value => Number.isSafeInteger(Math.round(value * 10 ** dec(cur))))) return { error: ["items", "invalid_amount"] };
+    lines.forEach((line, i) => { line.periodAmount = t.lineAmounts[i].discounted; });
+    return { ...t, currency: cur, lines, bundle: bundle ? { id: bundle.id, name: bundle.name, pct: bundle.pct } : null, coupon: c ? { code: c.code, kind: c.kind } : null, couponError: couponError ?? t.couponError ?? null, taxLabel: rule.label, taxRate: rule.rate, taxDisplay: rule.inclusive ? "inclusive" : "exclusive", reverseCharge: rule.reverseCharge, taxDecided: db.settings.switches.taxDisplay.decided };
   }
+  const quoteInputs = body => ({ items: body.items ?? [], coupon: body.coupon ? String(body.coupon).toUpperCase() : null, bundleId: body.bundleId ?? null, intent: body.intent ?? null });
+  const quoteFingerprint = (p, body) => makeWorkspaceOperation({ id: "subscription-quote", workspaceId: p.ws.id, actor: { userId: p.user.id }, method: "POST", path: "/v1/app/checkout", body: quoteInputs(body) }).fingerprint;
+  const quoteContext = ws => JSON.stringify({ currency: ws.currency, country: ws.country, state: ws.state, billingCountry: ws.billing.country, taxId: ws.billing.taxId, credit: ws.billingCredit ?? 0, creditCurrency: ws.billingCreditCurrency, members: ws.members.map(m => [m.userKey, m.email, m.role, m.status, m.tools]), lines: ws.lines.filter(l => ["active", "cancelling", "past_due", "read_only"].includes(l.state)).map(l => [l.id, l.planId, l.state, l.periodStart, l.periodEnd, l.snapshot]) });
   app.post("/v1/app/checkout/preview", as("owner"), (req, res) => {
     const { ws } = req.p;
     const items = req.body?.items ?? [];
     if (!Array.isArray(items) || !items.length) return fail(res, 422, "invalid", "Choose at least one plan.", { fieldErrors: { items: "required" } });
     const q = quote(ws, items, req.body);
     if (q.error) return fail(res, 422, "invalid", "That plan can't be bought here.", { fieldErrors: { [q.error[0]]: q.error[1] } });
-    ok(res, { ...q, paymentMethods: ws.paymentMethods.filter((m) => !m.expired), gateways: db.gateways.filter((g) => g.active && (g.countries.includes(ws.country) || g.countries.includes("*")) && g.currencies.includes(ws.currency)).map(({ id, name, methods, recurring }) => ({ id, name, methods, recurring })) });
+    const boundary = Math.min(S.now() + 15 * 60000, ...q.lines.filter(l => l.replaces).map(l => Date.parse(ws.lines.find(old => old.id === l.replaces)?.periodEnd)).filter(end => end > S.now()));
+    const priced = { ...q, priceVersion: db.priceVersion, quoteId: S.id("cq"), expiresAt: S.iso(boundary), expiresIn: Math.max(0, Math.floor((boundary - S.now()) / 1000)) };
+    db.checkoutQuotes ??= [];
+    db.checkoutQuotes.push({ id: priced.quoteId, workspaceId: ws.id, actorId: req.p.user.id, fingerprint: quoteFingerprint(req.p, req.body), context: quoteContext(ws), snapshot: JSON.parse(JSON.stringify(priced)), consumed: false });
+    ok(res, { ...priced, paymentMethods: ws.paymentMethods.filter((m) => !m.expired), gateways: S.routeGateways(ws).map(({ id, name, methods, recurring }) => ({ id, name, methods, recurring })) });
   });
   app.post("/v1/app/checkout/confirm", as("owner", { write: true }), (req, res) => {
     const { ws } = req.p;
     const b = req.body ?? {};
-    const q = quote(ws, b.items ?? [], b);
+    const operationId = req.get("idempotency-key");
+    if (operationId && !/^[\w.:-]{1,200}$/.test(operationId)) return fail(res, 422, "invalid", "Use a valid payment attempt ID.");
+    // The role/read-only guards run first. A prior receipt never grants a removed member
+    // permission, and a repeated confirmed payment retains its original monetary result.
+    const operation = operationId ? makeWorkspaceOperation({ id: operationId, workspaceId: ws.id, actor: { userId: req.p.user.id }, method: req.method, path: req.path, body: b }) : null;
+    const prior = operation && db.checkoutOperations?.find(row => row.id === operation.id && row.workspaceId === ws.id && row.actor.userId === req.p.user.id);
+    if (prior) return prior.fingerprint === operation.fingerprint ? ok(res, prior.result, {}, 201) : fail(res, 409, "operation_conflict", "This payment attempt was already used for a different checkout.");
+    const held = b.quoteId ? db.checkoutQuotes?.find(row => row.id === b.quoteId) : null;
+    if (b.quoteId && !held) return fail(res, 404, "quote_not_found", "Review a new checkout quote.");
+    if (held && (held.workspaceId !== ws.id || held.actorId !== req.p.user.id)) return fail(res, 403, "forbidden", "This checkout quote belongs to another workspace or owner.");
+    if (held?.consumed) return fail(res, 409, "quote_used", "This quote already has a successful payment.");
+    if (held && Date.parse(held.snapshot.expiresAt) <= S.now()) return fail(res, 410, "quote_expired", "Review the total again before paying.");
+    if (held && (held.fingerprint !== quoteFingerprint(req.p, b) || held.context !== quoteContext(ws) || b.billing?.taxId !== undefined && b.billing.taxId !== ws.billing.taxId || held.snapshot.lines.some(l => !db.plans.some(p => p.id === l.planId && availablePlan(p, ws))))) return fail(res, 409, "checkout_changed", "Your billing context changed. Review a new total before paying.");
+    const q = held ? JSON.parse(JSON.stringify(held.snapshot)) : quote(b.billing ? { ...ws, billing: { ...ws.billing, ...b.billing, country: ws.billing?.country || ws.country } } : ws, b.items ?? [], b);
+    if (held && q.coupon) {
+      const coupon = db.coupons.find(row => row.code === q.coupon.code);
+      if (!coupon?.active || coupon.redeemed >= coupon.maxRedemptions || Date.parse(coupon.validTo) < S.now()) return fail(res, 409, "checkout_changed", "The discount is no longer available. Review a new total.");
+    }
     if (q.error || !(b.items ?? []).length) return fail(res, 422, "invalid", "That plan can't be bought here.", { fieldErrors: { items: "required" } });
     if (b.coupon && q.couponError) return fail(res, 422, "invalid", "That code doesn't work.", { fieldErrors: { coupon: q.couponError } });
     const pm = ws.paymentMethods.find((m) => m.id === b.paymentMethodId && !m.expired);
     if (!pm) return fail(res, 422, "invalid", "Choose a payment method.", { fieldErrors: { paymentMethodId: "required" } });
     if (!ws.billing?.legalName?.trim() && !b.billing?.legalName?.trim()) return fail(res, 422, "invalid", "Add the billing name first.", { fieldErrors: { "billing.legalName": "required" } });
-    if (b.billing) ws.billing = { ...ws.billing, ...b.billing };
     // Payment, simulated: mock controls can make the next one fail (see /v1/__mock/fail-next-payment).
     const failed = S.failNext > 0 ? (S.failNext--, true) : pm.last4 === "0002";
     // A declined payment leaves nothing behind (USR-08): no invoice, no line, no coupon used.
     if (failed) return fail(res, 402, "payment_failed", "The payment didn't go through. Nothing changed; try another card.", { reason: "card_declined" });
-    const inv = invoiceFrom(ws, q, "paid", pm);
+    const gateway = S.routeGateways(ws, { method: pm.kind })[0];
+    if (!gateway) return fail(res, 409, "no_gateway", "No configured payment gateway supports this workspace currency.");
+    if (!S.usdRate(q.currency)) return fail(res, 503, "payment_rate_unavailable", "The USD reporting rate is unavailable. Nothing was charged.");
+    if (b.billing) ws.billing = { ...ws.billing, ...b.billing, country: ws.billing?.country || ws.country };
+    const inv = invoiceFrom(ws, q, "paid", { ...pm, gateway: gateway.id });
     const periodDays = (c) => (c === "yearly" ? 365 : 30);
     const created = [];
     for (const l of q.lines) {
       const old = l.replaces ? ws.lines.find((x) => x.id === l.replaces) : ws.lines.find((x) => x.tool === l.tool && live(x));
       if (old) Object.assign(old, { state: "ended", endedAt: S.iso(S.now()), replacedBy: "pending" });
-      const nl = { id: S.id("ln"), tool: l.tool, planId: l.planId, cycle: l.cycle, state: "active", startedAt: S.iso(S.now()), periodEnd: S.iso(S.now() + periodDays(l.cycle) * DAY), snapshot: { amount: l.amount, unit: l.unit, quantity: l.quantity, currency: q.currency, source: l.source, priceVersion: db.priceVersion }, trialUsed: Boolean(old?.trialUsed || old?.trialEndsAt) };
+      const nl = { id: S.id("ln"), tool: l.tool, planId: l.planId, cycle: l.cycle, state: "active", startedAt: S.iso(S.now()), periodStart: l.periodStart ?? S.iso(S.now()), periodEnd: l.periodEnd ?? S.iso(S.now() + periodDays(l.cycle) * DAY), snapshot: { amount: l.amount, unit: l.unit, quantity: l.quantity, periodAmount: l.periodAmount, currency: q.currency, source: l.source, priceVersion: q.priceVersion ?? db.priceVersion }, trialUsed: Boolean(old?.trialUsed || old?.trialEndsAt), autoRenew: old?.autoRenew !== false };
       if (old) old.replacedBy = nl.id;
       const at = ws.lines.findIndex((x) => x.tool === l.tool); // in front of the tool's older lines (toolState reads the first)
       ws.lines.splice(at < 0 ? ws.lines.length : at, 0, nl);
       created.push(nl);
+      for (const invoiceLine of inv.lines) if (invoiceLine.planId === l.planId) invoiceLine.lineId = nl.id;
+      const custom = db.customPlanRequests.find(r => r.workspaceId === ws.id && r.privatePlanIds?.includes(l.planId));
+      if (custom) { custom.lineIds ??= []; if (!custom.lineIds.includes(nl.id)) custom.lineIds.push(nl.id); }
     }
     if (q.coupon) db.coupons.find((c) => c.code === q.coupon.code).redeemed += 1;
+    ws.billingCredit = money((ws.billingCredit ?? 0) - q.accountCreditUsed + q.creditRemaining, q.currency);
+    ws.billingCreditCurrency = q.currency;
     ws.currencyLocked = true; // R03-C2: the first payment locks the currency
+    if (held) { held.consumed = true; held.invoiceId = inv.id; }
     S.log(req.p.key, "checkout", ws.id, { invoice: inv.number });
-    ok(res, { invoice: { id: inv.id, number: inv.number, total: inv.total, currency: inv.currency }, lines: created }, {}, 201);
+    const result = { invoice: { id: inv.id, number: inv.number, total: inv.total, currency: inv.currency }, lines: created };
+    if (operation) { db.checkoutOperations ??= []; db.checkoutOperations.push({ ...operation, result: JSON.parse(JSON.stringify(result)) }); }
+    ok(res, result, {}, 201);
   });
   function invoiceFrom(ws, q, state, pm) {
     const n = 1040 + db.invoices.length + 1;
     const r = S.usdRate(q.currency);
-    const inv = { id: S.id("inv"), number: `INV-2026-${String(n).padStart(6, "0")}`, workspaceId: ws.id, kind: "subscription", state, currency: q.currency, issuedAt: S.iso(S.now()), dueAt: S.iso(S.now()), lines: q.lines.map((l) => ({ label: `${l.name?.en ?? l.planId}${l.quantity > 1 ? ` × ${l.quantity}` : ""}`, amount: l.amount, credit: l.credit })), subtotal: q.subtotal, bundleDiscount: q.bundleDiscount, couponDiscount: q.couponDiscount, taxLabel: q.taxLabel, tax: q.tax, total: q.total, payments: [{ id: S.id("pay"), amount: q.total, currency: q.currency, method: pm.kind, gateway: pm.gateway, at: S.iso(S.now()), status: state === "paid" ? "succeeded" : "failed", usdRate: r, usdAmount: money(q.total / r, "USD") }], creditNotes: [], refunded: 0 };
+    if (!r) throw Object.assign(new Error("The USD reporting rate is unavailable; no invoice was created."), { status: 503, code: "payment_rate_unavailable" });
+    const invoiceLines = [];
+    q.lines.forEach((l, i) => {
+      const label = `${l.name?.en ?? l.planId}${l.contractedCapacity ? ` · capacity ${l.contractedCapacity}` : l.quantity > 1 ? ` × ${l.quantity}` : ""}`;
+      const factor = l.prorationFactor ?? 1;
+      const charge = money(l.amount * factor, q.currency);
+      invoiceLines.push({ label, amount: charge, planId: l.planId, kind: "charge", credit: l.credit ?? 0, prorationFactor: factor });
+      const details = q.lineAmounts?.[i];
+      if (details) {
+        const discount = money(charge - money(details.discounted * factor, q.currency), q.currency);
+        const bundle = Math.min(discount, money(details.bundleDiscount * factor, q.currency));
+        if (bundle) invoiceLines.push({ label: "Bundle", kind: "bundle_discount", planId: l.planId, amount: -bundle });
+        if (discount - bundle) invoiceLines.push({ label: q.coupon?.code ?? "Coupon", kind: "coupon_discount", planId: l.planId, amount: -money(discount - bundle, q.currency) });
+      }
+      if (l.credit) invoiceLines.push({ label: "Unused period credit", kind: "period_credit", planId: l.planId, amount: -l.credit });
+    });
+    if (q.creditRemaining) invoiceLines.push({ label: "Unused credit carried forward", kind: "credit_carried", amount: q.creditRemaining });
+    if (q.accountCreditUsed) invoiceLines.push({ label: "Workspace credit applied", kind: "account_credit", amount: -q.accountCreditUsed });
+    if (q.taxDisplay === "inclusive" && q.taxRate > 0) for (const line of invoiceLines) line.amount = money(line.amount / (1 + q.taxRate / 100), q.currency);
+    const subtotal = q.net ?? q.subtotal;
+    const rounding = money(subtotal - invoiceLines.reduce((sum, line) => sum + line.amount, 0), q.currency);
+    if (rounding) { const last = invoiceLines.filter(line => line.kind === "charge").at(-1); last.amount = money(last.amount + rounding, q.currency); last.roundingAdjustment = rounding; }
+    const inv = { id: S.id("inv"), number: `INV-2026-${String(n).padStart(6, "0")}`, workspaceId: ws.id, kind: "subscription", state, currency: q.currency, issuedAt: S.iso(S.now()), dueAt: S.iso(S.now()), lines: invoiceLines, subtotal, quotedSubtotal: q.subtotal, bundleDiscount: q.bundleDiscount, couponDiscount: q.couponDiscount, taxLabel: q.taxLabel, taxDisplay: q.taxDisplay, taxRate: q.taxRate ?? 0, reverseCharge: Boolean(q.reverseCharge), tax: q.tax, total: q.total, creditRemaining: q.creditRemaining ?? 0, accountCreditUsed: q.accountCreditUsed ?? 0, payments: [{ id: S.id("pay"), amount: q.total, currency: q.currency, method: pm.kind, gateway: pm.gateway, at: S.iso(S.now()), status: state === "paid" ? "succeeded" : "failed", usdRate: r, usdAmount: money(q.total / r, "USD") }], creditNotes: [], refunded: 0 };
     if (state === "paid") inv.paidAt = S.iso(S.now());
     db.invoices.push(inv);
     return inv;
@@ -208,7 +294,7 @@ module.exports = function appApi(app, ctx, S, H) {
   app.get("/v1/app/subscriptions", as("admin"), (req, res) => {
     const { ws } = req.p;
     const lines = ws.lines.filter((l) => l.state !== "deleted" && !(l.state === "ended" && l.replacedBy));
-    const monthly = lines.filter((l) => ["active", "cancelling", "past_due"].includes(l.state)).reduce((s, l) => s + (l.cycle === "yearly" ? l.snapshot.amount / 12 : l.snapshot.amount), 0);
+    const monthly = lines.filter((l) => ["active", "cancelling", "past_due"].includes(l.state)).reduce((s, l) => s + S.pricing.monthlyAmount(l), 0);
     ok(res, { currency: ws.currency, currencyLocked: ws.currencyLocked, seats: S.seats(ws), monthlyTotal: money(monthly, ws.currency), lines: lines.map((l) => lineOut(ws, l)) });
   });
   app.post("/v1/app/subscriptions/:id/:action(cancel|resume|downgrade|cancel-downgrade|retry)", as("owner", { write: true }), (req, res) => {
@@ -226,9 +312,11 @@ module.exports = function appApi(app, ctx, S, H) {
       Object.assign(l, { state: "active", cancelAt: null });
     } else if (a === "downgrade") {
       const p = db.plans.find((x) => x.id === req.body?.planId && x.tool === l.tool);
-      if (!p || l.state !== "active") return fail(res, 422, "invalid", "Choose a lower plan of the same tool.", { fieldErrors: { planId: "required" } });
+      const nextPrice = p && availablePlan(p, ws) && S.resolveForWorkspace(p.id, ws, l.cycle, l.snapshot.quantity);
+      if (!nextPrice || l.state !== "active" || nextPrice.amount >= l.snapshot.amount) return fail(res, 422, "invalid", "Choose a lower plan of the same tool.", { fieldErrors: { planId: "required" } });
       // Downgrades wait for the period's end (no refunds mid-period, spec 06 F-07).
-      l.scheduled = { kind: "downgrade", planId: p.id, effectiveAt: l.periodEnd };
+      if (l.scheduled?.kind === "price_change") l.scheduledPrice = l.scheduled;
+      l.scheduled = { kind: "downgrade", planId: p.id, effectiveAt: l.periodEnd, overLimits: overLimits(S, ws, p) };
     } else if (a === "cancel-downgrade") {
       if (l.scheduled?.kind !== "downgrade") return fail(res, 409, "wrong_state", "Nothing scheduled.");
       delete l.scheduled;
@@ -265,8 +353,9 @@ module.exports = function appApi(app, ctx, S, H) {
     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(b.expires ?? "")) e.expires = "invalid";
     else { const [mm, yy] = b.expires.split("/").map(Number); if (new Date(2000 + yy, mm, 1).getTime() <= S.now()) e.expires = "expired"; }
     if (Object.keys(e).length) return fail(res, 422, "invalid", "Check the card details.", { fieldErrors: e });
-    const gw = db.gateways.filter((g) => g.active && g.recurring && (g.countries.includes(ws.country) || g.countries.includes("*")) && g.currencies.includes(ws.currency)).sort((a, c) => a.priority - c.priority)[0];
-    const pm = { id: S.id("pm"), kind: b.kind ?? "card", brand: b.brand ?? "Visa", last4: b.last4, expires: b.expires, country: ws.country, gateway: gw?.id ?? "gw_stripe", isDefault: !ws.paymentMethods.some((m) => m.isDefault && !m.expired) };
+    const gw = S.routeGateways(ws, { method: b.kind ?? "card", recurring: true })[0];
+    if (!gw) return fail(res, 409, "no_gateway", "No configured payment gateway supports this workspace currency.");
+    const pm = { id: S.id("pm"), kind: b.kind ?? "card", brand: b.brand ?? "Visa", last4: b.last4, expires: b.expires, country: ws.country, gateway: gw.id, isDefault: !ws.paymentMethods.some((m) => m.isDefault && !m.expired) };
     if (b.makeDefault) for (const m of ws.paymentMethods) m.isDefault = false, pm.isDefault = true;
     ws.paymentMethods.push(pm);
     ok(res, pm, {}, 201);
@@ -339,54 +428,15 @@ module.exports = function appApi(app, ctx, S, H) {
     ok(res, m);
   });
 
-  // ---- An order paid on the public website (orgtik.ch checkout, 2026-10-07) ----
-  // The website charged it already; the suite turns it on: software becomes an active line on the
-  // tool's Pro plan for the paid term, each service opens a request (onboarding starts its period),
-  // and a paid invoice records it. Idempotent by the website's order reference.
-  const WEBSITE_SERVICE = (id) => (id === "website" || id.startsWith("design/web-") || id.startsWith("development/") ? "svc_website" : id.startsWith("design/") ? "svc_brand" : id.startsWith("marketing/") ? "svc_social" : id.startsWith("it-support/") ? "svc_support" : null);
+  // Only the immutable server-confirmed payment can provision this workspace.
   app.post("/v1/app/website-orders", as("admin", { write: true }), (req, res) => {
-    const { ws } = req.p;
-    const b = req.body ?? {};
-    const ref = String(b.reference ?? "").trim();
-    const lines = Array.isArray(b.lines) ? b.lines : [];
-    if (!ref || !lines.length) return fail(res, 422, "invalid", "An order needs its reference and lines.", { fieldErrors: { reference: ref ? undefined : "required", lines: lines.length ? undefined : "required" } });
-    db.websiteOrders ??= [];
-    const prior = db.websiteOrders.find((o) => o.reference === ref);
-    if (prior) return prior.workspaceId === ws.id ? ok(res, prior) : fail(res, 409, "conflict", "This order is already linked to another workspace.");
-    const cur = String(b.currency || "CHF");
-    const now = S.iso(S.now());
-    const out = { reference: ref, workspaceId: ws.id, at: now, tools: [], requests: [], skipped: [], invoice: null };
-    const invLines = [];
-    for (const l of lines) {
-      const amount = Math.round(Number(l.total) || 0) / 100;
-      const months = Math.max(1, Number(l.months) || 1);
-      invLines.push({ label: `${l.name} · ${months} month${months === 1 ? "" : "s"}`, amount });
-      if (l.kind === "software" && l.catalogId !== "website") {
-        const plan = db.plans.find((p) => p.id === `${l.catalogId}_pro` && p.tool);
-        if (!plan) { out.skipped.push({ catalogId: l.catalogId, reason: "not_in_suite_yet" }); continue; }
-        const old = ws.lines.find((x) => x.tool === plan.tool && live(x));
-        if (old) Object.assign(old, { state: "ended", endedAt: now, replacedBy: "pending" });
-        const nl = { id: S.id("ln"), tool: plan.tool, planId: plan.id, cycle: "monthly", state: "active", startedAt: now, periodEnd: S.iso(S.now() + months * 30 * DAY), snapshot: { amount, unit: amount, quantity: 1, currency: cur, source: "Website order", priceVersion: db.priceVersion }, autoRenew: Boolean(l.autoRenew), source: { kind: "website_order", reference: ref } };
-        if (old) old.replacedBy = nl.id;
-        const at = ws.lines.findIndex((x) => x.tool === plan.tool);
-        ws.lines.splice(at < 0 ? ws.lines.length : at, 0, nl);
-        out.tools.push({ tool: plan.tool, lineId: nl.id, periodEnd: nl.periodEnd });
-      } else {
-        const serviceId = WEBSITE_SERVICE(String(l.catalogId));
-        if (!serviceId) { out.skipped.push({ catalogId: l.catalogId, reason: "unknown_service" }); continue; }
-        const r = { id: S.id("sr"), number: `SR-${210 + db.serviceRequests.length + 1}`, workspaceId: ws.id, serviceId, title: l.name, brief: `Bought on the website (order ${ref}): ${l.name} for ${months} month${months === 1 ? "" : "s"}. The period starts once onboarding confirms it.`, budget: null, deadline: null, state: "new", createdAt: now, assignee: null, quote: null, milestones: [], deliveries: [], messages: [], source: { kind: "website_order", reference: ref } };
-        db.serviceRequests.push(r);
-        out.requests.push({ id: r.id, number: r.number });
-      }
+    try {
+      const result = linkWebsiteOrder(S, { workspace: req.p.ws, actor: { key: req.p.key, readOnly: Boolean(identity.decode(identity.tokenFrom(req))?.readOnly) } }, req.body);
+      ok(res, result, {}, 201);
+    } catch (error) {
+      if (!error.status) throw error;
+      fail(res, error.status, error.code, error.message);
     }
-    const total = Math.round(invLines.reduce((sum, l) => sum + l.amount, 0) * 100) / 100;
-    const inv = { id: S.id("inv"), number: `INV-2026-${String(1040 + db.invoices.length + 1).padStart(6, "0")}`, workspaceId: ws.id, kind: "website_order", state: "paid", currency: cur, issuedAt: now, dueAt: now, paidAt: now, lines: invLines, subtotal: total, taxLabel: null, tax: 0, total, payments: [{ id: S.id("pay"), amount: total, currency: cur, method: String(b.paymentMethod || "card"), gateway: "website", at: now, status: "succeeded" }], creditNotes: [], refunded: 0, reference: ref };
-    db.invoices.push(inv);
-    out.invoice = { id: inv.id, number: inv.number, total, currency: cur };
-    db.notifications.push({ id: S.id("nt"), workspaceId: ws.id, userKey: req.p.key, kind: "service_update", title: `Your website order ${ref} is in your workspace`, at: now, read: false });
-    db.websiteOrders.push(out);
-    S.log(req.p.key, "website_order", ws.id, { reference: ref, invoice: inv.number });
-    ok(res, out, {}, 201);
   });
 
   // ---- USR-16..20 services: catalogue, request, quote accept/decline, delivery approve/revise ----
@@ -394,7 +444,7 @@ module.exports = function appApi(app, ctx, S, H) {
     const { ws } = req.p;
     const subscriber = ws.lines.some((l) => ["active", "cancelling"].includes(l.state) && l.snapshot.amount > 0);
     ok(res, db.services.filter((s) => s.status === "active").map((s) => {
-      const r = s.kind === "package" ? S.resolve(s.id, ws.country, s.billing, 1) : null;
+      const r = s.kind === "package" ? S.resolveForWorkspace(s.id, ws, s.billing, 1) : null;
       return { id: s.id, family: s.family, kind: s.kind, billing: s.billing, name: s.name, deliveryDays: s.deliveryDays, price: r ? { amount: r.amount, currency: r.currency } : null, subscriberDiscountPct: subscriber ? s.subscriberDiscountPct : 0 };
     }));
   });
@@ -509,7 +559,7 @@ module.exports = function appApi(app, ctx, S, H) {
     const b = req.body ?? {};
     const e = {};
     if (!Array.isArray(b.tools) || !b.tools.length || b.tools.some((t) => !db.tools.some((x) => x.key === t))) e.tools = "required";
-    if (!(Number.isInteger(b.seats) && b.seats >= 1)) e.seats = "min";
+    if (!(Number.isSafeInteger(b.seats) && b.seats >= 1)) e.seats = "min";
     if (Object.keys(e).length) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: e });
     const r = { id: S.id("cpr"), workspaceId: req.p.ws.id, tools: b.tools, seats: b.seats, cycle: b.cycle === "monthly" ? "monthly" : "yearly", notes: b.notes ?? "", state: "new", createdAt: S.iso(S.now()) };
     db.customPlanRequests.push(r);
@@ -517,8 +567,23 @@ module.exports = function appApi(app, ctx, S, H) {
   });
   app.post("/v1/app/custom-plans/:id/accept", as("owner", { write: true }), (req, res) => {
     const r = db.customPlanRequests.find((x) => x.id === req.params.id && x.workspaceId === req.p.ws.id);
+    if (r?.state === "accepted") return ok(res, r);
     if (!r || r.state !== "quoted") return fail(res, 409, "wrong_state", "There's no quote to accept.");
-    if (Date.parse(r.quote.validUntil) < S.now()) return fail(res, 409, "expired", "This quote has expired.");
+    if (!Number.isFinite(Date.parse(r.quote.validUntil)) || Date.parse(r.quote.validUntil) <= S.now()) return fail(res, 409, "expired", "This quote has expired.");
+    const ws = req.p.ws;
+    if (r.quote.currency !== ws.currency) return fail(res, 409, "currency_mismatch", "Request a new quote in the workspace billing currency.");
+    const allocations = r.quote.lines ?? (r.tools.length === 1 ? [{ tool: r.tools[0], amount: r.quote.amount }] : null);
+    if (!allocations || allocations.length !== r.tools.length || new Set(allocations.map(l => l.tool)).size !== r.tools.length || allocations.some(l => !r.tools.includes(l.tool) || !Number.isFinite(l.amount) || l.amount < 0) || money(allocations.reduce((n, l) => n + l.amount, 0), ws.currency) !== money(r.quote.amount, ws.currency)) return fail(res, 422, "allocation_required", "Staff must allocate the total explicitly to every tool before acceptance.");
+    r.privatePlanIds = allocations.map(allocation => {
+      const planId = `private_${r.id}_${allocation.tool}`;
+      if (!db.plans.some(p => p.id === planId)) {
+        const base = db.plans.find(p => p.tool === allocation.tool && p.tier === "pro") ?? db.plans.find(p => p.tool === allocation.tool);
+        db.plans.push({ ...JSON.parse(JSON.stringify(base ?? {})), id: planId, tool: allocation.tool, tier: "custom", name: { en: "Custom", ar: "مخصص", de: "Individuell", fr: "Personnalisé", it: "Personalizzato" }, visibility: "private", status: "active", workspaceId: ws.id, perUser: false, contractedQuantity: r.seats, minSeats: 1, trialDays: 0, private: { amount: allocation.amount, currency: ws.currency, cycle: r.cycle }, customRequestId: r.id });
+      }
+      return planId;
+    });
+    // Acceptance exposes the private plans for normal checkout (F-12); no unpaid active line.
+    r.lineIds = [];
     r.state = "accepted"; r.acceptedAt = S.iso(S.now());
     ok(res, r);
   });

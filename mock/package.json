@@ -9,7 +9,7 @@
     "unpatch": "node patch.js --restore",
     "start": "node start-all.js",
     "smoke": "node smoke.js",
-    "test": "node lib/auth.test.js && node lib/journal.test.js && node apps/admin/pricing.test.js && node --test lib/dispatch.test.js apps/wm/content-followup.test.js && node --test apps/admin/website-managed-service.test.js"
+    "test": "node lib/auth.test.js && node lib/journal.test.js && node apps/admin/pricing.test.js && node --test lib/dispatch.test.js lib/journal-concurrency.test.js lib/platform-replay.test.js lib/platform-persistence-endpoints.test.js apps/admin/r0.test.js apps/admin/proration-terms.test.js apps/admin/lifecycle.test.js apps/admin/website-offers.test.js apps/wm/content-followup.test.js apps/admin/website-managed-service.test.js"
   },
   "dependencies": {
     "@iconify-json/bi": "1.2.7",
