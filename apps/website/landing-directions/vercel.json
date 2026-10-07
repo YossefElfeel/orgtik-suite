@@ -43,11 +43,6 @@
       "source": "/imprint",
       "destination": "/legal/imprint",
       "permanent": true
-    },
-    {
-      "source": "/sitemap",
-      "destination": "/legal/sitemap",
-      "permanent": true
     }
   ],
   "rewrites": [

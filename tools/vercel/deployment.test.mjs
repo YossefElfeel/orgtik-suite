@@ -6,6 +6,16 @@ import { execFileSync } from "node:child_process";
 import { test } from "node:test";
 import { checkMockBundle } from "./check-mock-bundle.mjs";
 import { copyMockRuntime } from "./copy-mock-runtime.mjs";
+
+test("binary HLS transport segments are excluded from the TypeScript tracer", () => {
+  const config = JSON.parse(fs.readFileSync(new URL("../../mock/vercel.json", import.meta.url), "utf8"));
+  const pattern = config.functions["api/index.js"].excludeFiles;
+  const assets = new URL("../../mock/apps/files/assets/hls/", import.meta.url);
+  const segments = fs.readdirSync(assets, { recursive: true }).filter(file => file.endsWith(".ts"));
+  assert.ok(segments.length > 0);
+  for (const file of segments) assert.ok(path.matchesGlob(`apps/files/assets/hls/${file.replaceAll("\\", "/")}`, pattern), file);
+  assert.equal(path.matchesGlob("apps/files.js", pattern), false, "The Files API remains traced");
+});
 import { protectedFetch, mintPreviewTokens, HEADER } from "./preview-protection.mjs";
 
 const parseUrl = input => execFileSync(process.execPath, [path.join(import.meta.dirname, "deploy-url.mjs")], { input, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim();

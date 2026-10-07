@@ -91,6 +91,8 @@ const commands = fs.existsSync(suiteConfig)
   ? (await import(pathToFileURL(suiteConfig).href)).commandsFor("apps/website/landing-directions")
   : { buildCommand: "npm run build" };
 const vercel = {
+  // Keep host settings (including response headers) when regenerating CMS redirects.
+  ...(fs.existsSync(VERCEL) ? JSON.parse(fs.readFileSync(VERCEL, "utf8")) : {}),
   $schema: "https://openapi.vercel.sh/vercel.json",
   framework: "vite",
   ...commands,
