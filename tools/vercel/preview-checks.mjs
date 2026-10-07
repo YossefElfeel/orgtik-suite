@@ -8,18 +8,26 @@ const deployments = files.map(file => JSON.parse(fs.readFileSync(path.join(folde
 const urls = { ...JSON.parse(process.env.SUITE_WEB_URLS || "{}") };
 for (const deployment of deployments) urls[deployment.key] = deployment.url;
 const mock = deployments.find(deployment => deployment.key === "mock")?.url || process.env.MOCK_PUBLIC_URL;
-if (!mock || !process.env.MOCK_PUBLIC_URL || new URL(mock).hostname === "orgtik-suite-mock.vercel.app") throw new Error("Preview checks require the isolated preview mock");
+if (!mock || !process.env.MOCK_PUBLIC_URL || new URL(mock).hostname !== "orgtik-suite-mock-preview.vercel.app") throw new Error("Preview checks require the existing isolated preview mock");
+const env = { ...process.env, MOCK_PUBLIC_URL: mock, MOCK_RESET_TEST_ACCOUNTS: "1", SUITE_WEB_URLS: JSON.stringify(urls) };
 const reset = await fetch(`${mock}/sos/__mock/reset`, { method: "POST" });
 if (!reset.ok) throw new Error(`Preview reset answered ${reset.status}`);
 let failed = false;
+try { execFileSync(process.execPath, [path.join(import.meta.dirname, "preview-auth-layout.mjs")], { cwd: root, env, stdio: "inherit" }); }
+catch { failed = true; }
 for (const { key } of deployments) {
   if (key === "mock" || key === "website") continue;
   const cwd = path.join(root, "program/tools/audit-kit");
-  const env = { ...process.env, MOCK_PUBLIC_URL: mock, MOCK_RESET_TEST_ACCOUNTS: "1", SUITE_WEB_URLS: JSON.stringify(urls) };
-  const flow = path.join(cwd, "flows", `${key}.mjs`);
+  const flows = fs.readdirSync(path.join(cwd, "flows")).filter(file => file === `${key}.mjs` || (key === "admin" && /^adm-.*\.mjs$/.test(file)) || (key === "wm" && /^wm-(overview|s\d[a-z]?)\.mjs$/.test(file)));
   try {
     execFileSync(process.execPath, ["vs1.mjs", "--app", key, "--route", "/", "--label", "preview"], { cwd, env, stdio: "inherit" });
-    if (fs.existsSync(flow)) for (const locale of ["en", "ar"]) execFileSync(process.execPath, [flow, "--locale", locale], { cwd, env, stdio: "inherit" });
+    const visual = JSON.parse(fs.readFileSync(path.join(root, "program/audits", key, "vs1/preview.json"), "utf8"));
+    if (visual.some(row => row.critical || row.serious || row.console || row.uncaught || row.overflow > 0 || row.dir !== (row.locale === "ar" ? "rtl" : "ltr") || row.lang?.split("-")[0] !== row.locale || row.brokenImages?.length)) throw new Error(`${key}: VS-1 visual acceptance failed`);
+    for (const file of flows) {
+      const flow = path.join(cwd, "flows", file);
+      // ADM/WM suites cover their locales internally; ordinary app flows take --locale.
+      for (const args of key === "admin" || key === "wm" ? [[]] : [["--locale", "en"], ["--locale", "ar"]]) execFileSync(process.execPath, [flow, ...args], { cwd, env, stdio: "inherit" });
+    }
   } catch { failed = true; }
 }
 if (failed) process.exitCode = 1;

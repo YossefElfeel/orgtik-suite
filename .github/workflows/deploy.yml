@@ -11,6 +11,11 @@ on:
         type: choice
         options: [preview, production]
         default: preview
+      preview_projects:
+        description: Preview scope (production always uses the affected graph)
+        type: choice
+        options: [affected, milestone]
+        default: affected
 
 permissions:
   contents: read
@@ -41,6 +46,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - id: affected
         env:
+          DEPLOY_ENV: ${{ (github.event_name == 'push' || inputs.environment == 'production') && 'production' || 'preview' }}
+          DEPLOY_PROJECTS: ${{ github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'mock,sos,website' || '' }}
           TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
           TURBO_SCM_HEAD: HEAD
         run: |
@@ -49,6 +56,7 @@ jobs:
           echo "count=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("affected.json")).length)')" >> "$GITHUB_OUTPUT"
 
   deploy:
+    name: Deploy ${{ matrix.key }}
     needs: affected
     if: needs.affected.outputs.count != '0'
     runs-on: ubuntu-latest
@@ -142,6 +150,16 @@ jobs:
           npm ci
           npx playwright install --with-deps chromium
           node ../../../tools/vercel/preview-checks.mjs
+      - name: Upload preview acceptance evidence
+        if: always() && github.event_name != 'push' && inputs.environment != 'production'
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-acceptance
+          path: |
+            program/audits/auth-layout/preview/
+            program/audits/*/vs1/preview.json
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Require all affected deployments
         if: always()
         env:
