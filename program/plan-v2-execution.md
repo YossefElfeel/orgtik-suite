@@ -6,13 +6,13 @@ Source: `C:/Users/yosse/.claude/plans/we-have-old-plan-quiet-turing.md`, refined
 
 ## الخلاصة بالمصري
 
-- الهدف **بروتوتايب متكامل على Vercel**: رحلات حقيقية بين الأدوات، وداتا الموك محفوظة. الدفع والإيميلات والتحليلات والـ AI والتكاملات الخارجية محاكاة؛ ربط مزوّدين حقيقيين مؤجل.
-- الترتيب **R0 → R1 → R2 → R3 → R4**. بنقدّم الأساس اللي كل مرحلة محتاجاه: حساب المقاعد والـ proration في R0، والتجديد وفشل الدفع واسترجاع الوصول في R1، والـ limits وPDF و2FA قبل فيتشرز R3 اللي بتعتمد عليهم.
-- **الفحوص التقنية للتجهيز نجحت**: اختبار الـ hosted preview رقم `37611824291` نجح، وCI رقم `37612798844` خلص بنجاح، بما فيه Linux و٢٦٤ مقارنة دقيقة للـ library والـ interactions. ترتيب الـ PRs وتسليم الـ work order لسه مطلوبين؛ مفيش release من R0–R4 مقفول.
-- Redis والمشاريع وبيانات نشر Actions متجهزين بالفعل. حد Vercel اليومي **١٠٠ deployment** اتوصل له؛ بنفحص الـ previews الموجودة من غير نشر جديد. تغييرات R0 لسه drafts محلية، ما اتنشرتش وما اتقبلتش كـ release.
-- أسعار الويبسايت من المنصة، مع الحفاظ على مدد **1/3/6/12 شهر** والخصومات الحالية. تحديد منطقة الزائر محاكاة تلقائية، وSwitzerland هي البديل؛ مفيش country selector جديد.
-- كل فيتشر لازم تبقى رحلة مفيدة، مع حالات تحميل وفراغ وخطأ وصلاحيات وقراءة فقط، ومكوّنات `@orgtik/ui`، وخمس لغات وRTL وثيمين وموبايل. تصميم الويبسايت الحالي محفوظ.
-- شغل متوازي بملكية واضحة للملفات، PR لكل حزمة، والنشر بحد أقصى مشروعين في نفس الوقت. الـ preview المشترك يتفحص بالتتابع؛ production يتفحص من غير reset أو تغيير الساعة.
+- الهدف **بروتوتايب متكامل محفوظ البيانات**: الدفع والبريد والتحليلات والـ AI والتكاملات الخارجية محاكاة، مع رحلات عميل وفريق OrgTik واضحة ومفيدة.
+- الترتيب **R0 → R1 → R2 → R3 → R4**، والـ ٧٢ التزام محفوظين. كود R0 الأساسي وواجهاته اتدمجوا بعد CI ناجح؛ **ده مش قبول release**، وR1–R4 لسه planned.
+- لقطة الدمج الحالية **main `0ba265e`**. الـ mock suite النهائي نجح في **١٤٨ فحص**. دليل المالية فيه ٤٠٦ فحوص تاريخية، وبعدها ٧٩ فحص recovery على السلوك المعدّل؛ الأرقام مش بتتجمع كإعادة كاملة على نفس revision.
+- المالك سمح بدمج الكود قبل قبول الـ hosted ووقف نشر Vercel صراحةً. Native Git مقفول لكل الـ ١٢ مشروع، وworkflow النشر disabled. **مفيش نشر جديد، وقبول الـ ١٥ رحلة على revision منشور لسه مفتوح**.
+- PR #3/work order اتدمج بعد التصالح مع main وCI ناجح، مع الحفاظ على adapter الدفع الجديد. تطبيع نهايات السطور لسه حزمة منفصلة.
+- أسعار الويبسايت من المنصة مع مدد 1/3/6/12 شهر والخصومات الحالية؛ منطقة الزائر MOCK تلقائية مع Switzerland بديل واختبار override، من غير country selector جديد.
+- الواجهات تستخدم `@orgtik/ui` وخمس لغات وRTL وثيمين وموبايل، مع حالات تحميل وفراغ وخطأ وصلاحيات وقراءة فقط، وهوية الويبسايت الحالية محفوظة.
 
 ## 1. Product outcome, readiness and delivery
 
@@ -26,40 +26,56 @@ Deliver one persistent hosted prototype for customer workspaces and OrgTik staff
 - Package sample file bytes; persist metadata, access, references, comments and versions. Whiteboards persist structured drawing state and a Files record with seeded previews. Arbitrary binary uploads remain deferred (D-066).
 - WM is OrgTik's internal CMS. A website-management purchase opens a managed-service request; it never grants the purchaser internal CMS access (D-002, D-059).
 
-### Readiness snapshot — technical checks verified, delivery gate open
+### Readiness and merged-code snapshot — hosted release acceptance open
 
-Historical inspected revision `64cd6c5ec205dbbf2f8279d63bf84fe28a5db8f7`, on `fix/vercel-auth-layout`, had successful SOS/website deployments but failed mock authentication with `ECONNRESET` and HLS transport-stream artifact verification. The existing 16 pricing checks passed locally.
+**Current recorded main: `0ba265e5a2fd0e8ce4960467862283c2e7d585c8` (2026-10-07).** PR #3 source`2364841` passed [CI37650247042](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247042) (Linux5m58s and Windows library15m18s) and [pause configuration37650247008](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247008). Earlier main`998d821` also passed CI37649449943. The owner authorized code merges while explicitly pausing Vercel deployment and waived hosted preview acceptance **before these code merges**. This operational exception does not waive release acceptance. Native Git deployment is disabled for all **12 projects**; deployment workflow **377190291** is disabled. No Vercel workflow run occurred after that disable. Existing resources, accounts and historical invoices remain in place.
 
-Historical repair **`53562b9`** added fresh `node:http` loopback dispatch with explicit 503 transport failure, copied reviewed Files assets after tracing, and marked binary HLS assets. Local authentication **17**, journal **8**, transport/artifact **6**, Linux checks and hosted smoke passed then; full hosted auth/layout and library visual acceptance were still pending at that point.
-
-**Latest verified evidence (2026-10-07):** [hosted verification run 37611824291](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37611824291) succeeded using verification code **`993248a`** against existing preview builds **mock/SOS `33bd33e`** and **website `b35f55c`**. [CI run 37612798844](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37612798844) completed **SUCCESS**, including Linux checks, all **264 strict Windows library comparisons** and interactions. Cairo/locale/fixed-clock determinism and the explicitly reviewed 38 Windows renderer pairs retain the original 264 references, threshold 0.1 and zero changed pixels. These are readiness checks against the named builds, **not acceptance of the new R0 draft or of all 15 release journeys**.
-
-The observed Vercel limit of **100 deployments/day** has been reached. Continue verification against existing previews through the verify-only workflow; do not redeploy, recreate resources or reset production to bypass the limit. [PR #4](https://github.com/YossefElfeel/orgtik-suite/pull/4) remains an integration preview. Stack/work-order/normalization delivery rules below remain open.
-
-| Setup or dependency | Verified state / evidence | Remaining work |
+| Coherent package | Source → main merge | Successful CI evidence |
 |---|---|---|
-| Redis persistence | Existing free Frankfurt Redis connected to both mock projects; existing-preview auth/persistence evidence in run 37611824291 | Preserve the binding and accounts; no new database |
-| Deployment credentials | Existing Actions credential/protected-preview access used by successful verification; no values copied into program records | Preserve existing setup; no new credential |
-| Project configuration | Existing 12 project IDs plus preview mock; Linux CI 37612798844 passed configuration checks | Keep affected-only deploy selection and separate runtime consumer tests; verify existing previews while quota is exhausted |
-| Auth/runtime artifact | Failures at `64cd6c5` corrected in `53562b9`; hosted run 37611824291 and Linux CI 37612798844 now pass | Preserve fixes through extracted coherent PRs; keep historical invoice/account compatibility before any R0 deployment |
-| Hosted acceptance | Existing mock/SOS `33bd33e`, website `b35f55c` verified by test code `993248a`; strict library CI 37612798844 completed successfully | New R0 changes still need revision-specific preview acceptance; all 15 release journeys remain open |
-| Existing website work | PR #3/work-order changes and local website work remain carried into this checkout | Complete or rebase work-order delivery before dedicated line-ending normalization |
+| PR #10 foundation/journal | `e1d01c3 → 1f3d662` | [37643491731](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37643491731), Linux and strict Windows library checks |
+| PR #11 review/plan ancestors | `a651010 → d4e3f4a` | [37646536091](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37646536091) |
+| PR #4 focused auth/runtime extraction | `a9f628c → a1bc0b8`; runtime source equivalent to repaired `4fea6a4` | [37644928271](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37644928271) |
+| PR #1 D-059 managed-service reconciliation | `df09d5d → a1b01b1` | [37646357048](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37646357048) |
+| PR #6 R0 backend/contracts | `3d13cc4 → e1216c6` | [37647486335](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37647486335), **141 mock checks passed** |
+| PR #9 HR currency, honest Chats copy and rails | `bb9fc84 → ccccbcf` | [37642637117](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37642637117) |
+| PR #12 finance UI and recovery | `c60c92e → 087db6e` | [37644363153](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37644363153) |
+| PR #7 server-paid website offers | `03bf11c → 998d821` | [37642581278](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37642581278) |
 
-**Gate status:** technical readiness checks above are verified. Preserve stack reconciliation, work-order delivery and dedicated normalization before the corresponding merges/deployments. R0 work may be drafted locally; no R0–R4 exit is accepted. Evidence and dependency status live in `backlog/release-packages.csv`; local test counts do not substitute for preview acceptance.
+PR #2 plan records and PR #8 deployment-pause controls have also landed. The foundation and review ancestors were extracted first; the original combined PR #4 integration diff was **not** merged as a shortcut. Its focused runtime package landed after those ancestors.
 
-### R0 local draft evidence — no release acceptance
+**PR #3/work order is code-accepted and merged:** source`2364841 → main0ba265e` resolves the three overlaps and preserves the newer server-paid adapter. All implementation PRs #1, #2, #3, #4, #6, #7, #8, #9, #10, #11 and #12 are merged with successful code checks. The final source2364841 CI confirms **148 mock regressions**: authentication17 + journal8 + pricing20 + Node103. This includes seven additional work-order content/idea cases beyond prior141. The22 tooling regressions are separate, and the website49+10 cases are unique even when rerun by a consumer check. Earlier141 at source3d13cc4 remains historical R0 proof. Dedicated line-ending normalization remains a separate package; hosted release acceptance is open.
 
-Local work currently includes **40 backend**, **158 finance UI**, and **78 basic UI** regression checks reported by the integration owner. The platform draft includes scheduled pricing, per-tool quantities, discounts/proration/credit ledgers, regional tax/routing, downgrade metadata and assigned-only service reads; D-067 prepares workspace-private plans on acceptance and activates lines only after successful checkout. The public offer adapter creates immutable server-priced payment snapshots and links them with `{reference, claimToken}`. Generated R0 contract changes cover those interfaces. New release code has not been deployed or accepted; hosted journeys, runtime usage integration, historical invoice compatibility and website parity remain required evidence.
+### Historical readiness evidence
 
-### Stack and delivery rules
+At inspected `64cd6c5`, SOS/website deployments succeeded but mock authentication failed with `ECONNRESET` and artifact verification failed on an HLS `.ts` segment; the old 16 pricing checks passed locally. Repair `53562b9` introduced fresh `node:http` loopback dispatch, explicit 503 transport failures, copied reviewed sample bytes after tracing and binary HLS attributes.
 
-- Preserve the existing stack and work. Reconcile PR #1 with D-059 before landing it. Land foundation/review ancestors in dependency order, then extract the auth/deployment changes from PR #4 into coherent PRs. Do not merge its combined integration diff as a shortcut.
-- PR #1 has now been reconciled in **`96f8877`** as a **draft**: only managed-service mapping plus its focused regression remain (3 files, 35 insertions/3 deletions; isolated Express check passed). Newly introduced private Website subscriptions/setup entitlements were removed. It remains unmerged; ancestor/review landing and R0 preview acceptance still gate delivery.
-- Preserve PR #3 and the 2026-10-06 work order; complete/rebase that work before a separate line-ending normalization PR. Binary `.ts` HLS assets must remain binary, including in Linux checkout and Vercel tracing.
-- One PR per coherent package. Parallel agents own disjoint app areas. The integration owner owns shared APIs, `mock/lib`, server dispatch, shells and `@orgtik/ui`; coordinate shared edits through that owner.
-- Deploy affected projects only, at most two concurrently. Serialize preview deploy plus verification against the shared preview sandbox. Backend consumer testing is selected separately from deployment selection.
-- Require CI and preview acceptance before merge; production deploys validated `main`. Preserve existing accounts, IDs, ownership and historical invoices. Never reset production business data or advance its shared clock for verification.
-- Retain earlier acceptance evidence as history. Close a package only with revision-specific CI, preview URLs and flow/visual evidence, distinguishing implemented behavior, simulated behavior and deferred external capability.
+[Hosted verification 37611824291](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37611824291) passed with test code `993248a` against **mock/SOS `33bd33e`** and **website `b35f55c`**. [CI 37612798844](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37612798844) passed Linux checks, **264 strict Windows library comparisons** and interactions. The reviewed references/38 renderer pairs retain threshold 0.1 and zero changed pixels, with fixed Cairo/locale/clock and semantic/layout/font validation. These prove only the named earlier builds, not current R0 hosted journeys.
+
+Build-only runs [37638044509](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37638044509) and [37639070714](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37639070714) succeeded at byte checks but originally logged **48 TypeScript diagnostics** because the HLS exclusion was project-relative. The subsequent `4fea6a4` repair matches repository/project trace bases with `**/apps/files/assets/hls/**/*.ts`; the corrected extraction now has green source CI. Six artifact guards protect packaged samples/frozen financial bytecode; the foundation's **22 tooling regressions** passed. Keep those historical limitations distinct from the repaired code. The earlier Vercel **100-deployments/day** limit is historical context; the owner's current explicit pause applies independently of quota.
+
+| Setup/dependency | Recorded state | Remaining work |
+|---|---|---|
+| Redis | Existing free Frankfurt Redis/persistent sandboxes; earlier hosted auth/persistence proof | Preserve configured bindings, accounts and invoice history; no new database |
+| Credentials/projects | Existing Actions credential and project IDs; configuration checks pass; native Git/workflow deployment paused | Preserve setup; do not recreate resources or deploy without a new owner instruction |
+| Auth/assets/library | Corrected source, byte guards and strict visual harness landed through coherent PRs with green CI | Prove current release flows on a revision-specific isolated hosted deployment when deployment is authorized |
+| Website/work order | R0 offer adapter and PR #3/work order merged | Preserve website/WM work and visual identity; keep normalization separate |
+| Release gate | Code/CI accepted for merged packages; **no R0 exit or all-journey hosted acceptance** | All 15 journeys, consuming-app access/persistence and website parity at the release revision; R1–R4 remain planned |
+
+### R0 implementation and local evidence
+
+The final merged mock suite passed **148** checks on source2364841 (CI37650247042): authentication17 + journal8 + pricing20 + Node103. The earlier R0 source3d13cc4 passed141 before seven work-order content/idea cases were included. Current source contains pricing20, lifecycle4, R0 endpoint24, website-offer20 and term/proration3 cases; these and the six persistence endpoint checks are overlapping subsets of the full suite. Do not add subset or tooling counts to148. The generated contract is **102 paths / 120 operations / 40 schemas**.
+
+[Local finance evidence](audits/r0-prototype/finance-clean-20261007/README.md) records **406 checks/57 captures** against an earlier API generation; it predates held quotes/uncertainty recovery and is not a full rerun of the final revision. [Later checkout recovery evidence](audits/r0-prototype/checkout-recovery-20261007/README.md) records **65 recovery + 14 edge checks**, with nine capture metadata entries and three representative tracked images. Neither proves hosted release acceptance. The [R0 readout](audits/r0-prototype/readout.md) records provenance and limits.
+
+The implementation includes scheduled/affected-cell repricing, stored per-tool capacity, eligible discounts/proration/credit ledgers, regional tax/Gulf routing, downgrade metadata, assigned-only service reads and D-067 scoped private plans activated only after payment. Public offers retain immutable server-priced paid orders and claim linking. New workspaces keep currency unlocked until a paid purchase. Held subscription quotes are scoped to workspace/actor and request/billing context for at most **900 seconds** (shortened at relevant period boundaries); successful authorized nonce receipts recover the same paid result after response loss. Full workspace/tool isolation, runtime usage integration, sessions and invitations still require the R1/R3 foundations.
+
+### Delivery rules retained
+
+- One PR per coherent package and one owner for shared APIs/library/shell. The current merged stack preserves the foundation/review-before-runtime requirement.
+- PR #3/work-order has landed; line-ending normalization remains a separate PR. Preserve binary sample/frozen bytes throughout.
+- Deployment remains explicitly paused. When authorized again, deploy affected projects only, at most two concurrently; serialize the shared-preview deployment and acceptance. Runtime consumer testing is separate from deployment selection.
+- Green CI and preview acceptance remain the normal merge rule; the owner's current code-only waiver is recorded above. Production deployment uses validated main and requires deployment authorization. Preserve accounts, historical invoices and ownership; never reset production data or advance its shared clock for verification.
+- A skipped **Preview acceptance** check is not acceptance. Package code merge, simulated behavior, external deferral and release acceptance are recorded separately in `backlog/release-packages.csv`.
 
 ### Runtime test dependency map
 
@@ -95,6 +111,8 @@ This map defines the **minimum consuming apps to test**, even when only `mock` n
 ### R1 — workspace, access, people and billing foundations
 
 Build packages in this order; app storage adapters can run in parallel after the workspace interface is stable.
+
+The workspace/runtime/session contract proposal is being prepared separately from these execution records. Shared authority, app adapters, independent fixtures and atomic commands must be stable before parallel R1 app work. Runtime implementation and R1 release acceptance remain open.
 
 1. **Workspace context/stores:** centrally resolve and validate selected workspace membership; carry it through login, refresh, switching and one-time handoff. Scope Tasks, Files, HR, Sales, Marketing and Chats data to that workspace. New workspaces begin empty; existing seeded fixtures remain independent. WM/ADM internal access stays separate.
 2. **Entitlements/roles:** launcher, UI role helpers and APIs use one current-workspace access calculation. No union of identity scopes across tenants may grant access in the selected workspace. Distinguish member/tool roles, seats and line state. Preserve staff grants independently. Useful no-access/ask-owner and read-only states accompany API enforcement.
