@@ -5,6 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { randomUUID } from "node:crypto";
+import { pathToFileURL } from "node:url";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const load = createRequire(path.join(root, "program/tools/audit-kit/package.json"));
@@ -67,7 +68,7 @@ try {
     assert.equal((await api("POST", "/sos/api/auth/change-password", { oldPassword: "WrongPreviewPassword!", newPassword: changedPassword }, token)).status, 400);
     assert.equal((await api("POST", "/sos/api/auth/change-password", { oldPassword: freshPassword, newPassword: changedPassword }, token)).status, 200);
     assert.equal((await login(freshEmail, freshPassword)).status, 401);
-    const { mock: controls } = await import(path.join(root, "program/tools/audit-kit/lib/mock.mjs"));
+    const { mock: controls } = await import(pathToFileURL(path.join(root, "program/tools/audit-kit/lib/mock.mjs")));
     const previous = process.env.MOCK_RESET_TEST_ACCOUNTS;
     process.env.MOCK_RESET_TEST_ACCOUNTS = "0";
     try { await controls.reset(); } finally {
