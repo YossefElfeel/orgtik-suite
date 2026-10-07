@@ -38,8 +38,13 @@ test("mock artifact rejects missing startup imports and accepts a self-contained
       fs.writeFileSync(path.join(pkg, "icons.json"), '{"icons":{}}\n');
     }
     copyMockRuntime(runtime, output);
+    const media = path.join(fn, "mock/apps/files/assets/hls");
+    fs.cpSync(new URL("../../mock/apps/files/assets/hls", import.meta.url), media, { recursive: true });
     assert.doesNotThrow(() => checkMockBundle(output));
     assert.ok(fs.existsSync(path.join(fn, "mock/api/index.js")), "Copy preserves the existing handler and assets");
+    const segment = path.join(media, "mp4_product_demo/segment-0.ts");
+    fs.writeFileSync(segment, "Incorrect TypeScript treatment of a transport-stream asset");
+    assert.throws(() => checkMockBundle(output), /HLS asset was altered or omitted/);
   } finally {
     fs.rmSync(folder, { recursive: true, force: true });
   }

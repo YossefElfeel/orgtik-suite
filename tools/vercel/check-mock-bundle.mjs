@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
 
 export function mockFunction(output = ".vercel/output") {
@@ -50,6 +51,14 @@ export function checkMockBundle(output = ".vercel/output") {
   for (const name of Object.keys(pkg.dependencies).filter(name => name.startsWith("@iconify-json/"))) {
     if (!contained(fs.realpathSync(load.resolve(`${name}/icons.json`)))) throw new Error(`Mock icon set ${name} resolves outside the uploaded artifact`);
   }
+  const source = path.resolve(import.meta.dirname, "../../mock/apps/files/assets/hls");
+  const segments = fs.readdirSync(source, { recursive: true }).filter(file => file.endsWith(".ts"));
+  const digest = file => createHash("sha256").update(fs.readFileSync(file)).digest("hex");
+  for (const file of segments) {
+    const packaged = path.join(fn.folder, "mock/apps/files/assets/hls", file);
+    if (!fs.existsSync(packaged) || digest(packaged) !== digest(path.join(source, file))) throw new Error(`Files HLS asset was altered or omitted: ${file}`);
+  }
+  console.log(`mock: ${segments.length} binary HLS segments match the source`);
   console.log("mock: self-contained Linux function artifact passed");
 }
 
