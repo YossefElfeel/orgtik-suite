@@ -20,12 +20,14 @@ test("Website Manager purchase creates one managed-service request and no tool a
     const res = new http.ServerResponse(req); res.end = payload => { resolve({ status: res.statusCode, body: JSON.parse(String(payload)) }); return res; };
     app.handle(req, res);
   });
+  const requestCount = S.db.serviceRequests.length;
   const before = S.db.invoices.length, first = await call(), repeat = await call();
   assert.equal(first.status, 201); assert.equal(repeat.status, 200);
   assert.deepEqual(repeat.body.data, first.body.data);
   assert.equal(first.body.data.tools.length, 0); assert.equal(first.body.data.requests.length, 1);
   assert.equal(S.db.serviceRequests.find(row => row.id === first.body.data.requests[0].id).serviceId, "svc_website");
   assert.equal(S.db.invoices.length, before + 1);
+  assert.equal(S.db.serviceRequests.length, requestCount + 1);
   assert.equal(ws.lines.some(line => line.tool === "website"), false);
   assert.equal(S.db.plans.some(plan => plan.id === "website_pro"), false);
 });
