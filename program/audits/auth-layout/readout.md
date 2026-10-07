@@ -14,7 +14,7 @@
 
 ## Verification
 
-- Authentication: 12 cold-start/persistence/error checks passed using disposable local files.
+- Authentication: 17 cold-start/persistence/error checks passed using disposable local files.
 - Journal: 8 regression checks passed. Pricing: 16 checks passed. Website: 42 checks passed.
 - Affected workspace check: 22 tasks passed (typecheck, catalogs and tests).
 - Production SOS build passed, including the changed handoff route.
@@ -33,6 +33,12 @@
   disables Today when visible (confirmed in initial commit `0b8d924`). Reconcile only those
   reference images; the shell stories did not change visually.
 - Existing PRs and branch history are retained. No additional external services are needed.
+- Linux CI passed typechecks, translations, tests and configuration checks. Its visual pass
+  reported 252 pixel differences against Windows references, with zero accessibility, console
+  or overflow failures. Visual comparisons now use the fixed Windows runner; Linux continues
+  to build deployments and run the hosted authentication/layout acceptance checks.
+- Protected previews use short-lived project OIDC credentials from the existing team identity,
+  scoped to their origins. No deployment-protection settings or persistent bypass secrets change.
 
 ## Release gate
 

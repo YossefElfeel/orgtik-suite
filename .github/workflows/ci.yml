@@ -14,6 +14,8 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    outputs:
+      library_changed: ${{ steps.library.outputs.changed }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -50,16 +52,50 @@ jobs:
       - name: Platform OpenAPI matches the mock
         run: node program/phase-e/openapi.mjs --check
 
-      - name: Library visual gate (when @orgtik/ui changed)
+      - name: Detect library changes
+        id: library
         run: |
           if pnpm turbo query affected --packages @orgtik/ui --exit-code > /dev/null; then
-            echo "@orgtik/ui unchanged: skipped"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
           else
-            pnpm --filter docs exec playwright install --with-deps chromium
-            pnpm --filter docs build && pnpm --filter docs check
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
         env:
           TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
 
       - name: No secrets or tokens in URLs
         run: node tools/ci/secret-scan.mjs
+
+  library-visual:
+    name: Library visuals (Windows references)
+    needs: checks
+    if: needs.checks.outputs.library_changed == 'true'
+    # Committed references were reviewed on Windows. Keep the rendering platform fixed;
+    # Linux still runs typechecks/tests and builds every Vercel deployment.
+    runs-on: windows-2025
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter docs exec playwright install chromium
+      - run: pnpm --filter docs build
+      - run: pnpm --filter docs check
+      - name: Upload visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-visual-evidence
+          path: apps/docs/tests/results/
+          if-no-files-found: ignore
+          retention-days: 7
