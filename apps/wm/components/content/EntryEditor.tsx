@@ -329,6 +329,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
       return (
         <span className="inline-flex flex-wrap gap-2">
           <ScheduleButton
+            onError={onError}
             onSchedule={(publishAt) =>
               transition({
                 ...ref,
@@ -655,6 +656,8 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
         </section>
       ) : null}
       {type.image && entry.content.image ? (
+        <>
+        {errors["image.src"] ? <p role="alert" className="text-body-sm text-danger">{t("errorRequired")}</p> : null}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
           <img
             src={mediaUrl(entry.content.image.src)}
@@ -678,6 +681,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
             />
           </Field>
         </div>
+        </>
       ) : null}
     </section>
   ) : null;
@@ -852,7 +856,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
                   : t("narrativeHelp")
             }
             error={
-              errors.narrativePublished ? t("narrativeSamples") : undefined
+              errors.narrativePublished ? t(errors.narrativePublished === "narrative_needs_approved_figures" ? "errorNarrativeFigures" : "errorRequired") : undefined
             }
           >
             <Switch
@@ -864,30 +868,25 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
               aria-label={t("narrativeTitle")}
             />
           </Field>
-          {entry.figures === "sample" ? (
+          {entry.figures === "sample" || errors.sampleNarrativePublished ? (
             <Field
               label={t("sampleNarrativeTitle")}
               description={t("sampleNarrativeHelp")}
               error={
                 errors.sampleNarrativePublished
-                  ? t("sampleNarrativeHelp")
+                  ? t(errors.sampleNarrativePublished === "sample_narrative_needs_sample_figures" ? "errorSampleNarrative" : "errorRequired")
                   : undefined
               }
             >
               <Switch
                 checked={neutral.sampleNarrativePublished === true}
-                disabled={!can("content:approve")}
+                disabled={!can("content:approve") || entry.figures !== "sample"}
                 onCheckedChange={(sampleNarrativePublished) =>
                   setNeutralEdit((p) => ({ ...p, sampleNarrativePublished }))
                 }
                 aria-label={t("sampleNarrativeTitle")}
               />
             </Field>
-          ) : null}
-          {neutral.sampleNarrativePublished ? (
-            <p role="note" className="text-body-sm text-fg-muted">
-              {t("sampleNarrativeHelp")}
-            </p>
           ) : null}
           {!neutral.narrativePublished && !neutral.sampleNarrativePublished ? (
             <p role="note" className="text-body-sm text-fg-muted">

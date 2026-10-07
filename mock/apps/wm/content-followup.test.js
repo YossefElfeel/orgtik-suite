@@ -4,6 +4,34 @@ const {makeStore}=require('./content');
 const {DEPARTMENTS,blankContent}=require('./defaults');
 const who={key:'editor'}, approver={key:'approver'}, all={can:()=>true};
 const make=()=>makeStore(()=> '2026-10-05T10:00:00.000Z');
+test('translations preserve approved figures and the enabled narrative',()=>{
+ const s=make(),e=s.entries.get('cs_01');s.approveFigures(e,approver);
+ s.save(e,approver,{neutral:{narrativePublished:true}},all);
+ const fields=structuredClone(e.draft.locales.en);fields.highlight.label='Übersetztes Ergebnis';
+ assert.ok(s.save(e,who,{locale:'de',fields},all).entry);
+ assert.equal(e.draft.provenance.figures,'approved');assert.equal(e.draft.narrativePublished,true);
+ fields.highlight.label='Bearbeitet';assert.ok(s.save(e,who,{locale:'de',fields},all).entry);
+ assert.equal(e.draft.provenance.figures,'approved');assert.equal(e.draft.narrativePublished,true);
+});
+test('blank dates follow the supplied mock clock',()=>{
+ const s=makeStore(()=> '2031-02-03T10:00:00.000Z');
+ assert.equal(s.create('article',who,{name:'Dated article',slug:'dated-article'}).entry.draft.publishedOn,'2031-02-03');
+ assert.equal(s.create('roadmapItem',who,{name:'Dated roadmap'}).entry.draft.year,'2031');
+});
+test('merged ideas retain their comment counts and sample threads',()=>{
+ const s=make();const source=[...s.ideas.values()].find(x=>['pending','open'].includes(x.status));
+ const target=[...s.ideas.values()].find(x=>x.id!==source.id&&s.VISIBLE.includes(x.status));
+ source.comments=2;source.commentPreview=[{id:'merge-comment',author:'Sample',body:'Discussion'}];
+ const count=target.comments;assert.ok(s.moderate(source,approver,'merge',{into:target.id}).idea);
+ assert.equal(target.comments,count+2);assert.ok(target.commentPreview.some(x=>x.id==='merge-comment'));
+});
+test('publication and scheduling require a lead image for articles and cases',()=>{
+ const s=make();for(const type of ['article','caseStudy']){
+ const e=s.create(type,who,{name:'No image',slug:`no-image-${type.toLowerCase()}`,department:'design'}).entry;
+ e.workflow.state='approved';assert.equal(s.transition(e,approver,'publish',all).fieldErrors['image.src'],'required');
+ assert.equal(s.transition(e,approver,'schedule',{...all,publishAt:'2026-10-06T10:00:00Z'}).fieldErrors['image.src'],'required');
+ }
+});
 for(const department of DEPARTMENTS)test(`blank ${department} case can be created without a template`,()=>{
  const store=make();for(const [id,e] of store.entries)if(e.type==='caseStudy')store.entries.delete(id);
  const {entry,errors}=store.create('caseStudy',who,{name:'Blank case',slug:`blank-${department}`,department});
@@ -40,7 +68,7 @@ test('invalid restored, published and scheduled sample narratives are rejected',
  e.versions.push({version:42,content:bad});assert.equal(s.restore(e,approver,42,all).fieldErrors.narrativePublished,'narrative_needs_approved_figures');
  e.draft=bad;e.workflow.state='approved';assert.equal(s.transition(e,approver,'publish',all).status,422);
  assert.equal(s.transition(e,approver,'schedule',{...all,publishAt:'2026-10-06T10:00:00Z'}).status,422);
- e.workflow.state='scheduled';e.workflow.publishAt='2026-10-05T09:00:00Z';const live=JSON.stringify(e.live);s.tick();assert.equal(JSON.stringify(e.live),live);assert.equal(e.workflow.state,'scheduled');
+ e.workflow.state='scheduled';e.workflow.publishAt='2026-10-05T09:00:00Z';const live=JSON.stringify(e.live);s.tick();assert.equal(JSON.stringify(e.live),live);assert.equal(e.workflow.state,'approved');assert.equal(e.workflow.publishAt,null);assert.equal(s.audit[0].action,'schedule_failed');
 });
 test('restore cannot change narrative permission through history',()=>{
  const s=make(),e=s.entries.get('cs_01');const approved=structuredClone(e.live);approved.provenance.figures='approved';approved.narrativePublished=true;e.versions.push({version:42,content:approved});

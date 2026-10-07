@@ -35,7 +35,7 @@ import {
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { useCan } from "@/lib/permissions";
-import { statusOf, useIdeasQuery, useModerateIdeaMutation, type ApiError, type Idea, type IdeaAction, type IdeaStatus } from "@/store/api";
+import { statusOf, useIdeasQuery, useModerateIdeaMutation, useEraseIdeaMutation, type ApiError, type Idea, type IdeaAction, type IdeaStatus } from "@/store/api";
 
 // The tabs: what needs a decision first, then the public lifecycle, then everything closed.
 const TABS = ["pending", "open", "planned", "in_progress", "shipped", "closed"] as const;
@@ -113,6 +113,8 @@ function ActionDialog({ idea, action, onClose }: { idea: Idea; action: IdeaActio
 function IdeaSheet({ idea, onClose }: { idea: Idea; onClose: () => void }) {
   const t = useTranslations("Ideas");
   const f = useFormatter();
+  const can = useCan();
+  const [erase] = useEraseIdeaMutation();
   return (
     <Sheet open onOpenChange={(o) => !o && onClose()}>
       <SheetContent>
@@ -130,6 +132,16 @@ function IdeaSheet({ idea, onClose }: { idea: Idea; onClose: () => void }) {
         <DialogBody className="flex flex-col gap-5">
           <p dir="auto" className="text-body text-fg">{idea.body}</p>
           <p className="text-body-sm text-fg-muted">{t("counts", { votes: idea.votes, comments: idea.comments })}</p>
+          {idea.source ? <p className="text-body-sm text-fg-muted">{t("source")}: <bdi>{idea.source === "website" ? t("sourceWebsite") : idea.source}</bdi></p> : null}
+          {idea.submitter ? <section className="flex flex-col gap-2" aria-labelledby="idea-submitter">
+            <h3 id="idea-submitter" className="text-label">{t("submitter")}</h3>
+            {idea.submitter.erased ? <p>{t("erased")}</p> : <>
+              <p dir="auto">{idea.submitter.name}</p><p dir="ltr" className="break-words text-start">{idea.submitter.email}</p>
+              {idea.submitter.masked ? <p className="text-body-sm text-fg-muted">{t("masked")}</p> : null}
+              {can("leads:pii") ? <ConfirmDialog tone="danger" trigger={<Button size="sm" variant="secondary">{t("erase")}</Button>} title={t("eraseTitle")} impact={t("eraseImpact")} confirmLabel={t("erase")} onConfirm={() => erase({ id: idea.id, version: idea.version }).unwrap().then(() => { toast.success(t("erased")); onClose(); }).catch((error: ApiError) => { toast.error(t(error.status === 412 ? "stale" : "failed")); throw error; })} /> : null}
+            </>}
+          </section> : null}
+          {idea.commentPreview?.length ? <section className="flex flex-col gap-2" aria-labelledby="idea-comments"><h3 id="idea-comments" className="text-label">{t("sampleComments")}</h3><ol className="flex flex-col gap-3">{idea.commentPreview.map(comment => <li key={comment.id} className="rounded-field border border-line p-3"><p dir="auto" className="text-label">{comment.author}</p><p dir="auto" className="mt-1 text-body-sm">{comment.body}</p></li>)}</ol></section> : null}
           {idea.reason ? <p className="text-body-sm text-fg"><span className="font-semibold">{t("reasonLabel")}:</span> <span dir="auto">{idea.reason}</span></p> : null}
           {idea.link ? <p className="text-body-sm text-fg"><span className="font-semibold">{t("shipLink")}:</span> <span dir="ltr">{idea.link}</span></p> : null}
           {idea.mergedInto ? <p className="text-body-sm text-fg"><span className="font-semibold">{t("mergedInto")}:</span> <span dir="ltr">{idea.mergedInto}</span></p> : null}

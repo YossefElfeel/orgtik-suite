@@ -1,0 +1,41 @@
+{
+  "label": "s6-after",
+  "site": "http://localhost:4173",
+  "commit": {
+    "head": "6b849ee",
+    "dirty": true
+  },
+  "at": "2026-10-01T06:53:28.713Z",
+  "clock": {
+    "start": "2026-09-29T06:00:00.000Z",
+    "settleMs": 15000
+  },
+  "widths": [
+    390,
+    768,
+    1440
+  ],
+  "captures": [
+    {
+      "name": "roadmap__390",
+      "route": "/roadmap",
+      "width": 390,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "roadmap__768",
+      "route": "/roadmap",
+      "width": 768,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "roadmap__1440",
+      "route": "/roadmap",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    }
+  ]
+}

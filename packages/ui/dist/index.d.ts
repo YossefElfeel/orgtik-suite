@@ -32,6 +32,7 @@ export { Accordion, Collapsible, CollapsibleTrigger, CollapsiblePanel, Separator
 export { Combobox, MultiSelect, type ComboboxProps, type MultiSelectProps, type ComboOption } from "./components/Combobox.js";
 export { NumberField, MoneyField, PercentField, type NumberFieldProps, type MoneyFieldProps, type PercentFieldProps } from "./components/NumberField.js";
 export { Progress, Meter, LimitMeter, limitState, type LimitState } from "./components/Meters.js";
+export { AuthSuccess, useAuthSuccess } from "./components/AuthSuccess.js";
 export { Stat, type StatChange } from "./components/Stat.js";
 export { Tag, FilterChips, type FilterChip } from "./components/Chips.js";
 export { LocalizedField, type LocalizedFieldProps, type LocalizedValue } from "./components/LocalizedField.js";

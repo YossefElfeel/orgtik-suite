@@ -1,0 +1,15 @@
+{
+  "route": "/checkout",
+  "width": 1440,
+  "rendered": true,
+  "errors": [],
+  "text": "Skip to content\nHome\nServices\nSoftware\nWork\nAbout\nInsights\n0\nEN\nTalk to us\n1\nCart\n2\nPayment\n3\nAccount\nTHE NEXT STEP\nCheckout.\nReview your order and complete your demo payment.\nA PLACE TO BEGIN\nYour next chapter starts here.\nChoose a ready-made bundle or build your own selection of services and software.\nExplore services\nExplore software\nPrototype pricing in CHF. Payment is simulated; no charge is made. Tax calculation is not configured.\nStrategy. Design. Technology.\nBundles & pricing\nTalk to us\nPrivacy policy",
+  "headings": [
+    "h1 Checkout.",
+    "h2 Your next chapter starts here.",
+    "h2 Already in your cart"
+  ],
+  "aria": "- link \"Skip to content\":\n- banner:\n  - link \"OrgTik home\":\n    - img \"OrgTik home\"\n  - navigation \"Main navigation\":\n    - link \"Home\":\n    - link \"Services\":\n    - link \"Software\":\n    - link \"Work\":\n    - link \"About\":\n    - link \"Insights\":\n  - link \"Cart, 0 plans\":\n    - text: \"0\"\n  - button \"Language, English\": EN\n  - link \"Talk to us\":\n- main:\n  - navigation \"Checkout steps\":\n    - link \"1 Cart\":\n    - text: 2 Payment 3 Account\n  - text: The next step\n  - heading \"Checkout.\" [level=1]\n  - paragraph: Review your order and complete your demo payment.\n  - text: A place to begin\n  - heading \"Your next chapter starts here.\" [level=2]\n  - paragraph: Choose a ready-made bundle or build your own selection of services and software.\n  - link \"Explore services\":\n  - link \"Explore software\":\n  - paragraph: Prototype pricing in CHF. Payment is simulated; no charge is made. Tax calculation is not configured.\n- contentinfo:\n  - link \"OrgTik home\":\n    - img \"OrgTik home\"\n  - paragraph: Strategy. Design. Technology.\n  - link \"Bundles & pricing\":\n  - link \"Talk to us\":\n  - link \"Privacy policy\":",
+  "title": "checkout | OrgTik",
+  "url": "/checkout"
+}

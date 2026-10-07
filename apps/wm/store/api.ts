@@ -313,8 +313,11 @@ export type Idea = {
   comments: number;
   submittedAt: string;
   version: number;
-  /** A made-up submission to moderate (the website's form sends nothing yet). */
+  /** Seeded demonstration content; real local submissions enter as private pending ideas. */
   sample?: boolean;
+  source?: string;
+  submitter?: { name?: string; email?: string; privacyVersion: string; erased?: boolean; masked?: boolean };
+  commentPreview?: { id: string; author: string; body: string }[];
   reason?: string;
   link?: string;
   mergedInto?: string;
@@ -768,6 +771,10 @@ export const api = createApi({
       query: (params) => ({ url: "/admin/ideas", params }),
       providesTags: ["Ideas"],
     }),
+    eraseIdea: b.mutation<Idea, { id: string; version: number }>({
+      query: ({ id, version }) => ({ url: `/admin/ideas/${id}/erase`, method: "POST", headers: { "if-match": String(version) } }),
+      invalidatesTags: ["Ideas"],
+    }),
     moderateIdea: b.mutation<
       Idea,
       {
@@ -1054,6 +1061,7 @@ export const {
   useApproveFiguresMutation,
   useIdeasQuery,
   useModerateIdeaMutation,
+  useEraseIdeaMutation,
   useMediaQuery,
   useMediaItemQuery,
   useUpdateMediaMutation,

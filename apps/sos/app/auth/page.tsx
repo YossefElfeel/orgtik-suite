@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useAuthSuccess } from "@orgtik/ui/auth";
 import { useSearchParams, useRouter } from "next/navigation";
 import { IUser as SosBarUser, UnifiedTokenValidation } from "@somion/sos-bar";
 import { API_URL } from "@/constants/env";
@@ -12,14 +13,16 @@ import { IScopeItem, IUser } from "@/types/user";
 export default function AuthPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { confirm, success } = useAuthSuccess();
   const dispatch = useAppDispatch();
 
   // Only a path on this site (SOS-002: it followed any address, an open redirect).
-  const redirect = safeRedirect(searchParams.get("redirect"));
-  const token = searchParams.get("token");
-  const refreshToken = searchParams.get("refreshToken");
+  const first = useRef<{ redirect: string; token: string | null; refreshToken: string | null } | null>(null);
+  if (!first.current) first.current = { redirect: safeRedirect(searchParams.get("redirect")), token: searchParams.get("token"), refreshToken: searchParams.get("refreshToken") };
+  const { redirect, token, refreshToken } = first.current;
 
   useEffect(() => {
+    if (window.location.search) window.history.replaceState(null, "", window.location.pathname);
     if (!token) {
       router.replace("/auth/login");
     }
@@ -61,9 +64,10 @@ export default function AuthPage() {
 
     // replace, not push: Back must not reopen the address that carried the token (SOS-002).
     // Customers land in their workspace (USR, D-011): Sales is a CRM, opened from the rail.
-    router.replace(redirect);
+    confirm(() => router.replace(redirect));
   };
 
+  if (success) return success;
   if (!token) {
     return null;
   }

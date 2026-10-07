@@ -34,6 +34,7 @@ export { Accordion, Collapsible, CollapsibleTrigger, CollapsiblePanel, Separator
 export { Combobox, MultiSelect } from "./components/Combobox.js";
 export { NumberField, MoneyField, PercentField } from "./components/NumberField.js";
 export { Progress, Meter, LimitMeter, limitState } from "./components/Meters.js";
+export { AuthSuccess, useAuthSuccess } from "./components/AuthSuccess.js";
 export { Stat } from "./components/Stat.js";
 export { Tag, FilterChips } from "./components/Chips.js";
 export { LocalizedField } from "./components/LocalizedField.js";

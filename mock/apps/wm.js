@@ -76,7 +76,7 @@ module.exports = {
 
     const store = makeStore(() => new Date().toISOString());
     // Uploads made while testing are throwaway (git-ignored) and go with every reset.
-    const UPLOADS = process.env.VERCEL ? path.join(ctx.config.dataDir, "uploads-wm") : path.join(__dirname, "wm", "uploads");
+    const UPLOADS = path.join(__dirname, "wm", "uploads");
     fs.rmSync(UPLOADS, { recursive: true, force: true });
     const lib = makeLibrary({ seed: store.seed, store, now: () => new Date().toISOString(), uploads: UPLOADS });
     const ops = makeOps({ store, now: () => new Date().toISOString() });
@@ -354,6 +354,8 @@ module.exports = {
     });
     // The website's contact form (S6). Answers 201 with the lead's id, or 422 with what's missing.
     app.post("/v2/public/leads", async (req, res) => {
+      if (ops.site.formsMode !== "live") return fail(res, 409, "forms_preview", "The website's forms are in preview.");
+      if (String(req.body?.privacyVersion ?? "") !== privacyInForce()) return fail(res, 409, "privacy_outdated", "The privacy notice changed; reload the page.");
       const r = ops.submit(req.body ?? {});
       if (r.fieldErrors) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: r.fieldErrors });
       // D-028: Sales owns the pipeline. The lead is handed to Sales' intake (server to server); a
@@ -388,7 +390,9 @@ module.exports = {
     });
 
     // ---- roadmap ideas: community submissions and their moderation ----
-    const ideaOut = (x) => ({ ...x, history: x.history.map((h) => ({ ...h, by: person(h.by === "visitor" ? null : h.by) })) });
+    const { ideaView, eraseSubmitter, ideaSubmissions } = require("./wm/ideas");
+    const submissions = ideaSubmissions(store.ideas);
+    const ideaOut = (req, x) => ({ ...ideaView(x, pii(req)), history: x.history.map((h) => ({ ...h, by: person(h.by === "visitor" ? null : h.by) })) });
     app.get("/v2/admin/ideas", need("marketing:view"), (req, res) => {
       const status = String(req.query.status ?? "");
       const q = String(req.query.search ?? "").trim().toLowerCase();
@@ -401,7 +405,7 @@ module.exports = {
       for (const x of store.ideas.values()) counts[x.status] = (counts[x.status] ?? 0) + 1;
       const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 25));
       const page = Math.max(1, Number(req.query.page) || 1);
-      ok(res, rows.slice((page - 1) * pageSize, page * pageSize).map(ideaOut), { page, pageSize, total: rows.length, counts });
+      ok(res, rows.slice((page - 1) * pageSize, page * pageSize).map(x => ideaOut(req, x)), { page, pageSize, total: rows.length, counts });
     });
     app.post("/v2/admin/ideas/:id/moderate", need("marketing:edit"), (req, res) => {
       const idea = store.ideas.get(req.params.id);
@@ -411,7 +415,15 @@ module.exports = {
       const r = store.moderate(idea, who(req), String(req.body?.action ?? ""), req.body ?? {});
       if (r.status) return fail(res, r.status, r.code, r.message ?? r.code, { fieldErrors: r.fieldErrors });
       res.set("ETag", String(idea.version));
-      ok(res, ideaOut(idea));
+      ok(res, ideaOut(req, idea));
+    });
+    app.post("/v2/admin/ideas/:id/erase", need("leads:pii"), (req, res) => {
+      const idea = store.ideas.get(req.params.id);
+      if (!idea) return fail(res, 404, "not_found", "This idea doesn't exist (any more).");
+      const want = req.get("if-match");
+      if (want != null && Number(want) !== idea.version) return fail(res, 412, "stale", "This idea changed since you opened it.", { current: idea.version });
+      eraseSubmitter(idea, who(req).key, new Date().toISOString(), store.audit);
+      ok(res, ideaOut(req, idea));
     });
     // What the roadmap page shows: moderated ideas only, most wanted first.
     app.get("/v2/public/ideas", (req, res) => {
@@ -430,8 +442,15 @@ module.exports = {
       if (!name) fieldErrors.name = "required";
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fieldErrors.email = "email";
       if (!message) fieldErrors.message = "required";
+      if (b.consent !== true) fieldErrors.consent = "required";
       if (Object.keys(fieldErrors).length) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors });
       if (ops.site.formsMode !== "live") return fail(res, 409, "forms_preview", "The website's forms are in preview.");
+      if (String(b.privacyVersion ?? "") !== privacyInForce()) return fail(res, 409, "privacy_outdated", "The privacy notice changed; reload the page.");
+      const submission = { name, email, message, topic: theme, privacyVersion: String(b.privacyVersion), consent: true };
+      const key = req.get("idempotency-key");
+      const duplicate = submissions.duplicate(submission, key);
+      if (duplicate?.conflict) return fail(res, 409, "idempotency_conflict", "This request key was already used for another idea.");
+      if (duplicate) return ok(res, { id: duplicate.id, status: store.ideas.get(duplicate.id).status, duplicate: true });
       const baseId = `idea_${Date.now().toString(36)}`;
       let id = baseId, suffix = 1;
       while (store.ideas.has(id)) id = `${baseId}_${suffix++}`;
@@ -443,6 +462,7 @@ module.exports = {
         submitter: { name, email, privacyVersion: String(b.privacyVersion ?? "") },
         history: [{ at, by: "visitor", action: "submitted", to: "pending" }],
       });
+      submissions.remember(submission, key, id);
       ok(res, { id, status: "pending" }, {}, 201);
     });
     // Every published version of a legal document, newest first (plan: legal versions).

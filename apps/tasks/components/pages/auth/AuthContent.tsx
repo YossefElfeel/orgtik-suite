@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuthSuccess } from "@orgtik/ui/auth";
+
 // The hand-off from SOS (FS-TASKS-3, D-017). SOS sends a one-time code (?code=), never the access
 // token: the code is exchanged once with the identity API, the address is cleared at once, and
 // the session is checked as before. ?token= still works until SOS lists Tasks among the apps that
@@ -24,6 +26,7 @@ export default function AuthContent() {
   const t = useTranslations("Errors");
   const params = useSearchParams();
   const router = useRouter();
+  const { confirm, success } = useAuthSuccess();
   const dispatch = useDispatch();
   // Read once: clearing the address changes the search params.
   const first = useRef<{ code: string | null; token: string | null; redirect: string } | null>(null);
@@ -57,9 +60,10 @@ export default function AuthContent() {
     // The redirect is a path in this app, with or without its language.
     const base = window.location.pathname.replace(/\/auth\/?$/, "");
     const to = first.current?.redirect ?? "/";
-    router.replace(/^\/(en|ar|de|fr|it)(\/|$)/.test(to) ? to : `${base}${to === "/" ? "" : to}` || "/");
+    confirm(() => router.replace(/^\/(en|ar|de|fr|it)(\/|$)/.test(to) ? to : `${base}${to === "/" ? "" : to}` || "/"));
   };
 
+  if (success) return success;
   if (failed) {
     return (
       <main className="grid min-h-dvh w-full place-items-center bg-canvas p-4">

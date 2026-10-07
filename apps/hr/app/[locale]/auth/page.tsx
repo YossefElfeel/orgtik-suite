@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuthSuccess } from "@orgtik/ui/auth";
+
 // The hand-off from SOS (HR wave, FS-HR-2; FS-SOS-2). SOS sends a one-time code (?code=), never the
 // access token: the code is exchanged with the identity API for the session, the address is cleared
 // at once, and the session is checked as before. ?token= still works while other launchers send it.
@@ -26,6 +28,7 @@ export default function AuthPage() {
   const t = useTranslations("suite");
   const params = useSearchParams();
   const router = useRouter();
+  const { confirm, success } = useAuthSuccess();
   const dispatch = useDispatch();
   // Read once: clearing the address changes the search params.
   const first = useRef<{ code: string | null; token: string | null; redirect: string } | null>(null);
@@ -56,9 +59,10 @@ export default function AuthPage() {
 
   const onSuccess = (data: { user: IUser; token: string }) => {
     dispatch(setUser({ user: mapToAuthUser(data.user), token: data.token }));
-    router.replace(first.current?.redirect ?? "/");
+    confirm(() => router.replace(first.current?.redirect ?? "/"));
   };
 
+  if (success) return success;
   if (failed) {
     return (
       <main className="grid min-h-dvh place-items-center bg-canvas p-4">
