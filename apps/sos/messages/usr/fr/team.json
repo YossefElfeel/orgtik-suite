@@ -135,6 +135,24 @@
       "confirmed": "Résultat de l’invitation confirmé",
       "uncertain": "Le résultat n’a pas été confirmé. Réessayez l’action d’origine pour vérifier avant une autre action.",
       "recover": "Vérifier le résultat"
+    },
+    "ownership": {
+      "open": "Transférer la propriété",
+      "recover": "Vérifier le transfert",
+      "title": "Transférer la propriété de l’espace",
+      "body": "Choisissez un membre actif pour devenir propriétaire de {workspace}.",
+      "member": "Nouveau propriétaire",
+      "chooseMember": "Choisissez un membre actif.",
+      "newOwner": "le nouveau propriétaire",
+      "review": "{name} devient propriétaire. Vous devenez administrateur et conservez vos accès actuels aux outils.",
+      "seats": "La propriété n’attribue aucun siège. La capacité, les affectations et les frais restent identiques.",
+      "empty": "Un membre actif doit rejoindre l’espace avant le transfert. Les invités ne peuvent pas en être propriétaires.",
+      "unconfirmed": "Le résultat du transfert est incertain. La personne et la demande initiales sont conservées. Vérifiez le résultat avant un autre transfert.",
+      "confirm": "Transférer la propriété",
+      "cancel": "Annuler",
+      "close": "Fermer",
+      "success": "Propriété de l’espace transférée.",
+      "workspaceChanged": "Revenez à l’espace d’origine pour vérifier ou récupérer ce transfert."
     }
   }
 }

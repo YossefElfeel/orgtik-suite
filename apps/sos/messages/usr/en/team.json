@@ -135,6 +135,24 @@
       "confirmed": "Invitation result confirmed",
       "uncertain": "The result wasn’t confirmed. Retry the original action to check before doing anything else.",
       "recover": "Check action result"
+    },
+    "ownership": {
+      "open": "Transfer ownership",
+      "recover": "Check handover result",
+      "title": "Transfer workspace ownership",
+      "body": "Choose an active member to own {workspace}.",
+      "member": "New owner",
+      "chooseMember": "Choose an active member.",
+      "newOwner": "the new owner",
+      "review": "{name} becomes the owner. You become an admin and keep your existing tool access.",
+      "seats": "Ownership does not assign a tool seat. Existing capacity, assignments and charges stay the same.",
+      "empty": "An active member must join before ownership can be transferred. Guests cannot own a workspace.",
+      "unconfirmed": "The handover result is unconfirmed. The original person and request are kept. Check that result before attempting another handover.",
+      "confirm": "Transfer ownership",
+      "cancel": "Cancel",
+      "close": "Close",
+      "success": "Workspace ownership transferred.",
+      "workspaceChanged": "Return to the original workspace to review or recover this handover."
     }
   }
 }

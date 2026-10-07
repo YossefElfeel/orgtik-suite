@@ -1,0 +1,109 @@
+{
+  "scope": "Actual sender/inbox/cancellation plus clearly marked UI projections; not release acceptance",
+  "checks": [
+    {
+      "name": "Actual Team sender UI exposes only its workspace delivery link and marks it mock",
+      "pass": true
+    },
+    {
+      "name": "Actual personal mock inbox links the recipient invitation across workspaces",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light actual cancelled invitation blocks password and acceptance controls",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light expired UI projection gives resend guidance without controls (backend expiry covered separately)",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light inactive UI projection cannot reset/reactivate an existing account",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light existing-account UI projection requires sign-in and never a password-reset form",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light pending-activation UI projection sets password while preserving administrator-entered details",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light public metadata503 retries without requiring a session or exposing a raw error",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark actual cancelled invitation blocks password and acceptance controls",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark expired UI projection gives resend guidance without controls (backend expiry covered separately)",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark inactive UI projection cannot reset/reactivate an existing account",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark existing-account UI projection requires sign-in and never a password-reset form",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark pending-activation UI projection sets password while preserving administrator-entered details",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark public metadata503 retries without requiring a session or exposing a raw error",
+      "pass": true
+    },
+    {
+      "name": "en-390-light actual cancelled invitation blocks password and acceptance controls",
+      "pass": true
+    },
+    {
+      "name": "en-390-light expired UI projection gives resend guidance without controls (backend expiry covered separately)",
+      "pass": true
+    },
+    {
+      "name": "en-390-light inactive UI projection cannot reset/reactivate an existing account",
+      "pass": true
+    },
+    {
+      "name": "en-390-light existing-account UI projection requires sign-in and never a password-reset form",
+      "pass": true
+    },
+    {
+      "name": "en-390-light pending-activation UI projection sets password while preserving administrator-entered details",
+      "pass": true
+    },
+    {
+      "name": "en-390-light public metadata503 retries without requiring a session or exposing a raw error",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark actual cancelled invitation blocks password and acceptance controls",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark expired UI projection gives resend guidance without controls (backend expiry covered separately)",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark inactive UI projection cannot reset/reactivate an existing account",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark existing-account UI projection requires sign-in and never a password-reset form",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark pending-activation UI projection sets password while preserving administrator-entered details",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark public metadata503 retries without requiring a session or exposing a raw error",
+      "pass": true
+    }
+  ]
+}

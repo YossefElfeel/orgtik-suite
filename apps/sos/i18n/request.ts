@@ -5,7 +5,7 @@ import { DEFAULT_LOCALE, LOCALE_COOKIE, fromAcceptLanguage, isLocale } from "./c
 // The customer dashboard's areas (Phase E, USR) keep their messages apart, one file per area and
 // one namespace per file (messages/usr/<locale>/<area>.json), so areas grow without editing the
 // one big catalog.
-const USR_AREAS = ["workspace", "tools", "billing", "team", "services", "support", "account"] as const;
+const USR_AREAS = ["workspace", "tools", "billing", "team", "services", "support", "account", "invitations", "mailbox"] as const;
 
 // The person's choice (the cookie the language menu sets), else their browser's language, else
 // English. No locale in the URL: see config.ts.

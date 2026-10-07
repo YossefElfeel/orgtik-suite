@@ -12,6 +12,7 @@ const authStorage = require("./auth-store");
 const { encodeDomainCheckpoint } = require("./domain-checkpoint");
 const clock = require("./clock");
 const people = require("./workspace-people");
+const journeys = require('./workspace-people-journeys');
 const { createTaskSampleRouter, isTaskSampleRequest } = require('./task-sample-assets');
 const { makeWorkspaceOperation } = require("./workspace-command");
 const { seatCounts, TOOL_DEFINITIONS } = require("./workspace-context");
@@ -51,14 +52,21 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const request = requests.getStore(), principal = request?.frame.principal, runtime = request?.runtime;
     if (!principal?.context.workspaceContext || !runtime || metadata.workspaceId !== runtime.workspaceId || (metadata.actor?.effectiveUserId ?? metadata.actor?.userId) !== principal.user.id) throw failure(403, "workspace_command_forbidden", "This workspace action is not authorized.");
     const S = platform().getStore(), workspace = S.workspace(runtime.workspaceId), tool = APP_TO_TOOL[runtime.appKey], access = principal.context.workspaceContext.tools[tool];
-    if (principal.readOnly || access?.access === "read_only") throw failure(423, "workspace_read_only", "This workspace is read-only.");
-    if (!access?.canWrite) throw failure(403, 'tool_permission_required', 'Your tool role cannot perform this action.');
+    const readOptions = kind === 'hr.offboarding.options';
+    if (!readOptions && (principal.readOnly || access?.access === "read_only")) throw failure(423, "workspace_read_only", "This workspace is read-only.");
+    if (!readOptions && !access?.canWrite) throw failure(403, 'tool_permission_required', 'Your tool role cannot perform this action.');
     const args = { S, identity: identityFor(), workspace, actor: principal.user, runtime, payload, transferOwned: row => transferOwned(workspace, row, runtime) };
     const hr = require("./workspace-hr");
     const shared = ["profile.self_update", "workspace.tool.roles", "workspace.member.remove"].includes(kind);
-    const allowed = shared || tool === "hr" && (kind === "hr.leave.approve" ? access.roles.some(role => ["super_admin", "hr", "manager"].includes(role)) : ["hr.hire", "hr.offboard"].includes(kind) && access.roles.some(role => ["super_admin", "hr"].includes(role)));
+    const allowed = shared || tool === "hr" && (kind === "hr.leave.approve" ? access.roles.some(role => ["super_admin", "hr", "manager"].includes(role)) : ["hr.hire", "hr.offboard", "hr.offboarding.options", "hr.offboarding.action"].includes(kind) && access.roles.some(role => ["super_admin", "hr"].includes(role)));
     if (allowed) {
       if (shared) require('./workspace-commands').authorize({ ...args, principal, tool, kind });
+      if (kind === 'hr.hire') hr.validateHirePayload(payload);
+      if (kind === 'hr.offboard' && runtime.exportSnapshot().data.employees.some(employee => employee.id === Number(payload.employeeId) && employee.authUserId === principal.user.id)) throw failure(400, 'self_offboarding_forbidden', 'Ask another HR administrator to schedule your offboarding.');
+      if (kind === 'hr.offboarding.options') {
+        const result = hr.offboardingOptions(args), readOnly = principal.readOnly || access.access === 'read_only';
+        return { ...result, readOnly, canOffboard: result.canOffboard && !readOnly, canTrackActions: !readOnly };
+      }
       const id = metadata.operationId;
       if (id && !/^[\w.:-]{1,200}$/.test(id)) throw failure(422, "invalid_operation_id", "Use a valid action reference.");
       const operation = id && makeWorkspaceOperation({ id, workspaceId: workspace.id, actor: { userId: principal.user.id, ...(principal.readOnly ? { impersonatedBy: principal.actor.id } : {}) }, method: "POST", path: `/commands/${kind}`, body: payload });
@@ -68,21 +76,22 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         if (prior.fingerprint !== operation.fingerprint) throw failure(409, "operation_conflict", "This action reference was already used differently.");
         return clone(prior.result);
       }
-      const result = shared ? require('./workspace-commands').execute({ ...args, principal, tool, kind }) : kind === "hr.hire" ? hr.hire(args) : kind === "hr.offboard" ? hr.offboard(args) : hr.approveLeave(args);
+      const result = shared ? require('./workspace-commands').execute({ ...args, principal, tool, kind }) : kind === "hr.hire" ? hr.hire(args) : kind === "hr.offboard" ? hr.offboard(args) : kind === 'hr.offboarding.action' ? hr.offboardingAction(args) : hr.approveLeave(args);
       if (key) workspace.commandOperations[key] = { fingerprint: operation.fingerprint, result: clone(result) };
       return result;
     }
     throw failure(501, "workspace_command_required", "This workspace action is not available yet.");
   }
   function transferOwned(workspace, row, currentRuntime) {
+    const identity = identityFor();
     const target = workspace.members.find(member => member.id === row.transfer.ownerMemberId && member.status === 'active');
-    const targetPerson = target && identityFor().findByKey(target.userKey), result = {};
+    const targetPerson = target && identity.findByKey(target.userKey), result = {};
     for (const appKey of Object.keys(APP_TO_TOOL)) {
       const runtime = currentRuntime?.appKey === appKey ? currentRuntime : registry.create(workspace.id, appKey);
       try {
         if (runtime.transferOwnership) {
           const grant = target?.toolGrants?.[APP_TO_TOOL[appKey]];
-          result[appKey] = runtime.transferOwnership({ operationId: `offboard:${row.id}:${appKey}`, fromUserId: row.userId, target: targetPerson && grant?.assigned ? { kind: 'member', userId: targetPerson.id } : { kind: 'archive' } });
+          result[appKey] = runtime.transferOwnership({ operationId: `offboard:${row.id}:${appKey}`, fromUserId: row.userId, target: targetPerson && require('./workspace-custody').eligible(target, APP_TO_TOOL[appKey], identity) ? { kind: 'member', userId: targetPerson.id } : { kind: 'archive' } });
           if (runtime !== currentRuntime) registry.commit(runtime);
         }
       } finally { if (runtime !== currentRuntime) runtime.close(); }
@@ -183,8 +192,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       answer(res, { user: safeUser(p.user), scopes: p.context.scopes, workspaceContext: p.context.workspaceContext, staffAccess: p.context.staffAccess }, "Profile fetched");
     });
     app.get('/api/auth/mailbox', route(() => {
-      if (principal()?.readOnly) throw failure(423, 'impersonation_read_only', 'View-as sessions cannot open a private mailbox.');
-      return platform().getStore().db.mailbox.filter(message => String(message.to).toLowerCase() === principal()?.user.email.toLowerCase());
+      return journeys.mailbox(platform().getStore(), principal().user, { readOnly: principal().readOnly });
     }));
     app.get("/api/auth/my-scopes", (req, res) => {
       const p = principal(); if (!p) return res.status(401).json({ success: false, code: "unauthenticated" });
@@ -247,10 +255,11 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     app.post("/v1/app/invitations", route(req => { writable(); return people.invite(platform().getStore(), identityFor(), workspace(), principal().user, req.body, { operationId: req.get('idempotency-key') }); }));
     app.post("/v1/app/invitations/:id/cancel", route(req => { writable(); return people.changeInvitation(platform().getStore(), workspace(), principal().user, req.params.id, "cancel", { operationId: req.get('idempotency-key') }); }));
     app.post("/v1/app/invitations/:id/resend", route(req => { writable(); return people.changeInvitation(platform().getStore(), workspace(), principal().user, req.params.id, "resend", { operationId: req.get('idempotency-key') }); }));
-    app.get("/v1/public/invitations/:token", route(req => people.invitationMetadata(platform().getStore(), req.params.token)));
+    app.get('/v1/app/invitations/:id/delivery', route(req => journeys.delivery(platform().getStore(), workspace(), principal().user, req.params.id, { readOnly: principal().readOnly })));
+    app.get("/v1/public/invitations/:token", route(req => journeys.metadata(platform().getStore(), identityFor(), req.params.token)));
     app.post("/v1/public/invitations/:token/accept", route(req => {
       if (principal()?.readOnly) throw failure(423, "impersonation_read_only", "View-as sessions cannot accept invitations.");
-      const result = people.acceptInvitation(platform().getStore(), identityFor(), req.params.token, principal()?.user, req.body);
+      const result = journeys.accept(platform().getStore(), identityFor(), req.params.token, principal()?.user, req.body, req.get('idempotency-key'));
       const user = identityFor().findUser(result.userId);
       const hrRuntime = registry.create(result.workspaceId, 'hr');
       try {
@@ -259,19 +268,15 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       const tokens = identityFor().issueTokens(user, { mode: "workspace", workspaceId: result.workspaceId, audience: "suite" });
       return { ...result, tokens, workspaceContext: contextService().resolveWorkspace(user, { mode: "workspace", workspaceId: result.workspaceId, audience: "suite" }).workspaceContext };
     }));
-    app.post("/v1/app/ownership-transfer", route(req => { writable(); return people.transferOwnership(platform().getStore(), workspace(), principal().user, req.body.memberId); }));
+    app.post("/v1/app/ownership-transfer", route(req => { writable(); return journeys.transfer(platform().getStore(), identityFor(), workspace(), principal().user, req.body.memberId, req.get('idempotency-key')); }));
     app.post('/v1/app/people-lifecycle', route(() => {
       writable(); const ws = workspace(); people.requireAdmin(ws, principal().user);
       const hrRuntime = registry.create(ws.id, 'hr');
-      try { const result = require('./workspace-hr').runOffboarding({ S: platform().getStore(), workspace: ws, actor: principal().user, runtime: hrRuntime, transferOwned: row => transferOwned(ws, row, hrRuntime) }); registry.commit(hrRuntime); return result; }
+      try { const result = require('./workspace-hr').runOffboarding({ S: platform().getStore(), identity: identityFor(), workspace: ws, actor: principal().user, runtime: hrRuntime, transferOwned: row => transferOwned(ws, row, hrRuntime) }); registry.commit(hrRuntime); return result; }
       finally { hrRuntime.close(); }
     }));
     app.get("/v1/app/mailbox", route(() => {
-      const ws = workspace(), email = principal().user.email.toLowerCase();
-      return platform().getStore().db.mailbox.filter(message => message.workspaceId === ws.id && String(message.to).toLowerCase() === email).map(message => {
-        if (!principal().readOnly) return message;
-        const { acceptanceToken, ...safe } = message; return safe;
-      });
+      return journeys.mailbox(platform().getStore(), principal().user, { workspaceId: workspace().id, readOnly: principal().readOnly });
     }));
     app.get("/v1/app/seats", route(() => {
       const ws = workspace();

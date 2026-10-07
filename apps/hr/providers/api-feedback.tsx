@@ -14,6 +14,8 @@ const QUIET = new Set([
   "addMessageToTicket",
   "exportBankFile",
   "updateOnboardingStep",
+  "offboardEmployee",
+  "offboardingAction",
 ]);
 
 const SPECIFIC: Record<string, string> = {

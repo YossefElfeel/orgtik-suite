@@ -660,7 +660,8 @@
     },
     "tooltips": {
       "edit": "Modifier",
-      "delete": "Supprimer"
+      "delete": "Supprimer",
+      "offboard": "Organiser le départ"
     },
     "noDepartment": "Aucun département",
     "empty": "Aucun employé trouvé.",
@@ -2684,5 +2685,102 @@
     "maxSize": "Taille maximale autorisée : {size} Mo",
     "button": "Téléverser vos fichiers",
     "previewAlt": "Aperçu du logo"
+  },
+  "Offboarding": {
+    "open": "Organiser le départ",
+    "title": "Départ d’un employé",
+    "description": "Mettre fin aux accès professionnels de {name} dans {workspace}.",
+    "loading": "Chargement des détails du départ…",
+    "close": "Fermer",
+    "retry": "Réessayer",
+    "timezone": "Les dates et limites d’accès utilisent {timeZone}.",
+    "ownershipReview": "Le successeur choisi est indisponible. La propriété de l’espace doit être vérifiée avant la reprise des accès habituels.",
+    "unconfirmed": "Le résultat est incertain. La demande initiale est conservée et la modification est bloquée. Vérifiez ce résultat avant un autre changement.",
+    "recover": "Récupérer le résultat initial",
+    "effectiveAt": "Fin des accès",
+    "successor": "Successeur des responsabilités",
+    "successorRequired": "Nouveau propriétaire · obligatoire",
+    "chooseSuccessor": "Choisir un membre actif",
+    "archive": "Archiver pour examen",
+    "noSuccessor": "Aucun membre admissible ne peut devenir propriétaire. Invitez un membre actif non invité avant le départ du propriétaire.",
+    "scheduledImpact": "Les accès restent disponibles jusqu’à la limite de fin de l’espace. L’exécution explicite du cycle simulé applique le départ.",
+    "completedImpact": "Les accès à cet espace et à ses outils sont terminés. Les autres espaces de cette personne restent disponibles.",
+    "actionsTitle": "Actions restantes",
+    "equipment": "Retour du matériel",
+    "finalPay": "Vérification du solde final · {currency}",
+    "markEquipment": "Marquer le matériel rendu",
+    "markFinalPay": "Terminer la vérification du solde",
+    "finalPayMock": "Cette action enregistre une vérification administrative simulée. Elle n’effectue aucun paiement.",
+    "note": "Note de l’action · facultative",
+    "cancelSchedule": "Annuler le départ programmé",
+    "history": "Historique des actions",
+    "when": "Quand les accès doivent-ils finir ?",
+    "now": "Immédiatement",
+    "date": "Après un dernier jour travaillé",
+    "lastDay": "Dernier jour travaillé",
+    "lastDayHint": "Les accès restent disponibles toute cette date dans le fuseau de l’espace et cessent au début du jour suivant.",
+    "nowImpact": "La confirmation termine les accès immédiatement. Les sièges affectés sont libérés et les invitations en attente annulées.",
+    "dateImpact": "Les accès cessent après le dernier jour travaillé choisi. Vous pouvez annuler avant la fin.",
+    "preserve": "Le compte global, l’historique et les accès aux autres espaces sont conservés.",
+    "seatImpact": "La propriété n’accorde aucun siège gratuit. Les affectations actuelles déterminent les responsabilités transférables.",
+    "custodyTitle": "Vérification des responsabilités",
+    "custodyHint": "Seul un successeur disposant déjà d’un accès à l’outil peut recevoir ses dossiers. Les autres dossiers sont archivés pour examen.",
+    "custodyTransfer": "Transférer à {name}",
+    "custodyArchive": "Archiver pour examen",
+    "confirmNow": "Terminer les accès maintenant",
+    "confirmSchedule": "Programmer le départ",
+    "status": {
+      "label": "Statut",
+      "scheduled": "Programmé",
+      "completed": "Terminé",
+      "cancelled": "Annulé"
+    },
+    "actionStatus": {
+      "pending": "En attente",
+      "completed": "Terminé"
+    },
+    "historyActions": {
+      "equipment_returned": "Retour du matériel enregistré",
+      "final_pay_completed": "Solde final vérifié",
+      "cancel": "Départ programmé annulé",
+      "recorded": "Action enregistrée"
+    },
+    "success": {
+      "completed": "Les accès à l’espace sont terminés. Le matériel et le solde final restent suivis ci-dessous.",
+      "scheduled": "Départ programmé. Les accès restent disponibles jusqu’à la limite de fin.",
+      "cancelled": "Départ programmé annulé. Les accès sont conservés.",
+      "action": "Action enregistrée."
+    },
+    "errors": {
+      "date": "Choisissez une date valide à partir du jour ouvré actuel de l’espace.",
+      "successor": "Choisissez un successeur actif qui n’a pas le rôle d’invité.",
+      "note": "Limitez la note à 1 000 caractères.",
+      "workspace": "Revenez à l’espace d’origine pour vérifier ou récupérer cette demande.",
+      "forbidden": "Vos accès actuels ne permettent pas de gérer ce départ.",
+      "readOnly": "Cet espace ou cette session est en lecture seule. Demandez une vérification à un administrateur autorisé.",
+      "gone": "Ce dossier d’emploi n’est plus disponible.",
+      "conflict": "L’état de l’emploi a changé. Actualisez-le et vérifiez-le.",
+      "invalid": "Vérifiez la date de fin et le successeur, puis réessayez.",
+      "failed": "La demande n’a pas pu aboutir. Vérifiez les détails et réessayez.",
+      "uncertain": "Le résultat est incertain. Récupérez la demande initiale pour le vérifier.",
+      "load": "Les détails du départ n’ont pas pu être chargés. Vérifiez la connexion et réessayez."
+    },
+    "tools": {
+      "tasks": "Tasks",
+      "hr": "HR",
+      "files": "Files",
+      "sales": "Sales",
+      "marketing": "Marketing",
+      "chats": "Chats",
+      "wm": "Website Manager",
+      "adm": "Admin",
+      "usr": "Workspace",
+      "whiteboards": "Whiteboards",
+      "crm": "Sales",
+      "chat": "Chats"
+    },
+    "successorUnavailable": "Successeur indisponible",
+    "successorWarning": "Le successeur prévu n’est plus admissible. Annulez la programmation et choisissez un membre actif avant la limite de fin.",
+    "working": "Enregistrement de la demande initiale…"
   }
 }

@@ -660,7 +660,8 @@
     },
     "tooltips": {
       "edit": "Modifica",
-      "delete": "Elimina"
+      "delete": "Elimina",
+      "offboard": "Gestisci l’uscita"
     },
     "noDepartment": "Nessun reparto",
     "empty": "Nessun dipendente trovato.",
@@ -2684,5 +2685,102 @@
     "maxSize": "Dimensione massima consentita: {size} MB",
     "button": "Carica i tuoi file",
     "previewAlt": "Anteprima del logo"
+  },
+  "Offboarding": {
+    "open": "Gestisci l’uscita",
+    "title": "Uscita del dipendente",
+    "description": "Termina l’accesso lavorativo di {name} in {workspace}.",
+    "loading": "Caricamento dei dettagli di uscita…",
+    "close": "Chiudi",
+    "retry": "Riprova",
+    "timezone": "Date e limiti di accesso usano {timeZone}.",
+    "ownershipReview": "Il successore scelto non è disponibile. La proprietà dello spazio va verificata prima di ripristinare l’accesso normale.",
+    "unconfirmed": "L’esito non è confermato. La richiesta originale è conservata e le modifiche sono bloccate. Recupera l’esito prima di un altro cambiamento.",
+    "recover": "Recupera l’esito originale",
+    "effectiveAt": "Fine dell’accesso",
+    "successor": "Successore delle responsabilità",
+    "successorRequired": "Nuovo proprietario · obbligatorio",
+    "chooseSuccessor": "Scegli un membro attivo",
+    "archive": "Archivia per revisione",
+    "noSuccessor": "Nessun membro idoneo può ricevere la proprietà. Invita un membro attivo non ospite prima dell’uscita del proprietario.",
+    "scheduledImpact": "L’accesso continua fino al limite di fine dello spazio. L’esecuzione esplicita del ciclo simulato applica il completamento.",
+    "completedImpact": "L’accesso a questo spazio e ai suoi strumenti è terminato. Gli altri spazi della persona restano disponibili.",
+    "actionsTitle": "Azioni rimanenti",
+    "equipment": "Restituzione attrezzatura",
+    "finalPay": "Verifica saldo finale · {currency}",
+    "markEquipment": "Segna attrezzatura restituita",
+    "markFinalPay": "Completa verifica saldo finale",
+    "finalPayMock": "Il completamento registra una verifica amministrativa simulata. Non esegue un pagamento.",
+    "note": "Nota dell’azione · facoltativa",
+    "cancelSchedule": "Annulla l’uscita programmata",
+    "history": "Cronologia delle azioni",
+    "when": "Quando deve terminare l’accesso?",
+    "now": "Subito",
+    "date": "Dopo l’ultimo giorno di lavoro",
+    "lastDay": "Ultimo giorno di lavoro",
+    "lastDayHint": "L’accesso resta attivo per questa data nel fuso dello spazio e termina all’inizio del giorno successivo.",
+    "nowImpact": "La conferma termina subito l’accesso. I posti assegnati vengono liberati e gli inviti in sospeso annullati.",
+    "dateImpact": "L’accesso termina dopo l’ultimo giorno di lavoro scelto. Puoi annullare prima del completamento.",
+    "preserve": "L’account globale, lo storico e l’accesso agli altri spazi sono conservati.",
+    "seatImpact": "La proprietà non concede posti gratuiti. Le assegnazioni attuali determinano quali responsabilità possono essere trasferite.",
+    "custodyTitle": "Revisione delle responsabilità",
+    "custodyHint": "Solo un successore con accesso esistente allo strumento può riceverne i dati. Gli altri dati sono archiviati per revisione.",
+    "custodyTransfer": "Trasferisci a {name}",
+    "custodyArchive": "Archivia per revisione",
+    "confirmNow": "Termina l’accesso ora",
+    "confirmSchedule": "Programma l’uscita",
+    "status": {
+      "label": "Stato",
+      "scheduled": "Programmata",
+      "completed": "Completata",
+      "cancelled": "Annullata"
+    },
+    "actionStatus": {
+      "pending": "In sospeso",
+      "completed": "Completata"
+    },
+    "historyActions": {
+      "equipment_returned": "Restituzione attrezzatura registrata",
+      "final_pay_completed": "Verifica saldo finale completata",
+      "cancel": "Uscita programmata annullata",
+      "recorded": "Azione registrata"
+    },
+    "success": {
+      "completed": "Accesso allo spazio terminato. Attrezzatura e saldo finale possono essere seguiti qui sotto.",
+      "scheduled": "Uscita programmata. L’accesso continua fino al limite di fine.",
+      "cancelled": "Uscita programmata annullata. L’accesso è conservato.",
+      "action": "Azione registrata."
+    },
+    "errors": {
+      "date": "Scegli una data valida dal giorno lavorativo corrente dello spazio in poi.",
+      "successor": "Scegli un successore attivo non ospite per il proprietario.",
+      "note": "La nota può contenere al massimo 1.000 caratteri.",
+      "workspace": "Torna allo spazio originale per verificare o recuperare questa richiesta.",
+      "forbidden": "Il tuo accesso attuale non consente di gestire l’uscita di questo dipendente.",
+      "readOnly": "Lo spazio o la sessione è in sola lettura. Chiedi una verifica a un amministratore autorizzato.",
+      "gone": "Questo record di impiego non è più disponibile.",
+      "conflict": "Lo stato di impiego è cambiato. Aggiorna e verifica prima di riprovare.",
+      "invalid": "Verifica data di fine e successore, poi riprova.",
+      "failed": "La richiesta non è stata completata. Verifica i dettagli e riprova.",
+      "uncertain": "L’esito non è confermato. Recupera la richiesta originale per verificarlo in sicurezza.",
+      "load": "Impossibile caricare i dettagli di uscita. Verifica la connessione e riprova."
+    },
+    "tools": {
+      "tasks": "Tasks",
+      "hr": "HR",
+      "files": "Files",
+      "sales": "Sales",
+      "marketing": "Marketing",
+      "chats": "Chats",
+      "wm": "Website Manager",
+      "adm": "Admin",
+      "usr": "Workspace",
+      "whiteboards": "Whiteboards",
+      "crm": "Sales",
+      "chat": "Chats"
+    },
+    "successorUnavailable": "Successore non disponibile",
+    "successorWarning": "Il successore previsto non è più idoneo. Annulla il programma e scegli un successore attivo prima del limite di fine.",
+    "working": "Salvataggio della richiesta originale…"
   }
 }

@@ -1,5 +1,5 @@
 "use client";
-import { CalendarBlank as Calendar, Clock, DotsThreeVertical as MoreVertical, Envelope as Mail, MapPin, PencilSimple as Pencil, Phone, Trash as Trash2 } from "@phosphor-icons/react";
+import { CalendarBlank as Calendar, Clock, DotsThreeVertical as MoreVertical, Envelope as Mail, MapPin, PencilSimple as Pencil, Phone, UserMinus } from "@phosphor-icons/react";
 
 import { IconButton } from "@/components/shared/IconButton";
 import React, { useState } from "react";
@@ -61,8 +61,8 @@ export default function EmployeeCard({ employee }: EmployeeCardProps) {
               variant="ghost"
               className="w-full justify-start px-2 gap-1 hover:text-danger"
             >
-              <Trash2 className="me-2 h-4 w-4" />
-              {t("tooltips.delete")}
+              <UserMinus className="me-2 h-4 w-4" />
+              {t("tooltips.offboard")}
             </Button>
           </DeleteEmployeeDialog>
         </DropdownMenuContent>

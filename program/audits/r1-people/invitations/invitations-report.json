@@ -1,0 +1,101 @@
+{
+  "scope": "Local public invitation acceptance only; not R1 release acceptance",
+  "checks": [
+    {
+      "name": "en-1440-light existing recipient accepts without replacing current workspace or another tab",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light explicit open retries profile503 without another acceptance; original tab remains isolated",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light new-person form is localized, responsive and keeps account creation separate",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light new account accepts once, stages tokens and does not store its password",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light lost503 after actual backend commit retains chosen password only in form memory",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light lost-response recovery signs in with same password and replays acceptance without duplicate seats",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark existing recipient accepts without replacing current workspace or another tab",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark explicit open retries profile503 without another acceptance; original tab remains isolated",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark new-person form is localized, responsive and keeps account creation separate",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark new account accepts once, stages tokens and does not store its password",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark lost503 after actual backend commit retains chosen password only in form memory",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark lost-response recovery signs in with same password and replays acceptance without duplicate seats",
+      "pass": true
+    },
+    {
+      "name": "en-390-light existing recipient accepts without replacing current workspace or another tab",
+      "pass": true
+    },
+    {
+      "name": "en-390-light explicit open retries profile503 without another acceptance; original tab remains isolated",
+      "pass": true
+    },
+    {
+      "name": "en-390-light new-person form is localized, responsive and keeps account creation separate",
+      "pass": true
+    },
+    {
+      "name": "en-390-light new account accepts once, stages tokens and does not store its password",
+      "pass": true
+    },
+    {
+      "name": "en-390-light lost503 after actual backend commit retains chosen password only in form memory",
+      "pass": true
+    },
+    {
+      "name": "en-390-light lost-response recovery signs in with same password and replays acceptance without duplicate seats",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark existing recipient accepts without replacing current workspace or another tab",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark explicit open retries profile503 without another acceptance; original tab remains isolated",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark new-person form is localized, responsive and keeps account creation separate",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark new account accepts once, stages tokens and does not store its password",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark lost503 after actual backend commit retains chosen password only in form memory",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark lost-response recovery signs in with same password and replays acceptance without duplicate seats",
+      "pass": true
+    }
+  ]
+}

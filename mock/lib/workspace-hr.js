@@ -1,7 +1,18 @@
 const people = require("./workspace-people");
+const custody = require('./workspace-custody');
 const { createBusinessCalendar } = require('./business-calendar');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
+function validateHirePayload(payload) {
+  const fields = ['firstName', 'lastName', 'email', 'phoneNumber', 'birthday', 'gender', 'nationality', 'nationalIdOrPassport', 'personalTaxId', 'accommodationType', 'country', 'city', 'street', 'postCode', 'tools'];
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload) || Object.keys(payload).some(key => !fields.includes(key))) throw fail(422, 'invalid_employee', 'Only employee details and invited tools can be supplied.');
+  for (const [key, value] of Object.entries(payload)) {
+    if (key === 'tools') { if (value !== null && (!Array.isArray(value) || value.some(tool => typeof tool !== 'string'))) throw fail(422, 'invalid_tools', 'Choose valid invited tools.'); }
+    else if (value !== null && (typeof value !== 'string' || value.length > 2000)) throw fail(422, 'invalid_employee', 'Check the employee details.');
+  }
+  if (['firstName', 'lastName', 'email'].some(key => typeof payload[key] !== 'string' || !payload[key].trim())) throw fail(422, 'invalid_employee', 'Enter the employee name and email.');
+}
 function hire({ S, identity, workspace, actor, runtime, payload }) {
+  validateHirePayload(payload);
   const email = String(payload.email || "").trim().toLowerCase();
   if (!payload.firstName || !payload.lastName || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw fail(422, "invalid_employee", "Check the employee name and email.");
   const old = runtime.exportSnapshot().data.employees.find(employee => employee.email.toLowerCase() === email && !employee.deletedAt && employee.status !== "offboarded");
@@ -71,22 +82,22 @@ function offboard({ S, identity, workspace, actor, runtime, payload, transferOwn
   workspace.offboardings ??= [];
   const existing = workspace.offboardings.find(row => row.employeeId === employee.id && row.status !== 'cancelled');
   if (existing) return existing;
-  const person = identity.findUser(employee.authUserId), member = person && people.memberOf(workspace, person);
+  const person = identity.findUser(employee.authUserId), member = workspace.members.find(candidate => person && candidate.userKey === person.key || candidate.email && candidate.email.toLowerCase() === employee.email.toLowerCase());
   const targetId = payload.transfer?.ownerMemberId ?? payload.transfer?.memberId;
-  if (member?.role === 'owner' && !workspace.members.some(row => row.id === targetId && row.status === 'active' && row.role !== 'guest' && row.id !== member.id)) throw fail(422, 'ownership_transfer_required', 'Choose an active member to receive workspace ownership.');
+  if (member?.role === 'owner' && !workspace.members.some(row => row.id === targetId && row.status === 'active' && row.role !== 'guest' && row.id !== member.id && custody.hasActiveAccount(row, identity))) throw fail(422, 'ownership_transfer_required', 'Choose an active member to receive workspace ownership.');
   const at = endInstant(workspace, payload.effectiveAt, S.now());
   const row = { id: S.id('offboard'), employeeId: employee.id, userId: employee.authUserId, memberId: member?.id || null, effectiveAt: S.iso(at), status: 'scheduled', transfer: { ownerMemberId: targetId || null }, equipment: { status: 'pending' }, finalPay: { status: 'pending', currency: employee.salary?.currency || workspace.currency }, createdBy: actor.id, createdAt: S.iso(S.now()) };
   workspace.offboardings.push(row);
   S.log(actor.key, 'offboarding_scheduled', row.id, { workspaceId: workspace.id, employeeId: employee.id });
-  runOffboarding({ S, workspace, actor, runtime, transferOwned }); return row;
+  runOffboarding({ S, identity, workspace, actor, runtime, transferOwned }); return row;
 }
-function runOffboarding({ S, workspace, actor, runtime, transferOwned }) {
+function runOffboarding({ S, identity, workspace, actor, runtime, transferOwned }) {
   const completed = [];
   for (const row of workspace.offboardings || []) {
     if (row.status !== 'scheduled' || Date.parse(row.effectiveAt) > S.now()) continue;
     const member = workspace.members.find(item => item.id === row.memberId);
     if (member?.role === 'owner') {
-      const target = workspace.members.find(item => item.id === row.transfer.ownerMemberId && item.status === 'active' && item.role !== 'guest');
+      const target = workspace.members.find(item => item.id === row.transfer.ownerMemberId && item.status === 'active' && item.role !== 'guest' && custody.hasActiveAccount(item, identity));
       if (!target) {
         workspace.state = 'suspended'; workspace.flags ??= {};
         workspace.flags.ownershipReview = { departedMemberId: member.id, unavailableSuccessorId: row.transfer.ownerMemberId, offboardingId: row.id, at: row.effectiveAt };
@@ -105,4 +116,31 @@ function runOffboarding({ S, workspace, actor, runtime, transferOwned }) {
   }
   return { completed };
 }
-module.exports = { hire, approveLeave, activateEmployee, offboard, runOffboarding, endInstant };
+function offboardingOptions({ S, identity, workspace, actor, runtime, payload }) {
+  const employee = runtime.exportSnapshot().data.employees.find(row => row.id === Number(payload.employeeId));
+  if (!employee) throw fail(404, 'employee_not_found', 'This employment record was not found.');
+  const person = identity.findUser(employee.authUserId), member = person && people.memberOf(workspace, person);
+  const clock = createBusinessCalendar(workspace.timeZone), parts = clock.parts(S.now());
+  const successors = workspace.members.filter(candidate => candidate.id !== member?.id && candidate.status === 'active' && candidate.role !== 'guest' && custody.hasActiveAccount(candidate, identity)).map(candidate => {
+    const user = identity.findByKey(candidate.userKey);
+    return { memberId: candidate.id, name: user ? `${user.firstName || ''} ${user.lastName || ''}`.trim() : candidate.name, email: user?.email || candidate.email, role: candidate.role, tools: Object.keys(candidate.toolGrants || {}).filter(tool => candidate.toolGrants[tool].assigned) };
+  });
+  const record = (workspace.offboardings || []).filter(row => row.employeeId === employee.id).at(-1) || null;
+  return { workspace: { id: workspace.id, name: workspace.name, timeZone: workspace.timeZone }, employee: { id: employee.id, name: `${employee.firstName || ''} ${employee.lastName || ''}`.trim(), isOwner: member?.role === 'owner' }, canOffboard: employee.authUserId !== actor.id && !['offboarded'].includes(employee.status), successorRequired: member?.role === 'owner', successors, offboarding: record, ownershipReview: workspace.flags?.ownershipReview || null, serverNow: S.iso(S.now()), businessToday: `${parts.year}-${String(parts.month).padStart(2, '0')}-${String(parts.day).padStart(2, '0')}`, custodyCoverage: custody.coverage(workspace, member, identity) };
+}
+function offboardingAction({ S, workspace, actor, payload }) {
+  const row = workspace.offboardings?.find(record => record.id === payload.offboardingId && record.employeeId === Number(payload.employeeId));
+  if (!row) throw fail(404, 'offboarding_not_found', 'This offboarding record was not found.');
+  if (payload.note !== undefined && (typeof payload.note !== 'string' || payload.note.length > 1000)) throw fail(422, 'invalid_note', 'Use a note of at most1000 characters.');
+  if (payload.action === 'cancel') {
+    if (row.status !== 'scheduled' || Date.parse(row.effectiveAt) <= S.now()) throw fail(409, 'offboarding_unavailable', 'Only future scheduled offboarding can be cancelled.');
+    row.status = 'cancelled'; row.cancelledAt = S.iso(S.now());
+  } else {
+    const field = { equipment_returned: 'equipment', final_pay_completed: 'finalPay' }[payload.action];
+    if (!field || row.status === 'cancelled') throw fail(422, 'invalid_offboarding_action', 'Choose an available offboarding action.');
+    row[field] = { ...row[field], status: 'completed', completedAt: S.iso(S.now()), completedBy: actor.id, mode: 'mock_tracking', ...(payload.note ? { note: payload.note } : {}) };
+  }
+  row.actions ??= []; row.actions.push({ action: payload.action, actorUserId: actor.id, at: S.iso(S.now()), note: payload.note || null });
+  S.log(actor.key, 'offboarding_action', row.id, { workspaceId: workspace.id, action: payload.action }); return row;
+}
+module.exports = { hire, validateHirePayload, approveLeave, activateEmployee, offboard, runOffboarding, endInstant, offboardingOptions, offboardingAction };

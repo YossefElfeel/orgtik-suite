@@ -11,6 +11,8 @@ import { useLocalized, usePlatformProblem } from '@/components/workspace/account
 import { Notice } from '@/components/workspace/account/Notice';
 import { InviteDialog } from './InviteDialog';
 import { AccessDialog } from './AccessDialog';
+import { InvitationDeliveryButton } from '@/components/workspace/mailbox/InvitationDeliveryButton';
+import { OwnershipTransferDialog } from '@/components/workspace/team/OwnershipTransferDialog';
 import { selection, supportedTools, membershipSeatState } from './seats';
 import { attemptNamespace, readActionAttempt, saveActionAttempt, uncertainResult, type InvitationActionAttempt } from './attempts';
 type Action = { kind: 'role'; role: Exclude<WorkspaceRole, 'owner'> } | { kind: 'access' } | { kind: 'remove' };
@@ -22,7 +24,7 @@ export function TeamView() {
   const [inviting, setInviting] = useState(false), [target, setTarget] = useState<{ member: TeamMember; action: Action } | null>(null), [problem, setProblem] = useState<string | null>(null);
   const columns = useColumns({ me, canManage, onAction: (member, action) => setTarget({ member, action }) });
   return <div className="flex flex-col gap-6">
-    <PageHeader title={t('title')} description={t(canManage ? 'description' : 'readOnly', { name: me.workspace.name })} actions={canManage && team ? <Button variant="primary" startIcon={<Plus />} onClick={() => setInviting(true)}>{t('invite.open')}</Button> : undefined} />
+    <PageHeader title={t('title')} description={t(canManage ? 'description' : 'readOnly', { name: me.workspace.name })} actions={canManage && team ? <div className="flex flex-wrap gap-2"><OwnershipTransferDialog me={me} team={team} /><Button variant="primary" startIcon={<Plus />} onClick={() => setInviting(true)}>{t('invite.open')}</Button></div> : undefined} />
     {problem && <Notice tone="danger">{problem}</Notice>}
     {isLoading ? <LoadingState rows={6} /> : isError || !team?.meta.perTool ? <ErrorState title={t('failedTitle')} description={t('failedBody')} onRetry={refetch} /> : <>
       <SeatsSummary team={team} me={me} />
@@ -80,7 +82,7 @@ function Invitations({ me }: { me: AppMe }) {
   };
   const rows = (data || []).filter(invitation => ['pending', 'expired'].includes(invitation.status));
   return <Card className="flex flex-col gap-4"><h2 className="font-display text-title-sm">{t('title')}</h2>
-    {isLoading ? <LoadingState rows={2} /> : isError ? <ErrorState title={t('failed')} onRetry={refetch} /> : !rows.length ? <p className="text-body-sm text-fg-muted">{t('empty')}</p> : <ul className="divide-y divide-line">{rows.map(invitation => <li key={invitation.id} className="flex flex-wrap items-center justify-between gap-3 py-3"><div className="min-w-0"><p dir="ltr" className="break-all text-start font-medium">{invitation.email}</p><p className="text-caption text-fg-muted">{t(invitation.status === 'expired' ? 'expired' : 'expires', { date: f.date(invitation.expiresAt, { dateStyle: 'medium' }) })}</p></div><div className="flex flex-wrap gap-2"><Button size="sm" disabled={busy || Boolean(pending) || invitation.role === 'admin' && me.workspace.role !== 'owner'} onClick={() => run(invitation.id, 'resend')}>{t('resend')}</Button><Button size="sm" variant="secondary" disabled={busy || Boolean(pending)} onClick={() => run(invitation.id, 'cancel')}>{t('cancel')}</Button></div></li>)}</ul>}
+    {isLoading ? <LoadingState rows={2} /> : isError ? <ErrorState title={t('failed')} onRetry={refetch} /> : !rows.length ? <p className="text-body-sm text-fg-muted">{t('empty')}</p> : <ul className="divide-y divide-line">{rows.map(invitation => <li key={invitation.id} className="flex flex-wrap items-center justify-between gap-3 py-3"><div className="min-w-0"><p dir="ltr" className="break-all text-start font-medium">{invitation.email}</p><p className="text-caption text-fg-muted">{t(invitation.status === 'expired' ? 'expired' : 'expires', { date: f.date(invitation.expiresAt, { dateStyle: 'medium' }) })}</p></div><div className="flex flex-wrap items-start gap-2">{invitation.status === 'pending' && <InvitationDeliveryButton invitationId={invitation.id} disabled={busy || Boolean(pending)} />}<Button size="sm" disabled={busy || Boolean(pending) || invitation.role === 'admin' && me.workspace.role !== 'owner'} onClick={() => run(invitation.id, 'resend')}>{t('resend')}</Button><Button size="sm" variant="secondary" disabled={busy || Boolean(pending)} onClick={() => run(invitation.id, 'cancel')}>{t('cancel')}</Button></div></li>)}</ul>}
     {failure && <Notice tone="warning">{failure}</Notice>}
     {pending && <Button variant="secondary" loading={busy} onClick={() => run(pending.id, pending.action)}>{t('recover')}</Button>}
   </Card>;
