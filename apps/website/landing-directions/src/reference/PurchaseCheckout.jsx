@@ -568,9 +568,7 @@ export default function PurchaseCheckout() {
     setProcessing(true);
     controller.current = new AbortController();
     if (recovering) attempt.current = recovering.payload.reference;
-    attempt.current ||= msg("PurchaseCheckout:19", [
-      crypto.randomUUID().slice(0, 8).toUpperCase(),
-    ]);
+    attempt.current ||= `ORG-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
     try {
       const purchase = await simulatePayment({
         groups: orderGroups,
@@ -799,9 +797,7 @@ export default function PurchaseCheckout() {
                             setError("");
                           }}
                           aria-label={method.name}
-                          aria-describedby={msg("PurchaseCheckout:36", [
-                            method.id,
-                          ])}
+                          aria-describedby={`purchase-method-${method.id}-description`}
                         />
                         <i
                           className={`ph ph-${method.icon}`}

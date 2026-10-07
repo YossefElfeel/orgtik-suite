@@ -49,6 +49,8 @@ type Common = {
   /** How values read (on the axis, in the tooltip and the table). */
   valueFormat?: Intl.NumberFormatOptions;
   className?: string;
+  /** Align chart areas when cards have different amounts of heading copy. */
+  headerMinHeight?: number;
 };
 type Cartesian = Common & {
   data: Datum[];
@@ -92,6 +94,7 @@ function ChartFrame({
   legend,
   table,
   className,
+  headerMinHeight,
   children,
 }: Common & { empty: boolean; legend?: { label: string; color: string; dashed?: boolean }[]; table: { head: string[]; rows: ReactNode[][] }; children: ReactNode }) {
   const t = useStrings();
@@ -100,7 +103,7 @@ function ChartFrame({
   const h = height ?? 240;
   return (
     <figure aria-labelledby={`${id}-t`} className={cn("flex min-w-0 flex-col gap-4 rounded-card border border-line bg-raised p-5", className)}>
-      <div className="flex flex-wrap items-start justify-between gap-3">
+      <div className="flex flex-wrap items-start justify-between gap-3" style={headerMinHeight === undefined ? undefined : { minHeight: headerMinHeight }}>
         <figcaption className="flex min-w-0 flex-col gap-1">
           <span id={`${id}-t`} className="font-display text-title-sm text-fg">
             {title}
@@ -244,9 +247,9 @@ export function LineChart({ data, x, series, area, ...common }: Cartesian & { ar
 // A row's name beside its bar: shortened with an ellipsis to fit, the whole name on hover and in
 // the table view.
 const LABEL_WIDTH = 168;
-function RowLabel({ x, y, payload, rtl, format }: { x?: number; y?: number; payload?: { value: string | number }; rtl: boolean; format?: (v: string | number) => string }) {
+function RowLabel({ x, y, payload, rtl, format, width }: { x?: number; y?: number; payload?: { value: string | number }; rtl: boolean; format?: (v: string | number) => string; width: number }) {
   const full = payload ? (format ? format(payload.value) : String(payload.value)) : "";
-  const max = Math.floor((LABEL_WIDTH - 12) / 6.6);
+  const max = Math.max(2, Math.floor((width - 12) / 6.6));
   const shown = full.length > max ? `${full.slice(0, max - 1)}…` : full;
   return (
     <text x={x} y={y} dy={4} textAnchor={rtl ? "start" : "end"} fill="var(--ot-fg-subtle)" fontSize={12}>
@@ -257,7 +260,14 @@ function RowLabel({ x, y, payload, rtl, format }: { x?: number; y?: number; payl
 }
 
 /** Amounts by category: columns, or `layout="rows"` for long names (a ranking). */
-export function BarChart({ data, x, series, stacked, layout = "columns", ...common }: Cartesian & { stacked?: boolean; layout?: "columns" | "rows" }) {
+export function BarChart({ data, x, series, stacked, layout = "columns", labelWidth = LABEL_WIDTH, maxBarSize, ...common }: Cartesian & {
+  stacked?: boolean;
+  layout?: "columns" | "rows";
+  /** Space for row labels; use less for short categories such as page paths. */
+  labelWidth?: number;
+  /** Keeps bars readable when charts with different category counts share a height. */
+  maxBarSize?: number;
+}) {
   const { dir } = useOrgtik();
   const rtl = dir === "rtl";
   const value = useValue(common.valueFormat);
@@ -272,7 +282,7 @@ export function BarChart({ data, x, series, stacked, layout = "columns", ...comm
           {rows ? (
             <>
               <XAxis type="number" reversed={rtl} tick={tick} tickLine={false} axisLine={false} tickFormatter={(v) => value(v)} />
-              <YAxis type="category" dataKey={x.key} orientation={rtl ? "right" : "left"} tickLine={false} axisLine={false} width={LABEL_WIDTH} tick={<RowLabel rtl={rtl} format={x.format} />} />
+              <YAxis type="category" dataKey={x.key} orientation={rtl ? "right" : "left"} tickLine={false} axisLine={false} width={labelWidth} tick={<RowLabel rtl={rtl} format={x.format} width={labelWidth} />} />
             </>
           ) : (
             <>
@@ -287,6 +297,7 @@ export function BarChart({ data, x, series, stacked, layout = "columns", ...comm
               dataKey={s.key}
               name={s.label}
               fill={colorOf(s, i)}
+              maxBarSize={maxBarSize}
               stackId={stacked ? "all" : undefined}
               // Only the outer end is rounded; in a stack, only the last segment has one.
               radius={stacked && i < series.length - 1 ? 0 : rows ? (rtl ? [4, 0, 0, 4] : [0, 4, 4, 0]) : [4, 4, 0, 0]}

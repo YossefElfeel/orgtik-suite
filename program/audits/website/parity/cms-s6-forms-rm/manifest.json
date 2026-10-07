@@ -1,0 +1,19 @@
+{
+  "label": "cms-s6-forms-rm",
+  "site": "http://localhost:4173",
+  "commit": {
+    "head": "6b849ee",
+    "dirty": true
+  },
+  "at": "2026-10-01T06:50:50.618Z",
+  "clock": {
+    "start": "2026-09-29T06:00:00.000Z",
+    "settleMs": 15000
+  },
+  "widths": [
+    390,
+    768,
+    1440
+  ],
+  "captures": []
+}

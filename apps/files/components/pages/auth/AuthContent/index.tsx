@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuthSuccess } from "@orgtik/ui/auth";
+
 // The hand-off from SOS (FS-SOS-2). SOS now sends a one-time code (?code=), never the access token:
 // the code is exchanged with the identity API for the session (in the response body), the address
 // is cleared at once, and the session is checked as before. ?token= still works while other apps'
@@ -23,6 +25,7 @@ function AuthContent() {
   const t = useTranslations("Errors");
   const params = useSearchParams();
   const router = useRouter();
+  const { confirm, success } = useAuthSuccess();
   const dispatch = useDispatch();
   // Read once: clearing the address changes the search params.
   const first = useRef<{ code: string | null; token: string | null; redirect: string } | null>(null);
@@ -50,9 +53,10 @@ function AuthContent() {
   const onSuccess = (data: { user: Record<string, unknown> & { permissions?: unknown }; token: string }) => {
     const { permissions: _ignored, ...lightWeightUser } = data.user;
     dispatch(setUser({ user: lightWeightUser as never, token: data.token }));
-    router.replace(first.current?.redirect ?? "/");
+    confirm(() => router.replace(first.current?.redirect ?? "/"));
   };
 
+  if (success) return success;
   if (failed) {
     return (
       <ErrorState

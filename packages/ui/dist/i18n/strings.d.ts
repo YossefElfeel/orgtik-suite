@@ -4,6 +4,12 @@ type Plural = Partial<Record<Intl.LDMLPluralRule, string>> & {
 };
 type Message = string | Plural;
 declare const en: {
+    authSuccessTitle: string;
+    authSuccessBody: string;
+    authVerified: string;
+    authAccessGranted: string;
+    authSecureAccess: string;
+    authContinue: string;
     pickDate: string;
     pickRange: string;
     pickTime: string;

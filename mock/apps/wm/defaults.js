@@ -14,11 +14,11 @@ function caseWords(department) {
   if (!blocks[department]) throw new Error('Unknown case-study department');
   return {...common,...blocks[department]};
 }
-function blankContent(type, department) {
+function blankContent(type, department, at = new Date().toISOString()) {
   const base = {slug:{en:''},locales:{en:{}},seo:{en:{title:'',description:'',robots:'noindex',inSitemap:true}}};
   if (type === 'caseStudy') return {...base,narrativePublished:false,sampleNarrativePublished:false,provenance:{figures:'sample',sampleLabel:{en:'Sample figures'}},image:{src:'',alt:{}},gallery:[],locales:{en:caseWords(department)}};
-  if (type === 'article') return {...base,category:'design',publishedOn:'2026-10-05',readingMinutes:1,image:{src:'',alt:{}},locales:{en:{name:'',excerpt:'',takeaways:[],sections:[]}}};
-  if (type === 'roadmapItem') return {...base,slug:{},seo:{},status:'open',period:'next',year:'2026',progress:0,locales:{en:{name:'',body:'',timing:'',theme:''}}};
+  if (type === 'article') return {...base,category:'design',publishedOn:at.slice(0,10),readingMinutes:1,image:{src:'',alt:{}},locales:{en:{name:'',excerpt:'',takeaways:[],sections:[]}}};
+  if (type === 'roadmapItem') return {...base,slug:{},seo:{},status:'open',period:'next',year:at.slice(0,4),progress:0,locales:{en:{name:'',body:'',timing:'',theme:''}}};
   throw new Error('Unsupported blank content type');
 }
 module.exports = {DEPARTMENTS,caseWords,blankContent};

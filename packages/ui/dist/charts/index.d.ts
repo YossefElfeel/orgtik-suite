@@ -22,6 +22,8 @@ type Common = {
     /** How values read (on the axis, in the tooltip and the table). */
     valueFormat?: Intl.NumberFormatOptions;
     className?: string;
+    /** Align chart areas when cards have different amounts of heading copy. */
+    headerMinHeight?: number;
 };
 type Cartesian = Common & {
     data: Datum[];
@@ -38,9 +40,13 @@ export declare function LineChart({ data, x, series, area, ...common }: Cartesia
     area?: boolean;
 }): import("react").JSX.Element;
 /** Amounts by category: columns, or `layout="rows"` for long names (a ranking). */
-export declare function BarChart({ data, x, series, stacked, layout, ...common }: Cartesian & {
+export declare function BarChart({ data, x, series, stacked, layout, labelWidth, maxBarSize, ...common }: Cartesian & {
     stacked?: boolean;
     layout?: "columns" | "rows";
+    /** Space for row labels; use less for short categories such as page paths. */
+    labelWidth?: number;
+    /** Keeps bars readable when charts with different category counts share a height. */
+    maxBarSize?: number;
 }): import("react").JSX.Element;
 /** Parts of a whole (up to about six): a ring with the total in the middle. */
 export declare function DonutChart({ data, totalLabel, categoryLabel, valueLabel, ...common }: Common & {

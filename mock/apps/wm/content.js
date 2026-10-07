@@ -249,13 +249,13 @@ function makeStore(now) {
     if (type === "caseStudy" && !template && !DEPARTMENTS.includes(department)) errors.department = "required";
     if (!String(name ?? "").trim()) errors.name = "required";
     if (Object.keys(errors).length) return { errors };
-    const content = template ? clone(current(template)) : blankContent(type, department);
+    const content = template ? clone(current(template)) : blankContent(type, department, now());
     content.locales = { en: { ...content.locales.en, name: String(name).trim() } };
     if (content.slug && Object.keys(content.slug).length) content.slug = { en: String(slug ?? "").trim() };
     const was = template?.live?.seo?.en ?? template?.draft?.seo?.en ?? {};
     content.seo = type === "roadmapItem" ? {} : { en: { title: String(name).trim(), description: "", robots: was.robots ?? "noindex", inSitemap: was.inSitemap ?? true } };
     // Copied figures aren't this project's: they start as samples.
-    if (content.provenance) content.provenance = { figures: "sample", sampleLabel: {en:"Sample figures"} };
+    if (content.provenance) content.provenance = { figures: "sample", sampleLabel: clone(content.provenance.sampleLabel) };
     if (type === "caseStudy") content.narrativePublished = false;
     if (type === "caseStudy") content.sampleNarrativePublished = false;
     const taken = new Set([...entries.keys()]);
@@ -362,7 +362,7 @@ function makeStore(now) {
       if (!same(was.jsonLd ?? null, now_.jsonLd ?? null) && !can("seo:custom-jsonld")) return { status: 403, code: "forbidden", required: "seo:custom-jsonld" };
     }
     // Approval covers the previous figures. Revoke it before narrative validation.
-    const figuresChanged = next.provenance && patch.fields && ["highlight", "results"].some((k) => k in patch.fields && !same(patch.fields[k], base.locales[patch.locale]?.[k]));
+    const figuresChanged = next.provenance && patch.locale === "en" && patch.fields && ["highlight", "results"].some((k) => k in patch.fields && !same(patch.fields[k], base.locales.en?.[k]));
     if (figuresChanged && next.provenance.figures === "approved") {
       next.provenance = {figures:"sample",sampleLabel:next.provenance.sampleLabel};
       next.narrativePublished = false;
@@ -370,7 +370,6 @@ function makeStore(now) {
     const errors = validate(next, e);
     if (Object.keys(errors).length) return { errors };
     if (same(next, base)) return { entry: e, unchanged: true };
-    // Figures edited while approved go back to being samples: approval covered the old numbers.
     e.draft = next;
     e.workflow = { ...e.workflow, state: "draft", version: e.workflow.version + 1, updatedAt: now(), updatedBy: who.key, lastEditor: who.key };
     if (patch.locale === "en" && patch.fields) {
@@ -395,6 +394,7 @@ function makeStore(now) {
     if (!can(rule.permission) && !seoLane) return { status: 403, code: "forbidden", required: rule.permission };
     if (["publish", "schedule", "approve"].includes(action)) {
       const errors = validate(current(e), e);
+      if (["caseStudy", "article"].includes(e.type) && !current(e).image?.src?.trim()) errors["image.src"] = "required";
       if (Object.keys(errors).length) return {status:422,code:"invalid",fieldErrors:errors};
     }
     // Legal wording is approved and published by someone who may approve legal text (plan: four
@@ -485,6 +485,8 @@ function makeStore(now) {
       idea.mergedInto = target.id;
       // The votes follow the idea people meant.
       target.votes += idea.votes;
+      target.comments += idea.comments;
+      if (idea.commentPreview?.length) target.commentPreview = [...(target.commentPreview ?? []), ...clone(idea.commentPreview)];
       target.version += 1;
       target.history.unshift({ at: now(), by: who.key, action: "merged_from", from: idea.id });
     }
@@ -497,10 +499,15 @@ function makeStore(now) {
   function tick() {
     for (const e of entries.values()) {
       if (e.draft && e.workflow.state === "scheduled" && Date.parse(e.workflow.publishAt) <= Date.parse(now())) {
-        if (Object.keys(validate(e.draft, e)).length) continue;
+        const publishAt = e.workflow.publishAt;
         e.workflow = { ...e.workflow, state: "approved" };
-        transition(e, { key: "scheduler" }, "publish", { can: () => true, note: `Scheduled for ${e.workflow.publishAt}` });
+        const result = transition(e, { key: "scheduler" }, "publish", { can: () => true, note: `Scheduled for ${publishAt}` });
         e.workflow.publishAt = null;
+        if (result.status) {
+          e.workflow.updatedAt = now();
+          e.workflow.updatedBy = "scheduler";
+          log("scheduler", "schedule_failed", e, { publishAt, code: result.code, fieldErrors: result.fieldErrors });
+        }
       }
     }
   }

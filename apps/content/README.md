@@ -1,5 +1,12 @@
 # content dashboard somion
 
+## Local suite authentication
+
+The authentication page uses the shared `@orgtik/ui/auth` confirmation screen after session verification. Its copy follows the dashboard's existing locale, and its redirect is limited to paths in this app.
+
+Build the shared UI package from `../orgtik-ui/packages/ui` and populate `.yalc/@orgtik/ui` with its distributable before installing this dashboard's dependencies. Use the shared UI repository's local package workflow, as with the other suite dashboards. The installed package needs `package.json`, `dist`, `fonts`, and `tailwind.css`; local distributable manifests omit development dependencies.
+
+
 
 
 ## Getting started

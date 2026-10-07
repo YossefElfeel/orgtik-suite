@@ -840,7 +840,7 @@ function useFrameWidth(fallback) {
     if (!el) return;
     const update = () => setWidth(Math.max(260, Math.round(el.clientWidth)));
     update();
-    if (!(msg("CaseStudy:18") in window)) return;
+    if (!("ResizeObserver" in window)) return;
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();

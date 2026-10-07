@@ -7,7 +7,7 @@ import { getPaymentMethod } from "./purchase-payment.js";
 import { msg } from "../content/strings.js";
 import { publicRequest } from "./purchase-platform.js";
 
-export const ORDER_SESSION_KEY = msg("purchase-adapter:1");
+export const ORDER_SESSION_KEY = "orgtik.purchase-preview.v1";
 const payments = new Map();
 const attempts = new Map();
 const ATTEMPT_KEY = "orgtik.purchase-attempt.v1";

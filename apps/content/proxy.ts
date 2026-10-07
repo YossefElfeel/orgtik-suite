@@ -42,8 +42,10 @@ export function proxy(req: NextRequest) {
     }
   }
 
-  // Case 2: Accessing an auth route (e.g., /auth) with a token
-  if (isAuthRoute && token) {
+  // A new handoff must validate its incoming token even when an older session
+  // exists, then show the shared confirmation. Bare /auth keeps its usual landing.
+  const hasIncomingToken = pathWithoutLocale === "/auth" && Boolean(req.nextUrl.searchParams.get("token"));
+  if (isAuthRoute && token && !hasIncomingToken) {
     return NextResponse.redirect(new URL(`/${locale}`, req.url));
   }
 

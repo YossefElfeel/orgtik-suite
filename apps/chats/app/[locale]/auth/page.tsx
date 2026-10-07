@@ -1,5 +1,7 @@
 "use client";
 
+import { useAuthSuccess } from "@orgtik/ui/auth";
+
 /**
  * CHATS - THE HAND-OFF FROM THE SUITE (Chats wave, FS-CHT-4, FS-SOS-2)
  *
@@ -14,6 +16,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Button, ErrorState, LoadingState } from "@orgtik/ui";
 import { useT } from "@/lib/i18n";
 import { SOS_API_URL, SOS_URL, clearSuiteSession, exchangeCode, sessionFor, writeSuiteSession } from "@/lib/suite-session";
+import type { SuiteSession } from "@/lib/suite-session";
 
 const safePath = (v: string | null) => {
   const s = (v ?? "").replace(/[\t\n\r]/g, "");
@@ -23,6 +26,7 @@ const safePath = (v: string | null) => {
 function Handoff() {
   const t = useT();
   const router = useRouter();
+  const { confirm, success } = useAuthSuccess();
   const params = useSearchParams();
   // Read once: clearing the address changes the search params.
   const first = useRef<{ code: string | null; token: string | null; redirect: string } | null>(null);
@@ -31,7 +35,7 @@ function Handoff() {
 
   // A code works once: the exchange is one request, shared if the effect runs twice (React runs
   // effects twice in development; a second exchange of the spent code would fail and win).
-  const work = useRef<Promise<void> | null>(null);
+  const work = useRef<Promise<SuiteSession> | null>(null);
   useEffect(() => {
     if (window.location.search) window.history.replaceState(null, "", window.location.pathname);
     const { code, token, redirect } = first.current ?? { code: null, token: null, redirect: "/hq/office" };
@@ -43,14 +47,13 @@ function Handoff() {
       setFailed(true);
       return;
     }
-    work.current ??= (code ? exchangeCode(code) : Promise.resolve(token as string))
-      .then(sessionFor)
-      .then((session) => {
-        writeSuiteSession(session);
-        router.replace(redirect);
-      });
+    work.current ??= (code ? exchangeCode(code) : Promise.resolve(token as string)).then(sessionFor);
     let live = true;
-    work.current.catch(() => {
+    work.current.then((session) => {
+      if (!live) return;
+      writeSuiteSession(session);
+      confirm(() => router.replace(redirect));
+    }).catch(() => {
       if (!live) return;
       clearSuiteSession();
       setFailed(true);
@@ -58,8 +61,9 @@ function Handoff() {
     return () => {
       live = false;
     };
-  }, [router]);
+  }, [router, confirm]);
 
+  if (success) return success;
   if (failed) {
     return (
       <main className="grid min-h-dvh place-items-center bg-canvas p-4">
