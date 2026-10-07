@@ -13,7 +13,11 @@ test("binary HLS transport segments are excluded from the TypeScript tracer", ()
   const assets = new URL("../../mock/apps/files/assets/hls/", import.meta.url);
   const segments = fs.readdirSync(assets, { recursive: true }).filter(file => file.endsWith(".ts"));
   assert.ok(segments.length > 0);
-  for (const file of segments) assert.ok(path.matchesGlob(`apps/files/assets/hls/${file.replaceAll("\\", "/")}`, pattern), file);
+  for (const file of segments) {
+    const relative = `apps/files/assets/hls/${file.replaceAll("\\", "/")}`;
+    assert.ok(path.matchesGlob(relative, pattern), file);
+    assert.ok(path.matchesGlob(`mock/${relative}`, pattern), `repository-base trace: ${file}`);
+  }
   assert.equal(path.matchesGlob("apps/files.js", pattern), false, "The Files API remains traced");
 });
 import { protectedFetch, mintPreviewTokens, HEADER } from "./preview-protection.mjs";

@@ -8,7 +8,7 @@
       "includeFiles": "{apps,lib,config.js,server.js}/**",
       "maxDuration": 60,
       "memory": 2048,
-      "excludeFiles": "apps/files/assets/hls/**/*.ts"
+      "excludeFiles": "**/apps/files/assets/hls/**/*.ts"
     }
   },
   "rewrites": [
