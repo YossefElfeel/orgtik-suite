@@ -1064,7 +1064,7 @@ export default class Software extends ReferencePage {
         ["Bundles & pricing", "/plans"],
         ["Tell us about your project", "/contact"],
         ["Roadmap", "/roadmap"],
-        ["Sitemap", "/legal#/sitemap"],
+        ["Imprint", "/legal/imprint"],
       ].map(([label, href]) => ({ label, href })),
       footTalk: () => {
         if (window.__orgNav) window.__orgNav("Contact.dc.html");
