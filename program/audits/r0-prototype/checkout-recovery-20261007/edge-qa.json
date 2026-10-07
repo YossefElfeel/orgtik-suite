@@ -1,0 +1,107 @@
+{
+  "run": "muy6q5s6-3c426e",
+  "checks": [
+    {
+      "name": "First expired rejection obtains a new server quote",
+      "pass": true
+    },
+    {
+      "name": "Expired rejection never auto-pays",
+      "pass": true
+    },
+    {
+      "name": "Expired first attempt is cleared for explicit review",
+      "pass": true
+    },
+    {
+      "name": "Review keeps billing editable",
+      "pass": true
+    },
+    {
+      "name": "expired-reviewed-390 fits viewport",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "expired-reviewed-390 has no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "expired-reviewed-390 locale/theme",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "Reviewed payment uses displayed refreshed quote",
+      "pass": true
+    },
+    {
+      "name": "Only explicit confirmation creates the new invoice",
+      "pass": true
+    },
+    {
+      "name": "Blocked recovery storage prevents any confirmation request",
+      "pass": true
+    },
+    {
+      "name": "Blocked storage cannot create another invoice",
+      "pass": true
+    },
+    {
+      "name": "storage-blocked-no-charge-390 fits viewport",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "storage-blocked-no-charge-390 has no runtime errors",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "storage-blocked-no-charge-390 locale/theme",
+      "pass": true,
+      "details": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    }
+  ],
+  "shots": [
+    {
+      "name": "expired-reviewed-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "storage-blocked-no-charge-390",
+      "facts": {
+        "width": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    }
+  ]
+}

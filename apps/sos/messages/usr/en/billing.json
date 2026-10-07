@@ -13,7 +13,7 @@
     "summary": {
       "label": "Summary",
       "monthly": "Monthly total",
-      "monthlyHint": "Paid tools only. Yearly plans count as a twelfth; trials aren't included.",
+      "monthlyHint": "Paid tools only, averaged over their purchased terms; trials are excluded.",
       "seats": "Seats",
       "seatsHint": "Active members who use a seat. Per-seat plans charge for each.",
       "currency": "Currency",
@@ -66,7 +66,10 @@
       "moveTo": "Move to {plan}",
       "moveLower": "Move to a lower plan",
       "endTrial": "End trial",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "perTerm": "for {count, plural, one {# month} other {# months}}",
+      "everyTerm": "Every {count, plural, one {# month} other {# months}}",
+      "prepaidTerms": "Future periods already paid"
     },
     "done": {
       "trialEnded": "The {tool} trial has ended.",
@@ -180,7 +183,18 @@
         "refunded": "Refunded"
       },
       "refunds": "Refunds",
-      "creditNotes": "Credit notes"
+      "creditNotes": "Credit notes",
+      "ledger": {
+        "period_credit": "Credit for unused period",
+        "account_credit": "Workspace credit applied",
+        "bundle_discount": "Bundle discount",
+        "coupon_discount": "Coupon discount",
+        "credit_carried": "Credit carried forward"
+      },
+      "taxIncluded": "Tax included ({rate})",
+      "taxAdded": "Tax added ({rate})",
+      "taxReverseCharge": "Reverse charge · no tax added",
+      "lineCapacity": "{count, plural, one {# purchased seat} other {# purchased seats}}"
     },
     "cards": {
       "title": "Payment methods",

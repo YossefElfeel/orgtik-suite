@@ -98,7 +98,9 @@
       "lastFailure": "Letzte fehlgeschlagene Zahlung",
       "scheduled": "Geplante Änderung",
       "noScheduled": "Keine",
-      "otherCurrency": "In {currency} bepreist, nicht in der Währung des Workspaces."
+      "otherCurrency": "In {currency} bepreist, nicht in der Währung des Workspaces.",
+      "term": "für {count, plural, one {# Monat} other {# Monate}}",
+      "capacity": "Sitzplatzkapazität: {count}"
     },
     "source": {
       "private": "einem privaten Plan",
@@ -259,7 +261,7 @@
     },
     "quote": {
       "title": "Angebot für {name}",
-      "description": "{seats, plural, one {Für # Platz.} other {Für # Plätze.}} Der Preis ist in der eigenen Währung des Workspaces.",
+      "description": "Plätze pro Tool: {seats}. Der Preis ist in der Arbeitsbereichswährung.",
       "amount": "Preis ({currency})",
       "amountHint": "Für den gesamten vom Kunden gewünschten Zeitraum.",
       "amountMin": "Geben Sie einen Preis über 0 ein.",
@@ -267,7 +269,12 @@
       "validUntil": "Gültig bis {date}",
       "daysRange": "Zwischen 1 und 90 Tagen.",
       "send": "Angebot senden",
-      "sent": "Angebot an {name} gesendet"
+      "sent": "Angebot an {name} gesendet",
+      "allocations": "Preis für den gesamten Zyklus zuordnen",
+      "allocationHint": "Geben Sie den Betrag pro Tool für den gesamten Zyklus ein. Die Summe muss dem Angebot entsprechen. Ein enthaltenes Tool darf 0 kosten.",
+      "allocationFor": "Betrag für {tool}",
+      "allocationRequired": "Ordnen Sie jedem angefragten Tool einen Betrag zu. Die gerundete Summe muss dem Angebot entsprechen.",
+      "allocated": "Zugeordnet: {amount} von {total}"
     }
   }
 }

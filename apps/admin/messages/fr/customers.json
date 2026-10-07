@@ -98,7 +98,9 @@
       "lastFailure": "Dernier paiement échoué",
       "scheduled": "Changement prévu",
       "noScheduled": "Aucun",
-      "otherCurrency": "Tarifé en {currency}, pas dans la devise de l'espace de travail."
+      "otherCurrency": "Tarifé en {currency}, pas dans la devise de l'espace de travail.",
+      "term": "pour {count, plural, one {# mois} other {# mois}}",
+      "capacity": "Capacité de sièges : {count}"
     },
     "source": {
       "private": "un plan privé",
@@ -259,7 +261,7 @@
     },
     "quote": {
       "title": "Devis pour {name}",
-      "description": "{seats, plural, one {Pour # place.} other {Pour # places.}} Le prix est dans la devise propre à l'espace de travail.",
+      "description": "Places par outil : {seats}. Le prix est dans la devise de l’espace.",
       "amount": "Prix ({currency})",
       "amountHint": "Pour l'ensemble du cycle demandé par le client.",
       "amountMin": "Saisissez un prix supérieur à 0.",
@@ -267,7 +269,12 @@
       "validUntil": "Valable jusqu'au {date}",
       "daysRange": "Entre 1 et 90 jours.",
       "send": "Envoyer le devis",
-      "sent": "Devis envoyé à {name}"
+      "sent": "Devis envoyé à {name}",
+      "allocations": "Répartir le prix du cycle complet",
+      "allocationHint": "Saisissez le montant du cycle complet de chaque outil. La somme doit égaler le devis. Un outil inclus peut avoir un montant nul.",
+      "allocationFor": "Montant pour {tool}",
+      "allocationRequired": "Attribuez un montant à chaque outil. La somme arrondie doit égaler le total du devis.",
+      "allocated": "Répartition: {amount} sur {total}"
     }
   }
 }

@@ -16,6 +16,7 @@
     },
     "actions": {
       "open": "Öffnen",
+      "openTool": "{tool} öffnen",
       "seePlans": "Tarife ansehen",
       "choosePlan": "Tarif wählen",
       "startTrial": "{days} Tage kostenlos testen",
@@ -43,7 +44,7 @@
     },
     "plans": {
       "title": "Tarife",
-      "pricesFor": "Preise pro Person gelten für {count, plural, one {# Person} other {# Personen}} in Ihrem Arbeitsbereich, in {currency}.",
+      "pricesFor": "Platzbasierte Tarife verwenden {count, plural, one {# gekauften Platz} other {# gekaufte Plätze}}, in {currency}.",
       "cycle": "Abrechnungszeitraum",
       "monthly": "Monatlich",
       "yearly": "Jährlich",
@@ -62,8 +63,8 @@
         "year": "pro Person und Jahr"
       },
       "seatsTotal": {
-        "month": "{count, plural, one {# Person} other {# Personen}}: <total>{amount}</total> pro Monat",
-        "year": "{count, plural, one {# Person} other {# Personen}}: <total>{amount}</total> pro Jahr"
+        "month": "{count, plural, one {# gekaufter Platz} other {# gekaufte Plätze}}: <total>{amount}</total> im Monat",
+        "year": "{count, plural, one {# gekaufter Platz} other {# gekaufte Plätze}}: <total>{amount}</total> im Jahr"
       },
       "yearlySaving": "Sie sparen {pct} % gegenüber monatlicher Zahlung",
       "minSeats": "Mindestens {count, plural, one {# Person} other {# Personen}}",
@@ -98,7 +99,12 @@
       "noPlansBody": "Dieses Tool gibt es auf Anfrage. Fragen Sie einen individuellen Tarif an, und wir senden Ihnen ein Angebot.",
       "notFound": "Dieses Tool gibt es nicht",
       "backToTools": "Zurück zu Tools und Tarifen",
-      "failed": "Die Tarife konnten nicht geladen werden"
+      "failed": "Die Tarife konnten nicht geladen werden",
+      "contractCapacity": "Enthält {count, plural, one {# gekauften Platz} other {# gekaufte Plätze}}.",
+      "taxInclusive": "Preise inklusive {rate} Steuer.",
+      "taxExclusive": "Preise zuzüglich {rate} Steuer.",
+      "taxReverseCharge": "Reverse Charge; keine zusätzliche Steuer.",
+      "taxNone": "Keine zusätzliche Steuer gemäß der hinterlegten Regel."
     },
     "features": {
       "general": {
@@ -185,8 +191,8 @@
       "order": "Ihre Bestellung",
       "lineName": "{tool} · {plan}",
       "perSeat": {
-        "monthly": "<unit>{amount}</unit> × {count, plural, one {# Person} other {# Personen}}, monatliche Abrechnung",
-        "yearly": "<unit>{amount}</unit> × {count, plural, one {# Person} other {# Personen}}, jährliche Abrechnung"
+        "monthly": "<unit>{amount}</unit> × {count, plural, one {# gekaufter Platz} other {# gekaufte Plätze}}, monatliche Abrechnung",
+        "yearly": "<unit>{amount}</unit> × {count, plural, one {# gekaufter Platz} other {# gekaufte Plätze}}, jährliche Abrechnung"
       },
       "billed": {
         "monthly": "Monatliche Abrechnung",
@@ -233,7 +239,33 @@
       "paid": "Bezahlt",
       "whereInvoice": "Die Rechnung finden Sie jederzeit unter <link>Abrechnung › Rechnungen</link>.",
       "openTool": "{tool} öffnen",
-      "toHome": "Zurück zur Startseite"
+      "toHome": "Zurück zur Startseite",
+      "taxInclusive": "Enthaltene Steuer ({rate})",
+      "taxExclusive": "Zusätzliche Steuer ({rate})",
+      "taxReverseCharge": "Reverse Charge · keine zusätzliche Steuer",
+      "taxInclusiveNote": "Tarifpreise enthalten {rate} Steuer, bereits in dieser Summe enthalten.",
+      "taxExclusiveNote": "Tarifpreise verstehen sich zuzüglich {rate} Steuer, die dieser Summe hinzugefügt wird.",
+      "taxReverseChargeNote": "Reverse Charge; keine zusätzliche Steuer.",
+      "taxNoneNote": "Keine zusätzliche Steuer gemäß der hinterlegten Regel.",
+      "accountCreditApplied": "Verwendetes Arbeitsbereichsguthaben",
+      "creditCarried": "{amount} Guthaben bleibt für eine zukünftige Zahlung in diesem Arbeitsbereich.",
+      "contractCapacity": "Vertrag ({cycle}) mit {count} gekauften Plätzen.",
+      "doneBodyMany": "{count, plural, one {Ihr Tarif ist aktiv.} other {Ihre # Tarife sind aktiv.}}",
+      "unconfirmedTitle": "Zahlungsstatus nicht bestätigt",
+      "unconfirmedBody": "Das Zahlungsergebnis konnte nicht bestätigt werden. Wiederholen Sie den Vorgang, um denselben Zahlungsversuch mit der ursprünglichen Bestellung und dem Zahlungsmittel abzurufen.",
+      "recoverPayment": "Zahlung wiederherstellen",
+      "recoveryWorkspace": "Zahlung für {workspace} wiederherstellen",
+      "recoveryLocked": "Die ursprüngliche Bestellung, der Rechnungsname und das Zahlungsmittel bleiben gesperrt, bis der Zahlungsstatus bestätigt ist.",
+      "recoveryContextMismatch": "Wechseln Sie mit demselben Konto zu {workspace}, um diese Zahlung wiederherzustellen. Es wird keine neue Zahlung gestartet.",
+      "recoveryStorageError": "Dieser Browser kann die Zahlungswiederherstellung nicht speichern. Aktivieren Sie den Sitzungsspeicher und versuchen Sie es erneut.",
+      "savedRecoveryError": "Die gespeicherten Wiederherstellungsdaten konnten nicht gelesen werden. Prüfen Sie Ihre Rechnungen, bevor Sie eine weitere Zahlung starten.",
+      "reviewInvoices": "Rechnungen prüfen",
+      "recoveryAccountMismatch": "Melden Sie sich mit dem Konto an, das diese Zahlung gestartet hat, um sie wiederherzustellen. Es wird keine neue Zahlung gestartet.",
+      "quoteExpiredTitle": "Preisangebot abgelaufen",
+      "quoteExpiredBody": "Prüfen Sie den aktualisierten Gesamtbetrag, bevor Sie zahlen. Die Zahlung erfordert eine neue Bestätigung.",
+      "quoteReviewTitle": "Aktualisiertes Preisangebot prüfen",
+      "quoteReviewBody": "Dieses Preisangebot kann nicht mehr verwendet werden. Prüfen Sie den aktualisierten Gesamtbetrag und Ihre vorhandenen Rechnungen, bevor Sie es erneut versuchen.",
+      "recoveryQuoteBlocked": "Der Server konnte das ursprüngliche Preisangebot nicht wiederherstellen. Prüfen Sie Ihre Rechnungen, bevor Sie eine weitere Zahlung starten."
     },
     "custom": {
       "title": "Individueller Tarif",
@@ -242,15 +274,15 @@
       "formBody": "Sagen Sie uns, was Sie brauchen. Das OrgTik-Team antwortet mit einem Angebot, meist innerhalb von zwei Werktagen.",
       "tools": "Tools",
       "toolsRequired": "Wählen Sie mindestens ein Tool.",
-      "seats": "Anzahl Personen",
-      "seatsHelp": "Alle, die die Tools nutzen, ohne Gäste.",
-      "seatsRequired": "Geben Sie mindestens 1 Person ein.",
+      "seats": "Benötigte Plätze pro Tool",
+      "seatsHelp": "Vertragliche Kapazität pro gewähltem Tool, unabhängig von der aktuellen Mitgliederzahl.",
+      "seatsRequired": "Geben Sie mindestens 1 Platz ein.",
       "notes": "Sonstiges",
       "notesHelp": "Standorte, Vertragsbedingungen, eine Frist.",
       "send": "Anfrage senden",
       "sent": "Anfrage gesendet. Wir antworten mit einem Angebot.",
       "yourRequests": "Ihre Anfragen",
-      "summary": "{seats, plural, one {# Person} other {# Personen}} · {cycle} · angefragt am {date}",
+      "summary": "{seats} Plätze pro Tool · {cycle} · angefragt am {date}",
       "state": {
         "new": "Wartet auf ein Angebot",
         "quoted": "Angebot zu prüfen",
@@ -264,13 +296,17 @@
       "waiting": "Wir bereiten das Angebot vor.",
       "accept": "Angebot annehmen",
       "acceptTitle": "Dieses Angebot annehmen?",
-      "acceptImpact": "OrgTik richtet den Tarif für {seats, plural, one {# Person} other {# Personen}} ein, Abrechnung {cycle}, und sendet die Rechnung über {amount}.",
-      "accepted": "Angebot angenommen. Wir richten den Tarif ein und senden die Rechnung.",
-      "acceptedBody": "Angenommen. OrgTik richtet den Tarif ein und sendet die Rechnung.",
+      "acceptImpact": "Bereitet einen Vertrag ({cycle}) für {seats} Plätze pro Tool mit insgesamt {amount} vor. Aktivierung erst nach Zahlung.",
+      "accepted": "Angebot angenommen. Aktivieren Sie die Tools durch die Zahlung.",
+      "acceptedBody": "Die privaten Tarife sind zahlungsbereit. Tools werden nach erfolgreicher Zahlung aktiviert.",
       "quoteExpired": "Dieses Angebot ist abgelaufen. Senden Sie eine neue Anfrage für ein aktuelles Angebot.",
       "emptyTitle": "Noch keine Anfragen",
       "emptyBody": "Ihre Anfragen erscheinen hier mit ihren Angeboten.",
-      "failed": "Ihre Anfragen konnten nicht geladen werden"
+      "failed": "Ihre Anfragen konnten nicht geladen werden",
+      "allocations": "Preis pro Tool für den gesamten Zyklus",
+      "allocationRequired": "OrgTik muss dieses Angebot vor der Annahme jedem Tool zuordnen.",
+      "checkout": "Weiter zur Zahlung",
+      "paidBody": "Zahlung erhalten. Die vertraglichen Tools sind aktiv."
     },
     "errors": {
       "general": "Etwas ist schiefgelaufen. Versuchen Sie es gleich noch einmal.",

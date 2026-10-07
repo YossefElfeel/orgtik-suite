@@ -13,7 +13,7 @@
     "summary": {
       "label": "Riepilogo",
       "monthly": "Totale mensile",
-      "monthlyHint": "Solo strumenti a pagamento. I piani annuali contano per un dodicesimo; le prove non sono incluse.",
+      "monthlyHint": "Solo strumenti a pagamento, ripartiti sulla durata acquistata; prove escluse.",
       "seats": "Posti",
       "seatsHint": "Membri attivi che occupano un posto. I piani per posto addebitano ciascuno di loro.",
       "currency": "Valuta",
@@ -66,7 +66,10 @@
       "moveTo": "Passa a {plan}",
       "moveLower": "Passa a un piano inferiore",
       "endTrial": "Termina la prova",
-      "cancel": "Annulla"
+      "cancel": "Annulla",
+      "perTerm": "per {count, plural, one {# mese} other {# mesi}}",
+      "everyTerm": "Ogni {count, plural, one {# mese} other {# mesi}}",
+      "prepaidTerms": "Periodi futuri già pagati"
     },
     "done": {
       "trialEnded": "La prova di {tool} è terminata.",
@@ -180,7 +183,18 @@
         "refunded": "Rimborsato"
       },
       "refunds": "Rimborsi",
-      "creditNotes": "Note di credito"
+      "creditNotes": "Note di credito",
+      "ledger": {
+        "period_credit": "Credito per il periodo non utilizzato",
+        "account_credit": "Credito dello spazio applicato",
+        "bundle_discount": "Sconto sul pacchetto",
+        "coupon_discount": "Sconto del codice",
+        "credit_carried": "Credito riportato"
+      },
+      "taxIncluded": "Imposta inclusa ({rate})",
+      "taxAdded": "Imposta aggiunta ({rate})",
+      "taxReverseCharge": "Inversione contabile · nessuna imposta aggiunta",
+      "lineCapacity": "{count, plural, one {# posto acquistato} other {# posti acquistati}}"
     },
     "cards": {
       "title": "Metodi di pagamento",

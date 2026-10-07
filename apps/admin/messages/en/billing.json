@@ -27,7 +27,8 @@
     },
     "kind": {
       "subscription": "Subscription",
-      "manual": "Manual"
+      "manual": "Manual",
+      "website_order": "Website order"
     },
     "method": {
       "bank_transfer": "Bank transfer",
@@ -131,7 +132,17 @@
       "usdRate": "USD rate {rate}",
       "noPayments": "No payments yet.",
       "creditNotes": "Credit notes",
-      "noCreditNotes": "No credit notes."
+      "noCreditNotes": "No credit notes.",
+      "ledger": {
+        "period_credit": "Credit for unused period",
+        "account_credit": "Workspace credit applied",
+        "bundle_discount": "Bundle discount",
+        "coupon_discount": "Coupon discount",
+        "credit_carried": "Credit carried forward"
+      },
+      "taxIncluded": "Tax included ({rate})",
+      "taxAdded": "Tax added ({rate})",
+      "taxReverseCharge": "Reverse charge · no tax added"
     }
   }
 }

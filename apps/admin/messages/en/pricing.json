@@ -122,7 +122,11 @@
       "source": "Source",
       "tableLabel": "Prices for {plan}",
       "empty": "No countries to show",
-      "note": "Published prices only, before coupons and tax."
+      "note": "Published prices with each country’s tax display. Coupons apply at checkout.",
+      "taxInclusive": "Prices include {rate} tax.",
+      "taxExclusive": "Prices exclude {rate} tax.",
+      "taxReverseCharge": "Reverse charge applies; no tax added.",
+      "taxNone": "No tax added under the configured rule."
     },
     "zones": {
       "title": "Zones and countries",

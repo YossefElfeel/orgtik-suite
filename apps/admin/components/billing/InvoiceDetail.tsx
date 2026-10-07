@@ -30,6 +30,8 @@ export function InvoiceDetail({ id }: { id: string }) {
     return <ErrorState title={tc("loadFailed")} description={tc("loadFailedBody")} onRetry={() => refetch()} />;
   }
   const method = (m: string) => (t.has(`method.${m}`) ? t(`method.${m}`) : m);
+  const taxRate = inv.taxRate ?? Number(/([\d.]+)\s*%/.exec(inv.taxLabel ?? "")?.[1] ?? 0);
+  const taxLabel = inv.reverseCharge ? t("detail.taxReverseCharge") : inv.taxDisplay ? t(inv.taxDisplay === "inclusive" ? "detail.taxIncluded" : "detail.taxAdded", { rate: f.percent(taxRate / 100) }) : null;
 
   return (
     <div className="flex flex-col gap-6">
@@ -94,7 +96,9 @@ export function InvoiceDetail({ id }: { id: string }) {
               {inv.lines.map((l, i) => (
                 <tr key={i} className="border-b border-line">
                   <td className="py-2 text-start text-fg">
-                    <span><bdi dir="auto">{l.label}</bdi></span>
+                    {l.kind && t.has(`detail.ledger.${l.kind}`) ? (
+                      <span>{t(`detail.ledger.${l.kind}`)}{l.kind === "coupon_discount" && l.label !== "Coupon" ? <> · <bdi dir="ltr">{l.label}</bdi></> : null}</span>
+                    ) : <span><bdi dir="auto">{l.label}</bdi></span>}
                   </td>
                   <td className="py-2 text-end">
                     <Money amount={l.amount} currency={inv.currency} />
@@ -113,13 +117,13 @@ export function InvoiceDetail({ id }: { id: string }) {
               </tr>
               <tr>
                 <th scope="row" className="py-1 text-start font-normal text-fg-muted">
-                  {inv.taxLabel ? (
+                  {taxLabel ?? (inv.taxLabel ? (
                     <>
                       {t("detail.tax")} · <span><bdi dir="auto">{inv.taxLabel}</bdi></span>
                     </>
                   ) : (
                     t("detail.noTax")
-                  )}
+                  ))}
                 </th>
                 <td className="py-1 text-end">
                   <Money amount={inv.tax} currency={inv.currency} />

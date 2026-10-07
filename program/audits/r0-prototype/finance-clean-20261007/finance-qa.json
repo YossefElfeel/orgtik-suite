@@ -1,0 +1,3632 @@
+{
+  "version": 1,
+  "runId": "20261007132312-2beb0151",
+  "startedAt": "2026-10-07T13:23:12.623Z",
+  "timeZone": "Africa/Cairo",
+  "origins": {
+    "sosApi": "http://localhost:4200",
+    "adminApi": "http://localhost:4208",
+    "sos": "http://localhost:3013",
+    "admin": "http://localhost:3008"
+  },
+  "localOnly": true,
+  "resetUsed": false,
+  "clockMutationUsed": false,
+  "checks": [
+    {
+      "name": "Dedicated local fixture guard",
+      "ok": true,
+      "details": {
+        "sandbox": "r0-local"
+      }
+    },
+    {
+      "name": "Clock configured externally",
+      "ok": true,
+      "details": {
+        "mode": "frozen",
+        "now": "2026-10-07T09:00:00.000Z"
+      }
+    },
+    {
+      "name": "Staff fixture sign-in",
+      "ok": true
+    },
+    {
+      "name": "Guest billing seed is confirmed in EGP",
+      "ok": true
+    },
+    {
+      "name": "Isolated customer registration",
+      "ok": true
+    },
+    {
+      "name": "New customer starts with its own workspace",
+      "ok": true,
+      "details": {
+        "workspaceId": "ws_signup_24"
+      }
+    },
+    {
+      "name": "Paid guest order establishes fixture EGP billing",
+      "ok": true
+    },
+    {
+      "name": "Fixture buys thirty-seat monthly Operations plans",
+      "ok": true,
+      "details": {
+        "invoiceId": "inv_1184",
+        "total": 10971.53
+      }
+    },
+    {
+      "name": "sos en light 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Customer UI selects its fixture workspace",
+      "ok": true
+    },
+    {
+      "name": "admin en light 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Custom request preserves selected tools/capacity",
+      "ok": true,
+      "details": {
+        "requestId": "cpr_1189",
+        "tools": [
+          "crm",
+          "marketing",
+          "chat"
+        ],
+        "seats": 60
+      }
+    },
+    {
+      "name": "Invalid full-period allocation is blocked",
+      "ok": true
+    },
+    {
+      "name": "allocation-error-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "allocation-error-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "allocation-error-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "allocation-error-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "Quote keeps explicit zero allocations",
+      "ok": true,
+      "details": {
+        "amount": 50000,
+        "allocations": [
+          {
+            "tool": "crm",
+            "amount": 50000
+          },
+          {
+            "tool": "marketing",
+            "amount": 0
+          },
+          {
+            "tool": "chat",
+            "amount": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "Acceptance prepares private plans without activation",
+      "ok": true
+    },
+    {
+      "name": "accepted-before-payment-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "accepted-before-payment-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "accepted-before-payment-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "accepted-before-payment-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "Full contract capacity is described once",
+      "ok": true
+    },
+    {
+      "name": "private-contract-checkout-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "private-contract-checkout-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "private-contract-checkout-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "private-contract-checkout-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "private-contract-paid-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "private-contract-paid-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "private-contract-paid-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "private-contract-paid-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "Payment activates each contracted capacity",
+      "ok": true
+    },
+    {
+      "name": "Custom contract invoice equals endpoint quote",
+      "ok": true,
+      "details": {
+        "invoiceId": "inv_1190",
+        "invoice": 45600,
+        "quote": 45600
+      }
+    },
+    {
+      "name": "Unused period credit carries forward",
+      "ok": true,
+      "details": {
+        "invoiceId": "inv_1196",
+        "credit": 39999,
+        "total": 0
+      }
+    },
+    {
+      "name": "Eligible discounts combine with workspace credit",
+      "ok": true,
+      "details": {
+        "credit": 39999,
+        "bundle": 17158.5,
+        "coupon": 19446.3
+      }
+    },
+    {
+      "name": "Lost-response basket has a nonzero payment",
+      "ok": true,
+      "details": {
+        "total": 31991.88
+      }
+    },
+    {
+      "name": "Lost response follows a successful server charge",
+      "ok": true
+    },
+    {
+      "name": "ordinary-checkout-lost-response-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "ordinary-checkout-lost-response-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "ordinary-checkout-lost-response-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "ordinary-checkout-lost-response-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "Retry preserves idempotency key and invoice",
+      "ok": true,
+      "details": {
+        "attempts": 2,
+        "sameKey": true,
+        "invoiceId": "inv_1201"
+      }
+    },
+    {
+      "name": "Retry creates one successful payment",
+      "ok": true
+    },
+    {
+      "name": "ordinary-checkout-recovered-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "ordinary-checkout-recovered-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "ordinary-checkout-recovered-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "ordinary-checkout-recovered-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "Invoice 1: net ledger balances",
+      "ok": true,
+      "details": {
+        "netLines": 40000,
+        "subtotal": 40000
+      }
+    },
+    {
+      "name": "Invoice 1: tax/payment balance",
+      "ok": true,
+      "details": {
+        "subtotal": 40000,
+        "tax": 5600,
+        "total": 45600
+      }
+    },
+    {
+      "name": "Invoice 2: net ledger balances",
+      "ok": true,
+      "details": {
+        "netLines": 0,
+        "subtotal": 0
+      }
+    },
+    {
+      "name": "Invoice 2: tax/payment balance",
+      "ok": true,
+      "details": {
+        "subtotal": 0,
+        "tax": 0,
+        "total": 0
+      }
+    },
+    {
+      "name": "Invoice 3: net ledger balances",
+      "ok": true,
+      "details": {
+        "netLines": 28063.050000000003,
+        "subtotal": 28063.05
+      }
+    },
+    {
+      "name": "Invoice 3: tax/payment balance",
+      "ok": true,
+      "details": {
+        "subtotal": 28063.05,
+        "tax": 3928.83,
+        "total": 31991.88
+      }
+    },
+    {
+      "name": "Actual ledger records period_credit",
+      "ok": true
+    },
+    {
+      "name": "Actual ledger records account_credit",
+      "ok": true
+    },
+    {
+      "name": "Actual ledger records bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "Actual ledger records coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "Actual ledger records credit_carried",
+      "ok": true
+    },
+    {
+      "name": "sos en light 390: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Customer UI selects its fixture workspace",
+      "ok": true
+    },
+    {
+      "name": "sos en light 390 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-1-en-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-1-en-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-1-en-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-1-en-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos en light 390 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos en light 390 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-2-en-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-2-en-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-2-en-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-2-en-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos en light 390 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "sos en light 390 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos en light 390 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos en light 390 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-3-en-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-3-en-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-3-en-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-3-en-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin en light 390: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "admin en light 390 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-1-en-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-1-en-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-1-en-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-1-en-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin en light 390 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin en light 390 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-2-en-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-2-en-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-2-en-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-2-en-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin en light 390 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "admin en light 390 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin en light 390 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin en light 390 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-3-en-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-3-en-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-3-en-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-3-en-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos en light 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Customer UI selects its fixture workspace",
+      "ok": true
+    },
+    {
+      "name": "sos en light 1440 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-1-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-1-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-1-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-1-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos en light 1440 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos en light 1440 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-2-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-2-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-2-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-2-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos en light 1440 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "sos en light 1440 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos en light 1440 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos en light 1440 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-3-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-3-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-3-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-3-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin en light 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "admin en light 1440 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-1-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-1-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-1-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-1-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin en light 1440 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin en light 1440 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-2-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-2-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-2-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-2-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin en light 1440 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "admin en light 1440 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin en light 1440 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin en light 1440 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-3-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-3-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-3-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-3-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos en dark 390: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Customer UI selects its fixture workspace",
+      "ok": true
+    },
+    {
+      "name": "sos en dark 390 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-1-en-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-1-en-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-1-en-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-1-en-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos en dark 390 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos en dark 390 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-2-en-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-2-en-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-2-en-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-2-en-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos en dark 390 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "sos en dark 390 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos en dark 390 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos en dark 390 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-3-en-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-3-en-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-3-en-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-3-en-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin en dark 390: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "admin en dark 390 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-1-en-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-1-en-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-1-en-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-1-en-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin en dark 390 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin en dark 390 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-2-en-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-2-en-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-2-en-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-2-en-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin en dark 390 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "admin en dark 390 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin en dark 390 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin en dark 390 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-3-en-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-3-en-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-3-en-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-3-en-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos en dark 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Customer UI selects its fixture workspace",
+      "ok": true
+    },
+    {
+      "name": "sos en dark 1440 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-1-en-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-1-en-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-1-en-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-1-en-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos en dark 1440 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos en dark 1440 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-2-en-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-2-en-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-2-en-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-2-en-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos en dark 1440 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "sos en dark 1440 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos en dark 1440 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos en dark 1440 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-3-en-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-3-en-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-3-en-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "sos-invoice-3-en-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin en dark 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "admin en dark 1440 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-1-en-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-1-en-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-1-en-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-1-en-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin en dark 1440 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin en dark 1440 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-2-en-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-2-en-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-2-en-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-2-en-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin en dark 1440 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "admin en dark 1440 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin en dark 1440 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin en dark 1440 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-3-en-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-3-en-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-3-en-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "admin-invoice-3-en-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos ar light 390: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Customer UI selects its fixture workspace",
+      "ok": true
+    },
+    {
+      "name": "sos ar light 390 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-1-ar-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-1-ar-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-1-ar-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-1-ar-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos ar light 390 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos ar light 390 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-2-ar-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-2-ar-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-2-ar-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-2-ar-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos ar light 390 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "sos ar light 390 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos ar light 390 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos ar light 390 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-3-ar-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-3-ar-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-3-ar-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-3-ar-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin ar light 390: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "admin ar light 390 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-1-ar-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-1-ar-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-1-ar-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-1-ar-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin ar light 390 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin ar light 390 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-2-ar-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-2-ar-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-2-ar-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-2-ar-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin ar light 390 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "admin ar light 390 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin ar light 390 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin ar light 390 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-3-ar-light-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-3-ar-light-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-3-ar-light-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-3-ar-light-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos ar light 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Customer UI selects its fixture workspace",
+      "ok": true
+    },
+    {
+      "name": "sos ar light 1440 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-1-ar-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-1-ar-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-1-ar-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-1-ar-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos ar light 1440 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos ar light 1440 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-2-ar-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-2-ar-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-2-ar-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-2-ar-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos ar light 1440 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "sos ar light 1440 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos ar light 1440 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos ar light 1440 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-3-ar-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "sos-invoice-3-ar-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-3-ar-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-3-ar-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin ar light 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "admin ar light 1440 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-1-ar-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-1-ar-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-1-ar-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-1-ar-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin ar light 1440 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin ar light 1440 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-2-ar-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-2-ar-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-2-ar-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-2-ar-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "admin ar light 1440 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "admin ar light 1440 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin ar light 1440 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin ar light 1440 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-3-ar-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-invoice-3-ar-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-3-ar-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-3-ar-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "sos ar dark 390: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Customer UI selects its fixture workspace",
+      "ok": true
+    },
+    {
+      "name": "sos ar dark 390 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-1-ar-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-1-ar-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-1-ar-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-1-ar-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos ar dark 390 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos ar dark 390 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-2-ar-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-2-ar-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-2-ar-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-2-ar-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos ar dark 390 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "sos ar dark 390 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos ar dark 390 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos ar dark 390 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-3-ar-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-3-ar-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-3-ar-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-3-ar-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin ar dark 390: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "admin ar dark 390 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-1-ar-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-1-ar-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-1-ar-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-1-ar-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin ar dark 390 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin ar dark 390 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-2-ar-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-2-ar-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-2-ar-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-2-ar-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin ar dark 390 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "admin ar dark 390 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin ar dark 390 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin ar dark 390 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-3-ar-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-3-ar-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-3-ar-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-3-ar-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos ar dark 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Customer UI selects its fixture workspace",
+      "ok": true
+    },
+    {
+      "name": "sos ar dark 1440 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-1-ar-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-1-ar-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-1-ar-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-1-ar-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos ar dark 1440 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos ar dark 1440 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-2-ar-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-2-ar-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-2-ar-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-2-ar-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "sos ar dark 1440 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "sos ar dark 1440 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "sos ar dark 1440 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "sos ar dark 1440 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "sos-invoice-3-ar-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "sos-invoice-3-ar-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "sos-invoice-3-ar-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "sos-invoice-3-ar-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin ar dark 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "admin ar dark 1440 invoice 1: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-1-ar-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-1-ar-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-1-ar-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-1-ar-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin ar dark 1440 invoice 2: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin ar dark 1440 invoice 2: credit_carried",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-2-ar-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-2-ar-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-2-ar-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-2-ar-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin ar dark 1440 invoice 3: bundle_discount",
+      "ok": true
+    },
+    {
+      "name": "admin ar dark 1440 invoice 3: coupon_discount",
+      "ok": true
+    },
+    {
+      "name": "admin ar dark 1440 invoice 3: period_credit",
+      "ok": true
+    },
+    {
+      "name": "admin ar dark 1440 invoice 3: account_credit",
+      "ok": true
+    },
+    {
+      "name": "admin-invoice-3-ar-dark-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-invoice-3-ar-dark-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "admin-invoice-3-ar-dark-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "admin-invoice-3-ar-dark-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin ar dark 390: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Mobile Arabic allocation fields",
+      "ok": true,
+      "details": {
+        "requestId": "cpr_1206"
+      }
+    },
+    {
+      "name": "allocation-dialog-ar-dark-390: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "allocation-dialog-ar-dark-390: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "allocation-dialog-ar-dark-390: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "ar",
+        "dir": "rtl"
+      }
+    },
+    {
+      "name": "allocation-dialog-ar-dark-390: theme",
+      "ok": true,
+      "details": {
+        "actual": "dark"
+      }
+    },
+    {
+      "name": "admin en light 1440: correct authenticated actor",
+      "ok": true
+    },
+    {
+      "name": "Seeded KWD invoice exists",
+      "ok": true
+    },
+    {
+      "name": "KWD total uses three decimals",
+      "ok": true,
+      "details": {
+        "invoiceId": "inv_1038",
+        "total": 3.7
+      }
+    },
+    {
+      "name": "KWD zero stays 0.000",
+      "ok": true
+    },
+    {
+      "name": "kwd-invoice-three-decimals-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "kwd-invoice-three-decimals-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "kwd-invoice-three-decimals-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "kwd-invoice-three-decimals-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    },
+    {
+      "name": "Regional tax preview distinguishes Saudi and German policy",
+      "ok": true
+    },
+    {
+      "name": "regional-tax-preview-en-light-1440: viewport fit",
+      "ok": true,
+      "details": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "regional-tax-preview-en-light-1440: no uncaught errors",
+      "ok": true,
+      "details": []
+    },
+    {
+      "name": "regional-tax-preview-en-light-1440: locale and direction",
+      "ok": true,
+      "details": {
+        "lang": "en",
+        "dir": "ltr"
+      }
+    },
+    {
+      "name": "regional-tax-preview-en-light-1440: theme",
+      "ok": true,
+      "details": {
+        "actual": "light"
+      }
+    }
+  ],
+  "captures": [
+    {
+      "file": "allocation-error-en-light-1440.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/en/custom-plans",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "accepted-before-payment-en-light-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/tools/custom-plan",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "private-contract-checkout-en-light-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/checkout",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "private-contract-paid-en-light-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/checkout",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "ordinary-checkout-lost-response-en-light-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/checkout",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "ordinary-checkout-recovered-en-light-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/checkout",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-1-en-light-390.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "route": "/billing/invoices/inv_1190",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-2-en-light-390.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "route": "/billing/invoices/inv_1196",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-3-en-light-390.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "route": "/billing/invoices/inv_1201",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-1-en-light-390.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "route": "/en/invoices/inv_1190",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-2-en-light-390.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "route": "/en/invoices/inv_1196",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-3-en-light-390.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "route": "/en/invoices/inv_1201",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-1-en-light-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1190",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-2-en-light-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1196",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-3-en-light-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1201",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-1-en-light-1440.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/en/invoices/inv_1190",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-2-en-light-1440.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/en/invoices/inv_1196",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-3-en-light-1440.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/en/invoices/inv_1201",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-1-en-dark-390.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "route": "/billing/invoices/inv_1190",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-2-en-dark-390.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "route": "/billing/invoices/inv_1196",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-3-en-dark-390.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "route": "/billing/invoices/inv_1201",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-1-en-dark-390.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "route": "/en/invoices/inv_1190",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-2-en-dark-390.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "route": "/en/invoices/inv_1196",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-3-en-dark-390.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "route": "/en/invoices/inv_1201",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-1-en-dark-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1190",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-2-en-dark-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1196",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-3-en-dark-1440.png",
+      "app": "sos",
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1201",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-1-en-dark-1440.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/en/invoices/inv_1190",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-2-en-dark-1440.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/en/invoices/inv_1196",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-3-en-dark-1440.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/en/invoices/inv_1201",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-1-ar-light-390.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "route": "/billing/invoices/inv_1190",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-2-ar-light-390.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "route": "/billing/invoices/inv_1196",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-3-ar-light-390.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "route": "/billing/invoices/inv_1201",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-1-ar-light-390.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "route": "/ar/invoices/inv_1190",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-2-ar-light-390.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "route": "/ar/invoices/inv_1196",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-3-ar-light-390.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "route": "/ar/invoices/inv_1201",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-1-ar-light-1440.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1190",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-2-ar-light-1440.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1196",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-3-ar-light-1440.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1201",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-1-ar-light-1440.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/ar/invoices/inv_1190",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-2-ar-light-1440.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/ar/invoices/inv_1196",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-3-ar-light-1440.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "route": "/ar/invoices/inv_1201",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-1-ar-dark-390.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 390,
+      "route": "/billing/invoices/inv_1190",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-2-ar-dark-390.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 390,
+      "route": "/billing/invoices/inv_1196",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-3-ar-dark-390.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 390,
+      "route": "/billing/invoices/inv_1201",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-1-ar-dark-390.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 390,
+      "route": "/ar/invoices/inv_1190",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-2-ar-dark-390.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 390,
+      "route": "/ar/invoices/inv_1196",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-3-ar-dark-390.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 390,
+      "route": "/ar/invoices/inv_1201",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-1-ar-dark-1440.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1190",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-2-ar-dark-1440.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1196",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "sos-invoice-3-ar-dark-1440.png",
+      "app": "sos",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/billing/invoices/inv_1201",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-1-ar-dark-1440.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/ar/invoices/inv_1190",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-2-ar-dark-1440.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/ar/invoices/inv_1196",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "admin-invoice-3-ar-dark-1440.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "route": "/ar/invoices/inv_1201",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "allocation-dialog-ar-dark-390.png",
+      "app": "admin",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 390,
+      "route": "/ar/custom-plans",
+      "facts": {
+        "viewport": 390,
+        "width": 390,
+        "scroll": 390,
+        "lang": "ar",
+        "dir": "rtl",
+        "theme": "dark"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "kwd-invoice-three-decimals-en-light-1440.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/en/invoices/inv_1038",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    },
+    {
+      "file": "regional-tax-preview-en-light-1440.png",
+      "app": "admin",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "route": "/en/pricing/preview",
+      "facts": {
+        "viewport": 1440,
+        "width": 1440,
+        "scroll": 1440,
+        "lang": "en",
+        "dir": "ltr",
+        "theme": "light"
+      },
+      "pageErrors": []
+    }
+  ],
+  "apiGeneration": 1,
+  "mockNow": "2026-10-07T09:00:00.000Z",
+  "fixtureWorkspaceId": "ws_signup_24",
+  "fixtureMode": "unique-registered-customer",
+  "fixtureInvoiceIds": [
+    "inv_1190",
+    "inv_1196",
+    "inv_1201"
+  ],
+  "ok": true,
+  "finishedAt": "2026-10-07T13:24:40.789Z"
+}

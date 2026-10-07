@@ -98,7 +98,9 @@
       "lastFailure": "Ultimo pagamento non riuscito",
       "scheduled": "Modifica programmata",
       "noScheduled": "Nessuna",
-      "otherCurrency": "Prezzo in {currency}, non nella valuta del workspace."
+      "otherCurrency": "Prezzo in {currency}, non nella valuta del workspace.",
+      "term": "per {count, plural, one {# mese} other {# mesi}}",
+      "capacity": "Capacità posti: {count}"
     },
     "source": {
       "private": "un piano privato",
@@ -259,7 +261,7 @@
     },
     "quote": {
       "title": "Preventivo per {name}",
-      "description": "{seats, plural, one {Per # posto.} other {Per # posti.}} Il prezzo è nella valuta del workspace.",
+      "description": "Posti per strumento: {seats}. Il prezzo è nella valuta dello spazio.",
       "amount": "Prezzo ({currency})",
       "amountHint": "Per l'intero ciclo richiesto dal cliente.",
       "amountMin": "Inserisci un prezzo superiore a 0.",
@@ -267,7 +269,12 @@
       "validUntil": "Valido fino al {date}",
       "daysRange": "Tra 1 e 90 giorni.",
       "send": "Invia preventivo",
-      "sent": "Preventivo inviato a {name}"
+      "sent": "Preventivo inviato a {name}",
+      "allocations": "Ripartisci il prezzo dell’intero ciclo",
+      "allocationHint": "Inserisci l’importo dell’intero ciclo per ogni strumento. La somma deve corrispondere al totale. Uno strumento incluso può costare zero.",
+      "allocationFor": "Importo per {tool}",
+      "allocationRequired": "Assegna un importo a ogni strumento. La somma arrotondata deve corrispondere al totale.",
+      "allocated": "Ripartito {amount} di {total}"
     }
   }
 }

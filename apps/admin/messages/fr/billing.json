@@ -27,7 +27,8 @@
     },
     "kind": {
       "subscription": "Abonnement",
-      "manual": "Manuelle"
+      "manual": "Manuelle",
+      "website_order": "Commande du site"
     },
     "method": {
       "bank_transfer": "Virement bancaire",
@@ -131,7 +132,17 @@
       "usdRate": "Taux USD {rate}",
       "noPayments": "Aucun paiement pour l'instant.",
       "creditNotes": "Avoirs",
-      "noCreditNotes": "Aucun avoir."
+      "noCreditNotes": "Aucun avoir.",
+      "ledger": {
+        "period_credit": "Crédit pour la période inutilisée",
+        "account_credit": "Crédit de l’espace utilisé",
+        "bundle_discount": "Remise du pack",
+        "coupon_discount": "Remise du code",
+        "credit_carried": "Crédit reporté"
+      },
+      "taxIncluded": "Taxe comprise ({rate})",
+      "taxAdded": "Taxe ajoutée ({rate})",
+      "taxReverseCharge": "Autoliquidation · aucune taxe ajoutée"
     }
   }
 }
