@@ -19,7 +19,8 @@
       "digital_marketing": "Marketing",
       "sales": "CRM",
       "website_manager": "Sito web",
-      "website_manager_legacy": "Vecchio CMS"
+      "website_manager_legacy": "Vecchio CMS",
+      "platform_admin": "Admin"
     }
   },
   "Greetings": {

@@ -4,8 +4,7 @@
  * SOMION HQ - WHITEBOARD
  *
  * Real Excalidraw, the same MIT-licensed component recommended for production.
- * Boards are saved through the File Manager rather than into a store of our
- * own, which is the same rule the attachments follow.
+ * This canvas is transient until the Files persistence connection is delivered.
  *
  * Loaded dynamically: it is a large dependency and nobody should pay for it
  * before opening a board.

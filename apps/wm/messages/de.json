@@ -131,7 +131,8 @@
     "digital_marketing": "Marketing",
     "sales": "CRM",
     "website_manager": "Website",
-    "website_manager_legacy": "Altes CMS"
+    "website_manager_legacy": "Altes CMS",
+    "platform_admin": "Admin"
   },
   "Roles": {
     "wm_admin": "Administrator",

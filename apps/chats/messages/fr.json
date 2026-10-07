@@ -33,7 +33,7 @@
   "appearance.accent": "Couleur de l’interface",
   "appearance.accentHint": "Rien que pour vous, sur cet appareil. Le turquoise, l’ambre, le violet et le bleu sont réservés à la présence et ne sont donc pas proposés : une couleur qui ressemblerait à un statut serait lue comme tel.",
   "appearance.accentShort": "Rien que pour vous, sur cet appareil.",
-  "boards.saved": "Enregistré dans Fichiers au fil du dessin",
+  "boards.saved": "Les modifications ne sont pas encore enregistrées",
   "boards.subtitle": "Un tableau sans réunion",
   "boards.title": "Tableau blanc",
   "calendar.free": "Rien de prévu",
