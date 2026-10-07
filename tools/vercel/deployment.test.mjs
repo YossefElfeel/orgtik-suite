@@ -5,6 +5,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { test } from "node:test";
 import { checkMockBundle } from "./check-mock-bundle.mjs";
+import { copyMockRuntime } from "./copy-mock-runtime.mjs";
 import { protectedFetch, mintPreviewTokens, HEADER } from "./preview-protection.mjs";
 
 const parseUrl = input => execFileSync(process.execPath, [path.join(import.meta.dirname, "deploy-url.mjs")], { input, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim();
@@ -24,12 +25,21 @@ test("mock artifact rejects missing startup imports and accepts a self-contained
     fs.writeFileSync(path.join(fn, ".vc-config.json"), JSON.stringify({ handler: "mock/api/index.js" }));
     fs.writeFileSync(path.join(fn, "mock/api/index.js"), "module.exports = () => {};\n");
     assert.throws(() => checkMockBundle(output), /Cannot find module 'express'/);
+    const runtime = path.join(folder, "runtime");
     for (const name of ["express", "cors", "multer", "socket.io", "@iconify/utils"]) {
-      const pkg = path.join(fn, "node_modules", name);
+      const pkg = path.join(runtime, "node_modules", name);
       fs.mkdirSync(pkg, { recursive: true });
       fs.writeFileSync(path.join(pkg, "index.js"), "module.exports = {};\n");
     }
+    const deps = JSON.parse(fs.readFileSync(new URL("../../mock/package.json", import.meta.url))).dependencies;
+    for (const name of Object.keys(deps).filter(name => name.startsWith("@iconify-json/"))) {
+      const pkg = path.join(runtime, "node_modules", name);
+      fs.mkdirSync(pkg, { recursive: true });
+      fs.writeFileSync(path.join(pkg, "icons.json"), '{"icons":{}}\n');
+    }
+    copyMockRuntime(runtime, output);
     assert.doesNotThrow(() => checkMockBundle(output));
+    assert.ok(fs.existsSync(path.join(fn, "mock/api/index.js")), "Copy preserves the existing handler and assets");
   } finally {
     fs.rmSync(folder, { recursive: true, force: true });
   }

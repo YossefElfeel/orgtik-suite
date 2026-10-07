@@ -96,6 +96,11 @@ jobs:
           else
             vercel build --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
           fi
+      - name: Package existing mock runtime dependencies
+        if: matrix.key == 'mock'
+        run: |
+          pnpm --filter orgtik-local-dev --prod deploy .vercel/mock-runtime
+          node tools/vercel/copy-mock-runtime.mjs
       - name: Verify self-contained mock artifact
         if: matrix.key == 'mock'
         run: node tools/vercel/check-mock-bundle.mjs
