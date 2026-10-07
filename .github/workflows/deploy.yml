@@ -138,9 +138,14 @@ jobs:
         with:
           pattern: deployment-*
           path: deployments
+      - name: Install Vercel CLI for ephemeral preview access
+        if: github.event_name != 'push' && inputs.environment != 'production' && needs.deploy.result == 'success'
+        run: npm install --global vercel@54.7.1
       - name: Preview golden flows and visual checks
         if: github.event_name != 'push' && inputs.environment != 'production' && needs.deploy.result == 'success'
         env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          PREVIEW_CHECK_SCOPE: ${{ (inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'milestone' || 'affected' }}
           MOCK_PUBLIC_URL: ${{ vars.PREVIEW_MOCK_URL }}
           SUITE_WEB_URLS: ${{ vars.SUITE_WEB_URLS }}
         run: |

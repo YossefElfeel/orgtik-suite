@@ -5,6 +5,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { test } from "node:test";
 import { checkMockBundle } from "./check-mock-bundle.mjs";
+import { protectedFetch, HEADER } from "./preview-protection.mjs";
 
 const parseUrl = input => execFileSync(process.execPath, [path.join(import.meta.dirname, "deploy-url.mjs")], { input, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim();
 
@@ -32,4 +33,30 @@ test("mock artifact rejects missing startup imports and accepts a self-contained
   } finally {
     fs.rmSync(folder, { recursive: true, force: true });
   }
+});
+
+test("ephemeral preview access stays on its origin through redirects", async () => {
+  const origin = "https://orgtik-suite-sos-preview.vercel.app";
+  const requests = [];
+  const native = async (url, options = {}) => {
+    requests.push({ url: String(url), options });
+    return String(url) === origin ? new Response(null, { status: 307, headers: { location: "/en" } }) : new Response("ok");
+  };
+  const request = protectedFetch({ [origin]: "fixture.token.value" }, native);
+  assert.equal((await request(origin)).status, 200);
+  assert.equal(requests.length, 2);
+  assert.equal(requests[1].options.headers.get(HEADER), "fixture.token.value");
+  await request("https://outside.example/asset");
+  assert.equal(requests[2].options.headers?.get(HEADER), undefined);
+});
+
+test("a protected redirect cannot send its credential to Vercel sign-in or another host", async () => {
+  let calls = 0;
+  const origin = "https://orgtik-suite-sos-preview.vercel.app";
+  const request = protectedFetch({ [origin]: "fixture.token.value" }, async () => {
+    calls++;
+    return new Response(null, { status: 302, headers: { location: "https://vercel.com/login" } });
+  });
+  await assert.rejects(request(origin), /redirected away/);
+  assert.equal(calls, 1);
 });
