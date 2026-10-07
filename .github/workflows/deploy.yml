@@ -5,17 +5,23 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      environment:
+        description: Existing projects to deploy
+        type: choice
+        options: [preview, production]
+        default: preview
 
 permissions:
   contents: read
 
 concurrency:
-  group: deploy-${{ github.event_name == 'pull_request' && 'preview-mock' || 'production' }}
+  group: deploy-${{ (github.event_name == 'push' || inputs.environment == 'production') && 'production' || 'preview-mock' }}
   cancel-in-progress: false
 
 jobs:
   affected:
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (inputs.environment != 'production' || github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.affected.outputs.matrix }}
@@ -24,6 +30,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -32,7 +41,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - id: affected
         env:
-          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'HEAD^' }}
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
           TURBO_SCM_HEAD: HEAD
         run: |
           node tools/vercel/affected.mjs > affected.json
@@ -51,13 +60,16 @@ jobs:
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       VERCEL_ORG_ID: team_Ypx8oiLDZi3PBNi8ht8fYPsm
-      VERCEL_PROJECT_ID: ${{ github.event_name == 'pull_request' && matrix.previewProjectId || matrix.projectId }}
-      DEPLOY_ENV: ${{ github.event_name == 'pull_request' && 'preview' || 'production' }}
+      VERCEL_PROJECT_ID: ${{ (github.event_name == 'push' || inputs.environment == 'production') && matrix.projectId || matrix.previewProjectId || matrix.projectId }}
+      DEPLOY_ENV: ${{ (github.event_name == 'push' || inputs.environment == 'production') && 'production' || 'preview' }}
       PREVIEW_ALIAS: ${{ matrix.previewUrl }}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -76,6 +88,9 @@ jobs:
           else
             vercel build --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
           fi
+      - name: Verify self-contained mock artifact
+        if: matrix.key == 'mock'
+        run: node tools/vercel/check-mock-bundle.mjs
       - name: Deploy
         env:
           PROJECT_KEY: ${{ matrix.key }}
@@ -116,7 +131,7 @@ jobs:
           pattern: deployment-*
           path: deployments
       - name: Preview golden flows and visual checks
-        if: github.event_name == 'pull_request'
+        if: github.event_name != 'push' && inputs.environment != 'production' && needs.deploy.result == 'success'
         env:
           MOCK_PUBLIC_URL: ${{ vars.PREVIEW_MOCK_URL }}
           SUITE_WEB_URLS: ${{ vars.SUITE_WEB_URLS }}
@@ -127,6 +142,15 @@ jobs:
           npm ci
           npx playwright install --with-deps chromium
           node ../../../tools/vercel/preview-checks.mjs
+      - name: Require all affected deployments
+        if: always()
+        env:
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+          EXPECTED_COUNT: ${{ needs.affected.outputs.count }}
+        run: |
+          test "$DEPLOY_RESULT" = success
+          count=$(find deployments -name deployment.json -type f | wc -l)
+          test "$count" -eq "$EXPECTED_COUNT"
       - name: Report deployments
         if: always()
         uses: actions/github-script@v7
