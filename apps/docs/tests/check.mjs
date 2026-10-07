@@ -11,11 +11,14 @@
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
+import os from "node:os";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 import { chromium } from "playwright";
-import pixelmatch from "pixelmatch";
 import { PNG } from "pngjs";
+import { VISUAL_ENVIRONMENT, createVisualPage, settleVisualStory, visualPageMetadata } from "./visual-environment.mjs";
+import { compareVisualBaseline } from "./visual-baseline.mjs";
+import { createReferenceResolver, captureStorySemantics, reviewedSemanticErrors } from "./platform-reference.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..", "storybook-static");
@@ -23,6 +26,8 @@ const baselines = path.join(here, "baselines");
 const results = path.join(here, "results");
 const args = process.argv.slice(2);
 const update = args.includes("--update");
+const ci = ["true", "1"].includes((process.env.CI ?? "").toLowerCase());
+if (update && ci) throw new Error("Review and update references locally; CI must not accept its own snapshots.");
 const only = args.includes("--only") ? args[args.indexOf("--only") + 1] : null;
 const axeSource = fs.readFileSync(createRequire(import.meta.url).resolve("axe-core/axe.min.js"), "utf8");
 
@@ -63,39 +68,29 @@ fs.mkdirSync(results, { recursive: true });
 
 const browser = await chromium.launch();
 const rows = [];
+const rendering = { expected: VISUAL_ENVIRONMENT, platform: process.platform, release: os.release(), browser: browser.version(), referenceProfile: process.env.ORGTIK_VISUAL_REFERENCE_PROFILE ?? "default", sourceCommit: process.env.GITHUB_SHA ?? null, runnerImage: process.env.ImageOS ?? null, runnerImageVersion: process.env.ImageVersion ?? null, renders: [] };
+const resolveReference = createReferenceResolver({ defaultDirectory: baselines, ci, requestedProfile: process.env.ORGTIK_VISUAL_REFERENCE_PROFILE ?? "", rendering: { platform: rendering.platform, release: rendering.release, browser: rendering.browser, ...VISUAL_ENVIRONMENT } });
 for (const story of stories) {
   for (const combo of COMBOS) {
-    const context = await browser.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: "reduce", deviceScaleFactor: 1 });
-    const page = await context.newPage();
+    const { context, page } = await createVisualPage(browser);
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
     await page.goto(`http://localhost:${port}/iframe.html?id=${story}&viewMode=story&globals=${combo.globals}`, { waitUntil: "networkidle" });
-    await page.evaluate(() => document.fonts.ready);
-    await page.addStyleTag({ content: "*,*::before,*::after{animation:none!important;transition:none!important;caret-color:transparent!important}" });
-    await page.waitForTimeout(150);
+    await settleVisualStory(page, combo.globals);
+    const metadata = await visualPageMetadata(context, page);
 
     const name = `${story}--${combo.id}.png`;
     const shot = PNG.sync.read(await page.screenshot({ fullPage: true }));
-    const basePath = path.join(baselines, name);
-    let visual = "new";
-    let changed = 0;
-    if (fs.existsSync(basePath) && !update) {
-      const base = PNG.sync.read(fs.readFileSync(basePath));
-      if (base.width !== shot.width || base.height !== shot.height) {
-        visual = `size ${base.width}×${base.height} → ${shot.width}×${shot.height}`;
-        fs.writeFileSync(path.join(results, name), PNG.sync.write(shot));
-      } else {
-        const diff = new PNG({ width: base.width, height: base.height });
-        changed = pixelmatch(base.data, shot.data, diff.data, base.width, base.height, { threshold: 0.1 });
-        visual = changed ? `${changed} px` : "same";
-        if (changed) {
-          fs.writeFileSync(path.join(results, name.replace(".png", ".diff.png")), PNG.sync.write(diff));
-          fs.writeFileSync(path.join(results, name), PNG.sync.write(shot));
-        }
-      }
+    const reference = resolveReference(name);
+    const semantics = reference.review ? await captureStorySemantics(page) : null;
+    const reviewErrors = reference.review ? reviewedSemanticErrors(reference.review, semantics, metadata.platformFonts) : [];
+    rendering.renders.push({ story, combo: combo.id, referenceProfile: reference.profile, ...metadata, ...(semantics ? { semantics } : {}) });
+    const { visual, changed, diff } = compareVisualBaseline(shot, update ? path.join(baselines, name) : reference.path, { update });
+    if (visual !== "same" && !update) {
+      if (changed) fs.writeFileSync(path.join(results, name.replace(".png", ".diff.png")), PNG.sync.write(diff));
+      fs.writeFileSync(path.join(results, name), PNG.sync.write(shot));
     }
-    if (visual === "new" || update) fs.writeFileSync(basePath, PNG.sync.write(shot));
 
     // A page wider than the viewport means something escaped its container (in RTL, often an
     // absolutely placed element under a scroller: VS-1 found one in DataTable).
@@ -108,7 +103,7 @@ for (const story of stories) {
       return r.violations.map((v) => ({ id: v.id, impact: v.impact, nodes: v.nodes.length }));
     });
     const serious = axe.filter((v) => v.impact === "critical" || v.impact === "serious");
-    rows.push({ story, combo: combo.id, visual, axe: serious, minor: axe.length - serious.length, errors, overflow });
+    rows.push({ story, combo: combo.id, visual, axe: serious, minor: axe.length - serious.length, errors, overflow, reviewErrors });
     await context.close();
   }
   process.stdout.write(".");
@@ -116,10 +111,11 @@ for (const story of stories) {
 await browser.close();
 server.close();
 
-const failedVisual = rows.filter((r) => r.visual !== "same" && r.visual !== "new" && !update);
+const failedVisual = rows.filter((r) => r.visual !== "same" && !update);
 const failedAxe = rows.filter((r) => r.axe.length);
 const withErrors = rows.filter((r) => r.errors.length);
 const overflowing = rows.filter((r) => r.overflow > 0);
+const failedReview = rows.filter(r => r.reviewErrors.length);
 const axeById = {};
 for (const r of failedAxe) for (const v of r.axe) (axeById[v.id] ??= new Set()).add(`${r.story} (${r.combo})`);
 
@@ -128,10 +124,11 @@ const md = [
   "",
   `${stories.length} stories × ${COMBOS.length} combinations = ${rows.length} renders${update ? " (baselines updated)" : ""}.`,
   "",
-  `- Visual: ${rows.filter((r) => r.visual === "same").length} same, ${rows.filter((r) => r.visual === "new").length} new baselines, ${failedVisual.length} changed`,
+  `- Visual: ${rows.filter((r) => r.visual === "same").length} same, ${rows.filter((r) => r.visual === "updated").length} reviewed baseline updates, ${failedVisual.length} changed/missing`,
   `- axe critical/serious: ${failedAxe.length} renders with violations; ${rows.reduce((n, r) => n + r.minor, 0)} moderate/minor findings in total`,
   `- Console errors: ${withErrors.length} renders`,
   `- Page wider than the viewport: ${overflowing.length} renders`,
+  `- Reviewed platform text/layout/fonts: ${failedReview.length} mismatches`,
   "",
   failedVisual.length ? "## Changed\n\n| Story | Combination | Pixels |\n|---|---|---|\n" + failedVisual.map((r) => `| ${r.story} | ${r.combo} | ${r.visual} |`).join("\n") + "\n" : "",
   Object.keys(axeById).length
@@ -139,7 +136,9 @@ const md = [
     : "",
   overflowing.length ? "## Page overflow\n\n" + overflowing.map((r) => `- ${r.story} (${r.combo}): ${r.overflow}px`).join("\n") + "\n" : "",
   withErrors.length ? "## Console errors\n\n" + withErrors.map((r) => `- ${r.story} (${r.combo}): ${r.errors[0].slice(0, 200)}`).join("\n") + "\n" : "",
+  failedReview.length ? "## Reviewed platform invariants\n\n" + failedReview.map(r => `- ${r.story} (${r.combo}): ${r.reviewErrors.join("; ")}`).join("\n") + "\n" : "",
 ].join("\n");
 fs.writeFileSync(path.join(results, "report.md"), md);
+fs.writeFileSync(path.join(results, "environment.json"), JSON.stringify(rendering, null, 2) + "\n");
 console.log("\n" + md);
-process.exit(failedVisual.length || failedAxe.length || withErrors.length || overflowing.length ? 1 : 0);
+process.exit(failedVisual.length || failedAxe.length || withErrors.length || overflowing.length || failedReview.length ? 1 : 0);

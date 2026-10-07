@@ -111,8 +111,8 @@ export function createCRMHandoffRequest(
   if (order?.paymentStatus !== "succeeded")
     throw new Error(msg("purchase-adapter:10"));
   // Production adapter input: backend purchase reference, immutable quoted lines,
-  // terms, renewals, activation, and customer context held only in memory.
-  // A refresh retry uses the reference; the backend retrieves customer context.
+  // terms, renewals, activation, and customer context. Only safe billing fields may
+  // be retained in this tab's receipt for password setup; credentials never are.
   return {
     purchaseReference: order.reference,
     customerContext: customer
@@ -138,7 +138,7 @@ export async function provisionCRM(
   if (prior?.status === "ready")
     return {
       ...prior,
-      access: verified ? "verified-existing" : "verification-required",
+      access: verified ? "verified-existing" : "setup-required",
     };
   await delay();
   const result = {
@@ -150,19 +150,30 @@ export async function provisionCRM(
         : scenario === "pending"
           ? "pending"
           : "ready",
-    access: verified ? "verified-existing" : "verification-required",
+    access: verified ? "verified-existing" : "setup-required",
   };
   // Reference-keyed setup is idempotent. Pending/failed setups may be retried without payment.
   setups.set(order.reference, result);
   return result;
 }
-export function savePurchaseSession(order, crm) {
+export function savePurchaseSession(order, crm, customer) {
   try {
     window.sessionStorage.setItem(
       ORDER_SESSION_KEY,
       JSON.stringify({
         order,
-        crm: { status: crm.status, access: "verification-required" },
+        crm: { status: crm.status, access: "setup-required" },
+        // Only billing details needed for password setup survive a reload in this tab.
+        // Never keep a password, payment credentials, or authenticated identity here.
+        ...(customer && !Object.keys(validateCustomer(customer)).length
+          ? {
+              customer: {
+                name: customer.name.trim(),
+                email: customer.email.trim(),
+                company: customer.company || "",
+              },
+            }
+          : {}),
       }),
     );
     return true;
@@ -191,8 +202,16 @@ export function loadPurchaseSession() {
         status: ["ready", "pending", "failed"].includes(value.crm?.status)
           ? value.crm.status
           : "pending",
-        access: "verification-required",
+        access: "setup-required",
       },
+      customer:
+        value.customer && !Object.keys(validateCustomer(value.customer)).length
+          ? {
+              name: value.customer.name,
+              email: value.customer.email,
+              company: value.customer.company || "",
+            }
+          : null,
     };
   } catch {
     return null;

@@ -20,7 +20,7 @@ export function AppRail({ apps, current, homeHref = "/" }: { apps: RailApp[]; cu
   const t = useStrings();
   const { Link } = useOrgtik();
   return (
-    <nav aria-label={t("apps")} className="flex h-full w-[76px] flex-col items-center gap-1 bg-chrome py-3 text-fg-on-chrome">
+    <nav aria-label={t("apps")} className="flex h-full min-h-0 w-[76px] flex-col items-center gap-1 overflow-y-auto bg-chrome py-3 text-fg-on-chrome [&>a]:shrink-0">
       <Link href={homeHref} className="mb-3 grid size-11 place-items-center rounded-field focus-visible:outline-2 focus-visible:outline-focus">
         <Logo variant="mark" tone="brand" className="h-8" />
       </Link>
@@ -215,7 +215,7 @@ export function SuiteShell({ rail, sidebar, topBar, banner, children }: SuiteShe
       >
         {t("skipToContent")}
       </a>
-      <div className="hidden shrink-0 lg:flex">
+      <div className="hidden min-h-0 shrink-0 lg:flex">
         {rail}
         <div className="w-[248px]">{sidebar}</div>
       </div>
@@ -239,7 +239,7 @@ export function SuiteShell({ rail, sidebar, topBar, banner, children }: SuiteShe
           </BaseDialog.Popup>
         </BaseDialog.Portal>
       </BaseDialog.Root>
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         <TopBar start={topBar?.start} end={topBar?.end} onOpenNavigation={() => setOpen(true)} />
         {banner}
         {/* The page scrolls here, so the keyboard must be able to reach it even when it holds no
@@ -248,7 +248,7 @@ export function SuiteShell({ rail, sidebar, topBar, banner, children }: SuiteShe
         <main
           id="ot-main"
           tabIndex={0}
-          className="min-h-0 flex-1 overflow-y-auto outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus"
+          className="relative min-h-0 min-w-0 flex-1 overflow-y-auto outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus"
         >
           {children}
         </main>

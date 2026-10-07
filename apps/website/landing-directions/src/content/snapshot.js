@@ -1,7 +1,7 @@
 // Pulled from the Website Manager by scripts/content-pull.mjs. Don't edit by hand: change it there and pull.
 export default {
  "source": "http://localhost:4007/v2",
- "pulledAt": "2026-10-06T05:33:59.094Z",
+ "pulledAt": "2026-10-07T08:47:19.108Z",
  "entries": {
   "page": [
    {
@@ -2892,7 +2892,7 @@ export default {
       "hero": {
        "p": "Legal & site information",
        "h1": "Clear information.<m1>One place to find it.</m1>",
-       "p-2": "Find company details, privacy and purchasing information, or use the sitemap to explore every part of OrgTik."
+       "p-2": "Find company and partner details, privacy and purchasing information in one place."
       },
       "legal": {
        "aside@aria-label": "Legal documents",
@@ -3111,6 +3111,277 @@ export default {
       "inSitemap": false,
       "title": "sign up | OrgTik",
       "description": ""
+     }
+    }
+   },
+   {
+    "id": "pg_partners",
+    "order": 15,
+    "name": "Partners",
+    "slug": {
+     "en": "/legal/partners"
+    },
+    "layout": [
+     {
+      "key": "intro",
+      "kind": "data",
+      "label": "Partners introduction and controls",
+      "node": {
+       "kind": "group",
+       "fields": {
+        "title": {
+         "kind": "text",
+         "label": "title"
+        },
+        "summary": {
+         "kind": "text",
+         "label": "summary"
+        },
+        "badge": {
+         "kind": "text",
+         "label": "badge"
+        },
+        "linkLabel": {
+         "kind": "text",
+         "label": "linkLabel"
+        },
+        "profileLabel": {
+         "kind": "text",
+         "label": "profileLabel"
+        },
+        "scrollLabel": {
+         "kind": "text",
+         "label": "scrollLabel"
+        },
+        "previousLabel": {
+         "kind": "text",
+         "label": "previousLabel"
+        },
+        "nextLabel": {
+         "kind": "text",
+         "label": "nextLabel"
+        },
+        "pauseLabel": {
+         "kind": "text",
+         "label": "pauseLabel"
+        },
+        "playLabel": {
+         "kind": "text",
+         "label": "playLabel"
+        },
+        "websiteLabel": {
+         "kind": "text",
+         "label": "websiteLabel"
+        },
+        "exampleWebsiteLabel": {
+         "kind": "text",
+         "label": "Mock website link label"
+        },
+        "exampleAccountLabel": {
+         "kind": "text",
+         "label": "Mock social profile label prefix"
+        },
+        "externalLabel": {
+         "kind": "text",
+         "label": "External link accessibility hint"
+        }
+       }
+      }
+     },
+     {
+      "key": "partners",
+      "kind": "data",
+      "label": "Partner profiles",
+      "node": {
+       "kind": "list",
+       "label": "Partners",
+       "itemLabel": "Partner",
+       "item": {
+        "kind": "group",
+        "fields": {
+         "id": {
+          "kind": "text",
+          "label": "Anchor ID",
+          "neutral": true
+         },
+         "name": {
+          "kind": "text",
+          "label": "Name"
+         },
+         "category": {
+          "kind": "text",
+          "label": "Category"
+         },
+         "summary": {
+          "kind": "longtext",
+          "label": "Profile description"
+         },
+         "logo": {
+          "kind": "text",
+          "label": "Logo asset path",
+          "neutral": true
+         },
+         "website": {
+          "kind": "text",
+          "label": "Website URL",
+          "neutral": true
+         },
+         "visible": {
+          "kind": "toggle",
+          "label": "Show partner",
+          "neutral": true
+         },
+         "mock": {
+          "kind": "toggle",
+          "label": "Mock partner",
+          "neutral": true
+         },
+         "accounts": {
+          "kind": "list",
+          "label": "Social profiles (optional)",
+          "itemLabel": "Social profile",
+          "item": {
+           "kind": "group",
+           "fields": {
+            "label": {
+             "kind": "text",
+             "label": "Platform name"
+            },
+            "url": {
+             "kind": "text",
+             "label": "Profile URL",
+             "neutral": true
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    ],
+    "locales": {
+     "en": {
+      "intro": {
+       "title": "Partners",
+       "summary": "These profiles use fictional names, mock logos and example links for this preview.",
+       "badge": "Mock partners",
+       "linkLabel": "View all partners",
+       "profileLabel": "View mock partner details",
+       "scrollLabel": "Mock partner logos",
+       "previousLabel": "Scroll to previous partners",
+       "nextLabel": "Scroll to next partners",
+       "pauseLabel": "Pause scrolling",
+       "playLabel": "Resume scrolling",
+       "websiteLabel": "Visit website",
+       "exampleWebsiteLabel": "Example website",
+       "exampleAccountLabel": "Example",
+       "externalLabel": "Opens in a new tab"
+      },
+      "partners": [
+       {
+        "id": "northline",
+        "name": "Northline",
+        "category": "Design & strategy",
+        "summary": "An illustrative partner profile for brand strategy and visual identity.",
+        "logo": "/assets/partners/northline.svg",
+        "website": "https://example.com/#northline-website",
+        "visible": true,
+        "mock": true,
+        "accounts": [
+         {
+          "label": "LinkedIn",
+          "url": "https://example.com/#northline-linkedin"
+         },
+         {
+          "label": "Instagram",
+          "url": "https://example.com/#northline-instagram"
+         }
+        ]
+       },
+       {
+        "id": "folio",
+        "name": "Folio",
+        "category": "Business software",
+        "summary": "An illustrative partner profile for business tools and connected workflows.",
+        "logo": "/assets/partners/folio.svg",
+        "website": "https://example.com/#folio-website",
+        "visible": true,
+        "mock": true,
+        "accounts": []
+       },
+       {
+        "id": "everoak",
+        "name": "Everoak",
+        "category": "Hosting & infrastructure",
+        "summary": "An illustrative partner profile for hosting and technical support.",
+        "logo": "/assets/partners/everoak.svg",
+        "website": "",
+        "visible": true,
+        "mock": true,
+        "accounts": [
+         {
+          "label": "LinkedIn",
+          "url": "https://example.com/#everoak-linkedin"
+         }
+        ]
+       },
+       {
+        "id": "aster",
+        "name": "Aster",
+        "category": "Digital experiences",
+        "summary": "An illustrative partner profile for websites, applications and customer experiences.",
+        "logo": "/assets/partners/aster.svg",
+        "website": "https://example.com/#aster-website",
+        "visible": true,
+        "mock": true,
+        "accounts": [
+         {
+          "label": "Instagram",
+          "url": "https://example.com/#aster-instagram"
+         }
+        ]
+       },
+       {
+        "id": "forma",
+        "name": "Forma",
+        "category": "Creative & content",
+        "summary": "An illustrative partner profile for campaigns and thoughtful content.",
+        "logo": "/assets/partners/forma.svg",
+        "website": "",
+        "visible": true,
+        "mock": true,
+        "accounts": []
+       },
+       {
+        "id": "signal-house",
+        "name": "Signal House",
+        "category": "Marketing & communication",
+        "summary": "An illustrative partner profile for audience research and communication.",
+        "logo": "/assets/partners/signal-house.svg",
+        "website": "",
+        "visible": true,
+        "mock": true,
+        "accounts": [
+         {
+          "label": "LinkedIn",
+          "url": "https://example.com/#signal-house-linkedin"
+         },
+         {
+          "label": "Instagram",
+          "url": "https://example.com/#signal-house-instagram"
+         }
+        ]
+       }
+      ]
+     }
+    },
+    "seo": {
+     "en": {
+      "robots": "noindex",
+      "inSitemap": true,
+      "title": "Partners | OrgTik",
+      "description": "These profiles use fictional names, mock logos and example links for this preview."
      }
     }
    }
@@ -3406,8 +3677,8 @@ export default {
         "href": "/roadmap"
        },
        {
-        "label": "Sitemap",
-        "href": "/legal#/sitemap"
+        "label": "Imprint",
+        "href": "/legal/imprint"
        }
       ]
      }
@@ -7198,10 +7469,10 @@ export default {
       "b1": {
        "s1": "Imprint",
        "s2": "Privacy policy",
-       "s3": "Sitemap",
+       "s3": "Company information",
        "s4": "Legal",
        "s5": "OrgTik · Legal & navigation",
-       "s6": "Legal & sitemap.",
+       "s6": "Legal information.",
        "s7": "Clear and readable.",
        "s8": "Read it",
        "s9": "All pages",
@@ -8453,6 +8724,63 @@ export default {
         "context": ""
        }
       ]
+     },
+     {
+      "key": "b21",
+      "kind": "copy",
+      "label": "Purchase account setup",
+      "slots": [
+       {
+        "key": "s1",
+        "kind": "message",
+        "context": "post-purchase account setup"
+       },
+       {
+        "key": "s2",
+        "kind": "message",
+        "context": "post-purchase account setup"
+       },
+       {
+        "key": "s3",
+        "kind": "message",
+        "context": "post-purchase account setup"
+       },
+       {
+        "key": "s4",
+        "kind": "message",
+        "context": "post-purchase account setup"
+       },
+       {
+        "key": "s5",
+        "kind": "message",
+        "context": "post-purchase account setup"
+       },
+       {
+        "key": "s6",
+        "kind": "message",
+        "context": "post-purchase account setup"
+       },
+       {
+        "key": "s7",
+        "kind": "message",
+        "context": "post-purchase account setup"
+       },
+       {
+        "key": "s8",
+        "kind": "message",
+        "context": "post-purchase account setup"
+       },
+       {
+        "key": "s9",
+        "kind": "message",
+        "context": "post-purchase account setup"
+       },
+       {
+        "key": "s10",
+        "kind": "message",
+        "context": "post-purchase account setup"
+       }
+      ]
      }
     ],
     "locales": {
@@ -8625,6 +8953,18 @@ export default {
        "s4": "Remove {0} plan",
        "s5": "Continue to checkout",
        "s6": "Your purchase"
+      },
+      "b21": {
+       "s1": "Set up my account",
+       "s2": "Choose a password for {0}. Your billing details are already saved. We’ll then open your dashboard.",
+       "s3": "Password",
+       "s4": "Use at least 8 characters.",
+       "s5": "Continue to my dashboard",
+       "s6": "Your account is created. We couldn’t connect your purchase yet. Try again; you won’t be asked to pay again.",
+       "s7": "Your billing details are unavailable. Create your account to continue with this saved purchase.",
+       "s8": "Your purchase is saved. Set up your account to continue.",
+       "s9": "Sign in to my account",
+       "s10": "Confirm password"
       }
      }
     },
@@ -12202,12 +12542,6 @@ export default {
   {
    "from": "/imprint",
    "to": "/legal/imprint",
-   "code": 301,
-   "handledBy": "host"
-  },
-  {
-   "from": "/sitemap",
-   "to": "/legal/sitemap",
    "code": 301,
    "handledBy": "host"
   }

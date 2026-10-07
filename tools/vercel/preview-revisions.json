@@ -1,0 +1,8 @@
+{
+  "profile": "readiness",
+  "projects": {
+    "mock": { "sha": "33bd33e35d176adc20f0beb9a65f26c78628d38e", "run": "37602899004", "paths": ["mock/", "vercel.json", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".npmrc", "tools/vercel/copy-mock-runtime.mjs", "tools/vercel/check-mock-bundle.mjs"] },
+    "sos": { "sha": "33bd33e35d176adc20f0beb9a65f26c78628d38e", "run": "37602899004", "paths": ["apps/sos/", "packages/ui/", "vercel.json", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".npmrc", "tools/vercel-prebuild.cjs", "tools/vercel/validate-env.cjs"] },
+    "website": { "sha": "b35f55ca789b0a03171e6811b44c5e338e653ad7", "run": "37598757790", "paths": ["apps/website/", "vercel.json", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".npmrc", "tools/vercel/validate-env.cjs"] }
+  }
+}
