@@ -30,7 +30,7 @@ async function child(step) {
   const base = `http://127.0.0.1:${server.address().port}`;
   const call = async (method, endpoint, body, token) => {
     const response = await fetch(base + endpoint, {
-      method, headers: { "content-type": "application/json", ...(token ? { authorization: `Bearer ${token}` } : {}) },
+      method, headers: { "content-type": "application/json", connection: "close", ...(token ? { authorization: `Bearer ${token}` } : {}) },
       body: body ? JSON.stringify(body) : undefined,
     });
     return { status: response.status, json: await response.json() };
@@ -104,7 +104,7 @@ async function child(step) {
       assert.equal((await login("mona.adel@orgtik.test", "Local@2026")).status, 200);
       // A separate instance registers a person and writes to their own workspace, while this
       // instance keeps its original in-memory identities and business data.
-      execFileSync(process.execPath, [__filename, "--child", "register-and-write"], {
+      execFileSync(process.execPath, [__filename, "--only=sos,admin", "--child", "register-and-write"], {
         env: process.env, stdio: ["ignore", "ignore", "pipe"], timeout: 25000,
       });
       const { token } = JSON.parse(fs.readFileSync(process.env.AUTH_TEST_OUT, "utf8"));
@@ -125,7 +125,14 @@ async function child(step) {
       assert.equal((await login("mona.adel@orgtik.test", "Local@2026")).status, 503);
     }
     fs.writeFileSync(process.env.AUTH_TEST_OUT, JSON.stringify(result));
-  } finally { server.closeAllConnections(); server.close(); }
+  } finally {
+    // Stop accepting connections first, then close them, and await complete shutdown.
+    // This avoids a keep-alive connection racing the close on the CI Node 22 runtime.
+    await new Promise((resolve, reject) => {
+      server.close((error) => error ? reject(error) : resolve());
+      server.closeAllConnections();
+    });
+  }
 }
 
 async function main() {
@@ -134,10 +141,17 @@ async function main() {
   const sandbox = `auth-test-${process.pid}`;
   const journalFile = path.join(__dirname, "..", "journal", `${sandbox}.json`);
   const run = (step, extra = {}) => {
-    execFileSync(process.execPath, [__filename, "--child", step], {
-      env: { ...process.env, MOCK_AUTH_STORE: "file", MOCK_AUTH_FILE: file, MOCK_JOURNAL: "memory", MOCK_SANDBOX: sandbox, MOCK_PUBLIC_URL: "https://mock.test", VERCEL: "", KV_REST_API_URL: "", KV_REST_API_TOKEN: "", UPSTASH_REDIS_REST_URL: "", UPSTASH_REDIS_REST_TOKEN: "", AUTH_TEST_OUT: out, ...extra },
-      encoding: "utf8", stdio: ["ignore", "ignore", "pipe"], timeout: 25000,
-    });
+    try {
+      // These checks exercise SOS account routes and the admin-owned customer workspace.
+      // Seeding every unrelated tool twice during rollback needlessly competes with CI's
+      // parallel typechecks; tool integration remains covered by the journal/preview suites.
+      execFileSync(process.execPath, [__filename, "--only=sos,admin", "--child", step], {
+        env: { ...process.env, MOCK_AUTH_STORE: "file", MOCK_AUTH_FILE: file, MOCK_JOURNAL: "memory", MOCK_SANDBOX: sandbox, MOCK_PUBLIC_URL: "https://mock.test", VERCEL: "", KV_REST_API_URL: "", KV_REST_API_TOKEN: "", UPSTASH_REDIS_REST_URL: "", UPSTASH_REDIS_REST_TOKEN: "", AUTH_TEST_OUT: out, ...extra },
+        encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], timeout: 25000,
+      });
+    } catch (error) {
+      throw new Error(`Authentication step "${step}" failed (${error.code || error.status}):\n${String(error.stdout || "").split("\n").slice(-10).join("\n")}\n${error.stderr || ""}`);
+    }
     return JSON.parse(fs.readFileSync(out, "utf8"));
   };
   let passed = 0;
