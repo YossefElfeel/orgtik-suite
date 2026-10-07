@@ -15,15 +15,26 @@ function affectedPriceLines(S, changes) {
   for (const ws of S.db.workspaces) for (const line of ws.lines) {
     if (!["active", "cancelling"].includes(line.state)) continue;
     const query = { planId: line.planId, cycle: line.cycle, workspace: ws, seats: line.snapshot.quantity };
-    const before = S.pricing.resolveWorkspaceLine(S.db, query);
-    const next = S.pricing.resolveWorkspaceLine(after, query);
+    const before = periodPrice(S, S.db, query, line);
+    const next = periodPrice(S, after, query, line);
     // Resolution comparison respects zone/currency, fixed country prices and derived yearly cells.
     if (next && before && (next.unit !== before.unit || next.currency !== before.currency || next.source !== before.source)) affected.push({ ws, line, next });
   }
   return affected;
 }
+function periodPrice(S, db, query, line) {
+  const resolved = S.pricing.resolveWorkspaceLine(db, query);
+  if (!resolved || line.source?.policy !== "website-offers-v1") return resolved;
+  const reference = line.prepaidTerms?.at(-1)?.reference || line.source.reference;
+  const order = db.publicWebsiteOrders?.find(row => row.snapshot.reference === reference)?.snapshot;
+  const offer = order?.groups.flatMap(group => group.lines).find(row => row.tool === line.tool);
+  if (!offer) throw Object.assign(new Error("The paid website renewal policy is unavailable."), { status: 503 });
+  const factor = offer.months * (1 - offer.discount / 100), decimals = db.currencies[query.workspace.currency].decimals;
+  return { ...resolved, unit: S.pricing.toDecimals(resolved.unit * factor, decimals), amount: S.pricing.toDecimals(resolved.amount * factor, decimals) };
+}
 function firstRenewalAfter(S, line, boundary) {
-  const period = S.pricing.periodDays(line.cycle) * 86400000;
+  const months = line.renewalMonths || line.termMonths;
+  const period = (months ? months * 30 : S.pricing.periodDays(line.cycle)) * 86400000;
   const end = Date.parse(line.periodEnd);
   return new Date(end + Math.max(0, Math.ceil((boundary - end) / period)) * period).toISOString();
 }

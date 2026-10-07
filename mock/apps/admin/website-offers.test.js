@@ -143,6 +143,7 @@ test("linking uses server amounts, is idempotent, and cannot turn website servic
   const first = await f.link(paid), again = await f.link(paid);
   assert.equal(first.status, 200); assert.deepEqual(again.body.data, first.body.data);
   assert.equal(first.body.data.tools.length, 1); assert.equal(first.body.data.requests.length, 2);
+  assert.equal(f.ws.currencyLocked, true, "The first linked paid order locks workspace billing currency");
   assert.equal(f.ws.lines.some(row => row.tool === "website" || row.tool === "wm"), false);
   assert.equal(f.S.db.services.find(row => row.websiteCatalogId === "website").id, f.S.db.serviceRequests.find(row => row.catalogId === "website").serviceId);
   const invoice = f.S.db.invoices.find(row => row.reference === paid.reference);
@@ -344,4 +345,19 @@ test("only server-known bundle IDs with exact members retain their presentation"
   assert.deepEqual(withoutPreset.quote, recognized.quote, "Presentation metadata never changes arithmetic");
   const customized = (await f.quote([{ ...cart, lines: cart.lines.slice(0, 2) }])).body.data;
   assert.equal(customized.groups[0].bundleId, undefined); assert.equal(customized.groups[0].name, "Custom software plan");
+});
+
+test("website price notices preserve the six-month renewal and full-period offer policy", async () => {
+  const f = fixture(); Object.assign(f.ws, { country: "SA", currency: "SAR" }); f.ws.billing.country = "SA";
+  const headers = { authorization: "Bearer admin", "x-workspace": "ws_web" };
+  const quote = (await f.quote([group("software", ["files"], 6)], headers)).body.data;
+  const paid = (await f.pay(quote.quoteId, "six-month-notice", {}, headers)).body.data;
+  await f.link(paid);
+  const invoice = JSON.stringify(f.S.db.invoices.at(-1)), line = f.ws.lines.find(row => row.tool === "files");
+  const start = f.S.now(), draft = await f.call("POST", "/v1/admin/price-drafts", { changes: [{ key: "files_pro:monthly:gcc", to: 100 }] }, headers);
+  const published = await f.call("POST", `/v1/admin/price-drafts/${draft.body.data.id}/publish`, { effectiveAt: f.S.iso(start + 220 * 86400000), applyMode: "existing_next_renewal", reason: "Keep six-month website renewal boundaries" }, headers);
+  assert.equal(published.status, 200);
+  assert.equal(line.scheduled.effectiveAt, f.S.iso(start + 360 * 86400000));
+  assert.equal(line.scheduled.snapshot.amount, 540, "Six months at100 with10% duration savings, without subscription annual/bundle savings");
+  assert.equal(JSON.stringify(f.S.db.invoices.at(-1)), invoice, "The original paid invoice stays immutable");
 });
