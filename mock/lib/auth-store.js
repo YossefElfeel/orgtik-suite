@@ -43,11 +43,14 @@ function conflict() {
 }
 
 function commit(data, changes) {
-  const emails = new Map(Object.entries(data.accounts).map(([id, raw]) => [emailKey(JSON.parse(raw).user.email), id]));
+  const changedIds = new Set(changes.map(({ id }) => id));
+  const emails = new Map(Object.entries(data.accounts).filter(([id]) => !changedIds.has(id)).map(([id, raw]) => [emailKey(JSON.parse(raw).user.email), id]));
   for (const { id, expected, value } of changes) {
     if ((data.accounts[id] ?? null) !== expected) throw conflict();
-    const owner = emails.get(emailKey(JSON.parse(value).user.email));
+    const email = emailKey(JSON.parse(value).user.email);
+    const owner = emails.get(email);
     if (owner && owner !== id) throw conflict();
+    emails.set(email, id);
   }
   for (const { id, value } of changes) data.accounts[id] = value;
 }
@@ -96,14 +99,25 @@ function localStore(file) {
 // Validate the entire batch before writing; concurrent email registrations cannot both win.
 const COMMIT = `
 local changes = cjson.decode(ARGV[1])
+local replacing = {}
 for _, change in ipairs(changes) do
   local current = redis.call('HGET', KEYS[1], change.id)
   local expected = change.expected
   if expected == cjson.null then expected = false end
   if current ~= expected then return 0 end
-  local record = cjson.decode(change.value)
+  replacing[change.id] = cjson.decode(change.value)
+end
+local newOwners = {}
+for _, change in ipairs(changes) do
+  local record = replacing[change.id]
+  local email = string.lower(record.user.email)
+  if newOwners[email] and newOwners[email] ~= change.id then return 0 end
+  newOwners[email] = change.id
   local owner = redis.call('HGET', KEYS[2], string.lower(record.user.email))
-  if owner and owner ~= change.id then return 0 end
+  if owner and owner ~= change.id then
+    local replacement = replacing[owner]
+    if not replacement or string.lower(replacement.user.email) == email then return 0 end
+  end
 end
 for _, change in ipairs(changes) do
   local current = redis.call('HGET', KEYS[1], change.id)

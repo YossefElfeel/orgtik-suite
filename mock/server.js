@@ -473,7 +473,12 @@ async function sync() {
     persist.clockJson = JSON.stringify(meta.clock ?? null);
     clock.importState(meta.clock);
   }
-  if (entries.length) await replay(entries, persist.applied);
+  if (entries.length) {
+    // Another instance may have registered the owner of these writes after this instance
+    // warmed up. Refresh identities and their workspaces before replay, just as restore does.
+    require("./lib/identity").hydrate(await accountStore.accounts());
+    await replay(entries, persist.applied);
+  }
 }
 
 function saveClock() {
