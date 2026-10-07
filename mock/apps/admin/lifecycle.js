@@ -79,11 +79,16 @@ function advance(S) {
         const priced = plan && S.resolveForWorkspace(plan.id, ws, l.cycle, l.snapshot.quantity);
         if (priced) {
           l.planId = plan.id;
-          l.snapshot = { ...l.snapshot, ...priced, priceVersion: db.priceVersion };
+          l.snapshot = { ...l.snapshot, ...priced, periodAmount: priced.amount, priceVersion: db.priceVersion };
           l.state = plan.tier === "free" ? "free" : "active";
           l.overLimits = overLimits(S, ws, plan);
           l.periodStart = downgrade.effectiveAt;
           l.periodEnd = S.iso(Date.parse(downgrade.effectiveAt) + S.pricing.periodDays(l.cycle) * 86400000);
+          if (l.termMonths) {
+            l.previousWebsiteTerms = { months: l.termMonths, prepaid: l.prepaidTerms ?? [], source: l.source };
+            delete l.termMonths; delete l.renewalMonths; delete l.prepaidTerms;
+            l.source = { kind: "subscription", previousWebsiteReference: l.source?.reference };
+          }
           delete l.scheduled;
           delete l.scheduledPrice;
           S.log("system", "downgrade_applied", ws.id, { line: l.id, plan: plan.id, overLimits: l.overLimits });

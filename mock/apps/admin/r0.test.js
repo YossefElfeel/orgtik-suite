@@ -97,6 +97,7 @@ test("ordinary checkout uses stored per-tool quantity; explicit capacity is vali
   for (const quantity of [1, 7.5, -3, 0]) assert.equal((await call("POST", "/v1/app/checkout/preview", { items: [{ ...item, quantity }] })).status, 422);
   ws.members.push({ email: "reserved@test.example", status: "invited", role: "member", tools: ["tasks"] });
   assert.equal((await call("POST", "/v1/app/checkout/preview", { items: [{ ...item, quantity: 4 }] })).status, 422);
+  assert.equal((await call("POST", "/v1/app/checkout/preview", { items: [{ ...item, quantity: 1e100 }] })).status, 422);
 }));
 
 test("bundles and plan-specific coupons discount only eligible lines", () => withApi(async ({ S, call }) => {
@@ -265,4 +266,80 @@ test("confirmed subscription retry returns one paid invoice and never bypasses a
   assert.equal((await call("POST", "/v1/app/checkout/confirm", { ...body, coupon: "LAUNCH20" }, opts)).status, 409);
   ws.members.find(member => member.userKey === "admin").role = "member";
   assert.equal((await call("POST", "/v1/app/checkout/confirm", body, opts)).status, 403);
+}));
+
+test("website full-period subscriptions report a monthly equivalent, not six times the monthly cost", () => withApi(async ({ S, call, own, now }) => {
+  const ws = own(S.workspace("ws_gulf")); Object.assign(ws, { country: "SA", currency: "SAR" }); ws.billing.country = "SA";
+  ws.lines = [{ id: "six-month-billing", planId: "files_pro", tool: "files", state: "active", cycle: "monthly", termMonths: 6, renewalMonths: 6, periodEnd: S.iso(now() + 180 * DAY), snapshot: { amount: 540, unit: 540, quantity: 1, currency: "SAR" } }];
+  const result = await call("GET", "/v1/app/subscriptions", undefined, { workspace: ws.id });
+  assert.equal(result.status, 200); assert.equal(result.data.monthlyTotal, 90);
+  assert.equal(result.data.lines[0].termMonths, 6); assert.equal(result.data.lines[0].snapshot.amount, 540);
+}));
+
+test("an unpaid workspace can choose billing country, then its first payment locks that currency", () => withApi(async ({ S, call }) => {
+  const ws = S.createWorkspace({ wsId: "ws_unpaid", ownerKey: "admin", name: "New customer", email: "billing@fixture.test" });
+  assert.equal(ws.currencyLocked, false);
+  const billing = { legalName: "New customer", email: "billing@fixture.test", country: "EG" };
+  assert.equal((await call("PUT", "/v1/app/billing", billing, { workspace: ws.id })).status, 200);
+  assert.equal(ws.currency, "EGP"); assert.equal(ws.country, "EG");
+  const card = await call("POST", "/v1/app/payment-methods", { last4: "4242", expires: "12/30" }, { workspace: ws.id });
+  assert.equal(card.status, 201);
+  const paid = await call("POST", "/v1/app/checkout/confirm", { items: [{ planId: "tasks_pro", cycle: "monthly" }], paymentMethodId: card.data.id }, { workspace: ws.id });
+  assert.equal(paid.status, 201); assert.equal(ws.currencyLocked, true);
+  const invoice = JSON.stringify(S.db.invoices.at(-1));
+  assert.equal((await call("PUT", "/v1/app/billing", { ...billing, country: "CH" }, { workspace: ws.id })).data.migrationQueued, true);
+  assert.equal(ws.currency, "EGP"); assert.equal(JSON.stringify(S.db.invoices.at(-1)), invoice);
+}));
+
+test("a replaced subscription cannot qualify the new basket for its old bundle", () => withApi(async ({ S, call }) => {
+  const ws = S.workspace("ws_orgtik"); ws.lines.find(line => line.tool === "hr").planId = "hr_pro";
+  const body = { items: [{ planId: "files_free", cycle: "monthly" }, { planId: "tasks_pro", cycle: "monthly" }] };
+  const quote = await call("POST", "/v1/app/checkout/preview", body);
+  assert.equal(quote.status, 200); assert.equal(quote.data.bundleDiscount, 0); assert.equal(quote.data.bundle, null);
+}));
+
+test("a persisted subscription quote keeps the agreed total through new-customer price publication", () => withApi(async ({ S, call, publish, now }) => {
+  const ws = S.workspace("ws_orgtik"), body = { items: [{ planId: "tasks_pro", cycle: "monthly" }] };
+  const preview = await call("POST", "/v1/app/checkout/preview", body);
+  assert.equal(preview.status, 200); assert.ok(preview.data.quoteId);
+  await publish("tasks_pro:monthly:egypt", 499, "new_only", S.iso(now()));
+  const paid = await call("POST", "/v1/app/checkout/confirm", { ...body, quoteId: preview.data.quoteId, paymentMethodId: ws.paymentMethods[0].id });
+  assert.equal(paid.status, 201); assert.equal(paid.data.invoice.total, preview.data.total);
+  assert.equal(paid.data.lines[0].snapshot.priceVersion, preview.data.priceVersion);
+  assert.equal((await call("POST", "/v1/app/checkout/confirm", { ...body, quoteId: preview.data.quoteId, paymentMethodId: ws.paymentMethods[0].id })).status, 409);
+}));
+
+test("successful nonce recovery survives quote expiry, while declined quotes remain reusable", () => withApi(async ({ S, call, now, setNow }) => {
+  const ws = S.workspace("ws_orgtik"), body = { items: [{ planId: "tasks_pro", cycle: "yearly" }] };
+  const quote = (await call("POST", "/v1/app/checkout/preview", body)).data;
+  const pay = { ...body, quoteId: quote.quoteId, paymentMethodId: ws.paymentMethods[0].id }, opts = { attemptId: "quoted-one-payment" };
+  S.failNext = 1; assert.equal((await call("POST", "/v1/app/checkout/confirm", pay, opts)).status, 402);
+  const paid = await call("POST", "/v1/app/checkout/confirm", pay, opts); assert.equal(paid.status, 201);
+  setNow(now() + 20 * 60000);
+  assert.deepEqual((await call("POST", "/v1/app/checkout/confirm", pay, opts)).data, paid.data);
+  const fresh = (await call("POST", "/v1/app/checkout/preview", body)).data;
+  setNow(now() + 20 * 60000);
+  assert.equal((await call("POST", "/v1/app/checkout/confirm", { ...pay, quoteId: fresh.quoteId })).status, 410);
+}));
+
+test("subscription quotes cannot cross workspaces or silently spend changed credit", () => withApi(async ({ S, call, own }) => {
+  const ws = S.workspace("ws_orgtik"), body = { items: [{ planId: "tasks_pro", cycle: "monthly" }] };
+  const quote = (await call("POST", "/v1/app/checkout/preview", body)).data;
+  const pay = { ...body, quoteId: quote.quoteId, paymentMethodId: ws.paymentMethods[0].id };
+  const other = own(S.workspace("ws_gulf"));
+  assert.equal((await call("POST", "/v1/app/checkout/confirm", pay, { workspace: other.id })).status, 403);
+  ws.billingCredit = 50; ws.billingCreditCurrency = ws.currency;
+  const before = S.db.invoices.length;
+  assert.equal((await call("POST", "/v1/app/checkout/confirm", pay)).status, 409);
+  assert.equal(S.db.invoices.length, before);
+}));
+
+test("a missing USD reporting rate cannot be invented as1 on a paid invoice", () => withApi(async ({ S, call }) => {
+  const ws = S.workspace("ws_orgtik");
+  S.db.rates = S.db.rates.filter(rate => rate.from !== "EGP" && rate.to !== "EGP");
+  assert.equal(S.usdRate("EGP"), null);
+  const before = S.db.invoices.length;
+  const response = await call("POST", "/v1/app/checkout/confirm", { items: [{ planId: "chat_pro", cycle: "monthly" }], paymentMethodId: ws.paymentMethods[0].id });
+  assert.equal(response.status, 503); assert.equal(response.error.code, "payment_rate_unavailable");
+  assert.equal(S.db.invoices.length, before);
 }));

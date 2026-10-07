@@ -73,6 +73,7 @@ test("full-period totals round once and preserve two- and three-decimal currency
   }
   const base = { decimals: 2, currency: "CHF", monthly: 0.055, unit: 0.055, quantity: 1, perUser: false, name: { en: "Fixture" } };
   assert.equal(priceLine(base, { id: "fixture" }, 3, 1).total, 16, "Rounding the monthly unit first would incorrectly yield17");
+  assert.throws(() => priceLine({ ...base, monthly: 1e100 }, { id: "fixture" }, 12, 1), { code: "price_unavailable", status: 503 });
 });
 
 test("software uses monthly Pro prices and server-selected capacity without stacking annual savings", async () => {

@@ -34,7 +34,7 @@ test("mock artifact rejects missing startup imports and accepts a self-contained
     fs.mkdirSync(path.join(fn, "mock/api"), { recursive: true });
     fs.writeFileSync(path.join(fn, ".vc-config.json"), JSON.stringify({ handler: "mock/api/index.js" }));
     fs.writeFileSync(path.join(fn, "mock/api/index.js"), "module.exports = () => {};\n");
-    assert.throws(() => checkMockBundle(output), /Cannot find module 'express'/);
+    assert.throws(() => checkMockBundle(output), /Cannot find module 'express'|Mock dependency express resolves outside the uploaded artifact/);
     const runtime = path.join(folder, "runtime");
     for (const name of ["express", "cors", "multer", "socket.io", "@iconify/utils"]) {
       const pkg = path.join(runtime, "node_modules", name);

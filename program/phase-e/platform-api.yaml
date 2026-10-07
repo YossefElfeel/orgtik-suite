@@ -58,6 +58,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/overview":
     get:
       tags:
@@ -85,6 +91,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/tools":
     get:
       tags:
@@ -108,6 +120,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing tools:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -156,6 +174,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/tools/{key}":
     get:
       tags:
@@ -185,6 +209,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing tools:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -239,6 +269,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/features":
     get:
       tags:
@@ -262,6 +298,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing plans:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -310,6 +352,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/features/{key}":
     delete:
       tags:
@@ -351,6 +399,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/plans":
     get:
       tags:
@@ -374,6 +428,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing plans:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -422,6 +482,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/plans/{id}":
     get:
       tags:
@@ -451,6 +517,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing plans:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -505,6 +577,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/currencies":
     get:
       tags:
@@ -528,6 +606,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing pricing:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -572,6 +656,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "422":
           description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -627,6 +717,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/zones":
     get:
       tags:
@@ -650,6 +746,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing pricing:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -694,6 +796,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "422":
           description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -749,6 +857,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/countries":
     get:
       tags:
@@ -772,6 +886,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing pricing:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -827,6 +947,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/rates":
     get:
       tags:
@@ -850,6 +976,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing pricing:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -898,6 +1030,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/grid":
     get:
       tags:
@@ -921,6 +1059,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing pricing:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -970,6 +1114,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/price-drafts/{id}":
     delete:
       tags:
@@ -1007,6 +1157,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "422":
           description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1058,6 +1214,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "422":
           description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1117,6 +1279,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/pricing-log":
     get:
       tags:
@@ -1144,6 +1312,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/bundles":
     get:
       tags:
@@ -1167,6 +1341,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing bundles:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1211,6 +1391,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "422":
           description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1266,6 +1452,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/coupons":
     get:
       tags:
@@ -1289,6 +1481,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing bundles:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1333,6 +1531,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "422":
           description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1388,6 +1592,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/tax-rules":
     get:
       tags:
@@ -1411,6 +1621,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing tax:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1466,6 +1682,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/gateways":
     get:
       tags:
@@ -1489,6 +1711,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing tax:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1544,6 +1772,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/gateways/route":
     get:
       tags:
@@ -1571,6 +1805,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/workspaces":
     get:
       tags:
@@ -1594,6 +1834,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing workspaces:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1627,6 +1873,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing workspaces:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1682,6 +1934,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/migrations":
     get:
       tags:
@@ -1705,6 +1963,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing workspaces:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1760,6 +2024,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/migrations/{id}/reject":
     post:
       tags:
@@ -1811,6 +2081,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/custom-plans":
     get:
       tags:
@@ -1834,6 +2110,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing workspaces:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1893,6 +2175,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/invoices":
     get:
       tags:
@@ -1916,6 +2204,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing billing:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -1964,6 +2258,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/invoices/{id}":
     get:
       tags:
@@ -1993,6 +2293,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing billing:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2048,6 +2354,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/invoices/{id}/mark-paid":
     post:
       tags:
@@ -2095,6 +2407,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "422":
           description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2150,6 +2468,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/invoices/{id}/retry":
     post:
       tags:
@@ -2197,6 +2521,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "422":
           description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2252,6 +2582,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/services":
     get:
       tags:
@@ -2275,6 +2611,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing services:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2330,6 +2672,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/service-requests":
     get:
       tags:
@@ -2353,6 +2701,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing services:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2386,6 +2740,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing services:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2441,6 +2801,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/tickets":
     get:
       tags:
@@ -2464,6 +2830,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing tickets:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2497,6 +2869,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing tickets:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2552,6 +2930,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/waitlist":
     get:
       tags:
@@ -2575,6 +2959,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing waitlist:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2605,6 +2995,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/staff":
     get:
       tags:
@@ -2628,6 +3024,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing staff:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2683,6 +3085,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/templates":
     get:
       tags:
@@ -2706,6 +3114,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing templates:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2761,6 +3175,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/reports":
     get:
       tags:
@@ -2788,6 +3208,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/settings":
     get:
       tags:
@@ -2811,6 +3237,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing settings:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -2859,6 +3291,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/admin/audit":
     get:
       tags:
@@ -2882,6 +3320,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Missing settings:view
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -3112,6 +3556,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/tools":
     get:
       tags:
@@ -3138,6 +3588,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -3177,6 +3633,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -3230,6 +3692,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "422":
           description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -3293,11 +3761,17 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/checkout/preview":
     post:
       tags:
         - Checkout
-      summary: "Price eligible bundle → coupon → proration/credits → regional tax; explicit intent changes purchased capacity"
+      summary: "Persist a reviewed bundle/coupon/proration/tax quote; explicit intent changes purchased capacity"
       description: "Spec: USR-07, R03-ALG-8, D-060, D-061."
       operationId: post_app_checkout_preview
       parameters:
@@ -3345,11 +3819,17 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/checkout/confirm":
     post:
       tags:
         - Checkout
-      summary: "Pay and activate; 402 changes nothing; the first payment locks the currency (R03-C2)"
+      summary: "Pay the reviewed server quote once; 402 creates no invoice, nonce recovery retains its result; first payment locks currency"
       description: "Spec: USR-08, F-04."
       operationId: post_app_checkout_confirm
       parameters:
@@ -3368,7 +3848,7 @@ paths:
         content:
           "application/json":
             schema:
-              $ref: "#/components/schemas/CheckoutBody"
+              $ref: "#/components/schemas/CheckoutConfirmBody"
       responses:
         "201":
           description: OK
@@ -3412,11 +3892,17 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/subscriptions":
     get:
       tags:
         - Subscriptions
-      summary: Subscription lines and the monthly total
+      summary: Subscription lines, full purchased terms and monthly equivalent
       description: "Spec: USR-09."
       operationId: get_app_subscriptions
       parameters:
@@ -3438,6 +3924,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -3501,6 +3993,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/subscriptions/{id}/resume":
     post:
       tags:
@@ -3556,6 +4054,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "423":
           description: The workspace is suspended
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -3619,6 +4123,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/subscriptions/{id}/cancel-downgrade":
     post:
       tags:
@@ -3674,6 +4184,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "423":
           description: The workspace is suspended
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -3743,6 +4259,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/invoices":
     get:
       tags:
@@ -3769,6 +4291,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -3808,6 +4336,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/payment-methods":
     get:
       tags:
@@ -3834,6 +4368,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -3887,6 +4427,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "423":
           description: The workspace is suspended
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -3950,6 +4496,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
     delete:
       tags:
         - Billing
@@ -3998,6 +4550,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/billing":
     get:
       tags:
@@ -4024,6 +4582,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -4081,6 +4645,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/team":
     get:
       tags:
@@ -4107,6 +4677,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -4161,6 +4737,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "423":
           description: The workspace is suspended
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -4224,6 +4806,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/website-orders":
     post:
       tags:
@@ -4282,6 +4870,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/services":
     get:
       tags:
@@ -4312,6 +4906,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/service-requests":
     get:
       tags:
@@ -4338,6 +4938,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -4395,6 +5001,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/service-requests/{id}":
     get:
       tags:
@@ -4426,6 +5038,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -4495,6 +5113,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/tickets":
     get:
       tags:
@@ -4521,6 +5145,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -4572,6 +5202,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/tickets/{id}":
     get:
       tags:
@@ -4603,6 +5239,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -4666,6 +5308,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/notifications":
     get:
       tags:
@@ -4692,6 +5340,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -4744,6 +5398,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/custom-plans":
     get:
       tags:
@@ -4770,6 +5430,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "403":
           description: Not allowed for this role
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -4823,6 +5489,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "423":
           description: The workspace is suspended
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -4890,6 +5562,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/workspace":
     patch:
       tags:
@@ -4944,6 +5622,12 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
   "/v1/app/workspace/delete":
     post:
       tags:
@@ -4994,6 +5678,12 @@ paths:
                 $ref: "#/components/schemas/Error"
         "423":
           description: The workspace is suspended
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: "Mock persistence or immutable financial snapshot unavailable; no successful change is claimed"
           content:
             "application/json":
               schema:
@@ -5278,6 +5968,12 @@ components:
             effectiveAt:
               type: string
               format: date-time
+        perUser:
+          type: boolean
+        contractedCapacity:
+          type:
+            - integer
+            - "null"
         periodStart:
           type: string
           format: date-time
@@ -5733,6 +6429,9 @@ components:
       required:
         - items
       properties:
+        quoteId:
+          type: string
+          description: "Persisted server subscription quote from preview; optional only for legacy direct callers. Successful nonce recovery is checked before expiry."
         items:
           type: array
           items:
@@ -5753,10 +6452,40 @@ components:
               type: string
             taxId:
               type: string
-      description: One plan per tool. Eligible bundle → coupon → proration/old-period credit → tax. Global seat_purchase intent also requires a valid quantity on each item.
+      description: "One plan per tool. Eligible bundle → coupon → proration/old-period credit → tax. A quoteId pins reviewed server totals until expiry/current billing or line/credit context changes. Known402declines leave a quote reusable; a successful quote is consumed once. Global seat_purchase intent also requires a valid quantity on each item."
+      allOf:
+        - if:
+            properties:
+              intent:
+                const: seat_purchase
+            required:
+              - intent
+          then:
+            properties:
+              items:
+                items:
+                  required:
+                    - quantity
+    CheckoutConfirmBody:
+      allOf:
+        - $ref: "#/components/schemas/CheckoutBody"
+        - type: object
+          required:
+            - paymentMethodId
     CheckoutPreview:
       type: object
       properties:
+        quoteId:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+        expiresIn:
+          type: integer
+          minimum: 0
+          maximum: 900
+        priceVersion:
+          type: integer
         currency:
           type: string
         subtotal:

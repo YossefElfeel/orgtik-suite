@@ -27,7 +27,7 @@ module.exports = function adminApi(app, ctx, S, H) {
   }, { permission: p }); // read by orgtik-program/phase-e/openapi.mjs
   const name = (key) => { const u = key && identity.findByKey?.(key); return u ? identity.fullName(u) : key; };
   const usd = (amount, cur) => Math.round((amount / S.usdRate(cur)) * 100) / 100;
-  const monthly = (l) => (l.cycle === "yearly" ? l.snapshot.amount / 12 : l.cycle === "monthly" ? l.snapshot.amount : 0);
+  const monthly = (l) => S.pricing.monthlyAmount(l);
   const paying = (l) => l.state === "active" || l.state === "cancelling" || l.state === "past_due";
 
   // ---- me ----
@@ -398,7 +398,7 @@ module.exports = function adminApi(app, ctx, S, H) {
       ...wsSummary(w),
       zone: w.zone, currencyLocked: w.currencyLocked, flags: w.flags, billing: w.billing, notes: w.notes.map((n) => ({ ...n, byName: name(n.by) })), paymentMethods: w.paymentMethods.map(({ id, kind, brand, last4, expires, isDefault, expired }) => ({ id, kind, brand, last4, expires, isDefault, expired: Boolean(expired) })),
       members: w.members.map((m) => ({ ...m, name: m.userKey ? name(m.userKey) : m.name, email: m.userKey ? identity.findByKey(m.userKey)?.email : m.email })),
-      lines: w.lines.map((l) => ({ ...l, toolName: db.tools.find((t) => t.key === l.tool)?.name, planName: db.plans.find((p) => p.id === l.planId)?.name })),
+      lines: w.lines.map((l) => ({ ...l, toolName: db.tools.find((t) => t.key === l.tool)?.name, planName: db.plans.find((p) => p.id === l.planId)?.name, perUser: Boolean(db.plans.find(p => p.id === l.planId)?.perUser), contractedCapacity: db.plans.find(p => p.id === l.planId)?.contractedQuantity ?? null })),
       invoices: db.invoices.filter((i) => i.workspaceId === w.id).map(({ id, number, state, total, currency, issuedAt }) => ({ id, number, state, total, currency, issuedAt })),
       tickets: db.tickets.filter((t) => t.workspaceId === w.id).map(({ id, number, subject, state }) => ({ id, number, subject, state })),
       serviceRequests: db.serviceRequests.filter((r) => r.workspaceId === w.id).map(({ id, number, title, state }) => ({ id, number, title, state })),

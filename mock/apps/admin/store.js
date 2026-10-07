@@ -219,7 +219,10 @@ function makeStore({ identity }) {
 
   // ---- invoices and payments (state table "Invoice", R03-R1) ----
   let invNo = 1040;
-  const usdRate = (cur) => (cur === "USD" ? 1 : pricing.rate(db, "USD", cur) ?? 1);
+  const usdRate = cur => {
+    const value = cur === "USD" ? 1 : pricing.rate(db, "USD", cur);
+    return Number.isFinite(value) && value > 0 ? value : null;
+  };
   const invoice = (ws, state, lineItems, o = {}) => {
     const cur = ws.currency, dec = db.currencies[cur]?.decimals ?? 2;
     const rule = db.taxRules.find((t) => t.country === ws.country && t.active);
@@ -330,6 +333,7 @@ function makeStore({ identity }) {
       const joinedAt = createdAt ?? iso(now());
       const ws = workspace({ id: wsId ?? id("ws"), name, slug, country, currency, createdAt: joinedAt, members: [{ userKey: ownerKey, role: "owner", status: "active", tools: null, joinedAt }], billing: { legalName: name, email, address: "", taxId: "", country } });
       ws.lines = [line(ws, "general_free", "free", { startedAt: joinedAt })];
+      ws.currencyLocked = false;
       if (registration) ws.billingInitialized = false;
       db.workspaces.push(ws);
       return ws;

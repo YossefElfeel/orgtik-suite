@@ -143,19 +143,20 @@ module.exports = function appApi(app, ctx, S, H) {
       if (!["monthly", "yearly"].includes(cycle) || p.private?.cycle && p.private.cycle !== cycle) return { error: ["cycle", "invalid"] };
       let quantity = S.purchasedSeats(ws, p.tool, p.id);
       if (it.intent === "seat_purchase" || intent === "seat_purchase") {
-        if (!p.perUser || !Number.isInteger(it.quantity) || it.quantity < Math.max(p.minSeats ?? 1, S.assignedSeats(ws, p.tool, p.id) + S.reservedSeats(ws, p.tool))) return { error: ["quantity", "invalid"] };
+        if (!p.perUser || !Number.isSafeInteger(it.quantity) || it.quantity < Math.max(p.minSeats ?? 1, S.assignedSeats(ws, p.tool, p.id) + S.reservedSeats(ws, p.tool))) return { error: ["quantity", "invalid"] };
         quantity = it.quantity;
       }
       // Legacy browser seats never change paid capacity; quantity requires the explicit intent.
       const r = S.resolveForWorkspace(p.id, ws, cycle, quantity);
       if (!r) return { error: ["planId", "no_price"] };
+      if (!Number.isSafeInteger(Math.round(r.amount * 10 ** dec(cur)))) return { error: ["quantity", "invalid"] };
       if (r.currency !== cur) return { error: ["currency", "mismatch"] }; // R03-C3: one currency per workspace
       const current = ws.lines.find((l) => l.tool === p.tool && (l.state === "active" || l.state === "cancelling"));
       // Proration (R03-ALG-8, G-01): an upgrade mid-period pays the remaining share now.
       const proration = S.pricing.proration(current, cycle, S.now(), dec(cur));
       lines.push({ planId: p.id, tool: p.tool, name: p.name, cycle, unit: r.unit, quantity: r.quantity, amount: r.amount, source: r.source, prorationFactor: proration.factor, credit: proration.credit, replaces: current?.id ?? null, periodEnd: proration.periodEnd, periodStart: proration.periodStart, contractedCapacity: p.contractedQuantity ?? null });
     }
-    const covers = b => b.planIds.every(id => lines.some(l => l.planId === id) || ws.lines.some(x => x.planId === id && ["active", "cancelling"].includes(x.state)));
+    const covers = b => b.planIds.every(id => lines.some(l => l.planId === id) || ws.lines.some(x => x.planId === id && ["active", "cancelling"].includes(x.state) && !lines.some(selection => selection.tool === x.tool)));
     const bundle = bundleId ? db.bundles.find(b => b.id === bundleId && b.active) : db.bundles.find(b => b.active && covers(b) && b.planIds.some(id => lines.some(l => l.planId === id)));
     if (bundleId && (!bundle || !covers(bundle) || lines.some(l => !bundle.planIds.includes(l.planId)))) return { error: ["bundleId", "invalid"] };
     let c = null, couponError = null;
@@ -179,16 +180,24 @@ module.exports = function appApi(app, ctx, S, H) {
       Object.assign(t, { prorated: charged.prorated, net: charged.net, tax: charged.tax, total: charged.total });
     }
     t.accountCreditUsed = accountCreditUsed;
+    if (![t.total, t.net, t.tax, t.creditRemaining].every(value => Number.isSafeInteger(Math.round(value * 10 ** dec(cur))))) return { error: ["items", "invalid_amount"] };
     lines.forEach((line, i) => { line.periodAmount = t.lineAmounts[i].discounted; });
     return { ...t, currency: cur, lines, bundle: bundle ? { id: bundle.id, name: bundle.name, pct: bundle.pct } : null, coupon: c ? { code: c.code, kind: c.kind } : null, couponError: couponError ?? t.couponError ?? null, taxLabel: rule.label, taxRate: rule.rate, taxDisplay: rule.inclusive ? "inclusive" : "exclusive", reverseCharge: rule.reverseCharge, taxDecided: db.settings.switches.taxDisplay.decided };
   }
+  const quoteInputs = body => ({ items: body.items ?? [], coupon: body.coupon ? String(body.coupon).toUpperCase() : null, bundleId: body.bundleId ?? null, intent: body.intent ?? null });
+  const quoteFingerprint = (p, body) => makeWorkspaceOperation({ id: "subscription-quote", workspaceId: p.ws.id, actor: { userId: p.user.id }, method: "POST", path: "/v1/app/checkout", body: quoteInputs(body) }).fingerprint;
+  const quoteContext = ws => JSON.stringify({ currency: ws.currency, country: ws.country, state: ws.state, billingCountry: ws.billing.country, taxId: ws.billing.taxId, credit: ws.billingCredit ?? 0, creditCurrency: ws.billingCreditCurrency, members: ws.members.map(m => [m.userKey, m.email, m.role, m.status, m.tools]), lines: ws.lines.filter(l => ["active", "cancelling", "past_due", "read_only"].includes(l.state)).map(l => [l.id, l.planId, l.state, l.periodStart, l.periodEnd, l.snapshot]) });
   app.post("/v1/app/checkout/preview", as("owner"), (req, res) => {
     const { ws } = req.p;
     const items = req.body?.items ?? [];
     if (!Array.isArray(items) || !items.length) return fail(res, 422, "invalid", "Choose at least one plan.", { fieldErrors: { items: "required" } });
     const q = quote(ws, items, req.body);
     if (q.error) return fail(res, 422, "invalid", "That plan can't be bought here.", { fieldErrors: { [q.error[0]]: q.error[1] } });
-    ok(res, { ...q, paymentMethods: ws.paymentMethods.filter((m) => !m.expired), gateways: S.routeGateways(ws).map(({ id, name, methods, recurring }) => ({ id, name, methods, recurring })) });
+    const boundary = Math.min(S.now() + 15 * 60000, ...q.lines.filter(l => l.replaces).map(l => Date.parse(ws.lines.find(old => old.id === l.replaces)?.periodEnd)).filter(end => end > S.now()));
+    const priced = { ...q, priceVersion: db.priceVersion, quoteId: S.id("cq"), expiresAt: S.iso(boundary), expiresIn: Math.max(0, Math.floor((boundary - S.now()) / 1000)) };
+    db.checkoutQuotes ??= [];
+    db.checkoutQuotes.push({ id: priced.quoteId, workspaceId: ws.id, actorId: req.p.user.id, fingerprint: quoteFingerprint(req.p, req.body), context: quoteContext(ws), snapshot: JSON.parse(JSON.stringify(priced)), consumed: false });
+    ok(res, { ...priced, paymentMethods: ws.paymentMethods.filter((m) => !m.expired), gateways: S.routeGateways(ws).map(({ id, name, methods, recurring }) => ({ id, name, methods, recurring })) });
   });
   app.post("/v1/app/checkout/confirm", as("owner", { write: true }), (req, res) => {
     const { ws } = req.p;
@@ -200,7 +209,17 @@ module.exports = function appApi(app, ctx, S, H) {
     const operation = operationId ? makeWorkspaceOperation({ id: operationId, workspaceId: ws.id, actor: { userId: req.p.user.id }, method: req.method, path: req.path, body: b }) : null;
     const prior = operation && db.checkoutOperations?.find(row => row.id === operation.id && row.workspaceId === ws.id && row.actor.userId === req.p.user.id);
     if (prior) return prior.fingerprint === operation.fingerprint ? ok(res, prior.result, {}, 201) : fail(res, 409, "operation_conflict", "This payment attempt was already used for a different checkout.");
-    const q = quote(b.billing ? { ...ws, billing: { ...ws.billing, ...b.billing, country: ws.billing?.country || ws.country } } : ws, b.items ?? [], b);
+    const held = b.quoteId ? db.checkoutQuotes?.find(row => row.id === b.quoteId) : null;
+    if (b.quoteId && !held) return fail(res, 404, "quote_not_found", "Review a new checkout quote.");
+    if (held && (held.workspaceId !== ws.id || held.actorId !== req.p.user.id)) return fail(res, 403, "forbidden", "This checkout quote belongs to another workspace or owner.");
+    if (held?.consumed) return fail(res, 409, "quote_used", "This quote already has a successful payment.");
+    if (held && Date.parse(held.snapshot.expiresAt) <= S.now()) return fail(res, 410, "quote_expired", "Review the total again before paying.");
+    if (held && (held.fingerprint !== quoteFingerprint(req.p, b) || held.context !== quoteContext(ws) || b.billing?.taxId !== undefined && b.billing.taxId !== ws.billing.taxId || held.snapshot.lines.some(l => !db.plans.some(p => p.id === l.planId && availablePlan(p, ws))))) return fail(res, 409, "checkout_changed", "Your billing context changed. Review a new total before paying.");
+    const q = held ? JSON.parse(JSON.stringify(held.snapshot)) : quote(b.billing ? { ...ws, billing: { ...ws.billing, ...b.billing, country: ws.billing?.country || ws.country } } : ws, b.items ?? [], b);
+    if (held && q.coupon) {
+      const coupon = db.coupons.find(row => row.code === q.coupon.code);
+      if (!coupon?.active || coupon.redeemed >= coupon.maxRedemptions || Date.parse(coupon.validTo) < S.now()) return fail(res, 409, "checkout_changed", "The discount is no longer available. Review a new total.");
+    }
     if (q.error || !(b.items ?? []).length) return fail(res, 422, "invalid", "That plan can't be bought here.", { fieldErrors: { items: "required" } });
     if (b.coupon && q.couponError) return fail(res, 422, "invalid", "That code doesn't work.", { fieldErrors: { coupon: q.couponError } });
     const pm = ws.paymentMethods.find((m) => m.id === b.paymentMethodId && !m.expired);
@@ -212,6 +231,7 @@ module.exports = function appApi(app, ctx, S, H) {
     if (failed) return fail(res, 402, "payment_failed", "The payment didn't go through. Nothing changed; try another card.", { reason: "card_declined" });
     const gateway = S.routeGateways(ws, { method: pm.kind })[0];
     if (!gateway) return fail(res, 409, "no_gateway", "No configured payment gateway supports this workspace currency.");
+    if (!S.usdRate(q.currency)) return fail(res, 503, "payment_rate_unavailable", "The USD reporting rate is unavailable. Nothing was charged.");
     if (b.billing) ws.billing = { ...ws.billing, ...b.billing, country: ws.billing?.country || ws.country };
     const inv = invoiceFrom(ws, q, "paid", { ...pm, gateway: gateway.id });
     const periodDays = (c) => (c === "yearly" ? 365 : 30);
@@ -219,7 +239,7 @@ module.exports = function appApi(app, ctx, S, H) {
     for (const l of q.lines) {
       const old = l.replaces ? ws.lines.find((x) => x.id === l.replaces) : ws.lines.find((x) => x.tool === l.tool && live(x));
       if (old) Object.assign(old, { state: "ended", endedAt: S.iso(S.now()), replacedBy: "pending" });
-      const nl = { id: S.id("ln"), tool: l.tool, planId: l.planId, cycle: l.cycle, state: "active", startedAt: S.iso(S.now()), periodStart: l.periodStart ?? S.iso(S.now()), periodEnd: l.periodEnd ?? S.iso(S.now() + periodDays(l.cycle) * DAY), snapshot: { amount: l.amount, unit: l.unit, quantity: l.quantity, periodAmount: l.periodAmount, currency: q.currency, source: l.source, priceVersion: db.priceVersion }, trialUsed: Boolean(old?.trialUsed || old?.trialEndsAt), autoRenew: old?.autoRenew !== false };
+      const nl = { id: S.id("ln"), tool: l.tool, planId: l.planId, cycle: l.cycle, state: "active", startedAt: S.iso(S.now()), periodStart: l.periodStart ?? S.iso(S.now()), periodEnd: l.periodEnd ?? S.iso(S.now() + periodDays(l.cycle) * DAY), snapshot: { amount: l.amount, unit: l.unit, quantity: l.quantity, periodAmount: l.periodAmount, currency: q.currency, source: l.source, priceVersion: q.priceVersion ?? db.priceVersion }, trialUsed: Boolean(old?.trialUsed || old?.trialEndsAt), autoRenew: old?.autoRenew !== false };
       if (old) old.replacedBy = nl.id;
       const at = ws.lines.findIndex((x) => x.tool === l.tool); // in front of the tool's older lines (toolState reads the first)
       ws.lines.splice(at < 0 ? ws.lines.length : at, 0, nl);
@@ -232,6 +252,7 @@ module.exports = function appApi(app, ctx, S, H) {
     ws.billingCredit = money((ws.billingCredit ?? 0) - q.accountCreditUsed + q.creditRemaining, q.currency);
     ws.billingCreditCurrency = q.currency;
     ws.currencyLocked = true; // R03-C2: the first payment locks the currency
+    if (held) { held.consumed = true; held.invoiceId = inv.id; }
     S.log(req.p.key, "checkout", ws.id, { invoice: inv.number });
     const result = { invoice: { id: inv.id, number: inv.number, total: inv.total, currency: inv.currency }, lines: created };
     if (operation) { db.checkoutOperations ??= []; db.checkoutOperations.push({ ...operation, result: JSON.parse(JSON.stringify(result)) }); }
@@ -240,6 +261,7 @@ module.exports = function appApi(app, ctx, S, H) {
   function invoiceFrom(ws, q, state, pm) {
     const n = 1040 + db.invoices.length + 1;
     const r = S.usdRate(q.currency);
+    if (!r) throw Object.assign(new Error("The USD reporting rate is unavailable; no invoice was created."), { status: 503, code: "payment_rate_unavailable" });
     const invoiceLines = [];
     q.lines.forEach((l, i) => {
       const label = `${l.name?.en ?? l.planId}${l.contractedCapacity ? ` · capacity ${l.contractedCapacity}` : l.quantity > 1 ? ` × ${l.quantity}` : ""}`;
@@ -272,7 +294,7 @@ module.exports = function appApi(app, ctx, S, H) {
   app.get("/v1/app/subscriptions", as("admin"), (req, res) => {
     const { ws } = req.p;
     const lines = ws.lines.filter((l) => l.state !== "deleted" && !(l.state === "ended" && l.replacedBy));
-    const monthly = lines.filter((l) => ["active", "cancelling", "past_due"].includes(l.state)).reduce((s, l) => s + (l.cycle === "yearly" ? l.snapshot.amount / 12 : l.snapshot.amount), 0);
+    const monthly = lines.filter((l) => ["active", "cancelling", "past_due"].includes(l.state)).reduce((s, l) => s + S.pricing.monthlyAmount(l), 0);
     ok(res, { currency: ws.currency, currencyLocked: ws.currencyLocked, seats: S.seats(ws), monthlyTotal: money(monthly, ws.currency), lines: lines.map((l) => lineOut(ws, l)) });
   });
   app.post("/v1/app/subscriptions/:id/:action(cancel|resume|downgrade|cancel-downgrade|retry)", as("owner", { write: true }), (req, res) => {
@@ -537,7 +559,7 @@ module.exports = function appApi(app, ctx, S, H) {
     const b = req.body ?? {};
     const e = {};
     if (!Array.isArray(b.tools) || !b.tools.length || b.tools.some((t) => !db.tools.some((x) => x.key === t))) e.tools = "required";
-    if (!(Number.isInteger(b.seats) && b.seats >= 1)) e.seats = "min";
+    if (!(Number.isSafeInteger(b.seats) && b.seats >= 1)) e.seats = "min";
     if (Object.keys(e).length) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: e });
     const r = { id: S.id("cpr"), workspaceId: req.p.ws.id, tools: b.tools, seats: b.seats, cycle: b.cycle === "monthly" ? "monthly" : "yearly", notes: b.notes ?? "", state: "new", createdAt: S.iso(S.now()) };
     db.customPlanRequests.push(r);

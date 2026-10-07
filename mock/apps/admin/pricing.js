@@ -107,6 +107,7 @@ function resolveWorkspaceLine(tables, { planId, cycle, workspace, seats = 1 }) {
 }
 
 const periodDays = cycle => cycle === "yearly" ? 365 : 30;
+const monthlyAmount = line => line.termMonths ? line.snapshot.amount / line.termMonths : line.cycle === "yearly" ? line.snapshot.amount / 12 : line.cycle === "monthly" ? line.snapshot.amount : 0;
 /** Unused old-period credit is independent of the new cycle. Legacy lines lack periodStart. */
 function proration(current, cycle, now, decimals = 2) {
   const end = current && Date.parse(current.periodEnd);
@@ -186,4 +187,4 @@ function totals({ lines, currency, decimals = 2, bundlePct = 0, coupon = null, p
   return { currency, subtotal: sub, bundleDiscount: bundle, couponDiscount: couponOff, couponError, prorated, net, tax: taxAmount, total, creditRemaining, lineAmounts };
 }
 
-module.exports = { roundStep, toDecimals, rate, zoneOf, resolveUnit, resolveLine, resolveWorkspaceLine, proration, periodDays, taxForWorkspace, totals };
+module.exports = { roundStep, toDecimals, rate, zoneOf, resolveUnit, resolveLine, resolveWorkspaceLine, proration, periodDays, monthlyAmount, taxForWorkspace, totals };

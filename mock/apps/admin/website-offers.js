@@ -71,6 +71,7 @@ function priceLine(base, offer, months, count, autoRenew = false) {
   const scale = 10 ** base.decimals;
   const subtotal = Math.round((base.monthly * months + Number.EPSILON) * scale);
   const total = Math.round((base.monthly * months * (100 - discount) / 100 + Number.EPSILON) * scale);
+  if (![subtotal, total].every(value => Number.isSafeInteger(value) && value >= 0)) throw error(503, "price_unavailable", "This offer cannot be represented safely in its billing currency.");
   return { catalogId: offer.id, kind: offer.kind, name: base.name.en, months, autoRenew, currency: base.currency, decimals: base.decimals, monthlyMinor: Math.round(base.monthly * scale), unitMinor: Math.round(base.unit * scale), quantity: base.quantity, perUser: base.perUser, subtotal, total, saving: subtotal - total, discount, reason: DURATION[months] >= countSaving(count) ? "duration" : "bundle", monthlyEquivalent: total / months, fulfillment: offer.fulfillment, ...(offer.planId ? { planId: offer.planId, tool: offer.tool } : { serviceId: offer.serviceId }), source: base.source };
 }
 
@@ -114,6 +115,7 @@ function groupsQuote(S, groups, resolved) {
   const lines = normalized.flatMap(group => group.lines), sum = key => lines.reduce((total, line) => total + line[key], 0);
   const tax = S.taxForWorkspace(resolved.workspace), discounted = sum("total");
   const taxAmount = tax.inclusive ? discounted - Math.round(discounted / (1 + tax.rate / 100)) : Math.round(discounted * tax.rate / 100);
+  if (![sum("subtotal"), sum("saving"), discounted, taxAmount, discounted + (tax.inclusive ? 0 : taxAmount)].every(Number.isSafeInteger)) throw error(503, "price_unavailable", "The order total cannot be represented safely in its billing currency.");
   return { groups: normalized, quote: { subtotal: sum("subtotal"), saving: sum("saving"), offerTotal: discounted, net: tax.inclusive ? discounted - taxAmount : discounted, tax: taxAmount, taxLabel: tax.label, taxInclusive: tax.inclusive, total: tax.inclusive ? discounted : discounted + taxAmount, monthlyEquivalent: sum("monthlyEquivalent"), valid: true } };
 }
 
