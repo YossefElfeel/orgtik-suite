@@ -2,6 +2,7 @@ name: Deploy affected projects
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, labeled]
   push:
     branches: [main]
   workflow_dispatch:
@@ -14,7 +15,7 @@ on:
       preview_projects:
         description: Preview scope (production always uses the affected graph)
         type: choice
-        options: [affected, milestone]
+        options: [affected, milestone, verify-readiness]
         default: affected
 
 permissions:
@@ -31,6 +32,7 @@ jobs:
     outputs:
       matrix: ${{ steps.affected.outputs.matrix }}
       count: ${{ steps.affected.outputs.count }}
+      verify_only: ${{ steps.affected.outputs.verify_only }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -50,8 +52,15 @@ jobs:
           DEPLOY_PROJECTS: ${{ github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'mock,sos,website' || '' }}
           TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
           TURBO_SCM_HEAD: HEAD
+          PREVIEW_VERIFY_ONLY: ${{ github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'verify-readiness' || contains(github.event.pull_request.labels.*.name, 'preview:verify-only')) && '1' || '0' }}
         run: |
-          node tools/vercel/affected.mjs > affected.json
+          if [ "$PREVIEW_VERIFY_ONLY" = 1 ]; then
+            node tools/vercel/verify-preview-revisions.mjs
+            echo '[]' > affected.json
+          else
+            node tools/vercel/affected.mjs > affected.json
+          fi
+          echo "verify_only=$PREVIEW_VERIFY_ONLY" >> "$GITHUB_OUTPUT"
           echo "matrix=$(node -e 'const fs=require("fs");console.log(JSON.stringify({include:JSON.parse(fs.readFileSync("affected.json"))}))')" >> "$GITHUB_OUTPUT"
           echo "count=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("affected.json")).length)')" >> "$GITHUB_OUTPUT"
 
@@ -157,7 +166,7 @@ jobs:
 
   checks:
     needs: [affected, deploy]
-    if: always() && needs.affected.outputs.count != '0'
+    if: always() && needs.affected.result == 'success' && (needs.affected.outputs.count != '0' || needs.affected.outputs.verify_only == '1')
     runs-on: ubuntu-latest
     timeout-minutes: 120
     permissions:
@@ -171,17 +180,18 @@ jobs:
         with:
           node-version: 22
       - uses: actions/download-artifact@v4
+        if: needs.affected.outputs.verify_only != '1'
         with:
           pattern: deployment-*
           path: deployments
       - name: Install Vercel CLI for ephemeral preview access
-        if: github.event_name != 'push' && inputs.environment != 'production' && needs.deploy.result == 'success'
+        if: github.event_name != 'push' && inputs.environment != 'production' && (needs.deploy.result == 'success' || needs.affected.outputs.verify_only == '1')
         run: npm install --global vercel@54.7.1
       - name: Preview golden flows and visual checks
-        if: github.event_name != 'push' && inputs.environment != 'production' && needs.deploy.result == 'success'
+        if: github.event_name != 'push' && inputs.environment != 'production' && (needs.deploy.result == 'success' || needs.affected.outputs.verify_only == '1')
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          PREVIEW_CHECK_SCOPE: ${{ (inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'milestone' || 'affected' }}
+          PREVIEW_CHECK_SCOPE: ${{ (needs.affected.outputs.verify_only == '1' || inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'milestone' || 'affected' }}
           MOCK_PUBLIC_URL: ${{ vars.PREVIEW_MOCK_URL }}
           SUITE_WEB_URLS: ${{ vars.SUITE_WEB_URLS }}
           TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
@@ -189,6 +199,9 @@ jobs:
         run: |
           test -n "$MOCK_PUBLIC_URL"
           node tools/dev/old-layout-links.mjs
+          if [ '${{ needs.affected.outputs.verify_only }}' = 1 ]; then
+            node tools/vercel/verify-preview-revisions.mjs
+          fi
           cd program/tools/audit-kit
           npm ci
           npx playwright install --with-deps chromium
@@ -204,7 +217,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
       - name: Require all affected deployments
-        if: always()
+        if: always() && needs.affected.outputs.verify_only != '1'
         env:
           DEPLOY_RESULT: ${{ needs.deploy.result }}
           EXPECTED_COUNT: ${{ needs.affected.outputs.count }}

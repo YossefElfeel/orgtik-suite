@@ -18,6 +18,7 @@ import { chromium } from "playwright";
 import { PNG } from "pngjs";
 import { VISUAL_ENVIRONMENT, createVisualPage, settleVisualStory, visualPageMetadata } from "./visual-environment.mjs";
 import { compareVisualBaseline } from "./visual-baseline.mjs";
+import { createReferenceResolver, captureStorySemantics, reviewedSemanticErrors } from "./platform-reference.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "..", "storybook-static");
@@ -25,7 +26,8 @@ const baselines = path.join(here, "baselines");
 const results = path.join(here, "results");
 const args = process.argv.slice(2);
 const update = args.includes("--update");
-if (update && process.env.CI) throw new Error("Review and update references locally; CI must not accept its own snapshots.");
+const ci = ["true", "1"].includes((process.env.CI ?? "").toLowerCase());
+if (update && ci) throw new Error("Review and update references locally; CI must not accept its own snapshots.");
 const only = args.includes("--only") ? args[args.indexOf("--only") + 1] : null;
 const axeSource = fs.readFileSync(createRequire(import.meta.url).resolve("axe-core/axe.min.js"), "utf8");
 
@@ -66,7 +68,8 @@ fs.mkdirSync(results, { recursive: true });
 
 const browser = await chromium.launch();
 const rows = [];
-const rendering = { expected: VISUAL_ENVIRONMENT, platform: process.platform, release: os.release(), browser: browser.version(), renders: [] };
+const rendering = { expected: VISUAL_ENVIRONMENT, platform: process.platform, release: os.release(), browser: browser.version(), referenceProfile: process.env.ORGTIK_VISUAL_REFERENCE_PROFILE ?? "default", sourceCommit: process.env.GITHUB_SHA ?? null, runnerImage: process.env.ImageOS ?? null, runnerImageVersion: process.env.ImageVersion ?? null, renders: [] };
+const resolveReference = createReferenceResolver({ defaultDirectory: baselines, ci, requestedProfile: process.env.ORGTIK_VISUAL_REFERENCE_PROFILE ?? "", rendering: { platform: rendering.platform, release: rendering.release, browser: rendering.browser, ...VISUAL_ENVIRONMENT } });
 for (const story of stories) {
   for (const combo of COMBOS) {
     const { context, page } = await createVisualPage(browser);
@@ -75,12 +78,15 @@ for (const story of stories) {
     page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
     await page.goto(`http://localhost:${port}/iframe.html?id=${story}&viewMode=story&globals=${combo.globals}`, { waitUntil: "networkidle" });
     await settleVisualStory(page, combo.globals);
-    rendering.renders.push({ story, combo: combo.id, ...await visualPageMetadata(context, page) });
+    const metadata = await visualPageMetadata(context, page);
 
     const name = `${story}--${combo.id}.png`;
     const shot = PNG.sync.read(await page.screenshot({ fullPage: true }));
-    const basePath = path.join(baselines, name);
-    const { visual, changed, diff } = compareVisualBaseline(shot, basePath, { update });
+    const reference = resolveReference(name);
+    const semantics = reference.review ? await captureStorySemantics(page) : null;
+    const reviewErrors = reference.review ? reviewedSemanticErrors(reference.review, semantics, metadata.platformFonts) : [];
+    rendering.renders.push({ story, combo: combo.id, referenceProfile: reference.profile, ...metadata, ...(semantics ? { semantics } : {}) });
+    const { visual, changed, diff } = compareVisualBaseline(shot, update ? path.join(baselines, name) : reference.path, { update });
     if (visual !== "same" && !update) {
       if (changed) fs.writeFileSync(path.join(results, name.replace(".png", ".diff.png")), PNG.sync.write(diff));
       fs.writeFileSync(path.join(results, name), PNG.sync.write(shot));
@@ -97,7 +103,7 @@ for (const story of stories) {
       return r.violations.map((v) => ({ id: v.id, impact: v.impact, nodes: v.nodes.length }));
     });
     const serious = axe.filter((v) => v.impact === "critical" || v.impact === "serious");
-    rows.push({ story, combo: combo.id, visual, axe: serious, minor: axe.length - serious.length, errors, overflow });
+    rows.push({ story, combo: combo.id, visual, axe: serious, minor: axe.length - serious.length, errors, overflow, reviewErrors });
     await context.close();
   }
   process.stdout.write(".");
@@ -109,6 +115,7 @@ const failedVisual = rows.filter((r) => r.visual !== "same" && !update);
 const failedAxe = rows.filter((r) => r.axe.length);
 const withErrors = rows.filter((r) => r.errors.length);
 const overflowing = rows.filter((r) => r.overflow > 0);
+const failedReview = rows.filter(r => r.reviewErrors.length);
 const axeById = {};
 for (const r of failedAxe) for (const v of r.axe) (axeById[v.id] ??= new Set()).add(`${r.story} (${r.combo})`);
 
@@ -121,6 +128,7 @@ const md = [
   `- axe critical/serious: ${failedAxe.length} renders with violations; ${rows.reduce((n, r) => n + r.minor, 0)} moderate/minor findings in total`,
   `- Console errors: ${withErrors.length} renders`,
   `- Page wider than the viewport: ${overflowing.length} renders`,
+  `- Reviewed platform text/layout/fonts: ${failedReview.length} mismatches`,
   "",
   failedVisual.length ? "## Changed\n\n| Story | Combination | Pixels |\n|---|---|---|\n" + failedVisual.map((r) => `| ${r.story} | ${r.combo} | ${r.visual} |`).join("\n") + "\n" : "",
   Object.keys(axeById).length
@@ -128,8 +136,9 @@ const md = [
     : "",
   overflowing.length ? "## Page overflow\n\n" + overflowing.map((r) => `- ${r.story} (${r.combo}): ${r.overflow}px`).join("\n") + "\n" : "",
   withErrors.length ? "## Console errors\n\n" + withErrors.map((r) => `- ${r.story} (${r.combo}): ${r.errors[0].slice(0, 200)}`).join("\n") + "\n" : "",
+  failedReview.length ? "## Reviewed platform invariants\n\n" + failedReview.map(r => `- ${r.story} (${r.combo}): ${r.reviewErrors.join("; ")}`).join("\n") + "\n" : "",
 ].join("\n");
 fs.writeFileSync(path.join(results, "report.md"), md);
 fs.writeFileSync(path.join(results, "environment.json"), JSON.stringify(rendering, null, 2) + "\n");
 console.log("\n" + md);
-process.exit(failedVisual.length || failedAxe.length || withErrors.length || overflowing.length ? 1 : 0);
+process.exit(failedVisual.length || failedAxe.length || withErrors.length || overflowing.length || failedReview.length ? 1 : 0);

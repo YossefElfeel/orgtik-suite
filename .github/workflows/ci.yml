@@ -42,7 +42,7 @@ jobs:
         run: node tools/vercel/configure.mjs --check
 
       - name: Deployment artifact and URL regressions
-        run: node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs
+        run: node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/verify-preview-revisions.test.mjs
 
       - name: Typecheck, message catalogs and tests (affected packages)
         run: pnpm turbo run typecheck i18n:check test --affected --continue
@@ -74,6 +74,8 @@ jobs:
     # Linux still runs typechecks/tests and builds every Vercel deployment.
     runs-on: windows-2025
     timeout-minutes: 30
+    env:
+      ORGTIK_VISUAL_REFERENCE_PROFILE: windows-2025-chromium-153
     defaults:
       run:
         shell: bash
@@ -90,7 +92,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter docs exec playwright install chromium
       - name: Visual environment regressions
-        run: pnpm --filter docs exec node --test tests/visual-environment.test.mjs
+        run: pnpm --filter docs exec node --test tests/visual-environment.test.mjs tests/platform-reference.test.mjs
       - run: pnpm --filter docs build
       - run: pnpm --filter docs check
       - name: Upload visual evidence
