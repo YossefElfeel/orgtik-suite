@@ -67,6 +67,8 @@
       "toHome": "Back to home",
       "failedTitle": "Your workspace couldn't be loaded",
       "failedBody": "Check your connection and try again."
-    }
+    },
+    "switchFailed": "Could not open this workspace. Try again.",
+    "signOutFailed": "Sign out could not be saved. Try again."
   }
 }

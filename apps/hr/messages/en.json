@@ -12,7 +12,8 @@
       "next": "Next",
       "submit": "Create employee",
       "save": "Save changes",
-      "close": "Close"
+      "close": "Close",
+      "recoverInvitation": "Recover invitation"
     },
     "avatar": {
       "upload": "Upload Photo",
@@ -24,14 +25,12 @@
       "fallbackName": "Employee"
     },
     "errors": {
-      "passwordRequired": "Password is required and must be at least 6 characters",
       "invalidPhoneNumber": "Invalid phone number format",
       "invalidPostCode": "Postal code must be 5 digits",
       "postCodeFor": "A post code in {country} looks like {example}.",
       "postCode": "Enter a valid post code.",
       "firstNameRequired": "First name is required",
       "lastNameRequired": "Last name is required",
-      "passwordMin": "Password must be at least 6 characters",
       "birthDateRequired": "Birth date is required",
       "phoneRequired": "Phone number is required",
       "invalidEmail": "Invalid email address",
@@ -69,7 +68,10 @@
       "casualLeaveRequired": "Casual leave is required",
       "sickLeaveRequired": "Sick leave is required",
       "unpaidLeaveRequired": "Unpaid leave policy is required",
-      "noEmployeeId": "This employee hasn't been created yet. Go back to the first step and save it."
+      "noEmployeeId": "This employee hasn't been created yet. Go back to the first step and save it.",
+      "invitationUnconfirmed": "The invitation status is unconfirmed. Retry to recover the same request.",
+      "invitationWorkspaceChanged": "Return to the original workspace to recover this invitation.",
+      "invitationCapacity": "No HR seat is available. Add capacity or release a seat, then retry."
     },
     "steps": {
       "personal": {
@@ -93,14 +95,16 @@
             "label": "Own accommodation",
             "description": "No company support"
           }
-        }
+        },
+        "invitationHint": "A workspace invitation will be delivered to the mock mailbox. The employee chooses their password when they accept."
       },
       "employee": {
         "nav": "Employee Information",
         "heading": "Employee Information",
         "description": "This information will help us confirm your identity and complete the necessary steps for adding your Employess details.",
         "skillsHeading": "Skills",
-        "skillsDescription": "This information will help us confirm your Skills ."
+        "skillsDescription": "This information will help us confirm your Skills .",
+        "invitationPending": "Workspace access starts after the employee accepts the invitation."
       },
       "bank": {
         "nav": "Bank information",
@@ -141,7 +145,6 @@
     "fields": {
       "birthDate": "Birthday",
       "nationality": "Nationality",
-      "password": "Password",
       "addressLine1": "Street",
       "addressCity": "City",
       "addressState": "Country",
@@ -233,7 +236,6 @@
       "remotePolicy": "Optional notes on time zone or hybrid schedule",
       "firstName": "First name",
       "lastName": "Last name",
-      "password": "StrongPassword123!",
       "personalTaxId": "xxxx-xxxx-xxxx",
       "gender": "Select gender",
       "maritalStatus": "Select marital status",
@@ -332,7 +334,8 @@
         "active": "Active",
         "inactive": "Inactive",
         "probation": "Probation",
-        "terminated": "Terminated"
+        "terminated": "Terminated",
+        "invited": "Invited"
       },
       "skills": {
         "ui": "UI design",
@@ -416,13 +419,13 @@
     },
     "success": {
       "title": "Success",
-      "messageCreate": "Employee has been added successfully.",
+      "messageCreate": "Employee details saved. Their workspace invitation is in the mock mailbox.",
       "messageEdit": "Employee has been updated successfully.",
       "primary": "Done"
     },
     "loading": "Loading...",
     "toasts": {
-      "creatingEmployee": "Creating employee...",
+      "creatingEmployee": "Creating employee and workspace invitation...",
       "updatingEmployeeInfo": "Updating employee info...",
       "updatingPaymentInfo": "Updating payment info...",
       "updatingSalaryInfo": "Updating salary info...",
@@ -2471,7 +2474,7 @@
     "added": "Added",
     "deleted": "Deleted",
     "uploaded": "Uploaded",
-    "employeeAdded": "Employee added",
+    "employeeAdded": "Employee created; workspace invitation delivered to the mock mailbox.",
     "employeeRemoved": "Employee removed",
     "requestSent": "Request sent",
     "decisionSaved": "Decision saved",

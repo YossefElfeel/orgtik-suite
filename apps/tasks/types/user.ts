@@ -1,5 +1,6 @@
 import { IManager, IProfile, IUser, IUserRole } from "@somion/sos-bar";
 import { IPriority, IStatus } from "./tasks";
+import type { WorkspaceContext } from '@orgtik/ui/auth';
 
 
 export interface IPeopleItem {
@@ -58,6 +59,7 @@ export interface IUserScope {
 export interface IAuthState {
   user: (Omit<IUser, "userRoles" | "permissions" | "scopes"> & {
     scopes: IUserScope[];
+    workspaceContext?: WorkspaceContext;
   }) | null;
   token: string | null;
 }

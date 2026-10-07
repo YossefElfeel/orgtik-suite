@@ -729,7 +729,7 @@ module.exports = function catalog(S) {
     });
     app.get("/api/departments/catalog/managers", (req, res) => {
       const taken = new Set(db.departments.map((d) => d.managerId).filter(Boolean));
-      const people = identity.users.filter((u) => ["admin", "manager", "employee"].includes(u.userType));
+      const people = identity.users.filter((u) => ["admin", "manager"].includes(K.appRole(u)));
       const list = util.search(people.map((u) => ({ id: u.id, displayName: identity.fullName(u), avatar: u.avatar, isActive: u.isActive, isAvailable: !taken.has(u.id) })), req.query.search, ["displayName"]);
       const { items, meta } = page(list, req.query, 50);
       ok(res, { items, meta }, "Managers retrieved");

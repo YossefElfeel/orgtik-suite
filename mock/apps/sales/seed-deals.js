@@ -3,7 +3,7 @@
 const H = require("./lib");
 const { PACKAGES } = require("./catalog-data");
 
-module.exports = function seedDeals(S) {
+module.exports = function seedDeals(S, { referencesOnly = false } = {}) {
   const { db, identity, util } = S;
   const C = S.catalog;
   const K = S.core;
@@ -35,6 +35,7 @@ module.exports = function seedDeals(S) {
     });
     return { id: uid("package", pk.key), key: pk.key, name: pk.name, description: pk.description, planIds, zones, status: pk.archivedDaysAgo ? "archived" : "active", archivedAt: pk.archivedDaysAgo ? ago(pk.archivedDaysAgo) : null, createdAt: ago(pk.createdDaysAgo), updatedAt: ago(Math.floor(pk.createdDaysAgo / 4)) };
   });
+  if (referencesOnly) return;
 
   // Historical sales baseline per zone (older deals that are not individually seeded) for the trend charts.
   const rnd = util.seeded(2026);

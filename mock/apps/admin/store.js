@@ -294,16 +294,23 @@ function makeStore({ identity }) {
 
   const S = {
     db, id, iso, at, now, usdRate, pricing,
+    allocateInvoiceNumber() {
+      const highest = Math.max(1040, ...db.invoices.map(invoice => Number(String(invoice.number || '').match(/^INV-\d{4}-(\d+)$/)?.[1]) || 0));
+      const next = Math.max(highest + 1, db.billingLifecycle?.nextInvoiceNumber || 0);
+      if (db.billingLifecycle) db.billingLifecycle.nextInvoiceNumber = next + 1;
+      return next;
+    },
     tables: () => db,
     workspace: (wid) => db.workspaces.find((w) => w.id === wid),
     workspaceOfUser: (key) => db.workspaces.find((w) => w.members.some((m) => m.userKey === key && m.status === "active")),
     seats: (ws) => ws.members.filter((m) => m.role !== "guest" && m.status === "active").length,
     assignedSeats: (ws, tool, planId) => {
+      if (db.workspaceAuthorityVersion === 1) return require('../../lib/workspace-context').seatCounts(S, ws, tool).assigned;
       const members = ws.members.filter(m => m.status === "active" && (!m.tools || m.tools.includes(tool)));
       const guestLimit = db.plans.find(p => p.id === planId)?.guestLimit ?? 0;
       return members.filter(m => m.role !== "guest").length + Math.max(0, members.filter(m => m.role === "guest").length - guestLimit);
     },
-    reservedSeats: (ws, tool) => ws.members.filter(m => m.status === "invited" && m.role !== "guest" && (!m.tools || m.tools.includes(tool))).length,
+    reservedSeats: (ws, tool) => db.workspaceAuthorityVersion === 1 ? require('../../lib/workspace-context').seatCounts(S, ws, tool).reserved : ws.members.filter(m => m.status === "invited" && m.role !== "guest" && (!m.tools || m.tools.includes(tool))).length,
     purchasedSeats: (ws, tool, planId) => {
       const plan = db.plans.find(p => p.id === planId) ?? db.plans.find(p => p.tool === tool && p.perUser);
       if (!plan?.perUser) return plan?.contractedQuantity ?? 1;
@@ -332,6 +339,9 @@ function makeStore({ identity }) {
       const slug = `${String(name).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "workspace"}-${seq + 1}`;
       const joinedAt = createdAt ?? iso(now());
       const ws = workspace({ id: wsId ?? id("ws"), name, slug, country, currency, createdAt: joinedAt, members: [{ userKey: ownerKey, role: "owner", status: "active", tools: null, joinedAt }], billing: { legalName: name, email, address: "", taxId: "", country } });
+      ws.kind = "customer"; ws.timeZone = "Africa/Cairo"; ws.authorityRevision = 1; ws.invitations = [];
+      ws.initialization = { kind: "empty", seedAt: joinedAt };
+      Object.assign(ws.members[0], { id: `member:${ws.id}:${ownerKey}`, revision: 1, toolGrants: {} });
       ws.lines = [line(ws, "general_free", "free", { startedAt: joinedAt })];
       ws.currencyLocked = false;
       if (registration) ws.billingInitialized = false;

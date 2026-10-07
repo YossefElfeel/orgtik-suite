@@ -1,14 +1,10 @@
-import { getCookie } from "cookies-next";
-
-import { USER_COOKIE } from "@/constants";
-import { UserRole } from "@/types/user";
-import { getDashboardRoles, parseUserCookie } from "@/utils/user-scopes";
+import { useUserRoles } from "./useUserRoles";
 
 type RoleType = "super_admin" | "hr" | "employee" | "manager";
 
 export const useGetRole = () => {
-  const user = parseUserCookie(getCookie(USER_COOKIE));
-  const roles = getDashboardRoles(user) as RoleType[];
+  const access = useUserRoles();
+  const roles = access.roles as RoleType[];
 
   return {
     roles,
@@ -17,5 +13,7 @@ export const useGetRole = () => {
     isHR: roles.includes("hr"),
     isEmployee: roles.includes("employee"),
     isManager: roles.includes("manager"),
+    canWrite: access.canWrite,
+    readOnly: access.readOnly,
   };
 };

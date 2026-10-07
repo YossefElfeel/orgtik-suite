@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -14,7 +14,8 @@ import SelectFormEle, {
 import RadioGroupFormEle from "@/components/ui/form/radio-group-form-element";
 import { DateTimeFormElement } from "@/components/ui/form/date-time-form-element";
 
-import type { ICreateEmployeeDTO, IOnboardingStepDTO } from "@/types/employee";
+import type { ICreateEmployeeDTO, ICreateEmployeeRequest, IOnboardingStepDTO } from "@/types/employee";
+import { readClientSession } from "@orgtik/ui/auth";
 import { ALL_COUNTRIES } from "@/constants/countries";
 import { makePersonalSchema, type PersonalFormValues } from "../schemas";
 import { isValidPostCode, postCodeFormat } from "@/lib/post-codes";
@@ -34,11 +35,14 @@ const RequiredLabel = ({ label }: { label: string }) => (
   </span>
 );
 
-type FormType = PersonalFormValues;
-
 export function PersonalInfoStep() {
   const { data, onNext, onBack, isEdit, isLastStep, setCompletedSteps } = useEmployeeWizard();
   const [createEmployee] = useCreateEmployeeMutation();
+  const hireAttempt = useRef<ICreateEmployeeRequest | null>(null);
+  const attemptWorkspace = useRef<string | undefined>(undefined);
+  const [recoveringInvitation, setRecoveringInvitation] = useState(false);
+  const [capacityError, setCapacityError] = useState(false);
+  const [workspaceChanged, setWorkspaceChanged] = useState(false);
   const [updateOnboarding] = useUpdateOnboardingStepMutation();
   const t = useTranslations("createUpdateEmployee");
   const reqWithToaster = useReqWithToaster();
@@ -67,19 +71,12 @@ export function PersonalInfoStep() {
           path: ["addressPostal"],
         });
       }
-      if (!isEdit && (!data.password || data.password.length < 6)) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: t("errors.passwordRequired"),
-          path: ["password"],
-        });
-      }
     });
-  }, [isEdit, t, regionName]);
+  }, [t, regionName]);
 
-  const form = useForm<FormType>({
+  const form = useForm<PersonalFormValues>({
     resolver: zodResolver(schema),
-    defaultValues: data as any,
+    defaultValues: data,
     mode: "onBlur",
   });
 
@@ -91,7 +88,7 @@ export function PersonalInfoStep() {
   useEffect(() => {
     if (stepApiResponse?.success && stepApiResponse.data?.data) {
       const transformed = transformApiDataToFormValues("personal", stepApiResponse.data.data);
-      form.reset(transformed as any);
+      form.reset(transformed);
     }
 
   }, [stepApiResponse, form]);
@@ -102,11 +99,10 @@ export function PersonalInfoStep() {
     { value: "other", label: t("options.gender.other") },
   ];
 
-  const onSubmit = async (values: FormType) => {
+  const onSubmit = async (values: PersonalFormValues) => {
     const payload: ICreateEmployeeDTO = {
       firstName: values.firstName,
       lastName: values.lastName,
-      password: values.password || undefined,
       birthday: values.birthDate ? new Date(values.birthDate).toISOString().split("T")[0] : "",
       gender: values.gender,
       nationality: values.nationality,
@@ -140,14 +136,30 @@ export function PersonalInfoStep() {
       });
     } else {
       await reqWithToaster(t("toasts.creatingEmployee"), async () => {
-        const res = await createEmployee(payload).unwrap();
-        const newEmployeeId = String(res.data.id);
-
-        if (res.data?.completedSteps) {
-          setCompletedSteps(res.data.completedSteps);
+        const workspaceId = readClientSession()?.workspaceContext?.workspace.id;
+        if (hireAttempt.current && attemptWorkspace.current !== workspaceId) {
+          setWorkspaceChanged(true);
+          return;
         }
-
-        onNext(values, { "employee_id": newEmployeeId });
+        hireAttempt.current ??= { body: payload, operationId: crypto.randomUUID() };
+        attemptWorkspace.current = workspaceId;
+        setCapacityError(false); setWorkspaceChanged(false);
+        try {
+          const res = await createEmployee(hireAttempt.current).unwrap();
+          const newEmployeeId = String(res.data.id);
+          if (res.data?.completedSteps) setCompletedSteps(res.data.completedSteps);
+          hireAttempt.current = null; setRecoveringInvitation(false);
+          onNext(values, { "employee_id": newEmployeeId });
+        } catch (error) {
+          const status = error && typeof error === "object" && "status" in error ? error.status : undefined;
+          const response = error && typeof error === "object" && "data" in error ? error.data : undefined;
+          const code = response && typeof response === "object" && "code" in response ? response.code : undefined;
+          const refused = typeof status === "number" && status >= 400 && status < 500 && status !== 408 && status !== 429;
+          if (refused && !recoveringInvitation) hireAttempt.current = null;
+          setRecoveringInvitation(!refused || recoveringInvitation);
+          setCapacityError(code === "seat_capacity_exhausted");
+          throw error;
+        }
       });
     }
   };
@@ -155,6 +167,12 @@ export function PersonalInfoStep() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit, onFormErrorDisplay)} className="space-y-6">
+        {(recoveringInvitation || workspaceChanged || capacityError) && (
+          <p role="status" className="text-sm leading-5 text-foreground">
+            {t(workspaceChanged ? "errors.invitationWorkspaceChanged" : capacityError ? "errors.invitationCapacity" : "errors.invitationUnconfirmed")}
+          </p>
+        )}
+        <fieldset disabled={form.formState.isSubmitting || recoveringInvitation} className="min-w-0 space-y-6">
         <header className="space-y-1">
           <h2 className="text-lg font-medium leading-6 text-foreground">
             {t("steps.personal.heading")}
@@ -176,13 +194,6 @@ export function PersonalInfoStep() {
             name="lastName"
             label={<RequiredLabel label={t("fields.lastName")} />}
             placeholder={t("placeholders.lastName")}
-          />
-          <TextFormEle
-            form={form}
-            name="password"
-            type="password"
-            label={t("fields.password")}
-            placeholder={t("placeholders.password")}
           />
           <DateTimeFormElement
             form={form}
@@ -218,6 +229,11 @@ export function PersonalInfoStep() {
             type="email"
             placeholder={t("placeholders.email")}
           />
+          {!employeeId && (
+            <p className="text-sm leading-5 text-muted-foreground">
+              {t("steps.personal.invitationHint")}
+            </p>
+          )}
           <TextFormEle
             form={form}
             name="personalTaxId"
@@ -336,6 +352,7 @@ export function PersonalInfoStep() {
           />
         </div>
 
+        </fieldset>
         {/* Navigation Buttons */}
         <div className="flex items-center justify-end gap-3 border-t border-border pt-6">
           <Button
@@ -344,11 +361,12 @@ export function PersonalInfoStep() {
             size="lg"
             variant="outline"
             onClick={onBack}
+            disabled={form.formState.isSubmitting || recoveringInvitation}
           >
             {t("nav.back")}
           </Button>
-          <Button type="submit" className="min-w-32" size="lg">
-            {isLastStep
+          <Button type="submit" className="min-w-32" size="lg" disabled={form.formState.isSubmitting}>
+            {recoveringInvitation ? t("nav.recoverInvitation") : isLastStep
               ? isEdit
                 ? t("nav.save")
                 : t("nav.submit")

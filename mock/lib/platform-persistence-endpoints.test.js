@@ -29,7 +29,7 @@ async function child(step) {
   fixtureStore.commit = async (entry, expected) => {
     commits++;
     if (rejectCommit) throw unavailable();
-    if (step === "race" && entry.method === "PATCH" && entry.url === "/v1/app/workspace" && !raced) {
+    if ((step === "race" && entry.method === "PATCH" && entry.url === "/v1/app/workspace" || step === 'invite-race' && entry.method === 'POST' && entry.url === '/v1/app/invitations') && !raced) {
       raced = true;
       fs.writeFileSync(path.join(process.env.PLATFORM_ENDPOINT_RACE_DIR, `ready-${process.env.PLATFORM_ENDPOINT_RACE_NAME}.json`), JSON.stringify({ epoch: expected.expectedEpoch, revision: expected.expectedRevision }));
       await waitFor(() => fs.existsSync(path.join(process.env.PLATFORM_ENDPOINT_RACE_DIR, "release")), "both endpoint mutations reaching CAS");
@@ -46,6 +46,10 @@ async function child(step) {
     return { status: response.status, body: await response.json() };
   };
   const signIn = (email = "mona.adel@orgtik.test", password = "Local@2026") => call("POST", "/sos/api/auth/login", { email, password });
+  const staffToken = async token => {
+    const selected = await call('POST', '/sos/api/auth/workspace', { mode: 'staff', target: 'admin' }, token);
+    assert.equal(selected.status, 200); return selected.body.data.tokens.accessToken;
+  };
   const platform = () => require("../apps/admin").exportState();
   const register = async () => {
     const response = await call("POST", "/sos/api/auth/register", { email: EMAIL, password: PASSWORD, name: "Financial Fixture Owner", company: "Original financial fixture" });
@@ -70,7 +74,7 @@ async function child(step) {
       const state = platform(), invoice = state.db.invoices.find(row => row.reference === paid.body.data.reference);
       assert.ok(invoice && invoice.state === "paid");
       const snapshot = await fixtureStore.snapshot();
-      const records = snapshot.entries.map(JSON.parse), saved = records.filter(entry => entry.platformState?.db.invoices.some(row => row.id === invoice.id));
+      const records = snapshot.entries.map(JSON.parse).map(entry => entry.checkpoint ? { ...entry, ...require('./domain-checkpoint').decodeDomainCheckpoint(entry.checkpoint) } : entry), saved = records.filter(entry => entry.platformState?.db.invoices.some(row => row.id === invoice.id));
       assert.ok(saved.length > 0, "The endpoint persisted a financial domain snapshot");
       assert.ok(saved.every(entry => entry.platformState.platformVersion === 2 && !entry.headers.authorization && !entry.headers.cookie && !entry.headers["x-mock-replay"]));
       save({ accountId: account.user.id, tokens: account.tokens, workspaceId, order: paid.body.data, request, invoice, sequence: state.sequence });
@@ -94,12 +98,12 @@ async function child(step) {
       assert.ok(state.sequence >= original.sequence);
     } else if (step === "deactivate") {
       const original = load(), admin = await signIn(); assert.equal(admin.status, 200);
-      assert.equal((await call("PATCH", `/sos/api/users/${original.accountId}`, { isActive: false }, admin.body.data.tokens.accessToken)).status, 200);
+      assert.equal((await call("PATCH", `/admin/v1/admin/people/${original.accountId}/status`, { isActive: false }, await staffToken(admin.body.data.tokens.accessToken))).status, 200);
     } else if (step === "inactive-cold") {
       const original = load(); assert.equal((await signIn(EMAIL, PASSWORD)).status, 403);
       assert.equal((await call("POST", "/sos/api/auth/refresh", { refreshToken: original.tokens.refreshToken })).status, 401);
       const admin = await signIn(); assert.equal(admin.status, 200);
-      assert.equal((await call("GET", `/admin/v1/admin/invoices/${original.invoice.id}`, null, admin.body.data.tokens.accessToken)).status, 200);
+      assert.equal((await call("GET", `/admin/v1/admin/invoices/${original.invoice.id}`, null, await staffToken(admin.body.data.tokens.accessToken))).status, 200);
       assert.deepEqual(platform().db.invoices.find(row => row.id === original.invoice.id), original.invoice, "Deactivated actor does not invalidate committed financial history");
       assert.equal((await call("GET", "/sos/__mock/status")).body.data.journal.skipped, 0);
     } else if (step === "commit-failure") {
@@ -128,16 +132,36 @@ async function child(step) {
       const signed = await signIn(); assert.equal(signed.status, 200);
       const me = await call("GET", "/sos/v1/app/me", null, signed.body.data.tokens.accessToken); assert.equal(me.status, 200);
       save({ name: me.body.data.workspace.name, revision: (await fixtureStore.snapshot()).revision });
+    } else if (step === 'prime-invite') {
+      const account = await register(), token = account.tokens.accessToken;
+      const method = await call('POST', '/sos/v1/app/payment-methods', { kind: 'card', last4: '4242', brand: 'visa', expires: '12/30', makeDefault: true }, token);
+      assert.equal(method.status, 201, JSON.stringify(method.body));
+      const purchased = await call('POST', '/sos/v1/app/checkout/confirm', { items: [{ planId: 'tasks_pro', cycle: 'monthly', quantity: 2 }], intent: 'seat_purchase', paymentMethodId: method.body.data.id }, token, { 'idempotency-key': 'last-seat-fixture' });
+      assert.equal(purchased.status, 201, JSON.stringify(purchased.body));
+      const seats = await call('GET', '/sos/v1/app/seats', null, token);
+      assert.equal(seats.body.data.tasks.available, 1);
+    } else if (step === 'invite-race') {
+      const signed = await signIn(EMAIL, PASSWORD); assert.equal(signed.status, 200);
+      const response = await call('POST', '/sos/v1/app/invitations', { email: `${process.env.PLATFORM_ENDPOINT_RACE_NAME}@last-seat.test`, tools: ['tasks'] }, signed.body.data.tokens.accessToken);
+      fs.writeFileSync(path.join(process.env.PLATFORM_ENDPOINT_RACE_DIR, `result-${process.env.PLATFORM_ENDPOINT_RACE_NAME}.json`), JSON.stringify(response));
+      assert.ok([200, 409].includes(response.status));
+    } else if (step === 'invite-read') {
+      const signed = await signIn(EMAIL, PASSWORD); assert.equal(signed.status, 200);
+      const token = signed.body.data.tokens.accessToken, seats = await call('GET', '/sos/v1/app/seats', null, token), invitations = await call('GET', '/sos/v1/app/invitations', null, token);
+      assert.equal(seats.body.data.tasks.reserved, 1); assert.equal(seats.body.data.tasks.available, 0);
+      assert.equal(invitations.body.data.length, 1);
+      const ws = platform().db.workspaces.find(row => row.id === signed.body.data.workspaceContext.workspace.id);
+      assert.equal(platform().db.mailbox.filter(row => row.workspaceId === ws.id && row.template === 'workspace_invitation').length, 1);
     } else if (step === "legacy-read" || step === "legacy-modern-write") {
       const original = load(), signed = await signIn(); assert.equal(signed.status, 200);
       const token = signed.body.data.tokens.accessToken;
-      assert.equal((await call("GET", `/admin/v1/admin/invoices/${original.invoice.id}`, null, token)).status, 200);
+      assert.equal((await call("GET", `/admin/v1/admin/invoices/${original.invoice.id}`, null, await staffToken(token))).status, 200);
       assert.deepEqual(platform().db.invoices.find(row => row.id === original.invoice.id), original.invoice);
       assert.equal(platform().db.grid["chat_pro:monthly:gcc"], 50);
       assert.equal(platform().sequence, original.sequence);
       if (step === "legacy-modern-write") {
         assert.equal((await call("PATCH", "/sos/v1/app/workspace", { name: "Modern checkpoint after legacy" }, token)).status, 200);
-        assert.ok((await fixtureStore.read(0)).map(JSON.parse).some(entry => entry.platformState?.platformVersion === 2));
+        assert.ok((await fixtureStore.read(0)).map(JSON.parse).some(entry => entry.kind === 'workspace-v1' && require('./domain-checkpoint').decodeDomainCheckpoint(entry.checkpoint).platformState.platformVersion === 2));
         assert.deepEqual(platform().db.invoices.find(row => row.id === original.invoice.id), original.invoice);
       }
     } else if (step === "legacy-fence") {
@@ -169,7 +193,7 @@ async function child(step) {
     } else if (step === "suspended-and-private") {
       const account = await register(), token = account.tokens.accessToken;
       const me = await call("GET", "/sos/v1/app/me", null, token), workspaceId = me.body.data.workspace.id;
-      const q = await quote(token, workspaceId), admin = await signIn(), staff = admin.body.data.tokens.accessToken;
+      const q = await quote(token, workspaceId), admin = await signIn(), staff = await staffToken(admin.body.data.tokens.accessToken);
       assert.equal((await call("POST", `/admin/v1/admin/workspaces/${workspaceId}/actions`, { action: "suspend", reason: "Isolated suspension regression" }, staff)).status, 200);
       const before = platform().db.publicWebsiteOrders.length;
       const refused = await call("POST", "/admin/v1/public/website-orders", paymentBody(q, "suspended-attempt"), token, { "x-workspace": workspaceId });
@@ -187,7 +211,7 @@ async function child(step) {
 
 function fixture() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "orgtik-platform-endpoints-"));
-  const env = { ...process.env, MOCK_AUTH_STORE: "file", MOCK_AUTH_FILE: path.join(dir, "accounts.json"), MOCK_JOURNAL: "file", MOCK_PUBLIC_URL: "https://mock.test", MOCK_SANDBOX: "isolated-platform-endpoint-fixture", MOCK_NOW: new Date(AT).toISOString(), MOCK_CLOCK: "frozen", MOCK_VISITOR_COUNTRY: "CH", MOCK_HANDOFF_SECRET: "isolated-endpoint-fixture-secret", MOCK_WEBSITE_ORDER_SECRET: "", VERCEL: "", KV_REST_API_URL: "", KV_REST_API_TOKEN: "", UPSTASH_REDIS_REST_URL: "", UPSTASH_REDIS_REST_TOKEN: "", PLATFORM_ENDPOINT_JOURNAL: path.join(dir, "journal.json"), PLATFORM_ENDPOINT_FACTS: path.join(dir, "facts.json"), PLATFORM_ENDPOINT_RACE_DIR: dir };
+  const env = { ...process.env, MOCK_AUTH_STORE: "file", MOCK_AUTH_FILE: path.join(dir, "accounts.json"), MOCK_JOURNAL: "file", MOCK_PUBLIC_URL: "", MOCK_SANDBOX: "isolated-platform-endpoint-fixture", MOCK_NOW: new Date(AT).toISOString(), MOCK_CLOCK: "frozen", MOCK_VISITOR_COUNTRY: "CH", MOCK_HANDOFF_SECRET: "isolated-endpoint-fixture-secret", MOCK_WEBSITE_ORDER_SECRET: "", VERCEL: "", KV_REST_API_URL: "", KV_REST_API_TOKEN: "", UPSTASH_REDIS_REST_URL: "", UPSTASH_REDIS_REST_TOKEN: "", PLATFORM_ENDPOINT_JOURNAL: path.join(dir, "journal.json"), PLATFORM_ENDPOINT_FACTS: path.join(dir, "facts.json"), PLATFORM_ENDPOINT_RACE_DIR: dir };
   const start = (step, extra = {}) => {
     const process = spawn(globalThis.process.execPath, [__filename, "--only=sos,admin", "--child", step], { env: { ...env, ...extra }, stdio: ["ignore", "pipe", "pipe"] });
     let output = "";
@@ -251,6 +275,20 @@ if (process.argv.includes("--child")) {
       await store.push(entry("sos", "/v1/app/team/invite", { email: "late@fixture.test", role: "member" }));
       await f.run("legacy-fence");
     } finally { f.cleanup(); }
+  });
+  test('separate mock instances competing for the last seat commit one invitation and one mailbox notice', { timeout: 90000 }, async () => {
+    const f = fixture(); let a, b;
+    try {
+      await f.run('prime-invite');
+      a = f.start('invite-race', { PLATFORM_ENDPOINT_RACE_NAME: 'A' }); b = f.start('invite-race', { PLATFORM_ENDPOINT_RACE_NAME: 'B' });
+      const finished = Promise.all([a.done, b.done]); finished.catch(() => {});
+      await Promise.race([waitFor(() => fs.existsSync(path.join(f.dir, 'ready-A.json')) && fs.existsSync(path.join(f.dir, 'ready-B.json')), 'both invitation instances at CAS'), finished.then(() => { throw new Error('Invitation instances exited before CAS'); })]);
+      const read = name => JSON.parse(fs.readFileSync(path.join(f.dir, name), 'utf8'));
+      assert.deepEqual(read('ready-A.json'), read('ready-B.json'));
+      fs.writeFileSync(path.join(f.dir, 'release'), 'go'); await finished;
+      assert.deepEqual([read('result-A.json').status, read('result-B.json').status].sort(), [200, 409]);
+      await f.run('invite-read');
+    } finally { a?.process.kill(); b?.process.kill(); f.cleanup(); }
   });
   test("guest KWD purchase establishes new billing once and remains immutable across cold starts", { timeout: 90000 }, async () => {
     const f = fixture(); try { await f.run("guest-purchase", { MOCK_VISITOR_COUNTRY: "KW" }); await f.run("guest-cold", { MOCK_VISITOR_COUNTRY: "KW" }); } finally { f.cleanup(); }

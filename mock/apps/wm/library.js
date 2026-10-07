@@ -12,6 +12,7 @@ const fs = require("fs");
 const path = require("path");
 
 const clone = (v) => JSON.parse(JSON.stringify(v));
+const codec = require("./state-codec");
 const RIGHTS = ["unknown", "owned", "licensed", "stock", "client"];
 // Where each routable type lives on the website (after S3; today most open through # routes).
 const ADDRESS = {
@@ -268,7 +269,14 @@ function makeLibrary({ seed, store, now, uploads }) {
     return { settings };
   }
 
-  return { media, redirects, settings, mediaOut, updateMedia, addUpload, removeMedia, health, CHECKS, saveRedirect, removeRedirect, sitemap, robots, setVisibility, RIGHTS, keepAddresses, previewAddresses };
+  const exportState = () => ({ data: clone({ media: [...media], redirects: [...redirects], settings }), sequences: { nextMedia, nextRedirect } });
+  const validateState = value => {
+    const incoming = codec.object(value), rows = codec.mapRows(incoming.data?.media), redirects_ = codec.mapRows(incoming.data?.redirects), settings_ = codec.object(incoming.data?.settings);
+    if (!Number.isSafeInteger(settings_.version) || !Array.isArray(settings_.history) || !Array.isArray(settings_.publicLocales)) throw codec.fail("Website Manager SEO settings are incomplete.");
+    return { data: { media: rows, redirects: redirects_, settings: settings_ }, sequences: { nextMedia: codec.sequence(incoming.sequences?.nextMedia, rows, "md"), nextRedirect: codec.sequence(incoming.sequences?.nextRedirect, redirects_, "rd") } };
+  };
+  const importState = value => { const incoming = validateState(value); codec.replaceMap(media, incoming.data.media); codec.replaceMap(redirects, incoming.data.redirects); codec.replaceObject(settings, incoming.data.settings); nextMedia = incoming.sequences.nextMedia; nextRedirect = incoming.sequences.nextRedirect; };
+  return { media, redirects, settings, mediaOut, updateMedia, addUpload, removeMedia, health, CHECKS, saveRedirect, removeRedirect, sitemap, robots, setVisibility, RIGHTS, keepAddresses, previewAddresses, exportState, importState, validateState };
 }
 
 module.exports = { makeLibrary };

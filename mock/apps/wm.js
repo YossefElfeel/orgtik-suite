@@ -11,10 +11,40 @@ const { makeLibrary } = require("./wm/library");
 const { makeOps } = require("./wm/ops");
 const path = require("path");
 const multer = require("multer");
+const codec = require("./wm/state-codec");
+const { RealDate } = require("../lib/clock");
+let internal;
+const SCHEMA = "orgtik.staff.wm";
+const tokenHash = token => crypto.createHash("sha256").update(String(token)).digest("hex");
+function previewGrant(holder, token) {
+  const grant = holder?.previews.get(tokenHash(token));
+  const user = grant && (typeof grant.by === "number" ? holder.ctx.identity.findUser(grant.by) : holder.ctx.identity.findByKey(grant.by));
+  if (!grant || Date.parse(grant.expiresAt) <= RealDate.now() || !user || user.isActive === false || user.deletedAt || typeof holder.ctx.previewIssuerAllowed === "function" && !holder.ctx.previewIssuerAllowed(user)) return null;
+  return { ...codec.copy(grant), issuerKey: user.key, issuerUserId: user.id, realm: holder.realm };
+}
+function exportHolder(holder) {
+  if (!holder) throw codec.fail("Website Manager has not been initialized.");
+  const library = holder.lib.exportState(), ops = holder.ops.exportState();
+  return { schema: SCHEMA, version: 1, realm: holder.realm, data: { content: holder.store.exportState(), library: library.data, ops: ops.data, previews: codec.copy([...holder.previews]), submissions: holder.submissions.exportState() }, sequences: { ...library.sequences, ...ops.sequences } };
+}
+function importHolder(holder, snapshot) {
+  if (!holder || snapshot?.schema !== SCHEMA || snapshot.version !== 1 || snapshot.realm !== holder.realm) throw codec.fail("Website Manager snapshot belongs to another realm or version.");
+  // Validate every part before mutating any live closure.
+  const content = holder.store.validateState(snapshot.data?.content);
+  const library = holder.lib.validateState({ data: snapshot.data?.library, sequences: snapshot.sequences });
+  const ops = holder.ops.validateState({ data: snapshot.data?.ops, sequences: snapshot.sequences });
+  const submissions = holder.submissions.validateState(snapshot.data?.submissions);
+  const previews = codec.mapRows(snapshot.data?.previews, { ids: false });
+  if (previews.some(([hash, grant]) => !/^[a-f0-9]{64}$/.test(hash) || !["string", "number"].includes(typeof grant.by) || !Number.isFinite(Date.parse(grant.expiresAt)))) throw codec.fail("Website preview grants are incomplete.");
+  holder.store.importState(content); holder.lib.importState(library); holder.ops.importState(ops); holder.submissions.importState(submissions); codec.replaceMap(holder.previews, previews);
+}
 
 const SCOPE = "website_manager";
 
 module.exports = {
+  exportState: () => internal ? exportHolder(internal) : null,
+  importState: snapshot => importHolder(internal, snapshot),
+  validatePreviewGrant: token => previewGrant(internal, token),
   scopes: [
     {
       name: SCOPE,
@@ -75,11 +105,16 @@ module.exports = {
     });
 
     const store = makeStore(() => new Date().toISOString());
-    // Uploads made while testing are throwaway (git-ignored) and go with every reset.
-    const UPLOADS = path.join(__dirname, "wm", "uploads");
-    fs.rmSync(UPLOADS, { recursive: true, force: true });
+    // Metadata restoration must not delete existing bytes during a build/cold start.
+    const UPLOADS = ctx.uploadsDir || path.join(__dirname, "wm", "uploads");
     const lib = makeLibrary({ seed: store.seed, store, now: () => new Date().toISOString(), uploads: UPLOADS });
     const ops = makeOps({ store, now: () => new Date().toISOString() });
+    const previews = new Map();
+    const submissions = require("./wm/ideas").ideaSubmissions(store.ideas);
+    const realm = ctx.realm || ctx.config?.sandbox || process.env.MOCK_SANDBOX || "demo";
+    if (!/^[\w-]{1,100}$/.test(realm)) throw codec.fail("Invalid Website Manager realm.");
+    const holder = { realm, store, lib, ops, previews, submissions, ctx };
+    internal = holder;
     // Claude's suggestions for G2's gaps (D-038): drafts for review, never published by themselves.
     require("./wm/suggestions").applySuggestions({ store, media: lib.media, now: () => new Date().toISOString() });
     const analytics = require("./wm/analytics").makeAnalytics({ store, lib, ops, now: () => new Date().toISOString() });
@@ -367,6 +402,14 @@ module.exports = {
     async function toSales(l, body) {
       const locale = ["en", "ar", "de", "fr", "it"].includes(body.locale) ? body.locale : undefined;
       const payload = { source: "website", name: l.name, email: l.email, company: l.company || undefined, phone: l.phone || undefined, page: l.page || undefined, bundle: l.context?.bundle ?? undefined, utm: Object.keys(l.utm).length ? l.utm : undefined, message: l.topic ? `[${l.topic}] ${l.message}` : l.message, locale };
+      if (typeof ctx.salesLeadDelivery === "function" || ctx.committedReplay || ctx.workspaceBoundary) {
+        try {
+          const delivered = typeof ctx.salesLeadDelivery === "function" ? await ctx.salesLeadDelivery(payload, { realm, wmLeadId: l.id }) : { state: "deferred", code: "orgtik_crm_intake_pending" };
+          const result = delivered?.deferred === true && !delivered.state ? { ...delivered, state: "deferred" } : delivered;
+          if (!result || !["sent", "failed", "deferred"].includes(result.state)) return { state: "failed", code: "invalid_delivery_result", at: new Date().toISOString() };
+          return { ...result, at: result.at || new Date().toISOString() };
+        } catch { return { state: "failed", code: "shared_delivery_unavailable", at: new Date().toISOString() }; }
+      }
       try {
         const res = await fetch(`${ctx.apiUrl("sales")}/api/leads/intake`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload), signal: AbortSignal.timeout(3000) });
         const j = await res.json().catch(() => ({}));
@@ -390,8 +433,7 @@ module.exports = {
     });
 
     // ---- roadmap ideas: community submissions and their moderation ----
-    const { ideaView, eraseSubmitter, ideaSubmissions } = require("./wm/ideas");
-    const submissions = ideaSubmissions(store.ideas);
+    const { ideaView, eraseSubmitter } = require("./wm/ideas");
     const ideaOut = (req, x) => ({ ...ideaView(x, pii(req)), history: x.history.map((h) => ({ ...h, by: person(h.by === "visitor" ? null : h.by) })) });
     app.get("/v2/admin/ideas", need("marketing:view"), (req, res) => {
       const status = String(req.query.status ?? "");
@@ -590,20 +632,19 @@ module.exports = {
     // A token is short-lived and read-only: it opens drafts, nothing else. The Website Manager hands
     // it to the site's frame by postMessage and the site sends it as a header, never in an address
     // (D-017). Drafts show over what's published; archived entries stay out, like on the site.
-    const previews = new Map();
     const PREVIEW_MINUTES = 30;
     app.post("/v2/admin/preview-token", need("content:view"), (req, res) => {
-      for (const [t, p] of previews) if (Date.parse(p.expiresAt) < Date.now()) previews.delete(t);
+      for (const [t, p] of previews) if (Date.parse(p.expiresAt) <= RealDate.now()) previews.delete(t);
       const token = crypto.randomBytes(18).toString("base64url");
-      const expiresAt = new Date(Date.now() + PREVIEW_MINUTES * 60000).toISOString();
-      previews.set(token, { by: req.who.user.key ?? req.who.user.id, expiresAt });
+      const expiresAt = new RealDate(RealDate.now() + PREVIEW_MINUTES * 60000).toISOString();
+      previews.set(tokenHash(token), { by: req.who.user.key ?? req.who.user.id, expiresAt });
       ok(res, { token, expiresAt });
     });
     app.get("/v2/admin/preview/addresses", need("content:view"), (req, res) => ok(res, lib.previewAddresses()));
     const previewOk = (req, res) => {
       const m = /^Preview (\S+)$/.exec(req.get("authorization") ?? "");
-      const p = m && previews.get(m[1]);
-      if (!p || Date.parse(p.expiresAt) < Date.now()) return fail(res, 401, "preview_expired", "This preview has expired. Open it again from the Website Manager."), false;
+      const p = m && previewGrant(holder, m[1]);
+      if (!p) return fail(res, 401, "preview_expired", "This preview has expired. Open it again from the Website Manager."), false;
       return true;
     };
     app.get("/v2/preview/entries/:type", (req, res) => {
@@ -629,5 +670,6 @@ module.exports = {
     app.get("/v2/admin/roles", need("settings:view"), (req, res) => {
       ok(res, Object.entries(ROLES).map(([key, r]) => ({ key, label: r.label, permissions: r.permissions })));
     });
+    return { exportState: () => exportHolder(holder), importState: snapshot => importHolder(holder, snapshot) };
   },
 };

@@ -6,6 +6,7 @@ const path = require("path");
 const { buildSeed } = require("./tasks/seed");
 const filesLib = require("./tasks/files");
 const analyticsLib = require("./tasks/analytics");
+const commands = require("./tasks/commands");
 
 const SCOPE = "task_manager";
 // The shared identity has avatar:null for everyone; generated initials avatars make the boards readable.
@@ -96,8 +97,8 @@ const activeTasks = (projectId) => db.tasks.filter((t) => t.projectId === projec
 
 function tmRoles(u) {
   if (!u) return [];
+  if (identity.workspaceMode) return identity.userScopes(u).find(scope => scope.scope === SCOPE)?.roles || [];
   const r = new Set(identity.grants[SCOPE]?.[u.key]?.roles || []);
-  if ((identity.grants.global?.[u.key]?.roles || []).includes("super_admin")) r.add("super_admin");
   return [...r];
 }
 const isAdmin = (u) => tmRoles(u).includes("super_admin");
@@ -439,26 +440,45 @@ function loadProject(req, res, u, id = req.params.id) {
   const p = projectById(id);
   if (!p) { fail(res, 404, "Project not found"); return null; }
   if (!canSeeProject(p, u)) { fail(res, 403, "You don't have access to this project"); return null; }
+  if (!['GET', 'HEAD'].includes(req.method) && p.custodyReadOnly) { fail(res, 423, "This project awaits ownership review."); return null; }
   return p;
 }
 function loadTask(req, res, u, id = req.params.id) {
   const t = taskById(id);
   if (!t) { fail(res, 404, "Task not found"); return null; }
   if (!canSeeProject(projectById(t.projectId), u)) { fail(res, 403, "You don't have access to this task"); return null; }
+  if (!['GET', 'HEAD'].includes(req.method) && (t.custodyReadOnly || projectById(t.projectId)?.custodyReadOnly)) { fail(res, 423, "This task awaits ownership review."); return null; }
   return t;
 }
 
 // ================================================================= routes
-function routes(app, context) {
+function routes(app, context, options = {}) {
   ctx = context;
   identity = ctx.identity;
   util = ctx.util;
-  files = filesLib.prepare(ctx.uploadsDir, identity.users);
-  db = buildSeed({ files, identity });
-  files.writeTeamLogos(db.teams);
+  files = filesLib.prepare(ctx.uploadsDir, identity.users, { samples: !options.empty });
+  db = options.state || buildSeed({ files, identity, empty: Boolean(options.empty), seedAt: options.seedAt });
+  if (options.fixtureId === "nile-v1") db = require("./tasks/runtime-state").nileFixture(db, identity);
+  if (!options.empty) files.writeTeamLogos(db.teams);
   analytics = analyticsLib.create({ db, util, visibleProjects, activeTasks, myTasks, isProjectMember, taskById, projectById, sectionById, userById, commentsOf, avatarOf, taskProgress });
   const upload = ctx.upload.any();
   ctx.log(`seeded ${db.projects.length} projects, ${db.tasks.length} tasks, ${db.comments.length} comments, ${db.notifications.length} notifications`);
+  if (identity.workspaceMode) app.use((req, res, next) => {
+    const ownProfile = req.method === 'PUT' && req.path === '/api/auth/profile' || req.method === 'DELETE' && req.path === '/api/auth/avatar';
+    if (!['GET', 'HEAD'].includes(req.method)) {
+      const user = me(req, res); if (!user) return;
+      if (!ownProfile && isViewerOnly(user)) return fail(res, 403, "This Tasks role is read-only.");
+      if (!ownProfile && typeof identity.canWrite === 'function' && !identity.canWrite(user)) return fail(res, 423, "This Tasks workspace is read-only.");
+    }
+    if (req.method === 'POST' && req.path === '/api/auth/avatar') return fail(res, 501, 'sample_assets_only');
+    if (!['GET', 'HEAD'].includes(req.method) && /^\/api\/auth\//.test(req.path) && !ownProfile) return fail(res, 501, 'workspace_command_required');
+    if (!['GET', 'HEAD'].includes(req.method)) {
+      const match = /^\/api\/(bookmarks|teams|projects|tasks)\/(\d+)(?:\/|$)/.exec(req.path);
+      const record = match && db[match[1]].find(row => row.id === Number(match[2]));
+      if (record?.custodyReadOnly) return fail(res, 423, "This record awaits ownership review.");
+    }
+    return next();
+  });
 
   // ------------------------------------------------ projects
   app.get("/api/projects", (req, res) => {
@@ -514,6 +534,11 @@ function routes(app, context) {
 
   // Project details. Also called server-side by the Next.js project layout without a token.
   app.get("/api/projects/:id", (req, res) => {
+    if (identity.workspaceMode) {
+      const u = me(req, res); if (!u) return;
+      const p = loadProject(req, res, u); if (!p) return;
+      return ok(res, projectDetails(p, clean(req.query.search)), "Project fetched successfully");
+    }
     const token = identity.tokenFrom(req);
     const u = token ? identity.userFromToken(token) : null;
     if (token && !u) return fail(res, 401, "Unauthorized");
@@ -1051,11 +1076,15 @@ function routes(app, context) {
     return ok(res, { ...fullUser(x), teams: db.teams.filter((t) => t.memberIds.includes(x.id)).map(teamMini) }, "User fetched successfully");
   });
 
-  app.delete("/api/users/:id", (req, res) => {
+  app.delete("/api/users/:id", async (req, res) => {
     const u = me(req, res); if (!u) return;
     if (!guard(res, isAdmin(u), "Only super admins can remove users")) return;
-    const x = loadUser(req, res); if (!x) return;
+    const x = identity.workspaceMode ? userById(req.params.id) : loadUser(req, res); if (!x) return identity.workspaceMode ? fail(res, 404, 'User not found in this workspace') : undefined;
     if (x.id === u.id) return fail(res, 400, "You cannot remove yourself");
+    if (identity.workspaceMode) {
+      try { const result = await commands.execute(ctx, identity, req, u, 'workspace.member.remove', { userId: x.id, tool: 'tasks', mode: 'tool_access' }); return ok(res, result, 'User removed successfully'); }
+      catch (error) { return commands.failure(res, error); }
+    }
     delete identity.grants[SCOPE][x.key];
     return ok(res, { message: `${fullName(x)} no longer has access to the Task Manager` }, "User removed successfully");
   });
@@ -1114,13 +1143,17 @@ function routes(app, context) {
     const created = identity.scopeByName(SCOPE)?.createdAt || nowIso();
     return ok(res, ROLE_DEFS.map((r) => ({ ...r, isActive: true, createdAt: created, updatedAt: created, permissions: [] })), "Roles fetched successfully");
   });
-  app.post("/api/rbac/users/:userId/roles", (req, res) => {
+  app.post("/api/rbac/users/:userId/roles", async (req, res) => {
     const u = me(req, res); if (!u) return;
     if (!guard(res, isAdmin(u), "Only super admins can change roles")) return;
     const x = userById(req.params.userId);
     if (!x) return fail(res, 404, "User not found");
     const names = toIds(req.body?.roleIds).map((id) => ROLE_DEFS.find((r) => r.id === id)?.name).filter(Boolean);
     if (!names.length) return fail(res, 400, "Please select at least one valid role");
+    if (identity.workspaceMode) {
+      try { await commands.execute(ctx, identity, req, u, 'workspace.tool.roles', { userId: x.id, tool: 'tasks', roles: [...new Set(names)] }); return ok(res, fullUser(userById(x.id)), 'User roles updated successfully'); }
+      catch (error) { return commands.failure(res, error); }
+    }
     identity.grants[SCOPE] = identity.grants[SCOPE] || {};
     identity.grants[SCOPE][x.key] = { roles: names, permissions: [] };
     pushNotification(x.id, { type: "user_role_changed", group: "all", title: "Role updated", message: `${fullName(u)} changed your Task Manager role to ${names.join(", ").replace(/_/g, " ")}`, actorId: u.id, data: { roles: names, assignedRoles: names } });
@@ -1132,9 +1165,13 @@ function routes(app, context) {
     const u = me(req, res); if (!u) return;
     return ok(res, fullUser(u), "Profile fetched successfully");
   });
-  app.put("/api/auth/profile", (req, res) => {
+  app.put("/api/auth/profile", async (req, res) => {
     const u = me(req, res); if (!u) return;
     const b = req.body || {};
+    if (identity.workspaceMode) {
+      try { await commands.execute(ctx, identity, req, u, 'profile.self_update', { patch: commands.profilePatch(b) }); return ok(res, fullUser(userById(u.id)), 'Profile updated successfully'); }
+      catch (error) { return commands.failure(res, error); }
+    }
     for (const k of ["firstName", "lastName", "username"]) if (clean(b[k])) u[k] = clean(b[k]);
     if (b.avatar !== undefined) u.avatar = clean(b.avatar) || null;
     for (const k of ["jobTitle", "department", "about", "language", "timeZone", "weekStartDay", "dateFormat", "timeFormat"]) if (b[k] !== undefined) u.profile[k] = b[k] === null ? null : String(b[k]);
@@ -1150,8 +1187,12 @@ function routes(app, context) {
     u.updatedAt = nowIso();
     return res.json({ success: true, statusCode: 200, message: "Avatar updated successfully", avatar: u.avatar, data: { avatar: u.avatar } });
   });
-  app.delete("/api/auth/avatar", (req, res) => {
+  app.delete("/api/auth/avatar", async (req, res) => {
     const u = me(req, res); if (!u) return;
+    if (identity.workspaceMode) {
+      try { await commands.execute(ctx, identity, req, u, 'profile.self_update', { patch: { avatar: null } }); return ok(res, { message: 'Avatar removed' }, 'Avatar removed successfully'); }
+      catch (error) { return commands.failure(res, error); }
+    }
     u.avatar = null;
     return ok(res, { message: "Avatar removed" }, "Avatar removed successfully");
   });
@@ -1494,6 +1535,39 @@ function routes(app, context) {
     if (io.chat) io.chat.to(`conversation:${c.id}`).emit("message_deleted", { conversationId: c.id, messageId: m.id });
     return ok(res, null, "Message deleted");
   });
+  return {
+    exportState: () => require("./tasks/runtime-state").encode(db),
+    bootstrap: user => ({ projects: visibleProjects(user).map(projectCard), teams: db.teams.filter(team => !isClient(user) || visibleTeamIds(user).has(team.id)).map(teamMini) }),
+    usage: () => [{ key: "tasks.projects", used: db.projects.filter(project => !project.archivedAt).length }, { key: "tasks.guests", used: identity.users.filter(user => tmRoles(user).includes("viewer")).length }],
+    transferOwnership: command => {
+      const { fromUserId, target, operationId } = command;
+      if (!Number.isSafeInteger(fromUserId) || !operationId || !target || !['member', 'archive'].includes(target.kind)) throw Object.assign(new Error("Invalid Tasks custody command."), { status: 422 });
+      const recipient = target.kind === 'member' && userById(target.userId);
+      if (target.kind === 'member' && (!recipient || recipient.id === fromUserId || recipient.isActive === false || !hasAccess(recipient) || isViewerOnly(recipient))) throw Object.assign(new Error("The Tasks custody recipient is not eligible."), { status: 409 });
+      const result = { transferred: [], archived: [] };
+      const own = row => Object.hasOwn(row, 'ownerId') ? row.ownerId : row.createdById;
+      for (const [kind, records] of [['project', db.projects], ['team', db.teams], ['bookmark', db.bookmarks], ['task', db.tasks]]) for (const row of records) {
+        const assigned = kind === 'task' && row.assignments.some(assignment => assignment.assigneeType === 'user' && assignment.assigneeId === fromUserId);
+        if (own(row) !== fromUserId && !assigned) continue;
+        row.ownerId = recipient ? recipient.id : null;
+        row.custodyOperationId = operationId; row.updatedAt = nowIso();
+        if (kind === 'task') {
+          row.assignments = row.assignments.filter(assignment => !(!recipient && assignment.assigneeType === 'user' && assignment.assigneeId === fromUserId)).map(assignment => assignment.assigneeType === 'user' && assignment.assigneeId === fromUserId ? { ...assignment, assigneeId: recipient.id } : assignment).filter((assignment, index, all) => all.findIndex(other => other.assigneeType === assignment.assigneeType && other.assigneeId === assignment.assigneeId) === index);
+          if (!recipient) row.sectionId = archiveSection(row.projectId)?.id ?? row.sectionId;
+        }
+        if (recipient) {
+          if (kind === 'project' || kind === 'team') row.memberIds = [...new Set([...row.memberIds, recipient.id])];
+          if (kind === 'task') { const project = projectById(row.projectId); project.memberIds = [...new Set([...project.memberIds, recipient.id])]; }
+          result.transferred.push(`${kind}:${row.id}`);
+        }
+        else { row.custodyReadOnly = true; row.archivedAt = nowIso(); if (kind === 'team') row.isActive = false; result.archived.push(`${kind}:${row.id}`); }
+      }
+      for (const project of db.projects) project.memberIds = project.memberIds.filter(id => id !== fromUserId);
+      for (const team of db.teams) team.memberIds = team.memberIds.filter(id => id !== fromUserId);
+      return result;
+    },
+    close: () => { online.clear(); io.notifications = null; io.chat = null; },
+  };
 }
 
 // ================================================================= sockets
@@ -1583,4 +1657,5 @@ module.exports = {
   },
   routes,
   sockets,
+  createWorkspaceRuntime: input => require("../lib/tool-adapters/tasks").createWorkspaceRuntime(input, module.exports),
 };

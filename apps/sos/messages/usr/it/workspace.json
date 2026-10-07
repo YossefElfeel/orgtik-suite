@@ -67,6 +67,8 @@
       "toHome": "Torna alla home",
       "failedTitle": "Impossibile caricare il tuo spazio",
       "failedBody": "Controlla la connessione e riprova."
-    }
+    },
+    "switchFailed": "Impossibile aprire questo spazio di lavoro. Riprova.",
+    "signOutFailed": "Impossibile salvare la disconnessione. Riprova."
   }
 }

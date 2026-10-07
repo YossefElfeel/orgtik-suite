@@ -1,17 +1,27 @@
 // Shared helpers for the HR mock: Cairo time math, formatting, envelopes, role checks.
 const { ok, fail, paginate, nowIso } = require("../../lib/util");
 
-const TZ = "Africa/Cairo";
+let TZ = "Africa/Cairo";
+let calendar = null;
 const DAY_MS = 864e5;
 
 // ---------- dates (all "YYYY-MM-DD" strings are Cairo calendar dates) ----------
 const pad = (n, w = 2) => String(n).padStart(w, "0");
 const ymd = (y, m, d) => `${y}-${pad(m)}-${pad(d)}`;
 
-const dtf = new Intl.DateTimeFormat("en-US", {
+let dtf = new Intl.DateTimeFormat("en-US", {
   timeZone: TZ, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit",
 });
+function configureClock(clock) {
+  calendar = clock;
+  TZ = clock.timeZone || "Africa/Cairo";
+  dtf = new Intl.DateTimeFormat("en-US", { timeZone: TZ, hourCycle: "h23", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit" });
+}
 function cairoParts(date = new Date()) {
+  if (calendar?.parts) {
+    const p = calendar.parts(date.getTime());
+    return { y: p.year, m: p.month, d: p.day, h: p.hour, mi: p.minute, s: p.second };
+  }
   const p = {};
   for (const { type, value } of dtf.formatToParts(date)) p[type] = value;
   return { y: +p.year, m: +p.month, d: +p.day, h: +p.hour % 24, mi: +p.minute, s: +p.second };
@@ -24,6 +34,7 @@ function cairoOffsetMin(date) {
 // Cairo wall-clock time -> Date.
 function cairoDate(dateStr, hh = 0, mm = 0, ss = 0) {
   const [y, m, d] = dateStr.split("-").map(Number);
+  if (calendar?.fromWall) return new Date(calendar.fromWall({ year: y, month: m, day: d, hour: hh, minute: mm, second: ss }));
   const guess = Date.UTC(y, m - 1, d, hh, mm, ss);
   let off = cairoOffsetMin(new Date(guess));
   let t = guess - off * 60000;
@@ -138,7 +149,7 @@ function sortBy(list, key, order = "DESC", getter) {
 }
 
 module.exports = {
-  TZ, pad, ymd, cairoParts, cairoDate, cairoIso, todayStr, dateOf, addDays, weekday, isoWeekday, daysBetween, dateRange,
+  get TZ() { return TZ; }, configureClock, pad, ymd, cairoParts, cairoDate, cairoIso, todayStr, dateOf, addDays, weekday, isoWeekday, daysBetween, dateRange,
   monthStart, monthEnd, daysInMonth, weekStartSun, weekStartMon, normDate, toDmy,
   clock12, hhmm, durLabel, hmsLabel, pct, round2, money, MONTHS, MON3, labelize, num, bool,
   send, err, pageOf, paged, sortBy, nowIso,

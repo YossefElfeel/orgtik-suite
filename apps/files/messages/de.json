@@ -587,7 +587,10 @@
     "notFoundBody": "Der Link ist vielleicht veraltet oder der Ordner wurde verschoben. Beginnen Sie bei der Übersicht oder bei Meine Dateien.",
     "loading": "Wird geladen",
     "handoffTitle": "Dieser Anmeldelink ist abgelaufen",
-    "handoffBody": "Links aus dem Launcher funktionieren einmal und eine Minute lang. Öffnen Sie Dateien erneut über Ihre Apps."
+    "handoffBody": "Links aus dem Launcher funktionieren einmal und eine Minute lang. Öffnen Sie Dateien erneut über Ihre Apps.",
+    "sessionLoading": "Dein Arbeitsbereich wird geöffnet…",
+    "sessionUnavailableTitle": "Dein Arbeitsbereich konnte nicht geöffnet werden",
+    "sessionUnavailableBody": "Dein aktueller Zugriff konnte nicht geprüft werden. Deine Anmeldedaten bleiben erhalten; versuche es erneut."
   },
   "Feedback": {
     "folderCreated": "Ordner „{name}“ erstellt",

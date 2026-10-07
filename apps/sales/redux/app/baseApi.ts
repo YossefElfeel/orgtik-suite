@@ -2,11 +2,12 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "./store";
 import { deleteCookie } from "cookies-next";
 import { TOKEN_COOKIE, USER_COOKIE, signInAgainUrl } from "@/constants";
-import { API_URL } from "@/constants";
+import { API_URL, AUTH_API_URL } from "@/constants";
 import { getRequestLocale } from "@/lib/i18n/request-locale";
 import { toast } from "@orgtik/ui";
 import { ErrorResponse } from "@/types";
 import { errorMessage, successMessage } from "@/lib/api-feedback";
+import { readClientSession, clearClientSession, refreshClientSession, SessionRequestError } from "@orgtik/ui/auth";
 
 type ApiExtraOptions = {
   skipSuccessToast?: boolean;
@@ -51,10 +52,12 @@ const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState;
-    const token = state.auth.token;
+    const session = readClientSession();
+    const token = session?.tokens.accessToken || state.auth.token;
     const language = getRequestLocale();
 
     if (token) headers.set("Authorization", `Bearer ${token}`);
+    if (session?.workspaceContext?.workspace.id) headers.set("x-workspace", session.workspaceContext.workspace.id);
 
     headers.set("Accept-Language", language || "en");
     return headers;
@@ -66,13 +69,18 @@ const baseQuery = fetchBaseQuery({
 // went in the reader's language (lib/api-feedback): the API's English messages and a generic
 // "Successfully done" are no longer shown. Reads don't toast: their screens show the error.
 const baseQueryWithInterceptor: typeof baseQuery = async (args, api, extraOptions) => {
-  const result = await baseQuery(args, api, extraOptions);
+  let result = await baseQuery(args, api, extraOptions);
+  if (result.error?.status === 401 && readClientSession()?.tokens.refreshToken) {
+    try { await refreshClientSession(AUTH_API_URL); result = await baseQuery(args, api, extraOptions); }
+    catch (error) { if (!(error instanceof SessionRequestError) || ![401, 403].includes(error.status)) return { error: { status: 503, data: { code: "session_unavailable" } } }; }
+  }
   const method = typeof args === "string" ? "GET" : args.method || "GET";
   const body = typeof args === "string" ? undefined : args.body;
   const options = extraOptions as ApiExtraOptions | undefined;
 
   // Signed out, or the session expired: sign in through the suite and come back to this page.
   if (result.error?.status === 401 && typeof window !== "undefined") {
+    clearClientSession();
     deleteCookie(USER_COOKIE);
     deleteCookie(TOKEN_COOKIE);
     window.location.href = signInAgainUrl(window.location.pathname + window.location.search);

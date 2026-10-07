@@ -5,7 +5,10 @@ function makeHelpers(ctx, getDb, views) {
   const { identity } = ctx;
 
   // Customers only see the brands they belong to; OrgTik staff see every brand.
-  const canSee = (p, u) => u.userType !== "customer" || (p.memberUserIds || []).includes(u.id);
+  const canSee = (p, u) => {
+    const roles = identity.userScopes(u).find(scope => scope.scope === "digital_marketing")?.roles || [];
+    return roles.some(role => ["super_admin", "marketing_manager", "marketing_specialist", "content_writer"].includes(role)) || roles.includes("client_reviewer") && (p.memberUserIds || []).includes(u.id);
+  };
   const projectsFor = (u) => getDb().projects.filter((p) => canSee(p, u));
 
   function activeProject(u) {
@@ -14,7 +17,7 @@ function makeHelpers(ctx, getDb, views) {
     let p = visible.find((x) => x.id === db.activeProject[u.id]);
     if (!p) {
       p = visible.find((x) => x.key === "nile") || visible[0] || null;
-      if (p) db.activeProject[u.id] = p.id;
+      if (p && !identity.workspaceMode) db.activeProject[u.id] = p.id;
     }
     return p;
   }
@@ -25,6 +28,7 @@ function makeHelpers(ctx, getDb, views) {
     if (id) {
       const p = getDb().projects.find((x) => x.id === id);
       if (p && canSee(p, u)) return p;
+      if (identity.workspaceMode) return null;
     }
     return activeProject(u);
   }

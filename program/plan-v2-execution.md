@@ -1,8 +1,10 @@
 # OrgTik Suite — revised hosted-mock roadmap
 
-Maintained execution roadmap · 2026-10-07 · amendment A11 · decisions D-063–D-067.
+Maintained execution roadmap · 2026-10-07 · amendments A11 and [A12](phase-f/amendment-A12.md) · decisions D-063–D-069.
 
 Source: `C:/Users/yosse/.claude/plans/we-have-old-plan-quiet-turing.md`, refined by the approved roadmap and the owner's request for parallel delivery of a senior UI/UX-quality prototype. This repository document is maintained from here; the external Claude plan is historical input.
+
+R1 is now in implementation from baseline main6032161; see [the package evidence and remaining gates](phase-f/README.md), [D-068](decisions/D-068.md) and [D-069](decisions/D-069.md). PR/CI and hosted release acceptance remain open until evidence is recorded. The R0 snapshot below remains historical evidence, not a claim that R1–R4 are complete.
 
 ## الخلاصة بالمصري
 

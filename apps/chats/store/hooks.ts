@@ -30,8 +30,11 @@ export const useMe = (): User => {
 
 export const useUsers = (): User[] => useWorkspace((s) => s.users);
 
-export const useUser = (id: Id): User | undefined =>
-  useWorkspace((s) => s.users.find((u) => u.id === id));
+export const useUser = (id: Id): User | undefined => {
+  const user = useWorkspace(s => s.users.find(u => u.id === id));
+  const author = useWorkspace(s => s.historicalUsers.find(u => u.id === id));
+  return useMemo(() => user || (author ? { ...author, role: "guest" as const, title: "", timezone: "" } : undefined), [user, author]);
+};
 
 /** One person's presence. Subscribing per-avatar keeps the floor cheap. */
 export const usePresenceOf = (userId: Id): Presence | undefined =>
@@ -197,12 +200,16 @@ export const useNeedsYou = (): number => {
 /** What the current viewer may do. One source, so no screen invents its own. */
 export const useCan = (): Capabilities => {
   const role = useWorkspace((s) => s.viewingRole);
+  const canWrite = useWorkspace((s) => s.workspaceSync.canWrite);
   const canCreateChannels = useWorkspace((s) => s.settings.canCreateChannels);
   const canInviteGuests = useWorkspace((s) => s.settings.canInviteGuests);
   const canRecord = useWorkspace((s) => s.settings.canRecord);
   return useMemo(
-    () => capabilitiesFor(role, { canCreateChannels, canInviteGuests, canRecord }),
-    [role, canCreateChannels, canInviteGuests, canRecord],
+    () => {
+      const capabilities = capabilitiesFor(role, { canCreateChannels, canInviteGuests, canRecord });
+      return canWrite ? capabilities : { ...Object.fromEntries(Object.keys(capabilities).map(key => [key, false])), viewInsights: capabilities.viewInsights } as Capabilities;
+    },
+    [role, canCreateChannels, canInviteGuests, canRecord, canWrite],
   );
 };
 
@@ -303,10 +310,11 @@ export const ANALYTICS_BOUNDS = { from: FACTS_FROM, to: FACTS_TO };
  */
 export function useAnalytics(range: DateRange, cohort: Id[]): Aggregate {
   const rooms = useWorkspace((s) => s.floor.rooms);
+  const fixtureId = useWorkspace((s) => s.fixtureId);
   const key = cohort.join(",");
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useMemo(() => {
-    const { dayFacts, meetingFacts } = getFacts();
+    const { dayFacts, meetingFacts } = fixtureId === "orgtik-v1" ? getFacts() : { dayFacts: [], meetingFacts: [] };
     return aggregate(dayFacts, meetingFacts, range, cohort, rooms);
-  }, [range.from, range.to, key, rooms]);
+  }, [range.from, range.to, key, rooms, fixtureId]);
 }

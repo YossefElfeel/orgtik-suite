@@ -163,10 +163,11 @@ module.exports = function integrationRoutes(app, { ctx, getDb, views, h }) {
     send(res, { authUrl: url.toString(), state, redirectUri, provider: PLATFORMS[platform].name, simulated: true }, `Redirecting to ${PLATFORMS[platform].name} (simulated locally)`);
   }));
 
-  app.get("/integrations/:platform/callback", h.handle((req, res, u) => {
+  const callback = h.handle((req, res, u) => {
     const platform = normPlatform(req.params.platform);
-    const state = req.query.state;
-    if (!state || !(req.query.code || req.query.oauth_verifier)) return error(res, 400, "Missing OAuth code or state — please start the connection again");
+    const payload = req.method === "GET" ? req.query : req.body || {};
+    const state = payload.state;
+    if (!state || !(payload.code || payload.oauth_verifier)) return error(res, 400, "Missing OAuth code or state — please start the connection again");
     const db = getDb();
     const rec = db.oauthStates[state];
     // Spent on first use, whatever the outcome: a state is never accepted twice.
@@ -177,7 +178,9 @@ module.exports = function integrationRoutes(app, { ctx, getDb, views, h }) {
     const temp = makeTemp({ p: rec.platform, pr: rec.projectId, u: rec.userId });
     if (!temp) return error(res, 400, "Invalid or expired OAuth state — please start the connection again", { code: "invalid_state" });
     send(res, views.wizardView(temp), "Account authorized — choose the resources to connect");
-  }, { needsProject: false }));
+  }, { needsProject: false });
+  app.post("/integrations/:platform/callback", callback);
+  app.get("/integrations/:platform/callback", ctx.identity.workspaceMode ? (_req, res) => error(res, 405, "Confirm the simulated connection using POST", { code: "workspace_command_required" }) : callback);
 
   // Only the person who authorized may continue their connect session.
   const tempFromBody = (req, u) => {

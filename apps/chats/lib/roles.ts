@@ -14,6 +14,13 @@
 
 import type { Role } from "@/entities";
 import { msgText } from "@/lib/messages";
+import { readClientSession, toolAccess } from "@orgtik/ui/auth";
+import type { SuiteSession } from "./suite-session";
+
+export function roleForSuiteSession(session: SuiteSession): Role {
+  const roles = toolAccess(session.workspaceContext, "chat", session.scopes).roles;
+  return (["owner", "admin", "member", "guest"] as const).find(role => roles.includes(role)) || "guest";
+}
 
 export interface Capabilities {
   /** Rename rooms, change capacity, lock them, switch the floor template. */
@@ -97,6 +104,12 @@ export function capabilitiesFor(
   access: { canCreateChannels: "everyone" | "admins"; canInviteGuests: "everyone" | "admins"; canRecord: "everyone" | "admins" },
 ): Capabilities {
   const base = CAPABILITIES[role];
+  const session = readClientSession();
+  if (session) {
+    const permission = toolAccess(session.workspaceContext, "chat", session.scopes);
+    if (!permission.hasAccess) return { ...GUEST };
+    if (!permission.canWrite) return { ...GUEST, viewInsights: base.viewInsights };
+  }
   const adminish = role === "admin" || role === "owner";
   return {
     ...base,

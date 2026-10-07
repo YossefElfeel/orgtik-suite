@@ -3,14 +3,14 @@
 // (@somion/gallery contract), campaigns (4 types with the onboarding wizard), boost, integrations
 // (with a fully local OAuth wizard), audiences/segments/CSV imports, messaging senders/templates and
 // analytics reports. All state is in memory and rebuilt from seed on restart (or POST /__reset).
-const { buildSeed } = require("./marketing/seed");
+const { buildSeed, buildEmptySeed } = require("./marketing/seed");
 const { makeViews } = require("./marketing/views");
 const { makeHelpers } = require("./marketing/routes/common");
 const media = require("./marketing/media");
-const { DAY, nowIso, send } = require("./marketing/lib");
+const { nowIso, send, addCalendarDays } = require("./marketing/lib");
 
-let db = buildSeed();
-const getDb = () => db;
+let legacy;
+const createState = (_ctx, { empty = false, snapshot } = {}) => ({ db: snapshot ? JSON.parse(JSON.stringify(snapshot)) : empty ? buildEmptySeed() : buildSeed() });
 
 module.exports = {
   scopes: [
@@ -34,13 +34,17 @@ module.exports = {
     },
   },
 
-  routes(app, ctx) {
+  createState,
+  createWorkspaceRuntime(input) { return require("../lib/tool-adapters/marketing").createWorkspaceRuntime(input, module.exports); },
+  routes(app, ctx, state = legacy || (legacy = createState(ctx))) {
+    const getDb = () => state.db;
     const views = makeViews(ctx, getDb);
     const h = makeHelpers(ctx, getDb, views);
     const svc = {};
 
-    // Lazy scheduler, run by list/detail reads: publishes due posts, starts queued boosts, starts campaigns.
-    function tick() {
+    // Private reads are pure. The coordinator invokes this explicitly on a fresh candidate.
+    function transitionCalendar() {
+      const db = getDb();
       const now = Date.now();
       for (const p of db.posts) {
         if (p.status !== "SCHEDULED" || !svc.publishPost) continue;
@@ -52,8 +56,8 @@ module.exports = {
           Object.assign(e, { status: "ACTIVE", startedAt: e.scheduledAt, queueState: "completed", updatedAt: nowIso() });
           e.externalCampaignId = e.externalCampaignId || `23851${Date.now().toString().slice(-9)}`;
         }
-        if (["ACTIVE", "RUNNING"].includes(e.status) && e.startedAt && new Date(e.startedAt).getTime() + e.durationDays * DAY <= now) {
-          Object.assign(e, { status: "STOPPED", completedAt: new Date(new Date(e.startedAt).getTime() + e.durationDays * DAY).toISOString(), updatedAt: nowIso() });
+        if (["ACTIVE", "RUNNING"].includes(e.status) && e.startedAt && addCalendarDays(e.startedAt, e.durationDays).getTime() <= now) {
+          Object.assign(e, { status: "STOPPED", completedAt: addCalendarDays(e.startedAt, e.durationDays).toISOString(), updatedAt: nowIso() });
         }
       }
       for (const c of db.campaigns) {
@@ -63,6 +67,9 @@ module.exports = {
         }
       }
     }
+    state.transitionCalendar = transitionCalendar;
+    const tick = () => { if (!ctx.identity.workspaceMode) transitionCalendar(); };
+    state.views = views; state.helpers = h;
 
     const deps = { ctx, getDb, views, h, tick, svc };
     // Role checks for every change (wave 5): see marketing/roles.js.
@@ -77,12 +84,13 @@ module.exports = {
     require("./marketing/routes/audience")(app, deps);
 
     // Rebuild the seed without restarting the servers (handy between QA runs).
-    app.post("/__reset", (req, res) => {
-      db = buildSeed();
+    if (!ctx.identity.workspaceMode) app.post("/__reset", (req, res) => {
+      state.db = buildSeed();
       ctx.log("seed data reset");
       send(res, { ok: true }, "Marketing mock data reset");
     });
 
+    const db = getDb();
     ctx.log(`seeded ${db.projects.length} brands, ${db.posts.length} posts, ${db.campaigns.length} campaigns, ${db.integrations.length} integrations, ${db.gallery.length} media items`);
   },
 };

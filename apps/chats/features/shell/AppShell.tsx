@@ -17,8 +17,6 @@ import { LiveRegion, PrototypeBadge, ToastHost } from "./ShellExtras";
 import { MobileTabs } from "./MobileTabs";
 import { RegisterServiceWorker } from "./RegisterServiceWorker";
 import { ClientOnly } from "./ClientOnly";
-import { startSimulator } from "@/mock/simulator";
-import { startTabRelay } from "@/mock/tab-relay";
 import { resumeAudio } from "@/lib/audio";
 import { InactivityMonitor } from "./InactivityMonitor";
 import { NavProgress } from "./NavProgress";
@@ -34,12 +32,7 @@ export function AppShell({
   sidebar?: ReactNode;
   children: ReactNode;
 }) {
-  /* The simulator is mounted once for the whole session and torn down on
-     unmount. Its cleanup is strict: no timer outlives the shell. */
-  useEffect(() => startSimulator(), []);
-  /* Meetings reach the other open tabs, so a link opened in one is live in
-     the other. It lives as long as the tab. */
-  useEffect(() => startTabRelay(), []);
+  // Workspace data comes from scoped polling; no ambient seed events or cross-tab relay.
   const signedOut = useWorkspace((s) => s.session.state === "signed_out");
 
   /* A module that is not switched on shows its entry point and nothing

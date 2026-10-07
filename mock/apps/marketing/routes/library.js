@@ -7,6 +7,11 @@ const { send, error, newId, nowIso, paginate, textMatch, listParam } = require("
 const LABEL_COLORS = ["#6366F1", "#F97316", "#EF4444", "#16A34A", "#0EA5E9", "#DB2777", "#CA8A04", "#7C3AED"];
 
 module.exports = function libraryRoutes(app, { ctx, getDb, views, h }) {
+  const permittedMedia = (id, user) => {
+    const db = getDb(), row = db.gallery.find(item => String(item.id) === String(id));
+    const project = row && db.projects.find(item => item.id === row.projectId);
+    return row && project && h.canSee(project, user) ? row : null;
+  };
   // ---------------------------------------------------------------- labels
   const projectLabels = (project) => getDb().labels.filter((l) => l.projectId === project.id).sort((a, b) => a.name.localeCompare(b.name));
   const findLabel = (req, project) => getDb().labels.find((l) => l.id === req.params.id && l.projectId === project.id);
@@ -67,14 +72,14 @@ module.exports = function libraryRoutes(app, { ctx, getDb, views, h }) {
     send(res, { items: items.map(views.galleryView), meta }, "Gallery fetched successfully");
   }));
 
-  app.post("/galleries/bulk-fetch", h.handle((req, res) => {
+  app.post("/galleries/bulk-fetch", h.handle((req, res, u) => {
     const ids = listParam(req.body?.ids).map(Number);
-    const out = ids.map((id) => views.galleryById(id)).filter(Boolean);
+    const out = ids.filter(id => permittedMedia(id, u)).map((id) => views.galleryById(id)).filter(Boolean);
     send(res, out, "Gallery items fetched successfully");
   }, { needsProject: false }));
 
-  app.get("/galleries/:id", h.handle((req, res) => {
-    const g = views.galleryById(req.params.id);
+  app.get("/galleries/:id", h.handle((req, res, u) => {
+    const g = permittedMedia(req.params.id, u) && views.galleryById(req.params.id);
     if (!g) return h.notFound(res, "Media item");
     send(res, g, "Media item fetched successfully");
   }, { needsProject: false }));
@@ -92,7 +97,7 @@ module.exports = function libraryRoutes(app, { ctx, getDb, views, h }) {
   }));
 
   const updateAlt = h.handle((req, res, u) => {
-    const g = getDb().gallery.find((x) => String(x.id) === String(req.params.id));
+    const g = permittedMedia(req.params.id, u);
     if (!g) return h.notFound(res, "Media item");
     if (req.body?.alt !== undefined) g.alt = String(req.body.alt);
     g.updated_at = nowIso();
@@ -101,9 +106,9 @@ module.exports = function libraryRoutes(app, { ctx, getDb, views, h }) {
   app.put("/galleries/:id", updateAlt);
   app.patch("/galleries/:id", updateAlt);
 
-  app.delete("/galleries/:id", h.handle((req, res) => {
+  app.delete("/galleries/:id", h.handle((req, res, u) => {
     const db = getDb();
-    const g = db.gallery.find((x) => String(x.id) === String(req.params.id));
+    const g = permittedMedia(req.params.id, u);
     if (!g) return h.notFound(res, "Media item");
     db.gallery = db.gallery.filter((x) => x.id !== g.id);
     db.posts.forEach((p) => p.targets.forEach((t) => { t.galleryIds = t.galleryIds.filter((id) => id !== g.id); }));

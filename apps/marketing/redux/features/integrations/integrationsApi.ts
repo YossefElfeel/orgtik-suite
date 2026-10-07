@@ -86,8 +86,8 @@ export const integrationsApi = baseApi.injectEndpoints({
       // The one-time code is exchanged once: nothing caches it.
       query: ({ platform, ...params }) => ({
         url: `/integrations/${platform}/callback`,
-        method: "GET",
-        params,
+        method: "POST",
+        body: params,
       }),
       keepUnusedDataFor: 0,
     }),

@@ -25,6 +25,7 @@
 const fs = require("fs");
 const path = require("path");
 const crypto = require("node:crypto");
+const { applyChanges: applyIdentityChanges } = require("./identity-effects");
 const { performance } = require("node:perf_hooks");
 
 const MAX_ENTRIES = Number(process.env.MOCK_JOURNAL_MAX || 5000);
@@ -97,8 +98,10 @@ function commitData(data, entry, expected) {
     return { sequence: prior.sequence, replayed: true, ...(prior.result !== undefined ? { result: copy(prior.result) } : {}) };
   }
   assertCurrent(data, expected);
+  const accounts = expected.identity ? applyIdentityChanges(data.identityAccounts || {}, expected.identity.changes) : null;
   if (data.log.length >= MAX_ENTRIES) throw unavailable("Journal is full. Nothing was committed.");
   data.log.push(raw);
+  if (accounts) data.identityAccounts = accounts;
   const sequence = data.log.length;
   if (operation) data.operations[operation.key] = { ...operation.receipt, sequence };
   return { sequence, replayed: false, ...(operation?.receipt.result !== undefined ? { result: copy(operation.receipt.result) } : {}) };
@@ -140,6 +143,8 @@ function memoryStore() {
     async snapshot(from) { return snapshotData(data, from); },
     async poll(from) { return snapshotData(data, from); },
     async commit(entry, expected) { return commitData(data, entry, expected); },
+    async identityAccounts() { return data.identityAccounts ? new Map(Object.entries(data.identityAccounts)) : null; },
+    async initializeIdentity(accounts) { if (!data.identityAccounts) data.identityAccounts = Object.fromEntries(accounts); return new Map(Object.entries(data.identityAccounts)); },
     async lookupOperation(operation, expected) { return lookupData(data, operation, expected); },
     async reset(meta, expected) { return resetData(data, meta, expected); },
   };
@@ -197,6 +202,8 @@ function fileStore(file, { io = fs, lockTimeoutMs = 5000 } = {}) {
     async snapshot(from) { return snapshotData(load(), from); },
     async poll(from) { return snapshotData(load(), from); },
     async commit(entry, expected) { return mutate(data => commitData(data, entry, expected)); },
+    async identityAccounts() { const accounts = load().identityAccounts; return accounts ? new Map(Object.entries(accounts)) : null; },
+    async initializeIdentity(accounts) { return mutate(data => { data.identityAccounts ??= Object.fromEntries(accounts); return new Map(Object.entries(data.identityAccounts)); }); },
     async lookupOperation(operation, expected) { return lookupData(load(), operation, expected); },
     async reset(meta, expected) { return mutate(data => resetData(data, meta, expected)); },
   };
@@ -236,7 +243,43 @@ if length ~= tonumber(ARGV[2]) then return cjson.encode({status='conflict'}) end
 if length >= tonumber(ARGV[4]) then return cjson.encode({status='full'}) end
 local receipt = nil
 if ARGV[5] ~= '' then receipt = cjson.decode(ARGV[7]) end
+-- Identity and business effects are validated before either table is changed.
+local changes = nil
+local replacements = {}
+if ARGV[8] and ARGV[8] ~= '' then
+  changes = cjson.decode(ARGV[8])
+  local owners = {}
+  for _, change in ipairs(changes) do
+    local expected = change.expected
+    if expected == cjson.null then expected = false end
+    if redis.call('HGET', KEYS[4], change.id) ~= expected then return cjson.encode({status='account_conflict'}) end
+    replacements[change.id] = cjson.decode(change.value)
+  end
+  for _, change in ipairs(changes) do
+    local email = string.lower(replacements[change.id].user.email)
+    if owners[email] and owners[email] ~= change.id then return cjson.encode({status='account_conflict'}) end
+    owners[email] = change.id
+    local owner = redis.call('HGET', KEYS[5], email)
+    if owner and owner ~= change.id then
+      local replacement = replacements[owner]
+      if not replacement or string.lower(replacement.user.email) == email then return cjson.encode({status='account_conflict'}) end
+    end
+  end
+end
 local sequence = redis.call('RPUSH', KEYS[2], ARGV[3])
+if changes then
+  for _, change in ipairs(changes) do
+    local prior = redis.call('HGET', KEYS[4], change.id)
+    if prior then
+      local email = string.lower(cjson.decode(prior).user.email)
+      if redis.call('HGET', KEYS[5], email) == change.id then redis.call('HDEL', KEYS[5], email) end
+    end
+  end
+  for _, change in ipairs(changes) do
+    redis.call('HSET', KEYS[4], change.id, change.value)
+    redis.call('HSET', KEYS[5], string.lower(replacements[change.id].user.email), change.id)
+  end
+end
 local result = nil
 if receipt then
   receipt.sequence = sequence
@@ -287,9 +330,22 @@ function redisStore(url, token, prefix, { fetch: request = globalThis.fetch } = 
     poll: snapshot,
     async commit(entry, expected) {
       const { raw, operation } = prepareCommit(entry, expected);
+      const keys = [metaKey, logKey, operationsKey];
+      let identityChanges = "";
+      if (expected.identity) {
+        const { accountsKey, emailsKey, changes } = expected.identity;
+        if (typeof accountsKey !== "string" || typeof emailsKey !== "string" || !Array.isArray(changes)) throw new TypeError("Invalid identity transaction");
+        for (const change of changes) {
+          const record = JSON.parse(change.value);
+          if (String(record.user?.id) !== String(change.id) || record.user.password !== undefined) throw new TypeError("Unsafe identity delta");
+        }
+        keys.push(accountsKey, emailsKey); identityChanges = JSON.stringify(changes);
+        if (Buffer.byteLength(identityChanges) + Buffer.byteLength(raw) > MAX_BODY) throw unavailable("Atomic change exceeds the persistence limit.");
+      }
       let reply;
-      try { reply = JSON.parse(await evaluate(COMMIT, [metaKey, logKey, operationsKey], [expected.expectedEpoch, String(expected.expectedRevision), raw, String(MAX_ENTRIES), operation?.key || "", operation?.receipt.fingerprint || "", JSON.stringify(operation?.receipt || {})])); }
+      try { reply = JSON.parse(await evaluate(COMMIT, keys, [expected.expectedEpoch, String(expected.expectedRevision), raw, String(MAX_ENTRIES), operation?.key || "", operation?.receipt.fingerprint || "", JSON.stringify(operation?.receipt || {}), identityChanges])); }
       catch { throw unavailable(); }
+      if (reply.status === "account_conflict") throw Object.assign(new Error("Account changed concurrently."), { status: 409, code: "account_conflict" });
       if (reply.status === "conflict" || reply.status === "operation_conflict") throw conflict(reply.status === "operation_conflict" ? reply.status : undefined);
       if (reply.status === "full") throw unavailable("Journal is full. Nothing was committed.");
       if (!["committed", "duplicate"].includes(reply.status) || !Number.isSafeInteger(reply.sequence) || reply.sequence < 1) throw unavailable();

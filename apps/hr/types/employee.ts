@@ -35,7 +35,6 @@ export type EmployeeFormValues = {
   firstName: string;
   lastName: string;
   birthDate: Date | undefined;
-  password: string;
   nationality: string;
   phoneNumber: string;
   email: string;
@@ -124,7 +123,6 @@ export function buildDefaultPermissions(): PermissionsState {
 
 export function getDefaultEmployeeFormValues(): EmployeeFormValues {
   return {
-    password: "",
     firstName: "",
     lastName: "",
     birthDate: undefined,
@@ -222,7 +220,6 @@ export function getDefaultEmployeeFormValues(): EmployeeFormValues {
 export interface ICreateEmployeeDTO {
   firstName: string;
   lastName: string;
-  password?: string;
   birthday: string; // YYYY-MM-DD
   gender: string;
   nationality: string;
@@ -235,6 +232,23 @@ export interface ICreateEmployeeDTO {
   postCode: string;
   personalTaxId?: string;
   accommodationType: string;
+}
+
+export interface ICreateEmployeeResult
+  extends Pick<IEmployee, "id" | "authUserId" | "employeeCode" | "firstName" | "lastName" | "email" | "completedSteps"> {
+  status: "invited";
+  isActive: false;
+  onboardingComplete: false;
+  invitation: {
+    id: string;
+    status: "pending";
+    expiresAt: string;
+  };
+}
+
+export interface ICreateEmployeeRequest {
+  body: ICreateEmployeeDTO;
+  operationId: string;
 }
 
 export interface IOnboardingStepDTO {

@@ -21,6 +21,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    bindVerifiedSession: (state, action: PayloadAction<IAuthState>) => { state.user = action.payload.user; state.token = action.payload.token; },
     setUser: (
       state,
       action: PayloadAction<{
@@ -50,5 +51,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, logoutUser } = authSlice.actions;
+export const { setUser, logoutUser, bindVerifiedSession } = authSlice.actions;
 export default authSlice;

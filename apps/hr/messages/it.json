@@ -11,7 +11,8 @@
       "next": "Avanti",
       "submit": "Crea dipendente",
       "save": "Salva modifiche",
-      "close": "Chiudi"
+      "close": "Chiudi",
+      "recoverInvitation": "Recupera invito"
     },
     "avatar": {
       "upload": "Carica foto",
@@ -44,14 +45,16 @@
             "label": "Alloggio proprio",
             "description": "Nessun supporto aziendale"
           }
-        }
+        },
+        "invitationHint": "Un invito all’area di lavoro sarà recapitato nella casella di posta simulata. La persona sceglie la password quando accetta l’invito."
       },
       "employee": {
         "nav": "Informazioni dipendente",
         "heading": "Informazioni dipendente",
         "description": "Queste informazioni ci aiuteranno a confermare la tua identità e a completare i passaggi necessari per aggiungere i tuoi dati dipendente.",
         "skillsHeading": "Competenze",
-        "skillsDescription": "Queste informazioni ci aiuteranno a confermare le tue competenze."
+        "skillsDescription": "Queste informazioni ci aiuteranno a confermare le tue competenze.",
+        "invitationPending": "L’accesso all’area di lavoro inizia dopo che la persona ha accettato l’invito."
       },
       "bank": {
         "nav": "Dati bancari",
@@ -145,7 +148,6 @@
       "trainingPeriod": "Periodo di formazione",
       "noticePeriod": "Periodo di preavviso",
       "contractBody": "Corpo del contratto",
-      "password": "Password",
       "gender": "Genere",
       "maritalStatus": "Stato civile",
       "experienceLevel": "Livello di esperienza",
@@ -196,7 +198,6 @@
       "contractType": "Seleziona tipo di contratto",
       "trainingPeriod": "Seleziona periodo di formazione",
       "noticePeriod": "Seleziona periodo di preavviso",
-      "password": "PasswordSicura123!",
       "gender": "Seleziona il genere",
       "maritalStatus": "Seleziona lo stato civile",
       "instapayNumber": "(+02) 0105 352 245",
@@ -283,7 +284,8 @@
         "active": "Attivo",
         "inactive": "Inattivo",
         "probation": "Periodo di prova",
-        "terminated": "Cessato"
+        "terminated": "Cessato",
+        "invited": "Invitato"
       },
       "skills": {
         "ui": "Design UI",
@@ -367,19 +369,17 @@
     },
     "success": {
       "title": "Operazione riuscita",
-      "messageCreate": "Il dipendente è stato creato correttamente.",
+      "messageCreate": "I dati del dipendente sono stati salvati. Il suo invito all’area di lavoro è nella casella di posta simulata.",
       "messageEdit": "Il dipendente è stato aggiornato correttamente.",
       "primary": "Fine"
     },
     "errors": {
       "postCodeFor": "Un codice postale in {country} è come {example}.",
       "postCode": "Inserisci un codice postale valido.",
-      "passwordRequired": "La password è obbligatoria e deve contenere almeno 6 caratteri",
       "invalidPhoneNumber": "Formato del numero di telefono non valido",
       "invalidPostCode": "Il codice postale deve avere 5 cifre",
       "firstNameRequired": "Il nome è obbligatorio",
       "lastNameRequired": "Il cognome è obbligatorio",
-      "passwordMin": "La password deve contenere almeno 6 caratteri",
       "birthDateRequired": "La data di nascita è obbligatoria",
       "phoneRequired": "Il numero di telefono è obbligatorio",
       "invalidEmail": "Indirizzo e-mail non valido",
@@ -417,12 +417,15 @@
       "casualLeaveRequired": "I permessi straordinari sono obbligatori",
       "sickLeaveRequired": "I giorni di malattia sono obbligatori",
       "unpaidLeaveRequired": "La regola sul congedo non retribuito è obbligatoria",
-      "noEmployeeId": "Questo dipendente non è ancora stato creato. Tornare al primo passaggio e salvarlo."
+      "noEmployeeId": "Questo dipendente non è ancora stato creato. Tornare al primo passaggio e salvarlo.",
+      "invitationUnconfirmed": "Lo stato dell’invito non è confermato. Riprova per recuperare il risultato della stessa richiesta.",
+      "invitationWorkspaceChanged": "Torna all’area di lavoro originale per recuperare questo invito.",
+      "invitationCapacity": "Non è disponibile alcun posto HR. Aumenta la capacità o libera un posto, poi riprova."
     },
     "editEmployee": "Modifica dipendente",
     "loading": "Caricamento...",
     "toasts": {
-      "creatingEmployee": "Creazione del dipendente...",
+      "creatingEmployee": "Creazione del dipendente e dell’invito all’area di lavoro...",
       "updatingEmployeeInfo": "Aggiornamento dei dati del dipendente...",
       "updatingPaymentInfo": "Aggiornamento dei dati di pagamento...",
       "updatingSalaryInfo": "Aggiornamento dei dati retributivi...",
@@ -2349,7 +2352,7 @@
     "added": "Aggiunto",
     "deleted": "Eliminato",
     "uploaded": "Caricato",
-    "employeeAdded": "Dipendente aggiunto",
+    "employeeAdded": "Dipendente creato; invito all’area di lavoro recapitato nella casella di posta simulata.",
     "employeeRemoved": "Dipendente rimosso",
     "requestSent": "Richiesta inviata",
     "decisionSaved": "Decisione salvata",

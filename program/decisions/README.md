@@ -81,6 +81,9 @@ Each decision gets a `D-###.md` file with its context, options, decision, conseq
 
 - [D-067](D-067.md): Custom-plan quote totals are allocated explicitly to per-tool prices; the platform never invents a monetary split (2026-10-07).
 
+- [D-068](D-068.md): One authoritative workspace/session boundary, private app stores, guest caps and workspace-specific offboarding revocation (2026-10-07).
+- [D-069](D-069.md): Explicit persistent renewal, recovery and seat commands extend the shared pricing model (2026-10-07).
+
 ## Proposed
 
 Each one has a full write-up: context, options with their trade-offs, the proposal, consequences, and the evidence still pending. They were drafted in session 5 for the G0 review.

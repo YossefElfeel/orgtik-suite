@@ -19,11 +19,15 @@ function readOnlyClaim(token: string | null | undefined): boolean {
 }
 
 export function useTaskRoles(): TaskPermissions & { readOnlySession: boolean; canEdit: boolean } {
-  const scopes = useAppSelector((s) => s.auth.user?.scopes);
+  const user = useAppSelector((s) => s.auth.user);
   const token = useAppSelector((s) => s.auth.token);
+  const context = (user as (typeof user & { workspaceContext?: { actor?: { readOnly?: boolean }; tools?: { tasks?: { scope: string; roles: import("@/types/user").IUserScope["roles"]; canWrite: boolean; access: string } } } }))?.workspaceContext;
+  const access = context?.tools?.tasks;
+  const scopes = context ? access && !["no_access", "not_subscribed"].includes(access.access) ? [{ scope: access.scope, roles: access.roles }] : [] : user?.scopes;
   const p = permissionsFor(scopes);
-  const readOnlySession = readOnlyClaim(token);
+  const readOnlySession = context?.actor?.readOnly === true || readOnlyClaim(token);
+  const blocked = readOnlySession || Boolean(context && access?.canWrite !== true);
   // isViewerOnly stays the person's role (what they can open); canEdit and the manager rights also
   // follow the session (what they can change now).
-  return { ...p, isAdmin: p.isAdmin && !readOnlySession, isManager: p.isManager && !readOnlySession, canEdit: !p.isViewerOnly && !readOnlySession, readOnlySession };
+  return { ...p, isAdmin: p.isAdmin && !blocked, isManager: p.isManager && !blocked, canEdit: !p.isViewerOnly && !blocked, readOnlySession };
 }

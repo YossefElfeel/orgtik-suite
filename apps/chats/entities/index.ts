@@ -431,7 +431,8 @@ export type ActivationState = "off" | "trial" | "active";
 export interface Activation {
   state: ActivationState;
   tier: "starter" | "business" | "enterprise";
-  userCap: number;
+  /** Flat-price tools have no purchased-seat quantity. Access still requires an assigned grant. */
+  userCap: number | null;
   trialEndsAt?: IsoDateTime;
 }
 

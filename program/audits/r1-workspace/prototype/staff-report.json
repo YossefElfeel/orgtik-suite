@@ -1,0 +1,17 @@
+{
+  "scope": "Local SOS staff bridge only; Admin destination UI and release acceptance deferred",
+  "checks": [
+    {
+      "name": "Customer workspace ownership does not authorize staff mode",
+      "pass": true
+    },
+    {
+      "name": "Staff entry forwards validated body fields and scoped code while original customer tab remains bound",
+      "pass": true
+    },
+    {
+      "name": "Staff destination code exchanges to current staff-only authority with no customer workspace context",
+      "pass": true
+    }
+  ]
+}

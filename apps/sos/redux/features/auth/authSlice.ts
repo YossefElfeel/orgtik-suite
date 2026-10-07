@@ -1,18 +1,18 @@
 import { USER_COOKIE, TOKEN_COOKIE, SCOPES_COOKIE } from "@/constants/index";
-import { IAuthState } from "@/types/user";
+import { IAuthState, IUser } from "@/types/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
+import { clearClientSession, readClientSession, setClientSession, type WorkspaceContext, type StaffAccess } from "@orgtik/ui/auth";
+
+const tabSession = readClientSession<IUser>();
+function cookieJson(name: string) { try { const raw = getCookie(name); return typeof raw === "string" ? JSON.parse(raw) : null; } catch { return null; } }
 
 const initialState: IAuthState = {
-  user: getCookie(USER_COOKIE)
-    ? JSON.parse(getCookie(USER_COOKIE) as string)
-    : null,
-  tokens: getCookie(TOKEN_COOKIE)
-    ? JSON.parse(getCookie(TOKEN_COOKIE) as string)
-    : null,
-  scopes: getCookie(SCOPES_COOKIE)
-    ? JSON.parse(getCookie(SCOPES_COOKIE) as string)
-    : null,
+  user: tabSession?.user ?? cookieJson(USER_COOKIE),
+  tokens: tabSession?.tokens ?? cookieJson(TOKEN_COOKIE),
+  scopes: tabSession?.scopes ?? cookieJson(SCOPES_COOKIE),
+  workspaceContext: tabSession?.workspaceContext ?? null,
+  staffAccess: tabSession?.staffAccess ?? null,
 };
 
 const cookieConfig = {
@@ -32,11 +32,16 @@ const authSlice = createSlice({
         user: NonNullable<IAuthState["user"]>;
         tokens: NonNullable<IAuthState["tokens"]>;
         scopes: NonNullable<IAuthState["scopes"]>;
+        workspaceContext?: WorkspaceContext | null;
+        staffAccess?: StaffAccess | null;
       }>
     ) => {
       state.user = action.payload.user;
       state.tokens = action.payload.tokens;
       state.scopes = action.payload.scopes;
+      state.workspaceContext = action.payload.workspaceContext ?? null;
+      state.staffAccess = action.payload.staffAccess ?? null;
+      setClientSession({ ...action.payload, workspaceContext: state.workspaceContext, staffAccess: state.staffAccess });
 
       // Set cookies with proper configuration
       setCookie(USER_COOKIE, JSON.stringify(action.payload.user), cookieConfig);
@@ -52,6 +57,7 @@ const authSlice = createSlice({
       action: PayloadAction<NonNullable<IAuthState["tokens"]>>
     ) => {
       state.tokens = action.payload;
+      if (state.user) setClientSession({ user: state.user, tokens: action.payload, scopes: state.scopes || [], workspaceContext: state.workspaceContext, staffAccess: state.staffAccess });
       setCookie(TOKEN_COOKIE, JSON.stringify(action.payload), cookieConfig);
     },
     updateUserAndScopes: (
@@ -59,10 +65,15 @@ const authSlice = createSlice({
       action: PayloadAction<{
         user: NonNullable<IAuthState["user"]>;
         scopes: NonNullable<IAuthState["scopes"]>;
+        workspaceContext?: WorkspaceContext | null;
+        staffAccess?: StaffAccess | null;
       }>
     ) => {
       state.user = action.payload.user;
       state.scopes = action.payload.scopes;
+      if (action.payload.workspaceContext !== undefined) state.workspaceContext = action.payload.workspaceContext;
+      if (action.payload.staffAccess !== undefined) state.staffAccess = action.payload.staffAccess;
+      if (state.tokens) setClientSession({ user: action.payload.user, tokens: state.tokens, scopes: action.payload.scopes, workspaceContext: state.workspaceContext, staffAccess: state.staffAccess });
 
       setCookie(USER_COOKIE, JSON.stringify(action.payload.user), cookieConfig);
       setCookie(SCOPES_COOKIE, JSON.stringify(action.payload.scopes), cookieConfig);
@@ -71,6 +82,9 @@ const authSlice = createSlice({
       state.user = null;
       state.tokens = null;
       state.scopes = null;
+      state.workspaceContext = null;
+      state.staffAccess = null;
+      clearClientSession();
       deleteCookie(USER_COOKIE);
       deleteCookie(TOKEN_COOKIE);
       deleteCookie(SCOPES_COOKIE);

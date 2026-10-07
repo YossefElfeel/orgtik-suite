@@ -4,11 +4,11 @@
 // sidebar for SOS's own pages (it was a rail plus a header pill bar labelled "Admin navigation",
 // shown to everyone). One sign out, in the person's menu (it was under the rail too). Language
 // changes at once from that menu. Acting as someone else is the one banner, with its way out.
-import { type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { Bell, Buildings, CreditCard, EyeSlash, GearSix, Globe, Headset, House, Invoice, Receipt, Briefcase, SquaresFour, Storefront, UserCircle, UsersThree, UsersFour } from "@phosphor-icons/react";
-import { AppRail, BannerRegion, Button, MenuLinkItem, Sidebar, SuiteShell, UserMenu, type Banner, type Locale, type SidebarItem, type SidebarSection } from "@orgtik/ui";
+import { AppRail, BannerRegion, Button, MenuLinkItem, Sidebar, SuiteShell, UserMenu, toast, useStrings, type Banner, type Locale, type SidebarItem, type SidebarSection } from "@orgtik/ui";
 import { useAppDispatch } from "@/redux/app/hooks";
 import { useExitImpersonationMutation, useLogoutMutation } from "@/redux/features/auth/authApi";
 import { performLogout } from "@/redux/features/auth/authThunks";
@@ -45,6 +45,8 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   const { user, isAdmin, isWebsiteManager, accessToken } = useUser();
   const { isImpersonating, adminDisplayName, targetDisplayName } = useImpersonation();
   const [logout] = useLogoutMutation();
+  const signOutBusy = useRef(false);
+  const uiText = useStrings();
   const [exitImpersonation, { isLoading: exiting }] = useExitImpersonationMutation();
   const apps = useSuiteApps(mounted ? (accessToken ?? null) : null);
 
@@ -56,6 +58,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   // The customer dashboard (USR, Phase E): what the person's role in the workspace allows. Billing
   // is the owner's (spec 05 §1); the team is the owner's and admins'.
   const tw = useTranslations("Workspace.nav");
+  const workspaceText = useTranslations("Workspace");
   const ws = useWorkspace();
   const sections: SidebarSection[] = [{ items }];
   if (mounted && ws.me) {
@@ -87,11 +90,18 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   const workspaceBanners = useWorkspaceBanners(ws.me);
 
   const signOut = async () => {
+    if (signOutBusy.current) return;
+    signOutBusy.current = true;
     try {
       await logout().unwrap();
-    } catch {
-      // Signing out locally still happens.
+    } catch (error) {
+      if (![401, 403].includes((error as { status?: number }).status || 0)) {
+        signOutBusy.current = false;
+        toast.error(workspaceText("signOutFailed"), { id: "suite-sign-out-failed", action: { label: uiText("retry"), onClick: () => { toast.dismiss("suite-sign-out-failed"); void signOut(); } } });
+        return;
+      }
     }
+    toast.dismiss("suite-sign-out-failed");
     dispatch(performLogout());
     router.push("/auth/login");
   };
@@ -127,7 +137,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
       sidebar={<Sidebar title={<span dir="ltr">{ts("appName")}</span>} sections={sections} />}
       banner={banners.length ? <BannerRegion banners={banners} /> : undefined}
       topBar={{
-        start: mounted && user ? ws.me ? <WorkspaceSwitcher me={ws.me} onSwitch={ws.switchTo} /> : <Greeting firstName={user.firstName || user.username} /> : null,
+        start: mounted && user ? ws.me ? <WorkspaceSwitcher me={ws.me} onSwitch={ws.switchTo} switching={ws.switching} failed={ws.switchError} /> : <Greeting firstName={user.firstName || user.username} /> : null,
         end:
           mounted && user ? (
             <UserMenu

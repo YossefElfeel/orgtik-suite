@@ -97,10 +97,14 @@ export function ActivationScreen() {
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p className="text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
-                    {t("activate.recommended", "{tier} · up to {cap} people", { tier: TIER_LABEL[activation.tier] ?? activation.tier, cap: activation.userCap })}
+                    {activation.userCap === null
+                      ? t("activate.unmeteredSummary", "Chats access for this workspace")
+                      : t("activate.recommended", "{tier} · up to {cap} people", { tier: TIER_LABEL[activation.tier] ?? activation.tier, cap: activation.userCap })}
                   </p>
                   <p className="mt-0.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
-                    {t("activate.recommendedHint", "Fits the {n} people in the directory. Media minutes are the only cost that grows with use.", { n: people })}
+                    {activation.userCap === null
+                      ? t("activate.unmeteredHint", "{n} people can use Chats in this workspace.", { n: people })
+                      : t("activate.recommendedHint", "Fits the {n} people in the directory. Media minutes are the only cost that grows with use.", { n: people })}
                   </p>
                 </div>
                 {can.manageSettings && (
@@ -128,10 +132,10 @@ export function ActivationScreen() {
               <h1 className="hq-display" style={{ color: "var(--color-ink)" }}>
                 {t("activate.activeTitle", "Chats is activated")}
               </h1>
-              <Chip tone="success">{TIER_LABEL[activation.tier] ?? activation.tier}</Chip>
+              <Chip tone="success">{activation.userCap === null ? t("activate.workspaceAccess", "Workspace access") : TIER_LABEL[activation.tier] ?? activation.tier}</Chip>
             </div>
             <p className="mt-2 text-[14px] leading-relaxed" style={{ color: "var(--color-ink-muted)", maxWidth: "58ch" }}>
-              {t("activate.activeBody", "{tier}, up to {cap} people, billed with the rest of the suite. {n} people are in the directory today.", {
+              {activation.userCap === null ? t("activate.unmeteredBody", "Chats is managed per workspace. Only members with Chats access can open it; {n} people have access here.", { n: people }) : t("activate.activeBody", "{tier}, up to {cap} people, billed with the rest of the suite. {n} people are in the directory today.", {
                 tier: TIER_LABEL[activation.tier] ?? activation.tier,
                 cap: activation.userCap,
                 n: people,

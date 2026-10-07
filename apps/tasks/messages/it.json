@@ -43,7 +43,10 @@
     "noAccessTitle": "Non puoi aprire questa pagina",
     "noAccessBody": "Il tuo ruolo in Attività non la include. Chiedi a un project manager o all’amministratore dello spazio di lavoro se ti serve.",
     "appNoAccessTitle": "Non hai accesso ad Attività",
-    "appNoAccessBody": "Il tuo account non è configurato per questa app. Apri le app che puoi usare dalla suite o chiedi all’amministratore dello spazio di lavoro di darti accesso ad Attività."
+    "appNoAccessBody": "Il tuo account non è configurato per questa app. Apri le app che puoi usare dalla suite o chiedi all’amministratore dello spazio di lavoro di darti accesso ad Attività.",
+    "sessionLoading": "Apertura del tuo spazio di lavoro…",
+    "sessionUnavailableTitle": "Impossibile aprire il tuo spazio di lavoro",
+    "sessionUnavailableBody": "Impossibile verificare il tuo accesso attuale. I dati di accesso restano salvati; riprova per continuare."
   },
   "Feedback": {
     "saved": "Modifiche salvate",

@@ -1,18 +1,17 @@
 # OrgTik: run everything locally
 
-Runs the seven OrgTik apps and the website on your machine against a local mock backend. Nothing talks to the online `sosback.orgtik.*`, `sos.orgtik.*`, app backends, or the Iconify icon API.
+Runs the suite applications and website against the persistent mock backend. Customer data belongs to the selected workspace; ADM and WM use OrgTik staff context. Providers, payments and delivery are simulated. The current roadmap/evidence is in `program/plan-v2-execution.md` and `program/phase-f/README.md`.
 
 ## Start
 
 Double-click `start-local.cmd` in the project root, or:
 
 ```sh
-cd local-dev
-npm install        # first time only
-npm start          # mock APIs + every app's dev server
+pnpm install --frozen-lockfile
+pnpm --filter orgtik-local-dev start
 ```
 
-Then open **http://localhost:3013/auth/login**, sign in with a test account below, and use the launcher bar on the left to open each app. **Chats** (Somion HQ) is the last tile; opened from there, it shows the same suite launcher as every other app (on desktop widths; on narrow screens HQ uses bottom tabs). The website needs no sign-in: open its URL directly. The launcher hands your session to the app; opening an app's URL directly without a session sends you back to the login.
+Then open **http://localhost:3013/auth**, sign in with a test account below, choose a workspace and use the launcher. New accounts begin with empty workspace stores. The launcher sends a one-time destination code; URLs do not carry session tokens. The website needs no sign-in.
 
 Stop everything with Ctrl+C (or close the window).
 
@@ -25,13 +24,13 @@ Stop everything with Ctrl+C (or close the window).
 | HR | http://localhost:3004 | http://localhost:4004 |
 | Digital Marketing | http://localhost:3014 | http://localhost:4005 |
 | Content Dashboard | http://localhost:3006 | http://localhost:4006 |
-| OrgTik Chats / Somion HQ (chat, calls, virtual office) | http://localhost:3000 | none (built-in mock data) |
+| OrgTik Chats / Somion HQ (chat, calls, virtual office) | http://localhost:3000 | http://localhost:4009 |
 | Website (frontend only) | http://localhost:4173 | none |
 | Local icon server | http://localhost:4099 | |
-| *Reserved:* Website Manager (the new CMS) | http://localhost:3007 | http://localhost:4007 |
-| *Reserved:* Admin back-office (ADM) | http://localhost:3008 | http://localhost:4008 |
+| Website Manager (internal CMS) | http://localhost:3007 | http://localhost:4007 |
+| Admin back-office (ADM) | http://localhost:3008 | http://localhost:4008 |
 
-The reserved ports belong to apps the program will build. `start-all.js` and `patch.js` skip them until those apps exist.
+Hosted projects are already configured. Reuse their existing Redis/credential configuration; do not create replacements. All12 native Git deployments and the deployment workflow remain paused by the owner. Quota reset does not enable deployment. Linux CI and hosted release acceptance are tracked separately.
 
 Run only some apps: `node start-all.js tasks,files` (SOS always starts, since it is the login).
 
@@ -61,7 +60,7 @@ More staff (Youssef, Laila, Ahmed, Mahmoud, Dina, Tamer, Sherif, Aya) exist with
 - **HR:** attendance, time off, payroll runs (HR prepares → Mona approves → Hany pays).
 - **Marketing:** posts and approvals for the Nile Foods brand, campaign wizards, a simulated social-account connect flow.
 - **Content:** services, blogs (the code editor is served locally), projects, contact inbox.
-- **Chats:** the virtual office, channels, calls. **Meet now** (on Meetings, or in a conversation's header) starts a meeting straight away; copy its link, open it in another tab of the same browser to join as a guest, and admit them from the first tab. HQ keeps its data in memory, so a reload starts fresh.
+- **Chats:** workspace channels/messages/read state persist through the backend and use polling. New/Nile workspaces do not inherit OrgTik's demo channels. Meeting and live-media capabilities retain their later roadmap/deferred scope; guests do not gain the workspace directory.
 
 ## Check that everything works
 
@@ -122,7 +121,7 @@ Other startup switches: `MOCK_STRICT_SCOPES=1` turns strict access on from the s
 
 ## Data that survives restarts (the write journal, D-053)
 
-By default the data lives in memory, as above. With a journal store, every successful change (POST, PUT, PATCH, DELETE) is recorded and replayed after the seed, so the data survives a restart and every Vercel instance shows the same data. Changes to the mock's own controls and anything about sign-in, passwords or tokens are never recorded.
+Local mode defaults to a persistent journal file. Hosted mode reuses the configured Redis store and fails closed if account/session persistence is unavailable. Versioned compressed checkpoints preserve platform, workspace and internal CMS state; account changes share the domain CAS and security records stay separate. Bearer tokens/passwords do not enter business history.
 
 | Setting | Effect |
 |---|---|
@@ -131,10 +130,10 @@ By default the data lives in memory, as above. With a journal store, every succe
 | `MOCK_JOURNAL=memory` | In this process only (tests). |
 | `MOCK_SANDBOX=<name>` | Which data set (default `demo`). Each mock deployment uses one sandbox. |
 
-- **How it stays identical:** the seed is built at the instant stored with the journal, and each change is replayed with its own recorded instant and random seed (`lib/clock.js` `runPinned`).
-- **One request at a time:** while a journal is on, the mock answers one request at a time, so the order applied equals the order recorded. Changes go through a loopback HTTP server inside the process.
-- **Status and reset:** `GET /__mock/status` shows `journal` (sandbox, store, entries, skipped). `POST /__mock/reset` starts a new journal and a fresh seed for that sandbox only. `skipped` above 0 after a cold start means a replay didn't reproduce; report it.
-- **Limits:** 5,000 changes per sandbox (`MOCK_JOURNAL_MAX`), and request bodies up to 512 KB. Larger uploads still work, but they aren't recorded. A response header `x-mock-journal` says when a change wasn't recorded.
+- **How it stays identical:** fixtures use the journal's initialization instant. Current operations restore committed snapshots; historical input-only tool/financial prefixes use private reducers. Invalid or conflicting history fails503 rather than losing data.
+- **Concurrency:** requests serialize locally and commit against the shared epoch/revision across instances. Failed speculative work is discarded; scoped receipts prevent repeating accepted effects.
+- **Status and reset:** `GET /__mock/status` reports journal state. Authorized fixture resets are for isolated verification only. Production verification must never reset business data or advance the clock.
+- **Limits:**5,000 changes per sandbox (`MOCK_JOURNAL_MAX`),512KB compressed journal entries and16MB decoded snapshots. Oversized persistence returns failure. Arbitrary binary uploads remain deferred; use packaged sample assets.
 - **Test:** `node lib/journal.test.js` (cold starts in separate processes, 8 checks).
 
 ## Known issues that come from the apps themselves

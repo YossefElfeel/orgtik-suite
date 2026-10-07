@@ -6,12 +6,15 @@ import {
   API_URL,
   TOKEN_COOKIE,
   USER_COOKIE,
+  SOS_API_URL,
 } from "@/constants";
 import { logoutUser } from "../features/auth/authSlice";
 import { suiteSignIn } from "@/lib/suite-return";
 import { errorMessage, successMessage } from "@/lib/api-feedback";
+import { readClientSession, clearClientSession, refreshClientSession, SessionRequestError } from "@orgtik/ui/auth";
 
 const handleUserLogout = (api: any) => {
+  clearClientSession();
   api.dispatch(logoutUser());
   deleteCookie(TOKEN_COOKIE);
   deleteCookie(USER_COOKIE);
@@ -24,8 +27,10 @@ const handleUserLogout = (api: any) => {
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.token;
+    const session = readClientSession();
+    const token = session?.tokens.accessToken || (getState() as RootState).auth.token;
     if (token) headers.set("authorization", `Bearer ${token}`);
+    if (session?.workspaceContext?.workspace.id) headers.set("x-workspace", session.workspaceContext.workspace.id);
     return headers;
   },
 });
@@ -36,7 +41,10 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
 
   // If we get a 401 error, try to refresh the token
   if (result.error && result.error.status === 401) {
-    handleUserLogout(api);
+    if (readClientSession()?.tokens.refreshToken) {
+      try { await refreshClientSession(SOS_API_URL); result = await baseQuery(args, api, extraOptions); }
+      catch (error) { if (error instanceof SessionRequestError && [401, 403].includes(error.status)) handleUserLogout(api); else return { error: { status: 503, data: { code: "session_unavailable" } } }; }
+    } else handleUserLogout(api);
   }
 
   // What a change says, in the reader's language (FS-HR-3, lib/api-feedback): one message, once,

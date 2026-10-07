@@ -1,0 +1,27 @@
+const express = require('express');
+const codec = require('../../apps/chats/runtime-state');
+const schema = 'orgtik.tool.chats';
+let created = false;
+const fail = message => { throw Object.assign(new Error(message), { status: 503, code: 'invalid_tool_runtime' }); };
+function createWorkspaceRuntime(input, tool) {
+  const ctx = input.services?.ctx, realm = input.realm ?? input.identity?.realm ?? ctx?.realm, fixtureId = input.initialization?.fixtureId;
+  if (created || !ctx || typeof realm !== 'string' || !realm || !input.workspace?.id || !input.identity?.workspaceMode || input.identity.workspaceId !== input.workspace.id) fail('Chats requires a private verified workspace runtime.');
+  if (!['empty', 'fixture'].includes(input.initialization?.kind) || !Number.isFinite(Date.parse(input.initialization.seedAt))) fail('Chats initialization is invalid.');
+  if (input.initialization.kind === 'fixture' && (!['orgtik-v1', 'nile-v1'].includes(fixtureId) || input.workspace.id !== (fixtureId === 'orgtik-v1' ? 'ws_orgtik' : 'ws_nile'))) fail('Chats fixture is not assigned to this workspace.');
+  const snapshot = input.snapshot;
+  if (snapshot && (snapshot.schema !== schema || snapshot.version !== 1 || snapshot.realm !== realm || snapshot.workspaceId !== input.workspace.id || snapshot.appKey !== 'chats')) fail('Chats snapshot belongs to another runtime.');
+  const effectiveFixture = snapshot?.fixtureId || fixtureId;
+  if (effectiveFixture && (!['orgtik-v1', 'nile-v1'].includes(effectiveFixture) || input.workspace.id !== (effectiveFixture === 'orgtik-v1' ? 'ws_orgtik' : 'ws_nile'))) fail('Chats snapshot fixture is not assigned to this workspace.');
+  const state = snapshot ? codec.decode(snapshot.data, snapshot.sequences) : codec.initialize({ workspace: input.workspace, identity: input.identity, fixtureId: input.initialization.kind === 'fixture' ? fixtureId : null });
+  const router = express.Router(); created = true;
+  const hooks = tool.routes(router, { ...ctx, identity: input.identity }, { state, seedAt: input.initialization.seedAt, timeZone: input.workspace.timeZone, fixtureId: effectiveFixture });
+  return {
+    router, exportSnapshot: () => ({ schema, version: 1, realm, workspaceId: input.workspace.id, appKey: 'chats', ...hooks.exportState(), ...(effectiveFixture ? { fixtureId: effectiveFixture } : {}) }),
+    bootstrap(context) {
+      const access = context?.tools?.chat;
+      if (context?.mode === 'public_resource' || context?.realm !== realm || context.workspace?.id !== input.workspace.id || !context.actor || !access || ['no_access', 'not_subscribed'].includes(access.access)) throw Object.assign(new Error('Chats bootstrap is not authorized.'), { status: 403 });
+      return hooks.bootstrap(input.identity.findUser(context.actor.effectiveUserId));
+    }, usage: hooks.usage, transferOwnership: hooks.transferOwnership, close: hooks.close,
+  };
+}
+module.exports = { createWorkspaceRuntime, schema };

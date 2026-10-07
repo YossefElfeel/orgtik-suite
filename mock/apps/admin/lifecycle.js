@@ -143,6 +143,12 @@ function advance(S) {
 function toolState(S, ws, tool, member) {
   if (tool.status === "coming_soon") return "coming_soon";
   if (tool.status === "retired") return null;
+  if (S.db.workspaceAuthorityVersion === 1 && require('../../lib/workspace-context').TOOL_DEFINITIONS[tool.key]) {
+    if (!member || member.status !== 'active' || !member.userKey) return 'no_access';
+    const context = require('../../lib/workspace-context').resolveWorkspaceContext(S, {}, { id: 1, key: member.userKey, isActive: true }, { workspaceId: ws.id });
+    const access = context.tools[tool.key].access;
+    return tool.status === 'beta' && access === 'active' ? 'beta' : access === 'free' ? 'active' : access;
+  }
   if (member?.role === "member" || member?.role === "guest") {
     if (member.tools && !member.tools.includes(tool.key) && !tool.mandatory) return "no_access";
   }

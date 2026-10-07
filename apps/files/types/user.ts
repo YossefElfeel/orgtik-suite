@@ -1,4 +1,5 @@
 import { IUser } from "@somion/sos-bar";
+import type { WorkspaceContext } from '@orgtik/ui/auth';
 
 export type VisibilityType = "only_me" | "everyone" | "specific_people";
 
@@ -14,6 +15,6 @@ export interface IFolderOwner {
 }
 
 export interface IAuthState {
-  user: Omit<IUser, "userRoles" | "permissions"> | null;
+  user: (Omit<IUser, "userRoles" | "permissions"> & { workspaceContext?: WorkspaceContext }) | null;
   token: string | null;
 }

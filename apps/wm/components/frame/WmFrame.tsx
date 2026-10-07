@@ -18,7 +18,8 @@ import {
 } from "@orgtik/ui";
 import { routing, usePathname, useRouter } from "@/i18n/routing";
 import { SOS_URL, WEBSITE_URL } from "@/lib/env";
-import { clearToken, getToken } from "@/lib/session";
+import { clearToken, getToken, signOutStaff } from "@/lib/session";
+import { useClientSession } from "@orgtik/ui/auth";
 import { statusOf, useMeQuery } from "@/store/api";
 import { CURRENT_SCOPE, useSuiteApps } from "@/components/suite/useSuiteApps";
 import { CenteredState } from "./CenteredState";
@@ -93,8 +94,10 @@ export function WmFrame({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
+  const session = useClientSession();
+  const [signOutFailed, setSignOutFailed] = useState(false);
   const [token, setTokenState] = useState<string | null | undefined>(undefined);
-  useEffect(() => setTokenState(getToken()), []);
+  useEffect(() => setTokenState(getToken()), [session]);
   useEffect(() => {
     if (token === null) router.replace("/signed-out");
   }, [token, router]);
@@ -135,7 +138,8 @@ export function WmFrame({ children }: { children: ReactNode }) {
   }
 
   const { user, permissions } = me.data;
-  const allowed = new Set(permissions);
+  const staffPermissions = session?.workspaceContext ? [] : session?.staffAccess?.permissions.wm || [];
+  const allowed = new Set(permissions.filter(permission => staffPermissions.includes(permission)));
   const matches = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/"));
   // Only the most specific item is current: on /seo/redirects that's Redirects, not SEO health.
   const best = nav.flatMap((x) => x.items.map((i) => i.href)).filter(matches).sort((x, y) => y.length - x.length)[0];
@@ -172,14 +176,14 @@ export function WmFrame({ children }: { children: ReactNode }) {
             locales={routing.locales as readonly Locale[]}
             onLocaleChange={(next) => router.replace(pathname, { locale: next })}
             onSignOut={() => {
-              clearToken();
-              window.location.assign(SOS_URL);
+              void signOutStaff().then(() => window.location.assign(SOS_URL)).catch(() => setSignOutFailed(true));
             }}
           />
         ),
       }}
     >
       <div className="mx-auto w-full max-w-6xl p-4 md:p-8">{children}</div>
+      {signOutFailed && <ErrorState size="compact" title={ta("offlineTitle")} description={ta("offlineBody")} onRetry={() => { setSignOutFailed(false); void signOutStaff().then(() => window.location.assign(SOS_URL)).catch(() => setSignOutFailed(true)); }} />}
       <Toaster />
     </SuiteShell>
   );

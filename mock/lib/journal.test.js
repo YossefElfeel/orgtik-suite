@@ -16,17 +16,14 @@ async function child(step) {
   const server = require("http").createServer(handler);
   await new Promise((r) => server.listen(0, "127.0.0.1", r));
   const base = `http://127.0.0.1:${server.address().port}`;
-  const call = async (method, url, body, token) => {
-    const r = await fetch(base + url, {
-      method,
-      headers: { "content-type": "application/json", ...(token ? { authorization: `Bearer ${token}` } : {}) },
-      body: body ? JSON.stringify(body) : undefined,
+  const call = (method, url, body, token) => new Promise((resolve, reject) => {
+    const payload = body ? Buffer.from(JSON.stringify(body)) : null;
+    const request = require('node:http').request(new URL(base + url), { method, agent: false, headers: { 'content-type': 'application/json', connection: 'close', ...(payload ? { 'content-length': payload.length } : {}), ...(token ? { authorization: `Bearer ${token}` } : {}) } }, response => {
+      const chunks = []; response.on('data', chunk => chunks.push(chunk)); response.on('error', reject);
+      response.on('end', () => { let json = null; try { json = JSON.parse(Buffer.concat(chunks).toString('utf8')); } catch {} resolve({ status: response.statusCode, json }); });
     });
-    const text = await r.text();
-    let json = null;
-    try { json = JSON.parse(text); } catch { /* not JSON */ }
-    return { status: r.status, json };
-  };
+    request.on('error', reject); request.end(payload);
+  });
   // Every {id, title|name} pair in a response, sorted: what a list screen would show.
   const items = (json) => {
     const out = [];
@@ -40,41 +37,50 @@ async function child(step) {
     return [...new Set(out)].sort();
   };
 
+  try {
   const login = await call("POST", "/sos/api/auth/login", { email: "mona.adel@orgtik.test", password: "Local@2026" });
   assert.strictEqual(login.status, 200, "login");
   const token = login.json.data?.tokens?.accessToken || login.json.tokens?.accessToken;
   assert.ok(token, "token");
+  const destination = async target => {
+    const selected = await call('POST', '/sos/api/auth/workspace', { workspaceId: 'ws_orgtik', target }, token);
+    assert.strictEqual(selected.status, 200); return selected.json.data.tokens.accessToken;
+  };
+  const tasksToken = await destination('tasks'), filesToken = await destination('files');
 
   const created = [];
   if (step === "write") {
-    const p = await call("POST", "/tasks/api/projects", { title: "Journal check A" }, token);
+    const p = await call("POST", "/tasks/api/projects", { title: "Journal check A" }, tasksToken);
     assert.ok(p.status < 300, `create project: ${p.status} ${JSON.stringify(p.json)}`);
-    const f = await call("POST", "/files/api/v1/folders", { name: "Journal folder A" }, token);
+    const f = await call("POST", "/files/api/v1/folders", { name: "Journal folder A" }, filesToken);
     assert.ok(f.status < 300, `create folder: ${f.status} ${JSON.stringify(f.json)}`);
     created.push("project", "folder");
   }
   if (step === "write-more") {
-    const p = await call("POST", "/tasks/api/projects", { title: "Journal check B" }, token);
+    const p = await call("POST", "/tasks/api/projects", { title: "Journal check B" }, tasksToken);
     assert.ok(p.status < 300, `create project B: ${p.status}`);
     created.push("project");
   }
   if (step === "reset") {
-    const r = await call("POST", "/sos/__mock/reset");
+    const staff = await call('POST', '/sos/api/auth/workspace', { mode: 'staff', target: 'admin' }, token);
+    assert.strictEqual(staff.status, 200);
+    const r = await call("POST", "/sos/__mock/reset", {}, staff.json.data.tokens.accessToken);
     assert.strictEqual(r.status, 200, "reset");
   }
-  const projects = items((await call("GET", "/tasks/api/projects", null, token)).json);
-  const folders = items((await call("GET", "/files/api/v1/folders", null, token)).json);
+  const projects = items((await call("GET", "/tasks/api/projects", null, tasksToken)).json);
+  const folders = items((await call("GET", "/files/api/v1/folders", null, filesToken)).json);
   const status = (await call("GET", "/sos/__mock/status")).json.data.journal;
   fs.writeFileSync(process.env.JOURNAL_TEST_OUT, JSON.stringify({ projects, folders, status, created }));
-  server.closeAllConnections();
-  server.close();
+  } finally {
+    await new Promise((resolve, reject) => { server.close(error => error ? reject(error) : resolve()); server.closeAllConnections(); });
+  }
 }
 
 const OUT = path.join(__dirname, "..", "journal", `${SANDBOX}.out.json`);
 function run(step) {
   try {
     execFileSync(process.execPath, [__filename, "--child", step], {
-      env: { ...process.env, MOCK_JOURNAL: "file", MOCK_SANDBOX: SANDBOX, MOCK_PUBLIC_URL: "", VERCEL: "", JOURNAL_TEST_OUT: OUT },
+      env: { ...process.env, MOCK_JOURNAL: "file", MOCK_SANDBOX: SANDBOX, MOCK_PUBLIC_URL: "", VERCEL: "", KV_REST_API_URL: '', KV_REST_API_TOKEN: '', UPSTASH_REDIS_REST_URL: '', UPSTASH_REDIS_REST_TOKEN: '', MOCK_AUTH_STORE: 'file', MOCK_AUTH_FILE: `${FILE}.accounts`, JOURNAL_TEST_OUT: OUT },
       encoding: "utf8",
       stdio: ["ignore", "ignore", "pipe"],
     });
@@ -98,8 +104,8 @@ function main() {
     const newIn = (x) => x.projects.filter((p) => !seed.projects.includes(p));
     const newFolders = (x) => x.folders.filter((f) => !seed.folders.includes(f));
 
-    check("a fresh journal starts from the seed only", () => assert.strictEqual(seed.status.entries, 0));
-    check("instance A records its two changes", () => assert.strictEqual(a.status.entries, 2));
+    check("a fresh journal materializes only its two private fixture stores", () => assert.strictEqual(seed.status.entries, 2));
+    check("instance A records its two changes", () => assert.strictEqual(a.status.entries, seed.status.entries + 2));
     check("A sees its new project and folder", () => {
       assert.strictEqual(newIn(a).length, 1);
       assert.strictEqual(newFolders(a).length, 1);
@@ -108,7 +114,7 @@ function main() {
       assert.ok(newIn(a).every((p) => b.projects.includes(p)));
       assert.ok(newFolders(a).every((f) => b.folders.includes(f)));
     });
-    check("B's own change is numbered after A's", () => assert.strictEqual(b.status.entries, 3));
+    check("B's own change is numbered after A's", () => assert.strictEqual(b.status.entries, seed.status.entries + 3));
     check("another cold start (C) sees every change, nothing skipped", () => {
       assert.deepStrictEqual(c.projects, b.projects);
       assert.deepStrictEqual(c.folders, b.folders);
@@ -120,17 +126,19 @@ function main() {
       assert.deepStrictEqual(seed2.folders, seed.folders);
     });
     check("a reset empties the journal and drops the changes", () => {
-      assert.strictEqual(d.status.entries, 0);
+      assert.strictEqual(d.status.entries, seed.status.entries);
       const ours = (x) => [...x.projects, ...x.folders].filter((i) => i.includes("Journal"));
       assert.deepStrictEqual([...ours(d), ...ours(e)], []);
-      assert.strictEqual(e.status.entries, 0);
+      assert.strictEqual(e.status.entries, seed.status.entries);
     });
     console.log(`journal: ${passed}/8 passed`);
   } finally {
     fs.rmSync(FILE, { force: true });
     fs.rmSync(OUT, { force: true });
+    fs.rmSync(`${FILE}.accounts`, { force: true });
+    fs.rmSync(`${FILE}.accounts.sessions`, { force: true });
   }
 }
 
-if (process.argv[2] === "--child") child(process.argv[3]).catch((e) => { console.error(e); process.exit(1); });
+if (process.argv.includes("--child")) child(process.argv[process.argv.indexOf('--child') + 1]).catch((e) => { console.error(e); process.exitCode = 1; });
 else main();

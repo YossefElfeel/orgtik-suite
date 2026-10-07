@@ -5,6 +5,7 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
+import { checkWorkspaceRuntime } from './workspace-runtime.mjs';
 
 export function mockFunction(output = ".vercel/output") {
   const functions = path.join(fs.realpathSync(output), "functions");
@@ -69,6 +70,7 @@ export function checkMockBundle(output = ".vercel/output") {
     console.log(`mock: ${files.length} historical financial reducers match the source`);
   }
   console.log("mock: self-contained Linux function artifact passed");
+  console.log(`mock: ${checkWorkspaceRuntime(fn.folder)} owned workspace sources match the source`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) checkMockBundle(process.argv[2]);

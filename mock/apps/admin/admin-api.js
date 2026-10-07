@@ -22,7 +22,7 @@ module.exports = function adminApi(app, ctx, S, H) {
     if (!who) return;
     if (!can(who, p)) return fail(res, 403, "forbidden", "Your role can't do this.", { required: p });
     req.who = who;
-    advance(S);
+    if (db.workspaceAuthorityVersion !== 1) advance(S);
     next();
   }, { permission: p }); // read by orgtik-program/phase-e/openapi.mjs
   const name = (key) => { const u = key && identity.findByKey?.(key); return u ? identity.fullName(u) : key; };

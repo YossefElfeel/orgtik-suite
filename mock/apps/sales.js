@@ -9,33 +9,42 @@ const fs = require("fs");
 
 const { seedCatalog, seedPeople, seedCoupons, seedLoyalty } = require("./sales/seed");
 
-const S = { db: {}, io: null };
+let legacy;
+let legacyProfilePrefs;
 
-function init(ctx) {
-  Object.assign(S, { ctx, util: ctx.util, identity: ctx.identity, config: ctx.config });
+function init(ctx, options = {}) {
+  const S = { db: {}, io: null, profilePrefs: {}, ctx, util: ctx.util, identity: ctx.identity, config: ctx.config, seeding: true };
   const db = S.db;
   Object.assign(db, {
     projects: [], contracts: [], offers: [], subscriptions: [], invoices: [], commissions: [], tickets: [],
-    notifications: [], notificationPrefs: {}, couponUses: [],
+    notifications: [], notificationPrefs: {}, couponUses: [], staff: [], customers: [], salesmanNotes: [], leads: [], packages: [], coupons: [], salesHistory: {}, ownershipTransfers: {},
   });
   // Seeded documents are regenerated on every start; keep uploads made at runtime.
   fs.mkdirSync(ctx.uploadsDir, { recursive: true });
   S.core = require("./sales/core")(S);
   seedCatalog(db, S.identity);
-  seedPeople(db, S.identity, { writeSeed: S.core.writeSeed, sosWeb: S.config.webUrl("sos") });
-  seedCoupons(db);
+  if (!options.empty && !options.snapshot) seedPeople(db, S.identity, { writeSeed: S.core.writeSeed, sosWeb: S.config.webUrl("sos") });
+  if (!options.empty && !options.snapshot) seedCoupons(db);
   seedLoyalty(db);
+  if (options.empty || options.snapshot) { db.loyalty.rewards = []; db.loyalty.transactions = []; db.loyalty.coupons = []; db.loyalty.settings.isActive = false; }
+  if (options.snapshot) {
+    for (const key of Object.keys(db)) delete db[key];
+    Object.assign(db, JSON.parse(JSON.stringify(options.snapshot.db)));
+    S.profilePrefs = JSON.parse(JSON.stringify(options.snapshot.profilePrefs || {}));
+    S.core = require("./sales/core")(S);
+  }
   S.catalog = require("./sales/catalog")(S);
   S.billing = require("./sales/billing")(S);
   S.deals = require("./sales/deals")(S);
   S.crm = require("./sales/crm")(S);
   S.engage = require("./sales/engage")(S);
-  require("./sales/seed-deals")(S);
+  if (!options.snapshot) require("./sales/seed-deals")(S, { referencesOnly: Boolean(options.empty) });
+  S.seeding = false;
   ctx.log(`seeded ${db.plans.length} plans, ${db.features.length} features, ${db.customers.length} customers, ${db.projects.length} projects, ${db.subscriptions.length} subscriptions, ${db.invoices.length} invoices, ${db.notifications.length} notifications`);
+  return S;
 }
 
 // Profile preferences the sales UI stores in its own vocabulary (kept apart from the shared SOS profile).
-const profilePrefs = {};
 const DATE_FORMATS = { "DD/MM/YYYY": "dd/mm/yyyy", "MM/DD/YYYY": "mm/dd/yyyy", "YYYY/MM/DD": "yyyy/mm/dd" };
 const LANG_NAMES = { en: "English", fr: "French", de: "German", es: "Spanish", it: "Italian", ar: "Arabic" };
 
@@ -61,11 +70,22 @@ module.exports = {
     },
   },
 
-  routes(app, ctx) {
-    init(ctx);
-    S.engage.publicRoutes(app);
-    S.crm.publicRoutes(app); // website lead intake (D-028), before the auth context
+  createState: init,
+  createWorkspaceRuntime(input) { return require("../lib/tool-adapters/sales").createWorkspaceRuntime(input, module.exports); },
+  routes(app, ctx, S = legacy || (legacy = init(ctx))) {
+    if (!ctx.identity.workspaceMode) {
+      S.engage.publicRoutes(app);
+      S.crm.publicRoutes(app); // Public leads belong to the explicit OrgTik coordinator, never a tenant-selected router.
+    } else {
+      app.get("/api/auth/me", (req, res) => {
+        const user = ctx.identity.requireUser(req, res); if (!user) return;
+        const safe = Object.fromEntries(["id", "key", "email", "username", "firstName", "lastName", "avatar", "isActive", "isEmailVerified", "userType", "profile", "createdAt", "updatedAt"].map(key => [key, user[key]]));
+        ctx.util.ok(res, { user: safe, scopes: ctx.identity.userScopes(user), workspaceId: ctx.workspaceId }, "Profile fetched");
+      });
+    }
     app.use("/api", S.core.contextMiddleware);
+    if (ctx.identity.workspaceMode) app.use((req, res, next) => /^\/api\/admin\/staff\/[^/]+\/(access|disable|enable|password-reset|invites\/resend)$/.test(req.path) && !["GET", "HEAD", "OPTIONS"].includes(req.method)
+      ? res.status(501).json({ success: false, code: "workspace_command_required", message: "Workspace access changes require a shared identity command." }) : next());
     S.catalog.routes(app);
     S.deals.routes(app);
     S.billing.routes(app);
@@ -75,6 +95,7 @@ module.exports = {
 
   // socket.io namespace /notifications (spec/notifications-api.md §5): token from auth / query / header.
   sockets(io, ctx) {
+    const S = legacy || (legacy = init(ctx));
     S.io = io;
     io.on("connection", () => {});
     io.of("/notifications").on("connection", (socket) => {
@@ -96,6 +117,7 @@ module.exports = {
   // SOS module itself does not implement these paths.
   mounts: {
     sos(app, ctx) {
+      const profilePrefs = legacy ? legacy.profilePrefs : (legacyProfilePrefs || (legacyProfilePrefs = {}));
       const identity = ctx.identity;
       const { ok, fail } = ctx.util;
       function profileOut(u) {

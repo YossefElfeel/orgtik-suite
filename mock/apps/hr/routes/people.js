@@ -8,6 +8,7 @@ module.exports = function peopleRoutes(app, h) {
   const findEmp = (req, res) => {
     const e = V.emp(Number(req.params.id));
     if (!e) err(res, 404, "Employee not found");
+    if (e && identity.workspaceMode && !canSee(req, e)) { err(res, 404, "Employee not found"); return null; }
     return e;
   };
   const canSee = (req, e) => V.has(req.user, "hr", "finance_manager") || req.user.id === e.authUserId || (V.isManager(req.user) && V.teamIds(req.user.id).has(e.id));
@@ -59,9 +60,15 @@ module.exports = function peopleRoutes(app, h) {
   });
 
   // ---------------- create (wizard step 1) ----------------
-  app.post("/api/employees", (req, res) => {
+  app.post("/api/employees", async (req, res) => {
     if (!h.guard(req, res, "hr")) return;
     const b = h.body(req);
+    if (identity.workspaceMode) {
+      const fields = ["firstName", "lastName", "email", "phoneNumber", "birthday", "gender", "nationality", "nationalIdOrPassport", "personalTaxId", "accommodationType", "country", "city", "street", "postCode", "tools"];
+      const payload = Object.fromEntries(fields.filter(key => b[key] !== undefined).map(key => [key, b[key]]));
+      try { return send(res, await h.command(req, "hr.hire", payload), "Hiring command staged", 201); }
+      catch (error) { return res.status(error.status || 503).json({ success: false, code: error.code || "workspace_command_required", message: error.message }); }
+    }
     const email = String(b.email || "").trim().toLowerCase();
     if (!b.firstName || !b.lastName || !email) return err(res, 400, "First name, last name and email are required.");
     const clash = db.employees.rows.find((e) => e.email.toLowerCase() === email && !e.deletedAt);
@@ -121,11 +128,15 @@ module.exports = function peopleRoutes(app, h) {
     send(res, V.empDetail(e), "Employee updated successfully");
   });
 
-  app.delete("/api/employees/:id", (req, res) => {
+  app.delete("/api/employees/:id", async (req, res) => {
     if (!h.guard(req, res, "hr")) return;
     const e = findEmp(req, res);
     if (!e) return;
     if (e.id === req.user.id) return err(res, 400, "You can't delete your own employee record.");
+    if (identity.workspaceMode) {
+      try { return send(res, await h.command(req, "hr.offboard", { employeeId: e.id, effectiveAt: req.body?.effectiveAt, transfer: req.body?.transfer }), "Offboarding command staged"); }
+      catch (error) { return res.status(error.status || 503).json({ success: false, code: error.code || "workspace_command_required", message: error.message }); }
+    }
     e.deletedAt = L.nowIso();
     e.isActive = false;
     for (const d of db.departments.rows) if (Number(d.managerUserId) === e.id) d.managerUserId = null;
@@ -197,7 +208,7 @@ module.exports = function peopleRoutes(app, h) {
           accommodationType: d.accommodationType ?? e.accommodationType,
           address: { country: d.country ?? e.address.country, city: d.city ?? e.address.city, street: d.street ?? e.address.street, postCode: d.postCode ?? e.address.postCode },
         });
-        if (u) Object.assign(u, { firstName: e.firstName, lastName: e.lastName, email: e.email, phone: e.phoneNumber || u.phone, updatedAt: L.nowIso(), ...(d.password ? { password: d.password } : {}) });
+        if (u && !identity.workspaceMode) Object.assign(u, { firstName: e.firstName, lastName: e.lastName, email: e.email, phone: e.phoneNumber || u.phone, updatedAt: L.nowIso(), ...(d.password ? { password: d.password } : {}) });
         break;
       }
       case "employee_info": {
@@ -209,7 +220,7 @@ module.exports = function peopleRoutes(app, h) {
           joinDate: L.normDate(d.joinDate) || e.joinDate, workLocation: d.workLocation ?? e.workLocation, managerId: d.managerId ? Number(d.managerId) : d.managerId === null ? null : e.managerId,
           status: d.status ?? e.status, experienceLevel: d.experienceLevel ?? e.experienceLevel, skills: Array.isArray(d.skills) ? d.skills : e.skills,
         });
-        if (u?.profile) Object.assign(u.profile, { jobTitle: e.jobTitle, department: V.deptName(e.departmentId) });
+        if (u?.profile && !identity.workspaceMode) Object.assign(u.profile, { jobTitle: e.jobTitle, department: V.deptName(e.departmentId) });
         break;
       }
       case "payment_method":

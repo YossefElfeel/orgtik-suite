@@ -6,6 +6,7 @@ const path = require("path");
 const crypto = require("crypto");
 const lib = require("./files/lib");
 const { buildSeed } = require("./files/seed");
+const commands = require('./files/commands');
 
 const SCOPE = "file_manager";
 const ASSET_DIR = path.join(__dirname, "files", "assets");
@@ -27,9 +28,10 @@ module.exports = {
   // everything else comes from per-item `capabilities`. Role names are file-manager specific on purpose.
   grants: { [SCOPE]: { admin: ["super_admin"], customer: ["file_guest"], ...staffGrants } },
 
-  routes(app, ctx) {
+  routes(app, ctx, options = {}) {
     const { identity, util } = ctx;
-    const state = buildSeed({ identity, manifest: MANIFEST });
+    const state = options.state || buildSeed({ identity, manifest: MANIFEST, seedAt: options.seedAt });
+    state.previewPages ||= new Map();
     const F = state.folders;
     const FL = state.files;
     const apiBase = () => `${ctx.apiUrl("files")}/api`;
@@ -42,9 +44,21 @@ module.exports = {
     // ------------------------------------------------------------ responses & auth
     const ok = (res, data, message, status = 200) => util.ok(res, data, message, status);
     const fail = (res, status, message, extra = {}) => util.fail(res, status, message, { error: message, ...extra });
-    const isAdmin = (u) => u.userType === "admin" || identity.userScopes(u).some((s) => s.roles.includes("super_admin"));
+    const toolRoles = u => identity.userScopes(u).find(scope => scope.scope === SCOPE)?.roles || [];
+    const isAdmin = (u) => toolRoles(u).includes("super_admin");
     const isStaff = (u) => u.userType !== "customer";
     const truthy = (v) => v === true || v === "true" || v === "1";
+    if (identity.workspaceMode) app.use((req, res, next) => {
+      const ownProfile = req.method === 'PUT' && req.path === '/api/auth/profile' || req.method === 'DELETE' && req.path === '/api/auth/avatar';
+      if (!['GET', 'HEAD'].includes(req.method) && !/^\/api\/v1\/public\/shares\//.test(req.path)) {
+        const user = identity.requireUser(req, res); if (!user) return;
+        if (!ownProfile && !toolRoles(user).some(role => role === 'super_admin' || role === 'file_editor')) return fail(res, 403, "This Files role is read-only.");
+        if (!ownProfile && typeof identity.canWrite === 'function' && !identity.canWrite(user)) return fail(res, 423, "This Files workspace is read-only.");
+      }
+      if (req.method === 'POST' && req.path === '/api/auth/avatar') return fail(res, 501, 'sample_assets_only');
+      if (!['GET', 'HEAD'].includes(req.method) && /^\/api\/auth\//.test(req.path) && !ownProfile) return fail(res, 501, "workspace_command_required");
+      return next();
+    });
 
     function member(req, res) {
       const u = identity.requireUser(req, res);
@@ -107,13 +121,15 @@ module.exports = {
       return null;
     }
 
-    function caps(acc, ownsItem) {
+    function caps(acc, ownsItem, user) {
+      if (user && typeof identity.canWrite === 'function' && !identity.canWrite(user)) return { canWrite: false, canMove: false, canArchive: false, canManageAccess: false, canManageExternalShares: false, sharedRootId: acc?.sharedRootId ?? null };
+      if (user && !toolRoles(user).some(role => role === "super_admin" || role === "file_editor")) return { canWrite: false, canMove: false, canArchive: false, canManageAccess: false, canManageExternalShares: false, sharedRootId: acc?.sharedRootId ?? null };
       if (!acc || acc.level === "reader") return { canWrite: false, canMove: false, canArchive: false, canManageAccess: false, canManageExternalShares: false, sharedRootId: null };
       if (acc.level !== "collab") return { canWrite: true, canMove: true, canArchive: true, canManageAccess: true, canManageExternalShares: true, sharedRootId: null };
       return { canWrite: true, canMove: true, canArchive: ownsItem, canManageAccess: ownsItem, canManageExternalShares: ownsItem, sharedRootId: acc.sharedRootId };
     }
-    const folderCaps = (u, f) => caps(folderAccess(u, f), f.ownerId === u.id);
-    const fileCaps = (u, f) => caps(fileAccess(u, f), f.ownerId === u.id);
+    const folderCaps = (u, f) => caps(chain(f).some(folder => folder.custodyReadOnly) ? null : folderAccess(u, f), f.ownerId === u.id, u);
+    const fileCaps = (u, f) => caps(f.custodyReadOnly || chain(F.get(f.folderId)).some(folder => folder.custodyReadOnly) ? null : fileAccess(u, f), f.ownerId === u.id, u);
 
     // Archived items: visible to admins, their owner, whoever archived them, and owners of the tree above.
     function archiveVisible(u, item, container) {
@@ -149,7 +165,7 @@ module.exports = {
           ? f.allowedUserIds.map((id) => ({ id: lib.seedId(`grant:${f.id}:${id}`), folderId: f.id, userId: String(id), grantedBy: String(f.grantedBy || f.ownerId), createdAt: f.grantsAt || f.createdAt }))
           : [],
         accessUsers: manager && f.visibility === "specific_people" ? f.allowedUserIds.map(userLite).filter(Boolean) : [],
-        capabilities: caps(acc, f.ownerId === u.id),
+        capabilities: folderCaps(u, f),
         ...(archive ? { parentName: parent ? parent.name : null } : {}),
       };
     }
@@ -271,10 +287,17 @@ module.exports = {
     }
     function checkPassword(res, u, password) {
       if (!password) return fail(res, 400, "Please enter your password to confirm."), false;
+      if (identity.workspaceMode) {
+        const verifier = ctx.workspaceServices?.verifyActorPassword;
+        if (typeof verifier !== "function") return fail(res, 503, "Password verification is unavailable."), false;
+        const verified = verifier(String(password));
+        if (typeof verified !== "boolean") return fail(res, 503, "Password verification is unavailable."), false;
+        return verified || (fail(res, 400, "Incorrect password. Nothing was deleted."), false);
+      }
       if (String(password) !== u.password) return fail(res, 400, "Incorrect password. Nothing was deleted."), false;
       return true;
     }
-    const canPurge = (u, item) => isAdmin(u) || item.ownerId === u.id || item.archivedBy === u.id;
+    const canPurge = (u, item) => !item.custodyReadOnly && (isAdmin(u) || item.ownerId === u.id || item.archivedBy === u.id);
 
     // bytes of a stored file: { path } for sendFile
     function storedPath(file) {
@@ -493,6 +516,7 @@ module.exports = {
     app.post("/api/v1/files/upload", (req, res, next) => {
       const u = member(req, res);
       if (!u) return;
+      if (identity.workspaceMode) return fail(res, 501, "sample_assets_only");
       ctx.upload.any()(req, res, (err) => {
         if (err) return fail(res, 400, `Upload failed: ${err.message}`);
         try {
@@ -909,10 +933,18 @@ module.exports = {
     });
 
     // authApi.ts endpoints (defined in the app, not used by any screen) - minimal but functional.
-    app.put("/api/auth/profile", (req, res) => {
+    app.get('/api/auth/profile', (req, res) => {
+      const user = member(req, res); if (!user) return;
+      return ok(res, identity.publicUser(user), 'Profile fetched successfully');
+    });
+    app.put("/api/auth/profile", async (req, res) => {
       const u = member(req, res);
       if (!u) return;
       const b = req.body || {};
+      if (identity.workspaceMode) {
+        try { await commands.execute(ctx, identity, req, u, 'profile.self_update', { patch: commands.profilePatch(b) }); return ok(res, identity.publicUser(identity.findUser(u.id)), 'Profile updated successfully'); }
+        catch (error) { return commands.failure(res, error); }
+      }
       for (const k of ["firstName", "lastName", "username", "avatar"]) if (typeof b[k] === "string" && b[k].trim()) u[k] = b[k].trim();
       for (const k of ["jobTitle", "department", "about", "language", "timeZone", "weekStartDay", "dateFormat", "timeFormat", "flyoutToastMessage", "timezoneChangeNotification"]) {
         if (b[k] !== undefined) u.profile[k] = b[k];
@@ -931,9 +963,13 @@ module.exports = {
         res.json({ success: true, message: "Avatar updated", avatar: u.avatar });
       });
     });
-    app.delete("/api/auth/avatar", (req, res) => {
+    app.delete("/api/auth/avatar", async (req, res) => {
       const u = member(req, res);
       if (!u) return;
+      if (identity.workspaceMode) {
+        try { await commands.execute(ctx, identity, req, u, 'profile.self_update', { patch: { avatar: null } }); return res.json({ success: true, message: 'Avatar removed' }); }
+        catch (error) { return commands.failure(res, error); }
+      }
       u.avatar = null;
       res.json({ success: true, message: "Avatar removed" });
     });
@@ -950,17 +986,21 @@ module.exports = {
     }
     // No language in the link: whoever opens it gets the share page in their browser's language
     // (the app redirects /share/… by Accept-Language). It was /en/, so every guest got English.
-    const shareUrl = (s) => `${ctx.webUrl("files")}/share/${s.id}?secret=${encodeURIComponent(s.secret)}`;
-    function shareOut(s, withUrl = false) {
+    const shareUrl = (s, secret = s.secret) => `${ctx.webUrl("files")}/share/${s.id}?secret=${encodeURIComponent(secret)}`;
+    function shareOut(s, withUrl = false, secret) {
       return {
         id: s.id, ownerId: String(s.ownerId), resourceType: s.resourceType, resourceId: s.resourceId, label: s.label, permission: s.permission,
         hasPassword: Boolean(s.passwordHash), expiresAt: s.expiresAt, revokedAt: s.revokedAt, maxDownloads: s.maxDownloads,
         downloadCount: s.downloadCount, version: s.version, lastAccessedAt: s.lastAccessedAt, createdAt: s.createdAt, status: shareStatus(s),
-        ...(withUrl ? { shareUrl: shareUrl(s) } : {}),
+        ...(withUrl ? { shareUrl: shareUrl(s, secret) } : {}),
       };
     }
     const hashPw = (p) => crypto.createHash("sha256").update(String(p)).digest("hex");
-    const newSecret = () => crypto.randomBytes(24).toString("base64url");
+    const newSecret = lib.newSecret;
+    if (identity.workspaceMode) for (const share of state.shares.values()) {
+      if (share.secret) share.secretHash = hashPw(share.secret);
+      delete share.secret; delete share.seedPassword;
+    }
     function canManageShares(u, type, r) {
       if (!r || r.deletedAt) return false;
       return (type === "file" ? fileCaps(u, r) : folderCaps(u, r)).canManageExternalShares;
@@ -989,13 +1029,14 @@ module.exports = {
         maxDownloads = Number(b.maxDownloads);
         if (!Number.isInteger(maxDownloads) || maxDownloads < 1 || maxDownloads > 10000) return fail(res, 400, "maxDownloads must be between 1 and 10000.");
       }
+      const secret = newSecret();
       const s = {
         id: lib.newId(), ownerId: u.id, resourceType: b.resourceType, resourceId: r.id, label: b.label ? String(b.label).slice(0, 120) : null,
         permission, passwordHash: b.password ? hashPw(b.password) : null, expiresAt: new Date(expires).toISOString(), revokedAt: null,
-        maxDownloads, downloadCount: 0, version: 1, secret: newSecret(), lastAccessedAt: null, createdAt: nowIso(),
+        maxDownloads, downloadCount: 0, version: 1, ...(identity.workspaceMode ? { secretHash: hashPw(secret) } : { secret }), lastAccessedAt: null, createdAt: nowIso(),
       };
       state.shares.set(s.id, s);
-      ok(res, shareOut(s, true), "Share link created", 201);
+      ok(res, shareOut(s, true, secret), "Share link created", 201);
     });
 
     app.get("/api/v1/shares", (req, res) => {
@@ -1022,10 +1063,11 @@ module.exports = {
       const s = shareForOwner(req, res, u);
       if (!s) return;
       if (shareStatus(s) !== "active") return fail(res, 400, "Only active links can be rotated.");
-      s.secret = newSecret();
+      const secret = newSecret();
+      if (identity.workspaceMode) s.secretHash = hashPw(secret); else s.secret = secret;
       s.version += 1;
       dropSessions(s.id);
-      ok(res, shareOut(s, true), "New link generated - the previous URL no longer works");
+      ok(res, shareOut(s, true, secret), "New link generated - the previous URL no longer works");
     });
 
     app.delete("/api/v1/shares/:id", (req, res) => {
@@ -1040,7 +1082,8 @@ module.exports = {
 
     // ============================================================ public share (guest, cookie session)
     const cookieName = (shareId) => `fm_share_${shareId}`;
-    const cookiePath = (shareId) => `/api/v1/public/shares/${shareId}`;
+    const publicApi = new URL(apiBase());
+    const cookiePath = (shareId) => `${publicApi.pathname.replace(/\/$/, '')}/v1/public/shares/${shareId}`;
 
     function publicShare(req, res, { session = true } = {}) {
       const s = state.shares.get(req.params.shareId);
@@ -1051,7 +1094,7 @@ module.exports = {
       if (!r || r.deletedAt) return fail(res, 404, "This link is not available."), null;
       if (session) {
         const token = lib.parseCookies(req.headers.cookie)[cookieName(s.id)];
-        const sess = token && state.sessions.get(token);
+        const sess = token && state.sessions.get(identity.workspaceMode ? hashPw(token) : token);
         if (!sess || sess.shareId !== s.id || sess.version !== s.version || sess.expiresAt < Date.now()) return fail(res, 401, "Open the link you received to view this share."), null;
       }
       return { share: s, resource: r };
@@ -1092,8 +1135,8 @@ module.exports = {
       const key = `${share.id}|${req.ip}`;
       if (limited(key)) return fail(res, 429, "Too many attempts. Please wait a few minutes and try again.");
       const { secret, password } = req.body || {};
-      const a = Buffer.from(String(secret || ""));
-      const b = Buffer.from(share.secret);
+      const a = Buffer.from(identity.workspaceMode ? hashPw(secret || "") : String(secret || ""));
+      const b = Buffer.from(identity.workspaceMode ? share.secretHash : share.secret);
       if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
         recordFailure(key);
         return fail(res, 404, "This link is not available.");
@@ -1105,11 +1148,11 @@ module.exports = {
           return fail(res, 401, "Incorrect password.", { passwordRequired: true });
         }
       }
-      const token = crypto.randomBytes(24).toString("base64url");
+      const token = newSecret();
       const expiresAt = Math.min(Date.parse(share.expiresAt), Date.now() + 12 * 3600e3);
-      state.sessions.set(token, { shareId: share.id, version: share.version, expiresAt });
+      state.sessions.set(identity.workspaceMode ? hashPw(token) : token, { shareId: share.id, version: share.version, expiresAt });
       share.lastAccessedAt = nowIso();
-      res.cookie(cookieName(share.id), token, { httpOnly: true, sameSite: "lax", path: cookiePath(share.id), maxAge: expiresAt - Date.now() });
+      res.cookie(cookieName(share.id), token, { httpOnly: true, sameSite: publicApi.protocol === 'https:' ? 'none' : 'lax', secure: publicApi.protocol === 'https:', path: cookiePath(share.id), maxAge: expiresAt - Date.now() });
       res.status(204).end();
     });
 
@@ -1140,7 +1183,7 @@ module.exports = {
     });
 
     // ---- previews: seeded assets come pre-rendered (page PNGs / HLS); uploads are rendered on demand
-    const uploadPages = new Map(); // fileId -> [svg]
+    const uploadPages = state.previewPages; // fileId -> [svg]
     function uploadPreview(f) {
       if (f.mimeType.startsWith("image/")) return { kind: "image" };
       const ext = lib.extOf(f.name);
@@ -1234,8 +1277,35 @@ module.exports = {
     });
 
     // Handy for QA: the seeded external links (their secrets are deterministic).
-    for (const s of state.shares.values()) {
+    if (!identity.workspaceMode) for (const s of state.shares.values()) {
       if (shareStatus(s) === "active") ctx.log(`seeded share "${s.label}"${s.seedPassword ? ` (password: ${s.seedPassword})` : ""}: ${shareUrl(s)}`);
     }
+    return {
+      exportState: () => ({ data: require("./files/runtime-state").encode(state), sequences: lib.exportCounters() }),
+      bootstrap: user => ({ folders: activeFolders().filter(folder => folderAccess(user, folder)).map(folder => folderOut(folder, user)), files: activeFiles().filter(file => fileAccess(user, file)).map(file => fileOut(file, user)) }),
+      usage: () => [{ key: "files.storage_gb", used: [...FL.values()].reduce((total, file) => total + Number(file.size || 0), 0) / 1024 ** 3 }],
+      transferOwnership: command => {
+        const { fromUserId, target, operationId } = command;
+        if (!Number.isSafeInteger(fromUserId) || !operationId || !target || !['member', 'archive'].includes(target.kind)) throw Object.assign(new Error("Invalid Files custody command."), { status: 422 });
+        const recipient = target.kind === 'member' && identity.findUser(target.userId);
+        if (target.kind === 'member' && (!recipient || recipient.id === fromUserId || recipient.isActive === false || !toolRoles(recipient).some(role => role === 'super_admin' || role === 'file_editor'))) throw Object.assign(new Error("The Files custody recipient is not eligible."), { status: 409 });
+        const result = { transferred: [], archived: [] };
+        for (const [kind, records] of [['folder', F], ['file', FL]]) for (const row of records.values()) {
+          if (row.ownerId !== fromUserId) continue;
+          row.ownerId = recipient ? recipient.id : null; row.updatedAt = nowIso(); row.custodyOperationId = operationId;
+          if (recipient) { row.allowedUserIds = (row.allowedUserIds || []).filter(id => id !== recipient.id); result.transferred.push(`${kind}:${row.id}`); }
+          else { row.custodyReadOnly = true; row.deletedAt ||= nowIso(); row.archiveBatch = `custody:${operationId}`; result.archived.push(`${kind}:${row.id}`); }
+        }
+        for (const share of state.shares.values()) if (share.ownerId === fromUserId) { share.revokedAt ||= nowIso(); dropSessions(share.id); }
+        for (const row of [...F.values(), ...FL.values()]) {
+          row.allowedUserIds = (row.allowedUserIds || []).filter(id => id !== fromUserId);
+          if (row.accessOverride) row.accessOverride.allowedUserIds = row.accessOverride.allowedUserIds.filter(id => id !== fromUserId);
+        }
+        state.pins.delete(fromUserId);
+        return result;
+      },
+      close: () => {},
+    };
   },
+  createWorkspaceRuntime: input => require("../lib/tool-adapters/files").createWorkspaceRuntime(input, module.exports, MANIFEST),
 };

@@ -1,0 +1,23 @@
+{
+  "Errors.sessionLoading": {
+    "en": "Opening your workspace…",
+    "ar": "جارٍ فتح مساحة العمل…",
+    "de": "Dein Arbeitsbereich wird geöffnet…",
+    "fr": "Ouverture de votre espace de travail…",
+    "it": "Apertura del tuo spazio di lavoro…"
+  },
+  "Errors.sessionUnavailableTitle": {
+    "en": "Your workspace couldn’t be opened",
+    "ar": "تعذّر فتح مساحة العمل",
+    "de": "Dein Arbeitsbereich konnte nicht geöffnet werden",
+    "fr": "Votre espace n’a pas pu être ouvert",
+    "it": "Impossibile aprire il tuo spazio di lavoro"
+  },
+  "Errors.sessionUnavailableBody": {
+    "en": "We couldn’t check your current access. Your sign-in details are kept; retry to continue.",
+    "ar": "تعذّر التحقق من صلاحيتك الحالية. بيانات تسجيل الدخول محفوظة؛ أعد المحاولة للمتابعة.",
+    "de": "Dein aktueller Zugriff konnte nicht geprüft werden. Deine Anmeldedaten bleiben erhalten; versuche es erneut.",
+    "fr": "Impossible de vérifier votre accès actuel. Vos informations de connexion sont conservées ; réessayez pour continuer.",
+    "it": "Impossibile verificare il tuo accesso attuale. I dati di accesso restano salvati; riprova per continuare."
+  }
+}

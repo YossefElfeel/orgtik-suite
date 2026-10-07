@@ -4,6 +4,7 @@ export type SessionAccess = {
   userId: string | number;
   isAdmin: boolean;
   isSuperAdmin: boolean;
+  canWrite?: boolean;
 };
 
 type OwnedResource = {
@@ -47,6 +48,7 @@ function hasCapability(
   session: SessionAccess,
   flag: CapabilityFlag,
 ): boolean {
+  if (session.canWrite === false) return false;
   if (resource.capabilities) {
     return Boolean(resource.capabilities[flag]);
   }
@@ -114,6 +116,7 @@ export function canUploadIntoFolder(
   folder: OwnedResource | null | undefined,
   session: SessionAccess,
 ): boolean {
+  if (session.canWrite === false) return false;
   // No folder selected = system root upload destination.
   if (!folder) return true;
   if (folder.isSystemRoot) return true;

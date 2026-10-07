@@ -17,11 +17,12 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAuthRoute = AuthRoutes.includes(pathname);
   const isTokenValidationRoute = pathname === "/auth";
-  const hasIncomingToken = request.nextUrl.searchParams.has("token");
+  const hasIncomingHandoff = request.nextUrl.searchParams.has("code");
+  const staffLogin = pathname === "/auth/login" && request.nextUrl.searchParams.get("mode") === "staff" && ["admin", "wm"].includes(request.nextUrl.searchParams.get("target") || "");
 
   // If user is logged in and tries to access auth routes (except redirecting), redirect to home
   // Allow customers with sales scope to stay on redirecting page
-  // Allow /auth?token= so cross-dashboard SSO can replace the current session,
+  // Allow /auth?code= so a scoped cross-domain handoff can replace the current tab,
   // /auth/handoff?code= so signing in on the website replaces it too, and the
   // reset step the website's Reset password opens, even with a session here
   if (
@@ -32,7 +33,8 @@ export function middleware(request: NextRequest) {
     pathname !== "/auth/handoff" &&
     pathname !== "/auth/reset-password" &&
     !(pathname === "/auth/login" && request.nextUrl.searchParams.get("switch") === "1") &&
-    !(pathname === "/auth" && hasIncomingToken)
+    !staffLogin &&
+    !(pathname === "/auth" && hasIncomingHandoff)
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }

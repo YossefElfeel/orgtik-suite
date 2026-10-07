@@ -68,7 +68,10 @@ module.exports = function engage(S) {
 
   // ------------------------------------------------------------------ tickets
   const ticketById = (id) => db.tickets.find((t) => t.id === id);
-  const canSeeTicket = (req, t) => (req.sc.role === "customer" ? t.customerId === req.sc.customer?.id : req.sc.role === "salesman" ? K.customerById(t.customerId)?.assignedSalesmanId === req.sc.staff?.id : true);
+  const canSeeTicket = (req, t) => {
+    const customer = K.customerById(t.customerId);
+    return req.sc.role === "customer" ? Boolean(req.sc.customer && t.customerId === req.sc.customer.id) : req.sc.role === "salesman" ? t.assigneeId === req.sc.user.id || Boolean(customer && (customer.ownerUserId === req.sc.user.id || req.sc.staff && customer.assignedSalesmanId === req.sc.staff.id)) : true;
+  };
   function ticketOut(t) {
     const c = K.customerById(t.customerId);
     const a = t.assigneeId && identity.findUser(t.assigneeId);
@@ -96,8 +99,8 @@ module.exports = function engage(S) {
       customers = customers.filter((c) => c.assignedSalesmanId === forSalesman.id);
       share = { default: 0, [forSalesman.zoneId]: 0.22 };
     } else if (sc.role === "salesman") {
-      projects = projects.filter((p) => p.assignedSalesmanId === sc.staff?.id);
-      customers = customers.filter((c) => c.assignedSalesmanId === sc.staff?.id);
+      projects = projects.filter((p) => p.ownerUserId === sc.user.id || Boolean(sc.staff && p.assignedSalesmanId === sc.staff.id));
+      customers = customers.filter((c) => c.ownerUserId === sc.user.id || Boolean(sc.staff && c.assignedSalesmanId === sc.staff.id));
       share = { default: 0, [sc.staff?.zoneId]: 0.22 };
     } else if (sc.role === "manager") {
       const depts = db.departments.filter((d) => d.managerId === sc.user.id).map((d) => d.id);
@@ -392,7 +395,7 @@ module.exports = function engage(S) {
     // ---------------- tickets
     app.get("/api/tickets/users", (req, res) => {
       if (req.sc.role === "customer") return fail(res, 403, "Customers cannot list assignees");
-      const users = identity.users.filter((u) => ["admin", "manager", "employee"].includes(u.userType) && u.isActive).map((u) => ({ id: u.id, username: u.username, firstName: u.firstName, lastName: u.lastName, userType: u.userType }));
+      const users = identity.users.filter((u) => ["admin", "manager", "salesman"].includes(K.appRole(u)) && u.isActive).map((u) => ({ id: u.id, username: u.username, firstName: u.firstName, lastName: u.lastName, userType: u.userType }));
       ok(res, users, "Users retrieved");
     });
     app.get("/api/tickets", (req, res) => {

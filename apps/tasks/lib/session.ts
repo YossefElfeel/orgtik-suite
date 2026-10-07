@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
-import { TOKEN_COOKIE, USER_COOKIE } from "@/constants";
+import { TOKEN_COOKIE } from "@/constants";
 import type { IAuthState } from "@/types/user";
 
-/** The signed-in person as the server sees them (the same cookies the browser reads). */
+/** A server cookie may hint at a token; only the client API profile validates a bound session. */
 export async function readSession(): Promise<IAuthState> {
   const jar = await cookies();
   const parse = (raw: string | undefined) => {
@@ -14,5 +14,5 @@ export async function readSession(): Promise<IAuthState> {
     }
   };
   const token = parse(jar.get(TOKEN_COOKIE)?.value);
-  return { user: parse(jar.get(USER_COOKIE)?.value), token: typeof token === "string" ? token : null };
+  return { user: null, token: typeof token === "string" ? token : null };
 }

@@ -31,6 +31,7 @@ const requests = require("./lib/requests");
 const journal = require("./lib/journal");
 const authStorage = require("./lib/auth-store");
 const accountStore = authStorage.pickStore(config);
+let workspaceBoundary;
 
 // "chats" has no API: its module only registers a launcher tile.
 const ORDER = ["sos", "tasks", "files", "sales", "hr", "marketing", "content", "wm", "admin", "chats"];
@@ -54,7 +55,7 @@ function purgeLocalModules() {
 function loadModules() {
   const modules = [];
   for (const key of ORDER) {
-    if (only && key !== "sos" && !only.includes(key)) continue;
+    if (only && key !== "sos" && key !== "admin" && !only.includes(key)) continue;
     const file = path.join(__dirname, "apps", `${key}.js`);
     if (!fs.existsSync(file)) continue;
     try {
@@ -93,6 +94,9 @@ function makeCtx(key, identity, util) {
     webUrl: config.webUrl,
     io: null,
     log: (...args) => console.log(`[api:${key}]`, ...args),
+    workspaceBoundary: key === 'wm',
+    salesLeadDelivery: key === 'wm' ? async () => ({ deferred: true, code: 'crm_intake_pending', message: 'The request is saved for the team to review in Website Manager.' }) : undefined,
+    previewIssuerAllowed: key === 'wm' ? user => Boolean(workspaceBoundary?.contextService().staffAccess(user).permissions.wm?.includes('content:view')) : undefined,
   };
 }
 
@@ -284,6 +288,7 @@ function build() {
   purgeLocalModules();
   const identity = require("./lib/identity");
   identity.configureStore(accountStore);
+  if (workspaceBoundary) identity.configureAuthority(workspaceBoundary.authority);
   const util = require("./lib/util");
   const modules = loadModules();
   identity.registerModules(modules);
@@ -333,8 +338,8 @@ function build() {
     // eslint-disable-next-line no-unused-vars
     app.use((err, req, res, next) => {
       console.error(`[api:${key}] ERROR on ${req.method} ${req.originalUrl}:`, err);
-      const status = err.status === 503 || err.status === 409 ? err.status : 500;
-      res.status(status).json({ success: false, statusCode: status, message: status === 503 ? "Account service unavailable. Please try again." : `[local mock] ${err.message}` });
+      const status = Number.isInteger(err.status) && err.status >= 400 && err.status <= 599 ? err.status : 500;
+      res.status(status).json({ success: false, statusCode: status, ...(err.code ? { code: err.code } : {}), message: status === 503 ? "Account service unavailable. Please try again." : err.message });
     });
 
     let slot = slots.get(key);
@@ -364,7 +369,7 @@ function build() {
     }
     slot.app = app;
     ctx.io = slot.io;
-    if (own?.sockets) own.sockets(slot.io, ctx);
+    if (own?.sockets && !['tasks', 'files', 'hr', 'sales', 'marketing', 'chats'].includes(key)) own.sockets(slot.io, ctx);
     else slot.io.on("connection", () => {}); // accept connections so clients don't retry forever
   }
   state.lastReset = new Date().toISOString();
@@ -374,9 +379,12 @@ function build() {
 // With a store configured, the seed is built at a fixed instant (meta.seedAt) with seeded random
 // numbers, and every recorded change is replayed with its own instant and seed, so every instance
 // of the mock rebuilds the same data. Without a store nothing here runs.
-const { sandbox, store } = journal.pickStore(config);
+const pickedJournal = journal.pickStore(config);
+const sandbox = pickedJournal.sandbox;
+const store = pickedJournal.store || journal.fileStore(path.join(config.dataDir, "journal", `${sandbox}-workspace.json`));
 const persist = { epoch: null, seedAt: null, clockJson: null, applied: 0, skipped: 0, rebuild: false, ready: null, lock: journal.makeLock(), legacy: null, modern: false };
 const realRandom = (() => { const r = Math.random; return () => r(); })(); // outside a pinned run this is the real one
+workspaceBoundary = require("./lib/workspace-boundary").createWorkspaceBoundary({ realm: sandbox, config, store, accountStore, platform: () => platform(), identity: () => require("./lib/identity"), dispatch, persist, util: require("./lib/util"), makeCtx, staffAvailable: key => Boolean(slots.get(key)?.app) });
 
 function newMeta() {
   return { epoch: `${clock.RealDate.now().toString(36)}-${Math.floor(realRandom() * 1e9).toString(36)}`, seedAt: clock.now(), clock: clock.exportState() };
@@ -389,7 +397,8 @@ function loopbackBase() {
   if (!loopback) {
     loopback = new Promise((resolve, reject) => {
       const srv = http.createServer({ maxHeaderSize: 64 * 1024 }, (req, res) => {
-        const app = slots.get(req.headers["x-mock-app"])?.app;
+        const fallback = () => slots.get(req.headers["x-mock-app"])?.app;
+        const app = req.headers["x-orgtik-dispatch"] ? workspaceBoundary.frameApp(req.headers["x-orgtik-dispatch"], req, fallback) : fallback();
         if (!app) return sendJson(res, 404, { success: false, statusCode: 404, message: "[mock] no such app" });
         app(req, res);
       });
@@ -421,6 +430,15 @@ async function replay(lines, offset) {
     const e = typeof line === "string" ? JSON.parse(line) : line;
     if (e.epoch !== persist.epoch) throw storageError("Journal epoch does not match its committed history.");
     if (e.kind === "clock-v2") { clock.importState(e.clock); continue; }
+    if (e.kind === "workspace-v1") {
+      const checkpoint = e.checkpoint ? require("./lib/domain-checkpoint").decodeDomainCheckpoint(e.checkpoint) : e;
+      if (checkpoint.platformState?.platformVersion !== 2 || !checkpoint.workspaceState) throw storageError("Invalid workspace checkpoint.");
+      platform().importState(checkpoint.platformState); workspaceBoundary.importState(checkpoint.workspaceState);
+      workspaceBoundary.importStaffState(checkpoint.staffState || {});
+      persist.legacy.adoptCommittedSnapshot(checkpoint.platformState);
+      persist.toolLegacy?.adoptWorkspaceCheckpoint();
+      persist.workspaceModern = true; persist.modern = true; continue;
+    }
     if (e.platformState) {
       if (!platformRequest(e.app, e.url) || e.platformState.platformVersion !== 2) throw storageError("Invalid platform checkpoint.");
       platform().importState(e.platformState);
@@ -433,6 +451,14 @@ async function replay(lines, offset) {
       platform().importState(persist.legacy.exportState());
       continue;
     }
+    if (['tasks', 'files', 'hr', 'sales', 'marketing', 'wm'].includes(e.app)) {
+      if (persist.workspaceModern) throw storageError('An older tool writer followed a workspace checkpoint. Reconcile that writer before continuing.');
+      persist.toolLegacy ??= require('./lib/legacy-tool-replay').createLegacyToolReplay({ identity: require('./lib/identity'), config, util: require('./lib/util'), makeCtx, realm: sandbox, seedAt: persist.seedAt });
+      await persist.toolLegacy.replayAccepted(e);
+      workspaceBoundary.importState(persist.toolLegacy.exportWorkspaceState());
+      if (e.app === 'wm') workspaceBoundary.importStaffState(persist.toolLegacy.exportStaffState());
+      continue;
+    }
     if (!slots.get(e.app)?.app) throw storageError(`A required journal app is unavailable: ${e.app}`);
     const r = await clock.runPinned({ at: e.at, seed: e.seed }, () =>
       dispatch(e.app, { method: e.method, url: e.url, headers: e.headers, body: e.body ? Buffer.from(e.body, "base64") : null }),
@@ -443,16 +469,19 @@ async function replay(lines, offset) {
 }
 
 async function restore(meta, entries) {
+  persist.toolLegacy?.close(); persist.toolLegacy = null;
+  workspaceBoundary.importState({ version: 1, realm: sandbox, snapshots: {} });
   persist.epoch = meta.epoch;
   persist.seedAt = meta.seedAt;
   persist.clockJson = JSON.stringify(meta.clock ?? null);
   clock.importState(meta.clock);
-  clock.runPinned({ at: meta.seedAt, seed: `seed:${meta.seedAt}` }, build);
+  clock.runPinned({ at: meta.seedAt, seed: `seed:${meta.seedAt}` }, () => workspaceBoundary.authority.runWithoutRequest(build));
   const accounts = await accountStore.accounts();
   const identity = require("./lib/identity");
   identity.hydrate(accounts);
   persist.legacy = require("./lib/platform-replay").createLegacyPlatform({ identity, accounts, config }, { seedAt: meta.seedAt });
   persist.modern = false;
+  persist.workspaceModern = false;
   persist.applied = 0;
   persist.skipped = 0;
   // Leave rebuild set if reconstruction fails. Never serve partially restored financial state.
@@ -527,24 +556,27 @@ function readBody(req) {
   });
 }
 
-function send(res, r) {
+function send(res, r, { head = false } = {}) {
   const headers = { ...r.headers };
   delete headers["transfer-encoding"];
   delete headers.connection;
   delete headers["keep-alive"];
   delete headers.date;
-  headers["content-length"] = r.rawPayload.length;
+  headers["content-length"] = head && headers['content-length'] !== undefined ? headers['content-length'] : r.rawPayload.length;
   res.writeHead(r.statusCode, headers);
   res.end(r.rawPayload);
 }
 
 const sendJson = (res, code, body) => {
-  res.writeHead(code, { "content-type": "application/json", "access-control-allow-origin": "*" });
+  res.writeHead(code, { "content-type": "application/json", "access-control-allow-origin": res.getHeader('access-control-allow-origin') || "*", "access-control-allow-credentials": "true", vary: 'Origin' });
   res.end(JSON.stringify(body));
 };
 
 // Every request to an app's API goes through here (the local servers and api/index.js).
 async function handle(key, req, res) {
+  res.setHeader('access-control-allow-origin', req.headers.origin || '*');
+  res.setHeader('access-control-allow-credentials', 'true');
+  res.setHeader('vary', 'Origin');
   // Preflights do not need account storage and must work even during an outage.
   if (req.method === "OPTIONS") {
     res.writeHead(204, { "access-control-allow-origin": req.headers.origin || "*", "access-control-allow-methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS", "access-control-allow-headers": req.headers["access-control-request-headers"] || "content-type,authorization", "access-control-allow-credentials": "true", vary: "Origin" });
@@ -568,59 +600,9 @@ async function handle(key, req, res) {
       return sendJson(res, 503, { success: false, statusCode: 503, message: "Account service unavailable. Please try again." });
     }
     if (!slots.get(key)?.app) return sendJson(res, 404, { success: false, statusCode: 404, message: `[mock] no API for ${key}` });
-    const identity = require("./lib/identity");
-    const before = authStorage.snapshot(identity);
-    const financial = platformRequest(key, url);
-    const financialBefore = financial ? platform().exportState() : null;
-    if (store && journal.recordable(req.method, url) && body.length > journal.MAX_BODY) {
-      return sendJson(res, 503, { success: false, statusCode: 503, message: "This change is too large to persist. Nothing was saved." });
-    }
-    const at = clock.now();
-    const seed = `${at}:${Math.floor(realRandom() * 1e12)}`;
-    let r;
-    try {
-      r = await clock.runPinned({ at, seed }, () => dispatch(key, { method: req.method, url, headers: req.headers, body }));
-    } catch (error) {
-      identity.hydrate(before, { replace: true });
-      if (store) persist.rebuild = true;
-      console.warn("[mock] loopback request failed:", error.code || error.message);
-      return sendJson(res, 503, { success: false, statusCode: 503, message: "Mock service unavailable. Please try again." });
-    }
-    if (r.statusCode < 400) {
-      const changes = [...authStorage.snapshot(identity)].filter(([id, value]) => before.get(id) !== value).map(([id, value]) => ({ id, value, expected: saved.get(id) ?? null }));
-      try {
-        if (changes.length) await accountStore.commit(changes);
-      } catch (error) {
-        identity.hydrate(before, { replace: true });
-        // The business side of a failed registration is rebuilt from the journal next time.
-        if (store) persist.rebuild = true;
-        const status = error.status === 409 ? 409 : 503;
-        return sendJson(res, status, { success: false, statusCode: status, message: status === 409 ? "Account changed concurrently. Please try again." : "Account service unavailable. Please try again." });
-      }
-    } else {
-      // A refused mutation must not change the account, even if a handler touched it first.
-      identity.hydrate(before, { replace: true });
-    }
-    const financialAfter = financial ? platform().exportState() : null;
-    const financialChanged = financial && JSON.stringify(financialBefore) !== JSON.stringify(financialAfter);
-    if (store && (financial ? financialChanged : journal.recordable(req.method, url) && r.statusCode < 400)) {
-      try {
-        const cleanBody = journal.redactBody(body);
-        const headers = journal.recordHeaders(req.headers);
-        if (financial) for (const key of Object.keys(headers)) if (/^(authorization|cookie|x-mock-replay)$/i.test(key)) delete headers[key];
-        const entry = { epoch: persist.epoch, app: key, method: req.method, url, headers, body: cleanBody.length ? cleanBody.toString("base64") : null, at, seed, ...(financial ? { platformState: financialAfter } : {}) };
-        const committed = await store.commit(entry, { expectedEpoch: persist.epoch, expectedRevision: persist.applied });
-        persist.applied = committed.sequence;
-        if (financial) { persist.legacy.adoptCommittedSnapshot(financialAfter); persist.modern = true; }
-      } catch (e) {
-        identity.hydrate(before, { replace: true });
-        persist.rebuild = true;
-        console.warn("[journal] commit failed:", e.code || e.message);
-        const code = e.status === 409 ? 409 : 503;
-        return sendJson(res, code, { success: false, statusCode: code, message: code === 409 ? "Workspace data changed concurrently. Refresh before trying again." : "This change could not be saved. Please try again." });
-      }
-    }
-    send(res, r);
+    delete req.headers["x-orgtik-dispatch"];
+    delete req.headers['x-mock-app'];
+    return workspaceBoundary.handle({ key, req, body, legacyApp: slots.get(key).app, send: result => send(res, result, { head: req.method === 'HEAD' }), sendJson: (code, value) => sendJson(res, code, value), sync });
   });
 }
 

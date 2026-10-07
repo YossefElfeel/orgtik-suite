@@ -9,10 +9,11 @@ interface IApiScope {
   roles: UserRole[];
 }
 
-type MapToAuthUserInput = IUser & {
+type MapToAuthUserInput = Omit<IUser, "scopes" | "userRoles" | "roles"> & {
   userRoles?: { role?: { name: string } }[];
   permissions?: unknown;
   scopes?: IApiScope[] | IUserScope[] | IUser["scopes"];
+  roles?: UserRole[];
 };
 
 function mapLegacyUserRoles(
@@ -46,15 +47,7 @@ export function mapToAuthUser(apiUser: MapToAuthUserInput): IAuthUser {
     (entry) => entry.scope === DASHBOARD_SCOPE
   )?.roles;
 
-  const roles = dedupeRoles(
-    dashboardRoles?.length
-      ? dashboardRoles
-      : flatRoles?.length
-        ? flatRoles
-        : mappedScopes.flatMap((entry) => entry.roles).length
-          ? mappedScopes.flatMap((entry) => entry.roles)
-          : mapLegacyUserRoles(userRoles)
-  );
+  const roles = dedupeRoles(dashboardRoles || []);
 
   return {
     ...rest,

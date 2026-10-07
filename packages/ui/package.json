@@ -8,8 +8,8 @@
   ],
   "exports": {
     "./auth": {
-      "types": "./dist/components/AuthSuccess.d.ts",
-      "default": "./dist/components/AuthSuccess.js"
+      "types": "./dist/auth/index.d.ts",
+      "default": "./dist/auth/index.js"
     },
     "./provider": {
       "types": "./dist/provider/OrgtikProvider.d.ts",

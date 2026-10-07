@@ -1,6 +1,7 @@
 import { DASHBOARD_SCOPE } from "@/constants";
 import { IUserScope, UserRole } from "@/types/user";
 import { CookieValueTypes } from "cookies-next";
+import { toolAccess, type WorkspaceContext } from "@orgtik/ui/auth";
 
 function isLegacyScopes(scopes: IUserScope[] | string[]): scopes is string[] {
   return scopes.length > 0 && typeof scopes[0] === "string";
@@ -38,6 +39,7 @@ export function getRolesForScope(
 interface IUserCookieDataLike {
   scopes?: IUserScope[] | string[];
   roles?: UserRole[];
+  workspaceContext?: WorkspaceContext | null;
 }
 
 export function getDashboardRoles(
@@ -46,13 +48,8 @@ export function getDashboardRoles(
 ): UserRole[] {
   if (!user) return [];
 
-  const normalizedScopes = normalizeScopes(user.scopes);
-
-  if (normalizedScopes.length > 0) {
-    return getRolesForScope(normalizedScopes, scopeName);
-  }
-
-  return user.roles ?? [];
+  if (scopeName === DASHBOARD_SCOPE && user.workspaceContext) return toolAccess(user.workspaceContext, "hr").roles;
+  return getRolesForScope(normalizeScopes(user.scopes), scopeName);
 }
 
 export function parseUserCookie(

@@ -13,6 +13,7 @@ import {
 } from "@/types/user";
 import { SuccessResponse } from "@/types";
 import { RootState } from "@/redux/app/store";
+import type { WorkspaceContext, StaffAccess } from "@orgtik/ui/auth";
 
 const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -33,6 +34,8 @@ const authApi = baseApi.injectEndpoints({
               user: data.data.user,
               tokens: data.data.tokens,
               scopes: data.data.scopes,
+              workspaceContext: data.data.workspaceContext,
+              staffAccess: data.data.staffAccess,
             })
           );
         } catch (error) {
@@ -50,8 +53,10 @@ const authApi = baseApi.injectEndpoints({
       async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
-        } finally {
           dispatch(performLogout());
+        } catch (error) {
+          const status = (error as { error?: { status?: number } }).error?.status;
+          if (status === 401 || status === 403) dispatch(performLogout());
         }
       },
     }),
@@ -83,7 +88,7 @@ const authApi = baseApi.injectEndpoints({
     // }),
 
     // GET : get profile
-    getProfile: builder.query<SuccessResponse<{ user: IUser; scopes: IScopeItem[] }>, void>({
+    getProfile: builder.query<SuccessResponse<{ user: IUser; scopes: IScopeItem[]; workspaceContext: WorkspaceContext | null; staffAccess: StaffAccess | null }>, void>({
       query: () => ({
         url: "/auth/me",
         method: "GET",
@@ -96,6 +101,8 @@ const authApi = baseApi.injectEndpoints({
             updateUserAndScopes({
               user: data.data.user,
               scopes: data.data.scopes,
+              workspaceContext: data.data.workspaceContext,
+              staffAccess: data.data.staffAccess,
             })
           );
         } catch (error) {
@@ -221,7 +228,7 @@ const authApi = baseApi.injectEndpoints({
       async onQueryStarted(_userId, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          dispatch(switchSession({ user: data.data.user, tokens: data.data.tokens, scopes: data.data.scopes }));
+          dispatch(switchSession(data.data));
         } catch {
           // The failure is said by lib/api-feedback.
         }
@@ -232,7 +239,7 @@ const authApi = baseApi.injectEndpoints({
       async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          dispatch(switchSession({ user: data.data.user, tokens: data.data.tokens, scopes: data.data.scopes }));
+          dispatch(switchSession(data.data));
         } catch {
           // The failure is said by lib/api-feedback.
         }

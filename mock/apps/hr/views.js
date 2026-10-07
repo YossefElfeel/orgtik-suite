@@ -24,8 +24,7 @@ module.exports = function makeViews(db, identity) {
   // ---------------- roles ----------------
   V.rolesOf = (user) => {
     if (!user) return [];
-    const r = new Set(identity.grants.hr_system?.[user.key]?.roles || []);
-    if ((identity.grants.global?.[user.key]?.roles || []).includes("super_admin")) r.add("super_admin");
+    const r = new Set(identity.userScopes(user).find(scope => scope.scope === "hr_system")?.roles || []);
     return [...r];
   };
   V.has = (user, ...roles) => { const r = V.rolesOf(user); return r.includes("super_admin") || roles.some((x) => r.includes(x)); };

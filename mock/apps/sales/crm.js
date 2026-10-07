@@ -111,7 +111,7 @@ module.exports = function crm(S) {
       summary: customerSummary(c),
     };
   }
-  const canSeeCustomer = (req, c) => (req.sc.role === "customer" ? c.id === req.sc.customer?.id : req.sc.role === "salesman" ? c.assignedSalesmanId === req.sc.staff?.id : true);
+  const canSeeCustomer = (req, c) => (req.sc.role === "customer" ? c.id === req.sc.customer?.id : req.sc.role === "salesman" ? c.ownerUserId === req.sc.user.id || Boolean(req.sc.staff && c.assignedSalesmanId === req.sc.staff.id) : true);
   const getCustomer = (req, res) => {
     const c = K.customerById(req.params.id);
     if (!c || !canSeeCustomer(req, c)) {
@@ -225,6 +225,7 @@ module.exports = function crm(S) {
   }
   const salesmanCustomer = (c) => ({ id: c.id, fullName: c.fullName, email: c.email, phoneNumber: c.phoneNumber, commercialRegistrationNumber: c.commercialRegistrationNumber, companyName: c.companyName, website: c.website, assignedSalesmanId: c.assignedSalesmanId, address: c.address, status: c.status, createdAt: c.createdAt });
   function signInAs(res, s, label) {
+    if (identity.workspaceMode) return res.status(403).json({ success: false, code: "staff_context_required", message: "Use the authorized OrgTik staff view-as flow." });
     const u = s.authUserId && identity.findUser(s.authUserId);
     if (!u) return fail(res, 400, `${s.fullName} has no login account yet – grant access first`);
     if (s.status === "disabled") return fail(res, 409, `${s.fullName} is disabled`);
@@ -258,7 +259,7 @@ module.exports = function crm(S) {
 
     // ---------------- customers
     app.get("/api/customers/profile", (req, res) => {
-      if (req.sc.role !== "customer") return fail(res, 404, "No customer profile for this account");
+      if (req.sc.role !== "customer" || !req.sc.customer) return fail(res, 404, "No customer profile for this account");
       ok(res, customerDetail(req, req.sc.customer), "Profile retrieved");
     });
     app.get("/api/customers/meetings/all", (req, res) => {
@@ -288,6 +289,7 @@ module.exports = function crm(S) {
     app.post("/api/customers", (req, res) => {
       if (!staffRoles(req, res)) return;
       const b = req.body || {};
+      if (identity.workspaceMode && (b.sendInvite || b.password)) return res.status(501).json({ success: false, code: "workspace_command_required", message: "Customer account access requires a shared workspace invitation command." });
       const r = customerBody(req, b);
       if (r.error) return fail(res, r.status || 422, r.error);
       const ts = nowIso();
@@ -295,7 +297,7 @@ module.exports = function crm(S) {
         id: H.newId(), key: null, authUserId: null, preferredLanguage: "en", status: "new", source: "manual", sourceContext: null, lostReason: null, countryCode: null, companyName: null, website: null,
         commercialRegistrationNumber: null, assignedSalesmanId: null, idDocument: null, businessDocument: null, notes: [], meetingAppointment: null,
         ...r.value, access: b.sendInvite ? "invited" : b.password ? "active" : "no_account", invite: b.sendInvite ? newInvite() : null,
-        lastActivityAt: ts, createdBy: req.sc.staff?.id || null, createdAt: ts, updatedAt: ts,
+        lastActivityAt: ts, createdBy: req.sc.staff?.id || null, createdByUserId: req.sc.user.id, ownerUserId: req.sc.user.id, createdAt: ts, updatedAt: ts,
       };
       db.customers.push(c);
       K.notify([K.salesmanUserId(c.assignedSalesmanId)].filter((id) => id !== req.sc.user.id), "customer.registered", { title: "New customer assigned", message: `${c.fullName} (${c.companyName || "no company"}) was assigned to you.`, data: { customerId: c.id } });

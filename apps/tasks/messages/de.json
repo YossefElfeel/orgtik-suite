@@ -43,7 +43,10 @@
     "noAccessTitle": "Sie können diese Seite nicht öffnen",
     "noAccessBody": "Ihre Rolle in Aufgaben umfasst sie nicht. Wenden Sie sich an eine Projektleitung oder die Workspace-Administration, wenn Sie sie brauchen.",
     "appNoAccessTitle": "Sie haben keinen Zugriff auf Aufgaben",
-    "appNoAccessBody": "Ihr Konto ist für diese App nicht eingerichtet. Öffnen Sie Ihre Apps in der Suite oder bitten Sie die Workspace-Administration um Zugriff auf Aufgaben."
+    "appNoAccessBody": "Ihr Konto ist für diese App nicht eingerichtet. Öffnen Sie Ihre Apps in der Suite oder bitten Sie die Workspace-Administration um Zugriff auf Aufgaben.",
+    "sessionLoading": "Dein Arbeitsbereich wird geöffnet…",
+    "sessionUnavailableTitle": "Dein Arbeitsbereich konnte nicht geöffnet werden",
+    "sessionUnavailableBody": "Dein aktueller Zugriff konnte nicht geprüft werden. Deine Anmeldedaten bleiben erhalten; versuche es erneut."
   },
   "Feedback": {
     "saved": "Änderungen gespeichert",
