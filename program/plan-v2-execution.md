@@ -8,9 +8,9 @@ Source: `C:/Users/yosse/.claude/plans/we-have-old-plan-quiet-turing.md`, refined
 
 - الهدف **بروتوتايب متكامل محفوظ البيانات**: الدفع والبريد والتحليلات والـ AI والتكاملات الخارجية محاكاة، مع رحلات عميل وفريق OrgTik واضحة ومفيدة.
 - الترتيب **R0 → R1 → R2 → R3 → R4**، والـ ٧٢ التزام محفوظين. كود R0 الأساسي وواجهاته اتدمجوا بعد CI ناجح؛ **ده مش قبول release**، وR1–R4 لسه planned.
-- لقطة الدمج الحالية **main `998d821`**. الـ mock suite نجح في **١٤١ فحص**. دليل المالية فيه ٤٠٦ فحوص تاريخية، وبعدها ٧٩ فحص recovery على السلوك المعدّل؛ الأرقام مش بتتجمع كإعادة كاملة على نفس revision.
+- لقطة الدمج الحالية **main `0ba265e`**. الـ mock suite النهائي نجح في **١٤٨ فحص**. دليل المالية فيه ٤٠٦ فحوص تاريخية، وبعدها ٧٩ فحص recovery على السلوك المعدّل؛ الأرقام مش بتتجمع كإعادة كاملة على نفس revision.
 - المالك سمح بدمج الكود قبل قبول الـ hosted ووقف نشر Vercel صراحةً. Native Git مقفول لكل الـ ١٢ مشروع، وworkflow النشر disabled. **مفيش نشر جديد، وقبول الـ ١٥ رحلة على revision منشور لسه مفتوح**.
-- PR #3 بتاع الـ work order لسه بيتصالح مع main مع الحفاظ على adapter الدفع الجديد. خلّصه قبل PR تطبيع نهايات السطور المنفصل.
+- PR #3/work order اتدمج بعد التصالح مع main وCI ناجح، مع الحفاظ على adapter الدفع الجديد. تطبيع نهايات السطور لسه حزمة منفصلة.
 - أسعار الويبسايت من المنصة مع مدد 1/3/6/12 شهر والخصومات الحالية؛ منطقة الزائر MOCK تلقائية مع Switzerland بديل واختبار override، من غير country selector جديد.
 - الواجهات تستخدم `@orgtik/ui` وخمس لغات وRTL وثيمين وموبايل، مع حالات تحميل وفراغ وخطأ وصلاحيات وقراءة فقط، وهوية الويبسايت الحالية محفوظة.
 
@@ -28,7 +28,7 @@ Deliver one persistent hosted prototype for customer workspaces and OrgTik staff
 
 ### Readiness and merged-code snapshot — hosted release acceptance open
 
-**Current recorded main: `998d821` (2026-10-07), with [main CI37649449943](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37649449943) SUCCESS.** The owner authorized code merges while explicitly pausing Vercel deployment and waived hosted preview acceptance **before these code merges**. This operational exception does not waive release acceptance. Native Git deployment is disabled for all **12 projects**; deployment workflow **377190291** is disabled. No Vercel workflow run occurred after that disable. Existing resources, accounts and historical invoices remain in place.
+**Current recorded main: `0ba265e5a2fd0e8ce4960467862283c2e7d585c8` (2026-10-07).** PR #3 source`2364841` passed [CI37650247042](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247042) (Linux5m58s and Windows library15m18s) and [pause configuration37650247008](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247008). Earlier main`998d821` also passed CI37649449943. The owner authorized code merges while explicitly pausing Vercel deployment and waived hosted preview acceptance **before these code merges**. This operational exception does not waive release acceptance. Native Git deployment is disabled for all **12 projects**; deployment workflow **377190291** is disabled. No Vercel workflow run occurred after that disable. Existing resources, accounts and historical invoices remain in place.
 
 | Coherent package | Source → main merge | Successful CI evidence |
 |---|---|---|
@@ -43,7 +43,7 @@ Deliver one persistent hosted prototype for customer workspaces and OrgTik staff
 
 PR #2 plan records and PR #8 deployment-pause controls have also landed. The foundation and review ancestors were extracted first; the original combined PR #4 integration diff was **not** merged as a shortcut. Its focused runtime package landed after those ancestors.
 
-**PR #3 remains pending:** final reconciliation head `2364841` merges main `998d821` and resolves three overlaps while preserving the newer server-paid adapter. Its unchanged shared UI source `47722c6` already passed Windows [37647016392](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37647016392). Fresh combined [CI37650247042](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247042) is running. The integration owner reports local website49+10, WM22, unchanged-content884 and configuration/contract/secret checks passing. Three idea cases join the mock chain in this pending package; do not report the expected144 full count until that CI confirms it. Complete this work order before dedicated line-ending normalization.
+**PR #3/work order is code-accepted and merged:** source`2364841 → main0ba265e` resolves the three overlaps and preserves the newer server-paid adapter. All implementation PRs #1, #2, #3, #4, #6, #7, #8, #9, #10, #11 and #12 are merged with successful code checks. The final source2364841 CI confirms **148 mock regressions**: authentication17 + journal8 + pricing20 + Node103. This includes seven additional work-order content/idea cases beyond prior141. The22 tooling regressions are separate, and the website49+10 cases are unique even when rerun by a consumer check. Earlier141 at source3d13cc4 remains historical R0 proof. Dedicated line-ending normalization remains a separate package; hosted release acceptance is open.
 
 ### Historical readiness evidence
 
@@ -58,12 +58,12 @@ Build-only runs [37638044509](https://github.com/YossefElfeel/orgtik-suite/actio
 | Redis | Existing free Frankfurt Redis/persistent sandboxes; earlier hosted auth/persistence proof | Preserve configured bindings, accounts and invoice history; no new database |
 | Credentials/projects | Existing Actions credential and project IDs; configuration checks pass; native Git/workflow deployment paused | Preserve setup; do not recreate resources or deploy without a new owner instruction |
 | Auth/assets/library | Corrected source, byte guards and strict visual harness landed through coherent PRs with green CI | Prove current release flows on a revision-specific isolated hosted deployment when deployment is authorized |
-| Website/work order | R0 offer adapter merged; PR #3 reconciliation remains open | Preserve website/WM work and visual identity; finish PR #3 before normalization |
+| Website/work order | R0 offer adapter and PR #3/work order merged | Preserve website/WM work and visual identity; keep normalization separate |
 | Release gate | Code/CI accepted for merged packages; **no R0 exit or all-journey hosted acceptance** | All 15 journeys, consuming-app access/persistence and website parity at the release revision; R1–R4 remain planned |
 
 ### R0 implementation and local evidence
 
-The merged mock suite passed **141** checks. Current source contains pricing20, lifecycle4, R0 endpoint24, website-offer20 and term/proration3 cases; these and the six persistence endpoint checks are overlapping subsets of the full suite. Do not add subset counts to 141. The generated contract is **102 paths / 120 operations / 40 schemas**.
+The final merged mock suite passed **148** checks on source2364841 (CI37650247042): authentication17 + journal8 + pricing20 + Node103. The earlier R0 source3d13cc4 passed141 before seven work-order content/idea cases were included. Current source contains pricing20, lifecycle4, R0 endpoint24, website-offer20 and term/proration3 cases; these and the six persistence endpoint checks are overlapping subsets of the full suite. Do not add subset or tooling counts to148. The generated contract is **102 paths / 120 operations / 40 schemas**.
 
 [Local finance evidence](audits/r0-prototype/finance-clean-20261007/README.md) records **406 checks/57 captures** against an earlier API generation; it predates held quotes/uncertainty recovery and is not a full rerun of the final revision. [Later checkout recovery evidence](audits/r0-prototype/checkout-recovery-20261007/README.md) records **65 recovery + 14 edge checks**, with nine capture metadata entries and three representative tracked images. Neither proves hosted release acceptance. The [R0 readout](audits/r0-prototype/readout.md) records provenance and limits.
 
@@ -72,7 +72,7 @@ The implementation includes scheduled/affected-cell repricing, stored per-tool c
 ### Delivery rules retained
 
 - One PR per coherent package and one owner for shared APIs/library/shell. The current merged stack preserves the foundation/review-before-runtime requirement.
-- PR #3/work-order completion precedes a separate line-ending normalization PR. Preserve binary sample/frozen bytes throughout.
+- PR #3/work-order has landed; line-ending normalization remains a separate PR. Preserve binary sample/frozen bytes throughout.
 - Deployment remains explicitly paused. When authorized again, deploy affected projects only, at most two concurrently; serialize the shared-preview deployment and acceptance. Runtime consumer testing is separate from deployment selection.
 - Green CI and preview acceptance remain the normal merge rule; the owner's current code-only waiver is recorded above. Production deployment uses validated main and requires deployment authorization. Preserve accounts, historical invoices and ownership; never reset production data or advance its shared clock for verification.
 - A skipped **Preview acceptance** check is not acceptance. Package code merge, simulated behavior, external deferral and release acceptance are recorded separately in `backlog/release-packages.csv`.

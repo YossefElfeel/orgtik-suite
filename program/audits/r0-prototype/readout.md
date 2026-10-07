@@ -1,10 +1,10 @@
 # R0 hosted-mock prototype — implementation and verification readout
 
-2026-10-07 · **Merged prototype code at main `998d821`; hosted release acceptance remains open.** The owner authorized code merges before hosted acceptance and explicitly paused Vercel deployment. [Main CI37649449943](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37649449943) succeeded. R1–R4 remain planned.
+2026-10-07 · **Merged prototype code at main `0ba265e`; hosted release acceptance remains open.** The owner authorized code merges before hosted acceptance and explicitly paused Vercel deployment. Final work-order source`2364841` passed [CI37650247042](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247042) and merged as`0ba265e`; prior main CI37649449943 also succeeded. R1–R4 remain planned.
 
 ## الخلاصة بالمصري
 
-كود R0 الأساسي والواجهات اتدمجوا في `main 998d821` بعد CI ناجح. الـ mock suite نجح في **١٤١ فحص**. دليل المالية التاريخي فيه **٤٠٦ فحوص** على API generation أقدم، وبعده **٧٩ فحص recovery** على السلوك المعدّل؛ ده مش إعادة كاملة على نفس revision، والأرقام مش بتتجمع كقبول إضافي. Native Git مقفول لكل الـ ١٢ مشروع وworkflow النشر disabled بطلب المالك. مفيش نشر Vercel جديد، وقبول الـ ١٥ رحلة على نسخة منشورة لسه مفتوح. PR #3/work order لسه محتاج التصالح والفحوص النهائية، وR1–R4 والـ ٧٢ التزام لسه مفتوحين.
+كود R0 الأساسي والواجهات اتدمجوا في `main 0ba265e` بعد CI ناجح. الـ mock suite النهائي نجح في **١٤٨ فحص**. دليل المالية التاريخي فيه **٤٠٦ فحوص** على API generation أقدم، وبعده **٧٩ فحص recovery** على السلوك المعدّل؛ ده مش إعادة كاملة على نفس revision، والأرقام مش بتتجمع كقبول إضافي. Native Git مقفول لكل الـ ١٢ مشروع وworkflow النشر disabled بطلب المالك. مفيش نشر Vercel جديد، وقبول الـ ١٥ رحلة على نسخة منشورة لسه مفتوح. PR #3/work order اتدمج بعد التصالح وCI ناجح، وR1–R4 والـ ٧٢ التزام لسه مفتوحين.
 
 ## Behavior in merged prototype code
 
@@ -23,8 +23,9 @@ Counts overlap; subset counts and successive UI runs must not be added as indepe
 
 | Check | Recorded result | Evidence / reproduction |
 |---|---|---|
-| Complete mock suite | **141 passed** on source `3d13cc4` | [CI 37647486335](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37647486335); `pnpm --filter orgtik-local-dev test` |
-| R0/public endpoints | **24 R0 + 20 public offer cases**, subsets of mock141 | `node --test mock/apps/admin/r0.test.js mock/apps/admin/website-offers.test.js` |
+| Final complete mock suite | **148 passed** on source `2364841`: auth17 + journal8 + pricing20 + Node103 | [CI37650247042](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247042); `pnpm --filter orgtik-local-dev test` |
+| Earlier R0 source proof | **141 passed** on source `3d13cc4` before seven work-order cases | [CI37647486335](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37647486335); historical checkpoint |
+| R0/public endpoints | **24 R0 + 20 public offer cases**, subsets of final mock148 | `node --test mock/apps/admin/r0.test.js mock/apps/admin/website-offers.test.js` |
 | Pricing/lifecycle/term cases | **20 / 4 / 3**, subsets of mock141 | Pricing examples, lifecycle and proration-term test files linked below |
 | Persistence endpoints | **6**, subset of mock141 | `node --test mock/lib/platform-persistence-endpoints.test.js` |
 | Packaging/tooling | Six artifact guards; **22 foundation tooling regressions** passed | [Foundation CI 37643491731](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37643491731); binary HLS/frozen-byte safeguards and corrected trace bases |
@@ -48,11 +49,11 @@ R0 backend [PR #6](https://github.com/YossefElfeel/orgtik-suite/pull/6) merged `
 
 Historical `64cd6c5` auth `ECONNRESET`/HLS failures were repaired after `53562b9`. Build-only runs37638044509/37639070714 initially passed byte verification while logging48 HLS TypeScript diagnostics; repository/project-base glob repair `4fea6a4` supersedes that limitation. The daily100 deployment limit was reached earlier. The current owner's explicit deployment pause applies independently of quota: native Git is disabled for all12 projects and workflow377190291 is disabled. No Vercel workflow run occurred after its disable.
 
-**PR #3 remains pending:** final head `2364841` reconciles main`998d821` and resolves the three overlaps, preserving the newer server-paid adapter. Shared UI is identical to `47722c6`, already Windows-green in [37647016392](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37647016392). Combined [CI37650247042](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247042) is still running. Local website49+10, WM22, unchanged-content884 and configuration/contract/secret checks are integration-owner reports. Three idea cases are being added to the mock chain; expected144 is pending and does not replace the accepted141 result yet.
+**PR #3/work order is code-accepted and merged:** source`2364841 → main0ba265e5a2fd0e8ce4960467862283c2e7d585c8` passed [CI37650247042](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37650247042) (Linux5m58s; strict Windows library15m18s) and pause configuration37650247008. The three overlaps are resolved, preserving the newer server-paid adapter. All implementation PRs are now merged. The final log confirms **148**, including seven content/idea cases added to prior source3d13cc4’s141. The22 tooling tests are separate; website49+10 are unique cases whose consumer rerun does not double their coverage. Hosted acceptance remains open.
 
 ## Still required before release acceptance
 
-- Finish PR #3/work-order reconciliation and its revision-specific checks; keep line-ending normalization separate.
+- Keep line-ending normalization a separate package after the accepted PR #3/work order.
 - When the owner authorizes deployment again, verify all15 journeys on an isolated hosted release revision, with consuming-app flows, EN/AR, light/dark, responsive/error/no-access/read-only states and website visual parity.
 - Complete/verify authoritative workspace/tool isolation, usage and read-only enforcement, sessions, reservations and HR lifecycle through the planned shared foundations. Current R0 code does not complete those R1/R3 journeys.
 - Verify deployed persistence outages/retries, historical invoices/accounts and pricing endpoints; production smoke remains non-destructive.
