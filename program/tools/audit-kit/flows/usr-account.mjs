@@ -10,7 +10,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
-import { AUDITS, AUDIT_TZ, WORKSPACE, redact, webUrl } from "../lib/suite.mjs";
+import { AUDITS, AUDIT_TZ, WORKSPACE, redact, webUrl, apiUrl } from "../lib/suite.mjs";
 import { mock } from "../lib/mock.mjs";
 import { signIn, tokenFor } from "../lib/session.mjs";
 import { settle, watch } from "../lib/checks.mjs";
@@ -37,7 +37,7 @@ const m = (key, values = {}) => {
 const head = (s, n = 24) => s.slice(0, n);
 const OUT = path.join(AUDITS, "usr", "flows", ...(LOCALE === "en" ? [] : [LOCALE]));
 const SOS = webUrl("sos");
-const PLATFORM = "http://localhost:4008/v1";
+const PLATFORM = `${apiUrl("admin")}/v1`;
 const MONA = "mona.adel@orgtik.test";
 const KARIM = "karim.hassan@orgtik.test";
 const SALMA = "salma.nabil@orgtik.test"; // `employee`: a member of OrgTik Egypt

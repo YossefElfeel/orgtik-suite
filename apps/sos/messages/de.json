@@ -13,6 +13,8 @@
     "invalidCredentials": "E-Mail und Passwort passen zu keinem Konto. Prüfen Sie beides und versuchen Sie es erneut.",
     "validationFailed": "Prüfen Sie die markierten Felder und versuchen Sie es erneut.",
     "failed": "Anmelden nicht möglich. Prüfen Sie die Verbindung und versuchen Sie es erneut.",
+    "handoffExpired": "Dieser Anmeldelink ist abgelaufen oder wurde bereits verwendet.",
+    "handoffSignIn": "Melden Sie sich erneut an, um zu Ihrem Konto zu gelangen.",
     "language": "Sprache",
     "passwordChanged": "Passwort geändert. Melden Sie sich mit Ihrem neuen Passwort an.",
     "accountReady": "Ihr Konto ist bereit. Melden Sie sich mit Ihrer E-Mail und dem gewählten Passwort an."

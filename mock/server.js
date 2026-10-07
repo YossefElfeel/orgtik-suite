@@ -29,6 +29,8 @@ const config = require("./config");
 const icons = require("./lib/icons");
 const requests = require("./lib/requests");
 const journal = require("./lib/journal");
+const authStorage = require("./lib/auth-store");
+const accountStore = authStorage.pickStore(config);
 
 // "chats" has no API: its module only registers a launcher tile.
 const ORDER = ["sos", "tasks", "files", "sales", "hr", "marketing", "content", "wm", "admin", "chats"];
@@ -40,7 +42,7 @@ const unhandledLog = path.join(LOG_DIR, "unhandled.log");
 
 // A reset re-requires the app modules and the shared libraries so every in-memory store is
 // rebuilt from its seed. These modules hold state that must survive a reset.
-const KEEP = new Set(["./lib/clock", "./lib/requests", "./lib/icons", "./lib/journal", "./config"].map((p) => require.resolve(p)));
+const KEEP = new Set(["./lib/clock", "./lib/requests", "./lib/icons", "./lib/journal", "./lib/auth-store", "./config"].map((p) => require.resolve(p)));
 const RELOAD_DIRS = ["apps", "lib"].map((d) => path.join(__dirname, d) + path.sep);
 function purgeLocalModules() {
   for (const id of Object.keys(require.cache)) {
@@ -153,9 +155,21 @@ function scheduleReset(reason) {
 function controlRoutes(app) {
   const c = express.Router();
   c.get("/status", (req, res) => res.json({ success: true, data: status() }));
-  c.post("/reset", (req, res) => {
-    res.json({ success: true, message: "Resetting every app's data", data: { generation: state.generation + 1 } });
-    resetData("POST /__mock/reset");
+  c.post("/reset", async (req, res, next) => {
+    try {
+      // Only CI's explicit preview reset can clear reserved test-domain fixtures. Production
+      // and ordinary data resets always preserve accounts, including non-test preview users.
+      if (req.body?.fixtures === true) {
+        const identity = require("./lib/identity");
+        const user = identity.userFromReq(req);
+        if (sandbox !== "preview" || !user || !identity.userScopes(user).some(scope => scope.scope === "global" && scope.roles.includes("super_admin"))) {
+          return res.status(403).json({ success: false, message: "Test account resets are restricted to preview administrators." });
+        }
+        await accountStore.resetTestFixtures();
+      }
+      res.json({ success: true, message: "Resetting every app's data", data: { generation: state.generation + 1 } });
+      resetData("POST /__mock/reset");
+    } catch (error) { next(error); }
   });
   c.get("/clock", (req, res) => res.json({ success: true, data: clock.status() }));
   c.post("/clock", (req, res) => {
@@ -262,6 +276,7 @@ function strictScopesMiddleware(key, identity) {
 function build() {
   purgeLocalModules();
   const identity = require("./lib/identity");
+  identity.configureStore(accountStore);
   const util = require("./lib/util");
   const modules = loadModules();
   identity.registerModules(modules);
@@ -311,13 +326,14 @@ function build() {
     // eslint-disable-next-line no-unused-vars
     app.use((err, req, res, next) => {
       console.error(`[api:${key}] ERROR on ${req.method} ${req.originalUrl}:`, err);
-      res.status(500).json({ success: false, statusCode: 500, message: `[local mock] ${err.message}` });
+      const status = err.status === 503 || err.status === 409 ? err.status : 500;
+      res.status(status).json({ success: false, statusCode: status, message: status === 503 ? "Account service unavailable. Please try again." : `[local mock] ${err.message}` });
     });
 
     let slot = slots.get(key);
     if (!slot && process.env.ORGTIK_MOCK_NO_LISTEN) {
       // Serverless: no sockets. A stand-in io lets modules register handlers and emit harmlessly.
-      const io = { on() {}, use() {}, emit() {}, of() { return io; }, to() { return io; }, in() { return io; }, _nsps: new Map() };
+      const io = { on() {}, use() {}, emit() {}, of() { return io; }, to() { return io; }, in() { return io; }, sockets: new Map(), _nsps: new Map() };
       slot = { server: null, io };
       slots.set(key, slot);
     } else if (!slot) {
@@ -371,6 +387,7 @@ function loopbackBase() {
         app(req, res);
       });
       srv.on("error", reject);
+      srv.on("connection", (socket) => socket.unref());
       srv.listen(0, "127.0.0.1", () => resolve(`http://127.0.0.1:${srv.address().port}`));
       srv.unref();
     });
@@ -379,17 +396,9 @@ function loopbackBase() {
   return loopback;
 }
 
-const HOP = new Set(["host", "connection", "content-length", "transfer-encoding", "keep-alive", "expect", "upgrade"]);
 async function dispatch(key, { method, url, headers, body }) {
   const base = await loopbackBase();
-  const h = { "x-mock-app": key };
-  for (const [k, v] of Object.entries(headers || {})) if (!HOP.has(k.toLowerCase()) && v != null) h[k] = Array.isArray(v) ? v.join(", ") : String(v);
-  const r = await fetch(base + url, { method, headers: h, body: body && body.length ? body : undefined, redirect: "manual" });
-  const headersOut = {};
-  r.headers.forEach((v, k) => { if (k !== "set-cookie") headersOut[k] = v; });
-  const cookies = r.headers.getSetCookie?.() ?? [];
-  if (cookies.length) headersOut["set-cookie"] = cookies;
-  return { statusCode: r.status, headers: headersOut, rawPayload: Buffer.from(await r.arrayBuffer()) };
+  return require("./lib/dispatch").dispatch(base, key, { method, url, headers, body });
 }
 
 async function replay(lines, offset) {
@@ -416,6 +425,8 @@ async function restore(meta) {
   persist.clockJson = JSON.stringify(meta.clock ?? null);
   clock.importState(meta.clock);
   clock.runPinned({ at: meta.seedAt, seed: `seed:${meta.seedAt}` }, build);
+  // Identity is authoritative and must exist before replaying customer-owned business writes.
+  require("./lib/identity").hydrate(await accountStore.accounts());
   persist.applied = 0;
   persist.skipped = 0;
   persist.rebuild = false;
@@ -454,7 +465,12 @@ async function sync() {
     persist.clockJson = JSON.stringify(meta.clock ?? null);
     clock.importState(meta.clock);
   }
-  if (entries.length) await replay(entries, persist.applied);
+  if (entries.length) {
+    // Another instance may have registered the owner of these writes after this instance
+    // warmed up. Refresh identities and their workspaces before replay, just as restore does.
+    require("./lib/identity").hydrate(await accountStore.accounts());
+    await replay(entries, persist.applied);
+  }
 }
 
 function saveClock() {
@@ -511,7 +527,11 @@ const sendJson = (res, code, body) => {
 
 // Every request to an app's API goes through here (the local servers and api/index.js).
 async function handle(key, req, res) {
-  if (!store) return slots.get(key).app(req, res);
+  // Preflights do not need account storage and must work even during an outage.
+  if (req.method === "OPTIONS") {
+    res.writeHead(204, { "access-control-allow-origin": req.headers.origin || "*", "access-control-allow-methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS", "access-control-allow-headers": req.headers["access-control-request-headers"] || "content-type,authorization", "access-control-allow-credentials": "true", vary: "Origin" });
+    return res.end();
+  }
   try {
     await ready();
   } catch (e) {
@@ -519,45 +539,52 @@ async function handle(key, req, res) {
     return sendJson(res, 503, { success: false, statusCode: 503, message: "[mock] data store unavailable" });
   }
   const url = req.url || "/";
-  // With the journal on, the mock answers one request at a time (it's a prototype): a change is
-  // applied with its pin while nothing else runs, in the order the journal records.
-  if (!journal.recordable(req.method, url)) {
-    return persist.lock(async () => {
-      if (!url.startsWith("/__mock")) {
-        try {
-          await sync();
-        } catch (e) {
-          console.warn("[journal] sync failed:", e.message);
-        }
-      }
-      const app = slots.get(key)?.app;
-      if (!app) return sendJson(res, 404, { success: false, statusCode: 404, message: `[mock] no API for ${key}` });
-      await new Promise((resolve) => {
-        const done = () => { clearTimeout(t); resolve(); };
-        const t = setTimeout(done, 15000); // a stream that never ends must not hold everyone up
-        res.on("finish", done);
-        res.on("close", done);
-        app(req, res);
-      });
-    });
-  }
   const body = await readBody(req);
   return persist.lock(async () => {
+    let saved;
     try {
-      await sync();
-    } catch (e) {
-      console.warn("[journal] sync failed:", e.message);
+      if (store && !url.startsWith("/__mock")) await sync();
+      saved = await accountStore.accounts();
+      require("./lib/identity").hydrate(saved);
+    } catch {
+      return sendJson(res, 503, { success: false, statusCode: 503, message: "Account service unavailable. Please try again." });
     }
     if (!slots.get(key)?.app) return sendJson(res, 404, { success: false, statusCode: 404, message: `[mock] no API for ${key}` });
+    const identity = require("./lib/identity");
+    const before = authStorage.snapshot(identity);
     const at = clock.now();
     const seed = `${at}:${Math.floor(realRandom() * 1e12)}`;
-    const r = await clock.runPinned({ at, seed }, () => dispatch(key, { method: req.method, url, headers: req.headers, body }));
+    let r;
+    try {
+      r = await clock.runPinned({ at, seed }, () => dispatch(key, { method: req.method, url, headers: req.headers, body }));
+    } catch (error) {
+      identity.hydrate(before, { replace: true });
+      if (store) persist.rebuild = true;
+      console.warn("[mock] loopback request failed:", error.code || error.message);
+      return sendJson(res, 503, { success: false, statusCode: 503, message: "Mock service unavailable. Please try again." });
+    }
     if (r.statusCode < 400) {
+      const changes = [...authStorage.snapshot(identity)].filter(([id, value]) => before.get(id) !== value).map(([id, value]) => ({ id, value, expected: saved.get(id) ?? null }));
+      try {
+        if (changes.length) await accountStore.commit(changes);
+      } catch (error) {
+        identity.hydrate(before, { replace: true });
+        // The business side of a failed registration is rebuilt from the journal next time.
+        if (store) persist.rebuild = true;
+        const status = error.status === 409 ? 409 : 503;
+        return sendJson(res, status, { success: false, statusCode: status, message: status === 409 ? "Account changed concurrently. Please try again." : "Account service unavailable. Please try again." });
+      }
+    } else {
+      // A refused mutation must not change the account, even if a handler touched it first.
+      identity.hydrate(before, { replace: true });
+    }
+    if (store && journal.recordable(req.method, url) && r.statusCode < 400) {
       if (body.length > journal.MAX_BODY) res.setHeader("x-mock-journal", "too-large");
       else if (persist.applied >= journal.MAX_ENTRIES) res.setHeader("x-mock-journal", "full");
       else {
         try {
-          const seq = await store.push({ epoch: persist.epoch, app: key, method: req.method, url, headers: journal.recordHeaders(req.headers), body: body.length ? body.toString("base64") : null, at, seed });
+          const cleanBody = journal.redactBody(body);
+          const seq = await store.push({ epoch: persist.epoch, app: key, method: req.method, url, headers: journal.recordHeaders(req.headers), body: cleanBody.length ? cleanBody.toString("base64") : null, at, seed });
           if (seq === persist.applied + 1) persist.applied = seq;
           else persist.rebuild = true; // another instance wrote in between: rebuild in journal order
         } catch (e) {

@@ -2,6 +2,10 @@
 // Every app module shares these people so the same names show up across all tools.
 const config = require("../config");
 const { nowIso, daysFromNow, ok, fail } = require("./util");
+const { passwordMatches, setPassword } = require("./auth-store");
+const { RealDate } = require("./clock");
+let accountStore;
+const configureStore = (store) => { accountStore = store; };
 
 // Password for every local test account. Local only; documented in local-dev/README.md.
 const LOCAL_PASSWORD = "Local@2026";
@@ -118,20 +122,20 @@ const scopeByName = (name) => scopes.find((s) => s.name === name);
 // ---- users ----
 const findUser = (id) => users.find((u) => String(u.id) === String(id));
 const findByKey = (key) => users.find((u) => u.key === key);
-const findByEmail = (email) => users.find((u) => u.email.toLowerCase() === String(email || "").toLowerCase());
+const findByEmail = (email) => users.find((u) => u.email.toLowerCase() === String(email || "").trim().toLowerCase());
 const fullName = (u) => `${u.firstName} ${u.lastName}`;
 
 // The IApiUser/IUser shape the SOS API returns (no password, no internal key).
 function publicUser(u) {
   if (!u) return null;
-  const { password, key, ...rest } = u;
+  const { password, passwordHash, key, signupSeal, ...rest } = u;
   return { ...rest, deletedAt: u.deletedAt ?? null };
 }
 
 // ---- tokens (JWT-shaped, unsigned; the frontends never verify signatures) ----
 const b64 = (obj) => Buffer.from(JSON.stringify(obj)).toString("base64url");
 function makeToken(user, type, ttlSec, extra = {}) {
-  const iat = Math.floor(Date.now() / 1000);
+  const iat = Math.floor(RealDate.now() / 1000);
   return `${b64({ alg: "HS256", typ: "JWT" })}.${b64({ sub: user.id, id: user.id, email: user.email, userType: user.userType, type, iat, exp: iat + ttlSec, ...extra })}.local-dev-signature`;
 }
 function issueTokens(user, extra = {}) {
@@ -142,7 +146,7 @@ function issueTokens(user, extra = {}) {
 function decode(token) {
   try {
     const payload = JSON.parse(Buffer.from(String(token).split(".")[1], "base64url").toString("utf8"));
-    if (payload.exp && payload.exp * 1000 < Date.now()) return null;
+    if (payload.exp && payload.exp * 1000 < RealDate.now()) return null;
     return payload;
   } catch {
     return null;
@@ -193,14 +197,15 @@ function routes(app) {
   app.post("/api/auth/login", (req, res) => {
     const { email, password } = req.body || {};
     const u = findByEmail(email);
-    if (!u || password !== u.password) return fail(res, 401, "Invalid email or password. Please try again.");
+    if (!u || !passwordMatches(u, password)) return fail(res, 401, "Invalid email or password. Please try again.");
+    if (u.deletedAt) return fail(res, 401, "Invalid email or password. Please try again.");
     if (!u.isActive) return fail(res, 403, "This account is deactivated.");
     return ok(res, authPayload(u), "Login successful");
   });
 
   // Sign-up from the public website (2026-10-07): a new customer account, signed in at once.
   // Modules that give a customer somewhere to land (the platform's workspace) listen through
-  // onRegister. Like everything here, the account lives in memory until the next reset.
+  // onRegister. The server commits the account to its own store before returning success.
   app.post("/api/auth/register", (req, res) => {
     const b = req.body || {};
     const email = String(b.email || "").trim().toLowerCase();
@@ -217,9 +222,10 @@ function routes(app) {
     const u = {
       id, key: `signup_${id}`, email, username: email.split("@")[0], firstName, lastName: rest.join(" "),
       avatar: null, isActive: true, isEmailVerified: true, managerId: null, userType: "customer", phone: null,
-      password, createdAt: at, updatedAt: at,
+      createdAt: at, updatedAt: at,
       profile: { id, jobTitle: null, department: String(b.company || "").trim() || null, about: null, language: "en", timeZone: "Europe/Zurich", weekStartDay: "monday", dateFormat: "DD/MM/YYYY", timeFormat: "24h", flyoutToastMessage: true, timezoneChangeNotification: true, createdAt: at, updatedAt: at },
     };
+    setPassword(u, password);
     addSignupUser(u, { company: String(b.company || "").trim() });
     return ok(res, authPayload(u), "Account created", 201);
   });
@@ -252,34 +258,42 @@ function routes(app) {
   // the launcher asks for a one-time code from the signed-in session; the app it opens sends the
   // code back here and gets the session's access token in the response body. A code works once,
   // for 60 seconds. (A proposal for the real API; the mock keeps codes in memory.)
-  app.post("/api/auth/handoff", (req, res) => {
+  const asyncRoute = (handler) => (req, res, next) => Promise.resolve(handler(req, res)).catch(next);
+  app.post("/api/auth/handoff", asyncRoute(async (req, res) => {
     const token = tokenFrom(req);
     if (!token || !userFromToken(token)) return fail(res, 401, "Unauthorized");
-    const expiresAt = Date.now() + 60 * 1000;
-    // Hosted (Vercel), requests can land on different instances, so the code carries the token
-    // itself, encrypted; locally it's a random key into memory.
-    const code = config.hosted ? sealHandoff({ token, expiresAt }) : require("crypto").randomBytes(24).toString("base64url");
-    if (!config.hosted) handoffs.set(code, { token, expiresAt });
+    const expiresAt = RealDate.now() + 60 * 1000;
+    const code = require("crypto").randomBytes(24).toString("base64url");
+    await accountStore.putHandoff(code, { token, expiresAt });
     return ok(res, { code, expiresIn: 60 }, "Hand-off code created");
-  });
+  }));
 
-  app.post("/api/auth/handoff/exchange", (req, res) => {
+  app.post("/api/auth/handoff/exchange", asyncRoute(async (req, res) => {
     const code = String(req.body?.code || "");
-    const h = config.hosted ? openHandoff(code) : handoffs.get(code);
-    handoffs.delete(code);
-    if (!h || h.expiresAt < Date.now() || !userFromToken(h.token)) return fail(res, 400, "This sign-in link has expired or was already used.");
-    return ok(res, { accessToken: h.token }, "Signed in");
-  });
+    if (!code || code.length > 10000) return fail(res, 400, "This sign-in link has expired or was already used.");
+    let h = await accountStore.takeHandoff(code);
+    // Rolling upgrade: honour old encrypted links during their original 60-second lifetime,
+    // but record consumption in the same shared store so another instance cannot reuse one.
+    if (!h && config.hosted && code.length > 64) {
+      const old = openHandoff(code);
+      if (old?.token && old.expiresAt > RealDate.now() && await accountStore.claimLegacy(code, old.expiresAt)) h = old;
+    }
+    const user = h && userFromToken(h.token);
+    if (!h || h.expiresAt <= RealDate.now() || !user) return fail(res, 400, "This sign-in link has expired or was already used.");
+    const claims = decode(h.token) || {};
+    const tokens = issueTokens(user, claims.impersonatedBy ? { impersonatedBy: claims.impersonatedBy, ...(claims.readOnly ? { readOnly: true } : {}) } : {});
+    return ok(res, { accessToken: tokens.accessToken, tokens }, "Signed in");
+  }));
 }
-const handoffs = new Map(); // code -> { token, expiresAt }
 const registerHooks = [];
 const onRegister = (fn) => registerHooks.push(fn);
-// Adds a signed-up person and lets modules give them somewhere to land. Hosted, the person also
-// gets a sealed copy of themselves that rides in every token (issueTokens), so another instance
-// of the mock can rebuild them (userFromToken); it's non-enumerable, so it never reaches a response.
+// Adds a signed-up person and lets modules give them somewhere to land. Registration metadata
+// stays private; the account store rehydrates it before replay. Legacy sealed sessions are
+// still accepted above, then migrated without putting credentials into new tokens.
 function addSignupUser(u, info = {}) {
-  if (config.hosted) Object.defineProperty(u, "signupSeal", { value: sealHandoff({ user: u, info }), enumerable: false });
-  users.push(u);
+  if (u.password !== undefined) setPassword(u, u.password);
+  Object.defineProperty(u, "signupInfo", { value: info, enumerable: false, configurable: true });
+  if (!findUser(u.id)) users.push(u);
   (grants.global || (grants.global = {}))[u.key] = { roles: [], permissions: [] };
   for (const fn of registerHooks) {
     try {
@@ -289,6 +303,35 @@ function addSignupUser(u, info = {}) {
     }
   }
   return u;
+}
+
+// Merge in place: app modules hold references to these users. Stored grants and credentials
+// take precedence over seed defaults, including deactivation and password changes.
+function hydrate(records, { replace = false } = {}) {
+  const ids = new Set(records.keys());
+  if (replace) {
+    for (let i = users.length - 1; i >= 0; i--) {
+      if (!ids.has(String(users[i].id))) {
+        for (const members of Object.values(grants)) delete members[users[i].key];
+        users.splice(i, 1);
+      }
+    }
+  }
+  for (const raw of records.values()) {
+    const record = JSON.parse(raw);
+    let user = findUser(record.user.id);
+    if (!user) {
+      user = record.user;
+      if (record.registration) addSignupUser(user, record.registration);
+      else users.push(user);
+    } else {
+      for (const key of Object.keys(user)) delete user[key];
+      Object.assign(user, record.user);
+      if (record.registration) addSignupUser(user, record.registration);
+    }
+    for (const members of Object.values(grants)) delete members[user.key];
+    for (const [scope, value] of Object.entries(record.grants || {})) (grants[scope] ||= {})[user.key] = value;
+  }
 }
 
 const handoffKey = () => require("crypto").createHash("sha256").update(process.env.MOCK_HANDOFF_SECRET || "orgtik-suite-prototype").digest();
@@ -311,7 +354,7 @@ function openHandoff(code) {
 }
 
 module.exports = {
-  LOCAL_PASSWORD, users, scopes, grants, onRegister,
+  LOCAL_PASSWORD, users, scopes, grants, onRegister, configureStore, hydrate, setPassword, passwordMatches,
   registerModules, userScopes, scopeByName,
   findUser, findByKey, findByEmail, fullName, publicUser,
   issueTokens, decode, tokenFrom, userFromToken, userFromReq, requireUser, authPayload,

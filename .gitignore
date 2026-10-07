@@ -8,6 +8,7 @@ node_modules/
 *.log
 mock/uploads/
 mock/logs/
+mock/identity/
 .turbo/
 storybook-static/
 

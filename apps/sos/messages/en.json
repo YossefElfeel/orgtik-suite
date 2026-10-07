@@ -13,6 +13,8 @@
     "invalidCredentials": "That email and password don't match an account. Check them and try again.",
     "validationFailed": "Check the highlighted fields and try again.",
     "failed": "Couldn't sign in. Check your connection and try again.",
+    "handoffExpired": "This sign-in link has expired or was already used.",
+    "handoffSignIn": "Sign in again to continue to your account.",
     "language": "Language",
     "passwordChanged": "Password changed. Sign in with your new password.",
     "accountReady": "Your account is ready. Sign in with your email and the password you chose."

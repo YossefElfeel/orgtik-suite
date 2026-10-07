@@ -104,9 +104,9 @@ function register(app, S, H, R) {
     const b = req.body || {};
     const current = b.oldPassword ?? b.currentPassword ?? b.password;
     const next = String(b.newPassword || "");
-    if (current !== undefined && current !== u.password) return H.fail(req, res, 400, "Current password is incorrect");
+    if (current !== undefined && !identity.passwordMatches(u, current)) return H.fail(req, res, 400, "Current password is incorrect");
     if (next.length < MIN_PASSWORD) return H.fail(req, res, 400, `Password must be at least ${MIN_PASSWORD} characters long`);
-    u.password = next;
+    identity.setPassword(u, next);
     u.updatedAt = nowIso();
     H.send(res, null, "Password changed successfully");
   });
@@ -179,7 +179,7 @@ function register(app, S, H, R) {
     const r = checkOtp(email, b.otp);
     if (r.error) return H.fail(req, res, 400, r.error);
     if (password.length < MIN_PASSWORD) return H.fail(req, res, 400, `Password must be at least ${MIN_PASSWORD} characters long`);
-    r.user.password = password;
+    identity.setPassword(r.user, password);
     r.user.updatedAt = nowIso();
     otps.delete(email);
     const message = "Your password has been reset. You can now sign in.";

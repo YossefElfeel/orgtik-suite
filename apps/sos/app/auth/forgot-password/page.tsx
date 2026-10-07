@@ -13,10 +13,12 @@ import { createRHFField } from "@orgtik/ui/rhf";
 import { useForgotPasswordMutation } from "@/redux/features/auth/authApi";
 import { AuthPanel } from "@/components/auth/AuthPanel";
 import { RESET_EMAIL_KEY } from "@/lib/recovery";
+import { useMounted } from "@/hooks/use-mounted";
 
 const EmailField = createRHFField(Input);
 
 export default function ForgotPasswordPage() {
+  const mounted = useMounted();
   const t = useTranslations("Recovery");
   const router = useRouter();
   const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
@@ -40,7 +42,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <AuthPanel title={t("forgotTitle")} subtitle={t("forgotBody")} error={error}>
-      <form noValidate onSubmit={onSubmit} className="flex flex-col gap-5">
+      <form method="post" noValidate onSubmit={onSubmit} className="flex flex-col gap-5">
         <EmailField
           control={control}
           name="email"
@@ -50,8 +52,9 @@ export default function ForgotPasswordPage() {
           dir="ltr"
           autoComplete="username"
           required
+          disabled={!mounted}
         />
-        <Button type="submit" size="lg" loading={isLoading} className="w-full">
+        <Button type="submit" size="lg" loading={isLoading} disabled={!mounted} className="w-full">
           {t("sendCode")}
         </Button>
         <Link href="/auth/login" className="self-center rounded-sm text-body-sm text-fg-brand hover:underline focus-visible:outline-2 focus-visible:outline-focus">
