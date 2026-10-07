@@ -4,6 +4,11 @@ name: CI
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      base_revision:
+        description: Base revision for a manually verified work package
+        type: string
+        default: origin/main
   push:
     branches: [main]
 
@@ -48,10 +53,15 @@ jobs:
       - name: Typecheck, message catalogs and tests (affected packages)
         run: pnpm turbo run typecheck i18n:check test --affected --continue
         env:
-          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || inputs.base_revision || 'origin/main' }}
 
       - name: Platform OpenAPI matches the mock
         run: node program/phase-e/openapi.mjs --check
+
+      - name: Check runtime API consumers even without frontend deployment
+        run: node tools/ci/runtime-consumers.mjs
+        env:
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || inputs.base_revision || 'origin/main' }}
 
       - name: Detect library changes
         id: library
@@ -62,7 +72,7 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
         env:
-          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || inputs.base_revision || 'origin/main' }}
 
       - name: No secrets or tokens in URLs
         run: node tools/ci/secret-scan.mjs

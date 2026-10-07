@@ -2,16 +2,17 @@
 openapi: "3.1.0"
 info:
   title: OrgTik platform API (ADM and USR)
-  version: "0.1.0"
-  description: "The SaaS core of OrgTik_00–06: the staff back office (ADM, /v1/admin) and the customer workspace (USR, /v1/app).\n\nGenerated from the local platform mock (local-dev/apps/admin.js) by orgtik-program/phase-e/openapi.mjs; the frontends are built against it.\n\nEnvelope: success `{ data, meta }`, error `{ error: { code, message, requestId, fieldErrors?, required? } }`. Lists page with `page` and `pageSize` (25, at most 100).\n\nStaff routes need the permission named in `x-permission` (spec 02 matrix, 8 roles); 403 names it in `error.required`.\n\nCustomer routes act in one workspace (`X-Workspace` header, else the person's first) and need the role in `x-workspace-role`; writes to a suspended workspace answer 423.\n\nOpen decisions are switches in GET /v1/admin/settings: G-04 seat model, G-12 tax display, G-18 add-ons, G-21 General paid plans, G-24 hosting ops, G-28 mailboxes."
+  version: "0.2.0"
+  description: "The SaaS core of OrgTik_00–06: the staff back office (ADM, /v1/admin) and the customer workspace (USR, /v1/app).\n\nGenerated from the local platform mock (local-dev/apps/admin.js) by orgtik-program/phase-e/openapi.mjs; the frontends are built against it.\n\nEnvelope: success `{ data, meta }`, error `{ error: { code, message, requestId, fieldErrors?, required? } }`. Lists page with `page` and `pageSize` (25, at most 100).\n\nStaff routes need the permission named in `x-permission` (spec 02 matrix, 8 roles); 403 names it in `error.required`.\n\nCustomer routes act in one workspace (`X-Workspace` header, else the person's first) and need the role in `x-workspace-role`; writes to a suspended workspace answer 423.\n\nD-061 resolves G-04 to purchased seats per tool; D-060 resolves G-12 to regional tax display. G-18, G-21, G-24 and G-28 remain switches. All payments, VAT verification and delivery integrations are prototype simulations.\n\nPublic offer routes permit guests and optional bearer context. A supplied invalid token is refused; a signed-in buyer uses their selected workspace region/currency, and payment confirmation requires its owner. Platform money uses major currency units; website offer money uses integer minor units with explicit decimals."
 servers:
   - url: http://localhost:4008
-    description: Local platform mock (ADM)
+    description: Local platform mock (ADM, USR and public offers)
   - url: http://localhost:4000
-    description: Local SOS API (USR routes only)
+    description: Local SOS API (USR and public offer routes)
 security:
   - bearer: []
 tags:
+  - name: Public website offers
   - name: Staff
   - name: Overview
   - name: Tools
@@ -1065,9 +1066,33 @@ paths:
     get:
       tags:
         - Pricing
-      summary: Resolve a plan's price for one or every country (R03-ALG-1…9)
+      summary: Resolve a plan's unit and quantity for one or every country (R03-ALG-1…9)
       description: "Spec: ADM-13."
       operationId: get_admin_price_preview
+      parameters:
+        - name: planId
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: country
+          in: query
+          schema:
+            type: string
+        - name: cycle
+          in: query
+          schema:
+            enum:
+              - monthly
+              - yearly
+            default: monthly
+        - name: seats
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+          description: "Staff-only hypothetical quantity; ordinary customer repricing uses purchased capacity."
       x-permission: pricing:view
       responses:
         "200":
@@ -1075,7 +1100,11 @@ paths:
           content:
             "application/json":
               schema:
-                $ref: "#/components/schemas/Envelope"
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - properties:
+                      data:
+                        $ref: "#/components/schemas/PricePreview"
         "401":
           description: No session
           content:
@@ -1813,8 +1842,8 @@ paths:
     post:
       tags:
         - Workspaces
-      summary: Quote a custom plan in the workspace's currency
-      description: "Spec: ADM-22."
+      summary: Quote explicit full-term per-tool allocations summing to the workspace-currency total
+      description: "Spec: ADM-22, D-067."
       operationId: post_admin_custom_plans_id_quote
       parameters:
         - name: id
@@ -1824,18 +1853,22 @@ paths:
             type: string
       x-permission: workspaces:edit
       requestBody:
-        required: false
+        required: true
         content:
           "application/json":
             schema:
-              type: object
+              $ref: "#/components/schemas/CustomQuoteBody"
       responses:
         "200":
           description: OK
           content:
             "application/json":
               schema:
-                $ref: "#/components/schemas/Envelope"
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - properties:
+                      data:
+                        $ref: "#/components/schemas/CustomPlanRequest"
         "401":
           description: No session
           content:
@@ -2853,6 +2886,202 @@ paths:
             "application/json":
               schema:
                 $ref: "#/components/schemas/Error"
+  "/v1/public/catalog":
+    get:
+      tags:
+        - Public website offers
+      summary: "Public offers and four-term regional prices; signed-in workspace billing context wins"
+      description: "Spec: D-058, D-064, D-065."
+      operationId: get_public_catalog
+      parameters:
+        - $ref: "#/components/parameters/Workspace"
+        - name: X-Mock-Country
+          in: header
+          required: false
+          schema:
+            type: string
+          description: "Controlled local/preview override only; unknown detection falls back to CH. Never overrides a signed-in workspace's billing context; production ignores this test override."
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json":
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - properties:
+                      data:
+                        $ref: "#/components/schemas/WebsiteCatalog"
+        "401":
+          description: "A supplied bearer token is invalid; guests need no token"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Invalid workspace membership, or payment confirmation by a non-owner/read-only actor
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Mock pricing, persistence, region, reporting-rate or gateway unavailable
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - {}
+        - bearer: []
+      x-auth-mode: guest-or-selected-workspace-bearer
+      x-prototype-mode: hosted-mock
+  "/v1/public/website-quotes":
+    post:
+      tags:
+        - Public website offers
+      summary: Create a 15-minute server-priced offer quote in currency minor units
+      description: "Spec: D-064, WEB-checkout."
+      operationId: post_public_website_quotes
+      parameters:
+        - $ref: "#/components/parameters/Workspace"
+        - name: X-Mock-Country
+          in: header
+          required: false
+          schema:
+            type: string
+          description: "Controlled local/preview override only; unknown detection falls back to CH. Never overrides a signed-in workspace's billing context; production ignores this test override."
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/WebsiteQuoteBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json":
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - properties:
+                      data:
+                        $ref: "#/components/schemas/WebsiteQuote"
+        "401":
+          description: "A supplied bearer token is invalid; guests need no token"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Invalid workspace membership, or payment confirmation by a non-owner/read-only actor
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Wrong state
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "422":
+          description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Mock pricing, persistence, region, reporting-rate or gateway unavailable
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - {}
+        - bearer: []
+      x-auth-mode: guest-or-selected-workspace-bearer
+      x-prototype-mode: hosted-mock
+  "/v1/public/website-orders":
+    post:
+      tags:
+        - Public website offers
+      summary: "Confirm an immutable simulated payment attempt; only success returns a linking claim"
+      description: "Spec: D-064, WEB-checkout."
+      operationId: post_public_website_orders
+      parameters:
+        - $ref: "#/components/parameters/Workspace"
+        - name: X-Mock-Country
+          in: header
+          required: false
+          schema:
+            type: string
+          description: "Controlled local/preview override only; unknown detection falls back to CH. Never overrides a signed-in workspace's billing context; production ignores this test override."
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/WebsiteConfirmBody"
+      responses:
+        "200":
+          description: OK
+          content:
+            "application/json":
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - properties:
+                      data:
+                        $ref: "#/components/schemas/WebsiteOrder"
+        "401":
+          description: "A supplied bearer token is invalid; guests need no token"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Invalid workspace membership, or payment confirmation by a non-owner/read-only actor
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Server quote not found
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: Wrong state
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "410":
+          description: Server quote expired
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "422":
+          description: "Invalid: see fieldErrors"
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: Mock pricing, persistence, region, reporting-rate or gateway unavailable
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - {}
+        - bearer: []
+      x-auth-mode: guest-or-selected-workspace-bearer
+      x-prototype-mode: hosted-mock
+      x-conditional-workspace-role: owner when signed in
   "/v1/app/me":
     get:
       tags:
@@ -2935,7 +3164,11 @@ paths:
           content:
             "application/json":
               schema:
-                $ref: "#/components/schemas/Envelope"
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - properties:
+                      data:
+                        $ref: "#/components/schemas/ToolDetail"
         "401":
           description: No session
           content:
@@ -3064,26 +3297,30 @@ paths:
     post:
       tags:
         - Checkout
-      summary: "Price a basket: proration, bundle, coupon, tax (R03-ALG-8)"
-      description: "Spec: USR-07."
+      summary: "Price eligible bundle → coupon → proration/credits → regional tax; explicit intent changes purchased capacity"
+      description: "Spec: USR-07, R03-ALG-8, D-060, D-061."
       operationId: post_app_checkout_preview
       parameters:
         - $ref: "#/components/parameters/Workspace"
       x-workspace-role: owner
       x-role-text: workspace owner
       requestBody:
-        required: false
+        required: true
         content:
           "application/json":
             schema:
-              type: object
+              $ref: "#/components/schemas/CheckoutBody"
       responses:
         "200":
           description: OK
           content:
             "application/json":
               schema:
-                $ref: "#/components/schemas/Envelope"
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - properties:
+                      data:
+                        $ref: "#/components/schemas/CheckoutPreview"
         "401":
           description: No session
           content:
@@ -3117,14 +3354,21 @@ paths:
       operationId: post_app_checkout_confirm
       parameters:
         - $ref: "#/components/parameters/Workspace"
+        - name: Idempotency-Key
+          in: header
+          required: false
+          schema:
+            type: string
+            pattern: "^[\\w.:-]{1,200}$"
+          description: "Optional stable payment attempt ID. A confirmed receipt is reused only for the same workspace/actor and identical body; changed input conflicts. Current owner/read-only guards run before receipt lookup. Unused website and future prepaid-term value is credited on a cycle change."
       x-workspace-role: owner
       x-role-text: workspace owner
       requestBody:
-        required: false
+        required: true
         content:
           "application/json":
             schema:
-              type: object
+              $ref: "#/components/schemas/CheckoutBody"
       responses:
         "201":
           description: OK
@@ -3984,26 +4228,30 @@ paths:
     post:
       tags:
         - Billing
-      summary: Bring in an order paid on the public website
-      description: "Spec: WEB-checkout."
+      summary: "Idempotently link a server-paid immutable order by reference and claimToken; preserve its currency"
+      description: "Spec: WEB-checkout, D-059, D-064."
       operationId: post_app_website_orders
       parameters:
         - $ref: "#/components/parameters/Workspace"
       x-workspace-role: admin
       x-role-text: workspace admin or owner
       requestBody:
-        required: false
+        required: true
         content:
           "application/json":
             schema:
-              type: object
+              $ref: "#/components/schemas/WebsiteLinkBody"
       responses:
-        "200":
+        "201":
           description: OK
           content:
             "application/json":
               schema:
-                $ref: "#/components/schemas/Envelope"
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - properties:
+                      data:
+                        $ref: "#/components/schemas/WebsiteLinkResult"
         "401":
           description: No session
           content:
@@ -4583,8 +4831,8 @@ paths:
     post:
       tags:
         - Checkout
-      summary: Accept a custom plan quote
-      description: "Spec: USR-25."
+      summary: "Prepare workspace-private plans for normal checkout; acceptance never creates unpaid active lines"
+      description: "Spec: USR-25, F-12, D-067."
       operationId: post_app_custom_plans_id_accept
       parameters:
         - name: id
@@ -4607,7 +4855,11 @@ paths:
           content:
             "application/json":
               schema:
-                $ref: "#/components/schemas/Envelope"
+                allOf:
+                  - $ref: "#/components/schemas/Envelope"
+                  - properties:
+                      data:
+                        $ref: "#/components/schemas/CustomPlanRequest"
         "401":
           description: No session
           content:
@@ -4878,7 +5130,7 @@ components:
         currency:
           type: string
           pattern: "^[A-Z]{3}$"
-      description: Amounts are in the currency's minor-unit precision (KWD/BHD/OMR 3 decimals).
+      description: Amounts use major currency units at currency precision (KWD/BHD/OMR three decimals). Website offer schemas explicitly use integer minor units.
     Tool:
       type: object
       properties:
@@ -4931,6 +5183,23 @@ components:
           enum:
             - public
             - private
+        workspaceId:
+          type: string
+        contractedQuantity:
+          type: integer
+          minimum: 1
+        private:
+          type: object
+          properties:
+            amount:
+              type: number
+              description: Major currency units, rounded to currency decimals.
+            currency:
+              type: string
+            cycle:
+              enum:
+                - monthly
+                - yearly
     Line:
       type: object
       description: "A subscription line (state table: Subscription line)"
@@ -4969,7 +5238,7 @@ components:
           format: date-time
         snapshot:
           type: object
-          description: The price the line pays (R03-P1)
+          description: Stored purchased price/capacity. For a D-067 custom allocation amount is the full term price, not unit multiplied by capacity.
           properties:
             amount:
               type: number
@@ -4981,13 +5250,24 @@ components:
               type: string
             source:
               enum:
+                - Private
+                - Country
                 - Zone
                 - Zone (converted)
-                - Country
                 - Default
                 - Free
+                - Website order
+                - Website server order
             priceVersion:
               type: integer
+            workspaceConverted:
+              type: boolean
+            periodAmount:
+              type: number
+              description: Major currency units, rounded to currency decimals.
+            monthlyAmount:
+              type: number
+              description: "Monthly equivalent of a paid website term; full term amount remains the ledger authority."
         scheduled:
           type: object
           properties:
@@ -4998,6 +5278,69 @@ components:
             effectiveAt:
               type: string
               format: date-time
+        periodStart:
+          type: string
+          format: date-time
+        termMonths:
+          type: integer
+          enum:
+            - 1
+            - 3
+            - 6
+            - 12
+        renewalMonths:
+          type: integer
+          enum:
+            - 1
+            - 3
+            - 6
+            - 12
+        prepaidTerms:
+          type: array
+          items:
+            type: object
+            properties:
+              reference:
+                type: string
+              start:
+                type: string
+                format: date-time
+              end:
+                type: string
+                format: date-time
+              months:
+                type: integer
+                enum:
+                  - 1
+                  - 3
+                  - 6
+                  - 12
+              amount:
+                type: number
+                description: Major currency units, rounded to currency decimals.
+              quantity:
+                type: integer
+              autoRenew:
+                type: boolean
+              policy:
+                type: string
+        autoRenew:
+          type: boolean
+        overLimits:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              used:
+                type: number
+              limit:
+                type: number
+              excess:
+                type: number
+              state:
+                const: read_only
     Workspace:
       type: object
       properties:
@@ -5055,10 +5398,79 @@ components:
           type: array
           items:
             type: object
+            properties:
+              id:
+                type: string
+              amount:
+                type: number
+                description: Major currency units, rounded to currency decimals.
+              currency:
+                type: string
+              gateway:
+                type: string
+              status:
+                enum:
+                  - succeeded
+                  - failed
+              at:
+                type: string
+                format: date-time
+              usdRate:
+                type: number
+              usdAmount:
+                type: number
+                description: Major currency units, rounded to currency decimals.
         creditNotes:
           type: array
           items:
             type: object
+        quotedSubtotal:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        taxDisplay:
+          enum:
+            - inclusive
+            - exclusive
+        taxRate:
+          type: number
+        reverseCharge:
+          type: boolean
+        accountCreditUsed:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        creditRemaining:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        lines:
+          type: array
+          items:
+            type: object
+            properties:
+              label:
+                type: string
+              lineId:
+                type: string
+              planId:
+                type: string
+              amount:
+                type: number
+                description: Major currency units, rounded to currency decimals.
+              kind:
+                enum:
+                  - charge
+                  - bundle_discount
+                  - coupon_discount
+                  - period_credit
+                  - credit_carried
+                  - account_credit
+              quantity:
+                type: integer
+              taxAmount:
+                type: number
+                description: Major currency units, rounded to currency decimals.
+              grossAmount:
+                type: number
+                description: Major currency units, rounded to currency decimals.
     Banner:
       type: object
       properties:
@@ -5123,3 +5535,971 @@ components:
           type: string
         priority:
           type: string
+    RegionalTax:
+      type: object
+      required:
+        - country
+        - rate
+        - inclusive
+        - reverseCharge
+      properties:
+        country:
+          type: string
+        name:
+          type: string
+        rate:
+          type: number
+        inclusive:
+          type: boolean
+        reverseCharge:
+          type: boolean
+        label:
+          type: string
+        validation:
+          const: mock
+    Price:
+      type: object
+      required:
+        - amount
+        - unit
+        - quantity
+        - currency
+        - source
+      properties:
+        amount:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        unit:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        quantity:
+          type: integer
+          minimum: 1
+        currency:
+          type: string
+        source:
+          enum:
+            - Private
+            - Country
+            - Zone
+            - Zone (converted)
+            - Default
+            - Free
+        workspaceConverted:
+          type: boolean
+    PricePreview:
+      type: array
+      items:
+        allOf:
+          - $ref: "#/components/schemas/Price"
+          - properties:
+              country:
+                type: string
+              taxDisplay:
+                enum:
+                  - inclusive
+                  - exclusive
+              taxInclusive:
+                type: boolean
+              taxRate:
+                type: number
+              reverseCharge:
+                type: boolean
+    ToolPlan:
+      type: object
+      required:
+        - id
+        - name
+        - perUser
+        - monthly
+        - limits
+        - flags
+      properties:
+        id:
+          type: string
+        name:
+          $ref: "#/components/schemas/Localized"
+        tier:
+          type: string
+        perUser:
+          type: boolean
+        minSeats:
+          type: integer
+        trialDays:
+          type: integer
+        recommended:
+          type: boolean
+        current:
+          type: boolean
+        limits:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+              value:
+                type:
+                  - number
+                  - "null"
+              unit:
+                type:
+                  - string
+                  - "null"
+        flags:
+          type: array
+          items:
+            type: string
+        monthly:
+          anyOf:
+            - $ref: "#/components/schemas/Price"
+            - type: "null"
+        yearly:
+          anyOf:
+            - $ref: "#/components/schemas/Price"
+            - type: "null"
+        yearlyDiscountPct:
+          type: number
+        contractedQuantity:
+          type:
+            - integer
+            - "null"
+        workspacePrivate:
+          type: boolean
+    ToolDetail:
+      type: object
+      properties:
+        key:
+          type: string
+        name:
+          $ref: "#/components/schemas/Localized"
+        state:
+          $ref: "#/components/schemas/ToolState"
+        line:
+          anyOf:
+            - $ref: "#/components/schemas/Line"
+            - type: "null"
+        plans:
+          type: array
+          items:
+            $ref: "#/components/schemas/ToolPlan"
+        seats:
+          type: integer
+        seatModel:
+          const: B
+        taxDisplay:
+          enum:
+            - inclusive
+            - exclusive
+        taxInclusive:
+          type: boolean
+        taxRate:
+          type: number
+        reverseCharge:
+          type: boolean
+    CheckoutItem:
+      type: object
+      required:
+        - planId
+      properties:
+        planId:
+          type: string
+        cycle:
+          enum:
+            - monthly
+            - yearly
+        intent:
+          const: seat_purchase
+        quantity:
+          type: integer
+          minimum: 1
+          description: "Explicit purchased capacity; validated against plan minimum and assigned/reserved seats."
+        seats:
+          type: number
+          deprecated: true
+          description: Legacy input ignored for capacity. Repricing uses stored per-tool quantity.
+      allOf:
+        - if:
+            properties:
+              intent:
+                const: seat_purchase
+            required:
+              - intent
+          then:
+            required:
+              - quantity
+    CheckoutBody:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/CheckoutItem"
+          minItems: 1
+        coupon:
+          type: string
+        bundleId:
+          type: string
+        intent:
+          const: seat_purchase
+        paymentMethodId:
+          type: string
+        billing:
+          type: object
+          properties:
+            legalName:
+              type: string
+            taxId:
+              type: string
+      description: One plan per tool. Eligible bundle → coupon → proration/old-period credit → tax. Global seat_purchase intent also requires a valid quantity on each item.
+    CheckoutPreview:
+      type: object
+      properties:
+        currency:
+          type: string
+        subtotal:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        bundleDiscount:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        couponDiscount:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        prorated:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        net:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        tax:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        total:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        taxRate:
+          type: number
+        taxDisplay:
+          enum:
+            - inclusive
+            - exclusive
+        reverseCharge:
+          type: boolean
+        taxLabel:
+          type:
+            - string
+            - "null"
+        creditRemaining:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        accountCreditUsed:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+        lines:
+          type: array
+          items:
+            type: object
+            properties:
+              planId:
+                type: string
+              tool:
+                type: string
+              cycle:
+                enum:
+                  - monthly
+                  - yearly
+              quantity:
+                type: integer
+                minimum: 1
+              amount:
+                type: number
+                description: Major currency units, rounded to currency decimals.
+              unit:
+                type: number
+                description: Major currency units, rounded to currency decimals.
+              prorationFactor:
+                type: number
+              credit:
+                type: number
+                description: Major currency units, rounded to currency decimals.
+              contractedCapacity:
+                type:
+                  - integer
+                  - "null"
+              periodEnd:
+                type:
+                  - string
+                  - "null"
+                format: date-time
+        taxDecided:
+          const: true
+    CustomAllocation:
+      type: object
+      required:
+        - tool
+        - amount
+      properties:
+        tool:
+          type: string
+        amount:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+          minimum: 0
+      description: "Full-term price for agreed capacity, never multiplied again by seats; tools appear exactly once."
+    CustomQuoteBody:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: number
+          description: Major currency units, rounded to currency decimals.
+          exclusiveMinimum: 0
+        validDays:
+          type: integer
+          minimum: 1
+          default: 30
+        lines:
+          type: array
+          items:
+            $ref: "#/components/schemas/CustomAllocation"
+      description: "Currency-rounded allocations must sum to amount. Multi-tool requests require explicit lines; a legacy single-tool amount has one unambiguous allocation."
+    CustomPlanRequest:
+      type: object
+      required:
+        - id
+        - tools
+        - seats
+        - cycle
+        - state
+      properties:
+        id:
+          type: string
+        workspaceId:
+          type: string
+        tools:
+          type: array
+          items:
+            type: string
+        seats:
+          type: integer
+          minimum: 1
+        cycle:
+          enum:
+            - monthly
+            - yearly
+        state:
+          enum:
+            - new
+            - quoted
+            - accepted
+        quote:
+          type: object
+          required:
+            - amount
+            - currency
+            - validUntil
+          properties:
+            amount:
+              type: number
+              description: Major currency units, rounded to currency decimals.
+            currency:
+              type: string
+            validUntil:
+              type: string
+              format: date-time
+            capacity:
+              type: integer
+              minimum: 1
+            lines:
+              type: array
+              items:
+                $ref: "#/components/schemas/CustomAllocation"
+        privatePlanIds:
+          type: array
+          items:
+            type: string
+        lineIds:
+          type: array
+          items:
+            type: string
+      description: "Acceptance prepares scoped private plans; lineIds stays empty until successful ordinary checkout."
+    WebsiteRegion:
+      type: object
+      required:
+        - country
+        - currency
+        - source
+      properties:
+        country:
+          type: string
+        currency:
+          type: string
+        source:
+          enum:
+            - workspace
+            - mock-override
+            - mock-detection
+            - fallback
+        workspaceId:
+          type: string
+    WebsitePolicy:
+      type: object
+      required:
+        - id
+        - terms
+        - tieWinner
+        - countScope
+        - rounding
+        - tax
+      properties:
+        id:
+          const: website-offers-v1
+        terms:
+          type: array
+          items:
+            type: integer
+            enum:
+              - 1
+              - 3
+              - 6
+              - 12
+          description: "1/3/6/12 months retained."
+        durationSavings:
+          type: object
+          description: "0/5/10/15 percent for 1/3/6/12 months."
+        countBands:
+          type: array
+          items:
+            type: object
+            properties:
+              min:
+                type: integer
+                enum:
+                  - 1
+                  - 2
+                  - 3
+                  - 5
+              saving:
+                type: number
+        tieWinner:
+          const: duration
+        countScope:
+          const: group
+        rounding:
+          const: full-period-line-currency-decimals
+        priceVersion:
+          type: integer
+        tax:
+          $ref: "#/components/schemas/RegionalTax"
+    WebsiteQuoteLineInput:
+      type: object
+      required:
+        - catalogId
+        - months
+      properties:
+        catalogId:
+          type: string
+        months:
+          type: integer
+          enum:
+            - 1
+            - 3
+            - 6
+            - 12
+        autoRenew:
+          type: boolean
+    WebsiteGroupInput:
+      type: object
+      required:
+        - id
+        - kind
+        - lines
+      properties:
+        id:
+          type: string
+          minLength: 1
+          maxLength: 120
+        kind:
+          enum:
+            - service
+            - software
+        bundleId:
+          type: string
+        lines:
+          type: array
+          items:
+            $ref: "#/components/schemas/WebsiteQuoteLineInput"
+          minItems: 1
+          maxItems: 30
+    WebsiteQuoteBody:
+      type: object
+      required:
+        - groups
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/WebsiteGroupInput"
+          minItems: 1
+          maxItems: 20
+      description: "Server-resolved prices and purchased quantities; client totals never authorize payment. Distinct items cannot repeat across groups."
+    WebsiteLine:
+      type: object
+      required:
+        - catalogId
+        - kind
+        - months
+        - currency
+        - decimals
+        - quantity
+        - subtotal
+        - total
+        - saving
+        - fulfillment
+      properties:
+        catalogId:
+          type: string
+        kind:
+          enum:
+            - service
+            - software
+        name:
+          type: string
+        months:
+          type: integer
+          enum:
+            - 1
+            - 3
+            - 6
+            - 12
+        autoRenew:
+          type: boolean
+        currency:
+          type: string
+        decimals:
+          type: integer
+          minimum: 0
+          maximum: 3
+        monthlyMinor:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        unitMinor:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        quantity:
+          type: integer
+          minimum: 1
+        perUser:
+          type: boolean
+        subtotal:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        total:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        saving:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        discount:
+          type: number
+        reason:
+          enum:
+            - duration
+            - bundle
+          description: bundle means distinct-item savings here, not subscription bundle checkout.
+        monthlyEquivalent:
+          type: number
+        fulfillment:
+          enum:
+            - tool
+            - managed-service
+        planId:
+          type: string
+        tool:
+          type: string
+        serviceId:
+          type: string
+        source:
+          type: string
+        activation:
+          enum:
+            - awaiting-link
+            - awaiting-onboarding
+    WebsiteGroup:
+      type: object
+      required:
+        - id
+        - kind
+        - lines
+      properties:
+        id:
+          type: string
+        kind:
+          enum:
+            - service
+            - software
+        name:
+          type: string
+        bundleId:
+          type: string
+        lines:
+          type: array
+          items:
+            $ref: "#/components/schemas/WebsiteLine"
+    WebsiteTotals:
+      type: object
+      required:
+        - subtotal
+        - saving
+        - offerTotal
+        - net
+        - tax
+        - total
+        - taxInclusive
+      properties:
+        subtotal:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        saving:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        offerTotal:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        net:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        tax:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        total:
+          type: integer
+          minimum: 0
+          description: "Minor currency units; use the response decimals to format."
+        monthlyEquivalent:
+          type: number
+        taxLabel:
+          type: string
+        taxInclusive:
+          type: boolean
+        valid:
+          const: true
+    WebsiteCatalog:
+      type: object
+      required:
+        - currency
+        - decimals
+        - region
+        - policy
+        - items
+      properties:
+        currency:
+          type: string
+        decimals:
+          type: integer
+          minimum: 0
+          maximum: 3
+        region:
+          $ref: "#/components/schemas/WebsiteRegion"
+        policy:
+          $ref: "#/components/schemas/WebsitePolicy"
+        paymentMethods:
+          type: array
+          items:
+            enum:
+              - card
+              - twint
+              - paypal
+        bundles:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              kind:
+                enum:
+                  - service
+                  - software
+              name:
+                type: string
+              ids:
+                type: array
+                items:
+                  type: string
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              kind:
+                enum:
+                  - service
+                  - software
+              name:
+                type: string
+              names:
+                $ref: "#/components/schemas/Localized"
+              fulfillment:
+                enum:
+                  - tool
+                  - managed-service
+              monthlyMinor:
+                type: integer
+                minimum: 0
+                description: "Minor currency units; use the response decimals to format."
+              unitMinor:
+                type: integer
+                minimum: 0
+                description: "Minor currency units; use the response decimals to format."
+              quantity:
+                type: integer
+                minimum: 1
+              perUser:
+                type: boolean
+              currency:
+                type: string
+              decimals:
+                type: integer
+              prices:
+                type: object
+                description: Term keys 1/3/6/12, each containing count-band keys 1/2/3/5 and WebsiteLine values.
+    WebsiteQuote:
+      type: object
+      required:
+        - quoteId
+        - createdAt
+        - expiresAt
+        - currency
+        - decimals
+        - region
+        - policy
+        - groups
+        - quote
+      properties:
+        quoteId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        expiresIn:
+          const: 900
+        currency:
+          type: string
+        decimals:
+          type: integer
+        region:
+          $ref: "#/components/schemas/WebsiteRegion"
+        policy:
+          $ref: "#/components/schemas/WebsitePolicy"
+        groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/WebsiteGroup"
+        quote:
+          $ref: "#/components/schemas/WebsiteTotals"
+    WebsiteBilling:
+      type: object
+      required:
+        - email
+      properties:
+        name:
+          type: string
+          minLength: 1
+        legalName:
+          type: string
+          minLength: 1
+        email:
+          type: string
+          format: email
+        company:
+          type: string
+        country:
+          type: string
+        address:
+          type: string
+        taxId:
+          type: string
+      additionalProperties: false
+      anyOf:
+        - required:
+            - name
+        - required:
+            - legalName
+      description: "Billing identity only; card credentials and arbitrary fields are rejected."
+    WebsiteConfirmBody:
+      type: object
+      required:
+        - quoteId
+        - reference
+        - paymentMethod
+        - billing
+      properties:
+        quoteId:
+          type: string
+        reference:
+          type: string
+          pattern: "^[\\w][\\w.:-]{2,119}$"
+        paymentMethod:
+          enum:
+            - card
+            - twint
+            - paypal
+        billing:
+          $ref: "#/components/schemas/WebsiteBilling"
+      additionalProperties: false
+      description: "Idempotent by reference plus quote/payment/billing fingerprint; TWINT only for CH/CHF. No amount/currency/receipt can replace the stored server quote."
+    WebsiteOrder:
+      type: object
+      required:
+        - version
+        - reference
+        - paymentStatus
+        - createdAt
+        - currency
+        - region
+        - policy
+        - quoteId
+        - groups
+        - quote
+      properties:
+        version:
+          const: 1
+        reference:
+          type: string
+        paymentStatus:
+          enum:
+            - succeeded
+            - failed
+        paymentMethod:
+          enum:
+            - card
+            - twint
+            - paypal
+        createdAt:
+          type: string
+          format: date-time
+        currency:
+          type: string
+        decimals:
+          type: integer
+        region:
+          $ref: "#/components/schemas/WebsiteRegion"
+        policy:
+          $ref: "#/components/schemas/WebsitePolicy"
+        quoteId:
+          type: string
+        groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/WebsiteGroup"
+        quote:
+          $ref: "#/components/schemas/WebsiteTotals"
+        claimToken:
+          type: string
+          x-sensitive: true
+          description: "Successful payment claim used only in the authenticated link body; never put it in a URL."
+        failure:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+      readOnly: true
+      description: "Immutable server payment snapshot. Failed payment is a 200 response with failed status and no claim/provisioning; successful payment precedes account linking."
+    WebsiteLinkBody:
+      type: object
+      required:
+        - reference
+        - claimToken
+      properties:
+        reference:
+          type: string
+        claimToken:
+          type: string
+          writeOnly: true
+          x-sensitive: true
+      additionalProperties: false
+      description: "Only the server-paid order claim; browser lines, totals and currency are rejected."
+    WebsiteLinkResult:
+      type: object
+      required:
+        - reference
+        - workspaceId
+        - tools
+        - requests
+        - invoice
+      properties:
+        reference:
+          type: string
+        workspaceId:
+          type: string
+        at:
+          type: string
+          format: date-time
+        tools:
+          type: array
+          items:
+            type: object
+            properties:
+              catalogId:
+                type: string
+              lineId:
+                type: string
+              state:
+                const: active
+              termMonths:
+                enum:
+                  - 1
+                  - 3
+                  - 6
+                  - 12
+              quantity:
+                type: integer
+        requests:
+          type: array
+          items:
+            type: object
+            properties:
+              catalogId:
+                type: string
+              requestId:
+                type: string
+              state:
+                const: new
+        skipped:
+          type: array
+          items: {}
+        invoice:
+          type: object
+          properties:
+            id:
+              type: string
+            number:
+              type: string
+            total:
+              type: number
+              description: Major currency units, rounded to currency decimals.
+            currency:
+              type: string
+      description: Repeated valid link returns the same result without duplicate provisioning. A signup-marked, single-owner workspace containing only unpaid General and no invoices/requests may initialize its first billing region from a verified guest order. Existing workspace currencies and immutable paid orders are never converted.

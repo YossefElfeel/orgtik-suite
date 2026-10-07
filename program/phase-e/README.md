@@ -30,6 +30,21 @@ One store for both apps, envelope `{data, meta}` / `{error:{code,message,request
 
 The contract is OpenAPI 3.1 (`phase-e/platform-api.yaml`, 115 operations), **generated from the mock** by `node phase-e/openapi.mjs` (`--check` fails when it's stale): paths and guards come from the routes, so `x-permission` (staff) and `x-workspace-role` (customer) are the ones the mock enforces.
 
+## R0 platform draft: contracts and verification
+
+The R0 changes below are local implementation drafts pending the readiness gate and preview acceptance. They are prototype/mock behavior; no live payment, VAT verification or delivery provider is connected.
+
+- `seatModel.value` is **B**, decided by D-061. Stored `snapshot.quantity` is purchased capacity per tool. Ordinary checkout ignores the legacy browser `seats` field. An explicit purchase uses `items[].intent: "seat_purchase"` and `items[].quantity`, validated as an integer against plan minimum, assigned seats and pending reservations. Invitation allocation/atomic acceptance and tool entitlements remain R1 work.
+- `taxDisplay.value` is **regional**, decided by D-060. GCC prices include configured VAT; Europe/CH display excludes it. Mock-valid EU business VAT IDs reverse-charge. No configured rule means zero tax; this does not assert regulatory compliance or add new legal rates. New Gulf routing uses Tap/HyperPay; unsupported currencies return `no_gateway` rather than inventing Stripe fallback.
+- Price publication stores future changes until `effectiveAt`. Existing-line impact compares resolved prices at stored quantities, respecting zones, country overrides and derived yearly prices. Existing-next notices are stored once in `notifications` and the prototype `mailbox`; their date is the first renewal outside the notice window. Downgrades apply at period end, preserve data and expose `overLimits` from recorded workspace usage; runtime tool usage integration is still required before complete journey acceptance.
+- Checkout calculates eligible bundle → eligible coupon → proration/unused-period credit → tax. Same-cycle changes preserve the billing end; cycle switches credit the remaining old period. Any surplus is preserved in workspace `billingCredit` and applied to later mock checkout. Invoice ledger lines carry `kind` for prorated charges, discounts and credits, and their net `subtotal` plus tax equals payment total; full-period `quotedSubtotal` remains separately auditable. Invoices/payments retain currency, quote totals and the payment's USD rate.
+- D-067 custom quotes carry `lines: [{tool, amount}]`, in the workspace currency, summing after currency rounding to `amount`. Each allocation is the full term price for the agreed capacity, never a unit price multiplied again. Legacy single-tool quotes have one unambiguous allocation; multi-tool quotes need explicit staff allocations. Acceptance exposes workspace-private plans (`privatePlanIds`) for ordinary checkout, without an unpaid active subscription. Only a successful mock payment creates active lines (`lineIds`); another workspace cannot see or buy the private plan.
+- Shared store helpers for the website adapter: `resolveForWorkspace(planId, ws, cycle, quantity)`, `purchasedSeats(ws, tool, planId)`, `taxForWorkspace(ws)`, `routeGateways(ws, {method, recurring})`, and `notifyOwner(ws, kind, details, eventKey)`. Website offer savings and paid-order linking are implemented separately; their legacy route is not accepted as R0-complete until the new adapter replaces it.
+
+Verification: `node mock/apps/admin/pricing.test.js` (20), `node mock/apps/admin/lifecycle.test.js` (4), and `node mock/apps/admin/r0.test.js` (16 actual endpoint regressions). These scripts use disposable in-memory fixtures/fresh loopback connections; they do not reset or advance a hosted production workspace. Platform route methods/guards remain unchanged, so `node program/phase-e/openapi.mjs --check` currently passes; regenerate together with any new public/shared routes in the website integration package.
+
+The legacy setup description above records the original Phase E baseline. Its G-04/G-12 open-switch defaults are superseded by this section and D-060/D-061; the maintained release order/readiness state is `program/plan-v2-execution.md`.
+
 ## Stages
 
 | Stage | Screens and flows | Exit |

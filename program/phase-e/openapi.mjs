@@ -15,12 +15,16 @@ const require = createRequire(path.join(LOCAL, "package.json"));
 const express = require("express");
 const identity = require(path.join(LOCAL, "lib/identity.js"));
 const mod = require(path.join(LOCAL, "apps/admin.js"));
+const websiteOffers = require(path.join(LOCAL, "apps/admin/website-offers.js"));
 
 const app = express();
 mod.routes(app, { identity, apiUrl: () => "", webUrl: () => "" });
 
 // "METHOD /path" -> [summary, spec IDs, tag]
 const SUMMARY = {
+  "GET /v1/public/catalog": ["Public offers and four-term regional prices; signed-in workspace billing context wins", "D-058, D-064, D-065", "Public website offers"],
+  "POST /v1/public/website-quotes": ["Create a 15-minute server-priced offer quote in currency minor units", "D-064, WEB-checkout", "Public website offers"],
+  "POST /v1/public/website-orders": ["Confirm an immutable simulated payment attempt; only success returns a linking claim", "D-064, WEB-checkout", "Public website offers"],
   "GET /v1/admin/me": ["The signed-in staff member: roles, permissions, links to the Website Manager", "ADM-01", "Staff"],
   "GET /v1/admin/overview": ["Platform overview: MRR (USD), workspaces, lines, invoices, requests and tickets by state", "ADM-02", "Overview"],
   "GET /v1/admin/tools": ["Tools with their status, plan, workspace and waitlist counts, and allowed next statuses", "ADM-03", "Tools"],
@@ -48,7 +52,7 @@ const SUMMARY = {
   "POST /v1/admin/price-drafts": ["Add cell changes to the open draft", "ADM-12", "Pricing"],
   "DELETE /v1/admin/price-drafts/{id}": ["Discard the draft", "ADM-12", "Pricing"],
   "POST /v1/admin/price-drafts/{id}/publish": ["Publish: new customers only, existing at next renewal with notice, or existing now (decreases only, R03-P5)", "ADM-12, R03-P3…P6", "Pricing"],
-  "GET /v1/admin/price-preview": ["Resolve a plan's price for one or every country (R03-ALG-1…9)", "ADM-13", "Pricing"],
+  "GET /v1/admin/price-preview": ["Resolve a plan's unit and quantity for one or every country (R03-ALG-1…9)", "ADM-13", "Pricing"],
   "GET /v1/admin/pricing-log": ["Pricing change log", "ADM-14", "Pricing"],
   "GET /v1/admin/bundles": ["Bundles with example prices in four countries (R03-B1)", "ADM-16", "Bundles & coupons"],
   "POST /v1/admin/bundles": ["Create a bundle (2+ plans, a percentage)", "ADM-16", "Bundles & coupons"],
@@ -68,7 +72,7 @@ const SUMMARY = {
   "POST /v1/admin/migrations/{id}/approve": ["Approve a migration (applies at the next renewal)", "ADM-21, R03-C4", "Workspaces"],
   "POST /v1/admin/migrations/{id}/reject": ["Reject a migration", "ADM-21", "Workspaces"],
   "GET /v1/admin/custom-plans": ["Custom plan requests", "ADM-22", "Workspaces"],
-  "POST /v1/admin/custom-plans/{id}/quote": ["Quote a custom plan in the workspace's currency", "ADM-22", "Workspaces"],
+  "POST /v1/admin/custom-plans/{id}/quote": ["Quote explicit full-term per-tool allocations summing to the workspace-currency total", "ADM-22, D-067", "Workspaces"],
   "GET /v1/admin/invoices": ["Invoices (?state, workspaceId, currency), paged, with USD totals", "ADM-23", "Billing"],
   "POST /v1/admin/invoices": ["Create a manual invoice (draft)", "ADM-23", "Billing"],
   "GET /v1/admin/invoices/{id}": ["One invoice with payments, credit notes and the refundable amount", "ADM-23", "Billing"],
@@ -101,7 +105,7 @@ const SUMMARY = {
   "GET /v1/app/tools/{key}": ["One tool's plans priced for this workspace", "USR-05", "Tools"],
   "POST /v1/app/tools/{key}/waitlist": ["Join a coming-soon tool's waitlist", "USR-04, US-C-03", "Tools"],
   "POST /v1/app/tools/{key}/trial": ["Start a trial (one per tool per workspace, G-17)", "USR-06, F-02", "Tools"],
-  "POST /v1/app/checkout/preview": ["Price a basket: proration, bundle, coupon, tax (R03-ALG-8)", "USR-07", "Checkout"],
+  "POST /v1/app/checkout/preview": ["Price eligible bundle → coupon → proration/credits → regional tax; explicit intent changes purchased capacity", "USR-07, R03-ALG-8, D-060, D-061", "Checkout"],
   "POST /v1/app/checkout/confirm": ["Pay and activate; 402 changes nothing; the first payment locks the currency (R03-C2)", "USR-08, F-04", "Checkout"],
   "GET /v1/app/subscriptions": ["Subscription lines and the monthly total", "USR-09", "Subscriptions"],
   "POST /v1/app/subscriptions/{id}/cancel": ["Cancel at period end (a trial ends now)", "USR-09, F-07", "Subscriptions"],
@@ -123,7 +127,7 @@ const SUMMARY = {
   "GET /v1/app/services": ["Service catalogue with prices and the subscriber discount", "USR-16", "Services"],
   "GET /v1/app/service-requests": ["The workspace's service requests, paged", "USR-18", "Services"],
   "POST /v1/app/service-requests": ["Request a service", "USR-17", "Services"],
-  "POST /v1/app/website-orders": ["Bring in an order paid on the public website", "WEB-checkout", "Billing"],
+  "POST /v1/app/website-orders": ["Idempotently link a server-paid immutable order by reference and claimToken; preserve its currency", "WEB-checkout, D-059, D-064", "Billing"],
   "GET /v1/app/service-requests/{id}": ["One request with quote, milestones, deliveries and messages", "USR-19", "Services"],
   "POST /v1/app/service-requests/{id}/actions": ["accept, pay, decline, approve, revise, message, cancel", "USR-19, USR-20", "Services"],
   "GET /v1/app/tickets": ["Tickets (admins see all, others their own), paged", "USR-21", "Support"],
@@ -134,7 +138,7 @@ const SUMMARY = {
   "POST /v1/app/notifications/read": ["Mark notifications read (all, or ids)", "USR-24", "Workspace"],
   "GET /v1/app/custom-plans": ["Custom plan requests", "USR-25", "Checkout"],
   "POST /v1/app/custom-plans": ["Ask for a custom plan", "USR-25", "Checkout"],
-  "POST /v1/app/custom-plans/{id}/accept": ["Accept a custom plan quote", "USR-25", "Checkout"],
+  "POST /v1/app/custom-plans/{id}/accept": ["Prepare workspace-private plans for normal checkout; acceptance never creates unpaid active lines", "USR-25, F-12, D-067", "Checkout"],
   "PATCH /v1/app/workspace": ["Rename the workspace", "USR-26", "Workspace"],
   "POST /v1/app/workspace/delete": ["Delete the workspace (type its name; retention applies, G-22)", "USR-27", "Workspace"],
 
@@ -169,17 +173,18 @@ const doc = {
   openapi: "3.1.0",
   info: {
     title: "OrgTik platform API (ADM and USR)",
-    version: "0.1.0",
+    version: "0.2.0",
     description: [
       "The SaaS core of OrgTik_00–06: the staff back office (ADM, /v1/admin) and the customer workspace (USR, /v1/app).",
       "Generated from the local platform mock (local-dev/apps/admin.js) by orgtik-program/phase-e/openapi.mjs; the frontends are built against it.",
       "Envelope: success `{ data, meta }`, error `{ error: { code, message, requestId, fieldErrors?, required? } }`. Lists page with `page` and `pageSize` (25, at most 100).",
       "Staff routes need the permission named in `x-permission` (spec 02 matrix, 8 roles); 403 names it in `error.required`.",
       "Customer routes act in one workspace (`X-Workspace` header, else the person's first) and need the role in `x-workspace-role`; writes to a suspended workspace answer 423.",
-      "Open decisions are switches in GET /v1/admin/settings: G-04 seat model, G-12 tax display, G-18 add-ons, G-21 General paid plans, G-24 hosting ops, G-28 mailboxes.",
+      "D-061 resolves G-04 to purchased seats per tool; D-060 resolves G-12 to regional tax display. G-18, G-21, G-24 and G-28 remain switches. All payments, VAT verification and delivery integrations are prototype simulations.",
+      "Public offer routes permit guests and optional bearer context. A supplied invalid token is refused; a signed-in buyer uses their selected workspace region/currency, and payment confirmation requires its owner. Platform money uses major currency units; website offer money uses integer minor units with explicit decimals.",
     ].join("\n\n"),
   },
-  servers: [{ url: "http://localhost:4008", description: "Local platform mock (ADM)" }, { url: "http://localhost:4000", description: "Local SOS API (USR routes only)" }],
+  servers: [{ url: "http://localhost:4008", description: "Local platform mock (ADM, USR and public offers)" }, { url: "http://localhost:4000", description: "Local SOS API (USR and public offer routes)" }],
   security: [{ bearer: [] }],
   tags: [...new Set(Object.values(SUMMARY).map((s) => s[2]))].map((name) => ({ name })),
   paths: {},
@@ -208,10 +213,72 @@ const doc = {
   },
 };
 
+const ref = name => ({ $ref: `#/components/schemas/${name}` });
+const str = { type: "string" }, num = { type: "number" }, bool = { type: "boolean" };
+const object = (properties, required = [], extra = {}) => ({ type: "object", ...(required.length ? { required } : {}), properties, ...extra });
+const array = items => ({ type: "array", items });
+const major = { type: "number", description: "Major currency units, rounded to currency decimals." };
+const minor = { type: "integer", minimum: 0, description: "Minor currency units; use the response decimals to format." };
+const instant = { type: "string", format: "date-time" };
+const envelope = name => ({ allOf: [ref("Envelope"), { properties: { data: ref(name) } }] });
+Object.assign(doc.components.schemas, {
+  RegionalTax: object({ country: str, name: str, rate: num, inclusive: bool, reverseCharge: bool, label: str, validation: { const: "mock" } }, ["country", "rate", "inclusive", "reverseCharge"]),
+  Price: object({ amount: major, unit: major, quantity: { type: "integer", minimum: 1 }, currency: str, source: { enum: ["Private", "Country", "Zone", "Zone (converted)", "Default", "Free"] }, workspaceConverted: bool }, ["amount", "unit", "quantity", "currency", "source"]),
+  PricePreview: array({ allOf: [ref("Price"), { properties: { country: str, taxDisplay: { enum: ["inclusive", "exclusive"] }, taxInclusive: bool, taxRate: num, reverseCharge: bool } }] }),
+  ToolPlan: object({ id: str, name: ref("Localized"), tier: str, perUser: bool, minSeats: { type: "integer" }, trialDays: { type: "integer" }, recommended: bool, current: bool, limits: array(object({ key: str, value: { type: ["number", "null"] }, unit: { type: ["string", "null"] } })), flags: array(str), monthly: { anyOf: [ref("Price"), { type: "null" }] }, yearly: { anyOf: [ref("Price"), { type: "null" }] }, yearlyDiscountPct: num, contractedQuantity: { type: ["integer", "null"] }, workspacePrivate: bool }, ["id", "name", "perUser", "monthly", "limits", "flags"]),
+  ToolDetail: object({ key: str, name: ref("Localized"), state: ref("ToolState"), line: { anyOf: [ref("Line"), { type: "null" }] }, plans: array(ref("ToolPlan")), seats: { type: "integer" }, seatModel: { const: "B" }, taxDisplay: { enum: ["inclusive", "exclusive"] }, taxInclusive: bool, taxRate: num, reverseCharge: bool }),
+  CheckoutItem: object({ planId: str, cycle: { enum: ["monthly", "yearly"] }, intent: { const: "seat_purchase" }, quantity: { type: "integer", minimum: 1, description: "Explicit purchased capacity; validated against plan minimum and assigned/reserved seats." }, seats: { type: "number", deprecated: true, description: "Legacy input ignored for capacity. Repricing uses stored per-tool quantity." } }, ["planId"], { allOf: [{ if: { properties: { intent: { const: "seat_purchase" } }, required: ["intent"] }, then: { required: ["quantity"] } }] }),
+  CheckoutBody: object({ items: { ...array(ref("CheckoutItem")), minItems: 1 }, coupon: str, bundleId: str, intent: { const: "seat_purchase" }, paymentMethodId: str, billing: object({ legalName: str, taxId: str }) }, ["items"], { description: "One plan per tool. Eligible bundle → coupon → proration/old-period credit → tax. Global seat_purchase intent also requires a valid quantity on each item." }),
+  CheckoutPreview: object({ currency: str, subtotal: major, bundleDiscount: major, couponDiscount: major, prorated: major, net: major, tax: major, total: major, taxRate: num, taxDisplay: { enum: ["inclusive", "exclusive"] }, reverseCharge: bool, taxLabel: { type: ["string", "null"] }, creditRemaining: major, accountCreditUsed: major, lines: array(object({ planId: str, tool: str, cycle: { enum: ["monthly", "yearly"] }, quantity: { type: "integer", minimum: 1 }, amount: major, unit: major, prorationFactor: num, credit: major, contractedCapacity: { type: ["integer", "null"] }, periodEnd: { type: ["string", "null"], format: "date-time" } })), taxDecided: { const: true } }),
+  CustomAllocation: object({ tool: str, amount: { ...major, minimum: 0 } }, ["tool", "amount"], { description: "Full-term price for agreed capacity, never multiplied again by seats; tools appear exactly once." }),
+  CustomQuoteBody: object({ amount: { ...major, exclusiveMinimum: 0 }, validDays: { type: "integer", minimum: 1, default: 30 }, lines: array(ref("CustomAllocation")) }, ["amount"], { description: "Currency-rounded allocations must sum to amount. Multi-tool requests require explicit lines; a legacy single-tool amount has one unambiguous allocation." }),
+  CustomPlanRequest: object({ id: str, workspaceId: str, tools: array(str), seats: { type: "integer", minimum: 1 }, cycle: { enum: ["monthly", "yearly"] }, state: { enum: ["new", "quoted", "accepted"] }, quote: object({ amount: major, currency: str, validUntil: instant, capacity: { type: "integer", minimum: 1 }, lines: array(ref("CustomAllocation")) }, ["amount", "currency", "validUntil"]), privatePlanIds: array(str), lineIds: array(str) }, ["id", "tools", "seats", "cycle", "state"], { description: "Acceptance prepares scoped private plans; lineIds stays empty until successful ordinary checkout." }),
+  WebsiteRegion: object({ country: str, currency: str, source: { enum: ["workspace", "mock-override", "mock-detection", "fallback"] }, workspaceId: str }, ["country", "currency", "source"]),
+  WebsitePolicy: object({ id: { const: "website-offers-v1" }, terms: { ...array({ type: "integer", enum: websiteOffers.MONTHS }), description: "1/3/6/12 months retained." }, durationSavings: { type: "object", description: "0/5/10/15 percent for 1/3/6/12 months." }, countBands: array(object({ min: { type: "integer", enum: websiteOffers.BANDS }, saving: num })), tieWinner: { const: "duration" }, countScope: { const: "group" }, rounding: { const: "full-period-line-currency-decimals" }, priceVersion: { type: "integer" }, tax: ref("RegionalTax") }, ["id", "terms", "tieWinner", "countScope", "rounding", "tax"]),
+  WebsiteQuoteLineInput: object({ catalogId: str, months: { type: "integer", enum: websiteOffers.MONTHS }, autoRenew: bool }, ["catalogId", "months"]),
+  WebsiteGroupInput: object({ id: { type: "string", minLength: 1, maxLength: 120 }, kind: { enum: ["service", "software"] }, bundleId: str, lines: { ...array(ref("WebsiteQuoteLineInput")), minItems: 1, maxItems: 30 } }, ["id", "kind", "lines"]),
+  WebsiteQuoteBody: object({ groups: { ...array(ref("WebsiteGroupInput")), minItems: 1, maxItems: 20 } }, ["groups"], { description: "Server-resolved prices and purchased quantities; client totals never authorize payment. Distinct items cannot repeat across groups." }),
+  WebsiteLine: object({ catalogId: str, kind: { enum: ["service", "software"] }, name: str, months: { type: "integer", enum: websiteOffers.MONTHS }, autoRenew: bool, currency: str, decimals: { type: "integer", minimum: 0, maximum: 3 }, monthlyMinor: minor, unitMinor: minor, quantity: { type: "integer", minimum: 1 }, perUser: bool, subtotal: minor, total: minor, saving: minor, discount: num, reason: { enum: ["duration", "bundle"], description: "bundle means distinct-item savings here, not subscription bundle checkout." }, monthlyEquivalent: num, fulfillment: { enum: ["tool", "managed-service"] }, planId: str, tool: str, serviceId: str, source: str, activation: { enum: ["awaiting-link", "awaiting-onboarding"] } }, ["catalogId", "kind", "months", "currency", "decimals", "quantity", "subtotal", "total", "saving", "fulfillment"]),
+  WebsiteGroup: object({ id: str, kind: { enum: ["service", "software"] }, name: str, bundleId: str, lines: array(ref("WebsiteLine")) }, ["id", "kind", "lines"]),
+  WebsiteTotals: object({ subtotal: minor, saving: minor, offerTotal: minor, net: minor, tax: minor, total: minor, monthlyEquivalent: num, taxLabel: str, taxInclusive: bool, valid: { const: true } }, ["subtotal", "saving", "offerTotal", "net", "tax", "total", "taxInclusive"]),
+  WebsiteCatalog: object({ currency: str, decimals: { type: "integer", minimum: 0, maximum: 3 }, region: ref("WebsiteRegion"), policy: ref("WebsitePolicy"), paymentMethods: array({ enum: ["card", "twint", "paypal"] }), bundles: array(object({ id: str, kind: { enum: ["service", "software"] }, name: str, ids: array(str) })), items: array(object({ id: str, kind: { enum: ["service", "software"] }, name: str, names: ref("Localized"), fulfillment: { enum: ["tool", "managed-service"] }, monthlyMinor: minor, unitMinor: minor, quantity: { type: "integer", minimum: 1 }, perUser: bool, currency: str, decimals: { type: "integer" }, prices: { type: "object", description: "Term keys 1/3/6/12, each containing count-band keys 1/2/3/5 and WebsiteLine values." } })) }, ["currency", "decimals", "region", "policy", "items"]),
+  WebsiteQuote: object({ quoteId: str, createdAt: instant, expiresAt: instant, expiresIn: { const: websiteOffers.QUOTE_TTL / 1000 }, currency: str, decimals: { type: "integer" }, region: ref("WebsiteRegion"), policy: ref("WebsitePolicy"), groups: array(ref("WebsiteGroup")), quote: ref("WebsiteTotals") }, ["quoteId", "createdAt", "expiresAt", "currency", "decimals", "region", "policy", "groups", "quote"]),
+  WebsiteBilling: object({ name: { type: "string", minLength: 1 }, legalName: { type: "string", minLength: 1 }, email: { type: "string", format: "email" }, company: str, country: str, address: str, taxId: str }, ["email"], { additionalProperties: false, anyOf: [{ required: ["name"] }, { required: ["legalName"] }], description: "Billing identity only; card credentials and arbitrary fields are rejected." }),
+  WebsiteConfirmBody: object({ quoteId: str, reference: { type: "string", pattern: "^[\\w][\\w.:-]{2,119}$" }, paymentMethod: { enum: ["card", "twint", "paypal"] }, billing: ref("WebsiteBilling") }, ["quoteId", "reference", "paymentMethod", "billing"], { additionalProperties: false, description: "Idempotent by reference plus quote/payment/billing fingerprint; TWINT only for CH/CHF. No amount/currency/receipt can replace the stored server quote." }),
+  WebsiteOrder: object({ version: { const: 1 }, reference: str, paymentStatus: { enum: ["succeeded", "failed"] }, paymentMethod: { enum: ["card", "twint", "paypal"] }, createdAt: instant, currency: str, decimals: { type: "integer" }, region: ref("WebsiteRegion"), policy: ref("WebsitePolicy"), quoteId: str, groups: array(ref("WebsiteGroup")), quote: ref("WebsiteTotals"), claimToken: { ...str, "x-sensitive": true, description: "Successful payment claim used only in the authenticated link body; never put it in a URL." }, failure: object({ code: str, message: str }) }, ["version", "reference", "paymentStatus", "createdAt", "currency", "region", "policy", "quoteId", "groups", "quote"], { readOnly: true, description: "Immutable server payment snapshot. Failed payment is a 200 response with failed status and no claim/provisioning; successful payment precedes account linking." }),
+  WebsiteLinkBody: object({ reference: str, claimToken: { ...str, writeOnly: true, "x-sensitive": true } }, ["reference", "claimToken"], { additionalProperties: false, description: "Only the server-paid order claim; browser lines, totals and currency are rejected." }),
+  WebsiteLinkResult: object({ reference: str, workspaceId: str, at: instant, tools: array(object({ catalogId: str, lineId: str, state: { const: "active" }, termMonths: { enum: websiteOffers.MONTHS }, quantity: { type: "integer" } })), requests: array(object({ catalogId: str, requestId: str, state: { const: "new" } })), skipped: array({}), invoice: object({ id: str, number: str, total: major, currency: str }) }, ["reference", "workspaceId", "tools", "requests", "invoice"], { description: "Repeated valid link returns the same result without duplicate provisioning. A signup-marked, single-owner workspace containing only unpaid General and no invoices/requests may initialize its first billing region from a verified guest order. Existing workspace currencies and immutable paid orders are never converted." }),
+});
+doc.components.schemas.Money.description = "Amounts use major currency units at currency precision (KWD/BHD/OMR three decimals). Website offer schemas explicitly use integer minor units.";
+Object.assign(doc.components.schemas.Plan.properties, { workspaceId: str, contractedQuantity: { type: "integer", minimum: 1 }, private: object({ amount: major, currency: str, cycle: { enum: ["monthly", "yearly"] } }) });
+Object.assign(doc.components.schemas.Line.properties, { periodStart: instant, termMonths: { type: "integer", enum: websiteOffers.MONTHS }, renewalMonths: { type: "integer", enum: websiteOffers.MONTHS }, prepaidTerms: array(object({ reference: str, start: instant, end: instant, months: { type: "integer", enum: websiteOffers.MONTHS }, amount: major, quantity: { type: "integer" }, autoRenew: bool, policy: str })), autoRenew: bool, overLimits: array(object({ key: str, used: num, limit: num, excess: num, state: { const: "read_only" } })) });
+doc.components.schemas.Line.properties.snapshot.description = "Stored purchased price/capacity. For a D-067 custom allocation amount is the full term price, not unit multiplied by capacity.";
+doc.components.schemas.Line.properties.snapshot.properties.source = { enum: ["Private", "Country", "Zone", "Zone (converted)", "Default", "Free", "Website order", "Website server order"] };
+doc.components.schemas.Line.properties.snapshot.properties.workspaceConverted = bool;
+Object.assign(doc.components.schemas.Line.properties.snapshot.properties, { periodAmount: major, monthlyAmount: { ...major, description: "Monthly equivalent of a paid website term; full term amount remains the ledger authority." } });
+Object.assign(doc.components.schemas.Invoice.properties, { quotedSubtotal: major, taxDisplay: { enum: ["inclusive", "exclusive"] }, taxRate: num, reverseCharge: bool, accountCreditUsed: major, creditRemaining: major, lines: array(object({ label: str, lineId: str, planId: str, amount: major, kind: { enum: ["charge", "bundle_discount", "coupon_discount", "period_credit", "credit_carried", "account_credit"] }, quantity: { type: "integer" }, taxAmount: major, grossAmount: major })), payments: array(object({ id: str, amount: major, currency: str, gateway: str, status: { enum: ["succeeded", "failed"] }, at: instant, usdRate: num, usdAmount: major })) });
+const CONTRACTS = {
+  "GET /v1/public/catalog": { response: "WebsiteCatalog" },
+  "POST /v1/public/website-quotes": { request: "WebsiteQuoteBody", response: "WebsiteQuote" },
+  "POST /v1/public/website-orders": { request: "WebsiteConfirmBody", response: "WebsiteOrder" },
+  "GET /v1/admin/price-preview": { response: "PricePreview" },
+  "GET /v1/app/tools/{key}": { response: "ToolDetail" },
+  "POST /v1/app/checkout/preview": { request: "CheckoutBody", response: "CheckoutPreview" },
+  "POST /v1/app/checkout/confirm": { request: "CheckoutBody" },
+  "POST /v1/admin/custom-plans/{id}/quote": { request: "CustomQuoteBody", response: "CustomPlanRequest" },
+  "POST /v1/app/custom-plans/{id}/accept": { response: "CustomPlanRequest" },
+  "POST /v1/app/website-orders": { request: "WebsiteLinkBody", response: "WebsiteLinkResult", status: "201" },
+};
+
 for (const o of ops) {
   const [summary, spec, tag] = SUMMARY[`${o.method} ${o.path}`];
   const params = [...o.path.matchAll(/\{(\w+)\}/g)].map((m) => ({ name: m[1], in: "path", required: true, schema: { type: "string" } }));
-  if (o.path.startsWith("/v1/app/")) params.push({ $ref: "#/components/parameters/Workspace" });
+  const isPublic = o.path.startsWith("/v1/public/");
+  const contract = CONTRACTS[`${o.method} ${o.path}`] ?? {};
+  if (o.path.startsWith("/v1/app/") || isPublic) params.push({ $ref: "#/components/parameters/Workspace" });
+  if (isPublic) params.push({ name: "X-Mock-Country", in: "header", required: false, schema: str, description: "Controlled local/preview override only; unknown detection falls back to CH. Never overrides a signed-in workspace's billing context; production ignores this test override." });
+  if (o.path === "/v1/admin/price-preview") params.push({ name: "planId", in: "query", required: true, schema: str }, { name: "country", in: "query", schema: str }, { name: "cycle", in: "query", schema: { enum: ["monthly", "yearly"], default: "monthly" } }, { name: "seats", in: "query", schema: { type: "integer", minimum: 1, default: 1 }, description: "Staff-only hypothetical quantity; ordinary customer repricing uses purchased capacity." });
+  if (o.path === "/v1/app/checkout/confirm") params.push({ name: "Idempotency-Key", in: "header", required: false, schema: { type: "string", pattern: "^[\\w.:-]{1,200}$" }, description: "Optional stable payment attempt ID. A confirmed receipt is reused only for the same workspace/actor and identical body; changed input conflicts. Current owner/read-only guards run before receipt lookup. Unused website and future prepaid-term value is credited on a cycle change." });
   const op = {
     tags: [tag],
     summary,
@@ -229,6 +296,21 @@ for (const o of ops) {
       ...(/checkout\/confirm|retry|actions$/.test(o.path) && o.path.startsWith("/v1/app/") ? { 402: errorRef("The payment failed; nothing changed") } : {}),
     },
   };
+  if (contract.request) op.requestBody = { required: true, content: { "application/json": { schema: ref(contract.request) } } };
+  if (contract.response || contract.status) {
+    const status = contract.status ?? Object.keys(op.responses).find(key => key.startsWith("2"));
+    for (const code of Object.keys(op.responses)) if (code.startsWith("2")) delete op.responses[code];
+    op.responses[status] = { description: "OK", content: { "application/json": { schema: contract.response ? envelope(contract.response) : ref("Envelope") } } };
+  }
+  if (isPublic) {
+    op.security = [{}, { bearer: [] }];
+    op["x-auth-mode"] = "guest-or-selected-workspace-bearer";
+    op["x-prototype-mode"] = "hosted-mock";
+    op.responses[401] = errorRef("A supplied bearer token is invalid; guests need no token");
+    op.responses[403] = errorRef("Invalid workspace membership, or payment confirmation by a non-owner/read-only actor");
+    op.responses[503] = errorRef("Mock pricing, persistence, region, reporting-rate or gateway unavailable");
+    if (o.path.endsWith("website-orders")) { op["x-conditional-workspace-role"] = "owner when signed in"; op.responses[404] = errorRef("Server quote not found"); op.responses[410] = errorRef("Server quote expired"); }
+  }
   if (o.path.startsWith("/v1/__mock")) op.security = [];
   (doc.paths[o.path] ??= {})[o.method.toLowerCase()] = op;
 }

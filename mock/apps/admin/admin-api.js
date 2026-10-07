@@ -2,7 +2,7 @@
 // 401 without a session, 403 with the missing permission named. Envelope { data, meta } /
 // { error: { code, message, fieldErrors?, required? } }; lists page with page/pageSize (25).
 const { permissionsFor, ROLE_LABELS, LABELS, MODULES, MATRIX, ROLE_KEYS } = require("./permissions");
-const { advance } = require("./lifecycle");
+const { advance, affectedPriceLines, schedulePricePublication } = require("./lifecycle");
 
 module.exports = function adminApi(app, ctx, S, H) {
   const { identity } = ctx;
@@ -240,8 +240,7 @@ module.exports = function adminApi(app, ctx, S, H) {
     const open = db.priceDrafts.find((d) => d.state === "draft");
     // Who a draft would reach if published to existing customers: their lines, counted now.
     const reach = (d) => {
-      const ids = new Set(d.changes.map((c) => c.key.split(":")[0]));
-      const lines = db.workspaces.flatMap((w) => w.lines.filter((l) => ids.has(l.planId) && (l.state === "active" || l.state === "cancelling")).map((l) => w.id));
+      const lines = affectedPriceLines(S, d.changes).map(x => x.ws.id);
       return { lines: lines.length, workspaces: new Set(lines).size };
     };
     const draft = open ? { ...open, affects: reach(open) } : undefined;
@@ -255,7 +254,10 @@ module.exports = function adminApi(app, ctx, S, H) {
   app.post("/v1/admin/price-drafts", need("pricing:edit"), (req, res) => {
     const changes = req.body?.changes ?? [];
     if (!Array.isArray(changes) || !changes.length) return fail(res, 422, "invalid", "Change at least one price.", { fieldErrors: { changes: "required" } });
-    for (const c of changes) if (!/^[a-z0-9_]+:(monthly|yearly|once):[a-z0-9_]+$/.test(c.key ?? "") || !(c.to == null || c.to >= 0)) return fail(res, 422, "invalid", `Bad change ${c.key}.`, { fieldErrors: { [c.key]: "invalid" } });
+    for (const c of changes) {
+      const [planId, , zoneId] = String(c.key ?? "").split(":");
+      if (!/^[a-z0-9_]+:(monthly|yearly|once):[a-z0-9_]+$/.test(c.key ?? "") || !db.plans.some(p => p.id === planId) || !db.zones.some(z => z.id === zoneId && z.active) || !(c.to == null || Number.isFinite(c.to) && c.to >= 0)) return fail(res, 422, "invalid", `Bad change ${c.key}.`, { fieldErrors: { [c.key]: "invalid" } });
+    }
     let d = db.priceDrafts.find((x) => x.state === "draft");
     if (!d) db.priceDrafts.push((d = { id: S.id("pd"), state: "draft", createdBy: req.who.key, createdAt: S.iso(S.now()), changes: [] }));
     for (const c of changes) {
@@ -279,35 +281,27 @@ module.exports = function adminApi(app, ctx, S, H) {
     if (!["new_only", "existing_next_renewal", "existing_now"].includes(applyMode)) e.applyMode = "required";
     if (!reason?.trim()) e.reason = "required";
     if (effectiveAt && Number.isNaN(Date.parse(effectiveAt))) e.effectiveAt = "invalid";
-    const increase = d.changes.some((c) => c.from != null && c.to > c.from);
+    const increase = d.changes.some(c => c.to != null && (c.from == null || c.to > c.from)) || affectedPriceLines(S, d.changes).some(({ line, next }) => next.amount > line.snapshot.amount);
     // P5: only a decrease may reach existing customers without notice.
     if (applyMode === "existing_now" && increase) e.applyMode = "increase_needs_notice";
     if (Object.keys(e).length) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: e });
-    for (const c of d.changes) if (c.to == null) delete db.grid[c.key]; else db.grid[c.key] = c.to;
-    db.priceVersion += 1;
-    Object.assign(d, { state: "published", publishedAt: S.iso(S.now()), publishedBy: req.who.key, effectiveAt: effectiveAt ?? S.iso(S.now()), applyMode, reason, priceVersion: db.priceVersion });
-    // Existing lines: P3 keep the snapshot; P4 a notice and the new price at the first renewal after it.
-    let notified = 0;
-    if (applyMode !== "new_only") {
-      const keys = new Set(d.changes.map((c) => c.key.split(":")[0]));
-      for (const w of db.workspaces) for (const l of w.lines) if (keys.has(l.planId) && (l.state === "active" || l.state === "cancelling")) {
-        if (applyMode === "existing_now") {
-          const r = S.resolve(l.planId, w.country, l.cycle, S.seats(w));
-          if (r) l.snapshot = { ...l.snapshot, amount: r.amount, unit: r.unit, priceVersion: db.priceVersion };
-        } else {
-          l.scheduled = { kind: "price_change", effectiveAt: new Date(Math.max(Date.parse(l.periodEnd), S.now() + db.settings.priceChange.noticeDays * 86400000)).toISOString(), priceVersion: db.priceVersion };
-          notified += 1;
-        }
-      }
-    }
-    db.pricingLog.unshift({ id: S.id("pl"), at: S.iso(S.now()), by: req.who.key, action: "publish", summary: d.changes.map((c) => `${c.key} ${c.from ?? "—"} → ${c.to ?? "—"}`).join(" · "), applyMode, reason, priceVersion: db.priceVersion, notified });
+    const priceVersion = Math.max(db.priceVersion, ...db.priceDrafts.map(draft => draft.priceVersion ?? 0)) + 1;
+    Object.assign(d, { state: "published", publishedAt: S.iso(S.now()), publishedBy: req.who.key, effectiveAt: effectiveAt ?? S.iso(S.now()), applyMode, reason, priceVersion });
+    // Future grid changes wait for effectiveAt; notices use the first actual renewal after the window.
+    schedulePricePublication(S, d);
+    advance(S);
+    const notified = d.notified ?? 0;
+    db.pricingLog.unshift({ id: S.id("pl"), at: S.iso(S.now()), by: req.who.key, action: "publish", summary: d.changes.map((c) => `${c.key} ${c.from ?? "—"} → ${c.to ?? "—"}`).join(" · "), applyMode, reason, priceVersion: d.priceVersion, notified });
     ok(res, { ...d, notified });
   });
   app.get("/v1/admin/price-preview", need("pricing:view"), (req, res) => {
     const { planId, cycle = "monthly", country, seats } = req.query;
     if (!db.plans.some((p) => p.id === planId)) return fail(res, 422, "invalid", "Choose a plan.", { fieldErrors: { planId: "required" } });
     const all = Object.keys(db.countries);
-    const list = (country ? [country] : all).map((iso) => ({ country: iso, ...S.resolve(planId, iso, cycle, Number(seats) || 1) }));
+    const list = (country ? [country] : all).map((iso) => {
+      const tax = S.taxForWorkspace({ country: iso, currency: db.countries[iso]?.currency ?? "USD", billing: { country: iso } });
+      return { country: iso, ...S.resolve(planId, iso, cycle, Number(seats) || 1), taxDisplay: tax.inclusive ? "inclusive" : "exclusive", taxInclusive: tax.inclusive, taxRate: tax.rate, reverseCharge: tax.reverseCharge };
+    });
     ok(res, list, { rules: ["R03-ALG-1…9"] });
   });
   app.get("/v1/admin/pricing-log", need("pricing:view"), (req, res) => page(req, res, db.pricingLog.map((x) => ({ ...x, byName: name(x.by) }))));
@@ -379,7 +373,7 @@ module.exports = function adminApi(app, ctx, S, H) {
     Object.assign(g, req.body ?? {}, { id: g.id });
     ok(res, g);
   });
-  const route = (country, currency) => db.gateways.filter((g) => g.active && (g.countries.includes(country) || g.countries.includes("*")) && g.currencies.includes(currency)).sort((a, b) => a.priority - b.priority);
+  const route = (country, currency) => S.routeGateways({ country, currency });
   app.get("/v1/admin/gateways/route", need("tax:view"), (req, res) => ok(res, route(req.query.country, req.query.currency)));
 
   // ---- ADM-20/21 workspaces ----
@@ -466,11 +460,15 @@ module.exports = function adminApi(app, ctx, S, H) {
   app.post("/v1/admin/custom-plans/:id/quote", need("workspaces:edit"), (req, res) => {
     const r = db.customPlanRequests.find((x) => x.id === req.params.id);
     if (!r) return fail(res, 404, "not_found", "No such request.");
+    if (r.state === "accepted" || r.privatePlanIds?.length || r.lineIds?.length) return fail(res, 409, "contract_accepted", "An accepted contract cannot be re-quoted. Create a new request for different terms.");
     const { amount, validDays = 30 } = req.body ?? {};
-    if (!(amount > 0)) return fail(res, 422, "invalid", "A price above 0.", { fieldErrors: { amount: "min" } });
+    if (!Number.isFinite(amount) || !(amount > 0) || !Number.isInteger(validDays) || validDays < 1) return fail(res, 422, "invalid", "A price above 0 and a positive validity period.", { fieldErrors: { amount: "min" } });
     const ws = S.workspace(r.workspaceId);
+    const lines = req.body?.lines ?? (r.tools.length === 1 ? [{ tool: r.tools[0], amount }] : null);
+    const decimals = db.currencies[ws.currency]?.decimals ?? 2;
+    if (!Array.isArray(lines) || lines.length !== r.tools.length || new Set(lines.map(l => l.tool)).size !== r.tools.length || lines.some(l => !r.tools.includes(l.tool) || !Number.isFinite(l.amount) || l.amount < 0) || S.pricing.toDecimals(lines.reduce((n, l) => n + S.pricing.toDecimals(l.amount, decimals), 0), decimals) !== S.pricing.toDecimals(amount, decimals)) return fail(res, 422, "invalid", "Allocate the quoted total explicitly to every requested tool.", { fieldErrors: { lines: "allocation_required" } });
     // ALG-1: a private plan has its own price and currency (the workspace's).
-    r.quote = { amount, currency: ws.currency, validUntil: new Date(S.now() + validDays * 86400000).toISOString() };
+    r.quote = { amount: S.pricing.toDecimals(amount, decimals), currency: ws.currency, cycle: r.cycle, capacity: r.seats, lines: lines.map(l => ({ tool: l.tool, amount: S.pricing.toDecimals(l.amount, decimals) })), validUntil: new Date(S.now() + validDays * 86400000).toISOString() };
     r.state = "quoted";
     ok(res, r);
   });
@@ -553,8 +551,10 @@ module.exports = function adminApi(app, ctx, S, H) {
     ok(res, s);
   });
   const srOut = (r) => ({ ...r, currency: S.workspace(r.workspaceId)?.currency, workspace: S.workspace(r.workspaceId)?.name, service: db.services.find((s) => s.id === r.serviceId)?.name, assigneeName: name(r.assignee) });
+  const assignedOnly = who => who.permissions.includes("services:edit:assigned") && !can(who, "services:edit");
   app.get("/v1/admin/service-requests", need("services:view"), (req, res) => {
     let list = db.serviceRequests.slice();
+    if (assignedOnly(req.who)) list = list.filter(r => r.assignee === req.who.key);
     if (req.query.state) list = list.filter((r) => r.state === req.query.state);
     if (req.query.mine) list = list.filter((r) => r.assignee === req.who.key);
     page(req, res, list.map(srOut));
@@ -562,6 +562,7 @@ module.exports = function adminApi(app, ctx, S, H) {
   app.get("/v1/admin/service-requests/:id", need("services:view"), (req, res) => {
     const r = db.serviceRequests.find((x) => x.id === req.params.id);
     if (!r) return fail(res, 404, "not_found", "No such request.");
+    if (assignedOnly(req.who) && r.assignee !== req.who.key) return fail(res, 404, "not_found", "No such request.");
     ok(res, srOut(r));
   });
   const SR_NEXT = { new: ["under_review", "cancelled"], under_review: ["quoted", "cancelled"], quoted: ["awaiting_payment", "rejected", "expired"], awaiting_payment: ["in_progress", "cancelled"], in_progress: ["in_review", "on_hold"], in_review: ["in_progress", "completed"], on_hold: ["in_progress", "cancelled"], rejected: ["quoted"], expired: ["quoted"], cancelled: ["quoted"] };

@@ -4,27 +4,102 @@
 // Subscription line: trialing → (trial end) free | ended · past_due → (grace end) read_only ·
 // read_only → (cancelAfterDays) ended · cancelling → (cancelAt) ended · ended → (retention) deleted.
 // Workspace: past_due while any line is past_due or read_only; back to active when none is.
+function changedTables(S, changes) {
+  const next = { ...S.db, grid: { ...S.db.grid } };
+  for (const c of changes) if (c.to == null) delete next.grid[c.key]; else next.grid[c.key] = c.to;
+  return next;
+}
+function affectedPriceLines(S, changes) {
+  const after = changedTables(S, changes);
+  const affected = [];
+  for (const ws of S.db.workspaces) for (const line of ws.lines) {
+    if (!["active", "cancelling"].includes(line.state)) continue;
+    const query = { planId: line.planId, cycle: line.cycle, workspace: ws, seats: line.snapshot.quantity };
+    const before = S.pricing.resolveWorkspaceLine(S.db, query);
+    const next = S.pricing.resolveWorkspaceLine(after, query);
+    // Resolution comparison respects zone/currency, fixed country prices and derived yearly cells.
+    if (next && before && (next.unit !== before.unit || next.currency !== before.currency || next.source !== before.source)) affected.push({ ws, line, next });
+  }
+  return affected;
+}
+function firstRenewalAfter(S, line, boundary) {
+  const period = S.pricing.periodDays(line.cycle) * 86400000;
+  const end = Date.parse(line.periodEnd);
+  return new Date(end + Math.max(0, Math.ceil((boundary - end) / period)) * period).toISOString();
+}
+function schedulePricePublication(S, draft) {
+  if (draft.noticesPreparedAt || draft.applyMode !== "existing_next_renewal") return;
+  const boundary = Math.max(Date.parse(draft.effectiveAt), S.now() + S.db.settings.priceChange.noticeDays * 86400000);
+  draft.notified = 0;
+  for (const { ws, line, next } of affectedPriceLines(S, draft.changes)) {
+    const scheduled = { kind: "price_change", draftId: draft.id, effectiveAt: firstRenewalAfter(S, line, boundary), priceVersion: draft.priceVersion, snapshot: { ...line.snapshot, ...next, priceVersion: draft.priceVersion } };
+    if (line.scheduled?.kind === "downgrade") line.scheduledPrice = scheduled; else line.scheduled = scheduled;
+    S.notifyOwner(ws, "price_change", { title: `Your ${line.tool} price changes on ${scheduled.effectiveAt.slice(0, 10)}`, lineId: line.id, effectiveAt: scheduled.effectiveAt, from: line.snapshot.amount, to: next.amount, currency: ws.currency }, `price:${draft.id}:${line.id}`);
+    draft.notified++;
+  }
+  draft.noticesPreparedAt = S.iso(S.now());
+}
+function applyPublishedPrices(S) {
+  const due = S.db.priceDrafts.filter(d => d.state === "published" && !d.appliedAt && Date.parse(d.effectiveAt) <= S.now()).sort((a, b) => Date.parse(a.effectiveAt) - Date.parse(b.effectiveAt));
+  for (const draft of due) {
+    const affected = affectedPriceLines(S, draft.changes);
+    for (const c of draft.changes) if (c.to == null) delete S.db.grid[c.key]; else S.db.grid[c.key] = c.to;
+    S.db.priceVersion = Math.max(S.db.priceVersion, draft.priceVersion);
+    if (draft.applyMode === "existing_now") for (const { line, next } of affected) line.snapshot = { ...line.snapshot, ...next, priceVersion: draft.priceVersion };
+    draft.appliedAt = S.iso(S.now());
+    S.log("system", "price_effective", draft.id, { priceVersion: draft.priceVersion });
+  }
+}
+
+function overLimits(S, ws, plan) {
+  const usage = ws.usage ?? {};
+  return Object.entries(plan.limits ?? {}).filter(([key, limit]) => Number.isFinite(limit) && (usage[key] ?? 0) > limit).map(([key, limit]) => ({ key, limit, used: usage[key], excess: usage[key] - limit, state: "read_only" }));
+}
 function advance(S) {
   const { db } = S;
   const t = S.now();
   const set = db.settings;
+  applyPublishedPrices(S);
   for (const ws of db.workspaces) {
     for (const l of ws.lines) {
+      const downgrade = l.scheduled?.kind === "downgrade" ? l.scheduled : null;
+      if (downgrade && Date.parse(downgrade.effectiveAt) <= t && l.state === "active") {
+        const plan = db.plans.find(p => p.id === downgrade.planId && p.tool === l.tool && (!p.workspaceId || p.workspaceId === ws.id));
+        const priced = plan && S.resolveForWorkspace(plan.id, ws, l.cycle, l.snapshot.quantity);
+        if (priced) {
+          l.planId = plan.id;
+          l.snapshot = { ...l.snapshot, ...priced, priceVersion: db.priceVersion };
+          l.state = plan.tier === "free" ? "free" : "active";
+          l.overLimits = overLimits(S, ws, plan);
+          l.periodStart = downgrade.effectiveAt;
+          l.periodEnd = S.iso(Date.parse(downgrade.effectiveAt) + S.pricing.periodDays(l.cycle) * 86400000);
+          delete l.scheduled;
+          delete l.scheduledPrice;
+          S.log("system", "downgrade_applied", ws.id, { line: l.id, plan: plan.id, overLimits: l.overLimits });
+        }
+      }
+      const priceChange = l.scheduledPrice ?? (l.scheduled?.kind === "price_change" ? l.scheduled : null);
+      if (priceChange?.snapshot && Date.parse(priceChange.effectiveAt) <= t && ["active", "cancelling"].includes(l.state)) {
+        // A later downgrade must not inherit the former plan's pending price.
+        if (!downgrade) l.snapshot = { ...l.snapshot, ...priceChange.snapshot };
+        if (l.scheduledPrice) delete l.scheduledPrice; else delete l.scheduled;
+        S.log("system", "line_price_effective", ws.id, { line: l.id, draft: priceChange.draftId });
+      }
       if (l.state === "trialing" && l.trialEndsAt && Date.parse(l.trialEndsAt) <= t) {
         // G-17: at the end the tool goes to its Free plan if it has one, else it ends.
         const free = db.plans.find((p) => p.tool === l.tool && p.tier === "free");
         if (free) Object.assign(l, { state: "free", planId: free.id, snapshot: { ...l.snapshot, amount: 0, unit: 0 } });
-        else Object.assign(l, { state: "ended", endedAt: S.iso(t) });
+        else Object.assign(l, { state: "ended", endedAt: l.trialEndsAt });
         S.log("system", "trial_ended", ws.id, { line: l.id });
       }
       if (l.state === "past_due" && l.graceEndsAt && Date.parse(l.graceEndsAt) <= t) {
-        Object.assign(l, { state: "read_only", readOnlySince: S.iso(t) });
+        Object.assign(l, { state: "read_only", readOnlySince: l.graceEndsAt });
         S.log("system", "line_read_only", ws.id, { line: l.id });
       }
       if (l.state === "read_only" && l.readOnlySince && Date.parse(l.readOnlySince) + (set.dunning.cancelAfterDays - set.dunning.graceDays) * 86400000 <= t) {
-        Object.assign(l, { state: "ended", endedAt: S.iso(t) });
+        Object.assign(l, { state: "ended", endedAt: S.iso(Date.parse(l.readOnlySince) + (set.dunning.cancelAfterDays - set.dunning.graceDays) * 86400000) });
       }
-      if (l.state === "cancelling" && l.cancelAt && Date.parse(l.cancelAt) <= t) Object.assign(l, { state: "ended", endedAt: S.iso(t) });
+      if (l.state === "cancelling" && l.cancelAt && Date.parse(l.cancelAt) <= t) Object.assign(l, { state: "ended", endedAt: l.cancelAt });
       if (l.state === "ended" && l.endedAt && Date.parse(l.endedAt) + set.retention.toolDays * 86400000 <= t) l.state = "deleted";
     }
     if (ws.state === "active" || ws.state === "past_due") {
@@ -80,11 +155,11 @@ function banners(S, ws, member) {
   if (tr && owner) out.push({ kind: "trial_ending", tone: "info", audience: "owner", tool: tr.tool, endsAt: tr.trialEndsAt, action: "choose_plan" });
   const beta = ws.lines.find((l) => S.db.tools.find((x) => x.key === l.tool)?.status === "beta" && l.state === "trialing");
   if (beta && owner) out.push({ kind: "beta_billing", tone: "warning", audience: "owner", tool: beta.tool, action: "view_plans", coupon: "LAUNCH20" });
-  const pc = ws.lines.find((l) => l.scheduled?.kind === "price_change");
-  if (pc && owner) out.push({ kind: "price_change", tone: "warning", audience: "owner", tool: pc.tool, effectiveAt: pc.scheduled.effectiveAt, action: "details" });
+  const pc = ws.lines.find((l) => l.scheduled?.kind === "price_change" || l.scheduledPrice);
+  if (pc && owner) out.push({ kind: "price_change", tone: "warning", audience: "owner", tool: pc.tool, effectiveAt: (pc.scheduledPrice ?? pc.scheduled).effectiveAt, action: "details" });
   const dg = ws.lines.find((l) => l.scheduled?.kind === "downgrade");
   if (dg && owner) out.push({ kind: "downgrade_scheduled", tone: "neutral", audience: "owner", tool: dg.tool, effectiveAt: dg.scheduled.effectiveAt, action: "cancel_downgrade" });
   return out.sort((a, b) => BANNER_ORDER.indexOf(a.kind) - BANNER_ORDER.indexOf(b.kind));
 }
 
-module.exports = { advance, toolState, banners, BANNER_ORDER };
+module.exports = { advance, toolState, banners, BANNER_ORDER, affectedPriceLines, schedulePricePublication, overLimits };

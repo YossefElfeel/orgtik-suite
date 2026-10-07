@@ -167,29 +167,36 @@ function controlRoutes(app) {
         }
         await accountStore.resetTestFixtures();
       }
-      res.json({ success: true, message: "Resetting every app's data", data: { generation: state.generation + 1 } });
-      resetData("POST /__mock/reset");
+      await resetData("POST /__mock/reset");
+      res.json({ success: true, message: "Every app's data was reset", data: { generation: state.generation } });
     } catch (error) { next(error); }
   });
   c.get("/clock", (req, res) => res.json({ success: true, data: clock.status() }));
-  c.post("/clock", (req, res) => {
+  c.post("/clock", async (req, res, next) => {
     const { now, frozen, reset = true } = req.body || {};
+    const previous = clock.exportState();
     try {
       const data = clock.set({ now, frozen });
-      res.json({ success: true, message: reset ? "Clock set; data is being rebuilt for the new time" : "Clock set", data });
-      if (reset) resetData("clock set");
-      else saveClock();
+      if (reset) await resetData("clock set");
+      else await saveClock();
+      res.json({ success: true, message: reset ? "Clock set; data was rebuilt for the new time" : "Clock set", data });
     } catch (e) {
+      clock.importState(previous);
+      if (e.status) return next(e);
       res.status(400).json({ success: false, statusCode: 400, message: e.message });
     }
   });
-  c.post("/clock/advance", (req, res) => {
+  c.post("/clock/advance", async (req, res, next) => {
     const { days = 0, hours = 0, minutes = 0, seconds = 0 } = req.body || {};
     const ms = ((Number(days) * 24 + Number(hours)) * 60 + Number(minutes)) * 60000 + Number(seconds) * 1000;
+    const previous = clock.exportState();
     try {
-      res.json({ success: true, message: "Clock moved on", data: clock.advance(ms) });
-      saveClock();
+      const data = clock.advance(ms);
+      await saveClock();
+      res.json({ success: true, message: "Clock moved on", data });
     } catch (e) {
+      clock.importState(previous);
+      if (e.status) return next(e);
       res.status(400).json({ success: false, statusCode: 400, message: e.message });
     }
   });
@@ -368,7 +375,7 @@ function build() {
 // numbers, and every recorded change is replayed with its own instant and seed, so every instance
 // of the mock rebuilds the same data. Without a store nothing here runs.
 const { sandbox, store } = journal.pickStore(config);
-const persist = { epoch: null, seedAt: null, clockJson: null, applied: 0, skipped: 0, rebuild: false, ready: null, lock: journal.makeLock() };
+const persist = { epoch: null, seedAt: null, clockJson: null, applied: 0, skipped: 0, rebuild: false, ready: null, lock: journal.makeLock(), legacy: null, modern: false };
 const realRandom = (() => { const r = Math.random; return () => r(); })(); // outside a pinned run this is the real one
 
 function newMeta() {
@@ -401,98 +408,109 @@ async function dispatch(key, { method, url, headers, body }) {
   return require("./lib/dispatch").dispatch(base, key, { method, url, headers, body });
 }
 
+// Financial replay uses a committed domain snapshot. The old input-only prefix uses its
+// frozen reducer so today's pricing, roles or token expiry cannot alter a paid invoice.
+const platformRequest = (key, url) => key === "admin" && /^\/v1\/(admin|app|public|__mock)(\/|$)/.test(url) || key === "sos" && /^\/v1\/(app|public)(\/|$)/.test(url);
+const platform = () => require("./apps/admin");
+const storageError = message => Object.assign(new Error(message), { status: 503 });
+
 async function replay(lines, offset) {
   let n = 0;
   for (const line of lines) {
     n += 1;
     const e = typeof line === "string" ? JSON.parse(line) : line;
-    if (e.epoch !== persist.epoch) continue;
-    if (!slots.get(e.app)?.app) { persist.skipped += 1; continue; }
-    const r = await clock.runPinned({ at: e.at, seed: e.seed }, () =>
-      dispatch(e.app, { method: e.method, url: e.url, headers: { ...e.headers, "x-mock-replay": "1" }, body: e.body ? Buffer.from(e.body, "base64") : null }),
-    );
-    if (r.statusCode >= 400) {
-      persist.skipped += 1;
-      console.warn(`[journal] replay of #${offset + n} ${e.method} /${e.app}${e.url} answered ${r.statusCode}`);
+    if (e.epoch !== persist.epoch) throw storageError("Journal epoch does not match its committed history.");
+    if (e.kind === "clock-v2") { clock.importState(e.clock); continue; }
+    if (e.platformState) {
+      if (!platformRequest(e.app, e.url) || e.platformState.platformVersion !== 2) throw storageError("Invalid platform checkpoint.");
+      platform().importState(e.platformState);
+      persist.legacy.adoptCommittedSnapshot(e.platformState);
+      persist.modern = true;
+      continue;
     }
+    if (platformRequest(e.app, e.url)) {
+      await persist.legacy.replayAccepted(e);
+      platform().importState(persist.legacy.exportState());
+      continue;
+    }
+    if (!slots.get(e.app)?.app) throw storageError(`A required journal app is unavailable: ${e.app}`);
+    const r = await clock.runPinned({ at: e.at, seed: e.seed }, () =>
+      dispatch(e.app, { method: e.method, url: e.url, headers: e.headers, body: e.body ? Buffer.from(e.body, "base64") : null }),
+    );
+    if (r.statusCode >= 400) throw storageError(`Accepted journal command #${offset + n} could not be restored (${r.statusCode}).`);
   }
   persist.applied = offset + n;
 }
 
-async function restore(meta) {
+async function restore(meta, entries) {
   persist.epoch = meta.epoch;
   persist.seedAt = meta.seedAt;
   persist.clockJson = JSON.stringify(meta.clock ?? null);
   clock.importState(meta.clock);
   clock.runPinned({ at: meta.seedAt, seed: `seed:${meta.seedAt}` }, build);
-  // Identity is authoritative and must exist before replaying customer-owned business writes.
-  require("./lib/identity").hydrate(await accountStore.accounts());
+  const accounts = await accountStore.accounts();
+  const identity = require("./lib/identity");
+  identity.hydrate(accounts);
+  persist.legacy = require("./lib/platform-replay").createLegacyPlatform({ identity, accounts, config }, { seedAt: meta.seedAt });
+  persist.modern = false;
   persist.applied = 0;
   persist.skipped = 0;
+  // Leave rebuild set if reconstruction fails. Never serve partially restored financial state.
+  persist.rebuild = true;
+  await replay(entries, 0);
   persist.rebuild = false;
-  await replay(await store.read(0), 0);
-  console.log(`[journal] ${sandbox}: seed of ${new clock.RealDate(meta.seedAt).toISOString()} + ${persist.applied} changes (${persist.skipped} skipped)`);
+  console.log(`[journal] ${sandbox}: seed of ${new clock.RealDate(meta.seedAt).toISOString()} + ${persist.applied} committed changes`);
 }
 
 function ready() {
   if (!store) return Promise.resolve();
   if (!persist.ready) {
     persist.ready = persist.lock(async () => {
-      let meta = await store.getMeta();
-      if (!meta) {
-        meta = newMeta();
-        await store.setMeta(meta);
-      }
-      await restore(meta);
+      await store.initialize(newMeta());
+      const { meta, entries } = await store.snapshot(0);
+      await restore(meta, entries);
     });
     persist.ready.catch(() => { persist.ready = null; });
   }
   return persist.ready;
 }
 
-// Catch up with changes other instances recorded (call inside the lock).
+// Catch up against one atomic metadata/revision view (inside the request lock).
 async function sync() {
-  const { meta, entries } = store.poll
-    ? await store.poll(persist.applied)
-    : { meta: await store.getMeta(), entries: await store.read(persist.applied) };
-  if (!meta) {
-    const fresh = newMeta();
-    await store.setMeta(fresh);
-    return restore(fresh);
+  let snapshot = await store.snapshot(persist.applied);
+  if (!snapshot.meta) {
+    await store.initialize(newMeta());
+    snapshot = await store.snapshot(0);
+    return restore(snapshot.meta, snapshot.entries);
   }
-  if (meta.epoch !== persist.epoch || persist.rebuild) return restore(meta);
-  if (JSON.stringify(meta.clock ?? null) !== persist.clockJson) {
-    persist.clockJson = JSON.stringify(meta.clock ?? null);
-    clock.importState(meta.clock);
+  if (snapshot.meta.epoch !== persist.epoch || persist.rebuild || snapshot.revision < persist.applied) {
+    snapshot = await store.snapshot(0);
+    return restore(snapshot.meta, snapshot.entries);
   }
-  if (entries.length) {
-    // Another instance may have registered the owner of these writes after this instance
-    // warmed up. Refresh identities and their workspaces before replay, just as restore does.
-    require("./lib/identity").hydrate(await accountStore.accounts());
-    await replay(entries, persist.applied);
+  if (snapshot.entries.length) {
+    const accounts = await accountStore.accounts();
+    require("./lib/identity").hydrate(accounts);
+    // New account registrations are metadata for reconstructing the accepted historical actor.
+    // The reducer also reads the current hydrated registry for accounts created after warm-up.
+    try { await replay(snapshot.entries, persist.applied); }
+    catch (error) { persist.rebuild = true; throw error; }
   }
 }
 
-function saveClock() {
+// Controls also run under the request lock. Persist their clock change before acknowledging it.
+async function saveClock() {
   if (!store) return;
-  persist.lock(async () => {
-    const meta = (await store.getMeta()) || newMeta();
-    meta.clock = clock.exportState();
-    persist.clockJson = JSON.stringify(meta.clock);
-    await store.setMeta(meta);
-  }).catch((e) => console.error("[journal] saving the clock failed:", e.message));
+  const entry = { epoch: persist.epoch, kind: "clock-v2", clock: clock.exportState() };
+  const committed = await store.commit(entry, { expectedEpoch: persist.epoch, expectedRevision: persist.applied });
+  persist.applied = committed.sequence;
 }
 
-// A reset starts a new epoch: the journal is emptied and the seed is built at the current instant.
-function resetData(reason) {
-  if (!store) return scheduleReset(reason);
-  persist.lock(async () => {
-    const meta = newMeta();
-    await store.clear();
-    await store.setMeta(meta);
-    await restore(meta);
-    console.log(`[mock] data reset (${reason}); journal epoch ${meta.epoch}`);
-  }).catch((e) => console.error("[journal] reset failed:", e));
+async function resetData(reason) {
+  if (!store) { scheduleReset(reason); return; }
+  const meta = newMeta();
+  await store.reset(meta, { expectedEpoch: persist.epoch, expectedRevision: persist.applied });
+  await restore(meta, []);
+  console.log(`[mock] data reset (${reason}); journal epoch ${meta.epoch}`);
 }
 
 function readBody(req) {
@@ -543,7 +561,7 @@ async function handle(key, req, res) {
   return persist.lock(async () => {
     let saved;
     try {
-      if (store && !url.startsWith("/__mock")) await sync();
+      if (store) await sync();
       saved = await accountStore.accounts();
       require("./lib/identity").hydrate(saved);
     } catch {
@@ -552,6 +570,11 @@ async function handle(key, req, res) {
     if (!slots.get(key)?.app) return sendJson(res, 404, { success: false, statusCode: 404, message: `[mock] no API for ${key}` });
     const identity = require("./lib/identity");
     const before = authStorage.snapshot(identity);
+    const financial = platformRequest(key, url);
+    const financialBefore = financial ? platform().exportState() : null;
+    if (store && journal.recordable(req.method, url) && body.length > journal.MAX_BODY) {
+      return sendJson(res, 503, { success: false, statusCode: 503, message: "This change is too large to persist. Nothing was saved." });
+    }
     const at = clock.now();
     const seed = `${at}:${Math.floor(realRandom() * 1e12)}`;
     let r;
@@ -578,19 +601,23 @@ async function handle(key, req, res) {
       // A refused mutation must not change the account, even if a handler touched it first.
       identity.hydrate(before, { replace: true });
     }
-    if (store && journal.recordable(req.method, url) && r.statusCode < 400) {
-      if (body.length > journal.MAX_BODY) res.setHeader("x-mock-journal", "too-large");
-      else if (persist.applied >= journal.MAX_ENTRIES) res.setHeader("x-mock-journal", "full");
-      else {
-        try {
-          const cleanBody = journal.redactBody(body);
-          const seq = await store.push({ epoch: persist.epoch, app: key, method: req.method, url, headers: journal.recordHeaders(req.headers), body: cleanBody.length ? cleanBody.toString("base64") : null, at, seed });
-          if (seq === persist.applied + 1) persist.applied = seq;
-          else persist.rebuild = true; // another instance wrote in between: rebuild in journal order
-        } catch (e) {
-          console.warn("[journal] recording failed:", e.message);
-          res.setHeader("x-mock-journal", "failed");
-        }
+    const financialAfter = financial ? platform().exportState() : null;
+    const financialChanged = financial && JSON.stringify(financialBefore) !== JSON.stringify(financialAfter);
+    if (store && (financial ? financialChanged : journal.recordable(req.method, url) && r.statusCode < 400)) {
+      try {
+        const cleanBody = journal.redactBody(body);
+        const headers = journal.recordHeaders(req.headers);
+        if (financial) for (const key of Object.keys(headers)) if (/^(authorization|cookie|x-mock-replay)$/i.test(key)) delete headers[key];
+        const entry = { epoch: persist.epoch, app: key, method: req.method, url, headers, body: cleanBody.length ? cleanBody.toString("base64") : null, at, seed, ...(financial ? { platformState: financialAfter } : {}) };
+        const committed = await store.commit(entry, { expectedEpoch: persist.epoch, expectedRevision: persist.applied });
+        persist.applied = committed.sequence;
+        if (financial) { persist.legacy.adoptCommittedSnapshot(financialAfter); persist.modern = true; }
+      } catch (e) {
+        identity.hydrate(before, { replace: true });
+        persist.rebuild = true;
+        console.warn("[journal] commit failed:", e.code || e.message);
+        const code = e.status === 409 ? 409 : 503;
+        return sendJson(res, code, { success: false, statusCode: code, message: code === 409 ? "Workspace data changed concurrently. Refresh before trying again." : "This change could not be saved. Please try again." });
       }
     }
     send(res, r);
