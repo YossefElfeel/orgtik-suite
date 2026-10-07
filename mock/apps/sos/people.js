@@ -150,7 +150,7 @@ function register(app, S, H, R) {
     }
     if (b.password !== undefined && String(b.password).length) {
       if (String(b.password).length < MIN_PASSWORD) return H.fail(req, res, 400, `password must be at least ${MIN_PASSWORD} characters long`);
-      u.password = String(b.password);
+      identity.setPassword(u, String(b.password));
     }
     if (b.userType !== undefined) {
       if (b.userType !== null && !USER_TYPES.includes(b.userType)) return H.fail(req, res, 400, `userType must be one of the following values: ${USER_TYPES.join(", ")}`);
@@ -198,6 +198,7 @@ function register(app, S, H, R) {
     // Soft delete: the record stays in identity.users so other apps' references still resolve, but the
     // account loses every scope, cannot sign in and disappears from SOS lists.
     S.deletedUserIds.add(u.id);
+    u.deletedAt = nowIso();
     u.isActive = false;
     u.updatedAt = nowIso();
     R.removeAllGrants(u);

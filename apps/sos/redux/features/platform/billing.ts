@@ -30,6 +30,8 @@ export type SubscriptionLine = {
   cancelAt?: string | null;
   endedAt?: string | null;
   lastFailure?: { at: string; reason: string } | null;
+  /** false when bought without automatic renewal (website orders); absent means it renews. */
+  autoRenew?: boolean;
   scheduled?: ScheduledChange;
   toolName?: Localized;
   planName?: Localized;

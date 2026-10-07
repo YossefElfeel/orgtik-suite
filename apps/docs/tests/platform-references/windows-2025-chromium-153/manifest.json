@@ -1,0 +1,1810 @@
+{
+  "id": "windows-2025-chromium-153",
+  "reviewedAt": "2026-10-07",
+  "renderer": {
+    "platform": "win32",
+    "release": "10.0.26100",
+    "browser": "153.0.8010.12",
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "deviceScaleFactor": 1,
+    "reducedMotion": "reduce",
+    "locale": "en-US",
+    "timezoneId": "Africa/Cairo",
+    "fixedTime": "2026-10-07T09:00:00.000Z"
+  },
+  "provenance": {
+    "sourceCommit": "33bd33e35d176adc20f0beb9a65f26c78628d38e",
+    "uiTree": "0cd7c918244ef55799aa21b79ee27855c4e65f6b",
+    "docsTree": "324b057c215361870a3df21f14da9b160f0b4d2c",
+    "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37602899028",
+    "job": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37602899028/job/112732849898",
+    "runnerImage": "windows-2025-vs2026",
+    "runnerImageVersion": "20260925.250.1",
+    "previousRun": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37596650387",
+    "localDefaultVerification": "264/264 exact; zero accessibility/console/overflow findings",
+    "reviewEvidence": "All38 image dimensions unchanged; all694 changed pixels map to glyphs1/2/4/5/z in Arial/Cascadia Code; all38 candidate images stable at pixelmatch0.1 across two CI runs; no component/styles changed",
+    "authorization": "Integration owner approved only these38 reviewed platform pairs; default264 references retained"
+  },
+  "policy": {
+    "pixelmatchThreshold": 0.1,
+    "allowedChangedPixels": 0,
+    "masks": false,
+    "ciOnly": true,
+    "defaultReferenceCount": 264,
+    "overrides": 38,
+    "reviewedPixelsTotal": 694,
+    "semanticValidation": "Normalized story text/control state and pixel layout-anchor hashes; exact selected-font metadata; default and override PNG SHA256 pairing"
+  },
+  "entries": {
+    "data-calendargrid--month--en-light.png": {
+      "story": "data-calendargrid--month",
+      "combo": "en-light",
+      "width": 1280,
+      "height": 860,
+      "originalSha256": "1e0693aa9d2e138537e5253af319b76fa22056ec62c45f1eceaee518e7a5d12f",
+      "overrideSha256": "30fca215af822a139dcd1f81193349a650d0eabb9d4a3dcfda5e93a8128c69fa",
+      "reviewedChangedPixels": 15,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "0879c98df0ff65db0327c254e03f076896d0e3f784446381daade9d26f39204f",
+        "layoutSha256": "4d12fd361395c83aafed01f2d238d3d04252e20983d3c8d1bd47408a7e4fd60d"
+      }
+    },
+    "data-calendargrid--month--en-dark.png": {
+      "story": "data-calendargrid--month",
+      "combo": "en-dark",
+      "width": 1280,
+      "height": 860,
+      "originalSha256": "db2895cfc521b1c0b1f1d266ba542d600d7f3a260457cf7af2ab8fe9a0673416",
+      "overrideSha256": "c2448888c4622cab03925e4d91a74aad0b1363e472bdf6fe2f6577aa2711c3a8",
+      "reviewedChangedPixels": 15,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "0879c98df0ff65db0327c254e03f076896d0e3f784446381daade9d26f39204f",
+        "layoutSha256": "4d12fd361395c83aafed01f2d238d3d04252e20983d3c8d1bd47408a7e4fd60d"
+      }
+    },
+    "data-calendargrid--month--ar-light.png": {
+      "story": "data-calendargrid--month",
+      "combo": "ar-light",
+      "width": 1280,
+      "height": 1007,
+      "originalSha256": "85740eeaba90f2012c5d78bf5d76e538677dd23d6b6055b21ea5d6908b4b5809",
+      "overrideSha256": "e88b2f760d66c5d1ca596ca5a0dcf15ebf627f85415903ad8236944bf76ff32d",
+      "reviewedChangedPixels": 9,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans Arabic SemiBold",
+            "postScriptName": "IBMPlexSansArabic-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "ed73a8d6db14fc64a303e02cacea5668119536094fa8391268bd1a9fbf2ba075",
+        "layoutSha256": "2f617f4097144704c6a84bd392d94736862fef453c0b21fca400a3644ff9e3e5"
+      }
+    },
+    "data-calendargrid--month--ar-dark.png": {
+      "story": "data-calendargrid--month",
+      "combo": "ar-dark",
+      "width": 1280,
+      "height": 1007,
+      "originalSha256": "faeeb2df71c4e573647014ee015b1b89e1c17e3729dac6622a0086eb183c681c",
+      "overrideSha256": "840d15614a4449ab0ef18980c7d0dd4aad72bdcb4e9773c3dfb5bb1899aa793e",
+      "reviewedChangedPixels": 8,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans Arabic SemiBold",
+            "postScriptName": "IBMPlexSansArabic-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "ed73a8d6db14fc64a303e02cacea5668119536094fa8391268bd1a9fbf2ba075",
+        "layoutSha256": "2f617f4097144704c6a84bd392d94736862fef453c0b21fca400a3644ff9e3e5"
+      }
+    },
+    "data-calendargrid--month--de-light.png": {
+      "story": "data-calendargrid--month",
+      "combo": "de-light",
+      "width": 1280,
+      "height": 860,
+      "originalSha256": "d6a4078f29d7e645678aba1467fa27e5398d92d083ff4cb9facec2226297fe04",
+      "overrideSha256": "47581464cfe018a0ce8d2714dc15d9fc730c4ac3ac3004949d278e3bdfbd0f0d",
+      "reviewedChangedPixels": 15,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "a9112d0f6f3eb6f174bf8ad7983962fd45d5db84742073e801e68279a57cd553",
+        "layoutSha256": "385e4d44cd623b1363cde0f870f1f61a537147b987818ce94eab871fa51ebc51"
+      }
+    },
+    "data-calendargrid--month--fr-dark.png": {
+      "story": "data-calendargrid--month",
+      "combo": "fr-dark",
+      "width": 1280,
+      "height": 860,
+      "originalSha256": "149bc77814a4fbcd10c56c38a83c79e62ef8bafe97209abcf364ad735ecdf26a",
+      "overrideSha256": "4a243e509f525feaf0408699ea395acaa2aa46c9018f28af543c1bb04b4c5bfa",
+      "reviewedChangedPixels": 15,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 11
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "3a058cbe1296694cec82a60caead90daae45c2b877aec8f897a20e6b2a8fce6f",
+        "layoutSha256": "af2d9096accf71042feb7e0aff24d9ab3524d66e87f7bd5cfc403c715ca17d11"
+      }
+    },
+    "data-calendargrid--week--ar-light.png": {
+      "story": "data-calendargrid--week",
+      "combo": "ar-light",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "7ee672a054435d4d09340fd82308b6665ef3a2e4ad4b9e2b6a8fb8a0283304cd",
+      "overrideSha256": "e982c4e24616191ac139137f3c8314ffd0ecc846019e8000889dc34572237fca",
+      "reviewedChangedPixels": 9,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans Arabic SemiBold",
+            "postScriptName": "IBMPlexSansArabic-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "697d125017f7ac4f1b88c35f3b3d603c4fe180e5159d761538a90d5d46c1d735",
+        "layoutSha256": "f6054b4f27993e39f45d001575a8e89da466681d1cca8acbebaf9a784c9447b2"
+      }
+    },
+    "data-calendargrid--week--ar-dark.png": {
+      "story": "data-calendargrid--week",
+      "combo": "ar-dark",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "45f07453ffc691558885bb55bb7a7dde34c963803503239f86f5dff2e34a86cd",
+      "overrideSha256": "9b49b51c3f39b47e90c3625fc27c60f84026f8afcaf6f2ec122744f035d9b3c8",
+      "reviewedChangedPixels": 8,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans Arabic SemiBold",
+            "postScriptName": "IBMPlexSansArabic-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "697d125017f7ac4f1b88c35f3b3d603c4fe180e5159d761538a90d5d46c1d735",
+        "layoutSha256": "f6054b4f27993e39f45d001575a8e89da466681d1cca8acbebaf9a784c9447b2"
+      }
+    },
+    "data-calendargrid--many-events--en-light.png": {
+      "story": "data-calendargrid--many-events",
+      "combo": "en-light",
+      "width": 1280,
+      "height": 861,
+      "originalSha256": "71f364d57c07a1b5c89fad845403cec71261dfe2996f7bf36dd959719dd8f0e0",
+      "overrideSha256": "25d2c2141b678e21910ad5bcd1ab8214092d183f238f786d5650ad9b74c24e35",
+      "reviewedChangedPixels": 15,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "1f85ad287a1c1a570718a29e919b27138e04a206dfd2bfe35bfd8fe4f4a88de7",
+        "layoutSha256": "f526d7e2a421a9e4e31164bb0a52e6cddb6ad2a1b1ac63fd193ba8dba088b2aa"
+      }
+    },
+    "data-calendargrid--many-events--en-dark.png": {
+      "story": "data-calendargrid--many-events",
+      "combo": "en-dark",
+      "width": 1280,
+      "height": 861,
+      "originalSha256": "b412378f28708615e0df04df1fe13c20d4793f0beebdab0a00187a1babd1a6d0",
+      "overrideSha256": "0833379520bee5a581e11cc6a811d7feeaefc4ab37cf5c18c7e6dd81487e796c",
+      "reviewedChangedPixels": 15,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "1f85ad287a1c1a570718a29e919b27138e04a206dfd2bfe35bfd8fe4f4a88de7",
+        "layoutSha256": "f526d7e2a421a9e4e31164bb0a52e6cddb6ad2a1b1ac63fd193ba8dba088b2aa"
+      }
+    },
+    "data-calendargrid--many-events--ar-light.png": {
+      "story": "data-calendargrid--many-events",
+      "combo": "ar-light",
+      "width": 1280,
+      "height": 1008,
+      "originalSha256": "67372184b6164e394327a929aed6b36b3839accd6e3bf4ea4d84e16f7c4f7a7f",
+      "overrideSha256": "adc35d0b0d97899f737a44bd24f2b070a68fe74ca52faab3d80ef1f4f8e35f91",
+      "reviewedChangedPixels": 9,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans Arabic SemiBold",
+            "postScriptName": "IBMPlexSansArabic-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "2ff73d5d063c1a45d4de5eabc0806a1c91cab6b1dd84cf0df913eb6d1e21046c",
+        "layoutSha256": "046f1ab8a69d389b5e8570d262f613f47190b86bd7beec7aaed191bfbfc741bb"
+      }
+    },
+    "data-calendargrid--many-events--ar-dark.png": {
+      "story": "data-calendargrid--many-events",
+      "combo": "ar-dark",
+      "width": 1280,
+      "height": 1008,
+      "originalSha256": "0b3ff91db43fc958178d72478b48217e3f6f41dd4a2fb7dc2e0d847d075da59f",
+      "overrideSha256": "5254853277027b5daa624b1d0a3c7fdf5aff2d4a342f19fac6c018dea8cb0343",
+      "reviewedChangedPixels": 8,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans Arabic SemiBold",
+            "postScriptName": "IBMPlexSansArabic-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "2ff73d5d063c1a45d4de5eabc0806a1c91cab6b1dd84cf0df913eb6d1e21046c",
+        "layoutSha256": "046f1ab8a69d389b5e8570d262f613f47190b86bd7beec7aaed191bfbfc741bb"
+      }
+    },
+    "data-calendargrid--many-events--de-light.png": {
+      "story": "data-calendargrid--many-events",
+      "combo": "de-light",
+      "width": 1280,
+      "height": 861,
+      "originalSha256": "24544ff4e6b00df11daad73d449c8b7c122267339d10b11b024a32cc19c34c35",
+      "overrideSha256": "b62a8ab56e33e10c19445d30f1451ed48d779bab11f4c0a2e9796fbd88a231aa",
+      "reviewedChangedPixels": 15,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 5
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "ee7a9d18b8a71505e6383373aef3a0581741b758c9faba1af5b7c0c1913baa2a",
+        "layoutSha256": "87ef8f89226acedfbd1bc45c348f1badbe02ca723a2f00a0e8e26b81d71d06c2"
+      }
+    },
+    "data-calendargrid--many-events--fr-dark.png": {
+      "story": "data-calendargrid--many-events",
+      "combo": "fr-dark",
+      "width": 1280,
+      "height": 861,
+      "originalSha256": "9a8b62d6798fb189ff6d4b3d62288275c1ad32a6e53c51b48ca321eac1cd96f4",
+      "overrideSha256": "ab0130b45ce59bdcb561e66459b3fbd1ab986f608c127fa0ad4cf24d71e85321",
+      "reviewedChangedPixels": 15,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "SPAN",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 11
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "5b97bbdf6a417a592eab04fe0a6bb073f5d08c31a370f064069ad7ba2b5e3506",
+        "layoutSha256": "55b1d2cc9bb5d1179a2e8280df51eba8f73f59c89a21f85f0c2a673cb94ff95b"
+      }
+    },
+    "data-datatable--ready--en-light.png": {
+      "story": "data-datatable--ready",
+      "combo": "en-light",
+      "width": 1280,
+      "height": 1358,
+      "originalSha256": "c8c7353d8111a8e10e47a775936b132e35ab3d9de8e638d7617d392316139f30",
+      "overrideSha256": "6e8bf754d9a91ab2ac2961e3587e8fc008310625349af0361c30dc125528201b",
+      "reviewedChangedPixels": 18,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11 Sept 2026",
+          "glyph": "1",
+          "tag": "TD",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 4
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "8c636195af7fd0bbe27c38666aa18f45e0159d524c79abd9a9460c8eae822c89",
+        "layoutSha256": "224d199f454a16ad7a1569c3c1f96a0acc02bf1c371e97277e0358ece54eb973"
+      }
+    },
+    "data-datatable--ready--en-dark.png": {
+      "story": "data-datatable--ready",
+      "combo": "en-dark",
+      "width": 1280,
+      "height": 1358,
+      "originalSha256": "6f1e60c77ddac706f78759baf3d364a2a3c269b45ceda01bddd95a61bf66d69c",
+      "overrideSha256": "1e7ee9f83fcfe6e77478ad12782c138b052e6266fb486b799341b7672389e85e",
+      "reviewedChangedPixels": 17,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11 Sept 2026",
+          "glyph": "1",
+          "tag": "TD",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 4
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "8c636195af7fd0bbe27c38666aa18f45e0159d524c79abd9a9460c8eae822c89",
+        "layoutSha256": "224d199f454a16ad7a1569c3c1f96a0acc02bf1c371e97277e0358ece54eb973"
+      }
+    },
+    "data-datatable--ready--ar-light.png": {
+      "story": "data-datatable--ready",
+      "combo": "ar-light",
+      "width": 1280,
+      "height": 1358,
+      "originalSha256": "6b3de9744ac12f103234d7fd5830f58021757b524cdb42c35abb4738c0219e8d",
+      "overrideSha256": "d3f979bdd5ca6a308022bf7a0516fcce057794ff02f1f49bb75a5807c149beae",
+      "reviewedChangedPixels": 18,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11‏/09‏/2026",
+          "glyph": "1",
+          "tag": "TD",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans Arabic SemiBold",
+            "postScriptName": "IBMPlexSansArabic-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 4
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "423a7329706e41d7d9698383cc064c6c176ac88e7426a7d2e3ea9133d34c0540",
+        "layoutSha256": "d43271873997da8ba4c18c60378c12a12d184405870c3ded41b5a8f42464cc56"
+      }
+    },
+    "data-datatable--ready--ar-dark.png": {
+      "story": "data-datatable--ready",
+      "combo": "ar-dark",
+      "width": 1280,
+      "height": 1358,
+      "originalSha256": "50c9f7fc982e080b52cd8548786eb0a00b3f0f8b8dfccb7cf8937493c1dc83c1",
+      "overrideSha256": "73992ae7b43ff2b116c8a44c56d03e20cda8976194e0a1dc771a939068fdd6dc",
+      "reviewedChangedPixels": 17,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11‏/09‏/2026",
+          "glyph": "1",
+          "tag": "TD",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans Arabic SemiBold",
+            "postScriptName": "IBMPlexSansArabic-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 4
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "423a7329706e41d7d9698383cc064c6c176ac88e7426a7d2e3ea9133d34c0540",
+        "layoutSha256": "d43271873997da8ba4c18c60378c12a12d184405870c3ded41b5a8f42464cc56"
+      }
+    },
+    "data-datatable--ready--de-light.png": {
+      "story": "data-datatable--ready",
+      "combo": "de-light",
+      "width": 1280,
+      "height": 1358,
+      "originalSha256": "e6fc51a74f8c55c8ea546f4f56915c3f4c0ce8cf2d69a6d8f09216c54b3acc7b",
+      "overrideSha256": "287fa07385b62bd523bc49c98081f0fb54fb5ffc1e6bb527ad94ca83f37033d6",
+      "reviewedChangedPixels": 18,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11.09.2026",
+          "glyph": "1",
+          "tag": "TD",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 4
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "d15c42ea9f5ca15eff40d757ed6248b35fac40ca7af8fe0faec4ed3009f3aca2",
+        "layoutSha256": "33158cde0c3e0ba675e60bb2fb8c6426aae9f3d175c2e81b521aa0985656e84e"
+      }
+    },
+    "data-datatable--ready--fr-dark.png": {
+      "story": "data-datatable--ready",
+      "combo": "fr-dark",
+      "width": 1280,
+      "height": 1358,
+      "originalSha256": "de95e3f8781a59c056343993a7940a89185bb0797e377bea236242755b0f201e",
+      "overrideSha256": "3ec7433eb6525272bd34f0f6776a324853ffcf5125e8f42c8f49c8bfcfe7b0f4",
+      "reviewedChangedPixels": 21,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11 sept. 2026",
+          "glyph": "1",
+          "tag": "TD",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "Arial-BoldMT",
+            "isCustomFont": false,
+            "glyphCount": 4
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "d759b12d9543a4f9613b15f8cacc958e6ff75b9e3cccdb34aea5cc7c1e505e91",
+        "layoutSha256": "4890733deea6e094e0442b2e79777e8ffb5d713c42e0da637b4236de9bcbd205"
+      }
+    },
+    "p1b-dates--dates-story--en-light.png": {
+      "story": "p1b-dates--dates-story",
+      "combo": "en-light",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "99bc62dcb76fc35d35882a23aaefa7ba33de817a30c412a0d1259bb76e97d908",
+      "overrideSha256": "cf5063952bdab376d575371f436907e7ba4fa4aca2b4d581156e0b0532fdc7ac",
+      "reviewedChangedPixels": 23,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "DIV",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 11
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "61d2c1c5f0b32c84e1bb75cd9e152ac260aa2a739dd6fc1ed0ca1065df883795",
+        "layoutSha256": "88aee44bf64472fd237e312875ad1911c5da2214097fe7ec87ddd5c34a508590"
+      }
+    },
+    "p1b-dates--dates-story--en-dark.png": {
+      "story": "p1b-dates--dates-story",
+      "combo": "en-dark",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "caa8872e553108f22027791de70435fd2b375020547e7d6a203b1d557805a776",
+      "overrideSha256": "d8478565c2f40b396cd261ef4ba0c9f18cc11fc94a79e59deadda0c0b048f9dd",
+      "reviewedChangedPixels": 24,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "DIV",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 11
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "61d2c1c5f0b32c84e1bb75cd9e152ac260aa2a739dd6fc1ed0ca1065df883795",
+        "layoutSha256": "88aee44bf64472fd237e312875ad1911c5da2214097fe7ec87ddd5c34a508590"
+      }
+    },
+    "p1b-dates--dates-story--ar-light.png": {
+      "story": "p1b-dates--dates-story",
+      "combo": "ar-light",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "cd40636dbfb69c4e2977393302eabf0e479141a52faff9b68a43f00abe998cff",
+      "overrideSha256": "e10f4a10c8a6f262f9e9ab37d8e069393f47932075820fab7e2e2d3da4f1f5a8",
+      "reviewedChangedPixels": 23,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "DIV",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 12
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "099ac82def5a7e5dae7e1a731e40275c404b085b53e44bdf63b13a9cc115001a",
+        "layoutSha256": "2df2724c3b1c4e7428246dd0977bb88b1e5c1d9a0571105cf4c3441f13d700bd"
+      }
+    },
+    "p1b-dates--dates-story--ar-dark.png": {
+      "story": "p1b-dates--dates-story",
+      "combo": "ar-dark",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "823b0d924ea66836d95c57fe314c8ae8115780e141ade7303d77e3b342317652",
+      "overrideSha256": "3589ad870fcfd8690b9512bc0218338f67063b0464d7af85627578f172b131b6",
+      "reviewedChangedPixels": 24,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "DIV",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 12
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "099ac82def5a7e5dae7e1a731e40275c404b085b53e44bdf63b13a9cc115001a",
+        "layoutSha256": "2df2724c3b1c4e7428246dd0977bb88b1e5c1d9a0571105cf4c3441f13d700bd"
+      }
+    },
+    "p1b-dates--dates-story--de-light.png": {
+      "story": "p1b-dates--dates-story",
+      "combo": "de-light",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "bb4a4f29da06b2622f1e2a9ffb0c4cda331b1b71a394c3f64d22b76b343777b7",
+      "overrideSha256": "1224421face4796d2dff5fdf1fb4b1a5fc453dbf6b3eee638180d4d3fb13f598",
+      "reviewedChangedPixels": 23,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "DIV",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 10
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "ee3dde74e46495c036ecaa3c0ad52f5e4411da6320c276ebc767fdc0da7896c5",
+        "layoutSha256": "88aee44bf64472fd237e312875ad1911c5da2214097fe7ec87ddd5c34a508590"
+      }
+    },
+    "p1b-dates--dates-story--fr-dark.png": {
+      "story": "p1b-dates--dates-story",
+      "combo": "fr-dark",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "591f353dab7239a79bf5e0b9d72e31b9a803da241d89051b762275895ce2b11f",
+      "overrideSha256": "27c87e98dd68062b9d32978010103d8765bba00e170bb8d25b90b2d09d7f423e",
+      "reviewedChangedPixels": 24,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        {
+          "text": "11",
+          "glyph": "1",
+          "tag": "DIV",
+          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root button": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 12
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "6f9892daefdb17bca9ba060d12a4442f4ea63e40c395e186c8446b53eb6168d1",
+        "layoutSha256": "88aee44bf64472fd237e312875ad1911c5da2214097fe7ec87ddd5c34a508590"
+      }
+    },
+    "foundations-tokens--semantic-colors--en-light.png": {
+      "story": "foundations-tokens--semantic-colors",
+      "combo": "en-light",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "c887e1145a06b222eb96af08e5b88a3df28b9efc0893c4582b184ee3260e4489",
+      "overrideSha256": "d5b80e12924bcda51c2efda801190521fdbdcd8254cae7426a1f08bb29a0ee6d",
+      "reviewedChangedPixels": 11,
+      "affectedGlyphs": [
+        "1",
+        "4",
+        "5"
+      ],
+      "affectedText": [
+        {
+          "text": "viz-1",
+          "glyph": "1",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-4",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-5",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 14
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
+        "layoutSha256": "bbd00fca2e35dc1b2482f85a6e961a56b9f174919d508ab3798d2311717e2185"
+      }
+    },
+    "foundations-tokens--semantic-colors--en-dark.png": {
+      "story": "foundations-tokens--semantic-colors",
+      "combo": "en-dark",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "9678ec9341f0933669d03b97141a65463727810b03c0aaf82ea51792f062707b",
+      "overrideSha256": "9ad96eee55ebf5d5eb419a9e2dc4e49eb1590ea273bb04af9d15fca0d7ec0bd6",
+      "reviewedChangedPixels": 29,
+      "affectedGlyphs": [
+        "z",
+        "2",
+        "4"
+      ],
+      "affectedText": [
+        {
+          "text": "viz-1",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-2",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-2",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-3",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-4",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-4",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-5",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-6",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-7",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-8",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 14
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
+        "layoutSha256": "bbd00fca2e35dc1b2482f85a6e961a56b9f174919d508ab3798d2311717e2185"
+      }
+    },
+    "foundations-tokens--semantic-colors--ar-light.png": {
+      "story": "foundations-tokens--semantic-colors",
+      "combo": "ar-light",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "36ae9f086c0dffb266d5a505726e8e71e5bd5bc8869fd2256adb57c45e14b709",
+      "overrideSha256": "a80237d90b895172fc245bcd37d8beffd9ef661133f6e9614c9387cd4c9650fa",
+      "reviewedChangedPixels": 1,
+      "affectedGlyphs": [
+        "5"
+      ],
+      "affectedText": [
+        {
+          "text": "viz-5",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 14
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
+        "layoutSha256": "b5a23d2d4246a9915ea8bd004db84b350a03338c9cf194f55a9084be5f9b004b"
+      }
+    },
+    "foundations-tokens--semantic-colors--ar-dark.png": {
+      "story": "foundations-tokens--semantic-colors",
+      "combo": "ar-dark",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "49d3a57646f49197274d8146bec6fafa29b8b9a9a3d41c7522de739cac07a76b",
+      "overrideSha256": "3e59d5143475545ebf2849aea526dca3801d228771551e2a9c014c29b4bdc518",
+      "reviewedChangedPixels": 30,
+      "affectedGlyphs": [
+        "z",
+        "2",
+        "4"
+      ],
+      "affectedText": [
+        {
+          "text": "viz-1",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-2",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-2",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-3",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-4",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-4",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-5",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-6",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-7",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-8",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 14
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
+        "layoutSha256": "b5a23d2d4246a9915ea8bd004db84b350a03338c9cf194f55a9084be5f9b004b"
+      }
+    },
+    "foundations-tokens--semantic-colors--de-light.png": {
+      "story": "foundations-tokens--semantic-colors",
+      "combo": "de-light",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "c887e1145a06b222eb96af08e5b88a3df28b9efc0893c4582b184ee3260e4489",
+      "overrideSha256": "d5b80e12924bcda51c2efda801190521fdbdcd8254cae7426a1f08bb29a0ee6d",
+      "reviewedChangedPixels": 11,
+      "affectedGlyphs": [
+        "1",
+        "4",
+        "5"
+      ],
+      "affectedText": [
+        {
+          "text": "viz-1",
+          "glyph": "1",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-4",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-5",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 14
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
+        "layoutSha256": "bbd00fca2e35dc1b2482f85a6e961a56b9f174919d508ab3798d2311717e2185"
+      }
+    },
+    "foundations-tokens--semantic-colors--fr-dark.png": {
+      "story": "foundations-tokens--semantic-colors",
+      "combo": "fr-dark",
+      "width": 1280,
+      "height": 800,
+      "originalSha256": "9678ec9341f0933669d03b97141a65463727810b03c0aaf82ea51792f062707b",
+      "overrideSha256": "9ad96eee55ebf5d5eb419a9e2dc4e49eb1590ea273bb04af9d15fca0d7ec0bd6",
+      "reviewedChangedPixels": 29,
+      "affectedGlyphs": [
+        "z",
+        "2",
+        "4"
+      ],
+      "affectedText": [
+        {
+          "text": "viz-1",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-2",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-2",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-3",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-4",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-4",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-5",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-6",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-7",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "viz-8",
+          "glyph": "z",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 14
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
+        "layoutSha256": "bbd00fca2e35dc1b2482f85a6e961a56b9f174919d508ab3798d2311717e2185"
+      }
+    },
+    "foundations-tokens--type-roles--en-light.png": {
+      "story": "foundations-tokens--type-roles",
+      "combo": "en-light",
+      "width": 1280,
+      "height": 875,
+      "originalSha256": "806b31ebd7b2828d5e3a8aa07dff4593a60d8413843001a8663bc87829a8d186",
+      "overrideSha256": "f0b4cf3a7f9914e0c134fa4d92c9f6fc253d21b853a424dc4df012b0eef2375d",
+      "reviewedChangedPixels": 19,
+      "affectedGlyphs": [
+        "5",
+        "4"
+      ],
+      "affectedText": [
+        {
+          "text": "1.25",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.35",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "400",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.55",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.5",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.45",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 41
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
+        "layoutSha256": "37fcea9467ca478d184ef0ee10cc5d1f12b020eebb8c0ac4cc34584b82237715"
+      }
+    },
+    "foundations-tokens--type-roles--en-dark.png": {
+      "story": "foundations-tokens--type-roles",
+      "combo": "en-dark",
+      "width": 1280,
+      "height": 875,
+      "originalSha256": "53f70aaa6baa60a256d343f495dd3e1df7c366fb4368f448c9f5e0d1b87de7e0",
+      "overrideSha256": "d193637020f985d400f7574a56d2af40f16812941f544b32674409a6415b4408",
+      "reviewedChangedPixels": 35,
+      "affectedGlyphs": [
+        "2",
+        "5",
+        "4"
+      ],
+      "affectedText": [
+        {
+          "text": "1.2",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "28px",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.25",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.25",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "20px",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.35",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "400",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.55",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.5",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "12px",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.45",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 41
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
+        "layoutSha256": "37fcea9467ca478d184ef0ee10cc5d1f12b020eebb8c0ac4cc34584b82237715"
+      }
+    },
+    "foundations-tokens--type-roles--ar-light.png": {
+      "story": "foundations-tokens--type-roles",
+      "combo": "ar-light",
+      "width": 1280,
+      "height": 944,
+      "originalSha256": "0e5fea65e2ffaa4380ab01bce8c2a99a2d60c91cae3f7d0c9debc327e54119c1",
+      "overrideSha256": "39cfc7721b159d042a70872828cab634eb2d90ccda54ac645e2ff88299ec2acc",
+      "reviewedChangedPixels": 19,
+      "affectedGlyphs": [
+        "5",
+        "4"
+      ],
+      "affectedText": [
+        {
+          "text": "1.25",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.35",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "400",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.55",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.5",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.45",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 41
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
+        "layoutSha256": "fa8344b34ee17db5d912df2d9dd605b45730a4904eebf9a070ddd524bcb01a87"
+      }
+    },
+    "foundations-tokens--type-roles--ar-dark.png": {
+      "story": "foundations-tokens--type-roles",
+      "combo": "ar-dark",
+      "width": 1280,
+      "height": 944,
+      "originalSha256": "9092c1697b36471e29a7059df0e93a14361025ba1c37cc3e5223b811d4f194e0",
+      "overrideSha256": "6d88a9e27aa16db207e099921fb523b8a4600ae46102a5aa0f61e4bebdd3dfef",
+      "reviewedChangedPixels": 35,
+      "affectedGlyphs": [
+        "2",
+        "5",
+        "4"
+      ],
+      "affectedText": [
+        {
+          "text": "1.2",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "28px",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.25",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.25",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "20px",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.35",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "400",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.55",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.5",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "12px",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.45",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 41
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
+        "layoutSha256": "fa8344b34ee17db5d912df2d9dd605b45730a4904eebf9a070ddd524bcb01a87"
+      }
+    },
+    "foundations-tokens--type-roles--de-light.png": {
+      "story": "foundations-tokens--type-roles",
+      "combo": "de-light",
+      "width": 1280,
+      "height": 875,
+      "originalSha256": "806b31ebd7b2828d5e3a8aa07dff4593a60d8413843001a8663bc87829a8d186",
+      "overrideSha256": "f0b4cf3a7f9914e0c134fa4d92c9f6fc253d21b853a424dc4df012b0eef2375d",
+      "reviewedChangedPixels": 19,
+      "affectedGlyphs": [
+        "5",
+        "4"
+      ],
+      "affectedText": [
+        {
+          "text": "1.25",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.35",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "400",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.55",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.5",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.45",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 41
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
+        "layoutSha256": "37fcea9467ca478d184ef0ee10cc5d1f12b020eebb8c0ac4cc34584b82237715"
+      }
+    },
+    "foundations-tokens--type-roles--fr-dark.png": {
+      "story": "foundations-tokens--type-roles",
+      "combo": "fr-dark",
+      "width": 1280,
+      "height": 875,
+      "originalSha256": "53f70aaa6baa60a256d343f495dd3e1df7c366fb4368f448c9f5e0d1b87de7e0",
+      "overrideSha256": "d193637020f985d400f7574a56d2af40f16812941f544b32674409a6415b4408",
+      "reviewedChangedPixels": 35,
+      "affectedGlyphs": [
+        "2",
+        "5",
+        "4"
+      ],
+      "affectedText": [
+        {
+          "text": "1.2",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "28px",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.25",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.25",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "20px",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.35",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "400",
+          "glyph": "4",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.55",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.5",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "12px",
+          "glyph": "2",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        },
+        {
+          "text": "1.45",
+          "glyph": "5",
+          "tag": "CODE",
+          "font": "ui-monospace, SFMono-Regular, \"Cascadia Code\", Consolas, \"Liberation Mono\", monospace"
+        }
+      ],
+      "platformFonts": {
+        "#storybook-root code": [
+          {
+            "familyName": "Cascadia Code",
+            "postScriptName": "CascadiaCodeRoman",
+            "isCustomFont": false,
+            "glyphCount": 41
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
+        "layoutSha256": "37fcea9467ca478d184ef0ee10cc5d1f12b020eebb8c0ac4cc34584b82237715"
+      }
+    }
+  }
+}

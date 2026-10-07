@@ -19,6 +19,18 @@ const of = (type) =>
     );
 const byId = (type, id) =>
   (snapshot.entries[type] ?? []).find((e) => e.id === id);
+const externalHref = (value) => {
+  try {
+    const url = new URL(String(value || "").trim());
+    return ["https:", "http:"].includes(url.protocol) &&
+      !url.username &&
+      !url.password
+      ? url.href
+      : null;
+  } catch {
+    return null;
+  }
+};
 // A record's words in the page's language, else English (S5; the name is from before languages).
 const en = (e) => wordsOf(e.locales);
 const page = (key) => en(byId("page", `pg_${key}`));
@@ -179,6 +191,27 @@ export const content = {
   MENU: () => clone(global("header")?.menu ?? []),
   FOOT_EXPLORE: () => clone(global("footer")?.explore ?? []),
   FOOT_START: () => clone(global("footer")?.start ?? []),
+  PARTNER_INFO: () => clone(en(byId("page", "pg_partners"))?.intro ?? {}),
+  PARTNERS: () =>
+    clone(en(byId("page", "pg_partners"))?.partners ?? [])
+      .filter(
+        (p) =>
+          p.visible !== false &&
+          p.name &&
+          /^\/assets\/|^https:\/\//.test(p.logo || ""),
+      )
+      .map((p) => ({
+        ...p,
+        profileHref: `/legal/partners#${encodeURIComponent(p.id)}`,
+        website: externalHref(p.website),
+        accounts: (Array.isArray(p.accounts) ? p.accounts : [])
+          .filter((account) => account && typeof account === "object")
+          .map((account) => ({
+            label: String(account.label || "").trim(),
+            url: externalHref(account.url),
+          }))
+          .filter((account) => account.label && account.url),
+      })),
   // Services.jsx, About.jsx
   FAM: () => families(),
   STORIES: () => page("services").stories.map((s) => [s.title, s.body, s.icon]),

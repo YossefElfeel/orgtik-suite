@@ -13,6 +13,8 @@
     "invalidCredentials": "E-mail e password non corrispondono a nessun account. Controllale e riprova.",
     "validationFailed": "Controlla i campi evidenziati e riprova.",
     "failed": "Accesso non riuscito. Controlla la connessione e riprova.",
+    "handoffExpired": "Questo link di accesso è scaduto o è già stato utilizzato.",
+    "handoffSignIn": "Accedi di nuovo per continuare al tuo account.",
     "language": "Lingua",
     "passwordChanged": "Password cambiata. Accedi con la nuova password.",
     "accountReady": "Il tuo account è pronto. Accedi con la tua e-mail e la password scelta."

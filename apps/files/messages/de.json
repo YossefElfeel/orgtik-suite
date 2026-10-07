@@ -355,7 +355,6 @@
   "Restore": {
     "titleSingle": "{type} wiederherstellen",
     "titleBulk": "{type} wiederherstellen",
-    "confirmMessage": "Sind Sie sicher, dass Sie {item} wiederherstellen möchten?",
     "confirmDescription": "Es wird zurück in Ihre Haupt-{type} verschoben.",
     "files": "Dateien",
     "folders": "Ordner",

@@ -56,12 +56,28 @@ Each decision gets a `D-###.md` file with its context, options, decision, conseq
 | [D-041](D-041.md) | The website's forms (contact, idea suggestions) go live **locally on the mock** now: leads and ideas reach the Website Manager. Going live in production still needs a real privacy policy and a retention period. | Yossef | 2026-10-01 |
 | [D-042](D-042.md) | The Arabic website (D-036) is built after the dashboard waves | Yossef | 2026-10-01 |
 | [D-043](D-043.md) | Waves run in parallel sessions: another session runs Tasks; this session runs Chats (HQ) next, as the plan pairs them | Yossef | 2026-10-01 |
-| [D-044](D-044.md) | Everything stays local: no pushes, and @orgtik/ui isn't published, until GitLab access and sdk.orgtik.org publish rights exist. *Exception 2026-10-07: one fresh-history snapshot in the private repo orgtik-suite, hosted on Vercel as a prototype* | Yossef | 2026-10-01 |
+| [D-044](D-044.md) | Everything stays local: no pushes, and @orgtik/ui isn't published, until GitLab access and sdk.orgtik.org publish rights exist. *Exception 2026-10-07: one fresh-history snapshot in the private repo orgtik-suite, hosted on Vercel as a prototype. **Superseded by D-052** (2026-10-07) for orgtik-suite* | Yossef | 2026-10-01 |
 | [D-045](D-045.md) | The pricing-override colour is the brand violet (brand tone, with an icon and a word), not the spec's orange | Yossef | 2026-10-01 |
 | [D-046](D-046.md) | Chats keeps its accent presets (each person chooses Chats' accent colour); the rest of Chats follows the brand | Yossef | 2026-10-01 |
 
 - [D-047](D-047.md): Restore the clearly labelled sample Roadmap with local preview voting (2026-10-05).
 - [D-048](D-048.md): Permanently redirect deleted work and legacy project addresses to Work (2026-10-05).
+- D-049, D-050, D-051: reserved by `plans/2026-10-06-bugs-and-remaining.md` (restored projects; the Roadmap follows the owner's GitHub version; the sign-in success screen only on success). Written when that work order is finished.
+- [D-052](D-052.md): `orgtik-suite` is the source of truth; branch → PR → Vercel preview; local repos frozen. Supersedes D-044's no-push rule (2026-10-07).
+- [D-053](D-053.md): The hosted mock keeps its data: write journal in Upstash Redis, sandboxes demo/preview/review/local (2026-10-07).
+- [D-054](D-054.md): `@orgtik/ui` is a workspace package; pnpm workspace + Turborepo; yalc retired (2026-10-07).
+- [D-055](D-055.md): Retire the Content dashboard, Sales' 17 frozen routes, SOS's superseded screens, the `components/ui` shims and `@somion/sos-bar` (2026-10-07).
+- [D-056](D-056.md): Build order after the review: R1 suite foundation → R2 apps working together → R3 tools complete (top 8 Expected features per tool) → R4 SaaS core completeness (2026-10-07).
+- [D-057](D-057.md): Website copy and flow fixes found by the review are made on our side (the CMS-connected website in this monorepo); the owner's repository is never changed (2026-10-07).
+- [D-058](D-058.md): The platform's price resolver (spec 03) is the single price authority; the website reads prices and products from the platform (2026-10-07).
+- [D-059](D-059.md): 'Website Manager' sold on the website is a managed website service: buying it opens a service request for OrgTik's team (2026-10-07).
+- [D-060](D-060.md): G-12 tax display is per region: GCC prices include VAT; Europe and Switzerland show prices excluding VAT, labelled; EU business customers with a valid VAT ID get reverse charge (2026-10-07).
+- [D-061](D-061.md): G-04 seat model: seats per tool. The owner buys a seat count for each per-user tool and assigns seats to members; an invitation or a tool grant needs a free seat in that tool (2026-10-07).
+- [D-062](D-062.md): Gulf payment gateways follow spec 03: Tap and HyperPay (2026-10-07).
+- [D-063](D-063.md): Persistent hosted prototype; preserve R0–R4 and deliver prerequisites when needed, with task-based UI/UX acceptance and explicit live-provider deferrals (2026-10-07).
+- [D-064](D-064.md): Platform-priced website offers retain 1/3/6/12-month terms and existing greater-of duration/item savings; paid mock orders precede idempotent account linking (2026-10-07).
+- [D-065](D-065.md): Automatic mock visitor-region detection, Switzerland fallback and controlled test overrides; signed-in workspace billing context wins; no new country selector (2026-10-07).
+- [D-066](D-066.md): Packaged file bytes only, with persistent scoped metadata/references/versions and structured whiteboard state exposed through Files; arbitrary uploads remain deferred (2026-10-07).
 
 ## Proposed
 

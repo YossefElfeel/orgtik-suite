@@ -75,7 +75,8 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
 
         // Retry the original request with new token
         result = await baseQuery(args, api, extraOptions);
-      } else handleUserLogout(api);
+      } else if (refreshResult.error?.status === 401 || refreshResult.error?.status === 403) handleUserLogout(api);
+      else return refreshResult; // A temporary outage must not erase the valid refresh session.
     } else handleUserLogout(api);
   }
 

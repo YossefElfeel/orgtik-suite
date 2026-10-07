@@ -1,0 +1,29 @@
+// Use a fresh loopback connection for each pinned mock request. A pooled fetch connection
+// can race server shutdown/idle timeouts while the global mock clock changes during replay.
+const http = require("node:http");
+
+const HOP = new Set(["host", "connection", "content-length", "transfer-encoding", "keep-alive", "expect", "upgrade"]);
+
+function dispatch(base, key, { method, url, headers, body }) {
+  const h = { "x-mock-app": key, connection: "close" };
+  for (const [name, value] of Object.entries(headers || {})) {
+    if (!HOP.has(name.toLowerCase()) && value != null) h[name] = Array.isArray(value) ? value.join(", ") : String(value);
+  }
+  if (body?.length) h["content-length"] = String(body.length);
+  return new Promise((resolve, reject) => {
+    const request = http.request(new URL(url, base), { method, headers: h, agent: false, maxHeaderSize: 64 * 1024 }, response => {
+      const chunks = [];
+      response.on("data", chunk => chunks.push(chunk));
+      response.on("error", reject);
+      response.on("end", () => resolve({
+        statusCode: response.statusCode,
+        headers: Object.fromEntries(Object.entries(response.headers).filter(([name]) => !HOP.has(name))),
+        rawPayload: Buffer.concat(chunks),
+      }));
+    });
+    request.on("error", reject);
+    request.end(body?.length ? body : undefined);
+  });
+}
+
+module.exports = { dispatch };

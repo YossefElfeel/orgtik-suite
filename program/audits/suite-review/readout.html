@@ -1,0 +1,206 @@
+<title>مراجعة سويت OrgTik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: one reading column (RTL) with full-width tables and a release lane; plum brand accents, status chips by meaning. */
+:root{
+  --bg:#f7f5fa; --surface:#ffffff; --sunken:#efeaf5; --fg:#1d1428; --muted:#5d5268; --line:#e2dbea;
+  --accent:#6c3caa; --accent-strong:#3b1e59; --accent-soft:#ece3f8;
+  --ok:#1f7a4d; --ok-bg:#e3f4ea; --warn:#8a5a00; --warn-bg:#fbf0d9; --bad:#b3261e; --bad-bg:#fbe5e3; --none:#5d5268; --none-bg:#ece9ef;
+  --font-ar:"IBM Plex Sans Arabic","Segoe UI","Noto Sans Arabic",Tahoma,sans-serif;
+  --font-lat:"Montserrat","Segoe UI",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#130d1a; --surface:#1c1426; --sunken:#241a30; --fg:#efe9f6; --muted:#b2a7bf; --line:#352a43;
+  --accent:#b48cf2; --accent-strong:#d9c6fa; --accent-soft:#2c2040;
+  --ok:#7fd3a6; --ok-bg:#16301f; --warn:#f0c46b; --warn-bg:#33270e; --bad:#ff9d94; --bad-bg:#3a1714; --none:#b2a7bf; --none-bg:#2a2233;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#130d1a; --surface:#1c1426; --sunken:#241a30; --fg:#efe9f6; --muted:#b2a7bf; --line:#352a43;
+  --accent:#b48cf2; --accent-strong:#d9c6fa; --accent-soft:#2c2040;
+  --ok:#7fd3a6; --ok-bg:#16301f; --warn:#f0c46b; --warn-bg:#33270e; --bad:#ff9d94; --bad-bg:#3a1714; --none:#b2a7bf; --none-bg:#2a2233;
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-ar);font-size:16px;line-height:1.75;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:32px 64px;display:flex;flex-direction:column;gap:40px}
+[dir="ltr"],.lat{font-family:var(--font-lat);unicode-bidi:isolate}
+h1,h2,h3{text-wrap:balance;line-height:1.35;margin:0}
+h1{font-size:clamp(1.7rem,3.6vw,2.4rem);font-weight:700;color:var(--accent-strong)}
+h2{font-size:1.35rem;font-weight:700}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0;max-width:68ch}
+.eyebrow{font-size:.8rem;font-weight:600;color:var(--accent);letter-spacing:.02em}
+section{display:flex;flex-direction:column;gap:16px}
+.lead{font-size:1.08rem;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.stat b{font-family:var(--font-lat);font-size:1.7rem;font-variant-numeric:tabular-nums;color:var(--accent-strong);line-height:1.2}
+.stat span{color:var(--muted);font-size:.9rem}
+.core{background:var(--accent-soft);border-radius:16px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.core ul{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:4px}
+.layers{display:grid;grid-template-columns:1fr;gap:8px;margin-top:6px}
+.apps{display:flex;flex-wrap:wrap;gap:8px}
+.app{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-family:var(--font-lat);font-size:.85rem}
+.missing-layer{border:2px dashed var(--bad);border-radius:12px;padding:10px 14px;color:var(--bad);font-weight:600;text-align:center}
+.platform{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;text-align:center;font-weight:600}
+.tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93rem}
+th,td{text-align:start;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.82rem;color:var(--muted);font-weight:600;background:var(--sunken)}
+tr:last-child td{border-bottom:none}
+td.num{font-family:var(--font-lat);font-variant-numeric:tabular-nums;white-space:nowrap}
+.chip{display:inline-block;border-radius:999px;padding:1px 10px;font-size:.8rem;font-weight:600;white-space:nowrap}
+.ok{background:var(--ok-bg);color:var(--ok)} .part{background:var(--warn-bg);color:var(--warn)} .bad{background:var(--bad-bg);color:var(--bad)} .none{background:var(--none-bg);color:var(--none)}
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:flex;flex-direction:column;gap:4px}
+.track{display:flex;height:22px;border-radius:8px;overflow:hidden;background:var(--sunken)}
+.track>i{display:block;height:100%}
+.legend{display:flex;flex-wrap:wrap;gap:12px;font-size:.85rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-end:6px;background:var(--c)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card ol,.card ul{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:3px;font-size:.93rem}
+.counts{font-size:.85rem;color:var(--muted)}
+.release{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.release .tag{font-family:var(--font-lat);font-weight:700;color:var(--accent);background:var(--accent-soft);border-radius:10px;padding:6px 10px;min-width:44px;text-align:center}
+.release .body{display:flex;flex-direction:column;gap:6px;min-width:0}
+.meta{font-size:.85rem;color:var(--muted)}
+.decisions li{margin-bottom:6px}
+footer{font-size:.85rem;color:var(--muted)}
+code{font-family:var(--font-lat);font-size:.85em;background:var(--sunken);padding:1px 6px;border-radius:6px;unicode-bidi:isolate}
+</style>
+
+<div class="wrap" dir="rtl" lang="ar">
+<header style="display:flex;flex-direction:column;gap:10px">
+  <span class="eyebrow">خطة v2 · المرحلة ١ و٢ · ٧ أكتوبر ٢٠٢٦</span>
+  <h1>مراجعة سويت OrgTik كمنتج واحد</h1>
+  <p class="lead">مشيت ١٥ رحلة بتعدّي بين الأبلكيشنز، وراجعت الـ ٢٢٨ بند بتوع السبيك من الأول، وقارنت كل tool بالمنتجات اللي اليوزر متعود عليها. النتيجة: كل أبلكيشن لوحده كويس، والـ SaaS core كويس جوّه نفسه. اللي ناقص هو الطبقة اللي بتربطهم ببعض.</p>
+</header>
+
+<section aria-labelledby="s-nums">
+  <h2 id="s-nums">بالأرقام</h2>
+  <div class="stats">
+    <div class="stat"><b>15</b><span>رحلة: ٢ شغالين، ٤ جزئي، ٤ بيقفوا، ٥ ناقصين</span></div>
+    <div class="stat"><b>26</b><span>ملاحظة من الرحلات (SR-001…026)، منهم ٤ خطيرين S1</span></div>
+    <div class="stat"><b>228</b><span>بند سبيك اتراجعوا كلهم النهارده</span></div>
+    <div class="stat"><b>176</b><span>فيتشر متوقعة أو مميزة ناقصة في الـ ٩ tools</span></div>
+    <div class="stat"><b>407</b><span>بند في الـ backlog، مترتبين بالأثر ÷ المجهود</span></div>
+  </div>
+</section>
+
+<section aria-labelledby="s-core">
+  <h2 id="s-core">أهم استنتاج: الطبقة اللي في النص مش موجودة</h2>
+  <div class="core">
+    <p>٨ من الـ ١٥ رحلة بيقفوا في نفس المكان. كل tool (Tasks وHR وFiles وSales وMarketing) عنده داتا واحدة مشتركة لشركة demo، من غير أي مفهوم لـ "مساحة عمل العميل". والمنصة (USR/ADM) بتعرف المساحات والاشتراكات، بس محدش بيسمع منها.</p>
+    <div class="layers" aria-label="شكل الطبقات">
+      <div class="apps"><span class="app">Tasks</span><span class="app">HR</span><span class="app">Files</span><span class="app">Sales</span><span class="app">Marketing</span><span class="app">Chats</span><span class="app">WM</span></div>
+      <div class="missing-layer">ناقص: مساحة العمل في كل tool · الاشتراك/التجربة/المقعد = صلاحية دخول · شخص واحد بدل ٣ · أحداث بتعدّي بين الأبلكيشنز</div>
+      <div class="platform">المنصة: الهوية (SOS) + المساحات والاشتراكات والفواتير (USR/ADM)</div>
+    </div>
+    <ul>
+      <li><b>عميل دفع على الويبسايت</b> ودخل مساحته، لقى Tasks "Active"، داس Open، طلعله "You can't open Tasks" (SR-001).</li>
+      <li><b>دعوة عضو في الفريق</b> بتتسجل وبتوضح تمن المقعد، بس مفيش لينك ولا إيميل، فالعضو عمره ما هيقدر يدخل (SR-013).</li>
+      <li><b>لو الفاتورة ما اتدفعتش</b>، USR بيعرض الـ banner، لكن ولا tool بيقفل التعديل (SR-016).</li>
+      <li><b>لو حد قدر يفتح Tasks</b> هيشوف مشاريع Nile Foods، لأن مفيش فصل بين العملاء (SR-015).</li>
+    </ul>
+  </div>
+</section>
+
+<section aria-labelledby="s-journeys">
+  <h2 id="s-journeys">الـ ١٥ رحلة</h2>
+  <div class="tablebox"><table>
+    <thead><tr><th>#</th><th>الرحلة</th><th>النتيجة</th><th>بتقف فين</th></tr></thead>
+    <tbody>
+      <tr><td class="num">J1</td><td>زائر يشتري من الويبسايت ← يعمل حساب ← يستخدم الـ tool</td><td><span class="chip bad">بتقف</span></td><td>الشراء والتسجيل تمام والفاتورة اتعملت، بس فتح الـ tool ممنوع</td></tr>
+      <tr><td class="num">J2</td><td>صاحب المساحة يدعي عضو ← العضو يدخل ويستخدم Tasks</td><td><span class="chip bad">بتقف</span></td><td>مفيش طريقة يقبل بيها الدعوة</td></tr>
+      <tr><td class="num">J3</td><td>التجديد فشل ← past due ← read-only في كل tool ← دفع ← رجع</td><td><span class="chip bad">بتقف</span></td><td>الـ tools مش عارفة حالة الفاتورة</td></tr>
+      <tr><td class="num">J4</td><td>الإدارة تطلق tool جديدة ← تظهر على الويبسايت وفي My Tools</td><td><span class="chip part">جزئي</span></td><td>USR بيتحدّث، الويبسايت لأ</td></tr>
+      <tr><td class="num">J5</td><td>الإدارة تغيّر سعر ← الويبسايت وUSR</td><td><span class="chip bad">بتقف</span></td><td>فيه مصدرين للأسعار: CRM بـ CHF 59 على الويبسايت، وبـ CHF 15 للفرد × ٢ في المساحة</td></tr>
+      <tr><td class="num">J6</td><td>lead من الويبسايت ← WM ← Sales ← صفقة اتقفلت ← مساحة للعميل</td><td><span class="chip part">جزئي</span></td><td>الـ lead بيوصل لـ Sales، بس الصفقة اللي بتتقفل مش بتعمل مساحة، والمشتريات مش بتعدّي على Sales</td></tr>
+      <tr><td class="num">J7</td><td>HR يعيّن موظف ← يبقى يوزر في السويت ← إجازة ← المدير يوافق</td><td><span class="chip none">ناقصة</span></td><td>الموظف في HR مش يوزر في السويت</td></tr>
+      <tr><td class="num">J8</td><td>مشروع في Tasks بملفات من Files ونقاش في Chats</td><td><span class="chip none">ناقصة</span></td><td>كل أبلكيشن شايل ملفاته لوحده، وChats بيمسح كل حاجة مع الـ reload</td></tr>
+      <tr><td class="num">J9</td><td>حملة Marketing ← صفحة في WM ← leads ← Sales</td><td><span class="chip none">ناقصة</span></td><td>Marketing مش مربوط بـ WM ولا بـ Sales</td></tr>
+      <tr><td class="num">J10</td><td>تذكرة دعم وطلب خدمة رايح جاي</td><td><span class="chip ok">شغالة</span></td><td>الناقص إشعارات وإيميلات</td></tr>
+      <tr><td class="num">J11</td><td>محرر يعدّل ← موافقة ← نشر ← يظهر على الويبسايت المنشور</td><td><span class="chip part">جزئي</span></td><td>محتاج pull وbuild وdeploy يدوي (قرار D-012 كان قراءة مباشرة)</td></tr>
+      <tr><td class="num">J12</td><td>الإدارة تعمل "View as" للعميل read-only</td><td><span class="chip ok">شغالة</span></td><td>—</td></tr>
+      <tr><td class="num">J13</td><td>اللغة والثيم يتظبطوا مرة واحدة ويتنقلوا مع اليوزر بين الأبلكيشنز</td><td><span class="chip part">جزئي</span></td><td>شغال على localhost، وعلى Vercel لأ (كل أبلكيشن له دومين)</td></tr>
+      <tr><td class="num">J14</td><td>إشعار من أبلكيشن يوصل لليوزر وهو في أبلكيشن تاني</td><td><span class="chip none">ناقصة</span></td><td>كل أبلكيشن له جرس لوحده</td></tr>
+      <tr><td class="num">J15</td><td>موظف يمشي ← تتشال صلاحياته ← شغله يتنقل لحد تاني</td><td><span class="chip none">ناقصة</span></td><td>نفس مشكلة J7</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section aria-labelledby="s-spec">
+  <h2 id="s-spec">بنود السبيك (الـ PM): قبل وبعد</h2>
+  <p>آخر مراجعة كانت ٣٠ سبتمبر، قبل الـ waves وPhase E. النهارده اتراجع كل بند في الكود والموك.</p>
+  <div class="bars">
+    <div class="bar"><span class="meta">٣٠ سبتمبر</span>
+      <div class="track" role="img" aria-label="٣٠ سبتمبر: ناقص ١٥٦، جزئي ٥٨، تعارض ١٤">
+        <i style="width:68.4%;background:var(--bad)"></i><i style="width:25.4%;background:var(--warn)"></i><i style="width:6.2%;background:var(--none)"></i>
+      </div></div>
+    <div class="bar"><span class="meta">٧ أكتوبر</span>
+      <div class="track" role="img" aria-label="٧ أكتوبر: تمام ٢٣، موجود فيه عيب ٢١، جزئي ١٦٨، ناقص ١٦">
+        <i style="width:10.1%;background:var(--ok)"></i><i style="width:9.2%;background:var(--accent)"></i><i style="width:73.7%;background:var(--warn)"></i><i style="width:7%;background:var(--bad)"></i>
+      </div></div>
+    <div class="legend"><span style="--c:var(--ok)">تمام <span class="lat">23</span></span><span style="--c:var(--accent)">موجود وفيه عيب <span class="lat">21</span></span><span style="--c:var(--warn)">جزئي <span class="lat">168</span></span><span style="--c:var(--bad)">ناقص <span class="lat">16</span> (كان 156)</span><span style="--c:var(--none)">تعارض (كان 14، دلوقتي 0)</span></div>
+  </div>
+  <p>معظم الشاشات موجودة دلوقتي، بس شروط القبول بتاعتها مش كاملة. أكتر حاجة متكررة: <b>الإدارة عمرها ما بتبعت إشعار أو إيميل</b>، و<b>مفيش حاجة بتشغّل التجديدات</b>. يعني تغييرات الأسعار المتجدولة والـ downgrades وإعادة محاولة الدفع عمرها ما بتحصل.</p>
+</section>
+
+<section aria-labelledby="s-money">
+  <h2 id="s-money">مشاكل في الفلوس (لازم تتصلح قبل أي demo فيه أسعار)</h2>
+  <div class="tablebox"><table>
+    <thead><tr><th>القاعدة</th><th>اللي بيحصل</th></tr></thead>
+    <tbody>
+      <tr><td class="num">P2</td><td>تاريخ تطبيق السعر بيتجاهل: سعر "الشهر الجاي" بيطبّق على العملاء الجداد النهارده</td></tr>
+      <tr><td class="num">P3 / P5</td><td>نشر سعر بـ "existing now" بيعيد تسعير كل خطوط الخطة في كل المناطق: عميل محتفظ بـ 45 SAR يتنقل لـ 50 SAR من غير إشعار</td></tr>
+      <tr><td class="num">ALG-7</td><td>الـ checkout بيصدق عدد المقاعد اللي جاي من المتصفح: مساحة فيها ١٠ أعضاء ممكن تتحاسب على ٢</td></tr>
+      <tr><td class="num">B1 / X3</td><td>أي <code>bundleId</code> بيدّي خصم ١٥٪ حتى على خطط برّه الباقة</td></tr>
+      <tr><td class="num">ALG-8</td><td>ترتيب الخصومات غلط، والتحويل من شهري لسنوي مش بيحسب الفترة اللي لسه ما اتستخدمتش</td></tr>
+      <tr><td class="num">TAX-EU</td><td>الـ reverse charge مش بيتطبق: شركة ألمانية عندها VAT ID بتتحاسب ١٩٪ بدل ٠٪</td></tr>
+      <tr><td class="num">C3 / R1</td><td>طلبات الويبسايت بتاخد العملة والإجمالي من الطلب نفسه، وتقرير الإيراد بالدولار بيطلع NaN</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section aria-labelledby="s-bench">
+  <h2 id="s-bench">كل tool مقارنة بالمنتجات اللي اليوزر يعرفها</h2>
+  <p class="meta">"متوقع" يعني يوزر المجال ده هيدوّر عليه. الأرقام: ناقص / جزئي. التفاصيل كلها في <code>program/audits/benchmark/</code>.</p>
+  <div class="grid2">
+    <div class="card"><h3>Tasks <span class="counts lat">vs Asana · Linear · ClickUp — 9 / 9</span></h3><ol><li>فلاتر وبحث في كل المهام</li><li>تذكيرات ومواعيد متأخرة وإشعارات</li><li>مهام بتتكرر وقوالب</li></ol></div>
+    <div class="card"><h3>HR <span class="counts lat">vs BambooHR · Personio · Zoho — 12 / 15</span></h3><ol><li>الـ offboarding يقفل حساب السويت</li><li>سياسات الإجازات والرصيد ظاهر للموظف</li><li>بروفايل وself-service للموظف، واستيراد الموظفين</li></ol></div>
+    <div class="card"><h3>Files <span class="counts lat">vs Drive · Dropbox — 9 / 8</span></h3><ol><li>إرفاق ملفات من Files في Tasks وChats</li><li>تاريخ النسخ ورفع نسخة جديدة</li><li>إشعار لما حد يشاركك ملف، وصلاحيات لكل شخص</li></ol></div>
+    <div class="card"><h3>Sales (CRM) <span class="counts lat">vs HubSpot · Pipedrive — 12 / 10</span></h3><ol><li>مهام متابعة عن طريق Tasks</li><li>استيراد وتصدير وتعديل جماعي</li><li>لوحة صفقات بمراحل قابلة للتعديل وتوقعات</li></ol></div>
+    <div class="card"><h3>Marketing <span class="counts lat">vs HubSpot · Mailchimp · Buffer — 11 / 5</span></h3><ol><li>ربط بالـ CRM ونسبة الـ leads للحملة</li><li>الموافقة على الرسائل وإلغاء الاشتراك، وإحصائيات التوصيل</li><li>نتائج الحملة: الصرف والضغطات وتكلفة الـ lead</li></ol></div>
+    <div class="card"><h3>Chats <span class="counts lat">vs Slack · Teams — 7 / 10</span></h3><ol><li>حفظ الرسايل وتوصيلها لحظيًا على باك إند</li><li>مشاركة ملفات حقيقية عن طريق Files</li><li>إشعارات desktop وإيميل</li></ol></div>
+    <div class="card"><h3>Website Manager <span class="counts lat">vs Webflow CMS · Storyblok — 5 / 5</span></h3><ol><li>النشر يحدّث الموقع لوحده (webhook)</li><li>analytics حقيقية بدل الأرقام التجريبية</li><li>إشعارات للمراجعين وللـ leads الجديدة</li></ol></div>
+    <div class="card"><h3>ADM <span class="counts lat">vs Stripe Billing · Chargebee — 8 / 9</span></h3><ol><li>إعادة محاولة الدفع وإيميلات الـ dunning</li><li>PDF للفاتورة وترقيم فواتير لكل كيان قانوني</li><li>تعديل اشتراك واحد (خطة، مقاعد، دورة)</li></ol></div>
+    <div class="card"><h3>USR (لوحة العميل) <span class="counts lat">vs Google Workspace · Atlassian admin — 10 / 6</span></h3><ol><li>2FA للفرد، وبعدين إجباري على مستوى المساحة</li><li>نقل الملكية (الشاشة بتوعد بيه ومفيش endpoint)</li><li>سجل نشاط المساحة، ومنه "View as" بتاع الإدارة</li></ol></div>
+  </div>
+</section>
+
+<section aria-labelledby="s-plan">
+  <h2 id="s-plan">الخطة المقترحة (محتاج موافقتك)</h2>
+  <p>الإصلاحات الصغيرة ومشاكل الفلوس شغال فيها من دلوقتي، زي ما الخطة بتقول. الحاجات الجديدة بتستنى اختيارك.</p>
+  <div class="release"><div class="tag">R0</div><div class="body"><h3>إصلاحات فورية (من غير موافقة)</h3><p>مشاكل الفلوس اللي فوق، وdowngrade مش بيتطبق، وفريق الخدمة شايف طلبات غيره، وقبول عرض خطة مخصصة مش بيعمل حاجة. ومعاهم الـ polish: "Renews on" (اتصلحت)، وأسماء أزرار Open، وعمود الإجمالي في الفواتير، وزرار فتح الـ tool بعد التجربة، والـ fetch المتكرر.</p><span class="meta">صغير لمتوسط · بيتسلّم PR بعد PR</span></div></div>
+  <div class="release"><div class="tag">R1</div><div class="body"><h3>أساس السويت (T1)</h3><p>مساحة العميل في كل tool، والاشتراك والتجربة والمقعد يبقوا صلاحية دخول في الـ launcher والـ <code>/go</code>، والدعوات تشتغل، وشخص واحد بين الهوية وأعضاء المساحة وموظفي HR، وحالة الفاتورة تقفل التعديل في كل tool. ده بيفتح J1 وJ2 وJ3 وJ7 وJ15.</p><span class="meta">كبير · أكبر قيمة · لازم قبل أي حاجة تانية تبان في demo</span></div></div>
+  <div class="release"><div class="tag">R2</div><div class="body"><h3>الأبلكيشنز مع بعض (T3)</h3><p>الملفات بين Files وTasks وChats، ومركز إشعارات واحد، وبحث في السويت كله، وCRM مربوط بالمنصة، ونشر WM يحدّث الموقع، واللغة والثيم يتنقلوا بين الدومينات، وتجربة مجانية من الويبسايت.</p><span class="meta">كبير</span></div></div>
+  <div class="release"><div class="tag">R3</div><div class="body"><h3>كل tool يكمل نفسه (T4)</h3><p>من قوايم المقارنة: أهم الفيتشرز المتوقعة لكل tool.</p><span class="meta">متوسط لكل tool · العمق على حسب اختيارك</span></div></div>
+  <div class="release"><div class="tag">R4</div><div class="body"><h3>اكتمال الـ SaaS core (T5)</h3><p>محرك التجديد والـ dunning، والـ proration، والـ limits واستخدامها، وwizard للـ onboarding، و2FA، وPDF للفواتير، ومقاييس الإيراد في ADM.</p><span class="meta">كبير · جزء منه مستني قرارات الـ PM</span></div></div>
+</section>
+
+<section aria-labelledby="s-dec">
+  <h2 id="s-dec">قرارات مش هتمشي من غيرها</h2>
+  <ol class="decisions">
+    <li><b>ليك:</b> ترتيب R1 ← R2 ← R3 ← R4، والعمق في R3 (أهم ٣ ولا أهم ٨ لكل tool).</li>
+    <li><b>ليك/للأونر:</b> نصوص الويبسايت (التسجيل بيقول "simulated"، والاسم والإيميل بيتطلبوا تاني بعد الشراء) جوّه ديزاين الأونر. نعدّلها ولا نسيبها للأونر؟</li>
+    <li><b>للـ PM:</b> مصدر واحد للأسعار: catalogs الويبسايت ولا الـ resolver بتاع المنصة؟ (SR-003، SR-017)</li>
+    <li><b>للـ PM:</b> "Website Manager" اللي بيتباع على الويبسايت: العميل بياخد إيه؟ (SR-009)</li>
+    <li><b>للـ PM:</b> بوابات الدفع في الخليج: Tap/HyperPay زي السبيك، ولا Moyasar/Checkout.com/KNET زي الموك؟ وكمان G-12 (عرض الضريبة) وG-04 (نموذج المقاعد).</li>
+  </ol>
+</section>
+
+<footer>المصادر: <code>program/audits/suite-review/</code> (journeys.md، findings.jsonl، gap-v1/) · <code>program/audits/benchmark/</code> · <code>program/backlog/backlog.csv</code> · <code>program/gap-analysis/gap-matrix.csv</code></footer>
+</div>

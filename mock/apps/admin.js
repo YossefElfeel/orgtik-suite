@@ -62,7 +62,9 @@ module.exports = {
     // Someone who signs up on the website lands in their own workspace (USR).
     ctx.identity.onRegister?.((u, { company }) => {
       // A fixed id, so the same workspace is rebuilt if another hosted instance rebuilds the person.
-      const ws = s.createWorkspace({ wsId: `ws_${u.key}`, ownerKey: u.key, name: company || `${u.firstName}'s workspace`, email: u.email });
+      const wsId = `ws_${u.key}`;
+      if (s.db.workspaces.some((w) => w.id === wsId)) return;
+      const ws = s.createWorkspace({ wsId, ownerKey: u.key, name: company || `${u.firstName}'s workspace`, email: u.email, createdAt: u.createdAt });
       s.log(u.key, "sign_up", ws.id);
     });
     adminApi(app, ctx, s, H);

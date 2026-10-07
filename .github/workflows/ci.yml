@@ -1,0 +1,106 @@
+# Checks every pull request (and main) for the packages the change affects (Plan v2, Phase 0.4).
+name: CI
+
+on:
+  pull_request:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      library_changed: ${{ steps.library.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # turbo's --affected compares with the base branch
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22 # pnpm 11 requires Node >=22.13 before its setup step
+
+      - uses: pnpm/action-setup@v4 # version from package.json "packageManager"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Old folder names for the program tools
+        run: node tools/dev/old-layout-links.mjs
+
+      - name: Vercel project settings are current
+        run: node tools/vercel/configure.mjs --check
+
+      - name: Deployment artifact and URL regressions
+        run: node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/verify-preview-revisions.test.mjs
+
+      - name: Typecheck, message catalogs and tests (affected packages)
+        run: pnpm turbo run typecheck i18n:check test --affected --continue
+        env:
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
+
+      - name: Platform OpenAPI matches the mock
+        run: node program/phase-e/openapi.mjs --check
+
+      - name: Detect library changes
+        id: library
+        run: |
+          if pnpm turbo query affected --packages @orgtik/ui --exit-code > /dev/null; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+        env:
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
+
+      - name: No secrets or tokens in URLs
+        run: node tools/ci/secret-scan.mjs
+
+  library-visual:
+    name: Library visuals (Windows references)
+    needs: checks
+    if: needs.checks.outputs.library_changed == 'true'
+    # Committed references were reviewed on Windows. Keep the rendering platform fixed;
+    # Linux still runs typechecks/tests and builds every Vercel deployment.
+    runs-on: windows-2025
+    timeout-minutes: 30
+    env:
+      ORGTIK_VISUAL_REFERENCE_PROFILE: windows-2025-chromium-153
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter docs exec playwright install chromium
+      - name: Visual environment regressions
+        run: pnpm --filter docs exec node --test tests/visual-environment.test.mjs tests/platform-reference.test.mjs
+      - run: pnpm --filter docs build
+      - run: pnpm --filter docs check
+      - name: Upload visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: library-visual-evidence
+          path: apps/docs/tests/results/
+          if-no-files-found: ignore
+          retention-days: 7

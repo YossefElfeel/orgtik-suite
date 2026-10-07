@@ -450,7 +450,6 @@
   "Restore": {
     "titleSingle": "Ripristina {type}",
     "titleBulk": "Ripristina {type}",
-    "confirmMessage": "Sei sicuro di voler ripristinare",
     "confirmDescription": "Verrà spostato di nuovo nei tuoi {type} principali.",
     "files": "file",
     "folders": "cartelle",

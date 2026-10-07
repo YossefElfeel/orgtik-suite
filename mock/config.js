@@ -2,20 +2,20 @@
 const offset = Number(process.env.MOCK_PORT_OFFSET || 0);
 
 const apps = {
-  sos: { dir: "somion-sos-frontend-main", web: 3013, api: 4000 },
-  tasks: { dir: "task-manager-front-main", web: 3001, api: 4001 },
-  files: { dir: "file-manager-dashboard-main", web: 3002, api: 4002 },
-  sales: { dir: "sales-dashboardv2-main", web: 3003, api: 4003 },
-  hr: { dir: "somion-hr-dashboard-main", web: 3004, api: 4004 },
-  marketing: { dir: "digital-marketing-frontend-main", web: 3014, api: 4005 },
-  content: { dir: "content-dashboard-somion-main", web: 3006, api: 4006 },
+  sos: { dir: "apps/sos", web: 3013, api: 4000 },
+  tasks: { dir: "apps/tasks", web: 3001, api: 4001 },
+  files: { dir: "apps/files", web: 3002, api: 4002 },
+  sales: { dir: "apps/sales", web: 3003, api: 4003 },
+  hr: { dir: "apps/hr", web: 3004, api: 4004 },
+  marketing: { dir: "apps/marketing", web: 3014, api: 4005 },
+  content: { dir: "apps/content", web: 3006, api: 4006 },
   // Somion HQ (chat, calls, virtual office): a prototype with its own built-in mock data, so no API.
-  chats: { dir: "somion-hq", web: 3000, api: null, devArgs: ["run", "dev", "--", "-p", "3000"] },
+  chats: { dir: "apps/chats", web: 3000, api: null, devArgs: ["run", "dev", "--", "-p", "3000"] },
   // The public website is frontend-only (no API). devArgs: Vite takes --port, not -p.
-  website: { dir: "orgtik-website/landing-directions", web: 4173, api: null, devArgs: ["run", "dev", "--", "--host", "127.0.0.1", "--port", "4173", "--strictPort"] },
+  website: { dir: "apps/website/landing-directions", web: 4173, api: null, devArgs: ["run", "dev", "--", "--host", "127.0.0.1", "--port", "4173", "--strictPort"] },
   // Reserved for apps the program will build. They're skipped until they exist (reserved: true).
-  wm: { dir: "orgtik-website-manager", web: 3007, api: 4007 }, // Website Manager (CMS), D-034
-  admin: { dir: "orgtik-admin", web: 3008, api: 4008 }, // Admin back-office (ADM) + platform API (Phase E)
+  wm: { dir: "apps/wm", web: 3007, api: 4007 }, // Website Manager (CMS), D-034
+  admin: { dir: "apps/admin", web: 3008, api: 4008 }, // Admin back-office (ADM) + platform API (Phase E)
 };
 
 for (const a of Object.values(apps)) if (a.api != null) a.api += offset;

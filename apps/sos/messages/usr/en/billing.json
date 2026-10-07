@@ -32,6 +32,8 @@
       "planCycle": "{plan} · {cycle}",
       "renewsOn": "Renews on",
       "endsOn": "Ends on",
+      "renewal": "Renewal",
+      "manualRenewal": "Manual: it ends unless you renew it",
       "trialEnds": "Trial ends on",
       "graceEnds": "Full access until",
       "failedOn": "Payment failed",
