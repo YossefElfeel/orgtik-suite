@@ -1,5 +1,6 @@
 import { content } from "../content";
 import { Testimonials } from "./Testimonials";
+import { PartnerStrip } from "./Partners";
 import React from "react";
 import { nudge } from "../content/locale";
 import { LanguageMenu } from "./LanguageMenu";
@@ -2671,6 +2672,7 @@ export default class Home extends ReferencePage {
               </div>
             </section>
 
+            <PartnerStrip />
             <section
               id={"work"}
               style={{ padding: "0 0 var(--section-space)" }}

@@ -772,7 +772,7 @@ export default class Insights extends ReferencePage {
           ["Plans & pricing", "/plans"],
           ["Tell us about your project", "Contact.dc.html"],
           ["Roadmap", "Roadmap.dc.html"],
-          ["Sitemap", "Legal.dc.html#/sitemap"],
+          ["Imprint", "/legal/imprint"],
         ].map((x) => ({ label: x[0], href: x[1] })),
         footTalk: () => {
           if (window.__orgNav) window.__orgNav("Contact.dc.html");

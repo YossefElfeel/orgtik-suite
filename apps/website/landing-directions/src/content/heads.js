@@ -66,13 +66,8 @@ function build() {
     add(`/insights/${a.slug.en}`, a, "article", [under("/insights"), a]);
   for (const l of entries.legalDocument)
     add(`/legal/${l.slug.en}`, l, "legalDocument", [under("/legal"), l]);
-  // The HTML sitemap is a view of the legal page; the plan builder's result is a view of the
-  // software page with its choices in the address, so it's never indexed on its own.
-  const legal = under("/legal");
-  if (legal)
-    add("/legal/sitemap", legal, "page", [legal], {
-      label: "sitemap",
-    });
+  // The plan builder's result is a view of the software page with its choices in the
+  // address, so it's never indexed on its own.
   const software = under("/software");
   if (software)
     add("/software/plans", software, "page", [software], {

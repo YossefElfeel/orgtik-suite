@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "consumers": ["sos", "admin", "tasks", "files", "hr", "sales", "marketing", "chats", "wm", "content", "website"],
+  "milestone": ["sos", "website"],
+  "pathRules": [
+    { "id": "platform-access-and-lifecycle", "paths": ["mock/apps/admin/app-api.js", "mock/apps/admin/lifecycle.js", "mock/apps/admin/store.js"], "consumers": "all" },
+    { "id": "platform", "paths": ["mock/apps/admin.js", "mock/apps/admin/"], "consumers": ["admin", "sos", "website"] },
+    { "id": "sos-and-handoff", "paths": ["mock/apps/sos.js", "mock/apps/sos/"], "consumers": "all" },
+    { "id": "tasks-files", "paths": ["mock/apps/tasks.js", "mock/apps/tasks/"], "consumers": ["tasks", "files", "sos"] },
+    { "id": "files-references", "paths": ["mock/apps/files.js", "mock/apps/files/"], "consumers": ["files", "tasks", "chats", "sos"] },
+    { "id": "hr-people", "paths": ["mock/apps/hr.js", "mock/apps/hr/"], "consumers": ["hr", "sos", "tasks", "files", "sales", "marketing", "chats"] },
+    { "id": "sales-intake", "paths": ["mock/apps/sales.js", "mock/apps/sales/"], "consumers": ["sales", "wm", "marketing", "sos", "website"] },
+    { "id": "marketing-attribution", "paths": ["mock/apps/marketing.js", "mock/apps/marketing/"], "consumers": ["marketing", "sales", "wm"] },
+    { "id": "chats-files", "paths": ["mock/apps/chats.js", "mock/apps/chats/"], "consumers": ["chats", "files", "sos"] },
+    { "id": "cms-and-public-site", "paths": ["mock/apps/wm.js", "mock/apps/wm/"], "consumers": ["wm", "website", "sales", "marketing"] },
+    { "id": "legacy-content", "paths": ["mock/apps/content.js", "mock/apps/content/"], "consumers": ["content", "sos", "website"] },
+    { "id": "shared-mock-runtime", "paths": ["mock/"], "consumers": "all" },
+    { "id": "shared-ui", "paths": ["packages/ui/"], "consumers": "all" },
+    { "id": "sos-frontend", "paths": ["apps/sos/"], "consumers": ["sos"] },
+    { "id": "admin-frontend", "paths": ["apps/admin/"], "consumers": ["admin"] },
+    { "id": "tasks-frontend", "paths": ["apps/tasks/"], "consumers": ["tasks"] },
+    { "id": "files-frontend", "paths": ["apps/files/"], "consumers": ["files"] },
+    { "id": "hr-frontend", "paths": ["apps/hr/"], "consumers": ["hr"] },
+    { "id": "sales-frontend", "paths": ["apps/sales/"], "consumers": ["sales"] },
+    { "id": "marketing-frontend", "paths": ["apps/marketing/"], "consumers": ["marketing"] },
+    { "id": "chats-frontend", "paths": ["apps/chats/"], "consumers": ["chats"] },
+    { "id": "wm-frontend", "paths": ["apps/wm/"], "consumers": ["wm"] },
+    { "id": "content-frontend", "paths": ["apps/content/"], "consumers": ["content"] },
+    { "id": "website-frontend", "paths": ["apps/website/"], "consumers": ["website"] },
+    { "id": "acceptance-runners", "paths": ["program/tools/audit-kit/", "tools/vercel/runtime-dependencies.json", "tools/vercel/runtime-dependencies.mjs", "tools/vercel/preview-checks.mjs", "tools/vercel/preview-protection.mjs"], "consumers": "all" }
+  ],
+  "suites": {
+    "sos": {
+      "coverage": "golden",
+      "requires": ["files"],
+      "visualRoute": "/",
+      "flows": [
+        { "file": "sos.mjs", "locales": "argument", "evidence": "sos/flows/{locale}/walks.json" },
+        { "file": "usr-account.mjs", "locales": "argument", "evidence": "usr/flows/{locale}/usr-account.json" },
+        { "file": "usr-billing.mjs", "locales": "argument", "evidence": "usr/flows/{locale}/usr-billing.json" },
+        { "file": "usr-tools.mjs", "locales": "argument", "evidence": "usr/flows/{locale}/usr-tools.json" }
+      ]
+    },
+    "admin": {
+      "coverage": "golden",
+      "requires": [],
+      "visualRoute": "/",
+      "flows": [
+        { "file": "adm-catalog.mjs", "locales": "internal", "evidence": "admin/flows/catalog.json" },
+        { "file": "adm-commerce.mjs", "locales": "internal", "evidence": "admin/flows/adm-commerce.json" },
+        { "file": "adm-customers.mjs", "locales": "internal", "evidence": "admin/flows/adm-customers.json" },
+        { "file": "adm-delivery.mjs", "locales": "internal", "evidence": "admin/flows/adm-delivery.json" },
+        { "file": "adm-pricing.mjs", "locales": "internal", "evidence": "admin/flows/adm-pricing.json" }
+      ]
+    },
+    "tasks": { "coverage": "golden", "requires": [], "visualRoute": "/", "flows": [{ "file": "tasks.mjs", "locales": "argument", "evidence": "tasks/flows/{locale}/walks.json" }] },
+    "files": { "coverage": "golden", "requires": [], "visualRoute": "/", "flows": [{ "file": "files.mjs", "locales": "argument", "evidence": "files/flows/{locale}/walks.json" }] },
+    "hr": { "coverage": "golden", "requires": [], "visualRoute": "/", "flows": [{ "file": "hr.mjs", "locales": "argument", "evidence": "hr/flows/{locale}/walks.json" }] },
+    "sales": { "coverage": "golden", "requires": [], "visualRoute": "/", "flows": [{ "file": "sales.mjs", "locales": "argument", "evidence": "sales/flows/{locale}/walks.json" }] },
+    "marketing": { "coverage": "golden", "requires": [], "visualRoute": "/", "flows": [{ "file": "marketing.mjs", "locales": "argument", "evidence": "marketing/flows/{locale}/walks.json" }] },
+    "chats": { "coverage": "golden", "requires": [], "visualRoute": "/", "flows": [{ "file": "chats.mjs", "locales": "argument", "evidence": "chats/flows/{locale}/walks.json" }] },
+    "wm": {
+      "coverage": "golden",
+      "requires": ["website"],
+      "visualRoute": "/",
+      "flows": [
+        { "file": "wm-overview.mjs", "locales": "internal" },
+        { "file": "wm-s0.mjs", "locales": "internal", "evidence": "wm/flows/s0.json" },
+        { "file": "wm-s1.mjs", "locales": "internal", "evidence": "wm/flows/s1.json" },
+        { "file": "wm-s1b.mjs", "locales": "internal", "evidence": "wm/flows/s1b.json" },
+        { "file": "wm-s1c.mjs", "locales": "internal", "evidence": "wm/flows/s1c.json" },
+        { "file": "wm-s1d.mjs", "locales": "internal", "evidence": "wm/flows/s1d.json" },
+        { "file": "wm-s2.mjs", "locales": "internal", "evidence": "wm/flows/s2.json" },
+        { "file": "wm-s3.mjs", "locales": "internal", "evidence": "wm/flows/s3.json" }
+      ]
+    },
+    "content": { "coverage": "frozen-visual-smoke", "note": "Legacy Content remains deployed until D-055 retirement; no golden flow exists. VS-1 smoke is required.", "requires": [], "visualRoute": "/", "flows": [] },
+    "website": { "coverage": "golden", "requires": [], "flows": [{ "file": "site-paths.mjs", "locales": "internal" }] }
+  }
+}

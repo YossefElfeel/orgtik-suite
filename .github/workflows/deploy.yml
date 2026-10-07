@@ -1,0 +1,250 @@
+name: Deploy affected projects
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, ready_for_review]
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Existing projects to deploy
+        type: choice
+        options: [preview, production]
+        default: preview
+      preview_projects:
+        description: Preview scope (production always uses the affected graph)
+        type: choice
+        options: [affected, milestone, verify-readiness, build-only]
+        default: affected
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-${{ (github.event_name == 'push' || inputs.environment == 'production') && 'production' || 'preview-mock' }}
+  cancel-in-progress: false
+
+jobs:
+  affected:
+    if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && (inputs.environment != 'production' || github.ref == 'refs/heads/main') && (github.event_name != 'pull_request' || github.event.pull_request.draft != true || contains(github.event.pull_request.labels.*.name, 'preview:deploy') || contains(github.event.pull_request.labels.*.name, 'preview:verify-only'))
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.affected.outputs.matrix }}
+      count: ${{ steps.affected.outputs.count }}
+      verify_only: ${{ steps.affected.outputs.verify_only }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - id: affected
+        env:
+          DEPLOY_ENV: ${{ (github.event_name == 'push' || inputs.environment == 'production') && 'production' || 'preview' }}
+          DEPLOY_PROJECTS: ${{ inputs.preview_projects == 'build-only' && 'mock' || github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'mock,sos,website' || '' }}
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
+          TURBO_SCM_HEAD: HEAD
+          PREVIEW_VERIFY_ONLY: ${{ github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'verify-readiness' || contains(github.event.pull_request.labels.*.name, 'preview:verify-only')) && '1' || '0' }}
+        run: |
+          if [ "$PREVIEW_VERIFY_ONLY" = 1 ]; then
+            node tools/vercel/verify-preview-revisions.mjs
+            echo '[]' > affected.json
+          else
+            node tools/vercel/affected.mjs > affected.json
+          fi
+          echo "verify_only=$PREVIEW_VERIFY_ONLY" >> "$GITHUB_OUTPUT"
+          echo "matrix=$(node -e 'const fs=require("fs");console.log(JSON.stringify({include:JSON.parse(fs.readFileSync("affected.json"))}))')" >> "$GITHUB_OUTPUT"
+          echo "count=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("affected.json")).length)')" >> "$GITHUB_OUTPUT"
+
+  production-validation:
+    if: github.event_name == 'push' || inputs.environment == 'production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: node tools/dev/old-layout-links.mjs
+      - name: Validate the production revision before deploying
+        env:
+          TURBO_SCM_BASE: ${{ github.event.before || 'origin/main^' }}
+          TURBO_SCM_HEAD: HEAD
+        run: |
+          pnpm turbo run typecheck i18n:check test --affected --continue
+          node tools/vercel/configure.mjs --check
+          node program/phase-e/openapi.mjs --check
+          node tools/ci/secret-scan.mjs
+          node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs
+
+  deploy:
+    name: ${{ inputs.preview_projects == 'build-only' && 'Build' || 'Deploy' }} ${{ matrix.key }}
+    needs: [affected, production-validation]
+    if: always() && needs.affected.result == 'success' && needs.affected.outputs.count != '0' && ((github.event_name != 'push' && inputs.environment != 'production') || needs.production-validation.result == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix: ${{ fromJSON(needs.affected.outputs.matrix) }}
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: team_Ypx8oiLDZi3PBNi8ht8fYPsm
+      VERCEL_PROJECT_ID: ${{ (github.event_name == 'push' || inputs.environment == 'production') && matrix.projectId || matrix.previewProjectId || matrix.projectId }}
+      DEPLOY_ENV: ${{ (github.event_name == 'push' || inputs.environment == 'production') && 'production' || 'preview' }}
+      PREVIEW_ALIAS: ${{ matrix.previewUrl }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Validate deployment credentials
+        run: test -n "$VERCEL_TOKEN" && test -n "$VERCEL_PROJECT_ID"
+      - name: Install Vercel CLI
+        run: npm install --global vercel@54.7.1
+      - name: Pull build settings
+        run: vercel pull --yes --environment="$DEPLOY_ENV" --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+      - name: Build
+        run: |
+          if [ "$DEPLOY_ENV" = production ]; then
+            vercel build --prod --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+          else
+            vercel build --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+          fi
+      - name: Package existing mock runtime dependencies
+        if: matrix.key == 'mock'
+        run: |
+          pnpm --filter orgtik-local-dev --prod deploy .vercel/mock-runtime
+          node tools/vercel/copy-mock-runtime.mjs
+      - name: Verify self-contained mock artifact
+        if: matrix.key == 'mock'
+        run: node tools/vercel/check-mock-bundle.mjs
+      - name: Deploy
+        if: inputs.preview_projects != 'build-only'
+        env:
+          PROJECT_KEY: ${{ matrix.key }}
+        run: |
+          if [ "$DEPLOY_ENV" = production ]; then
+            vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects > deploy-output.txt
+            alias="orgtik-suite-$PROJECT_KEY.vercel.app"
+          else
+            vercel deploy --prebuilt --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects > deploy-output.txt
+            alias=${PREVIEW_ALIAS#https://}
+          fi
+          url=$(node tools/vercel/deploy-url.mjs < deploy-output.txt)
+          vercel alias set "$url" "$alias" --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+          url="https://$alias"
+          export DEPLOY_URL="$url"
+          node -e 'require("fs").writeFileSync("deployment.json",JSON.stringify({key:process.env.PROJECT_KEY,url:process.env.DEPLOY_URL}))'
+          node tools/vercel/check-deploy.mjs deployment.json
+      - uses: actions/upload-artifact@v4
+        if: inputs.preview_projects != 'build-only'
+        with:
+          name: deployment-${{ matrix.key }}
+          path: deployment.json
+
+  checks:
+    name: Preview acceptance
+    needs: [affected, deploy]
+    if: always() && inputs.preview_projects != 'build-only' && needs.affected.result == 'success' && (needs.deploy.result == 'success' || needs.affected.outputs.verify_only == '1') && (needs.affected.outputs.count != '0' || needs.affected.outputs.verify_only == '1')
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/download-artifact@v4
+        if: needs.affected.outputs.verify_only != '1'
+        with:
+          pattern: deployment-*
+          path: deployments
+      - name: Install Vercel CLI for ephemeral preview access
+        if: github.event_name != 'push' && inputs.environment != 'production' && (needs.deploy.result == 'success' || needs.affected.outputs.verify_only == '1')
+        run: npm install --global vercel@54.7.1
+      - name: Preview golden flows and visual checks
+        if: github.event_name != 'push' && inputs.environment != 'production' && (needs.deploy.result == 'success' || needs.affected.outputs.verify_only == '1')
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          PREVIEW_CHECK_SCOPE: ${{ (needs.affected.outputs.verify_only == '1' || inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'milestone' || 'affected' }}
+          MOCK_PUBLIC_URL: ${{ vars.PREVIEW_MOCK_URL }}
+          SUITE_WEB_URLS: ${{ vars.SUITE_WEB_URLS }}
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
+          TURBO_SCM_HEAD: HEAD
+        run: |
+          test -n "$MOCK_PUBLIC_URL"
+          node tools/dev/old-layout-links.mjs
+          if [ '${{ needs.affected.outputs.verify_only }}' = 1 ]; then
+            node tools/vercel/verify-preview-revisions.mjs
+          fi
+          cd program/tools/audit-kit
+          npm ci
+          npx playwright install --with-deps chromium
+          node ../../../tools/vercel/preview-checks.mjs
+      - name: Upload preview acceptance evidence
+        if: always() && github.event_name != 'push' && inputs.environment != 'production'
+        uses: actions/upload-artifact@v4
+        with:
+          name: preview-acceptance
+          path: |
+            program/audits/auth-layout/preview/
+            program/audits/*/vs1/preview.json
+          if-no-files-found: ignore
+          retention-days: 7
+      - name: Require all affected deployments
+        if: always() && needs.affected.outputs.verify_only != '1'
+        env:
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+          EXPECTED_COUNT: ${{ needs.affected.outputs.count }}
+        run: |
+          test "$DEPLOY_RESULT" = success
+          count=$(find deployments -name deployment.json -type f | wc -l)
+          test "$count" -eq "$EXPECTED_COUNT"
+      - name: Report deployments
+        if: always()
+        uses: actions/github-script@v7
+        env:
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+          CHECK_RESULT: ${{ job.status }}
+        with:
+          script: |
+            const fs = require('fs');
+            const files = fs.existsSync('deployments') ? fs.readdirSync('deployments', { recursive: true }).filter(f => f.endsWith('deployment.json')) : [];
+            const deployments = files.map(f => JSON.parse(fs.readFileSync('deployments/' + f)));
+            const body = ['<!-- orgtik-deployments -->', 'Deployment result: ' + process.env.DEPLOY_RESULT, 'Checks: ' + process.env.CHECK_RESULT, ...deployments.map(d => '- ' + d.key + ': ' + d.url)].join('\n');
+            await core.summary.addRaw(body).write();
+            if (context.payload.pull_request) {
+              const issue_number = context.payload.pull_request.number;
+              const { data: comments } = await github.rest.issues.listComments({ ...context.repo, issue_number });
+              const previous = comments.find(c => c.user.type === 'Bot' && c.body.startsWith('<!-- orgtik-deployments -->'));
+              if (previous) await github.rest.issues.updateComment({ ...context.repo, comment_id: previous.id, body });
+              else await github.rest.issues.createComment({ ...context.repo, issue_number, body });
+            }

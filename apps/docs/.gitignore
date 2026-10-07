@@ -1,4 +1,5 @@
 storybook-static/
 *.png
 !tests/baselines/*.png
+!tests/platform-references/**/*.png
 tests/results/

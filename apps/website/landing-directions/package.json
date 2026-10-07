@@ -8,7 +8,7 @@
     "build": "vite build && node scripts/prerender-heads.mjs",
     "preview": "vite preview",
     "test:cart": "node tests/cart.test.mjs",
-    "test": "node tests/cart.test.mjs",
+    "test": "node tests/cart.test.mjs && node tests/suite-session.test.mjs",
     "format": "prettier --write src index.html vite.config.mjs",
     "format:check": "prettier --check src index.html vite.config.mjs"
   },

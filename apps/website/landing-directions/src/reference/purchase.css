@@ -1344,6 +1344,31 @@ html[dir="rtl"] .purchase-duration-switch input:checked + span::before {
   font-size: 13px;
   font-weight: 500;
 }
+.purchase-account-setup {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+.purchase-account-setup label {
+  display: grid;
+  gap: 8px;
+  color: #28123b;
+  font-size: 14px;
+  font-weight: 600;
+}
+.purchase-account-setup input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid #b8a2c8;
+  border-radius: 12px;
+  background: #fff;
+  color: #28123b;
+  font: inherit;
+}
+.purchase-account-setup input[aria-invalid="true"] {
+  border-color: #a82d42;
+}
 .purchase-fields input,
 .purchase-fields select {
   min-width: 0;

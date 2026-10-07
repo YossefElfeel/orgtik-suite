@@ -1,0 +1,90 @@
+{
+  "orgId": "team_Ypx8oiLDZi3PBNi8ht8fYPsm",
+  "projects": {
+    "admin": {
+      "projectId": "prj_uq42M70m3wGMGbewF0Dhai98yRwa",
+      "dir": "apps/admin",
+      "package": "orgtik-admin",
+      "name": "orgtik-suite-admin",
+      "previewUrl": "https://orgtik-suite-admin-preview.vercel.app"
+    },
+    "chats": {
+      "projectId": "prj_0Afre5VRLKct5ferpKpEQezTPwK0",
+      "dir": "apps/chats",
+      "package": "somion-hq",
+      "name": "orgtik-suite-chats",
+      "previewUrl": "https://orgtik-suite-chats-preview.vercel.app"
+    },
+    "content": {
+      "projectId": "prj_aqmNkV7n395HnTlCmfzT9GDYBRvN",
+      "dir": "apps/content",
+      "package": "content-dashboard-somion",
+      "name": "orgtik-suite-content",
+      "previewUrl": "https://orgtik-suite-content-preview.vercel.app"
+    },
+    "files": {
+      "projectId": "prj_YqL22TWz9cYxcxnWWaGQZw71Y0GE",
+      "dir": "apps/files",
+      "package": "file-management-dashboard",
+      "name": "orgtik-suite-files",
+      "previewUrl": "https://orgtik-suite-files-preview.vercel.app"
+    },
+    "hr": {
+      "projectId": "prj_jx4mpAoUIwmCwAO8jBnnrHUNzvPS",
+      "dir": "apps/hr",
+      "package": "somion-hr-management-system",
+      "name": "orgtik-suite-hr",
+      "previewUrl": "https://orgtik-suite-hr-preview.vercel.app"
+    },
+    "marketing": {
+      "projectId": "prj_xLnUCg3VEjdtAaVXaJlSMfa2nLzE",
+      "dir": "apps/marketing",
+      "package": "marketing-management-dashboard",
+      "name": "orgtik-suite-marketing",
+      "previewUrl": "https://orgtik-suite-marketing-preview.vercel.app"
+    },
+    "mock": {
+      "projectId": "prj_74P0VeIbDAIyUy8u5r6h91mwai1o",
+      "dir": "mock",
+      "package": "orgtik-local-dev",
+      "name": "orgtik-suite-mock",
+      "previewProjectId": "prj_O5Xp99VEPyKOb6ImpcQEEoRN0Np2",
+      "previewUrl": "https://orgtik-suite-mock-preview.vercel.app"
+    },
+    "sales": {
+      "projectId": "prj_2JIzP0FEewRyv2BU8tjwCHE4lhK4",
+      "dir": "apps/sales",
+      "package": "new-sales-dashboard",
+      "name": "orgtik-suite-sales",
+      "previewUrl": "https://orgtik-suite-sales-preview.vercel.app"
+    },
+    "sos": {
+      "projectId": "prj_UQHONVb9Aa9EG4geWJ3ap5vmyAlO",
+      "dir": "apps/sos",
+      "package": "somion_new_dashboard",
+      "name": "orgtik-suite-sos",
+      "previewUrl": "https://orgtik-suite-sos-preview.vercel.app"
+    },
+    "tasks": {
+      "projectId": "prj_3HSQwoh0hkpu1KLsXom8P8d1vWJL",
+      "dir": "apps/tasks",
+      "package": "somion-task-manager",
+      "name": "orgtik-suite-tasks",
+      "previewUrl": "https://orgtik-suite-tasks-preview.vercel.app"
+    },
+    "website": {
+      "projectId": "prj_aFaeltUxtAjoO7dwFZZhAyNUXuAA",
+      "dir": "apps/website/landing-directions",
+      "package": "orgtik-cinematic-website",
+      "name": "orgtik-suite-website",
+      "previewUrl": "https://orgtik-suite-website-preview.vercel.app"
+    },
+    "wm": {
+      "projectId": "prj_I5fxUzYZIQPhUF1caATEcCnHvmTr",
+      "dir": "apps/wm",
+      "package": "orgtik-website-manager",
+      "name": "orgtik-suite-wm",
+      "previewUrl": "https://orgtik-suite-wm-preview.vercel.app"
+    }
+  }
+}
