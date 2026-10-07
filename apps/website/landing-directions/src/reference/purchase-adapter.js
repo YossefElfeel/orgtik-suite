@@ -1,15 +1,17 @@
 import {
   createGroup,
-  groupName,
-  quoteGroup,
-  quoteCart,
+  groupFingerprint,
   CRM_PORTAL_URL,
 } from "./purchase-catalog.js";
 import { getPaymentMethod } from "./purchase-payment.js";
 import { msg } from "../content/strings.js";
+import { publicRequest } from "./purchase-platform.js";
 
 export const ORDER_SESSION_KEY = msg("purchase-adapter:1");
 const payments = new Map();
+const attempts = new Map();
+const ATTEMPT_KEY = "orgtik.purchase-attempt.v1";
+let pendingPayment;
 const setups = new Map();
 const clone = (value) => JSON.parse(JSON.stringify(value));
 function freeze(value) {
@@ -26,33 +28,94 @@ export function validateCustomer(customer) {
     errors.email = msg("purchase-adapter:3");
   return errors;
 }
-export function createPurchaseSnapshot(
-  groups,
-  reference,
-  paymentMethod = "card",
-) {
-  const method = getPaymentMethod(paymentMethod);
-  const quote = quoteCart(groups);
-  if (!quote.valid) throw new Error(msg("purchase-adapter:4"));
-  return freeze({
-    version: 1,
-    reference,
-    paymentStatus: "succeeded",
-    paymentMethod: method.id,
-    createdAt: new Date().toISOString(),
-    currency: msg("purchase-adapter:5"),
-    groups: groups.map((g) => ({
-      id: g.id,
-      name: groupName(g),
-      kind: g.kind,
-      lines: quoteGroup(g).lines.map((l) => ({
-        ...l,
-        activation:
-          g.kind === "software" ? "active-preview" : "awaiting-onboarding",
+export function createPurchaseSnapshot(order) {
+  if (
+    order?.version !== 1 ||
+    order.paymentStatus !== "succeeded" ||
+    !order.quoteId ||
+    !order.claimToken ||
+    !order.currency ||
+    !Number.isInteger(order.decimals) ||
+    !Array.isArray(order.groups) ||
+    !Number.isFinite(order.quote?.total)
+  )
+    throw Object.assign(new Error(msg("purchase-adapter:4")), {
+      code: "server_order_required",
+    });
+  return freeze(clone(order));
+}
+export const purchaseFingerprint = (groups) =>
+  JSON.stringify(groups.map((group) => [group.id, groupFingerprint(group)]));
+export async function quoteWebsite({ groups, signal }) {
+  const normalized = groups.map(createGroup);
+  if (
+    !normalized.length ||
+    normalized.some(
+      (group) =>
+        !group.lines.length ||
+        group.needsReview ||
+        group.lines.some((line) => ![1, 3, 6, 12].includes(line.months)),
+    )
+  )
+    throw new Error(msg("purchase-adapter:8"));
+  const quote = await publicRequest("/website-quotes", {
+    body: {
+      groups: normalized.map((group) => ({
+        id: group.id,
+        kind: group.kind,
+        ...(group.bundleId ? { bundleId: group.bundleId } : {}),
+        lines: group.lines,
       })),
-    })),
-    quote: clone(quote),
+    },
+    signal,
   });
+  return freeze(clone(quote));
+}
+export function getPendingPayment() {
+  if (pendingPayment !== undefined) return pendingPayment;
+  try {
+    const pending = JSON.parse(
+      globalThis.window?.sessionStorage?.getItem(ATTEMPT_KEY) || "null",
+    );
+    return pending?.payload?.quoteId &&
+      pending.payload.reference &&
+      pending.quote?.quoteId === pending.payload.quoteId
+      ? pending
+      : null;
+  } catch {
+    return null;
+  }
+}
+const retainAttempt = (attempt) => {
+  pendingPayment = attempt;
+  try {
+    window.sessionStorage.setItem(ATTEMPT_KEY, JSON.stringify(attempt));
+  } catch {}
+};
+const clearAttempt = (reference) => {
+  if (getPendingPayment()?.payload.reference !== reference) return;
+  pendingPayment = null;
+  try {
+    window.sessionStorage.removeItem(ATTEMPT_KEY);
+  } catch {}
+};
+export function purchaseErrorText(error) {
+  if (
+    getPendingPayment() &&
+    (error?.code === "transport_unavailable" ||
+      error?.code === "server_order_required" ||
+      error?.status >= 500 ||
+      error?.name === "AbortError")
+  )
+    return msg("PlatformPricing:16");
+  if (error?.code === "quote_expired") return msg("PlatformPricing:5");
+  if (error?.code === "owner_required") return msg("PlatformPricing:15");
+  if (error?.code === "payment_failed") return msg("purchase-adapter:9");
+  if (error?.name === "AbortError" || error?.message === "cancelled")
+    return msg("PurchaseCheckout:20");
+  return error?.code
+    ? msg("PlatformPricing:2")
+    : error?.message || msg("PlatformPricing:2");
 }
 const delay = (signal) =>
   new Promise((resolve, reject) => {
@@ -70,7 +133,7 @@ const delay = (signal) =>
     }, 450);
     signal?.addEventListener("abort", abort, { once: true });
   });
-// Frontend-only adapter. A production implementation must verify payment and pricing server-side.
+// The hosted mock confirms the displayed platform quote. Browser totals never become a receipt.
 export async function simulatePayment({
   groups,
   customer,
@@ -79,6 +142,7 @@ export async function simulatePayment({
   authorization,
   outcome = "success",
   signal,
+  quote: displayedQuote,
 }) {
   if (payments.has(reference)) return payments.get(reference);
   const method = getPaymentMethod(paymentMethod);
@@ -86,20 +150,69 @@ export async function simulatePayment({
     throw new Error(msg("purchase-adapter:6"));
   if (Object.keys(validateCustomer(customer)).length)
     throw new Error(msg("purchase-adapter:7"));
+  if (outcome === "cancelled") throw new Error("cancelled");
   const stableGroups = groups.map(createGroup);
-  if (!quoteCart(stableGroups).valid)
-    throw new Error(msg("purchase-adapter:8"));
+  let newAttempt = false;
   const request = (async () => {
-    await delay(signal);
-    if (outcome === "declined") throw new Error(msg("purchase-adapter:9"));
-    if (outcome === "cancelled") throw new Error("cancelled");
-    return createPurchaseSnapshot(stableGroups, reference, method.id);
+    const saved = getPendingPayment();
+    let attempt =
+      attempts.get(reference) ||
+      (saved?.payload.reference === reference ? saved : null);
+    if (!attempt) {
+      newAttempt = true;
+      const quote =
+        displayedQuote ||
+        (await quoteWebsite({ groups: stableGroups, signal }));
+      const payload = {
+        quoteId: quote.quoteId,
+        reference,
+        paymentMethod: method.id,
+        billing: {
+          name: customer.name.trim(),
+          email: customer.email.trim(),
+          company: customer.company || "",
+        },
+      };
+      attempt = {
+        payload,
+        quote,
+        fingerprint: purchaseFingerprint(stableGroups),
+      };
+      attempts.set(reference, attempt);
+    }
+    retainAttempt(attempt);
+    const result = await publicRequest("/website-orders", {
+      body: attempt.payload,
+      signal,
+      anonymous: !attempt.quote.region?.workspaceId,
+      ...(outcome === "declined"
+        ? { headers: { "x-mock-payment": "declined" } }
+        : {}),
+    });
+    if (result?.paymentStatus === "failed")
+      throw Object.assign(new Error(msg("purchase-adapter:9")), {
+        code: "payment_failed",
+        confirmed: true,
+      });
+    const order = createPurchaseSnapshot(result);
+    clearAttempt(reference);
+    return order;
   })();
   payments.set(reference, request);
   try {
     return await request;
   } catch (error) {
     payments.delete(reference);
+    const rejected = newAttempt && error.status >= 400 && error.status < 500;
+    if (
+      error.code === "payment_failed" ||
+      error.code === "quote_expired" ||
+      rejected
+    ) {
+      attempts.delete(reference);
+      clearAttempt(reference);
+      error.confirmed = true;
+    }
     throw error;
   }
 }
@@ -189,6 +302,9 @@ export function loadPurchaseSession() {
     if (
       value?.order?.version !== 1 ||
       value.order.paymentStatus !== "succeeded" ||
+      !value.order.quoteId ||
+      !value.order.claimToken ||
+      !Number.isInteger(value.order.decimals) ||
       !Array.isArray(value.order.groups) ||
       !Number.isFinite(value.order.quote?.total)
     )

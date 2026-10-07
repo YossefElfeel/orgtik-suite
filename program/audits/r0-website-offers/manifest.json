@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "kind": "local prototype evidence",
+  "packagedAt": "2026-10-07T15:14:40.325Z",
+  "baseCommit": "98bcfb7f62d3a6a57e67054457edd53b5b52c851",
+  "currentVerification": {
+    "cartAndCms": 49,
+    "suiteSession": 10,
+    "productionBuild": true,
+    "vercelConfig": true,
+    "currentCms": true
+  },
+  "sourceFingerprintTiming": "Computed during packaging; original browser runs did not record source hashes.",
+  "sources": [
+    {
+      "file": "apps/website/landing-directions/src/App.jsx",
+      "sha256": "67afdccc2b938db21f87b14f4155bd41c26a80d4f52d5a0fa98e9038e88751f6"
+    },
+    {
+      "file": "apps/website/landing-directions/src/content/snapshot.js",
+      "sha256": "fe2d2cf311d03517762125457560ed73e5a621e5f6d30f990556dbbabb98cf17"
+    },
+    {
+      "file": "apps/website/landing-directions/src/content/strings-templates.js",
+      "sha256": "4964b017dd5a92abc37485adf4804652e625ff45031d74ac4af9a06cb699c1d2"
+    },
+    {
+      "file": "apps/website/landing-directions/src/reference/PurchaseCheckout.jsx",
+      "sha256": "a0de7bb3b8bb77b7ccad6a7177344388e17786c6729965a4eba61a9a66a6120e"
+    },
+    {
+      "file": "apps/website/landing-directions/src/reference/PurchaseUI.jsx",
+      "sha256": "9ab385b97739bd6c2efa1df502cdd9e92ae55205040374d9bac690609afb2ac3"
+    },
+    {
+      "file": "apps/website/landing-directions/src/reference/PurchasePricing.jsx",
+      "sha256": "a7b2923c9f87189f34e56d9ee0c986ebf3be5c8cf56a6883e59077e1921f762f"
+    },
+    {
+      "file": "apps/website/landing-directions/src/reference/purchase-adapter.js",
+      "sha256": "8f6613115a513b30d82b80b44fe2fa09a9e1002c33d8634acf98fee75089f05a"
+    },
+    {
+      "file": "apps/website/landing-directions/src/reference/purchase-catalog.js",
+      "sha256": "e7809ad16496d68220c0f7d6dcb34e49258efada287758a9579b3f8568a413eb"
+    },
+    {
+      "file": "apps/website/landing-directions/src/reference/purchase-platform.js",
+      "sha256": "eaf8fc73b0a478d8a3617807cd58030cafe01ea80f8058cf3c1f1164be78fcee"
+    },
+    {
+      "file": "apps/website/landing-directions/src/reference/purchase-store.js",
+      "sha256": "934d39f68d8a1e59d758249c6ad845555aac34f01d12dda512d04894cd28761d"
+    },
+    {
+      "file": "apps/website/landing-directions/src/reference/purchase.css",
+      "sha256": "e414a1d91c9897d9831572e70bf8b40694378c2926d32620827a2814d25245bb"
+    },
+    {
+      "file": "apps/website/landing-directions/src/reference/suite-session.js",
+      "sha256": "1a31e16e1f0fc1eac011a75c89f3860d19524604cc5de2e529fb8544b22bf0c4"
+    },
+    {
+      "file": "apps/website/landing-directions/tests/purchase.test.mjs",
+      "sha256": "8385016fbf058d280af0a4906aa00eacf1e8b9c252da7d4eff623a0c3a997b9e"
+    },
+    {
+      "file": "apps/website/landing-directions/tests/suite-session.test.mjs",
+      "sha256": "52de69021494aca4fc31867063e1915beed729f0fdcb563df61bf4ce11047484"
+    },
+    {
+      "file": "mock/apps/wm/seed/build.mjs",
+      "sha256": "dff1f81bbac8765d51e4c4f52f8911443584d8484cd3f317bd345a387a3c9754"
+    },
+    {
+      "file": "mock/apps/wm/seed/platform-pricing.mjs",
+      "sha256": "3378f1035ea39da738cea14910db29906f7cc922a93edf6d4dde9f14420d57cb"
+    },
+    {
+      "file": "mock/apps/wm/seed/website.json",
+      "sha256": "c37ef896f26f742178a0fa045174fde754de0ab43a810278ef28338dd07dafd6"
+    }
+  ],
+  "runner": {
+    "file": "website-runner.cjs",
+    "sha256": "3764303efc0d7bf86224311f5fc83a9c883eaf038e1d1fcf1e76a568abdb1743",
+    "portableGuardsSyntaxChecked": true,
+    "broadFlowsRerunDuringPackaging": false
+  },
+  "reports": [
+    {
+      "mode": "full-20261007",
+      "run": "muy4nyzh",
+      "passed": 66,
+      "total": 66,
+      "capturesGenerated": 14,
+      "report": "program\\audits\\r0-website-offers\\full-20261007\\website-qa.json",
+      "sha256": "571fe9d5a811449bace691dcace9f7f1d2182165a4c455209b28d46d25fa8930",
+      "sourceRevisionRecorded": false
+    },
+    {
+      "mode": "rejections-20261007",
+      "run": "muy4vmht",
+      "passed": 11,
+      "total": 11,
+      "capturesGenerated": 2,
+      "report": "program\\audits\\r0-website-offers\\rejections-20261007\\website-qa.json",
+      "sha256": "97e36c2cbfaf46485bd54083eca6a8f9406baa1b896da401f9c1e68cfec1b98b",
+      "sourceRevisionRecorded": false
+    }
+  ],
+  "representatives": [
+    {
+      "file": "full-20261007/checkout-guest-ch-1440.png",
+      "sha256": "19fad956836847f81cb3035effa2b8aaffe93206e27f4748ff8aa6b63a3fb229"
+    },
+    {
+      "file": "full-20261007/checkout-kw-390.png",
+      "sha256": "c90ad580bb26b5d0f9cc387b28433a615b8c05e771f074c0258152b6a6eb3f48"
+    },
+    {
+      "file": "full-20261007/payment-recovery-1440.png",
+      "sha256": "e7e97b290939b1cbbc1efbd867beb4434d6cb699c741aae207a1332c5481fa92"
+    },
+    {
+      "file": "rejections-20261007/owner-rejection-uncertain-recovery-390.png",
+      "sha256": "a3ef1a4537d0c1737c8656055395130cf00c626202b233a328bb6ee4e007d3b6"
+    }
+  ]
+}

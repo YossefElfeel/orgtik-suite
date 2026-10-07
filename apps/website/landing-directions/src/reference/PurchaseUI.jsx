@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useId } from "react";
 import { attr, run } from "../content/copy";
 import { msg } from "../content/strings";
+import { PurchasePriceStatus, taxCaption } from "./PurchasePricing";
 import {
   CATALOG,
   BUNDLES,
@@ -18,6 +19,7 @@ import {
   money,
   termLabel,
   configurationHref,
+  getPricingSnapshot,
 } from "./purchase-catalog.js";
 import {
   AddPackageButton,
@@ -26,11 +28,13 @@ import {
   PurchaseDialog,
 } from "./PurchaseControls";
 
-export function PreviewNote() {
+export function PreviewNote({ source }) {
   return (
     <p className="purchase-note">
       <i className="ph ph-info" aria-hidden="true" />
-      {run("gl_commerce|purchaseUI-intro|p", 1)}
+      {msg("PlatformPricing:17", [
+        source?.currency || getPricingSnapshot().currency || "—",
+      ])}
     </p>
   );
 }
@@ -48,14 +52,17 @@ export function PurchaseHeading({ eyebrow, title, accent, children }) {
     </div>
   );
 }
-export function OrderContents({ groups }) {
+export function OrderContents({ groups, pricedQuote }) {
   return (
     <div className="purchase-order-contents">
       {groups.map((group) => (
         <div key={group.id} className="purchase-order-group">
           <strong>{groupName(group)}</strong>
           <ul>
-            {quoteGroup(group).lines.map((line) => (
+            {(
+              pricedQuote?.groups.find((item) => item.id === group.id)?.lines ??
+              quoteGroup(group).lines
+            ).map((line) => (
               <li key={line.catalogId}>
                 <span>
                   {line.name}
@@ -63,8 +70,11 @@ export function OrderContents({ groups }) {
                     {termLabel(line.months)} ·{" "}
                     {line.autoRenew ? msg("PurchaseUI:1") : msg("PurchaseUI:2")}
                   </small>
+                  {line.perUser && Number.isFinite(line.quantity) && (
+                    <small>{msg("PlatformPricing:18", [line.quantity])}</small>
+                  )}
                 </span>
-                <b>{money(line.total)}</b>
+                <b>{money(line.total, pricedQuote)}</b>
               </li>
             ))}
           </ul>
@@ -106,8 +116,10 @@ export function QuoteSummary({
   title = msg("PurchaseUI:4"),
   id,
   children,
+  pricedQuote,
 }) {
-  const quote = quoteCart(groups);
+  const quote = pricedQuote?.quote ?? quoteCart(groups);
+  const formatted = (value) => money(value, pricedQuote);
   const summary = useRef(null);
   useEffect(() => {
     const element = summary.current;
@@ -126,36 +138,49 @@ export function QuoteSummary({
       <span className="purchase-eyebrow">{title}</span>
       <div className="purchase-summary__amount">
         <small>{run("gl_commerce|purchaseUI-intro|div", 0)}</small>
-        <strong>{money(quote.total)}</strong>
+        <strong>{formatted(quote.total)}</strong>
         <span>{run("gl_commerce|purchaseUI-intro|div-2", 0)}</span>
       </div>
       <p className="purchase-sr-only" role="status" aria-live="polite">
         {run("gl_commerce|purchaseUI-intro|p-2", 0)}
-        {money(quote.total)}
+        {formatted(quote.total)}
         {run("gl_commerce|purchaseUI-intro|p-3", 0)}
-        {money(quote.saving)}.
+        {formatted(quote.saving)}.
       </p>
       <dl>
         <div>
           <dt>{run("gl_commerce|purchaseUI-intro|dt", 0)}</dt>
-          <dd>{money(quote.subtotal)}</dd>
+          <dd>{formatted(quote.subtotal)}</dd>
         </div>
         <div>
           <dt>{run("gl_commerce|purchaseUI-intro|dt-2", 0)}</dt>
-          <dd>−{money(quote.saving)}</dd>
+          <dd>−{formatted(quote.saving)}</dd>
         </div>
         <div>
-          <dt>{run("gl_commerce|purchaseUI-intro|dt-3", 0)}</dt>
-          <dd>{run("gl_commerce|purchaseUI-intro|dd", 0)}</dd>
+          <dt>
+            {pricedQuote
+              ? taxCaption(pricedQuote)
+              : run("gl_commerce|purchaseUI-intro|dt-3", 0)}
+          </dt>
+          <dd>
+            {pricedQuote
+              ? formatted(quote.tax)
+              : taxCaption(getPricingSnapshot())}
+          </dd>
         </div>
       </dl>
       <p className="purchase-summary__equivalent">
-        {money(Math.round(quote.monthlyEquivalent))}
+        {formatted(
+          Number.isFinite(quote.monthlyEquivalent)
+            ? Math.round(quote.monthlyEquivalent)
+            : null,
+        )}
         {run("gl_commerce|purchaseUI-intro|p-4", 0)}
         {groups.some((g) => groupTerm(g) === "Mixed durations") &&
           " Items have different periods."}
       </p>
       {children}
+      <PurchasePriceStatus source={pricedQuote} />
       <p className="purchase-summary__foot">
         {run("gl_commerce|purchaseUI-intro|p-5", 0)}
       </p>
@@ -199,6 +224,11 @@ export function PackageLines({
                 <small>{run("gl_commerce|purchaseUI-intro|div-3", 0)}</small>
               </strong>
             </div>
+            {line.perUser && Number.isFinite(line.quantity) && (
+              <p className="purchase-caption">
+                {msg("PlatformPricing:18", [line.quantity])}
+              </p>
+            )}
             <details
               className="purchase-capabilities"
               open={compact ? undefined : true}

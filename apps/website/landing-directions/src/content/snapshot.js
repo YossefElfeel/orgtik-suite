@@ -1,7 +1,7 @@
 // Pulled from the Website Manager by scripts/content-pull.mjs. Don't edit by hand: change it there and pull.
 export default {
- "source": "http://localhost:4007/v2",
- "pulledAt": "2026-10-07T08:47:19.108Z",
+ "source": "http://localhost:4207/v2",
+ "pulledAt": "2026-10-07T13:06:13.235Z",
  "entries": {
   "page": [
    {
@@ -5354,7 +5354,7 @@ export default {
        "p-3": "paid.",
        "p-4": "Payment method:",
        "button": "Continue browsing",
-       "p-5": "Software activates after payment. Service periods begin after onboarding confirms activation in the CRM."
+       "p-5": "Software activates after you link this purchase to your workspace. Service periods begin after onboarding confirms activation in your account."
       },
       "purchaseCheckout-section-1": {
        "h2": "Your purchase",
@@ -5376,7 +5376,7 @@ export default {
        "summary-2": "items",
        "summary-3": "due today",
        "p-2": "Full selected periods paid upfront. You save",
-       "p-3": ". Tax is not calculated.",
+       "p-3": ". Regional tax is included in the quoted total.",
        "a": "Edit your selection",
        "QuoteSummary@title": "Your order",
        "a-2": "Edit your selection"
@@ -8967,6 +8967,146 @@ export default {
        "s10": "Confirm password"
       }
      }
+    },
+    "seo": {}
+   },
+   {
+    "id": "st_platformPricing",
+    "order": 14,
+    "name": "Platform pricing",
+    "slug": {},
+    "layout": [
+     {
+      "key": "lines",
+      "kind": "copy",
+      "label": "Offer and payment states",
+      "slots": [
+       {
+        "key": "1",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "2",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "3",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "4",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "5",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "6",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "7",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "8",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "9",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "10",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "11",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "12",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "13",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "14",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "15",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "16",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "17",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "18",
+        "kind": "message",
+        "context": "PlatformPricing"
+       },
+       {
+        "key": "19",
+        "kind": "message",
+        "context": "PlatformPricing"
+       }
+      ]
+     }
+    ],
+    "locales": {
+     "en": {
+      "lines": {
+       "1": "Loading prices…",
+       "2": "Prices are unavailable. Try again.",
+       "3": "Retry prices",
+       "4": "Preparing your total…",
+       "5": "Your quote expired. Review the updated total before paying.",
+       "6": "Your quoted total changed. Review it before paying.",
+       "7": "Tax included ({0})",
+       "8": "Tax added ({0})",
+       "9": "Reverse charge · no tax added",
+       "10": "No tax is added under the configured rule.",
+       "11": "Ready to activate in your workspace",
+       "12": "Workspace activation confirmed",
+       "13": "Mock regional pricing: {0} ({1}).",
+       "14": "Workspace pricing: {0} ({1}).",
+       "15": "Only the workspace owner can complete this purchase.",
+       "16": "We couldn’t confirm this payment. Retry to recover the same attempt.",
+       "17": "Prices in {0}. Full selected periods are paid upfront.",
+       "18": "Seat capacity: {0}",
+       "19": "Recover payment"
+      }
+     },
+     "ar": {},
+     "de": {},
+     "fr": {},
+     "it": {}
     },
     "seo": {}
    }
