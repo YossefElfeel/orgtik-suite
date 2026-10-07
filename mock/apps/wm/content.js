@@ -46,6 +46,7 @@ const NEUTRAL = ["department", "format", "parent", "category", "icon", "publishe
 // Language-neutral fields an editor may change (the rest is structure: department, parent).
 const EDITABLE_NEUTRAL = ["icon", "category", "publishedOn", "readingMinutes", "status", "period", "year", "progress", "versionLabel", "effectiveFrom", "priceMode", "narrativePublished", "sampleNarrativePublished"];
 const clone = (v) => JSON.parse(JSON.stringify(v));
+const codec = require("./state-codec");
 
 // Numbers are language-neutral (chart points, gauges, weeks, before/after): they're edited in
 // English and copied to the same place in every other language that has that place, so a figure
@@ -570,7 +571,14 @@ function makeStore(now) {
     const live = entries.get("pr_software")?.live;
     return { currency: live?.currency ?? "CHF", priceMode: live?.priceMode ?? "indicative", managedIn: live?.managedIn ?? null, modules: Object.fromEntries((live?.locales.en.items ?? []).map((m) => [m.id, { monthly: m.monthly }])) };
   };
-  return { create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES };
+  const exportState = () => clone({ entries: [...entries], audit, ideas: [...ideas] });
+  const validateState = value => {
+    const incoming = codec.object(value), rows = codec.mapRows(incoming.entries), ideas_ = codec.mapRows(incoming.ideas);
+    if (!Array.isArray(incoming.audit) || rows.some(([, row]) => !row.workflow || !Array.isArray(row.versions) || !row.translation || !TYPES.includes(row.type))) throw codec.fail("Website Manager content state is incomplete.");
+    return { entries: rows, audit: clone(incoming.audit), ideas: ideas_ };
+  };
+  const importState = value => { const incoming = validateState(value); codec.replaceMap(entries, incoming.entries); codec.replaceMap(ideas, incoming.ideas); audit.splice(0, audit.length, ...incoming.audit); };
+  return { create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES, exportState, importState, validateState };
 }
 
 module.exports = { makeStore, TRANSITIONS, TYPES };

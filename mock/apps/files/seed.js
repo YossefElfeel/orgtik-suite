@@ -253,8 +253,8 @@ function hashNum(s) {
 }
 
 // Returns the initial in-memory state.
-function buildSeed({ identity, manifest }) {
-  const now = Date.now();
+function buildSeed({ identity, manifest, seedAt }) {
+  const now = seedAt ? Date.parse(seedAt) : Date.now();
   const uid = (key) => identity.findByKey(key).id;
   // days ago -> ISO. Whole days land on a stable pseudo-random time within Cairo working hours
   // (09:00-18:00, UTC+3); fractions of a day (< 1) are simply "that many hours ago".
@@ -272,6 +272,7 @@ function buildSeed({ identity, manifest }) {
     shares: new Map(),
     sessions: new Map(),
     failures: new Map(),
+    previewPages: new Map(),
     activities: [],
   };
   const folderByKey = {};

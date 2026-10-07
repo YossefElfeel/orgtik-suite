@@ -43,7 +43,10 @@
     "noAccessTitle": "You can't open this page",
     "noAccessBody": "Your role in Tasks doesn't include it. Ask a project manager or your workspace admin if you need it.",
     "appNoAccessTitle": "You don't have access to Tasks",
-    "appNoAccessBody": "Your account isn't set up for this app. Open the apps you can use from the suite, or ask your workspace admin to give you access to Tasks."
+    "appNoAccessBody": "Your account isn't set up for this app. Open the apps you can use from the suite, or ask your workspace admin to give you access to Tasks.",
+    "sessionLoading": "Opening your workspace…",
+    "sessionUnavailableTitle": "Your workspace couldn’t be opened",
+    "sessionUnavailableBody": "We couldn’t check your current access. Your sign-in details are kept; retry to continue."
   },
   "Feedback": {
     "saved": "Changes saved",

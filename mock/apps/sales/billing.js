@@ -75,7 +75,8 @@ module.exports = function billing(S) {
     return inv;
   }
   // Issue invoices for installments that are due within 30 days (time moves on while the mock runs).
-  function refreshSchedules() {
+  function refreshSchedules({ system = false } = {}) {
+    if (identity.workspaceMode && !S.seeding && !system) return;
     const horizon = nowMs() + 30 * H.DAY;
     for (const sub of db.subscriptions) {
       if (sub.status === "cancelled") continue;
@@ -586,7 +587,7 @@ module.exports = function billing(S) {
   function visibleInvoices(req) {
     const sc = req.sc;
     if (sc.role === "customer") return db.invoices.filter((i) => i.customerId === sc.customer?.id && i.kind !== "salesman" && i.kind !== "refund");
-    if (sc.role === "salesman") return db.invoices.filter((i) => (i.kind === "salesman" && i.salesmanId === sc.staff?.id) || (i.kind === "subscription" && D().visibleProjects(req).some((p) => p.id === i.projectId)));
+    if (sc.role === "salesman") return db.invoices.filter((i) => (i.kind === "salesman" && sc.staff && i.salesmanId === sc.staff.id) || (i.kind === "subscription" && D().visibleProjects(req).some((p) => p.id === i.projectId)));
     return db.invoices.filter((i) => i.kind !== "refund");
   }
   function invoiceStats(req) {
@@ -986,7 +987,7 @@ module.exports = function billing(S) {
       }
       return H.sortDesc(list);
     };
-    const ownCommissions = (req) => db.commissions.filter((c) => c.salesmanId === req.sc.staff?.id);
+    const ownCommissions = (req) => db.commissions.filter((c) => req.sc.staff && c.salesmanId === req.sc.staff.id);
     app.get("/api/commissions", (req, res) => {
       const base = req.sc.role === "salesman" ? ownCommissions(req) : req.sc.role === "customer" ? [] : db.commissions;
       const { items, meta } = util.paginate(commissionQuery(req, base), req.query, { defaultLimit: 10 });

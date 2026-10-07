@@ -34,6 +34,7 @@ module.exports = function projectRoutes(app, { ctx, getDb, views, h }) {
     const p = {
       id: newId(), key: null, userId: u.id, name, slug: slugify(name), description: req.body?.description?.trim() || null,
       avatar: req.file ? fileRef(req.file) : null, isActive: true, memberUserIds: [u.id], createdAt: now, updatedAt: now,
+      timeZone: ctx.workspace?.timeZone || "Africa/Cairo", currency: ctx.workspace?.currency || "USD",
     };
     db.projects.push(p);
     db.activeProject[u.id] = p.id;

@@ -1,0 +1,15 @@
+# R1 workspace foundation package
+
+Working baseline: main6032161. PR/CI evidence is pending until the package is finalized. This file records implementation, not full R1 or release acceptance.
+
+Implemented source: selected workspace context, private stores for six apps, shared tool access, signed persistent sessions, rotating refresh/handoff/logout, invitation reservations and ownership transfer, recipient mock inbox, HR invitation/offboarding/leave commands, explicit renewal/recovery/seat lifecycle, and persistent Chats polling. Public Files shares preserve scoped sample access and packaged asset bytes. The shared auth library and app bridges preserve the tab's workspace and reject delayed responses from an older context.
+
+Meaningful local checks include actual HTTP registration and no-access behavior; workspace mismatch; concurrent last-seat invitation attempts; failed hire without partial identity creation; paid capacity, repeated hire, invitation acceptance and employment activation; offboarding without global deactivation; public Files capability isolation; cross-app logout; cold-start passwords and invoices; refresh reuse; atomic identity/domain failure; private historical tool migration; and packaging source hashes. The final exact check counts and browser screenshots belong here after verification.
+
+The retained mock checks pass149 cases (authentication17, journal8, pricing20 and prior Node regressions104). The frozen workspace/CMS/sample package passes160 additional cases:309 mock regressions in total. Runtime consumer type/catalog checks pass20 tasks, including untouched consumers. Tooling/artifact checks pass24 cases; shared client/access checks pass10. Linux/Windows CI still awaits the PR. Internal CMS snapshots share the atomic checkpoint; real HTTP/cold-start tests cover drafts, preview hashes, rollback and issuer revocation. Existing website leads remain in WM with CRM delivery explicitly deferred until the R2 coordinator.
+
+Local SOS browser acceptance: [28 session checks](../audits/r1-workspace/prototype/report.json) across EN/AR,1440/390px and light/dark, plus [3 staff handoff checks](../audits/r1-workspace/prototype/staff-report.json). Desktop/mobile screenshots are stored beside those reports. The Admin destination UI and Team's latest capacity/recovery changes still need their own walkthrough; these screenshots do not accept every app or hosted journey. Home's visible G-24/G-28 copy was removed in source after capture.
+
+Open release acceptance: all15 hosted journeys and the required EN/AR, theme and responsive evidence. R2 connected Files/search/notifications/CMS/CRM intake, remaining R3 commitments, R4 operations and live external integrations are not closed by these foundations. Vercel remains paused.
+
+بالمصري: شغل R1 هنا بيحفظ سياق كل مساحة وصلاحياتها وبيمنع خلط بيانات العملاء. الدعوات بتحجز المقاعد، والتعيين في HR بيبعت دعوة من غير كلمة سر في الفورم. إنهاء العمل بيلغي وصول المساحة دي بس، وبيسيب المساحات التانية والفواتير القديمة محفوظة. فحوص الكود المحلية مش معناها إن خطة R0–R4 كلها خلصت؛ قبول الرحلات على نسخة hosted لسه مفتوح، وVercel متوقف بأمر المالك.

@@ -1,17 +1,18 @@
 import { APP_SCOPE } from "@/constants";
 import type { IUserScope } from "@/types/user";
+import { toolAccess, type WorkspaceContext } from "@orgtik/ui/auth";
 
 export type MarketingRole = "super_admin" | "marketing_manager" | "marketing_specialist" | "content_writer" | "client_reviewer";
 
 /**
- * The roles a person holds in Marketing (FS-MKT-4): the digital_marketing scope's roles, plus super
- * admin when they are the organisation's super admin. Same rule as the API (local-dev mock).
+ * Current workspace Marketing roles, or the exact digital_marketing scope projection.
+ * Identity/global admin grants never widen customer-workspace rights.
  */
-export function marketingRoles(scopes: IUserScope[] | undefined | null): MarketingRole[] {
+export function marketingRoles(scopes: IUserScope[] | undefined | null, context?: WorkspaceContext | null): MarketingRole[] {
   const list = scopes ?? [];
   const own = new Set<MarketingRole>((list.find((s) => s.scope === APP_SCOPE)?.roles ?? []) as MarketingRole[]);
-  if (list.find((s) => s.scope === "global")?.roles?.includes("super_admin")) own.add("super_admin");
-  return [...own];
+  const selected = context ? toolAccess(context, "marketing").roles : [...own];
+  return selected.filter((role): role is MarketingRole => ["super_admin", "marketing_manager", "marketing_specialist", "content_writer", "client_reviewer"].includes(role));
 }
 
 /**
@@ -44,8 +45,8 @@ export type MarketingPermissions = {
   isReviewerOnly: boolean;
 };
 
-export function permissionsFor(scopes: IUserScope[] | undefined | null): MarketingPermissions {
-  const roles = marketingRoles(scopes);
+export function permissionsFor(scopes: IUserScope[] | undefined | null, context?: WorkspaceContext | null): MarketingPermissions {
+  const roles = marketingRoles(scopes, context);
   const has = (...r: MarketingRole[]) => r.some((x) => roles.includes(x));
   const isAdmin = has("super_admin");
   const lead = has("super_admin", "marketing_manager");

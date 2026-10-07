@@ -67,6 +67,8 @@
       "toHome": "Retour à l'accueil",
       "failedTitle": "Impossible de charger votre espace",
       "failedBody": "Vérifiez votre connexion et réessayez."
-    }
+    },
+    "switchFailed": "Impossible d’ouvrir cet espace de travail. Réessayez.",
+    "signOutFailed": "Impossible d’enregistrer la déconnexion. Réessayez."
   }
 }

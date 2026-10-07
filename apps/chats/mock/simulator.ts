@@ -273,6 +273,7 @@ function runScripted(key: string, emit: Emit): boolean {
 /* --------------------------------------------------------------- control */
 
 export function startSimulator(): () => void {
+  if (process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SOS_API_URL) return () => {};
   const emit: Emit = (event) => useWorkspace.getState().applyEvent(event);
 
   /* Quiet mode (tests): no random moves or messages; the scripted keys below still work. */

@@ -34,7 +34,6 @@ export const transformApiDataToFormValues = (
         addressPostal: apiData.postCode || "",
         personalTaxId: apiData.personalTaxId || "",
         accommodationType: apiData.accommodationType || "own",
-        password: apiData.password || "",
       };
     case "employee":
       return {

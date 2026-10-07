@@ -7,6 +7,8 @@ import { SuccessResponse } from "@/types";
 import { deleteCookie, getCookie } from "cookies-next";
 import { TOKEN_COOKIE, USER_COOKIE } from "@/constants";
 import { setUser, logoutUser, setTokens } from "../features/auth/authSlice";
+import { readClientSession, setClientSession, refreshClientSession, SessionRequestError } from "@orgtik/ui/auth";
+import type { IUser } from "@/types/user";
 
 const handleUserLogout = (api: any) => {
   api.dispatch(logoutUser());
@@ -24,10 +26,15 @@ const handleUserLogout = (api: any) => {
 // Define a custom fetchBaseQuery
 const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
-  prepareHeaders: (headers, { getState }) => {
-    const tokens = (getState() as RootState).auth.tokens;
+  prepareHeaders: (headers, { getState, endpoint }) => {
+    if (["login", "forgotPassword", "resetPassword", "getInviteMetadata", "acceptInvite"].includes(endpoint)) return headers;
+    const auth = (getState() as RootState).auth;
+    if (!readClientSession() && auth.user && auth.tokens) setClientSession({ user: auth.user, tokens: auth.tokens, scopes: auth.scopes || [], workspaceContext: auth.workspaceContext, staffAccess: auth.staffAccess });
+    const tokens = readClientSession()?.tokens || auth.tokens;
     if (tokens?.accessToken)
       headers.set("authorization", `Bearer ${tokens.accessToken}`);
+    const workspaceId = readClientSession()?.workspaceContext?.workspace.id || auth.workspaceContext?.workspace.id;
+    if (workspaceId) headers.set("x-workspace", workspaceId);
     return headers;
   },
 });
@@ -49,34 +56,14 @@ const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
 
     if (refreshToken) {
       // Try to refresh the token
-      const refreshResult = await baseQuery(
-        {
-          url: "/auth/refresh",
-          method: "POST",
-          body: { refreshToken },
-        },
-        api,
-        extraOptions
-      );
-      if (refreshResult.data) {
-        const refreshData = refreshResult.data as SuccessResponse<{
-          accessToken: string;
-          refreshToken: string;
-          expiresIn: number;
-        }>;
-
-        api.dispatch(
-          setTokens({
-            accessToken: refreshData.data.accessToken,
-            refreshToken: refreshData.data.refreshToken,
-            expiresIn: refreshData.data.expiresIn,
-          })
-        );
-
-        // Retry the original request with new token
+      try {
+        const fresh = await refreshClientSession<IUser>(API_URL);
+        api.dispatch(setUser({ ...fresh, scopes: fresh.scopes.map(scope => ({ ...scope, permissions: scope.permissions || [] })) }));
         result = await baseQuery(args, api, extraOptions);
-      } else if (refreshResult.error?.status === 401 || refreshResult.error?.status === 403) handleUserLogout(api);
-      else return refreshResult; // A temporary outage must not erase the valid refresh session.
+      } catch (error) {
+        if (error instanceof SessionRequestError && [401, 403].includes(error.status)) handleUserLogout(api);
+        else return { error: { status: 503, data: { code: "session_unavailable" } } };
+      }
     } else handleUserLogout(api);
   }
 

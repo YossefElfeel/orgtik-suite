@@ -587,7 +587,10 @@
     "notFoundBody": "Il link potrebbe essere vecchio o la cartella potrebbe essere stata spostata. Riparti dalla dashboard o da I miei file.",
     "loading": "Caricamento",
     "handoffTitle": "Questo link di accesso è scaduto",
-    "handoffBody": "I link del launcher funzionano una volta sola e per un minuto. Riapri File dalle tue app."
+    "handoffBody": "I link del launcher funzionano una volta sola e per un minuto. Riapri File dalle tue app.",
+    "sessionLoading": "Apertura del tuo spazio di lavoro…",
+    "sessionUnavailableTitle": "Impossibile aprire il tuo spazio di lavoro",
+    "sessionUnavailableBody": "Impossibile verificare il tuo accesso attuale. I dati di accesso restano salvati; riprova per continuare."
   },
   "Feedback": {
     "folderCreated": "Cartella “{name}” creata",

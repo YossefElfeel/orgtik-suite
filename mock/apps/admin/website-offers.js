@@ -248,7 +248,7 @@ function linkWebsiteOrder(S, { workspace: ws, actor }, body) {
     }
   }
   const major = minor => minor / 10 ** order.decimals;
-  const invoice = { id: S.id("inv"), number: `INV-2026-${String(1041 + S.db.invoices.length).padStart(6, "0")}`, workspaceId: ws.id, kind: "website_order", chargeKind: "website_offer", state: "paid", currency: order.currency, issuedAt: at, dueAt: at, paidAt: order.createdAt, reference: order.reference, lines: ledger.lines, rounding: ledger.rounding, subtotal: major(order.quote.net), savings: major(order.quote.saving), taxLabel: order.quote.taxLabel, taxInclusive: order.quote.taxInclusive, taxDisplay: order.quote.taxInclusive ? "inclusive" : "exclusive", taxRate: order.policy.tax.rate, reverseCharge: Boolean(order.policy.tax.reverseCharge), tax: major(order.quote.tax), total: major(order.quote.total), payments: [{ id: S.id("pay"), amount: major(order.quote.total), currency: order.currency, method: order.paymentMethod, gateway: stored.gateway, at: order.createdAt, status: "succeeded", usdRate: stored.usdRate, usdAmount: S.pricing.toDecimals(major(order.quote.total) / stored.usdRate, 2) }], creditNotes: [], refunded: 0 };
+  const invoice = { id: S.id("inv"), number: `INV-2026-${String(S.allocateInvoiceNumber?.() ?? 1041 + S.db.invoices.length).padStart(6, "0")}`, workspaceId: ws.id, kind: "website_order", chargeKind: "website_offer", state: "paid", currency: order.currency, issuedAt: at, dueAt: at, paidAt: order.createdAt, reference: order.reference, lines: ledger.lines, rounding: ledger.rounding, subtotal: major(order.quote.net), savings: major(order.quote.saving), taxLabel: order.quote.taxLabel, taxInclusive: order.quote.taxInclusive, taxDisplay: order.quote.taxInclusive ? "inclusive" : "exclusive", taxRate: order.policy.tax.rate, reverseCharge: Boolean(order.policy.tax.reverseCharge), tax: major(order.quote.tax), total: major(order.quote.total), payments: [{ id: S.id("pay"), amount: major(order.quote.total), currency: order.currency, method: order.paymentMethod, gateway: stored.gateway, at: order.createdAt, status: "succeeded", usdRate: stored.usdRate, usdAmount: S.pricing.toDecimals(major(order.quote.total) / stored.usdRate, 2) }], creditNotes: [], refunded: 0 };
   S.db.invoices.push(invoice); result.invoice = { id: invoice.id, number: invoice.number, total: invoice.total, currency: invoice.currency };
   ws.currencyLocked = true;
   ws.billingInitialized = true;
@@ -261,8 +261,8 @@ function linkWebsiteOrder(S, { workspace: ws, actor }, body) {
 function mountPublicRoutes(app, ctx, S, H) {
   registerCatalog(S);
   const handle = fn => (req, res) => { try { H.ok(res, fn(req)); } catch (e) { if (!e.status) throw e; H.fail(res, e.status, e.code, e.message); } };
-  app.get("/v1/public/catalog", handle(req => { advance(S); return publicCatalog(S, resolveRegion(req, ctx, S)); }));
-  app.post("/v1/public/website-quotes", handle(req => { advance(S); return createQuote(S, ctx, req.body, resolveRegion(req, ctx, S)); }));
+  app.get("/v1/public/catalog", handle(req => { if (S.db.workspaceAuthorityVersion !== 1) advance(S); return publicCatalog(S, resolveRegion(req, ctx, S)); }));
+  app.post("/v1/public/website-quotes", handle(req => { if (S.db.workspaceAuthorityVersion !== 1) advance(S); return createQuote(S, ctx, req.body, resolveRegion(req, ctx, S)); }));
   app.post("/v1/public/website-orders", handle(req => confirmOrder(S, ctx, req, resolveRegion(req, ctx, S))));
 }
 

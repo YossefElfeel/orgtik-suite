@@ -32,7 +32,8 @@ import {
 import { AppRail, Badge, Button, ErrorState, NoPermissionState, Sidebar, Spinner, SuiteShell, Toaster, UserMenu, type Locale, type SidebarSection } from "@orgtik/ui";
 import { routing, usePathname, useRouter } from "@/i18n/routing";
 import { SOS_URL } from "@/lib/env";
-import { clearToken, getToken } from "@/lib/session";
+import { clearToken, getToken, signOutStaff } from "@/lib/session";
+import { useClientSession } from "@orgtik/ui/auth";
 import { statusOf, useMeQuery } from "@/store/api";
 import { CURRENT_SCOPE, useSuiteApps } from "@/components/suite/useSuiteApps";
 import { CenteredState } from "./CenteredState";
@@ -120,8 +121,10 @@ export function AdmFrame({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale();
+  const session = useClientSession();
+  const [signOutFailed, setSignOutFailed] = useState(false);
   const [token, setTokenState] = useState<string | null | undefined>(undefined);
-  useEffect(() => setTokenState(getToken()), []);
+  useEffect(() => setTokenState(getToken()), [session]);
   useEffect(() => {
     if (token === null) router.replace("/signed-out");
   }, [token, router]);
@@ -162,7 +165,8 @@ export function AdmFrame({ children }: { children: ReactNode }) {
   }
 
   const { user, permissions, roles } = me.data;
-  const allowed = new Set(permissions);
+  const staffPermissions = session?.workspaceContext ? [] : session?.staffAccess?.permissions.admin || [];
+  const allowed = new Set(permissions.filter(permission => staffPermissions.includes(permission)));
   const matches = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/"));
   // Only the most specific item is current: on /pricing/zones that's Zones, not the grid.
   const best = nav.flatMap((x) => x.items.filter((i) => !i.external).map((i) => i.href)).filter(matches).sort((x, y) => y.length - x.length)[0];
@@ -187,7 +191,7 @@ export function AdmFrame({ children }: { children: ReactNode }) {
         start: (
           <span className="inline-flex flex-wrap items-center gap-1.5">
             <span className="sr-only">{t("rolesLabel")}</span>
-            {roles.map((r) => (
+            {roles.filter(r => session?.staffAccess?.roles.admin?.includes(r.key)).map((r) => (
               <Badge key={r.key} size="sm" tone="brand">
                 {t(`roles.${r.key}`)}
               </Badge>
@@ -201,14 +205,14 @@ export function AdmFrame({ children }: { children: ReactNode }) {
             locales={routing.locales as readonly Locale[]}
             onLocaleChange={(next) => router.replace(pathname, { locale: next })}
             onSignOut={() => {
-              clearToken();
-              window.location.assign(SOS_URL);
+              void signOutStaff().then(() => window.location.assign(SOS_URL)).catch(() => setSignOutFailed(true));
             }}
           />
         ),
       }}
     >
       <div className="mx-auto w-full max-w-7xl p-4 md:p-8">{children}</div>
+      {signOutFailed && <ErrorState size="compact" title={ta("offlineTitle")} description={ta("offlineBody")} onRetry={() => { setSignOutFailed(false); void signOutStaff().then(() => window.location.assign(SOS_URL)).catch(() => setSignOutFailed(true)); }} />}
       <Toaster />
     </SuiteShell>
   );

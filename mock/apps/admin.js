@@ -86,6 +86,7 @@ module.exports = {
     },
   },
   exportState: () => S?.exportState() ?? null,
+  getStore: () => S,
   importState(snapshot) {
     if (!S) throw new Error("Platform runtime must be built before state import.");
     S.importState(snapshot);

@@ -8,7 +8,7 @@ The working repo for the OrgTik suite program:
 
 It holds the decisions, registers, audits and question packets that the app repos don't. Nothing in here ships to users.
 
-The approved plan is `C:\Users\yosse\.claude\plans\ethereal-snuggling-pixel.md`.
+The maintained roadmap is [plan-v2-execution.md](plan-v2-execution.md), using the supplied Claude plan as historical input. The R1 implementation/evidence is tracked in [phase-f/README.md](phase-f/README.md). Keep existing configured resources; Vercel deployment remains paused by the owner.
 
 ## What lives where
 
@@ -37,6 +37,6 @@ The approved plan is `C:\Users\yosse\.claude\plans\ethereal-snuggling-pixel.md`.
 ## Rules
 
 - **The website's design never changes.** Every website change must pass the pixel-parity harness.
-- **Frontend only for now.** Apps run against the mocks in `../local-dev/`.
+- **Persistent hosted mock prototype.** Apps use the workspace-aware backend in `../mock/`; payments, mailbox and external integrations are simulated. Local compatibility links keep older audit tooling usable.
 - **Decisions are recorded here before they're built.** PM answers are copied word for word.
 - **Upstream stays mergeable.** Each app keeps its pristine `main`; our work lives on branches (see `baselines.md`).

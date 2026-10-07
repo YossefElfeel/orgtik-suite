@@ -9,16 +9,24 @@ const { buildDb } = require("./hr/seed");
 const makeViews = require("./hr/views");
 const makeCalc = require("./hr/calc");
 
-const db = buildDb({ identity, config });
-const V = makeViews(db, identity);
-const C = makeCalc(db, V);
-const state = { nsp: null };
+let legacy;
+function createState(ctx, db = buildDb({ identity: ctx.identity, config: ctx.config })) {
+  const V = makeViews(db, ctx.identity);
+  return { db, V, C: makeCalc(db, V), state: { nsp: null } };
+}
+function legacyState(ctx) { return legacy || (legacy = createState(ctx)); }
 
 const STAFF_KEYS = ["admin", "manager", "employee", "sales", "finance", "u7", "u8", "u9", "u10", "u11", "u12", "u13", "u14", "u15", "u16"];
 const HR_ROLES = { admin: ["super_admin"], manager: ["manager"], u15: ["manager"], u10: ["hr"], finance: ["finance_manager"] };
 
-function helpers(ctx) {
+function helpers(ctx, runtime) {
+  const { db, V, C, state } = runtime;
+  const identity = ctx.identity, util = ctx.util;
   const h = { db, V, C, L, F, identity, util, ctx, state };
+  h.command = async (req, kind, payload) => {
+    if (typeof ctx.services?.lifecycle?.execute !== "function") throw Object.assign(new Error("A shared workspace command is required"), { status: 501, code: "workspace_command_required" });
+    return ctx.services.lifecycle.execute(kind, payload, { actor: req.workspaceContext?.actor || { userId: req.user.id, effectiveUserId: req.user.id }, workspaceId: ctx.workspaceId, operationId: req.operationId || req.get("idempotency-key") });
+  };
   h.me = (req) => V.empByUser(req.user.id);
   h.guard = (req, res, ...roles) => {
     if (V.has(req.user, ...roles)) return true;
@@ -67,13 +75,16 @@ module.exports = {
     hr_system: Object.fromEntries(STAFF_KEYS.map((k) => [k, HR_ROLES[k] || ["employee"]])),
   },
 
-  routes(app, ctx) {
-    const h = helpers(ctx);
+  createState,
+  createWorkspaceRuntime(input) { return require("../lib/tool-adapters/hr").createWorkspaceRuntime(input, module.exports); },
+  routes(app, ctx, runtime = legacyState(ctx)) {
+    const { db } = runtime;
+    const h = helpers(ctx, runtime);
     // Generated sample files (CVs, seeded attachments, avatars). Real uploads are served by the framework's /uploads static.
     require("./hr/routes/files")(app, h);
     // Everything under /api needs a valid SOS token.
     app.use("/api", (req, res, next) => {
-      const u = identity.requireUser(req, res);
+      const u = ctx.identity.requireUser(req, res);
       if (!u) return;
       req.user = u;
       next();
@@ -88,6 +99,7 @@ module.exports = {
   },
 
   sockets(io, ctx) {
+    const { db, V, state } = legacyState(ctx);
     // Default namespace: accept so stray clients don't retry forever.
     io.on("connection", () => {});
     const nsp = io.of("/notifications");
@@ -107,5 +119,8 @@ module.exports = {
     });
   },
 
-  mounts: require("./hr/mounts")({ db, V, L, identity, util }),
+  mounts: {
+    sos(app, ctx) { return require("./hr/mounts")({ ...legacyState(ctx), L, identity: ctx.identity, util: ctx.util }).sos(app, ctx); },
+    tasks(app, ctx) { return require("./hr/mounts")({ ...legacyState(ctx), L, identity: ctx.identity, util: ctx.util }).tasks(app, ctx); },
+  },
 };

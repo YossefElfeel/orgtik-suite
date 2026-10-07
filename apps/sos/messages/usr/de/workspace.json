@@ -67,6 +67,8 @@
       "toHome": "Zur Startseite",
       "failedTitle": "Ihr Arbeitsbereich konnte nicht geladen werden",
       "failedBody": "Prüfen Sie Ihre Verbindung und versuchen Sie es erneut."
-    }
+    },
+    "switchFailed": "Dieser Arbeitsbereich konnte nicht geöffnet werden. Bitte erneut versuchen.",
+    "signOutFailed": "Die Abmeldung konnte nicht gespeichert werden. Bitte erneut versuchen."
   }
 }

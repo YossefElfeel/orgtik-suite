@@ -1,6 +1,6 @@
 // Deterministic analytics: a 120-day daily series per connected profile, plus the report shapes the
 // app reads (our-reports overview/profiles, integration details, post performance, competitors).
-const { rng, ymd, startOfToday, DAY, round, pctChange } = require("./lib");
+const { rng, ymd, startOfToday, DAY, round, pctChange, calendarDay, addCalendarDays, weekday } = require("./lib");
 const { reportPlatform, normPlatform } = require("./catalog");
 
 const HISTORY_DAYS = 120;
@@ -26,17 +26,17 @@ function series(db, integration) {
   const reachRate = { FACEBOOK: 0.05, INSTAGRAM: 0.09, X: 0.07, LINKEDIN: 0.06, TIKTOK: 0.16, YOUTUBE: 0.08 }[integration.platform] || 0.06;
   const engRate = { FACEBOOK: 0.032, INSTAGRAM: 0.05, X: 0.02, LINKEDIN: 0.04, TIKTOK: 0.075, YOUTUBE: 0.045 }[integration.platform] || 0.04;
   const growth = { FACEBOOK: 0.0006, INSTAGRAM: 0.0011, X: 0.0008, LINKEDIN: 0.0012, TIKTOK: 0.0019, YOUTUBE: 0.001 }[integration.platform] || 0.0008;
-  const start = startOfToday().getTime() - (HISTORY_DAYS - 1) * DAY;
+  const start = addCalendarDays(startOfToday(), -(HISTORY_DAYS - 1));
 
   const days = [];
   for (let i = 0; i < HISTORY_DAYS; i++) {
-    const d = new Date(start + i * DAY);
+    const d = addCalendarDays(start, i);
     const date = ymd(d);
     const appPosts = postDays.get(date) || 0;
     const spike = 1 + appPosts * (0.35 + r() * 0.3);
     const noise = 0.8 + r() * 0.4;
     const trend = 0.85 + (i / HISTORY_DAYS) * 0.3; // audiences keep growing
-    const wd = WEEKDAY[d.getDay()];
+    const wd = WEEKDAY[weekday(date)];
     const point = { date };
     if (isAds) {
       const spend = 1 + (i % 7 === 3 ? 0.2 : 0);
@@ -84,27 +84,26 @@ function series(db, integration) {
 function parseDay(v, endOfDay) {
   if (!v) return null;
   const m = String(v).match(/^(\d{4})-(\d{2})-(\d{2})(?:T00:00:00(?:\.000)?Z)?$/);
-  if (m) return endOfDay ? new Date(+m[1], +m[2] - 1, +m[3], 23, 59, 59, 999) : new Date(+m[1], +m[2] - 1, +m[3]);
+  if (m) return endOfDay ? new Date(calendarDay(`${m[1]}-${m[2]}-${m[3]}`, 1).getTime() - 1) : calendarDay(`${m[1]}-${m[2]}-${m[3]}`);
   const d = new Date(v);
   return Number.isNaN(d.getTime()) ? null : d;
 }
 
 function resolvePeriod(q = {}) {
   const today = startOfToday();
-  const endOfToday = new Date(today.getTime() + DAY - 1);
+  const endOfToday = new Date(addCalendarDays(today, 1).getTime() - 1);
   const pEnd = parseDay(q.periodEnd, true) || endOfToday;
-  const pStart = parseDay(q.periodStart, false) || new Date(today.getTime() - 29 * DAY);
-  const start = Number.isNaN(pStart.getTime()) ? new Date(today.getTime() - 29 * DAY) : pStart;
+  const pStart = parseDay(q.periodStart, false) || addCalendarDays(today, -29);
+  const start = Number.isNaN(pStart.getTime()) ? addCalendarDays(today, -29) : pStart;
   const end = Number.isNaN(pEnd.getTime()) ? endOfToday : pEnd;
-  const len = Math.max(DAY, end.getTime() - start.getTime());
-  const cStart = parseDay(q.compareStart, false) || new Date(start.getTime() - len - 1);
+  const days = Math.max(1, Math.round((Date.parse(ymd(end)) - Date.parse(ymd(start))) / DAY) + 1);
+  const cStart = parseDay(q.compareStart, false) || calendarDay(ymd(start), -days);
   const cEnd = parseDay(q.compareEnd, true) || new Date(start.getTime() - 1);
-  return { start, end, cStart: Number.isNaN(cStart.getTime()) ? new Date(start.getTime() - len) : cStart, cEnd: Number.isNaN(cEnd.getTime()) ? new Date(start.getTime() - 1) : cEnd };
+  return { start, end, cStart: Number.isNaN(cStart.getTime()) ? calendarDay(ymd(start), -days) : cStart, cEnd: Number.isNaN(cEnd.getTime()) ? new Date(start.getTime() - 1) : cEnd };
 }
 
 const inRange = (date, a, b) => {
-  const t = new Date(`${date}T12:00:00`).getTime();
-  return t >= new Date(ymd(a) + "T00:00:00").getTime() && t <= new Date(ymd(b) + "T23:59:59").getTime();
+  return date >= ymd(a) && date <= ymd(b);
 };
 
 function zero() {

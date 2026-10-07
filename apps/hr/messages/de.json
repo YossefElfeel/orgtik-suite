@@ -12,7 +12,8 @@
       "next": "Weiter",
       "submit": "Mitarbeiter anlegen",
       "save": "Änderungen speichern",
-      "close": "Schließen"
+      "close": "Schließen",
+      "recoverInvitation": "Einladung wiederherstellen"
     },
     "avatar": {
       "upload": "Foto hochladen",
@@ -24,14 +25,12 @@
       "fallbackName": "Mitarbeiter"
     },
     "errors": {
-      "passwordRequired": "Passwort ist erforderlich und muss mindestens 6 Zeichen lang sein",
       "invalidPhoneNumber": "Ungültiges Telefonnummernformat",
       "invalidPostCode": "Postleitzahl muss 5-stellig sein",
       "postCodeFor": "Eine Postleitzahl in {country} sieht so aus: {example}.",
       "postCode": "Geben Sie eine gültige Postleitzahl ein.",
       "firstNameRequired": "Vorname ist erforderlich",
       "lastNameRequired": "Nachname ist erforderlich",
-      "passwordMin": "Das Passwort muss mindestens 6 Zeichen lang sein",
       "birthDateRequired": "Geburtsdatum ist erforderlich",
       "phoneRequired": "Telefonnummer ist erforderlich",
       "invalidEmail": "Ungültige E-Mail-Adresse",
@@ -69,7 +68,10 @@
       "casualLeaveRequired": "Sonderurlaub ist erforderlich",
       "sickLeaveRequired": "Krankheitstage sind erforderlich",
       "unpaidLeaveRequired": "Regelung für unbezahlten Urlaub ist erforderlich",
-      "noEmployeeId": "Dieser Mitarbeiter wurde noch nicht angelegt. Gehen Sie zurück zum ersten Schritt und speichern Sie ihn."
+      "noEmployeeId": "Dieser Mitarbeiter wurde noch nicht angelegt. Gehen Sie zurück zum ersten Schritt und speichern Sie ihn.",
+      "invitationUnconfirmed": "Der Status der Einladung ist unbestätigt. Wiederholen Sie die Anfrage, um dasselbe Ergebnis abzurufen.",
+      "invitationWorkspaceChanged": "Kehren Sie zum ursprünglichen Arbeitsbereich zurück, um diese Einladung wiederherzustellen.",
+      "invitationCapacity": "Es ist kein HR-Platz verfügbar. Erhöhen Sie die Kapazität oder geben Sie einen Platz frei und versuchen Sie es erneut."
     },
     "steps": {
       "personal": {
@@ -93,14 +95,16 @@
             "label": "Eigene Unterkunft",
             "description": "Keine Unterstützung durch das Unternehmen"
           }
-        }
+        },
+        "invitationHint": "Eine Einladung zum Arbeitsbereich wird im Mock-Postfach zugestellt. Die Person legt ihr Passwort bei der Annahme fest."
       },
       "employee": {
         "nav": "Mitarbeiterdaten",
         "heading": "Mitarbeiterdaten",
         "description": "Diese Informationen helfen uns, Ihre Identität zu bestätigen und die notwendigen Schritte zur Erfassung Ihrer Mitarbeiterdaten abzuschließen.",
         "skillsHeading": "Fähigkeiten",
-        "skillsDescription": "Diese Informationen helfen uns, Ihre Fähigkeiten zu bestätigen."
+        "skillsDescription": "Diese Informationen helfen uns, Ihre Fähigkeiten zu bestätigen.",
+        "invitationPending": "Der Zugang zum Arbeitsbereich beginnt, sobald die Person die Einladung annimmt."
       },
       "bank": {
         "nav": "Bankdaten",
@@ -141,7 +145,6 @@
     "fields": {
       "birthDate": "Geburtsdatum",
       "nationality": "Staatsangehörigkeit",
-      "password": "Passwort",
       "addressLine1": "Straße",
       "addressCity": "Stadt",
       "addressState": "Land",
@@ -233,7 +236,6 @@
       "remotePolicy": "Optionale Hinweise zu Zeitzone oder hybridem Modell",
       "firstName": "Vorname",
       "lastName": "Nachname",
-      "password": "SicheresPasswort123!",
       "personalTaxId": "xxxx-xxxx-xxxx",
       "gender": "Geschlecht auswählen",
       "maritalStatus": "Familienstand auswählen",
@@ -332,7 +334,8 @@
         "active": "Aktiv",
         "inactive": "Inaktiv",
         "probation": "Probezeit",
-        "terminated": "Ausgeschieden"
+        "terminated": "Ausgeschieden",
+        "invited": "Eingeladen"
       },
       "skills": {
         "ui": "UI-Design",
@@ -416,13 +419,13 @@
     },
     "success": {
       "title": "Erfolg",
-      "messageCreate": "Mitarbeiter wurde erfolgreich hinzugefügt.",
+      "messageCreate": "Die Mitarbeiterdaten wurden gespeichert. Die Einladung zum Arbeitsbereich liegt im Mock-Postfach.",
       "messageEdit": "Mitarbeiter wurde erfolgreich aktualisiert.",
       "primary": "Fertig"
     },
     "loading": "Wird geladen...",
     "toasts": {
-      "creatingEmployee": "Mitarbeiter wird angelegt...",
+      "creatingEmployee": "Mitarbeiter und Einladung zum Arbeitsbereich werden erstellt...",
       "updatingEmployeeInfo": "Mitarbeiterdaten werden aktualisiert...",
       "updatingPaymentInfo": "Zahlungsdaten werden aktualisiert...",
       "updatingSalaryInfo": "Gehaltsdaten werden aktualisiert...",
@@ -2471,7 +2474,7 @@
     "added": "Hinzugefügt",
     "deleted": "Gelöscht",
     "uploaded": "Hochgeladen",
-    "employeeAdded": "Mitarbeitende hinzugefügt",
+    "employeeAdded": "Mitarbeiter erstellt; die Einladung zum Arbeitsbereich wurde im Mock-Postfach zugestellt.",
     "employeeRemoved": "Mitarbeitende entfernt",
     "requestSent": "Antrag gesendet",
     "decisionSaved": "Entscheidung gespeichert",

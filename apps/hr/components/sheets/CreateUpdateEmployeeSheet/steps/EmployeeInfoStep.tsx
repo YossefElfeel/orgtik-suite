@@ -57,6 +57,7 @@ export function EmployeeInfoStep() {
 
   const STATUS_OPTIONS = [
     { value: SELECT_EMPTY_VALUE, label: t("placeholders.status") },
+    { value: "invited", label: t("options.status.invited") },
     { value: "active", label: t("options.status.active") },
     { value: "inactive", label: t("options.status.inactive") },
     { value: "probation", label: t("options.status.probation") },
@@ -121,6 +122,7 @@ export function EmployeeInfoStep() {
     { id: employeeId!, step: WIZARD_STEP_TO_API_KEY.employee },
     { skip: !employeeId }
   );
+  const invitationPending = stepApiResponse?.data?.data?.status === "invited";
 
   useEffect(() => {
     if (stepApiResponse?.success && stepApiResponse.data?.data) {
@@ -227,6 +229,11 @@ export function EmployeeInfoStep() {
             options={STATUS_OPTIONS}
             emptyOptionValue={SELECT_EMPTY_VALUE}
           />
+          {invitationPending && (
+            <p className="text-sm leading-5 text-muted-foreground">
+              {t("steps.employee.invitationPending")}
+            </p>
+          )}
           <SelectFormEle
             form={form}
             name="workType"

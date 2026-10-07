@@ -1,4 +1,5 @@
 const { mask, maskEmail } = require('./ops');
+const codec = require('./state-codec');
 
 function ideaView(idea, canPii) {
   const submitter = idea.submitter;
@@ -34,6 +35,13 @@ function ideaSubmissions(ideas, now = Date.now) {
       seen.set(`body:${body.email.toLowerCase()}|${body.message}`, value);
       if (key) seen.set(`key:${key}`, value);
     },
+    exportState: () => ({ seen: codec.copy([...seen]) }),
+    validateState(value) {
+      const rows = codec.mapRows(value?.seen, { ids: false });
+      if (rows.some(([, row]) => typeof row.id !== 'string' || !Number.isFinite(row.at) || typeof row.payload !== 'string')) throw codec.fail('Website idea submission receipts are incomplete.');
+      return { seen: rows };
+    },
+    importState(value) { const incoming = this.validateState(value); codec.replaceMap(seen, incoming.seen); },
   };
 }
 module.exports = { ideaView, eraseSubmitter, ideaSubmissions };

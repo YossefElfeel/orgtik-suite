@@ -1,92 +1,34 @@
 "use client";
-
-import { useAuthSuccess } from "@orgtik/ui/auth";
-
-// The hand-off from SOS (FS-TASKS-3, D-017). SOS sends a one-time code (?code=), never the access
-// token: the code is exchanged once with the identity API, the address is cleared at once, and
-// the session is checked as before. ?token= still works until SOS lists Tasks among the apps that
-// take a code. The redirect only follows paths in this app (it followed any address: TASKS-001),
-// and the address is replaced, so Back can't reopen the hand-off. Nothing is logged (TASKS-003).
-import { useEffect, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useDispatch } from "react-redux";
-import { useTranslations } from "next-intl";
-import { Button, ErrorState, Spinner } from "@orgtik/ui";
-import { SOS_URL, UnifiedTokenValidation } from "@somion/sos-bar";
-import { setUser } from "@/redux/features/auth/authSlice";
-import { SOS_API_URL } from "@/constants/env";
-import type { IUserScope } from "@/types/user";
-
-const safePath = (v: string | null) => {
-  const s = (v ?? "").replace(/[\t\n\r]/g, "");
-  return s.startsWith("/") && !s.startsWith("//") && !s.startsWith("/\\") ? s : "/";
-};
-
+import { useAuthSuccess, useHandoffSession, setClientSession } from '@orgtik/ui/auth';
+import { useEffect, useRef, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useDispatch } from 'react-redux';
+import { useTranslations } from 'next-intl';
+import { Button, ErrorState, Spinner } from '@orgtik/ui';
+import { SOS_URL } from '@somion/sos-bar';
+import { setUser } from '@/redux/features/auth/authSlice';
+import { SOS_API_URL } from '@/constants/env';
+import { verifiedAuth, type SessionUser } from '@/lib/workspace-session';
+const safePath = (value: string | null) => { const path = (value || '').replace(/[\t\n\r]/g, ''); return path.startsWith('/') && !path.startsWith('//') && !path.startsWith('/\\') ? path : '/'; };
 export default function AuthContent() {
-  const t = useTranslations("Errors");
-  const params = useSearchParams();
-  const router = useRouter();
+  const t = useTranslations('Errors'), params = useSearchParams(), router = useRouter(), dispatch = useDispatch();
+  const first = useRef({ code: params.get('code'), redirect: safePath(params.get('redirect')) });
+  const { session, error, retry } = useHandoffSession<SessionUser>(SOS_API_URL, 'tool:tasks', first.current.code);
   const { confirm, success } = useAuthSuccess();
-  const dispatch = useDispatch();
-  // Read once: clearing the address changes the search params.
-  const first = useRef<{ code: string | null; token: string | null; redirect: string } | null>(null);
-  if (!first.current) first.current = { code: params.get("code"), token: params.get("token"), redirect: safePath(params.get("redirect")) };
-  const [token, setToken] = useState<string | null>(first.current.token);
-  const [failed, setFailed] = useState(false);
-
-  // A code works once: the exchange is one request, shared if the effect runs twice (React runs
-  // effects twice in development; a second exchange of the spent code would fail and win).
-  const exchange = useRef<Promise<string | null> | null>(null);
+  const accepted = useRef(false), [denied, setDenied] = useState(false);
   useEffect(() => {
-    if (window.location.search) window.history.replaceState(null, "", window.location.pathname);
-    const code = first.current?.code;
-    if (!code) return;
-    exchange.current ??= fetch(`${SOS_API_URL}/auth/handoff/exchange`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code }) })
-      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
-      .then((body) => (body?.data?.accessToken as string | undefined) ?? null);
-    let live = true;
-    exchange.current.then((tk) => live && (tk ? setToken(tk) : setFailed(true))).catch(() => live && setFailed(true));
-    return () => {
-      live = false;
-    };
-  }, []);
-
-  const onSuccess = (data: { user: Record<string, unknown> & { permissions?: unknown; scopes?: unknown }; token: string }) => {
-    const { permissions: _ignored, ...user } = data.user;
-    // sos-bar's mapper still gives scopes as names; the app (and its middleware) reads {scope, roles}.
-    const raw = Array.isArray(user.scopes) ? user.scopes : [];
-    const scopes: IUserScope[] = raw.map((s: unknown) => (typeof s === "string" ? { scope: s, roles: [] } : (s as IUserScope)));
-    dispatch(setUser({ user: { ...user, scopes } as never, token: data.token }));
-    // The redirect is a path in this app, with or without its language.
-    const base = window.location.pathname.replace(/\/auth\/?$/, "");
-    const to = first.current?.redirect ?? "/";
-    confirm(() => router.replace(/^\/(en|ar|de|fr|it)(\/|$)/.test(to) ? to : `${base}${to === "/" ? "" : to}` || "/"));
-  };
-
+    if (!session || accepted.current) return;
+    try {
+      const auth = verifiedAuth(session); accepted.current = true;
+      setClientSession(session); dispatch(setUser({ user: auth.user!, token: auth.token! }));
+      const base = window.location.pathname.replace(/\/auth\/?$/, ''), to = first.current.redirect;
+      confirm(() => router.replace(/^\/(en|ar|de|fr|it)(\/|$)/.test(to) ? to : `${base}${to === '/' ? '' : to}` || '/'));
+    } catch { setDenied(true); }
+  }, [session, confirm, dispatch, router]);
   if (success) return success;
-  if (failed) {
-    return (
-      <main className="grid min-h-dvh w-full place-items-center bg-canvas p-4">
-        <ErrorState
-          size="page"
-          titleAs="h1"
-          title={t("handoffTitle")}
-          description={t("handoffBody")}
-          action={
-            <Button variant="primary" onClick={() => window.location.assign(SOS_URL)}>
-              {t("toSuite")}
-            </Button>
-          }
-        />
-      </main>
-    );
+  if (error || denied) {
+    const unavailable = error && error.status >= 500;
+    return <main className="grid min-h-dvh place-items-center bg-canvas p-4"><ErrorState titleAs="h1" title={t(unavailable ? 'sessionUnavailableTitle' : 'handoffTitle')} description={t(unavailable ? 'sessionUnavailableBody' : 'handoffBody')} action={<Button onClick={() => unavailable ? retry() : window.location.assign(SOS_URL)}>{t(unavailable ? 'retry' : 'toSuite')}</Button>} /></main>;
   }
-  if (first.current.code && !token) {
-    return (
-      <div className="grid min-h-dvh w-full place-items-center">
-        <Spinner />
-      </div>
-    );
-  }
-  return <UnifiedTokenValidation token={token} onSuccess={onSuccess as never} redirectOnNoToken={true} />;
+  return <main className="grid min-h-dvh place-items-center bg-canvas"><Spinner /></main>;
 }

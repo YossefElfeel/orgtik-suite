@@ -1,82 +1,36 @@
 "use client";
-
 import { useEffect, useRef } from "react";
-import { useAuthSuccess } from "@orgtik/ui/auth";
+import { useAuthSuccess, useHandoffSession } from "@orgtik/ui/auth";
 import { useSearchParams, useRouter } from "next/navigation";
-import { IUser as SosBarUser, UnifiedTokenValidation } from "@somion/sos-bar";
+import { useTranslations } from "next-intl";
+import { Button, ErrorState, LoadingState } from "@orgtik/ui";
 import { API_URL } from "@/constants/env";
 import { useAppDispatch } from "@/redux/app/hooks";
 import { switchSession } from "@/redux/features/auth/authThunks";
 import { safeRedirect } from "@/lib/safe-redirect";
-import { IScopeItem, IUser } from "@/types/user";
+import type { IUser } from "@/types/user";
 
 export default function AuthPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { confirm, success } = useAuthSuccess();
+  const t = useTranslations("Auth");
   const dispatch = useAppDispatch();
-
-  // Only a path on this site (SOS-002: it followed any address, an open redirect).
-  const first = useRef<{ redirect: string; token: string | null; refreshToken: string | null } | null>(null);
-  if (!first.current) first.current = { redirect: safeRedirect(searchParams.get("redirect")), token: searchParams.get("token"), refreshToken: searchParams.get("refreshToken") };
-  const { redirect, token, refreshToken } = first.current;
-
+  const { confirm, success } = useAuthSuccess();
+  const first = useRef<{ code: string | null; redirect: string } | null>(null);
+  if (!first.current) first.current = { code: searchParams.get("code"), redirect: safeRedirect(searchParams.get("redirect")) };
+  const handoff = useHandoffSession<IUser>(API_URL, "suite", first.current.code);
+  const completed = useRef(false);
   useEffect(() => {
-    if (window.location.search) window.history.replaceState(null, "", window.location.pathname);
-    if (!token) {
-      router.replace("/auth/login");
-    }
-  }, [token, router]);
-
-  const onSuccess = (data: { user: SosBarUser; token: string }) => {
-    const scopes: IScopeItem[] = (data.user.scopes || []).map((scope) => ({
-      scope: scope.scope,
-      roles: [...scope.roles],
-      permissions: [],
-    }));
-
-    const user: IUser = {
-      id: data.user.id,
-      email: data.user.email,
-      username: data.user.username,
-      firstName: data.user.firstName,
-      lastName: data.user.lastName,
-      avatar: data.user.avatar,
-      isActive: data.user.isActive,
-      isEmailVerified: data.user.isEmailVerified,
-      userType: data.user.userType,
-      createdAt: data.user.createdAt,
-      updatedAt: data.user.updatedAt,
-      profile: data.user.profile,
-    };
-
-    dispatch(
-      switchSession({
-        user,
-        tokens: {
-          accessToken: data.token,
-          refreshToken: refreshToken || "",
-          expiresIn: 0,
-        },
-        scopes,
-      })
-    );
-
-    // replace, not push: Back must not reopen the address that carried the token (SOS-002).
-    // Customers land in their workspace (USR, D-011): Sales is a CRM, opened from the rail.
-    confirm(() => router.replace(redirect));
-  };
-
+    if (!handoff.session || completed.current) return;
+    completed.current = true;
+    const value = handoff.session;
+    dispatch(switchSession({ ...value, scopes: value.scopes.map(scope => ({ ...scope, permissions: scope.permissions || [] })) }));
+    confirm(() => router.replace(first.current!.redirect));
+  }, [handoff.session, dispatch, router, confirm]);
   if (success) return success;
-  if (!token) {
-    return null;
+  if (handoff.error) {
+    const expired = [400, 401, 403, 410].includes(handoff.error.status);
+    return <ErrorState size="compact" title={t(expired ? "handoffExpired" : "failed")} description={expired ? t("handoffSignIn") : undefined} onRetry={expired ? undefined : handoff.retry} action={expired ? <Button onClick={() => router.replace("/auth/login?switch=1")}>{t("submit")}</Button> : undefined} />;
   }
-
-  return (
-    <UnifiedTokenValidation
-      baseApi={API_URL}
-      token={token}
-      onSuccess={onSuccess}
-    />
-  );
+  return <LoadingState rows={2} />;
 }

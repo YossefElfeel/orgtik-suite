@@ -43,7 +43,10 @@
     "noAccessTitle": "Vous ne pouvez pas ouvrir cette page",
     "noAccessBody": "Votre rôle dans Tâches ne l’inclut pas. Demandez à un chef de projet ou à l’administrateur de l’espace de travail si vous en avez besoin.",
     "appNoAccessTitle": "Vous n’avez pas accès à Tâches",
-    "appNoAccessBody": "Votre compte n’est pas configuré pour cette application. Ouvrez vos applications depuis la suite, ou demandez à l’administrateur de l’espace de travail de vous donner accès à Tâches."
+    "appNoAccessBody": "Votre compte n’est pas configuré pour cette application. Ouvrez vos applications depuis la suite, ou demandez à l’administrateur de l’espace de travail de vous donner accès à Tâches.",
+    "sessionLoading": "Ouverture de votre espace de travail…",
+    "sessionUnavailableTitle": "Votre espace n’a pas pu être ouvert",
+    "sessionUnavailableBody": "Impossible de vérifier votre accès actuel. Vos informations de connexion sont conservées ; réessayez pour continuer."
   },
   "Feedback": {
     "saved": "Modifications enregistrées",

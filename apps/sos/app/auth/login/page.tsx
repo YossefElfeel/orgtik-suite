@@ -35,6 +35,7 @@ export default function LoginPage() {
   const next = safeRedirect(searchParams.get("redirect"));
   // After a reset or an accepted invitation, say it worked (it used to land here with no word).
   const welcome = searchParams.get("reset") ? t("passwordChanged") : searchParams.get("invited") ? t("accountReady") : null;
+  const requestedMode = searchParams.get("mode"), requestedTarget = searchParams.get("target");
 
   const schema = useMemo(
     () =>
@@ -50,7 +51,9 @@ export default function LoginPage() {
   const onSubmit = async (data: LoginData) => {
     setFormError(null);
     try {
-      const response = await login(data).unwrap();
+      if (requestedMode === "staff" && !["admin", "wm"].includes(requestedTarget || "")) { setFormError(t("validationFailed")); return; }
+      const staffTarget = requestedMode === "staff" && (requestedTarget === "admin" || requestedTarget === "wm") ? requestedTarget : null;
+      const response = await login({ ...data, ...(staffTarget ? { mode: "staff", target: staffTarget } as const : {}) }).unwrap();
       const user = response?.data?.user;
       // Customers land in their workspace (USR, D-011): Sales is a CRM, opened from the rail.
       // Sent here by another suite app after its session ended: back to that page in that app,

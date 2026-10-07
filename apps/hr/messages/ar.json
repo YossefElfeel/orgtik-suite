@@ -12,7 +12,8 @@
       "next": "التالي",
       "submit": "إنشاء الموظف",
       "save": "حفظ التغييرات",
-      "close": "إغلاق"
+      "close": "إغلاق",
+      "recoverInvitation": "استعادة نتيجة الدعوة"
     },
     "avatar": {
       "upload": "رفع صورة",
@@ -24,14 +25,12 @@
       "fallbackName": "موظف"
     },
     "errors": {
-      "passwordRequired": "كلمة المرور مطلوبة ويجب ألا تقل عن 6 أحرف",
       "invalidPhoneNumber": "صيغة رقم الهاتف غير صحيحة",
       "invalidPostCode": "الرمز البريدي غير صحيح",
       "postCodeFor": "الرمز البريدي في {country} يكون مثل {example}.",
       "postCode": "أدخل رمزًا بريديًا صحيحًا.",
       "firstNameRequired": "الاسم الأول مطلوب",
       "lastNameRequired": "اسم العائلة مطلوب",
-      "passwordMin": "يجب ألا تقل كلمة المرور عن 6 أحرف",
       "birthDateRequired": "تاريخ الميلاد مطلوب",
       "phoneRequired": "رقم الهاتف مطلوب",
       "invalidEmail": "عنوان البريد الإلكتروني غير صالح",
@@ -69,7 +68,10 @@
       "casualLeaveRequired": "الإجازة العارضة مطلوبة",
       "sickLeaveRequired": "الإجازة المرضية مطلوبة",
       "unpaidLeaveRequired": "سياسة الإجازة غير مدفوعة الأجر مطلوبة",
-      "noEmployeeId": "لم يُنشأ هذا الموظف بعد. ارجع إلى الخطوة الأولى واحفظه."
+      "noEmployeeId": "لم يُنشأ هذا الموظف بعد. ارجع إلى الخطوة الأولى واحفظه.",
+      "invitationUnconfirmed": "حالة الدعوة غير مؤكدة. أعد المحاولة لاستعادة نتيجة الطلب نفسه.",
+      "invitationWorkspaceChanged": "عُد إلى مساحة العمل الأصلية لاستعادة نتيجة هذه الدعوة.",
+      "invitationCapacity": "لا يوجد مقعد متاح للموارد البشرية. أضف مقاعد أو حرّر مقعدًا، ثم أعد المحاولة."
     },
     "steps": {
       "personal": {
@@ -93,14 +95,16 @@
             "label": "سكن خاص",
             "description": "دون دعم من الشركة"
           }
-        }
+        },
+        "invitationHint": "ستُرسَل دعوة إلى مساحة العمل عبر صندوق البريد التجريبي. يختار الموظف كلمة مروره عند قبول الدعوة."
       },
       "employee": {
         "nav": "بيانات الوظيفة",
         "heading": "بيانات الوظيفة",
         "description": "تساعدنا هذه البيانات على إكمال الخطوات اللازمة لإضافة بيانات الموظف الوظيفية.",
         "skillsHeading": "المهارات",
-        "skillsDescription": "أضف مهارات الموظف."
+        "skillsDescription": "أضف مهارات الموظف.",
+        "invitationPending": "يبدأ الوصول إلى مساحة العمل بعد قبول الموظف للدعوة."
       },
       "bank": {
         "nav": "البيانات المصرفية",
@@ -141,7 +145,6 @@
     "fields": {
       "birthDate": "تاريخ الميلاد",
       "nationality": "الجنسية",
-      "password": "كلمة المرور",
       "addressLine1": "الشارع",
       "addressCity": "المدينة",
       "addressState": "الدولة",
@@ -233,7 +236,6 @@
       "remotePolicy": "ملاحظات اختيارية عن المنطقة الزمنية أو نظام العمل المختلط",
       "firstName": "الاسم الأول",
       "lastName": "اسم العائلة",
-      "password": "كلمة مرور قوية",
       "personalTaxId": "xxxx-xxxx-xxxx",
       "gender": "اختر النوع",
       "maritalStatus": "اختر الحالة الاجتماعية",
@@ -332,7 +334,8 @@
         "active": "نشط",
         "inactive": "غير نشط",
         "probation": "فترة اختبار",
-        "terminated": "منتهية خدمته"
+        "terminated": "منتهية خدمته",
+        "invited": "تمت دعوته"
       },
       "skills": {
         "ui": "تصميم الواجهات",
@@ -416,13 +419,13 @@
     },
     "success": {
       "title": "تم بنجاح",
-      "messageCreate": "أُضيف الموظف بنجاح.",
+      "messageCreate": "تم حفظ بيانات الموظف. دعوته إلى مساحة العمل موجودة في صندوق البريد التجريبي.",
       "messageEdit": "حُدِّثت بيانات الموظف بنجاح.",
       "primary": "تم"
     },
     "loading": "جارٍ التحميل…",
     "toasts": {
-      "creatingEmployee": "جارٍ إنشاء الموظف…",
+      "creatingEmployee": "جارٍ إنشاء الموظف ودعوته إلى مساحة العمل...",
       "updatingEmployeeInfo": "جارٍ تحديث بيانات الموظف…",
       "updatingPaymentInfo": "جارٍ تحديث بيانات الدفع…",
       "updatingSalaryInfo": "جارٍ تحديث بيانات الراتب…",
@@ -2471,7 +2474,7 @@
     "added": "تمت الإضافة",
     "deleted": "تم الحذف",
     "uploaded": "تم الرفع",
-    "employeeAdded": "أُضيف الموظف",
+    "employeeAdded": "تم إنشاء الموظف وتسليم دعوة مساحة العمل إلى صندوق البريد التجريبي.",
     "employeeRemoved": "أُزيل الموظف",
     "requestSent": "أُرسل الطلب",
     "decisionSaved": "حُفظ القرار",

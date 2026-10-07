@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@orgtik/ui";
 import { SignIn } from "@phosphor-icons/react";
 import { CenteredState } from "@/components/frame/CenteredState";
-import { SOS_URL } from "@/lib/env";
+import { staffSignInHref } from "@/lib/session";
 
 export default function SignedOutPage() {
   const t = useTranslations("Auth");
@@ -16,7 +16,7 @@ export default function SignedOutPage() {
         </span>
         <h1 className="font-display text-title text-fg">{t("signedOutTitle")}</h1>
         <p className="text-body text-fg-muted">{t("signedOutBody")}</p>
-        <Button className="mt-2" onClick={() => window.location.assign(`${SOS_URL}/auth/login`)}>
+        <Button className="mt-2" onClick={() => window.location.assign(staffSignInHref())}>
           {t("signIn")}
         </Button>
       </div>

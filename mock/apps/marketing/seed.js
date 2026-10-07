@@ -8,13 +8,17 @@ const { GALLERY } = require("./media");
 // u12=12 Dina (Marketing Specialist), u14=14 Hoda (Content Writer).
 const U = { admin: 1, manager: 2, customer: 5, u12: 12, u14: 14 };
 
-function buildSeed() {
-  const db = {
+function buildEmptySeed() {
+  return {
     projects: [], activeProject: {}, gallery: [], nextGalleryId: 1, labels: [], integrations: [],
     posts: [], postComments: [], campaigns: [], campaignComments: [], executions: [],
     audiences: [], segments: [], imports: [], senders: [], templates: [], competitors: [],
-    oauthStates: {}, tempIntegrations: {},
+    oauthStates: {}, tempIntegrations: {}, ownershipTransfers: {},
   };
+}
+
+function buildSeed() {
+  const db = buildEmptySeed();
 
   // ---------------------------------------------------------------- projects (brands)
   const P = {};
@@ -564,4 +568,4 @@ function seedMetrics(seed, followers, platform, publishedAt) {
   return { impressions, reach, engagements, likes, comments, reposts, shares: reposts, saves, clicks, videoViews };
 }
 
-module.exports = { buildSeed, seedMetrics, U };
+module.exports = { buildSeed, buildEmptySeed, seedMetrics, U };

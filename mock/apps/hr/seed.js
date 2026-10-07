@@ -1,6 +1,7 @@
 // Seed data for the HR mock. Everything is deterministic (seeded PRNG) and anchored on "today" in Cairo.
 const { createStore, seeded } = require("../../lib/util");
 const L = require("./lib");
+const TABLES = ["departments", "employees", "attachments", "notes", "timeOffs", "meetings", "runs", "items", "adjustments", "loanApps", "loans", "importBatches", "jobs", "applications", "stages", "appointments", "appNotes", "tickets", "messages", "notifications", "logs"];
 
 const COMPANY = {
   name: "OrgTik Egypt",
@@ -96,7 +97,7 @@ function buildDb({ identity, config }) {
   const rnd = seeded(20260929);
 
   const db = {
-    company: COMPANY,
+    company: { ...COMPANY },
     today: TODAY,
     seedUrl,
     calcSalary,
@@ -126,6 +127,7 @@ function buildDb({ identity, config }) {
     seedDocs: {}, // file name -> { kind, ...data } for /uploads/seed/*
     settings: null,
     projects: [],
+    ownershipTransfers: {},
   };
   // stores seeded with a dummy row to push their id sequence; drop the dummy.
   for (const s of [db.items, db.adjustments, db.loanApps, db.tickets]) s.remove(s.rows[0].id);
@@ -725,10 +727,66 @@ function buildDb({ identity, config }) {
   db.holidays = () => (db.settings.attendance.publicHolidays || []).map((h) => ({ name: h.name, date: L.normDate(h.date) })).filter((h) => h.date);
 
   // Rows above were pushed with explicit ids; rebuild each store so its id counter continues after the max id.
-  for (const k of ["departments", "employees", "attachments", "notes", "timeOffs", "meetings", "runs", "items", "adjustments", "loanApps", "loans", "importBatches", "jobs", "applications", "stages", "appointments", "appNotes", "tickets", "messages", "notifications", "logs"]) {
+  for (const k of TABLES) {
     db[k] = createStore(db[k].rows);
   }
   return db;
 }
 
-module.exports = { buildDb, calcSalary, ALL_STEPS, COMPANY };
+function attachCalculations(db) {
+  db.calcSalary = calcSalary;
+  db.holidays = () => (db.settings.attendance.publicHolidays || []).map(h => ({ name: h.name, date: L.normDate(h.date) })).filter(h => h.date);
+  db.approvedLeaveOn = (employeeId, date) => db.timeOffs.rows.find(row => row.employeeId === employeeId && row.status === "approved" && row.startDate <= date && row.endDate >= date) || null;
+  db.periodBase = (employee, run) => {
+    const base = Number(employee.salary.baseSalary) || 0, days = L.daysBetween(run.periodStart, run.periodEnd) + 1;
+    const start = employee.joinDate > run.periodStart ? employee.joinDate : run.periodStart;
+    const ratio = Math.min(1, Math.max(0, L.daysBetween(start, run.periodEnd) + 1) / days);
+    return L.round2(run.frequency === "monthly" ? base * ratio : run.frequency === "biweekly" ? base / 2 * ratio : run.frequency === "weekly" ? base * 12 / 52 * ratio : base / 176 * 8 * days);
+  };
+  db.itemMetrics = (employee, run) => {
+    const holidays = new Set(db.holidays().map(row => row.date));
+    const working = (db.settings.attendance.schedule.workingDays || []).map(Number);
+    const days = L.dateRange(run.periodStart, run.periodEnd).filter(date => working.includes(L.isoWeekday(date)) && !holidays.has(date) && date >= employee.joinDate);
+    const sessions = db.sessions.filter(row => row.employeeId === employee.id && row.date >= run.periodStart && row.date <= run.periodEnd);
+    return { workingDaysCount: days.length, workedDaysCount: new Set(sessions.map(row => row.date)).size, workedHours: L.round2(sessions.reduce((sum, row) => sum + row.durationSeconds, 0) / 3600) };
+  };
+  db.adjAmount = (item, mode, value) => {
+    const base = Number(item.baseSalary) || 0, amount = Number(value) || 0;
+    return L.round2(mode === "percent" || mode === "percentage" ? base * amount / 100 : mode === "days" ? base / 30 * amount : mode === "months" ? base * amount : amount);
+  };
+  return db;
+}
+
+function buildEmptyDb({ config, workspace }) {
+  const company = { name: workspace.name, address: "" };
+  const db = { company, today: L.todayStr(), seedUrl: file => `${config.apiUrl("hr")}/uploads/seed/${file}`, sessions: [], voiceLeaves: [], nextSessionId: 1, nextLeaveId: 1, projects: [], seedDocs: {}, ownershipTransfers: {}, settings: { companyProfile: { avatar: null, companyName: company.name, preferredLanguage: "en", phoneNumber: "", emailAddress: "", location: "" }, attendance: { schedule: { effectiveFrom: L.toDmy(L.todayStr()), workingDays: [1, 2, 3, 4, 5], dayStartTime: "09:00", dayEndTime: "17:00", gracePeriodMinutes: 15 }, publicHolidays: [] } } };
+  for (const key of TABLES) db[key] = createStore([]);
+  // These offsets are schema ID conventions, not seeded business records.
+  for (const [key, nextId] of Object.entries({ items: 1001, adjustments: 50001, loanApps: 70001, tickets: 1001 })) db[key].importSnapshot({ rows: [], nextId, idKey: "id" });
+  return attachCalculations(db);
+}
+
+function exportDb(db) {
+  const data = {}, sequences = {};
+  for (const key of TABLES) {
+    const table = db[key].exportSnapshot();
+    data[key] = table.rows; sequences[key] = table.nextId;
+  }
+  for (const [key, value] of Object.entries(db)) if (!TABLES.includes(key) && typeof value !== "function") data[key] = JSON.parse(JSON.stringify(value));
+  for (const key of ["nextSessionId", "nextLeaveId"]) sequences[key] = db[key];
+  return { data, sequences };
+}
+
+function importDb(db, snapshot) {
+  const { data, sequences } = snapshot;
+  if (!data || !sequences || !Array.isArray(data.sessions) || !Array.isArray(data.voiceLeaves) || !Array.isArray(data.projects) || !data.settings?.attendance?.schedule || !data.settings.companyProfile || !data.company) throw new TypeError("Invalid HR snapshot");
+  for (const key of TABLES) db[key].importSnapshot({ rows: data[key], nextId: sequences[key], idKey: "id" });
+  for (const [key, value] of Object.entries(data)) if (!TABLES.includes(key)) db[key] = JSON.parse(JSON.stringify(value));
+  for (const key of ["nextSessionId", "nextLeaveId"]) {
+    const rows = key === "nextSessionId" ? data.sessions : data.voiceLeaves;
+    if (!Number.isSafeInteger(sequences[key]) || sequences[key] <= Math.max(0, ...rows.map(row => Number(row.id) || 0)) || sequences[key] !== data[key]) throw new TypeError("Invalid HR sequence");
+  }
+  return attachCalculations(db);
+}
+
+module.exports = { buildDb, buildEmptyDb, exportDb, importDb, attachCalculations, TABLES, calcSalary, ALL_STEPS, COMPANY };

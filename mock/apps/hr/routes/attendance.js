@@ -204,7 +204,7 @@ module.exports = function attendanceRoutes(app, h) {
     send(res, V.timeOffDetail(t), "Time off request fetched");
   });
 
-  app.patch("/api/attendance/time-offs/requests/:id/decision", (req, res) => {
+  app.patch("/api/attendance/time-offs/requests/:id/decision", async (req, res) => {
     const t = db.timeOffs.find(req.params.id);
     if (!t) return err(res, 404, "Time off request not found");
     const { status, decisionNote } = h.body(req);
@@ -219,6 +219,10 @@ module.exports = function attendanceRoutes(app, h) {
       if (!me || !(e.managerId === me.id || V.teamIds(me.id).has(e.id))) return err(res, 403, "You can only decide on requests from your team.");
       role = "manager";
     } else return err(res, 403, "Only managers and HR can decide on time-off requests.");
+    if (h.identity.workspaceMode) {
+      try { return send(res, await h.command(req, "hr.leave.approve", { requestId: t.id, status, decisionNote: decisionNote || null, decidedAs: role }), "Leave decision command staged"); }
+      catch (error) { return res.status(error.status || 503).json({ success: false, code: error.code || "workspace_command_required", message: error.message }); }
+    }
     const before = t.status;
     if (role === "hr") Object.assign(t, { hrActionStatus: status, hrDecisionNote: decisionNote || null, hrDecidedByUserId: status === "pending" ? null : req.user.id, hrDecidedAt: status === "pending" ? null : now });
     else Object.assign(t, { managerActionStatus: status, managerDecisionNote: decisionNote || null, managerDecidedByUserId: status === "pending" ? null : req.user.id, managerDecidedAt: status === "pending" ? null : now });

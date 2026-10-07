@@ -2,7 +2,7 @@
 // can race server shutdown/idle timeouts while the global mock clock changes during replay.
 const http = require("node:http");
 
-const HOP = new Set(["host", "connection", "content-length", "transfer-encoding", "keep-alive", "expect", "upgrade"]);
+const HOP = new Set(["host", "connection", "content-length", "transfer-encoding", "keep-alive", "expect", "upgrade", "x-mock-app"]);
 
 function dispatch(base, key, { method, url, headers, body }) {
   const h = { "x-mock-app": key, connection: "close" };
@@ -17,7 +17,7 @@ function dispatch(base, key, { method, url, headers, body }) {
       response.on("error", reject);
       response.on("end", () => resolve({
         statusCode: response.statusCode,
-        headers: Object.fromEntries(Object.entries(response.headers).filter(([name]) => !HOP.has(name))),
+        headers: Object.fromEntries(Object.entries(response.headers).filter(([name]) => !HOP.has(name) || name === 'content-length')),
         rawPayload: Buffer.concat(chunks),
       }));
     });

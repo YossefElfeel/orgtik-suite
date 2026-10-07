@@ -32,6 +32,7 @@ let channel: BroadcastChannel | null = null;
 let receiving = false;
 
 export function startTabRelay(): void {
+  if (process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_SOS_API_URL) return;
   if (channel || typeof BroadcastChannel === "undefined") return;
   const open = new BroadcastChannel("somion-hq.meetings");
   channel = open;

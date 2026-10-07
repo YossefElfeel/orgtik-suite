@@ -3,24 +3,18 @@
 /**
  * SOMION HQ - WORKSPACE STORE
  *
- * The rule that protects this codebase from being rewritten: the UI does not
- * know the data is mock. Components read hooks, hooks read this store, and the
- * store is fed today by mock/simulator.ts and tomorrow by a WebSocket.
- *
- * Two halves:
- *   1. `applyEvent(event)` - the ONLY way state changes. In production the
- *      socket handler calls exactly this function with the same event shapes.
- *   2. Actions named for their future endpoints. Each performs an optimistic
- *      local apply and then hands off to the transport (mock today, HTTP later).
+ * Hooks read confirmed workspace snapshots. Actions stage supported events
+ * through the mock API; only a successful persistence response hydrates them.
+ * Remaining media/presence/meeting commands are explicitly deferred.
  */
 
 import { create } from "zustand";
-import { isWithinWindow } from "@/lib/time";
 import { roomEntryStatus, roomHardCap, roomIsOpenNow, roomOpensAudio } from "@/lib/presence";
-import { setEarshot } from "@/lib/audio";
 import { applyAccent, readAccent, type AccentId } from "@/lib/appearance";
 import { queryIdleSupport, requestIdlePermission, type IdleSupport } from "@/lib/idle";
 import { inSuite, signOutOfSuite, type SuiteSession } from "@/lib/suite-session";
+import { roleForSuiteSession } from "@/lib/roles";
+import { persistEvent, reloadWorkspace, type SyncState, type BootstrapData } from "./platform";
 
 import type {
   Channel,
@@ -52,6 +46,11 @@ import { msg, type Msg } from "@/lib/messages";
 
 export interface WorkspaceState {
   /* data */
+  workspaceId: string;
+  fixtureId: string | null;
+  historicalUsers: { id: Id; name: string; initials: string; tint: number }[];
+  readState: Record<string, number>;
+  workspaceSync: SyncState;
   me: Id;
   users: User[];
   presence: Presence[];
@@ -123,6 +122,9 @@ export interface WorkspaceState {
   applyEvent: (event: ServerEvent) => void;
   /** The suite's signed-in person takes their seat (FS-CHT-4). */
   adoptSuiteSession: (session: SuiteSession) => void;
+  clearWorkspace: (state: SyncState) => void;
+  hydrateWorkspace: (data: BootstrapData, state: SyncState) => void;
+  setWorkspaceSync: (state: SyncState) => void;
 
   /* actions, named for the endpoints that will replace them */
   /** A message with its files (CHT-001: they were dropped); a message may be files alone. */
@@ -219,8 +221,7 @@ export interface WorkspaceState {
 
 /* ----------------------------------------------------------------- helpers */
 
-let seq = 0;
-const nextId = (prefix: string): string => `${prefix}-${++seq}`;
+const nextId = (prefix: string): string => `${prefix}-${crypto.randomUUID()}`;
 
 /**
  * Told about every event after it is applied. For the transport, never the
@@ -237,17 +238,6 @@ export function observeEvents(observe: EventObserver): () => void {
 }
 
 /*
- * The suite's signed-in person sits in the demo's main seat: the mock workspace has one prepared
- * seat, with its conversations and meetings, and the person takes it with their own name and
- * role. A real backend gives each person their own member record instead.
- */
-let suiteSeat: { name: string; initials: string; role: Role; title?: string } | null = null;
-const seated = (users: User[]): User[] => {
-  const seat = suiteSeat;
-  return seat ? users.map((u) => (u.id === seed.ME ? { ...u, ...seat, title: seat.title || u.title } : u)) : users;
-};
-
-/*
  * View as (D-017) is read-only. The real API refuses changes with 403 read_only; the mock
  * workspace lives in the browser, so the store refuses them here, the same way: a change the
  * person asked for says why, and the automatic ones (marking a conversation read) stay quiet.
@@ -256,14 +246,15 @@ const seated = (users: User[]): User[] => {
 const LOUD_WRITES = [
   "sendMessage", "editMessage", "deleteMessage", "toggleReaction", "togglePin", "setStatus", "moveTo", "joinRoom",
   "sendKnock", "answerKnock", "endHuddle", "createChannel", "updateChannel", "addChannelMembers", "leaveChannel",
-  "createGroupDm", "removeChannelMember", "addRoom", "removeRoom", "updateRoom", "setServerMute", "setServerDeafen",
+  "createGroupDm", "openOrCreateDm", "ensureRoomChannel", "ensureMeetingChannel", "removeChannelMember", "addRoom", "removeRoom", "updateRoom", "setServerMute", "setServerDeafen",
   "declineGuest", "setShare", "setActivation", "connectIntegration", "disconnectIntegration", "scheduleMeeting",
   "startInstantMeeting", "resetGuestLink", "requestRecording", "startRecording", "declineRecording", "stopRecording", "endMeeting",
   "admitGuest", "updateSettings",
 ] as const;
 const QUIET_WRITES = ["markChannelRead", "markAllRead", "leaveRoom", "dismissHeldKnock"] as const;
 /** What a refused call returns: the callers of id-returning actions treat "" and null as "nothing made". */
-const REFUSED: Partial<Record<string, unknown>> = { addRoom: null, createChannel: "", createGroupDm: "", startInstantMeeting: "" };
+const REFUSED: Partial<Record<string, unknown>> = { addRoom: null, createChannel: "", createGroupDm: "", openOrCreateDm: "", ensureRoomChannel: "", ensureMeetingChannel: "", startInstantMeeting: "" };
+const PERSISTENT_ACTIONS = new Set(["sendMessage", "editMessage", "deleteMessage", "toggleReaction", "togglePin", "createChannel", "updateChannel", "addChannelMembers", "leaveChannel", "openOrCreateDm", "createGroupDm", "removeChannelMember", "markChannelRead", "markAllRead"]);
 
 function guardWrites<T extends WorkspaceState>(state: T, get: () => WorkspaceState, set: (fn: (s: WorkspaceState) => Partial<WorkspaceState>) => void): T {
   const guarded = { ...state } as Record<string, unknown>;
@@ -271,12 +262,16 @@ function guardWrites<T extends WorkspaceState>(state: T, get: () => WorkspaceSta
     const original = state[name] as (...args: unknown[]) => unknown;
     const loud = (LOUD_WRITES as readonly string[]).includes(name);
     guarded[name] = (...args: unknown[]) => {
-      if (!get().viewOnly) return original(...args);
+      if (!get().viewOnly && get().workspaceSync.status === "ready" && get().workspaceSync.canWrite) {
+        if (PERSISTENT_ACTIONS.has(name)) return original(...args);
+        if (loud) set(s => ({ workspaceSync: { ...s.workspaceSync, errorCode: "chat_flow_deferred" } }));
+        return REFUSED[name];
+      }
       if (loud) {
         set((s) => ({
           toasts: [
             ...s.toasts.filter((x) => !(typeof x.title !== "string" && x.title.key === "toast.readOnly")),
-            { id: nextId("toast"), kind: "system" as const, title: msg("toast.readOnly", "Changes are turned off"), body: msg("toast.readOnlyBody", "You're viewing as someone else, so nothing here can be changed.") },
+            { id: nextId("toast"), kind: "system" as const, title: msg("toast.readOnly", "Changes are turned off"), body: msg("toast.readOnlyBody", "This workspace is read-only. You can read conversations, but changes are turned off.") },
           ],
         }));
       }
@@ -295,26 +290,21 @@ export const newGuestKey = (): string => {
 const keyed = (m: Meeting): Meeting => (m.guestKey ? m : { ...m, guestKey: newGuestKey() });
 
 const freshData = () => ({
-  me: seed.ME,
-  users: seated(seed.users),
-  presence: seed.presence.map((p) => ({ ...p })),
-  floor: seed.floor,
-  channels: seed.channels.map((c) => ({ ...c })),
-  messages: seed.messages.map((m) => ({ ...m })),
-  threadReplies: Object.fromEntries(
-    Object.entries(seed.threadReplies).map(([k, v]) => [k, v.map((m) => ({ ...m }))]),
-  ),
-  meetings: seed.meetings.map((m) => keyed({ ...m, guests: m.guests.map((g) => ({ ...g })) })),
-  pastMeetings: seed.pastMeetings.map((m) => ({ ...m })),
-  notifications: seed.notifications.map((n) => ({ ...n })),
-  insight: seed.insight,
-  myTime: seed.myTime,
-  settings: { ...seed.settings },
+  workspaceId: "", fixtureId: null, historicalUsers: [], readState: {},
+  workspaceSync: { status: "loading", namespace: "", canWrite: false, pending: 0 } as SyncState,
+  me: "",
+  users: [] as User[], presence: [] as Presence[],
+  floor: { id: "floor", template: "team", rooms: [] } as Floor,
+  channels: [] as Channel[], messages: [] as Message[], threadReplies: {} as Record<string, Message[]>,
+  meetings: [] as Meeting[], pastMeetings: [] as Meeting[], notifications: [] as Notification[],
+  insight: { week: "", presenceHoursByHour: Array.from({ length: 7 }, () => Array(24).fill(0)), meetingHoursByDay: Array(7).fill(0), roomUsage: [], cohortSize: 0 } as Insight,
+  myTime: { week: "", presenceHoursByDay: Array(7).fill(0), meetingHoursByDay: Array(7).fill(0), focusHoursByDay: Array(7).fill(0) } as MyTime,
+  settings: { ...seed.settings, name: "", activation: { state: "active", tier: "business", userCap: null }, integrations: { google: "off", microsoft: "off" } } as WorkspaceSettings,
   session: { state: "active" } as Session,
   knock: null,
   huddleWith: null,
   heldKnocks: [],
-  viewingRole: "admin" as Role,
+  viewingRole: "member" as Role,
   officeFocus: null,
   localMutes: [],
   localVolumes: {},
@@ -329,24 +319,7 @@ const freshData = () => ({
 const nameOf = (users: User[], id: Id): string =>
   users.find((u) => u.id === id)?.name ?? "Someone";
 
-const roomNameOf = (floor: Floor, id?: Id): string =>
-  (id && floor.rooms.find((r) => r.id === id)?.name) || "the floor";
-
 /* ------------------------------------------------------------------- store */
-
-/**
- * Applies a patch to a meeting wherever it currently lives. Recording finishes
- * processing after the call ends, by which point the meeting has already moved
- * to `pastMeetings` - patching only the live list silently loses the file.
- */
-const patchMeeting = (
-  s: { meetings: Meeting[]; pastMeetings: Meeting[] },
-  id: Id,
-  patch: Partial<Meeting>,
-) => ({
-  meetings: s.meetings.map((m) => (m.id === id ? { ...m, ...patch } : m)),
-  pastMeetings: s.pastMeetings.map((m) => (m.id === id ? { ...m, ...patch } : m)),
-});
 
 /* -------------------------------------------------------------- placement */
 
@@ -447,597 +420,9 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
      Every state change in the product passes through here. The simulator and
      the production WebSocket both call this with identical payloads.
      ======================================================================== */
-  applyEvent: (event) => {
-    set((s) => {
-      switch (event.type) {
-        /* ------------------------------------------------------- presence */
-        case "presence.status_changed": {
-          const presence = s.presence.map((p) =>
-            p.userId === event.userId
-              ? {
-                  ...p,
-                  status: event.status,
-                  customText: event.customText,
-                  focusUntil: event.focusUntil,
-                  since: new Date().toISOString(),
-                }
-              : p,
-          );
-          return { presence };
-        }
+  applyEvent: (event) => persistEvent(event),
 
-        case "presence.moved":
-          return {
-            presence: s.presence.map((p) =>
-              p.userId === event.userId ? { ...p, position: event.position } : p,
-            ),
-          };
-
-        case "presence.room_changed": {
-          const presence = s.presence.map((p) =>
-            p.userId === event.userId ? { ...p, roomId: event.roomId } : p,
-          );
-          /* Announcements are batched, capped, and read by the live region.
-             Never one utterance per movement. */
-          const who = nameOf(s.users, event.userId);
-          const where = roomNameOf(s.floor, event.roomId);
-          const line = event.roomId
-            ? `${who} entered ${where}.`
-            : `${who} left ${roomNameOf(s.floor, s.presence.find((p) => p.userId === event.userId)?.roomId)}.`;
-          return {
-            presence,
-            announcements: [...s.announcements, line].slice(-6),
-          };
-        }
-
-        case "presence.speaking":
-          return {
-            presence: s.presence.map((p) =>
-              p.userId === event.userId ? { ...p, speaking: event.speaking } : p,
-            ),
-          };
-
-        /* ----------------------------------------------------------- chat */
-        case "message.created": {
-          const msg = event.message;
-          if (msg.threadId) {
-            const existing = s.threadReplies[msg.threadId] ?? [];
-            return {
-              threadReplies: { ...s.threadReplies, [msg.threadId]: [...existing, msg] },
-              messages: s.messages.map((m) =>
-                m.id === msg.threadId
-                  ? {
-                      ...m,
-                      replyCount: m.replyCount + 1,
-                      replyUserIds: Array.from(new Set([...m.replyUserIds, msg.authorId])).slice(-3),
-                    }
-                  : m,
-              ),
-            };
-          }
-          /* Unread only counts messages that are not mine and not in the open
-             channel. Quiet by default is a data rule, not a display trick. */
-          const mine = msg.authorId === s.me;
-          const mentionsMe = msg.text.includes(nameOf(s.users, s.me));
-          return {
-            messages: [...s.messages, msg],
-            channels: s.channels.map((c) =>
-              c.id === msg.channelId && !mine
-                ? {
-                    ...c,
-                    unread: c.unread + 1,
-                    mentions: mentionsMe ? c.mentions + 1 : c.mentions,
-                  }
-                : c,
-            ),
-          };
-        }
-
-        case "message.edited":
-          return {
-            messages: s.messages.map((m) =>
-              m.id === event.messageId ? { ...m, text: event.text, editedAt: event.editedAt } : m,
-            ),
-            threadReplies: Object.fromEntries(
-              Object.entries(s.threadReplies).map(([k, v]) => [
-                k,
-                v.map((m) =>
-                  m.id === event.messageId ? { ...m, text: event.text, editedAt: event.editedAt } : m,
-                ),
-              ]),
-            ),
-          };
-
-        case "message.deleted":
-          return {
-            messages: s.messages.map((m) =>
-              m.id === event.messageId ? { ...m, deletedAt: event.deletedAt } : m,
-            ),
-          };
-
-        case "message.reaction_toggled": {
-          const toggle = (m: Message): Message => {
-            if (m.id !== event.messageId) return m;
-            const existing = m.reactions.find((r) => r.emoji === event.emoji);
-            if (!existing) {
-              return { ...m, reactions: [...m.reactions, { emoji: event.emoji, userIds: [event.userId] }] };
-            }
-            const has = existing.userIds.includes(event.userId);
-            const userIds = has
-              ? existing.userIds.filter((u) => u !== event.userId)
-              : [...existing.userIds, event.userId];
-            return {
-              ...m,
-              reactions: userIds.length
-                ? m.reactions.map((r) => (r.emoji === event.emoji ? { ...r, userIds } : r))
-                : m.reactions.filter((r) => r.emoji !== event.emoji),
-            };
-          };
-          return {
-            messages: s.messages.map(toggle),
-            threadReplies: Object.fromEntries(
-              Object.entries(s.threadReplies).map(([k, v]) => [k, v.map(toggle)]),
-            ),
-          };
-        }
-
-        case "message.pin_toggled":
-          return {
-            messages: s.messages.map((m) =>
-              m.id === event.messageId ? { ...m, pinned: !m.pinned } : m,
-            ),
-          };
-
-        case "channel.read":
-          return {
-            channels: s.channels.map((c) =>
-              c.id === event.channelId ? { ...c, unread: 0, mentions: 0 } : c,
-            ),
-          };
-
-        case "channel.all_read":
-          return {
-            channels: s.channels.map((c) => ({ ...c, unread: 0, mentions: 0 })),
-            notifications: s.notifications.map((n) => ({ ...n, read: true })),
-          };
-
-        case "channel.created": {
-          const c = event.channel;
-          return {
-            channels: [
-              ...s.channels,
-              {
-                id: c.id,
-                name: c.name,
-                kind: c.kind,
-                ...(c.topic ? { topic: c.topic } : {}),
-                memberIds: c.memberIds,
-                unread: 0,
-                mentions: 0,
-                archived: false,
-                notify: "mentions",
-              },
-            ],
-          };
-        }
-
-        case "channel.updated":
-          return {
-            channels: s.channels.map((c) =>
-              c.id === event.channelId ? { ...c, ...event.patch } : c,
-            ),
-          };
-
-        case "channel.members_added":
-          return {
-            channels: s.channels.map((c) =>
-              c.id === event.channelId
-                ? { ...c, memberIds: Array.from(new Set([...c.memberIds, ...event.userIds])) }
-                : c,
-            ),
-          };
-
-        case "channel.member_removed":
-          return {
-            channels: s.channels.map((c) =>
-              c.id === event.channelId
-                ? { ...c, memberIds: c.memberIds.filter((m) => m !== event.userId) }
-                : c,
-            ),
-          };
-
-        case "channel.left":
-          return {
-            channels: s.channels.map((c) =>
-              c.id === event.channelId
-                ? { ...c, memberIds: c.memberIds.filter((m) => m !== s.me) }
-                : c,
-            ),
-          };
-
-        case "room.added":
-          return { floor: { ...s.floor, rooms: [...s.floor.rooms, event.room] } };
-
-        case "room.removed":
-          return {
-            floor: { ...s.floor, rooms: s.floor.rooms.filter((r) => r.id !== event.roomId) },
-            /* Nobody is left standing in a room that no longer exists. */
-            presence: s.presence.map((p) =>
-              p.roomId === event.roomId
-                ? { ...p, roomId: undefined, status: "available" as const }
-                : p,
-            ),
-          };
-
-        case "room.updated": {
-          const rect = event.patch.rect;
-          return {
-            floor: {
-              ...s.floor,
-              rooms: s.floor.rooms.map((r) =>
-                r.id === event.roomId ? { ...r, ...event.patch } : r,
-              ),
-            },
-            /* If a wall moved, nobody is left standing outside it. */
-            presence: rect
-              ? s.presence.map((p) =>
-                  p.roomId === event.roomId
-                    ? {
-                        ...p,
-                        position: {
-                          x: Math.min(rect.x + rect.w - 3, Math.max(rect.x + 3, p.position.x)),
-                          y: Math.min(rect.y + rect.h - 3, Math.max(rect.y + 3, p.position.y)),
-                        },
-                      }
-                    : p,
-                )
-              : s.presence,
-          };
-        }
-
-        case "floor.template_changed": {
-          const inside = (pos: { x: number; y: number }, r: Room) =>
-            pos.x >= r.rect.x && pos.x <= r.rect.x + r.rect.w && pos.y >= r.rect.y && pos.y <= r.rect.y + r.rect.h;
-          return {
-            floor: { ...s.floor, template: event.template, rooms: event.rooms },
-            presence: s.presence.map((p) => {
-              if (!p.roomId) return p;
-              const room = event.rooms.find((r) => r.id === p.roomId);
-              if (!room) return { ...p, roomId: undefined, status: "available" as const };
-              return inside(p.position, room)
-                ? p
-                : { ...p, position: { x: room.rect.x + room.rect.w / 2, y: room.rect.y + room.rect.h / 2 } };
-            }),
-          };
-        }
-
-        /* ---------------------------------------------------------- knock */
-        case "presence.muted": {
-          const isMe = event.userId === s.me;
-          return {
-            presence: s.presence.map((p) =>
-              p.userId === event.userId
-                ? { ...p, muted: event.muted, speaking: event.muted ? false : p.speaking }
-                : p,
-            ),
-            toasts: isMe
-              ? [
-                  ...s.toasts,
-                  {
-                    id: nextId("toast"),
-                    kind: "system" as const,
-                    title: event.muted ? msg("toast.mutedByModerator", "A moderator muted your microphone") : msg("toast.unmuted", "Your microphone is back"),
-                    body: event.muted ? msg("toast.mutedByModeratorBody", "Nobody in the room can hear you until it is lifted.") : msg("toast.unmutedBody", "People can hear you again."),
-                  },
-                ]
-              : s.toasts,
-          };
-        }
-
-        case "presence.deafened": {
-          const isMe = event.userId === s.me;
-          return {
-            presence: s.presence.map((p) =>
-              p.userId === event.userId ? { ...p, deafened: event.deafened } : p,
-            ),
-            selfDeafened: isMe ? event.deafened : s.selfDeafened,
-            toasts: isMe
-              ? [
-                  ...s.toasts,
-                  {
-                    id: nextId("toast"),
-                    kind: "system" as const,
-                    title: event.deafened ? msg("toast.deafenedByModerator", "A moderator deafened you") : msg("toast.undeafened", "You can hear again"),
-                    body: event.deafened ? msg("toast.deafenedByModeratorBody", "You will not hear anyone until it is lifted.") : msg("toast.undeafenedBody", "Audio from the room is back."),
-                  },
-                ]
-              : s.toasts,
-          };
-        }
-
-        case "knock.sent": {
-          /* Quiet hours withhold the interruption, not the message. The knock
-             is still recorded and still waiting when the window closes. */
-          const quiet = isWithinWindow(s.settings.quietHours);
-          const incoming = event.toId === s.me;
-          const meFocused =
-            s.presence.find((p) => p.userId === s.me)?.status === "focus";
-          /* Focus defers knocks rather than dropping them. Nothing is lost. */
-          const state = incoming && meFocused ? "deferred" : "pending";
-          return {
-            knock: { id: event.knockId, fromId: event.fromId, toId: event.toId, reason: event.reason, state },
-            heldKnocks:
-              incoming && (meFocused || quiet)
-                ? [
-                    ...s.heldKnocks,
-                    {
-                      id: event.knockId,
-                      fromId: event.fromId,
-                      ...(event.reason ? { reason: event.reason } : {}),
-                      createdAt: new Date().toISOString(),
-                    },
-                  ]
-                : s.heldKnocks,
-            toasts: incoming && !meFocused && !quiet
-              ? [
-                  ...s.toasts,
-                  {
-                    id: nextId("toast"),
-                    kind: "knock" as const,
-                    title: msg("toast.knocking", "{name} is knocking", { name: nameOf(s.users, event.fromId) }),
-                    body: event.reason ?? msg("toast.knockingBody", "Wants a quick word"),
-                  },
-                ]
-              : s.toasts,
-          };
-        }
-
-        /* Delivering a held knock puts it back in front of the person with its
-           original reason intact. Deferral is only trustworthy if the thing
-           actually comes back. */
-        case "knock.delivered":
-          return {
-            heldKnocks: s.heldKnocks.filter((k) => k.id !== event.knock.id),
-            knock: {
-              id: event.knock.id,
-              fromId: event.knock.fromId,
-              toId: event.knock.toId,
-              ...(event.knock.reason ? { reason: event.knock.reason } : {}),
-              state: "pending" as const,
-            },
-            toasts: [
-              ...s.toasts,
-              {
-                id: nextId("toast"),
-                kind: "knock" as const,
-                title: msg("toast.knockedInFocus", "{name} knocked while you were in Focus", { name: nameOf(s.users, event.knock.fromId) }),
-                body: event.knock.reason ?? msg("toast.knockedInFocusBody", "Wanted a quick word"),
-              },
-            ],
-          };
-
-        case "knock.answered": {
-          if (!s.knock || s.knock.id !== event.knockId) return {};
-          const knock = { ...s.knock, state: event.state };
-          if (event.state === "accepted") {
-            const other = knock.fromId === s.me ? knock.toId : knock.fromId;
-            return { knock, huddleWith: other };
-          }
-          /* Deferring holds it; it is delivered later rather than dropped. */
-          if (event.state === "deferred") {
-            return {
-              knock,
-              heldKnocks: [
-                ...s.heldKnocks,
-                {
-                  id: knock.id,
-                  fromId: knock.fromId,
-                  ...(knock.reason ? { reason: knock.reason } : {}),
-                  createdAt: new Date().toISOString(),
-                },
-              ],
-            };
-          }
-          return { knock };
-        }
-
-        /* ------------------------------------------------------- meetings */
-        case "meeting.chat_opened":
-          return patchMeeting(s, event.meetingId, { channelId: event.channelId });
-
-        case "meeting.recording_requested":
-          return patchMeeting(s, event.meetingId, { recordingState: "requested" });
-
-        case "meeting.recording_started":
-          return patchMeeting(s, event.meetingId, { recordingState: "recording" });
-
-        case "meeting.recording_declined":
-          return patchMeeting(s, event.meetingId, { recordingState: "declined" });
-
-        /* Stopping does not produce a file immediately - it goes to processing,
-           because pretending a recording is instantly ready is the kind of lie
-           that gets discovered in the first real week. */
-        case "meeting.recording_stopped":
-          return patchMeeting(s, event.meetingId, { recordingState: "processing" });
-
-        case "meeting.recording_ready":
-          return patchMeeting(s, event.meetingId, {
-            recordingState: "ready",
-            recordingFile: event.file,
-          });
-
-        /* Idempotent, as every socket event has to be: the same meeting can
-           arrive twice, once from this client and once from another. */
-        case "meeting.scheduled":
-          if ([...s.meetings, ...s.pastMeetings].some((mt) => mt.id === event.meeting.id)) return {};
-          return { meetings: [...s.meetings, keyed(event.meeting)] };
-
-        case "meeting.guest_arrived": {
-          const state = s.settings.lobby === "auto" ? ("admitted" as const) : ("lobby" as const);
-          return {
-            meetings: s.meetings.map((mt) => {
-              if (mt.id !== event.meetingId) return mt;
-              if (mt.guests.some((g) => g.email === event.guestEmail)) {
-                return { ...mt, guests: mt.guests.map((g) => (g.email === event.guestEmail ? { ...g, state } : g)) };
-              }
-              /* Nobody invited them: they came by the link. */
-              if (!event.name) return mt;
-              return { ...mt, guests: [...mt.guests, { name: event.name, email: event.guestEmail, state, viaLink: true }] };
-            }),
-          };
-        }
-
-        case "meeting.guest_declined": {
-          const meetings = s.meetings.map((m) =>
-            m.id === event.meetingId
-              ? { ...m, guests: m.guests.map((g) => (g.email === event.guestEmail ? { ...g, state: "declined" as const } : g)) }
-              : m,
-          );
-          return { meetings };
-        }
-
-        /* Someone who was in the call came, and stays counted after they go.
-           Someone who only waited did not: an invitation goes back to being
-           an invitation, and a visitor from the link is simply gone. */
-        case "meeting.guest_link_reset":
-          return { meetings: s.meetings.map((mt) => (mt.id === event.meetingId ? { ...mt, guestKey: event.guestKey } : mt)) };
-
-        case "meeting.guest_left":
-          return {
-            meetings: s.meetings.map((m) => {
-              if (m.id !== event.meetingId) return m;
-              const guests = m.guests.flatMap((g) => {
-                if (g.email !== event.guestEmail) return [g];
-                if (g.state === "admitted") return [{ ...g, state: "left" as const }];
-                return g.viaLink ? [] : [{ ...g, state: "invited" as const }];
-              });
-              return { ...m, guests };
-            }),
-          };
-
-        case "meeting.share_changed": {
-          const meetings = s.meetings.map((m) => {
-            if (m.id !== event.meetingId) return m;
-            const next = { ...m };
-            if (event.userId) next.sharingUserId = event.userId;
-            else delete next.sharingUserId;
-            return next;
-          });
-          return { meetings };
-        }
-
-        case "meeting.guest_admitted":
-          return {
-            meetings: s.meetings.map((mt) =>
-              mt.id === event.meetingId
-                ? {
-                    ...mt,
-                    guests: mt.guests.map((g) =>
-                      g.email === event.guestEmail ? { ...g, state: "admitted" as const } : g,
-                    ),
-                  }
-                : mt,
-            ),
-          };
-
-        /* Ending a meeting moves it to the past AND records what the
-           post-meeting screen needs: when it actually finished, and who was
-           really there rather than who was invited. */
-        case "meeting.ended": {
-          const ended = s.meetings.find((mt) => mt.id === event.meetingId);
-          return {
-            meetings: s.meetings.filter((mt) => mt.id !== event.meetingId),
-            pastMeetings: ended
-              ? [{ ...ended, endedAt: event.endedAt, attendedIds: event.attendedIds }, ...s.pastMeetings]
-              : s.pastMeetings,
-          };
-        }
-
-        /* -------------------------------------------------- notifications */
-        case "notification.created":
-          return { notifications: [event.notification, ...s.notifications] };
-
-        case "notification.read":
-          return {
-            notifications: s.notifications.map((n) =>
-              n.id === event.notificationId ? { ...n, read: true } : n,
-            ),
-          };
-
-        case "notification.all_read":
-          return { notifications: s.notifications.map((n) => ({ ...n, read: true })) };
-
-        /* ------------------------------------------------------ demo only */
-        case "demo.clock_advanced": {
-          const offset = s.clockOffsetMinutes + event.minutes;
-          const mine = s.presence.find((p) => p.userId === s.me);
-          /* Focus ending produces the summary rather than a pile of alerts. */
-          if (mine?.status === "focus") {
-            return {
-              clockOffsetMinutes: offset,
-              presence: s.presence.map((p) =>
-                p.userId === s.me
-                  ? { ...p, status: "available" as const, focusUntil: undefined, customText: undefined }
-                  : p,
-              ),
-              focusSummary: {
-                knocks: s.heldKnocks.length,
-                mentions: s.channels.reduce((n, c) => n + c.mentions, 0) + 2,
-                threads: 1,
-              },
-            };
-          }
-          return { clockOffsetMinutes: offset };
-        }
-
-        case "session.signed_out": {
-          if (event.userId !== s.me) return {};
-          const mine = s.presence.find((p) => p.userId === s.me);
-          const resume: Status = mine && mine.status !== "offline" && mine.status !== "away" ? mine.status : "available";
-          return {
-            presence: s.presence.map((p) =>
-              p.userId === s.me ? { ...p, status: "offline" as Status, speaking: false, since: event.at } : p,
-            ),
-            session: {
-              state: "signed_out",
-              reason: event.reason,
-              at: event.at,
-              resume,
-              ...(event.idleMinutes !== undefined ? { idleMinutes: event.idleMinutes } : {}),
-              ...(event.scope ? { scope: event.scope } : {}),
-            },
-            knock: null,
-            huddleWith: null,
-            openThreadId: null,
-            officeFocus: null,
-          };
-        }
-
-        case "session.signed_in": {
-          if (event.userId !== s.me) return {};
-          const resume: Status = s.session.state === "signed_out" ? s.session.resume : "available";
-          return {
-            presence: s.presence.map((p) => (p.userId === s.me ? { ...p, status: resume, since: event.at } : p)),
-            session: { state: "active" },
-          };
-        }
-
-        case "demo.reset":
-          return freshData();
-
-        default:
-          return {};
-      }
-    });
-    for (const observe of observers) observe(event);
-  },
-
-  /* ==========================================================================
-     ACTIONS
-     Named for the endpoints that replace them. Each applies locally and, in
-     production, would also POST. See HANDOFF.md.
-     ======================================================================== */
-
+  /* Channels, messages and read state are staged by the workspace API. */
   sendMessage: (channelId, text, threadId, attachments = []) => {
     const s = get();
     const message: Message = {
@@ -1459,7 +844,6 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
   updateSettings: (patch) => {
     const before = get().settings.template;
     set((s) => ({ settings: { ...s.settings, ...patch } }));
-    if (patch.earshot) setEarshot(patch.earshot);
     if (patch.template && patch.template !== before) {
       get().applyEvent({
         type: "floor.template_changed",
@@ -1516,13 +900,17 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
   notify: (title, body) =>
     set((s) => ({ toasts: [...s.toasts, { id: nextId("toast"), kind: "system" as const, title, body }] })),
 
-  resetWorkspace: () => get().applyEvent({ type: "demo.reset" }),
+  resetWorkspace: () => { void reloadWorkspace(); },
+
+  clearWorkspace: (workspaceSync) => set({ ...freshData(), workspaceSync, viewOnly: null }),
+  setWorkspaceSync: (workspaceSync) => set({ workspaceSync }),
+  hydrateWorkspace: (data, workspaceSync) => {
+    const keys = ["workspaceId", "fixtureId", "historicalUsers", "readState", "me", "users", "presence", "floor", "channels", "messages", "threadReplies", "meetings", "pastMeetings", "notifications", "insight", "myTime", "settings"] as const;
+    const patch = Object.fromEntries(keys.map(key => [key, data[key]])) as Pick<WorkspaceState, typeof keys[number]>;
+    set({ ...patch, workspaceSync, viewingRole: data.users.find(user => user.id === data.me)?.role || "member" });
+  },
 
   adoptSuiteSession: (session) => {
-    const u = session.user;
-    const name = `${u.firstName ?? ""} ${u.lastName ?? ""}`.trim() || u.email;
-    const initials = name.split(/\s+/).map((w) => w[0] ?? "").join("").slice(0, 2).toUpperCase();
-    suiteSeat = { name, initials, role: u.userType === "admin" ? "owner" : "member", title: u.jobTitle ?? undefined };
-    set((s) => ({ users: seated(s.users), viewOnly: session.readOnly ? { by: session.viewingBy } : null }));
+    set({ viewOnly: session.workspaceContext?.actor.readOnly ? { by: session.viewingBy } : null, viewingRole: roleForSuiteSession(session) });
   },
 }, get, set));

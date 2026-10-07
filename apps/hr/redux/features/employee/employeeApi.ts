@@ -3,6 +3,8 @@ import { PaginatedData, SuccessResponse } from "@/types";
 import {
   IEmployeeSelectOption,
   ICreateEmployeeDTO,
+  ICreateEmployeeResult,
+  ICreateEmployeeRequest,
   IOnboardingStepDTO,
   IAttachmentResponse,
   IEmployee,
@@ -55,11 +57,12 @@ const EmployeeApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Employee"],
     }),
-    createEmployee: builder.mutation<SuccessResponse<any>, ICreateEmployeeDTO>({
-      query: (data) => ({
+    createEmployee: builder.mutation<SuccessResponse<ICreateEmployeeResult>, ICreateEmployeeRequest>({
+      query: ({ body, operationId }) => ({
         url: "/employees",
         method: "POST",
-        body: data,
+        body,
+        headers: { "Idempotency-Key": operationId },
       }),
       invalidatesTags: ["Employee"],
     }),

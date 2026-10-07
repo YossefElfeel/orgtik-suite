@@ -12,7 +12,8 @@
       "next": "Suivant",
       "submit": "Créer l'employé",
       "save": "Enregistrer les modifications",
-      "close": "Fermer"
+      "close": "Fermer",
+      "recoverInvitation": "Récupérer l’invitation"
     },
     "avatar": {
       "upload": "Télécharger la photo",
@@ -24,14 +25,12 @@
       "fallbackName": "Employé"
     },
     "errors": {
-      "passwordRequired": "Le mot de passe est requis et doit contenir au moins 6 caractères",
       "invalidPhoneNumber": "Format de numéro de téléphone invalide",
       "invalidPostCode": "Le code postal doit comporter 5 chiffres",
       "postCodeFor": "Un code postal en {country} ressemble à {example}.",
       "postCode": "Saisissez un code postal valide.",
       "firstNameRequired": "Le prénom est requis",
       "lastNameRequired": "Le nom est requis",
-      "passwordMin": "Le mot de passe doit contenir au moins 6 caractères",
       "birthDateRequired": "La date de naissance est requise",
       "phoneRequired": "Le numéro de téléphone est requis",
       "invalidEmail": "Adresse e-mail invalide",
@@ -69,7 +68,10 @@
       "casualLeaveRequired": "Les congés exceptionnels sont requis",
       "sickLeaveRequired": "Les jours de maladie sont requis",
       "unpaidLeaveRequired": "La règle de congé sans solde est requise",
-      "noEmployeeId": "Cet employé n'a pas encore été créé. Revenez à la première étape et enregistrez-le."
+      "noEmployeeId": "Cet employé n'a pas encore été créé. Revenez à la première étape et enregistrez-le.",
+      "invitationUnconfirmed": "Le statut de l’invitation n’est pas confirmé. Réessayez pour récupérer le résultat de la même demande.",
+      "invitationWorkspaceChanged": "Revenez à l’espace de travail d’origine pour récupérer cette invitation.",
+      "invitationCapacity": "Aucune place RH n’est disponible. Augmentez la capacité ou libérez une place, puis réessayez."
     },
     "steps": {
       "personal": {
@@ -93,14 +95,16 @@
             "label": "Propre logement",
             "description": "Aucune aide de l'entreprise"
           }
-        }
+        },
+        "invitationHint": "Une invitation à l’espace de travail sera remise dans la boîte de réception simulée. La personne choisit son mot de passe en acceptant l’invitation."
       },
       "employee": {
         "nav": "Informations professionnelles",
         "heading": "Informations professionnelles",
         "description": "Ces informations nous aideront à confirmer votre identité et à compléter les étapes nécessaires à l'ajout des détails de vos employés.",
         "skillsHeading": "Compétences",
-        "skillsDescription": "Ces informations nous aideront à confirmer vos compétences."
+        "skillsDescription": "Ces informations nous aideront à confirmer vos compétences.",
+        "invitationPending": "L’accès à l’espace de travail commence après l’acceptation de l’invitation par la personne."
       },
       "bank": {
         "nav": "Coordonnées bancaires",
@@ -141,7 +145,6 @@
     "fields": {
       "birthDate": "Date de naissance",
       "nationality": "Nationalité",
-      "password": "Mot de passe",
       "addressLine1": "Rue",
       "addressCity": "Ville",
       "addressState": "Pays",
@@ -233,7 +236,6 @@
       "remotePolicy": "Notes optionnelles sur le fuseau horaire ou le système hybride",
       "firstName": "Prénom",
       "lastName": "Nom",
-      "password": "MotDePasseFort123!",
       "personalTaxId": "xxxx-xxxx-xxxx",
       "gender": "Sélectionner le genre",
       "maritalStatus": "Sélectionner la situation familiale",
@@ -332,7 +334,8 @@
         "active": "Actif",
         "inactive": "Inactif",
         "probation": "Période d'essai",
-        "terminated": "Parti"
+        "terminated": "Parti",
+        "invited": "Invité"
       },
       "skills": {
         "ui": "Design d'interface",
@@ -416,13 +419,13 @@
     },
     "success": {
       "title": "Succès",
-      "messageCreate": "L'employé a été ajouté avec succès.",
+      "messageCreate": "Les informations de l’employé ont été enregistrées. Son invitation à l’espace de travail est dans la boîte de réception simulée.",
       "messageEdit": "L'employé a été mis à jour avec succès.",
       "primary": "Terminé"
     },
     "loading": "Chargement...",
     "toasts": {
-      "creatingEmployee": "Création de l'employé...",
+      "creatingEmployee": "Création de l’employé et de son invitation à l’espace de travail...",
       "updatingEmployeeInfo": "Mise à jour des informations de l'employé...",
       "updatingPaymentInfo": "Mise à jour des informations de paiement...",
       "updatingSalaryInfo": "Mise à jour des informations salariales...",
@@ -2471,7 +2474,7 @@
     "added": "Ajouté",
     "deleted": "Supprimé",
     "uploaded": "Téléversé",
-    "employeeAdded": "Employé ajouté",
+    "employeeAdded": "Employé créé ; invitation à l’espace de travail remise dans la boîte de réception simulée.",
     "employeeRemoved": "Employé retiré",
     "requestSent": "Demande envoyée",
     "decisionSaved": "Décision enregistrée",

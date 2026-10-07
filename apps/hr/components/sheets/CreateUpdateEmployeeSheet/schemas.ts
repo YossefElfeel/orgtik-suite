@@ -13,7 +13,6 @@ export const makePersonalSchema = (t: (key: string) => string) =>
   z.object({
     firstName: z.string().min(1, t("errors.firstNameRequired")),
     lastName: z.string().min(1, t("errors.lastNameRequired")),
-    password: z.string().min(6, t("errors.passwordMin")).optional().or(z.literal("")),
     birthDate: z.date({ message: t("errors.birthDateRequired") }),
     phoneNumber: z
       .string()

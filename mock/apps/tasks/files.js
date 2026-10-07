@@ -378,11 +378,11 @@ function writeIfMissing(dir, file, build) {
 
 // Writes every seed file (once) and returns helpers: attachment(key), avatarFile(userId),
 // teamFile(teamId) and writeTeamLogos(teams) (called after the seed has created the teams).
-function prepare(uploadsDir, users) {
+function prepare(uploadsDir, users, { samples = true } = {}) {
   fs.mkdirSync(uploadsDir, { recursive: true });
   const sizes = {};
-  for (const [key, a] of Object.entries(ATTACHMENTS)) sizes[key] = writeIfMissing(uploadsDir, a.file, a.build);
-  users.forEach((u, i) => writeIfMissing(uploadsDir, `seed-avatar-${u.id}.svg`, () => avatarSvg(`${u.firstName[0]}${u.lastName[0]}`.toUpperCase(), i)));
+  if (samples) for (const [key, a] of Object.entries(ATTACHMENTS)) sizes[key] = writeIfMissing(uploadsDir, a.file, a.build);
+  users.forEach((u, i) => writeIfMissing(uploadsDir, `seed-avatar-${u.id}.svg`, () => avatarSvg((`${String(u.firstName || '').charAt(0)}${String(u.lastName || '').charAt(0)}` || '?').toUpperCase(), i)));
   return {
     attachment: (key) => ({ ...ATTACHMENTS[key], size: sizes[key] }),
     avatarFile: (userId) => `seed-avatar-${userId}.svg`,

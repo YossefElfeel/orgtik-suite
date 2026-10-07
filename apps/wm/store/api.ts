@@ -7,7 +7,9 @@ import {
   type FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 import { WM_API } from "@/lib/env";
-import { getToken } from "@/lib/session";
+import { clearToken, getToken } from "@/lib/session";
+import { refreshClientSession, SessionRequestError } from "@orgtik/ui/auth";
+import { SOS_API } from "@/lib/env";
 
 /** Every failure the UI handles, from the v2 envelope: { error: { code, message, required? } }. */
 export type ApiError = {
@@ -37,7 +39,24 @@ const baseQuery: BaseQueryFn<string | FetchArgs, unknown, ApiError> = async (
   api,
   extra,
 ) => {
-  const result = await raw(args, api, extra);
+  const originalToken = getToken();
+  let result = await raw(args, api, extra);
+  if (getToken() !== originalToken) return { error: { status: 503, code: "session_changed", message: "" } };
+  if (result.error?.status === 401 && originalToken) {
+    try {
+      await refreshClientSession(SOS_API);
+      const retryToken = getToken();
+      if (!retryToken) return { error: { status: 403, code: "staff_access_required", message: "" } };
+      result = await raw(args, api, extra);
+      if (getToken() !== retryToken) return { error: { status: 503, code: "session_changed", message: "" } };
+    } catch (reason) {
+      if (reason instanceof SessionRequestError && [401, 403].includes(reason.status)) {
+        if (getToken() === originalToken) clearToken();
+        return { error: { status: reason.status, code: reason.code, message: "" } };
+      }
+      return { error: { status: 503, code: "session_unavailable", message: "" } };
+    }
+  }
   if (result.error) {
     const e = result.error as FetchBaseQueryError;
     if (typeof e.status !== "number")

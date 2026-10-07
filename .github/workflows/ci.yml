@@ -48,7 +48,7 @@ jobs:
         run: node tools/vercel/configure.mjs --check
 
       - name: Deployment artifact and URL regressions
-        run: node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/verify-preview-revisions.test.mjs
+        run: node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/verify-preview-revisions.test.mjs tools/vercel/workspace-runtime.test.mjs
 
       - name: Typecheck, message catalogs and tests (affected packages)
         run: pnpm turbo run typecheck i18n:check test --affected --continue
@@ -57,6 +57,12 @@ jobs:
 
       - name: Platform OpenAPI matches the mock
         run: node program/phase-e/openapi.mjs --check
+      - name: Shared tab session and access regressions
+        run: node --test packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs
+      - name: Workspace source manifest and API contracts match
+        run: |
+          node tools/dev/workspace-manifest.mjs --check
+          node program/phase-f/contracts.mjs --check
 
       - name: Check runtime API consumers even without frontend deployment
         run: node tools/ci/runtime-consumers.mjs

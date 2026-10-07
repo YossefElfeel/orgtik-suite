@@ -22,13 +22,20 @@ function rng(seed) {
 
 // ---- dates (local time, anchored to "today") ----
 const DAY = 864e5;
+let calendar = null;
+const configureClock = value => { calendar = value; };
 function startOfToday() {
+  if (calendar) return new Date(calendar.dayStart());
   const d = new Date();
   d.setHours(0, 0, 0, 0);
   return d;
 }
 // ISO string for today + dayOffset at hh:mm local time.
 function at(dayOffset, hh = 10, mm = 0) {
+  if (calendar) {
+    const p = calendar.parts(calendar.addCalendarDays(calendar.dayStart(), dayOffset));
+    return calendar.iso(calendar.fromWall({ ...p, hour: hh, minute: mm, second: 0 }));
+  }
   const d = startOfToday();
   d.setDate(d.getDate() + dayOffset);
   d.setHours(hh, mm, 0, 0);
@@ -36,8 +43,29 @@ function at(dayOffset, hh = 10, mm = 0) {
 }
 const nowIso = () => new Date().toISOString();
 const ymd = (d) => {
+  if (calendar) {
+    const p = calendar.parts(new Date(d).getTime());
+    return `${p.year}-${String(p.month).padStart(2, "0")}-${String(p.day).padStart(2, "0")}`;
+  }
   const x = new Date(d);
   return `${x.getFullYear()}-${String(x.getMonth() + 1).padStart(2, "0")}-${String(x.getDate()).padStart(2, "0")}`;
+};
+function calendarDay(date, offset = 0, hour = 0, minute = 0, second = 0) {
+  const [year, month, day] = String(date).slice(0, 10).split("-").map(Number);
+  // Date-only arithmetic uses UTC as a calendar ordinal, never a tenant's instant.
+  const normalized = new Date(Date.UTC(year, month - 1, day + offset));
+  const p = { year: normalized.getUTCFullYear(), month: normalized.getUTCMonth() + 1, day: normalized.getUTCDate(), hour, minute, second };
+  return calendar ? new Date(hour === 0 && minute === 0 && second === 0 ? calendar.dayStart(calendar.fromWall({ ...p, hour: 12 })) : calendar.fromWall(p)) : new Date(p.year, p.month - 1, p.day, hour, minute, second);
+}
+const weekday = date => {
+  const [year, month, day] = String(date).slice(0, 10).split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day)).getUTCDay();
+};
+const addCalendarDays = (value, count) => {
+  if (!Number.isSafeInteger(count)) throw new TypeError("Calendar day count must be an integer");
+  if (!calendar) return calendarDay(ymd(value), count);
+  const p = calendar.parts(new Date(value).getTime());
+  return calendarDay(ymd(value), count, p.hour, p.minute, p.second);
 };
 
 // Lenient date parsing: accepts ISO, "YYYY-MM-DDTHH:mm" (local), "2026-10-01Tundefined", "" ...
@@ -49,6 +77,12 @@ function parseDate(value, fallback = null) {
   if (m) {
     const time = /^\d{2}:\d{2}/.test(m[2] || "") ? m[2] : "09:00";
     s = `${m[1]}T${time.length === 5 ? `${time}:00` : time}`;
+    if (calendar && !/(?:Z|[+-]\d{2}:?\d{2})$/i.test(s)) {
+      const wall = s.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?(?:\.\d+)?$/);
+      if (!wall) return fallback;
+      try { return calendar.iso(calendar.fromWall({ year: +wall[1], month: +wall[2], day: +wall[3], hour: +wall[4], minute: +wall[5], second: +(wall[6] || 0) })); }
+      catch { return fallback; }
+    }
   }
   const d = new Date(s);
   return Number.isNaN(d.getTime()) ? fallback : d.toISOString();
@@ -112,6 +146,6 @@ const clone = (x) => (x === undefined ? undefined : JSON.parse(JSON.stringify(x)
 const slugify = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "item";
 
 module.exports = {
-  uuidFrom, newId, hashInt, rng, DAY, startOfToday, at, nowIso, ymd, parseDate,
+  uuidFrom, newId, hashInt, rng, DAY, startOfToday, at, nowIso, ymd, parseDate, configureClock, calendarDay, addCalendarDays, weekday,
   send, error, listParam, boolParam, intParam, paginate, textMatch, round, pctChange, clone, slugify,
 };

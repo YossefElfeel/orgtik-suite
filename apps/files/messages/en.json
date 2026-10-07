@@ -587,7 +587,10 @@
     "notFoundBody": "The link may be old, or the folder may have moved. Start from the dashboard or from My files.",
     "loading": "Loading",
     "handoffTitle": "This sign-in link has expired",
-    "handoffBody": "Links from the launcher work once and for a minute. Open Files again from your apps."
+    "handoffBody": "Links from the launcher work once and for a minute. Open Files again from your apps.",
+    "sessionLoading": "Opening your workspace…",
+    "sessionUnavailableTitle": "Your workspace couldn’t be opened",
+    "sessionUnavailableBody": "We couldn’t check your current access. Your sign-in details are kept; retry to continue."
   },
   "Feedback": {
     "folderCreated": "Folder “{name}” created",

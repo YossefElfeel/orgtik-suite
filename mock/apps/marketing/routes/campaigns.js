@@ -244,10 +244,10 @@ module.exports = function campaignRoutes(app, { ctx, getDb, views, h, tick }) {
         const cfg = s.configuration || {};
         const channel = String(cfg.channel || "").toUpperCase();
         if (!["EMAIL", "SMS", "WHATSAPP"].includes(channel)) return "channel must be EMAIL, SMS or WHATSAPP";
-        const sender = db.senders.find((x) => x.id === cfg.senderConfigId);
+        const sender = db.senders.find((x) => x.id === cfg.senderConfigId && (!x.projectId || x.projectId === c.projectId));
         if (!sender) return "Select a sender for this channel";
         if (sender.channel !== channel) return `The selected sender is not a ${channel} sender`;
-        const template = db.templates.find((x) => x.id === cfg.templateId);
+        const template = db.templates.find((x) => x.id === cfg.templateId && (!x.projectId || x.projectId === c.projectId));
         if (!template) return "Select or create a template before continuing";
         if (template.channel !== channel) return `The selected template is not a ${channel} template`;
         const audience = db.audiences.find((a) => a.id === cfg.audienceId && a.projectId === c.projectId);

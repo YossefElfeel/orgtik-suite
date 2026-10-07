@@ -11,6 +11,7 @@ import { useAppDispatch } from "@/redux/app/hooks";
 import { switchSession } from "@/redux/features/auth/authThunks";
 import { safeRedirect } from "@/lib/safe-redirect";
 import { IScopeItem, ITokens, IUser } from "@/types/user";
+import type { WorkspaceContext, StaffAccess } from "@orgtik/ui/auth";
 
 export default function HandoffPage() {
   const searchParams = useSearchParams();
@@ -34,7 +35,7 @@ export default function HandoffPage() {
         const code = first.current!.code;
         if (!code) throw 400;
         const response = await fetch(`${API_URL}/auth/handoff/exchange`, {
-          method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ code }),
+          method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ code, audience: "suite" }),
         });
         if (!response.ok) throw response.status;
         const body = await response.json();
@@ -45,9 +46,9 @@ export default function HandoffPage() {
       const response = await fetch(`${API_URL}/auth/me`, { headers: { authorization: `Bearer ${tokens.accessToken}` } });
       if (!response.ok) throw response.status;
       const body = await response.json();
-      const { user, scopes } = body.data as { user: IUser; scopes: IScopeItem[] };
+      const { user, scopes, workspaceContext, staffAccess } = body.data as { user: IUser; scopes: IScopeItem[]; workspaceContext: WorkspaceContext | null; staffAccess: StaffAccess | null };
       if (!user?.id || !Array.isArray(scopes)) throw 503;
-      dispatch(switchSession({ user, tokens, scopes }));
+      dispatch(switchSession({ user, tokens, scopes, workspaceContext, staffAccess }));
       router.replace(first.current!.redirect);
     };
     complete().catch((status) => setFailure(status === 400 || status === 401 || status === 403 ? "expired" : "unavailable"));

@@ -10,6 +10,7 @@
 // Personal data (name, email, phone) is masked for anyone without leads:pii, in the list, the
 // detail and the CSV export; erasing it is recorded in the audit log.
 const clone = (v) => JSON.parse(JSON.stringify(v));
+const codec = require("./state-codec");
 
 const LEAD_ACTIONS = {
   contact: { from: ["new"], to: "contacted" },
@@ -194,7 +195,14 @@ function makeOps({ store, now }) {
     return { site };
   }
 
-  return { leads, view, move, assign, note, erase, submit, csv, OPEN, LEAD_ACTIONS, site, readiness, updateSite };
+  const exportState = () => ({ data: clone({ leads: [...leads], site }), sequences: { nextLead } });
+  const validateState = value => {
+    const incoming = codec.object(value), rows = codec.mapRows(incoming.data?.leads), site_ = codec.object(incoming.data?.site);
+    if (!Number.isSafeInteger(site_.version) || !Array.isArray(site_.locales) || !site_.organization) throw codec.fail("Website Manager site settings are incomplete.");
+    return { data: { leads: rows, site: site_ }, sequences: { nextLead: codec.sequence(incoming.sequences?.nextLead, rows, "ld") } };
+  };
+  const importState = value => { const incoming = validateState(value); codec.replaceMap(leads, incoming.data.leads); codec.replaceObject(site, incoming.data.site); nextLead = incoming.sequences.nextLead; };
+  return { leads, view, move, assign, note, erase, submit, csv, OPEN, LEAD_ACTIONS, site, readiness, updateSite, exportState, importState, validateState };
 }
 
 module.exports = { makeOps, mask, maskEmail };

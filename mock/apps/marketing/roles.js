@@ -8,7 +8,6 @@ const SCOPE = "digital_marketing";
 function rightsOf(identity, u) {
   const scopes = identity.userScopes(u);
   const roles = new Set(scopes.find((s) => s.scope === SCOPE)?.roles || []);
-  if (scopes.find((s) => s.scope === "global")?.roles?.includes("super_admin")) roles.add("super_admin");
   const has = (...r) => r.some((x) => roles.has(x));
   const lead = has("super_admin", "marketing_manager");
   const team = lead || has("marketing_specialist");

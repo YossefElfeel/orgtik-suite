@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { WorkspaceBootstrap } from "@/features/shell/WorkspaceBootstrap";
 
 /**
  * Routes inside (shell) render within the Business OS chrome. The guest page
@@ -6,5 +7,5 @@ import type { ReactNode } from "react";
  * link must never see the suite navigation.
  */
 export default function ShellGroupLayout({ children }: { children: ReactNode }) {
-  return <>{children}</>;
+  return <WorkspaceBootstrap>{children}</WorkspaceBootstrap>;
 }

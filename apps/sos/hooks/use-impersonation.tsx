@@ -1,26 +1,15 @@
 "use client";
 
-import { useMemo } from "react";
 import { useAppSelector } from "@/redux/app/hooks";
-import { getImpersonatedByFromToken } from "@/lib/jwt";
 
 function useImpersonation() {
-  const accessToken = useAppSelector((state) => state.auth.tokens?.accessToken);
   const user = useAppSelector((state) => state.auth.user);
-
-  const impersonatedBy = useMemo(
-    () => getImpersonatedByFromToken(accessToken),
-    [accessToken]
-  );
+  const context = useAppSelector((state) => state.auth.workspaceContext);
+  const impersonatedBy = context?.actor.readOnly && context.actor.userId !== context.actor.effectiveUserId ? { id: context.actor.userId } : null;
 
   const isImpersonating = impersonatedBy !== null;
 
-  const adminDisplayName = impersonatedBy
-    ? [impersonatedBy.firstName, impersonatedBy.lastName].filter(Boolean).join(" ") ||
-      impersonatedBy.email ||
-      impersonatedBy.username ||
-      `Admin #${impersonatedBy.id}`
-    : null;
+  const adminDisplayName = null;
 
   const targetDisplayName = user
     ? [user.firstName, user.lastName].filter(Boolean).join(" ") || user.email

@@ -85,7 +85,7 @@ const billingApi = platformApi.injectEndpoints({
     billingSubscriptions: b.query<Subscriptions, void>({ query: () => "/subscriptions", providesTags: ["Subscriptions"] }),
     // One action on one line. Retrying a payment also changes the invoice, the banner and the tool's state.
     billingLineAction: b.mutation<SubscriptionLine, { id: string; action: LineAction; planId?: string; reason?: string }>({
-      query: ({ id, action, planId, reason }) => ({ url: `/subscriptions/${encodeURIComponent(id)}/${action}`, method: "POST", body: { planId, reason: reason || undefined } }),
+      query: ({ id, action, planId, reason }) => ({ url: `/subscriptions/${encodeURIComponent(id)}/${action}`, method: "POST", body: { planId, reason: reason || undefined }, ...(action === 'retry' ? { headers: { 'Idempotency-Key': crypto.randomUUID() } } : {}) }),
       invalidatesTags: ["Subscriptions", "Me", "Tools", "Invoices"],
     }),
     billingToolPlans: b.query<BillingPlan[], string>({

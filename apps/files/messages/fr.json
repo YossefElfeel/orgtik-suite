@@ -587,7 +587,10 @@
     "notFoundBody": "Le lien est peut-être ancien, ou le dossier a été déplacé. Repartez du tableau de bord ou de Mes fichiers.",
     "loading": "Chargement",
     "handoffTitle": "Ce lien de connexion a expiré",
-    "handoffBody": "Les liens du lanceur fonctionnent une fois, pendant une minute. Rouvrez Fichiers depuis vos applications."
+    "handoffBody": "Les liens du lanceur fonctionnent une fois, pendant une minute. Rouvrez Fichiers depuis vos applications.",
+    "sessionLoading": "Ouverture de votre espace de travail…",
+    "sessionUnavailableTitle": "Votre espace n’a pas pu être ouvert",
+    "sessionUnavailableBody": "Impossible de vérifier votre accès actuel. Vos informations de connexion sont conservées ; réessayez pour continuer."
   },
   "Feedback": {
     "folderCreated": "Dossier « {name} » créé",

@@ -14,11 +14,14 @@ module.exports = function appApi(app, ctx, S, H) {
   function person(req, res) {
     const u = identity.userFromReq(req);
     if (!u) return fail(res, 401, "unauthenticated", "Sign in again."), null;
-    advance(S);
+    if (db.workspaceAuthorityVersion !== 1) advance(S);
     const mine = db.workspaces.filter((w) => w.state !== "deleted" && w.members.some((m) => m.userKey === u.key && m.status === "active"));
     if (!mine.length) return fail(res, 403, "no_workspace", "You're not in a workspace yet."), null;
-    const wanted = req.get("x-workspace") || req.query.workspace;
-    const ws = (wanted && mine.find((w) => w.id === wanted)) || mine[0];
+    const binding = req.workspaceContext?.workspace.id;
+    const wanted = req.get("x-workspace") || req.query.workspace || binding;
+    if (binding && wanted !== binding) return fail(res, 409, "workspace_mismatch", "This tab belongs to a different workspace."), null;
+    const ws = (wanted && mine.find((w) => w.id === wanted)) || (!binding && mine[0]);
+    if (!ws) return fail(res, 403, "workspace_required", "Choose a workspace to continue."), null;
     if (wanted && ws.id !== wanted) return fail(res, 404, "not_found", "No such workspace."), null;
     const member = ws.members.find((m) => m.userKey === u.key);
     return { user: u, key: u.key, ws, member, mine, role: member.role };
@@ -53,6 +56,7 @@ module.exports = function appApi(app, ctx, S, H) {
     const all = banners(S, ws, member);
     ok(res, {
       user: { key: user.key, id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email },
+      workspaceContext: req.workspaceContext || null,
       workspace: { id: ws.id, name: ws.name, slug: ws.slug, country: ws.country, currency: ws.currency, state: ws.state, role: member.role, retentionDays: db.settings.retention.workspaceDays },
       workspaces: mine.map((w) => ({ id: w.id, name: w.name, role: w.members.find((m) => m.userKey === user.key).role, state: w.state })),
       tools,
@@ -259,9 +263,9 @@ module.exports = function appApi(app, ctx, S, H) {
     ok(res, result, {}, 201);
   });
   function invoiceFrom(ws, q, state, pm) {
-    const n = 1040 + db.invoices.length + 1;
     const r = S.usdRate(q.currency);
     if (!r) throw Object.assign(new Error("The USD reporting rate is unavailable; no invoice was created."), { status: 503, code: "payment_rate_unavailable" });
+    const n = S.allocateInvoiceNumber?.() ?? 1040 + db.invoices.length + 1;
     const invoiceLines = [];
     q.lines.forEach((l, i) => {
       const label = `${l.name?.en ?? l.planId}${l.contractedCapacity ? ` · capacity ${l.contractedCapacity}` : l.quantity > 1 ? ` × ${l.quantity}` : ""}`;

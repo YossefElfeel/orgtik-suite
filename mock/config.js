@@ -10,7 +10,7 @@ const apps = {
   marketing: { dir: "apps/marketing", web: 3014, api: 4005 },
   content: { dir: "apps/content", web: 3006, api: 4006 },
   // Somion HQ (chat, calls, virtual office): a prototype with its own built-in mock data, so no API.
-  chats: { dir: "apps/chats", web: 3000, api: null, devArgs: ["run", "dev", "--", "-p", "3000"] },
+  chats: { dir: "apps/chats", web: 3000, api: 4009, devArgs: ["run", "dev", "--", "-p", "3000"] },
   // The public website is frontend-only (no API). devArgs: Vite takes --port, not -p.
   website: { dir: "apps/website/landing-directions", web: 4173, api: null, devArgs: ["run", "dev", "--", "--host", "127.0.0.1", "--port", "4173", "--strictPort"] },
   // Reserved for apps the program will build. They're skipped until they exist (reserved: true).

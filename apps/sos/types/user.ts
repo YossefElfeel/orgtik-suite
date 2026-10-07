@@ -1,3 +1,4 @@
+import type { WorkspaceContext, StaffAccess } from "@orgtik/ui/auth";
 
 export interface IProfile {
   id: number;
@@ -109,12 +110,16 @@ export interface IImpersonatedBy {
 export interface LoginUserDto {
   email: string;
   password: string;
+  mode?: "staff";
+  target?: "admin" | "wm";
 }
 
 export interface IAuthState {
   user: IUser | null;
   tokens: ITokens | null;
   scopes: IScopeItem[] | null;
+  workspaceContext: WorkspaceContext | null;
+  staffAccess: StaffAccess | null;
 }
 
 export interface RegisterUserDto {
@@ -129,6 +134,8 @@ export interface AuthResponse {
   user: IUser;
   tokens: ITokens;
   scopes: IScopeItem[];
+  workspaceContext?: WorkspaceContext | null;
+  staffAccess?: StaffAccess | null;
 }
 
 // Role interface based on API response

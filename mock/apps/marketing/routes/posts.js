@@ -1,6 +1,6 @@
 // Publishing: posts (list/detail/create/update), targets, approvals, comments, publish/duplicate/delete,
 // reviewers, platforms available for publishing and the campaign picker.
-const { send, error, newId, nowIso, at, parseDate, listParam, paginate, textMatch, clone, intParam } = require("../lib");
+const { send, error, newId, nowIso, at, parseDate, listParam, paginate, textMatch, clone, intParam, ymd } = require("../lib");
 const { meta, normPlatform } = require("../catalog");
 const { seedMetrics } = require("../seed");
 
@@ -24,8 +24,8 @@ module.exports = function postRoutes(app, { ctx, getDb, views, h, tick, svc }) {
 
   const connectedIntegration = (projectId, platform) => getDb().integrations.find((i) => i.projectId === projectId && i.platform === platform && i.isConnected)
     || getDb().integrations.find((i) => i.projectId === projectId && i.platform === platform);
-  const validGalleryIds = (ids) => {
-    const set = new Set(getDb().gallery.map((g) => g.id));
+  const validGalleryIds = (ids, projectId) => {
+    const set = new Set(getDb().gallery.filter(g => g.projectId === projectId).map((g) => g.id));
     return [...new Set(listParam(ids).map(Number))].filter((id) => set.has(id));
   };
   const deriveTitle = (text) => {
@@ -44,7 +44,7 @@ module.exports = function postRoutes(app, { ctx, getDb, views, h, tick, svc }) {
     const useMasterText = p.contentMode !== "PER_PLATFORM" || raw.useMasterText !== false || !raw.text || raw.text === p.text;
     return {
       id: newId(), platform, integrationId: integration?.id || null, contentType: raw.contentType || meta(platform)?.supportedContentTypes?.[0] || "POST",
-      useMasterText, textOverride: useMasterText ? null : String(raw.text), useMasterMedia: false, galleryIds: validGalleryIds(raw.galleryIds),
+      useMasterText, textOverride: useMasterText ? null : String(raw.text), useMasterMedia: false, galleryIds: validGalleryIds(raw.galleryIds, p.projectId),
       scheduledAt: parseDate(raw.scheduledAt), status: "DRAFT", errorMessage: null, publishedAt: null, platformPostId: null,
       isDeletedOnPlatform: false, platformDeletedAt: null, platformDeletedBy: null, platformDeleteStatus: "NONE", platformDeleteError: null,
       lastSyncedAt: null, lastSyncError: null, metrics: null, createdAt: now, updatedAt: now,
@@ -153,9 +153,9 @@ module.exports = function postRoutes(app, { ctx, getDb, views, h, tick, svc }) {
     if (labelIds.size) list = list.filter((p) => p.labelIds.some((id) => labelIds.has(id)));
     if (q.search) list = list.filter((p) => textMatch(q.search, p.title, p.text));
     const dateOf = (p) => new Date(views.effectiveScheduledAt(p) || p.createdAt);
-    if (year) list = list.filter((p) => dateOf(p).getFullYear() === year);
-    if (month) list = list.filter((p) => dateOf(p).getMonth() + 1 === month);
-    if (week) list = list.filter((p) => Math.ceil(dateOf(p).getDate() / 7) === week);
+    if (year) list = list.filter((p) => Number(ymd(dateOf(p)).slice(0, 4)) === year);
+    if (month) list = list.filter((p) => Number(ymd(dateOf(p)).slice(5, 7)) === month);
+    if (week) list = list.filter((p) => Math.ceil(Number(ymd(dateOf(p)).slice(8, 10)) / 7) === week);
     // Newest first (so a freshly created post is on page 1), then by schedule date.
     list = [...list].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt) || dateOf(b) - dateOf(a));
     const { items, meta: m } = paginate(list, q, 10);
@@ -354,7 +354,7 @@ module.exports = function postRoutes(app, { ctx, getDb, views, h, tick, svc }) {
     if (String(b.mediaAction || "").toLowerCase() === "replace" && uploaded.length) t.galleryIds = [];
     const toRemove = new Set(listParam(b.galleryIdsToRemove ?? b.mediaToDelete).map(Number));
     if (toRemove.size) t.galleryIds = t.galleryIds.filter((id) => !toRemove.has(id));
-    const toAdd = [...validGalleryIds(b.galleryIds), ...uploaded];
+    const toAdd = [...validGalleryIds(b.galleryIds, p.projectId), ...uploaded];
     for (const id of toAdd) if (!t.galleryIds.includes(id)) t.galleryIds.push(id);
     if (toAdd.length || toRemove.size) changes.push("media");
     t.updatedAt = nowIso();

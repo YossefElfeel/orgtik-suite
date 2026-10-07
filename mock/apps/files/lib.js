@@ -8,7 +8,14 @@ function seedId(name) {
   const h = crypto.createHash("sha1").update(`orgtik-files:${name}`).digest("hex");
   return `${h.slice(0, 8)}-${h.slice(8, 12)}-5${h.slice(13, 16)}-${((parseInt(h[16], 16) & 3) | 8).toString(16)}${h.slice(17, 20)}-${h.slice(20, 32)}`;
 }
-const newId = () => crypto.randomUUID();
+let counters = { ids: 0, secrets: 0 };
+const newId = () => { counters.ids += 1; return crypto.randomUUID(); };
+const newSecret = () => { counters.secrets += 1; return crypto.randomBytes(24).toString("base64url"); };
+const exportCounters = () => ({ ...counters });
+function importCounters(value) {
+  if (!value || Object.keys(value).sort().join(",") !== "ids,secrets" || Object.values(value).some(count => !Number.isSafeInteger(count) || count < 0)) throw Object.assign(new Error("Files ID counters are invalid."), { status: 503, code: "invalid_tool_snapshot" });
+  counters = { ...value };
+}
 
 // "1.8 MB" -> bytes
 function parseSize(s) {
@@ -293,7 +300,7 @@ function fixUploadName(name) {
 }
 
 module.exports = {
-  seedId, newId, parseSize, mimeFor, extOf, category,
+  seedId, newId, newSecret, exportCounters, importCounters, parseSize, mimeFor, extOf, category,
   crc32, zipBuffer, unzip, docxParagraphs,
   svgPages, textPreviewPages, csvPreviewPages, docxPreviewPages,
   parseCookies, contentDisposition, fixUploadName,

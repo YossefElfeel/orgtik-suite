@@ -4,9 +4,9 @@
 const DAY = 864e5;
 const HOUR = 36e5;
 
-function buildSeed({ files, identity }) {
-  const now = Date.now();
-  const today0 = new Date(); today0.setHours(0, 0, 0, 0);
+function buildSeed({ files, identity, empty = false, seedAt }) {
+  const now = seedAt ? Date.parse(seedAt) : Date.now();
+  const today0 = new Date(now); today0.setHours(0, 0, 0, 0);
   const at = (d, h = 10, m = 0) => new Date(today0.getTime() + d * DAY + h * HOUR + m * 6e4).toISOString();
   const past = (iso, minAgoMs = 6e4) => new Date(Math.min(new Date(iso).getTime(), now - minAgoMs)).toISOString();
   const hoursAgo = (h) => new Date(now - h * HOUR).toISOString();
@@ -23,6 +23,7 @@ function buildSeed({ files, identity }) {
     return db.seq[kind]++;
   };
   db.nextId = nextId;
+  if (empty) return db;
 
   // ---------------- teams ----------------
   const TEAMS = [

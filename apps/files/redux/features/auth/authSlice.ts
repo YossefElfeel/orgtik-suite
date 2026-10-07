@@ -2,17 +2,10 @@ import { USER_COOKIE, TOKEN_COOKIE } from "@/constants/index";
 import { IAuthState } from "@/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "@somion/sos-bar";
-import { setCookie, getCookie, deleteCookie } from "cookies-next";
+import { setCookie, deleteCookie } from "cookies-next";
 // import { logCookieSize } from "@/lib/cookie-utils";
 
-const initialState: IAuthState = {
-  user: getCookie(USER_COOKIE)
-    ? JSON.parse(getCookie(USER_COOKIE) as string)
-    : null,
-  token: getCookie(TOKEN_COOKIE)
-    ? JSON.parse(getCookie(TOKEN_COOKIE) as string)
-    : null,
-};
+const initialState: IAuthState = { user: null, token: null };
 
 export const cookieConfig = {
   maxAge: 60 * 60 * 24 * 7,
@@ -26,6 +19,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    bindVerifiedSession: (state, action: PayloadAction<IAuthState>) => { state.user = action.payload.user; state.token = action.payload.token; },
     setUser: (
       state,
       action: PayloadAction<{
@@ -36,12 +30,8 @@ const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
 
-      console.log("Before Setting User Cookie", action.payload.user);
       setCookie(USER_COOKIE, JSON.stringify(action.payload.user), cookieConfig);
       // logCookieSize(JSON.stringify(action.payload.user), "User Cookie");
-      setTimeout(() => {
-        console.log("After Setting User Cookie", getCookie(USER_COOKIE));
-      }, 1000);
 
       setCookie(
         TOKEN_COOKIE,
@@ -58,5 +48,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, logoutUser } = authSlice.actions;
+export const { setUser, logoutUser, bindVerifiedSession } = authSlice.actions;
 export default authSlice;

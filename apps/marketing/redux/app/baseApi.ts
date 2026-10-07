@@ -4,6 +4,8 @@ import type { RootState } from "./store";
 import { signInAgainUrl } from "@/constants";
 import { logoutUser } from "../features/auth/authSlice";
 import { successMessage, errorMessage } from "@/lib/api-feedback";
+import { readClientSession, clearClientSession, refreshClientSession, SessionRequestError } from "@orgtik/ui/auth";
+import { SOS_API_URL } from "@/constants/env";
 
 // Define error response type
 export interface ErrorResponse {
@@ -26,8 +28,10 @@ export interface SuccessResponse<DataType = any> {
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.NEXT_PUBLIC_API_URL,
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.token;
+    const session = readClientSession();
+    const token = session?.tokens.accessToken || (getState() as RootState).auth.token;
     if (token) headers.set("Authorization", `Bearer ${token}`);
+    if (session?.workspaceContext?.workspace.id) headers.set("x-workspace", session.workspaceContext.workspace.id);
     return headers;
   },
 });
@@ -36,13 +40,18 @@ const baseQueryWithInterceptor: typeof baseQuery = async (args, api, extraOption
   // A network failure comes back as { error: { status: "FETCH_ERROR" } } and is reported like any
   // other error. The old interceptor read `error.data.msg` and threw when there was no data, so a
   // stopped API crashed the screen (MKT-007).
-  const result = await baseQuery(args, api, extraOptions);
+  let result = await baseQuery(args, api, extraOptions);
+  if (result.error?.status === 401 && readClientSession()?.tokens.refreshToken) {
+    try { await refreshClientSession(SOS_API_URL); result = await baseQuery(args, api, extraOptions); }
+    catch (error) { if (!(error instanceof SessionRequestError) || ![401, 403].includes(error.status)) return { error: { status: 503, data: { code: "session_unavailable" } } }; }
+  }
   const method = typeof args === "string" ? "GET" : args.method || "GET";
   const body = typeof args === "string" ? undefined : args.body;
 
   // Signed out, or the session expired: sign in through the suite and come back to this page
   // (MKT-030, MKT-031).
   if (result.error?.status === 401 && typeof window !== "undefined") {
+    clearClientSession();
     api.dispatch(logoutUser());
     window.location.href = signInAgainUrl(window.location.pathname + window.location.search);
     return result;

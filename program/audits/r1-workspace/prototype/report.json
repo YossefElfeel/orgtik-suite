@@ -1,0 +1,118 @@
+{
+  "scope": "R1 local SOS session prototype only; not release acceptance",
+  "at": "2026-10-07T20:48:48.804Z",
+  "checks": [
+    {
+      "name": "en-1440-light signed login, selected scopes and empty owner workspace",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light existing-cookie handoff retries profile503 without consuming code twice",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light failed switching retains workspace, token and useful error",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light switch resets access while another tab retains original binding",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light responsive shell has no horizontal overflow or client exceptions",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light failed signout retains credentials for retry",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light signout persists revocation across workspace families",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark signed login, selected scopes and empty owner workspace",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark existing-cookie handoff retries profile503 without consuming code twice",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark failed switching retains workspace, token and useful error",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark switch resets access while another tab retains original binding",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark responsive shell has no horizontal overflow or client exceptions",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark failed signout retains credentials for retry",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark signout persists revocation across workspace families",
+      "pass": true
+    },
+    {
+      "name": "en-390-light signed login, selected scopes and empty owner workspace",
+      "pass": true
+    },
+    {
+      "name": "en-390-light existing-cookie handoff retries profile503 without consuming code twice",
+      "pass": true
+    },
+    {
+      "name": "en-390-light failed switching retains workspace, token and useful error",
+      "pass": true
+    },
+    {
+      "name": "en-390-light switch resets access while another tab retains original binding",
+      "pass": true
+    },
+    {
+      "name": "en-390-light responsive shell has no horizontal overflow or client exceptions",
+      "pass": true
+    },
+    {
+      "name": "en-390-light failed signout retains credentials for retry",
+      "pass": true
+    },
+    {
+      "name": "en-390-light signout persists revocation across workspace families",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark signed login, selected scopes and empty owner workspace",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark existing-cookie handoff retries profile503 without consuming code twice",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark failed switching retains workspace, token and useful error",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark switch resets access while another tab retains original binding",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark responsive shell has no horizontal overflow or client exceptions",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark failed signout retains credentials for retry",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark signout persists revocation across workspace families",
+      "pass": true
+    }
+  ]
+}

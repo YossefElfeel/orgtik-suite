@@ -1,21 +1,18 @@
-// The hand-off from SOS to another suite app (FS-SOS-2, D-017 as proposed). Apps whose /auth page
-// takes a one-time code get one: SOS asks the identity API for a code (single use, 60 s) and the
-// address carries only that. The others still read the access token from the address until their
-// wave moves them over; that path lives here alone and goes when the last one has.
+// Every launch obtains a single-use, destination-scoped code; URLs carry no bearer token.
+// Staff launches first prepare an explicit staff family without replacing the customer tab.
 import { API_URL } from "@/constants/env";
+import { handoffCode, staffTargetToken, type Audience } from "@orgtik/ui/auth";
 
 /** Suite apps whose /auth page exchanges ?code= (migrated in their waves). */
 export const CODE_APPS = new Set(["digital_marketing", "file_manager", "hq", "hr_system", "platform_admin", "sales", "task_manager", "website_manager"]);
+const AUDIENCES: Record<string, Audience> = { global: "suite", task_manager: "tool:tasks", file_manager: "tool:files", hr_system: "tool:hr", sales: "tool:sales", digital_marketing: "tool:marketing", hq: "tool:chats", platform_admin: "staff:admin", website_manager: "staff:wm", website_manager_legacy: "staff:wm" };
 
 export async function handoffHref(domain: string, accessToken: string, opts: { scope?: string; locale?: string } = {}): Promise<string> {
   const base = domain.replace(/\/$/, "");
   const path = `${base}${opts.locale ? `/${opts.locale}` : ""}/auth`;
-  if (opts.scope && CODE_APPS.has(opts.scope)) {
-    const r = await fetch(`${API_URL}/auth/handoff`, { method: "POST", headers: { Authorization: `Bearer ${accessToken}` } });
-    if (!r.ok) throw new Error(`handoff ${r.status}`);
-    const code = (await r.json())?.data?.code as string | undefined;
-    if (!code) throw new Error("handoff: no code");
-    return `${path}?code=${encodeURIComponent(code)}`;
-  }
-  return `${path}?token=${encodeURIComponent(accessToken)}`;
+  const audience = AUDIENCES[opts.scope || "global"];
+  if (!audience) throw new Error("This app has no session destination.");
+  const destinationToken = audience.startsWith("staff:") ? await staffTargetToken(API_URL, accessToken, audience === "staff:admin" ? "admin" : "wm") : accessToken;
+  const code = await handoffCode(API_URL, destinationToken, audience);
+  return `${path}?code=${encodeURIComponent(code)}`;
 }

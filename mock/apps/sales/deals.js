@@ -16,8 +16,8 @@ module.exports = function deals(S) {
   const latestContract = (projectId) => contractsOf(projectId).slice(-1)[0] || null;
   function canSeeProject(req, p) {
     const sc = req.sc;
-    if (sc.role === "customer") return p.customerId === sc.customer?.id;
-    if (sc.role === "salesman") return p.assignedSalesmanId === sc.staff?.id;
+    if (sc.role === "customer") return Boolean(sc.customer && p.customerId === sc.customer.id);
+    if (sc.role === "salesman") return p.ownerUserId === sc.user.id || Boolean(sc.staff && p.assignedSalesmanId === sc.staff.id);
     return true;
   }
   const visibleProjects = (req) => db.projects.filter((p) => canSeeProject(req, p));
@@ -358,7 +358,7 @@ module.exports = function deals(S) {
       status: status || (projectType === "internal_project" && !deal ? "in_progress" : "pending"),
       customerId: customer?.id || null, assignedSalesmanId: salesmanId, departmentId, dueDate: body.dueDate || null,
       vatCountryCode: body.vatCountryCode || null, zoneId: deal?.zone.id || null, contactNotes: [],
-      createdByUserId: actor?.id || null, createdAt: ts, updatedAt: ts,
+      createdByUserId: actor?.id || null, ownerUserId: actor?.id || null, createdAt: ts, updatedAt: ts,
     };
     db.projects.push(project);
     let contract = null;
@@ -473,7 +473,10 @@ module.exports = function deals(S) {
       createdAt: o.createdAt, updatedAt: o.updatedAt, vatCountryCode: o.vatCountryCode, zoneId: o.zoneId,
     };
   }
-  const canSeeOffer = (req, o) => (req.sc.role === "customer" ? o.customerId === req.sc.customer?.id : req.sc.role === "salesman" ? K.customerById(o.customerId)?.assignedSalesmanId === req.sc.staff?.id : true);
+  const canSeeOffer = (req, o) => {
+    const customer = K.customerById(o.customerId);
+    return req.sc.role === "customer" ? Boolean(req.sc.customer && o.customerId === req.sc.customer.id) : req.sc.role === "salesman" ? o.ownerUserId === req.sc.user.id || Boolean(customer && (customer.ownerUserId === req.sc.user.id || req.sc.staff && customer.assignedSalesmanId === req.sc.staff.id)) : true;
+  };
   function createOffer(req, body, { at, actorUser } = {}) {
     const sc = req.sc;
     const actor = actorUser || sc.user;
@@ -505,7 +508,7 @@ module.exports = function deals(S) {
   }
   function respondOffer(req, o, action, { total, note, at, actorUser } = {}) {
     if (!["pending", "countered"].includes(o.status)) return { error: `This offer is already ${o.status}` };
-    const side = (actorUser ? actorUser.userType === "customer" : req.sc.role === "customer") ? "customer" : "staff";
+    const side = (actorUser ? K.appRole(actorUser) === "customer" : req.sc.role === "customer") ? "customer" : "staff";
     const actor = actorUser || req.sc.user;
     const ts = at || new Date().toISOString();
     const ev = { id: H.newId(), type: action === "counter" ? "counter_offer" : action === "accept" ? "accepted" : "rejected", amount: H.money(action === "counter" ? total : agreedTotal(o), o.currencyCode), currencyCode: o.currencyCode, note: note || null, actorId: String(actor?.id || ""), actorType: side, createdAt: ts };
@@ -527,7 +530,7 @@ module.exports = function deals(S) {
         id: H.newId(), referenceNumber: ++db.counters.project, projectName: o.name, projectDescription: o.noteToCustomer || `Created from offer ${o.code}`,
         projectType: "client_project", priority: "medium", status: "pending", customerId: o.customerId,
         assignedSalesmanId: customer?.assignedSalesmanId || null, departmentId: o.lines[0]?.departmentId || null, dueDate: null,
-        vatCountryCode: o.vatCountryCode, zoneId: o.zoneId, contactNotes: [], createdByUserId: actor?.id || null, createdAt: ts, updatedAt: ts,
+        vatCountryCode: o.vatCountryCode, zoneId: o.zoneId, contactNotes: [], createdByUserId: actor?.id || null, ownerUserId: o.ownerUserId ?? customer?.ownerUserId ?? actor?.id ?? null, createdAt: ts, updatedAt: ts,
       };
       db.projects.push(project);
       const zone = C.zoneById(o.zoneId);

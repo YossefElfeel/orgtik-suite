@@ -46,7 +46,6 @@ module.exports = function core(S) {
   // so anyone signed in to the suite got the whole of Sales (SAL-005, wave 6).
   function appRole(user) {
     const scopes = identity.userScopes(user);
-    if (scopes.find((s) => s.scope === "global")?.roles?.includes("super_admin")) return "admin";
     const own = scopes.find((s) => s.scope === "sales")?.roles || [];
     return ["admin", "manager", "salesman", "customer"].find((r) => own.includes(r)) || null;
   }
@@ -81,7 +80,7 @@ module.exports = function core(S) {
     }
     req.sc = {
       user, role, lang: H.langOf(req), catAdmin: role === "admin" || role === "manager",
-      customer: role === "customer" ? ensureCustomerFor(user) : null,
+      customer: role === "customer" ? (identity.workspaceMode ? customerByAuth(user.id) : ensureCustomerFor(user)) : null,
       staff: staffByAuth(user.id) || null,
       displayCurrency,
     };
@@ -131,6 +130,10 @@ module.exports = function core(S) {
 
   const isStaff = (req) => req.sc.role !== "customer";
   function requireRoles(req, res, roles, message) {
+    if (identity.workspaceMode && req.sc.role === "customer" && roles.includes("customer") && !req.sc.customer) {
+      util.fail(res, 404, "No customer profile has been created in this workspace", { code: "customer_profile_missing" });
+      return false;
+    }
     if (roles.includes(req.sc.role)) return true;
     util.fail(res, 403, message || "You do not have permission to perform this action");
     return false;
@@ -180,7 +183,7 @@ module.exports = function core(S) {
     }
     return created;
   }
-  const adminIds = () => identity.users.filter((u) => u.userType === "admin" && u.isActive).map((u) => u.id);
+  const adminIds = () => identity.users.filter((u) => appRole(u) === "admin" && u.isActive).map((u) => u.id);
   const managerIdsFor = (departmentId) => {
     const d = db.departments.find((x) => x.id === departmentId);
     return d?.managerId ? [d.managerId] : [];

@@ -1,5 +1,6 @@
-// Each step runs in a fresh process with one account file: a Vercel cold start without Redis
-// credentials. Nothing touches the demo sandbox or any deployed account.
+// Each step uses fresh process-local HTTP with a shared isolated file domain journal
+// and security store. Hosted Redis requirements are covered separately; no deployed
+// account or demo sandbox is touched.
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const os = require("node:os");
@@ -13,29 +14,43 @@ const NEXT_PASSWORD = "ChangedTest@2026";
 async function child(step) {
   let rejectCommit = false;
   if (step === "commit-outage") {
-    const storage = require("./auth-store");
+    const storage = require("./journal");
     const pick = storage.pickStore;
     storage.pickStore = (config) => {
-      const store = pick(config), commit = store.commit.bind(store);
-      store.commit = async (changes) => {
+      const selected = pick(config), store = selected.store, commit = store.commit.bind(store);
+      store.commit = async (...args) => {
         if (rejectCommit) throw Object.assign(new Error("Synthetic local write failure"), { status: 503 });
-        return commit(changes);
+        return commit(...args);
       };
-      return store;
+      return selected;
     };
   }
   const handler = require("../api/index.js");
   const server = require("node:http").createServer(handler);
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
-  const call = async (method, endpoint, body, token) => {
-    const response = await fetch(base + endpoint, {
-      method, headers: { "content-type": "application/json", connection: "close", ...(token ? { authorization: `Bearer ${token}` } : {}) },
-      body: body ? JSON.stringify(body) : undefined,
+  const call = (method, endpoint, body, token) => new Promise((resolve, reject) => {
+    const bytes = body ? Buffer.from(JSON.stringify(body)) : null;
+    // Fresh HTTP sockets also avoid fetch's browser-port blacklist on Windows'
+    // ephemeral port range. This test exercises the server, not browser transport.
+    const request = require("node:http").request(base + endpoint, {
+      method, agent: false, headers: { "content-type": "application/json", connection: "close", ...(bytes ? { "content-length": bytes.length } : {}), ...(token ? { authorization: `Bearer ${token}` } : {}) },
+    }, response => {
+      const chunks = [];
+      response.on("data", chunk => chunks.push(chunk)); response.on("error", reject);
+      response.on("end", () => { try { resolve({ status: response.statusCode, json: JSON.parse(Buffer.concat(chunks).toString("utf8")) }); } catch (error) { reject(error); } });
     });
-    return { status: response.status, json: await response.json() };
-  };
+    request.setTimeout(15000, () => request.destroy(new Error("Local auth request timed out.")));
+    request.on("error", reject); request.end(bytes);
+  });
   const login = (email = EMAIL, password = PASSWORD) => call("POST", "/sos/api/auth/login", { email, password });
+  const staffToken = async () => {
+    const signedIn = await login("mona.adel@orgtik.test", "Local@2026");
+    assert.equal(signedIn.status, 200);
+    const switched = await call("POST", "/sos/api/auth/workspace", { mode: "staff", target: "admin" }, signedIn.json.data.tokens.accessToken);
+    assert.equal(switched.status, 200);
+    return switched.json.data.tokens.accessToken;
+  };
   let result = {};
   try {
     if (step === "register") {
@@ -46,6 +61,9 @@ async function child(step) {
       assert.ok(!("signup" in JSON.parse(Buffer.from(token.split(".")[1], "base64url"))));
       const me = await call("GET", "/sos/v1/app/me", null, token);
       assert.equal(me.status, 200);
+      const claims = JSON.parse(Buffer.from(token.split(".")[1], "base64url"));
+      assert.equal(claims.aud, "suite"); assert.equal(claims.workspaceId, me.json.data.workspace.id);
+      assert.notEqual(token.split(".")[2], "local-dev-signature"); assert.equal("roles" in claims, false);
       result = { id: created.json.data.user.id, workspace: me.json.data.workspace.id };
     } else if (step === "read" || step === "read-new") {
       const signedIn = await login(EMAIL, step === "read" ? PASSWORD : NEXT_PASSWORD);
@@ -63,11 +81,12 @@ async function child(step) {
       assert.equal(handoff.status, 200);
       result = { id: profile.json.data.user.id, workspace: me.json.data.workspace.id, handoff: handoff.json.data.code, scopes: profile.json.data.scopes };
     } else if (step === "exchange") {
-      const response = await call("POST", "/sos/api/auth/handoff/exchange", { code: process.env.AUTH_TEST_CODE });
+      const response = await call("POST", "/sos/api/auth/handoff/exchange", { code: process.env.AUTH_TEST_CODE, audience: "suite" });
       assert.equal(response.status, 200);
       assert.ok(response.json.data.tokens.refreshToken);
       const refreshed = await call("POST", "/sos/api/auth/refresh", { refreshToken: response.json.data.tokens.refreshToken });
       assert.equal(refreshed.status, 200);
+      assert.equal((await call("POST", "/sos/api/auth/refresh", { refreshToken: response.json.data.tokens.refreshToken })).status, 401);
       result.id = JSON.parse(Buffer.from(response.json.data.accessToken.split(".")[1], "base64url")).sub;
     } else if (step === "used-code") {
       const response = await call("POST", "/sos/api/auth/handoff/exchange", { code: process.env.AUTH_TEST_CODE });
@@ -89,10 +108,9 @@ async function child(step) {
       assert.equal((await login(EMAIL, NEXT_PASSWORD)).status, 200);
       assert.equal((await login(EMAIL, "FailedChange@2026")).status, 401);
     } else if (step === "reset-business") {
-      assert.equal((await call("POST", "/sos/__mock/reset")).status, 200);
+      assert.equal((await call("POST", "/sos/__mock/reset", {}, await staffToken())).status, 200);
     } else if (step === "reject-fixtures") {
-      const admin = await login("mona.adel@orgtik.test", "Local@2026");
-      assert.equal((await call("POST", "/sos/__mock/reset", { fixtures: true }, admin.json.data.tokens.accessToken)).status, 403);
+      assert.equal((await call("POST", "/sos/__mock/reset", { fixtures: true }, await staffToken())).status, 403);
     } else if (step === "register-and-write") {
       const created = await call("POST", "/sos/api/auth/register", { email: "journal.customer@business.org", name: "Journal Customer", company: "Original Workspace", password: PASSWORD });
       assert.equal(created.status, 201);
@@ -114,11 +132,12 @@ async function child(step) {
       const status = await call("GET", "/sos/__mock/status");
       assert.equal(status.json.data.journal.skipped, 0);
     } else if (step === "deactivate") {
-      const admin = await login("mona.adel@orgtik.test", "Local@2026");
       const account = await login(EMAIL, NEXT_PASSWORD);
       const id = account.json.data.user.id;
-      const changed = await call("PATCH", `/sos/api/users/${id}`, { isActive: false }, admin.json.data.tokens.accessToken);
+      const changed = await call("PATCH", `/admin/v1/admin/people/${id}/status`, { isActive: false }, await staffToken());
       assert.equal(changed.status, 200);
+      assert.equal((await call("GET", "/sos/api/auth/me", null, account.json.data.tokens.accessToken)).status, 401);
+      assert.equal((await call("POST", "/sos/api/auth/refresh", { refreshToken: account.json.data.tokens.refreshToken })).status, 401);
     } else if (step === "inactive") {
       assert.equal((await login(EMAIL, NEXT_PASSWORD)).status, 403);
     } else if (step === "outage") {
@@ -146,7 +165,7 @@ async function main() {
       // Seeding every unrelated tool twice during rollback needlessly competes with CI's
       // parallel typechecks; tool integration remains covered by the journal/preview suites.
       execFileSync(process.execPath, [__filename, "--only=sos,admin", "--child", step], {
-        env: { ...process.env, MOCK_AUTH_STORE: "file", MOCK_AUTH_FILE: file, MOCK_JOURNAL: "memory", MOCK_SANDBOX: sandbox, MOCK_PUBLIC_URL: "https://mock.test", VERCEL: "", KV_REST_API_URL: "", KV_REST_API_TOKEN: "", UPSTASH_REDIS_REST_URL: "", UPSTASH_REDIS_REST_TOKEN: "", AUTH_TEST_OUT: out, ...extra },
+        env: { ...process.env, MOCK_AUTH_STORE: "file", MOCK_AUTH_FILE: file, MOCK_JOURNAL: "file", MOCK_SANDBOX: sandbox, MOCK_PUBLIC_URL: "", MOCK_SESSION_SECRET: "synthetic-auth-test-signing-key-32-bytes", VERCEL: "", KV_REST_API_URL: "", KV_REST_API_TOKEN: "", UPSTASH_REDIS_REST_URL: "", UPSTASH_REDIS_REST_TOKEN: "", AUTH_TEST_OUT: out, ...extra },
         encoding: "utf8", stdio: ["ignore", "pipe", "pipe"], timeout: 25000,
       });
     } catch (error) {
@@ -171,7 +190,9 @@ async function main() {
     run("reject-fixtures"); run("read-new"); passed++; console.log("  ok  production-style sandbox refuses account-fixture resets");
     run("warm-catch-up", { MOCK_JOURNAL: "file" }); passed++; console.log("  ok  warm instances restore new customer identities before replaying their writes");
     check("only salted hashes are stored; responses and tokens omit credentials", () => {
-      const saved = fs.readFileSync(file, "utf8"); assert.ok(saved.includes("scrypt:"));
+      const saved = fs.readFileSync(journalFile, "utf8"); assert.ok(saved.includes("scrypt:"));
+      const accounts = Object.values(JSON.parse(saved).identityAccounts || {}).map(value => JSON.parse(value));
+      assert.ok(accounts.some(record => record.user.id === created.id && record.user.passwordHash.startsWith("scrypt:")));
       assert.ok(!saved.includes(PASSWORD)); assert.ok(!saved.includes(NEXT_PASSWORD));
     });
     run("deactivate"); run("inactive"); passed++; console.log("  ok  deactivation survives a fresh instance");

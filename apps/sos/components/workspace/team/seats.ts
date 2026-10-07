@@ -1,22 +1,14 @@
-// Seats (USR-14, G-04 switch). Guests are free. Under model A every active member or admin is one
-// seat on every per-user line; under B a per-user line counts only the people with access to its
-// tool. An invitation counts once it's accepted.
-import type { PerUserLine, SeatModel, TeamMember } from "@/redux/features/platform/team";
-import type { WorkspaceRole } from "@/redux/features/platform/platformApi";
-
-export const paysSeat = (role: WorkspaceRole) => role !== "guest";
-const hasTool = (tools: string[] | null, tool: string) => tools === null || tools.includes(tool);
-
-/** Seats a per-user line bills now. */
-export function seatsOn(line: PerUserLine, model: SeatModel, members: TeamMember[], workspaceSeats: number) {
-  if (model !== "B") return workspaceSeats;
-  return members.filter((m) => m.status === "active" && paysSeat(m.role) && hasTool(m.tools, line.tool)).length;
+import type { AppTool, WorkspaceRole } from '@/redux/features/platform/platformApi';
+import type { PerToolSeats } from '@/redux/features/platform/team';
+export const SUPPORTED_TOOLS = ['tasks', 'files', 'hr', 'crm', 'marketing', 'chat'] as const;
+export function supportedTools(tools: AppTool[], counts: Record<string, PerToolSeats>, role: WorkspaceRole) {
+  return tools.filter(tool => (SUPPORTED_TOOLS as readonly string[]).includes(tool.key) && tool.line && !['not_subscribed', 'coming_soon'].includes(tool.state) && counts[tool.key] && counts[tool.key].capacity !== 0 && !(role === 'guest' && tool.key === 'hr'));
 }
-
-/** The per-user lines one more seat lands on, for someone with this role and tools. */
-export function linesFor(lines: PerUserLine[], model: SeatModel, role: WorkspaceRole, tools: string[] | null) {
-  if (!paysSeat(role)) return [];
-  return model === "B" ? lines.filter((l) => hasTool(tools, l.tool)) : lines;
+export function selection(tools: AppTool[], counts: Record<string, PerToolSeats>, role: WorkspaceRole, value: string[] | null): string[] {
+  const available = supportedTools(tools, counts, role).map(tool => tool.key);
+  return value === null ? available : [...new Set(value)].filter(key => available.includes(key));
 }
-
-export const sumUnits = (lines: PerUserLine[]) => lines.reduce((s, l) => s + l.unit, 0);
+export function unavailableCapacity(counts: Record<string, PerToolSeats>, tools: string[], alreadyAssigned: string[] = []): string[] {
+  return tools.filter(tool => !alreadyAssigned.includes(tool) && (!counts[tool] || counts[tool].capacity !== null && (counts[tool].available ?? 0) < 1));
+}
+export function membershipSeatState(status: string): 'assigned' | 'reserved' { return status === 'active' ? 'assigned' : 'reserved'; }
