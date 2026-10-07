@@ -109,8 +109,10 @@ try {
     await page.locator("#ot-main").waitFor({ timeout: 60000 });
     await page.waitForFunction(() => !document.querySelector("[aria-busy=true]"), null, { timeout: 30000 });
   };
-  const websiteLogin = async (page, locale = "en") => {
-    await page.goto(`${urls.website}${locale === "en" ? "" : `/${locale}`}/sign-in`, { waitUntil: "domcontentloaded" });
+  const websiteLogin = async page => {
+    // Only the English website is public (D-037). The SOS locale cookie separately exercises
+    // Arabic handoff and RTL; testing an unpublished /ar/sign-in would exercise a 404 instead.
+    await page.goto(`${urls.website}/sign-in`, { waitUntil: "domcontentloaded" });
     await page.locator('#signin input[name="email"]').fill(seedEmail);
     await page.locator('#signin input[name="password"]').fill(seedPassword);
     await page.locator('#signin button[type="submit"]').click();
@@ -130,7 +132,7 @@ try {
       try {
         await context.addCookies([{ name: "NEXT_LOCALE", value: locale, url: urls.sos }]);
         const page = await context.newPage();
-        if (viewport.width > 1000) await websiteLogin(page, locale);
+        if (viewport.width > 1000) await websiteLogin(page);
         else await directLogin(page);
         assert.equal((await userCookie(context)).id, seedId);
         const tokenCookie = (await context.cookies(urls.sos)).find(item => item.name === "SOMION_SOS.token");

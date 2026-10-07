@@ -89,6 +89,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter docs exec playwright install chromium
+      - name: Visual environment regressions
+        run: pnpm --filter docs exec node --test tests/visual-environment.test.mjs
       - run: pnpm --filter docs build
       - run: pnpm --filter docs check
       - name: Upload visual evidence
