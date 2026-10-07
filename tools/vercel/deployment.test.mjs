@@ -37,9 +37,10 @@ test("mock artifact rejects missing startup imports and accepts a self-contained
       fs.mkdirSync(pkg, { recursive: true });
       fs.writeFileSync(path.join(pkg, "icons.json"), '{"icons":{}}\n');
     }
-    copyMockRuntime(runtime, output);
     const media = path.join(fn, "mock/apps/files/assets/hls");
-    fs.cpSync(new URL("../../mock/apps/files/assets/hls", import.meta.url), media, { recursive: true });
+    fs.mkdirSync(path.join(media, "mp4_product_demo"), { recursive: true });
+    fs.writeFileSync(path.join(media, "mp4_product_demo/segment-0.ts"), "Bundler-transformed TypeScript");
+    copyMockRuntime(runtime, output);
     assert.doesNotThrow(() => checkMockBundle(output));
     assert.ok(fs.existsSync(path.join(fn, "mock/api/index.js")), "Copy preserves the existing handler and assets");
     const segment = path.join(media, "mp4_product_demo/segment-0.ts");

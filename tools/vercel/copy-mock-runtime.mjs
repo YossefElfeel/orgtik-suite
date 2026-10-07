@@ -26,6 +26,13 @@ export function copyMockRuntime(runtime = ".vercel/mock-runtime", output = ".ver
   } catch (error) { if (error.code !== "ENOENT") throw error; }
   fs.cpSync(source, destination, { recursive: true, dereference: false, verbatimSymlinks: true });
   console.log("mock: copied isolated production dependencies into the function");
+  // Vercel interprets HLS transport-stream .ts files as TypeScript while tracing. Restore the
+  // complete reviewed sample asset tree after tracing; these bytes are runtime media, not code.
+  const assets = path.resolve(import.meta.dirname, "../../mock/apps/files/assets");
+  const packagedAssets = path.resolve(folder, "mock/apps/files/assets");
+  if (!inside(packagedAssets)) throw new Error("Mock asset destination must stay inside its generated function");
+  fs.cpSync(assets, packagedAssets, { recursive: true });
+  console.log("mock: restored packaged Files sample assets byte-for-byte");
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) copyMockRuntime(process.argv[2], process.argv[3]);

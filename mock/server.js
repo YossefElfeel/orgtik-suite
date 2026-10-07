@@ -396,17 +396,9 @@ function loopbackBase() {
   return loopback;
 }
 
-const HOP = new Set(["host", "connection", "content-length", "transfer-encoding", "keep-alive", "expect", "upgrade"]);
 async function dispatch(key, { method, url, headers, body }) {
   const base = await loopbackBase();
-  const h = { "x-mock-app": key };
-  for (const [k, v] of Object.entries(headers || {})) if (!HOP.has(k.toLowerCase()) && v != null) h[k] = Array.isArray(v) ? v.join(", ") : String(v);
-  const r = await fetch(base + url, { method, headers: h, body: body && body.length ? body : undefined, redirect: "manual" });
-  const headersOut = {};
-  r.headers.forEach((v, k) => { if (k !== "set-cookie") headersOut[k] = v; });
-  const cookies = r.headers.getSetCookie?.() ?? [];
-  if (cookies.length) headersOut["set-cookie"] = cookies;
-  return { statusCode: r.status, headers: headersOut, rawPayload: Buffer.from(await r.arrayBuffer()) };
+  return require("./lib/dispatch").dispatch(base, key, { method, url, headers, body });
 }
 
 async function replay(lines, offset) {
@@ -562,7 +554,15 @@ async function handle(key, req, res) {
     const before = authStorage.snapshot(identity);
     const at = clock.now();
     const seed = `${at}:${Math.floor(realRandom() * 1e12)}`;
-    const r = await clock.runPinned({ at, seed }, () => dispatch(key, { method: req.method, url, headers: req.headers, body }));
+    let r;
+    try {
+      r = await clock.runPinned({ at, seed }, () => dispatch(key, { method: req.method, url, headers: req.headers, body }));
+    } catch (error) {
+      identity.hydrate(before, { replace: true });
+      if (store) persist.rebuild = true;
+      console.warn("[mock] loopback request failed:", error.code || error.message);
+      return sendJson(res, 503, { success: false, statusCode: 503, message: "Mock service unavailable. Please try again." });
+    }
     if (r.statusCode < 400) {
       const changes = [...authStorage.snapshot(identity)].filter(([id, value]) => before.get(id) !== value).map(([id, value]) => ({ id, value, expected: saved.get(id) ?? null }));
       try {
