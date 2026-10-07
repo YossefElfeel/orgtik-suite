@@ -33,7 +33,7 @@
   "appearance.accent": "System colour",
   "appearance.accentHint": "Yours only, on this device. Teal, amber, violet and blue are reserved for presence, so they are not offered: an accent that looked like a status would be read as one.",
   "appearance.accentShort": "Yours only, on this device.",
-  "boards.saved": "Saved in Files as you draw",
+  "boards.saved": "Changes are not saved yet",
   "boards.subtitle": "A board without a meeting",
   "boards.title": "Whiteboard",
   "calendar.free": "Nothing booked",

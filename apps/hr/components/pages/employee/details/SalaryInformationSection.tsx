@@ -1,21 +1,12 @@
 import { ArrowsClockwise as RefreshCw, Money as Banknote, Wallet } from "@phosphor-icons/react";
 import { InfoCard, InfoCardSkeleton } from "@/components/ui/info-card";
-import type {
-  ISalaryInformation,
-  ISalaryUpgradeHistory,
-} from "@/types/employee";
+import type { SalaryInformationSectionProps } from "@/types/employee";
 import DataTable from "@/components/shared/Table";
 import { useMemo } from "react";
-import type { ColumnDef } from "@tanstack/react-table";
-import { useParams } from "next/navigation";
-import { formatDate } from "@/utils/formateDate";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslations } from "next-intl";
-
-type SalaryInformationSectionProps = {
-  salaryInformation?: ISalaryInformation;
-  isLoading?: boolean;
-};
+import { useEmployeeMoney } from "@/hooks/useEmployeeMoney";
+import { getSalaryHistoryColumns } from "./SalaryInformationSection/columns";
 
 export function SalaryInformationSectionSkeleton() {
   return (
@@ -36,9 +27,10 @@ export function SalaryInformationSection({
   salaryInformation,
   isLoading,
 }: SalaryInformationSectionProps) {
-  const params = useParams<{ locale: string }>();
   const t = useTranslations("employees.details.salary");
   const tPayment = useTranslations("createUpdateEmployee.options.paymentTypes");
+  const money = useEmployeeMoney();
+  const currency = salaryInformation?.currency;
   const method = salaryInformation?.paymentMethod;
   const methodLabel =
     method === "bank"
@@ -47,38 +39,7 @@ export function SalaryInformationSection({
         ? tPayment(method)
         : method || "-";
 
-  const columns = useMemo<ColumnDef<ISalaryUpgradeHistory>[]>(
-    () => [
-      {
-        accessorKey: "recordedAt",
-        header: t("columns.date"),
-        cell: ({ row }) => {
-          const date = new Date(row.original.recordedAt);
-          return (
-            <span className="font-medium text-foreground">
-              {Number.isNaN(date.getTime()) ? "-" : formatDate(date)}
-            </span>
-          );
-        },
-      },
-      {
-        accessorKey: "baseSalary",
-        header: t("columns.baseSalary"),
-        cell: ({ row }) => row.original.baseSalary,
-      },
-      {
-        accessorKey: "totalSalary",
-        header: t("columns.totalSalary"),
-        cell: ({ row }) => row.original.totalSalary,
-      },
-      {
-        accessorKey: "netSalary",
-        header: t("columns.netSalary"),
-        cell: ({ row }) => row.original.netSalary,
-      },
-    ],
-    [params.locale, t],
-  );
+  const columns = useMemo(() => getSalaryHistoryColumns({ translate: t, money, currency }), [t, money, currency]);
 
   if (isLoading) return <SalaryInformationSectionSkeleton />;
 
@@ -89,17 +50,18 @@ export function SalaryInformationSection({
       title={t("title")}
       icon={RefreshCw}
       onEdit={() => {}}
+      gridClassName="min-w-0 max-sm:[&>div]:grid max-sm:[&>div]:grid-cols-[1.25rem_minmax(0,1fr)] max-sm:[&>div]:gap-y-1 max-sm:[&>div>p]:w-auto max-sm:[&>div>div]:col-start-2 [&>div>div]:[overflow-wrap:anywhere]"
       items={[
         {
           id: "base-salary",
           label: t("columns.baseSalary"),
-          value: salaryInformation?.baseSalary?.toString() || "-",
+          value: <bdi className="tabular-nums">{money(salaryInformation?.baseSalary, currency)}</bdi>,
           icon: Banknote,
         },
         {
           id: "total-salary",
           label: t("columns.totalSalary"),
-          value: salaryInformation?.totalSalary?.toString() || "-",
+          value: <bdi className="tabular-nums">{money(salaryInformation?.totalSalary, currency)}</bdi>,
           icon: RefreshCw,
         },
         {

@@ -1,14 +1,9 @@
 import { ArrowsCounterClockwise as RefreshCcw, Bank as Landmark, Buildings as Building2, Code as Code2, CreditCard, DeviceMobile as Smartphone, Envelope as Mail, Phone, User, Wallet } from "@phosphor-icons/react";
 import { InfoCard, InfoCardSkeleton, type InfoCardItem } from "@/components/ui/info-card";
-import type { IPaymentDetails, ISalaryInformation } from "@/types/employee";
+import type { BankInformationSectionProps } from "@/types/employee";
 import { useTranslations } from "next-intl";
 import { useEmployeeLabels } from "@/hooks/useEmploymentTypeLabel";
-
-type BankInfoSectionProps = {
-  paymentDetails?: IPaymentDetails;
-  salaryInformation?: ISalaryInformation;
-  isLoading?: boolean;
-};
+import { useEmployeeMoney } from "@/hooks/useEmployeeMoney";
 
 export function BankInfoSectionSkeleton() {
   return <InfoCardSkeleton itemCount={6} />;
@@ -18,10 +13,11 @@ export function BankInfoSection({
   paymentDetails,
   salaryInformation,
   isLoading,
-}: BankInfoSectionProps) {
+}: BankInformationSectionProps) {
   const t = useTranslations("employees.details.sections");
   const tFields = useTranslations("createUpdateEmployee.fields");
   const labels = useEmployeeLabels();
+  const money = useEmployeeMoney();
 
   if (isLoading) return <BankInfoSectionSkeleton />;
 
@@ -155,7 +151,7 @@ export function BankInfoSection({
     items.push({
       id: "salary",
       label: tFields("baseSalary"),
-      value: salaryInformation?.baseSalary || "-",
+      value: <bdi className="tabular-nums">{money(salaryInformation?.baseSalary, salaryInformation?.currency)}</bdi>,
       icon: Building2,
     });
 
@@ -167,6 +163,7 @@ export function BankInfoSection({
       title={getSectionTitle()}
       icon={getSectionIcon()}
       onEdit={() => {}}
+      gridClassName="min-w-0 max-sm:[&>div]:grid max-sm:[&>div]:grid-cols-[1.25rem_minmax(0,1fr)] max-sm:[&>div]:gap-y-1 max-sm:[&>div>p]:w-auto max-sm:[&>div>div]:col-start-2 [&>div>div]:[overflow-wrap:anywhere]"
       items={getItems()}
     />
   );

@@ -394,6 +394,7 @@ export interface IPaymentDetails {
 
 export interface ISalaryUpgradeHistory {
   id: number;
+  currency?: string | null;
   baseSalary: number;
   paymentMethod: string;
   housingAllowanceValue: number;
@@ -414,6 +415,7 @@ export interface ISalaryUpgradeHistory {
 
 export interface ISalaryInformation {
   baseSalary: number;
+  currency?: string | null;
   paymentMethod: string;
   housingAllowanceValue: number;
   housingAllowanceType: "percentage" | "fixed" | string;
@@ -428,6 +430,23 @@ export interface ISalaryInformation {
   totalSalary: number;
   netSalary: number;
   salaryUpgradeHistory?: ISalaryUpgradeHistory[];
+}
+
+export interface SalaryInformationSectionProps {
+  salaryInformation?: ISalaryInformation;
+  isLoading?: boolean;
+}
+
+export interface BankInformationSectionProps {
+  paymentDetails?: IPaymentDetails;
+  salaryInformation?: ISalaryInformation;
+  isLoading?: boolean;
+}
+
+export interface SalaryHistoryColumnsOptions {
+  translate: (key: "columns.date" | "columns.baseSalary" | "columns.totalSalary" | "columns.netSalary") => string;
+  money: (amount: number | null | undefined, currency?: string | null) => string;
+  currency?: string | null;
 }
 
 export interface IDaysOffInformation {
