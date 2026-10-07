@@ -74,9 +74,15 @@ function iconifyCopies(nm) {
 function patchFile(file, replacements) {
   if (!fs.existsSync(file)) return "missing";
   const backup = file + BACKUP;
+  // pnpm hard-links installed files to its shared store, so every write replaces the file
+  // (unlink first) instead of writing through the link and changing the store for everyone.
+  const replace = (target, data) => {
+    fs.unlinkSync(target);
+    fs.writeFileSync(target, data);
+  };
   if (RESTORE) {
     if (!fs.existsSync(backup)) return "not patched";
-    fs.copyFileSync(backup, file);
+    replace(file, fs.readFileSync(backup));
     fs.unlinkSync(backup);
     return "restored";
   }
@@ -86,7 +92,7 @@ function patchFile(file, replacements) {
   if (text === original) return "no change";
   if (fs.readFileSync(file, "utf8") === text) return "already patched";
   if (!fs.existsSync(backup)) fs.writeFileSync(backup, original);
-  fs.writeFileSync(file, text);
+  replace(file, text);
   return "patched";
 }
 

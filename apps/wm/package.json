@@ -7,12 +7,13 @@
     "dev": "next dev -p 3007",
     "build": "next build",
     "start": "next start -p 3007",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "node ../../tools/next-env.cjs && tsc --noEmit",
+    "i18n:check": "node ../../tools/i18n/check-catalogs.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "5.2.2",
     "@internationalized/date": "3.12.4",
-    "@orgtik/ui": "file:.yalc/@orgtik/ui",
+    "@orgtik/ui": "workspace:*",
     "@phosphor-icons/react": "2.1.10",
     "@reduxjs/toolkit": "2.11.2",
     "@tanstack/react-table": "8.21.3",

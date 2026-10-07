@@ -10,3 +10,18 @@ mock/uploads/
 mock/logs/
 .turbo/
 storybook-static/
+
+# Old folder names, linked by tools/dev/old-layout-links.mjs for the program tools.
+/local-dev
+/orgtik-program
+/somion-sos-frontend-main
+/task-manager-front-main
+/file-manager-dashboard-main
+/sales-dashboardv2-main
+/somion-hr-dashboard-main
+/digital-marketing-frontend-main
+/content-dashboard-somion-main
+/somion-hq
+/orgtik-website-manager
+/orgtik-admin
+/orgtik-website

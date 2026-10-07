@@ -28,6 +28,7 @@ const { Server } = require("socket.io");
 const config = require("./config");
 const icons = require("./lib/icons");
 const requests = require("./lib/requests");
+const journal = require("./lib/journal");
 
 // "chats" has no API: its module only registers a launcher tile.
 const ORDER = ["sos", "tasks", "files", "sales", "hr", "marketing", "content", "wm", "admin", "chats"];
@@ -39,7 +40,7 @@ const unhandledLog = path.join(LOG_DIR, "unhandled.log");
 
 // A reset re-requires the app modules and the shared libraries so every in-memory store is
 // rebuilt from its seed. These modules hold state that must survive a reset.
-const KEEP = new Set(["./lib/clock", "./lib/requests", "./lib/icons", "./config"].map((p) => require.resolve(p)));
+const KEEP = new Set(["./lib/clock", "./lib/requests", "./lib/icons", "./lib/journal", "./config"].map((p) => require.resolve(p)));
 const RELOAD_DIRS = ["apps", "lib"].map((d) => path.join(__dirname, d) + path.sep);
 function purgeLocalModules() {
   for (const id of Object.keys(require.cache)) {
@@ -124,6 +125,7 @@ function status() {
     lastReset: state.lastReset,
     lastRequestSeq: requests.lastSeq(),
     strictScopes: state.strict,
+    journal: store ? { sandbox, store: store.kind, epoch: persist.epoch, entries: persist.applied, skipped: persist.skipped, seedAt: persist.seedAt && new clock.RealDate(persist.seedAt).toISOString() } : null,
     faults,
     apps: Object.fromEntries(
       Object.entries(config.apps).map(([k, a]) => [k, { web: config.webUrl(k), api: a.api == null ? null : config.apiUrl(k), running: slots.has(k), reserved: Boolean(a.reserved) }]),
@@ -153,7 +155,7 @@ function controlRoutes(app) {
   c.get("/status", (req, res) => res.json({ success: true, data: status() }));
   c.post("/reset", (req, res) => {
     res.json({ success: true, message: "Resetting every app's data", data: { generation: state.generation + 1 } });
-    scheduleReset("POST /__mock/reset");
+    resetData("POST /__mock/reset");
   });
   c.get("/clock", (req, res) => res.json({ success: true, data: clock.status() }));
   c.post("/clock", (req, res) => {
@@ -161,7 +163,8 @@ function controlRoutes(app) {
     try {
       const data = clock.set({ now, frozen });
       res.json({ success: true, message: reset ? "Clock set; data is being rebuilt for the new time" : "Clock set", data });
-      if (reset) scheduleReset("clock set");
+      if (reset) resetData("clock set");
+      else saveClock();
     } catch (e) {
       res.status(400).json({ success: false, statusCode: 400, message: e.message });
     }
@@ -171,6 +174,7 @@ function controlRoutes(app) {
     const ms = ((Number(days) * 24 + Number(hours)) * 60 + Number(minutes)) * 60000 + Number(seconds) * 1000;
     try {
       res.json({ success: true, message: "Clock moved on", data: clock.advance(ms) });
+      saveClock();
     } catch (e) {
       res.status(400).json({ success: false, statusCode: 400, message: e.message });
     }
@@ -319,7 +323,7 @@ function build() {
     } else if (!slot) {
       // Every app sets cookies on "localhost", and browsers send all of them to every port;
       // a bigger header limit avoids HTTP 431 once you're signed in to all apps.
-      const server = http.createServer({ maxHeaderSize: 64 * 1024 }, (req, res) => slots.get(key).app(req, res));
+      const server = http.createServer({ maxHeaderSize: 64 * 1024 }, (req, res) => handle(key, req, res));
       const io = new Server(server, { cors: { origin: true, credentials: true } });
       slot = { server, io };
       slots.set(key, slot);
@@ -343,12 +347,243 @@ function build() {
   state.lastReset = new Date().toISOString();
 }
 
-build();
+// ---- persistence: the write journal (D-053, lib/journal.js) ----
+// With a store configured, the seed is built at a fixed instant (meta.seedAt) with seeded random
+// numbers, and every recorded change is replayed with its own instant and seed, so every instance
+// of the mock rebuilds the same data. Without a store nothing here runs.
+const { sandbox, store } = journal.pickStore(config);
+const persist = { epoch: null, seedAt: null, clockJson: null, applied: 0, skipped: 0, rebuild: false, ready: null, lock: journal.makeLock() };
+const realRandom = (() => { const r = Math.random; return () => r(); })(); // outside a pinned run this is the real one
+
+function newMeta() {
+  return { epoch: `${clock.RealDate.now().toString(36)}-${Math.floor(realRandom() * 1e9).toString(36)}`, seedAt: clock.now(), clock: clock.exportState() };
+}
+
+// Changes (live and replayed) reach the apps through a loopback HTTP server, so Express gets real
+// request and response objects; the pin is set around the whole round trip.
+let loopback = null;
+function loopbackBase() {
+  if (!loopback) {
+    loopback = new Promise((resolve, reject) => {
+      const srv = http.createServer({ maxHeaderSize: 64 * 1024 }, (req, res) => {
+        const app = slots.get(req.headers["x-mock-app"])?.app;
+        if (!app) return sendJson(res, 404, { success: false, statusCode: 404, message: "[mock] no such app" });
+        app(req, res);
+      });
+      srv.on("error", reject);
+      srv.listen(0, "127.0.0.1", () => resolve(`http://127.0.0.1:${srv.address().port}`));
+      srv.unref();
+    });
+    loopback.catch(() => { loopback = null; });
+  }
+  return loopback;
+}
+
+const HOP = new Set(["host", "connection", "content-length", "transfer-encoding", "keep-alive", "expect", "upgrade"]);
+async function dispatch(key, { method, url, headers, body }) {
+  const base = await loopbackBase();
+  const h = { "x-mock-app": key };
+  for (const [k, v] of Object.entries(headers || {})) if (!HOP.has(k.toLowerCase()) && v != null) h[k] = Array.isArray(v) ? v.join(", ") : String(v);
+  const r = await fetch(base + url, { method, headers: h, body: body && body.length ? body : undefined, redirect: "manual" });
+  const headersOut = {};
+  r.headers.forEach((v, k) => { if (k !== "set-cookie") headersOut[k] = v; });
+  const cookies = r.headers.getSetCookie?.() ?? [];
+  if (cookies.length) headersOut["set-cookie"] = cookies;
+  return { statusCode: r.status, headers: headersOut, rawPayload: Buffer.from(await r.arrayBuffer()) };
+}
+
+async function replay(lines, offset) {
+  let n = 0;
+  for (const line of lines) {
+    n += 1;
+    const e = typeof line === "string" ? JSON.parse(line) : line;
+    if (e.epoch !== persist.epoch) continue;
+    if (!slots.get(e.app)?.app) { persist.skipped += 1; continue; }
+    const r = await clock.runPinned({ at: e.at, seed: e.seed }, () =>
+      dispatch(e.app, { method: e.method, url: e.url, headers: { ...e.headers, "x-mock-replay": "1" }, body: e.body ? Buffer.from(e.body, "base64") : null }),
+    );
+    if (r.statusCode >= 400) {
+      persist.skipped += 1;
+      console.warn(`[journal] replay of #${offset + n} ${e.method} /${e.app}${e.url} answered ${r.statusCode}`);
+    }
+  }
+  persist.applied = offset + n;
+}
+
+async function restore(meta) {
+  persist.epoch = meta.epoch;
+  persist.seedAt = meta.seedAt;
+  persist.clockJson = JSON.stringify(meta.clock ?? null);
+  clock.importState(meta.clock);
+  clock.runPinned({ at: meta.seedAt, seed: `seed:${meta.seedAt}` }, build);
+  persist.applied = 0;
+  persist.skipped = 0;
+  persist.rebuild = false;
+  await replay(await store.read(0), 0);
+  console.log(`[journal] ${sandbox}: seed of ${new clock.RealDate(meta.seedAt).toISOString()} + ${persist.applied} changes (${persist.skipped} skipped)`);
+}
+
+function ready() {
+  if (!store) return Promise.resolve();
+  if (!persist.ready) {
+    persist.ready = persist.lock(async () => {
+      let meta = await store.getMeta();
+      if (!meta) {
+        meta = newMeta();
+        await store.setMeta(meta);
+      }
+      await restore(meta);
+    });
+    persist.ready.catch(() => { persist.ready = null; });
+  }
+  return persist.ready;
+}
+
+// Catch up with changes other instances recorded (call inside the lock).
+async function sync() {
+  const { meta, entries } = store.poll
+    ? await store.poll(persist.applied)
+    : { meta: await store.getMeta(), entries: await store.read(persist.applied) };
+  if (!meta) {
+    const fresh = newMeta();
+    await store.setMeta(fresh);
+    return restore(fresh);
+  }
+  if (meta.epoch !== persist.epoch || persist.rebuild) return restore(meta);
+  if (JSON.stringify(meta.clock ?? null) !== persist.clockJson) {
+    persist.clockJson = JSON.stringify(meta.clock ?? null);
+    clock.importState(meta.clock);
+  }
+  if (entries.length) await replay(entries, persist.applied);
+}
+
+function saveClock() {
+  if (!store) return;
+  persist.lock(async () => {
+    const meta = (await store.getMeta()) || newMeta();
+    meta.clock = clock.exportState();
+    persist.clockJson = JSON.stringify(meta.clock);
+    await store.setMeta(meta);
+  }).catch((e) => console.error("[journal] saving the clock failed:", e.message));
+}
+
+// A reset starts a new epoch: the journal is emptied and the seed is built at the current instant.
+function resetData(reason) {
+  if (!store) return scheduleReset(reason);
+  persist.lock(async () => {
+    const meta = newMeta();
+    await store.clear();
+    await store.setMeta(meta);
+    await restore(meta);
+    console.log(`[mock] data reset (${reason}); journal epoch ${meta.epoch}`);
+  }).catch((e) => console.error("[journal] reset failed:", e));
+}
+
+function readBody(req) {
+  if (req.readableEnded) {
+    if (Buffer.isBuffer(req.body)) return Promise.resolve(req.body);
+    if (typeof req.body === "string") return Promise.resolve(Buffer.from(req.body));
+    return Promise.resolve(req.body == null ? Buffer.alloc(0) : Buffer.from(JSON.stringify(req.body)));
+  }
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on("data", (c) => chunks.push(c));
+    req.on("end", () => resolve(Buffer.concat(chunks)));
+    req.on("error", reject);
+  });
+}
+
+function send(res, r) {
+  const headers = { ...r.headers };
+  delete headers["transfer-encoding"];
+  delete headers.connection;
+  delete headers["keep-alive"];
+  delete headers.date;
+  headers["content-length"] = r.rawPayload.length;
+  res.writeHead(r.statusCode, headers);
+  res.end(r.rawPayload);
+}
+
+const sendJson = (res, code, body) => {
+  res.writeHead(code, { "content-type": "application/json", "access-control-allow-origin": "*" });
+  res.end(JSON.stringify(body));
+};
+
+// Every request to an app's API goes through here (the local servers and api/index.js).
+async function handle(key, req, res) {
+  if (!store) return slots.get(key).app(req, res);
+  try {
+    await ready();
+  } catch (e) {
+    console.error("[journal] start failed:", e);
+    return sendJson(res, 503, { success: false, statusCode: 503, message: "[mock] data store unavailable" });
+  }
+  const url = req.url || "/";
+  // With the journal on, the mock answers one request at a time (it's a prototype): a change is
+  // applied with its pin while nothing else runs, in the order the journal records.
+  if (!journal.recordable(req.method, url)) {
+    return persist.lock(async () => {
+      if (!url.startsWith("/__mock")) {
+        try {
+          await sync();
+        } catch (e) {
+          console.warn("[journal] sync failed:", e.message);
+        }
+      }
+      const app = slots.get(key)?.app;
+      if (!app) return sendJson(res, 404, { success: false, statusCode: 404, message: `[mock] no API for ${key}` });
+      await new Promise((resolve) => {
+        const done = () => { clearTimeout(t); resolve(); };
+        const t = setTimeout(done, 15000); // a stream that never ends must not hold everyone up
+        res.on("finish", done);
+        res.on("close", done);
+        app(req, res);
+      });
+    });
+  }
+  const body = await readBody(req);
+  return persist.lock(async () => {
+    try {
+      await sync();
+    } catch (e) {
+      console.warn("[journal] sync failed:", e.message);
+    }
+    if (!slots.get(key)?.app) return sendJson(res, 404, { success: false, statusCode: 404, message: `[mock] no API for ${key}` });
+    const at = clock.now();
+    const seed = `${at}:${Math.floor(realRandom() * 1e12)}`;
+    const r = await clock.runPinned({ at, seed }, () => dispatch(key, { method: req.method, url, headers: req.headers, body }));
+    if (r.statusCode < 400) {
+      if (body.length > journal.MAX_BODY) res.setHeader("x-mock-journal", "too-large");
+      else if (persist.applied >= journal.MAX_ENTRIES) res.setHeader("x-mock-journal", "full");
+      else {
+        try {
+          const seq = await store.push({ epoch: persist.epoch, app: key, method: req.method, url, headers: journal.recordHeaders(req.headers), body: body.length ? body.toString("base64") : null, at, seed });
+          if (seq === persist.applied + 1) persist.applied = seq;
+          else persist.rebuild = true; // another instance wrote in between: rebuild in journal order
+        } catch (e) {
+          console.warn("[journal] recording failed:", e.message);
+          res.setHeader("x-mock-journal", "failed");
+        }
+      }
+    }
+    send(res, r);
+  });
+}
 
 // On Vercel the APIs are served by api/index.js (no ports, no icon server).
 if (process.env.ORGTIK_MOCK_NO_LISTEN) {
-  module.exports = { slots, state };
+  if (!store) build();
+  module.exports = { slots, state, handle, ready };
   return;
+}
+
+if (store) {
+  ready().catch((e) => {
+    console.error("[journal] start failed:", e);
+    process.exit(1);
+  });
+} else {
+  build();
 }
 
 const excalidrawDist = path.join(__dirname, "..", config.apps.chats.dir, "node_modules", "@excalidraw", "excalidraw", "dist", "prod");

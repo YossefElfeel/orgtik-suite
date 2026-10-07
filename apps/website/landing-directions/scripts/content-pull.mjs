@@ -84,12 +84,18 @@ else {
 // two kinds of address only the browser can resolve, so they get the app's HTML.
 const VERCEL = path.join(here, "..", "vercel.json");
 const star = (x) => x.replace(/\/\*$/, "/:path*");
+// In the orgtik-suite monorepo the install, build and skip commands come from the shared Vercel
+// configuration (tools/vercel/configure.mjs); outside it (the owner's own repo) the build is npm.
+const suiteConfig = path.join(here, "..", "..", "..", "..", "tools", "vercel", "configure.mjs");
+const commands = fs.existsSync(suiteConfig)
+  ? (await import(pathToFileURL(suiteConfig).href)).commandsFor("apps/website/landing-directions")
+  : { buildCommand: "npm run build" };
 const vercel = {
   // Keep host settings (including response headers) when regenerating CMS redirects.
   ...(fs.existsSync(VERCEL) ? JSON.parse(fs.readFileSync(VERCEL, "utf8")) : {}),
   $schema: "https://openapi.vercel.sh/vercel.json",
   framework: "vite",
-  buildCommand: "npm run build",
+  ...commands,
   outputDirectory: "dist/client",
   redirects: redirects
     .filter((r) => r.handledBy !== "browser")

@@ -1,0 +1,20 @@
+{
+  "name": "orgtik-suite",
+  "private": true,
+  "packageManager": "pnpm@11.3.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "i18n:check": "turbo run i18n:check",
+    "dev:mock": "pnpm --filter orgtik-local-dev api",
+    "ui:build": "turbo run build --filter=@orgtik/ui"
+  },
+  "devDependencies": {
+    "turbo": "^2.11.7"
+  }
+}

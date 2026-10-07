@@ -1,4 +1,0 @@
-storybook-static/
-*.png
-!tests/baselines/*.png
-tests/results/
