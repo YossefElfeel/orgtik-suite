@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-06T23:45:42.044Z",
+  "generated": "2026-10-07T16:18:20.552Z",
   "total": 407,
   "bySource": {
     "review": 26,
@@ -15,14 +15,14 @@
     "T3": 9
   },
   "byType": {
-    "Fix flow": 33,
+    "Fix flow": 18,
     "Decision (PM)": 3,
-    "Missing feature": 363,
+    "Missing feature": 378,
     "Missing flow": 8
   },
   "byDecision": {
-    "user": 296,
-    "PM": 111
+    "user": 306,
+    "PM": 101
   },
   "themes": {
     "T1": "Suite foundation: workspaces in every tool, paid tools open, members join, billing state applies",

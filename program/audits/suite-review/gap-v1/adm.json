@@ -155,19 +155,41 @@
     "status": "Partial",
     "current_app": "admin",
     "current_route": "/en/pricing/preview",
-    "evidence": "apps/admin/components/pricing/PricePreview.tsx:15-118; mock/apps/admin/admin-api.js:306-312",
-    "missing": "Inverted: picks a plan and lists countries, not 'pick a country -> every plan'; no tax, total, rate used or discount; no 'Explain' step view; no 'include draft changes'.",
-    "notes": "Plan, cycle, seats; price, currency and source per country from the real resolver."
+    "evidence": "program/audits/r0-prototype/readout.md; program/backlog/release-packages.csv:R0-PAYMENT; apps/admin/components/pricing/PricePreview.tsx:15-118; mock/apps/admin/admin-api.js:306-312",
+    "missing": "Hosted release acceptance remains open. Price-preview contracts expose regional amounts and per-tool tax information. Hosted five-locale admin preview acceptance remains open.",
+    "notes": "R0 implementation delta: mock/local behavior only; live providers remain deferred. Original inspected review is retained in review_baseline; this does not accept any release or all 15 journeys.",
+    "review_baseline": {
+      "status": "Partial",
+      "missing": "Inverted: picks a plan and lists countries, not 'pick a country -> every plan'; no tax, total, rate used or discount; no 'Explain' step view; no 'include draft changes'.",
+      "notes": "Plan, cycle, seats; price, currency and source per country from the real resolver.",
+      "evidence": "apps/admin/components/pricing/PricePreview.tsx:15-118; mock/apps/admin/admin-api.js:306-312"
+    },
+    "implementation_status": "implemented_locally_hosted_unaccepted",
+    "release_package": "R0-PAYMENT",
+    "acceptance_evidence": [],
+    "accepted_decisions": [
+      "D-060"
+    ]
   },
   {
     "gap_id": "GAP-062",
     "spec_id": "US-A-17",
-    "status": "Exists-flawed",
+    "status": "Partial",
     "current_app": "admin",
     "current_route": "/en/pricing",
-    "evidence": "apps/admin/components/pricing/PublishDialog.tsx:99-139,142-182; mock/apps/admin/admin-api.js:240-247,274-305; mock/apps/admin/admin-api.js:286; mock/apps/admin/lifecycle.js:7-49",
-    "missing": "A future effective date is ignored: publish writes db.grid immediately (admin-api.js:286), so a 'scheduled' change applies to new purchases at once; scheduled price changes on existing lines are never applied at renewal (lifecycle has no renewal step); affected-subscriptions count is computed (draft.affects) but not shown in the review dialog; no notice email/notification to owners; no customer message or notice-days field.",
-    "notes": "Draft -> review (old vs new, increase/decrease) -> apply mode new_only / existing_next_renewal / existing_now (increase refused, P5), reason required. Old Sales conflict gone."
+    "evidence": "program/audits/r0-prototype/readout.md; program/backlog/release-packages.csv:R0-PRICING; apps/admin/components/pricing/PublishDialog.tsx:99-139,142-182; mock/apps/admin/admin-api.js:240-247,274-305; mock/apps/admin/admin-api.js:286; mock/apps/admin/lifecycle.js:7-49",
+    "missing": "Hosted release acceptance remains open. Publication retains scheduled changes until effectiveAt; endpoint-backed regressions exercise publish behavior. Hosted acceptance remains open.",
+    "notes": "R0 implementation delta: mock/local behavior only; live providers remain deferred. Original inspected review is retained in review_baseline; this does not accept any release or all 15 journeys.",
+    "review_baseline": {
+      "status": "Exists-flawed",
+      "missing": "A future effective date is ignored: publish writes db.grid immediately (admin-api.js:286), so a 'scheduled' change applies to new purchases at once; scheduled price changes on existing lines are never applied at renewal (lifecycle has no renewal step); affected-subscriptions count is computed (draft.affects) but not shown in the review dialog; no notice email/notification to owners; no customer message or notice-days field.",
+      "notes": "Draft -> review (old vs new, increase/decrease) -> apply mode new_only / existing_next_renewal / existing_now (increase refused, P5), reason required. Old Sales conflict gone.",
+      "evidence": "apps/admin/components/pricing/PublishDialog.tsx:99-139,142-182; mock/apps/admin/admin-api.js:240-247,274-305; mock/apps/admin/admin-api.js:286; mock/apps/admin/lifecycle.js:7-49"
+    },
+    "implementation_status": "implemented_locally_hosted_unaccepted",
+    "release_package": "R0-PRICING",
+    "acceptance_evidence": [],
+    "accepted_decisions": []
   },
   {
     "gap_id": "GAP-063",
@@ -352,12 +374,22 @@
   {
     "gap_id": "GAP-081",
     "spec_id": "US-A-36",
-    "status": "Exists-flawed",
+    "status": "Partial",
     "current_app": "admin",
     "current_route": "/en/service-requests",
-    "evidence": "apps/admin/app/[locale]/(app)/service-requests/page.tsx:25-79; mock/apps/admin/admin-api.js:556-561,572; mock/apps/admin/permissions.js:22,32",
-    "missing": "Service Team sees every request (services:view lists all; 'mine' is only an optional filter), breaking 'I only see requests assigned to me'; delivering creates no customer notification; files are names only.",
-    "notes": "Edit actions are limited to own requests (E*, 403 otherwise); deliver moves to in_review; messages and status changes work."
+    "evidence": "program/audits/r0-prototype/readout.md; program/backlog/release-packages.csv:R0-LIFECYCLE; apps/admin/app/[locale]/(app)/service-requests/page.tsx:25-79; mock/apps/admin/admin-api.js:556-561,572; mock/apps/admin/permissions.js:22,32",
+    "missing": "Hosted release acceptance remains open. ServiceTeam list/detail reads require assignment; optional client filters cannot widen access. Hosted staff access journey remains open.",
+    "notes": "R0 implementation delta: mock/local behavior only; live providers remain deferred. Original inspected review is retained in review_baseline; this does not accept any release or all 15 journeys.",
+    "review_baseline": {
+      "status": "Exists-flawed",
+      "missing": "Service Team sees every request (services:view lists all; 'mine' is only an optional filter), breaking 'I only see requests assigned to me'; delivering creates no customer notification; files are names only.",
+      "notes": "Edit actions are limited to own requests (E*, 403 otherwise); deliver moves to in_review; messages and status changes work.",
+      "evidence": "apps/admin/app/[locale]/(app)/service-requests/page.tsx:25-79; mock/apps/admin/admin-api.js:556-561,572; mock/apps/admin/permissions.js:22,32"
+    },
+    "implementation_status": "implemented_locally_hosted_unaccepted",
+    "release_package": "R0-LIFECYCLE",
+    "acceptance_evidence": [],
+    "accepted_decisions": []
   },
   {
     "gap_id": "GAP-084",

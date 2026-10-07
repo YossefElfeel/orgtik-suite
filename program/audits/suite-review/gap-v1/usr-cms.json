@@ -15,9 +15,23 @@
     "status": "Partial",
     "current_app": "sos + mock + website",
     "current_route": "/tools, /tools/:key, /checkout (sos); /plans (website)",
-    "evidence": "mock/apps/admin/app-api.js:64-68; mock/apps/admin/pricing.js:51-101; mock/apps/admin/app-api.js:153-156; apps/sos/app/(dashboard)/checkout/page.tsx:301-305; mock/apps/admin/app-api.js:305; apps/website/landing-directions/src/reference/purchase-catalog.js:4-7; apps/website/landing-directions/PURCHASING.md:14",
-    "missing": "No IP country detection and no country selector on any pricing page; the website is CHF-only; plan cards carry no tax incl./excl. label (tax only appears at checkout and G-12 is undecided).",
-    "notes": "Resolver (country -> zone -> USD, R03) is implemented in the mock and drives in-app prices in the workspace currency."
+    "evidence": "program/audits/r0-prototype/readout.md; program/backlog/release-packages.csv:R0-OFFERS; mock/apps/admin/app-api.js:64-68; mock/apps/admin/pricing.js:51-101; mock/apps/admin/app-api.js:153-156; apps/sos/app/(dashboard)/checkout/page.tsx:301-305; mock/apps/admin/app-api.js:305; apps/website/landing-directions/src/reference/purchase-catalog.js:4-7; apps/website/landing-directions/PURCHASING.md:14",
+    "missing": "Hosted release acceptance remains open. Automatic mock visitor resolution uses CH fallback/test override; signed workspace billing context and regional tax are authoritative. Full catalog expansion and hosted presentation acceptance remain open.",
+    "notes": "R0 implementation delta: mock/local behavior only; live providers remain deferred. Original inspected review is retained in review_baseline; this does not accept any release or all 15 journeys.",
+    "review_baseline": {
+      "status": "Partial",
+      "missing": "No IP country detection and no country selector on any pricing page; the website is CHF-only; plan cards carry no tax incl./excl. label (tax only appears at checkout and G-12 is undecided).",
+      "notes": "Resolver (country -> zone -> USD, R03) is implemented in the mock and drives in-app prices in the workspace currency.",
+      "evidence": "mock/apps/admin/app-api.js:64-68; mock/apps/admin/pricing.js:51-101; mock/apps/admin/app-api.js:153-156; apps/sos/app/(dashboard)/checkout/page.tsx:301-305; mock/apps/admin/app-api.js:305; apps/website/landing-directions/src/reference/purchase-catalog.js:4-7; apps/website/landing-directions/PURCHASING.md:14"
+    },
+    "implementation_status": "implemented_locally_hosted_unaccepted",
+    "release_package": "R0-OFFERS",
+    "acceptance_evidence": [],
+    "accepted_decisions": [
+      "D-060",
+      "D-064",
+      "D-065"
+    ]
   },
   {
     "gap_id": "GAP-003",
@@ -25,9 +39,21 @@
     "status": "Partial",
     "current_app": "sos + website",
     "current_route": "/tools/:key (sos); /plans (website)",
-    "evidence": "apps/sos/app/(dashboard)/tools/[key]/page.tsx:251-259; apps/sos/app/(dashboard)/tools/[key]/page.tsx:72-75; apps/website/landing-directions/src/reference/purchase-catalog.js:4,7",
-    "missing": "Yearly shows the per-year total and saving % but not the monthly equivalent. The website (visitor surface) has no monthly/yearly switch: it sells 1/3/6/12-month terms with 0/5/10/15% savings.",
-    "notes": "Website model follows its own design (D-000, D-031); no decision reconciles it with spec 03 cycles."
+    "evidence": "program/audits/r0-prototype/readout.md; program/backlog/release-packages.csv:R0-OFFERS; apps/sos/app/(dashboard)/tools/[key]/page.tsx:251-259; apps/sos/app/(dashboard)/tools/[key]/page.tsx:72-75; apps/website/landing-directions/src/reference/purchase-catalog.js:4,7",
+    "missing": "Hosted release acceptance remains open. D-064 preserves four website terms and greater-of existing savings as a separate offer policy. Subscription presentation and hosted parity remain open; do not require an unapproved website cycle redesign.",
+    "notes": "R0 implementation delta: mock/local behavior only; live providers remain deferred. Original inspected review is retained in review_baseline; this does not accept any release or all 15 journeys.",
+    "review_baseline": {
+      "status": "Partial",
+      "missing": "Yearly shows the per-year total and saving % but not the monthly equivalent. The website (visitor surface) has no monthly/yearly switch: it sells 1/3/6/12-month terms with 0/5/10/15% savings.",
+      "notes": "Website model follows its own design (D-000, D-031); no decision reconciles it with spec 03 cycles.",
+      "evidence": "apps/sos/app/(dashboard)/tools/[key]/page.tsx:251-259; apps/sos/app/(dashboard)/tools/[key]/page.tsx:72-75; apps/website/landing-directions/src/reference/purchase-catalog.js:4,7"
+    },
+    "implementation_status": "implemented_locally_hosted_unaccepted",
+    "release_package": "R0-OFFERS",
+    "acceptance_evidence": [],
+    "accepted_decisions": [
+      "D-064"
+    ]
   },
   {
     "gap_id": "GAP-004",
@@ -45,9 +71,21 @@
     "status": "Partial",
     "current_app": "sos + mock",
     "current_route": "/tools/custom-plan",
-    "evidence": "apps/sos/app/(dashboard)/tools/custom-plan/page.tsx:31-45; apps/sos/app/(dashboard)/tools/custom-plan/page.tsx:63-86; mock/apps/admin/app-api.js:507-524; mock/apps/admin/app-api.js:86",
-    "missing": "Form has tools, seats, cycle, notes only (no name, company, email, phone, country); owner-only and in-app, no visitor form on the website; accepting a quote only sets state=accepted and private plans are filtered out of /tools/:key, so the private plan never appears in the workspace.",
-    "notes": "Request reaches ADM custom plan requests as New."
+    "evidence": "program/audits/r0-prototype/readout.md; program/backlog/release-packages.csv:R0-PRICING; apps/sos/app/(dashboard)/tools/custom-plan/page.tsx:31-45; apps/sos/app/(dashboard)/tools/custom-plan/page.tsx:63-86; mock/apps/admin/app-api.js:507-524; mock/apps/admin/app-api.js:86",
+    "missing": "Hosted release acceptance remains open. D-067 acceptance prepares scoped private plans and ordinary successful checkout activates paid lines. Public custom-request fields and hosted F12 journey remain open.",
+    "notes": "R0 implementation delta: mock/local behavior only; live providers remain deferred. Original inspected review is retained in review_baseline; this does not accept any release or all 15 journeys.",
+    "review_baseline": {
+      "status": "Partial",
+      "missing": "Form has tools, seats, cycle, notes only (no name, company, email, phone, country); owner-only and in-app, no visitor form on the website; accepting a quote only sets state=accepted and private plans are filtered out of /tools/:key, so the private plan never appears in the workspace.",
+      "notes": "Request reaches ADM custom plan requests as New.",
+      "evidence": "apps/sos/app/(dashboard)/tools/custom-plan/page.tsx:31-45; apps/sos/app/(dashboard)/tools/custom-plan/page.tsx:63-86; mock/apps/admin/app-api.js:507-524; mock/apps/admin/app-api.js:86"
+    },
+    "implementation_status": "implemented_locally_hosted_unaccepted",
+    "release_package": "R0-PRICING",
+    "acceptance_evidence": [],
+    "accepted_decisions": [
+      "D-067"
+    ]
   },
   {
     "gap_id": "GAP-006",
@@ -132,12 +170,24 @@
   {
     "gap_id": "GAP-014",
     "spec_id": "US-C-14",
-    "status": "Exists-flawed",
+    "status": "Partial",
     "current_app": "sos + mock",
     "current_route": "/billing",
-    "evidence": "apps/sos/components/workspace/billing/LineCard.tsx:46-48; apps/sos/components/workspace/billing/LineCard.tsx:108-120; apps/sos/components/workspace/billing/LineCard.tsx:175-193; mock/apps/admin/app-api.js:227-234; mock/apps/admin/lifecycle.js:7-48",
-    "missing": "Defect: the mock never applies a scheduled downgrade (lifecycle.js advance() has no l.scheduled handler), so the plan never changes at period end. Also missing: the list of data over the new limits, and copy says it 'stops working' instead of read-only.",
-    "notes": "'Downgrade scheduled on <date>' notice + banner and cancel-before-date work."
+    "evidence": "program/audits/r0-prototype/readout.md; program/backlog/release-packages.csv:R0-LIFECYCLE; apps/sos/components/workspace/billing/LineCard.tsx:46-48; apps/sos/components/workspace/billing/LineCard.tsx:108-120; apps/sos/components/workspace/billing/LineCard.tsx:175-193; mock/apps/admin/app-api.js:227-234; mock/apps/admin/lifecycle.js:7-48",
+    "missing": "Hosted release acceptance remains open. Scheduled downgrades apply at period end and preserve data with over-limit metadata. Authoritative consuming-tool usage/read-only enforcement and hosted acceptance remain open.",
+    "notes": "R0 implementation delta: mock/local behavior only; live providers remain deferred. Original inspected review is retained in review_baseline; this does not accept any release or all 15 journeys.",
+    "review_baseline": {
+      "status": "Exists-flawed",
+      "missing": "Defect: the mock never applies a scheduled downgrade (lifecycle.js advance() has no l.scheduled handler), so the plan never changes at period end. Also missing: the list of data over the new limits, and copy says it 'stops working' instead of read-only.",
+      "notes": "'Downgrade scheduled on <date>' notice + banner and cancel-before-date work.",
+      "evidence": "apps/sos/components/workspace/billing/LineCard.tsx:46-48; apps/sos/components/workspace/billing/LineCard.tsx:108-120; apps/sos/components/workspace/billing/LineCard.tsx:175-193; mock/apps/admin/app-api.js:227-234; mock/apps/admin/lifecycle.js:7-48"
+    },
+    "implementation_status": "implemented_locally_hosted_unaccepted",
+    "release_package": "R0-LIFECYCLE",
+    "acceptance_evidence": [],
+    "accepted_decisions": [
+      "D-061"
+    ]
   },
   {
     "gap_id": "GAP-015",
@@ -162,12 +212,24 @@
   {
     "gap_id": "GAP-017",
     "spec_id": "US-C-17",
-    "status": "Missing",
+    "status": "Partial",
     "current_app": "sos + mock",
     "current_route": "/team (read-only seats)",
-    "evidence": "mock/apps/admin/store.js:292; apps/sos/components/workspace/team/TeamView.tsx:69-127; apps/sos/app/(dashboard)/checkout/page.tsx:104",
-    "missing": "No way to change the seat count: seats = active non-guest members; no seat input, no prorated add / next-renewal removal, no min-seat guard.",
-    "notes": "G-04 seat model is a switch (A default)."
+    "evidence": "program/audits/r0-prototype/readout.md; program/backlog/release-packages.csv:R0-QUANTITY; mock/apps/admin/store.js:292; apps/sos/components/workspace/team/TeamView.tsx:69-127; apps/sos/app/(dashboard)/checkout/page.tsx:104",
+    "missing": "Hosted release acceptance remains open. Stored purchased quantity is per tool; explicit requested purchases validate server-side. Invitation reservations, allocation and full team lifecycle remain R1 work.",
+    "notes": "R0 implementation delta: mock/local behavior only; live providers remain deferred. Original inspected review is retained in review_baseline; this does not accept any release or all 15 journeys.",
+    "review_baseline": {
+      "status": "Missing",
+      "missing": "No way to change the seat count: seats = active non-guest members; no seat input, no prorated add / next-renewal removal, no min-seat guard.",
+      "notes": "G-04 seat model is a switch (A default).",
+      "evidence": "mock/apps/admin/store.js:292; apps/sos/components/workspace/team/TeamView.tsx:69-127; apps/sos/app/(dashboard)/checkout/page.tsx:104"
+    },
+    "implementation_status": "implemented_locally_hosted_unaccepted",
+    "release_package": "R0-QUANTITY",
+    "acceptance_evidence": [],
+    "accepted_decisions": [
+      "D-061"
+    ]
   },
   {
     "gap_id": "GAP-018",
@@ -205,9 +267,22 @@
     "status": "Partial",
     "current_app": "sos + mock",
     "current_route": "/checkout",
-    "evidence": "apps/sos/app/(dashboard)/checkout/page.tsx:233-253; apps/sos/app/(dashboard)/checkout/page.tsx:257-286; apps/sos/app/(dashboard)/checkout/page.tsx:296-305; apps/sos/app/(dashboard)/checkout/page.tsx:307-327; mock/apps/admin/app-api.js:143-156; mock/apps/admin/app-api.js:164",
-    "missing": "Coupon isn't checked for currency; payment methods aren't filtered by gateway routing (gateways returned but unused; any saved card shown); cart lines can't be removed and only one line is possible.",
-    "notes": "Summary has subtotal, credit, bundle, coupon, tax name+rate, total in workspace currency."
+    "evidence": "program/audits/r0-prototype/readout.md; program/backlog/release-packages.csv:R0-PAYMENT; apps/sos/app/(dashboard)/checkout/page.tsx:233-253; apps/sos/app/(dashboard)/checkout/page.tsx:257-286; apps/sos/app/(dashboard)/checkout/page.tsx:296-305; apps/sos/app/(dashboard)/checkout/page.tsx:307-327; mock/apps/admin/app-api.js:143-156; mock/apps/admin/app-api.js:164",
+    "missing": "Hosted release acceptance remains open. Bundle/coupon eligibility, requested currency and mock gateway support are validated by the platform. Hosted checkout and full payment-method UX acceptance remain open.",
+    "notes": "R0 implementation delta: mock/local behavior only; live providers remain deferred. Original inspected review is retained in review_baseline; this does not accept any release or all 15 journeys.",
+    "review_baseline": {
+      "status": "Partial",
+      "missing": "Coupon isn't checked for currency; payment methods aren't filtered by gateway routing (gateways returned but unused; any saved card shown); cart lines can't be removed and only one line is possible.",
+      "notes": "Summary has subtotal, credit, bundle, coupon, tax name+rate, total in workspace currency.",
+      "evidence": "apps/sos/app/(dashboard)/checkout/page.tsx:233-253; apps/sos/app/(dashboard)/checkout/page.tsx:257-286; apps/sos/app/(dashboard)/checkout/page.tsx:296-305; apps/sos/app/(dashboard)/checkout/page.tsx:307-327; mock/apps/admin/app-api.js:143-156; mock/apps/admin/app-api.js:164"
+    },
+    "implementation_status": "implemented_locally_hosted_unaccepted",
+    "release_package": "R0-PAYMENT",
+    "acceptance_evidence": [],
+    "accepted_decisions": [
+      "D-060",
+      "D-062"
+    ]
   },
   {
     "gap_id": "GAP-022",
