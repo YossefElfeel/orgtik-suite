@@ -5,7 +5,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { test } from "node:test";
 import { checkMockBundle } from "./check-mock-bundle.mjs";
-import { protectedFetch, HEADER } from "./preview-protection.mjs";
+import { protectedFetch, mintPreviewTokens, HEADER } from "./preview-protection.mjs";
 
 const parseUrl = input => execFileSync(process.execPath, [path.join(import.meta.dirname, "deploy-url.mjs")], { input, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim();
 
@@ -59,4 +59,24 @@ test("a protected redirect cannot send its credential to Vercel sign-in or anoth
   });
   await assert.rejects(request(origin), /redirected away/);
   assert.equal(calls, 1);
+});
+
+test("preview OIDC uses the project token subcommand and the existing preview mock project", () => {
+  const previous = process.env.VERCEL_TOKEN;
+  process.env.VERCEL_TOKEN = "fixture-token";
+  const calls = [];
+  try {
+    const tokens = mintPreviewTokens(["mock", "sos"], (command, args) => {
+      calls.push({ command, args });
+      return JSON.stringify({ token: "fixture.token.value" });
+    });
+    assert.deepEqual(calls.map(call => call.args.slice(0, 3)), [
+      ["project", "token", "orgtik-suite-mock-preview"],
+      ["project", "token", "orgtik-suite-sos"],
+    ]);
+    assert.equal(tokens["https://orgtik-suite-mock-preview.vercel.app"], "fixture.token.value");
+  } finally {
+    if (previous === undefined) delete process.env.VERCEL_TOKEN;
+    else process.env.VERCEL_TOKEN = previous;
+  }
 });

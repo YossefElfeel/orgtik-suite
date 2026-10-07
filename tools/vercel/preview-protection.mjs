@@ -9,7 +9,7 @@ const manifest = JSON.parse(fs.readFileSync(new URL("./projects.json", import.me
 export const HEADER = "x-vercel-trusted-oidc-idp-token";
 const allowed = new Set(Object.values(manifest.projects).map(project => new URL(project.previewUrl).origin));
 
-export function mintPreviewTokens(keys) {
+export function mintPreviewTokens(keys, run = execFileSync) {
   if (!process.env.VERCEL_TOKEN) throw new Error("The approved VERCEL_TOKEN is required for protected preview checks");
   if (!/^[A-Za-z0-9_=-]+$/.test(process.env.VERCEL_TOKEN)) throw new Error("Vercel credential has an unexpected format");
   const tokens = {};
@@ -19,7 +19,7 @@ export function mintPreviewTokens(keys) {
     const name = key === "mock" ? "orgtik-suite-mock-preview" : project.name;
     let value;
     try {
-      const raw = execFileSync(process.platform === "win32" ? "vercel.cmd" : "vercel", ["project-token", name, "--scope", "yossef-elfeels-projects", "--token", process.env.VERCEL_TOKEN, "--format=json"], {
+      const raw = run(process.platform === "win32" ? "vercel.cmd" : "vercel", ["project", "token", name, "--scope", "yossef-elfeels-projects", "--token", process.env.VERCEL_TOKEN, "--format=json"], {
         encoding: "utf8", shell: process.platform === "win32", stdio: ["ignore", "pipe", "pipe"],
       });
       value = JSON.parse(raw).token;
