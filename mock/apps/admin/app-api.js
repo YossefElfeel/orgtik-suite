@@ -343,7 +343,7 @@ module.exports = function appApi(app, ctx, S, H) {
   // The website charged it already; the suite turns it on: software becomes an active line on the
   // tool's Pro plan for the paid term, each service opens a request (onboarding starts its period),
   // and a paid invoice records it. Idempotent by the website's order reference.
-  const WEBSITE_SERVICE = (id) => (id.startsWith("design/web-") || id.startsWith("development/") ? "svc_website" : id.startsWith("design/") ? "svc_brand" : id.startsWith("marketing/") ? "svc_social" : id.startsWith("it-support/") ? "svc_support" : null);
+  const WEBSITE_SERVICE = (id) => (id === "website" || id.startsWith("design/web-") || id.startsWith("development/") ? "svc_website" : id.startsWith("design/") ? "svc_brand" : id.startsWith("marketing/") ? "svc_social" : id.startsWith("it-support/") ? "svc_support" : null);
   app.post("/v1/app/website-orders", as("admin", { write: true }), (req, res) => {
     const { ws } = req.p;
     const b = req.body ?? {};
@@ -361,7 +361,7 @@ module.exports = function appApi(app, ctx, S, H) {
       const amount = Math.round(Number(l.total) || 0) / 100;
       const months = Math.max(1, Number(l.months) || 1);
       invLines.push({ label: `${l.name} · ${months} month${months === 1 ? "" : "s"}`, amount });
-      if (l.kind === "software") {
+      if (l.kind === "software" && l.catalogId !== "website") {
         const plan = db.plans.find((p) => p.id === `${l.catalogId}_pro` && p.tool);
         if (!plan) { out.skipped.push({ catalogId: l.catalogId, reason: "not_in_suite_yet" }); continue; }
         const old = ws.lines.find((x) => x.tool === plan.tool && live(x));
