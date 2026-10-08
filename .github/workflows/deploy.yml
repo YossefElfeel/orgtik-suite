@@ -157,10 +157,10 @@ jobs:
           PROJECT_KEY: ${{ matrix.key }}
         run: |
           if [ "$DEPLOY_ENV" = production ]; then
-            vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects > deploy-output.txt
+            vercel deploy --prebuilt --archive=tgz --prod --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects > deploy-output.txt
             alias="orgtik-suite-$PROJECT_KEY.vercel.app"
           else
-            vercel deploy --prebuilt --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects > deploy-output.txt
+            vercel deploy --prebuilt --archive=tgz --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects > deploy-output.txt
             alias=${PREVIEW_ALIAS#https://}
           fi
           url=$(node tools/vercel/deploy-url.mjs < deploy-output.txt)
