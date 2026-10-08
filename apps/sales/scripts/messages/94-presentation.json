@@ -1,0 +1,625 @@
+{
+  "Presentation.title": {
+    "en": "Sales presentation",
+    "ar": "عرض المبيعات",
+    "de": "Vertriebspräsentation",
+    "fr": "Présentation des ventes",
+    "it": "Presentazione vendite"
+  },
+  "Presentation.actor": {
+    "en": "Presenting as {name}",
+    "ar": "العرض بشخصية {name}",
+    "de": "Präsentation als {name}",
+    "fr": "Présentation avec {name}",
+    "it": "Presentazione come {name}"
+  },
+  "Presentation.intro": {
+    "en": "A local CRM walkthrough. Changes, follow-up tasks and signatures are simulated and separate from existing leads.",
+    "ar": "عرض CRM محلي. التغييرات ومهام المتابعة والتوقيعات محاكاة ومنفصلة عن العملاء الموجودين.",
+    "de": "Lokaler CRM-Ablauf. Änderungen, Folgeaufgaben und Unterschriften sind simuliert und von bestehenden Leads getrennt.",
+    "fr": "Parcours CRM local. Modifications, tâches et signatures sont simulées et séparées des prospects existants.",
+    "it": "Flusso CRM locale. Modifiche, attività e firme sono simulate e separate dai lead esistenti."
+  },
+  "Presentation.reset": {
+    "en": "Reset Sales scene",
+    "ar": "إعادة ضبط عرض المبيعات",
+    "de": "Vertriebsszene zurücksetzen",
+    "fr": "Réinitialiser les ventes",
+    "it": "Ripristina vendite"
+  },
+  "Presentation.resetNotice": {
+    "en": "Presentation records restored.",
+    "ar": "تم استعادة سجلات العرض.",
+    "de": "Demodatensätze wiederhergestellt.",
+    "fr": "Données de démonstration restaurées.",
+    "it": "Dati demo ripristinati."
+  },
+  "Presentation.views": {
+    "en": "Sales views",
+    "ar": "طرق عرض المبيعات",
+    "de": "Vertriebsansichten",
+    "fr": "Vues des ventes",
+    "it": "Viste vendite"
+  },
+  "Presentation.pipeline": {
+    "en": "Pipeline",
+    "ar": "مسار الصفقات",
+    "de": "Pipeline",
+    "fr": "Pipeline",
+    "it": "Pipeline"
+  },
+  "Presentation.contacts": {
+    "en": "Contacts",
+    "ar": "جهات الاتصال",
+    "de": "Kontakte",
+    "fr": "Contacts",
+    "it": "Contatti"
+  },
+  "Presentation.automation": {
+    "en": "Routing",
+    "ar": "التوجيه",
+    "de": "Zuweisung",
+    "fr": "Routage",
+    "it": "Assegnazione"
+  },
+  "Presentation.offers": {
+    "en": "Offers",
+    "ar": "العروض",
+    "de": "Angebote",
+    "fr": "Offres",
+    "it": "Offerte"
+  },
+  "Presentation.reports": {
+    "en": "Reports",
+    "ar": "التقارير",
+    "de": "Berichte",
+    "fr": "Rapports",
+    "it": "Report"
+  },
+  "Presentation.forecast": {
+    "en": "Weighted forecast",
+    "ar": "التوقع المرجّح",
+    "de": "Gewichtete Prognose",
+    "fr": "Prévision pondérée",
+    "it": "Previsione ponderata"
+  },
+  "Presentation.won": {
+    "en": "Won value",
+    "ar": "قيمة الصفقات المكتسبة",
+    "de": "Gewonnener Wert",
+    "fr": "Valeur gagnée",
+    "it": "Valore acquisito"
+  },
+  "Presentation.addLead": {
+    "en": "Add lead",
+    "ar": "إضافة عميل محتمل",
+    "de": "Lead hinzufügen",
+    "fr": "Ajouter un prospect",
+    "it": "Aggiungi lead"
+  },
+  "Presentation.bulkOwner": {
+    "en": "Assign selected to",
+    "ar": "إسناد المحدد إلى",
+    "de": "Auswahl zuweisen an",
+    "fr": "Attribuer la sélection à",
+    "it": "Assegna selezionati a"
+  },
+  "Presentation.assignSelected": {
+    "en": "Assign selected ({count})",
+    "ar": "إسناد المحدد ({count})",
+    "de": "Auswahl zuweisen ({count})",
+    "fr": "Attribuer la sélection ({count})",
+    "it": "Assegna selezionati ({count})"
+  },
+  "Presentation.bulkDone": {
+    "en": "Updated contacts: {count}",
+    "ar": "جهات الاتصال المحدّثة: {count}",
+    "de": "Aktualisierte Kontakte: {count}",
+    "fr": "Contacts mis à jour : {count}",
+    "it": "Contatti aggiornati: {count}"
+  },
+  "Presentation.import": {
+    "en": "Import CSV",
+    "ar": "استيراد CSV",
+    "de": "CSV importieren",
+    "fr": "Importer un CSV",
+    "it": "Importa CSV"
+  },
+  "Presentation.export": {
+    "en": "Export CSV",
+    "ar": "تصدير CSV",
+    "de": "CSV exportieren",
+    "fr": "Exporter un CSV",
+    "it": "Esporta CSV"
+  },
+  "Presentation.selectAll": {
+    "en": "Select all contacts",
+    "ar": "تحديد كل جهات الاتصال",
+    "de": "Alle Kontakte auswählen",
+    "fr": "Sélectionner tous les contacts",
+    "it": "Seleziona tutti i contatti"
+  },
+  "Presentation.select": {
+    "en": "Select {name}",
+    "ar": "تحديد {name}",
+    "de": "{name} auswählen",
+    "fr": "Sélectionner {name}",
+    "it": "Seleziona {name}"
+  },
+  "Presentation.company": {
+    "en": "Company",
+    "ar": "الشركة",
+    "de": "Firma",
+    "fr": "Entreprise",
+    "it": "Azienda"
+  },
+  "Presentation.contact": {
+    "en": "Contact",
+    "ar": "جهة الاتصال",
+    "de": "Kontakt",
+    "fr": "Contact",
+    "it": "Contatto"
+  },
+  "Presentation.owner": {
+    "en": "Assignee",
+    "ar": "المسؤول",
+    "de": "Verantwortlich",
+    "fr": "Responsable",
+    "it": "Responsabile"
+  },
+  "Presentation.value": {
+    "en": "Deal value",
+    "ar": "قيمة الصفقة",
+    "de": "Dealwert",
+    "fr": "Valeur",
+    "it": "Valore trattativa"
+  },
+  "Presentation.email": {
+    "en": "Email",
+    "ar": "البريد الإلكتروني",
+    "de": "E-Mail",
+    "fr": "E-mail",
+    "it": "E-mail"
+  },
+  "Presentation.empty": {
+    "en": "No leads yet",
+    "ar": "لا يوجد عملاء محتملون",
+    "de": "Noch keine Leads",
+    "fr": "Aucun prospect",
+    "it": "Nessun lead"
+  },
+  "Presentation.emptyHint": {
+    "en": "Add a lead or import sample contacts.",
+    "ar": "أضف عميلًا محتملًا أو استورد جهات اتصال نموذجية.",
+    "de": "Lead hinzufügen oder Beispielkontakte importieren.",
+    "fr": "Ajoutez un prospect ou importez des exemples.",
+    "it": "Aggiungi un lead o importa contatti di esempio."
+  },
+  "Presentation.routing": {
+    "en": "Lead routing",
+    "ar": "توجيه العملاء المحتملين",
+    "de": "Lead-Zuweisung",
+    "fr": "Routage des prospects",
+    "it": "Assegnazione lead"
+  },
+  "Presentation.routingHint": {
+    "en": "Match a source to an assignee; run this rule on the presentation records.",
+    "ar": "اربط مصدرًا بمسؤول ثم نفّذ القاعدة على سجلات العرض.",
+    "de": "Quelle einer Person zuordnen und die Regel auf Demodatensätze anwenden.",
+    "fr": "Associez une source à un responsable puis appliquez la règle aux données démo.",
+    "it": "Associa origine e responsabile, poi applica la regola ai dati demo."
+  },
+  "Presentation.source": {
+    "en": "Source",
+    "ar": "المصدر",
+    "de": "Quelle",
+    "fr": "Source",
+    "it": "Origine"
+  },
+  "Presentation.ruleEnabled": {
+    "en": "Enable routing rule",
+    "ar": "تفعيل قاعدة التوجيه",
+    "de": "Zuweisungsregel aktivieren",
+    "fr": "Activer le routage",
+    "it": "Attiva regola"
+  },
+  "Presentation.runRule": {
+    "en": "Run routing rule",
+    "ar": "تنفيذ قاعدة التوجيه",
+    "de": "Regel ausführen",
+    "fr": "Exécuter la règle",
+    "it": "Esegui regola"
+  },
+  "Presentation.routed": {
+    "en": "Routed contacts: {count}",
+    "ar": "جهات الاتصال الموجهة: {count}",
+    "de": "Zugewiesene Kontakte: {count}",
+    "fr": "Contacts routés : {count}",
+    "it": "Contatti assegnati: {count}"
+  },
+  "Presentation.offerHint": {
+    "en": "Offer preview",
+    "ar": "معاينة العرض",
+    "de": "Angebotsvorschau",
+    "fr": "Aperçu de l’offre",
+    "it": "Anteprima offerta"
+  },
+  "Presentation.signHint": {
+    "en": "A simulated signature, not an external signing service. Signed demo amounts and validity dates are locked.",
+    "ar": "توقيع محاكى وليس خدمة توقيع خارجية. تُقفل قيمة العرض التجريبي وتاريخ صلاحيته بعد التوقيع.",
+    "de": "Simulierte Unterschrift, kein externer Signaturdienst. Signierte Demowerte und Gültigkeitsdaten sind gesperrt.",
+    "fr": "Signature simulée, sans service externe. Les montants et dates des offres signées sont verrouillés.",
+    "it": "Firma simulata, senza servizio esterno. Valori e date delle offerte firmate sono bloccati."
+  },
+  "Presentation.expired": {
+    "en": "Expired",
+    "ar": "منتهي",
+    "de": "Abgelaufen",
+    "fr": "Expirée",
+    "it": "Scaduta"
+  },
+  "Presentation.signed": {
+    "en": "Signed",
+    "ar": "موقّع",
+    "de": "Signiert",
+    "fr": "Signée",
+    "it": "Firmata"
+  },
+  "Presentation.pending": {
+    "en": "Pending",
+    "ar": "قيد الانتظار",
+    "de": "Ausstehend",
+    "fr": "En attente",
+    "it": "In attesa"
+  },
+  "Presentation.reviewOffer": {
+    "en": "Review offer",
+    "ar": "مراجعة العرض",
+    "de": "Angebot prüfen",
+    "fr": "Vérifier l’offre",
+    "it": "Rivedi offerta"
+  },
+  "Presentation.targets": {
+    "en": "Sales targets",
+    "ar": "أهداف المبيعات",
+    "de": "Vertriebsziele",
+    "fr": "Objectifs commerciaux",
+    "it": "Obiettivi vendite"
+  },
+  "Presentation.quarterTarget": {
+    "en": "Quarter target",
+    "ar": "هدف الربع",
+    "de": "Quartalsziel",
+    "fr": "Objectif trimestriel",
+    "it": "Obiettivo trimestrale"
+  },
+  "Presentation.attainment": {
+    "en": "Attainment",
+    "ar": "نسبة تحقيق الهدف",
+    "de": "Zielerreichung",
+    "fr": "Réalisation",
+    "it": "Raggiungimento"
+  },
+  "Presentation.funnel": {
+    "en": "Stage funnel",
+    "ar": "مراحل المسار",
+    "de": "Stufentrichter",
+    "fr": "Étapes du pipeline",
+    "it": "Fasi pipeline"
+  },
+  "Presentation.sources": {
+    "en": "Lead sources",
+    "ar": "مصادر العملاء",
+    "de": "Leadquellen",
+    "fr": "Sources des prospects",
+    "it": "Origini lead"
+  },
+  "Presentation.lostReasons": {
+    "en": "Lost reasons",
+    "ar": "أسباب الخسارة",
+    "de": "Verlustgründe",
+    "fr": "Motifs de perte",
+    "it": "Motivi perdita"
+  },
+  "Presentation.notSet": {
+    "en": "Not set",
+    "ar": "غير محدد",
+    "de": "Nicht festgelegt",
+    "fr": "Non défini",
+    "it": "Non impostato"
+  },
+  "Presentation.reportHint": {
+    "en": "Reports calculate from the current scene records, including edited probabilities and deal values.",
+    "ar": "التقارير محسوبة من سجلات السيناريو الحالية بما فيها الاحتمالات والقيم المعدّلة.",
+    "de": "Berichte nutzen aktuelle Szenendaten samt bearbeiteten Wahrscheinlichkeiten und Werten.",
+    "fr": "Rapports calculés depuis les données de la scène, y compris probabilités et valeurs modifiées.",
+    "it": "Report calcolati dai dati correnti, incluse probabilità e valori modificati."
+  },
+  "Presentation.fixtureOnly": {
+    "en": "Only this presentation dataset changes.",
+    "ar": "التغيير في بيانات العرض فقط.",
+    "de": "Nur diese Demodaten ändern sich.",
+    "fr": "Seules les données démo changent.",
+    "it": "Cambiano solo i dati demo."
+  },
+  "Presentation.create": {
+    "en": "Create lead",
+    "ar": "إنشاء عميل محتمل",
+    "de": "Lead erstellen",
+    "fr": "Créer un prospect",
+    "it": "Crea lead"
+  },
+  "Presentation.cancel": {
+    "en": "Cancel",
+    "ar": "إلغاء",
+    "de": "Abbrechen",
+    "fr": "Annuler",
+    "it": "Annulla"
+  },
+  "Presentation.csvText": {
+    "en": "CSV text",
+    "ar": "نص CSV",
+    "de": "CSV-Text",
+    "fr": "Texte CSV",
+    "it": "Testo CSV"
+  },
+  "Presentation.csvHint": {
+    "en": "CSV header: name,company,email,value,source. Text import, up to 50 contacts.",
+    "ar": "عناوين CSV: name,company,email,value,source. استيراد نصي بحد أقصى 50 جهة اتصال.",
+    "de": "CSV-Kopf: name,company,email,value,source. Textimport bis 50 Kontakte.",
+    "fr": "En-tête CSV : name,company,email,value,source. Import texte, jusqu’à 50 contacts.",
+    "it": "Intestazione CSV: name,company,email,value,source. Importazione testuale, fino a 50 contatti."
+  },
+  "Presentation.csvError": {
+    "en": "Check five columns, nonempty names/company, unique emails and nonnegative values; maximum 50 contacts.",
+    "ar": "راجع الأعمدة الخمسة والأسماء والشركات والبريد الفريد والقيم غير السالبة؛ الحد 50 جهة اتصال.",
+    "de": "Fünf Spalten, Namen/Firmen, eindeutige E-Mails und nichtnegative Werte prüfen; maximal 50 Kontakte.",
+    "fr": "Vérifiez cinq colonnes, noms/entreprises, e-mails uniques et valeurs positives ; 50 contacts maximum.",
+    "it": "Verifica cinque colonne, nomi/aziende, e-mail uniche e valori non negativi; massimo 50 contatti."
+  },
+  "Presentation.importRows": {
+    "en": "Import contacts",
+    "ar": "استيراد جهات الاتصال",
+    "de": "Kontakte importieren",
+    "fr": "Importer les contacts",
+    "it": "Importa contatti"
+  },
+  "Presentation.imported": {
+    "en": "Imported contacts: {count}",
+    "ar": "جهات الاتصال المستوردة: {count}",
+    "de": "Importierte Kontakte: {count}",
+    "fr": "Contacts importés : {count}",
+    "it": "Contatti importati: {count}"
+  },
+  "Presentation.stage": {
+    "en": "Stage",
+    "ar": "المرحلة",
+    "de": "Stufe",
+    "fr": "Étape",
+    "it": "Fase"
+  },
+  "Presentation.probability": {
+    "en": "Probability (%)",
+    "ar": "الاحتمال (%)",
+    "de": "Wahrscheinlichkeit (%)",
+    "fr": "Probabilité (%)",
+    "it": "Probabilità (%)"
+  },
+  "Presentation.lostReason": {
+    "en": "Lost reason",
+    "ar": "سبب الخسارة",
+    "de": "Verlustgrund",
+    "fr": "Motif de perte",
+    "it": "Motivo perdita"
+  },
+  "Presentation.timeline": {
+    "en": "Timeline",
+    "ar": "سجل الأحداث",
+    "de": "Verlauf",
+    "fr": "Historique",
+    "it": "Cronologia"
+  },
+  "Presentation.note": {
+    "en": "Note",
+    "ar": "ملاحظة",
+    "de": "Notiz",
+    "fr": "Note",
+    "it": "Nota"
+  },
+  "Presentation.logNote": {
+    "en": "Add note",
+    "ar": "إضافة ملاحظة",
+    "de": "Notiz hinzufügen",
+    "fr": "Ajouter une note",
+    "it": "Aggiungi nota"
+  },
+  "Presentation.followup": {
+    "en": "Follow-up tasks",
+    "ar": "مهام المتابعة",
+    "de": "Folgeaufgaben",
+    "fr": "Tâches de suivi",
+    "it": "Attività di follow-up"
+  },
+  "Presentation.taskTitle": {
+    "en": "Task title",
+    "ar": "عنوان المهمة",
+    "de": "Aufgabentitel",
+    "fr": "Titre de la tâche",
+    "it": "Titolo attività"
+  },
+  "Presentation.createTask": {
+    "en": "Create mock task",
+    "ar": "إنشاء مهمة محاكاة",
+    "de": "Demoaufgabe erstellen",
+    "fr": "Créer une tâche simulée",
+    "it": "Crea attività simulata"
+  },
+  "Presentation.taskCreated": {
+    "en": "Local task created: {id}",
+    "ar": "تم إنشاء مهمة محلية: {id}",
+    "de": "Lokale Aufgabe erstellt: {id}",
+    "fr": "Tâche locale créée : {id}",
+    "it": "Attività locale creata: {id}"
+  },
+  "Presentation.taskHint": {
+    "en": "The task ID is simulated here. Actual Tasks provisioning remains pending.",
+    "ar": "معرّف المهمة محاكى هنا. الإنشاء الفعلي في Tasks ما زال قيد التنفيذ.",
+    "de": "Die Aufgaben-ID ist simuliert. Erstellung in Tasks bleibt offen.",
+    "fr": "Cet identifiant est simulé. La création dans Tasks reste à faire.",
+    "it": "L’ID è simulato. La creazione in Tasks resta da fare."
+  },
+  "Presentation.tagsFields": {
+    "en": "Tags and custom fields",
+    "ar": "التصنيفات والحقول المخصصة",
+    "de": "Tags und eigene Felder",
+    "fr": "Étiquettes et champs",
+    "it": "Tag e campi personalizzati"
+  },
+  "Presentation.remove": {
+    "en": "Remove",
+    "ar": "إزالة",
+    "de": "Entfernen",
+    "fr": "Supprimer",
+    "it": "Rimuovi"
+  },
+  "Presentation.tag": {
+    "en": "Tag",
+    "ar": "التصنيف",
+    "de": "Tag",
+    "fr": "Étiquette",
+    "it": "Tag"
+  },
+  "Presentation.addTag": {
+    "en": "Add tag",
+    "ar": "إضافة تصنيف",
+    "de": "Tag hinzufügen",
+    "fr": "Ajouter une étiquette",
+    "it": "Aggiungi tag"
+  },
+  "Presentation.fieldName": {
+    "en": "Field name",
+    "ar": "اسم الحقل",
+    "de": "Feldname",
+    "fr": "Nom du champ",
+    "it": "Nome campo"
+  },
+  "Presentation.fieldValue": {
+    "en": "Field value",
+    "ar": "قيمة الحقل",
+    "de": "Feldwert",
+    "fr": "Valeur du champ",
+    "it": "Valore campo"
+  },
+  "Presentation.saveField": {
+    "en": "Save field",
+    "ar": "حفظ الحقل",
+    "de": "Feld speichern",
+    "fr": "Enregistrer le champ",
+    "it": "Salva campo"
+  },
+  "Presentation.validUntil": {
+    "en": "Valid until",
+    "ar": "صالح حتى",
+    "de": "Gültig bis",
+    "fr": "Valable jusqu’au",
+    "it": "Valida fino al"
+  },
+  "Presentation.restoreOffer": {
+    "en": "Restore mock offer",
+    "ar": "استعادة العرض المحاكى",
+    "de": "Demoangebot wiederherstellen",
+    "fr": "Restaurer l’offre simulée",
+    "it": "Ripristina offerta simulata"
+  },
+  "Presentation.simulateExpiry": {
+    "en": "Simulate expiry",
+    "ar": "محاكاة الانتهاء",
+    "de": "Ablauf simulieren",
+    "fr": "Simuler l’expiration",
+    "it": "Simula scadenza"
+  },
+  "Presentation.signedBy": {
+    "en": "Signed in this scene by {name}",
+    "ar": "وقّع في هذا السيناريو {name}",
+    "de": "In dieser Szene signiert von {name}",
+    "fr": "Signée dans cette scène par {name}",
+    "it": "Firmata in questa scena da {name}"
+  },
+  "Presentation.signer": {
+    "en": "Signer name",
+    "ar": "اسم الموقّع",
+    "de": "Name der unterzeichnenden Person",
+    "fr": "Nom du signataire",
+    "it": "Nome firmatario"
+  },
+  "Presentation.consent": {
+    "en": "I agree to this simulated offer.",
+    "ar": "أوافق على هذا العرض المحاكى.",
+    "de": "Ich stimme diesem simulierten Angebot zu.",
+    "fr": "J’accepte cette offre simulée.",
+    "it": "Accetto questa offerta simulata."
+  },
+  "Presentation.sign": {
+    "en": "Sign mock offer",
+    "ar": "توقيع العرض المحاكى",
+    "de": "Demoangebot signieren",
+    "fr": "Signer l’offre simulée",
+    "it": "Firma offerta simulata"
+  },
+  "Presentation.stageEvent": {
+    "en": "Moved to {stage}",
+    "ar": "انتقل إلى {stage}",
+    "de": "Verschoben nach {stage}",
+    "fr": "Déplacé vers {stage}",
+    "it": "Spostato a {stage}"
+  },
+  "Presentation.formError": {
+    "en": "Check the required fields and their length.",
+    "ar": "راجع الحقول المطلوبة وطولها.",
+    "de": "Pflichtfelder und Textlänge prüfen.",
+    "fr": "Vérifiez les champs obligatoires et leur longueur.",
+    "it": "Verifica campi obbligatori e lunghezza."
+  },
+  "Presentation.website": {
+    "en": "Website",
+    "ar": "الموقع",
+    "de": "Website",
+    "fr": "Site web",
+    "it": "Sito web"
+  },
+  "Presentation.referral": {
+    "en": "Referral",
+    "ar": "إحالة",
+    "de": "Empfehlung",
+    "fr": "Recommandation",
+    "it": "Segnalazione"
+  },
+  "Presentation.partner": {
+    "en": "Partner",
+    "ar": "شريك",
+    "de": "Partner",
+    "fr": "Partenaire",
+    "it": "Partner"
+  },
+  "Presentation.event": {
+    "en": "Event",
+    "ar": "حدث",
+    "de": "Veranstaltung",
+    "fr": "Événement",
+    "it": "Evento"
+  },
+  "Presentation.importSource": {
+    "en": "Imported",
+    "ar": "مستورد",
+    "de": "Importiert",
+    "fr": "Importé",
+    "it": "Importato"
+  },
+  "Presentation.manual": {
+    "en": "Manual",
+    "ar": "يدوي",
+    "de": "Manuell",
+    "fr": "Manuel",
+    "it": "Manuale"
+  }
+}

@@ -1,0 +1,9 @@
+# Sales presentation
+
+The dev/demo-only `/[locale]/presentation` route is inside the existing Sales shell and access flow. Separate client fixture/types/schema modules preserve the canonical people/workspace story. The scene demonstrates pipeline moves and probability-based forecast, contact selection/bulk assignment, CSV text import/export, source routing, timeline notes/follow-up task IDs, tags/custom fields, offer expiry/signature preview and target/source/funnel reports.
+
+One browser flow passes 28 scoped checks with eight EN/AR light/dark desktop/mobile captures, zero axe critical findings and no page overflow. It covers note/task/field editing, expiry blocking signature, successful simulated signature, signed-value locking, bulk assignment, CSV import/export, routing, reports and reset. Typecheck and five catalogs pass. The affected production build passes with the installed Next CLI's Webpack option, used for this checkout's linked local dependencies. No tracked dependency/bundler changes were made; fresh CI validates the declared stack separately.
+
+The old checkout had mismatched local peer links. A private current UI copy and preserved dependency set were used; prior modules and draft files remain in ignored scratch folders. The local compiler is warmed before creating the existing one-minute handoff, preserving authentication behavior.
+
+Data persists in this browser tab by presentation workspace. View/open-item state is reflected in the URL. Reset restores only the scene. Follow-up task IDs and signatures are simulations; actual Tasks provisioning, signature providers, PDF offer generation, richer import mapping and full connected journey acceptance remain pending/deferred. Existing pipelines, notes, meetings and negotiated-offer screens remain in place. Backend data and Vercel deployment are unchanged.

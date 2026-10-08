@@ -12,6 +12,7 @@ import type {
 const ALL_ROLES: AppRole[] = ["admin", "manager", "salesman", "customer"];
 
 const EXTRA_ROUTE_ACCESS: RouteAccessConfig[] = [
+  ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ path: "/presentation", roles: ALL_ROLES, matchPrefix: true }] : []),
   {
     path: "/profile",
     roles: ALL_ROLES,

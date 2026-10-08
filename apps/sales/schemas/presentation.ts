@@ -1,0 +1,3 @@
+import { z } from "zod";
+export const presentationLeadSchema = (message: string) => z.object({ name: z.string().trim().min(1, message).max(120, message), company: z.string().trim().min(1, message).max(120, message), email: z.string().email(message).max(160, message) });
+export const presentationEditorSchema = (message: string) => z.object({ note: z.string().max(2000, message), task: z.string().max(240, message), tag: z.string().max(50, message), fieldName: z.string().max(50, message), fieldValue: z.string().max(240, message), signer: z.string().max(120, message), consent: z.boolean(), csv: z.string().max(100000, message) });

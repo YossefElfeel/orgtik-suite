@@ -75,6 +75,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   const t = useTranslations("Shell");
   const tn = useTranslations("nav");
   const ts = useTranslations("Suite");
+  const presentationText = useTranslations("Presentation");
   const te = useTranslations("Errors");
   const locale = useLocale();
   const pathname = usePathname();
@@ -104,6 +105,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
     { label: t("sectionTeam"), items: items.filter((i) => !i.frozen && !SELL.includes(i.path)).map(strip) },
     { label: t("sectionMoving"), items: items.filter((i) => i.frozen).map(strip) },
   ].filter((s) => s.items.length);
+  if (process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1") sections.unshift({ items: [{ label: presentationText("title"), href: `/${locale}/presentation`, icon: <ChartBar />, active: pathname === "/presentation" }] });
 
   const signOut = async () => {
     await logout();
