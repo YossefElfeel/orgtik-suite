@@ -70,3 +70,8 @@ Ratings: **Expected** means a small team assumes it is there. **Differentiator**
 8. **One search with filters, plus sorting (#18, M, with #6, S).** Finding things gets harder as a team's files grow.
 
 Next in line: trash retention (#16), HR documents in Files (#42), file requests (#10), and Office preview beyond Word (#11).
+
+
+## A26 presentation overlay — 2026-10-08
+
+PR25 Files scene accepted: permissions/versions/comments/quota/moves/search UI; existing authorized references retained. Existing benchmark scores and backend claims above remain historical. See the maintained release register and prototype guide; this overlay does not accept all72 or all15 journeys.

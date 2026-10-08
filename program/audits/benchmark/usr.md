@@ -65,3 +65,8 @@ Ratings: **Expected** means Google Workspace admin and Atlassian admin both trea
 6. **Onboarding checklist on Home** (#2): invite the team, pick tools, add billing details. It turns new free workspaces into trials. M.
 7. **Invoice PDF and billing contacts** (#23). Gulf and CH accounting teams need a document with the TRN / UID on it, sent to more than one person. S, shared with ADM.
 8. **Team lifecycle basics**: deactivate a member, leave a workspace, resend and bulk invites, team search (#12, #17, #9, #16). Each is S, and together they cover the day-to-day admin jobs.
+
+
+## A26 presentation overlay — 2026-10-08
+
+PR26 account scene accepted; fixed PDF/contact extension has local evidence and awaits package CI. Existing benchmark scores and backend claims above remain historical. See the maintained release register and prototype guide; this overlay does not accept all72 or all15 journeys.

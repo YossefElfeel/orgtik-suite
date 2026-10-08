@@ -508,6 +508,14 @@
     "stepReopened": "Passaggio riaperto",
     "demoEnabled": "Verifica demo attivata",
     "demoDisabled": "Verifica demo disattivata",
-    "handoffNote": "Team, trasferimento proprietà, fatture e dati di fatturazione restano nelle schermate esistenti. Questa scena non aggiunge regole account né garanzie normative per l’esportazione."
+    "handoffNote": "Team, trasferimento proprietà, fatture e dati di fatturazione restano nelle schermate esistenti. Questa scena non aggiunge regole account né garanzie normative per l’esportazione.",
+    "documents": "Fattura e contatti",
+    "sampleInvoice": "Fattura di esempio inclusa",
+    "billingContacts": "Contatti fatturazione",
+    "billingContactNote": "Contatti solo nella scena. La fatturazione esistente resta invariata.",
+    "billingEmail": "E-mail contatto fatturazione",
+    "emailError": "Inserisci e-mail valida.",
+    "billingContactAdded": "Contatto demo aggiunto",
+    "addBillingContact": "Aggiungi contatto"
   }
 }

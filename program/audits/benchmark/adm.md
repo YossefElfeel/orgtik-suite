@@ -70,3 +70,8 @@ Ratings: **Expected** means Stripe Billing and Chargebee both treat it as standa
 6. **Pay-by-link** (#25) for KNET and for manual or service invoices. Without it, renewals in Kuwait have no way to collect. M.
 7. **CSV exports and an accounting journal export** (#39, #40) so finance can close the month without copying by hand. S, then M.
 8. **Real staff 2FA and a complete, filterable audit log** (#37, #38). The spec requires 2FA (ADM-01), and several write actions leave no audit trace today. M.
+
+
+## A26 presentation overlay — 2026-10-08
+
+Local ADM32-check flow passes; package CI pending. Existing metrics/audit reused; new operations are scene-only. Existing benchmark scores and backend claims above remain historical. See the maintained release register and prototype guide; this overlay does not accept all72 or all15 journeys.

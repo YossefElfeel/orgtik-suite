@@ -73,3 +73,8 @@ Sizes: S ≤ 3 days, M ≤ 2 weeks, L > 2 weeks.
 6. **Posting queue and calendar drag to reschedule** (#5, #3). S + M.
 7. **Simple automated journeys** (#35): welcome and follow-up from a form or CRM stage. L.
 8. **AI writing help in the 5 languages** (#17), using the brand kit (#16). M.
+
+
+## A26 presentation overlay — 2026-10-08
+
+PR29 Marketing scene accepted: consent/content/queue/journey/AI mock workflows; external and new crossapp delivery pending. Existing benchmark scores and backend claims above remain historical. See the maintained release register and prototype guide; this overlay does not accept all72 or all15 journeys.

@@ -40,4 +40,5 @@ export { LocalizedField, type LocalizedFieldProps, type LocalizedValue } from ".
 export { FileField, type FileFieldProps } from "./components/FileField.js";
 export { Board, type BoardProps, type BoardColumn, type BoardItem, type BoardMove, type BoardCardState, type BoardStatus, } from "./board/Board.js";
 export { UsageMeter, AuditLogTable, TwoFactorScreens, type AuditEntry } from "./prototype/Account.js";
+export { PdfPreview } from "./prototype/PdfPreview.js";
 //# sourceMappingURL=index.d.ts.map

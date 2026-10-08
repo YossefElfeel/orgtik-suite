@@ -508,6 +508,14 @@
     "stepReopened": "Schritt wieder geöffnet",
     "demoEnabled": "Demoverifizierung aktiviert",
     "demoDisabled": "Demoverifizierung deaktiviert",
-    "handoffNote": "Teamverwaltung, Eigentumsübertragung, Rechnungen und Abrechnungsdaten bleiben in den bestehenden Ansichten. Diese Szene fügt keine Kontoprüfung oder Garantie für gesetzeskonformen Export hinzu."
+    "handoffNote": "Teamverwaltung, Eigentumsübertragung, Rechnungen und Abrechnungsdaten bleiben in den bestehenden Ansichten. Diese Szene fügt keine Kontoprüfung oder Garantie für gesetzeskonformen Export hinzu.",
+    "documents": "Rechnung und Kontakte",
+    "sampleInvoice": "Paket-Beispielrechnung",
+    "billingContacts": "Abrechnungskontakte",
+    "billingContactNote": "Kontakte nur in dieser Szene. Bestehende Abrechnung bleibt unverändert.",
+    "billingEmail": "E-Mail des Abrechnungskontakts",
+    "emailError": "Gültige E-Mail eingeben.",
+    "billingContactAdded": "Demo-Abrechnungskontakt hinzugefügt",
+    "addBillingContact": "Abrechnungskontakt hinzufügen"
   }
 }

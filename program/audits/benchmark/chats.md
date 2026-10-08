@@ -75,3 +75,8 @@ Ratings:
 6. **Rich text**: bold, lists, code and quotes. **M**
 7. **Channel basics**: browse and join public channels, @channel/@here, and a full emoji picker. **S**
 8. **Scheduled messages, "remind me" and "save for later"**. **M**
+
+
+## A26 presentation overlay — 2026-10-08
+
+PR24 Chats scene accepted: tab messages/channels/read state/saved/scheduled and mock call/task/file UI; integration pending. Existing benchmark scores and backend claims above remain historical. See the maintained release register and prototype guide; this overlay does not accept all72 or all15 journeys.

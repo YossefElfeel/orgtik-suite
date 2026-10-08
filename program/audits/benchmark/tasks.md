@@ -71,3 +71,8 @@ Ratings:
 6. **Labels/tags**, with a filter. **M**
 7. **CSV import and export**, to move in from spreadsheets or Trello and to report out. **M**
 8. **Quick add and bulk edit**: inline add per column, multi-select to move, assign or set due days. **S + M**
+
+
+## A26 presentation overlay — 2026-10-08
+
+Tasks presentation filters/edit/recurrence/template/CSV/bulk UI remains partial; connections/richer features pending. Existing benchmark scores and backend claims above remain historical. See the maintained release register and prototype guide; this overlay does not accept all72 or all15 journeys.

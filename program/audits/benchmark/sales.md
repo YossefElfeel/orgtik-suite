@@ -76,3 +76,8 @@ Sizes: S ≤ 3 days, M ≤ 2 weeks, L > 2 weeks.
 6. **Offer PDF, validity date and e-signature** (#27, #28). M.
 7. **Companies, custom fields and tags** (#2–4). M.
 8. **Targets, plus funnel, source and lost-reason reports** (#17, #33, #37). M.
+
+
+## A26 presentation overlay — 2026-10-08
+
+PR28 Sales scene accepted: forecast/routing/fields/CSV/bulk/mock signatures/local tasks; integration and full tool acceptance pending. Existing benchmark scores and backend claims above remain historical. See the maintained release register and prototype guide; this overlay does not accept all72 or all15 journeys.
