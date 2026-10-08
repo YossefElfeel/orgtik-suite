@@ -1,0 +1,94 @@
+{
+  "route": "/presentation",
+  "checks": [
+    "Saved item visible",
+    "Reminder feedback",
+    "Task created once",
+    "Sent message visible",
+    "Tab reload preserves messages",
+    "Scheduled queue",
+    "Send scheduled item now",
+    "Create channel",
+    "Read state cleared",
+    "Workspace data isolated",
+    "Persona applied",
+    "Reset scoped to Spree",
+    "en/light/1440: zero axe critical",
+    "en/light/1440: no page overflow",
+    "en/light/390: zero axe critical",
+    "en/light/390: no page overflow",
+    "en/dark/1440: zero axe critical",
+    "en/dark/1440: no page overflow",
+    "en/dark/390: zero axe critical",
+    "en/dark/390: no page overflow",
+    "ar/light/1440: zero axe critical",
+    "ar/light/1440: no page overflow",
+    "ar/light/390: zero axe critical",
+    "ar/light/390: no page overflow",
+    "ar/dark/1440: zero axe critical",
+    "ar/dark/1440: no page overflow",
+    "ar/dark/390: zero axe critical",
+    "ar/dark/390: no page overflow"
+  ],
+  "captures": [
+    "en-light-1440.png",
+    "en-light-390.png",
+    "en-dark-1440.png",
+    "en-dark-390.png",
+    "ar-light-1440.png",
+    "ar-light-390.png",
+    "ar-dark-1440.png",
+    "ar-dark-390.png"
+  ],
+  "axe": [
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "critical": []
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "critical": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "critical": []
+    },
+    {
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "critical": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "critical": []
+    },
+    {
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "critical": []
+    },
+    {
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "critical": []
+    },
+    {
+      "locale": "ar",
+      "theme": "dark",
+      "width": 390,
+      "critical": []
+    }
+  ],
+  "scope": "Client presentation fixtures; no backend or external delivery"
+}

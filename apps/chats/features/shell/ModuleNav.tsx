@@ -23,6 +23,7 @@ export function ModuleNav() {
   const t = useT();
 
   const items = [
+    ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ href: "/presentation", label: t("presentation.title", "Chats walkthrough"), Icon: ChatsCircle, meta: "", mention: false, count: undefined }] : []),
     { href: "/hq/office", label: t("nav.office", "Office"), Icon: MapTrifold, meta: `${online}`, mention: false },
     {
       href: "/hq/chat",
