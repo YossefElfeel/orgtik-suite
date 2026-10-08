@@ -1,5 +1,20 @@
 // Isolated presentation records only. No account/session/billing store is read or modified.
 const crypto=require('node:crypto');
+async function readPresentationBody(req) {
+  if (req.method === 'GET' || req.method === 'HEAD') return {};
+  if (req.body !== undefined) return typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+  if (req.readableEnded) {
+    if (Number(req.headers?.['content-length'] || 0) > 0 || req.headers?.['transfer-encoding']) throw Error('Presentation request body is unavailable.');
+    return {};
+  }
+  return new Promise((resolve, reject) => {
+    let text='';
+    req.on('data', chunk => { text += chunk; if (text.length > 100000) reject(Error('Presentation request too large.')); });
+    req.on('end', () => { try { resolve(text ? JSON.parse(text) : {}); } catch { reject(Error('Invalid presentation request.')); } });
+    req.on('error', reject);
+    req.on('aborted', () => reject(Error('Presentation request interrupted.')));
+  });
+}
 function createPresentationHandler(storage) {
 const spaces=new Map();
 const tools=['tasks','files','chats','hr','sales','marketing','wm','sos','admin'];
@@ -8,7 +23,7 @@ const sampleFiles=workspace=>workspace==='new'?[]:[{id:'brand',name:'Brand artwo
 const seed=workspace=>({tasks:[],leads:[],notices:[],campaigns:[],workspaces:[],files:sampleFiles(workspace),search:workspace==='new'?[]:[{id:'seed-task',tool:'tasks',title:'Nile Foods launch review',path:'/presentation'},{id:'seed-chat',tool:'chats',title:'Launch review conversation',path:'/presentation'},{id:'seed-hr',tool:'hr',title:'Employee onboarding',path:'/presentation'},{id:'seed-sales',tool:'sales',title:'Atlas Studio proposal',path:'/presentation'},{id:'seed-mkt',tool:'marketing',title:'Campaign delivery and attribution',path:'/presentation'},{id:'seed-wm',tool:'wm',title:'Partners landing page',path:'/content/pages/pg_partners'},{id:'seed-admin',tool:'admin',title:'Billing operations',path:'/presentation'}]});
 const store=workspace=>{if(!spaces.has(workspace))spaces.set(workspace,seed(workspace));return spaces.get(workspace)};
 const reply=(res,status,data)=>{res.writeHead(status,{'Content-Type':'application/json','Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'Content-Type','Access-Control-Allow-Methods':'GET,POST,OPTIONS','Cache-Control':'no-store'});res.end(JSON.stringify({simulated:true,data}))};
-return async(req,res)=>{if(req.method==='OPTIONS')return reply(res,200,null);let data,workspace;const send=async(res,status,value)=>{try{if(storage&&req.method==='POST'&&status<400&&data)await storage.save(workspace,data);return reply(res,status,value)}catch{return reply(res,503,{message:'Presentation store unavailable.'})}};try{const url=new URL(req.url,'http://localhost');workspace=url.searchParams.get('workspace')||'nile';const persona=url.searchParams.get('persona')||'current';if(!['current','nile','orgtik','spree','desert','new'].includes(workspace))return send(res,400,{message:'Choose a presentation workspace.'});data=storage?await storage.load(workspace)||seed(workspace):store(workspace);const allowed=visibility[persona]||[],body=req.body!==undefined?(typeof req.body==='string'?JSON.parse(req.body):req.body):await new Promise((resolve,reject)=>{let text='';req.on('data',chunk=>{text+=chunk;if(text.length>100000)reject(Error('Presentation request too large.'))});req.on('end',()=>{try{resolve(text?JSON.parse(text):{})}catch{reject(Error('Invalid presentation request.'))}})});
+return async(req,res)=>{if(req.method==='OPTIONS')return reply(res,200,null);let data,workspace;const send=async(res,status,value)=>{try{if(storage&&req.method==='POST'&&status<400&&data)await storage.save(workspace,data);return reply(res,status,value)}catch{return reply(res,503,{message:'Presentation store unavailable.'})}};try{const url=new URL(req.url,'http://localhost');workspace=url.searchParams.get('workspace')||'nile';const persona=url.searchParams.get('persona')||'current';if(!['current','nile','orgtik','spree','desert','new'].includes(workspace))return send(res,400,{message:'Choose a presentation workspace.'});const bodyPromise=readPresentationBody(req);const [stored,body]=await Promise.all([storage?storage.load(workspace):Promise.resolve(store(workspace)),bodyPromise]);data=stored||seed(workspace);const allowed=visibility[persona]||[];
 if(req.method==='GET'&&url.pathname==='/search'){const query=(url.searchParams.get('q')||'').toLowerCase();return send(res,200,[...data.search,...data.campaigns.map(campaign=>({id:"campaign-"+campaign.id,tool:"wm",title:campaign.name,path:"/presentation?view=forms&campaign="+encodeURIComponent(campaign.id)})),...data.files.map(file=>({id:file.id,tool:"files",title:file.name,path:"/presentation?item="+encodeURIComponent(file.id)})),...data.tasks.map(task=>({id:task.id,tool:'tasks',title:task.title,path:'/presentation?item='+encodeURIComponent(task.id)})),...data.leads.map(lead=>({id:lead.id,tool:'sales',title:lead.name,path:'/presentation?lead='+encodeURIComponent(lead.id)}))].filter(item=>allowed.includes(item.tool)&&(!query||item.title.toLowerCase().includes(query))))}
 if(req.method==='GET'&&url.pathname==='/notifications')return send(res,200,data.notices.filter(item=>allowed.includes(item.tool)));
 if(req.method==='GET'&&url.pathname==='/files')return send(res,200,allowed.includes('files')?data.files:[]);
