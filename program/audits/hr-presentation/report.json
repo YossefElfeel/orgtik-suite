@@ -1,0 +1,42 @@
+{
+  "checks": [
+    "Policy change reflected in balances",
+    "Employee request waits for approval",
+    "Approval recorded",
+    "CSV result displayed",
+    "CH file visibly simulated",
+    "UAE file uses employee currency",
+    "Onboarding task can complete",
+    "Reminder appears in mock mailbox",
+    "Profile receipt in mailbox",
+    "Reset restores empty mock mailbox",
+    "en-light-1440 critical zero",
+    "en-light-1440 overflow zero",
+    "en-light-390 critical zero",
+    "en-light-390 overflow zero",
+    "en-dark-1440 critical zero",
+    "en-dark-1440 overflow zero",
+    "en-dark-390 critical zero",
+    "en-dark-390 overflow zero",
+    "ar-light-1440 critical zero",
+    "ar-light-1440 overflow zero",
+    "ar-light-390 critical zero",
+    "ar-light-390 overflow zero",
+    "ar-dark-1440 critical zero",
+    "ar-dark-1440 overflow zero",
+    "ar-dark-390 critical zero",
+    "ar-dark-390 overflow zero"
+  ],
+  "captures": [
+    "hr-en-light-1440.png",
+    "hr-en-light-390.png",
+    "hr-en-dark-1440.png",
+    "hr-en-dark-390.png",
+    "hr-ar-light-1440.png",
+    "hr-ar-light-390.png",
+    "hr-ar-dark-1440.png",
+    "hr-ar-dark-390.png"
+  ],
+  "scope": "HR client presentation; no existing employee/billing/clock mutations",
+  "completed": true
+}

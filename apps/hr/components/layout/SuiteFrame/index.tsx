@@ -21,6 +21,7 @@ import { NotificationDropdown } from "@/components/layout/DashboardHeader/Notifi
 
 export function SuiteFrame({ children }: { children: ReactNode }) {
   const ts = useTranslations("suite");
+  const presentationText = useTranslations("HrPresentation");
   const pathname = usePathname();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -45,6 +46,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
         })),
       }))
     : [];
+  if (process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1") sections.unshift({ items: [{ label: presentationText("nav"), href: "/presentation", active: pathname === "/presentation" }] });
 
   // Signing out of HR signs out of the suite: SOS's sign-in, not a page of HR's own.
   const signOut = async () => {
