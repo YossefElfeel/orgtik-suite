@@ -128,7 +128,17 @@
     "currencyTitle": "Programmare il cambio valuta?",
     "currencyImpact": "Mantieni il ciclo attuale in {current}. Dal {date}, usa {next} e quantità e prezzo dell’anteprima. Fatture precedenti e link pagati conservano la valuta originale.",
     "confirmCurrency": "Programma modifica del prossimo ciclo",
-    "currencyScheduled": "Cambio valuta simulato programmato"
+    "currencyScheduled": "Cambio valuta simulato programmato",
+    "legalEntity": "Entità legale simulata",
+    "entityCH": "OrgTik Svizzera · CH",
+    "entityAE": "OrgTik EAU · AE",
+    "entitySeriesNote": "Ogni entità conserva prefisso e sequenza. Le precedenti impostazioni globali della demo appartengono solo a CH. Le fatture esistenti restano invariate.",
+    "nextCounter": "Prossimo contatore esempio",
+    "counterError": "Scegli un intero da {minimum} a 999999. Il contatore non può tornare indietro.",
+    "entitySeriesSaved": "Serie fatture dell’entità salvata",
+    "counterUnavailable": "Questo numero esempio non è disponibile. Scegli un altro prefisso o aumenta il contatore.",
+    "entityReserved": "{number} riservato per {entity}.",
+    "reservedNumbers": "Numeri esempio riservati"
   },
   "CustomerPreview": {
     "heading": "Anteprima cliente · {name}",

@@ -1,0 +1,37 @@
+{
+  "checks": [
+    "Priorityfilterselectsurgenttask",
+    "Overduefilterselectsdatedtask",
+    "BulkstatusappliesDoing",
+    "BulkpriorityappliesHigh",
+    "Undatedfilterexcludesdatedtask",
+    "Clearfiltersrestoresnewfilterfields",
+    "en-light-1440 critical0",
+    "en-light-1440 overflow0",
+    "en-light-390 critical0",
+    "en-light-390 overflow0",
+    "en-dark-1440 critical0",
+    "en-dark-1440 overflow0",
+    "en-dark-390 critical0",
+    "en-dark-390 overflow0",
+    "ar-light-1440 critical0",
+    "ar-light-1440 overflow0",
+    "ar-light-390 critical0",
+    "ar-light-390 overflow0",
+    "ar-dark-1440 critical0",
+    "ar-dark-1440 overflow0",
+    "ar-dark-390 critical0",
+    "ar-dark-390 overflow0"
+  ],
+  "captures": [
+    "task-filters-en-light-1440.png",
+    "task-filters-en-light-390.png",
+    "task-filters-en-dark-1440.png",
+    "task-filters-en-dark-390.png",
+    "task-filters-ar-light-1440.png",
+    "task-filters-ar-light-390.png",
+    "task-filters-ar-dark-1440.png",
+    "task-filters-ar-dark-390.png"
+  ],
+  "completed": true
+}

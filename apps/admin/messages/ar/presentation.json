@@ -128,7 +128,17 @@
     "currencyTitle": "جدولة تغيير العملة؟",
     "currencyImpact": "تبقى الدورة الحالية بعملة {current}. من {date} تُستخدم {next} وكمية وسعر المعاينة. تحتفظ الفواتير السابقة والروابط المدفوعة بعملتها الأصلية.",
     "confirmCurrency": "جدولة تغيير الدورة التالية",
-    "currencyScheduled": "جدولة تغيير العملة المحاكى"
+    "currencyScheduled": "جدولة تغيير العملة المحاكى",
+    "legalEntity": "الكيان القانوني المحاكى",
+    "entityCH": "OrgTik سويسرا · CH",
+    "entityAE": "OrgTik الإمارات · AE",
+    "entitySeriesNote": "يحتفظ كل كيان ببادئته وتسلسله. الإعداد العام السابق للعرض يخص CH فقط. لا تتغير الفواتير الحالية.",
+    "nextCounter": "عداد النموذج التالي",
+    "counterError": "اختر عددًا صحيحًا من {minimum} إلى 999999. لا يمكن إرجاع العداد للخلف.",
+    "entitySeriesSaved": "حُفظ تسلسل فواتير الكيان",
+    "counterUnavailable": "رقم النموذج غير متاح. اختر بادئة أخرى أو زد العداد.",
+    "entityReserved": "حُجز {number} للكيان {entity}.",
+    "reservedNumbers": "أرقام النماذج المحجوزة"
   },
   "CustomerPreview": {
     "heading": "معاينة العميل · {name}",

@@ -1293,5 +1293,10 @@
   "presentation.scheduledFor": "مجدولة في {date} ({zone}). التسليم محاكى.",
   "presentation.legacyFile": "اسم نموذجي سابق؛ اختر سجلًا من الملفات لإرفاق إصدار.",
   "presentation.taskConnected": "المهمة متاحة في المهام وبحث السويت وإشعارات العرض.",
-  "presentation.taskLocal": "أُنشئ مرجع مهمة في هذه المحادثة. شغّل العرض المتصل لفتحها في المهام."
+  "presentation.taskLocal": "أُنشئ مرجع مهمة في هذه المحادثة. شغّل العرض المتصل لفتحها في المهام.",
+  "presentation.browseChannels": "تصفح القنوات",
+  "presentation.channelScope": "قنوات عامة في مساحة العرض. العضوية وحالة القراءة تتبعان الشخصية المختارة.",
+  "presentation.leaveChannel": "مغادرة القناة",
+  "presentation.joinChannel": "الانضمام للقناة",
+  "presentation.noPublicChannels": "لا توجد قنوات عامة بعد"
 }

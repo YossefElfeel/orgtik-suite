@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "Joined state exposes Leave",
+    "Leave changes state to Join",
+    "Other persona did not inherit membership",
+    "Other persona has no joined sidebar entry",
+    "Mobile no overflow"
+  ],
+  "completed": true
+}

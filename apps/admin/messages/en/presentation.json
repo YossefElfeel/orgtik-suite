@@ -128,7 +128,17 @@
     "currencyTitle": "Schedule currency change?",
     "currencyImpact": "Keep the current cycle in {current}. From {date}, use {next} and the preview quantity/price. Historical invoices and paid links retain their original currency.",
     "confirmCurrency": "Schedule next-cycle change",
-    "currencyScheduled": "Mock currency change scheduled"
+    "currencyScheduled": "Mock currency change scheduled",
+    "legalEntity": "Mock legal entity",
+    "entityCH": "OrgTik Switzerland · CH",
+    "entityAE": "OrgTik UAE · AE",
+    "entitySeriesNote": "Each entity keeps its own prefix and sequence. Previous global demo settings belong to CH only. Existing invoices are unchanged.",
+    "nextCounter": "Next sample counter",
+    "counterError": "Choose a whole counter from {minimum} to 999999. Counters cannot move backwards.",
+    "entitySeriesSaved": "Entity invoice series saved",
+    "counterUnavailable": "This sample number is unavailable. Choose another prefix or increase the counter.",
+    "entityReserved": "Reserved {number} for {entity}.",
+    "reservedNumbers": "Reserved sample numbers"
   },
   "CustomerPreview": {
     "heading": "Customer preview · {name}",

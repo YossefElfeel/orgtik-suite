@@ -1,0 +1,47 @@
+{
+  "completed": true,
+  "checks": [
+    "USR sees Email coming soon with waitlist action",
+    "USR joins mock waitlist through existing UI",
+    "ADM publishes coming soon to beta",
+    "USR consumes beta availability and switches waitlist to plans",
+    "ADM publishes beta to live",
+    "USR consumes live release status",
+    "ADM stages one changed Egypt price cell",
+    "Draft does not yet alter public published price",
+    "Actual ADM publish recorded version2 with new-customer-only mode",
+    "USR resolves published unit139 EGP with purchased quantity2",
+    "USR plan card displays published regional price",
+    "Public catalog reflects version2 and regional Egypt unit",
+    "Four-term savings preserved0/5/10/15",
+    "Existing SOS staff launch route reaches ADM replacement tools page",
+    "Shared frozen clock remains original7Oct9UTC"
+  ],
+  "captures": [
+    "j4-usr-coming-soon.png",
+    "j4-adm-beta.png",
+    "j4-adm-live.png",
+    "j4-usr-live.png",
+    "j5-adm-published-price.png",
+    "j5-usr-plan-price.png",
+    "p4-sos-staff-to-adm.png"
+  ],
+  "scope": "Actual existing ADM catalog/pricing UI and USR consuming UI in private frozen memory core; website stopped, public catalog snapshot only",
+  "price": {
+    "plan": "tasks_pro",
+    "zone": "egypt",
+    "currency": "EGP",
+    "before": 129,
+    "after": 139,
+    "version": 2,
+    "applyMode": "new_only"
+  },
+  "clock": "2026-10-07T09:00:00.000Z",
+  "limits": [
+    "Email has no plans/provider: catalog status/waitlist availability only, no email purchase or live delivery acceptance.",
+    "Website5697 stopped; new public price verified by API snapshot. Prior four-term website UI proof remains separate.",
+    "Runtime historical invoice before-snapshot was not persisted before the interrupted publish harness, so no before/after monetary comparison claimed here. New-only policy and existing pricing regression evidence remain separate.",
+    "Sales-origin redirects not executed because Salesweb stopped;17route destinations and retained legacy files source-inspected separately.",
+    "No shared-clock advancement, production deployment, service restart or business-data reset."
+  ]
+}

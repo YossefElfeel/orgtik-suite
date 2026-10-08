@@ -1,11 +1,16 @@
 import type { LeadStatus } from "@/types/customers";
-import type { DemoDeal, DemoStage, SalesScene } from "@/types/presentation";
+import type { CompanyValues, DemoCompany, DemoDeal, DemoStage, SalesScene } from "@/types/presentation";
 
 export const people: Record<string,string> = { current: "Omar Farouk", mona: "Mona Adel", nour: "Nour Khaled", rana: "Rana Saad", omar: "Omar Farouk", salma: "Salma Nabil", hoda: "Hoda Ashraf", hany: "Hany Samir" };
 export const spaces: Record<string,{name:string;currency:string}> = { current: {name:"Nile Foods",currency:"EGP"}, nile: {name:"Nile Foods",currency:"EGP"},orgtik:{name:"OrgTik",currency:"CHF"},spree:{name:"Spree",currency:"EUR"},desert:{name:"Desert",currency:"AED"},new:{name:"New workspace",currency:"EGP"} };
 export const keyFor = (workspace: string) => `orgtik:presentation:sales:${workspace}`;
 export const probabilityFor: Partial<Record<LeadStatus,number>> = { new:10, contacted:25, qualified:50, quoted:75, won:100, lost:0 };
 export const seedStages=():DemoStage[]=>["new","contacted","qualified","quoted","won","lost","unqualified","spam","duplicate"].map(id=>({id,label:"",probability:probabilityFor[id as LeadStatus]??0,custom:false}));
+export function companyRecord(name:string,id=crypto.randomUUID()):DemoCompany{return{id,name,sector:"",website:"",notes:"",tags:[],fields:{}}}
+export const companyFormDefaults:CompanyValues={name:"",sector:"",website:"",notes:"",tag:"",fieldName:"",fieldValue:""};
+export function normalizeCompanyStore(scene:SalesScene):SalesScene{
+ const companies=[...(scene.companies??[])];const deals=scene.deals.map(deal=>{let company=companies.find(item=>item.id===deal.companyId)||companies.find(item=>item.name.trim().toLocaleLowerCase()===deal.company.trim().toLocaleLowerCase());if(!company){company=companyRecord(deal.company);companies.push(company)}return{...deal,companyId:company.id,company:company.name}});return{...scene,companies,deals};
+}
 export function createDeal(name:string,company:string,email:string,value:number,source:string,owner="Omar Farouk"):DemoDeal { return {id:crypto.randomUUID(),name,company,email,value,source,owner,stage:"new",probability:10,tags:[],fields:{},lostReason:"",timeline:[],tasks:[],offer:{validUntil:"2026-10-21",signedBy:null,expired:false}}; }
 export function seedScene(workspace:string):SalesScene {
  const records=[
@@ -15,7 +20,7 @@ export function seedScene(workspace:string):SalesScene {
   {name:"Yara Nasser",company:"Field Notes",email:"yara@field.example",value:9000,source:"event",stage:"lost" as LeadStatus},
  ];
  const multiplier=workspace==="spree"||workspace==="orgtik"?0.1:workspace==="desert"?0.3:1;
- return {stages:seedStages(),target:60000*multiplier,rule:{source:"website",owner:"Omar Farouk",enabled:true},deals:workspace==="new"?[]:records.map<DemoDeal>((record,index)=>({...createDeal(record.name,record.company,record.email,record.value*multiplier,record.source),id:`sales-demo-${index+1}`,stage:record.stage,probability:probabilityFor[record.stage]??10,tags:index===0?["priority"]:[],fields:Object.fromEntries(index===0?[["sector","Design"]]:[]),lostReason:record.stage==="lost"?"Budget":"",timeline:[{id:`event-${index}`,text:"Initial conversation recorded for the presentation.",actor:"Omar Farouk"}]}))};
+ return normalizeCompanyStore({stages:seedStages(),target:60000*multiplier,rule:{source:"website",owner:"Omar Farouk",enabled:true},deals:workspace==="new"?[]:records.map<DemoDeal>((record,index)=>({...createDeal(record.name,record.company,record.email,record.value*multiplier,record.source),id:`sales-demo-${index+1}`,stage:record.stage,probability:probabilityFor[record.stage]??10,tags:index===0?["priority"]:[],fields:Object.fromEntries(index===0?[["sector","Design"]]:[]),lostReason:record.stage==="lost"?"Budget":"",timeline:[{id:`event-${index}`,text:"Initial conversation recorded for the presentation.",actor:"Omar Farouk"}]}))});
 }
 /** Text-only CSV, quoted commas and doubled quotes supported; no binary upload. */
 export function parseCsv(text:string): string[][] {

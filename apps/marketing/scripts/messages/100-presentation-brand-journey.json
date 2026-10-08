@@ -1,0 +1,121 @@
+{
+  "Presentation.brand": {
+    "en": "Brand kit",
+    "ar": "هوية العلامة",
+    "de": "Markenprofil",
+    "fr": "Profil de marque",
+    "it": "Profilo del marchio"
+  },
+  "Presentation.brandNote": {
+    "en": "Set the voice, audience and value proposition for this workspace. The mock assistant uses these settings in its draft; this browser session keeps them.",
+    "ar": "حدد النبرة والجمهور والقيمة المقدمة لمساحة العمل هذه. يستخدم المساعد المحاكى هذه الإعدادات في مسودته؛ وتحتفظ بها جلسة المتصفح.",
+    "de": "Stimme, Zielgruppe und Nutzenversprechen dieses Arbeitsbereichs festlegen. Der Demo-Assistent nutzt sie im Entwurf; diese Browsersitzung speichert sie.",
+    "fr": "Définissez ton, public et proposition de valeur pour cet espace. L’assistant simulé les utilise dans son brouillon ; cette session les conserve.",
+    "it": "Imposta tono, pubblico e proposta di valore per questo spazio. L’assistente simulato li usa nella bozza; questa sessione li conserva."
+  },
+  "Presentation.brandVoice": {
+    "en": "Brand voice",
+    "ar": "نبرة العلامة",
+    "de": "Markenstimme",
+    "fr": "Ton de marque",
+    "it": "Tono del marchio"
+  },
+  "Presentation.brandAudience": {
+    "en": "Target audience",
+    "ar": "الجمهور المستهدف",
+    "de": "Zielgruppe",
+    "fr": "Public cible",
+    "it": "Pubblico target"
+  },
+  "Presentation.brandProposition": {
+    "en": "Value proposition",
+    "ar": "القيمة المقدمة",
+    "de": "Nutzenversprechen",
+    "fr": "Proposition de valeur",
+    "it": "Proposta di valore"
+  },
+  "Presentation.formal": {
+    "en": "Formal",
+    "ar": "رسمية",
+    "de": "Formell",
+    "fr": "Formel",
+    "it": "Formale"
+  },
+  "Presentation.saveBrand": {
+    "en": "Save brand kit",
+    "ar": "حفظ هوية العلامة",
+    "de": "Markenprofil speichern",
+    "fr": "Enregistrer le profil",
+    "it": "Salva profilo del marchio"
+  },
+  "Presentation.brandSaved": {
+    "en": "Brand kit saved in this workspace scene.",
+    "ar": "حُفظت هوية العلامة في سيناريو مساحة العمل هذه.",
+    "de": "Markenprofil in dieser Arbeitsbereichsszene gespeichert.",
+    "fr": "Profil enregistré dans la scène de cet espace.",
+    "it": "Profilo salvato nella scena di questo spazio."
+  },
+  "Presentation.journeyBuilderNote": {
+    "en": "Configure up to ten steps, including the consent-based entry. Add, change, reorder or remove steps; dry-run logs follow that exact sequence. Waiting and delivery remain simulated.",
+    "ar": "كوّن ما يصل إلى عشر خطوات، بما فيها الدخول المعتمد على الموافقة. أضف الخطوات أو غيّرها أو رتبها أو أزلها؛ تتبع سجلات التجربة الترتيب نفسه. يبقى الانتظار والتسليم محاكاة.",
+    "de": "Bis zu zehn Schritte einschließlich Einwilligungs-Einstieg konfigurieren. Hinzufügen, ändern, umordnen oder entfernen; Probeläufe folgen exakt der Reihenfolge. Warten und Zustellung bleiben simuliert.",
+    "fr": "Configurez dix étapes maximum, entrée avec consentement comprise. Ajoutez, modifiez, réordonnez ou retirez des étapes ; le test suit cet ordre. Attente et livraison restent simulées.",
+    "it": "Configura fino a dieci passaggi, incluso l’ingresso con consenso. Aggiungi, modifica, riordina o rimuovi; la simulazione segue quell’ordine. Attesa e invio restano simulati."
+  },
+  "Presentation.stepType": {
+    "en": "Step type",
+    "ar": "نوع الخطوة",
+    "de": "Schritttyp",
+    "fr": "Type d’étape",
+    "it": "Tipo di passaggio"
+  },
+  "Presentation.step_email": {
+    "en": "Mock email",
+    "ar": "بريد محاكى",
+    "de": "Demo-E-Mail",
+    "fr": "E-mail simulé",
+    "it": "Email simulata"
+  },
+  "Presentation.step_wait": {
+    "en": "Wait preview",
+    "ar": "معاينة انتظار",
+    "de": "Wartevorschau",
+    "fr": "Aperçu d’attente",
+    "it": "Anteprima attesa"
+  },
+  "Presentation.step_task": {
+    "en": "Follow-up preview",
+    "ar": "معاينة متابعة",
+    "de": "Folgevorschau",
+    "fr": "Aperçu du suivi",
+    "it": "Anteprima follow-up"
+  },
+  "Presentation.moveEarlier": {
+    "en": "Earlier",
+    "ar": "سابق",
+    "de": "Früher",
+    "fr": "Avancer",
+    "it": "Prima"
+  },
+  "Presentation.moveLater": {
+    "en": "Later",
+    "ar": "لاحق",
+    "de": "Später",
+    "fr": "Reculer",
+    "it": "Dopo"
+  },
+  "Presentation.removeStep": {
+    "en": "Remove step",
+    "ar": "إزالة الخطوة",
+    "de": "Schritt entfernen",
+    "fr": "Retirer l’étape",
+    "it": "Rimuovi passaggio"
+  },
+  "Presentation.addJourneyStep": {
+    "en": "Add step",
+    "ar": "إضافة خطوة",
+    "de": "Schritt hinzufügen",
+    "fr": "Ajouter une étape",
+    "it": "Aggiungi passaggio"
+  }
+}

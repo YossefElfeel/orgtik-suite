@@ -1,5 +1,12 @@
 # HR benchmark: OrgTik HR vs BambooHR, Personio, Zoho People
 
+> Latest presentation overlay — 2026-10-08; A33/A34. Validated merge baseline `eebc85d` through PR37; closure extensions await integration.
+>
+> Retained hire/invitation/leave/ownership/offboarding UI and local policy/profile/import/payroll/mailbox; current HR-directory reference feeds three simulated Tasks. J7 nine UI steps and J15 six steps; no new banking/mail/backend engine.
+>
+> UI/mock package coverage is separate from the historical benchmark below. No competitive rating or score was recalculated. Backend, hosted and external capabilities remain pending/deferred. Evidence: program/audits/prototype-final/hr-report.json; program/audits/prototype-final/offboarding-report.json; program/audits/hr-presentation/README.md; `program/prototype-journeys.md`.
+
+
 **Expected and Missing: 12. Expected and Partial: 15** (Have: 12 of 39 Expected).
 **Worthwhile differentiators: 9.** OrgTik already has 2 (loans with instalments, HR helpdesk), 2 are Partial (suite account provisioning, Tasks link) and 5 are Missing. One more is parked for later (field-level permissions) and one item is Not for us (a statutory payroll engine).
 The core people, leave and payroll flows exist. The gaps are the employee lifecycle (onboarding tasks, offboarding, assets), leave policy depth, employee self-service, performance, and multi-country money and holidays.

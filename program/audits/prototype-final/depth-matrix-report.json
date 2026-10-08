@@ -1,0 +1,39 @@
+{
+  "checks": [
+    "tasks-en-light-1440 critical0/overflow0",
+    "tasks-en-light-390 critical0/overflow0",
+    "tasks-en-dark-1440 critical0/overflow0",
+    "tasks-en-dark-390 critical0/overflow0",
+    "tasks-ar-light-1440 critical0/overflow0",
+    "tasks-ar-light-390 critical0/overflow0",
+    "tasks-ar-dark-1440 critical0/overflow0",
+    "tasks-ar-dark-390 critical0/overflow0",
+    "chats-en-light-1440 critical0/overflow0",
+    "chats-en-light-390 critical0/overflow0",
+    "chats-en-dark-1440 critical0/overflow0",
+    "chats-en-dark-390 critical0/overflow0",
+    "chats-ar-light-1440 critical0/overflow0",
+    "chats-ar-light-390 critical0/overflow0",
+    "chats-ar-dark-1440 critical0/overflow0",
+    "chats-ar-dark-390 critical0/overflow0"
+  ],
+  "captures": [
+    "depth-tasks-en-light-1440.png",
+    "depth-tasks-en-light-390.png",
+    "depth-tasks-en-dark-1440.png",
+    "depth-tasks-en-dark-390.png",
+    "depth-tasks-ar-light-1440.png",
+    "depth-tasks-ar-light-390.png",
+    "depth-tasks-ar-dark-1440.png",
+    "depth-tasks-ar-dark-390.png",
+    "depth-chats-en-light-1440.png",
+    "depth-chats-en-light-390.png",
+    "depth-chats-en-dark-1440.png",
+    "depth-chats-en-dark-390.png",
+    "depth-chats-ar-light-1440.png",
+    "depth-chats-ar-light-390.png",
+    "depth-chats-ar-dark-1440.png",
+    "depth-chats-ar-dark-390.png"
+  ],
+  "completed": true
+}

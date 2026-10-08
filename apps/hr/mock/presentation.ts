@@ -1,4 +1,9 @@
 import type { DemoEmployee, DemoOnboardingTask, DemoPolicy } from "@/types/presentation";
+import type { IEmployeeDetail } from "@/types/employee";
+export function directoryPresentationPerson(employee: IEmployeeDetail): DemoEmployee {
+  const person = employee.personalInformation;
+  return { id: `directory-${employee.id}`, directoryId: employee.id, name: person.fullName || `${person.firstName} ${person.lastName}`.trim(), email: person.email, phone: person.phoneNumber || "", department: employee.employeeInformation.departmentName || "", currency: employee.salaryInformation.currency || "CHF", salary: employee.salaryInformation.baseSalary || 0, taken: 0, documentExpiry: "2027-10-08" };
+}
 export const HR_DEMO_TODAY = "2026-10-08";
 export const HR_DEMO_POLICY: DemoPolicy = { annual: 24, carry: 3, accrual: "monthly" };
 export const HR_DEMO_IMPORT = "name,email,currency\nLayla Hassan,layla@presentation.test,CHF\nZiad Sami,ziad@presentation.test,AED";

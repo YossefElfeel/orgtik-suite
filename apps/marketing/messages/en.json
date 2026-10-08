@@ -2017,6 +2017,23 @@
     "campaignId": "Campaign reference",
     "crmConnectedNote": "The demo connection shares these attributed leads with Sales in this workspace. OrgTik’s WM form leads return here with their page and campaign reference; all records are simulated.",
     "presentationWorkspace": "Demo workspace",
-    "emptyWorkspaceLabel": "New workspace"
+    "emptyWorkspaceLabel": "New workspace",
+    "brand": "Brand kit",
+    "brandNote": "Set the voice, audience and value proposition for this workspace. The mock assistant uses these settings in its draft; this browser session keeps them.",
+    "brandVoice": "Brand voice",
+    "brandAudience": "Target audience",
+    "brandProposition": "Value proposition",
+    "formal": "Formal",
+    "saveBrand": "Save brand kit",
+    "brandSaved": "Brand kit saved in this workspace scene.",
+    "journeyBuilderNote": "Configure up to ten steps, including the consent-based entry. Add, change, reorder or remove steps; dry-run logs follow that exact sequence. Waiting and delivery remain simulated.",
+    "stepType": "Step type",
+    "step_email": "Mock email",
+    "step_wait": "Wait preview",
+    "step_task": "Follow-up preview",
+    "moveEarlier": "Earlier",
+    "moveLater": "Later",
+    "removeStep": "Remove step",
+    "addJourneyStep": "Add step"
   }
 }

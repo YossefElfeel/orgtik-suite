@@ -2017,6 +2017,23 @@
     "campaignId": "Riferimento campagna",
     "crmConnectedNote": "Il collegamento demo condivide questi lead attribuiti con Sales in questo spazio. I lead del modulo WM OrgTik tornano con pagina e campagna; tutti i dati sono simulati.",
     "presentationWorkspace": "Spazio demo",
-    "emptyWorkspaceLabel": "Nuovo spazio"
+    "emptyWorkspaceLabel": "Nuovo spazio",
+    "brand": "Profilo del marchio",
+    "brandNote": "Imposta tono, pubblico e proposta di valore per questo spazio. L’assistente simulato li usa nella bozza; questa sessione li conserva.",
+    "brandVoice": "Tono del marchio",
+    "brandAudience": "Pubblico target",
+    "brandProposition": "Proposta di valore",
+    "formal": "Formale",
+    "saveBrand": "Salva profilo del marchio",
+    "brandSaved": "Profilo salvato nella scena di questo spazio.",
+    "journeyBuilderNote": "Configura fino a dieci passaggi, incluso l’ingresso con consenso. Aggiungi, modifica, riordina o rimuovi; la simulazione segue quell’ordine. Attesa e invio restano simulati.",
+    "stepType": "Tipo di passaggio",
+    "step_email": "Email simulata",
+    "step_wait": "Anteprima attesa",
+    "step_task": "Anteprima follow-up",
+    "moveEarlier": "Prima",
+    "moveLater": "Dopo",
+    "removeStep": "Rimuovi passaggio",
+    "addJourneyStep": "Aggiungi passaggio"
   }
 }

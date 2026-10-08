@@ -2926,6 +2926,10 @@
     "reminderCreated": "Erinnerung im Postfach ergänzt.",
     "reuseNote": "Bestehende Personal-, Urlaubs-, Offboarding- und Gehaltsabläufe bleiben in ihren Ansichten.",
     "onboardingConnected": "Onboarding-Aufgaben wurden in Tasks dieses Arbeitsbereichs erstellt.",
-    "connectionError": "Die Verbindung ist fehlgeschlagen. Versuchen Sie es erneut."
+    "connectionError": "Die Verbindung ist fehlgeschlagen. Versuchen Sie es erneut.",
+    "directoryEmployee": "Mitarbeiter im HR-Verzeichnis",
+    "directoryHint": "Verwenden Sie einen Mitarbeiter aus Ihrem angemeldeten Arbeitsbereich. Die Onboarding-Referenz bleibt in dieser Präsentation.",
+    "useDirectoryEmployee": "Für Onboarding verwenden",
+    "directoryRequired": "Wählen Sie einen HR-Mitarbeiter."
   }
 }

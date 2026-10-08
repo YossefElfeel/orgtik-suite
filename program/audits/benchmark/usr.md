@@ -1,5 +1,12 @@
 # USR benchmark: customer dashboard vs Google Workspace admin console and Atlassian admin
 
+> Latest presentation overlay — 2026-10-08; A33/A34. Validated merge baseline `eebc85d` through PR37; closure extensions await integration.
+>
+> Validated local onboarding/preferences/usage/export/workspace verification policy, sample PDF/contacts and audited presentation-only customer preview; retained Team/ownership/billing flows. No new production auth or regulatory compliance.
+>
+> UI/mock package coverage is separate from the historical benchmark below. No competitive rating or score was recalculated. Backend, hosted and external capabilities remain pending/deferred. Evidence: program/audits/prototype-shared-account/account-report.json; program/audits/prototype-shared-account/customer-preview-report.json; program/audits/prototype-final/core-report.json; program/audits/billing-documents/README.md; `program/prototype-journeys.md`.
+
+
 Date: 2026-10-07. Read from code and mock, not from screen names. Scope: market features beyond the spec register (spec coverage is checked separately).
 
 **Summary**

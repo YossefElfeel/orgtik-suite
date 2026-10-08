@@ -1,8 +1,9 @@
-import type { MarketingEditor, MarketingScene } from "./types";
+import type { MarketingEditor, MarketingJourneyStep, MarketingScene } from "./types";
 import type { BoardMove } from "@orgtik/ui";
 export const marketingPeople = { current: "Hoda Ashraf", mona: "Mona Adel", nour: "Nour Khaled", rana: "Rana Saad", omar: "Omar Farouk", salma: "Salma Nabil", hoda: "Hoda Ashraf", hany: "Hany Samir" };
 export const marketingWorkspaces: Record<string, string> = { current: "Nile Foods", nile: "Nile Foods", orgtik: "OrgTik", spree: "Spree", desert: "Desert", new: "New workspace" };
 export const marketingKey = (workspace: string) => `orgtik:presentation:marketing:${workspace}`;
+export const seedMarketingJourney=(days=2):MarketingJourneyStep[]=>[{id:"entry",type:"entry",days:0},{id:"email",type:"email",days:0},{id:"wait",type:"wait",days},{id:"task",type:"task",days:0}];
 export function seedMarketing(workspace: string): MarketingScene {
   const names = workspace === "orgtik" ? ["Mona Adel", "Hoda Ashraf", "Omar Farouk"] : ["Nour Khaled", "Rana Saad", "Salma Nabil"];
   const people = workspace === "new" ? [] : names.map((name, i) => ({ id: `contact-${i}`, name, email: `${name.toLowerCase().replaceAll(" ", ".")}@presentation.test`, consent: i !== 2 }));
@@ -13,11 +14,15 @@ export function seedMarketingEditor(workspace: string, locale: string): Marketin
   const bodies: Record<string, string> = { en: "Discover our latest products and meet the people behind them.", ar: "تعرّف على أحدث منتجاتنا والأشخاص الذين يعملون عليها.", de: "Entdecken Sie unsere neuesten Produkte und die Menschen dahinter.", fr: "Découvrez nos nouveautés et les personnes qui les créent.", it: "Scopri le novità e le persone che le creano." };
   const buttons: Record<string, string> = { en: "Explore the collection", ar: "استكشف المجموعة", de: "Kollektion entdecken", fr: "Découvrez la collection", it: "Esplora la collezione" };
   const campaigns:Record<string,string>={en:"OrgTik partner launch",ar:"إطلاق شركاء OrgTik",de:"OrgTik-Partnerstart",fr:"Lancement des partenaires OrgTik",it:"Lancio partner OrgTik"};
-  return { headline: heading[locale] ?? heading.en, body: bodies[locale] ?? bodies.en, cta: buttons[locale] ?? buttons.en, direction: locale === "ar" ? "rtl" : "ltr", campaignName:campaigns[locale]??campaigns.en, reply: "", topic: "", voice: "warm", delay: "2", postTitle: "" };
+  const audiences:Record<string,string>={en:"Small teams",ar:"فرق صغيرة",de:"Kleine Teams",fr:"Petites équipes",it:"Piccoli team"},propositions:Record<string,string>={en:"Connect projects and people in one workspace",ar:"ربط المشاريع والأشخاص في مساحة عمل واحدة",de:"Projekte und Menschen in einem Arbeitsbereich verbinden",fr:"Relier projets et personnes dans un même espace",it:"Collegare progetti e persone in un unico spazio"};
+  return { headline: heading[locale] ?? heading.en, body: bodies[locale] ?? bodies.en, cta: buttons[locale] ?? buttons.en, direction: locale === "ar" ? "rtl" : "ltr", campaignName:campaigns[locale]??campaigns.en,brandAudience:audiences[locale]??audiences.en,brandProposition:propositions[locale]??propositions.en, reply: "", topic: "", voice: "warm", delay: "2", postTitle: "" };
 }
-export function marketingDraft(topic: string, workspace: string, locale: string, voice: string) {
+export function marketingDraft(topic: string, workspace: string, locale: string, voice: string, audience="",proposition="") {
   const templates: Record<string, [string, string]> = { en: [`Discover ${topic} with ${workspace}`, `A fresh update from our team. Explore ${topic} and tell us what you think.`], ar: [`اكتشف ${topic} مع ${workspace}`, `تحديث جديد من فريقنا. تعرّف على ${topic} وشاركنا رأيك.`], de: [`${topic} mit ${workspace} entdecken`, `Ein neues Update von unserem Team. Entdecken Sie ${topic} und teilen Sie Ihre Meinung.`], fr: [`Découvrez ${topic} avec ${workspace}`, `Une nouveauté de notre équipe. Découvrez ${topic} et partagez votre avis.`], it: [`Scopri ${topic} con ${workspace}`, `Una novità dal nostro team. Scopri ${topic} e condividi la tua opinione.`] };
-  const [headline, body] = templates[locale] ?? templates.en; return { headline, body: voice === "direct" ? headline + "." : body };
+  const [headline, body] = templates[locale] ?? templates.en;
+  const intro:Record<string,string>={en:`For ${audience}`,ar:`من أجل ${audience}`,de:`Für ${audience}`,fr:`Pour ${audience}`,it:`Per ${audience}`},formal:Record<string,string>={en:`Dear ${audience}`,ar:`إلى ${audience}`,de:`Sehr geehrte ${audience}`,fr:`À l’attention de ${audience}`,it:`Gentili ${audience}`};
+  const opening=voice==="formal"?(formal[locale]??formal.en):audience?(intro[locale]??intro.en):"";
+  return { headline, body:[opening,voice==="direct"?headline+".":body,proposition].filter(Boolean).join(voice==="direct"?" · ":"\n\n") };
 }
 export const escapeMarketingHtml = (text: string) => text.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 export function moveMarketingPost(scene: MarketingScene, move: BoardMove): MarketingScene {

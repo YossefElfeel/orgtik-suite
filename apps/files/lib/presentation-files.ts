@@ -9,7 +9,7 @@ export const FILE_PEOPLE = ["Nour Khaled", "Rana Saad", "Omar Farouk", "Salma Na
 export const FILE_FOLDERS = ["library", "campaign", "people"];
 export function seedPresentationFiles(workspace: string): PresentationFile[] {
   if (workspace === "new") return [];
-  const prefix = ({ orgtik: "OrgTik", nile: "Nile Studio", spree: "Spree", desert: "Desert" } as Record<string, string>)[workspace] ?? "Nile Studio";
+  const prefix = ({ orgtik: "OrgTik", nile: "Nile Foods", spree: "Spree", desert: "Desert" } as Record<string, string>)[workspace] ?? "Nile Foods";
   return [
     { id: "brand", name: `${prefix} — brand board.svg`, kind: "image", folder: "library", size: 2, versions: [{ id: 2, name: "brand-v2.svg", date: "2026-10-07" }, { id: 1, name: "brand-v1.svg", date: "2026-10-01" }], shares: [{ person: FILE_PEOPLE[1], permission: "comment" }], comments: [] },
     { id: "brief", name: `${prefix} — launch brief.txt`, kind: "document", folder: "campaign", size: 1, versions: [{ id: 1, name: "launch-brief.txt", date: "2026-10-07" }], shares: [], comments: [] },

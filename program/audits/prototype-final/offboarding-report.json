@@ -1,0 +1,35 @@
+{
+  "id": "J15",
+  "scenario": "J15-24c6165b-e147-4ea6-bb60-108c865f599a",
+  "steps": [
+    "Employment invitation activates departing person in UI",
+    "Workspace ownership transfers to departing employee in UI",
+    "Immediate offboarding completes with successor ownership",
+    "Equipment return is recorded through retained UI",
+    "Final-pay administrative review is recorded",
+    "Successor is restored as owner after offboarding"
+  ],
+  "clockMutation": false,
+  "dataReset": false,
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z",
+    "realNow": "2026-10-08T15:38:01.047Z",
+    "offsetMinutes": -1838
+  },
+  "sandbox": "presentation-HIyjCH",
+  "employeeId": 206875469743299,
+  "workspaceId": "ws_signup_34440933029709",
+  "capture": ".qa/j15-offboarding-completed.png",
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z",
+    "realNow": "2026-10-08T15:38:26.219Z",
+    "offsetMinutes": -1838
+  },
+  "clockUnchanged": true,
+  "completed": true,
+  "limits": [
+    "Employment/ownership/equipment UI passed; task/file record reassignment is not claimed because this fixture has no owned task/file records. Other-workspace access preservation retains its earlier evidence."
+  ]
+}

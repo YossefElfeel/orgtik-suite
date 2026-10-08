@@ -1,5 +1,12 @@
 # Sales benchmark: OrgTik Sales (CRM) vs HubSpot CRM and Pipedrive
 
+> Latest presentation overlay — 2026-10-08; A33/A34. Validated merge baseline `eebc85d` through PR37; closure extensions await integration.
+>
+> Connected campaign/website intake, follow-up Tasks, editable pipeline/probability/forecast, import/export, timeline/routing, mock quote/print/signature and reports. Company/field detail source has accepted focused UI evidence: 80 scoped checks and23 captures, including functional paths, locale/theme/width and digit-format checks shared with Marketing depth.
+>
+> UI/mock package coverage is separate from the historical benchmark below. No competitive rating or score was recalculated. Backend, hosted and external capabilities remain pending/deferred. Evidence: program/audits/prototype-business-closure/business-report.json; program/audits/sales-presentation/README.md; program/audits/prototype-final/feature-detail-report.json; `program/prototype-journeys.md`.
+
+
 Date: 2026-10-07. Read from code and mock, not from screen names. Scope: the CRM part of `apps/sales` only. The 17 frozen SaaS-admin routes (plan-management, coupons, packages, subscriptions, invoices, tickets) are out of scope because they are moving to ADM/USR (D-011).
 
 **Summary**

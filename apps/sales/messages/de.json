@@ -2915,6 +2915,23 @@
     "workspaceConfirm": "Simulierten Kunden-Arbeitsbereich erstellen?",
     "workspaceImpact": "Demo-Beleg für {name} mit {owner} als Inhaber. Bestehende Konten, Abonnements, Rechnungen und Abrechnungsdaten bleiben unverändert.",
     "leadAttribution": "Lead-Zuordnung",
-    "campaignReference": "Kampagne / Tags"
+    "campaignReference": "Kampagne / Tags",
+    "companies": "Unternehmen",
+    "addCompany": "Unternehmen hinzufügen",
+    "companiesNote": "Unternehmen besitzen eigene Profile, Tags und Felder. Kontakte verknüpfen und deren Deals öffnen; Umbenennungen aktualisieren verknüpfte CRM-Daten in dieser Szene.",
+    "companyContactCount": "Verknüpfte Kontakte: {count}",
+    "noCompanies": "Noch keine Unternehmen",
+    "companyDetails": "Unternehmensdetails",
+    "saveCompany": "Unternehmen speichern",
+    "companySector": "Branche",
+    "companyWebsite": "Unternehmenswebsite",
+    "companyNotes": "Unternehmensnotizen",
+    "companyFormError": "Unternehmensname, Feldlängen und optionale http(s)-Website prüfen.",
+    "companyDuplicate": "Ein anderes Unternehmen trägt bereits diesen Namen.",
+    "companyContacts": "Verknüpfte Kontakte und Deals",
+    "openLinkedDeal": "Deal öffnen",
+    "linkContact": "Zu verknüpfender Kontakt",
+    "linkContactAction": "Kontakt verknüpfen",
+    "noCompanyContacts": "Noch keine verknüpften Kontakte"
   }
 }

@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "LegacyglobalprefixandcounterloadedintoCH",
+    "AE startswithindependentseries",
+    "AE selectedreservationandnextcounterretained",
+    "CH legacyseriesunchangedbyAE",
+    "CH reservesownnumberandpreservesAEcounter",
+    "Countercannotmovebackwards",
+    "InvalidsavekeepsAEcounter",
+    "Auditincludesstaffandlegalentity",
+    "Originalsceneinvoicesunchanged",
+    "Bothsequencespersistafterreload",
+    "ReloadselectshowssavedAEprefixcounter",
+    "No desktopoverflow",
+    "Noaxecriticalviolations",
+    "Sharedfrozenclock unchanged"
+  ],
+  "captures": [
+    "entity-series-en-light-1440.png"
+  ],
+  "scope": "Local per-entity invoice-series UI; originalglobalseries migratestoCH, invoice/clockunchanged",
+  "completed": true
+}

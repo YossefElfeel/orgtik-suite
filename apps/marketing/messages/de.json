@@ -2017,6 +2017,23 @@
     "campaignId": "Kampagnenreferenz",
     "crmConnectedNote": "Die Demo teilt diese zugeordneten Leads mit Sales in diesem Arbeitsbereich. OrgTik-WM-Formularleads erscheinen mit Seiten- und Kampagnenreferenz; alle Daten sind simuliert.",
     "presentationWorkspace": "Demo-Arbeitsbereich",
-    "emptyWorkspaceLabel": "Neuer Arbeitsbereich"
+    "emptyWorkspaceLabel": "Neuer Arbeitsbereich",
+    "brand": "Markenprofil",
+    "brandNote": "Stimme, Zielgruppe und Nutzenversprechen dieses Arbeitsbereichs festlegen. Der Demo-Assistent nutzt sie im Entwurf; diese Browsersitzung speichert sie.",
+    "brandVoice": "Markenstimme",
+    "brandAudience": "Zielgruppe",
+    "brandProposition": "Nutzenversprechen",
+    "formal": "Formell",
+    "saveBrand": "Markenprofil speichern",
+    "brandSaved": "Markenprofil in dieser Arbeitsbereichsszene gespeichert.",
+    "journeyBuilderNote": "Bis zu zehn Schritte einschließlich Einwilligungs-Einstieg konfigurieren. Hinzufügen, ändern, umordnen oder entfernen; Probeläufe folgen exakt der Reihenfolge. Warten und Zustellung bleiben simuliert.",
+    "stepType": "Schritttyp",
+    "step_email": "Demo-E-Mail",
+    "step_wait": "Wartevorschau",
+    "step_task": "Folgevorschau",
+    "moveEarlier": "Früher",
+    "moveLater": "Später",
+    "removeStep": "Schritt entfernen",
+    "addJourneyStep": "Schritt hinzufügen"
   }
 }

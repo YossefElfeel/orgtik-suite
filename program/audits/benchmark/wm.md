@@ -1,5 +1,12 @@
 # Website Manager: feature benchmark against Webflow CMS and Storyblok
 
+> Latest presentation overlay — 2026-10-08; A33/A34. Validated merge baseline `eebc85d` through PR37; closure extensions await integration.
+>
+> Existing actual mock CMS publish/website reload/fallback retained; studio media/variants/translation/bundles and connected OrgTik lead attribution simulated. Studio bundle state does not itself publish actual website content.
+>
+> UI/mock package coverage is separate from the historical benchmark below. No competitive rating or score was recalculated. Backend, hosted and external capabilities remain pending/deferred. Evidence: program/audits/prototype-business-closure/business-report.json; program/audits/wm-studio/README.md; program/audits/cms-publishing/README.md; `program/prototype-journeys.md`.
+
+
 Scope: the internal CMS for OrgTik's own website (`apps/website/landing-directions`). Read on 2026-10-07 from the code (`apps/wm`) and the mock (`mock/apps/wm.js`, `mock/apps/wm/*`), with the audit records in `program/audits/wm/`. Paths without a prefix are under `apps/wm/`. The references (Webflow CMS, Storyblok) are described from their public feature sets, in our own words.
 
 **Summary**

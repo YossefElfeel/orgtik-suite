@@ -1,0 +1,31 @@
+{
+  "id": "J2",
+  "scenario": "J2-core-retained-52992",
+  "completed": true,
+  "scope": "Actual retained invitation/account acceptance/member Tasks UI path in the isolated memory demonstration sandbox",
+  "provenance": {
+    "runner": ".qa/prototype-journeys-retained.cjs",
+    "selection": "JOURNEY_IDS=J2",
+    "successfulToolSession": 52992,
+    "recordedDate": "2026-10-08",
+    "consolidation": "This dedicated report preserves the successful six-step browser result after subsequent J10 runs overwrote the common report file. No new assertion or rerun is claimed.",
+    "revisionBoundary": "Local closure work; validated merge baseline eebc85d through PR37. This does not assert an exact merged closure revision.",
+    "fixtureBoundary": "Fresh disposable owner/member/workspace; its UUID was not retained in the overwritten common report. No production/shared workspace was used."
+  },
+  "steps": [
+    { "name": "Owner creates invitation through Team UI", "pass": true },
+    { "name": "Team UI exposes current invitation delivery link", "pass": true },
+    { "name": "Invitation acceptance UI opens", "pass": true },
+    { "name": "Member accepts invitation through account form", "pass": true },
+    { "name": "Member opens accepted workspace", "pass": true },
+    { "name": "Assigned member enters Tasks Dashboard through launcher", "pass": true }
+  ],
+  "clockMutation": false,
+  "businessDataReset": false,
+  "clockUnchanged": true,
+  "limits": [
+    "Six meaningful UI steps, not six independent end-to-end journeys.",
+    "Concurrent last-seat, cancellation/expiry/replay and production session guarantees retain earlier foundation evidence and remain outside this bounded UI acceptance.",
+    "External invitation email and hosted acceptance remain deferred. Backend/session authority was not changed."
+  ]
+}

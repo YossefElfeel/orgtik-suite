@@ -1,5 +1,12 @@
 # Tasks: feature benchmark (vs Asana, Linear, ClickUp)
 
+> Latest presentation overlay — 2026-10-08; A33/A34. Validated merge baseline `eebc85d` through PR37; closure extensions await integration.
+>
+> Working mock task filters/edit/recurrence/watchers/labels/CSV/bulk, three presets and save-as-template; connected Files/search/notice flows. Template11 scoped checks; priority/due filters, editing and bulk status/priority have accepted22-check/eight-capture UI evidence.
+>
+> UI/mock package coverage is separate from the historical benchmark below. No competitive rating or score was recalculated. Backend, hosted and external capabilities remain pending/deferred. Evidence: program/audits/prototype-final/tool-report.json; program/audits/prototype-final/README.md; program/audits/tasks-presentation/README.md; `program/prototype-journeys.md`.
+
+
 Read from the code and the mock on 2026-10-07: `apps/tasks`, `mock/apps/tasks.js` and `mock/apps/tasks/*`, plus the wave records in `program/audits/tasks/`. Nothing was run. In the evidence column, `[d]` is `apps/tasks/app/[locale]/(dashboard)`.
 
 **Summary**

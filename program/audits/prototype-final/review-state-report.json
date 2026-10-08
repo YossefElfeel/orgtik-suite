@@ -1,0 +1,9 @@
+{
+  "checks": [
+    "Otherworkspace excludes savedtemplate",
+    "Originalworkspace retains savedtemplate",
+    "Reload excludes leftchannel fromsidebar",
+    "Reload selects valid joinedchannel"
+  ],
+  "completed": true
+}

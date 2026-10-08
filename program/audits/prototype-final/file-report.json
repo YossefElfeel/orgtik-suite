@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "Latest revision advances to3",
+    "Older packaged revision retained",
+    "Message retainsv2preview afterv3",
+    "Historical sample bytes available",
+    "Historical sample bytes match packaged asset exactly"
+  ],
+  "completed": true,
+  "sha256": "68d7da19b9e8ab06758858c866da59220acfe41354fd4d787d34e213cc874748"
+}

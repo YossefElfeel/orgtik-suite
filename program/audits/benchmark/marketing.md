@@ -1,5 +1,12 @@
 # Marketing benchmark: OrgTik Marketing vs HubSpot Marketing, Mailchimp and Buffer
 
+> Latest presentation overlay — 2026-10-08; A33/A34. Validated merge baseline `eebc85d` through PR37; closure extensions await integration.
+>
+> Campaign consent/delivery/CRM attribution, WM landing-to-Sales loop, rich RTL email/export, simulated social inbox and queue. Journey editor/brand-kit draft source has accepted focused UI evidence: 80 scoped checks and23 captures, including functional paths, locale/theme/width and digit-format checks shared with Sales depth.
+>
+> UI/mock package coverage is separate from the historical benchmark below. No competitive rating or score was recalculated. Backend, hosted and external capabilities remain pending/deferred. Evidence: program/audits/prototype-business-closure/business-report.json; program/audits/marketing-presentation/README.md; program/audits/prototype-final/feature-detail-report.json; `program/prototype-journeys.md`.
+
+
 Date: 2026-10-07. Read from code and mock, not from screen names. Scope: `apps/marketing`. Site pages and forms live in Website Manager (`apps/wm`); they are counted only where Marketing should link to them.
 
 **Summary**
