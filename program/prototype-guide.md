@@ -2,11 +2,13 @@
 
 Nine tools and all72 approved UI commitments are mapped under [D-073](decisions/D-073.md). The fifteen walkthroughs now have local presentation coverage with explicit limits. This is a senior UI/UX reference for the PM and developers; backend/hosted release acceptance remains pending. Payments, mail, AI, analytics, signatures and calls are labelled simulations.
 
-Validated merge baseline: `eebc85d` through PR37 (2026-10-08). Current closure extensions have local evidence and still require integration CI. The maintained amendments A33/A34 record this boundary; this guide does not imply all changes are already on main.
+Validated merge baseline: `0337413` through PR38 (2026-10-08). Final implementation PR38 passed CI and merged. The maintained amendments A33/A34 record this boundary; this guide does not imply all changes are already on main.
 
 ## Run and present
 
-Run `pnpm demo --list` for addresses, then `pnpm demo <tools>` for an isolated memory-backed, fixed-clock dataset. SOS starts with the selected tools; use existing synthetic accounts from `mock/README.md` in a private browser window. No passwords are reproduced here. Existing configured resources and user previews are preserved. Vercel stays paused until a direct deployment instruction.
+The runnable checkout for this delivery is `C:/Users/yosse/Projects/New sass/orgtik-suite-r2-whiteboards`. The separately maintained `orgtik-suite-v2/program` documents mirror this handoff; its older runtime WIP is preserved.
+
+From the runnable checkout, run `pnpm demo --list` for addresses, then `pnpm demo <tools>` for an isolated memory-backed, fixed-clock dataset. SOS starts with the selected tools; use existing synthetic accounts from `mock/README.md` in a private browser window. No passwords are reproduced here. Existing configured resources and user previews are preserved. Vercel stays paused until a direct deployment instruction.
 
 The shared Demo Panel switches presentation persona/workspace, six states, language, theme, digits and timezone. Persona changes are visual simulations, not account impersonation. Reset scene resets selectors; tool reset restores only its presentation records. Never reset existing shared/production business data or advance its clock for a demonstration.
 
@@ -36,8 +38,8 @@ J3 lifecycle and J12 customer view are expressly simulated UI flows. J11 reuses 
 
 The feature map specifies each record/action shape and future backend requirement. Existing handoff/refresh/workspace APIs are reused; frontend cold-entry warm-ups avoid issuing short-lived codes before target compilation. The mock transport does not establish production persistence, authorization, delivery, concurrency or regulatory guarantees.
 
-## Remaining acceptance
+## Deferred acceptance
 
-Focused Sales company and Marketing journey/brand-kit golden UI evidence passes 80 scoped checks and23 captures, including functional paths, locale/theme/width and digit-format checks; its real backend/provider behavior remains pending. Final code integration/CI and closure review remain required. Tasks priority/due filtering, editing and bulk status/priority now have22 scoped checks/eight captures. Hosted acceptance, live media/payment/mail/AI/analytics/social/signature providers, arbitrary binary uploads, regulatory submissions and public Arabic website launch remain deferred. Security/backend hardening is outside this prototype task.
+Focused Sales company and Marketing journey/brand-kit golden UI evidence passes 80 scoped checks and23 captures, including functional paths, locale/theme/width and digit-format checks; its real backend/provider behavior remains pending. Final code integration/CI and independent closure review passed in PR38; [A34](phase-f/amendment-A34.md) records local UI/mock delivery closure. Tasks priority/due filtering, editing and bulk status/priority now have22 scoped checks/eight captures. Hosted acceptance, live media/payment/mail/AI/analytics/social/signature providers, arbitrary binary uploads, regulatory submissions and public Arabic website launch remain deferred. Security/backend hardening is outside this prototype task.
 
 Evidence: [final core/tools/catalog/entity](audits/prototype-final/README.md), [business/public/lifecycle](audits/prototype-business-closure/README.md), [shared Account/customer preview](audits/prototype-shared-account/README.md). Original benchmark ratings and spec statuses remain historical; the new presentation columns/overlays track UI coverage separately.

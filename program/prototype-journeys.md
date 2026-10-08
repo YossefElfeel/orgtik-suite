@@ -8,7 +8,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## Latest local coverage — 2026-10-08
 
-Validated merge baseline `eebc85d` through PR37. Current local closure extensions still require integration CI. All15 journeys are covered at the presentation layer; hosted/provider/regulatory acceptance remains deferred. J11 reuses unchanged-source CMS evidence; J12 uses the approved simulated customer preview.
+Validated merge baseline `0337413` through PR38. Final implementation PR38 passed CI and merged. All15 journeys are covered at the presentation layer; hosted/provider/regulatory acceptance remains deferred. J11 reuses unchanged-source CMS evidence; J12 uses the approved simulated customer preview.
 
 | Journey | Scoped evidence | Accepted UI boundary | Report |
 |---|---|---|---|
