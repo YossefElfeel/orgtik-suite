@@ -58,3 +58,4 @@ export {
 } from "./board/Board.js";
 export { UsageMeter, AuditLogTable, TwoFactorScreens, type AuditEntry } from "./prototype/Account.js";
 export { PdfPreview } from "./prototype/PdfPreview.js";
+export { demoRuntime, demoRequest, type DemoRuntime, type DemoSearchItem, type DemoBridgeTask, type DemoBridgeLead } from "./demo/connections.js";

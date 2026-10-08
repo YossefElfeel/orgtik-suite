@@ -9,7 +9,7 @@ export type LinkComponent = ComponentType<{ href: string; className?: string; ch
 
 const PlainLink: LinkComponent = (props) => <a {...props} />;
 
-type OrgtikContext = { locale: Locale; dir: "ltr" | "rtl"; digits: Digits; t: Translate; Link: LinkComponent };
+type OrgtikContext = { locale: Locale; dir: "ltr" | "rtl"; digits: Digits; t: Translate; Link: LinkComponent; presentationTimeZone?: string };
 
 const Context = createContext<OrgtikContext>({ locale: "en", dir: "ltr", digits: "latn", t: createTranslator("en"), Link: PlainLink });
 
@@ -49,17 +49,23 @@ export const useOrgtik = () => useContext(Context);
 
 /** The library's translate function for the current language. */
 export const useStrings = () => useContext(Context).t;
+/** Formatting override for isolated presentation scenes, preserving the app's words and links. */
+export function PresentationFormatting({ digits, timeZone, children }: { digits: Digits; timeZone: string; children: ReactNode }) {
+  const outer = useContext(Context);
+  const value = useMemo(() => ({ ...outer, digits: outer.locale === "ar" ? digits : "latn" as Digits, presentationTimeZone: timeZone }), [outer, digits, timeZone]);
+  return <Context.Provider value={value}>{children}</Context.Provider>;
+}
 
 /** Number, money, percent and date formatting in the current language and digits. */
 export function useFormatter() {
-  const { locale, digits } = useOrgtik();
+  const { locale, digits, presentationTimeZone } = useOrgtik();
   return useMemo(() => {
     const tag = formatLocale(locale, digits);
     return {
       number: (n: number, options?: Intl.NumberFormatOptions) => new Intl.NumberFormat(tag, options).format(n),
       money: (amount: number, currency: string) => new Intl.NumberFormat(tag, { style: "currency", currency }).format(amount),
       percent: (ratio: number, maximumFractionDigits = 0) => new Intl.NumberFormat(tag, { style: "percent", maximumFractionDigits }).format(ratio),
-      date: (d: Date | string | number, options: Intl.DateTimeFormatOptions = { dateStyle: "medium" }) => new Intl.DateTimeFormat(tag, options).format(new Date(d)),
+      date: (d: Date | string | number, options: Intl.DateTimeFormatOptions = { dateStyle: "medium" }) => new Intl.DateTimeFormat(tag, { ...options, timeZone: options.timeZone ?? presentationTimeZone }).format(new Date(d)),
       /** File sizes with the language's own unit words ("438 kB", "438 كيلوبايت"), so bidi can't reorder them. */
       bytes: (n: number) => {
         const units = ["byte", "kilobyte", "megabyte", "gigabyte", "terabyte"] as const;
@@ -72,5 +78,5 @@ export function useFormatter() {
         return new Intl.NumberFormat(tag, { style: "unit", unit: units[i], unitDisplay: "short", maximumFractionDigits: v < 10 && i > 0 ? 1 : 0 }).format(v);
       },
     };
-  }, [locale, digits]);
+  }, [locale, digits, presentationTimeZone]);
 }

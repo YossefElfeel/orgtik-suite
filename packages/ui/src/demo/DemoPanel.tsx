@@ -13,32 +13,42 @@ import { SegmentedControl } from "../components/Choice.js";
 import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from "../components/Popover.js";
 import { EmptyState, ErrorState, LoadingState, NoPermissionState } from "../components/States.js";
 import { DEMO_STRINGS, type DemoStringKey } from "./strings.js";
+import type { DemoRuntime } from "./connections.js";
+import { PresentationFormatting } from "../provider/OrgtikProvider.js";
+import type { Digits } from "../locale.js";
 
 export const DEMO_PERSONAS = ["current", "mona", "nour", "rana", "omar", "salma", "hoda", "hany"] as const;
 export const DEMO_WORKSPACES = ["current", "orgtik", "nile", "spree", "desert", "new"] as const;
 export const DEMO_STATES = ["normal", "loading", "empty", "error", "noAccess", "readOnly", "success"] as const;
 export const DEMO_SCENARIOS = ["none", "renewal", "grace", "overdue"] as const;
 export type DemoScene = { persona: typeof DEMO_PERSONAS[number]; workspace: typeof DEMO_WORKSPACES[number]; state: typeof DEMO_STATES[number]; scenario: typeof DEMO_SCENARIOS[number] };
-export type DemoOptions = { enabled: boolean; appKey: string; onLocaleChange?: (locale: Locale) => void };
+export type DemoOptions = { enabled: boolean; appKey: string; onLocaleChange?: (locale: Locale) => void; runtime?: DemoRuntime };
+export type DemoPreferences = { digits: Digits; timeZone: string };
 const initial: DemoScene = { persona: "current", workspace: "current", state: "normal", scenario: "none" };
-type DemoContextValue = { enabled: boolean; scene: DemoScene; update: (patch: Partial<DemoScene>) => void; reset: () => void; open: boolean; setOpen: (open: boolean) => void; onLocaleChange?: (locale: Locale) => void };
-const Context = createContext<DemoContextValue>({ enabled: false, scene: initial, update: () => {}, reset: () => {}, open: false, setOpen: () => {} });
+type DemoContextValue = { enabled: boolean; appKey: string; runtime?: DemoRuntime; preferences: DemoPreferences; updatePreferences: (patch: Partial<DemoPreferences>) => void; scene: DemoScene; update: (patch: Partial<DemoScene>) => void; reset: () => void; open: boolean; setOpen: (open: boolean) => void; onLocaleChange?: (locale: Locale) => void };
+const defaults: DemoPreferences = { digits: "latn", timeZone: "Africa/Cairo" };
+const Context = createContext<DemoContextValue>({ enabled: false, appKey: "suite", preferences: defaults, updatePreferences: () => {}, scene: initial, update: () => {}, reset: () => {}, open: false, setOpen: () => {} });
 export const useDemoScene = () => useContext(Context);
 const useWords = () => { const { locale } = useOrgtik(); return (key: DemoStringKey) => DEMO_STRINGS[locale][key]; };
 
 export function DemoProvider({ options, children }: { options?: DemoOptions; children: ReactNode }) {
+  const { locale: currentLocale } = useOrgtik();
   const [scene, setScene] = useState<DemoScene>(initial), [open, setOpen] = useState(false);
+  const [preferences, setPreferences] = useState<DemoPreferences>(defaults);
+  const [, setTheme] = useTheme();
   const key = "orgtik:demo-scene:" + (options?.appKey || "suite");
   useEffect(() => {
     if (!options?.enabled) return;
-    try { const saved = JSON.parse(sessionStorage.getItem(key) || "null"); if (saved && DEMO_PERSONAS.includes(saved.persona) && DEMO_WORKSPACES.includes(saved.workspace) && DEMO_STATES.includes(saved.state) && DEMO_SCENARIOS.includes(saved.scenario)) setScene(saved); } catch {}
+    try { const carrier = new URLSearchParams(window.location.search).get("demoScene"), incoming = carrier ? JSON.parse(carrier) : null; const saved = incoming?.scene ?? JSON.parse(sessionStorage.getItem(key) || "null"); if (saved && DEMO_PERSONAS.includes(saved.persona) && DEMO_WORKSPACES.includes(saved.workspace) && DEMO_STATES.includes(saved.state) && DEMO_SCENARIOS.includes(saved.scenario)) { setScene(saved); sessionStorage.setItem(key, JSON.stringify(saved)); } const prefs = incoming?.preferences ?? JSON.parse(sessionStorage.getItem(key + ":preferences") || "null"); if (prefs && ["latn", "arab"].includes(prefs.digits) && ["Africa/Cairo", "Europe/Zurich", "Asia/Dubai", "UTC"].includes(prefs.timeZone)) { setPreferences(prefs); sessionStorage.setItem(key + ":preferences", JSON.stringify(prefs)); } if (incoming?.theme === "light" || incoming?.theme === "dark") setTheme(incoming.theme); if (incoming?.locale !== currentLocale && ["en", "ar", "de", "fr", "it"].includes(incoming?.locale)) options?.onLocaleChange?.(incoming.locale); } catch {}
   }, [key, options?.enabled]);
   const update = (patch: Partial<DemoScene>) => setScene(current => { const next = { ...current, ...patch }; try { sessionStorage.setItem(key, JSON.stringify(next)); } catch {} return next; });
   const reset = () => { setScene(initial); try { sessionStorage.removeItem(key); } catch {} };
-  return <Context.Provider value={{ enabled: Boolean(options?.enabled), scene, update, reset, open, setOpen, onLocaleChange: options?.onLocaleChange }}>{children}</Context.Provider>;
+  const updatePreferences = (patch: Partial<DemoPreferences>) => setPreferences(before => { const next = { ...before, ...patch }; try { sessionStorage.setItem(key + ":preferences", JSON.stringify(next)); } catch {} return next; });
+  const content = options?.enabled ? <PresentationFormatting digits={preferences.digits} timeZone={preferences.timeZone}>{children}</PresentationFormatting> : children;
+  return <Context.Provider value={{ enabled: Boolean(options?.enabled), appKey: options?.appKey ?? "suite", runtime: options?.runtime, preferences, updatePreferences, scene, update, reset, open, setOpen, onLocaleChange: options?.onLocaleChange }}>{content}</Context.Provider>;
 }
 
-export function SimulatedTag() { const t = useWords(); return <Badge tone="info" size="sm">{t("simulated")}</Badge>; }
+export function SimulatedTag() { const t = useWords(); return <Badge tone="info" size="sm" className="w-fit">{t("simulated")}</Badge>; }
 
 export function DemoPanel() {
   const demo = useDemoScene(), t = useWords(), { locale } = useOrgtik(), [theme, setTheme] = useTheme();
@@ -59,6 +69,8 @@ export function DemoPanel() {
         </div>
       </div>
       <p className="text-caption text-fg-muted">{t("previewNote")}</p>
+      <Field label={t("digits")}><Select value={demo.preferences.digits} onValueChange={value => value && demo.updatePreferences({ digits: value as Digits })} options={[{ value: "latn", label: t("latinDigits") }, { value: "arab", label: t("arabicDigits") }]} /></Field>
+      <Field label={t("timeZone")}><Select value={demo.preferences.timeZone} onValueChange={value => value && demo.updatePreferences({ timeZone: value })} options={["Africa/Cairo", "Europe/Zurich", "Asia/Dubai", "UTC"].map(value => ({ value, label: value }))} /></Field>
       <Button variant="secondary" startIcon={<ArrowCounterClockwise />} onClick={demo.reset}>{t("reset")}</Button>
     </PopoverContent>
   </Popover>;

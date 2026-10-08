@@ -1273,5 +1273,6 @@
   "presentation.title": "Chats-Rundgang",
   "presentation.tomorrow": "Morgen · 09:00",
   "presentation.unmute": "Testmikrofon aktivieren",
-  "presentation.unsave": "Nicht mehr speichern"
+  "presentation.unsave": "Nicht mehr speichern",
+  "presentation.connectionError": "Demoverbindung nicht verfügbar. Erneut versuchen."
 }

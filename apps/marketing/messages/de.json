@@ -2001,6 +2001,7 @@
     "unsubscribed": "Demokontakt abgemeldet; nächster Versand überspringt ihn.",
     "postTitle": "Beitragstitel",
     "addPost": "Entwurfsbeitrag hinzufügen",
-    "postOpened": "{name} ausgewählt; Zeitplan unten bearbeiten."
+    "postOpened": "{name} ausgewählt; Zeitplan unten bearbeiten.",
+    "connectionError": "Demoverbindung nicht verfügbar. Erneut versuchen."
   }
 }

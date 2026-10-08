@@ -11,6 +11,7 @@ import { Avatar } from "../components/Display.js";
 import { Menu, MenuContent, MenuGroup, MenuItem, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from "../components/Menu.js";
 import { Logo } from "./Logo.js";
 import { DemoProvider, DemoPanel, DemoSceneBanner, DemoStateView, type DemoOptions } from "../demo/DemoPanel.js";
+import { SuiteConnections } from "../demo/SuiteConnections.js";
 
 // The rail (suite apps) and sidebar (this app's pages) sit at the reading start: on the left in
 // LTR, on the right in RTL. Both are plain CSS grid columns, so they follow `dir` by themselves.
@@ -246,7 +247,7 @@ function SuiteShellView({ rail, sidebar, topBar, banner, children }: SuiteShellP
         </BaseDialog.Portal>
       </BaseDialog.Root>
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-        <TopBar start={topBar?.start} end={<>{topBar?.end}<DemoPanel /></>} onOpenNavigation={() => setOpen(true)} />
+        <TopBar start={topBar?.start} end={<>{topBar?.end}<SuiteConnections /><DemoPanel /></>} onOpenNavigation={() => setOpen(true)} />
         {banner}
         <DemoSceneBanner />
         {/* The page scrolls here, so the keyboard must be able to reach it even when it holds no

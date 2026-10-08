@@ -2001,6 +2001,7 @@
     "unsubscribed": "Demo contact opted out; next email delivery will skip it.",
     "postTitle": "Post title",
     "addPost": "Add draft post",
-    "postOpened": "Selected {name}; edit its schedule below."
+    "postOpened": "Selected {name}; edit its schedule below.",
+    "connectionError": "The presentation connection is unavailable. Try again."
   }
 }

@@ -37,6 +37,10 @@ From the repository root, run `pnpm demo`. It starts SOS at `http://localhost:35
 
 ## Developer handoff
 
+Connected presentation runtime: `pnpm demo tasks,chats,sales,marketing` starts a separate synthetic-record service alongside the unchanged mock backend. In Chats, create a task from a message; `Ctrl+K` finds it and opens the exact task in Tasks through the existing handoff. In Marketing, create campaign CRM leads; suite search opens their exact Sales presentation detail. Notification links carry the same scene. This runtime stores only mock connection records; existing backend accounts/invoices/content are separate.
+
+Presentation workspace/persona, locale, theme, digits and timezone travel as landing metadata. Demo controls expose digits/timezone choices. A tool’s actual access is still decided by its existing session. These first connections are locally verified; other connectors and all15 final journeys remain open.
+
 Account presentation uses client state plus shared `UsageMeter`, `AuditLogTable` and `TwoFactorScreens`. Demonstrate onboarding completion → Activity history → search, then Verification demo → Start setup → enter the displayed fixed code → sample recovery download. The exported JSON is tagged `prototype` and `simulated`; it is not a regulatory data export. Existing team, ownership, billing and invoice screens retain their own working mock flows.
 
 Tasks uses `PresentationTask {id,title,status,owner,label,due,recurrence,watchers,reminder}` in `apps/tasks/lib/presentation-tasks.ts`. The adapter is client memory; this increment adds no HTTP endpoint. Changes disappear on reload or workspace scene switch. Existing Tasks API data remains separate.

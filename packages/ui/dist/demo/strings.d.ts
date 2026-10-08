@@ -1,5 +1,9 @@
 import type { Locale } from "../locale.js";
 declare const copy: {
+    digits: [string, string, string, string, string];
+    latinDigits: [string, string, string, string, string];
+    arabicDigits: [string, string, string, string, string];
+    timeZone: [string, string, string, string, string];
     title: [string, string, string, string, string];
     body: [string, string, string, string, string];
     prototype: [string, string, string, string, string];

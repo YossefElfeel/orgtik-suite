@@ -42,7 +42,7 @@ const ICONS: Record<string, JSX.Element> = {
  */
 export function buildScopeHref(scope: Scope, token: string | null, locale: string): string {
   if (!token) return scope.domain;
-  return `${scope.domain}/${locale}/auth?token=${encodeURIComponent(token)}`;
+  return `${SOS_URL}/go/${encodeURIComponent(scope.name)}`;
 }
 
 let cache: { token: string; scopes: Scope[] } | null = null;

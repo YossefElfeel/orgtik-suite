@@ -1,14 +1,16 @@
 "use client";
+import { demoRuntime } from "@orgtik/ui";
 
 import { useEffect, useState } from "react";
 import { ChatsCircle, Hash, BookmarkSimple, Clock, CheckSquareOffset, Paperclip, VideoCamera, TextB, Plus, ArrowCounterClockwise, PaperPlaneTilt, Microphone, MicrophoneSlash } from "@phosphor-icons/react";
 import { AppRail, Badge, Button, Dialog, DialogBody, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, EmptyState, Field, Input, Sidebar, SimulatedTag, SuiteShell, Textarea, useDemoScene } from "@orgtik/ui";
 import { useI18n } from "@/lib/i18n";
 import { personaNames, sceneKey, seedScene, workspaceNames, type ChatScene, type DemoMessage } from "./scene";
+import { demoRequest, type DemoBridgeTask } from "@orgtik/ui";
 
 export function ChatsPresentation() {
   const { t, setLocale } = useI18n();
-  return <SuiteShell demo={{ enabled: true, appKey: "chats", onLocaleChange: setLocale }} rail={<AppRail current="chats" homeHref="/presentation" apps={[{ id: "chats", label: t("nav.chat", "Chat"), href: "/presentation", icon: <ChatsCircle /> }]} />} sidebar={<Sidebar title={t("nav.chat", "Chat")} sections={[{ items: [{ label: t("presentation.title", "Chats walkthrough"), href: "/presentation", active: true, icon: <ChatsCircle /> }, { label: t("nav.office", "Office"), href: "/hq/office", icon: <VideoCamera /> }, { label: t("nav.boards", "Whiteboard"), href: "/hq/whiteboard", icon: <CheckSquareOffset /> }] }]} />} topBar={{ start: <span className="font-semibold">{t("presentation.title", "Chats walkthrough")}</span> }}><PresentationContent /></SuiteShell>;
+  return <SuiteShell demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: true, appKey: "chats", onLocaleChange: setLocale }} rail={<AppRail current="chats" homeHref="/presentation" apps={[{ id: "chats", label: t("nav.chat", "Chat"), href: "/presentation", icon: <ChatsCircle /> }]} />} sidebar={<Sidebar title={t("nav.chat", "Chat")} sections={[{ items: [{ label: t("presentation.title", "Chats walkthrough"), href: "/presentation", active: true, icon: <ChatsCircle /> }, { label: t("nav.office", "Office"), href: "/hq/office", icon: <VideoCamera /> }, { label: t("nav.boards", "Whiteboard"), href: "/hq/whiteboard", icon: <CheckSquareOffset /> }] }]} />} topBar={{ start: <span className="font-semibold">{t("presentation.title", "Chats walkthrough")}</span> }}><PresentationContent /></SuiteShell>;
 }
 
 function PresentationContent() {
@@ -19,6 +21,7 @@ function PresentationContent() {
 }
 
 function WorkspaceConversation({ workspace, author }: { workspace: string; author: string }) {
+  const bridge = useDemoScene();
   const { t } = useI18n();
   const [data, setData] = useState<ChatScene>(() => seedScene(workspace));
   const [loaded, setLoaded] = useState(false), [active, setActive] = useState("launch-review"), [filter, setFilter] = useState("all");
@@ -26,6 +29,7 @@ function WorkspaceConversation({ workspace, author }: { workspace: string; autho
   const [picker, setPicker] = useState(false), [call, setCall] = useState(false), [muted, setMuted] = useState(false);
   const [creating, setCreating] = useState(false), [channelName, setChannelName] = useState("");
   const [notice, setNotice] = useState("");
+  const [creatingTask, setCreatingTask] = useState<string|null>(null);
   useEffect(() => { try { const raw = sessionStorage.getItem(sceneKey(workspace)); if (raw) { const saved = JSON.parse(raw); if (Array.isArray(saved.channels) && Array.isArray(saved.messages) && Array.isArray(saved.read)) setData(saved); } } catch {} setLoaded(true); }, [workspace]);
   useEffect(() => { if (loaded) { try { sessionStorage.setItem(sceneKey(workspace), JSON.stringify(data)); } catch {} } }, [data, loaded, workspace]);
   const changeMessage = (id: string, patch: Partial<DemoMessage>) => setData(current => ({ ...current, messages: current.messages.map(message => message.id === id ? { ...message, ...patch } : message) }));
@@ -66,7 +70,7 @@ function WorkspaceConversation({ workspace, author }: { workspace: string; autho
             <div className="mt-3 flex flex-wrap gap-1">
               <Button size="sm" variant="ghost" startIcon={<BookmarkSimple weight={message.saved ? "fill" : "regular"} />} onClick={() => changeMessage(message.id, { saved: !message.saved })}>{message.saved ? t("presentation.unsave", "Unsave") : t("presentation.save", "Save")}</Button>
               <Button size="sm" variant="ghost" startIcon={<Clock />} disabled={Boolean(message.reminder)} onClick={() => { changeMessage(message.id, { reminder: true }); setNotice(t("presentation.reminderNotice", "Reminder set for tomorrow at 09:00. Notification delivery is simulated.")); }}>{message.reminder ? t("presentation.reminderSet", "Reminder set") : t("presentation.remind", "Remind me")}</Button>
-              <Button size="sm" variant="ghost" startIcon={<CheckSquareOffset />} disabled={Boolean(message.task)} onClick={() => { changeMessage(message.id, { task: `TASK-${data.messages.indexOf(message) + 101}` }); setNotice(t("presentation.taskNotice", "A mock task was created from this message. Backend linking is pending.")); }}>{message.task ? <bdi>{message.task}</bdi> : t("presentation.task", "Create task")}</Button>
+              <Button size="sm" variant="ghost" startIcon={<CheckSquareOffset />} disabled={Boolean(message.task) || creatingTask === message.id} onClick={async () => { setCreatingTask(message.id); try { const task = bridge.runtime ? await demoRequest<DemoBridgeTask>(bridge.runtime, bridge.scene, "/tasks", { title: message.body || "Message follow-up", owner: author, sourceApp: "chats" }) : { id: `TASK-${data.messages.indexOf(message) + 101}` }; changeMessage(message.id, { task: task.id }); setNotice(t("presentation.taskNotice", "A mock task was created from this message. Backend linking is pending.")); } catch { setNotice(t("presentation.connectionError", "The presentation connection is unavailable. Try again.")); } finally { setCreatingTask(null); } }}>{message.task ? <bdi>{message.task}</bdi> : t("presentation.task", "Create task")}</Button>
               {message.scheduled && <><Button size="sm" variant="secondary" onClick={() => changeMessage(message.id, { scheduled: false })}>{t("presentation.sendNow", "Send now")}</Button><Button size="sm" variant="ghost" onClick={() => setData(current => ({ ...current, messages: current.messages.filter(item => item.id !== message.id) }))}>{t("presentation.cancel", "Cancel")}</Button></>}
             </div>
           </article>)}

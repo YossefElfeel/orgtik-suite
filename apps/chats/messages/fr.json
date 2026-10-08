@@ -1273,5 +1273,6 @@
   "presentation.title": "Parcours Chats",
   "presentation.tomorrow": "Demain · 09:00",
   "presentation.unmute": "Activer le microphone simulé",
-  "presentation.unsave": "Ne plus enregistrer"
+  "presentation.unsave": "Ne plus enregistrer",
+  "presentation.connectionError": "Connexion démo indisponible. Réessayez."
 }

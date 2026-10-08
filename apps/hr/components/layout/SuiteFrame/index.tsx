@@ -1,4 +1,5 @@
 "use client";
+import { demoRuntime } from "@orgtik/ui";
 
 // HR inside the suite's frame (HR wave, FS-HR-4, HR-027): the OrgTik rail with the person's apps
 // (each opens through SOS with a one-time code), HR's sections in the library sidebar (the same
@@ -57,7 +58,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
 
   return (
     <SuiteShell
-      demo={{ enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "hr", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
+      demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "hr", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
       rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref={`${SOS_URL}/`} />}
       sidebar={<Sidebar title={ts("appName")} sections={sections} />}
       topBar={{

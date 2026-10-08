@@ -12,6 +12,7 @@ import { Avatar } from "../components/Display.js";
 import { Menu, MenuContent, MenuGroup, MenuItem, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from "../components/Menu.js";
 import { Logo } from "./Logo.js";
 import { DemoProvider, DemoPanel, DemoSceneBanner, DemoStateView } from "../demo/DemoPanel.js";
+import { SuiteConnections } from "../demo/SuiteConnections.js";
 export function AppRail({ apps, current, homeHref = "/" }) {
     const t = useStrings();
     const { Link } = useOrgtik();
@@ -51,6 +52,6 @@ function SuiteShellView({ rail, sidebar, topBar, banner, children }) {
                                 // A tap on a link navigates; close the sheet with it.
                                 if (e.target.closest("a"))
                                     setOpen(false);
-                            }, children: [rail, _jsx("div", { className: "min-w-0 flex-1", children: sidebar })] })] }) }), _jsxs("div", { className: "flex min-h-0 min-w-0 flex-1 flex-col", children: [_jsx(TopBar, { start: topBar?.start, end: _jsxs(_Fragment, { children: [topBar?.end, _jsx(DemoPanel, {})] }), onOpenNavigation: () => setOpen(true) }), banner, _jsx(DemoSceneBanner, {}), _jsx("main", { id: "ot-main", tabIndex: 0, className: "relative min-h-0 min-w-0 flex-1 overflow-y-auto outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus", children: _jsx(DemoStateView, { children: children }) })] })] }));
+                            }, children: [rail, _jsx("div", { className: "min-w-0 flex-1", children: sidebar })] })] }) }), _jsxs("div", { className: "flex min-h-0 min-w-0 flex-1 flex-col", children: [_jsx(TopBar, { start: topBar?.start, end: _jsxs(_Fragment, { children: [topBar?.end, _jsx(SuiteConnections, {}), _jsx(DemoPanel, {})] }), onOpenNavigation: () => setOpen(true) }), banner, _jsx(DemoSceneBanner, {}), _jsx("main", { id: "ot-main", tabIndex: 0, className: "relative min-h-0 min-w-0 flex-1 overflow-y-auto outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus", children: _jsx(DemoStateView, { children: children }) })] })] }));
 }
 //# sourceMappingURL=SuiteShell.js.map
