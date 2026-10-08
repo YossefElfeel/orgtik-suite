@@ -58,4 +58,8 @@ export {
 } from "./board/Board.js";
 export { UsageMeter, AuditLogTable, TwoFactorScreens, type AuditEntry } from "./prototype/Account.js";
 export { PdfPreview } from "./prototype/PdfPreview.js";
+export { ImportWizard } from "./prototype/ImportWizard.js";
+export { BulkActionBar } from "./prototype/BulkActionBar.js";
+export { MailboxPreview, type MailboxPreviewEntry } from "./prototype/MailboxPreview.js";
+export { RichTextEditor, type RichTextFormat } from "./prototype/RichTextEditor.js";
 export { demoRuntime, demoRequest, type DemoRuntime, type DemoSearchItem, type DemoBridgeTask, type DemoBridgeLead } from "./demo/connections.js";

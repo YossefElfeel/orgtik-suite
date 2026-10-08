@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "Audited action opens sameorigin selectedworkspacepreview",
+    "Staffactor andcustomerowner visible",
+    "Explicit readonlypolicy retained",
+    "Preview offers noeditablecustomermaincontrols",
+    "Returnstaffworkspace exactlink",
+    "Purchasedcapacity snapshot shown",
+    "Historicalinvoice references shown",
+    "Stafftokenstorage unchanged",
+    "Existing auditrecords actorandreason",
+    "Originalinvoice history preserved",
+    "Sharedfrozenclock unchanged",
+    "Desktop nooverflow",
+    "Noaxecriticalviolations",
+    "Returnstaffworkspace functional"
+  ],
+  "captures": [
+    "customer-preview-en-light-1440.png"
+  ],
+  "scope": "Existing auditedstaffViewas action→readonlycustomerpresentation;stafftokenunchanged;clock/invoicesunchanged",
+  "completed": true
+}

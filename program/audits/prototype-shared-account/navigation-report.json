@@ -1,0 +1,48 @@
+{
+  "errors": [],
+  "navigation": [
+    "http://localhost:4600/auth?code=[redacted]&redirect=%2F",
+    "http://localhost:4600/auth?code=[redacted]&redirect=%2F",
+    "http://localhost:4600/auth",
+    "http://localhost:4600/auth",
+    "http://localhost:4600/",
+    "http://localhost:4600/go/task_manager",
+    "http://localhost:4601/en/auth?code=[redacted]",
+    "http://localhost:4601/en/auth?code=[redacted]",
+    "http://localhost:4601/en/auth",
+    "http://localhost:4601/en/auth",
+    "http://localhost:4601/en",
+    "http://localhost:4608/en/auth?code=[redacted]&redirect=%2Fworkspaces%2Fws_signup_199676251894518",
+    "http://localhost:4608/en/auth?code=[redacted]&redirect=%2Fworkspaces%2Fws_signup_199676251894518",
+    "http://localhost:4608/en/auth",
+    "http://localhost:4608/en/auth",
+    "http://localhost:4608/en/auth",
+    "http://localhost:4608/en/workspaces/ws_signup_199676251894518"
+  ],
+  "checks": [
+    {
+      "name": "SOS launcher reaches Tasks Dashboard",
+      "url": "http://localhost:4601/en",
+      "text": "Skip to content\nHome\nTasks\nTasks\nDashboard\nMy Tasks\nNotifications\nAll Projects\nAll Teams\nPresentation workflow\n\nGood afternoon, Navigation Owner\n\nNO\nDemo controls\nPrototype · mock data\nDashboard\n\nWhere work stands across the projects you can see.\n\nOpen tasks\n0\nNo change\nvs a week ago\nCompleted tasks\n0\nNo change\nlast 30 days vs the 30 before\nAll tasks\n0\nNo change\nvs a week ago\nOverdue tasks\n0\nNo change\nvs a week ago\nOpen tasks by project\nTasks not yet done, in each project.\n\nNo projects yet\n\nTasks by status\n\nNo data for this period yet.\n\nTasks assigned per day\nThe last 30 days, against the 30 before.\nChart\nTable\nLast 30 days\nThe 30 days before\n11 Sept\n15 Sept\n19 Sept\n23 Sept\n27 Sept\n1 Oct\n4 Oct\n7 Oct\n0\n2\n4\n6\n8\nNew tasks by priority\nCreated each month, last 6 months.\nChart\nTable\nUrgent\nHigh\nMedium\nLow\nMay\nJun\nJul\nAug\nSept\nOct\n0\n10\n20\n30\n40\n10"
+    },
+    {
+      "name": "ADM requested workspace landing",
+      "url": "http://localhost:4608/en/workspaces/ws_signup_199676251894518",
+      "text": "Skip to content\nHome\nAdmin\nOrgTik Admin\nOperations presentation\nOverview\nCatalog\nTools\nPlans and features\nWaitlist\nPricing\nPrice grid\nZones and countries\nCurrencies and rates\nPricing log\nOffers and tax\nBundles\nCoupons\nTax and gateways\nCustomers\nWorkspaces\nMigrations\nCustom plans\nInvoices\nServices and support\nServices\nService requests\nSupport tickets\nWebsite\nContent\nSuggestions and roadmap\nSystem\nReports\nStaff and roles\nTemplates\nSettings\nAudit log\nYour staff roles\nSuper Admin\nMA\nDemo controls\nPrototype · mock data\nWorkspaces\nNavigation 506400bc\nNavigation 506400bc\nActive\nAdd note\nView as owner\nSummary\nCountry\nSwitzerland\nCurrency\nSwiss Franc (CHF)\nNot locked yet\nPrice zone\nEurope\nState\nActive\nSeats\n1\nMRR\nCHF 0.00 · US$0.00\nCreated\n7 Oct 2026\nSubscription lines\nTasks · Pro\nTrial\nCycle\nMonthly\nPrice\nCHF 16.00 (CHF 8.00 × 2)\nPrice snapshot from the zone price, converted, price version 1\nPeriod ends\n21 Oct 2026\nTrial ends\n21 Oct 2026\nScheduled change\nNone\nExtend trial\nGeneral · Free\nFree\nCycle\nMonthly\nPrice\nCHF 0.00\nPrice snapshot from the default USD price, price version 1\nPeriod ends\n25 Oct 2026\nScheduled change\nNone\nInvoices\nNew invoice\n\nNo invoices yet.\n\nMembers (1)\nNavigation Owner\nnav-506400bc-fc12-446d-bd4b-53637b4f0a4a@local.fixture.test\nOwner\nAll tools\nPayment methods\n\nNo payment method on file.\n\nBilling details\nLegal name\nNavigation 506400bc\nBilling email\nnav-506400bc-fc12-446d-bd4b-53637b4f0a4a@local.fixture.test\nAddress\nNot given\nTax ID\nNot given\nSupport tickets\n\nNo tickets.\n\nService requests\n\nNo service requests.\n\nStaff notes\n\nNo notes yet. Add one from the actions above.\n\nAudit trail\n\ntrial_start\n\n7 Oct 2026, 12:00 · Navigation Owner\n\nsign_up\n\n7 Oct 2026, 12:00 · Navigation Owner"
+    },
+    {
+      "name": "Failure",
+      "url": "http://localhost:4608/en/workspaces/ws_signup_199676251894518",
+      "text": "Skip to content\nHome\nAdmin\nOrgTik Admin\nOperations presentation\nOverview\nCatalog\nTools\nPlans and features\nWaitlist\nPricing\nPrice grid\nZones and countries\nCurrencies and rates\nPricing log\nOffers and tax\nBundles\nCoupons\nTax and gateways\nCustomers\nWorkspaces\nMigrations\nCustom plans\nInvoices\nServices and support\nServices\nService requests\nSupport tickets\nWebsite\nContent\nSuggestions and roadmap\nSystem\nReports\nStaff and roles\nTemplates\nSettings\nAudit log\nYour staff roles\nSuper Admin\nMA\nDemo controls\nPrototype · mock data\nWorkspaces\nNavigation 506400bc\nNavigation 506400bc\nActive\nAdd note\nView as owner\n\nThe owner's read-only view opened in a new tab.\n\nOpen it again\n(opens in a new tab)\nDismiss\nSummary\nCountry\nSwitzerland\nCurrency\nSwiss Franc (CHF)\nNot locked yet\nPrice zone\nEurope\nState\nActive\nSeats\n1\nMRR\nCHF 0.00 · US$0.00\nCreated\n7 Oct 2026\nSubscription lines\nTasks · Pro\nTrial\nCycle\nMonthly\nPrice\nCHF 16.00 (CHF 8.00 × 2)\nPrice snapshot from the zone price, converted, price version 1\nPeriod ends\n21 Oct 2026\nTrial ends\n21 Oct 2026\nScheduled change\nNone\nExtend trial\nGeneral · Free\nFree\nCycle\nMonthly\nPrice\nCHF 0.00\nPrice snapshot from the default USD price, price version 1\nPeriod ends\n25 Oct 2026\nScheduled change\nNone\nInvoices\nNew invoice\n\nNo invoices yet.\n\nMembers (1)\nNavigation Owner\nnav-506400bc-fc12-446d-bd4b-53637b4f0a4a@local.fixture.test\nOwner\nAll tools\nPayment methods\n\nNo payment method on file.\n\nBilling details\nLegal name\nNavigation 506400bc\nBilling email\nnav-506400bc-fc12-446d-bd4b-53637b4f0a4a@local.fixture.test\nAddress\nNot given\nTax ID\nNot given\nSupport tickets\n\nNo tickets.\n\nService requests\n\nNo service requests.\n\nStaff notes\n\nNo notes yet. Add one from the actions above.\n\nAudit trail\n\nViewed as the owner\n\nPrototype navigation check\n\n7 Oct 2026, 12:00 · Mona Adel\n\ntrial_start\n\n7 Oct 2026, 12:00 · Navigation Owner\n\nsign_up\n\n7 Oct 2026, 12:00 · Navigation Owner"
+    }
+  ],
+  "error": "locator.waitFor: Timeout 45000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText(/Viewing as .*read-only/i).first() to be visible\u001b[22m\n",
+  "sourceFix": "apps/sos/lib/handoff.ts warms the target auth route before issuing the existing short-lived destination code. Backend/session authority unchanged; ADM auth source unchanged.",
+  "validation": {
+    "consumerTasks": 5,
+    "typecheck": "SOS and ADM pass",
+    "navigation": "SOS launcher reaches Tasks Dashboard; ADM requested workspace detail opens",
+    "viewAsLimit": "Current ADM action opens a popup, but the expected customer read-only banner did not appear within45s; fullJ12 remains pending",
+    "catalogs": "SOS10 and ADM11 groups, five languages each pass"
+  }
+}

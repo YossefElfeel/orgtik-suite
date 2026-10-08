@@ -43,5 +43,9 @@ export { FileField } from "./components/FileField.js";
 export { Board, } from "./board/Board.js";
 export { UsageMeter, AuditLogTable, TwoFactorScreens } from "./prototype/Account.js";
 export { PdfPreview } from "./prototype/PdfPreview.js";
+export { ImportWizard } from "./prototype/ImportWizard.js";
+export { BulkActionBar } from "./prototype/BulkActionBar.js";
+export { MailboxPreview } from "./prototype/MailboxPreview.js";
+export { RichTextEditor } from "./prototype/RichTextEditor.js";
 export { demoRuntime, demoRequest } from "./demo/connections.js";
 //# sourceMappingURL=index.js.map

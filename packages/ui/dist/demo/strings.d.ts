@@ -1,5 +1,9 @@
 import type { Locale } from "../locale.js";
 declare const copy: {
+    lifecycleNote: [string, string, string, string, string];
+    simulateFailure: [string, string, string, string, string];
+    endGrace: [string, string, string, string, string];
+    simulateRecovery: [string, string, string, string, string];
     digits: [string, string, string, string, string];
     latinDigits: [string, string, string, string, string];
     arabicDigits: [string, string, string, string, string];
