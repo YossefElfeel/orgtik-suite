@@ -25,7 +25,7 @@
     "legal": "Legal",
     "roadmap": "Roadmap",
     "ideas": "Ideas",
-    "pricing": "Pricing",
+    "pricing": "Offer references",
     "library": "Library",
     "seoHealth": "SEO health",
     "redirects": "Redirects",
@@ -355,7 +355,44 @@
     "caseFormatHosting": "Runbook",
     "caseFormatMarketing": "Performance report",
     "caseFormatSupport": "Service log",
-    "caseFormats": "Case-study formats"
+    "caseFormats": "Case-study formats",
+    "partnersIntro": "Introduction and controls",
+    "partnerProfiles": "Partner profiles",
+    "partners": "Partners",
+    "partner": "Partner",
+    "partnerId": "Profile anchor ID",
+    "partnerSummary": "Profile description",
+    "partnerLogo": "Logo asset path",
+    "partnerWebsite": "Website URL",
+    "partnerVisible": "Show partner",
+    "partnerMock": "Example partner",
+    "partnerAccounts": "Social profiles (optional)",
+    "partnerAccount": "Social profile",
+    "partnerPlatform": "Platform name",
+    "partnerProfileUrl": "Profile URL",
+    "exampleWebsiteLabel": "Example website link label",
+    "exampleAccountLabel": "Example social profile label",
+    "externalLabel": "New-tab accessibility hint",
+    "offerPaymentStates": "Offer and payment messages",
+    "badge": "Example badge",
+    "linkLabel": "Directory link label",
+    "profileLabel": "Profile action label",
+    "scrollLabel": "Logo strip accessibility label",
+    "previousLabel": "Previous button label",
+    "nextLabel": "Next button label",
+    "pauseLabel": "Pause button label",
+    "playLabel": "Resume button label",
+    "websiteLabel": "Website action label",
+    "bundles": "Bundles",
+    "savings": "Savings",
+    "itemKeys": "Included item IDs",
+    "why": "Recommendation reason",
+    "recommended": "Recommended",
+    "durationSavings": "Term savings",
+    "saving": "Saving",
+    "countSavings": "Item-count savings",
+    "count": "Item count",
+    "fromItems": "Minimum item count"
   },
   "Formats": {
     "design": "Design journal",
@@ -445,7 +482,7 @@
     "colName": "Name",
     "colFamily": "Family",
     "colPublished": "Date",
-    "colPrice": "Price",
+    "colPrice": "Pricing source",
     "allFamilies": "All families",
     "family": "Family",
     "servicesCount": "{count, plural, one {# service} other {# services}}",
@@ -492,7 +529,7 @@
     "colProgress": "Progress",
     "colVersion": "Version",
     "colTexts": "Texts",
-    "priceModeHelp": "Indicative prices are estimates; on request shows no numbers at all.",
+    "priceModeHelp": "This is the historical reference display mode. It does not change current checkout pricing.",
     "priceModes": {
       "indicative": "Indicative prices",
       "on_request": "On request"
@@ -567,7 +604,12 @@
     "narrativeDisabled": "Narrative disabled. The project card can appear without its story or results.",
     "fixedValuesHelp": "Fixed values supplied by the website’s code; keep every numbered placeholder.",
     "sampleNarrativeTitle": "Public sample case-study story",
-    "sampleNarrativeHelp": "Shows the story and results with visible sample labels after review and publication. Figures remain unapproved."
+    "sampleNarrativeHelp": "Shows the story and results with visible sample labels after review and publication. Figures remain unapproved.",
+    "platformPricingTitle": "Current prices are managed in Admin",
+    "platformPricingBody": "Checkout uses current regional prices. Manage website wording here; manage prices and offer rules in Admin.",
+    "historicalPricingBody": "These read-only examples come from an earlier website catalog. They are reference values, not current checkout prices.",
+    "platformPricingSource": "Admin pricing",
+    "catalogReferenceBody": "Package names and capabilities are shared with the website. Edit its page wording in Pages; current prices are managed in Admin."
   },
   "Areas": {
     "work": {
@@ -580,7 +622,7 @@
     },
     "software": {
       "title": "Software",
-      "description": "The software modules on orgtik.ch. Their prices are set in Pricing, not here."
+      "description": "Product content shared with the website. Current checkout prices are managed in Admin."
     },
     "insights": {
       "title": "Insights",
@@ -607,8 +649,8 @@
       "description": "Public timeline and moderated ideas, with clearly labelled samples and a moderated submission form."
     },
     "pricing": {
-      "title": "Pricing",
-      "description": "The prices the website shows, and the words around them. Numbers change only with pricing permission; publishing needs an Admin."
+      "title": "Offer references",
+      "description": "Read-only catalog examples and display wording. Current checkout prices and savings rules are managed in Admin."
     }
   },
   "Types": {
@@ -748,7 +790,12 @@
     "pg_signUp": "Sign up",
     "gl_commerce": "Purchasing",
     "gl_caseFormats": "Case-study formats",
-    "st_commerce": "Purchasing"
+    "st_commerce": "Purchasing",
+    "pg_plans": "Plans and pricing",
+    "pg_cart": "Cart",
+    "pg_checkout": "Checkout",
+    "pg_partners": "Partners",
+    "st_platformPricing": "Offer and payment messages"
   },
   "Ideas": {
     "title": "Ideas",

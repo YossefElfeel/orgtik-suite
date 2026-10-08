@@ -25,7 +25,7 @@
     "legal": "Mentions légales",
     "roadmap": "Feuille de route",
     "ideas": "Idées",
-    "pricing": "Tarifs",
+    "pricing": "Références d’offres",
     "library": "Médiathèque",
     "seoHealth": "Santé SEO",
     "redirects": "Redirections",
@@ -355,7 +355,44 @@
     "caseFormatHosting": "Runbook",
     "caseFormatMarketing": "Rapport de performance",
     "caseFormatSupport": "Journal de service",
-    "caseFormats": "Formats des études de cas"
+    "caseFormats": "Formats des études de cas",
+    "partnersIntro": "Introduction et commandes",
+    "partnerProfiles": "Profils des partenaires",
+    "partners": "Partenaires",
+    "partner": "Partenaire",
+    "partnerId": "Identifiant d’ancrage du profil",
+    "partnerSummary": "Description du profil",
+    "partnerLogo": "Chemin du fichier du logo",
+    "partnerWebsite": "URL du site",
+    "partnerVisible": "Afficher le partenaire",
+    "partnerMock": "Partenaire fictif",
+    "partnerAccounts": "Profils sociaux (facultatif)",
+    "partnerAccount": "Profil social",
+    "partnerPlatform": "Nom de la plateforme",
+    "partnerProfileUrl": "URL du profil",
+    "exampleWebsiteLabel": "Libellé du lien vers le site fictif",
+    "exampleAccountLabel": "Libellé du profil social fictif",
+    "externalLabel": "Indication d’ouverture dans un nouvel onglet",
+    "offerPaymentStates": "Messages d’offre et de paiement",
+    "badge": "Badge de démonstration",
+    "linkLabel": "Libellé du lien vers l’annuaire",
+    "profileLabel": "Libellé de l’action du profil",
+    "scrollLabel": "Libellé accessible du bandeau de logos",
+    "previousLabel": "Libellé du bouton précédent",
+    "nextLabel": "Libellé du bouton suivant",
+    "pauseLabel": "Libellé du bouton pause",
+    "playLabel": "Libellé du bouton reprendre",
+    "websiteLabel": "Libellé de l’action du site",
+    "bundles": "Offres groupées",
+    "savings": "Économies",
+    "itemKeys": "Identifiants des éléments inclus",
+    "why": "Raison de la recommandation",
+    "recommended": "Recommandé",
+    "durationSavings": "Économies selon la durée",
+    "saving": "Économie",
+    "countSavings": "Économies selon le nombre d’éléments",
+    "count": "Nombre d’éléments",
+    "fromItems": "Nombre minimal d’éléments"
   },
   "Formats": {
     "design": "Journal de design",
@@ -445,7 +482,7 @@
     "colName": "Nom",
     "colFamily": "Famille",
     "colPublished": "Date",
-    "colPrice": "Prix",
+    "colPrice": "Source des tarifs",
     "allFamilies": "Toutes les familles",
     "family": "Famille",
     "servicesCount": "{count, plural, one {# service} other {# services}}",
@@ -492,7 +529,7 @@
     "colProgress": "Avancement",
     "colVersion": "Version",
     "colTexts": "Textes",
-    "priceModeHelp": "Les prix indicatifs sont des estimations ; « sur demande » n’affiche aucun chiffre.",
+    "priceModeHelp": "Il s’agit du mode d’affichage historique. Il ne modifie pas les tarifs actuels du paiement.",
     "priceModes": {
       "indicative": "Prix indicatifs",
       "on_request": "Sur demande"
@@ -567,7 +604,12 @@
     "narrativeDisabled": "Récit désactivé. La fiche du projet peut apparaître sans récit ni résultats.",
     "fixedValuesHelp": "Valeurs fixes fournies par le code du site ; conservez tous les espaces réservés numérotés.",
     "sampleNarrativeTitle": "Récit public de cas d’exemple",
-    "sampleNarrativeHelp": "Affiche le récit et les résultats avec des mentions d’exemple après validation et publication. Les chiffres restent non approuvés."
+    "sampleNarrativeHelp": "Affiche le récit et les résultats avec des mentions d’exemple après validation et publication. Les chiffres restent non approuvés.",
+    "platformPricingTitle": "Les tarifs actuels sont gérés dans Admin",
+    "platformPricingBody": "Le paiement utilise les tarifs régionaux actuels. Modifiez les textes ici, et les prix et règles d’offre dans Admin.",
+    "historicalPricingBody": "Ces exemples en lecture seule proviennent d’un ancien catalogue. Ce sont des références, pas les tarifs actuels du paiement.",
+    "platformPricingSource": "Tarifs Admin",
+    "catalogReferenceBody": "Les noms et fonctions des offres sont partagés avec le site. Modifiez les textes dans Pages et les tarifs actuels dans Admin."
   },
   "Areas": {
     "work": {
@@ -580,7 +622,7 @@
     },
     "software": {
       "title": "Logiciels",
-      "description": "Les modules logiciels sur orgtik.ch. Leurs prix se règlent dans Tarifs, pas ici."
+      "description": "Contenu des produits partagé avec le site. Les tarifs actuels du paiement sont gérés dans Admin."
     },
     "insights": {
       "title": "Insights",
@@ -607,8 +649,8 @@
       "description": "Calendrier public et idées modérées, avec des exemples clairement indiqués et un formulaire soumis à modération."
     },
     "pricing": {
-      "title": "Tarifs",
-      "description": "Les prix affichés sur le site et les textes qui les entourent. Les nombres ne changent qu’avec la permission tarifs ; la publication demande un Admin."
+      "title": "Références d’offres",
+      "description": "Exemples de catalogue et textes en lecture seule. Les tarifs actuels et règles de remise sont gérés dans Admin."
     }
   },
   "Types": {
@@ -748,7 +790,12 @@
     "pg_signUp": "Créer un compte",
     "gl_commerce": "Achat",
     "gl_caseFormats": "Formats des études de cas",
-    "st_commerce": "Achat"
+    "st_commerce": "Achat",
+    "pg_plans": "Offres et tarifs",
+    "pg_cart": "Panier",
+    "pg_checkout": "Paiement",
+    "pg_partners": "Partenaires",
+    "st_platformPricing": "Messages d’offre et de paiement"
   },
   "Ideas": {
     "title": "Idées",

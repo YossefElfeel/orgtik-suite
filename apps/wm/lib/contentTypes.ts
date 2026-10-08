@@ -4,6 +4,7 @@
 // comes from the website at the D-031 baseline (d76ee3b); see local-dev/apps/wm/seed/build.mjs.
 import type { EntryContent, EntryType, LayoutSection } from "@/store/api";
 import { BLOCKS, BRIEF, type Department, type Node } from "./caseStudySchema";
+import { cmsLabelKey, cmsNodeLabels } from "./cmsLabels";
 
 export type Area =
   | "pages"
@@ -95,8 +96,8 @@ function layoutSections(e: SectionSource): EditorSection[] {
       return {
         value: sec.key,
         path: sec.key,
-        labelKey: sec.label,
-        node: sec.node,
+        labelKey: sec.label ? cmsLabelKey(sec.label) : undefined,
+        node: cmsNodeLabels(sec.node),
       };
     const fields = Object.fromEntries(
       sec.slots.map((slot) => [
@@ -119,7 +120,9 @@ function layoutSections(e: SectionSource): EditorSection[] {
     return {
       value: sec.key,
       path: sec.key,
-      label: sec.label ?? undefined,
+      ...(sec.label && cmsLabelKey(sec.label) !== sec.label
+        ? { labelKey: cmsLabelKey(sec.label) }
+        : { label: sec.label ?? undefined }),
       node: { kind: "group", fields },
     };
   });

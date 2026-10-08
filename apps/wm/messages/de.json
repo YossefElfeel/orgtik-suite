@@ -25,7 +25,7 @@
     "legal": "Rechtliches",
     "roadmap": "Roadmap",
     "ideas": "Ideen",
-    "pricing": "Preise",
+    "pricing": "Angebotsreferenzen",
     "library": "Mediathek",
     "seoHealth": "SEO-Zustand",
     "redirects": "Weiterleitungen",
@@ -355,7 +355,44 @@
     "caseFormatHosting": "Runbook",
     "caseFormatMarketing": "Leistungsbericht",
     "caseFormatSupport": "Service-Log",
-    "caseFormats": "Fallstudienformate"
+    "caseFormats": "Fallstudienformate",
+    "partnersIntro": "Einleitung und Steuerung",
+    "partnerProfiles": "Partnerprofile",
+    "partners": "Partner",
+    "partner": "Partner",
+    "partnerId": "Profilanker-ID",
+    "partnerSummary": "Profilbeschreibung",
+    "partnerLogo": "Pfad zur Logodatei",
+    "partnerWebsite": "Website-URL",
+    "partnerVisible": "Partner anzeigen",
+    "partnerMock": "Beispielpartner",
+    "partnerAccounts": "Social-Media-Profile (optional)",
+    "partnerAccount": "Social-Media-Profil",
+    "partnerPlatform": "Plattformname",
+    "partnerProfileUrl": "Profil-URL",
+    "exampleWebsiteLabel": "Beschriftung des Beispiel-Website-Links",
+    "exampleAccountLabel": "Beschriftung des Beispielprofils",
+    "externalLabel": "Hinweis zum Öffnen in einem neuen Tab",
+    "offerPaymentStates": "Angebots- und Zahlungsnachrichten",
+    "badge": "Beispielkennzeichnung",
+    "linkLabel": "Beschriftung des Verzeichnislinks",
+    "profileLabel": "Beschriftung der Profilaktion",
+    "scrollLabel": "Barrierefreie Beschriftung der Logoleiste",
+    "previousLabel": "Beschriftung der Zurück-Schaltfläche",
+    "nextLabel": "Beschriftung der Weiter-Schaltfläche",
+    "pauseLabel": "Beschriftung der Pause-Schaltfläche",
+    "playLabel": "Beschriftung der Fortsetzen-Schaltfläche",
+    "websiteLabel": "Beschriftung der Website-Aktion",
+    "bundles": "Pakete",
+    "savings": "Ersparnis",
+    "itemKeys": "IDs der enthaltenen Artikel",
+    "why": "Grund der Empfehlung",
+    "recommended": "Empfohlen",
+    "durationSavings": "Laufzeitersparnis",
+    "saving": "Ersparnis",
+    "countSavings": "Ersparnis nach Artikelanzahl",
+    "count": "Artikelanzahl",
+    "fromItems": "Mindestanzahl an Artikeln"
   },
   "Formats": {
     "design": "Design-Journal",
@@ -445,7 +482,7 @@
     "colName": "Name",
     "colFamily": "Bereich",
     "colPublished": "Datum",
-    "colPrice": "Preis",
+    "colPrice": "Preisquelle",
     "allFamilies": "Alle Bereiche",
     "family": "Bereich",
     "servicesCount": "{count, plural, one {# Leistung} other {# Leistungen}}",
@@ -492,7 +529,7 @@
     "colProgress": "Fortschritt",
     "colVersion": "Version",
     "colTexts": "Texte",
-    "priceModeHelp": "Richtpreise sind Schätzungen; „auf Anfrage“ zeigt keine Zahlen.",
+    "priceModeHelp": "Dies ist der historische Anzeigemodus. Er ändert keine aktuellen Kassenpreise.",
     "priceModes": {
       "indicative": "Richtpreise",
       "on_request": "Auf Anfrage"
@@ -567,7 +604,12 @@
     "narrativeDisabled": "Erzählung deaktiviert. Die Projektkarte kann ohne Geschichte oder Ergebnisse erscheinen.",
     "fixedValuesHelp": "Feste Werte aus dem Website-Code; behalten Sie alle nummerierten Platzhalter.",
     "sampleNarrativeTitle": "Öffentliche Beispiel-Fallstudie",
-    "sampleNarrativeHelp": "Zeigt Geschichte und Ergebnisse nach Prüfung und Veröffentlichung mit sichtbaren Beispielhinweisen. Die Zahlen bleiben unbestätigt."
+    "sampleNarrativeHelp": "Zeigt Geschichte und Ergebnisse nach Prüfung und Veröffentlichung mit sichtbaren Beispielhinweisen. Die Zahlen bleiben unbestätigt.",
+    "platformPricingTitle": "Aktuelle Preise werden in Admin verwaltet",
+    "platformPricingBody": "Die Kasse verwendet aktuelle regionale Preise. Website-Texte bearbeiten Sie hier, Preise und Angebotsregeln in Admin.",
+    "historicalPricingBody": "Diese schreibgeschützten Beispiele stammen aus einem früheren Website-Katalog. Es sind Referenzwerte, keine aktuellen Kassenpreise.",
+    "platformPricingSource": "Admin-Preise",
+    "catalogReferenceBody": "Paketnamen und Funktionen werden mit der Website geteilt. Seitentexte bearbeiten Sie unter Seiten, aktuelle Preise in Admin."
   },
   "Areas": {
     "work": {
@@ -580,7 +622,7 @@
     },
     "software": {
       "title": "Software",
-      "description": "Die Softwaremodule auf orgtik.ch. Ihre Preise werden unter Preise festgelegt, nicht hier."
+      "description": "Produktinhalte, die mit der Website geteilt werden. Aktuelle Kassenpreise werden in Admin verwaltet."
     },
     "insights": {
       "title": "Insights",
@@ -607,8 +649,8 @@
       "description": "Öffentliche Zeitleiste und moderierte Ideen mit gekennzeichneten Beispielen und moderiertem Vorschlagsformular."
     },
     "pricing": {
-      "title": "Preise",
-      "description": "Die Preise, die die Website zeigt, und die Texte dazu. Zahlen ändern sich nur mit Preisberechtigung; veröffentlichen muss ein Admin."
+      "title": "Angebotsreferenzen",
+      "description": "Schreibgeschützte Katalogbeispiele und Anzeigetexte. Aktuelle Kassenpreise und Rabattregeln werden in Admin verwaltet."
     }
   },
   "Types": {
@@ -748,7 +790,12 @@
     "pg_signUp": "Registrieren",
     "gl_commerce": "Kauf",
     "gl_caseFormats": "Fallstudienformate",
-    "st_commerce": "Kauf"
+    "st_commerce": "Kauf",
+    "pg_plans": "Tarife und Preise",
+    "pg_cart": "Warenkorb",
+    "pg_checkout": "Kasse",
+    "pg_partners": "Partner",
+    "st_platformPricing": "Angebots- und Zahlungsnachrichten"
   },
   "Ideas": {
     "title": "Ideen",

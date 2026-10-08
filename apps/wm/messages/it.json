@@ -25,7 +25,7 @@
     "legal": "Note legali",
     "roadmap": "Roadmap",
     "ideas": "Idee",
-    "pricing": "Prezzi",
+    "pricing": "Riferimenti delle offerte",
     "library": "Libreria",
     "seoHealth": "Salute SEO",
     "redirects": "Reindirizzamenti",
@@ -355,7 +355,44 @@
     "caseFormatHosting": "Runbook",
     "caseFormatMarketing": "Report di performance",
     "caseFormatSupport": "Log di servizio",
-    "caseFormats": "Formati dei casi di studio"
+    "caseFormats": "Formati dei casi di studio",
+    "partnersIntro": "Introduzione e controlli",
+    "partnerProfiles": "Profili dei partner",
+    "partners": "Partner",
+    "partner": "Partner",
+    "partnerId": "ID dell’ancora del profilo",
+    "partnerSummary": "Descrizione del profilo",
+    "partnerLogo": "Percorso del logo",
+    "partnerWebsite": "URL del sito",
+    "partnerVisible": "Mostra partner",
+    "partnerMock": "Partner dimostrativo",
+    "partnerAccounts": "Profili social (facoltativo)",
+    "partnerAccount": "Profilo social",
+    "partnerPlatform": "Nome della piattaforma",
+    "partnerProfileUrl": "URL del profilo",
+    "exampleWebsiteLabel": "Etichetta del link al sito dimostrativo",
+    "exampleAccountLabel": "Etichetta del profilo social dimostrativo",
+    "externalLabel": "Indicazione di apertura in una nuova scheda",
+    "offerPaymentStates": "Messaggi di offerta e pagamento",
+    "badge": "Etichetta dimostrativa",
+    "linkLabel": "Etichetta del link alla directory",
+    "profileLabel": "Etichetta dell’azione del profilo",
+    "scrollLabel": "Etichetta accessibile della striscia dei loghi",
+    "previousLabel": "Etichetta del pulsante precedente",
+    "nextLabel": "Etichetta del pulsante successivo",
+    "pauseLabel": "Etichetta del pulsante pausa",
+    "playLabel": "Etichetta del pulsante riprendi",
+    "websiteLabel": "Etichetta dell’azione del sito",
+    "bundles": "Pacchetti",
+    "savings": "Risparmio",
+    "itemKeys": "ID degli elementi inclusi",
+    "why": "Motivo del consiglio",
+    "recommended": "Consigliato",
+    "durationSavings": "Risparmio per durata",
+    "saving": "Risparmio",
+    "countSavings": "Risparmio per numero di elementi",
+    "count": "Numero di elementi",
+    "fromItems": "Numero minimo di elementi"
   },
   "Formats": {
     "design": "Diario di design",
@@ -445,7 +482,7 @@
     "colName": "Nome",
     "colFamily": "Famiglia",
     "colPublished": "Data",
-    "colPrice": "Prezzo",
+    "colPrice": "Fonte dei prezzi",
     "allFamilies": "Tutte le famiglie",
     "family": "Famiglia",
     "servicesCount": "{count, plural, one {# servizio} other {# servizi}}",
@@ -492,7 +529,7 @@
     "colProgress": "Avanzamento",
     "colVersion": "Versione",
     "colTexts": "Testi",
-    "priceModeHelp": "I prezzi indicativi sono stime; «su richiesta» non mostra numeri.",
+    "priceModeHelp": "È la modalità di visualizzazione storica. Non modifica i prezzi attuali del checkout.",
     "priceModes": {
       "indicative": "Prezzi indicativi",
       "on_request": "Su richiesta"
@@ -567,7 +604,12 @@
     "narrativeDisabled": "Racconto disattivato. La scheda del progetto può apparire senza storia o risultati.",
     "fixedValuesHelp": "Valori fissi forniti dal codice del sito; conserva tutti i segnaposto numerati.",
     "sampleNarrativeTitle": "Caso di studio pubblico di esempio",
-    "sampleNarrativeHelp": "Mostra il racconto e i risultati con etichette di esempio dopo revisione e pubblicazione. I dati restano non approvati."
+    "sampleNarrativeHelp": "Mostra il racconto e i risultati con etichette di esempio dopo revisione e pubblicazione. I dati restano non approvati.",
+    "platformPricingTitle": "I prezzi attuali sono gestiti in Admin",
+    "platformPricingBody": "Il checkout usa i prezzi regionali attuali. Modifica qui i testi del sito e in Admin i prezzi e le regole delle offerte.",
+    "historicalPricingBody": "Questi esempi di sola lettura provengono da un catalogo precedente. Sono valori di riferimento, non i prezzi attuali del checkout.",
+    "platformPricingSource": "Prezzi Admin",
+    "catalogReferenceBody": "Nomi e funzionalità dei pacchetti sono condivisi con il sito. Modifica i testi in Pagine e i prezzi attuali in Admin."
   },
   "Areas": {
     "work": {
@@ -580,7 +622,7 @@
     },
     "software": {
       "title": "Software",
-      "description": "I moduli software su orgtik.ch. I prezzi si impostano in Prezzi, non qui."
+      "description": "Contenuti dei prodotti condivisi con il sito. I prezzi attuali del checkout sono gestiti in Admin."
     },
     "insights": {
       "title": "Insights",
@@ -607,8 +649,8 @@
       "description": "Cronologia pubblica e idee moderate, con esempi chiaramente indicati e un modulo sottoposto a moderazione."
     },
     "pricing": {
-      "title": "Prezzi",
-      "description": "I prezzi che il sito mostra e i testi intorno. I numeri cambiano solo con il permesso prezzi; la pubblicazione richiede un Admin."
+      "title": "Riferimenti delle offerte",
+      "description": "Esempi del catalogo e testi di sola lettura. I prezzi attuali e le regole di risparmio sono gestiti in Admin."
     }
   },
   "Types": {
@@ -748,7 +790,12 @@
     "pg_signUp": "Registrati",
     "gl_commerce": "Acquisto",
     "gl_caseFormats": "Formati dei casi di studio",
-    "st_commerce": "Acquisto"
+    "st_commerce": "Acquisto",
+    "pg_plans": "Piani e prezzi",
+    "pg_cart": "Carrello",
+    "pg_checkout": "Checkout",
+    "pg_partners": "Partner",
+    "st_platformPricing": "Messaggi di offerta e pagamento"
   },
   "Ideas": {
     "title": "Idee",
