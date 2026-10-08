@@ -31,7 +31,9 @@ type NavSection = { label?: string; items: NavItem[] };
 // so no item leads to an empty "coming soon" page, and each one hides if the role can't view it.
 function useNav(): NavSection[] {
   const t = useTranslations("Nav");
+  const studioText = useTranslations("Studio");
   return [
+    ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ items: [{ key: studioText("heading"), href: "/presentation", icon: <Monitor />, permission: "overview:view" }] }] : []),
     { items: [{ key: t("overview"), href: "/", icon: <SquaresFour />, permission: "overview:view" }] },
     {
       label: t("sections.website"),
