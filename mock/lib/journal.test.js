@@ -80,7 +80,7 @@ const OUT = path.join(__dirname, "..", "journal", `${SANDBOX}.out.json`);
 function run(step) {
   try {
     execFileSync(process.execPath, [__filename, "--child", step], {
-      env: { ...process.env, MOCK_JOURNAL: "file", MOCK_SANDBOX: SANDBOX, MOCK_PUBLIC_URL: "", VERCEL: "", KV_REST_API_URL: '', KV_REST_API_TOKEN: '', UPSTASH_REDIS_REST_URL: '', UPSTASH_REDIS_REST_TOKEN: '', MOCK_AUTH_STORE: 'file', MOCK_AUTH_FILE: `${FILE}.accounts`, JOURNAL_TEST_OUT: OUT },
+      env: { ...process.env, MOCK_JOURNAL: "file", MOCK_SANDBOX: SANDBOX, MOCK_CLOCK: 'frozen', MOCK_NOW: '2026-10-07T09:00:00.000Z', MOCK_PUBLIC_URL: "", VERCEL: "", KV_REST_API_URL: '', KV_REST_API_TOKEN: '', UPSTASH_REDIS_REST_URL: '', UPSTASH_REDIS_REST_TOKEN: '', MOCK_AUTH_STORE: 'file', MOCK_AUTH_FILE: `${FILE}.accounts`, JOURNAL_TEST_OUT: OUT },
       encoding: "utf8",
       stdio: ["ignore", "ignore", "pipe"],
     });
@@ -104,7 +104,7 @@ function main() {
     const newIn = (x) => x.projects.filter((p) => !seed.projects.includes(p));
     const newFolders = (x) => x.folders.filter((f) => !seed.folders.includes(f));
 
-    check("a fresh journal materializes only its two private fixture stores", () => assert.strictEqual(seed.status.entries, 2));
+    check("a fresh journal records one due checkpoint and its two private fixture stores", () => { assert.strictEqual(seed.status.entries, 3); assert.strictEqual(seed2.status.entries, 3); });
     check("instance A records its two changes", () => assert.strictEqual(a.status.entries, seed.status.entries + 2));
     check("A sees its new project and folder", () => {
       assert.strictEqual(newIn(a).length, 1);

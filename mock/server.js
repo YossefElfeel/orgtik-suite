@@ -602,7 +602,7 @@ async function handle(key, req, res) {
     if (!slots.get(key)?.app) return sendJson(res, 404, { success: false, statusCode: 404, message: `[mock] no API for ${key}` });
     delete req.headers["x-orgtik-dispatch"];
     delete req.headers['x-mock-app'];
-    return workspaceBoundary.handle({ key, req, body, legacyApp: slots.get(key).app, send: result => send(res, result, { head: req.method === 'HEAD' }), sendJson: (code, value) => sendJson(res, code, value), sync });
+    return workspaceBoundary.handle({ key, req, body, legacyApp: slots.get(key).app, legacyAppFor: () => slots.get(key)?.app, send: result => send(res, result, { head: req.method === 'HEAD' }), sendJson: (code, value) => sendJson(res, code, value), sync });
   });
 }
 

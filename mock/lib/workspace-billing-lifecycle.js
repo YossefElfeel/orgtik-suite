@@ -13,6 +13,91 @@ const id = (kind, value) => `r1_${kind}_${hash(value).slice(0, 24)}`;
 const iso = value => new Date(value).toISOString();
 const live = line => !["ended", "deleted"].includes(line.state);
 const permitted = new Set(["billing.run", "billing.recover", "billing.seats.quote", "billing.seats.confirm", "billing.seats.reduce", "billing.seats.cancel-reduction"]);
+const debt = line => ['past_due', 'read_only'].includes(line.state);
+function unpaidInvoiceFor(db, workspace, line) {
+  const anchor = Date.parse(line.billingRenewalDueAt || line.periodEnd);
+  return (db.invoices || []).find(invoice => {
+    if (invoice.workspaceId !== workspace.id || !['open', 'past_due'].includes(invoice.state)) return false;
+    if (!Array.isArray(invoice.lines)) throw failure(503, 'billing_invoice_allocation_required', 'The recorded invoice allocation is unavailable; no replacement charge was created.');
+    return invoice.lines.some(row => row.lineId === line.id) && (debt(line) || Date.parse(invoice.dueAt) === anchor);
+  });
+}
+function renewalBoundary(db, workspace, line) {
+  return Date.parse(debt(line) ? line.lastFailure?.at || unpaidInvoiceFor(db, workspace, line)?.dueAt || line.periodEnd : line.billingRenewalDueAt || line.periodEnd);
+}
+
+// A read-only planner for the trusted preflight. A pending obligation is not necessarily
+// work: failed cycles wait for their next unprocessed retry or dunning deadline.
+function selectBillingDue({ db, at, workspaceId }) {
+  const observed = typeof at === 'number' ? at : Date.parse(at);
+  if (!Number.isFinite(observed) || !Array.isArray(db?.workspaces)) throw failure(503, 'billing_state_unavailable', 'A valid billing snapshot and server instant are required.');
+  const compare = (a, b) => a < b ? -1 : a > b ? 1 : 0;
+  const workspaces = db.workspaces.filter(ws => (workspaceId === undefined || ws.id === workspaceId) && !['cancelled', 'deleted'].includes(ws.state)).sort((a, b) => compare(a.id, b.id));
+  const deadlines = value => {
+    const parsed = typeof value === 'number' ? value : Date.parse(value);
+    if (!Number.isFinite(parsed)) throw failure(503, 'renewal_boundary_unavailable', 'A recorded billing transition boundary is unavailable.');
+    return parsed;
+  };
+  const published = (db.priceDrafts || []).filter(draft => draft.state === 'published' && !draft.appliedAt && deadlines(draft.effectiveAt) <= observed);
+  const noticed = key => (db.notifications || []).some(row => row.eventKey === key);
+  const jobs = [];
+  for (const ws of workspaces) {
+    const events = [], suspended = ws.state === 'suspended';
+    const add = (kind, key, when, lineId) => {
+      const time = deadlines(when);
+      if (time <= observed && !events.some(event => event.key === key)) events.push({ kind, key, at: iso(time), ...(lineId ? { lineId } : {}) });
+    };
+    // Price publication is global, and the full DB is passed to advance. Assign it
+    // once in an all-workspace scan; a scoped caller can also trigger the same work.
+    if (ws === workspaces[0]) for (const draft of published) add('price_publication', `price:${draft.id}:${draft.priceVersion}:${draft.effectiveAt}`, draft.effectiveAt);
+    for (const line of ws.lines || []) {
+      if (!suspended) {
+        if (line.state === 'active' && line.scheduled?.kind === 'downgrade') add('downgrade', `${line.id}:downgrade:${line.scheduled.planId}:${line.scheduled.effectiveAt}`, line.scheduled.effectiveAt, line.id);
+        const priceChange = line.scheduledPrice || (line.scheduled?.kind === 'price_change' ? line.scheduled : null);
+        if (['active', 'cancelling'].includes(line.state) && priceChange?.snapshot) add('line_price', `${line.id}:price:${priceChange.draftId}:${priceChange.effectiveAt}`, priceChange.effectiveAt, line.id);
+        if (line.state === 'trialing') add('trial_end', `${line.id}:trial:${line.trialEndsAt}`, line.trialEndsAt, line.id);
+        if (line.state === 'cancelling') add('term_end', `${line.id}:cancel:${line.cancelAt}`, line.cancelAt, line.id);
+        if (line.state === 'active' && line.scheduledSeatChange) add('seat_reduction', `${line.id}:seats:${line.scheduledSeatChange.operationId}:${line.scheduledSeatChange.effectiveAt}`, line.scheduledSeatChange.effectiveAt, line.id);
+        if (line.state === 'active') add(line.autoRenew === false ? 'term_end' : 'renewal', `${line.id}:renewal:${iso(deadlines(renewalBoundary(db, ws, line)))}`, renewalBoundary(db, ws, line), line.id);
+      }
+      if (debt(line)) {
+        const dueAt = deadlines(renewalBoundary(db, ws, line)), cycleKey = `renewal:${ws.id}:${line.id}:${iso(dueAt)}`;
+        const cycle = db.billingLifecycle?.cycles?.[cycleKey];
+        if (!cycle) add('debt_reconcile', `${cycleKey}:reconcile`, dueAt, line.id);
+        const policy = db.settings?.dunning;
+        if (!Number.isSafeInteger(policy?.graceDays) || policy.graceDays < 0 || !Number.isSafeInteger(policy?.cancelAfterDays) || policy.cancelAfterDays <= policy.graceDays) throw failure(503, 'dunning_policy_unavailable', 'A valid grace and cancellation policy is required.');
+        const graceAt = dueAt + policy.graceDays * DAY, endAt = dueAt + policy.cancelAfterDays * DAY;
+        if (cycle) {
+          if (!Array.isArray(cycle.retriesDone)) throw failure(503, 'billing_ledger_unavailable', 'The recorded retry markers are unavailable.');
+          if (line.graceEndsAt !== iso(graceAt)) add('debt_metadata', `${cycleKey}:grace`, dueAt, line.id);
+          if (!suspended && observed < endAt && !cycle.paid) {
+            if (!cycle.initialDone) add('payment_initial', `${cycle.paymentKey || cycleKey}:initial`, dueAt, line.id);
+            for (const day of RETRY_DAYS) if (!cycle.retriesDone.includes(day)) add('payment_retry', `${cycle.paymentKey || cycleKey}:retry:${day}`, dueAt + day * DAY, line.id);
+          }
+        }
+        if (line.state !== 'read_only' || line.readOnlySince !== iso(graceAt) || !noticed(`${cycleKey}:read_only`)) add('read_only', `${cycleKey}:read_only`, graceAt, line.id);
+        add('subscription_end', `${cycleKey}:ended`, endAt, line.id);
+      }
+      if (line.state === 'ended') {
+        const days = db.settings?.retention?.toolDays;
+        if (!Number.isFinite(days) || days < 0) throw failure(503, 'retention_policy_unavailable', 'A valid subscription retention policy is required.');
+        add('line_retention', `${line.id}:retention:${line.endedAt}`, deadlines(line.endedAt) + days * DAY, line.id);
+      }
+    }
+    if (!suspended) {
+      for (const request of db.serviceRequests || []) if (request.workspaceId === ws.id && request.state === 'in_review' && request.deliveries?.at(-1)?.autoApproveAt) add('service_approval', `service:${request.id}:${request.deliveries.at(-1).autoApproveAt}`, request.deliveries.at(-1).autoApproveAt);
+      for (const ticket of db.tickets || []) if (ticket.workspaceId === ws.id) {
+        if (ticket.state === 'waiting_for_you' && ticket.autoCloseAt) add('ticket_close', `ticket:${ticket.id}:${ticket.autoCloseAt}`, ticket.autoCloseAt);
+        if (ticket.state === 'resolved' && ticket.reopenUntil) add('ticket_close', `ticket:${ticket.id}:${ticket.reopenUntil}`, ticket.reopenUntil);
+      }
+    }
+    if (events.length) {
+      events.sort((a, b) => compare(a.at, b.at) || compare(a.key, b.key));
+      jobs.push({ workspaceId: ws.id, dueAt: events[0].at, events, operationId: `auto-billing:${hash([ws.id, iso(observed), events.map(event => event.key)]).slice(0, 40)}` });
+    }
+  }
+  return jobs;
+}
 
 function executeBillingCommand({ db: original, command, authority }) {
   if (!command || !permitted.has(command.kind) || typeof command.operationId !== "string" || !command.operationId || !command.workspaceId || !Number.isFinite(Date.parse(command.at))) throw failure(422, "invalid_billing_command", "Supply a recorded billing command and operation ID.");
@@ -134,7 +219,7 @@ function executeBillingCommand({ db: original, command, authority }) {
     if (at >= end) {
       if (live(line)) { line.state = "ended"; line.endedAt = iso(end); }
       notice("subscription_ended", line, `${cycle.key}:ended`, end); audit("subscription_ended", line, `${cycle.key}:ended`, end);
-    } else if (at >= grace && line.state !== "read_only") {
+    } else if (at >= grace && (line.state !== "read_only" || line.readOnlySince !== iso(grace))) {
       line.state = "read_only"; line.readOnlySince = iso(grace);
       notice("read_only", line, `${cycle.key}:read_only`, grace); audit("line_read_only", line, `${cycle.key}:read_only`, grace);
     }
@@ -163,8 +248,8 @@ function executeBillingCommand({ db: original, command, authority }) {
     }
   }
   function cycleFor(line) {
-    const unpaid = db.invoices.find(invoice => invoice.workspaceId === ws.id && ["open", "past_due"].includes(invoice.state) && invoice.lines.some(row => row.lineId === line.id) && (["past_due", "read_only"].includes(line.state) || Date.parse(invoice.dueAt) === Date.parse(line.periodEnd)));
-    const due = ["past_due", "read_only"].includes(line.state) ? Date.parse(line.lastFailure?.at || unpaid?.dueAt || line.periodEnd) : Date.parse(line.billingRenewalDueAt || line.periodEnd);
+    const unpaid = unpaidInvoiceFor(db, ws, line);
+    const due = renewalBoundary(db, ws, line);
     if (!Number.isFinite(due)) throw failure(503, "renewal_boundary_unavailable", "The subscription renewal boundary is unavailable.");
     const key = `renewal:${ws.id}:${line.id}:${iso(due)}`;
     if (ledger.cycles[key]) return ledger.cycles[key];
@@ -192,11 +277,12 @@ function executeBillingCommand({ db: original, command, authority }) {
   }
   function runLine(line) {
     let iterations = 0;
-    while (live(line) && ["active", "past_due", "read_only"].includes(line.state) && Date.parse(line.billingRenewalDueAt || line.periodEnd) <= at) {
+    while (live(line) && ["active", "past_due", "read_only"].includes(line.state) && renewalBoundary(db, ws, line) <= at) {
       if (++iterations > 24) throw failure(503, "billing_backlog_review_required", "Review the renewal backlog before charging additional periods.");
       if (line.autoRenew === false && line.state === "active") {
-        line.state = "ended"; line.endedAt = line.periodEnd;
-        notice("subscription_ended", line, `term:${ws.id}:${line.id}:${line.periodEnd}`, Date.parse(line.periodEnd)); break;
+        const endedAt = iso(renewalBoundary(db, ws, line));
+        line.state = "ended"; line.endedAt = endedAt;
+        notice("subscription_ended", line, `term:${ws.id}:${line.id}:${endedAt}`, Date.parse(endedAt)); break;
       }
       const cycle = cycleFor(line), invoice = db.invoices.find(row => row.id === cycle.invoiceId);
       if (!invoice) throw failure(503, "billing_invoice_unavailable", "The recorded renewal invoice is unavailable.");
@@ -228,7 +314,7 @@ function executeBillingCommand({ db: original, command, authority }) {
   }
   let result;
   if (command.kind === "billing.run") {
-    const dueDowngrades = new Map(ws.lines.filter(line => line.state === "active" && line.scheduled?.kind === "downgrade" && Date.parse(line.scheduled.effectiveAt) <= at).map(line => [line.id, line.scheduled.effectiveAt]));
+    const dueDowngrades = new Map(ws.lines.filter(line => ws.state !== 'suspended' && line.state === "active" && line.scheduled?.kind === "downgrade" && Date.parse(line.scheduled.effectiveAt) <= at).map(line => [line.id, line.scheduled.effectiveAt]));
     // Existing R0 publication, downgrade, trial, service/ticket and retention reducers run
     // only here, under system authority, against this command's private candidate.
     for (const line of ws.lines.filter(line => ["past_due", "read_only"].includes(line.state))) progress(line, cycleFor(line));
@@ -239,10 +325,10 @@ function executeBillingCommand({ db: original, command, authority }) {
     },
       log(by, action, target, extra = {}) { const eventKey = id("transition", [action, target, extra, at]); if (!db.audit.some(row => row.eventKey === eventKey)) db.audit.push({ at: iso(at), by, action, target, ...extra, eventKey }); },
       notifyOwner(workspace, kind, details, eventKey) { notice(kind, { id: details.lineId, tool: workspace.lines.find(line => line.id === details.lineId)?.tool }, eventKey, at, details, workspace); },
-    });
+    }, { workspaceId: ws.id });
     for (const line of ws.lines) {
       if (dueDowngrades.has(line.id) && line.state === "active") line.billingRenewalDueAt = dueDowngrades.get(line.id);
-      if (line.scheduledSeatChange && Date.parse(line.scheduledSeatChange.effectiveAt) <= at && line.state === "active") {
+      if (ws.state !== 'suspended' && line.scheduledSeatChange && Date.parse(line.scheduledSeatChange.effectiveAt) <= at && line.state === "active") {
         const change = line.scheduledSeatChange; assertSeatQuantity(line, change.quantity);
         const ratio = change.quantity / line.snapshot.quantity;
         line.snapshot = { ...line.snapshot, quantity: change.quantity, amount: money(line.snapshot.amount * ratio), periodAmount: money((line.snapshot.periodAmount ?? line.snapshot.amount) * ratio) };
@@ -323,4 +409,4 @@ function executeBillingCommand({ db: original, command, authority }) {
   return { db, effects, result, duplicate: false };
 }
 
-module.exports = { executeBillingCommand, RETRY_DAYS };
+module.exports = { executeBillingCommand, selectBillingDue, RETRY_DAYS };

@@ -49,3 +49,34 @@ test("price notices use real renewal intervals and do not reserve duplicate noti
   assert.equal(f.S.db.notifications.filter(n => n.eventKey === "price:pd_fixture:ln_notice").length, 1);
   assert.equal(f.S.db.mailbox.filter(n => n.eventKey === "price:pd_fixture:ln_notice").length, 1);
 });
+
+test('scoped advancement preserves other workspace schedules, service deliveries and ticket deadlines', () => {
+  const f = fixture({ id: 'trial_a', tool: 'tasks', planId: 'tasks_pro', cycle: 'monthly', state: 'trialing', trialEndsAt: '2026-10-07T09:00:00.000Z', snapshot: { amount: 58, unit: 29, quantity: 2, currency: 'AED' } });
+  const other = structuredClone(f.ws); other.id = 'ws_other'; other.lines[0].id = 'trial_b'; f.S.db.workspaces.push(other);
+  const deadline = f.S.iso(f.now());
+  f.S.db.serviceRequests = [f.ws, other].map(ws => ({ id: `service:${ws.id}`, workspaceId: ws.id, state: 'in_review', deliveries: [{ autoApproveAt: deadline }] }));
+  f.S.db.tickets = [f.ws, other].map(ws => ({ id: `ticket:${ws.id}`, workspaceId: ws.id, state: 'waiting_for_you', autoCloseAt: deadline }));
+  advance(f.S, { workspaceId: f.ws.id });
+  assert.equal(f.ws.lines[0].state, 'free'); assert.equal(other.lines[0].state, 'trialing');
+  assert.equal(f.S.db.serviceRequests[0].state, 'completed'); assert.equal(f.S.db.serviceRequests[1].state, 'in_review');
+  assert.equal(f.S.db.tickets[0].state, 'closed'); assert.equal(f.S.db.tickets[1].state, 'waiting_for_you');
+  advance(f.S, { workspaceId: other.id });
+  assert.equal(other.lines[0].state, 'free'); assert.equal(f.S.db.serviceRequests[1].state, 'completed'); assert.equal(f.S.db.tickets[1].state, 'closed');
+});
+
+test('a scoped billing pass applies a published global price to every affected workspace once', () => {
+  const f = fixture({ id: 'price_a', tool: 'tasks', planId: 'tasks_pro', cycle: 'monthly', state: 'active', periodEnd: '2026-11-06T09:00:00.000Z', snapshot: { amount: 58, unit: 29, quantity: 2, currency: 'AED' } });
+  Object.assign(f.line.snapshot, f.S.resolveForWorkspace('tasks_pro', f.ws, 'monthly', 2));
+  const other = structuredClone(f.ws); other.id = 'ws_other'; other.lines[0].id = 'price_b';
+  Object.assign(other.lines[0].snapshot, f.S.resolveForWorkspace('tasks_pro', other, 'monthly', 3));
+  other.lines[0].scheduled = { kind: 'downgrade', planId: 'tasks_free', effectiveAt: f.S.iso(f.now()) }; f.S.db.workspaces.push(other);
+  const cell = 'tasks_pro:monthly:gcc';
+  const draft = { id: 'pd_global', state: 'published', applyMode: 'existing_now', priceVersion: f.S.db.priceVersion + 1, effectiveAt: f.S.iso(f.now()), changes: [{ key: cell, from: f.S.db.grid[cell], to: f.S.db.grid[cell] + 5 }] };
+  f.S.db.priceDrafts = [draft];
+  advance(f.S, { workspaceId: f.ws.id });
+  assert.equal(f.line.snapshot.amount, f.S.resolveForWorkspace('tasks_pro', f.ws, 'monthly', 2).amount);
+  assert.equal(other.lines[0].snapshot.amount, f.S.resolveForWorkspace('tasks_pro', other, 'monthly', 3).amount);
+  assert.equal(other.lines[0].snapshot.quantity, 3); assert.equal(other.lines[0].scheduled.kind, 'downgrade');
+  const appliedAt = draft.appliedAt; advance(f.S, { workspaceId: f.ws.id });
+  assert.equal(draft.appliedAt, appliedAt); assert.equal(f.S.db.audit.filter(row => row.action === 'price_effective').length, 1);
+});

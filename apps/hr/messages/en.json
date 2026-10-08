@@ -2827,6 +2827,12 @@
     },
     "successorUnavailable": "Successor unavailable",
     "successorWarning": "The planned successor is no longer eligible. Cancel the schedule and choose an active successor before the end boundary.",
-    "working": "Saving the original request…"
+    "working": "Saving the original request…",
+    "staffProtection": {
+      "authority": "Offboarding ends OrgTik staff app access. Rehire does not restore staff authority; a separate authorized reappointment is required.",
+      "qualified": "Another qualified super administrator is active now. Their status is checked again for the chosen end date and when offboarding becomes due.",
+      "noReplacement": "Another qualified active OrgTik super administrator must already be in place. Transferring workspace ownership does not assign this staff role.",
+      "recovery": "OrgTik administrative recovery is required. Departed staff access remains revoked; no staff role was assigned automatically."
+    }
   }
 }

@@ -1,7 +1,7 @@
 const { test } = require("node:test");
 const assert = require("node:assert/strict");
 const { makeStore } = require("../apps/admin/store");
-const { executeBillingCommand } = require("./workspace-billing-lifecycle");
+const { executeBillingCommand, selectBillingDue } = require("./workspace-billing-lifecycle");
 const DAY = 86400000, start = Date.parse("2026-10-07T09:00:00Z"), due = start + 30 * DAY;
 const iso = value => new Date(value).toISOString();
 const clone = value => JSON.parse(JSON.stringify(value));
@@ -211,5 +211,140 @@ test("missing historical debt invoice never becomes a replacement current-price 
   const db = fixture(); Object.assign(line(db), { state: "past_due", lastFailure: { at: iso(due), reason: "card_declined" } });
   const before = clone(db);
   assert.throws(() => command(db, "billing.recover", due + DAY, { lineId: "line_fixture", paymentMethodId: "pm_fixture" }), error => error.code === "billing_invoice_unavailable");
+  assert.deepEqual(db, before);
+});
+
+const runWorkspace = (db, workspaceId, at, operationId) => executeBillingCommand({ db, command: { kind: 'billing.run', workspaceId, at: iso(at), operationId }, authority: { kind: 'system', workspaceId } });
+function runSelected(db, at) {
+  for (const selected of selectBillingDue({ db, at })) {
+    const fresh = selectBillingDue({ db, at, workspaceId: selected.workspaceId })[0];
+    if (fresh) db = runWorkspace(db, fresh.workspaceId, at, fresh.operationId).db;
+  }
+  return db;
+}
+
+test('workspace billing runs cannot consume another workspace paid-downgrade renewal anchor', () => {
+  for (const order of [['ws_billing', 'ws_second'], ['ws_second', 'ws_billing']]) {
+    let db = fixture();
+    db.plans.push({ id: 'billing_starter', tool: 'tasks', perUser: true, minSeats: 1, tier: 'starter', status: 'active', defaultUsd: { monthly: 4 } });
+    const second = clone(db.workspaces[0]); second.id = 'ws_second'; second.lines[0].id = 'line_second';
+    second.lines[0].scheduled = { kind: 'downgrade', planId: 'billing_starter', effectiveAt: iso(due) }; db.workspaces.push(second);
+    const untouchedId = order[1], untouched = clone(db.workspaces.find(ws => ws.id === untouchedId));
+    db = runWorkspace(db, order[0], due, `ordered:${order[0]}`).db;
+    assert.deepEqual(db.workspaces.find(ws => ws.id === untouchedId), untouched);
+    db = runWorkspace(db, order[1], due, `ordered:${order[1]}`).db;
+    const firstInvoice = db.invoices.find(row => row.workspaceId === 'ws_billing'), secondInvoice = db.invoices.find(row => row.workspaceId === 'ws_second');
+    assert.equal(firstInvoice.total, 20); assert.equal(secondInvoice.total, 8);
+    assert.equal(secondInvoice.dueAt, iso(due)); assert.equal(db.workspaces[1].lines[0].periodStart, iso(due));
+    assert.equal(db.workspaces[1].lines[0].periodEnd, iso(due + 30 * DAY));
+    const paid = clone(db.invoices), notices = db.mailbox.length;
+    for (const workspaceId of order) db = runWorkspace(db, workspaceId, due, `ordered:${workspaceId}`).db;
+    assert.deepEqual(db.invoices, paid); assert.equal(db.mailbox.length, notices);
+  }
+});
+
+test('recorded earlier debt is processed even when a legacy line still has a future period end', () => {
+  const db = fixture({ decline: true });
+  Object.assign(line(db), { state: 'past_due', periodEnd: iso(due + 30 * DAY), lastFailure: { at: iso(due), reason: 'card_declined' } });
+  db.invoices.push({ id: 'recorded_debt', number: 'INV-2026-002000', workspaceId: 'ws_billing', state: 'past_due', currency: 'USD', dueAt: iso(due), lines: [{ lineId: 'line_fixture', amount: 20 }], total: 20, subtotal: 20, tax: 0, payments: [{ id: 'recorded_failed', amount: 20, currency: 'USD', status: 'failed', at: iso(due) }], creditNotes: [], refunded: 0 });
+  const before = clone(db), jobs = selectBillingDue({ db, at: due + DAY });
+  assert.equal(jobs.length, 1); assert.ok(jobs[0].events.some(event => event.kind === 'debt_reconcile'));
+  const next = runSelected(db, due + DAY);
+  assert.deepEqual(db, before); assert.equal(next.invoices.length, 2); assert.equal(next.invoices[1].id, 'recorded_debt');
+  assert.equal(next.invoices[1].total, 20); assert.equal(next.invoices[1].payments.length, 2);
+  assert.equal(next.invoices[1].payments.at(-1).scheduledAt, iso(due + DAY));
+  assert.deepEqual(next.invoices[0], before.invoices[0]); assert.deepEqual(selectBillingDue({ db: next, at: due + DAY }), []);
+});
+
+test('paid downgrade reuses an already issued invoice at the preserved original renewal boundary', () => {
+  const db = fixture();
+  db.plans.push({ id: 'billing_starter', tool: 'tasks', perUser: true, minSeats: 1, tier: 'starter', status: 'active', defaultUsd: { monthly: 4 } });
+  line(db).scheduled = { kind: 'downgrade', planId: 'billing_starter', effectiveAt: iso(due) };
+  const issued = { id: 'previously_issued', number: 'INV-2026-002000', workspaceId: 'ws_billing', state: 'open', kind: 'subscription', currency: 'USD', dueAt: iso(due), lines: [{ lineId: 'line_fixture', planId: 'billing_plan', amount: 20 }], total: 20, subtotal: 20, tax: 0, payments: [], creditNotes: [], refunded: 0 };
+  db.invoices.push(issued);
+  const paid = runSelected(db, due);
+  assert.equal(paid.invoices.length, 2); assert.equal(paid.invoices[1].id, issued.id); assert.equal(paid.invoices[1].number, issued.number);
+  assert.equal(paid.invoices[1].total, issued.total); assert.deepEqual(paid.invoices[1].lines, issued.lines);
+  assert.equal(paid.invoices[1].payments.length, 1); assert.equal(paid.invoices[1].payments[0].amount, issued.total);
+  assert.equal(line(paid).planId, 'billing_starter'); assert.equal(line(paid).periodStart, iso(due));
+  assert.deepEqual(selectBillingDue({ db: paid, at: due }), []); assert.deepEqual(runSelected(paid, due).invoices, paid.invoices);
+});
+
+test('due selection is pure, deterministic and empty after a successful frozen-time renewal', () => {
+  const db = fixture(), before = clone(db);
+  assert.deepEqual(selectBillingDue({ db, at: start }), []);
+  const jobs = selectBillingDue({ db, at: due });
+  assert.deepEqual(selectBillingDue({ db, at: iso(due) }), jobs); assert.deepEqual(db, before);
+  assert.equal(jobs.length, 1); assert.equal(jobs[0].workspaceId, 'ws_billing'); assert.equal(jobs[0].dueAt, iso(due));
+  assert.match(jobs[0].operationId, /^auto-billing:[a-f0-9]{40}$/);
+  const paid = runSelected(db, due), count = Object.keys(paid.billingLifecycle.operations).length;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    assert.deepEqual(selectBillingDue({ db: paid, at: due }), []);
+    assert.deepEqual(selectBillingDue({ db: paid, at: due + 1 }), []);
+  }
+  assert.equal(Object.keys(paid.billingLifecycle.operations).length, count); assert.equal(count, 1);
+});
+
+test('failed cycles select only unprocessed retries and exact dunning/retention boundaries', () => {
+  let db = runSelected(fixture({ decline: true }), due);
+  assert.deepEqual(selectBillingDue({ db, at: due }), []);
+  for (const day of [1, 3, 5]) {
+    const jobs = selectBillingDue({ db, at: due + day * DAY });
+    assert.equal(jobs.length, 1); assert.ok(jobs[0].events.some(event => event.kind === 'payment_retry'));
+    db = runSelected(db, due + day * DAY); assert.deepEqual(selectBillingDue({ db, at: due + day * DAY }), []);
+  }
+  assert.deepEqual(selectBillingDue({ db, at: due + 7 * DAY - 1 }), []);
+  assert.ok(selectBillingDue({ db, at: due + 7 * DAY })[0].events.some(event => event.kind === 'read_only'));
+  db = runSelected(db, due + 7 * DAY); assert.equal(line(db).state, 'read_only'); assert.deepEqual(selectBillingDue({ db, at: due + 7 * DAY }), []);
+  db = runSelected(db, due + 37 * DAY); assert.equal(line(db).state, 'ended'); assert.equal(invoice(db).payments.length, 4);
+  assert.deepEqual(selectBillingDue({ db, at: due + 37 * DAY }), []);
+  const retentionAt = due + (37 + db.settings.retention.toolDays) * DAY;
+  db = runSelected(db, retentionAt); assert.equal(line(db).state, 'deleted'); assert.deepEqual(selectBillingDue({ db, at: retentionAt }), []);
+});
+
+test('suspended and closed workspaces cannot select active renewal, trial or seat charges', () => {
+  const db = fixture(), ws = db.workspaces[0]; ws.state = 'suspended';
+  line(db).scheduledSeatChange = { quantity: 1, effectiveAt: iso(due), operationId: 'reduce' };
+  ws.lines.push({ ...clone(line(db)), id: 'trial_suspended', state: 'trialing', trialEndsAt: iso(due), scheduledSeatChange: undefined });
+  db.serviceRequests.push({ id: 'service_suspended', workspaceId: ws.id, state: 'in_review', deliveries: [{ autoApproveAt: iso(due) }] });
+  assert.deepEqual(selectBillingDue({ db, at: due }), []);
+  const unchanged = command(db, 'billing.run', due).db;
+  assert.equal(unchanged.invoices.length, 1); assert.equal(line(unchanged).snapshot.quantity, 2);
+  assert.equal(unchanged.workspaces[0].lines[1].state, 'trialing'); assert.equal(unchanged.serviceRequests[0].state, 'in_review');
+  for (const state of ['cancelled', 'deleted']) { ws.state = state; assert.deepEqual(selectBillingDue({ db, at: due }), []); }
+});
+
+test('completed trial, cancellation, service and ticket markers do not create repeated jobs', () => {
+  const db = fixture();
+  Object.assign(line(db), { state: 'trialing', trialEndsAt: iso(due) });
+  db.workspaces[0].lines.push({ ...clone(line(db)), id: 'cancel_fixture', state: 'cancelling', cancelAt: iso(due) });
+  db.serviceRequests.push({ id: 'service_due', workspaceId: 'ws_billing', state: 'in_review', deliveries: [{ autoApproveAt: iso(due) }] });
+  db.tickets.push({ id: 'ticket_due', workspaceId: 'ws_billing', state: 'waiting_for_you', autoCloseAt: iso(due) });
+  const jobs = selectBillingDue({ db, at: due });
+  assert.ok(jobs[0].events.some(event => event.kind === 'trial_end')); assert.ok(jobs[0].events.some(event => event.kind === 'ticket_close'));
+  const next = runSelected(db, due);
+  assert.equal(next.serviceRequests[0].state, 'completed'); assert.equal(next.tickets[0].state, 'closed');
+  assert.equal(next.invoices.length, 1); assert.deepEqual(selectBillingDue({ db: next, at: due }), []);
+});
+
+test('global price publication selects one host job and completed markers settle every scoped poll', () => {
+  const db = fixture(), second = clone(db.workspaces[0]); second.id = 'ws_second'; second.lines[0].id = 'line_second'; db.workspaces.push(second);
+  const cell = 'tasks_pro:monthly:gcc', old = db.grid[cell];
+  db.priceDrafts.push({ id: 'global_due', state: 'published', applyMode: 'existing_now', priceVersion: db.priceVersion + 1, effectiveAt: iso(start), changes: [{ key: cell, from: old, to: old + 1 }] });
+  const jobs = selectBillingDue({ db, at: start });
+  assert.equal(jobs.length, 1); assert.equal(jobs[0].events[0].kind, 'price_publication');
+  assert.equal(selectBillingDue({ db, at: start, workspaceId: 'ws_second' }).length, 1);
+  const published = runSelected(db, start);
+  assert.equal(published.grid[cell], old + 1); assert.equal(published.priceDrafts[0].appliedAt, iso(start));
+  assert.deepEqual(selectBillingDue({ db: published, at: start }), []);
+  assert.deepEqual(selectBillingDue({ db: published, at: start, workspaceId: 'ws_second' }), []);
+  assert.equal(Object.keys(published.billingLifecycle.operations).length, 1);
+});
+
+test('an unavailable scheduled downgrade fails without consuming its marker or issuing a replacement charge', () => {
+  const db = fixture(), before = clone(db);
+  line(db).scheduled = { kind: 'downgrade', planId: 'missing_plan', effectiveAt: iso(due) };
+  before.workspaces[0].lines[0].scheduled = clone(line(db).scheduled);
+  assert.throws(() => runSelected(db, due), { status: 503, code: 'scheduled_downgrade_unavailable' });
   assert.deepEqual(db, before);
 });

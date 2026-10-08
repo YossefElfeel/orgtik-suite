@@ -102,6 +102,54 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     }
     return result;
   }
+  async function commitSystemPhase(job, at, execute) {
+    const identity = identityFor(), before = platform().exportState(), runtimesBefore = registry.exportState(), staffBefore = exportStaffState(), accountsBefore = authStorage.snapshot(identity);
+    let commitAttempted = false;
+    try {
+      await clock.runPinned({ at, seed: `system:${realm}:${persist.epoch}:${persist.applied}:${job}` }, execute);
+      const after = platform().exportState(), workspaceState = registry.exportState(), staffState = exportStaffState();
+      const changes = [...authStorage.snapshot(identity)].filter(([id, value]) => accountsBefore.get(id) !== value).map(([id, value]) => ({ id, value, expected: accountsBefore.get(id) ?? null }));
+      if (JSON.stringify(after) === JSON.stringify(before) && JSON.stringify(workspaceState) === JSON.stringify(runtimesBefore) && JSON.stringify(staffState) === JSON.stringify(staffBefore) && !changes.length) return false;
+      const entry = { epoch: persist.epoch, kind: 'workspace-v1', app: 'admin', method: 'SYSTEM', url: `/__system/${job}`, headers: {}, body: null, actor: { kind: 'system' }, at, checkpoint: encodeDomainCheckpoint({ platformState: after, workspaceState, staffState }) };
+      const identityEffect = { changes, ...(store.kind === 'redis' ? { accountsKey: `orgtik:identity:${realm}:accounts`, emailsKey: `orgtik:identity:${realm}:emails` } : {}) };
+      commitAttempted = true;
+      const committed = await store.commit(entry, { expectedEpoch: persist.epoch, expectedRevision: persist.applied, identity: identityEffect });
+      persist.applied = committed.sequence; persist.modern = true; persist.workspaceModern = true;
+      return true;
+    } catch (error) {
+      identity.hydrate(accountsBefore, { replace: true }); platform().importState(before); registry.importState(runtimesBefore); importStaffState(staffBefore);
+      if (commitAttempted) persist.rebuild = true;
+      throw error;
+    }
+  }
+  async function settleSystemDue(key, req) {
+    const url = req.url || '/';
+    // Immutable assets and operational probes must remain non-destructive smoke surfaces.
+    if (req.method === 'OPTIONS' || /^\/(?:__|uploads\/|assets\/|favicon\.|icons\/)/.test(url) || key === 'tasks' && isTaskSampleRequest(req)) return;
+    const at = clock.now();
+    const dueWorkspaces = platform().getStore().db.workspaces.filter(workspace => !['cancelled', 'deleted'].includes(workspace.state) && (workspace.offboardings || []).some(row => row.status === 'scheduled' && Date.parse(row.effectiveAt) <= at)).map(workspace => workspace.id);
+    if (dueWorkspaces.length) await commitSystemPhase('offboarding', at, () => {
+      for (const id of dueWorkspaces) {
+        const S = platform().getStore(), workspace = S.workspace(id), runtime = registry.create(id, 'hr');
+        try {
+          require('./workspace-hr').runOffboarding({ S, identity: identityFor(), workspace, actor: null, runtime, transferOwned: row => transferOwned(workspace, row, runtime) });
+          registry.commit(runtime);
+        } finally { runtime.close(); }
+      }
+    });
+    const billing = require('./workspace-billing-lifecycle');
+    const selected = billing.selectBillingDue({ db: platform().getStore().db, at });
+    if (selected.length) await commitSystemPhase('billing', at, () => {
+      for (const initial of selected) {
+        // Earlier global price publication may have consumed shared markers. Re-select against
+        // the current candidate and never retain references across a platform import.
+        const S = platform().getStore(), job = billing.selectBillingDue({ db: S.db, at, workspaceId: initial.workspaceId })[0];
+        if (!job) continue;
+        const value = billing.executeBillingCommand({ db: S.db, command: { kind: 'billing.run', workspaceId: job.workspaceId, operationId: job.operationId, at: S.iso(at) }, authority: { kind: 'system', workspaceId: job.workspaceId } });
+        platform().importState({ ...platform().exportState(), db: value.db });
+      }
+    });
+  }
   function billingCommand(frame, req, kind, workspaceId) {
     const p = frame.principal, S = platform().getStore(), ws = S.workspace(workspaceId);
     const system = kind === 'billing.run';
@@ -330,12 +378,36 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     app.use((error, req, res, next) => res.status(error.status || 503).json({ success: false, code: error.code || 'workspace_unavailable', message: error.message }));
     return app;
   }
-  async function handle({ key, req, body, legacyApp, send, sendJson, sync }) {
+  async function handle({ key, req, body, legacyApp, legacyAppFor, send, sendJson, sync }) {
     await initialize();
     await sync();
-    const identity = identityFor(), S = platform().getStore();
-    identity.configureAuthority(authority);
-    const saved = await accountStore.accounts(); identity.hydrate(saved);
+    let identity, S, saved, currentLegacyApp;
+    const refreshLiveReferences = async () => {
+      identity = identityFor(); saved = await accountStore.accounts(); identity.hydrate(saved); identity.configureAuthority(authority);
+      S = platform().getStore(); initializeWorkspaceAuthority(S, identity, { seedAt: new clock.RealDate(persist.seedAt).toISOString() });
+      currentLegacyApp = legacyAppFor ? legacyAppFor() : legacyApp;
+      if (typeof currentLegacyApp !== 'function') throw failure(503, 'workspace_runtime_unavailable', 'The current app runtime is unavailable.');
+    };
+    try { await refreshLiveReferences(); }
+    catch { return sendJson(503, { success: false, code: 'workspace_runtime_unavailable', message: 'The current app runtime is unavailable. Try again.' }); }
+    // Deadline work is a trusted transaction independent of the caller's authorization.
+    // Its committed state must survive a subsequent expired/offboarded/read-only refusal.
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try { await settleSystemDue(key, req); break; }
+      catch (error) {
+        if (error.status === 409 && attempt === 0) {
+          // Discarded candidates never become authority. Reload the winning checkpoint and
+          // canonical accounts before one trusted retry; the user body has not run yet.
+          try {
+            await sync(); await refreshLiveReferences();
+          } catch { return sendJson(503, { success: false, code: 'lifecycle_unavailable', message: 'Due workspace transitions could not be completed. Try again.' }); }
+          continue;
+        }
+        return sendJson(error.status || 503, { success: false, code: error.code || 'lifecycle_unavailable', message: 'Due workspace transitions could not be completed. Try again.' });
+      }
+    }
+    try { await refreshLiveReferences(); }
+    catch { return sendJson(503, { success: false, code: 'workspace_runtime_unavailable', message: 'The current app runtime is unavailable. Try again.' }); }
     let json;
     try { json = body.length && /application\/json/.test(req.headers["content-type"] || "") ? JSON.parse(body.toString("utf8")) : {}; }
     catch { return sendJson(400, { success: false, code: "invalid_json", message: "Check the request and try again." }); }
@@ -363,7 +435,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       if (/^\/(?:__mock\/|v[12]\/__mock\/)/.test(url) && req.method !== "GET" && (principal?.claims.mode !== 'staff' || !principal?.context.staffAccess?.permissions.admin?.includes("settings:full"))) throw failure(403, "mock_control_forbidden", "Only an authorized mock administrator can do this.");
       const request = { frame, key, req, principal, runtime: null };
       const result = await authority.runPrepared(frame, () => requests.run(request, async () => {
-        let app = key === "sos" || key === "admin" ? accountRoutes(legacyApp, frame) : legacyApp;
+        let app = key === "sos" || key === "admin" ? accountRoutes(currentLegacyApp, frame) : currentLegacyApp;
         if (taskSample) { app = express(); app.use(createTaskSampleRouter({ config })); }
         else if (publicFile) {
           const workspaceId = registry.publicFileWorkspace(publicFile[1]);

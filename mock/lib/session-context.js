@@ -7,8 +7,10 @@ function createContextService({ realm, identity, platform }) {
   function staffAccess(user) {
     const internal = platform().workspace('ws_orgtik');
     if (!internal?.members.some(member => member.userKey === user.key && member.status === 'active' && member.role !== 'guest')) return { actorUserId: user.id, apps: [], roles: {}, permissions: {} };
+    for (const value of [platform().db.staffAuthorityRevocations, platform().db.staffAccessEpochs]) if (value !== undefined && (!value || typeof value !== 'object' || Array.isArray(value))) throw fail('staff_authority_unavailable', 503);
+    if (Object.hasOwn(platform().db.staffAuthorityRevocations || {}, user.key)) return { actorUserId: user.id, apps: [], roles: {}, permissions: {} };
     const admin = platform().db.staffRoles?.[user.key] || [], wm = identity.grants.website_manager?.[user.key]?.roles || [];
-    return { actorUserId: user.id, apps: [...(admin.length ? ["admin"] : []), ...(wm.length ? ["wm"] : [])], roles: { ...(admin.length ? { admin: [...admin] } : {}), ...(wm.length ? { wm: [...wm] } : {}) }, permissions: { ...(admin.length ? { admin: permissionsFor(admin) } : {}), ...(wm.length ? { wm: wmPermissionsFor(wm) } : {}) } };
+    return { actorUserId: user.id, accessEpoch: platform().db.staffAccessEpochs?.[user.key] ?? 0, apps: [...(admin.length ? ["admin"] : []), ...(wm.length ? ["wm"] : [])], roles: { ...(admin.length ? { admin: [...admin] } : {}), ...(wm.length ? { wm: [...wm] } : {}) }, permissions: { ...(admin.length ? { admin: permissionsFor(admin) } : {}), ...(wm.length ? { wm: wmPermissionsFor(wm) } : {}) } };
   }
   function resolveWorkspace(user, { workspaceId, mode, audience = "suite", readOnly = false, actor = user }) {
     const access = staffAccess(actor);

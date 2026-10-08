@@ -22,6 +22,7 @@ const accessEpoch = value => {
   return value;
 };
 const memberEpoch = context => accessEpoch(context?.workspaceContext?.member?.accessEpoch);
+const staffEpoch = context => accessEpoch(context?.staffAccess?.accessEpoch);
 const normalToken = value => {
   let token = String(value || "").trim();
   if (/^bearer\s+/i.test(token)) token = token.replace(/^bearer\s+/i, "");
@@ -97,6 +98,7 @@ function createSessionAuthority(options) {
       context = await callbacks.resolveWorkspace(effective, { workspaceId: claims.workspaceId, mode: claims.mode, audience: family.accessAudience, readOnly, actor, ...(revalidate ? { revalidate: true, frame } : {}) });
       if (!context) throw authError("workspace_forbidden", 403);
       if (claims.mode === "workspace" && accessEpoch(family.memberAccessEpoch) !== memberEpoch(context)) throw authError("membership_revoked");
+      if ((claims.mode === 'staff' || readOnly) && accessEpoch(family.staffAccessEpoch) !== staffEpoch(context)) throw authError('staff_membership_revoked');
     } else if (claims.workspaceId !== null || family.accessAudience !== "identity") throw authError();
     return { user: effective, actor, claims, context, session, family, readOnly };
   }
@@ -117,7 +119,7 @@ function createSessionAuthority(options) {
   }
   function newFamily(session, { workspaceId, mode, audience, context }, state) {
     const fid = id(), at = now(), expiresAt = Math.min(session.expiresAt, at + REFRESH_TTL);
-    const family = { fid, sid: session.sid, workspaceId, mode, accessAudience: audience, memberAccessEpoch: mode === "workspace" ? memberEpoch(context) : 0, generation: 0, tokenHash: null, expiresAt, revokedAt: null };
+    const family = { fid, sid: session.sid, workspaceId, mode, accessAudience: audience, memberAccessEpoch: mode === "workspace" ? memberEpoch(context) : 0, staffAccessEpoch: mode === 'staff' || session.impersonation ? staffEpoch(context) : 0, generation: 0, tokenHash: null, expiresAt, revokedAt: null };
     state.families[fid] = family;
     return mint(session, family);
   }
@@ -182,6 +184,7 @@ function createSessionAuthority(options) {
             const projection = await callbacks.resolveWorkspace(effective, { workspaceId: family.workspaceId, mode: family.mode, audience: family.accessAudience, readOnly: Boolean(session.impersonation), actor });
             if (!projection) throw authError("workspace_forbidden", 403);
             if (family.mode === "workspace" && accessEpoch(family.memberAccessEpoch) !== memberEpoch(projection)) throw authError("membership_revoked");
+            if ((family.mode === 'staff' || session.impersonation) && accessEpoch(family.staffAccessEpoch) !== staffEpoch(projection)) throw authError('staff_membership_revoked');
           }
         }
         Object.assign(doc.state.sessions, clone(pending.sessions)); Object.assign(doc.state.families, clone(pending.families));

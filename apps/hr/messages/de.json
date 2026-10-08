@@ -2827,6 +2827,12 @@
     },
     "successorUnavailable": "Nachfolger nicht verfügbar",
     "successorWarning": "Der geplante Nachfolger ist nicht mehr geeignet. Brich den Zeitplan ab und wähle vor der Endgrenze einen aktiven Nachfolger.",
-    "working": "Ursprüngliche Anfrage wird gespeichert…"
+    "working": "Ursprüngliche Anfrage wird gespeichert…",
+    "staffProtection": {
+      "authority": "Offboarding beendet den Zugriff auf OrgTik-Mitarbeiterapps. Eine Wiedereinstellung stellt die Mitarbeiterrechte nicht wieder her; eine gesonderte autorisierte Ernennung ist erforderlich.",
+      "qualified": "Ein weiterer qualifizierter Super-Admin ist aktuell aktiv. Sein Status wird für das gewählte Enddatum und bei Fälligkeit erneut geprüft.",
+      "noReplacement": "Ein weiterer qualifizierter aktiver OrgTik-Super-Admin muss bereits vorhanden sein. Die Übergabe des Workspace-Eigentums vergibt diese Mitarbeiterrolle nicht.",
+      "recovery": "Eine administrative Wiederherstellung für OrgTik ist erforderlich. Der Zugriff der ausgeschiedenen Person bleibt entzogen; keine Mitarbeiterrolle wurde automatisch vergeben."
+    }
   }
 }
