@@ -42,6 +42,7 @@ function useMounted() {
 export function SuiteFrame({ children }: { children: ReactNode }) {
   const t = useTranslations("Shell");
   const ts = useTranslations("Suite");
+  const presentationText = useTranslations("Presentation");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -81,6 +82,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   if (!can.isReviewerOnly) {
     sections.push({ label: t("sectionSetup"), items: [item("/integrations", t("integrations"), <LinkSimple />), item("/settings", t("settings"), <Gear />)] });
   }
+  if (process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1") sections.unshift({ items: [item("/presentation", presentationText("heading"), <Megaphone />)] });
 
   const signOut = async () => {
     await logout();

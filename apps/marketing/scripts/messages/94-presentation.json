@@ -1,0 +1,527 @@
+{
+  "Presentation.heading": {
+    "en": "Marketing presentation",
+    "ar": "عرض التسويق",
+    "de": "Marketingpräsentation",
+    "fr": "Présentation marketing",
+    "it": "Presentazione marketing"
+  },
+  "Presentation.intro": {
+    "en": "Explore campaign delivery, consent, content and journeys in an isolated demo.",
+    "ar": "جرّب الحملات والموافقة والمحتوى ورحلات العملاء في عرض منفصل.",
+    "de": "Kampagnen, Einwilligung, Inhalte und Abläufe in einer isolierten Demo erkunden.",
+    "fr": "Explorez campagnes, consentement, contenu et parcours dans une démo isolée.",
+    "it": "Esplora campagne, consenso, contenuti e percorsi in una demo isolata."
+  },
+  "Presentation.reset": {
+    "en": "Reset Marketing scene",
+    "ar": "إعادة ضبط عرض التسويق",
+    "de": "Marketingszene zurücksetzen",
+    "fr": "Réinitialiser le marketing",
+    "it": "Ripristina marketing"
+  },
+  "Presentation.resetDone": {
+    "en": "Marketing demo restored.",
+    "ar": "تم استعادة عرض التسويق.",
+    "de": "Marketingdemo wiederhergestellt.",
+    "fr": "Démo marketing restaurée.",
+    "it": "Demo marketing ripristinata."
+  },
+  "Presentation.show": {
+    "en": "Show",
+    "ar": "عرض",
+    "de": "Anzeigen",
+    "fr": "Afficher",
+    "it": "Mostra"
+  },
+  "Presentation.campaign": {
+    "en": "Campaign and CRM",
+    "ar": "الحملة وCRM",
+    "de": "Kampagne und CRM",
+    "fr": "Campagne et CRM",
+    "it": "Campagna e CRM"
+  },
+  "Presentation.audience": {
+    "en": "Audience consent",
+    "ar": "موافقة الجمهور",
+    "de": "Zielgruppeneinwilligung",
+    "fr": "Consentement du public",
+    "it": "Consenso pubblico"
+  },
+  "Presentation.email": {
+    "en": "Email designer",
+    "ar": "مصمم البريد",
+    "de": "E-Mail-Designer",
+    "fr": "Concepteur d’e-mail",
+    "it": "Designer e-mail"
+  },
+  "Presentation.inbox": {
+    "en": "Social inbox",
+    "ar": "صندوق السوشيال",
+    "de": "Social-Postfach",
+    "fr": "Messagerie sociale",
+    "it": "Posta social"
+  },
+  "Presentation.queue": {
+    "en": "Publishing queue",
+    "ar": "طابور النشر",
+    "de": "Veröffentlichungswarteschlange",
+    "fr": "File de publication",
+    "it": "Coda pubblicazione"
+  },
+  "Presentation.journeys": {
+    "en": "Journeys",
+    "ar": "رحلات العملاء",
+    "de": "Abläufe",
+    "fr": "Parcours",
+    "it": "Percorsi"
+  },
+  "Presentation.ai": {
+    "en": "AI drafts",
+    "ar": "مسودات AI",
+    "de": "KI-Entwürfe",
+    "fr": "Brouillons IA",
+    "it": "Bozze IA"
+  },
+  "Presentation.simulateSend": {
+    "en": "Simulate campaign delivery",
+    "ar": "محاكاة إرسال الحملة",
+    "de": "Kampagne simulieren",
+    "fr": "Simuler la campagne",
+    "it": "Simula campagna"
+  },
+  "Presentation.sent": {
+    "en": "Delivered: {count}. Suppressed without consent: {suppressed}.",
+    "ar": "تم الإرسال: {count}. المستبعدون دون موافقة: {suppressed}.",
+    "de": "Zugestellt: {count}. Ohne Einwilligung unterdrückt: {suppressed}.",
+    "fr": "Distribués : {count}. Sans consentement : {suppressed}.",
+    "it": "Consegnati: {count}. Esclusi senza consenso: {suppressed}."
+  },
+  "Presentation.createLeads": {
+    "en": "Create mock CRM leads",
+    "ar": "إنشاء عملاء CRM محاكاة",
+    "de": "CRM-Demoleads erstellen",
+    "fr": "Créer des prospects CRM simulés",
+    "it": "Crea lead CRM simulati"
+  },
+  "Presentation.leadsCreated": {
+    "en": "Local attributed leads created.",
+    "ar": "تم إنشاء عملاء محليين بمصدر الحملة.",
+    "de": "Lokale Leads mit Kampagnenquelle erstellt.",
+    "fr": "Prospects locaux avec attribution créés.",
+    "it": "Lead locali attribuiti creati."
+  },
+  "Presentation.delivered": {
+    "en": "Delivered",
+    "ar": "تم الإرسال",
+    "de": "Zugestellt",
+    "fr": "Distribués",
+    "it": "Consegnati"
+  },
+  "Presentation.opened": {
+    "en": "Opened",
+    "ar": "تم الفتح",
+    "de": "Geöffnet",
+    "fr": "Ouverts",
+    "it": "Aperti"
+  },
+  "Presentation.clicked": {
+    "en": "Clicked",
+    "ar": "تم النقر",
+    "de": "Geklickt",
+    "fr": "Cliqués",
+    "it": "Cliccati"
+  },
+  "Presentation.attribution": {
+    "en": "Campaign attribution",
+    "ar": "مصدر الحملة",
+    "de": "Kampagnenzuordnung",
+    "fr": "Attribution de campagne",
+    "it": "Attribuzione campagna"
+  },
+  "Presentation.crmNote": {
+    "en": "These lead IDs and campaign sources are local. Delivery to the Sales workspace is pending.",
+    "ar": "معرّفات العملاء ومصادر الحملة محلية. الربط بمساحة Sales ما زال قيد التنفيذ.",
+    "de": "Lead-IDs und Quellen sind lokal. Übergabe an Sales bleibt offen.",
+    "fr": "Identifiants et sources sont locaux. La transmission vers Sales reste à faire.",
+    "it": "ID e origini sono locali. Il trasferimento verso Sales resta da fare."
+  },
+  "Presentation.noLeads": {
+    "en": "No attributed leads",
+    "ar": "لا يوجد عملاء منسوبون للحملة",
+    "de": "Keine zugeordneten Leads",
+    "fr": "Aucun prospect attribué",
+    "it": "Nessun lead attribuito"
+  },
+  "Presentation.consent": {
+    "en": "Consent and unsubscribe",
+    "ar": "الموافقة وإلغاء الاشتراك",
+    "de": "Einwilligung und Abmeldung",
+    "fr": "Consentement et désabonnement",
+    "it": "Consenso e disiscrizione"
+  },
+  "Presentation.consentNote": {
+    "en": "Opting out suppresses this contact from the next simulated email delivery.",
+    "ar": "إلغاء الموافقة يستبعد جهة الاتصال من إرسال البريد المحاكى التالي.",
+    "de": "Abmeldung unterdrückt den Kontakt beim nächsten simulierten Versand.",
+    "fr": "Le retrait du consentement exclut le contact du prochain envoi simulé.",
+    "it": "La revoca esclude il contatto dal prossimo invio simulato."
+  },
+  "Presentation.canEmail": {
+    "en": "Email consent",
+    "ar": "الموافقة على البريد",
+    "de": "E-Mail-Einwilligung",
+    "fr": "Consentement e-mail",
+    "it": "Consenso e-mail"
+  },
+  "Presentation.noPeople": {
+    "en": "No audience contacts",
+    "ar": "لا توجد جهات اتصال",
+    "de": "Keine Zielgruppenkontakte",
+    "fr": "Aucun contact",
+    "it": "Nessun contatto"
+  },
+  "Presentation.emailDesigner": {
+    "en": "Email designer",
+    "ar": "مصمم البريد",
+    "de": "E-Mail-Designer",
+    "fr": "Concepteur d’e-mail",
+    "it": "Designer e-mail"
+  },
+  "Presentation.headline": {
+    "en": "Headline",
+    "ar": "العنوان",
+    "de": "Überschrift",
+    "fr": "Titre",
+    "it": "Titolo"
+  },
+  "Presentation.body": {
+    "en": "Message body",
+    "ar": "نص الرسالة",
+    "de": "Nachricht",
+    "fr": "Message",
+    "it": "Messaggio"
+  },
+  "Presentation.cta": {
+    "en": "Button text",
+    "ar": "نص الزر",
+    "de": "Schaltflächentext",
+    "fr": "Texte du bouton",
+    "it": "Testo pulsante"
+  },
+  "Presentation.direction": {
+    "en": "Preview direction",
+    "ar": "اتجاه المعاينة",
+    "de": "Vorschau-Richtung",
+    "fr": "Direction de l’aperçu",
+    "it": "Direzione anteprima"
+  },
+  "Presentation.ltr": {
+    "en": "Left to right",
+    "ar": "من اليسار إلى اليمين",
+    "de": "Links nach rechts",
+    "fr": "De gauche à droite",
+    "it": "Da sinistra a destra"
+  },
+  "Presentation.rtl": {
+    "en": "Right to left",
+    "ar": "من اليمين إلى اليسار",
+    "de": "Rechts nach links",
+    "fr": "De droite à gauche",
+    "it": "Da destra a sinistra"
+  },
+  "Presentation.exportHtml": {
+    "en": "Export HTML preview",
+    "ar": "تصدير معاينة HTML",
+    "de": "HTML-Vorschau exportieren",
+    "fr": "Exporter l’aperçu HTML",
+    "it": "Esporta anteprima HTML"
+  },
+  "Presentation.preview": {
+    "en": "Email preview",
+    "ar": "معاينة البريد",
+    "de": "E-Mail-Vorschau",
+    "fr": "Aperçu e-mail",
+    "it": "Anteprima e-mail"
+  },
+  "Presentation.previewOnly": {
+    "en": "Simulated email preview. No message is sent.",
+    "ar": "معاينة بريد محاكاة. لا تُرسل رسالة.",
+    "de": "Simulierte E-Mail-Vorschau. Keine Nachricht wird gesendet.",
+    "fr": "Aperçu simulé. Aucun message n’est envoyé.",
+    "it": "Anteprima simulata. Nessun messaggio inviato."
+  },
+  "Presentation.previewClicked": {
+    "en": "Preview button clicked.",
+    "ar": "تم النقر على زر المعاينة.",
+    "de": "Vorschauschaltfläche angeklickt.",
+    "fr": "Bouton de l’aperçu activé.",
+    "it": "Pulsante anteprima attivato."
+  },
+  "Presentation.socialInbox": {
+    "en": "Social inbox",
+    "ar": "صندوق السوشيال",
+    "de": "Social-Postfach",
+    "fr": "Messagerie sociale",
+    "it": "Posta social"
+  },
+  "Presentation.incoming": {
+    "en": "A customer asks: when is the next collection available?",
+    "ar": "يسأل عميل: متى تتوفر المجموعة التالية؟",
+    "de": "Eine Person fragt: Wann ist die nächste Kollektion verfügbar?",
+    "fr": "Un client demande : quand sera disponible la prochaine collection ?",
+    "it": "Un cliente chiede: quando sarà disponibile la prossima collezione?"
+  },
+  "Presentation.reply": {
+    "en": "Reply",
+    "ar": "الرد",
+    "de": "Antwort",
+    "fr": "Réponse",
+    "it": "Risposta"
+  },
+  "Presentation.sendReply": {
+    "en": "Save mock reply",
+    "ar": "حفظ رد محاكى",
+    "de": "Demoantwort speichern",
+    "fr": "Enregistrer une réponse simulée",
+    "it": "Salva risposta simulata"
+  },
+  "Presentation.replySaved": {
+    "en": "Reply saved in this simulated inbox.",
+    "ar": "تم حفظ الرد في الصندوق المحاكى.",
+    "de": "Antwort im simulierten Postfach gespeichert.",
+    "fr": "Réponse enregistrée dans la messagerie simulée.",
+    "it": "Risposta salvata nella posta simulata."
+  },
+  "Presentation.queueNote": {
+    "en": "Move posts by drag or the keyboard/menu. Change the date to reschedule; all delivery is simulated.",
+    "ar": "انقل المنشورات بالسحب أو لوحة المفاتيح والقائمة. غيّر التاريخ لإعادة الجدولة؛ الإرسال محاكاة.",
+    "de": "Beiträge ziehen oder per Tastatur/Menü verschieben. Datum ändern zum Neuplanen; Zustellung ist simuliert.",
+    "fr": "Déplacez les posts par glisser ou clavier/menu. Modifiez la date ; la distribution est simulée.",
+    "it": "Sposta i post trascinando o con tastiera/menu. Modifica la data; la consegna è simulata."
+  },
+  "Presentation.draft": {
+    "en": "Draft",
+    "ar": "مسودة",
+    "de": "Entwurf",
+    "fr": "Brouillon",
+    "it": "Bozza"
+  },
+  "Presentation.scheduled": {
+    "en": "Scheduled",
+    "ar": "مجدول",
+    "de": "Geplant",
+    "fr": "Planifié",
+    "it": "Programmata"
+  },
+  "Presentation.scheduleDate": {
+    "en": "Scheduled date",
+    "ar": "تاريخ الجدولة",
+    "de": "Geplantes Datum",
+    "fr": "Date planifiée",
+    "it": "Data programmata"
+  },
+  "Presentation.entry": {
+    "en": "Contact enters campaign",
+    "ar": "دخول جهة اتصال إلى الحملة",
+    "de": "Kontakt tritt der Kampagne bei",
+    "fr": "Contact entre dans la campagne",
+    "it": "Contatto entra nella campagna"
+  },
+  "Presentation.sendEmail": {
+    "en": "Send email to consented contacts",
+    "ar": "إرسال بريد لجهات الاتصال الموافقة",
+    "de": "E-Mail an eingewilligte Kontakte senden",
+    "fr": "E-mail aux contacts consentants",
+    "it": "Invia e-mail ai contatti consenzienti"
+  },
+  "Presentation.waitStep": {
+    "en": "Wait {days} days",
+    "ar": "انتظار {days} أيام",
+    "de": "{days} Tage warten",
+    "fr": "Attendre {days} jours",
+    "it": "Attendi {days} giorni"
+  },
+  "Presentation.createFollowup": {
+    "en": "Create a sales follow-up",
+    "ar": "إنشاء متابعة للمبيعات",
+    "de": "Vertriebsnachverfolgung erstellen",
+    "fr": "Créer un suivi commercial",
+    "it": "Crea follow-up vendite"
+  },
+  "Presentation.delay": {
+    "en": "Delay in days",
+    "ar": "مدة الانتظار بالأيام",
+    "de": "Wartezeit in Tagen",
+    "fr": "Délai en jours",
+    "it": "Attesa in giorni"
+  },
+  "Presentation.delayError": {
+    "en": "Use 0–30 whole days.",
+    "ar": "استخدم عددًا صحيحًا من 0 إلى 30 يومًا.",
+    "de": "0–30 ganze Tage verwenden.",
+    "fr": "Utilisez 0–30 jours entiers.",
+    "it": "Usa 0–30 giorni interi."
+  },
+  "Presentation.saveJourney": {
+    "en": "Save journey",
+    "ar": "حفظ الرحلة",
+    "de": "Ablauf speichern",
+    "fr": "Enregistrer le parcours",
+    "it": "Salva percorso"
+  },
+  "Presentation.runJourney": {
+    "en": "Run mock journey",
+    "ar": "تشغيل الرحلة المحاكاة",
+    "de": "Demoablauf starten",
+    "fr": "Exécuter le parcours simulé",
+    "it": "Esegui percorso simulato"
+  },
+  "Presentation.journeyNote": {
+    "en": "This dry run logs steps without waiting or creating external tasks.",
+    "ar": "التشغيل التجريبي يسجل الخطوات دون انتظار أو إنشاء مهام خارجية.",
+    "de": "Dieser Probelauf protokolliert Schritte ohne Wartezeit oder externe Aufgaben.",
+    "fr": "Cet essai journalise les étapes sans attente ni tâches externes.",
+    "it": "La prova registra passaggi senza attesa o attività esterne."
+  },
+  "Presentation.journeyEntered": {
+    "en": "Entered contacts: {count}",
+    "ar": "جهات الاتصال الداخلة: {count}",
+    "de": "Eingetretene Kontakte: {count}",
+    "fr": "Contacts entrés : {count}",
+    "it": "Contatti entrati: {count}"
+  },
+  "Presentation.journeyEmail": {
+    "en": "Simulated email step",
+    "ar": "خطوة بريد محاكاة",
+    "de": "Simulierter E-Mail-Schritt",
+    "fr": "Étape e-mail simulée",
+    "it": "Passaggio e-mail simulato"
+  },
+  "Presentation.journeyWait": {
+    "en": "Simulated wait: {days} days",
+    "ar": "انتظار محاكى: {days} أيام",
+    "de": "Simulierte Wartezeit: {days} Tage",
+    "fr": "Attente simulée : {days} jours",
+    "it": "Attesa simulata: {days} giorni"
+  },
+  "Presentation.journeyTask": {
+    "en": "Local sales follow-up step",
+    "ar": "خطوة متابعة مبيعات محلية",
+    "de": "Lokaler Vertriebsfolgeschritt",
+    "fr": "Étape de suivi commercial locale",
+    "it": "Passaggio follow-up locale"
+  },
+  "Presentation.journeySuppressed": {
+    "en": "No consented contacts; email step suppressed.",
+    "ar": "لا توجد جهات اتصال موافقة؛ استُبعدت خطوة البريد.",
+    "de": "Keine eingewilligten Kontakte; E-Mail-Schritt unterdrückt.",
+    "fr": "Aucun contact consentant ; étape e-mail exclue.",
+    "it": "Nessun contatto consenziente; e-mail esclusa."
+  },
+  "Presentation.journeyRan": {
+    "en": "Journey dry run complete.",
+    "ar": "اكتمل التشغيل التجريبي.",
+    "de": "Probelauf abgeschlossen.",
+    "fr": "Essai terminé.",
+    "it": "Prova completata."
+  },
+  "Presentation.aiNote": {
+    "en": "Fixed templates simulate AI drafting. No external AI request is made.",
+    "ar": "القوالب الثابتة تحاكي الكتابة بالذكاء الاصطناعي. لا يُرسل طلب AI خارجي.",
+    "de": "Feste Vorlagen simulieren KI-Entwürfe. Keine externe KI-Anfrage.",
+    "fr": "Des modèles fixes simulent la rédaction IA. Aucun appel IA externe.",
+    "it": "Modelli fissi simulano la scrittura IA. Nessuna richiesta IA esterna."
+  },
+  "Presentation.topic": {
+    "en": "Topic",
+    "ar": "الموضوع",
+    "de": "Thema",
+    "fr": "Sujet",
+    "it": "Argomento"
+  },
+  "Presentation.voice": {
+    "en": "Tone of voice",
+    "ar": "نبرة النص",
+    "de": "Tonfall",
+    "fr": "Ton",
+    "it": "Tono"
+  },
+  "Presentation.warm": {
+    "en": "Warm",
+    "ar": "ودودة",
+    "de": "Freundlich",
+    "fr": "Chaleureux",
+    "it": "Cordiale"
+  },
+  "Presentation.direct": {
+    "en": "Direct",
+    "ar": "مباشرة",
+    "de": "Direkt",
+    "fr": "Direct",
+    "it": "Diretto"
+  },
+  "Presentation.generate": {
+    "en": "Generate mock draft",
+    "ar": "إنشاء مسودة محاكاة",
+    "de": "Demoentwurf erzeugen",
+    "fr": "Générer un brouillon simulé",
+    "it": "Genera bozza simulata"
+  },
+  "Presentation.useDraft": {
+    "en": "Use in email designer",
+    "ar": "استخدام في مصمم البريد",
+    "de": "Im E-Mail-Designer verwenden",
+    "fr": "Utiliser dans le concepteur",
+    "it": "Usa nel designer e-mail"
+  },
+  "Presentation.required": {
+    "en": "Enter this field.",
+    "ar": "أكمل هذا الحقل.",
+    "de": "Dieses Feld ausfüllen.",
+    "fr": "Complétez ce champ.",
+    "it": "Completa questo campo."
+  },
+  "Presentation.lengthError": {
+    "en": "Maximum length: {count}",
+    "ar": "الحد الأقصى للطول: {count}",
+    "de": "Maximale Länge: {count}",
+    "fr": "Longueur maximale : {count}",
+    "it": "Lunghezza massima: {count}"
+  },
+  "Presentation.unsubscribeDemo": {
+    "en": "Unsubscribe first demo contact",
+    "ar": "إلغاء اشتراك أول جهة اتصال تجريبية",
+    "de": "Ersten Demokontakt abmelden",
+    "fr": "Désabonner le premier contact démo",
+    "it": "Disiscrivi primo contatto demo"
+  },
+  "Presentation.unsubscribed": {
+    "en": "Demo contact opted out; next email delivery will skip it.",
+    "ar": "أُلغيت موافقة جهة الاتصال؛ ستُستبعد من الإرسال التالي.",
+    "de": "Demokontakt abgemeldet; nächster Versand überspringt ihn.",
+    "fr": "Contact démo désabonné ; prochain envoi l’exclura.",
+    "it": "Contatto demo disiscritto; il prossimo invio lo escluderà."
+  },
+  "Presentation.postTitle": {
+    "en": "Post title",
+    "ar": "عنوان المنشور",
+    "de": "Beitragstitel",
+    "fr": "Titre du post",
+    "it": "Titolo post"
+  },
+  "Presentation.addPost": {
+    "en": "Add draft post",
+    "ar": "إضافة منشور مسودة",
+    "de": "Entwurfsbeitrag hinzufügen",
+    "fr": "Ajouter un brouillon",
+    "it": "Aggiungi bozza"
+  },
+  "Presentation.postOpened": {
+    "en": "Selected {name}; edit its schedule below.",
+    "ar": "تم اختيار {name}؛ عدّل الجدولة بالأسفل.",
+    "de": "{name} ausgewählt; Zeitplan unten bearbeiten.",
+    "fr": "{name} sélectionné ; modifiez sa date ci-dessous.",
+    "it": "{name} selezionato; modifica la data sotto."
+  }
+}
