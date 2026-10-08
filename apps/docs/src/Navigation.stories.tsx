@@ -49,7 +49,7 @@ export const TabsStory: StoryObj = { name: "Tabs", render: () => <TabsDemo /> };
 
 function Pager() {
   const [page, setPage] = useState(3);
-  const [size, setSize] = useState(25);
+  const [size, setSize] = useState(10);
   return (
     <Card padding="sm">
       <Pagination page={page} pageSize={size} total={312} onPageChange={setPage} onPageSizeChange={setSize} />

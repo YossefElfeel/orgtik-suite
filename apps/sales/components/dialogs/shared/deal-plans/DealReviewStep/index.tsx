@@ -15,6 +15,7 @@ import { totals as sumTotals } from "@/lib/deals/pricing";
 import type { DealCatalog } from "@/lib/deals/catalog";
 import { NO_VAT, type DealFormValues, type DealMode } from "@/schemas/offers";
 import type { DealCustomer } from "@/types/projects";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 type Props = {
   form: UseFormReturn<DealFormValues>;
@@ -74,7 +75,7 @@ export default function DealReviewStep({ form, mode, catalog, currency, customer
       </div>
 
       <div className="overflow-x-auto rounded-card border border-line">
-        <table className="w-full border-collapse text-body-sm">
+        <PaginatedTable><table className="w-full border-collapse text-body-sm">
           <caption className="sr-only">{t("reviewPlans")}</caption>
           <thead>
             <tr className="border-b border-line text-caption text-fg-muted">
@@ -114,7 +115,7 @@ export default function DealReviewStep({ form, mode, catalog, currency, customer
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></PaginatedTable>
       </div>
 
       <div className="grid gap-4 md:grid-cols-[1fr_minmax(16rem,22rem)]">

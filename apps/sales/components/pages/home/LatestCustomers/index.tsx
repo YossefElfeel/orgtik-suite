@@ -26,7 +26,7 @@ export default function LatestCustomers({ className }: { className?: string }) {
         columns={columns}
         data={rows}
         getRowId={(r) => r.id}
-        paginate={false}
+        paginate
         status={q.isLoading || (q.isFetching && !q.data) ? "loading" : q.isError && !q.data ? "error" : "ready"}
         onRetry={() => void q.refetch()}
         error={{ title: t("listError") }}

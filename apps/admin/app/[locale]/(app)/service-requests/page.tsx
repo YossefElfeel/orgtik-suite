@@ -11,7 +11,7 @@ import { Link } from "@/i18n/routing";
 import { useCan } from "@/lib/permissions";
 import { useServiceRequestsQuery, type ServiceRequest, type SrState } from "@/store/services";
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 10;
 
 function Requests() {
   const t = useTranslations("Services");

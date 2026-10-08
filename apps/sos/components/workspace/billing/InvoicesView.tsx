@@ -9,7 +9,7 @@ import { DataTable, type ColumnDef, type PaginationState } from "@orgtik/ui/tabl
 import { useBillingInvoicesQuery, type InvoiceSummary } from "@/redux/features/platform/billing";
 import { Money, useDay } from "./shared";
 
-const PAGE_SIZES = [10, 25, 50];
+const PAGE_SIZES = [10];
 
 export function InvoicesView() {
   const t = useTranslations("Billing.invoices");
@@ -19,7 +19,7 @@ export function InvoicesView() {
   const pathname = usePathname();
   const params = useSearchParams();
   const page = Math.max(1, Number(params.get("page")) || 1);
-  const pageSize = PAGE_SIZES.includes(Number(params.get("size"))) ? Number(params.get("size")) : 25;
+  const pageSize = PAGE_SIZES.includes(Number(params.get("size"))) ? Number(params.get("size")) : 10;
   const { data, isLoading, isError, isFetching, refetch } = useBillingInvoicesQuery({ page, pageSize });
 
   const columns: ColumnDef<InvoiceSummary>[] = [
@@ -56,7 +56,7 @@ export function InvoicesView() {
     const q = new URLSearchParams(params.toString());
     if (next.pageIndex > 0) q.set("page", String(next.pageIndex + 1));
     else q.delete("page");
-    if (next.pageSize !== 25) q.set("size", String(next.pageSize));
+    if (next.pageSize !== 10) q.set("size", String(next.pageSize));
     else q.delete("size");
     router.replace(`${pathname}${q.toString() ? `?${q}` : ""}`, { scroll: false });
   };

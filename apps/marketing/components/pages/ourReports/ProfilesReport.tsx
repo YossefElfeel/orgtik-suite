@@ -140,7 +140,7 @@ export function ProfilesReport({ period }: { period: ReturnType<typeof useReport
         onRetry={() => report.refetch()}
         sorting={sort.sorting}
         onSortingChange={sort.onSortingChange}
-        paginate={false}
+        paginate
         error={{ title: t("loadError") }}
         empty={
           platforms.length

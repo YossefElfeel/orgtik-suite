@@ -13,6 +13,7 @@ import { Stepper, type StepState } from "@orgtik/ui";
 import { isolate } from "@/lib/bidi";
 import { useCommitAudienceImportMutation, useUploadAudienceImportMutation } from "@/redux/features/audiences/audiencesApi";
 import type { IAudienceImportCommitResult, IAudienceImportPreview } from "@/types/audiences";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 type Step = "upload" | "map" | "done";
 const NONE = "__none__";
@@ -165,7 +166,7 @@ export function ImportContactsDialog({ onDone }: { onDone?: (audienceId: string 
               <div className="flex flex-col gap-2">
                 <h3 className="text-label text-fg">{t("previewTitle", { count: Math.min(preview.preview.length, 5) })}</h3>
                 <div className="max-h-72 overflow-auto rounded-field border border-line" tabIndex={0} role="region" aria-label={t("previewTitle", { count: Math.min(preview.preview.length, 5) })}>
-                  <table className="w-full text-body-sm">
+                  <PaginatedTable><table className="w-full text-body-sm">
                     <thead className="sticky top-0 bg-sunken text-fg-muted">
                       <tr>
                         {headers.map((h) => (
@@ -187,7 +188,7 @@ export function ImportContactsDialog({ onDone }: { onDone?: (audienceId: string 
                         </tr>
                       ))}
                     </tbody>
-                  </table>
+                  </table></PaginatedTable>
                 </div>
               </div>
             </div>

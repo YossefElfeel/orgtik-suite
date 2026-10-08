@@ -10,6 +10,7 @@ import { cellKey, useCountriesQuery, useDiscardDraftMutation, useGridQuery, type
 import { CellDialog, type CellTarget } from "./CellDialog";
 import { PublishDialog } from "./PublishDialog";
 import { OverrideBadge, useMoney, useNames, usePlanLabel, useUrlState, ViewOnlyNote } from "./shared";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 const CYCLES: Cycle[] = ["monthly", "yearly"];
 
@@ -149,7 +150,7 @@ export function PriceGrid() {
         />
       ) : (
         <div role="region" aria-labelledby="grid-caption" tabIndex={0} className="relative max-w-full overflow-x-auto rounded-card border border-line bg-raised focus-visible:outline-2 focus-visible:outline-focus">
-          <table className="w-full border-collapse text-body-sm">
+          <PaginatedTable resetKey={tool ?? ""}><table className="w-full border-collapse text-body-sm">
             <caption id="grid-caption" className="sr-only">
               {t("caption")}
             </caption>
@@ -268,7 +269,7 @@ export function PriceGrid() {
                 );
               })}
             </tbody>
-          </table>
+          </table></PaginatedTable>
         </div>
       )}
 

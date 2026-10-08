@@ -11,7 +11,7 @@ import { Checkbox } from "../components/Checkbox.js";
 import { Skeleton } from "../components/Display.js";
 import { Pagination } from "../components/Navigation.js";
 import { EmptyState, ErrorState, NoPermissionState } from "../components/States.js";
-export function DataTable({ columns, data, getRowId, label, status = "ready", empty, error, forbidden, onRetry, mode = "client", rowCount, sorting: sortingProp, onSortingChange, pagination: paginationProp, onPaginationChange, pageSizes = [25, 50, 100], paginate = true, selectable = false, rowSelection: selectionProp, onRowSelectionChange, bulkActions, className, }) {
+export function DataTable({ columns, data, getRowId, label, status = "ready", empty, error, forbidden, onRetry, mode = "client", rowCount, sorting: sortingProp, onSortingChange, pagination: paginationProp, onPaginationChange, pageSizes = [10], paginate = true, selectable = false, rowSelection: selectionProp, onRowSelectionChange, bulkActions, className, }) {
     const t = useStrings();
     // A table wider than its box scrolls sideways; then the box is a labelled region you can focus
     // and scroll with the keyboard (WCAG 2.1.1). A table that fits adds no extra tab stop.
@@ -30,7 +30,7 @@ export function DataTable({ columns, data, getRowId, label, status = "ready", em
         return () => ro.disconnect();
     }, []);
     const [innerSorting, setInnerSorting] = useState([]);
-    const [innerPagination, setInnerPagination] = useState({ pageIndex: 0, pageSize: pageSizes[0] ?? 25 });
+    const [innerPagination, setInnerPagination] = useState({ pageIndex: 0, pageSize: pageSizes[0] ?? 10 });
     const [innerSelection, setInnerSelection] = useState({});
     const sorting = sortingProp ?? innerSorting;
     const pagination = paginationProp ?? innerPagination;
@@ -64,12 +64,20 @@ export function DataTable({ columns, data, getRowId, label, status = "ready", em
         autoResetPageIndex: !server,
     });
     const total = server ? (rowCount ?? data.length) : data.length;
+    // Deleting the final row on a page must return to the last available page.
+    useEffect(() => {
+        if (!paginate || status !== "ready")
+            return;
+        const last = Math.max(0, Math.ceil(total / pagination.pageSize) - 1);
+        if (pagination.pageIndex > last)
+            table.setPageIndex(last);
+    }, [total, pagination.pageIndex, pagination.pageSize, paginate, status, table]);
     const selected = table.getSelectedRowModel().rows;
     const headerGroups = table.getHeaderGroups();
     const colCount = table.getVisibleLeafColumns().length;
     const rows = table.getRowModel().rows;
     const showState = status !== "ready" && status !== "loading" ? status : rows.length === 0 && status === "ready" ? "empty" : null;
-    return (_jsxs("div", { className: cn("flex flex-col gap-3", className), children: [selectable && selected.length > 0 ? (_jsxs("div", { role: "region", "aria-label": t("selectedCount", { count: selected.length }), className: "flex flex-wrap items-center gap-3 rounded-field bg-brand-subtle px-3 py-2", children: [_jsx("span", { className: "text-body-sm font-semibold text-fg-brand", children: t("selectedCount", { count: selected.length }) }), _jsx("div", { className: "flex flex-wrap items-center gap-2", children: bulkActions?.(selected) }), _jsxs("button", { type: "button", onClick: () => table.resetRowSelection(), className: "ms-auto inline-flex items-center gap-1 rounded-pill px-2 py-1 text-body-sm text-fg-muted hover:bg-hover hover:text-fg focus-visible:outline-2 focus-visible:outline-focus", children: [_jsx(X, { "aria-hidden": "true", className: "size-3.5" }), t("clearSelection")] })] })) : null, _jsx("div", { ref: scroller, ...(scrolls ? { tabIndex: 0, role: "region", "aria-label": label } : {}), className: "relative overflow-x-auto rounded-card border border-line bg-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus", children: _jsxs("table", { "aria-label": label, "aria-busy": status === "loading" || undefined, className: "w-full border-collapse text-body", children: [_jsx("thead", { children: headerGroups.map((group) => (_jsx("tr", { className: "border-b border-line", children: group.headers.map((header) => {
+    return (_jsxs("div", { className: cn("flex flex-col gap-3", className), children: [selectable && selected.length > 0 ? (_jsxs("div", { role: "region", "aria-label": t("selectedCount", { count: selected.length }), className: "flex flex-wrap items-center gap-3 rounded-field bg-brand-subtle px-3 py-2", children: [_jsx("span", { className: "text-body-sm font-semibold text-fg-brand", children: t("selectedCount", { count: selected.length }) }), _jsx("div", { className: "flex flex-wrap items-center gap-2", children: bulkActions?.(selected) }), _jsxs("button", { type: "button", onClick: () => table.resetRowSelection(), className: "ms-auto inline-flex items-center gap-1 rounded-pill px-2 py-1 text-body-sm text-fg-muted hover:bg-hover hover:text-fg focus-visible:outline-2 focus-visible:outline-focus", children: [_jsx(X, { "aria-hidden": "true", className: "size-3.5" }), t("clearSelection")] })] })) : null, _jsx("div", { ref: scroller, ...(scrolls ? { tabIndex: 0, role: "region", "aria-label": label } : {}), className: "relative overflow-x-auto rounded-card border border-line bg-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus", children: _jsxs("table", { "aria-label": label, "aria-busy": status === "loading" || undefined, className: "w-full border-collapse text-body", children: [_jsx("thead", { className: "bg-sunken", children: headerGroups.map((group) => (_jsx("tr", { className: "border-b border-line", children: group.headers.map((header) => {
                                     const meta = header.column.columnDef.meta;
                                     const sortable = header.column.getCanSort();
                                     const dir = header.column.getIsSorted();

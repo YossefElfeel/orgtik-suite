@@ -90,7 +90,7 @@ const baseQuery: BaseQueryFn<string | FetchArgs, unknown, ApiError> = async (
       data: {
         items: body.data,
         page: page ?? 1,
-        pageSize: pageSize ?? 25,
+        pageSize: pageSize ?? 10,
         total,
         ...rest,
       },
@@ -102,6 +102,7 @@ const baseQuery: BaseQueryFn<string | FetchArgs, unknown, ApiError> = async (
 };
 
 export type Me = {
+  identity: { accounts: boolean };
   user: {
     id: number;
     key: string;
@@ -166,13 +167,14 @@ export type EntryType =
   | "article"
   | "legalDocument"
   | "roadmapItem"
+  | "review"
   | "pricing";
 export type RoadmapStatus = "open" | "planned" | "in_progress" | "shipped";
 export type Period = "past" | "now" | "next";
 export type PriceMode = "indicative" | "on_request";
 export type Department =
   "design" | "development" | "hosting" | "digital-marketing" | "it-support";
-export type MediaRef = { src: string; alt: Partial<Record<Locale, string>> };
+export type MediaRef = { src: string; alt: Partial<Record<Locale, string>>; focal?: { x: number; y: number } };
 
 export type EntrySummary = {
   id: string;
@@ -237,6 +239,10 @@ export type LayoutSection =
     };
 
 export type EntryContent = {
+  presentation?: { sectionOrder: string[]; sectionMedia: Record<string, MediaRef[]>; cursor: { text: Partial<Record<Locale, string>>; link: string } };
+  sample?: boolean;
+  position?: number;
+  relatedEntry?: string;
   narrativePublished?: boolean;
   sampleNarrativePublished?: boolean;
   /** Pages and Global: an internal name and the layout. */
@@ -374,6 +380,9 @@ export type NeutralPatch = Partial<
     | "priceMode"
     | "narrativePublished"
     | "sampleNarrativePublished"
+    | "sample"
+    | "position"
+    | "relatedEntry"
   >
 >;
 
@@ -448,6 +457,7 @@ export type Member = {
   permissions: string[];
 };
 export type AuditEvent = {
+  targetName?: string;
   at: string;
   by: Person;
   action: string;
@@ -487,6 +497,8 @@ export type RightsStatus =
 export type MediaIssue =
   "noAlt" | "altSuggested" | "rightsUnknown" | "rightsExpiring" | "unused";
 export type MediaItem = {
+  description?: string;
+  tags?: string[];
   id: string;
   file: string;
   kind: MediaKind;
@@ -521,6 +533,8 @@ export type MediaPage = Page<MediaItem> & {
   counts: Partial<Record<MediaIssue, number>>;
 };
 export type MediaPatch = {
+  description?: string;
+  tags?: string[];
   alt?: Partial<Record<Locale, string>>;
   rights?: Partial<MediaItem["rights"]>;
   focal?: { x: number; y: number };
@@ -596,13 +610,15 @@ export type Redirect = {
   to: string;
   code: 301 | 302;
   note?: string;
-  source: "website" | "manager" | "address_change";
+  source: "website" | "manager" | "address_change" | "archived";
+  history?: { at: string; action: string; by: Person }[];
   handledBy: "browser" | "host";
   createdAt: string;
   createdBy: Person;
   version: number;
 };
 export type Indexing = {
+  urls: { id: string; type: EntryType; locale: string; loc: string; canonical: string; policy: "index" | "noindex"; reason: "siteOverride" | "pagePolicy" | "allowed"; inSitemap: boolean; lastmod: string }[];
   settings: {
     canonicalHost: string;
     visibility: "index" | "noindex";
@@ -620,6 +636,7 @@ export type Indexing = {
 };
 
 export type EntryPatch = {
+  presentation?: EntryContent["presentation"];
   locale?: Locale;
   fields?: Record<string, unknown>;
   seo?: Record<string, unknown>;
@@ -664,6 +681,8 @@ const putEntry = async (
   }
 };
 
+export type SuiteUser = { id: number; key: string; name: string; firstName: string; lastName: string; email: string; active: boolean; roles: string[]; version: string };
+
 export const api = createApi({
   reducerPath: "wm",
   baseQuery,
@@ -680,8 +699,13 @@ export const api = createApi({
     "Leads",
     "Audit",
     "Site",
+    "Users",
   ],
   endpoints: (b) => ({
+    contentQueue: b.query<Page<EntrySummary>, { state?: string; mine?: string; search?: string; page?: number; pageSize?: number }>({ query: params => ({ url: "/admin/queue", params }), providesTags: ["EntryList", "Overview"] }),
+    users: b.query<Page<SuiteUser>, { search?: string; status?: string; role?: string; page?: number; pageSize?: number }>({ query: params => ({ url: "/admin/users", params }), providesTags: ["Users"] }),
+    createUser: b.mutation<SuiteUser, { firstName: string; lastName: string; email: string; password: string }>({ query: body => ({ url: "/admin/users", method: "POST", body }), invalidatesTags: ["Users", "Audit"] }),
+    updateUser: b.mutation<SuiteUser, { id: number; version: string; patch: Partial<Pick<SuiteUser, "firstName" | "lastName" | "email" | "active" | "roles">> }>({ query: ({ id, version, patch }) => ({ url: `/admin/users/${id}`, method: "PATCH", headers: { "if-match": version }, body: patch }), invalidatesTags: ["Users", "Audit", "Me"] }),
     me: b.query<Me, void>({ query: () => "/admin/me", providesTags: ["Me"] }),
     overview: b.query<Overview, void>({
       query: () => "/admin/overview",
@@ -700,6 +724,11 @@ export const api = createApi({
         state?: string;
         department?: string;
         parent?: string;
+        missingLanguages?: string;
+        deliveryStatus?: string;
+        period?: string;
+        year?: string;
+        sort?: string;
         page?: number;
         pageSize?: number;
       }
@@ -744,6 +773,12 @@ export const api = createApi({
         body,
       }),
       invalidatesTags: ["EntryList", "Overview", "Seo"],
+      async onQueryStarted(_input, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(api.util.upsertQueryData("entry", { type: data.type, id: data.id }, data));
+        } catch { /* The creation dialog handles the error. */ }
+      },
     }),
     setEntryVisibility: b.mutation<
       Entry,
@@ -789,6 +824,11 @@ export const api = createApi({
     >({
       query: (params) => ({ url: "/admin/ideas", params }),
       providesTags: ["Ideas"],
+    }),
+    idea: b.query<Idea, string>({ query: id => `/admin/ideas/${id}`, providesTags: ["Ideas"] }),
+    editIdea: b.mutation<Idea, { id: string; version: number; title: string; body: string; theme: string }>({
+      query: ({ id, version, ...body }) => ({ url: `/admin/ideas/${id}`, method: "PATCH", headers: { "if-match": String(version) }, body }),
+      invalidatesTags: ["Ideas", "Overview", "Audit"],
     }),
     eraseIdea: b.mutation<Idea, { id: string; version: number }>({
       query: ({ id, version }) => ({ url: `/admin/ideas/${id}/erase`, method: "POST", headers: { "if-match": String(version) } }),
@@ -850,10 +890,15 @@ export const api = createApi({
         }
       },
     }),
-    uploadMedia: b.mutation<MediaItem, File>({
-      query: (file) => {
+    uploadMedia: b.mutation<MediaItem, File | { file: File; description: string; tags: string[] }>({
+      query: (input) => {
         const body = new FormData();
+        const file = input instanceof File ? input : input.file;
         body.append("file", file);
+        if (!(input instanceof File)) {
+          body.append("description", input.description);
+          body.append("tags", JSON.stringify(input.tags));
+        }
         return { url: "/admin/media", method: "POST", body };
       },
       invalidatesTags: ["MediaList", "Overview"],
@@ -862,11 +907,11 @@ export const api = createApi({
       query: (id) => ({ url: `/admin/media/${id}`, method: "DELETE" }),
       invalidatesTags: ["MediaList", "Overview"],
     }),
-    seoHealth: b.query<SeoHealth, { issue?: string }>({
+    seoHealth: b.query<SeoHealth, { issue?: string; search?: string; kind?: string; page?: number; pageSize?: number }>({
       query: (params) => ({ url: "/admin/seo/health", params }),
       providesTags: ["Seo", "EntryList"],
     }),
-    redirects: b.query<Page<Redirect>, { page?: number; pageSize?: number }>({
+    redirects: b.query<Page<Redirect>, { page?: number; pageSize?: number; search?: string; kind?: string }>({
       query: (params) => ({ url: "/admin/seo/redirects", params }),
       providesTags: ["Seo"],
     }),
@@ -1023,7 +1068,7 @@ export const api = createApi({
     members: b.query<Page<Member>, void>({ query: () => "/admin/members" }),
     audit: b.query<
       Page<AuditEvent>,
-      { type?: string; by?: string; page?: number; pageSize?: number }
+      { search?: string; type?: string; by?: string; page?: number; pageSize?: number }
     >({
       query: (params) => ({ url: "/admin/audit", params }),
       providesTags: ["Audit"],
@@ -1079,6 +1124,8 @@ export const {
   useDeleteEntryMutation,
   useApproveFiguresMutation,
   useIdeasQuery,
+  useIdeaQuery,
+  useEditIdeaMutation,
   useModerateIdeaMutation,
   useEraseIdeaMutation,
   useMediaQuery,
@@ -1108,6 +1155,10 @@ export const {
   useAuditQuery,
   useSiteQuery,
   useUpdateSiteMutation,
+  useContentQueueQuery,
+  useUsersQuery,
+  useCreateUserMutation,
+  useUpdateUserMutation,
 } = api;
 
 /** Downloads the leads as CSV (the API decides whether personal data is in it). */

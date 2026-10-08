@@ -77,6 +77,9 @@ function makeAnalytics({ store, lib, ops, now }) {
     const famT = famW.reduce((n, w) => n + w, 0);
     const services = families.map((f, i) => ({ id: f.id, name: plain(f.live.locales.en.name), leads: Math.round((totals.leads * 0.55 * famW[i]) / famT) })).sort((x, y) => y.leads - x.leads);
 
+    services.push({ id: "software-system", name: "Software System", leads: Math.round(totals.leads * 0.3) });
+    services.sort((a, b) => b.leads - a.leads);
+
     // Articles by views, and views by topic (the service family an article belongs to, by its slug).
     const articles = pages.filter((x) => x.type === "article").map((x) => {
       const e = live.find((y) => y.type === "article" && `/insights/${y.live.slug.en}` === x.path);

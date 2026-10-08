@@ -15,6 +15,7 @@ import { InvitationDeliveryButton } from '@/components/workspace/mailbox/Invitat
 import { OwnershipTransferDialog } from '@/components/workspace/team/OwnershipTransferDialog';
 import { selection, supportedTools, membershipSeatState } from './seats';
 import { attemptNamespace, readActionAttempt, saveActionAttempt, uncertainResult, type InvitationActionAttempt } from './attempts';
+import { PaginatedTable } from "@orgtik/ui/table";
 type Action = { kind: 'role'; role: Exclude<WorkspaceRole, 'owner'> } | { kind: 'access' } | { kind: 'remove' };
 const MAX_TOOLS = 2;
 export function TeamView() {
@@ -28,7 +29,7 @@ export function TeamView() {
     {problem && <Notice tone="danger">{problem}</Notice>}
     {isLoading ? <LoadingState rows={6} /> : isError || !team?.meta.perTool ? <ErrorState title={t('failedTitle')} description={t('failedBody')} onRetry={refetch} /> : <>
       <SeatsSummary team={team} me={me} />
-      <DataTable label={t('tableLabel', { name: me.workspace.name })} columns={columns} data={team.items} getRowId={member => member.id} paginate={team.items.length > 25} empty={{ title: t('emptyTitle'), description: t('emptyBody') }} />
+      <DataTable label={t('tableLabel', { name: me.workspace.name })} columns={columns} data={team.items} getRowId={member => member.id} paginate empty={{ title: t('emptyTitle'), description: t('emptyBody') }} />
       {canManage && <><Invitations me={me} /><InviteDialog open={inviting} onOpenChange={setInviting} me={me} team={team} /></>}
       {canManage && <MemberChange team={team} me={me} target={target} onClose={() => setTarget(null)} onProblem={setProblem} />}
     </>}
@@ -39,8 +40,8 @@ function SeatsSummary({ team, me }: { team: Team; me: AppMe }) {
   const tools = supportedTools(me.tools, team.meta.perTool, 'owner');
   return <Card className="flex flex-col gap-5">
     <div className="flex flex-col gap-1"><h2 className="font-display text-title-sm text-fg">{t('title')}</h2><p className="max-w-prose text-body-sm text-fg-muted">{t('modelB')}</p></div>
-    <div className="overflow-x-auto"><table className="w-full text-start text-body-sm"><caption className="sr-only">{t('title')}</caption><thead><tr className="text-fg-muted">{['tool', 'purchased', 'assigned', 'reserved', 'available'].map(key => <th key={key} scope="col" className="px-3 py-2 text-start font-medium">{t(key)}</th>)}</tr></thead>
-      <tbody>{tools.map(tool => { const count = team.meta.perTool[tool.key]; return <tr key={tool.key} className="border-t border-line"><th scope="row" className="px-3 py-3 text-start font-semibold"><bdi>{name(tool.name)}</bdi></th>{[count.capacity, count.assigned, count.reserved, count.available].map((value, index) => <td key={index} className="px-3 py-3 tabular-nums text-fg-muted">{value === null ? t('licence') : f.number(value)}</td>)}</tr>; })}</tbody></table></div>
+    <div className="overflow-x-auto"><PaginatedTable><table className="w-full text-start text-body-sm"><caption className="sr-only">{t('title')}</caption><thead><tr className="text-fg-muted">{['tool', 'purchased', 'assigned', 'reserved', 'available'].map(key => <th key={key} scope="col" className="px-3 py-2 text-start font-medium">{t(key)}</th>)}</tr></thead>
+      <tbody>{tools.map(tool => { const count = team.meta.perTool[tool.key]; return <tr key={tool.key} className="border-t border-line"><th scope="row" className="px-3 py-3 text-start font-semibold"><bdi>{name(tool.name)}</bdi></th>{[count.capacity, count.assigned, count.reserved, count.available].map((value, index) => <td key={index} className="px-3 py-3 tabular-nums text-fg-muted">{value === null ? t('licence') : f.number(value)}</td>)}</tr>; })}</tbody></table></PaginatedTable></div>
     {!tools.length && <p className="text-body-sm text-fg-muted">{t('noLines')}</p>}
     <p className="text-caption text-fg-muted">{t('linesNote')}</p>
   </Card>;

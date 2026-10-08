@@ -137,7 +137,7 @@ export function TaskSections({
               columns={columnsFor(section)}
               data={section.tasks}
               getRowId={(r) => String(r.id)}
-              paginate={false}
+              paginate
               status={section.tasks.length ? "ready" : "empty"}
               empty={{ title: t("emptySection") }}
               className="rounded-none border-0"

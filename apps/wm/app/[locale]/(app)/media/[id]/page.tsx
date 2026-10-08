@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowSquareOut, Copy, Trash } from "@phosphor-icons/react";
 import {
@@ -30,6 +30,7 @@ import { Link, useRouter } from "@/i18n/routing";
 import { typeOfId } from "@/lib/contentTypes";
 import { useEntryName } from "@/lib/entryName";
 import { libraryUrl } from "@/lib/env";
+import { safeReturn } from "@/lib/useListState";
 import { useCan } from "@/lib/permissions";
 import { statusOf, useDeleteMediaMutation, useMediaItemQuery, useUpdateMediaMutation, type ApiError, type Locale, type MediaItem, type MediaPatch, type RightsStatus } from "@/store/api";
 
@@ -43,6 +44,10 @@ const CROPS = [
 
 function Editor({ m }: { m: MediaItem }) {
   const t = useTranslations("Media");
+  const returnTo = safeReturn(useSearchParams().get("returnTo"), "/media");
+  const ti = useTranslations("Improvements");
+  const [description, setDescription] = useState(m.description ?? "");
+  const [tags, setTags] = useState((m.tags ?? []).join(", "));
   const tp = useTranslations("EntryNames");
   const f = useFormatter();
   const uiLocale = useLocale();
@@ -61,8 +66,12 @@ function Editor({ m }: { m: MediaItem }) {
     setAlt(m.alt);
     setRights(m.rights);
     setFocal(m.focal);
+    setDescription(m.description ?? "");
+    setTags((m.tags ?? []).join(", "));
   }, [m]);
   const patch: MediaPatch = {};
+  if (description !== (m.description ?? "")) patch.description = description;
+  if (tags !== (m.tags ?? []).join(", ")) patch.tags = tags.split(/[,،]/).map(tag => tag.trim()).filter(Boolean);
   if (JSON.stringify(alt) !== JSON.stringify(m.alt)) patch.alt = alt;
   if (JSON.stringify(rights) !== JSON.stringify(m.rights)) patch.rights = rights;
   if (focal.x !== m.focal.x || focal.y !== m.focal.y) patch.focal = focal;
@@ -92,7 +101,7 @@ function Editor({ m }: { m: MediaItem }) {
   return (
     <div className="flex flex-col gap-6 pb-24">
       <PageHeader
-        breadcrumb={[{ label: t("title"), href: `/${uiLocale}/media` }, { label: <span dir="ltr">{m.file}</span> }]}
+        breadcrumb={[{ label: t("title"), href: `/${uiLocale}${returnTo}` }, { label: <span dir="ltr">{m.file}</span> }]}
         title={<span dir="ltr">{m.file.split("/").pop()}</span>}
         description={
           <span className="inline-flex flex-wrap items-center gap-2">
@@ -144,7 +153,7 @@ function Editor({ m }: { m: MediaItem }) {
                     .unwrap()
                     .then(() => {
                       toast.success(t("deleted"));
-                      router.push("/media");
+                      router.push(returnTo);
                     })
                     .catch((e: ApiError) => {
                       toast.error(e.code === "in_use" ? t("deleteBlocked", { count: m.usage }) : t("failed"));
@@ -196,6 +205,8 @@ function Editor({ m }: { m: MediaItem }) {
         </section>
 
         <div className="flex flex-col gap-6">
+          <Field label={ti("description")}><Textarea disabled={!editable} maxLength={2000} value={description} onChange={event => setDescription(event.target.value)} /></Field>
+          <Field label={ti("tags")}><Input disabled={!editable} value={tags} onChange={event => setTags(event.target.value)} /></Field>
           {m.kind !== "video" ? (
             <LocalizedField label={t("altText")} description={t("altHelp")} value={alt} onChange={(v) => setAlt(v)} required={["en"]} multiline errors={undefined} />
           ) : null}

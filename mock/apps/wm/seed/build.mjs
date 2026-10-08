@@ -18,6 +18,7 @@ import { buildCatalog } from "./catalog.mjs";
 import { buildPricing } from "./pricing.mjs";
 import { applyPlatformCommerceCopy, platformPricingEntry } from "./platform-pricing.mjs";
 import { applyWebsiteAlignment, websiteAlignmentRedirects } from "./website-alignment.mjs";
+import managerImprovements from "./manager-improvements.js";
 import { buildMedia } from "./media.mjs";
 import { buildSeo } from "./seo.mjs";
 import { restoredRoadmap, followupSource, ROADMAP_REF, WEBSITE_REF } from "./source-overrides.mjs";
@@ -231,6 +232,7 @@ const out = {
   pricing,
 };
 applyWebsiteAlignment(out.entries);
+managerImprovements.applyManagerImprovements(out);
 out.seo.redirects = websiteAlignmentRedirects();
 out.source.overrides.websiteAlignment = { repo: "orgtik-suite", revision: "bfd1238", file: "mock/apps/wm/seed/website-alignment.json", reason: "Approved Partners, account setup, Imprint and Legal content from the current website" };
 const output = process.env.SEED_OUTPUT_FILE ? path.resolve(process.env.SEED_OUTPUT_FILE) : path.join(here, "website.json");

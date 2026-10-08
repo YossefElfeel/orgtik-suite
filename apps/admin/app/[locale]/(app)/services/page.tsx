@@ -182,7 +182,7 @@ function Catalogue() {
     <div className="flex flex-col gap-6">
       <PageHeader title={t("catalogue.title")} description={t("catalogue.description")} />
       {!editable ? <p className="text-body-sm text-fg-muted">{tc("viewOnly")}</p> : null}
-      <DataTable label={t("catalogue.title")} columns={columns} data={data ?? []} getRowId={(r) => r.id} status={listStatus(isLoading, error)} paginate={false} onRetry={refetch} empty={{ title: t("catalogue.empty") }} />
+      <DataTable label={t("catalogue.title")} columns={columns} data={data ?? []} getRowId={(r) => r.id} status={listStatus(isLoading, error)} paginate onRetry={refetch} empty={{ title: t("catalogue.empty") }} />
       {editing ? <ServiceDialog service={editing} onClose={() => setEditing(null)} /> : null}
     </div>
   );

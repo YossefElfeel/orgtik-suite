@@ -43,6 +43,21 @@
       "source": "/imprint",
       "destination": "/legal/imprint",
       "permanent": true
+    },
+    {
+      "source": "/sample-campaign",
+      "destination": "/services",
+      "permanent": false
+    },
+    {
+      "source": "/sample-renamed",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/sample-retired",
+      "destination": "/services",
+      "permanent": true
     }
   ],
   "rewrites": [

@@ -1,4 +1,5 @@
 import React, { useEffect, useId, useRef, useState } from "react";
+import { SharedMedia } from "../content/managed-page";
 import { CartLink } from "./CartControls";
 import { LanguageMenu } from "./LanguageMenu";
 import { AccountControl } from "./AccountControl";
@@ -115,6 +116,8 @@ export function SiteHeader() {
             </button>
           )}
         </div>
+        <SharedMedia id="gl_header" />
+        <SharedMedia id="gl_commerce" prefixes={["siteHeader-", "accountControl-"]} />
       </header>
       <dialog
         ref={menuRef}

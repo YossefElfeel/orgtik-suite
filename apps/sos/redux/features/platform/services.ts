@@ -53,7 +53,7 @@ export const servicesApi = platformApi.injectEndpoints({
   endpoints: (b) => ({
     getServices: b.query<Service[], void>({ query: () => "/services", providesTags: ["Services"] }),
     getServiceRequests: b.query<Page<ServiceRequest>, { page?: number; pageSize?: number }>({
-      query: ({ page = 1, pageSize = 25 }) => ({ url: "/service-requests", params: { page, pageSize } }),
+      query: ({ page = 1, pageSize = 10 }) => ({ url: "/service-requests", params: { page, pageSize } }),
       providesTags: ["ServiceRequests"],
     }),
     getServiceRequest: b.query<ServiceRequest, string>({

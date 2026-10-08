@@ -1,3 +1,4 @@
+import { managedPageTree } from "../content/managed-page";
 import { content } from "../content";
 import { ContentHeading } from "./ContentHeading";
 import React from "react";
@@ -798,7 +799,7 @@ export default class Insights extends ReferencePage {
   render() {
     const v = this.renderVals();
     return (
-      <>
+      managedPageTree(<>
         <div
           ref={v.rootRef}
           data-screen-label={"Insights"}
@@ -1227,7 +1228,7 @@ export default class Insights extends ReferencePage {
             {v.isArticle && <ContentHeading title={v.hero} />}
             {v.isIndex && (
               <>
-                <section
+                <section data-cms-section="articles"
                   id={"articles"}
                   style={{
                     padding: "var(--section-space) 0 var(--section-space)",
@@ -1799,7 +1800,7 @@ export default class Insights extends ReferencePage {
             )}
             {v.isArticle && (
               <>
-                <section
+                <section data-cms-section="article"
                   id={"article"}
                   style={{ padding: "var(--section-space) 0" }}
                 >
@@ -2132,7 +2133,7 @@ export default class Insights extends ReferencePage {
                     </aside>
                   </div>
                 </section>
-                <section
+                <section data-cms-section="hero"
                   style={{
                     padding: "var(--section-space) 0",
                     borderTop: "1px solid #ffffff12",
@@ -2958,7 +2959,7 @@ export default class Insights extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>
+      </>, "pg_insights")
     );
   }
 }

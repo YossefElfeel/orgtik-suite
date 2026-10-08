@@ -17,7 +17,7 @@ export function PricingLog() {
   const f = useFormatter();
   const url = useUrlState();
   const page = Math.max(1, Number(url.get("page")) || 1);
-  const pageSize = [25, 50, 100].includes(Number(url.get("pageSize"))) ? Number(url.get("pageSize")) : 25;
+  const pageSize = [10].includes(Number(url.get("pageSize"))) ? Number(url.get("pageSize")) : 10;
   const { data, isLoading, isError, error, isFetching, refetch } = usePricingLogQuery({ page, pageSize });
 
   const columns = useMemo<ColumnDef<LogEntry, any>[]>(
@@ -85,7 +85,7 @@ export function PricingLog() {
         pagination={{ pageIndex: page - 1, pageSize }}
         onPaginationChange={(up) => {
           const next = typeof up === "function" ? up({ pageIndex: page - 1, pageSize }) : up;
-          url.set({ page: next.pageIndex > 0 ? next.pageIndex + 1 : null, pageSize: next.pageSize !== 25 ? next.pageSize : null });
+          url.set({ page: next.pageIndex > 0 ? next.pageIndex + 1 : null, pageSize: next.pageSize !== 10 ? next.pageSize : null });
         }}
         onRetry={() => refetch()}
         className={isFetching && !isLoading ? "opacity-70" : undefined}

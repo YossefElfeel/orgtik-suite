@@ -8,7 +8,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import { ChevronDown } from "lucide-react";
 import { IPaginationOptions } from "../Table/type";
@@ -24,6 +24,8 @@ export function CustomPagination({
   totalItems: totalItemsGeter,
 }: IPaginationOptions) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pageHref = (page: number, size = 10) => { const query = new URLSearchParams(searchParams.toString()); query.set("page", String(page)); query.set("limit", String(size)); return `${baseUrl}?${query}`; };
 
   const isFirstPage =
     currentPage === 1 || (totalPages === 0 && currentPage === 0);
@@ -33,33 +35,9 @@ export function CustomPagination({
   const isAfterDots =
     !isFewPages && currentPage < totalPages - Math.floor(BTNS_COUNT / 2);
 
-  const totalItems = totalItemsGeter || totalPages * limit;
+  const totalItems = totalItemsGeter ?? totalPages * limit;
   // Dynamic LIMIT_OPTIONS calculation
-  const limitOptions = useMemo(() => {
-    const baseOptions = [10, 20, 50, 100];
-    if (totalItems === 0) return baseOptions;
-
-    const validOptions = baseOptions.filter((option) => option <= totalItems);
-
-    if (!validOptions.includes(limit)) {
-      validOptions.push(limit);
-      validOptions.sort((a, b) => a - b);
-    }
-
-    const quarterItems = Math.ceil(totalItems / 4);
-    const halfItems = Math.ceil(totalItems / 2);
-    [quarterItems, halfItems].forEach((option) => {
-      if (
-        option > 0 &&
-        option <= totalItems &&
-        !validOptions.includes(option)
-      ) {
-        validOptions.push(option);
-      }
-    });
-
-    return [...new Set(validOptions)].sort((a, b) => a - b);
-  }, [totalPages, limit]);
+  const limitOptions = [10];
 
   function generateArr(start: number, count = BTNS_COUNT) {
     return Array.from(
@@ -80,12 +58,12 @@ export function CustomPagination({
 
   const handlePageChange = (e: React.MouseEvent, page: number) => {
     e.preventDefault();
-    router.push(`${baseUrl}?page=${page}&limit=${limit}`);
+    router.push(pageHref(page));
   };
 
   const handleLimitChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = parseInt(e.target.value);
-    router.push(`${baseUrl}?page=1&limit=${newLimit}`);
+    router.push(pageHref(1, newLimit));
   };
 
   const startItem = totalPages === 0 ? 0 : (currentPage - 1) * limit + 1;
@@ -108,7 +86,7 @@ export function CustomPagination({
               value={limit}
               onChange={handleLimitChange}
               className="appearance-none bg-white border border-gray-300  px-1 py-1 pr-3   text-gray-600
-                        focus:outline-none rounded-md 
+                        focus:outline-none rounded-md
                         hover:border-gray-400 transition-all duration-300
                         cursor-pointer min-w-12"
             >

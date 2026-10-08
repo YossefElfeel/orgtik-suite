@@ -57,7 +57,21 @@ async function child(phase) {
       refuseCommit = true;
       assert.equal((await call("wm", "/v2/admin/preview-token", "POST", {}, token)).status, 503); refuseCommit = false;
       assert.equal((await call("wm", "/v2/admin/me", "GET", undefined, token)).status, 200); assert.deepEqual(wm().exportState(), beforeFailure);
-      const multipart = await call("wm", "/v2/admin/media", "POST", undefined, token, { "content-type": "multipart/form-data; boundary=fixture" }); assert.equal(multipart.status, 501);
+      const multipart = await call("wm", "/v2/admin/media", "POST", undefined, token, { "content-type": "multipart/form-data; boundary=fixture" }); assert.equal(multipart.status, 422);
+      const form = new FormData();
+      form.set("file", new Blob(["<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10'/>"] , { type: "image/svg+xml" }), "persisted-fixture.svg");
+      form.set("description", "Boundary upload fixture"); form.set("tags", JSON.stringify(["fixture", "cms"]));
+      const uploadResponse = await fetch(`${base}/wm/v2/admin/media`, { method: "POST", headers: { authorization: `Bearer ${token}` }, body: form });
+      assert.equal(uploadResponse.status, 201); const uploaded = (await uploadResponse.json()).data;
+      assert.equal((await fetch(`${base}/wm${uploaded.url}`)).status, 200);
+      assert.equal(me.data.identity.accounts, true);
+      const account = await call("wm", "/v2/admin/users", "POST", { firstName: "Test", lastName: "Account", email: "cms-account@staff-codec.fixture.test", password: "OnlyForFixtures!2026" }, token); assert.equal(account.status, 201);
+      const roleChange = await call("wm", `/v2/admin/users/${account.data.id}`, "PATCH", { roles: ["wm_editor"] }, token, { "if-match": account.data.version }); assert.equal(roleChange.status, 200);
+      assert.deepEqual(roleChange.data.roles, ["wm_editor"]);
+      assert.equal((await call("wm", `/v2/admin/users/${account.data.id}`, "PATCH", { active: false }, token, { "if-match": account.data.version })).status, 412);
+      const deactivated = await call("wm", `/v2/admin/users/${account.data.id}`, "PATCH", { active: false }, token, { "if-match": roleChange.data.version }); assert.equal(deactivated.status, 200);
+      assert.equal(deactivated.data.active, false);
+      assert.ok(wm().exportState().data.content.audit.some(event => event.action === "user_roles" && event.entry === account.data.key));
       const publicSite = await call("wm", "/v2/public/site"); assert.equal(publicSite.status, 200);
       if (!publicSite.data.forms.privacyVersion) {
         const privacy = wm().exportState(); privacy.data.content.entries.find(([id]) => id === "lg_privacy")[1].legalVersions = [{ versionLabel: "staff-fixture-privacy", effectiveFrom: "2020-01-01T00:00:00.000Z" }]; wm().importState(privacy);
@@ -68,11 +82,16 @@ async function child(phase) {
       assert.equal(lead.data.sales.code, "crm_intake_pending");
       const idea = await call("wm", "/v2/public/ideas", "POST", { ...body, message: "Persistent public idea" }, null, { "idempotency-key": "staff-idea-proof" }); assert.equal(idea.status, 201);
       assert.equal(clock(), Date.parse(AT));
-      fs.writeFileSync(factsFile, JSON.stringify({ token, previewToken, name, originalLiveName, snapshot: wm().exportState(), leadId: lead.data.id, ideaId: idea.data.id, ideaBody: { ...body, message: "Persistent public idea" }, originalContentVersion: originalContent.data.content.entries.find(([id]) => id === "cs_01")[1].workflow.version }));
+      fs.writeFileSync(factsFile, JSON.stringify({ token, previewToken, name, originalLiveName, uploaded, account: deactivated.data, snapshot: wm().exportState(), leadId: lead.data.id, ideaId: idea.data.id, ideaBody: { ...body, message: "Persistent public idea" }, originalContentVersion: originalContent.data.content.entries.find(([id]) => id === "cs_01")[1].workflow.version }));
     } else if (phase === "cold") {
       const facts = JSON.parse(fs.readFileSync(factsFile, "utf8"));
       assert.equal((await call("wm", "/v2/admin/me", "GET", undefined, facts.token)).status, 200);
       assert.deepEqual(wm().exportState(), facts.snapshot);
+      assert.equal((await fetch(`${base}/wm${facts.uploaded.url}`)).status, 200);
+      assert.equal((await call("wm", `/v2/admin/media/${facts.uploaded.id}`, "GET", undefined, facts.token)).data.description, "Boundary upload fixture");
+      const accounts = await call("wm", "/v2/admin/users?search=cms-account", "GET", undefined, facts.token);
+      assert.deepEqual(accounts.data[0], facts.account);
+      assert.equal((await call("sos", "/api/auth/login", "POST", { email: facts.account.email, password: "OnlyForFixtures!2026", mode: "staff", target: "wm" })).status, 403);
       assert.equal((await call("wm", "/v2/admin/entries/caseStudy/cs_01", "GET", undefined, facts.token)).data.content.locales.en.name, facts.name);
       assert.equal(caseFrom((await call("wm", "/v2/public/entries/caseStudy")).data).locales.en.name, facts.originalLiveName);
       assert.equal(caseFrom((await call("wm", "/v2/preview/entries/caseStudy", "GET", undefined, null, { authorization: `Preview ${facts.previewToken}` })).data).locales.en.name, facts.name);

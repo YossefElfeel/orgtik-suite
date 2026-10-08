@@ -23,7 +23,7 @@ export default function ArchivedTable({ parentId }: { parentId?: string }) {
   const tc = useTranslations("Common");
   const f = useFormatter();
   const session = useSessionAccess();
-  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 25 });
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
   const [selection, setSelection] = useState<RowSelectionState>({});
   const args = { page: pagination.pageIndex + 1, limit: pagination.pageSize };
   const contents = useGetArchivedFolderContentsQuery({ id: parentId!, ...args }, { skip: !parentId });
@@ -93,7 +93,7 @@ export default function ArchivedTable({ parentId }: { parentId?: string }) {
       onRetry={q.refetch}
       pagination={pagination}
       onPaginationChange={setPagination}
-      paginate={total > 25}
+      paginate
       selectable
       rowSelection={selection}
       onRowSelectionChange={setSelection}

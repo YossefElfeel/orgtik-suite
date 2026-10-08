@@ -96,7 +96,7 @@ function Bundles() {
         data={data ?? []}
         getRowId={(r) => r.id}
         status={listStatus(isLoading, error)}
-        paginate={false}
+        paginate
         onRetry={refetch}
         empty={{ title: t("bundles.empty"), description: editable ? t("bundles.emptyBody") : undefined }}
       />

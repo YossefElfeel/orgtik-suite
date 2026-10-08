@@ -26,7 +26,7 @@ export type NewTicket = { subject: string; category: TicketCategory; text: strin
 export const supportApi = platformApi.injectEndpoints({
   endpoints: (b) => ({
     getTickets: b.query<Page<Ticket>, { page?: number; pageSize?: number }>({
-      query: ({ page = 1, pageSize = 25 }) => ({ url: "/tickets", params: { page, pageSize } }),
+      query: ({ page = 1, pageSize = 10 }) => ({ url: "/tickets", params: { page, pageSize } }),
       providesTags: ["Tickets"],
     }),
     getTicket: b.query<Ticket, string>({

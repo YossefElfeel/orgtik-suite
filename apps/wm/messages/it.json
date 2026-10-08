@@ -26,14 +26,14 @@
     "roadmap": "Roadmap",
     "ideas": "Idee",
     "pricing": "Riferimenti delle offerte",
-    "library": "Libreria",
+    "library": "Media",
     "seoHealth": "Salute SEO",
     "redirects": "Reindirizzamenti",
     "indexing": "Indicizzazione",
     "translations": "Traduzioni",
     "leads": "Contatti",
     "site": "Sito",
-    "audit": "Registro",
+    "audit": "Registro attività",
     "preview": "Anteprima"
   },
   "Overview": {
@@ -392,7 +392,11 @@
     "saving": "Risparmio",
     "countSavings": "Risparmio per numero di elementi",
     "count": "Numero di elementi",
-    "fromItems": "Numero minimo di elementi"
+    "fromItems": "Numero minimo di elementi",
+    "reviewAuthor": "Autore",
+    "reviewRole": "Ruolo",
+    "reviewCompany": "Azienda",
+    "reviewQuote": "Testimonianza"
   },
   "Formats": {
     "design": "Diario di design",
@@ -651,6 +655,10 @@
     "pricing": {
       "title": "Riferimenti delle offerte",
       "description": "Esempi del catalogo e testi di sola lettura. I prezzi attuali e le regole di risparmio sono gestiti in Admin."
+    },
+    "reviews": {
+      "title": "Recensioni",
+      "description": "Aggiungi una testimonianza e inviala in revisione prima della pubblicazione."
     }
   },
   "Types": {
@@ -755,6 +763,16 @@
       "emptyBody": "I prezzi vengono dalle pagine servizi e software.",
       "noMatch": "Nessun risultato",
       "notFound": "Questi prezzi non esistono"
+    },
+    "review": {
+      "one": "Recensione",
+      "many": "Recensioni",
+      "search": "Cerca recensioni",
+      "empty": "Nessuna recensione",
+      "emptyBody": "Aggiungi una testimonianza e inviala in revisione prima della pubblicazione.",
+      "noMatch": "Nessuna recensione corrispondente",
+      "notFound": "Questa recensione non esiste",
+      "new": "Nuova recensione"
     }
   },
   "EntryNames": {
@@ -882,7 +900,8 @@
       "decline": "Rifiutata",
       "merge": "Unita a un’altra idea",
       "merged_from": "Un’altra idea è stata unita a questa",
-      "hide": "Nascosta"
+      "hide": "Nascosta",
+      "edit": "Idea modificata"
     }
   },
   "Media": {
@@ -910,7 +929,8 @@
       "rightsUnknown": "Diritti sconosciuti",
       "rightsExpiring": "Diritti in scadenza",
       "unused": "Non usato",
-      "altSuggested": "Suggerita, non rivista"
+      "altSuggested": "Suggerita, non rivista",
+      "attention": "Da verificare"
     },
     "ready": "Pronto",
     "usedCount": "{count, plural, =0 {non usato} one {usato una volta} other {usato # volte}}",
@@ -1132,7 +1152,8 @@
       },
       "socialPreview": "Anteprima del link",
       "noImage": "Nessuna immagine"
-    }
+    },
+    "fromArchive": "Contenuto archiviato"
   },
   "Leads": {
     "title": "Contatti",
@@ -1250,10 +1271,11 @@
       "needs_review": "Da rivedere",
       "outdated": "Superate",
       "in_progress": "In corso",
-      "not_started": "Non iniziate"
+      "not_started": "Non iniziate",
+      "gaps": "Mancante o obsoleto"
     },
     "type": "Tipo",
-    "allTypes": "Tutto",
+    "allTypes": "Tutte le pagine",
     "colEntry": "Pagina o voce",
     "openIn": "Apri in {language}",
     "empty": "Niente qui"
@@ -1269,7 +1291,8 @@
       "redirect": "Reindirizzamenti",
       "idea": "Idee",
       "lead": "Contatti",
-      "settings": "Impostazioni"
+      "settings": "Impostazioni",
+      "user": "Gestione utenti"
     },
     "everyone": "Tutti",
     "colWhen": "Quando",
@@ -1321,7 +1344,11 @@
       "idea_ship": "Idee: Rilasciata",
       "idea_decline": "Idee: Rifiutata",
       "idea_merge": "Idee: Unita a un’altra idea",
-      "idea_hide": "Idee: Nascosta"
+      "idea_hide": "Idee: Nascosta",
+      "user_create": "Account creato",
+      "user_update": "Account aggiornato",
+      "user_roles": "Ruoli del sito modificati",
+      "sample_revision": "Revisione dimostrativa aggiunta"
     }
   },
   "Site": {
@@ -1488,5 +1515,120 @@
     "crmReference": "Lead CRM OrgTik",
     "visitorName": "Nome contatto",
     "visitorNameError": "Inserisci un nome contatto da 1 a 120 caratteri."
+  },
+  "Improvements": {
+    "actions": "Azioni",
+    "view": "Visualizza",
+    "edit": "Modifica",
+    "delete": "Elimina",
+    "all": "Tutti",
+    "year": "Anno",
+    "missingLanguages": "Lingue mancanti",
+    "deliveryStatus": "Stato di realizzazione",
+    "protectedDelete": "I contenuti fissi o pubblicati non possono essere eliminati. Archivia le voci idonee nel loro editor.",
+    "deleteName": "Eliminare {name}?",
+    "deleteImpact": "Questa azione elimina la voce non pubblicata e la cronologia delle bozze.",
+    "formattedPreview": "Anteprima del testo",
+    "formattingProtected": "La formattazione e i valori dinamici vengono conservati automaticamente.",
+    "sharedCopy": "Testi condivisi del sito",
+    "sharedCopyHint": "Questi testi sono condivisi con le schermate commerciali e dell’account. Le modifiche seguono il processo di revisione e pubblicazione esistente.",
+    "customCursor": "Cursore personalizzato",
+    "text": "Testo",
+    "link": "Link",
+    "media": "Media",
+    "description": "Descrizione",
+    "tags": "Tag",
+    "upload": "Carica immagine o video",
+    "remove": "Rimuovi",
+    "selectMedia": "Seleziona media",
+    "sections": "Ordine delle sezioni",
+    "moveUp": "Sposta su",
+    "moveDown": "Sposta giù",
+    "type": "Tipo",
+    "status": "Stato",
+    "search": "Cerca",
+    "allPages": "Tutte le pagine",
+    "addLanguage": "Aggiungi lingua",
+    "reviews": "Recensioni",
+    "sample": "Recensione dimostrativa",
+    "opened": "Aperto",
+    "userManagement": "Gestione utenti",
+    "activityLog": "Registro attività",
+    "order": "Ordine",
+    "relatedEntry": "Servizio o software correlato",
+    "enableLanguageHelp": "Abilita una lingua supportata per modificarla. La disponibilità pubblica si controlla nelle impostazioni del sito.",
+    "allLanguagesEnabled": "Le cinque lingue supportate sono già abilitate.",
+    "identityHelp": "Controlla il nome del sito usato nell’identità e nei metadati.",
+    "searchSocial": "Valori predefiniti per ricerca e social",
+    "searchSocialHelp": "Titolo, descrizione e immagine per le pagine senza valori SEO propri.",
+    "formsHelp": "Controlla se i moduli inviano richieste ai lead o rimangono in anteprima.",
+    "kind": "Categoria",
+    "history": "Cronologia",
+    "indexing": "Regola di indicizzazione",
+    "siteIndexing": "Consenti l’indicizzazione dell’intero sito",
+    "canonical": "URL canonico",
+    "sitemap": "Mappa del sito",
+    "included": "Incluso",
+    "excluded": "Escluso",
+    "siteOverride": "Impostazione globale del sito",
+    "pagePolicy": "Impostazione SEO della pagina",
+    "allowed": "Indicizzazione consentita",
+    "indexingHelp": "Qui trovi la regola inviata ai motori. Verifica l’indicizzazione effettiva di Google in Search Console.",
+    "sitemapHelp": "La mappa del sito facilita la scoperta degli URL. L’esclusione da sola non impedisce l’indicizzazione.",
+    "canonicalHelp": "L’URL canonico indica l’indirizzo preferito per contenuti duplicati.",
+    "robotsHelp": "Le regole robots controllano la scansione. I crawler devono accedere alla pagina per leggere noindex. L’interruttore globale prevale sulle singole pagine.",
+    "googleGuidance": "Guida Google all’indicizzazione",
+    "name": "Nome",
+    "firstName": "Nome",
+    "lastName": "Cognome",
+    "email": "Email",
+    "initialPassword": "Password iniziale (almeno 8 caratteri)",
+    "active": "Attivo",
+    "inactive": "Inattivo",
+    "activeAccount": "Account suite attivo",
+    "noAccess": "Nessun accesso",
+    "noResults": "Nessuna voce corrispondente",
+    "websiteRoles": "Ruoli di Website Manager",
+    "websiteRolesHelp": "Concedi l’accesso a Website Manager. Gli altri ruoli sono gestiti centralmente. Senza ruoli, l’accesso viene rimosso.",
+    "newAccount": "Crea account",
+    "editAccount": "Modifica account e accesso",
+    "centralUsers": "Gestione centrale degli utenti",
+    "centralAccountsHelp": "Il tuo ruolo gestisce l’accesso al sito. Gli amministratori centrali gestiscono i dati e l’attivazione degli account.",
+    "userManagementHelp": "Gestisci account centrali e accesso al sito. Le modifiche agli account si applicano all’intera suite.",
+    "accountStale": "Questo account è cambiato. Chiudilo e riaprilo prima di salvare.",
+    "accountInvalid": "Controlla nomi, email univoca e lunghezza della password.",
+    "selfLockout": "Non puoi rimuovere il tuo accesso amministrativo.",
+    "internalMemberRequired": "Ripristina prima l’appartenenza interna attiva nella gestione centrale.",
+    "approve": "Approva",
+    "manage": "Gestisci",
+    "personalData": "Leggi dati personali",
+    "enableLanguages": "Abilita lingue",
+    "structuredData": "Modifica dati strutturati",
+    "capability": "Gruppo di capacità",
+    "roleComparison": "Confronto dei ruoli",
+    "roleComparisonHelp": "Confronta i diritti di lettura, modifica e approvazione. Si applicano le regole di pubblicazione e accesso esistenti.",
+    "viewData": "Visualizza tabella dati",
+    "softwareSystem": "Sistema software",
+    "queueHelp": "Lavoro in sospeso per tutti i tipi di contenuto gestiti.",
+    "capabilityGroups": {
+      "overview": "Panoramica",
+      "content": "Contenuti",
+      "pages": "Pagine",
+      "media": "Media",
+      "seo": "SEO",
+      "marketing": "Marketing",
+      "localization": "Traduzioni",
+      "settings": "Impostazioni",
+      "legal": "Note legali",
+      "claims": "Affermazioni e prove",
+      "pricing": "Riferimenti delle offerte",
+      "leads": "Contatti",
+      "site": "Sito",
+      "locales": "Lingue",
+      "users": "Gestione utenti"
+    },
+    "partners": "Partner",
+    "seoHealth": "Stato SEO",
+    "faqQuestions": "Domande e risposte"
   }
 }

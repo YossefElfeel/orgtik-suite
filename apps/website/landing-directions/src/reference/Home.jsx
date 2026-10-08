@@ -1,5 +1,7 @@
+import { managedPageTree } from "../content/managed-page";
 import { content } from "../content";
 import { Testimonials } from "./Testimonials";
+import { FAQSection } from "./FAQSection";
 import { PartnerStrip } from "./Partners";
 import React from "react";
 import { nudge } from "../content/locale";
@@ -925,7 +927,7 @@ export default class Home extends ReferencePage {
   render() {
     const v = this.renderVals();
     return (
-      <>
+      managedPageTree(<>
         <div
           ref={v.rootRef}
           data-screen-label={"Home"}
@@ -1349,7 +1351,7 @@ export default class Home extends ReferencePage {
             </>
           )}
           <main id={"top"}>
-            <section
+            <section data-cms-section="hero"
               style={{
                 position: "relative",
                 minHeight: "100svh",
@@ -2027,7 +2029,7 @@ export default class Home extends ReferencePage {
                 </>
               )}
             </section>
-            <section
+            <section data-cms-section="two-sides"
               id={"two-sides"}
               style={{
                 padding: "var(--section-space) 0 var(--section-space)",
@@ -2672,8 +2674,8 @@ export default class Home extends ReferencePage {
               </div>
             </section>
 
-            <PartnerStrip />
-            <section
+            <PartnerStrip data-cms-section="partners" />
+            <section data-cms-section="work"
               id={"work"}
               style={{ padding: "0 0 var(--section-space)" }}
             >
@@ -3481,7 +3483,7 @@ export default class Home extends ReferencePage {
                 </div>
               </div>
             </section>
-            <section
+            <section data-cms-section="services"
               id={"services"}
               style={{
                 position: "relative",
@@ -4029,7 +4031,7 @@ export default class Home extends ReferencePage {
                 </div>
               </div>
             </section>
-            <section
+            <section data-cms-section="software"
               id={"software"}
               style={{
                 position: "relative",
@@ -4466,7 +4468,7 @@ export default class Home extends ReferencePage {
                 </div>
               </div>
             </section>
-            <section
+            <section data-cms-section="approach"
               id={"approach"}
               ref={v.procRef}
               style={{
@@ -4691,8 +4693,9 @@ export default class Home extends ReferencePage {
                 </div>
               </div>
             </section>
-            <Testimonials />
-            <section
+            <FAQSection data-cms-section="faqs" />
+            <Testimonials data-cms-section="reviews" />
+            <section data-cms-section="closing"
               id={"contact"}
               className="closing-cta"
               ref={v.closingRef}
@@ -5249,7 +5252,7 @@ export default class Home extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>
+      </>, "pg_home")
     );
   }
 }

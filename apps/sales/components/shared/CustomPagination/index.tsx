@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import {
   ChevronDown,
@@ -79,39 +79,17 @@ export function CustomPagination({
   onLimitChange,
 }: IPaginationOptions) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pageHref = (page: number, size = 10) => { const query = new URLSearchParams(searchParams.toString()); query.set("page", String(page)); query.set("limit", String(size)); return `${baseUrl}?${query}`; };
   const t = useTranslations("common");
 
   const isFirstPage =
     currentPage <= 1 || (totalPages === 0 && currentPage === 0);
   const isLastPage = totalPages === 0 || currentPage >= totalPages;
 
-  const totalItems = totalItemsGetter || totalPages * limit;
+  const totalItems = totalItemsGetter ?? totalPages * limit;
 
-  const limitOptions = useMemo(() => {
-    const baseOptions = [10, 20, 50, 100];
-    if (totalItems === 0) return baseOptions;
-
-    const validOptions = baseOptions.filter((option) => option <= totalItems);
-
-    if (!validOptions.includes(limit)) {
-      validOptions.push(limit);
-      validOptions.sort((a, b) => a - b);
-    }
-
-    const quarterItems = Math.ceil(totalItems / 4);
-    const halfItems = Math.ceil(totalItems / 2);
-    [quarterItems, halfItems].forEach((option) => {
-      if (
-        option > 0 &&
-        option <= totalItems &&
-        !validOptions.includes(option)
-      ) {
-        validOptions.push(option);
-      }
-    });
-
-    return [...new Set(validOptions)].sort((a, b) => a - b);
-  }, [totalItems, limit]);
+  const limitOptions = [10];
 
   const handlePageChange = (e: React.MouseEvent, page: number) => {
     e.preventDefault();
@@ -120,7 +98,7 @@ export function CustomPagination({
     if (onPageChange) {
       onPageChange(page);
     } else if (baseUrl) {
-      router.push(`${baseUrl}?page=${page}&limit=${limit}`);
+      router.push(pageHref(page));
     }
   };
 
@@ -130,16 +108,13 @@ export function CustomPagination({
     if (onLimitChange) {
       onLimitChange(newLimit);
     } else if (baseUrl) {
-      router.push(`${baseUrl}?page=1&limit=${newLimit}`);
+      router.push(pageHref(1, newLimit));
     }
   };
 
-  const pageHref = (page: number) =>
-    baseUrl && !onPageChange ? `${baseUrl}?page=${page}&limit=${limit}` : "#";
-
   const pageStatus =
-    totalPages === 0 
-      ? t("pageOf", { current: 0, total: 0 }) 
+    totalPages === 0
+      ? t("pageOf", { current: 0, total: 0 })
       : t("pageOf", { current: currentPage, total: totalPages });
 
   const pageItems = getPaginationRange(currentPage, totalPages);

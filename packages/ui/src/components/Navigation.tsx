@@ -106,7 +106,7 @@ export type PaginationProps = {
   pageSize: number;
   total: number;
   onPageChange?: (page: number) => void;
-  /** Shows the rows-per-page choice (25/50/100 by default). */
+  /** Shows the rows-per-page choice (10 by default). */
   onPageSizeChange?: (size: number) => void;
   pageSizes?: number[];
   /** For URL-synced lists: pages render as real links, so they can be opened and shared. */
@@ -114,7 +114,7 @@ export type PaginationProps = {
   className?: string;
 };
 
-export function Pagination({ page, pageSize, total, onPageChange, onPageSizeChange, pageSizes = [25, 50, 100], hrefFor, className }: PaginationProps) {
+export function Pagination({ page, pageSize, total, onPageChange, onPageSizeChange, pageSizes = [10], hrefFor, className }: PaginationProps) {
   const t = useStrings();
   const { Link } = useOrgtik();
   const pages = Math.max(1, Math.ceil(total / pageSize));

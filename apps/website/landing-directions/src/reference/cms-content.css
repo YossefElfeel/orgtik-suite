@@ -1,0 +1,86 @@
+.cms-reviews {
+  padding: clamp(44px, 7vw, 96px) clamp(20px, 6vw, 90px);
+  background: #130c20;
+  color: #f6f0ff;
+}
+.cms-reviews h2 {
+  font-size: clamp(30px, 4vw, 48px);
+  letter-spacing: -0.035em;
+  margin: 0 0 32px;
+}
+.cms-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+.cms-review {
+  margin: 0;
+  border-top: 1px solid #574166;
+  padding-top: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.cms-sample-label {
+  font-size: 12px;
+  line-height: 1.5;
+  border: 1px solid #8d789f;
+  border-radius: 100px;
+  padding: 4px 10px;
+  color: #e0cfef;
+}
+.cms-review blockquote {
+  font-size: clamp(18px, 2vw, 23px);
+  line-height: 1.6;
+  margin: 0 0 8px;
+}
+.cms-review figcaption {
+  margin-top: auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.cms-review figcaption img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.cms-review figcaption strong,
+.cms-review figcaption span > span {
+  display: block;
+}
+.cms-review figcaption span > span {
+  color: #c6b6d3;
+  margin-top: 4px;
+}
+.cms-section-media {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 20px;
+  width: 100%;
+  padding-block: 24px;
+}
+.cms-section-media img,
+.cms-section-media video {
+  max-width: 100%;
+  max-height: 540px;
+  object-fit: contain;
+}
+.cms-faq-link {
+  color: inherit;
+  font-size: 14px;
+  text-underline-offset: 4px;
+}
+.cms-faq-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+@media (max-width: 760px) {
+  .cms-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}

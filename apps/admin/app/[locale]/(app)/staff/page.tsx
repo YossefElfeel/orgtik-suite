@@ -10,6 +10,7 @@ import { asApiError, listStatus } from "@/components/system/kit";
 import { useCan } from "@/lib/permissions";
 import { useMeQuery, type RoleKey } from "@/store/api";
 import { useSetStaffRolesMutation, useStaffQuery, type MatrixModule, type StaffMember } from "@/store/system";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 const ROLES: RoleKey[] = ["super_admin", "finance", "sales", "support", "service_mgr", "service_team", "content", "product_mgr"];
 const MODULES = ["overview", "tools", "plans", "pricing", "bundles", "workspaces", "billing", "tax", "services", "tickets", "content", "suggestions", "waitlist", "templates", "staff", "reports", "settings"];
@@ -82,7 +83,7 @@ function Matrix({ modules, roleOrder }: { modules: MatrixModule[]; roleOrder: Ro
   return (
     <Card padding="none" className="overflow-hidden">
       <div className="relative overflow-x-auto" tabIndex={0} role="region" aria-labelledby="matrix-title">
-        <table className="w-full min-w-[56rem] text-body-sm">
+        <PaginatedTable><table className="w-full min-w-[56rem] text-body-sm">
           <caption className="sr-only">{t("staff.matrixTitle")}</caption>
           <thead className="bg-sunken">
             <tr>
@@ -124,7 +125,7 @@ function Matrix({ modules, roleOrder }: { modules: MatrixModule[]; roleOrder: Ro
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></PaginatedTable>
       </div>
     </Card>
   );
@@ -195,7 +196,7 @@ function Staff() {
         <h2 id="people-title" className="font-display text-title-sm text-fg">
           {t("staff.people")}
         </h2>
-        <DataTable label={t("staff.people")} columns={columns} data={data?.items ?? []} getRowId={(r) => r.key} status={listStatus(isLoading, error)} paginate={(data?.items.length ?? 0) > 25} onRetry={refetch} empty={{ title: t("staff.empty") }} />
+        <DataTable label={t("staff.people")} columns={columns} data={data?.items ?? []} getRowId={(r) => r.key} status={listStatus(isLoading, error)} paginate onRetry={refetch} empty={{ title: t("staff.empty") }} />
       </section>
       <section aria-labelledby="matrix-title" className="flex flex-col gap-3">
         <h2 id="matrix-title" className="font-display text-title-sm text-fg">

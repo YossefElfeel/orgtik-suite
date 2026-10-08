@@ -7,7 +7,7 @@ const path = require("path");
 const {DEPARTMENTS, blankContent} = require("./defaults");
 
 const LOCALES = ["en", "ar", "de", "fr", "it"];
-const TYPES = ["page", "global", "strings", "caseStudy", "serviceFamily", "service", "softwareModule", "article", "legalDocument", "roadmapItem", "pricing"];
+const TYPES = ["page", "global", "strings", "caseStudy", "serviceFamily", "service", "softwareModule", "article", "legalDocument", "roadmapItem", "pricing", "review"];
 // Roadmap items: where they sit on the timeline (keys; the screens and the site label them).
 const ROADMAP_STATUS = ["open", "planned", "in_progress", "shipped"];
 const PERIODS = ["past", "now", "next"];
@@ -85,10 +85,10 @@ const TRANSLATION_ACTIONS = {
 };
 
 function loadSeed() {
-  return JSON.parse(fs.readFileSync(path.join(__dirname, "seed", "website.json"), "utf8"));
+  return require("./seed/manager-improvements").applyManagerImprovements(JSON.parse(fs.readFileSync(path.join(__dirname, "seed", "website.json"), "utf8")));
 }
 
-function makeStore(now) {
+function makeStore(now, { demo = false } = {}) {
   const seed = loadSeed();
   const entries = new Map();
   const audit = [];
@@ -170,6 +170,20 @@ function makeStore(now) {
   // Validation per locale for what a reader can't do without (422 with fieldErrors).
   function validate(content, e) {
     const errors = {};
+    const safeAsset = value => typeof value === "string" && value.length <= 2048 && (/^(https?:)\/\//i.test(value) || !/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(value));
+    if (content.presentation) {
+      const p = content.presentation;
+      const allowedSections = require("../../../program/cms/sections.json")[e?.id]?.body;
+      if (allowedSections && Array.isArray(p.sectionOrder) && p.sectionOrder.some(key => !allowedSections.includes(key))) errors.presentation = "invalid";
+      if (!Array.isArray(p.sectionOrder) || p.sectionOrder.length > 50 || new Set(p.sectionOrder).size !== p.sectionOrder.length || p.sectionOrder.some(key => typeof key !== "string" || !/^[a-zA-Z0-9_-]+$/.test(key))) errors.presentation = "invalid";
+      if (!p.sectionMedia || typeof p.sectionMedia !== "object" || Object.values(p.sectionMedia).some(items => !Array.isArray(items) || items.length > 10 || items.some(item => !safeAsset(item?.src)))) errors.presentation = "invalid";
+      if (!p.cursor || typeof p.cursor.link !== "string" || (p.cursor.link && !/^(https?:\/\/|\/(?!\/)|#)/.test(p.cursor.link)) || !p.cursor.text || Object.values(p.cursor.text).some(text => typeof text !== "string" || text.length > 120)) errors.presentation = "invalid";
+    }
+    if (e?.type === "review") {
+      if (typeof content.sample !== "boolean") errors.sample = "required";
+      if (!Number.isInteger(content.position) || content.position < 0) errors.position = "out_of_range";
+      if (content.relatedEntry && !["service", "serviceFamily", "softwareModule"].includes(entries.get(content.relatedEntry)?.type)) errors.relatedEntry = "invalid";
+    }
     if (e?.type === "caseStudy") {
       if (typeof content.narrativePublished !== "boolean") errors.narrativePublished = "required";
       else if (content.narrativePublished && content.provenance?.figures !== "approved") errors.narrativePublished = "narrative_needs_approved_figures";
@@ -238,7 +252,7 @@ function makeStore(now) {
   // unpublished / published / archived") ----
   // Only where the website's design takes a list of any length: articles, case studies and
   // roadmap items. Families, services and modules have a fixed place in the design.
-  const CREATABLE = { article: "ar", caseStudy: "cs", roadmapItem: "rm" };
+  const CREATABLE = { article: "ar", caseStudy: "cs", roadmapItem: "rm", review: "rv" };
   // A new entry starts as a copy of one the site already shows, so it has every field its page
   // needs; only English, and off the site until it's published.
   function create(type, who, { name, slug, from, department } = {}) {
@@ -254,7 +268,7 @@ function makeStore(now) {
     content.locales = { en: { ...content.locales.en, name: String(name).trim() } };
     if (content.slug && Object.keys(content.slug).length) content.slug = { en: String(slug ?? "").trim() };
     const was = template?.live?.seo?.en ?? template?.draft?.seo?.en ?? {};
-    content.seo = type === "roadmapItem" ? {} : { en: { title: String(name).trim(), description: "", robots: was.robots ?? "noindex", inSitemap: was.inSitemap ?? true } };
+    content.seo = ["roadmapItem", "review"].includes(type) ? {} : { en: { title: String(name).trim(), description: "", robots: was.robots ?? "noindex", inSitemap: was.inSitemap ?? true } };
     // Copied figures aren't this project's: they start as samples.
     if (content.provenance) content.provenance = { figures: "sample", sampleLabel: clone(content.provenance.sampleLabel) };
     if (type === "caseStudy") content.narrativePublished = false;
@@ -344,6 +358,10 @@ function makeStore(now) {
     if (patch.seo && patch.locale) next.seo[patch.locale] = { ...(next.seo[patch.locale] ?? {}), ...patch.seo };
     if (patch.slug && patch.locale) next.slug[patch.locale] = patch.slug;
     if (patch.image) next.image = { ...next.image, ...patch.image };
+    if (patch.presentation) next.presentation = { ...(next.presentation ?? {}), ...clone(patch.presentation) };
+    if (e.type === "review" && patch.neutral) {
+      for (const key of ["sample", "position", "relatedEntry"]) if (key in patch.neutral) next[key] = clone(patch.neutral[key]);
+    }
     // Language-neutral fields an editor may change (the rest is structure: department, parent).
     for (const k of EDITABLE_NEUTRAL) if (patch.neutral && k in patch.neutral && k in next) next[k] = patch.neutral[k];
     if (patch.gallery) next.gallery = patch.gallery;
@@ -395,6 +413,7 @@ function makeStore(now) {
     if (!can(rule.permission) && !seoLane) return { status: 403, code: "forbidden", required: rule.permission };
     if (["publish", "schedule", "approve"].includes(action)) {
       const errors = validate(current(e), e);
+      if (e.type === "review" && !current(e).locales.en.quote?.trim()) errors["locales.en.quote"] = "required";
       if (["caseStudy", "article"].includes(e.type) && !current(e).image?.src?.trim()) errors["image.src"] = "required";
       if (Object.keys(errors).length) return {status:422,code:"invalid",fieldErrors:errors};
     }
@@ -461,7 +480,7 @@ function makeStore(now) {
     ship: { from: ["in_progress"], to: "shipped", needs: "link" },
     decline: { from: ["pending", "open"], to: "declined", needs: "reason" },
     merge: { from: ["pending", "open"], to: "merged", needs: "into" },
-    hide: { from: ["pending"], to: "hidden", needs: "reason" },
+    hide: { from: ["pending", "open", "planned", "in_progress", "shipped"], to: "hidden", needs: "reason" },
   };
   const VISIBLE = ["open", "planned", "in_progress", "shipped"];
   function moderate(idea, who, action, input = {}) {
@@ -571,14 +590,26 @@ function makeStore(now) {
     const live = entries.get("pr_software")?.live;
     return { currency: live?.currency ?? "CHF", priceMode: live?.priceMode ?? "indicative", managedIn: live?.managedIn ?? null, modules: Object.fromEntries((live?.locales.en.items ?? []).map((m) => [m.id, { monthly: m.monthly }])) };
   };
-  const exportState = () => clone({ entries: [...entries], audit, ideas: [...ideas] });
+  const ensureDemo = () => { if (demo) require("./seed/demo-states").contentExamples({ entries, audit, ideas, now }); };
+  const exportState = () => clone({ cmsVersion: 1, demoVersion: 1, entries: [...entries], audit, ideas: [...ideas] });
   const validateState = value => {
     const incoming = codec.object(value), rows = codec.mapRows(incoming.entries), ideas_ = codec.mapRows(incoming.ideas);
     if (!Array.isArray(incoming.audit) || rows.some(([, row]) => !row.workflow || !Array.isArray(row.versions) || !row.translation || !TYPES.includes(row.type))) throw codec.fail("Website Manager content state is incomplete.");
-    return { entries: rows, audit: clone(incoming.audit), ideas: ideas_ };
+    return { cmsVersion: incoming.cmsVersion ?? 0, demoVersion: incoming.demoVersion ?? 0, entries: rows, audit: clone(incoming.audit), ideas: ideas_ };
   };
-  const importState = value => { const incoming = validateState(value); codec.replaceMap(entries, incoming.entries); codec.replaceMap(ideas, incoming.ideas); audit.splice(0, audit.length, ...incoming.audit); };
-  return { create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES, exportState, importState, validateState };
+  const importState = value => {
+    const incoming = validateState(value);
+    const additions = [...entries].filter(([id]) => id === "pg_faq" || id.startsWith("rv_"));
+    codec.replaceMap(entries, incoming.entries);
+    for (const [id, entry] of additions) if (incoming.cmsVersion < 1 && !entries.has(id)) entries.set(id, entry);
+    // Populate only new schema fields. Never reset saved copy or draft revisions.
+    for (const entry of entries.values()) for (const content of [entry.live, entry.draft].filter(Boolean)) {
+      if (entry.type === "page") content.presentation ??= { sectionOrder: [], sectionMedia: {}, cursor: { text: {}, link: "" } };
+    }
+    codec.replaceMap(ideas, incoming.ideas); audit.splice(0, audit.length, ...incoming.audit);
+    if (incoming.demoVersion < 1) ensureDemo();
+  };
+  return { ensureDemo, create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES, exportState, importState, validateState };
 }
 
 module.exports = { makeStore, TRANSITIONS, TYPES };

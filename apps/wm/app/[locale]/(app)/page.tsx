@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { ChatCircleText, ClockCountdown, FileText, Globe, Image, Lightbulb, MagnifyingGlass, PencilSimple, Translate } from "@phosphor-icons/react";
 import { Card, ErrorState, PageHeader, Skeleton, useFormatter } from "@orgtik/ui";
 import { useMeQuery, useOverviewQuery, type Overview } from "@/store/api";
+import { Link } from "@/i18n/routing";
 import { WebsiteNumbers } from "@/components/overview/WebsiteNumbers";
 
 const QUEUE: { key: keyof Overview["queue"]; icon: React.ReactNode }[] = [
@@ -18,6 +19,10 @@ const QUEUE: { key: keyof Overview["queue"]; icon: React.ReactNode }[] = [
   { key: "translationReview", icon: <Translate /> },
 ];
 
+const DESTINATIONS: Partial<Record<keyof Overview["queue"], string>> = {
+  drafts: "/content/queue?state=draft&mine=1", inReview: "/content/queue?state=in_review", scheduled: "/content/queue?state=scheduled",
+  translationGaps: "/localization?status=gaps", translationReview: "/localization?status=needs_review", seoIssues: "/seo?issue=descriptionMissing", mediaIssues: "/media?issue=attention", newLeads: "/marketing/leads?status=new", pendingIdeas: "/marketing/ideas?status=pending",
+};
 export default function OverviewPage() {
   const t = useTranslations("Overview");
   const tr = useTranslations("Roles");
@@ -38,13 +43,13 @@ export default function OverviewPage() {
           <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(13rem,100%),1fr))] gap-3">
             {QUEUE.map(({ key, icon }) => (
               <li key={key}>
-                <Card padding="sm" className="flex items-center gap-3">
+                <Link href={DESTINATIONS[key] ?? "/content/queue"} className="block rounded-card focus-visible:outline-2 focus-visible:outline-focus"><Card padding="sm" className="flex items-center gap-3 transition-colors hover:bg-hover">
                   <span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-field bg-brand-subtle text-fg-brand [&_svg]:size-5">{icon}</span>
                   <span className="flex min-w-0 flex-col">
                     <span className="truncate text-body-sm text-fg-muted">{t(key)}</span>
                     {isLoading || !data ? <Skeleton className="mt-1 h-5 w-8" /> : <span className="font-display text-title text-fg tabular-nums">{f.number(data.queue[key])}</span>}
                   </span>
-                </Card>
+                </Card></Link>
               </li>
             ))}
           </ul>

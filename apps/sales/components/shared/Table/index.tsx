@@ -5,9 +5,11 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   getExpandedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Pagination as SuitePagination } from "@orgtik/ui";
 import TableSkeleton from "./TableSkeleton";
 import { CustomPagination, IPaginationOptions } from "../CustomPagination";
 import { useState } from "react";
@@ -33,15 +35,20 @@ export default function DataTable<TData, TValue>({
   const [expanded, setExpanded] = useState({});
   const t = useTranslations("common");
 
+  const [clientPagination, setClientPagination] = React.useState({ pageIndex: 0, pageSize: 10 });
+  React.useEffect(() => { setClientPagination({ pageIndex: 0, pageSize: 10 }); }, [data]);
   const table = useReactTable({
     data,
     columns,
     state: {
-      pagination: { pageIndex: 0, pageSize: pagination?.limit || 10 },
+      pagination: pagination ? { pageIndex: (pagination.currentPage || 1) - 1, pageSize: 10 } : clientPagination,
       expanded,
     },
     onExpandedChange: setExpanded,
+    manualPagination: Boolean(pagination),
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setClientPagination,
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: () => !!renderExpandedRow,
   });
@@ -55,7 +62,7 @@ export default function DataTable<TData, TValue>({
     >
       <div className="w-full min-w-0 overflow-x-auto transform-[rotateX(180deg)] px-3.5">
         <table className="w-full min-w-max border-separate border-spacing-0 transform-[rotateX(180deg)]">
-          <thead>
+          <thead className="bg-sunken">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id} className="border-b ">
                 {headerGroup.headers.map((header) => (
@@ -139,7 +146,8 @@ export default function DataTable<TData, TValue>({
         </table>
       </div>
 
-      {pagination && pagination.totalPages > 1 && (
+      {!pagination ? <SuitePagination page={clientPagination.pageIndex + 1} pageSize={10} total={data.length} onPageChange={page => setClientPagination({ pageIndex: page - 1, pageSize: 10 })} /> : null}
+      {pagination && (
         <div className="border-t ">
           <CustomPagination
             currentPage={pagination.currentPage}

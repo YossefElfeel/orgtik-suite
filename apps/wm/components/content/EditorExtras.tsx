@@ -61,7 +61,7 @@ function VersionChanges({ entry, version, before }: { entry: Entry; version: num
 }
 
 /** One row of the version history: who, when, what changed, and restoring it. */
-export function VersionRow({ entry, index, onError }: { entry: Entry; index: number; onError: (e: unknown) => void }) {
+export function VersionRow({ entry, index, onError, readOnly = false }: { entry: Entry; index: number; onError: (e: unknown) => void; readOnly?: boolean }) {
   const t = useTranslations("Editor");
   const f = useFormatter();
   const can = useCan();
@@ -86,7 +86,7 @@ export function VersionRow({ entry, index, onError }: { entry: Entry; index: num
         <Button size="sm" variant="ghost" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
           {open ? t("hideChanges") : t("showChanges")}
         </Button>
-        {!current && can("content:edit") && !needsApproval ? (
+        {!current && !readOnly && can("content:edit") && !needsApproval ? (
           <ConfirmDialog
             trigger={<Button size="sm" variant="secondary">{t("restore")}</Button>}
             tone="primary"

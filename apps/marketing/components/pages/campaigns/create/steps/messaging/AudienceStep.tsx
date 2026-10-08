@@ -22,6 +22,7 @@ import type { MessagingAudienceSelection, MessagingChannel } from "@/lib/campaig
 import type { IAudienceImportPreview } from "@/types/audiences";
 import { ChoiceCards } from "../../../shared/Choice";
 import { StepFrame, StepSection } from "../../StepFrame";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 const EMPTY: MessagingAudienceSelection = { sourceType: "COMPANY", audienceId: "", segmentId: "", importId: "", uploadFileName: "", saveAsAudience: false };
 const NONE = "__none__";
@@ -249,7 +250,7 @@ export default function MessagingAudienceStep() {
                 </Field>
               </div>
               <div className="overflow-x-auto rounded-field border border-line">
-                <table className="w-full min-w-80 text-start text-body-sm">
+                <PaginatedTable><table className="w-full min-w-80 text-start text-body-sm">
                   <caption className="border-b border-line bg-sunken px-3 py-2 text-start text-caption text-fg-muted">{t("previewCaption", { count: preview.totalRows })}</caption>
                   <thead>
                     <tr className="border-b border-line">
@@ -271,7 +272,7 @@ export default function MessagingAudienceStep() {
                       </tr>
                     ))}
                   </tbody>
-                </table>
+                </table></PaginatedTable>
               </div>
               <Checkbox checked={v.saveAsAudience} onCheckedChange={(c) => draft.patch({ saveAsAudience: Boolean(c) })} label={t("saveAsAudience")} description={t("saveAsAudienceHint")} />
               {v.saveAsAudience ? (

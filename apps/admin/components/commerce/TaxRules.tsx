@@ -206,7 +206,7 @@ export function TaxRules() {
           </Button>
         ) : null}
       </div>
-      <DataTable label={t("tax.rulesTitle")} columns={columns} data={rules} getRowId={(r) => r.country} status={listStatus(isLoading, error)} paginate={false} onRetry={refetch} empty={{ title: t("tax.empty") }} />
+      <DataTable label={t("tax.rulesTitle")} columns={columns} data={rules} getRowId={(r) => r.country} status={listStatus(isLoading, error)} paginate onRetry={refetch} empty={{ title: t("tax.empty") }} />
       {editing ? <TaxRuleDialog rule={editing === "new" ? null : editing} taken={rules.map((r) => r.country)} onClose={() => setEditing(null)} /> : null}
     </div>
   );

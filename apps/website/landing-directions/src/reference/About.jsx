@@ -1,3 +1,4 @@
+import { managedPageTree } from "../content/managed-page";
 import { content } from "../content";
 import { Testimonials } from "./Testimonials";
 import React from "react";
@@ -914,7 +915,7 @@ export default class About extends ReferencePage {
   render() {
     const v = this.renderVals();
     return (
-      <>
+      managedPageTree(<>
         <div
           ref={v.rootRef}
           data-screen-label={"About"}
@@ -1339,7 +1340,7 @@ export default class About extends ReferencePage {
           )}
           <main id={"top"}>
             <>
-              <section
+              <section data-cms-section="hero"
                 style={{
                   position: "relative",
                   minHeight: "100svh",
@@ -1747,7 +1748,7 @@ export default class About extends ReferencePage {
                 </div>
               </section>
             </>
-            <section
+            <section data-cms-section="purpose"
               id={"purpose"}
               style={{
                 padding: "var(--section-space) 0 var(--section-space)",
@@ -2165,7 +2166,7 @@ export default class About extends ReferencePage {
                 </div>
               </div>
             </section>
-            <section
+            <section data-cms-section="journey"
               id={"journey"}
               style={{
                 padding: "var(--section-space) 0",
@@ -2403,7 +2404,7 @@ export default class About extends ReferencePage {
                 </div>
               </div>
             </section>
-            <section
+            <section data-cms-section="capabilities"
               id={"capabilities"}
               data-screen-label={"About — What we can do"}
               style={{ padding: "var(--section-space) 0" }}
@@ -3167,7 +3168,7 @@ export default class About extends ReferencePage {
                 </div>
               </div>
             </section>
-            <Testimonials />
+            <Testimonials data-cms-section="reviews" />
             <section
               id={"closing"}
               className="closing-cta"
@@ -3748,7 +3749,7 @@ export default class About extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>
+      </>, "pg_about")
     );
   }
 }

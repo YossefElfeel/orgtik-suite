@@ -66,7 +66,7 @@ const baseQuery: BaseQueryFn<string | FetchArgs, unknown, PlatformError> = async
   // A list answer carries paging in meta; the screen gets it next to the rows.
   if (body?.meta && typeof body.meta.total === "number") {
     const { page, pageSize, total, ...rest } = body.meta as { page?: number; pageSize?: number; total: number };
-    return { data: { items: body.data, page: page ?? 1, pageSize: pageSize ?? 25, total, meta: rest }, meta: result.meta };
+    return { data: { items: body.data, page: page ?? 1, pageSize: pageSize ?? 10, total, meta: rest }, meta: result.meta };
   }
   // Other answers with meta: an object gets it as `meta`; an array becomes { items, meta }.
   if (body?.meta && Object.keys(body.meta).length && body.data && typeof body.data === "object") {

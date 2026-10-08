@@ -97,7 +97,7 @@ export function DataTable<T>({
   onSortingChange,
   pagination: paginationProp,
   onPaginationChange,
-  pageSizes = [25, 50, 100],
+  pageSizes = [10],
   paginate = true,
   selectable = false,
   rowSelection: selectionProp,
@@ -121,7 +121,7 @@ export function DataTable<T>({
     return () => ro.disconnect();
   }, []);
   const [innerSorting, setInnerSorting] = useState<SortingState>([]);
-  const [innerPagination, setInnerPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: pageSizes[0] ?? 25 });
+  const [innerPagination, setInnerPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: pageSizes[0] ?? 10 });
   const [innerSelection, setInnerSelection] = useState<RowSelectionState>({});
   const sorting = sortingProp ?? innerSorting;
   const pagination = paginationProp ?? innerPagination;
@@ -166,6 +166,12 @@ export function DataTable<T>({
   });
 
   const total = server ? (rowCount ?? data.length) : data.length;
+  // Deleting the final row on a page must return to the last available page.
+  useEffect(() => {
+    if (!paginate || status !== "ready") return;
+    const last = Math.max(0, Math.ceil(total / pagination.pageSize) - 1);
+    if (pagination.pageIndex > last) table.setPageIndex(last);
+  }, [total, pagination.pageIndex, pagination.pageSize, paginate, status, table]);
   const selected = table.getSelectedRowModel().rows;
   const headerGroups = table.getHeaderGroups();
   const colCount = table.getVisibleLeafColumns().length;
@@ -196,7 +202,7 @@ export function DataTable<T>({
         className="relative overflow-x-auto rounded-card border border-line bg-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
       >
         <table aria-label={label} aria-busy={status === "loading" || undefined} className="w-full border-collapse text-body">
-          <thead>
+          <thead className="bg-sunken">
             {headerGroups.map((group) => (
               <tr key={group.id} className="border-b border-line">
                 {group.headers.map((header) => {

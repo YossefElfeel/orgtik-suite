@@ -10,7 +10,7 @@ import { useFormatter } from "@orgtik/ui";
 import { usePathname, useRouter } from "@/i18n/routing";
 import type { Commission } from "@/types/commissions";
 
-const PAGE_SIZES = [10, 25, 50];
+const PAGE_SIZES = [10];
 
 /**
  * A list's filters, tab and page in the address, so a reload or a shared link keeps them. Changing

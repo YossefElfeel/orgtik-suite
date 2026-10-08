@@ -112,7 +112,7 @@ function CustomPlansPage() {
         getRowId={(r) => r.id}
         status={status}
         onRetry={refetch}
-        paginate={rows.length > 25}
+        paginate
         error={{ title: tc("loadFailed"), description: tc("loadFailedBody") }}
         empty={{ title: t("customPlans.empty"), description: t("customPlans.emptyBody") }}
       />

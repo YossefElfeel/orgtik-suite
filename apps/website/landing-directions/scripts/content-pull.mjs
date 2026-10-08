@@ -24,6 +24,7 @@ const TYPES = [
   "legalDocument",
   "roadmapItem",
   "pricing",
+  "review",
 ];
 
 async function get(p, text = false) {

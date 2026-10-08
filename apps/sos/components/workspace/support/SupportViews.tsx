@@ -18,7 +18,7 @@ import { fieldErrorsOf, usePlatformProblem } from "@/components/workspace/accoun
 import { Notice } from "@/components/workspace/account/Notice";
 import { Composer, Thread } from "./Thread";
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 10;
 export const CATEGORIES: TicketCategory[] = ["billing", "product", "sales", "technical", "other"];
 // The API says waiting_for_you where the status matrix says awaiting_reply.
 const ticketBadge = (s: TicketState): StatusState<"support_ticket"> => (s === "waiting_for_you" ? "awaiting_reply" : s) as StatusState<"support_ticket">;

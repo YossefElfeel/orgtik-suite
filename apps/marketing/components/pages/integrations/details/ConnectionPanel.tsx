@@ -105,7 +105,7 @@ export function ConnectionPanel({ data }: { data: IntegrationResponse }) {
           data={resources}
           getRowId={(r) => r.id}
           status="ready"
-          paginate={resources.length > 25}
+          paginate
           empty={{ title: t("resourcesEmpty") }}
         />
       </section>

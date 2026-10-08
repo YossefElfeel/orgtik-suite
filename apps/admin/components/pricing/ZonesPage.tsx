@@ -373,7 +373,7 @@ export function ZonesPage() {
           data={zones.data ?? []}
           getRowId={(z) => z.id}
           status={listStatus(zones)}
-          paginate={false}
+          paginate
           onRetry={() => zones.refetch()}
           empty={{ title: t("empty"), action: editable ? <Button size="sm" onClick={() => setDialog({})}>{t("add")}</Button> : undefined }}
         />
@@ -401,7 +401,7 @@ export function ZonesPage() {
           data={shownCountries}
           getRowId={(c) => c.iso}
           status={listStatus(countries)}
-          paginate={false}
+          paginate
           onRetry={() => countries.refetch()}
           empty={
             zoneFilter

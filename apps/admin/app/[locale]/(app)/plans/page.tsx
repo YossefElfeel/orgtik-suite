@@ -89,7 +89,7 @@ function PlansList() {
         data={data ?? []}
         getRowId={(r) => r.id}
         status={status}
-        paginate={(data?.length ?? 0) > 25}
+        paginate
         onRetry={refetch}
         className={isFetching && !isLoading ? "opacity-70" : undefined}
         empty={

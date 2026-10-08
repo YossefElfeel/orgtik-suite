@@ -23,7 +23,7 @@ export function TabsList({ items, variant = "line", className }) {
         return (_jsx(BaseTabs.List, { className: cn("flex flex-col gap-0.5", className), children: items.map((item) => (_jsxs(BaseTabs.Tab, { value: item.value, disabled: item.disabled, className: cn("flex min-h-control-md w-full items-center justify-between gap-2 rounded-field px-3 py-2 text-start font-body text-body-sm text-fg-muted outline-hidden select-none", "transition-colors duration-(--ot-duration-fast) ease-ot-out hover:bg-hover hover:text-fg", "data-[active]:bg-brand-subtle data-[active]:font-semibold data-[active]:text-fg-brand", "focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus data-[disabled]:pointer-events-none data-[disabled]:opacity-50"), children: [_jsx("span", { className: "min-w-0", children: item.label }), item.count !== undefined ? (_jsx("span", { className: "shrink-0 rounded-pill bg-sunken px-1.5 text-micro text-fg-muted tabular-nums", children: count.format(item.count) })) : null] }, item.value))) }));
     return (_jsxs(BaseTabs.List, { className: cn("relative flex max-w-full items-center overflow-x-auto", line ? "gap-5 border-b border-line" : "gap-1 rounded-pill bg-sunken p-1", className), children: [items.map((item) => (_jsxs(BaseTabs.Tab, { value: item.value, disabled: item.disabled, className: cn("relative z-[1] inline-flex shrink-0 items-center gap-2 font-body text-body font-semibold whitespace-nowrap text-fg-muted outline-hidden select-none", "transition-colors duration-(--ot-duration-fast) ease-ot-out hover:text-fg data-[active]:text-fg", "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus data-[disabled]:pointer-events-none data-[disabled]:opacity-50", line ? "h-control-md" : "h-control-sm rounded-pill px-3.5"), children: [item.label, item.count !== undefined ? (_jsx("span", { className: "rounded-pill bg-sunken px-1.5 text-micro text-fg-muted tabular-nums", children: count.format(item.count) })) : null] }, item.value))), _jsx(BaseTabs.Indicator
             // Base UI measures the active tab in physical pixels, so these stay physical on purpose.
-            , { 
+            , {
                 // Base UI measures the active tab in physical pixels, so these stay physical on purpose.
                 style: { left: "var(--active-tab-left)", width: "var(--active-tab-width)" }, className: cn("absolute transition-[left,width] duration-(--ot-duration-base) ease-ot-out", line ? "bottom-0 h-0.5 rounded-pill bg-fg-brand" : "top-1 h-[calc(100%-8px)] rounded-pill bg-raised shadow-raised") })] }));
 }
@@ -42,7 +42,7 @@ export function pageWindow(page, pages) {
     });
     return out;
 }
-export function Pagination({ page, pageSize, total, onPageChange, onPageSizeChange, pageSizes = [25, 50, 100], hrefFor, className }) {
+export function Pagination({ page, pageSize, total, onPageChange, onPageSizeChange, pageSizes = [10], hrefFor, className }) {
     const t = useStrings();
     const { Link } = useOrgtik();
     const pages = Math.max(1, Math.ceil(total / pageSize));

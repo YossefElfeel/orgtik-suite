@@ -33,7 +33,7 @@ export default function CampaignsPage() {
   const router = useRouter();
   const pathname = usePathname();
   const page = Math.max(1, Number(params.get("page")) || 1);
-  const pageSize = [10, 25, 50].includes(Number(params.get("size"))) ? Number(params.get("size")) : 10;
+  const pageSize = [10].includes(Number(params.get("size"))) ? Number(params.get("size")) : 10;
   const q = params.get("q") ?? "";
   const type = (TYPES as string[]).includes(params.get("type") ?? "") ? (params.get("type") as CampaignApiType) : null;
   const status = (STATUSES as readonly string[]).includes(params.get("status") ?? "") ? params.get("status") : null;
@@ -101,7 +101,7 @@ export default function CampaignsPage() {
           const next = typeof u === "function" ? u(pagination) : u;
           go({ page: next.pageIndex + 1, size: next.pageSize });
         }}
-        pageSizes={[10, 25, 50]}
+        pageSizes={[10]}
         status={isLoading ? "loading" : isError ? ((error as { status?: number })?.status === 403 ? "forbidden" : "error") : items.length ? "ready" : "empty"}
         onRetry={() => void refetch()}
         error={{ title: t("errorTitle"), description: t("errorBody") }}

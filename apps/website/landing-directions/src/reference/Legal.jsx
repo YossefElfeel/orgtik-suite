@@ -1,3 +1,4 @@
+import { managedPageTree } from "../content/managed-page";
 import { content } from "../content";
 import React from "react";
 import { LanguageMenu } from "./LanguageMenu";
@@ -649,7 +650,7 @@ export default class Legal extends ReferencePage {
   render() {
     const v = this.renderVals();
     return (
-      <>
+      managedPageTree(<>
         <div
           ref={v.rootRef}
           data-screen-label={"Legal"}
@@ -1072,7 +1073,7 @@ export default class Legal extends ReferencePage {
             </>
           )}
           <main id={"top"} className="content-page">
-            <section id={"legal"} style={{ padding: "var(--section-space) 0" }}>
+            <section data-cms-section="hero" id={"legal"} style={{ padding: "var(--section-space) 0" }}>
               <header className="contact-intro legal-intro">
                 <div className="contact-intro__title">
                   <p className="contact-intro__eyebrow">
@@ -1159,7 +1160,7 @@ export default class Legal extends ReferencePage {
                     maxWidth: "820px",
                   }}
                 >
-                  <div
+                  <div data-cms-section={v.isPartners ? "intro" : undefined} style={{ display: "contents" }}><div
                     data-reveal={"up"}
                     style={{
                       display: "flex",
@@ -1204,9 +1205,9 @@ export default class Legal extends ReferencePage {
                     }}
                   >
                     {v.doc.summary}
-                  </p>
+                  </p></div>
                   {v.isPartners ? (
-                    <PartnerDirectory />
+                    <PartnerDirectory data-cms-section="partners" />
                   ) : (
                     <>
                       <div
@@ -1667,7 +1668,7 @@ export default class Legal extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>
+      </>, v.isPartners ? "pg_partners" : "pg_legal")
     );
   }
 }

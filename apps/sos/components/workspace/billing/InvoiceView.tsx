@@ -12,6 +12,7 @@ import { statusOf } from "@/redux/features/platform/platformApi";
 import { useBillingInvoiceQuery, useBillingSubscriptionsQuery, type Invoice, type SubscriptionLine } from "@/redux/features/platform/billing";
 import { ButtonLink } from "@/components/shared/ButtonLink";
 import { Money, useCountryName, useDay, useLocalized, useTaxName } from "./shared";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 export function InvoiceView({ id }: { id: string }) {
   const t = useTranslations("Billing.invoice");
@@ -152,7 +153,7 @@ function InvoiceDocument({ invoice: inv, printing = false }: { invoice: Invoice;
       </dl>
 
       <div className="overflow-x-auto">
-        <table className="w-full border-collapse text-body">
+        <PaginatedTable><table className="w-full border-collapse text-body">
           <caption className="sr-only">{t("linesCaption")}</caption>
           <thead>
             <tr className="border-b border-line-strong text-start text-caption text-fg-muted">
@@ -190,7 +191,7 @@ function InvoiceDocument({ invoice: inv, printing = false }: { invoice: Invoice;
               </Total>
             ) : null}
           </tfoot>
-        </table>
+        </table></PaginatedTable>
       </div>
 
       <Section title={t("payments")} heading={H}>

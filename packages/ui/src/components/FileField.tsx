@@ -3,6 +3,7 @@ import { useId, useRef, useState, type DragEvent } from "react";
 import { File as FileIcon, UploadSimple, WarningCircle, X } from "@phosphor-icons/react";
 import { cn } from "../lib/cn.js";
 import { useFormatter, useStrings } from "../provider/OrgtikProvider.js";
+import { MediaFilePreview } from "./MediaFilePreview.js";
 
 export type FileFieldProps = {
   label: string;
@@ -124,16 +125,17 @@ export function FileField({ label, value, onChange, accept, maxSize, multiple = 
         <ul className="flex flex-col divide-y divide-line rounded-card border border-line bg-raised">
           {value.map((file, i) => (
             <li key={`${file.name}-${i}`} className="flex items-center gap-3 px-3 py-2">
-              <FileIcon aria-hidden="true" className="size-5 shrink-0 text-fg-subtle" />
+              {/^(image|video)\//.test(file.type) ? <MediaFilePreview file={file} /> : <FileIcon aria-hidden="true" className="size-5 shrink-0 text-fg-subtle" />}
               <span dir="auto" className="min-w-0 flex-1 truncate text-body text-fg">
                 {file.name}
               </span>
               <span className="text-caption text-fg-muted tabular-nums">{f.bytes(file.size)}</span>
               <button
                 type="button"
+                disabled={disabled}
                 onClick={() => onChange(value.filter((_, j) => j !== i))}
                 aria-label={t("removeItem", { label: file.name })}
-                className="grid size-7 place-items-center rounded-pill text-fg-muted hover:bg-hover hover:text-fg focus-visible:outline-2 focus-visible:outline-focus"
+                className="grid size-7 shrink-0 place-items-center rounded-pill text-fg-muted hover:bg-hover hover:text-fg focus-visible:outline-2 focus-visible:outline-focus disabled:pointer-events-none disabled:opacity-40"
               >
                 <X aria-hidden="true" className="size-3.5" />
               </button>

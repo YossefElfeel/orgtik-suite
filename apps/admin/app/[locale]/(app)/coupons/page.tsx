@@ -118,7 +118,7 @@ function Coupons() {
         data={data ?? []}
         getRowId={(r) => r.code}
         status={listStatus(isLoading, error)}
-        paginate={(data?.length ?? 0) > 25}
+        paginate
         onRetry={refetch}
         empty={{ title: t("coupons.empty"), description: editable ? t("coupons.emptyBody") : undefined }}
       />

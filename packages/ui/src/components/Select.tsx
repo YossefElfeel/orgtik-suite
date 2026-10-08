@@ -17,6 +17,8 @@ export type SelectProps<V extends string = string> = VariantProps<typeof control
   defaultValue?: V | null;
   onValueChange?: (value: V | null) => void;
   placeholder?: ReactNode;
+  /** Visible context for standalone filters, e.g. Status: All. */
+  label?: ReactNode;
   name?: string;
   id?: string;
   required?: boolean;
@@ -35,12 +37,14 @@ export function Select<V extends string = string>({
   defaultValue,
   onValueChange,
   placeholder,
+  label,
   size,
   className,
   "aria-label": ariaLabel,
   ...props
 }: SelectProps<V>) {
   const t = useStrings();
+  const visibleLabel = label ?? (value === "all" ? ariaLabel : undefined);
   const flat = options.flatMap((o) => (isGroup(o) ? o.options : [o]));
   const item = (o: SelectOption<V>) => (
     <BaseSelect.Item
@@ -66,14 +70,17 @@ export function Select<V extends string = string>({
       {...props}
     >
       <BaseSelect.Trigger
-        aria-label={ariaLabel}
+        aria-label={ariaLabel ?? (typeof label === "string" ? label : undefined)}
         className={cn(
           controlFrame({ size }),
           "flex cursor-default items-center justify-between gap-2 ps-3 pe-2 text-start outline-none select-none data-[popup-open]:border-focus",
           className,
         )}
       >
-        <BaseSelect.Value placeholder={placeholder ?? t("selectPlaceholder")} className="truncate data-[placeholder]:text-fg-subtle" />
+        <span className="flex min-w-0 items-center gap-1.5">
+          {visibleLabel ? <span className="shrink-0 text-fg-muted">{visibleLabel}:</span> : null}
+          <BaseSelect.Value placeholder={placeholder ?? t("selectPlaceholder")} className="truncate data-[placeholder]:text-fg-subtle" />
+        </span>
         <BaseSelect.Icon className="grid shrink-0 place-items-center text-fg-muted">
           <CaretDown aria-hidden="true" className="size-4" />
         </BaseSelect.Icon>
