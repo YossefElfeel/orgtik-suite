@@ -45,6 +45,7 @@ function Greeting({ name }: { name: string }) {
 export function SuiteFrame({ children }: { children: ReactNode }) {
   const t = useTranslations("Sidebar");
   const ts = useTranslations("Suite");
+  const td = useTranslations("TasksPresentation");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -66,6 +67,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
     { label: t("Notifications"), href: href("/notifications"), icon: <Bell />, active: at("/notifications") },
     { label: t("All Projects"), href: href("/projects"), icon: <FolderSimple />, active: pathname === "/projects" },
     { label: t("All Teams"), href: href("/teams"), icon: <UsersThree />, active: at("/teams") },
+    ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ label: td("presentationNav"), href: href("/presentation"), icon: <CheckSquare />, active: at("/presentation") }] : []),
   ];
   const sections: SidebarSection[] = [{ items: main }];
   const projects = important?.data ?? [];

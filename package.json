@@ -12,6 +12,7 @@
     "test": "turbo run test",
     "i18n:check": "turbo run i18n:check",
     "dev:mock": "pnpm --filter orgtik-local-dev api",
+    "demo": "node tools/demo/start.cjs",
     "ui:build": "turbo run build --filter=@orgtik/ui"
   },
   "devDependencies": {
