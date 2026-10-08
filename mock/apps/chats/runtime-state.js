@@ -2,6 +2,7 @@ const fixture = require('./fixture.json');
 const fileReferences = require('../../lib/workspace-file-references');
 const TABLES = ['channels', 'messages', 'presence', 'meetings', 'pastMeetings', 'notifications', 'whiteboards', 'historicalUsers'];
 const FIELDS = [...TABLES, 'floor', 'settings', 'insight', 'myTime', 'readState', 'channelPreferences', 'processedCommands', 'custodyOperations', 'fixtureOwnerId'];
+const OPTIONAL_FIELDS = ['whiteboardOperations'];
 const clone = value => JSON.parse(JSON.stringify(value));
 const invalid = text => { throw Object.assign(new Error(text), { status: 503, code: 'invalid_tool_snapshot' }); };
 const id = value => typeof value === 'string' && /^[a-zA-Z0-9_:.-]{1,96}$/.test(value) && !['__proto__', 'constructor', 'prototype'].includes(value);
@@ -35,7 +36,7 @@ function initialize({ workspace, identity, fixtureId }) {
 }
 
 function validate(data, sequences) {
-  if (!data || typeof data !== 'object' || Object.keys(data).sort().join() !== [...FIELDS].sort().join()) invalid('Chats snapshot has an uncovered state field.');
+  if (!data || typeof data !== 'object' || FIELDS.some(key => !Object.hasOwn(data, key)) || Object.keys(data).some(key => ![...FIELDS, ...OPTIONAL_FIELDS].includes(key))) invalid('Chats snapshot has an uncovered state field.');
   for (const key of TABLES) if (!Array.isArray(data[key])) invalid('Chats snapshot table is missing: ' + key);
   if (!sequences || Object.keys(sequences).sort().join() !== 'channels,messages,revision' || Object.values(sequences).some(value => !Number.isSafeInteger(value) || value < 0)) invalid('Chats counters are invalid.');
   const channels = new Map(), messages = new Map();
@@ -57,6 +58,21 @@ function validate(data, sequences) {
     messages.set(message.id, message);
   }
   for (const message of data.messages) if (message.threadId && (!messages.has(message.threadId) || messages.get(message.threadId).channelId !== message.channelId || messages.get(message.threadId).threadId)) invalid('Chats thread crosses a channel.');
+  const meetings = new Set();
+  for (const meeting of [...data.meetings, ...data.pastMeetings]) {
+    if (!id(meeting.id) || meetings.has(meeting.id) || !Array.isArray(meeting.participantIds) || meeting.participantIds.some(value => !id(value))) invalid('Chats saved meeting authority is invalid.');
+    meetings.add(meeting.id);
+  }
+  const boards = new Set();
+  for (const board of data.whiteboards) {
+    if (!id(board.id) || boards.has(board.id) || !id(board.ownerId) || typeof board.name !== 'string' || !board.name.trim() || board.name.length > 100 || !Number.isSafeInteger(board.revision) || board.revision < 1 || !Number.isFinite(Date.parse(board.createdAt)) || !Number.isFinite(Date.parse(board.updatedAt)) || board.channelId && board.meetingId || board.channelId !== null && !channels.has(board.channelId) || board.meetingId !== null && !meetings.has(board.meetingId) || Object.keys(board).some(key => !['id', 'name', 'ownerId', 'channelId', 'meetingId', 'reference', 'revision', 'createdAt', 'updatedAt', 'custodyReadOnly', 'custodyOperationId'].includes(key))) invalid('Chats whiteboard index is invalid.');
+    try { fileReferences.reference(board.reference, board.reference?.workspaceId); } catch { invalid('Chats whiteboard Files reference is invalid.'); }
+    boards.add(board.id);
+  }
+  if (data.whiteboardOperations !== undefined) {
+    if (!data.whiteboardOperations || typeof data.whiteboardOperations !== 'object' || Array.isArray(data.whiteboardOperations)) invalid('Chats whiteboard receipts are invalid.');
+    for (const [key, receipt] of Object.entries(data.whiteboardOperations)) if (!/^[\w.:-]{1,96}:[\w.:-]{1,96}$/.test(key) || !receipt || Object.keys(receipt).sort().join() !== 'boardId,fingerprint,versionId' || !/^[a-f0-9]{64}$/.test(receipt.fingerprint) || !boards.has(receipt.boardId) || !id(receipt.versionId)) invalid('Chats whiteboard receipt is invalid.');
+  }
   for (const user of data.historicalUsers) if (Object.keys(user).some(key => !['id', 'name', 'initials', 'tint'].includes(key)) || !id(user.id) || typeof user.name !== 'string') invalid('Chats historical display record contains authority or private fields.');
   for (const [userId, reads] of Object.entries(data.readState)) {
     if (!id(userId) || !reads || typeof reads !== 'object') invalid('Chats read state is invalid.');
@@ -73,5 +89,5 @@ function validate(data, sequences) {
   if (!data.floor || !Array.isArray(data.floor.rooms) || !data.settings) invalid('Chats presentation state is invalid.');
 }
 function decode(data, sequences) { validate(data, sequences); return { data: clone(data), sequences: clone(sequences) }; }
-function encode(state) { return decode(state.data, state.sequences); }
+function encode(state) { const result = decode(state.data, state.sequences); if (!Object.keys(result.data.whiteboardOperations || {}).length) delete result.data.whiteboardOperations; return result; }
 module.exports = { initialize, decode, encode, emptyInsight, emptyTime, id };

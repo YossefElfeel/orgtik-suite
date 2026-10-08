@@ -33,7 +33,7 @@ import {
 } from "@phosphor-icons/react";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button, Chip, EmptyState } from "@/components/ui/Primitives";
-import { Whiteboard } from "./Whiteboard";
+import { BoardScreen } from "./BoardScreen";
 import { InviteCard } from "./ShareMeeting";
 import { Composer } from "@/features/chat/Composer";
 import { Message } from "@/features/chat/Message";
@@ -308,7 +308,7 @@ export function CallStage({
             </div>
           ) : panel === "board" ? (
             <div className="min-h-0 flex-1 overflow-hidden" style={{ borderRadius: "var(--radius-card)" }}>
-              <Whiteboard />
+              <BoardScreen meetingId={meeting.id} embedded />
             </div>
           ) : view === "speaker" && participants.length > 1 ? (
             /* Speaker view: whoever is speaking, or the first other person,

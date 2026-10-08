@@ -17,7 +17,8 @@ export async function openFileReference(reference: FileReference, locale: string
   const code = await handoffCode(SOS_API_URL, session.tokens.accessToken, "tool:files");
   if (!current()) throw new FileRequestError("workspace_changed", 409);
   destination.pathname = destination.pathname.replace(/\/$/, "") + "/" + encodeURIComponent(locale) + "/auth";
-  destination.search = new URLSearchParams({ code, redirect: "/file/" + encodeURIComponent(reference.fileId) }).toString();
+  const versionQuery = new URLSearchParams({ versionId: reference.versionId });
+  destination.search = new URLSearchParams({ code, redirect: "/file/" + encodeURIComponent(reference.fileId) + "?" + versionQuery }).toString();
   destination.hash = "";
   if (!current()) throw new FileRequestError("workspace_changed", 409);
   window.location.assign(destination.href);

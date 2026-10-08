@@ -38,7 +38,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     platform: () => platform().getStore(), currentPrincipal, businessClock: clock,
     servicesFor({ workspace, appKey, identity }) {
       if (!/^[\w-]{1,200}$/.test(workspace.id)) throw failure(503, "invalid_workspace_id", "Workspace storage is unavailable.");
-      const ctx = { ...makeCtx(appKey, identity, util), realm, workspaceId: workspace.id, currentContext: () => currentPrincipal()?.workspaceContext, uploadsDir: path.join(config.dataDir, "uploads", "workspaces", workspace.id, appKey), io: null, sharedFiles: { resolve: resolveSharedFile, project: projectSharedFile } };
+      const ctx = { ...makeCtx(appKey, identity, util), realm, workspaceId: workspace.id, currentContext: () => currentPrincipal()?.workspaceContext, uploadsDir: path.join(config.dataDir, "uploads", "workspaces", workspace.id, appKey), io: null, boardAuthority: { authorize: authorizeBoardFile, custodyTarget: args => boardCustodyTarget(workspace.id, args) }, sharedFiles: { resolve: resolveSharedFile, project: projectSharedFile, ...Object.fromEntries(['authorizeWhiteboard', 'createWhiteboard', 'saveWhiteboard', 'resolveWhiteboard'].map(method => [method, args => invokeBoardFile(method, args)])) } };
       const upload = () => (req, res, next) => /multipart\/form-data|application\/octet-stream/i.test(req.headers["content-type"] || "") ? res.status(501).json({ success: false, code: "packaged_assets_only", message: "Choose a packaged sample asset." }) : next();
       ctx.upload = Object.fromEntries(["single", "array", "any", "fields", "none"].map(name => [name, upload]));
       return {
@@ -62,6 +62,28 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const runtime = filesRuntime();
     if (!runtime.resolveSharedFile) throw failure(503, 'files_runtime_unavailable', 'Files could not be loaded. Try again.');
     return runtime.resolveSharedFile({ actorId: principal.user.id, fileId: ref.fileId, versionId: ref.versionId });
+  }
+  function invokeBoardFile(method, args) {
+    const principal = requests.getStore()?.frame.principal;
+    if (!principal || args.actorId !== principal.user.id) throw failure(403, 'whiteboard_forbidden', 'This whiteboard action is not authorized.');
+    const runtime = filesRuntime();
+    if (typeof runtime[method] !== 'function') throw failure(503, 'whiteboard_storage_unavailable', 'Whiteboards could not be loaded. Try again.');
+    return runtime[method](args);
+  }
+  function authorizeBoardFile({ actorId, boardId, fileId, write = false }) {
+    const request = requests.getStore(), principal = request?.frame.principal, context = principal?.context.workspaceContext, access = context?.tools.chat;
+    if (!context || principal.user.id !== actorId || !access || ['no_access', 'not_subscribed'].includes(access.access) || !access.roles?.some(role => ['owner', 'admin', 'member'].includes(role))) throw failure(403, 'whiteboard_access_required', 'An assigned Chats member is required for this whiteboard.');
+    let runtime = request.runtime?.appKey === 'chats' ? request.runtime : request.relatedRuntimes.get('chats');
+    if (!runtime) { runtime = registry.create(context.workspace.id, 'chats'); request.relatedRuntimes.set('chats', runtime); }
+    if (typeof runtime.authorizeWhiteboardTarget !== 'function') throw failure(503, 'whiteboard_storage_unavailable', 'Whiteboards could not be loaded. Try again.');
+    return runtime.authorizeWhiteboardTarget({ actorId, boardId, fileId, write });
+  }
+  function boardCustodyTarget(workspaceId, args) {
+    const runtime = registry.create(workspaceId, 'chats');
+    try {
+      if (typeof runtime.isWhiteboardCustodyTarget !== 'function') throw failure(503, 'whiteboard_storage_unavailable', 'Whiteboard custody could not be validated.');
+      return runtime.isWhiteboardCustodyTarget(args);
+    } finally { runtime.close(); }
   }
   function projectSharedFile(value) {
     try { return { state: 'available', file: resolveSharedFile(value) }; }
@@ -89,7 +111,8 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         // attachment(filename) infers a MIME from the editable name; the pinned bytes
         // remain the authority even when a PDF is renamed with another extension.
         res.set('Cache-Control', 'private, no-store').set('X-Content-Type-Options', 'nosniff');
-        res.attachment(content.name).type(content.mimetype).sendFile(content.path, error => { if (error) next(error); });
+        if (content.bytes) res.attachment(content.name).type(content.mimetype).send(content.bytes);
+        else res.attachment(content.name).type(content.mimetype).sendFile(content.path, error => { if (error) next(error); });
       } catch (error) { next(error); }
     });
     app.use(toolApp);

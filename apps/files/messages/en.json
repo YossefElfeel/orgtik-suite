@@ -637,5 +637,15 @@
     "back": "Back to Files",
     "unavailable": "File unavailable",
     "unavailableBody": "The file was removed or your current permissions no longer allow access."
+  },
+  "WhiteboardPreview": {
+    "title": "Saved whiteboard",
+    "sampleAlt": "Packaged sample whiteboard preview",
+    "sampleCaption": "Packaged sample preview. Open this saved version in Chats to view its drawing.",
+    "unavailable": "The preview is unavailable with your current access.",
+    "loading": "Loading authorized preview…",
+    "retry": "Retry",
+    "openFailed": "The saved board could not be opened. Check your Chats and Files access, then retry.",
+    "open": "Open saved version in Chats"
   }
 }

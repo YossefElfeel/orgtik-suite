@@ -3,14 +3,14 @@
 import { useEffect, useState, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { CaretLeft, CaretRight, FileX, PlayCircle } from "@phosphor-icons/react";
-import { IconButton } from "@orgtik/ui";
+import { IconButton, useFormatter } from "@orgtik/ui";
 import { IFile } from "@/types";
 import { FileTypeIcon } from "@/components/shared/FileTypeIcon";
 import { BaseDialog } from "@/components/dialogs/BaseDialog";
-import { formatBytes } from "@/lib/utils";
 import { ProtectedImage } from "@/components/shared/ProtectedImage";
 import { useProtectedObjectUrl } from "@/hooks/useProtectedObjectUrl";
 import { ProtectedOfficePreview } from "@/components/shared/ProtectedOfficePreview";
+import { StructuredBoardPreview } from "@/components/shared/StructuredBoardPreview";
 import { getProtectedFileUrl } from "@/lib/get-protected-file-url";
 
 interface FilePreviewProps {
@@ -44,6 +44,7 @@ export function FilePreview({
   hideTrigger = false,
 }: FilePreviewProps) {
   const tf = useTranslations("Files");
+  const format = useFormatter();
   const [scale, setScale] = useState(1);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -96,7 +97,7 @@ export function FilePreview({
     );
 
   const title = file.originalName || name;
-  const fileSizeKB = file.size ? formatBytes(Number(file.size)) : "";
+  const fileSizeKB = file.size ? format.bytes(Number(file.size)) : "";
 
   // The picture alone (inside a card's own button), or as the button that opens the preview.
   const visual = (
@@ -179,7 +180,7 @@ export function FilePreview({
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
         >
-          {needsProtectedMedia ? (
+          {file.whiteboard ? <StructuredBoardPreview file={file} /> : needsProtectedMedia ? (
             <ProtectedDialogMedia
               protectedUrl={protectedUrl}
               name={name}

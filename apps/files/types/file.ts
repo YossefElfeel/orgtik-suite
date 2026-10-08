@@ -4,6 +4,8 @@ import { IFolderOwner, VisibilityType } from "./user";
 
 export interface IFile {
   id: string;
+  workspaceId?: string;
+  whiteboard?: { boardId: string; versionId: string; version: number; currentVersionId: string; preview: { kind: "sample"; url: string } };
   name: string;
   displayName?: string;
   originalName?: string;

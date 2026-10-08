@@ -637,5 +637,15 @@
     "back": "Zurück zu Dateien",
     "unavailable": "Datei nicht verfügbar",
     "unavailableBody": "Die Datei wurde entfernt oder deine aktuellen Berechtigungen erlauben keinen Zugriff mehr."
+  },
+  "WhiteboardPreview": {
+    "title": "Gespeichertes Whiteboard",
+    "sampleAlt": "Bereitgestellte Beispielvorschau eines Whiteboards",
+    "sampleCaption": "Bereitgestellte Beispielvorschau. Öffne diese gespeicherte Version in Chats, um die Zeichnung zu sehen.",
+    "unavailable": "Die Vorschau ist mit deinem aktuellen Zugriff nicht verfügbar.",
+    "loading": "Autorisierte Vorschau wird geladen…",
+    "retry": "Erneut versuchen",
+    "openFailed": "Das gespeicherte Board konnte nicht geöffnet werden. Prüfe deinen Chats- und Dateizugriff.",
+    "open": "Gespeicherte Version in Chats öffnen"
   }
 }

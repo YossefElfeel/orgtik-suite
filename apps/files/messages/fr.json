@@ -637,5 +637,15 @@
     "back": "Retour à Fichiers",
     "unavailable": "Fichier indisponible",
     "unavailableBody": "Le fichier a été supprimé ou vos autorisations actuelles ne permettent plus d’y accéder."
+  },
+  "WhiteboardPreview": {
+    "title": "Tableau enregistré",
+    "sampleAlt": "Aperçu de tableau fourni en exemple",
+    "sampleCaption": "Aperçu fourni en exemple. Ouvrez cette version enregistrée dans Chats pour voir son dessin.",
+    "unavailable": "L’aperçu est indisponible avec votre accès actuel.",
+    "loading": "Chargement de l’aperçu autorisé…",
+    "retry": "Réessayer",
+    "openFailed": "Le tableau enregistré n’a pas pu être ouvert. Vérifiez vos accès à Chats et Fichiers puis réessayez.",
+    "open": "Ouvrir la version enregistrée dans Chats"
   }
 }

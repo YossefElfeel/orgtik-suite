@@ -10,7 +10,7 @@
     "lint": "next lint",
     "typecheck": "node ../../tools/next-env.cjs && tsc --noEmit",
     "i18n:check": "node ../../tools/i18n/check-catalogs.mjs",
-    "test": "node --experimental-strip-types --test features/meetings/calendar-availability.test.mjs lib/open-file-reference.test.cjs",
+    "test": "node --experimental-strip-types --test features/meetings/calendar-availability.test.mjs lib/open-file-reference.test.cjs lib/whiteboard-scene.test.cjs",
     "demo": "next build && next start"
   },
   "dependencies": {

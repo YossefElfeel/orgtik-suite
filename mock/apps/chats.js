@@ -23,6 +23,7 @@ function routes(router, ctx, options) {
     if (write && (channel.archived || channel.custodyReadOnly)) reject(423, 'channel_read_only', 'This conversation is read-only.');
     return channel;
   }
+  const whiteboards = require('./chats/whiteboards').createWhiteboards({ db, seq, identity, ctx, actor, channelFor });
   function messageFor(id, who) {
     const message = db.messages.find(row => row.id === id);
     if (!message) reject(404, 'message_not_found', 'Message not found.');
@@ -78,7 +79,7 @@ function routes(router, ctx, options) {
     const threadReplies = Object.fromEntries(messages.filter(message => message.threadId).reduce((entries, message) => { const entry = entries.find(([key]) => key === message.threadId); if (entry) entry[1].push(messageOut(message)); else entries.push([message.threadId, [messageOut(message)]]); return entries; }, []));
     const historicalIds = new Set(messages.flatMap(message => [message.authorId, ...message.replyUserIds]));
     const context = identity.currentContext?.(), canWrite = typeof identity.canWrite === 'function' ? identity.canWrite(user) : true;
-    return { workspaceId: identity.workspaceId, dataRevision: seq.revision, me: who.id, access: { canWrite, readOnly: context?.actor.readOnly === true, roles: who.roles }, users, historicalUsers: clone(db.historicalUsers.filter(user => historicalIds.has(user.id))), channels, messages: messages.filter(message => !message.threadId).map(messageOut), threadReplies, readState: clone(reads), presence: users.map(user => ({ userId: user.id, status: 'offline', position: { x: 14, y: 20 }, since: options.seedAt, speaking: false })), floor: clone(db.floor), meetings: clone(db.meetings.filter(meeting => meeting.participantIds.includes(who.id))), pastMeetings: clone(db.pastMeetings.filter(meeting => meeting.participantIds.includes(who.id))), notifications: [], insight: clone(db.insight), myTime: who.id === db.fixtureOwnerId ? clone(db.myTime) : codec.emptyTime(), settings: { ...clone(db.settings), activation: { state: context?.tools?.chat?.access === 'trial' ? 'trial' : 'active', tier: 'business', userCap: context?.tools?.chat?.seats?.capacity ?? null } }, whiteboards: clone(db.whiteboards), fixtureId: options.fixtureId || null };
+    return { workspaceId: identity.workspaceId, dataRevision: seq.revision, me: who.id, access: { canWrite, readOnly: context?.actor.readOnly === true, roles: who.roles }, users, historicalUsers: clone(db.historicalUsers.filter(user => historicalIds.has(user.id))), channels, messages: messages.filter(message => !message.threadId).map(messageOut), threadReplies, readState: clone(reads), presence: users.map(user => ({ userId: user.id, status: 'offline', position: { x: 14, y: 20 }, since: options.seedAt, speaking: false })), floor: clone(db.floor), meetings: clone(db.meetings.filter(meeting => meeting.participantIds.includes(who.id))), pastMeetings: clone(db.pastMeetings.filter(meeting => meeting.participantIds.includes(who.id))), notifications: [], insight: clone(db.insight), myTime: who.id === db.fixtureOwnerId ? clone(db.myTime) : codec.emptyTime(), settings: { ...clone(db.settings), activation: { state: context?.tools?.chat?.access === 'trial' ? 'trial' : 'active', tier: 'business', userCap: context?.tools?.chat?.seats?.capacity ?? null } }, whiteboards: whiteboards.list(user).items, fixtureId: options.fixtureId || null };
   }
   function command(event, user, operationId) {
     const who = actor(user);
@@ -155,11 +156,15 @@ function routes(router, ctx, options) {
     }
     seq.revision++; db.processedCommands.push({ id: operationId, fingerprint }); db.processedCommands = db.processedCommands.slice(-256); return bootstrap(user);
   }
-  const handle = fn => (req, res) => { const user = identity.requireUser(req, res); if (!user) return; try { res.json({ success: true, data: fn(req, user) }); } catch (error) { if (!error.status) throw error; res.status(error.status).json({ success: false, code: error.code, message: error.message }); } };
+  const handle = (fn, status = 200) => (req, res) => { const user = identity.requireUser(req, res); if (!user) return; try { res.status(status).json({ success: true, data: fn(req, user) }); } catch (error) { if (!error.status) throw error; res.status(error.status).json({ success: false, code: error.code, message: error.message }); } };
+  router.get('/api/hq/whiteboards', handle((req, user) => whiteboards.list(user, req.query)));
+  router.get('/api/hq/whiteboards/:id', handle((req, user) => whiteboards.detail(user, req.params.id, req.query.versionId)));
+  router.post('/api/hq/whiteboards', handle((req, user) => whiteboards.create(user, req.body, req.get('Idempotency-Key')), 201));
+  router.patch('/api/hq/whiteboards/:id', handle((req, user) => whiteboards.save(user, req.params.id, req.body, req.get('Idempotency-Key'))));
   router.get('/api/hq/bootstrap', handle((_req, user) => bootstrap(user)));
   router.post('/api/hq/commands', handle((req, user) => command(req.body.event, user, req.get('Idempotency-Key') || req.body.operationId)));
   return {
-    bootstrap, authorizeSharedTarget, exportState: () => codec.encode(state), usage: () => [{ key: 'chat.messages', used: db.messages.length }], close() {},
+    bootstrap, authorizeSharedTarget, authorizeWhiteboardTarget: whiteboards.authorizeTarget, isWhiteboardCustodyTarget: whiteboards.custodyEligible, exportState: () => codec.encode(state), usage: () => [{ key: 'chat.messages', used: db.messages.length }], close() {},
     transferOwnership({ fromUserId, target, operationId }) {
       if (!Number.isSafeInteger(fromUserId) || !codec.id(operationId) || !target || !['member', 'archive'].includes(target.kind)) reject(422, 'invalid_custody', 'Choose a custody destination.');
       if (db.custodyOperations.includes(operationId)) return { transferred: [], archived: [] };
@@ -171,6 +176,11 @@ function routes(router, ctx, options) {
         if (channel.ownerId !== from) continue;
         if (recipient) { channel.ownerId = actorId(recipient); channel.memberIds = [...new Set([...channel.memberIds, channel.ownerId])]; result.transferred.push('chat:channel:' + channel.id); }
         else { channel.ownerId = 'system:workspace'; channel.archived = true; channel.custodyReadOnly = true; result.archived.push('chat:channel:' + channel.id); }
+      }
+      for (const board of db.whiteboards.filter(board => board.ownerId === from)) {
+        if (recipient && whiteboards.custodyEligible({ boardId: board.id, fromUserId, targetUserId: recipient.id })) { board.ownerId = actorId(recipient); result.transferred.push('chat:whiteboard:' + board.id); }
+        else { board.ownerId = 'system:workspace'; board.custodyReadOnly = true; result.archived.push('chat:whiteboard:' + board.id); }
+        board.custodyOperationId = operationId; board.updatedAt = new Date().toISOString();
       }
       db.custodyOperations.push(operationId); seq.revision++; return result;
     },

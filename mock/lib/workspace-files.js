@@ -3,12 +3,14 @@ const path = require('node:path');
 const crypto = require('node:crypto');
 const { createFileAccess } = require('../apps/files/access');
 const lib = require('../apps/files/lib');
+const boards = require('./whiteboard-scene');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
 const copy = value => JSON.parse(JSON.stringify(value));
 const SAMPLES = Object.freeze({ pdf_company_profile: 'Sample company profile.pdf', docx_runbook: 'Sample runbook.docx', txt_release_notes: 'Sample release notes.txt', png_app_home: 'Sample home screen.png', png_app_checkout: 'Sample checkout flow.png', png_dashboard_dark: 'Sample dashboard.png', jpg_mango: 'Sample product photo.jpg' });
 const TYPES = new Set(['application/pdf', 'text/plain', 'text/csv', 'text/markdown', 'application/json', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/zip', 'image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/svg+xml']);
-function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, assetDir, now = () => new Date().toISOString(), fileOut }) {
-  const acl = createFileAccess({ state, identity });
+TYPES.add(boards.MIME);
+function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, assetDir, boardAuthority, now = () => new Date().toISOString(), fileOut }) {
+  const acl = createFileAccess({ state, identity, boardAuthority });
   state.sampleOperations ||= new Map();
   let closed = false;
   function actor(actorId, write = false) {
@@ -23,6 +25,10 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
     return user;
   }
   function content(storage) {
+    if (storage?.kind === 'whiteboard') {
+      const value = boards.readWhiteboardStorage(storage);
+      return { bytes: Buffer.from(value.json, 'utf8'), mimetype: boards.MIME, size: value.size };
+    }
     if (storage?.kind !== 'asset' || !Object.hasOwn(manifest, storage.key)) throw fail(410, 'file_content_unavailable', 'This file version is unavailable.');
     const asset = manifest[storage.key];
     try {
@@ -46,7 +52,7 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
     if (modeled ? !stored?.storage : versionId !== 'v1') throw fail(404, 'file_version_not_found', 'This file version is unavailable.');
     const storage = modeled ? stored.storage : file.storage, binary = content(storage);
     if (!TYPES.has(binary.mimetype)) throw fail(422, 'unsupported_shared_file', 'This file type is not available in shared references yet.');
-    return { id: versionId, number: stored?.number || 1, storage, binary };
+    return { id: versionId, number: stored?.number || 1, storage, binary, stored };
   }
   function metadata(file, selected) {
     return { workspaceId, fileId: file.id, versionId: selected.id, name: file.name, mimetype: selected.binary.mimetype, size: selected.binary.size, version: selected.number };
@@ -57,7 +63,7 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
   }
   function contentSharedFile({ actorId, fileId, versionId }) {
     const user = actor(actorId), file = record(user, fileId), selected = version(file, versionId);
-    return { path: selected.binary.path, mimetype: selected.binary.mimetype, name: file.name };
+    return { ...(selected.binary.bytes ? { bytes: selected.binary.bytes } : { path: selected.binary.path }), mimetype: selected.binary.mimetype, name: file.name };
   }
   function listSharedFiles({ actorId, search = '', page = 1, limit = 20 }) {
     const user = actor(actorId), p = typeof page === 'string' && /^\d+$/.test(page) ? Number(page) : page, size = typeof limit === 'string' && /^\d+$/.test(limit) ? Number(limit) : limit;
@@ -98,6 +104,69 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
     state.sampleOperations.set(receiptKey, { fingerprint, fileId: id, versionId: 'v1' });
     return { ...fileOut(file, user), workspaceId, fileId: id, versionId: 'v1', version: 1 };
   }
-  return { listSharedFiles, resolveSharedFile, contentSharedFile, sampleCatalog, createSample, close() { closed = true; } };
+  function destination(user, parentId = null) {
+    const parent = parentId === null ? null : typeof parentId === 'string' && state.folders.get(parentId);
+    if (parentId !== null && (!parent || acl.chain(parent).some(row => row.deletedAt || row.custodyReadOnly))) throw fail(404, 'folder_not_found', 'The destination folder is unavailable.');
+    if (parent && !acl.folderCaps(user, parent).canWrite) throw fail(403, 'folder_write_required', 'You cannot save a whiteboard in that folder.');
+    return parent;
+  }
+  function authorizeWhiteboard({ actorId, fileId, boardId, parentId = null, write = false }) {
+    const user = actor(actorId, write);
+    if (!fileId) {
+      if (write) destination(user, parentId);
+      return { canWrite: write, readOnly: !write };
+    }
+    const file = record(user, fileId);
+    if (!file.whiteboard || boardId && boardId !== file.whiteboard.boardId) throw fail(404, 'whiteboard_not_found', 'This whiteboard is unavailable.');
+    if (write) {
+      acl.authorizeBoard(user, file, true);
+      if (!acl.fileCaps(user, file).canWrite) throw fail(403, 'file_write_required', 'You cannot change this whiteboard file.');
+    }
+    return { canWrite: acl.fileCaps(user, file).canWrite, readOnly: !acl.fileCaps(user, file).canWrite };
+  }
+  function whiteboardOut(file, selected, user) {
+    const capabilities = acl.fileCaps(user, file);
+    return { boardId: file.whiteboard.boardId, reference: { workspaceId, fileId: file.id, versionId: selected.id }, name: file.name, version: selected.number, scene: copy(selected.storage.scene), updatedAt: selected.stored?.createdAt || file.updatedAt, capabilities: { canWrite: capabilities.canWrite, readOnly: !capabilities.canWrite } };
+  }
+  function resolveWhiteboard({ actorId, fileId, versionId }) {
+    const user = actor(actorId), file = record(user, fileId), selected = version(file, versionId);
+    if (!file.whiteboard || selected.storage.kind !== 'whiteboard') throw fail(404, 'whiteboard_not_found', 'This whiteboard is unavailable.');
+    return whiteboardOut(file, selected, user);
+  }
+  function createWhiteboard({ actorId, boardId, name, parentId = null, scene }) {
+    const user = actor(actorId, true), parent = destination(user, parentId);
+    if (!boards.identifier(boardId) || typeof name !== 'string' || !name.trim() || name.trim().length > 120 || /[\\/\u0000-\u001f]/.test(name)) throw fail(422, 'invalid_whiteboard', 'Choose a valid board ID and name.');
+    const binding = { whiteboard: { boardId } }; acl.authorizeBoard(user, binding, true);
+    if ([...state.files.values()].some(file => file.whiteboard?.boardId === boardId)) throw fail(409, 'whiteboard_already_exists', 'This whiteboard already has a Files record.');
+    const value = boards.serializeWhiteboardScene(scene), timestamp = now(), id = lib.newId(), filename = `${name.trim()}.whiteboard.json`;
+    const storage = { kind: 'whiteboard', scene: value.scene };
+    const file = { id, name: filename, originalName: filename, ownerId: user.id, size: value.size, mimeType: boards.MIME, folderId: parent?.id || null, isUsed: false, usedNote: null, usedAt: null, usedBy: null, createdAt: timestamp, updatedAt: timestamp, deletedAt: null, archivedBy: null, archiveBatch: null, storage: copy(storage), accessOverride: null, whiteboard: { boardId }, currentVersionId: 'v1', versions: [{ id: 'v1', number: 1, createdAt: timestamp, createdById: user.id, originalName: filename, size: value.size, mimeType: boards.MIME, hash: value.hash, storage: copy(storage) }] };
+    state.files.set(id, file);
+    state.activities.unshift({ id: lib.newId(), scope: 'file_manager', actorId: String(user.id), action: 'whiteboard_created', entityType: 'file', entityId: id, metadata: { boardId, versionId: 'v1' }, createdAt: timestamp, ip: '', userAgent: '' });
+    // The coordinator owns operation receipts and fills the Chats index before committing.
+    return whiteboardOut(file, version(file, 'v1'), user);
+  }
+  function saveWhiteboard({ actorId, fileId, baseVersionId, scene }) {
+    authorizeWhiteboard({ actorId, fileId, write: true });
+    const user = actor(actorId, true), file = record(user, fileId);
+    if (baseVersionId !== file.currentVersionId) throw fail(409, 'version_conflict', 'The board was changed elsewhere. Reopen its saved version.');
+    const value = boards.serializeWhiteboardScene(scene), head = version(file), previous = boards.readWhiteboardStorage(head.storage);
+    if (value.hash === previous.hash) return whiteboardOut(file, head, user);
+    const number = Math.max(...file.versions.map(row => row.number)) + 1, versionId = `v${number}`, timestamp = now(), storage = { kind: 'whiteboard', scene: value.scene };
+    file.versions.push({ id: versionId, number, createdAt: timestamp, createdById: user.id, originalName: file.originalName, size: value.size, mimeType: boards.MIME, hash: value.hash, storage: copy(storage) });
+    file.currentVersionId = versionId; file.storage = copy(storage); file.size = value.size; file.updatedAt = timestamp;
+    state.activities.unshift({ id: lib.newId(), scope: 'file_manager', actorId: String(user.id), action: 'whiteboard_saved', entityType: 'file', entityId: file.id, metadata: { boardId: file.whiteboard.boardId, versionId }, createdAt: timestamp, ip: '', userAgent: '' });
+    return whiteboardOut(file, version(file, versionId), user);
+  }
+  function getVersionMetadata({ actorId, fileId, versionId }) {
+    const user = actor(actorId), file = record(user, fileId), selected = version(file, versionId);
+    return { ...fileOut(file, user, selected) };
+  }
+  function previewWhiteboard({ actorId, fileId, versionId }) {
+    resolveWhiteboard({ actorId, fileId, versionId });
+    const binary = content({ kind: 'asset', key: 'svg_whiteboard_sample' });
+    return { path: binary.path, mimetype: binary.mimetype, name: 'whiteboard-sample.svg', sample: true };
+  }
+  return { listSharedFiles, resolveSharedFile, contentSharedFile, sampleCatalog, createSample, authorizeWhiteboard, createWhiteboard, saveWhiteboard, resolveWhiteboard, getVersionMetadata, previewWhiteboard, close() { closed = true; } };
 }
 module.exports = { createWorkspaceFiles, SAMPLES };

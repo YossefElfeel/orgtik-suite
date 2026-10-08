@@ -1054,5 +1054,11 @@
     }
    ]
   }
+ },
+ "svg_whiteboard_sample": {
+  "file": "previews/whiteboard/sample.svg",
+  "mimeType": "image/svg+xml",
+  "size": 791,
+  "preview": { "kind": "image" }
  }
 }

@@ -1,5 +1,6 @@
 import { FileRecord } from "@/components/pages/file-record";
-export default async function Page({ params }: { params: Promise<{ fileId: string }> }) {
+export default async function Page({ params, searchParams }: { params: Promise<{ fileId: string }>; searchParams: Promise<{ versionId?: string }> }) {
   const { fileId } = await params;
-  return <FileRecord fileId={fileId} />;
+  const { versionId } = await searchParams;
+  return <FileRecord fileId={fileId} versionId={versionId} />;
 }
