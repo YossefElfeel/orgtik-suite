@@ -1,6 +1,7 @@
 const express = require('express');
 const crypto = require('node:crypto');
 const codec = require('./chats/runtime-state');
+const fileReferences = require('../lib/workspace-file-references');
 const clone = value => JSON.parse(JSON.stringify(value));
 const reject = (status, code, message) => { throw Object.assign(new Error(message), { status, code }); };
 const ownRoles = (identity, user) => identity.userScopes(user).filter(scope => scope.scope === 'hq').flatMap(scope => scope.roles);
@@ -26,6 +27,27 @@ function routes(router, ctx, options) {
     const message = db.messages.find(row => row.id === id);
     if (!message) reject(404, 'message_not_found', 'Message not found.');
     channelFor(message.channelId, who, true); return message;
+  }
+  function authorizeSharedTarget({ actorId: userId, type, id, referenceId, reference }) {
+    const who = actor(identity.findUser(userId));
+    if (type === 'channel' && !reference) return channelFor(id, who);
+    if (type !== 'message') reject(404, 'reference_not_found', 'This file reference was not found.');
+    const message = db.messages.find(row => row.id === id && !row.deletedAt);
+    if (!message) reject(404, 'reference_not_found', 'This file reference was not found.');
+    channelFor(message.channelId, who);
+    if (!reference || !message.attachments.some(row => row.reference && fileReferences.referenceId(row.reference) === referenceId && fileReferences.sameReference(row.reference, reference))) reject(404, 'reference_not_found', 'This file reference was not found.');
+    return message;
+  }
+  function messageOut(message) {
+    const out = clone(message);
+    delete out.fileOperation;
+    out.attachments = message.attachments.map(value => {
+      // Historical fixture labels were never Files records; they grant no content access.
+      if (!value.reference) return { id: value.id, state: 'unavailable', name: '', size: '', kind: 'other' };
+      if (!ctx.sharedFiles?.project) reject(503, 'files_unavailable', 'Files could not be loaded.');
+      return fileReferences.chatAttachment(value, ctx.sharedFiles.project(value.reference), { type: 'message', id: message.id });
+    });
+    return out;
   }
   const mayManage = (channel, who) => { if (channel.ownerId !== who.id && !who.admin) reject(403, 'channel_manager_required', 'Only a conversation manager can make this change.'); };
   function nextEntity(prefix, inputId, counter, rows) {
@@ -53,10 +75,10 @@ function routes(router, ctx, options) {
       const incoming = messages.filter(message => message.channelId === channel.id && message.sequence > (reads[channel.id] || 0) && message.authorId !== who.id && !message.deletedAt);
       return { ...clone(channel), memberIds: channel.memberIds.filter(id => directoryIds().has(id)), unread: incoming.length, mentions: incoming.filter(message => message.text.includes('@' + who.id)).length, notify: preferences[channel.id] || channel.notify };
     });
-    const threadReplies = Object.fromEntries(messages.filter(message => message.threadId).reduce((entries, message) => { const entry = entries.find(([key]) => key === message.threadId); if (entry) entry[1].push(clone(message)); else entries.push([message.threadId, [clone(message)]]); return entries; }, []));
+    const threadReplies = Object.fromEntries(messages.filter(message => message.threadId).reduce((entries, message) => { const entry = entries.find(([key]) => key === message.threadId); if (entry) entry[1].push(messageOut(message)); else entries.push([message.threadId, [messageOut(message)]]); return entries; }, []));
     const historicalIds = new Set(messages.flatMap(message => [message.authorId, ...message.replyUserIds]));
     const context = identity.currentContext?.(), canWrite = typeof identity.canWrite === 'function' ? identity.canWrite(user) : true;
-    return { workspaceId: identity.workspaceId, dataRevision: seq.revision, me: who.id, access: { canWrite, readOnly: context?.actor.readOnly === true, roles: who.roles }, users, historicalUsers: clone(db.historicalUsers.filter(user => historicalIds.has(user.id))), channels, messages: clone(messages.filter(message => !message.threadId)), threadReplies, readState: clone(reads), presence: users.map(user => ({ userId: user.id, status: 'offline', position: { x: 14, y: 20 }, since: options.seedAt, speaking: false })), floor: clone(db.floor), meetings: clone(db.meetings.filter(meeting => meeting.participantIds.includes(who.id))), pastMeetings: clone(db.pastMeetings.filter(meeting => meeting.participantIds.includes(who.id))), notifications: [], insight: clone(db.insight), myTime: who.id === db.fixtureOwnerId ? clone(db.myTime) : codec.emptyTime(), settings: { ...clone(db.settings), activation: { state: context?.tools?.chat?.access === 'trial' ? 'trial' : 'active', tier: 'business', userCap: context?.tools?.chat?.seats?.capacity ?? null } }, whiteboards: clone(db.whiteboards), fixtureId: options.fixtureId || null };
+    return { workspaceId: identity.workspaceId, dataRevision: seq.revision, me: who.id, access: { canWrite, readOnly: context?.actor.readOnly === true, roles: who.roles }, users, historicalUsers: clone(db.historicalUsers.filter(user => historicalIds.has(user.id))), channels, messages: messages.filter(message => !message.threadId).map(messageOut), threadReplies, readState: clone(reads), presence: users.map(user => ({ userId: user.id, status: 'offline', position: { x: 14, y: 20 }, since: options.seedAt, speaking: false })), floor: clone(db.floor), meetings: clone(db.meetings.filter(meeting => meeting.participantIds.includes(who.id))), pastMeetings: clone(db.pastMeetings.filter(meeting => meeting.participantIds.includes(who.id))), notifications: [], insight: clone(db.insight), myTime: who.id === db.fixtureOwnerId ? clone(db.myTime) : codec.emptyTime(), settings: { ...clone(db.settings), activation: { state: context?.tools?.chat?.access === 'trial' ? 'trial' : 'active', tier: 'business', userCap: context?.tools?.chat?.seats?.capacity ?? null } }, whiteboards: clone(db.whiteboards), fixtureId: options.fixtureId || null };
   }
   function command(event, user, operationId) {
     const who = actor(user);
@@ -75,8 +97,17 @@ function routes(router, ctx, options) {
       const message = messageFor(event.messageId, who);
       if (event.type === 'message.edited' && message.authorId !== who.id || event.type === 'message.deleted' && message.authorId !== who.id && !who.admin) reject(403, 'message_author_required', 'The current role cannot change this message.');
     }
+    let attachments = [];
+    if (event.type === 'message.created') {
+      const input = event.message || {};
+      if (input.attachments !== undefined && (!Array.isArray(input.attachments) || input.attachments.length > 10)) reject(422, 'invalid_file_references', 'Choose up to ten Files records.');
+      attachments = (input.attachments || []).map(value => fileReferences.reference(value, identity.workspaceId));
+      if (attachments.some((ref, index) => attachments.findIndex(other => fileReferences.sameReference(ref, other)) !== index)) reject(422, 'duplicate_file_reference', 'Choose each file version once.');
+      if (attachments.length && !ctx.sharedFiles?.resolve) reject(503, 'files_unavailable', 'Files could not be loaded.');
+      attachments.forEach(ref => ctx.sharedFiles.resolve(ref));
+    }
     const fingerprint = crypto.createHash('sha256').update(JSON.stringify({ actor: who.id, event })).digest('hex');
-    const previous = db.processedCommands.find(row => row.id === operationId);
+    const previous = db.processedCommands.find(row => row.id === operationId) || db.messages.find(message => message.fileOperation?.id === operationId)?.fileOperation;
     if (previous) { if (previous.fingerprint !== fingerprint) reject(409, 'operation_conflict', 'This operation ID was used for another change.'); return bootstrap(user); }
     switch (event.type) {
       case 'channel.created': {
@@ -105,14 +136,14 @@ function routes(router, ctx, options) {
       case 'channel.all_read': { for (const channel of db.channels.filter(channel => channel.memberIds.includes(who.id))) (db.readState[who.id] ||= {})[channel.id] = seq.messages; break; }
       case 'message.created': {
         const input = event.message || {}, channel = channelFor(input.channelId, who, true);
-        if (typeof input.text !== 'string' || !input.text.trim() || input.text.length > 10000) reject(422, 'invalid_message', 'Enter a message.');
-        if (input.attachments?.length || input.contextRef) reject(501, 'file_reference_required', 'Files references will be connected in R2.');
+        if (typeof input.text !== 'string' || !input.text.trim() && !attachments.length || input.text.length > 10000) reject(422, 'invalid_message', 'Enter a message or choose a file.');
+        if (input.contextRef) reject(501, 'object_reference_deferred', 'Linked business objects are not available yet.');
         const thread = input.threadId && db.messages.find(message => message.id === input.threadId && !message.threadId && message.channelId === channel.id && !message.deletedAt);
         if (input.threadId && !thread) reject(422, 'invalid_thread', 'Choose a thread in this conversation.');
         const { id, next } = nextEntity('m', input.id, 'messages', db.messages);
         if (!codec.id(id) || db.messages.some(message => message.id === id)) reject(409, 'message_id_conflict', 'Message ID is already used.');
         seq.messages = next;
-        db.messages.push({ id, channelId: channel.id, authorId: who.id, text: input.text, createdAt: new Date().toISOString(), sequence: next, replyCount: 0, replyUserIds: [], reactions: [], attachments: [], pinned: false, ...(thread ? { threadId: thread.id } : {}) });
+        db.messages.push({ id, channelId: channel.id, authorId: who.id, text: input.text, createdAt: new Date().toISOString(), sequence: next, replyCount: 0, replyUserIds: [], reactions: [], attachments: attachments.map(reference => ({ reference })), pinned: false, ...(attachments.length ? { fileOperation: { id: operationId, fingerprint } } : {}), ...(thread ? { threadId: thread.id } : {}) });
         if (!db.historicalUsers.some(person => person.id === who.id)) { const name = identity.fullName(user) || 'Workspace member'; db.historicalUsers.push({ id: who.id, name, initials: name.split(/\s+/).map(word => word[0]).join('').slice(0, 2).toUpperCase(), tint: Number(user.id) % 12 }); }
         if (thread) { thread.replyCount++; thread.replyUserIds = [...new Set([...thread.replyUserIds, who.id])].slice(-5); } break;
       }
@@ -128,7 +159,7 @@ function routes(router, ctx, options) {
   router.get('/api/hq/bootstrap', handle((_req, user) => bootstrap(user)));
   router.post('/api/hq/commands', handle((req, user) => command(req.body.event, user, req.get('Idempotency-Key') || req.body.operationId)));
   return {
-    bootstrap, exportState: () => codec.encode(state), usage: () => [{ key: 'chat.messages', used: db.messages.length }], close() {},
+    bootstrap, authorizeSharedTarget, exportState: () => codec.encode(state), usage: () => [{ key: 'chat.messages', used: db.messages.length }], close() {},
     transferOwnership({ fromUserId, target, operationId }) {
       if (!Number.isSafeInteger(fromUserId) || !codec.id(operationId) || !target || !['member', 'archive'].includes(target.kind)) reject(422, 'invalid_custody', 'Choose a custody destination.');
       if (db.custodyOperations.includes(operationId)) return { transferred: [], archived: [] };

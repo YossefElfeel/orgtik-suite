@@ -1,3 +1,6 @@
+import { API_URL } from "@/constants/env";
+import { fileRequest, FileRequestError } from "./file-references";
+
 export type ApiErrorPayload = {
   success: false;
   message: string | string[];
@@ -34,47 +37,10 @@ export async function readApiErrorFromBlob(
   }
 }
 
-/**
- * Fetch a protected file/folder binary with the session bearer token.
- * `protectedUrl` may be absolute (as returned by the API) or relative.
- */
-export async function fetchProtectedFile(
-  protectedUrl: string,
-  accessToken: string | null | undefined,
-  signal?: AbortSignal,
-): Promise<Blob> {
-  const headers = new Headers({ Accept: "*/*" });
-  if (accessToken) {
-    headers.set("Authorization", `Bearer ${accessToken}`);
-  }
-
-  const response = await fetch(protectedUrl, {
-    method: "GET",
-    headers,
-    signal,
-    cache: "no-store",
-  });
-
-  const contentType = response.headers.get("content-type") || "";
-  const blob = await response.blob();
-
-  if (!response.ok) {
-    let payload: ApiErrorPayload | null = null;
-
-    if (contentType.includes("application/json") || blob.type.includes("json")) {
-      payload = await readApiErrorFromBlob(blob);
-    }
-
-    throw new Error(errorMessage(payload) || `Request failed (${response.status})`);
-  }
-
-  // Some gateways still return 200 with a JSON error body as a blob.
-  if (blob.type.includes("json")) {
-    const payload = await readApiErrorFromBlob(blob);
-    if (payload) {
-      throw new Error(errorMessage(payload));
-    }
-  }
-
-  return blob;
+/** Protected bytes stay on this app's origin and current workspace authority. */
+export async function fetchProtectedFile(protectedUrl: string, _accessToken: string | null | undefined, signal?: AbortSignal): Promise<Blob> {
+  const url = new URL(protectedUrl, API_URL), api = new URL(API_URL);
+  const prefix = api.pathname.replace(/\/api\/?$/, "").replace(/\/$/, "");
+  if (url.origin !== api.origin || !url.pathname.startsWith(prefix + "/api/")) throw new FileRequestError("invalid_reference", 400);
+  return fileRequest<Blob>(url.pathname.slice(prefix.length) + url.search, { binary: true, signal });
 }

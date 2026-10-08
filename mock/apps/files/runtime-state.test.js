@@ -16,7 +16,7 @@ test("empty Files store exposes no seeded files, folders, shares or people-owned
 test("Files snapshot preserves nested pins, shares, sessions, failure limits, previews and metadata", () => {
   const state = codec.nileFixture(identity, manifest, '2026-10-07T09:00:00Z');
   const file = [...state.files.values()][0], folder = [...state.folders.keys()][0];
-  file.versions = [{ id: 'v1', comment: 'approved sample', references: ['task:1'] }];
+  file.versions = [{ id: 'v1', number: 1, size: manifest[file.storage.key].size, createdAt: file.createdAt, storage: { ...file.storage }, comment: 'approved sample', references: ['task:1'] }];
   state.pins.set(41, new Map([[folder, 'fixture']]));
   state.shares.set('share', { id: 'share', resourceType: 'file', resourceId: file.id, downloadCount: 2, version: 3, secretHash: 'hash' });
   state.sessions.set('hashed-token', { shareId: 'share', version: 3, expiresAt: 17 });

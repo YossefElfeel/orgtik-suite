@@ -10,7 +10,7 @@ const manifest = require('../../lib/workspace-runtime-manifest.json');
 const fixed = Date.parse('2026-10-07T09:00:00Z');
 class BusinessDate extends Date { constructor(...args) { super(...(args.length ? args : [fixed])); } static now() { return fixed; } }
 
-function runtime(appKey, workspaceId, { snapshot, fixtureId, roles, users, writable = true, commands, apiOrigin = 'http://fixture.test' } = {}) {
+function runtime(appKey, workspaceId, { snapshot, fixtureId, roles, users, writable = true, commands, sharedFiles, apiOrigin = 'http://fixture.test' } = {}) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'orgtik-tools-runtime-'));
   const people = users || [{ id: 1, key: 'one', firstName: 'One', lastName: 'Owner', email: 'one@fixture.test', username: 'one', userType: 'admin', isActive: true, profile: {}, createdAt: '2026-01-01T00:00:00Z' }, { id: 2, key: 'two', firstName: 'Two', lastName: 'Member', email: 'two@fixture.test', username: 'two', userType: 'employee', isActive: true, profile: {}, createdAt: '2026-01-01T00:00:00Z' }];
   const scope = appKey === 'tasks' ? 'task_manager' : appKey === 'chats' ? 'hq' : 'file_manager';
@@ -25,7 +25,7 @@ function runtime(appKey, workspaceId, { snapshot, fixtureId, roles, users, writa
     fullName: user => `${user.firstName} ${user.lastName}`,
   };
   const graph = createPrivateModuleGraph({ appKey, identity, config: {}, util, Date: BusinessDate, manifest: [...manifest.apps[appKey], ...(appKey === 'chats' ? ['apps/chats.js', 'apps/chats/runtime-state.js', 'apps/chats/fixture.json', 'lib/tool-adapters/chats.js'] : [])] });
-  const ctx = { realm: 'isolated', identity, util, uploadsDir: root, log() {}, upload: { any: () => (_req, _res, next) => next() }, apiUrl: () => apiOrigin, webUrl: () => 'http://fixture.test', fileUrl: name => `http://fixture.test/assets/${encodeURIComponent(name)}?workspace=${workspaceId}` };
+  const ctx = { realm: 'isolated', identity, util, sharedFiles, uploadsDir: root, log() {}, upload: { any: () => (_req, _res, next) => next() }, apiUrl: () => apiOrigin, webUrl: () => 'http://fixture.test', fileUrl: name => `http://fixture.test/assets/${encodeURIComponent(name)}?workspace=${workspaceId}` };
   const instance = graph.load().createWorkspaceRuntime({ realm: 'isolated', appKey, workspace: { id: workspaceId, name: workspaceId }, initialization: { kind: fixtureId ? 'fixture' : 'empty', ...(fixtureId ? { fixtureId } : {}), seedAt: new BusinessDate().toISOString() }, snapshot, identity, clock: { now: () => fixed }, services: { ctx, verifyActorPassword: password => password === 'fixture-password', commands }, assets: {} });
   return { instance, identity, graph, close() {
     instance.close(); graph.close();

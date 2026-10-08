@@ -1,0 +1,731 @@
+{
+  "realm": "r2-files-local",
+  "dataReset": false,
+  "clockMutation": false,
+  "seedMutation": false,
+  "controlledScenarios": [
+    "sample retry HTTP403 transport refusal",
+    "sample catalog read-only projection"
+  ],
+  "checks": [
+    {
+      "name": "Loopback http://127.0.0.1:5700",
+      "pass": true
+    },
+    {
+      "name": "Loopback http://localhost:5702",
+      "pass": true
+    },
+    {
+      "name": "Loopback http://localhost:5701",
+      "pass": true
+    },
+    {
+      "name": "Loopback http://localhost:5709",
+      "pass": true
+    },
+    {
+      "name": "Loopback http://localhost:3122",
+      "pass": true
+    },
+    {
+      "name": "Loopback http://localhost:3121",
+      "pass": true
+    },
+    {
+      "name": "Loopback http://localhost:3123",
+      "pass": true
+    },
+    {
+      "name": "Isolated frozen realm",
+      "pass": true
+    },
+    {
+      "name": "Registered destination is loopback",
+      "pass": true
+    },
+    {
+      "name": "Packaged image available",
+      "pass": true
+    },
+    {
+      "name": "New workspace picker empty",
+      "pass": true
+    },
+    {
+      "name": "task-empty-en-1440: document fits",
+      "pass": true
+    },
+    {
+      "name": "task-empty-en-1440: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "task-empty-en-1440: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "No device upload field en/1440",
+      "pass": true
+    },
+    {
+      "name": "samples-en-1440-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "samples-en-1440-light: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "samples-en-1440-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Unknown sample locks selection",
+      "pass": true
+    },
+    {
+      "name": "Later403 retains recovery",
+      "pass": true
+    },
+    {
+      "name": "sample-uncertain-retained-en: document fits",
+      "pass": true
+    },
+    {
+      "name": "sample-uncertain-retained-en: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "sample-uncertain-retained-en: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Original sample key/body retained",
+      "pass": true
+    },
+    {
+      "name": "One explicit sample record en/1440",
+      "pass": true
+    },
+    {
+      "name": "Immutable sample version en/1440",
+      "pass": true
+    },
+    {
+      "name": "task-picker-en-1440-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "task-picker-en-1440-light: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "task-picker-en-1440-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Task stores one authorized reference en/1440",
+      "pass": true
+    },
+    {
+      "name": "Protected image preview en/1440",
+      "pass": true
+    },
+    {
+      "name": "task-preview-en-1440-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "task-preview-en-1440-light: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "task-preview-en-1440-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Chats no device upload en/1440",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-en-1440-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-en-1440-light: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-en-1440-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Chats committed canonical reference en/1440",
+      "pass": true
+    },
+    {
+      "name": "Chats protected image bytes en/1440",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-en-1440-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-en-1440-light: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-en-1440-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Actual Open in Files preserves workspace en/1440",
+      "pass": true
+    },
+    {
+      "name": "Native protected thumbnail decoded en/1440",
+      "pass": true
+    },
+    {
+      "name": "files-record-en-1440-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "files-record-en-1440-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Read-only sample state disables create",
+      "pass": true
+    },
+    {
+      "name": "controlled-sample-readonly-en: document fits",
+      "pass": true
+    },
+    {
+      "name": "controlled-sample-readonly-en: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "controlled-sample-readonly-en: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Denied catalog never renders filenames",
+      "pass": true
+    },
+    {
+      "name": "controlled-sample-noaccess-en: document fits",
+      "pass": true
+    },
+    {
+      "name": "controlled-sample-noaccess-en: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "controlled-sample-noaccess-en: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Picker permission-filtered no match en/390",
+      "pass": true
+    },
+    {
+      "name": "No device upload field en/390",
+      "pass": true
+    },
+    {
+      "name": "samples-en-390-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "samples-en-390-light: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "samples-en-390-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "One explicit sample record en/390",
+      "pass": true
+    },
+    {
+      "name": "Immutable sample version en/390",
+      "pass": true
+    },
+    {
+      "name": "task-picker-en-390-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "task-picker-en-390-light: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "task-picker-en-390-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Task stores one authorized reference en/390",
+      "pass": true
+    },
+    {
+      "name": "Protected image preview en/390",
+      "pass": true
+    },
+    {
+      "name": "task-preview-en-390-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "task-preview-en-390-light: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "task-preview-en-390-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Chats no device upload en/390",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-en-390-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-en-390-light: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-en-390-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Chats committed canonical reference en/390",
+      "pass": true
+    },
+    {
+      "name": "Chats protected image bytes en/390",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-en-390-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-en-390-light: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-en-390-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Actual Open in Files preserves workspace en/390",
+      "pass": true
+    },
+    {
+      "name": "Native protected thumbnail decoded en/390",
+      "pass": true
+    },
+    {
+      "name": "files-record-en-390-light: document fits",
+      "pass": true
+    },
+    {
+      "name": "files-record-en-390-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Picker permission-filtered no match ar/1440",
+      "pass": true
+    },
+    {
+      "name": "No device upload field ar/1440",
+      "pass": true
+    },
+    {
+      "name": "samples-ar-1440-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "samples-ar-1440-dark: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "samples-ar-1440-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "One explicit sample record ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Immutable sample version ar/1440",
+      "pass": true
+    },
+    {
+      "name": "task-picker-ar-1440-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "task-picker-ar-1440-dark: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "task-picker-ar-1440-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Task stores one authorized reference ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Protected image preview ar/1440",
+      "pass": true
+    },
+    {
+      "name": "task-preview-ar-1440-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "task-preview-ar-1440-dark: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "task-preview-ar-1440-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Chats no device upload ar/1440",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-ar-1440-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-ar-1440-dark: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-ar-1440-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Chats committed canonical reference ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Chats protected image bytes ar/1440",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-ar-1440-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-ar-1440-dark: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-ar-1440-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Actual Open in Files preserves workspace ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Native protected thumbnail decoded ar/1440",
+      "pass": true
+    },
+    {
+      "name": "files-record-ar-1440-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "files-record-ar-1440-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Picker permission-filtered no match ar/390",
+      "pass": true
+    },
+    {
+      "name": "No device upload field ar/390",
+      "pass": true
+    },
+    {
+      "name": "samples-ar-390-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "samples-ar-390-dark: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "samples-ar-390-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "One explicit sample record ar/390",
+      "pass": true
+    },
+    {
+      "name": "Immutable sample version ar/390",
+      "pass": true
+    },
+    {
+      "name": "task-picker-ar-390-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "task-picker-ar-390-dark: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "task-picker-ar-390-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Task stores one authorized reference ar/390",
+      "pass": true
+    },
+    {
+      "name": "Protected image preview ar/390",
+      "pass": true
+    },
+    {
+      "name": "task-preview-ar-390-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "task-preview-ar-390-dark: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "task-preview-ar-390-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Chats no device upload ar/390",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-ar-390-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-ar-390-dark: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "chat-picker-ar-390-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Chats committed canonical reference ar/390",
+      "pass": true
+    },
+    {
+      "name": "Chats protected image bytes ar/390",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-ar-390-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-ar-390-dark: dialog fits",
+      "pass": true
+    },
+    {
+      "name": "chat-preview-ar-390-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Actual Open in Files preserves workspace ar/390",
+      "pass": true
+    },
+    {
+      "name": "Native protected thumbnail decoded ar/390",
+      "pass": true
+    },
+    {
+      "name": "files-record-ar-390-dark: document fits",
+      "pass": true
+    },
+    {
+      "name": "files-record-ar-390-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Clock unchanged",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/next.config.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/components/dialogs/FileUpload/index.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/lib/file-references.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/hooks/useProtectedObjectUrl.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/lib/fetch-protected-file.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/tasks/components/task/TaskAttachments.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/tasks/components/task/FilesPicker.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/tasks/lib/file-references.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/features/chat/Composer.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/features/chat/FilesPicker.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/entities/index.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/features/chat/Message.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/features/chat/ChannelDialogs.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/features/chat/FilePreview.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/lib/open-file-reference.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/store/platform.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/store/index.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/messages/en.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/messages/ar.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/tasks/messages/en.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/tasks/messages/ar.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/messages/en.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/messages/ar.json",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "task-empty-en-1440.png",
+    "samples-en-1440-light.png",
+    "sample-uncertain-retained-en.png",
+    "task-picker-en-1440-light.png",
+    "task-preview-en-1440-light.png",
+    "chat-picker-en-1440-light.png",
+    "chat-preview-en-1440-light.png",
+    "files-record-en-1440-light.png",
+    "controlled-sample-readonly-en.png",
+    "controlled-sample-noaccess-en.png",
+    "samples-en-390-light.png",
+    "task-picker-en-390-light.png",
+    "task-preview-en-390-light.png",
+    "chat-picker-en-390-light.png",
+    "chat-preview-en-390-light.png",
+    "files-record-en-390-light.png",
+    "samples-ar-1440-dark.png",
+    "task-picker-ar-1440-dark.png",
+    "task-preview-ar-1440-dark.png",
+    "chat-picker-ar-1440-dark.png",
+    "chat-preview-ar-1440-dark.png",
+    "files-record-ar-1440-dark.png",
+    "samples-ar-390-dark.png",
+    "task-picker-ar-390-dark.png",
+    "task-preview-ar-390-dark.png",
+    "chat-picker-ar-390-dark.png",
+    "chat-preview-ar-390-dark.png",
+    "files-record-ar-390-dark.png"
+  ],
+  "source": {
+    "apps/files/next.config.ts": "ca5ae102c95510d028b1ac210c834e9eab56b6abde8a2b7c44de0af888cee21b",
+    "apps/files/components/dialogs/FileUpload/index.tsx": "5f8605a36e4eeb0bee798328310a4ea403a78d106d32a589de3af7b028814b3a",
+    "apps/files/lib/file-references.ts": "9f36d06f56dfd1365c6eecc3befaa6a80064f46537fdd5a1fd834e5d383167d7",
+    "apps/files/hooks/useProtectedObjectUrl.ts": "6fba869027e6605bb5736ff1c2d1cc1cfc95b44d7deaa60c5045c2fc01413fbc",
+    "apps/files/lib/fetch-protected-file.ts": "eef17e0f4f351871d9f2a664a932a71aa68fd90ff4f2c3a400395f5d0ed00950",
+    "apps/tasks/components/task/TaskAttachments.tsx": "0911e6ab1daa31632fc8ede660931864c87398dcdbbea1ba8856ee455ed0eeda",
+    "apps/tasks/components/task/FilesPicker.tsx": "4f202984fa3c6234ce9a38f8eca723691af15d9a4de44e0de64e4a348d5dbd1e",
+    "apps/tasks/lib/file-references.ts": "a0d06d178282673c03917950b4c9946f6eb0d0be7dc2291b93e1a9927fc683f8",
+    "apps/chats/features/chat/Composer.tsx": "d0bec926a19ee8977727b917e48f570255e3b66f759a3a5ade0ec908ccd878ac",
+    "apps/chats/features/chat/FilesPicker.tsx": "5fd3936236be323c4f185ae0746e50760f4c8b44d9232c5d6c2dd6e8c3800d92",
+    "apps/chats/entities/index.ts": "50ab02d1762e2017fb8f9c427a78b20f20644c7f30be5dc97b3e635b1dae13c4",
+    "apps/chats/features/chat/Message.tsx": "ea0632eed0ba233c353cbb8ab6692ce0631746635719e0c5ed9b252d93e458d3",
+    "apps/chats/features/chat/ChannelDialogs.tsx": "cc03b3f455bd48c37465718ad75bb9d3cdb08ca0de950d723a99aa7597a1d73d",
+    "apps/chats/features/chat/FilePreview.tsx": "bdfa190e97a1cf72bbbbf0129791c9b3f6c9d034d2800f1cd2326072ecd569e0",
+    "apps/chats/lib/open-file-reference.ts": "cb5ed961b2211b9b0a9db2eda9bd6c840791acdfdf4a2c14bb7779ba2624d3cb",
+    "apps/chats/store/platform.ts": "79379780b0d3c1b53dcafa2cf6c85369e98ce56691b892d4e156f4ea5c936931",
+    "apps/chats/store/index.ts": "49fa9a0230d33f682c3f492a776f7699524cb3a95be2f99a846bfeca992cf46a",
+    "apps/files/messages/en.json": "9799ef2f56f93eeee24fb11e17fd140b081c0037492c7ce973be68bce5f0df55",
+    "apps/files/messages/ar.json": "270de81f88eed3f8cd22426b776ef357f337070e5c2bb18533a9bec5210829da",
+    "apps/tasks/messages/en.json": "81dd7120c5bfcccbd013827f3b64c2425621f58b73490f5eadb34b05c7d661da",
+    "apps/tasks/messages/ar.json": "a5d3e813fd8763cb72d4691beddf2e565e920acd5d632030163da812e61501a8",
+    "apps/chats/messages/en.json": "76596e3bfbf74095a43bb74b3118ef40473b7bc00c39ed202929ca8f45f32544",
+    "apps/chats/messages/ar.json": "5e3126954dc19aa19714a40b6fc945c0c6cdaa24256b562f01e8b1e3fb6b9952"
+  },
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "registeredFilesOrigin": "http://127.0.0.1:3122",
+  "currentStep": "Open chats ar",
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "passed": 163,
+  "completed": true
+}

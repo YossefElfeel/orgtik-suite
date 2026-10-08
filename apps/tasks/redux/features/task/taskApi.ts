@@ -24,7 +24,7 @@ export const taskApi = baseApi.injectEndpoints({
     // create task
     createTask: builder.mutation<
       SuccessResponse<ICreateTask>,
-      { sectionId: string; body: FormData }
+      { sectionId: string; body: { title: string; description: string; priority: string; startDate: string | null; dueDate: string | null; assignedUserIds: number[]; dependsOnTaskIds: number[] } }
     >({
       query: ({ sectionId, body }) => ({
         url: `tasks/sections/${sectionId}`,

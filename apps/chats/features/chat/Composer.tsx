@@ -12,12 +12,17 @@
  */
 
 import { useEffect, useRef, useState, useId } from "react";
-import { At, Paperclip, PaperPlaneRight, Smiley, X, UploadSimple } from "@phosphor-icons/react";
+import { At, Paperclip, PaperPlaneRight, Smiley, X } from "@phosphor-icons/react";
 import { Avatar } from "@/components/ui/Avatar";
 import { Button } from "@/components/ui/Primitives";
 import { useUsers } from "@/store/hooks";
+import { useWorkspace } from "@/store";
+import { recoverableMessage } from "@/store/platform";
 import { useT } from "@/lib/i18n";
 import type { FileRef } from "@/entities";
+import { FilesPicker } from "./FilesPicker";
+import { fileScope, fileAuthority as currentAuthority, useFileAuthority, type FilePickerItem } from "@/lib/file-references";
+import { useFormatter } from "@orgtik/ui";
 
 /** Files the File Manager would offer. Replaced by its picker endpoint. */
 /** A small, deliberate set. A full emoji index is a search problem, not a
@@ -27,11 +32,6 @@ const EMOJI = [
   "\u{1F604}", "\u{1F615}", "\u{1F622}", "\u{2764}\u{FE0F}", "\u{1F680}", "\u{1F41B}",
 ];
 
-const FILE_MANAGER_SAMPLE: FileRef[] = [
-  { id: "f-10", name: "Baumgartner-retainer-2026.pdf", size: "212 KB", kind: "pdf" },
-  { id: "f-11", name: "invoice-template-v2.fig", size: "4.2 MB", kind: "doc" },
-  { id: "f-12", name: "Q3-forecast.xlsx", size: "88 KB", kind: "sheet" },
-];
 
 /* Drafts live here, keyed by conversation, so a half-written message is
    still there after a trip to another channel. In the product they sync;
@@ -39,25 +39,33 @@ const FILE_MANAGER_SAMPLE: FileRef[] = [
 const drafts = new Map<string, string>();
 
 interface ComposerProps {
+  channelId: string;
+  threadId?: string;
   placeholder: string;
   /** Where the draft is kept while the person is elsewhere. */
   draftKey?: string;
   disabled?: boolean;
   disabledReason?: string;
-  onSend: (text: string, attachments: FileRef[]) => void;
+  onSend: (text: string, attachments: FileRef[]) => Promise<boolean>;
   autoFocus?: boolean;
 }
 
-export function Composer({ placeholder, draftKey, disabled, disabledReason, onSend, autoFocus }: ComposerProps) {
+export function Composer({ channelId, threadId, placeholder, draftKey, disabled, disabledReason, onSend, autoFocus }: ComposerProps) {
   const users = useUsers();
+  const f = useFormatter(), authority = useFileAuthority();
+  const scopedDraftKey = fileScope() + ":" + (draftKey || channelId);
+  const [draftScope, setDraftScope] = useState(scopedDraftKey);
+  const [sending, setSending] = useState(false), [unconfirmed, setUnconfirmed] = useState(false);
+  const [sendError, setSendError] = useState(false);
   const t = useT();
-  const [text, setText] = useState(() => (draftKey ? drafts.get(draftKey) ?? "" : ""));
+  const [text, setText] = useState(() => (scopedDraftKey ? drafts.get(scopedDraftKey) ?? "" : ""));
   useEffect(() => {
-    if (!draftKey) return;
-    if (text) drafts.set(draftKey, text);
-    else drafts.delete(draftKey);
-  }, [draftKey, text]);
+    if (!scopedDraftKey || draftScope !== scopedDraftKey) return;
+    if (text) drafts.set(scopedDraftKey, text);
+    else drafts.delete(scopedDraftKey);
+  }, [scopedDraftKey, draftScope, text]);
   const [attachments, setAttachments] = useState<FileRef[]>([]);
+  useEffect(() => { const pending = recoverableMessage(channelId, threadId); setText(pending?.text || drafts.get(scopedDraftKey) || ""); setAttachments(pending?.attachments || []); setUnconfirmed(Boolean(pending)); setSendError(Boolean(pending)); setDraftScope(scopedDraftKey); }, [scopedDraftKey, channelId, threadId]);
   const [mentionQuery, setMentionQuery] = useState<string | null>(null);
   const [activeMention, setActiveMention] = useState(0);
   const listId = useId();
@@ -69,16 +77,14 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
   /* The pickers close the way every popover in the product closes: a click
      anywhere else, or Escape. Before this they stayed open until a choice. */
   useEffect(() => {
-    if (!showFiles && !showEmoji) return;
+    if (!showEmoji) return;
     const onDown = (e: MouseEvent) => {
       if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
-        setShowFiles(false);
         setShowEmoji(false);
       }
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setShowFiles(false);
         setShowEmoji(false);
       }
     };
@@ -88,7 +94,7 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
       document.removeEventListener("mousedown", onDown);
       document.removeEventListener("keydown", onKey);
     };
-  }, [showFiles, showEmoji]);
+  }, [showEmoji]);
 
   /* Grow with the content, up to a ceiling. A composer that scrolls internally
      at three lines is the most common small cruelty in chat UI. */
@@ -99,13 +105,21 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
     el.style.height = `${Math.min(el.scrollHeight, 168)}px`;
   }, [text]);
 
-  const send = () => {
+  const send = async () => {
     const trimmed = text.trim();
-    if (!trimmed && attachments.length === 0) return;
-    onSend(trimmed, attachments);
-    setText("");
-    setAttachments([]);
-    setMentionQuery(null);
+    if (sending || (!trimmed && attachments.length === 0)) return;
+    setSending(true);
+    const original = authority;
+    try {
+      const saved = await onSend(trimmed, attachments);
+      if (original !== currentAuthority()) return;
+      if (!saved) { setUnconfirmed(Boolean(useWorkspace.getState().workspaceSync.uncertain)); setSendError(true); return; }
+      setText(""); setAttachments([]); setMentionQuery(null); setUnconfirmed(false); setSendError(false);
+    } finally { setSending(false); }
+  };
+  const pickFile = (item: FilePickerItem) => {
+    const file: FileRef = { id: item.fileId + ":" + item.versionId, reference: { workspaceId: item.workspaceId, fileId: item.fileId, versionId: item.versionId }, state: "available", name: item.name, size: f.bytes(item.size), kind: item.mimetype.startsWith("image/") ? "image" : item.mimetype === "application/pdf" ? "pdf" : "other", mimetype: item.mimetype };
+    setAttachments(a => a.some(existing => existing.id === file.id) ? a : [...a, file]); setShowFiles(false);
   };
 
   const onChange = (value: string) => {
@@ -185,74 +199,7 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
         </ul>
       )}
 
-      {showFiles && (
-        <div
-          className="absolute bottom-full z-30 mb-1.5 w-[320px] p-2"
-          style={{
-            background: "var(--color-surface)",
-            border: "1px solid var(--color-hairline-strong)",
-            borderRadius: "var(--radius-card)",
-            boxShadow: "var(--shadow-float)",
-          }}
-        >
-          <p className="px-1 pb-1.5 text-[11.5px] font-semibold" style={{ color: "var(--color-ink-subtle)" }}>
-            {t("chat.fromFileManager", "From Files")}
-          </p>
-          {/* An upload lands in the File Manager too; the channel is only
-              where it is mentioned. */}
-          <label
-            className="hq-row mb-1 flex cursor-pointer items-center gap-2 px-2 py-1.5 text-[12.5px] font-medium"
-            style={{ borderRadius: "var(--radius-control)", color: "var(--color-ink-brand)" }}
-          >
-            <UploadSimple size={14} weight="bold" aria-hidden="true" />
-            {t("chat.uploadDevice", "Upload from this device")}
-            <input
-              type="file"
-              className="sr-only"
-              aria-label={t("chat.uploadDevice", "Upload from this device")}
-              onChange={(e) => {
-                const picked = Array.from(e.target.files ?? []);
-                if (picked.length === 0) return;
-                const kindOf = (name: string): FileRef["kind"] => {
-                  const ext = name.split(".").pop()?.toLowerCase() ?? "";
-                  if (ext === "pdf") return "pdf";
-                  if (["png", "jpg", "jpeg", "gif", "webp"].includes(ext)) return "image";
-                  if (["xls", "xlsx", "csv"].includes(ext)) return "sheet";
-                  if (["mp4", "mov", "webm"].includes(ext)) return "video";
-                  if (["doc", "docx", "txt", "md", "fig"].includes(ext)) return "doc";
-                  return "other";
-                };
-                const fmt = (n: number) => (n >= 1_048_576 ? `${(n / 1_048_576).toFixed(1)} MB` : `${Math.max(1, Math.round(n / 1024))} KB`);
-                const refs: FileRef[] = picked.map((f, i) => ({ id: `up-${Date.now()}-${i}`, name: f.name, size: fmt(f.size), kind: kindOf(f.name) }));
-                setAttachments((a) => [...a, ...refs.filter((r) => !a.some((x) => x.name === r.name))]);
-                setShowFiles(false);
-                e.target.value = "";
-              }}
-            />
-          </label>
-          <ul>
-            {FILE_MANAGER_SAMPLE.map((f) => (
-              <li key={f.id}>
-                <button
-                  onClick={() => {
-                    setAttachments((a) => (a.some((x) => x.id === f.id) ? a : [...a, f]));
-                    setShowFiles(false);
-                  }}
-                  className="hq-row flex w-full items-center gap-2 px-2 py-1.5 text-start"
-                  style={{ borderRadius: "var(--radius-control)" }}
-                >
-                  <span className="min-w-0 flex-1 truncate text-[12.5px]" style={{ color: "var(--color-ink)" }}>
-                    <bdi>{f.name}</bdi>
-                  </span>
-                  <span className="tabular shrink-0 text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
-                    {f.size}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      <FilesPicker channelId={channelId} open={showFiles} onOpenChange={setShowFiles} onPick={pickFile} disabled={sending || unconfirmed} />
 
       {showEmoji && (
         <div
@@ -281,6 +228,7 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
         </div>
       )}
 
+      {sendError ? <p role="alert" className="mb-2 text-body-sm text-danger">{unconfirmed ? t("fileReferences.messageUnconfirmed", "Message delivery is unconfirmed. Retry to recover the same message before editing.") : t("fileReferences.messageRefused", "The message was not saved. Review your file access and try again.")}</p> : null}
       <div
         className="flex flex-col"
         style={{
@@ -289,7 +237,7 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
           borderRadius: "var(--radius-card)",
         }}
       >
-        {attachments.length > 0 && (
+        {draftScope === scopedDraftKey && attachments.length > 0 && (
           <ul className="flex flex-wrap gap-1.5 border-b p-2" style={{ borderColor: "var(--color-hairline)" }}>
             {attachments.map((f) => (
               <li key={f.id}>
@@ -297,8 +245,9 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
                   className="flex items-center gap-1.5 px-2 py-1 text-[12px]"
                   style={{ background: "var(--color-surface-sunken)", borderRadius: "var(--radius-control)" }}
                 >
-                  <bdi>{f.name}</bdi>
+                  <bdi>{f.name || t("fileReferences.selected", "Selected file")}</bdi>
                   <button
+                    disabled={sending || unconfirmed}
                     onClick={() => setAttachments((a) => a.filter((x) => x.id !== f.id))}
                     aria-label={t("chat.removeAttachment", "Remove {name}", { name: f.name })}
                     className="hq-btn"
@@ -313,7 +262,8 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
 
         <textarea
           ref={areaRef}
-          value={text}
+          value={draftScope === scopedDraftKey ? text : ""}
+          disabled={sending || unconfirmed || draftScope !== scopedDraftKey}
           autoFocus={autoFocus}
           onChange={(e) => onChange(e.target.value)}
           role="combobox"
@@ -346,7 +296,7 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
             }
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
-              send();
+              void send();
             }
           }}
           rows={1}
@@ -362,6 +312,7 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
               variant="ghost"
               size="sm"
               iconOnly
+              disabled={sending || unconfirmed}
               label={t("chat.attach", "Attach from Files")}
               onClick={() => {
                 setShowFiles((v) => !v);
@@ -375,6 +326,7 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
               variant="ghost"
               size="sm"
               iconOnly
+              disabled={sending || unconfirmed}
               label={t("chat.mention", "Mention someone")}
               onClick={() => onChange(`${text}${text.endsWith(" ") || !text ? "" : " "}@`)}
               style={{ color: "var(--color-ink-subtle)" }}
@@ -385,6 +337,7 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
               variant="ghost"
               size="sm"
               iconOnly
+              disabled={sending || unconfirmed}
               label={t("chat.emoji", "Add emoji")}
               aria-expanded={showEmoji}
               onClick={() => {
@@ -400,11 +353,11 @@ export function Composer({ placeholder, draftKey, disabled, disabledReason, onSe
           <Button
             variant="primary"
             size="sm"
-            onClick={send}
-            disabled={!text.trim() && attachments.length === 0}
+            onClick={() => void send()}
+            disabled={sending || (!text.trim() && attachments.length === 0)}
           >
             <PaperPlaneRight size={13} weight="fill" aria-hidden="true" />
-            {t("chat.send", "Send")}
+            {unconfirmed ? t("fileReferences.recoverMessage", "Recover message") : t("chat.send", "Send")}
           </Button>
         </div>
       </div>

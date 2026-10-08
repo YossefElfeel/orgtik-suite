@@ -1,6 +1,9 @@
 const express = require("express");
 const stateCodec = require("../../apps/files/runtime-state");
 const lib = require("../../apps/files/lib");
+const { buildSeed } = require('../../apps/files/seed');
+const { createWorkspaceFiles } = require('../workspace-files');
+const path = require('node:path');
 let created = false;
 const schema = "orgtik.tool.files";
 const fail = message => { throw Object.assign(new Error(message), { status: 503, code: "invalid_tool_runtime" }); };
@@ -21,10 +24,24 @@ function createWorkspaceRuntime(input, tool, manifest) {
     lib.importCounters({ ids: 0, secrets: 0 });
     if (input.initialization.kind === 'empty') state = stateCodec.empty();
     else if (fixtureId === 'nile-v1') state = stateCodec.nileFixture(input.identity, manifest, input.initialization.seedAt);
+    else state = buildSeed({ identity: input.identity, manifest, seedAt: input.initialization.seedAt });
   }
   const router = express.Router();
+  let shared;
+  const ownRoute = fn => (req, res) => {
+    const user = input.identity.requireUser(req, res); if (!user) return;
+    try { ctx.util.ok(res, fn(req, user), 'Files sample request completed', req.method === 'POST' ? 201 : 200); }
+    catch (error) { res.status(error.status || 503).json({ success: false, code: error.code || 'files_unavailable', message: error.message }); }
+  };
+  router.get('/api/v1/files/samples', ownRoute((_req, user) => shared.sampleCatalog({ actorId: user.id })));
+  router.post('/api/v1/files/samples', ownRoute((req, user) => {
+    const body = req.body;
+    if (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).some(key => !['sampleId', 'parentId'].includes(key))) throw Object.assign(new Error('Only the sample and destination folder can be supplied.'), { status: 422, code: 'invalid_sample_payload' });
+    return shared.createSample({ actorId: user.id, ...body, operationId: req.get('idempotency-key') });
+  }));
   created = true;
   const hooks = tool.routes(router, { ...ctx, identity: input.identity, workspaceServices: input.services, commands: input.services.commands }, { state, seedAt: input.initialization.seedAt });
+  shared = createWorkspaceFiles({ state, identity: input.identity, workspaceId: input.workspace.id, realm, manifest, assetDir: path.resolve(__dirname, '../../apps/files/assets'), now: () => new Date().toISOString(), fileOut: hooks.serializeFile });
   return {
     router,
     exportSnapshot: () => ({ schema, version: 1, realm, workspaceId: input.workspace.id, appKey: 'files', ...hooks.exportState(), ...(fixtureId ? { fixtureId } : {}) }),
@@ -34,7 +51,9 @@ function createWorkspaceRuntime(input, tool, manifest) {
       if (!user || user.isActive === false || context.realm !== realm || context.workspace?.id !== input.workspace.id || !access || ['no_access', 'not_subscribed'].includes(access.access) || !access.roles?.length || !input.identity.userScopes(user).some(scope => scope.scope === 'file_manager' && scope.roles.length)) throw Object.assign(new Error("Files bootstrap is not authorized."), { status: 403 });
       return hooks.bootstrap(user);
     },
-    usage: hooks.usage, transferOwnership: hooks.transferOwnership, close: hooks.close,
+    listSharedFiles: shared.listSharedFiles, resolveSharedFile: shared.resolveSharedFile, contentSharedFile: shared.contentSharedFile,
+    createSample: shared.createSample, sampleCatalog: shared.sampleCatalog,
+    usage: hooks.usage, transferOwnership: hooks.transferOwnership, close() { shared.close(); hooks.close(); },
   };
 }
 

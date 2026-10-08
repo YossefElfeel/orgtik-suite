@@ -7,6 +7,7 @@ import { TOKEN_COOKIE, USER_COOKIE, signInAgainUrl } from "@/constants";
 import { logoutUser } from "../features/auth/authSlice";
 import { successMessage, errorMessage } from "@/lib/api-feedback";
 import { readClientSession, refreshClientSession, clearClientSession, SessionRequestError } from '@orgtik/ui/auth';
+import { fileAuthority } from "@/lib/file-references";
 import { SOS_API_URL } from '@/constants/env';
 
 const handleUserLogout = (api: any) => {
@@ -22,8 +23,8 @@ const baseQuery = fetchBaseQuery({
   baseUrl: API_URL,
   prepareHeaders: (headers, { getState }) => {
     const session = readClientSession(), token = session?.tokens.accessToken || (getState() as RootState).auth.token;
-    if (token) headers.set("authorization", `Bearer ${token}`);
-    if (session?.workspaceContext) headers.set('X-Workspace', session.workspaceContext.workspace.id);
+    if (token && !headers.has("authorization")) headers.set("authorization", `Bearer ${token}`);
+    if (session?.workspaceContext && !headers.has('X-Workspace')) headers.set('X-Workspace', session.workspaceContext.workspace.id);
     return headers;
   },
 });
@@ -31,18 +32,42 @@ const baseQuery = fetchBaseQuery({
 const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
   // A network failure comes back as { error: { status: "FETCH_ERROR" } } and is reported like any
   // other error; nothing here throws, so a stopped API never crashes a screen (TASKS-005).
-  const before = readClientSession()?.workspaceContext;
+  const originalAuthority = fileAuthority();
+  const originalToken = readClientSession()?.tokens.accessToken;
+  const explicitAuthorization = typeof args === "object" ? new Headers(args.headers).get("authorization") : null;
+  const matches = () => originalAuthority === fileAuthority();
+  const changed = () => ({ error: { status: "CUSTOM_ERROR" as const, error: "workspace_changed", data: { code: "workspace_changed", uncertain: true } } });
+  const pin = (value: any, refreshed = false) => {
+    const session = readClientSession();
+    const headers = new Headers(typeof value === "object" ? value.headers : undefined);
+    if (session?.tokens.accessToken && (!headers.has("authorization") || refreshed && headers.get("authorization") === "Bearer " + originalToken)) headers.set("authorization", "Bearer " + session.tokens.accessToken);
+    if (session?.workspaceContext && !headers.has("X-Workspace")) headers.set("X-Workspace", session.workspaceContext.workspace.id);
+    return { ...(typeof value === "string" ? { url: value } : value), headers };
+  };
+  args = pin(args);
   const isChange = typeof args === 'object' && args.method && !['GET', 'HEAD'].includes(args.method);
   if (isChange) { const headers = new Headers(args.headers); if (!headers.has('Idempotency-Key')) headers.set('Idempotency-Key', crypto.randomUUID()); args = { ...args, headers }; }
+  if (!matches()) return changed();
   let result = await baseQuery(args, api, extraOptions);
+  if (!matches()) return changed();
 
   if (result.error && result.error.status === 401) {
-    try { await refreshClientSession(SOS_API_URL); result = await baseQuery(args, api, extraOptions); }
-    catch (error) { if (error instanceof SessionRequestError && error.status >= 500) return { error: { status: 503, data: { code: 'session_unavailable' } } }; handleUserLogout(api); return result; }
-    if (result.error?.status === 401) { handleUserLogout(api); return result; }
+    if (explicitAuthorization && explicitAuthorization !== "Bearer " + originalToken) return result;
+    try {
+      if (!matches()) return changed();
+      await refreshClientSession(SOS_API_URL);
+      if (!matches()) return changed();
+      args = pin(args, true);
+      result = await baseQuery(args, api, extraOptions);
+      if (!matches()) return changed();
+    } catch (error) {
+      if (!matches()) return changed();
+      if (!(error instanceof SessionRequestError) || ![401, 403].includes(error.status)) return { error: { status: 503, data: { code: "session_unavailable", uncertain: isChange } } };
+      handleUserLogout(api); return result;
+    }
+    if (result.error?.status === 401) { if (!matches()) return changed(); handleUserLogout(api); return result; }
   }
-  const after = readClientSession()?.workspaceContext;
-  if (before?.realm !== after?.realm || before?.workspace.id !== after?.workspace.id || before?.actor.effectiveUserId !== after?.actor.effectiveUserId) return { error: { status: 409, data: { code: 'workspace_changed' } } };
+  if (!matches()) return changed();
 
   // Changes (not reads) say how they went, in the reader's language (lib/api-feedback). The API's
   // own English messages are no longer shown (TASKS-030), and errors no longer depend on which

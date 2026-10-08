@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { X } from "@phosphor-icons/react";
-import { Button, FileField, Input, MultiSelect, Select, Textarea, toast } from "@orgtik/ui";
+import { Button, Input, MultiSelect, Select, Textarea, toast } from "@orgtik/ui";
 import { DatePicker } from "@orgtik/ui/dates";
 import { RHFField } from "@orgtik/ui/rhf";
 import { FormDialog } from "@/components/shared/FormDialog";
@@ -63,6 +63,7 @@ export default function TaskFormDialog({
   trigger?: ReactElement;
 }) {
   const t = useTranslations("TaskForm");
+  const tf = useTranslations("FileReferences");
   const tp = useTranslations("Priority");
   const router = useRouter();
   const editing = taskId != null;
@@ -81,7 +82,6 @@ export default function TaskFormDialog({
       dependsOnTaskIds: [],
     },
   });
-  const [files, setFiles] = useState<File[]>([]);
   const projectId = Number(form.watch("projectId")) || 0;
 
   const task = useGetTaskQuery(taskId ?? 0, { skip: !shown || !editing });
@@ -140,16 +140,7 @@ export default function TaskFormDialog({
       return;
     }
     // No status is sent: the task stays in the section it was created in.
-    const body = new FormData();
-    body.append("title", common.title);
-    if (common.description) body.append("description", common.description);
-    body.append("priority", common.priority);
-    if (common.startDate) body.append("startDate", common.startDate);
-    if (common.dueDate) body.append("dueDate", common.dueDate);
-    common.assignedUserIds.forEach((id) => body.append("assignedUserIds", String(id)));
-    common.dependsOnTaskIds.forEach((id) => body.append("dependsOnTaskIds", String(id)));
-    files.forEach((f) => body.append("attachments", f));
-    const created = await createTask({ sectionId: v.sectionId, body }).unwrap();
+    const created = await createTask({ sectionId: v.sectionId, body: common }).unwrap();
     const id = (created as { data?: { id?: number } })?.data?.id;
     if (id && !fixedProject) {
       toast.success(t("created", { name: isolate(common.title) }), { action: { label: t("open"), onClick: () => router.push(`/projects/${projectId}/board?task-id=${id}`) } });
@@ -167,7 +158,6 @@ export default function TaskFormDialog({
       onOpenChange={onOpenChange ?? setOwn}
       onClosed={() => {
         if (!editing) form.reset();
-        setFiles([]);
       }}
       size="xl"
       title={editing ? t("editTitle") : t("createTitle")}
@@ -250,7 +240,7 @@ export default function TaskFormDialog({
           <MultiSelect value={value} onValueChange={onChange} disabled={!projectId} placeholder={t("pickTasks")} emptyText={t("noTasks")} options={otherTasks.map((x) => ({ value: String(x.id), label: x.title }))} />
         )}
       />
-      {editing ? null : <FileField label={t("attachments")} multiple maxFiles={10} maxSize={25 * 1024 * 1024} value={files} onChange={setFiles} />}
+      {editing ? null : <p className="text-caption text-fg-muted">{tf("afterCreate")}</p>}
     </FormDialog>
   );
 }

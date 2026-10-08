@@ -7,6 +7,8 @@ const { buildSeed } = require("./tasks/seed");
 const filesLib = require("./tasks/files");
 const analyticsLib = require("./tasks/analytics");
 const commands = require("./tasks/commands");
+const fileReferences = require('../lib/workspace-file-references');
+const crypto = require('node:crypto');
 
 const SCOPE = "task_manager";
 // The shared identity has avatar:null for everyone; generated initials avatars make the boards readable.
@@ -171,7 +173,33 @@ function assigneeOut(a) {
 }
 const assignmentOut = (a) => ({ id: a.id, assigneeType: a.assigneeType, assigneeId: a.assigneeId, assignee: assigneeOut(a), assignedBy: byUser(userById(a.assignedById)), assignedAt: a.assignedAt });
 function attachmentOut(a) {
+  if (a.reference) {
+    if (!ctx.sharedFiles?.project) throw Object.assign(new Error('Files could not be loaded.'), { status: 503, code: 'files_unavailable' });
+    const projection = ctx.sharedFiles.project(a.reference), available = projection.state === 'available', file = projection.file;
+    return { id: a.id, reference: a.reference, state: projection.state, fileUrl: null, originalName: available ? file.name : '', mimetype: available ? file.mimetype : 'application/octet-stream', size: available ? file.size : 0, createdAt: a.createdAt, ...(available ? { version: file.version, contentPath: fileReferences.contentPath(a.reference, { type: 'task', id: a.taskId }, a.id) } : {}) };
+  }
   return { id: a.id, fileUrl: /^https?:/.test(a.filename) ? a.filename : ctx.fileUrl(a.filename), filename: a.filename, originalName: a.originalName, mimetype: a.mimetype, size: a.size, createdAt: a.createdAt, uploadedBy: byUser(userById(a.uploadedById)) };
+}
+function authorizeSharedTarget({ actorId, type, id, write = false, referenceId, reference }) {
+  const user = userById(actorId), task = type === 'task' && taskById(id);
+  if (!user || user.isActive === false || !hasAccess(user) || !task || !canSeeProject(projectById(task.projectId), user)) throw Object.assign(new Error('This task was not found.'), { status: 404, code: 'task_not_found' });
+  if (write && (isViewerOnly(user) || !identity.canWrite(user))) throw Object.assign(new Error('This task is read-only.'), { status: isViewerOnly(user) ? 403 : 423, code: 'task_read_only' });
+  if (write && (task.custodyReadOnly || projectById(task.projectId)?.custodyReadOnly)) throw Object.assign(new Error('This task awaits ownership review.'), { status: 423, code: 'task_read_only' });
+  if (reference && !taskAttachments(task.id).some(row => String(row.id) === String(referenceId) && fileReferences.sameReference(row.reference, reference))) throw Object.assign(new Error('This file reference was not found.'), { status: 404, code: 'reference_not_found' });
+  return task;
+}
+function fileOperation(task, user, key, body, apply) {
+  if (typeof key !== 'string' || !/^[\w.:-]{1,200}$/.test(key)) throw Object.assign(new Error('Supply the original file action reference.'), { status: 422, code: 'operation_id_required' });
+  const fingerprint = crypto.createHash('sha256').update(JSON.stringify(body)).digest('hex'), receiptKey = `${user.id}:${key}`;
+  task.fileReferenceOperations ??= {};
+  const prior = task.fileReferenceOperations[receiptKey];
+  if (prior) {
+    if (prior.fingerprint !== fingerprint) throw Object.assign(new Error('This reference was used for another file change.'), { status: 409, code: 'operation_conflict' });
+    return prior.ids.map(id => db.attachments.find(row => row.id === id)).filter(Boolean).map(attachmentOut);
+  }
+  if (Object.keys(task.fileReferenceOperations).length >= 1000) throw Object.assign(new Error('This task has reached its file action limit.'), { status: 422, code: 'file_action_limit' });
+  const rows = apply(); task.fileReferenceOperations[receiptKey] = { fingerprint, ids: rows.map(row => row.id) };
+  return rows.map(attachmentOut);
 }
 function taskProgress(t) {
   if (t.status === "done") return 100;
@@ -855,6 +883,29 @@ function routes(app, context, options = {}) {
     const u = me(req, res); if (!u) return;
     const t = loadTask(req, res, u); if (!t) return;
     if (!guard(res, !isViewerOnly(u), "Viewers cannot upload attachments")) return;
+    if (identity.workspaceMode) {
+      try {
+        authorizeSharedTarget({ actorId: u.id, type: 'task', id: t.id, write: true });
+        const body = req.body;
+        if (!body || Object.keys(body).sort().join() !== 'references' || !Array.isArray(body.references) || !body.references.length || body.references.length > 10) throw Object.assign(new Error('Choose up to ten Files records.'), { status: 422, code: 'invalid_file_references' });
+        const refs = body.references.map(value => fileReferences.reference(value, identity.workspaceId));
+        // Recheck current Files access before recovering an old receipt.
+        if (!ctx.sharedFiles?.resolve) throw Object.assign(new Error('Files could not be loaded.'), { status: 503, code: 'files_unavailable' });
+        refs.forEach(ref => ctx.sharedFiles.resolve(ref));
+        const saved = fileOperation(t, u, req.get('Idempotency-Key'), { kind: 'add', references: refs }, () => {
+          const unique = refs.filter((ref, index) => refs.findIndex(other => fileReferences.sameReference(ref, other)) === index);
+          const missing = unique.filter(ref => !taskAttachments(t.id).some(row => fileReferences.sameReference(row.reference, ref)));
+          if (taskAttachments(t.id).length + missing.length > 10) throw Object.assign(new Error('A task can reference up to ten files.'), { status: 422, code: 'file_reference_limit' });
+          for (const ref of missing) {
+            const row = { id: db.nextId('attachment'), taskId: t.id, reference: ref, uploadedById: u.id, createdAt: nowIso() };
+            db.attachments.push(row); logActivity(t, 'attachment_added', u.id, { referenceId: row.id });
+          }
+          if (missing.length) touchTask(t);
+          return unique.map(ref => taskAttachments(t.id).find(row => fileReferences.sameReference(row.reference, ref)));
+        });
+        return ok(res, saved, 'Files attached successfully', 201);
+      } catch (error) { return commands.failure(res, error); }
+    }
     const saved = saveFiles(req, { taskId: t.id }, u.id);
     if (!saved.length) return fail(res, 400, "No files were uploaded");
     for (const f of saved) logActivity(t, "attachment_added", u.id, { filename: f.originalName, filesize: f.size });
@@ -865,10 +916,24 @@ function routes(app, context, options = {}) {
   app.delete("/api/tasks/attachments/:attachmentId", (req, res) => {
     const u = me(req, res); if (!u) return;
     const a = db.attachments.find((x) => x.id === Number(req.params.attachmentId));
+    if (!a && identity.workspaceMode) {
+      const key = req.get('Idempotency-Key'), receiptKey = `${u.id}:${key}`;
+      const previousTask = db.tasks.find(row => row.fileReferenceOperations?.[receiptKey]?.fingerprint === crypto.createHash('sha256').update(JSON.stringify({ kind: 'remove', attachmentId: Number(req.params.attachmentId) })).digest('hex'));
+      if (previousTask) { try { authorizeSharedTarget({ actorId: u.id, type: 'task', id: previousTask.id, write: true }); return ok(res, null, 'File reference removed'); } catch (error) { return commands.failure(res, error); } }
+    }
     if (!a) return fail(res, 404, "Attachment not found");
     const t = taskById(a.taskId || commentById(a.commentId)?.taskId);
     if (!t || !canSeeProject(projectById(t.projectId), u)) return fail(res, 403, "You don't have access to this attachment");
     if (!guard(res, !isViewerOnly(u), "Viewers cannot delete attachments")) return;
+    if (a.reference) {
+      try {
+        authorizeSharedTarget({ actorId: u.id, type: 'task', id: t.id, write: true });
+        fileOperation(t, u, req.get('Idempotency-Key'), { kind: 'remove', attachmentId: a.id }, () => {
+          db.attachments = db.attachments.filter(row => row.id !== a.id); logActivity(t, 'attachment_deleted', u.id, { referenceId: a.id }); touchTask(t); return [];
+        });
+        return ok(res, null, 'File reference removed');
+      } catch (error) { return commands.failure(res, error); }
+    }
     db.attachments = db.attachments.filter((x) => x.id !== a.id);
     if (!a.filename.startsWith("seed-")) fs.promises.unlink(path.join(ctx.uploadsDir, a.filename)).catch(() => {});
     logActivity(t, "attachment_deleted", u.id, { filename: a.originalName, filesize: a.size });
@@ -1537,6 +1602,7 @@ function routes(app, context, options = {}) {
   });
   return {
     exportState: () => require("./tasks/runtime-state").encode(db),
+    authorizeSharedTarget,
     bootstrap: user => ({ projects: visibleProjects(user).map(projectCard), teams: db.teams.filter(team => !isClient(user) || visibleTeamIds(user).has(team.id)).map(teamMini) }),
     usage: () => [{ key: "tasks.projects", used: db.projects.filter(project => !project.archivedAt).length }, { key: "tasks.guests", used: identity.users.filter(user => tmRoles(user).includes("viewer")).length }],
     transferOwnership: command => {

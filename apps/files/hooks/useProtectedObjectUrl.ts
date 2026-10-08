@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/app/store";
 import { fetchProtectedFile } from "@/lib/fetch-protected-file";
+import { useFileAuthority } from "@/lib/file-references";
 
 interface ProtectedObjectUrlState {
   objectUrl: string | null;
@@ -15,6 +16,8 @@ export function useProtectedObjectUrl(
   protectedUrl: string | null | undefined,
 ): ProtectedObjectUrlState {
   const token = useSelector((state: RootState) => state.auth.token);
+  const authority = useFileAuthority();
+  const [loadedAuthority, setLoadedAuthority] = useState("");
   const [state, setState] = useState<ProtectedObjectUrlState>({
     objectUrl: null,
     loading: Boolean(protectedUrl),
@@ -31,9 +34,11 @@ export function useProtectedObjectUrl(
     let createdObjectUrl: string | null = null;
 
     setState({ objectUrl: null, loading: true, error: null });
+    setLoadedAuthority(authority);
 
     void fetchProtectedFile(protectedUrl, token, controller.signal)
       .then((blob) => {
+        if (controller.signal.aborted) return;
         createdObjectUrl = URL.createObjectURL(blob);
         setState({
           objectUrl: createdObjectUrl,
@@ -58,7 +63,7 @@ export function useProtectedObjectUrl(
       controller.abort();
       if (createdObjectUrl) URL.revokeObjectURL(createdObjectUrl);
     };
-  }, [protectedUrl, token]);
+  }, [protectedUrl, token, authority]);
 
-  return state;
+  return loadedAuthority === authority ? state : { objectUrl: null, loading: true, error: null };
 }

@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "typecheck": "node ../../tools/next-env.cjs && tsc --noEmit",
+    "test": "node --test lib/file-references.test.cjs",
     "i18n:check": "node ../../tools/i18n/check-catalogs.mjs",
     "start": "next start",
     "lint": "eslint"

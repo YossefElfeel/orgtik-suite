@@ -173,9 +173,15 @@ export interface ObjectRef {
 
 export interface FileRef {
   id: Id;
+  reference?: { workspaceId: string; fileId: string; versionId: string };
+  state?: "available" | "unavailable";
+  mimetype?: string;
+  contentPath?: string;
   name: string;
   /** Size already formatted for display; the File Manager owns the raw bytes. */
   size: string;
+  /** Canonical bytes, when available; display with the current locale formatter. */
+  bytes?: number;
   kind: "pdf" | "image" | "sheet" | "doc" | "video" | "other";
 }
 

@@ -1,6 +1,6 @@
 # A15 — trusted deadlines and durable staff revocation
 
-2026-10-08 · reviewed working source based on merged PR16; package CI and full release acceptance pending.
+2026-10-08 · [PR17](https://github.com/YossefElfeel/orgtik-suite/pull/17) merged: source `ab9849d` → main `496a0e2`, after [CI37715489730](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37715489730) and [pause check37715489664](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37715489664). Full release acceptance remains open.
 
 Deadline transitions now run before the user rollback baseline under the existing realm journal lock. Offboarding/custody commits first, then billing/time transitions commit separately, and the caller is prepared against the resulting current state. An old owner's refusal cannot undo a due departure, and a later billing persistence failure cannot retain departed access. Neither phase accepts a client actor, payment total or clock value; both journal complete `workspace-v1` checkpoints and replay their committed state.
 

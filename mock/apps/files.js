@@ -7,6 +7,7 @@ const crypto = require("crypto");
 const lib = require("./files/lib");
 const { buildSeed } = require("./files/seed");
 const commands = require('./files/commands');
+const { createFileAccess } = require('./files/access');
 
 const SCOPE = "file_manager";
 const ASSET_DIR = path.join(__dirname, "files", "assets");
@@ -44,9 +45,7 @@ module.exports = {
     // ------------------------------------------------------------ responses & auth
     const ok = (res, data, message, status = 200) => util.ok(res, data, message, status);
     const fail = (res, status, message, extra = {}) => util.fail(res, status, message, { error: message, ...extra });
-    const toolRoles = u => identity.userScopes(u).find(scope => scope.scope === SCOPE)?.roles || [];
-    const isAdmin = (u) => toolRoles(u).includes("super_admin");
-    const isStaff = (u) => u.userType !== "customer";
+    const { toolRoles, isAdmin, isStaff, parentOf, chain, folderAccess, fileAccess, folderCaps, fileCaps } = createFileAccess({ state, identity });
     const truthy = (v) => v === true || v === "true" || v === "1";
     if (identity.workspaceMode) app.use((req, res, next) => {
       const ownProfile = req.method === 'PUT' && req.path === '/api/auth/profile' || req.method === 'DELETE' && req.path === '/api/auth/avatar';
@@ -71,16 +70,6 @@ module.exports = {
     }
 
     // ------------------------------------------------------------ tree helpers
-    const parentOf = (f) => (f && f.parentId ? F.get(f.parentId) || null : null);
-    function chain(f) {
-      const out = [];
-      const seen = new Set();
-      for (let c = f; c && !seen.has(c.id); c = parentOf(c)) {
-        seen.add(c.id);
-        out.push(c);
-      }
-      return out;
-    }
     const pathOf = (f) => "/" + chain(f).reverse().map((x) => x.name).join("/");
     const depthOf = (f) => chain(f).length - 1;
     const within = (f, ancestorId) => Boolean(f) && chain(f).some((x) => x.id === ancestorId); // includes self
@@ -95,41 +84,6 @@ module.exports = {
     // admin: everything. owner: owns the folder or an ancestor. collab: the folder is shared with the user
     // ("everyone" = all staff, customers excluded; "specific_people" = listed users). Child folders copy
     // their parent's access; changing a folder's access re-applies it to the whole subtree.
-    const sharedWith = (f, u) => (f.visibility === "everyone" ? isStaff(u) : f.visibility === "specific_people" ? f.allowedUserIds.includes(u.id) : false);
-
-    function folderAccess(u, f) {
-      if (!f) return null;
-      if (isAdmin(u)) return { level: "admin", sharedRootId: null };
-      const ch = chain(f);
-      if (ch.some((x) => x.ownerId === u.id)) return { level: "owner", sharedRootId: null };
-      if (!sharedWith(f, u)) return null;
-      let root = f;
-      for (const x of ch.slice(1)) {
-        if (sharedWith(x, u)) root = x;
-        else break;
-      }
-      return { level: "collab", sharedRootId: root.id };
-    }
-
-    function fileAccess(u, file) {
-      if (isAdmin(u)) return { level: "admin", sharedRootId: null };
-      const folder = file.folderId ? F.get(file.folderId) : null;
-      const fa = folder ? folderAccess(u, folder) : null;
-      if (fa) return fa;
-      if (file.ownerId === u.id) return { level: "owner", sharedRootId: null };
-      if (file.accessOverride && sharedWith(file.accessOverride, u)) return { level: "reader", sharedRootId: null };
-      return null;
-    }
-
-    function caps(acc, ownsItem, user) {
-      if (user && typeof identity.canWrite === 'function' && !identity.canWrite(user)) return { canWrite: false, canMove: false, canArchive: false, canManageAccess: false, canManageExternalShares: false, sharedRootId: acc?.sharedRootId ?? null };
-      if (user && !toolRoles(user).some(role => role === "super_admin" || role === "file_editor")) return { canWrite: false, canMove: false, canArchive: false, canManageAccess: false, canManageExternalShares: false, sharedRootId: acc?.sharedRootId ?? null };
-      if (!acc || acc.level === "reader") return { canWrite: false, canMove: false, canArchive: false, canManageAccess: false, canManageExternalShares: false, sharedRootId: null };
-      if (acc.level !== "collab") return { canWrite: true, canMove: true, canArchive: true, canManageAccess: true, canManageExternalShares: true, sharedRootId: null };
-      return { canWrite: true, canMove: true, canArchive: ownsItem, canManageAccess: ownsItem, canManageExternalShares: ownsItem, sharedRootId: acc.sharedRootId };
-    }
-    const folderCaps = (u, f) => caps(chain(f).some(folder => folder.custodyReadOnly) ? null : folderAccess(u, f), f.ownerId === u.id, u);
-    const fileCaps = (u, f) => caps(f.custodyReadOnly || chain(F.get(f.folderId)).some(folder => folder.custodyReadOnly) ? null : fileAccess(u, f), f.ownerId === u.id, u);
 
     // Archived items: visible to admins, their owner, whoever archived them, and owners of the tree above.
     function archiveVisible(u, item, container) {
@@ -1281,6 +1235,7 @@ module.exports = {
       if (shareStatus(s) === "active") ctx.log(`seeded share "${s.label}"${s.seedPassword ? ` (password: ${s.seedPassword})` : ""}: ${shareUrl(s)}`);
     }
     return {
+      serializeFile: fileOut,
       exportState: () => ({ data: require("./files/runtime-state").encode(state), sequences: lib.exportCounters() }),
       bootstrap: user => ({ folders: activeFolders().filter(folder => folderAccess(user, folder)).map(folder => folderOut(folder, user)), files: activeFiles().filter(file => fileAccess(user, file)).map(file => fileOut(file, user)) }),
       usage: () => [{ key: "files.storage_gb", used: [...FL.values()].reduce((total, file) => total + Number(file.size || 0), 0) / 1024 ** 3 }],

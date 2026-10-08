@@ -94,11 +94,15 @@ export function ThreadPanel({ parentId, onClose }: { parentId: string; onClose: 
         })}
       </label>
       <Composer
+        channelId={parent.channelId}
+        threadId={parentId}
         placeholder={t("thread.reply", "Reply in thread")}
         draftKey={`thread:${parentId}`}
         onSend={(text, attachments) => {
-          sendMessage(parent.channelId, text, parentId, attachments);
-          if (alsoSend) sendMessage(parent.channelId, text, undefined, attachments);
+          return sendMessage(parent.channelId, text, parentId, attachments).then(async saved => {
+            if (!saved || !alsoSend) return saved;
+            return sendMessage(parent.channelId, text, undefined, attachments);
+          });
         }}
       />
     </div>

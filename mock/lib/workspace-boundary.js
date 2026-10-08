@@ -38,7 +38,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     platform: () => platform().getStore(), currentPrincipal, businessClock: clock,
     servicesFor({ workspace, appKey, identity }) {
       if (!/^[\w-]{1,200}$/.test(workspace.id)) throw failure(503, "invalid_workspace_id", "Workspace storage is unavailable.");
-      const ctx = { ...makeCtx(appKey, identity, util), realm, workspaceId: workspace.id, currentContext: () => currentPrincipal()?.workspaceContext, uploadsDir: path.join(config.dataDir, "uploads", "workspaces", workspace.id, appKey), io: null };
+      const ctx = { ...makeCtx(appKey, identity, util), realm, workspaceId: workspace.id, currentContext: () => currentPrincipal()?.workspaceContext, uploadsDir: path.join(config.dataDir, "uploads", "workspaces", workspace.id, appKey), io: null, sharedFiles: { resolve: resolveSharedFile, project: projectSharedFile } };
       const upload = () => (req, res, next) => /multipart\/form-data|application\/octet-stream/i.test(req.headers["content-type"] || "") ? res.status(501).json({ success: false, code: "packaged_assets_only", message: "Choose a packaged sample asset." }) : next();
       ctx.upload = Object.fromEntries(["single", "array", "any", "fields", "none"].map(name => [name, upload]));
       return {
@@ -48,6 +48,54 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       };
     },
   });
+  function filesRuntime() {
+    const request = requests.getStore(), principal = request?.frame.principal, context = principal?.context.workspaceContext;
+    const access = context?.tools.files;
+    if (!context || !access || ['no_access', 'not_subscribed'].includes(access.access) || !access.roles?.length) throw failure(403, 'files_access_denied', 'Ask your workspace owner for Files access.');
+    if (request.runtime?.appKey === 'files') return request.runtime;
+    if (!request.relatedRuntimes.has('files')) request.relatedRuntimes.set('files', registry.create(context.workspace.id, 'files'));
+    return request.relatedRuntimes.get('files');
+  }
+  function resolveSharedFile(value) {
+    const principal = requests.getStore()?.frame.principal, workspaceId = principal?.context.workspaceContext?.workspace.id;
+    const ref = require('./workspace-file-references').reference(value, workspaceId);
+    const runtime = filesRuntime();
+    if (!runtime.resolveSharedFile) throw failure(503, 'files_runtime_unavailable', 'Files could not be loaded. Try again.');
+    return runtime.resolveSharedFile({ actorId: principal.user.id, fileId: ref.fileId, versionId: ref.versionId });
+  }
+  function projectSharedFile(value) {
+    try { return { state: 'available', file: resolveSharedFile(value) }; }
+    catch (error) {
+      if ([403, 404].includes(error.status) || error.status === 410 && error.code === 'file_content_unavailable') return { state: 'unavailable' };
+      throw error;
+    }
+  }
+  function fileReferenceRoutes(toolApp, frame, runtime) {
+    const app = express(); app.use(cors({ origin: true, credentials: true }));
+    app.get('/api/shared/files', (req, res, next) => {
+      try {
+        const principal = frame.principal;
+        runtime.authorizeSharedTarget({ actorId: principal.user.id, type: req.query.resourceType, id: req.query.resourceId });
+        const data = filesRuntime().listSharedFiles({ actorId: principal.user.id, search: req.query.search, page: req.query.page, limit: req.query.limit });
+        res.set('Cache-Control', 'private, no-store').json({ success: true, data });
+      } catch (error) { next(error); }
+    });
+    app.get('/api/shared/files/:fileId/versions/:versionId/content', (req, res, next) => {
+      try {
+        const principal = frame.principal, value = { workspaceId: principal.context.workspaceContext.workspace.id, fileId: req.params.fileId, versionId: req.params.versionId };
+        runtime.authorizeSharedTarget({ actorId: principal.user.id, type: req.query.resourceType, id: req.query.resourceId, referenceId: req.query.referenceId, reference: value });
+        resolveSharedFile(value);
+        const content = filesRuntime().contentSharedFile({ actorId: principal.user.id, fileId: value.fileId, versionId: value.versionId });
+        // attachment(filename) infers a MIME from the editable name; the pinned bytes
+        // remain the authority even when a PDF is renamed with another extension.
+        res.set('Cache-Control', 'private, no-store').set('X-Content-Type-Options', 'nosniff');
+        res.attachment(content.name).type(content.mimetype).sendFile(content.path, error => { if (error) next(error); });
+      } catch (error) { next(error); }
+    });
+    app.use(toolApp);
+    app.use((error, req, res, next) => res.status(error.status || 503).json({ success: false, code: error.code || 'files_unavailable', message: error.status ? error.message : 'Files could not be loaded. Try again.' }));
+    return app;
+  }
   function executeCommand(kind, payload, metadata = {}) {
     const request = requests.getStore(), principal = request?.frame.principal, runtime = request?.runtime;
     if (!principal?.context.workspaceContext || !runtime || metadata.workspaceId !== runtime.workspaceId || (metadata.actor?.effectiveUserId ?? metadata.actor?.userId) !== principal.user.id) throw failure(403, "workspace_command_forbidden", "This workspace action is not authorized.");
@@ -379,8 +427,11 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     return app;
   }
   async function handle({ key, req, body, legacyApp, legacyAppFor, send, sendJson, sync }) {
-    await initialize();
-    await sync();
+    // Cold storage work occurs before the user transaction, but still belongs to
+    // this HTTP request. A temporary outage must not reject an ignored server
+    // callback promise and terminate the process; initialization can retry later.
+    try { await initialize(); await sync(); }
+    catch (error) { return sendJson(error.status || 503, { success: false, code: error.code || 'workspace_runtime_unavailable', message: 'Workspace storage could not be loaded. Try again.' }); }
     let identity, S, saved, currentLegacyApp;
     const refreshLiveReferences = async () => {
       identity = identityFor(); saved = await accountStore.accounts(); identity.hydrate(saved); identity.configureAuthority(authority);
@@ -419,6 +470,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const cmsPreview = key === 'wm' && ['GET', 'HEAD'].includes(req.method) && /^\/v2\/preview\/entries\/[\w-]+(?:$|\?)/.test(url);
     const anonymous = authPublic || publicFile || taskSample || publicCms || cmsPreview || /^\/v1\/public\//.test(url) || /^\/(__health|__mock\/status|__mock\/clock)(?:$|\?)/.test(url);
     let frame, runtime, commitAttempted = false;
+    const relatedRuntimes = new Map();
     const requestEpoch = persist.epoch;
     initializeWorkspaceAuthority(S, identity, { seedAt: new clock.RealDate(persist.seedAt).toISOString() });
     const platformBefore = platform().exportState(), accountsBefore = authStorage.snapshot(identity), runtimesBefore = registry.exportState(), staffBefore = exportStaffState();
@@ -433,7 +485,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         if (!require('../apps/wm').validatePreviewGrant?.(token)) throw failure(401, 'preview_expired', 'Open a new preview from Website Manager.');
       }
       if (/^\/(?:__mock\/|v[12]\/__mock\/)/.test(url) && req.method !== "GET" && (principal?.claims.mode !== 'staff' || !principal?.context.staffAccess?.permissions.admin?.includes("settings:full"))) throw failure(403, "mock_control_forbidden", "Only an authorized mock administrator can do this.");
-      const request = { frame, key, req, principal, runtime: null };
+      const request = { frame, key, req, principal, runtime: null, relatedRuntimes };
       const result = await authority.runPrepared(frame, () => requests.run(request, async () => {
         let app = key === "sos" || key === "admin" ? accountRoutes(currentLegacyApp, frame) : currentLegacyApp;
         if (taskSample) { app = express(); app.use(createTaskSampleRouter({ config })); }
@@ -448,6 +500,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
           if (!access || ["no_access", "not_subscribed"].includes(access.access)) throw failure(403, "tool_access_denied", "Ask your workspace owner for access.");
           if (req.method !== "GET" && req.method !== "HEAD" && (principal.readOnly || access.access === "read_only")) throw failure(423, "workspace_read_only", "This workspace tool is read-only.");
           runtime = registry.create(context.workspace.id, key); request.runtime = runtime; app = runtime.router;
+          if (['tasks', 'chats'].includes(key)) app = fileReferenceRoutes(app, frame, runtime);
           if (['tasks', 'chats'].includes(key)) app = availabilityRoutes(app, frame, key);
         }
         const capability = crypto.randomFillSync(Buffer.alloc(24)).toString("base64url");
@@ -468,6 +521,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       }
       assignInitialOwnerSeats(S);
       if (runtime) registry.commit(runtime);
+      for (const related of relatedRuntimes.values()) registry.commit(related);
       const after = platform().exportState(), workspaceState = registry.exportState(), staffState = exportStaffState();
       const changes = [...authStorage.snapshot(identity)].filter(([id, value]) => saved.get(id) !== value).map(([id, value]) => ({ id, value, expected: saved.get(id) ?? null }));
       const changed = JSON.stringify(after) !== JSON.stringify(platformBefore) || JSON.stringify(workspaceState) !== JSON.stringify(runtimesBefore) || JSON.stringify(staffState) !== JSON.stringify(staffBefore) || changes.length;
@@ -485,7 +539,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       identity.hydrate(accountsBefore, { replace: true }); platform().importState(platformBefore); registry.importState(runtimesBefore); importStaffState(staffBefore);
       if (commitAttempted) persist.rebuild = true;
       return sendJson(error.status || 503, { success: false, code: error.code || "workspace_unavailable", message: error.message });
-    } finally { if (frame) authority.discardPending(frame); runtime?.close(); }
+    } finally { if (frame) authority.discardPending(frame); runtime?.close(); for (const related of relatedRuntimes.values()) related.close(); }
   }
   return { authority, registry, initialize, handle, importState, exportStaffState, importStaffState, frameApp, currentPrincipal, contextService };
 }

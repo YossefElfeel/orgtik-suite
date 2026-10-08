@@ -407,6 +407,7 @@ export function CallStage({
             {panel === "chat" && chatChannelId && (
               <div className="shrink-0">
                 <Composer
+                  channelId={chatChannelId}
                   placeholder={t("call.chatPlaceholder", "Message the meeting")}
                   onSend={(text, attachments) => sendMessage(chatChannelId, text, undefined, attachments)}
                 />

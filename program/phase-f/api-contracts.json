@@ -413,6 +413,30 @@
     },
     {
       "app": "files",
+      "method": "GET",
+      "path": "/api/v1/files/samples",
+      "source": "lib/tool-adapters/files.js",
+      "authorization": {
+        "audience": "tool:files",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current Files grant; creation requires current write capability and writable parent before idempotent receipt recovery; packaged catalog only",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "files",
+      "method": "POST",
+      "path": "/api/v1/files/samples",
+      "source": "lib/tool-adapters/files.js",
+      "authorization": {
+        "audience": "tool:files",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current Files grant; creation requires current write capability and writable parent before idempotent receipt recovery; packaged catalog only",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "files",
       "method": "POST",
       "path": "/api/v1/files/upload",
       "source": "apps/files.js",
@@ -6480,6 +6504,30 @@
         "audience": "tool:tasks or tool:chats on its own API origin",
         "workspaceBinding": "signed selected workspace",
         "permission": "current consuming tool grant; final-approved active assigned coworkers only; guests receive an empty projection",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
+      "path": "/api/shared/files",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "tool:tasks or tool:chats on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current consuming tool and record/channel membership intersected with current Files grant and inherited file ACL; content also requires the stored pinned reference",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
+      "path": "/api/shared/files/:fileId/versions/:versionId/content",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "tool:tasks or tool:chats on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current consuming tool and record/channel membership intersected with current Files grant and inherited file ACL; content also requires the stored pinned reference",
         "writes": "read"
       }
     },
