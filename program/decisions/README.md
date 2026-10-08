@@ -89,6 +89,8 @@ Each decision gets a `D-###.md` file with its context, options, decision, conseq
 
 - [D-073](D-073.md): Accepted presentation scope — nine-tool UI/mock prototype, existing backend frozen, isolated demo data and lightweight evidence (2026-10-08).
 
+- [D-074](D-074.md): Authorized hosted stakeholder prototype rollout on existing projects, isolated presentation storage and scoped verification (2026-10-08).
+
 ## Proposed
 
 Each one has a full write-up: context, options with their trade-offs, the proposal, consequences, and the evidence still pending. They were drafted in session 5 for the G0 review.

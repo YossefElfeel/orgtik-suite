@@ -1,0 +1,349 @@
+{
+  "capturedAt": "2026-10-08T18:43:40.176Z",
+  "http": [
+    {
+      "key": "sos",
+      "locale": "en",
+      "url": "https://orgtik-suite-sos.vercel.app/presentation",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:43:44 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "x-vercel-id": "fra1::nrmcl-1791485024005-3ab01b52c255",
+        "location": "/auth/login?redirect=%2Fpresentation"
+      },
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "tasks",
+      "locale": "en",
+      "url": "https://orgtik-suite-tasks.vercel.app/en/presentation",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:43:44 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "x-vercel-id": "fra1::iad1::889bc-1791485024004-be4aaef356d5",
+        "x-vercel-cache": "MISS"
+      },
+      "bytes": 65368,
+      "reachable": true
+    },
+    {
+      "key": "files",
+      "locale": "en",
+      "url": "https://orgtik-suite-files.vercel.app/en/presentation",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:43:44 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "x-vercel-id": "fra1::iad1::xwxcn-1791485024686-29f235fc8d33",
+        "x-vercel-cache": "MISS"
+      },
+      "bytes": 55447,
+      "reachable": true
+    },
+    {
+      "key": "hr",
+      "locale": "en",
+      "url": "https://orgtik-suite-hr.vercel.app/en/presentation",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:43:44 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "x-vercel-id": "fra1::8gkjp-1791485024672-431bc6a2d39b",
+        "location": "https://orgtik-suite-sos.vercel.app/go/hr_system?redirect=%2Fpresentation"
+      },
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "sales",
+      "locale": "en",
+      "url": "https://orgtik-suite-sales.vercel.app/en/presentation",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:43:45 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "x-vercel-id": "fra1::t7m7x-1791485025267-a002fc4ec724",
+        "location": "https://orgtik-suite-sos.vercel.app/go/sales?redirect=%2Fen%2Fpresentation"
+      },
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "marketing",
+      "locale": "en",
+      "url": "https://orgtik-suite-marketing.vercel.app/en/presentation",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:43:45 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "x-vercel-id": "fra1::789bj-1791485025270-9827039a7001",
+        "location": "https://orgtik-suite-sos.vercel.app/go/digital_marketing?redirect=%2Fen%2Fpresentation"
+      },
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "chats",
+      "locale": "en",
+      "url": "https://orgtik-suite-chats.vercel.app/presentation",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:43:45 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "x-vercel-id": "fra1::iad1::fxcqg-1791485025658-0122eccc222e",
+        "x-vercel-cache": "MISS"
+      },
+      "bytes": 122556,
+      "reachable": true
+    },
+    {
+      "key": "wm",
+      "locale": "en",
+      "url": "https://orgtik-suite-wm.vercel.app/en/presentation",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:43:45 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "x-vercel-id": "fra1::iad1::425mv-1791485025659-afae3583b3cd",
+        "x-vercel-cache": "MISS"
+      },
+      "bytes": 71738,
+      "reachable": true
+    },
+    {
+      "key": "admin",
+      "locale": "en",
+      "url": "https://orgtik-suite-admin.vercel.app/en/presentation",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:43:46 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "x-vercel-id": "fra1::iad1::dz526-1791485026328-5feb2681f88d",
+        "x-vercel-cache": "MISS"
+      },
+      "bytes": 87903,
+      "reachable": true
+    },
+    {
+      "key": "website",
+      "locale": "en",
+      "url": "https://orgtik-suite-website.vercel.app/",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:43:46 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "x-vercel-id": "fra1::68qds-1791485026348-7a2137d3f1cf",
+        "x-vercel-cache": "HIT"
+      },
+      "bytes": 1819,
+      "reachable": true
+    }
+  ],
+  "bridge": [
+    {
+      "resource": "tasks",
+      "url": "https://orgtik-suite-mock.vercel.app/presentation/tasks?workspace=orgtik&persona=mona",
+      "status": 200,
+      "simulated": true,
+      "arrayResult": true,
+      "recordCount": 0,
+      "error": null
+    },
+    {
+      "resource": "files",
+      "url": "https://orgtik-suite-mock.vercel.app/presentation/files?workspace=orgtik&persona=mona",
+      "status": 200,
+      "simulated": true,
+      "arrayResult": true,
+      "recordCount": 3,
+      "error": null
+    },
+    {
+      "resource": "leads",
+      "url": "https://orgtik-suite-mock.vercel.app/presentation/leads?workspace=orgtik&persona=mona",
+      "status": 200,
+      "simulated": true,
+      "arrayResult": true,
+      "recordCount": 0,
+      "error": null
+    },
+    {
+      "resource": "notifications",
+      "url": "https://orgtik-suite-mock.vercel.app/presentation/notifications?workspace=orgtik&persona=mona",
+      "status": 200,
+      "simulated": true,
+      "arrayResult": true,
+      "recordCount": 0,
+      "error": null
+    },
+    {
+      "resource": "search",
+      "url": "https://orgtik-suite-mock.vercel.app/presentation/search?workspace=orgtik&persona=mona",
+      "status": 200,
+      "simulated": true,
+      "arrayResult": true,
+      "recordCount": 10,
+      "error": null
+    },
+    {
+      "resource": "campaigns",
+      "url": "https://orgtik-suite-mock.vercel.app/presentation/campaigns?workspace=orgtik&persona=mona",
+      "status": 200,
+      "simulated": true,
+      "arrayResult": true,
+      "recordCount": 0,
+      "error": null
+    },
+    {
+      "resource": "workspaces",
+      "url": "https://orgtik-suite-mock.vercel.app/presentation/workspaces?workspace=orgtik&persona=mona",
+      "status": 200,
+      "simulated": true,
+      "arrayResult": true,
+      "recordCount": 0,
+      "error": null
+    }
+  ],
+  "captures": [
+    "tasks-en-light-1440.png",
+    "tasks-en-dark-390.png",
+    "admin-en-dark-1440.png",
+    "admin-en-light-390.png",
+    "tasks-ar-light-1440.png",
+    "tasks-ar-dark-390.png",
+    "admin-ar-dark-1440.png",
+    "admin-ar-light-390.png"
+  ],
+  "browserChecks": [
+    {
+      "tool": "tasks",
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "headingVisible": true,
+      "actualTheme": "light",
+      "direction": "ltr",
+      "noDocumentOverflow": true,
+      "criticalAxe": 0
+    },
+    {
+      "tool": "tasks",
+      "locale": "en",
+      "theme": "dark",
+      "width": 390,
+      "headingVisible": true,
+      "actualTheme": "dark",
+      "direction": "ltr",
+      "noDocumentOverflow": true,
+      "criticalAxe": 0
+    },
+    {
+      "tool": "admin",
+      "locale": "en",
+      "theme": "dark",
+      "width": 1440,
+      "headingVisible": true,
+      "actualTheme": "dark",
+      "direction": "ltr",
+      "noDocumentOverflow": true,
+      "criticalAxe": 0
+    },
+    {
+      "tool": "admin",
+      "locale": "en",
+      "theme": "light",
+      "width": 390,
+      "headingVisible": true,
+      "actualTheme": "light",
+      "direction": "ltr",
+      "noDocumentOverflow": true,
+      "criticalAxe": 0
+    },
+    {
+      "tool": "tasks",
+      "locale": "ar",
+      "theme": "light",
+      "width": 1440,
+      "headingVisible": true,
+      "actualTheme": "light",
+      "direction": "rtl",
+      "noDocumentOverflow": true,
+      "criticalAxe": 0
+    },
+    {
+      "tool": "tasks",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 390,
+      "headingVisible": true,
+      "actualTheme": "dark",
+      "direction": "rtl",
+      "noDocumentOverflow": true,
+      "criticalAxe": 0
+    },
+    {
+      "tool": "admin",
+      "locale": "ar",
+      "theme": "dark",
+      "width": 1440,
+      "headingVisible": true,
+      "actualTheme": "dark",
+      "direction": "rtl",
+      "noDocumentOverflow": true,
+      "criticalAxe": 0
+    },
+    {
+      "tool": "admin",
+      "locale": "ar",
+      "theme": "light",
+      "width": 390,
+      "headingVisible": true,
+      "actualTheme": "light",
+      "direction": "rtl",
+      "noDocumentOverflow": true,
+      "criticalAxe": 0
+    }
+  ],
+  "blockedMethods": {},
+  "limitations": [
+    "Protected-route redirects prove HTTP availability, not authenticated UI acceptance.",
+    "Only representative Tasks/ADM screens are captured when --browser is supplied.",
+    "No business action, reset or clock-change endpoint is called."
+  ],
+  "clock": {
+    "before": {
+      "status": 200,
+      "mode": "real",
+      "now": "2026-10-08T18:43:43.765Z"
+    },
+    "after": {
+      "status": 200,
+      "mode": "real",
+      "now": "2026-10-08T18:44:20.249Z"
+    },
+    "realModePreserved": true
+  },
+  "completed": true,
+  "summary": {
+    "httpReachable": 10,
+    "httpTotal": 10,
+    "bridgePassed": 7,
+    "bridgeTotal": 7,
+    "browserPassed": 8,
+    "browserTotal": 8,
+    "captures": 8
+  }
+}

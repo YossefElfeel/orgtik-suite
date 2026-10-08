@@ -1,0 +1,35 @@
+{
+  "title": "Hosted presentation verification · 60490efd-a21e-4d97-b4a7-052f97e2e352",
+  "scope": "One clearly named presentation-only synthetic task; no account/invoice/CMS/clock mutation and no reset",
+  "frontendRevision": "489ac799",
+  "mockRevision": "6de999e",
+  "checks": [
+    {
+      "name": "Single presentation task creation succeeds",
+      "passed": true
+    },
+    {
+      "name": "Separate search request retrieves saved record",
+      "passed": true
+    },
+    {
+      "name": "Separate task-list request preserves one matching record",
+      "passed": true
+    },
+    {
+      "name": "Other presentation workspace does not contain this record",
+      "passed": true
+    },
+    {
+      "name": "Production clock retains real mode",
+      "passed": true
+    }
+  ],
+  "recordId": "bridge-task-468322b9-f031-44a2-8aab-e0e587553ccd",
+  "clock": {
+    "before": "real",
+    "after": "real"
+  },
+  "limit": "Independent HTTP requests verify persistence and workspace separation; a forced cold-start or redeploy test was not performed.",
+  "completed": true
+}

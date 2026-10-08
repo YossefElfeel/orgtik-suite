@@ -1,0 +1,542 @@
+{
+  "mode": "after",
+  "capturedAt": "2026-10-08T18:42:02.363Z",
+  "methodPolicy": "GET only; no login, deploy, reset, mutation, or clock advancement",
+  "excludedProjects": [
+    "content"
+  ],
+  "checks": [
+    {
+      "key": "admin",
+      "kind": "root",
+      "url": "https://orgtik-suite-admin.vercel.app/",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:04 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::zxjlj-1791484923796-bc91be8837d3",
+        "location": "/en"
+      },
+      "elapsedMs": 1204,
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "admin",
+      "kind": "auth",
+      "url": "https://orgtik-suite-admin.vercel.app/en/auth",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:05 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::iad1::h77vr-1791484923793-33358f0505fe",
+        "x-vercel-cache": "MISS",
+        "x-matched-path": "/[locale]/auth"
+      },
+      "elapsedMs": 1675,
+      "bytes": 84297,
+      "reachable": true
+    },
+    {
+      "key": "chats",
+      "kind": "root",
+      "url": "https://orgtik-suite-chats.vercel.app/",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:06 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::iad1::vzshc-1791484925434-afc005cccb2b",
+        "x-vercel-cache": "MISS",
+        "x-matched-path": "/"
+      },
+      "elapsedMs": 1445,
+      "bytes": 88465,
+      "reachable": true
+    },
+    {
+      "key": "chats",
+      "kind": "auth",
+      "url": "https://orgtik-suite-chats.vercel.app/en/auth",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:06 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::iad1::lwkgf-1791484925433-03399d9cbcc8",
+        "x-vercel-cache": "MISS",
+        "x-matched-path": "/[locale]/auth"
+      },
+      "elapsedMs": 1501,
+      "bytes": 88048,
+      "reachable": true
+    },
+    {
+      "key": "files",
+      "kind": "root",
+      "url": "https://orgtik-suite-files.vercel.app/",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:07 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::5r56d-1791484926929-c99052bd1278",
+        "location": "/en"
+      },
+      "elapsedMs": 1190,
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "files",
+      "kind": "auth",
+      "url": "https://orgtik-suite-files.vercel.app/en/auth",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:08 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::iad1::cl5xn-1791484926930-067289817bb5",
+        "x-vercel-cache": "MISS",
+        "x-matched-path": "/[locale]/auth"
+      },
+      "elapsedMs": 2289,
+      "bytes": 43382,
+      "reachable": true
+    },
+    {
+      "key": "hr",
+      "kind": "root",
+      "url": "https://orgtik-suite-hr.vercel.app/",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:09 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::c7mcz-1791484929223-56cabe12cd3c",
+        "location": "https://orgtik-suite-sos.vercel.app/go/hr_system"
+      },
+      "elapsedMs": 933,
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "hr",
+      "kind": "auth",
+      "url": "https://orgtik-suite-hr.vercel.app/en/auth",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:10 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::iad1::dx6rd-1791484929219-4bc5ba91444f",
+        "x-vercel-cache": "MISS",
+        "x-matched-path": "/[locale]/auth"
+      },
+      "elapsedMs": 2222,
+      "bytes": 109292,
+      "reachable": true
+    },
+    {
+      "key": "marketing",
+      "kind": "root",
+      "url": "https://orgtik-suite-marketing.vercel.app/",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:12 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::c5k29-1791484931446-5efc06497a21",
+        "location": "https://orgtik-suite-sos.vercel.app/go/digital_marketing?redirect=%2F"
+      },
+      "elapsedMs": 1005,
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "marketing",
+      "kind": "auth",
+      "url": "https://orgtik-suite-marketing.vercel.app/en/auth",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:13 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::iad1::5ltdf-1791484931447-3c1f4f12506a",
+        "x-vercel-cache": "MISS",
+        "x-matched-path": "/[locale]/auth"
+      },
+      "elapsedMs": 2150,
+      "bytes": 104272,
+      "reachable": true
+    },
+    {
+      "key": "sales",
+      "kind": "root",
+      "url": "https://orgtik-suite-sales.vercel.app/",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:14 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::lq24h-1791484933611-13e9858d7134",
+        "location": "https://orgtik-suite-sos.vercel.app/go/sales?redirect=%2F"
+      },
+      "elapsedMs": 1042,
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "sales",
+      "kind": "auth",
+      "url": "https://orgtik-suite-sales.vercel.app/en/auth",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:15 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::iad1::cl5xn-1791484933600-e55692590791",
+        "x-vercel-cache": "MISS",
+        "x-matched-path": "/[locale]/auth"
+      },
+      "elapsedMs": 2381,
+      "bytes": 135816,
+      "reachable": true
+    },
+    {
+      "key": "sos",
+      "kind": "root",
+      "url": "https://orgtik-suite-sos.vercel.app/",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:16 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::vb7w5-1791484935979-d834c5ab3eb3",
+        "location": "/auth/login"
+      },
+      "elapsedMs": 1183,
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "sos",
+      "kind": "auth",
+      "url": "https://orgtik-suite-sos.vercel.app/auth",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:17 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::iad1::qmh6z-1791484935982-7a4e9cb3b50c",
+        "x-vercel-cache": "MISS",
+        "x-matched-path": "/auth"
+      },
+      "elapsedMs": 2337,
+      "bytes": 115414,
+      "reachable": true
+    },
+    {
+      "key": "tasks",
+      "kind": "root",
+      "url": "https://orgtik-suite-tasks.vercel.app/",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:19 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::bw75n-1791484938321-1023970464d1",
+        "location": "/en"
+      },
+      "elapsedMs": 1224,
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "tasks",
+      "kind": "auth",
+      "url": "https://orgtik-suite-tasks.vercel.app/en/auth",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:20 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::iad1::h79x8-1791484938335-06020654d540",
+        "x-vercel-cache": "MISS",
+        "x-matched-path": "/[locale]/auth"
+      },
+      "elapsedMs": 2319,
+      "bytes": 62238,
+      "reachable": true
+    },
+    {
+      "key": "website",
+      "kind": "root",
+      "url": "https://orgtik-suite-website.vercel.app/",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:20 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::bpsdv-1791484940629-dc3a17cd0470",
+        "x-vercel-cache": "MISS"
+      },
+      "elapsedMs": 582,
+      "bytes": 1819,
+      "reachable": true
+    },
+    {
+      "key": "wm",
+      "kind": "root",
+      "url": "https://orgtik-suite-wm.vercel.app/",
+      "status": 307,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:21 GMT",
+        "content-type": "text/plain",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::nd2hx-1791484940651-a27f96b65f8a",
+        "location": "/en"
+      },
+      "elapsedMs": 1165,
+      "bytes": 15,
+      "reachable": true
+    },
+    {
+      "key": "wm",
+      "kind": "auth",
+      "url": "https://orgtik-suite-wm.vercel.app/en/auth",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:22 GMT",
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::iad1::gn8x5-1791484941753-222879fd38ba",
+        "x-vercel-cache": "MISS",
+        "x-matched-path": "/[locale]/auth"
+      },
+      "elapsedMs": 1536,
+      "bytes": 68138,
+      "reachable": true
+    },
+    {
+      "key": "mock",
+      "kind": "clock",
+      "url": "https://orgtik-suite-mock.vercel.app/sos/__mock/status",
+      "status": 200,
+      "headers": {
+        "date": "Thu, 08 Oct 2026 18:42:22 GMT",
+        "content-type": "application/json; charset=utf-8",
+        "cache-control": "public, max-age=0, must-revalidate",
+        "server": "Vercel",
+        "x-vercel-id": "fra1::fra1::mwx2g-1791484941808-b2e2898e7fe9",
+        "x-vercel-cache": "MISS"
+      },
+      "elapsedMs": 600,
+      "bytes": 1871,
+      "reachable": true,
+      "clock": {
+        "mode": "real",
+        "now": "2026-10-08T18:42:22.130Z"
+      }
+    }
+  ],
+  "summary": {
+    "requests": 20,
+    "reachable": 20,
+    "errors": []
+  },
+  "comparison": [
+    {
+      "key": "admin",
+      "kind": "root",
+      "before": 307,
+      "after": 307,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "admin",
+      "kind": "auth",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "chats",
+      "kind": "root",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "chats",
+      "kind": "auth",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "files",
+      "kind": "root",
+      "before": 307,
+      "after": 307,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "files",
+      "kind": "auth",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "hr",
+      "kind": "root",
+      "before": 307,
+      "after": 307,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "hr",
+      "kind": "auth",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "marketing",
+      "kind": "root",
+      "before": 307,
+      "after": 307,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "marketing",
+      "kind": "auth",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "sales",
+      "kind": "root",
+      "before": 307,
+      "after": 307,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "sales",
+      "kind": "auth",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "sos",
+      "kind": "root",
+      "before": 307,
+      "after": 307,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "sos",
+      "kind": "auth",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "tasks",
+      "kind": "root",
+      "before": 307,
+      "after": 307,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "tasks",
+      "kind": "auth",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "website",
+      "kind": "root",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "wm",
+      "kind": "root",
+      "before": 307,
+      "after": 307,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "wm",
+      "kind": "auth",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    },
+    {
+      "key": "mock",
+      "kind": "clock",
+      "before": 200,
+      "after": 200,
+      "wasReachable": true,
+      "isReachable": true
+    }
+  ],
+  "clockComparison": {
+    "before": {
+      "mode": "real",
+      "now": "2026-10-08T17:14:57.386Z"
+    },
+    "after": {
+      "mode": "real",
+      "now": "2026-10-08T18:42:22.130Z"
+    },
+    "frozenInstantPreserved": null
+  }
+}
