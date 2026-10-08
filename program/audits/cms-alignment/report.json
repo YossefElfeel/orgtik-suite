@@ -1,0 +1,309 @@
+{
+  "realm": "cms-alignment-local",
+  "dataReset": false,
+  "clockMutation": false,
+  "websiteMutation": false,
+  "checks": [
+    {
+      "name": "Isolated frozen demo",
+      "passed": true
+    },
+    {
+      "name": "en introduction localized",
+      "passed": true
+    },
+    {
+      "name": "en profile tab localized",
+      "passed": true
+    },
+    {
+      "name": "en controls localized",
+      "passed": true
+    },
+    {
+      "name": "partners-intro-en-1440-light fits viewport",
+      "passed": true
+    },
+    {
+      "name": "partners-intro-en-1440-light catalog complete",
+      "passed": true
+    },
+    {
+      "name": "Actual draft saved",
+      "passed": true
+    },
+    {
+      "name": "partners-saved-draft-en fits viewport",
+      "passed": true
+    },
+    {
+      "name": "partners-saved-draft-en catalog complete",
+      "passed": true
+    },
+    {
+      "name": "en profile fields localized",
+      "passed": true
+    },
+    {
+      "name": "en raw profile labels absent",
+      "passed": true
+    },
+    {
+      "name": "partners-profiles-en-1440-light fits viewport",
+      "passed": true
+    },
+    {
+      "name": "partners-profiles-en-1440-light catalog complete",
+      "passed": true
+    },
+    {
+      "name": "en page name pg_plans",
+      "passed": true
+    },
+    {
+      "name": "en page name pg_cart",
+      "passed": true
+    },
+    {
+      "name": "en page name pg_checkout",
+      "passed": true
+    },
+    {
+      "name": "en page name pg_partners",
+      "passed": true
+    },
+    {
+      "name": "pages-en-1440-light fits viewport",
+      "passed": true
+    },
+    {
+      "name": "pages-en-1440-light catalog complete",
+      "passed": true
+    },
+    {
+      "name": "en actual software rows loaded",
+      "passed": true
+    },
+    {
+      "name": "en old module prices hidden",
+      "passed": true
+    },
+    {
+      "name": "software-en-1440-light fits viewport",
+      "passed": true
+    },
+    {
+      "name": "software-en-1440-light catalog complete",
+      "passed": true
+    },
+    {
+      "name": "en historical reference labeled",
+      "passed": true
+    },
+    {
+      "name": "pricing-reference-en-1440-light fits viewport",
+      "passed": true
+    },
+    {
+      "name": "pricing-reference-en-1440-light catalog complete",
+      "passed": true
+    },
+    {
+      "name": "en offer messages localized",
+      "passed": true
+    },
+    {
+      "name": "offer-messages-en-1440-light fits viewport",
+      "passed": true
+    },
+    {
+      "name": "offer-messages-en-1440-light catalog complete",
+      "passed": true
+    },
+    {
+      "name": "ar introduction localized",
+      "passed": true
+    },
+    {
+      "name": "ar profile tab localized",
+      "passed": true
+    },
+    {
+      "name": "ar controls localized",
+      "passed": true
+    },
+    {
+      "name": "partners-intro-ar-390-dark fits viewport",
+      "passed": true
+    },
+    {
+      "name": "partners-intro-ar-390-dark catalog complete",
+      "passed": true
+    },
+    {
+      "name": "ar profile fields localized",
+      "passed": true
+    },
+    {
+      "name": "ar raw profile labels absent",
+      "passed": true
+    },
+    {
+      "name": "partners-profiles-ar-390-dark fits viewport",
+      "passed": true
+    },
+    {
+      "name": "partners-profiles-ar-390-dark catalog complete",
+      "passed": true
+    },
+    {
+      "name": "ar page name pg_plans",
+      "passed": true
+    },
+    {
+      "name": "ar page name pg_cart",
+      "passed": true
+    },
+    {
+      "name": "ar page name pg_checkout",
+      "passed": true
+    },
+    {
+      "name": "ar page name pg_partners",
+      "passed": true
+    },
+    {
+      "name": "pages-ar-390-dark fits viewport",
+      "passed": true
+    },
+    {
+      "name": "pages-ar-390-dark catalog complete",
+      "passed": true
+    },
+    {
+      "name": "ar actual software rows loaded",
+      "passed": true
+    },
+    {
+      "name": "ar old module prices hidden",
+      "passed": true
+    },
+    {
+      "name": "software-ar-390-dark fits viewport",
+      "passed": true
+    },
+    {
+      "name": "software-ar-390-dark catalog complete",
+      "passed": true
+    },
+    {
+      "name": "ar historical reference labeled",
+      "passed": true
+    },
+    {
+      "name": "pricing-reference-ar-390-dark fits viewport",
+      "passed": true
+    },
+    {
+      "name": "pricing-reference-ar-390-dark catalog complete",
+      "passed": true
+    },
+    {
+      "name": "ar offer messages localized",
+      "passed": true
+    },
+    {
+      "name": "offer-messages-ar-390-dark fits viewport",
+      "passed": true
+    },
+    {
+      "name": "offer-messages-ar-390-dark catalog complete",
+      "passed": true
+    },
+    {
+      "name": "Draft did not change published website",
+      "passed": true
+    },
+    {
+      "name": "Clock unchanged",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/wm/lib/cmsLabels.ts",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/wm/lib/contentTypes.ts",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/wm/components/content/PricingAuthority.tsx",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/wm/components/content/EntryEditor.tsx",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/wm/components/content/EntryList.tsx",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/wm/messages/en.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/wm/messages/ar.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/wm/messages/de.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/wm/messages/fr.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/wm/messages/it.json",
+      "passed": true
+    }
+  ],
+  "captures": [
+    "partners-intro-en-1440-light.png",
+    "partners-saved-draft-en.png",
+    "partners-profiles-en-1440-light.png",
+    "pages-en-1440-light.png",
+    "software-en-1440-light.png",
+    "pricing-reference-en-1440-light.png",
+    "offer-messages-en-1440-light.png",
+    "partners-intro-ar-390-dark.png",
+    "partners-profiles-ar-390-dark.png",
+    "pages-ar-390-dark.png",
+    "software-ar-390-dark.png",
+    "pricing-reference-ar-390-dark.png",
+    "offer-messages-ar-390-dark.png"
+  ],
+  "source": {
+    "apps/wm/lib/cmsLabels.ts": "0870e045fd82579e5622436a55de1fb1808e46b401e5217d71ed6e4c43e13db2",
+    "apps/wm/lib/contentTypes.ts": "0aaed0565276bd1b625fcbc57cb19cb6ffb86b3c8a50d3bfde5f9b688392173a",
+    "apps/wm/components/content/PricingAuthority.tsx": "f3fdc5072b5942d5e204c592c5a1e0ec36ede8f2cc5b85fb3b0b4943566463b4",
+    "apps/wm/components/content/EntryEditor.tsx": "f8c66ce22f692f5370d54660ce0f5d98fda478f11e870b7dbcd1b202e23633f0",
+    "apps/wm/components/content/EntryList.tsx": "244d411a6e1aadf03756f8788f2d562143fab3f3e59dcfdbfe7aff88c9986c43",
+    "apps/wm/messages/en.json": "2294e43950b03361bc69ce4508b05403e3ec7d8286713a19ba469accf64d15e8",
+    "apps/wm/messages/ar.json": "0a7baf44f40164c55cb054f8fa1f9b4d133a3e72b5f250d2c420f5cad33f2b15",
+    "apps/wm/messages/de.json": "2fb31ea4cb8d1041959385212caf87d2e13a829f5f9c4b5877ea6bd80656d936",
+    "apps/wm/messages/fr.json": "1f510c55ad5d4095d547d54ad11cbc8ae5a278b0197b04a592682a8fd747a506",
+    "apps/wm/messages/it.json": "94d8fbd3dc886120ac45cdb9715ea4c45d8a5e04dd1988ca35c278caaa320e88"
+  },
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "completed": true,
+  "passed": 66
+}

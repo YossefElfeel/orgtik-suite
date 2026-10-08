@@ -50,6 +50,7 @@ import {
   VersionRow,
 } from "@/components/content/EditorExtras";
 import { SeoPanel, type SeoBlock } from "@/components/content/SeoPanel";
+import { PricingAuthority } from "@/components/content/PricingAuthority";
 import {
   LifecycleActions,
   VisibilityBadge,
@@ -70,7 +71,6 @@ import {
   useIndexingQuery,
   useMediaQuery,
   useMeQuery,
-  usePricingQuery,
   useSaveEntryMutation,
   useTransitionEntryMutation,
   type ApiError,
@@ -147,9 +147,6 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
     { type: "serviceFamily", pageSize: 100 },
     { skip: !needsFamilies },
   );
-  const pricing = usePricingQuery(undefined, {
-    skip: type.key !== "softwareModule",
-  });
 
   const ref = { type: entry.type, id: entry.id };
   const saved = entry.content.locales[lang] as Tree | undefined;
@@ -161,8 +158,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
     [edits, seoEdits, neutralEdit, altEdits].some(
       (o) => Object.keys(o).length > 0,
     ) || slugEdit !== null;
-  // Purchasing data (families, services, software products, prices) is kept in the website's own
-  // catalogs, which the cart and checkout read too: mirrored here, read-only.
+  // Retained catalog mirrors are read-only. Current prices are owned by the platform.
   const managedIn = entry.content.managedIn ?? null;
   const editable = can("content:edit") && !managedIn;
   // The SEO team edits an entry's SEO block (and only that); a draft changing nothing else goes
@@ -382,8 +378,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
   // More sections than fit in a row (a page has up to a dozen) go in a column beside the form.
   const side = tabItems.length > 6;
   const seo = { ...(entry.content.seo[lang] ?? {}), ...(seoEdits[lang] ?? {}) };
-  const price = pricing.data?.modules[entry.content.slug.en ?? ""];
-  const hasShared = type.neutral.length > 0 || type.image || Boolean(price);
+  const hasShared = type.neutral.length > 0 || type.image;
   const lockShared = !editable || lang !== "en";
 
   // What every language shares (icon, date, family...) and the image with its description in this
@@ -482,7 +477,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
         ) : null}
         {managedIn ? (
           <p role="note" className="text-body-sm text-fg-muted sm:col-span-2">
-            {t("managedIn", { file: managedIn })}
+            {type.key === "pricing" ? t("historicalPricingBody") : t("catalogReferenceBody")}
           </p>
         ) : type.key === "pricing" ? (
           <p className="self-end text-body-sm text-fg-muted sm:col-span-2">
@@ -603,13 +598,6 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
               }
             />
           </Field>
-        ) : null}
-        {price ? (
-          <p className="self-end text-body-sm text-fg-muted sm:col-span-2">
-            {t("priceNote", {
-              price: f.money(price.monthly, pricing.data?.currency ?? "CHF"),
-            })}
-          </p>
         ) : null}
       </div>
       {entry.legalVersions ? (
@@ -794,6 +782,8 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
           </>
         }
       />
+
+      {type.key === "pricing" || type.key === "softwareModule" ? <PricingAuthority historical={type.key === "pricing"} /> : null}
 
       {mine && state === "in_review" ? (
         <p className="rounded-field bg-info-subtle px-3 py-2 text-body-sm text-info">

@@ -1,6 +1,6 @@
 # A17 — persistent structured whiteboards
 
-2026-10-08 · reviewed local source on merged PR18; package CI and hosted acceptance pending.
+2026-10-08 · PR19 source `327e895` passed CI37732109610/pause37732109529 and merged main `1d8c5df`. Scoped local/code acceptance passes; hosted roadmap acceptance remains open.
 
 This package extends the Files reference foundation with a persistent Excalidraw editor and immutable Files drawing versions. Explicit save/reopen replaces the transient canvas. A board index and its Files version advance atomically, while earlier task/message references remain pinned. Scope, source association, role, read-only and current File permissions apply to editor routes and native Files paths; global ownership or staff roles cannot widen a private conversation.
 

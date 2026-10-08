@@ -1,0 +1,11 @@
+{
+  "completed": true,
+  "actualPrivateDraftPreview": true,
+  "publishedWebsiteUnchanged": true,
+  "capture": "partners-live-draft-preview-en.png",
+  "checks": [
+    "Existing preview frame loads",
+    "Actual saved draft badge rendered",
+    "Current Partners website renders"
+  ]
+}

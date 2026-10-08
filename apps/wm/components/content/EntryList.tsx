@@ -15,6 +15,7 @@ import {
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { LanguageDots } from "@/components/content/LanguageDots";
 import { NewEntry } from "@/components/content/NewEntry";
+import { PricingAuthority } from "@/components/content/PricingAuthority";
 import { useCan } from "@/lib/permissions";
 import { Link } from "@/i18n/routing";
 import { DEPARTMENTS } from "@/lib/caseStudySchema";
@@ -24,7 +25,6 @@ import { mediaUrl } from "@/lib/env";
 import {
   statusOf,
   useEntriesQuery,
-  usePricingQuery,
   type EntrySummary,
   type EntryType,
 } from "@/store/api";
@@ -72,9 +72,6 @@ export function EntryList({ type: key }: { type: EntryType }) {
     { type: "service", pageSize: 100 },
     { skip: key !== "serviceFamily" },
   );
-  const pricing = usePricingQuery(undefined, {
-    skip: key !== "softwareModule",
-  });
   const familyList =
     key === "serviceFamily" ? data?.items : families.data?.items;
   const familyById = useMemo(
@@ -279,15 +276,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
       cols.push({
         id: "price",
         header: t("colPrice"),
-        meta: { numeric: true },
-        cell: ({ row }) => {
-          const p = pricing.data?.modules[row.original.slug.en ?? ""];
-          return (
-            <span className="text-fg-muted tabular-nums">
-              {p ? f.money(p.monthly, pricing.data?.currency ?? "CHF") : null}
-            </span>
-          );
-        },
+        cell: () => <Badge tone="neutral" size="sm">{t("platformPricingSource")}</Badge>,
       });
     cols.push(
       {
@@ -338,7 +327,6 @@ export function EntryList({ type: key }: { type: EntryType }) {
     familyById,
     familyBySlug,
     services.data,
-    pricing.data,
   ]);
 
   const filterOptions =
@@ -365,6 +353,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
       : "ready";
   return (
     <div className="flex flex-col gap-4">
+      {key === "pricing" || key === "softwareModule" ? <PricingAuthority historical={key === "pricing"} /> : null}
       <div className="flex flex-wrap items-center gap-3">
         <Input
           size="sm"
