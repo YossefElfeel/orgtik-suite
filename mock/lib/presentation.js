@@ -27,4 +27,3 @@ if(req.method==='POST'&&url.pathname==='/leads'){const lead={id:'bridge-lead-'+c
 if(req.method==='POST'&&url.pathname==='/reset'){data=seed(workspace);spaces.set(workspace,data);return send(res,200,{reset:'presentation-only',workspace})}return send(res,404,{message:'Presentation route not found.'});}catch(error){return reply(res,400,{message:error.message||'Presentation request failed.'})}};
 }
 module.exports={createPresentationHandler};
-
