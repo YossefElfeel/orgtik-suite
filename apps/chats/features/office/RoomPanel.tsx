@@ -154,7 +154,7 @@ export function RoomPanel({ roomId, onClose }: { roomId: string; onClose: () => 
       </div>
 
       <div className="shrink-0">
-        <Composer placeholder={t("room.chatPlaceholder", "Message {name}", { name: room.name })} draftKey={`room:${roomId}`} onSend={(text, attachments) => sendMessage(channelId, text, undefined, attachments)} />
+        <Composer channelId={channelId} placeholder={t("room.chatPlaceholder", "Message {name}", { name: room.name })} draftKey={`room:${roomId}`} onSend={(text, attachments) => sendMessage(channelId, text, undefined, attachments)} />
         <div className="flex items-center justify-between gap-2 px-4 pb-3">
           {can.manageFloor ? (
             <Button size="sm" onClick={() => updateRoom(roomId, { locked: !room.locked })} aria-pressed={room.locked}>

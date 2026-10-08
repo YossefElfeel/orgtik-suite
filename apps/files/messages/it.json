@@ -260,7 +260,7 @@
     "noMatchTitle": "Nessun file corrisponde a questi filtri",
     "noMatchBody": "Prova un’altra ricerca o cancella i filtri per vedere tutti i file.",
     "clearFilters": "Cancella filtri",
-    "emptyBody": "Carica i file qui o trascinali in un punto qualsiasi della pagina.",
+    "emptyBody": "Aggiungi un esempio fornito per iniziare. Il caricamento dal dispositivo è rinviato.",
     "preview": "Anteprima di {name}",
     "previousImage": "Immagine precedente",
     "nextImage": "Immagine successiva",
@@ -616,5 +616,26 @@
     "offline": "Impossibile raggiungere il server. Controlla la connessione e riprova.",
     "invalid": "Alcuni dati non sono validi. Controllali e riprova.",
     "failed": "Non ha funzionato. Riprova."
+  },
+  "SampleFiles": {
+    "add": "Aggiungi file di esempio",
+    "title": "Aggiungi un esempio fornito",
+    "body": "Scegli un file fornito per creare un record permanente in questo spazio.",
+    "choose": "Scegli un file di esempio",
+    "empty": "Nessun esempio fornito disponibile",
+    "noAccess": "I file non sono disponibili",
+    "noAccessBody": "Le autorizzazioni attuali dello spazio non consentono questa azione.",
+    "readOnly": "File è in sola lettura. Puoi consultare i record esistenti ma non aggiungere un esempio.",
+    "uncertain": "Il salvataggio non è confermato. Recupera lo stesso tentativo prima di altre modifiche.",
+    "originalWorkspace": "Torna allo spazio e all’account originali per recuperare questo tentativo.",
+    "saveError": "L’esempio non è stato aggiunto. Controlla l’accesso alla cartella e riprova.",
+    "uploadsDeferred": "Il caricamento dal dispositivo è rinviato in questo prototipo ospitato.",
+    "close": "Chiudi",
+    "recover": "Recupera salvataggio",
+    "create": "Aggiungi esempio",
+    "recordTitle": "Record del file",
+    "back": "Torna a File",
+    "unavailable": "File non disponibile",
+    "unavailableBody": "Il file è stato rimosso oppure le autorizzazioni attuali non consentono più l’accesso."
   }
 }

@@ -14,8 +14,9 @@ import { applyAccent, readAccent, type AccentId } from "@/lib/appearance";
 import { queryIdleSupport, requestIdlePermission, type IdleSupport } from "@/lib/idle";
 import { inSuite, signOutOfSuite, type SuiteSession } from "@/lib/suite-session";
 import { roleForSuiteSession } from "@/lib/roles";
-import { persistEvent, reloadWorkspace, type SyncState, type BootstrapData } from "./platform";
+import { persistEvent, reloadWorkspace, currentWorkspaceNamespace, recoverableMessage, currentMessageScope, eventUnconfirmed, type SyncState, type BootstrapData } from "./platform";
 
+const pendingMessages = new Map<string, Message>();
 import type {
   Channel,
   Floor,
@@ -128,7 +129,7 @@ export interface WorkspaceState {
 
   /* actions, named for the endpoints that will replace them */
   /** A message with its files (CHT-001: they were dropped); a message may be files alone. */
-  sendMessage: (channelId: Id, text: string, threadId?: Id, attachments?: FileRef[]) => void;
+  sendMessage: (channelId: Id, text: string, threadId?: Id, attachments?: FileRef[]) => Promise<boolean>;
   editMessage: (messageId: Id, text: string) => void;
   deleteMessage: (messageId: Id) => void;
   toggleReaction: (messageId: Id, emoji: string) => void;
@@ -425,7 +426,9 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
   /* Channels, messages and read state are staged by the workspace API. */
   sendMessage: (channelId, text, threadId, attachments = []) => {
     const s = get();
-    const message: Message = {
+    const scope = currentMessageScope();
+    const pendingKey = scope + ":" + channelId + ":" + (threadId || "");
+    const message: Message = pendingMessages.get(pendingKey) || recoverableMessage(channelId, threadId) || {
       id: nextId("m"),
       channelId,
       authorId: s.me,
@@ -438,7 +441,11 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
       pinned: false,
       ...(threadId ? { threadId } : {}),
     };
-    s.applyEvent({ type: "message.created", message });
+    pendingMessages.set(pendingKey, message);
+    return persistEvent({ type: "message.created", message }).then(saved => {
+      if (saved || !eventUnconfirmed({ type: "message.created", message }, scope)) pendingMessages.delete(pendingKey);
+      return saved;
+    });
   },
 
   editMessage: (messageId, text) =>

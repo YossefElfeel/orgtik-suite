@@ -14,6 +14,7 @@
  */
 
 import { useMemo, useState } from "react";
+import { useFormatter } from "@orgtik/ui";
 import { useRouter } from "next/navigation";
 import { Hash, Lock, MagnifyingGlass, PushPin, SignOut, FileText, Check } from "@phosphor-icons/react";
 import { Avatar } from "@/components/ui/Avatar";
@@ -322,6 +323,7 @@ export function ChannelDetailsPane({
   const router = useRouter();
   const t = useT();
   const [newName, setNewName] = useState(channel?.name ?? "");
+  const format = useFormatter();
   const [confirmArchive, setConfirmArchive] = useState(false);
 
   const [tab, setTab] = useState<Tab>("about");
@@ -330,6 +332,7 @@ export function ChannelDetailsPane({
   const [confirmLeave, setConfirmLeave] = useState(false);
   const [topic, setTopic] = useState(channel?.topic ?? "");
   const [preview, setPreview] = useState<import("@/entities").FileRef | null>(null);
+  const [previewMessageId, setPreviewMessageId] = useState("");
 
   if (!channel) return null;
 
@@ -584,11 +587,11 @@ export function ChannelDetailsPane({
             />
           ) : (
             <ul className="flex flex-col gap-1.5">
-              {files.map(({ file }) => (
-                <li key={file.id}>
+              {files.map(({ file, message }) => (
+                <li key={message.id + ":" + file.id}>
                   <button
                     type="button"
-                    onClick={() => setPreview(file)}
+                    onClick={() => { setPreview(file); setPreviewMessageId(message.id); }}
                     className="hq-row flex w-full items-center gap-2.5 px-3 py-2.5 text-start"
                     style={{
                       border: "1px solid var(--color-hairline)",
@@ -598,10 +601,10 @@ export function ChannelDetailsPane({
                   >
                     <FileText size={15} aria-hidden="true" style={{ color: "var(--color-ink-muted)" }} />
                     <span className="min-w-0 flex-1 truncate text-[12.5px]" style={{ color: "var(--color-ink)" }}>
-                      <bdi>{file.name}</bdi>
+                      <bdi>{file.state === "unavailable" ? t("fileReferences.unavailable", "File unavailable") : file.name}</bdi>
                     </span>
                     <span className="tabular shrink-0 text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
-                      {file.size}
+                      {file.state === "unavailable" ? "" : typeof file.bytes === "number" ? format.bytes(file.bytes) : file.size}
                     </span>
                   </button>
                 </li>
@@ -651,6 +654,7 @@ export function ChannelDetailsPane({
       </div>
 
       <FilePreview
+        messageId={previewMessageId}
         file={preview}
         open={Boolean(preview)}
         onClose={() => setPreview(null)}

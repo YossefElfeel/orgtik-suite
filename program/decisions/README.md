@@ -83,6 +83,8 @@ Each decision gets a `D-###.md` file with its context, options, decision, conseq
 
 - [D-068](D-068.md): One authoritative workspace/session boundary, private app stores, guest caps and workspace-specific offboarding revocation (2026-10-07).
 - [D-069](D-069.md): Explicit persistent renewal, recovery and seat commands extend the shared pricing model (2026-10-07).
+- [D-070](D-070.md): Trusted due transitions observe the existing clock before caller authorization; staff revocation survives rehire and stale sessions (2026-10-08).
+- [D-071](D-071.md): Pinned Files references require current consumer and Files permissions; packaged records are created explicitly and idempotently (2026-10-08, implementation acceptance pending).
 
 ## Proposed
 

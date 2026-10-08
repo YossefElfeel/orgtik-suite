@@ -75,7 +75,8 @@ for (const dir of DIRS) {
 const en = Object.fromEntries([...found.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => [k, v.text]));
 const enFile = path.join(ROOT, "messages", "en.json");
 const before = fs.existsSync(enFile) ? fs.readFileSync(enFile, "utf8") : "";
-const after = JSON.stringify(en, null, 2) + "\n";
+const eol = before.includes("\r\n") ? "\r\n" : "\n";
+const after = (JSON.stringify(en, null, 2) + "\n").replace(/\n/g, eol);
 let drift = conflicts.length > 0;
 if (before !== after) {
   if (check) {

@@ -10,6 +10,7 @@
  */
 
 import { memo, useEffect, useRef, useState } from "react";
+import { useFormatter } from "@orgtik/ui";
 import {
   DotsThree,
   PushPin,
@@ -57,6 +58,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
   const can = useCan();
   const editWindow = useWorkspace((s) => s.settings.editWindowMinutes);
   const t = useT();
+  const format = useFormatter();
   const [showPicker, setShowPicker] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [editing, setEditing] = useState(false);
@@ -277,10 +279,10 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                   >
                     <FileText size={15} aria-hidden="true" style={{ color: "var(--color-ink-muted)" }} />
                     <span className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
-                      <bdi>{f.name}</bdi>
+                      <bdi>{f.state === "unavailable" ? t("fileReferences.unavailable", "File unavailable") : f.name}</bdi>
                     </span>
                     <span className="tabular text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
-                      {f.size}
+                      {f.state === "unavailable" ? "" : typeof f.bytes === "number" ? format.bytes(f.bytes) : f.size}
                     </span>
                     {/* Attachments live in the File Manager. HQ owns no second
                         store, which is why this says where the file actually is. */}
@@ -481,6 +483,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
       </div>
 
       <FilePreview
+        messageId={message.id}
         file={preview}
         open={Boolean(preview)}
         onClose={() => setPreview(null)}

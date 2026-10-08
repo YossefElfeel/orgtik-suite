@@ -32,11 +32,9 @@ export const commentsApi = baseApi.injectEndpoints({
     // Create a new comment on a task
     addComment: builder.mutation<
       SuccessResponse<ICreateCommentResponse>,
-      FormData
+      { taskId: number; content: string; parentCommentId?: number }
     >({
-      query: (body) => {
-        const taskId = body.get("id");
-        body.delete("id"); // The API doesn't receive it
+      query: ({ taskId, ...body }) => {
         return {
           url: `/tasks/${taskId}/comments`,
           method: "POST",

@@ -15,6 +15,7 @@ function createWorkspaceRuntime(input, tool) {
   const snapshot = input.snapshot;
   if (snapshot && (snapshot.schema !== schema || snapshot.version !== 1 || snapshot.realm !== realm || snapshot.workspaceId !== input.workspace.id || snapshot.appKey !== 'tasks')) fail("Tasks snapshot belongs to a different runtime.");
   const state = snapshot && stateCodec.decode(snapshot.data, snapshot.sequences);
+  if (state?.attachments.some(attachment => attachment.reference && attachment.reference.workspaceId !== input.workspace.id)) fail('Tasks file reference belongs to another workspace.');
   const router = express.Router();
   created = true;
   const hooks = tool.routes(router, { ...ctx, identity: input.identity, commands: input.services.commands }, { empty: input.initialization.kind === 'empty', state, fixtureId: snapshot ? undefined : fixtureId, seedAt: input.initialization.seedAt });
@@ -27,7 +28,7 @@ function createWorkspaceRuntime(input, tool) {
       if (!user || user.isActive === false || context.realm !== realm || context.workspace?.id !== input.workspace.id || !access || ['no_access', 'not_subscribed'].includes(access.access) || !access.roles?.length || !input.identity.userScopes(user).some(scope => scope.scope === 'task_manager' && scope.roles.length)) throw Object.assign(new Error("Tasks bootstrap is not authorized."), { status: 403 });
       return hooks.bootstrap(user);
     },
-    usage: hooks.usage, transferOwnership: hooks.transferOwnership, close: hooks.close,
+    usage: hooks.usage, authorizeSharedTarget: hooks.authorizeSharedTarget, transferOwnership: hooks.transferOwnership, close: hooks.close,
   };
 }
 

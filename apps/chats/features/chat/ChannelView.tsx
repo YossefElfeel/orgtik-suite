@@ -187,6 +187,7 @@ export function ChannelView({ channelId }: { channelId: string }) {
         </div>
 
         <Composer
+          channelId={channelId}
           draftKey={channelId}
           placeholder={
             isDm

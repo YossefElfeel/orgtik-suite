@@ -1,4 +1,5 @@
 const { buildSeed } = require("./seed");
+const fileReferences = require('../../lib/workspace-file-references');
 
 const TABLES = ["teams", "bookmarks", "projects", "sections", "tasks", "subtasks", "attachments", "comments", "activities", "notifications", "conversations", "messages"];
 const COUNTERS = { teams: "team", bookmarks: "bookmark", projects: "project", sections: "section", tasks: "task", subtasks: "subtask", attachments: "attachment", comments: "comment", activities: "activity", notifications: "notification", conversations: "conversation", messages: "message" };
@@ -24,6 +25,11 @@ function decode(data, sequences) {
   const assignmentMaximum = assignments.reduce((max, row) => Math.max(max, Number(row.id) || 0), 0);
   if (assignmentMaximum && !(sequences.assignment > assignmentMaximum)) invalid("Tasks assignment counter would reuse an ID.");
   const db = buildSeed({ empty: true });
+  for (const attachment of data.attachments) if (attachment.reference) {
+    try { fileReferences.reference(attachment.reference, attachment.reference.workspaceId); }
+    catch { invalid('Tasks file reference is invalid.'); }
+    if (!data.tasks.some(task => task.id === attachment.taskId) || Object.keys(attachment).some(key => !['id', 'taskId', 'reference', 'uploadedById', 'createdAt'].includes(key))) invalid('Tasks file reference has an invalid target or unchecked metadata.');
+  }
   for (const key of TABLES) db[key] = clone(data[key]);
   db.myOrder = clone(data.myOrder);
   db.seq = clone(sequences);

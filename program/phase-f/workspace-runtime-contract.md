@@ -1,6 +1,6 @@
 # R1 workspace runtime and session contract
 
-2026-10-07 · **Implemented source contract; package CI, browser evidence and R1 hosted acceptance remain pending.** See [A12 and the evidence report](README.md). R0 ancestry and hosted release gates still apply. Hosted mock only; existing Redis/identity resources, sample bytes and `@orgtik/ui` remain.
+2026-10-08 · **Foundation source merged with CI and scoped local SOS evidence through PR14; subsequent people, leave and due packages merged through PR15–17. Full R1 integrated/hosted acceptance remains open.** See [A12 and the evidence report](README.md). R0 ancestry and hosted release gates still apply. Hosted mock only; existing Redis/identity resources, sample bytes and `@orgtik/ui` remain.
 
 ## 1. Source facts and the chosen boundary
 

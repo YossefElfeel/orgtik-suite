@@ -290,7 +290,7 @@
     "noMatchTitle": "Keine Dateien entsprechen diesen Filtern",
     "noMatchBody": "Versuchen Sie eine andere Suche oder setzen Sie die Filter zurück.",
     "clearFilters": "Filter zurücksetzen",
-    "emptyBody": "Laden Sie hier Dateien hoch oder ziehen Sie sie an eine beliebige Stelle der Seite.",
+    "emptyBody": "Füge ein bereitgestelltes Beispiel hinzu. Geräte-Uploads sind zurückgestellt.",
     "preview": "Vorschau von {name}",
     "previousImage": "Vorheriges Bild",
     "nextImage": "Nächstes Bild",
@@ -616,5 +616,26 @@
     "offline": "Der Server ist nicht erreichbar. Prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
     "invalid": "Einige Angaben sind ungültig. Prüfen Sie sie und versuchen Sie es erneut.",
     "failed": "Das hat nicht funktioniert. Versuchen Sie es erneut."
+  },
+  "SampleFiles": {
+    "add": "Beispieldatei hinzufügen",
+    "title": "Bereitgestelltes Beispiel hinzufügen",
+    "body": "Wähle eine bereitgestellte Datei, um einen dauerhaften Dateieintrag in diesem Arbeitsbereich zu erstellen.",
+    "choose": "Beispieldatei auswählen",
+    "empty": "Keine bereitgestellten Beispiele verfügbar",
+    "noAccess": "Dateien sind nicht verfügbar",
+    "noAccessBody": "Deine aktuellen Arbeitsbereichsberechtigungen erlauben diese Aktion nicht.",
+    "readOnly": "Dateien ist schreibgeschützt. Du kannst bestehende Einträge ansehen, aber kein Beispiel hinzufügen.",
+    "uncertain": "Der Speicherstatus ist unbestätigt. Stelle denselben Versuch wieder her, bevor du etwas änderst.",
+    "originalWorkspace": "Kehre zum ursprünglichen Arbeitsbereich und Konto zurück, um diesen Versuch wiederherzustellen.",
+    "saveError": "Das Beispiel wurde nicht hinzugefügt. Prüfe den Ordnerzugriff und versuche es erneut.",
+    "uploadsDeferred": "Geräte-Uploads sind in diesem gehosteten Prototyp zurückgestellt.",
+    "close": "Schließen",
+    "recover": "Speicherung wiederherstellen",
+    "create": "Beispiel hinzufügen",
+    "recordTitle": "Dateieintrag",
+    "back": "Zurück zu Dateien",
+    "unavailable": "Datei nicht verfügbar",
+    "unavailableBody": "Die Datei wurde entfernt oder deine aktuellen Berechtigungen erlauben keinen Zugriff mehr."
   }
 }

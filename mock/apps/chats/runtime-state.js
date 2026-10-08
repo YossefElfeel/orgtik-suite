@@ -1,4 +1,5 @@
 const fixture = require('./fixture.json');
+const fileReferences = require('../../lib/workspace-file-references');
 const TABLES = ['channels', 'messages', 'presence', 'meetings', 'pastMeetings', 'notifications', 'whiteboards', 'historicalUsers'];
 const FIELDS = [...TABLES, 'floor', 'settings', 'insight', 'myTime', 'readState', 'channelPreferences', 'processedCommands', 'custodyOperations', 'fixtureOwnerId'];
 const clone = value => JSON.parse(JSON.stringify(value));
@@ -47,6 +48,12 @@ function validate(data, sequences) {
   for (const message of data.messages) {
     if (!id(message.id) || messages.has(message.id) || !channels.has(message.channelId) || !id(message.authorId) || !Number.isSafeInteger(message.sequence) || message.sequence < 1 || message.sequence > sequences.messages || messageSequences.has(message.sequence) || typeof message.text !== 'string' || !Number.isFinite(Date.parse(message.createdAt)) || !Array.isArray(message.replyUserIds) || !Array.isArray(message.reactions) || !Array.isArray(message.attachments)) invalid('Chats message is invalid.');
     messageSequences.add(message.sequence);
+    for (const attachment of message.attachments) if (attachment.reference) {
+      try { fileReferences.reference(attachment.reference, attachment.reference.workspaceId); }
+      catch { invalid('Chats file reference is invalid.'); }
+      if (Object.keys(attachment).join() !== 'reference') invalid('Chats file reference stores unchecked metadata.');
+    }
+    if (message.fileOperation && (!id(message.fileOperation.id) || !/^[a-f0-9]{64}$/.test(message.fileOperation.fingerprint) || Object.keys(message.fileOperation).sort().join() !== 'fingerprint,id')) invalid('Chats file action receipt is invalid.');
     messages.set(message.id, message);
   }
   for (const message of data.messages) if (message.threadId && (!messages.has(message.threadId) || messages.get(message.threadId).channelId !== message.channelId || messages.get(message.threadId).threadId)) invalid('Chats thread crosses a channel.');

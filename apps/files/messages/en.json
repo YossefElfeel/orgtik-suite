@@ -290,7 +290,7 @@
     "noMatchTitle": "No files match these filters",
     "noMatchBody": "Try another search, or clear the filters to see every file.",
     "clearFilters": "Clear filters",
-    "emptyBody": "Upload files here, or drag them anywhere on the page.",
+    "emptyBody": "Add a packaged sample to begin. Device uploads are deferred.",
     "preview": "Preview {name}",
     "previousImage": "Previous image",
     "nextImage": "Next image",
@@ -616,5 +616,26 @@
     "offline": "Can't reach the server. Check your connection and try again.",
     "invalid": "Some details aren't valid. Check them and try again.",
     "failed": "That didn't work. Try again."
+  },
+  "SampleFiles": {
+    "add": "Add sample file",
+    "title": "Add a packaged sample",
+    "body": "Choose a packaged asset to create a persistent Files record in this workspace.",
+    "choose": "Choose a sample file",
+    "empty": "No packaged samples available",
+    "noAccess": "Files are unavailable",
+    "noAccessBody": "Your current workspace permissions do not allow this action.",
+    "readOnly": "Files is read-only. You can view existing records but cannot add a sample.",
+    "uncertain": "Saving is unconfirmed. Recover the same attempt before making another change.",
+    "originalWorkspace": "Return to the original workspace and account to recover this attempt.",
+    "saveError": "The sample was not added. Check your folder access and try again.",
+    "uploadsDeferred": "Device uploads are deferred in this hosted prototype.",
+    "close": "Close",
+    "recover": "Recover save",
+    "create": "Add sample",
+    "recordTitle": "File record",
+    "back": "Back to Files",
+    "unavailable": "File unavailable",
+    "unavailableBody": "The file was removed or your current permissions no longer allow access."
   }
 }

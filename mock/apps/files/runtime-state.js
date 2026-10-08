@@ -1,18 +1,21 @@
 const lib = require("./lib");
 const MAPS = ["folders", "files", "pins", "shares", "sessions", "failures", "previewPages"];
+const OPTIONAL_MAPS = ['sampleOperations'];
 const clone = value => JSON.parse(JSON.stringify(value));
+const validId = value => typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9._:-]{0,199}$/.test(value) && !['constructor', 'prototype'].includes(value);
 const invalid = message => { throw Object.assign(new Error(message), { status: 503, code: "invalid_tool_snapshot" }); };
-const empty = () => ({ ...Object.fromEntries(MAPS.map(key => [key, new Map()])), activities: [] });
+const empty = () => ({ ...Object.fromEntries([...MAPS, ...OPTIONAL_MAPS].map(key => [key, new Map()])), activities: [] });
 
 function encode(state) {
-  if (Object.keys(state).some(key => ![...MAPS, "activities"].includes(key))) invalid("Files codec does not cover every store field.");
+  if (Object.keys(state).some(key => ![...MAPS, ...OPTIONAL_MAPS, "activities"].includes(key))) invalid("Files codec does not cover every store field.");
   const data = { activities: clone(state.activities) };
   for (const key of MAPS) data[key] = [...state[key]].map(([id, value]) => [id, key === "pins" ? [...value] : clone(value)]);
+  for (const key of OPTIONAL_MAPS) if (state[key]?.size) data[key] = [...state[key]].map(([id, value]) => [id, clone(value)]);
   return data;
 }
 
 function decode(data, manifest) {
-  if (!data || Object.keys(data).some(key => ![...MAPS, "activities"].includes(key)) || !Array.isArray(data.activities)) invalid("Files snapshot has incomplete state.");
+  if (!data || Object.keys(data).some(key => ![...MAPS, ...OPTIONAL_MAPS, "activities"].includes(key)) || !Array.isArray(data.activities)) invalid("Files snapshot has incomplete state.");
   const state = empty();
   for (const key of MAPS) {
     if (!Array.isArray(data[key])) invalid(`Files snapshot ${key} is missing.`);
@@ -37,6 +40,18 @@ function decode(data, manifest) {
   for (const [id, row] of state.files) {
     if (row.id !== id || row.folderId != null && !state.folders.has(row.folderId)) invalid("Files snapshot has an invalid file reference.");
     if (row.storage?.kind !== "asset" || !Object.hasOwn(manifest, row.storage.key)) invalid("Files snapshots support packaged sample assets only.");
+    if (row.versions !== undefined) {
+      if (!Array.isArray(row.versions) || !row.versions.length || row.versions.some(version => !version || !validId(version.id) || !Number.isSafeInteger(version.number) || version.number < 1 || !Number.isFinite(version.size) || version.size < 0 || typeof version.createdAt !== 'string' || !Number.isFinite(Date.parse(version.createdAt)) || version.storage?.kind !== 'asset' || !Object.hasOwn(manifest, version.storage.key)) || new Set(row.versions.map(version => version.id)).size !== row.versions.length) invalid('Files version metadata is invalid.');
+    }
+    if (row.currentVersionId !== undefined && (!validId(row.currentVersionId) || !row.versions?.some(version => version.id === row.currentVersionId))) invalid('The current Files version is unavailable.');
+  }
+  for (const key of OPTIONAL_MAPS) {
+    if (data[key] === undefined) continue;
+    if (!Array.isArray(data[key])) invalid('Files sample receipts are invalid.');
+    for (const pair of data[key]) {
+      if (!Array.isArray(pair) || pair.length !== 2 || typeof pair[0] !== 'string' || !/^[1-9]\d*:[\w.:-]{1,200}$/.test(pair[0]) || ['__proto__', 'constructor', 'prototype'].includes(pair[0].slice(pair[0].indexOf(':') + 1)) || state[key].has(pair[0]) || !pair[1] || Object.keys(pair[1]).sort().join(',') !== 'fileId,fingerprint,versionId' || !/^[a-f0-9]{64}$/.test(pair[1].fingerprint) || !validId(pair[1].fileId) || pair[1].versionId !== 'v1') invalid('Files sample receipt is invalid.');
+      state[key].set(pair[0], clone(pair[1]));
+    }
   }
   for (const [id, row] of state.shares) if (row.id !== id || !["file", "folder"].includes(row.resourceType) || !(row.resourceType === "file" ? state.files : state.folders).has(row.resourceId)) invalid("Files snapshot has an invalid share reference.");
   state.activities = clone(data.activities);
@@ -57,4 +72,4 @@ function nileFixture(identity, manifest, at) {
   return state;
 }
 
-module.exports = { MAPS, empty, encode, decode, nileFixture };
+module.exports = { MAPS, OPTIONAL_MAPS, empty, encode, decode, nileFixture };

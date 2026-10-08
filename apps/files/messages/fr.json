@@ -290,7 +290,7 @@
     "noMatchTitle": "Aucun fichier ne correspond à ces filtres",
     "noMatchBody": "Essayez une autre recherche ou effacez les filtres pour voir tous les fichiers.",
     "clearFilters": "Effacer les filtres",
-    "emptyBody": "Importez des fichiers ici ou déposez-les n’importe où sur la page.",
+    "emptyBody": "Ajoutez un exemple fourni pour commencer. L’envoi depuis l’appareil est différé.",
     "preview": "Aperçu de {name}",
     "previousImage": "Image précédente",
     "nextImage": "Image suivante",
@@ -616,5 +616,26 @@
     "offline": "Impossible de joindre le serveur. Vérifiez votre connexion et réessayez.",
     "invalid": "Certaines informations ne sont pas valides. Vérifiez-les et réessayez.",
     "failed": "Cela n’a pas fonctionné. Réessayez."
+  },
+  "SampleFiles": {
+    "add": "Ajouter un fichier exemple",
+    "title": "Ajouter un exemple fourni",
+    "body": "Choisissez un fichier fourni pour créer un enregistrement durable dans cet espace.",
+    "choose": "Choisir un fichier exemple",
+    "empty": "Aucun exemple fourni disponible",
+    "noAccess": "Les fichiers sont indisponibles",
+    "noAccessBody": "Vos autorisations actuelles dans cet espace ne permettent pas cette action.",
+    "readOnly": "Fichiers est en lecture seule. Vous pouvez consulter les fichiers existants, mais pas ajouter d’exemple.",
+    "uncertain": "L’enregistrement n’est pas confirmé. Récupérez la même tentative avant une autre modification.",
+    "originalWorkspace": "Revenez à l’espace et au compte d’origine pour récupérer cette tentative.",
+    "saveError": "L’exemple n’a pas été ajouté. Vérifiez votre accès au dossier puis réessayez.",
+    "uploadsDeferred": "L’envoi de fichiers depuis l’appareil est différé dans ce prototype hébergé.",
+    "close": "Fermer",
+    "recover": "Récupérer l’enregistrement",
+    "create": "Ajouter l’exemple",
+    "recordTitle": "Fiche du fichier",
+    "back": "Retour à Fichiers",
+    "unavailable": "Fichier indisponible",
+    "unavailableBody": "Le fichier a été supprimé ou vos autorisations actuelles ne permettent plus d’y accéder."
   }
 }
