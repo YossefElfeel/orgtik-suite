@@ -1,0 +1,18 @@
+{
+  "completed": true,
+  "scope": "Local English/light/1440 Sales prototype acceptance; assertions from actual browser runs",
+  "checks": [
+    "Custom Decision review stage is saved with numeric default probability 65",
+    "Moving Decision review earlier changes the persisted stage order",
+    "Moving Atlas Studio into Decision review applies probability 65",
+    "Invalid default mapping for reordered CSV columns is blocked",
+    "Arbitrary reordered headers map to fields and Review Company appears in the review",
+    "One contact imports with source routing owner Omar Farouk",
+    "Completed result hides the import action so the batch cannot repeat",
+    "Another import of the same email is refused"
+  ],
+  "count": 8,
+  "passed_assertion_sessions": [51840, 66881, 58298],
+  "limitations": ["No hosted acceptance", "No new eight-capture matrix for this second Sales package; five catalogs checked statically", "Won/lost locking and custom-stage removal confirmation reviewed in source"],
+  "checks_outside_browser": ["Sales TypeScript noEmit passed", "Five catalog keys/placeholders passed", "Scoped git diff whitespace check passed"]
+}
