@@ -96,7 +96,7 @@ jobs:
           TURBO_SCM_BASE: ${{ github.event.before || inputs.base_revision || 'origin/main^' }}
           TURBO_SCM_HEAD: HEAD
         run: |
-          pnpm turbo run typecheck i18n:check test --affected --continue
+          pnpm turbo run typecheck i18n:check test --affected --continue --concurrency=2
           node tools/vercel/configure.mjs --check
           node program/phase-e/openapi.mjs --check
           node tools/ci/secret-scan.mjs

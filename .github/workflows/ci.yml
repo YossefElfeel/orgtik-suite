@@ -51,7 +51,7 @@ jobs:
         run: node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/verify-preview-revisions.test.mjs tools/vercel/workspace-runtime.test.mjs
 
       - name: Typecheck, message catalogs and tests (affected packages)
-        run: pnpm turbo run typecheck i18n:check test --affected --continue
+        run: pnpm turbo run typecheck i18n:check test --affected --continue --concurrency=2
         env:
           TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || inputs.base_revision || 'origin/main' }}
 
