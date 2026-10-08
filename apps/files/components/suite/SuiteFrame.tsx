@@ -39,6 +39,7 @@ function Greeting() {
 export function SuiteFrame({ children }: { children: ReactNode }) {
   const t = useTranslations("Sidebar");
   const ts = useTranslations("Suite");
+  const tp = useTranslations("FilesPresentation");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -60,6 +61,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
         { label: t("myFiles"), href: href("/my-files"), icon: <FolderSimple />, active: at("/my-files") },
         { label: t("archived"), href: href("/archived-files"), icon: <Archive />, active: at("/archived-files") },
         { label: t("activity"), href: href("/activity-logs"), icon: <ClockCounterClockwise />, active: at("/activity-logs") },
+        ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ label: tp("presentationNav"), href: href("/presentation"), icon: <FolderSimple />, active: at("/presentation") }] : []),
       ],
     },
   ];

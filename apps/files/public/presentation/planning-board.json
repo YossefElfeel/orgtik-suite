@@ -1,0 +1,1 @@
+{"schemaVersion":1,"sample":true,"title":"Planning board","shapes":[{"type":"rectangle","x":40,"y":40,"width":220,"height":120},{"type":"text","x":60,"y":80,"text":"Launch review"}]}
