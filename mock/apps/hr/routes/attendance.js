@@ -113,8 +113,12 @@ module.exports = function attendanceRoutes(app, h) {
   };
   const typeLabel = (x) => L.labelize(x);
 
-  app.post("/api/attendance/time-offs/requests", h.anyFiles, (req, res) => {
+  app.post("/api/attendance/time-offs/requests", h.anyFiles, async (req, res) => {
     const b = h.body(req);
+    if (h.identity.workspaceMode) {
+      try { return send(res, await h.command(req, 'hr.leave.create', b), 'Time off request submitted successfully', 201); }
+      catch (error) { return res.status(error.status || 503).json({ success: false, code: error.code || 'workspace_command_required', message: error.message }); }
+    }
     const targetId = Number(b.employeeUserId || b.employeeId || 0);
     let target = h.me(req);
     if (targetId && targetId !== req.user.id) {
@@ -201,13 +205,18 @@ module.exports = function attendanceRoutes(app, h) {
     const t = db.timeOffs.find(req.params.id);
     if (!t) return err(res, 404, "Time off request not found");
     if (!visibleRequest(req, t)) return err(res, 403, "You don't have access to this request.");
-    send(res, V.timeOffDetail(t), "Time off request fetched");
+    send(res, h.leave ? h.leave.detail(t, req.user.id) : V.timeOffDetail(t), "Time off request fetched");
   });
 
   app.patch("/api/attendance/time-offs/requests/:id/decision", async (req, res) => {
     const t = db.timeOffs.find(req.params.id);
     if (!t) return err(res, 404, "Time off request not found");
     const { status, decisionNote } = h.body(req);
+    if (h.identity.workspaceMode) {
+      if (Object.keys(h.body(req)).some(key => !['status', 'decisionNote'].includes(key))) return res.status(422).json({ success: false, code: 'invalid_leave_payload', message: 'Only the leave decision and note can be supplied.' });
+      try { return send(res, await h.command(req, "hr.leave.approve", { ...h.body(req), requestId: t.id }), "Leave decision recorded"); }
+      catch (error) { return res.status(error.status || 503).json({ success: false, code: error.code || "workspace_command_required", message: error.message }); }
+    }
     if (!["approved", "rejected", "pending"].includes(status)) return err(res, 400, "Status must be approved, rejected or pending.");
     if (t.status === "cancelled") return err(res, 400, "This request was cancelled by the employee.");
     const now = L.nowIso();
@@ -219,10 +228,6 @@ module.exports = function attendanceRoutes(app, h) {
       if (!me || !(e.managerId === me.id || V.teamIds(me.id).has(e.id))) return err(res, 403, "You can only decide on requests from your team.");
       role = "manager";
     } else return err(res, 403, "Only managers and HR can decide on time-off requests.");
-    if (h.identity.workspaceMode) {
-      try { return send(res, await h.command(req, "hr.leave.approve", { requestId: t.id, status, decisionNote: decisionNote || null, decidedAs: role }), "Leave decision command staged"); }
-      catch (error) { return res.status(error.status || 503).json({ success: false, code: error.code || "workspace_command_required", message: error.message }); }
-    }
     const before = t.status;
     if (role === "hr") Object.assign(t, { hrActionStatus: status, hrDecisionNote: decisionNote || null, hrDecidedByUserId: status === "pending" ? null : req.user.id, hrDecidedAt: status === "pending" ? null : now });
     else Object.assign(t, { managerActionStatus: status, managerDecisionNote: decisionNote || null, managerDecidedByUserId: status === "pending" ? null : req.user.id, managerDecidedAt: status === "pending" ? null : now });
@@ -239,10 +244,15 @@ module.exports = function attendanceRoutes(app, h) {
     send(res, V.timeOffDetail(t), status === "pending" ? "Decision reset to pending" : `Time off request ${status}`);
   });
 
-  app.patch("/api/attendance/time-offs/requests/:id/cancel", (req, res) => {
+  app.patch("/api/attendance/time-offs/requests/:id/cancel", async (req, res) => {
     const t = db.timeOffs.find(req.params.id);
     if (!t) return err(res, 404, "Time off request not found");
     if (t.employeeId !== req.user.id && !V.has(req.user, "hr")) return err(res, 403, "You can only cancel your own requests.");
+    if (h.identity.workspaceMode) {
+      if (Object.keys(h.body(req)).length) return res.status(422).json({ success: false, code: 'invalid_leave_payload', message: 'Cancellation does not accept additional details.' });
+      try { return send(res, await h.command(req, 'hr.leave.cancel', { ...h.body(req), requestId: t.id }), 'Time off request cancelled'); }
+      catch (error) { return res.status(error.status || 503).json({ success: false, code: error.code || 'workspace_command_required', message: error.message }); }
+    }
     if (t.status !== "pending") return err(res, 400, "Only pending requests can be cancelled.");
     t.status = "cancelled";
     t.updatedAt = L.nowIso();

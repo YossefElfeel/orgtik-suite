@@ -848,7 +848,14 @@
       "reject": "Rifiuta",
       "submitDecision": "Invia decisione",
       "cancel": "Annulla",
-      "changeDecision": "Modifica decisione"
+      "changeDecision": "Modifica decisione",
+      "close": "Chiudi",
+      "recover": "Recupera l’esito originale",
+      "sendRequest": "Invia richiesta",
+      "retry": "Riprova",
+      "cancelRequest": "Annulla questa richiesta",
+      "confirmCancel": "Conferma annullamento",
+      "keepRequest": "Mantieni richiesta"
     },
     "decision": {
       "label": "Decisione: {status}",
@@ -860,13 +867,31 @@
         "pending": "In attesa"
       },
       "choose": "Scegli prima Approva o Rifiuta.",
-      "tooLong": "La nota non deve superare i 500 caratteri."
+      "tooLong": "La nota non deve superare i 500 caratteri.",
+      "notRequired": "Non richiesto"
     },
     "durations": {
       "full_day": "Giornata intera",
       "half_day": "Mezza giornata",
       "partial": "Parte della giornata",
       "custom_hours": "Ore personalizzate"
+    },
+    "loading": "Caricamento dei dettagli…",
+    "working": "Salvataggio dell’azione originale…",
+    "unconfirmed": "L’esito non è confermato. L’azione originale è conservata e le modifiche sono bloccate. Recupera l’esito prima di un altro cambiamento.",
+    "timezone": "Date e orari usano {timeZone}.",
+    "cancelledSaved": "Richiesta annullata.",
+    "decisionSaved": "Decisione registrata. Lo stato generale sopra riflette il processo di approvazione.",
+    "cancelReview": "Annullare questa richiesta in sospeso? Uscirà dalla coda di approvazione. Il suo record sarà conservato.",
+    "errors": {
+      "uncertain": "L’esito non è confermato. Recupera l’azione originale per verificarlo in sicurezza.",
+      "workspace": "Torna allo spazio e all’account originali per recuperare questa azione.",
+      "forbidden": "Il tuo accesso attuale non consente questa azione.",
+      "readOnly": "Lo spazio o la sessione è in sola lettura. Richieste e decisioni non possono essere modificate.",
+      "gone": "Il record richiesto non è più disponibile.",
+      "conflict": "La richiesta è cambiata. Aggiorna e verifica prima di modificarla.",
+      "invalid": "Verifica dipendente, date, orari e decisione, poi riprova.",
+      "failed": "L’azione non è stata completata. Verifica i dettagli e riprova."
     }
   },
   "ticketStatusCard": {
@@ -1602,8 +1627,18 @@
       "typeRequired": "Il tipo di congedo è obbligatorio",
       "startDateRequired": "La data di inizio è obbligatoria",
       "endDateRequired": "La data di fine è obbligatoria",
-      "customHoursRequired": "Per le ore personalizzate sono obbligatorie l'ora di inizio e di fine"
-    }
+      "customHoursRequired": "Per le ore personalizzate sono obbligatorie l'ora di inizio e di fine",
+      "dateOrder": "Scegli una data di fine uguale o successiva all’inizio.",
+      "timeOrder": "Scegli un’ora di fine dopo l’inizio nello stesso giorno.",
+      "employee": "Scegli un dipendente valido.",
+      "note": "La nota può contenere al massimo 2.000 caratteri."
+    },
+    "startPlaceholder": "Scegli il primo giorno",
+    "endPlaceholder": "Scegli l’ultimo giorno",
+    "saved": "Richiesta {code} salvata.",
+    "reviewHint": "Le assenze approvate appaiono nei calendari dello spazio. Ogni revisione e lo stato generale sono mostrati separatamente.",
+    "timezone": "Date e orari usano il fuso dello spazio: {timeZone}.",
+    "packagedOnly": "Il caricamento di file non è disponibile in questo prototipo. Gli allegati di esempio esistenti restano disponibili nelle richieste salvate."
   },
   "attendanceCard": {
     "title": "Presenze",
@@ -2059,7 +2094,18 @@
       "type": "Tipo di assenza",
       "duration": "Durata",
       "days": "{count, plural, one {# giorno} other {# giorni}}",
-      "hours": "{count, plural, one {# ora} other {# ore}}"
+      "hours": "{count, plural, one {# ora} other {# ore}}",
+      "errors": {
+        "uncertain": "L’esito non è confermato. Recupera l’azione originale per verificarlo in sicurezza.",
+        "workspace": "Torna allo spazio e all’account originali per recuperare questa azione.",
+        "forbidden": "Il tuo accesso attuale non consente questa azione.",
+        "readOnly": "Lo spazio o la sessione è in sola lettura. Richieste e decisioni non possono essere modificate.",
+        "gone": "Il record richiesto non è più disponibile.",
+        "conflict": "La richiesta è cambiata. Aggiorna e verifica prima di modificarla.",
+        "invalid": "Verifica dipendente, date, orari e decisione, poi riprova.",
+        "failed": "L’azione non è stata completata. Verifica i dettagli e riprova."
+      },
+      "retry": "Riprova"
     },
     "meeting": {
       "date": "Data",

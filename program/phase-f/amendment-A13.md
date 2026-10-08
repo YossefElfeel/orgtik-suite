@@ -1,6 +1,8 @@
 # A13 — remaining R1 people journeys
 
-2026-10-08 · reviewed working source and local acceptance evidence; PR CI and hosted release acceptance remain open.
+2026-10-08 · source merged after PR CI; hosted release acceptance remains open.
+
+[PR15](https://github.com/YossefElfeel/orgtik-suite/pull/15), source `2ab930e`, merged as main `4dbb6db` after [CI37699827826](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37699827826) and [deployment-pause configuration37699827759](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37699827759) passed. The library visual job correctly skipped because this package did not change the shared library.
 
 The foundation [PR14](https://github.com/YossefElfeel/orgtik-suite/pull/14) merged as main e74134f after [successful Linux and Windows CI](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37691408296). Vercel remains disabled and production data/clock remain untouched.
 

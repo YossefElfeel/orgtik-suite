@@ -1,32 +1,24 @@
-import { IEmployee } from "./employee";
+import type { ReactNode } from 'react';
 
 export type TimeOffStatus = "pending" | "approved" | "rejected" | "cancelled";
 // Types for Time Off Request
+export type TimeOffStage = 'hr' | 'manager';
+export type TimeOffStageStatus = 'pending' | 'approved' | 'rejected';
+export type TimeOffDuration = 'full_day' | 'half_day' | 'partial';
+export type TimeOffType = TimeOffRequest['timeOffType'];
 export interface CreateTimeOffRequest {
-  timeOffType: string; // e.g., 'sick', 'annual'
-  durationType: string; // e.g., 'full_day', 'half_day', 'partial'
-  startDate: string; // ISO date string
-  endDate: string; // ISO date string
-  halfDayPeriod?: string; // Optional: 'morning' or 'afternoon'
-  partialStartTime?: string; // Optional: 'HH:mm'
-  partialEndTime?: string; // Optional: 'HH:mm'
-  employeeNote?: string; // Optional note
-  employeeUserId?: number; // HR only: Target employee ID
-  files?: File[];
-  // Array of files for multipart
+  timeOffType: TimeOffType;
+  durationType: TimeOffDuration;
+  /** Civil dates in the workspace timezone; never converted through the viewer's UTC offset. */
+  startDate: string; endDate: string;
+  employeeId?: number;
+  halfDayPeriod?: 'morning' | 'afternoon';
+  partialStartTime?: string; partialEndTime?: string;
+  employeeNote?: string;
 }
 
 // Typical API Response (adjust based on your actual backend response)
-export interface TimeOffResponse {
-  id: number;
-  status: {
-    hrAction: TimeOffStatus;
-    managerAction: TimeOffStatus;
-    overall: TimeOffStatus;
-  };
-  createdAt: string;
-  // ... any other fields returned by your API
-}
+export type TimeOffResponse = TimeOffRequestDetail;
 
 // ---------------------------------------
 export interface TimeOffAttachment {
@@ -55,8 +47,8 @@ export interface TimeOffRequest {
   | "unpaid_leave"
   | "other";
   status: TimeOffStatus;
-  hrActionStatus: string;
-  managerActionStatus: string;
+  hrActionStatus: TimeOffStageStatus;
+  managerActionStatus: TimeOffStageStatus;
   durationType: "full_day" | "half_day" | "partial";
   halfDayPeriod?: "morning" | "afternoon" | null;
   startDate: string;
@@ -65,7 +57,7 @@ export interface TimeOffRequest {
   partialStartTime?: string | null;
   partialEndTime?: string | null;
   employeeNote: string;
-  decisionNote: any;
+  decisionNote: { reason: string } | null;
   attachments: TimeOffAttachment[];
   createdAt: string;
   updatedAt: string;
@@ -152,15 +144,15 @@ export interface TimeOffRequestDetail {
   employeeDepartment: string;
   timeOffType: string;
   status: TimeOffStatus;
-  hrActionStatus: string;
-  managerActionStatus: string;
-  durationType: "full_day" | "half_day" | "partial_day";
+  hrActionStatus: TimeOffStageStatus;
+  managerActionStatus: TimeOffStageStatus;
+  durationType: TimeOffDuration;
   halfDayPeriod: "morning" | "afternoon" | null;
   startDate: string;
   endDate: string;
   totalDurationMinutes: number;
-  partialStartTime: string;
-  partialEndTime: string;
+  partialStartTime: string | null;
+  partialEndTime: string | null;
   employeeNote: string;
   decisionNote: {
     reason: string;
@@ -171,9 +163,9 @@ export interface TimeOffRequestDetail {
   decidedByUserId: number | null;
   hrDecidedByUserId: number | null;
   managerDecidedByUserId: number | null;
-  decidedAt: any;
-  hrDecidedAt: any;
-  managerDecidedAt: any;
+  decidedAt: string | null;
+  hrDecidedAt: string | null;
+  managerDecidedAt: string | null;
   createdAt: string;
 
   updatedAt: string;
@@ -183,10 +175,14 @@ export interface TimeOffRequestDetail {
     fullName: string;
     discordUsername: string | null;
   };
+  capabilities: {
+    canDecide: boolean; decisionStage: TimeOffStage | null;
+    canCancel: boolean; readOnly: boolean; managerRequired: boolean;
+  };
 }
 
 export interface TimeOffDecisionRequest {
-  status: TimeOffStatus;
+  status: 'approved' | 'rejected';
   decisionNote?: string;
 }
 
@@ -238,7 +234,23 @@ export interface Meeting {
 /** A time off request dialog: opened by its trigger, or controlled (the calendar opens it). */
 export interface TimeOffRequestDialogProps {
   id: number;
-  trigger?: React.ReactNode;
+  trigger?: ReactNode;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
+
+export type TimeOffScope = { realm: string; workspaceId: string; actorId: number | string };
+export type CreateTimeOffMutation = { body: CreateTimeOffRequest; operationId: string; scope: TimeOffScope };
+export type DecideTimeOffMutation = { id: number; body: TimeOffDecisionRequest; operationId: string; scope: TimeOffScope };
+export type CancelTimeOffMutation = { id: number; operationId: string; scope: TimeOffScope };
+export type TimeOffAttempt = { kind: 'create'; request: CreateTimeOffMutation; uncertain: boolean }
+  | { kind: 'decision'; request: DecideTimeOffMutation; stage: TimeOffStage; uncertain: boolean }
+  | { kind: 'cancel'; request: CancelTimeOffMutation; uncertain: boolean };
+export type AddTimeOffFormValues = {
+  employeeId: string; timeOffType: TimeOffType; durationType: TimeOffDuration;
+  startDate: string; endDate: string; halfDayPeriod: 'morning' | 'afternoon';
+  partialStartTime: string; partialEndTime: string; employeeNote: string;
+};
+export type AddTimeOffFormInput = AddTimeOffFormValues;
+export type DecisionFormValues = { decision: 'approved' | 'rejected'; note: string };
+export type TimeOffActionDialogProps = TimeOffRequestDialogProps & { status?: TimeOffStatus; onSave?: (data: DecisionFormValues) => void };

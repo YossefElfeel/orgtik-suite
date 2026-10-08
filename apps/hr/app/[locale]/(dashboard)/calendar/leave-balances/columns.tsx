@@ -7,13 +7,12 @@ import CustomAvatar from "@/components/shared/CustomAvatar";
 import StatusBadge from "@/components/shared/StatusBadge";
 import { TimeOffActionDialog } from "@/components/pages/time-off/TimeOffDialog";
 import { TimeOffRequest } from "@/types/time-off";
-import { formatDate } from "@/utils/formateDate";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export const useColumns = () => {
   const t = useTranslations("timeOffTable");
   const tTypes = useTranslations("leaveTypes");
-  const locale = useLocale();
+  const civilDay = (value: string) => new Intl.DateTimeFormat('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }).format(new Date(value + 'T00:00:00Z'));
 
   const columns: ColumnDef<TimeOffRequest>[] = [
     {
@@ -60,18 +59,18 @@ export const useColumns = () => {
     {
       accessorKey: "startDate",
       header: t("columns.from"),
-      cell: ({ row }) => formatDate(row.original.startDate),
+      cell: ({ row }) => civilDay(row.original.startDate),
     },
     {
       accessorKey: "endDate",
       header: t("columns.to"),
-      cell: ({ row }) => formatDate(row.original.endDate),
+      cell: ({ row }) => civilDay(row.original.endDate),
     },
     {
       accessorKey: "totalDurationMinutes",
       header: t("columns.duration"),
       cell: ({ row }) => {
-        const hours = Math.floor(row.original.totalDurationMinutes / 60);
+        const hours = row.original.totalDurationMinutes / 60;
         const days = hours / 24;
         return hours >= 24
           ? t("duration.days", { count: days })
@@ -82,7 +81,7 @@ export const useColumns = () => {
       accessorKey: "status",
       header: t("columns.status"),
       cell: ({ row }) => (
-        <StatusBadge status={row.original.status as any} size="sm" />
+        <StatusBadge status={row.original.status} size="sm" />
       ),
     },
     {
@@ -91,15 +90,12 @@ export const useColumns = () => {
       cell: ({ row }) => (
         <TimeOffActionDialog
           id={row.original.id}
-          status={row.original.status as any}
+          status={row.original.status}
           trigger={
             <IconButton label={t("tooltips.viewEdit")} variant="outline-view">
               <Edit2 className="size-4" />
             </IconButton>
           }
-          onSave={(data) => {
-            console.log("Action performed on:", row.original.id);
-          }}
         />
       ),
     },

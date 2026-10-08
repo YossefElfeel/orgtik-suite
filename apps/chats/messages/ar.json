@@ -1172,5 +1172,22 @@
   "workspace.noAccessBody": "اختر مساحة عمل لديك فيها صلاحية استخدام الدردشات. يمكن لضيوف الاجتماعات استخدام رابط الدعوة.",
   "workspace.openSuite": "فتح مشغّل مساحة العمل",
   "workspace.retry": "إعادة المحاولة",
-  "workspace.saving": "جارٍ الحفظ في مساحة العمل هذه…"
+  "workspace.saving": "جارٍ الحفظ في مساحة العمل هذه…",
+  "availability.title": "التفرغ المعتمد",
+  "availability.count": "{n} غير متاح",
+  "availability.error": "تعذر تحميل التفرغ. ما زالت الاجتماعات معروضة.",
+  "availability.retry": "إعادة تحميل التفرغ",
+  "availability.loading": "جارٍ تحميل التفرغ…",
+  "availability.legend": "دائرة مجوفة: غياب معتمد · للقراءة فقط",
+  "availability.unavailable": "غير متاح",
+  "availability.emptyDay": "لا يوجد غياب معتمد مشترك لهذا اليوم.",
+  "availability.notLoaded": "لم يتم تحميل التفرغ.",
+  "availability.noMeetings": "لا توجد اجتماعات محجوزة. تحقق من التفرغ قبل تحديد موعد.",
+  "availability.away": "غائب",
+  "availability.allDay": "اليوم كاملًا",
+  "availability.morning": "صباحًا",
+  "availability.afternoon": "بعد الظهر",
+  "availability.partial": "جزء من اليوم",
+  "availability.invalidTime": "هذا الوقت غير موجود في المنطقة الزمنية لمساحة العمل. اختر وقت بدء آخر.",
+  "availability.workspaceTime": "الأوقات وفق المنطقة الزمنية لمساحة العمل: {zone}"
 }

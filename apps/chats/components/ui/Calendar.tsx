@@ -54,6 +54,8 @@ export interface MonthGridProps {
   min?: DateKey;
   max?: DateKey;
   marks?: Record<DateKey, number>;
+  /** Shared approved availability, kept distinct from the meeting count. */
+  availabilityMarks?: Record<DateKey, number>;
   /** The day holding the tab stop; defaults to the first selectable day. */
   focusDay?: DateKey | null;
   onFocusDay?: (day: DateKey) => void;
@@ -75,6 +77,7 @@ export function MonthGrid({
   min,
   max,
   marks,
+  availabilityMarks,
   focusDay,
   onFocusDay,
   onMonthChange,
@@ -205,6 +208,7 @@ export function MonthGrid({
               const enabled = selectable(day);
               const isToday = day === today;
               const count = marks?.[day] ?? 0;
+              const unavailable = availabilityMarks?.[day] ?? 0;
               const tab = day === defaultFocus ? 0 : -1;
               return (
                 <span key={day} role="gridcell" aria-selected={inSpan || undefined} className="relative" style={{ height: cell }}>
@@ -226,7 +230,7 @@ export function MonthGrid({
                     data-day={day}
                     tabIndex={tab}
                     disabled={!enabled}
-                    aria-label={`${fullFmt.format(fromKey(day))}${count ? `, ${t("calendar.meetingsCount", "{n, plural, one {# meeting} other {# meetings}}", { n: count })}` : ""}`}
+                    aria-label={`${fullFmt.format(fromKey(day))}${count ? `, ${t("calendar.meetingsCount", "{n, plural, one {# meeting} other {# meetings}}", { n: count })}` : ""}${unavailable ? `, ${t("availability.count", "{n} unavailable", { n: unavailable })}` : ""}`}
                     aria-pressed={endpoint || undefined}
                     onClick={() => onPick(day)}
                     onMouseEnter={() => onPreview?.(day)}
@@ -246,6 +250,7 @@ export function MonthGrid({
                     }}
                   >
                     <span className="tabular">{fromKey(day).getDate()}</span>
+                    {unavailable > 0 && <span aria-hidden="true" className="absolute h-1.5 w-1.5 rounded-full border" style={{ insetInlineEnd: 5, top: 5, borderColor: endpoint ? "var(--color-ink-inverse)" : "var(--color-ink-muted)" }} />}
                     {count > 0 && (
                       <span aria-hidden="true" className="absolute flex gap-[3px]" style={{ bottom: 4 }}>
                         {Array.from({ length: Math.min(3, count) }, (_, i) => (

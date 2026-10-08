@@ -71,6 +71,7 @@ export function ReusableDialog({
         <DialogTrigger {...triggerProps(trigger)} />
       )}
       <DialogContent
+        closeLabel={tCommon('close')}
         className={`sm:rounded-[12px] p-0 gap-0 ${SIZE_CLASSES[size]} max-h-[90vh] flex flex-col overflow-hidden ${className}`}
       >
 

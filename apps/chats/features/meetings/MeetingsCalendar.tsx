@@ -14,16 +14,19 @@
  */
 
 import { useMemo, useState } from "react";
+import { useClientSession } from "@orgtik/ui/auth";
 import Link from "next/link";
 import { CaretLeft, CaretRight, Plus, VideoCamera } from "@phosphor-icons/react";
 import { AvatarStack } from "@/components/ui/Avatar";
 import { Button, Panel } from "@/components/ui/Primitives";
-import { MonthGrid, monthOf, sameMonth, shiftMonth, type YearMonth } from "@/components/ui/Calendar";
+import { MonthGrid, monthOf, sameMonth, type YearMonth } from "@/components/ui/Calendar";
 import { useRoom, useUsers } from "@/store/hooks";
 import { useT } from "@/lib/i18n";
 import { dayLabel, formatRange, formatTime, minutesUntil, localeFormat } from "@/lib/time";
 import { addDays, fromKey, toKey, weekdayOf, type DateKey } from "@/lib/analytics";
 import type { Meeting } from "@/entities";
+import { workspaceDayKey, zonedHour, type AvailabilityItem } from "@/lib/calendar-availability";
+import { useAvailability } from "./useAvailability";
 
 const FIRST_HOUR = 7;
 const LAST_HOUR = 19;
@@ -40,7 +43,8 @@ export function MeetingsCalendar({
   onSchedule: (day: DateKey) => void;
 }) {
   const t = useT();
-  const today = toKey(new Date());
+  const timeZone = useClientSession()?.workspaceContext?.workspace.timeZone ?? "UTC";
+  const today = workspaceDayKey(new Date(), timeZone);
   const [view, setView] = useState<"month" | "week">("month");
   const [day, setDay] = useState<DateKey>(today);
   const [month, setMonth] = useState<YearMonth>(monthOf(today));
@@ -49,17 +53,27 @@ export function MeetingsCalendar({
   const byDay = useMemo(() => {
     const map = new Map<DateKey, Meeting[]>();
     for (const m of meetings) {
-      const k = toKey(new Date(m.startsAt));
+      const k = workspaceDayKey(m.startsAt, timeZone);
       map.set(k, [...(map.get(k) ?? []), m]);
     }
     for (const list of map.values()) list.sort((a, b) => a.startsAt.localeCompare(b.startsAt));
     return map;
-  }, [meetings]);
+  }, [meetings, timeZone]);
 
   const marks = useMemo(() => Object.fromEntries([...byDay.entries()].map(([k, v]) => [k, v.length])), [byDay]);
 
   const weekStart = addDays(day, -weekdayOf(day));
   const weekDays = Array.from({ length: 7 }, (_, i) => addDays(weekStart, i));
+  const monthFirst = toKey(new Date(month.year, month.month, 1));
+  const monthLast = toKey(new Date(month.year, month.month + 1, 0));
+  const availability = useAvailability(view === "month" ? monthFirst : weekStart, view === "month" ? monthLast : weekDays[6]!);
+  const availableByDay = new Map<DateKey, AvailabilityItem[]>();
+  for (const item of availability.data?.items ?? []) {
+    const first = item.startDate < availability.data!.fromDate ? availability.data!.fromDate : item.startDate;
+    const last = item.endDate > availability.data!.toDate ? availability.data!.toDate : item.endDate;
+    for (let key = first; key <= last; key = addDays(key, 1)) availableByDay.set(key, [...(availableByDay.get(key) ?? []), item]);
+  }
+  const availabilityMarks = Object.fromEntries([...availableByDay].map(([key, rows]) => [key, rows.length]));
 
   const goToday = () => {
     setDay(today);
@@ -80,7 +94,7 @@ export function MeetingsCalendar({
               key={v}
               size="sm"
               variant={view === v ? "secondary" : "ghost"}
-              onClick={() => setView(v)}
+              onClick={() => { setView(v); if (v === "month") setMonth(monthOf(day)); }}
               aria-pressed={view === v}
               style={view === v ? { boxShadow: "var(--shadow-raise)" } : undefined}
             >
@@ -113,6 +127,10 @@ export function MeetingsCalendar({
           </Button>
         </span>
       </div>
+      <div className="flex flex-wrap items-center justify-between gap-2 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }} aria-live="polite" aria-busy={availability.status === "loading"}>
+        <p>{t("availability.title", "Approved availability")} · <bdi>{timeZone}</bdi></p>
+        {availability.status === "error" ? <div className="flex flex-wrap items-center gap-2" role="alert"><span>{t("availability.error", "Availability could not be loaded. Meetings are still shown.")}</span><Button size="sm" onClick={availability.refetch}>{t("availability.retry", "Retry availability")}</Button></div> : <span>{availability.status === "loading" ? t("availability.loading", "Loading availability…") : t("availability.legend", "Outlined dot: approved absence · read-only")}</span>}
+      </div>
 
       {view === "month" ? (
         <div className="grid gap-4 lg:grid-cols-[auto_1fr]">
@@ -126,17 +144,21 @@ export function MeetingsCalendar({
                 setMonth(monthOf(d));
               }}
               marks={marks}
+              availabilityMarks={availabilityMarks}
               focusDay={focusDay}
               onFocusDay={setFocusDay}
-              onMonthChange={setMonth}
+              onMonthChange={(next) => { setMonth(next); setDay(toKey(new Date(next.year, next.month, 1))); setFocusDay(null); }}
               cell={44}
               label={t("calendar.monthGrid", "Meetings by day")}
             />
           </Panel>
-          <DayList day={day} meetings={byDay.get(day) ?? []} today={today} onSchedule={() => onSchedule(day)} />
+          <DayList day={day} meetings={byDay.get(day) ?? []} today={today} timeZone={timeZone} availability={availableByDay.get(day) ?? []} availabilityStatus={availability.status} onSchedule={() => onSchedule(day)} />
         </div>
       ) : (
-        <WeekGrid days={weekDays} byDay={byDay} today={today} selected={day} onSelect={setDay} />
+        <div className="flex flex-col gap-4">
+          <WeekGrid days={weekDays} byDay={byDay} availability={availableByDay} timeZone={timeZone} today={today} selected={day} onSelect={setDay} />
+          <DayList day={day} meetings={byDay.get(day) ?? []} today={today} timeZone={timeZone} availability={availableByDay.get(day) ?? []} availabilityStatus={availability.status} onSchedule={() => onSchedule(day)} />
+        </div>
       )}
     </div>
   );
@@ -144,7 +166,7 @@ export function MeetingsCalendar({
 
 /* ---------------------------------------------------------------- the day */
 
-function DayList({ day, meetings, today, onSchedule }: { day: DateKey; meetings: Meeting[]; today: DateKey; onSchedule: () => void }) {
+function DayList({ day, meetings, today, onSchedule, timeZone, availability, availabilityStatus }: { day: DateKey; meetings: Meeting[]; today: DateKey; onSchedule: () => void; timeZone: string; availability: AvailabilityItem[]; availabilityStatus: "loading" | "ready" | "error" }) {
   const t = useT();
   const title = dayFmt.format(fromKey(day));
   return (
@@ -164,10 +186,29 @@ function DayList({ day, meetings, today, onSchedule }: { day: DateKey; meetings:
             : t("calendar.nBooked", "{n} booked", { n: meetings.length })}
         </span>
       </div>
+      <section className="mb-3 border-b pb-3" style={{ borderColor: "var(--color-hairline)" }} aria-label={t("availability.title", "Approved availability")}>
+        <h3 className="mb-2 text-[12.5px] font-semibold" style={{ color: "var(--color-ink)" }}>{t("availability.title", "Approved availability")}</h3>
+        {availabilityStatus === "ready" && availability.length > 0 ? (
+          <ul className="flex flex-col gap-2">
+            {availability.map(item => (
+              <li key={item.id} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-[12.5px]">
+                <span style={{ color: "var(--color-ink)" }}><bdi>{item.personName}</bdi> · {t("availability.unavailable", "Unavailable")}</span>
+                <span className="tabular" style={{ color: "var(--color-ink-muted)" }}>
+                  {availabilityPeriod(item, t)}{item.durationType !== "full_day" ? ` · ${formatRange(item.startAt, item.endAt, timeZone)}` : ""}
+                </span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+            {availabilityStatus === "loading" ? t("availability.loading", "Loading availability…") : availabilityStatus === "error" ? t("availability.notLoaded", "Availability is not loaded.") : t("availability.emptyDay", "No shared approved absences for this day.")}
+          </p>
+        )}
+      </section>
       {meetings.length === 0 ? (
         <div className="py-6 text-center">
           <p className="text-[13px]" style={{ color: "var(--color-ink-muted)" }}>
-            {t("calendar.freeBody", "A clear day. Most conversations here do not need a meeting.")}
+            {availability.length ? t("availability.noMeetings", "No meetings booked. Check availability before scheduling.") : t("calendar.freeBody", "A clear day. Most conversations here do not need a meeting.")}
           </p>
           <Button size="sm" className="mt-3" onClick={onSchedule}>
             {t("meetings.schedule", "Schedule")}
@@ -176,7 +217,7 @@ function DayList({ day, meetings, today, onSchedule }: { day: DateKey; meetings:
       ) : (
         <ul className="flex flex-col gap-1.5">
           {meetings.map((m) => (
-            <DayRow key={m.id} meeting={m} />
+            <DayRow key={m.id} meeting={m} timeZone={timeZone} />
           ))}
         </ul>
       )}
@@ -184,7 +225,7 @@ function DayList({ day, meetings, today, onSchedule }: { day: DateKey; meetings:
   );
 }
 
-function DayRow({ meeting }: { meeting: Meeting }) {
+function DayRow({ meeting, timeZone }: { meeting: Meeting; timeZone: string }) {
   const room = useRoom(meeting.roomId ?? "");
   const users = useUsers();
   const t = useT();
@@ -202,7 +243,7 @@ function DayRow({ meeting }: { meeting: Meeting }) {
       }}
     >
       <span className="tabular w-[92px] shrink-0 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
-        {formatRange(meeting.startsAt, meeting.endsAt)}
+        {formatRange(meeting.startsAt, meeting.endsAt, timeZone)}
       </span>
       <Link href={`/hq/meetings/${meeting.id}`} className="min-w-0 flex-1 after:absolute after:inset-0 after:content-['']">
         <span className="block truncate text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
@@ -235,17 +276,21 @@ function WeekGrid({
   today,
   selected,
   onSelect,
+  availability,
+  timeZone,
 }: {
   days: DateKey[];
   byDay: Map<DateKey, Meeting[]>;
   today: DateKey;
   selected: DateKey;
   onSelect: (d: DateKey) => void;
+  availability: Map<DateKey, AvailabilityItem[]>;
+  timeZone: string;
 }) {
   const t = useT();
   const hours = Array.from({ length: LAST_HOUR - FIRST_HOUR + 1 }, (_, i) => FIRST_HOUR + i);
   const now = new Date();
-  const nowY = ((now.getHours() + now.getMinutes() / 60 - FIRST_HOUR) / (LAST_HOUR - FIRST_HOUR + 1)) * (hours.length * ROW);
+  const nowY = (zonedHour(now, timeZone) - FIRST_HOUR) * ROW;
 
   return (
     <Panel className="overflow-x-auto">
@@ -283,6 +328,19 @@ function WeekGrid({
             );
           })}
         </div>
+        <div className="mt-1 grid border-y py-2" style={{ gridTemplateColumns: "52px repeat(7, minmax(0, 1fr))", borderColor: "var(--color-hairline)" }} aria-label={t("availability.title", "Approved availability")}>
+          <span className="px-1 text-[10.5px]" style={{ color: "var(--color-ink-muted)" }}>{t("availability.away", "Away")}</span>
+          {days.map(key => (
+            <div key={key} className="min-w-0 px-1.5 text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+              {(availability.get(key) ?? []).map(item => (
+                <div key={item.id} className="mb-1" title={`${item.personName} · ${availabilityPeriod(item, t)}${item.durationType !== "full_day" ? ` · ${formatRange(item.startAt, item.endAt, timeZone)}` : ""}`}>
+                  <span className="block truncate font-semibold"><bdi>{item.personName}</bdi></span>
+                  <span className="block truncate">{availabilityPeriod(item, t)}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
 
         <div className="relative mt-1 grid" style={{ gridTemplateColumns: `52px repeat(7, minmax(0, 1fr))`, height: hours.length * ROW }}>
           {/* Hour rules and labels. */}
@@ -318,8 +376,8 @@ function WeekGrid({
                 {list.map((m) => {
                   const s = new Date(m.startsAt);
                   const e = new Date(m.endsAt);
-                  const startH = s.getHours() + s.getMinutes() / 60;
-                  const endH = e.getHours() + e.getMinutes() / 60;
+                  const startH = zonedHour(s, timeZone);
+                  const endH = workspaceDayKey(s, timeZone) !== workspaceDayKey(e, timeZone) ? 24 : zonedHour(e, timeZone);
                   const top = Math.max(0, (startH - FIRST_HOUR) * ROW);
                   const height = Math.max(22, (endH - startH) * ROW - 2);
                   const over = Boolean(m.endedAt) || e.getTime() < Date.now();
@@ -328,7 +386,7 @@ function WeekGrid({
                       key={m.id}
                       href={`/hq/meetings/${m.id}`}
                       className="absolute inset-x-[3px] block overflow-hidden px-1.5 py-1"
-                      title={`${m.title} · ${formatRange(m.startsAt, m.endsAt)}`}
+                      title={`${m.title} · ${formatRange(m.startsAt, m.endsAt, timeZone)}`}
                       style={{
                         top,
                         height,
@@ -341,7 +399,7 @@ function WeekGrid({
                       <span className="block truncate text-[11.5px] font-semibold"><bdi>{m.title}</bdi></span>
                       {height >= 36 && (
                         <span className="tabular block truncate text-[10.5px]" style={{ color: "var(--color-ink-muted)" }}>
-                          {formatTime(m.startsAt)}
+                          {formatTime(m.startsAt, timeZone)}
                         </span>
                       )}
                     </Link>
@@ -357,4 +415,10 @@ function WeekGrid({
       </p>
     </Panel>
   );
+}
+
+function availabilityPeriod(item: AvailabilityItem, t: ReturnType<typeof useT>) {
+  if (item.durationType === "full_day") return t("availability.allDay", "All day");
+  if (item.durationType === "half_day") return item.halfDayPeriod === "morning" ? t("availability.morning", "Morning") : t("availability.afternoon", "Afternoon");
+  return t("availability.partial", "Part of the day");
 }

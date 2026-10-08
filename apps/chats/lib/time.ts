@@ -22,20 +22,20 @@ export function setFormatLocale(locale: Locale): void {
   tag = formatLocale(locale);
 }
 
-const timeFmt = () => fmt("time", () => new Intl.DateTimeFormat(tag, { hour: "2-digit", minute: "2-digit", hourCycle: "h23" }));
+const timeFmt = (timeZone?: string) => fmt(`time|${timeZone ?? "local"}`, () => new Intl.DateTimeFormat(tag, { hour: "2-digit", minute: "2-digit", hourCycle: "h23", ...(timeZone ? { timeZone } : {}) }));
 const dayFmt = () => fmt("day", () => new Intl.DateTimeFormat(tag, { weekday: "long", day: "numeric", month: "long" }));
-const shortDayFmt = () => fmt("shortDay", () => new Intl.DateTimeFormat(tag, { weekday: "short", day: "numeric", month: "short" }));
+const shortDayFmt = (timeZone?: string) => fmt(`shortDay|${timeZone ?? "local"}`, () => new Intl.DateTimeFormat(tag, { weekday: "short", day: "numeric", month: "short", ...(timeZone ? { timeZone } : {}) }));
 const unit = (u: "minute" | "hour" | "day") =>
   fmt(`unit-${u}`, () => new Intl.NumberFormat(tag, { style: "unit", unit: u, unitDisplay: "short" }));
 const relative = () => fmt("relative", () => new Intl.RelativeTimeFormat(tag, { numeric: "auto" }));
 
-export const formatTime = (iso: string): string => timeFmt().format(new Date(iso));
+export const formatTime = (iso: string, timeZone?: string): string => timeFmt(timeZone).format(new Date(iso));
 export const formatDay = (iso: string): string => dayFmt().format(new Date(iso));
-export const formatShortDay = (iso: string): string => shortDayFmt().format(new Date(iso));
+export const formatShortDay = (iso: string, timeZone?: string): string => shortDayFmt(timeZone).format(new Date(iso));
 
 /** "10:00–11:30", in the reader's own range style. */
-export const formatRange = (startIso: string, endIso: string): string =>
-  timeFmt().formatRange(new Date(startIso), new Date(endIso));
+export const formatRange = (startIso: string, endIso: string, timeZone?: string): string =>
+  timeFmt(timeZone).formatRange(new Date(startIso), new Date(endIso));
 
 /** "now", "12 min", "2 hr", "yesterday", "Tue 3 Mar" - short enough for a dense list. */
 export function formatRelative(iso: string, now: Date = new Date()): string {

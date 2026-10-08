@@ -108,13 +108,14 @@ test('successor account deactivation after scheduling archives custody and revok
     assert.deepEqual(other, otherBefore, unavailable);
   }
 });
-test('approved leave projection is workspace-scoped and withdrawn on rejection', () => {
+test('an unavailable staged HR runtime cannot invent a status-only approval or calendar cache', () => {
   const f = fixture(); const snapshot = f.runtime.exportSnapshot();
-  snapshot.data.timeOffs.push({ id: 9, employeeId: 2, startDate: '2026-10-09', endDate: '2026-10-10', status: 'pending', type: 'annual' });
+  snapshot.data.timeOffs.push({ id: 9, employeeId: 2, startDate: '2026-10-09', endDate: '2026-10-10', status: 'pending', timeOffType: 'annual_leave', managerActionStatus: 'pending', hrActionStatus: 'pending' });
   f.runtime.applyCommitted({ snapshot });
-  hr.approveLeave({ ...f, payload: { requestId: 9, status: 'approved' } });
-  assert.equal(f.workspace.approvedLeave.length, 1); assert.equal(f.S.workspace('ws_orgtik').approvedLeave, undefined);
-  hr.approveLeave({ ...f, payload: { requestId: 9, status: 'rejected' } }); assert.equal(f.workspace.approvedLeave.length, 0);
+  const before = f.runtime.exportSnapshot(), workspaceBefore = structuredClone(f.workspace);
+  assert.throws(() => hr.approveLeave({ ...f, payload: { requestId: 9, status: 'approved' } }), error => error.status === 503 && error.code === 'workspace_runtime_unavailable');
+  assert.deepEqual(f.runtime.exportSnapshot(), before); assert.deepEqual(f.workspace, workspaceBefore);
+  assert.equal(f.workspace.approvedLeave, undefined); assert.equal(f.S.workspace('ws_orgtik').approvedLeave, undefined);
 });
 test('offboarding an unaccepted hire cancels its invitation and releases reserved capacity', () => {
   const f = fixture();

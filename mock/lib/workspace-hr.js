@@ -44,16 +44,13 @@ function hire({ S, identity, workspace, actor, runtime, payload }) {
   return { ...employee, invitation };
 }
 function approveLeave({ S, workspace, actor, runtime, payload }) {
-  const snapshot = runtime.exportSnapshot(), request = snapshot.data.timeOffs.find(row => row.id === payload.requestId);
-  if (!request) throw fail(404, "leave_not_found", "This leave request was not found.");
-  if (!["approved", "rejected", "pending"].includes(payload.status) || request.status === "cancelled") throw fail(422, "invalid_leave_decision", "Check the leave decision.");
-  request.status = payload.status; request.decisionNote = payload.decisionNote; request.decidedAt = S.iso(S.now()); request.decidedById = actor.id; request.decidedAs = payload.decidedAs;
-  runtime.applyCommitted({ snapshot });
-  workspace.approvedLeave ??= [];
-  workspace.approvedLeave = workspace.approvedLeave.filter(row => row.requestId !== request.id);
-  if (request.status === 'approved') workspace.approvedLeave.push({ requestId: request.id, employeeId: request.employeeId ?? request.userId, startDate: request.startDate, endDate: request.endDate, type: request.type, status: 'approved' });
-  S.log(actor.key, "leave_decided", String(request.id), { workspaceId: workspace.id, status: request.status });
-  return request;
+  return leaveCommand({ S, workspace, actor, runtime, payload }, 'decision');
+}
+function leaveCommand({ S, workspace, actor, runtime, payload }, action) {
+  if (typeof runtime.executeLeave !== 'function') throw fail(503, 'workspace_runtime_unavailable', 'Leave processing is temporarily unavailable.');
+  const result = runtime.executeLeave(action, payload, actor.id);
+  S.log(actor.key, `leave_${action}`, String(result.id), { workspaceId: workspace.id, status: result.status, stage: result.capabilities.decisionStage });
+  return result;
 }
 function activateEmployee({ S, runtime, userId }) {
   const snapshot = runtime.exportSnapshot(), employee = snapshot.data.employees.find(row => row.authUserId === userId);
@@ -143,4 +140,4 @@ function offboardingAction({ S, workspace, actor, payload }) {
   row.actions ??= []; row.actions.push({ action: payload.action, actorUserId: actor.id, at: S.iso(S.now()), note: payload.note || null });
   S.log(actor.key, 'offboarding_action', row.id, { workspaceId: workspace.id, action: payload.action }); return row;
 }
-module.exports = { hire, validateHirePayload, approveLeave, activateEmployee, offboard, runOffboarding, endInstant, offboardingOptions, offboardingAction };
+module.exports = { hire, validateHirePayload, approveLeave, leaveCommand, activateEmployee, offboard, runOffboarding, endInstant, offboardingOptions, offboardingAction };

@@ -1,333 +1,138 @@
-"use client";
-import { Briefcase, CalendarDots as CalendarDays, Check, Clock, Clock as Clock3, X } from "@phosphor-icons/react";
+'use client';
+import { Check, X } from '@phosphor-icons/react';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useFormatter, useTranslations } from 'next-intl';
+import { useClientSession } from '@orgtik/ui/auth';
+import { ReusableDialog } from '@/components/shared/ReusableDialog/reusable-dialog';
+import { Button } from '@/components/ui/button';
+import { Form } from '@/components/ui/form';
+import TextFormEle from '@/components/ui/form/text-form-element';
+import CustomAvatar from '@/components/shared/CustomAvatar';
+import StatusBadge from '@/components/shared/StatusBadge';
+import { AttachmentList } from '@/components/shared/AttachmentList';
+import { useUserRoles } from '@/hooks/useUserRoles';
+import { useLazyGetTimeOffByIdQuery, useMakeTimeOffDecisionMutation, useCancelTimeOffRequestMutation } from '@/redux/features/timeOff/timeOffApi';
+import { baseApi } from '@/redux/app/baseApi';
+import type { AppDispatch } from '@/redux/app/store';
+import { makeDecisionSchema } from '@/schemas/time-off/decision.schemas';
+import { readTimeOffAttempt, saveTimeOffAttempt, timeOffAttemptKey, timeOffProblem, timeOffScope, timeOffContextSignature } from '@/lib/time-off-attempt';
+import type { DecisionFormValues, TimeOffActionDialogProps, TimeOffAttempt, TimeOffRequestDetail, TimeOffStage } from '@/types/time-off';
+import { cn } from '@/lib/utils';
 
-import React, { useEffect, useState } from "react";
-import { ReusableDialog } from "@/components/shared/ReusableDialog/reusable-dialog";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Form } from "@/components/ui/form";
-import TextFormEle from "@/components/ui/form/text-form-element";
-import CustomAvatar from "@/components/shared/CustomAvatar";
-import StatusBadge from "@/components/shared/StatusBadge";
-import {
-  useLazyGetTimeOffByIdQuery,
-  useMakeTimeOffDecisionMutation,
-} from "@/redux/features/timeOff/timeOffApi";
-import { AttachmentList } from "@/components/shared/AttachmentList";
-import { useGetRole } from "@/hooks/useGetRole";
-import { useFormatter, useTranslations } from "next-intl";
-import { makeDecisionSchema, type DecisionFormValues } from "@/schemas/time-off/decision.schemas";
-import { rangeText } from "@/lib/date-range";
-
-interface TimeOffActionDialogProps {
-  trigger?: React.ReactNode;
-  id: number;
-  status: "pending" | "approved" | "rejected";
-  onSave?: (data: DecisionFormValues) => void;
-  isLoading?: boolean;
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-}
-
-export function TimeOffActionDialog({
-  trigger,
-  status,
-  onSave,
-  id,
-  open: externalOpen,
-  onOpenChange: externalOnOpenChange,
-}: TimeOffActionDialogProps) {
-  const t = useTranslations("timeOffDialog");
-  const tTypes = useTranslations("leaveTypes");
-  const format = useFormatter();
-  const [internalOpen, setInternalOpen] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-
-
-  // super_admin decides at HR's level (the API treats them as HR): they could never act before.
-  const { isHR, isManager, isEmployee, isAdmin } = useGetRole();
-  const actsAsHR = isHR || isAdmin;
-
-  const [triggerFetch, { data: response }] = useLazyGetTimeOffByIdQuery();
-  const timeOffDetails = response?.data;
-
-  const [makeDecision, { isLoading: isDeciding }] = useMakeTimeOffDecisionMutation();
-
-  const isControlled =
-    externalOpen !== undefined && externalOnOpenChange !== undefined;
-  const open = isControlled ? externalOpen : internalOpen;
-  const onOpenChange = isControlled ? externalOnOpenChange : setInternalOpen;
-
-  const form = useForm<DecisionFormValues>({
-    resolver: zodResolver(makeDecisionSchema({ choose: t("decision.choose"), tooLong: t("decision.tooLong") })),
-    defaultValues: { decision: undefined, note: "" },
-  });
-  const chosen = form.watch("decision");
-
+export function TimeOffActionDialog({ trigger, id, onSave, open: externalOpen, onOpenChange: externalChange }: TimeOffActionDialogProps) {
+  const t = useTranslations('timeOffDialog'), types = useTranslations('leaveTypes');
+  const format = useFormatter(), dispatch = useDispatch<AppDispatch>();
+  const session = useClientSession(), { canWrite } = useUserRoles();
+  const [innerOpen, setInnerOpen] = useState(false), [attempt, setAttempt] = useState<TimeOffAttempt | null>(null);
+  const [error, setError] = useState<string | null>(null), [success, setSuccess] = useState<string | null>(null);
+  const [result, setResult] = useState<TimeOffRequestDetail | null>(null);
+  const [editStage, setEditStage] = useState<TimeOffStage | null>(null), [confirmCancel, setConfirmCancel] = useState(false);
+  const touched = useRef(false), open = externalOpen ?? innerOpen;
+  const [fetchRecord, query] = useLazyGetTimeOffByIdQuery();
+  const [decide, decisionState] = useMakeTimeOffDecisionMutation();
+  const [cancel, cancellationState] = useCancelTimeOffRequestMutation();
+  const busy = decisionState.isLoading || cancellationState.isLoading;
+  const form = useForm<DecisionFormValues>({ resolver: zodResolver(makeDecisionSchema({ choose: t('decision.choose'), tooLong: t('decision.tooLong') })), defaultValues: { note: '' } });
+  const namespace = timeOffAttemptKey(session?.workspaceContext ? { realm: session.workspaceContext.realm, workspaceId: session.workspaceContext.workspace.id, actorId: session.user.id } : null, id);
+  const contextSignature = timeOffContextSignature();
   useEffect(() => {
-    if (open && id) triggerFetch(id);
-  }, [open, id, triggerFetch]);
-
-  useEffect(() => {
-    if (open) {
-      form.reset({ decision: undefined, note: "" });
-      setIsEditing(false);
-    }
-  }, [status, open, form]);
-
-  const options = [
-    {
-      value: "approved",
-      label: t("actions.approve"),
-      icon: Check,
-      activeClass: "border-success bg-success-solid/5 text-success",
-    },
-    {
-      value: "rejected",
-      label: t("actions.reject"),
-      icon: X,
-      activeClass: "border-danger bg-danger-solid/5 text-danger",
-    },
-  ] as const;
-
-
-  const dataDecision = [
-    {
-      title: t("sections.managerDecision"),
-      status: timeOffDetails?.managerActionStatus || "pending",
-      note: timeOffDetails?.managerDecisionNote,
-      roleRequired: "manager",
-      canAction: isManager && !actsAsHR,
-    },
-    {
-      title: t("sections.hrDecision"),
-      status: timeOffDetails?.hrActionStatus || "pending",
-      note: timeOffDetails?.hrDecisionNote,
-      roleRequired: "hr",
-      canAction: actsAsHR,
-    },
-  ];
-
-  const handleDecisionSubmit = async (values: DecisionFormValues) => {
+    const saved = readTimeOffAttempt(namespace);
+    const original = saved && saved.kind !== 'create' && saved.request.id === id ? saved : null;
+    setAttempt(original); setError(null); setSuccess(null); setResult(null); setEditStage(null); setConfirmCancel(false);
+    if (original?.kind === 'decision') form.reset({ decision: original.request.body.status, note: original.request.body.decisionNote || '' }); else form.reset({ note: '' });
+  }, [namespace, id, form]);
+  useEffect(() => { if (open) fetchRecord(id); }, [open, id, namespace, contextSignature, fetchRecord]);
+  useEffect(() => { setResult(null); }, [query.currentData]);
+  const data = query.error ? undefined : result || query.currentData?.data;
+  const caps = data?.capabilities;
+  const readOnly = !canWrite || !caps || caps.readOnly;
+  const freshBlocked = busy || query.isFetching || readOnly || Boolean(attempt);
+  const changeOpen = (next: boolean) => {
+    if (busy) return;
+    (externalChange || setInnerOpen)(next);
+    if (!next && touched.current) { touched.current = false; dispatch(baseApi.util.invalidateTags(['TimeOff', 'Employee'])); }
+  };
+  const execute = async (original: TimeOffAttempt) => {
+    if (original.kind === 'create') return;
+    touched.current = true; setAttempt(original); saveTimeOffAttempt(namespace, original);
+    setError(null); setSuccess(null); setConfirmCancel(false);
     try {
-      await makeDecision({ id, body: { status: values.decision, decisionNote: values.note } }).unwrap();
-      onSave?.(values);
-      setIsEditing(false);
-      onOpenChange(false);
-    } catch {
-      // The base query says why, in the reader's language (lib/api-feedback); the dialog stays open.
+      const response = original.kind === 'decision' ? await decide(original.request).unwrap() : await cancel(original.request).unwrap();
+      setResult(response.data); setAttempt(null); saveTimeOffAttempt(namespace, null); setEditStage(null);
+      setSuccess(t(original.kind === 'cancel' ? 'cancelledSaved' : 'decisionSaved'));
+      if (original.kind === 'decision') onSave?.({ decision: original.request.body.status, note: original.request.body.decisionNote || '' });
+      form.reset({ note: '' });
+    } catch (failure) {
+      const code = timeOffProblem(failure);
+      if (code === 'uncertain' || original.uncertain) { const pending = { ...original, uncertain: true }; setAttempt(pending); saveTimeOffAttempt(namespace, pending); }
+      else { setAttempt(null); saveTimeOffAttempt(namespace, null); }
+      setError(t('errors.' + code));
     }
   };
-
-  return (
-    <ReusableDialog
-      title={t("title")}
-      description={`#${timeOffDetails?.requestCode || ""} · ${t("submitted")}`}
-      trigger={trigger}
-      size="lg"
-      open={open}
-      onOpenChange={onOpenChange}
-      footer={
-        <div className="flex w-full gap-3">
-          <Button
-            variant="outline"
-            className="flex-1"
-            size="lg"
-            onClick={() => onOpenChange(false)}
-          >
-            {t("actions.cancel")}
-          </Button>
-
-          {!isEmployee && !isEditing && status !== "pending" && (
-            <Button
-              className="flex-1"
-              size="lg"
-              onClick={() => setIsEditing(true)}
-            >
-              {t("actions.changeDecision")}
-            </Button>
-          )}
-        </div>
-      }
-    >
-      <div className="space-y-6">
-        {/* Employee Info Section */}
-        <div className="border rounded-[16px] p-5 bg-raised space-y-3">
-          {/* Employee Info Card */}
-
-          <div className="flex items-center justify-between bg-gray p-2 rounded-[12px]">
-            <div className="flex items-center gap-3">
-              <CustomAvatar
-                src={
-                  timeOffDetails?.employee?.avatar ||
-                  "https://randomuser.me/api/portraits/"
-                }
-                className="h-11 w-11"
-              />
-              <div>
-                <h4 className="text-[16px] font-medium text-gray-black">
-                  {timeOffDetails?.employee?.fullName}
-                </h4>
-                <p className="text-[12px] text-secondary ">
-                  {timeOffDetails?.requestCode} •{" "}
-                  {timeOffDetails?.employeeDepartment}
-                </p>
-              </div>
-            </div>
-            <StatusBadge
-              status={timeOffDetails?.status || "unknown"}
-              size="lg"
-            />
-          </div>
-          <div className="grid grid-cols-1 gap-y-4 text-[14px]">
-            <DetailRow
-              icon={Briefcase}
-              label={t("fields.leaveType")}
-              value={timeOffDetails?.timeOffType ? (tTypes.has(timeOffDetails.timeOffType) ? tTypes(timeOffDetails.timeOffType) : timeOffDetails.timeOffType) : undefined}
-              valueClass="text-primary font-medium"
-            />
-            <DetailRow
-              icon={CalendarDays}
-              label={t("fields.dates")}
-              value={
-                timeOffDetails
-                  ? timeOffDetails.startDate === timeOffDetails.endDate
-                    ? format.dateTime(new Date(`${timeOffDetails.startDate}T00:00:00`), { dateStyle: "medium" })
-                    : rangeText(format.dateTimeRange(new Date(`${timeOffDetails.startDate}T00:00:00`), new Date(`${timeOffDetails.endDate}T00:00:00`), { dateStyle: "medium" }))
-                  : undefined
-              }
-            />
-            <DetailRow
-              icon={Clock3}
-              label={t("fields.duration")}
-              value={timeOffDetails?.durationType ? t(`durations.${timeOffDetails.durationType}`) : undefined}
-              valueClass="text-primary font-medium"
-            />
-          </div>
-          {/* Attachments Section */}
-          <div className="space-y-2">
-            <p className="text-[16px] font-medium text-gray-black">
-              {t("fields.attachments")}
-            </p>
-            <div className="flex items-center gap-2 text-secondary text-[14px]">
-              {timeOffDetails?.attachments ? (
-                <AttachmentList attachments={timeOffDetails?.attachments} />
-              ) : (
-                t("fields.noFileAdded")
-              )}
-            </div>
-          </div>
-          <div >
-            <p>{t("fields.noteReason")}</p>
-            <p className="p-4 bg-sunken border rounded-xl text-gray-black text-[15px] ">{timeOffDetails?.employeeNote ? timeOffDetails?.employeeNote : t("decision.noNotesProvided")}</p>
-          </div>
-        </div>
-
-        {/* Decisions Sections */}
-        {dataDecision.map((decision, index) => (
-          <div key={index} className="space-y-4">
-            <h3 className="text-xl font-semibold text-gray-black mt-6">
-              {decision.title}
-            </h3>
-
-            <div className="border rounded-[16px] p-5 bg-raised">
-
-              {(decision.status === "pending" || isEditing) &&
-                decision.canAction ? (
-                <Form {...form}>
-                  <form
-                    className="space-y-6"
-                    onSubmit={form.handleSubmit(handleDecisionSubmit)}
-                  >
-                    <div role="group" aria-label={decision.title} className="grid grid-cols-2 gap-4">
-                      {options.map((opt) => (
-                        <button
-                          key={opt.value}
-                          type="button"
-                          aria-pressed={chosen === opt.value}
-                          onClick={() => form.setValue("decision", opt.value, { shouldValidate: true })}
-                          className={cn(
-                            "flex flex-col items-center justify-center gap-2 py-3 px-2 rounded-[16px] border-[1.5px] transition-all",
-                            chosen === opt.value
-                              ? opt.activeClass
-                              : "border-line text-fg-subtle",
-                          )}
-                        >
-                          <opt.icon className="w-5 h-5" weight="bold" aria-hidden="true" />
-                          <span className="font-medium text-lg">
-                            {opt.label}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                    <TextFormEle
-                      form={form}
-                      name="note"
-                      label={t("fields.noteReason")}
-                      type="textarea"
-                      placeholder={t("fields.notePlaceholder")}
-                    />
-                    <Button type="submit" className="w-full" disabled={!chosen || isDeciding} aria-busy={isDeciding}>
-                      {t("actions.submitDecision")}
-                    </Button>
-                    {!chosen ? <p className="text-center text-sm text-secondary">{t("decision.choose")}</p> : null}
-                  </form>
-                </Form>
-              ) : (
-                <div className="flex flex-col gap-[16px]">
-                  <div
-                    className={cn(
-                      "flex items-center justify-center gap-3 py-[16px] px-2 rounded-[12px] border-[1px]",
-                      decision.status === "approved"
-                        ? "border-success bg-success-solid/5 text-success"
-                        : decision.status === "rejected"
-                          ? "border-danger/30 bg-danger-subtle text-danger"
-                          : "border-warning/30 bg-warning-solid/5 text-warning",
-                    )}
-                  >
-                    {decision.status === "approved" ? (
-                      <Check />
-                    ) : decision.status === "rejected" ? (
-                      <X />
-                    ) : (
-                      <Clock />
-                    )}
-                    <span className="font-medium text-lg uppercase">
-                      {t("decision.label", {
-                        status: t(`decision.status.${decision.status}`),
-                      })}
-                    </span>
-                  </div>
-                  <div>
-                    <label className="text-gray-black text-[16px] font-medium mb-1">
-                      {t("fields.note")}
-                    </label>
-                    <div className="p-4 bg-sunken border rounded-xl text-gray-black text-[15px] ">
-                      {decision.status === "pending"
-                        ? t("decision.waitingForAction")
-                        : decision.note || t("decision.noNotesProvided")}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
+  const submit = (values: DecisionFormValues) => {
+    const scope = timeOffScope(), stage = caps?.decisionStage;
+    if (!scope || !stage || !caps?.canDecide) { setError(t('errors.forbidden')); return; }
+    return execute({ kind: 'decision', stage, uncertain: false, request: { id, scope, operationId: crypto.randomUUID(), body: { status: values.decision, ...(values.note ? { decisionNote: values.note } : {}) } } });
+  };
+  const cancelRequest = () => {
+    const scope = timeOffScope(); if (!scope || !caps?.canCancel) { setError(t('errors.forbidden')); return; }
+    return execute({ kind: 'cancel', uncertain: false, request: { id, scope, operationId: crypto.randomUUID() } });
+  };
+  const day = (value: string) => format.dateTime(new Date(value + 'T00:00:00Z'), { dateStyle: 'medium', timeZone: 'UTC' });
+  const stages: TimeOffStage[] = ['manager', 'hr'];
+  return <ReusableDialog title={t('title')} description={data ? '#' + data.requestCode : t('loading')} trigger={trigger} size="lg" open={open} onOpenChange={changeOpen}
+    footer={<div className="flex w-full flex-wrap gap-3">
+      <Button variant="outline" className="min-h-11 flex-1 sm:min-h-9" disabled={busy} onClick={() => changeOpen(false)}>{t('actions.close')}</Button>
+      {data && caps?.canCancel && !confirmCancel ? <Button variant="delete" className="min-h-11 flex-1 sm:min-h-9" disabled={freshBlocked} onClick={() => setConfirmCancel(true)}>{t('actions.cancelRequest')}</Button> : null}
+    </div>}>
+    {!data && query.isFetching ? <p role="status">{t('loading')}</p> : null}
+    {query.error ? <div role="alert" className="rounded-lg bg-danger-subtle p-4 text-danger space-y-3"><p>{t('errors.' + timeOffProblem(query.error))}</p><Button variant="outline" onClick={() => fetchRecord(id)}>{t('actions.retry')}</Button></div> : null}
+    {data && !query.error ? <div className="space-y-5">
+      <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-raised p-4">
+        <div className="flex min-w-0 items-center gap-3"><CustomAvatar src={data.employee?.avatar || ''} alt={data.employee?.fullName || ''} className="size-11" /><p className="min-w-0 font-medium break-words"><bdi>{data.employee?.fullName}</bdi></p></div>
+        <StatusBadge status={data.status} />
       </div>
-    </ReusableDialog>
-  );
+      <dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-3 text-sm">
+        <dt className="text-fg-muted">{t('fields.leaveType')}</dt><dd>{types.has(data.timeOffType) ? types(data.timeOffType) : data.timeOffType}</dd>
+        <dt className="text-fg-muted">{t('fields.dates')}</dt><dd><bdi>{day(data.startDate)}{data.endDate !== data.startDate ? ' – ' + day(data.endDate) : ''}</bdi></dd>
+        <dt className="text-fg-muted">{t('fields.duration')}</dt><dd>{t('durations.' + data.durationType)}{data.durationType === 'partial' ? <bdi className="ms-2">{data.partialStartTime} – {data.partialEndTime}</bdi> : null}</dd>
+      </dl>
+      <p className="text-sm text-fg-muted">{t('timezone', { timeZone: session?.workspaceContext?.workspace.timeZone || 'UTC' })}</p>
+      <div><p className="mb-2 text-sm font-medium">{t('fields.noteReason')}</p><p className="rounded-xl bg-sunken p-4 text-sm whitespace-pre-wrap break-words">{data.employeeNote || t('decision.noNotesProvided')}</p></div>
+      <section aria-label={t('fields.attachments')}><h3 className="mb-2 text-sm font-medium">{t('fields.attachments')}</h3>{data.attachments.length ? <AttachmentList attachments={data.attachments} /> : <p className="text-sm text-fg-muted">{t('fields.noFileAdded')}</p>}</section>
+      {busy ? <p role="status" className="text-sm text-fg-muted">{t('working')}</p> : null}
+      {success ? <p role="status" className="rounded-lg bg-success-subtle p-4 text-fg">{success}</p> : null}
+      {error ? <p role="alert" className="rounded-lg bg-danger-subtle p-4 text-danger">{error}</p> : null}
+      {readOnly ? <p role="status" className="rounded-lg bg-warning-subtle p-4 text-fg">{t('errors.readOnly')}</p> : null}
+      {attempt && !busy ? <div role="alert" className="rounded-lg bg-warning-subtle p-4 text-fg space-y-3"><p>{t('unconfirmed')}</p><Button disabled={readOnly} onClick={() => execute(attempt)}>{t('actions.recover')}</Button></div> : null}
+      {confirmCancel ? <div role="alert" className="rounded-lg bg-warning-subtle p-4 text-fg space-y-3"><p>{t('cancelReview')}</p><div className="flex flex-wrap gap-3"><Button variant="delete" disabled={freshBlocked} onClick={cancelRequest}>{t('actions.confirmCancel')}</Button><Button variant="outline" onClick={() => setConfirmCancel(false)}>{t('actions.keepRequest')}</Button></div></div> : null}
+      {stages.map(stage => {
+        const required = stage !== 'manager' || caps?.managerRequired;
+        const status = stage === 'manager' ? data.managerActionStatus : data.hrActionStatus;
+        const note = stage === 'manager' ? data.managerDecisionNote : data.hrDecisionNote;
+        const allowed = Boolean(required && caps?.canDecide && caps.decisionStage === stage);
+        const editing = allowed && (status === 'pending' || editStage === stage);
+        return <section key={stage} aria-label={t('sections.' + (stage === 'manager' ? 'managerDecision' : 'hrDecision'))} className="rounded-xl border border-line bg-raised p-4 space-y-3">
+          <h3 className="font-semibold text-base">{t('sections.' + (stage === 'manager' ? 'managerDecision' : 'hrDecision'))}</h3>
+          <p className="text-sm">{required ? t('decision.label', { status: t('decision.status.' + status) }) : t('decision.notRequired')}</p>
+          {note && required ? <p className="text-sm text-fg-muted whitespace-pre-wrap break-words">{note}</p> : null}
+          {editing ? <Form {...form}><form onSubmit={form.handleSubmit(submit)} className="space-y-4">
+            <fieldset disabled={freshBlocked} className="min-w-0 space-y-4">
+              <div role="group" aria-label={t('decision.choose')} className="grid grid-cols-2 gap-3">
+                {(['approved', 'rejected'] as const).map(value => <Button key={value} variant="outline" type="button" aria-pressed={form.watch('decision') === value} disabled={freshBlocked} className={cn('min-h-11 sm:min-h-9', form.watch('decision') === value && 'border-fg-brand bg-brand-subtle text-fg-brand')} onClick={() => form.setValue('decision', value, { shouldValidate: true })}>
+                  {value === 'approved' ? <Check aria-hidden="true" /> : <X aria-hidden="true" />}{t(value === 'approved' ? 'actions.approve' : 'actions.reject')}
+                </Button>)}
+              </div>
+              {form.formState.errors.decision ? <p role="alert" className="text-sm text-danger">{form.formState.errors.decision.message}</p> : null}
+              <TextFormEle form={form} name="note" type="textarea" label={t('fields.noteReason')} placeholder={t('fields.notePlaceholder')} disabled={freshBlocked} />
+            </fieldset>
+            <Button type="submit" className="w-full min-h-11 sm:min-h-9" disabled={freshBlocked || !form.watch('decision')}>{t('actions.submitDecision')}</Button>
+          </form></Form> : allowed ? <Button variant="outline" disabled={freshBlocked} onClick={() => { form.reset({ note: '' }); setEditStage(stage); }}>{t('actions.changeDecision')}</Button> : null}
+        </section>;
+      })}
+    </div> : null}
+  </ReusableDialog>;
 }
-
-const DetailRow = ({ icon: Icon, label, value, valueClass }: any) => (
-  <div className="flex items-start gap-4">
-    <div className="flex items-center gap-2 text-secondary text-sm w-[120px] shrink-0">
-      <Icon className="w-[20px] h-[20px]" />
-      <span>{label}</span>
-    </div>
-    <div className={cn("text-gray-black font-medium text-[16px]", valueClass)}>
-      {value || "-"}
-    </div>
-  </div>
-);

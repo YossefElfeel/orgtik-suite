@@ -1,0 +1,297 @@
+{
+  "realm": "r1-leave-local",
+  "checks": [
+    {
+      "name": "isolated realm and frozen clock",
+      "pass": true
+    },
+    {
+      "name": "form en/1440: language direction",
+      "pass": true
+    },
+    {
+      "name": "form en/1440: theme",
+      "pass": true
+    },
+    {
+      "name": "form en/1440: upload omitted",
+      "pass": true
+    },
+    {
+      "name": "request-en-1440-light: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "request-en-1440-light: dialog fits viewport",
+      "pass": true
+    },
+    {
+      "name": "request-en-1440-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "form en/390: language direction",
+      "pass": true
+    },
+    {
+      "name": "form en/390: theme",
+      "pass": true
+    },
+    {
+      "name": "form en/390: upload omitted",
+      "pass": true
+    },
+    {
+      "name": "request-en-390-light: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "request-en-390-light: dialog fits viewport",
+      "pass": true
+    },
+    {
+      "name": "request-en-390-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "form ar/1440: language direction",
+      "pass": true
+    },
+    {
+      "name": "form ar/1440: theme",
+      "pass": true
+    },
+    {
+      "name": "form ar/1440: upload omitted",
+      "pass": true
+    },
+    {
+      "name": "request-ar-1440-dark: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "request-ar-1440-dark: dialog fits viewport",
+      "pass": true
+    },
+    {
+      "name": "request-ar-1440-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "form ar/390: language direction",
+      "pass": true
+    },
+    {
+      "name": "form ar/390: theme",
+      "pass": true
+    },
+    {
+      "name": "form ar/390: upload omitted",
+      "pass": true
+    },
+    {
+      "name": "request-ar-390-dark: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "request-ar-390-dark: dialog fits viewport",
+      "pass": true
+    },
+    {
+      "name": "request-ar-390-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "date-order error shown",
+      "pass": true
+    },
+    {
+      "name": "create: backend committed before response loss",
+      "pass": true
+    },
+    {
+      "name": "create fields lock on unknown outcome",
+      "pass": true
+    },
+    {
+      "name": "create-unconfirmed: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "create-unconfirmed: dialog fits viewport",
+      "pass": true
+    },
+    {
+      "name": "create-unconfirmed: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "one persisted create with civil date",
+      "pass": true
+    },
+    {
+      "name": "create: backend committed before response loss",
+      "pass": true
+    },
+    {
+      "name": "create recovery keeps exact body/key/scope",
+      "pass": true
+    },
+    {
+      "name": "JSON command contains no operationId/files/scope body authority",
+      "pass": true
+    },
+    {
+      "name": "create-recovered: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "create-recovered: dialog fits viewport",
+      "pass": true
+    },
+    {
+      "name": "create-recovered: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "manager approval stays pending HR review",
+      "pass": true
+    },
+    {
+      "name": "manager-approved-hr-pending: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "manager-approved-hr-pending: dialog fits viewport",
+      "pass": true
+    },
+    {
+      "name": "manager-approved-hr-pending: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "HR decision: backend committed before response loss",
+      "pass": true
+    },
+    {
+      "name": "decision-unconfirmed: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "decision-unconfirmed: dialog fits viewport",
+      "pass": true
+    },
+    {
+      "name": "decision-unconfirmed: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "HR decision: backend committed before response loss",
+      "pass": true
+    },
+    {
+      "name": "HR decision recovery keeps exact body/key/scope",
+      "pass": true
+    },
+    {
+      "name": "HR final approval and attribution persist",
+      "pass": true
+    },
+    {
+      "name": "approved-two-stages: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "approved-two-stages: dialog fits viewport",
+      "pass": true
+    },
+    {
+      "name": "approved-two-stages: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "cancel: backend committed before response loss",
+      "pass": true
+    },
+    {
+      "name": "cancel: backend committed before response loss",
+      "pass": true
+    },
+    {
+      "name": "cancellation recovery keeps exact body/key/scope",
+      "pass": true
+    },
+    {
+      "name": "cancelled record retained with no fresh actions",
+      "pass": true
+    },
+    {
+      "name": "cancelled-record: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "cancelled-record: dialog fits viewport",
+      "pass": true
+    },
+    {
+      "name": "cancelled-record: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "partial-time order error shown",
+      "pass": true
+    },
+    {
+      "name": "401 refresh never resends old body under new actor",
+      "pass": true
+    },
+    {
+      "name": "superseded refresh never logs out new actor",
+      "pass": true
+    },
+    {
+      "name": "original uncertain attempt retains key/body/scope",
+      "pass": true
+    },
+    {
+      "name": "business clock unchanged",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "request-en-1440-light.png",
+    "request-en-390-light.png",
+    "request-ar-1440-dark.png",
+    "request-ar-390-dark.png",
+    "create-unconfirmed.png",
+    "create-recovered.png",
+    "manager-approved-hr-pending.png",
+    "decision-unconfirmed.png",
+    "approved-two-stages.png",
+    "cancelled-record.png"
+  ],
+  "source": {
+    "apps/hr/redux/app/baseApi.ts": "82705efc36b683aa857c5f77db5173507a652355f3eb703529e1b6711ff56283",
+    "apps/hr/redux/features/timeOff/timeOffApi.ts": "b656468e6171beefc41d4674b443cbf0fba0bdfb7601df78a421a39bdc049b92",
+    "apps/hr/lib/time-off-attempt.ts": "23cea801bd166489b080d7dbe471aa32daae78273e87d8d2224c267d0840b64e",
+    "apps/hr/components/pages/attendance/AddTimeDialog/index.tsx": "df88e942aaa2cd2ded81c3c23bcd9e6b4213b7b09cfafefb24e6cb929b4f3fb2",
+    "apps/hr/components/pages/time-off/TimeOffDialog/index.tsx": "a7a1a6d6821c4b24e6bed1cda9f84d8c0582b8cf32e50b5984b026ab3b775cba",
+    "apps/hr/schemas/attendance/add-time-off.schemas.ts": "772c16cbf2e3793c0934b9a73f5cd3d56db06cf757020e04f3de93be0ab57fcb",
+    "apps/hr/messages/en.json": "625e9df0c71a29fdc14edce83505237ff38f5a30954441c0df908e48f430759a",
+    "apps/hr/messages/ar.json": "9e686a0b1112424b55402c9587c550b8f6f8a998685bd89e1e0c1ee9b0c9f98d",
+    "mock/apps/hr/leave.js": "b0414006b44fe7064b50cbdd463e5f53dfd79165c49cf410f5c4c883f3a7b05b",
+    "mock/lib/business-calendar.js": "cff7a602517503816f5781e7e977bedfbdf37c978bc10c3157aaab794dff5bae"
+  },
+  "clockMutation": false,
+  "dataReset": false,
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "passed": 64,
+  "completed": true
+}

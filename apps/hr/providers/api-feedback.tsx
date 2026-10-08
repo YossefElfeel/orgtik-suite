@@ -16,6 +16,9 @@ const QUIET = new Set([
   "updateOnboardingStep",
   "offboardEmployee",
   "offboardingAction",
+  "createTimeOffRequest",
+  "makeTimeOffDecision",
+  "cancelTimeOffRequest",
 ]);
 
 const SPECIFIC: Record<string, string> = {
@@ -54,8 +57,8 @@ export function ApiFeedback() {
         return t("saved");
       },
       error: ({ endpoint, status, code }: FeedbackContext) => {
-        if (code === "read_only") return t("readOnly");
         if (QUIET.has(endpoint)) return null;
+        if (code === "read_only") return t("readOnly");
         switch (status) {
           case 403:
             return t("forbidden");

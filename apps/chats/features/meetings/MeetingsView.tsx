@@ -10,6 +10,7 @@
  */
 
 import { useRef, useState } from "react";
+import { useClientSession } from "@orgtik/ui/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CalendarBlank, Plus, VideoCamera } from "@phosphor-icons/react";
@@ -20,7 +21,8 @@ import { PeoplePicker } from "@/features/chat/ChannelDialogs";
 import { MeetingSummary } from "./MeetingSummary";
 import { MeetingsCalendar } from "./MeetingsCalendar";
 import { MeetingLinkRow, useLinkPolicy } from "./ShareMeeting";
-import { fromKey, toKey, type DateKey } from "@/lib/analytics";
+import { addDays, type DateKey } from "@/lib/analytics";
+import { workspaceDayKey, workspaceStart } from "@/lib/calendar-availability";
 import { useCan, useMe, useMeetings, usePastMeetings, useRoom, useUsers } from "@/store/hooks";
 import { useWorkspace } from "@/store";
 import { useT } from "@/lib/i18n";
@@ -161,6 +163,7 @@ export function MeetingsView() {
 }
 
 function MeetingRow({ meeting, past }: { meeting: Meeting; past: boolean }) {
+  const timeZone = useClientSession()?.workspaceContext?.workspace.timeZone ?? "UTC";
   const room = useRoom(meeting.roomId ?? "");
   const users = useUsers();
   const t = useT();
@@ -203,8 +206,8 @@ function MeetingRow({ meeting, past }: { meeting: Meeting; past: boolean }) {
               {meeting.recurrence === "weekly" && <Chip>{t("meetings.weekly", "Weekly")}</Chip>}
             </div>
             <p className="tabular mt-0.5 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
-              {past ? `${formatShortDay(meeting.startsAt)} · ` : ""}
-              {formatRange(meeting.startsAt, meeting.endsAt)}
+              {past ? `${formatShortDay(meeting.startsAt, timeZone)} · ` : ""}
+              {formatRange(meeting.startsAt, meeting.endsAt, timeZone)}
               {room && (<>{" · "}<bdi>{room.name}</bdi></>)}
             </p>
           </div>
@@ -247,6 +250,7 @@ const DURATIONS = [30, 45, 60, 90] as const;
  * email; the room is one of the floor's. Nothing here is a placeholder.
  */
 function ScheduleForm({ onClose, date }: { onClose: () => void; date: DateKey | null }) {
+  const timeZone = useClientSession()?.workspaceContext?.workspace.timeZone ?? "UTC";
   const scheduleMeeting = useWorkspace((s) => s.scheduleMeeting);
   const me = useWorkspace((s) => s.me);
   const users = useUsers();
@@ -255,7 +259,7 @@ function ScheduleForm({ onClose, date }: { onClose: () => void; date: DateKey | 
   const t = useT();
 
   const [title, setTitle] = useState("");
-  const [day, setDay] = useState<DateKey>(date ?? toKey(new Date()));
+  const [day, setDay] = useState<DateKey>(date ?? workspaceDayKey(new Date(), timeZone));
   const [time, setTime] = useState("15:00");
   const [minutes, setMinutes] = useState<number>(defaultMinutes);
   const [roomId, setRoomId] = useState<string>(() => rooms.find((r) => r.kind === "meeting" || r.kind === "boardroom")?.id ?? "");
@@ -273,17 +277,16 @@ function ScheduleForm({ onClose, date }: { onClose: () => void; date: DateKey | 
       setError(t("meetings.titleRequired", "Give the meeting a title so people know what it is."));
       return;
     }
-    const parts = time.split(":");
-    const start = fromKey(day);
-    start.setHours(Number(parts[0] ?? 15), Number(parts[1] ?? 0), 0, 0);
-    const end = new Date(start.getTime() + minutes * 60_000);
+    let starts: Date[];
+    try { starts = Array.from({ length: weekly ? 4 : 1 }, (_, index) => workspaceStart(addDays(day, index * 7), time, timeZone)); }
+    catch { setError(t("availability.invalidTime", "This time does not exist in the workspace timezone. Choose another start time.")); return; }
 
     /* A weekly meeting is its next four occurrences, each a meeting of its
        own, so the calendar and the rooms see them without a rule engine. */
     const stamp = Date.now();
-    for (let i = 0; i < (weekly ? 4 : 1); i++) {
-      const s0 = new Date(start.getTime() + i * 7 * 864e5);
-      const e0 = new Date(end.getTime() + i * 7 * 864e5);
+    for (let i = 0; i < starts.length; i++) {
+      const s0 = starts[i]!;
+      const e0 = new Date(s0.getTime() + minutes * 60_000);
       scheduleMeeting({
         id: `mt-${stamp}${weekly ? `-${i}` : ""}`,
         title: title.trim(),
@@ -305,6 +308,7 @@ function ScheduleForm({ onClose, date }: { onClose: () => void; date: DateKey | 
   return (
     <Panel className="mb-4">
       <SectionHead title={t("meetings.newMeeting", "New meeting")} />
+      <p className="mb-3 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>{t("availability.workspaceTime", "Times use the workspace timezone: {zone}", { zone: timeZone })}</p>
       <form onSubmit={submit} className="flex flex-col gap-3">
         <Field
           label={t("meetings.titleLabel", "Title")}
@@ -442,6 +446,7 @@ function ScheduleForm({ onClose, date }: { onClose: () => void; date: DateKey | 
 /* ----------------------------------------------------------------- detail */
 
 export function MeetingDetail({ meetingId }: { meetingId: string }) {
+  const timeZone = useClientSession()?.workspaceContext?.workspace.timeZone ?? "UTC";
   const meeting = useWorkspace((s) =>
     s.meetings.find((m) => m.id === meetingId) ?? s.pastMeetings.find((m) => m.id === meetingId),
   );
@@ -479,7 +484,7 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
           <bdi>{meeting.title}</bdi>
         </h1>
         <p className="tabular mt-1 text-[13.5px]" style={{ color: "var(--color-ink-muted)" }}>
-          {formatShortDay(meeting.startsAt)} · {formatRange(meeting.startsAt, meeting.endsAt)}
+          {formatShortDay(meeting.startsAt, timeZone)} · {formatRange(meeting.startsAt, meeting.endsAt, timeZone)}
           {room && (<>{" · "}<bdi>{room.name}</bdi></>)}
         </p>
         {meeting.description && (
@@ -573,7 +578,7 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
 
         {meeting.notes && (
           <section className="mt-6">
-            <SectionHead title={t("meetings.notes", "Notes")} meta={formatTime(meeting.endsAt)} />
+            <SectionHead title={t("meetings.notes", "Notes")} meta={formatTime(meeting.endsAt, timeZone)} />
             <Panel>
               <p className="text-[13.5px] leading-relaxed" style={{ color: "var(--color-ink)", maxWidth: "68ch" }}>
                 {meeting.notes}

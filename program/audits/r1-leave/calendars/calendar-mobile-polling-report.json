@@ -1,0 +1,15 @@
+{
+  "scope": "Focused final2 actual mobile polling checks only, not release acceptance",
+  "checks": [
+    {
+      "name": "en-390-light HR rejection removes half-day entry and reapproval restores full-day",
+      "pass": true,
+      "note": "Focused final rerun used visible accessible agenda names; live requests stayed mounted through approval/reset/rejection polling."
+    },
+    {
+      "name": "ar-390-dark HR rejection removes half-day entry and reapproval restores full-day",
+      "pass": true,
+      "note": "Focused final rerun used visible accessible agenda names; live requests stayed mounted through approval/reset/rejection polling."
+    }
+  ]
+}

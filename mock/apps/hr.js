@@ -59,6 +59,7 @@ function helpers(ctx, runtime) {
     res.setHeader("Access-Control-Expose-Headers", "Content-Disposition");
     res.end(buf);
   };
+  if (identity.workspaceMode) h.leave = require('./hr/leave').createLeaveService({ db, V, C, L, identity, workspace: ctx.workspace, context: () => identity.currentContext(), notify: h.notify, log: h.log });
   return h;
 }
 
@@ -75,7 +76,7 @@ module.exports = {
     hr_system: Object.fromEntries(STAFF_KEYS.map((k) => [k, HR_ROLES[k] || ["employee"]])),
   },
 
-  createState,
+  createState, helpers,
   createWorkspaceRuntime(input) { return require("../lib/tool-adapters/hr").createWorkspaceRuntime(input, module.exports); },
   routes(app, ctx, runtime = legacyState(ctx)) {
     const { db } = runtime;

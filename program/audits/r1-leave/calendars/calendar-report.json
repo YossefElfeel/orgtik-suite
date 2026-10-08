@@ -1,0 +1,164 @@
+{
+  "scope": "Local J7 Tasks/Chats calendar approval projection only, not release acceptance; injected503 state explicitly simulated",
+  "at": "2026-10-07T23:54:46.882Z",
+  "sourceHashes": {
+    "apps/tasks/components/task/TaskCalendar.tsx": "2cd26ca8930d71f119c1d2f60cbd60e07c3bd47f1bb9008ba45fa5e925621245",
+    "apps/tasks/lib/calendar-availability.ts": "21bba4043b8b3fb1328f747c4fdd36b00d4a80ed53f4069e61b0199c558fcf99",
+    "apps/tasks/redux/features/calendar/calendarApi.ts": "2a8be1243caa4e34372596937b6a8e27b2e18f771b98e7baf29ef24122fb5307",
+    "apps/chats/features/meetings/MeetingsCalendar.tsx": "deaf666cd248841e5c3d3e876ea5cddf14546cb9ed00ae6ca9ca8539c6d5692c",
+    "apps/chats/features/meetings/MeetingsView.tsx": "c05702370ffa9c7032f2053e6bcf71dcf538abf4eb41deeef8701a6a3fed63be",
+    "apps/chats/features/meetings/useAvailability.ts": "f17a4147bc2d0c15fe6cc9586db77cce74f3b6649437845a7fcc1110acf70a70",
+    "apps/chats/lib/calendar-availability.ts": "00f61e6c530ea58fbb422450b7287d729c4b0c0b2e2ebe2644569d20a13ea64c",
+    "apps/chats/components/ui/Calendar.tsx": "f2a6b2d4f879d41cbcc64da05b487e3450b02c21019ecd95f42f42a3771bc789"
+  },
+  "checks": [
+    {
+      "name": "en-1440-light Tasks approved projection, workspace timezone, privacy and readonly navigation",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light Tasks localized responsive calendar",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light existing Task click still opens its task sheet",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light Chats approved readonly day, private fields absent and workspace timezone",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light Chats localized responsive month",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light Chats week shows full, half and partial readonly spans",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark Tasks approved projection, workspace timezone, privacy and readonly navigation",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark Tasks localized responsive calendar",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark existing Task click still opens its task sheet",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark Chats approved readonly day, private fields absent and workspace timezone",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark Chats localized responsive month",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark Chats week shows full, half and partial readonly spans",
+      "pass": true
+    },
+    {
+      "name": "en-390-light Tasks approved projection, workspace timezone, privacy and readonly navigation",
+      "pass": true
+    },
+    {
+      "name": "en-390-light Tasks localized responsive calendar",
+      "pass": true
+    },
+    {
+      "name": "en-390-light existing Task click still opens its task sheet",
+      "pass": true
+    },
+    {
+      "name": "en-390-light Chats approved readonly day, private fields absent and workspace timezone",
+      "pass": true
+    },
+    {
+      "name": "en-390-light Chats localized responsive month",
+      "pass": true
+    },
+    {
+      "name": "en-390-light Chats week shows full, half and partial readonly spans",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark Tasks approved projection, workspace timezone, privacy and readonly navigation",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark Tasks localized responsive calendar",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark existing Task click still opens its task sheet",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark Chats approved readonly day, private fields absent and workspace timezone",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark Chats localized responsive month",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark Chats week shows full, half and partial readonly spans",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light HR reset removes full-day availability in both apps by polling",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark HR reset removes full-day availability in both apps by polling",
+      "pass": true
+    },
+    {
+      "name": "en-390-light HR reset removes full-day availability in both apps by polling",
+      "pass": true
+    },
+    {
+      "name": "ar-390-dark HR reset removes full-day availability in both apps by polling",
+      "pass": true
+    },
+    {
+      "name": "en-1440-light HR rejection removes half-day entry and reapproval restores full-day",
+      "pass": true
+    },
+    {
+      "name": "ar-1440-dark HR rejection removes half-day entry and reapproval restores full-day",
+      "pass": true
+    },
+    {
+      "name": "en-390-light HR rejection removes half-day entry and reapproval restores full-day",
+      "pass": true,
+      "note": "Focused final rerun used visible accessible agenda names; live requests stayed mounted through approval/reset/rejection polling."
+    },
+    {
+      "name": "ar-390-dark HR rejection removes half-day entry and reapproval restores full-day",
+      "pass": true,
+      "note": "Focused final rerun used visible accessible agenda names; live requests stayed mounted through approval/reset/rejection polling."
+    },
+    {
+      "name": "Tasks fetch outage shows useful error/retry without a false empty projection",
+      "pass": true
+    },
+    {
+      "name": "Tasks retry returns actual scoped API availability",
+      "pass": true
+    },
+    {
+      "name": "Chats fetch outage shows useful error/retry without a false empty projection",
+      "pass": true
+    },
+    {
+      "name": "Chats retry returns actual scoped API availability",
+      "pass": true
+    }
+  ],
+  "findings": [],
+  "confirmation": "One Tasks detail focus/scroll repair; final2 mobile polling assertions corrected a hidden desktop selector. All36 final scoped checks pass."
+}
