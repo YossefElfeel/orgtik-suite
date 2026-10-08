@@ -2002,6 +2002,21 @@
     "postTitle": "Beitragstitel",
     "addPost": "Entwurfsbeitrag hinzufügen",
     "postOpened": "{name} ausgewählt; Zeitplan unten bearbeiten.",
-    "connectionError": "Demoverbindung nicht verfügbar. Erneut versuchen."
+    "connectionError": "Demoverbindung nicht verfügbar. Erneut versuchen.",
+    "websiteCampaign": "Website-Kampagnenverbindung",
+    "websiteCampaignHint": "OrgTik-Partnerkampagne für pg_partners registrieren. Im Demo-Formular von Website Manager wählen; CRM-Leads erscheinen hier mit Kampagne und Seitenquelle.",
+    "campaignName": "Kampagnenname",
+    "registerCampaign": "Kampagne mit Website Manager verbinden",
+    "campaignRegistered": "Kampagne für das Partner-Demo-Formular registriert.",
+    "campaignReady": "Website-Kampagne bereit",
+    "campaignStaffOnly": "OrgTik und Mona, Hoda oder die aktuelle Mitarbeiterpersona wählen. Kundenkampagnen bleiben im eigenen Arbeitsbereich.",
+    "campaignConnected": "Über die Suite-Suche mit dem Kampagnennamen das WM-Formular öffnen. Leads behalten launch-demo und wm:pg_partners.",
+    "campaignLocal": "Nur Einzelvorschau. Ohne lokale Demo-Verbindung keine Übertragung an WM.",
+    "leadName": "CRM-Kontakt",
+    "leadSource": "Seite / Quelle",
+    "campaignId": "Kampagnenreferenz",
+    "crmConnectedNote": "Die Demo teilt diese zugeordneten Leads mit Sales in diesem Arbeitsbereich. OrgTik-WM-Formularleads erscheinen mit Seiten- und Kampagnenreferenz; alle Daten sind simuliert.",
+    "presentationWorkspace": "Demo-Arbeitsbereich",
+    "emptyWorkspaceLabel": "Neuer Arbeitsbereich"
   }
 }

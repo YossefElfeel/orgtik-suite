@@ -9,7 +9,7 @@ const AUDIENCES: Record<string, Audience> = { global: "suite", task_manager: "to
 
 export async function handoffHref(domain: string, accessToken: string, opts: { scope?: string; locale?: string } = {}): Promise<string> {
   const base = domain.replace(/\/$/, "");
-  const path = `${base}${opts.locale ? `/${opts.locale}` : ""}/auth`;
+  const path = `${base}${opts.scope !== "global" && opts.locale ? `/${opts.locale}` : ""}/auth`;
   const audience = AUDIENCES[opts.scope || "global"];
   if (!audience) throw new Error("This app has no session destination.");
   // Let a cold target render its entry route before the short-lived code is issued.

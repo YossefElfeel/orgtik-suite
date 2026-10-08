@@ -1,0 +1,82 @@
+{
+  "previousAttempt": {
+    "scenario": "J1-public-3503ac6a-74b7-462a-8705-45eaea2b7e87",
+    "scope": "Actual isolated public checkout/account-link/tool UI golden; no reset/clock advance",
+    "steps": [
+      "Website Tasks offer and platform regional price visible",
+      "Simulated paid receipt appears before account setup"
+    ],
+    "orders": [
+      {
+        "status": 200,
+        "reference": "ORG-E78F40DA",
+        "paymentStatus": "succeeded",
+        "currency": "CHF",
+        "total": 1600
+      }
+    ],
+    "errors": [],
+    "initialClock": {
+      "mode": "frozen",
+      "now": "2026-10-07T09:00:00Z",
+      "realNow": "2026-10-08T14:39:26.835Z",
+      "offsetMinutes": -1779
+    },
+    "sandbox": "presentation-raMndB",
+    "offerText": "OPERATIONS\nTasks\n\nProject planning · Ownership & priorities · Progress visibility\n\nCHF 16\n1 month upfront\nCHF 16/month equivalent\nAdd to cart\nCustomize selection",
+    "receiptText": "Payment successful\n\nTest payment complete. No money was charged.\n\nAccess your customer account.\n\nOrder ORG-E78F40DA · CHF 16 paid.\n\nPayment method: TWINT\n\nYour purchase is saved. Set up your account to continue.\n\nChoose a password for j1-public-3503ac6a-74b7-462a-8705-45eaea2b7e87@local.fixture.test. Your billing details are already saved. We’ll then open your dashboard.\n\nSet up my account\nContinue browsing\n\nSoftware activates after you link this purchase to your workspace. Service periods begin after onboarding confirms activation in your account.\n\nYour purchase\nPackage and duration\tPaid upfront\nTasks\n1 month · Manual renewal\nSeat capacity: 2\nReady to activate in your workspace\n\tCHF 16\n0% duration saving\n\nTotal paid\tCHF 16\n\nView invoices and payment history in your OrgTik customer account.",
+    "completed": false,
+    "error": "locator.waitFor: Timeout 60000ms exceeded.",
+    "lastScreen": {
+      "url": "http://localhost:4600/auth/handoff",
+      "text": "Every app in your workspace, one sign-in.\n\nFiles\nTasks\nHR\nCRM\nMarketing\nChats\nWebsite Manager\n\n© OrgTik\n\nEnglish\n\nThis sign-in link has expired or was already used.\n\nSign in again to continue to your account.\n\nSign in"
+    }
+  },
+  "scenario": "J1-public-910e46b4-0744-4eb4-ab23-2f5007fe434a",
+  "scope": "Actual isolated public checkout/account-link/tool UI golden; no reset/clock advance",
+  "steps": [
+    "Website Tasks offer is visible",
+    "Simulated paid receipt appears before account setup",
+    "Purchased account links and reaches workspace launcher",
+    "Linked paid invoice is visible",
+    "Purchased owner opens Tasks through existing handoff after resuming the same buyer",
+    "First task appears in the client presentation reference after actual checkout/account linking",
+    "Actual paid receipt and invoice totals agree"
+  ],
+  "orders": [
+    {
+      "status": 200,
+      "reference": "ORG-91E29F0D",
+      "paymentStatus": "succeeded",
+      "currency": "CHF",
+      "totalMinor": 1600
+    }
+  ],
+  "errors": [],
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00Z",
+    "realNow": "2026-10-08T14:47:40.288Z",
+    "offsetMinutes": -1788
+  },
+  "sandbox": "presentation-raMndB",
+  "offerText": "OPERATIONS\nTasks\n\nProject planning · Ownership & priorities · Progress visibility\n\n—\n1 month upfront\n—/month equivalent\nAdd to cart\nCustomize selection",
+  "receiptText": "Payment successful\n\nTest payment complete. No money was charged.\n\nAccess your customer account.\n\nOrder ORG-91E29F0D · CHF 16 paid.\n\nPayment method: TWINT\n\nYour purchase is saved. Set up your account to continue.\n\nChoose a password for j1-public-910e46b4-0744-4eb4-ab23-2f5007fe434a@local.fixture.test. Your billing details are already saved. We’ll then open your dashboard.\n\nSet up my account\nContinue browsing\n\nSoftware activates after you link this purchase to your workspace. Service periods begin after onboarding confirms activation in your account.\n\nYour purchase\nPackage and duration\tPaid upfront\nTasks\n1 month · Manual renewal\nSeat capacity: 2\nReady to activate in your workspace\n\tCHF 16\n0% duration saving\n\nTotal paid\tCHF 16\n\nView invoices and payment history in your OrgTik customer account.",
+  "invoiceText": "Skip to content\nHome\nTasks\nOrgTik\nHome\nAccount presentation\nTools and plans\nTeam\nServices\nSupport\nNotifications\n1\nMock mailbox\nBilling\nSubscriptions\nInvoices\nPayment methods\nBilling details\nWorkspace\nWorkspace settings\nPrototype's workspace\nOwner\nPB\nDemo controls\nPrototype · mock data\nInvoices\n\nEvery invoice for this workspace, newest first. Open one to see its lines, payments and refunds, or to print it.\n\nNumber\tTotal\tStatus\tIssued\tDue\tPaid\nINV-2026-001051\t\nCHF 16.00\n\t\nPaid\n\t7 Oct 2026\t7 Oct 2026\t7 Oct 2026\n1–1 of 1\nRows per page\n25\n1",
+  "completed": true,
+  "totalsAgree": true,
+  "coreJourneyComplete": true,
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00Z",
+    "realNow": "2026-10-08T15:04:07.455Z",
+    "offsetMinutes": -1804
+  },
+  "clockUnchanged": true,
+  "firstTaskStorage": "Client presentation memory only; no backend task creation claimed. The actual purchased workspace Dashboard was empty.",
+  "capture": ".qa/public-checkout-j1-tasks-first-use.png",
+  "resumedSameBuyer": true,
+  "initialToolWait": "page.waitForURL: Timeout 90000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"domcontentloaded\"\n  navigated to \"http://localhost:4600/go/task_manager\"\n============================================================",
+  "clockComparison": "UTC instants compared; initial PowerShell JSON normalization omitted .000 milliseconds without changing time.",
+  "acceptance": "Actual payment/account/invoice/Tasks entry completed with same buyer/order across a resumed cold-route wait. First task is explicitly a client presentation reference."
+}

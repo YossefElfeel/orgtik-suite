@@ -2901,6 +2901,20 @@
     "csvReviewCount": "Rivedi {count} contatti prima di aggiungerli a questo spazio.",
     "csvBack": "Indietro",
     "csvContinue": "Continua",
-    "csvNewImport": "Avvia un’altra importazione"
+    "csvNewImport": "Avvia un’altra importazione",
+    "workspaceReceipt": "Ricevuta spazio cliente",
+    "workspaceReceiptHint": "Una trattativa vinta può creare una ricevuta simulata intestata al contatto cliente.",
+    "workspaceReady": "Spazio demo pronto",
+    "workspaceOwner": "Proprietario cliente",
+    "createWorkspace": "Crea ricevuta spazio demo",
+    "retryWorkspace": "Riprova ricevuta demo",
+    "workspaceReadFailed": "Il servizio demo non è disponibile. Riprova per creare o recuperare la stessa ricevuta.",
+    "workspaceStaffOnly": "Solo Mona o il profilo OrgTik corrente può creare la ricevuta di una trattativa vinta.",
+    "workspaceConnected": "Salvato nella demo isolata. Riaprendo si recupera la stessa ricevuta; nessun account, posto o fattura reale.",
+    "workspaceLocal": "Solo ricevuta della scena autonoma. Non crea uno spazio cliente né invia inviti.",
+    "workspaceConfirm": "Creare uno spazio cliente simulato?",
+    "workspaceImpact": "Crea una ricevuta demo per {name}, intestata a {owner}. Nessuna modifica ad account, abbonamenti, fatture o dati di fatturazione esistenti.",
+    "leadAttribution": "Attribuzione del lead",
+    "campaignReference": "Campagna / tag"
   }
 }

@@ -2002,6 +2002,21 @@
     "postTitle": "عنوان المنشور",
     "addPost": "إضافة منشور مسودة",
     "postOpened": "تم اختيار {name}؛ عدّل الجدولة بالأسفل.",
-    "connectionError": "اتصال العرض غير متاح. أعد المحاولة."
+    "connectionError": "اتصال العرض غير متاح. أعد المحاولة.",
+    "websiteCampaign": "ربط حملة الموقع",
+    "websiteCampaignHint": "سجّل حملة شركاء OrgTik للصفحة pg_partners. اخترها في نموذج Website Manager المحاكى؛ تعود جهات CRM هنا مع الحملة ومصدر الصفحة.",
+    "campaignName": "اسم الحملة",
+    "registerCampaign": "ربط الحملة بـWebsite Manager",
+    "campaignRegistered": "سُجلت الحملة لنموذج الشركاء المحاكى.",
+    "campaignReady": "حملة الموقع جاهزة",
+    "campaignStaffOnly": "اختر OrgTik ومونا أو هدى أو شخصية الفريق الحالية لتسجيل حملة موقع. تبقى حملات العملاء في مساحاتهم.",
+    "campaignConnected": "استخدم بحث المجموعة باسم الحملة لفتح نموذج WM عبر الانتقال الحالي. تحتفظ الجهات بإسناد launch-demo وwm:pg_partners.",
+    "campaignLocal": "معاينة مستقلة فقط. لا تنتقل الحملات إلى WM دون اتصال العرض المحلي.",
+    "leadName": "جهة اتصال CRM",
+    "leadSource": "الصفحة / المصدر",
+    "campaignId": "مرجع الحملة",
+    "crmConnectedNote": "يشارك اتصال العرض هذه الجهات المنسوبة مع Sales في مساحة العمل هذه. تعود جهات نموذج WM لدى OrgTik مع الصفحة ومرجع الحملة؛ جميع السجلات محاكاة.",
+    "presentationWorkspace": "مساحة العرض",
+    "emptyWorkspaceLabel": "مساحة عمل جديدة"
   }
 }

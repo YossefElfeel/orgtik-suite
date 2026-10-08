@@ -39,6 +39,7 @@ declare const copy: {
     none: [string, string, string, string, string];
     renewal: [string, string, string, string, string];
     grace: [string, string, string, string, string];
+    expiredGrace: [string, string, string, string, string];
     overdue: [string, string, string, string, string];
     language: [string, string, string, string, string];
     theme: [string, string, string, string, string];

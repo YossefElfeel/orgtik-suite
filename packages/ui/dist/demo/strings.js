@@ -38,6 +38,7 @@ const copy = {
     none: ["No scenario", "بدون سيناريو", "Kein Szenario", "Aucun scénario", "Nessuno scenario"],
     renewal: ["Renewal payment failed", "فشل دفع التجديد", "Verlängerungszahlung fehlgeschlagen", "Échec du paiement de renouvellement", "Pagamento del rinnovo non riuscito"],
     grace: ["Grace period · day 8", "فترة السماح · اليوم ٨", "Kulanzzeit · Tag 8", "Délai de grâce · jour 8", "Periodo di tolleranza · giorno 8"],
+    expiredGrace: ["Grace ended · read-only", "انتهت فترة السماح · قراءة فقط", "Kulanz beendet · schreibgeschützt", "Délai terminé · lecture seule", "Tolleranza terminata · sola lettura"],
     overdue: ["Overdue task reminder", "تذكير بمهمة متأخرة", "Erinnerung an überfällige Aufgabe", "Rappel de tâche en retard", "Promemoria attività scaduta"],
     language: ["Language", "اللغة", "Sprache", "Langue", "Lingua"],
     theme: ["Theme", "المظهر", "Design", "Thème", "Tema"],

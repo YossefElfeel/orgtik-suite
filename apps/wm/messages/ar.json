@@ -1480,6 +1480,13 @@
     "internalTitle": "استوديو فريق OrgTik",
     "internalBody": "Website Manager هو CMS الداخلي لـOrgTik. اختر OrgTik وشخصية محتوى أو فريق من لوحة العرض.",
     "leadConnected": "تم إنشاء العميل المحتمل في مبيعات OrgTik مع مصدر صفحة الشركاء.",
-    "connectionError": "تعذر الاتصال. أعد المحاولة."
+    "connectionError": "تعذر الاتصال. أعد المحاولة.",
+    "campaign": "الحملة التسويقية",
+    "noCampaign": "دون حملة مسجلة",
+    "campaignHint": "تأتي الحملات من سيناريو Marketing لدى OrgTik. تحمل جهات نموذج الشركاء المقبولة الحملة إلى CRM وMarketing لدى OrgTik؛ تبقى بيانات مساحات العملاء منفصلة.",
+    "campaignReference": "الحملة",
+    "crmReference": "جهة CRM لدى OrgTik",
+    "visitorName": "اسم جهة الاتصال",
+    "visitorNameError": "أدخل اسم جهة اتصال من 1 إلى 120 حرفًا."
   }
 }

@@ -1480,6 +1480,13 @@
     "internalTitle": "OrgTik staff studio",
     "internalBody": "Website Manager is OrgTik’s internal CMS. Choose OrgTik and a content/staff persona in Demo controls.",
     "leadConnected": "Lead created in OrgTik Sales with Partners attribution.",
-    "connectionError": "The connection failed. Try the action again."
+    "connectionError": "The connection failed. Try the action again.",
+    "campaign": "Marketing campaign",
+    "noCampaign": "No registered campaign",
+    "campaignHint": "Campaigns come from OrgTik’s Marketing scene. Accepted Partners form leads carry this campaign into OrgTik CRM and Marketing; customer workspace data stays separate.",
+    "campaignReference": "Campaign",
+    "crmReference": "OrgTik CRM lead",
+    "visitorName": "Contact name",
+    "visitorNameError": "Enter a contact name of 1–120 characters."
   }
 }

@@ -2002,6 +2002,21 @@
     "postTitle": "Post title",
     "addPost": "Add draft post",
     "postOpened": "Selected {name}; edit its schedule below.",
-    "connectionError": "The presentation connection is unavailable. Try again."
+    "connectionError": "The presentation connection is unavailable. Try again.",
+    "websiteCampaign": "Website campaign connection",
+    "websiteCampaignHint": "Register the OrgTik partner campaign for pg_partners. Select it in Website Manager’s mock form; resulting CRM leads return here with their campaign and page source.",
+    "campaignName": "Campaign name",
+    "registerCampaign": "Connect campaign to Website Manager",
+    "campaignRegistered": "Campaign registered for the Partners mock form.",
+    "campaignReady": "Website campaign ready",
+    "campaignStaffOnly": "Choose OrgTik and Mona, Hoda or the current staff persona to register a website campaign. Customer campaigns stay in their own workspace.",
+    "campaignConnected": "Use suite search for the campaign name to open its WM form through the existing handoff. Leads retain launch-demo and wm:pg_partners attribution.",
+    "campaignLocal": "Standalone preview only. Campaigns are not transferred to WM without the local demo connection.",
+    "leadName": "CRM contact",
+    "leadSource": "Page / source",
+    "campaignId": "Campaign reference",
+    "crmConnectedNote": "The demo connection shares these attributed leads with Sales in this workspace. OrgTik’s WM form leads return here with their page and campaign reference; all records are simulated.",
+    "presentationWorkspace": "Demo workspace",
+    "emptyWorkspaceLabel": "New workspace"
   }
 }

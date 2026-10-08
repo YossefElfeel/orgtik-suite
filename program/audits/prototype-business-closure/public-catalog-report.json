@@ -1,0 +1,52 @@
+{
+  "scope": "J4/J5 website/catalog pricing surface verification; no staff status/price mutation",
+  "steps": [
+    "Four-term Tasks prices equal platform catalog snapshots",
+    "Existing savings0/5/10/15% retained",
+    "Website software catalog page opens"
+  ],
+  "terms": [
+    {
+      "months": 1,
+      "saving": 0,
+      "minorUnits": 1600,
+      "display": "CHF 16",
+      "pass": true
+    },
+    {
+      "months": 3,
+      "saving": 5,
+      "minorUnits": 4560,
+      "display": "CHF 45.60",
+      "pass": true
+    },
+    {
+      "months": 6,
+      "saving": 10,
+      "minorUnits": 8640,
+      "display": "CHF 86.40",
+      "pass": true
+    },
+    {
+      "months": 12,
+      "saving": 15,
+      "minorUnits": 16320,
+      "display": "CHF 163.20",
+      "pass": true
+    }
+  ],
+  "fullJourneyAcceptance": false,
+  "region": {
+    "country": "CH",
+    "currency": "CHF",
+    "source": "fallback"
+  },
+  "currency": "CHF",
+  "priceVersion": 1,
+  "productPageText": "Skip to content\nView project\nHome\nServices\nSoftware\nWork\nAbout\nInsights\n0\nEN\nSign in\nStart a project\nHome\nSoftware\nORGTIK SOFTWARE · MODULAR BUSINESS SUITE\nOne workspace.\nSix systems.\nBuilt to work together.\n\nStart with one module and expand when the business is ready. Every step stays connected to the same, clearer operating picture.\n\nBuild your plan\nHow it connects\nSIX SYSTEMS\nHR\nOperations\nCRM\nGrowth\nFiles\nOperations\nTasks\nOperations\nMarketing\nGrowth\nWebsite Manager\nGrowth\nSave up to 15% with longer periods or more products.\nSOFTWARE\nHR\nCRM\nFiles\nTasks\nMarketing\nWebsite Manager\nTeam Workspace\nSales & Marketing\nBusiness Suite\nSOFTWARE\nHR\nCRM\nFiles\nTasks\nMarketing\nWebsite Manager\nTeam Workspace\nSales & Marketing\nBusiness Suite\n(01)\nHOW IT CONNECTS\nLet the context move\nwith the work.\n\nIn one workspace, nothing gets re-typed at a hand-off. Start with CRM, then follow one customer through all six systems and watch the context build up.\n\n01 · CRMSTART HERE\nStart with the relationship.\nContacts, companies and the next conversation live in one shared view.\n02 · TASKS\nThe relationship becomes work.\n03 · FILES\nThe work creates knowledge.\n04 · HR\nThe right people stay on it.\n05 · MARKETING\nGood work fuels the next campaign.\n06 · WEBSITE\nThe next request arrives.\nCRM\nTasks\nFiles\nHR\nMarketing\nWebsite\nCustomer record\nShared across every module\n2 pieces of context\nCONTEXT THAT TRAVELS WITH THE WORK\nContact & company\nCRM\nNext conversation\nCRM\nSales starts the relationship in CRM.\nConsistent navigation across the modules you choose\nRole-aware access and team invitations\nShared support, updates, backups and export planning\nSTART WITH A BUNDLE\nReady-made bundles.\n\nA curated collection you can make your own. Every package keeps the same features at every duration.\n\nPrefer to choose each item?\nBuild your own plan\nAll\nOperations\nGrowth\nSOFTWARE BUNDLE\nRecommended\nTeam Workspace\n\nBring your people, projects, and documents into one workspace.\n\nHR\nTasks\nFiles\n1 month · paid upfront\nCHF 78.30\nCHF 78.30/month equivalent\nSave CHF 8.70\nChoose your duration\n1 mo\n3 mo\n6 mo\n12 mo\nAdd to cart\nCustomize\nSOFTWARE BUNDLE\nSales & Marketing\n\nConnect customer relationships, campaigns, and website work.\n\nCRM\nMarketing\nWebsite Manager\n1 month · paid upfront\nCHF 61.20\nCHF 61.20/month equivalent\nSave CHF 6.80\nChoose your duration\n1 mo\n3 mo\n6 mo\n12 mo\nAdd to cart\nCustomize\nSOFTWARE BUNDLE\nBusiness Suite\n\nAll six products for a connected business workspace.\n\nHR\nCRM\nFiles\nTasks\nMarketing\nWebsite Manager\n1 month · paid upfront\nCHF 131.75\nCHF 131.75/month equivalent\nSave CHF 23.25\nChoose your duration\n1 mo\n3 mo\n6 mo\n12 mo\nAdd to cart\nCustomize\n\nPrices in CHF. Full selected periods are paid upfront.\n\nBUILD YOUR OWN\nBuild your software plan.\n\nChoose your items, set their durations, and review you",
+  "limits": [
+    "ADM was not started for this verification, so Coming soon/Beta/Live transitions and staff price publish were not executed. Retained pricing/launch evidence applies separately.",
+    "This is website/platform price parity, not full J4/J5 acceptance."
+  ],
+  "completed": true
+}

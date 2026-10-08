@@ -25,6 +25,7 @@ import { logoutUser } from "@/redux/features/auth/authSlice";
 import { useMarketingRoles } from "@/lib/permissions";
 import { CURRENT_SCOPE, useSuiteApps } from "./useSuiteApps";
 import { ProjectSwitcher } from "./ProjectSwitcher";
+import { PresentationWorkspace } from "./PresentationWorkspace";
 
 function useMounted() {
   const [mounted, setMounted] = useState(false);
@@ -98,7 +99,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
       rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref={apps[0]?.href ?? SOS_URL} />}
       sidebar={<Sidebar title={ts("appName")} sections={sections} />}
       topBar={{
-        start: user ? <ProjectSwitcher /> : null,
+        start: user ? (process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1") && at("/presentation") ? <PresentationWorkspace/> : <ProjectSwitcher /> : null,
         end: user ? (
           <UserMenu
             name={name}

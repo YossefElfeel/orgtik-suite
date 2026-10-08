@@ -1480,6 +1480,13 @@
     "internalTitle": "Studio de l’équipe OrgTik",
     "internalBody": "Website Manager est le CMS interne OrgTik. Choisissez OrgTik et un profil contenu/équipe dans la démo.",
     "leadConnected": "Prospect créé dans OrgTik Sales avec attribution à la page Partenaires.",
-    "connectionError": "La connexion a échoué. Réessayez."
+    "connectionError": "La connexion a échoué. Réessayez.",
+    "campaign": "Campagne marketing",
+    "noCampaign": "Aucune campagne enregistrée",
+    "campaignHint": "Les campagnes viennent de Marketing OrgTik. Les prospects acceptés du formulaire partenaires portent cette campagne vers CRM et Marketing OrgTik ; les données clients restent séparées.",
+    "campaignReference": "Campagne",
+    "crmReference": "Prospect CRM OrgTik",
+    "visitorName": "Nom du contact",
+    "visitorNameError": "Saisissez un nom de contact de 1 à 120 caractères."
   }
 }
