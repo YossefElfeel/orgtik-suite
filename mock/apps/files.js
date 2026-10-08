@@ -8,6 +8,7 @@ const lib = require("./files/lib");
 const { buildSeed } = require("./files/seed");
 const commands = require('./files/commands');
 const { createFileAccess } = require('./files/access');
+const whiteboards = require('../lib/whiteboard-scene');
 
 const SCOPE = "file_manager";
 const ASSET_DIR = path.join(__dirname, "files", "assets");
@@ -45,7 +46,7 @@ module.exports = {
     // ------------------------------------------------------------ responses & auth
     const ok = (res, data, message, status = 200) => util.ok(res, data, message, status);
     const fail = (res, status, message, extra = {}) => util.fail(res, status, message, { error: message, ...extra });
-    const { toolRoles, isAdmin, isStaff, parentOf, chain, folderAccess, fileAccess, folderCaps, fileCaps } = createFileAccess({ state, identity });
+    const { toolRoles, isAdmin, isStaff, parentOf, chain, folderAccess, fileAccess, folderCaps, fileCaps, authorizeBoard, boardAccess, activeFile: activeSharedFile } = createFileAccess({ state, identity, boardAuthority: ctx.boardAuthority });
     const truthy = (v) => v === true || v === "true" || v === "1";
     if (identity.workspaceMode) app.use((req, res, next) => {
       const ownProfile = req.method === 'PUT' && req.path === '/api/auth/profile' || req.method === 'DELETE' && req.path === '/api/auth/avatar';
@@ -77,7 +78,7 @@ module.exports = {
     const byNewest = (a, b) => (a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
     const byName = (a, b) => a.name.localeCompare(b.name, "en", { sensitivity: "base" });
     const activeFolders = () => [...F.values()].filter((f) => !f.deletedAt);
-    const activeFiles = () => [...FL.values()].filter((f) => !f.deletedAt);
+    const activeFiles = () => [...FL.values()].filter((f) => !f.deletedAt && (!f.whiteboard || activeSharedFile(f)));
     const cleanName = (s) => String(s ?? "").replace(/[\\/]/g, "-").replace(/\s+/g, " ").trim().slice(0, 255);
 
     // ------------------------------------------------------------ access model
@@ -91,7 +92,7 @@ module.exports = {
       return chain(container).some((x) => x.ownerId === u.id);
     }
     const archiveVisibleFolder = (u, f) => archiveVisible(u, f, f);
-    const archiveVisibleFile = (u, file) => archiveVisible(u, file, file.folderId ? F.get(file.folderId) : null);
+    const archiveVisibleFile = (u, file) => boardAccess(u, file) && archiveVisible(u, file, file.folderId ? F.get(file.folderId) : null);
 
     // ------------------------------------------------------------ serializers
     function userLite(id) {
@@ -124,24 +125,29 @@ module.exports = {
       };
     }
 
-    function fileOut(file, u) {
+    function fileOut(file, u, selected) {
+      if (!boardAccess(u, file)) throw Object.assign(new Error('This file is unavailable.'), { status: 404, code: 'file_not_found' });
       const folder = file.folderId ? F.get(file.folderId) : null;
-      const url = `${apiBase()}/v1/files/${file.id}/download`;
+      const versionId = selected?.id || file.currentVersionId;
+      const url = `${apiBase()}/v1/files/${file.id}${selected ? `/versions/${selected.id}` : ''}/download`;
       const access = file.accessOverride || (folder ? { visibility: folder.visibility, allowedUserIds: folder.allowedUserIds } : { visibility: "only_me", allowedUserIds: [] });
       return {
         id: file.id, name: file.name, displayName: file.name, originalName: file.originalName, ownerId: String(file.ownerId),
-        size: file.size, mimeType: file.mimeType, url, path: url, relativePath: url, depth: folder ? depthOf(folder) + 1 : 0,
+        size: selected?.binary.size ?? file.size, mimeType: selected?.binary.mimetype || file.mimeType, url, path: url, relativePath: url, depth: folder ? depthOf(folder) + 1 : 0,
         isUsed: file.isUsed, usedNote: file.usedNote, usedAt: file.usedAt, usedBy: file.usedBy != null ? String(file.usedBy) : null,
         folderId: file.folderId, folder: folder ? folderLite(folder, u) : null,
         visibility: access.visibility, allowedUserIds: access.visibility === "specific_people" ? access.allowedUserIds.map(String) : [],
         createdAt: file.createdAt, updatedAt: file.updatedAt, deletedAt: file.deletedAt,
         owner: ownerOut(file.ownerId), capabilities: fileCaps(u, file),
+        ...(file.whiteboard ? { whiteboard: { boardId: file.whiteboard.boardId, versionId, currentVersionId: file.currentVersionId, version: selected?.number || file.versions.find(row => row.id === versionId).number, preview: { kind: 'sample', url: `${apiBase()}/v1/files/${file.id}/versions/${versionId}/preview` } } } : {}),
       };
     }
 
     const actOut = (a) => ({ ...a, actor: ownerOut(Number(a.actorId)) });
 
     function logAct(req, u, action, entityType, entityId, metadata) {
+      const boardId = entityType === 'file' && FL.get(entityId)?.whiteboard?.boardId;
+      if (boardId) metadata = { ...metadata, boardId };
       const ip = String(req.ip || "127.0.0.1").replace(/^::ffff:/, "").replace(/^::1$/, "127.0.0.1");
       state.activities.unshift({
         id: lib.newId(), scope: SCOPE, actorId: String(u.id), action, entityType, entityId, metadata,
@@ -198,6 +204,7 @@ module.exports = {
     }
 
     function archiveFolderTree(folder, u) {
+      preflightFolderBoards(u, [folder]);
       const at = nowIso();
       const batch = lib.newId();
       const walk = (f) => {
@@ -210,7 +217,8 @@ module.exports = {
     function archiveFile(file, u) {
       Object.assign(file, { deletedAt: nowIso(), archivedBy: u.id, archiveBatch: lib.newId(), updatedAt: nowIso() });
     }
-    function restoreFolderTree(folder) {
+    function restoreFolderTree(folder, u) {
+      preflightFolderBoards(u, [folder]);
       const batch = folder.archiveBatch;
       const at = nowIso();
       const walk = (f) => {
@@ -222,7 +230,8 @@ module.exports = {
       const parent = parentOf(folder);
       if (folder.parentId && (!parent || parent.deletedAt)) folder.parentId = null; // original location is gone -> restore to root
     }
-    function restoreFile(file) {
+    function restoreFile(file, u) {
+      preflightBoards(u, [file]);
       Object.assign(file, { deletedAt: null, archivedBy: null, archiveBatch: null, updatedAt: nowIso() });
       const folder = file.folderId ? F.get(file.folderId) : null;
       if (file.folderId && (!folder || folder.deletedAt)) file.folderId = null;
@@ -251,16 +260,35 @@ module.exports = {
       if (String(password) !== u.password) return fail(res, 400, "Incorrect password. Nothing was deleted."), false;
       return true;
     }
-    const canPurge = (u, item) => !item.custodyReadOnly && (isAdmin(u) || item.ownerId === u.id || item.archivedBy === u.id);
+    const canPurge = (u, item) => !item.custodyReadOnly && (!item.whiteboard || boardAccess(u, item, true)) && (isAdmin(u) || item.ownerId === u.id || item.archivedBy === u.id);
+    function preflightBoards(u, files) {
+      const affected = [...new Map(files.filter(file => file.whiteboard).map(file => [file.id, file])).values()];
+      if (affected.length > 10000) throw Object.assign(new Error('This folder has too many whiteboards for one operation.'), { status: 422, code: 'whiteboard_action_limit' });
+      for (const file of affected) {
+        if (file.custodyReadOnly || chain(F.get(file.folderId)).some(folder => folder.custodyReadOnly)) throw Object.assign(new Error('This whiteboard awaits ownership review.'), { status: 423, code: 'whiteboard_custody_read_only' });
+        authorizeBoard(u, file, true);
+      }
+    }
+    function preflightFolderBoards(u, folders) {
+      const ids = new Set(folders.flatMap(folder => subtreeFolders(folder).map(row => row.id)));
+      preflightBoards(u, [...FL.values()].filter(file => ids.has(file.folderId)));
+    }
 
     // bytes of a stored file: { path } for sendFile
     function storedPath(file) {
+      if (file.storage.kind === 'whiteboard') throw Object.assign(new Error('A structured board does not have an uploaded path.'), { status: 503, code: 'invalid_whiteboard_content' });
       if (file.storage.kind === "upload") return file.storage.path;
       return path.join(ASSET_DIR, MANIFEST[file.storage.key].file);
     }
-    const readBytes = (file) => fs.readFileSync(storedPath(file));
+    const readBytes = (file) => file.storage.kind === 'whiteboard' ? Buffer.from(whiteboards.readWhiteboardStorage(file.storage).json, 'utf8') : fs.readFileSync(storedPath(file));
 
     function sendStored(res, file, disposition = "inline", name = file.name) {
+      if (file.storage.kind === 'whiteboard') {
+        res.setHeader('Content-Type', whiteboards.MIME);
+        res.setHeader('Content-Disposition', lib.contentDisposition('attachment', name));
+        res.setHeader('Cache-Control', 'private, no-store'); res.setHeader('X-Content-Type-Options', 'nosniff');
+        return res.send(readBytes(file));
+      }
       const p = storedPath(file);
       if (!fs.existsSync(p)) return fail(res, 410, "The file content is no longer available.");
       res.setHeader("Content-Type", file.mimeType || "application/octet-stream");
@@ -285,7 +313,7 @@ module.exports = {
         for (const file of activeFiles().filter((x) => x.folderId === folder.id && canSee(x)).sort(byName)) {
           try {
             entries.push({ name: unique(`${prefix}/${file.name}`), data: readBytes(file), date: file.updatedAt });
-          } catch { /* skip unreadable */ }
+          } catch (error) { if (file.whiteboard) throw error; /* preserve legacy unreadable-asset behavior */ }
         }
         for (const c of activeFolders().filter((x) => x.parentId === folder.id).sort(byName)) walk(c, `${prefix}/${c.name}`);
       };
@@ -388,6 +416,10 @@ module.exports = {
       if (!f) return;
       const c = folderCaps(u, f);
       const b = req.body || {};
+      if (b.visibility !== undefined || b.allowedUserIds !== undefined) {
+        if (!c.canManageAccess) return fail(res, 403, "Only the folder owner can change who has access.");
+        preflightFolderBoards(u, [f]);
+      }
       const events = [];
       if (b.name !== undefined) {
         if (!c.canWrite) return fail(res, 403, "You can't rename this folder.");
@@ -460,6 +492,7 @@ module.exports = {
       if ((target ? target.id : null) === f.parentId && name === f.name) return fail(res, 400, "The folder is already in this location.");
       if (nameTaken(target ? target.id : null, name, f.id, f.ownerId)) return fail(res, 409, `A folder named "${name}" already exists in the destination.`);
       const fromParentId = f.parentId;
+      preflightFolderBoards(u, [f]);
       Object.assign(f, { parentId: target ? target.id : null, name, updatedAt: nowIso() });
       if (target) applyAccess(f, target.visibility, target.allowedUserIds, target.grantedBy, true);
       logAct(req, u, "moved", "folder", f.id, { name, parentId: f.parentId, fromParentId, path: pathOf(f) });
@@ -574,13 +607,13 @@ module.exports = {
         return { key, totalFiles: inBucket.length, totalStorage: inBucket.reduce((s, f) => s + Number(f.size || 0), 0), lastFileUpdatedAt: last };
       });
       const recentAddedFiles = [...files].sort(byNewest).slice(0, 8).map((f) => fileOut(f, u));
-      const myLastActivity = state.activities.filter((a) => a.actorId === String(u.id)).slice(0, 6).map(actOut);
+      const myLastActivity = state.activities.filter((a) => a.actorId === String(u.id) && activityVisible(u, a)).slice(0, 6).map(actOut);
       ok(res, { grouped, recentAddedFiles, myLastActivity }, "Dashboard overview fetched successfully");
     });
 
     const activeFileFor = (req, res, u) => {
       const f = FL.get(req.params.id);
-      if (!f || f.deletedAt) return fail(res, 404, "File not found."), null;
+      if (!f || f.deletedAt || f.whiteboard && !activeSharedFile(f)) return fail(res, 404, "File not found."), null;
       if (!fileAccess(u, f)) return fail(res, 403, "You don't have access to this file."), null;
       return f;
     };
@@ -598,6 +631,7 @@ module.exports = {
       if (!u) return;
       const f = FL.get(req.params.id);
       if (!f) return fail(res, 404, "File not found.");
+      if (f.whiteboard && !activeSharedFile(f)) return fail(res, 404, 'This whiteboard file is unavailable.');
       if (f.deletedAt ? !archiveVisibleFile(u, f) : !fileAccess(u, f)) return fail(res, 403, "You don't have access to this file.");
       sendStored(res, f, truthy(req.query.download) ? "attachment" : "inline");
     });
@@ -656,7 +690,7 @@ module.exports = {
       const f = FL.get(req.params.id);
       if (!f || !f.deletedAt) return fail(res, 404, "Archived file not found.");
       if (!archiveVisibleFile(u, f)) return fail(res, 403, "You can't restore this file.");
-      restoreFile(f);
+      restoreFile(f, u);
       logAct(req, u, "updated", "file", f.id, { name: f.name, restored: true, folderId: f.folderId });
       ok(res, fileOut(f, u), `"${f.name}" was restored`);
     }
@@ -749,7 +783,7 @@ module.exports = {
     });
 
     function restoreFolderOne(req, u, f) {
-      restoreFolderTree(f);
+      restoreFolderTree(f, u);
       logAct(req, u, "updated", "folder", f.id, { name: f.name, restored: true, parentId: f.parentId });
     }
 
@@ -758,8 +792,9 @@ module.exports = {
       if (!u) return;
       const files = [].concat(req.body?.ids || []).map((id) => FL.get(String(id))).filter((f) => f && f.deletedAt && archiveVisibleFile(u, f));
       if (!files.length) return fail(res, 404, "No archived files to restore.");
+      preflightBoards(u, files);
       for (const f of files) {
-        restoreFile(f);
+        restoreFile(f, u);
         logAct(req, u, "updated", "file", f.id, { name: f.name, restored: true, folderId: f.folderId });
       }
       ok(res, { restored: files.length }, `${files.length} file${files.length === 1 ? "" : "s"} restored`);
@@ -770,6 +805,7 @@ module.exports = {
       if (!u) return;
       const folders = [].concat(req.body?.ids || []).map((id) => F.get(String(id))).filter((f) => f && f.deletedAt && archiveVisibleFolder(u, f));
       if (!folders.length) return fail(res, 404, "No archived folders to restore.");
+      preflightFolderBoards(u, folders);
       for (const f of folders) if (f.deletedAt) restoreFolderOne(req, u, f);
       ok(res, { restored: folders.length }, `${folders.length} folder${folders.length === 1 ? "" : "s"} restored`);
     });
@@ -787,12 +823,14 @@ module.exports = {
     });
 
     function purgeFiles(req, res, u, files) {
+      preflightBoards(u, files);
       for (const f of files) {
         logAct(req, u, "deleted", "file", f.id, { name: f.name, permanent: true, folderId: f.folderId });
         purgeFile(f);
       }
     }
     function purgeFolders(req, res, u, folders) {
+      preflightFolderBoards(u, folders);
       for (const f of folders) {
         if (!F.has(f.id)) continue;
         logAct(req, u, "deleted", "folder", f.id, { name: f.name, permanent: true, parentId: f.parentId });
@@ -851,6 +889,11 @@ module.exports = {
 
     // ============================================================ activity & users
     function activityVisible(u, a) {
+      if (a.entityType === 'file') {
+        const file = FL.get(a.entityId);
+        if (file?.whiteboard) return Boolean(file.deletedAt ? archiveVisibleFile(u, file) : fileAccess(u, file));
+        if (a.metadata?.boardId) return false;
+      }
       if (a.actorId === String(u.id)) return true;
       if (a.entityType === "file") {
         const f = FL.get(a.entityId);
@@ -864,7 +907,7 @@ module.exports = {
       const u = member(req, res);
       if (!u) return;
       const q = req.query;
-      let list = isAdmin(u) ? state.activities : state.activities.filter((a) => activityVisible(u, a));
+      let list = state.activities.filter(a => a.metadata?.boardId || FL.get(a.entityId)?.whiteboard ? activityVisible(u, a) : isAdmin(u) || activityVisible(u, a));
       if (q.actorId && q.actorId !== "all") list = list.filter((a) => a.actorId === String(q.actorId));
       if (q.from) {
         const from = Date.parse(q.from);
@@ -970,6 +1013,10 @@ module.exports = {
       if (!["file", "folder"].includes(b.resourceType)) return fail(res, 400, "resourceType must be 'file' or 'folder'.");
       const r = resourceFor(b.resourceType, b.resourceId);
       if (!r || r.deletedAt) return fail(res, 404, `${b.resourceType === "file" ? "File" : "Folder"} not found.`);
+      if (r.whiteboard) {
+        if (!fileAccess(u, r)) return fail(res, 403, "You can't create external links for this item.");
+        return fail(res, 422, 'Structured whiteboards are unavailable in public shares.', { code: 'whiteboard_public_sharing_unavailable' });
+      }
       if (!canManageShares(u, b.resourceType, r)) return fail(res, 403, "You can't create external links for this item.");
       const permission = b.permission || "view_only";
       if (!["view_only", "download"].includes(permission)) return fail(res, 400, "permission must be 'view_only' or 'download'.");
@@ -1045,7 +1092,7 @@ module.exports = {
       const status = shareStatus(s);
       if (status !== "active") return fail(res, 410, status === "revoked" ? "This link has been turned off by its owner." : "This link has expired."), null;
       const r = resourceFor(s.resourceType, s.resourceId);
-      if (!r || r.deletedAt) return fail(res, 404, "This link is not available."), null;
+      if (!r || r.deletedAt || r.whiteboard) return fail(res, 404, "This link is not available."), null;
       if (session) {
         const token = lib.parseCookies(req.headers.cookie)[cookieName(s.id)];
         const sess = token && state.sessions.get(identity.workspaceMode ? hashPw(token) : token);
@@ -1061,7 +1108,7 @@ module.exports = {
     });
     function shareFile(res, share, resource, fileId) {
       const f = FL.get(fileId);
-      const inside = f && !f.deletedAt && (share.resourceType === "file" ? f.id === resource.id : f.folderId && within(F.get(f.folderId), resource.id));
+      const inside = f && !f.deletedAt && !f.whiteboard && (share.resourceType === "file" ? f.id === resource.id : f.folderId && within(F.get(f.folderId), resource.id));
       if (!inside) return fail(res, 404, "File not found in this share."), null;
       return f;
     }
@@ -1130,7 +1177,7 @@ module.exports = {
       if (!parent || parent.deletedAt || !within(parent, resource.id)) return fail(res, 404, "Folder not found in this share.");
       const items = [
         ...activeFolders().filter((f) => f.parentId === parent.id).sort(byName).map(pubFolder),
-        ...activeFiles().filter((f) => f.folderId === parent.id).sort(byName).map(pubFile),
+        ...activeFiles().filter((f) => f.folderId === parent.id && !f.whiteboard).sort(byName).map(pubFile),
       ];
       const { items: pageItems, meta } = util.paginate(items, req.query, { defaultLimit: 50 });
       ok(res, { parent: pubFolder(parent), rootId: resource.id, items: pageItems, meta }, "Share items fetched successfully");
@@ -1157,6 +1204,7 @@ module.exports = {
       return { kind: "pages", pages };
     }
     function previewManifest(f) {
+      if (f.whiteboard) return { status: 'ready', kind: 'sample', sample: true, mimeType: 'image/svg+xml' };
       if (f.storage.kind === "asset") {
         const m = MANIFEST[f.storage.key];
         const p = m.preview;
@@ -1211,7 +1259,7 @@ module.exports = {
       share.downloadCount += 1;
       share.lastAccessedAt = nowIso();
       if (share.resourceType === "file") return sendStored(res, resource, "attachment");
-      const buf = zipFolder(resource, () => true);
+      const buf = zipFolder(resource, file => !file.whiteboard);
       res.setHeader("Content-Type", "application/zip");
       res.setHeader("Content-Disposition", lib.contentDisposition("attachment", `${resource.name}.zip`));
       res.setHeader("Cache-Control", "private, no-store");
@@ -1245,10 +1293,19 @@ module.exports = {
         const recipient = target.kind === 'member' && identity.findUser(target.userId);
         if (target.kind === 'member' && (!recipient || recipient.id === fromUserId || recipient.isActive === false || !toolRoles(recipient).some(role => role === 'super_admin' || role === 'file_editor'))) throw Object.assign(new Error("The Files custody recipient is not eligible."), { status: 409 });
         const result = { transferred: [], archived: [] };
+        const boardTargets = new Map();
+        if (recipient) for (const file of FL.values()) {
+          if (file.ownerId !== fromUserId || !file.whiteboard) continue;
+          if (typeof ctx.boardAuthority?.custodyTarget !== 'function') throw Object.assign(new Error('Whiteboard custody authority is unavailable.'), { status: 503, code: 'whiteboard_authority_unavailable' });
+          const eligible = ctx.boardAuthority.custodyTarget({ boardId: file.whiteboard.boardId, fromUserId, targetUserId: recipient.id });
+          if (typeof eligible !== 'boolean') throw Object.assign(new Error('Whiteboard custody authority is unavailable.'), { status: 503, code: 'whiteboard_authority_unavailable' });
+          boardTargets.set(file.id, eligible);
+        }
         for (const [kind, records] of [['folder', F], ['file', FL]]) for (const row of records.values()) {
           if (row.ownerId !== fromUserId) continue;
-          row.ownerId = recipient ? recipient.id : null; row.updatedAt = nowIso(); row.custodyOperationId = operationId;
-          if (recipient) { row.allowedUserIds = (row.allowedUserIds || []).filter(id => id !== recipient.id); result.transferred.push(`${kind}:${row.id}`); }
+          const inherit = recipient && (!row.whiteboard || boardTargets.get(row.id));
+          row.ownerId = inherit ? recipient.id : null; row.updatedAt = nowIso(); row.custodyOperationId = operationId;
+          if (inherit) { row.allowedUserIds = (row.allowedUserIds || []).filter(id => id !== recipient.id); result.transferred.push(`${kind}:${row.id}`); }
           else { row.custodyReadOnly = true; row.deletedAt ||= nowIso(); row.archiveBatch = `custody:${operationId}`; result.archived.push(`${kind}:${row.id}`); }
         }
         for (const share of state.shares.values()) if (share.ownerId === fromUserId) { share.revokedAt ||= nowIso(); dropSessions(share.id); }

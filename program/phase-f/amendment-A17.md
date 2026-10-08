@@ -1,0 +1,15 @@
+# A17 — persistent structured whiteboards
+
+2026-10-08 · reviewed local source on merged PR18; package CI and hosted acceptance pending.
+
+This package extends the Files reference foundation with a persistent Excalidraw editor and immutable Files drawing versions. Explicit save/reopen replaces the transient canvas. A board index and its Files version advance atomically, while earlier task/message references remain pinned. Scope, source association, role, read-only and current File permissions apply to editor routes and native Files paths; global ownership or staff roles cannot widen a private conversation.
+
+[D-072](../decisions/D-072.md) and [the contract](whiteboard-contract.md) record canonical scene bounds, permanent original-attempt receipts, historical read-only versions, labelled sample previews and public-sharing exclusions. Scene images/imports/embeds/external links, live media, new persistent meeting scheduling and generic file-version/name-clash workflows remain separate or external deferrals.
+
+Independent review corrected actual file-ID binding omission, recursive folder mutation bypasses and custody transfers into inaccessible private associations. UI review corrected a vendor callback render loop, draft leakage between selected boards, and stale server-page selection after native history changes. The final client uses live search parameters and models Next's history markers in its recovery regressions.
+
+The complete retained mock chain passes **436 checks**: authentication 17 + journal 8 + pricing 20 + Node 107 + workspace 284, with exit 0. Eight signed HTTP scenarios, eight parser checks, eleven Files-board checks and six isolated actual-client UI regressions are included subsets. The earlier 422 run is superseded; these subsets are not added to 436. Chats app tests pass 14 and Files client tests pass 12 separately. Twenty consuming-app type/catalog tasks and 24 artifact/configuration guards pass; the generated contract covers 720 routes.
+
+[Final browser evidence](../audits/r2-whiteboards/README.md) passes **93 bounded assertions, 15 captures and 26 matching source hashes** at EN/light and AR/dark 1440/390px. It verifies actual drawing persistence, version conflict and retained drafts, lost-response recovery without changing a newer head, and pinned Files-to-Chats read-only views. A later HTTP 403 is a labeled controlled transport refusal. Canonical meeting, custody and renewal backend fixtures are private accepted historical state; embedded meeting UI is typechecked/API-tested, not browser-accepted here. Earlier 66/78 reports are superseded. These counts are not 93 journeys or a new accessibility/performance benchmark.
+
+Prior PR18 source `a35a9f0` merged main `438c237` after CI37724544919 verified 402 checks and pause37724544963 passed. Current package CI, full J8, all 15 hosted journeys, remaining R1/R2–R4 work and final release closure remain open. No production/shared data reset, clock advance or deployment occurred; Vercel remains disabled.

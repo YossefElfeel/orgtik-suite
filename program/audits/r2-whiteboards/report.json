@@ -1,0 +1,440 @@
+{
+  "realm": "r2-whiteboards-local",
+  "dataReset": false,
+  "clockMutation": false,
+  "seedMutation": false,
+  "controlledScenarios": [
+    "later403 transport refusal after committed save"
+  ],
+  "browserScope": "standalone board editor and Files pinned preview/handoff; embedded canonical meeting integration typechecked and API-tested separately",
+  "checks": [
+    {
+      "name": "Isolated frozen realm",
+      "pass": true
+    },
+    {
+      "name": "Registered loopback",
+      "pass": true
+    },
+    {
+      "name": "Library import affordance hidden en/1440",
+      "pass": true
+    },
+    {
+      "name": "Actual vector v1 en/1440",
+      "pass": true
+    },
+    {
+      "name": "board-v1-en-1440-light: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "board-v1-en-1440-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Unknown drawing locked",
+      "pass": true
+    },
+    {
+      "name": "unknown-refusal-reloaded-en: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "unknown-refusal-reloaded-en: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Same scene base/key after reload/refusal",
+      "pass": true
+    },
+    {
+      "name": "New immutable v2 en/1440",
+      "pass": true
+    },
+    {
+      "name": "Actual version conflict retains local draft",
+      "pass": true
+    },
+    {
+      "name": "actual-conflict-en: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "actual-conflict-en: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Retained conflicting draft can be restored",
+      "pass": true
+    },
+    {
+      "name": "Older receipt recovery leaves newer head unchanged",
+      "pass": true
+    },
+    {
+      "name": "actual-recovery-newer-head-en: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "actual-recovery-newer-head-en: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Recovered original version is read-only",
+      "pass": true
+    },
+    {
+      "name": "Pinned v1 unchanged read-only en/1440",
+      "pass": true
+    },
+    {
+      "name": "Authorized labelled sample en/1440",
+      "pass": true
+    },
+    {
+      "name": "files-pinned-sample-en-1440-light: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "files-pinned-sample-en-1440-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Actual Files→Chats pinned control en/1440",
+      "pass": true
+    },
+    {
+      "name": "Pinned save absent en/1440",
+      "pass": true
+    },
+    {
+      "name": "pinned-readonly-en-1440-light: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "pinned-readonly-en-1440-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Library import affordance hidden en/390",
+      "pass": true
+    },
+    {
+      "name": "Actual vector v1 en/390",
+      "pass": true
+    },
+    {
+      "name": "board-v1-en-390-light: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "board-v1-en-390-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "New immutable v2 en/390",
+      "pass": true
+    },
+    {
+      "name": "Pinned v1 unchanged read-only en/390",
+      "pass": true
+    },
+    {
+      "name": "Authorized labelled sample en/390",
+      "pass": true
+    },
+    {
+      "name": "files-pinned-sample-en-390-light: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "files-pinned-sample-en-390-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Actual Files→Chats pinned control en/390",
+      "pass": true
+    },
+    {
+      "name": "Pinned save absent en/390",
+      "pass": true
+    },
+    {
+      "name": "pinned-readonly-en-390-light: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "pinned-readonly-en-390-light: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Library import affordance hidden ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Actual vector v1 ar/1440",
+      "pass": true
+    },
+    {
+      "name": "board-v1-ar-1440-dark: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "board-v1-ar-1440-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "New immutable v2 ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Pinned v1 unchanged read-only ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Authorized labelled sample ar/1440",
+      "pass": true
+    },
+    {
+      "name": "files-pinned-sample-ar-1440-dark: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "files-pinned-sample-ar-1440-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Actual Files→Chats pinned control ar/1440",
+      "pass": true
+    },
+    {
+      "name": "Pinned save absent ar/1440",
+      "pass": true
+    },
+    {
+      "name": "pinned-readonly-ar-1440-dark: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "pinned-readonly-ar-1440-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Library import affordance hidden ar/390",
+      "pass": true
+    },
+    {
+      "name": "Actual vector v1 ar/390",
+      "pass": true
+    },
+    {
+      "name": "board-v1-ar-390-dark: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "board-v1-ar-390-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "New immutable v2 ar/390",
+      "pass": true
+    },
+    {
+      "name": "Pinned v1 unchanged read-only ar/390",
+      "pass": true
+    },
+    {
+      "name": "Authorized labelled sample ar/390",
+      "pass": true
+    },
+    {
+      "name": "files-pinned-sample-ar-390-dark: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "files-pinned-sample-ar-390-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Actual Files→Chats pinned control ar/390",
+      "pass": true
+    },
+    {
+      "name": "Pinned save absent ar/390",
+      "pass": true
+    },
+    {
+      "name": "pinned-readonly-ar-390-dark: fits viewport",
+      "pass": true
+    },
+    {
+      "name": "pinned-readonly-ar-390-dark: no missing messages",
+      "pass": true
+    },
+    {
+      "name": "Clock unchanged",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/app/(shell)/hq/whiteboard/page.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/features/meetings/CallStage.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/lib/file-references.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/app/[locale]/(dashboard)/file/[fileId]/page.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/components/pages/file-record/index.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/components/shared/FilePreview/index.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/types/file.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/lib/file-references.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/lib/fetch-protected-file.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/lib/whiteboard-scene.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/lib/whiteboards.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/features/meetings/Whiteboard.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/features/meetings/BoardScreen.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/lib/open-file-reference.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/components/shared/StructuredBoardPreview/index.tsx",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/lib/open-whiteboard.ts",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/messages/en.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/messages/ar.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/messages/de.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/messages/fr.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/files/messages/it.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/messages/en.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/messages/ar.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/messages/de.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/messages/fr.json",
+      "pass": true
+    },
+    {
+      "name": "Source frozen apps/chats/messages/it.json",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "board-v1-en-1440-light.png",
+    "unknown-refusal-reloaded-en.png",
+    "actual-conflict-en.png",
+    "actual-recovery-newer-head-en.png",
+    "files-pinned-sample-en-1440-light.png",
+    "pinned-readonly-en-1440-light.png",
+    "board-v1-en-390-light.png",
+    "files-pinned-sample-en-390-light.png",
+    "pinned-readonly-en-390-light.png",
+    "board-v1-ar-1440-dark.png",
+    "files-pinned-sample-ar-1440-dark.png",
+    "pinned-readonly-ar-1440-dark.png",
+    "board-v1-ar-390-dark.png",
+    "files-pinned-sample-ar-390-dark.png",
+    "pinned-readonly-ar-390-dark.png"
+  ],
+  "source": {
+    "apps/chats/app/(shell)/hq/whiteboard/page.tsx": "4f545ead9c14cc71a53598fc7df3482b9bbc51c6180705d5ea2e9546aa5b3b7c",
+    "apps/chats/features/meetings/CallStage.tsx": "c04263c4229902a0a74dad12fd60794bfe5d6ebb316659572c672e460e3a00fb",
+    "apps/chats/lib/file-references.ts": "45ba0f355e9b6bbf6576e7df2dfbe8021e6ec490b859e233cc34e24d02c98943",
+    "apps/files/app/[locale]/(dashboard)/file/[fileId]/page.tsx": "8457647712545be6379ccde7d29bdf95c8070309710c3caae6470698c934d098",
+    "apps/files/components/pages/file-record/index.tsx": "0998a2d05b58888a95910672fa3a396636f0f2f90b2a329cf37d3d8bc1c8d760",
+    "apps/files/components/shared/FilePreview/index.tsx": "eb8fb3d7178e47674292952a294fc4a390a79c0a78c34c2e0acd0aaebb386293",
+    "apps/files/types/file.ts": "6a717661a566bc83d78807ffabf4940efe06c8199d08d1083f72e3ca9f572f7d",
+    "apps/files/lib/file-references.ts": "44ed7c17a91fba5c9a47c30fb8471a9983ae249857633a28d2a526bec78b12ce",
+    "apps/files/lib/fetch-protected-file.ts": "eef17e0f4f351871d9f2a664a932a71aa68fd90ff4f2c3a400395f5d0ed00950",
+    "apps/chats/lib/whiteboard-scene.ts": "76bbebf0e4068dc55e997a33e240ca4ee9b58c3fa637e3947f5e3c9aea146c7e",
+    "apps/chats/lib/whiteboards.ts": "d7133e546c5ed29d93035ce3824d3c8cc4c21404a2119a4f794c41318100141f",
+    "apps/chats/features/meetings/Whiteboard.tsx": "3f5d408b574711282a4b60d2faa28913b3c8671f4044eb8355c40db85c8a92a7",
+    "apps/chats/features/meetings/BoardScreen.tsx": "7f88ba2226dd3b4a195f07d8ec6c195714d193c1941b17a418c979ab92369cb1",
+    "apps/chats/lib/open-file-reference.ts": "b882a48f3f4621dba8df3d4202e282936a02687c0857f4eb036abe05570cc860",
+    "apps/files/components/shared/StructuredBoardPreview/index.tsx": "2fbac6e232f45916fdd73bf10211a13a9147e10720495e8e1599e857db4fb40c",
+    "apps/files/lib/open-whiteboard.ts": "aec79522a6d2a1993765b6c4d889382c484b6538d403e384e45ff06a4a1b2744",
+    "apps/files/messages/en.json": "648ab2028e3e1753b95e25475c4fa5952da75727cd79ea9ca668ad4b7121d3a5",
+    "apps/files/messages/ar.json": "dc85e26d2302e2d3ff1e8de563f45f7aeb9c34fe3958d8bf4bf68f5c39973130",
+    "apps/files/messages/de.json": "b7de56701209c2ac86912bdd4a1d7a41ed536eb5d138ee645ca7927b83a3b945",
+    "apps/files/messages/fr.json": "fce263a9ecd9885e3c9a9274c54257fe56bf21f4ddfff7073cf294fa36ce6ef1",
+    "apps/files/messages/it.json": "2a6fb5f9c247b51f802f2309ce3465c95db530694c6618c47f1b1a651eaa9314",
+    "apps/chats/messages/en.json": "0a7bd30cbb4c51935fe27b88853a078c6995270059a1802a188658689835f653",
+    "apps/chats/messages/ar.json": "002041b66c157af0d66252ba0111b4b00e76f11b4844f99a8469c05bf48291c3",
+    "apps/chats/messages/de.json": "5a91c97f5576914cc285dac2687b4401d0b99a993b9aeaa1c4b64f2923a1de87",
+    "apps/chats/messages/fr.json": "9a49d59297325d2eaebdf0c9d35920c6aa25f88c5506cc971e37fdabfdfd9820",
+    "apps/chats/messages/it.json": "32b696729b8261671dbf4bebf89d3e5ae6946b20d564ea5abb669d5ad9e724f4"
+  },
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "step": "files ar /file/f7af9874-e20d-4414-8103-6a8b92ce10e4",
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "completed": true,
+  "passed": 93
+}

@@ -21,7 +21,7 @@ export function fileScope(): string {
 export function fileAuthority(): string {
   const c = context();
   const grant = (g: { scope: string; roles: string[]; access: string; canWrite: boolean } | undefined) => g ? [g.scope, g.roles, g.access, g.canWrite] : null;
-  return c ? JSON.stringify([fileScope(), c.workspace.state, c.member.id, c.member.role, c.member.revision, c.member.accessEpoch, c.actor.readOnly, grant(c.tools.files)]) : "";
+  return c ? JSON.stringify([fileScope(), c.workspace.state, c.member.id, c.member.role, c.member.revision, c.member.accessEpoch, c.actor.readOnly, grant(c.tools.files), grant(c.tools.chat)]) : "";
 }
 export const useFileAuthority = () => useSyncExternalStore(subscribeClientSession, fileAuthority, () => "");
 function assertCurrent(scope: string, signature: string) {

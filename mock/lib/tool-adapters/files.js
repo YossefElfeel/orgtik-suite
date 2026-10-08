@@ -39,9 +39,24 @@ function createWorkspaceRuntime(input, tool, manifest) {
     if (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).some(key => !['sampleId', 'parentId'].includes(key))) throw Object.assign(new Error('Only the sample and destination folder can be supplied.'), { status: 422, code: 'invalid_sample_payload' });
     return shared.createSample({ actorId: user.id, ...body, operationId: req.get('idempotency-key') });
   }));
+  router.get('/api/v1/files/:fileId/versions/:versionId', ownRoute((req, user) => shared.getVersionMetadata({ actorId: user.id, fileId: req.params.fileId, versionId: req.params.versionId })));
+  const versionBytes = preview => (req, res, next) => {
+    const user = input.identity.requireUser(req, res); if (!user) return;
+    try {
+      const args = { actorId: user.id, fileId: req.params.fileId, versionId: req.params.versionId };
+      const content = preview ? shared.previewWhiteboard(args) : shared.contentSharedFile(args);
+      res.set('Cache-Control', 'private, no-store').set('X-Content-Type-Options', 'nosniff');
+      if (preview) res.set('X-OrgTik-Preview', 'sample').type(content.mimetype);
+      else res.attachment(content.name).type(content.mimetype);
+      if (content.bytes) return res.send(content.bytes);
+      res.sendFile(content.path, error => { if (error) next(error); });
+    } catch (error) { res.status(error.status || 503).json({ success: false, code: error.code || 'files_unavailable', message: error.status ? error.message : 'Files could not be loaded.' }); }
+  };
+  router.get('/api/v1/files/:fileId/versions/:versionId/download', versionBytes(false));
+  router.get('/api/v1/files/:fileId/versions/:versionId/preview', versionBytes(true));
   created = true;
   const hooks = tool.routes(router, { ...ctx, identity: input.identity, workspaceServices: input.services, commands: input.services.commands }, { state, seedAt: input.initialization.seedAt });
-  shared = createWorkspaceFiles({ state, identity: input.identity, workspaceId: input.workspace.id, realm, manifest, assetDir: path.resolve(__dirname, '../../apps/files/assets'), now: () => new Date().toISOString(), fileOut: hooks.serializeFile });
+  shared = createWorkspaceFiles({ state, identity: input.identity, workspaceId: input.workspace.id, realm, manifest, assetDir: path.resolve(__dirname, '../../apps/files/assets'), boardAuthority: ctx.boardAuthority, now: () => new Date().toISOString(), fileOut: hooks.serializeFile });
   return {
     router,
     exportSnapshot: () => ({ schema, version: 1, realm, workspaceId: input.workspace.id, appKey: 'files', ...hooks.exportState(), ...(fixtureId ? { fixtureId } : {}) }),
@@ -53,6 +68,7 @@ function createWorkspaceRuntime(input, tool, manifest) {
     },
     listSharedFiles: shared.listSharedFiles, resolveSharedFile: shared.resolveSharedFile, contentSharedFile: shared.contentSharedFile,
     createSample: shared.createSample, sampleCatalog: shared.sampleCatalog,
+    authorizeWhiteboard: shared.authorizeWhiteboard, createWhiteboard: shared.createWhiteboard, saveWhiteboard: shared.saveWhiteboard, resolveWhiteboard: shared.resolveWhiteboard, getVersionMetadata: shared.getVersionMetadata,
     usage: hooks.usage, transferOwnership: hooks.transferOwnership, close() { shared.close(); hooks.close(); },
   };
 }

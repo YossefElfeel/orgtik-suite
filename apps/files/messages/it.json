@@ -637,5 +637,15 @@
     "back": "Torna a File",
     "unavailable": "File non disponibile",
     "unavailableBody": "Il file è stato rimosso oppure le autorizzazioni attuali non consentono più l’accesso."
+  },
+  "WhiteboardPreview": {
+    "title": "Lavagna salvata",
+    "sampleAlt": "Anteprima di lavagna fornita come esempio",
+    "sampleCaption": "Anteprima fornita come esempio. Apri questa versione salvata in Chat per visualizzare il disegno.",
+    "unavailable": "L’anteprima non è disponibile con l’accesso attuale.",
+    "loading": "Caricamento dell’anteprima autorizzata…",
+    "retry": "Riprova",
+    "openFailed": "Impossibile aprire la lavagna salvata. Controlla gli accessi a Chat e File, poi riprova.",
+    "open": "Apri versione salvata in Chat"
   }
 }

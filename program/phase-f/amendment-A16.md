@@ -1,6 +1,6 @@
 # A16 — authorized Files connections
 
-2026-10-08 · reviewed source based on merged PR17; local package acceptance passes and package CI is pending.
+2026-10-08 · [PR18](https://github.com/YossefElfeel/orgtik-suite/pull/18) merged: source `a35a9f0` → main `438c237`, after [CI37724544919](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37724544919) and [pause check37724544963](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37724544963). Local package acceptance passes; full release acceptance remains open.
 
 The first R2 Files work package replaces rejected/fabricated upload paths with actual workspace-scoped Files selection. New workspaces explicitly create packaged sample records; Tasks and Chats store pinned minimum references and reauthorize visible metadata and content through the intersection of their own record guard and Files permissions. Linking never grants another person Files access. Stable operation keys and one atomic checkpoint prevent duplicate records, task links or file messages after failure or lost response. Unknown committed requests keep their original key/body across later permission refusals instead of becoming new records or messages.
 
@@ -13,3 +13,5 @@ Independent review corrected three concrete defects: Express filename-based atta
 UI review also corrected cross-domain navigation through a stale SOS workspace, formatted canonical byte sizes in the current locale, and added exact app-prefix validation for hosted native preview URLs. Files development permits its registered127.0.0.1 loopback alias so Next16 dev resources can hydrate; production settings are unaffected. Native image placeholders in earlier captures were capture timing, verified by final image decode rather than an invented product repair.
 
 PR17 sourceab9849d merged main496a0e2 after CI37715489730/pause37715489664; merged-main CI37716311470 and pause37716311474 also passed. [D-070](../decisions/D-070.md) records that earlier trusted-preflight refinement and supersedes the historical ordinary-read restriction in D-069. Vercel remains disabled; no production/shared data or clock was reset or advanced.
+
+Source CI verified402 checks: authentication17 +journal8 +pricing20 +Node107 +workspace250. It includes the queued-token case added after the local401 chain; do not add that scoped follow-up again. The unchanged library visual job was correctly skipped. No Vercel deployment occurred.

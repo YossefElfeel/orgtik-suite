@@ -1,6 +1,6 @@
 # R2 Files reference contract
 
-2026-10-08 · reviewed package with scoped local browser/API acceptance; package CI and hosted release acceptance pending. Extends [D-066](../decisions/D-066.md) and [D-071](../decisions/D-071.md).
+2026-10-08 · reviewed package with scoped local browser/API acceptance; PR18 source CI passed and merged main438c237; hosted release acceptance remains pending. Extends [D-066](../decisions/D-066.md) and [D-071](../decisions/D-071.md).
 
 ## Record and authorization
 

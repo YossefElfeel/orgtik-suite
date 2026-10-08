@@ -1,4 +1,5 @@
 const lib = require("./lib");
+const whiteboards = require('../../lib/whiteboard-scene');
 const MAPS = ["folders", "files", "pins", "shares", "sessions", "failures", "previewPages"];
 const OPTIONAL_MAPS = ['sampleOperations'];
 const clone = value => JSON.parse(JSON.stringify(value));
@@ -39,12 +40,30 @@ function decode(data, manifest) {
   }
   for (const [id, row] of state.files) {
     if (row.id !== id || row.folderId != null && !state.folders.has(row.folderId)) invalid("Files snapshot has an invalid file reference.");
-    if (row.storage?.kind !== "asset" || !Object.hasOwn(manifest, row.storage.key)) invalid("Files snapshots support packaged sample assets only.");
+    const storageValid = storage => {
+      if (storage?.kind === 'asset') return Object.hasOwn(manifest, storage.key);
+      if (storage?.kind !== 'whiteboard') return false;
+      try { whiteboards.readWhiteboardStorage(storage); return true; } catch { return false; }
+    };
+    if (!storageValid(row.storage)) invalid("Files snapshot content is invalid.");
+    if (row.storage.kind === 'whiteboard' && (!row.whiteboard || Object.keys(row.whiteboard).join() !== 'boardId' || !whiteboards.identifier(row.whiteboard.boardId) || row.mimeType !== whiteboards.MIME || !Array.isArray(row.versions) || !row.currentVersionId)) invalid('Files whiteboard association is invalid.');
+    if (row.whiteboard && row.storage.kind !== 'whiteboard') invalid('Files whiteboard content is missing.');
     if (row.versions !== undefined) {
-      if (!Array.isArray(row.versions) || !row.versions.length || row.versions.some(version => !version || !validId(version.id) || !Number.isSafeInteger(version.number) || version.number < 1 || !Number.isFinite(version.size) || version.size < 0 || typeof version.createdAt !== 'string' || !Number.isFinite(Date.parse(version.createdAt)) || version.storage?.kind !== 'asset' || !Object.hasOwn(manifest, version.storage.key)) || new Set(row.versions.map(version => version.id)).size !== row.versions.length) invalid('Files version metadata is invalid.');
+      if (!Array.isArray(row.versions) || !row.versions.length || row.versions.some(version => !version || !validId(version.id) || !Number.isSafeInteger(version.number) || version.number < 1 || !Number.isFinite(version.size) || version.size < 0 || typeof version.createdAt !== 'string' || !Number.isFinite(Date.parse(version.createdAt)) || !storageValid(version.storage)) || new Set(row.versions.map(version => version.id)).size !== row.versions.length) invalid('Files version metadata is invalid.');
+      if (row.whiteboard) for (const version of row.versions) {
+        if (version.storage.kind !== 'whiteboard' || version.mimeType !== whiteboards.MIME || version.id !== `v${version.number}`) invalid('Whiteboard versions must retain structured content.');
+        const canonical = whiteboards.readWhiteboardStorage(version.storage);
+        if (version.size !== canonical.size || version.hash !== canonical.hash) invalid('Whiteboard version content does not match its immutable metadata.');
+      }
     }
     if (row.currentVersionId !== undefined && (!validId(row.currentVersionId) || !row.versions?.some(version => version.id === row.currentVersionId))) invalid('The current Files version is unavailable.');
+    if (row.whiteboard) {
+      const head = row.versions.find(version => version.id === row.currentVersionId), canonical = whiteboards.readWhiteboardStorage(row.storage);
+      if (row.size !== canonical.size || head.hash !== canonical.hash || new Set(row.versions.map(version => version.number)).size !== row.versions.length) invalid('The current whiteboard version is inconsistent.');
+    }
   }
+  const boardIds = [...state.files.values()].filter(row => row.whiteboard).map(row => row.whiteboard.boardId);
+  if (new Set(boardIds).size !== boardIds.length) invalid('A whiteboard cannot own multiple Files records.');
   for (const key of OPTIONAL_MAPS) {
     if (data[key] === undefined) continue;
     if (!Array.isArray(data[key])) invalid('Files sample receipts are invalid.');

@@ -28,6 +28,54 @@
       }
     },
     {
+      "app": "chats",
+      "method": "GET",
+      "path": "/api/hq/whiteboards",
+      "source": "apps/chats.js",
+      "authorization": {
+        "audience": "tool:chats",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current Chats grant and standalone author/channel member/canonical meeting participant intersected with current Files grant and ACL; writes require both current write capabilities before permanent receipt recovery",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "chats",
+      "method": "POST",
+      "path": "/api/hq/whiteboards",
+      "source": "apps/chats.js",
+      "authorization": {
+        "audience": "tool:chats",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current Chats grant and standalone author/channel member/canonical meeting participant intersected with current Files grant and ACL; writes require both current write capabilities before permanent receipt recovery",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "chats",
+      "method": "GET",
+      "path": "/api/hq/whiteboards/:id",
+      "source": "apps/chats.js",
+      "authorization": {
+        "audience": "tool:chats",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current Chats grant and standalone author/channel member/canonical meeting participant intersected with current Files grant and ACL; writes require both current write capabilities before permanent receipt recovery",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "chats",
+      "method": "PATCH",
+      "path": "/api/hq/whiteboards/:id",
+      "source": "apps/chats.js",
+      "authorization": {
+        "audience": "tool:chats",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current Chats grant and standalone author/channel member/canonical meeting participant intersected with current Files grant and ACL; writes require both current write capabilities before permanent receipt recovery",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
       "app": "files",
       "method": "DELETE",
       "path": "/api/auth/avatar",
@@ -300,6 +348,42 @@
         "audience": "tool:files",
         "workspaceBinding": "signed selected workspace",
         "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "files",
+      "method": "GET",
+      "path": "/api/v1/files/:fileId/versions/:versionId",
+      "source": "lib/tool-adapters/files.js",
+      "authorization": {
+        "audience": "tool:files",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current Files grant and inherited record ACL; structured board versions also require current Chats source association; pinned bytes never follow current head",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "files",
+      "method": "GET",
+      "path": "/api/v1/files/:fileId/versions/:versionId/download",
+      "source": "lib/tool-adapters/files.js",
+      "authorization": {
+        "audience": "tool:files",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current Files grant and inherited record ACL; structured board versions also require current Chats source association; pinned bytes never follow current head",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "files",
+      "method": "GET",
+      "path": "/api/v1/files/:fileId/versions/:versionId/preview",
+      "source": "lib/tool-adapters/files.js",
+      "authorization": {
+        "audience": "tool:files",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current Files grant and inherited record ACL; structured board versions also require current Chats source association; pinned bytes never follow current head",
         "writes": "read"
       }
     },

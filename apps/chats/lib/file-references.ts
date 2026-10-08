@@ -9,7 +9,7 @@ const SOS_API = SOS_API_URL;
 export type FileReference = { workspaceId: string; fileId: string; versionId: string };
 export type FilePickerItem = FileReference & { name: string; mimetype: string; size: number; version: number };
 export type FilePickerPage = { items: FilePickerItem[]; meta: { page: number; limit: number; total: number; totalPages: number } };
-export type FileAttempt = { key: string; scope: string; path: string; method: "POST" | "DELETE"; body?: unknown; uncertain?: boolean };
+export type FileAttempt = { key: string; scope: string; path: string; method: "POST" | "PATCH" | "DELETE"; body?: unknown; uncertain?: boolean };
 export class FileRequestError extends Error {
   constructor(public code: string, public status = 0, public uncertain = false) { super(code); }
 }
@@ -95,6 +95,6 @@ export function rememberAttempt(storageKey: string, attempt: FileAttempt | null)
 export function recalledAttempt(storageKey: string): FileAttempt | null {
   try {
     const a = JSON.parse(sessionStorage.getItem(storageKey) || "null") as FileAttempt | null;
-    return a && typeof a.key === "string" && typeof a.scope === "string" && typeof a.path === "string" && ["POST", "DELETE"].includes(a.method) ? { ...a, uncertain: true } : null;
+    return a && typeof a.key === "string" && typeof a.scope === "string" && typeof a.path === "string" && ["POST", "PATCH", "DELETE"].includes(a.method) ? { ...a, uncertain: true } : null;
   } catch { return null; }
 }
