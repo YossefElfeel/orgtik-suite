@@ -26,7 +26,7 @@ export function AppRail({ apps, current, homeHref = "/" }: { apps: RailApp[]; cu
       <Link href={homeHref} className="mb-3 grid size-11 place-items-center rounded-field focus-visible:outline-2 focus-visible:outline-focus">
         <Logo variant="mark" tone="brand" className="h-8" />
       </Link>
-      {apps.map((app) => {
+      {apps.filter(app => !["website_manager_legacy", "content"].includes(app.id)).map((app) => {
         const active = app.id === current;
         return (
           <Link

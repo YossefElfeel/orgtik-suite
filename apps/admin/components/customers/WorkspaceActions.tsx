@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowSquareOut, DotsThreeVertical, Eye, NotePencil, Pause, Play, XCircle } from "@phosphor-icons/react";
 import { Button, ConfirmDialog, IconButton, Menu, MenuContent, MenuItem, MenuTrigger, toast } from "@orgtik/ui";
 import { useWorkspaceActionMutation, type ViewAsResult, type WorkspaceDetail } from "@/store/customers";
@@ -15,6 +15,7 @@ type Asking = "suspend" | "reactivate" | "cancel" | "view_as" | "note" | null;
  */
 export function WorkspaceActions({ ws, onViewAs }: { ws: WorkspaceDetail; onViewAs: (r: ViewAsResult) => void }) {
   const t = useTranslations("Customers");
+  const locale = useLocale();
   const errorText = useErrorText();
   const [act] = useWorkspaceActionMutation();
   const [asking, setAsking] = useState<Asking>(null);
@@ -120,8 +121,15 @@ export function WorkspaceActions({ ws, onViewAs }: { ws: WorkspaceDetail; onView
           act({ id: ws.id, action: "view_as", reason })
             .unwrap()
             .then((r) => {
-              const result = r as ViewAsResult;
-              if (result.url) window.open(result.url, "_blank", "noopener,noreferrer");
+              const original = r as ViewAsResult;
+              const presentation = process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1";
+              const result = presentation && original.readOnly ? { ...original, url: `${window.location.origin}/${locale}/presentation/view-as?workspace=${encodeURIComponent(original.workspaceId || ws.id)}&readOnly=true` } : original;
+              if (result.url) {
+                // The existing staff session belongs to this tab. The prototype keeps it;
+                // the customer's identity and the production View as flow stay unchanged.
+                if (presentation && result.readOnly) window.location.assign(result.url);
+                else window.open(result.url, "_blank", "noopener,noreferrer");
+              }
               onViewAs(result);
             })
             .catch((e) => {
@@ -137,15 +145,17 @@ export function WorkspaceActions({ ws, onViewAs }: { ws: WorkspaceDetail; onView
 /** What View as gave back: the link again (a blocked pop-up still has a way), or why there is none. */
 export function ViewAsNotice({ result, onDismiss }: { result: ViewAsResult; onDismiss: () => void }) {
   const t = useTranslations("Customers");
+  const preview = useTranslations("CustomerPreview");
+  const isPreview = Boolean(result.url?.includes("/presentation/view-as?"));
   return (
     <div role="status" className="flex flex-col gap-2 rounded-card border border-line bg-brand-subtle p-4 sm:flex-row sm:items-center sm:justify-between">
-      <p className="text-body-sm text-fg">{result.url ? t("viewAs.opened") : t("viewAs.noSignIn")}</p>
+      <p className="text-body-sm text-fg">{isPreview ? preview("readOnly") : result.url ? t("viewAs.opened") : t("viewAs.noSignIn")}</p>
       <div className="flex flex-wrap items-center gap-2">
         {result.url ? (
-          <a href={result.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-body-sm font-semibold text-fg-brand hover:underline focus-visible:outline-2 focus-visible:outline-focus">
+          <a href={result.url} target={isPreview ? "_self" : "_blank"} rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-body-sm font-semibold text-fg-brand hover:underline focus-visible:outline-2 focus-visible:outline-focus">
             {t("viewAs.openAgain")}
             <ArrowSquareOut aria-hidden="true" className="size-4 rtl:-scale-x-100" />
-            <span className="sr-only">{t("newTab")}</span>
+            {!isPreview ? <span className="sr-only">{t("newTab")}</span> : null}
           </a>
         ) : null}
         <Button size="sm" variant="ghost" onClick={onDismiss}>

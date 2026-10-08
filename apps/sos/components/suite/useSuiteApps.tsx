@@ -57,7 +57,7 @@ export function useMyScopes(token: string | null, refreshKey: number | string = 
     fetch(`${API_URL}/auth/my-scopes`, { headers: { Authorization: `Bearer ${token}` } })
       .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
       .then((body) => {
-        const list: Scope[] = (body?.data ?? []).filter((s: Scope) => s.isActive);
+        const list: Scope[] = (body?.data ?? []).filter((s: Scope) => s.isActive && s.name !== "website_manager_legacy");
         if (live) { cache = { token, key, scopes: list }; setScopes(list); setLoaded({ token, key }); }
       })
       .catch(() => live && setFailed(true));

@@ -12,6 +12,9 @@ export async function handoffHref(domain: string, accessToken: string, opts: { s
   const path = `${base}${opts.locale ? `/${opts.locale}` : ""}/auth`;
   const audience = AUDIENCES[opts.scope || "global"];
   if (!audience) throw new Error("This app has no session destination.");
+  // Let a cold target render its entry route before the short-lived code is issued.
+  // The shared presentation launcher uses the same browser-only warm-up pattern.
+  await fetch(path, { mode: "no-cors" });
   const destinationToken = audience.startsWith("staff:") ? await staffTargetToken(API_URL, accessToken, audience === "staff:admin" ? "admin" : "wm") : accessToken;
   const code = await handoffCode(API_URL, destinationToken, audience);
   return `${path}?code=${encodeURIComponent(code)}`;

@@ -1,4 +1,8 @@
 const copy = {
+    lifecycleNote: ["Advance this UI scene only. Accounts, invoices and the shared clock stay unchanged.", "التقدم يغيّر سيناريو الواجهة فقط. الحسابات والفواتير والساعة المشتركة تبقى كما هي.", "Nur diese UI-Szene weiterschalten. Konten, Rechnungen und gemeinsame Uhr bleiben unverändert.", "Avancer cette scène uniquement. Comptes, factures et horloge partagée restent inchangés.", "Avanza solo questa scena. Account, fatture e orologio condiviso restano invariati."],
+    simulateFailure: ["Simulate failed renewal", "محاكاة فشل التجديد", "Fehlgeschlagene Verlängerung simulieren", "Simuler un renouvellement échoué", "Simula rinnovo non riuscito"],
+    endGrace: ["End grace → read-only", "إنهاء السماح ← قراءة فقط", "Kulanz beenden → schreibgeschützt", "Fin du délai → lecture seule", "Termina tolleranza → sola lettura"],
+    simulateRecovery: ["Simulate payment recovery", "محاكاة استعادة الدفع", "Zahlungswiederherstellung simulieren", "Simuler la récupération du paiement", "Simula recupero pagamento"],
     digits: ["Presentation digits", "أرقام العرض", "Demo-Ziffern", "Chiffres de démonstration", "Cifre demo"],
     latinDigits: ["Latin · 0123", "لاتينية · 0123", "Lateinisch · 0123", "Latins · 0123", "Latine · 0123"],
     arabicDigits: ["Arabic · ٠١٢٣", "عربية · ٠١٢٣", "Arabisch · ٠١٢٣", "Arabes · ٠١٢٣", "Arabe · ٠١٢٣"],

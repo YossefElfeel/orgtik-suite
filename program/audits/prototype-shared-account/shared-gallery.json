@@ -1,0 +1,9 @@
+{
+  "renders": 264,
+  "unchanged": 264,
+  "baselineUpdates": 0,
+  "axeFindings": 0,
+  "interactionChecks": 10,
+  "passed": true,
+  "scope": "Existing gallery; new tool flow coverage recorded separately"
+}
