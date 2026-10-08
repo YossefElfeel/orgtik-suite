@@ -35,6 +35,34 @@ async function signed(store, claims, header = { alg: "HS256", typ: "JWT" }) {
 }
 const payload = token => JSON.parse(Buffer.from(token.split(".")[1], "base64url"));
 
+test('staff reappointment cannot revive earlier staff or view-as families, while other workspace access survives', async () => {
+  const f = fixture(); let epoch = 0;
+  const originalResolve = f.callbacks.resolveWorkspace, originalContext = f.callbacks.contextFor;
+  const staffAccess = () => ({ actorUserId: 1, accessEpoch: epoch, apps: ['admin'], roles: { admin: ['super_admin'] }, permissions: { admin: ['workspaces:edit'] } });
+  f.authority.configureAuthority({
+    resolveWorkspace(user, options) {
+      const value = originalResolve(user, options); if (!value) return null;
+      return options.mode === 'staff' ? { scopes: [{ scope: 'platform_admin', roles: ['super_admin'], permissions: [] }], workspaceContext: null, staffAccess: staffAccess() } : { ...value, staffAccess: options.actor.staff ? staffAccess() : null };
+    },
+    contextFor(user, options) {
+      const value = originalContext(user, options);
+      return options.extra.mode === 'staff' ? { ...value, scopes: [{ scope: 'platform_admin', roles: ['super_admin'], permissions: [] }], workspaceContext: null, staffAccess: staffAccess() } : { ...value, staffAccess: options.principal?.actor.staff ? staffAccess() : null };
+    },
+  });
+  const staff = await issued(f, 1, { mode: 'staff', workspaceId: null, audience: 'staff:admin' });
+  const other = await issued(f, 1, { workspaceId: 'ws_b' });
+  const frame = await authorize(f, staff.accessToken);
+  const view = f.authority.runPrepared(frame, () => f.authority.issueTokens(f.people.get(2), { impersonatedBy: 1, mode: 'workspace', workspaceId: 'ws_a', audience: 'tool:tasks' }));
+  await f.authority.commitPending(frame);
+  assert.equal((await authorize(f, view.accessToken)).principal.readOnly, true);
+  epoch++; // Current employment may be reappointed; historical session families remain revoked.
+  await assert.rejects(authorize(f, staff.accessToken), error => error.code === 'staff_membership_revoked');
+  await assert.rejects(authorize(f, view.accessToken), error => error.code === 'staff_membership_revoked');
+  assert.equal((await authorize(f, other.accessToken)).principal.claims.workspaceId, 'ws_b');
+  const current = await issued(f, 1, { mode: 'staff', workspaceId: null, audience: 'staff:admin' });
+  assert.equal((await authorize(f, current.accessToken)).principal.context.staffAccess.accessEpoch, 1);
+});
+
 test("revalidation closes revoked-session and changed-membership races before a domain commit", async () => {
   const f = fixture(), tokens = await issued(f), frame = await authorize(f, tokens.accessToken);
   assert.equal((await f.authority.revalidatePrepared(frame)).user.id,1);

@@ -18,6 +18,8 @@ export type OffboardingOptions = {
   successors: Array<{ memberId: string; name: string; email: string; role: string; tools: string[] }>;
   offboarding: OffboardingRecord | null;
   ownershipReview?: { unavailableSuccessorId?: string; departedMemberId?: string } | null;
+  staffProtection: { isSuperAdmin: boolean; isLastActiveSuperAdmin: boolean; activeReplacementCount: number; canSchedule: boolean; reason: 'active_super_admin_required' | null } | null;
+  staffRecovery: { status: 'required'; offboardingId: string; at: string } | null;
   serverNow: string; businessToday: string;
   custodyCoverage: Array<{ tool: string; assigned: boolean; eligibleSuccessorMemberIds: string[]; canArchive: boolean }>;
 };

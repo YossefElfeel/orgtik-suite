@@ -2827,6 +2827,12 @@
     },
     "successorUnavailable": "Successore non disponibile",
     "successorWarning": "Il successore previsto non è più idoneo. Annulla il programma e scegli un successore attivo prima del limite di fine.",
-    "working": "Salvataggio della richiesta originale…"
+    "working": "Salvataggio della richiesta originale…",
+    "staffProtection": {
+      "authority": "L’uscita termina l’accesso alle app del personale OrgTik. Una riassunzione non ripristina questi diritti; serve una nomina separata e autorizzata.",
+      "qualified": "Un altro super amministratore qualificato è attualmente attivo. Il suo stato viene ricontrollato per la data di fine scelta e al momento dell’uscita.",
+      "noReplacement": "Deve essere già presente un altro super amministratore OrgTik qualificato e attivo. Trasferire la proprietà dello spazio non assegna questo ruolo.",
+      "recovery": "È necessario un recupero amministrativo OrgTik. L’accesso della persona uscita resta revocato; nessun ruolo del personale è stato assegnato automaticamente."
+    }
   }
 }

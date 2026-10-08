@@ -66,15 +66,18 @@ function overLimits(S, ws, plan) {
   const usage = ws.usage ?? {};
   return Object.entries(plan.limits ?? {}).filter(([key, limit]) => Number.isFinite(limit) && (usage[key] ?? 0) > limit).map(([key, limit]) => ({ key, limit, used: usage[key], excess: usage[key] - limit, state: "read_only" }));
 }
-function advance(S) {
+function advance(S, { workspaceId } = {}) {
   const { db } = S;
   const t = S.now();
   const set = db.settings;
+  const suspendedScope = workspaceId !== undefined && db.workspaces.find(ws => ws.id === workspaceId)?.state === 'suspended';
   applyPublishedPrices(S);
   for (const ws of db.workspaces) {
+    if (workspaceId !== undefined && ws.id !== workspaceId) continue;
+    const dunningOnly = workspaceId !== undefined && ws.state === 'suspended';
     for (const l of ws.lines) {
       const downgrade = l.scheduled?.kind === "downgrade" ? l.scheduled : null;
-      if (downgrade && Date.parse(downgrade.effectiveAt) <= t && l.state === "active") {
+      if (!dunningOnly && downgrade && Date.parse(downgrade.effectiveAt) <= t && l.state === "active") {
         const plan = db.plans.find(p => p.id === downgrade.planId && p.tool === l.tool && (!p.workspaceId || p.workspaceId === ws.id));
         const priced = plan && S.resolveForWorkspace(plan.id, ws, l.cycle, l.snapshot.quantity);
         if (priced) {
@@ -92,16 +95,16 @@ function advance(S) {
           delete l.scheduled;
           delete l.scheduledPrice;
           S.log("system", "downgrade_applied", ws.id, { line: l.id, plan: plan.id, overLimits: l.overLimits });
-        }
+        } else if (workspaceId !== undefined) throw Object.assign(new Error('The scheduled downgrade price is unavailable; nothing was committed.'), { status: 503, code: 'scheduled_downgrade_unavailable' });
       }
       const priceChange = l.scheduledPrice ?? (l.scheduled?.kind === "price_change" ? l.scheduled : null);
-      if (priceChange?.snapshot && Date.parse(priceChange.effectiveAt) <= t && ["active", "cancelling"].includes(l.state)) {
+      if (!dunningOnly && priceChange?.snapshot && Date.parse(priceChange.effectiveAt) <= t && ["active", "cancelling"].includes(l.state)) {
         // A later downgrade must not inherit the former plan's pending price.
         if (!downgrade) l.snapshot = { ...l.snapshot, ...priceChange.snapshot };
         if (l.scheduledPrice) delete l.scheduledPrice; else delete l.scheduled;
         S.log("system", "line_price_effective", ws.id, { line: l.id, draft: priceChange.draftId });
       }
-      if (l.state === "trialing" && l.trialEndsAt && Date.parse(l.trialEndsAt) <= t) {
+      if (!dunningOnly && l.state === "trialing" && l.trialEndsAt && Date.parse(l.trialEndsAt) <= t) {
         // G-17: at the end the tool goes to its Free plan if it has one, else it ends.
         const free = db.plans.find((p) => p.tool === l.tool && p.tier === "free");
         if (free) Object.assign(l, { state: "free", planId: free.id, snapshot: { ...l.snapshot, amount: 0, unit: 0 } });
@@ -115,7 +118,7 @@ function advance(S) {
       if (l.state === "read_only" && l.readOnlySince && Date.parse(l.readOnlySince) + (set.dunning.cancelAfterDays - set.dunning.graceDays) * 86400000 <= t) {
         Object.assign(l, { state: "ended", endedAt: S.iso(Date.parse(l.readOnlySince) + (set.dunning.cancelAfterDays - set.dunning.graceDays) * 86400000) });
       }
-      if (l.state === "cancelling" && l.cancelAt && Date.parse(l.cancelAt) <= t) Object.assign(l, { state: "ended", endedAt: l.cancelAt });
+      if (!dunningOnly && l.state === "cancelling" && l.cancelAt && Date.parse(l.cancelAt) <= t) Object.assign(l, { state: "ended", endedAt: l.cancelAt });
       if (l.state === "ended" && l.endedAt && Date.parse(l.endedAt) + set.retention.toolDays * 86400000 <= t) l.state = "deleted";
     }
     if (ws.state === "active" || ws.state === "past_due") {
@@ -125,6 +128,7 @@ function advance(S) {
   }
   // Delivered service work is approved by itself after the setting's days (G-30).
   for (const r of db.serviceRequests) {
+    if (workspaceId !== undefined && (r.workspaceId !== workspaceId || suspendedScope)) continue;
     const d = r.deliveries.at(-1);
     if (r.state === "in_review" && d?.autoApproveAt && Date.parse(d.autoApproveAt) <= t) {
       r.state = "completed";
@@ -134,6 +138,7 @@ function advance(S) {
   }
   // Tickets waiting for the customer close after 7 days; resolved ones after the reopen window.
   for (const k of db.tickets) {
+    if (workspaceId !== undefined && (k.workspaceId !== workspaceId || suspendedScope)) continue;
     if (k.state === "waiting_for_you" && k.autoCloseAt && Date.parse(k.autoCloseAt) <= t) k.state = "closed";
     if (k.state === "resolved" && k.reopenUntil && Date.parse(k.reopenUntil) <= t) k.state = "closed";
   }

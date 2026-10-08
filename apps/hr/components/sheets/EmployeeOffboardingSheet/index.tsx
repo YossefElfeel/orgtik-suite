@@ -82,7 +82,9 @@ export function EmployeeOffboardingSheet({ id, children, className }: EmployeeOf
         const pending = { ...original, uncertain: true };
         setAttempt(pending); saveOffboardingAttempt(namespace, pending);
       } else { setAttempt(null); saveOffboardingAttempt(namespace, null); }
-      setError(t(`errors.${code}`));
+      const response = failure && typeof failure === 'object' && 'data' in failure ? failure.data : undefined;
+      const staffBlocked = response && typeof response === 'object' && 'code' in response && response.code === 'active_super_admin_required';
+      setError(t(staffBlocked ? 'staffProtection.noReplacement' : `errors.${code}`));
     }
   };
   const submit = (values: OffboardingValues) => execute(attempt || { kind: 'offboard', uncertain: false, request: { id, operationId: crypto.randomUUID(), body: { ...(values.mode === 'date' ? { effectiveAt: values.effectiveDate } : {}), transfer: { ...(values.ownerMemberId ? { ownerMemberId: values.ownerMemberId } : {}) } } } });
@@ -105,7 +107,9 @@ export function EmployeeOffboardingSheet({ id, children, className }: EmployeeOf
         {options && !loadError ? <>
           <p className="text-sm text-fg-muted">{t('timezone', { timeZone: options.workspace.timeZone })}</p>
           {options.ownershipReview ? <div role="alert" className="rounded-lg bg-warning-subtle p-4 text-fg">{t('ownershipReview')}</div> : null}
-          {(record && record.status !== 'cancelled' ? actionsBlocked : blocked) ? <p role="alert" className="text-danger">{t(contextMatches ? 'errors.forbidden' : 'errors.workspace')}</p> : null}
+          {options.staffRecovery ? <div role="alert" className="rounded-lg bg-warning-subtle p-4 text-fg">{t('staffProtection.recovery')}</div> : null}
+          {options.staffProtection ? <div className="rounded-lg border border-line p-4 text-sm text-fg space-y-2"><p>{t('staffProtection.authority')}</p>{options.staffProtection.isSuperAdmin ? <p role={options.staffProtection.canSchedule ? 'status' : 'alert'} className={options.staffProtection.canSchedule ? 'text-fg-muted' : 'text-danger'}>{t(options.staffProtection.canSchedule ? 'staffProtection.qualified' : 'staffProtection.noReplacement')}</p> : null}</div> : null}
+          {(record && record.status !== 'cancelled' ? actionsBlocked : blocked) && !(contextMatches && canWrite && options.staffProtection?.reason === 'active_super_admin_required') ? <p role="alert" className="text-danger">{t(contextMatches ? 'errors.forbidden' : 'errors.workspace')}</p> : null}
           {success ? <p role="status" className="rounded-lg bg-success-subtle p-4 text-fg">{success}</p> : null}
           {attempt ? <div role="alert" className="rounded-lg bg-warning-subtle p-4 text-fg space-y-3"><p>{t('unconfirmed')}</p><Button className="min-h-11 sm:min-h-8" onClick={() => execute(attempt)} disabled={busy || actionsBlocked}>{t('recover')}</Button></div> : null}
           {error ? <p role="alert" className="rounded-lg bg-danger-subtle p-4 text-danger">{error}</p> : null}

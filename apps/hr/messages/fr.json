@@ -2827,6 +2827,12 @@
     },
     "successorUnavailable": "Successeur indisponible",
     "successorWarning": "Le successeur prévu n’est plus admissible. Annulez la programmation et choisissez un membre actif avant la limite de fin.",
-    "working": "Enregistrement de la demande initiale…"
+    "working": "Enregistrement de la demande initiale…",
+    "staffProtection": {
+      "authority": "Le départ termine les accès aux applications du personnel OrgTik. Une réembauche ne rétablit pas ces droits ; une nomination distincte et autorisée est nécessaire.",
+      "qualified": "Un autre super-administrateur qualifié est actuellement actif. Son statut sera revérifié pour la date de fin choisie et lors du départ effectif.",
+      "noReplacement": "Un autre super-administrateur OrgTik qualifié et actif doit déjà être en place. Le transfert de propriété de l’espace n’attribue pas ce rôle.",
+      "recovery": "Une récupération administrative OrgTik est nécessaire. Les accès de la personne partie restent révoqués ; aucun rôle du personnel n’a été attribué automatiquement."
+    }
   }
 }

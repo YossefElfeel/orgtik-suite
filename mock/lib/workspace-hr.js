@@ -2,6 +2,26 @@ const people = require("./workspace-people");
 const custody = require('./workspace-custody');
 const { createBusinessCalendar } = require('./business-calendar');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
+const dictionary = value => Boolean(value && typeof value === 'object' && !Array.isArray(value) && [Object.prototype, null].includes(Object.getPrototypeOf(value)));
+const isInternalEmployment = workspace => workspace?.id === 'ws_orgtik' && workspace.kind === 'orgtik_internal';
+function qualifiedSuperAdmins(S, identity, { excludingKey, through, excludingOffboardingId } = {}) {
+  const internal = S.workspace('ws_orgtik');
+  if (!isInternalEmployment(internal)) return [];
+  return internal.members.filter(member => member.userKey !== excludingKey && member.status === 'active' && member.role !== 'guest'
+    && custody.hasActiveAccount(member, identity) && !Object.hasOwn(S.db.staffAuthorityRevocations || {}, member.userKey)
+    && Array.isArray(S.db.staffRoles?.[member.userKey]) && S.db.staffRoles[member.userKey].includes('super_admin')
+    && !(internal.offboardings || []).some(row => row.id !== excludingOffboardingId && row.status === 'scheduled'
+      && (row.memberId === member.id || row.userKey === member.userKey || Number(row.userId) === identity.findByKey(member.userKey)?.id)
+      && Number.isFinite(through) && Date.parse(row.effectiveAt) <= through));
+}
+function staffProtection(S, identity, workspace, userKey, through, excludingOffboardingId) {
+  if (!isInternalEmployment(workspace)) return null;
+  const isSuperAdmin = qualifiedSuperAdmins(S, identity, { excludingOffboardingId }).some(member => member.userKey === userKey);
+  const replacements = qualifiedSuperAdmins(S, identity, { excludingKey: userKey, through, excludingOffboardingId });
+  return { isSuperAdmin, isLastActiveSuperAdmin: isSuperAdmin && replacements.length === 0, activeReplacementCount: replacements.length,
+    canSchedule: !isSuperAdmin || replacements.length > 0, reason: isSuperAdmin && !replacements.length ? 'active_super_admin_required' : null,
+    replacementUserKeys: replacements.map(member => member.userKey) };
+}
 function validateHirePayload(payload) {
   const fields = ['firstName', 'lastName', 'email', 'phoneNumber', 'birthday', 'gender', 'nationality', 'nationalIdOrPassport', 'personalTaxId', 'accommodationType', 'country', 'city', 'street', 'postCode', 'tools'];
   if (!payload || typeof payload !== 'object' || Array.isArray(payload) || Object.keys(payload).some(key => !fields.includes(key))) throw fail(422, 'invalid_employee', 'Only employee details and invited tools can be supplied.');
@@ -67,13 +87,15 @@ function endInstant(workspace, value, now) {
     if (normalized.toISOString().slice(0, 10) !== value) throw fail(422, 'invalid_end_date', 'Choose a valid employment end date.');
     // A date-only end date preserves access through the workspace's last local day.
     const next = new Date(Date.UTC(year, month - 1, day + 1));
-    return calendar.fromWall({ year: next.getUTCFullYear(), month: next.getUTCMonth() + 1, day: next.getUTCDate() });
+    return calendar.civilDayStart({ year: next.getUTCFullYear(), month: next.getUTCMonth() + 1, day: next.getUTCDate() });
   }
   const instant = Date.parse(value);
   if (!Number.isFinite(instant)) throw fail(422, 'invalid_end_date', 'Choose a valid employment end date.');
   return instant;
 }
 function offboard({ S, identity, workspace, actor, runtime, payload, transferOwned }) {
+  const scheduler = actor && identity.findUser(actor.id);
+  if (!scheduler || scheduler.key !== actor.key || scheduler.isActive !== true || scheduler.deletedAt || scheduler.pendingActivation) throw fail(403, 'offboarding_actor_required', 'An authenticated HR actor must schedule offboarding.');
   const snapshot = runtime.exportSnapshot(), employee = snapshot.data.employees.find(row => row.id === Number(payload.employeeId));
   if (!employee) throw fail(404, 'employee_not_found', 'This employment record was not found.');
   workspace.offboardings ??= [];
@@ -83,7 +105,12 @@ function offboard({ S, identity, workspace, actor, runtime, payload, transferOwn
   const targetId = payload.transfer?.ownerMemberId ?? payload.transfer?.memberId;
   if (member?.role === 'owner' && !workspace.members.some(row => row.id === targetId && row.status === 'active' && row.role !== 'guest' && row.id !== member.id && custody.hasActiveAccount(row, identity))) throw fail(422, 'ownership_transfer_required', 'Choose an active member to receive workspace ownership.');
   const at = endInstant(workspace, payload.effectiveAt, S.now());
+  const userKey = person?.key || member?.userKey || employee.userKey || null;
+  const protection = staffProtection(S, identity, workspace, userKey, at);
+  if (protection && !protection.canSchedule) throw fail(409, 'active_super_admin_required', 'Appoint another qualified active OrgTik super administrator before scheduling this departure.');
   const row = { id: S.id('offboard'), employeeId: employee.id, userId: employee.authUserId, memberId: member?.id || null, effectiveAt: S.iso(at), status: 'scheduled', transfer: { ownerMemberId: targetId || null }, equipment: { status: 'pending' }, finalPay: { status: 'pending', currency: employee.salary?.currency || workspace.currency }, createdBy: actor.id, createdAt: S.iso(S.now()) };
+  row.userKey = userKey;
+  if (protection) row.staffProtection = { wasQualifiedSuperAdmin: protection.isSuperAdmin, checkedAt: S.iso(S.now()), activeReplacementCount: protection.activeReplacementCount };
   workspace.offboardings.push(row);
   S.log(actor.key, 'offboarding_scheduled', row.id, { workspaceId: workspace.id, employeeId: employee.id });
   runOffboarding({ S, identity, workspace, actor, runtime, transferOwned }); return row;
@@ -93,6 +120,30 @@ function runOffboarding({ S, identity, workspace, actor, runtime, transferOwned 
   for (const row of workspace.offboardings || []) {
     if (row.status !== 'scheduled' || Date.parse(row.effectiveAt) > S.now()) continue;
     const member = workspace.members.find(item => item.id === row.memberId);
+    if (isInternalEmployment(workspace)) {
+      const userKey = row.userKey || member?.userKey || identity.findUser(row.userId)?.key;
+      const epochs = S.db.staffAccessEpochs;
+      if (epochs !== undefined && !dictionary(epochs)) throw fail(503, 'staff_epoch_invalid', 'Staff access recovery is temporarily required.');
+      if (S.db.staffAuthorityRevocations !== undefined && !dictionary(S.db.staffAuthorityRevocations)) throw fail(503, 'staff_revocations_invalid', 'Staff access recovery is temporarily required.');
+      const epoch = epochs && Object.hasOwn(epochs, userKey) ? epochs[userKey] : 0;
+      if (!userKey || !Number.isSafeInteger(epoch) || epoch < 0 || epoch === Number.MAX_SAFE_INTEGER) throw fail(503, 'staff_epoch_invalid', 'Staff access recovery is temporarily required.');
+      const currentlyQualified = qualifiedSuperAdmins(S, identity, { excludingOffboardingId: row.id }).some(item => item.userKey === userKey);
+      if (userKey) {
+        S.db.staffAccessEpochs ??= {};
+        S.db.staffAccessEpochs[userKey] = epoch + 1;
+        S.db.staffAuthorityRevocations ??= {};
+        S.db.staffAuthorityRevocations[userKey] ??= { workspaceId: workspace.id, memberId: row.memberId, offboardingId: row.id, at: row.effectiveAt };
+        row.staffAuthorityRevokedAt = S.db.staffAuthorityRevocations[userKey].at;
+      }
+      if ((row.staffProtection?.wasQualifiedSuperAdmin || currentlyQualified) && !qualifiedSuperAdmins(S, identity, { excludingKey: userKey, through: S.now(), excludingOffboardingId: row.id }).length) {
+        const incident = { status: 'required', reason: 'no_active_super_admin', offboardingId: row.id, departedUserKey: userKey || null, departedMemberId: row.memberId, at: row.effectiveAt, detectedAt: S.iso(S.now()) };
+        workspace.flags ??= {}; workspace.flags.staffRecovery = incident; row.staffRecovery = { ...incident };
+        const recipients = new Set(workspace.members.filter(item => item.id !== row.memberId && item.status === 'active' && item.role !== 'guest' && custody.hasActiveAccount(item, identity)).map(item => identity.findByKey(item.userKey)?.email).filter(Boolean));
+        if (!recipients.size && workspace.billing?.email) recipients.add(workspace.billing.email);
+        for (const email of recipients) people.notice(S, workspace, email, 'staff_recovery_required', `staff-recovery:${row.id}:${email}`, { offboardingId: row.id, at: row.effectiveAt });
+        S.log(actor?.key || 'system', 'staff_recovery_required', row.id, { workspaceId: workspace.id, userId: row.userId, at: row.effectiveAt });
+      }
+    }
     if (member?.role === 'owner') {
       const target = workspace.members.find(item => item.id === row.transfer.ownerMemberId && item.status === 'active' && item.role !== 'guest' && custody.hasActiveAccount(item, identity));
       if (!target) {
@@ -123,7 +174,10 @@ function offboardingOptions({ S, identity, workspace, actor, runtime, payload })
     return { memberId: candidate.id, name: user ? `${user.firstName || ''} ${user.lastName || ''}`.trim() : candidate.name, email: user?.email || candidate.email, role: candidate.role, tools: Object.keys(candidate.toolGrants || {}).filter(tool => candidate.toolGrants[tool].assigned) };
   });
   const record = (workspace.offboardings || []).filter(row => row.employeeId === employee.id).at(-1) || null;
-  return { workspace: { id: workspace.id, name: workspace.name, timeZone: workspace.timeZone }, employee: { id: employee.id, name: `${employee.firstName || ''} ${employee.lastName || ''}`.trim(), isOwner: member?.role === 'owner' }, canOffboard: employee.authUserId !== actor.id && !['offboarded'].includes(employee.status), successorRequired: member?.role === 'owner', successors, offboarding: record, ownershipReview: workspace.flags?.ownershipReview || null, serverNow: S.iso(S.now()), businessToday: `${parts.year}-${String(parts.month).padStart(2, '0')}-${String(parts.day).padStart(2, '0')}`, custodyCoverage: custody.coverage(workspace, member, identity) };
+  const protection = staffProtection(S, identity, workspace, person?.key || member?.userKey || employee.userKey, record?.status === 'scheduled' ? Date.parse(record.effectiveAt) : S.now(), record?.id);
+  const { replacementUserKeys: _privateKeys, ...safeProtection } = protection || {};
+  const recovery = isInternalEmployment(workspace) && workspace.flags?.staffRecovery;
+  return { workspace: { id: workspace.id, name: workspace.name, timeZone: workspace.timeZone }, employee: { id: employee.id, name: `${employee.firstName || ''} ${employee.lastName || ''}`.trim(), isOwner: member?.role === 'owner' }, canOffboard: employee.authUserId !== actor.id && !['offboarded'].includes(employee.status) && (!protection || protection.canSchedule), successorRequired: member?.role === 'owner', successors, offboarding: record, ownershipReview: workspace.flags?.ownershipReview || null, staffProtection: protection ? safeProtection : null, staffRecovery: recovery ? { status: recovery.status, offboardingId: recovery.offboardingId, at: recovery.at } : null, serverNow: S.iso(S.now()), businessToday: `${parts.year}-${String(parts.month).padStart(2, '0')}-${String(parts.day).padStart(2, '0')}`, custodyCoverage: custody.coverage(workspace, member, identity) };
 }
 function offboardingAction({ S, workspace, actor, payload }) {
   const row = workspace.offboardings?.find(record => record.id === payload.offboardingId && record.employeeId === Number(payload.employeeId));

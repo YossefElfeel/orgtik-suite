@@ -1,6 +1,8 @@
 # A14 — staged leave and approved availability
 
-2026-10-08 · reviewed working package based on merged PR15; package CI and hosted acceptance pending.
+2026-10-08 · source merged after CI; hosted acceptance remains open.
+
+[PR16](https://github.com/YossefElfeel/orgtik-suite/pull/16), source `6b5cf54`, merged as main `73e712b` after [CI37708774116](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37708774116) and [deployment-pause configuration37708773770](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37708773770) passed. The unchanged shared library correctly skipped a new visual run; touched app dialogs/calendars have their own local acceptance evidence below.
 
 J7 exposed three implementation gaps: a no-file HR request still submitted multipart to the deferred-upload path; the workspace decision helper bypassed HR's manager/HR stages; and no consuming calendar displayed approved availability. This package uses JSON commands with original operation keys, verified current-role/team decisions, the existing detailed serializer and current server capabilities. Missing manager approval is displayed as not required. New binary uploads remain deferred; historical packaged attachment display is preserved.
 

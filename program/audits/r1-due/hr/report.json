@@ -1,0 +1,318 @@
+{
+  "realm": "r1-due-local",
+  "seedStaffMutation": false,
+  "clockMutation": false,
+  "dataReset": false,
+  "checks": [
+    {
+      "name": "isolated due sandbox verified",
+      "pass": true
+    },
+    {
+      "name": "actual OrgTik last-SA protection is read-only verified",
+      "pass": true
+    },
+    {
+      "name": "fresh customer has no staff capabilities or recovery leakage",
+      "pass": true
+    },
+    {
+      "name": "ORG en/1440: specific no-replacement guidance",
+      "pass": true
+    },
+    {
+      "name": "ORG en/1440: new departure disabled",
+      "pass": true
+    },
+    {
+      "name": "ORG en/1440: no staff-promotion control",
+      "pass": true
+    },
+    {
+      "name": "org-protected-en-1440-light: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "org-protected-en-1440-light: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "org-protected-en-1440-light: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "customer en/1440: no staff-specific guidance",
+      "pass": true
+    },
+    {
+      "name": "customer en/1440: ordinary offboarding available",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-en-1440-light: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-en-1440-light: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-en-1440-light: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "projection en/1440: recovery guidance visible",
+      "pass": true
+    },
+    {
+      "name": "projection en/1440: staff remains administratively read-only",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-en-1440-light: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-en-1440-light: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-en-1440-light: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "ORG en/390: specific no-replacement guidance",
+      "pass": true
+    },
+    {
+      "name": "ORG en/390: new departure disabled",
+      "pass": true
+    },
+    {
+      "name": "ORG en/390: no staff-promotion control",
+      "pass": true
+    },
+    {
+      "name": "org-protected-en-390-light: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "org-protected-en-390-light: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "org-protected-en-390-light: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "customer en/390: no staff-specific guidance",
+      "pass": true
+    },
+    {
+      "name": "customer en/390: ordinary offboarding available",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-en-390-light: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-en-390-light: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-en-390-light: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "projection en/390: recovery guidance visible",
+      "pass": true
+    },
+    {
+      "name": "projection en/390: staff remains administratively read-only",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-en-390-light: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-en-390-light: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-en-390-light: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "ORG ar/1440: specific no-replacement guidance",
+      "pass": true
+    },
+    {
+      "name": "ORG ar/1440: new departure disabled",
+      "pass": true
+    },
+    {
+      "name": "ORG ar/1440: no staff-promotion control",
+      "pass": true
+    },
+    {
+      "name": "org-protected-ar-1440-dark: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "org-protected-ar-1440-dark: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "org-protected-ar-1440-dark: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "customer ar/1440: no staff-specific guidance",
+      "pass": true
+    },
+    {
+      "name": "customer ar/1440: ordinary offboarding available",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-ar-1440-dark: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-ar-1440-dark: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-ar-1440-dark: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "projection ar/1440: recovery guidance visible",
+      "pass": true
+    },
+    {
+      "name": "projection ar/1440: staff remains administratively read-only",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-ar-1440-dark: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-ar-1440-dark: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-ar-1440-dark: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "ORG ar/390: specific no-replacement guidance",
+      "pass": true
+    },
+    {
+      "name": "ORG ar/390: new departure disabled",
+      "pass": true
+    },
+    {
+      "name": "ORG ar/390: no staff-promotion control",
+      "pass": true
+    },
+    {
+      "name": "org-protected-ar-390-dark: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "org-protected-ar-390-dark: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "org-protected-ar-390-dark: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "customer ar/390: no staff-specific guidance",
+      "pass": true
+    },
+    {
+      "name": "customer ar/390: ordinary offboarding available",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-ar-390-dark: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-ar-390-dark: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "customer-nullcaps-ar-390-dark: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "projection ar/390: recovery guidance visible",
+      "pass": true
+    },
+    {
+      "name": "projection ar/390: staff remains administratively read-only",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-ar-390-dark: no horizontal overflow",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-ar-390-dark: sheet fits viewport",
+      "pass": true
+    },
+    {
+      "name": "controlled-recovery-ar-390-dark: no missing translation markers",
+      "pass": true
+    },
+    {
+      "name": "actual seed staff employment never changed",
+      "pass": true
+    },
+    {
+      "name": "business clock unchanged",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "org-protected-en-1440-light.png",
+    "customer-nullcaps-en-1440-light.png",
+    "controlled-recovery-en-1440-light.png",
+    "org-protected-en-390-light.png",
+    "customer-nullcaps-en-390-light.png",
+    "controlled-recovery-en-390-light.png",
+    "org-protected-ar-1440-dark.png",
+    "customer-nullcaps-ar-1440-dark.png",
+    "controlled-recovery-ar-1440-dark.png",
+    "org-protected-ar-390-dark.png",
+    "customer-nullcaps-ar-390-dark.png",
+    "controlled-recovery-ar-390-dark.png"
+  ],
+  "source": {
+    "mock/lib/workspace-hr.js": "2be5ebde51b7fa613d2a2e6f9669460dd4161d8be2a9cf567e3f6ee17beed9d5",
+    "apps/hr/components/sheets/EmployeeOffboardingSheet/index.tsx": "748867b4982e7a2c5cb71b138f0f66eca11f637b5abe9f35146a052e2c43663f",
+    "apps/hr/types/offboarding.ts": "5bc53eba53190113c55f1b411dddf415b6eeec30d3e3b79799a4ae585a848cb6",
+    "apps/hr/messages/en.json": "3daea92c8df0df89f6050223c900fd24634a1ef7f8869c621b413ccff1357e71",
+    "apps/hr/messages/ar.json": "e3820a628a3854676eba7cea817662e49ade90673e098c656df71f644335400c"
+  },
+  "projectedScenarios": [
+    "staffRecovery"
+  ],
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "passed": 69,
+  "completed": true
+}
