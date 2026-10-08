@@ -948,7 +948,14 @@
       "reject": "Reject",
       "submitDecision": "Submit Decision",
       "cancel": "Cancel",
-      "changeDecision": "Change Decision"
+      "changeDecision": "Change Decision",
+      "close": "Close",
+      "recover": "Recover original result",
+      "sendRequest": "Submit request",
+      "retry": "Try again",
+      "cancelRequest": "Cancel this request",
+      "confirmCancel": "Confirm cancellation",
+      "keepRequest": "Keep request"
     },
     "decision": {
       "label": "Decision: {status}",
@@ -960,13 +967,31 @@
         "pending": "Pending"
       },
       "choose": "Choose Approve or Reject first.",
-      "tooLong": "Keep the note under 500 characters."
+      "tooLong": "Keep the note under 500 characters.",
+      "notRequired": "Not required"
     },
     "durations": {
       "full_day": "Full day",
       "half_day": "Half day",
       "partial": "Part of the day",
       "custom_hours": "Custom hours"
+    },
+    "loading": "Loading request details…",
+    "working": "Saving the original action…",
+    "unconfirmed": "The result is unconfirmed. The original action is kept and editing is locked. Recover that result before making another change.",
+    "timezone": "Dates and times use {timeZone}.",
+    "cancelledSaved": "Request cancelled.",
+    "decisionSaved": "Decision recorded. The overall status above reflects the approval workflow.",
+    "cancelReview": "Cancel this pending request? It will leave the approval queue. Its record is retained.",
+    "errors": {
+      "uncertain": "The result could not be confirmed. Recover the original action to check it safely.",
+      "workspace": "Return to the original workspace and account to recover this action.",
+      "forbidden": "Your current workspace access does not permit this action.",
+      "readOnly": "This workspace or session is read-only. Requests and decisions cannot be changed.",
+      "gone": "The requested record is no longer available.",
+      "conflict": "The request changed. Refresh and review it before making another change.",
+      "invalid": "Review the employee, dates, times and decision, then try again.",
+      "failed": "The action could not be completed. Review the details and try again."
     }
   },
   "ticketStatusCard": {
@@ -1724,8 +1749,18 @@
       "typeRequired": "Type is required",
       "startDateRequired": "Start date is required",
       "endDateRequired": "End date is required",
-      "customHoursRequired": "Start and end time are required for custom hours"
-    }
+      "customHoursRequired": "Start and end time are required for custom hours",
+      "dateOrder": "Choose an end date on or after the start date.",
+      "timeOrder": "Choose an end time after the start time on the same day.",
+      "employee": "Choose a valid employee.",
+      "note": "Keep the note within 2,000 characters."
+    },
+    "startPlaceholder": "Choose the first day",
+    "endPlaceholder": "Choose the last day",
+    "saved": "Request {code} saved.",
+    "reviewHint": "Approved time off appears in your workspace calendars. Each review and the overall status are shown separately.",
+    "timezone": "Dates and times use the workspace timezone: {timeZone}.",
+    "packagedOnly": "File uploads are unavailable in this prototype. Existing sample attachments remain available on saved requests."
   },
   "attendanceCard": {
     "title": "Attendance",
@@ -2260,7 +2295,18 @@
       "type": "Leave type",
       "duration": "Duration",
       "days": "{count, plural, one {# day} other {# days}}",
-      "hours": "{count, plural, one {# hour} other {# hours}}"
+      "hours": "{count, plural, one {# hour} other {# hours}}",
+      "errors": {
+        "uncertain": "The result could not be confirmed. Recover the original action to check it safely.",
+        "workspace": "Return to the original workspace and account to recover this action.",
+        "forbidden": "Your current workspace access does not permit this action.",
+        "readOnly": "This workspace or session is read-only. Requests and decisions cannot be changed.",
+        "gone": "The requested record is no longer available.",
+        "conflict": "The request changed. Refresh and review it before making another change.",
+        "invalid": "Review the employee, dates, times and decision, then try again.",
+        "failed": "The action could not be completed. Review the details and try again."
+      },
+      "retry": "Try again"
     },
     "meeting": {
       "date": "Date",

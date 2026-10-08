@@ -948,7 +948,14 @@
       "reject": "Refuser",
       "submitDecision": "Soumettre la décision",
       "cancel": "Annuler",
-      "changeDecision": "Modifier la décision"
+      "changeDecision": "Modifier la décision",
+      "close": "Fermer",
+      "recover": "Récupérer le résultat initial",
+      "sendRequest": "Envoyer la demande",
+      "retry": "Réessayer",
+      "cancelRequest": "Annuler cette demande",
+      "confirmCancel": "Confirmer l’annulation",
+      "keepRequest": "Conserver la demande"
     },
     "decision": {
       "label": "Décision : {status}",
@@ -960,13 +967,31 @@
         "pending": "En attente"
       },
       "choose": "Choisissez d’abord Approuver ou Refuser.",
-      "tooLong": "La note ne doit pas dépasser 500 caractères."
+      "tooLong": "La note ne doit pas dépasser 500 caractères.",
+      "notRequired": "Non requis"
     },
     "durations": {
       "full_day": "Journée entière",
       "half_day": "Demi-journée",
       "partial": "Partie de la journée",
       "custom_hours": "Heures personnalisées"
+    },
+    "loading": "Chargement des détails…",
+    "working": "Enregistrement de l’action initiale…",
+    "unconfirmed": "Le résultat est incertain. L’action initiale est conservée et les modifications sont bloquées. Récupérez le résultat avant un autre changement.",
+    "timezone": "Les dates et heures utilisent {timeZone}.",
+    "cancelledSaved": "Demande annulée.",
+    "decisionSaved": "Décision enregistrée. Le statut global ci-dessus reflète le circuit d’approbation.",
+    "cancelReview": "Annuler cette demande en attente ? Elle quittera la file d’approbation. Son dossier sera conservé.",
+    "errors": {
+      "uncertain": "Le résultat est incertain. Récupérez l’action initiale pour le vérifier en toute sécurité.",
+      "workspace": "Revenez à l’espace et au compte d’origine pour récupérer cette action.",
+      "forbidden": "Vos accès actuels ne permettent pas cette action.",
+      "readOnly": "Cet espace ou cette session est en lecture seule. Les demandes et décisions ne peuvent pas être modifiées.",
+      "gone": "Le dossier demandé n’est plus disponible.",
+      "conflict": "La demande a changé. Actualisez-la et vérifiez-la avant une autre modification.",
+      "invalid": "Vérifiez l’employé, les dates, les heures et la décision, puis réessayez.",
+      "failed": "L’action n’a pas pu aboutir. Vérifiez les détails et réessayez."
     }
   },
   "ticketStatusCard": {
@@ -1724,8 +1749,18 @@
       "typeRequired": "Le type de congé est obligatoire",
       "startDateRequired": "La date de début est obligatoire",
       "endDateRequired": "La date de fin est obligatoire",
-      "customHoursRequired": "Les heures de début et de fin sont obligatoires pour des heures personnalisées"
-    }
+      "customHoursRequired": "Les heures de début et de fin sont obligatoires pour des heures personnalisées",
+      "dateOrder": "Choisissez une date de fin égale ou postérieure au début.",
+      "timeOrder": "Choisissez une heure de fin après le début le même jour.",
+      "employee": "Choisissez un employé valide.",
+      "note": "Limitez la note à 2 000 caractères."
+    },
+    "startPlaceholder": "Choisir le premier jour",
+    "endPlaceholder": "Choisir le dernier jour",
+    "saved": "Demande {code} enregistrée.",
+    "reviewHint": "Les absences approuvées apparaissent dans les calendriers de votre espace. Chaque examen et le statut global sont affichés séparément.",
+    "timezone": "Les dates et heures utilisent le fuseau de l’espace : {timeZone}.",
+    "packagedOnly": "L’envoi de fichiers est indisponible dans ce prototype. Les pièces jointes d’exemple existantes restent disponibles dans les demandes enregistrées."
   },
   "attendanceCard": {
     "title": "Présence",
@@ -2260,7 +2295,18 @@
       "type": "Type de congé",
       "duration": "Durée",
       "days": "{count, plural, one {# jour} other {# jours}}",
-      "hours": "{count, plural, one {# heure} other {# heures}}"
+      "hours": "{count, plural, one {# heure} other {# heures}}",
+      "errors": {
+        "uncertain": "Le résultat est incertain. Récupérez l’action initiale pour le vérifier en toute sécurité.",
+        "workspace": "Revenez à l’espace et au compte d’origine pour récupérer cette action.",
+        "forbidden": "Vos accès actuels ne permettent pas cette action.",
+        "readOnly": "Cet espace ou cette session est en lecture seule. Les demandes et décisions ne peuvent pas être modifiées.",
+        "gone": "Le dossier demandé n’est plus disponible.",
+        "conflict": "La demande a changé. Actualisez-la et vérifiez-la avant une autre modification.",
+        "invalid": "Vérifiez l’employé, les dates, les heures et la décision, puis réessayez.",
+        "failed": "L’action n’a pas pu aboutir. Vérifiez les détails et réessayez."
+      },
+      "retry": "Réessayer"
     },
     "meeting": {
       "date": "Date",

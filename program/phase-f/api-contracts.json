@@ -6474,6 +6474,18 @@
     {
       "app": "shared",
       "method": "GET",
+      "path": "/api/calendar/availability",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "tool:tasks or tool:chats on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current consuming tool grant; final-approved active assigned coworkers only; guests receive an empty projection",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
       "path": "/api/staff",
       "source": "lib/workspace-boundary.js",
       "authorization": {

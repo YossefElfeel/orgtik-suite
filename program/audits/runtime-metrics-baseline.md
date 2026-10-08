@@ -89,3 +89,11 @@ The historical route, accessibility and load-time tables above are unchanged; no
 Current invitation proof is30 actual linked UI/API checks plus20 controlled UI-state projections across EN/AR,1440/390px and light/dark. The final HR/ownership run passes82 bounded checks including layout/recovery assertions, with13 captures and6 matching reviewed source hashes; this is not82 journeys. See [people evidence](../phase-f/README.md), [invitation checks](r1-people/invitations/invitations-report.json), [state checks](r1-people/invitations/invitation-states-report.json) and [HR/ownership evidence](r1-people/hr-ownership).
 
 All15 isolated hosted journeys, J7 and automatic due-transition coordination remain open. R2-R4, live integrations and public Arabic website launch stay deferred/planned. Vercel remains paused; no business reset or shared-clock advancement was used.
+
+## J7 scoped progress note — 2026-10-08
+
+This is an implementation/evidence delta, not a new benchmark sweep: every historical measurement above remains unchanged. PR15 source 2ab930e merged main 4dbb6db after CI 37699827826. The current J7 chain passes 339 mock regressions;309, 325 and 339 describe successive retained versions and must not be added. Twenty consumer typecheck/catalog jobs, 24 tooling/artifact guards and 6 frontend calendar tests pass locally. Current package CI is pending.
+
+[Calendar evidence](r1-leave/calendars/calendar-report.json) passes 36 bounded UI assertions with 14 captures/eight matching source hashes; [final HR evidence](r1-leave/hr/report.json) passes 64 with 10 captures/ten matching hashes. These include responsive/translation/layout/recovery assertions, not 100 separate journeys. An independent manual serializer/privacy review made 11 platform/staff/public reads as an owner without HR access and found the private note marker/internal receipts absent; this is scoped manual review, not 11 additional automated cases. See [A14](../phase-f/amendment-A14.md) for scope and limitations.
+
+All15 isolated hosted journeys and full R1 acceptance remain open. Trusted due execution, staff-successor guards and Cairo workspace offboarding endDate semantics are the NEXT R1 package. R2-R4, live providers and public Arabic website launch remain planned/deferred. No benchmark improvement, production reset, shared-clock advancement or Vercel deployment is claimed.

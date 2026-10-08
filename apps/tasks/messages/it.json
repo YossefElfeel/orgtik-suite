@@ -587,7 +587,20 @@
     "month": "Mese",
     "week": "Settimana",
     "project": "Progetto",
-    "allProjects": "Tutti i progetti"
+    "allProjects": "Tutti i progetti",
+    "availabilityTitle": "Disponibilità approvate",
+    "unavailable": "Non disponibile",
+    "unavailablePerson": "{name} · non disponibile · {period}",
+    "allDay": "Tutto il giorno",
+    "morning": "Mattina",
+    "afternoon": "Pomeriggio",
+    "partial": "Parte della giornata",
+    "availabilityLoading": "Caricamento delle disponibilità…",
+    "availabilityError": "Impossibile caricare le disponibilità. Le attività restano visibili.",
+    "retryAvailability": "Ricarica le disponibilità",
+    "availabilityReadOnly": "Assenze approvate · sola lettura",
+    "availabilityEmpty": "Nessuna assenza approvata condivisa in questo periodo.",
+    "closeAvailability": "Chiudi dettagli"
   },
   "TaskSubtasks": {
     "summary": "{done, number} di {total, plural, one {# sottoattività completata} other {# sottoattività completate}}",

@@ -29,6 +29,7 @@ function createWorkspaceRuntime(input, appModule) {
     return row?.custodyReadOnly || owner?.custodyReadOnly ? res.status(403).json({ success: false, code: "custody_read_only", message: "Archived records require ownership review before changes." }) : next();
   });
   appModule.routes(router, ctx, state);
+  const leave = appModule.helpers(ctx, state).leave;
   const open = () => { if (closed) throw failure("HR runtime is closed"); };
   const exportSnapshot = () => { open(); return { schema: SCHEMA, version: 1, realm, workspaceId: workspace.id, appKey: "hr", ...seed.exportDb(db), ...(initialization.fixtureId ? { fixtureId: initialization.fixtureId } : {}) }; };
   function bootstrap(context) {
@@ -94,6 +95,10 @@ function createWorkspaceRuntime(input, appModule) {
     }
     throw failure("Unsupported HR committed command");
   }
-  return { router, exportSnapshot, bootstrap, usage: () => { open(); return [{ key: "employees", used: db.employees.rows.filter(row => !row.deletedAt && row.isActive !== false).length }, { key: "departments", used: db.departments.rows.filter(row => !row.deletedAt).length }, { key: "payroll_runs", used: db.runs.rows.length }]; }, transferOwnership, applyCommitted, close() { closed = true; state.state.nsp = null; } };
+  return { router, exportSnapshot, bootstrap,
+    authorizeLeave(action, payload, actorId) { open(); return leave.authorize(action, payload, actorId); },
+    executeLeave(action, payload, actorId) { open(); return leave.execute(action, payload, actorId); },
+    leaveDetail(requestId, actorId) { open(); const row = db.timeOffs.find(requestId); if (!row) throw Object.assign(new Error('This leave request was not found.'), { status: 404, code: 'leave_not_found' }); return leave.detail(row, actorId); },
+    usage: () => { open(); return [{ key: "employees", used: db.employees.rows.filter(row => !row.deletedAt && row.isActive !== false).length }, { key: "departments", used: db.departments.rows.filter(row => !row.deletedAt).length }, { key: "payroll_runs", used: db.runs.rows.length }]; }, transferOwnership, applyCommitted, close() { closed = true; state.state.nsp = null; } };
 }
 module.exports = { createWorkspaceRuntime, SCHEMA };

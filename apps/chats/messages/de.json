@@ -1172,5 +1172,22 @@
   "workspace.noAccessBody": "Wähle einen Arbeitsbereich, in dem du Zugriff auf Chats hast. Besprechungsgäste können ihren Einladungslink verwenden.",
   "workspace.openSuite": "Arbeitsbereich-Launcher öffnen",
   "workspace.retry": "Erneut versuchen",
-  "workspace.saving": "Wird in diesem Arbeitsbereich gespeichert…"
+  "workspace.saving": "Wird in diesem Arbeitsbereich gespeichert…",
+  "availability.title": "Genehmigte Abwesenheiten",
+  "availability.count": "{n} nicht verfügbar",
+  "availability.error": "Abwesenheiten konnten nicht geladen werden. Besprechungen werden weiterhin angezeigt.",
+  "availability.retry": "Abwesenheiten erneut laden",
+  "availability.loading": "Abwesenheiten werden geladen…",
+  "availability.legend": "Umrandeter Punkt: genehmigte Abwesenheit · schreibgeschützt",
+  "availability.unavailable": "Nicht verfügbar",
+  "availability.emptyDay": "Keine geteilten genehmigten Abwesenheiten an diesem Tag.",
+  "availability.notLoaded": "Abwesenheiten sind nicht geladen.",
+  "availability.noMeetings": "Keine Besprechungen gebucht. Prüfen Sie die Verfügbarkeit vor der Planung.",
+  "availability.away": "Abwesend",
+  "availability.allDay": "Ganztägig",
+  "availability.morning": "Vormittag",
+  "availability.afternoon": "Nachmittag",
+  "availability.partial": "Teil des Tages",
+  "availability.invalidTime": "Diese Uhrzeit existiert in der Zeitzone des Arbeitsbereichs nicht. Wählen Sie eine andere Startzeit.",
+  "availability.workspaceTime": "Zeiten gelten in der Zeitzone des Arbeitsbereichs: {zone}"
 }

@@ -17,19 +17,21 @@ function createBusinessCalendar(timeZone = "UTC", now = () => Date.now()) {
     if (!possibilities.length) throw Object.assign(new Error("This local time does not exist in the workspace timezone."), { status: 422, code: "invalid_local_time" });
     return Math.min(...possibilities);
   }
-  function dayStart(value = now()) {
-    const local = parts(value);
+  function civilDayStart(local) {
     for (let elapsed = 0; elapsed < 240; elapsed++) {
       try { return fromWall({ year: local.year, month: local.month, day: local.day, hour: Math.floor(elapsed / 60), minute: elapsed % 60 }); }
       catch (error) { if (error.code !== "invalid_local_time") throw error; }
     }
-    throw new Error("Workspace day start is unavailable.");
+    throw Object.assign(new Error("This civil day has no supported start in the workspace timezone."), { status: 422, code: "invalid_local_time" });
+  }
+  function dayStart(value = now()) {
+    return civilDayStart(parts(value));
   }
   function addCalendarDays(value, count) {
     if (!Number.isSafeInteger(count)) throw new TypeError("Calendar day count must be an integer");
     const local = parts(value), normalized = new RealDate(RealDate.UTC(local.year, local.month - 1, local.day + count));
     return fromWall({ ...local, year: normalized.getUTCFullYear(), month: normalized.getUTCMonth() + 1, day: normalized.getUTCDate() });
   }
-  return { timeZone, now, parts, fromWall, dayStart, addCalendarDays, iso: value => new RealDate(value).toISOString() };
+  return { timeZone, now, parts, fromWall, dayStart, civilDayStart, addCalendarDays, iso: value => new RealDate(value).toISOString() };
 }
 module.exports = { createBusinessCalendar };

@@ -7,9 +7,9 @@
 export const ORG_TIME_ZONE = process.env.NEXT_PUBLIC_ORG_TIME_ZONE || "Africa/Cairo";
 
 /** "YYYY-MM-DD" of a due date, in the organisation's time zone. */
-export function dueDayKey(value: string | Date): string {
+export function dueDayKey(value: string | Date, timeZone: string = ORG_TIME_ZONE): string {
   if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
-  return new Intl.DateTimeFormat("en-CA", { timeZone: ORG_TIME_ZONE, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(value));
+  return new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(value));
 }
 
 /**

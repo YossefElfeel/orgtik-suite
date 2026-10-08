@@ -587,7 +587,20 @@
     "month": "Month",
     "week": "Week",
     "project": "Project",
-    "allProjects": "All projects"
+    "allProjects": "All projects",
+    "availabilityTitle": "Approved availability",
+    "unavailable": "Unavailable",
+    "unavailablePerson": "{name} · unavailable · {period}",
+    "allDay": "All day",
+    "morning": "Morning",
+    "afternoon": "Afternoon",
+    "partial": "Part of the day",
+    "availabilityLoading": "Loading availability…",
+    "availabilityError": "Availability could not be loaded. Tasks are still shown.",
+    "retryAvailability": "Retry availability",
+    "availabilityReadOnly": "Approved absences · read-only",
+    "availabilityEmpty": "No shared approved absences in this range.",
+    "closeAvailability": "Close details"
   },
   "TaskSubtasks": {
     "summary": "{done, number} of {total, plural, one {# subtask} other {# subtasks}} done",

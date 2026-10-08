@@ -948,7 +948,14 @@
       "reject": "Ablehnen",
       "submitDecision": "Entscheidung einreichen",
       "cancel": "Abbrechen",
-      "changeDecision": "Entscheidung ändern"
+      "changeDecision": "Entscheidung ändern",
+      "close": "Schließen",
+      "recover": "Ursprüngliches Ergebnis prüfen",
+      "sendRequest": "Antrag senden",
+      "retry": "Erneut versuchen",
+      "cancelRequest": "Diesen Antrag stornieren",
+      "confirmCancel": "Stornierung bestätigen",
+      "keepRequest": "Antrag behalten"
     },
     "decision": {
       "label": "Entscheidung: {status}",
@@ -960,13 +967,31 @@
         "pending": "Ausstehend"
       },
       "choose": "Wählen Sie zuerst Genehmigen oder Ablehnen.",
-      "tooLong": "Die Notiz darf höchstens 500 Zeichen lang sein."
+      "tooLong": "Die Notiz darf höchstens 500 Zeichen lang sein.",
+      "notRequired": "Nicht erforderlich"
     },
     "durations": {
       "full_day": "Ganzer Tag",
       "half_day": "Halber Tag",
       "partial": "Teil des Tages",
       "custom_hours": "Eigene Stunden"
+    },
+    "loading": "Antragsdetails werden geladen…",
+    "working": "Ursprüngliche Aktion wird gespeichert…",
+    "unconfirmed": "Das Ergebnis ist unbestätigt. Die ursprüngliche Aktion bleibt gespeichert; Änderungen sind gesperrt. Prüfe das Ergebnis vor einer weiteren Änderung.",
+    "timezone": "Datum und Uhrzeit verwenden {timeZone}.",
+    "cancelledSaved": "Antrag storniert.",
+    "decisionSaved": "Entscheidung erfasst. Der Gesamtstatus oben zeigt den Genehmigungsablauf.",
+    "cancelReview": "Diesen offenen Antrag stornieren? Er wird aus der Genehmigungswarteschlange entfernt. Sein Datensatz bleibt erhalten.",
+    "errors": {
+      "uncertain": "Das Ergebnis konnte nicht bestätigt werden. Prüfe die ursprüngliche Aktion sicher.",
+      "workspace": "Kehre zum ursprünglichen Workspace und Konto zurück, um diese Aktion zu prüfen.",
+      "forbidden": "Dein aktueller Workspace-Zugriff erlaubt diese Aktion nicht.",
+      "readOnly": "Workspace oder Sitzung sind schreibgeschützt. Anträge und Entscheidungen können nicht geändert werden.",
+      "gone": "Dieser Datensatz ist nicht mehr verfügbar.",
+      "conflict": "Der Antrag hat sich geändert. Lade ihn neu und prüfe ihn vor einer Änderung.",
+      "invalid": "Prüfe Mitarbeiter, Datum, Uhrzeit und Entscheidung und versuche es erneut.",
+      "failed": "Die Aktion konnte nicht abgeschlossen werden. Prüfe die Angaben und versuche es erneut."
     }
   },
   "ticketStatusCard": {
@@ -1724,8 +1749,18 @@
       "typeRequired": "Bitte wählen Sie eine Abwesenheitsart",
       "startDateRequired": "Bitte wählen Sie ein Startdatum",
       "endDateRequired": "Bitte wählen Sie ein Enddatum",
-      "customHoursRequired": "Für benutzerdefinierte Stunden sind Start- und Endzeit erforderlich"
-    }
+      "customHoursRequired": "Für benutzerdefinierte Stunden sind Start- und Endzeit erforderlich",
+      "dateOrder": "Wähle ein Enddatum am oder nach dem Startdatum.",
+      "timeOrder": "Wähle eine Endzeit nach der Startzeit am selben Tag.",
+      "employee": "Wähle einen gültigen Mitarbeiter.",
+      "note": "Die Notiz darf höchstens 2.000 Zeichen haben."
+    },
+    "startPlaceholder": "Ersten Tag wählen",
+    "endPlaceholder": "Letzten Tag wählen",
+    "saved": "Antrag {code} gespeichert.",
+    "reviewHint": "Genehmigte Abwesenheit erscheint in den Workspace-Kalendern. Jede Prüfung und der Gesamtstatus werden getrennt angezeigt.",
+    "timezone": "Datum und Uhrzeit verwenden die Workspace-Zeitzone: {timeZone}.",
+    "packagedOnly": "Datei-Uploads sind in diesem Prototyp nicht verfügbar. Bestehende Beispielanhänge bleiben in gespeicherten Anträgen verfügbar."
   },
   "attendanceCard": {
     "title": "Anwesenheit",
@@ -2260,7 +2295,18 @@
       "type": "Abwesenheitsart",
       "duration": "Dauer",
       "days": "{count, plural, one {# Tag} other {# Tage}}",
-      "hours": "{count, plural, one {# Stunde} other {# Stunden}}"
+      "hours": "{count, plural, one {# Stunde} other {# Stunden}}",
+      "errors": {
+        "uncertain": "Das Ergebnis konnte nicht bestätigt werden. Prüfe die ursprüngliche Aktion sicher.",
+        "workspace": "Kehre zum ursprünglichen Workspace und Konto zurück, um diese Aktion zu prüfen.",
+        "forbidden": "Dein aktueller Workspace-Zugriff erlaubt diese Aktion nicht.",
+        "readOnly": "Workspace oder Sitzung sind schreibgeschützt. Anträge und Entscheidungen können nicht geändert werden.",
+        "gone": "Dieser Datensatz ist nicht mehr verfügbar.",
+        "conflict": "Der Antrag hat sich geändert. Lade ihn neu und prüfe ihn vor einer Änderung.",
+        "invalid": "Prüfe Mitarbeiter, Datum, Uhrzeit und Entscheidung und versuche es erneut.",
+        "failed": "Die Aktion konnte nicht abgeschlossen werden. Prüfe die Angaben und versuche es erneut."
+      },
+      "retry": "Erneut versuchen"
     },
     "meeting": {
       "date": "Datum",

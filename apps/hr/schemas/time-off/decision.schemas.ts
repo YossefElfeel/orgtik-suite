@@ -8,7 +8,7 @@ import { z } from "zod";
 export const makeDecisionSchema = (messages: { choose: string; tooLong: string }) =>
   z.object({
     decision: z.enum(["approved", "rejected"], { message: messages.choose }),
-    note: z.string().max(500, messages.tooLong).optional(),
+    note: z.string().max(500, messages.tooLong),
   });
 
-export type DecisionFormValues = z.infer<ReturnType<typeof makeDecisionSchema>>;
+export type { DecisionFormValues } from '@/types/time-off';

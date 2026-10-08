@@ -587,7 +587,20 @@
     "month": "Monat",
     "week": "Woche",
     "project": "Projekt",
-    "allProjects": "Alle Projekte"
+    "allProjects": "Alle Projekte",
+    "availabilityTitle": "Genehmigte Abwesenheiten",
+    "unavailable": "Nicht verfügbar",
+    "unavailablePerson": "{name} · nicht verfügbar · {period}",
+    "allDay": "Ganztägig",
+    "morning": "Vormittag",
+    "afternoon": "Nachmittag",
+    "partial": "Teil des Tages",
+    "availabilityLoading": "Abwesenheiten werden geladen…",
+    "availabilityError": "Abwesenheiten konnten nicht geladen werden. Aufgaben werden weiterhin angezeigt.",
+    "retryAvailability": "Abwesenheiten erneut laden",
+    "availabilityReadOnly": "Genehmigte Abwesenheiten · schreibgeschützt",
+    "availabilityEmpty": "Keine geteilten genehmigten Abwesenheiten in diesem Zeitraum.",
+    "closeAvailability": "Details schließen"
   },
   "TaskSubtasks": {
     "summary": "{done, number} von {total, plural, one {# Unteraufgabe} other {# Unteraufgaben}} erledigt",

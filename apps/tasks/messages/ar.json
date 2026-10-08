@@ -587,7 +587,20 @@
     "month": "شهر",
     "week": "أسبوع",
     "project": "المشروع",
-    "allProjects": "كل المشاريع"
+    "allProjects": "كل المشاريع",
+    "availabilityTitle": "التفرغ المعتمد",
+    "unavailable": "غير متاح",
+    "unavailablePerson": "{name} · غير متاح · {period}",
+    "allDay": "اليوم كاملًا",
+    "morning": "صباحًا",
+    "afternoon": "بعد الظهر",
+    "partial": "جزء من اليوم",
+    "availabilityLoading": "جارٍ تحميل التفرغ…",
+    "availabilityError": "تعذر تحميل التفرغ. ما زالت المهام معروضة.",
+    "retryAvailability": "إعادة تحميل التفرغ",
+    "availabilityReadOnly": "الغياب المعتمد · للقراءة فقط",
+    "availabilityEmpty": "لا يوجد غياب معتمد مشترك في هذه الفترة.",
+    "closeAvailability": "إغلاق التفاصيل"
   },
   "TaskSubtasks": {
     "summary": "أُنجز {done, number} من {total, plural, zero {# مهمة فرعية} one {# مهمة فرعية} two {مهمتين فرعيتين} few {# مهام فرعية} many {# مهمة فرعية} other {# مهمة فرعية}}",

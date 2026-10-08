@@ -12,6 +12,8 @@ import { logoutUser } from "../features/auth/authSlice";
 import { suiteSignIn } from "@/lib/suite-return";
 import { errorMessage, successMessage } from "@/lib/api-feedback";
 import { readClientSession, clearClientSession, refreshClientSession, SessionRequestError } from "@orgtik/ui/auth";
+import { timeOffContextSignature } from '@/lib/time-off-attempt';
+import type { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 const handleUserLogout = (api: any) => {
   clearClientSession();
@@ -30,21 +32,34 @@ const baseQuery = fetchBaseQuery({
     const session = readClientSession();
     const token = session?.tokens.accessToken || (getState() as RootState).auth.token;
     if (token) headers.set("authorization", `Bearer ${token}`);
-    if (session?.workspaceContext?.workspace.id) headers.set("x-workspace", session.workspaceContext.workspace.id);
+    if (!headers.has("x-workspace") && session?.workspaceContext?.workspace.id) headers.set("x-workspace", session.workspaceContext.workspace.id);
     return headers;
   },
 });
 
 // Enhanced base query with refresh token logic
 const baseQueryWithReauth = async (args: any, api: any, extraOptions: any) => {
+  const signature = timeOffContextSignature();
+  const changedContext = (): FetchBaseQueryError | null => signature !== timeOffContextSignature()
+    ? { status: 'CUSTOM_ERROR', error: 'The current HR context changed.', data: { code: 'context_changed' } } : null;
   let result = await baseQuery(args, api, extraOptions);
+  let stale = changedContext(); if (stale) return { error: stale };
 
   // If we get a 401 error, try to refresh the token
   if (result.error && result.error.status === 401) {
     if (readClientSession()?.tokens.refreshToken) {
-      try { await refreshClientSession(SOS_API_URL); result = await baseQuery(args, api, extraOptions); }
-      catch (error) { if (error instanceof SessionRequestError && [401, 403].includes(error.status)) handleUserLogout(api); else return { error: { status: 503, data: { code: "session_unavailable" } } }; }
-    } else handleUserLogout(api);
+      try {
+        stale = changedContext(); if (stale) return { error: stale };
+        await refreshClientSession(SOS_API_URL);
+        stale = changedContext(); if (stale) return { error: stale };
+        result = await baseQuery(args, api, extraOptions);
+        stale = changedContext(); if (stale) return { error: stale };
+      } catch (error) {
+        stale = changedContext(); if (stale) return { error: stale };
+        if (error instanceof SessionRequestError && [401, 403].includes(error.status)) handleUserLogout(api);
+        else return { error: { status: 503, data: { code: "session_unavailable" } } };
+      }
+    } else { stale = changedContext(); if (stale) return { error: stale }; handleUserLogout(api); }
   }
 
   // What a change says, in the reader's language (FS-HR-3, lib/api-feedback): one message, once,

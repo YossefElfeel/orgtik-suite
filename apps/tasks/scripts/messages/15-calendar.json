@@ -3,5 +3,18 @@
   "Calendar.month": { "en": "Month", "ar": "شهر", "de": "Monat", "fr": "Mois", "it": "Mese" },
   "Calendar.week": { "en": "Week", "ar": "أسبوع", "de": "Woche", "fr": "Semaine", "it": "Settimana" },
   "Calendar.project": { "en": "Project", "ar": "المشروع", "de": "Projekt", "fr": "Projet", "it": "Progetto" },
-  "Calendar.allProjects": { "en": "All projects", "ar": "كل المشاريع", "de": "Alle Projekte", "fr": "Tous les projets", "it": "Tutti i progetti" }
+  "Calendar.allProjects": { "en": "All projects", "ar": "كل المشاريع", "de": "Alle Projekte", "fr": "Tous les projets", "it": "Tutti i progetti" },
+  "Calendar.availabilityTitle": { "en": "Approved availability", "ar": "التفرغ المعتمد", "de": "Genehmigte Abwesenheiten", "fr": "Disponibilités approuvées", "it": "Disponibilità approvate" },
+  "Calendar.unavailable": { "en": "Unavailable", "ar": "غير متاح", "de": "Nicht verfügbar", "fr": "Indisponible", "it": "Non disponibile" },
+  "Calendar.unavailablePerson": { "en": "{name} · unavailable · {period}", "ar": "{name} · غير متاح · {period}", "de": "{name} · nicht verfügbar · {period}", "fr": "{name} · indisponible · {period}", "it": "{name} · non disponibile · {period}" },
+  "Calendar.allDay": { "en": "All day", "ar": "اليوم كاملًا", "de": "Ganztägig", "fr": "Toute la journée", "it": "Tutto il giorno" },
+  "Calendar.morning": { "en": "Morning", "ar": "صباحًا", "de": "Vormittag", "fr": "Matin", "it": "Mattina" },
+  "Calendar.afternoon": { "en": "Afternoon", "ar": "بعد الظهر", "de": "Nachmittag", "fr": "Après-midi", "it": "Pomeriggio" },
+  "Calendar.partial": { "en": "Part of the day", "ar": "جزء من اليوم", "de": "Teil des Tages", "fr": "Une partie de la journée", "it": "Parte della giornata" },
+  "Calendar.availabilityLoading": { "en": "Loading availability…", "ar": "جارٍ تحميل التفرغ…", "de": "Abwesenheiten werden geladen…", "fr": "Chargement des disponibilités…", "it": "Caricamento delle disponibilità…" },
+  "Calendar.availabilityError": { "en": "Availability could not be loaded. Tasks are still shown.", "ar": "تعذر تحميل التفرغ. ما زالت المهام معروضة.", "de": "Abwesenheiten konnten nicht geladen werden. Aufgaben werden weiterhin angezeigt.", "fr": "Les disponibilités n’ont pas pu être chargées. Les tâches restent affichées.", "it": "Impossibile caricare le disponibilità. Le attività restano visibili." },
+  "Calendar.retryAvailability": { "en": "Retry availability", "ar": "إعادة تحميل التفرغ", "de": "Abwesenheiten erneut laden", "fr": "Recharger les disponibilités", "it": "Ricarica le disponibilità" },
+  "Calendar.availabilityReadOnly": { "en": "Approved absences · read-only", "ar": "الغياب المعتمد · للقراءة فقط", "de": "Genehmigte Abwesenheiten · schreibgeschützt", "fr": "Absences approuvées · lecture seule", "it": "Assenze approvate · sola lettura" },
+  "Calendar.availabilityEmpty": { "en": "No shared approved absences in this range.", "ar": "لا يوجد غياب معتمد مشترك في هذه الفترة.", "de": "Keine geteilten genehmigten Abwesenheiten in diesem Zeitraum.", "fr": "Aucune absence approuvée partagée sur cette période.", "it": "Nessuna assenza approvata condivisa in questo periodo." },
+  "Calendar.closeAvailability": { "en": "Close details", "ar": "إغلاق التفاصيل", "de": "Details schließen", "fr": "Fermer les détails", "it": "Chiudi dettagli" }
 }

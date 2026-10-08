@@ -587,7 +587,20 @@
     "month": "Mois",
     "week": "Semaine",
     "project": "Projet",
-    "allProjects": "Tous les projets"
+    "allProjects": "Tous les projets",
+    "availabilityTitle": "Disponibilités approuvées",
+    "unavailable": "Indisponible",
+    "unavailablePerson": "{name} · indisponible · {period}",
+    "allDay": "Toute la journée",
+    "morning": "Matin",
+    "afternoon": "Après-midi",
+    "partial": "Une partie de la journée",
+    "availabilityLoading": "Chargement des disponibilités…",
+    "availabilityError": "Les disponibilités n’ont pas pu être chargées. Les tâches restent affichées.",
+    "retryAvailability": "Recharger les disponibilités",
+    "availabilityReadOnly": "Absences approuvées · lecture seule",
+    "availabilityEmpty": "Aucune absence approuvée partagée sur cette période.",
+    "closeAvailability": "Fermer les détails"
   },
   "TaskSubtasks": {
     "summary": "{done, number} sur {total, plural, one {# sous-tâche terminée} other {# sous-tâches terminées}}",

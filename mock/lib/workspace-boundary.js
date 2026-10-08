@@ -58,7 +58,9 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const args = { S, identity: identityFor(), workspace, actor: principal.user, runtime, payload, transferOwned: row => transferOwned(workspace, row, runtime) };
     const hr = require("./workspace-hr");
     const shared = ["profile.self_update", "workspace.tool.roles", "workspace.member.remove"].includes(kind);
-    const allowed = shared || tool === "hr" && (kind === "hr.leave.approve" ? access.roles.some(role => ["super_admin", "hr", "manager"].includes(role)) : ["hr.hire", "hr.offboard", "hr.offboarding.options", "hr.offboarding.action"].includes(kind) && access.roles.some(role => ["super_admin", "hr"].includes(role)));
+    const leaveAction = { 'hr.leave.create': 'create', 'hr.leave.approve': 'decision', 'hr.leave.cancel': 'cancel' }[kind];
+    const allowed = shared || tool === "hr" && (leaveAction ? leaveAction !== 'decision' || access.roles.some(role => ["super_admin", "hr", "manager"].includes(role)) : ["hr.hire", "hr.offboard", "hr.offboarding.options", "hr.offboarding.action"].includes(kind) && access.roles.some(role => ["super_admin", "hr"].includes(role)));
+    if (tool === 'hr' && leaveAction && !allowed) throw failure(403, 'leave_forbidden', 'Only HR or the current reporting manager may decide this request.');
     if (allowed) {
       if (shared) require('./workspace-commands').authorize({ ...args, principal, tool, kind });
       if (kind === 'hr.hire') hr.validateHirePayload(payload);
@@ -68,7 +70,9 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         return { ...result, readOnly, canOffboard: result.canOffboard && !readOnly, canTrackActions: !readOnly };
       }
       const id = metadata.operationId;
+      if (leaveAction && !/^[\w.:-]{1,200}$/.test(id || '')) throw failure(422, 'operation_id_required', 'Supply the original leave action reference.');
       if (id && !/^[\w.:-]{1,200}$/.test(id)) throw failure(422, "invalid_operation_id", "Use a valid action reference.");
+      if (leaveAction) runtime.authorizeLeave(leaveAction, payload, principal.user.id);
       const operation = id && makeWorkspaceOperation({ id, workspaceId: workspace.id, actor: { userId: principal.user.id, ...(principal.readOnly ? { impersonatedBy: principal.actor.id } : {}) }, method: "POST", path: `/commands/${kind}`, body: payload });
       workspace.commandOperations ??= {};
       const key = id && `${principal.user.id}:${kind}:${id}`, prior = key && workspace.commandOperations[key];
@@ -76,7 +80,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         if (prior.fingerprint !== operation.fingerprint) throw failure(409, "operation_conflict", "This action reference was already used differently.");
         return clone(prior.result);
       }
-      const result = shared ? require('./workspace-commands').execute({ ...args, principal, tool, kind }) : kind === "hr.hire" ? hr.hire(args) : kind === "hr.offboard" ? hr.offboard(args) : kind === 'hr.offboarding.action' ? hr.offboardingAction(args) : hr.approveLeave(args);
+      const result = shared ? require('./workspace-commands').execute({ ...args, principal, tool, kind }) : leaveAction ? hr.leaveCommand(args, leaveAction) : kind === "hr.hire" ? hr.hire(args) : kind === "hr.offboard" ? hr.offboard(args) : hr.offboardingAction(args);
       if (key) workspace.commandOperations[key] = { fingerprint: operation.fingerprint, result: clone(result) };
       return result;
     }
@@ -150,7 +154,11 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
   }
   function frameApp(capability, req, fallback) {
     const value = privateFrames.get(capability);
-    if (!value || value.key !== req.headers["x-mock-app"] || value.method !== req.method || value.url !== req.url) return (_req, res) => res.status(403).json({ success: false, code: 'invalid_dispatch_capability' });
+    if (!value || value.key !== req.headers["x-mock-app"] || value.method !== req.method || value.url !== req.url) return (_req, res) => {
+      // This callback receives a raw Node response before any Express app is selected.
+      res.statusCode = 403; res.setHeader('content-type', 'application/json; charset=utf-8');
+      res.end(JSON.stringify({ success: false, code: 'invalid_dispatch_capability' }));
+    };
     privateFrames.delete(capability); delete req.headers["x-orgtik-dispatch"];
     authority.bindPreparedRequest(req, value.frame);
     req.workspaceContext = value.frame.principal?.context.workspaceContext || null;
@@ -165,6 +173,23 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     if (APP_TO_TOOL[key]) return `tool:${key}`;
     return undefined;
   };
+  function availabilityRoutes(toolApp, frame, tool) {
+    const app = express(); app.use(cors({ origin: true, credentials: true }));
+    app.get('/api/calendar/availability', (req, res, next) => {
+      let hrRuntime;
+      try {
+        const principal = frame.principal, id = principal?.context.workspaceContext?.workspace.id;
+        if (!id) throw failure(403, 'workspace_required', 'Choose a workspace to continue.');
+        hrRuntime = registry.create(id, 'hr');
+        const data = require('./workspace-availability').projectAvailability({ realm, workspace: platform().getStore().workspace(id), identity: identityFor(), snapshot: hrRuntime.exportSnapshot(), tool, actor: principal.user, fromDate: req.query.fromDate, toDate: req.query.toDate });
+        res.json({ success: true, statusCode: 200, message: 'Workspace availability fetched', data });
+      } catch (error) { next(error); }
+      finally { hrRuntime?.close(); }
+    });
+    app.use(toolApp);
+    app.use((error, req, res, next) => res.status(error.status || 503).json({ success: false, code: error.code || 'availability_unavailable', message: error.message }));
+    return app;
+  }
   function accountRoutes(legacyApp, frame) {
     const app = express(); app.use(cors({ origin: true, credentials: true })); app.use(express.json({ limit: "1mb" }));
     const principal = () => frame.principal;
@@ -351,6 +376,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
           if (!access || ["no_access", "not_subscribed"].includes(access.access)) throw failure(403, "tool_access_denied", "Ask your workspace owner for access.");
           if (req.method !== "GET" && req.method !== "HEAD" && (principal.readOnly || access.access === "read_only")) throw failure(423, "workspace_read_only", "This workspace tool is read-only.");
           runtime = registry.create(context.workspace.id, key); request.runtime = runtime; app = runtime.router;
+          if (['tasks', 'chats'].includes(key)) app = availabilityRoutes(app, frame, key);
         }
         const capability = crypto.randomFillSync(Buffer.alloc(24)).toString("base64url");
         privateFrames.set(capability, { key, method: req.method, url, frame, request, app });

@@ -1172,5 +1172,22 @@
   "workspace.noAccessBody": "Choisissez un espace où vous avez accès à Chats. Les invités aux réunions peuvent utiliser leur lien d’invitation.",
   "workspace.openSuite": "Ouvrir le lanceur de l’espace",
   "workspace.retry": "Réessayer",
-  "workspace.saving": "Enregistrement dans cet espace de travail…"
+  "workspace.saving": "Enregistrement dans cet espace de travail…",
+  "availability.title": "Disponibilités approuvées",
+  "availability.count": "{n} indisponibles",
+  "availability.error": "Les disponibilités n’ont pas pu être chargées. Les réunions restent affichées.",
+  "availability.retry": "Recharger les disponibilités",
+  "availability.loading": "Chargement des disponibilités…",
+  "availability.legend": "Point cerclé : absence approuvée · lecture seule",
+  "availability.unavailable": "Indisponible",
+  "availability.emptyDay": "Aucune absence approuvée partagée ce jour-là.",
+  "availability.notLoaded": "Les disponibilités ne sont pas chargées.",
+  "availability.noMeetings": "Aucune réunion réservée. Vérifiez les disponibilités avant de planifier.",
+  "availability.away": "Absent",
+  "availability.allDay": "Toute la journée",
+  "availability.morning": "Matin",
+  "availability.afternoon": "Après-midi",
+  "availability.partial": "Une partie de la journée",
+  "availability.invalidTime": "Cette heure n’existe pas dans le fuseau horaire de l’espace de travail. Choisissez une autre heure de début.",
+  "availability.workspaceTime": "Les heures utilisent le fuseau horaire de l’espace de travail : {zone}"
 }
