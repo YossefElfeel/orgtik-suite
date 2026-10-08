@@ -1,4 +1,5 @@
 "use client";
+import { demoRuntime } from "@orgtik/ui";
 
 /**
  * SOMION HQ - APP SHELL
@@ -76,7 +77,7 @@ export function AppShell({
       {/* The suite's frame (FS-CHT-5): the rail and this sidebar at the reading start, in a sheet
           under 1024px opened from the top bar, so every section is reachable at every width. */}
       <SuiteShell
-      demo={{ enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "chats", onLocaleChange: setLocale }}
+      demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "chats", onLocaleChange: setLocale }}
         rail={<ChatsRail />}
         sidebar={
           <div className="flex h-full flex-col overflow-y-auto border-e border-line bg-raised">

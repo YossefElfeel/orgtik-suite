@@ -2001,6 +2001,7 @@
     "unsubscribed": "Contact démo désabonné ; prochain envoi l’exclura.",
     "postTitle": "Titre du post",
     "addPost": "Ajouter un brouillon",
-    "postOpened": "{name} sélectionné ; modifiez sa date ci-dessous."
+    "postOpened": "{name} sélectionné ; modifiez sa date ci-dessous.",
+    "connectionError": "Connexion démo indisponible. Réessayez."
   }
 }

@@ -1,4 +1,5 @@
 "use client";
+import { demoRuntime } from "@orgtik/ui";
 
 import { useEffect, useState, type ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
@@ -155,7 +156,7 @@ export function WmFrame({ children }: { children: ReactNode }) {
 
   return (
     <SuiteShell
-      demo={{ enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "wm", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
+      demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "wm", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
       rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref={SOS_URL} />}
       sidebar={<Sidebar title={t("name")} sections={sections} />}
       topBar={{

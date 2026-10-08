@@ -20,6 +20,7 @@ const APPS = {
 };
 const web = key => `http://localhost:${APPS[key].web}`;
 const api = key => `http://localhost:${APPS[key].api}`;
+const presentationPort = APPS.sos.api + 77;
 const args = process.argv.slice(2).filter(value => value !== '--');
 const selection = args.find(value => !value.startsWith('--')) || 'tasks';
 const wanted = selection === 'all' ? Object.keys(APPS) : selection.split(',');
@@ -79,6 +80,10 @@ function childEnv() {
     MOCK_AUTH_FILE: path.join(runDir, 'data', 'session-metadata'),
     SUITE_WEB_URLS: JSON.stringify(Object.fromEntries(Object.keys(APPS).map(key => [key, web(key)]))),
     NEXT_PUBLIC_DEMO_PANEL: '1', NEXT_TELEMETRY_DISABLED: '1',
+    ORGTIK_PRESENTATION_PORT: String(presentationPort),
+    NEXT_PUBLIC_DEMO_API: `http://localhost:${presentationPort}`,
+    NEXT_PUBLIC_DEMO_WEB_URLS: JSON.stringify(Object.fromEntries(Object.keys(APPS).map(key => [key, web(key)]))),
+    NEXT_PUBLIC_DEMO_SOS_API: `${api('sos')}/api`,
     NEXT_DIST_DIR: '.next-demo',
     NEXT_PUBLIC_SOS_URL: web('sos'), NEXT_PUBLIC_SOS_API_URL: api('sos'),
     NEXT_PUBLIC_WM_URL: web('wm'), NEXT_PUBLIC_ADMIN_URL: web('admin'),
@@ -153,7 +158,7 @@ function portFree(port) {
 }
 
 (async () => {
-  const ports = [...new Set([...keys.map(key => APPS[key].web), ...apiKeys.map(key => APPS[key].api), 7599])];
+  const ports = [...new Set([...keys.map(key => APPS[key].web), ...apiKeys.map(key => APPS[key].api), 7599, presentationPort])];
   for (const port of ports) await portFree(port);
   if (stopping) return;
   for (const key of keys) if (!fs.existsSync(path.join(ROOT, APPS[key].dir, 'node_modules'))) throw new Error(`${key}: dependencies missing. Run pnpm install first.`);
@@ -167,12 +172,14 @@ function portFree(port) {
   const env = childEnv();
   console.log(`Private runtime: ${path.relative(ROOT, runDir)}\nUse a separate private browser window for presentation sessions. Ctrl+C stops only this run.`);
   start('mock', path.join(__dirname, 'api.cjs'), ['--only', apiKeys.join(',')], ROOT, env);
+  start('presentation', path.join(__dirname, 'connections.cjs'), [], ROOT, env);
   for (const key of keys) {
     const cwd = staged.get(key);
     const appEnv = { ...env, NEXT_PUBLIC_API_URL: APPS[key].api ? `${api(key)}${['sos', 'sales', 'hr', 'marketing'].includes(key) ? '/api' : ''}` : '' };
     if (['hr', 'chats'].includes(key)) appEnv.NEXT_PUBLIC_SOS_API_URL = `${api('sos')}/api`;
     const script = key === 'website' ? path.join(path.dirname(require.resolve('vite/package.json', { paths: [cwd] })), 'bin/vite.js') : require.resolve('next/dist/bin/next', { paths: [cwd] });
-    const commandArgs = key === 'website' ? ['--host', '127.0.0.1', '--port', String(APPS[key].web), '--strictPort'] : ['dev', '--hostname', '127.0.0.1', '-p', String(APPS[key].web)];
+    const nextMajor = key === 'website' ? 0 : Number(JSON.parse(fs.readFileSync(require.resolve('next/package.json', { paths: [cwd] }))).version.split('.')[0]);
+    const commandArgs = key === 'website' ? ['--host', '127.0.0.1', '--port', String(APPS[key].web), '--strictPort'] : ['dev', ...(nextMajor >= 16 ? ['--webpack'] : []), '--hostname', '127.0.0.1', '-p', String(APPS[key].web)];
     start(key, script, commandArgs, cwd, appEnv);
   }
 })().catch(error => { console.error(error.message); stop(1); });

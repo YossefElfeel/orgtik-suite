@@ -1,4 +1,8 @@
 const copy = {
+    digits: ["Presentation digits", "أرقام العرض", "Demo-Ziffern", "Chiffres de démonstration", "Cifre demo"],
+    latinDigits: ["Latin · 0123", "لاتينية · 0123", "Lateinisch · 0123", "Latins · 0123", "Latine · 0123"],
+    arabicDigits: ["Arabic · ٠١٢٣", "عربية · ٠١٢٣", "Arabisch · ٠١٢٣", "Arabes · ٠١٢٣", "Arabe · ٠١٢٣"],
+    timeZone: ["Presentation timezone", "منطقة العرض الزمنية", "Demo-Zeitzone", "Fuseau de démonstration", "Fuso demo"],
     title: ["Demo controls", "عناصر تحكم العرض", "Demo-Steuerung", "Commandes de démonstration", "Controlli demo"],
     body: ["Choose a presentation scene and preview its states.", "اختر سيناريو للعرض وشاهد حالاته.", "Wählen Sie eine Präsentationsszene und deren Zustände.", "Choisissez une scène et prévisualisez ses états.", "Scegli una scena e visualizza i suoi stati."],
     prototype: ["Prototype · mock data", "بروتوتايب · بيانات تجريبية", "Prototyp · Beispieldaten", "Prototype · données fictives", "Prototipo · dati dimostrativi"],

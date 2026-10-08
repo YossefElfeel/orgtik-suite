@@ -19,6 +19,10 @@ The unchanged mock backend gets its own sandbox, in-memory journal and accounts,
 
 Ctrl+C stops only processes spawned by this run. Restart the command for fresh seeded presentation data. Runtime folders are retained for diagnosis; this command does not delete them. The Demo Panel's **Reset scene** resets the presentation selectors; it does not reset backend data. Tasks' **Presentation workflow** uses its own disposable client dataset: workspace selects fixtures, persona supplies the assignee, and **Reset demo tasks** restores those fixtures. Other surfaces retain scene descriptions until their data adapter is connected.
 
+The selected tools share a second memory-only presentation service on SOS API port + 77 (default7577). It holds only synthetic connected task/lead/search/notification records, separate from accounts, invoices, CMS content and journals. `Ctrl+K` opens suite presentation search; notification links and result links use the existing destination-scoped handoff. Scene workspace/persona, language, theme, digits and timezone travel as presentation metadata. App access is still decided by the existing signed session.
+
+Chats task creation and Marketing campaign leads appear in Tasks/Sales when the presentation service is available. Standalone development without its public runtime variables retains local simulated behavior. The bridge reset endpoint affects only its synthetic records; it never advances the backend clock or resets business data. Local dev uses the installed CLI's supported Webpack option for Next16 linked staging; source stack configuration remains unchanged.
+
 No online deployment is performed. Payments, mail, AI and external delivery remain simulated.
 
 ## Verification

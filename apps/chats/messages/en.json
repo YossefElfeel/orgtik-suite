@@ -1273,5 +1273,6 @@
   "workspace.noAccessBody": "Choose a workspace where you have access to Chats. Meeting guests can use their invitation link.",
   "workspace.openSuite": "Open workspace launcher",
   "workspace.retry": "Retry",
-  "workspace.saving": "Saving to this workspace…"
+  "workspace.saving": "Saving to this workspace…",
+  "presentation.connectionError": "The presentation connection is unavailable. Try again."
 }

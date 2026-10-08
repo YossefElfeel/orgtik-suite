@@ -1,11 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { notFound, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SegmentedControl } from "@orgtik/ui";
 import PrototypeDialog from "@/components/dialogs/presentation/PrototypeDialog";
+import { demoRequest, type DemoBridgeLead } from "@orgtik/ui";
 import { isolate } from "@/lib/bidi";
 import { presentationLeadSchema, presentationEditorSchema } from "@/schemas/presentation";
 import type { DemoDeal, SalesScene, DemoLeadValues, DemoEditorValues } from "@/types/presentation";
@@ -35,6 +36,8 @@ export default function PresentationPage(){
  useEffect(()=>{let next=seedScene(workspace);try{const raw=sessionStorage.getItem(keyFor(workspace));if(raw){const saved=JSON.parse(raw);if(Array.isArray(saved.deals)&&saved.rule&&typeof saved.target==='number')next=saved;}}catch{}setData(next);setLoaded(workspace);setSelected([]);if(loaded!==null)setEditing(null);},[workspace]);
  useEffect(()=>{if(loaded===workspace)try{sessionStorage.setItem(keyFor(workspace),JSON.stringify(data));}catch{}},[data,loaded,workspace]);
  useEffect(()=>{const next=new URLSearchParams(search?.toString()??"");next.set('view',view);if(editing)next.set('deal',editing);else next.delete('deal');router.replace(pathname+'?'+next.toString(),{scroll:false});},[view,editing]);
+ const openedBridge=useRef("");
+ useEffect(()=>{if(!demo.runtime||loaded!==workspace)return;let live=true;const load=()=>demoRequest<DemoBridgeLead[]>(demo.runtime!,demo.scene,"/leads").then(rows=>{if(!live)return;setData(current=>({...current,deals:[...current.deals,...rows.filter(row=>!current.deals.some(deal=>deal.id===row.id)).map(row=>({...createDeal(row.name,"Campaign contact",row.id+"@presentation.test",0,row.source,"Omar Farouk"),id:row.id,tags:[row.campaign]}))]}));const wanted=new URLSearchParams(window.location.search).get("lead");if(wanted&&rows.some(row=>row.id===wanted)&&openedBridge.current!==wanted){openedBridge.current=wanted;setView("contacts");setEditing(wanted);}}).catch(()=>{});void load();const timer=setInterval(load,4000);return()=>{live=false;clearInterval(timer)}},[demo.runtime,workspace,loaded]);
  const deal=data.deals.find(d=>d.id===editing);
  const update=(id:string,patch:Partial<DemoDeal>,event?:string)=>setData(current=>({...current,deals:current.deals.map(d=>d.id===id?{...d,...patch,...(event?{timeline:[...d.timeline,{id:crypto.randomUUID(),text:event,actor}]}:{})}:d)}));
  const move=(id:string,stage:LeadStatus)=>{const d=data.deals.find(item=>item.id===id);if(!d)return;update(id,{stage,probability:probabilityFor[stage]??d.probability},t("stageEvent",{stage:stageLabel("lead",stage)}));};

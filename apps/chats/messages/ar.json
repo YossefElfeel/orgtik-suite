@@ -1273,5 +1273,6 @@
   "presentation.title": "عرض Chats",
   "presentation.tomorrow": "غدًا · 09:00",
   "presentation.unmute": "إلغاء كتم الميكروفون التجريبي",
-  "presentation.unsave": "إلغاء الحفظ"
+  "presentation.unsave": "إلغاء الحفظ",
+  "presentation.connectionError": "اتصال العرض غير متاح. أعد المحاولة."
 }

@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowCounterClockwise, Bell, DownloadSimple, MagnifyingGlass, Plus, Repeat, UploadSimple } from "@phosphor-icons/react";
 import { Badge, Button, Checkbox, Dialog, DialogBody, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, EmptyState, Field, Input, MultiSelect, PageHeader, Select, SimulatedTag, Stepper, Textarea, useDemoScene, useFormatter } from "@orgtik/ui";
 import { newPresentationTask, nextPresentationDue, parsePresentationCsv, PRESENTATION_PEOPLE, presentationCsv, seedPresentationTasks, type PresentationTask } from "@/lib/presentation-tasks";
+import { demoRequest, type DemoBridgeTask } from "@orgtik/ui";
 
 const statuses = ["todo", "doing", "done"] as const;
 const repeats = ["none", "weekly", "monthly"] as const;
@@ -63,7 +64,9 @@ export function TasksPresentation() {
   const [tasks, setTasks] = useState<PresentationTask[]>(() => seedPresentationTasks(workspace));
   const [query, setQuery] = useState(""), [status, setStatus] = useState("all"), [owner, setOwner] = useState("all"), [label, setLabel] = useState("all"), [selected, setSelected] = useState<string[]>([]);
   const [quick, setQuick] = useState(""), [editing, setEditing] = useState<PresentationTask | null>(null), [importOpen, setImportOpen] = useState(false), [notice, setNotice] = useState("");
+  const openedBridge = useRef("");
   useEffect(() => { setTasks(seedPresentationTasks(workspace)); setSelected([]); setQuery(""); setStatus("all"); setOwner("all"); setLabel("all"); setNotice(""); }, [workspace]);
+  useEffect(() => { if (!demo.runtime) return; let live = true; const load = () => demoRequest<DemoBridgeTask[]>(demo.runtime!, demo.scene, "/tasks").then(rows => { if (!live) return; const incoming: PresentationTask[] = rows.map(row => ({ id: row.id, title: row.title, owner: row.owner, status: "todo", label: row.sourceApp, due: "", recurrence: "none", watchers: [], reminder: false })); setTasks(before => [...before, ...incoming.filter(row => !before.some(task => task.id === row.id))]); const target = new URLSearchParams(window.location.search).get("item"); const match = incoming.find(row => row.id === target); if (match && openedBridge.current !== match.id) { openedBridge.current = match.id; setEditing(match); } }).catch(() => {}); void load(); const timer = setInterval(load, 4000); return () => { live = false; clearInterval(timer); }; }, [demo.runtime, workspace]);
   const personaOwner = ({ nour: "Nour Khaled", rana: "Rana Saad", omar: "Omar Farouk", salma: "Salma Nabil", mona: "Mona Adel", hoda: "Hoda Ashraf", hany: "Hany Samir" } as Record<string, string>)[demo.scene.persona] ?? PRESENTATION_PEOPLE[0];
   const visible = tasks.filter(task => (!query || `${task.title} ${task.owner} ${task.label}`.toLocaleLowerCase().includes(query.toLocaleLowerCase())) && (status === "all" || task.status === status) && (owner === "all" || task.owner === owner) && (label === "all" || task.label === label));
   const allSelected = visible.length > 0 && visible.every(task => selected.includes(task.id));

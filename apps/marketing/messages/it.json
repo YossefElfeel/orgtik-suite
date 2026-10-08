@@ -2001,6 +2001,7 @@
     "unsubscribed": "Contatto demo disiscritto; il prossimo invio lo escluderà.",
     "postTitle": "Titolo post",
     "addPost": "Aggiungi bozza",
-    "postOpened": "{name} selezionato; modifica la data sotto."
+    "postOpened": "{name} selezionato; modifica la data sotto.",
+    "connectionError": "Connessione demo non disponibile. Riprova."
   }
 }

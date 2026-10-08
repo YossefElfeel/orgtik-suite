@@ -14,6 +14,7 @@ type OrgtikContext = {
     digits: Digits;
     t: Translate;
     Link: LinkComponent;
+    presentationTimeZone?: string;
 };
 /**
  * Wrap each app once, inside <body>. It tells the library's components the language, the
@@ -32,6 +33,12 @@ export declare function OrgtikProvider({ locale, digits, strings, link, children
 export declare const useOrgtik: () => OrgtikContext;
 /** The library's translate function for the current language. */
 export declare const useStrings: () => Translate;
+/** Formatting override for isolated presentation scenes, preserving the app's words and links. */
+export declare function PresentationFormatting({ digits, timeZone, children }: {
+    digits: Digits;
+    timeZone: string;
+    children: ReactNode;
+}): import("react").JSX.Element;
 /** Number, money, percent and date formatting in the current language and digits. */
 export declare function useFormatter(): {
     number: (n: number, options?: Intl.NumberFormatOptions) => string;

@@ -1,4 +1,5 @@
 "use client";
+import { demoRuntime } from "@orgtik/ui";
 
 // SOS in the suite's frame (FS-SOS-1, USR-00 v1). One navigation: the rail for the apps, the
 // sidebar for SOS's own pages (it was a rail plus a header pill bar labelled "Admin navigation",
@@ -137,7 +138,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
 
   return (
     <SuiteShell
-      demo={{ enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "sos", onLocaleChange: changeLocale }}
+      demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "sos", onLocaleChange: changeLocale }}
       rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref="/" />}
       sidebar={<Sidebar title={<span dir="ltr">{ts("appName")}</span>} sections={sections} />}
       banner={banners.length ? <BannerRegion banners={banners} /> : undefined}
