@@ -10,7 +10,7 @@ export async function retiredSalesRoute(destination: "admin" | "account", replac
   // Customer pages return to SOS in the original window, where its existing
   // tab session is retained. Home is not an app in the /go scope list.
   const href = destination === "admin"
-    ? `${origin}/go/platform_admin?redirect=${encodeURIComponent(`/${locale}${replacement}`)}`
+    ? `${origin}/go/platform_admin?redirect=${encodeURIComponent(replacement)}`
     : `${origin}${replacement}`;
   redirect({ href, locale });
   return null;
