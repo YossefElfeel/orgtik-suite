@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "Mapped frozen catalog destination opens ADM Plans",
+    "Existing handoff prepares explicit ADM staffcontext",
+    "Replacement Plans UI renders after loading",
+    "No desktop documentoverflow",
+    "Shared frozenclock unchanged"
+  ],
+  "captures": [
+    "staff-plans-en-light-1440.png"
+  ],
+  "scope": "Existing SOS staff launcher→mapped ADM Plans destination; frozen backend/auth unchanged",
+  "completed": true
+}
