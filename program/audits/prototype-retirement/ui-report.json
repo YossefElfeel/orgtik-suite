@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "Old Sales invoice route opens customer invoice replacement",
+    "Replacement invoice UI finishes loading",
+    "Legacy invoice UI no longer rendered"
+  ],
+  "scope": "Sales frozen invoice route→existing customer invoice replacement; noauth/backend mutations",
+  "completed": true,
+  "url": "http://localhost:4600/billing/invoices"
+}

@@ -1,0 +1,115 @@
+{
+  "sales": [
+    {
+      "route": "plan-management",
+      "destination": "admin",
+      "replacement": "/plans"
+    },
+    {
+      "route": "plan-management/[id]",
+      "destination": "admin",
+      "replacement": "/plans"
+    },
+    {
+      "route": "plan-management/features",
+      "destination": "admin",
+      "replacement": "/plans/features"
+    },
+    {
+      "route": "plan-management/duration",
+      "destination": "admin",
+      "replacement": "/plans"
+    },
+    {
+      "route": "plan-management/zones",
+      "destination": "admin",
+      "replacement": "/pricing/zones"
+    },
+    {
+      "route": "plan-management/departments",
+      "destination": "admin",
+      "replacement": "/tools"
+    },
+    {
+      "route": "plan-management/categories",
+      "destination": "admin",
+      "replacement": "/tools"
+    },
+    {
+      "route": "plan-management/categories/[id]",
+      "destination": "admin",
+      "replacement": "/tools"
+    },
+    {
+      "route": "coupons",
+      "destination": "admin",
+      "replacement": "/coupons"
+    },
+    {
+      "route": "packages",
+      "destination": "admin",
+      "replacement": "/bundles"
+    },
+    {
+      "route": "packages/[id]",
+      "destination": "admin",
+      "replacement": "/bundles"
+    },
+    {
+      "route": "subscriptions",
+      "destination": "account",
+      "replacement": "/billing"
+    },
+    {
+      "route": "subscriptions/[id]",
+      "destination": "account",
+      "replacement": "/billing"
+    },
+    {
+      "route": "invoices",
+      "destination": "account",
+      "replacement": "/billing/invoices"
+    },
+    {
+      "route": "invoices/[id]",
+      "destination": "account",
+      "replacement": "/billing/invoices"
+    },
+    {
+      "route": "tickets",
+      "destination": "account",
+      "replacement": "/support"
+    },
+    {
+      "route": "tickets/[id]",
+      "destination": "account",
+      "replacement": "/support"
+    }
+  ],
+  "sos": [
+    {
+      "route": "systems/cms",
+      "scope": "website_manager",
+      "replacement": "/content/pages"
+    },
+    {
+      "route": "systems/cms/[cmsId]/accounts",
+      "scope": "website_manager",
+      "replacement": "/content/pages"
+    },
+    {
+      "route": "content",
+      "scope": "website_manager",
+      "replacement": "/content/pages"
+    }
+  ],
+  "alreadyRetired": [
+    {
+      "route": "sos/chat",
+      "replacement": "/go/hq"
+    }
+  ],
+  "notPresent": [
+    "sos/icons-test"
+  ]
+}

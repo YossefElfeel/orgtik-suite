@@ -1,10 +1,5 @@
-import { redirect } from "next/navigation";
+import { retiredSalesRoute } from "@/lib/retired-routes";
 
-type Props = {
-  params: Promise<{ locale: string }>;
-};
-
-export default async function DepartmentsPage({ params }: Props) {
-  const { locale } = await params;
-  redirect(`/${locale}/plan-management/categories`);
+export default async function RetiredPage() {
+  return retiredSalesRoute("admin", "/tools");
 }
