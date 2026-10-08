@@ -2901,6 +2901,20 @@
     "csvReviewCount": "{count} Kontakte prüfen, bevor sie hinzugefügt werden.",
     "csvBack": "Zurück",
     "csvContinue": "Weiter",
-    "csvNewImport": "Weiteren Import starten"
+    "csvNewImport": "Weiteren Import starten",
+    "workspaceReceipt": "Kunden-Arbeitsbereichsbeleg",
+    "workspaceReceiptHint": "Ein gewonnener Deal kann einen simulierten Arbeitsbereichsbeleg für den Kundenkontakt erzeugen.",
+    "workspaceReady": "Demo-Arbeitsbereich bereit",
+    "workspaceOwner": "Kundeninhaber",
+    "createWorkspace": "Demo-Arbeitsbereichsbeleg erstellen",
+    "retryWorkspace": "Demo-Beleg erneut versuchen",
+    "workspaceReadFailed": "Der Demo-Dienst ist nicht verfügbar. Zum Erstellen oder Abrufen desselben Deal-Belegs erneut versuchen.",
+    "workspaceStaffOnly": "Nur Mona oder die aktuelle OrgTik-Mitarbeiterpersona kann den Beleg erstellen.",
+    "workspaceConnected": "In der isolierten Demo gespeichert. Beim erneuten Öffnen erscheint derselbe Beleg; kein echtes Konto, keine Plätze oder Rechnung.",
+    "workspaceLocal": "Nur ein Beleg in der Einzelszene. Kein Kunden-Arbeitsbereich und keine Einladung.",
+    "workspaceConfirm": "Simulierten Kunden-Arbeitsbereich erstellen?",
+    "workspaceImpact": "Demo-Beleg für {name} mit {owner} als Inhaber. Bestehende Konten, Abonnements, Rechnungen und Abrechnungsdaten bleiben unverändert.",
+    "leadAttribution": "Lead-Zuordnung",
+    "campaignReference": "Kampagne / Tags"
   }
 }

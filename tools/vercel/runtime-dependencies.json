@@ -3,6 +3,7 @@
   "consumers": ["sos", "admin", "tasks", "files", "hr", "sales", "marketing", "chats", "wm", "content", "website"],
   "milestone": ["sos", "website"],
   "pathRules": [
+    { "id": "presentation-connections", "paths": ["tools/demo/connections.cjs"], "consumers": "all" },
     { "id": "platform-access-and-lifecycle", "paths": ["mock/apps/admin/app-api.js", "mock/apps/admin/lifecycle.js", "mock/apps/admin/store.js"], "consumers": "all" },
     { "id": "platform", "paths": ["mock/apps/admin.js", "mock/apps/admin/"], "consumers": ["admin", "sos", "website"] },
     { "id": "sos-and-handoff", "paths": ["mock/apps/sos.js", "mock/apps/sos/"], "consumers": "all" },

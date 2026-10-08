@@ -20,7 +20,7 @@ import type { Digits } from "../locale.js";
 export const DEMO_PERSONAS = ["current", "mona", "nour", "rana", "omar", "salma", "hoda", "hany"] as const;
 export const DEMO_WORKSPACES = ["current", "orgtik", "nile", "spree", "desert", "new"] as const;
 export const DEMO_STATES = ["normal", "loading", "empty", "error", "noAccess", "readOnly", "success"] as const;
-export const DEMO_SCENARIOS = ["none", "renewal", "grace", "overdue"] as const;
+export const DEMO_SCENARIOS = ["none", "renewal", "grace", "expiredGrace", "overdue"] as const;
 export type DemoScene = { persona: typeof DEMO_PERSONAS[number]; workspace: typeof DEMO_WORKSPACES[number]; state: typeof DEMO_STATES[number]; scenario: typeof DEMO_SCENARIOS[number] };
 export type DemoOptions = { enabled: boolean; appKey: string; onLocaleChange?: (locale: Locale) => void; runtime?: DemoRuntime };
 export type DemoPreferences = { digits: Digits; timeZone: string };
@@ -61,8 +61,8 @@ export function DemoPanel() {
       <Field label={t("persona")}><Select aria-label={t("persona")} value={scene.persona} onValueChange={value => value && update({ persona: value as DemoScene["persona"] })} options={DEMO_PERSONAS.map(value => ({ value, label: t(value) }))} /></Field>
       <Field label={t("workspace")}><Select aria-label={t("workspace")} value={scene.workspace} onValueChange={value => value && update({ workspace: value as DemoScene["workspace"], state: value === "new" ? "empty" : value === "desert" ? "noAccess" : "normal" })} options={DEMO_WORKSPACES.map(value => ({ value, label: t(value) }))} /></Field>
       <Field label={t("screen")}><Select aria-label={t("screen")} value={scene.state} onValueChange={value => value && update({ state: value as DemoScene["state"] })} options={DEMO_STATES.map(value => ({ value, label: t(value) }))} /></Field>
-      <Field label={t("scenario")}><Select aria-label={t("scenario")} value={scene.scenario} onValueChange={value => value && update({ scenario: value as DemoScene["scenario"], state: value === "overdue" ? "readOnly" as const : "normal" as const })} options={DEMO_SCENARIOS.map(value => ({ value, label: t(value) }))} /></Field>
-      {scene.scenario !== "none" ? <div className="flex flex-col gap-2 rounded-field border border-line p-3"><SimulatedTag /><p className="text-body-sm text-fg-muted">{t("lifecycleNote")}</p>{scene.scenario !== "overdue" ? <Button size="sm" variant="secondary" onClick={() => update({ scenario: scene.scenario === "renewal" ? "grace" : "overdue", state: scene.scenario === "renewal" ? "normal" : "readOnly" })}>{t(scene.scenario === "renewal" ? "simulateFailure" : "endGrace")}</Button> : null}<Button size="sm" variant="secondary" onClick={() => update({ scenario: "none", state: "normal" })}>{t("simulateRecovery")}</Button></div> : null}
+      <Field label={t("scenario")}><Select aria-label={t("scenario")} value={scene.scenario} onValueChange={value => value && update({ scenario: value as DemoScene["scenario"], state: value === "expiredGrace" ? "readOnly" as const : "normal" as const })} options={DEMO_SCENARIOS.map(value => ({ value, label: t(value) }))} /></Field>
+      {["renewal", "grace", "expiredGrace"].includes(scene.scenario) ? <div className="flex flex-col gap-2 rounded-field border border-line p-3"><SimulatedTag /><p className="text-body-sm text-fg-muted">{t("lifecycleNote")}</p>{scene.scenario !== "expiredGrace" ? <Button size="sm" variant="secondary" onClick={() => update({ scenario: scene.scenario === "renewal" ? "grace" : "expiredGrace", state: scene.scenario === "renewal" ? "normal" : "readOnly" })}>{t(scene.scenario === "renewal" ? "simulateFailure" : "endGrace")}</Button> : null}<Button size="sm" variant="secondary" onClick={() => update({ scenario: "none", state: "normal" })}>{t("simulateRecovery")}</Button></div> : null}
       <div className="border-t border-line pt-3">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <Field label={t("language")}><Select aria-label={t("language")} value={locale} onValueChange={value => value && demo.onLocaleChange?.(value as Locale)} disabled={!demo.onLocaleChange} options={[{ value: "en", label: "English" }, { value: "ar", label: "العربية" }, { value: "de", label: "Deutsch" }, { value: "fr", label: "Français" }, { value: "it", label: "Italiano" }]} /></Field>
@@ -87,14 +87,17 @@ export function DemoSceneBanner() {
 }
 
 export function DemoStateView({ children }: { children: ReactNode }) {
-  const demo = useDemoScene(), t = useWords(); if (!demo.enabled || demo.scene.state === "normal") return <>{children}</>;
+  const demo = useDemoScene(), t = useWords(); if (!demo.enabled) return <>{children}</>;
   const action = <Button variant="secondary" onClick={() => demo.update({ state: "normal", scenario: "none" })}>{t("restore")}</Button>;
+  let preview: ReactNode = null;
   switch (demo.scene.state) {
-    case "loading": return <div className="mx-auto max-w-4xl p-6"><LoadingState rows={8} label={t("loadingBody")} /></div>;
-    case "empty": return <EmptyState titleAs="h1" title={t("emptyTitle")} description={t("emptyBody")} action={action} />;
-    case "error": return <ErrorState titleAs="h1" title={t("errorTitle")} description={t("errorBody")} onRetry={() => demo.update({ state: "normal" })} />;
-    case "noAccess": return <NoPermissionState titleAs="h1" title={t("noAccessTitle")} description={t("noAccessBody")} action={action} />;
-    case "success": return <EmptyState titleAs="h1" icon={<CheckCircle />} title={t("successTitle")} description={t("successBody")} action={action} />;
-    case "readOnly": return <><div className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-warning-subtle px-4 py-3"><p className="text-body-sm text-fg">{t("readOnlyBody")}</p>{action}</div><div inert className="min-w-0">{children}</div></>;
+    case "loading": preview = <div className="mx-auto max-w-4xl p-6"><LoadingState rows={8} label={t("loadingBody")} /></div>; break;
+    case "empty": preview = <EmptyState titleAs="h1" title={t("emptyTitle")} description={t("emptyBody")} action={action} />; break;
+    case "error": preview = <ErrorState titleAs="h1" title={t("errorTitle")} description={t("errorBody")} onRetry={() => demo.update({ state: "normal" })} />; break;
+    case "noAccess": preview = <NoPermissionState titleAs="h1" title={t("noAccessTitle")} description={t("noAccessBody")} action={action} />; break;
+    case "success": preview = <EmptyState titleAs="h1" icon={<CheckCircle />} title={t("successTitle")} description={t("successBody")} action={action} />; break;
+    case "readOnly": preview = <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line bg-warning-subtle px-4 py-3"><p className="text-body-sm text-fg">{t("readOnlyBody")}</p>{action}</div>; break;
   }
+  // Keep local edits mounted while demonstrating a temporary state or billing recovery.
+  return <>{preview}<div className="min-w-0" hidden={!["normal", "readOnly"].includes(demo.scene.state)} inert={demo.scene.state === "readOnly" ? true : undefined}>{children}</div></>;
 }

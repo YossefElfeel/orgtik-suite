@@ -2002,6 +2002,21 @@
     "postTitle": "Titre du post",
     "addPost": "Ajouter un brouillon",
     "postOpened": "{name} sélectionné ; modifiez sa date ci-dessous.",
-    "connectionError": "Connexion démo indisponible. Réessayez."
+    "connectionError": "Connexion démo indisponible. Réessayez.",
+    "websiteCampaign": "Connexion de campagne au site",
+    "websiteCampaignHint": "Enregistrez la campagne partenaires OrgTik pour pg_partners. Sélectionnez-la dans le formulaire démo WM ; les prospects CRM reviennent avec campagne et source.",
+    "campaignName": "Nom de campagne",
+    "registerCampaign": "Connecter la campagne à Website Manager",
+    "campaignRegistered": "Campagne enregistrée pour le formulaire partenaires démo.",
+    "campaignReady": "Campagne site prête",
+    "campaignStaffOnly": "Choisissez OrgTik et Mona, Hoda ou le profil actuel pour enregistrer une campagne site. Les campagnes clients restent dans leur espace.",
+    "campaignConnected": "Recherchez le nom de campagne dans la suite pour ouvrir son formulaire WM. Les prospects gardent launch-demo et wm:pg_partners.",
+    "campaignLocal": "Aperçu autonome. Sans connexion démo locale, aucune campagne transférée à WM.",
+    "leadName": "Contact CRM",
+    "leadSource": "Page / source",
+    "campaignId": "Référence de campagne",
+    "crmConnectedNote": "La connexion démo partage ces prospects attribués avec Sales dans cet espace. Les prospects du formulaire WM OrgTik reviennent avec page et campagne ; tous les enregistrements sont simulés.",
+    "presentationWorkspace": "Espace démo",
+    "emptyWorkspaceLabel": "Nouvel espace"
   }
 }

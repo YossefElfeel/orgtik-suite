@@ -81,6 +81,9 @@ const post = (path, body, token) =>
 
 // The address that opens the suite signed in with `token`, through a one-time code.
 async function handoffHref(token) {
+  // Compile a cold suite entry before creating its short-lived destination code.
+  if (typeof document !== "undefined")
+    await fetch(`${SUITE_URL}/auth/handoff`, { mode: "no-cors" });
   const handoff = token
     ? await post("/auth/handoff", null, token).catch(() => null)
     : null;

@@ -1480,6 +1480,13 @@
     "internalTitle": "OrgTik-Teamstudio",
     "internalBody": "Website Manager ist OrgTiks internes CMS. OrgTik und ein Inhalts-/Teamprofil im Demo-Panel wählen.",
     "leadConnected": "Lead in OrgTik Sales mit Herkunft Partnerseite erstellt.",
-    "connectionError": "Die Verbindung ist fehlgeschlagen. Versuchen Sie es erneut."
+    "connectionError": "Die Verbindung ist fehlgeschlagen. Versuchen Sie es erneut.",
+    "campaign": "Marketingkampagne",
+    "noCampaign": "Keine registrierte Kampagne",
+    "campaignHint": "Kampagnen stammen aus OrgTik Marketing. Akzeptierte Partnerformular-Leads übertragen die Kampagne an OrgTik CRM und Marketing; Kundendaten bleiben getrennt.",
+    "campaignReference": "Kampagne",
+    "crmReference": "OrgTik CRM-Lead",
+    "visitorName": "Kontaktname",
+    "visitorNameError": "Kontaktnamen mit 1–120 Zeichen eingeben."
   }
 }

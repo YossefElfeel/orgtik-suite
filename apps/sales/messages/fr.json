@@ -2901,6 +2901,20 @@
     "csvReviewCount": "Vérifiez {count} contacts avant leur ajout à cet espace.",
     "csvBack": "Retour",
     "csvContinue": "Continuer",
-    "csvNewImport": "Lancer un autre import"
+    "csvNewImport": "Lancer un autre import",
+    "workspaceReceipt": "Reçu d’espace client",
+    "workspaceReceiptHint": "Une affaire gagnée peut créer un reçu simulé d’espace au nom du contact client.",
+    "workspaceReady": "Espace démo prêt",
+    "workspaceOwner": "Propriétaire client",
+    "createWorkspace": "Créer le reçu d’espace démo",
+    "retryWorkspace": "Réessayer le reçu démo",
+    "workspaceReadFailed": "Le service démo est indisponible. Réessayez pour créer ou retrouver le même reçu.",
+    "workspaceStaffOnly": "Seule Mona ou le profil OrgTik actuel peut créer le reçu d’une affaire gagnée.",
+    "workspaceConnected": "Stocké dans la démo isolée. La réouverture retrouve le même reçu ; aucun compte, siège ou facture réel.",
+    "workspaceLocal": "Reçu de scène autonome uniquement. Aucun espace client ni invitation.",
+    "workspaceConfirm": "Créer un espace client simulé ?",
+    "workspaceImpact": "Créer un reçu démo pour {name}, au nom de {owner}. Aucun compte, abonnement, facture ou donnée de facturation existant ne change.",
+    "leadAttribution": "Attribution du prospect",
+    "campaignReference": "Campagne / étiquettes"
   }
 }

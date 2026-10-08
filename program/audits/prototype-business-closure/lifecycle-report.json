@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "Grace preserves editable content",
+    "Read-only freezes content",
+    "Recovery retains task edits",
+    "Loading returns without losing task",
+    "Empty returns without losing task",
+    "Error and retry returns without losing task",
+    "No access returns without losing task",
+    "Success returns without losing task"
+  ],
+  "scope": "UI-only billing progression and temporary state continuity; no shared clock or business changes",
+  "completed": true
+}

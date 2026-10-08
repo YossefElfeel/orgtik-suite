@@ -2901,6 +2901,20 @@
     "csvReviewCount": "Review {count} contacts before adding them to this workspace.",
     "csvBack": "Back",
     "csvContinue": "Continue",
-    "csvNewImport": "Start another import"
+    "csvNewImport": "Start another import",
+    "workspaceReceipt": "Customer workspace receipt",
+    "workspaceReceiptHint": "A won deal can produce a simulated workspace receipt owned by its customer contact.",
+    "workspaceReady": "Demo workspace ready",
+    "workspaceOwner": "Customer owner",
+    "createWorkspace": "Create demo workspace receipt",
+    "retryWorkspace": "Retry demo workspace receipt",
+    "workspaceReadFailed": "The demo workspace service is unavailable. Retry to create or retrieve the same deal receipt.",
+    "workspaceStaffOnly": "Only Mona or the current OrgTik staff persona can create a won-deal workspace receipt.",
+    "workspaceConnected": "Stored in the isolated demo connection. Reopening this won deal retrieves the same receipt; no real account, seats or invoice is created.",
+    "workspaceLocal": "Standalone scene receipt only. It does not provision a customer workspace or send an invitation.",
+    "workspaceConfirm": "Create simulated customer workspace?",
+    "workspaceImpact": "Create a demo receipt for {name}, owned by {owner}. No existing account, subscription, invoice or billing data changes.",
+    "leadAttribution": "Lead attribution",
+    "campaignReference": "Campaign / tags"
   }
 }

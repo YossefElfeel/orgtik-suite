@@ -5,7 +5,7 @@ import type { Digits } from "../locale.js";
 export declare const DEMO_PERSONAS: readonly ["current", "mona", "nour", "rana", "omar", "salma", "hoda", "hany"];
 export declare const DEMO_WORKSPACES: readonly ["current", "orgtik", "nile", "spree", "desert", "new"];
 export declare const DEMO_STATES: readonly ["normal", "loading", "empty", "error", "noAccess", "readOnly", "success"];
-export declare const DEMO_SCENARIOS: readonly ["none", "renewal", "grace", "overdue"];
+export declare const DEMO_SCENARIOS: readonly ["none", "renewal", "grace", "expiredGrace", "overdue"];
 export type DemoScene = {
     persona: typeof DEMO_PERSONAS[number];
     workspace: typeof DEMO_WORKSPACES[number];
