@@ -5,7 +5,9 @@ const [file] = process.argv.slice(2);
 const { key, url } = JSON.parse(fs.readFileSync(file, "utf8"));
 const preview = new URL(url).hostname.endsWith("-preview.vercel.app");
 const request = preview ? protectedFetch(mintPreviewTokens([key])) : fetch;
-const response = await request(url, { redirect: "follow", signal: AbortSignal.timeout(60000) });
+// Tool homepages may intentionally hand off to SOS. Check their own sign-in shell.
+const shellPath = ["mock", "website"].includes(key) ? "/" : key === "sos" ? "/auth" : "/en/auth";
+const response = await request(url + shellPath, { redirect: "follow", signal: AbortSignal.timeout(60000) });
 if (!response.ok) throw new Error(`${key}: deployed page answered ${response.status}`);
 if (new URL(response.url).origin !== new URL(url).origin) throw new Error(`${key}: hosted smoke was redirected away from the deployment (check preview protection credentials)`);
 if (key === "mock") {
