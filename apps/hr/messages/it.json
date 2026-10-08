@@ -2904,7 +2904,7 @@
     "welcomeTask": "Invia pacchetto benvenuto",
     "equipmentTask": "Assegna attrezzatura",
     "policyTask": "Leggi politica ferie",
-    "taskNote": "Queste attività sono simulazioni locali. La creazione in Tasks è ancora da fare.",
+    "taskNote": "Con la demo connessa questa checklist crea attività assegnate in Tasks. Le anteprime autonome restano locali.",
     "createOnboarding": "Crea attività di inserimento",
     "expiry": "Documenti in scadenza",
     "expiryNote": "Documenti in scadenza entro 30 giorni dalla data fissa della demo.",

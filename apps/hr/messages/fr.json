@@ -2904,7 +2904,7 @@
     "welcomeTask": "Envoyer le dossier d’accueil",
     "equipmentTask": "Attribuer l’équipement",
     "policyTask": "Lire la politique de congés",
-    "taskNote": "Ces tâches sont des simulations locales. Leur création dans Tasks reste à faire.",
+    "taskNote": "Avec la démo connectée, cette liste crée des tâches attribuées dans Tasks. Les aperçus autonomes restent locaux.",
     "createOnboarding": "Créer les tâches d’accueil",
     "expiry": "Documents proches de l’expiration",
     "expiryNote": "Documents expirant sous 30 jours à partir de la date fixe de démonstration.",

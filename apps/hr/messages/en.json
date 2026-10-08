@@ -2904,7 +2904,7 @@
     "welcomeTask": "Send welcome pack",
     "equipmentTask": "Assign equipment",
     "policyTask": "Review leave policy",
-    "taskNote": "These task records are local simulations. Actual creation in Tasks remains pending.",
+    "taskNote": "With the connected demo runtime, this checklist creates assigned records in Tasks. Standalone previews remain local.",
     "createOnboarding": "Create onboarding tasks",
     "expiry": "Expiring documents",
     "expiryNote": "Documents expiring in the next 30 days at the fixed demo date.",
