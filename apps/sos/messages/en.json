@@ -508,6 +508,14 @@
     "stepReopened": "Step reopened",
     "demoEnabled": "Demo verification enabled",
     "demoDisabled": "Demo verification disabled",
-    "handoffNote": "Real team management, ownership transfer, invoices and billing details remain in their existing screens. This scene adds no account enforcement or regulatory export guarantee."
+    "handoffNote": "Real team management, ownership transfer, invoices and billing details remain in their existing screens. This scene adds no account enforcement or regulatory export guarantee.",
+    "documents": "Invoice and contacts",
+    "sampleInvoice": "Packaged sample invoice",
+    "billingContacts": "Billing contacts",
+    "billingContactNote": "Contacts in this scene only. Existing billing details remain unchanged.",
+    "billingEmail": "Billing contact email",
+    "emailError": "Enter a valid email.",
+    "billingContactAdded": "Demo billing contact added",
+    "addBillingContact": "Add billing contact"
   }
 }

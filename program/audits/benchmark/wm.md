@@ -70,3 +70,8 @@ Ratings: **Expected** means a CMS team assumes it is there. **Differentiator** m
 8. **Release bundles (#29, M).** Pricing, pages and articles often change together. Publishing them one by one risks a half-updated site.
 
 Next in line: comments on entries (#10), reference fields (#3), autosave (#9), and editable form fields (#37).
+
+
+## A26 presentation overlay — 2026-10-08
+
+PR30 studio accepted; actual selected CMS publisher PR20/21 retained. Studio bundles/translations are scene-only. Existing benchmark scores and backend claims above remain historical. See the maintained release register and prototype guide; this overlay does not accept all72 or all15 journeys.

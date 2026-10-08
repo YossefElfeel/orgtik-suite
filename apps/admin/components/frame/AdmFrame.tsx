@@ -44,7 +44,9 @@ type NavSection = { label?: string; items: NavItem[] };
 /** Spec 02's areas, each shown only to roles that can view its module (the API checks again). */
 export function useNav(): NavSection[] {
   const t = useTranslations("Nav");
+  const operationsText = useTranslations("Operations");
   return [
+    ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ items: [{ key: operationsText("heading"), href: "/presentation", icon: <Table />, permission: "overview:view" }] }] : []),
     { items: [{ key: t("overview"), href: "/", icon: <SquaresFour />, permission: "overview:view" }] },
     {
       label: t("sections.catalog"),

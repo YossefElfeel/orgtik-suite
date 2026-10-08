@@ -82,3 +82,8 @@ Observations from reading the code:
 8. **Email notifications and reminders** (#40): pending approvals, probation or contract end and payslip ready reach people who don't keep HR open. M.
 9. **From candidate to employee** (#31, #29): an offer letter, "Hire" that pre-fills the wizard, and a careers page from Website Manager. M + M.
 10. **Light performance reviews linked to goals in Tasks** (#33, #34): a yearly or half-yearly review with self and manager forms. Owners expect it, and all three competitors offer it. L.
+
+
+## A26 presentation overlay — 2026-10-08
+
+PR27 HR scene accepted: balances/profile approval/import/payroll/onboarding/expiry/mailbox; actual task/mail/bank delivery pending. Existing benchmark scores and backend claims above remain historical. See the maintained release register and prototype guide; this overlay does not accept all72 or all15 journeys.

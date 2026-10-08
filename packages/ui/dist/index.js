@@ -42,4 +42,5 @@ export { LocalizedField } from "./components/LocalizedField.js";
 export { FileField } from "./components/FileField.js";
 export { Board, } from "./board/Board.js";
 export { UsageMeter, AuditLogTable, TwoFactorScreens } from "./prototype/Account.js";
+export { PdfPreview } from "./prototype/PdfPreview.js";
 //# sourceMappingURL=index.js.map

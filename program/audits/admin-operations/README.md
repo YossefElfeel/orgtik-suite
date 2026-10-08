@@ -1,0 +1,7 @@
+# ADM operations presentation
+
+The dev/demo-only `/[locale]/presentation` route reuses OrgTik’s existing staff frame and shared UI. The separate scene covers retry pause/recovery, credit-note confirmation, seat/unit-price totals and half-cycle difference preview, read-only/recovery state, fixed PDF sample/contacts/series, mock pay links, deterministic tax-ID/e-invoice examples, support deadlines/replies/merge, accounting CSV and attributed audit. Shared verification UI is reused; existing metrics, platform audit and invoices are linked.
+
+Typecheck, 11 five-language catalog groups and affected production build pass. One flow passes 32 scoped checks/eight EN/AR light/dark desktop/mobile captures with zero axe critical findings and no page overflow. It verifies paused retries, recovery/credit receipt, delta/total consistency, PDF bytes, contact/series, one mock paid-link state, tax example, support reply/merge, attribution/export and reset. The minimal root redirect layout follows the same installed-version requirement as WM.
+
+All money actions affect local fixtures. Mock pay links create no platform paid order/invoice; existing accounts, historical invoices and clocks are unchanged. The packaged fictional PDF is fixed and explicitly separate from scene values. Tax examples perform no official check/submission. External providers, actual migration/dunning/ticket behavior and complete integrated journey acceptance remain pending/deferred. No backend/security tests or deployment.

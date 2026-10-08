@@ -1,0 +1,34 @@
+{
+  "checks": [
+    "Invoice sample bytes unchanged",
+    "Local billing contact visible",
+    "en-light-1440 critical zero",
+    "en-light-1440 overflow zero",
+    "en-light-390 critical zero",
+    "en-light-390 overflow zero",
+    "en-dark-1440 critical zero",
+    "en-dark-1440 overflow zero",
+    "en-dark-390 critical zero",
+    "en-dark-390 overflow zero",
+    "ar-light-1440 critical zero",
+    "ar-light-1440 overflow zero",
+    "ar-light-390 critical zero",
+    "ar-light-390 overflow zero",
+    "ar-dark-1440 critical zero",
+    "ar-dark-1440 overflow zero",
+    "ar-dark-390 critical zero",
+    "ar-dark-390 overflow zero"
+  ],
+  "captures": [
+    "documents-en-light-1440.png",
+    "documents-en-light-390.png",
+    "documents-en-dark-1440.png",
+    "documents-en-dark-390.png",
+    "documents-ar-light-1440.png",
+    "documents-ar-light-390.png",
+    "documents-ar-dark-1440.png",
+    "documents-ar-dark-390.png"
+  ],
+  "scope": "USR packaged PDF and client billing contacts only",
+  "completed": true
+}
