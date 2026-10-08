@@ -128,7 +128,17 @@
     "currencyTitle": "Währungsänderung planen?",
     "currencyImpact": "Der aktuelle Zyklus bleibt in {current}. Ab {date} gelten {next} sowie Menge und Preis der Vorschau. Frühere Rechnungen und bezahlte Links behalten ihre ursprüngliche Währung.",
     "confirmCurrency": "Änderung für nächsten Zyklus planen",
-    "currencyScheduled": "Mock-Währungsänderung geplant"
+    "currencyScheduled": "Mock-Währungsänderung geplant",
+    "legalEntity": "Mock-Rechtseinheit",
+    "entityCH": "OrgTik Schweiz · CH",
+    "entityAE": "OrgTik VAE · AE",
+    "entitySeriesNote": "Jede Einheit behält ihr eigenes Präfix und ihre Nummernfolge. Frühere globale Demo-Einstellungen gehören nur zu CH. Vorhandene Rechnungen bleiben unverändert.",
+    "nextCounter": "Nächster Beispielzähler",
+    "counterError": "Wählen Sie eine ganze Zahl von {minimum} bis 999999. Zähler können nicht zurückgesetzt werden.",
+    "entitySeriesSaved": "Rechnungsserie der Einheit gespeichert",
+    "counterUnavailable": "Diese Beispielnummer ist nicht verfügbar. Wählen Sie ein anderes Präfix oder erhöhen Sie den Zähler.",
+    "entityReserved": "{number} für {entity} reserviert.",
+    "reservedNumbers": "Reservierte Beispielnummern"
   },
   "CustomerPreview": {
     "heading": "Kundenvorschau · {name}",

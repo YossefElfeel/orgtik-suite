@@ -2915,6 +2915,23 @@
     "workspaceConfirm": "Créer un espace client simulé ?",
     "workspaceImpact": "Créer un reçu démo pour {name}, au nom de {owner}. Aucun compte, abonnement, facture ou donnée de facturation existant ne change.",
     "leadAttribution": "Attribution du prospect",
-    "campaignReference": "Campagne / étiquettes"
+    "campaignReference": "Campagne / étiquettes",
+    "companies": "Entreprises",
+    "addCompany": "Ajouter une entreprise",
+    "companiesNote": "Les entreprises ont leurs profils, étiquettes et champs. Reliez des contacts et ouvrez leurs affaires ; un renommage actualise les données CRM liées dans cette scène.",
+    "companyContactCount": "Contacts liés : {count}",
+    "noCompanies": "Aucune entreprise",
+    "companyDetails": "Détails de l’entreprise",
+    "saveCompany": "Enregistrer l’entreprise",
+    "companySector": "Secteur",
+    "companyWebsite": "Site de l’entreprise",
+    "companyNotes": "Notes de l’entreprise",
+    "companyFormError": "Vérifiez le nom, la longueur des champs et l’adresse http(s) facultative.",
+    "companyDuplicate": "Une autre entreprise porte déjà ce nom.",
+    "companyContacts": "Contacts et affaires liés",
+    "openLinkedDeal": "Ouvrir l’affaire",
+    "linkContact": "Contact à relier",
+    "linkContactAction": "Relier le contact",
+    "noCompanyContacts": "Aucun contact lié"
   }
 }

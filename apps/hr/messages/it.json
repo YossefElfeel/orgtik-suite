@@ -2926,6 +2926,10 @@
     "reminderCreated": "Anteprima promemoria aggiunta.",
     "reuseNote": "Le schermate esistenti di personale, ferie, uscita e cedolini restano disponibili.",
     "onboardingConnected": "Attività di onboarding create in Tasks di questo spazio.",
-    "connectionError": "Connessione non riuscita. Riprova."
+    "connectionError": "Connessione non riuscita. Riprova.",
+    "directoryEmployee": "Dipendente della directory HR",
+    "directoryHint": "Scegli un dipendente dallo spazio di lavoro connesso. Il riferimento rimane in questa presentazione.",
+    "useDirectoryEmployee": "Usa per l’inserimento",
+    "directoryRequired": "Scegli un dipendente HR."
   }
 }

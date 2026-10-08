@@ -3,9 +3,16 @@ export type PresentationTask = {
   id: string; title: string; status: "todo" | "doing" | "done";
   owner: string; label: string; due: string; recurrence: "none" | "weekly" | "monthly";
   watchers: string[]; reminder: boolean;
-  fileRefs?: { id: string; name: string; workspace: string; version: number; source: string }[];
+  fileRefs?: { id: string; name: string; workspace: string; version: number; source: string; versions?: { version: number; source: string }[] }[];
+  priority?: "low" | "normal" | "high" | "urgent";
 };
 export const PRESENTATION_PEOPLE = ["Nour Khaled", "Rana Saad", "Omar Farouk", "Salma Nabil", "Mona Adel", "Hoda Ashraf", "Hany Samir"];
+export type PresentationTemplate = { id: string; titleKey?: string; name?: string; task: Partial<PresentationTask> };
+export const PRESENTATION_TEMPLATES: PresentationTemplate[] = [
+  { id: "onboarding", titleKey: "templateTitle", task: { label: "people", recurrence: "weekly", watchers: [PRESENTATION_PEOPLE[1]], reminder: true } },
+  { id: "launch", titleKey: "launchTemplate", task: { label: "launch", due: "2026-10-12", watchers: [PRESENTATION_PEOPLE[2]], reminder: true } },
+  { id: "review", titleKey: "reviewTemplate", task: { label: "operations", recurrence: "monthly", due: "2026-10-15", watchers: [PRESENTATION_PEOPLE[0]], reminder: true } },
+];
 export function seedPresentationTasks(workspace: string): PresentationTask[] {
   if (workspace === "new") return [];
   const prefix = workspace === "orgtik" ? "OrgTik launch" : workspace === "spree" ? "Spree renewal" : "Nile Foods launch";

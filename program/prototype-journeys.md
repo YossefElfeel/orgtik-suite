@@ -1,14 +1,36 @@
 # OrgTik prototype: 15 presentation walkthroughs
 
-These scripts retain the J1–J15 definitions from `audits/suite-review/journeys.md`. They are **presentation instructions**, not a record of completed final acceptance. Individual retained/tool flows have scoped evidence; the complete revision-specific end-to-end run remains pending. No hosted acceptance is claimed and Vercel remains paused.
+These scripts retain the J1–J15 definitions from `audits/suite-review/journeys.md`. The scripts now have **local UI walkthrough coverage with limits**. They are not a claim of a complete backend/production run. Shared reports cover several journeys; their assertion totals must not be added as independent journeys. No hosted acceptance is claimed and Vercel remains paused.
 
 Run `pnpm demo --list` to inspect addresses, then select the required tools with `pnpm demo <tools>`. The launcher uses a private memory-backed, fixed-clock dataset. Use existing synthetic accounts from `mock/README.md` through SOS; this guide does not reproduce passwords. Demo persona selection changes the presentation, not the authenticated person. Open staff/customer retained flows with their matching account.
 
 Before each walkthrough, reset the tool's **demo records** and restore Demo controls to Normal. Shared **Reset scene** resets selectors only. Retained lifecycle/reset/time operations must target the isolated launcher dataset; never reset an existing shared/production dataset or advance its clock. For loading/empty/error/no-access/read-only/success, use Demo controls and restore Normal after showing the state.
 
+## Latest local coverage — 2026-10-08
+
+Validated merge baseline `eebc85d` through PR37. Current local closure extensions still require integration CI. All15 journeys are covered at the presentation layer; hosted/provider/regulatory acceptance remains deferred. J11 reuses unchanged-source CMS evidence; J12 uses the approved simulated customer preview.
+
+| Journey | Scoped evidence | Accepted UI boundary | Report |
+|---|---|---|---|
+| J1 | Public purchase7 | Actual mock order/account link/paid invoice/Tasks Dashboard; first task is client presentation only | program/audits/prototype-business-closure/public-purchase-report.json |
+| J2 | Core6 | Retained invitation/account acceptance/member Tasks entry; same purchased-capacity model | program/audits/prototype-final/invitation-report.json |
+| J3 | Lifecycle8 | Simulated grace/read-only/recovery/state preservation; no real billing progression/clock change | program/audits/prototype-business-closure/lifecycle-report.json |
+| J4 | Catalog15 (shared J4/J5) | Retained staff catalog/status walkthrough + website surface; not hosted launch | program/audits/prototype-final/catalog-report.json |
+| J5 | Catalog15 (shared J4/J5) + four-term parity | Retained price UI/publish preview + platform website snapshots; historical/hosted criteria separate | program/audits/prototype-final/catalog-report.json; program/audits/prototype-business-closure/public-catalog-report.json |
+| J6 | Business54 (shared J6/J9) | OrgTik intake → Sales → won simulated provisioning receipt; no real customer provisioning | program/audits/prototype-business-closure/business-report.json |
+| J7 | HR9 | Actual retained hire/invite/access/leave + HR-directory reference → three mock Tasks/exact detail/approved calendar | program/audits/prototype-final/hr-report.json |
+| J8 | Final tools11 (shared J8/J13/J14) + prior connected32 matrix | Versioned packaged references and discussions/tasks; arbitrary uploads/media deferred | program/audits/prototype-final/tool-report.json; program/audits/suite-connections/report.json |
+| J9 | Business54 (shared J6/J9) | Campaign/page/source → OrgTik Sales/won receipt → attribution; delivery/analytics simulated | program/audits/prototype-business-closure/business-report.json |
+| J10 | Core10 | Actual retained ticket customer/staff reply and managed-service quote/pay/deliver/approve Completed | program/audits/prototype-final/core-report.json |
+| J11 | Retained CMS19 checks/five captures | Selected edit/review/publish→website reload/last-good path; unchanged source, prior acceptance reused | program/audits/cms-publishing/README.md |
+| J12 | Customer14 | Audited presentation-only read-only customer preview; preserved staff tab, no session authority change | program/audits/prototype-shared-account/customer-preview-report.json |
+| J13 | Final tools11 + prior connected32 matrix (shared) | Landing metadata carries locale/theme/digits/timezone; hosted cross-domain acceptance deferred | program/audits/prototype-final/tool-report.json; program/audits/suite-connections/report.json |
+| J14 | Final tools11 + prior connected32 matrix (shared) | Mock feed/search exact-item navigation and independent presentation scenes; external delivery deferred | program/audits/prototype-final/tool-report.json; program/audits/suite-connections/report.json |
+| J15 | Offboarding6 | Retained successor ownership/employment/equipment/final-pay UI; empty record fixture does not prove custody transfer | program/audits/prototype-final/offboarding-report.json |
+
 ## J1 — visitor purchase → workspace → first tool
 
-**Persona:** visitor, then Nour/owner. **Tools:** website, SOS, Tasks. **Status:** retained purchase/pricing foundation; final walkthrough pending.
+**Persona:** visitor, then Nour/owner. **Tools:** website, SOS, Tasks. **Status:** Local UI coverage: Public purchase7. Actual mock order/account link/paid invoice/Tasks Dashboard; first task is client presentation only.
 
 1. Open the English website and compare 1/3/6/12-month offers. Show the greater duration/item saving and mock-region price.
 2. Choose an offer, review the platform quote and simulate successful checkout. Show the simulated receipt/order before linking the account.
@@ -20,7 +42,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J2 — owner invitation → acceptance → seat → Tasks
 
-**Persona:** Nour, then invited synthetic member. **Tools:** SOS, Tasks. **Status:** retained Team/mailbox/seat implementation; final walkthrough pending.
+**Persona:** Nour, then invited synthetic member. **Tools:** SOS, Tasks. **Status:** Local UI coverage: Core6. Retained invitation/account acceptance/member Tasks entry; same purchased-capacity model.
 
 1. Open `/team`, inspect capacity/assigned/reserved/available for Tasks.
 2. Invite a synthetic member with role/tool choices; show the pending reservation and mailbox invitation.
@@ -32,7 +54,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J3 — failed renewal → read-only → recovery → credit note
 
-**Persona:** Hany, then Nour. **Tools:** ADM, SOS, Tasks (representative consuming tool). **Status:** retained billing lifecycle and new Operations UI; final connected scenario pending.
+**Persona:** Hany, then Nour. **Tools:** ADM, SOS, Tasks (representative consuming tool). **Status:** Local UI coverage: Lifecycle8. Simulated grace/read-only/recovery/state preservation; no real billing progression/clock change.
 
 1. In ADM Operations Billing, inspect a past-due invoice, attempts and pause/resume.
 2. Preview the card-expiry/reminder message. Open customer Billing/mailbox to explain customer-facing recovery.
@@ -44,7 +66,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J4 — tool Coming soon → Beta → Live
 
-**Persona:** Mona, then Nour/visitor. **Tools:** ADM, SOS, website. **Status:** retained tools/waitlist/My Tools; website alignment verification pending.
+**Persona:** Mona, then Nour/visitor. **Tools:** ADM, SOS, website. **Status:** Local UI coverage: Catalog15 (shared J4/J5). Retained staff catalog/status walkthrough + website surface; not hosted launch.
 
 1. Open ADM `/tools`, inspect a tool status and its plan/waitlist relationships.
 2. Demonstrate the existing status editor using an isolated demo tool. Review launch prerequisites before selecting Beta/Live.
@@ -56,7 +78,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J5 — price change → public offer → customer billing
 
-**Persona:** Hany/Mona, then Nour/visitor. **Tools:** ADM, SOS, website. **Status:** retained R0 pricing foundation; final walkthrough pending.
+**Persona:** Hany/Mona, then Nour/visitor. **Tools:** ADM, SOS, website. **Status:** Local UI coverage: Catalog15 (shared J4/J5) + four-term parity. Retained price UI/publish preview + platform website snapshots; historical/hosted criteria separate.
 
 1. Open ADM Pricing and select one regional/currency cell. Review scheduled effective date and affected customers.
 2. Preview the change and publish through the existing isolated mock flow; show affected-cell repricing/notice behavior.
@@ -68,19 +90,19 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J6 — website lead → OrgTik CRM → won → workspace
 
-**Persona:** visitor/Hoda, then Omar/Mona. **Tools:** website, WM, Sales, SOS. **Status:** existing website intake retained; new WM→Sales connector pending verification; won provisioning presentation incomplete.
+**Persona:** visitor/Hoda, then Omar/Mona. **Tools:** website, WM, Sales, SOS. **Status:** Local UI coverage: Business54 (shared J6/J9). OrgTik intake → Sales → won simulated provisioning receipt; no real customer provisioning.
 
 1. Show a website contact/offer form and its mock submission. Explain that public leads belong to OrgTik, not the customer's CRM.
 2. In WM Studio Forms, select Genuine and submit; compare Bot/blocked as a simulated outcome.
 3. Find the accepted lead through suite search and open its exact Sales detail in the OrgTik scene.
 4. Assign the owner, add a timeline note, move through the pipeline to Won.
-5. Demonstrate the available create-workspace preview/action only if implemented; otherwise identify this remaining step explicitly. Open new-workspace empty state to show the intended destination.
+5. Demonstrate the won-deal simulated provisioning receipt; otherwise identify the missing prototype action explicitly. Open new-workspace empty state to show the intended destination.
 
 **Show:** success, blocked form outcome, new workspace empty. **Handoff:** lead source/campaign, deal status and provisioning result. **Deferred:** real external CRM/mail; provisioning acceptance.
 
 ## J7 — hiring → onboarding Tasks → approved leave
 
-**Persona:** Rana, then Salma/manager. **Tools:** HR, SOS, Tasks, Files, Chats. **Status:** retained hiring/invitation/leave flow; onboarding Tasks connector pending verification.
+**Persona:** Rana, then Salma/manager. **Tools:** HR, SOS, Tasks, Files, Chats. **Status:** Local UI coverage: HR9. Actual retained hire/invite/access/leave + HR-directory reference → three mock Tasks/exact detail/approved calendar.
 
 1. Open HR hiring/employee record and the retained identity/invitation flow; accept the invitation in the synthetic person's session.
 2. In HR People presentation, open Onboarding and create the employee checklist.
@@ -92,7 +114,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J8 — Tasks project + Files + Chats discussion
 
-**Persona:** Nour/Omar, then Salma. **Tools:** Tasks, Files, Chats. **Status:** retained references/whiteboards; new-scene Files connectors pending verification; Chats→Tasks first connection locally verified.
+**Persona:** Nour/Omar, then Salma. **Tools:** Tasks, Files, Chats. **Status:** Local UI coverage: Final tools11 (shared J8/J13/J14) + prior connected32 matrix. Versioned packaged references and discussions/tasks; arbitrary uploads/media deferred.
 
 1. In Files select the packaged launch brief, inspect its version/comments and share view/comment access.
 2. Attach that workspace record to a task through the retained picker or the new verified presentation picker.
@@ -104,7 +126,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J9 — Marketing campaign → WM page → Sales attribution
 
-**Persona:** Hoda, then Omar. **Tools:** Marketing, WM, Sales. **Status:** campaign→Sales first connection locally verified; full WM attribution connector pending verification.
+**Persona:** Hoda, then Omar. **Tools:** Marketing, WM, Sales. **Status:** Local UI coverage: Business54 (shared J6/J9). Campaign/page/source → OrgTik Sales/won receipt → attribution; delivery/analytics simulated.
 
 1. In Marketing Campaign review eligible/consented recipients and create the campaign's CRM leads.
 2. Open the linked WM landing-page/form scene, preserving source/campaign metadata.
@@ -116,7 +138,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J10 — support/service request round trip
 
-**Persona:** Nour, then authorized support/service staff (Mona for setup). **Tools:** SOS, ADM. **Status:** retained support/service round trip, new Operations SLA/reply/merge UI; final combined walkthrough pending.
+**Persona:** Nour, then authorized support/service staff (Mona for setup). **Tools:** SOS, ADM. **Status:** Local UI coverage: Core10. Actual retained ticket customer/staff reply and managed-service quote/pay/deliver/approve Completed.
 
 1. As Nour create a support ticket in `/support`; show the thread and attachment/reference preview if available.
 2. As staff open ADM ticket, review assignment/SLA, reply, and show the customer reply through retained SOS support.
@@ -128,7 +150,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J11 — CMS edit → approve → publish → website fallback
 
-**Persona:** Hoda, then Mona. **Tools:** WM, website. **Status:** selected retained actual CMS flow complete locally in PR20/21; final release walkthrough pending.
+**Persona:** Hoda, then Mona. **Tools:** WM, website. **Status:** Local UI coverage: Retained CMS19 checks/five captures. Selected edit/review/publish→website reload/last-good path; unchanged source, prior acceptance reused.
 
 1. Open WM `/content/pages/pg_partners`, edit one approved presentation field and save the draft.
 2. Submit for review; sign in as approver and approve/publish through the actual CMS editor.
@@ -140,19 +162,19 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J12 — staff View as customer → read-only → audit
 
-**Persona:** Mona, then the selected customer view. **Tools:** SOS, ADM, one customer tool. **Status:** retained impersonation restrictions/attribution; final presentation walkthrough pending.
+**Persona:** Mona, then the selected customer view. **Tools:** SOS, ADM, one customer tool. **Status:** Local UI coverage: Customer14. Audited presentation-only read-only customer preview; preserved staff tab, no session authority change.
 
-1. Open the retained staff People/View as flow and choose the synthetic customer workspace.
-2. Navigate to its tool through the existing handoff; inspect the current-workspace/actor indicator.
-3. Demonstrate read-only access; show a disabled edit action. Demo controls can explain the state but do not replace actual View as behavior.
-4. End the view and inspect the retained audit screen. Show actor vs represented person.
+1. Open ADM Workspaces, choose the synthetic workspace and use View as owner with a reason.
+2. Open the explicitly labelled customer presentation preview. Inspect the customer/workspace and read-only indicator; the staff tab keeps its existing session.
+3. Demonstrate read-only access; show a disabled edit action. This preview simulates the customer view; production impersonation remains frozen.
+4. Return to ADM and inspect the existing audited View as entry. Show actor and represented workspace.
 5. Compare the Account presentation searchable activity as a simulated design reference.
 
 **Show:** read-only and no access; attributed activity. **Handoff:** workspace context/impersonation actor/audit record. **Deferred:** no new hardening work; final walkthrough evidence.
 
 ## J13 — preferences across tools
 
-**Persona:** Nour, then Hoda for staff tools. **Tools:** SOS, Tasks, Chats, Sales, Marketing; WM/ADM through staff access. **Status:** first connected scene carrier locally verified; full nine-tool sequence pending.
+**Persona:** Nour, then Hoda for staff tools. **Tools:** SOS, Tasks, Chats, Sales, Marketing; WM/ADM through staff access. **Status:** Local UI coverage: Final tools11 + prior connected32 matrix (shared). Landing metadata carries locale/theme/digits/timezone; hosted cross-domain acceptance deferred.
 
 1. Select Arabic, Dark, Arabic digits and Cairo timezone in Demo controls.
 2. Open a generated task/lead using suite search; confirm landing language/theme/digits/timezone and exact item.
@@ -164,7 +186,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J14 — event in one tool → notice → exact destination
 
-**Persona:** Omar/Rana/Hoda, then intended recipient. **Tools:** Chats, Tasks, HR, Files, WM, Sales, SOS. **Status:** Chats task/Marketing lead first notice links verified; added source adapters pending verification.
+**Persona:** Omar/Rana/Hoda, then intended recipient. **Tools:** Chats, Tasks, HR, Files, WM, Sales, SOS. **Status:** Local UI coverage: Final tools11 + prior connected32 matrix (shared). Mock feed/search exact-item navigation and independent presentation scenes; external delivery deferred.
 
 1. Create a task from a Chats message. Open the suite bell and inspect the new task notice.
 2. Follow the notice to the exact Tasks record and mark the notice read.
@@ -176,7 +198,7 @@ Before each walkthrough, reset the tool's **demo records** and restore Demo cont
 
 ## J15 — offboarding → reassignment → revoked access
 
-**Persona:** Rana, then departing synthetic employee and successor. **Tools:** HR, SOS, Tasks, Files. **Status:** retained offboarding/equipment/deadline work; final presentation walkthrough pending.
+**Persona:** Rana, then departing synthetic employee and successor. **Tools:** HR, SOS, Tasks, Files. **Status:** Local UI coverage: Offboarding6. Retained successor ownership/employment/equipment/final-pay UI; empty record fixture does not prove custody transfer.
 
 1. In HR employee record open the retained Offboarding sheet; review immediate/effective-date choices.
 2. Select the required successor and show task/file ownership/equipment/final-pay actions.

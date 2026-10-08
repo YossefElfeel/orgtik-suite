@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "source": "tools/demo/connections.cjs",
+  "mode": "isolated-memory-presentation",
+  "persistence": "discarded when this demo service restarts",
+  "query": {
+    "workspace": [
+      "current",
+      "nile",
+      "orgtik",
+      "spree",
+      "desert",
+      "new"
+    ],
+    "persona": [
+      "current",
+      "mona",
+      "nour",
+      "rana",
+      "omar",
+      "salma",
+      "hoda",
+      "hany"
+    ]
+  },
+  "invariants": [
+    "No account, invoice, CMS, journal or shared clock store is read or changed",
+    "Files references retain workspace, record, version and packaged asset path",
+    "OrgTik won-deal workspace receipts are simulated records, not account/billing provisioning"
+  ],
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/search",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "GET",
+      "path": "/notifications",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "GET",
+      "path": "/files",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "GET",
+      "path": "/campaigns",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "POST",
+      "path": "/campaigns",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "GET",
+      "path": "/workspaces",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "POST",
+      "path": "/workspaces",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "POST",
+      "path": "/files",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "POST",
+      "path": "/notifications",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "POST",
+      "path": "/notifications/read",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "GET",
+      "path": "/tasks",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "POST",
+      "path": "/tasks/batch",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "POST",
+      "path": "/tasks",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "GET",
+      "path": "/leads",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "POST",
+      "path": "/leads",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    },
+    {
+      "method": "POST",
+      "path": "/reset",
+      "workspaceScoped": true,
+      "response": {
+        "simulated": true,
+        "data": "route-specific record or list"
+      },
+      "access": "Presentation persona projection; app admission uses existing signed session separately"
+    }
+  ]
+}

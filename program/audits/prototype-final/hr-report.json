@@ -1,0 +1,126 @@
+{
+  "id": "J7",
+  "scenario": "J7-fdf5df98-0bd8-46f0-8fe9-d79d122cfb78",
+  "steps": [
+    "Retained Hire UI creates employee and workspace invitation",
+    "Hired person activates identity through invitation UI",
+    "Hired person opens accepted workspace",
+    "Owner assigns existing Tasks/Files seats to hired member",
+    "Same directory person creates three connected onboarding tasks",
+    "Tasks opens exact onboarding task",
+    "Hired person submits own leave in retained UI",
+    "HR approves retained leave request",
+    "Approved availability appears in Tasks calendar"
+  ],
+  "captures": [
+    ".qa/j7-approved-availability.png"
+  ],
+  "dataReset": false,
+  "clockMutation": false,
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z",
+    "realNow": "2026-10-08T15:55:12.160Z",
+    "offsetMinutes": -1855
+  },
+  "sandbox": "presentation-HIyjCH",
+  "workspaceId": "ws_signup_95862754566723",
+  "previousAttempt": {
+    "id": "J7",
+    "scenario": "J7-fdf5df98-0bd8-46f0-8fe9-d79d122cfb78",
+    "steps": [
+      "Retained Hire UI creates employee and workspace invitation",
+      "Hired person activates identity through invitation UI",
+      "Hired person opens accepted workspace",
+      "Owner assigns existing Tasks/Files seats to hired member"
+    ],
+    "captures": [],
+    "dataReset": false,
+    "clockMutation": false,
+    "initialClock": {
+      "mode": "frozen",
+      "now": "2026-10-07T09:00:00.000Z",
+      "realNow": "2026-10-08T15:50:10.089Z",
+      "offsetMinutes": -1850
+    },
+    "sandbox": "presentation-HIyjCH",
+    "workspaceId": "ws_signup_95862754566723",
+    "previousAttempt": {
+      "id": "J7",
+      "scenario": "J7-fdf5df98-0bd8-46f0-8fe9-d79d122cfb78",
+      "steps": [
+        "Retained Hire UI creates employee and workspace invitation",
+        "Hired person activates identity through invitation UI",
+        "Hired person opens accepted workspace",
+        "Owner assigns existing Tasks/Files seats to hired member"
+      ],
+      "captures": [],
+      "dataReset": false,
+      "clockMutation": false,
+      "initialClock": {
+        "mode": "frozen",
+        "now": "2026-10-07T09:00:00.000Z",
+        "realNow": "2026-10-08T15:45:49.670Z",
+        "offsetMinutes": -1846
+      },
+      "sandbox": "presentation-HIyjCH",
+      "workspaceId": "ws_signup_95862754566723",
+      "previousAttempt": {
+        "id": "J7",
+        "scenario": "J7-fdf5df98-0bd8-46f0-8fe9-d79d122cfb78",
+        "steps": [
+          "Retained Hire UI creates employee and workspace invitation",
+          "Hired person activates identity through invitation UI",
+          "Hired person opens accepted workspace",
+          "Owner assigns existing Tasks/Files seats to hired member"
+        ],
+        "captures": [],
+        "dataReset": false,
+        "clockMutation": false,
+        "initialClock": {
+          "mode": "frozen",
+          "now": "2026-10-07T09:00:00.000Z",
+          "realNow": "2026-10-08T15:35:29.761Z",
+          "offsetMinutes": -1835
+        },
+        "sandbox": "presentation-HIyjCH",
+        "workspaceId": "ws_signup_95862754566723",
+        "employeeId": "103995343369307",
+        "completed": false,
+        "error": "locator.click: Timeout 90000ms exceeded.",
+        "lastScreen": {
+          "url": "http://localhost:4604/en/presentation",
+          "text": "Skip to content\nHome\nTasks\nFiles\nHR\nHR\nPeople presentation\nMain\nAttendance\nCalendar\nEmployee\nProjects\nDepartment\nManagement\nTime Off\nPayroll\nLoans\nHiring\nOverall\nJob Hiring\nCandidates\nRejected\nCommunication\nTickets\nSettings\nConfiguration\nFinance\nPayment queue\n\nGood evening, Journey7\n\nSearch anything\nCtrl K\nJO\nDemo controls\nPrototype · mock data\nPeople presentation\n\nExplore leave, employee changes and people operations in an isolated mock workflow.\n\nReset people scene\n\nSimulated\nOnly this presentation dataset changes.\n\nShow\nLeave balances\nLeave balances\n\nBalances use the selected policy, carryover and sample leave taken.\n\nNour Khaled\n\nEarned 18 · carryover 3 · taken 8\n\n13 days available\n\nRana Saad\n\nEarned 18 · carryover 3 · taken 5\n\n16 days available\n\nSalma Nabil\n\nEarned 18 · carryover 3 · taken 2\n\n19 days available\nLeave policy\nAnnual allowance\nCarryover\nAccrual\nMonthly\nSave policy\n\nMonthly accrual uses nine completed months at the fixed demo date.\n\nExisting employee records, leave approvals, offboarding and payslip flows remain in their current screens."
+        }
+      },
+      "employeeId": "103995343369307",
+      "completed": false,
+      "error": "locator.click: Timeout 90000ms exceeded.",
+      "lastScreen": {
+        "url": "http://localhost:4604/en/presentation",
+        "text": "Skip to content\nHome\nTasks\nFiles\nHR\nHR\nPeople presentation\nMain\nAttendance\nCalendar\nEmployee\nProjects\nDepartment\nManagement\nTime Off\nPayroll\nLoans\nHiring\nOverall\nJob Hiring\nCandidates\nRejected\nCommunication\nTickets\nSettings\nConfiguration\nFinance\nPayment queue\n\nGood evening, Journey7\n\nSearch anything\nCtrl K\nJO\nDemo controls\nPrototype · mock data\nPeople presentation\n\nExplore leave, employee changes and people operations in an isolated mock workflow.\n\nReset people scene\n\nSimulated\nOnly this presentation dataset changes.\n\nShow\nOnboarding\nOnboarding\nSimulated\n\nWith the connected demo runtime, this checklist creates assigned records in Tasks. Standalone previews remain local.\n\nNour Khaled\nCreate onboarding tasks\nRana Saad\nCreate onboarding tasks\nSalma Nabil\nCreate onboarding tasks\n\nExisting employee records, leave approvals, offboarding and payslip flows remain in their current screens."
+      }
+    },
+    "employeeId": "103995343369307",
+    "completed": false,
+    "error": "locator.click: Timeout 90000ms exceeded.",
+    "lastScreen": {
+      "url": "http://localhost:4604/en/auth",
+      "text": "This page couldn’t load\n\nReload to try again, or go back.\n\nReload\nBack"
+    }
+  },
+  "employeeId": "103995343369307",
+  "onboardingTaskIds": [
+    "bridge-task-be4f2958-f01e-4873-a541-7d71dca7e882",
+    "bridge-task-9270295f-fb0a-462b-840f-ea08b8ddb68f",
+    "bridge-task-cab32151-fe57-47c0-898c-7feb6e8f41d4"
+  ],
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z",
+    "realNow": "2026-10-08T15:56:08.655Z",
+    "offsetMinutes": -1856
+  },
+  "clockUnchanged": true,
+  "completed": true
+}

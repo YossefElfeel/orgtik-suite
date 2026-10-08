@@ -1293,5 +1293,10 @@
   "presentation.scheduledFor": "Programmé pour {date} ({zone}). La livraison est simulée.",
   "presentation.legacyFile": "Ancien nom d’exemple ; choisissez un fichier pour joindre une version.",
   "presentation.taskConnected": "La tâche est disponible dans Tasks, la recherche et les notifications de démonstration.",
-  "presentation.taskLocal": "Une référence de tâche a été créée dans cette conversation. Lancez la démonstration connectée pour l’ouvrir dans Tasks."
+  "presentation.taskLocal": "Une référence de tâche a été créée dans cette conversation. Lancez la démonstration connectée pour l’ouvrir dans Tasks.",
+  "presentation.browseChannels": "Parcourir les canaux",
+  "presentation.channelScope": "Canaux publics de cet espace de démonstration. L’adhésion et la lecture suivent le profil choisi.",
+  "presentation.leaveChannel": "Quitter le canal",
+  "presentation.joinChannel": "Rejoindre le canal",
+  "presentation.noPublicChannels": "Aucun canal public pour le moment"
 }

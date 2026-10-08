@@ -2915,6 +2915,23 @@
     "workspaceConfirm": "Create simulated customer workspace?",
     "workspaceImpact": "Create a demo receipt for {name}, owned by {owner}. No existing account, subscription, invoice or billing data changes.",
     "leadAttribution": "Lead attribution",
-    "campaignReference": "Campaign / tags"
+    "campaignReference": "Campaign / tags",
+    "companies": "Companies",
+    "addCompany": "Add company",
+    "companiesNote": "Company records keep their own profile, tags and fields. Link contacts and open their deals; renaming a company updates its linked CRM records in this scene.",
+    "companyContactCount": "Linked contacts: {count}",
+    "noCompanies": "No companies yet",
+    "companyDetails": "Company details",
+    "saveCompany": "Save company",
+    "companySector": "Sector",
+    "companyWebsite": "Company website",
+    "companyNotes": "Company notes",
+    "companyFormError": "Check the company name, field lengths and an optional http(s) website address.",
+    "companyDuplicate": "Another company already has this name.",
+    "companyContacts": "Linked contacts and deals",
+    "openLinkedDeal": "Open deal",
+    "linkContact": "Contact to link",
+    "linkContactAction": "Link contact",
+    "noCompanyContacts": "No contacts linked yet"
   }
 }

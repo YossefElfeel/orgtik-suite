@@ -2017,6 +2017,23 @@
     "campaignId": "Référence de campagne",
     "crmConnectedNote": "La connexion démo partage ces prospects attribués avec Sales dans cet espace. Les prospects du formulaire WM OrgTik reviennent avec page et campagne ; tous les enregistrements sont simulés.",
     "presentationWorkspace": "Espace démo",
-    "emptyWorkspaceLabel": "Nouvel espace"
+    "emptyWorkspaceLabel": "Nouvel espace",
+    "brand": "Profil de marque",
+    "brandNote": "Définissez ton, public et proposition de valeur pour cet espace. L’assistant simulé les utilise dans son brouillon ; cette session les conserve.",
+    "brandVoice": "Ton de marque",
+    "brandAudience": "Public cible",
+    "brandProposition": "Proposition de valeur",
+    "formal": "Formel",
+    "saveBrand": "Enregistrer le profil",
+    "brandSaved": "Profil enregistré dans la scène de cet espace.",
+    "journeyBuilderNote": "Configurez dix étapes maximum, entrée avec consentement comprise. Ajoutez, modifiez, réordonnez ou retirez des étapes ; le test suit cet ordre. Attente et livraison restent simulées.",
+    "stepType": "Type d’étape",
+    "step_email": "E-mail simulé",
+    "step_wait": "Aperçu d’attente",
+    "step_task": "Aperçu du suivi",
+    "moveEarlier": "Avancer",
+    "moveLater": "Reculer",
+    "removeStep": "Retirer l’étape",
+    "addJourneyStep": "Ajouter une étape"
   }
 }

@@ -1,5 +1,12 @@
 # Files: feature benchmark against Google Drive and Dropbox
 
+> Latest presentation overlay — 2026-10-08; A33/A34. Validated merge baseline `eebc85d` through PR37; closure extensions await integration.
+>
+> Packaged records, versions/name conflicts, quota, per-person presentation access, comments, bulk/drag move and versioned Tasks/Chats picking. Arbitrary binary uploads remain deferred.
+>
+> UI/mock package coverage is separate from the historical benchmark below. No competitive rating or score was recalculated. Backend, hosted and external capabilities remain pending/deferred. Evidence: program/audits/prototype-final/tool-report.json; program/audits/files-presentation/README.md; `program/prototype-journeys.md`.
+
+
 Scope: file storage and sharing for a small team. Read on 2026-10-07 from the code (`apps/files`) and the mock (`mock/apps/files.js`, `mock/apps/files/*`), with the audit records in `program/audits/files/`. Paths without a prefix are under `apps/files/`. "Mock" means `mock/apps/files.js`, which is the contract the app is built against. The references (Drive, Dropbox) are described from their public feature sets, in our own words.
 
 **Summary**

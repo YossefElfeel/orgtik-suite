@@ -1,0 +1,19 @@
+{
+"Presentation.companies":{"en":"Companies","ar":"الشركات","de":"Unternehmen","fr":"Entreprises","it":"Aziende"},
+"Presentation.addCompany":{"en":"Add company","ar":"إضافة شركة","de":"Unternehmen hinzufügen","fr":"Ajouter une entreprise","it":"Aggiungi azienda"},
+"Presentation.companiesNote":{"en":"Company records keep their own profile, tags and fields. Link contacts and open their deals; renaming a company updates its linked CRM records in this scene.","ar":"تحتفظ سجلات الشركات بملفاتها ووسومها وحقولها. اربط جهات الاتصال وافتح صفقاتها؛ يحدّث تغيير اسم الشركة سجلات CRM المرتبطة في هذا السيناريو.","de":"Unternehmen besitzen eigene Profile, Tags und Felder. Kontakte verknüpfen und deren Deals öffnen; Umbenennungen aktualisieren verknüpfte CRM-Daten in dieser Szene.","fr":"Les entreprises ont leurs profils, étiquettes et champs. Reliez des contacts et ouvrez leurs affaires ; un renommage actualise les données CRM liées dans cette scène.","it":"Le aziende conservano profili, tag e campi propri. Collega contatti e apri trattative; rinominare aggiorna i record CRM collegati in questa scena."},
+"Presentation.companyContactCount":{"en":"Linked contacts: {count}","ar":"جهات الاتصال المرتبطة: {count}","de":"Verknüpfte Kontakte: {count}","fr":"Contacts liés : {count}","it":"Contatti collegati: {count}"},
+"Presentation.noCompanies":{"en":"No companies yet","ar":"لا توجد شركات بعد","de":"Noch keine Unternehmen","fr":"Aucune entreprise","it":"Nessuna azienda"},
+"Presentation.companyDetails":{"en":"Company details","ar":"تفاصيل الشركة","de":"Unternehmensdetails","fr":"Détails de l’entreprise","it":"Dettagli azienda"},
+"Presentation.saveCompany":{"en":"Save company","ar":"حفظ الشركة","de":"Unternehmen speichern","fr":"Enregistrer l’entreprise","it":"Salva azienda"},
+"Presentation.companySector":{"en":"Sector","ar":"القطاع","de":"Branche","fr":"Secteur","it":"Settore"},
+"Presentation.companyWebsite":{"en":"Company website","ar":"موقع الشركة","de":"Unternehmenswebsite","fr":"Site de l’entreprise","it":"Sito aziendale"},
+"Presentation.companyNotes":{"en":"Company notes","ar":"ملاحظات الشركة","de":"Unternehmensnotizen","fr":"Notes de l’entreprise","it":"Note azienda"},
+"Presentation.companyFormError":{"en":"Check the company name, field lengths and an optional http(s) website address.","ar":"تحقق من اسم الشركة وأطوال الحقول وعنوان موقع اختياري يبدأ بـhttp(s).","de":"Unternehmensname, Feldlängen und optionale http(s)-Website prüfen.","fr":"Vérifiez le nom, la longueur des champs et l’adresse http(s) facultative.","it":"Controlla nome, lunghezza dei campi e indirizzo http(s) facoltativo."},
+"Presentation.companyDuplicate":{"en":"Another company already has this name.","ar":"توجد شركة أخرى بهذا الاسم.","de":"Ein anderes Unternehmen trägt bereits diesen Namen.","fr":"Une autre entreprise porte déjà ce nom.","it":"Un’altra azienda ha già questo nome."},
+"Presentation.companyContacts":{"en":"Linked contacts and deals","ar":"جهات الاتصال والصفقات المرتبطة","de":"Verknüpfte Kontakte und Deals","fr":"Contacts et affaires liés","it":"Contatti e trattative collegati"},
+"Presentation.openLinkedDeal":{"en":"Open deal","ar":"فتح الصفقة","de":"Deal öffnen","fr":"Ouvrir l’affaire","it":"Apri trattativa"},
+"Presentation.linkContact":{"en":"Contact to link","ar":"جهة الاتصال المراد ربطها","de":"Zu verknüpfender Kontakt","fr":"Contact à relier","it":"Contatto da collegare"},
+"Presentation.linkContactAction":{"en":"Link contact","ar":"ربط جهة الاتصال","de":"Kontakt verknüpfen","fr":"Relier le contact","it":"Collega contatto"},
+"Presentation.noCompanyContacts":{"en":"No contacts linked yet","ar":"لم تُربط جهات اتصال بعد","de":"Noch keine verknüpften Kontakte","fr":"Aucun contact lié","it":"Nessun contatto collegato"}
+}

@@ -1,5 +1,12 @@
 # ADM benchmark: OrgTik back office vs Stripe Billing dashboard and Chargebee
 
+> Latest presentation overlay — 2026-10-08; A33/A34. Validated merge baseline `eebc85d` through PR37; closure extensions await integration.
+>
+> Local dunning/grace/mailbox, credits, currency preview, subscription, entity invoice series, sample PDF, pay-link states, tax examples, support and exports; retained reports/pricing/catalog UI. No financial provider/regulatory completion.
+>
+> UI/mock package coverage is separate from the historical benchmark below. No competitive rating or score was recalculated. Backend, hosted and external capabilities remain pending/deferred. Evidence: program/audits/prototype-final/catalog-report.json; program/audits/prototype-final/entity-report.json; program/audits/admin-operations/README.md; `program/prototype-journeys.md`.
+
+
 Date: 2026-10-07. Read from code and mock, not from screen names. Scope: market features beyond the spec register (spec coverage is checked separately).
 
 **Summary**

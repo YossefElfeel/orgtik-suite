@@ -2926,6 +2926,10 @@
     "reminderCreated": "Reminder preview added to mailbox.",
     "reuseNote": "Existing employee records, leave approvals, offboarding and payslip flows remain in their current screens.",
     "onboardingConnected": "Onboarding tasks created in this workspace’s Tasks.",
-    "connectionError": "The connection failed. Try the action again."
+    "connectionError": "The connection failed. Try the action again.",
+    "directoryEmployee": "HR directory employee",
+    "directoryHint": "Use an employee from your signed-in workspace. The onboarding reference stays in this presentation.",
+    "useDirectoryEmployee": "Use for onboarding",
+    "directoryRequired": "Choose an HR employee."
   }
 }

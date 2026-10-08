@@ -1293,5 +1293,10 @@
   "presentation.scheduledFor": "Vorgemerkt für {date} ({zone}). Die Zustellung wird simuliert.",
   "presentation.legacyFile": "Früherer Beispielname; wählen Sie einen Dateieintrag, um eine Version anzuhängen.",
   "presentation.taskConnected": "Die Aufgabe ist in Tasks, der Suite-Suche und den Demo-Benachrichtigungen verfügbar.",
-  "presentation.taskLocal": "Ein Aufgabenverweis wurde in dieser Unterhaltung erstellt. Starten Sie die verbundene Demo, um ihn in Tasks zu öffnen."
+  "presentation.taskLocal": "Ein Aufgabenverweis wurde in dieser Unterhaltung erstellt. Starten Sie die verbundene Demo, um ihn in Tasks zu öffnen.",
+  "presentation.browseChannels": "Kanäle durchsuchen",
+  "presentation.channelScope": "Öffentliche Kanäle dieses Demo-Arbeitsbereichs. Mitgliedschaft und Lesestatus folgen der gewählten Person.",
+  "presentation.leaveChannel": "Kanal verlassen",
+  "presentation.joinChannel": "Kanal beitreten",
+  "presentation.noPublicChannels": "Noch keine öffentlichen Kanäle"
 }

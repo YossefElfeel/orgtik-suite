@@ -1,0 +1,2 @@
+import { z } from "zod";
+export const companySchema=(message:string)=>z.object({name:z.string().trim().min(1,message).max(120,message),sector:z.string().max(80,message),website:z.string().max(200,message).refine(value=>!value||/^https?:\/\/[^\s]+$/.test(value),message),notes:z.string().max(2000,message),tag:z.string().max(50,message),fieldName:z.string().max(50,message),fieldValue:z.string().max(240,message)});

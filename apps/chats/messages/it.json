@@ -1293,5 +1293,10 @@
   "presentation.scheduledFor": "In coda per {date} ({zone}). La consegna è simulata.",
   "presentation.legacyFile": "Nome di esempio precedente; scegli un file per allegare una versione.",
   "presentation.taskConnected": "L’attività è disponibile in Tasks, nella ricerca e nelle notifiche della demo.",
-  "presentation.taskLocal": "Un riferimento all’attività è stato creato in questa conversazione. Avvia la demo connessa per aprirlo in Tasks."
+  "presentation.taskLocal": "Un riferimento all’attività è stato creato in questa conversazione. Avvia la demo connessa per aprirlo in Tasks.",
+  "presentation.browseChannels": "Esplora canali",
+  "presentation.channelScope": "Canali pubblici di questo spazio demo. Iscrizione e lettura seguono la persona selezionata.",
+  "presentation.leaveChannel": "Lascia canale",
+  "presentation.joinChannel": "Unisciti al canale",
+  "presentation.noPublicChannels": "Nessun canale pubblico ancora"
 }

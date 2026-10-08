@@ -2915,6 +2915,23 @@
     "workspaceConfirm": "إنشاء مساحة عمل عميل محاكاة؟",
     "workspaceImpact": "أنشئ إيصال عرض لـ{name} يملكه {owner}. لا يتغير حساب أو اشتراك أو فاتورة أو بيانات فوترة حالية.",
     "leadAttribution": "إسناد مصدر العميل المحتمل",
-    "campaignReference": "الحملة / الوسوم"
+    "campaignReference": "الحملة / الوسوم",
+    "companies": "الشركات",
+    "addCompany": "إضافة شركة",
+    "companiesNote": "تحتفظ سجلات الشركات بملفاتها ووسومها وحقولها. اربط جهات الاتصال وافتح صفقاتها؛ يحدّث تغيير اسم الشركة سجلات CRM المرتبطة في هذا السيناريو.",
+    "companyContactCount": "جهات الاتصال المرتبطة: {count}",
+    "noCompanies": "لا توجد شركات بعد",
+    "companyDetails": "تفاصيل الشركة",
+    "saveCompany": "حفظ الشركة",
+    "companySector": "القطاع",
+    "companyWebsite": "موقع الشركة",
+    "companyNotes": "ملاحظات الشركة",
+    "companyFormError": "تحقق من اسم الشركة وأطوال الحقول وعنوان موقع اختياري يبدأ بـhttp(s).",
+    "companyDuplicate": "توجد شركة أخرى بهذا الاسم.",
+    "companyContacts": "جهات الاتصال والصفقات المرتبطة",
+    "openLinkedDeal": "فتح الصفقة",
+    "linkContact": "جهة الاتصال المراد ربطها",
+    "linkContactAction": "ربط جهة الاتصال",
+    "noCompanyContacts": "لم تُربط جهات اتصال بعد"
   }
 }

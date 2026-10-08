@@ -128,7 +128,17 @@
     "currencyTitle": "Programmer le changement de devise ?",
     "currencyImpact": "Conservez le cycle actuel en {current}. À partir du {date}, utilisez {next} et la quantité et le prix prévisualisés. Les anciennes factures et les liens payés conservent leur devise d’origine.",
     "confirmCurrency": "Programmer le changement de cycle",
-    "currencyScheduled": "Changement de devise simulé programmé"
+    "currencyScheduled": "Changement de devise simulé programmé",
+    "legalEntity": "Entité juridique simulée",
+    "entityCH": "OrgTik Suisse · CH",
+    "entityAE": "OrgTik EAU · AE",
+    "entitySeriesNote": "Chaque entité conserve son préfixe et sa séquence. Les anciens réglages globaux de la démo concernent uniquement CH. Les factures existantes restent intactes.",
+    "nextCounter": "Prochain compteur exemple",
+    "counterError": "Choisissez un entier entre {minimum} et 999999. Le compteur ne peut pas reculer.",
+    "entitySeriesSaved": "Série de factures de l’entité enregistrée",
+    "counterUnavailable": "Ce numéro exemple est indisponible. Choisissez un autre préfixe ou augmentez le compteur.",
+    "entityReserved": "{number} réservé pour {entity}.",
+    "reservedNumbers": "Numéros exemples réservés"
   },
   "CustomerPreview": {
     "heading": "Prévisualisation client · {name}",

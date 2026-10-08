@@ -2926,6 +2926,10 @@
     "reminderCreated": "Aperçu du rappel ajouté.",
     "reuseNote": "Les écrans existants du personnel, des congés, du départ et des fiches de paie sont conservés.",
     "onboardingConnected": "Les tâches d’intégration ont été créées dans Tasks de cet espace.",
-    "connectionError": "La connexion a échoué. Réessayez."
+    "connectionError": "La connexion a échoué. Réessayez.",
+    "directoryEmployee": "Employé de l’annuaire RH",
+    "directoryHint": "Choisissez un employé de votre espace connecté. La référence d’intégration reste dans cette présentation.",
+    "useDirectoryEmployee": "Utiliser pour l’intégration",
+    "directoryRequired": "Choisissez un employé RH."
   }
 }

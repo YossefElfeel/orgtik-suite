@@ -2915,6 +2915,23 @@
     "workspaceConfirm": "Creare uno spazio cliente simulato?",
     "workspaceImpact": "Crea una ricevuta demo per {name}, intestata a {owner}. Nessuna modifica ad account, abbonamenti, fatture o dati di fatturazione esistenti.",
     "leadAttribution": "Attribuzione del lead",
-    "campaignReference": "Campagna / tag"
+    "campaignReference": "Campagna / tag",
+    "companies": "Aziende",
+    "addCompany": "Aggiungi azienda",
+    "companiesNote": "Le aziende conservano profili, tag e campi propri. Collega contatti e apri trattative; rinominare aggiorna i record CRM collegati in questa scena.",
+    "companyContactCount": "Contatti collegati: {count}",
+    "noCompanies": "Nessuna azienda",
+    "companyDetails": "Dettagli azienda",
+    "saveCompany": "Salva azienda",
+    "companySector": "Settore",
+    "companyWebsite": "Sito aziendale",
+    "companyNotes": "Note azienda",
+    "companyFormError": "Controlla nome, lunghezza dei campi e indirizzo http(s) facoltativo.",
+    "companyDuplicate": "Un’altra azienda ha già questo nome.",
+    "companyContacts": "Contatti e trattative collegati",
+    "openLinkedDeal": "Apri trattativa",
+    "linkContact": "Contatto da collegare",
+    "linkContactAction": "Collega contatto",
+    "noCompanyContacts": "Nessun contatto collegato"
   }
 }

@@ -1,0 +1,160 @@
+{
+  "scope": "Bounded retained-surface browser walkthrough; no reset, clock mutation or new backend/security tests",
+  "clockMutation": false,
+  "businessDataReset": false,
+  "journeys": [
+    {
+      "id": "J10",
+      "title": "Support customer ticket/reply and service request",
+      "status": "passed",
+      "steps": [
+        {
+          "name": "Customer creates ticket through retained support UI",
+          "pass": true
+        },
+        {
+          "name": "Customer reply appears in retained conversation",
+          "pass": true
+        },
+        {
+          "name": "Staff replies in retained ADM ticket UI",
+          "pass": true
+        },
+        {
+          "name": "Staff reply reaches customer conversation",
+          "pass": true
+        },
+        {
+          "name": "Customer adds default synthetic payment card",
+          "pass": true
+        },
+        {
+          "name": "Customer creates managed-service request in UI",
+          "pass": true
+        },
+        {
+          "name": "Staff reviews and quotes service request",
+          "pass": true
+        },
+        {
+          "name": "Customer accepts and pays simulated service quote",
+          "pass": true
+        },
+        {
+          "name": "Staff delivers managed-service work",
+          "pass": true
+        },
+        {
+          "name": "Customer approves delivery and request reaches Completed",
+          "pass": true
+        }
+      ],
+      "remaining": [],
+      "requestId": "sr_1106"
+    }
+  ],
+  "startedAt": "2026-10-08T15:45:36.531Z",
+  "previousAttempt": {
+    "startedAt": "2026-10-08T13:47:19.911Z",
+    "sandbox": "presentation-Xw6DH3",
+    "workspaceId": "ws_signup_269650558394283",
+    "clockUnchanged": true,
+    "status": "partial",
+    "steps": [
+      {
+        "journey": "J1",
+        "name": "Existing website pricing navigation opens"
+      },
+      {
+        "journey": "J2",
+        "name": "Owner creates invitation through Team UI"
+      },
+      {
+        "journey": "J2",
+        "name": "Team UI exposes current invitation delivery link"
+      },
+      {
+        "journey": "J7",
+        "name": "HR presentation opens using selected workspace handoff"
+      },
+      {
+        "journey": "J7",
+        "name": "Onboarding checklist screen opens"
+      },
+      {
+        "journey": "J7",
+        "name": "Retained workspace leave screen opens"
+      },
+      {
+        "journey": "J10",
+        "name": "Customer creates ticket through retained support UI"
+      },
+      {
+        "journey": "J10",
+        "name": "Customer reply appears in retained conversation"
+      },
+      {
+        "journey": "J10",
+        "name": "Retained managed-service request screen opens"
+      },
+      {
+        "journey": "J15",
+        "name": "Retained employee offboarding sheet opens"
+      }
+    ],
+    "limits": "J1 outdated heading selector, J2 acceptance hydration wait corrected; J12 workspace token correctly denied staff screen and staff-target correction prepared; J15 immediate completion selector corrected. No complete journey passed."
+  },
+  "previousRun": {
+    "startedAt": "2026-10-08T15:38:13.356Z",
+    "sandbox": "presentation-HIyjCH",
+    "journeys": [
+      {
+        "id": "J10",
+        "title": "Support customer ticket/reply and service request",
+        "status": "partial",
+        "steps": [
+          {
+            "name": "Customer creates ticket through retained support UI",
+            "pass": true
+          },
+          {
+            "name": "Customer reply appears in retained conversation",
+            "pass": true
+          },
+          {
+            "name": "Staff replies in retained ADM ticket UI",
+            "pass": true
+          },
+          {
+            "name": "Staff reply reaches customer conversation",
+            "pass": true
+          }
+        ],
+        "remaining": [
+          "locator.waitFor: Error: strict mode violation: getByRole('dialog') resolved to 2 elements:\n    1) <div tabindex=\"0\" role=\"dialog\" aria-modal=\"false\" data-type=\"success\" aria-labelledby=\"_r_10_\" data-orgtik-toast=\"success\" class=\"relative rounded-overlay border border-line bg-overlay text-fg shadow-overlay transition-[opacity,translate] duration-(--ot-duration-slow) ease-ot-out-strong data-[starting-style]:-translate-y-3 data-[starting-style]:opacity-0 data-[ending-style]:opacity-0 data-[limited]:opacity-0\">…</div> aka getByRole('dialog', { name: 'Visa ending in 4242 added.' })\n    2) <div id=\"_r_5_\" role=\"dialog\" tabindex=\"-1\" data-closed=\"\" data-ending-style=\"\" data-base-ui-focusable=\"\" aria-labelledby=\"base-ui-_r_7_\" aria-describedby=\"base-ui-_r_8_\" class=\"fixed start-1/2 top-1/2 z-50 flex max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] -translate-y-1/2 flex-col ltr:-translate-x-1/2 rtl:translate-x-1/2 rounded-panel border border-line bg-overlay text-fg shadow-overlay outline-none transition-[opacity,scale] duration-(--ot-duration-base) ease-ot-out-strong data-[starting-style]…>…</div> aka getByRole('dialog', { name: 'Add a card' })\n"
+        ],
+        "lastScreen": {
+          "url": "http://localhost:4600/billing/payment-methods",
+          "text": "Skip to content\nHome\nTasks\nFiles\nHR\nOrgTik\nHome\nAccount presentation\nTools and plans\nTeam\nServices\nSupport\nNotifications\nMock mailbox\nBilling\nSubscriptions\nInvoices\nPayment methods\nBilling details\nWorkspace\nWorkspace settings\nRetained journey 12983242\nOwner\nRO\nDemo controls\nPrototype · mock data\nPayment methods\n\nThe cards your renewals are charged to. The default one is charged first.\n\nAdd a card\n\nVisa •••• 4242\nDefault\n\nExpires 12/30\n\nRemove\nVisa ending in 4242 added.\nAdd a card\n\nRenewals can be charged to it once it's added.\n\nYour card details go to the payment provider\n\nIn the live product you type the card into the payment provider's own secure form, and OrgTik never sees the full number. Here a test card stands in for it.\nCard brand\nVisa\nLast 4 digits*\n\nFour digits, as printed on the card.\n\nExpiry*\n\nMonth and year, as MM/YY.\n\nMake this the default card\nRenewals are charged to the default card first.\nCancel\nAdd card"
+        }
+      }
+    ],
+    "clockUnchanged": true
+  },
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z",
+    "realNow": "2026-10-08T15:45:36.569Z",
+    "offsetMinutes": -1846
+  },
+  "sandbox": "presentation-HIyjCH",
+  "workspaceId": "ws_signup_183821844410217",
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z",
+    "realNow": "2026-10-08T15:48:39.283Z",
+    "offsetMinutes": -1849
+  },
+  "clockUnchanged": true,
+  "finishedAt": "2026-10-08T15:48:39.329Z"
+}

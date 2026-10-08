@@ -1,0 +1,22 @@
+{
+  "checks": [
+    "File metadata is workspace/version scoped",
+    "Files share reaches suite notices",
+    "Tasks retains Files record/version",
+    "Template chooser populates correct task",
+    "Saved template can be reused",
+    "Joined public channel opens composer",
+    "Chats reference matches shared record",
+    "Discussion task opens exact target",
+    "Theme carried across handoff",
+    "Timezone carried across handoff",
+    "Cross-tool notice visible"
+  ],
+  "journeys": [
+    "J8",
+    "J13",
+    "J14"
+  ],
+  "scope": "Workspace packaged Files→Tasks/Chats; existing signed handoff/preferences/feed; no business reset or clock advance",
+  "completed": true
+}

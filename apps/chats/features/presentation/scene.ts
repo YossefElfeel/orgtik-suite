@@ -1,6 +1,7 @@
-export type DemoFileReference = { id: string; name: string; workspace: string; version: number; source: string; path?: string };
+export type DemoFileReference = { id: string; name: string; workspace: string; version: number; source: string; path?: string; versions?: { version: number; source: string }[] };
 export type DemoMessage = { id: string; channel: string; author: string; body: string; bold?: boolean; italic?: boolean; bullets?: boolean; file?: string; fileRef?: DemoFileReference; saved?: boolean; reminder?: boolean; task?: string; scheduled?: boolean; scheduledAt?: string; scheduledTimeZone?: string };
-export type ChatScene = { channels: string[]; messages: DemoMessage[]; read: string[] };
+export type ChatScene = { channels: string[]; messages: DemoMessage[]; read: string[]; joinedBy?: Record<string, string[]>; readBy?: Record<string, string[]> };
+export const PUBLIC_DEMO_CHANNELS = ["launch-review", "design-team", "announcements", "customer-feedback"];
 export const sceneKey = (workspace: string) => `orgtik:presentation:chats:${workspace}`;
 export function seedScene(workspace: string): ChatScene {
   if (workspace === "new") return { channels: [], messages: [], read: [] };
@@ -15,4 +16,4 @@ export function seedScene(workspace: string): ChatScene {
   };
 }
 export const personaNames: Record<string, string> = { current: "Nour Khaled", mona: "Mona Adel", nour: "Nour Khaled", rana: "Rana Saad", omar: "Omar Farouk", salma: "Salma Nabil", hoda: "Hoda Ashraf", hany: "Hany Samir" };
-export const workspaceNames: Record<string, string> = { current: "Nile Studio", nile: "Nile Studio", orgtik: "OrgTik", spree: "Spree Atelier", desert: "Desert Works", new: "New workspace" };
+export const workspaceNames: Record<string, string> = { current: "Nile Foods", nile: "Nile Foods", orgtik: "OrgTik", spree: "Spree", desert: "Desert Works", new: "New workspace" };

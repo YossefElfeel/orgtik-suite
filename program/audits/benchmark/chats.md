@@ -1,5 +1,12 @@
 # Chats: feature benchmark (vs Slack, Microsoft Teams)
 
+> Latest presentation overlay — 2026-10-08; A33/A34. Validated merge baseline `eebc85d` through PR37; closure extensions await integration.
+>
+> Workspace tab history, versioned Files, connected Tasks, rich formatting/custom schedule, browse/join/read-by and simulated call stage. Membership persona final evidence is separate from the original28-check scene.
+>
+> UI/mock package coverage is separate from the historical benchmark below. No competitive rating or score was recalculated. Backend, hosted and external capabilities remain pending/deferred. Evidence: program/audits/prototype-final/channel-report.json; program/audits/prototype-final/tool-report.json; program/audits/prototype-final/channel-report.json; program/audits/chats-presentation/README.md; `program/prototype-journeys.md`.
+
+
 Read from the code on 2026-10-07: `apps/chats`, plus the records in `program/audits/chats/`. Nothing was run.
 
 Chats is the Somion HQ prototype. All its data lives in one in-memory zustand store (`store/index.ts`), filled from `mock/seed.ts` and `mock/simulator.ts`. `mock/apps/chats.js` only declares the launcher tile and the grants; it has no API. In the evidence column, paths are relative to `apps/chats`.
