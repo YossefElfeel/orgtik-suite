@@ -12,6 +12,14 @@ on:
         type: choice
         options: [preview, production]
         default: preview
+      base_revision:
+        description: Last deployed revision to compare for a manual release
+        type: string
+        default: origin/main^
+      deploy_projects:
+        description: Explicit existing-project keys for a manual main release
+        type: string
+        default: ""
       preview_projects:
         description: Preview scope (production always uses the affected graph)
         type: choice
@@ -49,8 +57,9 @@ jobs:
       - id: affected
         env:
           DEPLOY_ENV: ${{ (github.event_name == 'push' || inputs.environment == 'production') && 'production' || 'preview' }}
-          DEPLOY_PROJECTS: ${{ inputs.preview_projects == 'build-only' && 'mock' || github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'mock,sos,website' || '' }}
-          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || 'origin/main' }}
+          DEPLOY_PROJECTS: ${{ inputs.deploy_projects || (inputs.preview_projects == 'build-only' && 'mock' || github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'milestone' || contains(github.event.pull_request.labels.*.name, 'preview:milestone')) && 'mock,sos,website' || '') }}
+          DEPLOY_MANUAL_MAIN: ${{ github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && '1' || '0' }}
+          TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || inputs.base_revision || 'origin/main' }}
           TURBO_SCM_HEAD: HEAD
           PREVIEW_VERIFY_ONLY: ${{ github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'verify-readiness' || contains(github.event.pull_request.labels.*.name, 'preview:verify-only')) && '1' || '0' }}
         run: |
@@ -84,7 +93,7 @@ jobs:
       - run: node tools/dev/old-layout-links.mjs
       - name: Validate the production revision before deploying
         env:
-          TURBO_SCM_BASE: ${{ github.event.before || 'origin/main^' }}
+          TURBO_SCM_BASE: ${{ github.event.before || inputs.base_revision || 'origin/main^' }}
           TURBO_SCM_HEAD: HEAD
         run: |
           pnpm turbo run typecheck i18n:check test --affected --continue

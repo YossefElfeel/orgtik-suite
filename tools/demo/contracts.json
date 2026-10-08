@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "source": "tools/demo/connections.cjs",
+  "source": "mock/lib/presentation.js",
   "mode": "isolated-memory-presentation",
   "persistence": "discarded when this demo service restarts",
   "query": {
