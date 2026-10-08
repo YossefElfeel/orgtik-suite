@@ -1,5 +1,6 @@
 import { type ReactNode } from "react";
 import { type Locale } from "../locale.js";
+import { type DemoOptions } from "../demo/DemoPanel.js";
 export type RailApp = {
     id: string;
     label: string;
@@ -45,6 +46,7 @@ export declare function TopBar({ start, end, onOpenNavigation }: {
     onOpenNavigation?: () => void;
 }): import("react").JSX.Element;
 export type SuiteShellProps = {
+    demo?: DemoOptions;
     rail: ReactNode;
     sidebar: ReactNode;
     /** TopBar's contents: `start` (search, workspace switcher) and `end` (help, notifications, UserMenu). */
@@ -60,5 +62,5 @@ export type SuiteShellProps = {
  * The suite's frame: rail + sidebar + top bar + banner slot + content. Under 1024px the rail
  * and sidebar move into a sheet opened from the top bar.
  */
-export declare function SuiteShell({ rail, sidebar, topBar, banner, children }: SuiteShellProps): import("react").JSX.Element;
+export declare function SuiteShell(props: SuiteShellProps): import("react").JSX.Element;
 //# sourceMappingURL=SuiteShell.d.ts.map

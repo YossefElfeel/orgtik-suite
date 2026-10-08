@@ -132,6 +132,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
 
   return (
     <SuiteShell
+      demo={{ enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "sales", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
       banner={banner}
       rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref={apps[0]?.href ?? SOS_URL} />}
       sidebar={<Sidebar title={ts("appName")} sections={sections} footer={sections.some((s) => s.label === t("sectionMoving")) ? <p className="px-2 text-caption text-fg-subtle">{t("movingNote")}</p> : undefined} />}

@@ -87,6 +87,8 @@ Each decision gets a `D-###.md` file with its context, options, decision, conseq
 - [D-071](D-071.md): Pinned Files references require current consumer and Files permissions; packaged records are created explicitly and idempotently (2026-10-08, merged through PR18 after CI).
 - [D-072](D-072.md): Canonical bounded whiteboard scenes live in immutable Files versions, with current source/Files authorization and explicit save/recovery (2026-10-08, package acceptance pending).
 
+- [D-073](D-073.md): Accepted presentation scope — nine-tool UI/mock prototype, existing backend frozen, isolated demo data and lightweight evidence (2026-10-08).
+
 ## Proposed
 
 Each one has a full write-up: context, options with their trade-offs, the proposal, consequences, and the evidence still pending. They were drafted in session 5 for the G0 review.

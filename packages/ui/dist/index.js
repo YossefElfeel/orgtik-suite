@@ -35,6 +35,7 @@ export { Combobox, MultiSelect } from "./components/Combobox.js";
 export { NumberField, MoneyField, PercentField } from "./components/NumberField.js";
 export { Progress, Meter, LimitMeter, limitState } from "./components/Meters.js";
 export { AuthSuccess, useAuthSuccess } from "./components/AuthSuccess.js";
+export { DemoPanel, DemoProvider, DemoStateView, DemoSceneBanner, SimulatedTag, useDemoScene, DEMO_PERSONAS, DEMO_WORKSPACES, DEMO_STATES, DEMO_SCENARIOS } from "./demo/DemoPanel.js";
 export { Stat } from "./components/Stat.js";
 export { Tag, FilterChips } from "./components/Chips.js";
 export { LocalizedField } from "./components/LocalizedField.js";
