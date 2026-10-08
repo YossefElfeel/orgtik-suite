@@ -17,13 +17,16 @@ import { buildPages } from "./pages.mjs";
 import { buildCatalog } from "./catalog.mjs";
 import { buildPricing } from "./pricing.mjs";
 import { applyPlatformCommerceCopy, platformPricingEntry } from "./platform-pricing.mjs";
+import { applyWebsiteAlignment, websiteAlignmentRedirects } from "./website-alignment.mjs";
 import { buildMedia } from "./media.mjs";
 import { buildSeo } from "./seo.mjs";
 import { restoredRoadmap, followupSource, ROADMAP_REF, WEBSITE_REF } from "./source-overrides.mjs";
 import defaults from "../defaults.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const repo = path.resolve(here, "..", "..", "..", "..", "orgtik-website");
+const repo = process.env.SEED_SOURCE_REPO
+  ? path.resolve(process.env.SEED_SOURCE_REPO)
+  : path.resolve(here, "..", "..", "..", "..", "..", "orgtik-website");
 // Read the pinned upstream source regardless of the checkout: cms/connect turns the pages
 // into readers of this seed, and website main remains a recovery point.
 // Pin the latest integrated upstream revision without changing website main. SEED_REF may
@@ -227,7 +230,11 @@ const out = {
   uses: site_.uses,
   pricing,
 };
-fs.writeFileSync(path.join(here, "website.json"), JSON.stringify(out, null, 2) + "\n");
+applyWebsiteAlignment(out.entries);
+out.seo.redirects = websiteAlignmentRedirects();
+out.source.overrides.websiteAlignment = { repo: "orgtik-suite", revision: "bfd1238", file: "mock/apps/wm/seed/website-alignment.json", reason: "Approved Partners, account setup, Imprint and Legal content from the current website" };
+const output = process.env.SEED_OUTPUT_FILE ? path.resolve(process.env.SEED_OUTPUT_FILE) : path.join(here, "website.json");
+fs.writeFileSync(output, JSON.stringify(out, null, 2) + "\n");
 console.log(
   `seed: ${cat.strings.reduce((n, e) => n + e.layout.reduce((m, x) => m + x.slots.length, 0), 0)} strings in ${cat.strings.length} groups, ${cat.legal.length} legal documents, ${cat.roadmap.length} roadmap items, ${cat.ideas.length} ideas, ${site_.pages.length} pages (${site_.pages.reduce((n, p) => n + p.layout.filter((s) => s.kind === "copy").reduce((m, s) => m + s.slots.length, 0), 0)} copy slots), ${site_.global.length} global, ${caseStudies.length} case studies, ${families.length} service families, ${services.length} services, ${modules.length} software modules, ${articles.length} articles from orgtik-website@${commit}${dirty ? " (uncommitted changes!)" : ""} -> apps/wm/seed/website.json`,
 );

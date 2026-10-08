@@ -1,0 +1,13 @@
+# CMS publishing — stakeholder prototype acceptance
+
+The final actual local workflow passes **19 bounded assertions**, with **5 captures and 5 matching source hashes** in [publishing-report.json](publishing-report.json). Mona edits and saves a Partners draft, Karim approves it, and Mona publishes it. The draft stays off the public website until publication; reopening the website displays the new value. These are selected flow assertions, not 19 separate CMS journeys.
+
+The website reads a complete published candidate from existing CMS endpoints before creating its page instances. Unconfigured builds keep the packaged content. A configured runtime retains the last good public snapshot locally and uses it during an outage or malformed response. Fixed template records, route slugs and required English data blocks are checked before replacement/cache writes. Optional metadata keeps its existing defaults, and legitimate empty dynamic lists remain allowed. Draft preview uses its separate existing loader and never populates this public cache.
+
+Nine focused loader tests and three seed-regeneration regressions pass separately. Actual regeneration retains all **75 entry IDs and locale trees**, with unchanged media, SEO/redirects, ideas, pricing, formats and case-study data; only source provenance/build metadata differs. Approved Partners, purchasing/component strings, account setup, Imprint and Legal updates survive the archived-source extraction. Regeneration writes code seed output, not existing runtime edits or journals.
+
+Website purchase/account tests pass in their existing 49/10 groups. The final local build succeeds and produces **52 static addresses**, a 404 page, sitemap.xml (47 URLs) and noindex robots.txt. These are existing website-only SEO exports; no automatic hosted deployment was performed.
+
+Representative results: [published CMS record](partners-published-cms-en.png), [public website publication](partners-published-website-en.png), [native mobile publication](partners-published-website-mobile-en.png), and [last-good website during outage](partners-last-good-website-en.png). The mobile capture opens at its native viewport and lets the existing entrance animation settle. No website visual redesign, checkout arithmetic change, production/shared reset, clock advancement, security work or configured resource recreation occurred. Vercel remains paused.
+
+Local demo origins: CMS `http://localhost:3157`, website `http://localhost:4197`, mock APIs 6300/6307. Configure `VITE_CMS_API` for runtime publication loading; preview uses `VITE_WM_ORIGIN`. Without a CMS runtime origin, the packaged website remains usable. Reopen or reload the website after publishing; this prototype does not claim live updates in an already-open page.

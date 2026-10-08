@@ -1,0 +1,107 @@
+{
+  "realm": "cms-alignment-local",
+  "checks": [
+    {
+      "name": "Private frozen realm",
+      "passed": true
+    },
+    {
+      "name": "Actual saved draft",
+      "passed": true
+    },
+    {
+      "name": "Draft is not on public website",
+      "passed": true
+    },
+    {
+      "name": "partners-approved-en fits",
+      "passed": true
+    },
+    {
+      "name": "Different person approves draft",
+      "passed": true
+    },
+    {
+      "name": "Actual CMS publication",
+      "passed": true
+    },
+    {
+      "name": "partners-published-cms-en fits",
+      "passed": true
+    },
+    {
+      "name": "Reopened website loads new publication",
+      "passed": true
+    },
+    {
+      "name": "partners-published-website-en fits",
+      "passed": true
+    },
+    {
+      "name": "Actual browser last-good fallback during CMS outage",
+      "passed": true
+    },
+    {
+      "name": "partners-last-good-website-en fits",
+      "passed": true
+    },
+    {
+      "name": "Incomplete CMS data retains last publication",
+      "passed": true
+    },
+    {
+      "name": "partners-published-website-mobile-en fits",
+      "passed": true
+    },
+    {
+      "name": "Business clock unchanged",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/website/landing-directions/src/main.jsx",
+      "passed": true
+    },
+    {
+      "name": "Frozen source apps/website/landing-directions/src/content/published.js",
+      "passed": true
+    },
+    {
+      "name": "Frozen source mock/apps/wm/seed/website-alignment.mjs",
+      "passed": true
+    },
+    {
+      "name": "Frozen source mock/apps/wm/seed/website-alignment.json",
+      "passed": true
+    },
+    {
+      "name": "Frozen source mock/apps/wm/seed/build.mjs",
+      "passed": true
+    }
+  ],
+  "captures": [
+    "partners-approved-en.png",
+    "partners-published-cms-en.png",
+    "partners-published-website-en.png",
+    "partners-last-good-website-en.png",
+    "partners-published-website-mobile-en.png"
+  ],
+  "source": {
+    "apps/website/landing-directions/src/main.jsx": "52f1d5c839cc99ef0ab7cbd410e94d7b006985f0f6a6709d3b9852f6446a63ed",
+    "apps/website/landing-directions/src/content/published.js": "358ced4e3708bf3af310eb5e31d5cdb77b93a022be5657e3d7c2d7ec1947bc87",
+    "mock/apps/wm/seed/website-alignment.mjs": "70ed9ea87a526c47a8eba709a84d46e71f2a13d736d582d629a1fcc9add8665c",
+    "mock/apps/wm/seed/website-alignment.json": "c777d93f723e100d0b7956b45c81cd3e335db474037089337ef4279bf514823a",
+    "mock/apps/wm/seed/build.mjs": "acf8b034ffd352a4fe65dabea32480137f3b0cd77ab27850236d65a89bb2ea16"
+  },
+  "dataReset": false,
+  "clockMutation": false,
+  "publicationIsLocalMock": true,
+  "initialClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "finalClock": {
+    "mode": "frozen",
+    "now": "2026-10-07T09:00:00.000Z"
+  },
+  "completed": true
+}

@@ -282,6 +282,7 @@
       "apps/wm/library.js",
       "apps/wm/ops.js",
       "apps/wm/permissions.js",
+      "apps/wm/seed/website-alignment.json",
       "apps/wm/seed/website.json",
       "apps/wm/state-codec.js",
       "apps/wm/suggestions.js",

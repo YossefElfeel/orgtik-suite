@@ -1,0 +1,51 @@
+const fs = require("node:fs"), path = require("node:path"), assert = require("node:assert/strict"), crypto = require("node:crypto");
+const { chromium } = require("C:/Users/yosse/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright");
+const API = "http://localhost:6300", CMS = "http://localhost:6307/v2", WM = "http://localhost:3157", SITE = "http://localhost:4197";
+const messages = JSON.parse(fs.readFileSync("apps/wm/messages/en.json"));
+let badge;
+const report = { realm: "cms-alignment-local", checks: [], captures: [], source: {}, dataReset: false, clockMutation: false, publicationIsLocalMock: true };
+for (const file of ["apps/website/landing-directions/src/main.jsx", "apps/website/landing-directions/src/content/published.js", "mock/apps/wm/seed/website-alignment.mjs", "mock/apps/wm/seed/website-alignment.json", "mock/apps/wm/seed/build.mjs"]) report.source[file] = crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
+const check = (name, value) => { assert.ok(value, name); report.checks.push({ name, passed: true }); };
+async function call(origin, url, session, body) { const response = await fetch(origin + url, { method: body ? "POST" : "GET", headers: { ...(body ? { "Content-Type": "application/json" } : {}), ...(session ? { Authorization: "Bearer " + session.tokens.accessToken } : {}) }, ...(body ? { body: JSON.stringify(body) } : {}) }); if (!response.ok) throw Error(url + " " + response.status); return (await response.json()).data; }
+let browser, editorPage;
+(async () => {
+  const status = await call(API, "/__mock/status"); check("Private frozen realm", status.journal.sandbox === report.realm && status.clock.mode === "frozen"); report.initialClock = { mode: status.clock.mode, now: status.clock.now };
+  const editor = await call(API, "/api/auth/login", null, { email: "mona.adel@orgtik.test", password: "Local@2026", mode: "staff", target: "wm" });
+  const approver = await call(API, "/api/auth/login", null, { email: "karim.hassan@orgtik.test", password: "Local@2026", mode: "staff", target: "wm" });
+  const liveBefore = (await call(CMS, "/public/entries/page")).find(row => row.id === "pg_partners").locales.en.intro.badge;
+  badge = liveBefore === "Mock partners · stakeholder preview" ? "Mock partners · CMS presentation" : "Mock partners · stakeholder preview";
+  browser = await chromium.launch({ headless: true });
+  async function open(session) { const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } }); const page = await context.newPage(); page.setDefaultTimeout(30000); const code = await call(API, "/api/auth/handoff", session, { audience: "staff:wm" }); await page.goto(WM + "/en/auth?code=" + encodeURIComponent(code.code) + "&redirect=" + encodeURIComponent("/content/pages/pg_partners"), { waitUntil: "domcontentloaded", timeout: 60000 }); await page.getByRole("heading", { name: "Partners", exact: true }).waitFor(); return page; }
+  async function shot(page, name) { await page.screenshot({ path: path.join(__dirname, name + ".png") }); report.captures.push(name + ".png"); check(name + " fits", await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)); }
+  editorPage = await open(editor);
+  const field = editorPage.getByRole("textbox", { name: messages.Fields.badge, exact: true });
+  await field.fill(badge); await editorPage.getByRole("button", { name: messages.Editor.save, exact: true }).first().click(); await editorPage.getByRole("button", { name: messages.Editor.submit, exact: true }).first().waitFor();
+  check("Actual saved draft", (await call(CMS, "/admin/entries/page/pg_partners", editor)).content.locales.en.intro.badge === badge);
+  const siteContext = await browser.newContext({ viewport: { width: 1440, height: 1000 } }), live = await siteContext.newPage();
+  await live.goto(SITE + "/legal/partners", { waitUntil: "domcontentloaded" }); await live.getByRole("heading", { name: "Partners", exact: true }).waitFor();
+  check("Draft is not on public website", await live.getByText(badge, { exact: true }).count() === 0);
+  await editorPage.getByRole("button", { name: messages.Editor.submit, exact: true }).first().click();
+  const approvalPage = await open(approver); await approvalPage.getByRole("button", { name: messages.Editor.approve, exact: true }).first().click();
+  await approvalPage.getByRole("button", { name: messages.Editor.publish, exact: true }).first().waitFor(); await shot(approvalPage, "partners-approved-en");
+  check("Different person approves draft", (await call(CMS, "/admin/entries/page/pg_partners", editor)).state === "approved");
+  await editorPage.reload(); await editorPage.getByRole("button", { name: messages.Editor.publish, exact: true }).first().click();
+  const dialog = editorPage.locator('[role="dialog"], [role="alertdialog"]'); await dialog.getByRole("button", { name: messages.Editor.publish, exact: true }).click();
+  await editorPage.getByText(messages.Editor.submit, { exact: true }).count();
+  await editorPage.getByRole("button", { name: messages.Editor.publish, exact: true }).waitFor({ state: "hidden" });
+  const published = await call(CMS, "/admin/entries/page/pg_partners", editor);
+  check("Actual CMS publication", published.state === "published" && !published.hasDraft && published.content.locales.en.intro.badge === badge);
+  await shot(editorPage, "partners-published-cms-en");
+  await live.reload({ waitUntil: "domcontentloaded" }); await live.getByText(badge, { exact: true }).waitFor();
+  check("Reopened website loads new publication", true); await shot(live, "partners-published-website-en");
+  await live.route(CMS + "/public/**", route => route.abort()); await live.reload({ waitUntil: "domcontentloaded" }); await live.getByText(badge, { exact: true }).waitFor();
+  check("Actual browser last-good fallback during CMS outage", true); await shot(live, "partners-last-good-website-en");
+  await live.unroute(CMS + "/public/**");
+  await live.route(CMS + "/public/entries/page", route => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ success: true, data: [] }) }));
+  await live.reload({ waitUntil: "domcontentloaded" }); await live.getByText(badge, { exact: true }).waitFor();
+  check("Incomplete CMS data retains last publication", true);
+  await live.unroute(CMS + "/public/entries/page"); await live.setViewportSize({ width: 390, height: 844 }); await live.reload({ waitUntil: "domcontentloaded" }); await live.getByText(badge, { exact: true }).waitFor(); await shot(live, "partners-published-website-mobile-en");
+  const end = await call(API, "/__mock/status"); report.finalClock = { mode: end.clock.mode, now: end.clock.now }; check("Business clock unchanged", JSON.stringify(report.initialClock) === JSON.stringify(report.finalClock));
+  for (const [file, hash] of Object.entries(report.source)) check("Frozen source " + file, crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex") === hash);
+  report.completed = true; fs.writeFileSync(path.join(__dirname, "publishing-report.json"), JSON.stringify(report, null, 2)); await browser.close(); browser = null;
+  console.log(JSON.stringify({ assertions: report.checks.length, captures: report.captures.length, completed: true }));
+})().catch(async e => { report.completed = false; report.error = String(e.message).split("\nCall log:")[0].replace(/code=[^&\s]+/g, "code=[redacted]"); if (editorPage && !editorPage.isClosed()) await editorPage.screenshot({ path: path.join(__dirname, "publishing-failure.png") }).catch(() => {}); fs.writeFileSync(path.join(__dirname, "publishing-report.json"), JSON.stringify(report, null, 2)); if (browser) await browser.close(); console.error(report.error); process.exitCode = 1; });
