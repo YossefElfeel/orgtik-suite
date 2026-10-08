@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { notFound } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { ArrowCounterClockwise } from "@phosphor-icons/react";
-import { Button, Field, Select, SimulatedTag, useDemoScene } from "@orgtik/ui";
+import { Button, demoRequest, Field, Select, SimulatedTag, useDemoScene } from "@orgtik/ui";
 import InnerHeader from "@/components/layout/InnerHeader";
 import { PolicyBalance } from "@/components/presentation/PolicyBalance";
 import { ProfileRequest } from "@/components/presentation/ProfileRequest";
@@ -18,7 +18,16 @@ export default function PresentationPage() {
   const t = useTranslations("HrPresentation"), demo = useDemoScene(), workspace = demo.scene.workspace === "current" ? "nile" : demo.scene.workspace;
   const [employees, setEmployees] = useState<DemoEmployee[]>(() => seedHrEmployees(workspace)), [policy, setPolicy] = useState<DemoPolicy>(HR_DEMO_POLICY), [requests, setRequests] = useState<ProfileChange[]>([]), [tasks, setTasks] = useState<DemoOnboardingTask[]>([]), [messages, setMessages] = useState<DemoMail[]>([]), [employeeId, setEmployeeId] = useState("person-0"), [view, setView] = useState("balances"), [notice, setNotice] = useState("");
   const persona = HR_DEMO_PERSONAS[demo.scene.persona], canManage = ["current", "mona", "nour", "rana"].includes(demo.scene.persona);
-  const [revision, setRevision] = useState(0);
+  const [revision, setRevision] = useState(0), [pendingEmployee, setPendingEmployee] = useState<string>();
+  const createOnboarding = async (id: string) => {
+    if (!canManage || pendingEmployee || tasks.some(task => task.employeeId === id)) return;
+    const person = employees.find(person => person.id === id); if (!person) return;
+    setPendingEmployee(id); const checklist = onboardingTasks(id);
+    try {
+      if (demo.runtime) await demoRequest(demo.runtime, demo.scene, "/tasks/batch", { tasks: checklist.map(task => ({ title: `${person.name}: ${t(task.titleKey)}`, owner: task.owner, sourceApp: "hr", sourceId: task.id })) });
+      setTasks(before => [...before, ...checklist]); mail(id, "onboardingSubject"); setNotice(t(demo.runtime ? "onboardingConnected" : "onboardingCreated"));
+    } catch { setNotice(t("connectionError")); } finally { setPendingEmployee(undefined); }
+  };
   const canRequest = canManage || employees.some(person => person.id === employeeId && person.name === persona);
   const reset = () => { const people = seedHrEmployees(workspace); setEmployees(people); setPolicy(HR_DEMO_POLICY); setRequests([]); setTasks([]); setMessages([]); setNotice(""); setEmployeeId(people.find(person => person.name === persona)?.id ?? (canManage ? people[0]?.id ?? "" : "")); setRevision(before => before + 1); };
   useEffect(() => { reset(); }, [workspace]);
@@ -32,7 +41,7 @@ export default function PresentationPage() {
     {view === "profile" ? <ProfileRequest key={revision} employees={employees} requests={requests} employeeId={employeeId} canApprove={canManage} canRequest={canRequest} onEmployee={setEmployeeId} onRequest={requestChange} onDecision={decide} /> : null}
     {view === "import" ? <CsvImport key={revision} employees={employees} canManage={canManage} onImport={people => { setEmployees(before => [...before, ...people]); if (!employees.some(person => person.id === employeeId)) setEmployeeId(people[0]?.id ?? ""); setNotice(t("imported")); }} /> : null}
     {view === "bank" ? <BankPreview key={revision} employees={employees} canManage={canManage} onDownload={() => setNotice(t("bankDownloaded"))} /> : null}
-    {view === "onboarding" ? <OnboardingChecklist employees={canManage ? employees : employees.filter(person => person.id === employeeId)} tasks={tasks} canManage={canManage} onToggle={id => setTasks(before => before.map(task => task.id === id ? { ...task, done: !task.done } : task))} onCreate={id => { if (!canManage || tasks.some(task => task.employeeId === id)) return; setTasks(before => [...before, ...onboardingTasks(id)]); mail(id, "onboardingSubject"); setNotice(t("onboardingCreated")); }} /> : null}
+    {view === "onboarding" ? <OnboardingChecklist employees={canManage ? employees : employees.filter(person => person.id === employeeId)} tasks={tasks} canManage={canManage} pendingEmployee={pendingEmployee} onToggle={id => setTasks(before => before.map(task => task.id === id ? { ...task, done: !task.done } : task))} onCreate={createOnboarding} /> : null}
     {view === "mailbox" ? <ExpiryMailbox employees={canManage ? employees : employees.filter(person => person.id === employeeId)} messages={canManage ? messages : messages.filter(message => message.employeeId === employeeId)} canManage={canManage} onRemind={id => { mail(id, "expirySubject"); setNotice(t("reminderCreated")); }} /> : null}
     <p className="max-w-prose text-caption text-fg-muted">{t("reuseNote")}</p>
   </div>;

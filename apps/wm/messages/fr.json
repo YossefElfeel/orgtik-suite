@@ -1478,6 +1478,8 @@
     "actualCms": "Ouvrir le CMS existant",
     "releaseNotice": "Statut du lot : {state}",
     "internalTitle": "Studio de l’équipe OrgTik",
-    "internalBody": "Website Manager est le CMS interne OrgTik. Choisissez OrgTik et un profil contenu/équipe dans la démo."
+    "internalBody": "Website Manager est le CMS interne OrgTik. Choisissez OrgTik et un profil contenu/équipe dans la démo.",
+    "leadConnected": "Prospect créé dans OrgTik Sales avec attribution à la page Partenaires.",
+    "connectionError": "La connexion a échoué. Réessayez."
   }
 }

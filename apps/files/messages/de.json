@@ -732,6 +732,7 @@
     "accessRemoved": "Demozugriff entfernt.",
     "shareNotified": "Zugriff für {name} gespeichert. Simulierte Nachricht bereit.",
     "shared": "Zugriff für {name} gespeichert.",
-    "commentAdded": "Feedback zur Demodatei hinzugefügt."
+    "commentAdded": "Feedback zur Demodatei hinzugefügt.",
+    "connectionError": "Die Präsentationsverbindung ist fehlgeschlagen. Versuchen Sie es erneut."
   }
 }

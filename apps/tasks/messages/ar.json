@@ -882,6 +882,13 @@
     "monthly": "شهريًا",
     "presentationNav": "سير عمل العرض",
     "reminderPreview": "معاينة التذكير",
-    "recipients": "المستلمون"
+    "recipients": "المستلمون",
+    "files": "سجلات الملفات",
+    "filesNote": "اختر ملفات العينات بإصداراتها من هذه المساحة.",
+    "loadingFiles": "جارٍ تحميل الملفات…",
+    "retryFiles": "إعادة تحميل الملفات",
+    "fileVersion": "الإصدار {version}",
+    "noFiles": "لا توجد ملفات عينات. شغّل تطبيق الملفات من مشغّل العرض.",
+    "previewFile": "معاينة العينة"
   }
 }

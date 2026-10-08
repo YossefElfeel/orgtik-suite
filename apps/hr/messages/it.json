@@ -2924,6 +2924,8 @@
     "bankDownloaded": "Paghe simulate scaricate.",
     "onboardingCreated": "Attività locali create.",
     "reminderCreated": "Anteprima promemoria aggiunta.",
-    "reuseNote": "Le schermate esistenti di personale, ferie, uscita e cedolini restano disponibili."
+    "reuseNote": "Le schermate esistenti di personale, ferie, uscita e cedolini restano disponibili.",
+    "onboardingConnected": "Attività di onboarding create in Tasks di questo spazio.",
+    "connectionError": "Connessione non riuscita. Riprova."
   }
 }

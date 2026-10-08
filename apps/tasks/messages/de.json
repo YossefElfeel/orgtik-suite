@@ -882,6 +882,13 @@
     "monthly": "Monatlich",
     "presentationNav": "Präsentationsablauf",
     "reminderPreview": "Erinnerungsvorschau",
-    "recipients": "Empfänger"
+    "recipients": "Empfänger",
+    "files": "Dateieinträge",
+    "filesNote": "Versionierte Beispieldateien dieses Arbeitsbereichs auswählen.",
+    "loadingFiles": "Dateien werden geladen…",
+    "retryFiles": "Dateien erneut laden",
+    "fileVersion": "Version {version}",
+    "noFiles": "Keine Beispieldateien verfügbar. Starten Sie Files im Demo-Launcher.",
+    "previewFile": "Beispiel ansehen"
   }
 }

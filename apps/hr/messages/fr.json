@@ -2924,6 +2924,8 @@
     "bankDownloaded": "Paie simulée téléchargée.",
     "onboardingCreated": "Tâches d’accueil locales créées.",
     "reminderCreated": "Aperçu du rappel ajouté.",
-    "reuseNote": "Les écrans existants du personnel, des congés, du départ et des fiches de paie sont conservés."
+    "reuseNote": "Les écrans existants du personnel, des congés, du départ et des fiches de paie sont conservés.",
+    "onboardingConnected": "Les tâches d’intégration ont été créées dans Tasks de cet espace.",
+    "connectionError": "La connexion a échoué. Réessayez."
   }
 }

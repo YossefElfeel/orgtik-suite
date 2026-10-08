@@ -1478,6 +1478,8 @@
     "actualCms": "فتح ناشر CMS الموجود",
     "releaseNotice": "حالة الحزمة: {state}",
     "internalTitle": "استوديو فريق OrgTik",
-    "internalBody": "Website Manager هو CMS الداخلي لـOrgTik. اختر OrgTik وشخصية محتوى أو فريق من لوحة العرض."
+    "internalBody": "Website Manager هو CMS الداخلي لـOrgTik. اختر OrgTik وشخصية محتوى أو فريق من لوحة العرض.",
+    "leadConnected": "تم إنشاء العميل المحتمل في مبيعات OrgTik مع مصدر صفحة الشركاء.",
+    "connectionError": "تعذر الاتصال. أعد المحاولة."
   }
 }

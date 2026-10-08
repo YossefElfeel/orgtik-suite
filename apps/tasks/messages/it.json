@@ -882,6 +882,13 @@
     "monthly": "Ogni mese",
     "presentationNav": "Flusso di presentazione",
     "reminderPreview": "Anteprima promemoria",
-    "recipients": "Destinatari"
+    "recipients": "Destinatari",
+    "files": "Record dei file",
+    "filesNote": "Scegli gli esempi versionati di questo spazio.",
+    "loadingFiles": "Caricamento dei file…",
+    "retryFiles": "Riprova i file",
+    "fileVersion": "Versione {version}",
+    "noFiles": "Nessun esempio disponibile. Avvia Files nel launcher della demo.",
+    "previewFile": "Anteprima esempio"
   }
 }

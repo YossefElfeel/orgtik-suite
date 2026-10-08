@@ -1478,6 +1478,8 @@
     "actualCms": "Open the existing CMS publisher",
     "releaseNotice": "Bundle status: {state}",
     "internalTitle": "OrgTik staff studio",
-    "internalBody": "Website Manager is OrgTik’s internal CMS. Choose OrgTik and a content/staff persona in Demo controls."
+    "internalBody": "Website Manager is OrgTik’s internal CMS. Choose OrgTik and a content/staff persona in Demo controls.",
+    "leadConnected": "Lead created in OrgTik Sales with Partners attribution.",
+    "connectionError": "The connection failed. Try the action again."
   }
 }
