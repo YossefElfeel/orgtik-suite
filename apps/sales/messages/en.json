@@ -2860,6 +2860,19 @@
     "partner": "Partner",
     "event": "Event",
     "importSource": "Imported",
-    "manual": "Manual"
+    "manual": "Manual",
+    "taskConnecting": "Creating in Tasks…",
+    "retryTask": "Retry task creation",
+    "taskConnectionError": "Tasks could not be reached. Your draft is saved here; retry when the demo connection returns.",
+    "taskConnectedHint": "Created tasks appear in Tasks for this demo workspace, with the selected deal owner. Find them through suite search or notifications.",
+    "taskReadOnly": "This persona can review follow-ups. Switch to a sales colleague to create a task.",
+    "quoteDocument": "Quotation preview",
+    "quoteSimulated": "SIMULATED QUOTATION — stakeholder presentation only",
+    "quoteWorkspace": "Workspace",
+    "quoteReference": "Demo reference",
+    "quotePrintHint": "The preview uses the current deal values. Choose Print, then Save as PDF in your browser. This is an illustrative quotation; no invoice or legally binding signature is created.",
+    "printQuote": "Print / Save as PDF",
+    "previewPrintQuote": "Open print preview",
+    "quotePopupBlocked": "The print window was blocked. Allow pop-ups for this local demo and try again."
   }
 }

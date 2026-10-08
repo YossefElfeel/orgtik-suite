@@ -10,5 +10,5 @@ export interface PeopleProps { employees: DemoEmployee[]; requests: ProfileChang
 export interface PolicyProps { employees: DemoEmployee[]; employeeId: string; policy: DemoPolicy; canManage: boolean; onSave: (policy: DemoPolicy) => void; }
 export interface ImportProps { employees: DemoEmployee[]; canManage: boolean; onImport: (employees: DemoEmployee[]) => void; }
 export interface BankProps { employees: DemoEmployee[]; canManage: boolean; onDownload: () => void; }
-export interface OnboardingProps { employees: DemoEmployee[]; tasks: DemoOnboardingTask[]; canManage: boolean; onToggle: (id: string) => void; onCreate: (employeeId: string) => void; }
+export interface OnboardingProps { employees: DemoEmployee[]; tasks: DemoOnboardingTask[]; canManage: boolean; pendingEmployee?: string; onToggle: (id: string) => void; onCreate: (employeeId: string) => void; }
 export interface MailboxProps { employees: DemoEmployee[]; messages: DemoMail[]; canManage: boolean; onRemind: (employeeId: string) => void; }

@@ -2904,7 +2904,7 @@
     "welcomeTask": "Send welcome pack",
     "equipmentTask": "Assign equipment",
     "policyTask": "Review leave policy",
-    "taskNote": "These task records are local simulations. Actual creation in Tasks remains pending.",
+    "taskNote": "With the connected demo runtime, this checklist creates assigned records in Tasks. Standalone previews remain local.",
     "createOnboarding": "Create onboarding tasks",
     "expiry": "Expiring documents",
     "expiryNote": "Documents expiring in the next 30 days at the fixed demo date.",
@@ -2924,6 +2924,8 @@
     "bankDownloaded": "Simulated payroll downloaded.",
     "onboardingCreated": "Local onboarding tasks created.",
     "reminderCreated": "Reminder preview added to mailbox.",
-    "reuseNote": "Existing employee records, leave approvals, offboarding and payslip flows remain in their current screens."
+    "reuseNote": "Existing employee records, leave approvals, offboarding and payslip flows remain in their current screens.",
+    "onboardingConnected": "Onboarding tasks created in this workspace’s Tasks.",
+    "connectionError": "The connection failed. Try the action again."
   }
 }

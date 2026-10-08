@@ -3,6 +3,7 @@ export type PresentationTask = {
   id: string; title: string; status: "todo" | "doing" | "done";
   owner: string; label: string; due: string; recurrence: "none" | "weekly" | "monthly";
   watchers: string[]; reminder: boolean;
+  fileRefs?: { id: string; name: string; workspace: string; version: number; source: string }[];
 };
 export const PRESENTATION_PEOPLE = ["Nour Khaled", "Rana Saad", "Omar Farouk", "Salma Nabil", "Mona Adel", "Hoda Ashraf", "Hany Samir"];
 export function seedPresentationTasks(workspace: string): PresentationTask[] {

@@ -2860,6 +2860,19 @@
     "partner": "Partenaire",
     "event": "Événement",
     "importSource": "Importé",
-    "manual": "Manuel"
+    "manual": "Manuel",
+    "taskConnecting": "Création dans Tasks…",
+    "retryTask": "Réessayer la création",
+    "taskConnectionError": "Tasks est inaccessible. Votre brouillon reste ici ; réessayez au retour de la connexion démo.",
+    "taskConnectedHint": "Les tâches apparaissent dans Tasks pour cet espace démo, avec le responsable de l’affaire. Retrouvez-les par la recherche ou les notifications.",
+    "taskReadOnly": "Ce profil peut consulter les suivis. Passez à un collègue commercial pour créer une tâche.",
+    "quoteDocument": "Aperçu du devis",
+    "quoteSimulated": "DEVIS SIMULÉ — présentation uniquement",
+    "quoteWorkspace": "Espace de travail",
+    "quoteReference": "Référence démo",
+    "quotePrintHint": "L’aperçu utilise les valeurs actuelles de l’affaire. Imprimez puis enregistrez en PDF dans le navigateur. Devis illustratif ; aucune facture ni signature juridiquement contraignante.",
+    "printQuote": "Imprimer / Enregistrer en PDF",
+    "previewPrintQuote": "Ouvrir l’aperçu imprimable",
+    "quotePopupBlocked": "La fenêtre d’impression est bloquée. Autorisez les fenêtres pour cette démo locale et réessayez."
   }
 }

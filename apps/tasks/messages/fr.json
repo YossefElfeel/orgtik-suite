@@ -882,6 +882,13 @@
     "monthly": "Chaque mois",
     "presentationNav": "Parcours de présentation",
     "reminderPreview": "Aperçu du rappel",
-    "recipients": "Destinataires"
+    "recipients": "Destinataires",
+    "files": "Fichiers",
+    "filesNote": "Choisissez les exemples versionnés de cet espace.",
+    "loadingFiles": "Chargement des fichiers…",
+    "retryFiles": "Réessayer les fichiers",
+    "fileVersion": "Version {version}",
+    "noFiles": "Aucun exemple disponible. Lancez Files dans le lanceur de démonstration.",
+    "previewFile": "Aperçu de l’exemple"
   }
 }

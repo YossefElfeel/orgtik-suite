@@ -1478,6 +1478,8 @@
     "actualCms": "Bestehenden CMS-Publisher öffnen",
     "releaseNotice": "Paketstatus: {state}",
     "internalTitle": "OrgTik-Teamstudio",
-    "internalBody": "Website Manager ist OrgTiks internes CMS. OrgTik und ein Inhalts-/Teamprofil im Demo-Panel wählen."
+    "internalBody": "Website Manager ist OrgTiks internes CMS. OrgTik und ein Inhalts-/Teamprofil im Demo-Panel wählen.",
+    "leadConnected": "Lead in OrgTik Sales mit Herkunft Partnerseite erstellt.",
+    "connectionError": "Die Verbindung ist fehlgeschlagen. Versuchen Sie es erneut."
   }
 }

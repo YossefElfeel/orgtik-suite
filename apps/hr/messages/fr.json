@@ -2904,7 +2904,7 @@
     "welcomeTask": "Envoyer le dossier d’accueil",
     "equipmentTask": "Attribuer l’équipement",
     "policyTask": "Lire la politique de congés",
-    "taskNote": "Ces tâches sont des simulations locales. Leur création dans Tasks reste à faire.",
+    "taskNote": "Avec la démo connectée, cette liste crée des tâches attribuées dans Tasks. Les aperçus autonomes restent locaux.",
     "createOnboarding": "Créer les tâches d’accueil",
     "expiry": "Documents proches de l’expiration",
     "expiryNote": "Documents expirant sous 30 jours à partir de la date fixe de démonstration.",
@@ -2924,6 +2924,8 @@
     "bankDownloaded": "Paie simulée téléchargée.",
     "onboardingCreated": "Tâches d’accueil locales créées.",
     "reminderCreated": "Aperçu du rappel ajouté.",
-    "reuseNote": "Les écrans existants du personnel, des congés, du départ et des fiches de paie sont conservés."
+    "reuseNote": "Les écrans existants du personnel, des congés, du départ et des fiches de paie sont conservés.",
+    "onboardingConnected": "Les tâches d’intégration ont été créées dans Tasks de cet espace.",
+    "connectionError": "La connexion a échoué. Réessayez."
   }
 }

@@ -732,6 +732,7 @@
     "accessRemoved": "Accès démo retiré.",
     "shareNotified": "Accès enregistré pour {name}. Notification simulée prête.",
     "shared": "Accès enregistré pour {name}.",
-    "commentAdded": "Avis ajouté à ce fichier démo."
+    "commentAdded": "Avis ajouté à ce fichier démo.",
+    "connectionError": "La connexion de présentation a échoué. Réessayez."
   }
 }

@@ -1,4 +1,5 @@
-export type DemoMessage = { id: string; channel: string; author: string; body: string; bold?: boolean; file?: string; saved?: boolean; reminder?: boolean; task?: string; scheduled?: boolean };
+export type DemoFileReference = { id: string; name: string; workspace: string; version: number; source: string; path?: string };
+export type DemoMessage = { id: string; channel: string; author: string; body: string; bold?: boolean; italic?: boolean; bullets?: boolean; file?: string; fileRef?: DemoFileReference; saved?: boolean; reminder?: boolean; task?: string; scheduled?: boolean; scheduledAt?: string; scheduledTimeZone?: string };
 export type ChatScene = { channels: string[]; messages: DemoMessage[]; read: string[] };
 export const sceneKey = (workspace: string) => `orgtik:presentation:chats:${workspace}`;
 export function seedScene(workspace: string): ChatScene {
@@ -6,7 +7,7 @@ export function seedScene(workspace: string): ChatScene {
   return {
     channels: ["launch-review", "design-team", "announcements"], read: ["launch-review"],
     messages: [
-      { id: "seed-1", channel: "launch-review", author: "Mona Adel", body: "The updated partner page is ready. Can we review the handoff together?", file: "partner-brief.pdf" },
+      { id: "seed-1", channel: "launch-review", author: "Mona Adel", body: "The updated partner page is ready. Can we review the handoff together?" },
       { id: "seed-2", channel: "launch-review", author: "Nour Khaled", body: "I’ve checked the mobile layout. Let’s turn the remaining feedback into tasks." },
       { id: "seed-3", channel: "design-team", author: "Rana Saad", body: "The component review is ready for the next design sync." },
       { id: "seed-4", channel: "announcements", author: "Mona Adel", body: "Our stakeholder walkthrough is scheduled for Thursday." },

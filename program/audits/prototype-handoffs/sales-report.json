@@ -1,0 +1,14 @@
+{
+  "completed": true,
+  "scope": "One local desktop Sales presentation flow, English/light/1440. No hosted acceptance or production business data.",
+  "checks": [
+    "Exact deal hydration: sales-demo-1 remains open after OrgTik presentation workspace loads",
+    "Follow-up connector: Tasks bridge receives Sales connected follow-up QA with sourceApp sales and owner Omar Farouk",
+    "Quotation preview: print popup contains live Atlas Studio company and CHF currency",
+    "Quotation preview: print popup identifies SIMULATED QUOTATION"
+  ],
+  "count": 4,
+  "tool_session": 23545,
+  "source_commit": "13a30e7",
+  "limitations": ["Browser Save as PDF output was not exported or visually inspected", "Read-only persona behavior was reviewed in source; not part of this four-check run"]
+}

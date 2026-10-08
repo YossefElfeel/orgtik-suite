@@ -2860,6 +2860,19 @@
     "partner": "Partner",
     "event": "Veranstaltung",
     "importSource": "Importiert",
-    "manual": "Manuell"
+    "manual": "Manuell",
+    "taskConnecting": "Wird in Tasks erstellt…",
+    "retryTask": "Aufgabe erneut erstellen",
+    "taskConnectionError": "Tasks ist nicht erreichbar. Der Entwurf bleibt hier erhalten; bei verfügbarer Demo-Verbindung erneut versuchen.",
+    "taskConnectedHint": "Erstellte Aufgaben erscheinen in Tasks in diesem Demo-Arbeitsbereich mit dem zuständigen Deal-Verantwortlichen. Über Suite-Suche oder Benachrichtigungen öffnen.",
+    "taskReadOnly": "Diese Persona kann Folgeaufgaben ansehen. Zum Erstellen zu einem Vertriebskollegen wechseln.",
+    "quoteDocument": "Angebotsvorschau",
+    "quoteSimulated": "SIMULIERTES ANGEBOT — nur für die Präsentation",
+    "quoteWorkspace": "Arbeitsbereich",
+    "quoteReference": "Demo-Referenz",
+    "quotePrintHint": "Die Vorschau nutzt die aktuellen Deal-Werte. Drucken und im Browser als PDF speichern. Nur ein Beispielangebot; es wird keine Rechnung oder rechtsverbindliche Signatur erstellt.",
+    "printQuote": "Drucken / Als PDF speichern",
+    "previewPrintQuote": "Druckvorschau öffnen",
+    "quotePopupBlocked": "Das Druckfenster wurde blockiert. Pop-ups für diese lokale Demo erlauben und erneut versuchen."
   }
 }

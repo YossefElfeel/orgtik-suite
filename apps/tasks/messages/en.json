@@ -882,6 +882,13 @@
     "monthly": "Monthly",
     "presentationNav": "Presentation workflow",
     "reminderPreview": "Reminder preview",
-    "recipients": "Recipients"
+    "recipients": "Recipients",
+    "files": "Files records",
+    "filesNote": "Choose versioned packaged records from this workspace.",
+    "loadingFiles": "Loading files…",
+    "retryFiles": "Retry files",
+    "fileVersion": "Version {version}",
+    "noFiles": "No packaged files available. Start Files in the demo launcher.",
+    "previewFile": "Preview sample"
   }
 }

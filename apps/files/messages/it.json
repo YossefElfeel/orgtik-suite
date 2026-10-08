@@ -732,6 +732,7 @@
     "accessRemoved": "Accesso demo rimosso.",
     "shareNotified": "Accesso salvato per {name}. Notifica simulata pronta.",
     "shared": "Accesso salvato per {name}.",
-    "commentAdded": "Feedback aggiunto a questo file demo."
+    "commentAdded": "Feedback aggiunto a questo file demo.",
+    "connectionError": "Connessione della presentazione non riuscita. Riprova."
   }
 }

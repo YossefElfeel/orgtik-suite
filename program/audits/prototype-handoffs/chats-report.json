@@ -1,0 +1,15 @@
+{
+  "completed": true,
+  "checks": [
+    "past schedule rejected",
+    "selected schedule retained",
+    "bullets rendered",
+    "italic rendered",
+    "record metadata visible",
+    "preview linked to Files app",
+    "mobile no overflow",
+    "send-now exits scheduled list",
+    "scheduled message delivered to channel",
+    "versioned message survives reload"
+  ]
+}

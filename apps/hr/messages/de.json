@@ -2904,7 +2904,7 @@
     "welcomeTask": "Willkommenspaket senden",
     "equipmentTask": "Ausrüstung zuweisen",
     "policyTask": "Urlaubsrichtlinie prüfen",
-    "taskNote": "Diese Aufgaben sind lokale Simulationen. Die Erstellung in Tasks ist noch offen.",
+    "taskNote": "Mit der verbundenen Demo erstellt diese Checkliste zugewiesene Einträge in Tasks. Einzelne Vorschauen bleiben lokal.",
     "createOnboarding": "Onboarding-Aufgaben erstellen",
     "expiry": "Ablaufende Dokumente",
     "expiryNote": "Dokumente, die innerhalb von 30 Tagen ab dem festen Demodatum ablaufen.",
@@ -2924,6 +2924,8 @@
     "bankDownloaded": "Simulierte Gehaltsdatei geladen.",
     "onboardingCreated": "Lokale Onboarding-Aufgaben erstellt.",
     "reminderCreated": "Erinnerung im Postfach ergänzt.",
-    "reuseNote": "Bestehende Personal-, Urlaubs-, Offboarding- und Gehaltsabläufe bleiben in ihren Ansichten."
+    "reuseNote": "Bestehende Personal-, Urlaubs-, Offboarding- und Gehaltsabläufe bleiben in ihren Ansichten.",
+    "onboardingConnected": "Onboarding-Aufgaben wurden in Tasks dieses Arbeitsbereichs erstellt.",
+    "connectionError": "Die Verbindung ist fehlgeschlagen. Versuchen Sie es erneut."
   }
 }

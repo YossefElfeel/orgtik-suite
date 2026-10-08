@@ -2860,6 +2860,19 @@
     "partner": "Partner",
     "event": "Evento",
     "importSource": "Importato",
-    "manual": "Manuale"
+    "manual": "Manuale",
+    "taskConnecting": "Creazione in Tasks…",
+    "retryTask": "Riprova creazione attività",
+    "taskConnectionError": "Tasks non è raggiungibile. La bozza resta qui; riprova quando torna la connessione demo.",
+    "taskConnectedHint": "Le attività appaiono in Tasks in questo spazio demo, con il responsabile della trattativa. Trovale dalla ricerca o dalle notifiche.",
+    "taskReadOnly": "Questo profilo può consultare i follow-up. Passa a un collega commerciale per creare un’attività.",
+    "quoteDocument": "Anteprima preventivo",
+    "quoteSimulated": "PREVENTIVO SIMULATO — solo per presentazione",
+    "quoteWorkspace": "Spazio di lavoro",
+    "quoteReference": "Riferimento demo",
+    "quotePrintHint": "L’anteprima usa i valori correnti. Scegli Stampa e Salva come PDF nel browser. È un preventivo illustrativo; non crea fatture o firme legalmente vincolanti.",
+    "printQuote": "Stampa / Salva come PDF",
+    "previewPrintQuote": "Apri anteprima di stampa",
+    "quotePopupBlocked": "La finestra è stata bloccata. Consenti i pop-up per questa demo locale e riprova."
   }
 }
