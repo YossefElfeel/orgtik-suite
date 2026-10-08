@@ -1,0 +1,60 @@
+{
+  "at": "2026-10-08T18:45:21.944Z",
+  "results": [
+    {
+      "key": "mock",
+      "passed": true,
+      "output": "mock: hosted smoke passed"
+    },
+    {
+      "key": "sos",
+      "passed": true,
+      "output": "sos: hosted smoke passed"
+    },
+    {
+      "key": "website",
+      "passed": true,
+      "output": "website: hosted smoke passed"
+    },
+    {
+      "key": "admin",
+      "passed": true,
+      "output": "admin: hosted smoke passed"
+    },
+    {
+      "key": "chats",
+      "passed": true,
+      "output": "chats: hosted smoke passed"
+    },
+    {
+      "key": "files",
+      "passed": true,
+      "output": "files: hosted smoke passed"
+    },
+    {
+      "key": "hr",
+      "passed": true,
+      "output": "hr: hosted smoke passed"
+    },
+    {
+      "key": "marketing",
+      "passed": true,
+      "output": "marketing: hosted smoke passed"
+    },
+    {
+      "key": "sales",
+      "passed": true,
+      "output": "sales: hosted smoke passed"
+    },
+    {
+      "key": "tasks",
+      "passed": true,
+      "output": "tasks: hosted smoke passed"
+    },
+    {
+      "key": "wm",
+      "passed": true,
+      "output": "wm: hosted smoke passed"
+    }
+  ]
+}
