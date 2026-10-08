@@ -11,6 +11,7 @@ import { useTheme } from "../theme/theme.js";
 import { Avatar } from "../components/Display.js";
 import { Menu, MenuContent, MenuGroup, MenuItem, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from "../components/Menu.js";
 import { Logo } from "./Logo.js";
+import { DemoProvider, DemoPanel, DemoSceneBanner, DemoStateView } from "../demo/DemoPanel.js";
 export function AppRail({ apps, current, homeHref = "/" }) {
     const t = useStrings();
     const { Link } = useOrgtik();
@@ -40,13 +41,16 @@ export function TopBar({ start, end, onOpenNavigation }) {
  * The suite's frame: rail + sidebar + top bar + banner slot + content. Under 1024px the rail
  * and sidebar move into a sheet opened from the top bar.
  */
-export function SuiteShell({ rail, sidebar, topBar, banner, children }) {
+export function SuiteShell(props) {
+    return _jsx(DemoProvider, { options: props.demo, children: _jsx(SuiteShellView, { ...props }) });
+}
+function SuiteShellView({ rail, sidebar, topBar, banner, children }) {
     const t = useStrings();
     const [open, setOpen] = useState(false);
     return (_jsxs("div", { className: "flex h-dvh overflow-hidden bg-canvas text-fg", children: [_jsx("a", { href: "#ot-main", className: "fixed start-3 top-3 z-[70] -translate-y-20 rounded-pill bg-action-primary px-4 py-2 text-body font-semibold text-on-action-primary focus-visible:translate-y-0", children: t("skipToContent") }), _jsxs("div", { className: "hidden min-h-0 shrink-0 lg:flex", children: [rail, _jsx("div", { className: "w-[248px]", children: sidebar })] }), _jsx(BaseDialog.Root, { open: open, onOpenChange: setOpen, children: _jsxs(BaseDialog.Portal, { children: [_jsx(BaseDialog.Backdrop, { className: cn(scrim, "lg:hidden") }), _jsxs(BaseDialog.Popup, { "aria-label": t("mainNavigation"), className: cn("fixed inset-y-0 start-0 z-50 flex w-[min(100vw-3rem,324px)] shadow-overlay outline-none lg:hidden", "transition-transform duration-(--ot-duration-slow) ease-ot-out-strong", "data-[starting-style]:-translate-x-full data-[ending-style]:-translate-x-full rtl:data-[starting-style]:translate-x-full rtl:data-[ending-style]:translate-x-full"), onClick: (e) => {
                                 // A tap on a link navigates; close the sheet with it.
                                 if (e.target.closest("a"))
                                     setOpen(false);
-                            }, children: [rail, _jsx("div", { className: "min-w-0 flex-1", children: sidebar })] })] }) }), _jsxs("div", { className: "flex min-h-0 min-w-0 flex-1 flex-col", children: [_jsx(TopBar, { start: topBar?.start, end: topBar?.end, onOpenNavigation: () => setOpen(true) }), banner, _jsx("main", { id: "ot-main", tabIndex: 0, className: "relative min-h-0 min-w-0 flex-1 overflow-y-auto outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus", children: children })] })] }));
+                            }, children: [rail, _jsx("div", { className: "min-w-0 flex-1", children: sidebar })] })] }) }), _jsxs("div", { className: "flex min-h-0 min-w-0 flex-1 flex-col", children: [_jsx(TopBar, { start: topBar?.start, end: _jsxs(_Fragment, { children: [topBar?.end, _jsx(DemoPanel, {})] }), onOpenNavigation: () => setOpen(true) }), banner, _jsx(DemoSceneBanner, {}), _jsx("main", { id: "ot-main", tabIndex: 0, className: "relative min-h-0 min-w-0 flex-1 overflow-y-auto outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus", children: _jsx(DemoStateView, { children: children }) })] })] }));
 }
 //# sourceMappingURL=SuiteShell.js.map

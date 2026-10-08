@@ -1,0 +1,77 @@
+"use client";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import { createContext, useContext, useEffect, useState } from "react";
+import { ArrowCounterClockwise, CheckCircle, Moon, SlidersHorizontal, Sun, X } from "@phosphor-icons/react";
+import { useOrgtik } from "../provider/OrgtikProvider.js";
+import { useTheme } from "../theme/theme.js";
+import { Button } from "../components/Button.js";
+import { Badge } from "../components/Badge.js";
+import { Field } from "../components/Field.js";
+import { IconButton } from "../components/IconButton.js";
+import { Select } from "../components/Select.js";
+import { SegmentedControl } from "../components/Choice.js";
+import { Popover, PopoverClose, PopoverContent, PopoverTrigger } from "../components/Popover.js";
+import { EmptyState, ErrorState, LoadingState, NoPermissionState } from "../components/States.js";
+import { DEMO_STRINGS } from "./strings.js";
+export const DEMO_PERSONAS = ["current", "mona", "nour", "rana", "omar", "salma", "hoda", "hany"];
+export const DEMO_WORKSPACES = ["current", "orgtik", "nile", "spree", "desert", "new"];
+export const DEMO_STATES = ["normal", "loading", "empty", "error", "noAccess", "readOnly", "success"];
+export const DEMO_SCENARIOS = ["none", "renewal", "grace", "overdue"];
+const initial = { persona: "current", workspace: "current", state: "normal", scenario: "none" };
+const Context = createContext({ enabled: false, scene: initial, update: () => { }, reset: () => { }, open: false, setOpen: () => { } });
+export const useDemoScene = () => useContext(Context);
+const useWords = () => { const { locale } = useOrgtik(); return (key) => DEMO_STRINGS[locale][key]; };
+export function DemoProvider({ options, children }) {
+    const [scene, setScene] = useState(initial), [open, setOpen] = useState(false);
+    const key = "orgtik:demo-scene:" + (options?.appKey || "suite");
+    useEffect(() => {
+        if (!options?.enabled)
+            return;
+        try {
+            const saved = JSON.parse(sessionStorage.getItem(key) || "null");
+            if (saved && DEMO_PERSONAS.includes(saved.persona) && DEMO_WORKSPACES.includes(saved.workspace) && DEMO_STATES.includes(saved.state) && DEMO_SCENARIOS.includes(saved.scenario))
+                setScene(saved);
+        }
+        catch { }
+    }, [key, options?.enabled]);
+    const update = (patch) => setScene(current => { const next = { ...current, ...patch }; try {
+        sessionStorage.setItem(key, JSON.stringify(next));
+    }
+    catch { } return next; });
+    const reset = () => { setScene(initial); try {
+        sessionStorage.removeItem(key);
+    }
+    catch { } };
+    return _jsx(Context.Provider, { value: { enabled: Boolean(options?.enabled), scene, update, reset, open, setOpen, onLocaleChange: options?.onLocaleChange }, children: children });
+}
+export function SimulatedTag() { const t = useWords(); return _jsx(Badge, { tone: "info", size: "sm", children: t("simulated") }); }
+export function DemoPanel() {
+    const demo = useDemoScene(), t = useWords(), { locale } = useOrgtik(), [theme, setTheme] = useTheme();
+    if (!demo.enabled)
+        return null;
+    const { scene, update } = demo;
+    return _jsxs(Popover, { open: demo.open, onOpenChange: demo.setOpen, children: [_jsx(PopoverTrigger, { render: _jsx(Button, { variant: "secondary", size: "sm", "aria-label": t("title"), startIcon: _jsx(SlidersHorizontal, {}) }), children: _jsx("span", { className: "hidden sm:inline", children: t("title") }) }), _jsxs(PopoverContent, { align: "end", className: "w-[min(360px,calc(100vw-2rem))] max-h-[calc(100dvh-5rem)] overflow-y-auto", title: _jsxs("span", { className: "flex items-center justify-between gap-3", children: [t("title"), _jsx(PopoverClose, { render: _jsx(IconButton, { variant: "ghost", size: "sm", label: t("close"), icon: _jsx(X, {}) }) })] }), description: t("body"), children: [_jsx(Badge, { tone: "brand", size: "sm", className: "self-start", children: t("prototype") }), _jsx(Field, { label: t("persona"), children: _jsx(Select, { "aria-label": t("persona"), value: scene.persona, onValueChange: value => value && update({ persona: value }), options: DEMO_PERSONAS.map(value => ({ value, label: t(value) })) }) }), _jsx(Field, { label: t("workspace"), children: _jsx(Select, { "aria-label": t("workspace"), value: scene.workspace, onValueChange: value => value && update({ workspace: value, state: value === "new" ? "empty" : value === "desert" ? "noAccess" : "normal" }), options: DEMO_WORKSPACES.map(value => ({ value, label: t(value) })) }) }), _jsx(Field, { label: t("screen"), children: _jsx(Select, { "aria-label": t("screen"), value: scene.state, onValueChange: value => value && update({ state: value }), options: DEMO_STATES.map(value => ({ value, label: t(value) })) }) }), _jsx(Field, { label: t("scenario"), children: _jsx(Select, { "aria-label": t("scenario"), value: scene.scenario, onValueChange: value => value && update({ scenario: value, ...(value === "grace" ? { state: "readOnly" } : {}) }), options: DEMO_SCENARIOS.map(value => ({ value, label: t(value) })) }) }), _jsx("div", { className: "border-t border-line pt-3", children: _jsxs("div", { className: "flex flex-wrap items-end justify-between gap-3", children: [_jsx(Field, { label: t("language"), children: _jsx(Select, { "aria-label": t("language"), value: locale, onValueChange: value => value && demo.onLocaleChange?.(value), disabled: !demo.onLocaleChange, options: [{ value: "en", label: "English" }, { value: "ar", label: "العربية" }, { value: "de", label: "Deutsch" }, { value: "fr", label: "Français" }, { value: "it", label: "Italiano" }] }) }), _jsx(Field, { label: t("theme"), children: _jsx(SegmentedControl, { label: t("theme"), size: "sm", value: theme, onValueChange: setTheme, segments: [{ value: "light", label: t("light"), icon: _jsx(Sun, {}) }, { value: "dark", label: t("dark"), icon: _jsx(Moon, {}) }] }) })] }) }), _jsx("p", { className: "text-caption text-fg-muted", children: t("previewNote") }), _jsx(Button, { variant: "secondary", startIcon: _jsx(ArrowCounterClockwise, {}), onClick: demo.reset, children: t("reset") })] })] });
+}
+export function DemoSceneBanner() {
+    const { enabled, scene } = useDemoScene(), t = useWords();
+    if (!enabled)
+        return null;
+    if (Object.entries(initial).every(([key, value]) => scene[key] === value))
+        return _jsx("div", { className: "border-b border-line bg-raised px-4 py-1.5", children: _jsx(Badge, { tone: "brand", size: "sm", children: t("prototype") }) });
+    return _jsxs("div", { role: "status", className: "flex flex-wrap items-center gap-2 border-b border-line bg-brand-subtle px-4 py-2 text-caption text-fg", children: [_jsx(SimulatedTag, {}), _jsx("span", { className: "font-semibold", children: t("scene") }), _jsxs("span", { children: [t(scene.persona), " \u00B7 ", t(scene.workspace), " \u00B7 ", t(scene.state)] }), scene.scenario !== "none" ? _jsxs("span", { className: "text-fg-muted", children: ["\u00B7 ", t(scene.scenario)] }) : null] });
+}
+export function DemoStateView({ children }) {
+    const demo = useDemoScene(), t = useWords();
+    if (!demo.enabled || demo.scene.state === "normal")
+        return _jsx(_Fragment, { children: children });
+    const action = _jsx(Button, { variant: "secondary", onClick: () => demo.update({ state: "normal", scenario: "none" }), children: t("restore") });
+    switch (demo.scene.state) {
+        case "loading": return _jsx("div", { className: "mx-auto max-w-4xl p-6", children: _jsx(LoadingState, { rows: 8, label: t("loadingBody") }) });
+        case "empty": return _jsx(EmptyState, { titleAs: "h1", title: t("emptyTitle"), description: t("emptyBody"), action: action });
+        case "error": return _jsx(ErrorState, { titleAs: "h1", title: t("errorTitle"), description: t("errorBody"), onRetry: () => demo.update({ state: "normal" }) });
+        case "noAccess": return _jsx(NoPermissionState, { titleAs: "h1", title: t("noAccessTitle"), description: t("noAccessBody"), action: action });
+        case "success": return _jsx(EmptyState, { titleAs: "h1", icon: _jsx(CheckCircle, {}), title: t("successTitle"), description: t("successBody"), action: action });
+        case "readOnly": return _jsxs(_Fragment, { children: [_jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3 border-b border-line bg-warning-subtle px-4 py-3", children: [_jsx("p", { className: "text-body-sm text-fg", children: t("readOnlyBody") }), action] }), _jsx("div", { inert: true, className: "min-w-0", children: children })] });
+    }
+}
+//# sourceMappingURL=DemoPanel.js.map

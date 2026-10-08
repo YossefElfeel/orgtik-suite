@@ -10,6 +10,7 @@ import { useTheme } from "../theme/theme.js";
 import { Avatar } from "../components/Display.js";
 import { Menu, MenuContent, MenuGroup, MenuItem, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger } from "../components/Menu.js";
 import { Logo } from "./Logo.js";
+import { DemoProvider, DemoPanel, DemoSceneBanner, DemoStateView, type DemoOptions } from "../demo/DemoPanel.js";
 
 // The rail (suite apps) and sidebar (this app's pages) sit at the reading start: on the left in
 // LTR, on the right in RTL. Both are plain CSS grid columns, so they follow `dir` by themselves.
@@ -191,6 +192,7 @@ export function TopBar({ start, end, onOpenNavigation }: { start?: ReactNode; en
 }
 
 export type SuiteShellProps = {
+  demo?: DemoOptions;
   rail: ReactNode;
   sidebar: ReactNode;
   /** TopBar's contents: `start` (search, workspace switcher) and `end` (help, notifications, UserMenu). */
@@ -204,7 +206,11 @@ export type SuiteShellProps = {
  * The suite's frame: rail + sidebar + top bar + banner slot + content. Under 1024px the rail
  * and sidebar move into a sheet opened from the top bar.
  */
-export function SuiteShell({ rail, sidebar, topBar, banner, children }: SuiteShellProps) {
+export function SuiteShell(props: SuiteShellProps) {
+  return <DemoProvider options={props.demo}><SuiteShellView {...props} /></DemoProvider>;
+}
+
+function SuiteShellView({ rail, sidebar, topBar, banner, children }: SuiteShellProps) {
   const t = useStrings();
   const [open, setOpen] = useState(false);
   return (
@@ -240,8 +246,9 @@ export function SuiteShell({ rail, sidebar, topBar, banner, children }: SuiteShe
         </BaseDialog.Portal>
       </BaseDialog.Root>
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-        <TopBar start={topBar?.start} end={topBar?.end} onOpenNavigation={() => setOpen(true)} />
+        <TopBar start={topBar?.start} end={<>{topBar?.end}<DemoPanel /></>} onOpenNavigation={() => setOpen(true)} />
         {banner}
+        <DemoSceneBanner />
         {/* The page scrolls here, so the keyboard must be able to reach it even when it holds no
             links (axe scrollable-region-focusable): a tab stop with a visible ring, and the skip
             link's target. */}
@@ -250,7 +257,7 @@ export function SuiteShell({ rail, sidebar, topBar, banner, children }: SuiteShe
           tabIndex={0}
           className="relative min-h-0 min-w-0 flex-1 overflow-y-auto outline-hidden focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-focus"
         >
-          {children}
+          <DemoStateView>{children}</DemoStateView>
         </main>
       </div>
     </div>

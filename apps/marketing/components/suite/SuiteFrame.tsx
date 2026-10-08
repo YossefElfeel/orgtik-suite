@@ -91,6 +91,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
 
   return (
     <SuiteShell
+      demo={{ enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "marketing", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
       rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref={apps[0]?.href ?? SOS_URL} />}
       sidebar={<Sidebar title={ts("appName")} sections={sections} />}
       topBar={{

@@ -135,6 +135,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
 
   return (
     <SuiteShell
+      demo={{ enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "sos", onLocaleChange: changeLocale }}
       rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref="/" />}
       sidebar={<Sidebar title={<span dir="ltr">{ts("appName")}</span>} sections={sections} />}
       banner={banners.length ? <BannerRegion banners={banners} /> : undefined}

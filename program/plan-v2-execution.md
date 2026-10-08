@@ -1,5 +1,7 @@
 # OrgTik Suite — revised hosted-mock roadmap
 
+**Current delivery direction — 2026-10-08:** [A21](phase-f/amendment-A21.md) adopts the owner-designated presentation plan after CMS completion. [D-073](decisions/D-073.md) governs new work: all 72 commitments as UI/mock flows, existing backend frozen, lightweight evidence, and no security/production-infrastructure work. CMS is merged through PR20/21 into validated main `9bd6011`. The first new shared deliverable is the Demo Panel. Vercel stays paused; no worktree cleanup, existing-data reset or shared-clock change is authorized. The older roadmap below is retained as history/backlog.
+
 Maintained execution roadmap · 2026-10-08 · amendments A11–[A20](phase-f/amendment-A20.md), including [A18's presentation replan](phase-f/amendment-A18.md) · decisions D-063–D-072. Whiteboards and CMS alignment merged through PR19/20. The CMS publishing prototype has local acceptance and awaits its package PR/CI.
 
 Source: `C:/Users/yosse/.claude/plans/we-have-old-plan-quiet-turing.md`, refined by the approved roadmap and the owner's request for parallel delivery of a senior UI/UX-quality prototype. This repository document is maintained from here; the external Claude plan is historical input.

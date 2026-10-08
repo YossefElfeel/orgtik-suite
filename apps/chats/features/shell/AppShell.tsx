@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import { ChatsRail } from "./ChatsRail";
 import { HqSidebar } from "./HqSidebar";
 import { SuiteShell } from "@orgtik/ui";
+import { useI18n } from "@/lib/i18n";
 import { TopBarEnd, TopBarStart } from "./TopBar";
 import { LiveRegion, PrototypeBadge, ToastHost } from "./ShellExtras";
 import { MobileTabs } from "./MobileTabs";
@@ -32,6 +33,7 @@ export function AppShell({
   sidebar?: ReactNode;
   children: ReactNode;
 }) {
+  const { setLocale } = useI18n();
   // Workspace data comes from scoped polling; no ambient seed events or cross-tab relay.
   const signedOut = useWorkspace((s) => s.session.state === "signed_out");
 
@@ -74,6 +76,7 @@ export function AppShell({
       {/* The suite's frame (FS-CHT-5): the rail and this sidebar at the reading start, in a sheet
           under 1024px opened from the top bar, so every section is reachable at every width. */}
       <SuiteShell
+      demo={{ enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "chats", onLocaleChange: setLocale }}
         rail={<ChatsRail />}
         sidebar={
           <div className="flex h-full flex-col overflow-y-auto border-e border-line bg-raised">
