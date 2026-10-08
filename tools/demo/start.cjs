@@ -39,7 +39,7 @@ const now = '2026-10-07T09:00:00.000Z';
 console.log('OrgTik presentation sandbox · simulated data');
 console.log(`Frozen clock: ${now} · journal/accounts: memory`);
 for (const key of keys) console.log(`  ${key.padEnd(10)} ${web(key)}`);
-console.log(`  sign in    ${web('sos')}/en/auth/login`);
+console.log(`  sign in    ${web('sos')}/auth/login`);
 console.log(`API ports: ${apiKeys.map(key => APPS[key].api).join(', ')} · icons: 7599`);
 if (args.includes('--list') || args.includes('--dry-run')) {
   console.log('No services started or files changed.');
@@ -85,7 +85,7 @@ function childEnv() {
     NEXT_PUBLIC_WEBSITE_URL: web('website'),
     NEXT_PUBLIC_WM_API_URL: api('wm'), NEXT_PUBLIC_ADMIN_API_URL: api('admin'),
     NEXT_PUBLIC_ORG_TIME_ZONE: 'Africa/Cairo',
-    NEXT_PUBLIC_REDIRECT_URL: `${web('sos')}/en/auth/login`,
+    NEXT_PUBLIC_REDIRECT_URL: `${web('sos')}/auth/login`,
     NEXT_PUBLIC_AUTH_API_URL: `${api('sos')}/api`,
     NEXT_PUBLIC_API_URL_TASK: `${api('tasks')}/api`,
     VITE_SUITE_URL: web('sos'), VITE_SUITE_API: `${api('sos')}/api`,

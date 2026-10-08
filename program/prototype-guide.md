@@ -4,7 +4,7 @@ This guide tracks the working presentation under [D-073](decisions/D-073.md). Pa
 
 ## Run locally
 
-From the repository root, run `pnpm demo`. It starts SOS at `http://localhost:3500/en/auth/login` and Tasks at `http://localhost:3501`. Use an existing synthetic persona in a private browser window; the fixture accounts are documented in `mock/README.md`. This guide does not reproduce passwords.
+From the repository root, run `pnpm demo`. It starts SOS at `http://localhost:3500/auth/login` and Tasks at `http://localhost:3501`. Use an existing synthetic persona in a private browser window; the fixture accounts are documented in `mock/README.md`. This guide does not reproduce passwords.
 
 `pnpm demo wm,website` starts the CMS/website demonstration. `pnpm demo tasks,files` selects tools; `pnpm demo --list` prints addresses without starting anything. [Launcher details](../tools/demo/README.md) explain the isolated dataset, occupied-port behavior and Ctrl+C. Restart for a fresh backend seed. No online deployment is enabled.
 
@@ -15,7 +15,9 @@ From the repository root, run `pnpm demo`. It starts SOS at `http://localhost:35
 | CMS / website | Edit Partners, submit, approve, publish, reload website; last-good content during an outage | Selected mock flow completed in PR20/21 |
 | Shared Demo Panel | Six states, language, light/dark, scene descriptions and local reset across nine shells | Implemented; feature adapters connect per tool |
 | Tasks → Presentation workflow | Search, quick add, edit labels/watchers/reminder, repeat a task, use template, CSV mapping/review/result, select/bulk edit, export, reset | First local UI increment; broader tool integration pending |
-| Files / whiteboards | Existing packaged samples/references and structured whiteboard version flows | Earlier scoped evidence retained; new tool feature wave pending |
+| SOS → Account presentation | Sample usage/limits, onboarding checklist, attributed activity, simulated data export and fixed-code verification/recovery | Local UI increment; no sign-in or account changes |
+| Files → Presentation workflow | Packaged samples, per-person simulated access, comments/versions, conflicts, quota, bulk and drag moves, filters | First UI increment merged in PR25; existing authorized reference/whiteboard surfaces retained |
+| Chats → `/presentation` | Channels/read state, composition, saved/reminder/scheduled items, mock task IDs, sample file names and simulated call stage | First UI increment merged in PR24; new cross-app provisioning/provider delivery pending |
 | Other tools / final 15 journeys | See maintained release register | Remaining work |
 
 ## Tasks presentation script
@@ -29,6 +31,8 @@ From the repository root, run `pnpm demo`. It starts SOS at `http://localhost:35
 7. Demonstrate loading/error/retry/no-access/read-only/success with the shared controls, then restore Normal. **Reset scene** restores selectors; **Reset demo tasks** restores the page's fixtures.
 
 ## Developer handoff
+
+Account presentation uses client state plus shared `UsageMeter`, `AuditLogTable` and `TwoFactorScreens`. Demonstrate onboarding completion → Activity history → search, then Verification demo → Start setup → enter the displayed fixed code → sample recovery download. The exported JSON is tagged `prototype` and `simulated`; it is not a regulatory data export. Existing team, ownership, billing and invoice screens retain their own working mock flows.
 
 Tasks uses `PresentationTask {id,title,status,owner,label,due,recurrence,watchers,reminder}` in `apps/tasks/lib/presentation-tasks.ts`. The adapter is client memory; this increment adds no HTTP endpoint. Changes disappear on reload or workspace scene switch. Existing Tasks API data remains separate.
 

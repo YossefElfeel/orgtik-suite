@@ -38,6 +38,7 @@ function Greeting({ firstName }: { firstName: string }) {
 export function SuiteFrame({ children }: { children: ReactNode }) {
   const t = useTranslations("Nav");
   const ts = useTranslations("Suite");
+  const presentationText = useTranslations("AccountPresentation");
   const pathname = usePathname();
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -55,6 +56,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   // Who sees what is decided in the browser (the person lives in a cookie only it reads), so the
   // server renders the common items and the rest appear after mount, without a mismatch.
   const items: SidebarItem[] = [item("/", t("home"), <House />)];
+  if (process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1") items.push(item("/presentation", presentationText("nav"), <SquaresFour />));
   // The customer dashboard (USR, Phase E): what the person's role in the workspace allows. Billing
   // is the owner's (spec 05 §1); the team is the owner's and admins'.
   const tw = useTranslations("Workspace.nav");
