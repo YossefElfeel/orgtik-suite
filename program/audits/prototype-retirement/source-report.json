@@ -1,0 +1,233 @@
+{
+  "completed": true,
+  "records": [
+    {
+      "route": "plan-management",
+      "destination": "admin",
+      "replacement": "/plans",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/plan-management/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/plan-management/legacy.tsx",
+      "byteExact": true,
+      "sha256": "4414077b398877385bdcb25065397b16aa6c3905331bb1065aa088505a0c0870"
+    },
+    {
+      "route": "plan-management/[id]",
+      "destination": "admin",
+      "replacement": "/plans",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/plan-management/[id]/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/plan-management/[id]/legacy.tsx",
+      "byteExact": true,
+      "sha256": "5929fd733403ef1597738c5866e561eeb7725562e7efd2a2009d212af7809d25"
+    },
+    {
+      "route": "plan-management/features",
+      "destination": "admin",
+      "replacement": "/plans/features",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/plan-management/features/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/plan-management/features/legacy.tsx",
+      "byteExact": true,
+      "sha256": "ef0caafcfd4a7c36342949fe32b8d55e2787bee02ed0577bd0c0eb9ad02fd95e"
+    },
+    {
+      "route": "plan-management/duration",
+      "destination": "admin",
+      "replacement": "/plans",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/plan-management/duration/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/plan-management/duration/legacy.tsx",
+      "byteExact": true,
+      "sha256": "66e0950e9523afef6f6b53a402bca2b165e4beb5ce5bc8d3a3cc392c20819276"
+    },
+    {
+      "route": "plan-management/zones",
+      "destination": "admin",
+      "replacement": "/pricing/zones",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/plan-management/zones/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/plan-management/zones/legacy.tsx",
+      "byteExact": true,
+      "sha256": "c3c09b8878b665db775ffe3d7cd772abe4fdedac2d3da658e0f1aeb2a9f7fd57"
+    },
+    {
+      "route": "plan-management/departments",
+      "destination": "admin",
+      "replacement": "/tools",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/plan-management/departments/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/plan-management/departments/legacy.tsx",
+      "byteExact": true,
+      "sha256": "571f2c285db2c0aae79d709cd242985d42a174538e262466c5913a425f7eb59d"
+    },
+    {
+      "route": "plan-management/categories",
+      "destination": "admin",
+      "replacement": "/tools",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/plan-management/categories/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/plan-management/categories/legacy.tsx",
+      "byteExact": true,
+      "sha256": "aea064823cb3084a0f701df5735b569cfb7b34fc15aa0372e480393d4358f022"
+    },
+    {
+      "route": "plan-management/categories/[id]",
+      "destination": "admin",
+      "replacement": "/tools",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/plan-management/categories/[id]/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/plan-management/categories/[id]/legacy.tsx",
+      "byteExact": true,
+      "sha256": "e36fe60632e0d10d5a26e623cbe25b7212336f09f5dc8183112c8d57ee4005a9"
+    },
+    {
+      "route": "coupons",
+      "destination": "admin",
+      "replacement": "/coupons",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/coupons/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/coupons/legacy.tsx",
+      "byteExact": true,
+      "sha256": "63d2f37b32f30ac4bced8ee85aa5c371f6cf8bce3b44beb8f7ff5fa3c4cdef4a"
+    },
+    {
+      "route": "packages",
+      "destination": "admin",
+      "replacement": "/bundles",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/packages/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/packages/legacy.tsx",
+      "byteExact": true,
+      "sha256": "f33736fdad9837f24e2a0edbfddcf135ae371a5af466bbbe173db7cfb748580e"
+    },
+    {
+      "route": "packages/[id]",
+      "destination": "admin",
+      "replacement": "/bundles",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/packages/[id]/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/packages/[id]/legacy.tsx",
+      "byteExact": true,
+      "sha256": "75234b705b4c45d76d00186d4e47b955f332713876b052e22617016491339cb1"
+    },
+    {
+      "route": "subscriptions",
+      "destination": "account",
+      "replacement": "/billing",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/subscriptions/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/subscriptions/legacy.tsx",
+      "byteExact": true,
+      "sha256": "9101e963c830b5f887aba58f47c48ed2a7e15d09f760bdf1b68bd983052a9e43"
+    },
+    {
+      "route": "subscriptions/[id]",
+      "destination": "account",
+      "replacement": "/billing",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/subscriptions/[id]/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/subscriptions/[id]/legacy.tsx",
+      "byteExact": true,
+      "sha256": "f0dce873fc908d9a1dc0c8acbc1d64ff56977a188987400a58e2afb20bb8c6f0"
+    },
+    {
+      "route": "invoices",
+      "destination": "account",
+      "replacement": "/billing/invoices",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/invoices/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/invoices/legacy.tsx",
+      "byteExact": true,
+      "sha256": "6006faa2a76ffb27d4c756178923b06252693e9fd2abcd301d395a7f0bf8154d"
+    },
+    {
+      "route": "invoices/[id]",
+      "destination": "account",
+      "replacement": "/billing/invoices",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/invoices/[id]/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/invoices/[id]/legacy.tsx",
+      "byteExact": true,
+      "sha256": "8794a1d09dd2c90a6a5411706980df16f91e4bd6bd9c69f92be161de820543b1"
+    },
+    {
+      "route": "tickets",
+      "destination": "account",
+      "replacement": "/support",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/tickets/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/tickets/legacy.tsx",
+      "byteExact": true,
+      "sha256": "bf3dfa68ed6812ca8dfb223fbb58762fccb2796d1be42988f7fed826313ac557"
+    },
+    {
+      "route": "tickets/[id]",
+      "destination": "account",
+      "replacement": "/support",
+      "app": "sales",
+      "original": "apps/sales/app/[locale]/(dashboard)/tickets/[id]/page.tsx",
+      "archive": "apps/sales/app/[locale]/(dashboard)/tickets/[id]/legacy.tsx",
+      "byteExact": true,
+      "sha256": "a7c4ff7122d845cdfa2f4966e4e65ed5908edfd90671469cb82d43951c741a82"
+    },
+    {
+      "route": "systems/cms",
+      "scope": "website_manager",
+      "replacement": "/content/pages",
+      "app": "sos",
+      "original": "apps/sos/app/(dashboard)/systems/cms/page.tsx",
+      "archive": "apps/sos/app/(dashboard)/systems/cms/legacy.tsx",
+      "byteExact": true,
+      "sha256": "523c7294988489887cc7dd3e3428b11c5243733c1630efc54f40b64b3710bba1"
+    },
+    {
+      "route": "systems/cms/[cmsId]/accounts",
+      "scope": "website_manager",
+      "replacement": "/content/pages",
+      "app": "sos",
+      "original": "apps/sos/app/(dashboard)/systems/cms/[cmsId]/accounts/page.tsx",
+      "archive": "apps/sos/app/(dashboard)/systems/cms/[cmsId]/accounts/legacy.tsx",
+      "byteExact": true,
+      "sha256": "d074873ecaf9a2ea42efd5a080b05cb03fcf9cbc0f2f8c8d9321422aa2d89acc"
+    },
+    {
+      "route": "content",
+      "scope": "website_manager",
+      "replacement": "/content/pages",
+      "app": "sos",
+      "original": "apps/sos/app/(dashboard)/content/page.tsx",
+      "archive": "apps/sos/app/(dashboard)/content/legacy.tsx",
+      "byteExact": true,
+      "sha256": "a3b0ddd438b26dddc932d55423bd54ab876494324bee03794baa920320858fb3"
+    }
+  ],
+  "checks": {
+    "salesTypecheck": "pass",
+    "sosTypecheck": "pass",
+    "salesCatalogs": "5languages match",
+    "sosCatalogs": "10groups5languages match"
+  },
+  "liveNavigation": {
+    "customerInvoice": "passed: existing SOS session established in same Page, actual Sales handoff, old Sales invoice route returns to loaded SOS/billing/invoices",
+    "proof": ".qa/retired-route-ui-report.json",
+    "staffAdmin": "pending: ADM web not running in current sandbox",
+    "frontendNavigation": "Same original window preserves the SOS origin tab session; staff catalog uses existing /go/platform_admin handoff; legacy detail IDs are not remapped to new records."
+  },
+  "alreadyRetired": [
+    {
+      "route": "sos/chat",
+      "replacement": "/go/hq"
+    }
+  ],
+  "notPresent": [
+    "sos/icons-test"
+  ],
+  "notRemoved": [
+    "dependencies",
+    "UI shims",
+    "Content project",
+    "Vercel projects",
+    "original screen source"
+  ]
+}
