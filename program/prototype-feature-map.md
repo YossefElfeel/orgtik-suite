@@ -1,6 +1,6 @@
 # OrgTik prototype: 72-feature implementation map
 
-Presentation reference, 2026-10-08, under [D-073](decisions/D-073.md). The 72 IDs and titles below come from `backlog/release-packages.csv`; none are removed or renumbered. This map describes visible UI/mock behavior, not production readiness. Fifteen local walkthroughs now have scoped UI coverage with explicit limits; this is not full backend or hosted acceptance. Validated merge baseline `eebc85d` is through PR37; current closure extensions await integration. Vercel is paused.
+Presentation reference, 2026-10-08, under [D-073](decisions/D-073.md). The 72 IDs and titles below come from `backlog/release-packages.csv`; none are removed or renumbered. This map describes visible UI/mock behavior, not production readiness. Fifteen local walkthroughs now have scoped UI coverage with explicit limits; this is not full backend or hosted acceptance. Validated merge baseline `0337413` is through PR38; local UI/mock delivery is closed in A34; backend/hosted acceptance remains deferred. Vercel is paused.
 
 **Status language:** `Local` means the screen/action exists with scoped local evidence; it does not establish complete feature acceptance. `Retained` means an earlier working surface is reused. `Partial` identifies a missing part of the promised interaction. `Focused verification` distinguishes source from accepted UI behavior; external capability stays separate. Live providers, arbitrary binary uploads, real media and regulatory submissions remain external deferrals.
 
@@ -151,7 +151,7 @@ Screen `/presentation`, **Account presentation**, source `apps/sos/components/pr
 
 The [15 walkthrough scripts](prototype-journeys.md) reuse these scenes and retained flows. The fifteen walkthroughs have local UI coverage; a single uninterrupted full backend/hosted release run has not been accepted. Shared gallery checks and individual tool captures are evidence for those packages; they cannot be summed into a claim that all 72 commitments or all journeys pass.
 
-Focused Sales company and Marketing journey/brand-kit UI acceptance now passes 80 scoped checks and23 captures, including functional paths and matrix/digit confirmations in `audits/prototype-final/feature-detail-report.json`. Package evidence covers the remaining visible UI/mock flows; Tasks priority/due filters, editing and bulk status/priority pass22 scoped checks/eight EN/AR/theme/width captures (`audits/prototype-final/task-depth-report.json`). Final integration CI and evidence review remain required. Future backend requirements are handoff notes, not current tasks. External deferrals stay visible after a successful mock demonstration.
+Focused Sales company and Marketing journey/brand-kit UI acceptance now passes 80 scoped checks and23 captures, including functional paths and matrix/digit confirmations in `audits/prototype-final/feature-detail-report.json`. Package evidence covers the remaining visible UI/mock flows; Tasks priority/due filters, editing and bulk status/priority pass22 scoped checks/eight EN/AR/theme/width captures (`audits/prototype-final/task-depth-report.json`). Final implementation CI and evidence review passed in PR38. Future backend requirements are handoff notes, not current tasks. External deferrals stay visible after a successful mock demonstration.
 
 
 ## Latest evidence overlay — 2026-10-08

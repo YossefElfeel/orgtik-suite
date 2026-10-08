@@ -21,7 +21,11 @@ Ctrl+C stops only processes spawned by this run. Restart the command for fresh s
 
 The selected tools share a second memory-only presentation service on SOS API port + 77 (default7577). It holds only synthetic connected task/lead/search/notification records, separate from accounts, invoices, CMS content and journals. `Ctrl+K` opens suite presentation search; notification links and result links use the existing destination-scoped handoff. Scene workspace/persona, language, theme, digits and timezone travel as presentation metadata. App access is still decided by the existing signed session.
 
-Chats task creation and Marketing campaign leads appear in Tasks/Sales when the presentation service is available. Standalone development without its public runtime variables retains local simulated behavior. The bridge reset endpoint affects only its synthetic records; it never advances the backend clock or resets business data. Local dev uses the installed CLI's supported Webpack option for Next16 linked staging; source stack configuration remains unchanged.
+Chats message tasks and HR onboarding appear in Tasks. Marketing campaigns connect to WM forms and OrgTik Sales; won deals create simulated workspace receipts. Files exposes versioned packaged records to Tasks/Chats, including historical sample previews. Shared search and notifications open their exact presentation targets through the existing signed handoff. Standalone development without the runtime variables retains local simulated behavior.
+
+Use `pnpm demo tasks,files,chats` for the collaboration walkthrough, `pnpm demo sales,marketing,wm` for campaign/CRM work, and `pnpm demo admin,hr` for staff/people flows. The nine tool screens,72 feature mappings and15 local walkthroughs are documented in `program/prototype-guide.md`. Their evidence records backend/provider/hosted limits separately.
+
+The bridge reset endpoint affects only its synthetic records; it never advances the backend clock or resets business data. `node tools/demo/generate-contracts.cjs` maintains `contracts.json` from the16 route declarations. These contracts describe the local presentation transport; existing app admission remains separate. Local dev uses the installed CLI's supported Webpack option for Next16 linked staging; source stack configuration remains unchanged.
 
 No online deployment is performed. Payments, mail, AI and external delivery remain simulated.
 
