@@ -1,0 +1,50 @@
+[
+  {
+    "file": "apps/tasks/components/presentation/TasksPresentation.tsx",
+    "sha256": "f7e0cce3daf4acfc664f2fa8900bdc755d9698b161e6ccd7da1cc9c3c7ce56e0",
+    "comparison": "CRLF/LF normalized; staging content matches",
+    "stagedMatches": true
+  },
+  {
+    "file": "apps/tasks/lib/presentation-tasks.ts",
+    "sha256": "c6fef6129d918021bc31ae9406c96770d645770f784f76c49ef9bf8cfc762a65",
+    "comparison": "CRLF/LF normalized; staging content matches",
+    "stagedMatches": true
+  },
+  {
+    "file": "apps/tasks/components/suite/SuiteFrame.tsx",
+    "sha256": "5ce27f09a2a6d3ef4483bc1e0b576197c0c9a3658963427cc3eea00bd2864d29",
+    "comparison": "CRLF/LF normalized; staging content matches",
+    "stagedMatches": true
+  },
+  {
+    "file": "apps/tasks/messages/en.json",
+    "sha256": "772df9c5132f1f129cb6aa4912e35d80a7cfad08c5288cdc6138ca27585b3b83",
+    "comparison": "CRLF/LF normalized; staging content matches",
+    "stagedMatches": true
+  },
+  {
+    "file": "apps/tasks/messages/ar.json",
+    "sha256": "7f61d550ab3dcc33f0acc6bc8129a2e1b69fa7d4faa4c00add2a9d486ac595c8",
+    "comparison": "CRLF/LF normalized; staging content matches",
+    "stagedMatches": true
+  },
+  {
+    "file": "apps/tasks/messages/de.json",
+    "sha256": "587c7083bdf9d576f01727d13fe0ae3faf02057ed74dec4e530832096af40901",
+    "comparison": "CRLF/LF normalized; staging content matches",
+    "stagedMatches": true
+  },
+  {
+    "file": "apps/tasks/messages/fr.json",
+    "sha256": "96dae51605fec03c8fb3ebc2db628428b9eb37b8dba8f6d8ec7378bbeeb5e065",
+    "comparison": "CRLF/LF normalized; staging content matches",
+    "stagedMatches": true
+  },
+  {
+    "file": "apps/tasks/messages/it.json",
+    "sha256": "c2b1c6dab5910400a655db5184a2f1dc4fe03c53b48dbe39782bbfaa43490d6a",
+    "comparison": "CRLF/LF normalized; staging content matches",
+    "stagedMatches": true
+  }
+]
