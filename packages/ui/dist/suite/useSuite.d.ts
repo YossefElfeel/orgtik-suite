@@ -4,6 +4,8 @@ export declare function connectionState(snapshot: SuiteSnapshot | null, source: 
 export declare function useSuite(): {
     snapshot: SuiteSnapshot | null;
     session: import("../auth/types.js").AuthEnvelope<import("../auth/types.js").SessionPerson> | null;
+    request: <T>(path: string, method?: "GET" | "POST" | "PATCH" | "DELETE", body?: unknown) => Promise<T>;
+    mutate: <T>(path: string, method: "POST" | "PATCH" | "DELETE", body?: unknown) => Promise<T>;
     toolState: (tool: ToolKey) => {
         scope: string;
         roles: string[];
@@ -34,5 +36,6 @@ export declare function useSuite(): {
     sosUrl?: string;
     currentTool?: ToolKey;
     error?: string;
+    refresh?: () => Promise<void>;
 };
 //# sourceMappingURL=useSuite.d.ts.map

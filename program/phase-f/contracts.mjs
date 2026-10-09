@@ -27,6 +27,7 @@ function collect(source, app, audience) {
   });
 }
 collect('lib/workspace-boundary.js', 'shared', 'suite or identity route session');
+collect('lib/workspace-suite.js', 'shared', 'suite or current tool audience on its own API origin');
 collect('lib/identity.js', 'identity', 'current signed session; refresh token only on refresh');
 for (const [app, files] of Object.entries(manifest.apps)) for (const file of files.filter(file => (file.startsWith(`apps/${app}`) || file === `lib/tool-adapters/${app}.js`) && file.endsWith('.js'))) collect(file, app, `tool:${app}`);
 for (const file of manifest.staff?.wm || []) if (file.startsWith('apps/wm') && file.endsWith('.js')) collect(file, 'wm', 'staff:wm');

@@ -6,6 +6,7 @@ export type SuiteConnector = {
     source: ToolKey;
     target: ToolKey;
     enabled: boolean;
+    accessMode?: "projection";
     title?: string;
     data?: string[];
 };

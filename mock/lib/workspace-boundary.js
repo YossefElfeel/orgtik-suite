@@ -299,6 +299,11 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       try {
         const principal = frame.principal, id = principal?.context.workspaceContext?.workspace.id;
         if (!id) throw failure(403, 'workspace_required', 'Choose a workspace to continue.');
+        const workspace = platform().getStore().workspace(id), context = principal.context.workspaceContext;
+        // The retained absence projection grants no HR record/directory access. Missing
+        // subscriptions, disabled connections and external reviewers receive no rows.
+        const connector = require('./connectors').list(workspace, context).find(row => row.source === APP_TO_TOOL[tool] && row.target === 'hr');
+        if (context.tools.hr.access === 'not_subscribed' || connector?.enabled === false || context.member.role === 'guest') return res.json({ success: true, statusCode: 200, data: { workspaceId: id, timeZone: workspace.timeZone, fromDate: req.query.fromDate, toDate: req.query.toDate, items: [] } });
         hrRuntime = registry.create(id, 'hr');
         const data = require('./workspace-availability').projectAvailability({ realm, workspace: platform().getStore().workspace(id), identity: identityFor(), snapshot: hrRuntime.exportSnapshot(), tool, actor: principal.user, fromDate: req.query.fromDate, toDate: req.query.toDate });
         res.json({ success: true, statusCode: 200, message: 'Workspace availability fetched', data });
@@ -512,7 +517,20 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       const request = { frame, key, req, principal, runtime: null, relatedRuntimes };
       const result = await authority.runPrepared(frame, () => requests.run(request, async () => {
         let app = key === "sos" || key === "admin" ? accountRoutes(currentLegacyApp, frame) : currentLegacyApp;
-        if (taskSample) { app = express(); app.use(createTaskSampleRouter({ config })); }
+        if (/^\/api\/suite(?:\/|$)/.test(url)) {
+          const context = principal?.context.workspaceContext;
+          if (!context) throw failure(403, 'workspace_required', 'Choose a workspace to continue.');
+          const runtimeFor = tool => {
+            const appKey = TOOL_DEFINITIONS[tool]?.app;
+            if (!appKey) throw failure(422, 'unsupported_tool', 'Choose a supported tool.');
+            if (!relatedRuntimes.has(appKey)) relatedRuntimes.set(appKey, registry.create(context.workspace.id, appKey));
+            return relatedRuntimes.get(appKey);
+          };
+          app = require('./workspace-suite').createSuiteRouter({ S, identity, principal, runtimeFor, command: (tool, kind, payload, operationId) => {
+            request.runtime = runtimeFor(tool);
+            return executeCommand(kind, payload, { workspaceId: context.workspace.id, actor: { userId: principal.user.id }, operationId });
+          } });
+        } else if (taskSample) { app = express(); app.use(createTaskSampleRouter({ config })); }
         else if (publicFile) {
           const workspaceId = registry.publicFileWorkspace(publicFile[1]);
           if (!workspaceId) throw failure(404, 'public_grant_not_found', 'This link is not available.');

@@ -28,6 +28,8 @@ function createWorkspaceRuntime(input, tool) {
       if (!user || user.isActive === false || context.realm !== realm || context.workspace?.id !== input.workspace.id || !access || ['no_access', 'not_subscribed'].includes(access.access) || !access.roles?.length || !input.identity.userScopes(user).some(scope => scope.scope === 'task_manager' && scope.roles.length)) throw Object.assign(new Error("Tasks bootstrap is not authorized."), { status: 403 });
       return hooks.bootstrap(user);
     },
+    suiteFeed: context => { const access = context?.tools.tasks; if (!access || ['no_access', 'not_subscribed'].includes(access.access) || context.workspace.id !== input.workspace.id) throw Object.assign(new Error('Tasks access is required.'), { status: 403 }); return hooks.suiteFeed(input.identity.findUser(context.actor.effectiveUserId)); },
+    createConnectedTask: (context, payload) => { if (context?.workspace.id !== input.workspace.id || !context.tools.tasks?.canWrite || context.actor.readOnly) throw Object.assign(new Error('Tasks write access is required.'), { status: 403 }); return hooks.createConnectedTask(input.identity.findUser(context.actor.effectiveUserId), payload); },
     usage: hooks.usage, authorizeSharedTarget: hooks.authorizeSharedTarget, transferOwnership: hooks.transferOwnership, close: hooks.close,
   };
 }

@@ -4,6 +4,10 @@ const fail = (status, code, message) => Object.assign(new Error(message), { stat
 const ROLE_NAMES = {
   tasks: ['super_admin', 'project_manager', 'developer', 'viewer'],
   files: ['super_admin', 'file_editor', 'file_viewer', 'file_guest'],
+  hr: ['super_admin', 'hr', 'manager', 'finance_manager', 'employee'],
+  crm: ['admin', 'manager', 'salesman', 'customer'],
+  marketing: ['super_admin', 'marketing_manager', 'marketing_specialist', 'content_writer', 'client_reviewer'],
+  chat: ['owner', 'admin', 'member', 'guest'],
 };
 const PROFILE_FIELDS = ['jobTitle', 'department', 'about', 'language', 'timeZone', 'weekStartDay', 'dateFormat', 'timeFormat', 'flyoutToastMessage', 'timezoneChangeNotification'];
 function authorize({ S, identity, workspace, principal, tool, kind, payload }) {
@@ -14,7 +18,7 @@ function authorize({ S, identity, workspace, principal, tool, kind, payload }) {
   if (!actor || principal.readOnly || !access?.canWrite) throw fail(423, 'workspace_read_only', 'This workspace tool is read-only.');
   if (kind === 'profile.self_update') return { actor, access };
   if (!['workspace.tool.roles', 'workspace.member.remove'].includes(kind)) throw fail(501, 'workspace_command_required', 'This action is not available yet.');
-  const isToolAdmin = access.roles.includes('super_admin');
+  const isToolAdmin = access.roles.some(role => require('./workspace-suite').ADMIN_ROLES[tool]?.includes(role));
   if (!isToolAdmin) people.requireAdmin(workspace, actor);
   const user = identity.findUser(payload.userId), member = user && people.memberOf(workspace, user);
   if (!member) throw fail(404, 'member_not_found', 'This person was not found in the workspace.');

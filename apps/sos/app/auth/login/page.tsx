@@ -14,6 +14,7 @@ import { createRHFField } from "@orgtik/ui/rhf";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { safeRedirect, suiteReturn } from "@/lib/safe-redirect";
+import { adaptiveEntry } from "@/lib/adaptive-entry";
 import { handoffHref } from "@/lib/handoff";
 import { API_URL } from "@/constants/env";
 import { PASSWORD_MAX, PASSWORD_MIN } from "@/lib/password";
@@ -77,7 +78,7 @@ export default function LoginPage() {
           return;
         }
       }
-      return confirm(() => router.replace(next));
+      return confirm(() => router.replace(staffTarget ? next : adaptiveEntry(response.data.workspaceContext, searchParams.get("redirect"))));
     } catch (err) {
       // The API's own messages are English only; show ours, in the person's language.
       const status = (err as FetchBaseQueryError)?.status;

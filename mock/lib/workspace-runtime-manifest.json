@@ -8,10 +8,12 @@
       "apps/tasks/files.js",
       "apps/tasks/runtime-state.js",
       "apps/tasks/seed.js",
+      "apps/tasks/v3.js",
       "lib/accounts.js",
       "lib/auth-store.js",
       "lib/business-calendar.js",
       "lib/clock.js",
+      "lib/connectors.js",
       "lib/dispatch.js",
       "lib/domain-checkpoint.js",
       "lib/icons.js",
@@ -43,7 +45,8 @@
       "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
-      "lib/workspace-runtime.js"
+      "lib/workspace-runtime.js",
+      "lib/workspace-suite.js"
     ],
     "files": [
       "apps/files.js",
@@ -57,6 +60,7 @@
       "lib/auth-store.js",
       "lib/business-calendar.js",
       "lib/clock.js",
+      "lib/connectors.js",
       "lib/dispatch.js",
       "lib/domain-checkpoint.js",
       "lib/icons.js",
@@ -88,7 +92,8 @@
       "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
-      "lib/workspace-runtime.js"
+      "lib/workspace-runtime.js",
+      "lib/workspace-suite.js"
     ],
     "hr": [
       "apps/hr.js",
@@ -110,6 +115,7 @@
       "lib/auth-store.js",
       "lib/business-calendar.js",
       "lib/clock.js",
+      "lib/connectors.js",
       "lib/dispatch.js",
       "lib/domain-checkpoint.js",
       "lib/icons.js",
@@ -141,7 +147,8 @@
       "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
-      "lib/workspace-runtime.js"
+      "lib/workspace-runtime.js",
+      "lib/workspace-suite.js"
     ],
     "sales": [
       "apps/sales.js",
@@ -160,6 +167,7 @@
       "lib/auth-store.js",
       "lib/business-calendar.js",
       "lib/clock.js",
+      "lib/connectors.js",
       "lib/dispatch.js",
       "lib/domain-checkpoint.js",
       "lib/icons.js",
@@ -191,7 +199,8 @@
       "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
-      "lib/workspace-runtime.js"
+      "lib/workspace-runtime.js",
+      "lib/workspace-suite.js"
     ],
     "marketing": [
       "apps/marketing.js",
@@ -214,6 +223,7 @@
       "lib/auth-store.js",
       "lib/business-calendar.js",
       "lib/clock.js",
+      "lib/connectors.js",
       "lib/dispatch.js",
       "lib/domain-checkpoint.js",
       "lib/icons.js",
@@ -245,7 +255,8 @@
       "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
-      "lib/workspace-runtime.js"
+      "lib/workspace-runtime.js",
+      "lib/workspace-suite.js"
     ],
     "chats": [
       "apps/chats.js",
@@ -256,6 +267,7 @@
       "lib/auth-store.js",
       "lib/business-calendar.js",
       "lib/clock.js",
+      "lib/connectors.js",
       "lib/dispatch.js",
       "lib/domain-checkpoint.js",
       "lib/icons.js",
@@ -287,7 +299,8 @@
       "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
-      "lib/workspace-runtime.js"
+      "lib/workspace-runtime.js",
+      "lib/workspace-suite.js"
     ]
   },
   "staff": {
@@ -311,6 +324,7 @@
       "lib/auth-store.js",
       "lib/business-calendar.js",
       "lib/clock.js",
+      "lib/connectors.js",
       "lib/dispatch.js",
       "lib/domain-checkpoint.js",
       "lib/icons.js",
@@ -342,7 +356,8 @@
       "lib/workspace-people-journeys.js",
       "lib/workspace-people.js",
       "lib/workspace-runtime-manifest.json",
-      "lib/workspace-runtime.js"
+      "lib/workspace-runtime.js",
+      "lib/workspace-suite.js"
     ]
   }
 }
