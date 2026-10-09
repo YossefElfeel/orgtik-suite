@@ -1,0 +1,174 @@
+{
+  "reviews": [
+    {
+      "name": "foundations-tokens--semantic-colors--ar-dark.png",
+      "pixels": 54,
+      "withinCodeAnnotations": 54,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-tokens--semantic-colors--ar-light.png",
+      "pixels": 1,
+      "withinCodeAnnotations": 1,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-tokens--semantic-colors--de-light.png",
+      "pixels": 8,
+      "withinCodeAnnotations": 8,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-tokens--semantic-colors--en-dark.png",
+      "pixels": 53,
+      "withinCodeAnnotations": 53,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-tokens--semantic-colors--en-light.png",
+      "pixels": 8,
+      "withinCodeAnnotations": 8,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-tokens--semantic-colors--fr-dark.png",
+      "pixels": 53,
+      "withinCodeAnnotations": 53,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-tokens--type-roles--ar-dark.png",
+      "pixels": 12,
+      "withinCodeAnnotations": 12,
+      "dimensions": [
+        1280,
+        951
+      ]
+    },
+    {
+      "name": "foundations-tokens--type-roles--ar-light.png",
+      "pixels": 19,
+      "withinCodeAnnotations": 19,
+      "dimensions": [
+        1280,
+        951
+      ]
+    },
+    {
+      "name": "foundations-tokens--type-roles--de-light.png",
+      "pixels": 19,
+      "withinCodeAnnotations": 19,
+      "dimensions": [
+        1280,
+        881
+      ]
+    },
+    {
+      "name": "foundations-tokens--type-roles--en-dark.png",
+      "pixels": 12,
+      "withinCodeAnnotations": 12,
+      "dimensions": [
+        1280,
+        881
+      ]
+    },
+    {
+      "name": "foundations-tokens--type-roles--en-light.png",
+      "pixels": 19,
+      "withinCodeAnnotations": 19,
+      "dimensions": [
+        1280,
+        881
+      ]
+    },
+    {
+      "name": "foundations-tokens--type-roles--fr-dark.png",
+      "pixels": 12,
+      "withinCodeAnnotations": 12,
+      "dimensions": [
+        1280,
+        881
+      ]
+    },
+    {
+      "name": "foundations-v2--foundations-v-2--ar-dark.png",
+      "pixels": 4,
+      "withinCodeAnnotations": 4,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-v2--foundations-v-2--ar-light.png",
+      "pixels": 4,
+      "withinCodeAnnotations": 4,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-v2--foundations-v-2--de-light.png",
+      "pixels": 4,
+      "withinCodeAnnotations": 4,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-v2--foundations-v-2--en-dark.png",
+      "pixels": 4,
+      "withinCodeAnnotations": 4,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-v2--foundations-v-2--en-light.png",
+      "pixels": 4,
+      "withinCodeAnnotations": 4,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "foundations-v2--foundations-v-2--fr-dark.png",
+      "pixels": 4,
+      "withinCodeAnnotations": 4,
+      "dimensions": [
+        1280,
+        800
+      ]
+    }
+  ],
+  "provenance": {
+    "sourceCommit": "0636c3a",
+    "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37987861085",
+    "reviewedAt": "2026-10-10",
+    "changedPairs": 18,
+    "totalPixels": 294,
+    "scope": "Every changed pixel lies inside a visible code annotation; text/control state/layout anchors/selected fonts and dimensions are unchanged. Defaults, 0.1 threshold, zero-pixel requirement and no-mask policy are retained."
+  }
+}

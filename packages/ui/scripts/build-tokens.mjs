@@ -45,6 +45,9 @@ for (const [role, t] of Object.entries(scale.type)) {
   scalar[`--ot-type-${role}-tracking`] = t.tracking;
 }
 for (const [k, v] of Object.entries(scale.control)) scalar[`--ot-control-${k}`] = v;
+for (const group of ["space", "layout", "zIndex"]) for (const [k, t] of Object.entries(src[group] ?? {})) scalar[`--ot-${group === "zIndex" ? "z" : group}-${k}`] = value(t);
+scalar["--ot-row-height"] = src.density.comfortable.row;
+scalar["--ot-density-control"] = src.density.comfortable.control;
 
 // Semantic sets.
 const semantic = { light: {}, dark: {} };
@@ -53,8 +56,8 @@ for (const theme of ["light", "dark"]) for (const [name, t] of Object.entries(el
 
 // Interaction colours, derived so they follow each theme: a fill mixes toward the text colour.
 const derived = {
-  "--ot-action-primary-hover": "color-mix(in oklab, var(--ot-action-primary-bg), var(--ot-fg) 14%)",
-  "--ot-action-brand-hover": "color-mix(in oklab, var(--ot-action-brand-bg), var(--ot-fg) 14%)",
+  "--ot-action-primary-hover": "color-mix(in oklab, var(--ot-action-primary-bg), var(--ot-action-primary-fg) 18%)",
+  "--ot-action-brand-hover": "color-mix(in oklab, var(--ot-action-brand-bg), var(--ot-action-brand-fg) 18%)",
   "--ot-danger-solid-hover": "color-mix(in oklab, var(--ot-danger-solid), var(--ot-fg) 14%)",
   "--ot-hover": "color-mix(in oklab, var(--ot-fg) 7%, transparent)",
   "--ot-pressed": "color-mix(in oklab, var(--ot-fg) 12%, transparent)",
@@ -81,6 +84,8 @@ const css =
   // Also on every [data-theme] element: a custom property that reads others resolves where it is
   // declared, so a scoped dark area (a ThemeScope, a Storybook frame) must recompute these.
   block(":root,\n[data-theme]", derived) +
+  block('[data-density="compact"]', { "--ot-row-height": src.density.compact.row, "--ot-density-control": src.density.compact.control }) +
+  block('[data-density="comfortable"]', { "--ot-row-height": src.density.comfortable.row, "--ot-density-control": src.density.comfortable.control }) +
   "\n/* Arabic: no letter-spacing, taller lines. */\n" +
   block(":lang(ar)", arabic) +
   "\n@media (prefers-reduced-motion: reduce) {\n" +
@@ -100,8 +105,8 @@ const theme = [];
 for (const name of Object.keys(src.semantic.light)) theme.push(`  --color-${twName(name)}: var(--ot-${name});`);
 for (const k of ["action-primary-hover", "action-brand-hover", "danger-solid-hover", "hover", "pressed", "brand-subtle"]) theme.push(`  --color-${k}: var(--ot-${k});`);
 theme.push("  --color-scrim: var(--ot-scrim);");
-theme.push("  --shadow-raised: var(--ot-shadow-raised);");
-theme.push("  --shadow-overlay: var(--ot-shadow-overlay);");
+for (const k of ["xs", "sm", "md", "lg", "xl", "lit", "contact", "raised", "overlay"]) theme.push(`  --shadow-${k}: var(--ot-shadow-${k});`);
+for (const k of Object.keys(src.space ?? {})) theme.push(`  --spacing-ot-${k}: var(--ot-space-${k});`);
 for (const k of Object.keys(src.radius)) theme.push(`  --radius-${k}: var(--ot-radius-${k});`);
 for (const k of Object.keys(src.font)) theme.push(`  --font-${k}: var(--ot-font-${k});`);
 for (const k of Object.keys(src.easing)) theme.push(`  --ease-ot-${k}: var(--ot-ease-${k});`);
@@ -122,6 +127,11 @@ const data = {
   duration: Object.fromEntries(Object.entries(src.duration).map(([k, t]) => [k, value(t)])),
   type: scale.type,
   control: scale.control,
+  space: Object.fromEntries(Object.entries(src.space).map(([k, t]) => [k, value(t)])),
+  layout: Object.fromEntries(Object.entries(src.layout).map(([k, t]) => [k, value(t)])),
+  zIndex: Object.fromEntries(Object.entries(src.zIndex).map(([k, t]) => [k, value(t)])),
+  density: src.density,
+  elevation,
 };
 // A TypeScript module, so the compile emits tokens.js and an exact tokens.d.ts. Written only when
 // it changes: it is a tracked source file, and on Windows Turborepo holds its inputs mapped while

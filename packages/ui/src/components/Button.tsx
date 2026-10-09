@@ -6,7 +6,7 @@ import { cn } from "../lib/cn.js";
 export const buttonVariants = cva(
   [
     "inline-flex shrink-0 items-center justify-center gap-2 rounded-pill font-body font-semibold whitespace-nowrap select-none",
-    "transition-colors duration-(--ot-duration-fast) ease-ot-out",
+    "transition-[color,background-color,box-shadow,transform] duration-(--ot-duration-fast) ease-ot-out active:scale-[0.98] motion-reduce:transform-none",
     "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus",
     "disabled:pointer-events-none disabled:opacity-50 aria-busy:cursor-progress",
   ],
@@ -23,6 +23,7 @@ export const buttonVariants = cva(
         brand: "bg-action-brand text-on-action-brand hover:bg-action-brand-hover active:brightness-90",
       },
       size: {
+        xs: "h-control-xs px-2.5 text-caption",
         sm: "h-control-sm px-3 text-body-sm",
         md: "h-control-md px-4 text-body",
         lg: "h-control-lg px-5 text-body-lg",
@@ -59,6 +60,7 @@ function Spinner() {
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
     /** Shows a spinner, marks the button busy and blocks presses until the work ends. */
+    shape?: "pill" | "control";
     loading?: boolean;
     /** An icon before the label (at the reading start). */
     startIcon?: ReactNode;
@@ -67,7 +69,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
   };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { className, variant, size, loading = false, startIcon, endIcon, disabled, children, type = "button", ...props },
+  { className, variant, size, shape, loading = false, startIcon, endIcon, disabled, children, type = "button", ...props },
   ref,
 ) {
   const brand = variant === "brand";
@@ -75,7 +77,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     <button
       ref={ref}
       type={type}
-      className={cn(buttonVariants({ variant, size }), className)}
+      className={cn(buttonVariants({ variant, size }), shape === "control" && "rounded-field", className)}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
       {...props}

@@ -26,9 +26,9 @@ export async function settleVisualStory(page, globals) {
     return root?.children.length && document.documentElement.lang === locale && document.documentElement.dataset.theme === theme;
   }, { theme, locale });
   await page.evaluate(async () => {
-    // Request both packaged families explicitly; fonts.ready alone may resolve before a late
+    // Request all packaged families explicitly; fonts.ready alone may resolve before a late
     // story render starts loading the font it needs. Missing font files must fail, not fall back.
-    for (const [family, sample] of [["OrgTik Montserrat", "OrgTik"], ["OrgTik Arabic", "أورج تك"]]) {
+    for (const [family, sample] of [["OrgTik Montserrat", "OrgTik"], ["OrgTik Arabic", "أورج تك"], ["OrgTik Plex", "Workspace"]]) {
       const loaded = await document.fonts.load(`400 14px "${family}"`, sample);
       if (!loaded.length || loaded.some(font => font.status !== "loaded")) throw new Error(`Visual font unavailable: ${family}`);
     }

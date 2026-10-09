@@ -42,7 +42,7 @@ export function CardHeader({ title, description, actions, className }) {
 // Skeleton and Spinner -----------------------------------------------------------------------
 /** A placeholder with the shape of the content that is loading. The region should carry aria-busy. */
 export function Skeleton({ className, ...props }) {
-    return _jsx("div", { "aria-hidden": "true", className: cn("animate-pulse rounded-field bg-sunken motion-reduce:animate-none", className), ...props });
+    return _jsx("div", { "aria-hidden": "true", className: cn("ot-skeleton rounded-field bg-sunken", className), ...props });
 }
 const spinner = cva("animate-spin motion-reduce:animate-[spin_1.5s_linear_infinite]", {
     variants: { size: { sm: "size-4", md: "size-5", lg: "size-8" } },

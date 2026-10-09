@@ -254,3 +254,12 @@ export type AddTimeOffFormValues = {
 export type AddTimeOffFormInput = AddTimeOffFormValues;
 export type DecisionFormValues = { decision: 'approved' | 'rejected'; note: string };
 export type TimeOffActionDialogProps = TimeOffRequestDialogProps & { status?: TimeOffStatus; onSave?: (data: DecisionFormValues) => void };
+export type LeaveRequestSheetProps = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  title: string;
+  size?: "2xl";
+  trigger?: import("react").ReactNode;
+  children: import("react").ReactNode;
+  footer?: import("react").ReactNode;
+};

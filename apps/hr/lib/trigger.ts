@@ -1,6 +1,7 @@
 import { createElement, isValidElement, type ReactElement, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/shared/IconButton";
+import { Button as SuiteButton, IconButton as SuiteIconButton } from "@orgtik/ui";
 
 /**
  * Props for a Base UI trigger (dialog, sheet, menu) whose opener the caller passes in
@@ -14,7 +15,7 @@ export function triggerProps(opener: ReactNode): {
   nativeButton: boolean;
   children?: ReactNode;
 } {
-  if (isValidElement<Record<string, unknown>>(opener) && (opener.type === "button" || opener.type === Button || opener.type === IconButton)) {
+  if (isValidElement<Record<string, unknown>>(opener) && (opener.type === "button" || opener.type === Button || opener.type === IconButton || opener.type === SuiteButton || opener.type === SuiteIconButton)) {
     return { render: opener, nativeButton: true };
   }
   return { render: createElement("span"), nativeButton: false, children: opener };

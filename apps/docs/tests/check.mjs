@@ -74,10 +74,13 @@ for (const story of stories) {
   for (const combo of COMBOS) {
     const { context, page } = await createVisualPage(browser);
     const errors = [];
+    const resourceErrors = [];
+    page.on("requestfailed", request => resourceErrors.push({ url: request.url(), failure: request.failure() }));
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("console", (m) => m.type() === "error" && errors.push(m.text()));
     await page.goto(`http://localhost:${port}/iframe.html?id=${story}&viewMode=story&globals=${combo.globals}`, { waitUntil: "networkidle" });
-    await settleVisualStory(page, combo.globals);
+    try { await settleVisualStory(page, combo.globals); }
+    catch (error) { console.error(JSON.stringify({ story, combo: combo.id, resourceErrors })); throw error; }
     const metadata = await visualPageMetadata(context, page);
 
     const name = `${story}--${combo.id}.png`;

@@ -459,7 +459,11 @@
     "noSectionsBody": "Un project manager può aggiungerle nella bacheca.",
     "nothingAssignedTitle": "Niente assegnato a te",
     "nothingAssignedBody": "Qui compaiono le attività assegnate a te in qualsiasi progetto.",
-    "create": "Crea attività"
+    "create": "Crea attività",
+    "toolbar": "Controlli elenco attività",
+    "search": "Cerca attività",
+    "noResults": "Nessuna attività corrisponde alla ricerca",
+    "clearSearch": "Cancella la ricerca per vedere le attività assegnate."
   },
   "TaskSheet": {
     "label": "Attività",

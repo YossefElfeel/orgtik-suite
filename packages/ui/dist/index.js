@@ -47,5 +47,6 @@ export { ImportWizard } from "./prototype/ImportWizard.js";
 export { BulkActionBar } from "./prototype/BulkActionBar.js";
 export { MailboxPreview } from "./prototype/MailboxPreview.js";
 export { RichTextEditor } from "./prototype/RichTextEditor.js";
+export { Toolbar } from "./components/Toolbar.js";
 export { demoRuntime, demoRequest } from "./demo/connections.js";
 //# sourceMappingURL=index.js.map

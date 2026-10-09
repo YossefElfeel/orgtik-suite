@@ -60,7 +60,7 @@ export default function HomePage() {
   const showApps = !me || failed || scopes === null || apps.length > 0;
   return (
     <div className="flex flex-col gap-8">
-      <PageHeader title={t("title", { name: user.firstName || user.username })} description={t("description")} />
+      <PageHeader title={me?.workspace.name ?? t("title", { name: user.firstName || user.username })} description={t("description")} meta={me ? <span>{tt("title")} · {me.tools.length}</span> : undefined} />
 
       {me ? <MyTools me={me} /> : null}
 

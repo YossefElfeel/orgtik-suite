@@ -1,0 +1,487 @@
+{
+  "date": "2026-10-09",
+  "scope": "Ordinary Tasks list, HR leave Sheet and Account Home in an isolated memory-backed sandbox; DS v2 specimens.",
+  "checks": [
+    {
+      "name": "Ordinary task search filters actual query data",
+      "pass": true
+    },
+    {
+      "name": "Compact density applies to actual table rows",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/light/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/light/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/light/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/light/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "tasks/en/light/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/light/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/light/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/light/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "tasks/en/dark/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/dark/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/dark/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/dark/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "tasks/en/dark/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/dark/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/dark/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "tasks/en/dark/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "tasks/ar/light/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/light/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/light/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/light/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "tasks/ar/light/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/light/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/light/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/light/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "tasks/ar/dark/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/dark/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/dark/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/dark/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "tasks/ar/dark/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/dark/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/dark/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "tasks/ar/dark/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "HR en/light/1440: leave form in docked sheet",
+      "pass": true
+    },
+    {
+      "name": "hr/en/light/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "hr/en/light/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "hr/en/light/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "hr/en/light/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "HR en/light/390: leave form in docked sheet",
+      "pass": true
+    },
+    {
+      "name": "hr/en/light/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "hr/en/light/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "hr/en/light/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "hr/en/light/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "HR en/dark/1440: leave form in docked sheet",
+      "pass": true
+    },
+    {
+      "name": "hr/en/dark/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "hr/en/dark/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "hr/en/dark/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "hr/en/dark/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "HR en/dark/390: leave form in docked sheet",
+      "pass": true
+    },
+    {
+      "name": "hr/en/dark/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "hr/en/dark/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "hr/en/dark/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "hr/en/dark/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "HR ar/light/1440: leave form in docked sheet",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/light/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/light/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/light/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/light/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "HR ar/light/390: leave form in docked sheet",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/light/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/light/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/light/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/light/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "HR ar/dark/1440: leave form in docked sheet",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/dark/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/dark/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/dark/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/dark/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "HR ar/dark/390: leave form in docked sheet",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/dark/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/dark/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/dark/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "hr/ar/dark/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "sos/en/light/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "sos/en/light/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "sos/en/light/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "sos/en/light/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "sos/en/light/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "sos/en/light/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "sos/en/light/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "sos/en/light/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "sos/en/dark/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "sos/en/dark/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "sos/en/dark/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "sos/en/dark/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "sos/en/dark/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "sos/en/dark/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "sos/en/dark/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "sos/en/dark/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "sos/ar/light/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/light/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/light/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/light/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "sos/ar/light/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/light/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/light/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/light/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "sos/ar/dark/1440: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/dark/1440: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/dark/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/dark/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "sos/ar/dark/390: ordinary route",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/dark/390: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/dark/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "sos/ar/dark/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "tasks-en-light-1440.png",
+    "tasks-en-light-390.png",
+    "tasks-en-dark-1440.png",
+    "tasks-en-dark-390.png",
+    "tasks-ar-light-1440.png",
+    "tasks-ar-light-390.png",
+    "tasks-ar-dark-1440.png",
+    "tasks-ar-dark-390.png",
+    "hr-en-light-1440.png",
+    "hr-en-light-390.png",
+    "hr-en-dark-1440.png",
+    "hr-en-dark-390.png",
+    "hr-ar-light-1440.png",
+    "hr-ar-light-390.png",
+    "hr-ar-dark-1440.png",
+    "hr-ar-dark-390.png",
+    "sos-en-light-1440.png",
+    "sos-en-light-390.png",
+    "sos-en-dark-1440.png",
+    "sos-en-dark-390.png",
+    "sos-ar-light-1440.png",
+    "sos-ar-light-390.png",
+    "sos-ar-dark-1440.png",
+    "sos-ar-dark-390.png"
+  ],
+  "errors": [],
+  "completed": true
+}

@@ -6,8 +6,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 import { useClientSession } from '@orgtik/ui/auth';
 import { Form } from '@/components/ui/form';
-import { Button } from '@/components/ui/button';
-import { ReusableDialog } from '@/components/shared/ReusableDialog/reusable-dialog';
+import { Button } from '@orgtik/ui';
+import { LeaveRequestSheet as ReusableDialog } from '@/components/sheets/LeaveRequestSheet';
 import StatusBadge from '@/components/shared/StatusBadge';
 import SelectFormEle from '@/components/ui/form/select-form-element';
 import { DateTimeFormElement } from '@/components/ui/form/date-time-form-element';
@@ -87,7 +87,7 @@ export default function AddTimeOffDialog() {
   return <ReusableDialog open={open} onOpenChange={changeOpen} title={t('title')} size="2xl"
     trigger={<Button size="lg" className="gap-2"><CalendarDots aria-hidden="true" className="size-4.5" />{t('trigger')}</Button>}
     footer={<div className="flex w-full gap-3">
-      <Button variant="outline" className="flex-1 min-h-11 sm:min-h-9" disabled={isLoading} onClick={() => changeOpen(false)}>{review('actions.close')}</Button>
+      <Button variant="secondary" className="flex-1 min-h-11 sm:min-h-9" disabled={isLoading} onClick={() => changeOpen(false)}>{review('actions.close')}</Button>
       {!result ? <Button type={attempt ? 'button' : 'submit'} form={attempt ? undefined : FORM_ID} className="flex-1 min-h-11 sm:min-h-9" disabled={isLoading || !canWrite} onClick={attempt ? () => execute(attempt) : undefined}>
         {isLoading ? <CircleNotch aria-hidden="true" className="me-2 size-4 animate-spin" /> : null}{review(attempt && !isLoading ? 'actions.recover' : 'actions.sendRequest')}
       </Button> : null}

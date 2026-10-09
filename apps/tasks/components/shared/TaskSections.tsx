@@ -54,6 +54,7 @@ export function TaskSections({
   showProject = false,
   readOnly = false,
   onAdd,
+  density = "comfortable",
 }: {
   sections: TaskSection[];
   /** The project the tasks belong to; My tasks reads each task's own. */
@@ -61,6 +62,7 @@ export function TaskSections({
   showProject?: boolean;
   readOnly?: boolean;
   onAdd?: (section: TaskSection) => void;
+  density?: "comfortable" | "compact";
 }) {
   const t = useTranslations("TaskList");
   const f = useFormatter();
@@ -133,6 +135,7 @@ export function TaskSections({
               ) : null}
             </header>
             <DataTable
+              density={density}
               label={section.title}
               columns={columnsFor(section)}
               data={section.tasks}

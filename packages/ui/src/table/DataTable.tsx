@@ -79,6 +79,8 @@ export type DataTableProps<T> = {
   bulkActions?: (rows: Row<T>[]) => ReactNode;
 
   className?: string;
+  density?: "comfortable" | "compact";
+  stickyHeader?: boolean;
 };
 
 export function DataTable<T>({
@@ -104,6 +106,8 @@ export function DataTable<T>({
   onRowSelectionChange,
   bulkActions,
   className,
+  density = "comfortable",
+  stickyHeader = true,
 }: DataTableProps<T>) {
   const t = useStrings();
   // A table wider than its box scrolls sideways; then the box is a labelled region you can focus
@@ -179,7 +183,7 @@ export function DataTable<T>({
   const showState = status !== "ready" && status !== "loading" ? status : rows.length === 0 && status === "ready" ? "empty" : null;
 
   return (
-    <div className={cn("flex flex-col gap-3", className)}>
+    <div data-density={density} className={cn("flex flex-col gap-3", className)}>
       {selectable && selected.length > 0 ? (
         <div role="region" aria-label={t("selectedCount", { count: selected.length })} className="flex flex-wrap items-center gap-3 rounded-field bg-brand-subtle px-3 py-2">
           <span className="text-body-sm font-semibold text-fg-brand">{t("selectedCount", { count: selected.length })}</span>
@@ -202,7 +206,7 @@ export function DataTable<T>({
         className="relative overflow-x-auto rounded-card border border-line bg-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
       >
         <table aria-label={label} aria-busy={status === "loading" || undefined} className="w-full border-collapse text-body">
-          <thead className="bg-sunken">
+          <thead className={cn("bg-sunken", stickyHeader && "sticky top-0 z-10")}>
             {headerGroups.map((group) => (
               <tr key={group.id} className="border-b border-line">
                 {group.headers.map((header) => {
@@ -250,7 +254,7 @@ export function DataTable<T>({
               ? Array.from({ length: 6 }, (_, i) => (
                   <tr key={i} className="[&>td]:border-b [&>td]:border-line [&:last-child>td]:border-0">
                     {Array.from({ length: colCount }, (_, j) => (
-                      <td key={j} className="h-12 px-4">
+                      <td key={j} className="h-(--ot-row-height) px-4">
                         <Skeleton className={cn("h-3", j === 0 && selectable ? "size-4" : j % 3 === 0 ? "w-3/5" : "w-2/5")} />
                       </td>
                     ))}
@@ -282,7 +286,7 @@ export function DataTable<T>({
                           <td
                             key={cell.id}
                             className={cn(
-                              "h-12 px-4 align-middle text-fg",
+                              "h-(--ot-row-height) px-4 align-middle text-fg",
                               meta?.wrap ? "py-2" : "whitespace-nowrap",
                               meta?.numeric && "text-end tabular-nums",
                               meta?.truncate && "w-full max-w-0 min-w-48 truncate",

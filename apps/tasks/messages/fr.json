@@ -459,7 +459,11 @@
     "noSectionsBody": "Un chef de projet peut les ajouter sur le tableau.",
     "nothingAssignedTitle": "Rien ne vous est attribué",
     "nothingAssignedBody": "Les tâches qui vous sont attribuées dans un projet apparaissent ici.",
-    "create": "Créer une tâche"
+    "create": "Créer une tâche",
+    "toolbar": "Commandes de la liste des tâches",
+    "search": "Rechercher des tâches",
+    "noResults": "Aucune tâche ne correspond",
+    "clearSearch": "Effacez la recherche pour voir vos tâches assignées."
   },
   "TaskSheet": {
     "label": "Tâche",

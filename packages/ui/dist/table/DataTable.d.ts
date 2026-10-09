@@ -54,7 +54,9 @@ export type DataTableProps<T> = {
     /** The bulk actions for the chosen rows. Destructive ones should open a ConfirmDialog. */
     bulkActions?: (rows: Row<T>[]) => ReactNode;
     className?: string;
+    density?: "comfortable" | "compact";
+    stickyHeader?: boolean;
 };
-export declare function DataTable<T>({ columns, data, getRowId, label, status, empty, error, forbidden, onRetry, mode, rowCount, sorting: sortingProp, onSortingChange, pagination: paginationProp, onPaginationChange, pageSizes, paginate, selectable, rowSelection: selectionProp, onRowSelectionChange, bulkActions, className, }: DataTableProps<T>): import("react").JSX.Element;
+export declare function DataTable<T>({ columns, data, getRowId, label, status, empty, error, forbidden, onRetry, mode, rowCount, sorting: sortingProp, onSortingChange, pagination: paginationProp, onPaginationChange, pageSizes, paginate, selectable, rowSelection: selectionProp, onRowSelectionChange, bulkActions, className, density, stickyHeader, }: DataTableProps<T>): import("react").JSX.Element;
 export type { ColumnDef, SortingState, PaginationState, RowSelectionState, Row } from "@tanstack/react-table";
 //# sourceMappingURL=DataTable.d.ts.map

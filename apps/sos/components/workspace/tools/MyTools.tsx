@@ -39,13 +39,13 @@ export function MyTools({ me }: { me: AppMe }) {
           {t("allTools")}
         </Link>
       </div>
-      <ul className="grid grid-cols-[repeat(auto-fill,minmax(min(17rem,100%),1fr))] gap-4">
+      <ul className="grid grid-cols-1 gap-3 lg:grid-cols-2">
         {me.tools.map((tool) => {
           const name = loc(tool.name);
           const c = extra.get(tool.key);
           return (
             <li key={tool.key} data-tool={tool.key}>
-              <Card padding="md" className="flex h-full flex-col gap-4">
+              <Card padding="md" className="flex h-full flex-col gap-3 shadow-xs transition-shadow hover:shadow-sm">
                 <div className="flex items-start gap-3">
                   <ToolIcon icon={tool.icon} />
                   <div className="flex min-w-0 flex-1 flex-col gap-1">
