@@ -1,0 +1,1010 @@
+{
+  "nav.serviceCatalog": {
+    "en": "Service catalog",
+    "ar": "كتالوج الخدمات",
+    "de": "Servicekatalog",
+    "fr": "Catalogue des services",
+    "it": "Catalogo servizi"
+  },
+  "nav.serviceRequests": {
+    "en": "Service delivery",
+    "ar": "تسليم الخدمات",
+    "de": "Serviceabwicklung",
+    "fr": "Livraison des services",
+    "it": "Consegna servizi"
+  },
+  "nav.toolAdmin": {
+    "en": "CRM administration",
+    "ar": "إدارة CRM",
+    "de": "CRM-Verwaltung",
+    "fr": "Administration CRM",
+    "it": "Amministrazione CRM"
+  },
+  "Errors.handoffUnavailable": {
+    "en": "The destination could not be opened. Try the link again.",
+    "ar": "تعذر فتح الوجهة. حاول استخدام الرابط مجددًا.",
+    "de": "Das Ziel konnte nicht geöffnet werden. Link erneut versuchen.",
+    "fr": "Impossible d’ouvrir la destination. Réessayez le lien.",
+    "it": "Impossibile aprire la destinazione. Riprova il collegamento."
+  },
+  "ServiceCatalog.title": {
+    "en": "Service catalog",
+    "ar": "كتالوج الخدمات",
+    "de": "Servicekatalog",
+    "fr": "Catalogue des services",
+    "it": "Catalogo servizi"
+  },
+  "ServiceCatalog.subtitle": {
+    "en": "Manage public service offers and bundles. Save drafts, then publish them for new quotes.",
+    "ar": "أدر عروض الخدمات والباقات العامة. احفظ المسودات ثم انشرها لعروض الأسعار الجديدة.",
+    "de": "Öffentliche Serviceangebote und Pakete verwalten. Entwürfe speichern und für neue Angebote veröffentlichen.",
+    "fr": "Gérez les offres et forfaits publics. Enregistrez les brouillons puis publiez-les pour les nouveaux devis.",
+    "it": "Gestisci offerte e pacchetti pubblici. Salva le bozze e pubblicale per i nuovi preventivi."
+  },
+  "ServiceCatalog.version": {
+    "en": "Price version {version}",
+    "ar": "إصدار الأسعار {version}",
+    "de": "Preisversion {version}",
+    "fr": "Version tarifaire {version}",
+    "it": "Versione prezzi {version}"
+  },
+  "ServiceCatalog.delivery": {
+    "en": "Open service delivery",
+    "ar": "فتح تسليم الخدمات",
+    "de": "Serviceabwicklung öffnen",
+    "fr": "Ouvrir les livraisons",
+    "it": "Apri consegna servizi"
+  },
+  "ServiceCatalog.editOffer": {
+    "en": "Edit service offer",
+    "ar": "تعديل عرض الخدمة",
+    "de": "Serviceangebot bearbeiten",
+    "fr": "Modifier l’offre",
+    "it": "Modifica offerta"
+  },
+  "ServiceCatalog.editBundle": {
+    "en": "Edit bundle",
+    "ar": "تعديل الباقة",
+    "de": "Paket bearbeiten",
+    "fr": "Modifier le forfait",
+    "it": "Modifica pacchetto"
+  },
+  "ServiceCatalog.draftHelp": {
+    "en": "Changes stay in a draft until the catalog is published. Existing paid orders keep their original prices.",
+    "ar": "تظل التغييرات مسودة حتى نشر الكتالوج. تحتفظ الطلبات المدفوعة بأسعارها الأصلية.",
+    "de": "Änderungen bleiben bis zur Veröffentlichung ein Entwurf. Bezahlte Bestellungen behalten ihre Preise.",
+    "fr": "Les changements restent en brouillon jusqu’à publication. Les commandes payées conservent leurs prix.",
+    "it": "Le modifiche restano in bozza fino alla pubblicazione. Gli ordini pagati mantengono i prezzi originali."
+  },
+  "ServiceCatalog.translationLanguage": {
+    "en": "Translation language",
+    "ar": "لغة الترجمة",
+    "de": "Übersetzungssprache",
+    "fr": "Langue de traduction",
+    "it": "Lingua traduzione"
+  },
+  "ServiceCatalog.name": {
+    "en": "Name",
+    "ar": "الاسم",
+    "de": "Name",
+    "fr": "Nom",
+    "it": "Nome"
+  },
+  "ServiceCatalog.description": {
+    "en": "Description",
+    "ar": "الوصف",
+    "de": "Beschreibung",
+    "fr": "Description",
+    "it": "Descrizione"
+  },
+  "ServiceCatalog.fiveTranslations": {
+    "en": "If you add this content, complete it in all five languages.",
+    "ar": "عند إضافة هذا المحتوى، أكمله باللغات الخمس.",
+    "de": "Diesen Inhalt in allen fünf Sprachen ergänzen.",
+    "fr": "Complétez ce contenu dans les cinq langues.",
+    "it": "Completa questo contenuto nelle cinque lingue."
+  },
+  "ServiceCatalog.capabilities": {
+    "en": "Capabilities",
+    "ar": "الإمكانات",
+    "de": "Leistungsumfang",
+    "fr": "Fonctionnalités",
+    "it": "Funzionalità"
+  },
+  "ServiceCatalog.capabilitiesHelp": {
+    "en": "One capability per line, up to 12 in each language.",
+    "ar": "إمكانية واحدة في كل سطر، بحد أقصى 12 لكل لغة.",
+    "de": "Eine Leistung je Zeile, höchstens 12 je Sprache.",
+    "fr": "Une fonctionnalité par ligne, 12 par langue au maximum.",
+    "it": "Una funzionalità per riga, massimo 12 per lingua."
+  },
+  "ServiceCatalog.monthlyCHF": {
+    "en": "Monthly price · CHF",
+    "ar": "السعر الشهري · CHF",
+    "de": "Monatspreis · CHF",
+    "fr": "Prix mensuel · CHF",
+    "it": "Prezzo mensile · CHF"
+  },
+  "ServiceCatalog.status": {
+    "en": "Status",
+    "ar": "الحالة",
+    "de": "Status",
+    "fr": "Statut",
+    "it": "Stato"
+  },
+  "ServiceCatalog.active": {
+    "en": "Active",
+    "ar": "نشط",
+    "de": "Aktiv",
+    "fr": "Actif",
+    "it": "Attivo"
+  },
+  "ServiceCatalog.archived": {
+    "en": "Archived",
+    "ar": "مؤرشف",
+    "de": "Archiviert",
+    "fr": "Archivé",
+    "it": "Archiviato"
+  },
+  "ServiceCatalog.department": {
+    "en": "Department",
+    "ar": "القسم",
+    "de": "Bereich",
+    "fr": "Département",
+    "it": "Reparto"
+  },
+  "ServiceCatalog.departmentName": {
+    "en": "Department display name",
+    "ar": "اسم القسم المعروض",
+    "de": "Anzeigename des Bereichs",
+    "fr": "Nom affiché du département",
+    "it": "Nome visualizzato del reparto"
+  },
+  "ServiceCatalog.icon": {
+    "en": "Icon name",
+    "ar": "اسم الأيقونة",
+    "de": "Symbolname",
+    "fr": "Nom d’icône",
+    "it": "Nome icona"
+  },
+  "ServiceCatalog.saveError": {
+    "en": "The draft could not be saved. Check all translations and retry.",
+    "ar": "تعذر حفظ المسودة. تحقق من الترجمات وأعد المحاولة.",
+    "de": "Entwurf nicht gespeichert. Übersetzungen prüfen und erneut versuchen.",
+    "fr": "Échec de l’enregistrement. Vérifiez les traductions et réessayez.",
+    "it": "Bozza non salvata. Verifica le traduzioni e riprova."
+  },
+  "ServiceCatalog.cancel": {
+    "en": "Cancel",
+    "ar": "إلغاء",
+    "de": "Abbrechen",
+    "fr": "Annuler",
+    "it": "Annulla"
+  },
+  "ServiceCatalog.saveDraft": {
+    "en": "Save draft",
+    "ar": "حفظ المسودة",
+    "de": "Entwurf speichern",
+    "fr": "Enregistrer le brouillon",
+    "it": "Salva bozza"
+  },
+  "ServiceCatalog.loadError": {
+    "en": "The service catalog could not be loaded.",
+    "ar": "تعذر تحميل كتالوج الخدمات.",
+    "de": "Servicekatalog konnte nicht geladen werden.",
+    "fr": "Impossible de charger le catalogue.",
+    "it": "Impossibile caricare il catalogo."
+  },
+  "ServiceCatalog.notFound": {
+    "en": "This catalog item was not found.",
+    "ar": "لم يُعثر على عنصر الكتالوج.",
+    "de": "Katalogeintrag nicht gefunden.",
+    "fr": "Élément introuvable.",
+    "it": "Elemento non trovato."
+  },
+  "ServiceCatalog.bundleHelp": {
+    "en": "Bundle members use the same published service prices. No extra discount is added here.",
+    "ar": "تستخدم عناصر الباقة أسعار الخدمات المنشورة نفسها. لا يضاف خصم آخر هنا.",
+    "de": "Pakete verwenden dieselben veröffentlichten Servicepreise. Hier wird kein zusätzlicher Rabatt vergeben.",
+    "fr": "Les forfaits utilisent les prix publiés des services. Aucune réduction supplémentaire ici.",
+    "it": "I pacchetti usano gli stessi prezzi pubblicati. Qui non si aggiungono sconti."
+  },
+  "ServiceCatalog.bundleWhy": {
+    "en": "Bundle description",
+    "ar": "وصف الباقة",
+    "de": "Paketbeschreibung",
+    "fr": "Description du forfait",
+    "it": "Descrizione pacchetto"
+  },
+  "ServiceCatalog.bundleMembers": {
+    "en": "Services in this bundle",
+    "ar": "الخدمات في الباقة",
+    "de": "Services im Paket",
+    "fr": "Services du forfait",
+    "it": "Servizi nel pacchetto"
+  },
+  "ServiceCatalog.recommended": {
+    "en": "Recommended bundle",
+    "ar": "باقة موصى بها",
+    "de": "Empfohlenes Paket",
+    "fr": "Forfait recommandé",
+    "it": "Pacchetto consigliato"
+  },
+  "ServiceCatalog.publication": {
+    "en": "Publication",
+    "ar": "النشر",
+    "de": "Veröffentlichung",
+    "fr": "Publication",
+    "it": "Pubblicazione"
+  },
+  "ServiceCatalog.draft": {
+    "en": "Draft saved",
+    "ar": "مسودة محفوظة",
+    "de": "Entwurf gespeichert",
+    "fr": "Brouillon enregistré",
+    "it": "Bozza salvata"
+  },
+  "ServiceCatalog.published": {
+    "en": "Published",
+    "ar": "منشور",
+    "de": "Veröffentlicht",
+    "fr": "Publié",
+    "it": "Pubblicato"
+  },
+  "ServiceCatalog.actions": {
+    "en": "Actions",
+    "ar": "الإجراءات",
+    "de": "Aktionen",
+    "fr": "Actions",
+    "it": "Azioni"
+  },
+  "ServiceCatalog.edit": {
+    "en": "Edit",
+    "ar": "تعديل",
+    "de": "Bearbeiten",
+    "fr": "Modifier",
+    "it": "Modifica"
+  },
+  "ServiceCatalog.readOnly": {
+    "en": "Read only",
+    "ar": "للقراءة فقط",
+    "de": "Schreibgeschützt",
+    "fr": "Lecture seule",
+    "it": "Sola lettura"
+  },
+  "ServiceCatalog.internalOnly": {
+    "en": "OrgTik service permission required",
+    "ar": "تحتاج إلى صلاحية خدمات OrgTik",
+    "de": "OrgTik-Serviceberechtigung erforderlich",
+    "fr": "Autorisation de service OrgTik requise",
+    "it": "Permesso servizi OrgTik richiesto"
+  },
+  "ServiceCatalog.internalOnlyBody": {
+    "en": "The internal OrgTik CRM manages public services. Your customer CRM role does not grant access to this catalog.",
+    "ar": "يدير CRM الداخلي في OrgTik الخدمات العامة. دورك في CRM العميل لا يتيح الوصول إلى هذا الكتالوج.",
+    "de": "Das interne OrgTik-CRM verwaltet öffentliche Services. Eine Kunden-CRM-Rolle erlaubt keinen Katalogzugriff.",
+    "fr": "Le CRM interne OrgTik gère les services publics. Le rôle CRM client ne donne pas accès à ce catalogue.",
+    "it": "Il CRM interno OrgTik gestisce i servizi pubblici. Il ruolo CRM cliente non dà accesso al catalogo."
+  },
+  "ServiceCatalog.backCRM": {
+    "en": "Back to CRM",
+    "ar": "العودة إلى CRM",
+    "de": "Zurück zum CRM",
+    "fr": "Retour au CRM",
+    "it": "Torna al CRM"
+  },
+  "ServiceCatalog.toolbar": {
+    "en": "Service catalog controls",
+    "ar": "عناصر التحكم في الكتالوج",
+    "de": "Katalogsteuerung",
+    "fr": "Contrôles du catalogue",
+    "it": "Controlli catalogo"
+  },
+  "ServiceCatalog.search": {
+    "en": "Search service offers",
+    "ar": "البحث في عروض الخدمات",
+    "de": "Serviceangebote suchen",
+    "fr": "Rechercher des offres",
+    "it": "Cerca offerte servizi"
+  },
+  "ServiceCatalog.publish": {
+    "en": "Publish catalog",
+    "ar": "نشر الكتالوج",
+    "de": "Katalog veröffentlichen",
+    "fr": "Publier le catalogue",
+    "it": "Pubblica catalogo"
+  },
+  "ServiceCatalog.publishTitle": {
+    "en": "Publish service catalog drafts?",
+    "ar": "نشر مسودات كتالوج الخدمات؟",
+    "de": "Servicekatalog-Entwürfe veröffentlichen?",
+    "fr": "Publier les brouillons du catalogue ?",
+    "it": "Pubblicare le bozze del catalogo?"
+  },
+  "ServiceCatalog.publishImpact": {
+    "en": "{count, plural, =0 {No drafts will change.} other {# catalog drafts will apply to new public quotes. Existing paid orders keep their prices.}}",
+    "ar": "{count, plural, zero {لا توجد مسودات للنشر.} one {ستطبق مسودة واحدة على عروض الأسعار الجديدة. تحتفظ الطلبات المدفوعة بأسعارها.} two {ستطبق مسودتان على عروض الأسعار الجديدة. تحتفظ الطلبات المدفوعة بأسعارها.} few {ستطبق # مسودات على عروض الأسعار الجديدة. تحتفظ الطلبات المدفوعة بأسعارها.} many {ستطبق # مسودة على عروض الأسعار الجديدة. تحتفظ الطلبات المدفوعة بأسعارها.} other {ستطبق # مسودة على عروض الأسعار الجديدة. تحتفظ الطلبات المدفوعة بأسعارها.}}",
+    "de": "{count, plural, =0 {Keine Entwürfe werden geändert.} other {# Katalogentwürfe gelten für neue öffentliche Angebote. Bezahlte Bestellungen behalten ihre Preise.}}",
+    "fr": "{count, plural, =0 {Aucun brouillon ne sera modifié.} other {# brouillons s’appliqueront aux nouveaux devis. Les commandes payées conservent leurs prix.}}",
+    "it": "{count, plural, =0 {Nessuna bozza da modificare.} other {# bozze si applicheranno ai nuovi preventivi. Gli ordini pagati mantengono i prezzi.}}"
+  },
+  "ServiceCatalog.draftSaved": {
+    "en": "Draft saved. Publish the catalog when all changes are ready.",
+    "ar": "حُفظت المسودة. انشر الكتالوج عند اكتمال التغييرات.",
+    "de": "Entwurf gespeichert. Katalog veröffentlichen, wenn alle Änderungen bereit sind.",
+    "fr": "Brouillon enregistré. Publiez le catalogue une fois les changements prêts.",
+    "it": "Bozza salvata. Pubblica il catalogo quando tutte le modifiche sono pronte."
+  },
+  "ServiceCatalog.publishedNotice": {
+    "en": "Catalog published at price version {version}. New public quotes use these values.",
+    "ar": "نُشر الكتالوج بإصدار الأسعار {version}. تستخدم عروض الأسعار الجديدة هذه القيم.",
+    "de": "Katalog mit Preisversion {version} veröffentlicht. Neue Angebote verwenden diese Werte.",
+    "fr": "Catalogue publié à la version {version}. Les nouveaux devis utilisent ces valeurs.",
+    "it": "Catalogo pubblicato alla versione {version}. I nuovi preventivi usano questi valori."
+  },
+  "ServiceCatalog.publishError": {
+    "en": "Publishing failed. Your saved drafts remain available; retry publishing.",
+    "ar": "تعذر النشر. مسوداتك المحفوظة متاحة؛ أعد محاولة النشر.",
+    "de": "Veröffentlichung fehlgeschlagen. Entwürfe bleiben erhalten; erneut veröffentlichen.",
+    "fr": "Échec de publication. Les brouillons sont conservés ; réessayez.",
+    "it": "Pubblicazione fallita. Le bozze restano disponibili; riprova."
+  },
+  "ServiceCatalog.noMatch": {
+    "en": "No matching offers",
+    "ar": "لا توجد عروض مطابقة",
+    "de": "Keine passenden Angebote",
+    "fr": "Aucune offre correspondante",
+    "it": "Nessuna offerta corrispondente"
+  },
+  "ServiceCatalog.noMatchHelp": {
+    "en": "Clear the search to see all service offers.",
+    "ar": "امسح البحث لعرض جميع عروض الخدمات.",
+    "de": "Suche löschen, um alle Angebote zu sehen.",
+    "fr": "Effacez la recherche pour voir toutes les offres.",
+    "it": "Cancella la ricerca per vedere tutte le offerte."
+  },
+  "ServiceCatalog.empty": {
+    "en": "No service offers yet",
+    "ar": "لا توجد عروض خدمات بعد",
+    "de": "Noch keine Serviceangebote",
+    "fr": "Aucune offre de service",
+    "it": "Nessuna offerta servizi"
+  },
+  "ServiceCatalog.emptyHelp": {
+    "en": "Reload the platform service catalog to check for available offers.",
+    "ar": "أعد تحميل كتالوج المنصة للتحقق من العروض المتاحة.",
+    "de": "Plattformkatalog erneut laden und Angebote prüfen.",
+    "fr": "Rechargez le catalogue pour vérifier les offres disponibles.",
+    "it": "Ricarica il catalogo per verificare le offerte disponibili."
+  },
+  "ServiceCatalog.clearSearch": {
+    "en": "Clear search",
+    "ar": "مسح البحث",
+    "de": "Suche löschen",
+    "fr": "Effacer la recherche",
+    "it": "Cancella ricerca"
+  },
+  "ServiceCatalog.retry": {
+    "en": "Retry",
+    "ar": "إعادة المحاولة",
+    "de": "Erneut versuchen",
+    "fr": "Réessayer",
+    "it": "Riprova"
+  },
+  "ServiceCatalog.bundles": {
+    "en": "Service bundles",
+    "ar": "باقات الخدمات",
+    "de": "Servicepakete",
+    "fr": "Forfaits de services",
+    "it": "Pacchetti servizi"
+  },
+  "ServiceCatalog.noBundles": {
+    "en": "No service bundles yet",
+    "ar": "لا توجد باقات خدمات بعد",
+    "de": "Noch keine Servicepakete",
+    "fr": "Aucun forfait de services",
+    "it": "Nessun pacchetto servizi"
+  },
+  "ServiceCatalog.pricingHelp": {
+    "en": "The monthly CHF anchor is resolved through the shared platform pricing rules for each zone and currency. Paid order snapshots are preserved.",
+    "ar": "يحدد السعر الشهري المرجعي بالفرنك أسعار المناطق والعملات عبر قواعد المنصة المشتركة. تُحفظ بيانات الطلبات المدفوعة الأصلية.",
+    "de": "Der monatliche CHF-Basispreis wird über gemeinsame Preisregeln je Zone und Währung aufgelöst. Bezahlte Bestellungen bleiben erhalten.",
+    "fr": "Le prix mensuel de référence en CHF suit les règles communes par zone et devise. Les commandes payées sont préservées.",
+    "it": "Il prezzo mensile base in CHF usa le regole condivise per zona e valuta. Gli ordini pagati restano invariati."
+  },
+  "ServiceCatalog.required": {
+    "en": "Complete this field.",
+    "ar": "أكمل هذا الحقل.",
+    "de": "Dieses Feld ausfüllen.",
+    "fr": "Complétez ce champ.",
+    "it": "Completa questo campo."
+  },
+  "ServiceCatalog.tooLong": {
+    "en": "This value is too long.",
+    "ar": "القيمة أطول من المسموح.",
+    "de": "Dieser Wert ist zu lang.",
+    "fr": "Cette valeur est trop longue.",
+    "it": "Questo valore è troppo lungo."
+  },
+  "ServiceCatalog.iconInvalid": {
+    "en": "Use a lower-case catalog icon name with letters, numbers and hyphens.",
+    "ar": "استخدم اسم أيقونة بأحرف صغيرة وأرقام وشرطات.",
+    "de": "Kleinen Symbolnamen mit Buchstaben, Zahlen und Bindestrichen verwenden.",
+    "fr": "Utilisez un nom d’icône en minuscules, chiffres et tirets.",
+    "it": "Usa un nome icona minuscolo con lettere, numeri e trattini."
+  },
+  "ServiceCatalog.priceInvalid": {
+    "en": "Enter a price from 0 to 1,000,000.",
+    "ar": "أدخل سعرًا من 0 إلى 1,000,000.",
+    "de": "Preis von 0 bis 1.000.000 eingeben.",
+    "fr": "Saisissez un prix entre 0 et 1 000 000.",
+    "it": "Inserisci un prezzo tra 0 e 1.000.000."
+  },
+  "ServiceCatalog.departments.design": {
+    "en": "Design",
+    "ar": "التصميم",
+    "de": "Design",
+    "fr": "Design",
+    "it": "Design"
+  },
+  "ServiceCatalog.departments.development": {
+    "en": "Development",
+    "ar": "التطوير",
+    "de": "Entwicklung",
+    "fr": "Développement",
+    "it": "Sviluppo"
+  },
+  "ServiceCatalog.departments.marketing": {
+    "en": "Marketing",
+    "ar": "التسويق",
+    "de": "Marketing",
+    "fr": "Marketing",
+    "it": "Marketing"
+  },
+  "ServiceCatalog.departments.it-support": {
+    "en": "IT support",
+    "ar": "دعم التقنية",
+    "de": "IT-Support",
+    "fr": "Assistance informatique",
+    "it": "Supporto IT"
+  },
+  "ServiceCatalog.locales.en": {
+    "en": "English",
+    "ar": "الإنجليزية",
+    "de": "Englisch",
+    "fr": "Anglais",
+    "it": "Inglese"
+  },
+  "ServiceCatalog.locales.ar": {
+    "en": "Arabic",
+    "ar": "العربية",
+    "de": "Arabisch",
+    "fr": "Arabe",
+    "it": "Arabo"
+  },
+  "ServiceCatalog.locales.de": {
+    "en": "German",
+    "ar": "الألمانية",
+    "de": "Deutsch",
+    "fr": "Allemand",
+    "it": "Tedesco"
+  },
+  "ServiceCatalog.locales.fr": {
+    "en": "French",
+    "ar": "الفرنسية",
+    "de": "Französisch",
+    "fr": "Français",
+    "it": "Francese"
+  },
+  "ServiceCatalog.locales.it": {
+    "en": "Italian",
+    "ar": "الإيطالية",
+    "de": "Italienisch",
+    "fr": "Italien",
+    "it": "Italiano"
+  },
+  "ServiceRequests.cancel": {
+    "en": "Cancel",
+    "ar": "إلغاء",
+    "de": "Abbrechen",
+    "fr": "Annuler",
+    "it": "Annulla"
+  },
+  "ServiceRequests.loadError": {
+    "en": "The service catalog could not be loaded.",
+    "ar": "تعذر تحميل كتالوج الخدمات.",
+    "de": "Servicekatalog konnte nicht geladen werden.",
+    "fr": "Impossible de charger le catalogue.",
+    "it": "Impossibile caricare il catalogo."
+  },
+  "ServiceRequests.internalOnly": {
+    "en": "OrgTik service permission required",
+    "ar": "تحتاج إلى صلاحية خدمات OrgTik",
+    "de": "OrgTik-Serviceberechtigung erforderlich",
+    "fr": "Autorisation de service OrgTik requise",
+    "it": "Permesso servizi OrgTik richiesto"
+  },
+  "ServiceRequests.internalOnlyBody": {
+    "en": "The internal OrgTik CRM manages public services. Your customer CRM role does not grant access to this catalog.",
+    "ar": "يدير CRM الداخلي في OrgTik الخدمات العامة. دورك في CRM العميل لا يتيح الوصول إلى هذا الكتالوج.",
+    "de": "Das interne OrgTik-CRM verwaltet öffentliche Services. Eine Kunden-CRM-Rolle erlaubt keinen Katalogzugriff.",
+    "fr": "Le CRM interne OrgTik gère les services publics. Le rôle CRM client ne donne pas accès à ce catalogue.",
+    "it": "Il CRM interno OrgTik gestisce i servizi pubblici. Il ruolo CRM cliente non dà accesso al catalogo."
+  },
+  "ServiceRequests.backCRM": {
+    "en": "Back to CRM",
+    "ar": "العودة إلى CRM",
+    "de": "Zurück zum CRM",
+    "fr": "Retour au CRM",
+    "it": "Torna al CRM"
+  },
+  "ServiceRequests.readOnly": {
+    "en": "Read only",
+    "ar": "للقراءة فقط",
+    "de": "Schreibgeschützt",
+    "fr": "Lecture seule",
+    "it": "Sola lettura"
+  },
+  "ServiceRequests.retry": {
+    "en": "Retry",
+    "ar": "إعادة المحاولة",
+    "de": "Erneut versuchen",
+    "fr": "Réessayer",
+    "it": "Riprova"
+  },
+  "ServiceRequests.noMatch": {
+    "en": "No matching offers",
+    "ar": "لا توجد عروض مطابقة",
+    "de": "Keine passenden Angebote",
+    "fr": "Aucune offre correspondante",
+    "it": "Nessuna offerta corrispondente"
+  },
+  "ServiceRequests.noMatchHelp": {
+    "en": "Clear the search to see all service offers.",
+    "ar": "امسح البحث لعرض جميع عروض الخدمات.",
+    "de": "Suche löschen, um alle Angebote zu sehen.",
+    "fr": "Effacez la recherche pour voir toutes les offres.",
+    "it": "Cancella la ricerca per vedere tutte le offerte."
+  },
+  "ServiceRequests.notFound": {
+    "en": "This catalog item was not found.",
+    "ar": "لم يُعثر على عنصر الكتالوج.",
+    "de": "Katalogeintrag nicht gefunden.",
+    "fr": "Élément introuvable.",
+    "it": "Elemento non trovato."
+  },
+  "ServiceRequests.status": {
+    "en": "Status",
+    "ar": "الحالة",
+    "de": "Status",
+    "fr": "Statut",
+    "it": "Stato"
+  },
+  "ServiceRequests.title": {
+    "en": "Service delivery",
+    "ar": "تسليم الخدمات",
+    "de": "Serviceabwicklung",
+    "fr": "Livraison des services",
+    "it": "Consegna servizi"
+  },
+  "ServiceRequests.subtitle": {
+    "en": "Review requests, quote work and track delivery for OrgTik customers.",
+    "ar": "راجع الطلبات وقدّم عروض الأسعار وتابع تسليم خدمات عملاء OrgTik.",
+    "de": "Anfragen prüfen, Angebote erstellen und Leistungen für OrgTik-Kunden verfolgen.",
+    "fr": "Examinez les demandes, établissez les devis et suivez les livraisons.",
+    "it": "Esamina richieste, prepara preventivi e segui le consegne ai clienti OrgTik."
+  },
+  "ServiceRequests.catalog": {
+    "en": "Open service catalog",
+    "ar": "فتح كتالوج الخدمات",
+    "de": "Servicekatalog öffnen",
+    "fr": "Ouvrir le catalogue",
+    "it": "Apri catalogo servizi"
+  },
+  "ServiceRequests.toolbar": {
+    "en": "Service delivery controls",
+    "ar": "عناصر التحكم في التسليم",
+    "de": "Abwicklungssteuerung",
+    "fr": "Contrôles de livraison",
+    "it": "Controlli consegna"
+  },
+  "ServiceRequests.search": {
+    "en": "Search requests",
+    "ar": "البحث في الطلبات",
+    "de": "Anfragen suchen",
+    "fr": "Rechercher des demandes",
+    "it": "Cerca richieste"
+  },
+  "ServiceRequests.all": {
+    "en": "All states",
+    "ar": "جميع الحالات",
+    "de": "Alle Status",
+    "fr": "Tous les statuts",
+    "it": "Tutti gli stati"
+  },
+  "ServiceRequests.reference": {
+    "en": "Reference",
+    "ar": "المرجع",
+    "de": "Referenz",
+    "fr": "Référence",
+    "it": "Riferimento"
+  },
+  "ServiceRequests.request": {
+    "en": "Request",
+    "ar": "الطلب",
+    "de": "Anfrage",
+    "fr": "Demande",
+    "it": "Richiesta"
+  },
+  "ServiceRequests.workspace": {
+    "en": "Workspace",
+    "ar": "مساحة العمل",
+    "de": "Arbeitsbereich",
+    "fr": "Espace de travail",
+    "it": "Spazio di lavoro"
+  },
+  "ServiceRequests.assignee": {
+    "en": "Assignee",
+    "ar": "المسؤول",
+    "de": "Zuständig",
+    "fr": "Responsable",
+    "it": "Assegnatario"
+  },
+  "ServiceRequests.unassigned": {
+    "en": "Unassigned",
+    "ar": "غير معين",
+    "de": "Nicht zugewiesen",
+    "fr": "Non attribué",
+    "it": "Non assegnato"
+  },
+  "ServiceRequests.empty": {
+    "en": "No service requests yet",
+    "ar": "لا توجد طلبات خدمات بعد",
+    "de": "Noch keine Serviceanfragen",
+    "fr": "Aucune demande de service",
+    "it": "Nessuna richiesta servizi"
+  },
+  "ServiceRequests.emptyHelp": {
+    "en": "Customer requests and website service purchases appear here when they arrive.",
+    "ar": "تظهر طلبات العملاء ومشتريات خدمات الموقع هنا عند وصولها.",
+    "de": "Kundenanfragen und Servicekäufe erscheinen hier nach Eingang.",
+    "fr": "Les demandes clients et achats de services apparaîtront ici.",
+    "it": "Le richieste clienti e gli acquisti servizi appariranno qui."
+  },
+  "ServiceRequests.clearFilters": {
+    "en": "Clear filters",
+    "ar": "مسح عوامل التصفية",
+    "de": "Filter löschen",
+    "fr": "Effacer les filtres",
+    "it": "Cancella filtri"
+  },
+  "ServiceRequests.close": {
+    "en": "Close",
+    "ar": "إغلاق",
+    "de": "Schließen",
+    "fr": "Fermer",
+    "it": "Chiudi"
+  },
+  "ServiceRequests.budget": {
+    "en": "Budget",
+    "ar": "الميزانية",
+    "de": "Budget",
+    "fr": "Budget",
+    "it": "Budget"
+  },
+  "ServiceRequests.deadline": {
+    "en": "Deadline",
+    "ar": "الموعد النهائي",
+    "de": "Frist",
+    "fr": "Échéance",
+    "it": "Scadenza"
+  },
+  "ServiceRequests.notSet": {
+    "en": "Not set",
+    "ar": "غير محدد",
+    "de": "Nicht festgelegt",
+    "fr": "Non défini",
+    "it": "Non impostato"
+  },
+  "ServiceRequests.actionError": {
+    "en": "This action could not be saved. Review the current state and retry.",
+    "ar": "تعذر حفظ الإجراء. راجع الحالة الحالية وأعد المحاولة.",
+    "de": "Aktion nicht gespeichert. Aktuellen Status prüfen und erneut versuchen.",
+    "fr": "Échec de l’action. Vérifiez le statut et réessayez.",
+    "it": "Azione non salvata. Verifica lo stato e riprova."
+  },
+  "ServiceRequests.saved": {
+    "en": "Changes saved.",
+    "ar": "حُفظت التغييرات.",
+    "de": "Änderungen gespeichert.",
+    "fr": "Modifications enregistrées.",
+    "it": "Modifiche salvate."
+  },
+  "ServiceRequests.quote": {
+    "en": "Quote",
+    "ar": "عرض السعر",
+    "de": "Angebot",
+    "fr": "Devis",
+    "it": "Preventivo"
+  },
+  "ServiceRequests.quoteLine": {
+    "en": "Quote line description",
+    "ar": "وصف بند عرض السعر",
+    "de": "Beschreibung der Angebotsposition",
+    "fr": "Description de la ligne du devis",
+    "it": "Descrizione voce preventivo"
+  },
+  "ServiceRequests.quoteAmount": {
+    "en": "Amount · {currency}",
+    "ar": "المبلغ · {currency}",
+    "de": "Betrag · {currency}",
+    "fr": "Montant · {currency}",
+    "it": "Importo · {currency}"
+  },
+  "ServiceRequests.validDays": {
+    "en": "Valid for days",
+    "ar": "مدة الصلاحية بالأيام",
+    "de": "Gültigkeit in Tagen",
+    "fr": "Validité en jours",
+    "it": "Validità in giorni"
+  },
+  "ServiceRequests.reviewQuote": {
+    "en": "Review quote",
+    "ar": "مراجعة عرض السعر",
+    "de": "Angebot prüfen",
+    "fr": "Vérifier le devis",
+    "it": "Rivedi preventivo"
+  },
+  "ServiceRequests.quoteConfirm": {
+    "en": "Send {amount} quote for {reference}?",
+    "ar": "إرسال عرض سعر بقيمة {amount} للطلب {reference}؟",
+    "de": "Angebot über {amount} für {reference} senden?",
+    "fr": "Envoyer le devis de {amount} pour {reference} ?",
+    "it": "Inviare il preventivo di {amount} per {reference}?"
+  },
+  "ServiceRequests.quoteImpact": {
+    "en": "The customer can review this quote for {days} days. It uses the request’s currency.",
+    "ar": "يمكن للعميل مراجعة العرض لمدة {days} يومًا. يستخدم العرض عملة الطلب.",
+    "de": "Der Kunde kann dieses Angebot {days} Tage prüfen. Es verwendet die Währung der Anfrage.",
+    "fr": "Le client peut examiner ce devis pendant {days} jours, dans la devise de la demande.",
+    "it": "Il cliente può esaminare il preventivo per {days} giorni nella valuta della richiesta."
+  },
+  "ServiceRequests.validUntil": {
+    "en": "Valid until {date}",
+    "ar": "صالح حتى {date}",
+    "de": "Gültig bis {date}",
+    "fr": "Valable jusqu’au {date}",
+    "it": "Valido fino al {date}"
+  },
+  "ServiceRequests.deliveryNote": {
+    "en": "Delivery note",
+    "ar": "ملاحظة التسليم",
+    "de": "Lieferhinweis",
+    "fr": "Note de livraison",
+    "it": "Nota di consegna"
+  },
+  "ServiceRequests.deliveryHelp": {
+    "en": "Describe the work delivered. The customer reviews this delivery before completion.",
+    "ar": "صف العمل الذي تم تسليمه. يراجع العميل التسليم قبل الإكمال.",
+    "de": "Die gelieferte Arbeit beschreiben. Der Kunde prüft die Lieferung vor Abschluss.",
+    "fr": "Décrivez le travail livré. Le client examine la livraison avant clôture.",
+    "it": "Descrivi il lavoro consegnato. Il cliente verifica prima del completamento."
+  },
+  "ServiceRequests.cancelTitle": {
+    "en": "Cancel request {reference}?",
+    "ar": "إلغاء الطلب {reference}؟",
+    "de": "Anfrage {reference} stornieren?",
+    "fr": "Annuler la demande {reference} ?",
+    "it": "Annullare la richiesta {reference}?"
+  },
+  "ServiceRequests.cancelImpact": {
+    "en": "The request will be marked cancelled. Review any quote before issuing it again.",
+    "ar": "سيُعلّم الطلب بأنه ملغى. راجع عرض السعر قبل إصداره مجددًا.",
+    "de": "Die Anfrage wird storniert. Ein Angebot vor erneutem Versand prüfen.",
+    "fr": "La demande sera annulée. Vérifiez le devis avant de le renvoyer.",
+    "it": "La richiesta sarà annullata. Verifica il preventivo prima di reinviarlo."
+  },
+  "ServiceRequests.keepRequest": {
+    "en": "Keep request",
+    "ar": "الإبقاء على الطلب",
+    "de": "Anfrage behalten",
+    "fr": "Conserver la demande",
+    "it": "Mantieni richiesta"
+  },
+  "ServiceRequests.milestones": {
+    "en": "Milestones",
+    "ar": "المراحل",
+    "de": "Meilensteine",
+    "fr": "Jalons",
+    "it": "Traguardi"
+  },
+  "ServiceRequests.milestoneStatus": {
+    "en": "Milestone status",
+    "ar": "حالة المرحلة",
+    "de": "Meilensteinstatus",
+    "fr": "Statut du jalon",
+    "it": "Stato traguardo"
+  },
+  "ServiceRequests.deliveries": {
+    "en": "Deliveries",
+    "ar": "التسليمات",
+    "de": "Lieferungen",
+    "fr": "Livraisons",
+    "it": "Consegne"
+  },
+  "ServiceRequests.messages": {
+    "en": "Messages",
+    "ar": "الرسائل",
+    "de": "Nachrichten",
+    "fr": "Messages",
+    "it": "Messaggi"
+  },
+  "ServiceRequests.message": {
+    "en": "Message",
+    "ar": "الرسالة",
+    "de": "Nachricht",
+    "fr": "Message",
+    "it": "Messaggio"
+  },
+  "ServiceRequests.noMessages": {
+    "en": "No messages yet.",
+    "ar": "لا توجد رسائل بعد.",
+    "de": "Noch keine Nachrichten.",
+    "fr": "Aucun message.",
+    "it": "Nessun messaggio."
+  },
+  "ServiceRequests.actions.review": {
+    "en": "Start review",
+    "ar": "بدء المراجعة",
+    "de": "Prüfung starten",
+    "fr": "Commencer l’examen",
+    "it": "Avvia revisione"
+  },
+  "ServiceRequests.actions.start": {
+    "en": "Start work",
+    "ar": "بدء العمل",
+    "de": "Arbeit starten",
+    "fr": "Commencer le travail",
+    "it": "Avvia lavoro"
+  },
+  "ServiceRequests.actions.hold": {
+    "en": "Put on hold",
+    "ar": "تعليق العمل",
+    "de": "Pausieren",
+    "fr": "Mettre en attente",
+    "it": "Metti in attesa"
+  },
+  "ServiceRequests.actions.resume": {
+    "en": "Resume work",
+    "ar": "استئناف العمل",
+    "de": "Fortsetzen",
+    "fr": "Reprendre le travail",
+    "it": "Riprendi lavoro"
+  },
+  "ServiceRequests.actions.quote": {
+    "en": "Send quote",
+    "ar": "إرسال عرض السعر",
+    "de": "Angebot senden",
+    "fr": "Envoyer le devis",
+    "it": "Invia preventivo"
+  },
+  "ServiceRequests.actions.deliver": {
+    "en": "Submit delivery",
+    "ar": "تقديم التسليم",
+    "de": "Lieferung einreichen",
+    "fr": "Soumettre la livraison",
+    "it": "Invia consegna"
+  },
+  "ServiceRequests.actions.message": {
+    "en": "Send message",
+    "ar": "إرسال رسالة",
+    "de": "Nachricht senden",
+    "fr": "Envoyer un message",
+    "it": "Invia messaggio"
+  },
+  "ServiceRequests.actions.cancel": {
+    "en": "Cancel request",
+    "ar": "إلغاء الطلب",
+    "de": "Anfrage stornieren",
+    "fr": "Annuler la demande",
+    "it": "Annulla richiesta"
+  },
+  "ServiceRequests.states.new": {
+    "en": "New",
+    "ar": "جديد",
+    "de": "Neu",
+    "fr": "Nouveau",
+    "it": "Nuovo"
+  },
+  "ServiceRequests.states.under_review": {
+    "en": "Under review",
+    "ar": "قيد المراجعة",
+    "de": "In Prüfung",
+    "fr": "En examen",
+    "it": "In revisione"
+  },
+  "ServiceRequests.states.quoted": {
+    "en": "Quoted",
+    "ar": "تم تقديم العرض",
+    "de": "Angebot erstellt",
+    "fr": "Devis envoyé",
+    "it": "Preventivo inviato"
+  },
+  "ServiceRequests.states.awaiting_payment": {
+    "en": "Awaiting payment",
+    "ar": "في انتظار الدفع",
+    "de": "Zahlung ausstehend",
+    "fr": "Paiement attendu",
+    "it": "In attesa di pagamento"
+  },
+  "ServiceRequests.states.in_progress": {
+    "en": "In progress",
+    "ar": "قيد التنفيذ",
+    "de": "In Arbeit",
+    "fr": "En cours",
+    "it": "In corso"
+  },
+  "ServiceRequests.states.on_hold": {
+    "en": "On hold",
+    "ar": "معلق",
+    "de": "Pausiert",
+    "fr": "En attente",
+    "it": "In attesa"
+  },
+  "ServiceRequests.states.in_review": {
+    "en": "Delivery review",
+    "ar": "مراجعة التسليم",
+    "de": "Lieferprüfung",
+    "fr": "Examen de livraison",
+    "it": "Verifica consegna"
+  },
+  "ServiceRequests.states.completed": {
+    "en": "Completed",
+    "ar": "مكتمل",
+    "de": "Abgeschlossen",
+    "fr": "Terminé",
+    "it": "Completato"
+  },
+  "ServiceRequests.states.cancelled": {
+    "en": "Cancelled",
+    "ar": "ملغى",
+    "de": "Storniert",
+    "fr": "Annulé",
+    "it": "Annullato"
+  },
+  "ServiceRequests.states.rejected": {
+    "en": "Rejected",
+    "ar": "مرفوض",
+    "de": "Abgelehnt",
+    "fr": "Refusé",
+    "it": "Rifiutato"
+  },
+  "ServiceRequests.states.expired": {
+    "en": "Expired",
+    "ar": "منتهي الصلاحية",
+    "de": "Abgelaufen",
+    "fr": "Expiré",
+    "it": "Scaduto"
+  },
+  "ServiceRequests.milestoneStates.pending": {
+    "en": "Pending",
+    "ar": "لم يبدأ",
+    "de": "Ausstehend",
+    "fr": "À venir",
+    "it": "Da avviare"
+  },
+  "ServiceRequests.milestoneStates.in_progress": {
+    "en": "In progress",
+    "ar": "قيد التنفيذ",
+    "de": "In Arbeit",
+    "fr": "En cours",
+    "it": "In corso"
+  },
+  "ServiceRequests.milestoneStates.done": {
+    "en": "Done",
+    "ar": "مكتمل",
+    "de": "Erledigt",
+    "fr": "Terminé",
+    "it": "Completato"
+  }
+}

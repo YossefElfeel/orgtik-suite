@@ -14,6 +14,8 @@ type ApiExtraOptions = {
 };
 
 export const API_TAG_TYPES = [
+  "ServiceCatalog",
+  "ServiceRequests",
   "Coupons",
   "Tickets",
   "Zones",

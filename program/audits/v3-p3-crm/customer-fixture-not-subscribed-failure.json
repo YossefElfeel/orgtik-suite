@@ -1,0 +1,687 @@
+{
+  "date": "2026-10-10",
+  "scope": "Ordinary CRM service catalog and delivery, isolated memory demo on offset300",
+  "checks": [
+    {
+      "name": "J19 UI save persists draft while published price remains",
+      "pass": true
+    },
+    {
+      "name": "J19 UI publish clears draft and advances shared price version",
+      "pass": true
+    },
+    {
+      "name": "J19 ordinary reload retains published value",
+      "pass": true
+    },
+    {
+      "name": "Catalog no-match state offers clearing search",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Service review persists after actual callback",
+      "pass": true
+    },
+    {
+      "name": "Service quote amount/currency/validity persisted",
+      "pass": true
+    },
+    {
+      "name": "Delivery conversation persists actual message",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-catalog/pricing/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-requests/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "service-requests/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "service-catalog-en-light-1440.png",
+    "service-catalog-pricing-en-light-1440.png",
+    "service-requests-en-light-1440.png",
+    "request-reviewed-quote-message.png",
+    "service-catalog-en-light-768.png",
+    "service-catalog-pricing-en-light-768.png",
+    "service-requests-en-light-768.png",
+    "service-catalog-en-light-390.png",
+    "service-catalog-pricing-en-light-390.png",
+    "service-requests-en-light-390.png",
+    "service-catalog-en-dark-1440.png",
+    "service-catalog-pricing-en-dark-1440.png",
+    "service-requests-en-dark-1440.png",
+    "service-catalog-en-dark-768.png",
+    "service-catalog-pricing-en-dark-768.png",
+    "service-requests-en-dark-768.png",
+    "service-catalog-en-dark-390.png",
+    "service-catalog-pricing-en-dark-390.png",
+    "service-requests-en-dark-390.png",
+    "service-catalog-ar-light-1440.png",
+    "service-catalog-pricing-ar-light-1440.png",
+    "service-requests-ar-light-1440.png",
+    "service-catalog-ar-light-768.png",
+    "service-catalog-pricing-ar-light-768.png",
+    "service-requests-ar-light-768.png",
+    "service-catalog-ar-light-390.png",
+    "service-catalog-pricing-ar-light-390.png",
+    "service-requests-ar-light-390.png",
+    "service-catalog-ar-dark-1440.png",
+    "service-catalog-pricing-ar-dark-1440.png",
+    "service-requests-ar-dark-1440.png",
+    "service-catalog-ar-dark-768.png",
+    "service-catalog-pricing-ar-dark-768.png",
+    "service-requests-ar-dark-768.png",
+    "service-catalog-ar-dark-390.png",
+    "service-catalog-pricing-ar-dark-390.png",
+    "service-requests-ar-dark-390.png"
+  ],
+  "errors": [],
+  "failure": "{\"status\":403,\"data\":{\"success\":false,\"statusCode\":403,\"code\":\"not_subscribed\",\"message\":\"Ask your workspace owner for tool access.\"}}"
+}
