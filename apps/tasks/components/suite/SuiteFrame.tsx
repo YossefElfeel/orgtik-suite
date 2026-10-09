@@ -1,123 +1,30 @@
 "use client";
-import { demoRuntime } from "@orgtik/ui";
 import { useEffect, useState, type ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Bell, CheckSquare, Kanban, SquaresFour, UserCircle, UsersThree, FolderSimple } from "@phosphor-icons/react";
-import { AppRail, MenuLinkItem, Sidebar, SuiteShell, UserMenu, type Locale, type SidebarSection } from "@orgtik/ui";
+import { Bell, CheckSquare, FolderSimple, GearSix, Kanban, SquaresFour, UserCircle, UsersThree } from "@phosphor-icons/react";
+import { MenuLinkItem, Sidebar, SuiteFrame as SharedSuiteFrame, UserMenu, demoRuntime, type Locale, type SidebarSection } from "@orgtik/ui";
 import { SOS_URL, useLogout } from "@somion/sos-bar";
 import { routing, usePathname, useRouter } from "@/i18n/routing";
 import { useAppDispatch, useAppSelector } from "@/redux/app/hooks";
 import { logoutUser } from "@/redux/features/auth/authSlice";
 import { useGetMostImportantProjectsQuery } from "@/redux/features/projects/projectsApi";
-import { NotificationBell } from "./NotificationBell";
 import { useTaskRoles } from "@/lib/permissions";
-import { CURRENT_SCOPE, useSuiteApps } from "./useSuiteApps";
-
-function useMounted() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  return mounted;
-}
-
-// The part of the day depends on the reader's clock, which the server doesn't know, so it waits
-// for the browser (the server and the first client render stay identical).
-function Greeting({ name }: { name: string }) {
-  const t = useTranslations("Greetings");
-  const mounted = useMounted();
-  if (!mounted) return null;
-  const hour = new Date().getHours();
-  const period = hour >= 5 && hour < 12 ? "morning" : hour >= 12 && hour < 18 ? "afternoon" : "evening";
-  return (
-    <p className="truncate text-body text-fg-muted">
-      {t(period)},{" "}
-      <span dir="auto" className="font-semibold text-fg">
-        {name}
-      </span>
-    </p>
-  );
-}
-
-/**
- * The suite shell for Tasks (FS-TASKS-2): the library's rail, sidebar and top bar replace SoSBar,
- * the two local sidebars, the header and its English breadcrumb. The person comes from the store,
- * which the server filled from the cookies, so nothing here renders differently on the two sides
- * (TASKS-016).
- */
 export function SuiteFrame({ children }: { children: ReactNode }) {
-  const t = useTranslations("Sidebar");
-  const ts = useTranslations("Suite");
-  const td = useTranslations("TasksPresentation");
-  const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const mounted = useMounted();
-  const token = useAppSelector((s) => s.auth.token);
-  const user = useAppSelector((s) => s.auth.user);
-  const roles = useTaskRoles();
-  const { logout } = useLogout(token ?? "");
-  const apps = useSuiteApps(mounted ? token : null);
+  const t = useTranslations("Sidebar"), ts = useTranslations("Suite"), tv = useTranslations("TasksV3"), locale = useLocale(), pathname = usePathname(), router = useRouter(), dispatch = useAppDispatch();
+  const token = useAppSelector(state => state.auth.token), user = useAppSelector(state => state.auth.user), roles = useTaskRoles(), { logout } = useLogout(token || "");
+  const [mounted, setMounted] = useState(false); useEffect(() => setMounted(true), []);
   const { data: important } = useGetMostImportantProjectsQuery(undefined, { skip: !user });
-
-  const href = (path: string) => `/${locale}${path === "/" ? "" : path}`;
-  const at = (path: string) => (path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(path + "/"));
-
-  const main = [
+  const href = (path: string) => `/${locale}${path === "/" ? "" : path}`, at = (path: string) => path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(path + "/");
+  const sections: SidebarSection[] = [{ items: [
     { label: t("Dashboard"), href: href("/"), icon: <SquaresFour />, active: at("/") },
-    ...(roles.isViewerOnly ? [] : [{ label: t("My Tasks"), href: href("/my-tasks/overview"), icon: <CheckSquare />, active: at("/my-tasks") }]),
+    ...(roles.isViewerOnly ? [] : [{ label: t("My Tasks"), href: href("/my-tasks/lists"), icon: <CheckSquare />, active: at("/my-tasks") }]),
     { label: t("Notifications"), href: href("/notifications"), icon: <Bell />, active: at("/notifications") },
     { label: t("All Projects"), href: href("/projects"), icon: <FolderSimple />, active: pathname === "/projects" },
     { label: t("All Teams"), href: href("/teams"), icon: <UsersThree />, active: at("/teams") },
-    ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ label: td("presentationNav"), href: href("/presentation"), icon: <CheckSquare />, active: at("/presentation") }] : []),
-  ];
-  const sections: SidebarSection[] = [{ items: main }];
-  const projects = important?.data ?? [];
-  if (projects.length) {
-    sections.push({
-      label: t("Projects"),
-      items: projects.map((p) => ({
-        label: p.title,
-        href: href(`/projects/${p.id}/board`),
-        icon: <Kanban />,
-        active: pathname.startsWith(`/projects/${p.id}/`),
-      })),
-    });
-  }
-
-  const signOut = async () => {
-    await logout();
-    dispatch(logoutUser());
-    window.location.assign(SOS_URL);
-  };
+    ...(roles.isAdmin || roles.isManager ? [{ label: tv("admin"), href: href("/admin"), icon: <GearSix />, active: at("/admin") }] : []),
+  ] }];
+  if (important?.data.length) sections.push({ label: t("Projects"), items: important.data.map(project => ({ label: project.title, href: href(`/projects/${project.id}/lists`), icon: <Kanban />, active: pathname.startsWith(`/projects/${project.id}/`) })) });
   const name = user ? `${user.firstName} ${user.lastName}` : "";
-
-  return (
-    <SuiteShell
-      demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "tasks", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
-      rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref={apps[0]?.href ?? SOS_URL} />}
-      sidebar={<Sidebar title={ts("appName")} sections={sections} />}
-      topBar={{
-        start: user ? <Greeting name={name} /> : null,
-        end: user ? (
-          <>
-            <NotificationBell />
-            <UserMenu
-              name={name}
-              email={user.email}
-              avatarSrc={user.avatar ?? undefined}
-              locales={routing.locales as readonly Locale[]}
-              onLocaleChange={(next) => router.replace(pathname, { locale: next })}
-              onSignOut={signOut}
-            >
-              <MenuLinkItem href={`${SOS_URL}/profile`} icon={<UserCircle />}>
-                {t("profile")}
-              </MenuLinkItem>
-            </UserMenu>
-          </>
-        ) : null,
-      }}
-    >
-      <div className="mx-auto w-full max-w-[1600px] p-4 md:p-6">{children}</div>
-    </SuiteShell>
-  );
+  const signOut = async () => { await logout(); dispatch(logoutUser()); window.location.assign(SOS_URL); };
+  return <SharedSuiteFrame currentTool="tasks" currentScope="task_manager" currentHref={href("/")} apiUrl={process.env.NEXT_PUBLIC_API_URL} sosUrl={SOS_URL} width="wide" sidebar={<Sidebar title={ts("appName")} sections={sections} />} demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "tasks", onLocaleChange: next => router.replace(pathname, { locale: next }) }} userMenu={mounted && user ? <UserMenu name={name} email={user.email} avatarSrc={user.avatar || undefined} locales={routing.locales as readonly Locale[]} onLocaleChange={next => router.replace(pathname, { locale: next })} onSignOut={signOut}><MenuLinkItem href={`${SOS_URL}/profile`} icon={<UserCircle />}>{t("profile")}</MenuLinkItem></UserMenu> : null}>{children}</SharedSuiteFrame>;
 }

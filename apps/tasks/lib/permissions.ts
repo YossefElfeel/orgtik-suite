@@ -1,5 +1,6 @@
 import { useAppSelector } from "@/redux/app/hooks";
 import { permissionsFor, type TaskPermissions } from "./roles";
+import { useSuite } from "@orgtik/ui";
 
 export { TASKS_SCOPE, taskRoles, permissionsFor, type TaskRole, type TaskPermissions } from "./roles";
 
@@ -19,12 +20,13 @@ function readOnlyClaim(token: string | null | undefined): boolean {
 }
 
 export function useTaskRoles(): TaskPermissions & { readOnlySession: boolean; canEdit: boolean } {
+  const suite = useSuite();
   const user = useAppSelector((s) => s.auth.user);
   const token = useAppSelector((s) => s.auth.token);
-  const context = (user as (typeof user & { workspaceContext?: { actor?: { readOnly?: boolean }; tools?: { tasks?: { scope: string; roles: import("@/types/user").IUserScope["roles"]; canWrite: boolean; access: string } } } }))?.workspaceContext;
+  const context = suite.snapshot ?? (user as (typeof user & { workspaceContext?: { actor?: { readOnly?: boolean }; tools?: { tasks?: { scope: string; roles: import("@/types/user").IUserScope["roles"]; canWrite: boolean; access: string } } } }))?.workspaceContext;
   const access = context?.tools?.tasks;
   const scopes = context ? access && !["no_access", "not_subscribed"].includes(access.access) ? [{ scope: access.scope, roles: access.roles }] : [] : user?.scopes;
-  const p = permissionsFor(scopes);
+  const p = permissionsFor(scopes as import("@/types/user").IUserScope[] | undefined);
   const readOnlySession = context?.actor?.readOnly === true || readOnlyClaim(token);
   const blocked = readOnlySession || Boolean(context && access?.canWrite !== true);
   // isViewerOnly stays the person's role (what they can open); canEdit and the manager rights also
