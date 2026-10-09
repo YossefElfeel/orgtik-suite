@@ -1623,8 +1623,9 @@ function routes(app, context, options = {}) {
     bootstrap: user => ({ projects: visibleProjects(user).map(projectCard), teams: db.teams.filter(team => !isClient(user) || visibleTeamIds(user).has(team.id)).map(teamMini) }),
     suiteFeed: user => {
       const projects = visibleProjects(user), ids = new Set(projects.map(project => project.id));
-      return { projects: projects.map(projectCard), tasks: db.tasks.filter(task => ids.has(task.projectId) && !task.deletedAt).map(task => ({ id: task.id, projectId: task.projectId, title: task.title })), notifications: myNotifications(user).filter(row => !row.clearedAt).map(row => ({ id: row.id, title: row.title || row.message || row.type, createdAt: row.createdAt, readAt: row.readAt, path: row.data?.taskId ? `/projects/${row.data.projectId}/lists?task-id=${row.data.taskId}` : '/my-tasks/lists' })) };
+      return { projects: projects.map(projectCard), tasks: db.tasks.filter(task => ids.has(task.projectId) && !task.deletedAt).map(task => ({ id: task.id, projectId: task.projectId, title: task.title, status: task.status, source: task.source || null })), notifications: myNotifications(user).filter(row => !row.clearedAt).map(row => ({ id: row.id, title: row.title || row.message || row.type, createdAt: row.createdAt, readAt: row.readAt, path: row.data?.taskId ? `/projects/${row.data.projectId}/lists?task-id=${row.data.taskId}` : '/my-tasks/lists' })) };
     },
+    connectedProjects: user => visibleProjects(user).filter(project => !project.archivedAt).map(project => ({ ...projectCard(project), sections: boardSections(project.id).filter(section => section.flag !== 'done').map(section => ({ id: section.id, title: section.title, flag: section.flag })) })),
     createConnectedTask: (user, payload) => {
       const project = projectById(payload.projectId), section = sectionById(payload.sectionId);
       const task = v3.createTask(project, section, { ...payload, assignedUserIds: payload.assignedUserIds || [user.id] }, user);

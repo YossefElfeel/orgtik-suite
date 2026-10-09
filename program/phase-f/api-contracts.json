@@ -6906,6 +6906,18 @@
     {
       "app": "shared",
       "method": "GET",
+      "path": "/api/suite/tasks/references",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
       "path": "/api/suite/tools/:tool/admin",
       "source": "lib/workspace-suite.js",
       "authorization": {
