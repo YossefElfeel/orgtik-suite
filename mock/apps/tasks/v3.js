@@ -36,7 +36,9 @@ function create({ getDb, identity, nowIso, canSeeProject, isPM, isViewerOnly, se
   function complete(task, actor) {
     if (!['weekly', 'monthly'].includes(task.recurrence) || task.nextOccurrenceId) return;
     const section = sectionForStatus(task.projectId, 'todo'); if (!section) return;
-    const date = new Date(task.dueDate || nowIso()); if (task.recurrence === 'weekly') date.setUTCDate(date.getUTCDate() + 7); else date.setUTCMonth(date.getUTCMonth() + 1);
+    const date = new Date(task.dueDate || nowIso());
+    if (task.recurrence === 'weekly') date.setUTCDate(date.getUTCDate() + 7);
+    else { const day = date.getUTCDate(); date.setUTCDate(1); date.setUTCMonth(date.getUTCMonth() + 1); const last = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 0)).getUTCDate(); date.setUTCDate(Math.min(day, last)); }
     const next = createTask(projectById(task.projectId), section, { ...metadata(task), title: task.title, description: task.description, priority: task.priority, dueDate: date.toISOString(), assignedUserIds: task.assignments.filter(row => row.assigneeType === 'user').map(row => row.assigneeId), reminder: { enabled: false } }, actor);
     task.nextOccurrenceId = next.id; next.previousOccurrenceId = task.id;
     logActivity(task, 'recurrence_created', actor.id, { nextTaskId: next.id });
