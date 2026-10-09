@@ -1,0 +1,54 @@
+{
+  "scope": "Recapture ordinary detail and state evidence after waiting for each intended component. Loading/error/forbidden use controlled network responses in the owned sandbox.",
+  "checks": [
+    {
+      "name": "Admin settings capture shows actual project configuration",
+      "pass": true
+    },
+    {
+      "name": "Timeline capture shows actual ordinary Gantt rows",
+      "pass": true
+    },
+    {
+      "name": "Inspector capture shows task settings rather than missing-task state",
+      "pass": true
+    },
+    {
+      "name": "Mobile inspector stays within viewport",
+      "pass": true
+    },
+    {
+      "name": "Empty capture shows filtered ordinary task state",
+      "pass": true
+    },
+    {
+      "name": "500 capture shows intended ordinary recovery state",
+      "pass": true
+    },
+    {
+      "name": "403 capture shows intended ordinary recovery state",
+      "pass": true
+    },
+    {
+      "name": "Loading capture shows signed-in shell and pending project skeleton",
+      "pass": true
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "admin-settings.png",
+    "timeline.png",
+    "task-inspector.png",
+    "task-inspector-en-light-390.png",
+    "state-empty.png",
+    "state-error.png",
+    "state-forbidden.png",
+    "state-loading.png"
+  ],
+  "errors": [],
+  "completed": true
+}
