@@ -6869,6 +6869,18 @@
     },
     {
       "app": "shared",
+      "method": "GET",
+      "path": "/api/suite/services/staff",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
       "method": "POST",
       "path": "/api/suite/tasks",
       "source": "lib/workspace-suite.js",
@@ -8009,6 +8021,18 @@
     },
     {
       "app": "tasks",
+      "method": "POST",
+      "path": "/api/tasks/:id/reminder/send",
+      "source": "apps/tasks/v3.js",
+      "authorization": {
+        "audience": "tool:tasks",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "tasks",
       "method": "GET",
       "path": "/api/tasks/:id/subtasks",
       "source": "apps/tasks.js",
@@ -8143,6 +8167,18 @@
       "app": "tasks",
       "method": "POST",
       "path": "/api/tasks/import",
+      "source": "apps/tasks/v3.js",
+      "authorization": {
+        "audience": "tool:tasks",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "tasks",
+      "method": "POST",
+      "path": "/api/tasks/reminders/run",
       "source": "apps/tasks/v3.js",
       "authorization": {
         "audience": "tool:tasks",

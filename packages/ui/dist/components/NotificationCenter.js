@@ -8,7 +8,8 @@ import { Button } from "./Button.js";
 import { Skeleton } from "./Display.js";
 import { useFormatter, useOrgtik } from "../provider/OrgtikProvider.js";
 import { suiteText } from "../suite/strings.js";
-export function NotificationCenter({ items = [], load, onRead, onReadAll, onSelect }) {
+const EMPTY_ITEMS = [];
+export function NotificationCenter({ items = EMPTY_ITEMS, load, onRead, onReadAll, onSelect }) {
     const [open, setOpen] = useState(false), [records, setRecords] = useState(items), [busy, setBusy] = useState(false), [error, setError] = useState();
     const { locale } = useOrgtik(), f = useFormatter(), t = (key) => suiteText(locale, key);
     useEffect(() => setRecords(items), [items]);

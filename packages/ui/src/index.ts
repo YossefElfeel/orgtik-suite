@@ -94,5 +94,5 @@ export { ToolAdminLayout, type ToolAdminSection } from "./suite/ToolAdminLayout.
 export { ToolAdminScreen } from "./suite/ToolAdminScreen.js";
 export { suiteRequest, suiteApiRoot, SuiteRequestError } from "./suite/api.js";
 export { suiteText, type SuiteString } from "./suite/strings.js";
-export type { SuiteSnapshot, SuiteOptions, SuiteProviderProps, SuiteConnector, SuitePreferences, SuiteSearchItem, SuiteNotification, SuiteActivity, SuitePerson, ConnectionState } from "./suite/types.js";
+export type { SuiteSnapshot, SuiteOptions, SuiteProviderProps, SuiteConnector, SuitePreferences, SuiteSearchItem, SuiteNotification, SuiteActivity, SuitePerson, SuiteToolAdminData, ConnectionState } from "./suite/types.js";
 export { demoRuntime, demoRequest, type DemoRuntime, type DemoSearchItem, type DemoBridgeTask, type DemoBridgeLead } from "./demo/connections.js";

@@ -10,7 +10,8 @@ import { useOrgtik } from "../provider/OrgtikProvider.js";
 import { suiteText } from "../suite/strings.js";
 import type { SuiteSearchItem } from "../suite/types.js";
 
-export function CommandPalette({ items = [], load, onSelect }: { items?: SuiteSearchItem[]; load?: (query: string, signal: AbortSignal) => Promise<SuiteSearchItem[]>; onSelect: (item: SuiteSearchItem) => Promise<unknown> | void }) {
+const EMPTY_ITEMS: SuiteSearchItem[] = [];
+export function CommandPalette({ items = EMPTY_ITEMS, load, onSelect }: { items?: SuiteSearchItem[]; load?: (query: string, signal: AbortSignal) => Promise<SuiteSearchItem[]>; onSelect: (item: SuiteSearchItem) => Promise<unknown> | void }) {
   const { locale } = useOrgtik(), t = (key: Parameters<typeof suiteText>[1]) => suiteText(locale, key);
   const [open, setOpen] = useState(false), [query, setQuery] = useState(""), [results, setResults] = useState(items), [busy, setBusy] = useState(false), [active, setActive] = useState(0), [error, setError] = useState<string>();
   const id = useId(), input = useRef<HTMLInputElement>(null);

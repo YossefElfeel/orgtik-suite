@@ -11,8 +11,8 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
   const server = http.createServer(require('../api/index'));
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const base = `http://127.0.0.1:${server.address().port}`;
-  async function call(app, endpoint, token, method = 'GET', body) {
-    const response = await fetch(`${base}/${app}${endpoint}`, { method, signal: AbortSignal.timeout(20000), headers: { connection: 'close', ...(body ? { 'content-type': 'application/json' } : {}), ...(token ? { authorization: `Bearer ${token}` } : {}) }, ...(body ? { body: JSON.stringify(body) } : {}) });
+  async function call(app, endpoint, token, method = 'GET', body, extra = {}) {
+    const response = await fetch(`${base}/${app}${endpoint}`, { method, signal: AbortSignal.timeout(20000), headers: { connection: 'close', ...(body ? { 'content-type': 'application/json' } : {}), ...(token ? { authorization: `Bearer ${token}` } : {}), ...extra }, ...(body ? { body: JSON.stringify(body) } : {}) });
     const raw = await response.json(); return { status: response.status, data: raw.data ?? raw, raw };
   }
   const good = response => { assert.ok(response.status < 300, JSON.stringify(response.raw)); return response.data; };
@@ -83,7 +83,16 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     assert.equal(good(await call('tasks', `/api/tasks/${next.id}/reminder-preview`, tasksToken)).delivery, 'in_app_mock');
     const template = good(await call('tasks', '/api/task-templates', tasksToken, 'POST', { projectId: sample.id, name: 'Team review', title: 'Review request', labels: ['team'] }));
     assert.ok(good(await call('tasks', '/api/task-templates', tasksToken)).some(row => row.id === template.id));
-    const imported = good(await call('tasks', '/api/tasks/import', tasksToken, 'POST', { projectId: sample.id, sectionId: todo, rows: [{ title: 'Mapped CSV task' }, { title: '' }] })); assert.equal(imported.importedIds.length, 1); assert.equal(imported.failed.length, 1);
+    const richTemplate = good(await call('tasks', '/api/task-templates', tasksToken, 'POST', { projectId: sample.id, name: 'Watched repeat', title: 'Prepare watched review', description: 'Preserved brief', watcherIds: [account.user.id], reminder: { enabled: true, offset: 30 }, recurrence: 'weekly', customFields: { hours: 2 } }));
+    const savedTemplate = good(await call('tasks', '/api/task-templates', tasksToken)).find(row => row.id === richTemplate.id); assert.deepEqual(savedTemplate.watcherIds, [account.user.id]); assert.equal(savedTemplate.reminder.offset, 30); assert.equal(savedTemplate.description, 'Preserved brief'); assert.equal(savedTemplate.customFields.hours, 2);
+    good(await call('tasks', `/api/tasks/${next.id}`, tasksToken, 'PUT', { reminder: { enabled: true, at: '2026-10-07T08:00:00Z' } }));
+    const reminder = good(await call('tasks', '/api/tasks/reminders/run', tasksToken, 'POST', {})); assert.ok(reminder.notifiedTaskIds.includes(next.id)); assert.ok(reminder.notificationIds.length);
+    assert.equal(good(await call('tasks', '/api/tasks/reminders/run', tasksToken, 'POST', {})).notificationIds.length, 0);
+    assert.ok(good(await call('tasks', '/api/suite/notifications', tasksToken)).some(row => reminder.notificationIds.includes(Number(row.id.split(':').at(-1)))));
+    const monthly = good(await call('tasks', `/api/tasks/sections/${todo}`, tasksToken, 'POST', { title: 'Month-end repeat', dueDate: '2026-01-31T09:00:00Z', recurrence: 'monthly' }));
+    const monthlyDone = good(await call('tasks', `/api/tasks/${monthly.id}`, tasksToken, 'PUT', { status: 'done' }));
+    assert.equal(good(await call('tasks', `/api/tasks/${monthlyDone.nextOccurrenceId}`, tasksToken)).dueDate, '2026-02-28T09:00:00.000Z');
+    const imported = good(await call('tasks', '/api/tasks/import', tasksToken, 'POST', { projectId: sample.id, sectionId: todo, rows: [{ title: 'Mapped CSV task' }, { title: '' }, { title: 'Invalid calendar date', dueDate: '2026-02-31' }] })); assert.equal(imported.importedIds.length, 1); assert.equal(imported.failed.length, 2); assert.ok(imported.failed.some(row => row.code === 'invalid_date'));
     const bulk = good(await call('tasks', '/api/tasks/bulk', tasksToken, 'POST', { ids: [imported.importedIds[0], 999999], patch: { priority: 'urgent', labels: ['imported'] } })); assert.equal(bulk.updatedIds.length, 1); assert.equal(bulk.failed.length, 1);
     assert.ok(good(await call('tasks', `/api/projects/${sample.id}/automations/run`, tasksToken, 'POST', {})).updatedIds.includes(next.id));
     good(await call('tasks', `/api/projects/${sample.id}/archive`, tasksToken, 'POST', {}));
@@ -137,5 +146,15 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     const serviceRequest = require('../apps/admin').getStore().db.serviceRequests.find(row => row.id === linkedOrder.requests[0].requestId);
     assert.ok(serviceRequest.crmLeadId); assert.equal(serviceRequest.crmDelivery.state, 'sent');
     const linkedContact = good(await call('sales', `/api/customers/${serviceRequest.crmLeadId}`, crmToken)); assert.equal(linkedContact.email, 'owner@v3-suite.test');
+    const immutablePaid = JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders);
+    const regionalCatalog = good(await call('sales', '/api/suite/services/catalog', crmToken)); assert.ok(regionalCatalog.countries.some(row => row.code === 'FR'));
+    const eligible = good(await call('sales', '/api/suite/services/staff', crmToken)); assert.ok(eligible.some(row => row.id === mona.user.id));
+    const deliveryRow = good(await call('sales', '/api/suite/services/requests', crmToken)).find(row => row.id === serviceRequest.id); assert.equal(deliveryRow.capabilities.canAssign, true);
+    good(await call('sales', `/api/suite/services/catalog/offers/${encodeURIComponent(offer.id)}`, crmToken, 'PATCH', { regionalPrices: { europe: 654 }, countryPrices: { FR: 432 } }));
+    good(await call('sales', '/api/suite/services/catalog/publish', crmToken, 'POST', { operationId: 'regional-service-publish' }));
+    const france = good(await call('sos', '/v1/public/catalog', null, 'GET', undefined, { 'x-mock-country': 'FR' })).items.find(row => row.id === offer.id);
+    const germany = good(await call('sos', '/v1/public/catalog', null, 'GET', undefined, { 'x-mock-country': 'DE' })).items.find(row => row.id === offer.id);
+    assert.equal(france.monthlyMinor, 43200); assert.equal(germany.monthlyMinor, 65400); assert.equal(france.currency, 'EUR');
+    assert.equal(JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders), immutablePaid);
   } finally { await new Promise(resolve => server.close(resolve)); fs.rmSync(folder, { recursive: true, force: true }); }
 });

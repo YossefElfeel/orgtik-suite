@@ -25,6 +25,12 @@ function create({ getDb, identity, nowIso, canSeeProject, isPM, isViewerOnly, se
     if (!section || section.projectId !== project.id || section.flag === 'archive') throw fail(422, 'invalid_section', 'Choose an active project section.');
     const title = String(body.title || '').trim();
     if (title.length < 2 || title.length > 500) throw fail(422, 'invalid_title', 'Enter a title of 2–500 characters.');
+    for (const key of ['startDate', 'dueDate']) if (body[key] !== undefined && body[key] !== null && body[key] !== '') {
+      const value = body[key], match = typeof value === 'string' && /^(\d{4})-(\d{2})-(\d{2})(?:T|$)/.exec(value);
+      if (!match || !Number.isFinite(Date.parse(value))) throw fail(422, 'invalid_date', 'Use a valid date or leave it empty.');
+      const civil = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
+      if (civil.getUTCFullYear() !== Number(match[1]) || civil.getUTCMonth() + 1 !== Number(match[2]) || civil.getUTCDate() !== Number(match[3])) throw fail(422, 'invalid_date', 'Use a valid calendar date.');
+    }
     const at = nowIso(), task = { id: db().nextId('task'), projectId: project.id, sectionId: section.id, order: db().tasks.filter(row => row.sectionId === section.id).length + 1, title, description: String(body.description || '').slice(0, 20000), priority: ['low', 'medium', 'high', 'urgent'].includes(body.priority) ? body.priority : 'medium', status: section.flag, baseProgress: null, startDate: body.startDate && Number.isFinite(Date.parse(body.startDate)) ? new Date(body.startDate).toISOString() : at, dueDate: body.dueDate && Number.isFinite(Date.parse(body.dueDate)) ? new Date(body.dueDate).toISOString() : null, createdById: actor.id, createdAt: at, updatedAt: at, completedAt: null, assignments: [], movedAt: null, dependsOn: [] };
     patch(task, body);
     const users = body.assignedUserIds || [];
@@ -47,7 +53,35 @@ function create({ getDb, identity, nowIso, canSeeProject, isPM, isViewerOnly, se
     const route = fn => (req, res, next) => { try { const actor = me(req, res); if (!actor) return; const result = fn(req, actor); ok(res, result, 'Tasks updated'); } catch (error) { next(error); } };
     const visible = actor => db().projects.filter(project => canSeeProject(project, actor));
     app.get('/api/task-templates', route((_req, actor) => [...clone(PRESETS), ...visible(actor).flatMap(project => (project.v3Templates || []).map(row => ({ ...row, projectId: project.id })))]));
-    app.post('/api/task-templates', route((req, actor) => { const project = projectById(req.body.projectId); writable(project, actor, true); const name = String(req.body.name || '').trim(); if (!name || name.length > 100) throw fail(422, 'invalid_template', 'Name the template.'); project.v3Templates ??= []; if (project.v3Templates.length >= 100) throw fail(422, 'template_limit', 'This project has one hundred templates.'); const row = { id: `template:${project.id}:${db().nextId('activity')}`, name, title: String(req.body.title || name).slice(0, 500), priority: req.body.priority || 'medium', labels: req.body.labels || [], recurrence: req.body.recurrence || 'none' }; patch({ projectId: project.id }, row); project.v3Templates.push(row); return row; }));
+    app.post('/api/task-templates', route((req, actor) => {
+      const project = projectById(req.body.projectId); writable(project, actor, true);
+      const name = String(req.body.name || '').trim(); if (!name || name.length > 100) throw fail(422, 'invalid_template', 'Name the template.');
+      project.v3Templates ??= []; if (project.v3Templates.length >= 100) throw fail(422, 'template_limit', 'This project has one hundred templates.');
+      const row = { id: `template:${project.id}:${db().nextId('activity')}`, name, title: String(req.body.title || name).slice(0, 500), description: String(req.body.description || '').slice(0, 20000), priority: req.body.priority || 'medium', labels: req.body.labels || [], recurrence: req.body.recurrence || 'none', watcherIds: req.body.watcherIds || [], reminder: req.body.reminder || { enabled: false }, customFields: req.body.customFields || {} };
+      patch({ projectId: project.id }, row);
+      for (const key of ['dueDate', 'startDate']) if (req.body[key] !== undefined) { if (req.body[key] !== null && !Number.isFinite(Date.parse(req.body[key]))) throw fail(422, 'invalid_template_date', 'Choose valid template dates.'); row[key] = req.body[key] === null ? null : new Date(req.body[key]).toISOString(); }
+      project.v3Templates.push(row); return clone(row);
+    }));
+    const reminders = (actor, taskId, force = false) => {
+      const result = { delivery: 'in_app_mock', notifiedTaskIds: [], notificationIds: [] };
+      for (const task of db().tasks.filter(row => taskId === undefined || row.id === Number(taskId))) {
+        const project = projectById(task.projectId);
+        if (!canSeeProject(project, actor) || project.archivedAt || project.custodyReadOnly || task.status === 'done' || !task.reminder?.enabled) continue;
+        const at = task.reminder.at ? Date.parse(task.reminder.at) : task.dueDate ? Date.parse(task.dueDate) - (task.reminder.offset || 0) * 60000 : null;
+        if (!force && (at === null || at > Date.parse(nowIso()))) continue;
+        task.reminderReceipts ??= {};
+        const recipients = [...new Set([task.createdById, ...(task.watcherIds || []), ...task.assignments.filter(row => row.assigneeType === 'user').map(row => row.assigneeId)])];
+        for (const id of recipients) {
+          const person = identity.findUser(id), receipt = `${force ? 'preview' : 'due'}:${at ?? nowIso()}:${id}`;
+          if (!person || !identity.userScopes(person).some(scope => scope.scope === 'task_manager' && scope.roles.length) || !canSeeProject(project, person) || task.reminderReceipts[receipt]) continue;
+          const notification = pushNotification(id, { type: 'task_reminder', group: 'assigned', title: task.title, message: 'Task reminder · in-app mock', data: { ...taskNotifData(task), delivery: 'in_app_mock' } });
+          if (notification) { task.reminderReceipts[receipt] = notification.id; result.notificationIds.push(notification.id); if (!result.notifiedTaskIds.includes(task.id)) result.notifiedTaskIds.push(task.id); }
+        }
+      }
+      return result;
+    };
+    app.post('/api/tasks/reminders/run', route((_req, actor) => reminders(actor)));
+    app.post('/api/tasks/:id/reminder/send', route((req, actor) => { const task = taskById(req.params.id); writable(task && projectById(task.projectId), actor); if (!task.reminder?.enabled) throw fail(409, 'reminder_disabled', 'Enable a reminder before previewing delivery.'); return reminders(actor, task.id, true); }));
     app.delete('/api/task-templates/:id', route((req, actor) => { const project = visible(actor).find(row => row.v3Templates?.some(template => template.id === req.params.id)); writable(project, actor, true); project.v3Templates = project.v3Templates.filter(row => row.id !== req.params.id); return { deleted: true }; }));
     app.get('/api/projects/:id/config', route((req, actor) => { const project = projectById(req.params.id); if (!project || !canSeeProject(project, actor)) throw fail(404, 'project_not_found', 'This project was not found.'); return clone(project.v3Config || { customFields: [], automations: [], runs: [] }); }));
     app.put('/api/projects/:id/config', route((req, actor) => {

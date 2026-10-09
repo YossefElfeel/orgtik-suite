@@ -85,6 +85,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command }) {
   app.patch('/api/suite/services/catalog/bundles/:id', write(req => services.saveBundle(S, principal, req.params.id, req.body)));
   app.post('/api/suite/services/catalog/publish', write(req => services.publish(S, principal, req.get('idempotency-key') || req.body.operationId)));
   app.get('/api/suite/services/requests', read(() => services.requests(S, principal)));
+  app.get('/api/suite/services/staff', read(() => services.staff(S, identity, principal)));
   app.post('/api/suite/services/requests/:id/actions', write(req => services.requestAction(S, identity, principal, req.params.id, req.body)));
   app.post('/api/suite/tasks', write(req => {
     const ctx = currentContext(), body = req.body, source = body.source;
