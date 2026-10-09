@@ -1,7 +1,7 @@
 import { baseApi } from "@/redux/app/baseApi";
 import type { SuccessResponse } from "@/types";
 export type TaskMetadata = { labels: string[]; watcherIds: number[]; reminder: { enabled: boolean; at?: string; offset?: number }; recurrence: "none" | "weekly" | "monthly"; customFields: Record<string, string | number | boolean>; timeEntries: { id: string; userId: number; minutes: number; note: string; at: string }[]; nextOccurrenceId?: number | null; source?: { app: string; id: string } };
-export type TaskTemplate = Partial<TaskMetadata> & { id: string; projectId?: number; name: string; title: string; priority: string; description?: string; startDate?: string; dueDate?: string };
+export type TaskTemplate = Partial<TaskMetadata> & { id: string; projectId?: number; name: string; title: string; priority: string; description?: string; startDate?: string | null; dueDate?: string | null };
 export type ProjectConfig = { customFields: { id: string; name: string; type: "text" | "number" | "boolean" }[]; automations: { id: string; enabled: boolean; when: "overdue" | "status"; status?: string; action: "priority" | "label"; value: string }[]; runs: { id: string; at: string; updatedIds: number[] }[] };
 export type BatchResult = { updatedIds?: number[]; importedIds?: number[]; failed: { id?: number; row?: number; code: string }[] };
 export type NewTask = Partial<TaskMetadata> & { title: string; priority?: string; description?: string; assignedUserIds?: number[]; startDate?: string | null; dueDate?: string | null };
