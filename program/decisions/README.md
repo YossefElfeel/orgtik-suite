@@ -91,6 +91,17 @@ Each decision gets a `D-###.md` file with its context, options, decision, conseq
 
 - [D-074](D-074.md): Authorized hosted stakeholder prototype rollout on existing projects, isolated presentation storage and scoped verification (2026-10-08).
 
+## V3 scope — 2026-10-09
+
+- [D-075](D-075.md): Adaptive entry, connected-feature states and bounded owner-domain mock adapters.
+- [D-076](D-076.md): Presentation commitments move into ordinary tool/account screens; Demo Panel keeps controlled states.
+- [D-077](D-077.md): DS v2 preserves the brand and website design, with G-DS1/G-DS2 visual gates.
+- [D-078](D-078.md): Hybrid radius for primary actions and dense controls (amends D-022).
+- [D-079](D-079.md): CRM services, SaaS Console software, WM content (amends D-011/D-058/D-059).
+- [D-080](D-080.md): Shared in-tool customer administration with current entitlements and role limits.
+
+These scope decisions are adopted by the owner-designated plan; their implementation and visual acceptance are tracked separately in [A37](../phase-f/amendment-A37.md).
+
 ## Proposed
 
 Each one has a full write-up: context, options with their trade-offs, the proposal, consequences, and the evidence still pending. They were drafted in session 5 for the G0 review.

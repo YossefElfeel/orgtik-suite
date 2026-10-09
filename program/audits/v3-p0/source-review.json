@@ -1,0 +1,114 @@
+{
+  "checked_at": "2026-10-09",
+  "source_revision": "c7c7e1fe6771fe487521c03d48bec5608b0747c1",
+  "checks": [
+    {
+      "name": "407 original findings and every original field are preserved",
+      "pass": true,
+      "evidence": "baseline c7c7e1f → program/backlog/backlog.csv"
+    },
+    {
+      "name": "129 historical release rows and acceptance fields are unchanged",
+      "pass": true,
+      "evidence": "baseline c7c7e1f → program/backlog/release-packages.csv"
+    },
+    {
+      "name": "72 unique historical commitment IDs remain",
+      "pass": true,
+      "evidence": "program/prototype-feature-map.md (unchanged)"
+    },
+    {
+      "name": "Status overlay and augmented registers regenerate deterministically",
+      "pass": true,
+      "evidence": "program/tools/review/reconcile-v3.mjs --check"
+    },
+    {
+      "name": "D-075 is indexed",
+      "pass": true,
+      "evidence": "program/decisions/README.md"
+    },
+    {
+      "name": "D-076 is indexed",
+      "pass": true,
+      "evidence": "program/decisions/README.md"
+    },
+    {
+      "name": "D-077 is indexed",
+      "pass": true,
+      "evidence": "program/decisions/README.md"
+    },
+    {
+      "name": "D-078 is indexed",
+      "pass": true,
+      "evidence": "program/decisions/README.md"
+    },
+    {
+      "name": "D-079 is indexed",
+      "pass": true,
+      "evidence": "program/decisions/README.md"
+    },
+    {
+      "name": "D-080 is indexed",
+      "pass": true,
+      "evidence": "program/decisions/README.md"
+    },
+    {
+      "name": "tasks presentation is guarded in ordinary builds",
+      "pass": true,
+      "evidence": "apps/tasks/app/[locale]/(dashboard)/presentation/page.tsx"
+    },
+    {
+      "name": "hr presentation is guarded in ordinary builds",
+      "pass": true,
+      "evidence": "apps/hr/app/[locale]/(dashboard)/presentation/page.tsx"
+    },
+    {
+      "name": "sales presentation is guarded in ordinary builds",
+      "pass": true,
+      "evidence": "apps/sales/app/[locale]/(dashboard)/presentation/page.tsx"
+    },
+    {
+      "name": "Workspace command allowlist is a current integration constraint",
+      "pass": true,
+      "evidence": "mock/lib/workspace-boundary.js:executeCommand"
+    },
+    {
+      "name": "WM CRM intake is currently deferred",
+      "pass": true,
+      "evidence": "mock/server.js:makeCtx"
+    },
+    {
+      "name": "Current tool role catalog contains only Tasks and Files",
+      "pass": true,
+      "evidence": "mock/lib/workspace-commands.js:ROLE_NAMES"
+    },
+    {
+      "name": "No runtime, website, CI or frozen foundation files changed in P0",
+      "pass": true,
+      "evidence": "git diff --name-only c7c7e1f"
+    },
+    {
+      "name": "P0 document links resolve locally",
+      "pass": true,
+      "evidence": []
+    }
+  ],
+  "measured": {
+    "original_backlog": 407,
+    "original_packages": 129,
+    "v3_packages": 16,
+    "commitments": 72,
+    "tracked_page_tsx": 281,
+    "sales_hr_ui_kit_files": 71,
+    "sales_hr_kit_or_local_table_consumers": 281
+  },
+  "inherited_audit_classification": {
+    "presentation_only": 60,
+    "ordinary_only": 9,
+    "split": 3,
+    "real_integration_families": 4,
+    "classified_ordinary_routes": 192,
+    "note": "From the supplied plan; not a new exhaustive runtime feature/route audit. Raw tracked routes include auth, redirects and retired surfaces."
+  },
+  "acceptance": "P0 source/document consistency only; real DS v2 specimens, ordinary tool flows and hosted acceptance remain pending"
+}

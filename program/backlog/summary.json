@@ -31,5 +31,31 @@
     "T4": "Tools complete for their category (benchmark Expected features)",
     "T5": "SaaS core completeness (ADM/USR spec rows)",
     "T6": "Polish: copy, accessibility, responsive, performance"
+  },
+  "v3": {
+    "reconciled_at": "2026-10-09",
+    "source_revision": "c7c7e1fe6771fe487521c03d48bec5608b0747c1",
+    "historical_packages": 129,
+    "new_packages": 16,
+    "total_packages": 145,
+    "byStatus": {
+      "implemented_local_acceptance_bounded": 7,
+      "implemented_mock_bounded": 8,
+      "resolved_decision_delivery_move_pending": 1,
+      "criterion_recheck_pending": 381,
+      "deferred_website_design_scope": 1,
+      "implemented_guard_ui_gap": 1,
+      "implemented_catalog_expansion_pending": 1,
+      "presentation_only_migration_pending": 5,
+      "implemented_reference_scope_broader_pending": 1,
+      "implemented_persistence_live_delivery_deferred": 1
+    },
+    "byMappingBasis": {
+      "reviewed_finding": 26,
+      "topic_candidate_not_full_coverage": 196,
+      "reconciliation_only": 185
+    },
+    "current_gate": "P0_report_review",
+    "criterion_note": "Topic links are candidates; original criterion acceptance is not inferred from package coverage."
   }
 }

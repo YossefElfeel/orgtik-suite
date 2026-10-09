@@ -1,5 +1,7 @@
 # R1 workspace foundation package
 
+**Current delivery update — 2026-10-09:** [A37](amendment-A37.md) adopts [v3](../plan-v3-execution.md), records D-075–D-080 and prepares [the P0 report](../v3-report.html) for owner review. Historical foundation evidence below is preserved. New ordinary-screen features, DS v2 and connectors remain pending their plan gates.
+
 Historical foundation baseline: main6032161. This file records package implementation and evidence, not full R1 or release acceptance.
 
 Foundation update: [PR14](https://github.com/YossefElfeel/orgtik-suite/pull/14) merged to main e74134f after [Linux checks and Windows library acceptance](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37691408296). The following people-journey package extends that validated source; it does not repeat or waive hosted release gates.
