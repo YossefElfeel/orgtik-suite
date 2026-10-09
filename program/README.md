@@ -8,7 +8,7 @@ The working repo for the OrgTik suite program:
 
 It holds the decisions, registers, audits and question packets that the app repos don't. Nothing in here ships to users.
 
-The maintained roadmap is [plan-v2-execution.md](plan-v2-execution.md), using the supplied Claude plan as historical input. The R1 implementation/evidence is tracked in [phase-f/README.md](phase-f/README.md). Keep existing configured resources; Vercel deployment remains paused by the owner.
+The current maintained roadmap is [plan-v3-execution.md](plan-v3-execution.md): adaptive ecosystem, DS v2 and ordinary-screen mock flows. [The P0 report](v3-report.html) awaits owner review; [A37](phase-f/amendment-A37.md) records decisions and [feasibility](v3-feasibility.md). [Plan v2](plan-v2-execution.md) and the R1 implementation/evidence in [phase-f/README.md](phase-f/README.md) retain historical acceptance. Keep existing configured resources; Vercel deployment remains paused by the owner.
 
 ## What lives where
 

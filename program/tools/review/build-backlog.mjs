@@ -11,6 +11,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { reconcileV3 } from "./reconcile-v3.mjs";
 
 const PROGRAM = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const A = (...p) => path.join(PROGRAM, "audits", ...p);
@@ -113,3 +114,5 @@ const by = (key) => items.reduce((acc, it) => ((acc[it[key]] = (acc[it[key]] ?? 
 const summary = { generated: new Date().toISOString(), total: items.length, bySource: by("source"), byTheme: by("theme"), byType: by("type"), byDecision: by("decision"), themes: THEMES };
 fs.writeFileSync(path.join(PROGRAM, "backlog", "summary.json"), JSON.stringify(summary, null, 2) + "\n");
 console.log(JSON.stringify(summary, null, 2));
+// Preserve the current delivery/status overlay when regenerating historical sources.
+if (fs.existsSync(path.join(PROGRAM, "plan-v3-execution.md"))) console.log(JSON.stringify(reconcileV3(), null, 2));
