@@ -6797,6 +6797,78 @@
     },
     {
       "app": "shared",
+      "method": "GET",
+      "path": "/api/suite/services/catalog",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "PATCH",
+      "path": "/api/suite/services/catalog/bundles/:id",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "PATCH",
+      "path": "/api/suite/services/catalog/offers/:id",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "POST",
+      "path": "/api/suite/services/catalog/publish",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
+      "path": "/api/suite/services/requests",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "POST",
+      "path": "/api/suite/services/requests/:id/actions",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
       "method": "POST",
       "path": "/api/suite/tasks",
       "source": "lib/workspace-suite.js",
@@ -6823,6 +6895,18 @@
       "app": "shared",
       "method": "GET",
       "path": "/api/suite/tools/:tool/admin",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
+      "path": "/api/suite/tools/:tool/admin/audit",
       "source": "lib/workspace-suite.js",
       "authorization": {
         "audience": "suite or current tool audience on its own API origin",
@@ -8371,6 +8455,18 @@
       "app": "wm",
       "method": "GET",
       "path": "/v2/admin/audit",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "GET",
+      "path": "/v2/admin/catalog",
       "source": "apps/wm.js",
       "authorization": {
         "audience": "staff:wm or staff:admin for this route",

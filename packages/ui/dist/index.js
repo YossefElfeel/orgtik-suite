@@ -76,6 +76,7 @@ export { SuiteFrame } from "./suite/SuiteFrame.js";
 export { WorkspaceSwitcher } from "./suite/WorkspaceSwitcher.js";
 export { SettingsLayout } from "./suite/SettingsLayout.js";
 export { ToolAdminLayout } from "./suite/ToolAdminLayout.js";
+export { ToolAdminScreen } from "./suite/ToolAdminScreen.js";
 export { suiteRequest, suiteApiRoot, SuiteRequestError } from "./suite/api.js";
 export { suiteText } from "./suite/strings.js";
 export { demoRuntime, demoRequest } from "./demo/connections.js";

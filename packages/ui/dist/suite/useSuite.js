@@ -1,7 +1,7 @@
 "use client";
 import { jsx as _jsx } from "react/jsx-runtime";
 import { createContext, useContext, useMemo, useState, useEffect, useCallback } from "react";
-import { useClientSession } from "../auth/session.js";
+import { useClientSession, readClientSession } from "../auth/session.js";
 import { suiteRequest } from "./api.js";
 import { CONNECTOR_PAIRS, SUITE_TOOLS } from "./registry.js";
 const Context = createContext({});
@@ -11,17 +11,22 @@ export function SuiteProvider({ children, ...options }) {
     const refresh = useCallback(async () => {
         if (!apiUrl || !token || !workspaceId || options.snapshot !== undefined)
             return;
+        const current = () => readClientSession()?.tokens.accessToken === token && readClientSession()?.workspaceContext?.workspace.id === workspaceId;
         setLoading(true);
         setError(undefined);
         try {
-            setRemote(await suiteRequest(apiUrl, "/bootstrap"));
+            const value = await suiteRequest(apiUrl, "/bootstrap");
+            if (current())
+                setRemote(value);
         }
         catch (failure) {
-            setError(failure instanceof Error ? failure.message : "The workspace could not be loaded.");
+            if (current())
+                setError(failure instanceof Error ? failure.message : "The workspace could not be loaded.");
             throw failure;
         }
         finally {
-            setLoading(false);
+            if (current())
+                setLoading(false);
         }
     }, [apiUrl, token, workspaceId, options.snapshot]);
     useEffect(() => { setRemote(null); if (apiUrl && token && workspaceId && options.snapshot === undefined)

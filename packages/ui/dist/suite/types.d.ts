@@ -68,6 +68,35 @@ export type SuitePerson = {
     email?: string;
     avatar?: string;
 };
+export type SuiteToolAdminData = {
+    tool: ToolKey;
+    plan?: {
+        name: string;
+        limits: Record<string, number>;
+        usage: Record<string, number>;
+    };
+    seats: {
+        capacity: number | null;
+        assigned: number;
+        reserved: number;
+        available: number | null;
+    };
+    roles: string[];
+    members: {
+        id: string;
+        userId?: number;
+        name: string;
+        assigned: boolean;
+        roles: string[];
+        allowedRoles: string[];
+    }[];
+    connectors: SuiteConnector[];
+    settings: {
+        name?: string;
+        description?: string;
+    };
+    canWrite: boolean;
+};
 export type SuiteSession = AuthEnvelope;
 export type ConnectionState = "available" | "not_subscribed" | "no_access" | "read_only" | "role_denied" | "disabled";
 //# sourceMappingURL=types.d.ts.map

@@ -33,6 +33,41 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const principal = req ? authority.verifiedFromReq(req) : requests.getStore()?.frame.principal;
     return principal ? { ...principal, workspaceContext: principal.context.workspaceContext } : null;
   }
+  function internalCrmRuntime(request) {
+    const S = platform().getStore(), workspace = S.workspace('ws_orgtik');
+    if (!request || workspace?.kind !== 'orgtik_internal' || ['suspended', 'deleted', 'cancelled'].includes(workspace.state)) throw failure(503, 'orgtik_crm_unavailable', 'The OrgTik CRM is unavailable.');
+    const owner = workspace.members.find(member => member.status === 'active' && member.toolGrants?.crm?.assigned && member.toolGrants.crm.roles?.some(role => ['admin', 'manager'].includes(role))), actor = owner && identityFor().findByKey(owner.userKey);
+    if (!actor) throw failure(503, 'orgtik_crm_unavailable', 'The OrgTik CRM has no admitted intake owner.');
+    const context = require('./workspace-context').resolveWorkspaceContext(S, identityFor(), actor, { realm, workspaceId: workspace.id });
+    if (!context.tools.crm.canWrite) throw failure(503, 'orgtik_crm_read_only', 'The OrgTik CRM is read-only.');
+    const key = 'internal:sales';
+    if (!request.relatedRuntimes.has(key)) request.relatedRuntimes.set(key, registry.create(workspace.id, 'sales'));
+    return request.relatedRuntimes.get(key);
+  }
+  function deliverWebsiteLead(payload, metadata) {
+    const request = requests.getStore();
+    if (!request || request.key !== 'wm' || request.req.method !== 'POST' || !/^\/v2\/public\/leads(?:$|\?)/.test(request.req.url) || typeof metadata?.wmLeadId !== 'string' || metadata.wmLeadId.length > 200) throw failure(403, 'website_intake_forbidden', 'Only the validated website lead flow can deliver this record.');
+    try {
+      const result = internalCrmRuntime(request).receiveWebsiteIntake(payload, { sourceKey: `wm:${metadata.wmLeadId}` });
+      return { state: 'sent', ...result, managedIn: 'crm', at: new Date(clock.now()).toISOString() };
+    } catch (error) {
+      if (['orgtik_crm_unavailable', 'orgtik_crm_read_only'].includes(error.code)) return { state: 'deferred', code: 'crm_intake_pending', reason: error.code, managedIn: 'crm', at: new Date(clock.now()).toISOString() };
+      throw error;
+    }
+  }
+  function deliverPaidServices(request) {
+    const S = platform().getStore();
+    for (const service of S.db.serviceRequests.filter(row => row.source?.kind === 'website_order' && !row.crmLeadId)) {
+      const stored = S.db.publicWebsiteOrders.find(row => row.snapshot?.reference === service.source.reference);
+      if (!stored || !S.db.websiteOrderLinks.some(row => row.reference === service.source.reference && row.workspaceId === service.workspaceId)) continue;
+      const order = stored.snapshot, workspace = S.workspace(service.workspaceId), owner = workspace?.members.find(row => row.role === 'owner' && row.status === 'active'), person = owner && identityFor().findByKey(owner.userKey);
+      if (!person || !stored.billing?.email) continue;
+      try {
+        const result = internalCrmRuntime(request).receiveWebsiteIntake({ source: 'website_order', name: stored.billing.name || identityFor().fullName(person), email: stored.billing.email, company: workspace.name, message: service.brief, locale: person.profile?.language || 'en' }, { sourceKey: `website-order:${order.reference}:${service.id}`, serviceRequestId: service.id });
+        service.crmLeadId = result.leadId; service.crmDelivery = { state: 'sent' };
+      } catch (error) { service.crmDelivery = { state: 'deferred', code: error.code || 'crm_intake_unavailable' }; }
+    }
+  }
   const registry = createRuntimeRegistry({
     realm, identity: new Proxy({}, { get: (_target, name) => identityFor()[name] }), config, util,
     platform: () => platform().getStore(), currentPrincipal, businessClock: clock,
@@ -499,6 +534,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const anonymous = authPublic || publicFile || taskSample || publicCms || cmsPreview || /^\/v1\/public\//.test(url) || /^\/(__health|__mock\/status|__mock\/clock)(?:$|\?)/.test(url);
     let frame, runtime, commitAttempted = false;
     const relatedRuntimes = new Map();
+    const suiteReadRuntimes = new Map();
     const requestEpoch = persist.epoch;
     initializeWorkspaceAuthority(S, identity, { seedAt: new clock.RealDate(persist.seedAt).toISOString() });
     const platformBefore = platform().exportState(), accountsBefore = authStorage.snapshot(identity), runtimesBefore = registry.exportState(), staffBefore = exportStaffState();
@@ -520,14 +556,17 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         if (/^\/api\/suite(?:\/|$)/.test(url)) {
           const context = principal?.context.workspaceContext;
           if (!context) throw failure(403, 'workspace_required', 'Choose a workspace to continue.');
-          const runtimeFor = tool => {
+          const runtimeFor = (tool, write = false) => {
             const appKey = TOOL_DEFINITIONS[tool]?.app;
             if (!appKey) throw failure(422, 'unsupported_tool', 'Choose a supported tool.');
-            if (!relatedRuntimes.has(appKey)) relatedRuntimes.set(appKey, registry.create(context.workspace.id, appKey));
-            return relatedRuntimes.get(appKey);
+            if (relatedRuntimes.has(appKey)) return relatedRuntimes.get(appKey);
+            if (!suiteReadRuntimes.has(appKey)) suiteReadRuntimes.set(appKey, registry.create(context.workspace.id, appKey));
+            const candidate = suiteReadRuntimes.get(appKey);
+            if (write) { suiteReadRuntimes.delete(appKey); relatedRuntimes.set(appKey, candidate); }
+            return candidate;
           };
           app = require('./workspace-suite').createSuiteRouter({ S, identity, principal, runtimeFor, command: (tool, kind, payload, operationId) => {
-            request.runtime = runtimeFor(tool);
+            request.runtime = runtimeFor(tool, true);
             return executeCommand(kind, payload, { workspaceId: context.workspace.id, actor: { userId: principal.user.id }, operationId });
           } });
         } else if (taskSample) { app = express(); app.use(createTaskSampleRouter({ config })); }
@@ -561,6 +600,9 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         // Never append the pre-reset candidate or old runtime snapshots to that epoch.
         await authority.commitPending(frame); return send(result);
       }
+      // Approved owner-domain adapter. The existing transaction commits or rolls
+      // back the platform and related CRM snapshots together; paid rows stay intact.
+      await authority.runPrepared(frame, () => requests.run({ frame, key, req, principal: frame.principal, runtime, relatedRuntimes }, () => deliverPaidServices(requests.getStore())));
       assignInitialOwnerSeats(S);
       if (runtime) registry.commit(runtime);
       for (const related of relatedRuntimes.values()) registry.commit(related);
@@ -581,8 +623,8 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       identity.hydrate(accountsBefore, { replace: true }); platform().importState(platformBefore); registry.importState(runtimesBefore); importStaffState(staffBefore);
       if (commitAttempted) persist.rebuild = true;
       return sendJson(error.status || 503, { success: false, code: error.code || "workspace_unavailable", message: error.message });
-    } finally { if (frame) authority.discardPending(frame); runtime?.close(); for (const related of relatedRuntimes.values()) related.close(); }
+    } finally { if (frame) authority.discardPending(frame); runtime?.close(); for (const related of relatedRuntimes.values()) related.close(); for (const related of suiteReadRuntimes.values()) related.close(); }
   }
-  return { authority, registry, initialize, handle, importState, exportStaffState, importStaffState, frameApp, currentPrincipal, contextService };
+  return { authority, registry, initialize, handle, importState, exportStaffState, importStaffState, frameApp, currentPrincipal, contextService, deliverWebsiteLead };
 }
 module.exports = { createWorkspaceBoundary };

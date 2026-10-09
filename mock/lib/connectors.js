@@ -40,8 +40,11 @@ function writable(workspace, context) {
   if (context.actor.readOnly || ['suspended', 'read_only', 'cancelled', 'deleted'].includes(workspace.state)) throw fail(423, 'workspace_read_only', 'This workspace is read-only.');
 }
 function configure(S, workspace, actor, context, id, enabled) {
-  writable(workspace, context); people.requireAdmin(workspace, actor);
-  if (!DEFINITIONS.some(row => row.id === id) || typeof enabled !== 'boolean') throw fail(422, 'invalid_connection', 'Choose a connection and its enabled state.');
+  writable(workspace, context);
+  const definition = DEFINITIONS.find(row => row.id === id);
+  if (!definition || typeof enabled !== 'boolean') throw fail(422, 'invalid_connection', 'Choose a connection and its enabled state.');
+  if (!['owner', 'admin'].includes(context.member.role)) require('./workspace-suite').requireToolAdmin(context, definition.source);
+  if (!context.tools[definition.source].canWrite) throw fail(403, 'source_permission_required', 'Your source tool is read-only.');
   workspace.suite ??= {}; workspace.suite.connectors ??= {}; workspace.suite.connectors[id] = enabled;
   S.log(actor.key, 'connection_changed', id, { workspaceId: workspace.id, enabled });
   return list(workspace, context).find(row => row.id === id);

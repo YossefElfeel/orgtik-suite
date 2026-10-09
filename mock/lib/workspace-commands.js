@@ -1,5 +1,5 @@
 const people = require('./workspace-people');
-const { TOOL_DEFINITIONS, guestToolRoles, resolveWorkspaceContext } = require('./workspace-context');
+const { TOOL_DEFINITIONS, guestToolRoles, resolveWorkspaceContext, seatCounts } = require('./workspace-context');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
 const ROLE_NAMES = {
   tasks: ['super_admin', 'project_manager', 'developer', 'viewer'],
@@ -27,7 +27,8 @@ function authorize({ S, identity, workspace, principal, tool, kind, payload }) {
 }
 function execute(args) {
   const { S, identity, workspace, principal, tool, kind, payload } = args;
-  const { actor, user, member, grant } = authorize(args);
+  const authorization = authorize(args), { actor, user, member } = authorization;
+  let grant = authorization.grant;
   if (kind === 'profile.self_update') {
     const patch = payload.patch || {};
     const allowed = new Set(['firstName', 'lastName', 'username', 'avatar', ...PROFILE_FIELDS]);
@@ -47,10 +48,16 @@ function execute(args) {
     return { ...identity.publicUser(actor), scopes: principal.context.scopes, workspaceContext: principal.context.workspaceContext };
   }
   if (kind === 'workspace.tool.roles') {
-    if (!grant?.assigned) throw fail(409, 'tool_not_assigned', 'Assign an available seat before changing tool roles.');
+    if (payload.assigned !== undefined && typeof payload.assigned !== 'boolean') throw fail(422, 'invalid_assignment', 'Choose the assignment state.');
+    if (!grant?.assigned && payload.assigned !== true) throw fail(409, 'tool_not_assigned', 'Assign an available seat before changing tool roles.');
     if (!Array.isArray(payload.roles) || !payload.roles.length || new Set(payload.roles).size !== payload.roles.length || payload.roles.some(role => !ROLE_NAMES[tool].includes(role))) throw fail(422, 'invalid_roles', 'Choose valid tool roles.');
     if (member.role === 'guest' && payload.roles.some(role => !guestToolRoles(tool).includes(role))) throw fail(422, 'unsupported_guest_role', 'Guests can only receive supported review access.');
     if (!TOOL_DEFINITIONS[tool].roles[member.role]) throw fail(422, 'unsupported_tool_role', 'This membership cannot use that tool.');
+    if (!grant?.assigned && payload.assigned === true) {
+      const counts = seatCounts(S, workspace, tool);
+      if (counts.available !== null && counts.available < 1) throw fail(409, 'seat_capacity_exhausted', 'Buy or release a seat first.');
+      member.toolGrants ??= {}; grant = member.toolGrants[tool] ??= { assigned: false, roles: [] }; grant.assigned = true;
+    }
     grant.roles = [...payload.roles];
   } else if (kind === 'workspace.member.remove') {
     if (payload.mode !== 'tool_access') throw fail(422, 'invalid_removal', 'Choose tool access removal.');

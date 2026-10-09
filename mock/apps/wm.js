@@ -404,6 +404,10 @@ module.exports = {
       ops.erase(l, who(req));
       ok(res, leadOut(req, l));
     });
+    app.get('/v2/admin/catalog', need('content:view'), (req, res) => {
+      if (!ctx.catalogMirror) return fail(res, 503, 'catalog_unavailable', 'The catalog mirror is unavailable.');
+      ok(res, ctx.catalogMirror());
+    });
     // The website's contact form (S6). Answers 201 with the lead's id, or 422 with what's missing.
     app.post("/v2/public/leads", async (req, res) => {
       if (ops.site.formsMode !== "live") return fail(res, 409, "forms_preview", "The website's forms are in preview.");

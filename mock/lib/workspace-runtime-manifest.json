@@ -163,6 +163,7 @@
       "apps/sales/reference.js",
       "apps/sales/seed-deals.js",
       "apps/sales/seed.js",
+      "apps/sales/service-catalog.js",
       "lib/accounts.js",
       "lib/auth-store.js",
       "lib/business-calendar.js",

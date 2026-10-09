@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
+import { CATALOG, BUNDLES, installPublicCatalog, findItem, findBundle } from '../../../apps/website/landing-directions/src/reference/purchase-catalog.js';
+const require = createRequire(import.meta.url), seed = require('../../../mock/apps/admin/seed-website-offers.js');
+const copy = value => JSON.parse(JSON.stringify(value));
+const presentation = () => CATALOG.map(({ monthlyMinor, ...item }) => item);
+const initial = copy(presentation()), initialBundles = copy(BUNDLES);
+const data = { currency: 'CHF', decimals: 2, items: seed.offers.map(offer => ({ id: offer.id, kind: offer.kind, names: offer.name, monthlyMinor: offer.monthlyCHF * 100 })), bundles: seed.bundles };
+installPublicCatalog(data);
+assert.deepEqual(presentation(), initial, 'Equal catalog content must preserve every visible item field.');
+for (const bundle of initialBundles) assert.deepEqual(findBundle(bundle.id), bundle, 'Equal bundles must preserve their visible presentation.');
+const changed = copy(data), item = changed.items.find(row => row.kind === 'service');
+item.names = Object.fromEntries(['en', 'ar', 'de', 'fr', 'it'].map(locale => [locale, `Service ${locale}`]));
+item.descriptions = Object.fromEntries(['en', 'ar', 'de', 'fr', 'it'].map(locale => [locale, `Description ${locale}`]));
+item.capabilities = Object.fromEntries(['en', 'ar', 'de', 'fr', 'it'].map(locale => [locale, [`Capability ${locale}`]]));
+const bundle = changed.bundles.find(row => row.kind === 'service');
+bundle.name = { en: 'Published bundle', ar: 'حزمة منشورة' }; bundle.why = { en: 'Published explanation' };
+for (const locale of ['en', 'ar', 'de', 'fr', 'it']) { installPublicCatalog(changed, { locale }); assert.equal(findItem(item.id).name, `Service ${locale}`); assert.equal(findItem(item.id).description, `Description ${locale}`); assert.deepEqual(findItem(item.id).capabilities, [`Capability ${locale}`]); }
+assert.equal(findBundle(bundle.id).name, 'Published bundle');
+installPublicCatalog(data);
+assert.deepEqual(presentation(), initial, 'Switching back must clear all stale catalog overlays.');
+console.log(JSON.stringify({ equalContentItems: initial.length, equalContentBundles: initialBundles.length, publishedLocales: 5, staleOverlaysCleared: true }));

@@ -1,0 +1,93 @@
+// OrgTik's CRM edits the existing platform service catalog; customer CRMs have no authority here.
+const clone = value => JSON.parse(JSON.stringify(value));
+const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
+const LOCALES = ['en', 'ar', 'de', 'fr', 'it'];
+function authorize(principal, { write = false, catalog = true } = {}) {
+  const context = principal?.context.workspaceContext, permissions = principal?.context.staffAccess?.permissions.admin || [], access = context?.tools.crm;
+  if (context?.workspace.kind !== 'orgtik_internal' || !access || ['not_subscribed', 'no_access'].includes(access.access)) throw fail(403, 'orgtik_crm_required', 'The OrgTik internal CRM manages services.');
+  if (write && (principal.readOnly || !access.canWrite || access.access === 'read_only')) throw fail(423, 'service_read_only', 'This CRM session is read-only.');
+  if (!permissions.includes('services:view') || catalog && write && !permissions.includes('services:edit')) throw fail(403, 'service_permission_required', 'Your current OrgTik service permission is required.');
+  return permissions;
+}
+function translated(value, array = false) {
+  if (!value || typeof value !== 'object' || Array.isArray(value) || Object.keys(value).some(locale => !LOCALES.includes(locale)) || LOCALES.some(locale => array ? !Array.isArray(value[locale]) || value[locale].length > 12 || value[locale].some(text => typeof text !== 'string' || !text.trim() || text.length > 500) : typeof value[locale] !== 'string' || !value[locale].trim() || value[locale].length > 2000)) throw fail(422, 'translations_required', 'Supply the five supported translations.');
+  return clone(value);
+}
+function catalog(S, principal) {
+  authorize(principal);
+  return { managedIn: 'crm', priceVersion: S.db.priceVersion, services: clone(S.db.services), offers: clone(S.db.websiteOffers.filter(row => row.kind === 'service')), bundles: clone(S.db.websiteOfferBundles.filter(row => row.kind === 'service')), zones: clone(S.db.zones), currencies: clone(S.db.currencies), canPublish: !principal.readOnly && principal.context.workspaceContext.tools.crm.canWrite && principal.context.staffAccess.permissions.admin.includes('services:edit') };
+}
+function saveOffer(S, principal, id, body) {
+  authorize(principal, { write: true });
+  const offer = S.db.websiteOffers.find(row => row.id === id && row.kind === 'service');
+  if (!offer) throw fail(404, 'service_offer_not_found', 'This service offer was not found.');
+  if (!body || Object.keys(body).some(key => !['name', 'description', 'capabilities', 'department', 'departmentName', 'icon', 'monthlyCHF', 'status'].includes(key))) throw fail(422, 'invalid_service_offer', 'Choose supported service catalog fields.');
+  const patch = {};
+  for (const key of ['name', 'description', 'departmentName']) if (body[key] !== undefined) patch[key] = translated(body[key]);
+  if (body.capabilities !== undefined) patch.capabilities = translated(body.capabilities, true);
+  if (body.department !== undefined) { if (!['design', 'development', 'marketing', 'it-support'].includes(body.department)) throw fail(422, 'invalid_department', 'Choose a service department.'); patch.department = body.department; }
+  if (body.icon !== undefined) { if (!/^[a-z][a-z0-9-]{0,59}$/.test(body.icon)) throw fail(422, 'invalid_icon', 'Choose a catalog icon name.'); patch.icon = body.icon; }
+  if (body.monthlyCHF !== undefined) { if (!Number.isFinite(body.monthlyCHF) || body.monthlyCHF < 0 || body.monthlyCHF > 1000000) throw fail(422, 'invalid_service_price', 'Enter a valid monthly CHF price.'); patch.monthlyCHF = body.monthlyCHF; }
+  if (body.status !== undefined) { if (!['active', 'archived'].includes(body.status)) throw fail(422, 'invalid_service_status', 'Choose active or archived.'); patch.status = body.status; }
+  offer.draft = { ...(offer.draft || {}), ...patch, updatedAt: S.iso(S.now()), updatedBy: principal.user.key };
+  S.log(principal.user.key, 'service_catalog_drafted', id, { workspaceId: principal.context.workspaceContext.workspace.id });
+  return clone(offer);
+}
+function saveBundle(S, principal, id, body) {
+  authorize(principal, { write: true });
+  const bundle = S.db.websiteOfferBundles.find(row => row.id === id && row.kind === 'service');
+  if (!bundle) throw fail(404, 'service_bundle_not_found', 'This service bundle was not found.');
+  if (!body || Object.keys(body).some(key => !['name', 'ids', 'why', 'recommended'].includes(key))) throw fail(422, 'invalid_service_bundle', 'Choose supported service bundle fields.');
+  const patch = {};
+  for (const key of ['name', 'why']) if (body[key] !== undefined) patch[key] = translated(body[key]);
+  if (body.ids !== undefined) { if (!Array.isArray(body.ids) || !body.ids.length || body.ids.length > 30 || new Set(body.ids).size !== body.ids.length || body.ids.some(offerId => !S.db.websiteOffers.some(offer => offer.id === offerId && offer.kind === 'service'))) throw fail(422, 'invalid_bundle_members', 'Choose unique service offers.'); patch.ids = [...body.ids]; }
+  if (body.recommended !== undefined) { if (typeof body.recommended !== 'boolean') throw fail(422, 'invalid_recommendation', 'Choose the recommendation state.'); patch.recommended = body.recommended; }
+  bundle.draft = { ...(bundle.draft || {}), ...patch, updatedAt: S.iso(S.now()), updatedBy: principal.user.key };
+  return clone(bundle);
+}
+function publish(S, principal, operationId) {
+  authorize(principal, { write: true });
+  if (!/^[\w.:-]{1,200}$/.test(operationId || '')) throw fail(422, 'operation_id_required', 'Supply the original publish reference.');
+  const workspace = S.workspace(principal.context.workspaceContext.workspace.id), key = `${principal.user.id}:service-publish:${operationId}`;
+  if (workspace.commandOperations?.[key]) return clone(workspace.commandOperations[key].result);
+  const changed = [];
+  for (const offer of S.db.websiteOffers.filter(row => row.kind === 'service' && row.draft)) {
+    const { updatedAt, updatedBy, status, ...draft } = offer.draft;
+    const service = S.db.services.find(row => row.id === offer.serviceId), plan = S.db.plans.find(row => row.id === offer.serviceId);
+    if (!service || !plan) throw fail(409, 'service_mapping_unavailable', 'Review the service fulfillment mapping.');
+    if (draft.monthlyCHF !== undefined) {
+      const rate = S.pricing.rate(S.db, 'USD', 'CHF'); if (!(rate > 0)) throw fail(503, 'price_unavailable', 'The platform exchange rate is unavailable.');
+      S.db.countries.CH.fixed ??= {}; S.db.countries.CH.fixed[`${offer.serviceId}:monthly`] = draft.monthlyCHF;
+      plan.defaultUsd = { ...plan.defaultUsd, monthly: draft.monthlyCHF / rate };
+    }
+    Object.assign(offer, clone(draft)); if (draft.name) { service.name = clone(draft.name); plan.name = clone(draft.name); }
+    if (status) service.status = status;
+    delete offer.draft; offer.publishedAt = S.iso(S.now()); offer.publishedBy = principal.user.key; changed.push(offer.id);
+  }
+  for (const bundle of S.db.websiteOfferBundles.filter(row => row.kind === 'service' && row.draft)) { const { updatedAt, updatedBy, ...draft } = bundle.draft; Object.assign(bundle, clone(draft)); delete bundle.draft; changed.push(bundle.id); }
+  if (changed.length) S.db.priceVersion++;
+  const result = { managedIn: 'crm', changed, priceVersion: S.db.priceVersion, at: S.iso(S.now()), applyMode: 'new_public_quotes' };
+  workspace.commandOperations ??= {}; workspace.commandOperations[key] = { result: clone(result) };
+  S.log(principal.user.key, 'service_catalog_published', String(S.db.priceVersion), { workspaceId: workspace.id, changed, applyMode: result.applyMode });
+  return result;
+}
+function requests(S, principal) {
+  const permissions = authorize(principal, { catalog: false }), assignedOnly = permissions.includes('services:edit:assigned') && !permissions.includes('services:edit');
+  return S.db.serviceRequests.filter(row => !assignedOnly || row.assignee === principal.user.key).map(row => ({ ...clone(row), managedIn: 'crm', workspaceName: S.workspace(row.workspaceId)?.name, currency: S.workspace(row.workspaceId)?.currency }));
+}
+function requestAction(S, identity, principal, id, body) {
+  const permissions = authorize(principal, { write: true, catalog: false }), row = S.db.serviceRequests.find(request => request.id === id);
+  if (!row || permissions.includes('services:edit:assigned') && !permissions.includes('services:edit') && row.assignee !== principal.user.key) throw fail(404, 'service_request_not_found', 'This request was not found.');
+  if (!permissions.includes('services:edit') && !(permissions.includes('services:edit:assigned') && row.assignee === principal.user.key)) throw fail(403, 'service_permission_required', 'Your role cannot change this request.');
+  const at = S.iso(S.now()), transitions = { review: ['new', 'under_review'], start: ['awaiting_payment', 'in_progress'], hold: ['in_progress', 'on_hold'], resume: ['on_hold', 'in_progress'] };
+  if (transitions[body.action]) { const [from, to] = transitions[body.action]; if (row.state !== from) throw fail(409, 'wrong_service_state', 'Review the current service state.'); row.state = to; }
+  else if (body.action === 'assign') { const member = S.workspace('ws_orgtik').members.find(member => member.userKey === body.assignee && member.status === 'active'), person = member && identity.findByKey(member.userKey); if (!person || !S.db.staffRoles[body.assignee] || !member.toolGrants?.crm?.assigned) throw fail(422, 'invalid_service_assignee', 'Choose active OrgTik CRM staff.'); row.assignee = body.assignee; }
+  else if (body.action === 'message') { const text = String(body.text || '').trim(); if (!text || text.length > 5000) throw fail(422, 'message_required', 'Write a short message.'); row.messages.push({ by: 'staff', author: principal.user.key, at, text }); }
+  else if (body.action === 'deliver') { const note = String(body.note || '').trim(); if (row.state !== 'in_progress' || !note || note.length > 5000) throw fail(422, 'delivery_required', 'Describe the delivery for work in progress.'); if (body.files?.length) throw fail(422, 'packaged_assets_only', 'Use the existing packaged file-reference flow.'); row.deliveries.push({ id: S.id('dl'), at, note, files: [], autoApproveAt: S.iso(S.now() + S.db.settings.services.autoApproveDays * 864e5) }); row.state = 'in_review'; }
+  else if (body.action === 'quote') { if (!['under_review', 'rejected', 'expired', 'cancelled', 'quoted'].includes(row.state) || !Array.isArray(body.lines) || !body.lines.length || body.lines.length > 30 || body.lines.some(line => typeof line.label !== 'string' || !line.label.trim() || !Number.isFinite(line.amount)) || !Number.isInteger(body.validDays || 14) || (body.validDays || 14) < 1 || (body.validDays || 14) > 90) throw fail(422, 'invalid_service_quote', 'Add valid quote lines and a review period.'); const currency = S.workspace(row.workspaceId).currency; row.quote = { currency, lines: clone(body.lines), total: S.pricing.toDecimals(body.lines.reduce((sum, line) => sum + line.amount, 0), S.db.currencies[currency].decimals), validUntil: S.iso(S.now() + (body.validDays || 14) * 864e5), sentAt: at }; row.state = 'quoted'; }
+  else if (body.action === 'milestone') { const milestone = row.milestones[body.index]; if (!milestone || !['pending', 'in_progress', 'done'].includes(body.state)) throw fail(422, 'invalid_milestone', 'Choose a current milestone and state.'); milestone.state = body.state; }
+  else if (body.action === 'cancel') { if (!['new', 'under_review', 'awaiting_payment', 'on_hold'].includes(row.state)) throw fail(409, 'wrong_service_state', 'This service cannot be cancelled now.'); row.state = 'cancelled'; }
+  else throw fail(422, 'invalid_service_action', 'Choose a supported service action.');
+  row.updatedAt = at; S.log(principal.user.key, `service_${body.action}`, id, { workspaceId: row.workspaceId, managedIn: 'crm' }); return clone(row);
+}
+module.exports = { authorize, catalog, saveOffer, saveBundle, publish, requests, requestAction };

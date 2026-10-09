@@ -10,5 +10,6 @@ export type SuiteSearchItem = { id: string; title: string; tool: ToolKey | "acco
 export type SuiteNotification = SuiteSearchItem & { read: boolean; at: string };
 export type SuiteActivity = { id: string; title: string; description?: string; actor?: string; at: string; href?: string; tone?: "neutral" | "success" | "warning" | "danger" };
 export type SuitePerson = { id: string; name: string; email?: string; avatar?: string };
+export type SuiteToolAdminData = { tool: ToolKey; plan?: { name: string; limits: Record<string, number>; usage: Record<string, number> }; seats: { capacity: number | null; assigned: number; reserved: number; available: number | null }; roles: string[]; members: { id: string; userId?: number; name: string; assigned: boolean; roles: string[]; allowedRoles: string[] }[]; connectors: SuiteConnector[]; settings: { name?: string; description?: string }; canWrite: boolean };
 export type SuiteSession = AuthEnvelope;
 export type ConnectionState = "available" | "not_subscribed" | "no_access" | "read_only" | "role_denied" | "disabled";

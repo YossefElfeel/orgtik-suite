@@ -95,7 +95,11 @@ function makeCtx(key, identity, util) {
     io: null,
     log: (...args) => console.log(`[api:${key}]`, ...args),
     workspaceBoundary: key === 'wm',
-    salesLeadDelivery: key === 'wm' ? async () => ({ deferred: true, code: 'crm_intake_pending', message: 'The request is saved for the team to review in Website Manager.' }) : undefined,
+    salesLeadDelivery: key === 'wm' ? async (payload, metadata) => workspaceBoundary.deliverWebsiteLead(payload, metadata) : undefined,
+    catalogMirror: key === 'wm' ? () => {
+      const S = require('./apps/admin').getStore();
+      return { readOnly: true, items: S.db.websiteOffers.map(offer => ({ id: offer.id, kind: offer.kind, name: offer.name, managedIn: offer.kind === 'service' ? 'crm' : 'console', scope: offer.kind === 'service' ? 'sales' : 'platform_admin', path: offer.kind === 'service' ? '/service-catalog' : '/tools', status: offer.tool ? S.db.tools.find(tool => tool.key === offer.tool)?.status : S.db.services.find(service => service.id === offer.serviceId)?.status })), priceVersion: S.db.priceVersion };
+    } : undefined,
     previewIssuerAllowed: key === 'wm' ? user => Boolean(workspaceBoundary?.contextService().staffAccess(user).permissions.wm?.includes('content:view')) : undefined,
   };
 }

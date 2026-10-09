@@ -12,7 +12,7 @@ export const OUT = path.join(PROGRAM, "audits", "website");
 export const ROUTES_FILE = path.join(OUT, "routes.json");
 
 const require = createRequire(import.meta.url);
-const config = require(path.join(WORKSPACE, "local-dev", "config.js"));
+const config = require(path.join(WORKSPACE, "mock", "config.js"));
 // SITE_URL points the harness at another copy of the site (the built one on tools/site/host.mjs).
 export const SITE = process.env.SITE_URL ?? config.webUrl("website");
 // SITE_DIR points at another checkout of the website (a worktree of main, for a new baseline).

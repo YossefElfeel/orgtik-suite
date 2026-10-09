@@ -91,6 +91,7 @@ export { SuiteFrame, type SuiteFrameProps } from "./suite/SuiteFrame.js";
 export { WorkspaceSwitcher } from "./suite/WorkspaceSwitcher.js";
 export { SettingsLayout, type SettingsSection } from "./suite/SettingsLayout.js";
 export { ToolAdminLayout, type ToolAdminSection } from "./suite/ToolAdminLayout.js";
+export { ToolAdminScreen } from "./suite/ToolAdminScreen.js";
 export { suiteRequest, suiteApiRoot, SuiteRequestError } from "./suite/api.js";
 export { suiteText, type SuiteString } from "./suite/strings.js";
 export type { SuiteSnapshot, SuiteOptions, SuiteProviderProps, SuiteConnector, SuitePreferences, SuiteSearchItem, SuiteNotification, SuiteActivity, SuitePerson, ConnectionState } from "./suite/types.js";

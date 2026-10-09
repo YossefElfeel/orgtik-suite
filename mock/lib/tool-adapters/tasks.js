@@ -30,6 +30,7 @@ function createWorkspaceRuntime(input, tool) {
     },
     suiteFeed: context => { const access = context?.tools.tasks; if (!access || ['no_access', 'not_subscribed'].includes(access.access) || context.workspace.id !== input.workspace.id) throw Object.assign(new Error('Tasks access is required.'), { status: 403 }); return hooks.suiteFeed(input.identity.findUser(context.actor.effectiveUserId)); },
     createConnectedTask: (context, payload) => { if (context?.workspace.id !== input.workspace.id || !context.tools.tasks?.canWrite || context.actor.readOnly) throw Object.assign(new Error('Tasks write access is required.'), { status: 403 }); return hooks.createConnectedTask(input.identity.findUser(context.actor.effectiveUserId), payload); },
+    suiteExport: context => { if (context?.workspace.id !== input.workspace.id || !context.tools.tasks?.roles.length || ['no_access', 'not_subscribed'].includes(context.tools.tasks.access)) throw Object.assign(new Error('Tasks access is required.'), { status: 403 }); return hooks.suiteExport(input.identity.findUser(context.actor.effectiveUserId)); },
     usage: hooks.usage, authorizeSharedTarget: hooks.authorizeSharedTarget, transferOwnership: hooks.transferOwnership, close: hooks.close,
   };
 }

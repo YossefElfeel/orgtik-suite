@@ -1632,6 +1632,10 @@ function routes(app, context, options = {}) {
       for (const assignment of task.assignments) pushNotification(assignment.assigneeId, { type: 'task_created', group: 'assigned', title: task.title, message: 'A connected task was created.', data: taskNotifData(task) });
       return fullTask(task);
     },
+    suiteExport: user => {
+      const projects = visibleProjects(user), ids = new Set(projects.map(project => project.id)), tasks = db.tasks.filter(task => ids.has(task.projectId)), taskIds = new Set(tasks.map(task => task.id));
+      return { projects: projects.map(project => ({ ...projectDetails(project), config: project.v3Config || null, templates: project.v3Templates || [] })), tasks: tasks.map(fullTask), comments: db.comments.filter(comment => taskIds.has(comment.taskId)).map(comment => ({ id: comment.id, taskId: comment.taskId, content: comment.content, createdAt: comment.createdAt })), at: nowIso() };
+    },
     usage: () => [{ key: "tasks.projects", used: db.projects.filter(project => !project.archivedAt).length }, { key: "tasks.guests", used: identity.users.filter(user => tmRoles(user).includes("viewer")).length }],
     transferOwnership: command => {
       const { fromUserId, target, operationId } = command;

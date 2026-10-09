@@ -1,6 +1,21 @@
 import type { Locale } from "../locale.js";
 const order: Locale[] = ["en", "ar", "de", "fr", "it"];
 const copy = {
+  plan: ["Plan", "الخطة", "Plan", "Forfait", "Piano"],
+  seats: ["Assigned seats", "المقاعد المخصصة", "Zugewiesene Plätze", "Places attribuées", "Posti assegnati"],
+  usage: ["Usage and limits", "الاستخدام والحدود", "Nutzung und Grenzen", "Utilisation et limites", "Utilizzo e limiti"],
+  role: ["Tool role", "دور الأداة", "Tool-Rolle", "Rôle dans l’outil", "Ruolo dello strumento"],
+  assigned: ["Access assigned", "الوصول مخصص", "Zugriff zugewiesen", "Accès attribué", "Accesso assegnato"],
+  assign: ["Assign available seat", "تخصيص مقعد متاح", "Freien Platz zuweisen", "Attribuer une place disponible", "Assegna posto disponibile"],
+  removeAccess: ["Remove tool access", "إزالة وصول الأداة", "Tool-Zugriff entfernen", "Retirer l’accès à l’outil", "Rimuovi accesso allo strumento"],
+  exportData: ["Export visible data", "تصدير البيانات المتاحة", "Sichtbare Daten exportieren", "Exporter les données accessibles", "Esporta dati visibili"],
+  name: ["Name", "الاسم", "Name", "Nom", "Nome"],
+  description: ["Description", "الوصف", "Beschreibung", "Description", "Descrizione"],
+  enabled: ["Enabled", "مفعّل", "Aktiviert", "Activée", "Attivato"],
+  saved: ["Saved", "تم الحفظ", "Gespeichert", "Enregistré", "Salvato"],
+  noActivity: ["No activity yet", "لا يوجد نشاط بعد", "Noch keine Aktivität", "Aucune activité pour le moment", "Nessuna attività"],
+  noPeople: ["No matching people", "لا يوجد أشخاص مطابقون", "Keine passenden Personen", "Aucune personne correspondante", "Nessuna persona corrispondente"],
+  searchPeople: ["Search people", "بحث عن أشخاص", "Personen suchen", "Rechercher des personnes", "Cerca persone"],
   home: ["Home", "الرئيسية", "Start", "Accueil", "Home"],
   addTool: ["Add tool", "إضافة أداة", "Tool hinzufügen", "Ajouter un outil", "Aggiungi strumento"],
   add: ["Add", "إضافة", "Hinzufügen", "Ajouter", "Aggiungi"],
