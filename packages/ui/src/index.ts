@@ -62,4 +62,5 @@ export { ImportWizard } from "./prototype/ImportWizard.js";
 export { BulkActionBar } from "./prototype/BulkActionBar.js";
 export { MailboxPreview, type MailboxPreviewEntry } from "./prototype/MailboxPreview.js";
 export { RichTextEditor, type RichTextFormat } from "./prototype/RichTextEditor.js";
+export { Toolbar, type ToolbarProps, type Density } from "./components/Toolbar.js";
 export { demoRuntime, demoRequest, type DemoRuntime, type DemoSearchItem, type DemoBridgeTask, type DemoBridgeLead } from "./demo/connections.js";

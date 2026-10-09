@@ -107,6 +107,8 @@ for (let i = 0; i < order.length; i++) packages.push([
 packages.push(['V3-P5', 'P5', 'Suite consistency, ordinary journeys J1-J20 and before/after handoff', order.map(tool => `V3-P4-${tool}`).join(';'), 'integration']);
 
 export function reconcileV3({ check = false } = {}) {
+  const progressFile = path.join(PROGRAM, 'v3-progress.json');
+  const progress = fs.existsSync(progressFile) ? JSON.parse(fs.readFileSync(progressFile, 'utf8')) : { packages: {} };
   const backlogFile = path.join(PROGRAM, 'backlog/backlog.csv');
   const releaseFile = path.join(PROGRAM, 'backlog/release-packages.csv');
   const backlog = parseCsv(fs.readFileSync(backlogFile, 'utf8'));
@@ -125,7 +127,7 @@ export function reconcileV3({ check = false } = {}) {
     backend_status: 'existing_foundations_frozen_D073_D075', external_status: 'deferred', local_ui_evidence: '',
     prototype_limitations: 'Approved scope is not implementation or acceptance. Historical evidence remains separately qualified.',
   }));
-  release.rows = [...historical, ...newPackages];
+  release.rows = [...historical, ...newPackages.map(row => ({ ...row, ...(progress.packages?.[row.id] || {}) }))];
   const ids = new Set(release.rows.map(row => row.id));
   if (ids.size !== release.rows.length || new Set(backlog.rows.map(row => row.id)).size !== backlog.rows.length) throw Error('Duplicate register ID');
   const columns = ['status', 'release_packages', 'mapping_basis', 'status_evidence', 'verified_at', 'v3_package'];
@@ -141,7 +143,7 @@ export function reconcileV3({ check = false } = {}) {
   const summaryFile = path.join(PROGRAM, 'backlog/summary.json');
   const summary = JSON.parse(fs.readFileSync(summaryFile, 'utf8'));
   const by = key => backlog.rows.reduce((counts, row) => { counts[row[key]] = (counts[row[key]] || 0) + 1; return counts; }, {});
-  summary.v3 = { reconciled_at: DATE, source_revision: 'c7c7e1fe6771fe487521c03d48bec5608b0747c1', historical_packages: 129, new_packages: packages.length, total_packages: ids.size, byStatus: by('status'), byMappingBasis: by('mapping_basis'), current_gate: 'P0_report_review', criterion_note: 'Topic links are candidates; original criterion acceptance is not inferred from package coverage.' };
+  summary.v3 = { reconciled_at: DATE, source_revision: 'c7c7e1fe6771fe487521c03d48bec5608b0747c1', historical_packages: 129, new_packages: packages.length, total_packages: ids.size, byStatus: by('status'), byMappingBasis: by('mapping_basis'), current_gate: progress.current_phase || 'P0_report_review', criterion_note: 'Topic links are candidates; original criterion acceptance is not inferred from package coverage.' };
   const outputs = [[backlogFile, writeCsv(backlog.columns, backlog.rows)], [releaseFile, writeCsv(release.columns, release.rows)], [summaryFile, JSON.stringify(summary, null, 2) + '\n']];
   for (const [file, text] of outputs) {
     if (check) { if (fs.readFileSync(file, 'utf8') !== text) throw Error(`Stale v3 overlay: ${path.relative(PROGRAM, file)}`); }

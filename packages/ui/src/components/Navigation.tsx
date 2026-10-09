@@ -73,8 +73,8 @@ export function TabsList({ items, variant = "line", className }: { items: TabIte
           ) : null}
         </BaseTabs.Tab>
       ))}
+      {/* Base UI measures the active tab in physical pixels; these stay physical on purpose. */}
       <BaseTabs.Indicator
-        // Base UI measures the active tab in physical pixels, so these stay physical on purpose.
         style={{ left: "var(--active-tab-left)", width: "var(--active-tab-width)" }}
         className={cn(
           "absolute transition-[left,width] duration-(--ot-duration-base) ease-ot-out",
@@ -220,12 +220,14 @@ export type PageHeaderProps = {
   breadcrumb?: Crumb[];
   /** A StatusBadge or similar, next to the title. */
   status?: ReactNode;
+  meta?: ReactNode;
+  tabs?: ReactNode;
   /** The page's actions. Put the primary one last, so it sits at the reading end. */
   actions?: ReactNode;
   className?: string;
 };
 
-export function PageHeader({ title, description, breadcrumb, status, actions, className }: PageHeaderProps) {
+export function PageHeader({ title, description, breadcrumb, status, meta, tabs, actions, className }: PageHeaderProps) {
   return (
     <header className={cn("flex flex-col gap-3", className)}>
       {breadcrumb?.length ? <Breadcrumb items={breadcrumb} /> : null}
@@ -236,9 +238,11 @@ export function PageHeader({ title, description, breadcrumb, status, actions, cl
             {status}
           </div>
           {description ? <p className="max-w-[70ch] text-body text-fg-muted">{description}</p> : null}
+          {meta ? <div className="flex flex-wrap items-center gap-3 text-caption text-fg-subtle">{meta}</div> : null}
         </div>
         {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
       </div>
+      {tabs}
     </header>
   );
 }

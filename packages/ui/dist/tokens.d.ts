@@ -86,17 +86,31 @@ export declare const tokens: {
             readonly "900": "#570B1C";
             readonly "950": "#37040E";
         };
+        readonly graphite: {
+            readonly "50": "#F8F8F8";
+            readonly "100": "#F1F1F1";
+            readonly "200": "#E0E0E0";
+            readonly "300": "#C8C8C8";
+            readonly "400": "#A0A0A0";
+            readonly "500": "#7D7D7D";
+            readonly "600": "#686868";
+            readonly "700": "#4B4B4B";
+            readonly "800": "#303030";
+            readonly "850": "#252525";
+            readonly "900": "#1E1E1E";
+            readonly "950": "#151515";
+        };
     };
     readonly semantic: {
         readonly light: {
-            readonly "bg-canvas": "#F6F1FA";
+            readonly "bg-canvas": "#F8F8F8";
             readonly "bg-raised": "#FFFFFF";
-            readonly "bg-sunken": "#EEE8F7";
+            readonly "bg-sunken": "#F1F1F1";
             readonly "bg-overlay": "#FFFFFF";
             readonly "bg-chrome": "#190B25";
-            readonly fg: "#190B25";
-            readonly "fg-muted": "#4A3A57";
-            readonly "fg-subtle": "#6E6178";
+            readonly fg: "#252525";
+            readonly "fg-muted": "#4B4B4B";
+            readonly "fg-subtle": "#686868";
             readonly "fg-brand": "#6C3CAA";
             readonly "fg-on-chrome": "#F6F1FA";
             readonly "fg-on-chrome-muted": "#CFC2DB";
@@ -105,9 +119,9 @@ export declare const tokens: {
             readonly "action-brand-bg": "#190B25";
             readonly "action-brand-fg": "#F6F1FA";
             readonly focus: "#6C3CAA";
-            readonly line: "#DCD0E6";
-            readonly "line-strong": "#CFC2DB";
-            readonly "line-control": "#8E7FA0";
+            readonly line: "#E0E0E0";
+            readonly "line-strong": "#C8C8C8";
+            readonly "line-control": "#858585";
             readonly "success-fg": "#086A35";
             readonly "success-subtle": "#EEFBF1";
             readonly "success-solid": "#0C8544";
@@ -128,31 +142,41 @@ export declare const tokens: {
             readonly "viz-2": "#BE185D";
             readonly "viz-3": "#A16207";
             readonly "viz-4": "#0E7490";
-            readonly "viz-5": "#15803D";
-            readonly "viz-6": "#B91C1C";
-            readonly "viz-7": "#0369A1";
-            readonly "viz-8": "#0F766E";
+            readonly "viz-5": "#5B5A99";
+            readonly "viz-6": "#985B7B";
+            readonly "viz-7": "#4B7293";
+            readonly "viz-8": "#5B7468";
+            readonly "viz-sequential-1": "#EEE3F7";
+            readonly "viz-sequential-2": "#D4B7EC";
+            readonly "viz-sequential-3": "#AF7DF3";
+            readonly "viz-sequential-4": "#9458F4";
+            readonly "viz-sequential-5": "#6C3CAA";
+            readonly "viz-diverging-1": "#985B7B";
+            readonly "viz-diverging-2": "#D9A3BD";
+            readonly "viz-diverging-3": "#C8C8C8";
+            readonly "viz-diverging-4": "#A8A7E2";
+            readonly "viz-diverging-5": "#5B5A99";
         };
         readonly dark: {
-            readonly "bg-canvas": "#0D0814";
-            readonly "bg-raised": "#1A0D27";
-            readonly "bg-sunken": "#120A1B";
-            readonly "bg-overlay": "#21132D";
-            readonly "bg-chrome": "#120A1B";
-            readonly fg: "#F6F1FA";
-            readonly "fg-muted": "#CFC2DB";
-            readonly "fg-subtle": "#B5A6C4";
+            readonly "bg-canvas": "#151515";
+            readonly "bg-raised": "#1E1E1E";
+            readonly "bg-sunken": "#181818";
+            readonly "bg-overlay": "#252525";
+            readonly "bg-chrome": "#190B25";
+            readonly fg: "#F1F1F1";
+            readonly "fg-muted": "#C8C8C8";
+            readonly "fg-subtle": "#A0A0A0";
             readonly "fg-brand": "#C9A0F3";
             readonly "fg-on-chrome": "#F6F1FA";
             readonly "fg-on-chrome-muted": "#CFC2DB";
-            readonly "action-primary-bg": "#EEE3F7";
+            readonly "action-primary-bg": "#C9A0F3";
             readonly "action-primary-fg": "#28123B";
             readonly "action-brand-bg": "#EEE3F7";
             readonly "action-brand-fg": "#28123B";
             readonly focus: "#B98AF7";
-            readonly line: "#FFFFFF14";
-            readonly "line-strong": "#FFFFFF2B";
-            readonly "line-control": "#FFFFFF66";
+            readonly line: "#36363F";
+            readonly "line-strong": "#4B4B4B";
+            readonly "line-control": "#7D7D7D";
             readonly "success-fg": "#8BD59F";
             readonly "success-subtle": "#12301F";
             readonly "success-solid": "#58BD79";
@@ -173,50 +197,60 @@ export declare const tokens: {
             readonly "viz-2": "#F472B6";
             readonly "viz-3": "#FDE047";
             readonly "viz-4": "#67E8F9";
-            readonly "viz-5": "#4ADE80";
-            readonly "viz-6": "#F87171";
-            readonly "viz-7": "#38BDF8";
-            readonly "viz-8": "#2DD4BF";
+            readonly "viz-5": "#A8A7E2";
+            readonly "viz-6": "#D9A3BD";
+            readonly "viz-7": "#99BDE0";
+            readonly "viz-8": "#A7C4B5";
+            readonly "viz-sequential-1": "#EEE3F7";
+            readonly "viz-sequential-2": "#D4B7EC";
+            readonly "viz-sequential-3": "#AF7DF3";
+            readonly "viz-sequential-4": "#9458F4";
+            readonly "viz-sequential-5": "#6C3CAA";
+            readonly "viz-diverging-1": "#985B7B";
+            readonly "viz-diverging-2": "#D9A3BD";
+            readonly "viz-diverging-3": "#C8C8C8";
+            readonly "viz-diverging-4": "#A8A7E2";
+            readonly "viz-diverging-5": "#5B5A99";
         };
     };
     readonly radius: {
         readonly pill: "999px";
-        readonly field: "12px";
-        readonly card: "20px";
+        readonly field: "8px";
+        readonly card: "12px";
         readonly overlay: "16px";
-        readonly panel: "24px";
+        readonly panel: "20px";
     };
     readonly duration: {
-        readonly instant: "90ms";
+        readonly instant: "80ms";
         readonly fast: "120ms";
-        readonly base: "200ms";
-        readonly slow: "300ms";
-        readonly reveal: "480ms";
+        readonly base: "180ms";
+        readonly slow: "240ms";
+        readonly reveal: "320ms";
     };
     readonly type: {
         readonly display: {
-            readonly size: "40px";
+            readonly size: "36px";
             readonly line: 1.2;
             readonly weight: 700;
             readonly tracking: "-0.03em";
             readonly family: "display";
         };
         readonly "title-lg": {
-            readonly size: "28px";
+            readonly size: "30px";
             readonly line: 1.25;
             readonly weight: 600;
             readonly tracking: "-0.02em";
             readonly family: "display";
         };
         readonly title: {
-            readonly size: "20px";
+            readonly size: "24px";
             readonly line: 1.35;
             readonly weight: 600;
             readonly tracking: "-0.01em";
             readonly family: "display";
         };
         readonly "title-sm": {
-            readonly size: "16px";
+            readonly size: "18px";
             readonly line: 1.4;
             readonly weight: 600;
             readonly tracking: "0em";
@@ -273,10 +307,139 @@ export declare const tokens: {
         };
     };
     readonly control: {
+        readonly xs: "28px";
         readonly sm: "32px";
-        readonly md: "40px";
-        readonly lg: "48px";
-        readonly xl: "54px";
+        readonly md: "36px";
+        readonly lg: "40px";
+        readonly xl: "44px";
+    };
+    readonly space: {
+        readonly "1": "4px";
+        readonly "2": "8px";
+        readonly "3": "12px";
+        readonly "4": "16px";
+        readonly "5": "20px";
+        readonly "6": "24px";
+        readonly "8": "32px";
+        readonly "10": "40px";
+        readonly "12": "48px";
+        readonly "16": "64px";
+        readonly "20": "80px";
+        readonly "24": "96px";
+    };
+    readonly layout: {
+        readonly narrow: "720px";
+        readonly default: "1200px";
+        readonly wide: "1440px";
+        readonly rail: "64px";
+        readonly sidebar: "224px";
+        readonly topbar: "56px";
+        readonly full: "100%";
+    };
+    readonly zIndex: {
+        readonly base: 0;
+        readonly sticky: 10;
+        readonly dropdown: 30;
+        readonly overlay: 50;
+        readonly toast: 70;
+    };
+    readonly density: {
+        readonly comfortable: {
+            readonly row: "44px";
+            readonly control: "36px";
+            readonly font: "14px";
+        };
+        readonly compact: {
+            readonly row: "36px";
+            readonly control: "32px";
+            readonly font: "13px";
+        };
+    };
+    readonly elevation: {
+        readonly light: {
+            readonly "shadow-xs": {
+                readonly $type: "shadow";
+                readonly $value: "0 1px 2px rgb(25 25 32 / 0.05), 0 2px 8px -2px rgb(25 25 32 / 0.05)";
+            };
+            readonly "shadow-sm": {
+                readonly $type: "shadow";
+                readonly $value: "0 2px 5px rgb(25 25 32 / 0.07), 0 6px 17px -4px rgb(25 25 32 / 0.07)";
+            };
+            readonly "shadow-md": {
+                readonly $type: "shadow";
+                readonly $value: "0 3px 8px rgb(25 25 32 / 0.1), 0 10px 26px -6px rgb(25 25 32 / 0.1)";
+            };
+            readonly "shadow-lg": {
+                readonly $type: "shadow";
+                readonly $value: "0 4px 11px rgb(25 25 32 / 0.14), 0 14px 35px -8px rgb(25 25 32 / 0.14)";
+            };
+            readonly "shadow-xl": {
+                readonly $type: "shadow";
+                readonly $value: "0 5px 14px rgb(25 25 32 / 0.2), 0 18px 44px -10px rgb(25 25 32 / 0.2)";
+            };
+            readonly "shadow-contact": {
+                readonly $type: "shadow";
+                readonly $value: "0 1px 2px rgb(25 25 32 / 0.07)";
+            };
+            readonly "shadow-lit": {
+                readonly $type: "shadow";
+                readonly $value: "inset 0 1px 0 rgb(255 255 255 / .8)";
+            };
+            readonly "shadow-raised": {
+                readonly $type: "shadow";
+                readonly $value: "0 2px 5px rgb(25 25 32 / 0.07), 0 6px 17px -4px rgb(25 25 32 / 0.07)";
+            };
+            readonly "shadow-overlay": {
+                readonly $type: "shadow";
+                readonly $value: "0 5px 14px rgb(25 25 32 / 0.2), 0 18px 44px -10px rgb(25 25 32 / 0.2)";
+            };
+            readonly scrim: {
+                readonly $type: "color";
+                readonly $value: "rgb(21 21 25 / .40)";
+            };
+        };
+        readonly dark: {
+            readonly "shadow-xs": {
+                readonly $type: "shadow";
+                readonly $value: "0 1px 2px rgb(0 0 0 / 0.18), 0 2px 8px -2px rgb(0 0 0 / 0.18)";
+            };
+            readonly "shadow-sm": {
+                readonly $type: "shadow";
+                readonly $value: "0 2px 5px rgb(0 0 0 / 0.24), 0 6px 17px -4px rgb(0 0 0 / 0.24)";
+            };
+            readonly "shadow-md": {
+                readonly $type: "shadow";
+                readonly $value: "0 3px 8px rgb(0 0 0 / 0.32), 0 10px 26px -6px rgb(0 0 0 / 0.32)";
+            };
+            readonly "shadow-lg": {
+                readonly $type: "shadow";
+                readonly $value: "0 4px 11px rgb(0 0 0 / 0.4), 0 14px 35px -8px rgb(0 0 0 / 0.4)";
+            };
+            readonly "shadow-xl": {
+                readonly $type: "shadow";
+                readonly $value: "0 5px 14px rgb(0 0 0 / 0.48), 0 18px 44px -10px rgb(0 0 0 / 0.48)";
+            };
+            readonly "shadow-contact": {
+                readonly $type: "shadow";
+                readonly $value: "0 1px 2px rgb(0 0 0 / 0.24)";
+            };
+            readonly "shadow-lit": {
+                readonly $type: "shadow";
+                readonly $value: "inset 0 1px 0 rgb(255 255 255 / .06)";
+            };
+            readonly "shadow-raised": {
+                readonly $type: "shadow";
+                readonly $value: "0 2px 5px rgb(0 0 0 / 0.24), 0 6px 17px -4px rgb(0 0 0 / 0.24)";
+            };
+            readonly "shadow-overlay": {
+                readonly $type: "shadow";
+                readonly $value: "0 5px 14px rgb(0 0 0 / 0.48), 0 18px 44px -10px rgb(0 0 0 / 0.48)";
+            };
+            readonly scrim: {
+                readonly $type: "color";
+                readonly $value: "rgb(0 0 0 / .64)";
+            };
+        };
     };
 };
 //# sourceMappingURL=tokens.d.ts.map

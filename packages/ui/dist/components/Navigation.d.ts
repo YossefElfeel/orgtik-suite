@@ -49,9 +49,11 @@ export type PageHeaderProps = {
     breadcrumb?: Crumb[];
     /** A StatusBadge or similar, next to the title. */
     status?: ReactNode;
+    meta?: ReactNode;
+    tabs?: ReactNode;
     /** The page's actions. Put the primary one last, so it sits at the reading end. */
     actions?: ReactNode;
     className?: string;
 };
-export declare function PageHeader({ title, description, breadcrumb, status, actions, className }: PageHeaderProps): import("react").JSX.Element;
+export declare function PageHeader({ title, description, breadcrumb, status, meta, tabs, actions, className }: PageHeaderProps): import("react").JSX.Element;
 //# sourceMappingURL=Navigation.d.ts.map

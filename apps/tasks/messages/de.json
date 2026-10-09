@@ -459,7 +459,11 @@
     "noSectionsBody": "Eine Projektleitung kann sie im Board hinzufügen.",
     "nothingAssignedTitle": "Ihnen ist nichts zugewiesen",
     "nothingAssignedBody": "Aufgaben, die Ihnen in einem Projekt zugewiesen werden, erscheinen hier.",
-    "create": "Aufgabe erstellen"
+    "create": "Aufgabe erstellen",
+    "toolbar": "Aufgabenlisten-Steuerung",
+    "search": "Aufgaben suchen",
+    "noResults": "Keine Aufgaben passen zur Suche",
+    "clearSearch": "Löschen Sie die Suche, um Ihre zugewiesenen Aufgaben zu sehen."
   },
   "TaskSheet": {
     "label": "Aufgabe",

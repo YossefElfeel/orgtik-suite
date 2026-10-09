@@ -2,12 +2,12 @@ import { cva } from "class-variance-authority";
 
 /**
  * The frame every text-like control shares (Input, Select trigger, later Textarea and the number
- * fields): 12px field radius (G1a: pills are for buttons, fields stay 12px), a 3:1 border,
+ * fields): 8px field radius (D-078), a 3:1 border,
  * the focus ring, and the invalid, disabled and read-only looks.
  */
 export const controlFrame = cva(
   [
-    "w-full min-w-0 rounded-field border border-line-control bg-raised text-fg",
+    "ot-control w-full min-w-0 rounded-field border border-line-control bg-raised text-fg",
     "transition-[border-color,box-shadow] duration-(--ot-duration-fast) ease-ot-out",
     "hover:border-fg-subtle",
     "has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-1 has-[input:focus-visible]:outline-focus",

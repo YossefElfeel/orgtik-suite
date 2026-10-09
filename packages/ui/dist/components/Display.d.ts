@@ -1,7 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react";
 import { type VariantProps } from "class-variance-authority";
 declare const avatar: (props?: ({
-    size?: "sm" | "md" | "lg" | "xs" | null | undefined;
+    size?: "xs" | "sm" | "md" | "lg" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string;
 /**
  * Up to two initials from a name. Arabic letters would join into one shape ("هس"), so they are

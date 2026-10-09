@@ -459,7 +459,11 @@
     "noSectionsBody": "A project manager can add them on the board.",
     "nothingAssignedTitle": "Nothing assigned to you",
     "nothingAssignedBody": "Tasks you're assigned in any project show here.",
-    "create": "Create task"
+    "create": "Create task",
+    "toolbar": "Task list controls",
+    "search": "Search tasks",
+    "noResults": "No tasks match your search",
+    "clearSearch": "Clear the search to see your assigned tasks."
   },
   "TaskSheet": {
     "label": "Task",

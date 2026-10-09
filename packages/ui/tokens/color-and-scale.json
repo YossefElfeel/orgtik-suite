@@ -1,5 +1,5 @@
 {
-  "$description": "OrgTik tokens v0 (session 7). Primitives from the brand manual and the website; semantic sets for light and dark. Proposed, for G1a.",
+  "$description": "OrgTik DS v2: preserved plum anchors, graphite task surfaces, hybrid radii, shared density/layout and state motion (D-077/D-078).",
   "color": {
     "plum": {
       "50": {
@@ -140,29 +140,29 @@
       }
     },
     "night": {
-      "950": {
+      "600": {
         "$type": "color",
-        "$value": "#0D0814"
-      },
-      "900": {
-        "$type": "color",
-        "$value": "#120A1B"
-      },
-      "850": {
-        "$type": "color",
-        "$value": "#1A0D27"
-      },
-      "800": {
-        "$type": "color",
-        "$value": "#21132D"
+        "$value": "#3A2A4B"
       },
       "700": {
         "$type": "color",
         "$value": "#2C1B3B"
       },
-      "600": {
+      "800": {
         "$type": "color",
-        "$value": "#3A2A4B"
+        "$value": "#21132D"
+      },
+      "850": {
+        "$type": "color",
+        "$value": "#1A0D27"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#120A1B"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#0D0814"
       }
     },
     "green": {
@@ -302,13 +302,63 @@
         "$type": "color",
         "$value": "#37040E"
       }
+    },
+    "graphite": {
+      "50": {
+        "$type": "color",
+        "$value": "#F8F8F8"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#F1F1F1"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#E0E0E0"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#C8C8C8"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#A0A0A0"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#7D7D7D"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#686868"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#4B4B4B"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#303030"
+      },
+      "850": {
+        "$type": "color",
+        "$value": "#252525"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#1E1E1E"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#151515"
+      }
     }
   },
   "semantic": {
     "light": {
       "bg-canvas": {
         "$type": "color",
-        "$value": "#F6F1FA",
+        "$value": "#F8F8F8",
         "$description": "The page background"
       },
       "bg-raised": {
@@ -318,7 +368,7 @@
       },
       "bg-sunken": {
         "$type": "color",
-        "$value": "#EEE8F7",
+        "$value": "#F1F1F1",
         "$description": "Wells, inputs' surroundings, table headers"
       },
       "bg-overlay": {
@@ -333,17 +383,17 @@
       },
       "fg": {
         "$type": "color",
-        "$value": "#190B25",
+        "$value": "#252525",
         "$description": "Primary text"
       },
       "fg-muted": {
         "$type": "color",
-        "$value": "#4A3A57",
+        "$value": "#4B4B4B",
         "$description": "Secondary text"
       },
       "fg-subtle": {
         "$type": "color",
-        "$value": "#6E6178",
+        "$value": "#686868",
         "$description": "Hints, placeholders, metadata"
       },
       "fg-brand": {
@@ -388,17 +438,17 @@
       },
       "line": {
         "$type": "color",
-        "$value": "#DCD0E6",
+        "$value": "#E0E0E0",
         "$description": "Dividers and card borders"
       },
       "line-strong": {
         "$type": "color",
-        "$value": "#CFC2DB",
+        "$value": "#C8C8C8",
         "$description": "Stronger separators"
       },
       "line-control": {
         "$type": "color",
-        "$value": "#8E7FA0",
+        "$value": "#858585",
         "$description": "Field and control borders (3:1 required)"
       },
       "success-fg": {
@@ -503,64 +553,104 @@
       },
       "viz-5": {
         "$type": "color",
-        "$value": "#15803D",
+        "$value": "#5B5A99",
         "$description": "Chart series 5 (green)"
       },
       "viz-6": {
         "$type": "color",
-        "$value": "#B91C1C",
+        "$value": "#985B7B",
         "$description": "Chart series 6 (red)"
       },
       "viz-7": {
         "$type": "color",
-        "$value": "#0369A1",
+        "$value": "#4B7293",
         "$description": "Chart series 7 (sky)"
       },
       "viz-8": {
         "$type": "color",
-        "$value": "#0F766E",
+        "$value": "#5B7468",
         "$description": "Chart series 8 (teal)"
+      },
+      "viz-sequential-1": {
+        "$type": "color",
+        "$value": "#EEE3F7"
+      },
+      "viz-sequential-2": {
+        "$type": "color",
+        "$value": "#D4B7EC"
+      },
+      "viz-sequential-3": {
+        "$type": "color",
+        "$value": "#AF7DF3"
+      },
+      "viz-sequential-4": {
+        "$type": "color",
+        "$value": "#9458F4"
+      },
+      "viz-sequential-5": {
+        "$type": "color",
+        "$value": "#6C3CAA"
+      },
+      "viz-diverging-1": {
+        "$type": "color",
+        "$value": "#985B7B"
+      },
+      "viz-diverging-2": {
+        "$type": "color",
+        "$value": "#D9A3BD"
+      },
+      "viz-diverging-3": {
+        "$type": "color",
+        "$value": "#C8C8C8"
+      },
+      "viz-diverging-4": {
+        "$type": "color",
+        "$value": "#A8A7E2"
+      },
+      "viz-diverging-5": {
+        "$type": "color",
+        "$value": "#5B5A99"
       }
     },
     "dark": {
       "bg-canvas": {
         "$type": "color",
-        "$value": "#0D0814",
+        "$value": "#151515",
         "$description": "The page background"
       },
       "bg-raised": {
         "$type": "color",
-        "$value": "#1A0D27",
+        "$value": "#1E1E1E",
         "$description": "Cards, tables, panels"
       },
       "bg-sunken": {
         "$type": "color",
-        "$value": "#120A1B",
+        "$value": "#181818",
         "$description": "Wells, inputs' surroundings, table headers"
       },
       "bg-overlay": {
         "$type": "color",
-        "$value": "#21132D",
+        "$value": "#252525",
         "$description": "Dialogs, menus, popovers"
       },
       "bg-chrome": {
         "$type": "color",
-        "$value": "#120A1B",
+        "$value": "#190B25",
         "$description": "The rail and sidebar: plum in both themes"
       },
       "fg": {
         "$type": "color",
-        "$value": "#F6F1FA",
+        "$value": "#F1F1F1",
         "$description": "Primary text"
       },
       "fg-muted": {
         "$type": "color",
-        "$value": "#CFC2DB",
+        "$value": "#C8C8C8",
         "$description": "Secondary text"
       },
       "fg-subtle": {
         "$type": "color",
-        "$value": "#B5A6C4",
+        "$value": "#A0A0A0",
         "$description": "Hints, placeholders, metadata"
       },
       "fg-brand": {
@@ -580,7 +670,7 @@
       },
       "action-primary-bg": {
         "$type": "color",
-        "$value": "#EEE3F7",
+        "$value": "#C9A0F3",
         "$description": "Primary buttons"
       },
       "action-primary-fg": {
@@ -605,17 +695,17 @@
       },
       "line": {
         "$type": "color",
-        "$value": "#FFFFFF14",
+        "$value": "#36363F",
         "$description": "Dividers and card borders"
       },
       "line-strong": {
         "$type": "color",
-        "$value": "#FFFFFF2B",
+        "$value": "#4B4B4B",
         "$description": "Stronger separators"
       },
       "line-control": {
         "$type": "color",
-        "$value": "#FFFFFF66",
+        "$value": "#7D7D7D",
         "$description": "Field and control borders (3:1 required)"
       },
       "success-fg": {
@@ -720,23 +810,63 @@
       },
       "viz-5": {
         "$type": "color",
-        "$value": "#4ADE80",
+        "$value": "#A8A7E2",
         "$description": "Chart series 5 (green, dark theme)"
       },
       "viz-6": {
         "$type": "color",
-        "$value": "#F87171",
+        "$value": "#D9A3BD",
         "$description": "Chart series 6 (red, dark theme)"
       },
       "viz-7": {
         "$type": "color",
-        "$value": "#38BDF8",
+        "$value": "#99BDE0",
         "$description": "Chart series 7 (sky, dark theme)"
       },
       "viz-8": {
         "$type": "color",
-        "$value": "#2DD4BF",
+        "$value": "#A7C4B5",
         "$description": "Chart series 8 (teal, dark theme)"
+      },
+      "viz-sequential-1": {
+        "$type": "color",
+        "$value": "#EEE3F7"
+      },
+      "viz-sequential-2": {
+        "$type": "color",
+        "$value": "#D4B7EC"
+      },
+      "viz-sequential-3": {
+        "$type": "color",
+        "$value": "#AF7DF3"
+      },
+      "viz-sequential-4": {
+        "$type": "color",
+        "$value": "#9458F4"
+      },
+      "viz-sequential-5": {
+        "$type": "color",
+        "$value": "#6C3CAA"
+      },
+      "viz-diverging-1": {
+        "$type": "color",
+        "$value": "#985B7B"
+      },
+      "viz-diverging-2": {
+        "$type": "color",
+        "$value": "#D9A3BD"
+      },
+      "viz-diverging-3": {
+        "$type": "color",
+        "$value": "#C8C8C8"
+      },
+      "viz-diverging-4": {
+        "$type": "color",
+        "$value": "#A8A7E2"
+      },
+      "viz-diverging-5": {
+        "$type": "color",
+        "$value": "#5B5A99"
       }
     }
   },
@@ -747,11 +877,11 @@
     },
     "field": {
       "$type": "dimension",
-      "$value": "12px"
+      "$value": "8px"
     },
     "card": {
       "$type": "dimension",
-      "$value": "20px"
+      "$value": "12px"
     },
     "overlay": {
       "$type": "dimension",
@@ -759,13 +889,13 @@
     },
     "panel": {
       "$type": "dimension",
-      "$value": "24px"
+      "$value": "20px"
     }
   },
   "duration": {
     "instant": {
       "$type": "duration",
-      "$value": "90ms"
+      "$value": "80ms"
     },
     "fast": {
       "$type": "duration",
@@ -773,15 +903,15 @@
     },
     "base": {
       "$type": "duration",
-      "$value": "200ms"
+      "$value": "180ms"
     },
     "slow": {
       "$type": "duration",
-      "$value": "300ms"
+      "$value": "240ms"
     },
     "reveal": {
       "$type": "duration",
-      "$value": "480ms"
+      "$value": "320ms"
     }
   },
   "easing": {
@@ -804,6 +934,42 @@
         1
       ],
       "$description": "The site's entrance easing"
+    },
+    "standard": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.2,
+        0,
+        0,
+        1
+      ]
+    },
+    "emphasized": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.16,
+        1,
+        0.3,
+        1
+      ]
+    },
+    "exit": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.4,
+        0,
+        1,
+        1
+      ]
+    },
+    "spring": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.22,
+        1.2,
+        0.36,
+        1
+      ]
     }
   },
   "font": {
@@ -813,7 +979,6 @@
         "OrgTik Arabic",
         "OrgTik Montserrat",
         "Montserrat",
-        "Arial",
         "sans-serif"
       ],
       "$description": "Headings. \"OrgTik Arabic\" is IBM Plex Sans Arabic (D-010) declared for Arabic characters only (dist/fonts.css), so Latin falls through to Montserrat (latin + latin-ext)"
@@ -822,11 +987,11 @@
       "$type": "fontFamily",
       "$value": [
         "OrgTik Arabic",
-        "Arial",
-        "Helvetica",
+        "OrgTik Plex",
+        "IBM Plex Sans",
         "sans-serif"
       ],
-      "$description": "Body. The site's body face is Arial (159 uses); Arabic characters use \"OrgTik Arabic\" (IBM Plex Sans Arabic, D-010)"
+      "$description": "Self-hosted IBM Plex Sans and Arabic for UI, with tabular data."
     },
     "mono": {
       "$type": "fontFamily",
@@ -839,6 +1004,120 @@
         "monospace"
       ],
       "$description": "IDs, codes, logs and figures in tables. The website's case-study stack (--cs-mono, d76ee3b), system fonts only"
+    }
+  },
+  "space": {
+    "1": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "2": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "3": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "4": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "5": {
+      "$type": "dimension",
+      "$value": "20px"
+    },
+    "6": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "8": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "10": {
+      "$type": "dimension",
+      "$value": "40px"
+    },
+    "12": {
+      "$type": "dimension",
+      "$value": "48px"
+    },
+    "16": {
+      "$type": "dimension",
+      "$value": "64px"
+    },
+    "20": {
+      "$type": "dimension",
+      "$value": "80px"
+    },
+    "24": {
+      "$type": "dimension",
+      "$value": "96px"
+    }
+  },
+  "layout": {
+    "narrow": {
+      "$type": "dimension",
+      "$value": "720px"
+    },
+    "default": {
+      "$type": "dimension",
+      "$value": "1200px"
+    },
+    "wide": {
+      "$type": "dimension",
+      "$value": "1440px"
+    },
+    "rail": {
+      "$type": "dimension",
+      "$value": "64px"
+    },
+    "sidebar": {
+      "$type": "dimension",
+      "$value": "224px"
+    },
+    "topbar": {
+      "$type": "dimension",
+      "$value": "56px"
+    },
+    "full": {
+      "$type": "dimension",
+      "$value": "100%"
+    }
+  },
+  "zIndex": {
+    "base": {
+      "$type": "number",
+      "$value": 0
+    },
+    "sticky": {
+      "$type": "number",
+      "$value": 10
+    },
+    "dropdown": {
+      "$type": "number",
+      "$value": 30
+    },
+    "overlay": {
+      "$type": "number",
+      "$value": 50
+    },
+    "toast": {
+      "$type": "number",
+      "$value": 70
+    }
+  },
+  "density": {
+    "comfortable": {
+      "row": "44px",
+      "control": "36px",
+      "font": "14px"
+    },
+    "compact": {
+      "row": "36px",
+      "control": "32px",
+      "font": "13px"
     }
   }
 }

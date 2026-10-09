@@ -54,8 +54,8 @@
       "combo": "en-light",
       "width": 1280,
       "height": 860,
-      "originalSha256": "1e0693aa9d2e138537e5253af319b76fa22056ec62c45f1eceaee518e7a5d12f",
-      "overrideSha256": "30fca215af822a139dcd1f81193349a650d0eabb9d4a3dcfda5e93a8128c69fa",
+      "originalSha256": "b9cf97338233e6cac292cfbf727e28df5e09da2ed4d3e122aa7a530b00e9fd47",
+      "overrideSha256": "d5967a932c4c1085a84e86ed5d594e30a106cd562adc9976f19d95c850abab03",
       "reviewedChangedPixels": 15,
       "affectedGlyphs": [
         "1"
@@ -71,16 +71,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 5
           }
         ]
       },
       "semantics": {
         "textSha256": "0879c98df0ff65db0327c254e03f076896d0e3f784446381daade9d26f39204f",
-        "layoutSha256": "4d12fd361395c83aafed01f2d238d3d04252e20983d3c8d1bd47408a7e4fd60d"
+        "layoutSha256": "385e4d44cd623b1363cde0f870f1f61a537147b987818ce94eab871fa51ebc51"
       }
     },
     "data-calendargrid--month--en-dark.png": {
@@ -88,8 +88,8 @@
       "combo": "en-dark",
       "width": 1280,
       "height": 860,
-      "originalSha256": "db2895cfc521b1c0b1f1d266ba542d600d7f3a260457cf7af2ab8fe9a0673416",
-      "overrideSha256": "c2448888c4622cab03925e4d91a74aad0b1363e472bdf6fe2f6577aa2711c3a8",
+      "originalSha256": "c79a0a123675e7e65312b8e428f119581690641b25d926673dae1b1583ef72a2",
+      "overrideSha256": "426e78c5f8d992eee1614fd9117e47a337ea5c306890842ed7af130968a02a78",
       "reviewedChangedPixels": 15,
       "affectedGlyphs": [
         "1"
@@ -105,16 +105,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 5
           }
         ]
       },
       "semantics": {
         "textSha256": "0879c98df0ff65db0327c254e03f076896d0e3f784446381daade9d26f39204f",
-        "layoutSha256": "4d12fd361395c83aafed01f2d238d3d04252e20983d3c8d1bd47408a7e4fd60d"
+        "layoutSha256": "385e4d44cd623b1363cde0f870f1f61a537147b987818ce94eab871fa51ebc51"
       }
     },
     "data-calendargrid--month--ar-light.png": {
@@ -122,8 +122,8 @@
       "combo": "ar-light",
       "width": 1280,
       "height": 1007,
-      "originalSha256": "85740eeaba90f2012c5d78bf5d76e538677dd23d6b6055b21ea5d6908b4b5809",
-      "overrideSha256": "e88b2f760d66c5d1ca596ca5a0dcf15ebf627f85415903ad8236944bf76ff32d",
+      "originalSha256": "b3afdd0490998b9fa2496effdda82c78b3e7373b798c5f3dd2a63c79cf5a5ca6",
+      "overrideSha256": "8894fd99a45fc1da54ad79c3e00db52c5aab8a7b5229dbc2559b2d11608841f6",
       "reviewedChangedPixels": 9,
       "affectedGlyphs": [
         "1"
@@ -156,8 +156,8 @@
       "combo": "ar-dark",
       "width": 1280,
       "height": 1007,
-      "originalSha256": "faeeb2df71c4e573647014ee015b1b89e1c17e3729dac6622a0086eb183c681c",
-      "overrideSha256": "840d15614a4449ab0ef18980c7d0dd4aad72bdcb4e9773c3dfb5bb1899aa793e",
+      "originalSha256": "f76487eca0ca79199303eb0ec9debc8442dc334eaa311ad1e91cef6965ece7b6",
+      "overrideSha256": "56e124191945f9ef9051f1137125998d65576415236b36a74fd950c6b76ef221",
       "reviewedChangedPixels": 8,
       "affectedGlyphs": [
         "1"
@@ -190,8 +190,8 @@
       "combo": "de-light",
       "width": 1280,
       "height": 860,
-      "originalSha256": "d6a4078f29d7e645678aba1467fa27e5398d92d083ff4cb9facec2226297fe04",
-      "overrideSha256": "47581464cfe018a0ce8d2714dc15d9fc730c4ac3ac3004949d278e3bdfbd0f0d",
+      "originalSha256": "33720097e82ae6c68b0de45e9b7e8435c0fe60de4980762e86b97dfc6edb6f03",
+      "overrideSha256": "d55a794422d03e827d08ba0cfff559ce3ad9ccd893be31a1f7ad46d619b7ae0f",
       "reviewedChangedPixels": 15,
       "affectedGlyphs": [
         "1"
@@ -207,9 +207,9 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 5
           }
         ]
@@ -224,8 +224,8 @@
       "combo": "fr-dark",
       "width": 1280,
       "height": 860,
-      "originalSha256": "149bc77814a4fbcd10c56c38a83c79e62ef8bafe97209abcf364ad735ecdf26a",
-      "overrideSha256": "4a243e509f525feaf0408699ea395acaa2aa46c9018f28af543c1bb04b4c5bfa",
+      "originalSha256": "dd6f3d2811e883d66ba897aba21e1528f5db20b01e27f15ce14c6a96439c1e82",
+      "overrideSha256": "b57ff9cb065bde485b54a8e0f56ea4f7511ecddd9b1360189b030f0b6315e823",
       "reviewedChangedPixels": 15,
       "affectedGlyphs": [
         "1"
@@ -241,16 +241,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 11
           }
         ]
       },
       "semantics": {
         "textSha256": "3a058cbe1296694cec82a60caead90daae45c2b877aec8f897a20e6b2a8fce6f",
-        "layoutSha256": "af2d9096accf71042feb7e0aff24d9ab3524d66e87f7bd5cfc403c715ca17d11"
+        "layoutSha256": "dea181671e98c4b1194152459da6edb74e9b208b9d1f1cf08e8bafdccf7909a5"
       }
     },
     "data-calendargrid--week--ar-light.png": {
@@ -258,8 +258,8 @@
       "combo": "ar-light",
       "width": 1280,
       "height": 800,
-      "originalSha256": "7ee672a054435d4d09340fd82308b6665ef3a2e4ad4b9e2b6a8fb8a0283304cd",
-      "overrideSha256": "e982c4e24616191ac139137f3c8314ffd0ecc846019e8000889dc34572237fca",
+      "originalSha256": "545fcf6a63ed3d24168d12ab548bd390af0dc5e8237f81a3d5847cbfa4be339f",
+      "overrideSha256": "736fceaaaf7fa1b35fc1317c5b5367684422a33119f46c65ef5ab99c9d6f134c",
       "reviewedChangedPixels": 9,
       "affectedGlyphs": [
         "1"
@@ -292,8 +292,8 @@
       "combo": "ar-dark",
       "width": 1280,
       "height": 800,
-      "originalSha256": "45f07453ffc691558885bb55bb7a7dde34c963803503239f86f5dff2e34a86cd",
-      "overrideSha256": "9b49b51c3f39b47e90c3625fc27c60f84026f8afcaf6f2ec122744f035d9b3c8",
+      "originalSha256": "e5d87c7592e301e9a083b41b11b64d5e88abe52d79e455af562baf88fa8ee251",
+      "overrideSha256": "2b816b64065d9b494f4665fb8c7a04630e88c5641d1367c78f0361f4f9158b71",
       "reviewedChangedPixels": 8,
       "affectedGlyphs": [
         "1"
@@ -326,8 +326,8 @@
       "combo": "en-light",
       "width": 1280,
       "height": 861,
-      "originalSha256": "71f364d57c07a1b5c89fad845403cec71261dfe2996f7bf36dd959719dd8f0e0",
-      "overrideSha256": "25d2c2141b678e21910ad5bcd1ab8214092d183f238f786d5650ad9b74c24e35",
+      "originalSha256": "031ffd16638bc01e16c13c22a7bf7e164a3be865ae26d12d1711cabffe8e4a59",
+      "overrideSha256": "829f9fb2427d1a70ed7177a92427213f2e7bb7e948914029f650f241abddf04e",
       "reviewedChangedPixels": 15,
       "affectedGlyphs": [
         "1"
@@ -343,16 +343,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 5
           }
         ]
       },
       "semantics": {
         "textSha256": "1f85ad287a1c1a570718a29e919b27138e04a206dfd2bfe35bfd8fe4f4a88de7",
-        "layoutSha256": "f526d7e2a421a9e4e31164bb0a52e6cddb6ad2a1b1ac63fd193ba8dba088b2aa"
+        "layoutSha256": "87ef8f89226acedfbd1bc45c348f1badbe02ca723a2f00a0e8e26b81d71d06c2"
       }
     },
     "data-calendargrid--many-events--en-dark.png": {
@@ -360,8 +360,8 @@
       "combo": "en-dark",
       "width": 1280,
       "height": 861,
-      "originalSha256": "b412378f28708615e0df04df1fe13c20d4793f0beebdab0a00187a1babd1a6d0",
-      "overrideSha256": "0833379520bee5a581e11cc6a811d7feeaefc4ab37cf5c18c7e6dd81487e796c",
+      "originalSha256": "b9b3b31b4cda3015d5e3ac92a8d4e0644242e79be4a366119a959c30f5d1dec1",
+      "overrideSha256": "a53b7a9c75ed208ec331efc5f5fc619007ff3c265fdd4fb55f540d6ea3275450",
       "reviewedChangedPixels": 15,
       "affectedGlyphs": [
         "1"
@@ -377,16 +377,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 5
           }
         ]
       },
       "semantics": {
         "textSha256": "1f85ad287a1c1a570718a29e919b27138e04a206dfd2bfe35bfd8fe4f4a88de7",
-        "layoutSha256": "f526d7e2a421a9e4e31164bb0a52e6cddb6ad2a1b1ac63fd193ba8dba088b2aa"
+        "layoutSha256": "87ef8f89226acedfbd1bc45c348f1badbe02ca723a2f00a0e8e26b81d71d06c2"
       }
     },
     "data-calendargrid--many-events--ar-light.png": {
@@ -394,8 +394,8 @@
       "combo": "ar-light",
       "width": 1280,
       "height": 1008,
-      "originalSha256": "67372184b6164e394327a929aed6b36b3839accd6e3bf4ea4d84e16f7c4f7a7f",
-      "overrideSha256": "adc35d0b0d97899f737a44bd24f2b070a68fe74ca52faab3d80ef1f4f8e35f91",
+      "originalSha256": "cb8c1e93fa088b133260a3a0e022bd63d4864d96ee8a48a4dcad600d88a08f2e",
+      "overrideSha256": "3efd38a6ec01f4dc34aca45c41aece041d2b7ad954a3f1077bd469cb58e9b143",
       "reviewedChangedPixels": 9,
       "affectedGlyphs": [
         "1"
@@ -428,8 +428,8 @@
       "combo": "ar-dark",
       "width": 1280,
       "height": 1008,
-      "originalSha256": "0b3ff91db43fc958178d72478b48217e3f6f41dd4a2fb7dc2e0d847d075da59f",
-      "overrideSha256": "5254853277027b5daa624b1d0a3c7fdf5aff2d4a342f19fac6c018dea8cb0343",
+      "originalSha256": "3d8d30084379f370e6f4cce88fae7f77dd4cdb13e7369cc5dbd78f7b1b07f89d",
+      "overrideSha256": "c5661e403b23787b72f11950858cb93a58ecbff82148100ed82943c59eb60103",
       "reviewedChangedPixels": 8,
       "affectedGlyphs": [
         "1"
@@ -462,8 +462,8 @@
       "combo": "de-light",
       "width": 1280,
       "height": 861,
-      "originalSha256": "24544ff4e6b00df11daad73d449c8b7c122267339d10b11b024a32cc19c34c35",
-      "overrideSha256": "b62a8ab56e33e10c19445d30f1451ed48d779bab11f4c0a2e9796fbd88a231aa",
+      "originalSha256": "6ee4bdef72b593d730f41d4a8e4a05f7e9ea15db4f23530c671c2d83a649b9d1",
+      "overrideSha256": "fef3f5751bb649757c42244093129b9b53c22ac8304d14342132f3a7937cb4de",
       "reviewedChangedPixels": 15,
       "affectedGlyphs": [
         "1"
@@ -479,9 +479,9 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 5
           }
         ]
@@ -496,8 +496,8 @@
       "combo": "fr-dark",
       "width": 1280,
       "height": 861,
-      "originalSha256": "9a8b62d6798fb189ff6d4b3d62288275c1ad32a6e53c51b48ca321eac1cd96f4",
-      "overrideSha256": "ab0130b45ce59bdcb561e66459b3fbd1ab986f608c127fa0ad4cf24d71e85321",
+      "originalSha256": "6ad59eec47ef71de6aa54c08f7e0a4ed3b663932b7c230ce6a943d14fd04492b",
+      "overrideSha256": "aaa31fc29dac8f28943c756ad47f940e4b9105be8e248d29e9df85a693370e9d",
       "reviewedChangedPixels": 15,
       "affectedGlyphs": [
         "1"
@@ -513,16 +513,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 11
           }
         ]
       },
       "semantics": {
         "textSha256": "5b97bbdf6a417a592eab04fe0a6bb073f5d08c31a370f064069ad7ba2b5e3506",
-        "layoutSha256": "55b1d2cc9bb5d1179a2e8280df51eba8f73f59c89a21f85f0c2a673cb94ff95b"
+        "layoutSha256": "3bc2e1b5167b35933918c3db3893ccc5f397971a864c0fe68f4c1a465e6dcbd1"
       }
     },
     "data-datatable--ready--en-light.png": {
@@ -530,24 +530,24 @@
       "combo": "en-light",
       "width": 1280,
       "height": 800,
-      "originalSha256": "f2aea57a478746ae8b8d8e26772c24de6c282082ca3df00e72468c2365dbe908",
-      "overrideSha256": "3a317de0a5b63a147ac29fe4fd2c90e3921c7e4df51277d74deb4b69c828abc1",
+      "originalSha256": "854ee3e4d054a482ef54b02029a6d1ee46c9771b24239efaa1fd15bfc3dd29f7",
+      "overrideSha256": "3e7ac0c281a468a4ef5beb6ea2292070c8eb1c506c82d0e407147ae69303ae3d",
       "reviewedChangedPixels": 0,
       "affectedGlyphs": [],
       "affectedText": [],
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 4
           }
         ]
       },
       "semantics": {
         "textSha256": "cee21bec85362ab36a58a75b38aee19d434877730bbd27fce844ee681a45f9e5",
-        "layoutSha256": "9454780baf61a97d50f20e848e04cd48d6fbcd2a6a61660a28446754a418aa03"
+        "layoutSha256": "c86169566d0d20005f5ef21d0d724ea531d065439bbdd9b10daa2d70ee07ccc0"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -561,24 +561,24 @@
       "combo": "en-dark",
       "width": 1280,
       "height": 800,
-      "originalSha256": "ca60bfb40952c858fc8871a55419552a4d1798e35cf23004b59301e9bee3de58",
-      "overrideSha256": "84fda272109c127d02bf0e3236232a852469b81c8f393c4a976d5435199ad18c",
+      "originalSha256": "8852e24f69f6bcccf54e02d5fe8e83a369b9478a9201af542bb761c90b5a5789",
+      "overrideSha256": "53edc500f1744cc5ea0c4bdfee719e4ea0302bb396873068af1acdb4cb2d4a21",
       "reviewedChangedPixels": 0,
       "affectedGlyphs": [],
       "affectedText": [],
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 4
           }
         ]
       },
       "semantics": {
         "textSha256": "cee21bec85362ab36a58a75b38aee19d434877730bbd27fce844ee681a45f9e5",
-        "layoutSha256": "9454780baf61a97d50f20e848e04cd48d6fbcd2a6a61660a28446754a418aa03"
+        "layoutSha256": "c86169566d0d20005f5ef21d0d724ea531d065439bbdd9b10daa2d70ee07ccc0"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -592,8 +592,8 @@
       "combo": "ar-light",
       "width": 1280,
       "height": 800,
-      "originalSha256": "fc1ee3311f6ccb2339c6cd645a746574d6539ebd80cd8bc9c91975b84b00ddf5",
-      "overrideSha256": "539f86f2c40755b1334114897a14cab4a4b4672e479e04e6857b9b6c8a3506ac",
+      "originalSha256": "cc9df23719a128f09694cfc367433cea3394263bea15cb227ff32cab20baba9a",
+      "overrideSha256": "bc05bc00a03221579c01d2e1de43619b5a2c110c2b77102fc379bf30e378ea7f",
       "reviewedChangedPixels": 0,
       "affectedGlyphs": [],
       "affectedText": [],
@@ -609,7 +609,7 @@
       },
       "semantics": {
         "textSha256": "cc96b2c72b6e53e90984677d184a79404a9422aa7f0347de03537b60a4eba759",
-        "layoutSha256": "29b24040b198c9fca5c2dee3f7e6157a73c2a526903202d8f517068b10fe3b0d"
+        "layoutSha256": "dd7e41b9aec1b7777a66cc41e8368f7f0c02517a75d52231e8afd66ab9339d06"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -623,8 +623,8 @@
       "combo": "ar-dark",
       "width": 1280,
       "height": 800,
-      "originalSha256": "78b6efa1be7ecf46c3a8d4f982ec58b7d63dd07411ff7122c93b40804b59b00a",
-      "overrideSha256": "66ba934c190797d231e3d201303a2a6e88290420a62e823228bb227ef7a14efe",
+      "originalSha256": "cff8dcd7cbec575d6afa22bffffbac7c8227e8060f9f41b2062e55e1776f3b12",
+      "overrideSha256": "d287f6352478e36308f30af8610606791f74529ee1e8798aba0482caa213189f",
       "reviewedChangedPixels": 0,
       "affectedGlyphs": [],
       "affectedText": [],
@@ -640,7 +640,7 @@
       },
       "semantics": {
         "textSha256": "cc96b2c72b6e53e90984677d184a79404a9422aa7f0347de03537b60a4eba759",
-        "layoutSha256": "29b24040b198c9fca5c2dee3f7e6157a73c2a526903202d8f517068b10fe3b0d"
+        "layoutSha256": "dd7e41b9aec1b7777a66cc41e8368f7f0c02517a75d52231e8afd66ab9339d06"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -654,24 +654,24 @@
       "combo": "de-light",
       "width": 1280,
       "height": 800,
-      "originalSha256": "5c2507bc403895ecffbfedd0248651bf8f9e808eb08ee210470369173916c8b7",
-      "overrideSha256": "d661b4cd4c77845eb4936a3d3843cf161f9c5a99f856952f3bf2cb64de79e787",
+      "originalSha256": "331a03f6adc8a7ee1893a40c2b44ebb5f09d86d4cc43105e168622377845e6df",
+      "overrideSha256": "a2f11cccdd5052fde997f8f43d87b55619c373a95e769a536ed5b8b04bc7259d",
       "reviewedChangedPixels": 0,
       "affectedGlyphs": [],
       "affectedText": [],
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 4
           }
         ]
       },
       "semantics": {
         "textSha256": "8a2c7913c25606fb80fd6774914db7f233362ed893ffad7c0b785d60b1d536b1",
-        "layoutSha256": "2c1544522673976754e2fe2ebdf4f4f66d67076e0aca6d2657ef10e32b05a8a0"
+        "layoutSha256": "e8644a0cc66780bb4afd0e7e624dd36f78a407d9e47e0314ebeef6da0f785c1e"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -685,24 +685,24 @@
       "combo": "fr-dark",
       "width": 1280,
       "height": 800,
-      "originalSha256": "187fcc937a1acc68b27314be1be904f12498c114df7449c345d0dfc8f0e38cc8",
-      "overrideSha256": "415b508c49d1d9f4b860cb54d0e1c02e98af6f8f105ac14cf679ad12da6e26d5",
+      "originalSha256": "4b2736326a8e5eaedfc854a412412b72433ef7757ba9b1c9d6722461b450a24f",
+      "overrideSha256": "8af5c3fe3fe2c9d5edd59ac9f95e8786e744106d46323e6df1a22c39195ab880",
       "reviewedChangedPixels": 0,
       "affectedGlyphs": [],
       "affectedText": [],
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "Arial-BoldMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
             "glyphCount": 4
           }
         ]
       },
       "semantics": {
         "textSha256": "e6c6b487c9b875aba325e00739c856f5c446a8db1e7a2deb722abb00b05cf039",
-        "layoutSha256": "30eea7a70b449fb73bee391b359423c4b180138e69505d57c3c0b5d3536887d8"
+        "layoutSha256": "8aefbe461b983b7179231b3fc096bff6ce5a4a670aa21bcee1f0a3333c5e4cfd"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -716,8 +716,8 @@
       "combo": "en-light",
       "width": 1280,
       "height": 800,
-      "originalSha256": "99bc62dcb76fc35d35882a23aaefa7ba33de817a30c412a0d1259bb76e97d908",
-      "overrideSha256": "cf5063952bdab376d575371f436907e7ba4fa4aca2b4d581156e0b0532fdc7ac",
+      "originalSha256": "52995b840d31478b46e888a8bfb825f4ca910e4691071511ecfde1b0f14965c0",
+      "overrideSha256": "30f3539ca820f76798e842d345e7a140b9bdd4917d8a537f72642f71bdf5cc3b",
       "reviewedChangedPixels": 23,
       "affectedGlyphs": [
         "1"
@@ -733,16 +733,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 11
           }
         ]
       },
       "semantics": {
         "textSha256": "61d2c1c5f0b32c84e1bb75cd9e152ac260aa2a739dd6fc1ed0ca1065df883795",
-        "layoutSha256": "88aee44bf64472fd237e312875ad1911c5da2214097fe7ec87ddd5c34a508590"
+        "layoutSha256": "e17e86389481c43aa9266df25a77e0576759c0a8f5f72bbf9f0d8562d5f6a9ff"
       }
     },
     "p1b-dates--dates-story--en-dark.png": {
@@ -750,8 +750,8 @@
       "combo": "en-dark",
       "width": 1280,
       "height": 800,
-      "originalSha256": "caa8872e553108f22027791de70435fd2b375020547e7d6a203b1d557805a776",
-      "overrideSha256": "d8478565c2f40b396cd261ef4ba0c9f18cc11fc94a79e59deadda0c0b048f9dd",
+      "originalSha256": "ffe8256f895001f34e809a8ab341535e59c8c45a1811f781b3d2ea8dab131d7a",
+      "overrideSha256": "01c056bbe27e96faa84abb3b1d9c3d35dc302d4d699c2efb2459746e5065c33d",
       "reviewedChangedPixels": 24,
       "affectedGlyphs": [
         "1"
@@ -767,16 +767,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 11
           }
         ]
       },
       "semantics": {
         "textSha256": "61d2c1c5f0b32c84e1bb75cd9e152ac260aa2a739dd6fc1ed0ca1065df883795",
-        "layoutSha256": "88aee44bf64472fd237e312875ad1911c5da2214097fe7ec87ddd5c34a508590"
+        "layoutSha256": "e17e86389481c43aa9266df25a77e0576759c0a8f5f72bbf9f0d8562d5f6a9ff"
       }
     },
     "p1b-dates--dates-story--ar-light.png": {
@@ -784,8 +784,8 @@
       "combo": "ar-light",
       "width": 1280,
       "height": 800,
-      "originalSha256": "cd40636dbfb69c4e2977393302eabf0e479141a52faff9b68a43f00abe998cff",
-      "overrideSha256": "e10f4a10c8a6f262f9e9ab37d8e069393f47932075820fab7e2e2d3da4f1f5a8",
+      "originalSha256": "08c88ed45ffd08be69f498204806d572757239cf67c5bc182bd32ac2f2eee147",
+      "overrideSha256": "0e7efd9ced96ccc3b357ee088151ff665a90a028998982ab26adb8faa2cf20d9",
       "reviewedChangedPixels": 23,
       "affectedGlyphs": [
         "1"
@@ -801,16 +801,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 12
           }
         ]
       },
       "semantics": {
         "textSha256": "099ac82def5a7e5dae7e1a731e40275c404b085b53e44bdf63b13a9cc115001a",
-        "layoutSha256": "2df2724c3b1c4e7428246dd0977bb88b1e5c1d9a0571105cf4c3441f13d700bd"
+        "layoutSha256": "35b2c9e62d32a08b11647c2b36e80f3d3f6fe2adb0ea4a01b9b10a5b5c56d88a"
       }
     },
     "p1b-dates--dates-story--ar-dark.png": {
@@ -818,8 +818,8 @@
       "combo": "ar-dark",
       "width": 1280,
       "height": 800,
-      "originalSha256": "823b0d924ea66836d95c57fe314c8ae8115780e141ade7303d77e3b342317652",
-      "overrideSha256": "3589ad870fcfd8690b9512bc0218338f67063b0464d7af85627578f172b131b6",
+      "originalSha256": "274f0c02a458ff1bdb09cdd37bbce9463e3d5da55ffc35ccd2e6c41046dd4e57",
+      "overrideSha256": "269959abcfc32e9f051016c8d643a8eac41b14cf6c8809786406517c4f80ea19",
       "reviewedChangedPixels": 24,
       "affectedGlyphs": [
         "1"
@@ -835,16 +835,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 12
           }
         ]
       },
       "semantics": {
         "textSha256": "099ac82def5a7e5dae7e1a731e40275c404b085b53e44bdf63b13a9cc115001a",
-        "layoutSha256": "2df2724c3b1c4e7428246dd0977bb88b1e5c1d9a0571105cf4c3441f13d700bd"
+        "layoutSha256": "35b2c9e62d32a08b11647c2b36e80f3d3f6fe2adb0ea4a01b9b10a5b5c56d88a"
       }
     },
     "p1b-dates--dates-story--de-light.png": {
@@ -852,8 +852,8 @@
       "combo": "de-light",
       "width": 1280,
       "height": 800,
-      "originalSha256": "bb4a4f29da06b2622f1e2a9ffb0c4cda331b1b71a394c3f64d22b76b343777b7",
-      "overrideSha256": "1224421face4796d2dff5fdf1fb4b1a5fc453dbf6b3eee638180d4d3fb13f598",
+      "originalSha256": "b76733a92db17fc663a3f9079f1f58ffd774b0ad738ce5d4f3d48af8ead81e91",
+      "overrideSha256": "ccc80e91021d803d68ad076394d2ba53688587e4290852136e13d0c459194f52",
       "reviewedChangedPixels": 23,
       "affectedGlyphs": [
         "1"
@@ -869,16 +869,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 10
           }
         ]
       },
       "semantics": {
         "textSha256": "ee3dde74e46495c036ecaa3c0ad52f5e4411da6320c276ebc767fdc0da7896c5",
-        "layoutSha256": "88aee44bf64472fd237e312875ad1911c5da2214097fe7ec87ddd5c34a508590"
+        "layoutSha256": "e17e86389481c43aa9266df25a77e0576759c0a8f5f72bbf9f0d8562d5f6a9ff"
       }
     },
     "p1b-dates--dates-story--fr-dark.png": {
@@ -886,8 +886,8 @@
       "combo": "fr-dark",
       "width": 1280,
       "height": 800,
-      "originalSha256": "591f353dab7239a79bf5e0b9d72e31b9a803da241d89051b762275895ce2b11f",
-      "overrideSha256": "27c87e98dd68062b9d32978010103d8765bba00e170bb8d25b90b2d09d7f423e",
+      "originalSha256": "6004f780a11909393554a25331d0ec56a02b7c300f15a70345af3e3ab22b6744",
+      "overrideSha256": "52a3c1f79e8e6da6c9eca58dd302c274fef64fe7bf58cc46951a388819cdb2b6",
       "reviewedChangedPixels": 24,
       "affectedGlyphs": [
         "1"
@@ -903,16 +903,16 @@
       "platformFonts": {
         "#storybook-root button": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 12
           }
         ]
       },
       "semantics": {
         "textSha256": "6f9892daefdb17bca9ba060d12a4442f4ea63e40c395e186c8446b53eb6168d1",
-        "layoutSha256": "88aee44bf64472fd237e312875ad1911c5da2214097fe7ec87ddd5c34a508590"
+        "layoutSha256": "e17e86389481c43aa9266df25a77e0576759c0a8f5f72bbf9f0d8562d5f6a9ff"
       }
     },
     "foundations-tokens--semantic-colors--en-light.png": {
@@ -920,8 +920,8 @@
       "combo": "en-light",
       "width": 1280,
       "height": 800,
-      "originalSha256": "c887e1145a06b222eb96af08e5b88a3df28b9efc0893c4582b184ee3260e4489",
-      "overrideSha256": "d5b80e12924bcda51c2efda801190521fdbdcd8254cae7426a1f08bb29a0ee6d",
+      "originalSha256": "64453279bc6c1d4359423d5bd8091bfc8f28ac340c2f5a9b450e223dc619b853",
+      "overrideSha256": "9f6acf74f4acaf819799efdb63614b54a2a603841100692f7e9183d244c582fb",
       "reviewedChangedPixels": 11,
       "affectedGlyphs": [
         "1",
@@ -959,8 +959,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
-        "layoutSha256": "bbd00fca2e35dc1b2482f85a6e961a56b9f174919d508ab3798d2311717e2185"
+        "textSha256": "4ed8b90bd2a8c1043c85a9e828a6ff05a90911e3e7a6be82e99f1bd8eb4a8010",
+        "layoutSha256": "c71d7ec4fdec5f056583fe7f09c00c2ebf8543c5bb33d508505fdeaee98f8879"
       }
     },
     "foundations-tokens--semantic-colors--en-dark.png": {
@@ -968,8 +968,8 @@
       "combo": "en-dark",
       "width": 1280,
       "height": 800,
-      "originalSha256": "9678ec9341f0933669d03b97141a65463727810b03c0aaf82ea51792f062707b",
-      "overrideSha256": "9ad96eee55ebf5d5eb419a9e2dc4e49eb1590ea273bb04af9d15fca0d7ec0bd6",
+      "originalSha256": "79775091a33d8e0e6fa6433bc629062e4f7429549bbf06c62b59cd199fc306b2",
+      "overrideSha256": "38a3b1005cabb0e0787dfd70d77fdd54d77596dd254293b984d0bcf6e7b1e1f6",
       "reviewedChangedPixels": 29,
       "affectedGlyphs": [
         "z",
@@ -1049,8 +1049,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
-        "layoutSha256": "bbd00fca2e35dc1b2482f85a6e961a56b9f174919d508ab3798d2311717e2185"
+        "textSha256": "4ed8b90bd2a8c1043c85a9e828a6ff05a90911e3e7a6be82e99f1bd8eb4a8010",
+        "layoutSha256": "c71d7ec4fdec5f056583fe7f09c00c2ebf8543c5bb33d508505fdeaee98f8879"
       }
     },
     "foundations-tokens--semantic-colors--ar-light.png": {
@@ -1058,8 +1058,8 @@
       "combo": "ar-light",
       "width": 1280,
       "height": 800,
-      "originalSha256": "36ae9f086c0dffb266d5a505726e8e71e5bd5bc8869fd2256adb57c45e14b709",
-      "overrideSha256": "a80237d90b895172fc245bcd37d8beffd9ef661133f6e9614c9387cd4c9650fa",
+      "originalSha256": "d146fd9c8867db1d1c96550d327aeeb525dec17368f5226c9e41e261cd29a7d0",
+      "overrideSha256": "b8966e9e87d62019c40cb33edd271f907f4be3e3973fb373c5972df54f5493f7",
       "reviewedChangedPixels": 1,
       "affectedGlyphs": [
         "5"
@@ -1083,8 +1083,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
-        "layoutSha256": "b5a23d2d4246a9915ea8bd004db84b350a03338c9cf194f55a9084be5f9b004b"
+        "textSha256": "4ed8b90bd2a8c1043c85a9e828a6ff05a90911e3e7a6be82e99f1bd8eb4a8010",
+        "layoutSha256": "18fe823aa061ba1b46720361613adc5d71fc03bac66534eacfefbed2c205e930"
       }
     },
     "foundations-tokens--semantic-colors--ar-dark.png": {
@@ -1092,8 +1092,8 @@
       "combo": "ar-dark",
       "width": 1280,
       "height": 800,
-      "originalSha256": "49d3a57646f49197274d8146bec6fafa29b8b9a9a3d41c7522de739cac07a76b",
-      "overrideSha256": "3e59d5143475545ebf2849aea526dca3801d228771551e2a9c014c29b4bdc518",
+      "originalSha256": "3609fc1c8fdbd361fc0ff2e330a4632a506abfc0de44683dc8724a05e2536f9f",
+      "overrideSha256": "d85698d2fc9f6d07cd1d800e8f53f690598a0d17bc318fa110ae84a46bbedb37",
       "reviewedChangedPixels": 30,
       "affectedGlyphs": [
         "z",
@@ -1173,8 +1173,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
-        "layoutSha256": "b5a23d2d4246a9915ea8bd004db84b350a03338c9cf194f55a9084be5f9b004b"
+        "textSha256": "4ed8b90bd2a8c1043c85a9e828a6ff05a90911e3e7a6be82e99f1bd8eb4a8010",
+        "layoutSha256": "18fe823aa061ba1b46720361613adc5d71fc03bac66534eacfefbed2c205e930"
       }
     },
     "foundations-tokens--semantic-colors--de-light.png": {
@@ -1182,8 +1182,8 @@
       "combo": "de-light",
       "width": 1280,
       "height": 800,
-      "originalSha256": "c887e1145a06b222eb96af08e5b88a3df28b9efc0893c4582b184ee3260e4489",
-      "overrideSha256": "d5b80e12924bcda51c2efda801190521fdbdcd8254cae7426a1f08bb29a0ee6d",
+      "originalSha256": "64453279bc6c1d4359423d5bd8091bfc8f28ac340c2f5a9b450e223dc619b853",
+      "overrideSha256": "9f6acf74f4acaf819799efdb63614b54a2a603841100692f7e9183d244c582fb",
       "reviewedChangedPixels": 11,
       "affectedGlyphs": [
         "1",
@@ -1221,8 +1221,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
-        "layoutSha256": "bbd00fca2e35dc1b2482f85a6e961a56b9f174919d508ab3798d2311717e2185"
+        "textSha256": "4ed8b90bd2a8c1043c85a9e828a6ff05a90911e3e7a6be82e99f1bd8eb4a8010",
+        "layoutSha256": "c71d7ec4fdec5f056583fe7f09c00c2ebf8543c5bb33d508505fdeaee98f8879"
       }
     },
     "foundations-tokens--semantic-colors--fr-dark.png": {
@@ -1230,8 +1230,8 @@
       "combo": "fr-dark",
       "width": 1280,
       "height": 800,
-      "originalSha256": "9678ec9341f0933669d03b97141a65463727810b03c0aaf82ea51792f062707b",
-      "overrideSha256": "9ad96eee55ebf5d5eb419a9e2dc4e49eb1590ea273bb04af9d15fca0d7ec0bd6",
+      "originalSha256": "79775091a33d8e0e6fa6433bc629062e4f7429549bbf06c62b59cd199fc306b2",
+      "overrideSha256": "38a3b1005cabb0e0787dfd70d77fdd54d77596dd254293b984d0bcf6e7b1e1f6",
       "reviewedChangedPixels": 29,
       "affectedGlyphs": [
         "z",
@@ -1311,8 +1311,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "c5d214c427b0b22ebe06dcf50a27bad3aa4ea2bf49a420d3b1ae9ac66cd8a4b3",
-        "layoutSha256": "bbd00fca2e35dc1b2482f85a6e961a56b9f174919d508ab3798d2311717e2185"
+        "textSha256": "4ed8b90bd2a8c1043c85a9e828a6ff05a90911e3e7a6be82e99f1bd8eb4a8010",
+        "layoutSha256": "c71d7ec4fdec5f056583fe7f09c00c2ebf8543c5bb33d508505fdeaee98f8879"
       }
     },
     "foundations-tokens--type-roles--en-light.png": {
@@ -1320,8 +1320,8 @@
       "combo": "en-light",
       "width": 1280,
       "height": 875,
-      "originalSha256": "806b31ebd7b2828d5e3a8aa07dff4593a60d8413843001a8663bc87829a8d186",
-      "overrideSha256": "f0b4cf3a7f9914e0c134fa4d92c9f6fc253d21b853a424dc4df012b0eef2375d",
+      "originalSha256": "1f8f9ce5e3cdc083304be081ee56c837422a4f40339ece8ccca6b253827a717f",
+      "overrideSha256": "caa160fcdc2fea164ecdadd8ab2a1ad7272998dcdb376ed3250b5f137cc6eef7",
       "reviewedChangedPixels": 19,
       "affectedGlyphs": [
         "5",
@@ -1376,8 +1376,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
-        "layoutSha256": "37fcea9467ca478d184ef0ee10cc5d1f12b020eebb8c0ac4cc34584b82237715"
+        "textSha256": "ce0d89c5574a221b16fe3aee7321cf2a2e2708a1599f40ddc9950d64586b6c0e",
+        "layoutSha256": "049bb73a113267d3b3e8fcddbbea9e6403fff34ab2e347902e0a3353ede21bae"
       }
     },
     "foundations-tokens--type-roles--en-dark.png": {
@@ -1385,8 +1385,8 @@
       "combo": "en-dark",
       "width": 1280,
       "height": 875,
-      "originalSha256": "53f70aaa6baa60a256d343f495dd3e1df7c366fb4368f448c9f5e0d1b87de7e0",
-      "overrideSha256": "d193637020f985d400f7574a56d2af40f16812941f544b32674409a6415b4408",
+      "originalSha256": "27f681e9e8241b6b78f7514ac17cf57a5f04926a4e40cc09b53e374bc5bfd8e3",
+      "overrideSha256": "ce1f252783f9676f5ad22660ed6acca2e65ad7c7602e1039ff82a8bad532b109",
       "reviewedChangedPixels": 35,
       "affectedGlyphs": [
         "2",
@@ -1472,8 +1472,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
-        "layoutSha256": "37fcea9467ca478d184ef0ee10cc5d1f12b020eebb8c0ac4cc34584b82237715"
+        "textSha256": "ce0d89c5574a221b16fe3aee7321cf2a2e2708a1599f40ddc9950d64586b6c0e",
+        "layoutSha256": "049bb73a113267d3b3e8fcddbbea9e6403fff34ab2e347902e0a3353ede21bae"
       }
     },
     "foundations-tokens--type-roles--ar-light.png": {
@@ -1481,8 +1481,8 @@
       "combo": "ar-light",
       "width": 1280,
       "height": 944,
-      "originalSha256": "0e5fea65e2ffaa4380ab01bce8c2a99a2d60c91cae3f7d0c9debc327e54119c1",
-      "overrideSha256": "39cfc7721b159d042a70872828cab634eb2d90ccda54ac645e2ff88299ec2acc",
+      "originalSha256": "fc9e7a2a47eb814d5d3f463494c8b7ba105a72a1e4979b166e12e9f9c0e39d9f",
+      "overrideSha256": "6844ea4ce94d863bee755672a3c508a10fab48371753218e559bc67d5bfa8276",
       "reviewedChangedPixels": 19,
       "affectedGlyphs": [
         "5",
@@ -1537,8 +1537,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
-        "layoutSha256": "fa8344b34ee17db5d912df2d9dd605b45730a4904eebf9a070ddd524bcb01a87"
+        "textSha256": "ce0d89c5574a221b16fe3aee7321cf2a2e2708a1599f40ddc9950d64586b6c0e",
+        "layoutSha256": "1f63f52c540adde1d1e1f7121b1a1e9eca47a14de24699fbcec02b37d824d9f6"
       }
     },
     "foundations-tokens--type-roles--ar-dark.png": {
@@ -1546,8 +1546,8 @@
       "combo": "ar-dark",
       "width": 1280,
       "height": 944,
-      "originalSha256": "9092c1697b36471e29a7059df0e93a14361025ba1c37cc3e5223b811d4f194e0",
-      "overrideSha256": "6d88a9e27aa16db207e099921fb523b8a4600ae46102a5aa0f61e4bebdd3dfef",
+      "originalSha256": "9e32060796e7963fc6467f2586832e84eb583629ece8badbfe358baba89e0261",
+      "overrideSha256": "08846ba0327ececf1b540a5250dd8dae3b2e0765a3ade808b25af5fcf692c758",
       "reviewedChangedPixels": 35,
       "affectedGlyphs": [
         "2",
@@ -1633,8 +1633,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
-        "layoutSha256": "fa8344b34ee17db5d912df2d9dd605b45730a4904eebf9a070ddd524bcb01a87"
+        "textSha256": "ce0d89c5574a221b16fe3aee7321cf2a2e2708a1599f40ddc9950d64586b6c0e",
+        "layoutSha256": "1f63f52c540adde1d1e1f7121b1a1e9eca47a14de24699fbcec02b37d824d9f6"
       }
     },
     "foundations-tokens--type-roles--de-light.png": {
@@ -1642,8 +1642,8 @@
       "combo": "de-light",
       "width": 1280,
       "height": 875,
-      "originalSha256": "806b31ebd7b2828d5e3a8aa07dff4593a60d8413843001a8663bc87829a8d186",
-      "overrideSha256": "f0b4cf3a7f9914e0c134fa4d92c9f6fc253d21b853a424dc4df012b0eef2375d",
+      "originalSha256": "1f8f9ce5e3cdc083304be081ee56c837422a4f40339ece8ccca6b253827a717f",
+      "overrideSha256": "caa160fcdc2fea164ecdadd8ab2a1ad7272998dcdb376ed3250b5f137cc6eef7",
       "reviewedChangedPixels": 19,
       "affectedGlyphs": [
         "5",
@@ -1698,8 +1698,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
-        "layoutSha256": "37fcea9467ca478d184ef0ee10cc5d1f12b020eebb8c0ac4cc34584b82237715"
+        "textSha256": "ce0d89c5574a221b16fe3aee7321cf2a2e2708a1599f40ddc9950d64586b6c0e",
+        "layoutSha256": "049bb73a113267d3b3e8fcddbbea9e6403fff34ab2e347902e0a3353ede21bae"
       }
     },
     "foundations-tokens--type-roles--fr-dark.png": {
@@ -1707,8 +1707,8 @@
       "combo": "fr-dark",
       "width": 1280,
       "height": 875,
-      "originalSha256": "53f70aaa6baa60a256d343f495dd3e1df7c366fb4368f448c9f5e0d1b87de7e0",
-      "overrideSha256": "d193637020f985d400f7574a56d2af40f16812941f544b32674409a6415b4408",
+      "originalSha256": "27f681e9e8241b6b78f7514ac17cf57a5f04926a4e40cc09b53e374bc5bfd8e3",
+      "overrideSha256": "ce1f252783f9676f5ad22660ed6acca2e65ad7c7602e1039ff82a8bad532b109",
       "reviewedChangedPixels": 35,
       "affectedGlyphs": [
         "2",
@@ -1794,8 +1794,8 @@
         ]
       },
       "semantics": {
-        "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
-        "layoutSha256": "37fcea9467ca478d184ef0ee10cc5d1f12b020eebb8c0ac4cc34584b82237715"
+        "textSha256": "ce0d89c5574a221b16fe3aee7321cf2a2e2708a1599f40ddc9950d64586b6c0e",
+        "layoutSha256": "049bb73a113267d3b3e8fcddbbea9e6403fff34ab2e347902e0a3353ede21bae"
       }
     },
     "data-paginatedtable--legacy--en-light.png": {
@@ -1803,8 +1803,8 @@
       "combo": "en-light",
       "width": 1280,
       "height": 933,
-      "originalSha256": "25db7c5e631fa10e82c257e211b5bc5474ae0f9ea0d902ff041d49d4c5d29397",
-      "overrideSha256": "bf766749817dac4caa8d3bd4d550531c4f7801e2d9f95ba9bba1401114842a05",
+      "originalSha256": "322261f821b7d416a12a3c547a418bb478073f990f00fcdf67a58b48a0796a6e",
+      "overrideSha256": "239a45179cbba9cb1be1c70b507404dc563daf671ad17df8bd3c7de5558343bd",
       "reviewedChangedPixels": 12,
       "affectedGlyphs": [
         "1"
@@ -1815,16 +1815,16 @@
       "platformFonts": {
         "#storybook-root input": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 3
           }
         ]
       },
       "semantics": {
         "textSha256": "4f6b71da3b563faf847c40381e6203e3c7a2d21a765e05fd0cebaed977fb2083",
-        "layoutSha256": "82f80ef553ae1bfcfd6b808acff55aa51e9d5d9b946e4f18102898564958c510"
+        "layoutSha256": "6debd6f27e418c6bef1cb9cf5c4c381fef9f9acac7c57fcb84627e0f33fbe83e"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -1838,8 +1838,8 @@
       "combo": "en-dark",
       "width": 1280,
       "height": 933,
-      "originalSha256": "a4c83bc69fee39240bcfbaacaafdc07bdfd757790a0e67ef77414a768e1311c2",
-      "overrideSha256": "ac290bcb232429817aaf8c0801111f6c2a0b80082c0b3445e9da31dae5a0c516",
+      "originalSha256": "785a7aa25cebd7ee184a0f89eff0ad92ec2c81f4c188ae7f6115c52a35022d06",
+      "overrideSha256": "5a6b265c5097794cd83030ae56f4d6cbd24d4a5404a2ac86b62c1131b4d4941f",
       "reviewedChangedPixels": 6,
       "affectedGlyphs": [
         "1"
@@ -1850,16 +1850,16 @@
       "platformFonts": {
         "#storybook-root input": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 3
           }
         ]
       },
       "semantics": {
         "textSha256": "4f6b71da3b563faf847c40381e6203e3c7a2d21a765e05fd0cebaed977fb2083",
-        "layoutSha256": "82f80ef553ae1bfcfd6b808acff55aa51e9d5d9b946e4f18102898564958c510"
+        "layoutSha256": "6debd6f27e418c6bef1cb9cf5c4c381fef9f9acac7c57fcb84627e0f33fbe83e"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -1873,8 +1873,8 @@
       "combo": "ar-light",
       "width": 1280,
       "height": 942,
-      "originalSha256": "80424984fbf4617f845fa775274dc8bb6224c165a47206e408e7c9f8c20cb599",
-      "overrideSha256": "658fde0e813c37072d61d8b5183224f0504ee4ac08ffb40d2fe8607bcb997e2d",
+      "originalSha256": "3fff0d5317ac17cb12ab6783143dd2c7aa41143abb7905e89d140665d22b6181",
+      "overrideSha256": "2740ffeca49424c903b713bfe3c9bbcbd16e338bad6af4c90c946ea4f99ba886",
       "reviewedChangedPixels": 12,
       "affectedGlyphs": [
         "1"
@@ -1885,16 +1885,16 @@
       "platformFonts": {
         "#storybook-root input": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 3
           }
         ]
       },
       "semantics": {
         "textSha256": "02d7b9609199321b7318579fec46e1cbd7529b0c5a0e506d5bb28991095fc6fa",
-        "layoutSha256": "21e2f8c7d2231f9a61edcdb48fd2c3a97fdc31bed3ed0da2d5eb17ee67137f12"
+        "layoutSha256": "2a9ebc9945ae5fc06bde1fafeebfab3a2aef884d6069f46296d391e3659d716e"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -1908,8 +1908,8 @@
       "combo": "ar-dark",
       "width": 1280,
       "height": 942,
-      "originalSha256": "8a01e5381391db5dede96677becc1ecc589317d8e646fb7af0b4dad588750fd7",
-      "overrideSha256": "1e16a85e2bdf60b3e3800c07f96d493136c3b7f72d2edd61edc655dc65145c60",
+      "originalSha256": "55cbe35ccb9610cabc1a309e09f70f7193533ed7dbdf0f75e25345369536a785",
+      "overrideSha256": "32123e4d96dfb3a959be7da6b6b1b76fb8707bc49312ea0e11481398cbc85f6e",
       "reviewedChangedPixels": 6,
       "affectedGlyphs": [
         "1"
@@ -1920,16 +1920,16 @@
       "platformFonts": {
         "#storybook-root input": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 3
           }
         ]
       },
       "semantics": {
         "textSha256": "02d7b9609199321b7318579fec46e1cbd7529b0c5a0e506d5bb28991095fc6fa",
-        "layoutSha256": "21e2f8c7d2231f9a61edcdb48fd2c3a97fdc31bed3ed0da2d5eb17ee67137f12"
+        "layoutSha256": "2a9ebc9945ae5fc06bde1fafeebfab3a2aef884d6069f46296d391e3659d716e"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -1943,8 +1943,8 @@
       "combo": "de-light",
       "width": 1280,
       "height": 933,
-      "originalSha256": "3e1ac5c88c1d68a6a2dbbaa1af843c475350a15d3dbf9b584a38a531ff11887a",
-      "overrideSha256": "88c352af81611d7232045bb8a06081e63d6f5a00cfaf511ec350ae05ddc901e7",
+      "originalSha256": "c82d858805a941e7875b67f290c2b5e85f942f3f47befbf7c8326202aaa1e64a",
+      "overrideSha256": "65b0f35d6ea81fd793411dc3a05016e874b1ef78151ffa2caef5acc87fa1cea6",
       "reviewedChangedPixels": 12,
       "affectedGlyphs": [
         "1"
@@ -1955,16 +1955,16 @@
       "platformFonts": {
         "#storybook-root input": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 3
           }
         ]
       },
       "semantics": {
         "textSha256": "02a940874924f7e8c1dce354c066e2e0dd142b42e43f5bdf28deeb2d9e138db3",
-        "layoutSha256": "27d93ad43227acb7feb5685d313fedadd736690a247d4a38935c731c0819a3eb"
+        "layoutSha256": "521aa965ec2e11bd1ad48940f7ce6546d714fc3b6c183deb70963824925d2196"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -1978,8 +1978,8 @@
       "combo": "fr-dark",
       "width": 1280,
       "height": 933,
-      "originalSha256": "81058ecbceb6033a5923428355214282056d3a2186eb69e33657b15e72aea692",
-      "overrideSha256": "5ae18c2ad35816463bcc253ec7fd5343674c367b106619f22bc88fe22dfeb02d",
+      "originalSha256": "1d12e60ffb30068e8a609845e9def1c40e32b25dadef1d2a58c32ed3434c4602",
+      "overrideSha256": "6644f086b6b0a66d73adb5e5ba6470f280ff17e3f69cb972584027d62f76d53c",
       "reviewedChangedPixels": 6,
       "affectedGlyphs": [
         "1"
@@ -1990,16 +1990,16 @@
       "platformFonts": {
         "#storybook-root input": [
           {
-            "familyName": "Arial",
-            "postScriptName": "ArialMT",
-            "isCustomFont": false,
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
             "glyphCount": 3
           }
         ]
       },
       "semantics": {
         "textSha256": "6fa20dcb7069dc70a4d0ae52758b993dca549f421ad75915271108ebad00e749",
-        "layoutSha256": "9ee0b8bb55f123b2db4d167331235d7e346b9ff829d1479a92c3303f63b4bb42"
+        "layoutSha256": "3f22dc354c17bc48af1d02f7afd9e84440586ec9211cca20ef800838c8347415"
       },
       "review": {
         "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
@@ -2008,5 +2008,10 @@
         "reviewedAt": "2026-10-09"
       }
     }
+  },
+  "v3FoundationsRefresh": {
+    "date": "2026-10-09",
+    "basis": "Owner continuation instruction; DS v2 tokens and self-hosted Plex. Every enumerated pair re-rendered on the exact declared renderer and matched its reviewed default pixel-for-pixel; CI remains a separate gate.",
+    "pairs": 44
   }
 }

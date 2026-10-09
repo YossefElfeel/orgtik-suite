@@ -1,5 +1,7 @@
 <!-- Maintained execution copy of the owner-designated plan. -->
 
+**Continuation instruction — 2026-10-09:** The owner said “continue till finish” after P0. Proceed through P1–P5 and review the required visual/functional evidence without further intermediate approval stops. [Progress](v3-progress.json) records each package and its actual evidence. P0 merged through PR46 as main `e82c1e9` after green CI. Online deployment remains paused and still needs a separate explicit instruction.
+
 **Current checkpoint — 2026-10-09:** P0 prepared on `feat/suite-v3-p0` from refreshed `origin/main` `c7c7e1f`. Review [the Egyptian Arabic report](v3-report.html), [A37](phase-f/amendment-A37.md), [feasibility](v3-feasibility.md), and D-075–D-080. P0 report review is pending; P1 specimens/G-DS1 and P2 Storybook/G-DS2 are pending. Tier A/B are approved scope. Existing runtime and website design are unchanged by P0; deployment remains paused.
 
 This copy is maintained in the repository. Audit counts below come from the supplied plan unless the report explicitly records source verification. Historical implementation acceptance is preserved; `backlog.csv` links old findings to release packages with qualified current statuses. A zero-pixel website design comparison uses equal content fixtures; intentional catalog text/price changes are verified separately.

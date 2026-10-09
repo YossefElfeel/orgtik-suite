@@ -79,7 +79,7 @@ export function CardHeader({ title, description, actions, className }: { title: 
 
 /** A placeholder with the shape of the content that is loading. The region should carry aria-busy. */
 export function Skeleton({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
-  return <div aria-hidden="true" className={cn("animate-pulse rounded-field bg-sunken motion-reduce:animate-none", className)} {...props} />;
+  return <div aria-hidden="true" className={cn("ot-skeleton rounded-field bg-sunken", className)} {...props} />;
 }
 
 const spinner = cva("animate-spin motion-reduce:animate-[spin_1.5s_linear_infinite]", {

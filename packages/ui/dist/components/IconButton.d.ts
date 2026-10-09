@@ -2,7 +2,7 @@ import { type ButtonHTMLAttributes, type ReactNode } from "react";
 import { type VariantProps } from "class-variance-authority";
 declare const iconButton: (props?: ({
     variant?: "primary" | "secondary" | "ghost" | null | undefined;
-    size?: "sm" | "md" | "lg" | null | undefined;
+    size?: "xs" | "sm" | "md" | "lg" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string;
 export type IconButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "aria-label" | "children"> & VariantProps<typeof iconButton> & {
     /**
@@ -14,7 +14,7 @@ export type IconButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "ari
 };
 export declare const IconButton: import("react").ForwardRefExoticComponent<Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "aria-label"> & VariantProps<(props?: ({
     variant?: "primary" | "secondary" | "ghost" | null | undefined;
-    size?: "sm" | "md" | "lg" | null | undefined;
+    size?: "xs" | "sm" | "md" | "lg" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string> & {
     /**
      * What the button does, for people who can't see the icon. Required: the Files audit found
