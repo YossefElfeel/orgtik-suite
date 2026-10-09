@@ -63,23 +63,25 @@ function priceBase(S, offer, workspace) {
   const quantity = offer.tool ? S.purchasedSeats(workspace, offer.tool, planId) : 1;
   const resolved = S.resolveForWorkspace(planId, workspace, "monthly", quantity);
   if (!resolved || resolved.currency !== currency) throw error(503, "price_unavailable", "No platform price is available in this currency.");
-  return { currency, decimals, monthly: resolved.amount, unit: resolved.unit, quantity: resolved.quantity, perUser: Boolean(plan.perUser), name: clone(tool?.name || offer.name), source: resolved.source };
+  return { currency, decimals, monthly: resolved.amount, unit: resolved.unit, quantity: resolved.quantity, perUser: Boolean(plan.perUser), name: clone(tool?.name || offer.name), source: resolved.source, ...(offer.kind === 'service' && S.db.servicePricingPolicy ? { discountPolicy: S.db.servicePricingPolicy } : {}) };
 }
 
 function priceLine(base, offer, months, count, autoRenew = false) {
-  const discount = Math.max(DURATION[months], countSaving(count));
+  const duration = base.discountPolicy?.durationSavings?.[months] ?? DURATION[months], countDiscount = base.discountPolicy ? base.discountPolicy.countBands.filter(band => count >= band.min).at(-1)?.saving || 0 : countSaving(count);
+  const discount = Math.max(duration, countDiscount);
   const scale = 10 ** base.decimals;
   const subtotal = Math.round((base.monthly * months + Number.EPSILON) * scale);
   const total = Math.round((base.monthly * months * (100 - discount) / 100 + Number.EPSILON) * scale);
   if (![subtotal, total].every(value => Number.isSafeInteger(value) && value >= 0)) throw error(503, "price_unavailable", "This offer cannot be represented safely in its billing currency.");
-  return { catalogId: offer.id, kind: offer.kind, name: base.name.en, months, autoRenew, currency: base.currency, decimals: base.decimals, monthlyMinor: Math.round(base.monthly * scale), unitMinor: Math.round(base.unit * scale), quantity: base.quantity, perUser: base.perUser, subtotal, total, saving: subtotal - total, discount, reason: DURATION[months] >= countSaving(count) ? "duration" : "bundle", monthlyEquivalent: total / months, fulfillment: offer.fulfillment, ...(offer.planId ? { planId: offer.planId, tool: offer.tool } : { serviceId: offer.serviceId }), source: base.source };
+  return { catalogId: offer.id, kind: offer.kind, name: base.name.en, months, autoRenew, currency: base.currency, decimals: base.decimals, monthlyMinor: Math.round(base.monthly * scale), unitMinor: Math.round(base.unit * scale), quantity: base.quantity, perUser: base.perUser, subtotal, total, saving: subtotal - total, discount, reason: duration >= countDiscount ? "duration" : "bundle", monthlyEquivalent: total / months, fulfillment: offer.fulfillment, ...(offer.planId ? { planId: offer.planId, tool: offer.tool } : { serviceId: offer.serviceId }), source: base.source };
 }
 
 function policy(S, resolved) {
-  return { id: "website-offers-v1", terms: MONTHS, durationSavings: DURATION, countBands: BANDS.map(min => ({ min, saving: countSaving(min) })), tieWinner: "duration", countScope: "group", rounding: "full-period-line-currency-decimals", priceVersion: S.db.priceVersion, tax: S.taxForWorkspace(resolved.workspace) };
+  return { id: "website-offers-v1", terms: MONTHS, durationSavings: DURATION, countBands: BANDS.map(min => ({ min, saving: countSaving(min) })), ...(S.db.servicePricingPolicy ? { serviceDurationSavings: clone(S.db.servicePricingPolicy.durationSavings), serviceCountBands: clone(S.db.servicePricingPolicy.countBands) } : {}), tieWinner: "duration", countScope: "group", rounding: "full-period-line-currency-decimals", priceVersion: S.db.priceVersion, tax: S.taxForWorkspace(resolved.workspace) };
 }
 
 function publicCatalog(S, resolved) {
+  require('../sales/service-catalog').applyScheduled(S);
   const pricingPolicy = policy(S, resolved), currency = resolved.region.currency, decimals = S.db.currencies[currency]?.decimals;
   const available = S.db.websiteOffers.filter(offer => {
     const plan = S.db.plans.find(row => row.id === (offer.planId || offer.serviceId));
@@ -98,6 +100,7 @@ function publicCatalog(S, resolved) {
 }
 
 function groupsQuote(S, groups, resolved) {
+  require('../sales/service-catalog').applyScheduled(S);
   if (!Array.isArray(groups) || !groups.length || groups.length > 20) throw error(422, "invalid_groups", "Choose at least one package.");
   const seen = new Set(), groupIds = new Set();
   const normalized = groups.map(group => {

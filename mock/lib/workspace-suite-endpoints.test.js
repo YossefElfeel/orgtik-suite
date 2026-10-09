@@ -156,5 +156,23 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     const germany = good(await call('sos', '/v1/public/catalog', null, 'GET', undefined, { 'x-mock-country': 'DE' })).items.find(row => row.id === offer.id);
     assert.equal(france.monthlyMinor, 43200); assert.equal(germany.monthlyMinor, 65400); assert.equal(france.currency, 'EUR');
     assert.equal(JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders), immutablePaid);
+    const beforePreview = JSON.stringify(require('../apps/admin').exportState());
+    const stagedNames = Object.fromEntries(['en', 'ar', 'de', 'fr', 'it'].map(locale => [locale, `Scheduled ${locale}`]));
+    good(await call('sales', `/api/suite/services/catalog/offers/${encodeURIComponent(offer.id)}`, crmToken, 'PATCH', { name: stagedNames }));
+    const savedDraft = JSON.stringify(require('../apps/admin').exportState());
+    assert.equal(good(await call('sales', '/api/suite/services/catalog/preview?country=CH', crmToken)).items.find(row => row.id === offer.id).name, stagedNames.en);
+    assert.equal(JSON.stringify(require('../apps/admin').exportState()), savedDraft, 'Preview must not commit business effects.');
+    const scheduled = good(await call('sales', '/api/suite/services/catalog/publish', crmToken, 'POST', { operationId: 'scheduled-service-publication', effectiveAt: '2026-10-08T09:00:00Z' }));
+    assert.equal(scheduled.state, 'scheduled'); assert.notEqual(good(await call('sos', '/v1/public/catalog', null)).items.find(row => row.id === offer.id).name, stagedNames.en);
+    const publication = good(await call('sales', '/api/suite/services/catalog/publication', crmToken)); assert.ok(publication.scheduled.some(row => row.id === scheduled.id)); assert.ok(publication.history.length >= 2);
+    const S = require('../apps/admin').getStore(), candidate = { ...S, db: JSON.parse(JSON.stringify(S.db)), now: () => Date.parse('2026-10-08T09:00:00Z'), log: () => {} }; candidate.workspace = id => candidate.db.workspaces.find(row => row.id === id);
+    require('../apps/sales/service-catalog').applyScheduled(candidate);
+    assert.equal(candidate.db.websiteOffers.find(row => row.id === offer.id).name.en, stagedNames.en); assert.equal(candidate.workspace('ws_orgtik').suite.serviceSchedules.find(row => row.id === scheduled.id).state, 'published');
+    const appliedVersion = candidate.db.priceVersion; require('../apps/sales/service-catalog').applyScheduled(candidate); assert.equal(candidate.db.priceVersion, appliedVersion);
+    good(await call('sales', `/api/suite/services/catalog/schedules/${scheduled.id}/cancel`, crmToken, 'POST', {}));
+    good(await call('sales', '/api/suite/services/catalog/policy', crmToken, 'PATCH', { durationSavings: { 1: 0, 3: 7, 6: 12, 12: 20 }, countBands: [{ min: 1, saving: 0 }, { min: 2, saving: 6 }, { min: 3, saving: 11 }, { min: 5, saving: 16 }] }));
+    good(await call('sales', '/api/suite/services/catalog/publish', crmToken, 'POST', { operationId: 'service-policy-publication' }));
+    const policyCatalog = good(await call('sos', '/v1/public/catalog', null)); assert.equal(policyCatalog.items.find(row => row.id === offer.id).prices[3][1].discount, 7); assert.equal(policyCatalog.items.find(row => row.kind === 'software').prices[3][1].discount, 5); assert.equal(policyCatalog.policy.serviceDurationSavings[12], 20);
+    assert.equal(JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders), immutablePaid);
   } finally { await new Promise(resolve => server.close(resolve)); fs.rmSync(folder, { recursive: true, force: true }); }
 });

@@ -91,7 +91,11 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command }) {
   app.get('/api/suite/services/catalog', read(() => services.catalog(S, principal)));
   app.patch('/api/suite/services/catalog/offers/:id', write(req => services.saveOffer(S, principal, req.params.id, req.body)));
   app.patch('/api/suite/services/catalog/bundles/:id', write(req => services.saveBundle(S, principal, req.params.id, req.body)));
-  app.post('/api/suite/services/catalog/publish', write(req => services.publish(S, principal, req.get('idempotency-key') || req.body.operationId)));
+  app.post('/api/suite/services/catalog/publish', write(req => services.publish(S, principal, req.get('idempotency-key') || req.body.operationId, { effectiveAt: req.body.effectiveAt })));
+  app.get('/api/suite/services/catalog/publication', read(() => services.publication(S, principal)));
+  app.get('/api/suite/services/catalog/preview', read(req => services.preview(S, principal, String(req.query.country || 'CH'))));
+  app.patch('/api/suite/services/catalog/policy', write(req => services.savePolicy(S, principal, req.body)));
+  app.post('/api/suite/services/catalog/schedules/:id/cancel', write(req => services.cancelSchedule(S, principal, req.params.id)));
   app.get('/api/suite/services/requests', read(() => services.requests(S, principal)));
   app.get('/api/suite/services/staff', read(() => services.staff(S, identity, principal)));
   app.post('/api/suite/services/requests/:id/actions', write(req => services.requestAction(S, identity, principal, req.params.id, req.body)));
