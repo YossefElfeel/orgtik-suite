@@ -76,14 +76,26 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command }) {
   }));
   app.get('/api/suite/tasks/projects', read(req => {
     connectors.requireConnection(workspace, currentContext(), String(req.query.source), 'tasks', { targetWrite: true });
-    const data = runtimeFor('tasks').bootstrap(currentContext());
-    return data.projects.filter(row => !row.archivedAt);
+    return runtimeFor('tasks').connectedProjects(currentContext());
+  }));
+  app.get('/api/suite/tasks/references', read(req => {
+    const ctx = currentContext(), source = String(req.query.source), sourceId = String(req.query.sourceId || ''), ids = String(req.query.ids || '').split(',').filter(Boolean).map(Number);
+    if (!['hr', 'crm', 'chat'].includes(source) || !sourceId || ids.length > 50 || ids.some(id => !Number.isSafeInteger(id) || id < 1)) throw fail(422, 'invalid_references', 'Choose up to fifty source-owned task references.');
+    const connection = connectors.list(workspace, ctx).find(row => row.source === source && row.target === 'tasks');
+    if (!connection?.enabled || !connectors.admitted(ctx.tools[source]) || !connectors.admitted(ctx.tools.tasks)) throw fail(403, 'connection_access_required', 'Current source and Tasks access are required.');
+    const data = runtimeFor(source).bootstrap(ctx), records = source === 'hr' ? data.employees : source === 'chat' ? data.messages : [...data.contacts, ...data.projects];
+    if (!records.some(row => String(row.id) === sourceId)) throw fail(404, 'source_not_found', 'This source record was not found.');
+    return runtimeFor('tasks').suiteFeed(ctx).tasks.filter(task => ids.includes(task.id) && task.source?.app === source && String(task.source.id) === sourceId).map(task => ({ id: task.id, title: task.title, status: task.status, path: `/projects/${task.projectId}/lists?task-id=${task.id}` }));
   }));
   const services = require('../apps/sales/service-catalog');
   app.get('/api/suite/services/catalog', read(() => services.catalog(S, principal)));
   app.patch('/api/suite/services/catalog/offers/:id', write(req => services.saveOffer(S, principal, req.params.id, req.body)));
   app.patch('/api/suite/services/catalog/bundles/:id', write(req => services.saveBundle(S, principal, req.params.id, req.body)));
-  app.post('/api/suite/services/catalog/publish', write(req => services.publish(S, principal, req.get('idempotency-key') || req.body.operationId)));
+  app.post('/api/suite/services/catalog/publish', write(req => services.publish(S, principal, req.get('idempotency-key') || req.body.operationId, { effectiveAt: req.body.effectiveAt })));
+  app.get('/api/suite/services/catalog/publication', read(() => services.publication(S, principal)));
+  app.get('/api/suite/services/catalog/preview', read(req => services.preview(S, principal, String(req.query.country || 'CH'))));
+  app.patch('/api/suite/services/catalog/policy', write(req => services.savePolicy(S, principal, req.body)));
+  app.post('/api/suite/services/catalog/schedules/:id/cancel', write(req => services.cancelSchedule(S, principal, req.params.id)));
   app.get('/api/suite/services/requests', read(() => services.requests(S, principal)));
   app.get('/api/suite/services/staff', read(() => services.staff(S, identity, principal)));
   app.post('/api/suite/services/requests/:id/actions', write(req => services.requestAction(S, identity, principal, req.params.id, req.body)));

@@ -51,11 +51,7 @@ function saveBundle(S, principal, id, body) {
   bundle.draft = { ...(bundle.draft || {}), ...patch, updatedAt: S.iso(S.now()), updatedBy: principal.user.key };
   return clone(bundle);
 }
-function publish(S, principal, operationId) {
-  authorize(principal, { write: true });
-  if (!/^[\w.:-]{1,200}$/.test(operationId || '')) throw fail(422, 'operation_id_required', 'Supply the original publish reference.');
-  const workspace = S.workspace(principal.context.workspaceContext.workspace.id), key = `${principal.user.id}:service-publish:${operationId}`;
-  if (workspace.commandOperations?.[key]) return clone(workspace.commandOperations[key].result);
+function applyDrafts(S, actorKey) {
   const changed = [];
   for (const offer of S.db.websiteOffers.filter(row => row.kind === 'service' && row.draft)) {
     const { updatedAt, updatedBy, status, regionalPrices, countryPrices, ...draft } = offer.draft;
@@ -70,15 +66,64 @@ function publish(S, principal, operationId) {
     for (const [code, price] of Object.entries(countryPrices || {})) { const country = S.db.countries[code], key = `${offer.serviceId}:monthly`; country.fixed ??= {}; if (price === null) delete country.fixed[key]; else country.fixed[key] = price; }
     Object.assign(offer, clone(draft)); if (draft.name) { service.name = clone(draft.name); plan.name = clone(draft.name); }
     if (status) service.status = status;
-    delete offer.draft; offer.publishedAt = S.iso(S.now()); offer.publishedBy = principal.user.key; changed.push(offer.id);
+    delete offer.draft; offer.publishedAt = S.iso(S.now()); offer.publishedBy = actorKey; changed.push(offer.id);
   }
   for (const bundle of S.db.websiteOfferBundles.filter(row => row.kind === 'service' && row.draft)) { const { updatedAt, updatedBy, ...draft } = bundle.draft; Object.assign(bundle, clone(draft)); delete bundle.draft; changed.push(bundle.id); }
+  if (S.db.servicePricingPolicyDraft) { S.db.servicePricingPolicy = clone(S.db.servicePricingPolicyDraft); delete S.db.servicePricingPolicyDraft; changed.push('service-pricing-policy'); }
   if (changed.length) S.db.priceVersion++;
   const result = { managedIn: 'crm', changed, priceVersion: S.db.priceVersion, at: S.iso(S.now()), applyMode: 'new_public_quotes' };
-  workspace.commandOperations ??= {}; workspace.commandOperations[key] = { result: clone(result) };
-  S.log(principal.user.key, 'service_catalog_published', String(S.db.priceVersion), { workspaceId: workspace.id, changed, applyMode: result.applyMode });
   return result;
 }
+function captureDrafts(S) { return { offers: S.db.websiteOffers.filter(row => row.kind === 'service' && row.draft).map(row => ({ id: row.id, draft: clone(row.draft) })), bundles: S.db.websiteOfferBundles.filter(row => row.kind === 'service' && row.draft).map(row => ({ id: row.id, draft: clone(row.draft) })), policy: S.db.servicePricingPolicyDraft ? clone(S.db.servicePricingPolicyDraft) : null }; }
+function setDrafts(S, value) { for (const row of S.db.websiteOffers) if (row.kind === 'service') delete row.draft; for (const row of S.db.websiteOfferBundles) if (row.kind === 'service') delete row.draft; delete S.db.servicePricingPolicyDraft; for (const { id, draft } of value.offers) { const row = S.db.websiteOffers.find(row => row.id === id && row.kind === 'service'); if (!row) throw fail(409, 'catalog_changed', 'Review the current catalog.'); row.draft = clone(draft); } for (const { id, draft } of value.bundles) { const row = S.db.websiteOfferBundles.find(row => row.id === id && row.kind === 'service'); if (!row) throw fail(409, 'catalog_changed', 'Review the current bundles.'); row.draft = clone(draft); } if (value.policy) S.db.servicePricingPolicyDraft = clone(value.policy); }
+function history(S, result, drafts, by) { const workspace = S.workspace('ws_orgtik'); workspace.suite ??= {}; workspace.suite.serviceHistory ??= []; workspace.suite.serviceHistory.unshift({ ...clone(result), by, drafts: clone(drafts) }); workspace.suite.serviceHistory = workspace.suite.serviceHistory.slice(0, 30); S.log(by, 'service_catalog_published', String(result.priceVersion), { workspaceId: workspace.id, tool: 'crm', changed: result.changed, applyMode: result.applyMode }); }
+function publish(S, principal, operationId, { effectiveAt } = {}) {
+  authorize(principal, { write: true });
+  if (!/^[\w.:-]{1,200}$/.test(operationId || '')) throw fail(422, 'operation_id_required', 'Supply the original publish reference.');
+  const workspace = S.workspace(principal.context.workspaceContext.workspace.id), key = `${principal.user.id}:service-publish:${operationId}`;
+  const operation = require('../../lib/workspace-command').makeWorkspaceOperation({ id: operationId, workspaceId: workspace.id, actor: { userId: principal.user.id }, method: 'POST', path: '/services/catalog/publish', body: { effectiveAt: effectiveAt || null } });
+  const prior = workspace.commandOperations?.[key];
+  if (prior) { if (prior.fingerprint && prior.fingerprint !== operation.fingerprint) throw fail(409, 'operation_conflict', 'This publish reference was already used differently.'); return clone(prior.result); }
+  const drafts = captureDrafts(S);
+  if (JSON.stringify(drafts).length > 100000) throw fail(422, 'catalog_batch_limit', 'Publish a smaller catalog batch.');
+  let result;
+  if (effectiveAt) {
+    const at = Date.parse(effectiveAt); if (!Number.isFinite(at) || at <= S.now() || at > S.now() + 366 * 864e5) throw fail(422, 'invalid_publish_date', 'Choose a future publish date within one year.');
+    if (!drafts.offers.length && !drafts.bundles.length && !drafts.policy) throw fail(409, 'no_draft_changes', 'Save changes before scheduling.');
+    workspace.suite ??= {}; workspace.suite.serviceSchedules ??= [];
+    if (workspace.suite.serviceSchedules.filter(row => row.state === 'scheduled').length >= 20) throw fail(422, 'schedule_limit', 'Review existing schedules first.');
+    const scheduled = { id: S.id('service_schedule'), state: 'scheduled', effectiveAt: S.iso(at), by: principal.user.key, drafts, createdAt: S.iso(S.now()) };
+    workspace.suite.serviceSchedules.push(scheduled); setDrafts(S, { offers: [], bundles: [], policy: null });
+    result = { managedIn: 'crm', id: scheduled.id, state: 'scheduled', effectiveAt: scheduled.effectiveAt, changed: [...drafts.offers, ...drafts.bundles].map(row => row.id), priceVersion: S.db.priceVersion };
+  } else { result = applyDrafts(S, principal.user.key); history(S, result, drafts, principal.user.key); }
+  workspace.commandOperations ??= {}; workspace.commandOperations[key] = { fingerprint: operation.fingerprint, result: clone(result) };
+  return result;
+}
+function applyScheduled(S) {
+  const workspace = S.workspace('ws_orgtik'); if (!workspace) return;
+  for (const row of (workspace.suite?.serviceSchedules || []).filter(row => row.state === 'scheduled').sort((a, b) => Date.parse(a.effectiveAt) - Date.parse(b.effectiveAt))) if (Date.parse(row.effectiveAt) <= S.now()) {
+    const working = captureDrafts(S); setDrafts(S, row.drafts); const result = applyDrafts(S, row.by); setDrafts(S, working); row.state = 'published'; row.publishedAt = S.iso(S.now()); row.priceVersion = result.priceVersion; history(S, { ...result, scheduleId: row.id }, row.drafts, row.by);
+  }
+}
+function savePolicy(S, principal, body) {
+  authorize(principal, { write: true });
+  const { durationSavings, countBands } = body;
+  if (!durationSavings || Object.keys(durationSavings).some(key => !['1', '3', '6', '12'].includes(key)) || [1, 3, 6, 12].some(month => !Number.isFinite(durationSavings[month]) || durationSavings[month] < 0 || durationSavings[month] > 60) || durationSavings[1] !== 0 || !Array.isArray(countBands) || countBands.length !== 4 || [1, 2, 3, 5].some(min => !countBands.some(band => band.min === min && Number.isFinite(band.saving) && band.saving >= 0 && band.saving <= 60)) || countBands.find(band => band.min === 1).saving !== 0) throw fail(422, 'invalid_service_policy', 'Use the four supported terms and quantity bands with discounts from 0 to 60%.');
+  S.db.servicePricingPolicyDraft = { durationSavings: clone(durationSavings), countBands: clone(countBands).sort((a, b) => a.min - b.min) }; return clone(S.db.servicePricingPolicyDraft);
+}
+function publication(S, principal) {
+  authorize(principal); applyScheduled(S); const workspace = S.workspace('ws_orgtik');
+  return { drafts: captureDrafts(S), policy: clone(S.db.servicePricingPolicy || { durationSavings: { 1: 0, 3: 5, 6: 10, 12: 15 }, countBands: [{ min: 1, saving: 0 }, { min: 2, saving: 5 }, { min: 3, saving: 10 }, { min: 5, saving: 15 }] }), history: clone(workspace.suite?.serviceHistory || []), scheduled: (workspace.suite?.serviceSchedules || []).map(({ drafts, ...row }) => clone(row)) };
+}
+function preview(S, principal, country = 'CH') {
+  authorize(principal); if (!Object.hasOwn(S.db.countries, country)) throw fail(422, 'invalid_country', 'Choose a known country.');
+  const candidate = { ...S, db: clone(S.db), log: () => {} }; candidate.workspace = id => candidate.db.workspaces.find(row => row.id === id);
+  candidate.resolveForWorkspace = (planId, workspace, cycle = 'monthly', quantity) => S.pricing.resolveWorkspaceLine(candidate.db, { planId, cycle, workspace, seats: quantity ?? S.purchasedSeats(workspace, candidate.db.plans.find(row => row.id === planId)?.tool, planId) });
+  applyDrafts(candidate, principal.user.key);
+  const currency = candidate.db.countries[country].currency;
+  return require('../admin/website-offers').publicCatalog(candidate, { region: { country, currency, source: 'service-preview' }, workspace: { country, currency, billing: { country }, members: [], lines: [] } });
+}
+function cancelSchedule(S, principal, id) { authorize(principal, { write: true }); const row = S.workspace('ws_orgtik').suite?.serviceSchedules?.find(row => row.id === id); if (!row || row.state !== 'scheduled') throw fail(409, 'schedule_unavailable', 'This schedule is no longer pending.'); row.state = 'cancelled'; row.cancelledAt = S.iso(S.now()); row.cancelledBy = principal.user.key; return { id, state: row.state }; }
 function requests(S, principal) {
   const permissions = authorize(principal, { catalog: false }), assignedOnly = permissions.includes('services:edit:assigned') && !permissions.includes('services:edit');
   const writable = !principal.readOnly && principal.context.workspaceContext.tools.crm.canWrite;
@@ -108,4 +153,4 @@ function requestAction(S, identity, principal, id, body) {
   else throw fail(422, 'invalid_service_action', 'Choose a supported service action.');
   row.updatedAt = at; S.log(principal.user.key, `service_${body.action}`, id, { workspaceId: row.workspaceId, managedIn: 'crm' }); return clone(row);
 }
-module.exports = { authorize, catalog, saveOffer, saveBundle, publish, requests, staff, requestAction };
+module.exports = { authorize, catalog, saveOffer, saveBundle, publish, applyScheduled, publication, preview, savePolicy, cancelSchedule, requests, staff, requestAction };
