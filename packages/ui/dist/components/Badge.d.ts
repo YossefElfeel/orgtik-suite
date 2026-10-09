@@ -9,9 +9,10 @@ export declare const badgeVariants: (props?: ({
 } & import("class-variance-authority/types").ClassProp) | undefined) => string;
 export type BadgeProps = HTMLAttributes<HTMLSpanElement> & VariantProps<typeof badgeVariants> & {
     icon?: ReactNode;
+    dot?: boolean;
 };
 /** A short label. Colour is never the only signal: pair a tone with words, and an icon for status. */
-export declare function Badge({ className, tone, emphasis, size, icon, children, ...props }: BadgeProps): import("react").JSX.Element;
+export declare function Badge({ className, tone, emphasis, size, icon, dot, children, ...props }: BadgeProps): import("react").JSX.Element;
 export type StatusBadgeProps<E extends StatusEntity> = Omit<BadgeProps, "tone" | "icon" | "children"> & {
     entity: E;
     state: StatusState<E>;

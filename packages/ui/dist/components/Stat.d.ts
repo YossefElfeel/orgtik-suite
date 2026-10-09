@@ -12,7 +12,7 @@ export type StatChange = {
  * One figure with its label and, optionally, how it moved. The change says its direction in words
  * as well as with an arrow and a tone, so it doesn't depend on colour.
  */
-export declare function Stat({ label, value, change, hint, icon, loading, className, }: {
+export declare function Stat({ label, value, change, hint, icon, loading, className, sparkline, }: {
     label: ReactNode;
     value: ReactNode;
     change?: StatChange;
@@ -20,5 +20,6 @@ export declare function Stat({ label, value, change, hint, icon, loading, classN
     icon?: ReactNode;
     loading?: boolean;
     className?: string;
+    sparkline?: number[];
 }): import("react").JSX.Element;
 //# sourceMappingURL=Stat.d.ts.map

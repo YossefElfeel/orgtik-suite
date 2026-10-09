@@ -1,0 +1,64 @@
+{
+  "checks": [
+    {
+      "name": "Search filters real story rows",
+      "pass": true
+    },
+    {
+      "name": "Compact density reaches the table",
+      "pass": true
+    },
+    {
+      "name": "Column chooser hides the selected column",
+      "pass": true
+    },
+    {
+      "name": "Keyboard column resizing changes width by ten",
+      "pass": true
+    },
+    {
+      "name": "Inline edit commits the actual row",
+      "pass": true
+    },
+    {
+      "name": "Inspector opens the selected record",
+      "pass": true
+    },
+    {
+      "name": "Saved view is listed after its callback",
+      "pass": true
+    },
+    {
+      "name": "Real editor creates a bold mark",
+      "pass": true
+    },
+    {
+      "name": "Real editor creates list structure",
+      "pass": true
+    },
+    {
+      "name": "One command-K handler opens the palette",
+      "pass": true
+    },
+    {
+      "name": "Keyboard search selects a result",
+      "pass": true
+    },
+    {
+      "name": "Mark all removes unread count",
+      "pass": true
+    },
+    {
+      "name": "Sidebar collapse changes its actual width",
+      "pass": true
+    },
+    {
+      "name": "Sidebar expansion restores the token width",
+      "pass": true
+    },
+    {
+      "name": "Access request shows success only after the promise",
+      "pass": true
+    }
+  ]
+}

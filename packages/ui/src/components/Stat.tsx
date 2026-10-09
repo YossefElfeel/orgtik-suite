@@ -27,6 +27,7 @@ export function Stat({
   icon,
   loading,
   className,
+  sparkline,
 }: {
   label: ReactNode;
   value: ReactNode;
@@ -35,6 +36,7 @@ export function Stat({
   icon?: ReactNode;
   loading?: boolean;
   className?: string;
+  sparkline?: number[];
 }) {
   const t = useStrings();
   const f = useFormatter();
@@ -42,7 +44,7 @@ export function Stat({
   const good = change && dir !== "flat" && dir === (change.good ?? "up");
   const amount = change ? (change.format === "number" ? f.number(Math.abs(change.value)) : f.percent(Math.abs(change.value), 1)) : "";
   return (
-    <div className={cn("flex min-w-0 flex-col gap-2 rounded-card border border-line bg-raised p-5", className)}>
+    <div className={cn("flex min-w-0 flex-col gap-2 rounded-card border border-line bg-raised p-5 shadow-xs", className)}>
       <div className="flex items-center gap-2 text-body-sm text-fg-muted">
         {icon ? <span aria-hidden="true" className="flex size-5 shrink-0 items-center justify-center text-fg-subtle [&>svg]:size-5">{icon}</span> : null}
         <span className="min-w-0 truncate">{label}</span>
@@ -64,6 +66,7 @@ export function Stat({
         </div>
       ) : null}
       {hint ? <p className="text-caption text-fg-subtle">{hint}</p> : null}
+      {sparkline?.length && !loading ? <svg viewBox="0 0 120 28" aria-hidden="true" className="h-7 w-full text-fg-brand"><polyline fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" points={sparkline.map((point,index) => `${2+index/(Math.max(1,sparkline.length-1))*116},${26-(point-Math.min(...sparkline))/Math.max(1,Math.max(...sparkline)-Math.min(...sparkline))*24}`).join(" ")} /></svg> : null}
     </div>
   );
 }

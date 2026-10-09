@@ -31,8 +31,8 @@ export const badgeVariants = cva("inline-flex max-w-full shrink-0 items-center g
     defaultVariants: { tone: "neutral", emphasis: "subtle", size: "md" },
 });
 /** A short label. Colour is never the only signal: pair a tone with words, and an icon for status. */
-export function Badge({ className, tone, emphasis, size, icon, children, ...props }) {
-    return (_jsxs("span", { className: cn(badgeVariants({ tone, emphasis, size }), className), ...props, children: [icon ? _jsx("span", { "aria-hidden": "true", className: "contents", children: icon }) : null, _jsx("span", { className: "truncate", children: children })] }));
+export function Badge({ className, tone, emphasis, size, icon, dot, children, ...props }) {
+    return (_jsxs("span", { className: cn(badgeVariants({ tone, emphasis, size }), className), ...props, children: [icon ? _jsx("span", { "aria-hidden": "true", className: "contents", children: icon }) : null, dot ? _jsx("span", { "aria-hidden": "true", className: "size-1.5 shrink-0 rounded-pill bg-current" }) : null, _jsx("span", { className: "truncate", children: children })] }));
 }
 /**
  * A status's label as text, in the current language, for places a badge doesn't fit (tabs,

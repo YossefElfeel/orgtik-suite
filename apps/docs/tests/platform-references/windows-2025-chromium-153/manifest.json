@@ -2283,6 +2283,156 @@
         "scope": "DS v2 monospace annotation glyph rasterization only; unchanged dimensions/text/layout/fonts.",
         "pixels": 4
       }
+    },
+    "v2-lists-and-input--list-controls--ar-dark.png": {
+      "originalSha256": "ffd05246d9926c0ccd3bc84192ddb21c96089d5fdec3acc6a6eb62101a392de6",
+      "overrideSha256": "1736f269f1aea1f84f50af544601dcc7c43db29f692a160a25dc1b4942effa41",
+      "semantics": {
+        "textSha256": "bd86007bd2620463744d75c6f32ccdb0069e3fccde9c9306f4a6fa858fac0c9d",
+        "layoutSha256": "7d0e90a145bf1ecc4f4e18e0b79a6227af3c6077c0b5a22bdfc78916c5471b3a"
+      },
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
+            "glyphCount": 12
+          }
+        ],
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 8
+          }
+        ]
+      },
+      "review": {
+        "scope": "P2 keyboard legend glyph rasterization only; unchanged dimensions/text/layout/fonts.",
+        "pixels": 6
+      }
+    },
+    "v2-lists-and-input--list-controls--de-light.png": {
+      "originalSha256": "b761468795f3207dee73213f342af5449243f2090386eeb7d4514f85a88d8f84",
+      "overrideSha256": "61f7638749c2f22f41105b7df230ecac4763a138c676de5adc84ca32051ba390",
+      "semantics": {
+        "textSha256": "ec8c123526f08416709b4d2b73e054eb5b72c87d315e2260658c88d2027e774b",
+        "layoutSha256": "5eeb494ec656f27054fcb7011729aa07094e663eba78435f8c7a72c5d1f53722"
+      },
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
+            "glyphCount": 12
+          }
+        ],
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 8
+          }
+        ]
+      },
+      "review": {
+        "scope": "P2 keyboard legend glyph rasterization only; unchanged dimensions/text/layout/fonts.",
+        "pixels": 8
+      }
+    },
+    "v2-lists-and-input--list-controls--en-dark.png": {
+      "originalSha256": "678bb8ab45a8db1caf7ffcc3f99da3971ac018d81a668e729a92cf65c69d34c9",
+      "overrideSha256": "2520d79ca345733ccfc29f12afffe132c7836d3cb208431ccded66778aefea8b",
+      "semantics": {
+        "textSha256": "74a58404d7335d22429647e842e89d11d9906c267ebaa37bd278bf4afe3b9741",
+        "layoutSha256": "0628558847852d257c4adeb03424d0b016bccf3ef55e0eb4803d170b1da646db"
+      },
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
+            "glyphCount": 12
+          }
+        ],
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 8
+          }
+        ]
+      },
+      "review": {
+        "scope": "P2 keyboard legend glyph rasterization only; unchanged dimensions/text/layout/fonts.",
+        "pixels": 2
+      }
+    },
+    "v2-lists-and-input--list-controls--en-light.png": {
+      "originalSha256": "b3c07859c0bccdce6e46e21180653e03ecc3c5cd25114a026507ea45e9ebe57f",
+      "overrideSha256": "4ff3bdbb064d1c6a54d84569e0194352cb37f079d529bccb1567c18ffd049501",
+      "semantics": {
+        "textSha256": "74a58404d7335d22429647e842e89d11d9906c267ebaa37bd278bf4afe3b9741",
+        "layoutSha256": "0628558847852d257c4adeb03424d0b016bccf3ef55e0eb4803d170b1da646db"
+      },
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
+            "glyphCount": 12
+          }
+        ],
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 8
+          }
+        ]
+      },
+      "review": {
+        "scope": "P2 keyboard legend glyph rasterization only; unchanged dimensions/text/layout/fonts.",
+        "pixels": 8
+      }
+    },
+    "v2-lists-and-input--list-controls--fr-dark.png": {
+      "originalSha256": "82938002c2e38a792d8faf61015c9d73806c0af09a807ff0c26b41cc5a34eac6",
+      "overrideSha256": "06bac1b875afe2a8b16ce8dcf39d127c914f373cd127f836e7e71a0e87f1ef17",
+      "semantics": {
+        "textSha256": "0459ff2dac97b2a150d45fccd457cfb6b3a2d438ec2556cc021c036e72ef5751",
+        "layoutSha256": "38dd7058c8e2fdf874d3d17bf15bb9307a108ef6c4a3ec6710b03c3815efb43f"
+      },
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "IBM Plex Sans",
+            "postScriptName": "IBMPlexSans-Regular",
+            "isCustomFont": true,
+            "glyphCount": 12
+          }
+        ],
+        "#storybook-root button": [
+          {
+            "familyName": "IBM Plex Sans SemiBold",
+            "postScriptName": "IBMPlexSans-SemiBold",
+            "isCustomFont": true,
+            "glyphCount": 8
+          }
+        ]
+      },
+      "review": {
+        "scope": "P2 keyboard legend glyph rasterization only; unchanged dimensions/text/layout/fonts.",
+        "pixels": 2
+      }
     }
   },
   "v3FoundationsRefresh": {
@@ -2297,5 +2447,13 @@
     "changedPairs": 18,
     "totalPixels": 294,
     "scope": "Every changed pixel lies inside a visible code annotation; text/control state/layout anchors/selected fonts and dimensions are unchanged. Defaults, 0.1 threshold, zero-pixel requirement and no-mask policy are retained."
+  },
+  "v3LibraryWindowsCIReview": {
+    "sourceCommit": "2c40ac6",
+    "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37996377927",
+    "reviewedAt": "2026-10-10",
+    "changedPairs": 5,
+    "totalPixels": 26,
+    "scope": "Every changed pixel lies inside a visible keyboard legend; text/control state/layout anchors/selected fonts and dimensions are unchanged. Defaults, 0.1 threshold, zero-pixel requirement and no-mask policy are retained."
   }
 }

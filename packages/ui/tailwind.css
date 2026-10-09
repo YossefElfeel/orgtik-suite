@@ -14,4 +14,14 @@
 ::selection { color: var(--ot-fg); background: var(--ot-brand-subtle); }
 :where(button,a,[role="button"]):focus-visible { box-shadow: 0 0 0 4px color-mix(in oklab, var(--ot-focus) 16%, transparent); }
 .ot-control:has(input:focus-visible) { box-shadow: 0 0 0 4px color-mix(in oklab, var(--ot-focus) 16%, transparent); }
+.ot-suite-sidebar[data-collapsed="true"] [data-sidebar-label] { display: none; }
+.ot-suite-sidebar[data-collapsed="true"] nav { padding-inline: 8px; }
+.ot-suite-sidebar[data-collapsed="true"] nav a { justify-content: center; padding-inline: 4px; }
+.ot-rich-text p + p { margin-block-start: .5em; }
+.ot-rich-text ul { list-style: disc; padding-inline-start: 1.5em; }
+.ot-rich-text ol { list-style: decimal; padding-inline-start: 1.5em; }
+.ot-rich-text blockquote { border-inline-start: 1px solid var(--ot-line-strong); padding-inline-start: 1em; color: var(--ot-fg-muted); }
+.ot-rich-text pre { border-radius: var(--ot-radius-field); background: var(--ot-bg-sunken); padding: 12px; overflow-x: auto; font-family: var(--ot-font-mono); }
+.ot-rich-text a { color: var(--ot-fg-brand); text-decoration: underline; }
+.ot-rich-text p.is-editor-empty:first-child::before { content: attr(data-placeholder); float: inline-start; height: 0; color: var(--ot-fg-subtle); pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .ot-skeleton { animation: none; } }

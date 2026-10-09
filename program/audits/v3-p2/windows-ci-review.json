@@ -1,0 +1,57 @@
+{
+  "reviews": [
+    {
+      "name": "v2-lists-and-input--list-controls--ar-dark.png",
+      "pixels": 6,
+      "withinKeyboardLegends": 6,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "v2-lists-and-input--list-controls--de-light.png",
+      "pixels": 8,
+      "withinKeyboardLegends": 8,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "v2-lists-and-input--list-controls--en-dark.png",
+      "pixels": 2,
+      "withinKeyboardLegends": 2,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "v2-lists-and-input--list-controls--en-light.png",
+      "pixels": 8,
+      "withinKeyboardLegends": 8,
+      "dimensions": [
+        1280,
+        800
+      ]
+    },
+    {
+      "name": "v2-lists-and-input--list-controls--fr-dark.png",
+      "pixels": 2,
+      "withinKeyboardLegends": 2,
+      "dimensions": [
+        1280,
+        800
+      ]
+    }
+  ],
+  "provenance": {
+    "sourceCommit": "2c40ac6",
+    "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37996377927",
+    "reviewedAt": "2026-10-10",
+    "changedPairs": 5,
+    "totalPixels": 26,
+    "scope": "Every changed pixel lies inside a visible keyboard legend; text/control state/layout anchors/selected fonts and dimensions are unchanged. Defaults, 0.1 threshold, zero-pixel requirement and no-mask policy are retained."
+  }
+}

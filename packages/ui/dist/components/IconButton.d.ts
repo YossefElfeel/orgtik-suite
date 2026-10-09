@@ -12,7 +12,7 @@ export type IconButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "ari
     label: string;
     icon: ReactNode;
 };
-export declare const IconButton: import("react").ForwardRefExoticComponent<Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "aria-label"> & VariantProps<(props?: ({
+export declare const IconButton: import("react").ForwardRefExoticComponent<Omit<ButtonHTMLAttributes<HTMLButtonElement>, "aria-label" | "children"> & VariantProps<(props?: ({
     variant?: "primary" | "secondary" | "ghost" | null | undefined;
     size?: "xs" | "sm" | "md" | "lg" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string> & {
