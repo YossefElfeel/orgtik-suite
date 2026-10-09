@@ -37,13 +37,14 @@ export const badgeVariants = cva(
   },
 );
 
-export type BadgeProps = HTMLAttributes<HTMLSpanElement> & VariantProps<typeof badgeVariants> & { icon?: ReactNode };
+export type BadgeProps = HTMLAttributes<HTMLSpanElement> & VariantProps<typeof badgeVariants> & { icon?: ReactNode; dot?: boolean };
 
 /** A short label. Colour is never the only signal: pair a tone with words, and an icon for status. */
-export function Badge({ className, tone, emphasis, size, icon, children, ...props }: BadgeProps) {
+export function Badge({ className, tone, emphasis, size, icon, dot, children, ...props }: BadgeProps) {
   return (
     <span className={cn(badgeVariants({ tone, emphasis, size }), className)} {...props}>
       {icon ? <span aria-hidden="true" className="contents">{icon}</span> : null}
+      {dot ? <span aria-hidden="true" className="size-1.5 shrink-0 rounded-pill bg-current" /> : null}
       <span className="truncate">{children}</span>
     </span>
   );

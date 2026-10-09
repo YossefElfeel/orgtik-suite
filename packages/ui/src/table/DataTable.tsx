@@ -14,6 +14,8 @@ import {
   type Row,
   type RowSelectionState,
   type SortingState,
+  type VisibilityState,
+  type ColumnSizingState,
 } from "@tanstack/react-table";
 import { CaretDown, CaretUp, CaretUpDown, X } from "@phosphor-icons/react";
 import { cn } from "../lib/cn.js";
@@ -22,6 +24,9 @@ import { Checkbox } from "../components/Checkbox.js";
 import { Skeleton } from "../components/Display.js";
 import { Pagination } from "../components/Navigation.js";
 import { EmptyState, ErrorState, NoPermissionState, type ListStatus } from "../components/States.js";
+import { useOrgtik } from "../provider/OrgtikProvider.js";
+import { ColumnChooser } from "../components/ColumnChooser.js";
+import { suiteText } from "../suite/strings.js";
 
 declare module "@tanstack/react-table" {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -81,6 +86,13 @@ export type DataTableProps<T> = {
   className?: string;
   density?: "comfortable" | "compact";
   stickyHeader?: boolean;
+  columnChooser?: boolean;
+  columnVisibility?: VisibilityState;
+  onColumnVisibilityChange?: OnChangeFn<VisibilityState>;
+  resizable?: boolean;
+  columnSizing?: ColumnSizingState;
+  onColumnSizingChange?: OnChangeFn<ColumnSizingState>;
+  rowActions?: (record: T) => ReactNode;
 };
 
 export function DataTable<T>({
@@ -108,8 +120,16 @@ export function DataTable<T>({
   className,
   density = "comfortable",
   stickyHeader = true,
+  columnChooser = false,
+  columnVisibility: visibilityProp,
+  onColumnVisibilityChange,
+  resizable = false,
+  columnSizing: sizingProp,
+  onColumnSizingChange,
+  rowActions,
 }: DataTableProps<T>) {
   const t = useStrings();
+  const { locale, dir: readingDirection } = useOrgtik();
   // A table wider than its box scrolls sideways; then the box is a labelled region you can focus
   // and scroll with the keyboard (WCAG 2.1.1). A table that fits adds no extra tab stop.
   const scroller = useRef<HTMLDivElement>(null);
@@ -127,15 +147,21 @@ export function DataTable<T>({
   const [innerSorting, setInnerSorting] = useState<SortingState>([]);
   const [innerPagination, setInnerPagination] = useState<PaginationState>({ pageIndex: 0, pageSize: pageSizes[0] ?? 10 });
   const [innerSelection, setInnerSelection] = useState<RowSelectionState>({});
+  const [innerVisibility, setInnerVisibility] = useState<VisibilityState>({});
+  const [innerSizing, setInnerSizing] = useState<ColumnSizingState>({});
   const sorting = sortingProp ?? innerSorting;
   const pagination = paginationProp ?? innerPagination;
   const rowSelection = selectionProp ?? innerSelection;
   const server = mode === "server";
 
   const allColumns = useMemo<ColumnDef<T, any>[]>(() => {
-    if (!selectable) return columns;
+    const fields: ColumnDef<T, any>[] = rowActions ? [...columns, { id: "__actions", header: suiteText(locale, "actions"), enableSorting: false, enableHiding: false, enableResizing: false, size: 64, meta: { width: "1%" }, cell: ({ row }) => rowActions(row.original) }] : columns;
+    if (!selectable) return fields;
     const select: ColumnDef<T, any> = {
       id: "__select",
+      enableHiding: false,
+      enableResizing: false,
+      size: 44,
       enableSorting: false,
       meta: { width: "1%" },
       header: ({ table }) => (
@@ -150,17 +176,22 @@ export function DataTable<T>({
         <Checkbox aria-label={t("selectRow")} checked={row.getIsSelected()} disabled={!row.getCanSelect()} onCheckedChange={(v) => row.toggleSelected(Boolean(v))} />
       ),
     };
-    return [select, ...columns];
-  }, [columns, selectable, t]);
+    return [select, ...fields];
+  }, [columns, selectable, t, rowActions, locale]);
 
   const table = useReactTable({
     data,
     columns: allColumns,
     getRowId,
-    state: { sorting, pagination, rowSelection },
+    state: { sorting, pagination, rowSelection, columnVisibility: visibilityProp ?? innerVisibility, columnSizing: sizingProp ?? innerSizing },
     onSortingChange: onSortingChange ?? setInnerSorting,
     onPaginationChange: onPaginationChange ?? setInnerPagination,
     onRowSelectionChange: onRowSelectionChange ?? setInnerSelection,
+    onColumnVisibilityChange: onColumnVisibilityChange ?? setInnerVisibility,
+    onColumnSizingChange: onColumnSizingChange ?? setInnerSizing,
+    enableColumnResizing: resizable,
+    columnResizeMode: "onChange",
+    columnResizeDirection: readingDirection,
     enableRowSelection: selectable,
     getCoreRowModel: getCoreRowModel(),
     ...(server
@@ -184,6 +215,7 @@ export function DataTable<T>({
 
   return (
     <div data-density={density} className={cn("flex flex-col gap-3", className)}>
+      {columnChooser ? <div className="flex justify-end"><ColumnChooser columns={table.getAllLeafColumns().map((column,index) => ({ id: column.id, label: typeof column.columnDef.header === "string" ? column.columnDef.header : column.id, visible: column.getIsVisible(), required: !column.getCanHide() || index === (selectable ? 1 : 0) }))} onChange={(id,visible) => table.getColumn(id)?.toggleVisibility(visible)} /></div> : null}
       {selectable && selected.length > 0 ? (
         <div role="region" aria-label={t("selectedCount", { count: selected.length })} className="flex flex-wrap items-center gap-3 rounded-field bg-brand-subtle px-3 py-2">
           <span className="text-body-sm font-semibold text-fg-brand">{t("selectedCount", { count: selected.length })}</span>
@@ -205,7 +237,7 @@ export function DataTable<T>({
         {...(scrolls ? { tabIndex: 0, role: "region", "aria-label": label } : {})}
         className="relative overflow-x-auto rounded-card border border-line bg-raised focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
       >
-        <table aria-label={label} aria-busy={status === "loading" || undefined} className="w-full border-collapse text-body">
+        <table aria-label={label} aria-busy={status === "loading" || undefined} style={resizable ? { width: table.getTotalSize(), minWidth: "100%", tableLayout: "fixed" } : undefined} className={cn("w-full border-collapse", density === "compact" ? "text-body-sm" : "text-body")}>
           <thead className={cn("bg-sunken", stickyHeader && "sticky top-0 z-10")}>
             {headerGroups.map((group) => (
               <tr key={group.id} className="border-b border-line">
@@ -217,9 +249,9 @@ export function DataTable<T>({
                     <th
                       key={header.id}
                       scope="col"
-                      style={meta?.width ? { width: meta.width } : undefined}
+                      style={resizable ? { width: header.column.getSize() } : meta?.width ? { width: meta.width } : undefined}
                       aria-sort={dir === "asc" ? "ascending" : dir === "desc" ? "descending" : sortable ? "none" : undefined}
-                      className={cn("h-10 px-4 text-start align-middle text-caption font-semibold whitespace-nowrap text-fg-muted", meta?.numeric && "text-end", meta?.truncate && "min-w-48")}
+                      className={cn("relative h-10 px-4 text-start align-middle text-caption font-semibold whitespace-nowrap text-fg-muted", meta?.numeric && "text-end", meta?.truncate && "min-w-48")}
                     >
                       {header.isPlaceholder ? null : sortable ? (
                         <button
@@ -243,6 +275,7 @@ export function DataTable<T>({
                       ) : (
                         flexRender(header.column.columnDef.header, header.getContext())
                       )}
+                      {resizable && header.column.getCanResize() ? <span role="separator" aria-orientation="vertical" aria-label={`${suiteText(locale, "resizeColumn")} ${typeof header.column.columnDef.header === "string" ? header.column.columnDef.header : header.column.id}`} aria-valuemin={header.column.columnDef.minSize ?? 20} aria-valuemax={header.column.columnDef.maxSize ?? 2000} aria-valuenow={header.column.getSize()} tabIndex={0} className="absolute end-0 inset-y-1 w-2 cursor-col-resize rounded hover:bg-brand-subtle focus-visible:outline-2 focus-visible:outline-focus" onMouseDown={header.getResizeHandler()} onTouchStart={header.getResizeHandler()} onKeyDown={event => { if (!["ArrowLeft","ArrowRight"].includes(event.key)) return; event.preventDefault(); const increase = (event.key === "ArrowRight") !== (readingDirection === "rtl"); const next = Math.max(header.column.columnDef.minSize ?? 20, Math.min(header.column.columnDef.maxSize ?? 2000, header.column.getSize() + (increase ? 10 : -10))); table.setColumnSizing(previous => ({ ...previous, [header.column.id]: next })); }} /> : null}
                     </th>
                   );
                 })}

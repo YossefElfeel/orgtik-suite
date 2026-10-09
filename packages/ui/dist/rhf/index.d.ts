@@ -18,7 +18,7 @@ export declare function createRHFField<C extends ComponentType<any>>(Component: 
     <T extends FieldValues, N extends FieldPath<T>>(props: UseControllerProps<T, N> & FieldChrome & {
         formatError?: (message: string) => ReactNode;
         fieldClassName?: string;
-    } & Omit<ComponentProps<C>, "value" | "name" | "defaultValue" | "onChange" | "checked" | "onValueChange" | "onCheckedChange">): import("react").JSX.Element;
+    } & Omit<ComponentProps<C>, "defaultValue" | "onChange" | "value" | "name" | "checked" | "onValueChange" | "onCheckedChange">): import("react").JSX.Element;
     displayName: string;
 };
 export {};

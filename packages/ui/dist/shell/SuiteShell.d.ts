@@ -7,6 +7,7 @@ export type RailApp = {
     href: string;
     icon: ReactNode;
     badge?: ReactNode;
+    onNavigate?: () => void;
 };
 export declare function AppRail({ apps, current, homeHref }: {
     apps: RailApp[];
@@ -46,6 +47,7 @@ export declare function TopBar({ start, end, onOpenNavigation }: {
     onOpenNavigation?: () => void;
 }): import("react").JSX.Element;
 export type SuiteShellProps = {
+    sidebarCollapsed?: boolean;
     demo?: DemoOptions;
     rail: ReactNode;
     sidebar: ReactNode;

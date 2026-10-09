@@ -57,6 +57,8 @@ jobs:
 
       - name: Platform OpenAPI matches the mock
         run: node program/phase-e/openapi.mjs --check
+      - name: DS v2 contrast, neutral and chart palette gates
+        run: node packages/ui/scripts/check-v2.mjs && node packages/ui/scripts/check-viz.mjs
       - name: Shared tab session and access regressions
         run: node --test packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs
       - name: Workspace source manifest and API contracts match

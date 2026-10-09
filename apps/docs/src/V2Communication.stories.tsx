@@ -1,0 +1,12 @@
+import { useState } from "react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { ActivityTimeline, CommentThread, CommandPalette, NotificationCenter, RichTextEditor, type Comment, type SuiteNotification } from "@orgtik/ui";
+const meta: Meta = { title: "V2/Communication", parameters: {layout:"padded"} }; export default meta;
+const people=[{id:"1",name:"Rana Saad"},{id:"2",name:"Omar Farouk"},{id:"3",name:"Salma Nabil"}];
+const notices: SuiteNotification[]=[{id:"1",tool:"tasks",title:"Review launch brief",subtitle:"Rana mentioned you",path:"/tasks/1",read:false,at:"2026-10-07T08:00:00Z"},{id:"2",tool:"files",title:"Campaign brief updated",path:"/files/1",read:true,at:"2026-10-07T07:00:00Z"}];
+function Feed(){const[comments,setComments]=useState<Comment[]>([{id:"1",author:people[0],text:"The brief is ready for @Omar Farouk to review.",mentions:["2"],at:"2026-10-07T08:00:00Z"}]);return <div className="grid gap-8 lg:grid-cols-2"><ActivityTimeline label="Activity" items={[{id:"1",title:"Brief updated",actor:"Rana Saad",description:"Added the campaign objectives",at:"2026-10-07T08:00:00Z"},{id:"2",title:"Review requested",actor:"Omar Farouk",at:"2026-10-07T07:00:00Z"}]} /><CommentThread label="Project comments" comments={comments} people={people} onPost={async(text,mentions)=>setComments(previous=>[...previous,{id:String(previous.length+1),author:people[1],text,mentions,at:"2026-10-07T09:00:00Z"}])} /></div>}
+function SearchNotices(){const[selected,setSelected]=useState("");return <div className="flex flex-col gap-4"><div className="flex items-center gap-2"><CommandPalette items={notices} onSelect={item=>setSelected(item.title)} /><NotificationCenter items={notices} onSelect={item=>setSelected(item.title)} onRead={async()=>undefined} onReadAll={async()=>undefined} /></div><p role="status" className="text-body-sm text-fg-muted">{selected||"Use command-K or the notification bell."}</p></div>}
+function EditorExample(){const[value,setValue]=useState("<p>Review the <strong>launch brief</strong> with your team.</p>");return <RichTextEditor label="Message" value={value} onChange={setValue} contentFormat="html" placeholder="Write a message…" />}
+export const ActivityAndComments: StoryObj = {render:()=> <Feed />};
+export const SearchAndNotifications: StoryObj = {render:()=> <SearchNotices />};
+export const Editor: StoryObj = {render:()=> <EditorExample />};

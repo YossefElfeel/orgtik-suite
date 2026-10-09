@@ -18,7 +18,7 @@ export type AvatarProps = VariantProps<typeof avatar> & {
 };
 export declare function Avatar({ name, src, size, className, decorative }: AvatarProps): import("react").JSX.Element;
 declare const card: (props?: ({
-    padding?: "sm" | "md" | "lg" | "none" | null | undefined;
+    padding?: "none" | "sm" | "md" | "lg" | null | undefined;
     elevation?: "raised" | "flat" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string;
 export type CardProps = HTMLAttributes<HTMLDivElement> & VariantProps<typeof card>;

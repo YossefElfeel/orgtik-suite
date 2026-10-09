@@ -5,7 +5,7 @@
   "scripts": {
     "storybook": "storybook dev -p 6006 --no-open",
     "build": "storybook build -o storybook-static",
-    "check": "node tests/check.mjs && node tests/interactions.mjs",
+    "check": "node tests/check.mjs && node tests/interactions.mjs && node tests/v2-interactions.mjs",
     "check:interactions": "node tests/interactions.mjs",
     "check:update": "node tests/check.mjs --update"
   },

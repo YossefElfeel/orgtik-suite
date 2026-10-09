@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { type ColumnDef, type OnChangeFn, type PaginationState, type Row, type RowSelectionState, type SortingState } from "@tanstack/react-table";
+import { type ColumnDef, type OnChangeFn, type PaginationState, type Row, type RowSelectionState, type SortingState, type VisibilityState, type ColumnSizingState } from "@tanstack/react-table";
 import { type ListStatus } from "../components/States.js";
 declare module "@tanstack/react-table" {
     interface ColumnMeta<TData, TValue> {
@@ -56,7 +56,14 @@ export type DataTableProps<T> = {
     className?: string;
     density?: "comfortable" | "compact";
     stickyHeader?: boolean;
+    columnChooser?: boolean;
+    columnVisibility?: VisibilityState;
+    onColumnVisibilityChange?: OnChangeFn<VisibilityState>;
+    resizable?: boolean;
+    columnSizing?: ColumnSizingState;
+    onColumnSizingChange?: OnChangeFn<ColumnSizingState>;
+    rowActions?: (record: T) => ReactNode;
 };
-export declare function DataTable<T>({ columns, data, getRowId, label, status, empty, error, forbidden, onRetry, mode, rowCount, sorting: sortingProp, onSortingChange, pagination: paginationProp, onPaginationChange, pageSizes, paginate, selectable, rowSelection: selectionProp, onRowSelectionChange, bulkActions, className, density, stickyHeader, }: DataTableProps<T>): import("react").JSX.Element;
+export declare function DataTable<T>({ columns, data, getRowId, label, status, empty, error, forbidden, onRetry, mode, rowCount, sorting: sortingProp, onSortingChange, pagination: paginationProp, onPaginationChange, pageSizes, paginate, selectable, rowSelection: selectionProp, onRowSelectionChange, bulkActions, className, density, stickyHeader, columnChooser, columnVisibility: visibilityProp, onColumnVisibilityChange, resizable, columnSizing: sizingProp, onColumnSizingChange, rowActions, }: DataTableProps<T>): import("react").JSX.Element;
 export type { ColumnDef, SortingState, PaginationState, RowSelectionState, Row } from "@tanstack/react-table";
 //# sourceMappingURL=DataTable.d.ts.map

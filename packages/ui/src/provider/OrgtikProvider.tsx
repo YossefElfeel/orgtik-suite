@@ -1,11 +1,11 @@
 "use client";
-import { createContext, useContext, useMemo, type ComponentType, type ReactNode } from "react";
+import { createContext, useContext, useMemo, type AnchorHTMLAttributes, type ComponentType, type ReactNode } from "react";
 import { DirectionProvider } from "@base-ui/react/direction-provider";
 import { directionOf, formatLocale, type Digits, type Locale } from "../locale.js";
 import { createTranslator, type Strings, type Translate } from "../i18n/strings.js";
 
 /** The element library links render as. Next apps pass next/link, so navigation stays client-side. */
-export type LinkComponent = ComponentType<{ href: string; className?: string; children?: ReactNode; "aria-current"?: "page" }>;
+export type LinkComponent = ComponentType<Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & { href: string }>;
 
 const PlainLink: LinkComponent = (props) => <a {...props} />;
 

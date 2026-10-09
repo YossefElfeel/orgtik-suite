@@ -55,7 +55,7 @@
       "topic_candidate_not_full_coverage": 196,
       "reconciliation_only": 185
     },
-    "current_gate": "P1_foundations_specimens",
+    "current_gate": "P2_library_ci",
     "criterion_note": "Topic links are candidates; original criterion acceptance is not inferred from package coverage."
   }
 }

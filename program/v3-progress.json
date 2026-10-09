@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-09",
+  "updated_at": "2026-10-10",
   "owner_instruction": "continue till finish",
   "gate_policy": "Owner authorizes continued implementation and evidence review through P5 without intermediate approval stops; explicit deployment instruction is still required.",
   "deployment": "paused",
-  "current_phase": "P1_foundations_specimens",
+  "current_phase": "P2_library_ci",
   "packages": {
     "V3-P0": {
       "status": "merged_owner_continue_authorized",
@@ -12,9 +12,14 @@
       "acceptance_evidence": "program/audits/v3-p0/README.md"
     },
     "V3-P1": {
-      "status": "implemented_local_ci_pending",
+      "status": "merged_local_and_ci_verified",
       "ui_status": "three_ordinary_specimens_verified",
-      "current_evidence": "program/audits/v3-p1/README.md; 107 ordinary UI checks/24 captures; 46 token checks; 276 Storybook renders; package CI pending"
+      "current_evidence": "PR47 merged main8edd365 after CI37991406676 and pause37991406662; 276 strict Windows renders and scoped local evidence"
+    },
+    "V3-P2": {
+      "current_evidence": "program/audits/v3-p2/README.md; 360 renders/zero axe/console/overflow; 25 affected tasks; 20 unit checks; 15 new+10 retained interactions; package CI pending",
+      "status": "implemented_local_ci_pending",
+      "ui_status": "storybook_v2_reviewed"
     }
   }
 }

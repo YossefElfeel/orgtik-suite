@@ -1,6 +1,6 @@
 {
   "name": "@orgtik/ui",
-  "version": "1.0.0-rc.12",
+  "version": "2.0.0-rc.1",
   "description": "OrgTik's shared design system: tokens, themes, and components for every dashboard.",
   "type": "module",
   "sideEffects": [
@@ -55,7 +55,7 @@
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
     "build": "node scripts/build-tokens.mjs && node scripts/build-fonts.mjs && tsc -p tsconfig.build.json",
-    "test": "node --test src/auth/client.test.mjs src/auth/access.test.mjs src/table/PaginatedTable.test.mjs",
+    "test": "node --test src/auth/client.test.mjs src/auth/access.test.mjs src/table/PaginatedTable.test.mjs src/suite/access.test.mjs",
     "status": "node scripts/build-status.mjs",
     "logo": "node scripts/build-logo.mjs",
     "fonts": "node scripts/build-fonts.mjs",
@@ -79,6 +79,10 @@
     "@dnd-kit/core": "6.3.1",
     "@dnd-kit/sortable": "10.0.0",
     "@dnd-kit/utilities": "3.2.2",
+    "@tiptap/extension-placeholder": "3.31.3",
+    "@tiptap/pm": "3.31.3",
+    "@tiptap/react": "3.31.3",
+    "@tiptap/starter-kit": "3.31.3",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "tailwind-merge": "3.7.0"

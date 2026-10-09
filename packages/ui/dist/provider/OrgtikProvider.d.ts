@@ -1,12 +1,9 @@
-import { type ComponentType, type ReactNode } from "react";
+import { type AnchorHTMLAttributes, type ComponentType, type ReactNode } from "react";
 import { type Digits, type Locale } from "../locale.js";
 import { type Strings, type Translate } from "../i18n/strings.js";
 /** The element library links render as. Next apps pass next/link, so navigation stays client-side. */
-export type LinkComponent = ComponentType<{
+export type LinkComponent = ComponentType<Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & {
     href: string;
-    className?: string;
-    children?: ReactNode;
-    "aria-current"?: "page";
 }>;
 type OrgtikContext = {
     locale: Locale;

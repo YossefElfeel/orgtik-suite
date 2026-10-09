@@ -1,5 +1,5 @@
 "use client";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { Dialog as BaseDialog } from "@base-ui/react/dialog";
 import { List, Moon, SignOut, Sun, Translate } from "@phosphor-icons/react";
 import { cn } from "../lib/cn.js";
@@ -16,7 +16,7 @@ import { SuiteConnections } from "../demo/SuiteConnections.js";
 // The rail (suite apps) and sidebar (this app's pages) sit at the reading start: on the left in
 // LTR, on the right in RTL. Both are plain CSS grid columns, so they follow `dir` by themselves.
 
-export type RailApp = { id: string; label: string; href: string; icon: ReactNode; badge?: ReactNode };
+export type RailApp = { id: string; label: string; href: string; icon: ReactNode; badge?: ReactNode; onNavigate?: () => void };
 
 export function AppRail({ apps, current, homeHref = "/" }: { apps: RailApp[]; current?: string; homeHref?: string }) {
   const t = useStrings();
@@ -32,6 +32,7 @@ export function AppRail({ apps, current, homeHref = "/" }: { apps: RailApp[]; cu
           <Link
             key={app.id}
             href={app.href}
+            onClick={app.onNavigate ? event => { if (!event.metaKey && !event.ctrlKey && !event.shiftKey && event.button === 0) { event.preventDefault(); app.onNavigate?.(); } } : undefined}
             aria-current={active ? "page" : undefined}
             className={cn(
               "relative flex w-[64px] flex-col items-center gap-1 rounded-field px-1 py-2 text-micro text-fg-on-chrome-muted transition-colors",
@@ -65,14 +66,15 @@ export function Sidebar({ title, sections, footer }: { title: ReactNode; section
   const { Link } = useOrgtik();
   return (
     <nav aria-label={t("mainNavigation")} className="flex h-full w-full flex-col gap-4 overflow-y-auto border-e border-line bg-raised px-3 py-4">
-      <div className="px-2 font-display text-title-sm text-fg">{title}</div>
+      <div data-sidebar-label className="px-2 font-display text-title-sm text-fg">{title}</div>
       {sections.map((section, i) => (
         <div key={i} className="flex flex-col gap-0.5">
-          {section.label ? <div className="px-2 pb-1 text-caption font-semibold text-fg-subtle">{section.label}</div> : null}
+          {section.label ? <div data-sidebar-label className="px-2 pb-1 text-caption font-semibold text-fg-subtle">{section.label}</div> : null}
           {section.items.map((item) => (
             <Link
               key={item.href}
               href={item.href}
+              aria-label={item.label}
               aria-current={item.active ? "page" : undefined}
               className={cn(
                 "flex h-control-md items-center gap-2.5 rounded-field px-2.5 text-body text-fg-muted transition-colors hover:bg-hover hover:text-fg",
@@ -81,8 +83,8 @@ export function Sidebar({ title, sections, footer }: { title: ReactNode; section
             >
               {item.icon ? <span aria-hidden="true" className="grid size-5 place-items-center text-[18px]">{item.icon}</span> : null}
               {/* dir=auto: a label can be user content (a pinned folder named in Latin in an Arabic page). */}
-              <span dir="auto" className="flex-1 truncate text-start">{item.label}</span>
-              {item.count !== undefined ? <span className="text-caption tabular-nums text-fg-subtle">{item.count}</span> : null}
+              <span data-sidebar-label dir="auto" className="flex-1 truncate text-start">{item.label}</span>
+              {item.count !== undefined ? <span data-sidebar-label className="text-caption tabular-nums text-fg-subtle">{item.count}</span> : null}
             </Link>
           ))}
         </div>
@@ -193,6 +195,7 @@ export function TopBar({ start, end, onOpenNavigation }: { start?: ReactNode; en
 }
 
 export type SuiteShellProps = {
+  sidebarCollapsed?: boolean;
   demo?: DemoOptions;
   rail: ReactNode;
   sidebar: ReactNode;
@@ -211,9 +214,11 @@ export function SuiteShell(props: SuiteShellProps) {
   return <DemoProvider options={props.demo}><SuiteShellView {...props} /></DemoProvider>;
 }
 
-function SuiteShellView({ rail, sidebar, topBar, banner, children }: SuiteShellProps) {
+function SuiteShellView({ rail, sidebar, sidebarCollapsed = false, topBar, banner, children }: SuiteShellProps) {
   const t = useStrings();
   const [open, setOpen] = useState(false);
+  const [presentation, setPresentation] = useState(false);
+  useEffect(() => { setPresentation(window.location.pathname.split("/").includes("presentation")); }, []);
   return (
     <div className="flex h-dvh overflow-hidden bg-canvas text-fg">
       <a
@@ -224,7 +229,7 @@ function SuiteShellView({ rail, sidebar, topBar, banner, children }: SuiteShellP
       </a>
       <div className="hidden min-h-0 shrink-0 lg:flex">
         {rail}
-        <div className="w-[248px]">{sidebar}</div>
+        <div className={sidebarCollapsed ? "w-16" : "w-(--ot-layout-sidebar)"}>{sidebar}</div>
       </div>
       <BaseDialog.Root open={open} onOpenChange={setOpen}>
         <BaseDialog.Portal>
@@ -247,7 +252,7 @@ function SuiteShellView({ rail, sidebar, topBar, banner, children }: SuiteShellP
         </BaseDialog.Portal>
       </BaseDialog.Root>
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-        <TopBar start={topBar?.start} end={<>{topBar?.end}<SuiteConnections /><DemoPanel /></>} onOpenNavigation={() => setOpen(true)} />
+        <TopBar start={topBar?.start} end={<>{topBar?.end}{presentation ? <SuiteConnections /> : null}<DemoPanel /></>} onOpenNavigation={() => setOpen(true)} />
         {banner}
         <DemoSceneBanner />
         {/* The page scrolls here, so the keyboard must be able to reach it even when it holds no
