@@ -15,6 +15,7 @@ import { Link } from "@/i18n/routing";
 import { useCan } from "@/lib/permissions";
 import { statusOf, type Locale } from "@/store/api";
 import { useToolQuery, useToolsQuery, type Feature, type Plan, type ToolDetail } from "@/store/catalog";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 const LOCALES: Locale[] = ["en", "ar", "de", "fr", "it"];
 
@@ -26,7 +27,7 @@ function ToolTexts({ tool }: { tool: ToolDetail }) {
   return (
     <div className="flex max-w-3xl flex-col gap-4">
       <div className="overflow-x-auto rounded-card border border-line">
-        <table className="w-full text-body-sm">
+        <PaginatedTable><table className="w-full text-body-sm">
           <caption className="sr-only">{t("texts")}</caption>
           <thead className="bg-sunken text-fg-muted">
             <tr>
@@ -44,7 +45,7 @@ function ToolTexts({ tool }: { tool: ToolDetail }) {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table></PaginatedTable>
       </div>
       <p className="text-body-sm text-fg-muted">{t("orderIs", { order: f.number(tool.order) })}</p>
     </div>
@@ -142,7 +143,7 @@ function ToolPage() {
             </Link>
           ) : null}
         </div>
-        <DataTable label={tf("titleFor", { name: title })} columns={featureCols} data={tool.features} getRowId={(r) => r.key} paginate={false} empty={{ title: tf("emptyFor") }} />
+        <DataTable label={tf("titleFor", { name: title })} columns={featureCols} data={tool.features} getRowId={(r) => r.key} paginate empty={{ title: tf("emptyFor") }} />
       </section>
 
       <section aria-labelledby="tool-plans" className="flex flex-col gap-4">
@@ -155,7 +156,7 @@ function ToolPage() {
             </Link>
           ) : null}
         </div>
-        <DataTable label={tp("titleFor", { name: title })} columns={planCols} data={tool.plans.filter((p) => !p.service)} getRowId={(r) => r.id} paginate={false} empty={{ title: tp("emptyFor") }} />
+        <DataTable label={tp("titleFor", { name: title })} columns={planCols} data={tool.plans.filter((p) => !p.service)} getRowId={(r) => r.id} paginate empty={{ title: tp("emptyFor") }} />
       </section>
     </div>
   );

@@ -1,7 +1,7 @@
 // Pulled from the Website Manager by scripts/content-pull.mjs. Don't edit by hand: change it there and pull.
 export default {
- "source": "http://localhost:4207/v2",
- "pulledAt": "2026-10-07T13:06:13.235Z",
+ "source": "http://localhost:5007/v2",
+ "pulledAt": "2026-10-08T20:54:33.285Z",
  "entries": {
   "page": [
    {
@@ -15,7 +15,7 @@ export default {
      {
       "key": "intro",
       "kind": "copy",
-      "label": "View project",
+      "label": "Custom Cursor",
       "slots": [
        {
         "key": "div",
@@ -697,6 +697,16 @@ export default {
       "title": "Digital studio + business software | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {
+       "en": "View project"
+      },
+      "link": ""
+     }
     }
    },
    {
@@ -710,7 +720,7 @@ export default {
      {
       "key": "intro",
       "kind": "copy",
-      "label": "View project",
+      "label": "Custom Cursor",
       "slots": [
        {
         "key": "div",
@@ -958,6 +968,16 @@ export default {
       "title": "services | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {
+       "en": "View project"
+      },
+      "link": ""
+     }
     }
    },
    {
@@ -971,7 +991,7 @@ export default {
      {
       "key": "intro",
       "kind": "copy",
-      "label": "View project",
+      "label": "Custom Cursor",
       "slots": [
        {
         "key": "div",
@@ -1361,6 +1381,16 @@ export default {
       "title": "software | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {
+       "en": "View project"
+      },
+      "link": ""
+     }
     }
    },
    {
@@ -1374,7 +1404,7 @@ export default {
      {
       "key": "intro",
       "kind": "copy",
-      "label": "View project",
+      "label": "Custom Cursor",
       "slots": [
        {
         "key": "div",
@@ -1546,6 +1576,16 @@ export default {
       "title": "work | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {
+       "en": "View project"
+      },
+      "link": ""
+     }
     }
    },
    {
@@ -1559,7 +1599,7 @@ export default {
      {
       "key": "intro",
       "kind": "copy",
-      "label": "View project",
+      "label": "Custom Cursor",
       "slots": [
        {
         "key": "div",
@@ -1932,6 +1972,16 @@ export default {
       "title": "about | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {
+       "en": "View project"
+      },
+      "link": ""
+     }
     }
    },
    {
@@ -1945,7 +1995,7 @@ export default {
      {
       "key": "intro",
       "kind": "copy",
-      "label": "View project",
+      "label": "Custom Cursor",
       "slots": [
        {
         "key": "div",
@@ -2131,6 +2181,16 @@ export default {
       "title": "insights | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {
+       "en": "View project"
+      },
+      "link": ""
+     }
     }
    },
    {
@@ -2144,7 +2204,7 @@ export default {
      {
       "key": "intro",
       "kind": "copy",
-      "label": "View project",
+      "label": "Custom Cursor",
       "slots": [
        {
         "key": "div",
@@ -2416,6 +2476,16 @@ export default {
       "title": "contact | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {
+       "en": "View project"
+      },
+      "link": ""
+     }
     }
    },
    {
@@ -2429,7 +2499,7 @@ export default {
      {
       "key": "intro",
       "kind": "copy",
-      "label": "View project",
+      "label": "Custom Cursor",
       "slots": [
        {
         "key": "div",
@@ -2808,6 +2878,16 @@ export default {
       "title": "roadmap | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {
+       "en": "View project"
+      },
+      "link": ""
+     }
     }
    },
    {
@@ -2821,7 +2901,7 @@ export default {
      {
       "key": "intro",
       "kind": "copy",
-      "label": "View project",
+      "label": "Custom Cursor",
       "slots": [
        {
         "key": "div",
@@ -2907,6 +2987,16 @@ export default {
       "title": "legal | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {
+       "en": "View project"
+      },
+      "link": ""
+     }
     }
    },
    {
@@ -2920,7 +3010,7 @@ export default {
      {
       "key": "intro",
       "kind": "copy",
-      "label": "View project",
+      "label": "Custom Cursor",
       "slots": [
        {
         "key": "div",
@@ -3032,6 +3122,16 @@ export default {
       "title": "sign in | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {
+       "en": "View project"
+      },
+      "link": ""
+     }
     }
    },
    {
@@ -3051,6 +3151,14 @@ export default {
       "inSitemap": true,
       "title": "Bundles & pricing | OrgTik",
       "description": ""
+     }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {},
+      "link": ""
      }
     }
    },
@@ -3072,6 +3180,14 @@ export default {
       "title": "cart | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {},
+      "link": ""
+     }
     }
    },
    {
@@ -3092,6 +3208,14 @@ export default {
       "title": "checkout | OrgTik",
       "description": ""
      }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {},
+      "link": ""
+     }
     }
    },
    {
@@ -3111,6 +3235,14 @@ export default {
       "inSitemap": false,
       "title": "sign up | OrgTik",
       "description": ""
+     }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {},
+      "link": ""
      }
     }
    },
@@ -3382,6 +3514,114 @@ export default {
       "inSitemap": true,
       "title": "Partners | OrgTik",
       "description": "These profiles use fictional names, mock logos and example links for this preview."
+     }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {},
+      "link": ""
+     }
+    }
+   },
+   {
+    "id": "pg_faq",
+    "order": 30,
+    "name": "FAQ",
+    "slug": {
+     "en": "/faq"
+    },
+    "layout": [
+     {
+      "key": "hero",
+      "kind": "data",
+      "label": "FAQ",
+      "node": {
+       "kind": "group",
+       "fields": {
+        "title": {
+         "kind": "text",
+         "label": "title"
+        },
+        "intro": {
+         "kind": "longtext",
+         "label": "intro"
+        }
+       }
+      }
+     }
+    ],
+    "locales": {
+     "en": {
+      "hero": {
+       "title": "Frequently asked questions",
+       "intro": "Answers to common questions about working with OrgTik."
+      }
+     },
+     "ar": {
+      "hero": {
+       "title": "الأسئلة الشائعة",
+       "intro": "إجابات عن الأسئلة الشائعة حول العمل مع أورجتيك."
+      }
+     },
+     "de": {
+      "hero": {
+       "title": "Häufig gestellte Fragen",
+       "intro": "Antworten auf häufige Fragen zur Zusammenarbeit mit OrgTik."
+      }
+     },
+     "fr": {
+      "hero": {
+       "title": "Questions fréquentes",
+       "intro": "Les réponses aux questions courantes sur la collaboration avec OrgTik."
+      }
+     },
+     "it": {
+      "hero": {
+       "title": "Domande frequenti",
+       "intro": "Risposte alle domande più comuni sulla collaborazione con OrgTik."
+      }
+     }
+    },
+    "seo": {
+     "en": {
+      "title": "Frequently asked questions",
+      "description": "Answers to common questions about working with OrgTik.",
+      "robots": "index",
+      "inSitemap": true
+     },
+     "ar": {
+      "title": "الأسئلة الشائعة",
+      "description": "إجابات عن الأسئلة الشائعة حول العمل مع أورجتيك.",
+      "robots": "index",
+      "inSitemap": true
+     },
+     "de": {
+      "title": "Häufig gestellte Fragen",
+      "description": "Antworten auf häufige Fragen zur Zusammenarbeit mit OrgTik.",
+      "robots": "index",
+      "inSitemap": true
+     },
+     "fr": {
+      "title": "Questions fréquentes",
+      "description": "Les réponses aux questions courantes sur la collaboration avec OrgTik.",
+      "robots": "index",
+      "inSitemap": true
+     },
+     "it": {
+      "title": "Domande frequenti",
+      "description": "Risposte alle domande più comuni sulla collaborazione con OrgTik.",
+      "robots": "index",
+      "inSitemap": true
+     }
+    },
+    "presentation": {
+     "sectionOrder": [],
+     "sectionMedia": {},
+     "cursor": {
+      "text": {},
+      "link": ""
      }
     }
    }
@@ -3657,6 +3897,10 @@ export default {
        {
         "label": "About OrgTik",
         "href": "/about"
+       },
+       {
+        "label": "Frequently asked questions",
+        "href": "/faq"
        }
       ],
       "start": [
@@ -12337,6 +12581,71 @@ export default {
     },
     "seo": {}
    }
+  ],
+  "review": [
+   {
+    "id": "rv_01",
+    "order": 1,
+    "slug": {},
+    "seo": {},
+    "image": {
+     "src": "",
+     "alt": {}
+    },
+    "sample": true,
+    "relatedEntry": "",
+    "position": 1,
+    "locales": {
+     "en": {
+      "name": "Sample client 1",
+      "role": "Project lead",
+      "company": "Example organization",
+      "quote": "A clear plan helped our team agree on what to build next."
+     }
+    }
+   },
+   {
+    "id": "rv_02",
+    "order": 2,
+    "slug": {},
+    "seo": {},
+    "image": {
+     "src": "",
+     "alt": {}
+    },
+    "sample": true,
+    "relatedEntry": "",
+    "position": 2,
+    "locales": {
+     "en": {
+      "name": "Sample client 2",
+      "role": "Project lead",
+      "company": "Example organization",
+      "quote": "Our design and software work came together in one shared process."
+     }
+    }
+   },
+   {
+    "id": "rv_03",
+    "order": 3,
+    "slug": {},
+    "seo": {},
+    "image": {
+     "src": "",
+     "alt": {}
+    },
+    "sample": true,
+    "relatedEntry": "",
+    "position": 3,
+    "locales": {
+     "en": {
+      "name": "Sample client 3",
+      "role": "Project lead",
+      "company": "Example organization",
+      "quote": "We could follow progress and understand the decisions at every step."
+     }
+    }
+   }
   ]
  },
  "ideas": [
@@ -12684,7 +12993,25 @@ export default {
    "to": "/legal/imprint",
    "code": 301,
    "handledBy": "host"
+  },
+  {
+   "from": "/sample-campaign",
+   "to": "/services",
+   "code": 302,
+   "handledBy": "host"
+  },
+  {
+   "from": "/sample-renamed",
+   "to": "/services",
+   "code": 301,
+   "handledBy": "host"
+  },
+  {
+   "from": "/sample-retired",
+   "to": "/services",
+   "code": 301,
+   "handledBy": "host"
   }
  ],
- "robots": "# Hidden from search until the content is approved.\nUser-agent: *\nDisallow: /\n"
+ "robots": "# Page heads carry noindex. Crawling remains allowed so engines can read it.\nUser-agent: *\nAllow: /\n"
 };

@@ -14,6 +14,9 @@ import {
   cn,
 } from "@orgtik/ui";
 import type { Node } from "@/lib/caseStudySchema";
+import { RichCopyEditor } from "./RichCopyEditor";
+import { MediaPicker } from "@/components/media/MediaPicker";
+import { IconPicker } from "./IconPicker";
 
 // A schema-driven editor for one language of a case study. Rules (D-032):
 // - Structure (adding, removing and reordering steps, rows and points) is edited in English; the
@@ -148,9 +151,11 @@ export function ValueEditor({
       : undefined;
 
   switch (node.kind) {
-    case "text":
-    case "icon":
     case "image":
+      return <Field label={label(node.label)}><MediaPicker imagesOnly value={str(value)} onChange={onChange} disabled={ctx.readOnly || ctx.numbersLocked} /></Field>;
+    case "icon":
+      return <Field label={label(node.label)}><IconPicker value={str(value)} onChange={onChange} disabled={ctx.readOnly || ctx.numbersLocked} /></Field>;
+    case "text":
     case "color":
       return (
         <ErrorFor ctx={ctx} path={path}>
@@ -169,7 +174,7 @@ export function ValueEditor({
                 value={str(value)}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={str(fallback) || undefined}
-                readOnly={
+                disabled={
                   ctx.readOnly ||
                   (node.kind === "text" &&
                     (node.locked || (node.neutral && ctx.numbersLocked)))
@@ -198,7 +203,7 @@ export function ValueEditor({
         >
           <Switch
             checked={value === true}
-            disabled={ctx.numbersLocked}
+            disabled={ctx.numbersLocked || ctx.readOnly}
             onCheckedChange={(v) => onChange(v)}
             aria-label={label(node.label)}
           />
@@ -234,14 +239,10 @@ export function ValueEditor({
             <Field
               label={label(node.label)}
               error={error}
-              description={desc || undefined}
+              description={hintOf(node)}
               className={node.long ? "sm:col-span-2" : undefined}
             >
-              {node.long ? (
-                <Textarea {...props} rows={2} />
-              ) : (
-                <Input {...props} />
-              )}
+              <RichCopyEditor value={str(value)} fallback={str(fallback)} onChange={onChange} disabled={ctx.readOnly} lang={ctx.lang} label={label(node.label)} long={node.long} fixedValues={node.fixedValues} />
               {node.fixedValues ? (
                 <div role="note" className="mt-2 text-body-sm text-fg-muted">
                   <p>{tw("fixedValuesHelp")}</p>
@@ -272,7 +273,7 @@ export function ValueEditor({
                 value={str(value)}
                 onChange={(e) => onChange(e.target.value)}
                 placeholder={str(fallback) || undefined}
-                readOnly={ctx.readOnly}
+                disabled={ctx.readOnly}
                 lang={ctx.lang}
                 dir="auto"
                 rows={3}
@@ -292,8 +293,8 @@ export function ValueEditor({
             onValueChange={(v) => onChange(v ?? 0)}
             min={node.min}
             max={node.max}
-            readOnly={ctx.numbersLocked}
-            disabled={ctx.numbersLocked}
+            readOnly={ctx.numbersLocked || ctx.readOnly}
+            disabled={ctx.numbersLocked || ctx.readOnly}
             format={
               node.unit === "percent"
                 ? { style: "unit", unit: "percent" }
@@ -328,7 +329,7 @@ export function ValueEditor({
                 aria-label={`${label(node.label)}, ${tw("line", { n: i + 1 })}`}
                 value={lines[i] ?? ""}
                 placeholder={fb[i] || undefined}
-                readOnly={ctx.readOnly}
+                disabled={ctx.readOnly}
                 lang={ctx.lang}
                 dir="auto"
                 onChange={(e) =>
@@ -354,7 +355,7 @@ export function ValueEditor({
           <Textarea
             value={items.join("\n")}
             placeholder={fb.join("\n") || undefined}
-            readOnly={ctx.readOnly || (node.neutral && ctx.numbersLocked)}
+            disabled={ctx.readOnly || (node.neutral && ctx.numbersLocked)}
             lang={ctx.lang}
             dir={node.neutral ? "ltr" : "auto"}
             rows={Math.max(2, items.length || fb.length)}
@@ -380,7 +381,7 @@ export function ValueEditor({
           <Input
             dir="ltr"
             value={items.join(", ")}
-            readOnly={ctx.numbersLocked}
+            readOnly={ctx.numbersLocked || ctx.readOnly}
             onChange={(e) =>
               onChange(
                 e.target.value
@@ -402,7 +403,7 @@ export function ValueEditor({
             <Input
               value={str(pair[0])}
               placeholder={str(fb[0]) || undefined}
-              readOnly={ctx.readOnly}
+              disabled={ctx.readOnly}
               lang={ctx.lang}
               dir="auto"
               onChange={(e) => onChange([e.target.value, pair[1]])}
@@ -412,7 +413,7 @@ export function ValueEditor({
             <Input
               value={str(pair[1])}
               placeholder={str(fb[1]) || undefined}
-              readOnly={ctx.readOnly}
+              disabled={ctx.readOnly}
               lang={ctx.lang}
               dir="auto"
               onChange={(e) => onChange([pair[0], e.target.value])}
@@ -478,7 +479,7 @@ export function ValueEditor({
       const keyed =
         node.item.kind === "group" &&
         Object.values(node.item.fields).some((f) => "locked" in f && f.locked);
-      const fixed = ctx.structureLocked || keyed;
+      const fixed = ctx.readOnly || ctx.structureLocked || keyed;
       const move = (i: number, d: -1 | 1) => {
         const next = [...items];
         const [x] = next.splice(i, 1);
@@ -661,7 +662,7 @@ function SeriesEditor({
               aria-label={`${label(node.first)} ${i + 1}`}
               value={String(p[0] ?? "")}
               placeholder={String(fb[i]?.[0] ?? "") || undefined}
-              readOnly={ctx.readOnly}
+              disabled={ctx.readOnly}
               lang={ctx.lang}
               dir="auto"
               onChange={(e) =>
@@ -674,8 +675,8 @@ function SeriesEditor({
               aria-label={`${label(node.second)} ${i + 1}`}
               steppers={false}
               value={Number(p[1]) || 0}
-              readOnly={ctx.numbersLocked}
-              disabled={ctx.numbersLocked}
+              readOnly={ctx.numbersLocked || ctx.readOnly}
+              disabled={ctx.numbersLocked || ctx.readOnly}
               onValueChange={(v) =>
                 onChange(points.map((x, j) => (j === i ? [x[0], v ?? 0] : x)))
               }

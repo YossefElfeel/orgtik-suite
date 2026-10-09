@@ -1,3 +1,4 @@
+import { managedPageTree, SectionMedia } from "../content/managed-page";
 import { content } from "../content";
 import { SEND_FAILED, sendIdea } from "../content/forms";
 import { SiteHeader } from "./SiteHeader";
@@ -783,6 +784,7 @@ export default class Roadmap extends ReferencePage {
             eyebrow: msg("Roadmap:23", [A.status, A.theme]),
             title: A.title,
             body: A.body,
+            media: A.media ?? [],
             hasComments: A.kind === "c",
             commentThread: content.IDEA_COMMENTS(A.id),
             facts: (A.kind === "m"
@@ -925,7 +927,7 @@ export default class Roadmap extends ReferencePage {
   render() {
     const v = this.renderVals();
     return (
-      <>
+      managedPageTree(<>
         <div
           ref={v.rootRef}
           data-screen-label={"Roadmap"}
@@ -988,7 +990,7 @@ export default class Roadmap extends ReferencePage {
           <SiteHeader />
 
           <main id={"top"}>
-            <section
+            <section data-cms-section="hero"
               className="purchase-surface"
               style={{
                 paddingTop: 136,
@@ -1005,7 +1007,7 @@ export default class Roadmap extends ReferencePage {
                 {run("pg_roadmap|hero|p-2", 0)}
               </p>
             </section>
-            <section
+            <section data-cms-section="timeline"
               id={"timeline"}
               style={{ padding: "var(--section-space) 0" }}
             >
@@ -1776,7 +1778,7 @@ export default class Roadmap extends ReferencePage {
                 )}
               </div>
             </section>
-            <section
+            <section data-cms-section="community"
               id={"community"}
               style={{
                 padding: "var(--section-space) 0",
@@ -2212,7 +2214,7 @@ export default class Roadmap extends ReferencePage {
                 </div>
               </div>
             </section>
-            <section
+            <section data-cms-section="submit-idea"
               id={"submit-idea"}
               style={{
                 background:
@@ -3013,9 +3015,10 @@ export default class Roadmap extends ReferencePage {
                     >
                       {v.dlg.body}
                     </p>
+                    <SectionMedia items={v.dlg.media} />
 
                     {v.dlg.hasComments && (
-                      <section
+                      <section data-cms-section="section-1"
                         aria-labelledby="rm-comments-title"
                         data-idea-comments=""
                         style={{ marginTop: 22 }}
@@ -3698,7 +3701,7 @@ export default class Roadmap extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>
+      </>, "pg_roadmap")
     );
   }
 }

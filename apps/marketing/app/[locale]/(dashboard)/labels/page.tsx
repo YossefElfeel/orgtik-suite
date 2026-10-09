@@ -14,7 +14,7 @@ import { useMarketingRoles } from "@/lib/permissions";
 import { useGetLabelsQuery } from "@/redux/features/labels/labelsApi";
 import { useLabelColumns } from "./columns";
 
-const SIZES = [10, 25, 50];
+const SIZES = [10];
 
 export default function LabelsPage() {
   const t = useTranslations("Labels");

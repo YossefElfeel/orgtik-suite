@@ -20,7 +20,7 @@ import { useGetPostsQuery } from "@/redux/features/posts/postsApi";
 import type { IGetAllPostsParams } from "@/types/post";
 import { usePostColumns } from "./columns";
 
-const SIZES = [10, 25, 50];
+const SIZES = [10];
 const list = (v: string | null, allowed?: readonly string[]) => (v ? v.split(",").filter((x) => x && (!allowed || allowed.includes(x))) : []);
 
 export default function PostsPage() {

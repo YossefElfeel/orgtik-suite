@@ -45,7 +45,7 @@ function WorkspacesList() {
   const country = url.get("country");
   const tool = url.get("tool");
   const page = Math.max(1, Number(url.get("page")) || 1);
-  const pageSize = Number(url.get("pageSize")) || 25;
+  const pageSize = Number(url.get("pageSize")) || 10;
 
   // The search box writes to the address after a pause, not on every key.
   const [search, setSearch] = useState(q);
@@ -113,7 +113,7 @@ function WorkspacesList() {
   const status = isLoading ? "loading" : error ? (statusOf(error) === 403 ? "forbidden" : "error") : "ready";
   const onPagination = (u: PaginationState | ((old: PaginationState) => PaginationState)) => {
     const next = typeof u === "function" ? u({ pageIndex: page - 1, pageSize }) : u;
-    url.set({ page: next.pageIndex + 1, pageSize: next.pageSize === 25 ? null : next.pageSize });
+    url.set({ page: next.pageIndex + 1, pageSize: next.pageSize === 10 ? null : next.pageSize });
   };
 
   return (

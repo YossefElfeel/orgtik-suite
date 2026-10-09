@@ -55,6 +55,7 @@
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
     "build": "node scripts/build-tokens.mjs && node scripts/build-fonts.mjs && tsc -p tsconfig.build.json",
+    "test": "node --test src/auth/client.test.mjs src/auth/access.test.mjs src/table/PaginatedTable.test.mjs",
     "status": "node scripts/build-status.mjs",
     "logo": "node scripts/build-logo.mjs",
     "fonts": "node scripts/build-fonts.mjs",

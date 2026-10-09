@@ -393,7 +393,7 @@ export function CurrenciesPage() {
           data={currencies.data ?? []}
           getRowId={(c) => c.code}
           status={listStatus(currencies)}
-          paginate={false}
+          paginate
           onRetry={() => currencies.refetch()}
           empty={{ title: t("empty") }}
         />
@@ -415,7 +415,7 @@ export function CurrenciesPage() {
           data={rates.data ?? []}
           getRowId={(r) => `${r.from}-${r.to}`}
           status={listStatus(rates)}
-          paginate={false}
+          paginate
           onRetry={() => rates.refetch()}
           empty={{ title: tr("empty"), action: editable ? <Button size="sm" onClick={() => setRateDialog({})}>{tr("add")}</Button> : undefined }}
         />

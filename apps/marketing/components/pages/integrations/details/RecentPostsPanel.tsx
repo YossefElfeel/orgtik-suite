@@ -74,7 +74,7 @@ export function RecentPostsPanel({ posts, platform }: { posts: Posts; platform: 
       data={items}
       getRowId={(r) => r.id}
       status="ready"
-      paginate={items.length > 25}
+      paginate
       empty={{ title: t("postsEmptyTitle"), description: t("postsEmptyBody", { platform: name }) }}
     />
   );

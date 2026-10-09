@@ -11,7 +11,7 @@ import { useCan } from "@/lib/permissions";
 import { statusOf } from "@/store/api";
 import { useWaitlistQuery, type WaitlistEntry } from "@/store/catalog";
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 10;
 
 // ADM-29: who is waiting for which tool. Paged by the API; tool and page live in the address.
 function WaitlistList() {

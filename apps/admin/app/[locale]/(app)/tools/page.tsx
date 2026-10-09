@@ -110,7 +110,7 @@ function ToolsList() {
         data={data ?? []}
         getRowId={(r) => r.key}
         status={status}
-        paginate={false}
+        paginate
         onRetry={refetch}
         className={isFetching && !isLoading ? "opacity-70" : undefined}
         empty={{ title: t("empty"), description: editable ? t("emptyBody") : undefined }}

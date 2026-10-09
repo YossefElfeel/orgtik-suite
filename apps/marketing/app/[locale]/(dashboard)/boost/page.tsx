@@ -17,7 +17,7 @@ import { useGetAdExecutionsQuery } from "@/redux/features/boost/boostApi";
 import { AdExecutionStatus, type AdExecutionSortBy, type AdExecutionSortOrder, type IGetAdExecutionsParams } from "@/types/boost";
 import { useBoostColumns } from "./columns";
 
-const SIZES = [10, 25, 50];
+const SIZES = [10];
 const PLATFORM_KEYS = ["FACEBOOK", "INSTAGRAM", "LINKEDIN", "TIKTOK", "X", "YOUTUBE"];
 const STATUSES = [AdExecutionStatus.QUEUED, AdExecutionStatus.ACTIVE, AdExecutionStatus.PAUSED, AdExecutionStatus.STOPPED, AdExecutionStatus.FAILED];
 const SORTS: Record<string, [AdExecutionSortBy, AdExecutionSortOrder]> = {

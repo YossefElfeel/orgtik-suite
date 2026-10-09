@@ -1,4 +1,5 @@
 "use client";
+import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 
 /**
@@ -7,5 +8,5 @@ import { useTranslations } from "next-intl";
  */
 export function useEntryName() {
   const t = useTranslations("EntryNames");
-  return (e: { id: string; name: string }) => (t.has(e.id) ? t(e.id) : e.name);
+  return useCallback((e: { id: string; name: string }) => (t.has(e.id) ? t(e.id) : e.name), [t]);
 }

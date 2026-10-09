@@ -8,6 +8,7 @@ import { useCan } from "@/lib/permissions";
 import { statusOf } from "@/store/api";
 import { useInvoiceQuery } from "@/store/billing";
 import { InvoiceActions } from "./InvoiceActions";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 /** One invoice (ADM-23): its lines and tax, payments with gateway and USD rate, credit notes, what's refundable. */
 export function InvoiceDetail({ id }: { id: string }) {
@@ -81,7 +82,7 @@ export function InvoiceDetail({ id }: { id: string }) {
 
       <Section id="inv-lines" title={t("detail.lines")}>
         <div className="overflow-x-auto">
-          <table aria-labelledby="inv-lines" className="w-full border-collapse text-body-sm">
+          <PaginatedTable><table aria-labelledby="inv-lines" className="w-full border-collapse text-body-sm">
             <thead>
               <tr className="border-b border-line">
                 <th scope="col" className="py-2 text-start text-caption font-semibold text-fg-muted">
@@ -148,7 +149,7 @@ export function InvoiceDetail({ id }: { id: string }) {
                 </tr>
               ) : null}
             </tfoot>
-          </table>
+          </table></PaginatedTable>
         </div>
       </Section>
 

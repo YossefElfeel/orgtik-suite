@@ -1,3 +1,4 @@
+import { managedPageTree } from "../content/managed-page";
 import { content } from "../content";
 import {
   findItem,
@@ -1294,7 +1295,7 @@ export default class Services extends ReferencePage {
   render() {
     const v = this.renderVals();
     return (
-      <>
+      managedPageTree(<>
         <div
           ref={v.rootRef}
           data-screen-label={"Services"}
@@ -1724,7 +1725,7 @@ export default class Services extends ReferencePage {
             className={v.isOverview ? undefined : "content-page"}
           >
             {v.isOverview ? (
-              <section
+              <section data-cms-section="hero"
                 style={{
                   position: "relative",
                   minHeight: "100svh",
@@ -2242,7 +2243,7 @@ export default class Services extends ReferencePage {
             )}
             {v.isOverview && (
               <>
-                <section
+                <section data-cms-section="families"
                   id={"families"}
                   data-screen-label={"Services — Disciplines"}
                   style={{ padding: "var(--section-space) 0" }}
@@ -2777,7 +2778,7 @@ export default class Services extends ReferencePage {
                     )}
                   </div>
                 </section>
-                <section
+                <section data-cms-section="all-services"
                   id={"all-services"}
                   data-screen-label={"Services — All services"}
                   style={{ padding: "var(--section-space) 0" }}
@@ -3559,7 +3560,7 @@ export default class Services extends ReferencePage {
             )}
             {v.isFamily && (
               <>
-                <section
+                <section data-cms-section="services-list"
                   id={"services-list"}
                   data-screen-label={"Services — Family services"}
                   style={{
@@ -4124,7 +4125,7 @@ export default class Services extends ReferencePage {
             )}
             {v.isService && (
               <>
-                <section
+                <section data-cms-section="services-list"
                   id={"services-list"}
                   data-screen-label={"Services — Detail"}
                   style={{ padding: "var(--section-space) 0" }}
@@ -4474,7 +4475,7 @@ export default class Services extends ReferencePage {
                 />
               </>
             )}
-            <section
+            <section data-cms-section="approach"
               id={"approach"}
               ref={v.procRef}
               style={{
@@ -4912,7 +4913,7 @@ export default class Services extends ReferencePage {
                 </section>
               </>
             )}
-            {v.isOverview && <Testimonials scope={msg("Services:75")} />}
+            {v.isOverview && <Testimonials data-cms-section="reviews" scope={msg("Services:75")} />}
             <section
               id={"closing"}
               className="closing-cta"
@@ -5494,7 +5495,7 @@ export default class Services extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>
+      </>, "pg_services")
     );
   }
 }

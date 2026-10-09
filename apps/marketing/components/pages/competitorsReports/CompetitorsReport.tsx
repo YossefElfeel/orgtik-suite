@@ -166,7 +166,7 @@ export function CompetitorsReport() {
         onRetry={() => refetch()}
         sorting={sort.sorting}
         onSortingChange={sort.onSortingChange}
-        paginate={false}
+        paginate
         error={{ title: t("loadError") }}
         empty={filtered ? { title: t("noMatch"), action: <Button variant="secondary" onClick={clear}>{t("clearFilters")}</Button> } : { title: t("emptyTitle") }}
       />

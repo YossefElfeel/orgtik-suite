@@ -11,7 +11,7 @@ import { Link } from "@/i18n/routing";
 import { useCan } from "@/lib/permissions";
 import { useTicketsQuery, type Ticket } from "@/store/support";
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 10;
 const CATEGORIES = ["billing", "sales", "product", "technical"];
 
 function Tickets() {

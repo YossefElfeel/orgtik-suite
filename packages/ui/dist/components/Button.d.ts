@@ -1,7 +1,7 @@
 import { type ButtonHTMLAttributes, type ReactNode } from "react";
 import { type VariantProps } from "class-variance-authority";
 export declare const buttonVariants: (props?: ({
-    variant?: "danger" | "link" | "primary" | "secondary" | "ghost" | "brand" | null | undefined;
+    variant?: "warning" | "danger" | "link" | "primary" | "secondary" | "ghost" | "brand" | null | undefined;
     size?: "sm" | "md" | "lg" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string;
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants> & {
@@ -13,7 +13,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps
     endIcon?: ReactNode;
 };
 export declare const Button: import("react").ForwardRefExoticComponent<ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<(props?: ({
-    variant?: "danger" | "link" | "primary" | "secondary" | "ghost" | "brand" | null | undefined;
+    variant?: "warning" | "danger" | "link" | "primary" | "secondary" | "ghost" | "brand" | null | undefined;
     size?: "sm" | "md" | "lg" | null | undefined;
 } & import("class-variance-authority/types").ClassProp) | undefined) => string> & {
     /** Shows a spinner, marks the button busy and blocks presses until the work ends. */

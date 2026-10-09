@@ -42,7 +42,7 @@ import {
   useArchivePlanColumns,
 } from "./columns";
 
-const SIZES = [10, 25, 50];
+const SIZES = [10];
 
 type QueryLike<T> = {
   data?: { data?: { items?: T[]; meta?: IPagination } };

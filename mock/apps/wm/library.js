@@ -26,12 +26,14 @@ const ADDRESS = {
 };
 const plain = (s) => String(s ?? "").replace(/<[^>]+>/g, "").trim();
 
-function makeLibrary({ seed, store, now, uploads }) {
+function makeLibrary({ seed, store, now, uploads, demo = false }) {
   const media = new Map((seed.media ?? []).map((m) => [m.id, clone(m)]));
   const redirects = new Map((seed.seo?.redirects ?? []).map((r) => [r.id, clone(r)]));
   const settings = clone(seed.seo?.settings ?? { visibility: "noindex", canonicalHost: "https://orgtik.ch", publicLocales: ["en"], version: 1, history: [] });
   let nextMedia = media.size + 1;
   let nextRedirect = redirects.size + 1;
+  const ensureDemo = () => { if (demo) require("./seed/demo-states").redirectExamples(redirects, now); };
+  ensureDemo();
   const current = (e) => e.draft ?? e.live;
   const log = (who, action, id, type, extra = {}) => store.audit.unshift({ at: now(), by: who, action, entry: id, type, ...extra });
 
@@ -76,6 +78,14 @@ function makeLibrary({ seed, store, now, uploads }) {
   function updateMedia(m, who, patch) {
     const next = clone(m);
     const errors = {};
+    if (patch.description !== undefined) {
+      if (typeof patch.description !== "string" || patch.description.length > 2000) errors.description = "too_long";
+      else next.description = patch.description.trim();
+    }
+    if (patch.tags !== undefined) {
+      if (!Array.isArray(patch.tags) || patch.tags.length > 30 || patch.tags.some(tag => typeof tag !== "string" || tag.length > 80)) errors.tags = "invalid";
+      else next.tags = [...new Set(patch.tags.map(tag => tag.trim()).filter(Boolean))];
+    }
     if (patch.alt) for (const [l, v] of Object.entries(patch.alt)) next.alt[l] = String(v ?? "").trim();
     // Saving the description is the review.
     if (patch.alt) delete next.altSuggested;
@@ -98,7 +108,7 @@ function makeLibrary({ seed, store, now, uploads }) {
     log(who.key, "media_update", m.id, "media");
     return { media: m };
   }
-  function addUpload(who, file) {
+  function addUpload(who, file, metadata = {}) {
     const id = `md_${String(nextMedia++).padStart(2, "0")}`;
     const name = `${id}-${file.originalname.replace(/[^A-Za-z0-9._-]+/g, "-").toLowerCase()}`;
     fs.mkdirSync(uploads, { recursive: true });
@@ -107,6 +117,8 @@ function makeLibrary({ seed, store, now, uploads }) {
     const kind = file.mimetype === "image/svg+xml" ? "vector" : file.mimetype.startsWith("video/") ? "video" : "image";
     const m = { id, file: name, kind, bytes: file.size, width: null, height: null, alt: {}, rights: { status: "unknown", holder: "", expires: null, note: "" }, focal: { x: 50, y: 50 }, templateUses: [], source: "upload", addedAt: now(), addedBy: who.key, version: 1, ext };
     media.set(id, m);
+    m.description = metadata.description ?? "";
+    m.tags = metadata.tags ?? [];
     log(who.key, "media_upload", id, "media");
     return m;
   }
@@ -115,7 +127,8 @@ function makeLibrary({ seed, store, now, uploads }) {
     const count = uses.length + m.templateUses.length;
     if (count) return { status: 409, code: "in_use", message: "This file is used on the website.", count };
     media.delete(m.id);
-    if (m.source === "upload") fs.rmSync(path.join(uploads, m.file), { force: true });
+    // Bytes are retained until storage garbage collection: a failed journal commit can
+    // restore this record. The public media route serves only registered library files.
     log(who.key, "media_delete", m.id, "media");
     return { ok: true };
   }
@@ -151,7 +164,7 @@ function makeLibrary({ seed, store, now, uploads }) {
   }
 
   // ---- redirects ----
-  const livePaths = () => new Set([...store.entries.values()].filter((e) => ADDRESS[e.type]).map((e) => ADDRESS[e.type](e, e.live, store.entries)));
+  const livePaths = () => new Set([...store.entries.values()].filter((e) => ADDRESS[e.type] && e.live && e.workflow.visibility === "live").map((e) => ADDRESS[e.type](e, e.live, store.entries)));
   function validateRedirect(r, selfId) {
     const errors = {};
     const from = String(r.from ?? "").trim();
@@ -241,22 +254,39 @@ function makeLibrary({ seed, store, now, uploads }) {
   }
 
   // ---- indexing ----
+  function indexingUrls() {
+    const urls = [];
+    const included = new Set(sitemap().map(row => row.loc));
+    for (const entry of store.entries.values()) {
+      if (!ADDRESS[entry.type] || entry.workflow.visibility !== "live" || !entry.live) continue;
+      for (const locale of settings.publicLocales) {
+        const seo = entry.live.seo?.[locale] ?? entry.live.seo?.en ?? {};
+        const path = ADDRESS[entry.type](entry, entry.live, liveOnly);
+        const loc = settings.canonicalHost + (locale === "en" ? "" : `/${locale}`) + (path === "/" && locale !== "en" ? "" : path);
+        const policy = settings.visibility === "noindex" || seo.robots === "noindex" ? "noindex" : "index";
+        urls.push({ id: entry.id, type: entry.type, locale, loc, canonical: seo.canonical || loc, policy, reason: settings.visibility === "noindex" ? "siteOverride" : seo.robots === "noindex" ? "pagePolicy" : "allowed", inSitemap: included.has(loc), lastmod: String(entry.workflow.publishedAt ?? entry.workflow.updatedAt).slice(0, 10) });
+      }
+    }
+    return urls.sort((a, b) => a.loc.localeCompare(b.loc));
+  }
   function sitemap() {
     const urls = [];
     for (const e of store.entries.values()) {
-      if (!ADDRESS[e.type] || e.workflow.visibility !== "live") continue;
-      const seo = e.live.seo?.en ?? {};
-      if (seo.inSitemap === false) continue;
-      // As the site's canonical: the home page keeps its slash; a service uses its family's live slug.
+      if (!ADDRESS[e.type] || e.workflow.visibility !== "live" || !e.live) continue;
       const at = ADDRESS[e.type](e, e.live, liveOnly);
-      urls.push({ loc: settings.canonicalHost + (at === "/" ? "/" : at.replace(/\/$/, "")), lastmod: String(e.workflow.publishedAt ?? e.workflow.updatedAt).slice(0, 10), type: e.type, id: e.id });
+      for (const locale of settings.publicLocales) {
+        const seo = e.live.seo?.[locale] ?? e.live.seo?.en ?? {};
+        if (seo.inSitemap === false) continue;
+        const suffix = locale === "en" ? at : `/${locale}${at === "/" ? "" : at}`;
+        urls.push({ loc: settings.canonicalHost + suffix, lastmod: String(e.workflow.publishedAt ?? e.workflow.updatedAt).slice(0, 10), type: e.type, id: e.id });
+      }
     }
     urls.sort((a, b) => a.loc.localeCompare(b.loc));
     return urls;
   }
   const robots = () =>
     settings.visibility === "noindex"
-      ? "# Hidden from search until the content is approved.\nUser-agent: *\nDisallow: /\n"
+      ? "# Page heads carry noindex. Crawling remains allowed so engines can read it.\nUser-agent: *\nAllow: /\n"
       : `User-agent: *\nAllow: /\n\nSitemap: ${settings.canonicalHost}/sitemap.xml\n`;
   function setVisibility(who, visibility, reason) {
     if (!["index", "noindex"].includes(visibility)) return { errors: { visibility: "required" } };
@@ -269,14 +299,14 @@ function makeLibrary({ seed, store, now, uploads }) {
     return { settings };
   }
 
-  const exportState = () => ({ data: clone({ media: [...media], redirects: [...redirects], settings }), sequences: { nextMedia, nextRedirect } });
+  const exportState = () => ({ data: clone({ media: [...media], redirects: [...redirects], settings, demoVersion: 1 }), sequences: { nextMedia, nextRedirect } });
   const validateState = value => {
     const incoming = codec.object(value), rows = codec.mapRows(incoming.data?.media), redirects_ = codec.mapRows(incoming.data?.redirects), settings_ = codec.object(incoming.data?.settings);
     if (!Number.isSafeInteger(settings_.version) || !Array.isArray(settings_.history) || !Array.isArray(settings_.publicLocales)) throw codec.fail("Website Manager SEO settings are incomplete.");
-    return { data: { media: rows, redirects: redirects_, settings: settings_ }, sequences: { nextMedia: codec.sequence(incoming.sequences?.nextMedia, rows, "md"), nextRedirect: codec.sequence(incoming.sequences?.nextRedirect, redirects_, "rd") } };
+    return { data: { media: rows, redirects: redirects_, settings: settings_, demoVersion: incoming.data.demoVersion ?? 0 }, sequences: { nextMedia: codec.sequence(incoming.sequences?.nextMedia, rows, "md"), nextRedirect: codec.sequence(incoming.sequences?.nextRedirect, redirects_, "rd") } };
   };
-  const importState = value => { const incoming = validateState(value); codec.replaceMap(media, incoming.data.media); codec.replaceMap(redirects, incoming.data.redirects); codec.replaceObject(settings, incoming.data.settings); nextMedia = incoming.sequences.nextMedia; nextRedirect = incoming.sequences.nextRedirect; };
-  return { media, redirects, settings, mediaOut, updateMedia, addUpload, removeMedia, health, CHECKS, saveRedirect, removeRedirect, sitemap, robots, setVisibility, RIGHTS, keepAddresses, previewAddresses, exportState, importState, validateState };
+  const importState = value => { const incoming = validateState(value); codec.replaceMap(media, incoming.data.media); codec.replaceMap(redirects, incoming.data.redirects); codec.replaceObject(settings, incoming.data.settings); nextMedia = incoming.sequences.nextMedia; nextRedirect = incoming.sequences.nextRedirect; if (incoming.data.demoVersion < 1) ensureDemo(); };
+  return { media, redirects, settings, mediaOut, updateMedia, addUpload, removeMedia, health, CHECKS, saveRedirect, removeRedirect, sitemap, indexingUrls, robots, setVisibility, RIGHTS, keepAddresses, previewAddresses, exportState, importState, validateState };
 }
 
 module.exports = { makeLibrary };

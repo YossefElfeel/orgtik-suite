@@ -14,6 +14,7 @@ import { asApiError, usePick } from "@/components/system/kit";
 import { useCan } from "@/lib/permissions";
 import { statusOf, useMeQuery } from "@/store/api";
 import { useRequestWorkspaceQuery, useServiceRequestActionMutation, useServiceRequestQuery, useServiceRequestsQuery, useServicesQuery, type QuoteLine, type SrAction, type SrState } from "@/store/services";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 const CAN_QUOTE: SrState[] = ["under_review", "rejected", "expired", "cancelled", "quoted"];
 const CAN_CANCEL: SrState[] = ["new", "under_review", "awaiting_payment", "on_hold"];
@@ -158,7 +159,7 @@ function RequestDetail({ id }: { id: string }) {
           <Section title={t("detail.quoteTitle")}>
             {sr.quote ? (
               <div className="flex flex-col gap-3">
-                <table className="w-full text-body-sm">
+                <PaginatedTable><table className="w-full text-body-sm">
                   <caption className="sr-only">{t("detail.quoteTitle")}</caption>
                   <thead>
                     <tr className="border-b border-line text-fg-muted">
@@ -180,7 +181,7 @@ function RequestDetail({ id }: { id: string }) {
                       <td dir="ltr" className="py-2 text-end font-medium tabular-nums text-fg">{f.money(sr.quote.total, sr.quote.currency)}</td>
                     </tr>
                   </tfoot>
-                </table>
+                </table></PaginatedTable>
                 <p className="text-body-sm text-fg-muted">{t("detail.quoteMeta", { sent: f.date(sr.quote.sentAt, { dateStyle: "medium" }), until: f.date(sr.quote.validUntil, { dateStyle: "medium" }) })}</p>
               </div>
             ) : (

@@ -1,3 +1,4 @@
+import { managedPageTree } from "../content/managed-page";
 import { SEND_FAILED, sendLead } from "../content/forms";
 import { content } from "../content";
 import React from "react";
@@ -684,7 +685,7 @@ export default class Contact extends ReferencePage {
   render() {
     const v = this.renderVals();
     return (
-      <>
+      managedPageTree(<>
         <div
           ref={v.rootRef}
           data-screen-label={"Contact"}
@@ -1109,7 +1110,7 @@ export default class Contact extends ReferencePage {
             </>
           )}
           <main id={"top"} className="content-page">
-            <section
+            <section data-cms-section="hero"
               id={"enquiry"}
               style={{
                 background:
@@ -2453,7 +2454,7 @@ export default class Contact extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>
+      </>, "pg_contact")
     );
   }
 }

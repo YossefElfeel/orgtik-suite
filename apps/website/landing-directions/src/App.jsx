@@ -21,6 +21,7 @@ import { headFor } from "./content/heads";
 import { dirOf, shown, splitLocale, withLocale } from "./content/locale";
 
 const pages = {
+  "/faq": lazy(() => import("./reference/FAQ")),
   "/": lazy(() => import("./reference/Home")),
   "/services": lazy(() => import("./reference/Services")),
   "/software": lazy(() => import("./reference/Software")),

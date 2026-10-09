@@ -72,7 +72,7 @@ export default function TeamsPage() {
   const pathname = usePathname();
   const status = (["active", "inactive"].includes(params.get("status") ?? "") ? params.get("status") : "all") as Status;
   const page = Math.max(1, Number(params.get("page")) || 1);
-  const pageSize = [10, 25, 50].includes(Number(params.get("size"))) ? Number(params.get("size")) : 10;
+  const pageSize = [10].includes(Number(params.get("size"))) ? Number(params.get("size")) : 10;
   const q = params.get("q") ?? "";
   const [search, setSearch] = useState(q);
   useEffect(() => setSearch(q), [q]);
@@ -196,7 +196,7 @@ export default function TeamsPage() {
           const next = typeof u === "function" ? u(pagination) : u;
           go({ page: next.pageIndex + 1, size: next.pageSize });
         }}
-        pageSizes={[10, 25, 50]}
+        pageSizes={[10]}
         status={isLoading ? "loading" : isError ? ((error as { status?: number })?.status === 403 ? "forbidden" : "error") : items.length ? "ready" : "empty"}
         onRetry={() => refetch()}
         empty={

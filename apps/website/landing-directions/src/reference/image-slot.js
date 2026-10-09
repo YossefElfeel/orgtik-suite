@@ -1,5 +1,6 @@
 // Lightweight display-only replacement for the export's editable image slots.
 // Original images stay local; no editor runtime, uploads, or remote resources.
+import snapshot from "../content/snapshot.js";
 class ReferenceImage extends HTMLElement {
   static observedAttributes = ["src", "data-src", "fit", "placeholder", "alt"];
   constructor() {
@@ -23,6 +24,8 @@ class ReferenceImage extends HTMLElement {
     img.alt =
       this.getAttribute("alt") || this.getAttribute("placeholder") || "";
     img.style.objectFit = this.getAttribute("fit") || "cover";
+    const reference = Object.values(snapshot.entries).flat().map(entry => entry.image).find(image => image?.src && (image.src === src || src?.endsWith(`/assets/${image.src}`)));
+    img.style.objectPosition = `${reference?.focal?.x ?? 50}% ${reference?.focal?.y ?? 50}%`;
     this.shadowRoot.querySelector(".placeholder").textContent = src
       ? ""
       : this.getAttribute("placeholder") || "Image preview";

@@ -1,6 +1,6 @@
 {
   "id": "windows-2025-chromium-153",
-  "reviewedAt": "2026-10-07",
+  "reviewedAt": "2026-10-09",
   "renderer": {
     "platform": "win32",
     "release": "10.0.26100",
@@ -26,16 +26,26 @@
     "previousRun": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37596650387",
     "localDefaultVerification": "264/264 exact; zero accessibility/console/overflow findings",
     "reviewEvidence": "All38 image dimensions unchanged; all694 changed pixels map to glyphs1/2/4/5/z in Arial/Cascadia Code; all38 candidate images stable at pixelmatch0.1 across two CI runs; no component/styles changed",
-    "authorization": "Integration owner approved only these38 reviewed platform pairs; default264 references retained"
+    "authorization": "Integration owner approved only these38 reviewed platform pairs; default264 references retained",
+    "cmsImprovementsRefresh": {
+      "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+      "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+      "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+      "reviewedAt": "2026-10-09",
+      "refreshedDataTablePairs": 6,
+      "newLegacyTablePairs": 6,
+      "localDefaultVerification": "270/270 exact; zero accessibility, console, or overflow findings",
+      "reviewEvidence": "Ten-row DataTable renders now match Windows CI defaults exactly. Six new legacy-table pairs differ only at the two digit-1 vertical strokes of the final page-11 button (6 or 12 pixels per image). Text/control state, layout-anchor and selected-font guards remain enforced."
+    }
   },
   "policy": {
     "pixelmatchThreshold": 0.1,
     "allowedChangedPixels": 0,
     "masks": false,
     "ciOnly": true,
-    "defaultReferenceCount": 264,
-    "overrides": 38,
-    "reviewedPixelsTotal": 694,
+    "defaultReferenceCount": 270,
+    "overrides": 44,
+    "reviewedPixelsTotal": 639,
     "semanticValidation": "Normalized story text/control state and pixel layout-anchor hashes; exact selected-font metadata; default and override PNG SHA256 pairing"
   },
   "entries": {
@@ -519,21 +529,12 @@
       "story": "data-datatable--ready",
       "combo": "en-light",
       "width": 1280,
-      "height": 1358,
-      "originalSha256": "c8c7353d8111a8e10e47a775936b132e35ab3d9de8e638d7617d392316139f30",
-      "overrideSha256": "6e8bf754d9a91ab2ac2961e3587e8fc008310625349af0361c30dc125528201b",
-      "reviewedChangedPixels": 18,
-      "affectedGlyphs": [
-        "1"
-      ],
-      "affectedText": [
-        {
-          "text": "11 Sept 2026",
-          "glyph": "1",
-          "tag": "TD",
-          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
-        }
-      ],
+      "height": 800,
+      "originalSha256": "f2aea57a478746ae8b8d8e26772c24de6c282082ca3df00e72468c2365dbe908",
+      "overrideSha256": "3a317de0a5b63a147ac29fe4fd2c90e3921c7e4df51277d74deb4b69c828abc1",
+      "reviewedChangedPixels": 0,
+      "affectedGlyphs": [],
+      "affectedText": [],
       "platformFonts": {
         "#storybook-root button": [
           {
@@ -545,29 +546,26 @@
         ]
       },
       "semantics": {
-        "textSha256": "8c636195af7fd0bbe27c38666aa18f45e0159d524c79abd9a9460c8eae822c89",
-        "layoutSha256": "224d199f454a16ad7a1569c3c1f96a0acc02bf1c371e97277e0358ece54eb973"
+        "textSha256": "cee21bec85362ab36a58a75b38aee19d434877730bbd27fce844ee681a45f9e5",
+        "layoutSha256": "9454780baf61a97d50f20e848e04cd48d6fbcd2a6a61660a28446754a418aa03"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
       }
     },
     "data-datatable--ready--en-dark.png": {
       "story": "data-datatable--ready",
       "combo": "en-dark",
       "width": 1280,
-      "height": 1358,
-      "originalSha256": "6f1e60c77ddac706f78759baf3d364a2a3c269b45ceda01bddd95a61bf66d69c",
-      "overrideSha256": "1e7ee9f83fcfe6e77478ad12782c138b052e6266fb486b799341b7672389e85e",
-      "reviewedChangedPixels": 17,
-      "affectedGlyphs": [
-        "1"
-      ],
-      "affectedText": [
-        {
-          "text": "11 Sept 2026",
-          "glyph": "1",
-          "tag": "TD",
-          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
-        }
-      ],
+      "height": 800,
+      "originalSha256": "ca60bfb40952c858fc8871a55419552a4d1798e35cf23004b59301e9bee3de58",
+      "overrideSha256": "84fda272109c127d02bf0e3236232a852469b81c8f393c4a976d5435199ad18c",
+      "reviewedChangedPixels": 0,
+      "affectedGlyphs": [],
+      "affectedText": [],
       "platformFonts": {
         "#storybook-root button": [
           {
@@ -579,29 +577,26 @@
         ]
       },
       "semantics": {
-        "textSha256": "8c636195af7fd0bbe27c38666aa18f45e0159d524c79abd9a9460c8eae822c89",
-        "layoutSha256": "224d199f454a16ad7a1569c3c1f96a0acc02bf1c371e97277e0358ece54eb973"
+        "textSha256": "cee21bec85362ab36a58a75b38aee19d434877730bbd27fce844ee681a45f9e5",
+        "layoutSha256": "9454780baf61a97d50f20e848e04cd48d6fbcd2a6a61660a28446754a418aa03"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
       }
     },
     "data-datatable--ready--ar-light.png": {
       "story": "data-datatable--ready",
       "combo": "ar-light",
       "width": 1280,
-      "height": 1358,
-      "originalSha256": "6b3de9744ac12f103234d7fd5830f58021757b524cdb42c35abb4738c0219e8d",
-      "overrideSha256": "d3f979bdd5ca6a308022bf7a0516fcce057794ff02f1f49bb75a5807c149beae",
-      "reviewedChangedPixels": 18,
-      "affectedGlyphs": [
-        "1"
-      ],
-      "affectedText": [
-        {
-          "text": "11‏/09‏/2026",
-          "glyph": "1",
-          "tag": "TD",
-          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
-        }
-      ],
+      "height": 800,
+      "originalSha256": "fc1ee3311f6ccb2339c6cd645a746574d6539ebd80cd8bc9c91975b84b00ddf5",
+      "overrideSha256": "539f86f2c40755b1334114897a14cab4a4b4672e479e04e6857b9b6c8a3506ac",
+      "reviewedChangedPixels": 0,
+      "affectedGlyphs": [],
+      "affectedText": [],
       "platformFonts": {
         "#storybook-root button": [
           {
@@ -613,29 +608,26 @@
         ]
       },
       "semantics": {
-        "textSha256": "423a7329706e41d7d9698383cc064c6c176ac88e7426a7d2e3ea9133d34c0540",
-        "layoutSha256": "d43271873997da8ba4c18c60378c12a12d184405870c3ded41b5a8f42464cc56"
+        "textSha256": "cc96b2c72b6e53e90984677d184a79404a9422aa7f0347de03537b60a4eba759",
+        "layoutSha256": "29b24040b198c9fca5c2dee3f7e6157a73c2a526903202d8f517068b10fe3b0d"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
       }
     },
     "data-datatable--ready--ar-dark.png": {
       "story": "data-datatable--ready",
       "combo": "ar-dark",
       "width": 1280,
-      "height": 1358,
-      "originalSha256": "50c9f7fc982e080b52cd8548786eb0a00b3f0f8b8dfccb7cf8937493c1dc83c1",
-      "overrideSha256": "73992ae7b43ff2b116c8a44c56d03e20cda8976194e0a1dc771a939068fdd6dc",
-      "reviewedChangedPixels": 17,
-      "affectedGlyphs": [
-        "1"
-      ],
-      "affectedText": [
-        {
-          "text": "11‏/09‏/2026",
-          "glyph": "1",
-          "tag": "TD",
-          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
-        }
-      ],
+      "height": 800,
+      "originalSha256": "78b6efa1be7ecf46c3a8d4f982ec58b7d63dd07411ff7122c93b40804b59b00a",
+      "overrideSha256": "66ba934c190797d231e3d201303a2a6e88290420a62e823228bb227ef7a14efe",
+      "reviewedChangedPixels": 0,
+      "affectedGlyphs": [],
+      "affectedText": [],
       "platformFonts": {
         "#storybook-root button": [
           {
@@ -647,29 +639,26 @@
         ]
       },
       "semantics": {
-        "textSha256": "423a7329706e41d7d9698383cc064c6c176ac88e7426a7d2e3ea9133d34c0540",
-        "layoutSha256": "d43271873997da8ba4c18c60378c12a12d184405870c3ded41b5a8f42464cc56"
+        "textSha256": "cc96b2c72b6e53e90984677d184a79404a9422aa7f0347de03537b60a4eba759",
+        "layoutSha256": "29b24040b198c9fca5c2dee3f7e6157a73c2a526903202d8f517068b10fe3b0d"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
       }
     },
     "data-datatable--ready--de-light.png": {
       "story": "data-datatable--ready",
       "combo": "de-light",
       "width": 1280,
-      "height": 1358,
-      "originalSha256": "e6fc51a74f8c55c8ea546f4f56915c3f4c0ce8cf2d69a6d8f09216c54b3acc7b",
-      "overrideSha256": "287fa07385b62bd523bc49c98081f0fb54fb5ffc1e6bb527ad94ca83f37033d6",
-      "reviewedChangedPixels": 18,
-      "affectedGlyphs": [
-        "1"
-      ],
-      "affectedText": [
-        {
-          "text": "11.09.2026",
-          "glyph": "1",
-          "tag": "TD",
-          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
-        }
-      ],
+      "height": 800,
+      "originalSha256": "5c2507bc403895ecffbfedd0248651bf8f9e808eb08ee210470369173916c8b7",
+      "overrideSha256": "d661b4cd4c77845eb4936a3d3843cf161f9c5a99f856952f3bf2cb64de79e787",
+      "reviewedChangedPixels": 0,
+      "affectedGlyphs": [],
+      "affectedText": [],
       "platformFonts": {
         "#storybook-root button": [
           {
@@ -681,29 +670,26 @@
         ]
       },
       "semantics": {
-        "textSha256": "d15c42ea9f5ca15eff40d757ed6248b35fac40ca7af8fe0faec4ed3009f3aca2",
-        "layoutSha256": "33158cde0c3e0ba675e60bb2fb8c6426aae9f3d175c2e81b521aa0985656e84e"
+        "textSha256": "8a2c7913c25606fb80fd6774914db7f233362ed893ffad7c0b785d60b1d536b1",
+        "layoutSha256": "2c1544522673976754e2fe2ebdf4f4f66d67076e0aca6d2657ef10e32b05a8a0"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
       }
     },
     "data-datatable--ready--fr-dark.png": {
       "story": "data-datatable--ready",
       "combo": "fr-dark",
       "width": 1280,
-      "height": 1358,
-      "originalSha256": "de95e3f8781a59c056343993a7940a89185bb0797e377bea236242755b0f201e",
-      "overrideSha256": "3ec7433eb6525272bd34f0f6776a324853ffcf5125e8f42c8f49c8bfcfe7b0f4",
-      "reviewedChangedPixels": 21,
-      "affectedGlyphs": [
-        "1"
-      ],
-      "affectedText": [
-        {
-          "text": "11 sept. 2026",
-          "glyph": "1",
-          "tag": "TD",
-          "font": "\"OrgTik Arabic\", Arial, Helvetica, sans-serif"
-        }
-      ],
+      "height": 800,
+      "originalSha256": "187fcc937a1acc68b27314be1be904f12498c114df7449c345d0dfc8f0e38cc8",
+      "overrideSha256": "415b508c49d1d9f4b860cb54d0e1c02e98af6f8f105ac14cf679ad12da6e26d5",
+      "reviewedChangedPixels": 0,
+      "affectedGlyphs": [],
+      "affectedText": [],
       "platformFonts": {
         "#storybook-root button": [
           {
@@ -715,8 +701,14 @@
         ]
       },
       "semantics": {
-        "textSha256": "d759b12d9543a4f9613b15f8cacc958e6ff75b9e3cccdb34aea5cc7c1e505e91",
-        "layoutSha256": "4890733deea6e094e0442b2e79777e8ffb5d713c42e0da637b4236de9bcbd205"
+        "textSha256": "e6c6b487c9b875aba325e00739c856f5c446a8db1e7a2deb722abb00b05cf039",
+        "layoutSha256": "30eea7a70b449fb73bee391b359423c4b180138e69505d57c3c0b5d3536887d8"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
       }
     },
     "p1b-dates--dates-story--en-light.png": {
@@ -1804,6 +1796,216 @@
       "semantics": {
         "textSha256": "63e06a26ba1829fa026e4e96d8c19477867419ad8eba11246b5cd2e8079170e9",
         "layoutSha256": "37fcea9467ca478d184ef0ee10cc5d1f12b020eebb8c0ac4cc34584b82237715"
+      }
+    },
+    "data-paginatedtable--legacy--en-light.png": {
+      "story": "data-paginatedtable--legacy",
+      "combo": "en-light",
+      "width": 1280,
+      "height": 933,
+      "originalSha256": "25db7c5e631fa10e82c257e211b5bc5474ae0f9ea0d902ff041d49d4c5d29397",
+      "overrideSha256": "bf766749817dac4caa8d3bd4d550531c4f7801e2d9f95ba9bba1401114842a05",
+      "reviewedChangedPixels": 12,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        "11"
+      ],
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 3
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "4f6b71da3b563faf847c40381e6203e3c7a2d21a765e05fd0cebaed977fb2083",
+        "layoutSha256": "82f80ef553ae1bfcfd6b808acff55aa51e9d5d9b946e4f18102898564958c510"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
+      }
+    },
+    "data-paginatedtable--legacy--en-dark.png": {
+      "story": "data-paginatedtable--legacy",
+      "combo": "en-dark",
+      "width": 1280,
+      "height": 933,
+      "originalSha256": "a4c83bc69fee39240bcfbaacaafdc07bdfd757790a0e67ef77414a768e1311c2",
+      "overrideSha256": "ac290bcb232429817aaf8c0801111f6c2a0b80082c0b3445e9da31dae5a0c516",
+      "reviewedChangedPixels": 6,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        "11"
+      ],
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 3
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "4f6b71da3b563faf847c40381e6203e3c7a2d21a765e05fd0cebaed977fb2083",
+        "layoutSha256": "82f80ef553ae1bfcfd6b808acff55aa51e9d5d9b946e4f18102898564958c510"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
+      }
+    },
+    "data-paginatedtable--legacy--ar-light.png": {
+      "story": "data-paginatedtable--legacy",
+      "combo": "ar-light",
+      "width": 1280,
+      "height": 942,
+      "originalSha256": "80424984fbf4617f845fa775274dc8bb6224c165a47206e408e7c9f8c20cb599",
+      "overrideSha256": "658fde0e813c37072d61d8b5183224f0504ee4ac08ffb40d2fe8607bcb997e2d",
+      "reviewedChangedPixels": 12,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        "11"
+      ],
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 3
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "02d7b9609199321b7318579fec46e1cbd7529b0c5a0e506d5bb28991095fc6fa",
+        "layoutSha256": "21e2f8c7d2231f9a61edcdb48fd2c3a97fdc31bed3ed0da2d5eb17ee67137f12"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
+      }
+    },
+    "data-paginatedtable--legacy--ar-dark.png": {
+      "story": "data-paginatedtable--legacy",
+      "combo": "ar-dark",
+      "width": 1280,
+      "height": 942,
+      "originalSha256": "8a01e5381391db5dede96677becc1ecc589317d8e646fb7af0b4dad588750fd7",
+      "overrideSha256": "1e16a85e2bdf60b3e3800c07f96d493136c3b7f72d2edd61edc655dc65145c60",
+      "reviewedChangedPixels": 6,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        "11"
+      ],
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 3
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "02d7b9609199321b7318579fec46e1cbd7529b0c5a0e506d5bb28991095fc6fa",
+        "layoutSha256": "21e2f8c7d2231f9a61edcdb48fd2c3a97fdc31bed3ed0da2d5eb17ee67137f12"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
+      }
+    },
+    "data-paginatedtable--legacy--de-light.png": {
+      "story": "data-paginatedtable--legacy",
+      "combo": "de-light",
+      "width": 1280,
+      "height": 933,
+      "originalSha256": "3e1ac5c88c1d68a6a2dbbaa1af843c475350a15d3dbf9b584a38a531ff11887a",
+      "overrideSha256": "88c352af81611d7232045bb8a06081e63d6f5a00cfaf511ec350ae05ddc901e7",
+      "reviewedChangedPixels": 12,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        "11"
+      ],
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 3
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "02a940874924f7e8c1dce354c066e2e0dd142b42e43f5bdf28deeb2d9e138db3",
+        "layoutSha256": "27d93ad43227acb7feb5685d313fedadd736690a247d4a38935c731c0819a3eb"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
+      }
+    },
+    "data-paginatedtable--legacy--fr-dark.png": {
+      "story": "data-paginatedtable--legacy",
+      "combo": "fr-dark",
+      "width": 1280,
+      "height": 933,
+      "originalSha256": "81058ecbceb6033a5923428355214282056d3a2186eb69e33657b15e72aea692",
+      "overrideSha256": "5ae18c2ad35816463bcc253ec7fd5343674c367b106619f22bc88fe22dfeb02d",
+      "reviewedChangedPixels": 6,
+      "affectedGlyphs": [
+        "1"
+      ],
+      "affectedText": [
+        "11"
+      ],
+      "platformFonts": {
+        "#storybook-root input": [
+          {
+            "familyName": "Arial",
+            "postScriptName": "ArialMT",
+            "isCustomFont": false,
+            "glyphCount": 3
+          }
+        ]
+      },
+      "semantics": {
+        "textSha256": "6fa20dcb7069dc70a4d0ae52758b993dca549f421ad75915271108ebad00e749",
+        "layoutSha256": "9ee0b8bb55f123b2db4d167331235d7e346b9ff829d1479a92c3303f63b4bb42"
+      },
+      "review": {
+        "sourceCommit": "b91d73d7dc403b76a505f607e3f4797c8c914543",
+        "headCommit": "e5608162b2e5ef15bff9336496e9ace0e44b4470",
+        "run": "https://github.com/YossefElfeel/orgtik-suite/actions/runs/37853836926",
+        "reviewedAt": "2026-10-09"
       }
     }
   }

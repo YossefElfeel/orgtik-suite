@@ -19,7 +19,7 @@ import { PROJECT_PRIORITIES, PROJECT_STATUSES, type ProjectPriority } from "@/ty
 import { useProjectColumns } from "./columns";
 
 const ALL = "all";
-const SIZES = [10, 25, 50];
+const SIZES = [10];
 
 export default function ProjectsPage() {
   const t = useTranslations("Projects");

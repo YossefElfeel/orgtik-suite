@@ -35,7 +35,7 @@ import {
 import { useGetUnreadCountQuery } from "@/redux/features/notifications/notificationsApi";
 import { ACTIVITY_CATEGORIES, type ActivityFeedCategory } from "@/types/activity-feed";
 
-const SIZES = [20, 50, 100];
+const SIZES = [10];
 
 function ActivityFeed() {
   const t = useTranslations("SalesActivity");

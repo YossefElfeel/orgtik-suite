@@ -5,6 +5,7 @@
 import type { EntryContent, EntryType, LayoutSection } from "@/store/api";
 import { BLOCKS, BRIEF, type Department, type Node } from "./caseStudySchema";
 import { cmsLabelKey, cmsNodeLabels } from "./cmsLabels";
+import sectionMap from "../../../program/cms/sections.json";
 
 export type Area =
   | "pages"
@@ -16,6 +17,7 @@ export type Area =
   | "insights"
   | "legal"
   | "roadmap"
+  | "reviews"
   | "pricing";
 /**
  * `path` is where the section's value sits in one language's tree; "" is the whole tree. The
@@ -31,6 +33,7 @@ export type EditorSection = {
 };
 /** What a type's sections are built from: the entry's department, or its layout. */
 export type SectionSource = {
+  id?: string;
   department?: Department;
   content?: Pick<EntryContent, "layout" | "locales">;
 };
@@ -91,7 +94,7 @@ function layoutSections(e: SectionSource): EditorSection[] {
     string,
     Record<string, unknown>
   >;
-  return (e.content?.layout ?? []).map((sec: LayoutSection) => {
+  const sections = (e.content?.layout ?? []).map((sec: LayoutSection): EditorSection => {
     if (sec.kind === "data")
       return {
         value: sec.key,
@@ -126,6 +129,14 @@ function layoutSections(e: SectionSource): EditorSection[] {
       node: { kind: "group", fields },
     };
   });
+  const mapping = (sectionMap as Record<string, { groups?: Record<string, string[]> }>)[e.id ?? ""];
+  if (!mapping?.groups) return sections;
+  const groups = mapping.groups;
+  const grouped = new Set(Object.values(groups).flatMap(keys => keys.slice(1)));
+  return sections.filter(section => !grouped.has(section.value)).map(section => {
+    const groupKeys = groups[section.value];
+    return !groupKeys ? section : { ...section, path: "", node: { kind: "group", fields: Object.fromEntries(groupKeys.flatMap(key => { const child = sections.find(item => item.value === key); return child ? [[key, child.node]] : []; })) } };
+  });
 }
 
 const text = (label: string): Node => ({ kind: "text", label });
@@ -143,6 +154,10 @@ const titled = (label: string, itemLabel: string): Node => ({
 });
 
 export const TYPES: Record<EntryType, ContentType> = {
+  review: {
+    key: "review", area: "reviews", idPrefix: "rv", neutral: [], image: true, figures: false, path: () => "", seo: false,
+    sections: () => [{ value: "details", path: "", node: group({ name: text("reviewAuthor"), role: text("reviewRole"), company: text("reviewCompany"), quote: long("reviewQuote") }) }],
+  },
   page: {
     key: "page",
     area: "pages",
@@ -383,6 +398,7 @@ export const TYPES: Record<EntryType, ContentType> = {
 
 /** The areas in the navigation, each listing one or more types. */
 export const AREAS: Record<Area, EntryType[]> = {
+  reviews: ["review"],
   pages: ["page"],
   global: ["global"],
   strings: ["strings"],

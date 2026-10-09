@@ -65,3 +65,20 @@ test("a slow CMS request is bounded and falls back to the existing content", asy
   assert.equal((await loadPublishedContent({ api: "https://cms.fixture/v2", fetcher, storage: cache(), timeoutMs: 10 })).source, "packaged");
   assert.deepEqual(snapshot.entries, baseline.entries);
 });
+
+test("FAQ answers, review ordering, and section presentation refresh together and survive an outage", async () => {
+  const next = candidate(), saved = cache();
+  const home = next.entries.page.find(row => row.id === "pg_home");
+  home.locales.en.faqs[0][1] = "A newly published answer.";
+  home.presentation = { sectionOrder: ["hero", "faqs", "work"], sectionMedia: { faqs: [{ src: "https://assets.example.test/faq.mp4", alt: { en: "FAQ overview" } }] }, cursor: { text: { en: "Explore" }, link: "/work" } };
+  next.entries.review = [{ id: "review_new", position: 2, sample: true, locales: { en: { name: "Sample client", quote: "Published sample" } } }];
+  assert.ok(CONTENT_TYPES.includes("review"));
+  assert.equal((await loadPublishedContent({ api: "https://cms.fixture/v2", fetcher: server(next), storage: saved })).source, "published");
+  assert.deepEqual(snapshot.entries.review, next.entries.review);
+  applyPublished(baseline);
+  assert.equal((await loadPublishedContent({ api: "https://cms.fixture/v2", fetcher: async () => { throw Error("Offline"); }, storage: saved })).source, "cached");
+  assert.deepEqual(snapshot.entries.page.find(row => row.id === "pg_home").presentation, home.presentation);
+  assert.equal(snapshot.entries.page.find(row => row.id === "pg_home").locales.en.faqs[0][1], "A newly published answer.");
+  assert.ok(snapshot.entries.page.some(row => row.id === "pg_faq" && row.slug.en === "/faq"));
+  assert.deepEqual(snapshot.entries.review, next.entries.review);
+});

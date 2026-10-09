@@ -113,7 +113,7 @@ export default function SuiteAppsPage() {
         columns={columns}
         data={apps}
         getRowId={(s) => String(s.id)}
-        paginate={false}
+        paginate
         status={isLoading ? "loading" : isError ? "error" : "ready"}
         onRetry={refetch}
         empty={{ title: t("emptyApps"), action: <Button variant="primary" startIcon={<Plus />} onClick={() => setEditing("new")}>{t("add")}</Button> }}

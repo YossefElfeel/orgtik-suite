@@ -19,7 +19,7 @@ import { OFFER_STATUSES, type OfferStatus } from "@/types/offers";
 import { useOfferColumns } from "./columns";
 
 const ALL = "all";
-const SIZES = [10, 25, 50];
+const SIZES = [10];
 
 export default function OffersPage() {
   const t = useTranslations("Offers");

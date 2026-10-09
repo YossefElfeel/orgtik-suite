@@ -100,14 +100,15 @@ module.exports = {
         user: { id: u.id, key: who.user.key, firstName: u.firstName, lastName: u.lastName, email: u.email, avatar: u.avatar ?? null },
         roles: who.roles.map((r) => ({ key: r, label: ROLES[r]?.label ?? r })),
         permissions: who.permissions,
+        identity: require("./wm/users").capabilities(identity, who.user),
         site: { id: "orgtik", name: "orgtik.ch", locales: ["en", "ar", "de", "fr", "it"], publicLocales: ["en"] },
       });
     });
 
-    const store = makeStore(() => new Date().toISOString());
+    const store = makeStore(() => new Date().toISOString(), { demo: true });
     // Metadata restoration must not delete existing bytes during a build/cold start.
     const UPLOADS = ctx.uploadsDir || path.join(__dirname, "wm", "uploads");
-    const lib = makeLibrary({ seed: store.seed, store, now: () => new Date().toISOString(), uploads: UPLOADS });
+    const lib = makeLibrary({ seed: store.seed, store, now: () => new Date().toISOString(), uploads: UPLOADS, demo: true });
     const ops = makeOps({ store, now: () => new Date().toISOString() });
     const previews = new Map();
     const submissions = require("./wm/ideas").ideaSubmissions(store.ideas);
@@ -117,6 +118,7 @@ module.exports = {
     internal = holder;
     // Claude's suggestions for G2's gaps (D-038): drafts for review, never published by themselves.
     require("./wm/suggestions").applySuggestions({ store, media: lib.media, now: () => new Date().toISOString() });
+    store.ensureDemo();
     const analytics = require("./wm/analytics").makeAnalytics({ store, lib, ops, now: () => new Date().toISOString() });
     // Scheduled publishing happens when anyone asks: the mock has no background jobs.
     app.use("/v2", (req, res, next) => (lib.keepAddresses({ key: "scheduler" }, () => store.tick()), next()));
@@ -127,7 +129,7 @@ module.exports = {
       // Media issues come from the library: files in use without a description or clear rights.
       const mediaIssues = [...lib.media.values()].filter((m) => lib.mediaOut(m).issues.some((i) => i !== "unused")).length;
       const newLeads = [...ops.leads.values()].filter((l) => l.status === "new").length;
-      ok(res, { queue: { ...store.queue(who(req)), mediaIssues, newLeads } }, { generatedAt: new Date().toISOString() });
+      ok(res, { queue: { ...store.queue(who(req)), seoIssues: lib.health().counts.descriptionMissing, mediaIssues, newLeads } }, { generatedAt: new Date().toISOString() });
     });
 
     // Test control: the seed as the website has it, without Claude's suggestions (flows that count
@@ -201,9 +203,16 @@ module.exports = {
       if (state) rows = rows.filter((r) => r.state === state);
       if (dept) rows = rows.filter((r) => r.department === dept);
       if (parent) rows = rows.filter((r) => r.parent === parent);
+      if (req.query.missingLanguages === "true") rows = rows.filter(r => ["en", "ar", "de", "fr", "it"].some(locale => !["ready", "published"].includes(r.translation[locale])));
+      if (req.query.deliveryStatus) rows = rows.filter(r => r.status === req.query.deliveryStatus);
+      if (req.query.period) rows = rows.filter(r => r.period === req.query.period);
+      if (req.query.year) rows = rows.filter(r => String(r.year) === String(req.query.year));
       // Services sort inside their family, like the website lists them.
       rows.sort((a, b) => String(a.parent ?? "").localeCompare(String(b.parent ?? "")) || a.order - b.order);
-      const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 25));
+      const sort = String(req.query.sort ?? "");
+      const field = ({ name: "name", state: "state", updated: "updatedAt" })[sort.replace(/^-/, "")];
+      if (field) rows.sort((a, b) => String(a[field]).localeCompare(String(b[field])) * (sort.startsWith("-") ? -1 : 1));
+      const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 10));
       const page = Math.max(1, Number(req.query.page) || 1);
       ok(res, rows.slice((page - 1) * pageSize, page * pageSize), { page, pageSize, total: rows.length });
     });
@@ -297,11 +306,13 @@ module.exports = {
     });
 
     app.get("/v2/admin/audit", need("settings:view"), (req, res) => {
-      const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 25));
+      const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 10));
       const page = Math.max(1, Number(req.query.page) || 1);
       const type = String(req.query.type ?? "");
       const by = String(req.query.by ?? "");
-      let rows = store.audit;
+      const search = String(req.query.search ?? "").trim().toLowerCase();
+      let rows = store.audit.map(event => ({ ...event, targetName: event.targetName ?? (store.entries.has(event.entry) ? store.summary(store.entries.get(event.entry)).name : event.entry) }));
+      if (search) rows = rows.filter(event => `${event.targetName} ${event.action} ${person(event.by).name ?? ""}`.toLowerCase().includes(search));
       // "content": anything that happened to a page or an entry, whatever its type.
       if (type === "content") rows = rows.filter((a) => store.entries.has(a.entry));
       else if (type) rows = rows.filter((a) => a.type === type);
@@ -315,11 +326,17 @@ module.exports = {
     });
 
     const page = (req, rows) => {
-      const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 25));
+      const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 10));
       const n = Math.max(1, Number(req.query.page) || 1);
       return { rows: rows.slice((n - 1) * pageSize, n * pageSize), meta: { page: n, pageSize, total: rows.length } };
     };
+    app.get("/v2/admin/queue", need("content:view"), (req, res) => {
+      let rows = [...store.entries.values()].filter(entry => (!req.query.state || (entry.draft ? entry.workflow.state : "published") === req.query.state) && (req.query.mine !== "1" || entry.workflow.lastEditor === req.who.user.key)).map(entry => named(store.summary(entry)));
+      if (req.query.search) rows = rows.filter(row => row.name.toLowerCase().includes(String(req.query.search).toLowerCase()));
+      const result = page(req, rows); ok(res, result.rows, result.meta);
+    });
     // ---- members: who works in the Website Manager (for owners of leads, audit filters) ----
+    require("./wm/users").registerUsers(app, { identity, store, need, ok, fail, page });
     app.get("/v2/admin/members", need("content:view"), (req, res) => {
       const rows = identity.users
         .map((u) => ({ u, roles: rolesOf(u) }))
@@ -336,7 +353,7 @@ module.exports = {
       const q = String(req.query.search ?? "").trim().toLowerCase();
       let rows = [...ops.leads.values()];
       if (status === "open") rows = rows.filter((l) => ops.OPEN.includes(l.status));
-      else if (status === "closed") rows = rows.filter((l) => !ops.OPEN.includes(l.status));
+      else if (status === "closed") rows = rows.filter((l) => ["unqualified", "lost", "spam", "duplicate"].includes(l.status));
       else if (status) rows = rows.filter((l) => l.status === status);
       // Search by name or email only for those who may see them.
       if (q) rows = rows.filter((l) => `${l.topic} ${l.message} ${l.company} ${pii(req) ? `${l.name} ${l.email}` : ""}`.toLowerCase().includes(q));
@@ -435,6 +452,25 @@ module.exports = {
     // ---- roadmap ideas: community submissions and their moderation ----
     const { ideaView, eraseSubmitter } = require("./wm/ideas");
     const ideaOut = (req, x) => ({ ...ideaView(x, pii(req)), history: x.history.map((h) => ({ ...h, by: person(h.by === "visitor" ? null : h.by) })) });
+    app.get("/v2/admin/ideas/:id", need("marketing:view"), (req, res) => {
+      const idea = store.ideas.get(req.params.id);
+      if (!idea) return fail(res, 404, "not_found", "This idea does not exist.");
+      ok(res, ideaOut(req, idea));
+    });
+    app.patch("/v2/admin/ideas/:id", need("marketing:edit"), (req, res) => {
+      const idea = store.ideas.get(req.params.id);
+      if (!idea) return fail(res, 404, "not_found", "This idea does not exist.");
+      if (Number(req.get("if-match")) !== idea.version) return fail(res, 412, "stale", "This idea changed since you opened it.", { current: idea.version });
+      const patch = req.body ?? {}, errors = {};
+      for (const [field, max] of Object.entries({ title: 180, body: 5000, theme: 100 })) if (field in patch && (typeof patch[field] !== "string" || !patch[field].trim() || patch[field].length > max)) errors[field] = "invalid";
+      if (Object.keys(errors).length) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: errors });
+      for (const field of ["title", "body", "theme"]) if (field in patch) idea[field] = patch[field].trim();
+      idea.version += 1;
+      const at = new Date().toISOString(), by = who(req).key;
+      idea.history.unshift({ at, by, action: "edit", from: idea.status, to: idea.status });
+      store.audit.unshift({ at, by, action: "idea_edit", entry: idea.id, type: "idea", version: idea.version });
+      ok(res, ideaOut(req, idea));
+    });
     app.get("/v2/admin/ideas", need("marketing:view"), (req, res) => {
       const status = String(req.query.status ?? "");
       const q = String(req.query.search ?? "").trim().toLowerCase();
@@ -445,7 +481,7 @@ module.exports = {
       rows.sort((a, b) => (a.status === "pending" && b.status === "pending" ? a.submittedAt.localeCompare(b.submittedAt) : b.votes - a.votes));
       const counts = {};
       for (const x of store.ideas.values()) counts[x.status] = (counts[x.status] ?? 0) + 1;
-      const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 25));
+      const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 10));
       const page = Math.max(1, Number(req.query.page) || 1);
       ok(res, rows.slice((page - 1) * pageSize, page * pageSize).map(x => ideaOut(req, x)), { page, pageSize, total: rows.length, counts });
     });
@@ -523,10 +559,11 @@ module.exports = {
       const q = String(req.query.search ?? "").trim().toLowerCase();
       let rows = [...lib.media.values()].map((m) => mediaOf(m));
       if (kind) rows = rows.filter((m) => m.kind === kind);
-      if (issue) rows = rows.filter((m) => m.issues.includes(issue));
-      if (q) rows = rows.filter((m) => `${m.file} ${Object.values(m.alt).join(" ")}`.toLowerCase().includes(q));
+      if (issue) rows = rows.filter((m) => issue === "attention" ? m.issues.some(value => value !== "unused") : m.issues.includes(issue));
+      if (q) rows = rows.filter((m) => `${m.file} ${m.description ?? ""} ${(m.tags ?? []).join(" ")} ${Object.values(m.alt).join(" ")}`.toLowerCase().includes(q));
       const counts = {};
       for (const m of [...lib.media.values()].map((x) => lib.mediaOut(x))) for (const i of m.issues) counts[i] = (counts[i] ?? 0) + 1;
+      counts.attention = [...lib.media.values()].filter(m => lib.mediaOut(m).issues.some(issue => issue !== "unused")).length;
       const { rows: out, meta } = page(req, rows);
       ok(res, out, { ...meta, counts });
     });
@@ -546,10 +583,14 @@ module.exports = {
     });
     const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 15 * 1024 * 1024 } });
     const ACCEPT = ["image/webp", "image/png", "image/jpeg", "image/svg+xml", "video/mp4", "video/webm"];
-    app.post("/v2/admin/media", need("media:edit"), upload.single("file"), (req, res) => {
+    app.post("/v2/admin/media", need("media:edit"), (req, res, next) => upload.single("file")(req, res, error => error ? fail(res, 422, "invalid", "The upload is incomplete or exceeds 15 MB.", { fieldErrors: { file: "invalid" } }) : next()), (req, res) => {
       if (!req.file) return fail(res, 422, "invalid", "Choose a file to upload.", { fieldErrors: { file: "required" } });
       if (!ACCEPT.includes(req.file.mimetype)) return fail(res, 422, "invalid", "This kind of file can't go on the website.", { fieldErrors: { file: "type" } });
-      ok(res, mediaOf(lib.addUpload(who(req), req.file), true), {}, 201);
+      let tags;
+      try { tags = JSON.parse(req.body.tags ?? "[]"); } catch { return fail(res, 422, "invalid", "Tags must be a list."); }
+      const description = req.body.description ?? "";
+      if (typeof description !== "string" || description.length > 2000 || !Array.isArray(tags) || tags.length > 30 || tags.some(tag => typeof tag !== "string" || tag.length > 80)) return fail(res, 422, "invalid", "Invalid media metadata.");
+      ok(res, mediaOf(lib.addUpload(who(req), req.file, { description: description.trim(), tags: [...new Set(tags.map(tag => tag.trim()).filter(Boolean))] }), true), {}, 201);
     });
     app.delete("/v2/admin/media/:id", need("media:edit"), (req, res) => {
       const m = mediaOr404(req, res);
@@ -559,6 +600,7 @@ module.exports = {
       res.status(204).end();
     });
     app.get("/v2/media/:file", (req, res) => {
+      if (![...lib.media.values()].some(media => media.source === "upload" && media.file === req.params.file)) return res.status(404).end();
       const f = path.join(UPLOADS, path.basename(req.params.file));
       if (!fs.existsSync(f)) return res.status(404).end();
       res.sendFile(f);
@@ -568,11 +610,22 @@ module.exports = {
     app.get("/v2/admin/seo/health", need("seo:view"), (req, res) => {
       const h = lib.health();
       const issue = String(req.query.issue ?? "");
-      const rows = issue ? h.rows.filter((r) => r.issues.includes(issue)) : h.rows;
-      ok(res, rows, { total: rows.length, page: 1, pageSize: rows.length, counts: h.counts, healthy: h.healthy, checked: h.rows.length });
+      let rows = issue ? h.rows.filter((r) => r.issues.includes(issue)) : h.rows;
+      const search = String(req.query.search ?? "").trim().toLowerCase();
+      if (search) rows = rows.filter(row => `${row.name} ${row.path} ${row.title}`.toLowerCase().includes(search));
+      if (req.query.kind) rows = rows.filter(row => row.type === req.query.kind);
+      const result = page(req, rows);
+      ok(res, result.rows, { ...result.meta, counts: h.counts, healthy: h.healthy, checked: h.rows.length });
     });
     app.get("/v2/admin/seo/redirects", need("seo:view"), (req, res) => {
-      const rows = [...lib.redirects.values()].sort((a, b) => a.from.localeCompare(b.from)).map((r) => ({ ...r, createdBy: person(r.createdBy) }));
+      let rows = [...lib.redirects.values()].sort((a, b) => a.from.localeCompare(b.from)).map((r) => {
+        const history = store.audit.filter(event => event.entry === r.id && event.type === "redirect" || event.action === "redirect_auto" && event.from === r.from);
+        if (!history.some(event => ["redirect_create", "redirect_auto"].includes(event.action))) history.push({ at: r.createdAt, by: r.createdBy, action: "redirect_create" });
+        return { ...r, createdBy: person(r.createdBy), history: history.map(event => ({ ...event, by: person(event.by) })) };
+      });
+      const search = String(req.query.search ?? "").trim().toLowerCase();
+      if (search) rows = rows.filter(row => `${row.from} ${row.to} ${row.note ?? ""}`.toLowerCase().includes(search));
+      if (req.query.kind) rows = rows.filter(row => String(row.code) === req.query.kind);
       const { rows: out, meta } = page(req, rows);
       ok(res, out, meta);
     });
@@ -598,7 +651,7 @@ module.exports = {
       res.status(204).end();
     });
     app.get("/v2/admin/seo/indexing", need("seo:view"), (req, res) => {
-      ok(res, { settings: { ...lib.settings, history: lib.settings.history.map((h) => ({ ...h, by: person(h.by) })) }, sitemap: lib.sitemap(), robots: lib.robots() });
+      ok(res, { settings: { ...lib.settings, history: lib.settings.history.map((h) => ({ ...h, by: person(h.by) })) }, urls: lib.indexingUrls(), sitemap: lib.sitemap(), robots: lib.robots() });
     });
     app.patch("/v2/admin/seo/indexing", need("seo:view"), (req, res) => {
       if (!req.who.permissions.includes("site:visibility")) return fail(res, 403, "forbidden", "Changing search visibility needs site:visibility.", { required: "site:visibility" });
@@ -606,7 +659,7 @@ module.exports = {
       if (want != null && Number(want) !== lib.settings.version) return fail(res, 412, "stale", "Someone changed this since you opened it.", { current: lib.settings.version, by: person(lib.settings.history[0]?.by).name ?? "" });
       const r = lib.setVisibility(who(req), req.body?.visibility, req.body?.reason);
       if (r.errors) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: r.errors });
-      ok(res, { settings: { ...lib.settings, history: lib.settings.history.map((h) => ({ ...h, by: person(h.by) })) }, sitemap: lib.sitemap(), robots: lib.robots() });
+      ok(res, { settings: { ...lib.settings, history: lib.settings.history.map((h) => ({ ...h, by: person(h.by) })) }, urls: lib.indexingUrls(), sitemap: lib.sitemap(), robots: lib.robots() });
     });
     // What the website's head tags need from the settings (S3: prerender-heads). No people, no PII.
     // A file the website ships is its own /assets path; an upload lives in the Website Manager until the site has it.

@@ -20,7 +20,7 @@ const ActivityLogs = () => {
   const t = useTranslations("Activity");
   const tc = useTranslations("Common");
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(25);
+  const [limit, setLimit] = useState(10);
   const [actorId, setActorId] = useState<string | null>(null);
   const [period, setPeriod] = useState<DateRange | null>(null);
   const { data, isLoading, isError, error, refetch } = useGetActivityLogsQuery({

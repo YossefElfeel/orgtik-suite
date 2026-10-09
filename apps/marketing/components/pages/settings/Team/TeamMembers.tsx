@@ -100,7 +100,7 @@ export function TeamMembers() {
         getRowId={(m) => String(m.id)}
         status={status}
         onRetry={refetch}
-        paginate={members.length > 25}
+        paginate
         empty={{ title: errorStatus === 404 ? t("noProject") : t("emptyTitle"), description: t("emptyBody"), action: errorStatus === 404 ? undefined : manage }}
         error={{ title: t("loadError") }}
         forbidden={{ title: t("forbidden") }}

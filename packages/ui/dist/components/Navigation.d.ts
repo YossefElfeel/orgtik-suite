@@ -26,7 +26,7 @@ export type PaginationProps = {
     pageSize: number;
     total: number;
     onPageChange?: (page: number) => void;
-    /** Shows the rows-per-page choice (25/50/100 by default). */
+    /** Shows the rows-per-page choice (10 by default). */
     onPageSizeChange?: (size: number) => void;
     pageSizes?: number[];
     /** For URL-synced lists: pages render as real links, so they can be opened and shared. */

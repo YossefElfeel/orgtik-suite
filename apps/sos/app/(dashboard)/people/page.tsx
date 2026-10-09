@@ -21,7 +21,7 @@ import { useAppLabel } from "@/components/suite/useSuiteApps";
 import useUser from "@/hooks/use-user";
 import { personName, usePeopleColumns, type PersonAction } from "./columns";
 
-const PAGE_SIZES = [10, 25, 50];
+const PAGE_SIZES = [10];
 // The "all" choice of each filter (the Select treats an empty value as no choice).
 const ALL = "all";
 

@@ -226,7 +226,7 @@ export function Gateways() {
           {t("gateways.listTitle")}
         </h2>
         <p className="text-body-sm text-fg-muted">{editable ? t("gateways.listHelp") : tc("viewOnly")}</p>
-        <DataTable label={t("gateways.listTitle")} columns={columns} data={rows} getRowId={(r) => r.id} status={listStatus(isLoading, error)} paginate={false} onRetry={refetch} empty={{ title: t("gateways.empty") }} />
+        <DataTable label={t("gateways.listTitle")} columns={columns} data={rows} getRowId={(r) => r.id} status={listStatus(isLoading, error)} paginate onRetry={refetch} empty={{ title: t("gateways.empty") }} />
       </section>
       {editing ? <GatewayDialog gateway={editing} onClose={() => setEditing(null)} /> : null}
     </div>

@@ -38,6 +38,7 @@ import { dayLabel, dayLabels, formatHours, formatTag } from "@/lib/time";
 import { MIN_COHORT, type Id } from "@/entities";
 import { bucketize, formatRangeLabel, presetRange, previousRange, toCsv, toKey, type LengthBand } from "@/lib/analytics";
 import { msgText } from "@/lib/messages";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 const LENGTH_LABEL: Record<LengthBand, string> = {
   "15": msgText("insights.length.15", "15 min"),
@@ -476,7 +477,7 @@ export function InsightsView() {
                 <Panel>
                   <SectionHead title={t("insights.tableTitle", "Every day in the period")} meta={t("insights.nDays", "{n} days", { n: agg.days })} />
                   <div className="max-h-[380px] overflow-auto" style={{ borderRadius: "var(--radius-control)" }}>
-                    <table className="w-full text-[12.5px]" style={{ borderCollapse: "collapse" }}>
+                    <PaginatedTable resetKey={`${period.range.from}/${period.range.to}/${cohortIds.join(",")}`}><table className="w-full text-[12.5px]" style={{ borderCollapse: "collapse" }}>
                       <thead>
                         <tr style={{ position: "sticky", top: 0, background: "var(--color-surface)" }}>
                           {[
@@ -526,7 +527,7 @@ export function InsightsView() {
                           </tr>
                         ))}
                       </tbody>
-                    </table>
+                    </table></PaginatedTable>
                   </div>
                 </Panel>
               )}

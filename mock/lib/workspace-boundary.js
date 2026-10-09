@@ -489,7 +489,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const url = req.url || "/", authPublic = /^\/api\/auth\/(login|register|handoff\/exchange)(?:$|\?)/.test(url);
     const publicFile = key === 'files' && /^\/api\/v1\/public\/shares\/([\w-]+)(?:$|\/|\?)/.exec(url);
     const taskSample = key === 'tasks' && isTaskSampleRequest(req);
-    const publicCms = key === 'wm' && (['GET', 'HEAD'].includes(req.method) && /^\/v2\/public(?:\/|$)/.test(url) || req.method === 'POST' && /^\/v2\/public\/(leads|ideas)(?:$|\?)/.test(url));
+    const publicCms = key === 'wm' && (['GET', 'HEAD'].includes(req.method) && /^\/v2\/(?:public(?:\/|$)|media\/[^/]+(?:$|\?))/.test(url) || req.method === 'POST' && /^\/v2\/public\/(leads|ideas)(?:$|\?)/.test(url));
     const cmsPreview = key === 'wm' && ['GET', 'HEAD'].includes(req.method) && /^\/v2\/preview\/entries\/[\w-]+(?:$|\?)/.test(url);
     const anonymous = authPublic || publicFile || taskSample || publicCms || cmsPreview || /^\/v1\/public\//.test(url) || /^\/(__health|__mock\/status|__mock\/clock)(?:$|\?)/.test(url);
     let frame, runtime, commitAttempted = false;
@@ -502,7 +502,8 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       frame = await authority.prepareRequest(req, { audience: publicCms || cmsPreview || taskSample ? undefined : expectedAudience(key, url), allowAnonymous: anonymous, ...(authPublic || publicFile || publicCms || cmsPreview || taskSample ? { token: null } : {}), ...(refresh ? { token: json.refreshToken, type: "refresh" } : {}) });
       frame.authorizationSnapshot = platformBefore;
       const principal = frame.principal;
-      if (['POST', 'PUT', 'PATCH'].includes(req.method) && /multipart\/form-data|application\/octet-stream/i.test(req.headers['content-type'] || '')) throw failure(501, 'packaged_assets_only', 'Choose a packaged sample asset in this prototype.');
+      const cmsUpload = key === 'wm' && req.method === 'POST' && /^\/v2\/admin\/media(?:$|\?)/.test(url);
+      if (['POST', 'PUT', 'PATCH'].includes(req.method) && /multipart\/form-data|application\/octet-stream/i.test(req.headers['content-type'] || '') && !cmsUpload) throw failure(501, 'packaged_assets_only', 'Choose a packaged sample asset in this prototype.');
       if (cmsPreview) {
         const token = /^Preview (\S+)$/.exec(req.headers.authorization || '')?.[1];
         if (!require('../apps/wm').validatePreviewGrant?.(token)) throw failure(401, 'preview_expired', 'Open a new preview from Website Manager.');

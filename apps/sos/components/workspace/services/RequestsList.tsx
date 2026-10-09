@@ -13,7 +13,7 @@ import { useGetServiceRequestsQuery, type ServiceRequest } from "@/redux/feature
 import { useLocalized } from "@/components/workspace/account/problems";
 import { nextStep, requestBadge } from "./status";
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 10;
 
 export function RequestsList() {
   const t = useTranslations("Services.requests");

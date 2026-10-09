@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useRouter } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import {
   ClockCounterClockwise,
@@ -51,6 +51,12 @@ import {
 } from "@/components/content/EditorExtras";
 import { SeoPanel, type SeoBlock } from "@/components/content/SeoPanel";
 import { PricingAuthority } from "@/components/content/PricingAuthority";
+import { SharedCopyPanel, SHARED_PAGES } from "@/components/content/SharedCopyPanel";
+import { IconPicker } from "./IconPicker";
+import { SectionOrder } from "./SectionOrder";
+import { SectionAttachments } from "./SectionAttachments";
+import { MediaPicker } from "@/components/media/MediaPicker";
+import sectionMap from "../../../../program/cms/sections.json";
 import {
   LifecycleActions,
   VisibilityBadge,
@@ -60,9 +66,10 @@ import {
   type ContentType,
   type EditorSection,
 } from "@/lib/contentTypes";
-import { mediaUrl } from "@/lib/env";
+
 import { useEntryName } from "@/lib/entryName";
 import { useCan } from "@/lib/permissions";
+import { safeReturn } from "@/lib/useListState";
 import {
   statusOf,
   useApproveFiguresMutation,
@@ -105,8 +112,9 @@ const get = (tree: Tree | undefined, path: string) =>
 const put = (tree: Tree, path: string, v: unknown): Tree =>
   path ? { ...tree, [path]: v } : (v as Tree);
 
-function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
+function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentType; seoOnly?: boolean }) {
   const t = useTranslations("Editor");
+  const ti = useTranslations("Improvements");
   const tp = useTranslations("Preview");
   const router = useRouter();
   const tt = useTranslations("Types");
@@ -116,17 +124,21 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
   const tl = useTranslations("Fields");
   const f = useFormatter();
   const uiLocale = useLocale();
-  const can = useCan();
+  const permitted = useCan();
+  const params = useSearchParams();
+  const viewing = params.get("view") === "1";
+  const can = (permission: string) => (!viewing || permission.endsWith(":view")) && (!seoOnly || !permission.startsWith("content:")) && permitted(permission);
   const images = useMediaQuery({ kind: "image", pageSize: 100 });
   const indexing = useIndexingQuery(undefined, { skip: !can("seo:view") });
   const me = useMeQuery();
-  const sections: EditorSection[] = type.sections(entry);
+  const references = (sectionMap as Record<string, { references?: Record<string, string> }>)[entry.id]?.references ?? {};
+  const sections: EditorSection[] = seoOnly ? [] : [...type.sections(entry), ...Object.keys(references).map(value => ({ value, path: "", label: ti(value), node: { kind: "group" as const, fields: {} } })), ...(SHARED_PAGES[entry.id] ? [{ value: "shared-copy", path: "", label: ti("sharedCopy"), node: { kind: "group" as const, fields: {} } }] : [])];
   // ?lang=ar opens the editor in that language (from the localization matrix).
   const asked = useSearchParams().get("lang") as Locale | null;
   const [lang, setLang] = useState<Locale>(
     asked && LOCALES.includes(asked) ? asked : "en",
   );
-  const [section, setSection] = useState<string>(sections[0].value);
+  const [section, setSection] = useState<string>(seoOnly ? "seo" : params.get("section") ?? sections[0]?.value ?? "seo");
   // Unsaved edits per language, over the entry's current content.
   const [edits, setEdits] = useState<Partial<Record<Locale, Tree>>>({});
   const [seoEdits, setSeoEdits] = useState<Partial<Record<Locale, SeoBlock>>>(
@@ -135,6 +147,10 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
   const [slugEdit, setSlugEdit] = useState<string | null>(null);
   const [neutralEdit, setNeutralEdit] = useState<NeutralPatch>({});
   const [altEdits, setAltEdits] = useState<Partial<Record<Locale, string>>>({});
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [imageFocal, setImageFocal] = useState<{ x: number; y: number }>();
+  const [presentationEdit, setPresentationEdit] = useState<Entry["content"]["presentation"]>();
+  const presentation = presentationEdit ?? entry.content.presentation ?? { sectionOrder: [], sectionMedia: {}, cursor: { text: {}, link: "" } };
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [stale, setStale] = useState<{ by: string } | null>(null);
   const [save, saving] = useSaveEntryMutation();
@@ -143,6 +159,8 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
   // Services live under their family's address; articles are filed under a family.
   const needsFamilies =
     type.key === "service" || type.neutral.includes("category");
+  const relatedServices = useEntriesQuery({ type: "service", pageSize: 100 }, { skip: type.key !== "review" });
+  const relatedSoftware = useEntriesQuery({ type: "softwareModule", pageSize: 100 }, { skip: type.key !== "review" });
   const families = useEntriesQuery(
     { type: "serviceFamily", pageSize: 100 },
     { skip: !needsFamilies },
@@ -157,7 +175,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
   const dirty =
     [edits, seoEdits, neutralEdit, altEdits].some(
       (o) => Object.keys(o).length > 0,
-    ) || slugEdit !== null;
+    ) || slugEdit !== null || imageSrc !== null || Boolean(presentationEdit);
   // Retained catalog mirrors are read-only. Current prices are owned by the platform.
   const managedIn = entry.content.managedIn ?? null;
   const editable = can("content:edit") && !managedIn;
@@ -183,7 +201,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
   };
   const lastEditor = entry.versions.find((v) => v.state === "draft")?.by.key;
   const mine = entry.hasDraft && lastEditor === me.data?.user.key;
-  const areaTitle = ta(`${type.area}.title`);
+  const areaTitle = seoOnly ? ti("seoHealth") : ta(`${type.area}.title`);
   const entryName = useEntryName();
   const name = entryName(entry) || String(english?.name ?? "");
   const familySlug = entry.parent
@@ -255,10 +273,11 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
           }).unwrap()
         ).version;
       }
-      if (Object.keys(neutralEdit).length || Object.keys(altEdits).length) {
+      if (Object.keys(neutralEdit).length || Object.keys(altEdits).length || imageSrc !== null || presentationEdit) {
         const patch = {
           neutral: Object.keys(neutralEdit).length ? neutralEdit : undefined,
-          image: Object.keys(altEdits).length ? { alt } : undefined,
+          image: Object.keys(altEdits).length || imageSrc !== null ? { alt, ...(imageSrc !== null ? { src: imageSrc, focal: imageFocal } : {}) } : undefined,
+          presentation: presentationEdit,
         };
         version = (await save({ ...ref, version, patch }).unwrap()).version;
       }
@@ -267,6 +286,9 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
       setSlugEdit(null);
       setNeutralEdit({});
       setAltEdits({});
+      setImageSrc(null);
+      setImageFocal(undefined);
+      setPresentationEdit(undefined);
       toast.success(t("saved"));
     } catch (e) {
       onError(e);
@@ -362,7 +384,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
   const setTree = (next: Tree) => setEdits((e) => ({ ...e, [lang]: next }));
   // A section is named by the page's own heading, a field name, or the editor's tab name.
   const sectionName = (s: EditorSection) =>
-    s.label ??
+    (s.label === "Custom Cursor" || s.label === "View project" ? ti("customCursor") : s.label) ??
     (s.labelKey && tl.has(s.labelKey)
       ? tl(s.labelKey)
       : t.has(`tabs.${s.value}`)
@@ -380,6 +402,8 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
   const seo = { ...(entry.content.seo[lang] ?? {}), ...(seoEdits[lang] ?? {}) };
   const hasShared = type.neutral.length > 0 || type.image;
   const lockShared = !editable || lang !== "en";
+  const body = (sectionMap as Record<string, { body: string[] }>)[entry.id]?.body ?? [];
+  const orderedBody = [...new Set([...presentation.sectionOrder.filter(key => body.includes(key)), ...body])];
 
   // What every language shares (icon, date, family...) and the image with its description in this
   // language. Shared fields are set in English; the description is per language.
@@ -397,16 +421,14 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
         ) : null}
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
+        {type.key === "review" ? <>
+          <Field label={ti("sample")}><Switch aria-label={ti("sample")} checked={neutral.sample === true} disabled={lockShared} onCheckedChange={sample => setNeutralEdit(previous => ({ ...previous, sample }))} /></Field>
+          <Field label={ti("order")}><NumberField min={0} value={neutral.position ?? 0} disabled={lockShared} onValueChange={position => setNeutralEdit(previous => ({ ...previous, position: position ?? 0 }))} /></Field>
+          <Field label={ti("relatedEntry")}><Select disabled={lockShared} value={neutral.relatedEntry || "none"} onValueChange={value => setNeutralEdit(previous => ({ ...previous, relatedEntry: value === "none" ? "" : value ?? "" }))} options={[{ value: "none", label: "—" }, ...[...(relatedServices.data?.items ?? []), ...(relatedSoftware.data?.items ?? [])].map(item => ({ value: item.id, label: entryName(item) }))]} /></Field>
+        </> : null}
         {type.neutral.includes("icon") ? (
           <Field label={tl("icon")} description={t("iconHelp")}>
-            <Input
-              dir="ltr"
-              readOnly={!editable || lang !== "en"}
-              value={neutral.icon ?? ""}
-              onChange={(e) =>
-                setNeutralEdit((n) => ({ ...n, icon: e.target.value }))
-              }
-            />
+            <IconPicker disabled={!editable || lang !== "en"} value={neutral.icon ?? ""} onChange={icon => setNeutralEdit(previous => ({ ...previous, icon }))} />
           </Field>
         ) : null}
         {type.neutral.includes("category") ? (
@@ -647,11 +669,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
         <>
         {errors["image.src"] ? <p role="alert" className="text-body-sm text-danger">{t("errorRequired")}</p> : null}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
-          <img
-            src={mediaUrl(entry.content.image.src)}
-            alt=""
-            className="aspect-[4/3] w-full shrink-0 rounded-field bg-sunken object-cover sm:w-40"
-          />
+          <MediaPicker imagesOnly value={imageSrc ?? entry.content.image.src} onChange={(src, media) => { setImageSrc(src); setImageFocal(media?.focal); if (media?.alt) setAltEdits(media.alt); }} disabled={!editable || lang !== "en"} />
           <Field
             label={t("altText")}
             description={alt[lang] ? t("altHelp") : t("altMissing")}
@@ -676,9 +694,10 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
 
   return (
     <div className="flex flex-col gap-6 pb-24">
+
       <PageHeader
         breadcrumb={[
-          { label: areaTitle, href: `/${uiLocale}/content/${type.area}` },
+          { label: areaTitle, href: `/${uiLocale}${safeReturn(params.get("returnTo"), (seoOnly ? "/seo" : `/content/${type.area}`))}` },
           { label: <span dir="auto">{name}</span> },
         ]}
         title={<span dir="auto">{name}</span>}
@@ -714,7 +733,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
             >
               {tp("button")}
             </Button>
-            <LifecycleActions
+            {!viewing && !seoOnly ? <LifecycleActions
               entry={entry}
               area={type.area}
               address={type.seo && !type.fixedAddress ? previewPath : null}
@@ -723,7 +742,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
                   ? "/" + previewPath.split("/")[1]
                   : null
               }
-            />
+            /> : null}
             <Sheet>
               <SheetTrigger
                 render={
@@ -746,6 +765,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
                   <ol className="flex flex-col gap-3">
                     {entry.versions.map((v, i) => (
                       <VersionRow
+                        readOnly={viewing || seoOnly}
                         key={v.version + "-" + i}
                         entry={entry}
                         index={i}
@@ -782,6 +802,8 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
           </>
         }
       />
+
+      {!seoOnly && body.length > 1 ? <SectionOrder items={orderedBody.map(key => ({ key, label: sections.find(section => section.value === key) ? sectionName(sections.find(section => section.value === key)!) : key === "reviews" ? ti("reviews") : key === "questions" ? ti("faqQuestions") : key }))} disabled={!editable || lang !== "en"} onChange={sectionOrder => setPresentationEdit({ ...presentation, sectionOrder })} /> : null}
 
       {type.key === "pricing" || type.key === "softwareModule" ? <PricingAuthority historical={type.key === "pricing"} /> : null}
 
@@ -908,7 +930,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
         />
       </Tabs>
 
-      {lang !== "en" && tree ? (
+      {lang !== "en" && tree && !viewing && !seoOnly ? (
         <TranslationBar
           entry={entry}
           lang={lang}
@@ -917,7 +939,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
         />
       ) : null}
 
-      {!tree ? (
+      {!tree && !seoOnly ? (
         <EmptyState
           size="compact"
           icon={<Translate />}
@@ -973,14 +995,18 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
             {sections.map((s, i) => (
               <TabsPanel key={s.value} value={s.value}>
                 {i === 0 ? shared : null}
-                <ValueEditor
+                {s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "") ? <div className="grid max-w-2xl gap-4">
+                  <Field label={ti("text")}><Input disabled={!editable} value={presentation.cursor.text[lang] ?? String(get(tree, "intro") && (get(tree, "intro") as Tree).div || "").replace(/<[^>]+>/g, "").trim()} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, text: { ...presentation.cursor.text, [lang]: event.target.value } } })} /></Field>
+                  <Field label={ti("link")}><Input dir="ltr" disabled={!editable || lang !== "en"} value={presentation.cursor.link} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, link: event.target.value } })} /></Field>
+                </div> : references[s.value] ? <Link href={references[s.value]} className="text-fg-brand underline">{ti("manage")} {sectionName(s)}</Link> : s.value === "shared-copy" ? <SharedCopyPanel key={`${entry.id}-${lang}`} pageId={entry.id} lang={lang} readOnly={!editable} /> : <ValueEditor
                   node={s.node}
                   value={get(tree, s.path)}
                   fallback={lang === "en" ? undefined : get(english, s.path)}
-                  onChange={(v) => setTree(put(tree, s.path, v))}
+                  onChange={(v) => setTree(put(tree ?? {}, s.path, v))}
                   path={s.path}
                   ctx={ctx}
-                />
+                />}
+                {s.value !== "shared-copy" && !(s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "")) && type.key !== "strings" && type.key !== "pricing" ? <SectionAttachments disabled={!editable || lang !== "en"} items={presentation.sectionMedia[s.value] ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, [s.value]: items } })} /> : null}
               </TabsPanel>
             ))}
             {type.seo ? (
@@ -1013,7 +1039,7 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
                     >
                       <Input
                         dir="ltr"
-                        readOnly={!editable || type.fixedAddress}
+                        disabled={!editable || type.fixedAddress}
                         value={type.fixedAddress ? `orgtik.ch${slug}` : slug}
                         onChange={(e) => setSlugEdit(e.target.value)}
                       />
@@ -1075,6 +1101,8 @@ function Editor({ entry, type }: { entry: Entry; type: ContentType }) {
                   setSlugEdit(null),
                   setNeutralEdit({}),
                   setAltEdits({}),
+                  setImageSrc(null),
+                  setPresentationEdit(undefined),
                   setErrors({})
                 )}
               >
@@ -1112,7 +1140,7 @@ const STRUCTURED: Record<string, string> = {
   legalDocument: "BreadcrumbList",
 };
 
-export function EntryEditor({ id }: { id: string }) {
+export function EntryEditor({ id, seoOnly = false }: { id: string; seoOnly?: boolean }) {
   const t = useTranslations("Editor");
   const tt = useTranslations("Types");
   const ta = useTranslations("Areas");
@@ -1139,5 +1167,5 @@ export function EntryEditor({ id }: { id: string }) {
   if (s === 403) return <NoPermissionState />;
   if (error || !data) return <ErrorState onRetry={refetch} />;
   // Keyed by entry only: a save refreshes the entry in place, so the language, section and dialogs stay.
-  return <Editor key={data.id} entry={data} type={type} />;
+  return <Editor key={data.id} entry={data} type={type} seoOnly={seoOnly} />;
 }

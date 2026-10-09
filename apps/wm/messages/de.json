@@ -26,14 +26,14 @@
     "roadmap": "Roadmap",
     "ideas": "Ideen",
     "pricing": "Angebotsreferenzen",
-    "library": "Mediathek",
+    "library": "Medien",
     "seoHealth": "SEO-Zustand",
     "redirects": "Weiterleitungen",
     "indexing": "Indexierung",
     "translations": "Übersetzungen",
     "leads": "Anfragen",
     "site": "Website",
-    "audit": "Protokoll",
+    "audit": "Aktivitätsprotokoll",
     "preview": "Vorschau"
   },
   "Overview": {
@@ -392,7 +392,11 @@
     "saving": "Ersparnis",
     "countSavings": "Ersparnis nach Artikelanzahl",
     "count": "Artikelanzahl",
-    "fromItems": "Mindestanzahl an Artikeln"
+    "fromItems": "Mindestanzahl an Artikeln",
+    "reviewAuthor": "Autor",
+    "reviewRole": "Position",
+    "reviewCompany": "Unternehmen",
+    "reviewQuote": "Zitat"
   },
   "Formats": {
     "design": "Design-Journal",
@@ -651,6 +655,10 @@
     "pricing": {
       "title": "Angebotsreferenzen",
       "description": "Schreibgeschützte Katalogbeispiele und Anzeigetexte. Aktuelle Kassenpreise und Rabattregeln werden in Admin verwaltet."
+    },
+    "reviews": {
+      "title": "Bewertungen",
+      "description": "Fügen Sie eine Bewertung hinzu und lassen Sie sie vor der Veröffentlichung prüfen."
     }
   },
   "Types": {
@@ -666,7 +674,7 @@
     },
     "serviceFamily": {
       "one": "Leistungsbereich",
-      "many": "Leistungsbereiche",
+      "many": "Leistungsgruppen",
       "search": "Leistungsbereiche durchsuchen",
       "empty": "Noch keine Leistungsbereiche",
       "emptyBody": "Leistungsbereiche stammen von der Leistungsseite der Website.",
@@ -755,6 +763,16 @@
       "emptyBody": "Preise stammen von den Leistungs- und Softwareseiten.",
       "noMatch": "Nichts gefunden",
       "notFound": "Diese Preise gibt es nicht"
+    },
+    "review": {
+      "one": "Bewertung",
+      "many": "Bewertungen",
+      "search": "Bewertungen suchen",
+      "empty": "Noch keine Bewertungen",
+      "emptyBody": "Fügen Sie eine Bewertung hinzu und lassen Sie sie vor der Veröffentlichung prüfen.",
+      "noMatch": "Keine passenden Bewertungen",
+      "notFound": "Diese Bewertung existiert nicht",
+      "new": "Neue Bewertung"
     }
   },
   "EntryNames": {
@@ -882,7 +900,8 @@
       "decline": "Abgelehnt",
       "merge": "Mit einer anderen Idee zusammengeführt",
       "merged_from": "Eine andere Idee wurde hierhin zusammengeführt",
-      "hide": "Ausgeblendet"
+      "hide": "Ausgeblendet",
+      "edit": "Idee bearbeitet"
     }
   },
   "Media": {
@@ -910,7 +929,8 @@
       "rightsUnknown": "Rechte unklar",
       "rightsExpiring": "Rechte laufen ab",
       "unused": "Nicht verwendet",
-      "altSuggested": "Vorgeschlagen, nicht geprüft"
+      "altSuggested": "Vorgeschlagen, nicht geprüft",
+      "attention": "Prüfung erforderlich"
     },
     "ready": "Bereit",
     "usedCount": "{count, plural, =0 {nicht verwendet} one {einmal verwendet} other {#-mal verwendet}}",
@@ -1132,7 +1152,8 @@
       },
       "socialPreview": "Linkvorschau",
       "noImage": "Kein Bild"
-    }
+    },
+    "fromArchive": "Archivierter Inhalt"
   },
   "Leads": {
     "title": "Anfragen",
@@ -1250,16 +1271,17 @@
       "needs_review": "Zu prüfen",
       "outdated": "Veraltet",
       "in_progress": "In Arbeit",
-      "not_started": "Nicht begonnen"
+      "not_started": "Nicht begonnen",
+      "gaps": "Fehlend oder veraltet"
     },
     "type": "Art",
-    "allTypes": "Alles",
+    "allTypes": "Alle Seiten",
     "colEntry": "Seite oder Eintrag",
     "openIn": "Auf {language} öffnen",
     "empty": "Hier ist nichts"
   },
   "Audit": {
-    "title": "Protokoll",
+    "title": "Aktivitätsprotokoll",
     "description": "Jede Speicherung, Prüfung, Veröffentlichung und Einstellung, neueste zuerst. Nichts darin lässt sich ändern.",
     "kind": "Bereich",
     "kinds": {
@@ -1269,7 +1291,8 @@
       "redirect": "Weiterleitungen",
       "idea": "Ideen",
       "lead": "Anfragen",
-      "settings": "Einstellungen"
+      "settings": "Einstellungen",
+      "user": "Benutzerverwaltung"
     },
     "everyone": "Alle",
     "colWhen": "Wann",
@@ -1321,7 +1344,11 @@
       "idea_ship": "Ideen: Ausgeliefert",
       "idea_decline": "Ideen: Abgelehnt",
       "idea_merge": "Ideen: Mit einer anderen Idee zusammengeführt",
-      "idea_hide": "Ideen: Ausgeblendet"
+      "idea_hide": "Ideen: Ausgeblendet",
+      "user_create": "Konto erstellt",
+      "user_update": "Konto aktualisiert",
+      "user_roles": "Website-Rollen geändert",
+      "sample_revision": "Beispielrevision hinzugefügt"
     }
   },
   "Site": {
@@ -1488,5 +1515,120 @@
     "crmReference": "OrgTik CRM-Lead",
     "visitorName": "Kontaktname",
     "visitorNameError": "Kontaktnamen mit 1–120 Zeichen eingeben."
+  },
+  "Improvements": {
+    "actions": "Aktionen",
+    "view": "Ansehen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "all": "Alle",
+    "year": "Jahr",
+    "missingLanguages": "Fehlende Sprachen",
+    "deliveryStatus": "Umsetzungsstatus",
+    "protectedDelete": "Feste oder veröffentlichte Inhalte können nicht gelöscht werden. Archivieren Sie geeignete Einträge im Editor.",
+    "deleteName": "{name} löschen?",
+    "deleteImpact": "Der unveröffentlichte Eintrag und sein Entwurfsverlauf werden entfernt.",
+    "formattedPreview": "Formatierte Vorschau",
+    "formattingProtected": "Formatierung und dynamische Werte bleiben automatisch erhalten.",
+    "sharedCopy": "Gemeinsame Website-Texte",
+    "sharedCopyHint": "Diese Texte werden von Shop- und Kontoseiten gemeinsam genutzt. Änderungen durchlaufen den bestehenden Prüf- und Veröffentlichungsprozess.",
+    "customCursor": "Eigener Mauszeiger",
+    "text": "Text",
+    "link": "Link",
+    "media": "Medien",
+    "description": "Beschreibung",
+    "tags": "Tags",
+    "upload": "Bild oder Video hochladen",
+    "remove": "Entfernen",
+    "selectMedia": "Medien auswählen",
+    "sections": "Abschnittsreihenfolge",
+    "moveUp": "Nach oben",
+    "moveDown": "Nach unten",
+    "type": "Typ",
+    "status": "Status",
+    "search": "Suchen",
+    "allPages": "Alle Seiten",
+    "addLanguage": "Neue Sprache hinzufügen",
+    "reviews": "Bewertungen",
+    "sample": "Beispielbewertung",
+    "opened": "Offen",
+    "userManagement": "Benutzerverwaltung",
+    "activityLog": "Aktivitätsprotokoll",
+    "order": "Reihenfolge",
+    "relatedEntry": "Zugehörige Leistung oder Software",
+    "enableLanguageHelp": "Aktivieren Sie eine unterstützte Sprache zur Bearbeitung. Die Veröffentlichung steuern Sie in den Website-Einstellungen.",
+    "allLanguagesEnabled": "Alle fünf unterstützten Sprachen sind bereits aktiviert.",
+    "identityHelp": "Steuert den Websitenamen in Branding und Metadaten.",
+    "searchSocial": "Vorgaben für Suche und Social Media",
+    "searchSocialHelp": "Standardtitel, Beschreibung und Bild für Seiten ohne eigene SEO-Werte.",
+    "formsHelp": "Steuert, ob Kontaktformulare Anfragen an Leads senden oder im Vorschaumodus bleiben.",
+    "kind": "Art",
+    "history": "Verlauf",
+    "indexing": "Indexierungsregel",
+    "siteIndexing": "Indexierung der gesamten Website erlauben",
+    "canonical": "Kanonische URL",
+    "sitemap": "Sitemap",
+    "included": "Enthalten",
+    "excluded": "Ausgeschlossen",
+    "siteOverride": "Websiteweite Einstellung",
+    "pagePolicy": "SEO-Einstellung der Seite",
+    "allowed": "Indexierung erlaubt",
+    "indexingHelp": "Hier sehen Sie die an Suchmaschinen gesendete Regel. Prüfen Sie die tatsächliche Google-Indexierung in der Search Console.",
+    "sitemapHelp": "Die Sitemap hilft beim Entdecken von URLs. Ein Ausschluss verhindert allein keine Indexierung.",
+    "canonicalHelp": "Die kanonische URL bezeichnet die bevorzugte Adresse bei doppelten Inhalten.",
+    "robotsHelp": "Robots-Regeln steuern das Crawling. Crawler müssen eine Seite erreichen, um noindex zu lesen. Der globale Schalter überschreibt die Seitenregeln.",
+    "googleGuidance": "Google-Leitfaden zur Indexierung",
+    "name": "Name",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "email": "E-Mail",
+    "initialPassword": "Anfangspasswort (mindestens 8 Zeichen)",
+    "active": "Aktiv",
+    "inactive": "Inaktiv",
+    "activeAccount": "Aktives Suite-Konto",
+    "noAccess": "Kein Zugriff",
+    "noResults": "Keine passenden Einträge",
+    "websiteRoles": "Rollen im Website Manager",
+    "websiteRolesHelp": "Gewähren Sie Zugriff auf den Website Manager. Andere App-Rollen werden zentral verwaltet. Ohne Rollen entfällt der Zugriff.",
+    "newAccount": "Konto erstellen",
+    "editAccount": "Konto und Zugriff bearbeiten",
+    "centralUsers": "Zentrale Benutzerverwaltung",
+    "centralAccountsHelp": "Ihre Rolle verwaltet den Website-Zugriff. Zentrale Administratoren verwalten Kontodaten und Aktivierung.",
+    "userManagementHelp": "Verwalten Sie zentrale Konten und Website-Zugriff. Kontoänderungen gelten in der gesamten Suite.",
+    "accountStale": "Dieses Konto wurde geändert. Öffnen Sie es vor dem Speichern erneut.",
+    "accountInvalid": "Prüfen Sie Namen, eindeutige E-Mail-Adresse und Passwortlänge.",
+    "selfLockout": "Sie können Ihren eigenen Administratorzugriff nicht entfernen.",
+    "internalMemberRequired": "Stellen Sie zuerst die aktive interne Mitgliedschaft zentral wieder her.",
+    "approve": "Freigeben",
+    "manage": "Verwalten",
+    "personalData": "Personenbezogene Daten lesen",
+    "enableLanguages": "Sprachen aktivieren",
+    "structuredData": "Strukturierte Daten bearbeiten",
+    "capability": "Berechtigungsgruppe",
+    "roleComparison": "Rollenvergleich",
+    "roleComparisonHelp": "Vergleichen Sie Ansichts-, Bearbeitungs- und Freigaberechte. Es gelten die bestehenden Veröffentlichungs- und Zugriffsregeln.",
+    "viewData": "Datentabelle anzeigen",
+    "softwareSystem": "Softwaresystem",
+    "queueHelp": "Offene Arbeit für alle verwalteten Inhaltstypen.",
+    "capabilityGroups": {
+      "overview": "Übersicht",
+      "content": "Inhalte",
+      "pages": "Seiten",
+      "media": "Medien",
+      "seo": "SEO",
+      "marketing": "Marketing",
+      "localization": "Übersetzungen",
+      "settings": "Einstellungen",
+      "legal": "Rechtliches",
+      "claims": "Aussagen und Nachweise",
+      "pricing": "Angebotsreferenzen",
+      "leads": "Anfragen",
+      "site": "Website",
+      "locales": "Sprachen",
+      "users": "Benutzerverwaltung"
+    },
+    "partners": "Partner",
+    "seoHealth": "SEO-Zustand",
+    "faqQuestions": "Fragen und Antworten"
   }
 }

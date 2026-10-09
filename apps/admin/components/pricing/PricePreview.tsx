@@ -109,7 +109,7 @@ export function PricePreview() {
         data={preview.data?.items ?? []}
         getRowId={(r) => r.country}
         status={status}
-        paginate={false}
+        paginate
         onRetry={() => (grid.isError ? grid.refetch() : preview.refetch())}
         empty={{ title: t("empty") }}
         className={preview.isFetching && !preview.isLoading ? "opacity-70" : undefined}

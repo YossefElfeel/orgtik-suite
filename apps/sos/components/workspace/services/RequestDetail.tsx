@@ -18,6 +18,7 @@ import { useLocalized, usePlatformProblem } from "@/components/workspace/account
 import { Notice } from "@/components/workspace/account/Notice";
 import { Composer, Thread } from "@/components/workspace/support/Thread";
 import { cancellable, quoteExpired, requestBadge } from "./status";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 type Dialogs = "accept" | "pay" | "decline" | "approve" | "revise" | "cancel" | null;
 type Problem = { text: string; kind?: "payment" | "card" } | null;
@@ -218,7 +219,7 @@ function QuoteCard({ r, canDecide, onOpen }: { r: ServiceRequest; canDecide: boo
           {expired ? t("expiredOn", { date: f.date(q.validUntil, { dateStyle: "medium" }) }) : t("validUntil", { date: f.date(q.validUntil, { dateStyle: "medium" }) })}
         </p>
       </div>
-      <table className="w-full text-body-sm">
+      <PaginatedTable><table className="w-full text-body-sm">
         <caption className="sr-only">{t("quoteLines")}</caption>
         <thead>
           <tr className="border-b border-line text-fg-muted">
@@ -250,7 +251,7 @@ function QuoteCard({ r, canDecide, onOpen }: { r: ServiceRequest; canDecide: boo
             <td className="pt-3 text-end font-display text-title-sm text-fg">{total}</td>
           </tr>
         </tfoot>
-      </table>
+      </table></PaginatedTable>
 
       {expired ? (
         <Notice

@@ -26,14 +26,14 @@
     "roadmap": "Roadmap",
     "ideas": "Ideas",
     "pricing": "Offer references",
-    "library": "Library",
+    "library": "Media",
     "seoHealth": "SEO health",
     "redirects": "Redirects",
     "indexing": "Indexing",
     "translations": "Translations",
     "leads": "Leads",
     "site": "Site",
-    "audit": "Audit log",
+    "audit": "Activity Log",
     "preview": "Preview"
   },
   "Overview": {
@@ -392,7 +392,11 @@
     "saving": "Saving",
     "countSavings": "Item-count savings",
     "count": "Item count",
-    "fromItems": "Minimum item count"
+    "fromItems": "Minimum item count",
+    "reviewAuthor": "Author",
+    "reviewRole": "Role",
+    "reviewCompany": "Company",
+    "reviewQuote": "Quote"
   },
   "Formats": {
     "design": "Design journal",
@@ -651,6 +655,10 @@
     "pricing": {
       "title": "Offer references",
       "description": "Read-only catalog examples and display wording. Current checkout prices and savings rules are managed in Admin."
+    },
+    "reviews": {
+      "title": "Reviews",
+      "description": "Add a testimonial, then send it for review before publishing."
     }
   },
   "Types": {
@@ -666,7 +674,7 @@
     },
     "serviceFamily": {
       "one": "Service family",
-      "many": "Service families",
+      "many": "Service Families",
       "search": "Search service families",
       "empty": "No service families yet",
       "emptyBody": "Service families come from the website’s services page.",
@@ -755,6 +763,16 @@
       "emptyBody": "Prices come from the website’s services and software pages.",
       "noMatch": "Nothing matches",
       "notFound": "This pricing doesn’t exist"
+    },
+    "review": {
+      "one": "Review",
+      "many": "Reviews",
+      "search": "Search reviews",
+      "empty": "No reviews yet",
+      "emptyBody": "Add a testimonial, then send it for review before publishing.",
+      "noMatch": "No matching reviews",
+      "notFound": "This review does not exist",
+      "new": "New review"
     }
   },
   "EntryNames": {
@@ -882,7 +900,8 @@
       "decline": "Declined",
       "merge": "Merged into another idea",
       "merged_from": "Another idea merged into this one",
-      "hide": "Hidden"
+      "hide": "Hidden",
+      "edit": "Edited idea"
     }
   },
   "Media": {
@@ -910,7 +929,8 @@
       "rightsUnknown": "Rights unknown",
       "rightsExpiring": "Rights expiring",
       "unused": "Not used",
-      "altSuggested": "Suggested, not reviewed"
+      "altSuggested": "Suggested, not reviewed",
+      "attention": "Needs attention"
     },
     "ready": "Ready",
     "usedCount": "{count, plural, =0 {not used} one {used once} other {used # times}}",
@@ -1132,7 +1152,8 @@
       },
       "socialPreview": "Link preview",
       "noImage": "No image"
-    }
+    },
+    "fromArchive": "Archived content"
   },
   "Leads": {
     "title": "Leads",
@@ -1250,16 +1271,17 @@
       "needs_review": "Needs review",
       "outdated": "Outdated",
       "in_progress": "In progress",
-      "not_started": "Not started"
+      "not_started": "Not started",
+      "gaps": "Missing or outdated"
     },
     "type": "Kind",
-    "allTypes": "Everything",
+    "allTypes": "All Pages",
     "colEntry": "Page or entry",
     "openIn": "Open in {language}",
     "empty": "Nothing here"
   },
   "Audit": {
-    "title": "Audit log",
+    "title": "Activity Log",
     "description": "Every save, review, publish and setting, newest first. Nothing in it can be changed.",
     "kind": "What",
     "kinds": {
@@ -1269,7 +1291,8 @@
       "redirect": "Redirects",
       "idea": "Ideas",
       "lead": "Leads",
-      "settings": "Settings"
+      "settings": "Settings",
+      "user": "User Management"
     },
     "everyone": "Everyone",
     "colWhen": "When",
@@ -1321,7 +1344,11 @@
       "idea_ship": "Ideas: Shipped",
       "idea_decline": "Ideas: Declined",
       "idea_merge": "Ideas: Merged into another idea",
-      "idea_hide": "Ideas: Hidden"
+      "idea_hide": "Ideas: Hidden",
+      "user_create": "Created account",
+      "user_update": "Updated account",
+      "user_roles": "Changed website roles",
+      "sample_revision": "Added sample revision"
     }
   },
   "Site": {
@@ -1488,5 +1515,120 @@
     "crmReference": "OrgTik CRM lead",
     "visitorName": "Contact name",
     "visitorNameError": "Enter a contact name of 1–120 characters."
+  },
+  "Improvements": {
+    "actions": "Actions",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "all": "All",
+    "year": "Year",
+    "missingLanguages": "Missing languages",
+    "deliveryStatus": "Delivery status",
+    "protectedDelete": "Fixed or published content cannot be deleted. Archive eligible published records from their editor.",
+    "deleteName": "Delete {name}?",
+    "deleteImpact": "This removes the unpublished record and its draft history.",
+    "formattedPreview": "Formatted preview",
+    "formattingProtected": "Formatting and dynamic values are preserved automatically.",
+    "sharedCopy": "Shared website copy",
+    "sharedCopyHint": "These texts are shared with commerce and account screens. Saved edits follow the existing review and publishing workflow.",
+    "customCursor": "Custom Cursor",
+    "text": "Text",
+    "link": "Link",
+    "media": "Media",
+    "description": "Description",
+    "tags": "Tags",
+    "upload": "Upload image or video",
+    "remove": "Remove",
+    "selectMedia": "Select media",
+    "sections": "Section order",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "type": "Type",
+    "status": "Status",
+    "search": "Search",
+    "allPages": "All Pages",
+    "addLanguage": "Add New Language",
+    "reviews": "Reviews",
+    "sample": "Sample review",
+    "opened": "Opened",
+    "userManagement": "User Management",
+    "activityLog": "Activity Log",
+    "order": "Order",
+    "relatedEntry": "Related service or software",
+    "enableLanguageHelp": "Enable a supported language for editing. Public availability is controlled in Site Settings.",
+    "allLanguagesEnabled": "All five supported languages are already enabled.",
+    "identityHelp": "Controls the website name used in shared branding and metadata.",
+    "searchSocial": "Search & Social Defaults",
+    "searchSocialHelp": "Fallback title, description, and image for pages without their own SEO values.",
+    "formsHelp": "Controls whether public contact forms deliver enquiries to the Leads inbox or remain in preview mode.",
+    "kind": "Kind",
+    "history": "History",
+    "indexing": "Indexing policy",
+    "siteIndexing": "Allow indexing across the website",
+    "canonical": "Canonical URL",
+    "sitemap": "Sitemap",
+    "included": "Included",
+    "excluded": "Excluded",
+    "siteOverride": "Site-wide override",
+    "pagePolicy": "Page SEO setting",
+    "allowed": "Indexing allowed",
+    "indexingHelp": "This shows the policy sent to search engines. Actual Google indexing must be checked in Search Console.",
+    "sitemapHelp": "The sitemap lists URLs for discovery. Excluding a URL does not itself prevent indexing.",
+    "canonicalHelp": "The canonical URL identifies the preferred address when content is duplicated.",
+    "robotsHelp": "Robots instructions control crawling. Crawlers must access a page to read its noindex rule. The site-wide switch overrides each page’s indexing policy.",
+    "googleGuidance": "Google indexing guidance",
+    "name": "Name",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "initialPassword": "Initial password (at least 8 characters)",
+    "active": "Active",
+    "inactive": "Inactive",
+    "activeAccount": "Active suite account",
+    "noAccess": "No access",
+    "noResults": "No matching records",
+    "websiteRoles": "Website Manager roles",
+    "websiteRolesHelp": "Grant access to Website Manager. Other app roles are managed centrally. Removing all roles removes Website Manager access.",
+    "newAccount": "Create account",
+    "editAccount": "Edit account & access",
+    "centralUsers": "Central user management",
+    "centralAccountsHelp": "Your role can manage website access. Central administrators manage suite account details and activation.",
+    "userManagementHelp": "Manage central suite accounts and Website Manager access. Account changes apply across the suite.",
+    "accountStale": "This account changed. Close and reopen it before saving.",
+    "accountInvalid": "Check the names, unique email address, and password length.",
+    "selfLockout": "You cannot remove your own administration access.",
+    "internalMemberRequired": "Restore active internal membership in central user management first.",
+    "approve": "Approve",
+    "manage": "Manage",
+    "personalData": "Read personal data",
+    "enableLanguages": "Enable languages",
+    "structuredData": "Edit structured data",
+    "capability": "Capability group",
+    "roleComparison": "Role comparison",
+    "roleComparisonHelp": "Compare what each role can view, edit, and approve. These capabilities follow the existing publishing and access rules.",
+    "viewData": "View data table",
+    "softwareSystem": "Software System",
+    "queueHelp": "Pending work across all managed content types.",
+    "capabilityGroups": {
+      "overview": "Overview",
+      "content": "Content",
+      "pages": "Pages",
+      "media": "Media",
+      "seo": "SEO",
+      "marketing": "Marketing",
+      "localization": "Translations",
+      "settings": "Settings",
+      "legal": "Legal",
+      "claims": "Claims and evidence",
+      "pricing": "Offer references",
+      "leads": "Leads",
+      "site": "Site",
+      "locales": "Languages",
+      "users": "User Management"
+    },
+    "partners": "Partners",
+    "seoHealth": "SEO Health",
+    "faqQuestions": "Questions and answers"
   }
 }

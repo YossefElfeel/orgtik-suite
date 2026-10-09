@@ -155,7 +155,7 @@ export function ConnectedAccounts({ onAdd }: { onAdd?: () => void }) {
         getRowId={(r) => r.id}
         status={status}
         onRetry={refetch}
-        paginate={rows.length > 25}
+        paginate
         empty={{
           title: t("emptyTitle"),
           description: can.manageIntegrations ? t("emptyBody") : t("emptyBodyReadOnly"),

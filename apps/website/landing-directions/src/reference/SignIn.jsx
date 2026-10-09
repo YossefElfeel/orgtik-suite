@@ -1,3 +1,4 @@
+import { managedPageTree } from "../content/managed-page";
 import { content } from "../content";
 import { bare } from "../content/locale";
 import React from "react";
@@ -738,7 +739,7 @@ export default class SignIn extends ReferencePage {
   render() {
     const v = this.renderVals();
     return (
-      <>
+      managedPageTree(<>
         <div
           ref={v.rootRef}
           data-screen-label={v.isSignup ? "Create account" : "Sign in"}
@@ -1163,7 +1164,7 @@ export default class SignIn extends ReferencePage {
             </>
           )}
           <main id={"top"} className="content-page">
-            <section
+            <section data-cms-section="signin"
               id={"signin"}
               style={{
                 background:
@@ -2027,7 +2028,7 @@ export default class SignIn extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>
+      </>, "pg_signIn")
     );
   }
 }

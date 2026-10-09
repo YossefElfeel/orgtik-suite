@@ -159,7 +159,7 @@ function Templates() {
     <div className="flex flex-col gap-6">
       <PageHeader title={t("templates.pageTitle")} description={t("templates.description")} />
       {!editable ? <p className="text-body-sm text-fg-muted">{tc("viewOnly")}</p> : null}
-      <DataTable label={t("templates.pageTitle")} columns={columns} data={data ?? []} getRowId={(r) => r.key} status={listStatus(isLoading, error)} paginate={false} onRetry={refetch} empty={{ title: t("templates.empty") }} />
+      <DataTable label={t("templates.pageTitle")} columns={columns} data={data ?? []} getRowId={(r) => r.key} status={listStatus(isLoading, error)} paginate onRetry={refetch} empty={{ title: t("templates.empty") }} />
       {editing ? <TemplateDialog template={editing} onClose={() => setEditing(null)} /> : null}
     </div>
   );

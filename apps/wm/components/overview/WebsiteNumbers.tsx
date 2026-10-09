@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ChatCircleText, Eye, Flask, Percent, UsersThree } from "@phosphor-icons/react";
 import { Badge, Card, ErrorState, SegmentedControl, Stat, useFormatter } from "@orgtik/ui";
-import { BarChart, DonutChart, LineChart } from "@orgtik/ui/charts";
+import { RankingChart } from "./RankingChart";
+import { DonutChart, LineChart } from "@orgtik/ui/charts";
 import { Link } from "@/i18n/routing";
 import { mediaUrl } from "@/lib/env";
 import { useAnalyticsQuery, type AnalyticsPeriod } from "@/store/api";
@@ -17,6 +18,7 @@ import { useAnalyticsQuery, type AnalyticsPeriod } from "@/store/api";
 export function WebsiteNumbers() {
   const t = useTranslations("Overview");
   const f = useFormatter();
+  const ti = useTranslations("Improvements");
   const [period, setPeriod] = useState<AnalyticsPeriod>("30d");
   const { data, isLoading, isError, refetch } = useAnalyticsQuery(period);
   const change = (now: number, before: number) => (before ? now / before - 1 : 0);
@@ -57,7 +59,7 @@ export function WebsiteNumbers() {
         </Card>
       ) : (
         <>
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(min(14rem,100%),1fr))] gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
             <Stat loading={isLoading} icon={<Eye />} label={t("visits")} value={data ? f.number(data.totals.visits) : ""} change={data ? { value: change(data.totals.visits, data.previous.visits), against } : undefined} />
             <Stat loading={isLoading} icon={<UsersThree />} label={t("visitors")} value={data ? f.number(data.totals.visitors) : ""} change={data ? { value: change(data.totals.visitors, data.previous.visitors), against } : undefined} />
             <Stat loading={isLoading} icon={<ChatCircleText />} label={t("leadsSample")} value={data ? f.number(data.totals.leads) : ""} change={data ? { value: change(data.totals.leads, data.previous.leads), against } : undefined} hint={data ? t("realLeads", { count: data.realLeads }) : undefined} />
@@ -77,8 +79,8 @@ export function WebsiteNumbers() {
           />
 
           <div className="grid gap-4 xl:grid-cols-2">
-            <BarChart loading={isLoading} layout="rows" height={rankingHeight} labelWidth={100} maxBarSize={24} className="[&>div:first-child]:min-h-16" title={t("topPages")} data={data?.pages ?? []} x={{ key: "path", label: t("page") }} series={[{ key: "visits", label: t("visits") }]} />
-            <BarChart loading={isLoading} layout="rows" height={rankingHeight} labelWidth={148} maxBarSize={24} className="[&>div:first-child]:min-h-16" title={t("topServices")} description={t("topServicesHint")} data={data?.services ?? []} x={{ key: "name", label: t("service") }} series={[{ key: "leads", label: t("leadsSample"), color: 2 }]} />
+            <RankingChart loading={isLoading} title={t("topPages")} label={t("page")} valueLabel={t("visits")} rows={(data?.pages ?? []).map(row => ({ label: row.path, value: row.visits }))} />
+            <RankingChart loading={isLoading} title={t("topServices")} description={t("topServicesHint")} label={t("service")} valueLabel={t("leadsSample")} rows={(data?.services ?? []).map(row => ({ label: row.id === "software-system" ? ti("softwareSystem") : row.name, value: row.leads }))} />
           </div>
 
           <div className="grid gap-4 xl:grid-cols-2">

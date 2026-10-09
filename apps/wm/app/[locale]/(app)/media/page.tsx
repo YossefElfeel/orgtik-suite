@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { FilmStrip, MagnifyingGlass, UploadSimple, X } from "@phosphor-icons/react";
 import {
@@ -16,10 +16,13 @@ import {
   EmptyState,
   ErrorState,
   FileField,
+  Field,
+  Textarea,
   Input,
   LoadingState,
   NoPermissionState,
   PageHeader,
+  Pagination,
   Select,
   Tabs,
   TabsList,
@@ -29,15 +32,19 @@ import {
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { Link, useRouter } from "@/i18n/routing";
 import { Thumb } from "@/components/media/Thumb";
+import { useListState } from "@/lib/useListState";
 import { useCan } from "@/lib/permissions";
 import { statusOf, useMediaQuery, useUploadMediaMutation, type ApiError, type MediaIssue } from "@/store/api";
 
-const ISSUES = ["all", "noAlt", "altSuggested", "rightsUnknown", "rightsExpiring", "unused"] as const;
+const ISSUES = ["all", "attention", "noAlt", "altSuggested", "rightsUnknown", "rightsExpiring", "unused"] as const;
 type IssueTab = (typeof ISSUES)[number];
 const ACCEPT = "image/webp,image/png,image/jpeg,image/svg+xml,video/mp4,video/webm";
 
 function UploadDialog({ onClose }: { onClose: () => void }) {
   const t = useTranslations("Media");
+  const ti = useTranslations("Improvements");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
   const router = useRouter();
   const [files, setFiles] = useState<File[]>([]);
   const [upload, uploading] = useUploadMediaMutation();
@@ -50,6 +57,8 @@ function UploadDialog({ onClose }: { onClose: () => void }) {
         </DialogHeader>
         <DialogBody>
           <FileField label={t("file")} value={files} onChange={setFiles} accept={ACCEPT} maxSize={15 * 1024 * 1024} multiple={false} maxFiles={1} />
+          <Field label={ti("description")}><Textarea value={description} maxLength={2000} onChange={event => setDescription(event.target.value)} /></Field>
+          <Field label={ti("tags")}><Input value={tags} onChange={event => setTags(event.target.value)} /></Field>
         </DialogBody>
         <DialogFooter>
           <Button variant="ghost" onClick={onClose}>
@@ -59,7 +68,7 @@ function UploadDialog({ onClose }: { onClose: () => void }) {
             disabled={!files.length}
             loading={uploading.isLoading}
             onClick={() =>
-              upload(files[0])
+              upload({ file: files[0], description, tags: tags.split(/[,،]/).map(tag => tag.trim()).filter(Boolean) })
                 .unwrap()
                 .then((m) => {
                   toast.success(t("uploaded"));
@@ -81,11 +90,18 @@ function Library() {
   const t = useTranslations("Media");
   const f = useFormatter();
   const can = useCan();
-  const [issue, setIssue] = useState<IssueTab>("all");
-  const [kind, setKind] = useState("all");
-  const [search, setSearch] = useState("");
+  const url = useListState();
+  const issue = url.get("issue", "all") as IssueTab;
+  const kind = url.get("kind", "all");
+  const search = url.get("search");
+  const setIssue = (issue: string) => url.set({ issue });
+  const setKind = (kind: string) => url.set({ kind });
+  const setSearch = (search: string) => url.set({ search });
   const [uploading, setUploading] = useState(false);
-  const { data, isLoading, error, refetch, isFetching } = useMediaQuery({ issue: issue === "all" ? undefined : issue, kind: kind === "all" ? undefined : kind, search: search || undefined, pageSize: 100 });
+  const { data, isLoading, error, refetch, isFetching } = useMediaQuery({ issue: issue === "all" ? undefined : issue, kind: kind === "all" ? undefined : kind, search: search || undefined, page: url.page, pageSize: 10 });
+  useEffect(() => {
+    if (data && !isFetching && url.page > Math.max(1, Math.ceil(data.total / 10))) url.set({ page: Math.max(1, Math.ceil(data.total / 10)) });
+  }, [data, isFetching, url.page]);
   const counts = data?.counts ?? {};
   const filtered = issue !== "all" || kind !== "all" || Boolean(search);
   const s = statusOf(error);
@@ -116,7 +132,7 @@ function Library() {
           title={filtered ? t("noMatch") : t("empty")}
           action={
             filtered ? (
-              <Button size="sm" variant="secondary" startIcon={<X />} onClick={() => (setIssue("all"), setKind("all"), setSearch(""))}>
+              <Button size="sm" variant="secondary" startIcon={<X />} onClick={() => url.set({ issue: null, kind: null, search: null })}>
                 {t("clear")}
               </Button>
             ) : undefined
@@ -127,7 +143,7 @@ function Library() {
           {data.items.map((m) => (
             <li key={m.id} className="min-w-0">
               <Link
-                href={`/media/${m.id}`}
+                href={`/media/${m.id}?returnTo=${encodeURIComponent(url.href)}`}
                 className="group flex h-full flex-col overflow-hidden rounded-card border border-line bg-raised transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
               >
                 <span className="relative block aspect-[4/3] bg-sunken">
@@ -155,6 +171,7 @@ function Library() {
           ))}
         </ul>
       )}
+      {data ? <Pagination page={url.page} pageSize={10} total={data.total} onPageChange={page => url.set({ page })} /> : null}
       {uploading ? <UploadDialog onClose={() => setUploading(false)} /> : null}
     </div>
   );

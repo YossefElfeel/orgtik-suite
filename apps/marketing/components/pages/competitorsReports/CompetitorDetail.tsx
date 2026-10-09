@@ -90,7 +90,7 @@ export function CompetitorDetail() {
         x={{ key: "platform", label: t("platform") }}
         series={[{ key: "followers", label: label("followers") }]}
       />
-      <DataTable label={t("platformsTable", { name: c.name })} columns={columns} data={c.profiles} getRowId={(p) => p.platform} paginate={false} empty={{ title: t("noPlatforms") }} />
+      <DataTable label={t("platformsTable", { name: c.name })} columns={columns} data={c.profiles} getRowId={(p) => p.platform} paginate empty={{ title: t("noPlatforms") }} />
     </div>
   );
 }

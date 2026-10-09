@@ -1,3 +1,4 @@
+import { managedPageTree } from "../content/managed-page";
 import { content } from "../content";
 import { PROJECTS } from "./projects";
 import { Testimonials } from "./Testimonials";
@@ -957,7 +958,7 @@ export default class Work extends ReferencePage {
   render() {
     const v = this.renderVals();
     return (
-      <>
+      managedPageTree(<>
         <div
           ref={v.rootRef}
           data-screen-label={"Work"}
@@ -1389,7 +1390,7 @@ export default class Work extends ReferencePage {
             )}
             {v.isIndex && (
               <>
-                <section
+                <section data-cms-section="projects"
                   id={"projects"}
                   data-screen-label={"Work — Projects"}
                   style={{
@@ -2166,7 +2167,7 @@ export default class Work extends ReferencePage {
             )}
             {v.isProject && (
               <>
-                <section
+                <section data-cms-section="gallery"
                   id={"gallery"}
                   style={{
                     padding: "var(--section-space) 0",
@@ -2313,7 +2314,7 @@ export default class Work extends ReferencePage {
                     </div>
                   </div>
                 </section>
-                <section
+                <section data-cms-section="hero"
                   hidden={!v.related?.length}
                   style={{ padding: "var(--section-space) 0" }}
                 >
@@ -2597,7 +2598,7 @@ export default class Work extends ReferencePage {
               </>
             )}
             {v.isProject && (
-              <Testimonials
+              <Testimonials data-cms-section="reviews"
                 key={this.state.route.slug}
                 project={this.P.find((p) => p.slug === this.state.route.slug)}
               />
@@ -3182,7 +3183,7 @@ export default class Work extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>
+      </>, "pg_work")
     );
   }
 }

@@ -32,6 +32,7 @@ type NavSection = { label?: string; items: NavItem[] };
 // so no item leads to an empty "coming soon" page, and each one hides if the role can't view it.
 function useNav(): NavSection[] {
   const t = useTranslations("Nav");
+  const ti = useTranslations("Improvements");
   const studioText = useTranslations("Studio");
   return [
     ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ items: [{ key: studioText("heading"), href: "/presentation", icon: <Monitor />, permission: "overview:view" }] }] : []),
@@ -52,6 +53,7 @@ function useNav(): NavSection[] {
         { key: t("services"), href: "/content/services", icon: <Stack />, permission: "content:view" },
         { key: t("software"), href: "/content/software", icon: <AppWindow />, permission: "content:view" },
         { key: t("work"), href: "/content/work", icon: <Briefcase />, permission: "content:view" },
+        { key: ti("reviews"), href: "/content/reviews", icon: <Heartbeat />, permission: "content:view" },
         { key: t("insights"), href: "/content/insights", icon: <Article />, permission: "content:view" },
         { key: t("legal"), href: "/content/legal", icon: <Scales />, permission: "content:view" },
         { key: t("pricing"), href: "/content/pricing", icon: <Tag />, permission: "content:view" },
@@ -79,6 +81,7 @@ function useNav(): NavSection[] {
       items: [
         { key: t("site"), href: "/settings/site", icon: <GearSix />, permission: "settings:view" },
         { key: t("team"), href: "/settings/roles", icon: <Key />, permission: "settings:view" },
+        { key: ti("userManagement"), href: "/settings/users", icon: <Key />, permission: "users:view" },
         { key: t("audit"), href: "/settings/audit", icon: <ListChecks />, permission: "settings:view" },
       ],
     },

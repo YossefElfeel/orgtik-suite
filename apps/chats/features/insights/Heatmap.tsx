@@ -19,6 +19,7 @@ import { Table } from "@phosphor-icons/react";
 import { Button } from "@/components/ui/Primitives";
 import { useT } from "@/lib/i18n";
 import { dayLabel } from "@/lib/time";
+import { PaginatedTable } from "@orgtik/ui/table";
 
 /** The sequential scale. Defined in the token file; never a hex in here. */
 const RAMP = [
@@ -84,7 +85,7 @@ export function Heatmap({
 
       {showTable ? (
         <div className="overflow-x-auto">
-          <table className="w-full text-[12px]" style={{ borderCollapse: "collapse" }}>
+          <PaginatedTable><table className="w-full text-[12px]" style={{ borderCollapse: "collapse" }}>
             <caption className="sr-only">
               {t("insights.availabilityTitle", "When the team is around")}
             </caption>
@@ -119,7 +120,7 @@ export function Heatmap({
                 </tr>
               ))}
             </tbody>
-          </table>
+          </table></PaginatedTable>
         </div>
       ) : (
         <div className="overflow-x-auto pb-1">

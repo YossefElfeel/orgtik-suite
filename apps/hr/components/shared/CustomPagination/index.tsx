@@ -9,7 +9,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { IPaginationOptions } from "../Table/type";
@@ -27,6 +27,8 @@ export function CustomPagination({
   onLimitChange,
 }: IPaginationOptions) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const pageHref = (page: number, size = 10) => { const query = new URLSearchParams(searchParams.toString()); query.set("page", String(page)); query.set("limit", String(size)); return `${baseUrl}?${query}`; };
   const t = useTranslations("pagination");
   const tActions = useTranslations("actions");
 
@@ -38,33 +40,9 @@ export function CustomPagination({
   const isAfterDots =
     !isFewPages && currentPage < totalPages - Math.floor(BTNS_COUNT / 2);
 
-  const totalItems = totalItemsGeter || totalPages * limit;
+  const totalItems = totalItemsGeter ?? totalPages * limit;
   // Dynamic LIMIT_OPTIONS calculation
-  const limitOptions = useMemo(() => {
-    const baseOptions = [10, 20, 50, 100];
-    if (totalItems === 0) return baseOptions;
-
-    const validOptions = baseOptions.filter((option) => option <= totalItems);
-
-    if (!validOptions.includes(limit)) {
-      validOptions.push(limit);
-      validOptions.sort((a, b) => a - b);
-    }
-
-    const quarterItems = Math.ceil(totalItems / 4);
-    const halfItems = Math.ceil(totalItems / 2);
-    [quarterItems, halfItems].forEach((option) => {
-      if (
-        option > 0 &&
-        option <= totalItems &&
-        !validOptions.includes(option)
-      ) {
-        validOptions.push(option);
-      }
-    });
-
-    return [...new Set(validOptions)].sort((a, b) => a - b);
-  }, [totalPages, limit]);
+  const limitOptions = [10];
 
   function generateArr(start: number, count = BTNS_COUNT) {
     return Array.from(
@@ -88,7 +66,7 @@ export function CustomPagination({
     if (onPageChange) {
       onPageChange(page);
     } else if (baseUrl) {
-      router.push(`${baseUrl}?page=${page}&limit=${limit}`);
+      router.push(pageHref(page));
     }
   };
 
@@ -97,7 +75,7 @@ export function CustomPagination({
     if (onLimitChange) {
       onLimitChange(newLimit);
     } else if (baseUrl) {
-      router.push(`${baseUrl}?page=1&limit=${newLimit}`);
+      router.push(pageHref(1, newLimit));
     }
   };
 
@@ -210,9 +188,9 @@ export function CustomPagination({
               aria-label={tActions("rowsPerPage")}
               value={limit}
               onChange={handleLimitChange}
-              className="appearance-none w-full bg-raised border border-line rounded-[8px] 
-               py-1.5 ps-3 pe-8 text-sm font-medium text-fg 
-               cursor-pointer hover:border-line-strong focus:outline-none 
+              className="appearance-none w-full bg-raised border border-line rounded-[8px]
+               py-1.5 ps-3 pe-8 text-sm font-medium text-fg
+               cursor-pointer hover:border-line-strong focus:outline-none
                transition-all text-center hidden md:block"
             >
               {limitOptions.map((option) => (

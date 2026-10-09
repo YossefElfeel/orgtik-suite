@@ -8,7 +8,7 @@ import { RequirePermission } from "@/components/frame/RequirePermission";
 import { listStatus, useUrlState } from "@/components/system/kit";
 import { useAuditQuery, type AuditEntry } from "@/store/system";
 
-const PAGE_SIZE = 25;
+const PAGE_SIZE = 10;
 const ACTIONS = ["view_as", "tax_rule", "staff_roles", "settings", "service_assign", "service_review", "service_quote", "service_start", "service_hold", "service_deliver", "service_milestone", "service_message", "service_cancel"];
 const SKIP = new Set(["at", "by", "byName", "action", "target", "reason"]);
 

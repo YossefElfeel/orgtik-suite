@@ -2,7 +2,7 @@
 // A permission is "<module>:<action>" (view, edit, approve) or one of the named specials.
 const MODULES = ["overview", "content", "pages", "media", "seo", "marketing", "localization", "settings"];
 // pricing:edit changes a number the website shows; pricing:approve publishes it (four eyes).
-const SPECIALS = ["legal:approve", "claims:approve", "pricing:edit", "pricing:approve", "leads:pii", "site:visibility", "locales:enable", "seo:custom-jsonld"];
+const SPECIALS = ["legal:approve", "claims:approve", "pricing:edit", "pricing:approve", "leads:pii", "site:visibility", "locales:enable", "seo:custom-jsonld", "users:view", "users:manage"];
 
 const all = (actions) => MODULES.flatMap((m) => actions.map((a) => `${m}:${a}`));
 const view = all(["view"]);

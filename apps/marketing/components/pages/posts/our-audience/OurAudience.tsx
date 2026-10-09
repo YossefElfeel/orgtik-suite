@@ -20,7 +20,7 @@ import { SearchField } from "@/components/pages/ourReports/shared/SearchField";
 import { CreateSegmentDialog } from "./CreateSegmentDialog";
 import { ImportContactsDialog } from "./ImportContactsDialog";
 
-const SIZES = [20, 50, 100];
+const SIZES = [10];
 
 export function OurAudience() {
   const t = useTranslations("Audience");

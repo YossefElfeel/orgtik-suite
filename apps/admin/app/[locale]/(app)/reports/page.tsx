@@ -77,7 +77,7 @@ function Reports() {
           {t("reports.payments")}
         </h2>
         <p className="text-body-sm text-fg-muted">{t("reports.rateNote")}</p>
-        <DataTable label={t("reports.payments")} columns={columns} data={data?.payments ?? []} getRowId={(r) => r.id} status={listStatus(isLoading, error)} paginate={(data?.payments.length ?? 0) > 25} onRetry={refetch} empty={{ title: t("reports.noPayments") }} />
+        <DataTable label={t("reports.payments")} columns={columns} data={data?.payments ?? []} getRowId={(r) => r.id} status={listStatus(isLoading, error)} paginate onRetry={refetch} empty={{ title: t("reports.noPayments") }} />
       </section>
     </div>
   );

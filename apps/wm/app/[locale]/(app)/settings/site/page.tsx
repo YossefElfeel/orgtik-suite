@@ -13,6 +13,7 @@ const formOf = (s: SiteSettings): Form => ({ siteName: s.siteName, titleTemplate
 
 function SiteForm({ site }: { site: SiteSettings }) {
   const t = useTranslations("Site");
+  const ti = useTranslations("Improvements");
   const can = useCan();
   const editable = can("settings:edit");
   const canLocales = editable && can("locales:enable");
@@ -44,12 +45,15 @@ function SiteForm({ site }: { site: SiteSettings }) {
     <div className="flex flex-col gap-6 pb-24">
       <PageHeader title={t("title")} description={t("description")} />
       <Card className="grid gap-4 sm:grid-cols-2">
-        <h2 className="text-label text-fg sm:col-span-2">{t("identity")}</h2>
+        <h2 className="text-label text-fg sm:col-span-2">{t("identity")}</h2><p className="text-body-sm text-fg-muted sm:col-span-2">{ti("identityHelp")}</p>
         <Field label={t("siteName")} error={errors.siteName ? t("errorRequired") : undefined}>
-          <Input dir="auto" readOnly={!editable} value={form.siteName} onChange={(e) => setForm({ ...form, siteName: e.target.value })} />
+          <Input dir="auto" disabled={!editable} value={form.siteName} onChange={(e) => setForm({ ...form, siteName: e.target.value })} />
         </Field>
+      </Card>
+      <Card className="grid gap-4 sm:grid-cols-2">
+        <h2 className="text-label text-fg sm:col-span-2">{ti("searchSocial")}</h2><p className="text-body-sm text-fg-muted sm:col-span-2">{ti("searchSocialHelp")}</p>
         <Field label={t("titleTemplate")} description={t("titleTemplateHelp", { preview, page: "{page}" })} error={errors.titleTemplate ? t("errorTemplate", { page: "{page}" }) : undefined}>
-          <Input dir="auto" readOnly={!editable} value={form.titleTemplate} onChange={(e) => setForm({ ...form, titleTemplate: e.target.value })} />
+          <Input dir="auto" disabled={!editable} value={form.titleTemplate} onChange={(e) => setForm({ ...form, titleTemplate: e.target.value })} />
         </Field>
         <Field
           className="sm:col-span-2"
@@ -57,11 +61,11 @@ function SiteForm({ site }: { site: SiteSettings }) {
           description={t("defaultDescriptionHelp", { count: form.defaultDescription.length })}
           error={errors.defaultDescription ? t(errors.defaultDescription === "too_long" ? "errorTooLong" : "errorRequired") : undefined}
         >
-          <Textarea dir="auto" rows={2} readOnly={!editable} value={form.defaultDescription} onChange={(e) => setForm({ ...form, defaultDescription: e.target.value })} />
+          <Textarea dir="auto" rows={2} disabled={!editable} value={form.defaultDescription} onChange={(e) => setForm({ ...form, defaultDescription: e.target.value })} />
         </Field>
         <Field label={t("defaultImage")} description={t("defaultImageHelp")}>
           <Select
-            readOnly={!editable}
+            disabled={!editable}
             value={form.defaultOgImage ?? "none"}
             onValueChange={(v) => setForm({ ...form, defaultOgImage: v === "none" ? null : v })}
             options={[{ value: "none", label: t("noImage") }, ...(images.data?.items ?? []).map((m) => ({ value: m.id, label: <span dir="ltr">{m.file}</span> }))]}
@@ -73,23 +77,23 @@ function SiteForm({ site }: { site: SiteSettings }) {
         <h2 className="text-label text-fg sm:col-span-2">{t("organization")}</h2>
         <p className="text-body-sm text-fg-muted sm:col-span-2">{t("organizationHelp")}</p>
         <Field label={t("orgName")}>
-          <Input dir="auto" readOnly={!editable} value={form.organization.name} onChange={(e) => org("name", e.target.value)} />
+          <Input dir="auto" disabled={!editable} value={form.organization.name} onChange={(e) => org("name", e.target.value)} />
         </Field>
         <Field label={t("orgEmail")} error={errors["organization.email"] ? t("errorEmail") : undefined}>
-          <Input dir="ltr" type="email" readOnly={!editable} value={form.organization.email} onChange={(e) => org("email", e.target.value)} />
+          <Input dir="ltr" type="email" disabled={!editable} value={form.organization.email} onChange={(e) => org("email", e.target.value)} />
         </Field>
         <Field label={t("orgPhone")}>
-          <Input dir="ltr" type="tel" readOnly={!editable} value={form.organization.phone} onChange={(e) => org("phone", e.target.value)} />
+          <Input dir="ltr" type="tel" disabled={!editable} value={form.organization.phone} onChange={(e) => org("phone", e.target.value)} />
         </Field>
         <Field label={t("orgAddress")}>
-          <Input dir="auto" readOnly={!editable} value={form.organization.address} onChange={(e) => org("address", e.target.value)} />
+          <Input dir="auto" disabled={!editable} value={form.organization.address} onChange={(e) => org("address", e.target.value)} />
         </Field>
       </Card>
 
       <Card className="flex flex-col gap-4">
-        <h2 className="text-label text-fg">{t("forms")}</h2>
+        <h2 className="text-label text-fg">{t("forms")}</h2><p className="text-body-sm text-fg-muted">{ti("formsHelp")}</p>
         <Field label={t("formsMode")} description={t("formsModeHelp")} error={errors.formsMode === "privacy_first" ? t("errorPrivacyFirst") : undefined}>
-          <Select readOnly={!editable} value={form.formsMode} onValueChange={(v) => v && setForm({ ...form, formsMode: v as Form["formsMode"] })} options={(["preview", "live"] as const).map((m) => ({ value: m, label: t(`formsModes.${m}`) }))} className="max-w-sm" />
+          <Select disabled={!editable} value={form.formsMode} onValueChange={(v) => v && setForm({ ...form, formsMode: v as Form["formsMode"] })} options={(["preview", "live"] as const).map((m) => ({ value: m, label: t(`formsModes.${m}`) }))} className="max-w-sm" />
         </Field>
       </Card>
 
@@ -104,7 +108,7 @@ function SiteForm({ site }: { site: SiteSettings }) {
             const r = site.readiness[l.code];
             return (
               <li key={l.code} className="grid items-center gap-3 py-3 sm:grid-cols-[10rem_1fr_auto_auto]">
-                <span lang={l.code} dir={l.code === "ar" ? "rtl" : "ltr"} className="text-start font-semibold text-fg">{NATIVE[l.code]}</span>
+                <span className="text-start font-semibold text-fg"><bdi lang={l.code} dir={l.code === "ar" ? "rtl" : "ltr"}>{NATIVE[l.code]}</bdi></span>
                 <Progress value={r ? Math.round((r.done / Math.max(1, r.total)) * 100) : 0} label={<span className="text-caption text-fg-muted">{t("readiness", { done: r?.done ?? 0, total: r?.total ?? 0 })}</span>} />
                 <label className="inline-flex items-center gap-2 text-body-sm text-fg">
                   <Switch checked={l.enabled} disabled={!canLocales || l.code === "en"} onCheckedChange={(v) => setLocale(l.code, { enabled: v, ...(v ? {} : { public: false }) })} aria-label={t("enabledFor", { language: NATIVE[l.code] })} />

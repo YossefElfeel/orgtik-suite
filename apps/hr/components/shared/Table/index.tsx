@@ -6,9 +6,11 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
   type RowSelectionState,
 } from "@tanstack/react-table";
+import { Pagination as SuitePagination } from "@orgtik/ui";
 import TableSkeleton from "./TableSkeleton";
 import { IFilterFunctions, IPaginationOptions, ISearchFunctions } from "./type";
 import { CustomPagination } from "../CustomPagination";
@@ -149,15 +151,14 @@ export default function DataTable<TData, TValue>({
   const rowSelection = controlledRowSelection ?? internalRowSelection;
   const onRowSelectionChange = onControlledRowSelectionChange ?? setInternalRowSelection;
 
+  const [clientPagination, setClientPagination] = React.useState({ pageIndex: 0, pageSize: 10 });
+  React.useEffect(() => { setClientPagination({ pageIndex: 0, pageSize: 10 }); }, [data]);
   const table = useReactTable({
     data,
     columns,
     state: {
       rowSelection,
-      pagination: {
-        pageIndex: (pagination?.currentPage || 1) - 1,
-        pageSize: pagination?.limit || 10,
-      },
+      pagination: pagination ? { pageIndex: (pagination.currentPage || 1) - 1, pageSize: 10 } : clientPagination,
     },
     onRowSelectionChange,
     enableRowSelection,
@@ -167,9 +168,11 @@ export default function DataTable<TData, TValue>({
         const r = row as { id?: string | number };
         return r.id != null ? String(r.id) : String(index);
       }),
-    manualPagination: true,
+    manualPagination: Boolean(pagination),
     pageCount: pagination?.totalPages || -1,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setClientPagination,
   });
 
   const hasGridSupport = Boolean(gridCard);
@@ -213,7 +216,7 @@ export default function DataTable<TData, TValue>({
             <div className="w-full min-h-0 overflow-y-auto">
               <TableHorizontalScroll>
                 <table className="w-full min-w-max">
-                  <thead>
+                  <thead className="bg-sunken">
                     {table.getHeaderGroups().map((headerGroup) => (
                       <tr
                         key={headerGroup.id}
@@ -326,7 +329,8 @@ export default function DataTable<TData, TValue>({
         )}
       </AnimatePresence>
 
-      {pagination && pagination.totalPages > 1 && (
+      {!pagination ? <SuitePagination page={clientPagination.pageIndex + 1} pageSize={10} total={data.length} onPageChange={page => setClientPagination({ pageIndex: page - 1, pageSize: 10 })} /> : null}
+      {pagination && (
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

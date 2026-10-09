@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { MagnifyingGlass, X } from "@phosphor-icons/react";
 import {
@@ -16,6 +16,8 @@ import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { LanguageDots } from "@/components/content/LanguageDots";
 import { NewEntry } from "@/components/content/NewEntry";
 import { PricingAuthority } from "@/components/content/PricingAuthority";
+import { EntryActions } from "@/components/content/EntryActions";
+import { useListState } from "@/lib/useListState";
 import { useCan } from "@/lib/permissions";
 import { Link } from "@/i18n/routing";
 import { DEPARTMENTS } from "@/lib/caseStudySchema";
@@ -36,7 +38,7 @@ import {
  */
 // Where the site's design takes a list of any length, entries can be added; elsewhere the design
 // has a place for each one (the five families, their services, the six modules).
-const CREATABLE = new Set<EntryType>(["article", "caseStudy", "roadmapItem"]);
+const CREATABLE = new Set<EntryType>(["article", "caseStudy", "roadmapItem", "review"]);
 const FIXED_SET = new Set<EntryType>([
   "serviceFamily",
   "service",
@@ -50,14 +52,25 @@ export function EntryList({ type: key }: { type: EntryType }) {
   const tf = useTranslations("Formats");
   const f = useFormatter();
   const type = TYPES[key];
+  const ti = useTranslations("Improvements");
+  const url = useListState();
   const entryName = useEntryName();
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState("all");
+  const search = url.get("search");
+  const filter = url.get("filter", "all");
+  const setSearch = (search: string) => url.set({ search });
+  const setFilter = (filter: string) => url.set({ filter });
   const filterKey =
     key === "caseStudy" ? "department" : key === "service" ? "parent" : null;
   const { data, isLoading, error, refetch, isFetching } = useEntriesQuery({
     type: key,
-    pageSize: 100,
+    pageSize: 10,
+    page: url.page,
+    state: url.get("state") || undefined,
+    missingLanguages: url.get("missingLanguages") || undefined,
+    deliveryStatus: url.get("deliveryStatus") || undefined,
+    period: url.get("period") || undefined,
+    year: url.get("year") || undefined,
+    sort: url.get("sort") || undefined,
     search: search || undefined,
     ...(filterKey && filter !== "all" ? { [filterKey]: filter } : {}),
   });
@@ -82,7 +95,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
     () => new Map((familyList ?? []).map((x) => [x.slug.en ?? "", x])),
     [familyList],
   );
-  const filtered = Boolean(search) || filter !== "all";
+  const filtered = Boolean(search) || filter !== "all" || ["state", "missingLanguages", "deliveryStatus", "period", "year"].some(key => Boolean(url.get(key)));
 
   const columns = useMemo<ColumnDef<EntrySummary, any>[]>(() => {
     const cols: ColumnDef<EntrySummary, any>[] = [
@@ -106,7 +119,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
               ) : null}
               <span className="flex min-w-0 flex-col">
                 <Link
-                  href={`/content/${type.area}/${c.id}`}
+                  href={`/content/${type.area}/${c.id}?view=1&returnTo=${encodeURIComponent(url.href)}`}
                   dir="auto"
                   className="truncate font-semibold text-fg hover:underline focus-visible:outline-2 focus-visible:outline-focus"
                 >
@@ -220,7 +233,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
             ) : null}
             <span className="text-caption text-fg-subtle">
               {row.original.period ? t(`periods.${row.original.period}`) : null}{" "}
-              · <span dir="ltr">{row.original.year}</span>
+              Â· <span dir="ltr">{row.original.year}</span>
             </span>
           </span>
         ),
@@ -315,6 +328,8 @@ export function EntryList({ type: key }: { type: EntryType }) {
         },
       },
     );
+    cols.forEach(column => { column.enableSorting = ["name", "state", "updated"].includes(column.id ?? ""); });
+    cols.push({ id: "actions", header: ti("actions"), enableSorting: false, meta: { width: "1%" }, cell: ({ row }) => <EntryActions entry={row.original} returnTo={url.href} /> });
     return cols;
   }, [
     t,
@@ -327,6 +342,8 @@ export function EntryList({ type: key }: { type: EntryType }) {
     familyById,
     familyBySlug,
     services.data,
+    ti,
+    url.href,
   ]);
 
   const filterOptions =
@@ -365,6 +382,13 @@ export function EntryList({ type: key }: { type: EntryType }) {
           startIcon={<MagnifyingGlass className="size-4" />}
           className="w-full sm:w-72"
         />
+        <Select size="sm" label={t("colState")} aria-label={t("colState")} value={url.get("state", "all")} onValueChange={state => url.set({ state })} options={[{ value: "all", label: ti("all") }, ...(["draft", "in_review", "approved", "scheduled", "published"] as const).map(value => ({ value, label: <StatusBadge entity="cms_revision" state={value} size="sm" /> }))]} />
+        {key === "page" ? <Select size="sm" label={t("colLanguages")} aria-label={t("colLanguages")} value={url.get("missingLanguages", "all")} onValueChange={missingLanguages => url.set({ missingLanguages })} options={[{ value: "all", label: ti("all") }, { value: "true", label: ti("missingLanguages") }]} /> : null}
+        {key === "roadmapItem" ? <>
+          <Select size="sm" label={ti("deliveryStatus")} aria-label={ti("deliveryStatus")} value={url.get("deliveryStatus", "all")} onValueChange={deliveryStatus => url.set({ deliveryStatus })} options={[{ value: "all", label: ti("all") }, ...(["open", "planned", "in_progress", "shipped"] as const).map(value => ({ value, label: <StatusBadge entity="roadmap_idea" state={value} size="sm" /> }))]} />
+          <Select size="sm" label={t("colTimeline")} aria-label={t("colTimeline")} value={url.get("period", "all")} onValueChange={period => url.set({ period })} options={[{ value: "all", label: ti("all") }, ...["past", "now", "next"].map(value => ({ value, label: t(`periods.${value}`) }))]} />
+          <Input size="sm" type="number" aria-label={ti("year")} placeholder={ti("year")} value={url.get("year")} onChange={event => url.set({ year: event.target.value })} className="w-28" />
+        </> : null}
         {filterOptions ? (
           <Select
             size="sm"
@@ -383,12 +407,18 @@ export function EntryList({ type: key }: { type: EntryType }) {
         <p className="-mt-1 text-body-sm text-fg-muted">{t("fixedSet")}</p>
       ) : null}
       <DataTable
+        mode="server"
+        rowCount={data?.total ?? 0}
+        pagination={{ pageIndex: url.page - 1, pageSize: 10 }}
+        onPaginationChange={update => url.set({ page: (typeof update === "function" ? update({ pageIndex: url.page - 1, pageSize: 10 }) : update).pageIndex + 1 })}
+        sorting={url.get("sort") ? [{ id: url.get("sort").replace(/^-/, ""), desc: url.get("sort").startsWith("-") }] : []}
+        onSortingChange={update => { const previous = url.get("sort") ? [{ id: url.get("sort").replace(/^-/, ""), desc: url.get("sort").startsWith("-") }] : []; const next = typeof update === "function" ? update(previous) : update; url.set({ sort: next[0] ? `${next[0].desc ? "-" : ""}${next[0].id}` : null }); }}
         label={tt(`${key}.many`)}
         columns={columns}
         data={data?.items ?? []}
         getRowId={(r) => r.id}
         status={status}
-        paginate={(data?.total ?? 0) > 25}
+        paginate
         onRetry={refetch}
         className={isFetching && !isLoading ? "opacity-70" : undefined}
         empty={
@@ -401,7 +431,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
                     size="sm"
                     variant="secondary"
                     startIcon={<X />}
-                    onClick={() => (setSearch(""), setFilter("all"))}
+                    onClick={() => url.set({ search: null, filter: null, state: null, missingLanguages: null, deliveryStatus: null, period: null, year: null })}
                   >
                     {t("clear")}
                   </Button>

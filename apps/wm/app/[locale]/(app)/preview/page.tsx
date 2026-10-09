@@ -88,7 +88,7 @@ function PreviewView() {
   // All frames side by side at one scale, fitting the space (never larger than life).
   const gap = 16;
   // (A few pixels spare: rounded frame widths must not wrap the last one onto a new row.)
-  const scale = Math.min(1, Math.floor(((width - gap * (shown.length - 1) - 4) / shown.reduce((n, f) => n + f.width, 0)) * 1000) / 1000);
+  const scale = Math.min(1, Math.floor(((Math.max(only === "all" ? 1000 : 0, width) - gap * (shown.length - 1) - 4) / shown.reduce((n, f) => n + f.width, 0)) * 1000) / 1000);
   const src = `${WEBSITE_URL}${path}?preview`;
   const setState = useMemo(() => Object.fromEntries(FRAMES.map((f) => [f.key, (s: FrameState) => setStates((x) => ({ ...x, [f.key]: s }))])) as Record<FrameKey, (s: FrameState) => void>, []);
   const options = (addresses.data ?? []).map((a) => ({ value: a.path, label: a.path, hint: `${a.name}${a.draft ? ` · ${t("hasDraft")}` : ""}${a.onSite ? "" : ` · ${t("notOnSite")}`}` }));
@@ -130,12 +130,12 @@ function PreviewView() {
           <Spinner label={t("opening")} />
         </div>
       ) : (
-        <div className="flex flex-wrap items-start gap-4">
+        <div className="flex flex-nowrap items-start gap-4 overflow-x-auto pb-4">
           {shown.map((f) => {
             const st = states[f.key];
             return (
-              <figure key={f.key} className="flex flex-col gap-2">
-                <figcaption className="flex items-center justify-between gap-3 text-body-sm">
+              <figure key={f.key} className="flex shrink-0 flex-col gap-2">
+                <figcaption className="flex min-h-12 items-center justify-between gap-3 text-body-sm">
                   <span className="text-fg">
                     {t(f.key)} · <span dir="ltr">{f.width}px</span>
                   </span>

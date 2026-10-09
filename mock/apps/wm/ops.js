@@ -23,7 +23,7 @@ const LEAD_ACTIONS = {
   duplicate: { from: ["new"], to: "duplicate", needs: "of" },
   reopen: { from: ["unqualified"], to: "new" },
 };
-const OPEN = ["new", "contacted", "qualified", "quoted"];
+const OPEN = ["contacted", "qualified", "quoted"];
 
 function sampleLeads(now) {
   const at = (h) => new Date(Date.parse(now()) - h * 3600e3).toISOString();
@@ -49,6 +49,7 @@ const cell = (v) => {
 function makeOps({ store, now }) {
   const leads = new Map(sampleLeads(now).map((l) => [l.id, l]));
   let nextLead = leads.size + 1;
+  require("./seed/demo-states").leadExamples(leads, now);
   const log = (who, action, id, extra = {}) => store.audit.unshift({ at: now(), by: who, action, entry: id, type: "lead", ...extra });
 
   const view = (l, canPii) => (canPii || l.erased ? l : { ...l, name: mask(l.name), email: maskEmail(l.email), phone: l.phone ? mask(l.phone, 4) : "", masked: true });
@@ -195,13 +196,13 @@ function makeOps({ store, now }) {
     return { site };
   }
 
-  const exportState = () => ({ data: clone({ leads: [...leads], site }), sequences: { nextLead } });
+  const exportState = () => ({ data: clone({ leads: [...leads], site, demoVersion: 1 }), sequences: { nextLead } });
   const validateState = value => {
     const incoming = codec.object(value), rows = codec.mapRows(incoming.data?.leads), site_ = codec.object(incoming.data?.site);
     if (!Number.isSafeInteger(site_.version) || !Array.isArray(site_.locales) || !site_.organization) throw codec.fail("Website Manager site settings are incomplete.");
-    return { data: { leads: rows, site: site_ }, sequences: { nextLead: codec.sequence(incoming.sequences?.nextLead, rows, "ld") } };
+    return { data: { leads: rows, site: site_, demoVersion: incoming.data.demoVersion ?? 0 }, sequences: { nextLead: codec.sequence(incoming.sequences?.nextLead, rows, "ld") } };
   };
-  const importState = value => { const incoming = validateState(value); codec.replaceMap(leads, incoming.data.leads); codec.replaceObject(site, incoming.data.site); nextLead = incoming.sequences.nextLead; };
+  const importState = value => { const incoming = validateState(value); codec.replaceMap(leads, incoming.data.leads); codec.replaceObject(site, incoming.data.site); nextLead = incoming.sequences.nextLead; if (incoming.data.demoVersion < 1) require("./seed/demo-states").leadExamples(leads, now); };
   return { leads, view, move, assign, note, erase, submit, csv, OPEN, LEAD_ACTIONS, site, readiness, updateSite, exportState, importState, validateState };
 }
 

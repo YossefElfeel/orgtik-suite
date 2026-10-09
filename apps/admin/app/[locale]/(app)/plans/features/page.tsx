@@ -109,7 +109,7 @@ function FeaturesList() {
         data={data ?? []}
         getRowId={(r) => r.key}
         status={status}
-        paginate={(data?.length ?? 0) > 25}
+        paginate
         onRetry={refetch}
         className={isFetching && !isLoading ? "opacity-70" : undefined}
         empty={{ title: tool ? t("emptyFor") : t("empty"), description: editable ? t("emptyBody") : undefined }}

@@ -8129,6 +8129,30 @@
     },
     {
       "app": "wm",
+      "method": "GET",
+      "path": "/v2/admin/ideas/:id",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "PATCH",
+      "path": "/v2/admin/ideas/:id",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
       "method": "POST",
       "path": "/v2/admin/ideas/:id/erase",
       "source": "apps/wm.js",
@@ -8382,6 +8406,18 @@
     {
       "app": "wm",
       "method": "GET",
+      "path": "/v2/admin/queue",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "GET",
       "path": "/v2/admin/roles",
       "source": "apps/wm.js",
       "authorization": {
@@ -8492,6 +8528,42 @@
       "method": "PATCH",
       "path": "/v2/admin/settings/site",
       "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "GET",
+      "path": "/v2/admin/users",
+      "source": "apps/wm/users.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "POST",
+      "path": "/v2/admin/users",
+      "source": "apps/wm/users.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "PATCH",
+      "path": "/v2/admin/users/:id",
+      "source": "apps/wm/users.js",
       "authorization": {
         "audience": "staff:wm or staff:admin for this route",
         "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",

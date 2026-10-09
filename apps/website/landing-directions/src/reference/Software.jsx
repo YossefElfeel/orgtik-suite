@@ -1,3 +1,4 @@
+import { managedPageTree } from "../content/managed-page";
 import { content } from "../content";
 import {
   findItem,
@@ -1088,7 +1089,7 @@ export default class Software extends ReferencePage {
   render() {
     const v = this.renderVals();
     return (
-      <>
+      managedPageTree(<>
         <div
           ref={v.rootRef}
           data-screen-label={"Software"}
@@ -1518,7 +1519,7 @@ export default class Software extends ReferencePage {
             className={v.isOverview ? undefined : "content-page"}
           >
             {v.isOverview ? (
-              <section
+              <section data-cms-section="hero"
                 style={{
                   position: "relative",
                   minHeight: "100svh",
@@ -2036,7 +2037,7 @@ export default class Software extends ReferencePage {
             )}
             {v.isOverview && (
               <>
-                <section
+                <section data-cms-section="workspace"
                   id={"workspace"}
                   data-screen-label={"Software — How it connects"}
                   style={{
@@ -2616,7 +2617,7 @@ export default class Software extends ReferencePage {
             )}
             {v.isProduct && (
               <>
-                <section
+                <section data-cms-section="capabilities"
                   id={"capabilities"}
                   data-screen-label={"Software — Product capabilities"}
                   style={{ padding: "var(--section-space) 0" }}
@@ -3011,7 +3012,7 @@ export default class Software extends ReferencePage {
                     </div>
                   </div>
                 </section>
-                <section
+                <section data-cms-section="demo"
                   id={"demo"}
                   data-screen-label={"Software — Ways to use"}
                   style={{
@@ -3439,7 +3440,7 @@ export default class Software extends ReferencePage {
             )}
             {v.showPlans && (
               <>
-                <section
+                <section data-cms-section="section-1"
                   data-screen-label={"Software — What happens next"}
                   style={{
                     padding: "clamp(60px,6vw,88px) 0",
@@ -3601,7 +3602,7 @@ export default class Software extends ReferencePage {
             )}
             {v.isProduct && (
               <>
-                <section
+                <section data-cms-section="section-2"
                   data-screen-label={"Software — Related"}
                   style={{
                     padding: "var(--section-space) 0",
@@ -3895,7 +3896,7 @@ export default class Software extends ReferencePage {
                 </section>
               </>
             )}
-            {v.isOverview && <Testimonials scope={msg("Software:57")} />}
+            {v.isOverview && <Testimonials data-cms-section="reviews" scope={msg("Software:57")} />}
             <section
               id={"closing"}
               className="closing-cta"
@@ -4477,7 +4478,7 @@ export default class Software extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>
+      </>, "pg_software")
     );
   }
 }

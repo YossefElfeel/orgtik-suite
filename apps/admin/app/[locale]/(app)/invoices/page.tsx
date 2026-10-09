@@ -28,7 +28,7 @@ function InvoicesList() {
   const workspaceId = url.get("workspace");
   const currency = url.get("currency");
   const page = Math.max(1, Number(url.get("page")) || 1);
-  const pageSize = Number(url.get("pageSize")) || 25;
+  const pageSize = Number(url.get("pageSize")) || 10;
   const [creating, setCreating] = useState(false);
   const { data, isLoading, error, refetch, isFetching } = useInvoicesQuery({ state: state || undefined, workspaceId: workspaceId || undefined, currency: currency || undefined, page, pageSize });
   const workspaces = useWorkspacesQuery({ pageSize: 100 }, { skip: !can("workspaces:view") });
@@ -70,7 +70,7 @@ function InvoicesList() {
   const status = isLoading ? "loading" : error ? (statusOf(error) === 403 ? "forbidden" : "error") : "ready";
   const onPagination = (u: PaginationState | ((old: PaginationState) => PaginationState)) => {
     const next = typeof u === "function" ? u({ pageIndex: page - 1, pageSize }) : u;
-    url.set({ page: next.pageIndex + 1, pageSize: next.pageSize === 25 ? null : next.pageSize });
+    url.set({ page: next.pageIndex + 1, pageSize: next.pageSize === 10 ? null : next.pageSize });
   };
   const clear = () => url.set({ state: null, workspace: null, currency: null });
 

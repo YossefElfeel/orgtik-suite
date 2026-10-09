@@ -11,13 +11,14 @@ export const buttonVariants = cva([
 ], {
     variants: {
         variant: {
-            primary: "bg-action-primary text-on-action-primary hover:bg-action-primary-hover",
+            primary: "bg-action-primary text-on-action-primary hover:bg-action-primary-hover active:brightness-90",
             secondary: "border border-line-control bg-transparent text-fg hover:bg-hover active:bg-pressed",
             ghost: "bg-transparent text-fg hover:bg-hover active:bg-pressed",
-            danger: "bg-danger-solid text-on-danger-solid hover:bg-danger-solid-hover",
+            danger: "bg-danger-solid text-on-danger-solid hover:bg-danger-solid-hover active:brightness-90",
+            warning: "bg-warning-solid text-on-warning-solid hover:brightness-95 active:brightness-90",
             link: "h-auto bg-transparent px-0 text-fg-brand underline-offset-4 hover:underline",
             // The website's signature: a pill with an arrow chip at the end (the chip mirrors in RTL).
-            brand: "bg-action-brand text-on-action-brand hover:bg-action-brand-hover",
+            brand: "bg-action-brand text-on-action-brand hover:bg-action-brand-hover active:brightness-90",
         },
         size: {
             sm: "h-control-sm px-3 text-body-sm",

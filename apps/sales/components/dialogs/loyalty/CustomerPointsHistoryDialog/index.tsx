@@ -19,7 +19,7 @@ type Props = {
   onOpenChange: (open: boolean) => void;
 };
 
-const SIZES = [10, 25, 50];
+const SIZES = [10];
 
 export default function CustomerPointsHistoryDialog({ customerId, customerName, points, manager, onOpenChange }: Props) {
   const t = useTranslations("Team.loyalty");

@@ -6,8 +6,10 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { Pagination as SuitePagination } from "@orgtik/ui";
 import TableSkeleton from "./TableSkeleton";
 import { IFilterFunctions, IPaginationOptions, ISearchFunctions } from "./type";
 import { CustomPagination } from "../CustomPagination";
@@ -99,14 +101,19 @@ export default function DataTable<TData, TValue>({
   filterFunctions,
   searchFunctions,
 }: DataTableProps<TData, TValue>) {
+  const [clientPagination, setClientPagination] = React.useState({ pageIndex: 0, pageSize: 10 });
+  React.useEffect(() => { setClientPagination({ pageIndex: 0, pageSize: 10 }); }, [data]);
   const table = useReactTable({
     data,
     columns,
 
     state: {
-      pagination: { pageIndex: 0, pageSize: pagination?.limit || 10 },
+      pagination: pagination ? { pageIndex: (pagination.currentPage || 1) - 1, pageSize: 10 } : clientPagination,
     },
+    manualPagination: Boolean(pagination),
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setClientPagination,
   });
 
   return (
@@ -125,17 +132,17 @@ export default function DataTable<TData, TValue>({
       <div className="w-full border rounded-lg overflow-auto border-gray-200  ">
         <TableHorizontalScroll>
           <table className="w-full min-w-max">
-            <thead>
+            <thead className="bg-sunken">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr
                   key={headerGroup.id}
-                  className="bg-neutral-100 rounded-none"
+                  className="bg-sunken rounded-none"
                 >
                   {headerGroup.headers.map((header) => (
                     <th
                       key={header.id}
                       colSpan={header.colSpan}
-                      className="border-b border-r last:border-r-0 border-gray-100 text-start 
+                      className="border-b border-r last:border-r-0 border-gray-100 text-start
                     capitalize py-3 px-4 text-nowrap text-16 font-medium text-neutral-500 "
                     >
                       {header.isPlaceholder
@@ -158,7 +165,7 @@ export default function DataTable<TData, TValue>({
                   <motion.tr
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
-                    className="hover:bg-gray-50 transition-all duration-300 even:bg-gray-50/50 bg-white 
+                    className="hover:bg-gray-50 transition-all duration-300 even:bg-gray-50/50 bg-white
                   border-b  border-gray-100 last:border-b-0"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -194,7 +201,8 @@ export default function DataTable<TData, TValue>({
         </TableHorizontalScroll>
       </div>
 
-      {pagination && pagination.totalPages > 1 && (
+      {!pagination ? <SuitePagination page={clientPagination.pageIndex + 1} pageSize={10} total={data.length} onPageChange={page => setClientPagination({ pageIndex: page - 1, pageSize: 10 })} /> : null}
+      {pagination && (
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
