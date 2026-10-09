@@ -1,0 +1,213 @@
+{
+  "sourceCommit": "5406402b9e44beec7df4eb9f7ebd8504512159cc",
+  "sourceChanges": [
+    "2fdee39",
+    "5406402"
+  ],
+  "foundationCommit": "44d58ab",
+  "reports": {
+    "functional": 34,
+    "visual": 53,
+    "catalogs": 10,
+    "details-states": 9,
+    "templates": 5
+  },
+  "totalScopedAssertions": 111,
+  "captures": [
+    {
+      "file": "admin-settings.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "dd853034ee54fc1d892515061a31e7d94ba073ade08d4178d3b5cee3decd2aae"
+    },
+    {
+      "file": "first-run-connected-inspector.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "73296131d7ca20f4decd553e6884777c298ae068121ecf056104901f86ba3ec2"
+    },
+    {
+      "file": "functional-workbench.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "42f06b38b41736647ae5e6b84cc4a04678f47d23698fa13e9db09b8d162fa211"
+    },
+    {
+      "file": "state-empty.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "a84b4f429afb009c7ec3e561a855bbf5b2891e77f3124a4ce8ad7d469777e17c"
+    },
+    {
+      "file": "state-error.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "2864dc79b0c827539699c48b37ef3d9240f3b63a9d4c30af31483d98ddf35a80"
+    },
+    {
+      "file": "state-forbidden.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "e305e62e778978d5fae592043ce68c8d55cf1dffd8793659a3764bb9a0eeefb1"
+    },
+    {
+      "file": "state-loading.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "79c2df4cc4231f700c2bcfce0102f471f44ea5cdddd828c0017c7b26944d0e58"
+    },
+    {
+      "file": "state-read-only.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "6257ccd6f6ac64bd6e8143e99b8649b6ea08e95d14852ef1b5f5f04b168d6ca4"
+    },
+    {
+      "file": "state-success.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "a93ad1329c5c8aa3dffbc13eed9ebc56ccd19dc870ac37d092889bc0776aad3a"
+    },
+    {
+      "file": "task-inspector-en-light-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "4801c7d0a408a49b6e5890ae856f735ed6699e02c009a3a61c72422a6d59c0a7"
+    },
+    {
+      "file": "task-inspector.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "fd454ee446a5c2e10e6e863aab18f9474cdd050fc697bdc17516b863a4c626b0"
+    },
+    {
+      "file": "timeline.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "e59d8a2b3b60d4b1a73dae9392e22f2529aa2967d2ab176fb713b53f04468274"
+    },
+    {
+      "file": "workbench-ar-dark-1024.png",
+      "width": 1024,
+      "height": 1000,
+      "sha256": "85b4c106c8903b21cb8e7d69e367c39e33da0b363fe5247e16821a5e2965b3c6"
+    },
+    {
+      "file": "workbench-ar-dark-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "ef8218ebc02f86d348ad3d338bafcf270b2dab66fbc5aa9d77bbc31463e55696"
+    },
+    {
+      "file": "workbench-ar-dark-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "cd2f1784bd2179c99f34547cbd707185cec022e0c8626eac353c9ccd22766393"
+    },
+    {
+      "file": "workbench-ar-dark-768.png",
+      "width": 768,
+      "height": 1000,
+      "sha256": "faf431424975eb168d3785d6f2afaa6838f678fd4f69f49406949fc58d0fd23a"
+    },
+    {
+      "file": "workbench-ar-light-1024.png",
+      "width": 1024,
+      "height": 1000,
+      "sha256": "baa8653576eb6c334bcd2400ed62664f99960fc35554d52332cd7f72dfadd13d"
+    },
+    {
+      "file": "workbench-ar-light-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "dee2a7f8a01d174cf7dadabed457010d8784c603f5d41b6660aca965491b435b"
+    },
+    {
+      "file": "workbench-ar-light-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "0daa69394bfa7bf363ff31ba1d7336b753a38ce3c714d0b5be09c2938985143c"
+    },
+    {
+      "file": "workbench-ar-light-768.png",
+      "width": 768,
+      "height": 1000,
+      "sha256": "8ad2a6fa30c2ec34b3aa97d09b4ebc62bbcff5cfb295b8602a5fd55c45cf9b3f"
+    },
+    {
+      "file": "workbench-de-light-1024.png",
+      "width": 1024,
+      "height": 1000,
+      "sha256": "d55cf578db9de2f054c3ad5f5278c2640f07ef0ddc16767c3e76013a73ceb832"
+    },
+    {
+      "file": "workbench-en-dark-1024.png",
+      "width": 1024,
+      "height": 1000,
+      "sha256": "254765e675c675766c7af1efe6242efefa33e742e72d3d874450e6c3df080879"
+    },
+    {
+      "file": "workbench-en-dark-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "e0502f28dc9cea25784c93e545150bf8b90a4bc9c265393feb3b5f8d463e7354"
+    },
+    {
+      "file": "workbench-en-dark-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "92958b2db7d49a70609e95ec30ad6b69298962a3388d4713c133f245230bc9c3"
+    },
+    {
+      "file": "workbench-en-dark-768.png",
+      "width": 768,
+      "height": 1000,
+      "sha256": "34d130e4d2fb683bfb1f5dac72748165538fb0331de58918ded5dbf131bf210f"
+    },
+    {
+      "file": "workbench-en-light-1024.png",
+      "width": 1024,
+      "height": 1000,
+      "sha256": "321447f47c0608cf793cd8997045c370b49aff1f956b7c33f2a8fde1b400bc14"
+    },
+    {
+      "file": "workbench-en-light-1440.png",
+      "width": 1440,
+      "height": 1000,
+      "sha256": "a0ef2d11f230e3406e48cb2f1b36432ca15e6bdf57bb9790d4f6e461a2e84a9c"
+    },
+    {
+      "file": "workbench-en-light-390.png",
+      "width": 390,
+      "height": 844,
+      "sha256": "9c059aefdcc898b0f60eacd332affb47d9208ff5dc95f1e09d36f842ab1b5a79"
+    },
+    {
+      "file": "workbench-en-light-768.png",
+      "width": 768,
+      "height": 1000,
+      "sha256": "8bd805f2b2d01f404f4af93f72e9aa8eeb9cd5fc7dae8dbaf172a41cf980f183"
+    },
+    {
+      "file": "workbench-fr-light-1024.png",
+      "width": 1024,
+      "height": 1000,
+      "sha256": "15aacbe72b710b69e6d6a669415d98c7c91a723b0c333d3bfdfaee1b7d88d9b3"
+    },
+    {
+      "file": "workbench-it-light-1024.png",
+      "width": 1024,
+      "height": 1000,
+      "sha256": "5523eed7aa4d40f77980996c6feec2f29c269529bae826bce99cb4852b3cec04"
+    }
+  ],
+  "validation": {
+    "typecheck": "pass",
+    "fiveCatalogParity": "pass",
+    "productionBuild": "pass",
+    "applicationErrors": 0,
+    "criticalSeriousAxe": 0,
+    "overflow": 0
+  },
+  "scope": "Tasks ordinary frontend/mock pilot; external provider and hosted acceptance deferred; website unchanged"
+}

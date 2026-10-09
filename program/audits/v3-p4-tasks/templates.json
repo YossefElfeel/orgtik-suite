@@ -1,0 +1,27 @@
+{
+  "scope": "Focused actual inspector-template-quick-add round trip for all supported template fields.",
+  "checks": [
+    {
+      "name": "Inspector saved template preserves start and due dates",
+      "pass": true
+    },
+    {
+      "name": "Template preserves watchers/reminder/custom fields/description",
+      "pass": true
+    },
+    {
+      "name": "Ordinary quick-add template reuses persisted dates and recurrence",
+      "pass": true
+    },
+    {
+      "name": "Ordinary quick-add reuses persisted recipients and custom value",
+      "pass": true
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "completed": true
+}
