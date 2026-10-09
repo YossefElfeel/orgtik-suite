@@ -1,6 +1,9 @@
 import type { NavItemConfig } from "@/types/navigation";
 
 export const NAV_ITEMS: NavItemConfig[] = [
+  { path: "/service-catalog", label: "serviceCatalog", icon: "", roles: ["admin", "manager", "salesman", "customer"] },
+  { path: "/service-requests", label: "serviceRequests", icon: "", roles: ["admin", "manager", "salesman", "customer"] },
+  { path: "/admin", label: "toolAdmin", icon: "", roles: ["admin", "manager", "salesman", "customer"] },
   {
     path: "/",
     label: "dashboard",

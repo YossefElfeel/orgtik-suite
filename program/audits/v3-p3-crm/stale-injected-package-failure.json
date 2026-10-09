@@ -1,0 +1,129 @@
+{
+  "date": "2026-10-10",
+  "scope": "Ordinary CRM service catalog and delivery, isolated memory demo on offset300",
+  "checks": [],
+  "captures": [],
+  "errors": [
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Maximum update depth exceeded. This can happen when a component calls setState inside useEffect, but useEffect either doesn't have a dependency array, or one of the dependencies changes on every render."
+    }
+  ],
+  "failure": "locator.fill: Timeout 45000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog').getByLabel('Monthly price · CHF', { exact: true })\u001b[22m\n"
+}

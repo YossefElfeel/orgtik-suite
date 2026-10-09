@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-10",
+  "checks": [
+    {
+      "name": "regional-country-price-draft axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "regional-country-price-draft overflow",
+      "pass": true
+    },
+    {
+      "name": "Price editor saves regional/country overrides to a draft",
+      "pass": true
+    },
+    {
+      "name": "Published France quote resolves country override",
+      "pass": true
+    },
+    {
+      "name": "Eligible staff assignment persists",
+      "pass": true
+    },
+    {
+      "name": "Hold transition is reflected on the ordinary request",
+      "pass": true
+    },
+    {
+      "name": "Milestone status persists",
+      "pass": true
+    },
+    {
+      "name": "Note delivery persists and enters customer review",
+      "pass": true
+    },
+    {
+      "name": "service-delivery-review axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "service-delivery-review overflow",
+      "pass": true
+    },
+    {
+      "name": "Customer case is an actual current CRM admin",
+      "pass": true
+    },
+    {
+      "name": "Customer CRM admin has no catalog edit controls en",
+      "pass": true
+    },
+    {
+      "name": "customer-admin-no-access-en-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "customer-admin-no-access-en-1440 overflow",
+      "pass": true
+    },
+    {
+      "name": "Customer CRM admin has no catalog edit controls ar",
+      "pass": true
+    },
+    {
+      "name": "customer-admin-no-access-ar-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "customer-admin-no-access-ar-390 overflow",
+      "pass": true
+    },
+    {
+      "name": "catalog-read-error-retry axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "catalog-read-error-retry overflow",
+      "pass": true
+    },
+    {
+      "name": "Ordinary catalog error retry recovers",
+      "pass": true
+    },
+    {
+      "name": "No depth runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "regional-country-price-draft.png",
+    "service-delivery-review.png",
+    "customer-admin-no-access-en-1440.png",
+    "customer-admin-no-access-ar-390.png",
+    "catalog-read-error-retry.png"
+  ],
+  "errors": [],
+  "completed": true
+}

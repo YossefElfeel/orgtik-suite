@@ -1,0 +1,1 @@
+{"date":"2026-10-10","completed":false,"kind":"verification_setup","checks":0,"captures":0,"reason":"Initial Next webpack auth compile took 100 seconds; the one-use handoff expired (400 handoff_expired) before the ordinary CRM route loaded. The next run warms /en/auth before issuing a fresh handoff. No product UI conclusion is inferred from the timeout."}
