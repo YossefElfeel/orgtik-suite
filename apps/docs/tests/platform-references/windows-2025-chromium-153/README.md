@@ -1,6 +1,6 @@
 # Reviewed Windows 2025 reference pairs
 
-These **44 explicitly enumerated images** reconcile system-font rasterization on the reviewed GitHub Windows renderer. The suite now has **276 default references**. Comparisons use pixelmatch threshold **0.1**, **zero changed pixels**, and **no masks**.
+These **50 explicitly enumerated images** reconcile system-font rasterization on the reviewed GitHub Windows renderer. The suite now has **276 default references**. Comparisons use pixelmatch threshold **0.1**, **zero changed pixels**, and **no masks**.
 
 ## Original reference review — 2026-10-07
 
@@ -23,3 +23,5 @@ These images are evidence from the reviewed run, not a bulk refresh. A browser/O
 ## DS v2 foundation refresh — 2026-10-09
 
 The owner's “continue till finish” instruction authorizes proceeding through the design gates with evidence. P1 deliberately changes tokens, Plex fonts, control density and radius. All 276 defaults were captured with zero accessibility, console or overflow findings. The 44 enumerated pairs were then individually re-rendered on the exact declared Windows/Chromium/Cairo/locale/fixed-clock profile; each matched its new default pixel-for-pixel before the override, SHA-256, text/control-state, layout and selected-font metadata were updated together. `refresh-platform-references.mjs` refuses CI use, another renderer or a changed default render. Package CI independently validates these references; historical glyph-only reviews above remain history rather than evidence for the v2 styling.
+
+The first P1 Windows run [37987861085](https://github.com/YossefElfeel/orgtik-suite/actions/runs/37987861085), source `0636c3a`, retained 258 exact renders and found 18 small differences: 294 pixels total, 1–54 per image. Every changed pixel is inside the visible Cascadia Code annotations; dimensions, text/control state, layout anchors and selected fonts are unchanged. The six new Foundations v2 pairs each differ by four pixels at the digit-1 stroke of “100.” Twelve existing typography pairs and six new Foundation pairs were reconciled from the actual CI captures, bringing the enumerated total to 50. [The bounded review](../../../../program/audits/v3-p1/windows-ci-review.json) records each image. `reconcile-windows.mjs` verifies the renderer and these invariants before writing a pair; default references, threshold, zero-pixel rule and no-mask policy are preserved. The failed run remains failed history; a new CI run must pass.
