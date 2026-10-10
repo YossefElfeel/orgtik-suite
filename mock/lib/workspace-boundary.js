@@ -410,6 +410,26 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       if (!runtime.applyPublicCareer) throw failure(503, 'careers_unavailable', 'The careers page is being prepared.');
       return runtime.applyPublicCareer({ ...eligibility, jobId: req.params.jobId, application: req.body, operationId: req.get('idempotency-key') });
     }));
+    const publicChats = (req, write = false) => {
+      const S = platform().getStore(), ws = S.workspace(req.params.workspaceId), token = req.params.token;
+      if (!ws || ['deleted', 'cancelled'].includes(ws.state) || typeof token !== 'string' || token.length > 240) throw failure(404, 'guest_entry_unavailable', 'This guest entry is unavailable.');
+      const line = ws.lines.find(row => row.tool === 'chat' && !['ended', 'deleted'].includes(row.state)), plan = line && S.db.plans.find(row => row.id === line.planId), planEligible = Boolean(line && plan?.tool === 'chat'), canJoin = planEligible && ws.state !== 'suspended' && line.state !== 'read_only';
+      if (!planEligible) throw failure(404, 'guest_entry_unavailable', 'This guest entry is unavailable.');
+      const runtime = registry.create(ws.id, 'chats');
+      if (write) requests.getStore().relatedRuntimes.set(`public-chats:${ws.id}`, runtime);
+      return { runtime, planEligible, canJoin, token };
+    };
+    app.get('/v1/public/chats/:workspaceId/guests/:token', route(req => {
+      if (req.query.visitToken !== undefined && (typeof req.query.visitToken !== 'string' || req.query.visitToken.length > 240)) throw failure(422, 'invalid_visit_proof', 'Use the original guest visit proof.');
+      const { runtime, ...eligibility } = publicChats(req);
+      try { if (!runtime.publicGuest) throw failure(503, 'guest_entry_pending', 'This guest entry is being prepared.'); return runtime.publicGuest({ ...eligibility, visitToken: req.query.visitToken }); } finally { runtime.close(); }
+    }));
+    app.post('/v1/public/chats/:workspaceId/guests/:token', route(req => {
+      if (principal()?.readOnly) throw failure(423, 'view_as_read_only', 'View-as cannot create a guest visit.');
+      const { runtime, ...eligibility } = publicChats(req, true);
+      if (!runtime.joinPublicGuest) throw failure(503, 'guest_entry_pending', 'This guest entry is being prepared.');
+      return runtime.joinPublicGuest({ ...eligibility, guest: req.body, operationId: req.get('idempotency-key') });
+    }));
     app.get('/api/auth/account', route(req => {
       personActions(req);
       const p = principal(), S = platform().getStore();

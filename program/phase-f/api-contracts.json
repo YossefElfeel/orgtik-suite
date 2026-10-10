@@ -4,6 +4,486 @@
   "enforcement": "workspace-boundary and current app route guards; legacy-only source definitions do not imply mounted customer routes",
   "routes": [
     {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/api-keys",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/api-keys",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "DELETE",
+      "path": "/api/suite/account/api-keys/:id",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/audit",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/billing-contacts",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/billing-contacts",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "DELETE",
+      "path": "/api/suite/account/billing-contacts/:id",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/bootstrap",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/delete",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/export",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/feedback",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/leave",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/members/:id/role",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/members/:id/status",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "PATCH",
+      "path": "/api/suite/account/notification-preferences",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/onboarding",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "PATCH",
+      "path": "/api/suite/account/onboarding",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/product",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/refund-requests",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/refund-requests",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/retention",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/roles",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/roles",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "DELETE",
+      "path": "/api/suite/account/roles/:id",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/security",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/security/email",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "PATCH",
+      "path": "/api/suite/account/security/policy",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/security/recovery",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/security/two-factor",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/sessions",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/sessions/:id/revoke",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/sessions/revoke",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "PATCH",
+      "path": "/api/suite/account/sso",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/team/bulk-invite",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "GET",
+      "path": "/api/suite/account/webhooks",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/webhooks",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "DELETE",
+      "path": "/api/suite/account/webhooks/:id",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "PATCH",
+      "path": "/api/suite/account/webhooks/:id",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/webhooks/:id/test",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "account",
+      "method": "POST",
+      "path": "/api/suite/account/workspaces",
+      "source": "apps/sos/workspace-features.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "signed account/membership; personal owner for security, workspace owner for billing/SSO, administrator for team configuration; guard supplied by Account module/actions adapter",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
       "app": "chats",
       "method": "GET",
       "path": "/api/hq/bootstrap",
@@ -7277,6 +7757,18 @@
     },
     {
       "app": "shared",
+      "method": "GET",
+      "path": "/api/suite/crm/directory",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
       "method": "POST",
       "path": "/api/suite/crm/projects/:id/provision",
       "source": "lib/workspace-suite.js",
@@ -7965,9 +8457,9 @@
       "path": "/v1/public/careers/:workspaceId",
       "source": "lib/workspace-boundary.js",
       "authorization": {
-        "audience": "suite or identity route session",
-        "workspaceBinding": "signed selected workspace",
-        "permission": "current session or recipient",
+        "audience": "anonymous published careers resource on SOS",
+        "workspaceBinding": "server-validated workspace resource and opened job; no employee data",
+        "permission": "actual HR subscription/published careers setting; text-only application to current opened job; billing/read-only restriction and exact operation receipt",
         "writes": "read"
       }
     },
@@ -7977,10 +8469,34 @@
       "path": "/v1/public/careers/:workspaceId/jobs/:jobId/applications",
       "source": "lib/workspace-boundary.js",
       "authorization": {
-        "audience": "suite or identity route session",
-        "workspaceBinding": "signed selected workspace",
-        "permission": "current session or recipient",
-        "writes": "current write capability; billing and impersonation restrictions"
+        "audience": "anonymous published careers resource on SOS",
+        "workspaceBinding": "server-validated workspace resource and opened job; no employee data",
+        "permission": "actual HR subscription/published careers setting; text-only application to current opened job; billing/read-only restriction and exact operation receipt",
+        "writes": "published opened-job application only; no private HR authority"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
+      "path": "/v1/public/chats/:workspaceId/guests/:token",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "anonymous meeting guest capability on SOS; own visit proof after join",
+        "workspaceBinding": "server-validated meeting entry and own temporary guest; no canonical membership or private history",
+        "permission": "actual Chats subscription/write-state and meeting guest capability; only own lobby state; signed host admission/decline",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "POST",
+      "path": "/v1/public/chats/:workspaceId/guests/:token",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "anonymous meeting guest capability on SOS; own visit proof after join",
+        "workspaceBinding": "server-validated meeting entry and own temporary guest; no canonical membership or private history",
+        "permission": "actual Chats subscription/write-state and meeting guest capability; only own lobby state; signed host admission/decline",
+        "writes": "temporary guest visit only; no canonical session/grants"
       }
     },
     {

@@ -45,7 +45,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
       if (tool === 'hr') push(tool, 'employee', data.employees, row => row.fullName || [row.firstName, row.lastName].filter(Boolean).join(' ') || row.name, row => `/employees/${encodeURIComponent(row.id)}`);
       if (tool === 'crm') { push(tool, 'contact', data.contacts, row => row.fullName, row => `/customers/${encodeURIComponent(row.id)}`); push(tool, 'company', data.companies, row => row.name, row => `/companies?company=${encodeURIComponent(row.id)}`); push(tool, 'project', data.projects, row => row.projectName, row => `/projects/${encodeURIComponent(row.id)}`); }
       if (tool === 'marketing') push(tool, 'project', data.projects, row => row.name || row.title, row => `/projects/${encodeURIComponent(row.id)}`);
-      if (tool === 'chat') { push(tool, 'channel', data.channels, row => row.name, row => `/channels/${encodeURIComponent(row.id)}`); push(tool, 'message', data.messages, row => row.text || row.content, row => `/channels/${encodeURIComponent(row.channelId)}?message=${encodeURIComponent(row.id)}`); }
+      if (tool === 'chat') { push(tool, 'channel', data.channels, row => row.name, row => `/hq/chat/${encodeURIComponent(row.id)}`); push(tool, 'message', data.messages, row => row.text || row.content, row => `/hq/chat/${encodeURIComponent(row.channelId)}?message=${encodeURIComponent(row.id)}`); }
     }
     return out;
   }
