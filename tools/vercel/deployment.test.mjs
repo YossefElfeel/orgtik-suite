@@ -6,6 +6,24 @@ import { execFileSync } from "node:child_process";
 import { test } from "node:test";
 import { checkMockBundle } from "./check-mock-bundle.mjs";
 import { copyMockRuntime } from "./copy-mock-runtime.mjs";
+import { selectDeploymentProjects } from './deployment-policy.mjs';
+
+test('automatic rollouts select affected existing projects and exclude retired Content', () => {
+  const projects = JSON.parse(fs.readFileSync(new URL('./projects.json', import.meta.url))).projects;
+  const selection = selectDeploymentProjects(projects, { affectedPackages: Object.values(projects).map(project => project.package), environment: 'production' });
+  assert.equal(selection.length, 11);
+  assert.deepEqual(selection.slice(0, 3).map(project => project.key), ['mock', 'sos', 'website']);
+  assert.equal(selection.some(project => project.key === 'content'), false);
+  assert.deepEqual(selectDeploymentProjects(projects, { affectedPackages: [projects.tasks.package] }).map(project => project.key), ['tasks']);
+});
+
+test('manual main rollout preserves the explicit existing-project scope and rejects retired projects', () => {
+  const projects = JSON.parse(fs.readFileSync(new URL('./projects.json', import.meta.url))).projects;
+  assert.deepEqual(selectDeploymentProjects(projects, { requested: ['tasks', 'mock'], environment: 'production', manualMain: true }).map(project => project.key), ['mock', 'tasks']);
+  assert.throws(() => selectDeploymentProjects(projects, { requested: ['content'] }), /retired project/);
+  assert.throws(() => selectDeploymentProjects(projects, { requested: ['unknown'] }), /Unknown requested/);
+  assert.throws(() => selectDeploymentProjects(projects, { requested: ['tasks'], environment: 'production' }), /limited project selection/);
+});
 
 test("binary HLS transport segments are excluded from the TypeScript tracer", () => {
   const config = JSON.parse(fs.readFileSync(new URL("../../mock/vercel.json", import.meta.url), "utf8"));

@@ -1,8 +1,8 @@
 {
   "updated_at": "2026-10-11",
-  "owner_instruction": "continue till finish; merge all finished work",
-  "gate_policy": "Owner authorizes continued implementation and evidence review through P5 without intermediate approval stops; explicit deployment instruction is still required.",
-  "deployment": "paused",
+  "owner_instruction": "continue till finish; merge all finished work; resume deploy on vercel",
+  "gate_policy": "Owner authorizes continued implementation through P5 and explicitly resumed managed Vercel deployment on2026-10-11. Deploy validated merged main only; unfinished isolated tool work remains outside the rollout.",
+  "deployment": "resumed_managed_vercel_rollout_in_progress",
   "current_phase": "P3_integration_and_P4_tool_cycles",
   "packages": {
     "V3-P0": {
@@ -34,27 +34,27 @@
       "acceptance_evidence": "program/audits/v3-p3/README.md; program/audits/website/parity/diff-v3-catalog-final-before-vs-v3-catalog-final-after.md"
     },
     "V3-P4-TASKS": {
-      "status": "implemented_local_verified_ci_pending",
+      "status": "merged_local_and_ci_verified",
       "ui_status": "ordinary_pilot_verified",
-      "current_evidence": "Tasks e126536 integrated root1627975; all eight Tier A and approved Tier B ordinary workflows, admin/onboarding/connected/six states, five catalogs and production build. 111 scoped assertions and31 hashed accepted captures; root integration CI remains pending.",
+      "current_evidence": "Tasks e126536 integrated root1627975; all eight Tier A and approved Tier B ordinary workflows, admin/onboarding/connected/six states, five catalogs and production build. 111 scoped assertions and31 hashed accepted captures; root integration CI remains pending. Completed committed source merged through PR49 at main2f7aaa8 after CI38088515260 and configuration38088515217 passed, including strict Windows visuals.",
       "acceptance_evidence": "program/audits/v3-p4-tasks/README.md; program/audits/v3-p4-tasks/manifest.json"
     },
     "V3-P4-ACCOUNT": {
-      "status": "implemented_local_verified_ci_pending",
+      "status": "merged_local_and_ci_verified",
       "ui_status": "ordinary_account_verified",
-      "current_evidence": "Accountb5c4f68 integrated root90fd8ac:142 assertions/44 captures, all8Tier A and approved Tier B, actual authority actions/adaptive Home/preference handoff, six states, five catalogs, responsive EN/AR themes and production build.",
+      "current_evidence": "Accountb5c4f68 integrated root90fd8ac:142 assertions/44 captures, all8Tier A and approved Tier B, actual authority actions/adaptive Home/preference handoff, six states, five catalogs, responsive EN/AR themes and production build. Completed committed source merged through PR49 at main2f7aaa8 after CI38088515260 and configuration38088515217 passed, including strict Windows visuals.",
       "acceptance_evidence": "program/audits/v3-p4-account/README.md; program/audits/v3-p4-account/manifest.json"
     },
     "V3-P4-HR": {
-      "status": "implemented_local_verified_ci_pending",
+      "status": "merged_local_and_ci_verified",
       "ui_status": "ordinary_hr_and_careers_verified",
-      "current_evidence": "HRe569cb8 integrated root785a960:450 scriptedchecks/50 tests/117 captures; all8Tier A and approved Tier B, public careers, six states, five catalogs and production build. Reviewed5253faa correction adds3helpertests/11actualchecks/2AR390captures; badge/checklist follow real linked Tasks status with no manual field rewrite.",
+      "current_evidence": "HRe569cb8 integrated root785a960:450 scriptedchecks/50 tests/117 captures; all8Tier A and approved Tier B, public careers, six states, five catalogs and production build. Reviewed5253faa correction adds3helpertests/11actualchecks/2AR390captures; badge/checklist follow real linked Tasks status with no manual field rewrite. Completed committed source merged through PR49 at main2f7aaa8 after CI38088515260 and configuration38088515217 passed, including strict Windows visuals.",
       "acceptance_evidence": "program/audits/v3-p4/hr/README.md; program/audits/v3-p4/hr/verification.json; program/audits/v3-p4/hr/onboarding-review.json"
     },
     "V3-P4-CRM": {
-      "status": "implemented_local_verified_ci_pending",
+      "status": "merged_local_and_ci_verified",
       "ui_status": "ordinary_crm_verified",
-      "current_evidence": "CRM final0ffbdb9 integrated root757ee8a:1,316 accepted checks/334 unique captures,12 domain tests, five catalogs and production build. All Tier A/B ordinary workflows, native signed PDF bytes, paid service delivery, retained money flows, won customer workspace and actual Console handoff verified. Exactly226 approved kit files removed with zero remaining imports. Integration CI for the final source remains pending.",
+      "current_evidence": "CRM final0ffbdb9 integrated root757ee8a:1,316 accepted checks/334 unique captures,12 domain tests, five catalogs and production build. All Tier A/B ordinary workflows, native signed PDF bytes, paid service delivery, retained money flows, won customer workspace and actual Console handoff verified. Exactly226 approved kit files removed with zero remaining imports. Integration CI for the final source remains pending. Completed committed source merged through PR49 at main2f7aaa8 after CI38088515260 and configuration38088515217 passed, including strict Windows visuals.",
       "acceptance_evidence": "program/audits/v3-p4-crm/README.md; program/audits/v3-p4-crm/manifest.json"
     },
     "V3-P4-CHATS": {
@@ -63,9 +63,9 @@
       "current_evidence": "Chats source candidate cb8e8bc: ordinary Tier A/B, guest admission, recording references, feeds, Admin/onboarding and zero inline source styles implemented. Seventeen native UI checks,19 combined HTTP checks,24 domain tests and14 retained regressions passed; final states/matrix/recording proof and production build remain pending."
     },
     "V3-P4-FILES": {
-      "status": "implemented_local_verified_ci_pending",
+      "status": "merged_local_and_ci_verified",
       "ui_status": "ordinary_files_verified",
-      "current_evidence": "Files ab08b65 integrated root9423062:135 accepted native browser assertions/77 captures,48 domain/client regressions plus8 signed board HTTP scenarios. Ordinary Tier A/B, all eight Admin sections, connected access/trials, empty onboarding, exact pinned immutable bytes, original-command recovery, six states, five catalogs and production build passed. Subsequent integrated board regression repair passes14/14; final combined CI pending.",
+      "current_evidence": "Files ab08b65 integrated root9423062:135 accepted native browser assertions/77 captures,48 domain/client regressions plus8 signed board HTTP scenarios. Ordinary Tier A/B, all eight Admin sections, connected access/trials, empty onboarding, exact pinned immutable bytes, original-command recovery, six states, five catalogs and production build passed. Subsequent integrated board regression repair passes14/14; final combined CI pending. Completed committed source merged through PR49 at main2f7aaa8 after CI38088515260 and configuration38088515217 passed, including strict Windows visuals.",
       "acceptance_evidence": "program/audits/v3-p4-files/README.md; program/audits/v3-p4-files/manifest.json"
     },
     "V3-P4-MARKETING": {
@@ -85,7 +85,7 @@
     }
   },
   "integration": {
-    "status": "completed_committed_work_ready_for_current_ci",
+    "status": "merged_current_ci_verified",
     "branch": "feat/suite-v3-ecosystem",
     "pull_request": 49,
     "completed_cycles": [
@@ -102,6 +102,28 @@
       "Marketing uncommitted final acceptance evidence",
       "P5 final reconciliation"
     ],
-    "evidence_policy": "Committed source improvements are integrated; a tool cycle is accepted only with its complete scoped evidence. Unfinished sibling worktrees remain intact."
+    "evidence_policy": "Committed source improvements are integrated; a tool cycle is accepted only with its complete scoped evidence. Unfinished sibling worktrees remain intact.",
+    "merge_commit": "2f7aaa8f686661e477ca559ae32554212cb7d9ab",
+    "ci_run": 38088515260
+  },
+  "deployment_run": {
+    "workflow": 38091006894,
+    "source": "2f7aaa8f686661e477ca559ae32554212cb7d9ab",
+    "projects": [
+      "mock",
+      "sos",
+      "website",
+      "tasks",
+      "files",
+      "sales",
+      "hr",
+      "marketing",
+      "chats",
+      "wm",
+      "admin"
+    ],
+    "concurrency": 2,
+    "retired_content_excluded": true,
+    "status": "production_validation_in_progress"
   }
 }
