@@ -31,9 +31,18 @@ export async function recoverLinkPayment<T>(path: string): Promise<T> {
 export async function payOriginalLink<T>(path: string, body: { paymentMethodId: string }): Promise<T> {
   const key = paymentKey(path), prior = originalLinkPayment(path);
   if (prior && prior.paymentMethodId !== body.paymentMethodId) throw new PlatformLinkError(409, 'Recover the original payment method before changing it.');
-  const command = prior || { ...body, operationId: crypto.randomUUID() }; sessionStorage.setItem(key, JSON.stringify(command));
+  const stored = prior as (OwnerPaymentAttempt & { uncertain?: boolean }) | null;
+  const command = { paymentMethodId: body.paymentMethodId, operationId: prior?.operationId || crypto.randomUUID() };
+  // A retained pre-metadata attempt may already have committed before its response was lost.
+  const wasUncertain = Boolean(stored && stored.uncertain !== false);
+  sessionStorage.setItem(key, JSON.stringify({ ...command, uncertain: wasUncertain }));
   try { const result = await platformLinkRequest<T>(path, command); sessionStorage.removeItem(key); return result; }
-  catch (failure) { if (failure instanceof PlatformLinkError && failure.status < 500 && failure.status !== 409) sessionStorage.removeItem(key); throw failure; }
+  catch (failure) {
+    const uncertain = !(failure instanceof PlatformLinkError) || failure.status >= 500 || failure.status === 409;
+    if (wasUncertain || uncertain) sessionStorage.setItem(key, JSON.stringify({ ...command, uncertain: true }));
+    else sessionStorage.removeItem(key);
+    throw failure;
+  }
 }
 export function usePlatformLink<T>(path: string) {
   const session = useClientSession(), token = session?.tokens.accessToken, key = `${token}:${path}`, [revision, setRevision] = useState(0), [record, setRecord] = useState<{ key: string; data?: T; error?: Error; loading: boolean }>({ key: '', loading: true });
