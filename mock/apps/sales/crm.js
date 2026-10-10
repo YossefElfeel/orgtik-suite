@@ -264,6 +264,7 @@ module.exports = function crm(S) {
 
   // ------------------------------------------------------------------ routes
   function routes(app) {
+    require('./v3')(S).routes(app);
     const staffRoles = (req, res) => K.requireRoles(req, res, ["admin", "manager", "salesman"], "Customers cannot access this resource");
     const approvers = (req, res) => K.requireRoles(req, res, ["admin", "manager"], "Only admins and managers can do this");
     const adminOnly = (req, res) => K.requireRoles(req, res, ["admin"], "Only admins can manage users");

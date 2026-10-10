@@ -4518,6 +4518,162 @@
     {
       "app": "sales",
       "method": "GET",
+      "path": "/api/crm/v3",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "POST",
+      "path": "/api/crm/v3/bulk",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "POST",
+      "path": "/api/crm/v3/companies",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "PATCH",
+      "path": "/api/crm/v3/companies/:id",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "PATCH",
+      "path": "/api/crm/v3/config",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "POST",
+      "path": "/api/crm/v3/contacts",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "PATCH",
+      "path": "/api/crm/v3/contacts/:id",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "POST",
+      "path": "/api/crm/v3/contacts/:id/activities",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "POST",
+      "path": "/api/crm/v3/import",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "POST",
+      "path": "/api/crm/v3/merge",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "PATCH",
+      "path": "/api/crm/v3/offers/:id",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "POST",
+      "path": "/api/crm/v3/routing/run",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "POST",
+      "path": "/api/crm/v3/sample",
+      "source": "apps/sales/v3.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "sales",
+      "method": "GET",
       "path": "/api/currency/convert",
       "source": "apps/sales/engage.js",
       "authorization": {
