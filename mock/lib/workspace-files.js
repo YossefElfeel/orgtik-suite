@@ -65,6 +65,11 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
     const user = actor(actorId), file = record(user, fileId), selected = version(file, versionId);
     return { ...(selected.binary.bytes ? { bytes: selected.binary.bytes } : { path: selected.binary.path }), mimetype: selected.binary.mimetype, name: file.name };
   }
+  function packageServiceDelivery({ actorId, fileId, versionId }) {
+    const user = actor(actorId), file = record(user, fileId), selected = version(file, versionId);
+    if (selected.storage.kind !== 'asset' || !selected.binary.path) throw fail(422, 'packaged_assets_only', 'Choose an immutable packaged sample asset for this delivery.');
+    return { reference: { workspaceId, fileId, versionId: selected.id }, ...metadata(file, selected), assetKey: selected.storage.key, sha256: crypto.createHash('sha256').update(fs.readFileSync(selected.binary.path)).digest('hex') };
+  }
   function listSharedFiles({ actorId, search = '', page = 1, limit = 20 }) {
     const user = actor(actorId), p = typeof page === 'string' && /^\d+$/.test(page) ? Number(page) : page, size = typeof limit === 'string' && /^\d+$/.test(limit) ? Number(limit) : limit;
     if (typeof search !== 'string' || search.length > 200 || !Number.isSafeInteger(p) || p < 1 || !Number.isSafeInteger(size) || size < 1 || size > 100) throw fail(422, 'invalid_file_query', 'Choose a valid Files search and page.');
@@ -167,6 +172,6 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
     const binary = content({ kind: 'asset', key: 'svg_whiteboard_sample' });
     return { path: binary.path, mimetype: binary.mimetype, name: 'whiteboard-sample.svg', sample: true };
   }
-  return { listSharedFiles, resolveSharedFile, contentSharedFile, sampleCatalog, createSample, authorizeWhiteboard, createWhiteboard, saveWhiteboard, resolveWhiteboard, getVersionMetadata, previewWhiteboard, close() { closed = true; } };
+  return { listSharedFiles, resolveSharedFile, contentSharedFile, packageServiceDelivery, sampleCatalog, createSample, authorizeWhiteboard, createWhiteboard, saveWhiteboard, resolveWhiteboard, getVersionMetadata, previewWhiteboard, close() { closed = true; } };
 }
 module.exports = { createWorkspaceFiles, SAMPLES };

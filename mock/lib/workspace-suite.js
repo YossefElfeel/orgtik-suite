@@ -11,7 +11,7 @@ function requireToolAdmin(context, tool) {
   if (!connectors.admitted(access) || !access.roles.some(role => ADMIN_ROLES[tool]?.includes(role))) throw fail(403, 'tool_admin_required', 'Ask this tool’s administrator.');
   return access;
 }
-function preferences(actor) { return clone(actor.profile?.suitePreferences || { theme: 'light', density: 'comfortable', language: 'en' }); }
+function preferences(actor) { return clone(actor.profile?.suitePreferences || { density: 'comfortable' }); }
 function savePreferences(actor, patch) {
   const allowed = ['theme', 'density', 'language', 'savedViews', 'notificationPreferences'];
   if (!patch || typeof patch !== 'object' || Array.isArray(patch) || Object.keys(patch).some(key => !allowed.includes(key)) || JSON.stringify(patch).length > 50000) throw fail(422, 'invalid_preferences', 'Check the preference values.');
@@ -20,13 +20,20 @@ function savePreferences(actor, patch) {
   actor.profile ??= {}; actor.profile.suitePreferences = { ...preferences(actor), ...clone(patch) };
   return preferences(actor);
 }
-function createSuiteRouter({ S, identity, principal, runtimeFor, command }) {
+function createSuiteRouter({ S, identity, principal, runtimeFor, command, accountActions, serviceFiles }) {
   const app = express(); app.use(cors({ origin: true, credentials: true })); app.use(express.json({ limit: '200kb' }));
   const context = principal.context.workspaceContext, workspace = context && S.workspace(context.workspace.id), actor = identity.findUser(principal.user.id);
   if (!workspace || !actor) throw fail(403, 'workspace_required', 'Choose a workspace to continue.');
   const currentContext = () => resolveWorkspaceContext(S, identity, actor, { realm: context.realm, workspaceId: workspace.id, actorUserId: principal.actor.id, readOnly: principal.readOnly, audience: principal.claims.aud });
+  // Account-owned settings/projectors are supplied by its domain module; the
+  // guarded authority effects remain rooted in the existing boundary adapter.
   const read = fn => (req, res, next) => { try { Promise.resolve(fn(req)).then(data => res.set('Cache-Control', 'private, no-store').json({ success: true, data }), next); } catch (error) { next(error); } };
   const write = fn => read(req => { connectors.writable(workspace, currentContext()); return fn(req); });
+  app.get('/api/suite/account/sessions', read(() => accountActions.execute('sessions.list')));
+  app.post('/api/suite/account/actions/:kind', read(req => accountActions.execute(req.params.kind, req.body)));
+  const accountFile = require('node:path').join(__dirname, '../apps/sos/workspace-features.js');
+  if (require('node:fs').existsSync(accountFile)) require(accountFile).create({ S, identity, workspace, actor, principal, currentContext, runtimeFor, actions: accountActions }).routes(app, '/api/suite/account');
+  else app.use('/api/suite/account', (_req, res) => res.status(503).json({ success: false, code: 'account_features_pending', message: 'The Account feature module is still being prepared.' }));
   const admittedTools = () => Object.entries(currentContext().tools).filter(([, access]) => connectors.admitted(access)).map(([tool]) => tool);
   const snapshots = () => admittedTools().map(tool => ({ tool, data: runtimeFor(tool).suiteFeed?.(currentContext()) || runtimeFor(tool).bootstrap(currentContext()) }));
   function searchItems() {
@@ -96,9 +103,25 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command }) {
   app.get('/api/suite/services/catalog/preview', read(req => services.preview(S, principal, String(req.query.country || 'CH'))));
   app.patch('/api/suite/services/catalog/policy', write(req => services.savePolicy(S, principal, req.body)));
   app.post('/api/suite/services/catalog/schedules/:id/cancel', write(req => services.cancelSchedule(S, principal, req.params.id)));
-  app.get('/api/suite/services/requests', read(() => services.requests(S, principal)));
+  const deliveryFiles = require('./service-delivery-files');
+  app.get('/api/suite/services/requests', read(() => services.requests(S, principal).map(deliveryFiles.projectRequest)));
   app.get('/api/suite/services/staff', read(() => services.staff(S, identity, principal)));
-  app.post('/api/suite/services/requests/:id/actions', write(req => services.requestAction(S, identity, principal, req.params.id, req.body)));
+  app.get('/api/suite/services/requests/:id/files', read(req => {
+    if (!services.requests(S, principal).some(row => row.id === req.params.id)) throw fail(404, 'service_request_not_found', 'This request was not found.');
+    connectors.requireConnection(workspace, currentContext(), 'crm', 'files');
+    return serviceFiles.list(req.query);
+  }));
+  app.post('/api/suite/services/requests/:id/actions', write(req => deliveryFiles.projectRequest(services.requestAction(S, identity, principal, req.params.id, req.body, { packageFile: value => { connectors.requireConnection(workspace, currentContext(), 'crm', 'files'); return serviceFiles.package(value); } }))));
+  app.get('/api/suite/services/deliveries/:id/:deliveryId/:index/content', (req, res, next) => {
+    try {
+      const row = S.db.serviceRequests.find(item => item.id === req.params.id);
+      const customer = row?.workspaceId === workspace.id && ['owner', 'admin', 'member'].includes(context.member.role);
+      if (!row || !customer && !services.requests(S, principal).some(item => item.id === row.id)) throw fail(404, 'service_request_not_found', 'This request was not found.');
+      if (!/^\d$/.test(req.params.index)) throw fail(404, 'delivery_file_not_found', 'This delivery file was not found.');
+      const file = row.deliveries.find(item => item.id === req.params.deliveryId)?.files[Number(req.params.index)], content = deliveryFiles.content(file);
+      res.set('Cache-Control', 'private, no-store').set('X-Content-Type-Options', 'nosniff').attachment(content.name).type(content.mimetype).sendFile(content.path, error => { if (error) next(error); });
+    } catch (error) { next(error); }
+  });
   app.post('/api/suite/tasks', write(req => {
     const ctx = currentContext(), body = req.body, source = body.source;
     if (!['chat', 'crm', 'hr'].includes(source) || typeof body.sourceId !== 'string' && typeof body.sourceId !== 'number') throw fail(422, 'invalid_source', 'Choose a current source record.');

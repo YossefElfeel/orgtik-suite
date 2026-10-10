@@ -81,6 +81,25 @@ function createWorkspaceRuntime(input, appModule) {
     for (const key of Object.keys(S.db)) delete S.db[key]; Object.assign(S.db, clone(command.snapshot.data.db));
     S.profilePrefs = clone(command.snapshot.data.profilePrefs);
   }
-  return { router, exportSnapshot, bootstrap, receiveWebsiteIntake: (payload, metadata) => { open(); if (workspace.id !== 'ws_orgtik' || !metadata?.sourceKey) throw Object.assign(new Error('OrgTik intake authority is required.'), { status: 403 }); return S.crm.receiveIntake(payload, metadata); }, usage: () => { open(); return [{ key: "contacts", used: S.db.customers.length }, { key: "projects", used: S.db.projects.length }, { key: "leads", used: S.db.leads.length }]; }, transferOwnership, applyCommitted, dueTransitions: () => { open(); return S.db.subscriptions.flatMap(row => row.status === "cancelled" ? [] : row.installments.filter(item => !item.invoiceId && item.status !== "paid" && new Date(item.dueDate).getTime() <= (input.clock.nowMs?.() ?? input.clock.now()) + 30 * 864e5).map(item => ({ kind: "sales.schedule.due", subscriptionId: row.id, installmentNumber: item.number }))); }, stageDueTransitions() { open(); S.billing.refreshSchedules({ system: true }); }, close() { closed = true; S.io = null; } };
+  function receiveWebsiteIntake(payload, metadata) {
+    open();
+    if (workspace.id !== 'ws_orgtik' || !metadata?.sourceKey) throw Object.assign(new Error('OrgTik intake authority is required.'), { status: 403 });
+    const result = S.crm.receiveIntake(payload, metadata);
+    if (!metadata.serviceRequestId) return result;
+    const customer = S.db.customers.find(row => row.id === result.leadId), receipt = customer.intakeReceipts[metadata.sourceKey];
+    let project = receipt.projectId && S.db.projects.find(row => row.id === receipt.projectId);
+    if (!project) {
+      const actor = identity.users.find(person => ['admin', 'manager'].includes(S.core.appRole(person)));
+      if (!actor) throw Object.assign(new Error('An admitted CRM intake owner is required.'), { status: 503, code: 'orgtik_crm_unavailable' });
+      const created = S.deals.createProject({ sc: { role: 'admin', user: actor, lang: 'en' } }, { customerId: customer.id, projectName: metadata.title || payload.company || payload.name, projectDescription: payload.message, projectType: 'client_project' }, { at: input.clock.iso(input.clock.nowMs?.() ?? input.clock.now()), status: 'confirmed', actorUser: actor });
+      if (created.error) throw Object.assign(new Error(created.error), { status: 422, code: 'crm_deal_invalid' });
+      project = created.value;
+      project.source = { kind: 'website_order', reference: metadata.reference, serviceRequestId: metadata.serviceRequestId };
+      project.paidSnapshot = clone(metadata.paidSnapshot);
+      receipt.projectId = project.id;
+    }
+    return { ...result, projectId: project.id };
+  }
+  return { router, exportSnapshot, bootstrap, receiveWebsiteIntake, usage: () => { open(); return [{ key: "contacts", used: S.db.customers.length }, { key: "projects", used: S.db.projects.length }, { key: "leads", used: S.db.leads.length }]; }, transferOwnership, applyCommitted, dueTransitions: () => { open(); return S.db.subscriptions.flatMap(row => row.status === "cancelled" ? [] : row.installments.filter(item => !item.invoiceId && item.status !== "paid" && new Date(item.dueDate).getTime() <= (input.clock.nowMs?.() ?? input.clock.now()) + 30 * 864e5).map(item => ({ kind: "sales.schedule.due", subscriptionId: row.id, installmentNumber: item.number }))); }, stageDueTransitions() { open(); S.billing.refreshSchedules({ system: true }); }, close() { closed = true; S.io = null; } };
 }
 module.exports = { createWorkspaceRuntime, SCHEMA, COUNTERS, LISTS };

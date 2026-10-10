@@ -155,7 +155,7 @@ export function UserMenu({
           <>
             <MenuSeparator />
             <MenuGroup label={t("language")}>
-              <MenuRadioGroup value={locale} onValueChange={(v) => onLocaleChange(v as Locale)}>
+              <MenuRadioGroup value={locale} onValueChange={(v) => { window.dispatchEvent(new CustomEvent("orgtik:locale", { detail: v })); onLocaleChange(v as Locale); }}>
                 {locales.map((l) => (
                   <MenuRadioItem key={l} value={l}>
                     <span lang={l} dir={l === "ar" ? "rtl" : "ltr"}>{LANGUAGE_NAMES[l]}</span>

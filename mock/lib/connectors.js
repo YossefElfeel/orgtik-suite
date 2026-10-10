@@ -8,6 +8,7 @@ const DEFINITIONS = Object.freeze([
   { id: 'chat-hr', source: 'chat', target: 'hr', accessMode: 'projection', data: ['Approved absence availability'] },
   { id: 'hr-tasks', source: 'hr', target: 'tasks', data: ['Projects', 'Onboarding tasks'] },
   { id: 'crm-tasks', source: 'crm', target: 'tasks', data: ['Follow-up tasks'] },
+  { id: 'crm-files', source: 'crm', target: 'files', data: ['Packaged service delivery versions'] },
   { id: 'chat-tasks', source: 'chat', target: 'tasks', data: ['Task from a message'] },
   { id: 'marketing-crm', source: 'marketing', target: 'crm', data: ['Contacts', 'Attribution'] },
 ]);

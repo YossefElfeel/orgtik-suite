@@ -67,6 +67,7 @@ function createWorkspaceRuntime(input, tool, manifest) {
       return hooks.bootstrap(user);
     },
     listSharedFiles: shared.listSharedFiles, resolveSharedFile: shared.resolveSharedFile, contentSharedFile: shared.contentSharedFile,
+    packageServiceDelivery: shared.packageServiceDelivery,
     createSample: shared.createSample, sampleCatalog: shared.sampleCatalog,
     authorizeWhiteboard: shared.authorizeWhiteboard, createWhiteboard: shared.createWhiteboard, saveWhiteboard: shared.saveWhiteboard, resolveWhiteboard: shared.resolveWhiteboard, getVersionMetadata: shared.getVersionMetadata,
     usage: hooks.usage, transferOwnership: hooks.transferOwnership, close() { shared.close(); hooks.close(); },

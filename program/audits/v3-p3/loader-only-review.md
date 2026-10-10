@@ -7,8 +7,3 @@
 - Console errors: 0 renders
 - Page wider than the viewport: 0 renders
 - Reviewed platform text/layout/fonts: 0 mismatches
-
-
-
-
-
