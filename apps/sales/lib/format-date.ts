@@ -13,7 +13,7 @@ export function formatDate(dateStr: string | Date | undefined | null): string {
   }
 
   // Fallback for full parsing
-  const date = new Date(dateStr as any);
+  const date = dateStr instanceof Date ? dateStr : new Date(dateStr);
   if (Number.isNaN(date.getTime())) return String(dateStr);
 
   const day = String(date.getDate()).padStart(2, "0");

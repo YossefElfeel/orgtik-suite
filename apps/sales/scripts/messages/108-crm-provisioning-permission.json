@@ -1,0 +1,9 @@
+{
+  "CrmV3.provisioningPermission": {
+    "en": "You can review this customer workspace status. Creation requires the actual Console workspace permission.",
+    "ar": "يمكنك مراجعة حالة مساحة العميل. يتطلب الإنشاء صلاحية مساحة العمل الفعلية في وحدة التحكم.",
+    "de": "Sie können den Status prüfen. Die Erstellung erfordert die tatsächliche Arbeitsbereichsberechtigung der Konsole.",
+    "fr": "Vous pouvez consulter le statut. La création exige l’autorisation effective sur les espaces dans la console.",
+    "it": "Puoi consultare lo stato. La creazione richiede il permesso effettivo sugli spazi nella console."
+  }
+}

@@ -1,0 +1,1353 @@
+{
+  "CrmV3.contactsTitle": {
+    "en": "Contacts",
+    "ar": "جهات الاتصال",
+    "de": "Kontakte",
+    "fr": "Contacts",
+    "it": "Contatti"
+  },
+  "CrmV3.contactsHint": {
+    "en": "Manage leads, owners, and the next customer conversation.",
+    "ar": "تابع العملاء المحتملين والمسؤولين والتواصل القادم.",
+    "de": "Verwalten Sie Leads, Zuständigkeiten und nächste Gespräche.",
+    "fr": "Gérez les prospects, les responsables et les prochains échanges.",
+    "it": "Gestisci lead, responsabili e prossime conversazioni."
+  },
+  "CrmV3.pipelineTitle": {
+    "en": "Lead pipeline",
+    "ar": "مسار العملاء المحتملين",
+    "de": "Lead-Pipeline",
+    "fr": "Pipeline des prospects",
+    "it": "Pipeline dei lead"
+  },
+  "CrmV3.newContact": {
+    "en": "New contact",
+    "ar": "جهة اتصال جديدة",
+    "de": "Neuer Kontakt",
+    "fr": "Nouveau contact",
+    "it": "Nuovo contatto"
+  },
+  "CrmV3.createContact": {
+    "en": "Create contact",
+    "ar": "إنشاء جهة اتصال",
+    "de": "Kontakt erstellen",
+    "fr": "Créer le contact",
+    "it": "Crea contatto"
+  },
+  "CrmV3.fullName": {
+    "en": "Full name",
+    "ar": "الاسم الكامل",
+    "de": "Vollständiger Name",
+    "fr": "Nom complet",
+    "it": "Nome completo"
+  },
+  "CrmV3.email": {
+    "en": "Email",
+    "ar": "البريد الإلكتروني",
+    "de": "E-Mail",
+    "fr": "E-mail",
+    "it": "Email"
+  },
+  "CrmV3.companyName": {
+    "en": "Company name",
+    "ar": "اسم الشركة",
+    "de": "Firmenname",
+    "fr": "Nom de l’entreprise",
+    "it": "Nome dell’azienda"
+  },
+  "CrmV3.phoneNumber": {
+    "en": "Phone number",
+    "ar": "رقم الهاتف",
+    "de": "Telefonnummer",
+    "fr": "Téléphone",
+    "it": "Numero di telefono"
+  },
+  "CrmV3.countryCode": {
+    "en": "Country code",
+    "ar": "رمز الدولة",
+    "de": "Ländercode",
+    "fr": "Code pays",
+    "it": "Codice paese"
+  },
+  "CrmV3.forecastValue": {
+    "en": "Forecast value",
+    "ar": "قيمة التوقع",
+    "de": "Prognosewert",
+    "fr": "Valeur prévisionnelle",
+    "it": "Valore previsto"
+  },
+  "CrmV3.probability": {
+    "en": "Probability (%)",
+    "ar": "الاحتمال (%)",
+    "de": "Wahrscheinlichkeit (%)",
+    "fr": "Probabilité (%)",
+    "it": "Probabilità (%)"
+  },
+  "CrmV3.company": {
+    "en": "Company",
+    "ar": "الشركة",
+    "de": "Firma",
+    "fr": "Entreprise",
+    "it": "Azienda"
+  },
+  "CrmV3.owner": {
+    "en": "Owner",
+    "ar": "المسؤول",
+    "de": "Verantwortlich",
+    "fr": "Responsable",
+    "it": "Responsabile"
+  },
+  "CrmV3.pipeline": {
+    "en": "Pipeline",
+    "ar": "المسار",
+    "de": "Pipeline",
+    "fr": "Pipeline",
+    "it": "Pipeline"
+  },
+  "CrmV3.stage": {
+    "en": "Stage",
+    "ar": "المرحلة",
+    "de": "Phase",
+    "fr": "Étape",
+    "it": "Fase"
+  },
+  "CrmV3.source": {
+    "en": "Source",
+    "ar": "المصدر",
+    "de": "Quelle",
+    "fr": "Source",
+    "it": "Fonte"
+  },
+  "CrmV3.tags": {
+    "en": "Tags",
+    "ar": "الوسوم",
+    "de": "Tags",
+    "fr": "Étiquettes",
+    "it": "Tag"
+  },
+  "CrmV3.all": {
+    "en": "All",
+    "ar": "الكل",
+    "de": "Alle",
+    "fr": "Tous",
+    "it": "Tutti"
+  },
+  "CrmV3.manual": {
+    "en": "Manual",
+    "ar": "يدوي",
+    "de": "Manuell",
+    "fr": "Manuel",
+    "it": "Manuale"
+  },
+  "CrmV3.notSet": {
+    "en": "Not set",
+    "ar": "غير محدد",
+    "de": "Nicht festgelegt",
+    "fr": "Non défini",
+    "it": "Non impostato"
+  },
+  "CrmV3.filters": {
+    "en": "Contact filters",
+    "ar": "تصفية جهات الاتصال",
+    "de": "Kontaktfilter",
+    "fr": "Filtres des contacts",
+    "it": "Filtri dei contatti"
+  },
+  "CrmV3.search": {
+    "en": "Search contacts",
+    "ar": "بحث في جهات الاتصال",
+    "de": "Kontakte suchen",
+    "fr": "Rechercher des contacts",
+    "it": "Cerca contatti"
+  },
+  "CrmV3.importContacts": {
+    "en": "Import contacts",
+    "ar": "استيراد جهات الاتصال",
+    "de": "Kontakte importieren",
+    "fr": "Importer des contacts",
+    "it": "Importa contatti"
+  },
+  "CrmV3.exportContacts": {
+    "en": "Export contacts",
+    "ar": "تصدير جهات الاتصال",
+    "de": "Kontakte exportieren",
+    "fr": "Exporter les contacts",
+    "it": "Esporta contatti"
+  },
+  "CrmV3.listView": {
+    "en": "List view",
+    "ar": "عرض القائمة",
+    "de": "Listenansicht",
+    "fr": "Vue liste",
+    "it": "Vista elenco"
+  },
+  "CrmV3.boardView": {
+    "en": "Board view",
+    "ar": "عرض اللوحة",
+    "de": "Boardansicht",
+    "fr": "Vue tableau",
+    "it": "Vista bacheca"
+  },
+  "CrmV3.weightedForecast": {
+    "en": "Weighted forecast",
+    "ar": "التوقع المرجح",
+    "de": "Gewichtete Prognose",
+    "fr": "Prévision pondérée",
+    "it": "Previsione ponderata"
+  },
+  "CrmV3.assignOwner": {
+    "en": "Assign owner",
+    "ar": "تعيين المسؤول",
+    "de": "Verantwortliche zuweisen",
+    "fr": "Attribuer un responsable",
+    "it": "Assegna responsabile"
+  },
+  "CrmV3.assignSelected": {
+    "en": "Assign selected",
+    "ar": "تعيين المحدد",
+    "de": "Auswahl zuweisen",
+    "fr": "Attribuer la sélection",
+    "it": "Assegna selezionati"
+  },
+  "CrmV3.bulkResult": {
+    "en": "Saved {saved}; {failed} need review.",
+    "ar": "تم حفظ {saved}؛ يحتاج {failed} إلى مراجعة.",
+    "de": "{saved} gespeichert; {failed} prüfen.",
+    "fr": "{saved} enregistrés ; {failed} à vérifier.",
+    "it": "{saved} salvati; {failed} da verificare."
+  },
+  "CrmV3.noMatch": {
+    "en": "No matching records",
+    "ar": "لا توجد نتائج مطابقة",
+    "de": "Keine passenden Einträge",
+    "fr": "Aucun résultat correspondant",
+    "it": "Nessun risultato corrispondente"
+  },
+  "CrmV3.emptyContacts": {
+    "en": "Your contacts start here",
+    "ar": "ابدأ بجهات الاتصال هنا",
+    "de": "Hier beginnen Ihre Kontakte",
+    "fr": "Vos contacts commencent ici",
+    "it": "I tuoi contatti iniziano qui"
+  },
+  "CrmV3.emptyHint": {
+    "en": "Add a contact or import a CSV to begin.",
+    "ar": "أضف جهة اتصال أو استورد CSV للبدء.",
+    "de": "Kontakt hinzufügen oder CSV importieren.",
+    "fr": "Ajoutez un contact ou importez un CSV.",
+    "it": "Aggiungi un contatto o importa un CSV."
+  },
+  "CrmV3.clearFilters": {
+    "en": "Clear filters",
+    "ar": "مسح عوامل التصفية",
+    "de": "Filter löschen",
+    "fr": "Effacer les filtres",
+    "it": "Cancella filtri"
+  },
+  "CrmV3.close": {
+    "en": "Close",
+    "ar": "إغلاق",
+    "de": "Schließen",
+    "fr": "Fermer",
+    "it": "Chiudi"
+  },
+  "CrmV3.cancel": {
+    "en": "Cancel",
+    "ar": "إلغاء",
+    "de": "Abbrechen",
+    "fr": "Annuler",
+    "it": "Annulla"
+  },
+  "CrmV3.save": {
+    "en": "Save",
+    "ar": "حفظ",
+    "de": "Speichern",
+    "fr": "Enregistrer",
+    "it": "Salva"
+  },
+  "CrmV3.saved": {
+    "en": "Saved",
+    "ar": "تم الحفظ",
+    "de": "Gespeichert",
+    "fr": "Enregistré",
+    "it": "Salvato"
+  },
+  "CrmV3.saveError": {
+    "en": "The change could not be saved. Review and retry.",
+    "ar": "تعذر حفظ التغيير. راجع البيانات وأعد المحاولة.",
+    "de": "Änderung nicht gespeichert. Prüfen und erneut versuchen.",
+    "fr": "Modification non enregistrée. Vérifiez et réessayez.",
+    "it": "Modifica non salvata. Verifica e riprova."
+  },
+  "CrmV3.loadError": {
+    "en": "CRM could not be loaded",
+    "ar": "تعذر تحميل إدارة العملاء",
+    "de": "CRM konnte nicht geladen werden",
+    "fr": "Impossible de charger le CRM",
+    "it": "Impossibile caricare il CRM"
+  },
+  "CrmV3.noAccess": {
+    "en": "CRM access required",
+    "ar": "يلزم الوصول لإدارة العملاء",
+    "de": "CRM-Zugriff erforderlich",
+    "fr": "Accès CRM requis",
+    "it": "Accesso CRM richiesto"
+  },
+  "CrmV3.noAccessHint": {
+    "en": "Ask your workspace administrator for current CRM access.",
+    "ar": "اطلب الوصول الحالي من مسؤول مساحة العمل.",
+    "de": "Bitten Sie Ihre Administration um CRM-Zugriff.",
+    "fr": "Demandez l’accès CRM à votre administrateur.",
+    "it": "Chiedi l’accesso CRM all’amministratore."
+  },
+  "CrmV3.readOnly": {
+    "en": "You can read this record. Editing requires current access.",
+    "ar": "يمكنك قراءة هذا السجل. يتطلب التعديل صلاحية حالية.",
+    "de": "Lesbar. Bearbeiten erfordert aktuelle Berechtigung.",
+    "fr": "Lecture disponible. La modification exige un accès actuel.",
+    "it": "Puoi leggere il record. La modifica richiede accesso attuale."
+  },
+  "CrmV3.contactNotFound": {
+    "en": "This visible contact was not found",
+    "ar": "لم يتم العثور على جهة الاتصال المتاحة",
+    "de": "Sichtbarer Kontakt nicht gefunden",
+    "fr": "Contact visible introuvable",
+    "it": "Contatto visibile non trovato"
+  },
+  "CrmV3.onboarding": {
+    "en": "Set up your CRM",
+    "ar": "إعداد إدارة العملاء",
+    "de": "CRM einrichten",
+    "fr": "Configurer votre CRM",
+    "it": "Configura il CRM"
+  },
+  "CrmV3.firstContact": {
+    "en": "Add your first contact",
+    "ar": "أضف أول جهة اتصال",
+    "de": "Ersten Kontakt hinzufügen",
+    "fr": "Ajouter un premier contact",
+    "it": "Aggiungi il primo contatto"
+  },
+  "CrmV3.reviewPipeline": {
+    "en": "Review pipeline stages",
+    "ar": "راجع مراحل المسار",
+    "de": "Pipeline-Phasen prüfen",
+    "fr": "Vérifier les étapes du pipeline",
+    "it": "Verifica le fasi della pipeline"
+  },
+  "CrmV3.reviewConnections": {
+    "en": "Connect your tools",
+    "ar": "اربط أدواتك",
+    "de": "Tools verbinden",
+    "fr": "Connecter vos outils",
+    "it": "Collega gli strumenti"
+  },
+  "CrmV3.loadSample": {
+    "en": "Load sample prospects",
+    "ar": "تحميل عملاء محتملين تجريبيين",
+    "de": "Beispiel-Leads laden",
+    "fr": "Charger des prospects exemples",
+    "it": "Carica lead di esempio"
+  },
+  "CrmV3.sampleLoaded": {
+    "en": "Sample prospects loaded",
+    "ar": "تم تحميل العملاء المحتملين التجريبيين",
+    "de": "Beispiel-Leads geladen",
+    "fr": "Prospects exemples chargés",
+    "it": "Lead di esempio caricati"
+  },
+  "CrmV3.fullRecord": {
+    "en": "Open full record",
+    "ar": "فتح السجل الكامل",
+    "de": "Vollständigen Eintrag öffnen",
+    "fr": "Ouvrir la fiche complète",
+    "it": "Apri scheda completa"
+  },
+  "CrmV3.createOffer": {
+    "en": "Create offer",
+    "ar": "إنشاء عرض",
+    "de": "Angebot erstellen",
+    "fr": "Créer une offre",
+    "it": "Crea offerta"
+  },
+  "CrmV3.attribution": {
+    "en": "Campaign attribution",
+    "ar": "إسناد الحملة",
+    "de": "Kampagnenzuordnung",
+    "fr": "Attribution de campagne",
+    "it": "Attribuzione campagna"
+  },
+  "CrmV3.noAttribution": {
+    "en": "No campaign data was recorded.",
+    "ar": "لم يتم تسجيل بيانات حملة.",
+    "de": "Keine Kampagnendaten erfasst.",
+    "fr": "Aucune donnée de campagne enregistrée.",
+    "it": "Nessun dato di campagna registrato."
+  },
+  "CrmV3.timeline": {
+    "en": "Contact timeline",
+    "ar": "سجل جهة الاتصال",
+    "de": "Kontaktverlauf",
+    "fr": "Historique du contact",
+    "it": "Cronologia contatto"
+  },
+  "CrmV3.logActivity": {
+    "en": "Log activity",
+    "ar": "تسجيل نشاط",
+    "de": "Aktivität erfassen",
+    "fr": "Consigner une activité",
+    "it": "Registra attività"
+  },
+  "CrmV3.saveActivity": {
+    "en": "Save activity",
+    "ar": "حفظ النشاط",
+    "de": "Aktivität speichern",
+    "fr": "Enregistrer l’activité",
+    "it": "Salva attività"
+  },
+  "CrmV3.activityKind": {
+    "en": "Activity type",
+    "ar": "نوع النشاط",
+    "de": "Aktivitätstyp",
+    "fr": "Type d’activité",
+    "it": "Tipo di attività"
+  },
+  "CrmV3.activityText": {
+    "en": "Conversation notes",
+    "ar": "ملاحظات التواصل",
+    "de": "Gesprächsnotizen",
+    "fr": "Notes de conversation",
+    "it": "Note conversazione"
+  },
+  "CrmV3.meetingDate": {
+    "en": "Meeting date",
+    "ar": "تاريخ الاجتماع",
+    "de": "Besprechungsdatum",
+    "fr": "Date de réunion",
+    "it": "Data riunione"
+  },
+  "CrmV3.meetingTime": {
+    "en": "Meeting time",
+    "ar": "وقت الاجتماع",
+    "de": "Besprechungszeit",
+    "fr": "Heure de réunion",
+    "it": "Ora riunione"
+  },
+  "CrmV3.activities.note": {
+    "en": "Note",
+    "ar": "ملاحظة",
+    "de": "Notiz",
+    "fr": "Note",
+    "it": "Nota"
+  },
+  "CrmV3.activities.call": {
+    "en": "Call",
+    "ar": "مكالمة",
+    "de": "Anruf",
+    "fr": "Appel",
+    "it": "Chiamata"
+  },
+  "CrmV3.activities.email": {
+    "en": "Email",
+    "ar": "بريد إلكتروني",
+    "de": "E-Mail",
+    "fr": "E-mail",
+    "it": "Email"
+  },
+  "CrmV3.activities.meeting": {
+    "en": "Meeting",
+    "ar": "اجتماع",
+    "de": "Besprechung",
+    "fr": "Réunion",
+    "it": "Riunione"
+  },
+  "CrmV3.activities.whatsapp": {
+    "en": "WhatsApp simulation",
+    "ar": "محاكاة واتساب",
+    "de": "WhatsApp-Simulation",
+    "fr": "Simulation WhatsApp",
+    "it": "Simulazione WhatsApp"
+  },
+  "CrmV3.activities.click_to_call": {
+    "en": "Call simulation",
+    "ar": "محاكاة اتصال",
+    "de": "Anrufsimulation",
+    "fr": "Simulation d’appel",
+    "it": "Simulazione chiamata"
+  },
+  "CrmV3.mergeInto": {
+    "en": "Merge prospect into",
+    "ar": "دمج العميل المحتمل في",
+    "de": "Lead zusammenführen mit",
+    "fr": "Fusionner le prospect avec",
+    "it": "Unisci lead con"
+  },
+  "CrmV3.mergeContact": {
+    "en": "Merge duplicate",
+    "ar": "دمج المكرر",
+    "de": "Duplikat zusammenführen",
+    "fr": "Fusionner le doublon",
+    "it": "Unisci duplicato"
+  },
+  "CrmV3.mergeTitle": {
+    "en": "Merge this duplicate prospect?",
+    "ar": "دمج هذا العميل المحتمل المكرر؟",
+    "de": "Diesen doppelten Lead zusammenführen?",
+    "fr": "Fusionner ce prospect en doublon ?",
+    "it": "Unire questo lead duplicato?"
+  },
+  "CrmV3.mergeImpact": {
+    "en": "Notes and tags move to the chosen contact. Linked customer identities and billing records cannot be merged.",
+    "ar": "تنتقل الملاحظات والوسوم إلى جهة الاتصال المختارة. لا يمكن دمج هويات العملاء المرتبطة أو سجلات الفوترة.",
+    "de": "Notizen und Tags werden übertragen. Verknüpfte Kundenidentitäten und Rechnungen bleiben geschützt.",
+    "fr": "Notes et étiquettes sont transférées. Les identités et facturations liées sont protégées.",
+    "it": "Note e tag vengono trasferiti. Identità e fatture collegate restano protette."
+  },
+  "CrmV3.mergeError": {
+    "en": "This prospect could not be merged. Check its customer and billing links.",
+    "ar": "تعذر الدمج. تحقق من ارتباطات العميل والفوترة.",
+    "de": "Zusammenführen fehlgeschlagen. Kunden- und Rechnungsbezüge prüfen.",
+    "fr": "Fusion impossible. Vérifiez les liens client et facturation.",
+    "it": "Unione non riuscita. Verifica i collegamenti cliente e fatturazione."
+  },
+  "CrmV3.followupTitle": {
+    "en": "Task follow-ups",
+    "ar": "مهام المتابعة",
+    "de": "Aufgaben zur Nachverfolgung",
+    "fr": "Tâches de suivi",
+    "it": "Attività di follow-up"
+  },
+  "CrmV3.followupDefault": {
+    "en": "Follow up with {name}",
+    "ar": "متابعة مع {name}",
+    "de": "Bei {name} nachfassen",
+    "fr": "Relancer {name}",
+    "it": "Contatta {name}"
+  },
+  "CrmV3.connectionError": {
+    "en": "The connected records could not be loaded",
+    "ar": "تعذر تحميل السجلات المرتبطة",
+    "de": "Verknüpfte Einträge nicht geladen",
+    "fr": "Impossible de charger les fiches liées",
+    "it": "Impossibile caricare record collegati"
+  },
+  "CrmV3.taskProjectNeeded": {
+    "en": "Create a Tasks project first",
+    "ar": "أنشئ مشروع مهام أولاً",
+    "de": "Zuerst ein Aufgabenprojekt erstellen",
+    "fr": "Créez d’abord un projet de tâches",
+    "it": "Crea prima un progetto attività"
+  },
+  "CrmV3.taskProjectHint": {
+    "en": "A follow-up belongs to an actual project and section in Tasks.",
+    "ar": "تنتمي المتابعة إلى مشروع وقسم فعليين في المهام.",
+    "de": "Eine Nachverfolgung gehört zu einem echten Projekt und Abschnitt.",
+    "fr": "Le suivi appartient à un projet et une section réels dans Tâches.",
+    "it": "Il follow-up appartiene a un progetto e una sezione reali in Attività."
+  },
+  "CrmV3.openTasks": {
+    "en": "Open Tasks",
+    "ar": "فتح المهام",
+    "de": "Aufgaben öffnen",
+    "fr": "Ouvrir Tâches",
+    "it": "Apri Attività"
+  },
+  "CrmV3.taskTitle": {
+    "en": "Follow-up title",
+    "ar": "عنوان المتابعة",
+    "de": "Titel der Nachverfolgung",
+    "fr": "Titre du suivi",
+    "it": "Titolo follow-up"
+  },
+  "CrmV3.taskProject": {
+    "en": "Tasks project",
+    "ar": "مشروع المهام",
+    "de": "Aufgabenprojekt",
+    "fr": "Projet de tâches",
+    "it": "Progetto attività"
+  },
+  "CrmV3.taskSection": {
+    "en": "Project section",
+    "ar": "قسم المشروع",
+    "de": "Projektabschnitt",
+    "fr": "Section du projet",
+    "it": "Sezione progetto"
+  },
+  "CrmV3.createFollowup": {
+    "en": "Create follow-up",
+    "ar": "إنشاء متابعة",
+    "de": "Nachverfolgung erstellen",
+    "fr": "Créer un suivi",
+    "it": "Crea follow-up"
+  },
+  "CrmV3.importHint": {
+    "en": "Paste CSV text, map its columns, and review up to 200 records. Each result is reported.",
+    "ar": "الصق نص CSV وحدد الأعمدة وراجع حتى 200 سجل. تظهر نتيجة كل سجل.",
+    "de": "CSV einfügen, Spalten zuordnen und bis zu 200 Einträge prüfen. Ergebnisse je Zeile.",
+    "fr": "Collez un CSV, associez les colonnes et vérifiez jusqu’à 200 fiches. Résultat par ligne.",
+    "it": "Incolla CSV, mappa colonne e verifica fino a 200 record. Esito per riga."
+  },
+  "CrmV3.csvSource": {
+    "en": "CSV text",
+    "ar": "نص CSV",
+    "de": "CSV-Text",
+    "fr": "Texte CSV",
+    "it": "Testo CSV"
+  },
+  "CrmV3.mapping": {
+    "en": "Column mapping",
+    "ar": "ربط الأعمدة",
+    "de": "Spaltenzuordnung",
+    "fr": "Association des colonnes",
+    "it": "Mappatura colonne"
+  },
+  "CrmV3.review": {
+    "en": "Review",
+    "ar": "مراجعة",
+    "de": "Prüfen",
+    "fr": "Vérifier",
+    "it": "Verifica"
+  },
+  "CrmV3.result": {
+    "en": "Results",
+    "ar": "النتائج",
+    "de": "Ergebnisse",
+    "fr": "Résultats",
+    "it": "Risultati"
+  },
+  "CrmV3.continue": {
+    "en": "Continue",
+    "ar": "متابعة",
+    "de": "Weiter",
+    "fr": "Continuer",
+    "it": "Continua"
+  },
+  "CrmV3.done": {
+    "en": "Done",
+    "ar": "تم",
+    "de": "Fertig",
+    "fr": "Terminé",
+    "it": "Fine"
+  },
+  "CrmV3.csvInvalid": {
+    "en": "Use valid CSV with a header and up to 200 records.",
+    "ar": "استخدم CSV صالحاً مع عناوين وحتى 200 سجل.",
+    "de": "Gültiges CSV mit Kopfzeile und bis zu 200 Einträgen verwenden.",
+    "fr": "Utilisez un CSV valide avec en-tête et jusqu’à 200 fiches.",
+    "it": "Usa CSV valido con intestazione e fino a 200 record."
+  },
+  "CrmV3.notMapped": {
+    "en": "Not mapped",
+    "ar": "غير مربوط",
+    "de": "Nicht zugeordnet",
+    "fr": "Non associé",
+    "it": "Non mappato"
+  },
+  "CrmV3.csv.name": {
+    "en": "Name column",
+    "ar": "عمود الاسم",
+    "de": "Namensspalte",
+    "fr": "Colonne du nom",
+    "it": "Colonna nome"
+  },
+  "CrmV3.csv.email": {
+    "en": "Email column",
+    "ar": "عمود البريد",
+    "de": "E-Mail-Spalte",
+    "fr": "Colonne e-mail",
+    "it": "Colonna email"
+  },
+  "CrmV3.csv.company": {
+    "en": "Company column",
+    "ar": "عمود الشركة",
+    "de": "Firmenspalte",
+    "fr": "Colonne entreprise",
+    "it": "Colonna azienda"
+  },
+  "CrmV3.csv.phone": {
+    "en": "Phone column",
+    "ar": "عمود الهاتف",
+    "de": "Telefonspalte",
+    "fr": "Colonne téléphone",
+    "it": "Colonna telefono"
+  },
+  "CrmV3.csv.country": {
+    "en": "Country column",
+    "ar": "عمود الدولة",
+    "de": "Länderspalte",
+    "fr": "Colonne pays",
+    "it": "Colonna paese"
+  },
+  "CrmV3.csv.value": {
+    "en": "Value column",
+    "ar": "عمود القيمة",
+    "de": "Wertspalte",
+    "fr": "Colonne valeur",
+    "it": "Colonna valore"
+  },
+  "CrmV3.rowCreated": {
+    "en": "Row {row}: contact created",
+    "ar": "السطر {row}: تم إنشاء جهة الاتصال",
+    "de": "Zeile {row}: Kontakt erstellt",
+    "fr": "Ligne {row} : contact créé",
+    "it": "Riga {row}: contatto creato"
+  },
+  "CrmV3.rowFailed": {
+    "en": "Row {row}: not imported",
+    "ar": "السطر {row}: لم يتم الاستيراد",
+    "de": "Zeile {row}: nicht importiert",
+    "fr": "Ligne {row} : non importée",
+    "it": "Riga {row}: non importata"
+  },
+  "CrmV3.rowNeedsReview": {
+    "en": "Review this row before importing again.",
+    "ar": "راجع هذا السطر قبل استيراده مجدداً.",
+    "de": "Vor erneutem Import prüfen.",
+    "fr": "Vérifiez cette ligne avant de réimporter.",
+    "it": "Verifica la riga prima di importare di nuovo."
+  },
+  "CrmV3.companiesTitle": {
+    "en": "Companies",
+    "ar": "الشركات",
+    "de": "Firmen",
+    "fr": "Entreprises",
+    "it": "Aziende"
+  },
+  "CrmV3.companiesHint": {
+    "en": "Company records keep related contacts, tags, and commercial context together.",
+    "ar": "تجمع سجلات الشركات جهات الاتصال والوسوم والسياق التجاري.",
+    "de": "Firmen verknüpfen Kontakte, Tags und geschäftlichen Kontext.",
+    "fr": "Les entreprises regroupent contacts, étiquettes et contexte commercial.",
+    "it": "Le aziende riuniscono contatti, tag e contesto commerciale."
+  },
+  "CrmV3.newCompany": {
+    "en": "New company",
+    "ar": "شركة جديدة",
+    "de": "Neue Firma",
+    "fr": "Nouvelle entreprise",
+    "it": "Nuova azienda"
+  },
+  "CrmV3.editCompany": {
+    "en": "Edit company",
+    "ar": "تعديل الشركة",
+    "de": "Firma bearbeiten",
+    "fr": "Modifier l’entreprise",
+    "it": "Modifica azienda"
+  },
+  "CrmV3.searchCompanies": {
+    "en": "Search companies",
+    "ar": "بحث في الشركات",
+    "de": "Firmen suchen",
+    "fr": "Rechercher des entreprises",
+    "it": "Cerca aziende"
+  },
+  "CrmV3.emptyCompanies": {
+    "en": "No companies yet",
+    "ar": "لا توجد شركات بعد",
+    "de": "Noch keine Firmen",
+    "fr": "Aucune entreprise",
+    "it": "Nessuna azienda"
+  },
+  "CrmV3.sector": {
+    "en": "Sector",
+    "ar": "القطاع",
+    "de": "Branche",
+    "fr": "Secteur",
+    "it": "Settore"
+  },
+  "CrmV3.website": {
+    "en": "Website",
+    "ar": "الموقع الإلكتروني",
+    "de": "Website",
+    "fr": "Site web",
+    "it": "Sito web"
+  },
+  "CrmV3.notes": {
+    "en": "Notes",
+    "ar": "ملاحظات",
+    "de": "Notizen",
+    "fr": "Notes",
+    "it": "Note"
+  },
+  "CrmV3.reportsTitle": {
+    "en": "CRM reports",
+    "ar": "تقارير إدارة العملاء",
+    "de": "CRM-Berichte",
+    "fr": "Rapports CRM",
+    "it": "Report CRM"
+  },
+  "CrmV3.reportsHint": {
+    "en": "Current visible records, grouped by their currency. Revenue follows confirmed contracts.",
+    "ar": "السجلات الحالية المتاحة حسب عملتها. الإيرادات من العقود المؤكدة.",
+    "de": "Aktuell sichtbare Einträge nach Währung. Umsatz aus bestätigten Verträgen.",
+    "fr": "Fiches visibles par devise. Le revenu suit les contrats confirmés.",
+    "it": "Record visibili per valuta. Ricavi da contratti confermati."
+  },
+  "CrmV3.configureTargets": {
+    "en": "Configure targets",
+    "ar": "إعداد الأهداف",
+    "de": "Ziele konfigurieren",
+    "fr": "Configurer les objectifs",
+    "it": "Configura obiettivi"
+  },
+  "CrmV3.currency": {
+    "en": "Currency",
+    "ar": "العملة",
+    "de": "Währung",
+    "fr": "Devise",
+    "it": "Valuta"
+  },
+  "CrmV3.emptyReports": {
+    "en": "Add contacts or deals to see reports",
+    "ar": "أضف جهات اتصال أو صفقات لعرض التقارير",
+    "de": "Kontakte oder Geschäfte für Berichte hinzufügen",
+    "fr": "Ajoutez des contacts ou affaires pour voir les rapports",
+    "it": "Aggiungi contatti o trattative per vedere i report"
+  },
+  "CrmV3.wonRevenue": {
+    "en": "Confirmed deal value",
+    "ar": "قيمة الصفقات المؤكدة",
+    "de": "Wert bestätigter Geschäfte",
+    "fr": "Valeur des affaires confirmées",
+    "it": "Valore trattative confermate"
+  },
+  "CrmV3.monthlyTarget": {
+    "en": "Monthly target progress",
+    "ar": "التقدم نحو الهدف الشهري",
+    "de": "Monatlicher Zielfortschritt",
+    "fr": "Progression de l’objectif mensuel",
+    "it": "Avanzamento obiettivo mensile"
+  },
+  "CrmV3.targetHint": {
+    "en": "Set a monthly target in CRM settings.",
+    "ar": "حدد هدفاً شهرياً في الإعدادات.",
+    "de": "Monatsziel in den CRM-Einstellungen festlegen.",
+    "fr": "Définissez un objectif mensuel dans les paramètres CRM.",
+    "it": "Imposta un obiettivo mensile nelle impostazioni CRM."
+  },
+  "CrmV3.funnel": {
+    "en": "Pipeline funnel",
+    "ar": "قمع المسار",
+    "de": "Pipeline-Trichter",
+    "fr": "Entonnoir du pipeline",
+    "it": "Funnel pipeline"
+  },
+  "CrmV3.sourceReport": {
+    "en": "Contacts by source and win rate",
+    "ar": "جهات الاتصال حسب المصدر ونسبة الفوز",
+    "de": "Kontakte nach Quelle und Erfolgsquote",
+    "fr": "Contacts par source et taux de réussite",
+    "it": "Contatti per fonte e tasso di successo"
+  },
+  "CrmV3.lostReasons": {
+    "en": "Lost reasons",
+    "ar": "أسباب الخسارة",
+    "de": "Verlustgründe",
+    "fr": "Motifs de perte",
+    "it": "Motivi di perdita"
+  },
+  "CrmV3.noLostContacts": {
+    "en": "No lost contacts in this currency.",
+    "ar": "لا توجد جهات اتصال خاسرة بهذه العملة.",
+    "de": "Keine verlorenen Kontakte in dieser Währung.",
+    "fr": "Aucun contact perdu dans cette devise.",
+    "it": "Nessun contatto perso in questa valuta."
+  },
+  "CrmV3.pipelines": {
+    "en": "Pipelines and stages",
+    "ar": "المسارات والمراحل",
+    "de": "Pipelines und Phasen",
+    "fr": "Pipelines et étapes",
+    "it": "Pipeline e fasi"
+  },
+  "CrmV3.pipelineName": {
+    "en": "Pipeline name",
+    "ar": "اسم المسار",
+    "de": "Pipeline-Name",
+    "fr": "Nom du pipeline",
+    "it": "Nome pipeline"
+  },
+  "CrmV3.stageName": {
+    "en": "Stage name",
+    "ar": "اسم المرحلة",
+    "de": "Phasenname",
+    "fr": "Nom de l’étape",
+    "it": "Nome fase"
+  },
+  "CrmV3.name": {
+    "en": "Name",
+    "ar": "الاسم",
+    "de": "Name",
+    "fr": "Nom",
+    "it": "Nome"
+  },
+  "CrmV3.add.pipeline": {
+    "en": "Add pipeline",
+    "ar": "إضافة مسار",
+    "de": "Pipeline hinzufügen",
+    "fr": "Ajouter un pipeline",
+    "it": "Aggiungi pipeline"
+  },
+  "CrmV3.add.stage": {
+    "en": "Add stage",
+    "ar": "إضافة مرحلة",
+    "de": "Phase hinzufügen",
+    "fr": "Ajouter une étape",
+    "it": "Aggiungi fase"
+  },
+  "CrmV3.add.field": {
+    "en": "Add custom field",
+    "ar": "إضافة حقل مخصص",
+    "de": "Feld hinzufügen",
+    "fr": "Ajouter un champ",
+    "it": "Aggiungi campo"
+  },
+  "CrmV3.add.routing": {
+    "en": "Add routing rule",
+    "ar": "إضافة قاعدة توجيه",
+    "de": "Zuweisungsregel hinzufügen",
+    "fr": "Ajouter une règle d’attribution",
+    "it": "Aggiungi regola assegnazione"
+  },
+  "CrmV3.add.target": {
+    "en": "Set target",
+    "ar": "تحديد هدف",
+    "de": "Ziel festlegen",
+    "fr": "Définir un objectif",
+    "it": "Imposta obiettivo"
+  },
+  "CrmV3.stageStatus": {
+    "en": "Business stage",
+    "ar": "المرحلة التجارية",
+    "de": "Geschäftsphase",
+    "fr": "Étape commerciale",
+    "it": "Fase commerciale"
+  },
+  "CrmV3.stageStates.new": {
+    "en": "New",
+    "ar": "جديد",
+    "de": "Neu",
+    "fr": "Nouveau",
+    "it": "Nuovo"
+  },
+  "CrmV3.stageStates.contacted": {
+    "en": "Contacted",
+    "ar": "تم التواصل",
+    "de": "Kontaktiert",
+    "fr": "Contacté",
+    "it": "Contattato"
+  },
+  "CrmV3.stageStates.qualified": {
+    "en": "Qualified",
+    "ar": "مؤهل",
+    "de": "Qualifiziert",
+    "fr": "Qualifié",
+    "it": "Qualificato"
+  },
+  "CrmV3.stageStates.quoted": {
+    "en": "Quoted",
+    "ar": "تم تقديم العرض",
+    "de": "Angebot erstellt",
+    "fr": "Devis envoyé",
+    "it": "Preventivo inviato"
+  },
+  "CrmV3.customFields": {
+    "en": "Custom fields",
+    "ar": "حقول مخصصة",
+    "de": "Benutzerdefinierte Felder",
+    "fr": "Champs personnalisés",
+    "it": "Campi personalizzati"
+  },
+  "CrmV3.noFields": {
+    "en": "No custom fields configured.",
+    "ar": "لا توجد حقول مخصصة.",
+    "de": "Keine Felder konfiguriert.",
+    "fr": "Aucun champ configuré.",
+    "it": "Nessun campo configurato."
+  },
+  "CrmV3.fieldType": {
+    "en": "Field type",
+    "ar": "نوع الحقل",
+    "de": "Feldtyp",
+    "fr": "Type de champ",
+    "it": "Tipo di campo"
+  },
+  "CrmV3.fieldTypes.text": {
+    "en": "Text",
+    "ar": "نص",
+    "de": "Text",
+    "fr": "Texte",
+    "it": "Testo"
+  },
+  "CrmV3.fieldTypes.number": {
+    "en": "Number",
+    "ar": "رقم",
+    "de": "Zahl",
+    "fr": "Nombre",
+    "it": "Numero"
+  },
+  "CrmV3.fieldTypes.checkbox": {
+    "en": "Checkbox",
+    "ar": "مربع اختيار",
+    "de": "Kontrollkästchen",
+    "fr": "Case à cocher",
+    "it": "Casella di controllo"
+  },
+  "CrmV3.routingTitle": {
+    "en": "Lead routing",
+    "ar": "توجيه العملاء المحتملين",
+    "de": "Lead-Zuweisung",
+    "fr": "Attribution des prospects",
+    "it": "Assegnazione lead"
+  },
+  "CrmV3.routingHint": {
+    "en": "Enabled rules assign matching sources when contacts arrive. Run them to review current contacts.",
+    "ar": "تعيّن القواعد المفعلة مسؤولين للمصادر المطابقة عند وصول جهات الاتصال. شغّلها لمراجعة السجلات الحالية.",
+    "de": "Aktive Regeln weisen neue Kontakte nach Quelle zu. Auch auf aktuelle Kontakte anwendbar.",
+    "fr": "Les règles actives attribuent les nouveaux contacts par source. Appliquez-les aux contacts actuels.",
+    "it": "Le regole attive assegnano nuovi contatti per fonte. Applicale anche ai contatti attuali."
+  },
+  "CrmV3.enabled": {
+    "en": "Enabled",
+    "ar": "مفعّل",
+    "de": "Aktiv",
+    "fr": "Activé",
+    "it": "Attivo"
+  },
+  "CrmV3.runRouting": {
+    "en": "Run routing rules",
+    "ar": "تشغيل قواعد التوجيه",
+    "de": "Zuweisungsregeln ausführen",
+    "fr": "Exécuter les règles",
+    "it": "Esegui regole"
+  },
+  "CrmV3.routingResult": {
+    "en": "{count} assignments · {date}",
+    "ar": "{count} تعيينات · {date}",
+    "de": "{count} Zuweisungen · {date}",
+    "fr": "{count} attributions · {date}",
+    "it": "{count} assegnazioni · {date}"
+  },
+  "CrmV3.targetsTitle": {
+    "en": "Monthly targets",
+    "ar": "أهداف شهرية",
+    "de": "Monatsziele",
+    "fr": "Objectifs mensuels",
+    "it": "Obiettivi mensili"
+  },
+  "CrmV3.targetPeriod": {
+    "en": "Target month",
+    "ar": "شهر الهدف",
+    "de": "Zielmonat",
+    "fr": "Mois de l’objectif",
+    "it": "Mese obiettivo"
+  },
+  "CrmV3.targetAmount": {
+    "en": "Target amount",
+    "ar": "قيمة الهدف",
+    "de": "Zielbetrag",
+    "fr": "Montant de l’objectif",
+    "it": "Importo obiettivo"
+  },
+  "CrmV3.dealsPipeline": {
+    "en": "Deals pipeline",
+    "ar": "مسار الصفقات",
+    "de": "Geschäftspipeline",
+    "fr": "Pipeline des affaires",
+    "it": "Pipeline trattative"
+  },
+  "CrmV3.dealsPipelineHint": {
+    "en": "Actual project contracts determine value and whether a deal is won.",
+    "ar": "تحدد عقود المشاريع الفعلية القيمة وحالة الفوز بالصفقة.",
+    "de": "Echte Projektverträge bestimmen Wert und Abschluss.",
+    "fr": "Les contrats réels déterminent la valeur et le gain d’une affaire.",
+    "it": "I contratti reali determinano valore e successo delle trattative."
+  },
+  "CrmV3.openProjects": {
+    "en": "Open projects",
+    "ar": "فتح المشاريع",
+    "de": "Projekte öffnen",
+    "fr": "Ouvrir les projets",
+    "it": "Apri progetti"
+  },
+  "CrmV3.dealStageError": {
+    "en": "The stage could not be changed. A won deal requires its actual confirmed contract.",
+    "ar": "تعذر تغيير المرحلة. تتطلب الصفقة الفائزة عقدها المؤكد الفعلي.",
+    "de": "Phase nicht geändert. Ein gewonnenes Geschäft benötigt einen bestätigten Vertrag.",
+    "fr": "Étape non modifiée. Une affaire gagnée exige un contrat confirmé.",
+    "it": "Fase non modificata. Una trattativa vinta richiede un contratto confermato."
+  },
+  "CrmV3.provisioningTitle": {
+    "en": "Customer workspace",
+    "ar": "مساحة عمل العميل",
+    "de": "Kundenarbeitsbereich",
+    "fr": "Espace client",
+    "it": "Spazio cliente"
+  },
+  "CrmV3.provisioningHint": {
+    "en": "Create an empty workspace owned by the registered customer after the contract is confirmed. Its tools and billing start from the normal defaults.",
+    "ar": "أنشئ مساحة فارغة يملكها العميل المسجل بعد تأكيد العقد. تبدأ الأدوات والفوترة بالإعدادات المعتادة.",
+    "de": "Nach Vertragsbestätigung einen leeren Bereich für den registrierten Kunden erstellen. Normale Tool- und Abrechnungsvorgaben gelten.",
+    "fr": "Après confirmation, créez un espace vide appartenant au client inscrit. Les valeurs par défaut s’appliquent.",
+    "it": "Dopo la conferma crea uno spazio vuoto del cliente registrato. Si applicano i valori predefiniti."
+  },
+  "CrmV3.provisioningError": {
+    "en": "Customer workspace action could not be completed",
+    "ar": "تعذر إكمال إجراء مساحة العميل",
+    "de": "Kundenbereich-Aktion nicht abgeschlossen",
+    "fr": "Action sur l’espace client impossible",
+    "it": "Azione spazio cliente non completata"
+  },
+  "CrmV3.workspaceReady": {
+    "en": "The customer workspace is ready.",
+    "ar": "مساحة عمل العميل جاهزة.",
+    "de": "Der Kundenbereich ist bereit.",
+    "fr": "L’espace client est prêt.",
+    "it": "Lo spazio cliente è pronto."
+  },
+  "CrmV3.openWorkspace": {
+    "en": "Open customer workspace in Console",
+    "ar": "فتح مساحة العميل في وحدة التحكم",
+    "de": "Kundenbereich in der Konsole öffnen",
+    "fr": "Ouvrir l’espace client dans la console",
+    "it": "Apri spazio cliente nella console"
+  },
+  "CrmV3.confirmContractFirst": {
+    "en": "Confirm the actual contract before creating the customer workspace.",
+    "ar": "أكد العقد الفعلي قبل إنشاء مساحة العميل.",
+    "de": "Den tatsächlichen Vertrag vor der Erstellung bestätigen.",
+    "fr": "Confirmez le contrat réel avant de créer l’espace client.",
+    "it": "Conferma il contratto reale prima di creare lo spazio cliente."
+  },
+  "CrmV3.ownerSignupNeeded": {
+    "en": "{email} must register and activate their account before becoming the workspace owner.",
+    "ar": "يجب أن يسجل {email} حسابه ويفعّله قبل أن يصبح مالك المساحة.",
+    "de": "{email} muss sich registrieren und aktivieren, um Eigentümer zu werden.",
+    "fr": "{email} doit s’inscrire et activer son compte avant de devenir propriétaire.",
+    "it": "{email} deve registrarsi e attivare l’account prima di diventare proprietario."
+  },
+  "CrmV3.openSignup": {
+    "en": "Open customer signup",
+    "ar": "فتح تسجيل العميل",
+    "de": "Kundenregistrierung öffnen",
+    "fr": "Ouvrir l’inscription client",
+    "it": "Apri registrazione cliente"
+  },
+  "CrmV3.workspaceName": {
+    "en": "Workspace name",
+    "ar": "اسم مساحة العمل",
+    "de": "Name des Arbeitsbereichs",
+    "fr": "Nom de l’espace",
+    "it": "Nome spazio"
+  },
+  "CrmV3.retryProvisioning": {
+    "en": "Retry after customer signup",
+    "ar": "إعادة المحاولة بعد تسجيل العميل",
+    "de": "Nach Registrierung erneut versuchen",
+    "fr": "Réessayer après l’inscription",
+    "it": "Riprova dopo la registrazione"
+  },
+  "CrmV3.createCustomerWorkspace": {
+    "en": "Create customer workspace",
+    "ar": "إنشاء مساحة العميل",
+    "de": "Kundenbereich erstellen",
+    "fr": "Créer l’espace client",
+    "it": "Crea spazio cliente"
+  },
+  "CrmV3.offerTerms": {
+    "en": "Offer document and validity",
+    "ar": "مستند العرض وصلاحيته",
+    "de": "Angebotsdokument und Gültigkeit",
+    "fr": "Document et validité de l’offre",
+    "it": "Documento e validità offerta"
+  },
+  "CrmV3.offerTermsError": {
+    "en": "Offer terms could not be loaded",
+    "ar": "تعذر تحميل شروط العرض",
+    "de": "Angebotsbedingungen nicht geladen",
+    "fr": "Conditions de l’offre non chargées",
+    "it": "Condizioni offerta non caricate"
+  },
+  "CrmV3.downloadOffer": {
+    "en": "Download offer PDF",
+    "ar": "تنزيل العرض PDF",
+    "de": "Angebot als PDF herunterladen",
+    "fr": "Télécharger l’offre PDF",
+    "it": "Scarica offerta PDF"
+  },
+  "CrmV3.offerValidUntil": {
+    "en": "Valid until {date}",
+    "ar": "صالح حتى {date}",
+    "de": "Gültig bis {date}",
+    "fr": "Valable jusqu’au {date}",
+    "it": "Valida fino al {date}"
+  },
+  "CrmV3.signedSimulation": {
+    "en": "{name} recorded a simulated signature on {date}.",
+    "ar": "سجل {name} توقيعاً محاكياً في {date}.",
+    "de": "{name} hat am {date} eine simulierte Unterschrift erfasst.",
+    "fr": "{name} a enregistré une signature simulée le {date}.",
+    "it": "{name} ha registrato una firma simulata il {date}."
+  },
+  "CrmV3.validity": {
+    "en": "Offer validity",
+    "ar": "صلاحية العرض",
+    "de": "Angebotsgültigkeit",
+    "fr": "Validité de l’offre",
+    "it": "Validità offerta"
+  },
+  "CrmV3.validityDate": {
+    "en": "Validity date",
+    "ar": "تاريخ الصلاحية",
+    "de": "Gültigkeitsdatum",
+    "fr": "Date de validité",
+    "it": "Data validità"
+  },
+  "CrmV3.validityTime": {
+    "en": "Validity time",
+    "ar": "وقت الصلاحية",
+    "de": "Gültigkeitszeit",
+    "fr": "Heure de validité",
+    "it": "Ora validità"
+  },
+  "CrmV3.signerName": {
+    "en": "Simulated signer name",
+    "ar": "اسم الموقّع المحاكى",
+    "de": "Name für simulierte Unterschrift",
+    "fr": "Nom du signataire simulé",
+    "it": "Nome firmatario simulato"
+  },
+  "CrmV3.signatureHint": {
+    "en": "This records a local signature simulation for review. It does not sign or accept the commercial contract.",
+    "ar": "يسجل هذا محاكاة توقيع محلية للمراجعة. لا يوقع أو يقبل العقد التجاري.",
+    "de": "Lokale Unterschriftssimulation zur Prüfung. Der Vertrag wird weder unterschrieben noch angenommen.",
+    "fr": "Simulation locale pour vérification. Le contrat commercial n’est pas signé ni accepté.",
+    "it": "Simulazione locale per revisione. Il contratto commerciale non viene firmato né accettato."
+  },
+  "CrmV3.signatureConsent": {
+    "en": "Record a simulated signature",
+    "ar": "تسجيل توقيع محاكى",
+    "de": "Simulierte Unterschrift erfassen",
+    "fr": "Enregistrer une signature simulée",
+    "it": "Registra firma simulata"
+  },
+  "CrmV3.saveOfferTerms": {
+    "en": "Save offer terms",
+    "ar": "حفظ شروط العرض",
+    "de": "Angebotsbedingungen speichern",
+    "fr": "Enregistrer les conditions",
+    "it": "Salva condizioni offerta"
+  },
+  "CrmV3.required": {
+    "en": "Complete this field.",
+    "ar": "أكمل هذا الحقل.",
+    "de": "Dieses Feld ausfüllen.",
+    "fr": "Complétez ce champ.",
+    "it": "Completa questo campo."
+  },
+  "CrmV3.emailInvalid": {
+    "en": "Enter a valid email.",
+    "ar": "أدخل بريداً صالحاً.",
+    "de": "Gültige E-Mail eingeben.",
+    "fr": "Saisissez un e-mail valide.",
+    "it": "Inserisci email valida."
+  },
+  "CrmV3.countryInvalid": {
+    "en": "Use a two-letter country code.",
+    "ar": "استخدم رمز دولة من حرفين.",
+    "de": "Zweistelligen Ländercode verwenden.",
+    "fr": "Utilisez un code pays à deux lettres.",
+    "it": "Usa un codice paese di due lettere."
+  },
+  "CrmV3.currencyInvalid": {
+    "en": "Use a three-letter currency code.",
+    "ar": "استخدم رمز عملة من ثلاثة أحرف.",
+    "de": "Dreistelligen Währungscode verwenden.",
+    "fr": "Utilisez un code devise à trois lettres.",
+    "it": "Usa un codice valuta di tre lettere."
+  },
+  "CrmV3.numberInvalid": {
+    "en": "Use a number in the allowed range.",
+    "ar": "استخدم رقماً في النطاق المسموح.",
+    "de": "Zahl im zulässigen Bereich verwenden.",
+    "fr": "Utilisez un nombre dans la plage autorisée.",
+    "it": "Usa un numero nell’intervallo consentito."
+  },
+  "CrmV3.websiteInvalid": {
+    "en": "Use an HTTP or HTTPS website address.",
+    "ar": "استخدم عنوان موقع HTTP أو HTTPS.",
+    "de": "HTTP- oder HTTPS-Adresse verwenden.",
+    "fr": "Utilisez une adresse HTTP ou HTTPS.",
+    "it": "Usa un indirizzo HTTP o HTTPS."
+  },
+  "nav.companies": {
+    "en": "Companies",
+    "ar": "الشركات",
+    "de": "Firmen",
+    "fr": "Entreprises",
+    "it": "Aziende"
+  },
+  "nav.reports": {
+    "en": "Reports",
+    "ar": "التقارير",
+    "de": "Berichte",
+    "fr": "Rapports",
+    "it": "Report"
+  },
+  "nav.dealsPipeline": {
+    "en": "Deals pipeline",
+    "ar": "مسار الصفقات",
+    "de": "Geschäftspipeline",
+    "fr": "Pipeline des affaires",
+    "it": "Pipeline trattative"
+  },
+  "ServiceRequests.deliveryFiles": {
+    "en": "Packaged delivery files",
+    "ar": "ملفات التسليم المجمعة",
+    "de": "Paketierte Lieferdateien",
+    "fr": "Fichiers livrables archivés",
+    "it": "File consegna archiviati"
+  },
+  "ServiceRequests.deliveryFileHelp": {
+    "en": "Choose up to ten accessible packaged versions. The exact version is delivered to the customer.",
+    "ar": "اختر حتى عشر نسخ مجمعة متاحة. تُسلّم النسخة المحددة للعميل.",
+    "de": "Bis zu zehn zugängliche Paketversionen wählen. Die genaue Version wird geliefert.",
+    "fr": "Choisissez jusqu’à dix versions archivées accessibles. La version exacte est livrée.",
+    "it": "Scegli fino a dieci versioni archiviate accessibili. Viene consegnata la versione esatta."
+  },
+  "ServiceRequests.filesError": {
+    "en": "Delivery files could not be loaded",
+    "ar": "تعذر تحميل ملفات التسليم",
+    "de": "Lieferdateien nicht geladen",
+    "fr": "Fichiers livrables non chargés",
+    "it": "File consegna non caricati"
+  },
+  "ServiceRequests.fileVersion": {
+    "en": "Version {version}",
+    "ar": "النسخة {version}",
+    "de": "Version {version}",
+    "fr": "Version {version}",
+    "it": "Versione {version}"
+  },
+  "ServiceRequests.noDeliveryFiles": {
+    "en": "No accessible packaged files",
+    "ar": "لا توجد ملفات مجمعة متاحة",
+    "de": "Keine zugänglichen Paketdateien",
+    "fr": "Aucun fichier archivé accessible",
+    "it": "Nessun file archiviato accessibile"
+  },
+  "ServiceRequests.downloadDelivery": {
+    "en": "Download {name}",
+    "ar": "تنزيل {name}",
+    "de": "{name} herunterladen",
+    "fr": "Télécharger {name}",
+    "it": "Scarica {name}"
+  },
+  "ServiceRequests.downloadError": {
+    "en": "This delivery could not be downloaded. Check your current workspace access.",
+    "ar": "تعذر تنزيل التسليم. تحقق من صلاحيات المساحة الحالية.",
+    "de": "Download fehlgeschlagen. Aktuellen Bereichszugriff prüfen.",
+    "fr": "Téléchargement impossible. Vérifiez l’accès à l’espace actuel.",
+    "it": "Download non riuscito. Verifica l’accesso allo spazio attuale."
+  }
+}

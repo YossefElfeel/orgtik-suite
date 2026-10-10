@@ -1,0 +1,16 @@
+{
+  "ServiceRequests.openCrmDeal": {
+    "en": "Open confirmed CRM deal",
+    "ar": "فتح صفقة إدارة العملاء المؤكدة",
+    "de": "Bestätigtes CRM-Geschäft öffnen",
+    "fr": "Ouvrir l’affaire CRM confirmée",
+    "it": "Apri trattativa CRM confermata"
+  },
+  "ServiceRequests.openCrmContact": {
+    "en": "Open CRM contact",
+    "ar": "فتح جهة اتصال إدارة العملاء",
+    "de": "CRM-Kontakt öffnen",
+    "fr": "Ouvrir le contact CRM",
+    "it": "Apri contatto CRM"
+  }
+}

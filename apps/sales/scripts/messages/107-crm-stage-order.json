@@ -1,0 +1,23 @@
+{
+  "CrmV3.stageEarlier": {
+    "en": "Move {name} earlier",
+    "ar": "نقل {name} إلى مرحلة أبكر",
+    "de": "{name} nach vorne verschieben",
+    "fr": "Avancer {name}",
+    "it": "Sposta {name} prima"
+  },
+  "CrmV3.stageLater": {
+    "en": "Move {name} later",
+    "ar": "نقل {name} إلى مرحلة لاحقة",
+    "de": "{name} nach hinten verschieben",
+    "fr": "Reculer {name}",
+    "it": "Sposta {name} dopo"
+  },
+  "CrmV3.routingResult": {
+    "en": "{count, plural, one {# assignment} other {# assignments}} · {date}",
+    "ar": "{count, plural, zero {لا توجد تعيينات} one {تعيين واحد} two {تعيينان} few {# تعيينات} many {# تعييناً} other {# تعيين}} · {date}",
+    "de": "{count, plural, one {# Zuweisung} other {# Zuweisungen}} · {date}",
+    "fr": "{count, plural, one {# attribution} other {# attributions}} · {date}",
+    "it": "{count, plural, one {# assegnazione} other {# assegnazioni}} · {date}"
+  }
+}

@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import EventRow from "@/components/pages/activity-feed/EventRow";
 import { dayHeading, useFormatTag } from "@/components/pages/activity-feed/feed";
 import type { ActivityFeedGroup } from "@/types/activity-feed";
+import { useSuite } from "@orgtik/ui";
 
 type Props = {
   groups: ActivityFeedGroup[];
@@ -19,13 +20,14 @@ export default function ActivityFeedList({ groups, onMarkRead }: Props) {
   const t = useTranslations("SalesActivity");
   const tag = useFormatTag();
   const id = useId();
+  const clock = useSuite().snapshot?.now;
 
   return (
     <div className="flex flex-col gap-8">
       {groups.map((group, i) => (
         <section key={group.date} aria-labelledby={`${id}-${i}`} className="flex flex-col gap-3">
           <h2 id={`${id}-${i}`} className="flex flex-wrap items-baseline gap-x-2 text-label text-fg">
-            <span suppressHydrationWarning>{dayHeading(group.date, tag)}</span>
+            <span>{dayHeading(group.date, tag, clock ? Date.parse(clock) : Number.NaN)}</span>
             <span className="text-body-sm font-normal text-fg-muted">{t("eventCount", { count: group.count })}</span>
           </h2>
           <ol className="ms-2 flex flex-col gap-3 border-s border-line ps-4">
