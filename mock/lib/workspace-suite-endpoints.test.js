@@ -168,6 +168,12 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     const immutablePaid = JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders);
     const regionalCatalog = good(await call('sales', '/api/suite/services/catalog', crmToken)); assert.ok(regionalCatalog.countries.some(row => row.code === 'FR'));
     const eligible = good(await call('sales', '/api/suite/services/staff', crmToken)); assert.ok(eligible.some(row => row.id === mona.user.id));
+    const consoleStaff = good(await call('sos', '/api/auth/workspace', owner, 'POST', { mode: 'staff', target: 'admin' }));
+    const serviceState = JSON.stringify(require('../apps/admin').exportState());
+    assert.equal((await call('admin', `/v1/admin/services/${offer.serviceId}`, consoleStaff.tokens.accessToken, 'PATCH', { status: 'archived' })).status, 410);
+    assert.equal((await call('admin', `/v1/admin/service-requests/${serviceRequest.id}/actions`, consoleStaff.tokens.accessToken, 'POST', { action: 'cancel' })).status, 410);
+    assert.equal((await call('admin', '/v1/admin/price-drafts', consoleStaff.tokens.accessToken, 'POST', { changes: [{ key: `${offer.serviceId}:monthly:europe`, to: 1 }] })).status, 410);
+    assert.equal(JSON.stringify(require('../apps/admin').exportState()), serviceState);
     const deliveryRow = good(await call('sales', '/api/suite/services/requests', crmToken)).find(row => row.id === serviceRequest.id); assert.equal(deliveryRow.capabilities.canAssign, true);
     good(await call('sales', `/api/suite/services/catalog/offers/${encodeURIComponent(offer.id)}`, crmToken, 'PATCH', { regionalPrices: { europe: 654 }, countryPrices: { FR: 432 } }));
     good(await call('sales', '/api/suite/services/catalog/publish', crmToken, 'POST', { operationId: 'regional-service-publish' }));

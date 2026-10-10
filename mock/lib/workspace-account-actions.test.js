@@ -21,6 +21,14 @@ test('personal account remains usable after leaving the last workspace', { timeo
     assert.equal(good(await call('/api/auth/account', initial)).workspaces.length, 1);
     assert.equal((await call('/api/suite/account/actions/membership.leave', initial, 'POST', {})).status, 409);
     assert.equal((await call('/api/auth/account/actions/person.delete', initial, 'POST', { confirm: account.user.email, password: 'StrongFixture!' })).status, 409);
+    const peer = require('./identity').users.find(person => person.isActive === true && person.id !== account.user.id), membership = { id: `member:${ws.id}:${peer.key}`, userKey: peer.key, role: 'member', status: 'active', revision: 1, accessEpoch: 0, toolGrants: {} };
+    S.workspace(ws.id).members.push(membership); S.workspace(ws.id).suite = { account: { customRoles: [{ id: 'reviewer', name: 'Reviewer', baseRole: 'member' }] } };
+    good(await call('/api/suite/account/actions/member.role', initial, 'POST', { memberId: membership.id, customRoleId: 'reviewer' }));
+    assert.equal(good(await call('/v1/app/team', initial)).find(row => row.id === membership.id).customRoleId, 'reviewer');
+    good(await call('/api/suite/account/actions/member.status', initial, 'POST', { memberId: membership.id, status: 'suspended' }));
+    assert.equal(S.workspace(ws.id).members.find(row => row.id === membership.id).status, 'suspended');
+    good(await call('/api/suite/account/actions/member.status', initial, 'POST', { memberId: membership.id, status: 'active' }));
+    assert.equal(S.workspace(ws.id).members.find(row => row.id === membership.id).status, 'active');
     // Fixture membership is a member of its sole workspace; the actual HTTP leave rotates context.
     S.workspace(ws.id).members[0].role = 'member';
     const left = good(await call('/api/suite/account/actions/membership.leave', initial, 'POST', {}));

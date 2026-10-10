@@ -415,6 +415,23 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       if (!['workspace.create', 'person.delete', 'sessions.revoke'].includes(req.params.kind)) throw failure(422, 'workspace_action_required', 'Choose a workspace for this action.');
       return personActions(req).execute(req.params.kind, req.body);
     }));
+    app.use('/v1/admin', (req, res, next) => {
+      if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next();
+      const S = platform().getStore(), serviceId = value => S.db.plans.some(row => row.id === value && row.service) || S.db.services.some(row => row.id === value), moved = () => res.status(410).json({ success: false, code: 'services_managed_in_crm', message: 'Manage service catalogs and delivery in the OrgTik CRM.', managedIn: 'crm', path: req.path.startsWith('/service-requests') ? '/service-requests' : '/catalog' });
+      if (/^\/(?:services|service-requests)(?:\/|$)/.test(req.path)) return moved();
+      if (/^\/plans(?:\/|$)/.test(req.path) && (req.body?.service === true || serviceId(req.path.split('/')[2]))) return moved();
+      if (req.path === '/price-drafts' && req.body?.changes?.some(row => serviceId(String(row.key || '').split(':')[0]))) return moved();
+      const draft = /^\/price-drafts\/([^/]+)\/publish$/.exec(req.path);
+      if (draft && S.db.priceDrafts.find(row => row.id === draft[1])?.changes.some(row => serviceId(row.key.split(':')[0]))) return moved();
+      if (/^\/bundles(?:\/|$)/.test(req.path) && req.body?.planIds?.some(serviceId)) return moved();
+      const country = /^\/countries\/([^/]+)$/.exec(req.path);
+      if (country && req.body?.fixed) {
+        const prior = S.db.countries[country[1]]?.fixed || {};
+        if (Object.entries(req.body.fixed).some(([key, value]) => serviceId(key.split(':')[0]) && JSON.stringify(value) !== JSON.stringify(prior[key]))) return moved();
+        req.body.fixed = { ...Object.fromEntries(Object.entries(prior).filter(([key]) => serviceId(key.split(':')[0]))), ...req.body.fixed };
+      }
+      next();
+    });
     app.get("/api/auth/my-scopes", (req, res) => {
       const p = principal(); if (!p) return res.status(401).json({ success: false, code: "unauthenticated" });
       const names = new Set(p.context.scopes.map(scope => scope.scope));
@@ -461,7 +478,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         const ws = workspace(), S = platform().getStore();
         const data = ws.members.filter(member => !['removed', 'offboarded', 'cancelled'].includes(member.status)).map(member => {
           const user = identityFor().findByKey(member.userKey);
-          return { id: member.id, userKey: member.userKey, name: user ? identityFor().fullName(user) : member.name, email: user?.email || member.email, role: member.role, status: member.status, tools: Object.keys(member.toolGrants || {}).filter(tool => member.toolGrants[tool].assigned), joinedAt: member.joinedAt, invitationId: member.invitationId || null };
+          return { id: member.id, userKey: member.userKey, name: user ? identityFor().fullName(user) : member.name, email: user?.email || member.email, role: member.role, customRoleId: member.customRoleId || null, status: member.status, tools: Object.keys(member.toolGrants || {}).filter(tool => member.toolGrants[tool].assigned), joinedAt: member.joinedAt, invitationId: member.invitationId || null };
         });
         const filtered = ownContext().member.role === 'guest' ? data.filter(member => member.userKey === principal().user.key) : data;
         res.json({ data: filtered, meta: { seats: S.seats(ws), seatModel: 'B', perTool: Object.fromEntries(Object.keys(TOOL_DEFINITIONS).map(tool => [tool, seatCounts(S, ws, tool)])), perUserLines: ws.lines.filter(line => S.db.plans.find(plan => plan.id === line.planId)?.perUser).map(line => ({ id: line.id, tool: line.tool, unit: line.snapshot.unit, currency: line.snapshot.currency, cycle: line.cycle })) } });
