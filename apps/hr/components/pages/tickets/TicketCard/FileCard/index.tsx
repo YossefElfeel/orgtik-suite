@@ -92,7 +92,7 @@ function FileCard({ attachment }: Props) {
 
       <IconButton
         label={tActions("downloadFile", { name: attachment?.fileName ?? "" })}
-        variant="outline"
+        variant="secondary"
         href={attachment?.url}
         download={attachment?.fileName}
         target="_blank"

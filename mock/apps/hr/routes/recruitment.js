@@ -131,23 +131,7 @@ module.exports = function recruitmentRoutes(app, h) {
   });
 
   // Public-style apply endpoint (multipart: resume/cv/file + fields) so CV uploads can be exercised.
-  const apply = (req, res) => {
-    const j = findJob(req, res);
-    if (!j) return;
-    const b = h.body(req);
-    if (!b.fullName || !b.email) return err(res, 400, "Full name and email are required.");
-    const f = (req.files || [])[0];
-    const now = L.nowIso();
-    const a = db.applications.insert({
-      jobId: j.id, fullName: b.fullName, gender: b.gender || "", email: b.email, nationality: b.nationality || "EG", phoneNumber: b.phoneNumber || "",
-      dateOfBirth: L.normDate(b.dateOfBirth) || "", address: b.address || "", university: b.university || "", qualification: b.qualification || "", graduationDate: L.normDate(b.graduationDate) || "",
-      resumeFileName: f ? f.originalname : "", resumeFilePath: f ? `uploads/${f.filename}` : "", resumeMimeType: f ? f.mimetype : "", resumeFileSize: f ? String(f.size) : "0",
-      currentStage: "applying", stageUpdatedAt: now, appliedAt: now, deletedAt: null,
-    });
-    db.stages.insert({ applicationId: a.id, stage: "applying", stageAt: now, note: "Applied via careers page", updatedBy: null });
-    h.notify({ to: h.usersWithRole("hr"), actor: null, action: "application.created", title: "New job application", body: `${a.fullName} applied for ${j.title}.`, entityType: "JobApplication", entityId: a.id });
-    send(res, V.applicationView(a), "Application submitted successfully", 201);
-  };
+  const apply = (req,res) => { try {const a=require('../application').createApplication(h,req.params.id,h.body(req),{file:(req.files||[])[0]||null});send(res,V.applicationView(a),'Application submitted successfully',201);}catch(error){res.status(error.status||500).json({success:false,code:error.code||'application_unavailable',message:error.message});} };
   app.post("/api/recruitment/jobs/:id/applications", h.anyFiles, apply);
   app.post("/api/recruitment/jobs/:id/apply", h.anyFiles, apply);
 

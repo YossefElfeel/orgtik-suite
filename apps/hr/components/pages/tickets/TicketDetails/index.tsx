@@ -2,9 +2,9 @@
 
 import type { ReactNode } from "react";
 import CardLayout from "./CardLayout";
-import StatusBadge from "@/components/shared/StatusBadge";
+import StatusBadge from "@/components/bindings/EmploymentStatus";
 import { ITicket, ITicketDetail } from "@/types/ticket";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
 import { formatDate } from "@/utils/formateDate";
 import { useTranslations } from "next-intl";
 
@@ -35,7 +35,7 @@ function TicketDetails({ ticket }: { ticket?: ITicketDetail }) {
       label: t("labels.ticketCreator"),
       content: (
         <div className="flex items-center gap-2">
-          <Avatar size="default">
+          <Avatar size="md">
             <AvatarImage
               src={ticket?.createdBy?.avatar}
               alt={

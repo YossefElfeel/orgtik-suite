@@ -5,15 +5,15 @@
 // It is one element: it can be a dialog, sheet or menu trigger itself (lib/trigger), with no
 // wrapper span between the tooltip and the button. With `href` it is a link that looks like the
 // button (a real <a>, announced as a link): the app's own pages go through the locale-aware Link.
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Button, buttonVariants } from "@orgtik/ui";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/bindings/tooltip";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import type { IconButtonProps } from "@/types/icon-button";
 
 export function IconButton({
   label,
-  size = "icon",
+  size = "sm",
   tooltip = true,
   children,
   href,

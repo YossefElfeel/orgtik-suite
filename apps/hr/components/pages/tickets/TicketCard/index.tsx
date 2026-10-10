@@ -1,5 +1,5 @@
 import { Clock } from "@phosphor-icons/react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
 
 import FileCard from "./FileCard";
 import { SafeHtml } from "@/components/shared/SafeHtml";

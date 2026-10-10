@@ -3,7 +3,7 @@ import { DeleteDialog } from "@/components/shared/DeleteDialog";
 import { Camera, CircleNotch as Loader2, Trash as Trash2 } from "@phosphor-icons/react";
 
 import React, { useRef } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import CustomAvatar from "@/components/shared/CustomAvatar";
 import {
   useGetEmployeeQuery,
@@ -91,7 +91,7 @@ export default function EmployeeAvatarInput({ id }: EmployeeAvatarInputProps) {
         />
         <Button
           type="button"
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={handleUploadClick}
           disabled={isUploading || isDeleting || isFetching}

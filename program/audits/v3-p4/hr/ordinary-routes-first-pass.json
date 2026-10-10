@@ -1,0 +1,81 @@
+{
+  "scope": "Ordinary HR route migration smoke; current real owner records",
+  "checks": [
+    {
+      "name": "en/: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/employees: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/employees: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/employees/1: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/employees/1: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/employees/org-chart: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/employees/org-chart: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/department: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/department: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/department/1: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/department/1: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/attendance: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/attendance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/calendar: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/calendar: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/time-off: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/time-off: no overflow",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "hr-retained-employees-1-en-light-1440.png"
+  ],
+  "errors": []
+}

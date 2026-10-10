@@ -5,8 +5,8 @@ import { CheckCircle as CircleCheck, DownloadSimple as Download, FolderOpen, Lif
 import { TicketsFiltersBar } from "@/components/pages/home/TicketsFiltersBar";
 import { DashboardMetricCard } from "@/components/shared/DashboardMetricCard";
 import { TabMenu } from "@/components/shared/TabMenu";
-import MainHeader from "@/components/layout/MainHeader";
-import { Button } from "@/components/ui/button";
+import MainHeader from "@/components/layout/ResourceHeader";
+import { Button } from "@orgtik/ui";
 
 export default function HomePage() {
   return (

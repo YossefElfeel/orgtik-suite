@@ -96,6 +96,7 @@ module.exports = {
     require("./hr/routes/recruitment")(app, h);
     require("./hr/routes/tickets")(app, h);
     require("./hr/routes/misc")(app, h);
+    require("./hr/routes/workspace-v3")(app, h);
     ctx.log(`seeded ${db.employees.rows.length} employees, ${db.sessions.length} Discord sessions, ${db.runs.rows.length} payroll runs, ${db.applications.rows.length} candidates`);
   },
 

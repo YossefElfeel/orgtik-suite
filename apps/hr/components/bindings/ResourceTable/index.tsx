@@ -1,0 +1,14 @@
+'use client';
+import { useState } from 'react';
+import { Toolbar, Select, EmptyState, ErrorState, LoadingState } from '@orgtik/ui';
+import { DataTable } from '@orgtik/ui/table';
+import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import type { Density } from '@orgtik/ui';
+import type { ResourceTableProps } from '@/types/resource-table';
+export default function ResourceTable<T, V>({ columns, data, isLoading, isError, onRetry, pagination, filterFunctions, searchFunctions, emptyMessage, gridCard, defaultView = 'table', enableRowSelection, rowSelection, onRowSelectionChange, getRowId, gridSkeleton }: ResourceTableProps<T, V>) { const t = useTranslations('common'), [density, setDensity] = useState<Density>('comfortable'), params = useSearchParams(); const mode = params.get('view') || defaultView; return <div className='flex min-w-0 flex-col gap-4'>{searchFunctions || filterFunctions ? <Toolbar label={t('search')} density={density} onDensityChange={setDensity} search={searchFunctions ? { label: t('search'), value: searchFunctions.search, onChange: searchFunctions.setSearch } : undefined} filters={filterFunctions ? <Select aria-label={t('filter')} value={String(filterFunctions.activeFilter)} onValueChange={value => value && filterFunctions.setActiveFilter(value)} options={(filterFunctions.filterData || []).map(r => ({ value: String(r.id), label: r.name }))}/> : undefined}/> : null}{gridCard && mode === 'grid' ? isLoading ? gridSkeleton || <LoadingState /> : isError ? <ErrorState onRetry={onRetry}/> : data.length ? <div className='grid gap-4 sm:grid-cols-2 xl:grid-cols-3'>{data.map((row, i) => <div key={getRowId?.(row, i) || i}>{gridCard(row)}</div>)}</div> : <EmptyState title={emptyMessage || t('noResults')}/> : <DataTable label={emptyMessage || t('noResults')} columns={enableRowSelection?columns.filter(column=>column.id!=='select'):columns} data={data} getRowId={row => getRowId?.(row, data.indexOf(row)) || String((row as {
+    id?: string | number;
+}).id ?? data.indexOf(row))} status={isLoading ? 'loading' : isError ? 'error' : 'ready'} empty={{ title: emptyMessage || t('noResults') }} onRetry={onRetry} density={density} columnChooser resizable selectable={enableRowSelection} rowSelection={rowSelection} onRowSelectionChange={onRowSelectionChange} mode={pagination ? 'server' : 'client'} rowCount={pagination?.totalItems} pagination={pagination ? { pageIndex: pagination.currentPage - 1, pageSize: pagination.limit } : undefined} onPaginationChange={pagination ? next => { const value = typeof next === 'function' ? next({ pageIndex: pagination.currentPage - 1, pageSize: pagination.limit }) : next; if (value.pageSize !== pagination.limit)
+    pagination.onLimitChange?.(value.pageSize);
+else
+    pagination.onPageChange?.(value.pageIndex + 1); } : undefined}/>}</div>; }

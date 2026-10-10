@@ -1,13 +1,1 @@
-"use client";
-
-import TimeOffPage from "../../time-off/page";
-import { useColumns } from "./columns";
-
-type Props = {};
-
-function Page({}: Props) {
-  const columns = useColumns();
-  return <TimeOffPage showeHeader={false} columns={columns} />;
-}
-
-export default Page;
+import {redirect} from 'next/navigation';export default async function LeaveBalancesPage({params}:{params:Promise<{locale:string}>}){const {locale}=await params;redirect('/'+locale+'/people/policies');}

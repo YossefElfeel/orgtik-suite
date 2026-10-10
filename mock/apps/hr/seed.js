@@ -724,7 +724,7 @@ function buildDb({ identity, config }) {
     { id: 7, title: "Sales CRM clean-up", description: "Deduplicate leads and move the Gulf pipeline to the new stages.", teams: [team(8, "Sales", "B2B sales")], progress: 55, completedTasksPercentage: 55, members: ["u13", "sales"].map(member), isPrivate: false, priority: "medium", totalAttachmentsCount: 3, totalCommentsCount: 12, status: "in_progress" },
   ];
 
-  db.holidays = () => (db.settings.attendance.publicHolidays || []).map((h) => ({ name: h.name, date: L.normDate(h.date) })).filter((h) => h.date);
+  db.holidays = (employee) => (db.settings.attendance.publicHolidays || []).filter(h => !employee || !h.country || h.country === "ALL" || h.country === employee.address?.country).map((h) => ({ name: h.name, date: L.normDate(h.date), country: h.country || "ALL" })).filter((h) => h.date);
 
   // Rows above were pushed with explicit ids; rebuild each store so its id counter continues after the max id.
   for (const k of TABLES) {
@@ -735,7 +735,7 @@ function buildDb({ identity, config }) {
 
 function attachCalculations(db) {
   db.calcSalary = calcSalary;
-  db.holidays = () => (db.settings.attendance.publicHolidays || []).map(h => ({ name: h.name, date: L.normDate(h.date) })).filter(h => h.date);
+  db.holidays = (employee) => (db.settings.attendance.publicHolidays || []).filter(h => !employee || !h.country || h.country === "ALL" || h.country === employee.address?.country).map(h => ({ name: h.name, date: L.normDate(h.date), country: h.country || "ALL" })).filter(h => h.date);
   db.approvedLeaveOn = (employeeId, date) => db.timeOffs.rows.find(row => row.employeeId === employeeId && row.status === "approved" && row.startDate <= date && row.endDate >= date) || null;
   db.periodBase = (employee, run) => {
     const base = Number(employee.salary.baseSalary) || 0, days = L.daysBetween(run.periodStart, run.periodEnd) + 1;
@@ -744,10 +744,10 @@ function attachCalculations(db) {
     return L.round2(run.frequency === "monthly" ? base * ratio : run.frequency === "biweekly" ? base / 2 * ratio : run.frequency === "weekly" ? base * 12 / 52 * ratio : base / 176 * 8 * days);
   };
   db.itemMetrics = (employee, run) => {
-    const holidays = new Set(db.holidays().map(row => row.date));
+    const holidays = new Set(db.holidays(employee).map(row => row.date));
     const working = (db.settings.attendance.schedule.workingDays || []).map(Number);
     const days = L.dateRange(run.periodStart, run.periodEnd).filter(date => working.includes(L.isoWeekday(date)) && !holidays.has(date) && date >= employee.joinDate);
-    const sessions = db.sessions.filter(row => row.employeeId === employee.id && row.date >= run.periodStart && row.date <= run.periodEnd);
+    const sessions = db.sessions.filter(row => !row.supersededBy && row.employeeId === employee.id && row.date >= run.periodStart && row.date <= run.periodEnd);
     return { workingDaysCount: days.length, workedDaysCount: new Set(sessions.map(row => row.date)).size, workedHours: L.round2(sessions.reduce((sum, row) => sum + row.durationSeconds, 0) / 3600) };
   };
   db.adjAmount = (item, mode, value) => {

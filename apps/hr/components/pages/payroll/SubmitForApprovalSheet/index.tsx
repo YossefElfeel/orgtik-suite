@@ -5,8 +5,8 @@
 // counter agree (250), and with nobody selected the sheet says how to pick people.
 import React, { useId, useState } from "react";
 import { useFormatter, useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@orgtik/ui";
+import { Textarea } from "@orgtik/ui";
 import ReusableSheet from "@/components/shared/ResuableSheet";
 import { useSubmitPayrollEmployeesMutation } from "@/redux/features/payroll/payrollApi";
 import type { SubmitForApprovalSheetProps } from "@/types/payroll";
@@ -47,7 +47,7 @@ export default function SubmitForApprovalSheet({ trigger, runId, employees, curr
       variant="floating"
       footer={
         <>
-          <Button variant="outline" size="lg" onClick={() => setOpen(false)} className="rounded-[10px]" disabled={isLoading}>
+          <Button variant="secondary" size="lg" onClick={() => setOpen(false)} className="rounded-[10px]" disabled={isLoading}>
             {t("cancel")}
           </Button>
           <Button size="lg" className="rounded-[10px]" onClick={handleSubmit} disabled={isLoading || employees.length === 0} aria-busy={isLoading}>

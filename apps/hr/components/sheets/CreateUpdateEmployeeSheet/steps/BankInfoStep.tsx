@@ -5,7 +5,7 @@ import { FieldErrors, useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { Form } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useSearchParams } from "next/navigation";
 import { useEmployeeWizard } from "../EmployeeWizardContext";
 import { useUpdateOnboardingStepMutation, useGetOnboardingStepQuery } from "@/redux/features/employee/employeeApi";
@@ -273,7 +273,7 @@ export function BankInfoStep() {
             className="min-w-32"
             type="button"
             size="lg"
-            variant="outline"
+            variant="secondary"
             onClick={onBack}
           >
             {t("nav.back")}

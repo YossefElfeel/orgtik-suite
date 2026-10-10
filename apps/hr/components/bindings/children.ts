@@ -1,0 +1,1 @@
+import {Children,isValidElement,type ReactNode,type ReactElement} from 'react';export function elements(children:ReactNode):ReactElement<Record<string,unknown>>[]{return Children.toArray(children).flatMap(child=>isValidElement<Record<string,unknown>>(child)?[child,...elements(child.props.children as ReactNode)]:[]);}

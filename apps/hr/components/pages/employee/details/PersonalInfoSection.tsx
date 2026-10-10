@@ -1,5 +1,5 @@
 import { Cake, Code as Code2, Envelope as Mail, Flag, MapPin, Phone, ScanSmiley as ScanFace, User, Users } from "@phosphor-icons/react";
-import { InfoCard, InfoCardSkeleton } from "@/components/ui/info-card";
+import { InfoCard, InfoCardSkeleton } from "@/components/shared/EmployeeFacts";
 import type { IPersonalInformation } from "@/types/employee";
 import { useTranslations } from "next-intl";
 import { useEmployeeLabels } from "@/hooks/useEmploymentTypeLabel";

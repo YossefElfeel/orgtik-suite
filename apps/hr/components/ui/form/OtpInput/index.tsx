@@ -10,7 +10,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Input } from "@orgtik/ui";
 import { cn } from "@/lib/utils";
 import type { FieldValues, UseFormReturn } from "react-hook-form";
 

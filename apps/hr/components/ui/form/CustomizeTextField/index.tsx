@@ -1,8 +1,8 @@
 "use client";
 import { Eye, EyeSlash as EyeOff } from "@phosphor-icons/react";
 
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@orgtik/ui";
+import { Textarea } from "@orgtik/ui";
 import React, { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { cn } from "@/lib/utils";

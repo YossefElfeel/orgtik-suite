@@ -112,7 +112,7 @@ function createLeaveService({ db, V, C, L, identity, workspace, context = () => 
       const bounds = availabilityBounds(fields, db.settings, workspace.timeZone);
       const conflict = db.timeOffs.rows.some(row => row.employeeId === employee.id && ['pending', 'approved'].includes(overall(row)) && (() => { const old = availabilityBounds(row, db.settings, workspace.timeZone); return old.startAt < bounds.endAt && old.endAt > bounds.startAt; })());
       if (conflict) throw fail(409, 'leave_overlap', 'This employee already has a pending or approved request during that time.');
-      const workDays = L.dateRange(fields.startDate, fields.endDate).filter(date => C.isWorkingDay(date));
+      const workDays = L.dateRange(fields.startDate, fields.endDate).filter(date => C.isWorkingDay(date, employee));
       if (durationType === 'full_day' && !workDays.length) throw fail(422, 'non_working_days', 'Choose dates that include a working day.');
       const schedule = db.settings.attendance.schedule;
       const minutes = durationType === 'full_day' ? workDays.length * 1440 : durationType === 'half_day' ? (clockMinute(schedule.dayEndTime) - clockMinute(schedule.dayStartTime)) / 2 : clockMinute(fields.partialEndTime) - clockMinute(fields.partialStartTime);

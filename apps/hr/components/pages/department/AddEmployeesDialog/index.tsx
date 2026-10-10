@@ -4,9 +4,9 @@ import { CircleNotch as Loader2, MagnifyingGlass as Search, Plus as PlusIcon } f
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ReusableDialog } from "@/components/shared/ReusableDialog/reusable-dialog";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
+import { Button } from "@orgtik/ui";
+import { Checkbox } from "@orgtik/ui";
+import { Input } from "@orgtik/ui";
 import { useReqWithToaster } from "@/hooks/useReqWithToaster";
 import { useAssignEmployeesMutation } from "@/redux/features/department/departmentApi";
 import { useGetEmployeeSelectOptionsQuery } from "@/redux/features/employee/employeeApi";
@@ -90,7 +90,7 @@ function AddEmployeesDialog({ departmentId, employees }: Props) {
         }
       }}
       trigger={
-        <Button size="lg" variant="outline" className="px-6">
+        <Button size="lg" variant="secondary" className="px-6">
           <PlusIcon aria-hidden="true" />
           {t("trigger")}
         </Button>
@@ -100,7 +100,7 @@ function AddEmployeesDialog({ departmentId, employees }: Props) {
         <>
           <Button
             size="lg"
-            variant="outline"
+            variant="secondary"
             disabled={isAssigningEmployees}
             onClick={handleClose}
           >

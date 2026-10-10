@@ -2,8 +2,8 @@
 import { CurrencyCircleDollar as CircleDollarSign, ShieldCheck } from "@phosphor-icons/react";
 
 import { useForm, FormProvider } from "react-hook-form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@orgtik/ui";
+import { Input } from "@orgtik/ui";
 import TextFormEle from "@/components/ui/form/text-form-element";
 import SelectFormEle, {
   SELECT_EMPTY_VALUE,
@@ -21,8 +21,8 @@ import CustomizeTextField from "@/components/ui/form/CustomizeTextField";
 import OtpInput from "@/components/ui/form/OtpInput";
 import LogoUploadField from "@/components/ui/form/logo-upload-field";
 import PasswordSuffix from "@/components/ui/form/password-suffix";
-import { InfoCard } from "@/components/ui/info-card";
-import { TextEditor } from "@/components/ui/text-editor";
+import { InfoCard } from "@/components/shared/EmployeeFacts";
+import { TextEditor } from "@/components/shared/HrRichTextEditor";
 import { useState } from "react";
 
 type ReferenceFormValues = {

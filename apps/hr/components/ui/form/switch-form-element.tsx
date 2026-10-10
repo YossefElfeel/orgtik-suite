@@ -11,7 +11,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "@orgtik/ui";
 import { cn } from "@/lib/utils";
 import { formStyles } from "@/lib/form-styles";
 
@@ -98,8 +98,6 @@ export function SwitchFormElement<
               onCheckedChange={field.onChange}
               disabled={disabled}
               dir={dir}
-              checkedIcon={onIcon}
-              uncheckedIcon={offIcon}
             />
           </FormControl>
           <FormMessage />

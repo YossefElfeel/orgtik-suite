@@ -22,9 +22,10 @@ export function proxy(req: NextRequest) {
   // Remove the locale prefix (e.g. /en/auth -> /auth).
   const pathWithoutLocale = pathname.replace(/^\/[a-z]{2}(\/|$)/, "/");
   const isAuthRoute = pathWithoutLocale === "/auth" || pathWithoutLocale.startsWith("/auth/");
+  const isPublicCareers = /^\/jobs\/[A-Za-z0-9_-]{1,100}\/?$/.test(pathWithoutLocale);
   const handingOver = pathWithoutLocale === "/auth" && searchParams.has("code");
 
-  if (!isAuthRoute && !token) {
+  if (!isAuthRoute && !isPublicCareers && !token) {
     return NextResponse.redirect(suiteSignIn(`${pathWithoutLocale}${search}`));
   }
 

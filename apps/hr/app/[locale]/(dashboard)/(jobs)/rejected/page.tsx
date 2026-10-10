@@ -1,5 +1,5 @@
 "use client";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import CandidateCardsGrid, {
   CandidateCardsGridSkeleton,
 } from "@/components/pages/hiring/CandidateCardsGrid";

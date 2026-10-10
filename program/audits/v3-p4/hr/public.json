@@ -1,0 +1,164 @@
+{
+  "scope": "Anonymous careers uses actual opened jobs and existing HR application constructor",
+  "checks": [
+    {
+      "name": "Unpublished careers is unavailable anonymously",
+      "pass": true
+    },
+    {
+      "name": "Actual HR setting publishes careers",
+      "pass": true
+    },
+    {
+      "name": "Published job metadata is anonymously readable",
+      "pass": true
+    },
+    {
+      "name": "Public DTO has no employees/private applications/creators",
+      "pass": true
+    },
+    {
+      "name": "Anonymous apply reaches actual HR constructor",
+      "pass": true
+    },
+    {
+      "name": "Application response is minimal",
+      "pass": true
+    },
+    {
+      "name": "Duplicate receipt replays exact application",
+      "pass": true
+    },
+    {
+      "name": "Submitted candidate appears in actual signed HR view",
+      "pass": true
+    },
+    {
+      "name": "Application did not create or activate an employee",
+      "pass": true
+    },
+    {
+      "name": "Unknown public body fields are refused",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440: no sign-in required",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Anonymous browser submission shows real receipt",
+      "pass": true
+    },
+    {
+      "name": "en/light/390: no sign-in required",
+      "pass": true
+    },
+    {
+      "name": "en/light/390: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/390: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1440: no sign-in required",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/390: no sign-in required",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1440: no sign-in required",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/390: no sign-in required",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1440: no sign-in required",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/390: no sign-in required",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390: axe",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "hr-public-careers-en-light-1440.png",
+    "hr-public-careers-en-light-390.png",
+    "hr-public-careers-en-dark-1440.png",
+    "hr-public-careers-en-dark-390.png",
+    "hr-public-careers-ar-light-1440.png",
+    "hr-public-careers-ar-light-390.png",
+    "hr-public-careers-ar-dark-1440.png",
+    "hr-public-careers-ar-dark-390.png"
+  ],
+  "completed": true
+}

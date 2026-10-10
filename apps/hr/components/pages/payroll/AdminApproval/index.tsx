@@ -5,9 +5,9 @@
 // in the batch's own currency (it said "CHF" with three decimals whatever the currency was).
 import { useFormatter, useTranslations } from "next-intl";
 import { ArrowRight } from "@phosphor-icons/react";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@orgtik/ui";
 import { cn } from "@/lib/utils";
-import StatusBadge from "@/components/shared/StatusBadge";
+import StatusBadge from "@/components/bindings/EmploymentStatus";
 import { Link } from "@/i18n/routing";
 import type { AdminApprovalsSectionProps } from "@/types/payroll";
 
@@ -54,7 +54,7 @@ export default function AdminApprovalsSection({ batches }: AdminApprovalsSection
                 </div>
 
                 {/* A link that looks like a button: it opens a page, so it is announced as a link. */}
-                <Link href={`/payroll/${batch.id}`} className={cn(buttonVariants({ variant: "outline", size: "lg" }), "text-secondary")}>
+                <Link href={`/payroll/${batch.id}`} className={cn(buttonVariants({ variant: "secondary", size: "lg" }), "text-secondary")}>
                   {t("review")}
                   <ArrowRight className="size-4 text-fg-subtle rtl:-scale-x-100" aria-hidden="true" />
                 </Link>

@@ -3,8 +3,8 @@ import { CircleNotch as Loader2, Note as StickyNote } from "@phosphor-icons/reac
 
 import { useState } from "react";
 import { SectionCard } from "../SectionCard";
-import { InfoCardSkeleton } from "@/components/ui/info-card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { InfoCardSkeleton } from "@/components/shared/EmployeeFacts";
+import { Skeleton } from "@orgtik/ui";
 import { NoteForm } from "./NoteForm";
 import { NoteItem } from "./NoteItem";
 import {

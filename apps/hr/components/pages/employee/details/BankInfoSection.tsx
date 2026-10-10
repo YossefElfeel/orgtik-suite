@@ -1,5 +1,5 @@
 import { ArrowsCounterClockwise as RefreshCcw, Bank as Landmark, Buildings as Building2, Code as Code2, CreditCard, DeviceMobile as Smartphone, Envelope as Mail, Phone, User, Wallet } from "@phosphor-icons/react";
-import { InfoCard, InfoCardSkeleton, type InfoCardItem } from "@/components/ui/info-card";
+import { InfoCard, InfoCardSkeleton, type InfoCardItem } from "@/components/shared/EmployeeFacts";
 import type { BankInformationSectionProps } from "@/types/employee";
 import { useTranslations } from "next-intl";
 import { useEmployeeLabels } from "@/hooks/useEmploymentTypeLabel";

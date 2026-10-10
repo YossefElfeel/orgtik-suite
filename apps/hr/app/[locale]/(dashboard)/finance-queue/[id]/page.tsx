@@ -3,18 +3,18 @@ import { CurrencyCircleDollar as CurrencyCircleDollarIcon, FileArrowDown as File
 
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import {
   useLazyExportPayrollFinanceSheetQuery,
   useLazyExportPayrollRunPayslipsZipQuery,
   useGetPayrollRunItemsPayoutQuery,
   usePayAllPayrollMutation,
 } from "@/redux/features/payroll/payrollApi";
-import DataTable from "@/components/shared/Table";
+import DataTable from "@/components/bindings/ResourceTable";
 import { useColumns } from "./columns";
 import { ToolbarSearchAndFilter } from "@/components/shared/ToolbarSearchAndFilter";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 
 function FinanceQueue() {
   const t = useTranslations("financeQueue");
@@ -106,7 +106,7 @@ function FinanceQueue() {
       <section className="main-padding flex items-end justify-end">
         <div className="flex items-center gap-2">
           <Button
-            variant="outline"
+            variant="secondary"
             onClick={() => handleExportSheet(payoutRunId)}
             disabled={isExportingSheet}
           >
@@ -114,7 +114,7 @@ function FinanceQueue() {
             {t("exportFinanceSheet")}
           </Button>
           <Button
-            variant="outline"
+            variant="secondary"
             onClick={() => handleExportPayslipsZip(payoutRunId)}
             disabled={isExportingPayslips}
           >

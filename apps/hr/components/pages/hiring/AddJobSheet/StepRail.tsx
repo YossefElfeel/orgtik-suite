@@ -1,4 +1,4 @@
-import { WizardStep } from "@/components/ui/wizard-step";
+import { WizardStep } from "@/components/shared/WizardStep";
 import { cn } from "@/lib/utils";
 
 import type { AddJobStep } from "./types";

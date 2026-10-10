@@ -3,8 +3,8 @@ import { Eye as EyeIcon, Trash as TrashIcon } from "@phosphor-icons/react";
 
 import { ColumnDef } from "@tanstack/react-table";
 import CustomAvatar from "@/components/shared/CustomAvatar";
-import { Button } from "@/components/ui/button";
-import StatusBadge, { TaskStatus } from "@/components/shared/StatusBadge";
+import { Button } from "@orgtik/ui";
+import StatusBadge, { TaskStatus } from "@/components/bindings/EmploymentStatus";
 import CustomizeTooltip from "@/components/shared/CustomizeTooltip";
 import { useTranslations } from "next-intl";
 
@@ -95,7 +95,7 @@ export const useColumns = () => {
             <CustomizeTooltip title={t("tooltips.viewDetails")}>
               <Button
                 variant="ghost"
-                size="icon"
+                size="sm"
                 onClick={handleView}
                 className="h-8 w-8 rounded-lg border border-line text-fg-subtle transition-colors hover:border-info/30 hover:bg-info-subtle hover:text-info
                  "
@@ -107,7 +107,7 @@ export const useColumns = () => {
             <CustomizeTooltip title={t("tooltips.deleteTicket")}>
               <Button
                 variant="ghost"
-                size="icon"
+                size="sm"
                 onClick={handleDelete}
                 className="h-8 w-8 rounded-lg border border-line text-fg-subtle transition-colors hover:border-danger/30 hover:bg-danger-subtle hover:text-danger"
               >

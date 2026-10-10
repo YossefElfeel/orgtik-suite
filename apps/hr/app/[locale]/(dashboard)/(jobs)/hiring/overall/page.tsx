@@ -2,13 +2,13 @@
 import { ClipboardText as ClipboardTextGlyph, UsersThree as UsersThreeGlyph, FileText as FileTextGlyph, UserMinus as UserMinusGlyph, UserCheck as UserCheckGlyph } from "@phosphor-icons/react";
 import { PlusCircle as PlusCircleIcon } from "@phosphor-icons/react";
 
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import AddJobSheet from "@/components/pages/hiring/AddJobSheet";
 import InterviewSchedule, {
   type InterviewScheduleEvent,
 } from "@/components/pages/hiring/InterviewSchedule";
 import { DashboardMetricCard } from "@/components/shared/DashboardMetricCard";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useMemo, useState } from "react";
 import {
   useGetInterviewCalendarQuery,

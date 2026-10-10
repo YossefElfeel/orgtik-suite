@@ -2,7 +2,7 @@ import { useGetMessagesByTicketIdQuery } from "@/redux/features/ticket/ticketApi
 import TicketCard from "../../TicketCard";
 import AddTicket from "../../TicketCard/AddTicket";
 import { useParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useEffect, useState } from "react";
 import { ITicketMessage } from "@/types/ticket";
 import { useTranslations } from "next-intl";
@@ -92,7 +92,7 @@ function TicketsManagement({}: Props) {
       {!isInitialLoading && hasMoreMessages ? (
         <Button
           type="button"
-          variant="outline"
+          variant="secondary"
           size="sm"
           className="mx-auto"
           onClick={handleLoadMore}

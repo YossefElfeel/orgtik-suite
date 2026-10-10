@@ -1,5 +1,5 @@
 "use client";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import { CustomPagination } from "@/components/shared/CustomPagination";
 import CandidateCardsGrid, {
   CandidateCardsGridSkeleton,
