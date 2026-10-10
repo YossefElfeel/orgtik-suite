@@ -1138,6 +1138,36 @@ module.exports = function crmV3(S) {
     project.crmProvisioning = clone(receipt);
     return clone(project.crmProvisioning);
   }
+  function marketingActor(context) {
+    const user = S.identity.findUser(context?.actor?.effectiveUserId), role = user && K.appRole(user);
+    if (!user || !context.tools?.crm?.canWrite || context.actor.readOnly) throw fail(403, 'crm_write_required', 'Current writable CRM access is required.');
+    const req = { sc: { user, role, staff: K.staffByAuth(user.id), customer: K.customerByAuth(user.id), lang: 'en', displayCurrency: null } };
+    staff(req); return req;
+  }
+  function setMarketingConsent(context, contactId, value) {
+    const req = marketingActor(context), row = customer(req, contactId, true);
+    if (!['unknown', 'opted_in', 'opted_out'].includes(value)) throw fail(422, 'invalid_marketing_consent', 'Record an explicit marketing consent state.');
+    row.crmMarketingConsent = { state: value, source: 'marketing_mock', recordedBy: req.sc.user.id, recordedAt: now() };
+    row.updatedAt = now(); event(req, row, 'consent', 'Marketing consent recorded', { state: value, source: 'marketing_mock' });
+    return contactOut(req, row);
+  }
+  function marketingContact(context, contactId) {
+    const req = marketingActor(context);
+    return contactOut(req, customer(req, contactId, true));
+  }
+  function createCampaignLead(context, candidate, contactId, body) {
+    const req = marketingActor(context), row = customer(req, contactId, true);
+    const title = text(body.title, 200);
+    if (body.estimate !== undefined && (!Number.isFinite(body.estimate) || body.estimate < 0 || body.estimate > 1e12)) throw fail(422, 'invalid_estimate', 'Use a non-negative pipeline estimate.');
+    const created = S.deals.createProject(req, { customerId: row.id, projectName: title, projectDescription: `Follow-up from ${candidate.title}`, projectType: 'client_project' }, { actorUser: req.sc.user });
+    if (created.error) throw fail(422, 'crm_deal_invalid', created.error);
+    const project = created.value;
+    project.source = { kind: 'marketing_campaign', campaignId: candidate.id, marketingProjectId: candidate.projectId };
+    project.crmEstimatedValue = body.estimate ?? 0;
+    row.sourceContext ??= {}; row.sourceContext.marketing = { campaignId: candidate.id, projectId: candidate.projectId, crmProjectId: project.id, by: req.sc.user.id, at: now() };
+    event(req, row, 'attribution', 'Campaign lead received', { campaignId: candidate.id, projectId: project.id, estimatedValue: project.crmEstimatedValue });
+    return { leadId: row.id, projectId: project.id, estimatedValue: project.crmEstimatedValue };
+  }
   return {
     routes,
     bootstrap,
@@ -1145,5 +1175,8 @@ module.exports = function crmV3(S) {
     event,
     provisioningCandidate,
     recordProvisioning,
+    setMarketingConsent,
+    marketingContact,
+    createCampaignLead,
   };
 };

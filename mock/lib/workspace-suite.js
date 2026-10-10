@@ -83,6 +83,44 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     if (query.length > 200) throw fail(422, 'invalid_directory_query', 'Use a shorter directory search.');
     return { workspaceId: workspace.id, managedIn: 'crm', contacts: data.contacts.filter(row => !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200).map(row => ({ workspaceId: workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
   }));
+  function marketingWriteContext(req, keys) {
+    const ctx = currentContext();
+    connectors.requireConnection(workspace, ctx, 'marketing', 'crm', { targetWrite: true });
+    if (!ctx.tools.marketing.canWrite || ctx.member.role === 'guest' || !ctx.tools.marketing.roles.some(role => ['super_admin', 'marketing_manager', 'marketing_specialist'].includes(role))) throw fail(403, 'marketing_write_required', 'Current Marketing writer access is required.');
+    if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body) || Object.keys(req.body).some(key => !keys.includes(key)) || req.body.workspaceId !== undefined && req.body.workspaceId !== workspace.id) throw fail(422, 'invalid_marketing_command', 'Choose a current source workspace and supported action fields.');
+    return ctx;
+  }
+  function marketingOperation(req, run) {
+    const operationId = req.get('idempotency-key') || req.body.operationId;
+    if (!/^[\w.:-]{1,200}$/.test(operationId || '')) throw fail(422, 'operation_id_required', 'Supply the original Marketing action reference.');
+    const operation = require('./workspace-command').makeWorkspaceOperation({ id: operationId, workspaceId: workspace.id, actor: { userId: actor.id }, method: 'POST', path: req.path, body: req.body });
+    const key = `${actor.id}:marketing:${operationId}`, prior = workspace.commandOperations?.[key];
+    if (prior) { if (prior.fingerprint !== operation.fingerprint) throw fail(409, 'operation_conflict', 'Retry the original Marketing action unchanged.'); return clone(prior.result); }
+    const result = run(); workspace.commandOperations ??= {}; workspace.commandOperations[key] = { fingerprint: operation.fingerprint, result: clone(result) }; return result;
+  }
+  app.post('/api/suite/crm/consent', write(req => {
+    const ctx = marketingWriteContext(req, ['workspaceId', 'contactId', 'state', 'operationId']);
+    runtimeFor('crm').marketingContact(ctx, req.body.contactId);
+    if (!['unknown', 'opted_in', 'opted_out'].includes(req.body.state)) throw fail(422, 'invalid_marketing_consent', 'Choose an explicit consent state.');
+    return marketingOperation(req, () => {
+      const result = runtimeFor('crm', true).setMarketingConsent(ctx, req.body.contactId, req.body.state);
+      S.log(actor.key, 'marketing_consent_recorded', String(req.body.contactId), { workspaceId: workspace.id, tool: 'marketing', state: req.body.state });
+      return { workspaceId: workspace.id, contactId: result.id, consent: result.marketingConsent };
+    });
+  }));
+  app.post('/api/suite/marketing/campaigns/:id/lead', write(req => {
+    const ctx = marketingWriteContext(req, ['workspaceId', 'contactId', 'title', 'estimate', 'operationId']), marketing = runtimeFor('marketing'), candidate = marketing.campaignCandidate(ctx, req.params.id);
+    if (!candidate.capabilities?.canLead) throw fail(403, 'campaign_lead_forbidden', 'This current campaign cannot create CRM leads.');
+    if (!candidate.recipientRefs.some(ref => ref.workspaceId === workspace.id && ref.contactId === req.body.contactId)) throw fail(422, 'campaign_recipient_required', 'Choose an actual recipient of this campaign.');
+    runtimeFor('crm').marketingContact(ctx, req.body.contactId);
+    return marketingOperation(req, () => {
+      const receipt = runtimeFor('crm', true).createCampaignLead(ctx, candidate, req.body.contactId, req.body);
+      const result = { workspaceId: workspace.id, campaignId: candidate.id, operationId: req.get('idempotency-key') || req.body.operationId, ...receipt, contactPath: `/customers/${encodeURIComponent(receipt.leadId)}`, projectPath: `/projects/${encodeURIComponent(receipt.projectId)}` };
+      runtimeFor('marketing', true).recordAttribution(ctx, candidate.id, result);
+      S.log(actor.key, 'campaign_lead_created', String(receipt.projectId), { workspaceId: workspace.id, tool: 'marketing', campaignId: candidate.id });
+      return result;
+    });
+  }));
   app.get('/api/suite/projects', read(req => {
     connectors.requireConnection(workspace, currentContext(), 'hr', 'tasks');
     const query = String(req.query.search || '').toLocaleLowerCase();
