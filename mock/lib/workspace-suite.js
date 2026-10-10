@@ -5,6 +5,7 @@ const people = require('./workspace-people');
 const { TOOL_DEFINITIONS, resolveWorkspaceContext, guestToolRoles } = require('./workspace-context');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
 const clone = value => JSON.parse(JSON.stringify(value));
+const chatMessages = data => [...(data.messages || []), ...Object.values(data.threadReplies || {}).flat()];
 const ADMIN_ROLES = { tasks: ['super_admin', 'project_manager'], files: ['super_admin'], hr: ['super_admin', 'hr'], crm: ['admin', 'manager'], marketing: ['super_admin', 'marketing_manager'], chat: ['owner', 'admin'] };
 function requireToolAdmin(context, tool) {
   const access = context.tools[tool];
@@ -103,7 +104,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     if (!['hr', 'crm', 'chat'].includes(source) || !sourceId || ids.length > 50 || ids.some(id => !Number.isSafeInteger(id) || id < 1)) throw fail(422, 'invalid_references', 'Choose up to fifty source-owned task references.');
     const connection = connectors.list(workspace, ctx).find(row => row.source === source && row.target === 'tasks');
     if (!connection?.enabled || !connectors.admitted(ctx.tools[source]) || !connectors.admitted(ctx.tools.tasks)) throw fail(403, 'connection_access_required', 'Current source and Tasks access are required.');
-    const data = runtimeFor(source).bootstrap(ctx), records = source === 'hr' ? data.employees : source === 'chat' ? data.messages : [...data.contacts, ...data.projects];
+    const data = runtimeFor(source).bootstrap(ctx), records = source === 'hr' ? data.employees : source === 'chat' ? chatMessages(data) : [...data.contacts, ...data.projects];
     if (!records.some(row => String(row.id) === sourceId)) throw fail(404, 'source_not_found', 'This source record was not found.');
     return runtimeFor('tasks').suiteFeed(ctx).tasks.filter(task => ids.includes(task.id) && task.source?.app === source && String(task.source.id) === sourceId).map(task => ({ id: task.id, title: task.title, status: task.status, path: `/projects/${task.projectId}/lists?task-id=${task.id}` }));
   }));
@@ -142,7 +143,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     if (!['chat', 'crm', 'hr'].includes(source) || typeof body.sourceId !== 'string' && typeof body.sourceId !== 'number') throw fail(422, 'invalid_source', 'Choose a current source record.');
     connectors.requireConnection(workspace, ctx, source, 'tasks', { targetWrite: true });
     if (!ctx.tools[source].canWrite) throw fail(403, 'source_permission_required', 'Your source role cannot create connected tasks.');
-    const projection = runtimeFor(source).bootstrap(ctx), rows = source === 'chat' ? projection.messages : source === 'hr' ? projection.employees : body.sourceType === 'contact' ? projection.contacts : projection.projects;
+    const projection = runtimeFor(source).bootstrap(ctx), rows = source === 'chat' ? chatMessages(projection) : source === 'hr' ? projection.employees : body.sourceType === 'contact' ? projection.contacts : projection.projects;
     if (!rows?.some(row => String(row.id) === String(body.sourceId))) throw fail(404, 'source_not_found', 'This source record was not found.');
     if (source === 'chat') {
       const audience = runtimeFor('chat').connectedTaskAudience(ctx, String(body.sourceId));
