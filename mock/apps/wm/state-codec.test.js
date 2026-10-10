@@ -12,7 +12,7 @@ function mounted(folder, { realm = "wm-codec", active = true, permitted = true }
   const identity = { userFromReq: req => req.headers["x-staff"] === "yes" ? actor : null, userScopes: () => [{ scope: "website_manager", roles: ["wm_admin"] }], publicUser: user => clone(user), fullName: user => `${user.firstName} ${user.lastName}`, findByKey: key => key === actor.key ? actor : null, findUser: id => Number(id) === actor.id ? actor : null, users: [actor] };
   const app = express(); app.use(express.json());
   const deliveries = [];
-  const hooks = wm.routes(app, { realm, identity, uploadsDir: folder, config: { apiUrl: () => "http://unavailable.fixture.invalid" }, apiUrl: () => "http://unavailable.fixture.invalid", webUrl: () => "http://website.fixture.invalid", log() {}, workspaceBoundary: true, previewIssuerAllowed: () => permitted, async salesLeadDelivery(payload, metadata) { deliveries.push({ payload, metadata }); return { state: "deferred", code: "orgtik_crm_intake_pending" }; } });
+  const hooks = wm.routes(app, { realm, identity, uploadsDir: folder, config: { apiUrl: () => "http://unavailable.fixture.invalid" }, apiUrl: () => "http://unavailable.fixture.invalid", webUrl: () => "http://website.fixture.invalid", log() {}, workspaceBoundary: true, staffAccessForPerson: () => ({permissions:{wm:require('./permissions').permissionsFor(['wm_admin'])}}), previewIssuerAllowed: () => permitted, async salesLeadDelivery(payload, metadata) { deliveries.push({ payload, metadata }); return { state: "deferred", code: "orgtik_crm_intake_pending" }; } });
   app.use((error, _req, res, _next) => res.status(error.status || 500).json({ code: error.code, message: error.message }));
   return { app, hooks, actor, deliveries };
 }

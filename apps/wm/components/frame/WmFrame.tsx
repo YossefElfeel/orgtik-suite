@@ -22,7 +22,7 @@ import { SOS_URL, WEBSITE_URL } from "@/lib/env";
 import { clearToken, getToken, signOutStaff } from "@/lib/session";
 import { useClientSession } from "@orgtik/ui/auth";
 import { statusOf, useMeQuery } from "@/store/api";
-import { CURRENT_SCOPE } from "@/components/suite/useSuiteApps";
+
 import { CenteredState } from "./CenteredState";
 import { wmRequest, studioAuthority } from "@/lib/studio";
 import { useStaffAppearance } from "@/components/studio/StaffAppearance";
@@ -170,7 +170,7 @@ export function WmFrame({ children }: { children: ReactNode }) {
     <SuiteFrame
       key={studioAuthority()}
       snapshot={null}
-      currentScope={CURRENT_SCOPE}
+      currentScope="website_manager"
       currentHref={`/${locale}`}
       sosUrl={SOS_URL}
       width="wide"

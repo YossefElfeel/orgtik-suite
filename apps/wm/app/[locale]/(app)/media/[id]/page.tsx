@@ -1,5 +1,7 @@
 "use client";
 
+import { useDispatch } from "react-redux";
+import type { WmDispatch } from "@/store";
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
@@ -33,7 +35,7 @@ import { useEntryName } from "@/lib/entryName";
 import { libraryUrl } from "@/lib/env";
 import { safeReturn } from "@/lib/useListState";
 import { useCan } from "@/lib/permissions";
-import { statusOf, useDeleteMediaMutation, useMediaItemQuery, useUpdateMediaMutation, type ApiError, type Locale, type MediaItem, type MediaPatch, type RightsStatus } from "@/store/api";
+import { api, statusOf, useDeleteMediaMutation, useMediaItemQuery, useUpdateMediaMutation, type ApiError, type Locale, type MediaItem, type MediaPatch, type RightsStatus } from "@/store/api";
 
 const RIGHTS: RightsStatus[] = ["unknown", "owned", "licensed", "stock", "client"];
 // How pages crop the picture: the focal point decides what stays in each frame.
@@ -44,6 +46,7 @@ const CROPS = [
 ] as const;
 
 function Editor({ m }: { m: MediaItem }) {
+  const dispatch = useDispatch<WmDispatch>();
   const t = useTranslations("Media");
   const returnTo = safeReturn(useSearchParams().get("returnTo"), "/media");
   const ti = useTranslations("Improvements");
@@ -265,7 +268,7 @@ function Editor({ m }: { m: MediaItem }) {
         </div>
       </div>
 
-      <MediaHistory id={m.id} reload={()=>window.dispatchEvent(new Event("focus"))}/>
+      <MediaHistory id={m.id} version={m.version} reload={()=>dispatch(api.util.invalidateTags(["Media","MediaList"]))}/>
       {dirty && editable ? (
         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-raised/95 px-4 py-3 shadow-overlay backdrop-blur lg:ps-[340px]">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
