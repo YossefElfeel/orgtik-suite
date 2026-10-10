@@ -17,7 +17,7 @@ export function WorkspaceBootstrap({ children }: { children: ReactNode }) {
     hydrate: (data, state) => useWorkspace.getState().hydrateWorkspace(data, state),
     status: state => useWorkspace.getState().setWorkspaceSync(state),
   }), []);
-  if (sync.status === "loading" || sync.namespace !== currentWorkspaceNamespace()) return <main className="grid min-h-dvh place-items-center bg-canvas p-4"><LoadingState label={t("workspace.loading", "Loading workspace conversations…")} /></main>;
+  if (sync.status === "loading" || sync.namespace !== currentWorkspaceNamespace()) return <main className="grid min-h-dvh place-items-center bg-canvas p-4"><LoadingState className="w-72 max-w-full" label={t("workspace.loading", "Loading workspace conversations…")} /></main>;
   if (sync.status !== "ready") return (
     <main className="grid min-h-dvh place-items-center bg-canvas p-6">
       <div className="max-w-md space-y-4 text-center">
