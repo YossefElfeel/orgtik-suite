@@ -1,8 +1,9 @@
 const { makeWorkspaceOperation } = require('./workspace-command');
 const { permissionsFor } = require('../apps/admin/permissions');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
+const canProvision = (S, principal, context) => context.workspace.kind === 'orgtik_internal' && context.workspace.id === 'ws_orgtik' && context.tools.crm?.canWrite && context.tools.crm.roles.some(role => ['admin', 'manager'].includes(role)) && permissionsFor(S.db.staffRoles[principal.user.key] || []).includes('workspaces:edit');
 function provision({ S, identity, principal, context, runtime, projectId, body, operationId }) {
-  if (context.workspace.kind !== 'orgtik_internal' || context.workspace.id !== 'ws_orgtik' || !context.tools.crm?.canWrite || !context.tools.crm.roles.some(role => ['admin', 'manager'].includes(role)) || !permissionsFor(S.db.staffRoles[principal.user.key] || []).includes('workspaces:edit')) throw fail(403, 'provisioning_permission_required', 'An authorised OrgTik CRM workspace administrator must provision this customer.');
+  if (!canProvision(S, principal, context)) throw fail(403, 'provisioning_permission_required', 'An authorised OrgTik CRM workspace administrator must provision this customer.');
   if (!/^[\w.:-]{1,140}$/.test(operationId || '')) throw fail(422, 'operation_id_required', 'Supply the original provisioning reference.');
   const candidate = runtime.provisioningCandidate(context, projectId);
   if (!candidate.won || !candidate.customer) throw fail(409, 'won_project_required', 'Confirm the actual customer contract before provisioning a workspace.');
@@ -27,4 +28,4 @@ function provision({ S, identity, principal, context, runtime, projectId, body, 
   S.log(principal.user.key, 'crm_workspace_provisioned', workspace.id, { workspaceId: context.workspace.id, customerWorkspaceId: workspace.id, projectId: candidate.projectId });
   return receipt;
 }
-module.exports = { provision };
+module.exports = { provision, canProvision };

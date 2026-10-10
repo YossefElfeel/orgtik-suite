@@ -76,7 +76,7 @@ export function useSuite() {
         const hasTool = (tool) => Boolean(toolState(tool) && toolState(tool)?.access !== "not_subscribed");
         const accessibleTools = Object.keys(SUITE_TOOLS).filter(tool => canRead(toolState(tool)?.access));
         const isOwner = snapshot?.member.role === "owner" && !snapshot.actor.readOnly;
-        const canAdmin = (tool) => canRead(toolState(tool)?.access) && Boolean(toolState(tool)?.canWrite) && Boolean(["owner", "admin"].includes(snapshot?.member.role || "") || toolState(tool)?.roles.some(role => SUITE_TOOLS[tool].adminRoles.includes(role)));
+        const canAdmin = (tool) => canRead(toolState(tool)?.access) && Boolean(["owner", "admin"].includes(snapshot?.member.role || "") || toolState(tool)?.roles.some(role => SUITE_TOOLS[tool].adminRoles.includes(role)));
         const request = async (path, method = "GET", body) => { if (!options.apiUrl)
             throw new Error("The suite API is unavailable."); return suiteRequest(options.apiUrl, path, { method, body }); };
         const mutate = async (path, method, body) => { const result = await request(path, method, body); await options.refresh?.(); return result; };

@@ -26,6 +26,6 @@ export function ConnectedFeature({ requires, source, children, write = true, tar
     <div className="min-w-0 flex-1"><h3 className="text-body font-semibold text-fg">{heading}</h3><p className="mt-1 text-body-sm text-fg-muted">{SUITE_TOOLS[requires].labels[locale]}{state === "no_access" ? ` · ${t("accessBody")}` : state === "read_only" && !preview ? ` · ${t("readonlyBody")}` : ""}</p>{saved ? <p role="status" className="mt-2 text-body-sm text-success">{t("pending")}</p> : null}{error ? <p role="alert" className="mt-2 text-body-sm text-danger">{error}</p> : null}</div>
     {!saved && action ? <Button size="sm" loading={busy} onClick={run}>{t(state === "not_subscribed" ? suite.isOwner ? "trial" : "requestTool" : "request")}</Button> : null}
     {state === "read_only" && suite.isOwner && !preview && billingHref ? <Link href={billingHref} className="rounded-pill bg-action-primary px-4 py-2 text-body-sm font-semibold text-on-action-primary">{t("billing")}</Link> : null}
-    {state === "disabled" && settingsHref ? <Link href={settingsHref} className="text-body-sm text-fg-brand underline">{t("settings")}</Link> : null}
+    {state === "disabled" && settingsHref ? <Link href={settingsHref} className="text-body-sm text-fg-brand underline">{t("connectionSettings")}</Link> : null}
   </section>;
 }

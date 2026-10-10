@@ -84,6 +84,8 @@ module.exports = {
       });
     }
     app.use("/api", S.core.contextMiddleware);
+    if (ctx.identity.workspaceMode) app.use('/api', (req, res, next) => !['GET', 'HEAD', 'OPTIONS'].includes(req.method) && /^\/(categories|features|plans|packages)(?:\/|$)/.test(req.path)
+      ? res.status(410).json({ success: false, code: 'legacy_catalog_retired', message: 'Manage current OrgTik services in the canonical catalog. Existing contract catalog snapshots remain readable.', managedIn: 'crm', path: '/catalog' }) : next());
     if (ctx.identity.workspaceMode) app.use((req, res, next) => /^\/api\/admin\/staff\/[^/]+\/(access|disable|enable|password-reset|invites\/resend)$/.test(req.path) && !["GET", "HEAD", "OPTIONS"].includes(req.method)
       ? res.status(501).json({ success: false, code: "workspace_command_required", message: "Workspace access changes require a shared identity command." }) : next());
     S.catalog.routes(app);

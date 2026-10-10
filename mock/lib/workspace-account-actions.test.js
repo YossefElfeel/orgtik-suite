@@ -21,7 +21,7 @@ test('personal account remains usable after leaving the last workspace', { timeo
     assert.equal(good(await call('/api/auth/account', initial)).workspaces.length, 1);
     assert.equal((await call('/api/suite/account/actions/membership.leave', initial, 'POST', {})).status, 409);
     assert.equal((await call('/api/auth/account/actions/person.delete', initial, 'POST', { confirm: account.user.email, password: 'StrongFixture!' })).status, 409);
-    const peer = require('./identity').users.find(person => person.isActive === true && person.id !== account.user.id), membership = { id: `member:${ws.id}:${peer.key}`, userKey: peer.key, role: 'member', status: 'active', revision: 1, accessEpoch: 0, toolGrants: {} };
+    const peer = require('./identity').users.find(person => person.isActive === true && person.id !== account.user.id && person.email !== 'mona.adel@orgtik.test'), membership = { id: `member:${ws.id}:${peer.key}`, userKey: peer.key, role: 'member', status: 'active', revision: 1, accessEpoch: 0, toolGrants: {} };
     S.workspace(ws.id).members.push(membership); S.workspace(ws.id).suite = { account: { customRoles: [{ id: 'reviewer', name: 'Reviewer', baseRole: 'member' }] } };
     good(await call('/api/suite/account/actions/member.role', initial, 'POST', { memberId: membership.id, customRoleId: 'reviewer' }));
     assert.equal(good(await call('/v1/app/team', initial)).find(row => row.id === membership.id).customRoleId, 'reviewer');
@@ -35,7 +35,8 @@ test('personal account remains usable after leaving the last workspace', { timeo
     const audit = good(await call('/api/auth/account/audit', initial));
     assert.ok(audit.some(row => row.action === 'view_as_started' && row.actorUserId === staff.user.id && row.effectiveUserId === account.user.id && row.workspaceId === ws.id));
     assert.equal((await call('/api/auth/account/actions/workspace.create', viewed.tokens.accessToken, 'POST', { name: 'Denied preview workspace' })).status, 423);
-    good(await call('/api/auth/exit-impersonation', viewed.tokens.accessToken, 'POST', {}));
+    const returned = good(await call('/api/auth/exit-impersonation', viewed.tokens.accessToken, 'POST', {}));
+    assert.equal(returned.workspaceContext, null); assert.ok(returned.staffAccess.apps.includes('admin'));
     assert.ok(good(await call('/api/auth/account/audit', initial)).some(row => row.action === 'view_as_ended' && row.actorUserId === staff.user.id && row.effectiveUserId === account.user.id));
     // Fixture membership is a member of its sole workspace; the actual HTTP leave rotates context.
     S.workspace(ws.id).members[0].role = 'member';

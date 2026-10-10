@@ -28,7 +28,12 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     realm, store: sessionStore,
     loadUser: async id => { const accounts = await accountStore.accounts(), raw = accounts.get(String(id)); return raw ? JSON.parse(raw).user : identityFor().findUser(id); },
     resolveWorkspace: (user, options) => contextService(options.revalidate ? options.frame?.authorizationSnapshot : undefined).resolveWorkspace(user, options),
-    contextFor: (user, options) => options.extra?.mode === 'identity' && options.extra.workspaceId === null && options.extra.audience === 'identity' && !options.principal?.readOnly ? { mode: 'identity', audience: 'identity', workspaceId: null, workspaceContext: null, scopes: [], staffAccess: null } : contextService().contextFor(user, options),
+    contextFor: (user, options) => {
+      const exiting = options.principal?.readOnly && String(user.id) === String(options.principal.actor.id) && /^\/api\/auth\/exit-impersonation(?:$|\?)/.test(options.request?.path || options.request?.url || '');
+      if (exiting) return contextService().contextFor(user, { ...options, extra: { ...options.extra, exitImpersonation: true } });
+      if (options.extra?.mode === 'identity' && options.extra.workspaceId === null && options.extra.audience === 'identity' && !options.principal?.readOnly) return { mode: 'identity', audience: 'identity', workspaceId: null, workspaceContext: null, scopes: [], staffAccess: null };
+      return contextService().contextFor(user, options);
+    },
   });
   function currentPrincipal(req) {
     const principal = req ? authority.verifiedFromReq(req) : requests.getStore()?.frame.principal;
