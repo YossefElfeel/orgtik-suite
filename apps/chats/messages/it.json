@@ -934,7 +934,7 @@
   "settings.ownerOnly": "solo proprietario",
   "settings.people": "Persone e ruoli",
   "settings.peopleCount": "{n, plural, one {# persona} other {# persone}}",
-  "settings.plan": "Abbonamento",
+  "settings.plan": "Piano",
   "settings.planActive": "Attivato. Il livello e il limite di utenti arrivano dalla suite.",
   "settings.planOff": "Non attivo.",
   "settings.planOpen": "Abbonamento e attivazione",
