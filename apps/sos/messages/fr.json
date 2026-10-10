@@ -860,6 +860,7 @@
       "marketing": "Marketing"
     },
     "toolStates": {
+      "free": "Forfait gratuit",
       "active": "Actif",
       "trial": "Essai",
       "beta": "Bêta",

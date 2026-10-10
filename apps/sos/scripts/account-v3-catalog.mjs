@@ -239,6 +239,7 @@ toolNames.hr|HR|الموارد البشرية|Personal|RH|Risorse umane
 toolNames.crm|CRM|إدارة العملاء|CRM|CRM|CRM
 toolNames.chat|Chats|المحادثات|Chats|Discussions|Chat
 toolNames.marketing|Marketing|التسويق|Marketing|Marketing|Marketing
+toolStates.free|Free plan|خطة مجانية|Kostenloser Plan|Forfait gratuit|Piano gratuito
 toolStates.active|Active|نشط|Aktiv|Actif|Attivo
 toolStates.trial|Trial|تجربة|Testversion|Essai|Prova
 toolStates.beta|Beta|تجريبي|Beta|Bêta|Beta

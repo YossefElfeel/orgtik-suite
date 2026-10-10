@@ -860,6 +860,7 @@
       "marketing": "التسويق"
     },
     "toolStates": {
+      "free": "خطة مجانية",
       "active": "نشط",
       "trial": "تجربة",
       "beta": "تجريبي",
