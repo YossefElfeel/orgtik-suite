@@ -23,6 +23,11 @@ function createWorkspaceRuntime(input, tool) {
       const access = context?.tools?.chat;
       if (context?.mode === 'public_resource' || context?.realm !== realm || context.workspace?.id !== input.workspace.id || !context.actor || !access || ['no_access', 'not_subscribed'].includes(access.access)) throw Object.assign(new Error('Chats bootstrap is not authorized.'), { status: 403 });
       return hooks.bootstrap(input.identity.findUser(context.actor.effectiveUserId));
+    },
+    connectedTaskAudience(context,messageId) {
+      const access=context?.tools?.chat;
+      if(context?.mode==='public_resource'||context?.realm!==realm||context.workspace?.id!==input.workspace.id||!context.actor||!access||['no_access','not_subscribed'].includes(access.access))throw Object.assign(new Error('Chats source is not authorized.'),{status:403});
+      return hooks.connectedTaskAudience(input.identity.findUser(context.actor.effectiveUserId),messageId);
     }, usage: hooks.usage, authorizeSharedTarget: hooks.authorizeSharedTarget, authorizeWhiteboardTarget: hooks.authorizeWhiteboardTarget, isWhiteboardCustodyTarget: hooks.isWhiteboardCustodyTarget, transferOwnership: hooks.transferOwnership, close: hooks.close,
   };
 }

@@ -164,6 +164,12 @@ function routes(router, ctx, options) {
   router.get('/api/hq/bootstrap', handle((_req, user) => bootstrap(user)));
   router.post('/api/hq/commands', handle((req, user) => command(req.body.event, user, req.get('Idempotency-Key') || req.body.operationId)));
   return {
+    connectedTaskAudience(user,messageId) {
+      const who=actor(user),message=db.messages.find(row=>row.id===messageId&&!row.deletedAt);
+      if(!message)reject(404,'message_not_found','Message not found.');
+      const channel=channelFor(message.channelId,who),readers=new Set(members().map(actorId));
+      return {restricted:channel.kind!=='public',userIds:channel.kind==='public'?[]:channel.memberIds.filter(id=>readers.has(id)).map(Number).filter(Number.isSafeInteger)};
+    },
     bootstrap, authorizeSharedTarget, authorizeWhiteboardTarget: whiteboards.authorizeTarget, isWhiteboardCustodyTarget: whiteboards.custodyEligible, exportState: () => codec.encode(state), usage: () => [{ key: 'chat.messages', used: db.messages.length }], close() {},
     transferOwnership({ fromUserId, target, operationId }) {
       if (!Number.isSafeInteger(fromUserId) || !codec.id(operationId) || !target || !['member', 'archive'].includes(target.kind)) reject(422, 'invalid_custody', 'Choose a custody destination.');
