@@ -90,8 +90,13 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     return { items, meta };
   }));
   app.get('/api/suite/tasks/projects', read(req => {
-    connectors.requireConnection(workspace, currentContext(), String(req.query.source), 'tasks', { targetWrite: true });
-    return runtimeFor('tasks').connectedProjects(currentContext());
+    const ctx = currentContext(), source = String(req.query.source);
+    connectors.requireConnection(workspace, ctx, source, 'tasks', { targetWrite: true });
+    const tasks = runtimeFor('tasks'), projects = tasks.connectedProjects(ctx);
+    if (source !== 'chat') return projects;
+    const audience = runtimeFor('chat').connectedTaskAudience(ctx, String(req.query.sourceId || ''));
+    const readers = new Set(audience.userIds);
+    return audience.restricted ? projects.filter(project => tasks.projectAudience(ctx, project.id).userIds.every(id => readers.has(id))) : projects;
   }));
   app.get('/api/suite/tasks/references', read(req => {
     const ctx = currentContext(), source = String(req.query.source), sourceId = String(req.query.sourceId || ''), ids = String(req.query.ids || '').split(',').filter(Boolean).map(Number);
@@ -139,6 +144,11 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     if (!ctx.tools[source].canWrite) throw fail(403, 'source_permission_required', 'Your source role cannot create connected tasks.');
     const projection = runtimeFor(source).bootstrap(ctx), rows = source === 'chat' ? projection.messages : source === 'hr' ? projection.employees : body.sourceType === 'contact' ? projection.contacts : projection.projects;
     if (!rows?.some(row => String(row.id) === String(body.sourceId))) throw fail(404, 'source_not_found', 'This source record was not found.');
+    if (source === 'chat') {
+      const audience = runtimeFor('chat').connectedTaskAudience(ctx, String(body.sourceId));
+      const readers = new Set(audience.userIds);
+      if (audience.restricted && runtimeFor('tasks').projectAudience(ctx, body.projectId).userIds.some(id => !readers.has(id))) throw fail(403, 'source_audience_mismatch', 'Choose a project whose readers can also see this conversation.');
+    }
     const operationId = req.get('idempotency-key') || body.operationId;
     if (!/^[\w.:-]{1,200}$/.test(operationId || '')) throw fail(422, 'operation_id_required', 'Supply the original action reference.');
     const operation = require('./workspace-command').makeWorkspaceOperation({ id: operationId, workspaceId: workspace.id, actor: { userId: actor.id }, method: 'POST', path: '/api/suite/tasks', body });
