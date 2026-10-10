@@ -235,7 +235,7 @@ module.exports = function campaignRoutes(app, { ctx, getDb, views, h, tick }) {
       c.onboardingStep = "REVIEW";
       return null;
     },
-    MESSAGE(c, b) {
+    async MESSAGE(c, b) {
       const db = getDb();
       const sets = Array.isArray(b.adSets) ? b.adSets : [];
       if (!sets.length) return "Add the message configuration";
@@ -250,20 +250,22 @@ module.exports = function campaignRoutes(app, { ctx, getDb, views, h, tick }) {
         const template = db.templates.find((x) => x.id === cfg.templateId && (!x.projectId || x.projectId === c.projectId));
         if (!template) return "Select or create a template before continuing";
         if (template.channel !== channel) return `The selected template is not a ${channel} template`;
-        const audience = db.audiences.find((a) => a.id === cfg.audienceId && a.projectId === c.projectId);
-        const imp = db.imports.find((x) => x.id === (cfg.importId || cfg.audienceId) && x.projectId === c.projectId);
-        if (!audience && !imp) return "Select an audience (or upload a contact list) first";
-        const segment = cfg.segmentId ? db.segments.find((x) => x.id === cfg.segmentId && x.projectId === c.projectId) : null;
-        if (cfg.segmentId && !segment) return "The selected segment was not found";
-        const name = String(s.name || audience?.name || imp?.fileName || "Audience");
+        const refs = cfg.crmRecipientRefs || c.crmRecipientRefs;
+        if (!Array.isArray(refs) || !refs.length || refs.length > 200 || refs.some(ref => ref.workspaceId !== ctx.workspaceId || typeof ref.contactId !== "string")) return "Choose actual CRM recipients on the audience step first";
+        if (!ctx.crmDirectory) throw Object.assign(new Error("Review the current CRM connection"), { status: 503 });
+        const current = await ctx.crmDirectory.resolve({ contactIds: refs.map(ref => ref.contactId) });
+        if (refs.some(ref => !current.contacts.some(contact => contact.id === ref.contactId))) return "A current CRM recipient is unavailable";
+        const name = String(s.name || "CRM contacts");
         out.push({
           id: c.adSets[0]?.id || newId(), name, platform: null, deliveryPlatform: channel, integrationId: null, startAt: null, endAt: null,
-          configuration: { channel, audienceId: cfg.audienceId, ...(segment ? { segmentId: segment.id } : {}), ...(imp ? { importId: imp.id } : {}), senderConfigId: sender.id, templateId: template.id }, ads: [],
+          configuration: { channel, crmRecipientRefs: clone(refs), senderConfigId: sender.id, templateId: template.id }, ads: [],
         });
       }
       if (b.startAt !== undefined) c.startAt = parseDate(b.startAt, null);
       c.endAt = null;
       c.adSets = out;
+      c.crmRecipientRefs = clone(out[0].configuration.crmRecipientRefs);
+      c.configuration = { ...c.configuration, crmRecipientRefs: clone(c.crmRecipientRefs), senderConfigId: out[0].configuration.senderConfigId, templateId: out[0].configuration.templateId, v3TemplateVersion: db.templates.find(t => t.id === out[0].configuration.templateId)?.v3Version || 0 };
       c.onboardingStep = "REVIEW";
       return null;
     },
@@ -284,13 +286,13 @@ module.exports = function campaignRoutes(app, { ctx, getDb, views, h, tick }) {
     },
   };
 
-  app.patch("/campaigns/:id/onboarding", withCampaign((req, res, u, c) => {
+  app.patch("/campaigns/:id/onboarding", withCampaign(async(req, res, u, c) => {
     const b = req.body || {};
     const step = String(b.step || "").toUpperCase();
     const handler = STEP_HANDLERS[step];
     if (!handler) return error(res, 400, `Unknown onboarding step "${b.step}"`);
     const before = JSON.stringify({ n: c.name, d: c.description, s: c.startAt, e: c.endAt, cfg: c.configuration, a: c.adSets });
-    const problem = handler(c, b, u);
+    const problem = await handler(c, b, u);
     if (problem) return error(res, 422, problem);
     if (step !== "REVIEW" && before !== JSON.stringify({ n: c.name, d: c.description, s: c.startAt, e: c.endAt, cfg: c.configuration, a: c.adSets })) markEdited(c);
     c.updatedAt = nowIso();

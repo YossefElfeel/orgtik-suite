@@ -102,3 +102,21 @@ test('Marketing current feed visibility and extension custody preserve attributi
   assert.equal((await http.call(0,'POST','/v3/writing',{topic:'Denied topic',locale:'ar'})).status,403);assert.deepEqual(plain(f.instance.exportSnapshot()),after);
  }finally{await http.close();}
 });
+test('Marketing ordinary messaging constructor saves canonical CRM references and retires duplicate imports',async()=>{
+ const f=fixture(),http=await harness([f]);
+ try{
+  const before=plain(f.instance.exportSnapshot());
+  assert.equal((await http.call(0,'POST','/audiences/imports',{})).status,410);
+  assert.equal((await http.call(0,'POST','/audiences/imports/legacy/commit',{})).status,410);
+  assert.deepEqual(plain(f.instance.exportSnapshot()),before);
+  const sender=(await http.call(0,'POST','/v3/senders',{name:'Canonical sender',from:'hello@example.test'})).json.data;
+  const template=(await http.call(0,'POST','/v3/email-designs',{name:'Canonical template',senderId:sender.id})).json.data;
+  const campaign=(await http.call(0,'POST','/campaigns',{name:'Actual canonical messaging campaign',type:'MESSAGING'})).json.data;
+  const refs=[{workspaceId:'ws_orgtik',contactId:f.contacts[0].id}],body={step:'MESSAGE',adSets:[{name:'Canonical recipients',configuration:{channel:'EMAIL',senderConfigId:sender.id,templateId:template.id,crmRecipientRefs:refs}}]};
+  assert.equal((await http.call(0,'PATCH',`/campaigns/${campaign.id}/onboarding`,body)).status,200);
+  const saved=plain(f.instance.exportSnapshot()),actual=saved.data.campaigns.find(c=>c.id===campaign.id);
+  assert.deepEqual(actual.crmRecipientRefs,refs);assert.deepEqual(actual.adSets[0].configuration.crmRecipientRefs,refs);assert.equal(actual.adSets[0].configuration.audienceId,undefined);assert.equal(actual.configuration.templateId,template.id);assert.equal(saved.data.audiences.length,before.data.audiences.length);
+  const invalid={...body,adSets:[{...body.adSets[0],configuration:{...body.adSets[0].configuration,crmRecipientRefs:[{workspaceId:'ws_orgtik',contactId:'foreign'}]}}]};
+  assert.equal((await http.call(0,'PATCH',`/campaigns/${campaign.id}/onboarding`,invalid)).status,422);assert.deepEqual(plain(f.instance.exportSnapshot()),saved);
+ }finally{await http.close();}
+});
