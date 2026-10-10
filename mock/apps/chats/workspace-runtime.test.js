@@ -102,3 +102,30 @@ test('Chats receipts recheck current channel membership before returning prior s
     assert.equal(first.instance.exportSnapshot().data.messages.length, 1);
   } finally { await api.close(); }
 });
+
+
+test('connected task audience keeps private/group/DM messages within current admitted source readers',async()=>{
+  const first=runtime('chats','one'),api=await harness([first]),context={mode:'workspace',realm:'isolated',workspace:{id:'one'},actor:{effectiveUserId:1},tools:{chat:{access:'active'}}};
+  try{
+    await api.call(0,'POST','/api/hq/commands',{event:create('private-source')},{'Idempotency-Key':'audience-create'});
+    const response=await api.call(0,'POST','/api/hq/commands',{event:event('private-source','Private source')},{'Idempotency-Key':'audience-message'}),messageId=response.json.data.messages[0].id;
+    assert.deepEqual(plain(first.instance.connectedTaskAudience(context,messageId)),{restricted:true,userIds:[1,2]});
+    assert.throws(()=>first.instance.connectedTaskAudience({...context,workspace:{id:'other'}},messageId),/not authorized/);
+    assert.throws(()=>first.instance.connectedTaskAudience({...context,mode:'public_resource'},messageId),/not authorized/);
+    first.identity.users[1].isActive=false;
+    assert.deepEqual(plain(first.instance.connectedTaskAudience(context,messageId)),{restricted:true,userIds:[1]});
+    assert.throws(()=>first.instance.connectedTaskAudience({...context,actor:{effectiveUserId:2}},messageId),/assigned Chats member/);
+    assert.throws(()=>first.instance.connectedTaskAudience(context,'missing-message'),/Message not found/);
+  }finally{await api.close();}
+});
+test('public source metadata is marked unrestricted while an unjoined member cannot read a private source',async()=>{
+  const first=runtime('chats','one'),api=await harness([first]),context={mode:'workspace',realm:'isolated',workspace:{id:'one'},actor:{effectiveUserId:1},tools:{chat:{access:'active'}}};
+  try{
+    await api.call(0,'POST','/api/hq/commands',{event:create('public-source',['1'],'public')},{'Idempotency-Key':'public-create'});
+    const pub=await api.call(0,'POST','/api/hq/commands',{event:event('public-source','Public source')},{'Idempotency-Key':'public-message'});
+    assert.deepEqual(plain(first.instance.connectedTaskAudience(context,pub.json.data.messages[0].id)),{restricted:false,userIds:[]});
+    await api.call(0,'POST','/api/hq/commands',{event:create('only-owner',['1'])},{'Idempotency-Key':'private-create'});
+    const pri=await api.call(0,'POST','/api/hq/commands',{event:event('only-owner','Owner only')},{'Idempotency-Key':'private-message'}),messageId=pri.json.data.messages.find(m=>m.channelId==='only-owner').id;
+    assert.throws(()=>first.instance.connectedTaskAudience({...context,actor:{effectiveUserId:2}},messageId),/Conversation not found/);
+  }finally{await api.close();}
+});
