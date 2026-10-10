@@ -23,8 +23,9 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
   const requests = new AsyncLocalStorage(), privateFrames = new Map();
   let initialized = false;
   const contextService = snapshot => createContextService({ realm, identity: identityFor(), platform: () => snapshot ? { db: snapshot.db, workspace: id => snapshot.db.workspaces.find(row => row.id === id), now: () => clock.now() } : platform().getStore() });
+  const sessionStore = sessionStorage.pickStore(config, { realm });
   const authority = createSessionAuthority({
-    realm, store: sessionStorage.pickStore(config, { realm }),
+    realm, store: sessionStore,
     loadUser: async id => { const accounts = await accountStore.accounts(), raw = accounts.get(String(id)); return raw ? JSON.parse(raw).user : identityFor().findUser(id); },
     resolveWorkspace: (user, options) => contextService(options.revalidate ? options.frame?.authorizationSnapshot : undefined).resolveWorkspace(user, options),
     contextFor: (user, options) => contextService().contextFor(user, options),
@@ -565,7 +566,8 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
             if (write) { suiteReadRuntimes.delete(appKey); relatedRuntimes.set(appKey, candidate); }
             return candidate;
           };
-          app = require('./workspace-suite').createSuiteRouter({ S, identity, principal, runtimeFor, command: (tool, kind, payload, operationId) => {
+          const accountActions = require('./workspace-account-actions').createAccountActions({ S, identity, principal, workspace: S.workspace(context.workspace.id), sessionStore, authority, token: identity.tokenFrom(req), frame });
+          app = require('./workspace-suite').createSuiteRouter({ S, identity, principal, runtimeFor, accountActions, command: (tool, kind, payload, operationId) => {
             request.runtime = runtimeFor(tool, true);
             return executeCommand(kind, payload, { workspaceId: context.workspace.id, actor: { userId: principal.user.id }, operationId });
           } });
@@ -612,7 +614,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       if (changed) {
         const identityEffect = { changes, ...(store.kind === "redis" ? { accountsKey: `orgtik:identity:${realm}:accounts`, emailsKey: `orgtik:identity:${realm}:emails` } : {}) };
         const entry = { epoch: persist.epoch, kind: "workspace-v1", app: key, method: req.method, url, headers: {}, body: null, at: clock.now(), checkpoint: encodeDomainCheckpoint({ platformState: after, workspaceState, staffState }) };
-        if (!/^\/api\/auth\/logout(?:-all)?(?:$|\?)/.test(url)) await authority.revalidatePrepared(frame);
+        if (!frame.accountSessionExit && !/^\/api\/auth\/logout(?:-all)?(?:$|\?)/.test(url)) await authority.revalidatePrepared(frame);
         commitAttempted = true;
         const committed = await store.commit(entry, { expectedEpoch: persist.epoch, expectedRevision: persist.applied, identity: identityEffect });
         persist.applied = committed.sequence; persist.modern = true; persist.workspaceModern = true;

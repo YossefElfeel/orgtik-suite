@@ -20,11 +20,16 @@ function savePreferences(actor, patch) {
   actor.profile ??= {}; actor.profile.suitePreferences = { ...preferences(actor), ...clone(patch) };
   return preferences(actor);
 }
-function createSuiteRouter({ S, identity, principal, runtimeFor, command }) {
+function createSuiteRouter({ S, identity, principal, runtimeFor, command, accountActions }) {
   const app = express(); app.use(cors({ origin: true, credentials: true })); app.use(express.json({ limit: '200kb' }));
   const context = principal.context.workspaceContext, workspace = context && S.workspace(context.workspace.id), actor = identity.findUser(principal.user.id);
   if (!workspace || !actor) throw fail(403, 'workspace_required', 'Choose a workspace to continue.');
   const currentContext = () => resolveWorkspaceContext(S, identity, actor, { realm: context.realm, workspaceId: workspace.id, actorUserId: principal.actor.id, readOnly: principal.readOnly, audience: principal.claims.aud });
+  // Account-owned settings/projectors are supplied by its domain module; the
+  // guarded authority effects remain rooted in the existing boundary adapter.
+  const accountFile = require('node:path').join(__dirname, '../apps/sos/workspace-features.js');
+  if (require('node:fs').existsSync(accountFile)) require(accountFile).create({ S, identity, workspace, actor, principal, currentContext, runtimeFor, actions: accountActions }).routes(app, '/api/suite/account');
+  else app.use('/api/suite/account', (_req, res) => res.status(503).json({ success: false, code: 'account_features_pending', message: 'The Account feature module is still being prepared.' }));
   const read = fn => (req, res, next) => { try { Promise.resolve(fn(req)).then(data => res.set('Cache-Control', 'private, no-store').json({ success: true, data }), next); } catch (error) { next(error); } };
   const write = fn => read(req => { connectors.writable(workspace, currentContext()); return fn(req); });
   const admittedTools = () => Object.entries(currentContext().tools).filter(([, access]) => connectors.admitted(access)).map(([tool]) => tool);
