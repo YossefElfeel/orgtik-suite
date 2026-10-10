@@ -7,6 +7,7 @@ import { Button, toast, useFormatter } from "@orgtik/ui";
 import { PublicPreview } from "@/components/public-share/PublicPreview";
 import { PublicSharePasswordForm } from "@/components/public-share/PublicSharePasswordForm";
 import { PublicShareHeader } from "@/components/public-share/PublicShareHeader";
+import { PublicSampleRequest } from "./PublicSampleRequest";
 import {
   PublicShareFolderView,
   type BreadcrumbEntry,
@@ -193,6 +194,7 @@ export function PublicShareViewer({
       skip:
         phase !== "ready" ||
         !metadata ||
+        metadata.purpose === "upload_request" ||
         metadata.resource.type !== "folder" ||
         selectedFile != null,
     },
@@ -263,6 +265,7 @@ export function PublicShareViewer({
   }
 
   if (!metadata) return null;
+  if (metadata.purpose === "upload_request") return <PublicSampleRequest shareId={shareId} metadata={metadata} />;
 
   const canDownload = metadata.capabilities.canDownload;
   const canPreview = metadata.capabilities.canPreview;

@@ -27,7 +27,8 @@ function createWorkspaceRuntime(input, tool, manifest) {
     else state = buildSeed({ identity: input.identity, manifest, seedAt: input.initialization.seedAt });
   }
   const router = express.Router();
-  let shared;
+  let shared, features;
+  router.use((req, res, next) => features ? features.middleware(req, res, next) : next());
   const ownRoute = fn => (req, res) => {
     const user = input.identity.requireUser(req, res); if (!user) return;
     try { ctx.util.ok(res, fn(req, user), 'Files sample request completed', req.method === 'POST' ? 201 : 200); }
@@ -37,7 +38,7 @@ function createWorkspaceRuntime(input, tool, manifest) {
   router.post('/api/v1/files/samples', ownRoute((req, user) => {
     const body = req.body;
     if (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).some(key => !['sampleId', 'parentId'].includes(key))) throw Object.assign(new Error('Only the sample and destination folder can be supplied.'), { status: 422, code: 'invalid_sample_payload' });
-    return shared.createSample({ actorId: user.id, ...body, operationId: req.get('idempotency-key') });
+    return createSample({ actorId: user.id, ...body, operationId: req.get('idempotency-key') });
   }));
   router.get('/api/v1/files/:fileId/versions/:versionId', ownRoute((req, user) => shared.getVersionMetadata({ actorId: user.id, fileId: req.params.fileId, versionId: req.params.versionId })));
   const versionBytes = preview => (req, res, next) => {
@@ -57,6 +58,18 @@ function createWorkspaceRuntime(input, tool, manifest) {
   created = true;
   const hooks = tool.routes(router, { ...ctx, identity: input.identity, workspaceServices: input.services, commands: input.services.commands }, { state, seedAt: input.initialization.seedAt });
   shared = createWorkspaceFiles({ state, identity: input.identity, workspaceId: input.workspace.id, realm, manifest, assetDir: path.resolve(__dirname, '../../apps/files/assets'), boardAuthority: ctx.boardAuthority, now: () => new Date().toISOString(), fileOut: hooks.serializeFile });
+  features = require('../../apps/files/v3').create({ state, identity: input.identity, ctx, manifest, hooks, shared, workspaceId: input.workspace.id });
+  function createSample(args) {
+    shared.authorizeWhiteboard({ actorId: args.actorId, parentId: args.parentId, write: true });
+    if (!state.sampleOperations?.has(`${args.actorId}:${args.operationId}`)) features.quota(manifest[args.sampleId]?.size || 0);
+    return shared.createSample(args);
+  }
+  const currentUser = context => {
+    const access = context?.tools?.files, user = input.identity.findUser(context?.actor?.effectiveUserId);
+    if (!user || user.isActive === false || context.realm !== realm || context.workspace?.id !== input.workspace.id || !access?.roles?.length || ['no_access', 'not_subscribed'].includes(access.access)) throw Object.assign(new Error('Files access is required.'), { status: 403 });
+    return user;
+  };
+  const boardBytes = args => require('../whiteboard-scene').serializeWhiteboardScene(args.scene);
   return {
     router,
     exportSnapshot: () => ({ schema, version: 1, realm, workspaceId: input.workspace.id, appKey: 'files', ...hooks.exportState(), ...(fixtureId ? { fixtureId } : {}) }),
@@ -68,9 +81,19 @@ function createWorkspaceRuntime(input, tool, manifest) {
     },
     listSharedFiles: shared.listSharedFiles, resolveSharedFile: shared.resolveSharedFile, contentSharedFile: shared.contentSharedFile,
     packageServiceDelivery: shared.packageServiceDelivery,
-    createSample: shared.createSample, sampleCatalog: shared.sampleCatalog,
-    authorizeWhiteboard: shared.authorizeWhiteboard, createWhiteboard: shared.createWhiteboard, saveWhiteboard: shared.saveWhiteboard, resolveWhiteboard: shared.resolveWhiteboard, getVersionMetadata: shared.getVersionMetadata,
-    usage: hooks.usage, transferOwnership: hooks.transferOwnership, close() { shared.close(); hooks.close(); },
+    createSample, sampleCatalog: shared.sampleCatalog,
+    authorizeWhiteboard: shared.authorizeWhiteboard,
+    createWhiteboard: args => {
+      shared.authorizeWhiteboard({ ...args, write: true });
+      if (typeof ctx.boardAuthority?.authorize !== 'function') throw Object.assign(new Error('Whiteboard authority is unavailable.'), { status: 503, code: 'whiteboard_authority_unavailable' });
+      const admitted = ctx.boardAuthority.authorize({ boardId: args.boardId, actorId: args.actorId, write: true });
+      if (admitted?.then) throw Object.assign(new Error('Whiteboard authority must be synchronous.'), { status: 503, code: 'whiteboard_authority_unavailable' });
+      features.quota(boardBytes(args).size); return shared.createWhiteboard(args);
+    },
+    saveWhiteboard: args => { shared.authorizeWhiteboard({ ...args, write: true }); const value = boardBytes(args), file = state.files.get(args.fileId), head = file?.versions?.find(row => row.id === file.currentVersionId); if (head?.hash !== value.hash) features.quota(value.size); return shared.saveWhiteboard(args); },
+    resolveWhiteboard: shared.resolveWhiteboard, getVersionMetadata: shared.getVersionMetadata,
+    suiteFeed: context => features.feed(currentUser(context)), suiteExport: context => features.exportVisible(currentUser(context)),
+    usage: () => [{ key: 'files.storage_gb', used: features.retainedBytes() / 1024 ** 3 }], transferOwnership: hooks.transferOwnership, close() { shared.close(); hooks.close(); },
   };
 }
 

@@ -1,0 +1,54 @@
+{
+  "scope": "Ordinary Files routes, actual signed workspace identities, persisted packaged assets and protected shares in owned offset700 sandbox.",
+  "mode": "connections",
+  "checks": [
+    {
+      "name": "Protected byte response /api/v1/files/2124a3a8-eaab-4705-8bae-f53b2f72de9f/versions/v1/download",
+      "pass": true
+    },
+    {
+      "name": "Ordinary Tasks picker attaches exact Files tuple/version",
+      "pass": true
+    },
+    {
+      "name": "Ordinary Chats picker sends exact Files tuple/version",
+      "pass": true
+    },
+    {
+      "name": "Protected byte response /api/shared/files/2124a3a8-eaab-4705-8bae-f53b2f72de9f/versions/v1/content?resourceType=task&resourceId=1067&referenceId=331",
+      "pass": true
+    },
+    {
+      "name": "Task attachment remains pinned after v2",
+      "pass": true
+    },
+    {
+      "name": "Protected byte response /api/shared/files/2124a3a8-eaab-4705-8bae-f53b2f72de9f/versions/v1/content?resourceType=message&resourceId=m-03cceeb8-528d-4d32-aed5-82315bb82d5e&referenceId=2124a3a8-eaab-4705-8bae-f53b2f72de9f%3Av1",
+      "pass": true
+    },
+    {
+      "name": "Chat attachment remains pinned after v2",
+      "pass": true
+    },
+    {
+      "name": "Structured board retains actual source association",
+      "pass": true
+    },
+    {
+      "name": "Source board action uses actual signed handoff with board/version query",
+      "pass": true
+    },
+    {
+      "name": "No unexpected browser runtime or console errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    "tasks-pinned-attachment.png",
+    "chats-pinned-attachment.png",
+    "source-board.png"
+  ],
+  "errors": [],
+  "completed": true
+}

@@ -1,6 +1,4 @@
 import { BackgroundUploadProvider } from "@/providers/background-upload-provider";
-import { BackgroundUploadPanel } from "@/components/layout/BackgroundUploadPanel";
-import { GlobalDropZone } from "@/components/layout/GlobalDropZone";
 import { SuiteFrame } from "@/components/suite/SuiteFrame";
 import { WorkspaceSessionGate } from '@/components/suite/WorkspaceSessionGate';
 
@@ -13,9 +11,7 @@ export default function DashboardLayout({
 }>) {
   return (
     <WorkspaceSessionGate><BackgroundUploadProvider>
-      <GlobalDropZone />
       <SuiteFrame>{children}</SuiteFrame>
-      <BackgroundUploadPanel />
     </BackgroundUploadProvider></WorkspaceSessionGate>
   );
 }

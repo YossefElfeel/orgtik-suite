@@ -1,0 +1,19 @@
+{
+  "checks": [
+    {
+      "name": "One ordinary global notification trigger",
+      "pass": true
+    },
+    {
+      "name": "No presentation navigation",
+      "pass": true
+    },
+    {
+      "name": "Visible current library record",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "console": [],
+  "completed": true
+}
