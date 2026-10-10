@@ -35,7 +35,7 @@ export function DeleteDialog({
       onSuccessText={t("delete")}
       onSuccess={onConfirm}
       isLoading={isLoading}
-      successVariant="destructive"
+      successVariant="danger"
       successClassName="bg-destructive text-white hover:bg-destructive/90 hover:text-white"
     >
       <p className="text-base text-muted-foreground">

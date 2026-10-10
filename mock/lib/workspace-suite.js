@@ -5,6 +5,7 @@ const people = require('./workspace-people');
 const { TOOL_DEFINITIONS, resolveWorkspaceContext, guestToolRoles } = require('./workspace-context');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
 const clone = value => JSON.parse(JSON.stringify(value));
+const chatMessages = data => [...(data.messages || []), ...Object.values(data.threadReplies || {}).flat()];
 const ADMIN_ROLES = { tasks: ['super_admin', 'project_manager'], files: ['super_admin'], hr: ['super_admin', 'hr'], crm: ['admin', 'manager'], marketing: ['super_admin', 'marketing_manager'], chat: ['owner', 'admin'] };
 function requireToolAdmin(context, tool) {
   const access = context.tools[tool];
@@ -82,6 +83,55 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     if (query.length > 200) throw fail(422, 'invalid_directory_query', 'Use a shorter directory search.');
     return { workspaceId: workspace.id, managedIn: 'crm', contacts: data.contacts.filter(row => !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200).map(row => ({ workspaceId: workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
   }));
+  function marketingWriteContext(req, keys) {
+    const ctx = currentContext();
+    connectors.requireConnection(workspace, ctx, 'marketing', 'crm', { targetWrite: true });
+    if (!ctx.tools.marketing.canWrite || ctx.member.role === 'guest' || !ctx.tools.marketing.roles.some(role => ['super_admin', 'marketing_manager', 'marketing_specialist'].includes(role))) throw fail(403, 'marketing_write_required', 'Current Marketing writer access is required.');
+    if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body) || Object.keys(req.body).some(key => !keys.includes(key)) || req.body.workspaceId !== undefined && req.body.workspaceId !== workspace.id) throw fail(422, 'invalid_marketing_command', 'Choose a current source workspace and supported action fields.');
+    return ctx;
+  }
+  function marketingOperation(req, run) {
+    const operationId = req.get('idempotency-key') || req.body.operationId;
+    if (!/^[\w.:-]{1,200}$/.test(operationId || '')) throw fail(422, 'operation_id_required', 'Supply the original Marketing action reference.');
+    const operation = require('./workspace-command').makeWorkspaceOperation({ id: operationId, workspaceId: workspace.id, actor: { userId: actor.id }, method: 'POST', path: req.path, body: req.body });
+    const key = `${actor.id}:marketing:${operationId}`, prior = workspace.commandOperations?.[key];
+    if (prior) { if (prior.fingerprint !== operation.fingerprint) throw fail(409, 'operation_conflict', 'Retry the original Marketing action unchanged.'); return clone(prior.result); }
+    const result = run(); workspace.commandOperations ??= {}; workspace.commandOperations[key] = { fingerprint: operation.fingerprint, result: clone(result) }; return result;
+  }
+  app.post('/api/suite/crm/consent', write(req => {
+    const ctx = marketingWriteContext(req, ['workspaceId', 'contactId', 'state', 'operationId']);
+    runtimeFor('crm').marketingContact(ctx, req.body.contactId);
+    if (!['unknown', 'opted_in', 'opted_out'].includes(req.body.state)) throw fail(422, 'invalid_marketing_consent', 'Choose an explicit consent state.');
+    return marketingOperation(req, () => {
+      const result = runtimeFor('crm', true).setMarketingConsent(ctx, req.body.contactId, req.body.state);
+      S.log(actor.key, 'marketing_consent_recorded', String(req.body.contactId), { workspaceId: workspace.id, tool: 'marketing', state: req.body.state });
+      return { workspaceId: workspace.id, contactId: result.id, consent: result.marketingConsent };
+    });
+  }));
+  app.post('/api/suite/marketing/campaigns/:id/lead', write(req => {
+    const ctx = marketingWriteContext(req, ['workspaceId', 'contactId', 'title', 'estimate', 'operationId']), marketing = runtimeFor('marketing'), candidate = marketing.campaignCandidate(ctx, req.params.id);
+    if (!candidate.capabilities?.canLead) throw fail(403, 'campaign_lead_forbidden', 'This current campaign cannot create CRM leads.');
+    if (!candidate.recipientRefs.some(ref => ref.workspaceId === workspace.id && ref.contactId === req.body.contactId)) throw fail(422, 'campaign_recipient_required', 'Choose an actual recipient of this campaign.');
+    runtimeFor('crm').marketingContact(ctx, req.body.contactId);
+    return marketingOperation(req, () => {
+      const receipt = runtimeFor('crm', true).createCampaignLead(ctx, candidate, req.body.contactId, req.body);
+      const result = { workspaceId: workspace.id, campaignId: candidate.id, operationId: req.get('idempotency-key') || req.body.operationId, ...receipt, contactPath: `/customers/${encodeURIComponent(receipt.leadId)}`, projectPath: `/projects/${encodeURIComponent(receipt.projectId)}` };
+      runtimeFor('marketing', true).recordAttribution(ctx, candidate.id, result);
+      S.log(actor.key, 'campaign_lead_created', String(receipt.projectId), { workspaceId: workspace.id, tool: 'marketing', campaignId: candidate.id });
+      return result;
+    });
+  }));
+  app.get('/api/suite/marketing/campaigns/:id/results', read(req => {
+    const ctx = currentContext(); connectors.requireConnection(workspace, ctx, 'marketing', 'crm');
+    const candidate = runtimeFor('marketing').campaignCandidate(ctx, req.params.id), crm = runtimeFor('crm').suiteFeed(ctx), deals = [];
+    for (const receipt of candidate.results) {
+      const project = crm.projects.find(row => row.id === receipt.projectId), contact = crm.contacts.find(row => row.id === project?.contactId);
+      if (!project || !contact) continue;
+      deals.push({ leadId: contact.id, projectId: project.id, title: project.projectName, status: project.status, won: project.won, value: project.value, estimatedValue: project.estimatedValue, currency: project.currency, attribution: contact.attribution, contactPath: `/customers/${encodeURIComponent(contact.id)}`, projectPath: `/projects/${encodeURIComponent(project.id)}` });
+    }
+    const currencies = [...new Set(deals.map(row => row.currency))].map(currency => ({ currency, deals: deals.filter(row => row.currency === currency).length, wonValue: deals.filter(row => row.currency === currency && row.won).reduce((sum, row) => sum + row.value, 0), pipelineEstimate: deals.filter(row => row.currency === currency && !row.won).reduce((sum, row) => sum + row.estimatedValue, 0) }));
+    return { workspaceId: workspace.id, campaignId: candidate.id, deals, currencies, receipts: candidate.results.filter(row => deals.some(deal => deal.projectId === row.projectId)) };
+  }));
   app.get('/api/suite/projects', read(req => {
     connectors.requireConnection(workspace, currentContext(), 'hr', 'tasks');
     const query = String(req.query.search || '').toLocaleLowerCase();
@@ -92,6 +142,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
   app.get('/api/suite/tasks/projects', read(req => {
     const ctx = currentContext(), source = String(req.query.source);
     connectors.requireConnection(workspace, ctx, source, 'tasks', { targetWrite: true });
+    if (source === 'marketing') runtimeFor('marketing').campaignCandidate(ctx, String(req.query.sourceId || ''));
     const tasks = runtimeFor('tasks'), projects = tasks.connectedProjects(ctx);
     if (source !== 'chat') return projects;
     const audience = runtimeFor('chat').connectedTaskAudience(ctx, String(req.query.sourceId || ''));
@@ -100,11 +151,14 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
   }));
   app.get('/api/suite/tasks/references', read(req => {
     const ctx = currentContext(), source = String(req.query.source), sourceId = String(req.query.sourceId || ''), ids = String(req.query.ids || '').split(',').filter(Boolean).map(Number);
-    if (!['hr', 'crm', 'chat'].includes(source) || !sourceId || ids.length > 50 || ids.some(id => !Number.isSafeInteger(id) || id < 1)) throw fail(422, 'invalid_references', 'Choose up to fifty source-owned task references.');
+    if (!['hr', 'crm', 'chat', 'marketing'].includes(source) || !sourceId || ids.length > 50 || ids.some(id => !Number.isSafeInteger(id) || id < 1)) throw fail(422, 'invalid_references', 'Choose up to fifty source-owned task references.');
     const connection = connectors.list(workspace, ctx).find(row => row.source === source && row.target === 'tasks');
     if (!connection?.enabled || !connectors.admitted(ctx.tools[source]) || !connectors.admitted(ctx.tools.tasks)) throw fail(403, 'connection_access_required', 'Current source and Tasks access are required.');
-    const data = runtimeFor(source).bootstrap(ctx), records = source === 'hr' ? data.employees : source === 'chat' ? data.messages : [...data.contacts, ...data.projects];
-    if (!records.some(row => String(row.id) === sourceId)) throw fail(404, 'source_not_found', 'This source record was not found.');
+    if (source === 'marketing') runtimeFor('marketing').campaignCandidate(ctx, sourceId);
+    else {
+      const data = runtimeFor(source).bootstrap(ctx), records = source === 'hr' ? data.employees : source === 'chat' ? chatMessages(data) : [...data.contacts, ...data.projects];
+      if (!records.some(row => String(row.id) === sourceId)) throw fail(404, 'source_not_found', 'This source record was not found.');
+    }
     return runtimeFor('tasks').suiteFeed(ctx).tasks.filter(task => ids.includes(task.id) && task.source?.app === source && String(task.source.id) === sourceId).map(task => ({ id: task.id, title: task.title, status: task.status, path: `/projects/${task.projectId}/lists?task-id=${task.id}` }));
   }));
   const services = require('../apps/sales/service-catalog');
@@ -139,11 +193,17 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
   });
   app.post('/api/suite/tasks', write(req => {
     const ctx = currentContext(), body = req.body, source = body.source;
-    if (!['chat', 'crm', 'hr'].includes(source) || typeof body.sourceId !== 'string' && typeof body.sourceId !== 'number') throw fail(422, 'invalid_source', 'Choose a current source record.');
+    if (!['chat', 'crm', 'hr', 'marketing'].includes(source) || typeof body.sourceId !== 'string' && typeof body.sourceId !== 'number') throw fail(422, 'invalid_source', 'Choose a current source record.');
     connectors.requireConnection(workspace, ctx, source, 'tasks', { targetWrite: true });
     if (!ctx.tools[source].canWrite) throw fail(403, 'source_permission_required', 'Your source role cannot create connected tasks.');
-    const projection = runtimeFor(source).bootstrap(ctx), rows = source === 'chat' ? projection.messages : source === 'hr' ? projection.employees : body.sourceType === 'contact' ? projection.contacts : projection.projects;
-    if (!rows?.some(row => String(row.id) === String(body.sourceId))) throw fail(404, 'source_not_found', 'This source record was not found.');
+    if (source === 'marketing') {
+      const candidate = runtimeFor(source).campaignCandidate(ctx, String(body.sourceId));
+      if (!candidate.capabilities.canLead) throw fail(403, 'campaign_task_forbidden', 'Current campaign edit permission is required.');
+      if (body.journeyId !== undefined || body.stepId !== undefined) runtimeFor(source).journeyTaskCandidate(ctx, candidate.id, body.journeyId, body.stepId);
+    } else {
+      const projection = runtimeFor(source).bootstrap(ctx), rows = source === 'chat' ? chatMessages(projection) : source === 'hr' ? projection.employees : body.sourceType === 'contact' ? projection.contacts : projection.projects;
+      if (!rows?.some(row => String(row.id) === String(body.sourceId))) throw fail(404, 'source_not_found', 'This source record was not found.');
+    }
     if (source === 'chat') {
       const audience = runtimeFor('chat').connectedTaskAudience(ctx, String(body.sourceId));
       const readers = new Set(audience.userIds);
@@ -156,6 +216,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     if (prior) { if (prior.fingerprint !== operation.fingerprint) throw fail(409, 'operation_conflict', 'This reference was used for another action.'); return clone(prior.result); }
     const task = runtimeFor('tasks', true).createConnectedTask(ctx, { title: body.title, description: body.description, projectId: body.projectId, sectionId: body.sectionId, priority: body.priority, dueDate: body.dueDate, assignedUserIds: body.assignedUserIds, source: { app: source, id: body.sourceId } });
     const result = { task, path: `/projects/${task.projectId}/lists?task-id=${task.id}` };
+    if (source === 'marketing') runtimeFor(source, true).recordDelivery(ctx, String(body.sourceId), { kind: body.journeyId !== undefined ? 'journey_task' : 'campaign_task', ...(body.journeyId !== undefined ? { journeyId: body.journeyId, stepId: body.stepId } : {}), taskId: task.id, path: result.path, operationId });
     workspace.commandOperations ??= {}; workspace.commandOperations[key] = { fingerprint: operation.fingerprint, result: clone(result) };
     S.log(actor.key, 'connected_task_created', String(task.id), { workspaceId: workspace.id, source, sourceId: body.sourceId });
     return result;

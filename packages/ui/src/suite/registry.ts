@@ -9,7 +9,7 @@ export const SUITE_TOOLS: Record<ToolKey, { scope: string; app: string; labels: 
   chat: { scope: "hq", app: "chats", labels: { en: "Chats", ar: "المحادثات", de: "Chats", fr: "Discussions", it: "Chat" }, adminRoles: ["owner", "admin"] },
 };
 export function toolFromScope(scope: string): ToolKey | undefined { return (Object.keys(SUITE_TOOLS) as ToolKey[]).find(tool => SUITE_TOOLS[tool].scope === scope || SUITE_TOOLS[tool].app === scope || tool === scope); }
-export const CONNECTOR_PAIRS: [ToolKey, ToolKey][] = [["tasks", "files"], ["chat", "files"], ["tasks", "hr"], ["chat", "hr"], ["hr", "tasks"], ["chat", "tasks"], ["crm", "tasks"], ["crm", "files"], ["marketing", "crm"]];
+export const CONNECTOR_PAIRS: [ToolKey, ToolKey][] = [["tasks", "files"], ["chat", "files"], ["tasks", "hr"], ["chat", "hr"], ["hr", "tasks"], ["chat", "tasks"], ["crm", "tasks"], ["crm", "files"], ["marketing", "crm"], ["marketing", "tasks"]];
 const METRICS = {
   projects: ["Projects", "المشاريع", "Projekte", "Projets", "Progetti"],
   guests: ["Guests", "الضيوف", "Gäste", "Invités", "Ospiti"],

@@ -3,6 +3,7 @@
 // An offer: what was quoted, where the negotiation stands and what both sides agreed. The agreed
 // total is the counter once one was accepted, here as in the list (SAL-014). The page always ends
 // in a state: loading, the offer, not found, no access, or an error with Retry (SAL-094).
+import CrmOfferTerms from "@/components/CrmOfferTerms";
 import { useTranslations } from "next-intl";
 import { ArrowRight, CheckCircle, HourglassMedium, XCircle } from "@phosphor-icons/react";
 import { EmptyState, ErrorState, NoPermissionState, PageHeader, Skeleton } from "@orgtik/ui";
@@ -87,6 +88,7 @@ export default function OfferDetails({ id }: { id: string }) {
         actions={!isCustomer && canEdit ? <OfferHeaderActions offer={offer} /> : null}
       />
       {banner}
+      <CrmOfferTerms id={id} />
       <div className="grid items-start gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <div className="flex flex-col gap-5">
           {myTurn ? <OfferRespondCard offer={offer} /> : null}

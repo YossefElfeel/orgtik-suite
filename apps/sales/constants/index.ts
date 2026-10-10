@@ -1,4 +1,6 @@
-import { SOS_URL } from "@somion/sos-bar";
+import { SOS_URL as DEFAULT_SOS_URL } from "@somion/sos-bar";
+
+export const SOS_URL = process.env.NEXT_PUBLIC_SOS_URL || DEFAULT_SOS_URL;
 
 export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

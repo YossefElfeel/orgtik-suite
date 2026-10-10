@@ -143,7 +143,7 @@ module.exports = function deals(S) {
   }
 
   // ------------------------------------------------------------------ contracts
-  function contractPdf(contract) {
+  function contractPdf(contract, artifactFilename) {
     const p = projectById(contract.projectId);
     const c = p && K.customerById(p.customerId);
     const cur = contract.currency;
@@ -168,7 +168,7 @@ module.exports = function deals(S) {
       "",
       "Signed for OrgTik: ____________________        Signed for the customer: ____________________",
     ];
-    return K.writePdf(`contract-${contract.id}.pdf`, "Service Contract", lines, `Contract-${p ? p.referenceNumber : contract.id.slice(0, 8)}.pdf`);
+    return K.writePdf(artifactFilename || `contract-${contract.id}.pdf`, "Service Contract", lines, `Contract-${p ? p.referenceNumber : contract.id.slice(0, 8)}.pdf`);
   }
   function applyTotals(contract, t) {
     const cur = contract.currency;
@@ -856,7 +856,7 @@ module.exports = function deals(S) {
   }
 
   return {
-    routes, projectById, contractById, offerById, latestContract, contractsOf, canSeeProject, visibleProjects,
+    routes, projectById, contractById, offerById, latestContract, contractsOf, canSeeProject, canSeeOffer, visibleProjects,
     buildDeal, createProject, createContract, approveContract, rejectContract, createOffer, respondOffer, contractOut, projectOut, planLineOut,
     commissionFor, contractPdf, resolveZone, totalsFor,
   };

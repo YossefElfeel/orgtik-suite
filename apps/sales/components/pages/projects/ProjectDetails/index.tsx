@@ -2,6 +2,7 @@
 
 // A project (a deal) and its contract. The page always ends in a state: loading, the project, not
 // found, no access, or an error with Retry; it span forever on any of them (SAL-093).
+import CrmProvisioning from "@/components/CrmProvisioning";
 import { useTranslations } from "next-intl";
 import { EmptyState, ErrorState, NoPermissionState, PageHeader, Skeleton } from "@orgtik/ui";
 import { ButtonLink } from "@/components/shared/ButtonLink";
@@ -66,6 +67,7 @@ export default function ProjectDetails({ id }: { id: string }) {
         actions={isCustomer ? null : <ProjectHeaderActions project={project} />}
       />
       <ProjectOverview project={project} />
+      <CrmProvisioning id={id} />
       <div className="grid items-start gap-5 xl:grid-cols-[minmax(0,1fr)_22rem]">
         <div className="flex flex-col gap-5">
           <ProjectContractCard project={project} />

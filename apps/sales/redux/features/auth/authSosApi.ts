@@ -45,18 +45,31 @@ const baseQueryWithInterceptor: typeof baseQuery = async (
   if ((error?.status as number) === 401 && typeof window !== "undefined") {
     deleteCookie(USER_COOKIE);
     deleteCookie(TOKEN_COOKIE);
-    window.location.href = signInAgainUrl(window.location.pathname + window.location.search);
+    window.location.href = signInAgainUrl(
+      window.location.pathname + window.location.search,
+    );
   }
 
   // Same feedback as baseApi: the reader's language, never the SOS API's own English messages.
   const body = typeof args === "string" ? undefined : args.body;
   if (method !== "GET") {
     if (result.error) {
-      const code = (result.error.data as (ErrorResponse & { code?: string }) | undefined)?.code;
-      const message = errorMessage({ endpoint: api.endpoint, args: body, status: result.error.status, code });
+      const code = (
+        result.error.data as (ErrorResponse & { code?: string }) | undefined
+      )?.code;
+      const message = errorMessage({
+        endpoint: api.endpoint,
+        args: body,
+        status: result.error.status,
+        code,
+      });
       if (message) toast.error(message);
     } else if (result.data !== undefined && !options?.skipSuccessToast) {
-      const message = successMessage({ endpoint: api.endpoint, args: body, data: result.data });
+      const message = successMessage({
+        endpoint: api.endpoint,
+        args: body,
+        data: result.data,
+      });
       if (message) toast.success(message);
     }
   }
@@ -77,7 +90,10 @@ export const authSosApi = createApi({
       providesTags: ["Profile"],
     }),
 
-    updateProfile: builder.mutation<ProfileResponse, UpdateProfileDTO>({
+    updateProfile: builder.mutation<
+      ProfileResponse | SuccessResponse<ProfileResponse>,
+      UpdateProfileDTO
+    >({
       query: (body) => ({
         url: "/auth/profile",
         method: "PUT",
@@ -87,7 +103,7 @@ export const authSosApi = createApi({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          const profileData = (data as any).data || data;
+          const profileData = "data" in data ? data.data : data;
           dispatch(
             updateUser({
               firstName: profileData.firstName,
@@ -112,7 +128,10 @@ export const authSosApi = createApi({
       }),
     }),
 
-    uploadAvatar: builder.mutation<ProfileResponse, FormData>({
+    uploadAvatar: builder.mutation<
+      ProfileResponse | SuccessResponse<ProfileResponse>,
+      FormData
+    >({
       query: (body) => ({
         url: "/auth/avatar",
         method: "POST",
@@ -122,7 +141,7 @@ export const authSosApi = createApi({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          const profileData = (data as any).data || data;
+          const profileData = "data" in data ? data.data : data;
           dispatch(
             updateUser({
               avatar: profileData.avatar,
@@ -134,7 +153,10 @@ export const authSosApi = createApi({
       },
     }),
 
-    deleteAvatar: builder.mutation<ProfileResponse, void>({
+    deleteAvatar: builder.mutation<
+      ProfileResponse | SuccessResponse<ProfileResponse>,
+      void
+    >({
       query: () => ({
         url: "/auth/avatar",
         method: "DELETE",
@@ -143,7 +165,7 @@ export const authSosApi = createApi({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          const profileData = (data as any).data || data;
+          const profileData = "data" in data ? data.data : data;
           dispatch(
             updateUser({
               avatar: profileData.avatar,

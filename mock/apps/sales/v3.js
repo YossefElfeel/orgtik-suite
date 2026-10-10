@@ -252,6 +252,7 @@ module.exports = function crmV3(S) {
       stageId: stage.id,
       probability: row.crmProbability ?? stage.probability,
       value: H.num(contract?.grandTotal),
+      estimatedValue: row.crmEstimatedValue ?? 0,
       currency:
         contract?.currency || currencyFor(K.customerById(row.customerId) || {}),
       won,
@@ -300,7 +301,7 @@ module.exports = function crmV3(S) {
       },
       sample: {
         loaded: state.samplesLoaded,
-        canLoad: contacts.length === 0 && req.sc.role !== "customer",
+        canLoad: contacts.length === 0 && ["admin", "manager"].includes(req.sc.role),
       },
     };
   }
@@ -337,6 +338,18 @@ module.exports = function crmV3(S) {
       !COUNTRIES.some((row) => row.code === body.countryCode)
     )
       throw fail(422, "invalid_country", "Choose a supported country.");
+    if (
+      body.value !== undefined &&
+      (typeof body.value !== "number" ||
+        !Number.isFinite(body.value) ||
+        body.value < 0 ||
+        body.value > 1e9)
+    )
+      throw fail(
+        422,
+        "invalid_value",
+        "Use a valid nonnegative forecast value.",
+      );
     const email = text(body.email, 200).toLocaleLowerCase();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
       throw fail(422, "invalid_email", "Enter a valid email.");
@@ -753,61 +766,7 @@ module.exports = function crmV3(S) {
         return projectOut(req, row);
       }),
     );
-    app.get(
-      "/api/crm/v3/offers/:id/pdf",
-      handle((req) => {
-        const offer = db.offers.find((row) => row.id === req.params.id);
-        if (!offer)
-          throw fail(404, "offer_not_found", "This offer was not found.");
-        const contact = customer(req, offer.customerId),
-          cur = offer.currencyCode;
-        return K.writePdf(
-          `offer-${offer.id}.pdf`,
-          offer.name,
-          [
-            `Customer: ${contact.fullName}`,
-            `Company: ${contact.companyName || "-"}`,
-            `Status: ${offer.status}`,
-            `Valid until: ${offer.crmValidUntil || "-"}`,
-            "---",
-            ...offer.lines.map((line) => ({
-              text: `${line.planName} · ${line.durationMonths} months`,
-              right: H.fmtMoney(line.price, cur),
-            })),
-            { text: "Subtotal", right: H.fmtMoney(offer.totals.subtotal, cur) },
-            {
-              text: "Installment markup",
-              right: H.fmtMoney(offer.totals.installmentMarkupTotal, cur),
-            },
-            {
-              text: "Discount",
-              right: H.fmtMoney(offer.totals.discountAmount, cur),
-            },
-            { text: "VAT", right: H.fmtMoney(offer.totals.vatAmount, cur) },
-            {
-              text: "Quoted total",
-              right: H.fmtMoney(offer.totals.total, cur),
-            },
-            {
-              text: "Agreed total",
-              bold: true,
-              right: H.fmtMoney(
-                offer.status === "accepted"
-                  ? (offer.counterTotal ?? offer.totals.total)
-                  : offer.totals.total,
-                cur,
-              ),
-            },
-            ...(offer.crmSimulatedSignature
-              ? [
-                  `Simulated signature: ${offer.crmSimulatedSignature.name} · ${offer.crmSimulatedSignature.at}`,
-                ]
-              : []),
-          ],
-          `Offer-${offer.id}.pdf`,
-        );
-      }),
-    );
+    require("./documents")(S).routes(app);
     app.get(
       "/api/crm/v3/offers/:id",
       handle((req) => {
@@ -1180,6 +1139,36 @@ module.exports = function crmV3(S) {
     project.crmProvisioning = clone(receipt);
     return clone(project.crmProvisioning);
   }
+  function marketingActor(context) {
+    const user = S.identity.findUser(context?.actor?.effectiveUserId), role = user && K.appRole(user);
+    if (!user || !context.tools?.crm?.canWrite || context.actor.readOnly) throw fail(403, 'crm_write_required', 'Current writable CRM access is required.');
+    const req = { sc: { user, role, staff: K.staffByAuth(user.id), customer: K.customerByAuth(user.id), lang: 'en', displayCurrency: null } };
+    staff(req); return req;
+  }
+  function setMarketingConsent(context, contactId, value) {
+    const req = marketingActor(context), row = customer(req, contactId, true);
+    if (!['unknown', 'opted_in', 'opted_out'].includes(value)) throw fail(422, 'invalid_marketing_consent', 'Record an explicit marketing consent state.');
+    row.crmMarketingConsent = { state: value, source: 'marketing_mock', recordedBy: req.sc.user.id, recordedAt: now() };
+    row.updatedAt = now(); event(req, row, 'consent', 'Marketing consent recorded', { state: value, source: 'marketing_mock' });
+    return contactOut(req, row);
+  }
+  function marketingContact(context, contactId) {
+    const req = marketingActor(context);
+    return contactOut(req, customer(req, contactId, true));
+  }
+  function createCampaignLead(context, candidate, contactId, body) {
+    const req = marketingActor(context), row = customer(req, contactId, true);
+    const title = text(body.title, 200);
+    if (body.estimate !== undefined && (!Number.isFinite(body.estimate) || body.estimate < 0 || body.estimate > 1e12)) throw fail(422, 'invalid_estimate', 'Use a non-negative pipeline estimate.');
+    const created = S.deals.createProject(req, { customerId: row.id, projectName: title, projectDescription: `Follow-up from ${candidate.title}`, projectType: 'client_project' }, { actorUser: req.sc.user });
+    if (created.error) throw fail(422, 'crm_deal_invalid', created.error);
+    const project = created.value;
+    project.source = { kind: 'marketing_campaign', campaignId: candidate.id, marketingProjectId: candidate.projectId };
+    project.crmEstimatedValue = body.estimate ?? 0;
+    row.sourceContext ??= {}; row.sourceContext.marketing = { campaignId: candidate.id, projectId: candidate.projectId, crmProjectId: project.id, by: req.sc.user.id, at: now() };
+    event(req, row, 'attribution', 'Campaign lead received', { campaignId: candidate.id, projectId: project.id, estimatedValue: project.crmEstimatedValue });
+    return { leadId: row.id, projectId: project.id, estimatedValue: project.crmEstimatedValue };
+  }
   return {
     routes,
     bootstrap,
@@ -1187,5 +1176,8 @@ module.exports = function crmV3(S) {
     event,
     provisioningCandidate,
     recordProvisioning,
+    setMarketingConsent,
+    marketingContact,
+    createCampaignLead,
   };
 };

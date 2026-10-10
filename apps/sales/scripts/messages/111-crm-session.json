@@ -1,0 +1,9 @@
+{
+  "Errors.logoutUnavailable": {
+    "en": "Sign out could not be completed. Try again.",
+    "ar": "تعذر تسجيل الخروج. حاول مرة أخرى.",
+    "de": "Die Abmeldung konnte nicht abgeschlossen werden. Versuchen Sie es erneut.",
+    "fr": "La déconnexion n’a pas pu être effectuée. Réessayez.",
+    "it": "Impossibile completare la disconnessione. Riprova."
+  }
+}

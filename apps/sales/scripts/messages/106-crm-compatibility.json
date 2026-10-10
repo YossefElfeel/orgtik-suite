@@ -1,0 +1,9 @@
+{
+  "Deal.compatibilityCatalog": {
+    "en": "Compatibility catalog for retained deal and contract pricing. Current public service offers are managed in the service catalog.",
+    "ar": "كتالوج توافق لتسعير الصفقات والعقود المحتفظ بها. تُدار عروض الخدمات العامة الحالية في كتالوج الخدمات.",
+    "de": "Kompatibilitätskatalog für bestehende Geschäfts- und Vertragspreise. Aktuelle öffentliche Services werden im Servicekatalog verwaltet.",
+    "fr": "Catalogue de compatibilité pour la tarification des affaires et contrats conservés. Les offres publiques actuelles sont gérées dans le catalogue de services.",
+    "it": "Catalogo di compatibilità per prezzi di trattative e contratti conservati. Le offerte pubbliche attuali sono gestite nel catalogo servizi."
+  }
+}

@@ -36,7 +36,8 @@ test(
         },
         ...(body ? { body: JSON.stringify(body) } : {}),
       });
-      const data = await response.json();
+      const isPdf = response.headers.get("content-type")?.includes("application/pdf");
+      const data = isPdf ? {data:Buffer.from(await response.arrayBuffer())} : await response.json();
       return { status: response.status, data: data.data, raw: data };
     }
     const good = (result) => {
@@ -222,8 +223,9 @@ test(
         const document = good(
           await call("sales", "/api/crm/v3/offers/" + offer.id + "/pdf", token),
         );
-        assert.ok(document.name.endsWith(".pdf"));
-        assert.ok(document.size > 100);
+        assert.ok(Buffer.isBuffer(document));
+        assert.equal(document.subarray(0, 5).toString(), "%PDF-");
+        assert.ok(document.length > 100);
       }
       assert.equal(
         (
@@ -235,7 +237,10 @@ test(
         ).status,
         422,
       );
-      const owner = good(
+      const invalidValueImport = good(await call("sales","/api/crm/v3/import",token,"POST",{rows:[{fullName:"Invalid numeric CSV",email:"invalid-number@crm.test",value:null}]}));
+    assert.equal(invalidValueImport[0].state,"failed");
+    assert.ok(!good(await call("sales","/api/crm/v3",token)).contacts.some(row=>row.email==="invalid-number@crm.test"));
+    const owner = good(
         await call("sos", "/api/auth/register", null, "POST", {
           email: "owner-empty-crm@crm.test",
           name: "Empty CRM",
@@ -277,6 +282,16 @@ test(
         ).status,
         404,
       );
+      for (const offer of offers) assert.equal((await call("sales", "/api/crm/v3/offers/" + offer.id + "/pdf", empty.tokens.accessToken)).status, 404);
+      const projects = good(await call("sales", "/api/projects?limit=100", token)).items;
+      for (const project of projects.filter(row => row.latestContract).slice(0, 4)) {
+        const id = project.latestContract.id;
+        const pdf = good(await call("sales", "/api/crm/v3/contracts/" + id + "/pdf", token));
+        assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
+        assert.ok(pdf.length > 100);
+        assert.equal((await call("sales", "/api/crm/v3/contracts/" + id + "/pdf", empty.tokens.accessToken)).status, 404);
+      }
+      assert.equal((await call("sales", "/api/crm/v3/offers/" + offers[0].id + "/pdf", null)).status, 401);
       const sample = good(
         await call(
           "sales",

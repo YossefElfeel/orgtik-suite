@@ -144,6 +144,11 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     const chatTask = good(await call('chats', '/api/suite/tasks', chatToken, 'POST', publicBody));
     assert.equal(chatTask.task.source.id, publicMessage.id);
     assert.equal(good(await call('chats', '/api/suite/tasks', chatToken, 'POST', publicBody)).task.id, chatTask.task.id);
+    const threadProjection = good(await chatCommand({ type: 'message.created', message: { channelId: 'public-connected-source', threadId: publicMessage.id, text: 'Actual thread follow-up' } }, 'public-connected-thread'));
+    const threadMessage = Object.values(threadProjection.threadReplies).flat().find(row => row.threadId === publicMessage.id);
+    const threadTask = good(await call('chats', '/api/suite/tasks', chatToken, 'POST', { ...publicBody, sourceId: threadMessage.id, operationId: 'public-thread-task' }));
+    assert.equal(threadTask.task.source.id, threadMessage.id);
+    assert.ok(good(await call('chats', `/api/suite/tasks/references?source=chat&sourceId=${threadMessage.id}&ids=${threadTask.task.id}`, chatToken)).some(row => row.id === threadTask.task.id));
     assert.equal((await call('chats', '/api/suite/tasks/projects?source=chat&sourceId=missing', chatToken)).status, 404);
     const crmHandoff = good(await call('sos', '/api/auth/workspace', owner, 'POST', { workspaceId: 'ws_orgtik', target: 'sales' }));
     const crmToken = crmHandoff.tokens.accessToken, services = good(await call('sales', '/api/suite/services/catalog', crmToken));
@@ -239,6 +244,21 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     good(await call('sales', '/api/suite/services/catalog/policy', crmToken, 'PATCH', { durationSavings: { 1: 0, 3: 7, 6: 12, 12: 20 }, countBands: [{ min: 1, saving: 0 }, { min: 2, saving: 6 }, { min: 3, saving: 11 }, { min: 5, saving: 16 }] }));
     good(await call('sales', '/api/suite/services/catalog/publish', crmToken, 'POST', { operationId: 'service-policy-publication' }));
     const policyCatalog = good(await call('sos', '/v1/public/catalog', null)); assert.equal(policyCatalog.items.find(row => row.id === offer.id).prices[3][1].discount, 7); assert.equal(policyCatalog.items.find(row => row.kind === 'software').prices[3][1].discount, 5); assert.equal(policyCatalog.policy.serviceDurationSavings[12], 20);
+    assert.equal(JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders), immutablePaid);
+    const campaign = good(await call('marketing', '/v3/bootstrap', marketingToken)).campaigns[0]; assert.ok(campaign?.id);
+    good(await call('marketing', `/v3/campaigns/${campaign.id}/recipients`, marketingToken, 'PATCH', { refs: [{ workspaceId: 'ws_orgtik', contactId: lead.sales.leadId }] }));
+    const consentBody = { contactId: lead.sales.leadId, state: 'opted_out', operationId: 'all-tools-marketing-consent' };
+    const consentResult = good(await call('marketing', '/api/suite/crm/consent', marketingToken, 'POST', consentBody));
+    assert.deepEqual(good(await call('marketing', '/api/suite/crm/consent', marketingToken, 'POST', consentBody)), consentResult);
+    const campaignLeadBody = { contactId: lead.sales.leadId, title: 'All-tool campaign follow-up', estimate: 1500, operationId: 'all-tools-marketing-lead' };
+    const campaignLead = good(await call('marketing', `/api/suite/marketing/campaigns/${campaign.id}/lead`, marketingToken, 'POST', campaignLeadBody));
+    assert.equal(good(await call('sales', `/api/projects/${campaignLead.projectId}`, crmToken)).projectName, campaignLeadBody.title);
+    const marketingTaskBody = { ...connectedBody, source: 'marketing', sourceId: campaign.id, title: 'All-tool campaign task', operationId: 'all-tools-marketing-task' };
+    const campaignTask = good(await call('marketing', '/api/suite/tasks', marketingToken, 'POST', marketingTaskBody));
+    assert.equal(campaignTask.task.source.app, 'marketing');
+    assert.equal(good(await call('marketing', '/api/suite/tasks', marketingToken, 'POST', marketingTaskBody)).task.id, campaignTask.task.id);
+    assert.ok(good(await call('marketing', `/api/suite/tasks/references?source=marketing&sourceId=${campaign.id}&ids=${campaignTask.task.id}`, marketingToken)).some(row => row.id === campaignTask.task.id));
+    assert.ok(good(await call('marketing', `/v3/campaigns/${campaign.id}`, marketingToken)).results.some(row => row.projectId === campaignLead.projectId));
     assert.equal(JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders), immutablePaid);
   } finally { await new Promise(resolve => server.close(resolve)); fs.rmSync(folder, { recursive: true, force: true }); }
 });

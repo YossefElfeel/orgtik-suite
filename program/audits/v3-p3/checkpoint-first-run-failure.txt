@@ -1,0 +1,53 @@
+$ node lib/auth.test.js && node lib/journal.test.js && node apps/admin/pricing.test.js && node --test lib/dispatch.test.js lib/journal-concurrency.test.js lib/platform-replay.test.js lib/platform-persistence-endpoints.test.js apps/admin/r0.test.js apps/admin/proration-terms.test.js apps/admin/lifecycle.test.js apps/admin/website-offers.test.js apps/wm/content-followup.test.js apps/admin/website-managed-service.test.js apps/wm/ideas.test.js apps/wm/website-alignment.test.js apps/wm/manager-improvements.test.js apps/wm/users.test.js && node test-workspace.mjs
+  ok  new account and workspace survive a fresh instance
+  ok  handoff works on another instance and includes refresh tokens
+  ok  a third instance refuses a consumed handoff
+  ok  changed password survives a cold start; old password is refused
+  ok  failed credential writes preserve the password and valid session
+  ok  business reset preserves account identity and workspace ownership
+  ok  production-style sandbox refuses account-fixture resets
+  ok  warm instances restore new customer identities before replaying their writes
+  ok  only salted hashes are stored; responses and tokens omit credentials
+  ok  deactivation survives a fresh instance
+  ok  storage failure returns 503, never invalid-credentials 401
+  ok  atomic email release allows a replacement for a deleted account
+  ok  a duplicate-email batch fails atomically
+  ok  stale account updates cannot overwrite newer credentials
+  ok  preview fixture cleanup preserves real-domain accounts
+  ok  expired handoff is refused
+  ok  Redis uses atomic account commits and single-use expiring codes
+Authentication: 17/17 passed
+C:\Users\yosse\Projects\New sass\orgtik-suite-v3\mock\lib\journal.test.js:88
+    throw new Error(`step "${step}" failed:\n${e.stderr}`);
+    ^
+
+Error: step "read" failed:
+AssertionError [ERR_ASSERTION]: login
+
+503 !== 200
+
+    at child (C:\Users\yosse\Projects\New sass\orgtik-suite-v3\mock\lib\journal.test.js:42:10)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 503,
+  expected: 200,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+    at run (C:\Users\yosse\Projects\New sass\orgtik-suite-v3\mock\lib\journal.test.js:88:11)
+    at main (C:\Users\yosse\Projects\New sass\orgtik-suite-v3\mock\lib\journal.test.js:97:18)
+    at Object.<anonymous> (C:\Users\yosse\Projects\New sass\orgtik-suite-v3\mock\lib\journal.test.js:144:6)
+    at Module._compile (node:internal/modules/cjs/loader:1760:14)
+    at Object..js (node:internal/modules/cjs/loader:1892:10)
+    at Module.load (node:internal/modules/cjs/loader:1480:32)
+    at Module._load (node:internal/modules/cjs/loader:1299:12)
+    at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:245:24)
+    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+
+Node.js v25.2.1
+C:\Users\yosse\Projects\New sass\orgtik-suite-v3\mock:
+[ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL] orgtik-local-dev@1.0.0 test: `node lib/auth.test.js && node lib/journal.test.js && node apps/admin/pricing.test.js && node --test lib/dispatch.test.js lib/journal-concurrency.test.js lib/platform-replay.test.js lib/platform-persistence-endpoints.test.js apps/admin/r0.test.js apps/admin/proration-terms.test.js apps/admin/lifecycle.test.js apps/admin/website-offers.test.js apps/wm/content-followup.test.js apps/admin/website-managed-service.test.js apps/wm/ideas.test.js apps/wm/website-alignment.test.js apps/wm/manager-improvements.test.js apps/wm/users.test.js && node test-workspace.mjs`
+Exit status 1

@@ -6,7 +6,7 @@
 import { useTranslations } from "next-intl";
 import { Eye } from "@phosphor-icons/react";
 import { buttonVariants } from "@orgtik/ui";
-import { SOS_URL } from "@somion/sos-bar";
+import { SOS_URL } from "@/constants";
 import { useRole } from "@/hooks/useRole";
 import { isolate } from "@/lib/bidi";
 

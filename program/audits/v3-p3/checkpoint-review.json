@@ -1,0 +1,15 @@
+{
+  "scope": "Rolling P3 ecosystem/catalog implementation and locally accepted Tasks, Account and HR cycles",
+  "completePlan": false,
+  "fullMockRevision": "a5c4305dd9ff6f89add32d3c2fcc95afc100cd76",
+  "fullMock": { "platformTests": 118, "workspaceTests": 298, "failed": 0, "authAndJournalAndPricing": "retained standalone checks also passed" },
+  "affectedTypesAndCatalogs": { "tasks": 20, "failed": 0 },
+  "laterIntegration": { "crmSource": "2498142", "crmTests": 6, "crmTypesAndFiveCatalogs": "passed", "guestSource": "5af12e9", "guestRuntimeCodecTransportTests": 21, "guestFailed": 0 },
+  "lock": "Offline frozen installation passed after Sales/HR dependency retirement and peer closure regeneration.",
+  "website": { "pairs": 168, "changedPixels": 0, "equalPNGBytes": 168, "details": "catalog-parity-review.json" },
+  "toolEvidence": { "tasks": { "checks": 111, "captures": 31 }, "account": { "checks": 142, "captures": 44 }, "hr": { "checks": 450, "tests": 50, "captures": 117, "reviewedFollowupChecks": 11, "reviewedFollowupCaptures": 2, "reviewedFollowupHelperTests": 3 } },
+  "failureHistory": "The first full attempt had a cold-journal login503. Frozen source was unchanged; isolated two-instance diagnosis passed, retained journal recheck8/8 passed and the final full chain passed. Preserve checkpoint-first-run-failure.txt; no source fix or unexplained test success is inferred.",
+  "remaining": ["CRM final PDF/negotiation/state/matrix evidence", "Chats and Files full cycles", "Marketing integration/cycle", "Console software ownership/cycle", "WM mirrors/cycle", "P5 combined journeys, glossary, feature map and handoff"],
+  "deployment": "paused",
+  "externalProviders": "deferred or explicitly mocked"
+}

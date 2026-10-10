@@ -7,7 +7,6 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { THEME_COOKIE, ThemeScript, Toaster, directionOf, themeAttributes, type Locale as UiLocale } from "@orgtik/ui";
 import { OrgtikNextProvider } from "@orgtik/ui/next";
-import { Toaster as LegacyToaster } from "@/components/ui/sonner";
 import ApiLocaleSync from "@/providers/ApiLocaleSync";
 import ReduxProvider from "@/providers/redux-provider";
 import { ApiFeedback } from "@/providers/api-feedback";
@@ -55,8 +54,6 @@ export default async function RootLayout({
           </OrgtikNextProvider>
         </NextIntlClientProvider>
         <Toaster />
-        {/* Screens not yet moved to the library (and the frozen SaaS-admin routes) still call sonner. */}
-        <LegacyToaster richColors />
       </body>
     </html>
   );

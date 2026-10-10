@@ -1,8 +1,7 @@
-// Contract documents are served behind the session, so they are fetched with the bearer token and
-// shown from a local blob. The API answers /contracts/:id/pdf with a file record that points at
-// the file itself.
+// Current visible CRM documents stream authenticated bytes and are shown from a local blob.
 import { API_URL } from "@/constants";
 import type { ContractFile } from "@/types/projects";
+import { readClientSession } from "@orgtik/ui/auth";
 
 export type FetchedDocument = { blob: Blob; contentType: string; fileName?: string };
 
@@ -13,7 +12,9 @@ const resolve = (url: string) => {
 };
 
 async function fetchDocument(url: string, token: string | null | undefined, fileName?: string): Promise<FetchedDocument> {
-  const response = await fetch(resolve(url), { headers: token ? { Authorization: `Bearer ${token}` } : {} });
+  const workspaceId = readClientSession()?.workspaceContext?.workspace.id;
+  const response = await fetch(resolve(url), { headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}), ...(workspaceId ? { "X-Workspace": workspaceId } : {}) } });
+  if (workspaceId !== readClientSession()?.workspaceContext?.workspace.id) throw new Error("workspace changed");
   if (!response.ok) throw new Error(`document ${response.status}`);
   const contentType = response.headers.get("content-type") ?? "";
   if (contentType.includes("application/json")) {
@@ -27,7 +28,10 @@ async function fetchDocument(url: string, token: string | null | undefined, file
 
 /** The contract's current document: the signed one once uploaded, else the generated one. */
 export function fetchContractDocument(contractId: string, token: string | null | undefined) {
-  return fetchDocument(`/contracts/${contractId}/pdf`, token);
+  return fetchDocument(`/crm/v3/contracts/${encodeURIComponent(contractId)}/pdf`, token);
+}
+export function fetchOfferDocument(offerId: string, token: string | null | undefined) {
+  return fetchDocument(`/crm/v3/offers/${encodeURIComponent(offerId)}/pdf`, token);
 }
 
 export function saveBlob(blob: Blob, fileName: string) {

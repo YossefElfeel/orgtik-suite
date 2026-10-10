@@ -1,0 +1,29 @@
+✔ guest capability entry exposes minimal meeting metadata and one actual visitor with stable replay, without directory grants (85.8608ms)
+✔ only actual signed host decisions advance the lobby; visit proof remains meeting scoped through cold restore (57.6465ms)
+✔ current plan, settings, write state, ended meeting and link rotation refuse guest access without partial joins (48.0312ms)
+✔ Chats transport retries a lost command response with one operation ID and hydrates only committed data (173.2693ms)
+✔ Chats dispatches a queued command with the current token after same-context rotation (47.0545ms)
+✔ Chats keeps one command through repeated 503, a cold reload, and canonical reference serialization (66.3524ms)
+✔ Chats treats a malformed successful command response as uncertain and retains its operation (28.9714ms)
+✔ Chats discards a delayed private projection after Files permission or member epoch changes (40.5338ms)
+✔ Chats clears before switching workspace and ignores a delayed old-workspace response (36.1414ms)
+✔ Chats storage/transport failures show failure without inventing a saved message (23.3233ms)
+✔ Chats guest or revoked context clears the directory and never falls back to seeded data (26.5393ms)
+✔ Chats snapshot codec fails closed on uncovered state, counters and historical authority (5.3282ms)
+✔ Chats board indexes and permanent receipts reject incomplete or copied drawing authority (1.4013ms)
+✔ Chats actual routers isolate equal IDs, directory, member-only channels and spoofed authors (126.6447ms)
+✔ Chats snapshots preserve read cursors, thread/reaction state, receipts and allocator after cold start (62.1917ms)
+✔ Chats guests, global-admin-like users and read-only contexts cannot bootstrap or write beyond own grants (28.3048ms)
+✔ OrgTik historical sample is explicit, author display never enters membership; Nile stays empty (27.4926ms)
+✔ Chats custody transfers history once and archives without granting departed access (25.9456ms)
+✔ Chats receipts recheck current channel membership before returning prior success (23.8032ms)
+✔ connected task audience keeps private/group/DM messages within current admitted source readers (17.4684ms)
+✔ public source metadata is marked unrestricted while an unjoined member cannot read a private source (25.7861ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 800.3435

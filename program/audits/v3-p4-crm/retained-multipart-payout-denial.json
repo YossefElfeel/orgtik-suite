@@ -1,0 +1,38 @@
+{
+  "scope": "Retained actual CRM constructor, customer negotiation, signed approval and payout",
+  "checks": [
+    {
+      "name": "Retired catalog chooser is labelled compatibility data",
+      "pass": true
+    },
+    {
+      "name": "S2 actual ordinary constructor keeps selected 12-month installments",
+      "pass": true
+    },
+    {
+      "name": "S3 actual customer counter persists negotiated total",
+      "pass": true
+    },
+    {
+      "name": "S3 acceptance creates actual project at agreed total",
+      "pass": true
+    },
+    {
+      "name": "S4 recorded signed approval keeps price and sets 8% commission",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "retained-created-installment-offer.png",
+    "retained-customer-counter.png",
+    "retained-negotiated-project.png",
+    "retained-approved-signed-contract.png",
+    "retained-failure.png"
+  ],
+  "records": {
+    "offerId": "8105e972-d610-4a22-96a4-0170cb28f3ff",
+    "projectId": "36b95896-face-478c-8307-07d4d7e57236"
+  },
+  "errors": [],
+  "failure": "locator.waitFor: Timeout 120000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('alertdialog') to be hidden\u001b[22m\n\u001b[2m    241 × locator resolved to visible <div id=\"_r_o_\" data-open=\"\" tabindex=\"-1\" role=\"alertdialog\" data-base-ui-focusable=\"\" aria-labelledby=\"base-ui-_r_2g_\" aria-describedby=\"base-ui-_r_2h_\" class=\"fixed start-1/2 top-1/2 z-50 flex w-[calc(100vw-2rem)] max-w-[440px] -translate-y-1/2 flex-col gap-5 p-6 ltr:-translate-x-1/2 rtl:translate-x-1/2 rounded-panel border border-line bg-overlay text-fg shadow-overlay outline-none transition-[opacity,scale] duration-(--ot-duration-base) ease-ot-out-strong data-[starting-style]:scale-[0.97] data…>…</div>\u001b[22m\n"
+}

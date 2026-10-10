@@ -1,0 +1,58 @@
+{
+  "ServiceRequests.paidService": {
+    "en": "Confirmed service payment",
+    "ar": "دفع الخدمة المؤكد",
+    "de": "Bestätigte Servicezahlung",
+    "fr": "Paiement de service confirmé",
+    "it": "Pagamento servizio confermato"
+  },
+  "ServiceRequests.paidOn": {
+    "en": "Paid on {date}",
+    "ar": "تم الدفع في {date}",
+    "de": "Bezahlt am {date}",
+    "fr": "Payé le {date}",
+    "it": "Pagato il {date}"
+  },
+  "ServiceRequests.servicePeriod": {
+    "en": "Service period: {start} – {end}",
+    "ar": "فترة الخدمة: {start} – {end}",
+    "de": "Servicezeitraum: {start} – {end}",
+    "fr": "Période de service : {start} – {end}",
+    "it": "Periodo servizio: {start} – {end}"
+  },
+  "ServiceRequests.paidOnboarding": {
+    "en": "Complete onboarding before starting the paid service period.",
+    "ar": "أكمل التجهيز قبل بدء فترة الخدمة المدفوعة.",
+    "de": "Vor Beginn des bezahlten Servicezeitraums das Onboarding abschließen.",
+    "fr": "Terminez l’intégration avant de commencer la période payée.",
+    "it": "Completa l’avvio prima del periodo di servizio pagato."
+  },
+  "CrmV3.taskOnHold": {
+    "en": "On hold",
+    "ar": "معلّقة",
+    "de": "Pausiert",
+    "fr": "En attente",
+    "it": "In sospeso"
+  },
+  "CrmV3.taskCancelled": {
+    "en": "Cancelled",
+    "ar": "ملغاة",
+    "de": "Abgebrochen",
+    "fr": "Annulée",
+    "it": "Annullata"
+  },
+  "CrmV3.taskUnavailable": {
+    "en": "Status unavailable",
+    "ar": "الحالة غير متاحة",
+    "de": "Status nicht verfügbar",
+    "fr": "Statut indisponible",
+    "it": "Stato non disponibile"
+  },
+  "CrmV3.meetingScheduled": {
+    "en": "Meeting scheduled for {date}",
+    "ar": "اجتماع مقرر في {date}",
+    "de": "Besprechung am {date}",
+    "fr": "Réunion prévue le {date}",
+    "it": "Riunione prevista il {date}"
+  }
+}

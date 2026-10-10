@@ -1,0 +1,77 @@
+{
+  "scope": "Ordinary CRM P4 functional callbacks, owned offset300 memory demo",
+  "checks": [
+    {
+      "name": "Ordinary contacts route and one suite shell",
+      "pass": true
+    },
+    {
+      "name": "UI contact creation persists in canonical customers",
+      "pass": true
+    },
+    {
+      "name": "New contacts start with truthful unknown consent",
+      "pass": true
+    },
+    {
+      "name": "UI marketing consent records signed actor/source",
+      "pass": true
+    },
+    {
+      "name": "Structured call log persists actual timeline",
+      "pass": true
+    },
+    {
+      "name": "WhatsApp remains explicit simulated activity",
+      "pass": true
+    },
+    {
+      "name": "CSV UI reports created and duplicate row outcomes",
+      "pass": true
+    },
+    {
+      "name": "CSV export preserves quoted commas and source values",
+      "pass": true
+    },
+    {
+      "name": "Company master UI persists separate shared company record",
+      "pass": true
+    },
+    {
+      "name": "Admin UI stages typed actual custom field",
+      "pass": true
+    },
+    {
+      "name": "Admin UI creates second actual pipeline",
+      "pass": true
+    },
+    {
+      "name": "Stage UI persists mapped canonical state and probability",
+      "pass": true
+    },
+    {
+      "name": "Target UI persists currency and workspace-clock month",
+      "pass": true
+    },
+    {
+      "name": "Custom stage applies current probability to canonical contact",
+      "pass": true
+    },
+    {
+      "name": "Lost stage uses actual entered reason",
+      "pass": true
+    },
+    {
+      "name": "Reports show actual entered loss and same-currency target",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "contact-timeline-consent-followup.png",
+    "import-row-outcomes.png",
+    "company-master.png",
+    "crm-admin-configuration.png",
+    "actual-funnel-target-loss-report.png"
+  ],
+  "errors": []
+}

@@ -24,6 +24,9 @@ function createWorkspaceRuntime(input, tool) {
       if (context?.mode === 'public_resource' || context?.realm !== realm || context.workspace?.id !== input.workspace.id || !context.actor || !access || ['no_access', 'not_subscribed'].includes(access.access)) throw Object.assign(new Error('Chats bootstrap is not authorized.'), { status: 403 });
       return hooks.bootstrap(input.identity.findUser(context.actor.effectiveUserId));
     },
+    suiteFeed(context){const access=context?.tools?.chat;if(context?.mode==='public_resource'||context?.realm!==realm||context.workspace?.id!==input.workspace.id||!context.actor||!access||['no_access','not_subscribed'].includes(access.access))throw Object.assign(new Error('Chats feed is not authorized.'),{status:403});return hooks.suiteFeed(input.identity.findUser(context.actor.effectiveUserId));},
+    suiteExport(context){const data=this.bootstrap(context);return{tool:'chat',workspaceId:data.workspaceId,channels:data.channels,messages:data.messages,meetings:data.meetings};},
+    publicGuest:hooks.publicGuest,joinPublicGuest:hooks.joinPublicGuest,
     connectedTaskAudience(context,messageId) {
       const access=context?.tools?.chat;
       if(context?.mode==='public_resource'||context?.realm!==realm||context.workspace?.id!==input.workspace.id||!context.actor||!access||['no_access','not_subscribed'].includes(access.access))throw Object.assign(new Error('Chats source is not authorized.'),{status:403});

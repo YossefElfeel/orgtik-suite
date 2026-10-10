@@ -247,6 +247,7 @@ export function exactTime(iso: string, tag: string): string {
 export function dayHeading(day: string, tag: string, now: number = Date.now()): string {
   const at = Date.parse(`${day}T00:00:00Z`);
   if (Number.isNaN(at)) return day;
+  if (!Number.isFinite(now)) return new Intl.DateTimeFormat(tag, { dateStyle: "full", timeZone: "UTC" }).format(new Date(at));
   const today = Date.parse(`${new Date(now).toISOString().slice(0, 10)}T00:00:00Z`);
   const diff = Math.round((at - today) / 86_400_000);
   if (diff === 0 || diff === -1) return new Intl.RelativeTimeFormat(tag, { numeric: "auto" }).format(diff, "day");
