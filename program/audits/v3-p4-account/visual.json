@@ -1,0 +1,239 @@
+{
+  "scope": "Ordinary Account routes with actual authority in isolated offset500 demo. Provider settings/delivery are labeled mock; no external sending or payment claims.",
+  "mode": "visual",
+  "checks": [
+    {
+      "name": "en/light/1440: document fits",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/390: document fits",
+      "pass": true
+    },
+    {
+      "name": "en/light/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "en/light/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/768: document fits",
+      "pass": true
+    },
+    {
+      "name": "en/light/768: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "en/light/768: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1024: document fits",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1440: document fits",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/390: document fits",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/768: document fits",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1024: document fits",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1440: document fits",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/390: document fits",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/768: document fits",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1024: document fits",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1440: document fits",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/390: document fits",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/768: document fits",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1024: document fits",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "account-en-light-1440.png",
+    "account-en-light-390.png",
+    "account-en-light-768.png",
+    "account-en-light-1024.png",
+    "account-en-dark-1440.png",
+    "account-en-dark-390.png",
+    "account-en-dark-768.png",
+    "account-en-dark-1024.png",
+    "account-ar-light-1440.png",
+    "account-ar-light-390.png",
+    "account-ar-light-768.png",
+    "account-ar-light-1024.png",
+    "account-ar-dark-1440.png",
+    "account-ar-dark-390.png",
+    "account-ar-dark-768.png",
+    "account-ar-dark-1024.png"
+  ],
+  "errors": [],
+  "completed": true
+}

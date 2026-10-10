@@ -1,0 +1,37 @@
+{
+  "scope": "Ordinary Account routes with actual authority in isolated offset500 demo. Provider settings/delivery are labeled mock; no external sending or payment claims.",
+  "mode": "workspace-gates",
+  "checks": [
+    {
+      "name": "Staff gate uses actual principal without selected workspace",
+      "pass": true
+    },
+    {
+      "name": "Unselected workspace settings show a real chooser rather than endless loading",
+      "pass": true
+    },
+    {
+      "name": "Chooser reads actual available workspace memberships",
+      "pass": true
+    },
+    {
+      "name": "Unmapped legacy member cannot invoke guarded person controls",
+      "pass": true
+    },
+    {
+      "name": "Ownership choices require an actual active member identity",
+      "pass": true
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "workspace-settings-gate.png",
+    "ownership-identity-gate.png"
+  ],
+  "errors": [],
+  "completed": true
+}

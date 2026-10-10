@@ -1,0 +1,36 @@
+{
+  "scope": "Ordinary Account routes with actual authority in isolated offset500 demo. Provider settings/delivery are labeled mock; no external sending or payment claims.",
+  "mode": "access",
+  "checks": [
+    {
+      "name": "Member request is persisted with current actual identity",
+      "pass": true
+    },
+    {
+      "name": "Owner approval assigns real current tool seat",
+      "pass": true
+    },
+    {
+      "name": "Owner decline persists a true denied request",
+      "pass": true
+    },
+    {
+      "name": "Member billing configuration remains forbidden",
+      "pass": true
+    },
+    {
+      "name": "Member scoped export excludes owner billing and admin configuration",
+      "pass": true
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "request-access.png"
+  ],
+  "errors": [],
+  "completed": true
+}

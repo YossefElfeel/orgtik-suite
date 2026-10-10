@@ -1,0 +1,169 @@
+{
+  "scope": "Ordinary Account routes with actual authority in isolated offset500 demo. Provider settings/delivery are labeled mock; no external sending or payment claims.",
+  "mode": "functional",
+  "checks": [
+    {
+      "name": "Actual View-as start and exit are present in scoped audit",
+      "pass": true
+    },
+    {
+      "name": "Ordinary Account navigation excludes presentation",
+      "pass": true
+    },
+    {
+      "name": "Exactly one suite notification trigger",
+      "pass": true
+    },
+    {
+      "name": "2FA mock enrollment persists six explicitly mock recovery codes",
+      "pass": true
+    },
+    {
+      "name": "Recovery generation replaces persisted samples",
+      "pass": true
+    },
+    {
+      "name": "Workspace policy preview is distinct from person enrollment",
+      "pass": true
+    },
+    {
+      "name": "Verification preview persists while real verified flag stays actual",
+      "pass": true
+    },
+    {
+      "name": "Actual session view has current realm session and no credentials",
+      "pass": true
+    },
+    {
+      "name": "SSO saved as simulated provider metadata",
+      "pass": true
+    },
+    {
+      "name": "Mock API key list redacts secret and hash",
+      "pass": true
+    },
+    {
+      "name": "Mock webhook test records simulated receipt without external sending",
+      "pass": true
+    },
+    {
+      "name": "Person notification preferences persist",
+      "pass": true
+    },
+    {
+      "name": "Ordinary audit filter shows actual actor and effective record",
+      "pass": true
+    },
+    {
+      "name": "Full scoped export contains real tasks, team, invoices and customer records",
+      "pass": true
+    },
+    {
+      "name": "Full export excludes credentials and key hashes",
+      "pass": true
+    },
+    {
+      "name": "Billing contact persists in current workspace",
+      "pass": true
+    },
+    {
+      "name": "Refund request persists pending and does not alter paid invoice",
+      "pass": true
+    },
+    {
+      "name": "Invoice PDF action invokes real native print surface",
+      "pass": true
+    },
+    {
+      "name": "Pause renewal uses actual period-end cancellation with retained access",
+      "pass": true
+    },
+    {
+      "name": "Win-back resumes the same actual subscription",
+      "pass": true
+    },
+    {
+      "name": "Team search narrows actual members",
+      "pass": true
+    },
+    {
+      "name": "Custom role persists canonical base access",
+      "pass": true
+    },
+    {
+      "name": "Role assignment appears in actual Team projection",
+      "pass": true
+    },
+    {
+      "name": "Suspension invalidates the member workspace session",
+      "pass": true
+    },
+    {
+      "name": "Restore returns membership status with capacity checks",
+      "pass": true
+    },
+    {
+      "name": "Bulk invitation reports true partial outcome",
+      "pass": true
+    },
+    {
+      "name": "Connection toggle changes actual workspace contract",
+      "pass": true
+    },
+    {
+      "name": "Usage reflects actual admitted tool plan metrics",
+      "pass": true
+    },
+    {
+      "name": "Multi-tool Home shows actual activity and waiting",
+      "pass": true
+    },
+    {
+      "name": "Ordinary help route uses live account projection",
+      "pass": true
+    },
+    {
+      "name": "Ordinary status route uses live account projection",
+      "pass": true
+    },
+    {
+      "name": "Ordinary changelog route uses live account projection",
+      "pass": true
+    },
+    {
+      "name": "Ordinary announcements route uses live account projection",
+      "pass": true
+    },
+    {
+      "name": "Ordinary feedback route uses live account projection",
+      "pass": true
+    },
+    {
+      "name": "Feedback is persisted in workspace with actual actor",
+      "pass": true
+    },
+    {
+      "name": "Onboarding reflects actual members, subscriptions and tasks",
+      "pass": true
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "security.png",
+    "integrations.png",
+    "audit.png",
+    "billing-contacts.png",
+    "invoice-pdf-refund.png",
+    "team.png",
+    "connections.png",
+    "usage.png",
+    "home.png",
+    "feedback.png"
+  ],
+  "errors": [],
+  "completed": true
+}
