@@ -1,0 +1,241 @@
+{
+  "date": "2026-10-10",
+  "source": "ff9ea42 publication contract + CRM follow-up",
+  "checks": [
+    {
+      "name": "Canonical /catalog ordinary route works",
+      "pass": true
+    },
+    {
+      "name": "Canonical service detail editor saves and returns to catalog",
+      "pass": true
+    },
+    {
+      "name": "Service duration policy persists as draft",
+      "pass": true
+    },
+    {
+      "name": "Preview resolves draft with the shared service policy",
+      "pass": true
+    },
+    {
+      "name": "Preview leaves published catalog intact",
+      "pass": true
+    },
+    {
+      "name": "Software default saving is retained",
+      "pass": true
+    },
+    {
+      "name": "publication-saved-preview-en-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-saved-preview-en-1440 overflow",
+      "pass": true
+    },
+    {
+      "name": "Schedule uses workspace clock and captures drafts",
+      "pass": true
+    },
+    {
+      "name": "Scheduling leaves current public prices unchanged",
+      "pass": true
+    },
+    {
+      "name": "Schedule cancellation persists",
+      "pass": true
+    },
+    {
+      "name": "Immediate publish records actual change history",
+      "pass": true
+    },
+    {
+      "name": "Immediate public price is published",
+      "pass": true
+    },
+    {
+      "name": "Canonical bundle editor saves actual recommendation",
+      "pass": true
+    },
+    {
+      "name": "Publication en/light/1440 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-en-light-1440 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication en/light/768 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-en-light-768 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication en/light/390 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-en-light-390 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication en/dark/1440 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-en-dark-1440 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication en/dark/768 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-en-dark-768 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication en/dark/390 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-en-dark-390 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication ar/light/1440 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-ar-light-1440 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication ar/light/768 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-ar-light-768 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication ar/light/390 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-ar-light-390 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication ar/dark/1440 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-ar-dark-1440 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication ar/dark/768 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-ar-dark-768 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication ar/dark/390 ordinary/RTL/theme",
+      "pass": true
+    },
+    {
+      "name": "publication-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "publication-ar-dark-390 overflow",
+      "pass": true
+    },
+    {
+      "name": "Publication has no runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "publication-saved-preview-en-1440.png",
+    "publication-en-light-1440.png",
+    "publication-en-light-768.png",
+    "publication-en-light-390.png",
+    "publication-en-dark-1440.png",
+    "publication-en-dark-768.png",
+    "publication-en-dark-390.png",
+    "publication-ar-light-1440.png",
+    "publication-ar-light-768.png",
+    "publication-ar-light-390.png",
+    "publication-ar-dark-1440.png",
+    "publication-ar-dark-768.png",
+    "publication-ar-dark-390.png"
+  ],
+  "errors": [],
+  "completed": true
+}
