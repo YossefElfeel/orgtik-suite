@@ -60,6 +60,7 @@ const copy = {
   audit: ["Activity log", "سجل النشاط", "Aktivitätsprotokoll", "Journal d’activité", "Registro attività"],
   account: ["Account", "الحساب", "Konto", "Compte", "Account"],
   preferences: ["Preferences", "التفضيلات", "Einstellungen", "Préférences", "Preferenze"],
+  preferencesFailed: ["Preferences could not be saved. Try again.", "تعذّر حفظ التفضيلات. حاول مجددًا.", "Einstellungen konnten nicht gespeichert werden. Versuchen Sie es erneut.", "Les préférences n’ont pas été enregistrées. Réessayez.", "Impossibile salvare le preferenze. Riprova."],
   help: ["Help", "المساعدة", "Hilfe", "Aide", "Aiuto"],
   administration: ["Administration", "الإدارة", "Verwaltung", "Administration", "Amministrazione"],
   collapseNavigation: ["Collapse navigation", "طيّ القائمة", "Navigation einklappen", "Réduire la navigation", "Comprimi navigazione"],

@@ -8,5 +8,6 @@ export declare function suiteRequest<T>(base: string, path: string, options?: {
     method?: "GET" | "POST" | "PATCH" | "DELETE";
     body?: unknown;
     signal?: AbortSignal;
+    keepalive?: boolean;
 }): Promise<T>;
 //# sourceMappingURL=api.d.ts.map
