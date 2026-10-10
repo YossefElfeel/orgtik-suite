@@ -194,7 +194,9 @@ function FileWorkspaceContent({
       {
         accessorKey: "name",
         header: t("name"),
-        meta: { wrap: true, width: "45%" },
+        size: 320,
+        minSize: 180,
+        meta: { wrap: true },
         cell: ({ row }) => (
           <div
             className="flex min-w-0 items-center gap-3"
@@ -218,7 +220,8 @@ function FileWorkspaceContent({
               size="sm"
               variant="ghost"
               shape="control"
-              className="min-w-0 justify-start whitespace-normal break-words text-start"
+              className="h-auto min-h-control-sm min-w-0 flex-1 shrink justify-start py-1.5 whitespace-normal text-start [&>span]:min-w-0 [&>span]:wrap-anywhere"
+              dir="auto"
               onClick={() => choose(row.original.id)}
             >
               {row.original.name}
@@ -236,6 +239,8 @@ function FileWorkspaceContent({
       {
         id: "folder",
         header: t("folders"),
+        size: 220,
+        minSize: 130,
         meta: { wrap: true },
         cell: ({ row }) => (
           <span dir="auto" className="text-body-sm text-fg-muted">
@@ -249,18 +254,21 @@ function FileWorkspaceContent({
       {
         accessorKey: "version",
         header: t("version"),
+        size: 80,
         meta: { numeric: true },
         cell: ({ row }) => f.number(row.original.version),
       },
       {
         accessorKey: "size",
         header: t("size"),
+        size: 100,
         meta: { numeric: true },
         cell: ({ row }) => f.bytes(Number(row.original.size)),
       },
       {
         accessorKey: "updatedAt",
         header: t("updated"),
+        size: 170,
         meta: { numeric: true },
         cell: ({ row }) => f.date(row.original.updatedAt),
       },
