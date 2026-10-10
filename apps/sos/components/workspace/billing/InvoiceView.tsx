@@ -12,11 +12,13 @@ import { statusOf } from "@/redux/features/platform/platformApi";
 import { useBillingInvoiceQuery, useBillingSubscriptionsQuery, type Invoice, type SubscriptionLine } from "@/redux/features/platform/billing";
 import { ButtonLink } from "@/components/shared/ButtonLink";
 import { Money, useCountryName, useDay, useLocalized, useTaxName } from "./shared";
+import { RefundRequestPanel } from "@/components/account/AccountBilling";
 import { PaginatedTable } from "@orgtik/ui/table";
 
 export function InvoiceView({ id }: { id: string }) {
   const t = useTranslations("Billing.invoice");
   const tb = useTranslations("Billing");
+  const tv = useTranslations("AccountV3");
   const { data, isLoading, isError, error, refetch } = useBillingInvoiceQuery(id);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -34,13 +36,14 @@ export function InvoiceView({ id }: { id: string }) {
         status={<StatusBadge entity="invoice" state={data.state} viewer="customer" />}
         actions={
           <Button variant="secondary" startIcon={<Printer />} onClick={() => window.print()}>
-            {t("print")}
+            {tv("invoicePdf")}
           </Button>
         }
       />
       <Card padding="none" className="overflow-hidden">
         <InvoiceDocument invoice={data} />
       </Card>
+      <RefundRequestPanel invoice={data} />
       {/* The same invoice, alone on paper. Hidden on screen; while printing, everything else is. */}
       {mounted
         ? createPortal(

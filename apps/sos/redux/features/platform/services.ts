@@ -20,7 +20,7 @@ export type Service = {
 export type ServiceRequestState = "new" | "under_review" | "quoted" | "awaiting_payment" | "in_progress" | "in_review" | "on_hold" | "completed" | "rejected" | "expired" | "cancelled";
 export type Quote = { currency: string; lines: { label: string; amount: number }[]; total: number; validUntil: string; sentAt?: string };
 export type Milestone = { title: string; state: "open" | "done" | "delivered"; due?: string };
-export type Delivery = { id: string; at: string; note: string; files: string[]; autoApproveAt?: string };
+export type Delivery = { id: string; at: string; note: string; files: (string | { name: string; contentPath?: string; size?: number; mimeType?: string })[]; autoApproveAt?: string };
 export type RequestMessage = { by: "customer" | "staff"; author: string; at: string; text: string };
 export type ServiceRequest = {
   id: string;
