@@ -111,6 +111,9 @@ function createWorkspaceRuntime(input, appModule) {
   return { router, exportSnapshot, bootstrap, suiteFeed, receiveWebsiteIntake,
     provisioningCandidate: (context, id) => { open(); return require('../../apps/sales/v3')(S).provisioningCandidate(context, id); },
     recordProvisioning: (context, id, receipt) => { open(); return require('../../apps/sales/v3')(S).recordProvisioning(context, id, receipt); },
+    setMarketingConsent: (context, id, value) => { bootstrap(context); return require('../../apps/sales/v3')(S).setMarketingConsent(context, id, value); },
+    marketingContact: (context, id) => { bootstrap(context); return require('../../apps/sales/v3')(S).marketingContact(context, id); },
+    createCampaignLead: (context, candidate, id, body) => { bootstrap(context); return require('../../apps/sales/v3')(S).createCampaignLead(context, candidate, id, body); },
     usage: () => { open(); return [{ key: "contacts", used: S.db.customers.length }, { key: "projects", used: S.db.projects.length }, { key: "leads", used: S.db.leads.length }]; }, transferOwnership, applyCommitted, dueTransitions: () => { open(); return S.db.subscriptions.flatMap(row => row.status === "cancelled" ? [] : row.installments.filter(item => !item.invoiceId && item.status !== "paid" && new Date(item.dueDate).getTime() <= (input.clock.nowMs?.() ?? input.clock.now()) + 30 * 864e5).map(item => ({ kind: "sales.schedule.due", subscriptionId: row.id, installmentNumber: item.number }))); }, stageDueTransitions() { open(); S.billing.refreshSchedules({ system: true }); }, close() { closed = true; S.io = null; } };
 }
 module.exports = { createWorkspaceRuntime, SCHEMA, COUNTERS, LISTS };

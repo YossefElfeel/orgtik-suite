@@ -49,7 +49,7 @@ export type CrmContact = Customer & {
   activities: CrmActivity[];
   marketingConsent: {
     state: "opted_in" | "opted_out" | "unknown";
-    source: "manual_mock" | null;
+    source: "manual_mock" | "marketing_mock" | null;
     recordedBy: number | null;
     recordedAt: string | null;
   };
