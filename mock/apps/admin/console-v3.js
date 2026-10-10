@@ -210,7 +210,10 @@ function create({ getStore, identity, principal, applyDb, afterStaffAcceptance }
     })));
     app.get(prefix + '/software-catalog', read(() => {
       authority('tools:view');
-      return { managedIn: 'console', offers: S().db.websiteOffers.filter(row => row.kind === 'software').map(row => ({ ...clone(row), toolStatus: row.tool ? S().db.tools.find(tool => tool.key === row.tool)?.status : S().db.services.find(service => service.id === row.serviceId)?.status })), bundles: clone(S().db.websiteOfferBundles.filter(row => row.kind === 'software')) };
+      return { managedIn: 'console', offers: S().db.websiteOffers.filter(row => row.kind === 'software').map(row => {
+        const owner = row.tool ? S().db.tools.find(tool => tool.key === row.tool) : S().db.services.find(service => service.id === row.serviceId);
+        return { ...clone(row), name: clone(row.name || owner?.name || {}), description: clone(row.description || {}), capabilities: clone(row.capabilities || {}), toolStatus: owner?.status };
+      }), bundles: clone(S().db.websiteOfferBundles.filter(row => row.kind === 'software')) };
     }));
     app.post(prefix + '/software-catalog/:id', read(req => recorded(req, 'tools:edit', (p) => {
       const offer = S().db.websiteOffers.find(row => row.id === req.params.id && row.kind === 'software'), body = req.body;
@@ -284,7 +287,7 @@ function create({ getStore, identity, principal, applyDb, afterStaffAcceptance }
       if (Object.values(data.documents).some(row => row.documentNumber === documentNumber)) throw fail(409, 'document_number_used', 'Choose an unused document series.');
       const row = { invoiceId: invoice.id, documentNumber, number: invoice.number, entity, invoice: clone(invoice), workspace: workspace.name, billing: clone(workspace.billing), issuedAt: at(), prototype: true, regulatorySubmission: 'not_submitted' };
       const money = amount => `${S().pricing.toDecimals(amount || 0, S().db.currencies[invoice.currency]?.decimals ?? 2).toFixed(S().db.currencies[invoice.currency]?.decimals ?? 2)} ${invoice.currency}`;
-      const content = require('../sales/lib').makePdf(documentNumber, [`Original invoice: ${invoice.number}`, `Workspace: ${workspace.name}`, `Billing: ${workspace.billing.legalName || workspace.name}`, `Issued: ${invoice.issuedAt || row.issuedAt}`, '---', ...invoice.lines.map(line => ({ text: line.label || line.name?.en || line.planId || line.lineId || 'Invoice line', right: money(line.amount) })), { text: 'Subtotal', right: money(invoice.subtotal) }, { text: invoice.taxLabel || 'Tax', right: money(invoice.tax) }, { text: 'Total', right: money(invoice.total), bold: true }, 'Prototype document - regulatory submission: not submitted'], { subtitle: 'OrgTik Console - local mock invoice', footerBrand: 'OrgTik Console' });
+      const content = require('../sales/lib').makePdf(documentNumber, [`Original invoice: ${invoice.number}`, `Workspace: ${workspace.name}`, `Billing: ${workspace.billing.legalName || workspace.name}`, `Issued: ${invoice.issuedAt || row.issuedAt}`, '---', ...invoice.lines.map(line => ({ text: String(line.label || line.name?.en || line.planId || line.lineId || 'Invoice line').replace(/[·•–—]/g, '-'), right: money(line.amount) })), { text: 'Subtotal', right: money(invoice.subtotal) }, { text: invoice.taxLabel || 'Tax', right: money(invoice.tax) }, { text: 'Total', right: money(invoice.total), bold: true }, 'Prototype document - regulatory submission: not submitted'], { subtitle: 'OrgTik Console - local mock invoice', footerBrand: 'OrgTik Console' });
       row.content = { name: `Invoice-${documentNumber}.pdf`, mimetype: 'application/pdf', bytes: content.length, sha256: crypto.createHash('sha256').update(content).digest('hex'), base64: content.toString('base64') };
       data.documents[invoice.id] = row; log(p, 'invoice_document_recorded', invoice.id, { documentNumber }); return clone(row);
     })));

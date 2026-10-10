@@ -941,6 +941,16 @@
     "acceptStaffInvitation": "Accepter et se reconnecter",
     "staffInvitationFailed": "Cette invitation n’a pas pu être acceptée",
     "paymentRecoveryBody": "Une tentative initiale attend sa récupération. Conservez le moyen initial.",
-    "recoverOriginalPayment": "Récupérer le paiement initial"
+    "recoverOriginalPayment": "Récupérer le paiement initial",
+    "staffRoles": {
+      "super_admin": "Super administrateur",
+      "finance": "Finance",
+      "sales": "Ventes",
+      "support": "Support",
+      "service_mgr": "Responsable des services",
+      "service_team": "Équipe services",
+      "content": "Contenu",
+      "product_mgr": "Responsable produit"
+    }
   }
 }

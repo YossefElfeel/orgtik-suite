@@ -941,6 +941,16 @@
     "acceptStaffInvitation": "Accept and sign in again",
     "staffInvitationFailed": "This current invitation could not be accepted",
     "paymentRecoveryBody": "An original payment attempt is awaiting recovery. Keep its original method and recover the recorded result.",
-    "recoverOriginalPayment": "Recover original payment"
+    "recoverOriginalPayment": "Recover original payment",
+    "staffRoles": {
+      "super_admin": "Super Admin",
+      "finance": "Finance",
+      "sales": "Sales",
+      "support": "Support",
+      "service_mgr": "Service Manager",
+      "service_team": "Service Team",
+      "content": "Content",
+      "product_mgr": "Product Manager"
+    }
   }
 }

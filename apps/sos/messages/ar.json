@@ -941,6 +941,16 @@
     "acceptStaffInvitation": "اقبل وسجّل دخول تاني",
     "staffInvitationFailed": "الدعوة الحالية ما اتقبلتش",
     "paymentRecoveryBody": "في محاولة دفع أصلية مستنية الاسترجاع. احتفظ بالطريقة الأصلية واسترجع النتيجة المسجلة.",
-    "recoverOriginalPayment": "استرجع محاولة الدفع الأصلية"
+    "recoverOriginalPayment": "استرجع محاولة الدفع الأصلية",
+    "staffRoles": {
+      "super_admin": "مدير عام",
+      "finance": "المالية",
+      "sales": "المبيعات",
+      "support": "الدعم",
+      "service_mgr": "مدير الخدمات",
+      "service_team": "فريق الخدمات",
+      "content": "المحتوى",
+      "product_mgr": "مدير المنتج"
+    }
   }
 }

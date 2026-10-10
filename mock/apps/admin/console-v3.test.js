@@ -31,6 +31,12 @@ test('ordinary Console uses current staff authority, actual records and immutabl
     assert.deepEqual(notes.map(row => row.id), good(await call('admin', '/v1/admin/console/notifications', token)).map(row => row.id));
     const metrics = good(await call('admin', '/v1/admin/console/metrics', token)); assert.ok(metrics.mrrUsd >= 0); assert.equal(metrics.cohorts.reduce((sum, row) => sum + row.workspaces, 0), store.db.workspaces.filter(row => row.state !== 'deleted').length);
     assert.equal(good(await call('admin', '/v1/admin/console/ecosystem', token)).connectors.length, require('../../lib/connectors').DEFINITIONS.length);
+    const catalog = good(await call('admin', '/v1/admin/console/software-catalog', token));
+    for (const offer of catalog.offers) {
+      assert.ok(['en', 'ar', 'de', 'fr', 'it'].every(locale => typeof offer.name[locale] === 'string' && offer.name[locale].length));
+      assert.equal(typeof offer.description, 'object'); assert.equal(typeof offer.capabilities, 'object');
+    }
+    assert.deepEqual(catalog.offers.find(offer => offer.id === 'tasks').name, store.db.tools.find(tool => tool.key === 'tasks').name);
     const publication = { tool: 'tasks', kind: 'changelog', title: 'Actual Tasks change', body: 'A recorded mock release note.', version: 'v3' };
     const release = good(await call('admin', '/v1/admin/console/releases', token, 'POST', publication, 'console-release-proof'));
     assert.equal(good(await call('admin', '/v1/admin/console/releases', token, 'POST', publication, 'console-release-proof')).id, release.id);

@@ -941,6 +941,16 @@
     "acceptStaffInvitation": "Accetta e accedi di nuovo",
     "staffInvitationFailed": "Impossibile accettare questo invito",
     "paymentRecoveryBody": "Un tentativo originale attende il recupero. Mantieni il metodo originale.",
-    "recoverOriginalPayment": "Recupera pagamento originale"
+    "recoverOriginalPayment": "Recupera pagamento originale",
+    "staffRoles": {
+      "super_admin": "Super amministratore",
+      "finance": "Finanza",
+      "sales": "Vendite",
+      "support": "Assistenza",
+      "service_mgr": "Responsabile servizi",
+      "service_team": "Team servizi",
+      "content": "Contenuti",
+      "product_mgr": "Product manager"
+    }
   }
 }

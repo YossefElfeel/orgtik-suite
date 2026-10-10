@@ -39,6 +39,7 @@ import { CURRENT_SCOPE } from "@/components/suite/useSuiteApps";
 import { CenteredState } from "./CenteredState";
 import { consoleRequest } from "@/lib/console";
 import { PendingCommands } from '@/components/console/PendingCommands';
+import { StaffPreferences } from '@/components/console/StaffPreferences';
 
 type NavItem = { key: string; href: string; icon: ReactNode; permission: string; external?: boolean };
 type NavSection = { label?: string; items: NavItem[] };
@@ -223,6 +224,7 @@ export function AdmFrame({ children }: { children: ReactNode }) {
       }
     >
       <PendingCommands />
+      <StaffPreferences />
       {children}
       {signOutFailed && <ErrorState size="compact" title={ta("offlineTitle")} description={ta("offlineBody")} onRetry={() => { setSignOutFailed(false); void signOutStaff().then(() => window.location.assign(SOS_URL)).catch(() => setSignOutFailed(true)); }} />}
       <Toaster />

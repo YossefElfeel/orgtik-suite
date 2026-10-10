@@ -941,6 +941,16 @@
     "acceptStaffInvitation": "Annehmen und erneut anmelden",
     "staffInvitationFailed": "Diese Einladung konnte nicht angenommen werden",
     "paymentRecoveryBody": "Ein ursprünglicher Zahlungsversuch wartet auf Wiederherstellung. Behalten Sie die Methode bei.",
-    "recoverOriginalPayment": "Ursprüngliche Zahlung wiederherstellen"
+    "recoverOriginalPayment": "Ursprüngliche Zahlung wiederherstellen",
+    "staffRoles": {
+      "super_admin": "Super-Admin",
+      "finance": "Finanzen",
+      "sales": "Vertrieb",
+      "support": "Support",
+      "service_mgr": "Service-Manager",
+      "service_team": "Service-Team",
+      "content": "Inhalte",
+      "product_mgr": "Produktmanager"
+    }
   }
 }
