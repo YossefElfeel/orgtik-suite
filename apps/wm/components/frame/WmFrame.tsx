@@ -1,17 +1,17 @@
 "use client";
-import { demoRuntime } from "@orgtik/ui";
+
 
 import { useEffect, useState, type ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { AppWindow, ArrowsSplit, GearSix, ListChecks, Translate, Tray, Article, ArrowSquareOut, Briefcase, Browsers, Globe, Heartbeat, Images, Key, Lightbulb, MagnifyingGlass, MapTrifold, Scales, SquaresFour, Stack, Tag, TextAa, Monitor } from "@phosphor-icons/react";
 import {
-  AppRail,
+  Badge,
   Button,
   ErrorState,
   NoPermissionState,
   Sidebar,
   Spinner,
-  SuiteShell,
+  SuiteFrame,
   Toaster,
   UserMenu,
   type Locale,
@@ -22,8 +22,10 @@ import { SOS_URL, WEBSITE_URL } from "@/lib/env";
 import { clearToken, getToken, signOutStaff } from "@/lib/session";
 import { useClientSession } from "@orgtik/ui/auth";
 import { statusOf, useMeQuery } from "@/store/api";
-import { CURRENT_SCOPE, useSuiteApps } from "@/components/suite/useSuiteApps";
+
 import { CenteredState } from "./CenteredState";
+import { wmRequest, studioAuthority } from "@/lib/studio";
+import { useStaffAppearance } from "@/components/studio/StaffAppearance";
 
 type NavItem = { key: string; href: string; icon: ReactNode; permission: string };
 type NavSection = { label?: string; items: NavItem[] };
@@ -33,9 +35,9 @@ type NavSection = { label?: string; items: NavItem[] };
 function useNav(): NavSection[] {
   const t = useTranslations("Nav");
   const ti = useTranslations("Improvements");
-  const studioText = useTranslations("Studio");
+  const v3 = useTranslations("WmV3");
   return [
-    ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ items: [{ key: studioText("heading"), href: "/presentation", icon: <Monitor />, permission: "overview:view" }] }] : []),
+
     { items: [{ key: t("overview"), href: "/", icon: <SquaresFour />, permission: "overview:view" }] },
     {
       label: t("sections.website"),
@@ -44,19 +46,19 @@ function useNav(): NavSection[] {
         { key: t("global"), href: "/content/global", icon: <Globe />, permission: "content:view" },
         { key: t("strings"), href: "/content/strings", icon: <TextAa />, permission: "content:view" },
         { key: t("translations"), href: "/localization", icon: <Translate />, permission: "localization:view" },
+        { key: v3("translationDrafts"), href: "/localization/drafts", icon: <Translate />, permission: "localization:view" },
         { key: t("preview"), href: "/preview", icon: <Monitor />, permission: "content:view" },
       ],
     },
     {
       label: t("sections.content"),
       items: [
-        { key: t("services"), href: "/content/services", icon: <Stack />, permission: "content:view" },
-        { key: t("software"), href: "/content/software", icon: <AppWindow />, permission: "content:view" },
+        { key: t("services"), href: "/catalog/services", icon: <Stack />, permission: "content:view" },
+        { key: t("software"), href: "/catalog/software", icon: <AppWindow />, permission: "content:view" },
         { key: t("work"), href: "/content/work", icon: <Briefcase />, permission: "content:view" },
         { key: ti("reviews"), href: "/content/reviews", icon: <Heartbeat />, permission: "content:view" },
         { key: t("insights"), href: "/content/insights", icon: <Article />, permission: "content:view" },
         { key: t("legal"), href: "/content/legal", icon: <Scales />, permission: "content:view" },
-        { key: t("pricing"), href: "/content/pricing", icon: <Tag />, permission: "content:view" },
       ],
     },
     { label: t("sections.media"), items: [{ key: t("library"), href: "/media", icon: <Images />, permission: "media:view" }] },
@@ -74,15 +76,20 @@ function useNav(): NavSection[] {
         { key: t("roadmap"), href: "/content/roadmap", icon: <MapTrifold />, permission: "content:view" },
         { key: t("leads"), href: "/marketing/leads", icon: <Tray />, permission: "marketing:view" },
         { key: t("ideas"), href: "/marketing/ideas", icon: <Lightbulb />, permission: "marketing:view" },
+        { key: v3("formChecks"), href: "/marketing/forms", icon: <Tray />, permission: "marketing:view" },
       ],
     },
     {
       label: t("sections.settings"),
       items: [
+        { key: v3("administration"), href: "/admin", icon: <GearSix />, permission: "overview:view" },
         { key: t("site"), href: "/settings/site", icon: <GearSix />, permission: "settings:view" },
         { key: t("team"), href: "/settings/roles", icon: <Key />, permission: "settings:view" },
         { key: ti("userManagement"), href: "/settings/users", icon: <Key />, permission: "users:view" },
         { key: t("audit"), href: "/settings/audit", icon: <ListChecks />, permission: "settings:view" },
+        { key: v3("webhooks"), href: "/settings/webhooks", icon: <GearSix />, permission: "settings:view" },
+        { key: v3("releases"), href: "/releases", icon: <Stack />, permission: "content:view" },
+        { key: v3("setup"), href: "/setup", icon: <ListChecks />, permission: "overview:view" },
       ],
     },
   ];
@@ -109,7 +116,9 @@ export function WmFrame({ children }: { children: ReactNode }) {
   }, [token, router]);
 
   const me = useMeQuery(undefined, { skip: !token });
-  const apps = useSuiteApps(token ?? null);
+  const appearance = useStaffAppearance(pathname,locale);
+  const v3 = useTranslations("WmV3");
+  const tr = useTranslations("Roles");
   const nav = useNav();
 
   useEffect(() => {
@@ -158,40 +167,23 @@ export function WmFrame({ children }: { children: ReactNode }) {
     .filter((s) => s.items.length);
 
   return (
-    <SuiteShell
-      demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "wm", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
-      rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref={SOS_URL} />}
+    <SuiteFrame
+      key={studioAuthority()}
+      snapshot={null}
+      currentScope="website_manager"
+      currentHref={`/${locale}`}
+      sosUrl={SOS_URL}
+      width="wide"
+      breadcrumbs={[{label:"OrgTik",href:SOS_URL},{label:t("name")}]}
+      search={{load:(query,signal)=>wmRequest(`/studio/search?q=${encodeURIComponent(query)}`,{signal}),onSelect:item=>router.push(item.path)}}
+      notifications={{load:()=>wmRequest("/studio/notifications"),onSelect:item=>router.push(item.path),onRead:id=>wmRequest("/studio/notifications/read",{body:{ids:[id]}}),onReadAll:()=>wmRequest("/studio/notifications/read",{body:{all:true}})}}
+      banner={<div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2"><div className="flex flex-wrap gap-2">{(session?.staffAccess?.roles.wm||[]).map(role=><Badge key={role} tone="brand" size="sm">{tr.has(role)?tr(role):role}</Badge>)}</div><Button variant="ghost" size="sm" onClick={()=>appearance.setDensity(appearance.preferences.density==="compact"?"comfortable":"compact")}>{v3(appearance.preferences.density==="compact"?"comfortable":"compact")}</Button></div>}
       sidebar={<Sidebar title={t("name")} sections={sections} />}
-      topBar={{
-        start: (
-          <a
-            href={WEBSITE_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-pill px-2 py-1 text-body-sm font-semibold text-fg-muted hover:bg-hover hover:text-fg focus-visible:outline-2 focus-visible:outline-focus"
-          >
-            <span dir="ltr">{t("site")}</span>
-            <ArrowSquareOut aria-hidden="true" className="size-4 rtl:-scale-x-100" />
-            <span className="sr-only">{t("viewSite")}</span>
-          </a>
-        ),
-        end: (
-          <UserMenu
-            name={`${user.firstName} ${user.lastName}`}
-            email={user.email}
-            avatarSrc={user.avatar ?? undefined}
-            locales={routing.locales as readonly Locale[]}
-            onLocaleChange={(next) => router.replace(pathname, { locale: next })}
-            onSignOut={() => {
-              void signOutStaff().then(() => window.location.assign(SOS_URL)).catch(() => setSignOutFailed(true));
-            }}
-          />
-        ),
-      }}
+      userMenu={<UserMenu name={`${user.firstName} ${user.lastName}`} email={user.email} avatarSrc={user.avatar??undefined} locales={routing.locales as readonly Locale[]} onLocaleChange={appearance.changeLocale} onSignOut={()=>{void signOutStaff().then(()=>window.location.assign(SOS_URL)).catch(()=>setSignOutFailed(true));}}/>}
     >
-      <div className="mx-auto w-full max-w-6xl p-4 md:p-8">{children}</div>
+      <div data-density={appearance.preferences.density||"comfortable"} className="min-w-0">{appearance.failed?<p role="alert" className="mb-4 text-body-sm text-danger">{v3("preferencesFailed")}</p>:null}{children}</div>
       {signOutFailed && <ErrorState size="compact" title={ta("offlineTitle")} description={ta("offlineBody")} onRetry={() => { setSignOutFailed(false); void signOutStaff().then(() => window.location.assign(SOS_URL)).catch(() => setSignOutFailed(true)); }} />}
       <Toaster />
-    </SuiteShell>
+    </SuiteFrame>
   );
 }

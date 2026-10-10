@@ -5,7 +5,7 @@
 import type { EntryContent, EntryType, LayoutSection } from "@/store/api";
 import { BLOCKS, BRIEF, type Department, type Node } from "./caseStudySchema";
 import { cmsLabelKey, cmsNodeLabels } from "./cmsLabels";
-import sectionMap from "../../../program/cms/sections.json";
+import sectionMap from "@/lib/cms-sections.json";
 
 export type Area =
   | "pages"
