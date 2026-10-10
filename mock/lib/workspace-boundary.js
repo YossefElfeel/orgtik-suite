@@ -58,14 +58,16 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
   }
   function deliverPaidServices(request) {
     const S = platform().getStore();
-    for (const service of S.db.serviceRequests.filter(row => row.source?.kind === 'website_order' && !row.crmLeadId)) {
+    for (const service of S.db.serviceRequests.filter(row => row.source?.kind === 'website_order' && !row.crmProjectId)) {
       const stored = S.db.publicWebsiteOrders.find(row => row.snapshot?.reference === service.source.reference);
-      if (!stored || !S.db.websiteOrderLinks.some(row => row.reference === service.source.reference && row.workspaceId === service.workspaceId)) continue;
+      if (stored?.snapshot?.paymentStatus !== 'succeeded' || !S.db.websiteOrderLinks.some(row => row.reference === service.source.reference && row.workspaceId === service.workspaceId)) continue;
       const order = stored.snapshot, workspace = S.workspace(service.workspaceId), owner = workspace?.members.find(row => row.role === 'owner' && row.status === 'active'), person = owner && identityFor().findByKey(owner.userKey);
       if (!person || !stored.billing?.email) continue;
       try {
-        const result = internalCrmRuntime(request).receiveWebsiteIntake({ source: 'website_order', name: stored.billing.name || identityFor().fullName(person), email: stored.billing.email, company: workspace.name, message: service.brief, locale: person.profile?.language || 'en' }, { sourceKey: `website-order:${order.reference}:${service.id}`, serviceRequestId: service.id });
-        service.crmLeadId = result.leadId; service.crmDelivery = { state: 'sent' };
+        const line = order.groups.flatMap(group => group.lines).find(row => row.catalogId === service.catalogId && row.fulfillment !== 'tool');
+        if (!line) continue;
+        const result = internalCrmRuntime(request).receiveWebsiteIntake({ source: 'website_order', name: stored.billing.name || identityFor().fullName(person), email: stored.billing.email, company: workspace.name, message: service.brief, locale: person.profile?.language || 'en' }, { sourceKey: `website-order:${order.reference}:${service.id}`, serviceRequestId: service.id, reference: order.reference, title: `${service.title} · ${order.reference}`, paidSnapshot: { currency: order.currency, decimals: order.decimals, paidAt: order.createdAt, line: clone(line), policy: clone(order.policy) } });
+        service.crmLeadId = result.leadId; service.crmProjectId = result.projectId; service.crmDelivery = { state: 'sent' };
       } catch (error) { service.crmDelivery = { state: 'deferred', code: error.code || 'crm_intake_unavailable' }; }
     }
   }
@@ -384,6 +386,25 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       if (!p) throw failure(401, 'unauthenticated', 'Sign in to manage your account.');
       return require('./workspace-account-actions').createAccountActions({ S: platform().getStore(), identity: identityFor(), principal: p, workspace: ownContext() ? workspace() : null, sessionStore, authority, token: identityFor().tokenFrom(req), frame });
     };
+    const publicCareers = (req, write = false) => {
+      const S = platform().getStore(), ws = S.workspace(req.params.workspaceId);
+      if (!ws || ['deleted', 'cancelled'].includes(ws.state)) throw failure(404, 'careers_not_found', 'This careers page is unavailable.');
+      const line = ws.lines.find(row => row.tool === 'hr' && !['ended', 'deleted'].includes(row.state)), plan = line && S.db.plans.find(row => row.id === line.planId);
+      const planEligible = Boolean(line && plan?.tool === 'hr'), canApply = planEligible && ws.state !== 'suspended' && line.state !== 'read_only';
+      if (!planEligible) throw failure(404, 'careers_not_found', 'This careers page is unavailable.');
+      const runtime = registry.create(ws.id, 'hr');
+      if (write) requests.getStore().relatedRuntimes.set(`public-careers:${ws.id}`, runtime);
+      return { runtime, planEligible, canApply };
+    };
+    app.get('/v1/public/careers/:workspaceId', route(req => {
+      const { runtime, ...eligibility } = publicCareers(req);
+      try { if (!runtime.publicCareers) throw failure(503, 'careers_unavailable', 'The careers page is being prepared.'); return runtime.publicCareers(eligibility); } finally { runtime.close(); }
+    }));
+    app.post('/v1/public/careers/:workspaceId/jobs/:jobId/applications', route(req => {
+      const { runtime, ...eligibility } = publicCareers(req, true);
+      if (!runtime.applyPublicCareer) throw failure(503, 'careers_unavailable', 'The careers page is being prepared.');
+      return runtime.applyPublicCareer({ ...eligibility, jobId: req.params.jobId, application: req.body, operationId: req.get('idempotency-key') });
+    }));
     app.get('/api/auth/account', route(req => {
       personActions(req);
       const p = principal(), S = platform().getStore();
@@ -619,7 +640,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       }
       // Approved owner-domain adapter. The existing transaction commits or rolls
       // back the platform and related CRM snapshots together; paid rows stay intact.
-      await authority.runPrepared(frame, () => requests.run({ frame, key, req, principal: frame.principal, runtime, relatedRuntimes }, () => deliverPaidServices(requests.getStore())));
+      if (req.method === 'POST' && /^\/v1\/app\/website-orders(?:$|\?)/.test(url)) await authority.runPrepared(frame, () => requests.run({ frame, key, req, principal: frame.principal, runtime, relatedRuntimes }, () => deliverPaidServices(requests.getStore())));
       assignInitialOwnerSeats(S);
       if (runtime) registry.commit(runtime);
       for (const related of relatedRuntimes.values()) registry.commit(related);

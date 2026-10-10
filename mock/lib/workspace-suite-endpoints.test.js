@@ -144,8 +144,17 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     assert.equal(order.paymentStatus, 'succeeded');
     const linkedOrder = good(await call('sos', '/v1/app/website-orders', token, 'POST', { reference: order.reference, claimToken: order.claimToken }));
     const serviceRequest = require('../apps/admin').getStore().db.serviceRequests.find(row => row.id === linkedOrder.requests[0].requestId);
-    assert.ok(serviceRequest.crmLeadId); assert.equal(serviceRequest.crmDelivery.state, 'sent');
+    assert.ok(serviceRequest.crmLeadId, JSON.stringify(serviceRequest)); assert.ok(serviceRequest.crmProjectId); assert.equal(serviceRequest.crmDelivery.state, 'sent');
     const linkedContact = good(await call('sales', `/api/customers/${serviceRequest.crmLeadId}`, crmToken)); assert.equal(linkedContact.email, 'owner@v3-suite.test');
+    const paidDeal = good(await call('sales', `/api/projects/${serviceRequest.crmProjectId}`, crmToken)); assert.equal(paidDeal.customerId, serviceRequest.crmLeadId);
+    const sourceRuntime = require('../apps/admin').getStore().db.serviceRequests.find(row => row.id === serviceRequest.id);
+    const projectId = sourceRuntime.crmProjectId;
+    good(await call('sos', '/v1/app/website-orders', token, 'POST', { reference: order.reference, claimToken: order.claimToken }));
+    assert.equal(require('../apps/admin').getStore().db.serviceRequests.find(row => row.id === serviceRequest.id).crmProjectId, projectId);
+    good(await call('sales', `/api/suite/services/requests/${serviceRequest.id}/actions`, crmToken, 'POST', { action: 'review' }));
+    assert.equal((await call('sales', `/api/suite/services/requests/${serviceRequest.id}/actions`, crmToken, 'POST', { action: 'quote', lines: [{ label: 'Charge again', amount: 10 }] })).status, 409);
+    const started = good(await call('sales', `/api/suite/services/requests/${serviceRequest.id}/actions`, crmToken, 'POST', { action: 'start' }));
+    assert.equal(started.state, 'in_progress'); assert.ok(started.periodStart); assert.ok(started.periodEnd);
     const immutablePaid = JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders);
     const regionalCatalog = good(await call('sales', '/api/suite/services/catalog', crmToken)); assert.ok(regionalCatalog.countries.some(row => row.code === 'FR'));
     const eligible = good(await call('sales', '/api/suite/services/staff', crmToken)); assert.ok(eligible.some(row => row.id === mona.user.id));
