@@ -11,6 +11,7 @@
  * SHAPE as well as its own hue, so status never depends on colour alone.
  */
 
+import {Avatar as LibAvatar,AvatarGroup} from "@orgtik/ui";
 import { memo } from "react";
 import type { Status } from "@/entities";
 import { STATUS_META, tintFor } from "@/lib/presence";
@@ -57,7 +58,7 @@ export function PresenceMark({ status, px }: { status: Status; px: number }) {
       height={px}
       viewBox="0 0 16 16"
       aria-hidden="true"
-      style={{ display: "block" }}
+      className={"ch-display-2a1b75"} 
     >
       {/* A ground disc so the mark reads on any surface it lands on. */}
       <circle cx="8" cy="8" r="8" fill="var(--color-surface)" />
@@ -98,122 +99,5 @@ export function PresenceMark({ status, px }: { status: Status; px: number }) {
   );
 }
 
-function AvatarBase({
-  name,
-  initials,
-  tint,
-  status,
-  size = 40,
-  speaking = false,
-  guest = false,
-  hideStatus = false,
-  className = "",
-}: AvatarProps) {
-  const t = tintFor(tint);
-  const markPx = MARK_SIZE[size];
-  const meta = status ? STATUS_META[status] : null;
-  const dimmed = status === "offline";
-  const tr = useT();
-  const named = meta ? `${name} - ${tr(`status.${meta.id}`, meta.label)}` : name;
-
-  return (
-    <span
-      className={`relative inline-flex shrink-0 items-center justify-center rounded-full ${className}`}
-      style={{
-        width: size,
-        height: size,
-        /* Lit from the same upper-left direction as the furniture, so a person
-           belongs to the same world as the room they stand in - and carries a
-           little more light than anything around them. */
-        background: `radial-gradient(circle at 32% 26%, color-mix(in srgb, ${t.bg} 55%, #fff), ${t.bg} 78%)`,
-        color: t.fg,
-        fontSize: FONT_SIZE[size],
-        fontWeight: 600,
-        letterSpacing: "0.01em",
-        opacity: dimmed ? 0.55 : 1,
-        border: guest ? "1.5px dashed var(--color-hairline-strong)" : "none",
-        boxShadow: dimmed
-          ? "none"
-          : "var(--shadow-lit), 0 1px 2px rgb(var(--shadow-ink) / 0.12)",
-        transition: "opacity var(--duration-state) var(--ease-out-soft)",
-      }}
-      /* The accessible name carries the status in words, because the mark is
-         decorative to a screen reader. */
-      role="img"
-      aria-label={named}
-      title={named}
-    >
-      <span aria-hidden="true">{initials}</span>
-
-      {/* Speaking is a concentric ring, animated only while audio flows. It is
-          outside the avatar so it never obscures the initials. */}
-      {speaking && (
-        <span
-          aria-hidden="true"
-          className="hq-speak pointer-events-none absolute inset-0 rounded-full"
-          style={{
-            boxShadow: `0 0 0 2px var(--color-presence-available), 0 0 0 5px color-mix(in srgb, var(--color-presence-available) 22%, transparent)`,
-          }}
-        />
-      )}
-
-      {status && !hideStatus && (
-        <span
-          className="absolute"
-          style={{ insetInlineEnd: -1, bottom: -1, lineHeight: 0 }}
-          aria-hidden="true"
-        >
-          <PresenceMark status={status} px={markPx} />
-        </span>
-      )}
-    </span>
-  );
-}
-
-/**
- * Memoised: on the floor, twelve of these are mounted at once and only the one
- * whose person moved should re-render.
- */
-export const Avatar = memo(AvatarBase);
-
-/* ---------------------------------------------------------------- stacked */
-
-/** Overlapping avatars for room occupancy and thread reply summaries. */
-export function AvatarStack({
-  people,
-  size = 20,
-  max = 4,
-}: {
-  people: { name: string; initials: string; tint: number }[];
-  size?: AvatarSize;
-  max?: number;
-}) {
-  const shown = people.slice(0, max);
-  const rest = people.length - shown.length;
-  return (
-    <span className="inline-flex items-center">
-      {shown.map((p, i) => (
-        <span
-          key={p.name}
-          style={{
-            marginInlineStart: i === 0 ? 0 : -Math.round(size * 0.3),
-            zIndex: shown.length - i,
-            borderRadius: "999px",
-            boxShadow: "0 0 0 2px var(--color-surface)",
-            display: "inline-flex",
-          }}
-        >
-          <Avatar name={p.name} initials={p.initials} tint={p.tint} size={size} hideStatus />
-        </span>
-      ))}
-      {rest > 0 && (
-        <span
-          className="tabular ms-1 text-[11px]"
-          style={{ color: "var(--color-ink-muted)" }}
-        >
-          +{rest}
-        </span>
-      )}
-    </span>
-  );
-}
+function AvatarBase({name,status,size=40,speaking=false,guest=false,hideStatus=false,className=''}:AvatarProps){const t=useT(),meta=status?STATUS_META[status]:null,named=meta?name+' · '+t('status.'+meta.id,meta.label):name;return <span className={['relative inline-flex shrink-0',speaking?'hq-speaking-ring':'',guest?'rounded-pill outline-dashed outline-1 outline-line-strong':'',className].join(' ')} title={named}><LibAvatar name={name} size={size===20?'xs':size===28?'sm':size===56?'lg':'md'} className={status==='offline'?'opacity-60':undefined}/>{status&&!hideStatus?<span className='absolute -bottom-px -end-px leading-none' aria-hidden><PresenceMark status={status} px={MARK_SIZE[size]}/></span>:null}</span>;}
+export const Avatar=memo(AvatarBase);export function AvatarStack({people,size=20,max=4}:{people:{name:string;initials:string;tint:number}[];size?:AvatarSize;max?:number}){const t=useT();return <AvatarGroup people={people.map((p,i)=>({id:String(i),name:p.name}))} max={max} size={size===56?'lg':size===40?'md':'sm'} label={t('v3.participants','Participants')}/>;}

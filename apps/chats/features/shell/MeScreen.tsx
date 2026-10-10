@@ -33,10 +33,10 @@ export function MeScreen() {
         <div className="flex items-center gap-3">
           <Avatar name={me.name} initials={me.initials} tint={me.tint} status={status} size={56} />
           <div className="min-w-0">
-            <h1 className="hq-title truncate" style={{ color: "var(--color-ink)" }}>
+            <h1 className={"hq-title truncate "+("ch-color-7f7330")} >
               <bdi>{me.name}</bdi>
             </h1>
-            <p className="truncate text-[13px]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"truncate text-body-sm "+("ch-color-4a0211")} >
               <bdi>{me.title}</bdi>
             </p>
           </div>
@@ -52,30 +52,19 @@ export function MeScreen() {
                 <button
                   key={s}
                   onClick={() => setStatus(s, undefined, s === "focus" ? 50 : undefined)}
-                  className="hq-row flex items-center gap-2.5 px-3 text-start"
-                  style={{
-                    minHeight: 48,
-                    border: `1px solid ${active ? "var(--color-accent)" : "var(--color-hairline-strong)"}`,
-                    borderRadius: "var(--radius-control)",
-                    background: active ? "var(--color-accent-soft)" : "var(--color-surface)",
-                  }}
+                  className={"hq-row flex items-center gap-2.5 px-3 text-start "+("ch-min-height-fdd09d"+' '+(active?"ch-border-c98846":"ch-border-8ff264")+' '+"ch-border-radius-332348"+' '+(active?"ch-background-1416a8":"ch-background-751d03"))}
+                  
                   aria-pressed={active}
                 >
                   <span
                     aria-hidden="true"
-                    style={{
-                      width: 10,
-                      height: 10,
-                      borderRadius: "var(--radius-chip)",
-                      background: meta.mark === "hollow" || meta.mark === "ring" ? "transparent" : meta.color,
-                      border: `2px solid ${meta.color}`,
-                    }}
+                    className={("ch-width-5e26c9"+' '+"ch-height-6a8e05"+' '+"ch-border-radius-189003")+" "+('ch-status-mark-'+meta.id+' '+'ch-status-mark-'+meta.id)} 
                   />
                   <span className="flex-1">
-                    <span className="block text-[13.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+                    <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >
                       {t(`status.${s}`, meta.label)}
                     </span>
-                    <span className="block text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+                    <span className={"block text-caption "+("ch-color-4a0211")} >
                       {t(`status.${s}.desc`, meta.description)}
                     </span>
                   </span>
@@ -89,7 +78,7 @@ export function MeScreen() {
           <SectionHead title={t("me.preferences", "Preferences")} />
           <Panel>
             <label className="flex cursor-pointer items-center justify-between gap-4 py-1">
-              <span className="text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+              <span className={"text-body-sm font-medium "+("ch-color-7f7330")} >
                 {t("settings.sounds", "Interface sounds")}
               </span>
               <input
@@ -100,14 +89,14 @@ export function MeScreen() {
                   update({ soundsEnabled: e.target.checked });
                   setAudioEnabled(e.target.checked);
                 }}
-                style={{ width: 20, height: 20, accentColor: "var(--color-accent)" }}
+                className={"ch-width-0f6c53"+' '+"ch-height-44a2f4"+' '+"ch-accent-color-e56d5b"} 
               />
             </label>
-            <div className="my-2" style={{ borderTop: "1px solid var(--color-hairline)" }} />
-            <p className="text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+            <div className={"my-2 "+("ch-border-top-c9ce2a")}  />
+            <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
               {t("appearance.accent", "System colour")}
             </p>
-            <p className="mt-0.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
               {t("appearance.accentShort", "Yours only, on this device.")}
             </p>
             <div className="mt-2">

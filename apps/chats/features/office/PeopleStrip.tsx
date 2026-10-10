@@ -51,22 +51,19 @@ export function PeopleStrip() {
           key={g.key}
           role="group"
           aria-label={g.label}
-          className="flex shrink-0 items-center gap-1 px-1.5 py-1"
-          style={{
-            background: gi % 2 ? "transparent" : "var(--color-surface-sunken)",
-            borderRadius: "var(--radius-chip)",
-          }}
+          className={"flex shrink-0 items-center gap-1 px-1.5 py-1 "+((gi % 2?"ch-background-a8869d":"ch-background-314b28")+' '+"ch-border-radius-189003")}
+          
         >
           <span
-            className="me-0.5 max-w-[88px] truncate ps-1 text-[10.5px] font-semibold uppercase"
-            style={{ color: "var(--color-ink-subtle)", letterSpacing: "0.05em" }}
+            className={"me-0.5 max-w-[88px] truncate ps-1 text-micro font-semibold uppercase "+("ch-color-094083"+' '+"ch-letter-spacing-c5cfcd")}
+            
           >
             <bdi>{g.label}</bdi>
           </span>
           {g.hidden ? (
             <span
-              className="tabular px-2 text-[11.5px] font-medium"
-              style={{ color: "var(--color-ink-muted)", lineHeight: "34px" }}
+              className={"tabular px-2 text-caption font-medium "+("ch-color-4a0211"+' '+"ch-line-height-87dfa8")}
+              
               title={t("office.hiddenRoom", "This room does not name who is inside")}
             >
               {t("office.nInside", "{n} inside", { n: g.rows.length })}
@@ -76,20 +73,13 @@ export function PeopleStrip() {
               key={user.id}
               type="button"
               onClick={() => focusOn(user.id)}
-              className="hq-btn flex items-center justify-center"
-              style={{ width: 34, height: 34, borderRadius: "var(--radius-chip)" }}
+              className={"hq-btn flex items-center justify-center "+("ch-width-fb6a31"+' '+"ch-height-1ebb58"+' '+"ch-border-radius-189003")}
+              
               title={t("office.findPerson", "Find {name} on the floor", { name: user.name })}
               aria-label={t("office.findPerson", "Find {name} on the floor", { name: user.name })}
             >
               <span
-                style={{
-                  borderRadius: "var(--radius-chip)",
-                  boxShadow:
-                    user.id === me
-                      ? "0 0 0 2px var(--color-accent), 0 0 0 3px var(--color-surface)"
-                      : "0 0 0 2px var(--color-surface)",
-                  display: "inline-flex",
-                }}
+                className={"ch-border-radius-189003"+' '+(user.id === me?"ch-box-shadow-f2b06b":"ch-box-shadow-f112e5")+' '+"ch-display-f984c5"} 
               >
                 <Avatar
                   name={user.name}

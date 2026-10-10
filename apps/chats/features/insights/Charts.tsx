@@ -1,4 +1,5 @@
 "use client";
+import {geometryClass} from "@/lib/geometry";
 
 /**
  * SOMION HQ - CHART PRIMITIVES
@@ -82,7 +83,7 @@ export function LinesChart({
         height={height}
         role="img"
         aria-label={ariaLabel}
-        style={{ display: "block", maxWidth: "100%" }}
+        className={"ch-display-2a1b75"+' '+"ch-max-width-27aeb6"} 
         onMouseLeave={() => setHover(null)}
       >
         {ticks.map((v) => {
@@ -90,7 +91,7 @@ export function LinesChart({
           return (
             <g key={v}>
               <line x1={PAD.left} x2={W - PAD.right} y1={y} y2={y} stroke="var(--color-hairline)" strokeWidth={1} />
-              <text x={PAD.left - 8} y={y + 3} textAnchor="end" className="tabular" style={{ fontSize: 10, fill: "var(--color-ink-subtle)" }}>
+              <text x={PAD.left - 8} y={y + 3} textAnchor="end" className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")} >
                 {compact(v)}
               </text>
             </g>
@@ -137,8 +138,8 @@ export function LinesChart({
               x={x}
               y={height - 7}
               textAnchor={i === 0 ? "start" : i === n - 1 ? "end" : "middle"}
-              className="tabular"
-              style={{ fontSize: 10, fill: "var(--color-ink-subtle)" }}
+              className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")}
+              
             >
               {l}
             </text>
@@ -161,7 +162,7 @@ export function LinesChart({
               onMouseEnter={() => setHover(i)}
               onFocus={() => setHover(i)}
               onBlur={() => setHover(null)}
-              style={{ cursor: "default" }}
+              className={"ch-cursor-2a9295"} 
             />
           );
         })}
@@ -171,41 +172,32 @@ export function LinesChart({
       {hover !== null && (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute z-10 px-2.5 py-2"
-          style={{
-            left: Math.min(Math.max(xy(hover, 0)[0] - 60, 0), W - 140),
-            top: 0,
-            minWidth: 130,
-            background: "var(--color-surface)",
-            border: "1px solid var(--color-hairline-strong)",
-            borderRadius: "var(--radius-control)",
-            boxShadow: "var(--shadow-panel)",
-            fontSize: 12,
-          }}
+          className={("pointer-events-none absolute z-10 px-2.5 py-2 "+("ch-top-0d4406"+' '+"ch-min-width-b62dc2"+' '+"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-box-shadow-85f924"+' '+"ch-font-size-b9bb0f"))+" "+(geometryClass({left:Math.min(Math.max(xy(hover, 0)[0] - 60, 0), W - 140)}))}
+          
         >
-          <p className="font-medium" style={{ color: "var(--color-ink)" }}>
+          <p className={"font-medium "+("ch-color-7f7330")} >
             {labels[hover]}
           </p>
           {series.map((s) => (
             <p key={s.id} className="mt-0.5 flex items-center gap-1.5">
               <span
                 aria-hidden="true"
-                style={{ width: 10, height: 2, background: s.tone === "accent" ? "var(--color-bar)" : "var(--color-paper-500)", display: "inline-block" }}
+                className={"ch-width-5e26c9"+' '+"ch-height-32ec1b"+' '+(s.tone === "accent"?"ch-background-82a08c":"ch-background-e9b63d")+' '+"ch-display-60e32d"} 
               />
-              <span className="tabular font-semibold" style={{ color: "var(--color-ink)" }}>
+              <span className={"tabular font-semibold "+("ch-color-7f7330")} >
                 {format(s.values[hover] ?? 0)}
               </span>
-              <span style={{ color: "var(--color-ink-muted)" }}>{s.label}</span>
+              <span className={"ch-color-4a0211"} >{s.label}</span>
             </p>
           ))}
         </div>
       )}
 
       {series.length > 1 && (
-        <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+        <ul className={"mt-1 flex flex-wrap gap-x-4 gap-y-1 text-caption "+("ch-color-4a0211")} >
           {series.map((s) => (
             <li key={s.id} className="flex items-center gap-1.5">
-              <span aria-hidden="true" style={{ width: 12, height: 2, background: s.tone === "accent" ? "var(--color-bar)" : "var(--color-paper-500)", display: "inline-block" }} />
+              <span aria-hidden="true" className={"ch-width-fbf353"+' '+"ch-height-32ec1b"+' '+(s.tone === "accent"?"ch-background-82a08c":"ch-background-e9b63d")+' '+"ch-display-60e32d"}  />
               {s.label}
             </li>
           ))}
@@ -246,23 +238,18 @@ export function RankedBars({
         const quiet = emphasis !== undefined && emphasis !== r.id;
         return (
           <li key={r.id} className="flex items-center gap-3">
-            <span className="w-[112px] shrink-0 truncate text-[12.5px]" style={{ color: "var(--color-ink)" }} title={r.label}>
+            <span className={"w-[112px] shrink-0 truncate text-body-sm "+("ch-color-7f7330")}  title={r.label}>
               <bdi>{r.label}</bdi>
             </span>
-            <span className="h-[10px] min-w-0 flex-1" style={{ background: "var(--color-bar-zero)", borderRadius: "var(--radius-chip)" }}>
+            <span className={"h-[10px] min-w-0 flex-1 "+("ch-background-5d6e34"+' '+"ch-border-radius-189003")} >
               <span
-                className="block h-full"
-                style={{
-                  width: `${(r.value / max) * 100}%`,
-                  background: quiet ? "var(--color-paper-500)" : "var(--color-bar)",
-                  borderRadius: "var(--radius-chip)",
-                  transition: "width var(--duration-state) var(--ease-out-soft)",
-                }}
+                className={("block h-full "+((quiet?"ch-background-e9b63d":"ch-background-82a08c")+' '+"ch-border-radius-189003"+' '+"ch-transition-a79bda"))+" "+(geometryClass({width:`${(r.value / max) * 100}%`}))}
+                
               />
             </span>
-            <span className="tabular w-[96px] shrink-0 text-end text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+            <span className={"tabular w-[96px] shrink-0 text-end text-caption "+("ch-color-4a0211")} >
               {format(r.value)}
-              {r.meta && <span style={{ color: "var(--color-ink-subtle)" }}> · {r.meta}</span>}
+              {r.meta && <span className={"ch-color-094083"} > · {r.meta}</span>}
             </span>
           </li>
         );
@@ -290,10 +277,10 @@ export function Meter({
   return (
     <div>
       <div className="flex items-baseline justify-between gap-3">
-        <span className="text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+        <span className={"text-body-sm font-medium "+("ch-color-7f7330")} >
           {label}
         </span>
-        <span className="tabular text-[13px] font-semibold" style={{ color: "var(--color-ink)" }}>
+        <span className={"tabular text-body-sm font-semibold "+("ch-color-7f7330")} >
           {Math.round(pct)}%
         </span>
       </div>
@@ -303,19 +290,19 @@ export function Meter({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={label}
-        className="relative mt-1.5"
-        style={{ height: 10, background: "var(--color-bar-zero)", borderRadius: "var(--radius-chip)" }}
+        className={"relative mt-1.5 "+("ch-height-6a8e05"+' '+"ch-background-5d6e34"+' '+"ch-border-radius-189003")}
+        
       >
-        <div style={{ width: `${pct}%`, height: "100%", background: "var(--color-bar)", borderRadius: "var(--radius-chip)" }} />
+        <div className={("ch-height-622640"+' '+"ch-background-82a08c"+' '+"ch-border-radius-189003")+" "+(geometryClass({width:`${pct}%`}))}  />
         {target !== undefined && (
           <span
             aria-hidden="true"
-            className="absolute top-[-3px]"
-            style={{ left: `${target * 100}%`, width: 2, height: 16, background: "var(--color-ink)", borderRadius: 1 }}
+            className={("absolute top-[-3px] "+("ch-width-208c98"+' '+"ch-height-30de4a"+' '+"ch-background-c5a814"+' '+"ch-border-radius-edd97e"))+" "+(geometryClass({left:`${target * 100}%`}))}
+            
           />
         )}
       </div>
-      <p className="mt-1.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+      <p className={"mt-1.5 text-caption "+("ch-color-4a0211")} >
         {caption}
       </p>
     </div>
@@ -366,11 +353,11 @@ export function Columns({
 
   return (
     <div ref={wrapRef} className="relative">
-      <svg viewBox={`0 0 ${W} ${height}`} width={W} height={height} role="img" aria-label={ariaLabel} style={{ display: "block", maxWidth: "100%" }} onMouseLeave={() => setHover(null)}>
+      <svg viewBox={`0 0 ${W} ${height}`} width={W} height={height} role="img" aria-label={ariaLabel} className={"ch-display-2a1b75"+' '+"ch-max-width-27aeb6"}  onMouseLeave={() => setHover(null)}>
         {ticks.map((v) => (
           <g key={v}>
             <line x1={PAD.left} x2={W - PAD.right} y1={y(v)} y2={y(v)} stroke="var(--color-hairline)" strokeWidth={1} />
-            <text x={PAD.left - 8} y={y(v) + 3} textAnchor="end" className="tabular" style={{ fontSize: 10, fill: "var(--color-ink-subtle)" }}>
+            <text x={PAD.left - 8} y={y(v) + 3} textAnchor="end" className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")} >
               {compact(v)}
             </text>
           </g>
@@ -388,7 +375,7 @@ export function Columns({
                 d={quiet ? `M${x},${PAD.top + plotH - 2} h${barW} v2 h-${barW} z` : `M${x},${top + r} a${r},${r} 0 0 1 ${r},-${r} h${barW - 2 * r} a${r},${r} 0 0 1 ${r},${r} v${h - r} h-${barW} z`}
                 fill={quiet ? "var(--color-bar-zero)" : hover === i ? "var(--color-scale-3)" : "var(--color-bar)"}
               />
-              <text x={x + barW / 2} y={height - 7} textAnchor="middle" className="tabular" style={{ fontSize: 10.5, fill: "var(--color-ink-subtle)" }}>
+              <text x={x + barW / 2} y={height - 7} textAnchor="middle" className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")} >
                 {d.label}
               </text>
               <rect
@@ -403,7 +390,7 @@ export function Columns({
                 onMouseEnter={() => setHover(i)}
                 onFocus={() => setHover(i)}
                 onBlur={() => setHover(null)}
-                style={{ cursor: "default" }}
+                className={"ch-cursor-2a9295"} 
               />
             </g>
           );
@@ -412,22 +399,13 @@ export function Columns({
       {hover !== null && data[hover] && (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute z-10 px-2.5 py-1.5"
-          style={{
-            left: Math.min(Math.max(PAD.left + hover * slot + slot / 2 - 50, 0), W - 110),
-            top: 0,
-            minWidth: 100,
-            background: "var(--color-surface)",
-            border: "1px solid var(--color-hairline-strong)",
-            borderRadius: "var(--radius-control)",
-            boxShadow: "var(--shadow-panel)",
-            fontSize: 12,
-          }}
+          className={("pointer-events-none absolute z-10 px-2.5 py-1.5 "+("ch-top-0d4406"+' '+"ch-min-width-e79a03"+' '+"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-box-shadow-85f924"+' '+"ch-font-size-b9bb0f"))+" "+(geometryClass({left:Math.min(Math.max(PAD.left + hover * slot + slot / 2 - 50, 0), W - 110)}))}
+          
         >
-          <span className="tabular font-semibold" style={{ color: "var(--color-ink)" }}>
+          <span className={"tabular font-semibold "+("ch-color-7f7330")} >
             {format(data[hover].value)}
           </span>
-          <span style={{ color: "var(--color-ink-muted)" }}> {data[hover].label}</span>
+          <span className={"ch-color-4a0211"} > {data[hover].label}</span>
         </div>
       )}
     </div>

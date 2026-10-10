@@ -80,7 +80,7 @@ export function SettingsView() {
       <div className="mx-auto flex w-full max-w-[1000px] gap-8 px-5 py-6">
         <SectionNav items={NAV.filter((n) => n.show !== false)} />
         <div className="min-w-0 max-w-[720px] flex-1">
-        <h1 className="hq-display" style={{ color: "var(--color-ink)" }}>
+        <h1 className={"hq-display "+("ch-color-7f7330")} >
           {t("settings.title", "Chats settings")}
         </h1>
 
@@ -88,12 +88,8 @@ export function SettingsView() {
             but every control is inert and the reason is said once, here. */}
         {!can.manageSettings && (
           <p
-            className="mt-3 px-3.5 py-2.5 text-[12.5px] leading-relaxed"
-            style={{
-              background: "var(--color-surface-sunken)",
-              borderRadius: "var(--radius-card)",
-              color: "var(--color-ink-muted)",
-            }}
+            className={"mt-3 px-3.5 py-2.5 text-body-sm leading-relaxed "+("ch-background-314b28"+' '+"ch-border-radius-8d459a"+' '+"ch-color-4a0211")}
+            
           >
             {t(
               "settings.readOnly",
@@ -109,10 +105,10 @@ export function SettingsView() {
           <SectionHead title={t("settings.appearance", "Appearance")} />
           <Panel>
             <div className="py-1">
-              <p className="text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+              <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
                 {t("appearance.accent", "System colour")}
               </p>
-              <p className="mt-0.5 text-[12px] leading-relaxed" style={{ color: "var(--color-ink-muted)", maxWidth: "58ch" }}>
+              <p className={"mt-0.5 text-caption leading-relaxed "+("ch-color-4a0211"+' '+"ch-max-width-28c433")} >
                 {t(
                   "appearance.accentHint",
                   "Yours only, on this device. Teal, amber, violet and blue are reserved for presence, so they are not offered: an accent that looked like a status would be read as one.",
@@ -129,7 +125,7 @@ export function SettingsView() {
           <SectionHead title={t("settings.floor", "Floor")} />
           <Panel>
             <fieldset>
-              <legend className="pb-2 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+              <legend className={"pb-2 text-body-sm "+("ch-color-4a0211")} >
                 {t("settings.templateLegend", "Choose the layout that fits the team. You can change it later.")}
               </legend>
               <div className="flex flex-col gap-1.5">
@@ -138,12 +134,8 @@ export function SettingsView() {
                   return (
                     <label
                       key={tpl.id}
-                      className="hq-row flex cursor-pointer items-center gap-2.5 px-3 py-2.5"
-                      style={{
-                        border: `1px solid ${active ? "var(--color-accent)" : "var(--color-hairline-strong)"}`,
-                        borderRadius: "var(--radius-control)",
-                        background: active ? "var(--color-accent-soft)" : "var(--color-surface)",
-                      }}
+                      className={"hq-row flex cursor-pointer items-center gap-2.5 px-3 py-2.5 "+((active?"ch-border-c98846":"ch-border-8ff264")+' '+"ch-border-radius-332348"+' '+(active?"ch-background-1416a8":"ch-background-751d03"))}
+                      
                     >
                       <input
                         type="radio"
@@ -151,12 +143,12 @@ export function SettingsView() {
                         checked={active}
                         onChange={() => update({ template: tpl.id })}
                         disabled={!can.manageSettings}
-                        style={{ accentColor: "var(--color-accent)" }}
+                        className={"ch-accent-color-e56d5b"} 
                       />
-                      <span className="flex-1 text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+                      <span className={"flex-1 text-body-sm font-medium "+("ch-color-7f7330")} >
                         {t(`template.${tpl.id}`, tpl.label)}
                       </span>
-                      <span className="text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                      <span className={"text-caption "+("ch-color-4a0211")} >
                         {t(`template.${tpl.id}.capacity`, tpl.capacity)}
                       </span>
                     </label>
@@ -249,10 +241,10 @@ export function SettingsView() {
             <Divider />
             <div className="flex items-center justify-between gap-4 py-2.5">
               <div className="min-w-0">
-                <p className="text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+                <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
                   {t("settings.retention", "Message retention")}
                 </p>
-                <p className="mt-0.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
                   {t("settings.retentionHint", "Deleting reaches the search index and stored media, not just the screen.")}
                 </p>
               </div>
@@ -262,16 +254,8 @@ export function SettingsView() {
                 onChange={(e) =>
                   update({ retentionDays: e.target.value === "forever" ? null : Number(e.target.value) })
                 }
-                className="shrink-0"
-                style={{
-                  background: "var(--color-surface)",
-                  border: "1px solid var(--color-hairline-strong)",
-                  borderRadius: "var(--radius-control)",
-                  padding: "7px 10px",
-                  fontSize: "13px",
-                  minHeight: 34,
-                  color: "var(--color-ink)",
-                }}
+                className={"shrink-0 "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"+' '+"ch-color-7f7330")}
+                
                 aria-label={t("settings.retention", "Message retention")}
               >
                 <option value="forever">{t("settings.keepAll", "Keep everything")}</option>
@@ -436,8 +420,8 @@ export function SettingsView() {
         <section id="s-integrations" className="mt-6">
           <SectionHead title={t("settings.integrations", "Integrations")} />
           <Panel>
-            <p className="pb-2 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
-              {t("settings.integrationsBody", "A connected calendar puts its meetings in the list, opens outside links in one press, and sets In a meeting from the calendar.")}
+            <p className={"pb-2 text-body-sm "+("ch-color-4a0211")} >
+              {t("settings.integrationsBody", "External providers are unavailable in this local prototype. Scheduled workspace meetings remain saved here.")}
             </p>
             <IntegrationRow id="google" label={<bdi>Google Calendar</bdi>} />
             <Divider />
@@ -448,7 +432,7 @@ export function SettingsView() {
         <section id="s-access" className="mt-6">
           <SectionHead title={t("settings.access", "Access")} meta={t("settings.accessMeta", "who may do what")} />
           <Panel>
-            <p className="pb-2 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"pb-2 text-body-sm "+("ch-color-4a0211")} >
               {t("settings.accessBody", "These narrow what members may do. Admins and the owner keep everything; a guest never gains anything here.")}
             </p>
             <Choice
@@ -489,31 +473,7 @@ export function SettingsView() {
         <section id="s-workspace" className="mt-6">
           <SectionHead title={t("settings.workspace", "Workspace")} />
           <Panel>
-            <Row
-              label={t("settings.plan", "Plan")}
-              hint={
-                settings.activation.state === "trial"
-                  ? t("settings.planTrial", "On trial, {n} days left. Activation and billing live in the suite.", {
-                      n: Math.max(0, Math.ceil((new Date(settings.activation.trialEndsAt ?? Date.now()).getTime() - Date.now()) / 864e5)),
-                    })
-                  : settings.activation.state === "active"
-                    ? t("settings.planActive", "Activated. The tier and user cap come from the suite.")
-                    : t("settings.planOff", "Not switched on.")
-              }
-            >
-              <span className="flex items-center gap-2">
-                <Chip tone={settings.activation.state === "active" ? "success" : "accent"}>
-                  {settings.activation.state === "trial"
-                    ? t("settings.trialChip", "Trial")
-                    : settings.activation.state === "active"
-                      ? t("settings.activeChip", "{tier}", { tier: settings.activation.tier.charAt(0).toUpperCase() + settings.activation.tier.slice(1) })
-                      : t("settings.offChip", "Off")}
-                </Chip>
-                <Button size="sm" href="/hq/activate">
-                  {t("settings.planOpen", "Plan and activation")}
-                </Button>
-              </span>
-            </Row>
+            <Row label={t('settings.plan','Plan')} hint={t('v3.actualBilling','Current subscription, seats and usage are managed by the workspace.')}><Button size='sm' href='/hq/admin/billing'>{t('v3.billingUsage','Billing and usage')}</Button></Row>
             <Divider />
             <Row
               label={t("settings.workspaceName", "Name")}
@@ -524,15 +484,7 @@ export function SettingsView() {
                 disabled={ro}
                 aria-label={t("settings.workspaceName", "Name")}
                 onBlur={(e) => e.target.value.trim() && update({ name: e.target.value.trim() })}
-                style={{
-                  background: "var(--color-surface)",
-                  border: "1px solid var(--color-hairline-strong)",
-                  borderRadius: "var(--radius-control)",
-                  padding: "7px 10px",
-                  fontSize: "13px",
-                  minHeight: 34,
-                  width: 200,
-                }}
+                className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"+' '+"ch-width-2acaf3"} 
               />
             </Row>
             <Divider />
@@ -561,7 +513,7 @@ export function SettingsView() {
             meta={t("settings.fromSaas", "from the Business OS")}
           />
           <Panel>
-            <p className="pb-3 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"pb-3 text-body-sm "+("ch-color-4a0211")} >
               {t(
                 "settings.directoryNote",
                 "Chats does not keep its own list of people. Adding someone, removing them, or changing a role happens once, in the Business OS, and applies to all seven modules.",
@@ -571,14 +523,14 @@ export function SettingsView() {
               {users.slice(0, 5).map((u) => (
                 <li key={u.id} className="flex items-center gap-2.5 py-1">
                   <Avatar name={u.name} initials={u.initials} tint={u.tint} size={28} hideStatus />
-                  <span className="flex-1 truncate text-[13px]" style={{ color: "var(--color-ink)" }}>
+                  <span className={"flex-1 truncate text-body-sm "+("ch-color-7f7330")} >
                     <bdi>{u.name}</bdi>
                   </span>
                   <Chip>{t(`role.${u.role}`, ROLE_LABEL[u.role])}</Chip>
                 </li>
               ))}
             </ul>
-            <p className="tabular pt-2 text-[12px]" style={{ color: "var(--color-ink-subtle)" }}>
+            <p className={"tabular pt-2 text-caption "+("ch-color-094083")} >
               {t("settings.andMore", "and {n} more", { n: users.length - 5 })}
             </p>
             <Button
@@ -603,10 +555,10 @@ export function SettingsView() {
             <Panel>
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <p className="text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+                  <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
                     {t("settings.runSetup", "Run setup again")}
                   </p>
-                  <p className="mt-0.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
                     {t(
                       "settings.runSetupHint",
                       "The five-step guide from the first day: name, floor, rooms, people, defaults. Nothing is changed until you finish it.",
@@ -624,68 +576,11 @@ export function SettingsView() {
           </section>
         )}
 
-        {can.resetWorkspace && (
-          <section id="s-danger" className="mt-6">
-            <SectionHead title={t("settings.danger", "Owner")} meta={t("settings.ownerOnly", "owner only")} />
-            <Panel>
-              <div className="flex items-start justify-between gap-4">
-                <div className="min-w-0">
-                  <p className="text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
-                    {t("settings.reset", "Reset the workspace")}
-                  </p>
-                  <p className="mt-0.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
-                    {t(
-                      "settings.resetHint",
-                      "Puts every room, channel, message and status back to the opening state. In this prototype that is the demo's starting point; in the product it would be a full export first.",
-                    )}
-                  </p>
-                </div>
-                <Button variant="danger" size="sm" className="shrink-0" onClick={() => setConfirmReset(true)}>
-                  <ArrowsCounterClockwise size={13} weight="bold" aria-hidden="true" />
-                  {t("settings.resetAction", "Reset")}
-                </Button>
-              </div>
-            </Panel>
-            <Panel className="mt-3">
-              <div className="flex items-start justify-between gap-4">
-                <div className="min-w-0">
-                  <p className="text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
-                    {t("settings.export", "Export the workspace")}
-                  </p>
-                  <p className="mt-0.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
-                    {t(
-                      "settings.exportHint",
-                      "Settings, floor, channels, messages and meetings as one JSON file. Presence is not in it: there is no history of where anyone was.",
-                    )}
-                  </p>
-                </div>
-                <Button size="sm" className="shrink-0" onClick={download}>
-                  <DownloadSimple size={13} aria-hidden="true" />
-                  {t("settings.exportAction", "Export as JSON")}
-                </Button>
-              </div>
-            </Panel>
-            <ConfirmModal
-              open={confirmReset}
-              onClose={() => setConfirmReset(false)}
-              onConfirm={() => {
-                resetWorkspace();
-                router.push("/hq/office");
-              }}
-              title={t("settings.resetTitle", "Reset the whole workspace?")}
-              body={t(
-                "settings.resetBody",
-                "Every change anyone has made - rooms, channels, messages, statuses - goes back to the opening state. This cannot be undone.",
-              )}
-              confirmLabel={t("settings.resetConfirm", "Reset everything")}
-            />
-          </section>
-        )}
-
+        {can.manageSettings?<section id='s-danger' className='mt-6'><Panel><Button size='sm' href='/hq/admin/export'>{t('settings.exportAction','Export as JSON')}</Button></Panel></section>:null}
         <section id="s-transparency" className="mt-6 pb-4">
           <SectionHead title={t("settings.transparency", "Transparency")} />
           <Panel>
-            <p className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"text-body-sm "+("ch-color-4a0211")} >
               {t(
                 "settings.transparencyBody",
                 "Every member can read exactly what Chats records about them. The page reflects the settings above as you change them.",
@@ -724,11 +619,11 @@ function QuietHours({
     <div className="py-2.5">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <p className="flex items-center gap-2 text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+          <p className={"flex items-center gap-2 text-body-sm font-medium "+("ch-color-7f7330")} >
             {t("settings.quietHours", "Quiet hours")}
             {activeNow && <Chip tone="accent">{t("settings.quietNow", "On now")}</Chip>}
           </p>
-          <p className="mt-0.5 text-[12px] leading-relaxed" style={{ color: "var(--color-ink-muted)", maxWidth: "58ch" }}>
+          <p className={"mt-0.5 text-caption leading-relaxed "+("ch-color-4a0211"+' '+"ch-max-width-28c433")} >
             {t(
               "settings.quietHoursHint",
               "Nothing interrupts you between these times. Knocks are held and delivered when the window closes, so nothing is lost - it just waits.",
@@ -741,54 +636,38 @@ function QuietHours({
           checked={on}
           onChange={(e) => onChange(e.target.checked ? { from, to } : null)}
           aria-label={t("settings.quietHours", "Quiet hours")}
-          className="mt-0.5 shrink-0"
-          style={{ width: 18, height: 18, accentColor: "var(--color-accent)" }}
+          className={"mt-0.5 shrink-0 "+("ch-width-f74111"+' '+"ch-height-ad1b79"+' '+"ch-accent-color-e56d5b")}
+          
         />
       </div>
 
       {on && (
         <div className="mt-3 flex flex-wrap items-end gap-3">
           <label className="flex flex-col gap-1">
-            <span className="text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+            <span className={"text-caption "+("ch-color-4a0211")} >
               {t("settings.quietFrom", "From")}
             </span>
             <input
               type="time"
               value={from}
               onChange={(e) => onChange({ from: e.target.value, to })}
-              className="tabular"
-              style={{
-                background: "var(--color-surface)",
-                border: "1px solid var(--color-hairline-strong)",
-                borderRadius: "var(--radius-control)",
-                padding: "7px 10px",
-                fontSize: "13px",
-                minHeight: 34,
-                color: "var(--color-ink)",
-              }}
+              className={"tabular "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"+' '+"ch-color-7f7330")}
+              
             />
           </label>
           <label className="flex flex-col gap-1">
-            <span className="text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+            <span className={"text-caption "+("ch-color-4a0211")} >
               {t("settings.quietTo", "To")}
             </span>
             <input
               type="time"
               value={to}
               onChange={(e) => onChange({ from, to: e.target.value })}
-              className="tabular"
-              style={{
-                background: "var(--color-surface)",
-                border: "1px solid var(--color-hairline-strong)",
-                borderRadius: "var(--radius-control)",
-                padding: "7px 10px",
-                fontSize: "13px",
-                minHeight: 34,
-                color: "var(--color-ink)",
-              }}
+              className={"tabular "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"+' '+"ch-color-7f7330")}
+              
             />
           </label>
-          <p className="pb-2 text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+          <p className={"pb-2 text-caption "+("ch-color-094083")} >
             {from > to
               ? t("settings.quietOvernight", "Overnight, across midnight.")
               : t("settings.quietSameDay", "Within the same day.")}
@@ -815,8 +694,8 @@ function SectionNav({ items }: { items: { id: string; label: string }[] }) {
                 e.preventDefault();
                 document.getElementById(it.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className="hq-row block px-2.5 py-1.5 text-[12.5px]"
-              style={{ borderRadius: "var(--radius-control)", color: "var(--color-ink-muted)" }}
+              className={"hq-row block px-2.5 py-1.5 text-body-sm "+("ch-border-radius-332348"+' '+"ch-color-4a0211")}
+              
             >
               {it.label}
             </a>
@@ -832,11 +711,11 @@ function Row({ label, hint, children }: { label: React.ReactNode; hint?: string;
   return (
     <div className="flex items-center justify-between gap-4 py-2.5">
       <div className="min-w-0">
-        <p className="text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+        <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
           {label}
         </p>
         {hint && (
-          <p className="mt-0.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+          <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
             {hint}
           </p>
         )}
@@ -867,8 +746,8 @@ function Choice({
       <div
         role="radiogroup"
         aria-label={label}
-        className="flex items-center gap-0.5 p-0.5"
-        style={{ background: "var(--color-surface-sunken)", borderRadius: "var(--radius-control)" }}
+        className={"flex items-center gap-0.5 p-0.5 "+("ch-background-314b28"+' '+"ch-border-radius-332348")}
+        
       >
         {options.map(([v, l]) => (
           <button
@@ -878,14 +757,8 @@ function Choice({
             aria-checked={value === v}
             disabled={disabled}
             onClick={() => onChange(v)}
-            className="hq-btn px-2.5 text-[12.5px] font-medium"
-            style={{
-              minHeight: 28,
-              borderRadius: "var(--radius-object-lg)",
-              background: value === v ? "var(--color-surface)" : "transparent",
-              color: value === v ? "var(--color-ink)" : "var(--color-ink-muted)",
-              boxShadow: value === v ? "var(--shadow-raise)" : "none",
-            }}
+            className={"hq-btn px-2.5 text-body-sm font-medium "+("ch-min-height-4f3317"+' '+"ch-border-radius-0abaf1"+' '+(value === v?"ch-background-751d03":"ch-background-a8869d")+' '+(value === v?"ch-color-7f7330":"ch-color-4a0211")+' '+(value === v?"ch-box-shadow-03c10c":"ch-box-shadow-ce3f2c"))}
+            
           >
             {l}
           </button>
@@ -918,15 +791,7 @@ function SelectRow({
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
         aria-label={label}
-        style={{
-          background: "var(--color-surface)",
-          border: "1px solid var(--color-hairline-strong)",
-          borderRadius: "var(--radius-control)",
-          padding: "7px 10px",
-          fontSize: "13px",
-          minHeight: 34,
-          color: "var(--color-ink)",
-        }}
+        className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"+' '+"ch-color-7f7330"} 
       >
         {options.map(([v, l]) => (
           <option key={v} value={v}>
@@ -954,10 +819,10 @@ function Toggle({
   return (
     <label className="flex cursor-pointer items-start justify-between gap-4 py-2.5">
       <span className="min-w-0">
-        <span className="block text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+        <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >
           {label}
         </span>
-        <span className="mt-0.5 block text-[12px] leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+        <span className={"mt-0.5 block text-caption leading-relaxed "+("ch-color-4a0211")} >
           {hint}
         </span>
       </span>
@@ -967,15 +832,15 @@ function Toggle({
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
         disabled={disabled}
-        className="mt-0.5 shrink-0"
-        style={{ width: 18, height: 18, accentColor: "var(--color-accent)" }}
+        className={"mt-0.5 shrink-0 "+("ch-width-f74111"+' '+"ch-height-ad1b79"+' '+"ch-accent-color-e56d5b")}
+        
       />
     </label>
   );
 }
 
 function Divider() {
-  return <span className="block h-px" style={{ background: "var(--color-hairline)" }} />;
+  return <span className={"block h-px "+("ch-background-423228")}  />;
 }
 
 /**
@@ -1028,38 +893,4 @@ function IdleWatchRow() {
  * an account, or broken and in need of a reconnect. The button is always
  * the one move that fixes the state.
  */
-function IntegrationRow({ id, label }: { id: "google" | "microsoft"; label: React.ReactNode }) {
-  const state = useWorkspace((s) => s.settings.integrations[id]);
-  const account = useWorkspace((s) => s.settings.integrations.account);
-  const connect = useWorkspace((s) => s.connectIntegration);
-  const disconnect = useWorkspace((s) => s.disconnectIntegration);
-  const can = useCan();
-  const t = useT();
-  const hint =
-    state === "connected"
-      ? t("settings.intConnected", "Connected as {account}. Its meetings appear in the list.", { account: account ?? "" })
-      : state === "connecting"
-        ? t("settings.intConnecting", "Waiting for the calendar to answer.")
-        : state === "error"
-          ? t("settings.intError", "The connection expired. Reconnect to see its meetings again.")
-          : t("settings.intOff", "Not connected.");
-  return (
-    <Row label={label} hint={hint}>
-      <span className="flex items-center gap-2">
-        {state === "connected" && <Chip tone="success">{t("settings.intChipOn", "Connected")}</Chip>}
-        {state === "error" && <Chip tone="danger">{t("settings.intChipError", "Needs attention")}</Chip>}
-        {state === "connecting" && <Chip>{t("settings.intChipConnecting", "Connecting…")}</Chip>}
-        {can.manageSettings &&
-          (state === "connected" ? (
-            <Button size="sm" onClick={() => disconnect(id)}>
-              {t("settings.intDisconnect", "Disconnect")}
-            </Button>
-          ) : state === "connecting" ? null : (
-            <Button size="sm" variant={state === "error" ? "primary" : "secondary"} onClick={() => connect(id)}>
-              {state === "error" ? t("settings.intReconnect", "Reconnect") : t("settings.intConnect", "Connect")}
-            </Button>
-          ))}
-      </span>
-    </Row>
-  );
-}
+function IntegrationRow({label}:{id:'google'|'microsoft';label:React.ReactNode}){const t=useT();return <Row label={label} hint={t('v3.providerSample','External calendar providers are unavailable in this local prototype.')}><Chip>{t('v3.localOnly','Local sample only')}</Chip></Row>;}

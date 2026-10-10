@@ -59,16 +59,16 @@ export function RoomPanel({ roomId, onClose }: { roomId: string; onClose: () => 
     <aside
       role="dialog"
       aria-label={t("room.panel", "{name}: inside the room", { name: room.name })}
-      className="hq-floating hq-rise fixed inset-y-0 end-0 z-[45] flex w-full max-w-[360px] flex-col"
-      style={{ background: "var(--color-surface)", borderInlineStart: "1px solid var(--color-hairline)" }}
+      className={"hq-floating hq-rise fixed inset-y-0 end-0 z-[45] flex w-full max-w-[360px] flex-col "+("ch-background-751d03"+' '+"ch-border-inline-start-c791b2")}
+      
     >
-      <header className="flex shrink-0 items-center justify-between gap-2 px-4 py-3" style={{ borderBottom: "1px solid var(--color-hairline)" }}>
+      <header className={"flex shrink-0 items-center justify-between gap-2 px-4 py-3 "+("ch-border-bottom-9cb2f4")} >
         <div className="min-w-0">
-          <h2 className="flex items-center gap-1.5 text-[14px] font-semibold" style={{ color: "var(--color-ink)" }}>
+          <h2 className={"flex items-center gap-1.5 text-body-sm font-semibold "+("ch-color-7f7330")} >
             <bdi>{room.name}</bdi>
-            {room.locked && <LockSimple size={12} weight="bold" aria-hidden="true" style={{ color: "var(--color-ink-subtle)" }} />}
+            {room.locked && <LockSimple size={12} weight="bold" aria-hidden="true" className={"ch-color-094083"}  />}
           </h2>
-          <p className="truncate text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+          <p className={"truncate text-caption "+("ch-color-094083")} >
             {t("room.inside", "{n} of {cap} inside", { n: occupants.length, cap: room.capacity })}
             {room.purpose ? ` · ${room.purpose}` : ""}
           </p>
@@ -80,7 +80,7 @@ export function RoomPanel({ roomId, onClose }: { roomId: string; onClose: () => 
 
       <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
         <section className="px-3 pt-3">
-          <h3 className="px-1 pb-1 text-[11.5px] font-semibold uppercase" style={{ color: "var(--color-ink-subtle)", letterSpacing: "0.04em" }}>
+          <h3 className={"px-1 pb-1 text-caption font-semibold uppercase "+("ch-color-094083"+' '+"ch-letter-spacing-47bb2f")} >
             {t("room.members", "In the room")}
           </h3>
           <ul className="flex flex-col">
@@ -92,11 +92,11 @@ export function RoomPanel({ roomId, onClose }: { roomId: string; onClose: () => 
                 <li key={user.id} className="flex items-center gap-2.5 px-1 py-1.5">
                   <Avatar name={user.name} initials={user.initials} tint={user.tint} size={28} speaking={presence.speaking} hideStatus />
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+                    <span className={"block truncate text-body-sm font-medium "+("ch-color-7f7330")} >
                       <bdi>{user.name}</bdi>
-                      {isMe && <span style={{ color: "var(--color-ink-subtle)" }}> · {t("office.you", "you")}</span>}
+                      {isMe && <span className={"ch-color-094083"} > · {t("office.you", "you")}</span>}
                     </span>
-                    <span className="block truncate text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+                    <span className={"block truncate text-caption "+("ch-color-4a0211")} >
                       {presence.speaking ? t("room.speaking", "Speaking") : STATUS_META[presence.status].label}
                       {presence.muted ? ` · ${t("call.mutedByHost", "muted")}` : ""}
                     </span>
@@ -111,7 +111,7 @@ export function RoomPanel({ roomId, onClose }: { roomId: string; onClose: () => 
                         onChange={(e) => setLocalVolume(user.id, Number(e.target.value) / 100)}
                         aria-label={t("office.volumeOf", "Volume of {name}", { name: user.name })}
                         disabled={mutedForMe}
-                        style={{ width: 64, accentColor: "var(--color-accent)" }}
+                        className={"ch-width-38ac3b"+' '+"ch-accent-color-e56d5b"} 
                       />
                       <Button
                         variant="ghost"
@@ -120,7 +120,7 @@ export function RoomPanel({ roomId, onClose }: { roomId: string; onClose: () => 
                         label={mutedForMe ? t("office.hearAgain", "Hear {name} again", { name: user.name }) : t("office.muteForMe", "Mute for me")}
                         aria-pressed={mutedForMe}
                         onClick={() => toggleLocalMute(user.id)}
-                        style={{ color: mutedForMe ? "var(--color-danger-600)" : "var(--color-ink-subtle)" }}
+                        className={(mutedForMe?"ch-color-1fd63a":"ch-color-094083")} 
                       >
                         {mutedForMe ? <SpeakerSlash size={14} weight="fill" aria-hidden="true" /> : <SpeakerHigh size={14} aria-hidden="true" />}
                       </Button>
@@ -133,12 +133,12 @@ export function RoomPanel({ roomId, onClose }: { roomId: string; onClose: () => 
         </section>
 
         <section className="mt-3 flex min-h-0 flex-1 flex-col px-3">
-          <h3 className="px-1 pb-1 text-[11.5px] font-semibold uppercase" style={{ color: "var(--color-ink-subtle)", letterSpacing: "0.04em" }}>
+          <h3 className={"px-1 pb-1 text-caption font-semibold uppercase "+("ch-color-094083"+' '+"ch-letter-spacing-47bb2f")} >
             {t("room.chat", "Room chat")}
           </h3>
-          <div className="min-h-[120px] flex-1 overflow-y-auto" style={{ background: "var(--color-surface-sunken)", borderRadius: "var(--radius-control)" }}>
+          <div className={"min-h-[120px] flex-1 overflow-y-auto "+("ch-background-314b28"+' '+"ch-border-radius-332348")} >
             {messages.length === 0 ? (
-              <p className="px-3 py-3 text-[12.5px] leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+              <p className={"px-3 py-3 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
                 {t("room.chatEmpty", "Notes left here stay with the room, and are still here tomorrow.")}
               </p>
             ) : (

@@ -9,6 +9,8 @@
  * opens.
  */
 
+import {useForm,Controller}from"react-hook-form";
+import{zodResolver}from"@hookform/resolvers/zod";import{z}from"zod";import{Field as SharedField,Input,Select,Textarea,Checkbox,RadioGroup}from"@orgtik/ui";import{persistEvent}from"@/store/platform";
 import { useRef, useState } from "react";
 import { useClientSession } from "@orgtik/ui/auth";
 import Link from "next/link";
@@ -26,7 +28,7 @@ import { workspaceDayKey, workspaceStart } from "@/lib/calendar-availability";
 import { useCan, useMe, useMeetings, usePastMeetings, useRoom, useUsers } from "@/store/hooks";
 import { useWorkspace } from "@/store";
 import { useT } from "@/lib/i18n";
-import { formatRange, formatShortDay, formatTime, minutesUntil } from "@/lib/time";
+import { workspaceDate,formatRange, formatShortDay, formatTime, minutesUntil } from "@/lib/time";
 import type { Meeting } from "@/entities";
 import { useTitle } from "@/lib/useTitle";
 
@@ -71,16 +73,16 @@ export function MeetingsView() {
       {/* On a phone the actions take a line of their own rather than
           crushing the title into the tabs. */}
       <header
-        className="flex shrink-0 flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-2.5"
-        style={{ background: "transparent" }}
+        className={"flex shrink-0 flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-2.5 "+("ch-background-a8869d")}
+        
       >
         <div className="flex items-center gap-3">
-          <h1 className="hq-title" style={{ color: "var(--color-ink)" }}>
+          <h1 className={"hq-title "+("ch-color-7f7330")} >
             {t("meetings.title", "Meetings")}
           </h1>
           <div
-            className="flex items-center gap-0.5 p-0.5"
-            style={{ background: "var(--color-surface-sunken)", borderRadius: "var(--radius-control)" }}
+            className={"flex items-center gap-0.5 p-0.5 "+("ch-background-314b28"+' '+"ch-border-radius-332348")}
+            
             role="group"
           >
             {TABS.map((x) => (
@@ -90,7 +92,7 @@ export function MeetingsView() {
                 variant={tab === x.id ? "secondary" : "ghost"}
                 onClick={() => setTab(x.id)}
                 aria-pressed={tab === x.id}
-                style={tab === x.id ? { boxShadow: "var(--shadow-raise)" } : undefined}
+                className={(tab === x.id?"ch-box-shadow-03c10c":"")} 
               >
                 {x.label}
               </Button>
@@ -178,12 +180,8 @@ function MeetingRow({ meeting, past }: { meeting: Meeting; past: boolean }) {
 
   return (
     <li
-      className="hq-row relative flex flex-col gap-2.5 px-3.5 py-3"
-      style={{
-        background: "var(--color-surface)",
-        border: `1px solid ${soon ? "var(--color-accent)" : "var(--color-hairline)"}`,
-        borderRadius: "var(--radius-card)",
-      }}
+      className={"hq-row relative flex flex-col gap-2.5 px-3.5 py-3 "+("ch-background-751d03"+' '+(soon?"ch-border-c98846":"ch-border-5065d4")+' '+"ch-border-radius-8d459a")}
+      
     >
       <div className="flex flex-col gap-2.5">
         <div className="flex items-start justify-between gap-3">
@@ -193,7 +191,7 @@ function MeetingRow({ meeting, past }: { meeting: Meeting; past: boolean }) {
                 href={`/hq/meetings/${meeting.id}`}
                 className="min-w-0 after:absolute after:inset-0 after:content-['']"
               >
-                <h3 className="truncate text-[14px] font-semibold" style={{ color: "var(--color-ink)" }}>
+                <h3 className={"truncate text-body-sm font-semibold "+("ch-color-7f7330")} >
                   <bdi>{meeting.title}</bdi>
                 </h3>
               </Link>
@@ -205,7 +203,7 @@ function MeetingRow({ meeting, past }: { meeting: Meeting; past: boolean }) {
               {meeting.recordingState === "ready" && <Chip>{t("meetings.recorded", "Recorded")}</Chip>}
               {meeting.recurrence === "weekly" && <Chip>{t("meetings.weekly", "Weekly")}</Chip>}
             </div>
-            <p className="tabular mt-0.5 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"tabular mt-0.5 text-body-sm "+("ch-color-4a0211")} >
               {past ? `${formatShortDay(meeting.startsAt, timeZone)} · ` : ""}
               {formatRange(meeting.startsAt, meeting.endsAt, timeZone)}
               {room && (<>{" · "}<bdi>{room.name}</bdi></>)}
@@ -249,198 +247,11 @@ const DURATIONS = [30, 45, 60, 90] as const;
  * a line on why. Participants come from the directory and a guest from an
  * email; the room is one of the floor's. Nothing here is a placeholder.
  */
-function ScheduleForm({ onClose, date }: { onClose: () => void; date: DateKey | null }) {
-  const timeZone = useClientSession()?.workspaceContext?.workspace.timeZone ?? "UTC";
-  const scheduleMeeting = useWorkspace((s) => s.scheduleMeeting);
-  const me = useWorkspace((s) => s.me);
-  const users = useUsers();
-  const rooms = useWorkspace((s) => s.floor.rooms);
-  const defaultMinutes = useWorkspace((s) => s.settings.meetingDefaultMinutes);
-  const t = useT();
-
-  const [title, setTitle] = useState("");
-  const [day, setDay] = useState<DateKey>(date ?? workspaceDayKey(new Date(), timeZone));
-  const [time, setTime] = useState("15:00");
-  const [minutes, setMinutes] = useState<number>(defaultMinutes);
-  const [roomId, setRoomId] = useState<string>(() => rooms.find((r) => r.kind === "meeting" || r.kind === "boardroom")?.id ?? "");
-  const [picked, setPicked] = useState<string[]>([]);
-  const [description, setDescription] = useState("");
-  const [weekly, setWeekly] = useState(false);
-  const [guestEmail, setGuestEmail] = useState("");
-  const [error, setError] = useState<string | null>(null);
-
-  const bookable = rooms.filter((r) => r.kind !== "desk");
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!title.trim()) {
-      setError(t("meetings.titleRequired", "Give the meeting a title so people know what it is."));
-      return;
-    }
-    let starts: Date[];
-    try { starts = Array.from({ length: weekly ? 4 : 1 }, (_, index) => workspaceStart(addDays(day, index * 7), time, timeZone)); }
-    catch { setError(t("availability.invalidTime", "This time does not exist in the workspace timezone. Choose another start time.")); return; }
-
-    /* A weekly meeting is its next four occurrences, each a meeting of its
-       own, so the calendar and the rooms see them without a rule engine. */
-    const stamp = Date.now();
-    for (let i = 0; i < starts.length; i++) {
-      const s0 = starts[i]!;
-      const e0 = new Date(s0.getTime() + minutes * 60_000);
-      scheduleMeeting({
-        id: `mt-${stamp}${weekly ? `-${i}` : ""}`,
-        title: title.trim(),
-        startsAt: s0.toISOString(),
-        endsAt: e0.toISOString(),
-        ...(roomId ? { roomId } : {}),
-        participantIds: [me, ...picked.filter((id) => id !== me)],
-        guests: guestEmail.trim()
-          ? [{ name: guestEmail.split("@")[0] ?? "Guest", email: guestEmail.trim(), state: "invited" }]
-          : [],
-        recordingState: "none",
-        ...(description.trim() ? { description: description.trim() } : {}),
-        ...(weekly ? { recurrence: "weekly" as const } : {}),
-      });
-    }
-    onClose();
-  };
-
-  return (
-    <Panel className="mb-4">
-      <SectionHead title={t("meetings.newMeeting", "New meeting")} />
-      <p className="mb-3 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>{t("availability.workspaceTime", "Times use the workspace timezone: {zone}", { zone: timeZone })}</p>
-      <form onSubmit={submit} className="flex flex-col gap-3">
-        <Field
-          label={t("meetings.titleLabel", "Title")}
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-            setError(null);
-          }}
-          placeholder={t("meetings.titlePlaceholder", "What is this about?")}
-          {...(error ? { error } : {})}
-          autoFocus
-        />
-        <div className="grid gap-3 sm:grid-cols-3">
-          <Field
-            label={t("meetings.dateLabel", "Day")}
-            type="date"
-            value={day}
-            onChange={(e) => e.target.value && setDay(e.target.value)}
-          />
-          <Field
-            label={t("meetings.timeLabel", "Start")}
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-          />
-          <div className="flex flex-col gap-1">
-            <span className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
-              {t("meetings.durationLabel", "Length")}
-            </span>
-            <div className="flex gap-1" role="radiogroup" aria-label={t("meetings.durationLabel", "Length")}>
-              {DURATIONS.map((m) => (
-                <Button
-                  key={m}
-                  type="button"
-                  size="sm"
-                  role="radio"
-                  aria-checked={minutes === m}
-                  variant={minutes === m ? "primary" : "secondary"}
-                  className="flex-1"
-                  onClick={() => setMinutes(m)}
-                >
-                  <span className="tabular">{m}</span>
-                </Button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="grid gap-3 sm:grid-cols-2">
-          <label className="flex flex-col gap-1">
-            <span className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
-              {t("meetings.roomLabel", "Room")}
-            </span>
-            <select
-              value={roomId}
-              onChange={(e) => setRoomId(e.target.value)}
-              aria-label={t("meetings.roomLabel", "Room")}
-              style={{
-                background: "var(--color-surface)",
-                border: "1px solid var(--color-hairline-strong)",
-                borderRadius: "var(--radius-control)",
-                padding: "8px 10px",
-                fontSize: 13,
-                minHeight: 36,
-                color: "var(--color-ink)",
-              }}
-            >
-              <option value="">{t("meetings.noRoom", "No room, a call only")}</option>
-              {bookable.map((r) => (
-                <option key={r.id} value={r.id}>
-                  {r.name} · {t("meetings.roomPlaces", "{n} places", { n: r.capacity })}
-                </option>
-              ))}
-            </select>
-          </label>
-          <Field
-            label={t("meetings.guestLabel", "Guest email")}
-            hint={t("meetings.guestHint", "They join from a link, with no account")}
-            type="email"
-            value={guestEmail}
-            onChange={(e) => setGuestEmail(e.target.value)}
-            placeholder="name@company.ch"
-          />
-        </div>
-
-        <PeoplePicker
-          label={t("meetings.peopleLabel", "People")}
-          hint={t("meetings.peopleHint", "From the directory. You are in it already.")}
-          users={users}
-          exclude={[me]}
-          picked={picked}
-          onToggle={(id) => setPicked((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]))}
-        />
-
-        <label className="flex flex-col gap-1">
-          <span className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
-            {t("meetings.descriptionLabel", "What is it for?")}
-          </span>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={2}
-            aria-label={t("meetings.descriptionLabel", "What is it for?")}
-            placeholder={t("meetings.descriptionPlaceholder", "A line for the people invited, and for the summary afterwards.")}
-            className="w-full resize-none"
-            style={{
-              background: "var(--color-surface)",
-              border: "1px solid var(--color-hairline-strong)",
-              borderRadius: "var(--radius-control)",
-              padding: "8px 10px",
-              fontSize: 13,
-              color: "var(--color-ink)",
-            }}
-          />
-        </label>
-
-        <label className="flex cursor-pointer items-center gap-2 text-[12.5px]" style={{ color: "var(--color-ink)" }}>
-          <input type="checkbox" checked={weekly} onChange={(e) => setWeekly(e.target.checked)} style={{ width: 14, height: 14, accentColor: "var(--color-accent)" }} />
-          {t("meetings.weeklyLabel", "Repeats weekly, for the next four weeks")}
-        </label>
-
-        <div className="flex gap-2">
-          <Button type="submit" variant="primary" size="sm">
-            {t("meetings.create", "Schedule")}
-          </Button>
-          <Button type="button" size="sm" onClick={onClose}>
-            {t("common.cancel", "Cancel")}
-          </Button>
-        </div>
-      </form>
-    </Panel>
-  );
+function ScheduleForm({onClose,date}:{onClose:()=>void;date:DateKey|null}){
+const timeZone=useClientSession()?.workspaceContext?.workspace.timeZone||'UTC',me=useWorkspace(s=>s.me),users=useUsers(),rooms=useWorkspace(s=>s.floor.rooms),minutes=useWorkspace(s=>s.settings.meetingDefaultMinutes),canWrite=useWorkspace(s=>s.workspaceSync.canWrite),t=useT(),[error,setError]=useState(false),batch=useRef('mt-'+crypto.randomUUID());
+const schema=z.object({title:z.string().trim().min(1).max(200),day:z.string().regex(/^\d{4}-\d{2}-\d{2}$/),time:z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/),minutes:z.number().min(15).max(180),roomId:z.string(),picked:z.array(z.string()),description:z.string().max(3000),guestEmail:z.union([z.literal(''),z.email()]),weekly:z.boolean()});type Values=z.infer<typeof schema>;
+const form=useForm<Values>({resolver:zodResolver(schema),defaultValues:{title:'',day:date||workspaceDayKey(workspaceDate(),timeZone),time:'15:00',minutes,roomId:rooms.find(r=>r.kind==='meeting'||r.kind==='boardroom')?.id||'',picked:[],description:'',guestEmail:'',weekly:false}}),picked=form.watch('picked'),review=t('v3.reviewField','Review this field.'),submit=form.handleSubmit(async value=>{setError(false);let starts:Date[];try{starts=Array.from({length:value.weekly?4:1},(_,i)=>workspaceStart(addDays(value.day,i*7),value.time,timeZone));}catch{form.setError('time',{message:review});return;}for(let i=0;i<starts.length;i++){const start=starts[i]!,saved=await persistEvent({type:'meeting.scheduled',meeting:{id:batch.current+'-'+i,title:value.title,startsAt:start.toISOString(),endsAt:new Date(start.getTime()+value.minutes*60000).toISOString(),participantIds:[me,...value.picked.filter(id=>id!==me)],guests:value.guestEmail?[{name:value.guestEmail.split('@')[0]!,email:value.guestEmail,state:'invited'}]:[],recordingState:'none',...(value.roomId?{roomId:value.roomId}:{}),...(value.description?{description:value.description}:{}),...(value.weekly?{recurrence:'weekly' as const}:{})}});if(!saved){setError(true);return;}}onClose();});
+return <Panel className='mb-4'><SectionHead title={t('meetings.newMeeting','New meeting')}/><p className='mb-3 text-body-sm text-fg-muted'>{t('availability.workspaceTime','Times use the workspace timezone: {zone}',{zone:timeZone})}</p><form onSubmit={submit} className='space-y-4'><SharedField label={t('meetings.titleLabel','Title')} error={form.formState.errors.title?review:undefined}><Input {...form.register('title')} autoFocus/></SharedField><div className='grid gap-3 sm:grid-cols-3'><SharedField label={t('meetings.dateLabel','Day')} error={form.formState.errors.day?review:undefined}><Input type='date' {...form.register('day')}/></SharedField><SharedField label={t('meetings.timeLabel','Start')} error={form.formState.errors.time?review:undefined}><Input type='time' {...form.register('time')}/></SharedField><SharedField group label={t('meetings.durationLabel','Length')}><Controller control={form.control} name='minutes' render={({field})=><RadioGroup value={String(field.value)} onValueChange={v=>field.onChange(Number(v))} aria-label={t('meetings.durationLabel','Length')} orientation='horizontal' options={DURATIONS.map(n=>({value:String(n),label:String(n)}))}/>}/></SharedField></div><div className='grid gap-3 sm:grid-cols-2'><SharedField label={t('meetings.roomLabel','Room')}><Controller control={form.control} name='roomId' render={({field})=><Select value={field.value} onValueChange={field.onChange} options={[{value:'',label:t('meetings.noRoom','No room, a call only')},...rooms.filter(r=>r.kind!=='desk').map(r=>({value:r.id,label:r.name}))]}/>}/></SharedField><SharedField label={t('meetings.guestLabel','Guest email')} error={form.formState.errors.guestEmail?review:undefined}><Input type='email' {...form.register('guestEmail')}/></SharedField></div><PeoplePicker label={t('meetings.peopleLabel','People')} hint={t('meetings.peopleHint','From the directory. You are in it already.')} users={users} exclude={[me]} picked={picked} onToggle={id=>form.setValue('picked',picked.includes(id)?picked.filter(v=>v!==id):[...picked,id])}/><SharedField label={t('meetings.descriptionLabel','What is it for?')} error={form.formState.errors.description?review:undefined}><Textarea {...form.register('description')}/></SharedField><Controller control={form.control} name='weekly' render={({field})=><Checkbox checked={field.value} onCheckedChange={field.onChange} label={t('meetings.repeatWeekly','Weekly, for the next four weeks')}/>}/>{error?<p role='alert' className='text-body-sm text-danger'>{t('v3.meetingRetry','Some occurrences may already be saved. Retry the same values to recover them before starting another schedule.')}</p>:null}<div className='flex gap-2'><Button type='submit' variant='primary' size='sm' disabled={!canWrite||form.formState.isSubmitting}>{t('meetings.create','Schedule')}</Button><Button type='button' size='sm' onClick={onClose}>{t('common.cancel','Cancel')}</Button></div></form></Panel>;
 }
 
 /* ----------------------------------------------------------------- detail */
@@ -476,24 +287,24 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
   return (
     <div className="min-h-0 flex-1 overflow-y-auto">
       <div className="mx-auto w-full max-w-[760px] px-5 py-6">
-        <Link href="/hq/meetings" className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+        <Link href="/hq/meetings" className={"text-body-sm "+("ch-color-4a0211")} >
           {t("meetings.back", "Back to meetings")}
         </Link>
 
-        <h1 className="hq-display mt-3" style={{ color: "var(--color-ink)" }}>
+        <h1 className={"hq-display mt-3 "+("ch-color-7f7330")} >
           <bdi>{meeting.title}</bdi>
         </h1>
-        <p className="tabular mt-1 text-[13.5px]" style={{ color: "var(--color-ink-muted)" }}>
+        <p className={"tabular mt-1 text-body-sm "+("ch-color-4a0211")} >
           {formatShortDay(meeting.startsAt, timeZone)} · {formatRange(meeting.startsAt, meeting.endsAt, timeZone)}
           {room && (<>{" · "}<bdi>{room.name}</bdi></>)}
         </p>
         {meeting.description && (
-          <p className="mt-2 text-[13.5px] leading-relaxed" style={{ color: "var(--color-ink)", maxWidth: "62ch" }}>
+          <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-7f7330"+' '+"ch-max-width-d350dc")} >
             {meeting.description}
           </p>
         )}
         {meeting.recurrence === "weekly" && (
-          <p className="mt-1 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <p className={"mt-1 text-body-sm "+("ch-color-4a0211")} >
             {t("meetings.repeatsWeekly", "Repeats weekly. Each week is its own meeting, with its own notes.")}
           </p>
         )}
@@ -510,13 +321,8 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
           {!ended && (
           <Link
             href={`/hq/meetings/${meeting.id}/call`}
-            className="hq-btn inline-flex items-center gap-1.5 px-3.5 text-[13.5px] font-medium"
-            style={{
-              minHeight: 36,
-              background: "var(--color-accent)",
-              color: "var(--color-ink-inverse)",
-              borderRadius: "var(--radius-control)",
-            }}
+            className={"hq-btn inline-flex items-center gap-1.5 px-3.5 text-body-sm font-medium "+("ch-min-height-9efc87"+' '+"ch-background-3f17cb"+' '+"ch-color-7b8a5e"+' '+"ch-border-radius-332348")}
+            
           >
             <VideoCamera size={14} weight="fill" aria-hidden="true" />
             {t("meetings.joinNow", "Join meeting")}
@@ -533,10 +339,10 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
               return (
                 <li key={id} className="flex items-center gap-2.5">
                   <Avatar name={u.name} initials={u.initials} tint={u.tint} size={28} hideStatus />
-                  <span className="text-[13px]" style={{ color: "var(--color-ink)" }}>
+                  <span className={"text-body-sm "+("ch-color-7f7330")} >
                     <bdi>{u.name}</bdi>
                   </span>
-                  <span className="text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <span className={"text-caption "+("ch-color-4a0211")} >
                     <bdi>{u.title}</bdi>
                   </span>
                 </li>
@@ -545,12 +351,12 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
             {meeting.guests.map((g) => (
               <li key={g.email} className="flex items-center gap-2.5">
                 <Avatar name={g.name} initials={g.name.slice(0, 2).toUpperCase()} tint={3} size={28} guest hideStatus />
-                <span className="text-[13px]" style={{ color: "var(--color-ink)" }}>
+                <span className={"text-body-sm "+("ch-color-7f7330")} >
                   <bdi>{g.name}</bdi>
                 </span>
                 <Chip>{t("call.guest", "Guest")}</Chip>
                 {g.company && (
-                  <span className="text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <span className={"text-caption "+("ch-color-4a0211")} >
                     <bdi>{g.company}</bdi>
                   </span>
                 )}
@@ -565,7 +371,7 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
           <section className="mt-6">
             <SectionHead title={t("meetings.meetingLink", "Meeting link")} />
             <Panel>
-              <p className="text-[12.5px] leading-relaxed" style={{ color: "var(--color-ink-muted)", maxWidth: "68ch" }}>
+              <p className={"text-body-sm leading-relaxed "+("ch-color-4a0211"+' '+"ch-max-width-5119b9")} >
                 {t("meetings.linkLead", "Send this link to anyone outside the workspace.")} {linkPolicy}{" "}
                 {t("meetings.linkBranding", "The page carries your branding, never a third party's.")}
               </p>
@@ -580,7 +386,7 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
           <section className="mt-6">
             <SectionHead title={t("meetings.notes", "Notes")} meta={formatTime(meeting.endsAt, timeZone)} />
             <Panel>
-              <p className="text-[13.5px] leading-relaxed" style={{ color: "var(--color-ink)", maxWidth: "68ch" }}>
+              <p className={"text-body-sm leading-relaxed "+("ch-color-7f7330"+' '+"ch-max-width-5119b9")} >
                 {meeting.notes}
               </p>
             </Panel>

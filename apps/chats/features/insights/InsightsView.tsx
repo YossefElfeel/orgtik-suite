@@ -128,10 +128,10 @@ export function InsightsView() {
       <div className="flex min-h-0 flex-1 flex-col">
         <div className="mx-auto w-full max-w-[560px] px-5 py-10">
           <Panel>
-            <h1 className="hq-title" style={{ color: "var(--color-ink)" }}>
+            <h1 className={"hq-title "+("ch-color-7f7330")} >
               {t("insights.notForRole", "Insights is not part of the {role} role", { role: t(`role.${role}`, ROLE_LABEL[role]) })}
             </h1>
-            <p className="mt-2 text-[13px] leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
               {t(
                 "insights.notForRoleBody",
                 "It describes the team as a whole and is for people who are part of it. A guest is in one meeting and nothing else.",
@@ -150,10 +150,10 @@ export function InsightsView() {
     <div className="flex min-h-0 flex-1 flex-col">
       <header className="flex shrink-0 items-center justify-between gap-3 px-4 py-2.5">
         <div className="flex items-baseline gap-2.5">
-          <h1 className="hq-title" style={{ color: "var(--color-ink)" }}>
+          <h1 className={"hq-title "+("ch-color-7f7330")} >
             {t("insights.title", "Insights")}
           </h1>
-          <span className="tabular text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <span className={"tabular text-body-sm "+("ch-color-4a0211")} >
             {formatRangeLabel(period.range)}
           </span>
         </div>
@@ -166,13 +166,13 @@ export function InsightsView() {
           <div className="flex flex-wrap items-center gap-2 pb-4" role="group" aria-label={t("insights.filters", "Filters")}>
             <DateRangePicker value={period} onChange={setPeriod} today={today} min={ANALYTICS_BOUNDS.from} max={today} />
             <PeopleFilter users={users} me={me.id} value={cohort} onChange={setCohort} minCohort={minCohort} />
-            <label className="flex cursor-pointer items-center gap-2 ps-1 text-[12.5px]" style={{ color: "var(--color-ink)" }}>
+            <label className={"flex cursor-pointer items-center gap-2 ps-1 text-body-sm "+("ch-color-7f7330")} >
               <input
                 type="checkbox"
                 role="switch"
                 checked={compare}
                 onChange={(e) => setCompare(e.target.checked)}
-                style={{ width: 16, height: 16, accentColor: "var(--color-accent)" }}
+                className={"ch-width-7375d5"+' '+"ch-height-30de4a"+' '+"ch-accent-color-e56d5b"} 
               />
               {t("insights.compare", "Compare with the period before")}
             </label>
@@ -192,13 +192,8 @@ export function InsightsView() {
 
           {/* Stated before any number is shown, not as a footnote after. */}
           <p
-            className="mb-5 px-3.5 py-2.5 text-[12.5px] leading-relaxed"
-            style={{
-              background: "var(--color-surface-sunken)",
-              borderRadius: "var(--radius-card)",
-              color: "var(--color-ink-muted)",
-              maxWidth: "76ch",
-            }}
+            className={"mb-5 px-3.5 py-2.5 text-body-sm leading-relaxed "+("ch-background-314b28"+' '+"ch-border-radius-8d459a"+' '+"ch-color-4a0211"+' '+"ch-max-width-d4e2c0")}
+            
           >
             {onlyMe
               ? t("insights.preambleMe", "These are your own numbers. Nobody else can open this view of you, and no manager has an equivalent.")
@@ -211,10 +206,10 @@ export function InsightsView() {
 
           {suppressed ? (
             <Panel>
-              <p className="text-[13px] leading-relaxed" style={{ color: "var(--color-ink)" }}>
+              <p className={"text-body-sm leading-relaxed "+("ch-color-7f7330")} >
                 {t("insights.tooFewPicked", "{n} people is below the minimum of {min}, so nothing is shown.", { n: cohortIds.length, min: minCohort })}
               </p>
-              <p className="mt-1.5 text-[12.5px] leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+              <p className={"mt-1.5 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
                 {t(
                   "insights.tooFewWhy",
                   "With a group this small an average is a person. Add people until the group is at least {min}, or choose Only me to see your own numbers.",
@@ -342,7 +337,7 @@ export function InsightsView() {
                     title={t("insights.presentTrend", "Hours here")}
                     meta={mode === "week" ? t("insights.byWeek", "by week") : t("insights.byDay", "by day")}
                   />
-                  <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
                     {t("insights.presentTrendBody", "Time signed in and here, summed across the group.")}
                   </p>
                   <LinesChart
@@ -362,7 +357,7 @@ export function InsightsView() {
                     title={t("insights.meetingTrend", "Hours in meetings")}
                     meta={mode === "week" ? t("insights.byWeek", "by week") : t("insights.byDay", "by day")}
                   />
-                  <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
                     {t("insights.meetingTrendBody", "Meeting time on the calendar, for meetings this group took part in.")}
                   </p>
                   <LinesChart
@@ -390,7 +385,7 @@ export function InsightsView() {
                       }
                     : {})}
                 />
-                <p className="mt-2 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                <p className={"mt-2 text-caption "+("ch-color-4a0211")} >
                   {onlyMe
                     ? t("insights.heatNoteMe", "Averaged across the period. Your busiest hour: {day} at {hour}:00.", {
                         day: dayLabel(agg.peak.day),
@@ -407,7 +402,7 @@ export function InsightsView() {
               <div className="grid gap-5 lg:grid-cols-2">
                 <Panel>
                   <SectionHead title={t("insights.byWeekday", "Meetings by weekday")} meta={formatHours(agg.meetingHours)} />
-                  <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
                     {t("insights.byWeekdayBody", "Where in the week the meeting load lands.")}
                   </p>
                   <Columns
@@ -422,7 +417,7 @@ export function InsightsView() {
               <div className="grid gap-5 lg:grid-cols-2">
                 <Panel>
                   <SectionHead title={t("insights.lengths", "How long they ran")} meta={t("insights.nMeetings", "{n} meetings", { n: agg.meetingCount })} />
-                  <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
                     {t("insights.lengthsBody", "Hours spent, by how long each meeting was booked for.")}
                   </p>
                   <RankedBars
@@ -436,14 +431,14 @@ export function InsightsView() {
               <div className="grid gap-5 lg:grid-cols-2">
                 <Panel>
                   <SectionHead title={t("insights.channels", "Where the conversation happens")} meta={new Intl.NumberFormat(formatTag()).format(agg.messages)} />
-                  <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
                     {t("insights.channelsBody", "Messages by channel. Direct messages are one bar, never named pairs.")}
                   </p>
                   <RankedBars rows={channelRows} format={countFmt} />
                 </Panel>
                 <Panel>
                   <SectionHead title={t("insights.fromTheWork", "Started from the work")} />
-                  <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
                     {t("insights.fromTheWorkBody", "The product's promise is that conversations attach to the work. These two say whether that is happening.")}
                   </p>
                   <div className="flex flex-col gap-4">
@@ -467,7 +462,7 @@ export function InsightsView() {
 
               <Panel>
                 <SectionHead title={t("insights.roomUse", "Room use")} meta={formatHours(roomHoursUsed)} />
-                <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
                   {t("insights.roomUseBody2", "Hours each room was occupied over the period, meetings and quiet work alike.")}
                 </p>
                 <RankedBars rows={roomRows} format={hoursFmt} emphasis={roomRows[0]?.id} />
@@ -476,10 +471,10 @@ export function InsightsView() {
               {showTable && (
                 <Panel>
                   <SectionHead title={t("insights.tableTitle", "Every day in the period")} meta={t("insights.nDays", "{n} days", { n: agg.days })} />
-                  <div className="max-h-[380px] overflow-auto" style={{ borderRadius: "var(--radius-control)" }}>
-                    <PaginatedTable resetKey={`${period.range.from}/${period.range.to}/${cohortIds.join(",")}`}><table className="w-full text-[12.5px]" style={{ borderCollapse: "collapse" }}>
+                  <div className={"max-h-[380px] overflow-auto "+("ch-border-radius-332348")} >
+                    <PaginatedTable resetKey={`${period.range.from}/${period.range.to}/${cohortIds.join(",")}`}><table className={"w-full text-body-sm "+("ch-border-collapse-454826")} >
                       <thead>
-                        <tr style={{ position: "sticky", top: 0, background: "var(--color-surface)" }}>
+                        <tr className={"ch-position-b00353"+' '+"ch-top-0d4406"+' '+"ch-background-751d03"} >
                           {[
                             t("insights.colDate", "Date"),
                             t("insights.colPeople", "People here"),
@@ -492,8 +487,8 @@ export function InsightsView() {
                             <th
                               key={h}
                               scope="col"
-                              className={`py-2 pe-3 font-semibold ${i === 0 ? "text-start" : "text-end"}`}
-                              style={{ color: "var(--color-ink-subtle)", borderBottom: "1px solid var(--color-hairline)" }}
+                              className={(`py-2 pe-3 font-semibold ${i === 0 ? "text-start" : "text-end"}`)+" "+("ch-color-094083"+' '+"ch-border-bottom-9cb2f4")}
+                              
                             >
                               {h}
                             </th>
@@ -502,26 +497,26 @@ export function InsightsView() {
                       </thead>
                       <tbody className="tabular">
                         {agg.daily.map((d) => (
-                          <tr key={d.date} style={{ borderBottom: "1px solid var(--color-hairline)" }}>
-                            <td className="py-1.5 pe-3" style={{ color: "var(--color-ink)" }}>
+                          <tr key={d.date} className={"ch-border-bottom-9cb2f4"} >
+                            <td className={"py-1.5 pe-3 "+("ch-color-7f7330")} >
                               {d.date}
                             </td>
-                            <td className="py-1.5 pe-3 text-end" style={{ color: "var(--color-ink-muted)" }}>
+                            <td className={"py-1.5 pe-3 text-end "+("ch-color-4a0211")} >
                               {d.activePeople}
                             </td>
-                            <td className="py-1.5 pe-3 text-end" style={{ color: "var(--color-ink-muted)" }}>
+                            <td className={"py-1.5 pe-3 text-end "+("ch-color-4a0211")} >
                               {d.presentHours.toFixed(1)}
                             </td>
-                            <td className="py-1.5 pe-3 text-end" style={{ color: "var(--color-ink-muted)" }}>
+                            <td className={"py-1.5 pe-3 text-end "+("ch-color-4a0211")} >
                               {d.meetingCount}
                             </td>
-                            <td className="py-1.5 pe-3 text-end" style={{ color: "var(--color-ink-muted)" }}>
+                            <td className={"py-1.5 pe-3 text-end "+("ch-color-4a0211")} >
                               {d.meetingHours.toFixed(1)}
                             </td>
-                            <td className="py-1.5 pe-3 text-end" style={{ color: "var(--color-ink-muted)" }}>
+                            <td className={"py-1.5 pe-3 text-end "+("ch-color-4a0211")} >
                               {d.focusHours.toFixed(1)}
                             </td>
-                            <td className="py-1.5 pe-3 text-end" style={{ color: "var(--color-ink-muted)" }}>
+                            <td className={"py-1.5 pe-3 text-end "+("ch-color-4a0211")} >
                               {d.messages}
                             </td>
                           </tr>
@@ -535,7 +530,7 @@ export function InsightsView() {
               {!onlyMe && (
                 <Panel>
                   <SectionHead title={t("insights.myTime", "My time")} meta={t("insights.onlyYou", "only you can see this")} />
-                  <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
                     {t("insights.myTimeBody2", "Your own numbers for the same period. Nobody else can open this view of you, and no manager has an equivalent.")}
                   </p>
                   <div className="mb-3 flex flex-wrap items-center gap-2">

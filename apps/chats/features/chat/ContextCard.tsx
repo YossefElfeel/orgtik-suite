@@ -53,8 +53,8 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
     return (
       <Frame muted>
         <div className="flex items-center gap-2">
-          <Warning size={15} aria-hidden="true" style={{ color: "var(--color-ink-subtle)" }} />
-          <span className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <Warning size={15} aria-hidden="true" className={"ch-color-094083"}  />
+          <span className={"text-body-sm "+("ch-color-4a0211")} >
             {t("card.noPermission", "This conversation is about a record you cannot open.")}
           </span>
         </div>
@@ -66,8 +66,8 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
     return (
       <Frame muted>
         <div className="flex items-center gap-2">
-          <Warning size={15} aria-hidden="true" style={{ color: "var(--color-ink-subtle)" }} />
-          <span className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <Warning size={15} aria-hidden="true" className={"ch-color-094083"}  />
+          <span className={"text-body-sm "+("ch-color-4a0211")} >
             {t("card.deleted", "{title} was deleted. The conversation is kept.", { title: object.title })}
           </span>
         </div>
@@ -80,21 +80,15 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
       <div className="flex items-start gap-2.5">
         <span
           aria-hidden="true"
-          className="flex shrink-0 items-center justify-center"
-          style={{
-            width: 28,
-            height: 28,
-            borderRadius: "var(--radius-control)",
-            background: "var(--color-surface-sunken)",
-            color: "var(--color-ink-muted)",
-          }}
+          className={"flex shrink-0 items-center justify-center "+("ch-width-a81a9e"+' '+"ch-height-3a8bc5"+' '+"ch-border-radius-332348"+' '+"ch-background-314b28"+' '+"ch-color-4a0211")}
+          
         >
           <Icon size={15} weight="bold" />
         </span>
 
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline gap-2">
-            <span className="text-[11px] font-medium" style={{ color: "var(--color-ink-subtle)" }}>
+            <span className={"text-micro font-medium "+("ch-color-094083")} >
               {moduleLabel(object.module)}
             </span>
             {object.state === "stale" && (
@@ -102,7 +96,7 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
             )}
           </div>
 
-          <p className="mt-0.5 truncate text-[13.5px] font-semibold" style={{ color: "var(--color-ink)" }}>
+          <p className={"mt-0.5 truncate text-body-sm font-semibold "+("ch-color-7f7330")} >
             <bdi>{object.title}</bdi>
           </p>
 
@@ -114,11 +108,11 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
             {object.due && <Meta label={t("card.due", "Due")} value={formatShortDay(object.due)} />}
             {owner && (
               <span className="flex items-center gap-1.5">
-                <span className="text-[11px]" style={{ color: "var(--color-ink-subtle)" }}>
+                <span className={"text-micro "+("ch-color-094083")} >
                   {t("card.owner", "Owner")}
                 </span>
                 <Avatar name={owner.name} initials={owner.initials} tint={owner.tint} size={20} hideStatus />
-                <span className="text-[12px]" style={{ color: "var(--color-ink)" }}>
+                <span className={"text-caption "+("ch-color-7f7330")} >
                   <bdi>{owner.name.split(" ")[0]}</bdi>
                 </span>
               </span>
@@ -129,13 +123,8 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
         {!compact && object.type === "task" && (
           <Link
             href={`/tasks/${object.id}`}
-            className="hq-btn flex shrink-0 items-center gap-1 px-2 text-[12px] font-medium"
-            style={{
-              minHeight: 28,
-              color: "var(--color-ink-muted)",
-              border: "1px solid var(--color-hairline-strong)",
-              borderRadius: "var(--radius-control)",
-            }}
+            className={"hq-btn flex shrink-0 items-center gap-1 px-2 text-caption font-medium "+("ch-min-height-4f3317"+' '+"ch-color-4a0211"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348")}
+            
           >
             {t("card.open", "Open")}
             <ArrowSquareOut size={12} weight="bold" aria-hidden="true" />
@@ -152,13 +141,8 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
                 t("card.otherModuleBody", "In the product, Open goes to the record in its own module of the Business OS. That module is not part of this prototype."),
               )
             }
-            className="hq-btn flex shrink-0 items-center gap-1 px-2 text-[12px] font-medium"
-            style={{
-              minHeight: 28,
-              color: "var(--color-ink-muted)",
-              border: "1px solid var(--color-hairline-strong)",
-              borderRadius: "var(--radius-control)",
-            }}
+            className={"hq-btn flex shrink-0 items-center gap-1 px-2 text-caption font-medium "+("ch-min-height-4f3317"+' '+"ch-color-4a0211"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348")}
+            
           >
             {t("card.open", "Open")}
             <ArrowSquareOut size={12} weight="bold" aria-hidden="true" />
@@ -172,12 +156,8 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
 function Frame({ children, muted = false }: { children: React.ReactNode; muted?: boolean }) {
   return (
     <div
-      className="p-2.5"
-      style={{
-        background: muted ? "var(--color-surface-sunken)" : "var(--color-surface)",
-        border: "1px solid var(--color-hairline-strong)",
-        borderRadius: "var(--radius-card)",
-      }}
+      className={"p-2.5 "+((muted?"ch-background-314b28":"ch-background-751d03")+' '+"ch-border-8ff264"+' '+"ch-border-radius-8d459a")}
+      
     >
       {children}
     </div>
@@ -196,10 +176,10 @@ const MODULE_KEYS: Record<string, string> = {
 function Meta({ label, value }: { label: string; value: string }) {
   return (
     <span className="flex items-baseline gap-1.5">
-      <span className="text-[11px]" style={{ color: "var(--color-ink-subtle)" }}>
+      <span className={"text-micro "+("ch-color-094083")} >
         {label}
       </span>
-      <span className="text-[12px] font-medium" style={{ color: "var(--color-ink)" }}>
+      <span className={"text-caption font-medium "+("ch-color-7f7330")} >
         <bdi>{value}</bdi>
       </span>
     </span>

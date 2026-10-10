@@ -51,7 +51,8 @@ interface ComposerProps {
 }
 
 export function Composer({ channelId, threadId, placeholder, draftKey, disabled, disabledReason, onSend, autoFocus }: ComposerProps) {
-  const users = useUsers();
+  const directory = useUsers();
+  const users=[...directory,{id:"channel",name:"channel",role:"member" as const,title:"",initials:"#",tint:0,timezone:"UTC"},{id:"here",name:"here",role:"member" as const,title:"",initials:"@",tint:0,timezone:"UTC"}];
   const f = useFormatter(), authority = useFileAuthority();
   const scopedDraftKey = fileScope() + ":" + (draftKey || channelId);
   const [draftScope, setDraftScope] = useState(scopedDraftKey);
@@ -96,15 +97,6 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
     };
   }, [showEmoji]);
 
-  /* Grow with the content, up to a ceiling. A composer that scrolls internally
-     at three lines is the most common small cruelty in chat UI. */
-  useEffect(() => {
-    const el = areaRef.current;
-    if (!el) return;
-    el.style.height = "auto";
-    el.style.height = `${Math.min(el.scrollHeight, 168)}px`;
-  }, [text]);
-
   const send = async () => {
     const trimmed = text.trim();
     if (sending || (!trimmed && attachments.length === 0)) return;
@@ -114,7 +106,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
       const saved = await onSend(trimmed, attachments);
       if (original !== currentAuthority()) return;
       if (!saved) { setUnconfirmed(Boolean(useWorkspace.getState().workspaceSync.uncertain)); setSendError(true); return; }
-      setText(""); setAttachments([]); setMentionQuery(null); setUnconfirmed(false); setSendError(false);
+      void useWorkspace.getState().applyEvent({type:"channel.typing",channelId,active:false});setText(""); setAttachments([]); setMentionQuery(null); setUnconfirmed(false); setSendError(false);
     } finally { setSending(false); }
   };
   const pickFile = (item: FilePickerItem) => {
@@ -122,8 +114,10 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
     setAttachments(a => a.some(existing => existing.id === file.id) ? a : [...a, file]); setShowFiles(false);
   };
 
+  const lastTyping=useRef(false);useEffect(()=>{const scope=fileScope();return()=>{if(scope===fileScope()&&lastTyping.current)void useWorkspace.getState().applyEvent({type:"channel.typing",channelId,active:false});};},[channelId]);useEffect(()=>{const active=Boolean(text);if(active===lastTyping.current)return;const timer=setTimeout(()=>{lastTyping.current=active;void useWorkspace.getState().applyEvent({type:'channel.typing',channelId,active});},400);return()=>clearTimeout(timer);},[text,channelId]);
   const onChange = (value: string) => {
     setText(value);
+
     /* Mention autocomplete reads the token being typed, not the whole field. */
     const match = /(?:^|\s)@([\p{L}\p{N}_]*)$/u.exec(value);
     setMentionQuery(match ? (match[1] ?? "") : null);
@@ -147,13 +141,8 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
   if (disabled) {
     return (
       <div
-        className="mx-4 mb-4 flex items-center justify-center px-4 py-3 text-[12.5px]"
-        style={{
-          background: "var(--color-surface-sunken)",
-          border: "1px solid var(--color-hairline)",
-          borderRadius: "var(--radius-card)",
-          color: "var(--color-ink-muted)",
-        }}
+        className={"mx-4 mb-4 flex items-center justify-center px-4 py-3 text-body-sm "+("ch-background-314b28"+' '+"ch-border-5065d4"+' '+"ch-border-radius-8d459a"+' '+"ch-color-4a0211")}
+        
       >
         {disabledReason ?? t("chat.archived", "This channel is archived. It stays searchable.")}
       </div>
@@ -167,13 +156,8 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
           id={listId}
           role="listbox"
           aria-label={t("chat.mentionList", "People to mention")}
-          className="absolute bottom-full z-30 mb-1.5 w-[260px] overflow-hidden p-1"
-          style={{
-            background: "var(--color-surface)",
-            border: "1px solid var(--color-hairline-strong)",
-            borderRadius: "var(--radius-card)",
-            boxShadow: "var(--shadow-float)",
-          }}
+          className={"absolute bottom-full z-30 mb-1.5 w-[260px] overflow-hidden p-1 "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-8d459a"+' '+"ch-box-shadow-3d74b9")}
+          
         >
           {matches.map((u, i) => (
             <li key={u.id} id={`${listId}-${i}`} role="option" aria-selected={i === activeMention}>
@@ -181,16 +165,16 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
                 type="button"
                 tabIndex={-1}
                 onMouseDown={(e) => e.preventDefault()}
-                onClick={() => applyMention(u.name)}
+                onClick={() => applyMention(u.id)}
                 data-active={i === activeMention ? "true" : undefined}
-                className="hq-row flex w-full items-center gap-2 px-2 py-1.5 text-start"
-                style={{ borderRadius: "var(--radius-control)" }}
+                className={"hq-row flex w-full items-center gap-2 px-2 py-1.5 text-start "+("ch-border-radius-332348")}
+                
               >
                 <Avatar name={u.name} initials={u.initials} tint={u.tint} size={20} hideStatus />
-                <span className="text-[13px]" style={{ color: "var(--color-ink)" }}>
+                <span className={"text-body-sm "+("ch-color-7f7330")} >
                   <bdi>{u.name}</bdi>
                 </span>
-                <span className="ms-auto truncate text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                <span className={"ms-auto truncate text-caption "+("ch-color-094083")} >
                   <bdi>{u.title}</bdi>
                 </span>
               </button>
@@ -203,8 +187,8 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
 
       {showEmoji && (
         <div
-          className="hq-floating hq-rise absolute bottom-full z-30 mb-1.5 w-[228px] p-2"
-          style={{ borderRadius: "var(--radius-card)" }}
+          className={"hq-floating hq-rise absolute bottom-full z-30 mb-1.5 w-[228px] p-2 "+("ch-border-radius-8d459a")}
+          
           role="dialog"
           aria-label={t("chat.emoji", "Add emoji")}
         >
@@ -217,8 +201,8 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
                   setShowEmoji(false);
                   areaRef.current?.focus();
                 }}
-                className="hq-btn flex items-center justify-center text-[18px]"
-                style={{ height: 32, borderRadius: "var(--radius-control)" }}
+                className={"hq-btn flex items-center justify-center text-title-sm "+("ch-height-268b76"+' '+"ch-border-radius-332348")}
+                
                 aria-label={t("chat.insertEmoji", "Insert {emoji}", { emoji: e })}
               >
                 <span aria-hidden="true">{e}</span>
@@ -230,20 +214,16 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
 
       {sendError ? <p role="alert" className="mb-2 text-body-sm text-danger">{unconfirmed ? t("fileReferences.messageUnconfirmed", "Message delivery is unconfirmed. Retry to recover the same message before editing.") : t("fileReferences.messageRefused", "The message was not saved. Review your file access and try again.")}</p> : null}
       <div
-        className="flex flex-col"
-        style={{
-          background: "var(--color-surface)",
-          border: "1px solid var(--color-hairline-strong)",
-          borderRadius: "var(--radius-card)",
-        }}
+        className={"flex flex-col "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-8d459a")}
+        
       >
         {draftScope === scopedDraftKey && attachments.length > 0 && (
-          <ul className="flex flex-wrap gap-1.5 border-b p-2" style={{ borderColor: "var(--color-hairline)" }}>
+          <ul className={"flex flex-wrap gap-1.5 border-b p-2 "+("ch-border-color-407eb5")} >
             {attachments.map((f) => (
               <li key={f.id}>
                 <span
-                  className="flex items-center gap-1.5 px-2 py-1 text-[12px]"
-                  style={{ background: "var(--color-surface-sunken)", borderRadius: "var(--radius-control)" }}
+                  className={"flex items-center gap-1.5 px-2 py-1 text-caption "+("ch-background-314b28"+' '+"ch-border-radius-332348")}
+                  
                 >
                   <bdi>{f.name || t("fileReferences.selected", "Selected file")}</bdi>
                   <button
@@ -252,7 +232,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
                     aria-label={t("chat.removeAttachment", "Remove {name}", { name: f.name })}
                     className="hq-btn"
                   >
-                    <X size={11} weight="bold" aria-hidden="true" style={{ color: "var(--color-ink-subtle)" }} />
+                    <X size={11} weight="bold" aria-hidden="true" className={"ch-color-094083"}  />
                   </button>
                 </span>
               </li>
@@ -302,8 +282,8 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
           rows={1}
           placeholder={placeholder}
           aria-label={placeholder}
-          className="w-full resize-none bg-transparent px-3 pt-2.5 text-[13.5px] leading-[1.55] outline-none"
-          style={{ color: "var(--color-ink)", minHeight: 40 }}
+          className={"w-full resize-none bg-transparent px-3 pt-2.5 text-body-sm leading-[1.55] outline-none "+("ch-color-7f7330"+' '+"ch-min-height-fd2692")}
+          
         />
 
         <div className="flex items-center justify-between px-2 pb-2">
@@ -318,7 +298,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
                 setShowFiles((v) => !v);
                 setShowEmoji(false);
               }}
-              style={{ color: "var(--color-ink-subtle)" }}
+              className={"ch-color-094083"} 
             >
               <Paperclip size={16} aria-hidden="true" />
             </Button>
@@ -329,7 +309,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
               disabled={sending || unconfirmed}
               label={t("chat.mention", "Mention someone")}
               onClick={() => onChange(`${text}${text.endsWith(" ") || !text ? "" : " "}@`)}
-              style={{ color: "var(--color-ink-subtle)" }}
+              className={"ch-color-094083"} 
             >
               <At size={16} aria-hidden="true" />
             </Button>
@@ -344,7 +324,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
                 setShowEmoji((v) => !v);
                 setShowFiles(false);
               }}
-              style={{ color: "var(--color-ink-subtle)" }}
+              className={"ch-color-094083"} 
             >
               <Smiley size={16} aria-hidden="true" />
             </Button>

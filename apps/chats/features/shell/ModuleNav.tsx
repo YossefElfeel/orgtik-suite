@@ -23,7 +23,6 @@ export function ModuleNav() {
   const t = useT();
 
   const items = [
-    ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ href: "/presentation", label: t("presentation.title", "Chats walkthrough"), Icon: ChatsCircle, meta: "", mention: false, count: undefined }] : []),
     { href: "/hq/office", label: t("nav.office", "Office"), Icon: MapTrifold, meta: `${online}`, mention: false },
     {
       href: "/hq/chat",
@@ -38,6 +37,7 @@ export function ModuleNav() {
     { href: "/hq/whiteboard", label: t("nav.boards", "Whiteboard"), Icon: PencilSimple, meta: "", mention: false },
     { href: "/hq/insights", label: t("nav.insights", "Insights"), Icon: ChartBar, meta: "", mention: false },
     { href: "/hq/settings", label: t("nav.settings", "Settings"), Icon: Gear, meta: "", mention: false },
+    { href: "/hq/admin", label: t("nav.admin", "Administration"), Icon: Gear, meta: "", mention: false },
   ] as const;
 
   return (
@@ -51,20 +51,13 @@ export function ModuleNav() {
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className="hq-row flex items-center gap-2.5 px-2.5"
-                style={{
-                  borderRadius: "var(--radius-control)",
-                  minHeight: 34,
-                  color: active ? "var(--color-ink-brand)" : "var(--color-ink)",
-                  background: active ? "var(--color-accent-soft)" : "transparent",
-                  fontWeight: active ? 600 : 500,
-                  fontSize: "13.5px",
-                }}
+                className={"hq-row flex items-center gap-2.5 px-2.5 "+("ch-border-radius-332348"+' '+"ch-min-height-87483b"+' '+(active?"ch-color-55f463":"ch-color-7f7330")+' '+(active?"ch-background-1416a8":"ch-background-a8869d")+' '+(active?"ch-font-weight-eed0f8":"ch-font-weight-02a2d3")+' '+"ch-font-size-ba0694")}
+                
               >
                 <Icon size={17} weight={active ? "fill" : "regular"} aria-hidden="true" />
                 <span className="min-w-0 flex-1 truncate">{label}</span>
                 {meta && (
-                  <span className="tabular text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                  <span className={"tabular text-caption "+("ch-color-094083")} >
                     {meta}
                   </span>
                 )}

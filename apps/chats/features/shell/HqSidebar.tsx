@@ -76,7 +76,7 @@ function ChatSidebar() {
               iconOnly
               label={t("chat.newChannel", "New channel")}
               onClick={() => setCreating(true)}
-              style={{ color: "var(--color-ink-subtle)" }}
+              className={"ch-color-094083"} 
             >
               <Plus size={13} weight="bold" aria-hidden="true" />
             </Button>
@@ -99,8 +99,8 @@ function ChatSidebar() {
               <li key={c.id}>
                 <Link
                   href={`/hq/chat/${c.id}`}
-                  className="hq-row flex items-center gap-2 px-2.5 py-1.5 text-[13px]"
-                  style={{ borderRadius: "var(--radius-control)", color: "var(--color-ink-subtle)" }}
+                  className={"hq-row flex items-center gap-2 px-2.5 py-1.5 text-body-sm "+("ch-border-radius-332348"+' '+"ch-color-094083")}
+                  
                 >
                   <Hash size={13} aria-hidden="true" />
                   <span className="truncate line-through"><bdi>{c.name}</bdi></span>
@@ -120,7 +120,7 @@ function ChatSidebar() {
             iconOnly
             label={t("chat.newMessage", "New message")}
             onClick={() => setMessaging(true)}
-            style={{ color: "var(--color-ink-subtle)" }}
+            className={"ch-color-094083"} 
           >
             <Plus size={13} weight="bold" aria-hidden="true" />
           </Button>
@@ -138,7 +138,7 @@ function ChatSidebar() {
 function SidebarHeading({ label, action }: { label: string; action?: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between pb-1 pt-3 ps-2.5 pe-1">
-      <span className="text-[11.5px] font-semibold" style={{ color: "var(--color-ink-subtle)" }}>
+      <span className={"text-caption font-semibold "+("ch-color-094083")} >
         {label}
       </span>
       {action}
@@ -161,23 +161,16 @@ function ChannelRow({ channel }: { channel: Channel }) {
       <Link
         href={`/hq/chat/${channel.id}`}
         aria-current={active ? "page" : undefined}
-        className="hq-row flex items-center gap-2 px-2.5"
-        style={{
-          borderRadius: "var(--radius-control)",
-          minHeight: 30,
-          fontSize: "13px",
-          color: active ? "var(--color-ink-brand)" : silenced ? "var(--color-ink-subtle)" : channel.unread ? "var(--color-ink)" : "var(--color-ink-muted)",
-          background: active ? "var(--color-accent-soft)" : "transparent",
-          fontWeight: channel.unread && !silenced ? 600 : 400,
-        }}
+        className={"hq-row flex items-center gap-2 px-2.5 "+("ch-border-radius-332348"+' '+"ch-min-height-ac51e5"+' '+"ch-font-size-ba0694"+' '+(active?"ch-color-55f463":(silenced?"ch-color-094083":(channel.unread?"ch-color-7f7330":"ch-color-4a0211")))+' '+(active?"ch-background-1416a8":"ch-background-a8869d")+' '+(channel.unread && !silenced?"ch-font-weight-eed0f8":"ch-font-weight-7e3a94"))}
+        
       >
-        <Icon size={13} weight="bold" aria-hidden="true" style={{ color: "var(--color-ink-subtle)", flexShrink: 0 }} />
+        <Icon size={13} weight="bold" aria-hidden="true" className={"ch-color-094083"+' '+"ch-flex-shrink-6ee066"}  />
         <span className="min-w-0 flex-1 truncate"><bdi>{channel.name}</bdi></span>
         {silenced ? (
           <BellSlash
             size={12}
             aria-label={t("chat.silenced", "Notifications off")}
-            style={{ color: "var(--color-ink-subtle)", flexShrink: 0 }}
+            className={"ch-color-094083"+' '+"ch-flex-shrink-6ee066"} 
           />
         ) : (
           <Count value={channel.unread} mention={channel.mentions > 0} />
@@ -203,21 +196,14 @@ function DirectRow({ channel }: { channel: Channel }) {
       <Link
         href={`/hq/chat/${channel.id}`}
         aria-current={active ? "page" : undefined}
-        className="hq-row flex items-center gap-2 px-2.5"
-        style={{
-          borderRadius: "var(--radius-control)",
-          minHeight: 32,
-          fontSize: "13px",
-          color: active ? "var(--color-ink-brand)" : channel.unread ? "var(--color-ink)" : "var(--color-ink-muted)",
-          background: active ? "var(--color-accent-soft)" : "transparent",
-          fontWeight: channel.unread ? 600 : 400,
-        }}
+        className={"hq-row flex items-center gap-2 px-2.5 "+("ch-border-radius-332348"+' '+"ch-min-height-dace99"+' '+"ch-font-size-ba0694"+' '+(active?"ch-color-55f463":(channel.unread?"ch-color-7f7330":"ch-color-4a0211"))+' '+(active?"ch-background-1416a8":"ch-background-a8869d")+' '+(channel.unread?"ch-font-weight-eed0f8":"ch-font-weight-7e3a94"))}
+        
       >
         {isGroup || !other ? (
           <span
             aria-hidden="true"
-            className="flex shrink-0 items-center justify-center"
-            style={{ width: 20, height: 20, borderRadius: "var(--radius-chip)", background: "var(--color-surface-sunken)", color: "var(--color-ink-subtle)" }}
+            className={"flex shrink-0 items-center justify-center "+("ch-width-0f6c53"+' '+"ch-height-44a2f4"+' '+"ch-border-radius-189003"+' '+"ch-background-314b28"+' '+"ch-color-094083")}
+            
           >
             <UsersThree size={11} weight="bold" />
           </span>
@@ -262,7 +248,7 @@ function OfficeSidebar() {
               iconOnly
               label={t("room.addTitle", "Add a room")}
               onClick={() => setAdding(true)}
-              style={{ color: "var(--color-ink-subtle)" }}
+              className={"ch-color-094083"} 
             >
               <Plus size={13} weight="bold" aria-hidden="true" />
             </Button>
@@ -310,18 +296,18 @@ function RoomRow({
         type="button"
         onClick={() => joinRoom(roomId)}
         data-active={here ? "true" : undefined}
-        className="hq-row flex w-full items-center gap-2 px-2.5 text-start"
-        style={{ borderRadius: "var(--radius-control)", minHeight: 32, fontSize: "13px" }}
+        className={"hq-row flex w-full items-center gap-2 px-2.5 text-start "+("ch-border-radius-332348"+' '+"ch-min-height-dace99"+' '+"ch-font-size-ba0694")}
+        
       >
-        <span className="min-w-0 flex-1 truncate" style={{ color: here ? "var(--color-ink-brand)" : "var(--color-ink)" }}>
+        <span className={"min-w-0 flex-1 truncate "+((here?"ch-color-55f463":"ch-color-7f7330"))} >
           <bdi>{name}</bdi>
         </span>
         {here && (
-          <span className="shrink-0 text-[11px] font-medium" style={{ color: "var(--color-ink-brand)" }}>
+          <span className={"shrink-0 text-micro font-medium "+("ch-color-55f463")} >
             {t("office.here", "you")}
           </span>
         )}
-        <span className="tabular text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+        <span className={"tabular text-caption "+("ch-color-094083")} >
           {occupants.length > 0
             ? t("office.occupancy", "{n}/{cap}", { n: occupants.length, cap: capacity })
             : t("office.emptyRoom", "empty")}
@@ -339,7 +325,7 @@ function RoomRow({
           iconOnly
           label={t("room.settingsFor", "Settings for {name}", { name })}
           onClick={onEdit}
-          style={{ color: "var(--color-ink-subtle)", background: "var(--color-surface)" }}
+          className={"ch-color-094083"+' '+"ch-background-751d03"} 
         >
           <Gear size={13} aria-hidden="true" />
         </Button>

@@ -32,12 +32,8 @@ export function MobileTabs() {
   return (
     <nav
       aria-label={t("nav.label", "Chats sections")}
-      className="flex shrink-0 md:hidden"
-      style={{
-        background: "var(--color-surface)",
-        borderTop: "1px solid var(--color-hairline)",
-        paddingBottom: "env(safe-area-inset-bottom)",
-      }}
+      className={"flex shrink-0 md:hidden "+("ch-background-751d03"+' '+"ch-border-top-c9ce2a"+' '+"ch-padding-bottom-e22ead")}
+      
     >
       {tabs.map(({ href, match, label, Icon, count, mention }) => {
         const active = pathname.startsWith(match);
@@ -46,11 +42,8 @@ export function MobileTabs() {
             key={href}
             href={href}
             aria-current={active ? "page" : undefined}
-            className="relative flex flex-1 flex-col items-center justify-center gap-0.5"
-            style={{
-              minHeight: 52,
-              color: active ? "var(--color-ink-brand)" : "var(--color-ink-muted)",
-            }}
+            className={"relative flex flex-1 flex-col items-center justify-center gap-0.5 "+("ch-min-height-5d0881"+' '+(active?"ch-color-55f463":"ch-color-4a0211"))}
+            
           >
             <span className="relative">
               <Icon size={20} weight={active ? "fill" : "regular"} aria-hidden="true" />
@@ -60,7 +53,7 @@ export function MobileTabs() {
                 </span>
               )}
             </span>
-            <span className="text-[10.5px] font-medium">{label}</span>
+            <span className="text-micro font-medium">{label}</span>
           </Link>
         );
       })}

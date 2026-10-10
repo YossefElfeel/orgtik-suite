@@ -1,4 +1,5 @@
 "use client";
+import {geometryClass} from "@/lib/geometry";
 
 /**
  * SOMION HQ - PRE-JOIN
@@ -51,27 +52,27 @@ export function PreJoin({
 
   return (
     <div className="mx-auto w-full max-w-[720px] px-5 py-8">
-      <h1 className="text-[20px] font-semibold tracking-[-0.02em]" style={{ color: "var(--color-ink)" }}>
+      <h1 className={"text-title-sm font-semibold tracking-[-0.02em] "+("ch-color-7f7330")} >
         {title}
       </h1>
       {subtitle && (
-        <p className="mt-1 text-[13.5px]" style={{ color: "var(--color-ink-muted)" }}>
+        <p className={"mt-1 text-body-sm "+("ch-color-4a0211")} >
           {subtitle}
         </p>
       )}
 
       <div className="mt-5 grid gap-5 md:grid-cols-[1fr_240px]">
         <div
-          className="relative aspect-[4/3] overflow-hidden"
-          style={{ background: "var(--color-paper-800)", borderRadius: "var(--radius-card)" }}
+          className={"relative aspect-[4/3] overflow-hidden "+("ch-background-ea65cd"+' '+"ch-border-radius-8d459a")}
+          
         >
           {camera.stream ? (
             <video
               ref={videoRef}
               muted
               playsInline
-              className="h-full w-full object-cover"
-              style={{ transform: "scaleX(-1)" }}
+              className={"h-full w-full object-cover "+("ch-transform-ff7784")}
+              
               aria-label={t("call.yourCamera", "Your camera")}
             />
           ) : (
@@ -84,7 +85,7 @@ export function PreJoin({
                 hideStatus
                 guest={askForName}
               />
-              <p className="max-w-[240px] px-4 text-center text-[12.5px]" style={{ color: "var(--color-paper-500)" }}>
+              <p className={"max-w-[240px] px-4 text-center text-body-sm "+("ch-color-1a360f")} >
                 {camera.error === "denied"
                   ? t("prejoin.cameraDenied", "Your browser blocked the camera. You can still join with audio.")
                   : camera.error === "missing"
@@ -98,7 +99,7 @@ export function PreJoin({
             <Button
               size="sm"
               onClick={() => (camera.stream ? camera.stop() : void camera.start())}
-              style={{ background: "var(--color-paper-900)", color: "var(--color-paper-100)", borderColor: "transparent" }}
+              className={"ch-background-db4104"+' '+"ch-color-343ada"+' '+"ch-border-color-c4235e"} 
             >
               {camera.stream ? (
                 <>
@@ -128,21 +129,21 @@ export function PreJoin({
           )}
 
           <div className="flex flex-col gap-2">
-            <span className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+            <span className={"text-body-sm font-medium "+("ch-color-7f7330")} >
               {t("prejoin.microphone", "Microphone")}
             </span>
 
             {micError ? (
-              <p className="flex items-start gap-1.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
-                <Warning size={13} aria-hidden="true" style={{ marginTop: 2, flexShrink: 0 }} />
+              <p className={"flex items-start gap-1.5 text-caption "+("ch-color-4a0211")} >
+                <Warning size={13} aria-hidden="true" className={"ch-margin-top-7a21c6"+' '+"ch-flex-shrink-6ee066"}  />
                 {t("prejoin.micDenied", "Microphone blocked. Others will not hear you until you allow it.")}
               </p>
             ) : (
               <>
                 {/* A real meter on a real input. Speak and it moves. */}
                 <div
-                  className="flex h-2 w-full overflow-hidden"
-                  style={{ background: "var(--color-surface-sunken)", borderRadius: "var(--radius-chip)" }}
+                  className={"flex h-2 w-full overflow-hidden "+("ch-background-314b28"+' '+"ch-border-radius-189003")}
+                  
                   role="meter"
                   aria-label={t("prejoin.micLevel", "Microphone level")}
                   aria-valuenow={Math.round(level * 100)}
@@ -150,14 +151,10 @@ export function PreJoin({
                   aria-valuemax={100}
                 >
                   <span
-                    style={{
-                      width: `${Math.min(100, level * 180)}%`,
-                      background: "var(--color-presence-available)",
-                      transition: "width 90ms linear",
-                    }}
+                    className={("ch-background-289564"+' '+"ch-transition-a0e1b3")+" "+(geometryClass({width:`${Math.min(100, level * 180)}%`}))} 
                   />
                 </div>
-                <p className="text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                <p className={"text-caption "+("ch-color-094083")} >
                   {t("prejoin.saySomething", "Say something to check the level.")}
                 </p>
               </>
@@ -170,12 +167,8 @@ export function PreJoin({
 
           {recordingNotice && (
             <p
-              className="px-2.5 py-2 text-[12px]"
-              style={{
-                background: "var(--color-surface-sunken)",
-                borderRadius: "var(--radius-control)",
-                color: "var(--color-ink-muted)",
-              }}
+              className={"px-2.5 py-2 text-caption "+("ch-background-314b28"+' '+"ch-border-radius-332348"+' '+"ch-color-4a0211")}
+              
             >
               {t("prejoin.recordingNotice", "This meeting may be recorded. You will be asked before it starts.")}
             </p>

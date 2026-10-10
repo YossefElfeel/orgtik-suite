@@ -13,7 +13,7 @@ import { useT } from "@/lib/i18n";
 import Link from "next/link";
 import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from "react";
 import {
-  Badge,
+  Card, Skeleton as SharedSkeleton, Badge,
   Button as LibButton,
   EmptyState as LibEmptyState,
   ErrorState as LibErrorState,
@@ -48,7 +48,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * and href renders a link that looks like a button (a <button> inside an <a> is invalid HTML).
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = "secondary", size = "md", label, iconOnly, href, className = "", style, children, ...rest },
+  { variant = "secondary", size = "md", label, iconOnly, href, className = "", children, ...rest },
   ref,
 ) {
   const libSize = size === "sm" ? "sm" : "md";
@@ -57,7 +57,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       <Link
         href={href}
         className={buttonVariants({ variant, size: libSize, className: `${iconOnly ? "aspect-square px-0" : ""} ${className}` })}
-        style={style}
         aria-label={iconOnly ? label : undefined}
         title={iconOnly ? label : undefined}
       >
@@ -74,7 +73,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         variant={variant === "danger" ? "secondary" : variant}
         size={libSize}
         className={className}
-        style={style}
         title={label}
         {...rest}
       />
@@ -88,7 +86,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
   const endIcon = !startIcon && parts.length > 1 && isIcon(parts[parts.length - 1]) ? parts[parts.length - 1] : undefined;
   const text = parts.filter((c) => c !== startIcon && c !== endIcon);
   return (
-    <LibButton ref={ref} variant={variant} size={libSize} className={className} style={style} startIcon={startIcon} endIcon={endIcon} {...rest}>
+    <LibButton ref={ref} variant={variant} size={libSize} className={className} startIcon={startIcon} endIcon={endIcon} {...rest}>
       {text}
     </LibButton>
   );
@@ -96,34 +94,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
 
 /* ------------------------------------------------------------------- panel */
 
-export function Panel({
-  children,
-  className = "",
-  padded = true,
-  style,
-}: {
-  children: ReactNode;
-  className?: string;
-  padded?: boolean;
-  style?: React.CSSProperties;
-}) {
-  return (
-    <section
-      className={className}
-      style={{
-        background: "var(--color-surface)",
-        border: "1px solid var(--color-hairline)",
-        borderRadius: "var(--radius-card)",
-        boxShadow: "var(--shadow-raise), var(--shadow-lit)",
-        padding: padded ? 18 : 0,
-        ...style,
-      }}
-    >
-      {children}
-    </section>
-  );
-}
-
+export function Panel({children,className='',padded=true}:{children:ReactNode;className?:string;padded?:boolean}){return <Card padding={padded?'md':'none'} className={className}>{children}</Card>;}
 /* -------------------------------------------------------------------- chip */
 
 /** A short label: the library's Badge, in HQ's four tones. */
@@ -146,30 +117,7 @@ export function Chip({
 /* ------------------------------------------------------------------ counts */
 
 /** Unread and mention counts. Tabular so the sidebar never jitters. */
-export function Count({ value, mention = false }: { value: number; mention?: boolean }) {
-  const t = useT();
-  if (value <= 0) return null;
-  return (
-    <span
-      className="tabular inline-flex min-w-[18px] items-center justify-center px-1.5 text-[11px] font-semibold"
-      style={{
-        height: 18,
-        borderRadius: "var(--radius-chip)",
-        background: mention ? "var(--color-accent)" : "var(--color-paper-400)",
-        color: mention ? "var(--color-ink-inverse)" : "var(--color-paper-900)",
-      }}
-    >
-      <span aria-hidden="true">{value > 99 ? "99+" : value}</span>
-      {/* The number alone says nothing to a screen reader; this says what it counts (CHT-014). */}
-      <span className="sr-only">
-        {mention
-          ? t("count.mentions", "{n, plural, one {# mention} other {# mentions}}", { n: value })
-          : t("count.unread", "{n} unread", { n: value })}
-      </span>
-    </span>
-  );
-}
-
+export function Count({value,mention=false}:{value:number;mention?:boolean}){const t=useT();if(value<=0)return null;return <Badge tone={mention?'brand':'neutral'} size='sm' className='tabular-nums'><span aria-hidden>{value>99?'99+':value}</span><span className='sr-only'>{mention?t('count.mentions','{n, plural, one {# mention} other {# mentions}}',{n:value}):t('count.unread','{n} unread',{n:value})}</span></Badge>;}
 /* ------------------------------------------------------------------ inputs */
 
 interface FieldProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -209,31 +157,6 @@ export function EmptyState({
 }
 
 /** Skeletons match the shape of what is arriving, never a spinner. */
-export function Skeleton({
-  width = "100%",
-  height = 12,
-  radius = "var(--radius-control)",
-  className = "",
-}: {
-  width?: number | string;
-  height?: number;
-  radius?: string;
-  className?: string;
-}) {
-  return (
-    <span
-      className={`hq-skeleton block ${className}`}
-      style={{ width, height, borderRadius: radius }}
-      aria-hidden="true"
-    />
-  );
-}
-
-/** Something failed: what, and a retry in the reader's language (the library's ErrorState). */
-export function ErrorState({ title, body, retry }: { title: string; body: string; retry?: () => void }) {
-  return <LibErrorState title={title} description={body} onRetry={retry} />;
-}
-
 /* ------------------------------------------------------------- section head */
 
 /**
@@ -252,11 +175,11 @@ export function SectionHead({
   return (
     <div className="flex items-baseline justify-between gap-4 pb-3">
       <div className="flex items-baseline gap-2.5 min-w-0">
-        <h2 className="hq-title truncate" style={{ color: "var(--color-ink)" }}>
+        <h2 className={"hq-title truncate "+("ch-color-7f7330")} >
           {title}
         </h2>
         {meta && (
-          <span className="tabular shrink-0 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+          <span className={"tabular shrink-0 text-caption "+("ch-color-4a0211")} >
             {meta}
           </span>
         )}

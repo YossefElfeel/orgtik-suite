@@ -66,22 +66,22 @@ export function TransparencyPage() {
       <div className="mx-auto w-full max-w-[720px] px-5 py-6">
         <Link
           href="/hq/insights"
-          className="inline-flex items-center gap-1.5 text-[12.5px]"
-          style={{ color: "var(--color-ink-muted)" }}
+          className={"inline-flex items-center gap-1.5 text-body-sm "+("ch-color-4a0211")}
+          
         >
           <ArrowLeft size={13} weight="bold" aria-hidden="true" />
           {t("trans.back", "Back to insights")}
         </Link>
 
         <h1
-          className="hq-display mt-4"
-          style={{ color: "var(--color-ink)" }}
+          className={"hq-display mt-4 "+("ch-color-7f7330")}
+          
         >
           {t("trans.title", "What Chats collects about you")}
         </h1>
         <p
-          className="mt-2 text-[14px] leading-relaxed"
-          style={{ color: "var(--color-ink-muted)", maxWidth: "68ch" }}
+          className={"mt-2 text-body-sm leading-relaxed "+("ch-color-4a0211"+' '+"ch-max-width-5119b9")}
+          
         >
           {t(
             "trans.intro",
@@ -95,13 +95,13 @@ export function TransparencyPage() {
             {collected.map((row) => (
               <li key={row.what}>
                 <Panel>
-                  <p className="text-[13.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+                  <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
                     {row.what}
                   </p>
-                  <p className="mt-1 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <p className={"mt-1 text-body-sm "+("ch-color-4a0211")} >
                     {row.why}
                   </p>
-                  <p className="mt-1.5 text-[12px]" style={{ color: "var(--color-ink-subtle)" }}>
+                  <p className={"mt-1.5 text-caption "+("ch-color-094083")} >
                     {t("trans.keptFor", "Kept: {kept}", { kept: row.kept })}
                   </p>
                 </Panel>
@@ -120,9 +120,9 @@ export function TransparencyPage() {
                     size={13}
                     weight="bold"
                     aria-hidden="true"
-                    style={{ color: "var(--color-danger-600)", marginTop: 3, flexShrink: 0 }}
+                    className={"ch-color-1fd63a"+' '+"ch-margin-top-c00d39"+' '+"ch-flex-shrink-6ee066"} 
                   />
-                  <span className="text-[13px]" style={{ color: "var(--color-ink)" }}>
+                  <span className={"text-body-sm "+("ch-color-7f7330")} >
                     {item}
                   </span>
                 </li>
@@ -189,7 +189,7 @@ export function TransparencyPage() {
           </Panel>
         </section>
 
-        <p className="mt-6 text-[12px] leading-relaxed" style={{ color: "var(--color-ink-subtle)", maxWidth: "68ch" }}>
+        <p className={"mt-6 text-caption leading-relaxed "+("ch-color-094083"+' '+"ch-max-width-5119b9")} >
           {t(
             "trans.footer",
             "You can ask an admin for a copy of your data or for it to be deleted. Deleting reaches the search index and any stored recordings, not just the screen.",
@@ -203,10 +203,10 @@ export function TransparencyPage() {
 function Line({ term, desc }: { term: string; desc: string }) {
   return (
     <div>
-      <dt className="text-[13px] font-semibold" style={{ color: "var(--color-ink)" }}>
+      <dt className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
         {term}
       </dt>
-      <dd className="mt-0.5 text-[12.5px] leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+      <dd className={"mt-0.5 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
         {desc}
       </dd>
     </div>
@@ -216,15 +216,15 @@ function Line({ term, desc }: { term: string; desc: string }) {
 function Setting({ label, value, on }: { label: string; value: string; on?: boolean }) {
   return (
     <div className="flex items-baseline justify-between gap-3">
-      <dt className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+      <dt className={"text-body-sm "+("ch-color-4a0211")} >
         {label}
       </dt>
-      <dd className="flex items-center gap-1.5 text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+      <dd className={"flex items-center gap-1.5 text-body-sm font-medium "+("ch-color-7f7330")} >
         {on !== undefined &&
           (on ? (
-            <Check size={12} weight="bold" aria-hidden="true" style={{ color: "var(--color-success-600)" }} />
+            <Check size={12} weight="bold" aria-hidden="true" className={"ch-color-57738a"}  />
           ) : (
-            <X size={12} weight="bold" aria-hidden="true" style={{ color: "var(--color-ink-subtle)" }} />
+            <X size={12} weight="bold" aria-hidden="true" className={"ch-color-094083"}  />
           ))}
         {value}
       </dd>

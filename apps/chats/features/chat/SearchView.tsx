@@ -92,8 +92,8 @@ export function SearchView({ query }: { query: string }) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <header
-        className="shrink-0 px-4 py-2.5"
-        style={{ background: "transparent" }}
+        className={"shrink-0 px-4 py-2.5 "+("ch-background-a8869d")}
+        
       >
       <Button
         variant="ghost"
@@ -122,10 +122,10 @@ export function SearchView({ query }: { query: string }) {
           />
         </form>
         <div className="flex items-baseline gap-2.5">
-          <h1 className="hq-title" style={{ color: "var(--color-ink)" }}>
+          <h1 className={"hq-title "+("ch-color-7f7330")} >
             {t("search.title", "Search")}
           </h1>
-          <span className="tabular text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <span className={"tabular text-body-sm "+("ch-color-4a0211")} >
             {t("search.resultsFor", "{n} results for “{q}”", { n: total, q: query })}
           </span>
         </div>
@@ -138,10 +138,10 @@ export function SearchView({ query }: { query: string }) {
               variant={filter === f.id ? "secondary" : "ghost"}
               onClick={() => setFilter(f.id)}
               aria-pressed={filter === f.id}
-              style={filter === f.id ? { background: "var(--color-accent-soft)", color: "var(--color-ink-brand)", borderColor: "transparent" } : undefined}
+              className={(filter === f.id?"ch-background-1416a8"+' '+"ch-color-55f463"+' '+"ch-border-color-c4235e":"")} 
             >
               {f.label}
-              <span className="tabular" style={{ opacity: 0.7 }}>
+              <span className={"tabular "+("ch-opacity-383082")} >
                 {f.n}
               </span>
             </Button>
@@ -166,7 +166,7 @@ export function SearchView({ query }: { query: string }) {
           <div className="mx-auto w-full max-w-[720px] px-4 py-4">
             {filter !== "people" && (
               <div className="flex flex-wrap items-center gap-2 pb-4" role="group" aria-label={t("search.narrow", "Narrow the results")}>
-                <select value={inChannel} onChange={(e) => setInChannel(e.target.value)} aria-label={t("search.inChannel", "In")} style={selectStyle}>
+                <select value={inChannel} onChange={(e) => setInChannel(e.target.value)} aria-label={t("search.inChannel", "In")} className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-7aab68"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-dace99"+' '+"ch-color-7f7330"} >
                   <option value="">{t("search.anyChannel", "Any conversation")}</option>
                   {channels
                     .filter((c) => !c.archived)
@@ -176,7 +176,7 @@ export function SearchView({ query }: { query: string }) {
                       </option>
                     ))}
                 </select>
-                <select value={fromId} onChange={(e) => setFromId(e.target.value)} aria-label={t("search.from", "From")} style={selectStyle}>
+                <select value={fromId} onChange={(e) => setFromId(e.target.value)} aria-label={t("search.from", "From")} className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-7aab68"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-dace99"+' '+"ch-color-7f7330"} >
                   <option value="">{t("search.anyone", "Anyone")}</option>
                   {users.map((u) => (
                     <option key={u.id} value={u.id}>
@@ -184,14 +184,14 @@ export function SearchView({ query }: { query: string }) {
                     </option>
                   ))}
                 </select>
-                <select value={when} onChange={(e) => setWhen(e.target.value as typeof when)} aria-label={t("search.when", "When")} style={selectStyle}>
+                <select value={when} onChange={(e) => setWhen(e.target.value as typeof when)} aria-label={t("search.when", "When")} className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-7aab68"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-dace99"+' '+"ch-color-7f7330"} >
                   <option value="any">{t("search.anyTime", "Any time")}</option>
                   <option value="today">{t("search.today", "Today")}</option>
                   <option value="week">{t("search.week", "Last 7 days")}</option>
                   <option value="month">{t("search.month", "Last 30 days")}</option>
                 </select>
-                <label className="flex cursor-pointer items-center gap-1.5 text-[12.5px]" style={{ color: "var(--color-ink)" }}>
-                  <input type="checkbox" checked={hasFile} onChange={(e) => setHasFile(e.target.checked)} style={{ width: 14, height: 14, accentColor: "var(--color-accent)" }} />
+                <label className={"flex cursor-pointer items-center gap-1.5 text-body-sm "+("ch-color-7f7330")} >
+                  <input type="checkbox" checked={hasFile} onChange={(e) => setHasFile(e.target.checked)} className={"ch-width-eb53b5"+' '+"ch-height-946a99"+' '+"ch-accent-color-e56d5b"}  />
                   {t("search.hasFile", "Has a file")}
                 </label>
                 {narrowed && (
@@ -225,14 +225,14 @@ export function SearchView({ query }: { query: string }) {
                   <li key={file.id}>
                     <Link
                       href={`/hq/chat/${message.channelId}#${message.id}`}
-                      className="hq-row flex items-center gap-2.5 px-3 py-2.5"
-                      style={{ borderRadius: "var(--radius-card)", border: "1px solid var(--color-hairline)", background: "var(--color-surface)" }}
+                      className={"hq-row flex items-center gap-2.5 px-3 py-2.5 "+("ch-border-radius-8d459a"+' '+"ch-border-5065d4"+' '+"ch-background-751d03")}
+                      
                     >
-                      <FileText size={16} aria-hidden="true" style={{ color: "var(--color-ink-muted)" }} />
-                      <span className="flex-1 truncate text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+                      <FileText size={16} aria-hidden="true" className={"ch-color-4a0211"}  />
+                      <span className={"flex-1 truncate text-body-sm font-medium "+("ch-color-7f7330")} >
                         <bdi>{file.name}</bdi>
                       </span>
-                      <span className="tabular text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                      <span className={"tabular text-caption "+("ch-color-094083")} >
                         {file.size}
                       </span>
                     </Link>
@@ -250,15 +250,15 @@ export function SearchView({ query }: { query: string }) {
                     <li key={m.id}>
                       <Link
                         href={`/hq/chat/${m.channelId}#${m.id}`}
-                        className="hq-row flex flex-col gap-1.5 px-3 py-2.5"
-                        style={{ borderRadius: "var(--radius-card)", border: "1px solid var(--color-hairline)", background: "var(--color-surface)" }}
+                        className={"hq-row flex flex-col gap-1.5 px-3 py-2.5 "+("ch-border-radius-8d459a"+' '+"ch-border-5065d4"+' '+"ch-background-751d03")}
+                        
                       >
                         <span className="flex items-center gap-2">
-                          <Hash size={12} weight="bold" aria-hidden="true" style={{ color: "var(--color-ink-subtle)" }} />
-                          <span className="text-[12px] font-medium" style={{ color: "var(--color-ink-muted)" }}>
+                          <Hash size={12} weight="bold" aria-hidden="true" className={"ch-color-094083"}  />
+                          <span className={"text-caption font-medium "+("ch-color-4a0211")} >
                             <bdi>{channel?.name}</bdi>
                           </span>
-                          <span className="tabular ms-auto text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                          <span className={"tabular ms-auto text-caption "+("ch-color-094083")} >
                             {formatRelative(m.createdAt)}
                           </span>
                         </span>
@@ -266,7 +266,7 @@ export function SearchView({ query }: { query: string }) {
                           {author && (
                             <Avatar name={author.name} initials={author.initials} tint={author.tint} size={20} hideStatus />
                           )}
-                          <span className="min-w-0 flex-1 text-[13px] leading-snug" style={{ color: "var(--color-ink)" }}>
+                          <span className={"min-w-0 flex-1 text-body-sm leading-snug "+("ch-color-7f7330")} >
                             <bdi><Highlight text={m.text} term={q} /></bdi>
                           </span>
                         </span>
@@ -286,7 +286,7 @@ export function SearchView({ query }: { query: string }) {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="pb-5">
-      <h2 className="pb-2 text-[13px] font-semibold" style={{ color: "var(--color-ink)" }}>
+      <h2 className={"pb-2 text-body-sm font-semibold "+("ch-color-7f7330")} >
         {title}
       </h2>
       <ul className="flex flex-col gap-2">{children}</ul>
@@ -320,22 +320,17 @@ function PersonResult({
       <button
         type="button"
         onClick={() => router.push(`/hq/chat/${openDm(userId)}`)}
-        className="hq-row flex w-full items-center gap-2.5 px-3 py-2.5 text-start"
-        style={{
-          borderRadius: "var(--radius-card)",
-          border: "1px solid var(--color-hairline)",
-          background: "var(--color-surface)",
-          minHeight: 52,
-        }}
+        className={"hq-row flex w-full items-center gap-2.5 px-3 py-2.5 text-start "+("ch-border-radius-8d459a"+' '+"ch-border-5065d4"+' '+"ch-background-751d03"+' '+"ch-min-height-5d0881")}
+        
       >
         <Avatar name={name} initials={initials} tint={tint} status={presence?.status} size={28} />
-        <span className="flex-1 text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+        <span className={"flex-1 text-body-sm font-medium "+("ch-color-7f7330")} >
           {name}
         </span>
-        <span className="hidden text-[12px] sm:inline" style={{ color: "var(--color-ink-muted)" }}>
+        <span className={"hidden text-caption sm:inline "+("ch-color-4a0211")} >
           {title}
         </span>
-        <span className="text-[12px] font-medium" style={{ color: "var(--color-ink-brand)" }}>
+        <span className={"text-caption font-medium "+("ch-color-55f463")} >
           {t("search.message", "Message")}
         </span>
       </button>
@@ -349,7 +344,7 @@ function Highlight({ text, term }: { text: string; term: string }) {
   return (
     <>
       {text.slice(0, i)}
-      <mark style={{ background: "var(--color-accent-soft)", color: "var(--color-ink-brand)", fontWeight: 600 }}>
+      <mark className={"ch-background-1416a8"+' '+"ch-color-55f463"+' '+"ch-font-weight-eed0f8"} >
         {text.slice(i, i + term.length)}
       </mark>
       {text.slice(i + term.length)}

@@ -1,4 +1,5 @@
 "use client";
+import {geometryClass} from "@/lib/geometry";
 
 /**
  * SOMION HQ - FLOOR CANVAS
@@ -63,8 +64,8 @@ function WalkHint() {
 
   return (
     <p
-      className="pointer-events-none absolute bottom-3 start-3 flex items-center gap-1.5 text-[11.5px]"
-      style={{ color: "var(--color-ink-subtle)" }}
+      className={"pointer-events-none absolute bottom-3 start-3 flex items-center gap-1.5 text-caption "+("ch-color-094083")}
+      
     >
       <Key>&#8593;</Key>
       <Key>&#8592;</Key>
@@ -80,17 +81,8 @@ function WalkHint() {
 function Key({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className="inline-flex items-center justify-center"
-      style={{
-        minWidth: 17,
-        height: 17,
-        padding: "0 3px",
-        borderRadius: 5,
-        border: "1px solid var(--color-hairline-strong)",
-        background: "var(--color-surface)",
-        fontSize: "10px",
-        lineHeight: 1,
-      }}
+      className={"inline-flex items-center justify-center "+("ch-min-width-1cf0f5"+' '+"ch-height-a8970c"+' '+"ch-padding-764011"+' '+"ch-border-radius-edd97e"+' '+"ch-border-8ff264"+' '+"ch-background-751d03"+' '+"ch-font-size-dc3e3c"+' '+"ch-line-height-85779e")}
+      
     >
       {children}
     </span>
@@ -631,25 +623,8 @@ export function FloorCanvas() {
         ref={surfaceRef}
         onClick={onSurfaceClick}
         onMouseDown={onPanStart}
-        className="relative min-h-0 flex-1 overflow-hidden"
-        style={{
-          transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`,
-          transformOrigin: "center center",
-          /* No transition while dragging: a panning surface that eases behind
-             the pointer feels broken rather than smooth. */
-          transition: panning ? "none" : "transform 180ms var(--ease-out-soft)",
-          background: "var(--color-floor)",
-          /* Two layers: ambient daylight falling from the upper left, and a
-             faint grid for scale. The light is what stops a large flat plane
-             from reading as dead space. */
-          backgroundImage: [
-            ...(daylightOn ? [daylight] : []),
-            "radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--color-paper-600) 22%, transparent) 1px, transparent 0)",
-          ].join(", "),
-          backgroundSize: "auto, 24px 24px",
-          boxShadow: "inset 0 1px 3px rgb(var(--shadow-ink) / 0.05)",
-          cursor: panning ? "grabbing" : spaceHeld ? "grab" : "default",
-        }}
+        className={("relative min-h-0 flex-1 overflow-hidden "+("ch-transform-origin-8825fb"+' '+(panning?"ch-transition-2ed754":"ch-transition-064c3b")+' '+"ch-background-7d822f"+' '+"ch-background-size-3de776"+' '+"ch-box-shadow-e06688"+' '+(panning?"ch-cursor-cf4aa2":(spaceHeld?"ch-cursor-dad798":"ch-cursor-2a9295"))))+" "+((daylightOn?'ch-floor-'+(hour<6||hour>=20?'night':hour<11?'morning':hour<16?'noon':'evening'):'ch-floor-grid')+' '+geometryClass({transform:`translate(${view.x}px, ${view.y}px) scale(${view.scale})`}))}
+        
         role="application"
         aria-label={t("office.canvas", "Office floor. Walk with the arrow keys or W A S D; entering a room connects its audio. Rooms and people are also focusable: Enter opens, Escape leaves.")}
       >
@@ -677,27 +652,8 @@ export function FloorCanvas() {
                 });
               }}
               onMouseLeave={() => setHoverRoom(null)}
-              className="hq-room absolute flex flex-col p-2.5 text-start"
-              style={{
-                left: `${room.rect.x}%`,
-                top: `${room.rect.y}%`,
-                width: `${room.rect.w}%`,
-                height: `${room.rect.h}%`,
-                backgroundColor: ROOM_SURFACE[room.kind] ?? "var(--color-floor-room)",
-                backgroundImage: ROOM_MATERIAL[room.kind] ?? "none",
-                border: `1px solid ${mine ? "var(--color-accent)" : "var(--color-wall)"}`,
-                borderRadius: "var(--radius-room)",
-                /* A room is built space: a wall with thickness (the two inset
-                   rings), raised on the floor (the layered shadow), catching
-                   light along its top edge. */
-                boxShadow: [
-                  "inset 0 0 0 3px var(--color-wall-inner)",
-                  "inset 0 0 0 4px var(--color-wall)",
-                  mine ? "var(--shadow-float)" : "var(--shadow-room)",
-                  "var(--shadow-lit)",
-                ].join(", "),
-                cursor: "pointer",
-              }}
+              className={("hq-room absolute flex flex-col p-2.5 text-start "+((mine?"ch-border-c98846":"ch-border-f84093")+' '+"ch-border-radius-9d9174"+' '+"ch-cursor-3b6a3a"))+" "+('ch-room-'+room.kind+' '+'ch-room-'+room.kind+' '+(mine?'ch-room-current':'ch-room-rest')+' '+geometryClass({left:`${room.rect.x}%`,top:`${room.rect.y}%`,width:`${room.rect.w}%`,height:`${room.rect.h}%`}))}
+              
               aria-label={t("office.enterRoom", "{name}, {kind}, {n} of {cap} people. {action}.", {
                 name: room.name,
                 kind: t(`roomKind.${room.kind}`, ROOM_LABEL[room.kind] ?? room.kind),
@@ -710,27 +666,24 @@ export function FloorCanvas() {
 
               <span className="relative flex w-full items-baseline justify-between gap-2">
                 <span
-                  className="relative truncate text-[10.5px] font-semibold uppercase"
-                  style={{ color: "var(--color-floor-label)", letterSpacing: "0.06em" }}
+                  className={"relative truncate text-micro font-semibold uppercase "+("ch-color-ad649f"+' '+"ch-letter-spacing-0015ec")}
+                  
                 >
                   <bdi>{room.name}</bdi>
                 </span>
                 <span className="flex shrink-0 items-baseline gap-1">
                   {/* One number per room, set large against a small label. */}
                   <span
-                    className="tabular text-[17px] font-semibold leading-none"
-                    style={{
-                      color: count > 0 ? "var(--color-ink)" : "var(--color-paper-500)",
-                      letterSpacing: "-0.03em",
-                    }}
+                    className={"tabular text-title-sm font-semibold leading-none "+((count > 0?"ch-color-7f7330":"ch-color-1a360f")+' '+"ch-letter-spacing-1314f6")}
+                    
                   >
                     {count}
                   </span>
-                  <span className="text-[10.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                  <span className={"text-micro "+("ch-color-094083")} >
                     {full ? t("office.full", "full") : t("office.ofCapacity", "of {cap}", { cap: room.capacity })}
                   </span>
                   {room.locked && (
-                    <LockSimple size={11} weight="bold" aria-hidden="true" style={{ color: "var(--color-ink-subtle)", marginInlineStart: 2 }} />
+                    <LockSimple size={11} weight="bold" aria-hidden="true" className={"ch-color-094083"+' '+"ch-margin-inline-start-7179d7"}  />
                   )}
                 </span>
               </span>
@@ -749,15 +702,11 @@ export function FloorCanvas() {
                 if (!shown) return null;
                 return (
                   <span
-                    className="relative mt-1 flex max-w-full items-center gap-1.5 self-start truncate px-1.5 py-0.5 text-[10.5px] font-medium"
-                    style={{
-                      borderRadius: "var(--radius-chip)",
-                      background: live ? "var(--color-presence-meeting-soft)" : "var(--color-surface-sunken)",
-                      color: live ? "var(--color-presence-meeting)" : "var(--color-ink-muted)",
-                    }}
+                    className={"relative mt-1 flex max-w-full items-center gap-1.5 self-start truncate px-1.5 py-0.5 text-micro font-medium "+("ch-border-radius-189003"+' '+(live?"ch-background-65ec3a":"ch-background-314b28")+' '+(live?"ch-color-d19c7f":"ch-color-4a0211"))}
+                    
                     title={shown.title}
                   >
-                    {live && <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "var(--radius-chip)", background: "currentColor" }} />}
+                    {live && <span aria-hidden="true" className={"ch-width-2c7cba"+' '+"ch-height-cc3d9d"+' '+"ch-border-radius-189003"+' '+"ch-background-be5c13"}  />}
                     <span className="truncate">
                       {live
                         ? t("office.meetingUntil", "{title} · until {time}", { title: shown.title, time: formatTime(shown.endsAt) })
@@ -771,15 +720,8 @@ export function FloorCanvas() {
                   zero in it takes attention that belongs on the people. */}
               {count === 0 && room.kind !== "desk" && (
                 <span
-                  className="pointer-events-none absolute inset-x-0 bottom-3 z-[1] mx-auto w-fit px-2 py-1 text-center text-[11px] leading-snug"
-                  style={{
-                    color: "var(--color-ink-subtle)",
-                    /* The room now has furniture under this line, so it needs
-                       its own ground to stay legible. */
-                    background: "color-mix(in srgb, var(--color-surface) 82%, transparent)",
-                    borderRadius: "var(--radius-control)",
-                    maxWidth: "calc(100% - 16px)",
-                  }}
+                  className={"pointer-events-none absolute inset-x-0 bottom-3 z-[1] mx-auto w-fit px-2 py-1 text-center text-micro leading-snug "+("ch-color-094083"+' '+"ch-background-afcf07"+' '+"ch-border-radius-332348"+' '+"ch-max-width-326d05")}
+                  
                 >
                   {room.locked
                     ? t("office.roomLocked", "{kind} · {cap} places · locked", {
@@ -806,7 +748,7 @@ export function FloorCanvas() {
                   is the expectation; the desk area not doing so is the thing
                   worth saying, and it is the product's cost model in one line. */}
               {room.kind === "desk" && (
-                <span className="relative mt-auto text-[10.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                <span className={"relative mt-auto text-micro "+("ch-color-094083")} >
                   {t("office.deskHint", "Open floor. Audio connects in rooms, not here.")}
                 </span>
               )}
@@ -818,10 +760,10 @@ export function FloorCanvas() {
         {clusters.length > 0 && (
           <svg
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
+            className={"pointer-events-none absolute inset-0 "+("ch-z-index-d12f69")}
             width={size.w}
             height={size.h}
-            style={{ zIndex: 5 }}
+            
           >
             {clusters.map(({ members, edges }) => {
               const px = (p: { position: { x: number; y: number } }) =>
@@ -880,18 +822,8 @@ export function FloorCanvas() {
         {drag && (
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute"
-            style={{
-              left: `${drag.x}%`,
-              top: `${drag.y}%`,
-              width: 44,
-              height: 44,
-              transform: "translate(-50%, -50%)",
-              borderRadius: "var(--radius-chip)",
-              border: "2px dashed var(--color-accent)",
-              background: "color-mix(in srgb, var(--color-accent) 10%, transparent)",
-              zIndex: 20,
-            }}
+            className={("pointer-events-none absolute "+("ch-width-8fb32a"+' '+"ch-height-69c02c"+' '+"ch-transform-199fce"+' '+"ch-border-radius-189003"+' '+"ch-border-cdcbe1"+' '+"ch-background-f85f90"+' '+"ch-z-index-6dac52"))+" "+(geometryClass({left:`${drag.x}%`,top:`${drag.y}%`}))}
+            
           />
         )}
 
@@ -931,23 +863,18 @@ export function FloorCanvas() {
         return (
           <div
             role="tooltip"
-            className="hq-floating hq-rise pointer-events-none absolute z-[36] w-[220px] p-2.5"
-            style={{
-              left: hoverRoom.x,
-              top: hoverRoom.y,
-              transform: hoverRoom.above ? "translate(-50%, calc(-100% - 8px))" : "translate(-50%, 8px)",
-              borderRadius: "var(--radius-control)",
-            }}
+            className={("hq-floating hq-rise pointer-events-none absolute z-[36] w-[220px] p-2.5 "+((hoverRoom.above?"ch-transform-08a22e":"ch-transform-ead9ec")+' '+"ch-border-radius-332348"))+" "+(geometryClass({left:hoverRoom.x,top:hoverRoom.y}))}
+            
           >
             <p className="flex items-baseline justify-between gap-2">
-              <span className="truncate text-[12.5px] font-semibold" style={{ color: "var(--color-ink)" }}>
+              <span className={"truncate text-body-sm font-semibold "+("ch-color-7f7330")} >
                 <bdi>{room.name}</bdi>
               </span>
-              <span className="tabular shrink-0 text-[11px]" style={{ color: "var(--color-ink-subtle)" }}>
+              <span className={"tabular shrink-0 text-micro "+("ch-color-094083")} >
                 {inside.length}/{room.capacity}
               </span>
             </p>
-            <p className="mt-0.5 text-[11px]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"mt-0.5 text-micro "+("ch-color-4a0211")} >
               {t(`roomKind.${room.kind}`, ROOM_LABEL[room.kind] ?? room.kind)}
               {" · "}
               {room.locked
@@ -957,28 +884,28 @@ export function FloorCanvas() {
                   : t("office.hoverQuiet", "quiet room, no audio")}
             </p>
             {room.purpose && (
-              <p className="mt-1 text-[11.5px]" style={{ color: "var(--color-ink)" }}>
+              <p className={"mt-1 text-caption "+("ch-color-7f7330")} >
                 <bdi>{room.purpose}</bdi>
               </p>
             )}
             {room.hours && (
-              <p className="mt-1 text-[11px]" style={{ color: "var(--color-ink-muted)" }}>
+              <p className={"mt-1 text-micro "+("ch-color-4a0211")} >
                 {t("office.hoverHours", "Open {from} to {to}", { from: room.hours.from, to: room.hours.to })}
               </p>
             )}
             {inside.length > 0 && roomHidesOccupants(room) ? (
-              <p className="mt-1.5 text-[11px]" style={{ color: "var(--color-ink-muted)" }}>
+              <p className={"mt-1.5 text-micro "+("ch-color-4a0211")} >
                 {t("office.hoverHidden", "{n} inside. This room does not name who.", { n: inside.length })}
               </p>
             ) : inside.length > 0 ? (
               <div className="mt-2 flex items-center gap-2">
                 <AvatarStack people={inside.map(({ user }) => user)} size={20} max={5} />
-                <span className="truncate text-[11px]" style={{ color: "var(--color-ink)" }}>
+                <span className={"truncate text-micro "+("ch-color-7f7330")} >
                   {inside.map(({ user }) => user.name.split(" ")[0]).join(", ")}
                 </span>
               </div>
             ) : (
-              <p className="mt-1.5 text-[11px]" style={{ color: "var(--color-ink-subtle)" }}>
+              <p className={"mt-1.5 text-micro "+("ch-color-094083")} >
                 {t("office.hoverEmpty", "Nobody in here right now")}
               </p>
             )}
@@ -990,11 +917,11 @@ export function FloorCanvas() {
           says what to do while it fills. */}
       {othersOnline === 0 && (
         <div className="pointer-events-none absolute inset-x-0 top-5 z-[34] flex justify-center px-4">
-          <div className="hq-floating pointer-events-auto max-w-[440px] p-4" role="status" style={{ borderRadius: "var(--radius-card)", background: "var(--color-surface)" }}>
-            <p className="text-[14px] font-semibold" style={{ color: "var(--color-ink)" }}>
+          <div className={"hq-floating pointer-events-auto max-w-[440px] p-4 "+("ch-border-radius-8d459a"+' '+"ch-background-751d03")} role="status" >
+            <p className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
               {t("office.firstTitle", "You are the first one in today")}
             </p>
-            <p className="mt-1 text-[12.5px] leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"mt-1 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
               {t("office.firstBody", "The floor fills as people sign in. Until then, set a status so they know how to find you, or bring the rest of the team in.")}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -1015,32 +942,32 @@ export function FloorCanvas() {
         {view.scale !== 1 && (
           <button
             onClick={resetView}
-            className="hq-btn hq-floating pointer-events-auto tabular px-2.5 text-[11.5px] font-medium"
-            style={{ borderRadius: "var(--radius-control)", minHeight: 28, color: "var(--color-ink-muted)" }}
+            className={"hq-btn hq-floating pointer-events-auto tabular px-2.5 text-caption font-medium "+("ch-border-radius-332348"+' '+"ch-min-height-4f3317"+' '+"ch-color-4a0211")}
+            
           >
             {t("office.resetZoom", "Reset · {n}%", { n: Math.round(view.scale * 100) })}
           </button>
         )}
         <div
-          className="hq-floating pointer-events-auto flex flex-col overflow-hidden"
-          style={{ borderRadius: "var(--radius-control)" }}
+          className={"hq-floating pointer-events-auto flex flex-col overflow-hidden "+("ch-border-radius-332348")}
+          
         >
           <button
             onClick={() => zoomBy(0.25)}
             disabled={view.scale >= 2.5}
             aria-label={t("office.zoomIn", "Zoom in")}
-            className="hq-btn flex items-center justify-center"
-            style={{ width: 30, height: 28, color: "var(--color-ink-muted)" }}
+            className={"hq-btn flex items-center justify-center "+("ch-width-322e3f"+' '+"ch-height-3a8bc5"+' '+"ch-color-4a0211")}
+            
           >
             <Plus size={13} weight="bold" aria-hidden="true" />
           </button>
-          <span aria-hidden="true" style={{ height: 1, background: "var(--color-hairline)" }} />
+          <span aria-hidden="true" className={"ch-height-fb237a"+' '+"ch-background-423228"}  />
           <button
             onClick={() => zoomBy(-0.25)}
             disabled={view.scale <= 1}
             aria-label={t("office.zoomOut", "Zoom out")}
-            className="hq-btn flex items-center justify-center"
-            style={{ width: 30, height: 28, color: "var(--color-ink-muted)" }}
+            className={"hq-btn flex items-center justify-center "+("ch-width-322e3f"+' '+"ch-height-3a8bc5"+' '+"ch-color-4a0211")}
+            
           >
             <Minus size={13} weight="bold" aria-hidden="true" />
           </button>

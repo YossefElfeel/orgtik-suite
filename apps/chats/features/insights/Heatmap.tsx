@@ -67,10 +67,10 @@ export function Heatmap({
     <div>
       <div className="flex items-center justify-between gap-3 pb-3">
         <div>
-          <h3 className="text-[14px] font-semibold" style={{ color: "var(--color-ink)" }}>
+          <h3 className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
             {title ?? t("insights.availabilityTitle", "When the team is around")}
           </h3>
-          <p className="mt-0.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+          <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
             {body ??
               t("insights.availabilityBody", "People present at each hour, across the whole team of {n}.", {
                 n: cohortSize,
@@ -85,21 +85,21 @@ export function Heatmap({
 
       {showTable ? (
         <div className="overflow-x-auto">
-          <PaginatedTable><table className="w-full text-[12px]" style={{ borderCollapse: "collapse" }}>
+          <PaginatedTable><table className={"w-full text-caption "+("ch-border-collapse-454826")} >
             <caption className="sr-only">
               {t("insights.availabilityTitle", "When the team is around")}
             </caption>
             <thead>
               <tr>
-                <th scope="col" className="p-1.5 text-start" style={{ color: "var(--color-ink-muted)" }}>
+                <th scope="col" className={"p-1.5 text-start "+("ch-color-4a0211")} >
                   {t("insights.day", "Day")}
                 </th>
                 {hours.map((h) => (
                   <th
                     key={h}
                     scope="col"
-                    className="tabular p-1.5 text-end"
-                    style={{ color: "var(--color-ink-muted)", fontWeight: 500 }}
+                    className={"tabular p-1.5 text-end "+("ch-color-4a0211"+' '+"ch-font-weight-02a2d3")}
+                    
                   >
                     {String(h).padStart(2, "0")}
                   </th>
@@ -108,12 +108,12 @@ export function Heatmap({
             </thead>
             <tbody>
               {grid.map((row, d) => (
-                <tr key={d} style={{ borderTop: "1px solid var(--color-hairline)" }}>
-                  <th scope="row" className="p-1.5 text-start font-medium" style={{ color: "var(--color-ink)" }}>
+                <tr key={d} className={"ch-border-top-c9ce2a"} >
+                  <th scope="row" className={"p-1.5 text-start font-medium "+("ch-color-7f7330")} >
                     {dayLabel(d)}
                   </th>
                   {hours.map((h) => (
-                    <td key={h} className="tabular p-1.5 text-end" style={{ color: "var(--color-ink)" }}>
+                    <td key={h} className={"tabular p-1.5 text-end "+("ch-color-7f7330")} >
                       {row[h] ?? 0}
                     </td>
                   ))}
@@ -124,7 +124,7 @@ export function Heatmap({
         </div>
       ) : (
         <div className="overflow-x-auto pb-1">
-          <div className="relative" style={{ minWidth: 520 }}>
+          <div className={"relative "+("ch-min-width-512bf9")} >
             {/* Hour axis, recessive. Every third hour is labelled; a number on
                 every column is noise, not information. */}
             <div
@@ -134,8 +134,8 @@ export function Heatmap({
               {hours.map((h) => (
                 <span
                   key={h}
-                  className="tabular flex-1 text-center text-[9.5px]"
-                  style={{ color: "var(--color-ink-subtle)" }}
+                  className={"tabular flex-1 text-center text-micro "+("ch-color-094083")}
+                  
                 >
                   {h % 3 === 0 ? String(h).padStart(2, "0") : ""}
                 </span>
@@ -145,8 +145,8 @@ export function Heatmap({
             {grid.map((row, d) => (
               <div key={d} className="mt-[2px] flex items-center gap-[2px]">
                 <span
-                  className="w-[32px] shrink-0 text-[10.5px] font-medium"
-                  style={{ color: "var(--color-ink-muted)" }}
+                  className={"w-[32px] shrink-0 text-micro font-medium "+("ch-color-4a0211")}
+                  
                 >
                   {dayLabel(d)}
                 </span>
@@ -158,7 +158,7 @@ export function Heatmap({
                       key={h}
                       tabIndex={0}
                       role="img"
-                      className="flex-1"
+                      className={("flex-1 "+("ch-height-ca02a9"+' '+"ch-border-radius-edd97e"+' '+(hovered?.d === d && hovered?.h === h?"ch-outline-c5700c":(index > 0?"ch-outline-153950":"ch-outline-f9b4dc"))+' '+(hovered?.d === d && hovered?.h === h?"ch-outline-offset-1f2868":"ch-outline-offset-ce7a09")))+" "+('ch-heat-'+index)}
                       onMouseEnter={() => setHovered({ d, h })}
                       onMouseLeave={() => setHovered(null)}
                       onFocus={() => setHovered({ d, h })}
@@ -169,20 +169,7 @@ export function Heatmap({
                         n: value,
                         total: cohortSize,
                       })}
-                      style={{
-                        height: 22,
-                        background: bg,
-                        borderRadius: 4,
-                        /* Level is also encoded by opacity of a border, so the
-                           lightest steps remain separable from empty. */
-                        outline:
-                          hovered?.d === d && hovered?.h === h
-                            ? "2px solid var(--color-ink)"
-                            : index > 0
-                              ? "1px solid color-mix(in srgb, var(--color-scale-4) 12%, transparent)"
-                              : "none",
-                        outlineOffset: hovered?.d === d && hovered?.h === h ? 1 : 0,
-                      }}
+                      
                     />
                   );
                 })}
@@ -194,13 +181,13 @@ export function Heatmap({
                 describes is worse than one that does not move. */}
             <div className="mt-2.5 h-[18px]" aria-hidden="true">
               {hovered && (
-                <p className="text-[12px]" style={{ color: "var(--color-ink)" }}>
+                <p className={"text-caption "+("ch-color-7f7330")} >
                   <span className="font-medium">{dayLabel(hovered.d)}</span>
-                  <span className="tabular" style={{ color: "var(--color-ink-muted)" }}>
+                  <span className={"tabular "+("ch-color-4a0211")} >
                     {" "}
                     {String(hovered.h).padStart(2, "0")}:00
                   </span>
-                  <span style={{ color: "var(--color-ink-muted)" }}> · </span>
+                  <span className={"ch-color-4a0211"} > · </span>
                   <span className="font-medium">
                     {t("insights.cellPeople", "{n} of {total} people", {
                       n: grid[hovered.d]?.[hovered.h] ?? 0,
@@ -213,16 +200,16 @@ export function Heatmap({
 
             {/* Legend with real numbers, not just a gradient bar. */}
             <div className="mt-1 flex items-center gap-2">
-              <span className="text-[10.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+              <span className={"text-micro "+("ch-color-094083")} >
                 {t("insights.nobody", "nobody")}
               </span>
               <span className="flex gap-[2px]">
-                <span style={{ width: 16, height: 9, background: EMPTY, borderRadius: 3 }} />
+                <span className={"ch-width-7375d5"+' '+"ch-height-b9986b"+' '+"ch-background-1f1dc1"+' '+"ch-border-radius-edd97e"}  />
                 {RAMP.map((c) => (
-                  <span key={c} style={{ width: 16, height: 9, background: c, borderRadius: 3 }} />
+                  <span key={c} className={("ch-width-7375d5"+' '+"ch-height-b9986b"+' '+"ch-border-radius-edd97e")+" "+('ch-heat-'+(RAMP.indexOf(c)+1))}  />
                 ))}
               </span>
-              <span className="tabular text-[10.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+              <span className={"tabular text-micro "+("ch-color-094083")} >
                 {t("insights.upTo", "up to {n}", { n: max })}
               </span>
             </div>

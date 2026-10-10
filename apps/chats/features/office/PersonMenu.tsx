@@ -1,4 +1,5 @@
 "use client";
+import {geometryClass} from "@/lib/geometry";
 
 /**
  * SOMION HQ - PERSON MENU
@@ -132,15 +133,8 @@ export function PersonMenu({
       ref={ref}
       role="dialog"
       aria-label={t("office.personMenu", "Actions for {name}", { name: user.name })}
-      className="hq-floating hq-rise absolute z-[30] p-3"
-      style={{
-        left,
-        top,
-        width: WIDTH,
-        maxHeight,
-        overflowY: "auto",
-        borderRadius: "var(--radius-card)",
-      }}
+      className={("hq-floating hq-rise absolute z-[30] p-3 "+("ch-overflow-y-03df74"+' '+"ch-border-radius-8d459a"))+" "+(geometryClass({left:left,top:top,width:WIDTH,maxHeight:maxHeight}))}
+      
     >
       <Button
         variant="ghost"
@@ -148,8 +142,8 @@ export function PersonMenu({
         iconOnly
         label={t("common.close", "Close")}
         onClick={onClose}
-        className="absolute end-1.5 top-1.5"
-        style={{ color: "var(--color-ink-subtle)" }}
+        className={"absolute end-1.5 top-1.5 "+("ch-color-094083")}
+        
       >
         <X size={13} weight="bold" aria-hidden="true" />
       </Button>
@@ -162,13 +156,13 @@ export function PersonMenu({
           size={40}
         />
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[13.5px] font-semibold" style={{ color: "var(--color-ink)" }}>
+          <p className={"truncate text-body-sm font-semibold "+("ch-color-7f7330")} >
             <bdi>{user.name}</bdi>
           </p>
-          <p className="truncate text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+          <p className={"truncate text-caption "+("ch-color-4a0211")} >
             <bdi>{user.title}</bdi>
           </p>
-          <p className="mt-1 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+          <p className={"mt-1 text-caption "+("ch-color-4a0211")} >
             {presence.customText ?? meta.label}
             {room && (<>{" · "}<bdi>{room.name}</bdi></>)}
             <span className="tabular"> · {formatRelative(presence.since)}</span>
@@ -180,12 +174,8 @@ export function PersonMenu({
           rather than silently behaving differently. */}
       {presence.status === "focus" && (
         <p
-          className="mt-2.5 px-2 py-1.5 text-[11.5px]"
-          style={{
-            background: "var(--color-presence-focus-soft)",
-            color: "var(--color-paper-900)",
-            borderRadius: "var(--radius-control)",
-          }}
+          className={"mt-2.5 px-2 py-1.5 text-caption "+("ch-background-48a847"+' '+"ch-color-50ec9d"+' '+"ch-border-radius-332348")}
+          
         >
           {t("office.focusUntil", "In focus. A knock is held and delivered when they finish.")}
         </p>
@@ -231,8 +221,8 @@ export function PersonMenu({
           {/* What you hear of them is yours to set; what everyone hears of them
               is a moderator's, and the labels keep the two apart. */}
           {userId !== meId && (
-            <div className="mt-1.5 flex flex-col gap-1.5 border-t pt-2" style={{ borderColor: "var(--color-hairline)" }}>
-              <label className="flex items-center gap-2 text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+            <div className={"mt-1.5 flex flex-col gap-1.5 border-t pt-2 "+("ch-border-color-407eb5")} >
+              <label className={"flex items-center gap-2 text-caption "+("ch-color-4a0211")} >
                 <SpeakerHigh size={13} aria-hidden="true" />
                 <span className="sr-only">{t("office.volume", "Their volume")}</span>
                 <input
@@ -243,8 +233,8 @@ export function PersonMenu({
                   value={Math.round(volume * 100)}
                   onChange={(e) => setLocalVolume(userId, Number(e.target.value) / 100)}
                   aria-label={t("office.volumeOf", "Volume of {name}", { name: user.name })}
-                  className="min-w-0 flex-1"
-                  style={{ accentColor: "var(--color-accent)" }}
+                  className={"min-w-0 flex-1 "+("ch-accent-color-e56d5b")}
+                  
                 />
                 <span className="tabular w-[38px] text-end">{Math.round(volume * 100)}%</span>
               </label>
@@ -261,10 +251,10 @@ export function PersonMenu({
                 {can.moderate && (
                   <Button
                     size="sm"
-                    className="flex-1"
+                    className={"flex-1 "+((presence.muted?"ch-color-1fd63a":""))}
                     aria-pressed={Boolean(presence.muted)}
                     onClick={() => setServerMute(userId, !presence.muted)}
-                    style={presence.muted ? { color: "var(--color-danger-600)" } : undefined}
+                    
                   >
                     <MicrophoneSlash size={13} aria-hidden="true" />
                     {presence.muted ? t("office.unmuteMic", "Unmute mic") : t("office.muteMic", "Mute mic")}
@@ -273,10 +263,10 @@ export function PersonMenu({
                 {can.moderate && (
                   <Button
                     size="sm"
-                    className="flex-1"
+                    className={"flex-1 "+((presence.deafened?"ch-color-1fd63a":""))}
                     aria-pressed={Boolean(presence.deafened)}
                     onClick={() => setServerDeafen(userId, !presence.deafened)}
-                    style={presence.deafened ? { color: "var(--color-danger-600)" } : undefined}
+                    
                   >
                     <SpeakerSlash size={13} aria-hidden="true" />
                     {presence.deafened ? t("office.undeafen", "Undeafen") : t("office.deafen", "Deafen")}
@@ -284,7 +274,7 @@ export function PersonMenu({
                 )}
               </div>
               {can.moderate && (
-                <p className="text-[10.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                <p className={"text-micro "+("ch-color-094083")} >
                   {t("office.moderationNote", "Mute mic and Deafen apply for everyone, and the person is told.")}
                 </p>
               )}
@@ -293,7 +283,7 @@ export function PersonMenu({
         </div>
       ) : (
         <div className="mt-3 flex flex-col gap-2">
-          <label htmlFor="knock-reason" className="text-[12px] font-medium" style={{ color: "var(--color-ink)" }}>
+          <label htmlFor="knock-reason" className={"text-caption font-medium "+("ch-color-7f7330")} >
             {t("office.knockReason", "What is it about?")}
           </label>
           <input
@@ -303,14 +293,7 @@ export function PersonMenu({
             onChange={(e) => setReason(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && doKnock()}
             placeholder={t("office.knockPlaceholder", "Optional, one line")}
-            style={{
-              background: "var(--color-surface-sunken)",
-              border: "1px solid var(--color-hairline-strong)",
-              borderRadius: "var(--radius-control)",
-              padding: "7px 10px",
-              fontSize: "13px",
-              minHeight: 34,
-            }}
+            className={"ch-background-314b28"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"} 
           />
           <div className="flex gap-1.5">
             <Button variant="primary" size="sm" className="flex-1" onClick={doKnock}>

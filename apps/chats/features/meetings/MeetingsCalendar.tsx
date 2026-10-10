@@ -1,4 +1,5 @@
 "use client";
+import {geometryClass} from "@/lib/geometry";
 
 /**
  * SOMION HQ - MEETINGS CALENDAR
@@ -13,6 +14,7 @@
  * that day filled in.
  */
 
+import {ChatConnection} from "@/features/chat/ChatFeatures";
 import { useMemo, useState } from "react";
 import { useClientSession } from "@orgtik/ui/auth";
 import Link from "next/link";
@@ -23,6 +25,7 @@ import { MonthGrid, monthOf, sameMonth, type YearMonth } from "@/components/ui/C
 import { useRoom, useUsers } from "@/store/hooks";
 import { useT } from "@/lib/i18n";
 import { dayLabel, formatRange, formatTime, minutesUntil, localeFormat } from "@/lib/time";
+import{workspaceDate}from"@/lib/time";
 import { addDays, fromKey, toKey, weekdayOf, type DateKey } from "@/lib/analytics";
 import type { Meeting } from "@/entities";
 import { workspaceDayKey, zonedHour, type AvailabilityItem } from "@/lib/calendar-availability";
@@ -44,7 +47,7 @@ export function MeetingsCalendar({
 }) {
   const t = useT();
   const timeZone = useClientSession()?.workspaceContext?.workspace.timeZone ?? "UTC";
-  const today = workspaceDayKey(new Date(), timeZone);
+  const today = workspaceDayKey(workspaceDate(), timeZone);
   const [view, setView] = useState<"month" | "week">("month");
   const [day, setDay] = useState<DateKey>(today);
   const [month, setMonth] = useState<YearMonth>(monthOf(today));
@@ -84,8 +87,8 @@ export function MeetingsCalendar({
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center gap-2">
         <div
-          className="flex items-center gap-0.5 p-0.5"
-          style={{ background: "var(--color-surface-sunken)", borderRadius: "var(--radius-control)" }}
+          className={"flex items-center gap-0.5 p-0.5 "+("ch-background-314b28"+' '+"ch-border-radius-332348")}
+          
           role="group"
           aria-label={t("calendar.view", "Calendar view")}
         >
@@ -96,7 +99,7 @@ export function MeetingsCalendar({
               variant={view === v ? "secondary" : "ghost"}
               onClick={() => { setView(v); if (v === "month") setMonth(monthOf(day)); }}
               aria-pressed={view === v}
-              style={view === v ? { boxShadow: "var(--shadow-raise)" } : undefined}
+              className={(view === v?"ch-box-shadow-03c10c":"")} 
             >
               {v === "month" ? t("calendar.month", "Month") : t("calendar.week", "Week")}
             </Button>
@@ -112,7 +115,7 @@ export function MeetingsCalendar({
             <Button size="sm" iconOnly label={t("calendar.prevWeek", "Previous week")} onClick={() => setDay(addDays(day, -7))}>
               <CaretLeft size={13} weight="bold" aria-hidden="true" />
             </Button>
-            <span className="tabular px-1 text-[13px] font-semibold" style={{ color: "var(--color-ink)" }}>
+            <span className={"tabular px-1 text-body-sm font-semibold "+("ch-color-7f7330")} >
               {shortFmt.format(fromKey(weekStart))} – {shortFmt.format(fromKey(addDays(weekStart, 6)))}
             </span>
             <Button size="sm" iconOnly label={t("calendar.nextWeek", "Next week")} onClick={() => setDay(addDays(day, 7))}>
@@ -127,10 +130,10 @@ export function MeetingsCalendar({
           </Button>
         </span>
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-2 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }} aria-live="polite" aria-busy={availability.status === "loading"}>
+      <ChatConnection requires="hr" write={false}>      <div className={"flex flex-wrap items-center justify-between gap-2 text-body-sm "+("ch-color-4a0211")}  aria-live="polite" aria-busy={availability.status === "loading"}>
         <p>{t("availability.title", "Approved availability")} · <bdi>{timeZone}</bdi></p>
         {availability.status === "error" ? <div className="flex flex-wrap items-center gap-2" role="alert"><span>{t("availability.error", "Availability could not be loaded. Meetings are still shown.")}</span><Button size="sm" onClick={availability.refetch}>{t("availability.retry", "Retry availability")}</Button></div> : <span>{availability.status === "loading" ? t("availability.loading", "Loading availability…") : t("availability.legend", "Outlined dot: approved absence · read-only")}</span>}
-      </div>
+      </div></ChatConnection>
 
       {view === "month" ? (
         <div className="grid gap-4 lg:grid-cols-[auto_1fr]">
@@ -172,42 +175,42 @@ function DayList({ day, meetings, today, onSchedule, timeZone, availability, ava
   return (
     <Panel>
       <div className="flex items-baseline justify-between gap-3 pb-2">
-        <h2 className="text-[14px] font-semibold" style={{ color: "var(--color-ink)" }}>
+        <h2 className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
           {title}
           {day === today && (
-            <span className="ms-2 text-[12px] font-medium" style={{ color: "var(--color-ink-brand)" }}>
+            <span className={"ms-2 text-caption font-medium "+("ch-color-55f463")} >
               {t("calendar.todayLabel", "today")}
             </span>
           )}
         </h2>
-        <span className="tabular text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+        <span className={"tabular text-caption "+("ch-color-4a0211")} >
           {meetings.length === 0
             ? t("calendar.free", "Nothing booked")
             : t("calendar.nBooked", "{n} booked", { n: meetings.length })}
         </span>
       </div>
-      <section className="mb-3 border-b pb-3" style={{ borderColor: "var(--color-hairline)" }} aria-label={t("availability.title", "Approved availability")}>
-        <h3 className="mb-2 text-[12.5px] font-semibold" style={{ color: "var(--color-ink)" }}>{t("availability.title", "Approved availability")}</h3>
+      <section className={"mb-3 border-b pb-3 "+("ch-border-color-407eb5")}  aria-label={t("availability.title", "Approved availability")}>
+        <h3 className={"mb-2 text-body-sm font-semibold "+("ch-color-7f7330")} >{t("availability.title", "Approved availability")}</h3>
         {availabilityStatus === "ready" && availability.length > 0 ? (
           <ul className="flex flex-col gap-2">
             {availability.map(item => (
-              <li key={item.id} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-[12.5px]">
-                <span style={{ color: "var(--color-ink)" }}><bdi>{item.personName}</bdi> · {t("availability.unavailable", "Unavailable")}</span>
-                <span className="tabular" style={{ color: "var(--color-ink-muted)" }}>
+              <li key={item.id} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-body-sm">
+                <span className={"ch-color-7f7330"} ><bdi>{item.personName}</bdi> · {t("availability.unavailable", "Unavailable")}</span>
+                <span className={"tabular "+("ch-color-4a0211")} >
                   {availabilityPeriod(item, t)}{item.durationType !== "full_day" ? ` · ${formatRange(item.startAt, item.endAt, timeZone)}` : ""}
                 </span>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <p className={"text-body-sm "+("ch-color-4a0211")} >
             {availabilityStatus === "loading" ? t("availability.loading", "Loading availability…") : availabilityStatus === "error" ? t("availability.notLoaded", "Availability is not loaded.") : t("availability.emptyDay", "No shared approved absences for this day.")}
           </p>
         )}
       </section>
       {meetings.length === 0 ? (
         <div className="py-6 text-center">
-          <p className="text-[13px]" style={{ color: "var(--color-ink-muted)" }}>
+          <p className={"text-body-sm "+("ch-color-4a0211")} >
             {availability.length ? t("availability.noMeetings", "No meetings booked. Check availability before scheduling.") : t("calendar.freeBody", "A clear day. Most conversations here do not need a meeting.")}
           </p>
           <Button size="sm" className="mt-3" onClick={onSchedule}>
@@ -232,25 +235,21 @@ function DayRow({ meeting, timeZone }: { meeting: Meeting; timeZone: string }) {
   const people = meeting.participantIds.map((id) => users.find((u) => u.id === id)).filter((u): u is NonNullable<typeof u> => Boolean(u));
   const mins = minutesUntil(meeting.startsAt);
   const soon = !meeting.endedAt && mins <= 15 && mins > -60;
-  const over = Boolean(meeting.endedAt) || new Date(meeting.endsAt).getTime() < Date.now();
+  const over = Boolean(meeting.endedAt) || new Date(meeting.endsAt).getTime() < workspaceDate().getTime();
   return (
     <li
-      className="hq-row relative flex items-center gap-3 px-3 py-2"
-      style={{
-        borderRadius: "var(--radius-control)",
-        borderInlineStart: `3px solid ${over ? "var(--color-paper-500)" : "var(--color-accent)"}`,
-        background: "var(--color-surface-sunken)",
-      }}
+      className={"hq-row relative flex items-center gap-3 px-3 py-2 "+("ch-border-radius-332348"+' '+(over?"ch-border-inline-start-844669":"ch-border-inline-start-f158c3")+' '+"ch-background-314b28")}
+      
     >
-      <span className="tabular w-[92px] shrink-0 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+      <span className={"tabular w-[92px] shrink-0 text-caption "+("ch-color-4a0211")} >
         {formatRange(meeting.startsAt, meeting.endsAt, timeZone)}
       </span>
       <Link href={`/hq/meetings/${meeting.id}`} className="min-w-0 flex-1 after:absolute after:inset-0 after:content-['']">
-        <span className="block truncate text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+        <span className={"block truncate text-body-sm font-medium "+("ch-color-7f7330")} >
           <bdi>{meeting.title}</bdi>
         </span>
         {room && (
-          <span className="block truncate text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <span className={"block truncate text-caption "+("ch-color-4a0211")} >
             <bdi>{room.name}</bdi>
           </span>
         )}
@@ -289,13 +288,13 @@ function WeekGrid({
 }) {
   const t = useT();
   const hours = Array.from({ length: LAST_HOUR - FIRST_HOUR + 1 }, (_, i) => FIRST_HOUR + i);
-  const now = new Date();
+  const now = workspaceDate();
   const nowY = (zonedHour(now, timeZone) - FIRST_HOUR) * ROW;
 
   return (
     <Panel className="overflow-x-auto">
-      <div style={{ minWidth: 760 }}>
-        <div className="grid" style={{ gridTemplateColumns: `52px repeat(7, minmax(0, 1fr))` }}>
+      <div className={"ch-min-width-af5b40"} >
+        <div className={"grid "+("ch-grid-template-columns-3fb748")} >
           <span />
           {days.map((d, i) => {
             const isToday = d === today;
@@ -306,21 +305,15 @@ function WeekGrid({
                 type="button"
                 onClick={() => onSelect(d)}
                 aria-pressed={isSelected}
-                className="hq-btn flex flex-col items-center py-1.5"
-                style={{ borderRadius: "var(--radius-control)", color: "var(--color-ink)" }}
+                className={"hq-btn flex flex-col items-center py-1.5 "+("ch-border-radius-332348"+' '+"ch-color-7f7330")}
+                
               >
-                <span className="text-[10.5px] font-semibold uppercase" style={{ color: "var(--color-ink-subtle)", letterSpacing: "0.04em" }}>
+                <span className={"text-micro font-semibold uppercase "+("ch-color-094083"+' '+"ch-letter-spacing-47bb2f")} >
                   {dayLabel(i)}
                 </span>
                 <span
-                  className="tabular mt-0.5 inline-flex items-center justify-center text-[13px] font-semibold"
-                  style={{
-                    width: 26,
-                    height: 26,
-                    borderRadius: "var(--radius-chip)",
-                    background: isToday ? "var(--color-accent)" : isSelected ? "var(--color-accent-soft)" : "transparent",
-                    color: isToday ? "var(--color-ink-inverse)" : "var(--color-ink)",
-                  }}
+                  className={"tabular mt-0.5 inline-flex items-center justify-center text-body-sm font-semibold "+("ch-width-4b2fb4"+' '+"ch-height-b9ab46"+' '+"ch-border-radius-189003"+' '+(isToday?"ch-background-3f17cb":(isSelected?"ch-background-1416a8":"ch-background-a8869d"))+' '+(isToday?"ch-color-7b8a5e":"ch-color-7f7330"))}
+                  
                 >
                   {fromKey(d).getDate()}
                 </span>
@@ -328,10 +321,10 @@ function WeekGrid({
             );
           })}
         </div>
-        <div className="mt-1 grid border-y py-2" style={{ gridTemplateColumns: "52px repeat(7, minmax(0, 1fr))", borderColor: "var(--color-hairline)" }} aria-label={t("availability.title", "Approved availability")}>
-          <span className="px-1 text-[10.5px]" style={{ color: "var(--color-ink-muted)" }}>{t("availability.away", "Away")}</span>
+        <div className={"mt-1 grid border-y py-2 "+("ch-grid-template-columns-3fb748"+' '+"ch-border-color-407eb5")}  aria-label={t("availability.title", "Approved availability")}>
+          <span className={"px-1 text-micro "+("ch-color-4a0211")} >{t("availability.away", "Away")}</span>
           {days.map(key => (
-            <div key={key} className="min-w-0 px-1.5 text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+            <div key={key} className={"min-w-0 px-1.5 text-caption "+("ch-color-4a0211")} >
               {(availability.get(key) ?? []).map(item => (
                 <div key={item.id} className="mb-1" title={`${item.personName} · ${availabilityPeriod(item, t)}${item.durationType !== "full_day" ? ` · ${formatRange(item.startAt, item.endAt, timeZone)}` : ""}`}>
                   <span className="block truncate font-semibold"><bdi>{item.personName}</bdi></span>
@@ -342,14 +335,14 @@ function WeekGrid({
           ))}
         </div>
 
-        <div className="relative mt-1 grid" style={{ gridTemplateColumns: `52px repeat(7, minmax(0, 1fr))`, height: hours.length * ROW }}>
+        <div className={("relative mt-1 grid "+("ch-grid-template-columns-3fb748"))+" "+(geometryClass({height:hours.length * ROW}))} >
           {/* Hour rules and labels. */}
           {hours.map((h, i) => (
-            <div key={h} className="absolute inset-x-0" style={{ top: i * ROW, height: ROW }}>
-              <span className="tabular absolute -top-[7px] text-[10.5px]" style={{ left: 0, width: 44, textAlign: "end", color: "var(--color-ink-subtle)" }}>
+            <div key={h} className={("absolute inset-x-0 "+("ch-height-69c02c"))+" "+(geometryClass({top:i * ROW}))} >
+              <span className={"tabular absolute -top-[7px] text-micro "+("ch-left-ced581"+' '+"ch-width-8fb32a"+' '+"ch-text-align-1dfa36"+' '+"ch-color-094083")} >
                 {String(h).padStart(2, "0")}:00
               </span>
-              <span className="absolute" style={{ left: 52, right: 0, top: 0, borderTop: "1px solid var(--color-hairline)" }} />
+              <span className={"absolute "+("ch-left-cb9bdb"+' '+"ch-right-9682c6"+' '+"ch-top-0d4406"+' '+"ch-border-top-c9ce2a")}  />
             </div>
           ))}
           <span />
@@ -359,18 +352,14 @@ function WeekGrid({
             return (
               <div
                 key={d}
-                className="relative"
-                style={{
-                  borderInlineStart: "1px solid var(--color-hairline)",
-                  background: isToday ? "var(--color-accent-soft)" : "transparent",
-                  opacity: isToday ? 0.999 : 1,
-                }}
+                className={"relative "+("ch-border-inline-start-c791b2"+' '+(isToday?"ch-background-1416a8":"ch-background-a8869d")+' '+(isToday?"ch-opacity-047007":"ch-opacity-c6e797"))}
+                
               >
                 {isToday && (
                   <span
                     aria-hidden="true"
-                    className="absolute inset-x-0 z-10"
-                    style={{ top: nowY, borderTop: "2px solid var(--color-ink-brand)" }}
+                    className={("absolute inset-x-0 z-10 "+("ch-border-top-fa61bf"))+" "+(geometryClass({top:nowY}))}
+                    
                   />
                 )}
                 {list.map((m) => {
@@ -385,20 +374,13 @@ function WeekGrid({
                     <Link
                       key={m.id}
                       href={`/hq/meetings/${m.id}`}
-                      className="absolute inset-x-[3px] block overflow-hidden px-1.5 py-1"
+                      className={("absolute inset-x-[3px] block overflow-hidden px-1.5 py-1 "+("ch-border-radius-edd97e"+' '+(over?"ch-background-314b28":"ch-background-198f75")+' '+(over?"ch-border-inline-start-844669":"ch-border-inline-start-f158c3")+' '+"ch-color-7f7330"))+" "+(geometryClass({top:top,height:height}))}
                       title={`${m.title} · ${formatRange(m.startsAt, m.endsAt, timeZone)}`}
-                      style={{
-                        top,
-                        height,
-                        borderRadius: 6,
-                        background: over ? "var(--color-surface-sunken)" : "var(--color-brand-100)",
-                        borderInlineStart: `3px solid ${over ? "var(--color-paper-500)" : "var(--color-accent)"}`,
-                        color: "var(--color-ink)",
-                      }}
+                      
                     >
-                      <span className="block truncate text-[11.5px] font-semibold"><bdi>{m.title}</bdi></span>
+                      <span className="block truncate text-caption font-semibold"><bdi>{m.title}</bdi></span>
                       {height >= 36 && (
-                        <span className="tabular block truncate text-[10.5px]" style={{ color: "var(--color-ink-muted)" }}>
+                        <span className={"tabular block truncate text-micro "+("ch-color-4a0211")} >
                           {formatTime(m.startsAt, timeZone)}
                         </span>
                       )}
@@ -410,7 +392,7 @@ function WeekGrid({
           })}
         </div>
       </div>
-      <p className="mt-2 text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+      <p className={"mt-2 text-caption "+("ch-color-094083")} >
         {t("calendar.weekHint", "Working hours only, {a}:00 to {b}:00. Pick a day to schedule on it.", { a: FIRST_HOUR, b: LAST_HOUR + 1 })}
       </p>
     </Panel>

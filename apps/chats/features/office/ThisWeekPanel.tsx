@@ -37,39 +37,25 @@ export function ThisWeekPanel() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className="hq-btn flex items-center gap-1.5 px-2.5"
-        style={{
-          minHeight: 28,
-          fontSize: "12.5px",
-          fontWeight: 500,
-          color: "var(--color-ink-muted)",
-          border: "1px solid var(--color-hairline-strong)",
-          borderRadius: "var(--radius-control)",
-          background: "var(--color-surface)",
-        }}
+        className={"hq-btn flex items-center gap-1.5 px-2.5 "+("ch-min-height-4f3317"+' '+"ch-font-size-ba0694"+' '+"ch-font-weight-02a2d3"+' '+"ch-color-4a0211"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-background-751d03")}
+        
       >
         <span>{t("insights.thisWeek", "This week")}</span>
         <CaretDown
           size={12}
           weight="bold"
           aria-hidden="true"
-          style={{
-            color: "var(--color-ink-subtle)",
-            transform: open ? "rotate(180deg)" : "none",
-            transition: "transform var(--duration-state) var(--ease-out-soft)",
-          }}
+          className={"ch-color-094083"+' '+(open?"ch-transform-6e88a8":"ch-transform-e48099")+' '+"ch-transition-25ab2b"} 
         />
       </button>
 
       {open && (
         <div
-          className="hq-floating hq-rise absolute end-0 z-50 mt-2 w-[236px] px-3 pb-3 pt-3"
-          style={{
-            borderRadius: "var(--radius-card)",
-          }}
+          className={"hq-floating hq-rise absolute end-0 z-50 mt-2 w-[236px] px-3 pb-3 pt-3 "+("ch-border-radius-8d459a")}
+          
         >
           {suppressed ? (
-            <p className="text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"text-caption "+("ch-color-4a0211")} >
               {t("insights.tooFew", "Not enough members to show team numbers. At least {n} are needed.", {
                 n: MIN_COHORT,
               })}
@@ -89,8 +75,8 @@ export function ThisWeekPanel() {
               number about people. It is not buried in settings. */}
           <Link
             href="/hq/insights/transparency"
-            className="mt-3 inline-flex items-center gap-1.5 text-[11.5px] font-medium"
-            style={{ color: "var(--color-ink-brand)" }}
+            className={"mt-3 inline-flex items-center gap-1.5 text-caption font-medium "+("ch-color-55f463")}
+            
           >
             <Info size={12} weight="bold" aria-hidden="true" />
             {t("insights.whatWeCollect", "What do we collect?")}
@@ -104,10 +90,10 @@ export function ThisWeekPanel() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-baseline justify-between gap-2">
-      <dt className="text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+      <dt className={"text-caption "+("ch-color-4a0211")} >
         {label}
       </dt>
-      <dd className="tabular text-[13px] font-semibold" style={{ color: "var(--color-ink)" }}>
+      <dd className={"tabular text-body-sm font-semibold "+("ch-color-7f7330")} >
         {value}
       </dd>
     </div>

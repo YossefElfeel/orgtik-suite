@@ -1,4 +1,5 @@
 "use client";
+import {geometryClass} from "@/lib/geometry";
 
 /**
  * SOMION HQ - INACTIVITY MONITOR
@@ -144,18 +145,18 @@ export function InactivityMonitor() {
   };
 
   return (
-    <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ background: "rgb(var(--shadow-ink) / 0.18)" }}>
+    <div className={"fixed inset-0 z-[70] flex items-center justify-center p-4 "+("ch-background-0c6c0f")} >
       <div
         role="alertdialog"
         aria-live="assertive"
         aria-label={t("inactivity.title", "Still there?")}
-        className="hq-floating hq-rise w-full max-w-[380px] p-5"
-        style={{ borderRadius: "var(--radius-card)", background: "var(--color-surface)" }}
+        className={"hq-floating hq-rise w-full max-w-[380px] p-5 "+("ch-border-radius-8d459a"+' '+"ch-background-751d03")}
+        
       >
-        <h2 className="hq-title" style={{ color: "var(--color-ink)" }}>
+        <h2 className={"hq-title "+("ch-color-7f7330")} >
           {t("inactivity.title", "Still there?")}
         </h2>
-        <p className="mt-1.5 text-[13px] leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+        <p className={"mt-1.5 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
           {scope === "computer"
             ? t(
                 "inactivity.bodyComputer",
@@ -168,14 +169,9 @@ export function InactivityMonitor() {
                 { n: minutes ?? 0, s: secondsLeft },
               )}
         </p>
-        <div aria-hidden="true" className="mt-3 h-1 w-full overflow-hidden" style={{ background: "var(--color-surface-sunken)", borderRadius: "var(--radius-chip)" }}>
+        <div aria-hidden="true" className={"mt-3 h-1 w-full overflow-hidden "+("ch-background-314b28"+' '+"ch-border-radius-189003")} >
           <div
-            style={{
-              height: "100%",
-              width: `${(secondsLeft / (WARN_MS / 1000)) * 100}%`,
-              background: "var(--color-accent)",
-              transition: "width 1s linear",
-            }}
+            className={("ch-height-622640"+' '+"ch-background-3f17cb"+' '+"ch-transition-f17a3a")+" "+(geometryClass({width:`${(secondsLeft / (WARN_MS / 1000)) * 100}%`}))} 
           />
         </div>
         <div className="mt-4 flex flex-wrap items-center justify-between gap-2">

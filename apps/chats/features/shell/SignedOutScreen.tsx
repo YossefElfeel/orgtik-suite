@@ -37,28 +37,22 @@ export function SignedOutScreen() {
       : t("signedOut.manual", "You signed out.");
 
   return (
-    <div className="flex h-[100dvh] w-full items-center justify-center p-6" style={{ background: "var(--color-ground)" }}>
-      <div className="hq-raised w-full max-w-[420px] p-6" style={{ borderRadius: "var(--radius-card)", background: "var(--color-surface)" }}>
+    <div className={"flex h-[100dvh] w-full items-center justify-center p-6 "+("ch-background-8473a7")} >
+      <div className={"hq-raised w-full max-w-[420px] p-6 "+("ch-border-radius-8d459a"+' '+"ch-background-751d03")} >
         <span
           aria-hidden="true"
-          className="inline-flex items-center justify-center"
-          style={{
-            width: 40,
-            height: 40,
-            borderRadius: "var(--radius-control)",
-            background: "var(--color-accent-soft)",
-            color: "var(--color-ink-brand)",
-          }}
+          className={"inline-flex items-center justify-center "+("ch-width-d6db40"+' '+"ch-height-3a4095"+' '+"ch-border-radius-332348"+' '+"ch-background-1416a8"+' '+"ch-color-55f463")}
+          
         >
           <SignOut size={20} weight="bold" />
         </span>
-        <h1 className="hq-display mt-4" style={{ color: "var(--color-ink)" }}>
+        <h1 className={"hq-display mt-4 "+("ch-color-7f7330")} >
           {t("signedOut.title", "Signed out")}
         </h1>
-        <p className="mt-2 text-[13.5px] leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+        <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
           {why}
         </p>
-        <p className="mt-2 text-[12.5px] leading-relaxed" style={{ color: "var(--color-ink-subtle)" }}>
+        <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-094083")} >
           {t(
             "signedOut.record",
             "Your status is Offline to colleagues. The time of your last input stayed on this device and was not sent anywhere.",
@@ -67,7 +61,7 @@ export function SignedOutScreen() {
         <Button variant="primary" className="mt-5 w-full" onClick={signIn}>
           {t("signedOut.again", "Sign in again")}
         </Button>
-        <p className="mt-3 text-center text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+        <p className={"mt-3 text-center text-caption "+("ch-color-094083")} >
           {t("signedOut.proto", "Prototype: in the product this is the {ws} sign-in.", { ws: name })}
         </p>
       </div>

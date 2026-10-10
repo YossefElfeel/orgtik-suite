@@ -10,6 +10,7 @@
  * closed most of this category.
  */
 
+import {ChatsOnboarding} from "@/features/shell/ChatsOnboarding";
 import { useEffect, useState } from "react";
 import { ListBullets, MapTrifold } from "@phosphor-icons/react";
 import { FloorCanvas } from "./FloorCanvas";
@@ -48,15 +49,16 @@ export function OfficeScreen() {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
+      <ChatsOnboarding/>
       <header
-        className="flex shrink-0 items-center justify-between gap-3 px-4 py-2.5"
-        style={{ background: "transparent" }}
+        className={"flex shrink-0 items-center justify-between gap-3 px-4 py-2.5 "+("ch-background-a8869d")}
+        
       >
         <div className="flex items-baseline gap-2.5">
-          <h1 className="hq-title" style={{ color: "var(--color-ink)" }}>
+          <h1 className={"hq-title "+("ch-color-7f7330")} >
             {t("office.title", "Office")}
           </h1>
-          <span className="tabular text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <span className={"tabular text-body-sm "+("ch-color-4a0211")} >
             {t("office.aroundCount", "{n} around", { n: online })}
           </span>
         </div>
@@ -65,8 +67,8 @@ export function OfficeScreen() {
         {!isNarrow && <ThisWeekPanel />}
         {!isNarrow && (
           <div
-            className="flex items-center gap-0.5 p-0.5"
-            style={{ background: "var(--color-surface-sunken)", borderRadius: "var(--radius-control)" }}
+            className={"flex items-center gap-0.5 p-0.5 "+("ch-background-314b28"+' '+"ch-border-radius-332348")}
+            
             role="group"
             aria-label={t("office.viewToggle", "Office view")}
           >
@@ -75,7 +77,7 @@ export function OfficeScreen() {
               size="sm"
               onClick={() => setView("floor")}
               aria-pressed={view === "floor"}
-              style={view === "floor" ? { boxShadow: "var(--shadow-raise)" } : undefined}
+              className={(view === "floor"?"ch-box-shadow-03c10c":"")} 
             >
               <MapTrifold size={13} weight="bold" aria-hidden="true" />
               {t("office.floorView", "Floor")}
@@ -85,7 +87,7 @@ export function OfficeScreen() {
               size="sm"
               onClick={() => setView("list")}
               aria-pressed={view === "list"}
-              style={view === "list" ? { boxShadow: "var(--shadow-raise)" } : undefined}
+              className={(view === "list"?"ch-box-shadow-03c10c":"")} 
             >
               <ListBullets size={13} weight="bold" aria-hidden="true" />
               {t("office.listView", "List")}
@@ -103,7 +105,7 @@ export function OfficeScreen() {
         ) : (
           <div className="min-h-0 flex-1 overflow-y-auto">
             {isNarrow && (
-              <p className="px-3 pt-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+              <p className={"px-3 pt-3 text-caption "+("ch-color-4a0211")} >
                 {t(
                   "office.mobileNote",
                   "The floor plan is a desktop view. Everyone is listed here, grouped by room.",

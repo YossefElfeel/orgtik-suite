@@ -9,6 +9,7 @@
  * focused, so a dense transcript is not a wall of buttons.
  */
 
+import {MessageTools,RichMessage} from "./ChatFeatures";
 import { memo, useEffect, useRef, useState } from "react";
 import { useFormatter } from "@orgtik/ui";
 import {
@@ -88,8 +89,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
     if (!el) return;
     el.focus();
     el.setSelectionRange(el.value.length, el.value.length);
-    el.style.height = "auto";
-    el.style.height = `${el.scrollHeight}px`;
+
   }, [editing]);
 
   if (!author) return null;
@@ -100,12 +100,8 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
     return (
       <div className="px-4 py-1.5 ps-[52px]">
         <span
-          className="inline-block px-2 py-1 text-[12px] italic"
-          style={{
-            background: "var(--color-surface-sunken)",
-            color: "var(--color-ink-subtle)",
-            borderRadius: "var(--radius-control)",
-          }}
+          className={"inline-block px-2 py-1 text-caption italic "+("ch-background-314b28"+' '+"ch-color-094083"+' '+"ch-border-radius-332348")}
+          
         >
           {t("chat.deleted", "This message was deleted.")}
         </span>
@@ -126,17 +122,8 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
   return (
     <article
       id={message.id}
-      className="hq-msg group relative px-4 py-1"
-      style={
-        mentionsMe
-          ? {
-              background: "var(--color-accent-soft)",
-              /* A mention is marked by its whole surface, not by a coloured
-                 bar down one side. */
-              borderRadius: "var(--radius-control)",
-            }
-          : undefined
-      }
+      className={"hq-msg group relative px-4 py-1 "+((mentionsMe?"ch-background-1416a8"+' '+"ch-border-radius-332348":""))}
+      
     >
       <div className="flex gap-3">
         <div className="w-[36px] shrink-0 pt-0.5">
@@ -150,8 +137,8 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
             />
           ) : (
             <span
-              className="tabular block pt-0.5 text-end text-[10.5px] opacity-0 transition-opacity group-hover:opacity-100"
-              style={{ color: "var(--color-ink-subtle)" }}
+              className={"tabular block pt-0.5 text-end text-micro opacity-0 transition-opacity group-hover:opacity-100 "+("ch-color-094083")}
+              
             >
               {formatTime(message.createdAt)}
             </span>
@@ -161,14 +148,14 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
         <div className="min-w-0 flex-1">
           {!grouped && (
             <div className="flex items-baseline gap-2">
-              <span className="text-[13.5px] font-semibold" style={{ color: "var(--color-ink)" }}>
+              <span className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
                 <bdi>{author.name}</bdi>
               </span>
-              <span className="tabular text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+              <span className={"tabular text-caption "+("ch-color-094083")} >
                 {formatTime(message.createdAt)}
               </span>
               {message.pinned && (
-                <span className="flex items-center gap-1 text-[11px]" style={{ color: "var(--color-ink-muted)" }}>
+                <span className={"flex items-center gap-1 text-micro "+("ch-color-4a0211")} >
                   <PushPin size={10} weight="fill" aria-hidden="true" />
                   {t("chat.pinned", "Pinned")}
                 </span>
@@ -189,8 +176,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                 value={draft}
                 onChange={(e) => {
                   setDraft(e.target.value);
-                  e.currentTarget.style.height = "auto";
-                  e.currentTarget.style.height = `${e.currentTarget.scrollHeight}px`;
+
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Escape") {
@@ -205,16 +191,8 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                 }}
                 rows={1}
                 aria-label={t("chat.editing", "Edit your message")}
-                className="w-full resize-none"
-                style={{
-                  background: "var(--color-surface)",
-                  border: "1px solid var(--color-hairline-strong)",
-                  borderRadius: "var(--radius-control)",
-                  padding: "8px 11px",
-                  fontSize: "13.5px",
-                  lineHeight: 1.55,
-                  color: "var(--color-ink)",
-                }}
+                className={"w-full resize-none "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-14f075"+' '+"ch-font-size-ba0694"+' '+"ch-line-height-afef7d"+' '+"ch-color-7f7330")}
+                
               />
               <div className="flex items-center gap-2">
                 <Button
@@ -237,7 +215,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                 >
                   {t("common.cancel", "Cancel")}
                 </Button>
-                <span className="text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                <span className={"text-caption "+("ch-color-094083")} >
                   {t("chat.escapeToCancel", "Escape to cancel")}
                 </span>
               </div>
@@ -245,14 +223,14 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
           ) : (
             <>
               {/* What people wrote reads in its own direction: an English message stays LTR in Arabic. */}
-              <p dir="auto" className="whitespace-pre-wrap text-[13.5px] leading-[1.55]" style={{ color: "var(--color-ink)" }}>
-                {renderText(message.text, users, openPerson)}
+              <div dir="auto" className={"whitespace-pre-wrap text-body-sm leading-[1.55] "+("ch-color-7f7330")} >
+                {message.format==="rich"?<RichMessage text={message.text}/>:renderText(message.text, users, openPerson)}
                 {message.editedAt && (
-                  <span className="ms-1.5 text-[11px]" style={{ color: "var(--color-ink-subtle)" }}>
+                  <span className={"ms-1.5 text-micro "+("ch-color-094083")} >
                     {t("chat.edited", "(edited)")}
                   </span>
                 )}
-              </p>
+              </div>
               {(() => {
                 const found = message.text.match(URL_PATTERN);
                 return found?.[0] ? <LinkPreview url={found[0]} /> : null;
@@ -260,6 +238,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
             </>
           )}
 
+          <MessageTools message={message}/>
           {message.meetingId && <MeetingMessageCard meetingId={message.meetingId} />}
 
           {message.attachments.length > 0 && (
@@ -269,24 +248,19 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                   <button
                     type="button"
                     onClick={() => setPreview(f)}
-                    className="hq-btn inline-flex items-center gap-2 px-2.5 py-1.5 text-start"
-                    style={{
-                      border: "1px solid var(--color-hairline-strong)",
-                      borderRadius: "var(--radius-control)",
-                      background: "var(--color-surface)",
-                      minHeight: 34,
-                    }}
+                    className={"hq-btn inline-flex items-center gap-2 px-2.5 py-1.5 text-start "+("ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-background-751d03"+' '+"ch-min-height-87483b")}
+                    
                   >
-                    <FileText size={15} aria-hidden="true" style={{ color: "var(--color-ink-muted)" }} />
-                    <span className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+                    <FileText size={15} aria-hidden="true" className={"ch-color-4a0211"}  />
+                    <span className={"text-body-sm font-medium "+("ch-color-7f7330")} >
                       <bdi>{f.state === "unavailable" ? t("fileReferences.unavailable", "File unavailable") : f.name}</bdi>
                     </span>
-                    <span className="tabular text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                    <span className={"tabular text-caption "+("ch-color-094083")} >
                       {f.state === "unavailable" ? "" : typeof f.bytes === "number" ? format.bytes(f.bytes) : f.size}
                     </span>
                     {/* Attachments live in the File Manager. HQ owns no second
                         store, which is why this says where the file actually is. */}
-                    <span className="text-[11px]" style={{ color: "var(--color-ink-subtle)" }}>
+                    <span className={"text-micro "+("ch-color-094083")} >
                       {t("chat.inFileManager", "in Files")}
                     </span>
                   </button>
@@ -303,13 +277,8 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                   <li key={r.emoji}>
                     <button
                       onClick={() => toggleReaction(message.id, r.emoji)}
-                      className="hq-btn flex items-center gap-1 px-1.5 py-0.5 text-[12px]"
-                      style={{
-                        background: mine ? "var(--color-accent-soft)" : "var(--color-surface-sunken)",
-                        border: `1px solid ${mine ? "var(--color-accent)" : "transparent"}`,
-                        borderRadius: "var(--radius-chip)",
-                        color: "var(--color-ink)",
-                      }}
+                      className={"hq-btn flex items-center gap-1 px-1.5 py-0.5 text-caption "+((mine?"ch-background-1416a8":"ch-background-314b28")+' '+(mine?"ch-border-c98846":"ch-border-52e799")+' '+"ch-border-radius-189003"+' '+"ch-color-7f7330")}
+                      
                       aria-pressed={mine}
                       aria-label={t("chat.reactionCount", "{emoji}, {n} people", {
                         emoji: r.emoji,
@@ -317,7 +286,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                       })}
                     >
                       <span aria-hidden="true">{r.emoji}</span>
-                      <span className="tabular" style={{ color: "var(--color-ink-muted)" }}>
+                      <span className={"tabular "+("ch-color-4a0211")} >
                         {r.userIds.length}
                       </span>
                     </button>
@@ -332,8 +301,8 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
           {message.replyCount > 0 && onOpenThread && (
             <button
               onClick={() => onOpenThread(message.id)}
-              className="hq-btn mt-1.5 flex items-center gap-2 px-1.5 py-1 text-[12.5px] font-medium"
-              style={{ color: "var(--color-ink-brand)", borderRadius: "var(--radius-control)" }}
+              className={"hq-btn mt-1.5 flex items-center gap-2 px-1.5 py-1 text-body-sm font-medium "+("ch-color-55f463"+' '+"ch-border-radius-332348")}
+              
             >
               <AvatarStack people={replyPeople} size={20} max={3} />
               <span>
@@ -348,13 +317,8 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
 
       {/* Hover actions */}
       <div
-        className="hq-msg-actions absolute end-3 top-0 flex items-center gap-0.5 p-0.5"
-        style={{
-          background: "var(--color-surface)",
-          border: "1px solid var(--color-hairline-strong)",
-          borderRadius: "var(--radius-control)",
-          boxShadow: "var(--shadow-raise)",
-        }}
+        className={"hq-msg-actions absolute end-3 top-0 flex items-center gap-0.5 p-0.5 "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-box-shadow-03c10c")}
+        
       >
         {showPicker ? (
           <div className="flex items-center gap-0.5">
@@ -365,8 +329,8 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                   toggleReaction(message.id, emoji);
                   setShowPicker(false);
                 }}
-                className="hq-btn px-1.5 py-0.5 text-[14px]"
-                style={{ borderRadius: "var(--radius-control)" }}
+                className={"hq-btn px-1.5 py-0.5 text-body-sm "+("ch-border-radius-332348")}
+                
                 aria-label={t("chat.reactWith", "React with {emoji}", { emoji })}
               >
                 <span aria-hidden="true">{emoji}</span>
@@ -381,7 +345,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
               iconOnly
               label={t("chat.react", "Add reaction")}
               onClick={() => setShowPicker(true)}
-              style={{ color: "var(--color-ink-muted)" }}
+              className={"ch-color-4a0211"} 
             >
               <Smiley size={15} aria-hidden="true" />
             </Button>
@@ -392,7 +356,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                 iconOnly
                 label={t("chat.replyInThread", "Reply in thread")}
                 onClick={() => onOpenThread(message.id)}
-                style={{ color: "var(--color-ink-muted)" }}
+                className={"ch-color-4a0211"} 
               >
                 <ChatTeardropText size={15} aria-hidden="true" />
               </Button>
@@ -403,12 +367,14 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
               iconOnly
               label={message.pinned ? t("chat.unpin", "Unpin") : t("chat.pin", "Pin to channel")}
               onClick={() => togglePin(message.id)}
-              style={{ color: message.pinned ? "var(--color-ink-brand)" : "var(--color-ink-muted)" }}
+              className={(message.pinned?"ch-color-55f463":"ch-color-4a0211")} 
             >
               <PushPin size={15} weight={message.pinned ? "fill" : "regular"} aria-hidden="true" />
             </Button>
             <span className="relative">
-              <Button
+
+              <Menu
+                trigger={<Button
                 variant="ghost"
                 size="sm"
                 iconOnly
@@ -416,11 +382,10 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                 aria-expanded={menuOpen}
                 aria-haspopup="menu"
                 onClick={() => setMenuOpen((v) => !v)}
-                style={{ color: "var(--color-ink-muted)" }}
+                className={"ch-color-4a0211"} 
               >
                 <DotsThree size={15} weight="bold" aria-hidden="true" />
-              </Button>
-              <Menu
+              </Button>}
                 open={menuOpen}
                 onClose={() => setMenuOpen(false)}
                 label={t("chat.messageActions", "Message actions")}
@@ -521,12 +486,12 @@ function renderText(
   onOpen: (userId: string) => void,
 ): React.ReactNode {
   const names = [...users].sort((a, b) => b.name.length - a.name.length);
-  const hit = names.find((u) => text.includes(u.name));
+  const hit = names.find((u) => text.includes("@"+u.id)||text.includes(u.name));
   if (!hit) return linkify(text);
 
   /* The @ belongs to the chip, not to the text before it: "@ Name" with a
      gap reads as a typo. */
-  const parts = text.split(hit.name).map((part, i, all) => (i < all.length - 1 && part.endsWith("@") ? part.slice(0, -1) : part));
+  const parts = text.split(text.includes("@"+hit.id)?"@"+hit.id:hit.name).map((part, i, all) => (i < all.length - 1 && part.endsWith("@") ? part.slice(0, -1) : part));
   return parts.flatMap<React.ReactNode>((part, i) =>
     i === 0
       ? [renderText(part, users.filter((u) => u.id !== hit.id), onOpen)]
@@ -535,19 +500,8 @@ function renderText(
             key={`${hit.id}-${i}`}
             type="button"
             onClick={() => onOpen(hit.id)}
-            className="hq-btn"
-            style={{
-              background: "var(--color-accent-soft)",
-              color: "var(--color-ink-brand)",
-              fontWeight: 600,
-              /* Padding grows the hit area past the 24px floor; the matching
-                 negative margin keeps the line box exactly where it was, so a
-                 mention never reflows the sentence around it. */
-              padding: "3px 4px",
-              margin: "-3px -1px",
-              lineHeight: "inherit",
-              borderRadius: "var(--radius-object-sm)",
-            }}
+            className={"hq-btn "+("ch-background-1416a8"+' '+"ch-color-55f463"+' '+"ch-font-weight-eed0f8"+' '+"ch-padding-d5b924"+' '+"ch-margin-be0044"+' '+"ch-line-height-013d00"+' '+"ch-border-radius-a360d0")}
+            
           >
             @{hit.name}
           </button>,
@@ -567,7 +521,7 @@ function linkify(text: string): React.ReactNode {
     i < urls.length
       ? [
           part,
-          <a key={`u-${i}`} href={urls[i]} target="_blank" rel="noreferrer noopener" style={{ color: "var(--color-ink-brand)", textDecoration: "underline" }}>
+          <a key={`u-${i}`} href={urls[i]} target="_blank" rel="noreferrer noopener" className={"ch-color-55f463"+' '+"ch-text-decoration-36ec74"} >
             {urls[i]}
           </a>,
         ]
