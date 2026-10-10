@@ -6534,6 +6534,42 @@
     {
       "app": "shared",
       "method": "GET",
+      "path": "/api/auth/account",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "suite or identity route session",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "POST",
+      "path": "/api/auth/account/actions/:kind",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "suite or identity route session",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
+      "path": "/api/auth/account/sessions",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "suite or identity route session",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
       "path": "/api/auth/mailbox",
       "source": "lib/workspace-boundary.js",
       "authorization": {
@@ -6661,6 +6697,30 @@
         "workspaceBinding": "signed selected workspace",
         "permission": "current session or recipient",
         "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "POST",
+      "path": "/api/suite/account/actions/:kind",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
+      "path": "/api/suite/account/sessions",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
       }
     },
     {
@@ -6894,6 +6954,18 @@
     {
       "app": "shared",
       "method": "GET",
+      "path": "/api/suite/services/deliveries/:id/:deliveryId/:index/content",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
       "path": "/api/suite/services/requests",
       "source": "lib/workspace-suite.js",
       "authorization": {
@@ -6913,6 +6985,18 @@
         "workspaceBinding": "signed selected workspace",
         "permission": "current session or recipient",
         "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
+      "path": "/api/suite/services/requests/:id/files",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
       }
     },
     {
@@ -7344,6 +7428,30 @@
         "audience": "suite or identity route session",
         "workspaceBinding": "signed selected workspace",
         "permission": "current workspace administrator; owner for administrator appointment",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
+      "path": "/v1/public/careers/:workspaceId",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "suite or identity route session",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "POST",
+      "path": "/v1/public/careers/:workspaceId/jobs/:jobId/applications",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "suite or identity route session",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
         "writes": "current write capability; billing and impersonation restrictions"
       }
     },
