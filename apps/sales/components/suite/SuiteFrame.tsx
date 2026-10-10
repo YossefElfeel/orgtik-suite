@@ -22,10 +22,10 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   const context = session?.workspaceContext;
   const canAdmin = Boolean(context?.tools.crm?.canWrite && !context.actor.readOnly && (["owner", "admin"].includes(context.member.role) || context.tools.crm.roles.some(value => ["admin", "manager"].includes(value))));
   const visible = NAV_ITEMS.filter(item => !item.frozen && item.roles.includes(role) && (!item.path.startsWith("/service-") || internal) && (item.path !== "/admin" || canAdmin));
-  const at = (path: string) => path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(path + "/");
+  const at = (path: string) => path === "/" ? pathname === "/" : path === "/service-catalog" ? pathname === "/catalog" || pathname.startsWith("/catalog/") || pathname === path || pathname.startsWith(path + "/") : pathname === path || pathname.startsWith(path + "/");
   const current = visible.filter(item => at(item.path)).sort((a, b) => b.path.length - a.path.length)[0]?.path;
-  const items = visible.map(item => ({ label: tn(getNavLabel(item, role)), href: `/${locale}${item.path === "/" ? "" : item.path}`, icon: ICONS[item.path], active: item.path === current }));
-  const sections: SidebarSection[] = [{ items: items.filter((_, index) => SELL.includes(visible[index].path)) }, { label: t("sectionTeam"), items: items.filter((_, index) => !SELL.includes(visible[index].path)) }].filter(section => section.items.length);
+  const items = visible.map(item => ({ label: tn(getNavLabel(item, role)), href: `/${locale}${item.path === "/" ? "" : item.path === "/service-catalog" ? "/catalog" : item.path}`, icon: ICONS[item.path], active: item.path === current }));
+  const sections: SidebarSection[] = [{ items: items.filter((_, index) => SELL.includes(visible[index].path)) }, { label: t("sectionServices"), items: items.filter((_, index) => visible[index].path.startsWith("/service-")) }, { label: t("sectionTeam"), items: items.filter((_, index) => !SELL.includes(visible[index].path) && !visible[index].path.startsWith("/service-")) }].filter(section => section.items.length);
   const navigate = async (href: string) => {
     const session = readClientSession();
     if (!session) { window.location.assign(href); return; }

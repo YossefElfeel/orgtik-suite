@@ -1,0 +1,4 @@
+"use client";
+import { useTranslations } from "next-intl";
+import { Link, usePathname } from "@/i18n/routing";
+export default function ServiceCatalogNavigation() { const t = useTranslations("ServiceCatalog"), pathname = usePathname().replace(/^\/service-catalog/, "/catalog"); return <nav aria-label={t("catalogSections")} className="flex flex-wrap gap-2 border-b border-line pb-3">{[{ href: "/catalog", label: "title" }, { href: "/catalog/pricing", label: "pricingTitle" }, { href: "/catalog/bundles", label: "bundles" }, { href: "/catalog/publish", label: "publicationTitle" }].map(item => <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined} className={`rounded-field px-3 py-2 text-body-sm font-semibold ${pathname === item.href ? "bg-brand-subtle text-fg-brand" : "text-fg-muted hover:bg-hover"}`}>{t(item.label)}</Link>)}</nav>; }

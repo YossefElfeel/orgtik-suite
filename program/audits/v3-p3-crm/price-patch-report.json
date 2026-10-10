@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-10",
+  "checks": [
+    {
+      "name": "Price edit persists the intended CHF draft",
+      "pass": true
+    },
+    {
+      "name": "Price-only patch preserves undefined fallback metadata",
+      "pass": true
+    },
+    {
+      "name": "Published metadata remains unchanged before publishing",
+      "pass": true
+    },
+    {
+      "name": "No price patch runtime errors",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "completed": true
+}

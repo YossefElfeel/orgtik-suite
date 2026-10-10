@@ -7,3 +7,4 @@ export function offerForm(row: ServiceOffer, status: "active" | "archived"): Ser
 }
 export function bundleForm(row: ServiceBundle): ServiceBundleForm { const value = { ...row, ...row.draft }; return { name: serviceTranslations(value.name), why: serviceTranslations(value.why), ids: value.ids, recommended: value.recommended || false }; }
 export function serviceForbidden(error: unknown): boolean { return Boolean(error && typeof error === "object" && "status" in error && error.status === 403); }
+export function serviceRouteId(value: string): string { try { return decodeURIComponent(value); } catch { return value; } }
