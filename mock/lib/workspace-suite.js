@@ -81,7 +81,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     const ctx = currentContext(); connectors.requireConnection(workspace, ctx, 'marketing', 'crm');
     const data = runtimeFor('crm').suiteFeed(ctx), query = String(req.query.search || '').trim().toLocaleLowerCase();
     if (query.length > 200) throw fail(422, 'invalid_directory_query', 'Use a shorter directory search.');
-    return { workspaceId: workspace.id, managedIn: 'crm', contacts: data.contacts.filter(row => !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200).map(row => ({ workspaceId: workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
+    return { workspaceId: workspace.id, managedIn: 'crm', contacts: data.contacts.filter(row => !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200).map(row => ({ workspaceId: workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, currency: row.currency, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
   }));
   function marketingWriteContext(req, keys) {
     const ctx = currentContext();

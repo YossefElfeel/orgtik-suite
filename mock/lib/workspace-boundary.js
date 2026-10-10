@@ -127,7 +127,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const data = runtime.suiteFeed(context);
     if (selected && ids.some(id => !data.contacts.some(row => row.id === id))) throw failure(403, 'recipient_unavailable', 'A selected CRM contact is no longer visible. Review the audience.');
     const contacts = data.contacts.filter(row => selected ? ids.includes(row.id) : !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200);
-    return { workspaceId: initial.workspace.id, managedIn: 'crm', contacts: contacts.map(row => ({ workspaceId: initial.workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
+    return { workspaceId: initial.workspace.id, managedIn: 'crm', contacts: contacts.map(row => ({ workspaceId: initial.workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, currency: row.currency, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
   }
   function resolveSharedFile(value) {
     const principal = requests.getStore()?.frame.principal, workspaceId = principal?.context.workspaceContext?.workspace.id;

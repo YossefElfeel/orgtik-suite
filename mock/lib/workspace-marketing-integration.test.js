@@ -36,6 +36,7 @@ test('Marketing resolves current CRM consent and creates one native attributed p
     const leadBody = { contactId: contact.id, title: 'Actual campaign follow-up', estimate: 1500, operationId: 'marketing-lead-proof' };
     const lead = good(await call('marketing', `/api/suite/marketing/campaigns/${campaign.id}/lead`, marketing, 'POST', leadBody));
     assert.equal(lead.leadId, contact.id); assert.ok(lead.projectId); assert.equal(lead.operationId, leadBody.operationId);
+    assert.equal(lead.currency, contact.currency); assert.match(lead.currency, /^[A-Z]{3}$/);
     assert.equal(good(await call('sales', `/api/projects/${lead.projectId}`, crm)).projectName, leadBody.title);
     assert.deepEqual(good(await call('marketing', `/api/suite/marketing/campaigns/${campaign.id}/lead`, marketing, 'POST', leadBody)), lead);
     assert.equal((await call('marketing', `/api/suite/marketing/campaigns/${campaign.id}/lead`, marketing, 'POST', { ...leadBody, title: 'Changed receipt' })).status, 409);
@@ -43,6 +44,7 @@ test('Marketing resolves current CRM consent and creates one native attributed p
     assert.equal(results.filter(row => row.projectId === lead.projectId).length, 1);
     const currentResults = good(await call('marketing', `/api/suite/marketing/campaigns/${campaign.id}/results`, marketing));
     assert.equal(currentResults.deals[0].projectId, lead.projectId); assert.equal(currentResults.deals[0].estimatedValue, 1500);
+    assert.equal(currentResults.deals[0].currency, lead.currency);
     assert.equal(currentResults.currencies[0].wonValue, 0); assert.equal(currentResults.currencies[0].pipelineEstimate, 1500);
     assert.equal(JSON.stringify({ invoices: S.db.invoices, publicWebsiteOrders: S.db.publicWebsiteOrders }), monetary);
     good(await call('marketing', '/api/suite/crm/consent', marketing, 'POST', { ...consentBody, state: 'opted_out', operationId: 'marketing-optout-proof' }));
