@@ -1,0 +1,28 @@
+{
+  "scope": "Ordinary Account routes with actual authority in isolated offset500 demo. Provider settings/delivery are labeled mock; no external sending or payment claims.",
+  "mode": "services",
+  "checks": [
+    {
+      "name": "Customer delivery can be read without a Files seat",
+      "pass": true
+    },
+    {
+      "name": "Ordinary customer action downloads signed actual PDF bytes",
+      "pass": true
+    },
+    {
+      "name": "Customer projection contains signed contentPath and no asset key",
+      "pass": true
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "customer-delivery.png"
+  ],
+  "errors": [],
+  "completed": true
+}

@@ -1,0 +1,57 @@
+{
+  "scope": "Ordinary Account routes with actual authority in isolated offset500 demo. Provider settings/delivery are labeled mock; no external sending or payment claims.",
+  "mode": "catalogs",
+  "checks": [
+    {
+      "name": "de/light/1024: document fits",
+      "pass": true
+    },
+    {
+      "name": "de/light/1024: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "de/light/1024: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "fr/light/1024: document fits",
+      "pass": true
+    },
+    {
+      "name": "fr/light/1024: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "fr/light/1024: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "it/light/1024: document fits",
+      "pass": true
+    },
+    {
+      "name": "it/light/1024: direction/theme",
+      "pass": true
+    },
+    {
+      "name": "it/light/1024: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "account-de-light-1024.png",
+    "account-fr-light-1024.png",
+    "account-it-light-1024.png"
+  ],
+  "errors": [],
+  "completed": true
+}

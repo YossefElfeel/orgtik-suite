@@ -1,0 +1,45 @@
+{
+  "scope": "Ordinary Account routes with actual authority in isolated offset500 demo. Provider settings/delivery are labeled mock; no external sending or payment claims.",
+  "mode": "states",
+  "checks": [
+    {
+      "name": "Empty state comes from actual missing publications",
+      "pass": true
+    },
+    {
+      "name": "Actual 500 response renders proper component state",
+      "pass": true
+    },
+    {
+      "name": "Actual 403 response renders proper component state",
+      "pass": true
+    },
+    {
+      "name": "Actual pending account GET shows loading state",
+      "pass": true
+    },
+    {
+      "name": "Success state follows actual persisted preference action",
+      "pass": true
+    },
+    {
+      "name": "Read-only View-as disables writes with actual actor authority",
+      "pass": true
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "state-empty.png",
+    "state-error.png",
+    "state-forbidden.png",
+    "state-loading.png",
+    "state-success.png",
+    "state-read-only.png"
+  ],
+  "errors": [],
+  "completed": true
+}

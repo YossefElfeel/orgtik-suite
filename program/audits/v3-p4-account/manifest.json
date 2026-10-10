@@ -1,0 +1,337 @@
+{
+  "scope": "Ordinary Account P4 and adaptive Home",
+  "sourceCommits": [
+    "e00b489",
+    "057a9e4",
+    "90845e0",
+    "3f19548",
+    "ee438e6",
+    "f05bbf6"
+  ],
+  "validatedRevision": "f05bbf6e2a199c0b6bf66981f45898d4c9f50a54",
+  "rootContracts": [
+    "ccc8de5",
+    "aa642b4",
+    "ea824c0",
+    "3df2663",
+    "87ba0f3",
+    "4745c80",
+    "76bd23f",
+    "d47da5c",
+    "1e6035d"
+  ],
+  "baseline": "207e725 + integrated Tasks pilot1627975",
+  "prototype": {
+    "offset": 500,
+    "selection": "tasks,files,sales",
+    "web": [
+      4000,
+      4001,
+      4002,
+      4003
+    ],
+    "api": [
+      8000,
+      8001,
+      8002,
+      8003,
+      8008
+    ],
+    "run": "presentation-SNBAzK",
+    "processSession": 65828,
+    "workspaceClock": "2026-10-07T09:00:00Z",
+    "authClock": "actual"
+  },
+  "validation": {
+    "productionBuild": "pass",
+    "typecheck": "pass",
+    "catalogs": "10 groups x5 locales: pass",
+    "existingRegressions": "Account/actions, suite endpoints, team UI and mailbox UI:8 pass; earlier people journeys included13 pass"
+  },
+  "reports": [
+    {
+      "mode": "functional",
+      "checks": 37,
+      "captures": [
+        "security.png",
+        "integrations.png",
+        "audit.png",
+        "billing-contacts.png",
+        "invoice-pdf-refund.png",
+        "team.png",
+        "connections.png",
+        "usage.png",
+        "home.png",
+        "feedback.png"
+      ]
+    },
+    {
+      "mode": "lifecycle",
+      "checks": 11,
+      "captures": [
+        "first-run.png",
+        "theme-handoff-tasks.png",
+        "identity.png"
+      ]
+    },
+    {
+      "mode": "access",
+      "checks": 6,
+      "captures": [
+        "request-access.png"
+      ]
+    },
+    {
+      "mode": "services",
+      "checks": 4,
+      "captures": [
+        "customer-delivery.png"
+      ]
+    },
+    {
+      "mode": "states",
+      "checks": 7,
+      "captures": [
+        "state-empty.png",
+        "state-error.png",
+        "state-forbidden.png",
+        "state-loading.png",
+        "state-success.png",
+        "state-read-only.png"
+      ]
+    },
+    {
+      "mode": "visual",
+      "checks": 49,
+      "captures": [
+        "account-en-light-1440.png",
+        "account-en-light-390.png",
+        "account-en-light-768.png",
+        "account-en-light-1024.png",
+        "account-en-dark-1440.png",
+        "account-en-dark-390.png",
+        "account-en-dark-768.png",
+        "account-en-dark-1024.png",
+        "account-ar-light-1440.png",
+        "account-ar-light-390.png",
+        "account-ar-light-768.png",
+        "account-ar-light-1024.png",
+        "account-ar-dark-1440.png",
+        "account-ar-dark-390.png",
+        "account-ar-dark-768.png",
+        "account-ar-dark-1024.png"
+      ]
+    },
+    {
+      "mode": "catalogs",
+      "checks": 10,
+      "captures": [
+        "account-de-light-1024.png",
+        "account-fr-light-1024.png",
+        "account-it-light-1024.png"
+      ]
+    },
+    {
+      "mode": "preferences-effect",
+      "checks": 12,
+      "captures": [
+        "notifications-muted.png",
+        "home-muted.png",
+        "home.png"
+      ]
+    },
+    {
+      "mode": "workspace-gates",
+      "checks": 6,
+      "captures": [
+        "workspace-settings-gate.png",
+        "ownership-identity-gate.png"
+      ]
+    }
+  ],
+  "checks": 142,
+  "acceptedCaptures": [
+    {
+      "name": "account-ar-dark-1024.png",
+      "sha256": "1554f31a084ece414c64ec63d8365fed6dc8edb3b307bbc9c203bb2f6abc0382"
+    },
+    {
+      "name": "account-ar-dark-1440.png",
+      "sha256": "c82e31dd21965312333fbba02b51e45a7a7f7f7ccab4d24e7249bde49145b294"
+    },
+    {
+      "name": "account-ar-dark-390.png",
+      "sha256": "7adb66c04c63c98264010f792deae69b66d154603f46424287cfa6b25dad0943"
+    },
+    {
+      "name": "account-ar-dark-768.png",
+      "sha256": "6341fe0bed89326d0817c8f91029a670c0181eaa4dead1208c3cf1f127b622b5"
+    },
+    {
+      "name": "account-ar-light-1024.png",
+      "sha256": "e6e6e5992a5839f461a63a45204d8fbbe75c4d8e36170bc6a8bb2ca10c14ebc0"
+    },
+    {
+      "name": "account-ar-light-1440.png",
+      "sha256": "34c1fee37496480c2a0108f7a4f766cc44311bcb16213f892a7bd8ac41c87569"
+    },
+    {
+      "name": "account-ar-light-390.png",
+      "sha256": "3595fa11afab0a743c9051afd76e4739444942d4966f718a055c016f5330d3ea"
+    },
+    {
+      "name": "account-ar-light-768.png",
+      "sha256": "e2c55b137884d8f4ab31c71ddbfff71c2ec378ecf3de62399d85a5c6449442a2"
+    },
+    {
+      "name": "account-de-light-1024.png",
+      "sha256": "67793f6fef8970a7e03b0481097cb70a61c2b5f0284d39ab8b5f4df3eb35bbb3"
+    },
+    {
+      "name": "account-en-dark-1024.png",
+      "sha256": "9b54dc179abcffe5806313d50a1fbcd452d0da061af5e831cad5af8cb43a251b"
+    },
+    {
+      "name": "account-en-dark-1440.png",
+      "sha256": "0a365a7e141909c07382acd2e9b9e24cb8f18dd9ac954f9090c7cb210354995d"
+    },
+    {
+      "name": "account-en-dark-390.png",
+      "sha256": "2e8d72001da3f3680c9fdcc7c1e7e086cc7d6898472ee8a4b0f2a7eeb9c61096"
+    },
+    {
+      "name": "account-en-dark-768.png",
+      "sha256": "cf505b89019a2e256e76c94ede302b765410291d2c548d592ec96553ba957bf7"
+    },
+    {
+      "name": "account-en-light-1024.png",
+      "sha256": "f7bd0be8ff8ce81ac6b911e4d681c0b8f0671867e852352d0f368791ad37f104"
+    },
+    {
+      "name": "account-en-light-1440.png",
+      "sha256": "eaccc48a74a9baa017461e7052182460ebe3dbdd07f69905111e6b87274cb5e0"
+    },
+    {
+      "name": "account-en-light-390.png",
+      "sha256": "a7d3a4cca93c8db99345c7bf1fa87b0fb6e4ee80657e32ab62e300524bfef69c"
+    },
+    {
+      "name": "account-en-light-768.png",
+      "sha256": "282478c713531b1a8b2f1b722cdeff17aa07ca4c2a4b586e6b81c028aee8ef78"
+    },
+    {
+      "name": "account-fr-light-1024.png",
+      "sha256": "de07a15fcaa9feb7c601301cdea64b5a86ba42046cfd7c4fa8535b60194f4ba6"
+    },
+    {
+      "name": "account-it-light-1024.png",
+      "sha256": "4fcc850a549d1427456f7ab6886523bfbe99ad7fbfead6c72315eaf2cce10281"
+    },
+    {
+      "name": "audit.png",
+      "sha256": "7362c4d47b1325a77e43d20416b50584ff1ac93d00d1f368125b81d5e975bb13"
+    },
+    {
+      "name": "billing-contacts.png",
+      "sha256": "d6d152c89cf55c416349fe692c165a5d4cb00e764747f5d67dead0ba8b446d63"
+    },
+    {
+      "name": "connections.png",
+      "sha256": "aeb5a95edf422fb113989c8f97fb86a9c19c24c9173b13020520cc3a90d98685"
+    },
+    {
+      "name": "customer-delivery.png",
+      "sha256": "db612c5c9e4803580316384aa66afeb38617df309abf5d66226520809f07a3b1"
+    },
+    {
+      "name": "feedback.png",
+      "sha256": "d1412d5f73a6a091680d70f3015c04d76475d7b4ee5bf6b62309329cb2360ec9"
+    },
+    {
+      "name": "first-run.png",
+      "sha256": "c81395fe653310dd38815ce9e93b4d3e9be621c63cf5e9c02891130b5e5e253f"
+    },
+    {
+      "name": "home-muted.png",
+      "sha256": "e677b2e4f042c88043e1b56cfd1148a9aefd5f04ac92c28c9fdaa01b6510501d"
+    },
+    {
+      "name": "home.png",
+      "sha256": "331078bda216d62cefcc32a99a2e2b167902befc3c39d71f3db2805e7da407b0"
+    },
+    {
+      "name": "identity.png",
+      "sha256": "ad359e3e0ae94611d3e3e0a8cd1daf54c697b5b0d7c06bdef26566f1eac4eac7"
+    },
+    {
+      "name": "integrations.png",
+      "sha256": "dcb9f51095c59f1eae2afb273cb4df92aa990aea710ee7457eb5cf0edd00af52"
+    },
+    {
+      "name": "invoice-pdf-refund.png",
+      "sha256": "edc4a5517e781fb3363f9d2cb78348a84fc38a68f9c3c88a0a0d6d6a05d7cf51"
+    },
+    {
+      "name": "notifications-muted.png",
+      "sha256": "fd36972d9c43a936165d33204dae4d253bb5cb9735079194f96ec354ac52e83e"
+    },
+    {
+      "name": "ownership-identity-gate.png",
+      "sha256": "0214d3545fb2092e96578832a74c0e04c226f68c35611e8dc94a5ed187ef969b"
+    },
+    {
+      "name": "request-access.png",
+      "sha256": "25210becc57da4a686e24ec6cd74efc680095af1857933669b6110fdb084ef0b"
+    },
+    {
+      "name": "security.png",
+      "sha256": "7479f0806210db32f7f43f3099725ae7a4bdee7c1e4524856667a72098516cfe"
+    },
+    {
+      "name": "state-empty.png",
+      "sha256": "2c0ea8f6d4a05ac0b7522eb5d3be4673ee8cccf9f0127720317ef76ab1063e1b"
+    },
+    {
+      "name": "state-error.png",
+      "sha256": "ab2085040887f0ebb70997ee68a29da7d4771eaa6bddeeacfc7c4050cce84e83"
+    },
+    {
+      "name": "state-forbidden.png",
+      "sha256": "c79185501ff80fe431bcccab4d098841fe8a725100583ba50095f30254eecd32"
+    },
+    {
+      "name": "state-loading.png",
+      "sha256": "a8a2844d4e62135f5d380daabe2fbe94a9d8b85bbfd77b42473bc4300b5539f4"
+    },
+    {
+      "name": "state-read-only.png",
+      "sha256": "8a5ee3ee7e77ec76e23398dd8ea4fe37bbda7c0cd2fd1a8b947a5b1fafaa2892"
+    },
+    {
+      "name": "state-success.png",
+      "sha256": "21bb0c0fa26f7f2e4524c82cbc3a3f6cf419c59e0f94097631974029bc034086"
+    },
+    {
+      "name": "team.png",
+      "sha256": "44d3c76e8bcbe84ef8d69b980a660d904572b60339f6a56cd5d8ecb380c757eb"
+    },
+    {
+      "name": "theme-handoff-tasks.png",
+      "sha256": "4196a84f5d5d2ab0e3b71458e65e7e9c52050ee20dab716097c7692304043138"
+    },
+    {
+      "name": "usage.png",
+      "sha256": "7289c084b439719456b0e95f42770803a70921cb4e194af527b525db3c5bd421"
+    },
+    {
+      "name": "workspace-settings-gate.png",
+      "sha256": "623711098b0cbcbe259a0c01ebd378797e4e7a315eed3ade632da74a87ba704f"
+    }
+  ],
+  "capturedAt": "2026-10-10T10:27:03.189Z",
+  "limits": [
+    "Enrollment/email/SSO/API keys/webhooks/status/feedback/refund processing are explicitly mock or prototype behavior.",
+    "Actual selected workspace/person authority and session effects use root-guarded adapters.",
+    "No external sending, provider authentication change, deployment or regulatory acceptance claim."
+  ]
+}
