@@ -29,6 +29,13 @@ test('ordinary Console uses current staff authority, actual records and immutabl
     good(await call('admin', '/v1/admin/console/notifications/read', token, 'POST', { all: true }));
     assert.ok(good(await call('admin', '/v1/admin/console/notifications', token)).every(row => row.read));
     assert.deepEqual(notes.map(row => row.id), good(await call('admin', '/v1/admin/console/notifications', token)).map(row => row.id));
+    const limitedPerson = require('../../lib/identity').findByKey('u8');
+    const limitedLogin = good(await call('sos', '/api/auth/login', null, 'POST', { email: limitedPerson.email, password: 'Local@2026' }));
+    const limitedToken = good(await call('sos', '/api/auth/workspace', limitedLogin.tokens.accessToken, 'POST', { mode: 'staff', target: 'admin' })).tokens.accessToken;
+    assert.equal(good(await call('admin', '/v1/admin/console/frame', limitedToken)).staff.id, limitedPerson.id);
+    good(await call('admin', '/v1/admin/console/preferences', limitedToken, 'PATCH', { theme: 'dark' }));
+    assert.equal(good(await call('admin', '/v1/admin/console/frame', limitedToken)).preferences.theme, 'dark');
+    assert.equal((await call('admin', '/v1/admin/console/releases', limitedToken)).status, 403);
     const metrics = good(await call('admin', '/v1/admin/console/metrics', token)); assert.ok(metrics.mrrUsd >= 0); assert.equal(metrics.cohorts.reduce((sum, row) => sum + row.workspaces, 0), store.db.workspaces.filter(row => row.state !== 'deleted').length);
     assert.equal(good(await call('admin', '/v1/admin/console/ecosystem', token)).connectors.length, require('../../lib/connectors').DEFINITIONS.length);
     const catalog = good(await call('admin', '/v1/admin/console/software-catalog', token));
