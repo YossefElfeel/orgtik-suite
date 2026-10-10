@@ -2169,6 +2169,8 @@
     "assetsDeferred": "Use the packaged gallery assets. New file uploads are deferred.",
     "taskOnHold": "On hold",
     "taskCancelled": "Cancelled",
-    "taskUnavailable": "Task status unavailable"
+    "taskUnavailable": "Task status unavailable",
+    "projectSwitchFailed": "This project could not be selected. Retry with current access.",
+    "projectUnavailable": "This project is not visible with your current access."
   }
 }

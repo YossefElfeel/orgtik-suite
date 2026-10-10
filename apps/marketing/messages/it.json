@@ -2169,6 +2169,8 @@
     "assetsDeferred": "Usa i file inclusi nella galleria. Il caricamento di nuovi file è rinviato.",
     "taskOnHold": "In attesa",
     "taskCancelled": "Annullato",
-    "taskUnavailable": "Stato attività non disponibile"
+    "taskUnavailable": "Stato attività non disponibile",
+    "projectSwitchFailed": "Impossibile selezionare questo progetto. Riprova con l’accesso attuale.",
+    "projectUnavailable": "Questo progetto non è visibile con il tuo accesso attuale."
   }
 }

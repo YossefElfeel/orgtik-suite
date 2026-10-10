@@ -2169,6 +2169,8 @@
     "assetsDeferred": "Utilisez les fichiers fournis dans la galerie. Les nouveaux téléversements sont reportés.",
     "taskOnHold": "En pause",
     "taskCancelled": "Annulé",
-    "taskUnavailable": "Statut de tâche indisponible"
+    "taskUnavailable": "Statut de tâche indisponible",
+    "projectSwitchFailed": "Impossible de sélectionner ce projet. Réessayez avec votre accès actuel.",
+    "projectUnavailable": "Ce projet n’est pas visible avec votre accès actuel."
   }
 }

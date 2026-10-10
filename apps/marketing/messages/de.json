@@ -2169,6 +2169,8 @@
     "assetsDeferred": "Verwenden Sie die mitgelieferten Galerie-Dateien. Neue Uploads sind zurückgestellt.",
     "taskOnHold": "Zurückgestellt",
     "taskCancelled": "Abgebrochen",
-    "taskUnavailable": "Aufgabenstatus nicht verfügbar"
+    "taskUnavailable": "Aufgabenstatus nicht verfügbar",
+    "projectSwitchFailed": "Dieses Projekt konnte nicht ausgewählt werden. Versuchen Sie es mit aktuellem Zugriff erneut.",
+    "projectUnavailable": "Dieses Projekt ist mit Ihrem aktuellen Zugriff nicht sichtbar."
   }
 }
