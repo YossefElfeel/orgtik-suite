@@ -337,6 +337,18 @@ module.exports = function crmV3(S) {
       !COUNTRIES.some((row) => row.code === body.countryCode)
     )
       throw fail(422, "invalid_country", "Choose a supported country.");
+    if (
+      body.value !== undefined &&
+      (typeof body.value !== "number" ||
+        !Number.isFinite(body.value) ||
+        body.value < 0 ||
+        body.value > 1e9)
+    )
+      throw fail(
+        422,
+        "invalid_value",
+        "Use a valid nonnegative forecast value.",
+      );
     const email = text(body.email, 200).toLocaleLowerCase();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
       throw fail(422, "invalid_email", "Enter a valid email.");

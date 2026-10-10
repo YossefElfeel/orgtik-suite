@@ -60,6 +60,7 @@ export default function DealPlansStep({ form, catalog, currency, lockedReason }:
       <p className="text-body text-fg-muted">
         {catalog.zoneName && currency ? t("pricesFor", { zone: isolate(catalog.zoneName), currency }) : t("pricesForCurrency", { currency })}
       </p>
+      <p role="note" className="text-body-sm text-fg-muted">{t("compatibilityCatalog")}</p>
       {lockedReason ? (
         <p role="note" className="flex items-start gap-2 rounded-field bg-sunken px-3 py-2 text-body-sm text-fg">
           <WarningCircle aria-hidden className="mt-0.5 size-4 shrink-0 text-fg-muted" />

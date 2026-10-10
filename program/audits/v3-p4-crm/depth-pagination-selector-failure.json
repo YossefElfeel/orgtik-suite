@@ -1,0 +1,14 @@
+{
+  "scope": "CRM P4 retained business, actual paid service, packaged delivery and workspace handoff",
+  "checks": [
+    {
+      "name": "Functional fixture is an actual persisted contact",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "depth-failure.png"
+  ],
+  "errors": [],
+  "failure": "locator.check: Timeout 120000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('row').filter({ hasText: 'CRM QA, Prospect' }).getByRole('checkbox')\u001b[22m\n"
+}

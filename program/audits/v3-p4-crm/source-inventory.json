@@ -1,0 +1,26 @@
+{
+  "rootCount": 58,
+  "fileCount": 392,
+  "liveCount": 322,
+  "liveKit": [],
+  "removable": [
+    "app/[locale]/(dashboard)/customers/columns.tsx",
+    "components/dialogs/projects/AddPlanDialog/PlanOptionSelect/index.tsx",
+    "components/dialogs/projects/PlanFeaturesDialog/index.tsx",
+    "components/dialogs/shared/DeleteDialog/index.tsx",
+    "components/dialogs/shared/ReusableDialog/index.tsx",
+    "components/layout/DashboardHeader/NotificationPopover/index.tsx",
+    "components/pages/customers/CustomerManagement/index.tsx",
+    "components/pages/customers/CustomerRowActions/index.tsx",
+    "components/pages/customers/LeadCard/index.tsx",
+    "components/pages/customers/LeadToolbar/index.tsx",
+    "components/pages/customers/useLeadInbox.ts",
+    "components/shared/CurrencyAmount/index.tsx",
+    "components/shared/LocalizedLanguageTabs/index.tsx",
+    "components/shared/PriceDisplay/index.tsx",
+    "components/shared/SectionCard/index.tsx",
+    "components/shared/Skeleton/index.tsx",
+    "components/shared/ZoneMoneyStack/index.tsx"
+  ],
+  "unusedKit": []
+}

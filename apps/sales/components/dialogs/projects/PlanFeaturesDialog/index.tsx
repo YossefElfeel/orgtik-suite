@@ -1,13 +1,13 @@
 "use client";
 
-import { CheckIcon } from "lucide-react";
+import { Check as CheckIcon } from "@phosphor-icons/react";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@orgtik/ui";
 import type { PlanCardItem } from "@/types/plans";
 import { useTranslations } from "next-intl";
 
@@ -26,7 +26,7 @@ export default function PlanFeaturesDialog({ plan, open, onOpenChange }: Props) 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent nested className="gap-0 overflow-hidden p-0 sm:max-w-md">
+      <DialogContent className="gap-0 overflow-hidden p-0 sm:max-w-md">
         <div className="px-5 pt-5 pb-2">
           <DialogHeader className="gap-0 p-0 text-left">
             <DialogTitle className="text-2xl font-semibold">
@@ -46,7 +46,7 @@ export default function PlanFeaturesDialog({ plan, open, onOpenChange }: Props) 
                 className="flex items-center gap-3 text-base text-secondary"
               >
                 <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-sm border border-secondary text-secondary">
-                  <CheckIcon className="size-3" strokeWidth={3} />
+                  <CheckIcon className="size-3" weight="bold" />
                 </span>
                 <span>{feature}</span>
               </li>

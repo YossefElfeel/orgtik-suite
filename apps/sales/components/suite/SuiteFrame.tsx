@@ -12,9 +12,10 @@ import { logoutUser } from "@/redux/features/auth/authSlice";
 import { useRole } from "@/hooks/useRole";
 import { NAV_ITEMS } from "@/lib/navigation";
 import { canAccessRoute, getNavLabel } from "@/lib/role-access";
+import CrmScopeGate from "@/providers/CrmScopeGate";
 
-const ICONS: Record<string, ReactNode> = { "/": <SquaresFour />, "/customers": <UsersThree />, "/customers/pipeline": <Kanban />, "/offers": <FileText />, "/projects": <Briefcase />, "/salesman": <IdentificationBadge />, "/commissions": <Wallet />, "/loyalty": <CrownSimple />, "/activity-feed": <Pulse />, "/archive": <Archive />, "/user-management": <UserGear />, "/service-catalog": <Storefront />, "/service-requests": <Truck />, "/admin": <GearSix /> };
-const SELL = ["/", "/customers", "/customers/pipeline", "/offers", "/projects"];
+const ICONS: Record<string, ReactNode> = { "/companies": <Briefcase />, "/reports": <Pulse />, "/projects/pipeline": <Kanban />, "/": <SquaresFour />, "/customers": <UsersThree />, "/customers/pipeline": <Kanban />, "/offers": <FileText />, "/projects": <Briefcase />, "/salesman": <IdentificationBadge />, "/commissions": <Wallet />, "/loyalty": <CrownSimple />, "/activity-feed": <Pulse />, "/archive": <Archive />, "/user-management": <UserGear />, "/service-catalog": <Storefront />, "/service-requests": <Truck />, "/admin": <GearSix /> };
+const SELL = ["/", "/customers", "/customers/pipeline", "/offers", "/projects", "/projects/pipeline", "/companies", "/reports"];
 export function SuiteFrame({ children }: { children: ReactNode }) {
   const t = useTranslations("Shell"), tn = useTranslations("nav"), ts = useTranslations("Suite"), te = useTranslations("Errors"), locale = useLocale(), pathname = usePathname(), router = useRouter(), dispatch = useAppDispatch(), token = useAppSelector(state => state.auth.token), { role, user, fullName } = useRole(), { logout } = useLogout(token ?? ""), [navigationError, setNavigationError] = useState(false);
   const session = useClientSession();
@@ -41,6 +42,6 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
     demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "sales", onLocaleChange: next => router.replace(pathname, { locale: next }) }}
     sidebar={<Sidebar title={ts("appName")} sections={sections} />}
     userMenu={user ? <UserMenu name={fullName || ""} email={String(user.email || "")} avatarSrc={typeof user.avatar === "string" ? user.avatar : undefined} locales={routing.locales as readonly Locale[]} onLocaleChange={next => router.replace(pathname, { locale: next })} onSignOut={signOut}><MenuLinkItem href={`/${locale}/profile`} icon={<UserCircle />}>{t("profile")}</MenuLinkItem></UserMenu> : null}>
-    {navigationError ? <p role="alert" className="mb-4 text-body-sm text-danger">{te("handoffUnavailable")}</p> : null}{canAccessRoute(role, pathname) ? children : <NoPermissionState titleAs="h1" title={te("noAccessTitle")} description={te("noAccessBody")} />}
+    {navigationError ? <p role="alert" className="mb-4 text-body-sm text-danger">{te("handoffUnavailable")}</p> : null}<CrmScopeGate>{canAccessRoute(role, pathname) ? children : <NoPermissionState titleAs="h1" title={te("noAccessTitle")} description={te("noAccessBody")} />}</CrmScopeGate>
   </SharedSuiteFrame>;
 }

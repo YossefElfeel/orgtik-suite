@@ -1,0 +1,79 @@
+{
+  "CrmV3.marketingConsent": {
+    "en": "Marketing consent",
+    "ar": "موافقة التسويق",
+    "de": "Marketingeinwilligung",
+    "fr": "Consentement marketing",
+    "it": "Consenso marketing"
+  },
+  "CrmV3.consentStates.unknown": {
+    "en": "Unknown · suppress marketing",
+    "ar": "غير معروف · استبعاد التسويق",
+    "de": "Unbekannt · Marketing unterdrücken",
+    "fr": "Inconnu · exclure du marketing",
+    "it": "Sconosciuto · escludi dal marketing"
+  },
+  "CrmV3.consentStates.opted_in": {
+    "en": "Opted in · manual mock record",
+    "ar": "موافق · تسجيل تجريبي يدوي",
+    "de": "Zugestimmt · manueller Mock-Eintrag",
+    "fr": "Accepté · fiche manuelle simulée",
+    "it": "Accettato · record manuale simulato"
+  },
+  "CrmV3.consentStates.opted_out": {
+    "en": "Opted out · suppress marketing",
+    "ar": "رفض · استبعاد التسويق",
+    "de": "Abgelehnt · Marketing unterdrücken",
+    "fr": "Refusé · exclure du marketing",
+    "it": "Rifiutato · escludi dal marketing"
+  },
+  "CrmV3.consentHint": {
+    "en": "Record the customer's explicit choice. This is manual mock metadata; unknown or opted-out contacts stay out of marketing audiences.",
+    "ar": "سجل اختيار العميل الصريح. هذه بيانات تجريبية يدوية؛ تُستبعد الحالات غير المعروفة والرافضة من جماهير التسويق.",
+    "de": "Die ausdrückliche Wahl des Kunden als manuelle Mock-Metadaten erfassen. Unbekannte und ablehnende Kontakte bleiben ausgeschlossen.",
+    "fr": "Consignez le choix explicite du client comme donnée simulée manuelle. Les contacts inconnus ou opposés sont exclus des audiences.",
+    "it": "Registra la scelta esplicita del cliente come dato manuale simulato. Contatti sconosciuti o contrari esclusi dai destinatari."
+  },
+  "CrmV3.consentRecorded": {
+    "en": "Manual mock record · {date}",
+    "ar": "تسجيل تجريبي يدوي · {date}",
+    "de": "Manueller Mock-Eintrag · {date}",
+    "fr": "Fiche manuelle simulée · {date}",
+    "it": "Record manuale simulato · {date}"
+  },
+  "CrmV3.activities.created": {
+    "en": "Contact created",
+    "ar": "تم إنشاء جهة اتصال",
+    "de": "Kontakt erstellt",
+    "fr": "Contact créé",
+    "it": "Contatto creato"
+  },
+  "CrmV3.activities.stage": {
+    "en": "Stage changed",
+    "ar": "تغيرت المرحلة",
+    "de": "Phase geändert",
+    "fr": "Étape modifiée",
+    "it": "Fase modificata"
+  },
+  "CrmV3.activities.routing": {
+    "en": "Owner routed",
+    "ar": "تم توجيه المسؤول",
+    "de": "Verantwortlicher zugewiesen",
+    "fr": "Responsable attribué",
+    "it": "Responsabile assegnato"
+  },
+  "CrmV3.activities.merge": {
+    "en": "Duplicate merged",
+    "ar": "تم دمج المكرر",
+    "de": "Duplikat zusammengeführt",
+    "fr": "Doublon fusionné",
+    "it": "Duplicato unito"
+  },
+  "CrmV3.activities.consent": {
+    "en": "Consent recorded",
+    "ar": "تم تسجيل الموافقة",
+    "de": "Einwilligung erfasst",
+    "fr": "Consentement enregistré",
+    "it": "Consenso registrato"
+  }
+}
