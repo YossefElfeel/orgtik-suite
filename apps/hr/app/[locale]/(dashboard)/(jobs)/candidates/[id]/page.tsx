@@ -2,14 +2,14 @@
 import { Envelope as Mail } from "@phosphor-icons/react";
 
 import { useState } from "react";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@orgtik/ui";
 import { AboutSection } from "@/components/pages/candidates/details/PersonalInfo/AboutSection";
 import { PersonalInfoSection } from "@/components/pages/candidates/details/PersonalInfo";
 import { EducationSection } from "@/components/pages/candidates/details/PersonalInfo/EducationSection";
 import { JobApplicationSection } from "@/components/pages/candidates/details/PersonalInfo/JobApplicationSection";
 import { CandidateSkillsSection } from "@/components/pages/candidates/details/PersonalInfo/CandidateSkillsSection";
 import { CandidateSidebar } from "@/components/pages/candidates/details/CandidateSidebar";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import { TabMenu } from "@/components/shared/TabMenu";
 import { ResumeSection } from "@/components/pages/candidates/details/Resume";
 import HiringSteps from "@/components/pages/candidates/details/HiringSteps";

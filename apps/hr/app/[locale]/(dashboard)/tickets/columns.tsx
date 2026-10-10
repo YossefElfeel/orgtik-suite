@@ -4,7 +4,7 @@ import { Eye, Trash as Trash2 } from "@phosphor-icons/react";
 import { ColumnDef } from "@tanstack/react-table";
 import { IconButton } from "@/components/shared/IconButton";
 import CustomAvatar from "@/components/shared/CustomAvatar";
-import StatusBadge, { TaskStatus } from "@/components/shared/StatusBadge";
+import StatusBadge, { TaskStatus } from "@/components/bindings/EmploymentStatus";
 import { useTranslations } from "next-intl";
 import { ITicket } from "@/types/ticket";
 import { formatDate } from "@/utils/formateDate";
@@ -85,7 +85,7 @@ export const useColumns = ({
           <div className="flex items-center gap-2">
             <IconButton
               label={t("tooltips.viewDetails")}
-              variant="outline-view"
+              variant="secondary"
               href={`/tickets/${row.original.id}`}
             >
               <Eye className="size-4" />
@@ -98,7 +98,7 @@ export const useColumns = ({
               onConfirm={() => deleteTicket(row.original.id).unwrap()}
               loading={isDeleting}
               trigger={
-                <IconButton label={t("tooltips.deleteTicket")} variant="outline-delete">
+                <IconButton label={t("tooltips.deleteTicket")} variant="secondary">
                   <Trash2 className="h-4 w-4" />
                 </IconButton>
               }
@@ -158,7 +158,7 @@ export const useColumns = ({
       cell: ({ row }) => (
         <IconButton
           label={t("tooltips.viewDetails")}
-          variant="outline-view"
+          variant="secondary"
           href={`/tickets/${row.original.id}`}
         >
           <Eye className="size-4" />

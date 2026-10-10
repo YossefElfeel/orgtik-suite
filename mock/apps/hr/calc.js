@@ -6,7 +6,7 @@ module.exports = function makeCalc(db, V) {
   let index = null;
   C.reindex = () => {
     index = new Map();
-    for (const s of db.sessions) {
+    for (const s of db.sessions.filter(row => !row.supersededBy)) {
       const k = `${s.employeeId}|${s.date}`;
       if (!index.has(k)) index.set(k, []);
       index.get(k).push(s);
@@ -15,9 +15,9 @@ module.exports = function makeCalc(db, V) {
   C.sessionsOn = (empId, date) => { if (!index) C.reindex(); return index.get(`${empId}|${date}`) || []; };
 
   C.schedule = () => db.settings.attendance.schedule;
-  C.holidayOn = (date) => db.holidays().find((h) => h.date === date) || null;
+  C.holidayOn = (date, employee) => db.holidays(employee).find((h) => h.date === date) || null;
   C.isScheduleDay = (date) => (C.schedule().workingDays || []).map(Number).includes(L.isoWeekday(date));
-  C.isWorkingDay = (date) => C.isScheduleDay(date) && !C.holidayOn(date);
+  C.isWorkingDay = (date, employee) => C.isScheduleDay(date) && !C.holidayOn(date, employee);
   C.dayHours = (e) => (e.employeeType === "part_time" ? 4.5 : 8);
 
   // Working days an employee is expected to attend (excludes full-day approved leave).
@@ -26,7 +26,7 @@ module.exports = function makeCalc(db, V) {
     const end = to < today ? to : today;
     const start = e.joinDate > from ? e.joinDate : from;
     return L.dateRange(start, end).filter((d) => {
-      if (!C.isWorkingDay(d)) return false;
+      if (!C.isWorkingDay(d, e)) return false;
       const leave = db.approvedLeaveOn(e.id, d);
       return !(leave && leave.durationType === "full_day");
     });
@@ -124,9 +124,10 @@ module.exports = function makeCalc(db, V) {
       const weekend = !C.isScheduleDay(d);
       for (const e of emps) {
         if (d < e.joinDate) continue;
+        const employeeHoliday = C.holidayOn(d, e);
         const leave = db.approvedLeaveOn(e.id, d);
         let type = null, label = null, sourceType = null, sourceId = null;
-        if (hol && !weekend) { type = "public_holiday"; label = `${TYPE_LABEL.public_holiday} - ${hol.name}`; sourceType = "calendar"; sourceId = `holiday-${d}`; }
+        if (employeeHoliday && !weekend) { type = "public_holiday"; label = `${TYPE_LABEL.public_holiday} - ${employeeHoliday.name}`; sourceType = "calendar"; sourceId = `holiday-${d}`; }
         else if (weekend) { type = "weekend"; label = TYPE_LABEL.weekend; sourceType = "schedule"; }
         else if (leave && leave.durationType === "full_day") { type = "approved_leave"; label = `${TYPE_LABEL.approved_leave} - ${L.labelize(leave.timeOffType)}`; sourceType = "time_off_request"; sourceId = leave.id; }
         if (!type) continue;
@@ -143,7 +144,7 @@ module.exports = function makeCalc(db, V) {
     const out = [];
     for (const d of L.dateRange(e.joinDate > from ? e.joinDate : from, to < today ? to : today).reverse()) {
       const ss = C.sessionsOn(e.id, d);
-      const working = C.isWorkingDay(d);
+      const working = C.isWorkingDay(d, e);
       const leave = db.approvedLeaveOn(e.id, d);
       if (!ss.length && !working) continue;
       const dur = ss.reduce((a, s) => a + s.durationSeconds, 0);
@@ -162,9 +163,10 @@ module.exports = function makeCalc(db, V) {
   C.workDaysOf = (t) => {
     if (t.durationType === "half_day") return 0.5;
     if (t.durationType === "partial" || t.durationType === "custom_hours" || t.durationType === "partial_day") return L.round2((t.totalDurationMinutes || 0) / 60 / 8);
-    const n = L.dateRange(t.startDate, t.endDate).filter((d) => C.isWorkingDay(d)).length;
+    const n = L.dateRange(t.startDate, t.endDate).filter((d) => C.isWorkingDay(d, V.empAny(t.employeeId))).length;
     return n || 1;
   };
+  C.policyAllocation = (e) => {const p=db.settings.leavePolicy;if(!p)return null;const today=L.todayStr(),year=today.slice(0,4),start=e.joinDate>year+'-01-01'?e.joinDate:year+'-01-01',months=Math.max(0,Number(today.slice(5,7))-Number(start.slice(5,7))+(today.slice(8)>=start.slice(8)?1:0));return L.round2((p.accrual==='monthly'?p.annual*Math.min(12,months)/12:start<=today?p.annual:0)+p.carry);};
   C.leaveSummary = (e) => {
     const year = L.todayStr().slice(0, 4);
     const today = L.todayStr();
@@ -172,13 +174,13 @@ module.exports = function makeCalc(db, V) {
     const paidTypes = ["annual_leave", "vacation_day", "personal_leave"];
     const sum = (list) => L.round2(list.reduce((s, t) => s + C.workDaysOf(t), 0));
     const d = V.daysOffInfo(e);
-    const allocation = d.annualLeave + d.casualLeave + d.contractAdds;
+    const allocation = (C.policyAllocation(e) ?? d.annualLeave) + d.casualLeave + d.contractAdds;
     const approvedPaid = mine.filter((t) => t.status === "approved" && paidTypes.includes(t.timeOffType));
     const used = sum(approvedPaid.filter((t) => t.startDate <= today));
     const booked = sum(approvedPaid.filter((t) => t.startDate > today));
     const pending = sum(mine.filter((t) => t.status === "pending"));
     const available = L.round2(Math.max(0, allocation - used - booked));
-    const holidays = db.holidays().filter((h) => h.date.startsWith(year)).length;
+    const holidays = db.holidays(e).filter((h) => h.date.startsWith(year)).length;
     return {
       paidTimeOffDays: allocation, pendingApprovalDays: pending, bookedDays: booked, availableToBookDays: available, awaitingApprovalDays: mine.filter((t) => t.status === "pending").length,
       usedDays: used, contractDaysPerYear: d.totalDaysOff, nationalHolidaysDays: holidays, inContractDays: d.contractAdds + d.annualLeave,
@@ -191,7 +193,7 @@ module.exports = function makeCalc(db, V) {
     const used = (types) => L.round2(mine.filter((t) => types.includes(t.timeOffType)).reduce((s, t) => s + C.workDaysOf(t), 0));
     const row = (timeOffType, allocatedDays, types) => { const u = used(types); return { timeOffType, allocatedDays, usedDays: u, remainingDays: L.round2(Math.max(0, allocatedDays - u)) }; };
     return [
-      row("annual_leave", d.annualLeave + d.contractAdds, ["annual_leave", "vacation_day"]),
+      row("annual_leave", (C.policyAllocation(e) ?? d.annualLeave) + d.contractAdds, ["annual_leave", "vacation_day"]),
       row("personal_leave", d.casualLeave, ["personal_leave"]),
       row("sick_leave", d.sickLeave, ["sick_leave", "medical_appointment"]),
       row("unpaid_leave", d.unpaidLeavePolicy === "allowed" ? 30 : 0, ["unpaid_leave"]),

@@ -1,5 +1,5 @@
 "use client";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import AddTimeDialog from "@/components/pages/attendance/AddTimeDialog";
 import AttendanceCard from "@/components/pages/attendance/AttendanceCard/Attendance";
 import AttendanceTable from "@/components/pages/attendance/AttendanceTable";

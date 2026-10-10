@@ -1,6 +1,6 @@
 "use client";
 
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import AddTimeDialog from "@/components/pages/attendance/AddTimeDialog";
 import { ScheduleMeetingDialog } from "@/components/pages/time-off/ScheduleMeetingDialog";
 import { RoleGuard } from "@/components/shared/RoleGuard";

@@ -1,12 +1,12 @@
 "use client";
 import { MagnifyingGlass as Search } from "@phosphor-icons/react";
 
-import { Input } from "@/components/ui/input";
+import { Input } from "@orgtik/ui";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { IFilterFunctions, ISearchFunctions } from "../Table/type";
+import { IFilterFunctions, ISearchFunctions } from "@/types/resource-table";
 import { Filter } from "./Filter";
 
 interface ToolbarSearchAndFilterProps {

@@ -8,8 +8,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@orgtik/ui";
+import { Checkbox } from "@orgtik/ui";
 import { useFormatter, useTranslations } from "next-intl";
 import { useFormContext } from "react-hook-form";
 import { DateTimeFormElement } from "@/components/ui/form/date-time-form-element";

@@ -1,0 +1,3 @@
+import {z} from 'zod';
+import type {HrFieldSpec} from '@/types/workspace';
+export const hrActionSchema=(fields:HrFieldSpec[],required:string)=>z.record(z.string(),z.string()).superRefine((values,ctx)=>{for(const field of fields){const value=values[field.key]?.trim();if(!field.optional&&!value)ctx.addIssue({code:'custom',path:[field.key],message:required});if(value&&field.type==='number'&&!Number.isFinite(Number(value)))ctx.addIssue({code:'custom',path:[field.key],message:required});if(value&&field.type==='email'&&!z.email().safeParse(value).success)ctx.addIssue({code:'custom',path:[field.key],message:required});}});

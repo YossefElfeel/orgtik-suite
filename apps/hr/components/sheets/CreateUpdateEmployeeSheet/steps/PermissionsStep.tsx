@@ -5,9 +5,9 @@ import { useForm, useWatch } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
-import { Switch } from "@/components/ui/switch";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
+import { Switch } from "@orgtik/ui";
+import { Checkbox } from "@orgtik/ui";
+import { Button } from "@orgtik/ui";
 import { useEmployeeWizard } from "../EmployeeWizardContext";
 import { useSearchParams } from "next/navigation";
 import { onFormErrorDisplay } from "@/lib/form-error-toast";
@@ -16,7 +16,7 @@ import { permissionsSchema, type PermissionsFormValues } from "../schemas";
 import { toast } from "sonner";
 import { SUITE_APP_ICONS } from "@/constants/suite-icons";
 
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@orgtik/ui";
 import { IOnboardingStepDTO } from "@/types/employee";
 import { useUpdateOnboardingStepMutation, useGetEmployeeQuery } from "@/redux/features/employee/employeeApi";
 import { useReqWithToaster } from "@/hooks/useReqWithToaster";
@@ -283,7 +283,7 @@ export function PermissionsStep() {
             className="min-w-32"
             type="button"
             size="lg"
-            variant="outline"
+            variant="secondary"
             onClick={onBack} disabled={isLoading}
           >
             {t("nav.back")}

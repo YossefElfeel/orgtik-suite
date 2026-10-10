@@ -1,0 +1,56 @@
+▲ Next.js 16.3.5 (Turbopack)
+✓ Running next.config.ts took 143ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 3.6s
+  Running TypeScript ...
+  Finished TypeScript in 7.6s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/3) ...
+✓ Generating static pages using 11 workers (3/3) in 191ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /_not-found
+├ ƒ /[locale]
+├ ƒ /[locale]/[...rest]
+├ ƒ /[locale]/admin/[[...section]]
+├ ƒ /[locale]/attendance
+├ ƒ /[locale]/auth
+├ ƒ /[locale]/auth/not-allowed
+├ ƒ /[locale]/calendar
+├ ƒ /[locale]/calendar/leave-balances
+├ ƒ /[locale]/candidates
+├ ƒ /[locale]/candidates/[id]
+├ ƒ /[locale]/careers
+├ ƒ /[locale]/configuration
+├ ƒ /[locale]/department
+├ ƒ /[locale]/department/[id]
+├ ƒ /[locale]/employees
+├ ƒ /[locale]/employees/[id]
+├ ƒ /[locale]/employees/org-chart
+├ ƒ /[locale]/finance-queue
+├ ƒ /[locale]/finance-queue/[id]
+├ ƒ /[locale]/hiring/jobs
+├ ƒ /[locale]/hiring/overall
+├ ƒ /[locale]/hiring/overall/[openingId]
+├ ƒ /[locale]/jobs/[workspaceId]
+├ ƒ /[locale]/loans
+├ ƒ /[locale]/my-payslips
+├ ƒ /[locale]/payroll
+├ ƒ /[locale]/payroll/[id]
+├ ƒ /[locale]/payroll/loans/[id]
+├ ƒ /[locale]/people/[view]
+├ ƒ /[locale]/presentation
+├ ƒ /[locale]/projects
+├ ƒ /[locale]/rejected
+├ ƒ /[locale]/subscriptions
+├ ƒ /[locale]/tickets
+├ ƒ /[locale]/tickets/[id]
+└ ƒ /[locale]/time-off
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand

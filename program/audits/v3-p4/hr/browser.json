@@ -1,0 +1,1386 @@
+{
+  "scope": "Ordinary HR pages on owned memory demo",
+  "checks": [
+    {
+      "name": "en/light/1440/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Shared policy sheet uses real fields",
+      "pass": true
+    },
+    {
+      "name": "Save closes sheet and confirms persistence",
+      "pass": true
+    },
+    {
+      "name": "Saved policy survives browser reload",
+      "pass": true
+    },
+    {
+      "name": "CSV import maps real columns",
+      "pass": true
+    },
+    {
+      "name": "CSV review precedes apply",
+      "pass": true
+    },
+    {
+      "name": "CSV apply shows committed owner-record outcome",
+      "pass": true
+    },
+    {
+      "name": "Ordinary eight-section admin is reachable",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/390/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/390/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/390/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/390/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/390/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/390/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/768/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/768/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/768/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/768/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/768/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/768/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/768/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1024/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1024/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1024/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1024/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1024/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1024/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1024/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1440/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1440/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1440/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1440/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1440/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1440/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1440/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/390/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/390/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/390/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/390/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/390/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/390/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/390/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/768/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/768/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/768/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/768/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/768/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/768/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/768/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1024/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1024/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1024/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1024/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1024/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/dark/1024/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/dark/1024/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1440/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1440/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1440/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1440/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1440/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1440/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1440/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/390/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/390/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/390/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/390/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/390/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/390/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/390/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/768/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/768/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/768/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/768/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/768/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/768/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/768/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1024/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1024/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1024/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1024/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1024/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/light/1024/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/light/1024/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1440/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1440/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1440/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1440/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1440/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1440/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1440/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/390/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/390/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/390/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/390/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/390/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/390/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/390/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/768/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/768/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/768/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/768/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/768/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/768/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/768/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1024/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1024/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1024/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1024/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1024/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar/dark/1024/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/dark/1024/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "No runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "hr-policies-en-light-1440.png",
+    "hr-directory-en-light-1440.png",
+    "hr-profile-en-light-1440.png",
+    "hr-onboarding-en-light-1440.png",
+    "hr-performance-en-light-1440.png",
+    "hr-recruiting-en-light-1440.png",
+    "hr-policies-en-light-390.png",
+    "hr-directory-en-light-390.png",
+    "hr-profile-en-light-390.png",
+    "hr-onboarding-en-light-390.png",
+    "hr-performance-en-light-390.png",
+    "hr-recruiting-en-light-390.png",
+    "hr-policies-en-light-768.png",
+    "hr-directory-en-light-768.png",
+    "hr-profile-en-light-768.png",
+    "hr-onboarding-en-light-768.png",
+    "hr-performance-en-light-768.png",
+    "hr-recruiting-en-light-768.png",
+    "hr-policies-en-light-1024.png",
+    "hr-directory-en-light-1024.png",
+    "hr-profile-en-light-1024.png",
+    "hr-onboarding-en-light-1024.png",
+    "hr-performance-en-light-1024.png",
+    "hr-recruiting-en-light-1024.png",
+    "hr-policies-en-dark-1440.png",
+    "hr-directory-en-dark-1440.png",
+    "hr-profile-en-dark-1440.png",
+    "hr-onboarding-en-dark-1440.png",
+    "hr-performance-en-dark-1440.png",
+    "hr-recruiting-en-dark-1440.png",
+    "hr-policies-en-dark-390.png",
+    "hr-directory-en-dark-390.png",
+    "hr-profile-en-dark-390.png",
+    "hr-onboarding-en-dark-390.png",
+    "hr-performance-en-dark-390.png",
+    "hr-recruiting-en-dark-390.png",
+    "hr-policies-en-dark-768.png",
+    "hr-directory-en-dark-768.png",
+    "hr-profile-en-dark-768.png",
+    "hr-onboarding-en-dark-768.png",
+    "hr-performance-en-dark-768.png",
+    "hr-recruiting-en-dark-768.png",
+    "hr-policies-en-dark-1024.png",
+    "hr-directory-en-dark-1024.png",
+    "hr-profile-en-dark-1024.png",
+    "hr-onboarding-en-dark-1024.png",
+    "hr-performance-en-dark-1024.png",
+    "hr-recruiting-en-dark-1024.png",
+    "hr-policies-ar-light-1440.png",
+    "hr-directory-ar-light-1440.png",
+    "hr-profile-ar-light-1440.png",
+    "hr-onboarding-ar-light-1440.png",
+    "hr-performance-ar-light-1440.png",
+    "hr-recruiting-ar-light-1440.png",
+    "hr-policies-ar-light-390.png",
+    "hr-directory-ar-light-390.png",
+    "hr-profile-ar-light-390.png",
+    "hr-onboarding-ar-light-390.png",
+    "hr-performance-ar-light-390.png",
+    "hr-recruiting-ar-light-390.png",
+    "hr-policies-ar-light-768.png",
+    "hr-directory-ar-light-768.png",
+    "hr-profile-ar-light-768.png",
+    "hr-onboarding-ar-light-768.png",
+    "hr-performance-ar-light-768.png",
+    "hr-recruiting-ar-light-768.png",
+    "hr-policies-ar-light-1024.png",
+    "hr-directory-ar-light-1024.png",
+    "hr-profile-ar-light-1024.png",
+    "hr-onboarding-ar-light-1024.png",
+    "hr-performance-ar-light-1024.png",
+    "hr-recruiting-ar-light-1024.png",
+    "hr-policies-ar-dark-1440.png",
+    "hr-directory-ar-dark-1440.png",
+    "hr-profile-ar-dark-1440.png",
+    "hr-onboarding-ar-dark-1440.png",
+    "hr-performance-ar-dark-1440.png",
+    "hr-recruiting-ar-dark-1440.png",
+    "hr-policies-ar-dark-390.png",
+    "hr-directory-ar-dark-390.png",
+    "hr-profile-ar-dark-390.png",
+    "hr-onboarding-ar-dark-390.png",
+    "hr-performance-ar-dark-390.png",
+    "hr-recruiting-ar-dark-390.png",
+    "hr-policies-ar-dark-768.png",
+    "hr-directory-ar-dark-768.png",
+    "hr-profile-ar-dark-768.png",
+    "hr-onboarding-ar-dark-768.png",
+    "hr-performance-ar-dark-768.png",
+    "hr-recruiting-ar-dark-768.png",
+    "hr-policies-ar-dark-1024.png",
+    "hr-directory-ar-dark-1024.png",
+    "hr-profile-ar-dark-1024.png",
+    "hr-onboarding-ar-dark-1024.png",
+    "hr-performance-ar-dark-1024.png",
+    "hr-recruiting-ar-dark-1024.png"
+  ],
+  "errors": [],
+  "completed": true
+}

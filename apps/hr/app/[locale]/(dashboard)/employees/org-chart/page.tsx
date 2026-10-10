@@ -4,10 +4,10 @@ import { CircleNotch as Loader2, DownloadSimple as Download, MagnifyingGlass as 
 import React, { useState } from "react";
 
 import { OrgChart } from "@/components/shared/OrgChart";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import { MenuTabItem, TabMenu } from "@/components/shared/TabMenu";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@orgtik/ui";
+import { Button } from "@orgtik/ui";
 import { useGetOrgChartQuery } from "@/redux/features/employee/employeeApi";
 import { useTranslations } from "next-intl";
 
@@ -59,7 +59,7 @@ export default function OrgChartRoute() {
         </div>
 
         {/* <Button
-          variant="outline"
+          variant="secondary"
           className="h-8 gap-1.5 rounded-lg border-line bg-raised px-3 text-xs font-medium text-fg-muted shadow-[0px_1px_2px_0px_rgba(9,25,72,0.06)] hover:bg-raised"
         >
           Edit ORG Chart

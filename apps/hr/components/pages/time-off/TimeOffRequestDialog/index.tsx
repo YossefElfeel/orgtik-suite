@@ -6,13 +6,13 @@ import { CalendarBlank as Calendar } from "@phosphor-icons/react";
 import React, { useState, useEffect } from "react";
 import { useFormatter, useTranslations } from "next-intl";
 import { ReusableDialog } from "@/components/shared/ReusableDialog/reusable-dialog";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import StatusBadge from "@/components/shared/StatusBadge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
+import StatusBadge from "@/components/bindings/EmploymentStatus";
 import { useLazyGetTimeOffByIdQuery } from "@/redux/features/timeOff/timeOffApi";
 import type { TimeOffRequestDialogProps } from "@/types/time-off";
 import { rangeText } from "@/lib/date-range";
 import { timeOffProblem } from '@/lib/time-off-attempt';
-import { Button } from '@/components/ui/button';
+import { Button } from '@orgtik/ui';
 
 export function TimeOffRequestDialog({ id, trigger, open: openProp, onOpenChange }: TimeOffRequestDialogProps) {
   const t = useTranslations("calendar.timeOff");
@@ -47,7 +47,7 @@ export function TimeOffRequestDialog({ id, trigger, open: openProp, onOpenChange
       isLoading={isQueryLoading}
       trigger={trigger}
     >
-      {error ? <div role="alert" className="rounded-lg bg-danger-subtle p-4 text-danger"><p>{t('errors.' + timeOffProblem(error))}</p><Button variant="outline" className="mt-3" onClick={() => triggerFetch(id)}>{t('retry')}</Button></div> : <div className="space-y-6">
+      {error ? <div role="alert" className="rounded-lg bg-danger-subtle p-4 text-danger"><p>{t('errors.' + timeOffProblem(error))}</p><Button variant="secondary" className="mt-3" onClick={() => triggerFetch(id)}>{t('retry')}</Button></div> : <div className="space-y-6">
         <div className="bg-sunken rounded-2xl p-4 flex items-center gap-3">
           <div className="w-10 h-10 bg-raised rounded-xl flex items-center justify-center border">
             <Calendar className="w-5 h-5 text-muted-foreground" aria-hidden="true" />

@@ -5,9 +5,9 @@
 // said "CHF"); the words are translated, and the "Bouns" typo is gone with the item types.
 import React from "react";
 import { useFormatter, useTranslations } from "next-intl";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
+import { Button } from "@orgtik/ui";
+import { Textarea } from "@orgtik/ui";
 import { cn } from "@/lib/utils";
 import type { EmployeeApprovalCardProps } from "@/types/payroll";
 
@@ -96,7 +96,7 @@ export default function EmployeeApprovalCard({ employee, currency, onStatusChang
       <div className="p-5 px-6 space-y-4">
         <div role="group" aria-label={t("decisionFor", { name: employee.name })} className="flex items-center justify-end gap-3">
           <Button
-            variant="outline"
+            variant="secondary"
             aria-pressed={isApproved}
             onClick={() => onStatusChange(employee.id, isApproved ? null : "APPROVED")}
             size="lg"
@@ -105,7 +105,7 @@ export default function EmployeeApprovalCard({ employee, currency, onStatusChang
             {t("approve")}
           </Button>
           <Button
-            variant="outline"
+            variant="secondary"
             aria-pressed={isRejected}
             onClick={() => onStatusChange(employee.id, isRejected ? null : "REJECTED")}
             size="lg"

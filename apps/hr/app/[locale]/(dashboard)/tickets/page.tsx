@@ -3,12 +3,12 @@ import { Lifebuoy as LifeBuoy, Ticket } from "@phosphor-icons/react";
 
 
 import { TabMenu } from "@/components/shared/TabMenu";
-import MainHeader from "@/components/layout/MainHeader";
-import { Button } from "@/components/ui/button";
+import MainHeader from "@/components/layout/ResourceHeader";
+import { Button } from "@orgtik/ui";
 import { AddNewTicketDialog } from "@/components/pages/tickets/AddNewTicketDialog";
 import { useColumns } from "./columns";
 import { useState } from "react";
-import DataTable from "@/components/shared/Table";
+import DataTable from "@/components/bindings/ResourceTable";
 import { ToolbarSearchAndFilter } from "@/components/shared/ToolbarSearchAndFilter";
 import {
   useGetMyTicketsQuery,

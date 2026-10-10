@@ -1373,6 +1373,306 @@
     },
     {
       "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/candidates/:id/hire",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "PUT",
+      "path": "/api/hr/candidates/:id/offer",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "GET",
+      "path": "/api/hr/candidates/:id/offer/download",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/candidates/:id/scorecards",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "GET",
+      "path": "/api/hr/careers",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "PUT",
+      "path": "/api/hr/careers/settings",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/clock",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/corrections",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "PATCH",
+      "path": "/api/hr/employees/:id/checklist",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "PATCH",
+      "path": "/api/hr/employees/:id/corrections/:correctionId",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/employees/:id/documents",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/employees/:id/goals",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "PATCH",
+      "path": "/api/hr/employees/:id/goals/:goalId",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/employees/:id/letters",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "GET",
+      "path": "/api/hr/employees/:id/letters/:letterId",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "PATCH",
+      "path": "/api/hr/employees/:id/profile-requests/:requestId",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/employees/:id/reminders",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/employees/:id/reviews",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/employees/import",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "PUT",
+      "path": "/api/hr/holidays",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "PATCH",
+      "path": "/api/hr/mailbox/:id/read",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "PUT",
+      "path": "/api/hr/policy",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "POST",
+      "path": "/api/hr/profile-requests",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "GET",
+      "path": "/api/hr/reports",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "hr",
+      "method": "GET",
+      "path": "/api/hr/workspace",
+      "source": "apps/hr/routes/workspace-v3.js",
+      "authorization": {
+        "audience": "tool:hr",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "hr",
       "method": "GET",
       "path": "/api/meetings",
       "source": "apps/hr/routes/attendance.js",

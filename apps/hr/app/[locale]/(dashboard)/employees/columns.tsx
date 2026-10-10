@@ -3,8 +3,8 @@ import { PencilSimple as Pencil, UserMinus } from "@phosphor-icons/react";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { IconButton } from "@/components/shared/IconButton";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Checkbox } from "@orgtik/ui";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
 import { cn } from "@/lib/utils";
 import { Link } from "@/i18n/routing";
 import { IEmployee } from "@/types/employee";
@@ -125,14 +125,14 @@ export const getColumns = (t: any, employmentType: (code?: string | null) => str
           <IconButton
             label={t("tooltips.edit")}
             type="button"
-            variant="outline-view"
+            variant="secondary"
             onClick={handleEdit}
           >
             <Pencil className="h-4 w-4" />
           </IconButton>
 
           <DeleteEmployeeDialog id={row.original.id}>
-            <IconButton label={t("tooltips.offboard")} type="button" variant="outline-delete">
+            <IconButton label={t("tooltips.offboard")} type="button" variant="secondary">
               <UserMinus className="h-4 w-4" />
             </IconButton>
           </DeleteEmployeeDialog>

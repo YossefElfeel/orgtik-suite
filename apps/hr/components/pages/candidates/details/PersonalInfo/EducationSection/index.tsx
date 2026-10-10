@@ -1,5 +1,5 @@
 import { Buildings as Building2, CalendarBlank as Calendar, GraduationCap } from "@phosphor-icons/react";
-import { InfoCard } from "@/components/ui/info-card";
+import { InfoCard } from "@/components/shared/EmployeeFacts";
 import type { IJobApplication } from "@/types/job";
 import { formatDate } from "@/utils/formateDate";
 import { useTranslations } from "next-intl";

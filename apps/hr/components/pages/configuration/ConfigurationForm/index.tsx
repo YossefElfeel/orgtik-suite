@@ -1,36 +1,27 @@
 "use client";
-
 import React, { useEffect, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@orgtik/ui";
+import { Button } from "@orgtik/ui";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/bindings/select";
+import { Card } from "@orgtik/ui";
 import { useTranslations } from "next-intl";
 import { makeConfigurationSchema, ConfigurationFormValues } from "@/schemas/configuration/configuration.schema";
 import CompanyLogoUpload from "../CompanyLogoUpload";
 import AttendanceScheduleFields from "../AttendanceScheduleFields";
 import PublicHolidaysFields from "../PublicHolidaysFields";
 import ConfigurationSkeleton from "./skeleton";
-import {
-  useGetSettingsQuery,
-  useUpdateSettingsMutation,
-  useUploadAvatarMutation,
-  useDeleteAvatarMutation
-} from "@/redux/features/settings/settingsApi";
+import { useGetSettingsQuery, useUpdateSettingsMutation, useUploadAvatarMutation, useDeleteAvatarMutation } from "@/redux/features/settings/settingsApi";
 import { mockConfiguration } from "@/mock/configuration";
 import { toast } from "sonner";
 import { useReqWithToaster } from "@/hooks/useReqWithToaster";
-
 const ConfigurationForm: React.FC = () => {
-  const t = useTranslations("configuration");
-  const reqWithToaster = useReqWithToaster();
-  const { data: settingsData, isLoading } = useGetSettingsQuery();
-  const schema = useMemo(
-    () =>
-      makeConfigurationSchema({
+    const t = useTranslations("configuration");
+    const reqWithToaster = useReqWithToaster();
+    const { data: settingsData, isLoading } = useGetSettingsQuery();
+    const schema = useMemo(() => makeConfigurationSchema({
         companyNameRequired: t("validation.companyNameRequired"),
         preferredLanguageRequired: t("validation.preferredLanguageRequired"),
         phoneRequired: t("validation.phoneRequired"),
@@ -43,106 +34,74 @@ const ConfigurationForm: React.FC = () => {
         gracePeriodMin: t("validation.gracePeriodMin"),
         holidayNameRequired: t("validation.holidayNameRequired"),
         dateRequired: t("validation.dateRequired"),
-      }),
-    [t],
-  );
-
-  const [updateSettings] = useUpdateSettingsMutation();
-  const [uploadAvatar] = useUploadAvatarMutation();
-  const [deleteAvatar] = useDeleteAvatarMutation();
-
-  const form = useForm<ConfigurationFormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: mockConfiguration as any,
-  });
-
-  useEffect(() => {
-    if (settingsData?.data) {
-      form.reset(settingsData.data as any);
-    }
-  }, [settingsData, form]);
-
-  const onSubmit = (values: ConfigurationFormValues) => {
-    reqWithToaster(t("toasts.updating"), async () => {
-      const { avatar, ...profileWithoutAvatar } = values.companyProfile;
-      const payload = {
-        ...values,
-        companyProfile: profileWithoutAvatar,
-      };
-
-      await updateSettings(payload as any).unwrap();
-
-    })
-  };
-
-  const handleAvatarChange = (value: File | string | null) => {
-    reqWithToaster(t("toasts.uploading"), async () => {
-      if (value instanceof File) {
-        const response = await uploadAvatar(value).unwrap();
-        form.setValue("companyProfile.avatar", response.data.url);
-      } else if (value === null) {
-        await deleteAvatar().unwrap();
-        form.setValue("companyProfile.avatar", null);
-      }
-    }
-    )
-  };
-
-  if (isLoading)
-    return <ConfigurationSkeleton />;
-
-
-  return (
-    <Form {...form}>
+    }), [t]);
+    const [updateSettings] = useUpdateSettingsMutation();
+    const [uploadAvatar] = useUploadAvatarMutation();
+    const [deleteAvatar] = useDeleteAvatarMutation();
+    const form = useForm<ConfigurationFormValues>({
+        resolver: zodResolver(schema),
+        defaultValues: mockConfiguration as any,
+    });
+    useEffect(() => {
+        if (settingsData?.data) {
+            form.reset(settingsData.data as any);
+        }
+    }, [settingsData, form]);
+    const onSubmit = (values: ConfigurationFormValues) => {
+        reqWithToaster(t("toasts.updating"), async () => {
+            const { avatar, ...profileWithoutAvatar } = values.companyProfile;
+            const payload = {
+                ...values,
+                companyProfile: profileWithoutAvatar,
+            };
+            await updateSettings(payload as any).unwrap();
+        });
+    };
+    const handleAvatarChange = (value: File | string | null) => {
+        reqWithToaster(t("toasts.uploading"), async () => {
+            if (value instanceof File) {
+                const response = await uploadAvatar(value).unwrap();
+                form.setValue("companyProfile.avatar", response.data.url);
+            }
+            else if (value === null) {
+                await deleteAvatar().unwrap();
+                form.setValue("companyProfile.avatar", null);
+            }
+        });
+    };
+    if (isLoading)
+        return <ConfigurationSkeleton />;
+    return (<Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         {/* Left Column: Company Profile */}
         <Card className="lg:col-span-2">
-          <CardHeader>
-            <CardTitle>{t("companyProfile")}</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
+          <div className="flex flex-col gap-2">
+            <h3 className="font-display text-title-sm">{t("companyProfile")}</h3>
+          </div>
+          <div className="space-y-6">
             <div className="flex flex-col md:flex-row gap-8 items-start">
-              <FormField
-                control={form.control}
-                name="companyProfile.avatar"
-                render={({ field }) => (
-                  <FormItem className="mx-auto md:mx-0">
+              <FormField control={form.control} name="companyProfile.avatar" render={({ field }) => (<FormItem className="mx-auto md:mx-0">
                     <FormControl>
-                      <CompanyLogoUpload
-                        value={field.value}
-                        onChange={handleAvatarChange}
-                      />
+                      <CompanyLogoUpload value={field.value} onChange={handleAvatarChange}/>
                     </FormControl>
                     <FormMessage />
-                  </FormItem>
-                )}
-              />
+                  </FormItem>)}/>
 
               <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
-                <FormField
-                  control={form.control}
-                  name="companyProfile.companyName"
-                  render={({ field }) => (
-                    <FormItem>
+                <FormField control={form.control} name="companyProfile.companyName" render={({ field }) => (<FormItem>
                       <FormLabel>{t("companyName")}</FormLabel>
                       <FormControl>
-                        <Input placeholder={t("placeholders.companyName")} {...field} />
+                        <Input placeholder={t("placeholders.companyName")} {...field}/>
                       </FormControl>
                       <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    </FormItem>)}/>
 
-                <FormField
-                  control={form.control}
-                  name="companyProfile.preferredLanguage"
-                  render={({ field }) => (
-                    <FormItem>
+                <FormField control={form.control} name="companyProfile.preferredLanguage" render={({ field }) => (<FormItem>
                       <FormLabel>{t("preferredLanguage")}</FormLabel>
                       <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder={t("placeholders.language")} />
+                            <SelectValue placeholder={t("placeholders.language")}/>
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -153,77 +112,57 @@ const ConfigurationForm: React.FC = () => {
                         </SelectContent>
                       </Select>
                       <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    </FormItem>)}/>
 
-                <FormField
-                  control={form.control}
-                  name="companyProfile.phoneNumber"
-                  render={({ field }) => (
-                    <FormItem>
+                <FormField control={form.control} name="companyProfile.phoneNumber" render={({ field }) => (<FormItem>
                       <FormLabel>{t("phone")}</FormLabel>
                       <FormControl>
-                        <Input placeholder={t("placeholders.phone")} {...field} />
+                        <Input placeholder={t("placeholders.phone")} {...field}/>
                       </FormControl>
                       <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    </FormItem>)}/>
 
-                <FormField
-                  control={form.control}
-                  name="companyProfile.emailAddress"
-                  render={({ field }) => (
-                    <FormItem>
+                <FormField control={form.control} name="companyProfile.emailAddress" render={({ field }) => (<FormItem>
                       <FormLabel>{t("email")}</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder={t("placeholders.email")} {...field} />
+                        <Input type="email" placeholder={t("placeholders.email")} {...field}/>
                       </FormControl>
                       <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    </FormItem>)}/>
 
-                <FormField
-                  control={form.control}
-                  name="companyProfile.location"
-                  render={({ field }) => (
-                    <FormItem className="md:col-span-2">
+                <FormField control={form.control} name="companyProfile.location" render={({ field }) => (<FormItem className="md:col-span-2">
                       <FormLabel>{t("location")}</FormLabel>
                       <FormControl>
-                        <Input placeholder={t("placeholders.location")} {...field} />
+                        <Input placeholder={t("placeholders.location")} {...field}/>
                       </FormControl>
                       <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    </FormItem>)}/>
               </div>
             </div>
-          </CardContent>
+          </div>
         </Card>
 
         {/* Right Column: Attendance Schedule */}
         <Card>
-          <CardHeader>
-            <CardTitle>{t("attendanceSettings")}</CardTitle>
-          </CardHeader>
-          <CardContent>
+          <div className="flex flex-col gap-2">
+            <h3 className="font-display text-title-sm">{t("attendanceSettings")}</h3>
+          </div>
+          <div>
             <AttendanceScheduleFields />
-          </CardContent>
+          </div>
         </Card>
 
         {/* Public Holidays */}
         <Card>
-          <CardContent>
+          <div>
             <PublicHolidaysFields />
-          </CardContent>
+          </div>
         </Card>
 
 
         <div className="flex justify-end gap-4">
           {/* Cancel discards changes, so it is on only when there are some (it did nothing otherwise, HR-031). */}
-          <Button type="button" variant="outline" disabled={!form.formState.isDirty} onClick={() => form.reset()}>
+          <Button type="button" variant="secondary" disabled={!form.formState.isDirty} onClick={() => form.reset()}>
             {t("cancel")}
           </Button>
           <Button type="submit" disabled={form.formState.isSubmitting}>
@@ -231,8 +170,6 @@ const ConfigurationForm: React.FC = () => {
           </Button>
         </div>
       </form>
-    </Form>
-  );
+    </Form>);
 };
-
 export default ConfigurationForm;

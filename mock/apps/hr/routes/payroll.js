@@ -481,14 +481,18 @@ module.exports = function payrollRoutes(app, h) {
     if (!h.guard(req, res, "finance_manager", "hr")) return;
     const run = findRun(req, res);
     if (!run) return;
-    const rows = [["Employee Code", "Beneficiary", "Method", "Bank", "IBAN / Number", "Amount", "Currency", "Reference"]];
+    const country = req.body?.country || "generic";
+    if (!["generic", "CH", "AE"].includes(country)) return err(res, 400, "Choose CH, AE or generic export.");
+    const header = country === "CH" ? ["Creditor name", "IBAN", "BIC", "Amount", "Currency", "Reference"] : country === "AE" ? ["Employee code", "IBAN", "Bank routing code", "Period start", "Period end", "Net amount", "Currency", "Reference"] : ["Employee Code", "Beneficiary", "Method", "Bank", "IBAN / Number", "Amount", "Currency", "Reference"];
+    const rows = [["NOT-FOR-BANK-SUBMISSION", "SAMPLE", country], header];
     for (const i of V.runItems(run.id).filter((x) => ["approved", "queued"].includes(x.status))) {
       const p = V.payoutRow(i);
-      rows.push([p.employee.employeeCode, p.employee.name, p.paymentMethod, p.bankName || "", p.iban || "", p.amount.toFixed(2), p.currency, `PAYROLL-${run.id}-${i.id}`]);
+      const bank = V.empAny(i.employeeId)?.payment?.bank || {}, reference = `PAYROLL-${run.id}-${i.id}`;
+      rows.push(country === "CH" ? [p.employee.name, p.iban || "", bank.swiftCode || bank.bic || "", p.amount.toFixed(2), p.currency, reference] : country === "AE" ? [p.employee.employeeCode, p.iban || "", bank.routingCode || "", run.periodStart, run.periodEnd, p.amount.toFixed(2), p.currency, reference] : [p.employee.employeeCode, p.employee.name, p.paymentMethod, p.bankName || "", p.iban || "", p.amount.toFixed(2), p.currency, reference]);
     }
-    const filename = `bank-file-${slug(run.title)}.csv`;
+    const filename = `sample-bank-file-${country}-${slug(run.title)}.csv`;
     plog(run, "Bank file exported", req.user.id);
-    send(res, { filename, contentType: "text/csv", content: F.csv(rows), rows: rows.length - 1 }, `Bank file generated (${rows.length - 1} payments)`);
+    send(res, { filename, contentType: "text/csv", content: F.csv(rows), rows: rows.length - 2, simulated: true, country }, `Bank file generated (${rows.length - 2} payments)`);
   });
 
   // ---------------- payslips ----------------

@@ -1,5 +1,5 @@
 "use client";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import TicketDetails from "@/components/pages/tickets/TicketDetails";
 import TicketStatus from "@/components/pages/tickets/TicketDetails/TicketStatus";
 import TicketActivity from "@/components/pages/tickets/TicketDetails/TicketActivity";

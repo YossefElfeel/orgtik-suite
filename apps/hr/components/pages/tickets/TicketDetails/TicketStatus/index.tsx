@@ -1,7 +1,7 @@
 "use client";
 import { CircleNotch as Loader2 } from "@phosphor-icons/react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import SelectFormEle from "@/components/ui/form/select-form-element";
 import ComboboxFormEle from "@/components/ui/form/combobox-form-element";
 import EmployeeComboBox from "@/components/ui/form/employee-combobox";

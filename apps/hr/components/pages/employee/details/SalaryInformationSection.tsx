@@ -1,9 +1,9 @@
 import { ArrowsClockwise as RefreshCw, Money as Banknote, Wallet } from "@phosphor-icons/react";
-import { InfoCard, InfoCardSkeleton } from "@/components/ui/info-card";
+import { InfoCard, InfoCardSkeleton } from "@/components/shared/EmployeeFacts";
 import type { SalaryInformationSectionProps } from "@/types/employee";
-import DataTable from "@/components/shared/Table";
+import DataTable from "@/components/bindings/ResourceTable";
 import { useMemo } from "react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@orgtik/ui";
 import { useTranslations } from "next-intl";
 import { useEmployeeMoney } from "@/hooks/useEmployeeMoney";
 import { getSalaryHistoryColumns } from "./SalaryInformationSection/columns";

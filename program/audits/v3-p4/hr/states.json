@@ -1,0 +1,42 @@
+{
+  "scope": "Six ordinary HR states; real scoped sessions and temporary network outage/delay",
+  "checks": [
+    {
+      "name": "Loading is rendered during a real delayed owner-data request",
+      "pass": true
+    },
+    {
+      "name": "Ordinary outage gives retryable error",
+      "pass": true
+    },
+    {
+      "name": "Committed save has ordinary success feedback",
+      "pass": true
+    },
+    {
+      "name": "Current employee role receives forbidden recovery page",
+      "pass": true
+    },
+    {
+      "name": "View-as authority is forced read-only",
+      "pass": true
+    },
+    {
+      "name": "Read-only policy action is absent and banner appears",
+      "pass": true
+    },
+    {
+      "name": "New HR trial stays empty until real employment is added",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "hr-state-loading.png",
+    "hr-state-error.png",
+    "hr-state-success.png",
+    "hr-state-forbidden.png",
+    "hr-state-read-only.png",
+    "hr-state-empty.png"
+  ],
+  "completed": true
+}

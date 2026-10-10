@@ -1,6 +1,6 @@
 import { ArrowUpRight, CaretDown as ChevronDown } from "@phosphor-icons/react";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
 import { cn } from "@/lib/utils";
 import { IJobApplication, JobApplicationStage } from "@/types/job";
 import { Link } from "@/i18n/routing";
@@ -87,7 +87,7 @@ export function CandidateCard({
         </p>
 
         <div className="mt-2.5 flex items-start gap-2">
-          <Avatar size="default" className="size-8">
+          <Avatar size="md" className="size-8">
             {/* {candidate.avatarUrl ? (
               <AvatarImage src={candidate.avatarUrl} alt={candidate.name} />
             ) : null} */}

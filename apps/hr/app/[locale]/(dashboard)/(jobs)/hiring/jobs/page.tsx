@@ -2,11 +2,11 @@
 import { Briefcase as BriefcaseBusiness, Clock as Clock3, MapPin, Plus } from "@phosphor-icons/react";
 
 
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import AddJobSheet from "@/components/pages/hiring/AddJobSheet";
 import { JobOpeningCard } from "@/components/shared/JobOpeningCard";
 import { TabMenu } from "@/components/shared/TabMenu";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import {
   useGetJobsQuery,
   useUpdateJobMutation,
@@ -16,14 +16,14 @@ import { formatDate } from "@/utils/formateDate";
 import { useState } from "react";
 import { CustomPagination } from "@/components/shared/CustomPagination";
 import { useTranslations } from "next-intl";
-// import { Input } from "@/components/ui/input";
+// import { Input } from "@orgtik/ui";
 // import {
 //   Select,
 //   SelectContent,
 //   SelectItem,
 //   SelectTrigger,
 //   SelectValue,
-// } from "@/components/ui/select";
+// } from "@/components/bindings/select";
 const toDateOnly = (value: string) => value.split("T")[0];
 
 export default function HiringJobsPage() {

@@ -13,6 +13,8 @@ module.exports = function miscRoutes(app, h) {
     const att = b.attendance || {};
     const sch = att.schedule || {};
     const next = {
+      ...(db.settings.careers ? { careers: db.settings.careers } : {}),
+      ...(db.settings.leavePolicy ? { leavePolicy: db.settings.leavePolicy } : {}),
       companyProfile: { ...db.settings.companyProfile, ...Object.fromEntries(Object.entries(cp).filter(([k]) => k !== "avatar")) },
       attendance: {
         schedule: { ...db.settings.attendance.schedule, ...sch },
@@ -28,7 +30,7 @@ module.exports = function miscRoutes(app, h) {
     for (const [i, hday] of next.attendance.publicHolidays.entries()) {
       const date = L.normDate(hday?.date);
       if (!hday?.name || !date) return err(res, 400, `Public holiday #${i + 1} needs a name and a valid date.`);
-      holidays.push({ name: String(hday.name).trim(), date: L.toDmy(date) });
+      holidays.push({ name: String(hday.name).trim(), date: L.toDmy(date), ...(hday.country ? { country: String(hday.country).toUpperCase().slice(0,3) } : {}) });
     }
     next.attendance.publicHolidays = holidays.sort((a, b) => (L.normDate(a.date) < L.normDate(b.date) ? -1 : 1));
     if (cp.companyName !== undefined) db.company.name = cp.companyName || db.company.name;

@@ -7,11 +7,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useFormatter, useTranslations } from 'next-intl';
 import { useClientSession } from '@orgtik/ui/auth';
 import { ReusableDialog } from '@/components/shared/ReusableDialog/reusable-dialog';
-import { Button } from '@/components/ui/button';
+import { Button } from '@orgtik/ui';
 import { Form } from '@/components/ui/form';
 import TextFormEle from '@/components/ui/form/text-form-element';
 import CustomAvatar from '@/components/shared/CustomAvatar';
-import StatusBadge from '@/components/shared/StatusBadge';
+import StatusBadge from '@/components/bindings/EmploymentStatus';
 import { AttachmentList } from '@/components/shared/AttachmentList';
 import { useUserRoles } from '@/hooks/useUserRoles';
 import { useLazyGetTimeOffByIdQuery, useMakeTimeOffDecisionMutation, useCancelTimeOffRequestMutation } from '@/redux/features/timeOff/timeOffApi';
@@ -85,11 +85,11 @@ export function TimeOffActionDialog({ trigger, id, onSave, open: externalOpen, o
   const stages: TimeOffStage[] = ['manager', 'hr'];
   return <ReusableDialog title={t('title')} description={data ? '#' + data.requestCode : t('loading')} trigger={trigger} size="lg" open={open} onOpenChange={changeOpen}
     footer={<div className="flex w-full flex-wrap gap-3">
-      <Button variant="outline" className="min-h-11 flex-1 sm:min-h-9" disabled={busy} onClick={() => changeOpen(false)}>{t('actions.close')}</Button>
-      {data && caps?.canCancel && !confirmCancel ? <Button variant="delete" className="min-h-11 flex-1 sm:min-h-9" disabled={freshBlocked} onClick={() => setConfirmCancel(true)}>{t('actions.cancelRequest')}</Button> : null}
+      <Button variant="secondary" className="min-h-11 flex-1 sm:min-h-9" disabled={busy} onClick={() => changeOpen(false)}>{t('actions.close')}</Button>
+      {data && caps?.canCancel && !confirmCancel ? <Button variant="danger" className="min-h-11 flex-1 sm:min-h-9" disabled={freshBlocked} onClick={() => setConfirmCancel(true)}>{t('actions.cancelRequest')}</Button> : null}
     </div>}>
     {!data && query.isFetching ? <p role="status">{t('loading')}</p> : null}
-    {query.error ? <div role="alert" className="rounded-lg bg-danger-subtle p-4 text-danger space-y-3"><p>{t('errors.' + timeOffProblem(query.error))}</p><Button variant="outline" onClick={() => fetchRecord(id)}>{t('actions.retry')}</Button></div> : null}
+    {query.error ? <div role="alert" className="rounded-lg bg-danger-subtle p-4 text-danger space-y-3"><p>{t('errors.' + timeOffProblem(query.error))}</p><Button variant="secondary" onClick={() => fetchRecord(id)}>{t('actions.retry')}</Button></div> : null}
     {data && !query.error ? <div className="space-y-5">
       <div className="flex items-center justify-between gap-3 rounded-xl border border-line bg-raised p-4">
         <div className="flex min-w-0 items-center gap-3"><CustomAvatar src={data.employee?.avatar || ''} alt={data.employee?.fullName || ''} className="size-11" /><p className="min-w-0 font-medium break-words"><bdi>{data.employee?.fullName}</bdi></p></div>
@@ -108,7 +108,7 @@ export function TimeOffActionDialog({ trigger, id, onSave, open: externalOpen, o
       {error ? <p role="alert" className="rounded-lg bg-danger-subtle p-4 text-danger">{error}</p> : null}
       {readOnly ? <p role="status" className="rounded-lg bg-warning-subtle p-4 text-fg">{t('errors.readOnly')}</p> : null}
       {attempt && !busy ? <div role="alert" className="rounded-lg bg-warning-subtle p-4 text-fg space-y-3"><p>{t('unconfirmed')}</p><Button disabled={readOnly} onClick={() => execute(attempt)}>{t('actions.recover')}</Button></div> : null}
-      {confirmCancel ? <div role="alert" className="rounded-lg bg-warning-subtle p-4 text-fg space-y-3"><p>{t('cancelReview')}</p><div className="flex flex-wrap gap-3"><Button variant="delete" disabled={freshBlocked} onClick={cancelRequest}>{t('actions.confirmCancel')}</Button><Button variant="outline" onClick={() => setConfirmCancel(false)}>{t('actions.keepRequest')}</Button></div></div> : null}
+      {confirmCancel ? <div role="alert" className="rounded-lg bg-warning-subtle p-4 text-fg space-y-3"><p>{t('cancelReview')}</p><div className="flex flex-wrap gap-3"><Button variant="danger" disabled={freshBlocked} onClick={cancelRequest}>{t('actions.confirmCancel')}</Button><Button variant="secondary" onClick={() => setConfirmCancel(false)}>{t('actions.keepRequest')}</Button></div></div> : null}
       {stages.map(stage => {
         const required = stage !== 'manager' || caps?.managerRequired;
         const status = stage === 'manager' ? data.managerActionStatus : data.hrActionStatus;
@@ -122,7 +122,7 @@ export function TimeOffActionDialog({ trigger, id, onSave, open: externalOpen, o
           {editing ? <Form {...form}><form onSubmit={form.handleSubmit(submit)} className="space-y-4">
             <fieldset disabled={freshBlocked} className="min-w-0 space-y-4">
               <div role="group" aria-label={t('decision.choose')} className="grid grid-cols-2 gap-3">
-                {(['approved', 'rejected'] as const).map(value => <Button key={value} variant="outline" type="button" aria-pressed={form.watch('decision') === value} disabled={freshBlocked} className={cn('min-h-11 sm:min-h-9', form.watch('decision') === value && 'border-fg-brand bg-brand-subtle text-fg-brand')} onClick={() => form.setValue('decision', value, { shouldValidate: true })}>
+                {(['approved', 'rejected'] as const).map(value => <Button key={value} variant="secondary" type="button" aria-pressed={form.watch('decision') === value} disabled={freshBlocked} className={cn('min-h-11 sm:min-h-9', form.watch('decision') === value && 'border-fg-brand bg-brand-subtle text-fg-brand')} onClick={() => form.setValue('decision', value, { shouldValidate: true })}>
                   {value === 'approved' ? <Check aria-hidden="true" /> : <X aria-hidden="true" />}{t(value === 'approved' ? 'actions.approve' : 'actions.reject')}
                 </Button>)}
               </div>
@@ -130,7 +130,7 @@ export function TimeOffActionDialog({ trigger, id, onSave, open: externalOpen, o
               <TextFormEle form={form} name="note" type="textarea" label={t('fields.noteReason')} placeholder={t('fields.notePlaceholder')} disabled={freshBlocked} />
             </fieldset>
             <Button type="submit" className="w-full min-h-11 sm:min-h-9" disabled={freshBlocked || !form.watch('decision')}>{t('actions.submitDecision')}</Button>
-          </form></Form> : allowed ? <Button variant="outline" disabled={freshBlocked} onClick={() => { form.reset({ note: '' }); setEditStage(stage); }}>{t('actions.changeDecision')}</Button> : null}
+          </form></Form> : allowed ? <Button variant="secondary" disabled={freshBlocked} onClick={() => { form.reset({ note: '' }); setEditStage(stage); }}>{t('actions.changeDecision')}</Button> : null}
         </section>;
       })}
     </div> : null}

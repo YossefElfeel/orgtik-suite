@@ -1,0 +1,609 @@
+{
+  "date": "2026-10-10",
+  "scope": "Task-owned memory-only HR workspace; ordinary owner-domain APIs",
+  "checks": [
+    {
+      "name": "Ordinary workspace loads existing employees",
+      "pass": true
+    },
+    {
+      "name": "Persist leave policy",
+      "pass": true
+    },
+    {
+      "name": "Policy reload calculates current earned balance",
+      "pass": true
+    },
+    {
+      "name": "Create own change request",
+      "pass": true
+    },
+    {
+      "name": "Approve employment change",
+      "pass": true
+    },
+    {
+      "name": "Create actual employee goal",
+      "pass": true
+    },
+    {
+      "name": "Update saved goal progress",
+      "pass": true
+    },
+    {
+      "name": "Persist employee review",
+      "pass": true
+    },
+    {
+      "name": "Persist document metadata",
+      "pass": true
+    },
+    {
+      "name": "Expiry reminder reaches simulated owner mailbox",
+      "pass": true
+    },
+    {
+      "name": "Import delegates to existing hire command",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "data": {
+          "outcomes": [
+            {
+              "email": "hr-v3-import@fixture.test",
+              "status": "created",
+              "employeeId": 117138660924078,
+              "receipt": {
+                "id": 117138660924078,
+                "authUserId": 117138660924078,
+                "userKey": "person_117138660924078",
+                "employeeCode": "EMP-1017",
+                "firstName": "HR",
+                "lastName": "Flow sample",
+                "email": "hr-v3-import@fixture.test",
+                "phoneNumber": "",
+                "birthday": "",
+                "gender": "",
+                "nationality": "",
+                "nationalIdOrPassport": "",
+                "personalTaxId": "",
+                "accommodationType": "own_accommodation",
+                "address": {
+                  "country": "",
+                  "city": "",
+                  "street": "",
+                  "postCode": ""
+                },
+                "jobTitle": "",
+                "departmentId": null,
+                "managerId": null,
+                "employeeType": "",
+                "workLocation": "",
+                "status": "invited",
+                "experienceLevel": "",
+                "joinDate": "2026-10-07",
+                "skills": [],
+                "payment": {
+                  "paymentMethod": "bank",
+                  "paymentCycle": "monthly",
+                  "bank": null,
+                  "instapay": null,
+                  "wallet": null
+                },
+                "salary": {
+                  "baseSalary": 0,
+                  "housingAllowanceValue": 0,
+                  "housingAllowanceType": "percentage",
+                  "transportationAllowanceValue": 0,
+                  "transportationAllowanceType": "percentage",
+                  "otherAllowancesValue": 0,
+                  "otherAllowancesType": "percentage",
+                  "insuranceValue": 0,
+                  "insuranceType": "percentage",
+                  "taxValue": 0,
+                  "taxType": "percentage",
+                  "currency": "EGP"
+                },
+                "salaryHistory": [],
+                "daysOff": {
+                  "annualLeave": 0,
+                  "casualLeave": 0,
+                  "sickLeave": 0,
+                  "unpaidLeavePolicy": "",
+                  "contractAdds": 0
+                },
+                "contract": {
+                  "contractType": "",
+                  "startDate": "",
+                  "endDate": null,
+                  "trainingPeriod": "",
+                  "noticePeriod": "",
+                  "sendForSignature": false,
+                  "companyLogoFileId": null,
+                  "contractSections": []
+                },
+                "permissions": {
+                  "roleIds": [],
+                  "scopeDepartmentIds": [],
+                  "scopeEntityIds": [],
+                  "customPermissions": []
+                },
+                "completedSteps": [
+                  "user_base_info"
+                ],
+                "onboardingComplete": false,
+                "avatarUrl": "",
+                "isActive": false,
+                "createdAt": "2026-10-07T09:00:00.000Z",
+                "updatedAt": "2026-10-07T09:00:00.000Z",
+                "deletedAt": null,
+                "invitation": {
+                  "id": "invite_1057",
+                  "email": "hr-v3-import@fixture.test",
+                  "role": "member",
+                  "tools": [],
+                  "status": "pending",
+                  "expiresAt": "2026-10-14T09:00:00.000Z"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Duplicate import returns outcome without another employee",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "data": {
+          "outcomes": [
+            {
+              "email": "hr-v3-import@fixture.test",
+              "status": "duplicate",
+              "employeeId": 117138660924078
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Connected project picker includes actual section IDs",
+      "pass": true
+    },
+    {
+      "name": "Create actual source-owned Task",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "data": {
+          "task": {
+            "id": 1067,
+            "title": "HR v3 actual onboarding task",
+            "description": "",
+            "priority": "medium",
+            "status": "backlog",
+            "order": 3,
+            "labels": [],
+            "watcherIds": [],
+            "reminder": {
+              "enabled": false
+            },
+            "recurrence": "none",
+            "customFields": {},
+            "timeEntries": [],
+            "source": {
+              "app": "hr",
+              "id": 1
+            },
+            "nextOccurrenceId": null,
+            "progress": 0,
+            "dueDate": null,
+            "startDate": "2026-10-07T09:00:00.000Z",
+            "sectionId": 11,
+            "projectId": 1,
+            "members": [
+              {
+                "id": 1,
+                "email": "mona.adel@orgtik.test",
+                "firstName": "Mona",
+                "lastName": "Adel",
+                "avatar": "http://localhost:7901/uploads/seed-avatar-1.svg"
+              }
+            ],
+            "createdBy": {
+              "id": 1,
+              "email": "mona.adel@orgtik.test",
+              "firstName": "Mona",
+              "lastName": "Adel"
+            },
+            "subtasksCount": 0,
+            "commentsCount": 0,
+            "attachmentsCount": 0,
+            "assignmentsCount": 1,
+            "canComplete": true,
+            "createdAt": "2026-10-07T09:00:00.000Z",
+            "updatedAt": "2026-10-07T09:00:00.000Z",
+            "completedAt": null,
+            "subtasks": [],
+            "assignments": [
+              {
+                "id": 7092,
+                "assigneeType": "user",
+                "assigneeId": 1,
+                "assignee": {
+                  "id": 1,
+                  "firstName": "Mona",
+                  "lastName": "Adel",
+                  "name": "Mona Adel",
+                  "email": "mona.adel@orgtik.test",
+                  "avatar": "http://localhost:7901/uploads/seed-avatar-1.svg",
+                  "type": "user"
+                },
+                "assignedBy": {
+                  "id": 1,
+                  "email": "mona.adel@orgtik.test",
+                  "firstName": "Mona",
+                  "lastName": "Adel"
+                },
+                "assignedAt": "2026-10-07T09:00:00.000Z"
+              }
+            ],
+            "dependencies": {
+              "dependsOn": [],
+              "blocks": [],
+              "canComplete": true
+            },
+            "attachments": [],
+            "section": {
+              "id": 11,
+              "title": "BACKLOG",
+              "color": "#6B7280",
+              "flag": "backlog"
+            },
+            "project": {
+              "id": 1,
+              "title": "Nile Foods E-commerce Revamp"
+            }
+          },
+          "path": "/projects/1/lists?task-id=1067"
+        }
+      }
+    },
+    {
+      "name": "Store exact Task reference in employment checklist",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "data": [
+          {
+            "id": "hr-v3-checklist",
+            "title": "HR v3 actual onboarding task",
+            "done": false,
+            "taskId": "1067"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Project current Task status through source-gated read",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "data": [
+          {
+            "id": 1067,
+            "title": "HR v3 actual onboarding task",
+            "status": "backlog",
+            "path": "/projects/1/lists?task-id=1067"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Persist candidate scorecard",
+      "pass": true,
+      "details": {
+        "status": 201,
+        "data": {
+          "id": "82009ab1-9346-4a36-b786-c7b4782cad15",
+          "score": 4,
+          "summary": "Sample current-candidate assessment",
+          "reviewerId": 1,
+          "createdAt": "2026-10-07T09:00:00.000Z"
+        }
+      }
+    },
+    {
+      "name": "Persist simulated offer",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "data": {
+          "title": "Sample engineer",
+          "startDate": "2026-11-01",
+          "salary": 2000,
+          "currency": "CHF",
+          "status": "draft",
+          "simulated": true,
+          "updatedAt": "2026-10-07T09:00:00.000Z"
+        }
+      }
+    },
+    {
+      "name": "Hire calls original employment command and fills offer fields",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "data": {
+          "employeeId": 29207756457787,
+          "receipt": {
+            "id": 29207756457787,
+            "authUserId": 29207756457787,
+            "userKey": "person_29207756457787",
+            "employeeCode": "EMP-1018",
+            "firstName": "Mostafa",
+            "lastName": "El-Sayed",
+            "email": "mostafa.elsayed10@gmail.test",
+            "phoneNumber": "+201055501234",
+            "birthday": "",
+            "gender": "",
+            "nationality": "",
+            "nationalIdOrPassport": "",
+            "personalTaxId": "",
+            "accommodationType": "own_accommodation",
+            "address": {
+              "country": "",
+              "city": "",
+              "street": "",
+              "postCode": ""
+            },
+            "jobTitle": "",
+            "departmentId": null,
+            "managerId": null,
+            "employeeType": "",
+            "workLocation": "",
+            "status": "invited",
+            "experienceLevel": "",
+            "joinDate": "2026-10-07",
+            "skills": [],
+            "payment": {
+              "paymentMethod": "bank",
+              "paymentCycle": "monthly",
+              "bank": null,
+              "instapay": null,
+              "wallet": null
+            },
+            "salary": {
+              "baseSalary": 0,
+              "housingAllowanceValue": 0,
+              "housingAllowanceType": "percentage",
+              "transportationAllowanceValue": 0,
+              "transportationAllowanceType": "percentage",
+              "otherAllowancesValue": 0,
+              "otherAllowancesType": "percentage",
+              "insuranceValue": 0,
+              "insuranceType": "percentage",
+              "taxValue": 0,
+              "taxType": "percentage",
+              "currency": "EGP"
+            },
+            "salaryHistory": [],
+            "daysOff": {
+              "annualLeave": 0,
+              "casualLeave": 0,
+              "sickLeave": 0,
+              "unpaidLeavePolicy": "",
+              "contractAdds": 0
+            },
+            "contract": {
+              "contractType": "",
+              "startDate": "",
+              "endDate": null,
+              "trainingPeriod": "",
+              "noticePeriod": "",
+              "sendForSignature": false,
+              "companyLogoFileId": null,
+              "contractSections": []
+            },
+            "permissions": {
+              "roleIds": [],
+              "scopeDepartmentIds": [],
+              "scopeEntityIds": [],
+              "customPermissions": []
+            },
+            "completedSteps": [
+              "user_base_info"
+            ],
+            "onboardingComplete": false,
+            "avatarUrl": "",
+            "isActive": false,
+            "createdAt": "2026-10-07T09:00:00.000Z",
+            "updatedAt": "2026-10-07T09:00:00.000Z",
+            "deletedAt": null,
+            "invitation": {
+              "id": "invite_1059",
+              "email": "mostafa.elsayed10@gmail.test",
+              "role": "member",
+              "tools": [],
+              "status": "pending",
+              "expiresAt": "2026-10-14T09:00:00.000Z"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "Hired candidate links to actual employment record",
+      "pass": true
+    },
+    {
+      "name": "Country holiday saves alongside existing holidays",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "data": [
+          {
+            "name": "Coptic Christmas",
+            "date": "07-01-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "January 25 Revolution & Police Day",
+            "date": "25-01-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Eid al-Fitr",
+            "date": "20-03-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Eid al-Fitr (Day 2)",
+            "date": "21-03-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Eid al-Fitr (Day 3)",
+            "date": "22-03-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Sham El-Nessim",
+            "date": "13-04-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Sinai Liberation Day",
+            "date": "25-04-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Labour Day",
+            "date": "01-05-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Arafat Day",
+            "date": "26-05-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Eid al-Adha",
+            "date": "27-05-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Eid al-Adha (Day 2)",
+            "date": "28-05-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Eid al-Adha (Day 3)",
+            "date": "29-05-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Islamic New Year",
+            "date": "16-06-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "June 30 Revolution",
+            "date": "30-06-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "July 23 Revolution Day",
+            "date": "23-07-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Prophet's Birthday",
+            "date": "25-08-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Armed Forces Day",
+            "date": "06-10-2026",
+            "country": "ALL"
+          },
+          {
+            "name": "Swiss sample holiday",
+            "date": "01-12-2026",
+            "country": "CH"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Create letter from current employment",
+      "pass": true,
+      "details": {
+        "status": 201,
+        "data": {
+          "id": "ca633e34-9729-49d6-bac7-d06160ce41ca",
+          "kind": "employment",
+          "name": "Mona Adel",
+          "employeeCode": "EMP-1001",
+          "title": "Chief Executive Officer",
+          "company": "OrgTik Egypt",
+          "salary": 180000,
+          "currency": "EGP",
+          "joinDate": "2023-01-05",
+          "createdAt": "2026-10-07T09:00:00.000Z",
+          "simulated": true
+        }
+      }
+    },
+    {
+      "name": "Reports derive current headcount",
+      "pass": true,
+      "details": {
+        "status": 200,
+        "data": {
+          "asOf": "2026-10-07",
+          "headcount": 15,
+          "joinedThisMonth": 0,
+          "departedThisMonth": 0,
+          "turnoverRate": 0,
+          "byDepartment": [
+            {
+              "name": "Management",
+              "count": 1
+            },
+            {
+              "name": "Operations",
+              "count": 1
+            },
+            {
+              "name": "Engineering",
+              "count": 5
+            },
+            {
+              "name": "Sales",
+              "count": 2
+            },
+            {
+              "name": "Finance",
+              "count": 2
+            },
+            {
+              "name": "Design",
+              "count": 1
+            },
+            {
+              "name": "Human Resources",
+              "count": 1
+            },
+            {
+              "name": "Marketing",
+              "count": 2
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "completed": true
+}

@@ -1,0 +1,116 @@
+{
+  "scope": "Ordinary HR pages on owned memory demo",
+  "checks": [
+    {
+      "name": "en/light/1440/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Shared policy sheet uses real fields",
+      "pass": true
+    },
+    {
+      "name": "Save closes sheet and confirms persistence",
+      "pass": true
+    },
+    {
+      "name": "Saved policy survives browser reload",
+      "pass": true
+    },
+    {
+      "name": "CSV import maps real columns",
+      "pass": true
+    },
+    {
+      "name": "CSV review precedes apply",
+      "pass": true
+    },
+    {
+      "name": "CSV apply shows committed owner-record outcome",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "hr-policies-en-light-1440.png",
+    "hr-directory-en-light-1440.png",
+    "hr-profile-en-light-1440.png",
+    "hr-onboarding-en-light-1440.png",
+    "hr-performance-en-light-1440.png",
+    "hr-recruiting-en-light-1440.png"
+  ],
+  "errors": []
+}

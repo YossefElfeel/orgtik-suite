@@ -6,7 +6,7 @@ import TextFormEle from "@/components/ui/form/text-form-element";
 import SelectFormEle, {
   SELECT_EMPTY_VALUE,
 } from "@/components/ui/form/select-form-element";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useUpdateOnboardingStepMutation, useGetOnboardingStepQuery } from "@/redux/features/employee/employeeApi";
 import { useReqWithToaster } from "@/hooks/useReqWithToaster";
 import { toast } from "sonner";
@@ -191,7 +191,7 @@ export function DaysOffStep() {
             className="min-w-32"
             type="button"
             size="lg"
-            variant="outline"
+            variant="secondary"
             onClick={onBack}
           >
             {t("nav.back")}

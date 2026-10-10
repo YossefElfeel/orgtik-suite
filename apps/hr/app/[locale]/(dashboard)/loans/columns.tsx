@@ -2,8 +2,8 @@
 import { Eye } from "@phosphor-icons/react";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Button } from "@/components/ui/button";
-import StatusBadge from "@/components/shared/StatusBadge";
+import { Button } from "@orgtik/ui";
+import StatusBadge from "@/components/bindings/EmploymentStatus";
 import CustomizeTooltip from "@/components/shared/CustomizeTooltip";
 import { Link } from "@/i18n/routing";
 import { formatDate } from "@/utils/formateDate";

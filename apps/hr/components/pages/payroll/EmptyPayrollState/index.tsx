@@ -6,7 +6,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Plus } from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import type { EmptyPayrollStateProps } from "@/types/payroll";
 
 export function EmptyPayrollState({ period, type, onStart, onSwitchToMonthly }: EmptyPayrollStateProps) {

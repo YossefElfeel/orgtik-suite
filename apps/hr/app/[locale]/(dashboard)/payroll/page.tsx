@@ -2,18 +2,18 @@
 import { PaperPlaneRight as Send, Plus } from "@phosphor-icons/react";
 
 import AddPayrollAdjustmentSheet from "@/components/pages/payroll/AddPayrollAdjustmentSheet";
-import MainHeader from "@/components/layout/MainHeader";
-import DataTable from "@/components/shared/Table";
+import MainHeader from "@/components/layout/ResourceHeader";
+import DataTable from "@/components/bindings/ResourceTable";
 import { TabMenu } from "@/components/shared/TabMenu";
 import { ToolbarSearchAndFilter } from "@/components/shared/ToolbarSearchAndFilter";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState, useMemo } from "react";
 import { PayrollTab, useColumns, PayrollRow } from "./columns";
 import { DateRange } from "react-aria-components";
 import { today, getLocalTimeZone, CalendarDate } from "@internationalized/date";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import StatusBadge from "@/components/shared/StatusBadge";
+import { Tabs, TabsList, TabsTrigger } from "@/components/bindings/tabs";
+import StatusBadge from "@/components/bindings/EmploymentStatus";
 import { EmptyPayrollState } from "@/components/pages/payroll/EmptyPayrollState";
 import { RunActions } from "@/components/pages/payroll/RunActions";
 import { PayrollCurrencyProvider } from "@/components/pages/payroll/PayrollCurrency";
@@ -376,7 +376,7 @@ function HRDashboard() {
                   runId={currentRun?.id}
                   trigger={
                     <Button
-                      variant={"outline"}
+                      variant={"secondary"}
                       size="lg"
                       className="flex-1 sm:flex-initial h-10 text-xs md:text-sm px-3"
                     >
@@ -392,7 +392,7 @@ function HRDashboard() {
                   trigger={
                     <Button
                       size="lg"
-                      variant={"outline"}
+                      variant={"secondary"}
                       className="flex-1 sm:flex-initial h-10 text-xs md:text-sm px-3"
                     >
                       <Plus className="size-4 me-1" />
@@ -411,7 +411,7 @@ function HRDashboard() {
                     employees={selectedEmployees}
                     trigger={
                       <Button
-                        variant="outline"
+                        variant="secondary"
                         size="lg"
                         className="text-fg-muted border-line-strong w-full h-10 text-xs md:text-sm px-3"
                       >

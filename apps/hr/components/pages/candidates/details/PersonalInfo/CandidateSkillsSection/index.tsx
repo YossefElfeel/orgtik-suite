@@ -1,5 +1,5 @@
 import { Sparkle as Sparkles } from "@phosphor-icons/react";
-import { InfoCard } from "@/components/ui/info-card";
+import { InfoCard } from "@/components/shared/EmployeeFacts";
 import { Tag } from "@orgtik/ui";
 import type { IJobApplication } from "@/types/job";
 import { useTranslations } from "next-intl";

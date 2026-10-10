@@ -11,14 +11,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { Calendar } from "@orgtik/ui/dates";
-import { Input } from "@/components/ui/input";
+import { Input } from "@orgtik/ui";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@orgtik/ui";
 import { cn } from "@/lib/utils";
 import { FormButton } from "@/components/ui/form/form-button";
 import { formStyles } from "@/lib/form-styles";
@@ -205,7 +205,7 @@ export function DateTimeFormElement<
                 disabled={disabled}
                 render={
                   <FormButton
-                    variant="outline"
+                    variant="secondary"
                     className={cn(
                       globalConfig.styles.buttonClassName,
                       !field.value && "text-muted-foreground",

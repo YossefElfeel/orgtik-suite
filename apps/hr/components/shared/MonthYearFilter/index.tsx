@@ -10,20 +10,20 @@ import {
   parseDate,
 } from "@internationalized/date";
 import type { DateRange } from "react-aria-components";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { RangeCalendar } from "@orgtik/ui/dates";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@orgtik/ui";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/bindings/select";
 import { rangeText } from "@/lib/date-range";
 
 function getYears(range = 10): string[] {
@@ -131,8 +131,8 @@ export default function MonthYearFilter({ onChange }: Props) {
       {/* Month range navigation */}
       <div className="flex items-center gap-2">
         <Button
-          variant="outline"
-          size="icon"
+          variant="secondary"
+          size="sm"
           className="h-9 w-9 rounded-lg"
           onClick={handlePrev}
           aria-label={t("prevMonth")}
@@ -144,7 +144,7 @@ export default function MonthYearFilter({ onChange }: Props) {
           <PopoverTrigger
             render={
               <Button
-                variant="outline"
+                variant="secondary"
                 size="lg"
                 className="min-w-[220px] text-center text-sm font-medium"
               >
@@ -163,8 +163,8 @@ export default function MonthYearFilter({ onChange }: Props) {
         </Popover>
 
         <Button
-          variant="outline"
-          size="icon"
+          variant="secondary"
+          size="sm"
           className="h-9 w-9 rounded-lg"
           onClick={handleNext}
           aria-label={t("nextMonth")}

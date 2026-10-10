@@ -5,15 +5,15 @@ import Link from "next/link";
 // The board is in Tasks: opened through SOS with a one-time code, landing on this project.
 import { SOS_URL } from "@somion/sos-bar";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import StatusCell from "@/components/shared/Table/Cells/StatusCell";
-import StatusBadge from "@/components/shared/StatusBadge";
+} from "@/components/bindings/tooltip";
+import StatusCell from "@/components/bindings/ResourceTable/Cells/StatusCell";
+import StatusBadge from "@/components/bindings/EmploymentStatus";
 import { IProjects } from "@/types/projects";
 import { useTranslations } from "next-intl";
 
@@ -44,7 +44,7 @@ function ProjectCard({ project }: { project: IProjects }) {
               value={project.progress}
               size={40}
               strokeWidth={5}
-              variant="default"
+              variant="primary"
             />
           </div>
           <span className="text-sm text-fg ">
@@ -80,7 +80,7 @@ function ProjectCard({ project }: { project: IProjects }) {
                   <TooltipTrigger render={<span />}>
                     <Avatar className="w-8 h-8">
                       <AvatarImage
-                        src={team.teamImage || "https://github.com/shadcn.png"}
+                        src={team.teamImage || ""}
                         alt={team.name}
                       />
                       <AvatarFallback>{team.name[0]}</AvatarFallback>

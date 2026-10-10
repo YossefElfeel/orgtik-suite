@@ -2,7 +2,7 @@
 import { CalendarDots as CalendarDays, Clock as Clock3, LinkSimple as Link2 } from "@phosphor-icons/react";
 
 import { ReusableDialog } from "@/components/shared/ReusableDialog/reusable-dialog";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import TextFormEle from "@/components/ui/form/text-form-element";
 import { DateTimeFormElement } from "@/components/ui/form/date-time-form-element";
 import { useCreateApplicationInterviewMutation } from "@/redux/features/job/jobApi";
@@ -115,7 +115,7 @@ export default function ScheduleInterview({
       onOpenChange={handleOpenChange}
       size="2xl"
       trigger={
-        <Button size="lg" variant="outline">
+        <Button size="lg" variant="secondary">
           <CalendarDays className="size-4" />
           {t("trigger")}
         </Button>
@@ -125,7 +125,7 @@ export default function ScheduleInterview({
           <Button
             type="button"
             size="lg"
-            variant="outline"
+            variant="secondary"
             className="flex-1"
             onClick={() => handleOpenChange(false)}
           >

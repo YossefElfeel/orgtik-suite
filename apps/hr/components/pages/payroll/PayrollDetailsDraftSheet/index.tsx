@@ -5,12 +5,12 @@ import { Check, DownloadSimple as Download, Envelope as Mail, Eye, PencilSimple 
 
 import React, { useState } from "react";
 import ReusableSheet from "@/components/shared/ResuableSheet";
-import StatusBadge from "@/components/shared/StatusBadge";
+import StatusBadge from "@/components/bindings/EmploymentStatus";
 import { useForm } from "react-hook-form";
 import type { SalaryItemFormValues } from "@/schemas/payroll/salary-item.schemas";
 import TextFormEle from "@/components/ui/form/text-form-element";
 import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 
 import {
   useUpdatePayrollAdjustmentMutation,
@@ -272,7 +272,7 @@ export default function PayrollDetailsDraftSheet({
               <div className="flex items-center gap-2">
                 <PayslipPreviewDialog id={Number(rowData?.id)}>
                   <div>
-                    <Button variant="outline" size="sm" className="h-9">
+                    <Button variant="secondary" size="sm" className="h-9">
                       <Eye className="size-4 me-1.5" />
                       {t("actions.previewPayslip")}
                     </Button>
@@ -280,7 +280,7 @@ export default function PayrollDetailsDraftSheet({
                 </PayslipPreviewDialog>
 
                 <Button
-                  variant="outline"
+                  variant="secondary"
                   size="sm"
                   className="h-9"
                   onClick={handleDownload}
@@ -294,7 +294,7 @@ export default function PayrollDetailsDraftSheet({
                   hasRole("hr") ||
                   hasRole("super_admin")) && (
                   <Button
-                    variant="outline"
+                    variant="secondary"
                     size="sm"
                     className="h-9"
                     onClick={handleSendEmail}
@@ -610,7 +610,7 @@ const isDraft = status === "draft" || status === "change_requested";
           <IconButton
             label={tDelete("edit")}
             variant="ghost"
-            size="icon-sm"
+            size="xs"
             onClick={() => setIsEditing(true)}
             className="text-fg-muted hover:text-fg hover:bg-sunken border border-line rounded-lg"
           >
@@ -625,7 +625,7 @@ const isDraft = status === "draft" || status === "change_requested";
               <IconButton
                 label={tDelete(isBonus ? "bonusConfirm" : "deductionConfirm")}
                 variant="ghost"
-                size="icon-sm"
+                size="xs"
                 className="text-fg-muted hover:text-danger hover:bg-danger-subtle border border-line rounded-lg"
               >
                 <Trash2 className="h-3.5 w-3.5" />

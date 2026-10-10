@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { IconButton } from "@/components/shared/IconButton";
 import { useFormatter, useTranslations } from "next-intl";
 
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "@orgtik/ui";
 
 export type ISubscription = {
   toolName: string;
@@ -71,7 +71,7 @@ export const useColumns = () => {
         // No edit here: subscriptions move to the customer dashboard (HR-035), and the button
         // did nothing.
         <div className="flex items-center gap-2">
-          <IconButton label={t("tooltips.delete")} variant="outline-delete">
+          <IconButton label={t("tooltips.delete")} variant="secondary">
             <Trash2 className="size-4" />
           </IconButton>
         </div>

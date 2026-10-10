@@ -2,8 +2,8 @@
 import { CaretDown as ChevronDown, MagnifyingGlass as Search } from "@phosphor-icons/react";
 
 
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@orgtik/ui";
+import { Button } from "@orgtik/ui";
 import { cn } from "@/lib/utils";
 
 type Option = {
@@ -44,7 +44,7 @@ export function TicketsFiltersBar({
 
       <div className="flex items-center gap-2">
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => onStatusChange?.(activeStatus?.value ?? "all")}
           className="h-8 gap-1.5 rounded-lg border-line bg-raised px-2 text-xs font-medium text-fg-muted shadow-[0px_1px_2px_0px_rgba(9,25,72,0.06)] hover:bg-raised"
@@ -54,7 +54,7 @@ export function TicketsFiltersBar({
         </Button>
 
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => onSortChange?.(activeSort?.value ?? "last-7-days")}
           className="h-8 gap-1.5 rounded-lg border-line bg-raised px-2 text-xs font-medium text-fg-muted shadow-[0px_1px_2px_0px_rgba(9,25,72,0.06)] hover:bg-raised"

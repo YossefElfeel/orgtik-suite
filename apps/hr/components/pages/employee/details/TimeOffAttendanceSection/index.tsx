@@ -3,11 +3,11 @@ import { AirplaneTakeoff as PlaneTakeoff, CalendarDots as CalendarClock } from "
 
 import { useMemo, useState } from "react";
 import { TabMenu } from "@/components/shared/TabMenu";
-import DataTable from "@/components/shared/Table";
+import DataTable from "@/components/bindings/ResourceTable";
 import { SectionCard } from "../SectionCard";
 import type { IDaysOffInformation } from "@/types/employee";
-import { InfoCardSkeleton } from "@/components/ui/info-card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { InfoCardSkeleton } from "@/components/shared/EmployeeFacts";
+import { Skeleton } from "@orgtik/ui";
 import {
   useGetEmployeeAttendanceQuery,
   useGetEmployeeLeavesQuery,

@@ -2,8 +2,8 @@
 import { Camera as CameraIcon, UploadSimple as UploadSimpleIcon, X } from "@phosphor-icons/react";
 
 import React, { useRef, useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
+import { Button } from "@orgtik/ui";
 import { useTranslations } from "next-intl";
 
 interface CompanyLogoUploadProps {
@@ -71,7 +71,7 @@ const CompanyLogoUpload: React.FC<CompanyLogoUploadProps> = ({ value, onChange }
       <div className="flex gap-2">
         <Button
           type="button"
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => fileInputRef.current?.click()}
         >
