@@ -82,6 +82,6 @@ function createWorkspaceRuntime(input, appModule) {
     open(); if (!command.snapshot) throw failure("Marketing replay requires committed snapshot effects");
     checkSnapshot(command.snapshot); state.db = clone(command.snapshot.data);
   }
-  return { router, exportSnapshot, bootstrap, transferOwnership, applyCommitted, usage: () => { open(); return [{ key: "brands", used: state.db.projects.length }, { key: "posts", used: state.db.posts.length }, { key: "campaigns", used: state.db.campaigns.length }]; }, transitionCalendar() { open(); state.transitionCalendar(); }, close() { closed = true; } };
+  return { campaignCandidate: (...args) => state.v3.campaignCandidate(...args), recordAttribution: (...args) => state.v3.recordAttribution(...args), recordDelivery: (...args) => state.v3.recordDelivery(...args), router, exportSnapshot, bootstrap, transferOwnership, applyCommitted, usage: () => { open(); return [{ key: "brands", used: state.db.projects.length }, { key: "posts", used: state.db.posts.length }, { key: "campaigns", used: state.db.campaigns.length }]; }, transitionCalendar() { open(); state.transitionCalendar(); }, close() { closed = true; } };
 }
 module.exports = { createWorkspaceRuntime, SCHEMA, LISTS };
