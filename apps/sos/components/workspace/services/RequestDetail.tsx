@@ -18,6 +18,8 @@ import { useLocalized, usePlatformProblem } from "@/components/workspace/account
 import { Notice } from "@/components/workspace/account/Notice";
 import { Composer, Thread } from "@/components/workspace/support/Thread";
 import { cancellable, quoteExpired, requestBadge } from "./status";
+import { API_URL } from "@/constants/env";
+import { readClientSession } from "@orgtik/ui/auth";
 import { PaginatedTable } from "@orgtik/ui/table";
 
 type Dialogs = "accept" | "pay" | "decline" | "approve" | "revise" | "cancel" | null;
@@ -312,6 +314,9 @@ function Deliveries({ r, canManage, onOpen }: { r: ServiceRequest; canManage: bo
   const t = useTranslations("Services.detail");
   const f = useFormatter();
   const day = (d?: string) => (d ? f.date(d, { dateStyle: "medium" }) : "");
+  const tv = useTranslations("AccountV3");
+  const [downloadError, setDownloadError] = useState(false);
+  const download = async (file: { name: string; contentPath?: string }) => { if (!file.contentPath) return; setDownloadError(false); try { const session = readClientSession(); const response = await fetch(API_URL.replace(/\/api$/, "") + file.contentPath, { headers: { Authorization: "Bearer " + session?.tokens.accessToken, "X-Workspace": session?.workspaceContext?.workspace.id || "" } }); if (!response.ok) throw Error("delivery_unavailable"); const url = URL.createObjectURL(await response.blob()), link = document.createElement("a"); link.href = url; link.download = file.name; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000); } catch { setDownloadError(true); } };
   const last = r.deliveries.at(-1);
   return (
     <Card className="flex flex-col gap-4">
@@ -328,10 +333,10 @@ function Deliveries({ r, canManage, onOpen }: { r: ServiceRequest; canManage: bo
               </p>
               {d.files.length ? (
                 <ul className="flex flex-wrap gap-2">
-                  {d.files.map((file) => (
-                    <li key={file} className="flex items-center gap-1 text-body-sm text-fg-muted">
+                  {d.files.map((file, index) => (
+                    <li key={index} className="flex items-center gap-1 text-body-sm text-fg-muted">
                       <FileText aria-hidden="true" />
-                      <span dir="ltr">{file}</span>
+                      <span dir="auto">{typeof file === "string" ? file : file.name}</span>{typeof file !== "string" && file.contentPath ? <Button size="sm" variant="ghost" onClick={() => void download(file)}>{tv("downloadDelivery")}</Button> : null}
                     </li>
                   ))}
                 </ul>
@@ -339,6 +344,7 @@ function Deliveries({ r, canManage, onOpen }: { r: ServiceRequest; canManage: bo
             </li>
           ))}
       </ol>
+      {downloadError ? <p role="alert" className="text-body-sm text-danger">{tv("deliveryUnavailable")}</p> : null}
       {r.state === "in_review" && last ? (
         <>
           {last.autoApproveAt ? <Notice tone="info">{t("autoApprove", { date: day(last.autoApproveAt) })}</Notice> : null}

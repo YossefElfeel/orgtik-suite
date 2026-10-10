@@ -16,6 +16,7 @@ import { useMounted } from "@/hooks/use-mounted";
 import { platformError, useStartTrialMutation, useToolCatalogQuery, useToolDetailQuery, type Cycle, type ToolDetail, type ToolPlan } from "@/redux/features/platform/tools";
 import type { PlatformError } from "@/redux/features/platform/platformApi";
 import { openHref, WaitlistButton } from "@/components/workspace/tools/ToolActions";
+import { ToolAccessAction } from "@/components/account/ToolAccessAction";
 import { daysUntil, Notice, ToolIcon, useLocalized, useToolsError } from "@/components/workspace/tools/shared";
 
 function useFeatureText() {
@@ -231,6 +232,7 @@ export default function ToolPlansPage() {
         <Notice tone="info">{t("trialUsedNote", { tool: name })}</Notice>
       ) : null}
       {!canBuy ? <Notice tone="info">{t("ownerOnly", { workspace: ws.me.workspace.name })}</Notice> : null}
+      {!canBuy && ["not_subscribed", "no_access"].includes(tool.state) ? <ToolAccessAction toolKey={tool.key} /> : null}
 
       {tool.status === "coming_soon" ? (
         <Card padding="lg" className="flex flex-col items-start gap-3">

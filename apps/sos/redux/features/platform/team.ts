@@ -2,10 +2,11 @@
 // The workspace's purchased capacity, assigned access and pending reservations are separate.
 import { platformApi, type WorkspaceRole } from "./platformApi";
 
-export type MemberStatus = "active" | "invited" | "cancelled" | "expired";
+export type MemberStatus = "active" | "invited" | "cancelled" | "expired" | "suspended" | "removed";
 export type TeamMember = {
   /** Stable workspace membership ID; person identity and invitations have their own IDs. */
   id: string;
+  customRoleId?: string | null;
   userKey: string | null;
   name: string;
   email: string;

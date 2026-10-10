@@ -7,11 +7,11 @@
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Gift, Sparkle, Timer } from "@phosphor-icons/react";
-import { buttonVariants, Card, ErrorState, ListStates, PageHeader, StatusBadge, useFormatter } from "@orgtik/ui";
+import { buttonVariants, Card, ErrorState, ListStates, PageHeader, StatusBadge, toolFromScope, useFormatter, useSuite } from "@orgtik/ui";
 import useWorkspace from "@/hooks/use-workspace";
 import { useMounted } from "@/hooks/use-mounted";
 import { useToolCatalogQuery, type CatalogTool } from "@/redux/features/platform/tools";
-import { WaitlistButton } from "@/components/workspace/tools/ToolActions";
+import { ToolActions, WaitlistButton } from "@/components/workspace/tools/ToolActions";
 import { ToolIcon, useLocalized } from "@/components/workspace/tools/shared";
 
 function Facts({ tool }: { tool: CatalogTool }) {
@@ -59,6 +59,7 @@ function Facts({ tool }: { tool: CatalogTool }) {
 }
 
 export default function ToolsPage() {
+  const suite = useSuite();
   const t = useTranslations("Tools.catalog");
   const ta = useTranslations("Tools.actions");
   const loc = useLocalized();
@@ -102,6 +103,7 @@ export default function ToolsPage() {
                   </div>
                   <Facts tool={tool} />
                   <div className="mt-auto flex flex-wrap items-center gap-2 pt-1">
+                    {tool.status !== "coming_soon" && toolFromScope(tool.key) ? <ToolActions tool={{ key: tool.key, name, state: tool.state, scope: suite.toolState(toolFromScope(tool.key)!)?.scope, trialDays: tool.trialDays, onWaitlist: tool.onWaitlist }} role={role} canBuy={Boolean(ws.me?.can.buy)} /> : null}
                     {tool.status === "coming_soon" ? (
                       role === "guest" ? null : <WaitlistButton toolKey={tool.key} name={name} onWaitlist={tool.onWaitlist} />
                     ) : (

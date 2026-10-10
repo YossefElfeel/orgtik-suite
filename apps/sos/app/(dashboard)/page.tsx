@@ -15,6 +15,9 @@ import { useMounted } from "@/hooks/use-mounted";
 import { useGetDashboardStatsQuery } from "@/redux/features/dashboard/dashboardApi";
 import { APP_ICONS, CURRENT_SCOPE, buildScopeHref, useAppLabel, useMyScopes } from "@/components/suite/useSuiteApps";
 import useWorkspace from "@/hooks/use-workspace";
+import { AccountHome } from "@/components/account/AccountHome";
+import { IdentityLanding } from "@/components/account/IdentityLanding";
+import { useSuite } from "@orgtik/ui";
 import { MyTools } from "@/components/workspace/tools/MyTools";
 
 function AdminFigures() {
@@ -35,7 +38,7 @@ function AdminFigures() {
   );
 }
 
-export default function HomePage() {
+function LegacyHome() {
   const t = useTranslations("Home");
   const mounted = useMounted();
   const appLabel = useAppLabel();
@@ -102,3 +105,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+export default function HomePage() { const suite = useSuite(), { workspaceContext, staffAccess } = useUser(), mounted = useMounted(); if (!mounted) return <LoadingState rows={4} />; if (workspaceContext) return <AccountHome />; if (staffAccess) return <LegacyHome />; return <IdentityLanding />; }
