@@ -8,7 +8,7 @@ const clone = value => JSON.parse(JSON.stringify(value));
 const ADMIN_ROLES = { tasks: ['super_admin', 'project_manager'], files: ['super_admin'], hr: ['super_admin', 'hr'], crm: ['admin', 'manager'], marketing: ['super_admin', 'marketing_manager'], chat: ['owner', 'admin'] };
 function requireToolAdmin(context, tool) {
   const access = context.tools[tool];
-  if (!connectors.admitted(access) || !access.roles.some(role => ADMIN_ROLES[tool]?.includes(role))) throw fail(403, 'tool_admin_required', 'Ask this tool’s administrator.');
+  if (!connectors.admitted(access) || !['owner', 'admin'].includes(context.member.role) && !access.roles.some(role => ADMIN_ROLES[tool]?.includes(role))) throw fail(403, 'tool_admin_required', 'Ask this tool’s administrator.');
   return access;
 }
 function preferences(actor) { return clone(actor.profile?.suitePreferences || { density: 'comfortable' }); }
@@ -76,6 +76,12 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
   app.post('/api/suite/access-requests', write(req => connectors.requestAccess(S, workspace, actor, currentContext(), req.body)));
   app.post('/api/suite/access-requests/:id/:decision', write(req => connectors.decideAccess(S, identity, workspace, actor, currentContext(), req.params.id, req.params.decision)));
   app.get('/api/suite/people', read(() => workspace.members.filter(row => row.status === 'active' && (context.member.role !== 'guest' || row.userKey === actor.key)).map(row => { const user = identity.findByKey(row.userKey); return { id: String(user?.id || row.id), memberId: row.id, name: user ? identity.fullName(user) : row.name, email: user?.email || row.email, avatar: user?.avatar || null }; })));
+  app.get('/api/suite/crm/directory', read(req => {
+    const ctx = currentContext(); connectors.requireConnection(workspace, ctx, 'marketing', 'crm');
+    const data = runtimeFor('crm').suiteFeed(ctx), query = String(req.query.search || '').trim().toLocaleLowerCase();
+    if (query.length > 200) throw fail(422, 'invalid_directory_query', 'Use a shorter directory search.');
+    return { workspaceId: workspace.id, managedIn: 'crm', contacts: data.contacts.filter(row => !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200).map(row => ({ workspaceId: workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
+  }));
   app.get('/api/suite/projects', read(req => {
     connectors.requireConnection(workspace, currentContext(), 'hr', 'tasks');
     const query = String(req.query.search || '').toLocaleLowerCase();

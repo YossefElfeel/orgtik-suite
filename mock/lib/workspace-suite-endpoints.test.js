@@ -36,6 +36,9 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     assert.equal(good(await call('sos', '/api/suite/bootstrap', token)).connectors.find(row => row.id === 'tasks-files').state, 'disabled');
     assert.deepEqual(good(await call('sos', '/api/suite/search?q=OrgTik', token)), []);
     const admin = good(await call('sos', '/api/suite/tools/tasks/admin', token)); assert.equal(admin.members.length, 1); assert.equal(admin.members[0].userId, account.user.id);
+    good(await call('sos', `/api/suite/tools/tasks/admin/members/${account.user.id}`, token, 'PATCH', { roles: ['developer'] }));
+    assert.equal(good(await call('sos', '/api/suite/tools/tasks/admin', token)).members[0].roles[0], 'developer');
+    good(await call('sos', `/api/suite/tools/tasks/admin/members/${account.user.id}`, token, 'PATCH', { roles: ['super_admin'] }));
     const exportData = good(await call('sos', '/api/suite/tools/tasks/export', token)); assert.equal(exportData.workspaceId, workspaceId); assert.deepEqual(exportData.data.projects, []); assert.ok(exportData.consequences.some(row => row.id === 'tasks-files'));
     const mona = good(await call('sos', '/api/auth/login', null, 'POST', { email: 'mona.adel@orgtik.test', password: 'Local@2026' }));
     const owner = mona.tokens.accessToken;
@@ -64,6 +67,7 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     const todo = project.sections.find(row => row.section.flag === 'todo').section.id, done = project.sections.find(row => row.section.flag === 'done').section.id;
     const first = project.sections.find(row => row.section.flag === 'todo').tasks[0];
     const blocked = good(await call('tasks', `/api/tasks/sections/${todo}`, tasksToken, 'POST', { title: 'Blocked recurring review', dependsOnTaskIds: [first.id], recurrence: 'weekly', labels: ['review'], watcherIds: [account.user.id], reminder: { enabled: true, offset: 30 } }));
+    assert.ok(good(await call('sos', '/api/suite/activity', token)).some(row => row.tool === 'tasks' && row.path.includes(`task-id=${blocked.id}`)));
     assert.deepEqual(blocked.labels, ['review']); assert.equal(blocked.recurrence, 'weekly'); assert.equal(blocked.canComplete, false);
     for (const action of [
       () => call('tasks', `/api/tasks/${blocked.id}`, tasksToken, 'PUT', { status: 'done' }),
@@ -145,6 +149,13 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     const lead = good(await call('wm', '/v2/public/leads', null, 'POST', { name: 'Website Prospect', email: 'prospect@v3-suite.test', message: 'Please prepare a service proposal.', consent: true, privacyVersion: site.forms.privacyVersion }));
     assert.equal(lead.sales.state, 'sent'); assert.equal(lead.sales.managedIn, 'crm'); assert.ok(lead.sales.leadId);
     assert.ok(good(await call('sales', '/api/customers?search=prospect', crmToken)).items.some(row => row.email === 'prospect@v3-suite.test'));
+    const marketingToken = good(await call('sos', '/api/auth/workspace', owner, 'POST', { workspaceId: 'ws_orgtik', target: 'marketing' })).tokens.accessToken;
+    const unknownConsent = good(await call('marketing', '/api/suite/crm/directory?search=Website%20Prospect', marketingToken)).contacts.find(row => row.id === lead.sales.leadId);
+    assert.equal(unknownConsent.consent.state, 'unknown'); assert.equal(unknownConsent.workspaceId, 'ws_orgtik');
+    good(await call('sales', `/api/crm/v3/contacts/${lead.sales.leadId}`, crmToken, 'PATCH', { marketingConsent: 'opted_in' }));
+    const consented = good(await call('marketing', '/api/suite/crm/directory?search=Website%20Prospect', marketingToken)).contacts.find(row => row.id === lead.sales.leadId);
+    assert.equal(consented.consent.state, 'opted_in'); assert.equal(consented.consent.recordedBy, mona.user.id); assert.equal(consented.consent.source, 'manual_mock');
+    assert.ok(good(await call('sos', '/api/suite/activity', owner)).some(row => row.tool === 'crm' && row.path.includes(lead.sales.leadId)));
     const mirror = good(await call('wm', '/v2/admin/catalog', wmStaff.tokens.accessToken)); assert.equal(mirror.readOnly, true); assert.equal(mirror.items.find(row => row.id === offer.id).managedIn, 'crm'); assert.ok(mirror.items.some(row => row.managedIn === 'console'));
     const quote = good(await call('sos', '/v1/public/website-quotes', null, 'POST', { groups: [{ id: 'service-order', kind: 'service', lines: [{ catalogId: offer.id, months: 1, autoRenew: false }] }] }));
     const order = good(await call('sos', '/v1/public/website-orders', null, 'POST', { quoteId: quote.quoteId, reference: 'v3-service-paid-example', paymentMethod: 'paypal', billing: { name: 'V3 Owner', email: 'owner@v3-suite.test', country: 'CH' } }));

@@ -14,6 +14,7 @@ export type SuitePreferences = {
     theme?: "light" | "dark";
     density?: "comfortable" | "compact";
     language?: string;
+    notificationPreferences?: Record<string, boolean>;
     savedViews?: Record<string, {
         id: string;
         name: string;
