@@ -14,6 +14,12 @@ function create({ getStore, identity, principal, applyDb, afterStaffAcceptance }
     if (write && p.readOnly) throw fail(423, 'view_as_read_only', 'View-as is read-only.');
     return p;
   }
+  function personalAuthority(write = false) {
+    const p = principal();
+    if (!p || p.claims.mode !== 'staff' || p.claims.aud !== 'staff:admin' || !p.context.staffAccess?.apps.includes('admin')) throw fail(403, 'staff_permission_required', 'Open Console with your current staff account.');
+    if (write && p.readOnly) throw fail(423, 'view_as_read_only', 'View-as is read-only.');
+    return p;
+  }
   const state = () => S().db.consoleV3 || { version: 1, readMarks: {}, security: {}, releases: [], invitations: [], documents: {}, series: {}, manualRetryPauses: {}, taxChecks: [], payLinks: [], ticketSLAs: {} };
   function mutable() {
     S().db.consoleV3 ??= clone(state());
@@ -86,10 +92,10 @@ function create({ getStore, identity, principal, applyDb, afterStaffAcceptance }
   function routes(app, prefix = '/v1/admin/console') {
     const read = fn => (req, res, next) => { try { Promise.resolve(fn(req)).then(data => res.set('Cache-Control', 'private, no-store').json({ data, meta: {} }), next); } catch (error) { next(error); } };
     app.get(prefix + '/frame', read(() => {
-      const p = authority('overview:view');
+      const p = personalAuthority();
       return { staff: { id: p.user.id, name: identity.fullName(p.user) }, preferences: preferences(actor()), now: at(), scope: 'staff:admin' };
     }));
-    app.patch(prefix + '/preferences', read(req => { authority('overview:view', true); return savePreferences(actor(), req.body); }));
+    app.patch(prefix + '/preferences', read(req => { personalAuthority(true); return savePreferences(actor(), req.body); }));
     app.get(prefix + '/search', read(req => search(String(req.query.q || '').trim())));
     app.get(prefix + '/notifications', read(notifications));
     app.post(prefix + '/notifications/read', read(req => {
@@ -115,7 +121,7 @@ function create({ getStore, identity, principal, applyDb, afterStaffAcceptance }
     app.get(prefix + '/workspaces/:id/lines', read(req => {
       authority('billing:view'); const workspace = S().workspace(req.params.id);
       if (!workspace || workspace.state === 'deleted') throw fail(404, 'workspace_not_found', 'Choose a current workspace.');
-      return { workspaceId: workspace.id, lines: clone(workspace.lines), plans: S().db.plans.filter(plan => plan.tool && plan.status === 'active' && (plan.visibility !== 'private' || plan.allowedWorkspaceIds?.includes(workspace.id))).map(plan => ({ id: plan.id, tool: plan.tool, name: plan.name, perUser: plan.perUser })), paymentMethods: clone(workspace.paymentMethods.filter(method => !method.expired)) };
+      return { workspaceId: workspace.id, lines: workspace.lines.map(line => ({ ...clone(line), toolName: clone(S().db.tools.find(tool => tool.key === line.tool)?.name || { en: line.tool }), planName: clone(S().db.plans.find(plan => plan.id === line.planId)?.name || { en: line.planId }) })), plans: S().db.plans.filter(plan => plan.tool && plan.status === 'active' && (plan.visibility !== 'private' || plan.allowedWorkspaceIds?.includes(workspace.id))).map(plan => ({ id: plan.id, tool: plan.tool, name: plan.name, perUser: plan.perUser })), paymentMethods: clone(workspace.paymentMethods.filter(method => !method.expired)) };
     }));
     app.post(prefix + '/workspaces/:id/view-as', read(req => recorded(req, 'workspaces:edit', p => {
       const workspace = S().workspace(req.params.id), owner = workspace?.members.find(member => member.role === 'owner' && member.status === 'active'), person = owner && identity.users.find(user => user.key === owner.userKey || user.email === owner.email);
