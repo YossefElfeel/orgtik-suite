@@ -12,6 +12,99 @@ const TYPES = [
   "roadmapItem",
   "review",
 ];
+function publishedExamples({ entries, audit, now }) {
+  for (const type of TYPES) {
+    const rows = [...entries.values()].filter((entry) => entry.type === type);
+    if (!rows.length || rows.some((entry) => !entry.draft)) continue;
+    const id = `demo_published_${type}`;
+    if (entries.has(id)) continue;
+    const source = rows.find((entry) => entry.live);
+    if (!source) continue;
+    const labels = {
+      page: "page",
+      global: "global content",
+      strings: "strings",
+      serviceFamily: "service family",
+      service: "service",
+      softwareModule: "software",
+      caseStudy: "case study",
+      article: "article",
+      roadmapItem: "roadmap item",
+      review: "review",
+    };
+    const at = now(),
+      content = clone(source.live),
+      name = `Sample published ${labels[type]}`;
+    content.name = name;
+    content.locales.en.name = name;
+    if (content.slug?.en)
+      content.slug.en =
+        type === "page"
+          ? `/sample-published-${type}`
+          : `sample-published-${type.toLowerCase()}`;
+    const entry = {
+      ...clone(source),
+      id,
+      live: content,
+      draft: null,
+      demoState: true,
+      demoPublished: true,
+      order: Math.max(...rows.map((entry) => entry.order)) + 1,
+      workflow: {
+        state: "published",
+        visibility: "archived",
+        version: 1,
+        updatedAt: at,
+        updatedBy: "admin",
+        publishedAt: at,
+        lastEditor: null,
+      },
+      versions: [
+        {
+          version: 1,
+          state: "published",
+          at,
+          by: "admin",
+          note: "Sample published record, kept off the website. Existing published content and pending revisions are unchanged.",
+          content: clone(content),
+        },
+      ],
+      translators: {},
+    };
+    entries.set(id, entry);
+    audit.unshift({
+      at,
+      by: "admin",
+      action: "sample_revision",
+      entry: id,
+      type,
+      version: 1,
+      targetName: name,
+      sample: true,
+    });
+  }
+}
+function populateTranslationExamples(entries) {
+  for (const entry of entries.values()) {
+    if (
+      !entry.demoState ||
+      entry.demoPublished ||
+      !entry.draft ||
+      !entry.versions[0]?.note?.startsWith("Sample ")
+    )
+      continue;
+    for (const [locale, state] of Object.entries(entry.translation)) {
+      if (
+        locale === "en" ||
+        !["needs_review", "outdated", "in_progress"].includes(state) ||
+        entry.draft.locales[locale]
+      )
+        continue;
+      entry.draft.locales[locale] = clone(entry.draft.locales.en);
+      entry.versions[0].content = clone(entry.draft);
+    }
+  }
+}
 function contentExamples({ entries, audit, ideas, now }) {
   const at = now();
   for (const type of TYPES) {
@@ -68,15 +161,19 @@ function contentExamples({ entries, audit, ideas, now }) {
       });
     }
   }
+  publishedExamples({ entries, audit, now });
   // Translation examples only touch untouched seed translations.
   const translations = ["needs_review", "outdated", "in_progress"];
   [...entries.values()]
-    .filter((entry) => entry.demoState)
+    .filter((entry) => entry.demoState && !entry.demoPublished)
     .slice(0, 12)
     .forEach((entry, index) => {
+      if (entry.demoTranslations) return;
       const locale = ["ar", "de", "fr", "it"][index % 4];
       entry.translation[locale] = translations[index % 3];
+      entry.demoTranslations = true;
     });
+  populateTranslationExamples(entries);
   const base = [...ideas.values()][0];
   if (base)
     for (const [index, status] of ["declined", "hidden", "merged"].entries()) {
@@ -197,4 +294,10 @@ function redirectExamples(redirects, now) {
       });
   }
 }
-module.exports = { contentExamples, leadExamples, redirectExamples };
+module.exports = {
+  contentExamples,
+  publishedExamples,
+  populateTranslationExamples,
+  leadExamples,
+  redirectExamples,
+};

@@ -49,6 +49,13 @@ export function RankingChart({
       >
         {loading ? (
           <Skeleton className="h-64 w-full" />
+        ) : !rows.length ? (
+          <p
+            role="status"
+            className="py-8 text-center text-body-sm text-fg-muted"
+          >
+            {t("noResults")}
+          </p>
         ) : (
           rows.map((row, index) => (
             <div

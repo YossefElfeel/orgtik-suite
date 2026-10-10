@@ -265,7 +265,10 @@ export const content = {
         a.slug.en,
         {
           t: clone(en(a).takeaways),
-          b: en(a).sections.map((s) => [s.heading, clone(s.paragraphs)]),
+          b: en(a).sections.map((s) => [s.heading, clone(s.paragraphs ?? [])]),
+          ...(en(a).sections.some((s) => s.blocks)
+            ? { sections: clone(en(a).sections) }
+            : {}),
         },
       ]),
     ),

@@ -62,6 +62,7 @@ import { SectionOrder } from "./SectionOrder";
 import { SectionAttachments } from "./SectionAttachments";
 import { MediaPicker } from "@/components/media/MediaPicker";
 import sectionMap from "@/lib/cms-sections.json";
+import { ArticleBodyEditor, synchronizeArticleEdits } from "./ArticleBodyEditor";
 import {
   LifecycleActions,
   VisibilityBadge,
@@ -190,6 +191,12 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   // Retained catalog mirrors are read-only. Current prices are owned by the platform.
   const managedIn = entry.content.managedIn ?? null;
   const editable = can("content:edit") && !managedIn;
+  const mayEdit = seoOnly ? permitted("seo:edit") : permitted("content:edit") && !managedIn;
+  const editQuery = new URLSearchParams(params.toString());
+  editQuery.delete("view");
+  editQuery.set("lang", lang);
+  editQuery.set("section", section);
+  const editHref = `${seoOnly ? "/seo/content" : `/content/${type.area}`}/${entry.id}?${editQuery}`;
   // The SEO team edits an entry's SEO block (and only that); a draft changing nothing else goes
   // through their review too (the SEO fast lane).
   const seoEditable = can("content:edit") || can("seo:edit");
@@ -210,7 +217,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
     numbersLocked: lang !== "en" || !editable || pricesLocked,
     errors,
   };
-  const lastEditor = entry.versions.find((v) => v.state === "draft")?.by.key;
+  const lastEditor = entry.lastEditor ?? entry.versions.find((v) => v.state === "draft")?.by.key;
   const mine = entry.hasDraft && lastEditor === me.data?.user.key;
   const areaTitle = seoOnly ? ti("seoHealth") : ta(`${type.area}.title`);
   const entryName = useEntryName();
@@ -416,7 +423,13 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
     return null;
   })();
 
-  const setTree = (next: Tree) => setEdits((e) => ({ ...e, [lang]: next }));
+  const setTree = (next: Tree) => setEdits(current => {
+    const result = { ...current, [lang]: next };
+    if (type.key === "article" && lang === "en" && next.sections) for (const locale of LOCALES) {
+      if (locale !== "en" && current[locale]) result[locale] = { ...current[locale], sections: synchronizeArticleEdits(next.sections, (current.en ?? english).sections, current[locale]?.sections) };
+    }
+    return result;
+  });
   // A section is named by the page's own heading, a field name, or the editor's tab name.
   const sectionName = (s: EditorSection) =>
     (s.label === "Custom Cursor" || s.label === "View project" ? ti("customCursor") : s.label) ??
@@ -759,6 +772,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         }
         actions={
           <>
+            {viewing && mayEdit ? <Button onClick={() => router.replace(editHref)}>{ti("edit")}</Button> : null}
             <Button
               variant="ghost"
               startIcon={<Monitor />}
@@ -838,7 +852,9 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         }
       />
 
-      {!managedIn && !["pricing","legalDocument","service","softwareModule","serviceFamily"].includes(entry.type)?<><div className="flex flex-wrap items-center gap-3"><Switch checked={autosaving} onCheckedChange={setAutosaving} aria-label={v3("autosave")}/><span className="text-body-sm text-fg-muted">{v3(savingAction.busy?"autosaving":"autosave")}</span></div><StudioFeedback action={savingAction} onRetry={value=>acceptSaved(value,JSON.stringify((savingAction.pending?.body as {patches?:unknown})?.patches)===JSON.stringify(makePatches())?editStamp:undefined)}/></>:null}
+      {!viewing && !managedIn && !["pricing","legalDocument","service","softwareModule","serviceFamily"].includes(entry.type)?<><div className="flex flex-wrap items-center gap-3"><Switch checked={autosaving} onCheckedChange={setAutosaving} aria-label={v3("autosave")}/><span className="text-body-sm text-fg-muted">{v3(savingAction.busy?"autosaving":"autosave")}</span></div><StudioFeedback action={savingAction} onRetry={value=>acceptSaved(value,JSON.stringify((savingAction.pending?.body as {patches?:unknown})?.patches)===JSON.stringify(makePatches())?editStamp:undefined)}/></>:null}
+      {viewing ? <div className="flex flex-wrap items-center justify-between gap-3 rounded-field border border-line bg-info-subtle p-4"><p className="text-body-sm text-info">{ti(mayEdit ? "viewModeHelp" : "viewOnlyHelp")}</p>{mayEdit ? <Button size="sm" variant="secondary" onClick={() => router.replace(editHref)}>{ti("edit")}</Button> : null}</div> : null}
+
       {!seoOnly && body.length > 1 ? <SectionOrder items={orderedBody.map(key => ({ key, label: sections.find(section => section.value === key) ? sectionName(sections.find(section => section.value === key)!) : key === "reviews" ? ti("reviews") : key === "questions" ? ti("faqQuestions") : key }))} disabled={!editable || lang !== "en"} onChange={sectionOrder => setPresentationEdit({ ...presentation, sectionOrder })} /> : null}
 
       {type.key === "pricing" || type.key === "softwareModule" ? <PricingAuthority historical={type.key === "pricing"} /> : null}
@@ -1034,7 +1050,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                 {s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "") ? <div className="grid max-w-2xl gap-4">
                   <Field label={ti("text")}><Input disabled={!editable} value={presentation.cursor.text[lang] ?? String(get(tree, "intro") && (get(tree, "intro") as Tree).div || "").replace(/<[^>]+>/g, "").trim()} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, text: { ...presentation.cursor.text, [lang]: event.target.value } } })} /></Field>
                   <Field label={ti("link")}><Input dir="ltr" disabled={!editable || lang !== "en"} value={presentation.cursor.link} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, link: event.target.value } })} /></Field>
-                </div> : references[s.value] ? <Link href={references[s.value]} className="text-fg-brand underline">{ti("manage")} {sectionName(s)}</Link> : s.value === "shared-copy" ? <SharedCopyPanel key={`${entry.id}-${lang}`} pageId={entry.id} lang={lang} readOnly={!editable} /> : <ValueEditor
+                </div> : references[s.value] ? <Link href={references[s.value]} className="text-fg-brand underline">{ti("manage")} {sectionName(s)}</Link> : s.value === "shared-copy" ? <SharedCopyPanel key={`${entry.id}-${lang}`} pageId={entry.id} lang={lang} readOnly={!editable} /> : type.key === "article" && s.value === "body" ? <ArticleBodyEditor ctx={ctx} value={get(tree, "sections")} onChange={value => setTree(put(tree ?? {}, "sections", value))} /> : <ValueEditor
                   node={s.node}
                   value={get(tree, s.path)}
                   fallback={lang === "en" ? undefined : get(english, s.path)}
@@ -1042,7 +1058,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                   path={s.path}
                   ctx={ctx}
                 />}
-                {s.value !== "shared-copy" && !(s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "")) && type.key !== "strings" && type.key !== "pricing" ? <SectionAttachments disabled={!editable || lang !== "en"} items={presentation.sectionMedia[s.value] ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, [s.value]: items } })} /> : null}
+                {s.value !== "shared-copy" && !(s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "")) && type.key !== "strings" && type.key !== "pricing" ? <SectionAttachments disabled={!editable || lang !== "en"} disabledReason={viewing ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia[s.value] ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, [s.value]: items } })} /> : null}
               </TabsPanel>
             ))}
             {type.seo ? (
@@ -1152,7 +1168,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         </div>
       ) : null}
 
-      {!managedIn && !["pricing","legalDocument","service","softwareModule","serviceFamily"].includes(entry.type)?<ElementComments entryId={entry.id} anchor={section==="seo"?"seo":sections.find(s=>s.value===section)?.path||"entry"} locale={lang} editable={editable||seoEditable}/>:null}
+      {!viewing && !managedIn && !["pricing","legalDocument","service","softwareModule","serviceFamily"].includes(entry.type)?<ElementComments entryId={entry.id} anchor={section==="seo"?"seo":sections.find(s=>s.value===section)?.path||"entry"} locale={lang} editable={editable||seoEditable}/>:null}
       <ConfirmDialog
         open={Boolean(stale)}
         onOpenChange={(o) => !o && setStale(null)}

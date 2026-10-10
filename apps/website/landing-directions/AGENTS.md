@@ -1,3 +1,7 @@
+## Flexible Insights content — 2026-10-11
+
+The user requested adding more sections and placing images freely in the article editor, including `/content/insights/ar_02`. Insights articles support ordered sections with text, image, and video blocks between paragraphs. Keep existing paragraph content compatible, retain captions and alternative text, and render the saved order in both draft previews and the published website. Structure and media are shared across the five languages; translated text follows stable section/block identifiers. Preserve the existing cinematic article typography.
+
 ## Pull request base — 2026-10-07
 
 The user requires standalone pull requests based directly on main. Do not stack changes on another PR branch. Carry only this task's changes onto main and keep unrelated work out of the diff.
