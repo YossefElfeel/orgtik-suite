@@ -57,7 +57,7 @@ export default function JourneyTask({
     if (!available) return;
     setError(false);
     Promise.all([
-      suite.request<TaskProject[]>("/tasks/projects?source=marketing"),
+      suite.request<TaskProject[]>(`/tasks/projects?source=marketing&sourceId=${encodeURIComponent(journey.campaignId)}`),
       step.taskIds?.length
         ? suite.request<TaskReference[]>(
             `/tasks/references?source=marketing&sourceId=${encodeURIComponent(journey.campaignId)}&ids=${step.taskIds.join(",")}`,
