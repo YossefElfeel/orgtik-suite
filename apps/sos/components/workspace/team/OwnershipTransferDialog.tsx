@@ -25,7 +25,7 @@ export function OwnershipTransferDialog({ me, team }: OwnershipTransferDialogPro
   const [transfer, { isLoading }] = useTransferOwnershipMutation();
   const form = useForm<OwnershipTransferValues>({ resolver: zodResolver(ownershipSchema), defaultValues: { memberId: '' } });
   const key = ownershipAttemptKey(me.workspaceContext?.realm || 'default', me.workspace.id, me.user.id);
-  const eligible = team.items.filter(member => member.status === 'active' && member.role !== 'guest' && member.role !== 'owner');
+  const eligible = team.items.filter(member => Boolean(member.userKey) && member.status === 'active' && member.role !== 'guest' && member.role !== 'owner');
   const choices = eligible.map(member => ({ value: member.id, label: <bdi>{member.name}</bdi> }));
   if (attempt && !choices.some(choice => choice.value === attempt.memberId)) choices.push({ value: attempt.memberId, label: <bdi>{attempt.memberName}</bdi> });
   const selected = eligible.find(member => member.id === form.watch('memberId'));
