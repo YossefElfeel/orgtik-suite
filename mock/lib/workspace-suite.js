@@ -45,7 +45,10 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
       if (tool === 'files') { push(tool, 'file', data.files, row => row.name, row => `/my-files?file=${encodeURIComponent(row.id)}`); push(tool, 'folder', data.folders, row => row.name, row => `/my-files?folder=${encodeURIComponent(row.id)}`); }
       if (tool === 'hr') push(tool, 'employee', data.employees, row => row.fullName || [row.firstName, row.lastName].filter(Boolean).join(' ') || row.name, row => `/employees/${encodeURIComponent(row.id)}`);
       if (tool === 'crm') { push(tool, 'contact', data.contacts, row => row.fullName, row => `/customers/${encodeURIComponent(row.id)}`); push(tool, 'company', data.companies, row => row.name, row => `/companies?company=${encodeURIComponent(row.id)}`); push(tool, 'project', data.projects, row => row.projectName, row => `/projects/${encodeURIComponent(row.id)}`); }
-      if (tool === 'marketing') push(tool, 'project', data.projects, row => row.name || row.title, row => `/projects/${encodeURIComponent(row.id)}`);
+      if (tool === 'marketing') {
+        push(tool, 'project', data.projects, row => row.name || row.title, row => `/dashboard?projectId=${encodeURIComponent(row.id)}`);
+        for (const type of ['campaign', 'post', 'journey']) push(tool, type, data[`${type}s`], row => row.title, row => `${row.path}${row.path.includes('?') ? '&' : '?'}projectId=${encodeURIComponent(row.projectId)}`);
+      }
       if (tool === 'chat') { push(tool, 'channel', data.channels, row => row.name, row => `/hq/chat/${encodeURIComponent(row.id)}`); push(tool, 'message', data.messages, row => row.text || row.content, row => `/hq/chat/${encodeURIComponent(row.channelId)}?message=${encodeURIComponent(row.id)}`); }
     }
     return out;

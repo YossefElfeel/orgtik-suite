@@ -98,6 +98,7 @@ function makeCtx(key, identity, util) {
     salesLeadDelivery: key === 'wm' ? async (payload, metadata) => workspaceBoundary.deliverWebsiteLead(payload, metadata) : undefined,
     catalogMirror: key === 'wm' ? args => workspaceBoundary.catalogMirror(args) : undefined,
     staffPreferences: key === 'wm' ? { current: () => workspaceBoundary.staffPreferences(), save: patch => workspaceBoundary.staffPreferences(patch) } : undefined,
+    crmLeadTarget: key === 'wm' ? args => workspaceBoundary.crmLeadTarget(args) : undefined,
     previewIssuerAllowed: key === 'wm' ? user => Boolean(workspaceBoundary?.contextService().staffAccess(user).permissions.wm?.includes('content:view')) : undefined,
   };
 }
