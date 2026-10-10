@@ -35,6 +35,8 @@ function createFileAccess({ state, identity, boardAuthority }) {
   function fileAccess(user, file) {
     if (!boardAccess(user, file)) return null;
     if (isAdmin(user)) return { level: 'admin', sharedRootId: null };
+    const permission = file.ownerId !== user.id && file.accessOverride?.permissions?.find(row => row.userId === user.id)?.permission;
+    if (permission) return { level: permission === 'edit' ? 'collab' : permission === 'comment' ? 'commenter' : 'reader', sharedRootId: null };
     const folder = file.folderId ? folders.get(file.folderId) : null, inherited = folder && folderAccess(user, folder);
     if (inherited) return inherited;
     if (file.ownerId === user.id) return { level: 'owner', sharedRootId: null };
@@ -42,10 +44,12 @@ function createFileAccess({ state, identity, boardAuthority }) {
     return null;
   }
   function caps(access, ownsItem, user) {
-    const disabled = !access || access.level === 'reader' || user && (typeof identity.canWrite === 'function' && !identity.canWrite(user) || !toolRoles(user).some(role => ['super_admin', 'file_editor'].includes(role)));
-    if (disabled) return { canWrite: false, canMove: false, canArchive: false, canManageAccess: false, canManageExternalShares: false, sharedRootId: !access || access.level === 'reader' ? null : access.sharedRootId ?? null };
-    if (access.level !== 'collab') return { canWrite: true, canMove: true, canArchive: true, canManageAccess: true, canManageExternalShares: true, sharedRootId: null };
-    return { canWrite: true, canMove: true, canArchive: ownsItem, canManageAccess: ownsItem, canManageExternalShares: ownsItem, sharedRootId: access.sharedRootId };
+    const admittedWriter = Boolean(user && (typeof identity.canWrite !== 'function' || identity.canWrite(user)) && toolRoles(user).some(role => ['super_admin', 'file_editor'].includes(role)));
+    const canComment = Boolean(access && access.level !== 'reader' && admittedWriter);
+    const disabled = !access || ['reader', 'commenter'].includes(access.level) || !admittedWriter;
+    if (disabled) return { canComment, canWrite: false, canMove: false, canArchive: false, canManageAccess: false, canManageExternalShares: false, sharedRootId: !access || access.level === 'reader' ? null : access.sharedRootId ?? null };
+    if (access.level !== 'collab') return { canComment, canWrite: true, canMove: true, canArchive: true, canManageAccess: true, canManageExternalShares: true, sharedRootId: null };
+    return { canComment, canWrite: true, canMove: true, canArchive: ownsItem, canManageAccess: ownsItem, canManageExternalShares: ownsItem, sharedRootId: access.sharedRootId };
   }
   const folderCaps = (user, folder) => caps(chain(folder).some(row => row.custodyReadOnly) ? null : folderAccess(user, folder), folder.ownerId === user.id, user);
   const fileCaps = (user, file) => {

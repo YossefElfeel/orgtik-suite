@@ -60,6 +60,7 @@
       "apps/files/lib.js",
       "apps/files/runtime-state.js",
       "apps/files/seed.js",
+      "apps/files/v3.js",
       "lib/accounts.js",
       "lib/auth-store.js",
       "lib/business-calendar.js",
