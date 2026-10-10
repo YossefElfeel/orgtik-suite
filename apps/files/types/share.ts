@@ -72,6 +72,9 @@ export interface PublicShareFolder {
 export type PublicShareResource = PublicShareFile | PublicShareFolder;
 
 export interface PublicShareMetadata {
+  purpose?: "upload_request";
+  label?: string | null;
+  request?: { samples: { id: string; name: string; size: number; mimeType: string }[]; maxSubmissions: number; submissionCount: number; canSubmit: boolean };
   shareId: string;
   permission: SharePermission;
   expiresAt: string;

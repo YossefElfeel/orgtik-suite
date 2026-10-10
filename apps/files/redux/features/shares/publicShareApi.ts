@@ -29,7 +29,7 @@ export const publicShareApi = createApi({
   baseQuery: publicBaseQuery,
   tagTypes: ["PublicShare", "PublicShareItems", "PublicPreview"],
   endpoints: (builder) => ({
-    createShareSession: builder.mutation<void, CreateShareSessionPayload>({
+    createShareSession: builder.mutation<null, CreateShareSessionPayload>({
       query: ({ shareId, secret, password }) => ({
         url: `/v1/public/shares/${shareId}/session`,
         method: "POST",
@@ -38,7 +38,8 @@ export const publicShareApi = createApi({
           ...(password ? { password } : {}),
         },
         responseHandler: async (response: Response) => {
-          if (response.status === 204) return undefined;
+          // RTK Query requires a defined success value even when HTTP 204 has no body.
+          if (response.status === 204) return null;
           return response.json();
         },
       }),

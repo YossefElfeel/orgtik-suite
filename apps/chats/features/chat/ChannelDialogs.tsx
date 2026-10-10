@@ -116,7 +116,7 @@ export function CreateChannelModal({ open, onClose }: { open: boolean; onClose: 
         />
 
         <fieldset className="flex flex-col gap-1.5">
-          <legend className="pb-1.5 text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+          <legend className={"pb-1.5 text-body-sm font-medium "+("ch-color-7f7330")} >
             {t("channel.visibility", "Who can find it")}
           </legend>
           {[
@@ -135,27 +135,23 @@ export function CreateChannelModal({ open, onClose }: { open: boolean; onClose: 
           ].map((opt) => (
             <label
               key={String(opt.value)}
-              className="hq-row flex cursor-pointer items-start gap-2.5 px-3 py-2.5"
-              style={{
-                border: `1px solid ${isPrivate === opt.value ? "var(--color-accent)" : "var(--color-hairline-strong)"}`,
-                borderRadius: "var(--radius-control)",
-                background: isPrivate === opt.value ? "var(--color-accent-soft)" : "var(--color-surface)",
-              }}
+              className={"hq-row flex cursor-pointer items-start gap-2.5 px-3 py-2.5 "+((isPrivate === opt.value?"ch-border-c98846":"ch-border-8ff264")+' '+"ch-border-radius-332348"+' '+(isPrivate === opt.value?"ch-background-1416a8":"ch-background-751d03"))}
+
             >
               <input
                 type="radio"
                 name="visibility"
                 checked={isPrivate === opt.value}
                 onChange={() => setIsPrivate(opt.value)}
-                className="mt-0.5"
-                style={{ accentColor: "var(--color-accent)" }}
+                className={"mt-0.5 "+("ch-accent-color-e56d5b")}
+
               />
               <span className="min-w-0">
-                <span className="flex items-center gap-1.5 text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+                <span className={"flex items-center gap-1.5 text-body-sm font-medium "+("ch-color-7f7330")} >
                   {opt.icon}
                   {opt.label}
                 </span>
-                <span className="mt-0.5 block text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                <span className={"mt-0.5 block text-caption "+("ch-color-4a0211")} >
                   {opt.desc}
                 </span>
               </span>
@@ -208,11 +204,11 @@ export function PeoplePicker({
 
   return (
     <div className="flex flex-col gap-1.5">
-      <span className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+      <span className={"text-body-sm font-medium "+("ch-color-7f7330")} >
         {label}
       </span>
       {hint && (
-        <span className="text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+        <span className={"text-caption "+("ch-color-4a0211")} >
           {hint}
         </span>
       )}
@@ -221,32 +217,25 @@ export function PeoplePicker({
         <MagnifyingGlass
           size={14}
           aria-hidden="true"
-          className="pointer-events-none absolute start-2.5 top-1/2 -translate-y-1/2"
-          style={{ color: "var(--color-ink-subtle)" }}
+          className={"pointer-events-none absolute start-2.5 top-1/2 -translate-y-1/2 "+("ch-color-094083")}
+
         />
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("channel.searchPeople", "Search people")}
           aria-label={t("channel.searchPeople", "Search people")}
-          className="w-full"
-          style={{
-            background: "var(--color-surface)",
-            border: "1px solid var(--color-hairline-strong)",
-            borderRadius: "var(--radius-control)",
-            padding: "7px 10px 7px 29px",
-            fontSize: "13px",
-            minHeight: 34,
-          }}
+          className={"w-full "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-713482"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b")}
+
         />
       </div>
 
       <ul
-        className="mt-1 max-h-[184px] overflow-y-auto"
-        style={{ border: "1px solid var(--color-hairline)", borderRadius: "var(--radius-control)" }}
+        className={"mt-1 max-h-[184px] overflow-y-auto "+("ch-border-5065d4"+' '+"ch-border-radius-332348")}
+
       >
         {list.length === 0 && (
-          <li className="px-3 py-3 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <li className={"px-3 py-3 text-body-sm "+("ch-color-4a0211")} >
             {t("channel.noPeople", "Nobody matches “{q}”.", { q: query })}
           </li>
         )}
@@ -258,29 +247,22 @@ export function PeoplePicker({
                 type="button"
                 onClick={() => onToggle(u.id)}
                 aria-pressed={on}
-                className="hq-row flex w-full items-center gap-2.5 px-2.5 text-start"
-                style={{ minHeight: 40 }}
+                className={"hq-row flex w-full items-center gap-2.5 px-2.5 text-start "+("ch-min-height-fd2692")}
+
               >
                 <Avatar name={u.name} initials={u.initials} tint={u.tint} size={28} hideStatus />
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[13px]" style={{ color: "var(--color-ink)" }}>
+                  <span className={"block truncate text-body-sm "+("ch-color-7f7330")} >
                     <bdi>{u.name}</bdi>
                   </span>
-                  <span className="block truncate text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <span className={"block truncate text-caption "+("ch-color-4a0211")} >
                     <bdi>{u.title}</bdi>
                   </span>
                 </span>
                 <span
                   aria-hidden="true"
-                  className="flex shrink-0 items-center justify-center"
-                  style={{
-                    width: 18,
-                    height: 18,
-                    borderRadius: 5,
-                    border: `1px solid ${on ? "var(--color-accent)" : "var(--color-hairline-strong)"}`,
-                    background: on ? "var(--color-accent)" : "var(--color-surface)",
-                    color: "var(--color-ink-inverse)",
-                  }}
+                  className={"flex shrink-0 items-center justify-center "+("ch-width-f74111"+' '+"ch-height-ad1b79"+' '+"ch-border-radius-edd97e"+' '+(on?"ch-border-c98846":"ch-border-8ff264")+' '+(on?"ch-background-3f17cb":"ch-background-751d03")+' '+"ch-color-7b8a5e")}
+
                 >
                   {on && <Check size={11} weight="bold" />}
                 </span>
@@ -291,7 +273,7 @@ export function PeoplePicker({
       </ul>
 
       {picked.length > 0 && (
-        <span className="tabular text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+        <span className={"tabular text-caption "+("ch-color-4a0211")} >
           {t("channel.pickedCount", "{n} selected", { n: picked.length })}
         </span>
       )}
@@ -354,12 +336,12 @@ export function ChannelDetailsPane({
       aria-label={t("channel.detailsFor", "Details for {name}", {
         name: isDm ? channel.name : `#${channel.name}`,
       })}
-      className="flex min-h-0 w-full flex-col"
-      style={{ background: "var(--color-surface)" }}
+      className={"flex min-h-0 w-full flex-col "+("ch-background-751d03")}
+
     >
-      <header className="shrink-0 px-4 pt-3" style={{ borderBottom: "1px solid var(--color-hairline)" }}>
+      <header className={"shrink-0 px-4 pt-3 "+("ch-border-bottom-9cb2f4")} >
         <div className="flex items-start justify-between gap-2">
-          <h2 className="hq-title" style={{ color: "var(--color-ink)" }}>
+          <h2 className={"hq-title "+("ch-color-7f7330")} >
             {isDm ? channel.name : `#${channel.name}`}
           </h2>
           <Button variant="ghost" size="sm" onClick={onClose}>
@@ -374,16 +356,12 @@ export function ChannelDetailsPane({
               role="tab"
               aria-selected={tab === x.id}
               onClick={() => setTab(x.id)}
-              className="hq-btn whitespace-nowrap px-2.5 pb-2 pt-1 text-[12.5px] font-medium"
-              style={{
-                color: tab === x.id ? "var(--color-ink-brand)" : "var(--color-ink-muted)",
-                borderBottom: `2px solid ${tab === x.id ? "var(--color-accent)" : "transparent"}`,
-                borderRadius: 0,
-              }}
+              className={"hq-btn whitespace-nowrap px-2.5 pb-2 pt-1 text-body-sm font-medium "+((tab === x.id?"ch-color-55f463":"ch-color-4a0211")+' '+(tab === x.id?"ch-border-bottom-b31eb9":"ch-border-bottom-04abcc")+' '+"ch-border-radius-8852e6")}
+
             >
               {x.label}
               {x.count !== undefined && (
-                <span className="tabular ms-1.5" style={{ opacity: 0.65 }}>
+                <span className={"tabular ms-1.5 "+("ch-opacity-a697a8")} >
                   {x.count}
                 </span>
               )}
@@ -396,7 +374,7 @@ export function ChannelDetailsPane({
         {tab === "about" && (
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="ch-topic" className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+              <label htmlFor="ch-topic" className={"text-body-sm font-medium "+("ch-color-7f7330")} >
                 {t("channel.topicLabel", "What is it for?")}
               </label>
               <textarea
@@ -406,23 +384,17 @@ export function ChannelDetailsPane({
                 onBlur={() => updateChannel(channelId, { topic: topic.trim() })}
                 rows={2}
                 placeholder={t("channel.topicPlaceholder", "Everything about the autumn launch")}
-                className="w-full resize-none"
-                style={{
-                  background: "var(--color-surface)",
-                  border: "1px solid var(--color-hairline-strong)",
-                  borderRadius: "var(--radius-control)",
-                  padding: "8px 11px",
-                  fontSize: "13px",
-                }}
+                className={"w-full resize-none "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-14f075"+' '+"ch-font-size-ba0694")}
+
               />
-              <span className="text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+              <span className={"text-caption "+("ch-color-094083")} >
                 {t("channel.savesOnBlur", "Saved when you click away.")}
               </span>
             </div>
 
             {!isDm && can.archiveChannels && (
               <div className="flex flex-col gap-1.5">
-                <label htmlFor="ch-name" className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+                <label htmlFor="ch-name" className={"text-body-sm font-medium "+("ch-color-7f7330")} >
                   {t("channel.rename", "Name")}
                 </label>
                 <div className="flex gap-2">
@@ -430,15 +402,8 @@ export function ChannelDetailsPane({
                     id="ch-name"
                     value={newName}
                     onChange={(e) => setNewName(e.target.value)}
-                    className="min-w-0 flex-1"
-                    style={{
-                      background: "var(--color-surface)",
-                      border: "1px solid var(--color-hairline-strong)",
-                      borderRadius: "var(--radius-control)",
-                      padding: "7px 10px",
-                      fontSize: "13px",
-                      minHeight: 34,
-                    }}
+                    className={"min-w-0 flex-1 "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b")}
+
                   />
                   <Button
                     size="sm"
@@ -452,7 +417,7 @@ export function ChannelDetailsPane({
                     {t("channel.renameAction", "Rename")}
                   </Button>
                 </div>
-                <span className="text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                <span className={"text-caption "+("ch-color-094083")} >
                   {t("channel.renameHint", "Links to the channel keep working; only the name changes.")}
                 </span>
               </div>
@@ -460,14 +425,14 @@ export function ChannelDetailsPane({
 
             {!isDm && can.archiveChannels && (
               <div
-                className="flex items-start justify-between gap-3 px-3 py-2.5"
-                style={{ border: "1px solid var(--color-hairline-strong)", borderRadius: "var(--radius-control)" }}
+                className={"flex items-start justify-between gap-3 px-3 py-2.5 "+("ch-border-8ff264"+' '+"ch-border-radius-332348")}
+
               >
                 <span className="min-w-0">
-                  <span className="block text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+                  <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >
                     {channel.archived ? t("channel.archived", "Archived") : t("channel.archive", "Archive this channel")}
                   </span>
-                  <span className="mt-0.5 block text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                  <span className={"mt-0.5 block text-caption "+("ch-color-4a0211")} >
                     {channel.archived
                       ? t("channel.archivedHint", "Read-only and out of the list, but still searchable.")
                       : t("channel.archiveHint", "Nobody can post; the history stays searchable. You can bring it back.")}
@@ -486,7 +451,7 @@ export function ChannelDetailsPane({
             )}
 
             <fieldset>
-              <legend className="mb-1.5 text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+              <legend className={"mb-1.5 text-body-sm font-medium "+("ch-color-7f7330")} >
                 {t("channel.notifications", "Notify me about")}
               </legend>
               <div className="flex flex-col gap-1.5">
@@ -513,26 +478,22 @@ export function ChannelDetailsPane({
                   return (
                     <label
                       key={opt.value}
-                      className="hq-row flex cursor-pointer items-start gap-2.5 px-3 py-2.5"
-                      style={{
-                        border: `1px solid ${on ? "var(--color-accent)" : "var(--color-hairline-strong)"}`,
-                        borderRadius: "var(--radius-control)",
-                        background: on ? "var(--color-accent-soft)" : "var(--color-surface)",
-                      }}
+                      className={"hq-row flex cursor-pointer items-start gap-2.5 px-3 py-2.5 "+((on?"ch-border-c98846":"ch-border-8ff264")+' '+"ch-border-radius-332348"+' '+(on?"ch-background-1416a8":"ch-background-751d03"))}
+
                     >
                       <input
                         type="radio"
                         name="notify"
                         checked={on}
                         onChange={() => updateChannel(channelId, { notify: opt.value })}
-                        className="mt-0.5"
-                        style={{ accentColor: "var(--color-accent)" }}
+                        className={"mt-0.5 "+("ch-accent-color-e56d5b")}
+
                       />
                       <span className="min-w-0">
-                        <span className="block text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+                        <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >
                           {opt.label}
                         </span>
-                        <span className="mt-0.5 block text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                        <span className={"mt-0.5 block text-caption "+("ch-color-4a0211")} >
                           {opt.desc}
                         </span>
                       </span>
@@ -544,7 +505,7 @@ export function ChannelDetailsPane({
 
             {!isDm && (
               <div className="pt-1">
-                <Button size="sm" variant="ghost" onClick={() => setConfirmLeave(true)} style={{ color: "var(--color-danger-600)" }}>
+                <Button size="sm" variant="ghost" onClick={() => setConfirmLeave(true)} className={"ch-color-1fd63a"} >
                   <SignOut size={13} weight="bold" aria-hidden="true" />
                   {t("channel.leave", "Leave channel")}
                 </Button>
@@ -592,18 +553,14 @@ export function ChannelDetailsPane({
                   <button
                     type="button"
                     onClick={() => { setPreview(file); setPreviewMessageId(message.id); }}
-                    className="hq-row flex w-full items-center gap-2.5 px-3 py-2.5 text-start"
-                    style={{
-                      border: "1px solid var(--color-hairline)",
-                      borderRadius: "var(--radius-control)",
-                      minHeight: 44,
-                    }}
+                    className={"hq-row flex w-full items-center gap-2.5 px-3 py-2.5 text-start "+("ch-border-5065d4"+' '+"ch-border-radius-332348"+' '+"ch-min-height-99fb93")}
+
                   >
-                    <FileText size={15} aria-hidden="true" style={{ color: "var(--color-ink-muted)" }} />
-                    <span className="min-w-0 flex-1 truncate text-[12.5px]" style={{ color: "var(--color-ink)" }}>
+                    <FileText size={15} aria-hidden="true" className={"ch-color-4a0211"}  />
+                    <span className={"min-w-0 flex-1 truncate text-body-sm "+("ch-color-7f7330")} >
                       <bdi>{file.state === "unavailable" ? t("fileReferences.unavailable", "File unavailable") : file.name}</bdi>
                     </span>
-                    <span className="tabular shrink-0 text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                    <span className={"tabular shrink-0 text-caption "+("ch-color-094083")} >
                       {file.state === "unavailable" ? "" : typeof file.bytes === "number" ? format.bytes(file.bytes) : file.size}
                     </span>
                   </button>
@@ -628,21 +585,21 @@ export function ChannelDetailsPane({
                     <button
                       type="button"
                       onClick={() => router.push(`/hq/chat/${m.channelId}#${m.id}`)}
-                      className="hq-row flex w-full flex-col gap-1.5 px-3 py-2.5 text-start"
-                      style={{ border: "1px solid var(--color-hairline)", borderRadius: "var(--radius-control)" }}
+                      className={"hq-row flex w-full flex-col gap-1.5 px-3 py-2.5 text-start "+("ch-border-5065d4"+' '+"ch-border-radius-332348")}
+
                     >
                       <span className="flex items-center gap-2">
                         {author && (
                           <Avatar name={author.name} initials={author.initials} tint={author.tint} size={20} hideStatus />
                         )}
-                        <span className="text-[12px] font-medium" style={{ color: "var(--color-ink)" }}>
+                        <span className={"text-caption font-medium "+("ch-color-7f7330")} >
                           <bdi>{author?.name}</bdi>
                         </span>
-                        <span className="tabular ms-auto text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+                        <span className={"tabular ms-auto text-caption "+("ch-color-094083")} >
                           {formatRelative(m.createdAt)}
                         </span>
                       </span>
-                      <p className="text-[12.5px] leading-snug" style={{ color: "var(--color-ink)" }}>
+                      <p className={"text-body-sm leading-snug "+("ch-color-7f7330")} >
                         <bdi>{m.text}</bdi>
                       </p>
                     </button>
@@ -758,15 +715,15 @@ function MemberRow({
     <li className="flex items-center gap-2.5 py-1.5">
       <Avatar name={name} initials={initials} tint={tint} status={presence?.status} size={28} />
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-[13px]" style={{ color: "var(--color-ink)" }}>
+        <span className={"block truncate text-body-sm "+("ch-color-7f7330")} >
           {name}
           {userId === me && (
-            <span className="ms-1.5 text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+            <span className={"ms-1.5 text-caption "+("ch-color-094083")} >
               {t("office.you", "you")}
             </span>
           )}
         </span>
-        <span className="block truncate text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+        <span className={"block truncate text-caption "+("ch-color-4a0211")} >
           {title}
         </span>
       </span>
@@ -777,7 +734,7 @@ function MemberRow({
           size="sm"
           onClick={onRemove}
           aria-label={t("channel.removeMember", "Remove {name} from this channel", { name })}
-          style={{ color: "var(--color-ink-subtle)" }}
+          className={"ch-color-094083"}
         >
           {t("channel.remove", "Remove")}
         </Button>

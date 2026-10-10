@@ -1,0 +1,7 @@
+{
+  "test": "node --test mock/lib/workspace-whiteboard-recovery-ui.test.js",
+  "scope": "Actual nested owner BoardScreen function with a bounded unrelated connection-policy fixture; original conflict/history/recovery assertions unchanged",
+  "tests": 6,
+  "passed": 6,
+  "failed": 0
+}

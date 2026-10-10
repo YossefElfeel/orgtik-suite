@@ -208,6 +208,7 @@ module.exports = function crmV3(S) {
       tags: row.crmTags || [],
       fields: row.crmFields || {},
       companyId: row.crmCompanyId || null,
+      currency: currencyFor(row),
       company:
         state.companies.find((company) => company.id === row.crmCompanyId) ||
         null,
@@ -1167,7 +1168,7 @@ module.exports = function crmV3(S) {
     project.crmEstimatedValue = body.estimate ?? 0;
     row.sourceContext ??= {}; row.sourceContext.marketing = { campaignId: candidate.id, projectId: candidate.projectId, crmProjectId: project.id, by: req.sc.user.id, at: now() };
     event(req, row, 'attribution', 'Campaign lead received', { campaignId: candidate.id, projectId: project.id, estimatedValue: project.crmEstimatedValue });
-    return { leadId: row.id, projectId: project.id, estimatedValue: project.crmEstimatedValue };
+    return { leadId: row.id, projectId: project.id, estimatedValue: project.crmEstimatedValue, currency: currencyFor(row) };
   }
   return {
     routes,

@@ -12,7 +12,7 @@
 
 import dynamic from "next/dynamic";
 import "@excalidraw/excalidraw/index.css";
-import { Skeleton } from "@/components/ui/Primitives";
+import { Skeleton } from "@orgtik/ui";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { encodeWhiteboardScene, sceneFingerprint, type WhiteboardScene } from "@/lib/whiteboard-scene";
 import type { ExcalidrawImperativeAPI, ExcalidrawProps } from "@excalidraw/excalidraw/types";
@@ -32,9 +32,9 @@ const Excalidraw = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex h-full w-full flex-col gap-3 p-4" style={{ background: "var(--color-surface)" }}>
-        <Skeleton width={180} height={16} />
-        <Skeleton height={200} radius="var(--radius-card)" />
+      <div className={"flex h-full w-full flex-col gap-3 p-4 "+("ch-background-751d03")} >
+        <Skeleton className="h-4 w-44"/>
+        <Skeleton className="h-52 w-full"/>
       </div>
     ),
   },
@@ -82,7 +82,7 @@ export function Whiteboard({ scene, readOnly = false, onChange, onIssue }: { sce
     return () => watch.disconnect();
   }, [t]);
   return (
-    <div ref={box} onDragOverCapture={event => event.preventDefault()} onDropCapture={event => { event.preventDefault(); event.stopPropagation(); onIssue?.("unsupported_content"); }} onKeyDownCapture={event => { if ((event.ctrlKey || event.metaKey) && ["o", "k"].includes(event.key.toLowerCase())) { event.preventDefault(); event.stopPropagation(); onIssue?.("unsupported_content"); } }} className="h-full w-full [&_.default-sidebar-trigger]:hidden! [&_[data-testid=toolbar-embeddable]]:hidden! [&_[data-testid=toolbar-magicframe]]:hidden!" style={{ background: "var(--color-surface)" }}>
+    <div ref={box} onDragOverCapture={event => event.preventDefault()} onDropCapture={event => { event.preventDefault(); event.stopPropagation(); onIssue?.("unsupported_content"); }} onKeyDownCapture={event => { if ((event.ctrlKey || event.metaKey) && ["o", "k"].includes(event.key.toLowerCase())) { event.preventDefault(); event.stopPropagation(); onIssue?.("unsupported_content"); } }} className={"h-full w-full [&_.default-sidebar-trigger]:hidden! [&_[data-testid=toolbar-embeddable]]:hidden! [&_[data-testid=toolbar-magicframe]]:hidden! "+("ch-background-751d03")} >
       <Excalidraw
         /* Excalidraw's API takes literal colours, not CSS variables, so these two are the one place
            raw hex appears outside the token file: the brand's raised surface and ink (light). In the

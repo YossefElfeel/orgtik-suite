@@ -26,7 +26,17 @@ import type {
   Status,
 } from "./index";
 
+export type CreatedMessage = Omit<Message,"poll"> & {poll?:{question:string;options:string[]}};
 export type ServerEvent =
+  | {type:"knock.ended";knockId:Id}
+  | { type:'settings.updated';patch:Partial<import('./index').WorkspaceSettings> }
+  | { type:'channel.joined';channelId:Id }
+  | { type:'channel.typing';channelId:Id;active:boolean }
+  | { type:'message.saved_toggled'|'message.reminder_delivered'|'message.schedule_sent'|'message.schedule_cancelled'|'message.poll_closed';messageId:Id }
+  | { type:'message.reminder_set';messageId:Id;at:string }
+  | { type:'message.poll_voted';messageId:Id;optionId:number }
+  | { type:'message.task_linked';messageId:Id;taskId:number }
+
   /* ------------------------------------------------------------- presence */
   | {
       type: "presence.status_changed";
@@ -34,12 +44,13 @@ export type ServerEvent =
       status: Status;
       customText?: string;
       focusUntil?: IsoDateTime;
+      focusMinutes?: number;
     }
   | { type: "presence.moved"; userId: Id; position: { x: number; y: number } }
   | { type: "presence.room_changed"; userId: Id; roomId?: Id }
   | { type: "presence.speaking"; userId: Id; speaking: boolean }
   /* ----------------------------------------------------------------- chat */
-  | { type: "message.created"; message: Message }
+  | { type: "message.created"; message: CreatedMessage }
   | { type: "message.edited"; messageId: Id; text: string; editedAt: IsoDateTime }
   | { type: "message.deleted"; messageId: Id; deletedAt: IsoDateTime }
   | {
@@ -107,7 +118,7 @@ export type ServerEvent =
   | { type: "meeting.guest_declined"; meetingId: Id; guestEmail: string }
   /* The guest closed the call, or the tab, from their side. */
   | { type: "meeting.guest_left"; meetingId: Id; guestEmail: string }
-  | { type: "meeting.guest_link_reset"; meetingId: Id; guestKey: string }
+  | { type: "meeting.guest_link_reset"; meetingId: Id; guestKey?: string }
   | { type: "meeting.share_changed"; meetingId: Id; userId?: Id }
   | {
       type: "meeting.guest_admitted";

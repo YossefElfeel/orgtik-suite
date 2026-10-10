@@ -9,7 +9,8 @@ import SettingsSidebar from "@/components/layout/SettingsSidebar";
 // beside the content from md up; the shell scrolls the page, so there is no second scrollbar
 // (MKT-038). The permissions, preferences and notifications stubs are gone (MKT-035).
 export default function SettingsLayout({ children }: { children: ReactNode }) {
-  const t = useTranslations("SettingsNav");
+  const t = useTranslations("SettingsNav"),
+    tv = useTranslations("MarketingV3");
   return (
     <div className="flex flex-col gap-6">
       <PageHeader title={t("title")} description={t("description")} />
@@ -19,6 +20,8 @@ export default function SettingsLayout({ children }: { children: ReactNode }) {
           settingsItems={[
             { label: t("project"), path: "/settings" },
             { label: t("team"), path: "/settings/teams" },
+            { label: tv("brand"), path: "/settings/brand" },
+            { label: tv("senders"), path: "/settings/senders" },
           ]}
         />
         <div className="min-w-0 flex-1">{children}</div>

@@ -9,10 +9,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function GuestPage({
-  params,
+  params,searchParams,
 }: {
-  params: Promise<{ token: string }>;
+  params: Promise<{ token: string }>; searchParams: Promise<{workspace?:string}>;
 }) {
   const { token } = await params;
-  return <GuestJoin token={token} />;
+  const query=await searchParams;return <GuestJoin token={token} workspaceId={query.workspace||""} />;
 }

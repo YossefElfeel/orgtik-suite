@@ -1284,6 +1284,7 @@ module.exports = {
     }
     return {
       serializeFile: fileOut,
+      serializeFolder: folderOut, publicShare, shareOut, shareStatus, logActivity: logAct,
       exportState: () => ({ data: require("./files/runtime-state").encode(state), sequences: lib.exportCounters() }),
       bootstrap: user => ({ folders: activeFolders().filter(folder => folderAccess(user, folder)).map(folder => folderOut(folder, user)), files: activeFiles().filter(file => fileAccess(user, file)).map(file => fileOut(file, user)) }),
       usage: () => [{ key: "files.storage_gb", used: [...FL.values()].reduce((total, file) => total + Number(file.size || 0), 0) / 1024 ** 3 }],
@@ -1311,7 +1312,10 @@ module.exports = {
         for (const share of state.shares.values()) if (share.ownerId === fromUserId) { share.revokedAt ||= nowIso(); dropSessions(share.id); }
         for (const row of [...F.values(), ...FL.values()]) {
           row.allowedUserIds = (row.allowedUserIds || []).filter(id => id !== fromUserId);
-          if (row.accessOverride) row.accessOverride.allowedUserIds = row.accessOverride.allowedUserIds.filter(id => id !== fromUserId);
+          if (row.accessOverride) {
+            row.accessOverride.allowedUserIds = row.accessOverride.allowedUserIds.filter(id => id !== fromUserId);
+            if (row.accessOverride.permissions) row.accessOverride.permissions = row.accessOverride.permissions.filter(grant => grant.userId !== fromUserId && grant.userId !== row.ownerId);
+          }
         }
         state.pins.delete(fromUserId);
         return result;

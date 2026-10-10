@@ -21,10 +21,17 @@ function renderer() {
     pending = false; if (!active) return;
     try {
       if (++renders > 150) throw new Error('The actual component does not settle its render/effect cycle.');
-      cursor = 0; tree = component(props);
+      cursor = 0; tree = resolveComponents(component(props));
       // Effects run as one commit; setter updates do not interrupt this effect batch.
       for (const hook of hooks) if (hook.effect) { const effect = hook.effect; hook.effect = null; hook.cleanup?.(); hook.cleanup = effect(); }
     } catch (failure) { error = failure; active = false; }
+  }
+  // Evaluate the real owner component nested by the new connection composition.
+  function resolveComponents(value) {
+    if (Array.isArray(value)) return value.map(resolveComponents);
+    if (!value || typeof value !== 'object' || !value.props) return value;
+    if (typeof value.type === 'function') return resolveComponents(value.type(value.props));
+    return { ...value, props: { ...value.props, children: resolveComponents(value.props.children) } };
   }
   const react = {
     useState(initial) {
@@ -111,6 +118,9 @@ function environment() {
       if (name === '@orgtik/ui/auth') return auth;
       if (name === '@orgtik/ui') return { Button: 'Button', Input: 'Input', Select: 'Select' };
       if (name === '@phosphor-icons/react') return { FloppyDisk: 'FloppyDisk', Plus: 'Plus' };
+      // Connection policy has its actual selector/native readonly proof; this boundary
+      // keeps the original board conflict, history and recovery assertions isolated.
+      if (name === '@/features/chat/ChatFeatures') return { ChatConnection: ({ children }) => children };
       if (name === '@/lib/i18n') return { useT: () => t, useI18n: () => ({ locale: 'en' }) };
       if (name === '@/lib/suite-session') return { SOS_API_URL: 'http://isolated.fixture/sos/api' };
       if (name === './Whiteboard') return { Whiteboard: 'Whiteboard' };

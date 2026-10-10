@@ -1,4 +1,5 @@
 "use client";
+import {geometryClass} from "@/lib/geometry";
 
 /**
  * SOMION HQ - ROOM FURNITURE
@@ -98,42 +99,18 @@ function Solid({
   children?: React.ReactNode;
 }) {
   return (
-    <span style={{ position: "relative", display: "block", width: w, height: h + depth }}>
+    <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + depth}))} >
       {/* contact shadow: tight and low, so the object reads as resting */}
       <span
-        style={{
-          position: "absolute",
-          left: 2,
-          right: 2,
-          top: depth + h - 5,
-          height: 8,
-          borderRadius: "50%",
-          background: "rgb(var(--shadow-ink) / 0.13)",
-          filter: "blur(4px)",
-        }}
+        className={("ch-position-bb6a43"+' '+"ch-left-261659"+' '+"ch-right-3748d4"+' '+"ch-height-83ca52"+' '+"ch-border-radius-9eaa9c"+' '+"ch-background-43fd7b"+' '+"ch-filter-e0c7b4")+" "+(geometryClass({top:depth + h - 5}))}
       />
       {/* side face */}
       <span
-        style={{
-          position: "absolute",
-          insetInline: 0,
-          top: depth,
-          height: h,
-          background: material.side,
-          borderRadius: radius,
-        }}
+        className={("ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa")+" "+(materialClass(material,'side')+' '+furnitureRadius(radius)+' '+geometryClass({top:depth,height:h}))}
       />
       {/* top face, lit from the upper left */}
       <span
-        style={{
-          position: "absolute",
-          insetInline: 0,
-          top: 0,
-          height: h,
-          background: `linear-gradient(150deg, ${material.top} 0%, ${material.mid} 78%)`,
-          borderRadius: radius,
-          boxShadow: "var(--shadow-lit)",
-        }}
+        className={("ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-top-0d4406"+' '+"ch-box-shadow-caed6f")+" "+(materialClass(material,'top')+' '+furnitureRadius(radius)+' '+geometryClass({height:h}))}
       >
         {children}
       </span>
@@ -157,7 +134,7 @@ function Flat({
 }) {
   return (
     <span
-      style={{ display: "block", width: w, height: h, background, borderRadius: radius, boxShadow: shadow }}
+      className={("ch-display-2a1b75")+" "+(flatPaint(background)+' '+furnitureRadius(radius)+' '+(shadow?'ch-furniture-inlay-shadow':'')+' '+geometryClass({width:w,height:h}))}
     />
   );
 }
@@ -166,15 +143,7 @@ function Flat({
 function Leaf({ x, y, size, tone }: { x: number; y: number; size: number; tone: string }) {
   return (
     <span
-      style={{
-        position: "absolute",
-        left: x,
-        top: y,
-        width: size,
-        height: size,
-        borderRadius: "50%",
-        background: `radial-gradient(circle at 34% 30%, var(--mat-leaf-top), ${tone} 72%)`,
-      }}
+      className={("ch-position-bb6a43"+' '+"ch-border-radius-9eaa9c")+" "+('ch-leaf'+' '+geometryClass({left:x,top:y,width:size,height:size}))}
     />
   );
 }
@@ -189,48 +158,22 @@ function Shape({ kind }: { kind: PieceKind }) {
         <Solid w={w} h={h} depth={d} radius="var(--radius-object)" material={OAK}>
           {/* a monitor and a notebook, so a desk reads as a workstation */}
           <span
-            style={{
-              position: "absolute",
-              left: "50%",
-              top: 3,
-              transform: "translateX(-50%)",
-              width: w * 0.44,
-              height: 4,
-              background: "var(--mat-metal-side)",
-              borderRadius: "var(--radius-object-xs)",
-            }}
+            className={("ch-position-bb6a43"+' '+"ch-left-635b13"+' '+"ch-top-95a770"+' '+"ch-transform-1b8ae7"+' '+"ch-height-1d9069"+' '+"ch-background-6ccfa0"+' '+"ch-border-radius-84df20")+" "+(geometryClass({width:w * 0.44}))}
           />
           <span
-            style={{
-              position: "absolute",
-              right: 6,
-              bottom: 4,
-              width: 13,
-              height: 9,
-              background: "var(--mat-metal-top)",
-              border: "1px solid var(--mat-metal-side)",
-              borderRadius: "var(--radius-object-xs)",
-            }}
+            className={"ch-position-bb6a43"+' '+"ch-right-e20f42"+' '+"ch-bottom-ce3bb6"+' '+"ch-width-74b3e7"+' '+"ch-height-b9986b"+' '+"ch-background-98f40e"+' '+"ch-border-10b2bf"+' '+"ch-border-radius-84df20"}
           />
         </Solid>
       );
 
     case "chair":
       return (
-        <span style={{ position: "relative", display: "block", width: w, height: h + d + 4 }}>
+        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + d + 4}))} >
           {/* the back, a low bar behind the seat */}
           <span
-            style={{
-              position: "absolute",
-              left: 1,
-              right: 1,
-              top: 0,
-              height: 5,
-              background: SOFT.side,
-              borderRadius: "var(--radius-object-sm)",
-            }}
+            className={("ch-position-bb6a43"+' '+"ch-left-51b783"+' '+"ch-right-8074b2"+' '+"ch-top-0d4406"+' '+"ch-height-925e0a"+' '+"ch-border-radius-a360d0")+" "+('ch-material-soft-side')}
           />
-          <span style={{ position: "absolute", insetInline: 0, top: 3 }}>
+          <span className={"ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-top-95a770"} >
             <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={SOFT} />
           </span>
         </span>
@@ -247,42 +190,17 @@ function Shape({ kind }: { kind: PieceKind }) {
 
     case "sofa":
       return (
-        <span style={{ position: "relative", display: "block", width: w, height: h + d + 6 }}>
+        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + d + 6}))} >
           <span
-            style={{
-              position: "absolute",
-              insetInline: 0,
-              top: 0,
-              height: 9,
-              background: SOFT.side,
-              borderRadius: "var(--radius-object-lg) var(--radius-object-lg) 0 0",
-            }}
+            className={("ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-top-0d4406"+' '+"ch-height-b9986b"+' '+"ch-border-radius-6300ab")+" "+('ch-material-soft-side')}
           />
-          <span style={{ position: "absolute", insetInline: 0, top: 5 }}>
+          <span className={"ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-top-64f465"} >
             <Solid w={w} h={h} depth={d} radius="var(--radius-object-lg)" material={SOFT}>
               <span
-                style={{
-                  position: "absolute",
-                  left: 5,
-                  top: 4,
-                  width: w / 2 - 8,
-                  height: h - 8,
-                  background: SOFT.top,
-                  borderRadius: "var(--radius-object-sm)",
-                  opacity: 0.8,
-                }}
+                className={("ch-position-bb6a43"+' '+"ch-left-8bfc9d"+' '+"ch-top-288ddb"+' '+"ch-border-radius-a360d0"+' '+"ch-opacity-51faa6")+" "+('ch-material-soft-top'+' '+geometryClass({width:w / 2 - 8,height:h - 8}))}
               />
               <span
-                style={{
-                  position: "absolute",
-                  right: 5,
-                  top: 4,
-                  width: w / 2 - 8,
-                  height: h - 8,
-                  background: SOFT.top,
-                  borderRadius: "var(--radius-object-sm)",
-                  opacity: 0.8,
-                }}
+                className={("ch-position-bb6a43"+' '+"ch-right-8188c1"+' '+"ch-top-288ddb"+' '+"ch-border-radius-a360d0"+' '+"ch-opacity-51faa6")+" "+('ch-material-soft-top'+' '+geometryClass({width:w / 2 - 8,height:h - 8}))}
               />
             </Solid>
           </span>
@@ -291,8 +209,8 @@ function Shape({ kind }: { kind: PieceKind }) {
 
     case "plant":
       return (
-        <span style={{ position: "relative", display: "block", width: w, height: h }}>
-          <span style={{ position: "absolute", left: (w - 20) / 2, bottom: 0 }}>
+        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h}))} >
+          <span className={("ch-position-bb6a43"+' '+"ch-bottom-ad3760")+" "+(geometryClass({left:(w - 20) / 2}))} >
             <Solid
               w={20}
               h={11}
@@ -309,12 +227,12 @@ function Shape({ kind }: { kind: PieceKind }) {
 
     case "cooler":
       return (
-        <span style={{ position: "relative", display: "block", width: w, height: h }}>
-          <span style={{ position: "absolute", insetInline: 0, bottom: 0 }}>
+        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h}))} >
+          <span className={"ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-bottom-ad3760"} >
             <Solid w={w} h={20} depth={d} radius="var(--radius-object-sm)" material={METAL} />
           </span>
           {/* the bottle: glass, so it reads as water */}
-          <span style={{ position: "absolute", left: 3, top: 0 }}>
+          <span className={"ch-position-bb6a43"+' '+"ch-left-f7bcc1"+' '+"ch-top-0d4406"} >
             <Solid
               w={w - 6}
               h={15}
@@ -330,15 +248,7 @@ function Shape({ kind }: { kind: PieceKind }) {
       return (
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={METAL}>
           <span
-            style={{
-              position: "absolute",
-              insetInline: 6,
-              bottom: 4,
-              height: 7,
-              background: "var(--color-paper-800)",
-              borderRadius: "var(--radius-object-xs)",
-              opacity: 0.5,
-            }}
+            className={"ch-position-bb6a43"+' '+"ch-inset-inline-58baad"+' '+"ch-bottom-ce3bb6"+' '+"ch-height-ba2ef8"+' '+"ch-background-ea65cd"+' '+"ch-border-radius-84df20"+' '+"ch-opacity-e1549f"}
           />
         </Solid>
       );
@@ -348,23 +258,12 @@ function Shape({ kind }: { kind: PieceKind }) {
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={OAK}>
           {/* books: alternating warm tones, low chroma */}
           <span
-            style={{
-              position: "absolute",
-              inset: "5px 3px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 4,
-            }}
+            className={"ch-position-bb6a43"+' '+"ch-inset-a4522e"+' '+"ch-display-75816c"+' '+"ch-flex-direction-06c8b5"+' '+"ch-gap-d76768"}
           >
             {[0, 1, 2, 3].map((i) => (
               <span
                 key={i}
-                style={{
-                  flex: 1,
-                  background: i % 2 ? "var(--mat-pot)" : "var(--mat-metal)",
-                  borderRadius: "var(--radius-object-xs)",
-                  opacity: 0.75,
-                }}
+                className={"ch-flex-97445a"+' '+(i % 2?"ch-background-b80482":"ch-background-941d54")+' '+"ch-border-radius-84df20"+' '+"ch-opacity-31c9f8"}
               />
             ))}
           </span>
@@ -384,25 +283,11 @@ function Shape({ kind }: { kind: PieceKind }) {
       return (
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={METAL}>
           <span
-            style={{
-              position: "absolute",
-              insetInline: 5,
-              top: 5,
-              height: 5,
-              background: "var(--mat-metal-side)",
-              borderRadius: "var(--radius-object-xs)",
-            }}
+            className={"ch-position-bb6a43"+' '+"ch-inset-inline-5d1292"+' '+"ch-top-64f465"+' '+"ch-height-925e0a"+' '+"ch-background-6ccfa0"+' '+"ch-border-radius-84df20"}
           />
           {/* the output tray */}
           <span
-            style={{
-              position: "absolute",
-              insetInline: 7,
-              bottom: 4,
-              height: 6,
-              background: "var(--color-paper-0)",
-              borderRadius: "var(--radius-object-xs)",
-            }}
+            className={"ch-position-bb6a43"+' '+"ch-inset-inline-c245e3"+' '+"ch-bottom-ce3bb6"+' '+"ch-height-cc3d9d"+' '+"ch-background-7f0f18"+' '+"ch-border-radius-84df20"}
           />
         </Solid>
       );
@@ -414,9 +299,9 @@ function Shape({ kind }: { kind: PieceKind }) {
       return (
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={OAK}>
           {/* slats */}
-          <span style={{ position: "absolute", inset: "3px 4px", display: "flex", flexDirection: "column", gap: 2 }}>
+          <span className={"ch-position-bb6a43"+' '+"ch-inset-8a9728"+' '+"ch-display-75816c"+' '+"ch-flex-direction-06c8b5"+' '+"ch-gap-206a0d"} >
             {[0, 1].map((i) => (
-              <span key={i} style={{ flex: 1, background: "var(--mat-oak-side)", borderRadius: 1, opacity: 0.35 }} />
+              <span key={i} className={"ch-flex-97445a"+' '+"ch-background-45587b"+' '+"ch-border-radius-edd97e"+' '+"ch-opacity-f76fbb"}  />
             ))}
           </span>
         </Solid>
@@ -424,18 +309,10 @@ function Shape({ kind }: { kind: PieceKind }) {
 
     case "mic":
       return (
-        <span style={{ position: "relative", display: "block", width: w, height: h + 8 }}>
+        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + 8}))} >
           {/* the stand */}
           <span
-            style={{
-              position: "absolute",
-              left: w / 2 - 1,
-              top: 4,
-              width: 2,
-              height: h,
-              background: "var(--mat-metal-side)",
-              borderRadius: 1,
-            }}
+            className={("ch-position-bb6a43"+' '+"ch-top-288ddb"+' '+"ch-width-208c98"+' '+"ch-background-6ccfa0"+' '+"ch-border-radius-edd97e")+" "+(geometryClass({left:w / 2 - 1,height:h}))}
           />
           <Solid w={w} h={h} depth={d} radius="50%" material={METAL} />
         </span>
@@ -443,18 +320,10 @@ function Shape({ kind }: { kind: PieceKind }) {
 
     case "lamp":
       return (
-        <span style={{ position: "relative", display: "block", width: w, height: h + 8 }}>
+        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + 8}))} >
           {/* the pool of light it casts, which is the point of drawing a lamp */}
           <span
-            style={{
-              position: "absolute",
-              left: -10,
-              top: -6,
-              width: w + 20,
-              height: h + 20,
-              borderRadius: "50%",
-              background: "radial-gradient(circle, rgb(255 246 214 / 0.55), transparent 70%)",
-            }}
+            className={("ch-position-bb6a43"+' '+"ch-left-da3c8d"+' '+"ch-top-fc3d0d"+' '+"ch-border-radius-9eaa9c"+' '+"ch-background-bfd524")+" "+(geometryClass({width:w + 20,height:h + 20}))}
           />
           <Solid w={w} h={h} depth={8} radius="50%" material={POT} />
         </span>
@@ -466,40 +335,16 @@ function Shape({ kind }: { kind: PieceKind }) {
        the wall, and every rug in the room is laid facing it. */
     case "mihrab":
       return (
-        <span style={{ position: "relative", display: "block", width: w, height: h + d }}>
+        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + d}))} >
           <span
-            style={{
-              position: "absolute",
-              insetInline: 0,
-              top: d,
-              height: h,
-              background: "var(--mat-oak-side)",
-              borderRadius: `${h}px ${h}px var(--radius-object-xs) var(--radius-object-xs)`,
-            }}
+            className={("ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-background-45587b")+" "+('ch-furniture-arch'+' '+geometryClass({top:d,height:h}))}
           />
           <span
-            style={{
-              position: "absolute",
-              insetInline: 0,
-              top: 0,
-              height: h,
-              background: `linear-gradient(150deg, var(--mat-oak-top), var(--mat-oak) 78%)`,
-              borderRadius: `${h}px ${h}px var(--radius-object-xs) var(--radius-object-xs)`,
-              boxShadow: "var(--shadow-lit)",
-            }}
+            className={("ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-top-0d4406"+' '+"ch-background-c8b21e"+' '+"ch-box-shadow-caed6f")+" "+('ch-furniture-arch'+' '+geometryClass({height:h}))}
           />
           {/* the recess itself, darker because it is a niche */}
           <span
-            style={{
-              position: "absolute",
-              left: w * 0.28,
-              top: 3,
-              width: w * 0.44,
-              height: h - 3,
-              background: "var(--mat-oak-side)",
-              borderRadius: `${h}px ${h}px 0 0`,
-              opacity: 0.75,
-            }}
+            className={("ch-position-bb6a43"+' '+"ch-top-95a770"+' '+"ch-background-45587b"+' '+"ch-opacity-31c9f8")+" "+('ch-furniture-arch'+' '+geometryClass({left:w * 0.28,width:w * 0.44,height:h - 3}))}
           />
         </span>
       );
@@ -508,7 +353,7 @@ function Shape({ kind }: { kind: PieceKind }) {
        primitive: no extrusion, no contact shadow. */
     case "prayer-rug":
       return (
-        <span style={{ position: "relative", display: "block", width: w, height: h }}>
+        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h}))} >
           <Flat
             w={w}
             h={h}
@@ -519,27 +364,10 @@ function Shape({ kind }: { kind: PieceKind }) {
           {/* The woven arch at the head of the rug, which points to the qibla.
               It is why a prayer rug is recognisable at this size at all. */}
           <span
-            style={{
-              position: "absolute",
-              left: w * 0.26,
-              top: 5,
-              width: w * 0.48,
-              height: h * 0.3,
-              borderRadius: `${w * 0.24}px ${w * 0.24}px 2px 2px`,
-              border: "1.5px solid var(--mat-pot-side)",
-              opacity: 0.55,
-            }}
+            className={("ch-position-bb6a43"+' '+"ch-top-64f465"+' '+"ch-border-b019fd"+' '+"ch-opacity-94ec8e")+" "+('ch-furniture-arch'+' '+geometryClass({left:w * 0.26,width:w * 0.48,height:h * 0.3}))}
           />
           <span
-            style={{
-              position: "absolute",
-              insetInline: 5,
-              bottom: 5,
-              height: 2,
-              background: "var(--mat-pot-side)",
-              borderRadius: 1,
-              opacity: 0.4,
-            }}
+            className={"ch-position-bb6a43"+' '+"ch-inset-inline-5d1292"+' '+"ch-bottom-4c6900"+' '+"ch-height-32ec1b"+' '+"ch-background-d760d2"+' '+"ch-border-radius-edd97e"+' '+"ch-opacity-c4c3c1"}
           />
         </span>
       );
@@ -547,16 +375,11 @@ function Shape({ kind }: { kind: PieceKind }) {
     case "shoe-rack":
       return (
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={OAK}>
-          <span style={{ position: "absolute", inset: "4px 4px", display: "flex", gap: 3 }}>
+          <span className={"ch-position-bb6a43"+' '+"ch-inset-45f6cf"+' '+"ch-display-75816c"+' '+"ch-gap-fce9b2"} >
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                style={{
-                  flex: 1,
-                  background: "var(--mat-oak-side)",
-                  borderRadius: "var(--radius-object-xs)",
-                  opacity: 0.5,
-                }}
+                className={"ch-flex-97445a"+' '+"ch-background-45587b"+' '+"ch-border-radius-84df20"+' '+"ch-opacity-e1549f"}
               />
             ))}
           </span>
@@ -566,16 +389,11 @@ function Shape({ kind }: { kind: PieceKind }) {
     case "book-shelf-low":
       return (
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={OAK}>
-          <span style={{ position: "absolute", inset: "4px 5px", display: "flex", gap: 2 }}>
+          <span className={"ch-position-bb6a43"+' '+"ch-inset-5d3566"+' '+"ch-display-75816c"+' '+"ch-gap-206a0d"} >
             {[0, 1, 2, 3, 4].map((i) => (
               <span
                 key={i}
-                style={{
-                  flex: 1,
-                  background: i % 2 ? "var(--mat-pot)" : "var(--mat-metal)",
-                  borderRadius: "var(--radius-object-xs)",
-                  opacity: 0.7,
-                }}
+                className={"ch-flex-97445a"+' '+(i % 2?"ch-background-b80482":"ch-background-941d54")+' '+"ch-border-radius-84df20"+' '+"ch-opacity-383082"}
               />
             ))}
           </span>
@@ -588,20 +406,10 @@ function Shape({ kind }: { kind: PieceKind }) {
     /* A doorway: a gap of floor cut into the wall, with a swing arc. */
     case "door":
       return (
-        <span style={{ position: "relative", display: "block", width: w, height: h }}>
+        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h}))} >
           <Flat w={w} h={h} radius="var(--radius-object-sm)" background="var(--color-floor)" />
           <span
-            style={{
-              position: "absolute",
-              left: 2,
-              top: 0,
-              width: 22,
-              height: 22,
-              borderInlineStart: "1px solid var(--color-paper-400)",
-              borderBottom: "1px solid var(--color-paper-400)",
-              borderEndStartRadius: 22,
-              opacity: 0.55,
-            }}
+            className={"ch-position-bb6a43"+' '+"ch-left-261659"+' '+"ch-top-0d4406"+' '+"ch-width-cefbfe"+' '+"ch-height-ca02a9"+' '+"ch-border-inline-start-4c0f32"+' '+"ch-border-bottom-ec165b"+' '+"ch-border-end-start-radius-ad032a"+' '+"ch-opacity-94ec8e"}
           />
         </span>
       );
@@ -612,20 +420,10 @@ function Shape({ kind }: { kind: PieceKind }) {
     case "window-v": {
       const horizontal = kind === "window-h";
       return (
-        <span style={{ position: "relative", display: "block", width: w, height: h }}>
+        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h}))} >
           <span
             aria-hidden="true"
-            style={{
-              position: "absolute",
-              left: horizontal ? -14 : 0,
-              top: horizontal ? 0 : -14,
-              width: horizontal ? w + 28 : 64,
-              height: horizontal ? 64 : h + 28,
-              background: horizontal
-                ? "radial-gradient(ellipse at 50% 0%, var(--light-window), transparent 70%)"
-                : "radial-gradient(ellipse at 0% 50%, var(--light-window), transparent 70%)",
-              pointerEvents: "none",
-            }}
+            className={("ch-position-bb6a43"+' '+(horizontal?"ch-left-7a2402":"ch-left-ced581")+' '+(horizontal?"ch-top-0d4406":"ch-top-c4e8b6")+' '+(horizontal?"ch-background-c1c007":"ch-background-70edd5")+' '+"ch-pointer-events-8b1364")+" "+(geometryClass({width:horizontal ? w + 28 : 64,height:horizontal ? 64 : h + 28}))}
           />
           <Flat
             w={w}
@@ -650,19 +448,14 @@ function RoomFurnitureBase({ roomId, kind }: { roomId: string; kind: string }) {
   return (
     <span
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-      style={{ borderRadius: "var(--radius-room)" }}
+      className={"pointer-events-none absolute inset-0 overflow-hidden "+("ch-border-radius-9d9174")}
+
     >
       {pieces.map((piece: Piece, i: number) => (
         <span
           key={`${piece.kind}-${i}`}
-          className="absolute"
-          style={{
-            left: `${piece.x}%`,
-            top: `${piece.y}%`,
-            transform: `translate(-50%, -50%) rotate(${piece.rot ?? 0}deg) scale(${piece.scale ?? 1})`,
-            lineHeight: 0,
-          }}
+          className={("absolute "+("ch-line-height-3c11d0"))+" "+(geometryClass({left:`${piece.x}%`,top:`${piece.y}%`,transform:`translate(-50%, -50%) rotate(${piece.rot ?? 0}deg) scale(${piece.scale ?? 1})`}))}
+
         >
           <Shape kind={piece.kind} />
         </span>
@@ -673,3 +466,5 @@ function RoomFurnitureBase({ roomId, kind }: { roomId: string; kind: string }) {
 
 /** Static per room, so it never re-renders while people move around it. */
 export const RoomFurniture = memo(RoomFurnitureBase);
+
+function materialClass(material:Material,face:'top'|'side'){const key=material.mid.includes('soft')?'soft':material.mid.includes('metal')?'metal':material.mid.includes('glass')?'glass':material.mid.includes('leaf')?'leaf':material.mid.includes('pot')?'pot':'oak';return 'ch-material-'+key+'-'+face;}function furnitureRadius(radius:string){return radius==='50%'||radius==='999px'?'ch-furniture-round':radius.includes(' ')?'ch-furniture-arch':'ch-furniture-radius';}function flatPaint(value:string){return value.includes('glass')?'ch-flat-glass':value.includes('soft')?'ch-flat-soft':value.includes('floor')?'ch-flat-floor':'ch-flat-paper';}

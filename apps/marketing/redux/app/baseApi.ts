@@ -4,8 +4,14 @@ import type { RootState } from "./store";
 import { signInAgainUrl } from "@/constants";
 import { logoutUser } from "../features/auth/authSlice";
 import { successMessage, errorMessage } from "@/lib/api-feedback";
-import { readClientSession, clearClientSession, refreshClientSession, SessionRequestError } from "@orgtik/ui/auth";
+import {
+  readClientSession,
+  clearClientSession,
+  refreshClientSession,
+  SessionRequestError,
+} from "@orgtik/ui/auth";
 import { SOS_API_URL } from "@/constants/env";
+import { marketingRequestScope } from "@/lib/request-scope";
 
 // Define error response type
 export interface ErrorResponse {
@@ -26,25 +32,49 @@ export interface SuccessResponse<DataType = any> {
 }
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.NEXT_PUBLIC_API_URL,
+  baseUrl: process.env.NEXT_PUBLIC_API_URL?.replace(/\/api\/?$/, ""),
   prepareHeaders: (headers, { getState }) => {
     const session = readClientSession();
-    const token = session?.tokens.accessToken || (getState() as RootState).auth.token;
+    const token =
+      session?.tokens.accessToken || (getState() as RootState).auth.token;
     if (token) headers.set("Authorization", `Bearer ${token}`);
-    if (session?.workspaceContext?.workspace.id) headers.set("x-workspace", session.workspaceContext.workspace.id);
+    if (session?.workspaceContext?.workspace.id)
+      headers.set("x-workspace", session.workspaceContext.workspace.id);
     return headers;
   },
 });
 
-const baseQueryWithInterceptor: typeof baseQuery = async (args, api, extraOptions) => {
+const baseQueryWithInterceptor: typeof baseQuery = async (
+  args,
+  api,
+  extraOptions,
+) => {
   // A network failure comes back as { error: { status: "FETCH_ERROR" } } and is reported like any
   // other error. The old interceptor read `error.data.msg` and threw when there was no data, so a
   // stopped API crashed the screen (MKT-007).
+  const requestScope = marketingRequestScope();
   let result = await baseQuery(args, api, extraOptions);
-  if (result.error?.status === 401 && readClientSession()?.tokens.refreshToken) {
-    try { await refreshClientSession(SOS_API_URL); result = await baseQuery(args, api, extraOptions); }
-    catch (error) { if (!(error instanceof SessionRequestError) || ![401, 403].includes(error.status)) return { error: { status: 503, data: { code: "session_unavailable" } } }; }
+  if (requestScope !== marketingRequestScope())
+    return { error: { status: 409, data: { code: "scope_changed" } } };
+  if (
+    result.error?.status === 401 &&
+    readClientSession()?.tokens.refreshToken
+  ) {
+    try {
+      await refreshClientSession(SOS_API_URL);
+      result = await baseQuery(args, api, extraOptions);
+    } catch (error) {
+      if (
+        !(error instanceof SessionRequestError) ||
+        ![401, 403].includes(error.status)
+      )
+        return {
+          error: { status: 503, data: { code: "session_unavailable" } },
+        };
+    }
   }
+  if (requestScope !== marketingRequestScope())
+    return { error: { status: 409, data: { code: "scope_changed" } } };
   const method = typeof args === "string" ? "GET" : args.method || "GET";
   const body = typeof args === "string" ? undefined : args.body;
 
@@ -53,7 +83,9 @@ const baseQueryWithInterceptor: typeof baseQuery = async (args, api, extraOption
   if (result.error?.status === 401 && typeof window !== "undefined") {
     clearClientSession();
     api.dispatch(logoutUser());
-    window.location.href = signInAgainUrl(window.location.pathname + window.location.search);
+    window.location.href = signInAgainUrl(
+      window.location.pathname + window.location.search,
+    );
     return result;
   }
 
@@ -62,10 +94,19 @@ const baseQueryWithInterceptor: typeof baseQuery = async (args, api, extraOption
   if (method !== "GET") {
     if (result.error) {
       const code = (result.error.data as ErrorResponse | undefined)?.code;
-      const message = errorMessage({ endpoint: api.endpoint, args: body, status: result.error.status, code });
+      const message = errorMessage({
+        endpoint: api.endpoint,
+        args: body,
+        status: result.error.status,
+        code,
+      });
       if (message) toast.error(message);
     } else if (result.data !== undefined) {
-      const message = successMessage({ endpoint: api.endpoint, args: body, data: result.data });
+      const message = successMessage({
+        endpoint: api.endpoint,
+        args: body,
+        data: result.data,
+      });
       if (message) toast.success(message);
     }
   }
@@ -94,6 +135,7 @@ export const baseApi = createApi({
     "Messaging",
     "Audiences",
     "AudienceSegments",
+    "MarketingV3",
   ],
   endpoints: () => ({}),
 });

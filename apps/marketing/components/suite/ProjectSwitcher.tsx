@@ -7,14 +7,30 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { CaretUpDown, Plus } from "@phosphor-icons/react";
-import { Avatar, Menu, MenuContent, MenuGroup, MenuItem, MenuRadioGroup, MenuRadioItem, MenuSeparator, MenuTrigger, Skeleton } from "@orgtik/ui";
+import {
+  Avatar,
+  Menu,
+  MenuContent,
+  MenuGroup,
+  MenuItem,
+  MenuRadioGroup,
+  MenuRadioItem,
+  MenuSeparator,
+  MenuTrigger,
+  Skeleton,
+} from "@orgtik/ui";
 import { useRouter } from "@/i18n/routing";
 import { useAppDispatch } from "@/redux/app/hooks";
 import { baseApi } from "@/redux/app/baseApi";
-import { useGetActiveProjectQuery, useGetAllProjectsQuery, useSwitchProjectMutation } from "@/redux/features/projects/projectApi";
+import {
+  useGetActiveProjectQuery,
+  useGetAllProjectsQuery,
+  useSwitchProjectMutation,
+} from "@/redux/features/projects/projectApi";
 import { ProjectFormDialog } from "@/components/pages/project/ProjectFormDialog";
 import { useMarketingRoles } from "@/lib/permissions";
 import { isolate } from "@/lib/bidi";
+import { advanceMarketingProjectScope } from "@/lib/request-scope";
 
 export function ProjectSwitcher() {
   const t = useTranslations("Shell");
@@ -31,6 +47,7 @@ export function ProjectSwitcher() {
 
   const choose = async (id: string) => {
     if (!id || id === current?.id) return;
+    advanceMarketingProjectScope();
     try {
       await switchProject(id).unwrap();
     } catch {
@@ -47,11 +64,25 @@ export function ProjectSwitcher() {
     <>
       <Menu>
         <MenuTrigger
-          aria-label={current ? t("switchProjectCurrent", { name: isolate(current.name) }) : t("chooseProject")}
+          aria-label={
+            current
+              ? t("switchProjectCurrent", { name: isolate(current.name) })
+              : t("chooseProject")
+          }
           className="flex h-9 max-w-64 items-center gap-2 rounded-pill border border-line-control bg-raised ps-1 pe-3 text-body text-fg hover:bg-hover focus-visible:outline-2 focus-visible:outline-focus"
         >
-          {current ? <Avatar name={current.name} src={current.avatar} size="xs" decorative /> : null}
-          <span dir="auto" className="min-w-0 flex-1 truncate text-start font-semibold">
+          {current ? (
+            <Avatar
+              name={current.name}
+              src={current.avatar}
+              size="xs"
+              decorative
+            />
+          ) : null}
+          <span
+            dir="auto"
+            className="min-w-0 flex-1 truncate text-start font-semibold"
+          >
             {current ? current.name : t("chooseProject")}
           </span>
           <CaretUpDown aria-hidden className="size-4 shrink-0 text-fg-muted" />
@@ -59,11 +90,19 @@ export function ProjectSwitcher() {
         <MenuContent className="w-72">
           {list.length ? (
             <MenuGroup label={t("projects")}>
-              <MenuRadioGroup value={current?.id ?? ""} onValueChange={(v) => void choose(String(v))}>
+              <MenuRadioGroup
+                value={current?.id ?? ""}
+                onValueChange={(v) => void choose(String(v))}
+              >
                 {list.map((p) => (
                   <MenuRadioItem key={p.id} value={p.id}>
                     <span className="flex items-center gap-2">
-                      <Avatar name={p.name} src={p.avatar} size="xs" decorative />
+                      <Avatar
+                        name={p.name}
+                        src={p.avatar}
+                        size="xs"
+                        decorative
+                      />
                       <span dir="auto" className="truncate">
                         {p.name}
                       </span>
@@ -73,7 +112,9 @@ export function ProjectSwitcher() {
               </MenuRadioGroup>
             </MenuGroup>
           ) : (
-            <p className="px-3 py-2 text-body text-fg-muted">{t("noProjects")}</p>
+            <p className="px-3 py-2 text-body text-fg-muted">
+              {t("noProjects")}
+            </p>
           )}
           {can.manageProjects ? (
             <>
@@ -85,7 +126,13 @@ export function ProjectSwitcher() {
           ) : null}
         </MenuContent>
       </Menu>
-      {can.manageProjects ? <ProjectFormDialog open={creating} onOpenChange={setCreating} onCreated={(id) => void choose(id)} /> : null}
+      {can.manageProjects ? (
+        <ProjectFormDialog
+          open={creating}
+          onOpenChange={setCreating}
+          onCreated={(id) => void choose(id)}
+        />
+      ) : null}
     </>
   );
 }

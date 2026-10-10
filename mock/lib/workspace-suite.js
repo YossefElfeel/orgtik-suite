@@ -45,7 +45,10 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
       if (tool === 'files') { push(tool, 'file', data.files, row => row.name, row => `/my-files?file=${encodeURIComponent(row.id)}`); push(tool, 'folder', data.folders, row => row.name, row => `/my-files?folder=${encodeURIComponent(row.id)}`); }
       if (tool === 'hr') push(tool, 'employee', data.employees, row => row.fullName || [row.firstName, row.lastName].filter(Boolean).join(' ') || row.name, row => `/employees/${encodeURIComponent(row.id)}`);
       if (tool === 'crm') { push(tool, 'contact', data.contacts, row => row.fullName, row => `/customers/${encodeURIComponent(row.id)}`); push(tool, 'company', data.companies, row => row.name, row => `/companies?company=${encodeURIComponent(row.id)}`); push(tool, 'project', data.projects, row => row.projectName, row => `/projects/${encodeURIComponent(row.id)}`); }
-      if (tool === 'marketing') push(tool, 'project', data.projects, row => row.name || row.title, row => `/projects/${encodeURIComponent(row.id)}`);
+      if (tool === 'marketing') {
+        push(tool, 'project', data.projects, row => row.name || row.title, row => `/dashboard?projectId=${encodeURIComponent(row.id)}`);
+        for (const type of ['campaign', 'post', 'journey']) push(tool, type, data[`${type}s`], row => row.title, row => `${row.path}${row.path.includes('?') ? '&' : '?'}projectId=${encodeURIComponent(row.projectId)}`);
+      }
       if (tool === 'chat') { push(tool, 'channel', data.channels, row => row.name, row => `/hq/chat/${encodeURIComponent(row.id)}`); push(tool, 'message', data.messages, row => row.text || row.content, row => `/hq/chat/${encodeURIComponent(row.channelId)}?message=${encodeURIComponent(row.id)}`); }
     }
     return out;
@@ -81,7 +84,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     const ctx = currentContext(); connectors.requireConnection(workspace, ctx, 'marketing', 'crm');
     const data = runtimeFor('crm').suiteFeed(ctx), query = String(req.query.search || '').trim().toLocaleLowerCase();
     if (query.length > 200) throw fail(422, 'invalid_directory_query', 'Use a shorter directory search.');
-    return { workspaceId: workspace.id, managedIn: 'crm', contacts: data.contacts.filter(row => !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200).map(row => ({ workspaceId: workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
+    return { workspaceId: workspace.id, managedIn: 'crm', contacts: data.contacts.filter(row => !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200).map(row => ({ workspaceId: workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, currency: row.currency, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
   }));
   function marketingWriteContext(req, keys) {
     const ctx = currentContext();

@@ -24,12 +24,13 @@
     "V3-P3-ECO": {
       "status": "ordinary_adapters_in_progress",
       "ui_status": "tool_migration_in_progress",
-      "current_evidence": "Actual connectors/trials/access, Account identity/actions and signed adaptive Home, native Tasks/CRM activity and notification preferences, won CRM customer-owned workspace and public careers are verified. Account142/44, Tasks111/31, HR450+50/117 plus11/2 reviewed correction. All-tool providers, private Chat audience and Marketing attribution remain in progress."
+      "current_evidence": "Actual connectors/trials/access, Account identity/actions and signed adaptive Home, native feeds/preferences, won CRM customer-owned workspace, public careers and private Chat audience guards are verified. Native Marketing consent/attribution/current CRM results/currency and campaign Tasks pass current-role/connector/receipt checks; the cumulative all-tool journey passes after a documented lossless codec repair with the journal cap unchanged. Remaining tool provider/UI acceptance is in progress.",
+      "acceptance_evidence": "program/audits/v3-p3/README.md; program/audits/v3-p3/marketing-transactions.md"
     },
     "V3-P3-CATALOG": {
       "status": "ordinary_catalog_and_website_parity_verified_mirrors_pending",
       "ui_status": "publication_230_checks_56_captures_verified",
-      "current_evidence": "Canonical CRM publication230 checks/56 captures integrated; paid customer+confirmed deal, actual paid source/start guard and packaged delivery bytes verified. Data-only website adapter passes16items/11bundles/five catalogs and168/168 strict pixel/text/ARIA pairs at390/768/1440. Console service writes retired; final CRM UI and WM mirrors remain pending.",
+      "current_evidence": "Canonical CRM publication and final CRM ordinary tool cycle accepted locally (1,316 checks/334 captures). Paid customer+confirmed deal, actual paid source/start guard and packaged delivery bytes verified. Data-only website adapter passes16items/11bundles/five catalogs and168/168 strict pixel/text/ARIA pairs at390/768/1440. Console service writes retired; final Console software metadata and WM mirrors remain pending.",
       "acceptance_evidence": "program/audits/v3-p3/README.md; program/audits/website/parity/diff-v3-catalog-final-before-vs-v3-catalog-final-after.md"
     },
     "V3-P4-TASKS": {
@@ -51,19 +52,35 @@
       "acceptance_evidence": "program/audits/v3-p4/hr/README.md; program/audits/v3-p4/hr/verification.json; program/audits/v3-p4/hr/onboarding-review.json"
     },
     "V3-P4-CRM": {
-      "status": "ordinary_tool_cycle_in_progress",
-      "ui_status": "crm_stream_in_progress",
-      "current_evidence": "P3 catalog publication accepted locally; CRM-owned ordinary pipelines/companies/activities/routing/targets/mock communication and kit removal now being implemented; full P4 acceptance pending"
+      "status": "implemented_local_verified_ci_pending",
+      "ui_status": "ordinary_crm_verified",
+      "current_evidence": "CRM final0ffbdb9 integrated root757ee8a:1,316 accepted checks/334 unique captures,12 domain tests, five catalogs and production build. All Tier A/B ordinary workflows, native signed PDF bytes, paid service delivery, retained money flows, won customer workspace and actual Console handoff verified. Exactly226 approved kit files removed with zero remaining imports. Integration CI for the final source remains pending.",
+      "acceptance_evidence": "program/audits/v3-p4-crm/README.md; program/audits/v3-p4-crm/manifest.json"
     },
     "V3-P4-CHATS": {
       "status": "ordinary_tool_cycle_in_progress",
       "ui_status": "chats_stream_in_progress",
-      "current_evidence": "Owned ordinary tool cycle in progress; current native runtime and DS v2 shell, all approved commitments and responsive acceptance pending."
+      "current_evidence": "Chats source candidate cb8e8bc: ordinary Tier A/B, guest admission, recording references, feeds, Admin/onboarding and zero inline source styles implemented. Seventeen native UI checks,19 combined HTTP checks,24 domain tests and14 retained regressions passed; final states/matrix/recording proof and production build remain pending."
     },
     "V3-P4-FILES": {
       "status": "ordinary_tool_cycle_in_progress",
       "ui_status": "files_stream_in_progress",
-      "current_evidence": "Owned ordinary tool cycle in progress; current native runtime and DS v2 shell, all approved commitments and responsive acceptance pending."
+      "current_evidence": "Files source af19439 plus819a5cc: functional27, public/bulk11, Tasks/Chats/board connections10, six-state6, empty onboarding5 and actual connection/access/trial/admin15 checks pass. Matrix36 checks/19 captures has zero axe/overflow/runtime errors.36 domain/retained tests and8 signed board HTTP regressions pass; final detail/recovery review and production build remain pending."
+    },
+    "V3-P4-MARKETING": {
+      "status": "ordinary_tool_cycle_in_progress",
+      "ui_status": "marketing_stream_in_progress",
+      "current_evidence": "Native campaign/journey persistence and owned feature hooks implemented; canonical CRM consent/attribution/current results/currency and actual Marketing Tasks shared adapters verified. Ordinary UI and complete responsive tool acceptance remain in progress."
+    },
+    "V3-P4-CONSOLE": {
+      "status": "ordinary_tool_cycle_in_progress",
+      "ui_status": "console_stream_in_progress",
+      "current_evidence": "Isolated Console branch has actual staff SuiteFrame/search/notices/preferences, releases, current cohorts/setup/mock verification, canonical software metadata, immutable invoice PDFs/series, native single-line quote/confirm, exports and ticket SLA hooks. Expanded HTTP proof passes; remaining native pay-link/invitation/handoff and ordinary UI/matrix/build acceptance remain pending."
+    },
+    "V3-P4-WM": {
+      "status": "scheduled_after_files",
+      "ui_status": "pending",
+      "current_evidence": "Assigned to the Files stream after final Files acceptance. Content-only ordinary workflow, actual autosave/comments/mock webhooks and canonical read-only mirrors still require their v3 cycle."
     }
   }
 }

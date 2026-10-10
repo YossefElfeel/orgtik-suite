@@ -1,0 +1,233 @@
+{
+  "MarketingV3.draft": {
+    "en": "Draft",
+    "ar": "مسودة",
+    "de": "Entwurf",
+    "fr": "Brouillon",
+    "it": "Bozza"
+  },
+  "MarketingV3.scheduled": {
+    "en": "Scheduled",
+    "ar": "مجدول",
+    "de": "Geplant",
+    "fr": "Planifié",
+    "it": "Programmato"
+  },
+  "MarketingV3.review": {
+    "en": "In review",
+    "ar": "قيد المراجعة",
+    "de": "In Prüfung",
+    "fr": "En révision",
+    "it": "In revisione"
+  },
+  "MarketingV3.published": {
+    "en": "Published",
+    "ar": "منشور",
+    "de": "Veröffentlicht",
+    "fr": "Publié",
+    "it": "Pubblicato"
+  },
+  "MarketingV3.failed": {
+    "en": "Failed",
+    "ar": "فشل",
+    "de": "Fehlgeschlagen",
+    "fr": "Échec",
+    "it": "Non riuscito"
+  },
+  "MarketingV3.schedule": {
+    "en": "Schedule",
+    "ar": "موعد النشر",
+    "de": "Zeitplan",
+    "fr": "Programmation",
+    "it": "Programmazione"
+  },
+  "MarketingV3.openPost": {
+    "en": "Open post",
+    "ar": "فتح المنشور",
+    "de": "Beitrag öffnen",
+    "fr": "Ouvrir la publication",
+    "it": "Apri post"
+  },
+  "MarketingV3.newPost": {
+    "en": "New post",
+    "ar": "منشور جديد",
+    "de": "Neuer Beitrag",
+    "fr": "Nouvelle publication",
+    "it": "Nuovo post"
+  },
+  "MarketingV3.project": {
+    "en": "Task project",
+    "ar": "مشروع المهام",
+    "de": "Aufgabenprojekt",
+    "fr": "Projet de tâches",
+    "it": "Progetto attività"
+  },
+  "MarketingV3.section": {
+    "en": "Task section",
+    "ar": "قسم المهام",
+    "de": "Aufgabenabschnitt",
+    "fr": "Section de tâches",
+    "it": "Sezione attività"
+  },
+  "MarketingV3.openTasks": {
+    "en": "Open Tasks",
+    "ar": "فتح المهام",
+    "de": "Aufgaben öffnen",
+    "fr": "Ouvrir Tasks",
+    "it": "Apri Tasks"
+  },
+  "MarketingV3.taskProjectNeeded": {
+    "en": "Create a Tasks project and section first.",
+    "ar": "أنشئ مشروع مهام وقسمًا أولًا.",
+    "de": "Erstellen Sie zuerst ein Aufgabenprojekt mit Abschnitt.",
+    "fr": "Créez d’abord un projet Tasks avec une section.",
+    "it": "Crea prima un progetto Tasks con una sezione."
+  },
+  "MarketingV3.approvedRequired": {
+    "en": "Approve and publish a complete campaign first.",
+    "ar": "اعتمد حملة مكتملة وانشرها أولًا.",
+    "de": "Genehmigen und veröffentlichen Sie zuerst eine vollständige Kampagne.",
+    "fr": "Approuvez et publiez d’abord une campagne complète.",
+    "it": "Approva e pubblica prima una campagna completa."
+  },
+  "MarketingV3.steps": {
+    "en": "Journey steps",
+    "ar": "خطوات الرحلة",
+    "de": "Journey-Schritte",
+    "fr": "Étapes du parcours",
+    "it": "Passaggi del percorso"
+  },
+  "MarketingV3.stepType": {
+    "en": "Step type",
+    "ar": "نوع الخطوة",
+    "de": "Schritttyp",
+    "fr": "Type d’étape",
+    "it": "Tipo di passaggio"
+  },
+  "MarketingV3.taskTitle": {
+    "en": "Task title",
+    "ar": "عنوان المهمة",
+    "de": "Aufgabentitel",
+    "fr": "Titre de tâche",
+    "it": "Titolo attività"
+  },
+  "MarketingV3.delivery": {
+    "en": "Mock delivery",
+    "ar": "تسليم تجريبي",
+    "de": "Simulierte Zustellung",
+    "fr": "Livraison simulée",
+    "it": "Consegna simulata"
+  },
+  "MarketingV3.delivered": {
+    "en": "Simulated sent",
+    "ar": "إرسال محاكى",
+    "de": "Simuliert gesendet",
+    "fr": "Envoi simulé",
+    "it": "Invio simulato"
+  },
+  "MarketingV3.opened": {
+    "en": "Simulated opens",
+    "ar": "فتح محاكى",
+    "de": "Simulierte Öffnungen",
+    "fr": "Ouvertures simulées",
+    "it": "Aperture simulate"
+  },
+  "MarketingV3.clicked": {
+    "en": "Simulated clicks",
+    "ar": "نقرات محاكاة",
+    "de": "Simulierte Klicks",
+    "fr": "Clics simulés",
+    "it": "Clic simulati"
+  },
+  "MarketingV3.bindMessage": {
+    "en": "Save campaign message",
+    "ar": "حفظ رسالة الحملة",
+    "de": "Kampagnennachricht speichern",
+    "fr": "Enregistrer le message de campagne",
+    "it": "Salva messaggio campagna"
+  },
+  "MarketingV3.message": {
+    "en": "Campaign message",
+    "ar": "رسالة الحملة",
+    "de": "Kampagnennachricht",
+    "fr": "Message de campagne",
+    "it": "Messaggio campagna"
+  },
+  "MarketingV3.runHistory": {
+    "en": "Dry run history",
+    "ar": "سجل التجارب",
+    "de": "Testlaufverlauf",
+    "fr": "Historique des essais",
+    "it": "Cronologia prove"
+  },
+  "MarketingV3.waiting": {
+    "en": "Waiting",
+    "ar": "بانتظار",
+    "de": "Wartend",
+    "fr": "En attente",
+    "it": "In attesa"
+  },
+  "MarketingV3.simulated_not_executed": {
+    "en": "Simulated; no external action",
+    "ar": "محاكاة؛ دون إجراء خارجي",
+    "de": "Simuliert; keine externe Aktion",
+    "fr": "Simulation ; aucune action externe",
+    "it": "Simulato; nessuna azione esterna"
+  },
+  "MarketingV3.moveUp": {
+    "en": "Move up",
+    "ar": "نقل لأعلى",
+    "de": "Nach oben",
+    "fr": "Monter",
+    "it": "Sposta su"
+  },
+  "MarketingV3.moveDown": {
+    "en": "Move down",
+    "ar": "نقل لأسفل",
+    "de": "Nach unten",
+    "fr": "Descendre",
+    "it": "Sposta giù"
+  },
+  "MarketingV3.reviewCampaign": {
+    "en": "Review campaign",
+    "ar": "مراجعة الحملة",
+    "de": "Kampagne prüfen",
+    "fr": "Réviser la campagne",
+    "it": "Rivedi campagna"
+  },
+  "MarketingV3.connected": {
+    "en": "Connected tools",
+    "ar": "الأدوات المتصلة",
+    "de": "Verbundene Tools",
+    "fr": "Outils connectés",
+    "it": "Strumenti collegati"
+  },
+  "MarketingV3.newCampaign": {
+    "en": "New campaign",
+    "ar": "حملة جديدة",
+    "de": "Neue Kampagne",
+    "fr": "Nouvelle campagne",
+    "it": "Nuova campagna"
+  },
+  "MarketingV3.queueHint": {
+    "en": "Move drafts or approved scheduled posts. Review and published posts stay locked.",
+    "ar": "انقل المسودات أو المنشورات المجدولة المعتمدة. تظل منشورات المراجعة والمنشورة مقفلة.",
+    "de": "Verschieben Sie Entwürfe oder genehmigte geplante Beiträge. Beiträge in Prüfung und veröffentlichte Beiträge bleiben gesperrt.",
+    "fr": "Déplacez les brouillons ou publications planifiées approuvées. Les publications en révision ou publiées restent verrouillées.",
+    "it": "Sposta bozze o post programmati approvati. I post in revisione e pubblicati rimangono bloccati."
+  },
+  "MarketingV3.journeyHint": {
+    "en": "Save steps before running. Dry runs simulate provider actions; Tasks are created in the connected tool.",
+    "ar": "احفظ الخطوات قبل التشغيل. تحاكي التجربة إجراءات المزود؛ وتُنشأ المهام في الأداة المتصلة.",
+    "de": "Speichern Sie Schritte vor dem Start. Testläufe simulieren Anbieteraktionen; Aufgaben werden im verbundenen Tool erstellt.",
+    "fr": "Enregistrez les étapes avant l’essai. Les essais simulent les fournisseurs ; les tâches sont créées dans l’outil connecté.",
+    "it": "Salva i passaggi prima della prova. Le prove simulano i provider; le attività vengono create nello strumento collegato."
+  },
+  "MarketingV3.onboardingHint": {
+    "en": "Save brand context and an email sender, then review CRM and Tasks connections before your first campaign.",
+    "ar": "احفظ سياق العلامة ومرسل البريد، ثم راجع ربط CRM والمهام قبل حملتك الأولى.",
+    "de": "Speichern Sie Markenkontext und E-Mail-Absender und prüfen Sie vor der ersten Kampagne CRM und Tasks.",
+    "fr": "Enregistrez le contexte de marque et un expéditeur, puis vérifiez CRM et Tasks avant votre première campagne.",
+    "it": "Salva contesto del brand e mittente, poi controlla CRM e Tasks prima della prima campagna."
+  }
+}

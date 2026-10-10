@@ -1,0 +1,60 @@
+{
+  "scope": "Ordinary Files routes, actual signed workspace identities, persisted packaged assets and protected shares in owned offset700 sandbox.",
+  "mode": "public-bulk",
+  "checks": [
+    {
+      "name": "Ordinary bulk move reports actual partial collision",
+      "pass": true
+    },
+    {
+      "name": "Bulk Keep both resolves the real destination collision",
+      "pass": true
+    },
+    {
+      "name": "Ordinary drag move changes actual file destination",
+      "pass": true
+    },
+    {
+      "name": "Archive makes the actual file unavailable to active reads",
+      "pass": true
+    },
+    {
+      "name": "Ordinary restore returns the same actual record and saved version",
+      "pass": true
+    },
+    {
+      "name": "Ordinary upload request creates actual protected capability",
+      "pass": true
+    },
+    {
+      "name": "Public request uses real password/cookie exchange and clears URL secret",
+      "pass": true
+    },
+    {
+      "name": "Anonymous capability submits a real packaged file once",
+      "pass": true
+    },
+    {
+      "name": "Request records actual submission count",
+      "pass": true
+    },
+    {
+      "name": "Ordinary revoke invalidates actual request capability",
+      "pass": true
+    },
+    {
+      "name": "No unexpected browser runtime or console errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    "bulk-partial.png",
+    "drag-move.png",
+    "trash-restored.png",
+    "public-request-mobile.png",
+    "requests-revoked.png"
+  ],
+  "errors": [],
+  "completed": true
+}

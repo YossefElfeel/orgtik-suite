@@ -39,6 +39,41 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const principal = req ? authority.verifiedFromReq(req) : requests.getStore()?.frame.principal;
     return principal ? { ...principal, workspaceContext: principal.context.workspaceContext } : null;
   }
+  function staffPreferences(patch) {
+    const p = currentPrincipal(), S = platform().getStore(), person = p && identityFor().findUser(p.user.id);
+    if (!person || p.claims.mode !== 'staff' || p.claims.aud !== 'staff:wm' || !p.context.staffAccess?.permissions.wm?.includes('content:view')) throw failure(403, 'wm_staff_required', 'Current Website Manager access is required.');
+    const helpers = require('./workspace-suite');
+    if (patch !== undefined) { if (p.readOnly) throw failure(423, 'view_as_read_only', 'View-as cannot save appearance choices.'); return helpers.savePreferences(person, patch); }
+    return { person: { id: person.id, name: identityFor().fullName(person), email: person.email }, preferences: helpers.preferences(person), now: S.iso(S.now()), scope: 'staff:wm' };
+  }
+  function catalogMirror({ country = 'CH' } = {}) {
+    const p = currentPrincipal(), S = platform().getStore(), identity = identityFor(), person = p && identity.findUser(p.user.id);
+    if (!person || p.claims.mode !== 'staff' || p.claims.aud !== 'staff:wm' || !p.context.staffAccess?.permissions.wm?.includes('content:view')) throw failure(403, 'wm_staff_required', 'Current Website Manager access is required.');
+    if (!Object.hasOwn(S.db.countries, country)) throw failure(422, 'catalog_country_required', 'Choose a configured catalog country.');
+    const currency = S.db.countries[country].currency, resolved = { workspace: { country, currency, billing: { country }, members: [], lines: [] }, buyerKey: null, region: { country, currency, source: 'mock-override' } };
+    const catalog = require('../apps/admin/website-offers').publicCatalog(S, resolved), rights = p.context.staffAccess.permissions.admin || [], internal = S.workspace('ws_orgtik');
+    let crmContext = null;
+    try { if (internal?.kind === 'orgtik_internal' && !['deleted', 'cancelled'].includes(internal.state)) crmContext = require('./workspace-context').resolveWorkspaceContext(S, identity, person, { realm, workspaceId: internal.id, actorUserId: p.actor.id, audience: 'sales' }); } catch (error) { if (![403, 404].includes(error.status)) throw error; }
+    const canCRM = Boolean(rights.includes('services:view') && require('./connectors').admitted(crmContext?.tools.crm)), canConsole = rights.includes('tools:view');
+    return { readOnly: true, country, countries: Object.keys(S.db.countries), region: catalog.region, currency, decimals: catalog.decimals, priceVersion: S.db.priceVersion, policy: catalog.policy, bundles: catalog.bundles, items: S.db.websiteOffers.map(offer => {
+      const published = catalog.items.find(row => row.id === offer.id), service = offer.kind === 'service', path = service ? `/catalog/services/${encodeURIComponent(offer.serviceId)}` : `/catalog/software?offer=${encodeURIComponent(offer.id)}`, canOpen = service ? canCRM : canConsole;
+      const query = new URLSearchParams({ ...(service && internal ? { workspaceId: internal.id } : {}), redirect: path });
+      return { id: offer.id, catalogId: offer.id, kind: offer.kind, name: published?.names || offer.name, serviceId: offer.serviceId || null, planId: offer.planId || offer.serviceId, toolId: offer.tool || null, managedIn: service ? 'crm' : 'console', scope: service ? 'sales' : 'platform_admin', path, workspaceId: service ? internal?.id || null : null, status: offer.tool ? S.db.tools.find(tool => tool.key === offer.tool)?.status : S.db.services.find(row => row.id === offer.serviceId)?.status, available: Boolean(published), publishedAt: offer.publishedAt || null, monthlyMinor: published?.monthlyMinor ?? null, prices: published?.prices || null, currency, decimals: catalog.decimals, launch: { canOpen, reason: canOpen ? null : service ? 'crm_service_access_required' : 'console_catalog_access_required', url: canOpen ? `${config.webUrl('sos')}/go/${service ? 'sales' : 'platform_admin'}?${query}` : null } };
+    }) };
+  }
+  function crmLeadTarget({ leadId } = {}) {
+    const request = requests.getStore(), p = currentPrincipal(), S = platform().getStore(), identity = identityFor(), person = p && identity.findUser(p.user.id), workspace = S.workspace('ws_orgtik');
+    if (!request || !person || p.claims.mode !== 'staff' || p.claims.aud !== 'staff:wm' || !p.context.staffAccess?.permissions.wm?.includes('content:view') || typeof leadId !== 'string' || !/^[\w-]{1,160}$/.test(leadId)) throw failure(403, 'wm_lead_context_required', 'Choose an actual Website Manager lead reference.');
+    const path = `/customers/${encodeURIComponent(leadId)}`, base = { workspaceId: workspace?.id || null, leadId, scope: 'sales', path, canOpen: false, reason: 'crm_read_access_required', url: null };
+    if (!workspace || workspace.kind !== 'orgtik_internal' || ['deleted', 'cancelled'].includes(workspace.state)) return { ...base, reason: 'orgtik_crm_unavailable' };
+    let context;
+    try { context = require('./workspace-context').resolveWorkspaceContext(S, identity, person, { realm, workspaceId: workspace.id, actorUserId: p.actor.id, audience: 'sales' }); } catch (error) { if ([403, 404].includes(error.status)) return base; throw error; }
+    if (!require('./connectors').admitted(context.tools.crm)) return base;
+    let runtime = request.suiteReadRuntimes.get('sales'); if (!runtime) { runtime = registry.create(workspace.id, 'sales'); request.suiteReadRuntimes.set('sales', runtime); }
+    if (!runtime.suiteFeed(context).contacts.some(row => row.id === leadId)) return { ...base, reason: 'crm_record_unavailable' };
+    const query = new URLSearchParams({ workspaceId: workspace.id, redirect: path });
+    return { ...base, canOpen: true, reason: null, url: `${config.webUrl('sos')}/go/sales?${query}` };
+  }
   function internalCrmRuntime(request) {
     const S = platform().getStore(), workspace = S.workspace('ws_orgtik');
     if (!request || workspace?.kind !== 'orgtik_internal' || ['suspended', 'deleted', 'cancelled'].includes(workspace.state)) throw failure(503, 'orgtik_crm_unavailable', 'The OrgTik CRM is unavailable.');
@@ -127,7 +162,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const data = runtime.suiteFeed(context);
     if (selected && ids.some(id => !data.contacts.some(row => row.id === id))) throw failure(403, 'recipient_unavailable', 'A selected CRM contact is no longer visible. Review the audience.');
     const contacts = data.contacts.filter(row => selected ? ids.includes(row.id) : !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200);
-    return { workspaceId: initial.workspace.id, managedIn: 'crm', contacts: contacts.map(row => ({ workspaceId: initial.workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
+    return { workspaceId: initial.workspace.id, managedIn: 'crm', contacts: contacts.map(row => ({ workspaceId: initial.workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, currency: row.currency, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
   }
   function resolveSharedFile(value) {
     const principal = requests.getStore()?.frame.principal, workspaceId = principal?.context.workspaceContext?.workspace.id;
@@ -747,6 +782,6 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       return sendJson(error.status || 503, { success: false, code: error.code || "workspace_unavailable", message: error.message });
     } finally { if (frame) authority.discardPending(frame); runtime?.close(); for (const related of relatedRuntimes.values()) related.close(); for (const related of suiteReadRuntimes.values()) related.close(); }
   }
-  return { authority, registry, initialize, handle, importState, exportStaffState, importStaffState, frameApp, currentPrincipal, contextService, deliverWebsiteLead };
+  return { authority, registry, initialize, handle, importState, exportStaffState, importStaffState, frameApp, currentPrincipal, contextService, deliverWebsiteLead, staffPreferences, catalogMirror, crmLeadTarget };
 }
 module.exports = { createWorkspaceBoundary };
