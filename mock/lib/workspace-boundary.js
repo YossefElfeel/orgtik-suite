@@ -85,6 +85,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       const upload = () => (req, res, next) => /multipart\/form-data|application\/octet-stream/i.test(req.headers["content-type"] || "") ? res.status(501).json({ success: false, code: "packaged_assets_only", message: "Choose a packaged sample asset." }) : next();
       ctx.filesPolicy = () => require('./workspace-files-policy').filesPolicy(platform().getStore(), workspace.id, currentPrincipal()?.workspaceContext);
       ctx.connectedTasks = { references: args => connectedTaskReferences(appKey, args) };
+      ctx.crmDirectory = { current: args => currentCrmDirectory(appKey, args), resolve: args => currentCrmDirectory(appKey, args, true) };
       ctx.upload = Object.fromEntries(["single", "array", "any", "fields", "none"].map(name => [name, upload]));
       return {
         ctx, assets: { kind: "packaged", workspaceId: workspace.id },
@@ -112,6 +113,20 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     // The owning tool has already checked its source record ACL. Only actual
     // visible Tasks records pinned to that exact source can be projected here.
     return runtime.suiteFeed(context).tasks.filter(task => ids.includes(task.id) && task.source?.app === source && String(task.source.id) === String(sourceId)).map(task => ({ id: task.id, title: task.title, status: task.status, path: `/projects/${task.projectId}/lists?task-id=${task.id}` }));
+  }
+  function currentCrmDirectory(appKey, args = {}, selected = false) {
+    const request = requests.getStore(), p = request?.frame.principal, initial = p?.context.workspaceContext;
+    if (appKey !== 'marketing' || !initial) throw failure(403, 'marketing_context_required', 'Current Marketing workspace access is required.');
+    const S = platform().getStore(), person = identityFor().findUser(p.user.id), context = require('./workspace-context').resolveWorkspaceContext(S, identityFor(), person, { realm, workspaceId: initial.workspace.id, actorUserId: p.actor.id, readOnly: p.readOnly, audience: p.claims.aud });
+    require('./connectors').requireConnection(S.workspace(initial.workspace.id), context, 'marketing', 'crm');
+    const query = String(args.search || '').trim().toLocaleLowerCase(), ids = args.contactIds;
+    if (query.length > 200 || selected && (!Array.isArray(ids) || ids.length > 200 || ids.some(id => !Number.isSafeInteger(id) || id < 1))) throw failure(422, 'invalid_directory_selection', 'Select up to two hundred current CRM contacts.');
+    let runtime = request.runtime?.appKey === 'sales' ? request.runtime : request.relatedRuntimes.get('sales') || request.suiteReadRuntimes.get('sales');
+    if (!runtime) { runtime = registry.create(initial.workspace.id, 'sales'); request.suiteReadRuntimes.set('sales', runtime); }
+    const data = runtime.suiteFeed(context);
+    if (selected && ids.some(id => !data.contacts.some(row => row.id === id))) throw failure(403, 'recipient_unavailable', 'A selected CRM contact is no longer visible. Review the audience.');
+    const contacts = data.contacts.filter(row => selected ? ids.includes(row.id) : !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200);
+    return { workspaceId: initial.workspace.id, managedIn: 'crm', contacts: contacts.map(row => ({ workspaceId: initial.workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
   }
   function resolveSharedFile(value) {
     const principal = requests.getStore()?.frame.principal, workspaceId = principal?.context.workspaceContext?.workspace.id;
