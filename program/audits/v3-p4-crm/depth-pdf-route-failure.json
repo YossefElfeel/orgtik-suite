@@ -1,0 +1,48 @@
+{
+  "scope": "CRM P4 retained business, actual paid service, packaged delivery and workspace handoff",
+  "checks": [
+    {
+      "name": "Functional fixture is an actual persisted contact",
+      "pass": true
+    },
+    {
+      "name": "UI bulk assignment changes actual owner",
+      "pass": true
+    },
+    {
+      "name": "Routing rule UI persists actual eligible owner",
+      "pass": true
+    },
+    {
+      "name": "Stage ordering UI persists before won",
+      "pass": true
+    },
+    {
+      "name": "Contact arrival applies enabled actual source routing",
+      "pass": true
+    },
+    {
+      "name": "UI duplicate merge removes only unlinked prospect from active projection",
+      "pass": true
+    },
+    {
+      "name": "Functional fixture is an actual persisted contact",
+      "pass": true
+    },
+    {
+      "name": "Offer validity/signature UI persists explicit simulation",
+      "pass": true
+    },
+    {
+      "name": "Metadata signing preserves agreed commercial status and price",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "bulk-owner-outcome.png",
+    "merged-prospect-list.png",
+    "depth-failure.png"
+  ],
+  "errors": [],
+  "failure": "page.waitForEvent: Timeout 120000ms exceeded while waiting for event \"download\"\n=========================== logs ===========================\nwaiting for event \"download\"\n============================================================"
+}
