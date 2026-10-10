@@ -84,6 +84,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       const ctx = { ...makeCtx(appKey, identity, util), realm, workspaceId: workspace.id, currentContext: () => currentPrincipal()?.workspaceContext, uploadsDir: path.join(config.dataDir, "uploads", "workspaces", workspace.id, appKey), io: null, boardAuthority: { authorize: authorizeBoardFile, custodyTarget: args => boardCustodyTarget(workspace.id, args) }, sharedFiles: { resolve: resolveSharedFile, project: projectSharedFile, ...Object.fromEntries(['authorizeWhiteboard', 'createWhiteboard', 'saveWhiteboard', 'resolveWhiteboard'].map(method => [method, args => invokeBoardFile(method, args)])) } };
       const upload = () => (req, res, next) => /multipart\/form-data|application\/octet-stream/i.test(req.headers["content-type"] || "") ? res.status(501).json({ success: false, code: "packaged_assets_only", message: "Choose a packaged sample asset." }) : next();
       ctx.filesPolicy = () => require('./workspace-files-policy').filesPolicy(platform().getStore(), workspace.id, currentPrincipal()?.workspaceContext);
+      ctx.connectedTasks = { references: args => connectedTaskReferences(appKey, args) };
       ctx.upload = Object.fromEntries(["single", "array", "any", "fields", "none"].map(name => [name, upload]));
       return {
         ctx, assets: { kind: "packaged", workspaceId: workspace.id },
@@ -99,6 +100,18 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     if (request.runtime?.appKey === 'files') return request.runtime;
     if (!request.relatedRuntimes.has('files')) request.relatedRuntimes.set('files', registry.create(context.workspace.id, 'files'));
     return request.relatedRuntimes.get('files');
+  }
+  function connectedTaskReferences(appKey, { source, sourceId, ids } = {}) {
+    const request = requests.getStore(), p = request?.frame.principal, initial = p?.context.workspaceContext;
+    if (!initial || source !== APP_TO_TOOL[appKey] || !['chat', 'crm', 'hr'].includes(source) || !['string', 'number'].includes(typeof sourceId) || !String(sourceId) || String(sourceId).length > 160 || !Array.isArray(ids) || ids.length > 50 || ids.some(id => !Number.isSafeInteger(id) || id < 1)) throw failure(422, 'invalid_task_references', 'Choose current source-owned task references.');
+    const S = platform().getStore(), person = identityFor().findUser(p.user.id), context = require('./workspace-context').resolveWorkspaceContext(S, identityFor(), person, { realm, workspaceId: initial.workspace.id, actorUserId: p.actor.id, readOnly: p.readOnly, audience: p.claims.aud });
+    const connections = require('./connectors'), connection = connections.list(S.workspace(initial.workspace.id), context).find(row => row.source === source && row.target === 'tasks');
+    if (!connection?.enabled || !connections.admitted(context.tools[source]) || !connections.admitted(context.tools.tasks)) throw failure(403, 'connection_access_required', 'Current source and Tasks access are required.');
+    let runtime = request.runtime?.appKey === 'tasks' ? request.runtime : request.relatedRuntimes.get('tasks') || request.suiteReadRuntimes.get('tasks');
+    if (!runtime) { runtime = registry.create(initial.workspace.id, 'tasks'); request.suiteReadRuntimes.set('tasks', runtime); }
+    // The owning tool has already checked its source record ACL. Only actual
+    // visible Tasks records pinned to that exact source can be projected here.
+    return runtime.suiteFeed(context).tasks.filter(task => ids.includes(task.id) && task.source?.app === source && String(task.source.id) === String(sourceId)).map(task => ({ id: task.id, title: task.title, status: task.status, path: `/projects/${task.projectId}/lists?task-id=${task.id}` }));
   }
   function resolveSharedFile(value) {
     const principal = requests.getStore()?.frame.principal, workspaceId = principal?.context.workspaceContext?.workspace.id;
@@ -631,7 +644,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         if (!require('../apps/wm').validatePreviewGrant?.(token)) throw failure(401, 'preview_expired', 'Open a new preview from Website Manager.');
       }
       if (/^\/(?:__mock\/|v[12]\/__mock\/)/.test(url) && req.method !== "GET" && (principal?.claims.mode !== 'staff' || !principal?.context.staffAccess?.permissions.admin?.includes("settings:full"))) throw failure(403, "mock_control_forbidden", "Only an authorized mock administrator can do this.");
-      const request = { frame, key, req, principal, runtime: null, relatedRuntimes };
+      const request = { frame, key, req, principal, runtime: null, relatedRuntimes, suiteReadRuntimes };
       const result = await authority.runPrepared(frame, () => requests.run(request, async () => {
         let app = key === "sos" || key === "admin" ? accountRoutes(currentLegacyApp, frame) : currentLegacyApp;
         if (/^\/api\/suite(?:\/|$)/.test(url)) {
