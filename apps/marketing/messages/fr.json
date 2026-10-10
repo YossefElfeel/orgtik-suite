@@ -2176,6 +2176,17 @@
     "pendingCommandsBody": "Une réponse a été perdue. Vérifiez la modification initiale avant d’en commencer une autre. La récupération utilise la même requête enregistrée et vos droits actuels.",
     "recoverCommand": "Vérifier la modification initiale",
     "recoveryDenied": "La modification initiale n’a pas pu être confirmée. Vérifiez vos droits actuels et l’enregistrement source, puis réessayez. La requête enregistrée est conservée.",
-    "recoverFirst": "Vérifiez la modification initiale non confirmée avant d’envoyer des détails différents."
+    "recoverFirst": "Vérifiez la modification initiale non confirmée avant d’envoyer des détails différents.",
+    "utmSettings": "Paramètres UTM",
+    "marketingConfiguration": "Configuration marketing",
+    "utmHint": "Enregistrez les libellés par défaut de ce projet pour les liens partagés. Ces paramètres ne comptabilisent aucune visite et n’envoient aucun événement de suivi.",
+    "utmSource": "Source UTM",
+    "utmMedium": "Support UTM",
+    "utmCampaign": "Campagne UTM",
+    "utmLinkBuilder": "Créer un lien balisé",
+    "utmPageAddress": "Adresse de la page",
+    "utmTaggedAddress": "Adresse balisée",
+    "utmInvalidAddress": "Saisissez une adresse HTTP ou HTTPS publique sans identifiants.",
+    "utmSavedDefaults": "L’adresse générée utilise les derniers paramètres enregistrés et conserve les autres valeurs de requête ainsi que le fragment de page."
   }
 }

@@ -222,8 +222,14 @@ export async function marketingSuiteCommand<T>(
   run: (body: Body) => Promise<T>,
 ) {
   const command = prepareMarketingCommand("suite", projectId, path, body);
+  const requestScope = marketingRequestScope();
   try {
     const result = await run(command?.body || body);
+    if (
+      requestScope !== marketingRequestScope() ||
+      (command && command.scope !== currentScope())
+    )
+      throw new MarketingRecoveryRequired("command_scope_changed");
     settleMarketingCommand(command, 200);
     return result;
   } catch (error) {
