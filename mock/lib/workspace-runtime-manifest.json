@@ -170,6 +170,7 @@
       "apps/sales/seed-deals.js",
       "apps/sales/seed.js",
       "apps/sales/service-catalog.js",
+      "apps/sales/v3.js",
       "lib/accounts.js",
       "lib/auth-store.js",
       "lib/business-calendar.js",
