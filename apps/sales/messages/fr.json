@@ -1198,7 +1198,8 @@
     "handoffBody": "Les liens du lanceur ne fonctionnent qu’une fois et pendant une minute. Rouvrez CRM depuis vos applications.",
     "appNoAccessBody": "Votre compte n’est pas configuré pour cette application. Ouvrez vos applications depuis la suite, ou demandez à l’administrateur de l’espace de travail de vous donner accès à CRM.",
     "noAccessBody": "Votre rôle dans CRM ne l’inclut pas. Demandez à un responsable commercial ou à l’administrateur de l’espace de travail si vous en avez besoin.",
-    "handoffUnavailable": "Impossible d’ouvrir la destination. Réessayez le lien."
+    "handoffUnavailable": "Impossible d’ouvrir la destination. Réessayez le lien.",
+    "logoutUnavailable": "La déconnexion n’a pas pu être effectuée. Réessayez."
   },
   "Feedback": {
     "saved": "Modifications enregistrées",

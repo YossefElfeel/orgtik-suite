@@ -1198,7 +1198,8 @@
     "handoffBody": "I link del launcher funzionano una sola volta e per un minuto. Riapri CRM dalle tue app.",
     "appNoAccessBody": "Il tuo account non è configurato per questa app. Apri le app che puoi usare dalla suite o chiedi all’amministratore dello spazio di lavoro di darti accesso a CRM.",
     "noAccessBody": "Il tuo ruolo in CRM non la include. Chiedi a un responsabile vendite o all’amministratore dello spazio di lavoro se ti serve.",
-    "handoffUnavailable": "Impossibile aprire la destinazione. Riprova il collegamento."
+    "handoffUnavailable": "Impossibile aprire la destinazione. Riprova il collegamento.",
+    "logoutUnavailable": "Impossibile completare la disconnessione. Riprova."
   },
   "Feedback": {
     "saved": "Modifiche salvate",

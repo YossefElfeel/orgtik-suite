@@ -45,7 +45,6 @@ export default function CrmWorkbench({ board = false }: { board?: boolean }) {
     pathname = usePathname(),
     [densityOverride, setDensity] = useState<"comfortable" | "compact">(),
     [selected, setSelected] = useState<RowSelectionState>({}),
-    [creating, setCreating] = useState(false),
     [importing, setImporting] = useState(false),
     [owner, setOwner] = useState<string>(),
     [notice, setNotice] = useState<string>(),
@@ -60,6 +59,7 @@ export default function CrmWorkbench({ board = false }: { board?: boolean }) {
     [update] = useCrmUpdateMutation();
   const density = densityOverride || suite.snapshot?.preferences?.density || "comfortable";
   const data = query.data,
+    creating = params.get("new") === "1",
     search = params.get("q") || "",
     pipelineId = params.get("pipeline") || data?.pipelines[0]?.id || "",
     source = params.get("source") || "all",
@@ -146,7 +146,7 @@ export default function CrmWorkbench({ board = false }: { board?: boolean }) {
         description={t("contactsHint")}
         actions={
           canEdit ? (
-            <Button onClick={() => setCreating(true)}>{t("newContact")}</Button>
+            <Button onClick={() => set("new", "1")}>{t("newContact")}</Button>
           ) : undefined
         }
       />
@@ -159,7 +159,7 @@ export default function CrmWorkbench({ board = false }: { board?: boolean }) {
                 id: "contact",
                 title: t("firstContact"),
                 complete: data.contacts.length > 0,
-                onSelect: () => setCreating(true),
+                onSelect: () => set("new", "1"),
               },
               {
                 id: "pipeline",
@@ -358,7 +358,7 @@ export default function CrmWorkbench({ board = false }: { board?: boolean }) {
           status={rows.length ? "ready" : "empty"}
           emptyAction={
             canEdit ? (
-              <Button onClick={() => setCreating(true)}>
+              <Button onClick={() => set("new", "1")}>
                 {t("newContact")}
               </Button>
             ) : undefined
@@ -455,7 +455,7 @@ export default function CrmWorkbench({ board = false }: { board?: boolean }) {
                 onClick={() => {
                   if (search || source !== "all" || tag !== "all")
                     router.replace(pathname);
-                  else setCreating(true);
+                  else set("new", "1");
                 }}
               >
                 {t(
@@ -468,10 +468,10 @@ export default function CrmWorkbench({ board = false }: { board?: boolean }) {
           }}
         />
       )}
-      {creating ? (
+      {creating && canEdit ? (
         <CrmContactSheet
-          onClose={() => setCreating(false)}
-          onSaved={(id) => set("contact", id)}
+          onClose={() => set("new", "")}
+          onSaved={(id) => { const next = new URLSearchParams(params.toString()); next.delete("new"); next.set("contact", id); router.replace(`${pathname}?${next}`, { scroll: false }); }}
         />
       ) : null}
       {importing ? <ImportDialog onClose={() => setImporting(false)} /> : null}

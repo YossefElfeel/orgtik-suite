@@ -1,5 +1,5 @@
 import { handoffCode, readClientSession } from "@orgtik/ui/auth";
-import { SOS_URL } from "@somion/sos-bar";
+import { SOS_URL } from "@/constants";
 import { AUTH_API_URL } from "@/constants";
 /** Establish the suite session before following a current tool or staff Console destination. */
 export async function openSuiteDestination(href: string) {

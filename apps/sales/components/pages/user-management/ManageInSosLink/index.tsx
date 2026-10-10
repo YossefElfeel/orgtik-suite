@@ -5,7 +5,7 @@
 import { useTranslations } from "next-intl";
 import { ArrowSquareOut } from "@phosphor-icons/react";
 import { buttonVariants } from "@orgtik/ui";
-import { SOS_URL } from "@somion/sos-bar";
+import { SOS_URL } from "@/constants";
 import { useRole } from "@/hooks/useRole";
 
 export const SOS_ACCESS_URL = `${SOS_URL}/go/global?redirect=${encodeURIComponent("/systems")}`;
