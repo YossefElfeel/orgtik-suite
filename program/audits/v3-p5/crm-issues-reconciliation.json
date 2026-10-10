@@ -1,0 +1,14 @@
+{
+  "originalFindings": 191,
+  "originalFieldsPreservedExceptStatus": true,
+  "specificNativeOrSupersededReviews": 65,
+  "counts": {
+    "implemented_local_bounded": 45,
+    "existing_auth_contract_rechecked": 12,
+    "historical_scope_boundary": 118,
+    "superseded_retired_ui_contract_frozen": 8,
+    "superseded_owner_or_policy": 4,
+    "superseded_retired_source": 4
+  },
+  "limitation": "Historical criteria remain visible. Scoped current evidence does not establish full production/security/legacy-policy acceptance."
+}
