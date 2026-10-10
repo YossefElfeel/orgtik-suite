@@ -6714,6 +6714,18 @@
     {
       "app": "shared",
       "method": "GET",
+      "path": "/api/auth/account/audit",
+      "source": "lib/workspace-boundary.js",
+      "authorization": {
+        "audience": "suite or identity route session",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
       "path": "/api/auth/account/sessions",
       "source": "lib/workspace-boundary.js",
       "authorization": {
@@ -6925,6 +6937,30 @@
         "workspaceBinding": "signed selected workspace",
         "permission": "current session or recipient",
         "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "POST",
+      "path": "/api/suite/crm/projects/:id/provision",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
+      "path": "/api/suite/crm/projects/:id/provisioning",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
       }
     },
     {
