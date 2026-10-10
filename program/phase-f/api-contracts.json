@@ -497,6 +497,30 @@
     },
     {
       "app": "admin",
+      "method": "POST",
+      "path": "/v1/admin/console/billing/invoices/:id/action",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik billing:full permission",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "GET",
+      "path": "/v1/admin/console/billing/invoices/:id/content",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik billing:full permission",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "admin",
       "method": "GET",
       "path": "/v1/admin/console/billing/invoices/:id/document",
       "source": "apps/admin/console-v3.js",
@@ -546,6 +570,30 @@
     {
       "app": "admin",
       "method": "POST",
+      "path": "/v1/admin/console/billing/pay-links",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik billing:full permission",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "POST",
+      "path": "/v1/admin/console/billing/pay-links/:id/revoke",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik billing:full permission",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "POST",
       "path": "/v1/admin/console/billing/series",
       "source": "apps/admin/console-v3.js",
       "authorization": {
@@ -559,6 +607,18 @@
       "app": "admin",
       "method": "GET",
       "path": "/v1/admin/console/ecosystem",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "GET",
+      "path": "/v1/admin/console/exports/:kind",
       "source": "apps/admin/console-v3.js",
       "authorization": {
         "audience": "staff:wm or staff:admin for this route",
@@ -714,6 +774,42 @@
     {
       "app": "admin",
       "method": "GET",
+      "path": "/v1/admin/console/staff/invitations",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "POST",
+      "path": "/v1/admin/console/staff/invitations",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "POST",
+      "path": "/v1/admin/console/staff/invitations/:id/cancel",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "GET",
       "path": "/v1/admin/console/staff/security",
       "source": "apps/admin/console-v3.js",
       "authorization": {
@@ -756,6 +852,102 @@
         "audience": "staff:wm or staff:admin for this route",
         "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
         "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "POST",
+      "path": "/v1/admin/console/tickets/:id/sla",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "GET",
+      "path": "/v1/admin/console/tickets/sla",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "GET",
+      "path": "/v1/admin/console/workspaces/:id/lines",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "POST",
+      "path": "/v1/admin/console/workspaces/:id/view-as",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "GET",
+      "path": "/v1/app/pay-links/:id",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:admin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "POST",
+      "path": "/v1/app/pay-links/:id",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:admin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "GET",
+      "path": "/v1/app/staff-invitations",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:admin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "admin",
+      "method": "POST",
+      "path": "/v1/app/staff-invitations/:id/accept",
+      "source": "apps/admin/console-v3.js",
+      "authorization": {
+        "audience": "staff:admin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
         "writes": "current write capability; billing and impersonation restrictions"
       }
     },

@@ -605,7 +605,7 @@
   "AccountV3": {
     "account": "الحساب",
     "accountIntro": "تفضيلاتك الشخصية وإدارة مساحة العمل.",
-    "loading": "جارٍ تحميل الحساب…",
+    "loading": "جاري تحميل البيانات الحالية",
     "forbidden": "هذه المنطقة تحتاج صلاحية.",
     "askOwner": "اطلب الصلاحية من مالك مساحة العمل.",
     "loadFailed": "تعذر تحميل هذه المنطقة",
@@ -924,6 +924,23 @@
       "workspace_read_only": "المساحة للقراءة فقط. راجع الفوترة أو تواصل مع مالكها.",
       "view_as_read_only": "جلسات المعاينة لا تعدل الحساب.",
       "account_action_unavailable": "الإجراء غير متاح مؤقتًا. حاول مرة أخرى."
-    }
+    },
+    "paymentLink": "رابط دفع الفاتورة",
+    "paymentLinkUnavailable": "رابط الدفع ده مش متاح",
+    "paymentLinkOwner": "افتح الرابط الحالي بحساب مالك مساحة العمل.",
+    "savedPaymentMethod": "طريقة دفع محفوظة",
+    "choosePaymentMethod": "اختار طريقة محفوظة",
+    "paymentLinkMock": "المحاكاة المحلية بتسجّل الدفع من غير خصم خارجي.",
+    "payCurrentInvoice": "ادفع الفاتورة الحالية",
+    "paymentLinkViewOnly": "تقدر تعرض الفاتورة. الدفع متاح للفاتورة غير المدفوعة وجلسة مالك مسموح لها بالدفع.",
+    "paymentRecorded": "دفع المحاكاة اتسجّل",
+    "paymentFailed": "الدفع ما اكتملش. راجع طريقة الدفع الحالية وجرّب تاني.",
+    "staffInvitations": "دعوات فريق OrgTik",
+    "staffInvitationBody": "اقبل دعوتك المسجلة، وبعدها سجّل دخول تاني لاستخدام صلاحيات Console الجديدة.",
+    "noStaffInvitations": "مفيش دعوات فريق للحساب ده",
+    "acceptStaffInvitation": "اقبل وسجّل دخول تاني",
+    "staffInvitationFailed": "الدعوة الحالية ما اتقبلتش",
+    "paymentRecoveryBody": "في محاولة دفع أصلية مستنية الاسترجاع. احتفظ بالطريقة الأصلية واسترجع النتيجة المسجلة.",
+    "recoverOriginalPayment": "استرجع محاولة الدفع الأصلية"
   }
 }

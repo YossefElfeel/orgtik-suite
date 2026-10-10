@@ -605,7 +605,7 @@
   "AccountV3": {
     "account": "Konto",
     "accountIntro": "Persönliche Einstellungen und Arbeitsbereich.",
-    "loading": "Konto wird geladen…",
+    "loading": "Aktuelle Daten werden geladen",
     "forbidden": "Zugriff erforderlich.",
     "askOwner": "Bitten Sie den Eigentümer um Zugriff.",
     "loadFailed": "Kontobereich konnte nicht geladen werden",
@@ -924,6 +924,23 @@
       "workspace_read_only": "Arbeitsbereich schreibgeschützt. Abrechnung oder Eigentümer prüfen.",
       "view_as_read_only": "Ansichtssitzungen dürfen nichts ändern.",
       "account_action_unavailable": "Aktion vorübergehend nicht verfügbar."
-    }
+    },
+    "paymentLink": "Zahlungslink für Rechnung",
+    "paymentLinkUnavailable": "Dieser Zahlungslink ist nicht verfügbar",
+    "paymentLinkOwner": "Öffnen Sie diesen Link als Inhaber des Arbeitsbereichs.",
+    "savedPaymentMethod": "Gespeicherte Zahlungsmethode",
+    "choosePaymentMethod": "Gespeicherte Methode wählen",
+    "paymentLinkMock": "Diese lokale Simulation erfasst die Zahlung ohne externe Abbuchung.",
+    "payCurrentInvoice": "Aktuelle Rechnung bezahlen",
+    "paymentLinkViewOnly": "Zahlung ist nur für eine offene Rechnung in einer berechtigten Inhabersitzung möglich.",
+    "paymentRecorded": "Testzahlung erfasst",
+    "paymentFailed": "Zahlung nicht abgeschlossen. Prüfen Sie die Methode und versuchen Sie es erneut.",
+    "staffInvitations": "OrgTik-Mitarbeitereinladungen",
+    "staffInvitationBody": "Einladung annehmen und erneut anmelden, um den neuen Console-Zugang zu nutzen.",
+    "noStaffInvitations": "Keine Mitarbeitereinladungen für dieses Konto",
+    "acceptStaffInvitation": "Annehmen und erneut anmelden",
+    "staffInvitationFailed": "Diese Einladung konnte nicht angenommen werden",
+    "paymentRecoveryBody": "Ein ursprünglicher Zahlungsversuch wartet auf Wiederherstellung. Behalten Sie die Methode bei.",
+    "recoverOriginalPayment": "Ursprüngliche Zahlung wiederherstellen"
   }
 }

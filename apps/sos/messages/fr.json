@@ -605,7 +605,7 @@
   "AccountV3": {
     "account": "Compte",
     "accountIntro": "Préférences personnelles et espace de travail.",
-    "loading": "Chargement du compte…",
+    "loading": "Chargement des données",
     "forbidden": "Accès requis.",
     "askOwner": "Demandez l’accès au propriétaire.",
     "loadFailed": "Impossible de charger ce compte",
@@ -924,6 +924,23 @@
       "workspace_read_only": "Espace en lecture seule. Vérifiez la facturation.",
       "view_as_read_only": "Les aperçus ne modifient pas le compte.",
       "account_action_unavailable": "Action temporairement indisponible."
-    }
+    },
+    "paymentLink": "Lien de paiement de facture",
+    "paymentLinkUnavailable": "Ce lien est indisponible",
+    "paymentLinkOwner": "Ouvrez ce lien avec le compte propriétaire.",
+    "savedPaymentMethod": "Moyen de paiement enregistré",
+    "choosePaymentMethod": "Choisissez un moyen enregistré",
+    "paymentLinkMock": "Cette simulation locale enregistre le paiement sans débit externe.",
+    "payCurrentInvoice": "Payer la facture",
+    "paymentLinkViewOnly": "Le paiement nécessite une facture impayée et une session propriétaire autorisée.",
+    "paymentRecorded": "Paiement simulé enregistré",
+    "paymentFailed": "Paiement non effectué. Vérifiez le moyen et réessayez.",
+    "staffInvitations": "Invitations du personnel OrgTik",
+    "staffInvitationBody": "Acceptez l’invitation puis reconnectez-vous pour utiliser le nouvel accès Console.",
+    "noStaffInvitations": "Aucune invitation pour ce compte",
+    "acceptStaffInvitation": "Accepter et se reconnecter",
+    "staffInvitationFailed": "Cette invitation n’a pas pu être acceptée",
+    "paymentRecoveryBody": "Une tentative initiale attend sa récupération. Conservez le moyen initial.",
+    "recoverOriginalPayment": "Récupérer le paiement initial"
   }
 }

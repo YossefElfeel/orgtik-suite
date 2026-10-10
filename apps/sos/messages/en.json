@@ -605,7 +605,7 @@
   "AccountV3": {
     "account": "Account",
     "accountIntro": "Your personal preferences and workspace controls.",
-    "loading": "Loading account…",
+    "loading": "Loading current data",
     "forbidden": "This area requires access.",
     "askOwner": "Ask the workspace owner for the required access.",
     "loadFailed": "Could not load this account area",
@@ -924,6 +924,23 @@
       "workspace_read_only": "This workspace is read-only. Review billing or contact its owner.",
       "view_as_read_only": "View-as sessions cannot change this account.",
       "account_action_unavailable": "This action is temporarily unavailable. Try again."
-    }
+    },
+    "paymentLink": "Invoice payment link",
+    "paymentLinkUnavailable": "This payment link is unavailable",
+    "paymentLinkOwner": "Open this current link as the workspace owner.",
+    "savedPaymentMethod": "Saved payment method",
+    "choosePaymentMethod": "Choose a saved method",
+    "paymentLinkMock": "This local mock records the payment without an external charge.",
+    "payCurrentInvoice": "Pay current invoice",
+    "paymentLinkViewOnly": "This invoice can be viewed. Payment is available only for an unpaid invoice and a writable owner session.",
+    "paymentRecorded": "Mock payment recorded",
+    "paymentFailed": "The payment could not be completed. Review the current method and try again.",
+    "staffInvitations": "OrgTik staff invitations",
+    "staffInvitationBody": "Accept your recorded staff invitation, then sign in again to use the new Console access.",
+    "noStaffInvitations": "No staff invitations for this account",
+    "acceptStaffInvitation": "Accept and sign in again",
+    "staffInvitationFailed": "This current invitation could not be accepted",
+    "paymentRecoveryBody": "An original payment attempt is awaiting recovery. Keep its original method and recover the recorded result.",
+    "recoverOriginalPayment": "Recover original payment"
   }
 }

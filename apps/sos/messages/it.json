@@ -605,7 +605,7 @@
   "AccountV3": {
     "account": "Account",
     "accountIntro": "Preferenze personali e spazio di lavoro.",
-    "loading": "Caricamento account…",
+    "loading": "Caricamento dati",
     "forbidden": "Accesso richiesto.",
     "askOwner": "Chiedi accesso al proprietario.",
     "loadFailed": "Impossibile caricare questa area",
@@ -924,6 +924,23 @@
       "workspace_read_only": "Spazio in sola lettura. Verifica fatturazione.",
       "view_as_read_only": "Le anteprime non modificano account.",
       "account_action_unavailable": "Azione temporaneamente non disponibile."
-    }
+    },
+    "paymentLink": "Link pagamento fattura",
+    "paymentLinkUnavailable": "Questo link non è disponibile",
+    "paymentLinkOwner": "Apri il link come proprietario dello spazio.",
+    "savedPaymentMethod": "Metodo di pagamento salvato",
+    "choosePaymentMethod": "Scegli un metodo salvato",
+    "paymentLinkMock": "Questa simulazione registra il pagamento senza addebito esterno.",
+    "payCurrentInvoice": "Paga fattura attuale",
+    "paymentLinkViewOnly": "Il pagamento richiede una fattura non pagata e una sessione proprietario autorizzata.",
+    "paymentRecorded": "Pagamento simulato registrato",
+    "paymentFailed": "Pagamento non completato. Controlla il metodo e riprova.",
+    "staffInvitations": "Inviti personale OrgTik",
+    "staffInvitationBody": "Accetta l’invito e accedi di nuovo per usare il nuovo accesso Console.",
+    "noStaffInvitations": "Nessun invito per questo account",
+    "acceptStaffInvitation": "Accetta e accedi di nuovo",
+    "staffInvitationFailed": "Impossibile accettare questo invito",
+    "paymentRecoveryBody": "Un tentativo originale attende il recupero. Mantieni il metodo originale.",
+    "recoverOriginalPayment": "Recupera pagamento originale"
   }
 }

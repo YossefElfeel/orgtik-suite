@@ -1,5 +1,17 @@
 import type { SuitePreferences } from '@orgtik/ui';
+import type { Invoice } from '@/store/billing';
+import type { Line } from '@/store/customers';
 export type ConsoleFrame = { staff: { id: number; name: string }; preferences: SuitePreferences; now: string; scope: 'staff:admin' };
 export type ConsoleMetrics = { mrrUsd: number; activeWorkspaces: number; trials: number; activation: { activated: number; eligible: number }; cohorts: { month: string; workspaces: number; paying: number; mrrUsd: number }[]; movements: { id: string; at: string; workspaceId: string; kind: string; amountUsd: number }[]; definitions: { currency: string; conversion: string; mrr: string; cohorts: string } };
 export type ConsoleRelease = { id: string; tool: string; kind: 'release' | 'changelog' | 'announcement'; title: string; body: string; version: string; publishedAt: string; by: string; status: string };
 export type ConsoleConnector = { id: string; source: string; target: string; data: string[]; workspaces: { id: string; name: string; enabled: boolean }[] };
+export type ConsoleInvoice = Invoice & { manualRetryPaused: boolean };
+export type ConsoleBilling = { invoices: ConsoleInvoice[]; cardWarnings: { workspaceId: string; workspace: string; id: string; last4: string; expires: string; expired: boolean }[]; payLinks: ConsolePayLink[]; series: Record<string, { entity: string; prefix: string; nextNumber: number }>; documents: { invoiceId: string; documentNumber: string }[] };
+export type ConsolePayLink = { id: string; invoiceId: string; workspaceId: string; state: 'active' | 'revoked'; expiresAt: string; path: string };
+export type ConsoleLineOptions = { workspaceId: string; lines: Line[]; plans: { id: string; tool: string; name: Record<string, string>; perUser: boolean }[]; paymentMethods: { id: string; kind: string; last4?: string }[] };
+export type ConsoleLineQuote = { quoteId: string; currency: string; total: number; expiresAt: string; lines: { replaces: string; planId: string }[] };
+export type ConsoleSLA = { ticketId: string; number: string; subject: string; state: string; policy: { minutes: number } | null; dueAt: string | null; firstResponseAt: string | null; breached: boolean; path: string };
+export type ConsoleStaffInvitation = { id: string; name: string; email: string; roles: string[]; state: 'pending' | 'accepted' | 'cancelled'; expiresAt: string; path: string };
+export type ConsoleDownload = { filename?: string; name?: string; mimetype: string; content?: string; base64?: string };
+export type ConsoleTaxCheck = { id: string; workspaceId: string; taxId: string; state: 'accepted_mock' | 'rejected_mock'; at: string; submitted: false };
+export type ConsoleSoftwareOffer = { id: string; name: Record<string, string>; description: Record<string, string>; capabilities: Record<string, string[]>; toolStatus: string; publishedAt?: string };

@@ -38,6 +38,7 @@ import { statusOf, useMeQuery } from "@/store/api";
 import { CURRENT_SCOPE } from "@/components/suite/useSuiteApps";
 import { CenteredState } from "./CenteredState";
 import { consoleRequest } from "@/lib/console";
+import { PendingCommands } from '@/components/console/PendingCommands';
 
 type NavItem = { key: string; href: string; icon: ReactNode; permission: string; external?: boolean };
 type NavSection = { label?: string; items: NavItem[] };
@@ -52,6 +53,7 @@ export function useNav(): NavSection[] {
       label: t("sections.catalog"),
       items: [
         { key: t("tools"), href: "/tools", icon: <Toolbox />, permission: "tools:view" },
+        { key: v3("softwareCatalog"), href: "/catalog/software", icon: <Package />, permission: "tools:view" },
         { key: t("plans"), href: "/plans", icon: <Stack />, permission: "plans:view" },
         { key: t("waitlist"), href: "/waitlist", icon: <ListChecks />, permission: "waitlist:view" },
         { key: v3("releases"), href: "/releases", icon: <Article />, permission: "tools:view" },
@@ -72,6 +74,7 @@ export function useNav(): NavSection[] {
         { key: t("bundles"), href: "/bundles", icon: <Package />, permission: "bundles:view" },
         { key: t("coupons"), href: "/coupons", icon: <Percent />, permission: "bundles:view" },
         { key: t("tax"), href: "/tax", icon: <Bank />, permission: "tax:view" },
+        { key: v3("taxChecks"), href: "/tax/checks", icon: <Receipt />, permission: "tax:view" },
       ],
     },
     {
@@ -88,6 +91,7 @@ export function useNav(): NavSection[] {
       label: v3("support"),
       items: [
         { key: t("tickets"), href: "/tickets", icon: <Headset />, permission: "tickets:view" },
+        { key: v3("ticketTargets"), href: "/tickets/targets", icon: <ClockCounterClockwise />, permission: "tickets:view" },
       ],
     },
     {
@@ -101,6 +105,7 @@ export function useNav(): NavSection[] {
       items: [
         { key: t("reports"), href: "/reports", icon: <ChartBar />, permission: "reports:view" },
         { key: t("staff"), href: "/staff", icon: <UserList />, permission: "staff:view" },
+        { key: v3("invitations"), href: "/staff/invitations", icon: <EnvelopeSimple />, permission: "staff:view" },
         { key: v3("staffSecurity"), href: "/staff/security", icon: <GearSix />, permission: "overview:view" },
         { key: v3("setup"), href: "/setup", icon: <ListChecks />, permission: "overview:view" },
         { key: t("templates"), href: "/templates", icon: <EnvelopeSimple />, permission: "templates:view" },
@@ -217,6 +222,7 @@ export function AdmFrame({ children }: { children: ReactNode }) {
           />
       }
     >
+      <PendingCommands />
       {children}
       {signOutFailed && <ErrorState size="compact" title={ta("offlineTitle")} description={ta("offlineBody")} onRetry={() => { setSignOutFailed(false); void signOutStaff().then(() => window.location.assign(SOS_URL)).catch(() => setSignOutFailed(true)); }} />}
       <Toaster />

@@ -6,7 +6,7 @@ const fail = (status, code, message) => Object.assign(new Error(message), { stat
 const stable = value => Array.isArray(value) ? value.map(stable) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map(key => [key, stable(value[key])])) : value;
 const hash = value => crypto.createHash('sha256').update(JSON.stringify(stable(value))).digest('hex');
 
-function create({ getStore, identity, principal }) {
+function create({ getStore, identity, principal, applyDb, afterStaffAcceptance }) {
   const S = () => getStore();
   function authority(permission, write = false) {
     const p = principal(), rights = p?.context.staffAccess?.permissions.admin || [];
@@ -30,13 +30,15 @@ function create({ getStore, identity, principal }) {
       if (prior.fingerprint !== fingerprint) throw fail(409, 'operation_conflict', 'This reference belongs to a different action.');
       return clone(prior.result);
     }
-    const result = action(p, data);
-    data.operations[key] = { fingerprint, result: clone(result) };
+    const beforeMRR = metricValues().mrrUsd, result = action(p, data), delta = S().pricing.toDecimals(metricValues().mrrUsd - beforeMRR, 2);
+    if (delta) { const current = mutable(); current.movements ??= []; current.movements.push({ id: S().id('mrr'), at: at(), workspaceId: result.workspaceId || req.params.id, kind: delta > 0 ? 'expansion' : 'contraction', amountUsd: delta, operationId, by: p.actor.id }); }
+    mutable().operations[key] = { fingerprint, result: clone(result) };
     return result;
   }
   function actor() { return identity.findUser(principal()?.user.id); }
   const at = () => S().iso(S().now());
   const log = (p, action, target, details = {}) => S().log(p.actor.key, action, String(target), details);
+  const native = (selection, p, req, workspace, body = req.body) => require('./console-native-actions').invoke(S(), identity, selection, { method: 'POST', path: req.path, params: req.params, body, query: {}, get: name => req.get(name), p: { user: identity.findUser(p.user.id), key: p.actor.key, ws: workspace }, who: { user: identity.findUser(p.user.id), key: p.actor.key, permissions: p.context.staffAccess?.permissions.admin || [] } });
   function search(query) {
     const p = authority('overview:view'), rights = p.context.staffAccess.permissions.admin, rows = [];
     const push = (permission, type, values, label, path) => {
@@ -58,8 +60,7 @@ function create({ getStore, identity, principal }) {
     const prefs = preferences(actor()).notificationPreferences || {};
     return prefs.inApp === false ? [] : rows.filter(row => !row.category || prefs[row.category] !== false).map(row => ({ ...row, read: marks.includes(row.id) })).sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 100);
   }
-  function metrics() {
-    authority('reports:view');
+  function metricValues() {
     const current = S(), workspaces = current.db.workspaces.filter(row => !['deleted', 'cancelled'].includes(row.state)), paying = line => ['active', 'cancelling', 'past_due', 'read_only'].includes(line.state);
     const mrr = workspace => workspace.lines.filter(line => paying(line) && current.db.plans.some(plan => plan.id === line.planId && plan.tool)).reduce((sum, line) => sum + current.pricing.monthlyAmount(line) / current.usdRate(line.snapshot.currency || workspace.currency), 0);
     const cohorts = new Map();
@@ -69,8 +70,21 @@ function create({ getStore, identity, principal }) {
     }
     return { mrrUsd: workspaces.reduce((sum, workspace) => sum + mrr(workspace), 0), activeWorkspaces: workspaces.length, trials: workspaces.reduce((sum, workspace) => sum + workspace.lines.filter(line => line.state === 'trialing').length, 0), activation: { activated: workspaces.filter(workspace => workspace.lines.some(line => line.tool !== 'general' && ['active', 'trialing', 'free'].includes(line.state))).length, eligible: workspaces.length }, cohorts: [...cohorts.values()].sort((a, b) => a.month.localeCompare(b.month)), movements: clone(state().movements || []), definitions: { currency: 'USD', conversion: 'current platform reporting rate', mrr: 'Current recurring tool lines; services excluded. Website term lines use the native monthlyAmount function.', cohorts: 'Workspace creation month and current paying state; no invented historic retention periods.' } };
   }
+  function metrics() { authority('reports:view'); return metricValues(); }
+  function recoverInvoice(req, p, invoice, paymentMethodId) {
+    const workspace = S().workspace(invoice.workspaceId), method = workspace?.paymentMethods.find(row => row.id === paymentMethodId && !row.expired);
+    if (!method) throw fail(422, 'payment_method_required', 'Choose a current saved payment method.');
+    const cycle = Object.values(S().db.billingLifecycle?.cycles || {}).find(row => row.invoiceId === invoice.id && row.workspaceId === workspace.id);
+    if (cycle) {
+      if (typeof applyDb !== 'function') throw fail(503, 'billing_adapter_unavailable', 'The canonical billing adapter is unavailable.');
+      const value = require('../../lib/workspace-billing-lifecycle').executeBillingCommand({ db: S().db, command: { kind: 'billing.recover', workspaceId: workspace.id, lineId: cycle.lineId, paymentMethodId, operationId: req.get('idempotency-key') || req.body.operationId, at: at() }, authority: { kind: 'user', workspaceId: workspace.id, userId: p.user.id, canManageBilling: true, readOnly: p.readOnly } });
+      applyDb(value.db); return value.result;
+    }
+    const result = native('POST /v1/admin/invoices/:id/:action(void|mark-paid|refund|retry|issue)', p, { path: req.path, params: { id: invoice.id, action: 'retry' }, get: name => req.get(name) }, workspace, { simulate: method.last4 === '0002' ? 'fail' : 'success' });
+    return { workspaceId: workspace.id, invoiceId: result.id, paymentStatus: result.state === 'paid' ? 'succeeded' : 'failed', state: result.state };
+  }
   function routes(app, prefix = '/v1/admin/console') {
-    const read = fn => (req, res, next) => { try { res.set('Cache-Control', 'private, no-store').json({ data: fn(req), meta: {} }); } catch (error) { next(error); } };
+    const read = fn => (req, res, next) => { try { Promise.resolve(fn(req)).then(data => res.set('Cache-Control', 'private, no-store').json({ data, meta: {} }), next); } catch (error) { next(error); } };
     app.get(prefix + '/frame', read(() => {
       const p = authority('overview:view');
       return { staff: { id: p.user.id, name: identity.fullName(p.user) }, preferences: preferences(actor()), now: at(), scope: 'staff:admin' };
@@ -85,6 +99,115 @@ function create({ getStore, identity, principal }) {
       return notifications();
     }));
     app.get(prefix + '/metrics', read(metrics));
+    app.get(prefix + '/exports/:kind', read(req => {
+      const choices = { invoices: 'billing:view', accounting: 'billing:view', workspaces: 'workspaces:view', audit: 'settings:view', cohorts: 'reports:view' }, permission = choices[req.params.kind];
+      if (!permission) throw fail(404, 'export_not_found', 'Choose a supported export.');
+      authority(permission);
+      let rows;
+      if (req.params.kind === 'invoices') rows = S().db.invoices.map(row => ({ id: row.id, number: row.number, workspaceId: row.workspaceId, state: row.state, currency: row.currency, subtotal: row.subtotal, tax: row.tax, total: row.total, refunded: row.refunded, issuedAt: row.issuedAt }));
+      else if (req.params.kind === 'accounting') rows = S().db.invoices.flatMap(invoice => [...invoice.payments.map(row => ({ invoice: invoice.number, workspaceId: invoice.workspaceId, kind: 'payment', id: row.id, currency: invoice.currency, amount: row.amount, state: row.status, at: row.at })), ...invoice.creditNotes.map(row => ({ invoice: invoice.number, workspaceId: invoice.workspaceId, kind: 'credit_note', id: row.id, currency: invoice.currency, amount: row.amount, state: invoice.state, at: row.at }))]);
+      else if (req.params.kind === 'workspaces') rows = S().db.workspaces.filter(row => row.state !== 'deleted').map(row => ({ id: row.id, name: row.name, state: row.state, country: row.country, currency: row.currency, createdAt: row.createdAt }));
+      else if (req.params.kind === 'audit') rows = S().db.audit.map(row => ({ at: row.at, by: row.by, action: row.action, target: row.target, details: JSON.stringify(row.details || {}) }));
+      else rows = metrics().cohorts;
+      const columns = Object.keys(rows[0] || { id: '' }), cell = value => { const text = String(value ?? ''); return `"${(/^[=+@-]/.test(text) ? "'" + text : text).replaceAll('"', '""')}"`; };
+      return { filename: `OrgTik-${req.params.kind}-${at().slice(0, 10)}.csv`, mimetype: 'text/csv;charset=utf-8', content: '\uFEFF' + [columns.map(cell).join(','), ...rows.map(row => columns.map(column => cell(row[column])).join(','))].join('\r\n'), rows: rows.length };
+    }));
+    app.get(prefix + '/workspaces/:id/lines', read(req => {
+      authority('billing:view'); const workspace = S().workspace(req.params.id);
+      if (!workspace || workspace.state === 'deleted') throw fail(404, 'workspace_not_found', 'Choose a current workspace.');
+      return { workspaceId: workspace.id, lines: clone(workspace.lines), plans: S().db.plans.filter(plan => plan.tool && plan.status === 'active' && (plan.visibility !== 'private' || plan.allowedWorkspaceIds?.includes(workspace.id))).map(plan => ({ id: plan.id, tool: plan.tool, name: plan.name, perUser: plan.perUser })), paymentMethods: clone(workspace.paymentMethods.filter(method => !method.expired)) };
+    }));
+    app.post(prefix + '/workspaces/:id/view-as', read(req => recorded(req, 'workspaces:edit', p => {
+      const workspace = S().workspace(req.params.id), owner = workspace?.members.find(member => member.role === 'owner' && member.status === 'active'), person = owner && identity.users.find(user => user.key === owner.userKey || user.email === owner.email);
+      if (!workspace || workspace.state === 'deleted' || !person || !person.isActive || typeof req.body.reason !== 'string' || !req.body.reason.trim() || req.body.reason.length > 1000) throw fail(422, 'view_as_owner_required', 'Choose a current workspace owner and enter the audit reason.');
+      log(p, 'view_as_requested', workspace.id, { reason: req.body.reason, ownerUserId: person.id }); return { workspaceId: workspace.id, ownerUserId: person.id, as: person.email, readOnly: true };
+    })));
+    for (const action of ['preview', 'confirm', 'downgrade']) app.post(prefix + '/workspaces/:id/lines/:lineId/' + action, read(req => {
+      authority('billing:edit', true); const workspace = S().workspace(req.params.id), line = workspace?.lines.find(row => row.id === req.params.lineId), body = req.body;
+      if (!workspace || !line || !S().db.plans.some(plan => plan.id === body.planId && plan.tool === line.tool) || !['monthly', 'yearly'].includes(body.cycle) || !Number.isSafeInteger(body.seats) || body.seats < 1 || typeof body.reason !== 'string' || !body.reason.trim()) throw fail(422, 'invalid_line_selection', 'Choose an actual line, its tool plan, cycle, whole capacity and audit reason.');
+      if (workspace.state === 'suspended' || workspace.state === 'deleted' || line.custodyReadOnly) throw fail(423, 'workspace_read_only', 'Review this workspace before changing its subscription.');
+      if (Object.keys(body).some(key => !['planId', 'cycle', 'seats', 'reason', 'quoteId', 'paymentMethodId'].includes(key)) || action === 'confirm' && !body.quoteId) throw fail(422, 'quote_required', 'Confirm the original server quote without client prices.');
+      return recorded(req, 'billing:edit', p => {
+        if (action === 'downgrade') {
+          if (body.cycle !== line.cycle || body.seats !== line.snapshot.quantity) throw fail(422, 'downgrade_selection_required', 'Schedule a lower plan with the current cycle and capacity.');
+          const result = native('POST /v1/app/subscriptions/:id/:action(cancel|resume|downgrade|cancel-downgrade|retry)', p, { path: req.path, params: { id: line.id, action: 'downgrade' }, get: name => req.get(name) }, workspace, { planId: body.planId });
+          log(p, 'console_line_downgrade', workspace.id, { lineId: line.id, reason: body.reason }); return result;
+        }
+        const items = [{ planId: body.planId, cycle: body.cycle, seats: body.seats }], input = { items, intent: 'switch', ...(action === 'confirm' ? { quoteId: body.quoteId, paymentMethodId: body.paymentMethodId } : {}) };
+        if (action === 'confirm') { const held = S().db.checkoutQuotes?.find(row => row.id === body.quoteId); if (!held || held.workspaceId !== workspace.id || held.snapshot.lines.length !== 1 || held.snapshot.lines[0].replaces !== line.id) throw fail(409, 'line_quote_changed', 'Review the original quote for this exact subscription line.'); }
+        const result = native(`POST /v1/app/checkout/${action}`, p, req, workspace, input); log(p, `console_line_${action}`, workspace.id, { lineId: line.id, reason: body.reason }); return result;
+      });
+    }));
+    app.post(prefix + '/billing/invoices/:id/action', read(req => {
+      authority('billing:edit', true); const invoice = S().db.invoices.find(row => row.id === req.params.id), action = req.body.action;
+      if (!invoice || !['retry', 'mark-paid', 'refund', 'void', 'issue'].includes(action)) throw fail(422, 'invalid_invoice_action', 'Choose a current invoice action.');
+      if (action === 'retry' && state().manualRetryPauses[invoice.id]) throw fail(409, 'manual_retry_paused', 'Resume staff retry attempts before trying this invoice.');
+      if (['mark-paid', 'void'].includes(action) && Object.values(S().db.billingLifecycle?.cycles || {}).some(row => row.invoiceId === invoice.id)) throw fail(409, 'canonical_recovery_required', 'Use a saved payment method to recover this canonical subscription invoice.');
+      return recorded(req, 'billing:edit', p => { if (action === 'retry') return recoverInvoice(req, p, invoice, req.body.paymentMethodId); const params = { id: invoice.id, action }, body = { ...req.body }; delete body.action; return native('POST /v1/admin/invoices/:id/:action(void|mark-paid|refund|retry|issue)', p, { ...req, path: req.path, params, get: name => req.get(name) }, S().workspace(invoice.workspaceId), body); });
+    }));
+    app.post(prefix + '/billing/pay-links', read(req => recorded(req, 'billing:edit', (p, data) => {
+      const invoice = S().db.invoices.find(row => row.id === req.body.invoiceId && ['open', 'past_due'].includes(row.state)), workspace = invoice && S().workspace(invoice.workspaceId);
+      if (!invoice || !workspace) throw fail(422, 'unpaid_invoice_required', 'Choose an actual unpaid invoice.');
+      const row = { id: S().id('paylink'), invoiceId: invoice.id, workspaceId: workspace.id, createdAt: at(), expiresAt: S().iso(S().now() + 7 * 86400000), state: 'active', by: p.actor.id };
+      row.path = `/billing/pay/${encodeURIComponent(row.id)}`; data.payLinks.push(row); log(p, 'pay_link_created', invoice.id, { linkId: row.id }); return clone(row);
+    })));
+    app.post(prefix + '/billing/pay-links/:id/revoke', read(req => recorded(req, 'billing:edit', (p, data) => {
+      const row = data.payLinks.find(link => link.id === req.params.id); if (!row) throw fail(404, 'pay_link_not_found', 'This pay link was not found.'); row.state = 'revoked'; log(p, 'pay_link_revoked', row.invoiceId); return clone(row);
+    })));
+    function ownerPayLink(req, write = false) {
+      const p = principal(), context = p?.context.workspaceContext, link = state().payLinks.find(row => row.id === req.params.id), invoice = link && S().db.invoices.find(row => row.id === link.invoiceId);
+      if (!context || context.member.role !== 'owner' || !link || !invoice || context.workspace.id !== link.workspaceId) throw fail(404, 'pay_link_not_found', 'Open this link as the current workspace owner.');
+      if (write && (p.readOnly || S().workspace(link.workspaceId).state === 'suspended')) throw fail(423, 'workspace_read_only', 'Review this workspace before payment.');
+      if (link.state !== 'active' || Date.parse(link.expiresAt) <= S().now()) throw fail(410, 'pay_link_expired', 'Ask for a new current payment link.');
+      return { p, link, invoice };
+    }
+    app.get('/v1/app/pay-links/:id', read(req => {
+      const { p, link, invoice } = ownerPayLink(req); return { ...clone(link), canPay: !p.readOnly && S().workspace(link.workspaceId).state !== 'suspended' && ['open', 'past_due'].includes(invoice.state), invoice: { id: invoice.id, number: invoice.number, state: invoice.state, total: invoice.total, currency: invoice.currency }, paymentMethods: S().workspace(link.workspaceId).paymentMethods.filter(row => !row.expired).map(row => ({ id: row.id, kind: row.kind, last4: row.last4 })) };
+    }));
+    app.post('/v1/app/pay-links/:id', read(req => {
+      const { p, link, invoice } = ownerPayLink(req, true), operationId = req.get('idempotency-key') || req.body.operationId;
+      if (!/^[\w.:-]{1,200}$/.test(operationId || '') || Object.keys(req.body || {}).some(key => !['paymentMethodId', 'operationId'].includes(key))) throw fail(422, 'payment_selection_required', 'Use the original payment reference and a saved method.');
+      const key = `${p.user.id}:pay-link:${operationId}`, data = mutable(), fingerprint = hash({ path: req.path, body: req.body }); data.operations ??= {}; const prior = data.operations[key];
+      if (prior) { if (prior.fingerprint !== fingerprint) throw fail(409, 'operation_conflict', 'Retry the original payment unchanged.'); return clone(prior.result); }
+      if (!['open', 'past_due'].includes(invoice.state)) throw fail(409, 'invoice_settled', 'This invoice is already settled.');
+      const result = recoverInvoice(req, p, invoice, req.body.paymentMethodId); mutable().operations[key] = { fingerprint, result: clone(result) }; log(p, 'pay_link_attempt', invoice.id, { linkId: link.id, paymentStatus: result.paymentStatus }); return result;
+    }));
+    app.get(prefix + '/staff/invitations', read(() => { authority('staff:view'); return clone(state().invitations); }));
+    app.post(prefix + '/staff/invitations', read(req => recorded(req, 'staff:full', (p, data) => {
+      const recipient = identity.users.find(row => row.email.toLowerCase() === String(req.body.email || '').trim().toLowerCase()), roles = req.body.roles, allowed = require('./permissions').ROLE_KEYS;
+      if (!recipient || recipient.userType === 'customer' || !Array.isArray(roles) || !roles.length || roles.some(role => !allowed.includes(role))) throw fail(422, 'staff_recipient_required', 'Choose a registered OrgTik staff person and supported roles.');
+      const prior = data.invitations.find(row => row.userId === recipient.id && row.state === 'pending'); if (prior) throw fail(409, 'invitation_pending', 'Review the existing invitation first.');
+      const row = { id: S().id('staffinvite'), userId: recipient.id, email: recipient.email, name: identity.fullName(recipient), roles: [...new Set(roles)], state: 'pending', createdAt: at(), expiresAt: S().iso(S().now() + 7 * 86400000), invitedBy: p.user.id, path: '/staff-invitations' };
+      data.invitations.push(row); S().db.mailbox.push({ id: S().id('mail'), kind: 'staff_invitation', to: recipient.email, at: at(), invitationId: row.id, delivery: 'mock' }); log(p, 'staff_invited', recipient.id, { invitationId: row.id }); return clone(row);
+    })));
+    app.post(prefix + '/staff/invitations/:id/cancel', read(req => recorded(req, 'staff:full', (p, data) => {
+      const row = data.invitations.find(item => item.id === req.params.id); if (!row || row.state !== 'pending') throw fail(409, 'invitation_not_pending', 'Choose a pending invitation.'); row.state = 'cancelled'; log(p, 'staff_invitation_cancelled', row.userId); return clone(row);
+    })));
+    app.get('/v1/app/staff-invitations', read(() => {
+      const p = principal(); if (!p) throw fail(401, 'session_required', 'Sign in again.'); return clone(state().invitations.filter(row => row.userId === p.user.id));
+    }));
+    app.post('/v1/app/staff-invitations/:id/accept', read(async req => {
+      const p = principal(), row = state().invitations.find(item => item.id === req.params.id && item.userId === p?.user.id), person = p && identity.findUser(p.user.id), inviter = row && identity.findUser(row.invitedBy);
+      if (!row || !person || person.userType === 'customer' || !inviter || !require('./permissions').permissionsFor(S().db.staffRoles[inviter.key] || []).includes('staff:full')) throw fail(404, 'staff_invitation_not_found', 'This current invitation is unavailable.');
+      if (p.readOnly) throw fail(423, 'view_as_read_only', 'View-as cannot accept invitations.');
+      if (row.state === 'accepted') return clone(row);
+      if (row.state !== 'pending' || Date.parse(row.expiresAt) <= S().now()) throw fail(410, 'staff_invitation_expired', 'Ask for a current invitation.');
+      if (typeof afterStaffAcceptance !== 'function') throw fail(503, 'staff_acceptance_unavailable', 'The current session must finish before new staff access can be used.');
+      const current = mutable().invitations.find(item => item.id === row.id); S().db.staffRoles[person.key] = [...new Set([...(S().db.staffRoles[person.key] || []), ...row.roles])]; Object.assign(current, { state: 'accepted', acceptedAt: at() }); log(p, 'staff_invitation_accepted', person.id, { invitationId: row.id });
+      return { ...clone(current), ...await afterStaffAcceptance(req) };
+    }));
+    app.get(prefix + '/tickets/sla', read(() => {
+      authority('tickets:view'); return S().db.tickets.map(ticket => {
+        const policy = state().ticketSLAs[ticket.id], first = ticket.messages.filter(message => message.by === 'staff' && !message.internal).sort((a, b) => a.at.localeCompare(b.at))[0];
+        const dueAt = policy ? S().iso(Date.parse(ticket.createdAt) + policy.minutes * 60000) : null;
+        return { ticketId: ticket.id, number: ticket.number, subject: ticket.subject, state: ticket.state, policy: policy || null, dueAt, firstResponseAt: first?.at || null, breached: Boolean(dueAt && (first ? Date.parse(first.at) : S().now()) > Date.parse(dueAt)), path: `/tickets/${encodeURIComponent(ticket.id)}` };
+      });
+    }));
+    app.post(prefix + '/tickets/:id/sla', read(req => recorded(req, 'tickets:edit', (p, data) => {
+      const ticket = S().db.tickets.find(row => row.id === req.params.id), minutes = req.body.minutes;
+      if (!ticket || !Number.isSafeInteger(minutes) || minutes < 1 || minutes > 43200) throw fail(422, 'invalid_sla', 'Use an actual ticket and response time from one minute to thirty days.');
+      data.ticketSLAs[ticket.id] = { minutes, by: p.actor.id, at: at() }; log(p, 'ticket_sla_configured', ticket.id, { minutes }); return clone(data.ticketSLAs[ticket.id]);
+    })));
     app.get(prefix + '/software-catalog', read(() => {
       authority('tools:view');
       return { managedIn: 'console', offers: S().db.websiteOffers.filter(row => row.kind === 'software').map(row => ({ ...clone(row), toolStatus: row.tool ? S().db.tools.find(tool => tool.key === row.tool)?.status : S().db.services.find(service => service.id === row.serviceId)?.status })), bundles: clone(S().db.websiteOfferBundles.filter(row => row.kind === 'software')) };
@@ -160,8 +283,14 @@ function create({ getStore, identity, principal }) {
       const entity = workspace.billing?.country || workspace.country, series = data.series[entity], documentNumber = series ? `${series.prefix}-${String(series.nextNumber++).padStart(6, '0')}` : invoice.number;
       if (Object.values(data.documents).some(row => row.documentNumber === documentNumber)) throw fail(409, 'document_number_used', 'Choose an unused document series.');
       const row = { invoiceId: invoice.id, documentNumber, number: invoice.number, entity, invoice: clone(invoice), workspace: workspace.name, billing: clone(workspace.billing), issuedAt: at(), prototype: true, regulatorySubmission: 'not_submitted' };
+      const money = amount => `${S().pricing.toDecimals(amount || 0, S().db.currencies[invoice.currency]?.decimals ?? 2).toFixed(S().db.currencies[invoice.currency]?.decimals ?? 2)} ${invoice.currency}`;
+      const content = require('../sales/lib').makePdf(documentNumber, [`Original invoice: ${invoice.number}`, `Workspace: ${workspace.name}`, `Billing: ${workspace.billing.legalName || workspace.name}`, `Issued: ${invoice.issuedAt || row.issuedAt}`, '---', ...invoice.lines.map(line => ({ text: line.label || line.name?.en || line.planId || line.lineId || 'Invoice line', right: money(line.amount) })), { text: 'Subtotal', right: money(invoice.subtotal) }, { text: invoice.taxLabel || 'Tax', right: money(invoice.tax) }, { text: 'Total', right: money(invoice.total), bold: true }, 'Prototype document - regulatory submission: not submitted'], { subtitle: 'OrgTik Console - local mock invoice', footerBrand: 'OrgTik Console' });
+      row.content = { name: `Invoice-${documentNumber}.pdf`, mimetype: 'application/pdf', bytes: content.length, sha256: crypto.createHash('sha256').update(content).digest('hex'), base64: content.toString('base64') };
       data.documents[invoice.id] = row; log(p, 'invoice_document_recorded', invoice.id, { documentNumber }); return clone(row);
     })));
+    app.get(prefix + '/billing/invoices/:id/content', read(req => {
+      authority('billing:view'); const document = state().documents[req.params.id]; if (!document?.content || !S().db.invoices.some(row => row.id === req.params.id)) throw fail(404, 'invoice_document_unavailable', 'Record the current invoice document first.'); return clone(document.content);
+    }));
     app.post(prefix + '/tax/verify', read(req => recorded(req, 'tax:edit', (p, data) => {
       const workspace = S().workspace(req.body.workspaceId), taxId = String(req.body.taxId || '').trim();
       if (!workspace || !taxId || taxId.length > 100) throw fail(422, 'invalid_tax_check', 'Choose an actual workspace and tax ID.');
