@@ -2,8 +2,9 @@ const people = require('./workspace-people');
 const { seatCounts } = require('./workspace-context');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
 function createAccountActions({ S, identity, principal, workspace, sessionStore, authority, token, frame }) {
-  const actor = identity.findUser(principal.user.id), member = people.memberOf(workspace, actor);
-  const writable = () => { if (principal.readOnly) throw fail(423, 'account_read_only', 'View-as sessions cannot change this account.'); if (!actor || !member) throw fail(403, 'account_access_required', 'Your current account and membership are required.'); };
+  const actor = identity.findUser(principal.user.id), member = workspace && people.memberOf(workspace, actor);
+  const ownPerson = () => { if (principal.readOnly) throw fail(423, 'account_read_only', 'View-as sessions cannot change this account.'); if (!actor || actor.isActive !== true || actor.deletedAt || actor.pendingActivation) throw fail(403, 'account_access_required', 'Your current active account is required.'); };
+  const writable = () => { ownPerson(); if (!member) throw fail(403, 'account_access_required', 'Your current workspace membership is required.'); };
   const sessionList = async () => {
     if (principal.readOnly) throw fail(403, 'session_owner_required', 'Session information belongs to its signed-in owner.');
     const doc = await sessionStore.read();
@@ -12,23 +13,29 @@ function createAccountActions({ S, identity, principal, workspace, sessionStore,
   };
   return { async execute(kind, body = {}) {
     if (kind === 'sessions.list') return sessionList();
-    writable();
+    if (['sessions.revoke', 'workspace.create', 'person.delete'].includes(kind)) ownPerson(); else writable();
     if (kind === 'sessions.revoke') {
       if (body.all !== true && body.id !== principal.session.sid) throw fail(422, 'session_action_required', 'Sign out this session or all your sessions.');
       await authority.logout(token, body.all === true); frame.accountSessionExit = true;
       return { sessionAction: 'signed_out' };
     }
     if (kind === 'member.status') {
+      if (workspace.state === 'suspended') throw fail(423, 'workspace_read_only', 'This workspace is read-only.');
       people.requireAdmin(workspace, actor);
       const target = workspace.members.find(row => row.id === body.memberId);
       if (!target || target.role === 'owner' || target.id === member.id) throw fail(409, 'protected_membership', 'The owner and your own membership cannot be suspended here.');
+      const person = identity.findByKey(target.userKey);
+      if (!person || person.isActive !== true || person.deletedAt || person.pendingActivation) throw fail(409, 'person_inactive', 'This person must activate their account before membership access can be restored.');
+      const staffEpoch = S.db.staffAccessEpochs?.[target.userKey] ?? 0;
+      if (workspace.kind === 'orgtik_internal' && (S.db.staffAccessEpochs !== undefined && (!S.db.staffAccessEpochs || typeof S.db.staffAccessEpochs !== 'object' || Array.isArray(S.db.staffAccessEpochs)) || !Number.isSafeInteger(staffEpoch) || staffEpoch < 0 || staffEpoch === Number.MAX_SAFE_INTEGER)) throw fail(503, 'staff_epoch_invalid', 'Staff access recovery is temporarily required.');
       if (!['suspended', 'active'].includes(body.status) || !['active', 'suspended'].includes(target.status)) throw fail(422, 'invalid_member_status', 'Suspend or restore an active membership.');
       if (body.status === 'active' && target.status === 'suspended') for (const [tool, grant] of Object.entries(target.toolGrants || {})) if (grant.assigned) { const counts = seatCounts(S, workspace, tool); if (counts.available !== null && counts.available < 1) throw fail(409, 'seat_capacity_exhausted', 'Release or buy an available seat before restoring access.'); }
-      if (target.status !== body.status) { target.status = body.status; target.accessEpoch = (target.accessEpoch || 0) + 1; target.revision++; people.revision(workspace); }
+      if (target.status !== body.status) { target.status = body.status; target.accessEpoch = (target.accessEpoch || 0) + 1; target.revision++; people.revision(workspace); if (workspace.kind === 'orgtik_internal') { S.db.staffAccessEpochs ??= {}; S.db.staffAccessEpochs[target.userKey] = staffEpoch + 1; } }
       S.log(actor.key, `member_${body.status}`, target.id, { workspaceId: workspace.id });
       return { id: target.id, status: target.status };
     }
     if (kind === 'member.role') {
+      if (workspace.state === 'suspended') throw fail(423, 'workspace_read_only', 'This workspace is read-only.');
       const role = body.customRoleId ? workspace.suite?.account?.customRoles?.find(row => row.id === body.customRoleId)?.baseRole : body.role;
       if (!['admin', 'member', 'guest'].includes(role)) throw fail(422, 'invalid_role', 'Choose a configured canonical membership role.');
       const result = people.changeMember(S, workspace, actor, body.memberId, { role });
@@ -36,6 +43,7 @@ function createAccountActions({ S, identity, principal, workspace, sessionStore,
       return { id: result.id, role: result.role, customRoleId: result.customRoleId || null };
     }
     if (kind === 'team.inviteMany') {
+      if (workspace.state === 'suspended') throw fail(423, 'workspace_read_only', 'This workspace is read-only.');
       people.requireAdmin(workspace, actor);
       if (!Array.isArray(body.rows) || !body.rows.length || body.rows.length > 50 || !/^[\w.:-]{1,140}$/.test(body.operationId || '')) throw fail(422, 'invalid_invite_batch', 'Choose up to fifty invitation rows and the original action reference.');
       const result = { invited: [], failed: [] };
@@ -65,7 +73,7 @@ function createAccountActions({ S, identity, principal, workspace, sessionStore,
       const owned = S.db.workspaces.filter(row => !['deleted', 'cancelled'].includes(row.state) && row.members.some(person => person.userKey === actor.key && person.role === 'owner' && person.status === 'active'));
       if (owned.length) throw fail(409, 'ownership_transfer_required', 'Transfer or close your owned workspaces before deleting the account.');
       const mine = S.db.workspaces.filter(row => row.members.some(person => person.userKey === actor.key));
-      if (S.db.invoices.some(invoice => mine.some(row => row.id === invoice.workspaceId) && ['open', 'past_due'].includes(invoice.state))) throw fail(409, 'unpaid_invoices', 'Settle the outstanding invoices first.');
+      if (S.db.invoices.some(invoice => mine.some(row => row.id === invoice.workspaceId && row.members.some(person => person.userKey === actor.key && person.role === 'owner')) && ['open', 'past_due'].includes(invoice.state))) throw fail(409, 'unpaid_invoices', 'Settle your outstanding invoices first.');
       await authority.revokeUser(actor.id); actor.isActive = false; actor.deletedAt = S.iso(S.now()); actor.authVersion = (actor.authVersion || 0) + 1;
       for (const row of mine) { const membership = row.members.find(person => person.userKey === actor.key); membership.status = 'removed'; membership.accessEpoch = (membership.accessEpoch || 0) + 1; for (const grant of Object.values(membership.toolGrants || {})) grant.assigned = false; people.revision(row); }
       frame.accountSessionExit = true; S.log(actor.key, 'personal_account_deleted', String(actor.id));

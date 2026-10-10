@@ -28,7 +28,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     realm, store: sessionStore,
     loadUser: async id => { const accounts = await accountStore.accounts(), raw = accounts.get(String(id)); return raw ? JSON.parse(raw).user : identityFor().findUser(id); },
     resolveWorkspace: (user, options) => contextService(options.revalidate ? options.frame?.authorizationSnapshot : undefined).resolveWorkspace(user, options),
-    contextFor: (user, options) => contextService().contextFor(user, options),
+    contextFor: (user, options) => options.extra?.mode === 'identity' && options.extra.workspaceId === null && options.extra.audience === 'identity' && !options.principal?.readOnly ? { mode: 'identity', audience: 'identity', workspaceId: null, workspaceContext: null, scopes: [], staffAccess: null } : contextService().contextFor(user, options),
   });
   function currentPrincipal(req) {
     const principal = req ? authority.verifiedFromReq(req) : requests.getStore()?.frame.principal;
@@ -378,6 +378,21 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     });
     app.get('/api/auth/mailbox', route(() => {
       return journeys.mailbox(platform().getStore(), principal().user, { readOnly: principal().readOnly });
+    }));
+    const personActions = req => {
+      const p = principal();
+      if (!p) throw failure(401, 'unauthenticated', 'Sign in to manage your account.');
+      return require('./workspace-account-actions').createAccountActions({ S: platform().getStore(), identity: identityFor(), principal: p, workspace: ownContext() ? workspace() : null, sessionStore, authority, token: identityFor().tokenFrom(req), frame });
+    };
+    app.get('/api/auth/account', route(req => {
+      personActions(req);
+      const p = principal(), S = platform().getStore();
+      return { user: safeUser(p.user), readOnly: p.readOnly, workspaceId: ownContext()?.workspace.id || null, workspaces: S.db.workspaces.filter(row => !['deleted', 'cancelled'].includes(row.state) && people.memberOf(row, p.user)).map(row => ({ id: row.id, name: row.name, state: row.state, role: people.memberOf(row, p.user).role })) };
+    }));
+    app.get('/api/auth/account/sessions', route(req => personActions(req).execute('sessions.list')));
+    app.post('/api/auth/account/actions/:kind', route(req => {
+      if (!['workspace.create', 'person.delete', 'sessions.revoke'].includes(req.params.kind)) throw failure(422, 'workspace_action_required', 'Choose a workspace for this action.');
+      return personActions(req).execute(req.params.kind, req.body);
     }));
     app.get("/api/auth/my-scopes", (req, res) => {
       const p = principal(); if (!p) return res.status(401).json({ success: false, code: "unauthenticated" });

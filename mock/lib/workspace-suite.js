@@ -11,7 +11,7 @@ function requireToolAdmin(context, tool) {
   if (!connectors.admitted(access) || !access.roles.some(role => ADMIN_ROLES[tool]?.includes(role))) throw fail(403, 'tool_admin_required', 'Ask this tool’s administrator.');
   return access;
 }
-function preferences(actor) { return clone(actor.profile?.suitePreferences || { theme: 'light', density: 'comfortable', language: 'en' }); }
+function preferences(actor) { return clone(actor.profile?.suitePreferences || { density: 'comfortable' }); }
 function savePreferences(actor, patch) {
   const allowed = ['theme', 'density', 'language', 'savedViews', 'notificationPreferences'];
   if (!patch || typeof patch !== 'object' || Array.isArray(patch) || Object.keys(patch).some(key => !allowed.includes(key)) || JSON.stringify(patch).length > 50000) throw fail(422, 'invalid_preferences', 'Check the preference values.');
@@ -27,11 +27,13 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
   const currentContext = () => resolveWorkspaceContext(S, identity, actor, { realm: context.realm, workspaceId: workspace.id, actorUserId: principal.actor.id, readOnly: principal.readOnly, audience: principal.claims.aud });
   // Account-owned settings/projectors are supplied by its domain module; the
   // guarded authority effects remain rooted in the existing boundary adapter.
+  const read = fn => (req, res, next) => { try { Promise.resolve(fn(req)).then(data => res.set('Cache-Control', 'private, no-store').json({ success: true, data }), next); } catch (error) { next(error); } };
+  const write = fn => read(req => { connectors.writable(workspace, currentContext()); return fn(req); });
+  app.get('/api/suite/account/sessions', read(() => accountActions.execute('sessions.list')));
+  app.post('/api/suite/account/actions/:kind', read(req => accountActions.execute(req.params.kind, req.body)));
   const accountFile = require('node:path').join(__dirname, '../apps/sos/workspace-features.js');
   if (require('node:fs').existsSync(accountFile)) require(accountFile).create({ S, identity, workspace, actor, principal, currentContext, runtimeFor, actions: accountActions }).routes(app, '/api/suite/account');
   else app.use('/api/suite/account', (_req, res) => res.status(503).json({ success: false, code: 'account_features_pending', message: 'The Account feature module is still being prepared.' }));
-  const read = fn => (req, res, next) => { try { Promise.resolve(fn(req)).then(data => res.set('Cache-Control', 'private, no-store').json({ success: true, data }), next); } catch (error) { next(error); } };
-  const write = fn => read(req => { connectors.writable(workspace, currentContext()); return fn(req); });
   const admittedTools = () => Object.entries(currentContext().tools).filter(([, access]) => connectors.admitted(access)).map(([tool]) => tool);
   const snapshots = () => admittedTools().map(tool => ({ tool, data: runtimeFor(tool).suiteFeed?.(currentContext()) || runtimeFor(tool).bootstrap(currentContext()) }));
   function searchItems() {
