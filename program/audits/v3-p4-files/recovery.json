@@ -1,0 +1,33 @@
+{
+  "scope": "Ordinary Files routes, actual signed workspace identities, persisted packaged assets and protected shares in owned offset700 sandbox.",
+  "mode": "recovery",
+  "checks": [
+    {
+      "name": "Lost-response probe commits through the actual server",
+      "pass": true
+    },
+    {
+      "name": "Committed unknown outcome retains original action and blocks a new submission",
+      "pass": true
+    },
+    {
+      "name": "Reload recovery uses the exact same key and body",
+      "pass": true
+    },
+    {
+      "name": "Receipt recovery returns exactly one actual file",
+      "pass": true
+    },
+    {
+      "name": "No unexpected browser runtime or console errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    "recovery-uncertain.png",
+    "recovery-success.png"
+  ],
+  "errors": [],
+  "completed": true
+}

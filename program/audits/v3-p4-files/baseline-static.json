@@ -1,0 +1,18 @@
+{
+  "files": 134,
+  "lines": 9835,
+  "use_client_files": 70,
+  "raw_hex": 12,
+  "arbitrary_color_classes": 0,
+  "default_palette_classes": 0,
+  "physical_direction_classes": 0,
+  "inline_style_objects": 7,
+  "primitive_imports": 0,
+  "lucide_imports": 0,
+  "iconify_uses": 0,
+  "phosphor_imports": 39,
+  "t_calls": 449,
+  "literal_jsx_text": 14,
+  "token_in_url": 0,
+  "hardcoded_passwords": 0
+}
