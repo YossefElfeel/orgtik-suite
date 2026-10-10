@@ -213,6 +213,7 @@ export function ArticleBodyEditor({
                 <IconButton
                   label={`${t("remove")}: ${tf("articleSection")} ${index + 1}`}
                   icon={<Trash />}
+                className="text-danger hover:bg-danger-subtle focus-visible:outline-danger"
                   onClick={() => update(sections.filter((_, n) => n !== index))}
                 />
               </span>
@@ -317,6 +318,7 @@ export function ArticleBodyEditor({
                     <IconButton
                       label={`${t("remove")}: ${t(block.kind)} ${n + 1}`}
                       icon={<Trash />}
+                      className="text-danger hover:bg-danger-subtle focus-visible:outline-danger"
                       onClick={() =>
                         editSection(index, {
                           blocks: section.blocks.filter((_, i) => i !== n),

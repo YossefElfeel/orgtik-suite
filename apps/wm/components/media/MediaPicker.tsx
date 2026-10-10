@@ -96,7 +96,7 @@ export function MediaPicker({
             </Link>
           ) : null}
           {!disabled ? (
-            <Button variant="secondary" size="sm" onClick={() => onChange("")}>
+            <Button variant="danger" size="sm" onClick={() => onChange("")}>
               {t("remove")}
             </Button>
           ) : null}
