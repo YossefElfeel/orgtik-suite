@@ -83,6 +83,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       if (!/^[\w-]{1,200}$/.test(workspace.id)) throw failure(503, "invalid_workspace_id", "Workspace storage is unavailable.");
       const ctx = { ...makeCtx(appKey, identity, util), realm, workspaceId: workspace.id, currentContext: () => currentPrincipal()?.workspaceContext, uploadsDir: path.join(config.dataDir, "uploads", "workspaces", workspace.id, appKey), io: null, boardAuthority: { authorize: authorizeBoardFile, custodyTarget: args => boardCustodyTarget(workspace.id, args) }, sharedFiles: { resolve: resolveSharedFile, project: projectSharedFile, ...Object.fromEntries(['authorizeWhiteboard', 'createWhiteboard', 'saveWhiteboard', 'resolveWhiteboard'].map(method => [method, args => invokeBoardFile(method, args)])) } };
       const upload = () => (req, res, next) => /multipart\/form-data|application\/octet-stream/i.test(req.headers["content-type"] || "") ? res.status(501).json({ success: false, code: "packaged_assets_only", message: "Choose a packaged sample asset." }) : next();
+      ctx.filesPolicy = () => require('./workspace-files-policy').filesPolicy(platform().getStore(), workspace.id, currentPrincipal()?.workspaceContext);
       ctx.upload = Object.fromEntries(["single", "array", "any", "fields", "none"].map(name => [name, upload]));
       return {
         ctx, assets: { kind: "packaged", workspaceId: workspace.id },
