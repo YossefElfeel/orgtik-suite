@@ -117,6 +117,7 @@ function routes(router, ctx, options) {
     const fingerprint = crypto.createHash('sha256').update(JSON.stringify({ actor: who.id, event })).digest('hex');
     const previous = db.processedCommands.find(row => row.id === operationId) || db.messages.find(message => message.fileOperation?.id === operationId)?.fileOperation;
     if (previous) { if (previous.fingerprint !== fingerprint) reject(409, 'operation_conflict', 'This operation ID was used for another change.'); return bootstrap(user); }
+    let createdChannelId;
     switch (event.type) {
       case 'channel.created': {
         const input = event.channel || {}, name = typeof input.name === 'string' && input.name.trim();
@@ -126,6 +127,7 @@ function routes(router, ctx, options) {
         if (input.kind === 'dm' && memberIds.length !== 2) reject(422, 'invalid_dm', 'Choose one other workspace member.');
         const { id, next } = nextEntity('c', input.id, 'channels', db.channels);
         if (!codec.id(id) || db.channels.some(channel => channel.id === id)) reject(409, 'channel_id_conflict', 'Conversation ID is already used.');
+        createdChannelId = id;
         db.channels.push({ id, name, kind: input.kind, ...(input.topic ? { topic: input.topic.trim() } : {}), memberIds, ownerId: who.id, unread: 0, mentions: 0, archived: false, notify: db.settings.channelNotifyDefault }); seq.channels = next; break;
       }
       case 'channel.updated': {
@@ -164,7 +166,7 @@ function routes(router, ctx, options) {
       case 'meeting.guest_admitted': case 'meeting.guest_declined': guests.decide(user,event);break;
       default: if(v3.command(event,who))break; reject(501, 'chat_flow_deferred', 'This simulated flow is deferred; workspace conversations are available.');
     }
-    v3.activity(event,who);seq.revision++; db.processedCommands.push({ id: operationId, fingerprint }); db.processedCommands = db.processedCommands.slice(-256); return bootstrap(user);
+    v3.activity(event,who,createdChannelId);seq.revision++; db.processedCommands.push({ id: operationId, fingerprint }); db.processedCommands = db.processedCommands.slice(-256); return bootstrap(user);
   }
   const handle = (fn, status = 200) => (req, res) => { const user = identity.requireUser(req, res); if (!user) return; try { res.status(status).json({ success: true, data: fn(req, user) }); } catch (error) { if (!error.status) throw error; res.status(error.status).json({ success: false, code: error.code, message: error.message }); } };
   router.get('/api/hq/whiteboards', handle((req, user) => whiteboards.list(user, req.query)));

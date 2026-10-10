@@ -1,0 +1,11 @@
+{
+  "scope": "Native Files reference, whiteboard endpoint and custody integration subprocesses",
+  "sourceFix": "Pass server-allocated channel ID into owner activity logging without changing submitted command or fingerprint",
+  "commands": [
+    "node --test mock/lib/workspace-file-reference-endpoints.test.js mock/lib/workspace-whiteboard-endpoints.test.js mock/lib/workspace-custody.test.js"
+  ],
+  "tests": 19,
+  "passed": 19,
+  "failed": 0,
+  "complete": true
+}
