@@ -64,3 +64,9 @@ Commands:
 The six HR test files pass 50/50, including retained identity/seat/custody, leave refusal rollback/calendar isolation/cold restore and new owner-domain/public-careers/currency behavior. Production build, typecheck and five-catalog check pass. Inventories are generated source inventories; root will regenerate combined versions after integration.
 
 Owned runtime: session16746, presentation-rMneB0. Web 3900/3901/3904; API 7900/7901/7904/7908; icons 7999; connections 7977. This run is separate from root/Tasks/CRM demos.
+
+## Reviewed onboarding status follow-up
+
+The overall employee badge now uses the exact same resolved linked/manual steps as the checklist, independently of the employment wizard's onboardingComplete flag. Empty and unavailable linked work stay Pending. References refresh on focus/visibility and every 30 seconds while visible, scoped to the current workspace/token. Manual steps have no mutation affordance when the current actor cannot manage them; unavailable linked steps have none.
+
+Against shared fraction fix6b85927, onboarding-review.json records 11 passing actual API/browser checks and 2 AR dark390 captures. An actual Tasks record changes pending→done, then HR focus refresh changes0%/Pending→100%/Complete. The HR manual done/setup fields are unchanged. node --experimental-strip-types --test apps/hr/lib/hr-onboarding.test.mjs passes 3 focused cases for empty, stale/manual and current linked status. HR typecheck passes. The original117 captures were not repeated for this bounded correction.

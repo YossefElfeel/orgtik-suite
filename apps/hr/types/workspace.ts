@@ -25,3 +25,5 @@ export type HrTaskReference={id:number;title:string;status:string;path:string};
 export type HrTaskProject={id:string|number;title:string;sections?:{id:string|number;title:string}[]};
 export type HrTaskCreated={task:{id:string|number}};
 export type HrToolPlan={id:string;trialDays:number};
+
+export type HrEffectiveChecklistStep=HrChecklistItem&{complete:boolean;task?:HrTaskReference};

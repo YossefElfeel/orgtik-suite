@@ -1,0 +1,15 @@
+(node:25372) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/yosse/Projects/New%20sass/orgtik-suite-v3-hr/apps/hr/lib/hr-onboarding.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\yosse\Projects\New sass\orgtik-suite-v3-hr\apps\hr\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ empty onboarding never reports complete (1.7451ms)
+✔ linked pending and unavailable status override a stale manual completion (0.4856ms)
+✔ actual Tasks done completes the same steps and overall badge; unfinished manual work remains pending (0.3526ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 256.8278
