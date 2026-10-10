@@ -104,7 +104,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
   }
   function connectedTaskReferences(appKey, { source, sourceId, ids } = {}) {
     const request = requests.getStore(), p = request?.frame.principal, initial = p?.context.workspaceContext;
-    if (!initial || source !== APP_TO_TOOL[appKey] || !['chat', 'crm', 'hr'].includes(source) || !['string', 'number'].includes(typeof sourceId) || !String(sourceId) || String(sourceId).length > 160 || !Array.isArray(ids) || ids.length > 50 || ids.some(id => !Number.isSafeInteger(id) || id < 1)) throw failure(422, 'invalid_task_references', 'Choose current source-owned task references.');
+    if (!initial || source !== APP_TO_TOOL[appKey] || !['chat', 'crm', 'hr', 'marketing'].includes(source) || !['string', 'number'].includes(typeof sourceId) || !String(sourceId) || String(sourceId).length > 160 || !Array.isArray(ids) || ids.length > 50 || ids.some(id => !Number.isSafeInteger(id) || id < 1)) throw failure(422, 'invalid_task_references', 'Choose current source-owned task references.');
     const S = platform().getStore(), person = identityFor().findUser(p.user.id), context = require('./workspace-context').resolveWorkspaceContext(S, identityFor(), person, { realm, workspaceId: initial.workspace.id, actorUserId: p.actor.id, readOnly: p.readOnly, audience: p.claims.aud });
     const connections = require('./connectors'), connection = connections.list(S.workspace(initial.workspace.id), context).find(row => row.source === source && row.target === 'tasks');
     if (!connection?.enabled || !connections.admitted(context.tools[source]) || !connections.admitted(context.tools.tasks)) throw failure(403, 'connection_access_required', 'Current source and Tasks access are required.');

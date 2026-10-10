@@ -245,5 +245,20 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     good(await call('sales', '/api/suite/services/catalog/publish', crmToken, 'POST', { operationId: 'service-policy-publication' }));
     const policyCatalog = good(await call('sos', '/v1/public/catalog', null)); assert.equal(policyCatalog.items.find(row => row.id === offer.id).prices[3][1].discount, 7); assert.equal(policyCatalog.items.find(row => row.kind === 'software').prices[3][1].discount, 5); assert.equal(policyCatalog.policy.serviceDurationSavings[12], 20);
     assert.equal(JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders), immutablePaid);
+    const campaign = good(await call('marketing', '/v3/bootstrap', marketingToken)).campaigns[0]; assert.ok(campaign?.id);
+    good(await call('marketing', `/v3/campaigns/${campaign.id}/recipients`, marketingToken, 'PATCH', { refs: [{ workspaceId: 'ws_orgtik', contactId: lead.sales.leadId }] }));
+    const consentBody = { contactId: lead.sales.leadId, state: 'opted_out', operationId: 'all-tools-marketing-consent' };
+    const consentResult = good(await call('marketing', '/api/suite/crm/consent', marketingToken, 'POST', consentBody));
+    assert.deepEqual(good(await call('marketing', '/api/suite/crm/consent', marketingToken, 'POST', consentBody)), consentResult);
+    const campaignLeadBody = { contactId: lead.sales.leadId, title: 'All-tool campaign follow-up', estimate: 1500, operationId: 'all-tools-marketing-lead' };
+    const campaignLead = good(await call('marketing', `/api/suite/marketing/campaigns/${campaign.id}/lead`, marketingToken, 'POST', campaignLeadBody));
+    assert.equal(good(await call('sales', `/api/projects/${campaignLead.projectId}`, crmToken)).projectName, campaignLeadBody.title);
+    const marketingTaskBody = { ...connectedBody, source: 'marketing', sourceId: campaign.id, title: 'All-tool campaign task', operationId: 'all-tools-marketing-task' };
+    const campaignTask = good(await call('marketing', '/api/suite/tasks', marketingToken, 'POST', marketingTaskBody));
+    assert.equal(campaignTask.task.source.app, 'marketing');
+    assert.equal(good(await call('marketing', '/api/suite/tasks', marketingToken, 'POST', marketingTaskBody)).task.id, campaignTask.task.id);
+    assert.ok(good(await call('marketing', `/api/suite/tasks/references?source=marketing&sourceId=${campaign.id}&ids=${campaignTask.task.id}`, marketingToken)).some(row => row.id === campaignTask.task.id));
+    assert.ok(good(await call('marketing', `/v3/campaigns/${campaign.id}`, marketingToken)).results.some(row => row.projectId === campaignLead.projectId));
+    assert.equal(JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders), immutablePaid);
   } finally { await new Promise(resolve => server.close(resolve)); fs.rmSync(folder, { recursive: true, force: true }); }
 });
