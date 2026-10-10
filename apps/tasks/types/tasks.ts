@@ -5,6 +5,7 @@ export type IStatus =
   | "in_review"
   | "in_progress"
   | "completed"
+  | "done"
   | "on_hold"
   | "cancelled"
   | "backlog";

@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { FolderSimple, MagnifyingGlass, Plus } from "@phosphor-icons/react";
-import { Button, Input, ListStates, PageHeader, Pagination, SegmentedControl, useStatusLabel, type ListStatus } from "@orgtik/ui";
+import { Button, Input, ListStates, PageHeader, Pagination, Select, SegmentedControl, Toolbar, useStatusLabel, type ListStatus } from "@orgtik/ui";
 import { usePathname, useRouter } from "@/i18n/routing";
 import ProjectCard from "@/components/pages/projects/ProjectCard";
 import ProjectFormDialog from "@/components/dialogs/projects/ProjectFormDialog";
@@ -20,6 +20,7 @@ type Filter = "all" | IProjectStatus;
 
 export default function ProjectsPage() {
   const t = useTranslations("ProjectList");
+  const tv = useTranslations("TasksV3");
   const statusLabel = useStatusLabel();
   const { isManager } = useTaskRoles();
   const params = useSearchParams();
@@ -29,6 +30,7 @@ export default function ProjectsPage() {
   const status = (["todo", "in_progress", "done"].includes(params.get("status") ?? "") ? params.get("status") : "all") as Filter;
   const page = Math.max(1, Number(params.get("page")) || 1);
   const q = params.get("q") ?? "";
+  const archived = params.get("archived") === "true";
   const [search, setSearch] = useState(q);
   useEffect(() => setSearch(q), [q]);
 
@@ -49,7 +51,7 @@ export default function ProjectsPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
-  const { data, isLoading, isError, error, refetch } = useGetAllProjectsQuery({ page, limit: PAGE_SIZE, search: q, status: status === "all" ? "" : status });
+  const { data, isLoading, isError, error, refetch } = useGetAllProjectsQuery({ page, limit: PAGE_SIZE, search: q, status: status === "all" ? "" : status, archived: archived ? "true" : "false" });
   const items = data?.data?.items ?? [];
   const total = data?.data?.meta?.total ?? 0;
   const filtered = Boolean(q) || status !== "all";
@@ -68,7 +70,7 @@ export default function ProjectsPage() {
   return (
     <section className="flex flex-col gap-6">
       <PageHeader title={t("title")} description={t("description")} actions={create} />
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <Toolbar label={t("statusFilter")}>
         <Input
           type="search"
           value={search}
@@ -89,7 +91,8 @@ export default function ProjectsPage() {
             { value: "done", label: statusLabel("task", "done") },
           ]}
         />
-      </div>
+        <Select aria-label={tv("project")} value={archived ? "archived" : "active"} options={[{ value: "active", label: tv("active") }, { value: "archived", label: tv("archived") }]} onValueChange={value => { const sp = new URLSearchParams(params.toString()); sp.delete("page"); if (value === "archived") sp.set("archived", "true"); else sp.delete("archived"); router.replace(`${pathname}${sp.size ? `?${sp}` : ""}`); }} className="w-48" />
+      </Toolbar>
       <ListStates
         status={listStatus}
         onRetry={() => refetch()}

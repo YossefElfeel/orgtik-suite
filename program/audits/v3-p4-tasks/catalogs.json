@@ -1,0 +1,57 @@
+{
+  "scope": "Ordinary Tasks routes and persisted mock contracts in an isolated offset200 demo. External sending and arbitrary uploads remain simulated/deferred.",
+  "mode": "catalogs",
+  "checks": [
+    {
+      "name": "de/light/1024: document fits",
+      "pass": true
+    },
+    {
+      "name": "de/light/1024: direction and theme",
+      "pass": true
+    },
+    {
+      "name": "de/light/1024: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "fr/light/1024: document fits",
+      "pass": true
+    },
+    {
+      "name": "fr/light/1024: direction and theme",
+      "pass": true
+    },
+    {
+      "name": "fr/light/1024: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "it/light/1024: document fits",
+      "pass": true
+    },
+    {
+      "name": "it/light/1024: direction and theme",
+      "pass": true
+    },
+    {
+      "name": "it/light/1024: no critical/serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "workbench-de-light-1024.png",
+    "workbench-fr-light-1024.png",
+    "workbench-it-light-1024.png"
+  ],
+  "errors": [],
+  "completed": true
+}

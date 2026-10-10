@@ -29,6 +29,7 @@ export interface ISidebarProject {
 }
 
 export interface IProjects {
+  archivedAt?: string | null;
   id: number;
   title: string;
   description: string;

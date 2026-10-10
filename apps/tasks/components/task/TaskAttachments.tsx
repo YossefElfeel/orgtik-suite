@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { DownloadSimple, Eye, File, FileImage, FilePdf, Paperclip, Trash } from "@phosphor-icons/react";
-import { Button, ConfirmDialog, Dialog, DialogBody, DialogContent, DialogHeader, DialogTitle, IconButton, ListStates, useFormatter } from "@orgtik/ui";
+import { Button, ConnectedFeature, ConfirmDialog, Dialog, DialogBody, DialogContent, DialogHeader, DialogTitle, IconButton, ListStates, useFormatter, useSuite } from "@orgtik/ui";
 import { useAppDispatch } from "@/redux/app/hooks";
 import { taskApi } from "@/redux/features/task/taskApi";
 import { downloadAttachmentFile } from "@/lib/downloadAttachmentFile";
@@ -13,6 +13,9 @@ export type Attachment = { id: number; fileUrl: string | null; originalName: str
 const iconFor = (mime: string) => mime.startsWith("image/") ? <FileImage aria-hidden className="size-5 shrink-0 text-fg-muted" /> : mime === "application/pdf" ? <FilePdf aria-hidden className="size-5 shrink-0 text-fg-muted" /> : <File aria-hidden className="size-5 shrink-0 text-fg-muted" />;
 export function TaskAttachments({ taskId, files: initialFiles, readOnly }: { taskId: number; files: Attachment[]; readOnly: boolean }) {
   const t = useTranslations("FileReferences"), f = useFormatter(), authority = useFileAuthority(), dispatch = useAppDispatch();
+  const suite = useSuite();
+  const requestFiles = () => suite.mutate("/access-requests", "POST", { tool: "files", reason: "Attach a Files reference to a task" });
+  const trialFiles = async () => { const plans = await suite.request<{ id: string; trialDays: number }[]>("/tools/files/plans"); const plan = plans.find(row => row.trialDays > 0); if (!plan) throw new Error(t("noAccessBody")); await suite.mutate("/tools/files/trial", "POST", { planId: plan.id }); dispatch(taskApi.util.invalidateTags(["Task"])); };
   const storageKey = "orgtik:task-files:" + fileScope() + ":" + taskId;
   const [result, setResult] = useState<{ authority: string; files?: Attachment[]; error?: FileRequestError }>({ authority: "" });
   const [revision, setRevision] = useState(0), [picker, setPicker] = useState(false), [removing, setRemoving] = useState<Attachment | null>(null);
@@ -75,7 +78,7 @@ export function TaskAttachments({ taskId, files: initialFiles, readOnly }: { tas
       </ul> : <p className="text-body-sm text-fg-subtle">{t("noFiles")}</p>}
     </ListStates>
     {issue ? <p role="alert" className="text-body-sm text-danger">{t(issue)}</p> : null}
-    {attempt ? <div className="flex flex-col gap-2"><p className="text-body-sm text-fg-muted">{t(attempt.scope === fileScope() ? "uncertain" : "originalWorkspace")}</p><Button variant="secondary" size="sm" disabled={busy || readOnly || attempt.scope !== fileScope()} loading={busy} onClick={() => void execute(attempt)}>{t("recover")}</Button></div> : readOnly ? <p className="text-caption text-fg-muted">{t("readOnly")}</p> : <Button variant="secondary" size="sm" startIcon={<Paperclip />} disabled={busy || status !== "ready"} onClick={() => setPicker(true)}>{t("attach")}</Button>}
+    <ConnectedFeature requires="files" source="tasks" compact onTrial={trialFiles} onRequestAccess={requestFiles} onRequestTool={requestFiles} billingHref={`${suite.sosUrl}/billing`} settingsHref="/admin/connections">{attempt ? <div className="flex flex-col gap-2"><p className="text-body-sm text-fg-muted">{t(attempt.scope === fileScope() ? "uncertain" : "originalWorkspace")}</p><Button variant="secondary" size="sm" disabled={busy || readOnly || attempt.scope !== fileScope()} loading={busy} onClick={() => void execute(attempt)}>{t("recover")}</Button></div> : readOnly ? <p className="text-caption text-fg-muted">{t("readOnly")}</p> : <Button variant="secondary" size="sm" startIcon={<Paperclip />} disabled={busy || status !== "ready"} onClick={() => setPicker(true)}>{t("attach")}</Button>}</ConnectedFeature>
     <FilesPicker taskId={taskId} open={picker} onOpenChange={setPicker} onPick={pick} disabled={busy || Boolean(attempt) || readOnly} />
     <Dialog open={previewCurrent} onOpenChange={open => !open && setPreview(null)}><DialogContent size="xl"><DialogHeader><DialogTitle>{preview?.contentPath && !image.url ? t("checking") : preview?.originalName}</DialogTitle></DialogHeader><DialogBody>
       {preview?.contentPath ? image.authority !== authority || !image.url && !image.error ? <p role="status">{t("loading")}</p> : image.error ? <p role="alert">{t("unavailableBody")}</p> : <img src={image.url} alt={preview.originalName} className="mx-auto max-h-[70dvh] rounded-field object-contain" /> : preview?.fileUrl ? <img src={preview.fileUrl} alt={preview.originalName} className="mx-auto max-h-[70dvh] rounded-field object-contain" /> : null}

@@ -44,8 +44,10 @@ import { daysUntil, dueDay } from "@/lib/dates";
 import { isolate } from "@/lib/bidi";
 import type { IProjectMember } from "@/types/projects";
 import { sectionTitle } from "@/lib/sections";
+import { TaskOptions } from "./TaskOptions";
+import type { TaskMetadata } from "@/redux/features/task/v3Api";
 
-type FullTask = {
+type FullTask = Partial<TaskMetadata> & {
   id: number;
   title: string;
   description: string;
@@ -78,7 +80,7 @@ function TaskView({ id, projectId, onClose }: { id: number; projectId: number; o
   const t = useTranslations("TaskSheet");
   const statusLabel = useStatusLabel();
   const f = useFormatter();
-  const { canEdit, isManager } = useTaskRoles();
+  const roles = useTaskRoles();
   const { data, isLoading, isError, error, refetch } = useGetTaskQuery(id);
   const details = useGetProjectDetailsQuery({ projectId }, { skip: !projectId });
   const [del] = useDeleteTaskMutation();
@@ -93,6 +95,8 @@ function TaskView({ id, projectId, onClose }: { id: number; projectId: number; o
   if (isError || !data?.data) return <ErrorState size="page" titleAs="h2" title={t("errorTitle")} description={t("errorBody")} onRetry={() => refetch()} />;
 
   const task = data.data as unknown as FullTask;
+  const archived = Boolean((details.data?.data as unknown as { archivedAt?: string })?.archivedAt);
+  const canEdit = roles.canEdit && !archived, isManager = roles.isManager && !archived;
   // A task belongs to one project: a link to it from another project's page shows nothing.
   if (task.projectId !== projectId) return <EmptyState size="page" titleAs="h2" title={t("goneTitle")} description={t("goneBody")} action={<Button onClick={onClose}>{t("close")}</Button>} />;
   const members = ((details.data?.data as { members?: IProjectMember[] } | undefined)?.members ?? []) as unknown as { id: number; firstName?: string; lastName?: string }[];
@@ -185,6 +189,7 @@ function TaskView({ id, projectId, onClose }: { id: number; projectId: number; o
         {task.description ? <RichText text={task.description} people={members} /> : <p className="text-body-sm text-fg-subtle">{t("noDescription")}</p>}
       </section>
       <TaskAttachments taskId={task.id} files={task.attachments ?? []} readOnly={!canEdit} />
+      <TaskOptions task={task} projectId={projectId} people={members} readOnly={!canEdit} />
       <Tabs defaultValue="comments">
         <TabsList
           items={[

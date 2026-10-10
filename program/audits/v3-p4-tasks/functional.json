@@ -1,0 +1,151 @@
+{
+  "scope": "Ordinary Tasks routes and persisted mock contracts in an isolated offset200 demo. External sending and arbitrary uploads remain simulated/deferred.",
+  "mode": "functional",
+  "checks": [
+    {
+      "name": "No presentation link in ordinary sidebar",
+      "pass": true
+    },
+    {
+      "name": "Quick add persists an ordinary task with explicit project",
+      "pass": true
+    },
+    {
+      "name": "Labels, monthly recurrence and reminder persist",
+      "pass": true
+    },
+    {
+      "name": "Saved template retains validated task settings",
+      "pass": true
+    },
+    {
+      "name": "Time entry persists minutes and note",
+      "pass": true
+    },
+    {
+      "name": "Explicit in-app mock reminder reaches actual notification feed",
+      "pass": true
+    },
+    {
+      "name": "Repeated reminder creates no duplicate recipient notice",
+      "pass": true
+    },
+    {
+      "name": "Actual Files attachment preserves versioned D071 reference",
+      "pass": true
+    },
+    {
+      "name": "Completion creates one real recurrence with month-end clamp",
+      "pass": true
+    },
+    {
+      "name": "Repeated completion preserves next occurrence id",
+      "pass": true
+    },
+    {
+      "name": "Mapped CSV reports genuine partial import results",
+      "pass": true
+    },
+    {
+      "name": "Bulk status/priority edits persist ordinary selected rows",
+      "pass": true
+    },
+    {
+      "name": "Due reminder ordinary action records actual in-app notice",
+      "pass": true
+    },
+    {
+      "name": "Repeated due action creates no duplicate notices",
+      "pass": true
+    },
+    {
+      "name": "Saved view is persisted in suite preferences",
+      "pass": true
+    },
+    {
+      "name": "Filtered RFC4180 CSV export uses actual task data",
+      "pass": true
+    },
+    {
+      "name": "Admin custom fields and automation rules persist",
+      "pass": true
+    },
+    {
+      "name": "Ordinary automation action logs actual task changes",
+      "pass": true
+    },
+    {
+      "name": "Task custom field value uses configured ordinary schema",
+      "pass": true
+    },
+    {
+      "name": "Gantt uses ordinary task dates and exact inspector links",
+      "pass": true
+    },
+    {
+      "name": "Tool administration overview route is real",
+      "pass": true
+    },
+    {
+      "name": "Tool administration members route is real",
+      "pass": true
+    },
+    {
+      "name": "Tool administration roles route is real",
+      "pass": true
+    },
+    {
+      "name": "Tool administration connections route is real",
+      "pass": true
+    },
+    {
+      "name": "Tool administration import-export route is real",
+      "pass": true
+    },
+    {
+      "name": "Tool administration audit route is real",
+      "pass": true
+    },
+    {
+      "name": "Tool administration billing route is real",
+      "pass": true
+    },
+    {
+      "name": "Archived project becomes an actual read-only ordinary screen",
+      "pass": true
+    },
+    {
+      "name": "Restore returns project write controls",
+      "pass": true
+    },
+    {
+      "name": "Empty ordinary workspace has a real onboarding checklist",
+      "pass": true
+    },
+    {
+      "name": "First-run sample creates three editable persisted tasks",
+      "pass": true
+    },
+    {
+      "name": "Tasks-only attachment shows actual missing-tool ConnectCard",
+      "pass": true
+    },
+    {
+      "name": "Starting Files trial enables the real attachment affordance",
+      "pass": true
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "state-success.png",
+    "state-read-only.png",
+    "functional-workbench.png",
+    "first-run-connected-inspector.png"
+  ],
+  "errors": [],
+  "completed": true
+}

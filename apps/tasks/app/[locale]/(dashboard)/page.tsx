@@ -9,6 +9,7 @@ import { CheckCircle, Circle, Stack, WarningCircle } from "@phosphor-icons/react
 import { ErrorState, PageHeader, Stat, useStatusLabel, useFormatter } from "@orgtik/ui";
 import { BarChart, DonutChart, LineChart } from "@orgtik/ui/charts";
 import { useGetDashboardAnalyticsQuery } from "@/redux/features/home/homeApi";
+import { TaskOnboarding } from "@/components/task/TaskOnboarding";
 
 type Card = { key: "open" | "completed" | "total" | "overdue"; value: number; percentage: number };
 type StatusRow = { status: "todo" | "in_progress" | "in_review" | "done" | "backlog"; count: number };
@@ -40,6 +41,7 @@ export default function TasksDashboard() {
   return (
     <section className="flex flex-col gap-6">
       <PageHeader title={t("title")} description={t("description")} />
+      <TaskOnboarding />
       <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {cards.map((k) => {
           const c = card(k);
