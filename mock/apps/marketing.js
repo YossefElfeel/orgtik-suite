@@ -38,6 +38,7 @@ module.exports = {
   createWorkspaceRuntime(input) { return require("../lib/tool-adapters/marketing").createWorkspaceRuntime(input, module.exports); },
   routes(app, ctx, state = legacy || (legacy = createState(ctx))) {
     const getDb = () => state.db;
+    state.db.marketingV3 ??= require("./marketing/v3").empty();
     const views = makeViews(ctx, getDb);
     const h = makeHelpers(ctx, getDb, views);
     const svc = {};
@@ -82,6 +83,8 @@ module.exports = {
     require("./marketing/routes/integrations")(app, deps);
     require("./marketing/routes/insights")(app, deps);
     require("./marketing/routes/audience")(app, deps);
+    state.v3 = require("./marketing/v3")(deps);
+    state.v3.routes(app);
 
     // Rebuild the seed without restarting the servers (handy between QA runs).
     if (!ctx.identity.workspaceMode) app.post("/__reset", (req, res) => {
