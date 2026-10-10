@@ -120,7 +120,8 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const S = platform().getStore(), person = identityFor().findUser(p.user.id), context = require('./workspace-context').resolveWorkspaceContext(S, identityFor(), person, { realm, workspaceId: initial.workspace.id, actorUserId: p.actor.id, readOnly: p.readOnly, audience: p.claims.aud });
     require('./connectors').requireConnection(S.workspace(initial.workspace.id), context, 'marketing', 'crm');
     const query = String(args.search || '').trim().toLocaleLowerCase(), ids = args.contactIds;
-    if (query.length > 200 || selected && (!Array.isArray(ids) || ids.length > 200 || ids.some(id => !Number.isSafeInteger(id) || id < 1))) throw failure(422, 'invalid_directory_selection', 'Select up to two hundred current CRM contacts.');
+    const validId = id => typeof id === 'string' ? require('./workspace-file-references').identifier(id) : Number.isSafeInteger(id) && id > 0;
+    if (query.length > 200 || selected && (!Array.isArray(ids) || ids.length > 200 || ids.some(id => !validId(id)))) throw failure(422, 'invalid_directory_selection', 'Select up to two hundred current CRM contacts.');
     let runtime = request.runtime?.appKey === 'sales' ? request.runtime : request.relatedRuntimes.get('sales') || request.suiteReadRuntimes.get('sales');
     if (!runtime) { runtime = registry.create(initial.workspace.id, 'sales'); request.suiteReadRuntimes.set('sales', runtime); }
     const data = runtime.suiteFeed(context);
