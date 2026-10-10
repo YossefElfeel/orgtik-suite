@@ -23,6 +23,7 @@ function routes(router, ctx, options) {
     if (write && (channel.archived || channel.custodyReadOnly)) reject(423, 'channel_read_only', 'This conversation is read-only.');
     return channel;
   }
+  const guests=require('./chats/guest')({db,seq,workspace:{id:identity.workspaceId,name:db.settings.name},actor});
   const whiteboards = require('./chats/whiteboards').createWhiteboards({ db, seq, identity, ctx, actor, channelFor });
   function messageFor(id, who) {
     const message = db.messages.find(row => row.id === id);
@@ -93,7 +94,8 @@ function routes(router, ctx, options) {
     } else if (event.type.startsWith('channel.') && event.type !== 'channel.all_read') {
       const channel = channelFor(event.channelId, who, event.type !== 'channel.read');
       if (['channel.members_added', 'channel.member_removed'].includes(event.type) || event.type === 'channel.updated' && Object.keys(event.patch || {}).some(key => key !== 'notify')) mayManage(channel, who);
-    } else if (event.type === 'message.created') channelFor(event.message?.channelId, who, true);
+    } else if(event.type.startsWith('meeting.')) guests.meetingFor(user,event.meetingId,true);
+    else if (event.type === 'message.created') channelFor(event.message?.channelId, who, true);
     else if (event.type.startsWith('message.')) {
       const message = messageFor(event.messageId, who);
       if (event.type === 'message.edited' && message.authorId !== who.id || event.type === 'message.deleted' && message.authorId !== who.id && !who.admin) reject(403, 'message_author_required', 'The current role cannot change this message.');
@@ -152,6 +154,8 @@ function routes(router, ctx, options) {
       case 'message.deleted': { const message = messageFor(event.messageId, who); if (message.authorId !== who.id && !who.admin) reject(403, 'message_author_required', 'Only the author or a moderator can delete this message.'); message.deletedAt ||= new Date().toISOString(); message.text = ''; message.attachments = []; break; }
       case 'message.reaction_toggled': { const message = messageFor(event.messageId, who); if (typeof event.emoji !== 'string' || !event.emoji.trim() || event.emoji.length > 32 || message.deletedAt) reject(422, 'invalid_reaction', 'Choose a reaction.'); let reaction = message.reactions.find(reaction => reaction.emoji === event.emoji); if (!reaction) { reaction = { emoji: event.emoji, userIds: [] }; message.reactions.push(reaction); } reaction.userIds = reaction.userIds.includes(who.id) ? reaction.userIds.filter(id => id !== who.id) : [...reaction.userIds, who.id]; message.reactions = message.reactions.filter(reaction => reaction.userIds.length); break; }
       case 'message.pin_toggled': { const message = messageFor(event.messageId, who); message.pinned = !message.pinned; break; }
+      case 'meeting.guest_link_reset': guests.reset(user,event);break;
+      case 'meeting.guest_admitted': case 'meeting.guest_declined': guests.decide(user,event);break;
       default: reject(501, 'chat_flow_deferred', 'This simulated flow is deferred; workspace conversations are available.');
     }
     seq.revision++; db.processedCommands.push({ id: operationId, fingerprint }); db.processedCommands = db.processedCommands.slice(-256); return bootstrap(user);
@@ -164,6 +168,7 @@ function routes(router, ctx, options) {
   router.get('/api/hq/bootstrap', handle((_req, user) => bootstrap(user)));
   router.post('/api/hq/commands', handle((req, user) => command(req.body.event, user, req.get('Idempotency-Key') || req.body.operationId)));
   return {
+    publicGuest:guests.publicGuest,joinPublicGuest:guests.joinPublicGuest,
     connectedTaskAudience(user,messageId) {
       const who=actor(user),message=db.messages.find(row=>row.id===messageId&&!row.deletedAt);
       if(!message)reject(404,'message_not_found','Message not found.');

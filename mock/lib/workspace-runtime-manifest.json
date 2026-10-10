@@ -285,6 +285,7 @@
     "chats": [
       "apps/chats.js",
       "apps/chats/fixture.json",
+      "apps/chats/guest.js",
       "apps/chats/runtime-state.js",
       "apps/chats/whiteboards.js",
       "lib/accounts.js",
