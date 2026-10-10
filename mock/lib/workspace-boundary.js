@@ -61,6 +61,19 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       return { id: offer.id, catalogId: offer.id, kind: offer.kind, name: published?.names || offer.name, serviceId: offer.serviceId || null, planId: offer.planId || offer.serviceId, toolId: offer.tool || null, managedIn: service ? 'crm' : 'console', scope: service ? 'sales' : 'platform_admin', path, workspaceId: service ? internal?.id || null : null, status: offer.tool ? S.db.tools.find(tool => tool.key === offer.tool)?.status : S.db.services.find(row => row.id === offer.serviceId)?.status, available: Boolean(published), publishedAt: offer.publishedAt || null, monthlyMinor: published?.monthlyMinor ?? null, prices: published?.prices || null, currency, decimals: catalog.decimals, launch: { canOpen, reason: canOpen ? null : service ? 'crm_service_access_required' : 'console_catalog_access_required', url: canOpen ? `${config.webUrl('sos')}/go/${service ? 'sales' : 'platform_admin'}?${query}` : null } };
     }) };
   }
+  function crmLeadTarget({ leadId } = {}) {
+    const request = requests.getStore(), p = currentPrincipal(), S = platform().getStore(), identity = identityFor(), person = p && identity.findUser(p.user.id), workspace = S.workspace('ws_orgtik');
+    if (!request || !person || p.claims.mode !== 'staff' || p.claims.aud !== 'staff:wm' || !p.context.staffAccess?.permissions.wm?.includes('content:view') || typeof leadId !== 'string' || !/^[\w-]{1,160}$/.test(leadId)) throw failure(403, 'wm_lead_context_required', 'Choose an actual Website Manager lead reference.');
+    const path = `/customers/${encodeURIComponent(leadId)}`, base = { workspaceId: workspace?.id || null, leadId, scope: 'sales', path, canOpen: false, reason: 'crm_read_access_required', url: null };
+    if (!workspace || workspace.kind !== 'orgtik_internal' || ['deleted', 'cancelled'].includes(workspace.state)) return { ...base, reason: 'orgtik_crm_unavailable' };
+    let context;
+    try { context = require('./workspace-context').resolveWorkspaceContext(S, identity, person, { realm, workspaceId: workspace.id, actorUserId: p.actor.id, audience: 'sales' }); } catch (error) { if ([403, 404].includes(error.status)) return base; throw error; }
+    if (!require('./connectors').admitted(context.tools.crm)) return base;
+    let runtime = request.suiteReadRuntimes.get('sales'); if (!runtime) { runtime = registry.create(workspace.id, 'sales'); request.suiteReadRuntimes.set('sales', runtime); }
+    if (!runtime.suiteFeed(context).contacts.some(row => row.id === leadId)) return { ...base, reason: 'crm_record_unavailable' };
+    const query = new URLSearchParams({ workspaceId: workspace.id, redirect: path });
+    return { ...base, canOpen: true, reason: null, url: `${config.webUrl('sos')}/go/sales?${query}` };
+  }
   function internalCrmRuntime(request) {
     const S = platform().getStore(), workspace = S.workspace('ws_orgtik');
     if (!request || workspace?.kind !== 'orgtik_internal' || ['suspended', 'deleted', 'cancelled'].includes(workspace.state)) throw failure(503, 'orgtik_crm_unavailable', 'The OrgTik CRM is unavailable.');
@@ -766,6 +779,6 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       return sendJson(error.status || 503, { success: false, code: error.code || "workspace_unavailable", message: error.message });
     } finally { if (frame) authority.discardPending(frame); runtime?.close(); for (const related of relatedRuntimes.values()) related.close(); for (const related of suiteReadRuntimes.values()) related.close(); }
   }
-  return { authority, registry, initialize, handle, importState, exportStaffState, importStaffState, frameApp, currentPrincipal, contextService, deliverWebsiteLead, staffPreferences, catalogMirror };
+  return { authority, registry, initialize, handle, importState, exportStaffState, importStaffState, frameApp, currentPrincipal, contextService, deliverWebsiteLead, staffPreferences, catalogMirror, crmLeadTarget };
 }
 module.exports = { createWorkspaceBoundary };
