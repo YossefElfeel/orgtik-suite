@@ -7,6 +7,7 @@ import { createServer } from "vite";
 // Vite loads the same JSX, CSS and JSON modules used by the published website.
 const server = await createServer({
   configFile: false,
+  esbuild: { jsx: "automatic" },
   server: { middlewareMode: true, hmr: false, watch: null },
   optimizeDeps: { noDiscovery: true, entries: [] },
   appType: "custom",
@@ -17,12 +18,51 @@ const { default: snapshot } = await server.ssrLoadModule(
 );
 const { managedPageTree, SectionMedia, SharedMedia } =
   await server.ssrLoadModule("/src/content/managed-page.jsx");
+const { ArticleBlocks } = await server.ssrLoadModule(
+  "/src/reference/ArticleBlocks.jsx",
+);
 const baseline = structuredClone(snapshot.entries);
 afterEach(() => {
   snapshot.entries = structuredClone(baseline);
   delete globalThis.window;
 });
 after(() => server.close());
+
+test("article blocks render images and videos in managed order, with captions and safe sources", () => {
+  const html = renderToStaticMarkup(
+    h(ArticleBlocks, {
+      blocks: [
+        { id: "first", kind: "text", text: "Before media <script>" },
+        {
+          id: "image",
+          kind: "image",
+          src: "brand-cards.webp",
+          alt: "Cards",
+          caption: "Image caption",
+        },
+        { id: "middle", kind: "text", text: "Between the media" },
+        {
+          id: "video",
+          kind: "video",
+          src: "https://cdn.example.test/movie.mp4",
+          alt: "A movie",
+          caption: "Video caption",
+        },
+        { id: "last", kind: "text", text: "After media" },
+        { id: "unsafe", kind: "image", src: "javascript:alert(1)" },
+      ],
+    }),
+  );
+  assert.ok(html.indexOf("Before media") < html.indexOf("<img"));
+  assert.ok(html.indexOf("<img") < html.indexOf("Between the media"));
+  assert.ok(html.indexOf("Between the media") < html.indexOf("<video"));
+  assert.ok(html.indexOf("<video") < html.indexOf("After media"));
+  assert.match(html, /src="\/assets\/brand-cards.webp" alt="Cards"/);
+  assert.match(html, /<figcaption[^>]*>Image caption<\/figcaption>/);
+  assert.match(html, /controls="" preload="metadata"/);
+  assert.match(html, /&lt;script&gt;/);
+  assert.ok(!html.includes("javascript:"));
+});
 
 test("published section order changes body sections without moving header, footer or section steps", () => {
   const home = snapshot.entries.page.find((entry) => entry.id === "pg_home");
@@ -155,15 +195,42 @@ test("shared attachments stay scoped and Arabic images use Arabic alternative te
 
 test("the actual Partners route applies its own order and intro/profile attachments", async () => {
   const events = new EventTarget();
-  globalThis.window = { addEventListener: events.addEventListener.bind(events), removeEventListener: events.removeEventListener.bind(events), dispatchEvent: events.dispatchEvent.bind(events), innerWidth: 1440, location: { pathname: "/legal/partners", hash: "", search: "" } };
-  const partners = snapshot.entries.page.find(entry => entry.id === "pg_partners");
-  partners.presentation = { sectionOrder: ["partners", "intro"], cursor: { text: {}, link: "" }, sectionMedia: {
-    intro: [{ src: "https://assets.example.test/partner-intro.webp", alt: { en: "Partners introduction" } }],
-    partners: [{ src: "https://assets.example.test/partner-profiles.webm", alt: { en: "Our partners" } }],
-  } };
-  const { default: Legal } = await server.ssrLoadModule("/src/reference/Legal.jsx");
+  globalThis.window = {
+    addEventListener: events.addEventListener.bind(events),
+    removeEventListener: events.removeEventListener.bind(events),
+    dispatchEvent: events.dispatchEvent.bind(events),
+    innerWidth: 1440,
+    location: { pathname: "/legal/partners", hash: "", search: "" },
+  };
+  const partners = snapshot.entries.page.find(
+    (entry) => entry.id === "pg_partners",
+  );
+  partners.presentation = {
+    sectionOrder: ["partners", "intro"],
+    cursor: { text: {}, link: "" },
+    sectionMedia: {
+      intro: [
+        {
+          src: "https://assets.example.test/partner-intro.webp",
+          alt: { en: "Partners introduction" },
+        },
+      ],
+      partners: [
+        {
+          src: "https://assets.example.test/partner-profiles.webm",
+          alt: { en: "Our partners" },
+        },
+      ],
+    },
+  };
+  const { default: Legal } = await server.ssrLoadModule(
+    "/src/reference/Legal.jsx",
+  );
   const html = renderToStaticMarkup(h(Legal));
-  assert.ok(html.indexOf('class="partner-directory"') < html.indexOf('data-cms-section="intro"'));
+  assert.ok(
+    html.indexOf('class="partner-directory"') <
+      html.indexOf('data-cms-section="intro"'),
+  );
   assert.match(html, /alt="Partners introduction"/);
   assert.match(html, /<video[^>]*partner-profiles\.webm[^>]*controls=""/);
   assert.match(html, /href="\/faq"/);
@@ -171,12 +238,90 @@ test("the actual Partners route applies its own order and intro/profile attachme
 
 test("the actual homepage publishes the saved order and retains visible sample reviews", async () => {
   const events = new EventTarget();
-  globalThis.window = { addEventListener: events.addEventListener.bind(events), removeEventListener: events.removeEventListener.bind(events), dispatchEvent: events.dispatchEvent.bind(events), innerWidth: 1440, location: { pathname: "/", hash: "", search: "" } };
-  snapshot.entries.page.find(entry => entry.id === "pg_home").presentation = { sectionOrder: ["reviews", "faqs", "hero", "two-sides", "partners", "work", "services", "software", "approach", "closing"], sectionMedia: {}, cursor: { text: {}, link: "" } };
-  const { default: Home } = await server.ssrLoadModule("/src/reference/Home.jsx");
+  globalThis.window = {
+    addEventListener: events.addEventListener.bind(events),
+    removeEventListener: events.removeEventListener.bind(events),
+    dispatchEvent: events.dispatchEvent.bind(events),
+    innerWidth: 1440,
+    location: { pathname: "/", hash: "", search: "" },
+  };
+  snapshot.entries.page.find((entry) => entry.id === "pg_home").presentation = {
+    sectionOrder: [
+      "reviews",
+      "faqs",
+      "hero",
+      "two-sides",
+      "partners",
+      "work",
+      "services",
+      "software",
+      "approach",
+      "closing",
+    ],
+    sectionMedia: {},
+    cursor: { text: {}, link: "" },
+  };
+  const { default: Home } = await server.ssrLoadModule(
+    "/src/reference/Home.jsx",
+  );
   const html = renderToStaticMarkup(h(Home));
-  assert.ok(html.indexOf('id="reviews"') < html.indexOf('data-cms-section="faqs"'));
-  assert.ok(html.indexOf('data-cms-section="faqs"') < html.indexOf('data-cms-section="hero"'));
+  assert.ok(
+    html.indexOf('id="reviews"') < html.indexOf('data-cms-section="faqs"'),
+  );
+  assert.ok(
+    html.indexOf('data-cms-section="faqs"') <
+      html.indexOf('data-cms-section="hero"'),
+  );
   assert.match(html, /Sample review/);
   assert.match(html, /<details class="faq-item"/);
+});
+
+test("the actual Insights route renders managed sections and media in order", async () => {
+  const events = new EventTarget();
+  const article = snapshot.entries.article.find(
+    (entry) => entry.id === "ar_02",
+  );
+  article.locales.en.sections = [
+    {
+      id: "section",
+      heading: "Managed article heading",
+      blocks: [
+        { id: "before", kind: "text", text: "Managed paragraph before media" },
+        {
+          id: "image",
+          kind: "image",
+          src: "brand-tablet.webp",
+          alt: "Managed article image",
+          caption: "Managed caption",
+        },
+        { id: "after", kind: "text", text: "Managed paragraph after media" },
+      ],
+    },
+  ];
+  globalThis.window = {
+    addEventListener: events.addEventListener.bind(events),
+    removeEventListener: events.removeEventListener.bind(events),
+    dispatchEvent: events.dispatchEvent.bind(events),
+    innerWidth: 1440,
+    location: {
+      pathname: `/insights/${article.slug.en}`,
+      hash: "",
+      search: "",
+    },
+  };
+  const { default: Insights } = await server.ssrLoadModule(
+    "/src/reference/Insights.jsx",
+  );
+  const html = renderToStaticMarkup(h(Insights));
+  assert.match(html, /Managed article heading/);
+  assert.ok(
+    html.indexOf("Managed paragraph before media") <
+      html.indexOf('alt="Managed article image"'),
+  );
+  assert.ok(
+    html.indexOf('alt="Managed article image"') <
+      html.indexOf("Managed paragraph after media"),
+  );
+  assert.match(html, /Managed caption/);
+  assert.match(html, /href="\/faq"/);
 });

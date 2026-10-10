@@ -7,7 +7,8 @@ import {
   FileField,
   Input,
   Pagination,
-  Select,
+  ErrorState,
+  Skeleton,
   Textarea,
   toast,
 } from "@orgtik/ui";
@@ -25,11 +26,13 @@ export function MediaPicker({
   onChange,
   disabled = false,
   imagesOnly = false,
+  kind,
 }: {
   value: string;
   onChange: (src: string, media?: MediaItem) => void;
   disabled?: boolean;
   imagesOnly?: boolean;
+  kind?: "image" | "video";
 }) {
   const t = useTranslations("Improvements");
   const tm = useTranslations("Media");
@@ -39,9 +42,16 @@ export function MediaPicker({
   const [files, setFiles] = useState<File[]>([]);
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
+  const [choosing, setChoosing] = useState(!value);
+  const [uploadingNew, setUploadingNew] = useState(false);
   const library = useMediaQuery(
-    { page, pageSize: 10, search, kind: imagesOnly ? "image" : undefined },
-    { skip: disabled || !can("media:view") },
+    {
+      page,
+      pageSize: 10,
+      search,
+      kind: kind ?? (imagesOnly ? "image" : undefined),
+    },
+    { skip: disabled || !choosing || !can("media:view") },
   );
   const [upload, uploading] = useUploadMediaMutation();
   const selection = useMediaQuery(
@@ -52,7 +62,10 @@ export function MediaPicker({
     (item) =>
       (item.source === "upload" ? libraryUrl(item) : item.file) === value,
   );
-  const video = /\.(mp4|webm)(\?|$)/i.test(value);
+  const video =
+    kind === "video" ||
+    selected?.kind === "video" ||
+    /\.(mp4|webm)(\?|$)/i.test(value);
   return (
     <div className="flex flex-col gap-3 rounded-field border border-line p-3">
       {value ? (
@@ -71,7 +84,10 @@ export function MediaPicker({
               className="h-28 max-w-full rounded-field object-contain"
             />
           )}
-          {selected ? (
+          <span className="min-w-0 flex-1 break-all text-body-sm text-fg-muted">
+            {selected?.file ?? value.split("/").pop()}
+          </span>
+          {selected && can("media:edit") ? (
             <Link
               href={`/media/${selected.id}`}
               className="text-body-sm text-fg-brand underline"
@@ -86,7 +102,34 @@ export function MediaPicker({
           ) : null}
         </div>
       ) : null}
-      {!disabled && can("media:view") ? (
+      {!disabled ? (
+        <div className="flex flex-wrap gap-2">
+          {can("media:view") ? (
+            <Button
+              variant="secondary"
+              size="sm"
+              aria-expanded={choosing}
+              onClick={() => setChoosing(!choosing)}
+            >
+              {value ? t("replaceMedia") : t("selectMedia")}
+            </Button>
+          ) : null}
+          {can("media:edit") ? (
+            <Button
+              variant="secondary"
+              size="sm"
+              aria-expanded={uploadingNew}
+              onClick={() => setUploadingNew(!uploadingNew)}
+            >
+              {t("upload")}
+            </Button>
+          ) : null}
+          {!can("media:view") && !can("media:edit") ? (
+            <p className="text-body-sm text-fg-muted">{t("mediaPermission")}</p>
+          ) : null}
+        </div>
+      ) : null}
+      {!disabled && choosing && can("media:view") ? (
         <>
           <Input
             type="search"
@@ -99,24 +142,67 @@ export function MediaPicker({
               setPage(1);
             }}
           />
-          <Select
-            label={t("media")}
-            aria-label={t("selectMedia")}
-            value={selected?.id ?? null}
-            placeholder={t("selectMedia")}
-            options={(library.data?.items ?? []).map((item) => ({
-              value: item.id,
-              label: item.file,
-            }))}
-            onValueChange={(id) => {
-              const item = library.data?.items.find((media) => media.id === id);
-              if (item)
-                onChange(
-                  item.source === "upload" ? libraryUrl(item) : item.file,
-                  item,
+          {library.isFetching ? (
+            <Skeleton className="h-40 w-full" />
+          ) : library.isError ? (
+            <ErrorState size="compact" onRetry={library.refetch} />
+          ) : library.data?.items.length ? (
+            <div
+              aria-label={t("selectMedia")}
+              className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
+            >
+              {library.data.items.map((item) => {
+                const src =
+                  item.source === "upload" ? libraryUrl(item) : item.file;
+                return (
+                  <button
+                    type="button"
+                    key={item.id}
+                    aria-pressed={value === src}
+                    onClick={() => {
+                      onChange(src, item);
+                      setChoosing(false);
+                    }}
+                    className="group flex min-w-0 flex-col overflow-hidden rounded-field border border-line bg-raised text-start hover:border-fg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg-brand aria-pressed:border-fg-brand"
+                  >
+                    <span className="flex aspect-video w-full items-center justify-center overflow-hidden bg-sunken">
+                      {item.kind === "video" ? (
+                        <video
+                          src={`${mediaUrl(src)}#t=0.1`}
+                          muted
+                          preload="metadata"
+                          aria-hidden
+                          className="h-full w-full object-contain"
+                        />
+                      ) : (
+                        <img
+                          src={mediaUrl(src)}
+                          alt=""
+                          loading="lazy"
+                          className="h-full w-full object-contain"
+                        />
+                      )}
+                    </span>
+                    <span className="flex flex-col gap-1 p-2">
+                      <span className="break-all text-body-sm font-medium text-fg">
+                        {item.file}
+                      </span>
+                      <span className="text-caption text-fg-muted">
+                        {item.kind === "video" ? t("video") : t("image")}
+                        {item.width && item.height
+                          ? ` · ${item.width} × ${item.height}`
+                          : ""}
+                      </span>
+                    </span>
+                  </button>
                 );
-            }}
-          />
+              })}
+            </div>
+          ) : (
+            <p role="status" className="py-4 text-body-sm text-fg-muted">
+              {t("noMediaResults")}
+            </p>
+          )}
           {(library.data?.total ?? 0) > 10 ? (
             <Pagination
               page={page}
@@ -127,65 +213,64 @@ export function MediaPicker({
           ) : null}
         </>
       ) : null}
-      {!disabled && can("media:edit") ? (
-        <details>
-          <summary className="cursor-pointer text-body-sm font-semibold text-fg-brand">
-            {t("upload")}
-          </summary>
-          <div className="mt-3 flex flex-col gap-3">
-            <FileField
-              label={tm("file")}
-              value={files}
-              onChange={setFiles}
-              accept={
-                imagesOnly
+      {!disabled && uploadingNew && can("media:edit") ? (
+        <div className="flex flex-col gap-3 border-t border-line pt-3">
+          <FileField
+            label={tm("file")}
+            value={files}
+            onChange={setFiles}
+            accept={
+              kind === "video"
+                ? "video/mp4,video/webm"
+                : imagesOnly || kind === "image"
                   ? "image/png,image/jpeg,image/webp"
                   : "image/png,image/jpeg,image/webp,image/svg+xml,video/mp4,video/webm"
-              }
-              maxSize={15 * 1024 * 1024}
-              maxFiles={1}
-              multiple={false}
+            }
+            maxSize={15 * 1024 * 1024}
+            maxFiles={1}
+            multiple={false}
+          />
+          <Field label={t("description")}>
+            <Textarea
+              value={description}
+              maxLength={2000}
+              onChange={(event) => setDescription(event.target.value)}
             />
-            <Field label={t("description")}>
-              <Textarea
-                value={description}
-                maxLength={2000}
-                onChange={(event) => setDescription(event.target.value)}
-              />
-            </Field>
-            <Field label={t("tags")}>
-              <Input
-                value={tags}
-                onChange={(event) => setTags(event.target.value)}
-              />
-            </Field>
-            <Button
-              size="sm"
-              disabled={!files.length}
-              loading={uploading.isLoading}
-              onClick={async () => {
-                try {
-                  const item = await upload({
-                    file: files[0],
-                    description,
-                    tags: tags
-                      .split(/[,،]/)
-                      .map((tag) => tag.trim())
-                      .filter(Boolean),
-                  }).unwrap();
-                  onChange(libraryUrl(item), item);
-                  setFiles([]);
-                  setDescription("");
-                  setTags("");
-                } catch {
-                  toast.error(tm("failed"));
-                }
-              }}
-            >
-              {tm("upload")}
-            </Button>
-          </div>
-        </details>
+          </Field>
+          <Field label={t("tags")}>
+            <Input
+              value={tags}
+              onChange={(event) => setTags(event.target.value)}
+            />
+          </Field>
+          <Button
+            size="sm"
+            disabled={!files.length}
+            loading={uploading.isLoading}
+            onClick={async () => {
+              try {
+                const item = await upload({
+                  file: files[0],
+                  description,
+                  tags: tags
+                    .split(/[,،]/)
+                    .map((tag) => tag.trim())
+                    .filter(Boolean),
+                }).unwrap();
+                onChange(libraryUrl(item), item);
+                setFiles([]);
+                setDescription("");
+                setTags("");
+                setUploadingNew(false);
+                setChoosing(false);
+              } catch {
+                toast.error(tm("failed"));
+              }
+            }}
+          >
+            {tm("upload")}
+          </Button>
+        </div>
       ) : null}
     </div>
   );

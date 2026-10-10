@@ -5,6 +5,7 @@
 const fs = require("fs");
 const path = require("path");
 const {DEPARTMENTS, blankContent} = require("./defaults");
+const articleBody = require("./article-body");
 
 const LOCALES = ["en", "ar", "de", "fr", "it"];
 const TYPES = ["page", "global", "strings", "caseStudy", "serviceFamily", "service", "softwareModule", "article", "legalDocument", "roadmapItem", "pricing", "review"];
@@ -170,6 +171,9 @@ function makeStore(now, { demo = false } = {}) {
   // Validation per locale for what a reader can't do without (422 with fieldErrors).
   function validate(content, e) {
     const errors = {};
+    if (e?.type === "article") for (const [locale, words] of Object.entries(content.locales ?? {})) {
+      if (words && Object.hasOwn(words, "sections") && articleBody.validate(words.sections)) errors[`locales.${locale}.sections`] = "invalid";
+    }
     const safeAsset = value => typeof value === "string" && value.length <= 2048 && (/^(https?:)\/\//i.test(value) || !/^(?:[a-z][a-z0-9+.-]*:|\/\/)/i.test(value));
     if (content.presentation) {
       const p = content.presentation;
@@ -345,10 +349,18 @@ function makeStore(now, { demo = false } = {}) {
     if (mirrored(e) && Object.keys(patch).some((k) => !["locale", "seo", "note"].includes(k))) return MIRRORED;
     const base = clone(current(e));
     const next = clone(base);
+    if (e.type === "article" && Object.hasOwn(patch.fields ?? {}, "sections")) {
+      const error = articleBody.validate(patch.fields.sections);
+      if (error) return { errors: { [`locales.${patch.locale}.sections`]: error } };
+      if (patch.locale !== "en" && !same(articleBody.structure(patch.fields.sections), articleBody.structure(base.locales.en.sections))) return { errors: { [`locales.${patch.locale}.sections`]: "structure_locked" } };
+    }
     if (patch.neutral && "narrativePublished" in patch.neutral && patch.neutral.narrativePublished !== base.narrativePublished && !can("content:approve")) return {status:403,code:"forbidden",required:"content:approve"};
     if (patch.neutral && "sampleNarrativePublished" in patch.neutral && patch.neutral.sampleNarrativePublished !== base.sampleNarrativePublished && !can("content:approve")) return {status:403,code:"forbidden",required:"content:approve"};
     // The patch is copied: nothing the caller keeps a hold of can change the draft later.
     if (patch.locale && patch.fields) next.locales[patch.locale] = { ...(next.locales[patch.locale] ?? {}), ...clone(patch.fields) };
+    if (e.type === "article" && patch.locale === "en" && patch.fields?.sections?.some(section => section.blocks)) {
+      for (const locale of LOCALES) if (locale !== "en" && next.locales[locale]) next.locales[locale].sections = articleBody.synchronize(next.locales.en.sections, base.locales.en.sections, base.locales[locale]?.sections ?? []);
+    }
     if (patch.locale === "en" && patch.fields)
       for (const l of LOCALES) {
         if (l === "en" || !next.locales[l]) continue;
@@ -413,6 +425,7 @@ function makeStore(now, { demo = false } = {}) {
     if (!can(rule.permission) && !seoLane) return { status: 403, code: "forbidden", required: rule.permission };
     if (["publish", "schedule", "approve"].includes(action)) {
       const errors = validate(current(e), e);
+      if (e.type === "article") for (const [locale, words] of Object.entries(current(e).locales)) if (words?.sections && articleBody.validate(words.sections, { publishing: true })) errors[`locales.${locale}.sections`] = "invalid";
       if (e.type === "review" && !current(e).locales.en.quote?.trim()) errors["locales.en.quote"] = "required";
       if (["caseStudy", "article"].includes(e.type) && !current(e).image?.src?.trim()) errors["image.src"] = "required";
       if (Object.keys(errors).length) return {status:422,code:"invalid",fieldErrors:errors};
@@ -591,7 +604,7 @@ function makeStore(now, { demo = false } = {}) {
     return { currency: live?.currency ?? "CHF", priceMode: live?.priceMode ?? "indicative", managedIn: live?.managedIn ?? null, modules: Object.fromEntries((live?.locales.en.items ?? []).map((m) => [m.id, { monthly: m.monthly }])) };
   };
   const ensureDemo = () => { if (demo) require("./seed/demo-states").contentExamples({ entries, audit, ideas, now }); };
-  const exportState = () => clone({ cmsVersion: 1, demoVersion: 1, entries: [...entries], audit, ideas: [...ideas] });
+  const exportState = () => clone({ cmsVersion: 1, demoVersion: 3, entries: [...entries], audit, ideas: [...ideas] });
   const validateState = value => {
     const incoming = codec.object(value), rows = codec.mapRows(incoming.entries), ideas_ = codec.mapRows(incoming.ideas);
     if (!Array.isArray(incoming.audit) || rows.some(([, row]) => !row.workflow || !Array.isArray(row.versions) || !row.translation || !TYPES.includes(row.type))) throw codec.fail("Website Manager content state is incomplete.");
@@ -608,6 +621,8 @@ function makeStore(now, { demo = false } = {}) {
     }
     codec.replaceMap(ideas, incoming.ideas); audit.splice(0, audit.length, ...incoming.audit);
     if (incoming.demoVersion < 1) ensureDemo();
+    else if (demo && incoming.demoVersion < 2) require("./seed/demo-states").publishedExamples({ entries, audit, now });
+    if (demo && incoming.demoVersion < 3) require("./seed/demo-states").populateTranslationExamples(entries);
   };
   return { ensureDemo, create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES, exportState, importState, validateState };
 }
