@@ -69,6 +69,7 @@ import {
 } from "@/components/content/Lifecycle";
 import {
   TYPES,
+  typeOfId,
   type ContentType,
   type EditorSection,
 } from "@/lib/contentTypes";
@@ -1197,9 +1198,7 @@ export function EntryEditor({ id, seoOnly = false }: { id: string; seoOnly?: boo
   const t = useTranslations("Editor");
   const tt = useTranslations("Types");
   const ta = useTranslations("Areas");
-  const type = Object.values(TYPES).find((x) =>
-    id.startsWith(`${x.idPrefix}_`),
-  );
+  const type = typeOfId(id);
   const { data, isLoading, error, refetch } = useEntryQuery(
     { type: type?.key ?? "caseStudy", id },
     { skip: !type },
