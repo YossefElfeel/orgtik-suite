@@ -1,7 +1,7 @@
 import { USER_COOKIE, TOKEN_COOKIE } from "@/constants/index";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { setCookie, deleteCookie } from "cookies-next";
-import { IUser } from "@somion/sos-bar";
+import type { SessionUser as IUser } from "@/types/user";
 
 export type AuthState = { user: IUser | null; token: string | null };
 
@@ -25,7 +25,11 @@ const authSlice = createSlice({
       state.user = action.payload.user as IUser;
       state.token = action.payload.token;
       setCookie(USER_COOKIE, JSON.stringify(action.payload.user), cookieConfig);
-      setCookie(TOKEN_COOKIE, JSON.stringify(action.payload.token), cookieConfig);
+      setCookie(
+        TOKEN_COOKIE,
+        JSON.stringify(action.payload.token),
+        cookieConfig,
+      );
     },
     logoutUser: (state) => {
       state.user = null;

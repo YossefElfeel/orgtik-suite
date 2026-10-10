@@ -8,22 +8,42 @@ import { useTranslations } from "next-intl";
 import { ArrowSquareOut } from "@phosphor-icons/react";
 import { Avatar, Badge, buttonVariants } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
-import { SOS_URL } from "@somion/sos-bar";
+import { SOS_URL } from "@/constants";
 import { useGetActiveProjectQuery } from "@/redux/features/projects/projectApi";
 import type { IProjectMember } from "@/types/projects";
 
-const ROLE_ORDER = ["super_admin", "marketing_manager", "marketing_specialist", "content_writer", "client_reviewer"];
+const ROLE_ORDER = [
+  "super_admin",
+  "marketing_manager",
+  "marketing_specialist",
+  "content_writer",
+  "client_reviewer",
+];
 
 export function TeamMembers() {
   const t = useTranslations("SettingsTeam");
-  const { data, isLoading, isError, error, refetch } = useGetActiveProjectQuery();
+  const { data, isLoading, isError, error, refetch } =
+    useGetActiveProjectQuery();
   const members: IProjectMember[] = data?.data?.members ?? [];
-  const errorStatus = (error as { status?: number | string } | undefined)?.status;
-  const status = isLoading ? "loading" : isError ? (errorStatus === 403 ? "forbidden" : errorStatus === 404 ? "ready" : "error") : "ready";
-  const roleLabel = (r: string) => (t.has(`role_${r}`) ? t(`role_${r}`) : t("role_other"));
+  const errorStatus = (error as { status?: number | string } | undefined)
+    ?.status;
+  const status = isLoading
+    ? "loading"
+    : isError
+      ? errorStatus === 403
+        ? "forbidden"
+        : errorStatus === 404
+          ? "ready"
+          : "error"
+      : "ready";
+  const roleLabel = (r: string) =>
+    t.has(`role_${r}`) ? t(`role_${r}`) : t("role_other");
 
   const manage = (
-    <a href={`${SOS_URL}/go/global?redirect=/systems`} className={buttonVariants({ variant: "secondary" })}>
+    <a
+      href={`${SOS_URL}/go/global?redirect=/systems`}
+      className={buttonVariants({ variant: "secondary" })}
+    >
       {t("manageInSos")}
       <ArrowSquareOut aria-hidden className="size-4 rtl:-scale-x-100" />
     </a>
@@ -66,11 +86,17 @@ export function TeamMembers() {
       id: "roles",
       header: t("colRoles"),
       cell: ({ row }) => {
-        const roles = [...(row.original.roles ?? [])].sort((a, b) => ROLE_ORDER.indexOf(a) - ROLE_ORDER.indexOf(b));
+        const roles = [...(row.original.roles ?? [])].sort(
+          (a, b) => ROLE_ORDER.indexOf(a) - ROLE_ORDER.indexOf(b),
+        );
         return roles.length ? (
           <span className="flex flex-wrap gap-1">
             {roles.map((r) => (
-              <Badge key={r} tone={r === "super_admin" ? "brand" : "neutral"} size="sm">
+              <Badge
+                key={r}
+                tone={r === "super_admin" ? "brand" : "neutral"}
+                size="sm"
+              >
                 {roleLabel(r)}
               </Badge>
             ))}
@@ -101,7 +127,11 @@ export function TeamMembers() {
         status={status}
         onRetry={refetch}
         paginate
-        empty={{ title: errorStatus === 404 ? t("noProject") : t("emptyTitle"), description: t("emptyBody"), action: errorStatus === 404 ? undefined : manage }}
+        empty={{
+          title: errorStatus === 404 ? t("noProject") : t("emptyTitle"),
+          description: t("emptyBody"),
+          action: errorStatus === 404 ? undefined : manage,
+        }}
         error={{ title: t("loadError") }}
         forbidden={{ title: t("forbidden") }}
       />

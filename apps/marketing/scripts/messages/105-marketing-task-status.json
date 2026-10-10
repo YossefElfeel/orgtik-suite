@@ -1,0 +1,23 @@
+{
+  "MarketingV3.taskOnHold": {
+    "en": "On hold",
+    "ar": "معلّق",
+    "de": "Zurückgestellt",
+    "fr": "En pause",
+    "it": "In attesa"
+  },
+  "MarketingV3.taskCancelled": {
+    "en": "Cancelled",
+    "ar": "ملغى",
+    "de": "Abgebrochen",
+    "fr": "Annulé",
+    "it": "Annullato"
+  },
+  "MarketingV3.taskUnavailable": {
+    "en": "Task status unavailable",
+    "ar": "حالة المهمة غير متاحة",
+    "de": "Aufgabenstatus nicht verfügbar",
+    "fr": "Statut de tâche indisponible",
+    "it": "Stato attività non disponibile"
+  }
+}

@@ -1,4 +1,9 @@
-import { SOS_URL } from "@somion/sos-bar";
+export const SOS_URL =
+  process.env.NEXT_PUBLIC_SOS_URL ||
+  (process.env.NODE_ENV === "production"
+    ? "https://sos.orgtik.org"
+    : "https://sos.orgtik.xyz");
+export const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const USER_COOKIE = "marketing_user";
 export const TOKEN_COOKIE = "marketing_token";
@@ -11,4 +16,5 @@ export const APP_SCOPE = "digital_marketing";
  * person in if needed, then hands off to Marketing with this path, so they land on the page they
  * were on (a path in Marketing only; SOS checks it).
  */
-export const signInAgainUrl = (path: string) => `${SOS_URL}/go/${APP_SCOPE}?redirect=${encodeURIComponent(path)}`;
+export const signInAgainUrl = (path: string) =>
+  `${SOS_URL}/go/${APP_SCOPE}?redirect=${encodeURIComponent(path)}`;

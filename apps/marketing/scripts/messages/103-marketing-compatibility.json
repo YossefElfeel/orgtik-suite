@@ -1,0 +1,9 @@
+{
+  "MarketingV3.compatibilityAudience": {
+    "en": "Historical audience counts are compatibility data. Current campaigns use CRM contacts and consent.",
+    "ar": "أعداد الجمهور السابقة بيانات توافقية. تستخدم الحملات الحالية جهات اتصال CRM وموافقتها.",
+    "de": "Historische Zielgruppenzahlen sind Kompatibilitätsdaten. Aktuelle Kampagnen verwenden CRM-Kontakte und deren Einwilligung.",
+    "fr": "Les anciens décomptes d’audience sont des données de compatibilité. Les campagnes actuelles utilisent les contacts CRM et leur consentement.",
+    "it": "I conteggi storici del pubblico sono dati di compatibilità. Le campagne attuali usano contatti CRM e consenso."
+  }
+}
