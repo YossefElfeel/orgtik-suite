@@ -58,7 +58,7 @@ function LeadsList() {
       { id: "owner", header: t("owner"), cell: ({ row }) => <span className="text-fg-muted"><bdi dir="auto">{row.original.owner?.name ?? t("noOwner")}</bdi></span> },
       { id: "created", header: t("colCreated"), meta: { numeric: true }, cell: ({ row }) => <span className="text-fg-muted">{f.date(row.original.createdAt, { dateStyle: "medium" })}</span> },
       { id: "status", header: t("colStatus"), cell: ({ row }) => <StatusBadge entity="lead" state={row.original.status} size="sm" /> },
-      { id: "actions", header: ti("actions"), enableSorting: false, cell: ({ row }) => <Menu><MenuTrigger render={<IconButton label={ti("actions")} icon={<DotsThreeVertical />} />} /><MenuContent align="end"><MenuLinkItem render={<Link href={`/marketing/leads/${row.original.id}?returnTo=${encodeURIComponent(url.href)}`} />}>{ti("view")}</MenuLinkItem>{can("marketing:edit") ? <MenuLinkItem render={<Link href={`/marketing/leads/${row.original.id}?edit=1&returnTo=${encodeURIComponent(url.href)}`} />}>{ti("edit")}</MenuLinkItem> : null}</MenuContent></Menu> },
+      { id: "actions", header: ti("actions"), enableSorting: false, cell: ({ row }) => <Menu><MenuTrigger render={<IconButton label={ti("actions")} icon={<DotsThreeVertical />} />} /><MenuContent align="end"><MenuLinkItem render={<Link href={`/marketing/leads/${row.original.id}?returnTo=${encodeURIComponent(url.href)}`} />}>{ti("view")}</MenuLinkItem></MenuContent></Menu> },
     ],
     [t, ti, f, can, router, url.href],
   );
