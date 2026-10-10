@@ -30,13 +30,14 @@ import type { Meeting } from "@/entities";
  * and the client never disagree about the first render.
  */
 function useMeetingLink(guestKey: string | undefined) {
+  const workspace=useWorkspace(s=>s.workspaceId);
   const [origin, setOrigin] = useState("");
   const [canShare, setCanShare] = useState(false);
   useEffect(() => {
     setOrigin(window.location.origin);
     setCanShare(typeof navigator.share === "function");
   }, []);
-  return { link: origin && guestKey ? `${origin}/guest/${guestKey}` : "", canShare };
+  return { link: origin && guestKey ? `${origin}/guest/${guestKey}?workspace=${encodeURIComponent(workspace)}` : "", canShare };
 }
 
 /** What happens to someone who opens the link, under the workspace's lobby setting. */
@@ -107,6 +108,7 @@ export function MeetingLinkRow({
 
   return (
     <div className="flex flex-col gap-1.5">
+      {!meeting.guestKey&&can.inviteGuests?<Button size="sm" onClick={()=>resetGuestLink(meeting.id)}>{t("v3.generateGuestLink","Generate guest link")}</Button>:null}
       <div className="flex flex-wrap items-center gap-2">
         {/* A field, not a label: what is shown is exactly what is copied, and
             a click selects all of it for copying by hand. */}
@@ -116,15 +118,8 @@ export function MeetingLinkRow({
           value={link}
           aria-label={t("meetings.meetingLink", "Meeting link")}
           onFocus={(e) => e.currentTarget.select()}
-          className="min-w-0 flex-1 basis-[220px] px-2.5 py-2 text-[12px]"
-          style={{
-            background: "var(--color-surface-sunken)",
-            border: "1px solid transparent",
-            borderRadius: "var(--radius-control)",
-            color: "var(--color-ink)",
-            fontFamily: "var(--font-mono)",
-            textOverflow: "ellipsis",
-          }}
+          className={"min-w-0 flex-1 basis-[220px] px-2.5 py-2 text-caption "+("ch-background-314b28"+' '+"ch-border-52e799"+' '+"ch-border-radius-332348"+' '+"ch-color-7f7330"+' '+"ch-font-family-84a226"+' '+"ch-text-overflow-2bf148")}
+
         />
         <div className="flex shrink-0 items-center gap-2">
           <Button ref={copyRef} size="sm" variant="primary" onClick={() => void copy()} disabled={!link}>
@@ -151,7 +146,7 @@ export function MeetingLinkRow({
                 </Button>
               }
               title={t("meetings.resetTitle", "Reset the guest link?")}
-              impact={t("meetings.resetImpact", "The current link stops working for anyone who has it. Guests already in the meeting stay. Share the new link with whoever should still join.")}
+              impact={t("meetings.resetImpact", "The current link stops working for anyone who has it. Current link visits end. Share the new link with whoever should still join.")}
               confirmLabel={t("meetings.resetConfirm", "Reset link")}
               tone="primary"
               onConfirm={() => resetGuestLink(meeting.id)}
@@ -170,7 +165,7 @@ export function MeetingLinkRow({
         {copied === "done" ? t("meetings.linkCopied", "Link copied") : copied === "blocked" ? blockedHint : ""}
       </span>
       {copied === "blocked" && (
-        <p aria-hidden="true" className="text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+        <p aria-hidden="true" className={"text-caption "+("ch-color-4a0211")} >
           {blockedHint}
         </p>
       )}
@@ -212,20 +207,15 @@ export function InviteCard({
           onClose();
         }
       }}
-      className="hq-rise absolute bottom-3 start-3 z-20 flex w-[min(400px,calc(100%-24px))] flex-col gap-3 p-4"
-      style={{
-        background: "var(--color-surface)",
-        border: "1px solid var(--color-hairline)",
-        borderRadius: "var(--radius-card)",
-        boxShadow: "var(--shadow-float)",
-      }}
+      className={"hq-rise absolute bottom-3 start-3 z-20 flex w-[min(400px,calc(100%-24px))] flex-col gap-3 p-4 "+("ch-background-751d03"+' '+"ch-border-5065d4"+' '+"ch-border-radius-8d459a"+' '+"ch-box-shadow-3d74b9")}
+
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h2 id="invite-card-title" className="text-[14px] font-semibold" style={{ color: "var(--color-ink)" }}>
+          <h2 id="invite-card-title" className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
             {ready ? t("call.readyTitle", "Your meeting is ready") : t("call.inviteTitle", "Invite people")}
           </h2>
-          <p className="mt-1 text-[12.5px] leading-relaxed" style={{ color: "var(--color-ink-muted)", maxWidth: "46ch" }}>
+          <p className={"mt-1 text-body-sm leading-relaxed "+("ch-color-4a0211"+' '+"ch-max-width-91a84c")} >
             {ready
               ? t("call.readyBody", "Send this link to whoever should be in it.")
               : t("call.inviteBody", "Send this link to anyone you want in the call.")}{" "}
@@ -266,23 +256,13 @@ export function MeetingMessageCard({ meetingId }: { meetingId: string }) {
 
   return (
     <div
-      className="mt-1.5 flex max-w-[480px] items-center gap-3 px-3 py-2.5"
-      style={{
-        border: "1px solid var(--color-hairline)",
-        borderRadius: "var(--radius-control)",
-        background: "var(--color-surface)",
-      }}
+      className={"mt-1.5 flex max-w-[480px] items-center gap-3 px-3 py-2.5 "+("ch-border-5065d4"+' '+"ch-border-radius-332348"+' '+"ch-background-751d03")}
+
     >
       <span
         aria-hidden="true"
-        className="flex shrink-0 items-center justify-center"
-        style={{
-          width: 32,
-          height: 32,
-          borderRadius: "var(--radius-control)",
-          background: "var(--color-surface-sunken)",
-          color: "var(--color-ink-muted)",
-        }}
+        className={"flex shrink-0 items-center justify-center "+("ch-width-82b9d8"+' '+"ch-height-268b76"+' '+"ch-border-radius-332348"+' '+"ch-background-314b28"+' '+"ch-color-4a0211")}
+
       >
         <VideoCamera size={16} weight={live ? "fill" : "regular"} />
       </span>
@@ -290,17 +270,17 @@ export function MeetingMessageCard({ meetingId }: { meetingId: string }) {
         {meeting ? (
           <Link
             href={`/hq/meetings/${meeting.id}`}
-            className="block truncate text-[13px] font-medium"
-            style={{ color: "var(--color-ink)", textDecoration: "none" }}
+            className={"block truncate text-body-sm font-medium "+("ch-color-7f7330"+' '+"ch-text-decoration-80d654")}
+
           >
             <bdi>{meeting.title}</bdi>
           </Link>
         ) : (
-          <span className="block truncate text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+          <span className={"block truncate text-body-sm font-medium "+("ch-color-7f7330")} >
             {t("meetings.gone", "This meeting is not here")}
           </span>
         )}
-        <span className="tabular block truncate text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+        <span className={"tabular block truncate text-caption "+("ch-color-4a0211")} >
           {status}
         </span>
       </span>

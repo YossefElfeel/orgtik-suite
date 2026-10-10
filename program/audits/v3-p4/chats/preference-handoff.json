@@ -1,0 +1,42 @@
+{
+  "checks": [
+    {
+      "name": "Early actual menu choice saves before remote bootstrap",
+      "pass": true
+    },
+    {
+      "name": "One actual menu click makes one native preference write",
+      "pass": true
+    },
+    {
+      "name": "Late real bootstrap cannot overwrite explicit choice",
+      "pass": true
+    },
+    {
+      "name": "Source reference hands off to actual native Tasks path",
+      "pass": true
+    },
+    {
+      "name": "Native Tasks handoff applies persisted theme",
+      "pass": true
+    },
+    {
+      "name": "Current workspace survives actual handoff",
+      "pass": true
+    },
+    {
+      "name": "Preference handoff console is clean",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "flow-theme-task-handoff-en-dark-1440.png"
+  ],
+  "writes": [
+    {
+      "theme": "dark"
+    }
+  ],
+  "errors": [],
+  "completed": true
+}

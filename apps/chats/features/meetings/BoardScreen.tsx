@@ -1,4 +1,5 @@
 "use client";
+import{ChatConnection}from"@/features/chat/ChatFeatures";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { readClientSession } from "@orgtik/ui/auth";
@@ -15,7 +16,7 @@ function readDraft(key: string): Draft | null {
 }
 function storeDraft(key: string, value: Draft | null) { try { if (value) sessionStorage.setItem(key + ":draft", JSON.stringify(value)); else sessionStorage.removeItem(key + ":draft"); } catch { /* The open canvas remains editable. */ } }
 
-export function BoardScreen({ boardId, versionId, meetingId, channelId, embedded = false }: { boardId?: string; versionId?: string; meetingId?: string; channelId?: string; embedded?: boolean }) {
+function NativeBoardScreen({ boardId, versionId, meetingId, channelId, embedded = false }: { boardId?: string; versionId?: string; meetingId?: string; channelId?: string; embedded?: boolean }) {
   const t = useT(), authority = useFileAuthority();
   const query = useSearchParams();
   const requestedId = embedded ? boardId || "" : query.get("boardId") || "";
@@ -130,3 +131,5 @@ export function BoardScreen({ boardId, versionId, meetingId, channelId, embedded
     </>}
   </section>;
 }
+
+export function BoardScreen(props:Parameters<typeof NativeBoardScreen>[0]){return <ChatConnection requires='files' write={false}><NativeBoardScreen {...props}/></ChatConnection>;}

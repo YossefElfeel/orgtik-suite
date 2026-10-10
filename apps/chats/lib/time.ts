@@ -10,6 +10,7 @@
    render; Arabic keeps Latin digits (D-016). Dates and times are never hand-assembled. */
 import { formatLocale, type Locale } from "@orgtik/ui";
 
+let workspaceTime="";export function setWorkspaceTime(iso:string){if(Number.isFinite(Date.parse(iso)))workspaceTime=iso;}export const workspaceDate=()=>workspaceTime?new Date(workspaceTime):new Date();
 let tag = "en";
 const cache = new Map<string, Intl.DateTimeFormat | Intl.NumberFormat | Intl.RelativeTimeFormat>();
 function fmt<T>(key: string, make: () => T): T {
@@ -38,7 +39,7 @@ export const formatRange = (startIso: string, endIso: string, timeZone?: string)
   timeFmt(timeZone).formatRange(new Date(startIso), new Date(endIso));
 
 /** "now", "12 min", "2 hr", "yesterday", "Tue 3 Mar" - short enough for a dense list. */
-export function formatRelative(iso: string, now: Date = new Date()): string {
+export function formatRelative(iso: string, now: Date = workspaceDate()): string {
   const diffMs = now.getTime() - new Date(iso).getTime();
   const min = Math.floor(diffMs / 60_000);
   if (min < 1) return relative().format(0, "second");
@@ -74,7 +75,7 @@ export function dayLabel(index: number): string {
 }
 
 /** Minutes until an ISO timestamp; negative once it has passed. */
-export const minutesUntil = (iso: string, now: Date = new Date()): number =>
+export const minutesUntil = (iso: string, now: Date = workspaceDate()): number =>
   Math.round((new Date(iso).getTime() - now.getTime()) / 60_000);
 
 /* ------------------------------------------------------------ quiet hours */
@@ -87,7 +88,7 @@ export const minutesUntil = (iso: string, now: Date = new Date()): number =>
  */
 export function isWithinWindow(
   window: { from: string; to: string } | null,
-  now: Date = new Date(),
+  now: Date = workspaceDate(),
 ): boolean {
   if (!window) return false;
   const toMinutes = (hhmm: string): number | null => {

@@ -21,10 +21,10 @@ export function SuiteGate({ children }: { children: ReactNode }) {
   const [session] = useState(() => {
     if (!inSuite()) return null;
     const s = readSuiteSession();
-    if (s) useWorkspace.getState().adoptSuiteSession(s);
     return s;
   });
   const missing = inSuite() && !session;
+  useEffect(() => { if (session) useWorkspace.getState().adoptSuiteSession(session); }, [session]);
 
   useEffect(() => {
     if (missing) window.location.replace(suiteEntryUrl());

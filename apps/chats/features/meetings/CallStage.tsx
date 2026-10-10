@@ -1,4 +1,5 @@
 "use client";
+import {geometryClass} from "@/lib/geometry";
 
 /**
  * SOMION HQ - CALL STAGE
@@ -12,6 +13,8 @@
  * the thing actually does.
  */
 
+import {RecordingReference} from "./RecordingReference";
+import {Badge} from "@orgtik/ui";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   ChatCircle,
@@ -169,7 +172,7 @@ export function CallStage({
 
   const participants = meeting.participantIds;
   /* The person who started the meeting (its first participant), or a moderator. */
-  const isHost = participants[0] === me.id || can.moderate;
+  const isHost = (meeting.hostId?meeting.hostId===me.id:participants[0]===me.id)||can.moderate;
   const stopMedia = () => {
     camera.stop();
     share.stop();
@@ -181,13 +184,14 @@ export function CallStage({
   const remoteShare = meeting.sharingUserId && meeting.sharingUserId !== me.id ? meeting.sharingUserId : null;
 
   return (
-    <div className="flex min-h-0 flex-1 flex-col" style={{ background: "var(--color-paper-900)" }}>
+    <div className={"flex min-h-0 flex-1 flex-col "+("ch-background-db4104")} >
+      <p className="px-4 pt-3"><Badge>{t("v3.sampleCall","Local sample call · no live media service")}</Badge></p>
       <header className="flex shrink-0 items-center justify-between gap-3 px-4 py-2.5">
         <div className="flex min-w-0 items-baseline gap-2.5">
-          <h1 className="truncate text-[14px] font-semibold" style={{ color: "var(--color-paper-100)" }}>
+          <h1 className={"truncate text-body-sm font-semibold "+("ch-color-343ada")} >
             <bdi>{meeting.title}</bdi>
           </h1>
-          <span className="tabular text-[12px]" style={{ color: "var(--color-paper-500)" }}>
+          <span className={"tabular text-caption "+("ch-color-1a360f")} >
             {formatDuration(seconds)}
           </span>
         </div>
@@ -195,13 +199,7 @@ export function CallStage({
           <Chip tone="danger">
             <span
               aria-hidden="true"
-              style={{
-                width: 7,
-                height: 7,
-                borderRadius: "var(--radius-chip)",
-                background: "var(--color-danger-600)",
-                display: "inline-block",
-              }}
+              className={"ch-width-0b4791"+' '+"ch-height-ba2ef8"+' '+"ch-border-radius-189003"+' '+"ch-background-adbce8"+' '+"ch-display-60e32d"}
             />
             {t("call.recording", "Recording")}
           </Chip>
@@ -209,6 +207,7 @@ export function CallStage({
         {recording === "processing" && <Chip>{t("call.processing", "Processing recording")}</Chip>}
       </header>
 
+      {recording==="processing"||recording==="ready"?<div className="px-4"><RecordingReference meeting={meeting}/></div>:null}
       <div className="flex min-h-0 flex-1">
         <div className="relative flex min-h-0 min-w-0 flex-1 flex-col p-3">
           {inviting !== "closed" && can.inviteGuests && (
@@ -224,22 +223,18 @@ export function CallStage({
               urgent than anything else on this screen. */}
           {waiting.length > 0 && (
             <div
-              className="mb-3 flex flex-wrap items-center gap-3 px-3 py-2.5"
-              style={{
-                background: "var(--color-paper-800)",
-                borderRadius: "var(--radius-card)",
-                border: "1px solid var(--color-paper-700)",
-              }}
+              className={"mb-3 flex flex-wrap items-center gap-3 px-3 py-2.5 "+("ch-background-ea65cd"+' '+"ch-border-radius-8d459a"+' '+"ch-border-9c1a9f")}
+
             >
               {waiting.map((g) => (
                 <div key={g.email} className="flex flex-1 items-center gap-2.5">
                   <Avatar name={g.name} initials={initialsOf(g.name)} tint={3} size={28} guest hideStatus />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-[13px] font-medium" style={{ color: "var(--color-paper-100)" }}>
+                    <p className={"truncate text-body-sm font-medium "+("ch-color-343ada")} >
                       {t("call.waiting", "{name} is waiting", { name: g.name })}
                     </p>
                     {g.company && (
-                      <p className="truncate text-[11.5px]" style={{ color: "var(--color-paper-500)" }}>
+                      <p className={"truncate text-caption "+("ch-color-1a360f")} >
                         {g.company}
                       </p>
                     )}
@@ -247,7 +242,7 @@ export function CallStage({
                   <Button variant="primary" size="sm" onClick={() => admitGuest(meeting.id, g.email)}>
                     {t("call.admit", "Admit")}
                   </Button>
-                  <Button size="sm" variant="ghost" onClick={() => declineGuest(meeting.id, g.email)} style={{ color: "var(--color-paper-100)" }}>
+                  <Button size="sm" variant="ghost" onClick={() => declineGuest(meeting.id, g.email)} className={"ch-color-343ada"} >
                     {t("call.decline", "Decline")}
                   </Button>
                 </div>
@@ -259,11 +254,11 @@ export function CallStage({
             /* Someone else's screen: the view from the other side of the
                presenter. The share fills the stage; people become a strip. */
             <div className="flex min-h-0 flex-1 flex-col gap-2">
-              <div className="relative min-h-0 flex-1 overflow-hidden" style={{ background: "var(--color-paper-950)", borderRadius: "var(--radius-card)" }}>
+              <div className={"relative min-h-0 flex-1 overflow-hidden "+("ch-background-781b0e"+' '+"ch-border-radius-8d459a")} >
                 <RemoteShare title={meeting.title} />
                 <span
-                  className="absolute start-3 top-3 px-2 py-1 text-[11.5px] font-medium"
-                  style={{ background: "var(--color-paper-900)", color: "var(--color-paper-100)", borderRadius: "var(--radius-chip)" }}
+                  className={"absolute start-3 top-3 px-2 py-1 text-caption font-medium "+("ch-background-db4104"+' '+"ch-color-343ada"+' '+"ch-border-radius-189003")}
+
                 >
                   {t("call.theirShare", "{name} is sharing their screen", { name: sharer?.name ?? "" })}
                 </span>
@@ -280,8 +275,8 @@ export function CallStage({
           ) : sharing ? (
             <div className="flex min-h-0 flex-1 flex-col gap-2">
               <div
-                className="relative min-h-0 flex-1 overflow-hidden"
-                style={{ background: "var(--color-paper-950)", borderRadius: "var(--radius-card)" }}
+                className={"relative min-h-0 flex-1 overflow-hidden "+("ch-background-781b0e"+' '+"ch-border-radius-8d459a")}
+
               >
                 <video
                   ref={shareRef}
@@ -291,8 +286,8 @@ export function CallStage({
                   aria-label={t("call.yourScreen", "Your shared screen")}
                 />
                 <span
-                  className="absolute start-3 top-3 px-2 py-1 text-[11.5px] font-medium"
-                  style={{ background: "var(--color-paper-900)", color: "var(--color-paper-100)", borderRadius: "var(--radius-chip)" }}
+                  className={"absolute start-3 top-3 px-2 py-1 text-caption font-medium "+("ch-background-db4104"+' '+"ch-color-343ada"+' '+"ch-border-radius-189003")}
+
                 >
                   {t("call.youAreSharing", "You are sharing your screen")}
                 </span>
@@ -307,7 +302,7 @@ export function CallStage({
               </div>
             </div>
           ) : panel === "board" ? (
-            <div className="min-h-0 flex-1 overflow-hidden" style={{ borderRadius: "var(--radius-card)" }}>
+            <div className={"min-h-0 flex-1 overflow-hidden "+("ch-border-radius-8d459a")} >
               <BoardScreen meetingId={meeting.id} embedded />
             </div>
           ) : view === "speaker" && participants.length > 1 ? (
@@ -337,11 +332,8 @@ export function CallStage({
             </div>
           ) : (
             <div
-              className="grid min-h-0 flex-1 gap-2"
-              style={{
-                gridTemplateColumns: `repeat(${gridColumns(participants.length + admitted.length)}, minmax(0, 1fr))`,
-                gridAutoRows: "1fr",
-              }}
+              className={("grid min-h-0 flex-1 gap-2 "+("ch-grid-auto-rows-5a7d9d"))+" "+(geometryClass({gridTemplateColumns:`repeat(${gridColumns(participants.length + admitted.length)}, minmax(0, 1fr))`}))}
+
             >
               <SelfTile camera={camera} selfRef={selfRef} muted={muted} />
               {participants
@@ -358,14 +350,14 @@ export function CallStage({
 
         {(panel === "people" || panel === "chat") && (
           <aside
-            className="hidden w-[300px] shrink-0 flex-col lg:flex"
-            style={{ background: "var(--color-surface)", borderInlineStart: "1px solid var(--color-hairline)" }}
+            className={"hidden w-[300px] shrink-0 flex-col lg:flex "+("ch-background-751d03"+' '+"ch-border-inline-start-c791b2")}
+
           >
             <header
-              className="flex items-center justify-between px-3 py-2.5"
-              style={{ borderBottom: "1px solid var(--color-hairline)" }}
+              className={"flex items-center justify-between px-3 py-2.5 "+("ch-border-bottom-9cb2f4")}
+
             >
-              <strong className="text-[13px]">
+              <strong className="text-body-sm">
                 {panel === "people" ? t("call.people", "People") : t("call.chat", "Chat")}
               </strong>
               <Button variant="ghost" size="sm" iconOnly label={t("common.close", "Close")} onClick={() => setPanel("none")}>
@@ -379,7 +371,7 @@ export function CallStage({
                     so everyone sees it and the person is told. */}
                 {can.moderate && participants.length > 1 && (
                   <div className="flex items-center justify-between gap-2 px-2 pb-2">
-                    <span className="text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                    <span className={"text-caption "+("ch-color-4a0211")} >
                       {t("call.hostControls", "Host controls")}
                     </span>
                     <Button size="sm" onClick={() => participants.filter((id) => id !== me.id).forEach((id) => setServerMute(id, true))}>
@@ -394,7 +386,7 @@ export function CallStage({
                   {admitted.map((g) => (
                     <li key={g.email} className="flex items-center gap-2 px-2 py-1.5">
                       <Avatar name={g.name} initials={initialsOf(g.name)} tint={3} size={28} guest hideStatus />
-                      <span className="flex-1 text-[13px]"><bdi>{g.name}</bdi></span>
+                      <span className="flex-1 text-body-sm"><bdi>{g.name}</bdi></span>
                       <Chip>{t("call.guest", "Guest")}</Chip>
                     </li>
                   ))}
@@ -437,7 +429,7 @@ export function CallStage({
         }
       >
         <div className="flex flex-col gap-3">
-          <p className="text-[13.5px] leading-relaxed" style={{ color: "var(--color-ink)", maxWidth: "56ch" }}>
+          <p className={"text-body-sm leading-relaxed "+("ch-color-7f7330"+' '+"ch-max-width-cc7c20")} >
             {t(
               "call.consentBody",
               "Everyone in the call, including guests, is shown a recording indicator for as long as it runs. Ask them out loud before you start.",
@@ -449,13 +441,13 @@ export function CallStage({
               t("call.consentPoint2", "It follows the workspace retention setting like any other file."),
               t("call.consentPoint3", "Anyone in the call can ask you to stop, and stopping is immediate."),
             ].map((line) => (
-              <li key={line} className="flex gap-2 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+              <li key={line} className={"flex gap-2 text-body-sm "+("ch-color-4a0211")} >
                 <span aria-hidden="true">&middot;</span>
                 <span>{line}</span>
               </li>
             ))}
           </ul>
-          <p className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <p className={"text-body-sm "+("ch-color-4a0211")} >
             {t("call.consentWho", "In the call: {names}.", {
               names: [
                 ...participants.map((id) => allUsers.find((u) => u.id === id)?.name ?? id),
@@ -574,7 +566,7 @@ export function CallStage({
             open={confirmEnd}
             onOpenChange={setConfirmEnd}
             trigger={
-              <Button variant="ghost" className="ms-2" style={{ color: "var(--color-paper-100)" }}>
+              <Button variant="ghost" className={"ms-2 "+("ch-color-343ada")} >
                 {t("call.endForAll", "End for everyone")}
               </Button>
             }
@@ -634,15 +626,15 @@ function SelfTile({
           ref={selfRef}
           muted
           playsInline
-          className="h-full w-full object-cover"
-          style={{ transform: "scaleX(-1)" }}
+          className={"h-full w-full object-cover "+("ch-transform-ff7784")}
+
           aria-label={t("call.yourCamera", "Your camera")}
         />
       ) : (
         <div className="flex h-full w-full flex-col items-center justify-center gap-2">
           <Avatar name={me.name} initials={me.initials} tint={me.tint} size={small ? 28 : 56} hideStatus />
           {!small && camera.error && (
-            <p className="px-3 text-center text-[11.5px]" style={{ color: "var(--color-paper-500)" }}>
+            <p className={"px-3 text-center text-caption "+("ch-color-1a360f")} >
               {camera.error === "denied"
                 ? t("call.cameraDenied", "Camera blocked. Audio still works.")
                 : t("call.cameraMissing", "No camera found. Audio still works.")}
@@ -682,17 +674,8 @@ function GuestTile({ name, company }: { name: string; company?: string }) {
 function TileFrame({ children, small = false }: { children: React.ReactNode; small?: boolean }) {
   return (
     <div
-      className="relative overflow-hidden"
-      style={{
-        background: "var(--color-paper-800)",
-        borderRadius: "var(--radius-card)",
-        minHeight: small ? 84 : 120,
-        /* A large tile fills whatever it is given: a grid cell, or the whole
-           stage in speaker view. */
-        height: small ? undefined : "100%",
-        width: small ? 132 : undefined,
-        flexShrink: small ? 0 : undefined,
-      }}
+      className={"relative overflow-hidden "+("ch-background-ea65cd"+' '+"ch-border-radius-8d459a"+' '+(small?"ch-min-height-511dd9":"ch-min-height-2faa5e")+' '+(small?"":"ch-height-622640")+' '+(small?"ch-width-7fd2ee":"")+' '+(small?"ch-flex-shrink-6ee066":""))}
+
     >
       {children}
     </div>
@@ -704,19 +687,19 @@ function TileLabel({ name, muted, guest }: { name: string; muted?: boolean; gues
   return (
     <div className="absolute bottom-2 start-2 flex items-center gap-1.5">
       <span
-        className="max-w-[180px] truncate px-2 py-0.5 text-[11.5px] font-medium"
-        style={{ background: "var(--color-paper-950)", color: "var(--color-paper-100)", borderRadius: "var(--radius-chip)" }}
+        className={"max-w-[180px] truncate px-2 py-0.5 text-caption font-medium "+("ch-background-781b0e"+' '+"ch-color-343ada"+' '+"ch-border-radius-189003")}
+
       >
         {name}
       </span>
       {guest && <Chip>{t("call.guest", "Guest")}</Chip>}
       {muted && (
         <span
-          className="flex items-center justify-center"
-          style={{ width: 20, height: 20, borderRadius: "var(--radius-chip)", background: "var(--color-danger-600)" }}
+          className={"flex items-center justify-center "+("ch-width-0f6c53"+' '+"ch-height-44a2f4"+' '+"ch-border-radius-189003"+' '+"ch-background-adbce8")}
+
           title={t("call.muted", "Muted")}
         >
-          <MicrophoneSlash size={11} weight="fill" aria-hidden="true" style={{ color: "var(--color-ink-inverse)" }} />
+          <MicrophoneSlash size={11} weight="fill" aria-hidden="true" className={"ch-color-7b8a5e"}  />
         </span>
       )}
     </div>
@@ -732,12 +715,12 @@ function PersonRow({ userId, isMe, handUp, canMute }: { userId: string; isMe: bo
   return (
     <li className="flex items-center gap-2 px-2 py-1.5">
       <Avatar name={user.name} initials={user.initials} tint={user.tint} size={28} hideStatus />
-      <span className="flex-1 text-[13px]">
+      <span className="flex-1 text-body-sm">
         <bdi>{user.name}</bdi>
-        {isMe && <span style={{ color: "var(--color-ink-subtle)" }}> ({t("office.you", "you")})</span>}
-        {muted && <span style={{ color: "var(--color-ink-subtle)" }}> · {t("call.mutedByHost", "muted")}</span>}
+        {isMe && <span className={"ch-color-094083"} > ({t("office.you", "you")})</span>}
+        {muted && <span className={"ch-color-094083"} > · {t("call.mutedByHost", "muted")}</span>}
       </span>
-      {handUp && <Hand size={14} weight="fill" aria-hidden="true" style={{ color: "var(--color-presence-busy)" }} />}
+      {handUp && <Hand size={14} weight="fill" aria-hidden="true" className={"ch-color-3d9ecb"}  />}
       {canMute && !isMe && (
         <Button size="sm" variant="ghost" onClick={() => setServerMute(userId, !muted)}>
           {muted ? t("call.unmute", "Unmute") : t("call.mute", "Mute")}
@@ -758,7 +741,7 @@ function MeetingChat({ channelId }: { channelId: string }) {
 
   if (messages.length === 0) {
     return (
-      <p className="p-2 text-[12.5px] leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+      <p className={"p-2 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
         {t("call.chatEmpty", "Messages sent here stay with the meeting, and are still here afterwards.")}
       </p>
     );
@@ -806,19 +789,8 @@ function DockButton({
         ? { "aria-pressed": active }
         : { "aria-expanded": expanded, ...(expanded && controls ? { "aria-controls": controls } : {}) })}
       title={label}
-      className="hq-btn flex items-center justify-center"
-      style={{
-        width: 40,
-        height: 40,
-        borderRadius: "var(--radius-control)",
-        background: danger
-          ? "var(--color-danger-600)"
-          : active
-            ? "var(--color-paper-700)"
-            : "var(--color-paper-800)",
-        color: "var(--color-paper-100)",
-        border: "none",
-      }}
+      className={"hq-btn flex items-center justify-center "+("ch-width-d6db40"+' '+"ch-height-3a4095"+' '+"ch-border-radius-332348"+' '+(danger?"ch-background-adbce8":(active?"ch-background-f7c51f":"ch-background-ea65cd"))+' '+"ch-color-343ada"+' '+"ch-border-2eda1d")}
+
     >
       {children}
     </button>
@@ -853,25 +825,25 @@ function RemoteShare({ title }: { title: string }) {
   return (
     <div className="flex h-full w-full items-center justify-center p-6" aria-hidden="true">
       <div
-        className="flex h-full w-full max-w-[880px] flex-col overflow-hidden"
-        style={{ background: "var(--color-surface)", borderRadius: "var(--radius-control)", boxShadow: "var(--shadow-panel)" }}
+        className={"flex h-full w-full max-w-[880px] flex-col overflow-hidden "+("ch-background-751d03"+' '+"ch-border-radius-332348"+' '+"ch-box-shadow-85f924")}
+
       >
-        <div className="flex items-center gap-2 px-3 py-2" style={{ borderBottom: "1px solid var(--color-hairline)" }}>
+        <div className={"flex items-center gap-2 px-3 py-2 "+("ch-border-bottom-9cb2f4")} >
           {[0, 1, 2].map((i) => (
-            <span key={i} style={{ width: 8, height: 8, borderRadius: "var(--radius-chip)", background: "var(--color-paper-400)" }} />
+            <span key={i} className={"ch-width-0c3340"+' '+"ch-height-83ca52"+' '+"ch-border-radius-189003"+' '+"ch-background-7731cf"}  />
           ))}
-          <span className="ms-2 text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <span className={"ms-2 text-caption "+("ch-color-4a0211")} >
             {title} · invoice-template-v2.fig
           </span>
         </div>
         <div className="flex flex-1 flex-col gap-3 p-6">
-          <span style={{ width: "42%", height: 18, borderRadius: 6, background: "var(--color-paper-300)" }} />
+          <span className={"ch-width-6ac132"+' '+"ch-height-ad1b79"+' '+"ch-border-radius-edd97e"+' '+"ch-background-3a24e5"}  />
           {[92, 84, 88, 60, 76, 40].map((w, i) => (
-            <span key={i} style={{ width: `${w}%`, height: 10, borderRadius: 5, background: "var(--color-surface-sunken)" }} />
+            <span key={i} className={("ch-height-6a8e05"+' '+"ch-border-radius-edd97e"+' '+"ch-background-314b28")+" "+(geometryClass({width:`${w}%`}))}  />
           ))}
           <div className="mt-2 grid grid-cols-3 gap-3">
             {[0, 1, 2].map((i) => (
-              <span key={i} style={{ height: 72, borderRadius: 8, background: "var(--color-surface-sunken)" }} />
+              <span key={i} className={"ch-height-38bc9b"+' '+"ch-border-radius-edd97e"+' '+"ch-background-314b28"}  />
             ))}
           </div>
         </div>

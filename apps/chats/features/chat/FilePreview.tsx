@@ -10,12 +10,13 @@ import { openFileReference } from "@/lib/open-file-reference";
 import { downloadReference, fileRequest, fileAuthority, useFileAuthority } from "@/lib/file-references";
 import type { FileRef } from "@/entities";
 
-export function FilePreview({ file, messageId, open, onClose, context }: { file: FileRef | null; messageId: string; open: boolean; onClose: () => void; context?: string }) {
+export function FilePreview({ file, messageId,targetType="message", open, onClose, context }: { file: FileRef | null; messageId: string;targetType?:"message"|"meeting"; open: boolean; onClose: () => void; context?: string }) {
   const t = useT(), authority = useFileAuthority();
   const format = useFormatter();
   const { locale } = useI18n();
   const [opening, setOpening] = useState(false), [openError, setOpenError] = useState(false);
   const current = useWorkspace(s => {
+    if(targetType==="meeting")return [...s.meetings,...s.pastMeetings].find(m=>m.id===messageId)?.recordingFile;
     const message = s.messages.find(m => m.id === messageId) || Object.values(s.threadReplies).flat().find(m => m.id === messageId);
     return message?.attachments.find(f => f.id === file?.id);
   });
@@ -40,7 +41,7 @@ export function FilePreview({ file, messageId, open, onClose, context }: { file:
     {loaded && current?.reference ? <Button variant="primary" size="sm" disabled={opening} onClick={() => { const signature = fileAuthority(); setOpening(true); setOpenError(false); void openFileReference(current.reference!, locale).catch(() => { if (signature === fileAuthority()) setOpenError(true); }).finally(() => { if (signature === fileAuthority()) setOpening(false); }); }}><ArrowSquareOut size={14} aria-hidden />{t("file.openInManager", "Open in Files")}</Button> : null}
   </>}>
     {denied ? <div className="flex flex-col gap-3"><p role="alert" className="text-body-sm text-fg-muted">{t("fileReferences.unavailableBody", "The file was removed or your current permissions no longer allow access.")}</p><Button size="sm" onClick={() => setRevision(v => v + 1)}>{t("fileReferences.retry", "Retry")}</Button></div> : !loaded ? <p role="status" className="text-body-sm text-fg-muted">{t("fileReferences.loading", "Loading file…")}</p> : <div className="flex flex-col gap-4">
-      {current!.mimetype?.startsWith("image/") ? <img src={loaded} alt={current!.name} className="max-h-[55dvh] w-full rounded-field object-contain" /> : current!.mimetype === "application/pdf" ? <iframe title={current!.name} src={loaded} className="h-[50dvh] w-full rounded-field border border-line" /> : <div className="grid h-32 place-items-center rounded-field bg-sunken"><FileText size={42} aria-hidden /></div>}
+      {current!.mimetype?.startsWith("image/") ? <img src={loaded} alt={current!.name} className="max-h-[55dvh] w-full rounded-field object-contain" /> : current!.mimetype === 'video/mp4'?<video controls preload='metadata' src={loaded} aria-label={current!.name} className='max-h-[55dvh] w-full rounded-field'/>:current!.mimetype === "application/pdf" ? <iframe title={current!.name} src={loaded} className="h-[50dvh] w-full rounded-field border border-line" /> : <div className="grid h-32 place-items-center rounded-field bg-sunken"><FileText size={42} aria-hidden /></div>}
       <div className="flex flex-wrap items-center gap-2 text-body-sm"><bdi className="min-w-0 flex-1 break-all">{current!.name}</bdi><span className="text-fg-muted">{typeof current!.bytes === "number" ? format.bytes(current!.bytes) : current!.size}</span></div>
       {context ? <p className="text-caption text-fg-muted">{t("file.sharedIn", "Shared in")}: {context}</p> : null}
       {downloadError ? <p role="alert" className="text-body-sm text-danger">{t("fileReferences.downloadError", "The file could not be downloaded. Check your access and retry.")}</p> : null}

@@ -22,7 +22,8 @@ export function SuiteProvider({ children, ...options }: SuiteProviderProps) {
 }
 const canRead = (access?: string) => Boolean(access && !["no_access", "not_subscribed"].includes(access));
 export function connectionState(snapshot: SuiteSnapshot | null, source: ToolKey | undefined, target: ToolKey, write = true, targetWrite = false): ConnectionState {
-  if (snapshot?.actor.readOnly || snapshot?.workspace.state === "suspended" || source && snapshot?.tools[source]?.access === "read_only") return "read_only";
+  const writing = write || targetWrite;
+  if (writing && (snapshot?.actor.readOnly || snapshot?.workspace.state === "suspended" || source && snapshot?.tools[source]?.access === "read_only")) return "read_only";
   if (source) {
     const origin = snapshot?.tools[source];
     if (!origin || origin.access === "not_subscribed") return "not_subscribed";
@@ -34,7 +35,7 @@ export function connectionState(snapshot: SuiteSnapshot | null, source: ToolKey 
   if (!tool || tool.access === "not_subscribed") return "not_subscribed";
   if (tool.access === "no_access" && !projection) return tool.reason === "unsupported_tool_role" ? "role_denied" : "no_access";
   if (projection && snapshot?.member.role === "guest") return "role_denied";
-  if (tool.access === "read_only") return "read_only";
+  if (writing && tool.access === "read_only") return "read_only";
   if (write && source && !snapshot?.tools[source]?.canWrite) return "role_denied";
   if (targetWrite && !tool.canWrite) return "role_denied";
   if (source && source !== target) {

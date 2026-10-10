@@ -45,29 +45,17 @@ export function AccentPicker() {
                 move(-1);
               }
             }}
-            className="hq-btn flex flex-col items-center gap-1.5 px-2 pb-1.5 pt-2"
-            style={{
-              minWidth: 60,
-              borderRadius: "var(--radius-control)",
-              background: checked ? "var(--color-surface-sunken)" : "transparent",
-            }}
+            className={"hq-btn flex flex-col items-center gap-1.5 px-2 pb-1.5 pt-2 "+("ch-min-width-71f5ad"+' '+"ch-border-radius-332348"+' '+(checked?"ch-background-314b28":"ch-background-a8869d"))}
+
           >
             <span
               aria-hidden="true"
-              className="relative inline-flex items-center justify-center rounded-full"
-              style={{
-                width: 28,
-                height: 28,
-                background: a.swatch,
-                boxShadow: checked
-                  ? "0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-ink)"
-                  : "var(--shadow-lit), 0 1px 2px rgb(var(--shadow-ink) / 0.18)",
-                transition: "box-shadow var(--duration-state) var(--ease-out-soft)",
-              }}
+              className={("relative inline-flex items-center justify-center rounded-full "+("ch-width-a81a9e"+' '+"ch-height-3a8bc5"+' '+(checked?"ch-box-shadow-03116c":"ch-box-shadow-867c4f")+' '+"ch-transition-c980fa"))+" "+('ch-swatch-'+a.id)}
+
             >
-              {checked && <Check size={14} weight="bold" style={{ color: "var(--ot-color-plum-50)" }} />}
+              {checked && <Check size={14} weight="bold" className={"ch-color-5a8fcf"}  />}
             </span>
-            <span className="text-[11.5px] font-medium" style={{ color: checked ? "var(--color-ink)" : "var(--color-ink-muted)" }}>
+            <span className={"text-caption font-medium "+((checked?"ch-color-7f7330":"ch-color-4a0211"))} >
               <bdi>{t(`accent.${a.id}`, a.label)}</bdi>
             </span>
           </button>

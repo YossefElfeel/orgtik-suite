@@ -23,7 +23,7 @@ function routes(router, ctx, options) {
     if (write && (channel.archived || channel.custodyReadOnly)) reject(423, 'channel_read_only', 'This conversation is read-only.');
     return channel;
   }
-  const guests=require('./chats/guest')({db,seq,workspace:{id:identity.workspaceId,name:db.settings.name},actor});
+  const guests=require('./chats/guest')({db,seq,workspace:{id:identity.workspaceId,name:db.settings.name},actor,resolveHost:id=>identity.findUser(id)});
   const v3=require('./chats/v3')({db,seq,identity,ctx,actor,channelFor,guests});
   const whiteboards = require('./chats/whiteboards').createWhiteboards({ db, seq, identity, ctx, actor, channelFor });
   function messageFor(id, who) {
@@ -53,7 +53,7 @@ function routes(router, ctx, options) {
     });
     return out;
   }
-  function meetingOut(meeting){const out=clone(meeting);if(meeting.recordingFile?.reference)out.recordingFile=fileReferences.chatAttachment(meeting.recordingFile,ctx.sharedFiles?.project(meeting.recordingFile.reference),{type:'meeting',id:meeting.id});return out;}
+  function meetingOut(meeting){const out=clone(meeting);out.guests=out.guests.map(({visitProofHash,joinOperationId,joinFingerprint,contactEmail,...guest})=>guest);if(meeting.recordingFile?.reference)out.recordingFile=fileReferences.chatAttachment(meeting.recordingFile,ctx.sharedFiles?.project(meeting.recordingFile.reference),{type:'meeting',id:meeting.id});return out;}
   const mayManage = (channel, who) => { if (channel.ownerId !== who.id && !who.admin) reject(403, 'channel_manager_required', 'Only a conversation manager can make this change.'); };
   function nextEntity(prefix, inputId, counter, rows) {
     let next = seq[counter] + 1;
@@ -101,6 +101,7 @@ function routes(router, ctx, options) {
     else if (event.type === 'message.created') channelFor(event.message?.channelId, who, true);
     else if (event.type.startsWith('message.')) {
       const message = messageFor(event.messageId, who);
+      if(event.type==='message.edited'&&db.settings.editWindowMinutes!==null&&Date.now()-Date.parse(message.createdAt)>db.settings.editWindowMinutes*60000)reject(423,'edit_window_closed','This message editing window has ended.');
       if (event.type === 'message.edited' && message.authorId !== who.id || event.type === 'message.deleted' && message.authorId !== who.id && !who.admin) reject(403, 'message_author_required', 'The current role cannot change this message.');
     }
     v3.authorize(event,who);
@@ -116,6 +117,7 @@ function routes(router, ctx, options) {
     const fingerprint = crypto.createHash('sha256').update(JSON.stringify({ actor: who.id, event })).digest('hex');
     const previous = db.processedCommands.find(row => row.id === operationId) || db.messages.find(message => message.fileOperation?.id === operationId)?.fileOperation;
     if (previous) { if (previous.fingerprint !== fingerprint) reject(409, 'operation_conflict', 'This operation ID was used for another change.'); return bootstrap(user); }
+    let createdChannelId;
     switch (event.type) {
       case 'channel.created': {
         const input = event.channel || {}, name = typeof input.name === 'string' && input.name.trim();
@@ -125,6 +127,7 @@ function routes(router, ctx, options) {
         if (input.kind === 'dm' && memberIds.length !== 2) reject(422, 'invalid_dm', 'Choose one other workspace member.');
         const { id, next } = nextEntity('c', input.id, 'channels', db.channels);
         if (!codec.id(id) || db.channels.some(channel => channel.id === id)) reject(409, 'channel_id_conflict', 'Conversation ID is already used.');
+        createdChannelId = id;
         db.channels.push({ id, name, kind: input.kind, ...(input.topic ? { topic: input.topic.trim() } : {}), memberIds, ownerId: who.id, unread: 0, mentions: 0, archived: false, notify: db.settings.channelNotifyDefault }); seq.channels = next; break;
       }
       case 'channel.updated': {
@@ -163,7 +166,7 @@ function routes(router, ctx, options) {
       case 'meeting.guest_admitted': case 'meeting.guest_declined': guests.decide(user,event);break;
       default: if(v3.command(event,who))break; reject(501, 'chat_flow_deferred', 'This simulated flow is deferred; workspace conversations are available.');
     }
-    v3.activity(event,who);seq.revision++; db.processedCommands.push({ id: operationId, fingerprint }); db.processedCommands = db.processedCommands.slice(-256); return bootstrap(user);
+    v3.activity(event,who,createdChannelId);seq.revision++; db.processedCommands.push({ id: operationId, fingerprint }); db.processedCommands = db.processedCommands.slice(-256); return bootstrap(user);
   }
   const handle = (fn, status = 200) => (req, res) => { const user = identity.requireUser(req, res); if (!user) return; try { res.status(status).json({ success: true, data: fn(req, user) }); } catch (error) { if (!error.status) throw error; res.status(error.status).json({ success: false, code: error.code, message: error.message }); } };
   router.get('/api/hq/whiteboards', handle((req, user) => whiteboards.list(user, req.query)));

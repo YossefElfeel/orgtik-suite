@@ -96,12 +96,15 @@ importers:
       '@excalidraw/excalidraw':
         specifier: 0.18.1
         version: 0.18.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(immer@11.1.21)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      '@hookform/resolvers':
+        specifier: 5.2.2
+        version: 5.2.2(react-hook-form@7.72.0(react@19.2.8))(zod@4.3.6)
       '@internationalized/date':
         specifier: 3.12.4
         version: 3.12.4
       '@orgtik/ui':
         specifier: workspace:*
-        version: file:packages/ui(@date-fns/tz@1.5.0)(@internationalized/date@3.12.4)(@phosphor-icons/react@2.1.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tanstack/react-table@8.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/extensions@3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(date-fns@4.4.0)(next@15.5.25(@types/node@22.20.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.51.0))(react-aria-components@1.21.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-hook-form@7.89.0(@types/react@19.3.0)(react@19.2.8))(react@19.2.8)(recharts@3.10.1(@types/react@19.3.0)(react-dom@19.2.8(react@19.2.8))(react-is@19.2.8)(react@19.2.8)(redux@5.0.1))
+        version: file:packages/ui(@date-fns/tz@1.5.0)(@internationalized/date@3.12.4)(@phosphor-icons/react@2.1.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tanstack/react-table@8.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/extensions@3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(date-fns@4.4.0)(next@15.5.25(@types/node@22.20.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.51.0))(react-aria-components@1.21.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-hook-form@7.72.0(react@19.2.8))(react@19.2.8)(recharts@3.10.1(@types/react@19.3.0)(react-dom@19.2.8(react@19.2.8))(react-is@19.2.8)(react@19.2.8)(redux@5.0.1))
       '@phosphor-icons/react':
         specifier: 2.1.10
         version: 2.1.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -114,6 +117,12 @@ importers:
       react-dom:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
+      react-hook-form:
+        specifier: 7.72.0
+        version: 7.72.0(react@19.2.8)
+      zod:
+        specifier: 4.3.6
+        version: 4.3.6
       zustand:
         specifier: 5.0.15
         version: 5.0.15(@types/react@19.3.0)(immer@11.1.21)(react@19.2.8)(use-sync-external-store@1.7.0(react@19.2.8))
@@ -608,6 +617,9 @@ importers:
 
   apps/marketing:
     dependencies:
+      '@hookform/resolvers':
+        specifier: 5.4.0
+        version: 5.4.0(react-hook-form@7.76.0(react@19.2.3))(zod@3.25.76)
       '@internationalized/date':
         specifier: 3.12.4
         version: 3.12.4
@@ -620,9 +632,6 @@ importers:
       '@reduxjs/toolkit':
         specifier: 2.12.0
         version: 2.12.0(react-redux@9.3.0(@types/react@19.3.0)(react@19.2.3)(redux@5.0.1))(react@19.2.3)
-      '@somion/sos-bar':
-        specifier: 3.11.2
-        version: 3.11.2(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@tanstack/react-table':
         specifier: 8.21.3
         version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -665,6 +674,9 @@ importers:
       tailwind-merge:
         specifier: 3.7.0
         version: 3.7.0
+      zod:
+        specifier: 3.25.76
+        version: 3.25.76
     devDependencies:
       '@tailwindcss/postcss':
         specifier: 4.3.0
@@ -10662,12 +10674,26 @@ snapshots:
     optionalDependencies:
       zod: 4.3.6
 
+  '@hookform/resolvers@5.2.2(react-hook-form@7.72.0(react@19.2.8))(zod@4.3.6)':
+    dependencies:
+      '@standard-schema/utils': 0.3.0
+      react-hook-form: 7.72.0(react@19.2.8)
+    optionalDependencies:
+      zod: 4.3.6
+
   '@hookform/resolvers@5.2.2(react-hook-form@7.89.0(@types/react@19.3.0)(react@19.2.0))(zod@4.3.6)':
     dependencies:
       '@standard-schema/utils': 0.3.0
       react-hook-form: 7.89.0(@types/react@19.3.0)(react@19.2.0)
     optionalDependencies:
       zod: 4.3.6
+
+  '@hookform/resolvers@5.4.0(react-hook-form@7.76.0(react@19.2.3))(zod@3.25.76)':
+    dependencies:
+      '@standard-schema/utils': 0.3.0
+      react-hook-form: 7.76.0(react@19.2.3)
+    optionalDependencies:
+      zod: 3.25.76
 
   '@hookform/resolvers@5.4.0(react-hook-form@7.82.0(react@19.2.4))(zod@3.25.76)':
     dependencies:
@@ -11591,7 +11617,7 @@ snapshots:
       - '@tiptap/extensions'
       - date-fns
 
-  '@orgtik/ui@file:packages/ui(@date-fns/tz@1.5.0)(@internationalized/date@3.12.4)(@phosphor-icons/react@2.1.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tanstack/react-table@8.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/extensions@3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(date-fns@4.4.0)(next@15.5.25(@types/node@22.20.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.51.0))(react-aria-components@1.21.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-hook-form@7.89.0(@types/react@19.3.0)(react@19.2.8))(react@19.2.8)(recharts@3.10.1(@types/react@19.3.0)(react-dom@19.2.8(react@19.2.8))(react-is@19.2.8)(react@19.2.8)(redux@5.0.1))':
+  '@orgtik/ui@file:packages/ui(@date-fns/tz@1.5.0)(@internationalized/date@3.12.4)(@phosphor-icons/react@2.1.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tanstack/react-table@8.21.3(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/extensions@3.31.3(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3))(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(date-fns@4.4.0)(next@15.5.25(@types/node@22.20.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.51.0))(react-aria-components@1.21.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(react-dom@19.2.8(react@19.2.8))(react-hook-form@7.72.0(react@19.2.8))(react@19.2.8)(recharts@3.10.1(@types/react@19.3.0)(react-dom@19.2.8(react@19.2.8))(react-is@19.2.8)(react@19.2.8)(redux@5.0.1))':
     dependencies:
       '@base-ui/react': 1.8.0(@date-fns/tz@1.5.0)(@types/react@19.3.0)(date-fns@4.4.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@dnd-kit/core': 6.3.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -11614,7 +11640,7 @@ snapshots:
       '@types/react-dom': 19.3.0(@types/react@19.3.0)
       next: 15.5.25(@types/node@22.20.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(sass@1.51.0)
       react-aria-components: 1.21.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      react-hook-form: 7.89.0(@types/react@19.3.0)(react@19.2.8)
+      react-hook-form: 7.72.0(react@19.2.8)
       recharts: 3.10.1(@types/react@19.3.0)(react-dom@19.2.8(react@19.2.8))(react-is@19.2.8)(react@19.2.8)(redux@5.0.1)
     transitivePeerDependencies:
       - '@date-fns/tz'
@@ -20181,6 +20207,10 @@ snapshots:
     dependencies:
       react: 19.2.4
 
+  react-hook-form@7.72.0(react@19.2.8):
+    dependencies:
+      react: 19.2.8
+
   react-hook-form@7.76.0(react@19.2.3):
     dependencies:
       react: 19.2.3
@@ -20200,13 +20230,6 @@ snapshots:
       react: 19.2.0
     optionalDependencies:
       '@types/react': 19.3.0
-
-  react-hook-form@7.89.0(@types/react@19.3.0)(react@19.2.8):
-    dependencies:
-      react: 19.2.8
-    optionalDependencies:
-      '@types/react': 19.3.0
-    optional: true
 
   react-is@16.13.1: {}
 
