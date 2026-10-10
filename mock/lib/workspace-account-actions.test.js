@@ -29,6 +29,14 @@ test('personal account remains usable after leaving the last workspace', { timeo
     assert.equal(S.workspace(ws.id).members.find(row => row.id === membership.id).status, 'suspended');
     good(await call('/api/suite/account/actions/member.status', initial, 'POST', { memberId: membership.id, status: 'active' }));
     assert.equal(S.workspace(ws.id).members.find(row => row.id === membership.id).status, 'active');
+    const staff = good(await call('/api/auth/login', null, 'POST', { email: 'mona.adel@orgtik.test', password: 'Local@2026', mode: 'staff', target: 'admin' }));
+    const viewed = good(await call(`/api/auth/login-as/${account.user.id}`, staff.tokens.accessToken, 'POST', { workspaceId: ws.id }));
+    assert.equal(viewed.workspaceContext.actor.readOnly, true);
+    const audit = good(await call('/api/auth/account/audit', initial));
+    assert.ok(audit.some(row => row.action === 'view_as_started' && row.actorUserId === staff.user.id && row.effectiveUserId === account.user.id && row.workspaceId === ws.id));
+    assert.equal((await call('/api/auth/account/actions/workspace.create', viewed.tokens.accessToken, 'POST', { name: 'Denied preview workspace' })).status, 423);
+    good(await call('/api/auth/exit-impersonation', viewed.tokens.accessToken, 'POST', {}));
+    assert.ok(good(await call('/api/auth/account/audit', initial)).some(row => row.action === 'view_as_ended' && row.actorUserId === staff.user.id && row.effectiveUserId === account.user.id));
     // Fixture membership is a member of its sole workspace; the actual HTTP leave rotates context.
     S.workspace(ws.id).members[0].role = 'member';
     const left = good(await call('/api/suite/account/actions/membership.leave', initial, 'POST', {}));

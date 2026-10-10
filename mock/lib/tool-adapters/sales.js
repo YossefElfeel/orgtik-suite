@@ -100,6 +100,9 @@ function createWorkspaceRuntime(input, appModule) {
     }
     return { ...result, projectId: project.id };
   }
-  return { router, exportSnapshot, bootstrap, receiveWebsiteIntake, usage: () => { open(); return [{ key: "contacts", used: S.db.customers.length }, { key: "projects", used: S.db.projects.length }, { key: "leads", used: S.db.leads.length }]; }, transferOwnership, applyCommitted, dueTransitions: () => { open(); return S.db.subscriptions.flatMap(row => row.status === "cancelled" ? [] : row.installments.filter(item => !item.invoiceId && item.status !== "paid" && new Date(item.dueDate).getTime() <= (input.clock.nowMs?.() ?? input.clock.now()) + 30 * 864e5).map(item => ({ kind: "sales.schedule.due", subscriptionId: row.id, installmentNumber: item.number }))); }, stageDueTransitions() { open(); S.billing.refreshSchedules({ system: true }); }, close() { closed = true; S.io = null; } };
+  return { router, exportSnapshot, bootstrap, receiveWebsiteIntake,
+    provisioningCandidate: (context, id) => { open(); return require('../../apps/sales/v3')(S).provisioningCandidate(context, id); },
+    recordProvisioning: (context, id, receipt) => { open(); return require('../../apps/sales/v3')(S).recordProvisioning(context, id, receipt); },
+    usage: () => { open(); return [{ key: "contacts", used: S.db.customers.length }, { key: "projects", used: S.db.projects.length }, { key: "leads", used: S.db.leads.length }]; }, transferOwnership, applyCommitted, dueTransitions: () => { open(); return S.db.subscriptions.flatMap(row => row.status === "cancelled" ? [] : row.installments.filter(item => !item.invoiceId && item.status !== "paid" && new Date(item.dueDate).getTime() <= (input.clock.nowMs?.() ?? input.clock.now()) + 30 * 864e5).map(item => ({ kind: "sales.schedule.due", subscriptionId: row.id, installmentNumber: item.number }))); }, stageDueTransitions() { open(); S.billing.refreshSchedules({ system: true }); }, close() { closed = true; S.io = null; } };
 }
 module.exports = { createWorkspaceRuntime, SCHEMA, COUNTERS, LISTS };

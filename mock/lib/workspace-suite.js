@@ -96,6 +96,8 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
   }));
   const services = require('../apps/sales/service-catalog');
   app.get('/api/suite/services/catalog', read(() => services.catalog(S, principal)));
+  app.get('/api/suite/crm/projects/:id/provisioning', read(req => runtimeFor('crm').provisioningCandidate(currentContext(), req.params.id)));
+  app.post('/api/suite/crm/projects/:id/provision', write(req => require('./workspace-crm-provisioning').provision({ S, identity, principal, context: currentContext(), runtime: runtimeFor('crm', true), projectId: req.params.id, body: req.body, operationId: req.get('idempotency-key') || req.body.operationId })));
   app.patch('/api/suite/services/catalog/offers/:id', write(req => services.saveOffer(S, principal, req.params.id, req.body)));
   app.patch('/api/suite/services/catalog/bundles/:id', write(req => services.saveBundle(S, principal, req.params.id, req.body)));
   app.post('/api/suite/services/catalog/publish', write(req => services.publish(S, principal, req.get('idempotency-key') || req.body.operationId, { effectiveAt: req.body.effectiveAt })));

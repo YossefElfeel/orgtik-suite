@@ -13,6 +13,7 @@ function createAccountActions({ S, identity, principal, workspace, sessionStore,
   };
   return { async execute(kind, body = {}) {
     if (kind === 'sessions.list') return sessionList();
+    if (kind === 'audit.list') return S.db.audit.filter(row => workspace ? row.workspaceId === workspace.id && (['owner', 'admin'].includes(member?.role) || row.by === actor.key || row.effectiveUserId === actor.id) : row.by === actor.key).slice(0, 300).map((row, index) => ({ id: row.id || `${row.at}:${index}`, action: row.action, target: row.target, workspaceId: row.workspaceId || null, actorUserId: row.actorUserId || identity.findByKey(row.by)?.id || null, effectiveUserId: row.effectiveUserId || null, by: row.by, at: row.at }));
     if (['sessions.revoke', 'workspace.create', 'person.delete'].includes(kind)) ownPerson(); else writable();
     if (kind === 'sessions.revoke') {
       if (body.all !== true && body.id !== principal.session.sid) throw fail(422, 'session_action_required', 'Sign out this session or all your sessions.');

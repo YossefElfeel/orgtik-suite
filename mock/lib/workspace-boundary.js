@@ -411,6 +411,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       return { user: safeUser(p.user), readOnly: p.readOnly, workspaceId: ownContext()?.workspace.id || null, workspaces: S.db.workspaces.filter(row => !['deleted', 'cancelled'].includes(row.state) && people.memberOf(row, p.user)).map(row => ({ id: row.id, name: row.name, state: row.state, role: people.memberOf(row, p.user).role })) };
     }));
     app.get('/api/auth/account/sessions', route(req => personActions(req).execute('sessions.list')));
+    app.get('/api/auth/account/audit', route(req => personActions(req).execute('audit.list')));
     app.post('/api/auth/account/actions/:kind', route(req => {
       if (!['workspace.create', 'person.delete', 'sessions.revoke'].includes(req.params.kind)) throw failure(422, 'workspace_action_required', 'Choose a workspace for this action.');
       return personActions(req).execute(req.params.kind, req.body);
@@ -658,6 +659,11 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         // Never append the pre-reset candidate or old runtime snapshots to that epoch.
         await authority.commitPending(frame); return send(result);
       }
+      if (req.method === 'POST' && /^\/api\/auth\/login-as\/[1-9]\d*(?:$|\?)/.test(url)) {
+        const data = JSON.parse(result.rawPayload.toString('utf8')).data, viewed = data?.workspaceContext;
+        if (viewed?.actor.readOnly && principal?.actor.id === viewed.actor.userId) S.log(principal.actor.key, 'view_as_started', String(viewed.actor.effectiveUserId), { workspaceId: viewed.workspace.id, actorUserId: principal.actor.id, effectiveUserId: viewed.actor.effectiveUserId });
+      }
+      if (req.method === 'POST' && /^\/api\/auth\/exit-impersonation(?:$|\?)/.test(url) && principal?.readOnly) S.log(principal.actor.key, 'view_as_ended', String(principal.user.id), { workspaceId: principal.context.workspaceContext?.workspace.id, actorUserId: principal.actor.id, effectiveUserId: principal.user.id });
       // Approved owner-domain adapter. The existing transaction commits or rolls
       // back the platform and related CRM snapshots together; paid rows stay intact.
       if (req.method === 'POST' && /^\/v1\/app\/website-orders(?:$|\?)/.test(url)) await authority.runPrepared(frame, () => requests.run({ frame, key, req, principal: frame.principal, runtime, relatedRuntimes }, () => deliverPaidServices(requests.getStore())));
