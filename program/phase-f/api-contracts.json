@@ -497,6 +497,18 @@
     },
     {
       "app": "chats",
+      "method": "GET",
+      "path": "/api/hq/channels/discover",
+      "source": "apps/chats.js",
+      "authorization": {
+        "audience": "tool:chats",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "chats",
       "method": "POST",
       "path": "/api/hq/commands",
       "source": "apps/chats.js",
