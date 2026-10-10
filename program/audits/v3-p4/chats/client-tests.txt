@@ -1,0 +1,30 @@
+$ node --experimental-strip-types --test features/meetings/calendar-availability.test.mjs lib/open-file-reference.test.cjs lib/whiteboard-scene.test.cjs
+(node:9456) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/yosse/Projects/New%20sass/orgtik-suite-v3-chats/apps/chats/lib/calendar-availability.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\yosse\Projects\New sass\orgtik-suite-v3-chats\apps\chats\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9456) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/yosse/Projects/New%20sass/orgtik-suite-v3-chats/apps/tasks/lib/calendar-availability.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\yosse\Projects\New sass\orgtik-suite-v3-chats\apps\tasks\package.json.
+✔ Tasks calendar rejects another context, range, guest projection and invalid civil dates (4.3632ms)
+✔ Tasks calendar cache contains no HR notes, type, attachments or write controls (0.5352ms)
+✔ Chats calendar rejects another context, range, guest projection and invalid civil dates (0.5966ms)
+✔ Chats calendar cache contains no HR notes, type, attachments or write controls (0.2626ms)
+✔ workspace days and weekly start times ignore browser timezone and retain DST civil hours (37.9712ms)
+✔ calendar namespaces change on workspace, actor, tool role, membership and timezone changes (1.2128ms)
+✔ Open in Files uses the current workspace one-use handoff and registered destination (112.4667ms)
+✔ Open in Files refuses a foreign workspace reference before minting (23.5985ms)
+✔ Open in Files fences role changes during destination lookup (19.3931ms)
+✔ Open in Files discards a handoff after member epoch changes (13.2633ms)
+✔ Canvas adapter round-trips real vendor geometry through the canonical server parser without saving viewport or collaborator state (22.9143ms)
+✔ Canvas dirty fingerprint ignores reconciliation metadata but retains layer order, text, geometry and background edits (3.7984ms)
+✔ Canvas adapter rejects binary files, images, embeds, external links and custom data (1.2415ms)
+✔ Canvas scene limits measure UTF8 and aggregate element/point/text counts before submission (59.5864ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 677.7527

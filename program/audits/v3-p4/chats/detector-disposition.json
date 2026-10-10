@@ -1,0 +1,16 @@
+{
+  "initialFindings": 5,
+  "boundedFixBatch": 1,
+  "confirmation": "Source scan has no thick calendar side border or width/height transition; ordinary matrix reviews loaded final controls.",
+  "findings": [
+    {
+      "rule": "side-tab",
+      "disposition": "Calendar event borders reduced from3px to1px."
+    },
+    {
+      "rule": "layout-transition",
+      "count": 4,
+      "disposition": "Charts, device meter, speaking indicator and idle countdown retain real data dimensions while animating transforms."
+    }
+  ]
+}
