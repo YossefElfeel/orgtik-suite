@@ -20,7 +20,7 @@ function savePreferences(actor, patch) {
   actor.profile ??= {}; actor.profile.suitePreferences = { ...preferences(actor), ...clone(patch) };
   return preferences(actor);
 }
-function createSuiteRouter({ S, identity, principal, runtimeFor, command, accountActions }) {
+function createSuiteRouter({ S, identity, principal, runtimeFor, command, accountActions, serviceFiles }) {
   const app = express(); app.use(cors({ origin: true, credentials: true })); app.use(express.json({ limit: '200kb' }));
   const context = principal.context.workspaceContext, workspace = context && S.workspace(context.workspace.id), actor = identity.findUser(principal.user.id);
   if (!workspace || !actor) throw fail(403, 'workspace_required', 'Choose a workspace to continue.');
@@ -103,9 +103,25 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
   app.get('/api/suite/services/catalog/preview', read(req => services.preview(S, principal, String(req.query.country || 'CH'))));
   app.patch('/api/suite/services/catalog/policy', write(req => services.savePolicy(S, principal, req.body)));
   app.post('/api/suite/services/catalog/schedules/:id/cancel', write(req => services.cancelSchedule(S, principal, req.params.id)));
-  app.get('/api/suite/services/requests', read(() => services.requests(S, principal)));
+  const deliveryFiles = require('./service-delivery-files');
+  app.get('/api/suite/services/requests', read(() => services.requests(S, principal).map(deliveryFiles.projectRequest)));
   app.get('/api/suite/services/staff', read(() => services.staff(S, identity, principal)));
-  app.post('/api/suite/services/requests/:id/actions', write(req => services.requestAction(S, identity, principal, req.params.id, req.body)));
+  app.get('/api/suite/services/requests/:id/files', read(req => {
+    if (!services.requests(S, principal).some(row => row.id === req.params.id)) throw fail(404, 'service_request_not_found', 'This request was not found.');
+    connectors.requireConnection(workspace, currentContext(), 'crm', 'files');
+    return serviceFiles.list(req.query);
+  }));
+  app.post('/api/suite/services/requests/:id/actions', write(req => deliveryFiles.projectRequest(services.requestAction(S, identity, principal, req.params.id, req.body, { packageFile: value => { connectors.requireConnection(workspace, currentContext(), 'crm', 'files'); return serviceFiles.package(value); } }))));
+  app.get('/api/suite/services/deliveries/:id/:deliveryId/:index/content', (req, res, next) => {
+    try {
+      const row = S.db.serviceRequests.find(item => item.id === req.params.id);
+      const customer = row?.workspaceId === workspace.id && ['owner', 'admin', 'member'].includes(context.member.role);
+      if (!row || !customer && !services.requests(S, principal).some(item => item.id === row.id)) throw fail(404, 'service_request_not_found', 'This request was not found.');
+      if (!/^\d$/.test(req.params.index)) throw fail(404, 'delivery_file_not_found', 'This delivery file was not found.');
+      const file = row.deliveries.find(item => item.id === req.params.deliveryId)?.files[Number(req.params.index)], content = deliveryFiles.content(file);
+      res.set('Cache-Control', 'private, no-store').set('X-Content-Type-Options', 'nosniff').attachment(content.name).type(content.mimetype).sendFile(content.path, error => { if (error) next(error); });
+    } catch (error) { next(error); }
+  });
   app.post('/api/suite/tasks', write(req => {
     const ctx = currentContext(), body = req.body, source = body.source;
     if (!['chat', 'crm', 'hr'].includes(source) || typeof body.sourceId !== 'string' && typeof body.sourceId !== 'number') throw fail(422, 'invalid_source', 'Choose a current source record.');

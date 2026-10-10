@@ -603,7 +603,10 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
             return candidate;
           };
           const accountActions = require('./workspace-account-actions').createAccountActions({ S, identity, principal, workspace: S.workspace(context.workspace.id), sessionStore, authority, token: identity.tokenFrom(req), frame });
-          app = require('./workspace-suite').createSuiteRouter({ S, identity, principal, runtimeFor, accountActions, command: (tool, kind, payload, operationId) => {
+          app = require('./workspace-suite').createSuiteRouter({ S, identity, principal, runtimeFor, accountActions, serviceFiles: {
+            list: query => filesRuntime().listSharedFiles({ actorId: principal.user.id, search: query.search, page: query.page, limit: query.limit }),
+            package: value => { const ref = require('./workspace-file-references').reference(value, context.workspace.id); return filesRuntime().packageServiceDelivery({ actorId: principal.user.id, fileId: ref.fileId, versionId: ref.versionId }); },
+          }, command: (tool, kind, payload, operationId) => {
             request.runtime = runtimeFor(tool, true);
             return executeCommand(kind, payload, { workspaceId: context.workspace.id, actor: { userId: principal.user.id }, operationId });
           } });

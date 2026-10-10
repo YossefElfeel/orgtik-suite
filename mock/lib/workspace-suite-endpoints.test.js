@@ -155,6 +155,16 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     assert.equal((await call('sales', `/api/suite/services/requests/${serviceRequest.id}/actions`, crmToken, 'POST', { action: 'quote', lines: [{ label: 'Charge again', amount: 10 }] })).status, 409);
     const started = good(await call('sales', `/api/suite/services/requests/${serviceRequest.id}/actions`, crmToken, 'POST', { action: 'start' }));
     assert.equal(started.state, 'in_progress'); assert.ok(started.periodStart); assert.ok(started.periodEnd);
+    const deliveryOptions = good(await call('sales', `/api/suite/services/requests/${serviceRequest.id}/files`, crmToken));
+    assert.ok(deliveryOptions.items.length);
+    const picked = deliveryOptions.items[0], reference = { workspaceId: picked.workspaceId, fileId: picked.fileId, versionId: picked.versionId };
+    assert.equal((await call('sales', `/api/suite/services/requests/${serviceRequest.id}/actions`, crmToken, 'POST', { action: 'deliver', note: 'Invalid cross-workspace version', files: [{ ...reference, workspaceId }] })).status, 404);
+    const delivered = good(await call('sales', `/api/suite/services/requests/${serviceRequest.id}/actions`, crmToken, 'POST', { action: 'deliver', note: 'Reviewed packaged delivery', files: [reference] }));
+    assert.equal(delivered.state, 'in_review'); assert.equal(delivered.deliveries.at(-1).files[0].versionId, reference.versionId);
+    const deliveryFile = delivered.deliveries.at(-1).files[0]; assert.ok(deliveryFile.contentPath); assert.equal(Object.hasOwn(deliveryFile, 'assetKey'), false);
+    const downloaded = await fetch(`${base}/sos${deliveryFile.contentPath}`, { headers: { connection: 'close', authorization: `Bearer ${token}` } });
+    assert.equal(downloaded.status, 200); assert.equal(downloaded.headers.get('content-type').split(';')[0], picked.mimetype); assert.equal((await downloaded.arrayBuffer()).byteLength, picked.size);
+    assert.equal((await fetch(`${base}/sos${deliveryFile.contentPath}`, { headers: { connection: 'close', authorization: `Bearer ${recipient}` } })).status, 403);
     const immutablePaid = JSON.stringify(require('../apps/admin').getStore().db.publicWebsiteOrders);
     const regionalCatalog = good(await call('sales', '/api/suite/services/catalog', crmToken)); assert.ok(regionalCatalog.countries.some(row => row.code === 'FR'));
     const eligible = good(await call('sales', '/api/suite/services/staff', crmToken)); assert.ok(eligible.some(row => row.id === mona.user.id));
