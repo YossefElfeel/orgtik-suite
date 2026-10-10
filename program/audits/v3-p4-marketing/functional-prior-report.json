@@ -1,0 +1,103 @@
+{
+  "scope": "Actual current Marketing UI callbacks and native CRM/Tasks transactions in owned memory fixture",
+  "checks": [
+    {
+      "name": "Project create and switch use actual native record",
+      "pass": true
+    },
+    {
+      "name": "Brand voice/context saved with actual project",
+      "pass": true
+    },
+    {
+      "name": "Mock domain check records actual sender and explicit simulated state",
+      "pass": true
+    },
+    {
+      "name": "Saved email direction/format and immutable version come from native template",
+      "pass": true
+    },
+    {
+      "name": "Authenticated export contains actual nonempty escaped RTL bytes",
+      "pass": true
+    },
+    {
+      "name": "Self test persists actual actor/template and explicit not-sent receipt",
+      "pass": true
+    },
+    {
+      "name": "Social reply persists one actual actor event",
+      "pass": true
+    },
+    {
+      "name": "Mock writing saves voice-specific draft on actual project",
+      "pass": true
+    },
+    {
+      "name": "Consent writes actual canonical CRM contact with Marketing provenance",
+      "pass": true
+    },
+    {
+      "name": "Consent writes actual canonical CRM contact with Marketing provenance",
+      "pass": true
+    },
+    {
+      "name": "Assigned ordinary approval enables fresh-consent mock delivery",
+      "pass": true
+    },
+    {
+      "name": "Journey saves ordered task step on actual campaign",
+      "pass": true
+    },
+    {
+      "name": "Consent writes actual canonical CRM contact with Marketing provenance",
+      "pass": true
+    },
+    {
+      "name": "Assigned ordinary approval enables fresh-consent mock delivery",
+      "pass": true
+    },
+    {
+      "name": "Journey saves ordered task step on actual campaign",
+      "pass": true
+    },
+    {
+      "name": "Atomic handoff records actual task ID/current status/exact destination",
+      "pass": true
+    },
+    {
+      "name": "Dry run persists explicitly simulated provider/task log",
+      "pass": true
+    },
+    {
+      "name": "Campaign result is fresh native CRM pipeline estimate in canonical currency",
+      "pass": true
+    },
+    {
+      "name": "No runtime/catalog/hydration errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "actual-brand-context",
+    "actual-rtl-email-designer",
+    "actual-sender-domain-self-test",
+    "actual-social-inbox-reply",
+    "actual-brand-writing-draft",
+    "actual-canonical-crm-consent",
+    "actual-canonical-crm-consent",
+    "actual-approved-campaign-delivery",
+    "actual-canonical-crm-consent",
+    "actual-approved-campaign-delivery",
+    "actual-journey-approval-denial",
+    "actual-journey-task-reference",
+    "actual-native-crm-attribution-result"
+  ],
+  "errors": [],
+  "recoveredPersistedSetup": true,
+  "campaignId": "9faee91f-a8f9-4a77-aee8-2449ae273606",
+  "contactId": "942531ac-70a2-4427-a4b0-9b238d25bed4",
+  "journeyId": "a41cb277-4a1b-4c77-a47d-36276d39ae5b",
+  "completed": true
+}

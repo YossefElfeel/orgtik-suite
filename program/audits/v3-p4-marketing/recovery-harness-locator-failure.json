@@ -1,0 +1,26 @@
+{
+  "scope": "Native accepted-but-lost response recovery through ordinary Marketing controls",
+  "checks": [
+    {
+      "name": "Native server accepted one event before response was lost",
+      "pass": true
+    },
+    {
+      "name": "Reload retains original body and operation, without tokens or HTML",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "recovery-uncertain",
+    "recovery-failure"
+  ],
+  "requests": [
+    {
+      "body": "Recovered original reply after reload",
+      "operationId": "d20935d0-deb7-4bdc-958e-ea17250f36f9"
+    }
+  ],
+  "errors": [],
+  "acceptedStatus": 200,
+  "failure": "locator.waitFor: Error: strict mode violation: getByText('Check the original unconfirmed change before submitting different details.', { exact: true }) resolved to 2 elements:\n    1) <h2 id=\"_r_f_\" data-type=\"error\" class=\"text-body font-semibold text-fg\">Check the original unconfirmed change before subm…</h2> aka getByRole('region', { name: 'Notifications' }).getByText('Check the original')\n    2) <div>Check the original unconfirmed change before subm…</div> aka getByText('Check the original').nth(2)\n\nCall log:\n\u001b[2m  - waiting for getByText('Check the original unconfirmed change before submitting different details.', { exact: true }) to be visible\u001b[22m\n"
+}

@@ -1,0 +1,259 @@
+{
+  "workspaceId": "ws_orgtik",
+  "tool": "marketing",
+  "at": "2026-10-07T09:00:00.000Z",
+  "data": {
+    "appKey": "marketing",
+    "workspaceId": "ws_orgtik",
+    "state": "ready",
+    "projects": [
+      {
+        "id": "10be0f99-5f00-4d21-b3d3-51576922de42",
+        "userId": 1,
+        "name": "Nile Foods",
+        "description": "Egyptian FMCG food brand — ready meals, sweets and pantry staples in Egypt, KSA and the UAE.",
+        "avatar": "http://localhost:8405/media/brand/nile-foods.svg",
+        "isActive": true,
+        "isLastActive": false,
+        "timeZone": "Africa/Cairo",
+        "currency": "EGP",
+        "members": [
+          {
+            "id": 1,
+            "email": "mona.adel@orgtik.test",
+            "username": "mona.adel",
+            "firstName": "Mona",
+            "lastName": "Adel",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "super_admin"
+            ]
+          },
+          {
+            "id": 2,
+            "email": "karim.hassan@orgtik.test",
+            "username": "karim.hassan",
+            "firstName": "Karim",
+            "lastName": "Hassan",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "marketing_manager"
+            ]
+          },
+          {
+            "id": 5,
+            "email": "nour.khaled@nilefoods.test",
+            "username": "nour.khaled",
+            "firstName": "Nour",
+            "lastName": "Khaled",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "client_reviewer"
+            ]
+          },
+          {
+            "id": 12,
+            "email": "dina.fathy@orgtik.test",
+            "username": "dina.fathy",
+            "firstName": "Dina",
+            "lastName": "Fathy",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "marketing_specialist"
+            ]
+          },
+          {
+            "id": 14,
+            "email": "hoda.ashraf@orgtik.test",
+            "username": "hoda.ashraf",
+            "firstName": "Hoda",
+            "lastName": "Ashraf",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "content_writer"
+            ]
+          }
+        ],
+        "createdAt": "2026-02-09T07:00:00.000Z",
+        "updatedAt": "2026-02-12T10:00:00.000Z"
+      },
+      {
+        "id": "93e44b32-3c2d-41a0-bbfd-6fd73fa53ea3",
+        "userId": 1,
+        "name": "OrgTik",
+        "description": "OrgTik suite brand marketing — B2B SaaS for teams in Egypt and the GCC.",
+        "avatar": "http://localhost:8405/media/brand/orgtik.svg",
+        "isActive": true,
+        "isLastActive": false,
+        "timeZone": "Africa/Cairo",
+        "currency": "USD",
+        "members": [
+          {
+            "id": 1,
+            "email": "mona.adel@orgtik.test",
+            "username": "mona.adel",
+            "firstName": "Mona",
+            "lastName": "Adel",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "super_admin"
+            ]
+          },
+          {
+            "id": 2,
+            "email": "karim.hassan@orgtik.test",
+            "username": "karim.hassan",
+            "firstName": "Karim",
+            "lastName": "Hassan",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "marketing_manager"
+            ]
+          },
+          {
+            "id": 12,
+            "email": "dina.fathy@orgtik.test",
+            "username": "dina.fathy",
+            "firstName": "Dina",
+            "lastName": "Fathy",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "marketing_specialist"
+            ]
+          },
+          {
+            "id": 14,
+            "email": "hoda.ashraf@orgtik.test",
+            "username": "hoda.ashraf",
+            "firstName": "Hoda",
+            "lastName": "Ashraf",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "content_writer"
+            ]
+          }
+        ],
+        "createdAt": "2025-12-11T07:00:00.000Z",
+        "updatedAt": "2025-12-14T10:00:00.000Z"
+      },
+      {
+        "id": "7bd9ef56-a48d-4d04-8b27-0d08aafc106f",
+        "userId": 1,
+        "name": "Sahel Resorts",
+        "description": "Beach resorts on the North Coast and the Red Sea (Sidi Abdel Rahman, Hurghada).",
+        "avatar": "http://localhost:8405/media/brand/sahel-resorts.svg",
+        "isActive": true,
+        "isLastActive": false,
+        "timeZone": "Africa/Cairo",
+        "currency": "EGP",
+        "members": [
+          {
+            "id": 1,
+            "email": "mona.adel@orgtik.test",
+            "username": "mona.adel",
+            "firstName": "Mona",
+            "lastName": "Adel",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "super_admin"
+            ]
+          },
+          {
+            "id": 2,
+            "email": "karim.hassan@orgtik.test",
+            "username": "karim.hassan",
+            "firstName": "Karim",
+            "lastName": "Hassan",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "marketing_manager"
+            ]
+          },
+          {
+            "id": 12,
+            "email": "dina.fathy@orgtik.test",
+            "username": "dina.fathy",
+            "firstName": "Dina",
+            "lastName": "Fathy",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "marketing_specialist"
+            ]
+          },
+          {
+            "id": 14,
+            "email": "hoda.ashraf@orgtik.test",
+            "username": "hoda.ashraf",
+            "firstName": "Hoda",
+            "lastName": "Ashraf",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "content_writer"
+            ]
+          }
+        ],
+        "createdAt": "2026-06-09T06:00:00.000Z",
+        "updatedAt": "2026-06-12T09:00:00.000Z"
+      },
+      {
+        "id": "4490037c-00c1-49e3-81b9-e66b6b4ebf53",
+        "userId": 1,
+        "name": "Marketing current-record proof",
+        "description": "Ordinary saved workflow proof",
+        "avatar": null,
+        "isActive": true,
+        "isLastActive": true,
+        "timeZone": "Africa/Cairo",
+        "currency": "EGP",
+        "members": [
+          {
+            "id": 1,
+            "email": "mona.adel@orgtik.test",
+            "username": "mona.adel",
+            "firstName": "Mona",
+            "lastName": "Adel",
+            "avatar": null,
+            "jobTitle": null,
+            "roles": [
+              "super_admin"
+            ]
+          }
+        ],
+        "createdAt": "2026-10-07T09:00:00.000Z",
+        "updatedAt": "2026-10-07T09:00:00.000Z"
+      }
+    ],
+    "capabilities": {
+      "canWrite": true
+    }
+  },
+  "consequences": [
+    {
+      "id": "marketing-crm",
+      "data": [
+        "Contacts",
+        "Attribution"
+      ]
+    },
+    {
+      "id": "marketing-tasks",
+      "data": [
+        "Campaign follow-ups",
+        "Journey task steps"
+      ]
+    }
+  ]
+}
