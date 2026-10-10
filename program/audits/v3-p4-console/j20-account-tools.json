@@ -1,0 +1,276 @@
+[
+  {
+    "key": "general",
+    "name": {
+      "en": "General",
+      "ar": "العام",
+      "de": "Allgemein",
+      "fr": "Général",
+      "it": "Generale"
+    },
+    "short": {
+      "en": "Your workspace, people and settings.",
+      "ar": "مساحة العمل والأشخاص والإعدادات.",
+      "de": "Ihr Arbeitsbereich, Personen und Einstellungen.",
+      "fr": "Votre espace, vos personnes et vos réglages.",
+      "it": "Il tuo spazio, le persone e le impostazioni."
+    },
+    "icon": "ph-squares-four",
+    "status": "live",
+    "mandatory": true,
+    "state": "active",
+    "hasFree": true,
+    "trialDays": 0,
+    "fromUnit": null,
+    "onWaitlist": false
+  },
+  {
+    "key": "tasks",
+    "name": {
+      "en": "Tasks",
+      "ar": "المهام",
+      "de": "Aufgaben",
+      "fr": "Tâches",
+      "it": "Attività"
+    },
+    "short": {
+      "en": "Projects, boards and deadlines.",
+      "ar": "المشاريع واللوحات والمواعيد.",
+      "de": "Projekte, Boards und Fristen.",
+      "fr": "Projets, tableaux et échéances.",
+      "it": "Progetti, bacheche e scadenze."
+    },
+    "icon": "ph-check-square",
+    "status": "live",
+    "mandatory": false,
+    "state": "active",
+    "hasFree": true,
+    "trialDays": 14,
+    "fromUnit": {
+      "amount": 129,
+      "currency": "EGP",
+      "perUser": true
+    },
+    "onWaitlist": false
+  },
+  {
+    "key": "files",
+    "name": {
+      "en": "Files",
+      "ar": "الملفات",
+      "de": "Dateien",
+      "fr": "Fichiers",
+      "it": "File"
+    },
+    "short": {
+      "en": "Shared files with versions and links.",
+      "ar": "ملفات مشتركة بإصدارات وروابط.",
+      "de": "Gemeinsame Dateien mit Versionen und Links.",
+      "fr": "Fichiers partagés, versions et liens.",
+      "it": "File condivisi con versioni e link."
+    },
+    "icon": "ph-folder",
+    "status": "live",
+    "mandatory": false,
+    "state": "active",
+    "hasFree": true,
+    "trialDays": 14,
+    "fromUnit": {
+      "amount": 99,
+      "currency": "EGP",
+      "perUser": false
+    },
+    "onWaitlist": false
+  },
+  {
+    "key": "chat",
+    "name": {
+      "en": "Chat",
+      "ar": "المحادثات",
+      "de": "Chat",
+      "fr": "Chat",
+      "it": "Chat"
+    },
+    "short": {
+      "en": "Team chat, calls and meetings.",
+      "ar": "محادثات الفريق والمكالمات والاجتماعات.",
+      "de": "Team-Chat, Anrufe und Meetings.",
+      "fr": "Messagerie, appels et réunions.",
+      "it": "Chat del team, chiamate e riunioni."
+    },
+    "icon": "ph-chats",
+    "status": "live",
+    "mandatory": false,
+    "state": "trial",
+    "hasFree": true,
+    "trialDays": 14,
+    "fromUnit": {
+      "amount": 49,
+      "currency": "EGP",
+      "perUser": true
+    },
+    "onWaitlist": false
+  },
+  {
+    "key": "hr",
+    "name": {
+      "en": "HR",
+      "ar": "الموارد البشرية",
+      "de": "Personal",
+      "fr": "RH",
+      "it": "Risorse umane"
+    },
+    "short": {
+      "en": "People, leave and payroll.",
+      "ar": "الموظفين والإجازات والرواتب.",
+      "de": "Mitarbeitende, Urlaub und Lohn.",
+      "fr": "Personnel, congés et paie.",
+      "it": "Persone, ferie e buste paga."
+    },
+    "icon": "ph-users-three",
+    "status": "live",
+    "mandatory": false,
+    "state": "not_subscribed",
+    "hasFree": false,
+    "trialDays": 14,
+    "fromUnit": {
+      "amount": 249,
+      "currency": "EGP",
+      "perUser": true
+    },
+    "onWaitlist": false
+  },
+  {
+    "key": "crm",
+    "name": {
+      "en": "CRM",
+      "ar": "إدارة العملاء",
+      "de": "CRM",
+      "fr": "CRM",
+      "it": "CRM"
+    },
+    "short": {
+      "en": "Leads, deals and customers.",
+      "ar": "العملاء المحتملين والصفقات والعملاء.",
+      "de": "Leads, Deals und Kunden.",
+      "fr": "Prospects, affaires et clients.",
+      "it": "Lead, trattative e clienti."
+    },
+    "icon": "ph-chart-line-up",
+    "status": "live",
+    "mandatory": false,
+    "state": "not_subscribed",
+    "hasFree": false,
+    "trialDays": 14,
+    "fromUnit": {
+      "amount": 299,
+      "currency": "EGP",
+      "perUser": true
+    },
+    "onWaitlist": false
+  },
+  {
+    "key": "marketing",
+    "name": {
+      "en": "Marketing",
+      "ar": "التسويق",
+      "de": "Marketing",
+      "fr": "Marketing",
+      "it": "Marketing"
+    },
+    "short": {
+      "en": "Campaigns, posts and reports.",
+      "ar": "الحملات والمنشورات والتقارير.",
+      "de": "Kampagnen, Beiträge und Berichte.",
+      "fr": "Campagnes, publications et rapports.",
+      "it": "Campagne, post e report."
+    },
+    "icon": "ph-megaphone",
+    "status": "live",
+    "mandatory": false,
+    "state": "not_subscribed",
+    "hasFree": false,
+    "trialDays": 14,
+    "fromUnit": {
+      "amount": 179,
+      "currency": "EGP",
+      "perUser": false
+    },
+    "onWaitlist": false
+  },
+  {
+    "key": "email",
+    "name": {
+      "en": "Email",
+      "ar": "البريد",
+      "de": "E-Mail",
+      "fr": "E-mail",
+      "it": "Email"
+    },
+    "short": {
+      "en": "Business mailboxes on your domain.",
+      "ar": "صناديق بريد على نطاقك.",
+      "de": "Postfächer auf Ihrer Domain.",
+      "fr": "Boîtes mail sur votre domaine.",
+      "it": "Caselle sul tuo dominio."
+    },
+    "icon": "ph-envelope-simple",
+    "status": "coming_soon",
+    "mandatory": false,
+    "state": "coming_soon",
+    "hasFree": false,
+    "trialDays": 0,
+    "fromUnit": null,
+    "onWaitlist": false
+  },
+  {
+    "key": "website",
+    "name": {
+      "en": "Website",
+      "ar": "الموقع",
+      "de": "Website",
+      "fr": "Site web",
+      "it": "Sito web"
+    },
+    "short": {
+      "en": "Your website, managed from the suite.",
+      "ar": "موقعك، من داخل المنصة.",
+      "de": "Ihre Website, aus der Suite verwaltet.",
+      "fr": "Votre site, géré depuis la suite.",
+      "it": "Il tuo sito, gestito dalla suite."
+    },
+    "icon": "ph-browser",
+    "status": "coming_soon",
+    "mandatory": false,
+    "state": "coming_soon",
+    "hasFree": false,
+    "trialDays": 0,
+    "fromUnit": null,
+    "onWaitlist": false
+  },
+  {
+    "key": "hosting",
+    "name": {
+      "en": "Hosting",
+      "ar": "الاستضافة",
+      "de": "Hosting",
+      "fr": "Hébergement",
+      "it": "Hosting"
+    },
+    "short": {
+      "en": "Managed hosting at orgtik.ch.",
+      "ar": "استضافة مُدارة على orgtik.ch.",
+      "de": "Verwaltetes Hosting auf orgtik.ch.",
+      "fr": "Hébergement géré sur orgtik.ch.",
+      "it": "Hosting gestito su orgtik.ch."
+    },
+    "icon": "ph-hard-drives",
+    "status": "live",
+    "mandatory": false,
+    "state": "not_subscribed",
+    "hasFree": false,
+    "trialDays": 0,
+    "fromUnit": null,
+    "onWaitlist": false
+  }
+]

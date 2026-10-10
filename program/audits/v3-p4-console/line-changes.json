@@ -1,0 +1,44 @@
+{
+  "scope": "Native ordinary single-subscription quote/confirm with current server-priced amount",
+  "checks": [
+    {
+      "name": "Actual eligible per-user subscription available",
+      "pass": true
+    },
+    {
+      "name": "Selected native tool and plan have human-readable names",
+      "pass": true
+    },
+    {
+      "name": "Ordinary preview returns native server quote",
+      "pass": true
+    },
+    {
+      "name": "Quote targets exactly the selected source line",
+      "pass": true
+    },
+    {
+      "name": "Ordinary confirm uses the actual native held quote",
+      "pass": true
+    },
+    {
+      "name": "Unrelated subscriptions retain exact original records",
+      "pass": true
+    },
+    {
+      "name": "Selected subscription uses the native confirmed cycle",
+      "pass": true
+    },
+    {
+      "name": "Current recorded invoice amount matches held quote",
+      "pass": true
+    },
+    {
+      "name": "No ordinary line-edit runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "errors": [],
+  "completed": true
+}
