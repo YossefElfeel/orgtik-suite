@@ -170,6 +170,8 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     good(await call('sos', '/v1/app/website-orders', token, 'POST', { reference: order.reference, claimToken: order.claimToken }));
     assert.equal(require('../apps/admin').getStore().db.serviceRequests.find(row => row.id === serviceRequest.id).crmProjectId, projectId);
     good(await call('sales', `/api/suite/services/requests/${serviceRequest.id}/actions`, crmToken, 'POST', { action: 'review' }));
+    const reviewedPaid = good(await call('sales', '/api/suite/services/requests', crmToken)).find(row => row.id === serviceRequest.id);
+    assert.equal(reviewedPaid.prepaid, true); assert.equal(reviewedPaid.capabilities.canStart, true); assert.equal(reviewedPaid.paidSource.reference, order.reference); assert.equal(reviewedPaid.paidSource.amountMinor, order.groups[0].lines[0].total);
     assert.equal((await call('sales', `/api/suite/services/requests/${serviceRequest.id}/actions`, crmToken, 'POST', { action: 'quote', lines: [{ label: 'Charge again', amount: 10 }] })).status, 409);
     const started = good(await call('sales', `/api/suite/services/requests/${serviceRequest.id}/actions`, crmToken, 'POST', { action: 'start' }));
     assert.equal(started.state, 'in_progress'); assert.ok(started.periodStart); assert.ok(started.periodEnd);
