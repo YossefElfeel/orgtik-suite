@@ -41,6 +41,9 @@ test('Marketing resolves current CRM consent and creates one native attributed p
     assert.equal((await call('marketing', `/api/suite/marketing/campaigns/${campaign.id}/lead`, marketing, 'POST', { ...leadBody, title: 'Changed receipt' })).status, 409);
     const results = good(await call('marketing', `/v3/campaigns/${campaign.id}`, marketing)).results;
     assert.equal(results.filter(row => row.projectId === lead.projectId).length, 1);
+    const currentResults = good(await call('marketing', `/api/suite/marketing/campaigns/${campaign.id}/results`, marketing));
+    assert.equal(currentResults.deals[0].projectId, lead.projectId); assert.equal(currentResults.deals[0].estimatedValue, 1500);
+    assert.equal(currentResults.currencies[0].wonValue, 0); assert.equal(currentResults.currencies[0].pipelineEstimate, 1500);
     assert.equal(JSON.stringify({ invoices: S.db.invoices, publicWebsiteOrders: S.db.publicWebsiteOrders }), monetary);
     good(await call('marketing', '/api/suite/crm/consent', marketing, 'POST', { ...consentBody, state: 'opted_out', operationId: 'marketing-optout-proof' }));
     assert.equal(good(await call('marketing', `/v3/campaigns/${campaign.id}/audience`, marketing)).eligible.length, 0);

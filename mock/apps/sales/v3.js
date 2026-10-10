@@ -252,6 +252,7 @@ module.exports = function crmV3(S) {
       stageId: stage.id,
       probability: row.crmProbability ?? stage.probability,
       value: H.num(contract?.grandTotal),
+      estimatedValue: row.crmEstimatedValue ?? 0,
       currency:
         contract?.currency || currencyFor(K.customerById(row.customerId) || {}),
       won,

@@ -8118,6 +8118,18 @@
     {
       "app": "shared",
       "method": "GET",
+      "path": "/api/suite/marketing/campaigns/:id/results",
+      "source": "lib/workspace-suite.js",
+      "authorization": {
+        "audience": "suite or current tool audience on its own API origin",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current session or recipient",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "shared",
+      "method": "GET",
       "path": "/api/suite/notifications",
       "source": "lib/workspace-suite.js",
       "authorization": {

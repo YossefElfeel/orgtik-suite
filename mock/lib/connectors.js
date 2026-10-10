@@ -11,6 +11,7 @@ const DEFINITIONS = Object.freeze([
   { id: 'crm-files', source: 'crm', target: 'files', data: ['Packaged service delivery versions'] },
   { id: 'chat-tasks', source: 'chat', target: 'tasks', data: ['Task from a message'] },
   { id: 'marketing-crm', source: 'marketing', target: 'crm', data: ['Contacts', 'Attribution'] },
+  { id: 'marketing-tasks', source: 'marketing', target: 'tasks', data: ['Campaign follow-ups', 'Journey task steps'] },
 ]);
 const admitted = access => access && !['not_subscribed', 'no_access'].includes(access.access) && access.roles?.length;
 function state(context, connector, { targetWrite = false } = {}) {
