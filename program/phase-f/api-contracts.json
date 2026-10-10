@@ -4913,6 +4913,18 @@
     },
     {
       "app": "sales",
+      "method": "GET",
+      "path": "/api/crm/v3/contracts/:id/pdf",
+      "source": "apps/sales/documents.js",
+      "authorization": {
+        "audience": "tool:sales",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "sales",
       "method": "POST",
       "path": "/api/crm/v3/import",
       "source": "apps/sales/v3.js",
@@ -4963,7 +4975,7 @@
       "app": "sales",
       "method": "GET",
       "path": "/api/crm/v3/offers/:id/pdf",
-      "source": "apps/sales/v3.js",
+      "source": "apps/sales/documents.js",
       "authorization": {
         "audience": "tool:sales",
         "workspaceBinding": "signed selected workspace",

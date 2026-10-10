@@ -150,7 +150,7 @@ export default function CrmWorkbench({ board = false }: { board?: boolean }) {
           ) : undefined
         }
       />
-      {data.sample.canLoad ? (
+      {data.sample.canLoad && canEdit ? (
         <div className="flex flex-col gap-3">
           <OnboardingChecklist
             title={t("onboarding")}
@@ -449,7 +449,7 @@ export default function CrmWorkbench({ board = false }: { board?: boolean }) {
                 : "emptyContacts",
             ),
             description: t("emptyHint"),
-            action: (
+            action: search || source !== "all" || tag !== "all" || canEdit ? (
               <Button
                 variant="secondary"
                 onClick={() => {
@@ -464,7 +464,7 @@ export default function CrmWorkbench({ board = false }: { board?: boolean }) {
                     : "newContact",
                 )}
               </Button>
-            ),
+            ) : undefined,
           }}
         />
       )}
