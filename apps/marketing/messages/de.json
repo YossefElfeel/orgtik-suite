@@ -2171,6 +2171,11 @@
     "taskCancelled": "Abgebrochen",
     "taskUnavailable": "Aufgabenstatus nicht verfügbar",
     "projectSwitchFailed": "Dieses Projekt konnte nicht ausgewählt werden. Versuchen Sie es mit aktuellem Zugriff erneut.",
-    "projectUnavailable": "Dieses Projekt ist mit Ihrem aktuellen Zugriff nicht sichtbar."
+    "projectUnavailable": "Dieses Projekt ist mit Ihrem aktuellen Zugriff nicht sichtbar.",
+    "pendingCommands": "Unbestätigte Änderungen",
+    "pendingCommandsBody": "Eine Antwort ging verloren. Prüfen Sie die ursprüngliche Änderung, bevor Sie eine weitere starten. Die Wiederherstellung nutzt dieselbe gespeicherte Anfrage und Ihre aktuellen Rechte.",
+    "recoverCommand": "Ursprüngliche Änderung prüfen",
+    "recoveryDenied": "Die ursprüngliche Änderung konnte nicht bestätigt werden. Prüfen Sie Ihre aktuellen Rechte und den Quelldatensatz und versuchen Sie es erneut. Die gespeicherte Anfrage bleibt erhalten.",
+    "recoverFirst": "Prüfen Sie die ursprüngliche unbestätigte Änderung, bevor Sie andere Angaben senden."
   }
 }
