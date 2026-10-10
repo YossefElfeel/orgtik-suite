@@ -89,6 +89,12 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     const reminder = good(await call('tasks', '/api/tasks/reminders/run', tasksToken, 'POST', {})); assert.ok(reminder.notifiedTaskIds.includes(next.id)); assert.ok(reminder.notificationIds.length);
     assert.equal(good(await call('tasks', '/api/tasks/reminders/run', tasksToken, 'POST', {})).notificationIds.length, 0);
     assert.ok(good(await call('tasks', '/api/suite/notifications', tasksToken)).some(row => reminder.notificationIds.includes(Number(row.id.split(':').at(-1)))));
+    good(await call('sos', '/api/suite/preferences', token, 'PATCH', { notificationPreferences: { inApp: true, tasks: false } }));
+    assert.ok(good(await call('tasks', '/api/suite/notifications', tasksToken)).every(row => row.tool !== 'tasks'));
+    good(await call('sos', '/api/suite/preferences', token, 'PATCH', { notificationPreferences: { inApp: false } }));
+    assert.deepEqual(good(await call('tasks', '/api/suite/notifications', tasksToken)), []);
+    good(await call('sos', '/api/suite/preferences', token, 'PATCH', { notificationPreferences: { inApp: true, tasks: true } }));
+    assert.ok(good(await call('tasks', '/api/suite/notifications', tasksToken)).some(row => reminder.notificationIds.includes(Number(row.id.split(':').at(-1)))));
     const monthly = good(await call('tasks', `/api/tasks/sections/${todo}`, tasksToken, 'POST', { title: 'Month-end repeat', dueDate: '2026-01-31T09:00:00Z', recurrence: 'monthly' }));
     const monthlyDone = good(await call('tasks', `/api/tasks/${monthly.id}`, tasksToken, 'PUT', { status: 'done' }));
     assert.equal(good(await call('tasks', `/api/tasks/${monthlyDone.nextOccurrenceId}`, tasksToken)).dueDate, '2026-02-28T09:00:00.000Z');
@@ -116,6 +122,7 @@ test('ordinary suite routes persist preferences, connect trials, requests and sc
     assert.equal(hrProjection.workspace.id, 'ws_orgtik');
     const crmHandoff = good(await call('sos', '/api/auth/workspace', owner, 'POST', { workspaceId: 'ws_orgtik', target: 'sales' }));
     const crmToken = crmHandoff.tokens.accessToken, services = good(await call('sales', '/api/suite/services/catalog', crmToken));
+    assert.equal((await call('sales', '/api/plans', crmToken, 'POST', { name: 'Retired duplicate service plan' })).status, 410);
     assert.equal(services.managedIn, 'crm'); assert.equal(services.canPublish, true);
     const offer = services.offers[0], publicBefore = good(await call('sos', '/v1/public/catalog', null));
     const names = Object.fromEntries(['en', 'ar', 'de', 'fr', 'it'].map(locale => [locale, `Reviewed ${locale} service`]));

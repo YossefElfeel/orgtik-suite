@@ -100,7 +100,15 @@ function createWorkspaceRuntime(input, appModule) {
     }
     return { ...result, projectId: project.id };
   }
-  return { router, exportSnapshot, bootstrap, receiveWebsiteIntake,
+  function suiteFeed(context) {
+    const base = bootstrap(context);
+    if (base.state === 'no_access') return base;
+    const user = identity.findUser(context.actor.effectiveUserId), role = S.core.appRole(user), req = { sc: { user, role, staff: S.core.staffByAuth(user.id), customer: S.core.customerByAuth(user.id), lang: 'en', displayCurrency: null } }, owned = require('../../apps/sales/v3')(S).bootstrap(req);
+    const contacts = new Set(owned.contacts.map(row => row.id)), projects = new Set(base.projects.map(row => row.id));
+    const notifications = S.db.notifications.filter(row => row.userId === user.id && (!row.data?.customerId || contacts.has(row.data.customerId)) && (!row.data?.projectId || projects.has(row.data.projectId))).map(row => ({ id: row.id, title: row.title, message: row.message, createdAt: row.createdAt, readAt: row.readAt, path: row.data?.projectId ? `/projects/${encodeURIComponent(row.data.projectId)}` : row.data?.customerId ? `/customers/${encodeURIComponent(row.data.customerId)}` : '/dashboard' }));
+    return { ...base, contacts: owned.contacts.map(row => ({ id: row.id, fullName: row.fullName, companyId: row.companyId, companyName: row.companyName, email: row.email, status: row.status, tags: row.tags, attribution: row.attribution })), companies: owned.companies.map(row => ({ id: row.id, name: row.name })), activities: owned.activities.map(row => ({ id: row.id, title: row.text, actor: row.actorName, at: row.at, action: row.kind, path: `/customers/${encodeURIComponent(row.contactId)}` })), notifications };
+  }
+  return { router, exportSnapshot, bootstrap, suiteFeed, receiveWebsiteIntake,
     provisioningCandidate: (context, id) => { open(); return require('../../apps/sales/v3')(S).provisioningCandidate(context, id); },
     recordProvisioning: (context, id, receipt) => { open(); return require('../../apps/sales/v3')(S).recordProvisioning(context, id, receipt); },
     usage: () => { open(); return [{ key: "contacts", used: S.db.customers.length }, { key: "projects", used: S.db.projects.length }, { key: "leads", used: S.db.leads.length }]; }, transferOwnership, applyCommitted, dueTransitions: () => { open(); return S.db.subscriptions.flatMap(row => row.status === "cancelled" ? [] : row.installments.filter(item => !item.invoiceId && item.status !== "paid" && new Date(item.dueDate).getTime() <= (input.clock.nowMs?.() ?? input.clock.now()) + 30 * 864e5).map(item => ({ kind: "sales.schedule.due", subscriptionId: row.id, installmentNumber: item.number }))); }, stageDueTransitions() { open(); S.billing.refreshSchedules({ system: true }); }, close() { closed = true; S.io = null; } };

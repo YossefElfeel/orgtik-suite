@@ -17,6 +17,7 @@ function savePreferences(actor, patch) {
   if (!patch || typeof patch !== 'object' || Array.isArray(patch) || Object.keys(patch).some(key => !allowed.includes(key)) || JSON.stringify(patch).length > 50000) throw fail(422, 'invalid_preferences', 'Check the preference values.');
   if (patch.theme !== undefined && !['light', 'dark'].includes(patch.theme) || patch.density !== undefined && !['comfortable', 'compact'].includes(patch.density) || patch.language !== undefined && !['en', 'ar', 'de', 'fr', 'it'].includes(patch.language)) throw fail(422, 'invalid_preferences', 'Choose a supported preference.');
   for (const key of ['savedViews', 'notificationPreferences']) if (patch[key] !== undefined && (!patch[key] || typeof patch[key] !== 'object' || Array.isArray(patch[key]))) throw fail(422, 'invalid_preferences', 'Check the preference values.');
+  if (patch.notificationPreferences && Object.entries(patch.notificationPreferences).some(([key, value]) => !['inApp', 'mentions', 'tasks', 'billing', 'hr', 'marketing', 'crm', 'files', 'chat', 'emailMock', 'desktopMock'].includes(key) || typeof value !== 'boolean')) throw fail(422, 'invalid_preferences', 'Choose supported notification categories.');
   actor.profile ??= {}; actor.profile.suitePreferences = { ...preferences(actor), ...clone(patch) };
   return preferences(actor);
 }
@@ -42,18 +43,19 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
       if (tool === 'tasks') { push(tool, 'project', data.projects, row => row.title, row => `/projects/${encodeURIComponent(row.id)}/lists`); push(tool, 'task', data.tasks, row => row.title, row => `/projects/${encodeURIComponent(row.projectId)}/lists?task-id=${encodeURIComponent(row.id)}`); }
       if (tool === 'files') { push(tool, 'file', data.files, row => row.name, row => `/my-files?file=${encodeURIComponent(row.id)}`); push(tool, 'folder', data.folders, row => row.name, row => `/my-files?folder=${encodeURIComponent(row.id)}`); }
       if (tool === 'hr') push(tool, 'employee', data.employees, row => row.fullName || [row.firstName, row.lastName].filter(Boolean).join(' ') || row.name, row => `/employees/${encodeURIComponent(row.id)}`);
-      if (tool === 'crm') { push(tool, 'contact', data.contacts, row => row.fullName, row => `/customers/${encodeURIComponent(row.id)}`); push(tool, 'project', data.projects, row => row.projectName, row => `/projects/${encodeURIComponent(row.id)}`); }
+      if (tool === 'crm') { push(tool, 'contact', data.contacts, row => row.fullName, row => `/customers/${encodeURIComponent(row.id)}`); push(tool, 'company', data.companies, row => row.name, row => `/companies?company=${encodeURIComponent(row.id)}`); push(tool, 'project', data.projects, row => row.projectName, row => `/projects/${encodeURIComponent(row.id)}`); }
       if (tool === 'marketing') push(tool, 'project', data.projects, row => row.name || row.title, row => `/projects/${encodeURIComponent(row.id)}`);
       if (tool === 'chat') { push(tool, 'channel', data.channels, row => row.name, row => `/channels/${encodeURIComponent(row.id)}`); push(tool, 'message', data.messages, row => row.text || row.content, row => `/channels/${encodeURIComponent(row.channelId)}?message=${encodeURIComponent(row.id)}`); }
     }
     return out;
   }
   function notifications() {
-    const rows = S.db.notifications.filter(row => row.workspaceId === workspace.id && row.userKey === actor.key).map(row => ({ id: `account:${row.id}`, tool: 'account', title: row.title, path: '/notifications', at: row.at, read: Boolean(row.read) }));
-    for (const { tool, data } of snapshots()) for (const row of data.notifications || []) rows.push({ id: `${tool}:${row.id}`, tool, title: row.title || row.message || row.type, path: row.path || '/', at: row.createdAt || row.at, read: Boolean(row.readAt || row.read) });
+    const rows = S.db.notifications.filter(row => row.workspaceId === workspace.id && row.userKey === actor.key).map(row => ({ id: `account:${row.id}`, tool: 'account', category: /billing|invoice|payment|subscription|renewal|refund|credit|price|trial/.test(row.kind || '') ? 'billing' : undefined, title: row.title, path: '/notifications', at: row.at, read: Boolean(row.read) }));
+    for (const { tool, data } of snapshots()) for (const row of data.notifications || []) rows.push({ id: `${tool}:${row.id}`, tool, category: row.category || (/mention/.test(row.kind || row.type || '') ? 'mentions' : tool), title: row.title || row.message || row.type, path: row.path || '/', at: row.createdAt || row.at, read: Boolean(row.readAt || row.read) });
     for (const request of workspace.suite?.requests || []) if (request.userId === actor.id || ['owner', 'admin'].includes(context.member.role)) rows.push({ id: `request:${request.id}:${request.state}`, tool: 'account', title: `${request.tool}: ${request.state}`, path: '/team?tab=requests', at: request.decidedAt || request.at, read: false });
-    const reads = workspace.suite?.notificationReads?.[actor.id] || [];
-    return rows.filter(row => row.title).map(row => ({ ...row, read: row.read || reads.includes(row.id) })).sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 100);
+    const reads = workspace.suite?.notificationReads?.[actor.id] || [], settings = preferences(actor).notificationPreferences || {};
+    if (settings.inApp === false) return [];
+    return rows.filter(row => row.title && settings[row.tool] !== false && (!row.category || settings[row.category] !== false)).map(row => ({ ...row, read: row.read || reads.includes(row.id) })).sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 100);
   }
   function bootstrap() {
     const ctx = currentContext(), toolPlans = {};
@@ -96,7 +98,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
   }));
   const services = require('../apps/sales/service-catalog');
   app.get('/api/suite/services/catalog', read(() => services.catalog(S, principal)));
-  app.get('/api/suite/crm/projects/:id/provisioning', read(req => runtimeFor('crm').provisioningCandidate(currentContext(), req.params.id)));
+  app.get('/api/suite/crm/projects/:id/provisioning', read(req => ({ ...runtimeFor('crm').provisioningCandidate(currentContext(), req.params.id), canProvision: Boolean(require('./workspace-crm-provisioning').canProvision(S, principal, currentContext())) })));
   app.post('/api/suite/crm/projects/:id/provision', write(req => require('./workspace-crm-provisioning').provision({ S, identity, principal, context: currentContext(), runtime: runtimeFor('crm', true), projectId: req.params.id, body: req.body, operationId: req.get('idempotency-key') || req.body.operationId })));
   app.patch('/api/suite/services/catalog/offers/:id', write(req => services.saveOffer(S, principal, req.params.id, req.body)));
   app.patch('/api/suite/services/catalog/bundles/:id', write(req => services.saveBundle(S, principal, req.params.id, req.body)));
@@ -145,7 +147,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
   app.get('/api/suite/search', read(req => { const query = String(req.query.q || '').toLocaleLowerCase().slice(0, 200); return query ? searchItems().filter(row => row.title.toLocaleLowerCase().includes(query)).slice(0, 50) : []; }));
   app.get('/api/suite/notifications', read(notifications));
   app.post('/api/suite/notifications/read', write(req => { const visible = notifications(), ids = req.body.all === true ? visible.map(row => row.id) : req.body.ids; if (!Array.isArray(ids) || ids.length > 100 || ids.some(id => !visible.some(row => row.id === id))) throw fail(422, 'invalid_notifications', 'Choose your current notifications.'); workspace.suite ??= {}; workspace.suite.notificationReads ??= {}; workspace.suite.notificationReads[actor.id] = [...new Set([...(workspace.suite.notificationReads[actor.id] || []), ...ids])].slice(-1000); return notifications(); }));
-  app.get('/api/suite/activity', read(() => S.db.audit.filter(row => row.workspaceId === workspace.id && (['owner', 'admin'].includes(context.member.role) || row.by === actor.key)).slice(0, 100).map((row, index) => ({ id: row.id || `${row.at}:${index}`, title: row.action, actor: row.by, at: row.at }))));
+  app.get('/api/suite/activity', read(() => [...S.db.audit.filter(row => row.workspaceId === workspace.id && (['owner', 'admin'].includes(context.member.role) || row.by === actor.key)).map((row, index) => ({ id: `account:${row.id || `${row.at}:${index}`}`, tool: 'account', title: row.action, actor: row.by, at: row.at })), ...snapshots().flatMap(({ tool, data }) => (data.activities || []).map(row => ({ ...row, id: `${tool}:${row.id}`, tool })))].sort((a, b) => String(b.at).localeCompare(String(a.at))).slice(0, 100)));
   app.get('/api/suite/tools/:tool/admin', read(req => {
     const tool = req.params.tool, ctx = currentContext(); requireToolAdmin(ctx, tool);
     const snapshot = bootstrap(), access = ctx.tools[tool];
