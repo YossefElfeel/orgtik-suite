@@ -1,5 +1,5 @@
 import { Briefcase, Buildings as Building2, CalendarBlank as Calendar, CheckCircle as CheckCircle2, Hash, User, UserCheck as UserCheck2 } from "@phosphor-icons/react";
-import { InfoCard, InfoCardSkeleton } from "@/components/ui/info-card";
+import { InfoCard, InfoCardSkeleton } from "@/components/shared/EmployeeFacts";
 import type { Employee } from "./types";
 import type { IEmployeeInformation } from "@/types/employee";
 import { useTranslations } from "next-intl";

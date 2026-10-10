@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useSearchParams } from "next/navigation";
 
 import TextFormEle from "@/components/ui/form/text-form-element";
@@ -276,7 +276,7 @@ export function EmployeeInfoStep() {
             className="min-w-32"
             type="button"
             size="lg"
-            variant="outline"
+            variant="secondary"
             onClick={onBack}
           >
             {t("nav.back")}

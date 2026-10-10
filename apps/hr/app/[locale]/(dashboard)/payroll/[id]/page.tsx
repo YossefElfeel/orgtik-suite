@@ -1,7 +1,7 @@
 "use client";
 
 import PendingApprovalsPage from "@/components/pages/payroll/PayrollAdminDetail";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation"; 
 import { useGetPayrollRunByIdAdminQuery } from "@/redux/features/payroll/payrollApi";

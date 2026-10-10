@@ -34,7 +34,7 @@ export function CandidateSidebar({
           <div className="mt-1 flex items-center gap-3">
             <IconButton
               label={tActions("call")}
-              variant="outline"
+              variant="secondary"
               className="rounded-full"
               href={`tel:${application.phoneNumber}`}
             >
@@ -42,7 +42,7 @@ export function CandidateSidebar({
             </IconButton>
             <IconButton
               label={tActions("email")}
-              variant="outline"
+              variant="secondary"
               className="rounded-full"
               href={`mailto:${application.email}`}
             >

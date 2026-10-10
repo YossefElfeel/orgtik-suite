@@ -103,6 +103,7 @@
     ],
     "hr": [
       "apps/hr.js",
+      "apps/hr/application.js",
       "apps/hr/calc.js",
       "apps/hr/files.js",
       "apps/hr/leave.js",
@@ -115,6 +116,7 @@
       "apps/hr/routes/people.js",
       "apps/hr/routes/recruitment.js",
       "apps/hr/routes/tickets.js",
+      "apps/hr/routes/workspace-v3.js",
       "apps/hr/seed.js",
       "apps/hr/views.js",
       "lib/accounts.js",

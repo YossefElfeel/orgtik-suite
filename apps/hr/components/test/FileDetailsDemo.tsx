@@ -2,7 +2,7 @@
 import { CalendarBlank as Calendar, FileText, HardDrive, Info, Plus, Trash as Trash2, User } from "@phosphor-icons/react";
 
 import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import {
   ConfirmDialog,
   ReusableDialog,
@@ -48,7 +48,7 @@ export default function FileDetailsDemo() {
         footer={
           <div className="">
             <Button
-              variant="delete"
+              variant="danger"
               className="gap-2"
               onClick={() => setConfirmDeleteOpen(true)}
             >
@@ -100,7 +100,7 @@ export default function FileDetailsDemo() {
         open={confirmDeleteOpen}
         onOpenChange={setConfirmDeleteOpen}
         confirmText="Yes, Delete File"
-        variant="destructive"
+        variant="danger"
         isLoading={isDeleting}
         onConfirm={handleDelete}
         onCancel={() => setConfirmDeleteOpen(false)}

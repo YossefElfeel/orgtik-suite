@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@orgtik/ui";
 
 export default function EmployeeSkeleton() {
   return (

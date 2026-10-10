@@ -46,7 +46,7 @@ module.exports = function attendanceRoutes(app, h) {
     const q = req.query;
     const ids = new Set(scopedEmps(req).map((e) => e.id));
     const from = L.normDate(q.startDate), to = L.normDate(q.endDate);
-    let list = db.sessions.filter((s) => ids.has(s.employeeId) && (!from || s.date >= from) && (!to || s.date <= to));
+    let list = db.sessions.filter((s) => !s.supersededBy && ids.has(s.employeeId) && (!from || s.date >= from) && (!to || s.date <= to));
     if (q.discordUserId) list = list.filter((s) => s.discordUserId === q.discordUserId);
     if (q.isLate !== undefined && q.isLate !== "") list = list.filter((s) => s.isLate === L.bool(q.isLate));
     list = L.sortBy(list, q.sortBy || "checkInAt", q.order || "DESC");

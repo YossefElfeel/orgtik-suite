@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "@/components/bindings/radio-group";
 import { FormControl, FormField, FormItem } from "@/components/ui/form";
 import CheckboxFormEle from "@/components/ui/form/checkbox-form-element";
 import SelectFormEle, {

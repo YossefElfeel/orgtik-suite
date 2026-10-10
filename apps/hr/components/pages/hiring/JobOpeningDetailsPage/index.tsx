@@ -3,9 +3,9 @@ import { Trash as Trash2 } from "@phosphor-icons/react";
 
 import { useState, type ComponentType, type ReactNode } from "react";
 
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import { type MenuTabItem, TabMenu } from "@/components/shared/TabMenu";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useParams } from "next/navigation";
 import { useRouter } from "@/i18n/routing";
 import {
@@ -201,7 +201,7 @@ export default function JobOpeningDetailsPage() {
                 trigger={
                   <Button
                     type="button"
-                    variant="delete"
+                    variant="danger"
                     size="lg"
                     className="h-10 rounded-xl px-4 text-sm font-medium"
                     disabled={!hasValidOpeningId || isDeleting}

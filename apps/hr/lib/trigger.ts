@@ -1,5 +1,5 @@
 import { createElement, isValidElement, type ReactElement, type ReactNode } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { IconButton } from "@/components/shared/IconButton";
 import { Button as SuiteButton, IconButton as SuiteIconButton } from "@orgtik/ui";
 

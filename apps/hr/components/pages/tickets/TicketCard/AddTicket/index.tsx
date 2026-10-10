@@ -9,7 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { TextEditor } from "@/components/ui/text-editor";
+import { TextEditor } from "@/components/shared/HrRichTextEditor";
 import { useAddMessageToTicketMutation } from "@/redux/features/ticket/ticketApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -21,9 +21,9 @@ import {
   type TicketMessageFormInputValues,
   type TicketMessageFormValues,
 } from "@/schemas/tickets/ticket.schemas";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useAppSelector } from "@/redux/app/hooks";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
 
 type Props = {};
 

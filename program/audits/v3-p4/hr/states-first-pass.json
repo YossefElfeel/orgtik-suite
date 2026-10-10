@@ -1,0 +1,22 @@
+{
+  "scope": "Six ordinary HR states; real scoped sessions and temporary network outage/delay",
+  "checks": [
+    {
+      "name": "Loading is rendered during a real delayed owner-data request",
+      "pass": true
+    },
+    {
+      "name": "Ordinary outage gives retryable error",
+      "pass": true
+    },
+    {
+      "name": "Committed save has ordinary success feedback",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "hr-state-loading.png",
+    "hr-state-error.png",
+    "hr-state-success.png"
+  ]
+}

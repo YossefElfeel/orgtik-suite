@@ -9,7 +9,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { useEmploymentTypeLabel } from "@/hooks/useEmploymentTypeLabel";
 import { toast } from "sonner";
 import { DownloadSimple } from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useLazyGetEmployeesQuery } from "@/redux/features/employee/employeeApi";
 import { downloadCsv, toCsv } from "@/lib/csv";
 import type { IEmployee } from "@/types/employee";
@@ -52,7 +52,7 @@ export function ExportEmployeesButton({ className }: { className?: string }) {
   };
 
   return (
-    <Button variant="outline" onClick={exportList} disabled={busy} aria-busy={busy} className={className}>
+    <Button variant="secondary" onClick={exportList} disabled={busy} aria-busy={busy} className={className}>
       <DownloadSimple className="size-4" aria-hidden="true" />
       {t("export")}
     </Button>

@@ -1,0 +1,18 @@
+{
+  "checks": [
+    {
+      "name": "Canonical staff action suspends only owned mock fixture",
+      "pass": true
+    },
+    {
+      "name": "Published board exposes actual non-accepting state",
+      "pass": true
+    },
+    {
+      "name": "Suspended workspace rejects anonymous application",
+      "pass": true,
+      "details": "careers_not_accepting"
+    }
+  ],
+  "completed": true
+}

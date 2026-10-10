@@ -1,0 +1,20 @@
+{
+  "checks": [
+    {
+      "name": "Real theme choice persists through shared personal preferences",
+      "pass": true
+    },
+    {
+      "name": "Theme follows real HR→Account handoff",
+      "pass": true
+    },
+    {
+      "name": "Current workspace is preserved across host handoff",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "hr-account-theme-handoff.png"
+  ],
+  "completed": true
+}

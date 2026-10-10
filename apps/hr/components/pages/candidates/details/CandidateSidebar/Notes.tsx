@@ -4,7 +4,7 @@ import { PaperPlaneRight as Send } from "@phosphor-icons/react";
 import { useFormatter, useTranslations } from "next-intl";
 import { IconButton } from "@/components/shared/IconButton";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
+import { Input } from "@orgtik/ui";
 import {
   useCreateApplicationNoteMutation,
   useGetApplicationNotesQuery,

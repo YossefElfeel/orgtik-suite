@@ -2,8 +2,8 @@ import { Pulse as ActivitySquare } from "@phosphor-icons/react";
 import { SectionCard } from "./SectionCard";
 import type { ActivityItem } from "./types";
 
-import { InfoCardSkeleton } from "@/components/ui/info-card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { InfoCardSkeleton } from "@/components/shared/EmployeeFacts";
+import { Skeleton } from "@orgtik/ui";
 import { useTranslations } from "next-intl";
 
 type ActivitySectionProps = {

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import DataTable from "@/components/shared/Table";
+import DataTable from "@/components/bindings/ResourceTable";
 import { CustomPagination } from "@/components/shared/CustomPagination";
 import { Form } from "@/components/ui/form";
 import {

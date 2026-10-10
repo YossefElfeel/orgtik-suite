@@ -1,0 +1,349 @@
+{
+  "scope": "Ordinary HR route migration smoke; current real owner records",
+  "checks": [
+    {
+      "name": "en/: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/employees: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/employees: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/employees/1: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/employees/1: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/employees/org-chart: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/employees/org-chart: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/department: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/department: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/department/1: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/department/1: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/attendance: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/attendance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/calendar: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/calendar: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/time-off: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/time-off: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/payroll: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/payroll: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/payroll/1: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/payroll/1: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/finance-queue: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/finance-queue: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/loans: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/loans: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/tickets: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/tickets: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/tickets/1001: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/tickets/1001: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/hiring/jobs: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/hiring/jobs: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/hiring/overall: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/hiring/overall: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/hiring/overall/1: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/hiring/overall/1: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/candidates: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/candidates: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/candidates/1: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/candidates/1: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/rejected: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/rejected: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/configuration: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/configuration: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/projects: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/projects: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/my-payslips: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/my-payslips: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/people/team: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/people/team: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/people/documents: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/people/documents: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/people/mailbox: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/people/mailbox: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/people/attendance: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/people/attendance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/people/holidays: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/people/holidays: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/people/reports: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/people/reports: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/people/import: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/people/import: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/careers: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "en/careers: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/employees: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "ar/employees: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/employees/1: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "ar/employees/1: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/payroll: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "ar/payroll: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/payroll/1: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "ar/payroll/1: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/tickets: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "ar/tickets: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/tickets/1001: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "ar/tickets/1001: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/calendar: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "ar/calendar: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/configuration: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "ar/configuration: no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/projects: ordinary route renders",
+      "pass": true
+    },
+    {
+      "name": "ar/projects: no overflow",
+      "pass": true
+    },
+    {
+      "name": "No ordinary-route runtime, catalog, hydration or duplicate-key errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "hr-retained-employees-1-en-light-1440.png",
+    "hr-retained-payroll-1-en-light-1440.png",
+    "hr-retained-tickets-1001-en-light-1440.png",
+    "hr-retained-employees-1-ar-dark-390.png",
+    "hr-retained-payroll-1-ar-dark-390.png",
+    "hr-retained-tickets-1001-ar-dark-390.png"
+  ],
+  "errors": [],
+  "currentRoute": "ar/projects",
+  "completed": true
+}

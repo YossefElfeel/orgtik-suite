@@ -1,0 +1,175 @@
+{
+  "scope": "Ordinary HR pages on owned memory demo",
+  "checks": [
+    {
+      "name": "en/light/1440/policies: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/policies: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/policies: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/directory: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/directory: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/directory: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/profile: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/profile: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/profile: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/onboarding: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/onboarding: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/onboarding: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/performance: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/performance: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/performance: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en/light/1440/recruiting: ordinary path",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/recruiting: no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/light/1440/recruiting: axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Shared policy sheet uses real fields",
+      "pass": true
+    },
+    {
+      "name": "Save closes sheet and confirms persistence",
+      "pass": true
+    },
+    {
+      "name": "Saved policy survives browser reload",
+      "pass": true
+    },
+    {
+      "name": "CSV import maps real columns",
+      "pass": true
+    },
+    {
+      "name": "CSV review precedes apply",
+      "pass": true
+    },
+    {
+      "name": "CSV apply shows committed owner-record outcome",
+      "pass": true
+    },
+    {
+      "name": "Ordinary eight-section admin is reachable",
+      "pass": false
+    }
+  ],
+  "captures": [
+    "hr-policies-en-light-1440.png",
+    "hr-directory-en-light-1440.png",
+    "hr-profile-en-light-1440.png",
+    "hr-onboarding-en-light-1440.png",
+    "hr-performance-en-light-1440.png",
+    "hr-recruiting-en-light-1440.png"
+  ],
+  "errors": [
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <SuiteShellView demo={{runtime:{...}, ...}} sidebarCollapsed={false} rail={<AppRail>} sidebar={<div>} ...>\n      <div className=\"flex h-dvh...\">\n        <a>\n        <div className=\"hidden min...\">\n          <AppRail>\n          <div className=\"w-(--ot-la...\">\n            <div data-collapsed={false} className=\"ot-suite-s...\">\n              <div>\n              <div className=\"min-h-0 fl...\">\n                <Sidebar title=\"HR\" sections={[...]}>\n                  <nav aria-label=\"Main navig...\" className=\"flex h-ful...\">\n                    <div>\n                    <div>\n                    <div className=\"flex flex-...\">\n                      <div>\n                      <Link>\n                      <Link href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} className=\"flex h-con...\">\n                        <LinkComponent href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} ...>\n+                         <a\n+                           aria-label=\"Calendar\"\n+                           aria-current={undefined}\n+                           className=\"flex h-control-md items-center gap-2.5 rounded-field px-2.5 text-body text-fg-m...\"\n+                           ref={function}\n+                           onClick={function onClick}\n+                           onMouseEnter={function onMouseEnter}\n+                           onTouchStart={function onTouchStart}\n+                           href=\"/calendar\"\n+                         >\n                      ...\n                    ...\n        ...\n"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <SuiteShellView demo={{runtime:{...}, ...}} sidebarCollapsed={false} rail={<AppRail>} sidebar={<div>} ...>\n      <div className=\"flex h-dvh...\">\n        <a>\n        <div className=\"hidden min...\">\n          <AppRail>\n          <div className=\"w-(--ot-la...\">\n            <div data-collapsed={false} className=\"ot-suite-s...\">\n              <div>\n              <div className=\"min-h-0 fl...\">\n                <Sidebar title=\"HR\" sections={[...]}>\n                  <nav aria-label=\"Main navig...\" className=\"flex h-ful...\">\n                    <div>\n                    <div>\n                    <div className=\"flex flex-...\">\n                      <div>\n                      <Link>\n                      <Link href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} className=\"flex h-con...\">\n                        <LinkComponent href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} ...>\n+                         <a\n+                           aria-label=\"Calendar\"\n+                           aria-current={undefined}\n+                           className=\"flex h-control-md items-center gap-2.5 rounded-field px-2.5 text-body text-fg-m...\"\n+                           ref={function}\n+                           onClick={function onClick}\n+                           onMouseEnter={function onMouseEnter}\n+                           onTouchStart={function onTouchStart}\n+                           href=\"/calendar\"\n+                         >\n                      ...\n                    ...\n        ...\n"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <SuiteShellView demo={{runtime:{...}, ...}} sidebarCollapsed={false} rail={<AppRail>} sidebar={<div>} ...>\n      <div className=\"flex h-dvh...\">\n        <a>\n        <div className=\"hidden min...\">\n          <AppRail>\n          <div className=\"w-(--ot-la...\">\n            <div data-collapsed={false} className=\"ot-suite-s...\">\n              <div>\n              <div className=\"min-h-0 fl...\">\n                <Sidebar title=\"HR\" sections={[...]}>\n                  <nav aria-label=\"Main navig...\" className=\"flex h-ful...\">\n                    <div>\n                    <div>\n                    <div className=\"flex flex-...\">\n                      <div>\n                      <Link>\n                      <Link href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} className=\"flex h-con...\">\n                        <LinkComponent href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} ...>\n+                         <a\n+                           aria-label=\"Calendar\"\n+                           aria-current={undefined}\n+                           className=\"flex h-control-md items-center gap-2.5 rounded-field px-2.5 text-body text-fg-m...\"\n+                           ref={function}\n+                           onClick={function onClick}\n+                           onMouseEnter={function onMouseEnter}\n+                           onTouchStart={function onTouchStart}\n+                           href=\"/calendar\"\n+                         >\n                      ...\n                    ...\n        ...\n"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <SuiteShellView demo={{runtime:{...}, ...}} sidebarCollapsed={false} rail={<AppRail>} sidebar={<div>} ...>\n      <div className=\"flex h-dvh...\">\n        <a>\n        <div className=\"hidden min...\">\n          <AppRail>\n          <div className=\"w-(--ot-la...\">\n            <div data-collapsed={false} className=\"ot-suite-s...\">\n              <div>\n              <div className=\"min-h-0 fl...\">\n                <Sidebar title=\"HR\" sections={[...]}>\n                  <nav aria-label=\"Main navig...\" className=\"flex h-ful...\">\n                    <div>\n                    <div>\n                    <div className=\"flex flex-...\">\n                      <div>\n                      <Link>\n                      <Link href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} className=\"flex h-con...\">\n                        <LinkComponent href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} ...>\n+                         <a\n+                           aria-label=\"Calendar\"\n+                           aria-current={undefined}\n+                           className=\"flex h-control-md items-center gap-2.5 rounded-field px-2.5 text-body text-fg-m...\"\n+                           ref={function}\n+                           onClick={function onClick}\n+                           onMouseEnter={function onMouseEnter}\n+                           onTouchStart={function onTouchStart}\n+                           href=\"/calendar\"\n+                         >\n                      ...\n                    ...\n        ...\n"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <SuiteShellView demo={{runtime:{...}, ...}} sidebarCollapsed={false} rail={<AppRail>} sidebar={<div>} ...>\n      <div className=\"flex h-dvh...\">\n        <a>\n        <div className=\"hidden min...\">\n          <AppRail>\n          <div className=\"w-(--ot-la...\">\n            <div data-collapsed={false} className=\"ot-suite-s...\">\n              <div>\n              <div className=\"min-h-0 fl...\">\n                <Sidebar title=\"HR\" sections={[...]}>\n                  <nav aria-label=\"Main navig...\" className=\"flex h-ful...\">\n                    <div>\n                    <div>\n                    <div className=\"flex flex-...\">\n                      <div>\n                      <Link>\n                      <Link href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} className=\"flex h-con...\">\n                        <LinkComponent href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} ...>\n+                         <a\n+                           aria-label=\"Calendar\"\n+                           aria-current={undefined}\n+                           className=\"flex h-control-md items-center gap-2.5 rounded-field px-2.5 text-body text-fg-m...\"\n+                           ref={function}\n+                           onClick={function onClick}\n+                           onMouseEnter={function onMouseEnter}\n+                           onTouchStart={function onTouchStart}\n+                           href=\"/calendar\"\n+                         >\n                      ...\n                    ...\n        ...\n"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <SuiteShellView demo={{runtime:{...}, ...}} sidebarCollapsed={false} rail={<AppRail>} sidebar={<div>} ...>\n      <div className=\"flex h-dvh...\">\n        <a>\n        <div className=\"hidden min...\">\n          <AppRail>\n          <div className=\"w-(--ot-la...\">\n            <div data-collapsed={false} className=\"ot-suite-s...\">\n              <div>\n              <div className=\"min-h-0 fl...\">\n                <Sidebar title=\"HR\" sections={[...]}>\n                  <nav aria-label=\"Main navig...\" className=\"flex h-ful...\">\n                    <div>\n                    <div>\n                    <div className=\"flex flex-...\">\n                      <div>\n                      <Link>\n                      <Link href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} className=\"flex h-con...\">\n                        <LinkComponent href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} ...>\n+                         <a\n+                           aria-label=\"Calendar\"\n+                           aria-current={undefined}\n+                           className=\"flex h-control-md items-center gap-2.5 rounded-field px-2.5 text-body text-fg-m...\"\n+                           ref={function}\n+                           onClick={function onClick}\n+                           onMouseEnter={function onMouseEnter}\n+                           onTouchStart={function onTouchStart}\n+                           href=\"/calendar\"\n+                         >\n                      ...\n                    ...\n        ...\n"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <SuiteShellView demo={{runtime:{...}, ...}} sidebarCollapsed={false} rail={<AppRail>} sidebar={<div>} ...>\n      <div className=\"flex h-dvh...\">\n        <a>\n        <div className=\"hidden min...\">\n          <AppRail>\n          <div className=\"w-(--ot-la...\">\n            <div data-collapsed={false} className=\"ot-suite-s...\">\n              <div>\n              <div className=\"min-h-0 fl...\">\n                <Sidebar title=\"HR\" sections={[...]}>\n                  <nav aria-label=\"Main navig...\" className=\"flex h-ful...\">\n                    <div>\n                    <div>\n                    <div className=\"flex flex-...\">\n                      <div>\n                      <Link>\n                      <Link href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} className=\"flex h-con...\">\n                        <LinkComponent href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} ...>\n+                         <a\n+                           aria-label=\"Calendar\"\n+                           aria-current={undefined}\n+                           className=\"flex h-control-md items-center gap-2.5 rounded-field px-2.5 text-body text-fg-m...\"\n+                           ref={function}\n+                           onClick={function onClick}\n+                           onMouseEnter={function onMouseEnter}\n+                           onTouchStart={function onTouchStart}\n+                           href=\"/calendar\"\n+                         >\n                      ...\n                    ...\n        ...\n"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <SuiteShellView demo={{runtime:{...}, ...}} sidebarCollapsed={false} rail={<AppRail>} sidebar={<div>} ...>\n      <div className=\"flex h-dvh...\">\n        <a>\n        <div className=\"hidden min...\">\n          <AppRail>\n          <div className=\"w-(--ot-la...\">\n            <div data-collapsed={false} className=\"ot-suite-s...\">\n              <div>\n              <div className=\"min-h-0 fl...\">\n                <Sidebar title=\"HR\" sections={[...]}>\n                  <nav aria-label=\"Main navig...\" className=\"flex h-ful...\">\n                    <div>\n                    <div>\n                    <div className=\"flex flex-...\">\n                      <div>\n                      <Link>\n                      <Link href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} className=\"flex h-con...\">\n                        <LinkComponent href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} ...>\n+                         <a\n+                           aria-label=\"Calendar\"\n+                           aria-current={undefined}\n+                           className=\"flex h-control-md items-center gap-2.5 rounded-field px-2.5 text-body text-fg-m...\"\n+                           ref={function}\n+                           onClick={function onClick}\n+                           onMouseEnter={function onMouseEnter}\n+                           onTouchStart={function onTouchStart}\n+                           href=\"/calendar\"\n+                         >\n                      ...\n                    ...\n        ...\n"
+    },
+    {
+      "locale": "en",
+      "theme": "light",
+      "width": 1440,
+      "message": "Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:\n\n- A server/client branch `if (typeof window !== 'undefined')`.\n- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.\n- Date formatting in a user's locale which doesn't match the server.\n- External changing data without sending a snapshot of it along with the HTML.\n- Invalid HTML tag nesting.\n\nIt can also happen if the client has a browser extension installed which messes with the HTML before React loaded.\n\nhttps://react.dev/link/hydration-mismatch\n\n  ...\n    <SuiteShellView demo={{runtime:{...}, ...}} sidebarCollapsed={false} rail={<AppRail>} sidebar={<div>} ...>\n      <div className=\"flex h-dvh...\">\n        <a>\n        <div className=\"hidden min...\">\n          <AppRail>\n          <div className=\"w-(--ot-la...\">\n            <div data-collapsed={false} className=\"ot-suite-s...\">\n              <div>\n              <div className=\"min-h-0 fl...\">\n                <Sidebar title=\"HR\" sections={[...]}>\n                  <nav aria-label=\"Main navig...\" className=\"flex h-ful...\">\n                    <div>\n                    <div>\n                    <div className=\"flex flex-...\">\n                      <div>\n                      <Link>\n                      <Link href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} className=\"flex h-con...\">\n                        <LinkComponent href=\"/calendar\" aria-label=\"Calendar\" aria-current={undefined} ...>\n+                         <a\n+                           aria-label=\"Calendar\"\n+                           aria-current={undefined}\n+                           className=\"flex h-control-md items-center gap-2.5 rounded-field px-2.5 text-body text-fg-m...\"\n+                           ref={function}\n+                           onClick={function onClick}\n+                           onMouseEnter={function onMouseEnter}\n+                           onTouchStart={function onTouchStart}\n+                           href=\"/calendar\"\n+                         >\n                      ...\n                    ...\n        ...\n"
+    }
+  ]
+}

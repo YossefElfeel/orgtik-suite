@@ -4,7 +4,7 @@ import { FolderOpen, UploadSimple as Upload } from "@phosphor-icons/react";
 import React, { useEffect, useMemo, useRef } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import Image from "next/image";
-import { Input } from "@/components/ui/input";
+import { Input } from "@orgtik/ui";
 import { formStyles } from "@/lib/form-styles";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";

@@ -78,7 +78,7 @@ export function useImportBatchColumns() {
         cell: ({ row }) => (
           <IconButton
             label={t("actions.view")}
-            variant="outline-view"
+            variant="secondary"
             href={`/finance-queue/${row.original.runId}`}
           >
             <Eye className="size-4 text-primary" />

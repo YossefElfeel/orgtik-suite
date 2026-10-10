@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useLocale, useTranslations } from "next-intl";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "@/components/bindings/radio-group";
 import { Form, FormField, FormItem, FormControl, FormMessage } from "@/components/ui/form";
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import TextFormEle from "@/components/ui/form/text-form-element";
@@ -20,7 +20,7 @@ import { ALL_COUNTRIES } from "@/constants/countries";
 import { makePersonalSchema, type PersonalFormValues } from "../schemas";
 import { isValidPostCode, postCodeFormat } from "@/lib/post-codes";
 import z from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useEmployeeWizard } from "../EmployeeWizardContext";
 import { useCreateEmployeeMutation, useUpdateOnboardingStepMutation, useGetOnboardingStepQuery } from "@/redux/features/employee/employeeApi";
 import { useReqWithToaster } from "@/hooks/useReqWithToaster";
@@ -359,7 +359,7 @@ export function PersonalInfoStep() {
             className="min-w-32"
             type="button"
             size="lg"
-            variant="outline"
+            variant="secondary"
             onClick={onBack}
             disabled={form.formState.isSubmitting || recoveringInvitation}
           >

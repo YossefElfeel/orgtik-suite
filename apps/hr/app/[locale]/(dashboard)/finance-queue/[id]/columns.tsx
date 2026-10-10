@@ -3,8 +3,8 @@ import { Check, PencilSimple as Edit2 } from "@phosphor-icons/react";
 
 import { ColumnDef } from "@tanstack/react-table";
 import CustomAvatar from "@/components/shared/CustomAvatar";
-import { Button } from "@/components/ui/button";
-import StatusBadge from "@/components/shared/StatusBadge";
+import { Button } from "@orgtik/ui";
+import StatusBadge from "@/components/bindings/EmploymentStatus";
 import CustomizeTooltip from "@/components/shared/CustomizeTooltip";
 import { useFormatter, useTranslations } from "next-intl";
 import { useMarkPayrollItemAsPaidMutation } from "@/redux/features/payroll/payrollApi";
@@ -88,7 +88,7 @@ export const useColumns = () => {
           <div className="flex items-center gap-2">
             {row.original.status === "queued" && (
               <Button
-                variant="outline"
+                variant="secondary"
                 size="sm"
                 className="h-8 text-xs text-secondary"
                 onClick={() => markAsPaid(row.original.id)}

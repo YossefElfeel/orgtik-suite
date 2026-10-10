@@ -9,8 +9,8 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@orgtik/ui";
+import { Textarea } from "@orgtik/ui";
 import { cn } from "@/lib/utils";
 import { formStyles } from "@/lib/form-styles";
 
@@ -35,7 +35,7 @@ interface CustomInputProps<T extends FieldValues> {
   className?: string;
   labelClassName?: string;
   inputClassName?: string;
-  type?: React.InputHTMLAttributes<HTMLInputElement>["type"] | "textarea";
+  type?: Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">["type"] | "textarea";
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   /**
@@ -52,7 +52,7 @@ interface CustomInputProps<T extends FieldValues> {
   inlineSuffixClassName?: string;
   disabled?: boolean;
   readOnly?: boolean;
-  inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
+  inputProps?: Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">;
 }
 
 export default function TextFormEle<T extends FieldValues>({
@@ -140,7 +140,7 @@ export default function TextFormEle<T extends FieldValues>({
                   readOnly={readOnly}
                   placeholder={placeholder}
                   type={
-                    type as React.InputHTMLAttributes<HTMLInputElement>["type"]
+                    type as Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">["type"]
                   }
                   step={type === "number" ? "0.01" : undefined}
                   className={cn(
@@ -186,7 +186,7 @@ export default function TextFormEle<T extends FieldValues>({
                   readOnly={readOnly}
                   placeholder={placeholder}
                   type={
-                    type as React.InputHTMLAttributes<HTMLInputElement>["type"]
+                    type as Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">["type"]
                   }
                   className={cn(
                     "h-full flex-1 rounded-none border-0 bg-transparent px-4 py-0 text-[30px] leading-none text-fg-muted shadow-none ring-0 focus-visible:border-0 focus-visible:ring-0",

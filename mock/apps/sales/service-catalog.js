@@ -124,10 +124,19 @@ function preview(S, principal, country = 'CH') {
   return require('../admin/website-offers').publicCatalog(candidate, { region: { country, currency, source: 'service-preview' }, workspace: { country, currency, billing: { country }, members: [], lines: [] } });
 }
 function cancelSchedule(S, principal, id) { authorize(principal, { write: true }); const row = S.workspace('ws_orgtik').suite?.serviceSchedules?.find(row => row.id === id); if (!row || row.state !== 'scheduled') throw fail(409, 'schedule_unavailable', 'This schedule is no longer pending.'); row.state = 'cancelled'; row.cancelledAt = S.iso(S.now()); row.cancelledBy = principal.user.key; return { id, state: row.state }; }
+function payment(S, row) {
+  const order = row.source?.kind === 'website_order' && S.db.publicWebsiteOrders.find(value => value.snapshot?.reference === row.source.reference && value.snapshot.paymentStatus === 'succeeded');
+  if (order && S.db.websiteOrderLinks.some(link => link.reference === row.source.reference && link.workspaceId === row.workspaceId && link.requests.some(request => request.requestId === row.id))) {
+    const line = order.snapshot.groups.flatMap(group => group.lines).find(value => value.catalogId === row.catalogId && value.fulfillment !== 'tool');
+    if (line) return { prepaid: true, reference: order.snapshot.reference, currency: order.snapshot.currency, decimals: order.snapshot.decimals, amountMinor: line.total, paidAt: order.snapshot.createdAt, months: line.months };
+  }
+  const invoice = row.invoiceId && S.db.invoices.find(value => value.id === row.invoiceId && value.workspaceId === row.workspaceId && value.state === 'paid');
+  return invoice ? { prepaid: false, invoiceId: invoice.id, currency: invoice.currency, amount: invoice.total, paidAt: invoice.paidAt || invoice.issuedAt } : null;
+}
 function requests(S, principal) {
   const permissions = authorize(principal, { catalog: false }), assignedOnly = permissions.includes('services:edit:assigned') && !permissions.includes('services:edit');
   const writable = !principal.readOnly && principal.context.workspaceContext.tools.crm.canWrite;
-  return S.db.serviceRequests.filter(row => !assignedOnly || row.assignee === principal.user.key).map(row => ({ ...clone(row), managedIn: 'crm', workspaceName: S.workspace(row.workspaceId)?.name, currency: S.workspace(row.workspaceId)?.currency, capabilities: { canEdit: writable && (permissions.includes('services:edit') || assignedOnly && row.assignee === principal.user.key), canAssign: writable && permissions.includes('services:edit'), canDeliver: writable && row.state === 'in_progress' && (permissions.includes('services:edit') || assignedOnly && row.assignee === principal.user.key) } }));
+  return S.db.serviceRequests.filter(row => !assignedOnly || row.assignee === principal.user.key).map(row => { const paid = payment(S, row), canEdit = writable && (permissions.includes('services:edit') || assignedOnly && row.assignee === principal.user.key); return { ...clone(row), prepaid: Boolean(paid?.prepaid), paidSource: paid, managedIn: 'crm', workspaceName: S.workspace(row.workspaceId)?.name, currency: S.workspace(row.workspaceId)?.currency, capabilities: { canEdit, canAssign: writable && permissions.includes('services:edit'), canStart: Boolean(canEdit && paid && (row.state === 'awaiting_payment' || paid.prepaid && row.state === 'under_review')), canDeliver: canEdit && row.state === 'in_progress' } }; });
 }
 function staff(S, identity, principal) {
   authorize(principal, { catalog: false });
@@ -143,7 +152,8 @@ function requestAction(S, identity, principal, id, body, { packageFile } = {}) {
   if (!row || permissions.includes('services:edit:assigned') && !permissions.includes('services:edit') && row.assignee !== principal.user.key) throw fail(404, 'service_request_not_found', 'This request was not found.');
   if (!permissions.includes('services:edit') && !(permissions.includes('services:edit:assigned') && row.assignee === principal.user.key)) throw fail(403, 'service_permission_required', 'Your role cannot change this request.');
   const at = S.iso(S.now()), transitions = { review: ['new', 'under_review'], start: ['awaiting_payment', 'in_progress'], hold: ['in_progress', 'on_hold'], resume: ['on_hold', 'in_progress'] };
-  const paidOrder = row.source?.kind === 'website_order' && S.db.publicWebsiteOrders.find(order => order.snapshot?.reference === row.source.reference && order.snapshot.paymentStatus === 'succeeded'), prepaid = paidOrder && S.db.websiteOrderLinks.some(link => link.reference === row.source.reference && link.workspaceId === row.workspaceId && link.requests.some(request => request.requestId === row.id));
+  const paid = payment(S, row), prepaid = paid?.prepaid;
+  if (body.action === 'start' && !paid) throw fail(409, 'service_payment_required', 'The customer must complete the actual mock payment before work starts.');
   if (body.action === 'start' && prepaid && row.state === 'under_review') { transitions.start = ['under_review', 'in_progress']; row.periodStart = at; row.periodEnd = S.iso(S.now() + row.termMonths * 30 * 864e5); }
   if (transitions[body.action]) { const [from, to] = transitions[body.action]; if (row.state !== from) throw fail(409, 'wrong_service_state', 'Review the current service state.'); row.state = to; }
   else if (body.action === 'assign') { if (!permissions.includes('services:edit')) throw fail(403, 'service_assignment_required', 'An OrgTik service administrator assigns delivery ownership.'); if (!staff(S, identity, principal).some(person => person.key === body.assignee)) throw fail(422, 'invalid_service_assignee', 'Choose eligible active OrgTik CRM staff.'); row.assignee = body.assignee; }

@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from "react";
-import type { Button } from "@/components/ui/button";
+import type { Button } from "@orgtik/ui";
 
 /** A button that shows only an icon (FS-HR-4, HR-016). */
 export type IconButtonProps = Omit<ComponentProps<typeof Button>, "aria-label" | "children"> & {

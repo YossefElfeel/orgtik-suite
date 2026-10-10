@@ -1,11 +1,11 @@
 "use client";
 import { Plus, TreeStructure as Network, Users } from "@phosphor-icons/react";
 
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import { MenuTabItem, TabMenu } from "@/components/shared/TabMenu";
 import { CreateUpdateEmployeeSheet } from "@/components/sheets/CreateUpdateEmployeeSheet";
 import { ExportEmployeesButton } from "@/components/pages/employee/ExportEmployeesButton";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";

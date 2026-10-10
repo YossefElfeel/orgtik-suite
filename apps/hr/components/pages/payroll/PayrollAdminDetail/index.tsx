@@ -2,8 +2,8 @@
 import { CircleNotch as Loader2, WarningCircle as AlertCircle } from "@phosphor-icons/react";
 
 import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@orgtik/ui";
+import { Textarea } from "@orgtik/ui";
 import EmployeeApprovalCard, {
   IActivityLog,
   IEmployeeBatch,
@@ -203,7 +203,7 @@ export default function PendingApprovalsPage({
                 cancelLabel={t("approveAllConfirm.cancel")}
                 onConfirm={handleApproveAll}
                 trigger={
-                  <Button variant="outline" size="lg" disabled={isApproveAllLoading || isSubmitReviewLoading || waiting.length === 0}>
+                  <Button variant="secondary" size="lg" disabled={isApproveAllLoading || isSubmitReviewLoading || waiting.length === 0}>
                     {t("approveAll", { count: waiting.length })}
                   </Button>
                 }

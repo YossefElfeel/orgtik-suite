@@ -1,5 +1,5 @@
 import { CalendarDots as CalendarDays, LinkSimple as Link2, PencilSimple as Pencil, User as UserRound } from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import type { IJobApplicationAppointment } from "@/types/job";
 import { useLocale, useTranslations } from "next-intl";
 

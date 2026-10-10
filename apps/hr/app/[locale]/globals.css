@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 @import "@orgtik/ui/tailwind.css";
 
 /* @custom-variant dark (&:is(.dark *)); */
@@ -55,12 +54,7 @@
   --color-gray-black: var(--gray-black);
 }
 
-/* Token bridge (HR wave, FS-HR-2, D-020): HR's shadcn variables now read the @orgtik/ui tokens, so
-   today's components take the brand and follow the theme without edits. HR uses --secondary as a
-   TEXT colour (182 text-secondary against 10 bg-secondary), so it maps to muted ink; --tertiary,
-   --gray and --gray-black map to subtle ink, the sunken surface and ink. Declared on every
-   [data-theme] element too, so a scoped theme recomputes them. It goes away when the last
-   component has moved to the library (FS-HR-10). */
+/* HR semantic aliases delegate to shared OrgTik tokens for domain layouts. */
 :root,
 [data-theme] {
   --background: var(--ot-bg-canvas);

@@ -71,7 +71,7 @@ export const useColumns = () => {
           <div className="flex items-center gap-2">
             <IconButton
               label={t("tooltips.viewDetails")}
-              variant="outline-view"
+              variant="secondary"
               href={`/department/${row.original.id}`}
             >
               <Eye className="h-4 w-4" />
@@ -84,7 +84,7 @@ export const useColumns = () => {
               onConfirm={() => deleteDepartment(row.original.id).unwrap()}
               loading={isDeleting}
               trigger={
-                <IconButton label={t("tooltips.deleteDepartment")} variant="outline-delete">
+                <IconButton label={t("tooltips.deleteDepartment")} variant="secondary">
                   <Trash2 className="h-4 w-4" />
                 </IconButton>
               }

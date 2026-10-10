@@ -96,7 +96,7 @@ export const useColumns = (departmentId: string, managerUserId?: string) => {
           <div className="flex items-center gap-2">
             <IconButton
               label={isManager ? tActions("isManager") : tActions("makeManager")}
-              variant={isManager ? "default" : "outline"}
+              variant={isManager ? "primary" : "secondary"}
               onClick={handleAssignManager}
               disabled={isAssigningManager || isManager}
             >
@@ -105,7 +105,7 @@ export const useColumns = (departmentId: string, managerUserId?: string) => {
 
             <IconButton
               label={tActions("viewDetails")}
-              variant="outline-view"
+              variant="secondary"
               href={`/employees/${row.original.id}`}
             >
               <Eye className="h-4 w-4" />
@@ -126,7 +126,7 @@ export const useColumns = (departmentId: string, managerUserId?: string) => {
               trigger={
                 <IconButton
                   label={isManager ? tActions("managerCantBeRemoved") : tActions("removeEmployee")}
-                  variant="outline-delete"
+                  variant="secondary"
                   disabled={isManager || isRemovingEmployee}
                 >
                   <Trash2 className="h-4 w-4" />

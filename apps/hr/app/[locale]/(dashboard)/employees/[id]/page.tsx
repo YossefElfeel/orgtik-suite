@@ -1,7 +1,7 @@
 "use client";
 import { CircleNotch as Loader2 } from "@phosphor-icons/react";
 
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import { PersonalInfoSection } from "@/components/pages/employee/details/PersonalInfoSection";
 import { EmployeeInfoSection } from "@/components/pages/employee/details/EmployeeInfoSection";
 import { SkillsSection } from "@/components/pages/employee/details/SkillsSection";

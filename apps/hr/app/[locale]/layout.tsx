@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
-import { Toaster } from "sonner";
+import { Toaster } from "@orgtik/ui";
 import { THEME_COOKIE, ThemeScript, directionOf, themeAttributes, type Locale as UiLocale } from "@orgtik/ui";
 import { cookies } from "next/headers";
 import { OrgtikNextProvider } from "@orgtik/ui/next";
