@@ -2171,6 +2171,11 @@
     "taskCancelled": "Annulé",
     "taskUnavailable": "Statut de tâche indisponible",
     "projectSwitchFailed": "Impossible de sélectionner ce projet. Réessayez avec votre accès actuel.",
-    "projectUnavailable": "Ce projet n’est pas visible avec votre accès actuel."
+    "projectUnavailable": "Ce projet n’est pas visible avec votre accès actuel.",
+    "pendingCommands": "Modifications non confirmées",
+    "pendingCommandsBody": "Une réponse a été perdue. Vérifiez la modification initiale avant d’en commencer une autre. La récupération utilise la même requête enregistrée et vos droits actuels.",
+    "recoverCommand": "Vérifier la modification initiale",
+    "recoveryDenied": "La modification initiale n’a pas pu être confirmée. Vérifiez vos droits actuels et l’enregistrement source, puis réessayez. La requête enregistrée est conservée.",
+    "recoverFirst": "Vérifiez la modification initiale non confirmée avant d’envoyer des détails différents."
   }
 }

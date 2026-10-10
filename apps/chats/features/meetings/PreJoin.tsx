@@ -151,7 +151,7 @@ export function PreJoin({
                   aria-valuemax={100}
                 >
                   <span
-                    className={("ch-background-289564"+' '+"ch-transition-a0e1b3")+" "+(geometryClass({width:`${Math.min(100, level * 180)}%`}))}
+                    className={("w-full origin-left rtl:origin-right ch-background-289564"+' '+"ch-transition-a0e1b3")+" "+(geometryClass({transform:`scaleX(${Math.min(1, level * 1.8)})`}))}
                   />
                 </div>
                 <p className={"text-caption "+("ch-color-094083")} >
