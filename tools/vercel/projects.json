@@ -16,6 +16,7 @@
       "previewUrl": "https://orgtik-suite-chats-preview.vercel.app"
     },
     "content": {
+      "retired": true,
       "projectId": "prj_aqmNkV7n395HnTlCmfzT9GDYBRvN",
       "dir": "apps/content",
       "package": "content-dashboard-somion",
