@@ -42,6 +42,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/app/hooks";
 import { logoutUser } from "@/redux/features/auth/authSlice";
 import { useMarketingRoles } from "@/lib/permissions";
 import { ProjectSwitcher } from "./ProjectSwitcher";
+import ProjectRouteGate from "./ProjectRouteGate";
 import MarketingScopeGate from "@/providers/MarketingScopeGate";
 export function SuiteFrame({ children }: { children: ReactNode }) {
   const t = useTranslations("Shell"),
@@ -196,7 +197,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
         <div className="mb-5">
           <ProjectSwitcher />
         </div>
-        {children}
+        <ProjectRouteGate>{children}</ProjectRouteGate>
       </MarketingScopeGate>
     </SharedSuiteFrame>
   );

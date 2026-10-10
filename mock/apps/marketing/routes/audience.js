@@ -1,5 +1,4 @@
 // Company audiences, segments, CSV contact imports, and messaging senders/templates (Email, SMS, WhatsApp).
-const fs = require("fs");
 const { send, error, newId, nowIso, paginate, textMatch, listParam, slugify } = require("../lib");
 
 // Minimal RFC-4180-ish CSV parser (quotes, escaped quotes, CRLF, ; or , delimiters, BOM).
@@ -87,60 +86,10 @@ module.exports = function audienceRoutes(app, { ctx, getDb, views, h }) {
   app.post("/audiences/imports", h.handle((_req,res)=>res.status(410).json({success:false,code:"managed_in_crm",path:"/our-audience/contacts",message:"Choose canonical CRM contact references."}),{needsProject:false}));
   app.post("/audiences/imports/:id/commit", h.handle((_req,res)=>res.status(410).json({success:false,code:"managed_in_crm",path:"/our-audience/contacts",message:"Choose canonical CRM contact references."}),{needsProject:false}));
   // ---------------------------------------------------------------- CSV imports
-  // POST /audiences/imports (multipart `file`) -> preview { id, headers, preview, totalRows, status }
-  app.post("/audiences/imports", ctx.upload.any(), h.handle((req, res, u, project) => {
-    const file = (req.files || []).find((f) => f.fieldname === "file") || (req.files || [])[0];
-    if (!file) return error(res, 422, "Please upload a .csv or .xlsx file");
-    const ext = (file.originalname.split(".").pop() || "").toLowerCase();
-    let headers;
-    let records;
-    if (ext === "csv" || ext === "txt" || /csv|text/.test(file.mimetype)) {
-      ({ headers, records } = parseCsv(fs.readFileSync(file.path, "utf8")));
-      if (!headers.length || !records.length) return error(res, 422, "The file has no data rows — add a header row and at least one contact");
-    } else if (ext === "xlsx" || ext === "xls") {
-      // No spreadsheet parser in the local mock: show a representative preview so the flow can continue.
-      headers = ["Full name", "Email", "Phone", "City"];
-      records = [["Mariam Adel", "mariam.adel@example.com", "+20 100 123 4567", "Alexandria"], ["Khaled Nasser", "khaled.nasser@example.com", "+966 50 222 1100", "Riyadh"], ["Laila Hamdy", "laila.hamdy@example.com", "+971 55 410 8890", "Dubai"], ["Omar Fathi", "omar.fathi@example.com", "+20 122 900 3344", "Cairo"]]
-        .map((r) => Object.fromEntries(headers.map((h2, i) => [h2, r[i]])));
-      records = Array.from({ length: 48 }, (_, i) => records[i % records.length]);
-    } else {
-      return error(res, 422, "Unsupported file type — upload a .csv or .xlsx file");
-    }
-    const imp = { id: newId(), projectId: project.id, userId: u.id, fileName: file.originalname, status: "PREVIEW_READY", headers, rows: records, totalRows: records.length, mapping: null, savedAudienceId: null, createdAt: nowIso(), updatedAt: nowIso() };
-    getDb().imports.push(imp);
-    send(res, { id: imp.id, fileName: imp.fileName, headers, preview: records.slice(0, 5), totalRows: records.length, status: imp.status }, `${records.length} contacts found in ${file.originalname}`, 201);
-  }));
-
   app.get("/audiences/imports/:id", h.handle((req, res, u, project) => {
     const imp = getDb().imports.find((x) => x.id === req.params.id && x.projectId === project.id);
     if (!imp) return h.notFound(res, "Import");
     send(res, { id: imp.id, fileName: imp.fileName, headers: imp.headers, preview: (imp.rows || []).slice(0, 5), totalRows: imp.totalRows, status: imp.status, savedAudienceId: imp.savedAudienceId }, "Import fetched successfully");
-  }));
-
-  // POST /audiences/imports/:id/commit { nameColumn, emailColumn?, phoneColumn?, saveAsCompanyAudience, audienceName? }
-  app.post("/audiences/imports/:id/commit", h.handle((req, res, u, project) => {
-    const db = getDb();
-    const imp = db.imports.find((x) => x.id === req.params.id && x.projectId === project.id);
-    if (!imp) return h.notFound(res, "Import");
-    const b = req.body || {};
-    if (!b.nameColumn || !imp.headers.includes(b.nameColumn)) return error(res, 422, "Choose which column holds the contact name");
-    for (const col of [b.emailColumn, b.phoneColumn]) if (col && !imp.headers.includes(col)) return error(res, 422, `Column "${col}" is not in the file`);
-    if (!b.emailColumn && !b.phoneColumn) return error(res, 422, "Map an email or a phone column so contacts can be reached");
-    const valid = (imp.rows || []).filter((r) => String(r[b.nameColumn] || "").trim() && (String(r[b.emailColumn] || "").includes("@") || String(r[b.phoneColumn] || "").replace(/\D/g, "").length >= 8));
-    imp.mapping = { nameColumn: b.nameColumn, emailColumn: b.emailColumn || null, phoneColumn: b.phoneColumn || null };
-    imp.status = "COMPLETED";
-    imp.importedCount = valid.length;
-    imp.skippedCount = imp.totalRows - valid.length;
-    imp.updatedAt = nowIso();
-    let audience = null;
-    if (b.saveAsCompanyAudience) {
-      const name = String(b.audienceName || "").trim() || imp.fileName.replace(/\.[^.]+$/, "");
-      audience = { id: newId(), projectId: project.id, name, description: `Imported from ${imp.fileName} on ${new Date().toLocaleDateString("en-GB")}`, contactsCount: valid.length, createdAt: nowIso(), updatedAt: nowIso() };
-      db.audiences.push(audience);
-      imp.savedAudienceId = audience.id;
-    }
-    send(res, { id: imp.id, status: imp.status, importedCount: valid.length, skippedCount: imp.skippedCount, audienceId: audience?.id || null, ...(audience ? { audience: views.audienceView(audience) } : {}) },
-      audience ? `${valid.length} contacts saved to "${audience.name}"` : `${valid.length} contacts imported`);
   }));
 
   app.get("/audiences/:id", h.handle((req, res, u, project) => {

@@ -3569,18 +3569,6 @@
     },
     {
       "app": "marketing",
-      "method": "POST",
-      "path": "/audiences/imports",
-      "source": "apps/marketing/routes/audience.js",
-      "authorization": {
-        "audience": "tool:marketing",
-        "workspaceBinding": "signed selected workspace",
-        "permission": "current tool grant and app record/role guard",
-        "writes": "current write capability; billing and impersonation restrictions"
-      }
-    },
-    {
-      "app": "marketing",
       "method": "GET",
       "path": "/audiences/imports/:id",
       "source": "apps/marketing/routes/audience.js",
@@ -3589,18 +3577,6 @@
         "workspaceBinding": "signed selected workspace",
         "permission": "current tool grant and app record/role guard",
         "writes": "read"
-      }
-    },
-    {
-      "app": "marketing",
-      "method": "POST",
-      "path": "/audiences/imports/:id/commit",
-      "source": "apps/marketing/routes/audience.js",
-      "authorization": {
-        "audience": "tool:marketing",
-        "workspaceBinding": "signed selected workspace",
-        "permission": "current tool grant and app record/role guard",
-        "writes": "current write capability; billing and impersonation restrictions"
       }
     },
     {

@@ -2169,6 +2169,8 @@
     "assetsDeferred": "استخدم ملفات المعرض المرفقة. رفع الملفات الجديدة مؤجل.",
     "taskOnHold": "معلّق",
     "taskCancelled": "ملغى",
-    "taskUnavailable": "حالة المهمة غير متاحة"
+    "taskUnavailable": "حالة المهمة غير متاحة",
+    "projectSwitchFailed": "تعذّر اختيار هذا المشروع. أعد المحاولة بالصلاحية الحالية.",
+    "projectUnavailable": "هذا المشروع غير متاح ضمن صلاحيتك الحالية."
   }
 }
