@@ -1,104 +1,28 @@
-"use client";
-import { demoRuntime } from "@orgtik/ui";
-
-/**
- * SOMION HQ - APP SHELL
- *
- * The suite chrome every module renders inside. In production this is the
- * SaaS layer's /app shell and this file is deleted; the module keeps its
- * sidebar and content and slots into the real one.
- */
-
-import { useEffect, type ReactNode } from "react";
-import { ChatsRail } from "./ChatsRail";
-import { HqSidebar } from "./HqSidebar";
-import { SuiteShell } from "@orgtik/ui";
-import { useI18n } from "@/lib/i18n";
-import { TopBarEnd, TopBarStart } from "./TopBar";
-import { LiveRegion, PrototypeBadge, ToastHost } from "./ShellExtras";
-import { MobileTabs } from "./MobileTabs";
-import { RegisterServiceWorker } from "./RegisterServiceWorker";
-import { ClientOnly } from "./ClientOnly";
-import { resumeAudio } from "@/lib/audio";
-import { InactivityMonitor } from "./InactivityMonitor";
-import { NavProgress } from "./NavProgress";
-import { SignedOutScreen } from "./SignedOutScreen";
-import { SuiteGate, ViewAsBanner } from "./SuiteGate";
-import { useWorkspace } from "@/store";
-import { usePathname, useRouter } from "next/navigation";
-
-export function AppShell({
-  sidebar,
-  children,
-}: {
-  sidebar?: ReactNode;
-  children: ReactNode;
-}) {
-  const { setLocale } = useI18n();
-  // Workspace data comes from scoped polling; no ambient seed events or cross-tab relay.
-  const signedOut = useWorkspace((s) => s.session.state === "signed_out");
-
-  /* A module that is not switched on shows its entry point and nothing
-     else, the way the suite would. */
-  const activation = useWorkspace((s) => s.settings.activation.state);
-  const pathname = usePathname();
-  const router = useRouter();
-  useEffect(() => {
-    if (activation === "off" && pathname.startsWith("/hq/") && !pathname.startsWith("/hq/activate")) router.replace("/hq/activate");
-  }, [activation, pathname, router]);
-
-  /* Browsers refuse to start an AudioContext before a gesture. Arming it on
-     the first interaction means the first knock actually makes a sound. */
-  useEffect(() => {
-    const arm = () => resumeAudio();
-    document.addEventListener("pointerdown", arm, { once: true });
-    document.addEventListener("keydown", arm, { once: true });
-    return () => {
-      document.removeEventListener("pointerdown", arm);
-      document.removeEventListener("keydown", arm);
-    };
-  }, []);
-
-  /* No session, no chrome: the sign-in stands alone, as it does in the
-     product, and the inactivity monitor is not mounted to argue with it. */
-  if (signedOut) {
-    return (
-      <ClientOnly>
-        <>
-          <SignedOutScreen />
-        </>
-      </ClientOnly>
-    );
-  }
-
-  return (
-    <ClientOnly>
-    <SuiteGate>
-      {/* The suite's frame (FS-CHT-5): the rail and this sidebar at the reading start, in a sheet
-          under 1024px opened from the top bar, so every section is reachable at every width. */}
-      <SuiteShell
-      demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "chats", onLocaleChange: setLocale }}
-        rail={<ChatsRail />}
-        sidebar={
-          <div className="flex h-full flex-col overflow-y-auto border-e border-line bg-raised">
-            {sidebar ?? <HqSidebar />}
-          </div>
-        }
-        topBar={{ start: <TopBarStart />, end: <TopBarEnd /> }}
-        banner={<ViewAsBanner />}
-      >
-        <NavProgress />
-        <InactivityMonitor />
-        <div className="flex h-full min-h-0 flex-col">
-          <div className="flex min-h-0 min-w-0 flex-1 flex-col">{children}</div>
-          {/* On a phone the module also navigates with bottom tabs. */}
-          <MobileTabs />
-        </div>
-      </SuiteShell>
-      <ToastHost />
-      <LiveRegion />
-      <RegisterServiceWorker />
-    </SuiteGate>
-    </ClientOnly>
-  );
+'use client';
+import {useEffect,type ReactNode} from 'react';
+import {SuiteFrame,UserMenu,MenuLinkItem,MenuItem,toast,demoRuntime} from '@orgtik/ui';
+import {useClientSession,handoffCode} from '@orgtik/ui/auth';
+import {IncomingKnock} from './IncomingKnock';
+import {HqSidebar} from './HqSidebar';
+import {StatusPicker} from './StatusPicker';
+import {SettingsEffects} from './SettingsEffects';
+import {LiveRegion,ToastHost} from './ShellExtras';
+import {MobileTabs} from './MobileTabs';
+import {RegisterServiceWorker} from './RegisterServiceWorker';
+import {ClientOnly} from './ClientOnly';
+import {InactivityMonitor} from './InactivityMonitor';
+import {NavProgress} from './NavProgress';
+import {SignedOutScreen} from './SignedOutScreen';
+import {SuiteGate} from './SuiteGate';
+import {useWorkspace} from '@/store';
+import {useI18n,useT} from '@/lib/i18n';
+import {resumeAudio} from '@/lib/audio';
+import {SOS_URL,SOS_API_URL,signOutOfSuite,stopViewing} from '@/lib/suite-session';
+export function AppShell({sidebar,children}:{sidebar?:ReactNode;children:ReactNode}){
+  const session=useClientSession(),{setLocale}=useI18n(),t=useT(),signedOut=useWorkspace(state=>state.session.state==='signed_out');
+  useEffect(()=>{const arm=()=>resumeAudio();document.addEventListener('pointerdown',arm,{once:true});document.addEventListener('keydown',arm,{once:true});return()=>{document.removeEventListener('pointerdown',arm);document.removeEventListener('keydown',arm);};},[]);
+  const navigate=async(href:string)=>{if(!session)return window.location.assign(href);try{const target=new URL(href,SOS_URL),code=await handoffCode(SOS_API_URL,session.tokens.accessToken,'suite');window.location.assign(SOS_URL+'/auth/handoff?code='+encodeURIComponent(code)+'&redirect='+encodeURIComponent(target.pathname+target.search));}catch{toast.error(t('suite.navigationFailed','The destination could not be opened. Try again.'));}};
+  if(signedOut)return <ClientOnly><SignedOutScreen/></ClientOnly>;
+  const user=session?.user,owner=session?.workspaceContext?.member.role==='owner',readonly=session?.workspaceContext?.actor.readOnly;
+  return <ClientOnly><SuiteGate><SuiteFrame currentTool='chat' currentScope='hq' currentHref='/hq/office' width='full' apiUrl={process.env.NEXT_PUBLIC_API_URL} sosUrl={SOS_URL} onNavigate={href=>void navigate(href)} sidebar={sidebar??<HqSidebar/>} demo={{runtime:demoRuntime(process.env.NEXT_PUBLIC_DEMO_API,process.env.NEXT_PUBLIC_DEMO_WEB_URLS,process.env.NEXT_PUBLIC_DEMO_SOS_API),enabled:process.env.NODE_ENV==='development'||process.env.NEXT_PUBLIC_DEMO_PANEL==='1',appKey:'chats',onLocaleChange:setLocale}} userMenu={<><SettingsEffects/><StatusPicker/>{user?<UserMenu name={[user.firstName,user.lastName].filter(Boolean).join(' ')||user.email||'Chats'} email={user.email||''} onLocaleChange={setLocale} onSignOut={()=>void signOutOfSuite()}><MenuLinkItem href={SOS_URL+'/profile'} onClick={event=>{event.preventDefault();void navigate(SOS_URL+'/profile');}}>{t('suite.accountProfile','Account profile')}</MenuLinkItem>{owner&&!readonly?<MenuLinkItem href={SOS_URL+'/billing'} onClick={event=>{event.preventDefault();void navigate(SOS_URL+'/billing');}}>{t('suite.billing','Billing')}</MenuLinkItem>:null}{readonly?<MenuItem onClick={()=>void stopViewing().catch(()=>toast.error(t('suite.stopViewingFailed',"Couldn't return to your account. Try again, or sign out.")))}>{t('suite.returnToAccount','Return to my account')}</MenuItem>:null}</UserMenu>:null}</>}><NavProgress/><InactivityMonitor/><div className='absolute inset-0 flex min-h-0 min-w-0 flex-col'><IncomingKnock/><div className='flex min-h-0 min-w-0 flex-1 flex-col'>{children}</div><MobileTabs/></div></SuiteFrame><ToastHost/><LiveRegion/><RegisterServiceWorker/></SuiteGate></ClientOnly>;
 }

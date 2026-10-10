@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@orgtik/ui/tailwind.css";
+@import "./v3-classes.css";
 
 /* ============================================================================
    CHATS (HQ) - THE BRIDGE ONTO @orgtik/ui (Chats wave, FS-CHT-2, D-020)
@@ -747,3 +748,7 @@ html[data-accent="graphite"] {
     background: var(--color-accent);
   }
 }
+
+/* D-046 opt-in presets also feed v2 semantic controls within Chats. */
+html[data-accent]:not([data-accent="brand"]) {--ot-action-primary-bg:var(--color-brand-600);--ot-action-primary-hover:var(--color-brand-700);--ot-fg-brand:var(--color-brand-600);--ot-focus:var(--color-brand-500);}
+html.dark[data-accent]:not([data-accent="brand"]),html[data-theme="dark"][data-accent]:not([data-accent="brand"]) {--ot-action-primary-bg:var(--color-brand-300);--ot-action-primary-hover:var(--color-brand-100);--ot-action-primary-fg:var(--color-brand-900);--ot-fg-brand:var(--color-brand-300);--ot-focus:var(--color-brand-300);}

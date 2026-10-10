@@ -14,6 +14,7 @@
  * product cannot do.
  */
 
+import {RecordingReference} from "./RecordingReference";
 import { useState } from "react";
 import {
   ArrowRight,
@@ -56,10 +57,10 @@ export function MeetingSummary({ meeting }: { meeting: Meeting }) {
   return (
     <Panel className="mb-5">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 className="hq-title" style={{ color: "var(--color-ink)" }}>
+        <h2 className={"hq-title "+("ch-color-7f7330")} >
           {t("meetings.afterTitle", "After the meeting")}
         </h2>
-        <span className="tabular text-[12px]" style={{ color: "var(--color-ink-subtle)" }}>
+        <span className={"tabular text-caption "+("ch-color-094083")} >
           {t("meetings.endedAt", "Ended {time}, {day}", {
             time: formatTime(meeting.endedAt),
             day: formatShortDay(meeting.endedAt),
@@ -74,19 +75,19 @@ export function MeetingSummary({ meeting }: { meeting: Meeting }) {
         >
           <span className="flex flex-wrap items-center gap-2">
             <AvatarStack people={attended} size={20} max={5} />
-            <span className="tabular text-[13px]" style={{ color: "var(--color-ink)" }}>
+            <span className={"tabular text-body-sm "+("ch-color-7f7330")} >
               {t("meetings.ofInvited", "{n} of {total}", { n: attended.length, total: invitedCount })}
             </span>
           </span>
           {/* Who did not come is said plainly rather than left to arithmetic,
               but nobody is named: an absence is not a performance record. */}
           {missing > 0 && (
-            <span className="mt-1 block text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+            <span className={"mt-1 block text-caption "+("ch-color-094083")} >
               {t("meetings.didNotJoin", "{n} invited did not join", { n: missing })}
             </span>
           )}
           {guests.length > 0 && (
-            <span className="mt-1 block text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+            <span className={"mt-1 block text-caption "+("ch-color-094083")} >
               {t("meetings.plusGuests", "plus {n} guest", { n: guests.length })}
             </span>
           )}
@@ -96,7 +97,7 @@ export function MeetingSummary({ meeting }: { meeting: Meeting }) {
           icon={<ChatCircle size={14} aria-hidden="true" />}
           label={t("meetings.ranFor", "Ran for")}
         >
-          <span className="tabular text-[13px]" style={{ color: "var(--color-ink)" }}>
+          <span className={"tabular text-body-sm "+("ch-color-7f7330")} >
             {formatDuration(ranSeconds)}
           </span>
         </Stat>
@@ -109,7 +110,7 @@ export function MeetingSummary({ meeting }: { meeting: Meeting }) {
         </Stat>
       </dl>
 
-      <div className="mt-5 flex flex-wrap gap-2" style={{ borderTop: "1px solid var(--color-hairline)", paddingTop: 16 }}>
+      <div className={"mt-5 flex flex-wrap gap-2 "+("ch-border-top-c9ce2a"+' '+"ch-padding-top-76a4e5")} >
         {/* The two things that actually carry a meeting forward. Both go to
             somewhere that already exists rather than opening a notes field
             nobody returns to. */}
@@ -148,8 +149,8 @@ function Stat({
   return (
     <div>
       <dt
-        className="flex items-center gap-1.5 text-[11.5px] font-medium"
-        style={{ color: "var(--color-ink-subtle)" }}
+        className={"flex items-center gap-1.5 text-caption font-medium "+("ch-color-094083")}
+
       >
         {icon}
         {label}
@@ -164,46 +165,17 @@ function RecordingState({ meeting }: { meeting: Meeting }) {
   const t = useT();
   const state = meeting.recordingState ?? "none";
 
-  if (state === "ready" && meeting.recordingFile) {
-    return (
-      <span className="flex flex-col gap-1.5">
-        <span className="flex items-center gap-1.5">
-          <Chip tone="success">{t("meetings.recordingReady", "Ready")}</Chip>
-          <span className="tabular text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
-            {meeting.recordingFile.size}
-          </span>
-        </span>
-        <span className="truncate text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
-          {meeting.recordingFile.name}
-        </span>
-        <span className="text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
-          {t("meetings.inFileManager", "In Files, under this client.")}
-        </span>
-      </span>
-    );
-  }
-
-  if (state === "processing") {
-    return (
-      <span className="flex flex-col gap-1">
-        <Chip>{t("meetings.processing", "Processing")}</Chip>
-        <span className="text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
-          {t("meetings.processingHint", "It appears in Files when it is done.")}
-        </span>
-      </span>
-    );
-  }
-
+  if(state==="ready"||state==="processing")return <RecordingReference meeting={meeting}/>;
   if (state === "declined") {
     return (
-      <span className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+      <span className={"text-body-sm "+("ch-color-4a0211")} >
         {t("meetings.recordingDeclined", "Not recorded. Someone declined.")}
       </span>
     );
   }
 
   return (
-    <span className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+    <span className={"text-body-sm "+("ch-color-4a0211")} >
       {t("meetings.notRecorded", "Not recorded.")}
     </span>
   );

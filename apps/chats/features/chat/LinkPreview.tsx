@@ -40,30 +40,25 @@ export function LinkPreview({ url }: { url: string }) {
       href={url}
       target="_blank"
       rel="noreferrer noopener"
-      className="hq-row mt-1.5 flex max-w-[480px] items-center gap-3 px-3 py-2"
-      style={{
-        border: "1px solid var(--color-hairline)",
-        borderRadius: "var(--radius-control)",
-        background: "var(--color-surface)",
-        textDecoration: "none",
-      }}
+      className={"hq-row mt-1.5 flex max-w-[480px] items-center gap-3 px-3 py-2 "+("ch-border-5065d4"+' '+"ch-border-radius-332348"+' '+"ch-background-751d03"+' '+"ch-text-decoration-80d654")}
+
     >
       <span
         aria-hidden="true"
-        className="flex shrink-0 items-center justify-center text-[12px] font-semibold"
-        style={{ width: 32, height: 32, borderRadius: 8, background: "var(--color-surface-sunken)", color: "var(--color-ink-muted)" }}
+        className={"flex shrink-0 items-center justify-center text-caption font-semibold "+("ch-width-82b9d8"+' '+"ch-height-268b76"+' '+"ch-border-radius-edd97e"+' '+"ch-background-314b28"+' '+"ch-color-4a0211")}
+
       >
         {info.site.slice(0, 1).toUpperCase()}
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+        <span className={"block truncate text-body-sm font-medium "+("ch-color-7f7330")} >
           <bdi>{info.title}</bdi>
         </span>
-        <span className="block truncate text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+        <span className={"block truncate text-caption "+("ch-color-4a0211")} >
           {info.site} · {info.host}
         </span>
       </span>
-      <ArrowSquareOut size={13} aria-hidden="true" style={{ color: "var(--color-ink-subtle)" }} />
+      <ArrowSquareOut size={13} aria-hidden="true" className={"ch-color-094083"}  />
     </a>
   );
 }
