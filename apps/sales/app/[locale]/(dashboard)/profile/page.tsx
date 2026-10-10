@@ -6,7 +6,7 @@
 import { useTranslations } from "next-intl";
 import { ArrowSquareOut } from "@phosphor-icons/react";
 import { ErrorState, LoadingState, PageHeader, Tabs, TabsList, TabsPanel, buttonVariants } from "@orgtik/ui";
-import { SOS_URL } from "@somion/sos-bar";
+import { SOS_URL } from "@/constants";
 import { useRole } from "@/hooks/useRole";
 import { useAppSelector } from "@/redux/app/hooks";
 import { useGetAuthProfileQuery } from "@/redux/features/auth/authSosApi";

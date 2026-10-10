@@ -1,6 +1,6 @@
 import { getLocale } from "next-intl/server";
 import { redirect } from "@/i18n/routing";
-import { SOS_URL } from "@somion/sos-bar";
+import { SOS_URL } from "@/constants";
 
 /** UI retirement only. Original screens remain in legacy.tsx; no old identifier
  * is treated as an authoritative platform plan, invoice or ticket identifier. */

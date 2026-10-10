@@ -1198,7 +1198,8 @@
     "handoffBody": "Links aus dem Launcher funktionieren einmal und eine Minute lang. Öffnen Sie CRM erneut über Ihre Apps.",
     "appNoAccessBody": "Ihr Konto ist für diese App nicht eingerichtet. Öffnen Sie Ihre Apps in der Suite oder bitten Sie die Workspace-Administration um Zugriff auf CRM.",
     "noAccessBody": "Ihre Rolle im CRM umfasst sie nicht. Wenden Sie sich an die Vertriebsleitung oder die Workspace-Administration, wenn Sie sie brauchen.",
-    "handoffUnavailable": "Das Ziel konnte nicht geöffnet werden. Link erneut versuchen."
+    "handoffUnavailable": "Das Ziel konnte nicht geöffnet werden. Link erneut versuchen.",
+    "logoutUnavailable": "Die Abmeldung konnte nicht abgeschlossen werden. Versuchen Sie es erneut."
   },
   "Feedback": {
     "saved": "Änderungen gespeichert",

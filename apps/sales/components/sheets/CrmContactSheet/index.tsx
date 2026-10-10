@@ -53,7 +53,6 @@ export default function CrmContactSheet({
             try {
               const row = await create(values).unwrap();
               onSaved(row.id);
-              onClose();
             } catch {}
           })}
         >

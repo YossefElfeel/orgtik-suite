@@ -1,0 +1,320 @@
+{
+  "scope": "Actual CRM salesman dashboard and retained new-contact deep link",
+  "checks": [
+    {
+      "name": "Dashboard/en/light/1440 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/1440 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/1440 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/en/light/1024 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/1024 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/1024 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/en/light/768 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/768 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/768 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/en/light/390 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/390 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/light/390 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/en/dark/1440 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/1440 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/1440 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/en/dark/1024 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/1024 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/1024 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/en/dark/768 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/768 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/768 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/en/dark/390 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/390 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/en/dark/390 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/ar/light/1440 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/1440 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/1440 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/ar/light/1024 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/1024 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/1024 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/ar/light/768 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/768 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/768 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/ar/light/390 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/390 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/light/390 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/ar/dark/1440 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/1440 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/1440 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/ar/dark/1024 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/1024 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/1024 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/ar/dark/768 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/768 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/768 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Dashboard/ar/dark/390 ordinary source",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/390 no overflow",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "Dashboard/ar/dark/390 no serious axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "S8 retained dashboard link opens actual new-contact sheet",
+      "pass": true
+    },
+    {
+      "name": "New-contact URL survives ordinary reload",
+      "pass": true
+    },
+    {
+      "name": "Actual creation replaces new URL with persisted contact ID",
+      "pass": true
+    },
+    {
+      "name": "Read-only direct new-contact URL does not open edit form",
+      "pass": true
+    },
+    {
+      "name": "Home/deep-link checks have zero application errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "dashboard-en-light-1440.png",
+    "dashboard-en-light-1024.png",
+    "dashboard-en-light-768.png",
+    "dashboard-en-light-390.png",
+    "dashboard-en-dark-1440.png",
+    "dashboard-en-dark-1024.png",
+    "dashboard-en-dark-768.png",
+    "dashboard-en-dark-390.png",
+    "dashboard-ar-light-1440.png",
+    "dashboard-ar-light-1024.png",
+    "dashboard-ar-light-768.png",
+    "dashboard-ar-light-390.png",
+    "dashboard-ar-dark-1440.png",
+    "dashboard-ar-dark-1024.png",
+    "dashboard-ar-dark-768.png",
+    "dashboard-ar-dark-390.png",
+    "dashboard-real-created-contact.png",
+    "readonly-new-contact-deep-link.png"
+  ],
+  "errors": [],
+  "completed": true
+}

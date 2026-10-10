@@ -33,6 +33,7 @@ export const commissionsApi = baseApi.injectEndpoints({
     /** Admins only. Part or all of the due amount, with the payment reference and an optional receipt. */
     payCommission: builder.mutation<SuccessResponse<Commission>, PayCommissionDTO>({
       query: ({ commissionId, amount, reference, receipt }) => {
+        if (!receipt) return { url: `/commissions/${commissionId}/pay`, method: "POST", body: { amount, reference } };
         const body = new FormData();
         body.append("amount", String(amount));
         body.append("reference", reference);

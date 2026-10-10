@@ -1,7 +1,7 @@
 {
   "rootCount": 58,
-  "fileCount": 392,
-  "liveCount": 322,
+  "fileCount": 397,
+  "liveCount": 327,
   "liveKit": [],
   "removable": [
     "app/[locale]/(dashboard)/customers/columns.tsx",

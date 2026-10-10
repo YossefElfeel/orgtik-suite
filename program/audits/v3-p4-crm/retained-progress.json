@@ -1,0 +1,41 @@
+{
+  "scope": "Retained actual CRM constructor, customer negotiation, signed approval and payout",
+  "checks": [
+    {
+      "name": "Retired catalog chooser is labelled compatibility data",
+      "pass": true
+    },
+    {
+      "name": "S2 actual ordinary constructor keeps selected 12-month installments",
+      "pass": true
+    },
+    {
+      "name": "S3 actual customer counter persists negotiated total",
+      "pass": true
+    },
+    {
+      "name": "S3 acceptance creates actual project at agreed total",
+      "pass": true
+    },
+    {
+      "name": "S4 recorded signed approval keeps price and sets 8% commission",
+      "pass": true
+    },
+    {
+      "name": "S5 actual partial payout changes paid and remaining amounts",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "retained-created-installment-offer.png",
+    "retained-customer-counter.png",
+    "retained-negotiated-project.png",
+    "retained-approved-signed-contract.png",
+    "retained-partial-commission-payout.png"
+  ],
+  "records": {
+    "offerId": "8105e972-d610-4a22-96a4-0170cb28f3ff",
+    "projectId": "36b95896-face-478c-8307-07d4d7e57236"
+  },
+  "errors": []
+}

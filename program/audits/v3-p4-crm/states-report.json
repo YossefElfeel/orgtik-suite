@@ -1,0 +1,76 @@
+{
+  "scope": "Actual CRM six states, empty onboarding, source/target gate and read-only actor",
+  "checks": [
+    {
+      "name": "Loading state is an accessible busy status",
+      "pass": true
+    },
+    {
+      "name": "Error retry reloads actual visible CRM records",
+      "pass": true
+    },
+    {
+      "name": "No-match clear action returns actual rows",
+      "pass": true
+    },
+    {
+      "name": "Not-found current record has ordinary close action",
+      "pass": true
+    },
+    {
+      "name": "Actual external CRM customer has no catalog authority",
+      "pass": true
+    },
+    {
+      "name": "External customer cannot enter tool administration",
+      "pass": true
+    },
+    {
+      "name": "Actual View as actor is read-only",
+      "pass": true
+    },
+    {
+      "name": "View as mutation is refused",
+      "pass": true,
+      "details": {
+        "success": false,
+        "code": "workspace_read_only",
+        "message": "This workspace tool is read-only."
+      }
+    },
+    {
+      "name": "Denied View as creates no contact",
+      "pass": true
+    },
+    {
+      "name": "New real CRM workspace remains empty without implicit seeding",
+      "pass": true
+    },
+    {
+      "name": "Explicit onboarding action loads only requested sample prospects",
+      "pass": true
+    },
+    {
+      "name": "Empty workspace cannot read foreign PDF",
+      "pass": true
+    },
+    {
+      "name": "No browser application errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "state-loading.png",
+    "state-error-retry.png",
+    "state-no-match.png",
+    "state-not-found.png",
+    "state-no-access-customer-catalog.png",
+    "customer-admin-denial.png",
+    "state-read-only-view-as.png",
+    "state-empty-onboarding.png",
+    "explicit-sample-prospects.png"
+  ],
+  "errors": [],
+  "completed": true
+}

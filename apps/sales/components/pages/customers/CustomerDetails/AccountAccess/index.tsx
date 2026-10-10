@@ -7,7 +7,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Copy, Eye, Key } from "@phosphor-icons/react";
-import { SOS_URL } from "@somion/sos-bar";
+import { SOS_URL } from "@/constants";
 import { Button, Card, CardHeader, toast } from "@orgtik/ui";
 import { ButtonAnchor } from "@/components/shared/ButtonLink";
 import { InviteLinkDialog } from "@/components/dialogs/customers/InviteLinkDialog";

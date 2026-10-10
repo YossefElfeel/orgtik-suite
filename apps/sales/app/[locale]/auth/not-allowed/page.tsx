@@ -6,7 +6,7 @@
 import { useTranslations } from "next-intl";
 import { LockKey } from "@phosphor-icons/react";
 import { NoPermissionState, buttonVariants } from "@orgtik/ui";
-import { SOS_URL } from "@somion/sos-bar";
+import { SOS_URL } from "@/constants";
 
 export default function NotAllowed() {
   const t = useTranslations("Errors");
