@@ -42,6 +42,7 @@ function validate(data, sequences) {
   const channels = new Map(), messages = new Map();
   for (const channel of data.channels) {
     if (!id(channel.id) || channels.has(channel.id) || !['public', 'private', 'dm', 'group'].includes(channel.kind) || !Array.isArray(channel.memberIds) || channel.memberIds.some(value => !id(value)) || typeof channel.name !== 'string' || !id(channel.ownerId)) invalid('Chats channel is invalid.');
+    if(channel.workspaceFeatures){const x=channel.workspaceFeatures;if(!x||Array.isArray(x)||Object.keys(x).some(k=>!['typing','activity'].includes(k))||x.typing&&Object.entries(x.typing).some(([uid,on])=>!id(uid)||typeof on!=='boolean')||x.activity&&(!Array.isArray(x.activity)||x.activity.some(r=>!id(r.id)||!id(r.actorId)||typeof r.action!=='string'||!Number.isFinite(Date.parse(r.createdAt)))))invalid('Chats channel feature state is invalid.');}
     channels.set(channel.id, channel);
   }
   if (sequences.channels < channels.size) invalid('Chats counter would reuse committed channel IDs.');
@@ -55,6 +56,7 @@ function validate(data, sequences) {
       if (Object.keys(attachment).join() !== 'reference') invalid('Chats file reference stores unchecked metadata.');
     }
     if (message.fileOperation && (!id(message.fileOperation.id) || !/^[a-f0-9]{64}$/.test(message.fileOperation.fingerprint) || Object.keys(message.fileOperation).sort().join() !== 'fingerprint,id')) invalid('Chats file action receipt is invalid.');
+    if(message.workspaceFeatures){const x=message.workspaceFeatures;if(!x||Array.isArray(x)||Object.keys(x).some(k=>!['saved','reminders','format','voice','scheduledAt','timeZone','poll','taskIds'].includes(k))||x.saved&&Object.entries(x.saved).some(([uid,on])=>!id(uid)||typeof on!=='boolean')||x.reminders&&Object.entries(x.reminders).some(([uid,r])=>!id(uid)||!r||!Number.isFinite(Date.parse(r.at))||typeof r.delivered!=='boolean')||x.format&&!['plain','markdown','rich'].includes(x.format)||x.scheduledAt&&!Number.isFinite(Date.parse(x.scheduledAt))||x.taskIds&&(!Array.isArray(x.taskIds)||x.taskIds.some(v=>!Number.isSafeInteger(v)||v<1))||x.voice&&(x.voice.simulated!==true||!Number.isInteger(x.voice.durationSeconds)||x.voice.durationSeconds<1||x.voice.durationSeconds>300)||x.poll&&(!Array.isArray(x.poll.options)||x.poll.options.length<2||x.poll.options.length>8||typeof x.poll.question!=='string'||typeof x.poll.closed!=='boolean'||!x.poll.votes||Object.entries(x.poll.votes).some(([uid,v])=>!id(uid)||!Number.isInteger(v)||v<0||v>=x.poll.options.length)))invalid('Chats message feature state is invalid.');}
     messages.set(message.id, message);
   }
   for (const message of data.messages) if (message.threadId && (!messages.has(message.threadId) || messages.get(message.threadId).channelId !== message.channelId || messages.get(message.threadId).threadId)) invalid('Chats thread crosses a channel.');
@@ -63,8 +65,11 @@ function validate(data, sequences) {
     if (!id(meeting.id) || meetings.has(meeting.id) || !Array.isArray(meeting.participantIds) || meeting.participantIds.some(value => !id(value))) invalid('Chats saved meeting authority is invalid.');
     if(!Array.isArray(meeting.guests))invalid('Chats meeting guests are invalid.');
     for(const guest of meeting.guests){if(typeof guest.name!=='string'||typeof guest.email!=='string'||!['invited','lobby','admitted','declined','left'].includes(guest.state))invalid('Chats guest display record is invalid.');if(guest.visitId!==undefined&&(!id(guest.visitId)||!/^visit:guest-[\w-]+$/.test(guest.email)||!/^[a-f0-9]{64}$/.test(guest.visitProofHash||'')||!/^[a-f0-9]{64}$/.test(guest.joinFingerprint||'')||!id(guest.joinOperationId)||guest.contactEmail!==undefined&&typeof guest.contactEmail!=='string'))invalid('Chats guest visit proof is invalid.');}
+    if(meeting.recordingFile){try{fileReferences.reference(meeting.recordingFile.reference,meeting.recordingFile.reference?.workspaceId);}catch{invalid('Chats recording reference is invalid.');}if(Object.keys(meeting.recordingFile).join()!=='reference')invalid('Chats recording stores unchecked metadata.');}
     meetings.add(meeting.id);
   }
+  for(const p of data.presence)if(!id(p.userId)||!['available','busy','focus','in_meeting','away','offline'].includes(p.status)||!p.position||['x','y'].some(k=>!Number.isFinite(p.position[k])||p.position[k]<0||p.position[k]>100)||!Number.isFinite(Date.parse(p.since)))invalid('Chats presence state is invalid.');
+  for(const n of data.notifications)if(!id(n.id)||!id(n.userId)||typeof n.title!=='string'||!Number.isFinite(Date.parse(n.createdAt))||n.channelId&&!channels.has(n.channelId))invalid('Chats notification state is invalid.');
   const boards = new Set();
   for (const board of data.whiteboards) {
     if (!id(board.id) || boards.has(board.id) || !id(board.ownerId) || typeof board.name !== 'string' || !board.name.trim() || board.name.length > 100 || !Number.isSafeInteger(board.revision) || board.revision < 1 || !Number.isFinite(Date.parse(board.createdAt)) || !Number.isFinite(Date.parse(board.updatedAt)) || board.channelId && board.meetingId || board.channelId !== null && !channels.has(board.channelId) || board.meetingId !== null && !meetings.has(board.meetingId) || Object.keys(board).some(key => !['id', 'name', 'ownerId', 'channelId', 'meetingId', 'reference', 'revision', 'createdAt', 'updatedAt', 'custodyReadOnly', 'custodyOperationId'].includes(key))) invalid('Chats whiteboard index is invalid.');
