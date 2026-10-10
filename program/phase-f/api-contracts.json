@@ -4638,6 +4638,30 @@
     {
       "app": "marketing",
       "method": "GET",
+      "path": "/v3/brand",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "PATCH",
+      "path": "/v3/brand",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "GET",
       "path": "/v3/campaigns/:id",
       "source": "apps/marketing/v3.js",
       "authorization": {
@@ -4664,6 +4688,210 @@
       "method": "PATCH",
       "path": "/v3/campaigns/:id/recipients",
       "source": "apps/marketing/v3.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "GET",
+      "path": "/v3/email-designs",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/v3/email-designs",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "PATCH",
+      "path": "/v3/email-designs/:id",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "GET",
+      "path": "/v3/email-designs/:id/export",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "GET",
+      "path": "/v3/journeys",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/v3/journeys",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "PATCH",
+      "path": "/v3/journeys/:id",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/v3/journeys/:id/run",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "GET",
+      "path": "/v3/queue",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "GET",
+      "path": "/v3/senders",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/v3/senders",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/v3/senders/:id/test",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/v3/senders/:id/verify",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "GET",
+      "path": "/v3/social-inbox",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/v3/social-inbox/:id/replies",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/v3/social-inbox/sample",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/v3/writing",
+      "source": "apps/marketing/v3-features.js",
       "authorization": {
         "audience": "tool:marketing",
         "workspaceBinding": "signed selected workspace",

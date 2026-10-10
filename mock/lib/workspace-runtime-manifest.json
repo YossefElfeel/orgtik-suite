@@ -239,6 +239,7 @@
       "apps/marketing/routes/posts.js",
       "apps/marketing/routes/projects.js",
       "apps/marketing/seed.js",
+      "apps/marketing/v3-features.js",
       "apps/marketing/v3.js",
       "apps/marketing/views.js",
       "lib/accounts.js",
