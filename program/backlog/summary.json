@@ -50,7 +50,7 @@
     "byMappingBasis": {
       "criterion_reviewed_v3": 407
     },
-    "current_gate": "P3_integration_and_P4_tool_cycles",
+    "current_gate": "P5_final_integration_gates",
     "criterion_note": "Every P5 finding retains its individual current behavior, evidence checks and remaining boundary. A reviewed finding is not blanket full production acceptance."
   }
 }
