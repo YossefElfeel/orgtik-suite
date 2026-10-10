@@ -6,8 +6,8 @@ const lib = require('../apps/files/lib');
 const boards = require('./whiteboard-scene');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
 const copy = value => JSON.parse(JSON.stringify(value));
-const SAMPLES = Object.freeze({ pdf_company_profile: 'Sample company profile.pdf', docx_runbook: 'Sample runbook.docx', txt_release_notes: 'Sample release notes.txt', png_app_home: 'Sample home screen.png', png_app_checkout: 'Sample checkout flow.png', png_dashboard_dark: 'Sample dashboard.png', jpg_mango: 'Sample product photo.jpg' });
-const TYPES = new Set(['application/pdf', 'text/plain', 'text/csv', 'text/markdown', 'application/json', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/zip', 'image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/svg+xml']);
+const SAMPLES = Object.freeze({ pdf_company_profile: 'Sample company profile.pdf', docx_runbook: 'Sample runbook.docx', txt_release_notes: 'Sample release notes.txt', png_app_home: 'Sample home screen.png', png_app_checkout: 'Sample checkout flow.png', png_dashboard_dark: 'Sample dashboard.png', jpg_mango: 'Sample product photo.jpg', mp4_app_walkthrough: 'Sample app walkthrough.mp4' });
+const TYPES = new Set(['application/pdf', 'text/plain', 'text/csv', 'text/markdown', 'application/json', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/zip', 'image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/svg+xml', 'video/mp4']);
 TYPES.add(boards.MIME);
 function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, assetDir, boardAuthority, now = () => new Date().toISOString(), fileOut }) {
   const acl = createFileAccess({ state, identity, boardAuthority });

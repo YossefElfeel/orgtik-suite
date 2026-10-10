@@ -25,7 +25,7 @@ test('empty workspace catalog is explicit, creation pins immutable version1 and 
   try {
     const before = plain(f.instance.exportSnapshot()), catalog = f.instance.sampleCatalog({ actorId: 1 });
     assert.ok(catalog.items.some(item => item.sampleId === 'pdf_company_profile'));
-    assert.deepEqual(catalog.items.map(item => item.sampleId).sort().join(','), ['docx_runbook', 'jpg_mango', 'pdf_company_profile', 'png_app_checkout', 'png_app_home', 'png_dashboard_dark', 'txt_release_notes'].sort().join(','));
+    assert.deepEqual(catalog.items.map(item => item.sampleId).sort().join(','), ['docx_runbook', 'jpg_mango', 'mp4_app_walkthrough', 'pdf_company_profile', 'png_app_checkout', 'png_app_home', 'png_dashboard_dark', 'txt_release_notes'].sort().join(','));
     assert.equal(catalog.canCreate, true); assert.deepEqual(plain(f.instance.exportSnapshot()), before);
     assert.deepEqual(plain(f.instance.listSharedFiles({ actorId: 1 }).items), []);
     const created = sample(f), row = f.instance.exportSnapshot().data.files[0][1];
@@ -38,6 +38,21 @@ test('empty workspace catalog is explicit, creation pins immutable version1 and 
     assert.deepEqual(fs.readFileSync(binary.path), fs.readFileSync(path.join(__dirname, '../apps/files/assets', manifest.pdf_company_profile.file)));
     assert.equal(list.items[0].size, manifest.pdf_company_profile.size);
     const completed = plain(f.instance.exportSnapshot()); assert.equal(sample(f).id, created.id); assert.deepEqual(plain(f.instance.exportSnapshot()), completed);
+  } finally { f.close(); }
+});
+
+test('packaged recording sample pins real MP4 bytes and retains current Files write/refusal rules', () => {
+  const f = fixture('ws_recording_sample');
+  try {
+    const created = f.instance.createSample({ actorId: 1, sampleId: 'mp4_app_walkthrough', operationId: 'recording-sample' });
+    const metadata = f.instance.resolveSharedFile({ actorId: 1, fileId: created.id, versionId: 'v1' });
+    assert.equal(metadata.mimetype, 'video/mp4'); assert.equal(metadata.size, manifest.mp4_app_walkthrough.size);
+    const binary = f.instance.contentSharedFile({ actorId: 1, fileId: created.id, versionId: 'v1' });
+    assert.deepEqual(fs.readFileSync(binary.path), fs.readFileSync(path.join(__dirname, '../apps/files/assets', manifest.mp4_app_walkthrough.file)));
+    const before = plain(f.instance.exportSnapshot());
+    f.current.readOnly = true;
+    unchangedRefusal(f, () => f.instance.createSample({ actorId: 1, sampleId: 'mp4_app_walkthrough', operationId: 'readonly-recording' }), 423);
+    assert.deepEqual(plain(f.instance.exportSnapshot()), before);
   } finally { f.close(); }
 });
 
