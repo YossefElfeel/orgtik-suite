@@ -269,51 +269,53 @@ for (const route of routes)
       });
     return { heading: await page.locator("h1").first().innerText(), tables };
   });
-if (!live) {
-  await check(
-    "View mode exposes Edit, retains list state, and explains empty media",
-    async () => {
-      await go(
-        "/content/pages/pg_home?view=1&returnTo=%2Fcontent%2Fpages%3Fstate%3Din_review&section=software",
-      );
-      assert.ok(
-        await page
-          .getByText("You are viewing this record.", { exact: false })
-          .isVisible(),
-      );
+await check(
+  "View mode exposes Edit, retains list state, and explains empty media",
+  async () => {
+    await go(
+      "/content/pages/pg_home?view=1&returnTo=%2Fcontent%2Fpages%3Fstate%3Din_review&section=software",
+    );
+    assert.ok(
+      await page
+        .getByText("You are viewing this record.", { exact: false })
+        .isVisible(),
+    );
+    const home = (await call("/admin/entries/page/pg_home")).data;
+    if (!(home.content.presentation?.sectionMedia.software ?? []).length)
       assert.ok(
         await page
           .getByText("No media attached to this section.")
           .first()
           .isVisible(),
       );
-      await page
-        .getByRole("button", { name: "Edit", exact: true })
-        .first()
-        .click();
-      await page.waitForURL((url) => !url.searchParams.has("view"));
-      assert.equal(
-        new URL(page.url()).searchParams.get("returnTo"),
-        "/content/pages?state=in_review",
-      );
-      assert.ok(
-        await page
-          .getByRole("button", { name: "Select media", exact: true })
-          .first()
-          .isVisible(),
-      );
-      await page
-        .getByRole("button", { name: /brand-cards\.webp/ })
-        .first()
-        .waitFor();
-      await page
-        .getByRole("button", { name: /brand-cards\.webp/ })
-        .first()
-        .locator("..")
-        .locator("..")
-        .screenshot({ path: path.join(out, "visual-media-picker.png") });
-    },
-  );
+    await page
+      .getByRole("button", { name: "Edit", exact: true })
+      .first()
+      .click();
+    await page.waitForURL((url) => !url.searchParams.has("view"));
+    assert.equal(
+      new URL(page.url()).searchParams.get("returnTo"),
+      "/content/pages?state=in_review",
+    );
+    const picker = page
+      .getByRole("button", { name: /^(Select media|Replace media)$/ })
+      .first();
+    await picker.waitFor();
+    if ((await picker.getAttribute("aria-expanded")) === "false")
+      await picker.click();
+    await page
+      .getByRole("button", { name: /brand-cards\.webp/ })
+      .first()
+      .waitFor();
+    await page
+      .getByRole("button", { name: /brand-cards\.webp/ })
+      .first()
+      .locator("..")
+      .locator("..")
+      .screenshot({ path: path.join(out, "visual-media-picker.png") });
+  },
+);
+if (!live) {
   await check(
     "article builder inserts media between paragraphs and persists saved order on refresh",
     async () => {
