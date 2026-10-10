@@ -7,19 +7,27 @@ export function SectionAttachments({
   items,
   onChange,
   disabled,
+  disabledReason,
 }: {
   items: MediaRef[];
   onChange: (items: MediaRef[]) => void;
   disabled: boolean;
+  disabledReason?: string;
 }) {
   const t = useTranslations("Improvements");
   return (
-    <details className="mt-6 rounded-card border border-line p-4">
+    <details open className="mt-6 rounded-card border border-line p-4">
       <summary className="cursor-pointer text-label">
         {t("media")}
         {items.length ? ` (${items.length})` : ""}
       </summary>
       <div className="mt-3 flex flex-col gap-3">
+        {disabledReason ? (
+          <p className="text-body-sm text-fg-muted">{disabledReason}</p>
+        ) : null}
+        {!items.length && disabled ? (
+          <p className="text-body-sm text-fg-muted">{t("noMediaAttached")}</p>
+        ) : null}
         {items.map((item, index) => (
           <MediaPicker
             key={index}

@@ -342,6 +342,7 @@
     "wm": [
       "apps/wm.js",
       "apps/wm/analytics.js",
+      "apps/wm/article-body.js",
       "apps/wm/content.js",
       "apps/wm/defaults.js",
       "apps/wm/ideas.js",

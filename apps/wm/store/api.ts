@@ -303,6 +303,8 @@ export type LegalVersion = {
 };
 
 export type Entry = EntrySummary & {
+  /** Author of the working copy, retained across review transitions. */
+  lastEditor?: string | null;
   content: EntryContent;
   live: EntryContent;
   versions: {

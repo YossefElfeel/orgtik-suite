@@ -9,6 +9,7 @@ import { ReferencePage } from "./ReferencePage";
 import { routeHash, setRoute, toSiteHref } from "./navigation";
 import { attr, run } from "../content/copy";
 import { msg } from "../content/strings";
+import { ArticleBlocks } from "./ArticleBlocks";
 
 export default class Insights extends ReferencePage {
   INS = content.INS();
@@ -563,10 +564,16 @@ export default class Insights extends ReferencePage {
         gridCols: gridCols,
         ar: {
           takeaways: (this.ART[A.slug] || { t: [] }).t,
-          body: (this.ART[A.slug] || { b: [] }).b.map((x) => ({
-            h: x[0],
-            p: x[1],
-          })),
+          body:
+            this.ART[A.slug]?.sections?.map((section) => ({
+              h: section.heading,
+              p: section.paragraphs,
+              blocks: section.blocks,
+            })) ??
+            (this.ART[A.slug] || { b: [] }).b.map((x) => ({
+              h: x[0],
+              p: x[1],
+            })),
           slug: A.slug,
           image: A.image,
           excerpt: A.excerpt,
@@ -798,8 +805,8 @@ export default class Insights extends ReferencePage {
 
   render() {
     const v = this.renderVals();
-    return (
-      managedPageTree(<>
+    return managedPageTree(
+      <>
         <div
           ref={v.rootRef}
           data-screen-label={"Insights"}
@@ -1228,7 +1235,8 @@ export default class Insights extends ReferencePage {
             {v.isArticle && <ContentHeading title={v.hero} />}
             {v.isIndex && (
               <>
-                <section data-cms-section="articles"
+                <section
+                  data-cms-section="articles"
                   id={"articles"}
                   style={{
                     padding: "var(--section-space) 0 var(--section-space)",
@@ -1800,7 +1808,8 @@ export default class Insights extends ReferencePage {
             )}
             {v.isArticle && (
               <>
-                <section data-cms-section="article"
+                <section
+                  data-cms-section="article"
                   id={"article"}
                   style={{ padding: "var(--section-space) 0" }}
                 >
@@ -1958,22 +1967,26 @@ export default class Insights extends ReferencePage {
                             >
                               {sec.h}
                             </h3>
-                            {(sec.p || []).map((pp, ppIndex) => (
-                              <React.Fragment key={ppIndex}>
-                                <p
-                                  style={{
-                                    fontFamily:
-                                      '"OrgTik Arabic",Arial,Helvetica,sans-serif',
-                                    marginTop: "14px",
-                                    fontSize: "17px",
-                                    lineHeight: "1.75",
-                                    color: "#DCD0E6",
-                                  }}
-                                >
-                                  {pp}
-                                </p>
-                              </React.Fragment>
-                            ))}
+                            {sec.blocks ? (
+                              <ArticleBlocks blocks={sec.blocks} />
+                            ) : (
+                              (sec.p || []).map((pp, ppIndex) => (
+                                <React.Fragment key={ppIndex}>
+                                  <p
+                                    style={{
+                                      fontFamily:
+                                        '"OrgTik Arabic",Arial,Helvetica,sans-serif',
+                                      marginTop: "14px",
+                                      fontSize: "17px",
+                                      lineHeight: "1.75",
+                                      color: "#DCD0E6",
+                                    }}
+                                  >
+                                    {pp}
+                                  </p>
+                                </React.Fragment>
+                              ))
+                            )}
                           </div>
                         </React.Fragment>
                       ))}
@@ -2133,7 +2146,8 @@ export default class Insights extends ReferencePage {
                     </aside>
                   </div>
                 </section>
-                <section data-cms-section="hero"
+                <section
+                  data-cms-section="hero"
                   style={{
                     padding: "var(--section-space) 0",
                     borderTop: "1px solid #ffffff12",
@@ -2959,7 +2973,8 @@ export default class Insights extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>, "pg_insights")
+      </>,
+      "pg_insights",
     );
   }
 }

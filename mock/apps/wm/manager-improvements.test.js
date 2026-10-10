@@ -14,6 +14,95 @@ const now = () => "2026-10-08T12:00:00.000Z",
   approver = { key: "approver" },
   all = { can: () => true };
 
+test("Published examples survive suggestion drafts and persisted version-one fixtures without altering existing content", () => {
+  const store = makeStore(now, { demo: true });
+  require("./suggestions").applySuggestions({ store, media: new Map(), now });
+  store.ensureDemo();
+  for (const type of [
+    "serviceFamily",
+    "softwareModule",
+    "caseStudy",
+    "article",
+  ])
+    assert.ok(
+      [...store.entries.values()].some(
+        (entry) =>
+          entry.type === type && store.summary(entry).state === "published",
+      ),
+      type,
+    );
+  const published = [...store.entries.values()].filter(
+    (entry) => entry.demoPublished,
+  );
+  assert.ok(published.length > 0);
+  assert.ok(
+    published.every((entry) => entry.workflow.visibility === "archived"),
+  );
+  const before = store.exportState();
+  store.ensureDemo();
+  assert.deepEqual(store.exportState(), before);
+  const legacy = structuredClone(before);
+  legacy.demoVersion = 1;
+  legacy.entries = legacy.entries.filter(([, entry]) => !entry.demoPublished);
+  const existing = structuredClone(legacy.entries);
+  const restored = makeStore(now, { demo: true });
+  restored.importState(legacy);
+  for (const [id, entry] of existing)
+    assert.deepEqual(restored.entries.get(id), entry);
+  assert.ok(
+    [...restored.entries.values()].some((entry) => entry.demoPublished),
+  );
+});
+
+test("translation-status examples open actual draft content without resetting saved translations or the live website", () => {
+  const store = makeStore(now, { demo: true });
+  store.ensureDemo();
+  for (const entry of store.entries.values())
+    for (const [locale, state] of Object.entries(entry.translation)) {
+      if (
+        entry.demoTranslations &&
+        ["needs_review", "outdated", "in_progress"].includes(state)
+      )
+        assert.ok(entry.draft.locales[locale]);
+    }
+  const snapshot = store.exportState();
+  snapshot.demoVersion = 1;
+  const sample = snapshot.entries.find(
+    ([, entry]) => entry.demoTranslations,
+  )[1];
+  const locale = Object.keys(sample.translation).find(
+    (key) =>
+      key !== "en" &&
+      ["needs_review", "outdated", "in_progress"].includes(
+        sample.translation[key],
+      ),
+  );
+  delete sample.draft.locales[locale];
+  const live = structuredClone(sample.live);
+  const edited = snapshot.entries.find(
+    ([, entry]) => entry.demoTranslations && entry !== sample,
+  )[1];
+  edited.versions[0].note = "A saved user revision";
+  const before = structuredClone(edited);
+  const restored = makeStore(now, { demo: true });
+  restored.importState(snapshot);
+  assert.deepEqual(
+    restored.entries.get(sample.id).draft.locales[locale],
+    sample.draft.locales.en,
+  );
+  assert.deepEqual(restored.entries.get(sample.id).live, live);
+  assert.deepEqual(restored.entries.get(edited.id), before);
+});
+
+test("review details expose the actual draft author independently of the transition actor", () => {
+  const store = makeStore(now, { demo: true }); store.ensureDemo();
+  const sample = [...store.entries.values()].find(entry => entry.draft && entry.workflow.state === "in_review");
+  assert.equal(store.detail(sample).lastEditor, "admin");
+  assert.equal(store.transition(sample, { key: "admin" }, "approve", all).code, "four_eyes");
+  assert.ok(store.transition(sample, { key: "manager" }, "approve", all).entry);
+  assert.equal(store.detail(sample).lastEditor, "admin");
+});
+
 test("demo revisions cover workflow states without changing published content or overwriting saved edits", () => {
   const store = makeStore(now, { demo: true });
   const published = [...store.entries.values()].map((entry) => [
@@ -392,12 +481,23 @@ test("SEO-only edits preserve content permissions; redirects and indexing includ
   );
   assert.ok(library.robots().includes("Allow: /"));
   library.settings.publicLocales = ["en", "ar", "de"];
-  store.entries.get("pg_home").live.seo.ar = { robots: "noindex", inSitemap: false };
+  store.entries.get("pg_home").live.seo.ar = {
+    robots: "noindex",
+    inSitemap: false,
+  };
   const localized = library.indexingUrls();
-  const sitemap = new Set(library.sitemap().map(row => row.loc));
-  assert.ok(localized.some(row => row.id === "pg_home" && row.locale === "ar" && !row.inSitemap));
-  assert.ok(localized.some(row => row.id === "pg_home" && row.locale === "de" && row.inSitemap));
-  assert.ok(localized.every(row => row.inSitemap === sitemap.has(row.loc)));
+  const sitemap = new Set(library.sitemap().map((row) => row.loc));
+  assert.ok(
+    localized.some(
+      (row) => row.id === "pg_home" && row.locale === "ar" && !row.inSitemap,
+    ),
+  );
+  assert.ok(
+    localized.some(
+      (row) => row.id === "pg_home" && row.locale === "de" && row.inSitemap,
+    ),
+  );
+  assert.ok(localized.every((row) => row.inSitemap === sitemap.has(row.loc)));
 });
 
 test("media uploads retain descriptions, tags, alt text and focal points through persistence", async (t) => {
