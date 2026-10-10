@@ -6,6 +6,10 @@
       "pass": true
     },
     {
+      "name": "Pending capture waits for the actual visible Task reference",
+      "pass": true
+    },
+    {
       "name": "Pending actual Task keeps overall badge Pending",
       "pass": true
     },
