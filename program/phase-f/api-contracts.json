@@ -3569,6 +3569,18 @@
     },
     {
       "app": "marketing",
+      "method": "POST",
+      "path": "/audiences/imports",
+      "source": "apps/marketing/routes/audience.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
       "method": "GET",
       "path": "/audiences/imports/:id",
       "source": "apps/marketing/routes/audience.js",
@@ -3577,6 +3589,18 @@
         "workspaceBinding": "signed selected workspace",
         "permission": "current tool grant and app record/role guard",
         "writes": "read"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/audiences/imports/:id/commit",
+      "source": "apps/marketing/routes/audience.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
       }
     },
     {
@@ -4686,6 +4710,30 @@
     {
       "app": "marketing",
       "method": "PATCH",
+      "path": "/v3/campaigns/:id/message",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "POST",
+      "path": "/v3/campaigns/:id/mock-delivery",
+      "source": "apps/marketing/v3-features.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "PATCH",
       "path": "/v3/campaigns/:id/recipients",
       "source": "apps/marketing/v3.js",
       "authorization": {
@@ -4795,12 +4843,24 @@
       "app": "marketing",
       "method": "GET",
       "path": "/v3/queue",
-      "source": "apps/marketing/v3-features.js",
+      "source": "apps/marketing/v3-queue.js",
       "authorization": {
         "audience": "tool:marketing",
         "workspaceBinding": "signed selected workspace",
         "permission": "current tool grant and app record/role guard",
         "writes": "read"
+      }
+    },
+    {
+      "app": "marketing",
+      "method": "PATCH",
+      "path": "/v3/queue/:id",
+      "source": "apps/marketing/v3-queue.js",
+      "authorization": {
+        "audience": "tool:marketing",
+        "workspaceBinding": "signed selected workspace",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
       }
     },
     {

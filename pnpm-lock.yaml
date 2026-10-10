@@ -617,6 +617,9 @@ importers:
 
   apps/marketing:
     dependencies:
+      '@hookform/resolvers':
+        specifier: 5.4.0
+        version: 5.4.0(react-hook-form@7.76.0(react@19.2.3))(zod@3.25.76)
       '@internationalized/date':
         specifier: 3.12.4
         version: 3.12.4
@@ -629,9 +632,6 @@ importers:
       '@reduxjs/toolkit':
         specifier: 2.12.0
         version: 2.12.0(react-redux@9.3.0(@types/react@19.3.0)(react@19.2.3)(redux@5.0.1))(react@19.2.3)
-      '@somion/sos-bar':
-        specifier: 3.11.2
-        version: 3.11.2(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@tanstack/react-table':
         specifier: 8.21.3
         version: 8.21.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -674,6 +674,9 @@ importers:
       tailwind-merge:
         specifier: 3.7.0
         version: 3.7.0
+      zod:
+        specifier: 3.25.76
+        version: 3.25.76
     devDependencies:
       '@tailwindcss/postcss':
         specifier: 4.3.0
@@ -10677,6 +10680,13 @@ snapshots:
       react-hook-form: 7.89.0(@types/react@19.3.0)(react@19.2.0)
     optionalDependencies:
       zod: 4.3.6
+
+  '@hookform/resolvers@5.4.0(react-hook-form@7.76.0(react@19.2.3))(zod@3.25.76)':
+    dependencies:
+      '@standard-schema/utils': 0.3.0
+      react-hook-form: 7.76.0(react@19.2.3)
+    optionalDependencies:
+      zod: 3.25.76
 
   '@hookform/resolvers@5.4.0(react-hook-form@7.82.0(react@19.2.4))(zod@3.25.76)':
     dependencies:

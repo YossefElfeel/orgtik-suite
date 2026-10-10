@@ -195,6 +195,7 @@ export interface ICampaign {
     messagingAudience?: {
         sourceType: "COMPANY" | "UPLOAD";
         audienceId: string;
+    crmRecipientRefs?: {workspaceId:string;contactId:string}[];
         audienceLabel?: string;
         segmentId: string;
         segmentLabel?: string;
@@ -476,6 +477,7 @@ export interface ICampaignOnboardingMessagingAudienceImport {
 export interface ICampaignOnboardingMessagingAdSetConfiguration {
     channel: "EMAIL" | "SMS" | "WHATSAPP";
     audienceId: string;
+    crmRecipientRefs?: {workspaceId:string;contactId:string}[];
     segmentId?: string;
     importId?: string;
     senderConfigId: string;

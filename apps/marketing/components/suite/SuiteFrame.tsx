@@ -1,6 +1,5 @@
 "use client";
-import { demoRuntime } from "@orgtik/ui";
-import { useEffect, useState, type ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
   CalendarDots,
@@ -16,57 +15,67 @@ import {
   UserCircle,
   UsersThree,
   Binoculars,
+  Kanban,
+  EnvelopeSimple,
+  ChatsCircle,
+  Path,
+  MagicWand,
 } from "@phosphor-icons/react";
-import { AppRail, MenuLinkItem, Sidebar, SuiteShell, UserMenu, type Locale, type SidebarSection } from "@orgtik/ui";
-import { SOS_URL, useLogout } from "@somion/sos-bar";
+import {
+  demoRuntime,
+  MenuLinkItem,
+  Sidebar,
+  SuiteFrame as SharedSuiteFrame,
+  UserMenu,
+  type Locale,
+  type SidebarSection,
+} from "@orgtik/ui";
+import {
+  handoffCode,
+  readClientSession,
+  signOutSession,
+} from "@orgtik/ui/auth";
+import { API_URL, SOS_URL } from "@/constants";
+import { SOS_API_URL } from "@/constants/env";
 import { routing, usePathname, useRouter } from "@/i18n/routing";
 import { useAppDispatch, useAppSelector } from "@/redux/app/hooks";
 import { logoutUser } from "@/redux/features/auth/authSlice";
 import { useMarketingRoles } from "@/lib/permissions";
-import { CURRENT_SCOPE, useSuiteApps } from "./useSuiteApps";
 import { ProjectSwitcher } from "./ProjectSwitcher";
-import { PresentationWorkspace } from "./PresentationWorkspace";
-
-function useMounted() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  return mounted;
-}
-
-/**
- * The suite shell for Marketing (FS-MKT-2): the library's rail, sidebar and top bar replace SoSBar,
- * the local sidebar (its iconify icons fetched at runtime, MKT-078), the header and its breadcrumb
- * of raw slugs (MKT-077). The sidebar marks the current page (MKT-026), lists only routes that
- * exist (MKT-027: the three without a page and the /demo playground are gone, MKT-028), and hides
- * what the person's role can't use. The person comes from the store, which the server filled from
- * the cookies, so both sides render the same (MKT-029).
- */
+import MarketingScopeGate from "@/providers/MarketingScopeGate";
 export function SuiteFrame({ children }: { children: ReactNode }) {
-  const t = useTranslations("Shell");
-  const ts = useTranslations("Suite");
-  const presentationText = useTranslations("Presentation");
-  const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const mounted = useMounted();
-  const token = useAppSelector((s) => s.auth.token);
-  const user = useAppSelector((s) => s.auth.user);
-  const can = useMarketingRoles();
-  const { logout } = useLogout(token ?? "");
-  const apps = useSuiteApps(mounted ? token : null);
-
-  // Every link carries the reader's language (plain links dropped it, MKT-025).
-  const at = (path: string) => pathname === path || pathname.startsWith(path + "/");
-  const item = (path: string, label: string, icon: ReactNode) => ({ label, href: `/${locale}${path}`, icon, active: at(path) });
-
+  const t = useTranslations("Shell"),
+    tv = useTranslations("MarketingV3"),
+    ts = useTranslations("Suite"),
+    locale = useLocale(),
+    pathname = usePathname(),
+    router = useRouter(),
+    dispatch = useAppDispatch(),
+    user = useAppSelector((s) => s.auth.user),
+    can = useMarketingRoles(),
+    [error, setError] = useState<"handoff" | "logout">();
+  const at = (path: string) =>
+      pathname === path || pathname.startsWith(path + "/"),
+    item = (path: string, label: string, icon: ReactNode) => ({
+      label,
+      href: `/${locale}${path}`,
+      icon,
+      active: at(path),
+    });
   const sections: SidebarSection[] = [
-    { items: [item("/dashboard", t("dashboard"), <SquaresFour />), item("/calendar", t("calendar"), <CalendarDots />)] },
+    {
+      items: [
+        item("/dashboard", t("dashboard"), <SquaresFour />),
+        item("/calendar", t("calendar"), <CalendarDots />),
+      ],
+    },
     {
       label: t("sectionPublish"),
       items: [
         item("/posts", t("posts"), <Notepad />),
+        item("/queue", tv("queue"), <Kanban />),
         item("/campaigns", t("campaigns"), <Megaphone />),
+        item("/social-inbox", tv("inbox"), <ChatsCircle />),
         ...(can.boost ? [item("/boost", t("boosts"), <Lightning />)] : []),
         item("/gallery", t("gallery"), <ImagesSquare />),
         ...(can.manageAudience ? [item("/labels", t("labels"), <Tag />)] : []),
@@ -78,45 +87,117 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
         item("/our-reports", t("reports"), <ChartLineUp />),
         item("/competitors-reports", t("competitors"), <Binoculars />),
         item("/our-audience", t("audience"), <UsersThree />),
+        item("/our-audience/contacts", tv("contacts"), <UsersThree />),
       ],
     },
   ];
-  if (!can.isReviewerOnly) {
-    sections.push({ label: t("sectionSetup"), items: [item("/integrations", t("integrations"), <LinkSimple />), item("/settings", t("settings"), <Gear />)] });
-  }
-  if (process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1") sections.unshift({ items: [item("/presentation", presentationText("heading"), <Megaphone />)] });
-
+  if (!can.isReviewerOnly)
+    sections.push({
+      label: t("sectionSetup"),
+      items: [
+        item("/email-designer", tv("emailDesigner"), <EnvelopeSimple />),
+        item("/journeys", tv("journeys"), <Path />),
+        item("/writing", tv("writing"), <MagicWand />),
+        item("/integrations", t("integrations"), <LinkSimple />),
+        item("/settings", t("settings"), <Gear />),
+        ...(can.manageProjects
+          ? [item("/admin", tv("administration"), <Gear />)]
+          : []),
+      ],
+    });
+  const navigate = async (href: string) => {
+    const session = readClientSession();
+    if (!session) {
+      window.location.assign(href);
+      return;
+    }
+    try {
+      setError(undefined);
+      const url = new URL(href, SOS_URL);
+      await fetch(`${SOS_URL}/auth/handoff`, { mode: "no-cors" });
+      const code = await handoffCode(
+        SOS_API_URL,
+        session.tokens.accessToken,
+        "suite",
+      );
+      window.location.assign(
+        `${SOS_URL}/auth/handoff?code=${encodeURIComponent(code)}&redirect=${encodeURIComponent(url.pathname + url.search)}`,
+      );
+    } catch {
+      setError("handoff");
+    }
+  };
   const signOut = async () => {
-    await logout();
-    dispatch(logoutUser());
-    window.location.assign(SOS_URL);
+    try {
+      setError(undefined);
+      const token = readClientSession()?.tokens.accessToken;
+      if (token) await signOutSession(SOS_API_URL, token);
+      dispatch(logoutUser());
+      window.location.assign(SOS_URL);
+    } catch {
+      setError("logout");
+    }
   };
   const name = user ? `${user.firstName} ${user.lastName}` : "";
-
   return (
-    <SuiteShell
-      demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "marketing", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
-      rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref={apps[0]?.href ?? SOS_URL} />}
+    <SharedSuiteFrame
+      apiUrl={API_URL}
+      sosUrl={SOS_URL}
+      currentTool="marketing"
+      currentScope="digital_marketing"
+      currentHref={`/${locale}/dashboard`}
+      width="wide"
+      onNavigate={(href) => void navigate(href)}
       sidebar={<Sidebar title={ts("appName")} sections={sections} />}
-      topBar={{
-        start: user ? (process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1") && at("/presentation") ? <PresentationWorkspace/> : <ProjectSwitcher /> : null,
-        end: user ? (
+      demo={{
+        runtime: demoRuntime(
+          process.env.NEXT_PUBLIC_DEMO_API,
+          process.env.NEXT_PUBLIC_DEMO_WEB_URLS,
+          process.env.NEXT_PUBLIC_DEMO_SOS_API,
+        ),
+        enabled:
+          process.env.NODE_ENV === "development" ||
+          process.env.NEXT_PUBLIC_DEMO_PANEL === "1",
+        appKey: "marketing",
+        onLocaleChange: (next) => router.replace(pathname, { locale: next }),
+      }}
+      userMenu={
+        user ? (
           <UserMenu
             name={name}
             email={user.email}
             avatarSrc={user.avatar ?? undefined}
             locales={routing.locales as readonly Locale[]}
-            onLocaleChange={(next) => router.replace(pathname, { locale: next })}
-            onSignOut={signOut}
+            onLocaleChange={(next) =>
+              router.replace(pathname, { locale: next })
+            }
+            onSignOut={() => void signOut()}
           >
-            <MenuLinkItem href={`${SOS_URL}/profile`} icon={<UserCircle />}>
+            <MenuLinkItem
+              href={`${SOS_URL}/profile`}
+              icon={<UserCircle />}
+              onClick={(event) => {
+                event.preventDefault();
+                void navigate(event.currentTarget.href);
+              }}
+            >
               {t("profile")}
             </MenuLinkItem>
           </UserMenu>
-        ) : null,
-      }}
+        ) : null
+      }
     >
-      <div className="mx-auto w-full max-w-[1600px] p-4 md:p-6">{children}</div>
-    </SuiteShell>
+      {error ? (
+        <p role="alert" className="mb-4 text-body-sm text-danger">
+          {tv(error === "logout" ? "logoutError" : "handoffError")}
+        </p>
+      ) : null}
+      <MarketingScopeGate>
+        <div className="mb-5">
+          <ProjectSwitcher />
+        </div>
+        {children}
+      </MarketingScopeGate>
+    </SharedSuiteFrame>
   );
 }

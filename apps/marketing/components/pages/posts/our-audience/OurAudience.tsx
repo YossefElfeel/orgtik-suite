@@ -8,22 +8,41 @@
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Trash } from "@phosphor-icons/react";
-import { Button, ConfirmDialog, IconButton, PageHeader, Tabs, TabsList, TabsPanel, Tag, useFormatter } from "@orgtik/ui";
-import { DataTable, type ColumnDef, type PaginationState } from "@orgtik/ui/table";
+import {
+  Button,
+  ConfirmDialog,
+  IconButton,
+  PageHeader,
+  Tabs,
+  TabsList,
+  TabsPanel,
+  Tag,
+  useFormatter,
+} from "@orgtik/ui";
+import {
+  DataTable,
+  type ColumnDef,
+  type PaginationState,
+} from "@orgtik/ui/table";
 import { isolate } from "@/lib/bidi";
 import { useMarketingRoles } from "@/lib/permissions";
 import { useProjectContext } from "@/lib/project-context";
-import { useDeleteAudienceSegmentMutation, useListAudienceSegmentsQuery, useListCompanyAudiencesQuery } from "@/redux/features/audiences/audiencesApi";
+import {
+  useDeleteAudienceSegmentMutation,
+  useListAudienceSegmentsQuery,
+  useListCompanyAudiencesQuery,
+} from "@/redux/features/audiences/audiencesApi";
 import type { IAudienceSegment, ICompanyAudience } from "@/types/audiences";
 import { useSearchState } from "@/components/pages/ourReports/shared/period";
 import { SearchField } from "@/components/pages/ourReports/shared/SearchField";
 import { CreateSegmentDialog } from "./CreateSegmentDialog";
-import { ImportContactsDialog } from "./ImportContactsDialog";
+import { ButtonLink } from "@/components/shared/ButtonLink";
 
 const SIZES = [10];
 
 export function OurAudience() {
   const t = useTranslations("Audience");
+  const tv = useTranslations("MarketingV3");
   const f = useFormatter();
   const { timeZone } = useProjectContext();
   const roles = useMarketingRoles();
@@ -31,22 +50,42 @@ export function OurAudience() {
   const tab = params.get("tab") === "segments" ? "segments" : "audiences";
   const q = (params.get("q") ?? "").trim();
   const page = Math.max(1, Number(params.get("page")) || 1);
-  const size = SIZES.includes(Number(params.get("size"))) ? Number(params.get("size")) : SIZES[0];
+  const size = SIZES.includes(Number(params.get("size")))
+    ? Number(params.get("size"))
+    : SIZES[0];
   const [toDelete, setToDelete] = useState<IAudienceSegment | null>(null);
   const [remove] = useDeleteAudienceSegmentMutation();
 
-  const audiences = useListCompanyAudiencesQuery({ q: q || undefined, page: tab === "audiences" ? page : 1, limit: size });
-  const segments = useListAudienceSegmentsQuery({ q: q || undefined, page: tab === "segments" ? page : 1, limit: size });
+  const audiences = useListCompanyAudiencesQuery({
+    q: q || undefined,
+    page: tab === "audiences" ? page : 1,
+    limit: size,
+  });
+  const segments = useListAudienceSegmentsQuery({
+    q: q || undefined,
+    page: tab === "segments" ? page : 1,
+    limit: size,
+  });
   // Names for the segments' audience column, whatever the search.
   const allAudiences = useListCompanyAudiencesQuery({ page: 1, limit: 100 });
-  const audienceName = useMemo(() => new Map((allAudiences.data?.data.items ?? []).map((a) => [a.id, a.name])), [allAudiences.data]);
+  const audienceName = useMemo(
+    () =>
+      new Map((allAudiences.data?.data.items ?? []).map((a) => [a.id, a.name])),
+    [allAudiences.data],
+  );
 
   const pagination: PaginationState = { pageIndex: page - 1, pageSize: size };
-  const onPaginationChange = (u: PaginationState | ((old: PaginationState) => PaginationState)) => {
+  const onPaginationChange = (
+    u: PaginationState | ((old: PaginationState) => PaginationState),
+  ) => {
     const next = typeof u === "function" ? u(pagination) : u;
-    set({ page: next.pageIndex ? String(next.pageIndex + 1) : null, size: next.pageSize === SIZES[0] ? null : String(next.pageSize) });
+    set({
+      page: next.pageIndex ? String(next.pageIndex + 1) : null,
+      size: next.pageSize === SIZES[0] ? null : String(next.pageSize),
+    });
   };
-  const dateOf = (iso?: string) => (iso ? f.date(iso, { dateStyle: "medium", timeZone }) : "–");
+  const dateOf = (iso?: string) =>
+    iso ? f.date(iso, { dateStyle: "medium", timeZone }) : "–";
 
   const audienceColumns = useMemo<ColumnDef<ICompanyAudience, unknown>[]>(
     () => [
@@ -69,8 +108,23 @@ export function OurAudience() {
           </div>
         ),
       },
-      { id: "contacts", header: t("colContacts"), accessorFn: (a) => a.contactsCount ?? 0, enableSorting: false, meta: { numeric: true }, cell: ({ getValue }) => f.number(getValue() as number) },
-      { id: "updated", header: t("colUpdated"), accessorFn: (a) => a.updatedAt ?? a.createdAt ?? "", enableSorting: false, meta: { numeric: true }, cell: ({ row }) => dateOf(row.original.updatedAt ?? row.original.createdAt) },
+      {
+        id: "contacts",
+        header: t("colContacts"),
+        accessorFn: (a) => a.contactsCount ?? 0,
+        enableSorting: false,
+        meta: { numeric: true },
+        cell: ({ getValue }) => f.number(getValue() as number),
+      },
+      {
+        id: "updated",
+        header: t("colUpdated"),
+        accessorFn: (a) => a.updatedAt ?? a.createdAt ?? "",
+        enableSorting: false,
+        meta: { numeric: true },
+        cell: ({ row }) =>
+          dateOf(row.original.updatedAt ?? row.original.createdAt),
+      },
     ],
     [t, f, timeZone],
   );
@@ -99,10 +153,18 @@ export function OurAudience() {
       {
         id: "audience",
         header: t("colAudience"),
-        accessorFn: (s) => (s.audienceId ? audienceName.get(s.audienceId) ?? "" : ""),
+        accessorFn: (s) =>
+          s.audienceId ? (audienceName.get(s.audienceId) ?? "") : "",
         enableSorting: false,
         cell: ({ row }) =>
-          row.original.audienceId ? <span dir="auto">{audienceName.get(row.original.audienceId) ?? t("unknownAudience")}</span> : <span className="text-fg-muted">{t("allAudiences")}</span>,
+          row.original.audienceId ? (
+            <span dir="auto">
+              {audienceName.get(row.original.audienceId) ??
+                t("unknownAudience")}
+            </span>
+          ) : (
+            <span className="text-fg-muted">{t("allAudiences")}</span>
+          ),
       },
       {
         id: "rules",
@@ -114,7 +176,9 @@ export function OurAudience() {
           const tags = [
             r.source ? t("ruleSourceIs", { value: isolate(r.source) }) : null,
             r.type ? t("ruleTypeIs", { value: isolate(r.type) }) : null,
-            r.interest ? t("ruleInterestIs", { value: isolate(r.interest) }) : null,
+            r.interest
+              ? t("ruleInterestIs", { value: isolate(r.interest) })
+              : null,
             r.qualifiedOnly ? t("ruleQualified") : null,
           ].filter(Boolean) as string[];
           return tags.length ? (
@@ -130,8 +194,22 @@ export function OurAudience() {
           );
         },
       },
-      { id: "matching", header: t("colMatching"), accessorFn: (s) => s.matchingContactsCount ?? 0, enableSorting: false, meta: { numeric: true }, cell: ({ getValue }) => f.number(getValue() as number) },
-      { id: "created", header: t("colCreated"), accessorFn: (s) => s.createdAt ?? "", enableSorting: false, meta: { numeric: true }, cell: ({ row }) => dateOf(row.original.createdAt) },
+      {
+        id: "matching",
+        header: t("colMatching"),
+        accessorFn: (s) => s.matchingContactsCount ?? 0,
+        enableSorting: false,
+        meta: { numeric: true },
+        cell: ({ getValue }) => f.number(getValue() as number),
+      },
+      {
+        id: "created",
+        header: t("colCreated"),
+        accessorFn: (s) => s.createdAt ?? "",
+        enableSorting: false,
+        meta: { numeric: true },
+        cell: ({ row }) => dateOf(row.original.createdAt),
+      },
       ...(roles.manageAudience
         ? [
             {
@@ -139,7 +217,15 @@ export function OurAudience() {
               header: () => <span className="sr-only">{t("colActions")}</span>,
               enableSorting: false,
               meta: { width: "1%" },
-              cell: ({ row }) => <IconButton variant="ghost" size="sm" icon={<Trash />} label={t("deleteSegmentLabel", { name: row.original.name })} onClick={() => setToDelete(row.original)} />,
+              cell: ({ row }) => (
+                <IconButton
+                  variant="ghost"
+                  size="sm"
+                  icon={<Trash />}
+                  label={t("deleteSegmentLabel", { name: row.original.name })}
+                  onClick={() => setToDelete(row.original)}
+                />
+              ),
             } satisfies ColumnDef<IAudienceSegment, unknown>,
           ]
         : []),
@@ -147,13 +233,30 @@ export function OurAudience() {
     [t, f, timeZone, audienceName, roles.manageAudience],
   );
 
-  const statusOf = (r: { isLoading: boolean; isError: boolean; data?: { data: { items: unknown[] } } }) =>
-    r.isLoading ? "loading" : r.isError && !r.data ? "error" : r.data?.data.items.length ? "ready" : "empty";
-  const clearSearch = <Button variant="secondary" onClick={() => set({ q: null, page: null })}>{t("clearSearch")}</Button>;
+  const statusOf = (r: {
+    isLoading: boolean;
+    isError: boolean;
+    data?: { data: { items: unknown[] } };
+  }) =>
+    r.isLoading
+      ? "loading"
+      : r.isError && !r.data
+        ? "error"
+        : r.data?.data.items.length
+          ? "ready"
+          : "empty";
+  const clearSearch = (
+    <Button variant="secondary" onClick={() => set({ q: null, page: null })}>
+      {t("clearSearch")}
+    </Button>
+  );
   const canChange = roles.manageAudience;
 
   return (
     <div className="flex flex-col gap-6">
+      <p className="max-w-prose text-body-sm text-fg-muted">
+        {tv("compatibilityAudience")}
+      </p>
       <PageHeader
         title={t("title")}
         description={t("description")}
@@ -161,19 +264,42 @@ export function OurAudience() {
           canChange ? (
             <>
               <CreateSegmentDialog />
-              <ImportContactsDialog onDone={() => set({ tab: null, q: null, page: null })} />
+              <ButtonLink href="/our-audience/contacts" variant="secondary">
+                {tv("contacts")}
+              </ButtonLink>
             </>
           ) : undefined
         }
       />
       <div className="flex flex-wrap items-end gap-3">
-        <SearchField label={t("search")} placeholder={tab === "segments" ? t("searchSegments") : t("searchAudiences")} value={q} onChange={(v) => set({ q: v, page: null })} className="min-w-56 flex-1 sm:max-w-96" />
+        <SearchField
+          label={t("search")}
+          placeholder={
+            tab === "segments" ? t("searchSegments") : t("searchAudiences")
+          }
+          value={q}
+          onChange={(v) => set({ q: v, page: null })}
+          className="min-w-56 flex-1 sm:max-w-96"
+        />
       </div>
-      <Tabs value={tab} onValueChange={(v) => set({ tab: v === "segments" ? "segments" : null, page: null })}>
+      <Tabs
+        value={tab}
+        onValueChange={(v) =>
+          set({ tab: v === "segments" ? "segments" : null, page: null })
+        }
+      >
         <TabsList
           items={[
-            { value: "audiences", label: t("tabAudiences"), count: audiences.data?.data.meta.total },
-            { value: "segments", label: t("tabSegments"), count: segments.data?.data.meta.total },
+            {
+              value: "audiences",
+              label: t("tabAudiences"),
+              count: audiences.data?.data.meta.total,
+            },
+            {
+              value: "segments",
+              label: t("tabSegments"),
+              count: segments.data?.data.meta.total,
+            },
           ]}
         />
         <TabsPanel value="audiences" className="pt-5">
@@ -193,7 +319,17 @@ export function OurAudience() {
             empty={
               q
                 ? { title: t("noAudiencesMatch"), action: clearSearch }
-                : { title: t("noAudiences"), description: canChange ? t("noAudiencesBody") : t("noAudiencesReadOnly"), action: canChange ? <ImportContactsDialog onDone={() => set({ tab: null })} /> : undefined }
+                : {
+                    title: t("noAudiences"),
+                    description: canChange
+                      ? t("noAudiencesBody")
+                      : t("noAudiencesReadOnly"),
+                    action: canChange ? (
+                      <ButtonLink href="/our-audience/contacts">
+                        {tv("contacts")}
+                      </ButtonLink>
+                    ) : undefined,
+                  }
             }
           />
         </TabsPanel>
@@ -214,7 +350,13 @@ export function OurAudience() {
             empty={
               q
                 ? { title: t("noSegmentsMatch"), action: clearSearch }
-                : { title: t("noSegments"), description: canChange ? t("noSegmentsBody") : t("noSegmentsReadOnly"), action: canChange ? <CreateSegmentDialog /> : undefined }
+                : {
+                    title: t("noSegments"),
+                    description: canChange
+                      ? t("noSegmentsBody")
+                      : t("noSegmentsReadOnly"),
+                    action: canChange ? <CreateSegmentDialog /> : undefined,
+                  }
             }
           />
         </TabsPanel>
@@ -228,7 +370,9 @@ export function OurAudience() {
         tone="danger"
         irreversible
         title={t("deleteSegmentTitle", { name: isolate(toDelete?.name) })}
-        impact={t("deleteSegmentImpact", { count: toDelete?.matchingContactsCount ?? 0 })}
+        impact={t("deleteSegmentImpact", {
+          count: toDelete?.matchingContactsCount ?? 0,
+        })}
         confirmLabel={t("deleteSegment")}
         cancelLabel={t("cancel")}
         onConfirm={async () => {

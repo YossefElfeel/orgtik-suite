@@ -83,6 +83,9 @@ module.exports = function audienceRoutes(app, { ctx, getDb, views, h }) {
     send(res, { id: s.id }, "Segment deleted successfully");
   }));
 
+  // Historical imports remain readable; current master contacts are owned by CRM.
+  app.post("/audiences/imports", h.handle((_req,res)=>res.status(410).json({success:false,code:"managed_in_crm",path:"/our-audience/contacts",message:"Choose canonical CRM contact references."}),{needsProject:false}));
+  app.post("/audiences/imports/:id/commit", h.handle((_req,res)=>res.status(410).json({success:false,code:"managed_in_crm",path:"/our-audience/contacts",message:"Choose canonical CRM contact references."}),{needsProject:false}));
   // ---------------------------------------------------------------- CSV imports
   // POST /audiences/imports (multipart `file`) -> preview { id, headers, preview, totalRows, status }
   app.post("/audiences/imports", ctx.upload.any(), h.handle((req, res, u, project) => {

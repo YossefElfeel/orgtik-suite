@@ -3,7 +3,7 @@ import { ICreateProject, IProject } from "@/types/projects";
 
 export const projectApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    createProject: builder.mutation<void, ICreateProject>({
+    createProject: builder.mutation<SuccessResponse<IProject>, ICreateProject>({
       query: ({ name, description, avatar }) => {
         // avatar → FormData
         if (avatar) {

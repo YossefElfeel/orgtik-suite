@@ -6,15 +6,13 @@
 import { useState, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { FileField, Input, Textarea, toast } from "@orgtik/ui";
+import { Input, Textarea } from "@orgtik/ui";
 import { RHFField } from "@orgtik/ui/rhf";
 import { FormDialog } from "@/components/shared/FormDialog";
 import { useCreateProjectMutation } from "@/redux/features/projects/projectApi";
-import { isolate } from "@/lib/bidi";
 
-type Values = { name: string; description: string; avatar: File[] };
-const EMPTY: Values = { name: "", description: "", avatar: [] };
-const MAX_AVATAR = 5 * 1024 * 1024;
+type Values = { name: string; description: string };
+const EMPTY: Values = { name: "", description: "" };
 
 export function ProjectFormDialog({
   trigger,
@@ -28,7 +26,8 @@ export function ProjectFormDialog({
   /** The new project's id, so the caller can switch to it. */
   onCreated?: (id: string) => void;
 }) {
-  const t = useTranslations("ProjectForm");
+  const t = useTranslations("ProjectForm"),
+    tv = useTranslations("MarketingV3");
   const [isOpen, setIsOpen] = useState(false);
   const form = useForm<Values>({ defaultValues: EMPTY });
   const [createProject] = useCreateProjectMutation();
@@ -37,9 +36,11 @@ export function ProjectFormDialog({
     if (!(await form.trigger())) throw new Error("invalid");
     const v = form.getValues();
     const name = v.name.trim();
-    const created = await createProject({ name, description: v.description.trim() || undefined, avatar: v.avatar[0] } as never).unwrap();
-    toast.success(t("created", { name: isolate(name) }));
-    const id = (created as { data?: { id?: string | number } } | undefined)?.data?.id;
+    const created = await createProject({
+      name,
+      description: v.description.trim() || undefined,
+    }).unwrap();
+    const id = created.data.id;
     if (id != null) onCreated?.(String(id));
   };
 
@@ -61,19 +62,21 @@ export function ProjectFormDialog({
         name="name"
         label={t("name")}
         required
-        rules={{ validate: (v: string) => v.trim().length >= 2 || t("nameRequired") }}
+        rules={{
+          validate: (v: string) => v.trim().length >= 2 || t("nameRequired"),
+        }}
         render={(field) => <Input dir="auto" autoFocus {...field} />}
       />
-      <RHFField control={form.control} name="description" label={t("description")} optional render={(field) => <Textarea dir="auto" rows={3} maxRows={8} {...field} />} />
-      <FileField
-        label={t("avatar")}
-        description={t("avatarHint")}
-        accept="image/*"
-        maxSize={MAX_AVATAR}
-        multiple={false}
-        value={form.watch("avatar")}
-        onChange={(files) => form.setValue("avatar", files)}
+      <RHFField
+        control={form.control}
+        name="description"
+        label={t("description")}
+        optional
+        render={(field) => (
+          <Textarea dir="auto" rows={3} maxRows={8} {...field} />
+        )}
       />
+      <p className="text-body-sm text-fg-muted">{tv("assetsDeferred")}</p>
     </FormDialog>
   );
 }
