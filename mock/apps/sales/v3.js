@@ -300,7 +300,7 @@ module.exports = function crmV3(S) {
       },
       sample: {
         loaded: state.samplesLoaded,
-        canLoad: contacts.length === 0 && req.sc.role !== "customer",
+        canLoad: contacts.length === 0 && ["admin", "manager"].includes(req.sc.role),
       },
     };
   }
@@ -765,61 +765,7 @@ module.exports = function crmV3(S) {
         return projectOut(req, row);
       }),
     );
-    app.get(
-      "/api/crm/v3/offers/:id/pdf",
-      handle((req) => {
-        const offer = db.offers.find((row) => row.id === req.params.id);
-        if (!offer)
-          throw fail(404, "offer_not_found", "This offer was not found.");
-        const contact = customer(req, offer.customerId),
-          cur = offer.currencyCode;
-        return K.writePdf(
-          `offer-${offer.id}.pdf`,
-          offer.name,
-          [
-            `Customer: ${contact.fullName}`,
-            `Company: ${contact.companyName || "-"}`,
-            `Status: ${offer.status}`,
-            `Valid until: ${offer.crmValidUntil || "-"}`,
-            "---",
-            ...offer.lines.map((line) => ({
-              text: `${line.planName} · ${line.durationMonths} months`,
-              right: H.fmtMoney(line.price, cur),
-            })),
-            { text: "Subtotal", right: H.fmtMoney(offer.totals.subtotal, cur) },
-            {
-              text: "Installment markup",
-              right: H.fmtMoney(offer.totals.installmentMarkupTotal, cur),
-            },
-            {
-              text: "Discount",
-              right: H.fmtMoney(offer.totals.discountAmount, cur),
-            },
-            { text: "VAT", right: H.fmtMoney(offer.totals.vatAmount, cur) },
-            {
-              text: "Quoted total",
-              right: H.fmtMoney(offer.totals.total, cur),
-            },
-            {
-              text: "Agreed total",
-              bold: true,
-              right: H.fmtMoney(
-                offer.status === "accepted"
-                  ? (offer.counterTotal ?? offer.totals.total)
-                  : offer.totals.total,
-                cur,
-              ),
-            },
-            ...(offer.crmSimulatedSignature
-              ? [
-                  `Simulated signature: ${offer.crmSimulatedSignature.name} · ${offer.crmSimulatedSignature.at}`,
-                ]
-              : []),
-          ],
-          `Offer-${offer.id}.pdf`,
-        );
-      }),
-    );
+    require("./documents")(S).routes(app);
     app.get(
       "/api/crm/v3/offers/:id",
       handle((req) => {

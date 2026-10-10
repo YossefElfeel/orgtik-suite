@@ -172,6 +172,7 @@
       "apps/sales/core.js",
       "apps/sales/crm.js",
       "apps/sales/deals.js",
+      "apps/sales/documents.js",
       "apps/sales/engage.js",
       "apps/sales/lib.js",
       "apps/sales/reference.js",

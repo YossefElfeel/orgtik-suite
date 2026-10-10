@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, ErrorState, Input, LoadingState, useSuite } from "@orgtik/ui";
 import { RHFField } from "@orgtik/ui/rhf";
 import { isolate } from "@/lib/bidi";
+import { openSuiteDestination } from "@/lib/suite-navigation";
 import { crmProvisioningSchema } from "@/schemas/crm-v3";
 import type {
   CrmProvisioningCandidate,
@@ -13,11 +14,13 @@ import type {
 } from "@/types/crm-v3";
 export default function CrmProvisioning({ id }: { id: string }) {
   const t = useTranslations("CrmV3"),
+    te = useTranslations("Errors"),
     suite = useSuite(),
     [candidate, setCandidate] = useState<CrmProvisioningCandidate>(),
     [receipt, setReceipt] = useState<CrmProvisioningReceipt>(),
     [error, setError] = useState(false),
     [busy, setBusy] = useState(false),
+    [navigationError, setNavigationError] = useState(false),
     operation = useRef<string | undefined>(undefined),
     form = useForm<{ name: string; country: string }>({
       resolver: zodResolver(crmProvisioningSchema(t)),
@@ -75,11 +78,13 @@ export default function CrmProvisioning({ id }: { id: string }) {
             {t("workspaceReady")}
           </p>
           <a
-            href={`${suite.sosUrl}/go/admin?redirect=${encodeURIComponent(`/workspaces/${receipt.workspaceId}`)}`}
+            href={`${suite.sosUrl}/go/platform_admin?redirect=${encodeURIComponent(`/workspaces/${receipt.workspaceId}`)}`}
             className="mt-3 inline-block text-body-sm text-fg-brand underline"
+            onClick={(event) => { event.preventDefault(); setNavigationError(false); void openSuiteDestination(event.currentTarget.href).catch(() => setNavigationError(true)); }}
           >
             {t("openWorkspace")}
           </a>
+          {navigationError ? <p role="alert" className="mt-2 text-body-sm text-danger">{te("handoffUnavailable")}</p> : null}
         </div>
       ) : !candidate.canProvision ? (
         <p className="text-body-sm text-fg-muted">
