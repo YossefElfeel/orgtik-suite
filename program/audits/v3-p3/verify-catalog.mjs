@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
-import { CATALOG, BUNDLES, installPublicCatalog, findItem, findBundle } from '../../../apps/website/landing-directions/src/reference/purchase-catalog.js';
+import { CATALOG, BUNDLES, TERM_SAVINGS, countSaving, installPublicCatalog, findItem, findBundle } from '../../../apps/website/landing-directions/src/reference/purchase-catalog.js';
 const require = createRequire(import.meta.url), seed = require('../../../mock/apps/admin/seed-website-offers.js');
 const copy = value => JSON.parse(JSON.stringify(value));
 const presentation = () => CATALOG.map(({ monthlyMinor, ...item }) => item);
@@ -19,4 +19,7 @@ for (const locale of ['en', 'ar', 'de', 'fr', 'it']) { installPublicCatalog(chan
 assert.equal(findBundle(bundle.id).name, 'Published bundle');
 installPublicCatalog(data);
 assert.deepEqual(presentation(), initial, 'Switching back must clear all stale catalog overlays.');
+installPublicCatalog({ ...data, policy: { durationSavings: { 1: 0, 3: 5, 6: 10, 12: 15 }, serviceDurationSavings: { 1: 0, 3: 2, 6: 12, 12: 20 }, countBands: [{ min: 1, saving: 0 }, { min: 2, saving: 5 }], serviceCountBands: [{ min: 1, saving: 0 }, { min: 2, saving: 6 }] } });
+assert.equal(TERM_SAVINGS[3], 2); assert.equal(TERM_SAVINGS[12], 15); assert.equal(countSaving(2, 'service'), 6); assert.equal(countSaving(2, 'software'), 5);
+installPublicCatalog(data); assert.equal(TERM_SAVINGS[3], 5);
 console.log(JSON.stringify({ equalContentItems: initial.length, equalContentBundles: initialBundles.length, publishedLocales: 5, staleOverlaysCleared: true }));

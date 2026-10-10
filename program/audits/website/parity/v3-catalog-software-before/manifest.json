@@ -1,0 +1,33 @@
+{
+  "label": "v3-catalog-software-before",
+  "site": "http://127.0.0.1:4183",
+  "commit": {
+    "head": "d893640",
+    "dirty": true
+  },
+  "renderer": "software",
+  "at": "2026-10-10T08:26:22.420Z",
+  "clock": {
+    "start": "2026-09-29T06:00:00.000Z",
+    "settleMs": 15000
+  },
+  "widths": [
+    1440
+  ],
+  "captures": [
+    {
+      "name": "home__1440",
+      "route": "/",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    },
+    {
+      "name": "services__1440",
+      "route": "/services",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    }
+  ]
+}

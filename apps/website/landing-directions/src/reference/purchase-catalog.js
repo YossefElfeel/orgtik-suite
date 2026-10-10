@@ -45,6 +45,7 @@ export const CATALOG = [
     monthlyMinor: null,
   })),
 ];
+const BASE_PRESENTATION = new Map(CATALOG.map(item => [item.id, { ...item }]));
 const bundle = (id, kind, department, name, ids, why, recommended = false) => ({
   id,
   kind,
@@ -163,7 +164,7 @@ const BUNDLE_PRESENTATION = [
 export let BUNDLES = BUNDLE_PRESENTATION;
 export const findItem = (id, kind) =>
   CATALOG.find((x) => x.id === id && (!kind || x.kind === kind));
-export const findBundle = (id) => BUNDLE_PRESENTATION.find((x) => x.id === id);
+export const findBundle = (id) => BUNDLES.find((x) => x.id === id);
 const pricingListeners = new Set();
 let pricing = {
   status: "idle",
@@ -184,7 +185,7 @@ export const subscribePricing = (listener) => {
   pricingListeners.add(listener);
   return () => pricingListeners.delete(listener);
 };
-export function installPublicCatalog(data) {
+export function installPublicCatalog(data, { locale = typeof document === "undefined" ? "en" : document.documentElement.lang || "en" } = {}) {
   if (
     !data?.currency ||
     !Number.isInteger(data.decimals) ||
@@ -195,12 +196,30 @@ export function installPublicCatalog(data) {
     const priced = data.items.find(
       (row) => row.id === item.id && row.kind === item.kind,
     );
+    Object.assign(item, BASE_PRESENTATION.get(item.id));
     item.monthlyMinor = priced?.monthlyMinor ?? null;
+    const localized = value => value?.[locale] ?? value?.en;
+    if (item.kind === "service" && localized(priced?.names)) item.name = localized(priced.names);
+    if (localized(priced?.descriptions)) item.description = localized(priced.descriptions);
+    if (Array.isArray(localized(priced?.capabilities))) item.capabilities = [...localized(priced.capabilities)];
+    if (priced?.department) item.department = priced.department;
+    if (localized(priced?.departmentNames)) item.departmentName = localized(priced.departmentNames);
+    if (priced?.icon) item.icon = priced.icon;
   }
-  Object.assign(TERM_SAVINGS, data.policy?.durationSavings);
-  BUNDLES = BUNDLE_PRESENTATION.filter((bundle) =>
-    data.bundles?.some((available) => available.id === bundle.id),
-  );
+  // This shared picker serves service and software groups. Its advertised saving is the
+  // guaranteed minimum for either kind; exact per-line savings remain server-priced.
+  for (const months of MONTHS) {
+    const software = data.policy?.durationSavings?.[months] ?? ({ 1: 0, 3: 5, 6: 10, 12: 15 })[months];
+    TERM_SAVINGS[months] = Math.min(software, data.policy?.serviceDurationSavings?.[months] ?? software);
+  }
+  BUNDLES = BUNDLE_PRESENTATION.flatMap(bundle => {
+    const available = data.bundles?.find(row => row.id === bundle.id && row.kind === bundle.kind);
+    if (!available) return [];
+    const localized = value => typeof value === "string" ? value : value?.[locale] ?? value?.en;
+    const name = localized(available.name) || bundle.name, why = localized(available.why) || bundle.why, recommended = available.recommended ?? bundle.recommended;
+    const ids = available.ids && (available.ids.length !== bundle.ids.length || available.ids.some((id, index) => id !== bundle.ids[index])) ? available.ids : bundle.ids;
+    return name === bundle.name && why === bundle.why && recommended === bundle.recommended && ids === bundle.ids ? [bundle] : [{ ...bundle, name, why, ids, recommended }];
+  });
   updatePricing({ ...data, status: "ready", error: null });
   return pricing;
 }
@@ -257,8 +276,8 @@ export const money = (minor, context = pricing) => {
 };
 export const termLabel = (months) =>
   months ? `${months} month${months === 1 ? "" : "s"}` : "Choose duration";
-export const countSaving = (count) =>
-  (pricing.policy?.countBands ?? []).filter((band) => count >= band.min).at(-1)
+export const countSaving = (count, kind = "service") =>
+  ((kind === "service" ? pricing.policy?.serviceCountBands : null) ?? pricing.policy?.countBands ?? []).filter((band) => count >= band.min).at(-1)
     ?.saving ?? 0;
 let sequence = 0;
 const newId = () =>

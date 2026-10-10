@@ -1,0 +1,27 @@
+{
+  "label": "v3-home-warm-before",
+  "site": "http://127.0.0.1:4183",
+  "commit": {
+    "head": "dab0a11",
+    "dirty": true
+  },
+  "renderer": "software",
+  "warmPaint": true,
+  "at": "2026-10-10T09:05:54.969Z",
+  "clock": {
+    "start": "2026-09-29T06:00:00.000Z",
+    "settleMs": 15000
+  },
+  "widths": [
+    1440
+  ],
+  "captures": [
+    {
+      "name": "home__1440",
+      "route": "/",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0
+    }
+  ]
+}

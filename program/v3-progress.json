@@ -3,7 +3,7 @@
   "owner_instruction": "continue till finish",
   "gate_policy": "Owner authorizes continued implementation and evidence review through P5 without intermediate approval stops; explicit deployment instruction is still required.",
   "deployment": "paused",
-  "current_phase": "P2_library_ci",
+  "current_phase": "P3_integration_and_P4_tool_cycles",
   "packages": {
     "V3-P0": {
       "status": "merged_owner_continue_authorized",
@@ -17,9 +17,53 @@
       "current_evidence": "PR47 merged main8edd365 after CI37991406676 and pause37991406662; 276 strict Windows renders and scoped local evidence"
     },
     "V3-P2": {
-      "current_evidence": "program/audits/v3-p2/README.md; 360 renders/zero axe/console/overflow; 25 affected tasks; 20 unit checks; 15 new+10 retained interactions; package CI pending",
-      "status": "implemented_local_ci_pending",
+      "current_evidence": "PR48 source eaea1e5 merged main e8a9c57 after green CI37998115026 and configuration37998115145; 360 strict renders with reviewed 55 Windows pairs, zero tolerance/mask change",
+      "status": "merged_local_and_ci_verified",
       "ui_status": "storybook_v2_reviewed"
+    },
+    "V3-P3-ECO": {
+      "status": "ordinary_adapters_in_progress",
+      "ui_status": "tool_migration_in_progress",
+      "current_evidence": "Actual connectors/trials/access, Account identity/actions and signed adaptive Home, native Tasks/CRM activity and notification preferences, won CRM customer-owned workspace and public careers are verified. Account142/44, Tasks111/31, HR450+50/117 plus11/2 reviewed correction. All-tool providers, private Chat audience and Marketing attribution remain in progress."
+    },
+    "V3-P3-CATALOG": {
+      "status": "ordinary_catalog_and_website_parity_verified_mirrors_pending",
+      "ui_status": "publication_230_checks_56_captures_verified",
+      "current_evidence": "Canonical CRM publication230 checks/56 captures integrated; paid customer+confirmed deal, actual paid source/start guard and packaged delivery bytes verified. Data-only website adapter passes16items/11bundles/five catalogs and168/168 strict pixel/text/ARIA pairs at390/768/1440. Console service writes retired; final CRM UI and WM mirrors remain pending.",
+      "acceptance_evidence": "program/audits/v3-p3/README.md; program/audits/website/parity/diff-v3-catalog-final-before-vs-v3-catalog-final-after.md"
+    },
+    "V3-P4-TASKS": {
+      "status": "implemented_local_verified_ci_pending",
+      "ui_status": "ordinary_pilot_verified",
+      "current_evidence": "Tasks e126536 integrated root1627975; all eight Tier A and approved Tier B ordinary workflows, admin/onboarding/connected/six states, five catalogs and production build. 111 scoped assertions and31 hashed accepted captures; root integration CI remains pending.",
+      "acceptance_evidence": "program/audits/v3-p4-tasks/README.md; program/audits/v3-p4-tasks/manifest.json"
+    },
+    "V3-P4-ACCOUNT": {
+      "status": "implemented_local_verified_ci_pending",
+      "ui_status": "ordinary_account_verified",
+      "current_evidence": "Accountb5c4f68 integrated root90fd8ac:142 assertions/44 captures, all8Tier A and approved Tier B, actual authority actions/adaptive Home/preference handoff, six states, five catalogs, responsive EN/AR themes and production build.",
+      "acceptance_evidence": "program/audits/v3-p4-account/README.md; program/audits/v3-p4-account/manifest.json"
+    },
+    "V3-P4-HR": {
+      "status": "implemented_local_verified_ci_pending",
+      "ui_status": "ordinary_hr_and_careers_verified",
+      "current_evidence": "HRe569cb8 integrated root785a960:450 scriptedchecks/50 tests/117 captures; all8Tier A and approved Tier B, public careers, six states, five catalogs and production build. Reviewed5253faa correction adds3helpertests/11actualchecks/2AR390captures; badge/checklist follow real linked Tasks status with no manual field rewrite.",
+      "acceptance_evidence": "program/audits/v3-p4/hr/README.md; program/audits/v3-p4/hr/verification.json; program/audits/v3-p4/hr/onboarding-review.json"
+    },
+    "V3-P4-CRM": {
+      "status": "ordinary_tool_cycle_in_progress",
+      "ui_status": "crm_stream_in_progress",
+      "current_evidence": "P3 catalog publication accepted locally; CRM-owned ordinary pipelines/companies/activities/routing/targets/mock communication and kit removal now being implemented; full P4 acceptance pending"
+    },
+    "V3-P4-CHATS": {
+      "status": "ordinary_tool_cycle_in_progress",
+      "ui_status": "chats_stream_in_progress",
+      "current_evidence": "Owned ordinary tool cycle in progress; current native runtime and DS v2 shell, all approved commitments and responsive acceptance pending."
+    },
+    "V3-P4-FILES": {
+      "status": "ordinary_tool_cycle_in_progress",
+      "ui_status": "files_stream_in_progress",
+      "current_evidence": "Owned ordinary tool cycle in progress; current native runtime and DS v2 shell, all approved commitments and responsive acceptance pending."
     }
   }
 }

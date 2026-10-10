@@ -1,0 +1,1200 @@
+{
+  "scope": "Equal-fixture website source/data parity, 56 logical routes at390/768/1440",
+  "before": {
+    "label": "v3-catalog-final-before",
+    "adapterReference": "eaea1e5:apps/website/landing-directions/src/reference/purchase-catalog.js",
+    "adapterBlobSHA256": "e7809ad16496d68220c0f7d6dcb34e49258efada287758a9579b3f8568a413eb"
+  },
+  "after": {
+    "label": "v3-catalog-final-after",
+    "adapterSHA256": "9b11a706b03f099cac651fe4b422d1482e05bbdefd0d18d3f659e80a35ce0ef5"
+  },
+  "result": {
+    "comparisons": 168,
+    "changedPixels": 0,
+    "textEqual": true,
+    "headingsEqual": true,
+    "accessibilityWithoutLinkURLsEqual": true
+  },
+  "protocol": "Matching per-capture software renderer/media lock; Home warm paint at each width. Existing video frame held at time0; decoded completed images settled. No CSS/source visual edits, hidden elements, masks or tolerance changes.",
+  "history": "First default comparison166/168 exact: Home one-channel pixel and Services autoplay video. Matched final protocol passes168. One cold /software/crm after failure recovered at all three widths. Initial reports retained.",
+  "report": "diff-v3-catalog-final-before-vs-v3-catalog-final-after.md",
+  "captures": [
+    {
+      "name": "about__390",
+      "route": "/about",
+      "width": 390,
+      "beforeSHA256": "7fab179a81f2abf69f5dc2727f4998278950759113b69e1641cc90d7f6617b7c",
+      "afterSHA256": "7fab179a81f2abf69f5dc2727f4998278950759113b69e1641cc90d7f6617b7c"
+    },
+    {
+      "name": "about__768",
+      "route": "/about",
+      "width": 768,
+      "beforeSHA256": "4f4272774e23c252ea1a7509292f05e83350975a8448e4e3991175ef2a077f3f",
+      "afterSHA256": "4f4272774e23c252ea1a7509292f05e83350975a8448e4e3991175ef2a077f3f"
+    },
+    {
+      "name": "about__1440",
+      "route": "/about",
+      "width": 1440,
+      "beforeSHA256": "906ef513b7275e55d410d2376fd3af52d1816132acccdc541b5449ee64d334a6",
+      "afterSHA256": "906ef513b7275e55d410d2376fd3af52d1816132acccdc541b5449ee64d334a6"
+    },
+    {
+      "name": "cart__390",
+      "route": "/cart",
+      "width": 390,
+      "beforeSHA256": "8699c7c43f7ed6c5c1e0bd5d5b5a52054eac993d825f098cf41059b10bf9bd82",
+      "afterSHA256": "8699c7c43f7ed6c5c1e0bd5d5b5a52054eac993d825f098cf41059b10bf9bd82"
+    },
+    {
+      "name": "cart__768",
+      "route": "/cart",
+      "width": 768,
+      "beforeSHA256": "55ee00db0c0997e88681a4c9b56ce476074df9a1263b57a0805d8f2707f4d5ff",
+      "afterSHA256": "55ee00db0c0997e88681a4c9b56ce476074df9a1263b57a0805d8f2707f4d5ff"
+    },
+    {
+      "name": "cart__1440",
+      "route": "/cart",
+      "width": 1440,
+      "beforeSHA256": "4b44b4bdff6e3058b821050d48da19e5e09273230146f55f2ce1ca02231b26ef",
+      "afterSHA256": "4b44b4bdff6e3058b821050d48da19e5e09273230146f55f2ce1ca02231b26ef"
+    },
+    {
+      "name": "checkout__390",
+      "route": "/checkout",
+      "width": 390,
+      "beforeSHA256": "abfc7c04dc9d7afb5565929e1330d642a7d7d63d95ec235e65f3875d7b4e16c3",
+      "afterSHA256": "abfc7c04dc9d7afb5565929e1330d642a7d7d63d95ec235e65f3875d7b4e16c3"
+    },
+    {
+      "name": "checkout__768",
+      "route": "/checkout",
+      "width": 768,
+      "beforeSHA256": "15e65bbc6e3e11f8d69415219df2f0f67baf16ed8bc13d5f9867b12ee54dcb18",
+      "afterSHA256": "15e65bbc6e3e11f8d69415219df2f0f67baf16ed8bc13d5f9867b12ee54dcb18"
+    },
+    {
+      "name": "checkout__1440",
+      "route": "/checkout",
+      "width": 1440,
+      "beforeSHA256": "be21198c9b28288627b4c42b351f21de667b545a91e29ad3c440cde817d618f7",
+      "afterSHA256": "be21198c9b28288627b4c42b351f21de667b545a91e29ad3c440cde817d618f7"
+    },
+    {
+      "name": "contact__390",
+      "route": "/contact",
+      "width": 390,
+      "beforeSHA256": "e5784051854b0a2c1f8916326428dcb1c5efc813adcdf4a15f1498239e18ffb9",
+      "afterSHA256": "e5784051854b0a2c1f8916326428dcb1c5efc813adcdf4a15f1498239e18ffb9"
+    },
+    {
+      "name": "contact__768",
+      "route": "/contact",
+      "width": 768,
+      "beforeSHA256": "faa9645e259b4cc39cd24b62aeb66d63810587ec54c2ab6de7d75a92a02f8b92",
+      "afterSHA256": "faa9645e259b4cc39cd24b62aeb66d63810587ec54c2ab6de7d75a92a02f8b92"
+    },
+    {
+      "name": "contact__1440",
+      "route": "/contact",
+      "width": 1440,
+      "beforeSHA256": "f6a27db17168d9418897bdce726e62daab15b506173792ab19a75380094ff864",
+      "afterSHA256": "f6a27db17168d9418897bdce726e62daab15b506173792ab19a75380094ff864"
+    },
+    {
+      "name": "faq__390",
+      "route": "/faq",
+      "width": 390,
+      "beforeSHA256": "4b3718bf9464db288d5ee07f191a6cae7c7fe3ea9faa88aba4b7034f49958f85",
+      "afterSHA256": "4b3718bf9464db288d5ee07f191a6cae7c7fe3ea9faa88aba4b7034f49958f85"
+    },
+    {
+      "name": "faq__768",
+      "route": "/faq",
+      "width": 768,
+      "beforeSHA256": "893cf0d571249326f6b12cb9e6a5c7ed23d7f1f4fc7719e9e9861273bad49a30",
+      "afterSHA256": "893cf0d571249326f6b12cb9e6a5c7ed23d7f1f4fc7719e9e9861273bad49a30"
+    },
+    {
+      "name": "faq__1440",
+      "route": "/faq",
+      "width": 1440,
+      "beforeSHA256": "10228627b8fb3b42950b4fc6b699170e9e67e519124a3bc99a5886b29141437f",
+      "afterSHA256": "10228627b8fb3b42950b4fc6b699170e9e67e519124a3bc99a5886b29141437f"
+    },
+    {
+      "name": "insights__390",
+      "route": "/insights",
+      "width": 390,
+      "beforeSHA256": "4db64822185cca283b04a6de2a2a435b3df6f7963705f160542a31e4fc1fb91f",
+      "afterSHA256": "4db64822185cca283b04a6de2a2a435b3df6f7963705f160542a31e4fc1fb91f"
+    },
+    {
+      "name": "insights__768",
+      "route": "/insights",
+      "width": 768,
+      "beforeSHA256": "6ba682d9ba2339314206b4b9c39c0485c9cbbede3d5ef26756ed2fe2f5d36ca6",
+      "afterSHA256": "6ba682d9ba2339314206b4b9c39c0485c9cbbede3d5ef26756ed2fe2f5d36ca6"
+    },
+    {
+      "name": "insights__1440",
+      "route": "/insights",
+      "width": 1440,
+      "beforeSHA256": "40eecdcf4bdaf90be0f697f064c9a908c8567a70d9acf2f85e2da205fd91194e",
+      "afterSHA256": "40eecdcf4bdaf90be0f697f064c9a908c8567a70d9acf2f85e2da205fd91194e"
+    },
+    {
+      "name": "insights_brand-system-that-scales__390",
+      "route": "/insights/brand-system-that-scales",
+      "width": 390,
+      "beforeSHA256": "a84c850603b1502f03319e5b12625debb2568d18db4c379a6f8759f7b3ed5ec1",
+      "afterSHA256": "a84c850603b1502f03319e5b12625debb2568d18db4c379a6f8759f7b3ed5ec1"
+    },
+    {
+      "name": "insights_brand-system-that-scales__768",
+      "route": "/insights/brand-system-that-scales",
+      "width": 768,
+      "beforeSHA256": "639be361d7a49af9d2a8a9361701f8e25bbe0036d39d7128395d754ac98445c5",
+      "afterSHA256": "639be361d7a49af9d2a8a9361701f8e25bbe0036d39d7128395d754ac98445c5"
+    },
+    {
+      "name": "insights_brand-system-that-scales__1440",
+      "route": "/insights/brand-system-that-scales",
+      "width": 1440,
+      "beforeSHA256": "e938818011308a9d777a52920429527b910373bc7ec3e3fe259192f4539a0026",
+      "afterSHA256": "e938818011308a9d777a52920429527b910373bc7ec3e3fe259192f4539a0026"
+    },
+    {
+      "name": "insights_campaigns-with-a-system__390",
+      "route": "/insights/campaigns-with-a-system",
+      "width": 390,
+      "beforeSHA256": "741a8a6b63cc920264053024d9fab19e6f88ab59a0d63a5cd5af8eb5c26a4cfb",
+      "afterSHA256": "741a8a6b63cc920264053024d9fab19e6f88ab59a0d63a5cd5af8eb5c26a4cfb"
+    },
+    {
+      "name": "insights_campaigns-with-a-system__768",
+      "route": "/insights/campaigns-with-a-system",
+      "width": 768,
+      "beforeSHA256": "a62d380799682f618944bbc2c54ab75529d87a3eb9ca6169667c8c0fd04b954b",
+      "afterSHA256": "a62d380799682f618944bbc2c54ab75529d87a3eb9ca6169667c8c0fd04b954b"
+    },
+    {
+      "name": "insights_campaigns-with-a-system__1440",
+      "route": "/insights/campaigns-with-a-system",
+      "width": 1440,
+      "beforeSHA256": "29c0330777d786c8003acee35ce73cafc36426d18f3e6a1b0baf50b6a25b39cb",
+      "afterSHA256": "29c0330777d786c8003acee35ce73cafc36426d18f3e6a1b0baf50b6a25b39cb"
+    },
+    {
+      "name": "insights_connected-digital-system__390",
+      "route": "/insights/connected-digital-system",
+      "width": 390,
+      "beforeSHA256": "5287b513e1356c10f9420ea7ed381c25aea55cf1d4f90d1117738875b76de118",
+      "afterSHA256": "5287b513e1356c10f9420ea7ed381c25aea55cf1d4f90d1117738875b76de118"
+    },
+    {
+      "name": "insights_connected-digital-system__768",
+      "route": "/insights/connected-digital-system",
+      "width": 768,
+      "beforeSHA256": "ebffccdc84872a3cd46d1a95c8a273919c9e91d71dc9caa78d4290f66f8e7944",
+      "afterSHA256": "ebffccdc84872a3cd46d1a95c8a273919c9e91d71dc9caa78d4290f66f8e7944"
+    },
+    {
+      "name": "insights_connected-digital-system__1440",
+      "route": "/insights/connected-digital-system",
+      "width": 1440,
+      "beforeSHA256": "32b13ea771e8d875bf7640c122dddc65d4133609c09aaf0e2605b2008953fb7d",
+      "afterSHA256": "32b13ea771e8d875bf7640c122dddc65d4133609c09aaf0e2605b2008953fb7d"
+    },
+    {
+      "name": "insights_designing-for-change__390",
+      "route": "/insights/designing-for-change",
+      "width": 390,
+      "beforeSHA256": "c8c0eb1bcdecff6cb761d0dd3e6112025dae6e434cf5a097146de541c7e8615d",
+      "afterSHA256": "c8c0eb1bcdecff6cb761d0dd3e6112025dae6e434cf5a097146de541c7e8615d"
+    },
+    {
+      "name": "insights_designing-for-change__768",
+      "route": "/insights/designing-for-change",
+      "width": 768,
+      "beforeSHA256": "2b983fd251fd209165855e5e0ddc8400f4345018d785f87fb5e796d2a5639fc1",
+      "afterSHA256": "2b983fd251fd209165855e5e0ddc8400f4345018d785f87fb5e796d2a5639fc1"
+    },
+    {
+      "name": "insights_designing-for-change__1440",
+      "route": "/insights/designing-for-change",
+      "width": 1440,
+      "beforeSHA256": "567bf7780af961d04dcfde627bb80070a23307921ecc62a7b95438dfcf40c64f",
+      "afterSHA256": "567bf7780af961d04dcfde627bb80070a23307921ecc62a7b95438dfcf40c64f"
+    },
+    {
+      "name": "insights_frontend-performance-budget__390",
+      "route": "/insights/frontend-performance-budget",
+      "width": 390,
+      "beforeSHA256": "1fba2dfb5ff60d431e926872cf7d20d3a7f04b9d18ff10fbb0149075cebc212c",
+      "afterSHA256": "1fba2dfb5ff60d431e926872cf7d20d3a7f04b9d18ff10fbb0149075cebc212c"
+    },
+    {
+      "name": "insights_frontend-performance-budget__768",
+      "route": "/insights/frontend-performance-budget",
+      "width": 768,
+      "beforeSHA256": "80e802eb2bdea0e52e51fb342b8074a32a763ffce9901c55429f778a8ef022de",
+      "afterSHA256": "80e802eb2bdea0e52e51fb342b8074a32a763ffce9901c55429f778a8ef022de"
+    },
+    {
+      "name": "insights_frontend-performance-budget__1440",
+      "route": "/insights/frontend-performance-budget",
+      "width": 1440,
+      "beforeSHA256": "b1f5f8d04d9c1278f37367b621d50482de9493ec36a59e659ec50f45aaeccb68",
+      "afterSHA256": "b1f5f8d04d9c1278f37367b621d50482de9493ec36a59e659ec50f45aaeccb68"
+    },
+    {
+      "name": "insights_managed-hosting-questions__390",
+      "route": "/insights/managed-hosting-questions",
+      "width": 390,
+      "beforeSHA256": "539a8e75bd4718a6af1a5ff36258004e171193100d3d7c6dcfa3d71a092ad287",
+      "afterSHA256": "539a8e75bd4718a6af1a5ff36258004e171193100d3d7c6dcfa3d71a092ad287"
+    },
+    {
+      "name": "insights_managed-hosting-questions__768",
+      "route": "/insights/managed-hosting-questions",
+      "width": 768,
+      "beforeSHA256": "12bb9a1465be1b324d3212f101991b1df5710e7a99ea5bdfa619665f16b53b56",
+      "afterSHA256": "12bb9a1465be1b324d3212f101991b1df5710e7a99ea5bdfa619665f16b53b56"
+    },
+    {
+      "name": "insights_managed-hosting-questions__1440",
+      "route": "/insights/managed-hosting-questions",
+      "width": 1440,
+      "beforeSHA256": "d586fedcbffb846a5b95ed41a4c464cf58c25f0087ea5faf7266b599ca82964b",
+      "afterSHA256": "d586fedcbffb846a5b95ed41a4c464cf58c25f0087ea5faf7266b599ca82964b"
+    },
+    {
+      "name": "legal__390",
+      "route": "/legal",
+      "width": 390,
+      "beforeSHA256": "76eb77066bf50a8050623b3cad23e97bfe57fae5be1b11e2d60d616f805252df",
+      "afterSHA256": "76eb77066bf50a8050623b3cad23e97bfe57fae5be1b11e2d60d616f805252df"
+    },
+    {
+      "name": "legal__768",
+      "route": "/legal",
+      "width": 768,
+      "beforeSHA256": "69c839dcb0159fc6964ed424c99026bb3787ab326bab01e4bbdbb029c8e2de8b",
+      "afterSHA256": "69c839dcb0159fc6964ed424c99026bb3787ab326bab01e4bbdbb029c8e2de8b"
+    },
+    {
+      "name": "legal__1440",
+      "route": "/legal",
+      "width": 1440,
+      "beforeSHA256": "9a4500c3cdd258b873464a1f664a0e5062de04e28c400bd3f5b8ed745c28d5f1",
+      "afterSHA256": "9a4500c3cdd258b873464a1f664a0e5062de04e28c400bd3f5b8ed745c28d5f1"
+    },
+    {
+      "name": "legal_imprint__390",
+      "route": "/legal/imprint",
+      "width": 390,
+      "beforeSHA256": "76eb77066bf50a8050623b3cad23e97bfe57fae5be1b11e2d60d616f805252df",
+      "afterSHA256": "76eb77066bf50a8050623b3cad23e97bfe57fae5be1b11e2d60d616f805252df"
+    },
+    {
+      "name": "legal_imprint__768",
+      "route": "/legal/imprint",
+      "width": 768,
+      "beforeSHA256": "69c839dcb0159fc6964ed424c99026bb3787ab326bab01e4bbdbb029c8e2de8b",
+      "afterSHA256": "69c839dcb0159fc6964ed424c99026bb3787ab326bab01e4bbdbb029c8e2de8b"
+    },
+    {
+      "name": "legal_imprint__1440",
+      "route": "/legal/imprint",
+      "width": 1440,
+      "beforeSHA256": "9a4500c3cdd258b873464a1f664a0e5062de04e28c400bd3f5b8ed745c28d5f1",
+      "afterSHA256": "9a4500c3cdd258b873464a1f664a0e5062de04e28c400bd3f5b8ed745c28d5f1"
+    },
+    {
+      "name": "legal_partners__390",
+      "route": "/legal/partners",
+      "width": 390,
+      "beforeSHA256": "a21f0d0c17dac0c11b3a31ccb1c7f01f36d1374f5d80970cb7e9de61b8c2b4d8",
+      "afterSHA256": "a21f0d0c17dac0c11b3a31ccb1c7f01f36d1374f5d80970cb7e9de61b8c2b4d8"
+    },
+    {
+      "name": "legal_partners__768",
+      "route": "/legal/partners",
+      "width": 768,
+      "beforeSHA256": "6a49f98f06571925fd4ea40c276ada1d77a5fdfc8e2d04358d64f7accd69b2c7",
+      "afterSHA256": "6a49f98f06571925fd4ea40c276ada1d77a5fdfc8e2d04358d64f7accd69b2c7"
+    },
+    {
+      "name": "legal_partners__1440",
+      "route": "/legal/partners",
+      "width": 1440,
+      "beforeSHA256": "4e304dd7a5f1d2ca02d6ddbc53785d917bdbc60d4e03e46eb22e55b61f5179d2",
+      "afterSHA256": "4e304dd7a5f1d2ca02d6ddbc53785d917bdbc60d4e03e46eb22e55b61f5179d2"
+    },
+    {
+      "name": "legal_privacy__390",
+      "route": "/legal/privacy",
+      "width": 390,
+      "beforeSHA256": "47a057209275def08ca02ec00df23fa55e31019463ea6f9cec88143ecd4ce081",
+      "afterSHA256": "47a057209275def08ca02ec00df23fa55e31019463ea6f9cec88143ecd4ce081"
+    },
+    {
+      "name": "legal_privacy__768",
+      "route": "/legal/privacy",
+      "width": 768,
+      "beforeSHA256": "54e563ccfc9402abf3aff7e288a9a6dad048f3bdd61c4f54dd1de1fc0ba3fdd1",
+      "afterSHA256": "54e563ccfc9402abf3aff7e288a9a6dad048f3bdd61c4f54dd1de1fc0ba3fdd1"
+    },
+    {
+      "name": "legal_privacy__1440",
+      "route": "/legal/privacy",
+      "width": 1440,
+      "beforeSHA256": "0dd750e7f3d2ec2010bdf11cfd7bfbe14154cab6210c8e711d0fd0a225677308",
+      "afterSHA256": "0dd750e7f3d2ec2010bdf11cfd7bfbe14154cab6210c8e711d0fd0a225677308"
+    },
+    {
+      "name": "legal_sitemap__390",
+      "route": "/legal/sitemap",
+      "width": 390,
+      "beforeSHA256": "16ecb83ada5ec7aeffb16e6bd6ef3e336f4be789f51887b7a2f583426280a6a5",
+      "afterSHA256": "16ecb83ada5ec7aeffb16e6bd6ef3e336f4be789f51887b7a2f583426280a6a5"
+    },
+    {
+      "name": "legal_sitemap__768",
+      "route": "/legal/sitemap",
+      "width": 768,
+      "beforeSHA256": "5203db16c3ad45d6096234b5fc754c077c9ba0a96272dc121a9cfda756fbdd11",
+      "afterSHA256": "5203db16c3ad45d6096234b5fc754c077c9ba0a96272dc121a9cfda756fbdd11"
+    },
+    {
+      "name": "legal_sitemap__1440",
+      "route": "/legal/sitemap",
+      "width": 1440,
+      "beforeSHA256": "005c665c0c8d591a04a528667f54caa825a77010fb8a5773f379bfde3352a537",
+      "afterSHA256": "005c665c0c8d591a04a528667f54caa825a77010fb8a5773f379bfde3352a537"
+    },
+    {
+      "name": "legal_terms__390",
+      "route": "/legal/terms",
+      "width": 390,
+      "beforeSHA256": "360aa56e8eac6f58e6b6390240a82fcef1146e1380c928fc6d1fc95bb00cddb3",
+      "afterSHA256": "360aa56e8eac6f58e6b6390240a82fcef1146e1380c928fc6d1fc95bb00cddb3"
+    },
+    {
+      "name": "legal_terms__768",
+      "route": "/legal/terms",
+      "width": 768,
+      "beforeSHA256": "54dd4eeffaf73ecc02b8a55c3e00329e918ec102a5553e7eff3691874b1ad010",
+      "afterSHA256": "54dd4eeffaf73ecc02b8a55c3e00329e918ec102a5553e7eff3691874b1ad010"
+    },
+    {
+      "name": "legal_terms__1440",
+      "route": "/legal/terms",
+      "width": 1440,
+      "beforeSHA256": "4f978f0593ddf232ec92ff98eaac22f0b47ffae84890deff66eab52f94423744",
+      "afterSHA256": "4f978f0593ddf232ec92ff98eaac22f0b47ffae84890deff66eab52f94423744"
+    },
+    {
+      "name": "plans__390",
+      "route": "/plans",
+      "width": 390,
+      "beforeSHA256": "4f5eb2738c8e04c7c1578c993e1d717141366cb4cf352a3659da357205ca1e05",
+      "afterSHA256": "4f5eb2738c8e04c7c1578c993e1d717141366cb4cf352a3659da357205ca1e05"
+    },
+    {
+      "name": "plans__768",
+      "route": "/plans",
+      "width": 768,
+      "beforeSHA256": "e73b118b4dc3c36735e3b2bb933cd8c3f29f5869d148e4317afb8c38340423a3",
+      "afterSHA256": "e73b118b4dc3c36735e3b2bb933cd8c3f29f5869d148e4317afb8c38340423a3"
+    },
+    {
+      "name": "plans__1440",
+      "route": "/plans",
+      "width": 1440,
+      "beforeSHA256": "f675de106f8898665bd295cb44b280328a096cbdb01e47582e3ec90f70f5fc7b",
+      "afterSHA256": "f675de106f8898665bd295cb44b280328a096cbdb01e47582e3ec90f70f5fc7b"
+    },
+    {
+      "name": "roadmap__390",
+      "route": "/roadmap",
+      "width": 390,
+      "beforeSHA256": "5ab25e2ad8369bedeeeaa39ec99a9bf2fef9044f8b0ae4a7ec1d2d3b67281972",
+      "afterSHA256": "5ab25e2ad8369bedeeeaa39ec99a9bf2fef9044f8b0ae4a7ec1d2d3b67281972"
+    },
+    {
+      "name": "roadmap__768",
+      "route": "/roadmap",
+      "width": 768,
+      "beforeSHA256": "2665efa801aa1dc40e7b390d62f855dba0fb282f8c25997ae0c7844dfa1d95fd",
+      "afterSHA256": "2665efa801aa1dc40e7b390d62f855dba0fb282f8c25997ae0c7844dfa1d95fd"
+    },
+    {
+      "name": "roadmap__1440",
+      "route": "/roadmap",
+      "width": 1440,
+      "beforeSHA256": "a47dda99602004c934d69fa529b181148f28fbc6d134ab8af274a62b5aeb786a",
+      "afterSHA256": "a47dda99602004c934d69fa529b181148f28fbc6d134ab8af274a62b5aeb786a"
+    },
+    {
+      "name": "services__390",
+      "route": "/services",
+      "width": 390,
+      "beforeSHA256": "7cdbae34e60ee0d21ba3f31e8c176689bfc552219fd86ea294cf27874ba4d6f8",
+      "afterSHA256": "7cdbae34e60ee0d21ba3f31e8c176689bfc552219fd86ea294cf27874ba4d6f8"
+    },
+    {
+      "name": "services__768",
+      "route": "/services",
+      "width": 768,
+      "beforeSHA256": "46bfa61a6a263f2297eb81528cfd19de5c2ac5022fed02dbae0405bcdc457992",
+      "afterSHA256": "46bfa61a6a263f2297eb81528cfd19de5c2ac5022fed02dbae0405bcdc457992"
+    },
+    {
+      "name": "services__1440",
+      "route": "/services",
+      "width": 1440,
+      "beforeSHA256": "e6cafec691f0cbd24c9f8e15d7ef2fb496b5accb3d86cc9aec47ae60624d96a4",
+      "afterSHA256": "e6cafec691f0cbd24c9f8e15d7ef2fb496b5accb3d86cc9aec47ae60624d96a4"
+    },
+    {
+      "name": "services_design__390",
+      "route": "/services/design",
+      "width": 390,
+      "beforeSHA256": "0697a1e7e5a5dde5e0fbed667f49459683869fa0f26bf8b6fc665dc367c84199",
+      "afterSHA256": "0697a1e7e5a5dde5e0fbed667f49459683869fa0f26bf8b6fc665dc367c84199"
+    },
+    {
+      "name": "services_design__768",
+      "route": "/services/design",
+      "width": 768,
+      "beforeSHA256": "34e20c8841470822d1ef6634160400c0b1d8707adb497d1ee9c9095804d32b9a",
+      "afterSHA256": "34e20c8841470822d1ef6634160400c0b1d8707adb497d1ee9c9095804d32b9a"
+    },
+    {
+      "name": "services_design__1440",
+      "route": "/services/design",
+      "width": 1440,
+      "beforeSHA256": "828b2b6ffc7d38ff7d9094bd00152eb015a69bc1bf41d39035fe39e8ae3368ef",
+      "afterSHA256": "828b2b6ffc7d38ff7d9094bd00152eb015a69bc1bf41d39035fe39e8ae3368ef"
+    },
+    {
+      "name": "services_design_brand-development__390",
+      "route": "/services/design/brand-development",
+      "width": 390,
+      "beforeSHA256": "c7935ec721c28151e6fffebef3741c12316b936a77d26f492714042db27a1890",
+      "afterSHA256": "c7935ec721c28151e6fffebef3741c12316b936a77d26f492714042db27a1890"
+    },
+    {
+      "name": "services_design_brand-development__768",
+      "route": "/services/design/brand-development",
+      "width": 768,
+      "beforeSHA256": "442f78f938b4231521e4e7cb739ba093db08c9544db4b72ec775497c727fbd78",
+      "afterSHA256": "442f78f938b4231521e4e7cb739ba093db08c9544db4b72ec775497c727fbd78"
+    },
+    {
+      "name": "services_design_brand-development__1440",
+      "route": "/services/design/brand-development",
+      "width": 1440,
+      "beforeSHA256": "f16a22f8e45fef624700a1d343438e35308dc356b2c031a4665e126ea1e78f5c",
+      "afterSHA256": "f16a22f8e45fef624700a1d343438e35308dc356b2c031a4665e126ea1e78f5c"
+    },
+    {
+      "name": "services_design_graphic-design__390",
+      "route": "/services/design/graphic-design",
+      "width": 390,
+      "beforeSHA256": "a573b395f2f34291040c46eaf6b7f40c4cb827659d94253fa580cabe747ed265",
+      "afterSHA256": "a573b395f2f34291040c46eaf6b7f40c4cb827659d94253fa580cabe747ed265"
+    },
+    {
+      "name": "services_design_graphic-design__768",
+      "route": "/services/design/graphic-design",
+      "width": 768,
+      "beforeSHA256": "7f1720733f89484966f8b378ceecd9be2ccbd110ebc39aba7041da2dcc0af535",
+      "afterSHA256": "7f1720733f89484966f8b378ceecd9be2ccbd110ebc39aba7041da2dcc0af535"
+    },
+    {
+      "name": "services_design_graphic-design__1440",
+      "route": "/services/design/graphic-design",
+      "width": 1440,
+      "beforeSHA256": "f90ebc05f6f9938416e8f18ebacd82d6d9c674af4669c3f528140e48f90a4633",
+      "afterSHA256": "f90ebc05f6f9938416e8f18ebacd82d6d9c674af4669c3f528140e48f90a4633"
+    },
+    {
+      "name": "services_design_web-and-app-design__390",
+      "route": "/services/design/web-and-app-design",
+      "width": 390,
+      "beforeSHA256": "58dc16f7388590c1c653b3f23c7338138ee39c5b5d8bf1c58b6a4a69b125b684",
+      "afterSHA256": "58dc16f7388590c1c653b3f23c7338138ee39c5b5d8bf1c58b6a4a69b125b684"
+    },
+    {
+      "name": "services_design_web-and-app-design__768",
+      "route": "/services/design/web-and-app-design",
+      "width": 768,
+      "beforeSHA256": "4fc5268b3ae2df8b0c5dc3c138470ffb94d83aab5104410f43c3d28d1eded96b",
+      "afterSHA256": "4fc5268b3ae2df8b0c5dc3c138470ffb94d83aab5104410f43c3d28d1eded96b"
+    },
+    {
+      "name": "services_design_web-and-app-design__1440",
+      "route": "/services/design/web-and-app-design",
+      "width": 1440,
+      "beforeSHA256": "073720dd837a2696975bd03391a2483c8f218ad4eef54e53e6cc6b700c989c97",
+      "afterSHA256": "073720dd837a2696975bd03391a2483c8f218ad4eef54e53e6cc6b700c989c97"
+    },
+    {
+      "name": "services_development__390",
+      "route": "/services/development",
+      "width": 390,
+      "beforeSHA256": "bd07528c9457dbfe6858b2413b8a7154a15fc50b04874e175a4592fa5a70d766",
+      "afterSHA256": "bd07528c9457dbfe6858b2413b8a7154a15fc50b04874e175a4592fa5a70d766"
+    },
+    {
+      "name": "services_development__768",
+      "route": "/services/development",
+      "width": 768,
+      "beforeSHA256": "da138ad196a68db75801cd960bf52e4ac81fc71dbe7af63649082936d25bc3b0",
+      "afterSHA256": "da138ad196a68db75801cd960bf52e4ac81fc71dbe7af63649082936d25bc3b0"
+    },
+    {
+      "name": "services_development__1440",
+      "route": "/services/development",
+      "width": 1440,
+      "beforeSHA256": "c04c897b4204e5a93b22bd4663784834ee4a61ee037eb1062fe243d71d6d0bf7",
+      "afterSHA256": "c04c897b4204e5a93b22bd4663784834ee4a61ee037eb1062fe243d71d6d0bf7"
+    },
+    {
+      "name": "services_development_custom-app-development__390",
+      "route": "/services/development/custom-app-development",
+      "width": 390,
+      "beforeSHA256": "6cfa8b03cf202b5825a76d047b74945620b51703ffe78c9528b82de4c7afac86",
+      "afterSHA256": "6cfa8b03cf202b5825a76d047b74945620b51703ffe78c9528b82de4c7afac86"
+    },
+    {
+      "name": "services_development_custom-app-development__768",
+      "route": "/services/development/custom-app-development",
+      "width": 768,
+      "beforeSHA256": "f9e52de86f60598299de81b73885de91803f7973baf9958dd4e522a9389207da",
+      "afterSHA256": "f9e52de86f60598299de81b73885de91803f7973baf9958dd4e522a9389207da"
+    },
+    {
+      "name": "services_development_custom-app-development__1440",
+      "route": "/services/development/custom-app-development",
+      "width": 1440,
+      "beforeSHA256": "6b5e3a21442aacab5e3d7027687cc82b252d808df7f01ea0a78243b41947133e",
+      "afterSHA256": "6b5e3a21442aacab5e3d7027687cc82b252d808df7f01ea0a78243b41947133e"
+    },
+    {
+      "name": "services_development_web-development__390",
+      "route": "/services/development/web-development",
+      "width": 390,
+      "beforeSHA256": "8239a4df2aeaf41118011f0bae4145d4b033ba33f5cb48741bfacad873bd830a",
+      "afterSHA256": "8239a4df2aeaf41118011f0bae4145d4b033ba33f5cb48741bfacad873bd830a"
+    },
+    {
+      "name": "services_development_web-development__768",
+      "route": "/services/development/web-development",
+      "width": 768,
+      "beforeSHA256": "f3ccb1a155cc0170e3e49fcfc191d46603a3d49d09ebe79ace476ee91da6d600",
+      "afterSHA256": "f3ccb1a155cc0170e3e49fcfc191d46603a3d49d09ebe79ace476ee91da6d600"
+    },
+    {
+      "name": "services_development_web-development__1440",
+      "route": "/services/development/web-development",
+      "width": 1440,
+      "beforeSHA256": "51fbf31d60b0d4898c401cbcabe40fcffbb2f01bc6de50a316f01a37428aaee0",
+      "afterSHA256": "51fbf31d60b0d4898c401cbcabe40fcffbb2f01bc6de50a316f01a37428aaee0"
+    },
+    {
+      "name": "services_hosting__390",
+      "route": "/services/hosting",
+      "width": 390,
+      "beforeSHA256": "097ecc5702bf09774cbf3f74ddd901dc10c0a711481a72e869539403a4430a8c",
+      "afterSHA256": "097ecc5702bf09774cbf3f74ddd901dc10c0a711481a72e869539403a4430a8c"
+    },
+    {
+      "name": "services_hosting__768",
+      "route": "/services/hosting",
+      "width": 768,
+      "beforeSHA256": "6cba7f802fe4a78218001503e786b87d0b394309f9ad2c4ca07c787fbbfd3d59",
+      "afterSHA256": "6cba7f802fe4a78218001503e786b87d0b394309f9ad2c4ca07c787fbbfd3d59"
+    },
+    {
+      "name": "services_hosting__1440",
+      "route": "/services/hosting",
+      "width": 1440,
+      "beforeSHA256": "3c5f488efc154b0817d5f9b3f370771ca6e3c673894f1f423dfe4261ff401a21",
+      "afterSHA256": "3c5f488efc154b0817d5f9b3f370771ca6e3c673894f1f423dfe4261ff401a21"
+    },
+    {
+      "name": "services_hosting_managed-hosting__390",
+      "route": "/services/hosting/managed-hosting",
+      "width": 390,
+      "beforeSHA256": "155ef7afc71ed6e02c19ab99bc1fa98c144696a16036b69725eefd2a8bf43fa3",
+      "afterSHA256": "155ef7afc71ed6e02c19ab99bc1fa98c144696a16036b69725eefd2a8bf43fa3"
+    },
+    {
+      "name": "services_hosting_managed-hosting__768",
+      "route": "/services/hosting/managed-hosting",
+      "width": 768,
+      "beforeSHA256": "5182248e798d37da84f2f6c99104f077d5177f4cbfbaaa5a756e1526ead72d88",
+      "afterSHA256": "5182248e798d37da84f2f6c99104f077d5177f4cbfbaaa5a756e1526ead72d88"
+    },
+    {
+      "name": "services_hosting_managed-hosting__1440",
+      "route": "/services/hosting/managed-hosting",
+      "width": 1440,
+      "beforeSHA256": "e8071d067994a3f0e16cc3ebf4e8707f398007d0f65d0c6154b8e64868028e05",
+      "afterSHA256": "e8071d067994a3f0e16cc3ebf4e8707f398007d0f65d0c6154b8e64868028e05"
+    },
+    {
+      "name": "services_it-support__390",
+      "route": "/services/it-support",
+      "width": 390,
+      "beforeSHA256": "a9f04cdb790bf44c8772235a1d81d597fa83c73c4a7c4a3bf16d0c1211c52165",
+      "afterSHA256": "a9f04cdb790bf44c8772235a1d81d597fa83c73c4a7c4a3bf16d0c1211c52165"
+    },
+    {
+      "name": "services_it-support__768",
+      "route": "/services/it-support",
+      "width": 768,
+      "beforeSHA256": "7c6d41ae225753061af70287af77642c963103e2a0cc33a5d29547b2cc397a6e",
+      "afterSHA256": "7c6d41ae225753061af70287af77642c963103e2a0cc33a5d29547b2cc397a6e"
+    },
+    {
+      "name": "services_it-support__1440",
+      "route": "/services/it-support",
+      "width": 1440,
+      "beforeSHA256": "ba129a9799059a41eb4036998884d74c5fce967812446cbe820953da89acab3c",
+      "afterSHA256": "ba129a9799059a41eb4036998884d74c5fce967812446cbe820953da89acab3c"
+    },
+    {
+      "name": "services_it-support_software-support__390",
+      "route": "/services/it-support/software-support",
+      "width": 390,
+      "beforeSHA256": "b3c5b7e04504ed84aec71c715942a6c9af9fe18a6b72b21e4dd58d3a8c87f2a2",
+      "afterSHA256": "b3c5b7e04504ed84aec71c715942a6c9af9fe18a6b72b21e4dd58d3a8c87f2a2"
+    },
+    {
+      "name": "services_it-support_software-support__768",
+      "route": "/services/it-support/software-support",
+      "width": 768,
+      "beforeSHA256": "6586cac027d0236f621d6e9f59c491cf289d669535035228b6e8774e73bb1e17",
+      "afterSHA256": "6586cac027d0236f621d6e9f59c491cf289d669535035228b6e8774e73bb1e17"
+    },
+    {
+      "name": "services_it-support_software-support__1440",
+      "route": "/services/it-support/software-support",
+      "width": 1440,
+      "beforeSHA256": "44dce65ba0cd9f5d775c2b29fefc503d938b51376527e37c1711b919d8817dcb",
+      "afterSHA256": "44dce65ba0cd9f5d775c2b29fefc503d938b51376527e37c1711b919d8817dcb"
+    },
+    {
+      "name": "services_it-support_website-management__390",
+      "route": "/services/it-support/website-management",
+      "width": 390,
+      "beforeSHA256": "61b537bc657251b2b111ac9a506890b973b661c643cd3766c346462741d22af5",
+      "afterSHA256": "61b537bc657251b2b111ac9a506890b973b661c643cd3766c346462741d22af5"
+    },
+    {
+      "name": "services_it-support_website-management__768",
+      "route": "/services/it-support/website-management",
+      "width": 768,
+      "beforeSHA256": "72eb6a9ea9c80c9f515f4897aaf7edbf18086d544437f701193c0341c149a5e3",
+      "afterSHA256": "72eb6a9ea9c80c9f515f4897aaf7edbf18086d544437f701193c0341c149a5e3"
+    },
+    {
+      "name": "services_it-support_website-management__1440",
+      "route": "/services/it-support/website-management",
+      "width": 1440,
+      "beforeSHA256": "31dbde2e624f7d57d9046a7c173e5b9c29bfe1d90984abc8b35eee9b88ec4f96",
+      "afterSHA256": "31dbde2e624f7d57d9046a7c173e5b9c29bfe1d90984abc8b35eee9b88ec4f96"
+    },
+    {
+      "name": "services_marketing__390",
+      "route": "/services/marketing",
+      "width": 390,
+      "beforeSHA256": "d6a680a7ecb3897a9ee137d4c10be22e2f79060efedb1ecfcfc54cfea1801889",
+      "afterSHA256": "d6a680a7ecb3897a9ee137d4c10be22e2f79060efedb1ecfcfc54cfea1801889"
+    },
+    {
+      "name": "services_marketing__768",
+      "route": "/services/marketing",
+      "width": 768,
+      "beforeSHA256": "977b1b0ea9a6a757e8a39d76c0967ed2ba165a59cf47c6cadca6cf7eb845b162",
+      "afterSHA256": "977b1b0ea9a6a757e8a39d76c0967ed2ba165a59cf47c6cadca6cf7eb845b162"
+    },
+    {
+      "name": "services_marketing__1440",
+      "route": "/services/marketing",
+      "width": 1440,
+      "beforeSHA256": "15dae6004c1ecd831bb1f63305f5df2d23d44d6a36701ef593cc7fc9e6bfee3a",
+      "afterSHA256": "15dae6004c1ecd831bb1f63305f5df2d23d44d6a36701ef593cc7fc9e6bfee3a"
+    },
+    {
+      "name": "services_marketing_digital-advertising-switzerland__390",
+      "route": "/services/marketing/digital-advertising-switzerland",
+      "width": 390,
+      "beforeSHA256": "120a4086b9a45f9b635488afbfb01b57f78e316185e4e20b9f42b5399079d8af",
+      "afterSHA256": "120a4086b9a45f9b635488afbfb01b57f78e316185e4e20b9f42b5399079d8af"
+    },
+    {
+      "name": "services_marketing_digital-advertising-switzerland__768",
+      "route": "/services/marketing/digital-advertising-switzerland",
+      "width": 768,
+      "beforeSHA256": "9a12d0476b464a6e58650c4b2d9e6bea0bfd413d781f4a135eabbcac700536c0",
+      "afterSHA256": "9a12d0476b464a6e58650c4b2d9e6bea0bfd413d781f4a135eabbcac700536c0"
+    },
+    {
+      "name": "services_marketing_digital-advertising-switzerland__1440",
+      "route": "/services/marketing/digital-advertising-switzerland",
+      "width": 1440,
+      "beforeSHA256": "220b3a0a6ae10e0211133bac0c3a5ecd278a0df597ee690923e4676d889cab5e",
+      "afterSHA256": "220b3a0a6ae10e0211133bac0c3a5ecd278a0df597ee690923e4676d889cab5e"
+    },
+    {
+      "name": "services_marketing_seo-services__390",
+      "route": "/services/marketing/seo-services",
+      "width": 390,
+      "beforeSHA256": "f0abb8385844b7bd62dbf98ac3ce107f49ccb5a7c1cc0159692d2bf13260ed6b",
+      "afterSHA256": "f0abb8385844b7bd62dbf98ac3ce107f49ccb5a7c1cc0159692d2bf13260ed6b"
+    },
+    {
+      "name": "services_marketing_seo-services__768",
+      "route": "/services/marketing/seo-services",
+      "width": 768,
+      "beforeSHA256": "e9b998cb0af3004f85938295a293d42452aa397207eba8055c347dab96ee71a6",
+      "afterSHA256": "e9b998cb0af3004f85938295a293d42452aa397207eba8055c347dab96ee71a6"
+    },
+    {
+      "name": "services_marketing_seo-services__1440",
+      "route": "/services/marketing/seo-services",
+      "width": 1440,
+      "beforeSHA256": "1f4ed92586264d31a21a42141fc63a2b1aaca25441c79fc8801a168295d87fdb",
+      "afterSHA256": "1f4ed92586264d31a21a42141fc63a2b1aaca25441c79fc8801a168295d87fdb"
+    },
+    {
+      "name": "services_marketing_social-media-marketing__390",
+      "route": "/services/marketing/social-media-marketing",
+      "width": 390,
+      "beforeSHA256": "608a482a98fabbbe47ce69fa46e8bb6ca02ae70916fec3eab5702766d1878a87",
+      "afterSHA256": "608a482a98fabbbe47ce69fa46e8bb6ca02ae70916fec3eab5702766d1878a87"
+    },
+    {
+      "name": "services_marketing_social-media-marketing__768",
+      "route": "/services/marketing/social-media-marketing",
+      "width": 768,
+      "beforeSHA256": "795df6b6817df0ccabde330124cce02d3d24cc9942e91e7a8ffcf2ed2bd04d6c",
+      "afterSHA256": "795df6b6817df0ccabde330124cce02d3d24cc9942e91e7a8ffcf2ed2bd04d6c"
+    },
+    {
+      "name": "services_marketing_social-media-marketing__1440",
+      "route": "/services/marketing/social-media-marketing",
+      "width": 1440,
+      "beforeSHA256": "38db33a47396630b9d5c211cf9ffaa604d9c7e6aab72ff967af9b5e2b3da903d",
+      "afterSHA256": "38db33a47396630b9d5c211cf9ffaa604d9c7e6aab72ff967af9b5e2b3da903d"
+    },
+    {
+      "name": "sign-in__390",
+      "route": "/sign-in",
+      "width": 390,
+      "beforeSHA256": "7ac346200970877282be875973837e8bdd57a0d46c2cf9d6678be8d085ff5b1d",
+      "afterSHA256": "7ac346200970877282be875973837e8bdd57a0d46c2cf9d6678be8d085ff5b1d"
+    },
+    {
+      "name": "sign-in__768",
+      "route": "/sign-in",
+      "width": 768,
+      "beforeSHA256": "9b36024e9e3d33e9d5237cc42dbcbe291159eb93bf0fbf183c1f1afffaedf082",
+      "afterSHA256": "9b36024e9e3d33e9d5237cc42dbcbe291159eb93bf0fbf183c1f1afffaedf082"
+    },
+    {
+      "name": "sign-in__1440",
+      "route": "/sign-in",
+      "width": 1440,
+      "beforeSHA256": "761e740e454b9dc894a343db341a1da6da4065033c10b429d7bea264c9a9ff21",
+      "afterSHA256": "761e740e454b9dc894a343db341a1da6da4065033c10b429d7bea264c9a9ff21"
+    },
+    {
+      "name": "sign-up__390",
+      "route": "/sign-up",
+      "width": 390,
+      "beforeSHA256": "8b51a32a96507d2d1f17d52bf1836e0376a9e53aee6e49fbc99fd4601803edef",
+      "afterSHA256": "8b51a32a96507d2d1f17d52bf1836e0376a9e53aee6e49fbc99fd4601803edef"
+    },
+    {
+      "name": "sign-up__768",
+      "route": "/sign-up",
+      "width": 768,
+      "beforeSHA256": "066912f8b27e043ab68f97fef9f2b03403f22985de8993ccfc7ec0bc727bda62",
+      "afterSHA256": "066912f8b27e043ab68f97fef9f2b03403f22985de8993ccfc7ec0bc727bda62"
+    },
+    {
+      "name": "sign-up__1440",
+      "route": "/sign-up",
+      "width": 1440,
+      "beforeSHA256": "c38932790670c48f8ccc690fb344cfadbc7f6a3a4b85c5a0215ba4d4b79be56e",
+      "afterSHA256": "c38932790670c48f8ccc690fb344cfadbc7f6a3a4b85c5a0215ba4d4b79be56e"
+    },
+    {
+      "name": "software__390",
+      "route": "/software",
+      "width": 390,
+      "beforeSHA256": "ddf4e54c0c06cb59e4711403804b754ce8037b869c71ff67db7501b046f1927b",
+      "afterSHA256": "ddf4e54c0c06cb59e4711403804b754ce8037b869c71ff67db7501b046f1927b"
+    },
+    {
+      "name": "software__768",
+      "route": "/software",
+      "width": 768,
+      "beforeSHA256": "2d40b379b9c71c1988fd51ba5a0707a42a20264904d66ed414ab52bc41adda90",
+      "afterSHA256": "2d40b379b9c71c1988fd51ba5a0707a42a20264904d66ed414ab52bc41adda90"
+    },
+    {
+      "name": "software__1440",
+      "route": "/software",
+      "width": 1440,
+      "beforeSHA256": "38b4636150db7d36e5600e7f41b4d9ac78a0b1368d1e4aa29561b375514f3ec4",
+      "afterSHA256": "38b4636150db7d36e5600e7f41b4d9ac78a0b1368d1e4aa29561b375514f3ec4"
+    },
+    {
+      "name": "software_crm__390",
+      "route": "/software/crm",
+      "width": 390,
+      "beforeSHA256": "2e2415285999cf395a8ebf992972fb67704c737a82b910c23214ddd71bd0a899",
+      "afterSHA256": "2e2415285999cf395a8ebf992972fb67704c737a82b910c23214ddd71bd0a899"
+    },
+    {
+      "name": "software_crm__768",
+      "route": "/software/crm",
+      "width": 768,
+      "beforeSHA256": "ac25178318909680646e9e6250e45ec396c98d251aa7d9f5f113c634e30762d7",
+      "afterSHA256": "ac25178318909680646e9e6250e45ec396c98d251aa7d9f5f113c634e30762d7"
+    },
+    {
+      "name": "software_crm__1440",
+      "route": "/software/crm",
+      "width": 1440,
+      "beforeSHA256": "2ef2bb313c047c8e502e65ff21857fb2b465684fa32237babe64093ef7630b7d",
+      "afterSHA256": "2ef2bb313c047c8e502e65ff21857fb2b465684fa32237babe64093ef7630b7d"
+    },
+    {
+      "name": "software_files__390",
+      "route": "/software/files",
+      "width": 390,
+      "beforeSHA256": "256401230fe935c59063cf3d6530fe4829e1796c6d0989525fe1fb3dbcdc5264",
+      "afterSHA256": "256401230fe935c59063cf3d6530fe4829e1796c6d0989525fe1fb3dbcdc5264"
+    },
+    {
+      "name": "software_files__768",
+      "route": "/software/files",
+      "width": 768,
+      "beforeSHA256": "aad9687b3b137eb43939fd1e078b547c6bc3b81066b33d1218802e253a0e20e5",
+      "afterSHA256": "aad9687b3b137eb43939fd1e078b547c6bc3b81066b33d1218802e253a0e20e5"
+    },
+    {
+      "name": "software_files__1440",
+      "route": "/software/files",
+      "width": 1440,
+      "beforeSHA256": "54ed7c51d4a8fbc3647271f4a991b7dcd9821a5f3624b91f983a87ad204074b3",
+      "afterSHA256": "54ed7c51d4a8fbc3647271f4a991b7dcd9821a5f3624b91f983a87ad204074b3"
+    },
+    {
+      "name": "software_hr__390",
+      "route": "/software/hr",
+      "width": 390,
+      "beforeSHA256": "bd4c24412dfa16baf4a4b704c6066617bb15e915af88660ba7508b40f07f74be",
+      "afterSHA256": "bd4c24412dfa16baf4a4b704c6066617bb15e915af88660ba7508b40f07f74be"
+    },
+    {
+      "name": "software_hr__768",
+      "route": "/software/hr",
+      "width": 768,
+      "beforeSHA256": "6b64f9a254c1b979c8fe69a8e98f8323c3ffcf0b76e9c6ceecf0f113583f513c",
+      "afterSHA256": "6b64f9a254c1b979c8fe69a8e98f8323c3ffcf0b76e9c6ceecf0f113583f513c"
+    },
+    {
+      "name": "software_hr__1440",
+      "route": "/software/hr",
+      "width": 1440,
+      "beforeSHA256": "450cb8b069355dbf7e1b389f4220eafa3bbe382ebc4e97b3612bb0b7eeec2334",
+      "afterSHA256": "450cb8b069355dbf7e1b389f4220eafa3bbe382ebc4e97b3612bb0b7eeec2334"
+    },
+    {
+      "name": "software_marketing__390",
+      "route": "/software/marketing",
+      "width": 390,
+      "beforeSHA256": "a3df6e3253f6be91f818d240fd49facda1a94c24d58befddd2718ed43fdd28f5",
+      "afterSHA256": "a3df6e3253f6be91f818d240fd49facda1a94c24d58befddd2718ed43fdd28f5"
+    },
+    {
+      "name": "software_marketing__768",
+      "route": "/software/marketing",
+      "width": 768,
+      "beforeSHA256": "06e4998aca2dd813dcdc6e78904464026cf522551fe46837c9909f8b12094a80",
+      "afterSHA256": "06e4998aca2dd813dcdc6e78904464026cf522551fe46837c9909f8b12094a80"
+    },
+    {
+      "name": "software_marketing__1440",
+      "route": "/software/marketing",
+      "width": 1440,
+      "beforeSHA256": "07a0b61339c9eb20d94f7dfe2244c6af2b7408dde9a346b616ddfe81e5d350b7",
+      "afterSHA256": "07a0b61339c9eb20d94f7dfe2244c6af2b7408dde9a346b616ddfe81e5d350b7"
+    },
+    {
+      "name": "software_plans__390",
+      "route": "/software/plans",
+      "width": 390,
+      "beforeSHA256": "dffc5e525fc7cfef4014876b66466159d15f04dba11786096e770915962c90c2",
+      "afterSHA256": "dffc5e525fc7cfef4014876b66466159d15f04dba11786096e770915962c90c2"
+    },
+    {
+      "name": "software_plans__768",
+      "route": "/software/plans",
+      "width": 768,
+      "beforeSHA256": "f7ce303b61cf1a2122ed99617094a99b088b1d398196714a7938e6f6c9af86f0",
+      "afterSHA256": "f7ce303b61cf1a2122ed99617094a99b088b1d398196714a7938e6f6c9af86f0"
+    },
+    {
+      "name": "software_plans__1440",
+      "route": "/software/plans",
+      "width": 1440,
+      "beforeSHA256": "39c2f336f4890893f8a0d5ea929fad25b347d6a43adb2e92d24b3d1eed02c560",
+      "afterSHA256": "39c2f336f4890893f8a0d5ea929fad25b347d6a43adb2e92d24b3d1eed02c560"
+    },
+    {
+      "name": "software_plans_single_annual_hr__390",
+      "route": "/software/plans/single/annual/hr",
+      "width": 390,
+      "beforeSHA256": "d50f4fe5285fb8d96519815d7746947c82a37b4da1f445e50be12473dc7f0dd7",
+      "afterSHA256": "d50f4fe5285fb8d96519815d7746947c82a37b4da1f445e50be12473dc7f0dd7"
+    },
+    {
+      "name": "software_plans_single_annual_hr__768",
+      "route": "/software/plans/single/annual/hr",
+      "width": 768,
+      "beforeSHA256": "db23350f261382a86aa45b0730d30daa1db2e4297249602ed6398b57d265cc1c",
+      "afterSHA256": "db23350f261382a86aa45b0730d30daa1db2e4297249602ed6398b57d265cc1c"
+    },
+    {
+      "name": "software_plans_single_annual_hr__1440",
+      "route": "/software/plans/single/annual/hr",
+      "width": 1440,
+      "beforeSHA256": "c697a713652b5f5d1099aeab95e0208ac55b199715f782190b68cc14a33711d2",
+      "afterSHA256": "c697a713652b5f5d1099aeab95e0208ac55b199715f782190b68cc14a33711d2"
+    },
+    {
+      "name": "software_tasks__390",
+      "route": "/software/tasks",
+      "width": 390,
+      "beforeSHA256": "7e3656d5245b45bfde39db6fad2e53c1af10cf8ebf0cfe23def4541136769b8c",
+      "afterSHA256": "7e3656d5245b45bfde39db6fad2e53c1af10cf8ebf0cfe23def4541136769b8c"
+    },
+    {
+      "name": "software_tasks__768",
+      "route": "/software/tasks",
+      "width": 768,
+      "beforeSHA256": "e4dc497ca341602a5227f3947a589786ca959cf1ba1d67b4887d2ebba56428f7",
+      "afterSHA256": "e4dc497ca341602a5227f3947a589786ca959cf1ba1d67b4887d2ebba56428f7"
+    },
+    {
+      "name": "software_tasks__1440",
+      "route": "/software/tasks",
+      "width": 1440,
+      "beforeSHA256": "8fa4124c804286628e6ad14f60240bc05914d84a9c04ea79a51c6a3e5fba3589",
+      "afterSHA256": "8fa4124c804286628e6ad14f60240bc05914d84a9c04ea79a51c6a3e5fba3589"
+    },
+    {
+      "name": "software_website__390",
+      "route": "/software/website",
+      "width": 390,
+      "beforeSHA256": "0b3a6e65ec1b1a09f5b60165b8b3c32b09fcc8b13a8858c317a3922e84d3b49d",
+      "afterSHA256": "0b3a6e65ec1b1a09f5b60165b8b3c32b09fcc8b13a8858c317a3922e84d3b49d"
+    },
+    {
+      "name": "software_website__768",
+      "route": "/software/website",
+      "width": 768,
+      "beforeSHA256": "ff142c0681a1ebaa5df6e7d8e7da0e57ed9c9c4d6c2d26442a8aea930a9a231c",
+      "afterSHA256": "ff142c0681a1ebaa5df6e7d8e7da0e57ed9c9c4d6c2d26442a8aea930a9a231c"
+    },
+    {
+      "name": "software_website__1440",
+      "route": "/software/website",
+      "width": 1440,
+      "beforeSHA256": "b033d93b3cf0f70504526d119cd5c16ba4ad01d0a8520836b178523083a515f7",
+      "afterSHA256": "b033d93b3cf0f70504526d119cd5c16ba4ad01d0a8520836b178523083a515f7"
+    },
+    {
+      "name": "work__390",
+      "route": "/work",
+      "width": 390,
+      "beforeSHA256": "bae6eba5e935299c6337d57d6b33fdb978f0114e0f3db4b3c9d0e6108ec370b2",
+      "afterSHA256": "bae6eba5e935299c6337d57d6b33fdb978f0114e0f3db4b3c9d0e6108ec370b2"
+    },
+    {
+      "name": "work__768",
+      "route": "/work",
+      "width": 768,
+      "beforeSHA256": "116beb26325f014d73f3bce25a17e867b735aad1cead4798a2a2aa4dd8e814b3",
+      "afterSHA256": "116beb26325f014d73f3bce25a17e867b735aad1cead4798a2a2aa4dd8e814b3"
+    },
+    {
+      "name": "work__1440",
+      "route": "/work",
+      "width": 1440,
+      "beforeSHA256": "3707323e45ecd7466505d444fde511c99561a17dedcbed6cfacf1f0439493b3a",
+      "afterSHA256": "3707323e45ecd7466505d444fde511c99561a17dedcbed6cfacf1f0439493b3a"
+    },
+    {
+      "name": "work_campaign-growth-system__390",
+      "route": "/work/campaign-growth-system",
+      "width": 390,
+      "beforeSHA256": "fbcf7f62ba8852c174ff3d6554e98f5a528faccb1d29ef909a7c5c3200affd8f",
+      "afterSHA256": "fbcf7f62ba8852c174ff3d6554e98f5a528faccb1d29ef909a7c5c3200affd8f"
+    },
+    {
+      "name": "work_campaign-growth-system__768",
+      "route": "/work/campaign-growth-system",
+      "width": 768,
+      "beforeSHA256": "229dcfa67133d94736f793a99275c854f8d4becdf0fa6f5125a9ec837d5ac0ab",
+      "afterSHA256": "229dcfa67133d94736f793a99275c854f8d4becdf0fa6f5125a9ec837d5ac0ab"
+    },
+    {
+      "name": "work_campaign-growth-system__1440",
+      "route": "/work/campaign-growth-system",
+      "width": 1440,
+      "beforeSHA256": "ab493079470cd83e93460d379c19aeb6f7a74203f8ab89e204c5610cdbbc1a4c",
+      "afterSHA256": "ab493079470cd83e93460d379c19aeb6f7a74203f8ab89e204c5610cdbbc1a4c"
+    },
+    {
+      "name": "work_connected-platform-concept__390",
+      "route": "/work/connected-platform-concept",
+      "width": 390,
+      "beforeSHA256": "f050689d49e422c31a825cb2216607614dfae8f54cacb98f12c7b3daa8bfae4b",
+      "afterSHA256": "f050689d49e422c31a825cb2216607614dfae8f54cacb98f12c7b3daa8bfae4b"
+    },
+    {
+      "name": "work_connected-platform-concept__768",
+      "route": "/work/connected-platform-concept",
+      "width": 768,
+      "beforeSHA256": "640f34c463b01030c243e489c689cae0864291670ff324835300e768caae1b1d",
+      "afterSHA256": "640f34c463b01030c243e489c689cae0864291670ff324835300e768caae1b1d"
+    },
+    {
+      "name": "work_connected-platform-concept__1440",
+      "route": "/work/connected-platform-concept",
+      "width": 1440,
+      "beforeSHA256": "a6c260231caf332962cb80ad38ade5097e01cce49bf5d77394ab66b9209a83d1",
+      "afterSHA256": "a6c260231caf332962cb80ad38ade5097e01cce49bf5d77394ab66b9209a83d1"
+    },
+    {
+      "name": "work_managed-digital-presence__390",
+      "route": "/work/managed-digital-presence",
+      "width": 390,
+      "beforeSHA256": "9db2383b0a001a742eea5cd663d47f071f266d47f6894d23d7d74c6e5bbd988d",
+      "afterSHA256": "9db2383b0a001a742eea5cd663d47f071f266d47f6894d23d7d74c6e5bbd988d"
+    },
+    {
+      "name": "work_managed-digital-presence__768",
+      "route": "/work/managed-digital-presence",
+      "width": 768,
+      "beforeSHA256": "58c3d57ee0d5d2baec631d8ecfe2c80aa086b8a1099fe28b1ebe235bde59ef7c",
+      "afterSHA256": "58c3d57ee0d5d2baec631d8ecfe2c80aa086b8a1099fe28b1ebe235bde59ef7c"
+    },
+    {
+      "name": "work_managed-digital-presence__1440",
+      "route": "/work/managed-digital-presence",
+      "width": 1440,
+      "beforeSHA256": "d1a8708a7ba3152288e54c7b31b4de646da73630ac06819665aa93587f28dd7c",
+      "afterSHA256": "d1a8708a7ba3152288e54c7b31b4de646da73630ac06819665aa93587f28dd7c"
+    },
+    {
+      "name": "work_orgtik-identity-system__390",
+      "route": "/work/orgtik-identity-system",
+      "width": 390,
+      "beforeSHA256": "ff519b8a392cd62be10cfca93fe4fc636e1ad3255d2b799e308071fc9d3df4d2",
+      "afterSHA256": "ff519b8a392cd62be10cfca93fe4fc636e1ad3255d2b799e308071fc9d3df4d2"
+    },
+    {
+      "name": "work_orgtik-identity-system__768",
+      "route": "/work/orgtik-identity-system",
+      "width": 768,
+      "beforeSHA256": "d2268ff524c14317550b030e89503bfc313811e6fb876e266ef45fdf15d8dab5",
+      "afterSHA256": "d2268ff524c14317550b030e89503bfc313811e6fb876e266ef45fdf15d8dab5"
+    },
+    {
+      "name": "work_orgtik-identity-system__1440",
+      "route": "/work/orgtik-identity-system",
+      "width": 1440,
+      "beforeSHA256": "cfde3672acb2876445e3444a2591706afe5b85ef527581ed7030648b14d10554",
+      "afterSHA256": "cfde3672acb2876445e3444a2591706afe5b85ef527581ed7030648b14d10554"
+    },
+    {
+      "name": "work_support-continuity-system__390",
+      "route": "/work/support-continuity-system",
+      "width": 390,
+      "beforeSHA256": "0ef0491239080e4c80d4a0fa3a89c4ef16da94b439c8005ebe589a21bbf125d4",
+      "afterSHA256": "0ef0491239080e4c80d4a0fa3a89c4ef16da94b439c8005ebe589a21bbf125d4"
+    },
+    {
+      "name": "work_support-continuity-system__768",
+      "route": "/work/support-continuity-system",
+      "width": 768,
+      "beforeSHA256": "d402b0cc6262e9b442976338032ed8f13e3e7a7fc371d7f498e17339f655dac4",
+      "afterSHA256": "d402b0cc6262e9b442976338032ed8f13e3e7a7fc371d7f498e17339f655dac4"
+    },
+    {
+      "name": "work_support-continuity-system__1440",
+      "route": "/work/support-continuity-system",
+      "width": 1440,
+      "beforeSHA256": "61292e182820b075cd85e7cab394be7b72eaa2ab0e3fea58a80dfcc3ed8e77ea",
+      "afterSHA256": "61292e182820b075cd85e7cab394be7b72eaa2ab0e3fea58a80dfcc3ed8e77ea"
+    },
+    {
+      "name": "audit-missing-page__390",
+      "route": "/audit-missing-page",
+      "width": 390,
+      "beforeSHA256": "16ecb83ada5ec7aeffb16e6bd6ef3e336f4be789f51887b7a2f583426280a6a5",
+      "afterSHA256": "16ecb83ada5ec7aeffb16e6bd6ef3e336f4be789f51887b7a2f583426280a6a5"
+    },
+    {
+      "name": "audit-missing-page__768",
+      "route": "/audit-missing-page",
+      "width": 768,
+      "beforeSHA256": "5203db16c3ad45d6096234b5fc754c077c9ba0a96272dc121a9cfda756fbdd11",
+      "afterSHA256": "5203db16c3ad45d6096234b5fc754c077c9ba0a96272dc121a9cfda756fbdd11"
+    },
+    {
+      "name": "audit-missing-page__1440",
+      "route": "/audit-missing-page",
+      "width": 1440,
+      "beforeSHA256": "005c665c0c8d591a04a528667f54caa825a77010fb8a5773f379bfde3352a537",
+      "afterSHA256": "005c665c0c8d591a04a528667f54caa825a77010fb8a5773f379bfde3352a537"
+    },
+    {
+      "name": "home__390",
+      "route": "/",
+      "width": 390,
+      "beforeSHA256": "9e71d7ae93421ca534c1058bf01f4a9ef86e240955d185a79d0bf43d04504d4d",
+      "afterSHA256": "9e71d7ae93421ca534c1058bf01f4a9ef86e240955d185a79d0bf43d04504d4d"
+    },
+    {
+      "name": "home__768",
+      "route": "/",
+      "width": 768,
+      "beforeSHA256": "357aaa76ec08b431e29ab7a97d91d8dbcd82d5045b632c7389f07ec4c4b16f5a",
+      "afterSHA256": "357aaa76ec08b431e29ab7a97d91d8dbcd82d5045b632c7389f07ec4c4b16f5a"
+    },
+    {
+      "name": "home__1440",
+      "route": "/",
+      "width": 1440,
+      "beforeSHA256": "5a0e962adaffc94ffa416fb6186c5c6ec42f7c8b2edb8f0e1605f6f44e4cb6fd",
+      "afterSHA256": "5a0e962adaffc94ffa416fb6186c5c6ec42f7c8b2edb8f0e1605f6f44e4cb6fd"
+    }
+  ]
+}

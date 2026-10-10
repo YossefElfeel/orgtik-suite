@@ -18,6 +18,8 @@ const baseDir = path.join(root, String(opt.base));
 const headDir = path.join(root, String(opt.head));
 const name = `diff-${opt.base}-vs-${opt.head}`;
 const outDir = path.join(root, name);
+const relativeOutput = path.relative(path.resolve(root), path.resolve(outDir));
+if (!relativeOutput || relativeOutput === '..' || relativeOutput.startsWith(`..${path.sep}`) || path.isAbsolute(relativeOutput)) throw new Error('Diff output must remain inside the website parity directory.');
 for (const d of [baseDir, headDir]) if (!fs.existsSync(path.join(d, "manifest.json"))) throw new Error(`No capture at ${path.relative(OUT, d)}`);
 fs.rmSync(outDir, { recursive: true, force: true });
 
@@ -44,6 +46,10 @@ for (const c of base.captures) {
   if (!headNames.has(c.name)) row.problems.push("missing from head");
   else if (c.failed) row.problems.push(`base capture failed: ${c.failed}`);
   else {
+    const candidate = head.captures.find(item => item.name === c.name);
+    const settings = (capture, source) => ({ renderer: capture.renderer || source.renderer || 'default', warmPaint: capture.warmPaint ?? source.warmPaint === true, mediaLock: capture.mediaLock === true });
+    if (candidate.failed || !candidate.rendered) row.problems.push(`head capture failed: ${candidate.failed || 'never rendered'}`);
+    if (JSON.stringify(settings(c, base)) !== JSON.stringify(settings(candidate, head))) row.problems.push('capture renderer/paint protocol differs');
     const [bp, hp] = [path.join(baseDir, `${c.name}.png`), path.join(headDir, `${c.name}.png`)];
     if (!fs.existsSync(bp) || !fs.existsSync(hp)) row.problems.push("screenshot missing");
     else {
