@@ -235,7 +235,10 @@ test(
         ).status,
         422,
       );
-      const owner = good(
+      const invalidValueImport = good(await call("sales","/api/crm/v3/import",token,"POST",{rows:[{fullName:"Invalid numeric CSV",email:"invalid-number@crm.test",value:null}]}));
+    assert.equal(invalidValueImport[0].state,"failed");
+    assert.ok(!good(await call("sales","/api/crm/v3",token)).contacts.some(row=>row.email==="invalid-number@crm.test"));
+    const owner = good(
         await call("sos", "/api/auth/register", null, "POST", {
           email: "owner-empty-crm@crm.test",
           name: "Empty CRM",
