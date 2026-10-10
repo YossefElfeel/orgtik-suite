@@ -9,6 +9,7 @@ Audited the production Website Manager at `https://orgtik-suite-wm.vercel.app/en
 - Overview's visits, ranking, and topic charts use coordinated layouts, purple styling, readable counts, and accessible tables. Software System remains in the service ranking.
 - Insights supports adding sections and inserting text, images, and videos between paragraphs, with drag and keyboard ordering, captions, and alternative text. Stable IDs preserve translated words. Drafts, publication, persistence, and actual public article rendering support the same structure.
 - Repeatable Published examples fill the gaps caused by suggestion drafts. They are explicitly named samples and kept off the website. Translation-state examples contain draft content. Additive migration preserves existing records and saved revisions.
+- Review actions use the actual draft author so self-approval is disabled consistently with the existing API restriction.
 
 ## Original comment coverage
 

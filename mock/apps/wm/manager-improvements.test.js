@@ -94,6 +94,15 @@ test("translation-status examples open actual draft content without resetting sa
   assert.deepEqual(restored.entries.get(edited.id), before);
 });
 
+test("review details expose the actual draft author independently of the transition actor", () => {
+  const store = makeStore(now, { demo: true }); store.ensureDemo();
+  const sample = [...store.entries.values()].find(entry => entry.draft && entry.workflow.state === "in_review");
+  assert.equal(store.detail(sample).lastEditor, "admin");
+  assert.equal(store.transition(sample, { key: "admin" }, "approve", all).code, "four_eyes");
+  assert.ok(store.transition(sample, { key: "manager" }, "approve", all).entry);
+  assert.equal(store.detail(sample).lastEditor, "admin");
+});
+
 test("demo revisions cover workflow states without changing published content or overwriting saved edits", () => {
   const store = makeStore(now, { demo: true });
   const published = [...store.entries.values()].map((entry) => [

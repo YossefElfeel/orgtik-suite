@@ -293,6 +293,8 @@ await check(
       .first()
       .click();
     await page.waitForURL((url) => !url.searchParams.has("view"));
+      const currentUser = (await call("/admin/me")).data;
+      if (home.state === "in_review" && home.lastEditor === currentUser.user.key) assert.ok(await page.getByRole("button", { name: "Approve", exact: true }).isDisabled());
     assert.equal(
       new URL(page.url()).searchParams.get("returnTo"),
       "/content/pages?state=in_review",

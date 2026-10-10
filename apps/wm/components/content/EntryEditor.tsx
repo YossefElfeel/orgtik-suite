@@ -206,7 +206,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
     numbersLocked: lang !== "en" || !editable || pricesLocked,
     errors,
   };
-  const lastEditor = entry.versions.find((v) => v.state === "draft")?.by.key;
+  const lastEditor = entry.lastEditor ?? entry.versions.find((v) => v.state === "draft")?.by.key;
   const mine = entry.hasDraft && lastEditor === me.data?.user.key;
   const areaTitle = seoOnly ? ti("seoHealth") : ta(`${type.area}.title`);
   const entryName = useEntryName();

@@ -165,7 +165,7 @@ function makeStore(now, { demo = false } = {}) {
   }
 
   function detail(e) {
-    return { ...summary(e), publishAt: e.workflow.publishAt ?? null, seoOnly: seoOnly(e), content: current(e), live: e.live, versions: e.versions.map(({ content, ...v }) => v), ...(e.legalVersions ? { legalVersions: e.legalVersions.map(({ content, ...v }) => v) } : {}) };
+    return { ...summary(e), lastEditor: e.workflow.lastEditor ?? null, publishAt: e.workflow.publishAt ?? null, seoOnly: seoOnly(e), content: current(e), live: e.live, versions: e.versions.map(({ content, ...v }) => v), ...(e.legalVersions ? { legalVersions: e.legalVersions.map(({ content, ...v }) => v) } : {}) };
   }
 
   // Validation per locale for what a reader can't do without (422 with fieldErrors).
