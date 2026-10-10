@@ -8,7 +8,8 @@ import { useTranslations, useFormatter } from "next-intl";
 import { useRunPeriod } from "@/hooks/useRunPeriod";
 import { ArrowCounterClockwise, EnvelopeSimple, PaperPlaneRight, Snowflake } from "@phosphor-icons/react";
 import { ConfirmDialog } from "@orgtik/ui";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
+import BankSampleExport from "@/components/pages/payroll/BankSampleExport";
 import {
   useFreezePayrollRunMutation,
   usePayAllrollMutation,
@@ -57,6 +58,7 @@ export function RunActions({ run, status, canEmailPayslips }: RunActionsProps) {
 
   return (
     <>
+      <BankSampleExport runId={run.id} disabled={!approved} />
       {run.queuedCount === 0 && run.paidCount === 0 ? (
         <ConfirmDialog
           tone="primary"
@@ -66,7 +68,7 @@ export function RunActions({ run, status, canEmailPayslips }: RunActionsProps) {
           cancelLabel={t("run.cancel")}
           onConfirm={() => reopen(run.id).unwrap()}
           trigger={
-            <Button variant="outline" size="lg" className={BUTTON}>
+            <Button variant="secondary" size="lg" className={BUTTON}>
               <ArrowCounterClockwise className="me-1.5 h-4 w-4" aria-hidden="true" />
               {t("status.reOpen")}
             </Button>
@@ -92,7 +94,7 @@ export function RunActions({ run, status, canEmailPayslips }: RunActionsProps) {
         />
       ) : (
         // Said, not just greyed out: why it can't be pressed yet.
-        <Button size="lg" variant="outline" disabled className={BUTTON} title={t("run.queue.noneApproved")}>
+        <Button size="lg" variant="secondary" disabled className={BUTTON} title={t("run.queue.noneApproved")}>
           <PaperPlaneRight className="me-1.5 h-4 w-4 rtl:-scale-x-100" aria-hidden="true" />
           {t("status.pay")}
           <span className="sr-only">: {t("run.queue.noneApproved")}</span>
@@ -108,7 +110,7 @@ export function RunActions({ run, status, canEmailPayslips }: RunActionsProps) {
           cancelLabel={t("run.cancel")}
           onConfirm={() => emailAll(run.id).unwrap()}
           trigger={
-            <Button size="lg" variant="outline" className={BUTTON}>
+            <Button size="lg" variant="secondary" className={BUTTON}>
               <EnvelopeSimple className="me-1.5 h-4 w-4" aria-hidden="true" />
               {t("actions.bulkSend")}
             </Button>

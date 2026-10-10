@@ -18,7 +18,7 @@ import { AvatarStack } from "@/components/shared/AvatarStack";
 import TaskFormDialog from "@/components/task/TaskFormDialog";
 import { SectionFormDialog } from "@/components/dialogs/projects/SectionFormDialog";
 import { useProjectId } from "@/components/pages/projects/ProjectFrame";
-import { useDeleteProjectSectionMutation, useGetProjectArchiveTasksQuery, useGetProjectBoardQuery } from "@/redux/features/projects/projectsApi";
+import { useDeleteProjectSectionMutation, useGetProjectArchiveTasksQuery, useGetProjectBoardQuery, useGetProjectByIdQuery } from "@/redux/features/projects/projectsApi";
 import { useMoveTaskMutation } from "@/redux/features/task/taskApi";
 import { useTaskRoles } from "@/lib/permissions";
 import { daysUntil, dueDay } from "@/lib/dates";
@@ -70,8 +70,11 @@ function Card({ task }: { task: IProjectTask }) {
 
 export default function BoardPage() {
   const t = useTranslations("BoardPage");
+  const taskText = useTranslations("TaskSheet");
   const id = useProjectId() ?? 0;
-  const { canEdit, isManager } = useTaskRoles();
+  const roles = useTaskRoles();
+  const project = useGetProjectByIdQuery(id, { skip: !id });
+  const canEdit = roles.canEdit && !project.data?.data.archivedAt, isManager = roles.isManager && !project.data?.data.archivedAt;
   const statusLabel = useStatusLabel();
   const params = useSearchParams();
   const router = useRouter();
@@ -133,7 +136,7 @@ export default function BoardPage() {
     } catch (e) {
       const status = (e as { status?: number | string; data?: { code?: string } })?.status;
       const code = (e as { data?: { code?: string } })?.data?.code;
-      toast.error(code === "read_only" ? t("moveReadOnly") : status === 403 ? t("moveForbidden") : status === "FETCH_ERROR" ? t("moveOffline") : t("moveFailed"));
+      toast.error(code === "dependency_blocked" ? taskText("waitingOnOthers") : code === "read_only" ? t("moveReadOnly") : status === 403 ? t("moveForbidden") : status === "FETCH_ERROR" ? t("moveOffline") : t("moveFailed"));
       throw e;
     }
   };

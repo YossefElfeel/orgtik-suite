@@ -23,15 +23,93 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
   const requests = new AsyncLocalStorage(), privateFrames = new Map();
   let initialized = false;
   const contextService = snapshot => createContextService({ realm, identity: identityFor(), platform: () => snapshot ? { db: snapshot.db, workspace: id => snapshot.db.workspaces.find(row => row.id === id), now: () => clock.now() } : platform().getStore() });
+  const sessionStore = sessionStorage.pickStore(config, { realm });
   const authority = createSessionAuthority({
-    realm, store: sessionStorage.pickStore(config, { realm }),
+    realm, store: sessionStore,
     loadUser: async id => { const accounts = await accountStore.accounts(), raw = accounts.get(String(id)); return raw ? JSON.parse(raw).user : identityFor().findUser(id); },
     resolveWorkspace: (user, options) => contextService(options.revalidate ? options.frame?.authorizationSnapshot : undefined).resolveWorkspace(user, options),
-    contextFor: (user, options) => contextService().contextFor(user, options),
+    contextFor: (user, options) => {
+      const exiting = options.principal?.readOnly && String(user.id) === String(options.principal.actor.id) && /^\/api\/auth\/exit-impersonation(?:$|\?)/.test(options.request?.path || options.request?.url || '');
+      if (exiting) return contextService().contextFor(user, { ...options, extra: { ...options.extra, exitImpersonation: true } });
+      if (options.extra?.mode === 'identity' && options.extra.workspaceId === null && options.extra.audience === 'identity' && !options.principal?.readOnly) return { mode: 'identity', audience: 'identity', workspaceId: null, workspaceContext: null, scopes: [], staffAccess: null };
+      return contextService().contextFor(user, options);
+    },
   });
   function currentPrincipal(req) {
     const principal = req ? authority.verifiedFromReq(req) : requests.getStore()?.frame.principal;
     return principal ? { ...principal, workspaceContext: principal.context.workspaceContext } : null;
+  }
+  function staffPreferences(patch) {
+    const p = currentPrincipal(), S = platform().getStore(), person = p && identityFor().findUser(p.user.id);
+    if (!person || p.claims.mode !== 'staff' || p.claims.aud !== 'staff:wm' || !p.context.staffAccess?.permissions.wm?.includes('content:view')) throw failure(403, 'wm_staff_required', 'Current Website Manager access is required.');
+    const helpers = require('./workspace-suite');
+    if (patch !== undefined) { if (p.readOnly) throw failure(423, 'view_as_read_only', 'View-as cannot save appearance choices.'); return helpers.savePreferences(person, patch); }
+    return { person: { id: person.id, name: identityFor().fullName(person), email: person.email }, preferences: helpers.preferences(person), now: S.iso(S.now()), scope: 'staff:wm' };
+  }
+  function catalogMirror({ country = 'CH' } = {}) {
+    const p = currentPrincipal(), S = platform().getStore(), identity = identityFor(), person = p && identity.findUser(p.user.id);
+    if (!person || p.claims.mode !== 'staff' || p.claims.aud !== 'staff:wm' || !p.context.staffAccess?.permissions.wm?.includes('content:view')) throw failure(403, 'wm_staff_required', 'Current Website Manager access is required.');
+    if (!Object.hasOwn(S.db.countries, country)) throw failure(422, 'catalog_country_required', 'Choose a configured catalog country.');
+    const currency = S.db.countries[country].currency, resolved = { workspace: { country, currency, billing: { country }, members: [], lines: [] }, buyerKey: null, region: { country, currency, source: 'mock-override' } };
+    const catalog = require('../apps/admin/website-offers').publicCatalog(S, resolved), rights = p.context.staffAccess.permissions.admin || [], internal = S.workspace('ws_orgtik');
+    let crmContext = null;
+    try { if (internal?.kind === 'orgtik_internal' && !['deleted', 'cancelled'].includes(internal.state)) crmContext = require('./workspace-context').resolveWorkspaceContext(S, identity, person, { realm, workspaceId: internal.id, actorUserId: p.actor.id, audience: 'sales' }); } catch (error) { if (![403, 404].includes(error.status)) throw error; }
+    const canCRM = Boolean(rights.includes('services:view') && require('./connectors').admitted(crmContext?.tools.crm)), canConsole = rights.includes('tools:view');
+    return { readOnly: true, country, countries: Object.keys(S.db.countries), region: catalog.region, currency, decimals: catalog.decimals, priceVersion: S.db.priceVersion, policy: catalog.policy, bundles: catalog.bundles, items: S.db.websiteOffers.map(offer => {
+      const published = catalog.items.find(row => row.id === offer.id), service = offer.kind === 'service', path = service ? `/catalog/services/${encodeURIComponent(offer.serviceId)}` : `/catalog/software?offer=${encodeURIComponent(offer.id)}`, canOpen = service ? canCRM : canConsole;
+      const query = new URLSearchParams({ ...(service && internal ? { workspaceId: internal.id } : {}), redirect: path });
+      return { id: offer.id, catalogId: offer.id, kind: offer.kind, name: published?.names || offer.name, serviceId: offer.serviceId || null, planId: offer.planId || offer.serviceId, toolId: offer.tool || null, managedIn: service ? 'crm' : 'console', scope: service ? 'sales' : 'platform_admin', path, workspaceId: service ? internal?.id || null : null, status: offer.tool ? S.db.tools.find(tool => tool.key === offer.tool)?.status : S.db.services.find(row => row.id === offer.serviceId)?.status, available: Boolean(published), publishedAt: offer.publishedAt || null, monthlyMinor: published?.monthlyMinor ?? null, prices: published?.prices || null, currency, decimals: catalog.decimals, launch: { canOpen, reason: canOpen ? null : service ? 'crm_service_access_required' : 'console_catalog_access_required', url: canOpen ? `${config.webUrl('sos')}/go/${service ? 'sales' : 'platform_admin'}?${query}` : null } };
+    }) };
+  }
+  function crmLeadTarget({ leadId } = {}) {
+    const request = requests.getStore(), p = currentPrincipal(), S = platform().getStore(), identity = identityFor(), person = p && identity.findUser(p.user.id), workspace = S.workspace('ws_orgtik');
+    if (!request || !person || p.claims.mode !== 'staff' || p.claims.aud !== 'staff:wm' || !p.context.staffAccess?.permissions.wm?.includes('content:view') || typeof leadId !== 'string' || !/^[\w-]{1,160}$/.test(leadId)) throw failure(403, 'wm_lead_context_required', 'Choose an actual Website Manager lead reference.');
+    const path = `/customers/${encodeURIComponent(leadId)}`, base = { workspaceId: workspace?.id || null, leadId, scope: 'sales', path, canOpen: false, reason: 'crm_read_access_required', url: null };
+    if (!workspace || workspace.kind !== 'orgtik_internal' || ['deleted', 'cancelled'].includes(workspace.state)) return { ...base, reason: 'orgtik_crm_unavailable' };
+    let context;
+    try { context = require('./workspace-context').resolveWorkspaceContext(S, identity, person, { realm, workspaceId: workspace.id, actorUserId: p.actor.id, audience: 'sales' }); } catch (error) { if ([403, 404].includes(error.status)) return base; throw error; }
+    if (!require('./connectors').admitted(context.tools.crm)) return base;
+    let runtime = request.suiteReadRuntimes.get('sales'); if (!runtime) { runtime = registry.create(workspace.id, 'sales'); request.suiteReadRuntimes.set('sales', runtime); }
+    if (!runtime.suiteFeed(context).contacts.some(row => row.id === leadId)) return { ...base, reason: 'crm_record_unavailable' };
+    const query = new URLSearchParams({ workspaceId: workspace.id, redirect: path });
+    return { ...base, canOpen: true, reason: null, url: `${config.webUrl('sos')}/go/sales?${query}` };
+  }
+  function internalCrmRuntime(request) {
+    const S = platform().getStore(), workspace = S.workspace('ws_orgtik');
+    if (!request || workspace?.kind !== 'orgtik_internal' || ['suspended', 'deleted', 'cancelled'].includes(workspace.state)) throw failure(503, 'orgtik_crm_unavailable', 'The OrgTik CRM is unavailable.');
+    const owner = workspace.members.find(member => member.status === 'active' && member.toolGrants?.crm?.assigned && member.toolGrants.crm.roles?.some(role => ['admin', 'manager'].includes(role))), actor = owner && identityFor().findByKey(owner.userKey);
+    if (!actor) throw failure(503, 'orgtik_crm_unavailable', 'The OrgTik CRM has no admitted intake owner.');
+    const context = require('./workspace-context').resolveWorkspaceContext(S, identityFor(), actor, { realm, workspaceId: workspace.id });
+    if (!context.tools.crm.canWrite) throw failure(503, 'orgtik_crm_read_only', 'The OrgTik CRM is read-only.');
+    const key = 'internal:sales';
+    if (!request.relatedRuntimes.has(key)) request.relatedRuntimes.set(key, registry.create(workspace.id, 'sales'));
+    return request.relatedRuntimes.get(key);
+  }
+  function deliverWebsiteLead(payload, metadata) {
+    const request = requests.getStore();
+    if (!request || request.key !== 'wm' || request.req.method !== 'POST' || !/^\/v2\/public\/leads(?:$|\?)/.test(request.req.url) || typeof metadata?.wmLeadId !== 'string' || metadata.wmLeadId.length > 200) throw failure(403, 'website_intake_forbidden', 'Only the validated website lead flow can deliver this record.');
+    try {
+      const result = internalCrmRuntime(request).receiveWebsiteIntake(payload, { sourceKey: `wm:${metadata.wmLeadId}` });
+      return { state: 'sent', ...result, managedIn: 'crm', at: new Date(clock.now()).toISOString() };
+    } catch (error) {
+      if (['orgtik_crm_unavailable', 'orgtik_crm_read_only'].includes(error.code)) return { state: 'deferred', code: 'crm_intake_pending', reason: error.code, managedIn: 'crm', at: new Date(clock.now()).toISOString() };
+      throw error;
+    }
+  }
+  function deliverPaidServices(request) {
+    const S = platform().getStore();
+    for (const service of S.db.serviceRequests.filter(row => row.source?.kind === 'website_order' && !row.crmProjectId)) {
+      const stored = S.db.publicWebsiteOrders.find(row => row.snapshot?.reference === service.source.reference);
+      if (stored?.snapshot?.paymentStatus !== 'succeeded' || !S.db.websiteOrderLinks.some(row => row.reference === service.source.reference && row.workspaceId === service.workspaceId)) continue;
+      const order = stored.snapshot, workspace = S.workspace(service.workspaceId), owner = workspace?.members.find(row => row.role === 'owner' && row.status === 'active'), person = owner && identityFor().findByKey(owner.userKey);
+      if (!person || !stored.billing?.email) continue;
+      try {
+        const line = order.groups.flatMap(group => group.lines).find(row => row.catalogId === service.catalogId && row.fulfillment !== 'tool');
+        if (!line) continue;
+        const result = internalCrmRuntime(request).receiveWebsiteIntake({ source: 'website_order', name: stored.billing.name || identityFor().fullName(person), email: stored.billing.email, company: workspace.name, message: service.brief, locale: person.profile?.language || 'en' }, { sourceKey: `website-order:${order.reference}:${service.id}`, serviceRequestId: service.id, reference: order.reference, title: `${service.title} · ${order.reference}`, paidSnapshot: { currency: order.currency, decimals: order.decimals, paidAt: order.createdAt, line: clone(line), policy: clone(order.policy) } });
+        service.crmLeadId = result.leadId; service.crmProjectId = result.projectId; service.crmDelivery = { state: 'sent' };
+      } catch (error) { service.crmDelivery = { state: 'deferred', code: error.code || 'crm_intake_unavailable' }; }
+    }
   }
   const registry = createRuntimeRegistry({
     realm, identity: new Proxy({}, { get: (_target, name) => identityFor()[name] }), config, util,
@@ -40,6 +118,9 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       if (!/^[\w-]{1,200}$/.test(workspace.id)) throw failure(503, "invalid_workspace_id", "Workspace storage is unavailable.");
       const ctx = { ...makeCtx(appKey, identity, util), realm, workspaceId: workspace.id, currentContext: () => currentPrincipal()?.workspaceContext, uploadsDir: path.join(config.dataDir, "uploads", "workspaces", workspace.id, appKey), io: null, boardAuthority: { authorize: authorizeBoardFile, custodyTarget: args => boardCustodyTarget(workspace.id, args) }, sharedFiles: { resolve: resolveSharedFile, project: projectSharedFile, ...Object.fromEntries(['authorizeWhiteboard', 'createWhiteboard', 'saveWhiteboard', 'resolveWhiteboard'].map(method => [method, args => invokeBoardFile(method, args)])) } };
       const upload = () => (req, res, next) => /multipart\/form-data|application\/octet-stream/i.test(req.headers["content-type"] || "") ? res.status(501).json({ success: false, code: "packaged_assets_only", message: "Choose a packaged sample asset." }) : next();
+      ctx.filesPolicy = () => require('./workspace-files-policy').filesPolicy(platform().getStore(), workspace.id, currentPrincipal()?.workspaceContext);
+      ctx.connectedTasks = { references: args => connectedTaskReferences(appKey, args) };
+      ctx.crmDirectory = { current: args => currentCrmDirectory(appKey, args), resolve: args => currentCrmDirectory(appKey, args, true) };
       ctx.upload = Object.fromEntries(["single", "array", "any", "fields", "none"].map(name => [name, upload]));
       return {
         ctx, assets: { kind: "packaged", workspaceId: workspace.id },
@@ -55,6 +136,33 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     if (request.runtime?.appKey === 'files') return request.runtime;
     if (!request.relatedRuntimes.has('files')) request.relatedRuntimes.set('files', registry.create(context.workspace.id, 'files'));
     return request.relatedRuntimes.get('files');
+  }
+  function connectedTaskReferences(appKey, { source, sourceId, ids } = {}) {
+    const request = requests.getStore(), p = request?.frame.principal, initial = p?.context.workspaceContext;
+    if (!initial || source !== APP_TO_TOOL[appKey] || !['chat', 'crm', 'hr', 'marketing'].includes(source) || !['string', 'number'].includes(typeof sourceId) || !String(sourceId) || String(sourceId).length > 160 || !Array.isArray(ids) || ids.length > 50 || ids.some(id => !Number.isSafeInteger(id) || id < 1)) throw failure(422, 'invalid_task_references', 'Choose current source-owned task references.');
+    const S = platform().getStore(), person = identityFor().findUser(p.user.id), context = require('./workspace-context').resolveWorkspaceContext(S, identityFor(), person, { realm, workspaceId: initial.workspace.id, actorUserId: p.actor.id, readOnly: p.readOnly, audience: p.claims.aud });
+    const connections = require('./connectors'), connection = connections.list(S.workspace(initial.workspace.id), context).find(row => row.source === source && row.target === 'tasks');
+    if (!connection?.enabled || !connections.admitted(context.tools[source]) || !connections.admitted(context.tools.tasks)) throw failure(403, 'connection_access_required', 'Current source and Tasks access are required.');
+    let runtime = request.runtime?.appKey === 'tasks' ? request.runtime : request.relatedRuntimes.get('tasks') || request.suiteReadRuntimes.get('tasks');
+    if (!runtime) { runtime = registry.create(initial.workspace.id, 'tasks'); request.suiteReadRuntimes.set('tasks', runtime); }
+    // The owning tool has already checked its source record ACL. Only actual
+    // visible Tasks records pinned to that exact source can be projected here.
+    return runtime.suiteFeed(context).tasks.filter(task => ids.includes(task.id) && task.source?.app === source && String(task.source.id) === String(sourceId)).map(task => ({ id: task.id, title: task.title, status: task.status, path: `/projects/${task.projectId}/lists?task-id=${task.id}` }));
+  }
+  function currentCrmDirectory(appKey, args = {}, selected = false) {
+    const request = requests.getStore(), p = request?.frame.principal, initial = p?.context.workspaceContext;
+    if (appKey !== 'marketing' || !initial) throw failure(403, 'marketing_context_required', 'Current Marketing workspace access is required.');
+    const S = platform().getStore(), person = identityFor().findUser(p.user.id), context = require('./workspace-context').resolveWorkspaceContext(S, identityFor(), person, { realm, workspaceId: initial.workspace.id, actorUserId: p.actor.id, readOnly: p.readOnly, audience: p.claims.aud });
+    require('./connectors').requireConnection(S.workspace(initial.workspace.id), context, 'marketing', 'crm');
+    const query = String(args.search || '').trim().toLocaleLowerCase(), ids = args.contactIds;
+    const validId = id => typeof id === 'string' ? require('./workspace-file-references').identifier(id) : Number.isSafeInteger(id) && id > 0;
+    if (query.length > 200 || selected && (!Array.isArray(ids) || ids.length > 200 || ids.some(id => !validId(id)))) throw failure(422, 'invalid_directory_selection', 'Select up to two hundred current CRM contacts.');
+    let runtime = request.runtime?.appKey === 'sales' ? request.runtime : request.relatedRuntimes.get('sales') || request.suiteReadRuntimes.get('sales');
+    if (!runtime) { runtime = registry.create(initial.workspace.id, 'sales'); request.suiteReadRuntimes.set('sales', runtime); }
+    const data = runtime.suiteFeed(context);
+    if (selected && ids.some(id => !data.contacts.some(row => row.id === id))) throw failure(403, 'recipient_unavailable', 'A selected CRM contact is no longer visible. Review the audience.');
+    const contacts = data.contacts.filter(row => selected ? ids.includes(row.id) : !query || `${row.fullName} ${row.email} ${row.companyName}`.toLocaleLowerCase().includes(query)).slice(0, 200);
+    return { workspaceId: initial.workspace.id, managedIn: 'crm', contacts: contacts.map(row => ({ workspaceId: initial.workspace.id, id: row.id, name: row.fullName, email: row.email, companyId: row.companyId, currency: row.currency, tags: row.tags, consent: row.marketingConsent, attribution: row.attribution })), companies: data.companies };
   }
   function resolveSharedFile(value) {
     const principal = requests.getStore()?.frame.principal, workspaceId = principal?.context.workspaceContext?.workspace.id;
@@ -299,6 +407,11 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       try {
         const principal = frame.principal, id = principal?.context.workspaceContext?.workspace.id;
         if (!id) throw failure(403, 'workspace_required', 'Choose a workspace to continue.');
+        const workspace = platform().getStore().workspace(id), context = principal.context.workspaceContext;
+        // The retained absence projection grants no HR record/directory access. Missing
+        // subscriptions, disabled connections and external reviewers receive no rows.
+        const connector = require('./connectors').list(workspace, context).find(row => row.source === APP_TO_TOOL[tool] && row.target === 'hr');
+        if (context.tools.hr.access === 'not_subscribed' || connector?.enabled === false || context.member.role === 'guest') return res.json({ success: true, statusCode: 200, data: { workspaceId: id, timeZone: workspace.timeZone, fromDate: req.query.fromDate, toDate: req.query.toDate, items: [] } });
         hrRuntime = registry.create(id, 'hr');
         const data = require('./workspace-availability').projectAvailability({ realm, workspace: platform().getStore().workspace(id), identity: identityFor(), snapshot: hrRuntime.exportSnapshot(), tool, actor: principal.user, fromDate: req.query.fromDate, toDate: req.query.toDate });
         res.json({ success: true, statusCode: 200, message: 'Workspace availability fetched', data });
@@ -338,6 +451,78 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     app.get('/api/auth/mailbox', route(() => {
       return journeys.mailbox(platform().getStore(), principal().user, { readOnly: principal().readOnly });
     }));
+    const personActions = req => {
+      const p = principal();
+      if (!p) throw failure(401, 'unauthenticated', 'Sign in to manage your account.');
+      return require('./workspace-account-actions').createAccountActions({ S: platform().getStore(), identity: identityFor(), principal: p, workspace: ownContext() ? workspace() : null, sessionStore, authority, token: identityFor().tokenFrom(req), frame });
+    };
+    const publicCareers = (req, write = false) => {
+      const S = platform().getStore(), ws = S.workspace(req.params.workspaceId);
+      if (!ws || ['deleted', 'cancelled'].includes(ws.state)) throw failure(404, 'careers_not_found', 'This careers page is unavailable.');
+      const line = ws.lines.find(row => row.tool === 'hr' && !['ended', 'deleted'].includes(row.state)), plan = line && S.db.plans.find(row => row.id === line.planId);
+      const planEligible = Boolean(line && plan?.tool === 'hr'), canApply = planEligible && ws.state !== 'suspended' && line.state !== 'read_only';
+      if (!planEligible) throw failure(404, 'careers_not_found', 'This careers page is unavailable.');
+      const runtime = registry.create(ws.id, 'hr');
+      if (write) requests.getStore().relatedRuntimes.set(`public-careers:${ws.id}`, runtime);
+      return { runtime, planEligible, canApply };
+    };
+    app.get('/v1/public/careers/:workspaceId', route(req => {
+      const { runtime, ...eligibility } = publicCareers(req);
+      try { if (!runtime.publicCareers) throw failure(503, 'careers_unavailable', 'The careers page is being prepared.'); return runtime.publicCareers(eligibility); } finally { runtime.close(); }
+    }));
+    app.post('/v1/public/careers/:workspaceId/jobs/:jobId/applications', route(req => {
+      const { runtime, ...eligibility } = publicCareers(req, true);
+      if (!runtime.applyPublicCareer) throw failure(503, 'careers_unavailable', 'The careers page is being prepared.');
+      return runtime.applyPublicCareer({ ...eligibility, jobId: req.params.jobId, application: req.body, operationId: req.get('idempotency-key') });
+    }));
+    const publicChats = (req, write = false) => {
+      const S = platform().getStore(), ws = S.workspace(req.params.workspaceId), token = req.params.token;
+      if (!ws || ['deleted', 'cancelled'].includes(ws.state) || typeof token !== 'string' || token.length > 240) throw failure(404, 'guest_entry_unavailable', 'This guest entry is unavailable.');
+      const line = ws.lines.find(row => row.tool === 'chat' && !['ended', 'deleted'].includes(row.state)), plan = line && S.db.plans.find(row => row.id === line.planId), planEligible = Boolean(line && plan?.tool === 'chat'), canJoin = planEligible && ws.state !== 'suspended' && line.state !== 'read_only';
+      if (!planEligible) throw failure(404, 'guest_entry_unavailable', 'This guest entry is unavailable.');
+      const runtime = registry.create(ws.id, 'chats');
+      if (write) requests.getStore().relatedRuntimes.set(`public-chats:${ws.id}`, runtime);
+      return { runtime, planEligible, canJoin, token };
+    };
+    app.get('/v1/public/chats/:workspaceId/guests/:token', route(req => {
+      if (req.query.visitToken !== undefined && (typeof req.query.visitToken !== 'string' || req.query.visitToken.length > 240)) throw failure(422, 'invalid_visit_proof', 'Use the original guest visit proof.');
+      const { runtime, ...eligibility } = publicChats(req);
+      try { if (!runtime.publicGuest) throw failure(503, 'guest_entry_pending', 'This guest entry is being prepared.'); return runtime.publicGuest({ ...eligibility, visitToken: req.query.visitToken }); } finally { runtime.close(); }
+    }));
+    app.post('/v1/public/chats/:workspaceId/guests/:token', route(req => {
+      if (principal()?.readOnly) throw failure(423, 'view_as_read_only', 'View-as cannot create a guest visit.');
+      const { runtime, ...eligibility } = publicChats(req, true);
+      if (!runtime.joinPublicGuest) throw failure(503, 'guest_entry_pending', 'This guest entry is being prepared.');
+      return runtime.joinPublicGuest({ ...eligibility, guest: req.body, operationId: req.get('idempotency-key') });
+    }));
+    app.get('/api/auth/account', route(req => {
+      personActions(req);
+      const p = principal(), S = platform().getStore();
+      return { user: safeUser(p.user), readOnly: p.readOnly, workspaceId: ownContext()?.workspace.id || null, workspaces: S.db.workspaces.filter(row => !['deleted', 'cancelled'].includes(row.state) && people.memberOf(row, p.user)).map(row => ({ id: row.id, name: row.name, state: row.state, role: people.memberOf(row, p.user).role })) };
+    }));
+    app.get('/api/auth/account/sessions', route(req => personActions(req).execute('sessions.list')));
+    app.get('/api/auth/account/audit', route(req => personActions(req).execute('audit.list')));
+    app.post('/api/auth/account/actions/:kind', route(req => {
+      if (!['workspace.create', 'person.delete', 'sessions.revoke'].includes(req.params.kind)) throw failure(422, 'workspace_action_required', 'Choose a workspace for this action.');
+      return personActions(req).execute(req.params.kind, req.body);
+    }));
+    app.use('/v1/admin', (req, res, next) => {
+      if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next();
+      const S = platform().getStore(), serviceId = value => S.db.plans.some(row => row.id === value && row.service) || S.db.services.some(row => row.id === value), moved = () => res.status(410).json({ success: false, code: 'services_managed_in_crm', message: 'Manage service catalogs and delivery in the OrgTik CRM.', managedIn: 'crm', path: req.path.startsWith('/service-requests') ? '/service-requests' : '/catalog' });
+      if (/^\/(?:services|service-requests)(?:\/|$)/.test(req.path)) return moved();
+      if (/^\/plans(?:\/|$)/.test(req.path) && (req.body?.service === true || serviceId(req.path.split('/')[2]))) return moved();
+      if (req.path === '/price-drafts' && Array.isArray(req.body?.changes) && req.body.changes.some(row => serviceId(String(row.key || '').split(':')[0]))) return moved();
+      const draft = /^\/price-drafts\/([^/]+)\/publish$/.exec(req.path);
+      if (draft && S.db.priceDrafts.find(row => row.id === draft[1])?.changes.some(row => serviceId(row.key.split(':')[0]))) return moved();
+      if (/^\/bundles(?:\/|$)/.test(req.path) && Array.isArray(req.body?.planIds) && req.body.planIds.some(serviceId)) return moved();
+      const country = /^\/countries\/([^/]+)$/.exec(req.path);
+      if (country && req.body?.fixed) {
+        const prior = S.db.countries[country[1]]?.fixed || {};
+        if (Object.entries(req.body.fixed).some(([key, value]) => serviceId(key.split(':')[0]) && JSON.stringify(value) !== JSON.stringify(prior[key]))) return moved();
+        req.body.fixed = { ...Object.fromEntries(Object.entries(prior).filter(([key]) => serviceId(key.split(':')[0]))), ...req.body.fixed };
+      }
+      next();
+    });
     app.get("/api/auth/my-scopes", (req, res) => {
       const p = principal(); if (!p) return res.status(401).json({ success: false, code: "unauthenticated" });
       const names = new Set(p.context.scopes.map(scope => scope.scope));
@@ -384,7 +569,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         const ws = workspace(), S = platform().getStore();
         const data = ws.members.filter(member => !['removed', 'offboarded', 'cancelled'].includes(member.status)).map(member => {
           const user = identityFor().findByKey(member.userKey);
-          return { id: member.id, userKey: member.userKey, name: user ? identityFor().fullName(user) : member.name, email: user?.email || member.email, role: member.role, status: member.status, tools: Object.keys(member.toolGrants || {}).filter(tool => member.toolGrants[tool].assigned), joinedAt: member.joinedAt, invitationId: member.invitationId || null };
+          return { id: member.id, userKey: member.userKey, name: user ? identityFor().fullName(user) : member.name, email: user?.email || member.email, role: member.role, customRoleId: member.customRoleId || null, status: member.status, tools: Object.keys(member.toolGrants || {}).filter(tool => member.toolGrants[tool].assigned), joinedAt: member.joinedAt, invitationId: member.invitationId || null };
         });
         const filtered = ownContext().member.role === 'guest' ? data.filter(member => member.userKey === principal().user.key) : data;
         res.json({ data: filtered, meta: { seats: S.seats(ws), seatModel: 'B', perTool: Object.fromEntries(Object.keys(TOOL_DEFINITIONS).map(tool => [tool, seatCounts(S, ws, tool)])), perUserLines: ws.lines.filter(line => S.db.plans.find(plan => plan.id === line.planId)?.perUser).map(line => ({ id: line.id, tool: line.tool, unit: line.snapshot.unit, currency: line.snapshot.currency, cycle: line.cycle })) } });
@@ -494,6 +679,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const anonymous = authPublic || publicFile || taskSample || publicCms || cmsPreview || /^\/v1\/public\//.test(url) || /^\/(__health|__mock\/status|__mock\/clock)(?:$|\?)/.test(url);
     let frame, runtime, commitAttempted = false;
     const relatedRuntimes = new Map();
+    const suiteReadRuntimes = new Map();
     const requestEpoch = persist.epoch;
     initializeWorkspaceAuthority(S, identity, { seedAt: new clock.RealDate(persist.seedAt).toISOString() });
     const platformBefore = platform().exportState(), accountsBefore = authStorage.snapshot(identity), runtimesBefore = registry.exportState(), staffBefore = exportStaffState();
@@ -509,10 +695,30 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         if (!require('../apps/wm').validatePreviewGrant?.(token)) throw failure(401, 'preview_expired', 'Open a new preview from Website Manager.');
       }
       if (/^\/(?:__mock\/|v[12]\/__mock\/)/.test(url) && req.method !== "GET" && (principal?.claims.mode !== 'staff' || !principal?.context.staffAccess?.permissions.admin?.includes("settings:full"))) throw failure(403, "mock_control_forbidden", "Only an authorized mock administrator can do this.");
-      const request = { frame, key, req, principal, runtime: null, relatedRuntimes };
+      const request = { frame, key, req, principal, runtime: null, relatedRuntimes, suiteReadRuntimes };
       const result = await authority.runPrepared(frame, () => requests.run(request, async () => {
         let app = key === "sos" || key === "admin" ? accountRoutes(currentLegacyApp, frame) : currentLegacyApp;
-        if (taskSample) { app = express(); app.use(createTaskSampleRouter({ config })); }
+        if (/^\/api\/suite(?:\/|$)/.test(url)) {
+          const context = principal?.context.workspaceContext;
+          if (!context) throw failure(403, 'workspace_required', 'Choose a workspace to continue.');
+          const runtimeFor = (tool, write = false) => {
+            const appKey = TOOL_DEFINITIONS[tool]?.app;
+            if (!appKey) throw failure(422, 'unsupported_tool', 'Choose a supported tool.');
+            if (relatedRuntimes.has(appKey)) return relatedRuntimes.get(appKey);
+            if (!suiteReadRuntimes.has(appKey)) suiteReadRuntimes.set(appKey, registry.create(context.workspace.id, appKey));
+            const candidate = suiteReadRuntimes.get(appKey);
+            if (write) { suiteReadRuntimes.delete(appKey); relatedRuntimes.set(appKey, candidate); }
+            return candidate;
+          };
+          const accountActions = require('./workspace-account-actions').createAccountActions({ S, identity, principal, workspace: S.workspace(context.workspace.id), sessionStore, authority, token: identity.tokenFrom(req), frame });
+          app = require('./workspace-suite').createSuiteRouter({ S, identity, principal, runtimeFor, accountActions, serviceFiles: {
+            list: query => filesRuntime().listSharedFiles({ actorId: principal.user.id, search: query.search, page: query.page, limit: query.limit }),
+            package: value => { const ref = require('./workspace-file-references').reference(value, context.workspace.id); return filesRuntime().packageServiceDelivery({ actorId: principal.user.id, fileId: ref.fileId, versionId: ref.versionId }); },
+          }, command: (tool, kind, payload, operationId) => {
+            request.runtime = runtimeFor(tool, true);
+            return executeCommand(kind, payload, { workspaceId: context.workspace.id, actor: { userId: principal.user.id }, operationId });
+          } });
+        } else if (taskSample) { app = express(); app.use(createTaskSampleRouter({ config })); }
         else if (publicFile) {
           const workspaceId = registry.publicFileWorkspace(publicFile[1]);
           if (!workspaceId) throw failure(404, 'public_grant_not_found', 'This link is not available.');
@@ -543,6 +749,14 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         // Never append the pre-reset candidate or old runtime snapshots to that epoch.
         await authority.commitPending(frame); return send(result);
       }
+      if (req.method === 'POST' && /^\/api\/auth\/login-as\/[1-9]\d*(?:$|\?)/.test(url)) {
+        const data = JSON.parse(result.rawPayload.toString('utf8')).data, viewed = data?.workspaceContext;
+        if (viewed?.actor.readOnly && principal?.actor.id === viewed.actor.userId) S.log(principal.actor.key, 'view_as_started', String(viewed.actor.effectiveUserId), { workspaceId: viewed.workspace.id, actorUserId: principal.actor.id, effectiveUserId: viewed.actor.effectiveUserId });
+      }
+      if (req.method === 'POST' && /^\/api\/auth\/exit-impersonation(?:$|\?)/.test(url) && principal?.readOnly) S.log(principal.actor.key, 'view_as_ended', String(principal.user.id), { workspaceId: principal.context.workspaceContext?.workspace.id, actorUserId: principal.actor.id, effectiveUserId: principal.user.id });
+      // Approved owner-domain adapter. The existing transaction commits or rolls
+      // back the platform and related CRM snapshots together; paid rows stay intact.
+      if (req.method === 'POST' && /^\/v1\/app\/website-orders(?:$|\?)/.test(url)) await authority.runPrepared(frame, () => requests.run({ frame, key, req, principal: frame.principal, runtime, relatedRuntimes }, () => deliverPaidServices(requests.getStore())));
       assignInitialOwnerSeats(S);
       if (runtime) registry.commit(runtime);
       for (const related of relatedRuntimes.values()) registry.commit(related);
@@ -552,7 +766,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       if (changed) {
         const identityEffect = { changes, ...(store.kind === "redis" ? { accountsKey: `orgtik:identity:${realm}:accounts`, emailsKey: `orgtik:identity:${realm}:emails` } : {}) };
         const entry = { epoch: persist.epoch, kind: "workspace-v1", app: key, method: req.method, url, headers: {}, body: null, at: clock.now(), checkpoint: encodeDomainCheckpoint({ platformState: after, workspaceState, staffState }) };
-        if (!/^\/api\/auth\/logout(?:-all)?(?:$|\?)/.test(url)) await authority.revalidatePrepared(frame);
+        if (!frame.accountSessionExit && !/^\/api\/auth\/logout(?:-all)?(?:$|\?)/.test(url)) await authority.revalidatePrepared(frame);
         commitAttempted = true;
         const committed = await store.commit(entry, { expectedEpoch: persist.epoch, expectedRevision: persist.applied, identity: identityEffect });
         persist.applied = committed.sequence; persist.modern = true; persist.workspaceModern = true;
@@ -563,8 +777,8 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       identity.hydrate(accountsBefore, { replace: true }); platform().importState(platformBefore); registry.importState(runtimesBefore); importStaffState(staffBefore);
       if (commitAttempted) persist.rebuild = true;
       return sendJson(error.status || 503, { success: false, code: error.code || "workspace_unavailable", message: error.message });
-    } finally { if (frame) authority.discardPending(frame); runtime?.close(); for (const related of relatedRuntimes.values()) related.close(); }
+    } finally { if (frame) authority.discardPending(frame); runtime?.close(); for (const related of relatedRuntimes.values()) related.close(); for (const related of suiteReadRuntimes.values()) related.close(); }
   }
-  return { authority, registry, initialize, handle, importState, exportStaffState, importStaffState, frameApp, currentPrincipal, contextService };
+  return { authority, registry, initialize, handle, importState, exportStaffState, importStaffState, frameApp, currentPrincipal, contextService, deliverWebsiteLead, staffPreferences, catalogMirror, crmLeadTarget };
 }
 module.exports = { createWorkspaceBoundary };

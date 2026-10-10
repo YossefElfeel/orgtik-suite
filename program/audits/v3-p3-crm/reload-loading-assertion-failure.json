@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-10",
+  "scope": "Ordinary CRM service catalog and delivery, isolated memory demo on offset300",
+  "checks": [
+    {
+      "name": "J19 UI save persists draft while published price remains",
+      "pass": true
+    },
+    {
+      "name": "J19 UI publish clears draft and advances shared price version",
+      "pass": true
+    },
+    {
+      "name": "J19 ordinary reload retains published value",
+      "pass": false
+    }
+  ],
+  "captures": [],
+  "errors": [],
+  "failure": "J19 ordinary reload retains published value undefined"
+}

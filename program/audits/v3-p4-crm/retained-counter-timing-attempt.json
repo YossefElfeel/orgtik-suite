@@ -1,0 +1,23 @@
+{
+  "scope": "Retained real CRM constructor, customer negotiation, signed approval and payout",
+  "checks": [
+    {
+      "name": "Retired catalog chooser is labelled compatibility data",
+      "pass": true
+    },
+    {
+      "name": "S2 actual ordinary constructor keeps selected 12-month installments",
+      "pass": true
+    },
+    {
+      "name": "S3 current customer counter persists actual negotiated total",
+      "pass": false
+    }
+  ],
+  "captures": [
+    "retained-created-installment-offer.png",
+    "retained-failure.png"
+  ],
+  "errors": [],
+  "failure": "S3 current customer counter persists actual negotiated total undefined"
+}

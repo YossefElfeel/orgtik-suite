@@ -1,168 +1,47 @@
 "use client";
-import { demoRuntime } from "@orgtik/ui";
-import { useEffect, useState, type ReactNode } from "react";
+import { type ReactNode, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import {
-  Archive,
-  Kanban,
-  Briefcase,
-  ChartBar,
-  CrownSimple,
-  FileText,
-  Gift,
-  Package,
-  Pulse,
-  Receipt,
-  Repeat,
-  SquaresFour,
-  Ticket,
-  Tag,
-  UserCircle,
-  UserGear,
-  UsersThree,
-  Wallet,
-  IdentificationBadge,
-} from "@phosphor-icons/react";
-import { AppRail, BannerRegion, MenuLinkItem, NoPermissionState, Sidebar, SuiteShell, UserMenu, buttonVariants, type Locale, type SidebarSection } from "@orgtik/ui";
-import { SOS_URL, useLogout } from "@somion/sos-bar";
+import { Archive, Kanban, Briefcase, CrownSimple, FileText, Pulse, SquaresFour, UserCircle, UserGear, UsersThree, Wallet, IdentificationBadge, Storefront, Truck, GearSix } from "@phosphor-icons/react";
+import { demoRuntime, MenuLinkItem, NoPermissionState, Sidebar, SuiteFrame as SharedSuiteFrame, UserMenu, type Locale, type SidebarSection } from "@orgtik/ui";
+import { handoffCode, readClientSession, signOutSession, useClientSession } from "@orgtik/ui/auth";
+import { SOS_URL } from "@/constants";
+import { API_URL, AUTH_API_URL } from "@/constants";
 import { routing, usePathname, useRouter } from "@/i18n/routing";
 import { useAppDispatch, useAppSelector } from "@/redux/app/hooks";
 import { logoutUser } from "@/redux/features/auth/authSlice";
 import { useRole } from "@/hooks/useRole";
 import { NAV_ITEMS } from "@/lib/navigation";
 import { canAccessRoute, getNavLabel } from "@/lib/role-access";
-import { useNotificationSocket } from "@/hooks/useNotificationSocket";
-import { NotificationPopover } from "@/components/layout/DashboardHeader/NotificationPopover";
-import { CURRENT_SCOPE, useSuiteApps } from "./useSuiteApps";
+import CrmScopeGate from "@/providers/CrmScopeGate";
 
-function useMounted() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  return mounted;
-}
-
-// D-008: Phosphor everywhere. The nav table still carries the old iconify ids; the shell ignores them.
-const ICONS: Record<string, ReactNode> = {
-  "/": <SquaresFour />,
-  "/customers": <UsersThree />,
-  "/customers/pipeline": <Kanban />,
-  "/offers": <FileText />,
-  "/projects": <Briefcase />,
-  "/salesman": <IdentificationBadge />,
-  "/commissions": <Wallet />,
-  "/loyalty": <CrownSimple />,
-  "/activity-feed": <Pulse />,
-  "/archive": <Archive />,
-  "/user-management": <UserGear />,
-  "/plan-management": <ChartBar />,
-  "/packages": <Package />,
-  "/subscriptions": <Repeat />,
-  "/coupons": <Tag />,
-  "/invoices": <Receipt />,
-  "/tickets": <Ticket />,
-};
-const SELL = ["/", "/customers", "/customers/pipeline", "/offers", "/projects"];
-
-/**
- * The suite shell for Sales (FS-SAL-2): the library's rail, sidebar and top bar replace SoSBar, the
- * local sidebar (iconify icons fetched at runtime), the header and its breadcrumb. The sidebar shows
- * the role's CRM items with the current page marked, then the SaaS-admin modules that move to the
- * Admin app (frozen, D-011) in their own group. A page the role can't open shows a no-permission
- * state in place; it used to bounce to the dashboard without a word. The person comes from the
- * store, which the server filled from the cookies, so both sides render the same.
- */
+const ICONS: Record<string, ReactNode> = { "/companies": <Briefcase />, "/reports": <Pulse />, "/projects/pipeline": <Kanban />, "/": <SquaresFour />, "/customers": <UsersThree />, "/customers/pipeline": <Kanban />, "/offers": <FileText />, "/projects": <Briefcase />, "/salesman": <IdentificationBadge />, "/commissions": <Wallet />, "/loyalty": <CrownSimple />, "/activity-feed": <Pulse />, "/archive": <Archive />, "/user-management": <UserGear />, "/service-catalog": <Storefront />, "/service-requests": <Truck />, "/admin": <GearSix /> };
+const SELL = ["/", "/customers", "/customers/pipeline", "/offers", "/projects", "/projects/pipeline", "/companies", "/reports"];
 export function SuiteFrame({ children }: { children: ReactNode }) {
-  useNotificationSocket();
-  const t = useTranslations("Shell");
-  const tn = useTranslations("nav");
-  const ts = useTranslations("Suite");
-  const presentationText = useTranslations("Presentation");
-  const te = useTranslations("Errors");
-  const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
-  const dispatch = useAppDispatch();
-  const mounted = useMounted();
-  const token = useAppSelector((s) => s.auth.token);
-  const { role, user, fullName, readOnlySession } = useRole();
-  const { logout } = useLogout(token ?? "");
-  const apps = useSuiteApps(mounted ? token : null);
-
-  const at = (path: string) => (path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(path + "/"));
-  const visible = NAV_ITEMS.filter((i) => i.roles.includes(role));
-  // Only the most specific item is current: on /customers/pipeline that's the pipeline, not Customers.
-  const current = visible.filter((i) => at(i.path)).sort((a, b) => b.path.length - a.path.length)[0]?.path;
-  const items = visible.map((i) => ({
-    path: i.path,
-    frozen: Boolean(i.frozen),
-    label: tn(getNavLabel(i, role)),
-    href: `/${locale}${i.path === "/" ? "" : i.path}`,
-    icon: ICONS[i.path] ?? <Gift />,
-    active: i.path === current,
-  }));
-  const strip = ({ label, href, icon, active }: (typeof items)[number]) => ({ label, href, icon, active });
-  const sections: SidebarSection[] = [
-    { items: items.filter((i) => !i.frozen && SELL.includes(i.path)).map(strip) },
-    { label: t("sectionTeam"), items: items.filter((i) => !i.frozen && !SELL.includes(i.path)).map(strip) },
-    { label: t("sectionMoving"), items: items.filter((i) => i.frozen).map(strip) },
-  ].filter((s) => s.items.length);
-  if (process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1") sections.unshift({ items: [{ label: presentationText("title"), href: `/${locale}/presentation`, icon: <ChartBar />, active: pathname === "/presentation" }] });
-
-  const signOut = async () => {
-    await logout();
-    dispatch(logoutUser());
-    window.location.assign(SOS_URL);
+  const t = useTranslations("Shell"), tn = useTranslations("nav"), ts = useTranslations("Suite"), te = useTranslations("Errors"), locale = useLocale(), pathname = usePathname(), router = useRouter(), dispatch = useAppDispatch(), token = useAppSelector(state => state.auth.token), { role, user, fullName } = useRole(), [navigationError, setNavigationError] = useState(false), [logoutError, setLogoutError] = useState(false);
+  const session = useClientSession();
+  const internal = session?.workspaceContext?.workspace.kind === "orgtik_internal";
+  const context = session?.workspaceContext;
+  const canAdmin = Boolean(context?.tools.crm?.canWrite && !context.actor.readOnly && (["owner", "admin"].includes(context.member.role) || context.tools.crm.roles.some(value => ["admin", "manager"].includes(value))));
+  const visible = NAV_ITEMS.filter(item => !item.frozen && item.roles.includes(role) && (!item.path.startsWith("/service-") || internal) && (item.path !== "/admin" || canAdmin));
+  const at = (path: string) => path === "/" ? pathname === "/" : path === "/service-catalog" ? pathname === "/catalog" || pathname.startsWith("/catalog/") || pathname === path || pathname.startsWith(path + "/") : pathname === path || pathname.startsWith(path + "/");
+  const current = visible.filter(item => at(item.path)).sort((a, b) => b.path.length - a.path.length)[0]?.path;
+  const items = visible.map(item => ({ label: tn(getNavLabel(item, role)), href: `/${locale}${item.path === "/" ? "" : item.path === "/service-catalog" ? "/catalog" : item.path}`, icon: ICONS[item.path], active: item.path === current }));
+  const sections: SidebarSection[] = [{ items: items.filter((_, index) => SELL.includes(visible[index].path)) }, { label: t("sectionServices"), items: items.filter((_, index) => visible[index].path.startsWith("/service-")) }, { label: t("sectionTeam"), items: items.filter((_, index) => !SELL.includes(visible[index].path) && !visible[index].path.startsWith("/service-")) }].filter(section => section.items.length);
+  const navigate = async (href: string) => {
+    const session = readClientSession();
+    if (!session) { window.location.assign(href); return; }
+    try {
+      setNavigationError(false);
+      const url = new URL(href, SOS_URL), destination = url.pathname + url.search;
+      const code = await handoffCode(AUTH_API_URL, session.tokens.accessToken, "suite");
+      window.location.assign(`${SOS_URL}/auth/handoff?code=${encodeURIComponent(code)}&redirect=${encodeURIComponent(destination)}`);
+    } catch { setNavigationError(true); }
   };
-  const allowed = canAccessRoute(role, pathname);
-  // A View as session (D-017, started in SOS): say so on every page; ending it happens in SOS.
-  const banner = readOnlySession ? (
-    <BannerRegion
-      banners={[
-        {
-          kind: "staff_viewing",
-          title: t("viewingAs", { name: fullName ?? "" }),
-          description: t("viewingAsBody"),
-          action: (
-            <a href={SOS_URL} className={buttonVariants({ variant: "secondary", size: "sm" })}>
-              {t("viewingAsExit")}
-            </a>
-          ),
-        },
-      ]}
-    />
-  ) : undefined;
-  const onFrozen = items.some((i) => i.frozen && i.active);
-
-  return (
-    <SuiteShell
-      demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "sales", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
-      banner={banner}
-      rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref={apps[0]?.href ?? SOS_URL} />}
-      sidebar={<Sidebar title={ts("appName")} sections={sections} footer={sections.some((s) => s.label === t("sectionMoving")) ? <p className="px-2 text-caption text-fg-subtle">{t("movingNote")}</p> : undefined} />}
-      topBar={{
-        end: user ? (
-          <>
-            <NotificationPopover />
-            <UserMenu
-              name={fullName ?? ""}
-              email={String(user.email ?? "")}
-              avatarSrc={(user.avatar as string | undefined) ?? undefined}
-              locales={routing.locales as readonly Locale[]}
-              onLocaleChange={(next) => router.replace(pathname, { locale: next })}
-              onSignOut={signOut}
-            >
-              <MenuLinkItem href={`/${locale}/profile`} icon={<UserCircle />}>
-                {t("profile")}
-              </MenuLinkItem>
-            </UserMenu>
-          </>
-        ) : null,
-      }}
-    >
-      <div className="mx-auto w-full max-w-[1600px] p-4 md:p-6">
-        {onFrozen ? <p className="mb-4 rounded-field bg-sunken px-3 py-2 text-body-sm text-fg-muted">{t("movingBanner")}</p> : null}
-        {allowed ? children : <NoPermissionState titleAs="h1" title={te("noAccessTitle")} description={te("noAccessBody")} />}
-      </div>
-    </SuiteShell>
-  );
+  const signOut = async () => { setLogoutError(false); try { const currentToken = readClientSession()?.tokens.accessToken || token; if (currentToken) await signOutSession(AUTH_API_URL, currentToken); dispatch(logoutUser()); window.location.assign(SOS_URL); } catch { setLogoutError(true); } };
+  return <SharedSuiteFrame apiUrl={API_URL} sosUrl={SOS_URL} currentTool="crm" currentScope="sales" currentHref={`/${locale}`} width="wide" onNavigate={href => void navigate(href)}
+    demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "sales", onLocaleChange: next => router.replace(pathname, { locale: next }) }}
+    sidebar={<Sidebar title={ts("appName")} sections={sections} />}
+    userMenu={user ? <UserMenu name={fullName || ""} email={String(user.email || "")} avatarSrc={typeof user.avatar === "string" ? user.avatar : undefined} locales={routing.locales as readonly Locale[]} onLocaleChange={next => router.replace(pathname, { locale: next })} onSignOut={signOut}><MenuLinkItem href={`/${locale}/profile`} icon={<UserCircle />}>{t("profile")}</MenuLinkItem></UserMenu> : null}>
+    {logoutError ? <p role="alert" className="mb-4 text-body-sm text-danger">{te("logoutUnavailable")}</p> : null}{navigationError ? <p role="alert" className="mb-4 text-body-sm text-danger">{te("handoffUnavailable")}</p> : null}<CrmScopeGate>{canAccessRoute(role, pathname) ? children : <NoPermissionState titleAs="h1" title={te("noAccessTitle")} description={te("noAccessBody")} />}</CrmScopeGate>
+  </SharedSuiteFrame>;
 }

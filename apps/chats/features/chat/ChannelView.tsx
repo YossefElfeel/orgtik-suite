@@ -10,9 +10,10 @@
 import { useBackToClose, useEscape } from "@/lib/useDismiss";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useSearchParams,useRouter } from "next/navigation";
 import { Hash, Lock, PushPin, UserPlus, UsersThree, ArrowLeft, VideoCamera } from "@phosphor-icons/react";
 import { Message } from "./Message";
+import {ChannelTools} from "./ChatFeatures";
 import { Composer } from "./Composer";
 import { ThreadPanel } from "./ThreadPanel";
 import { ChannelDetailsPane } from "./ChannelDialogs";
@@ -36,6 +37,7 @@ import { useTitle } from "@/lib/useTitle";
 const GROUPING_WINDOW_MS = 5 * 60_000;
 
 export function ChannelView({ channelId }: { channelId: string }) {
+  const params=useSearchParams(),targetMessage=params.get("message"),replies=useWorkspace(s=>s.threadReplies);
   const [detailsOpen, setDetailsOpen] = useState(false);
   useBackToClose(detailsOpen, () => setDetailsOpen(false));
   useEscape(detailsOpen, () => setDetailsOpen(false));
@@ -64,7 +66,8 @@ export function ChannelView({ channelId }: { channelId: string }) {
      must not drag the view back to it. */
   const landed = useRef<string | null>(null);
   useEffect(() => {
-    const hash = typeof window === "undefined" ? "" : window.location.hash.slice(1);
+    const reply=Object.values(replies).flat().find(m=>m.id===targetMessage);if(reply?.threadId&&openThreadId!==reply.threadId){openThread(reply.threadId);return;}
+    const hash = typeof window === "undefined" ? "" : new URLSearchParams(window.location.search).get("message")||window.location.hash.slice(1);
     const target = hash ? document.getElementById(hash) : null;
     if (target && landed.current !== hash) {
       landed.current = hash;
@@ -75,7 +78,7 @@ export function ChannelView({ channelId }: { channelId: string }) {
     }
     if (!hash || landed.current === hash) bottomRef.current?.scrollIntoView({ block: "end" });
     return undefined;
-  }, [messages.length, channelId]);
+  }, [messages.length,channelId,targetMessage,replies,openThreadId,openThread]);
 
   /* Group consecutive messages from the same person within five minutes, and
      insert a day divider when the date changes. */
@@ -140,11 +143,11 @@ export function ChannelView({ channelId }: { channelId: string }) {
 
         {pinned.length > 0 && (
           <div
-            className="flex items-center gap-2 px-4 py-1.5"
-            style={{ background: "var(--color-surface-sunken)", borderBottom: "1px solid var(--color-hairline)" }}
+            className={"flex items-center gap-2 px-4 py-1.5 "+("ch-background-314b28"+' '+"ch-border-bottom-9cb2f4")}
+
           >
-            <PushPin size={12} weight="fill" aria-hidden="true" style={{ color: "var(--color-ink-muted)" }} />
-            <span className="truncate text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+            <PushPin size={12} weight="fill" aria-hidden="true" className={"ch-color-4a0211"}  />
+            <span className={"truncate text-caption "+("ch-color-4a0211")} >
               {pinned[0]?.text}
             </span>
           </div>
@@ -186,6 +189,7 @@ export function ChannelView({ channelId }: { channelId: string }) {
           <div ref={bottomRef} />
         </div>
 
+        <ChannelTools channelId={channelId}/>
         <Composer
           channelId={channelId}
           draftKey={channelId}
@@ -203,8 +207,8 @@ export function ChannelView({ channelId }: { channelId: string }) {
           on a phone, where Back and Close return to the messages. */}
       {(openThreadId || detailsOpen) && (
         <div
-          className="fixed inset-0 z-[60] flex xl:static xl:inset-auto xl:z-auto xl:w-[380px] xl:shrink-0"
-          style={{ borderInlineStart: "1px solid var(--color-hairline)", background: "var(--color-surface)" }}
+          className={"fixed inset-0 z-[60] flex xl:static xl:inset-auto xl:z-auto xl:w-[380px] xl:shrink-0 "+("ch-border-inline-start-c791b2"+' '+"ch-background-751d03")}
+
         >
           {/* Details was asked for last, so it shows; closing it brings the
               thread back rather than losing it. */}
@@ -234,13 +238,13 @@ function ChannelStart({ channelId, onAddPeople }: { channelId: string; onAddPeop
   return (
     <div className="px-4 pb-4 pt-6">
       <h2
-        className="text-[20px] font-semibold tracking-[-0.02em]"
-        style={{ color: "var(--color-ink)" }}
+        className={"text-title-sm font-semibold tracking-[-0.02em] "+("ch-color-7f7330")}
+
       >
         {/* A channel name keeps its # on the right side in any direction. */}
         <bdi>{isDm ? channel.name : `#${channel.name}`}</bdi>
       </h2>
-      <p className="mt-1.5 max-w-[62ch] text-[13.5px] leading-relaxed" style={{ color: "var(--color-ink-muted)" }}>
+      <p className={"mt-1.5 max-w-[62ch] text-body-sm leading-relaxed "+("ch-color-4a0211")} >
         {isDm
           ? t("chat.startDm", "This is the beginning of your conversation with {name}.", {
               name: channel.name,
@@ -256,7 +260,7 @@ function ChannelStart({ channelId, onAddPeople }: { channelId: string; onAddPeop
       {!isDm && (
         <div className="mt-3 flex flex-wrap items-center gap-2.5">
           <AvatarStack people={members} size={28} max={6} />
-          <span className="text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <span className={"text-body-sm "+("ch-color-4a0211")} >
             {t("chat.memberCount", "{n} members", { n: members.length })}
           </span>
           <Button size="sm" onClick={onAddPeople}>
@@ -322,15 +326,15 @@ function ChannelHeader({
 
   return (
     <header
-      className="flex shrink-0 items-center justify-between gap-3 px-4 py-2.5"
-      style={{ background: "transparent" }}
+      className={"flex shrink-0 items-center justify-between gap-3 px-4 py-2.5 "+("ch-background-a8869d")}
+
     >
       {/* Below lg there is no sidebar to click, so the header carries the way
           back to the list of conversations. */}
       <Link
         href="/hq/chat"
-        className="hq-btn me-1 inline-flex items-center gap-1 text-[12.5px] font-medium lg:hidden"
-        style={{ color: "var(--color-ink-muted)", minHeight: 32, paddingInline: 6, borderRadius: "var(--radius-control)" }}
+        className={"hq-btn me-1 inline-flex items-center gap-1 text-body-sm font-medium lg:hidden "+("ch-color-4a0211"+' '+"ch-min-height-dace99"+' '+"ch-padding-inline-e566f8"+' '+"ch-border-radius-332348")}
+
         aria-label={t("chat.backToList", "Back to conversations")}
       >
         <ArrowLeft size={14} weight="bold" aria-hidden="true" />
@@ -346,15 +350,15 @@ function ChannelHeader({
             size={28}
           />
         ) : (
-          <Icon size={16} weight="bold" aria-hidden="true" style={{ color: "var(--color-ink-muted)" }} />
+          <Icon size={16} weight="bold" aria-hidden="true" className={"ch-color-4a0211"}  />
         )}
         <div className="min-w-0">
-          <h1 className="hq-title truncate" style={{ color: "var(--color-ink)" }}>
+          <h1 className={"hq-title truncate "+("ch-color-7f7330")} >
             <bdi>{channel.kind === "public" || channel.kind === "private" ? `#${channel.name}` : channel.name}</bdi>
           </h1>
         </div>
         {channel.topic && (
-          <span className="hidden truncate text-[12.5px] md:inline" style={{ color: "var(--color-ink-muted)" }}>
+          <span className={"hidden truncate text-body-sm md:inline "+("ch-color-4a0211")} >
             <bdi>{channel.topic}</bdi>
           </span>
         )}
@@ -364,7 +368,7 @@ function ChannelHeader({
         {/* On a phone the count gives its room to the channel's name; the
             conversation's opening line still carries it. */}
         {!isDm && (
-          <span className="tabular hidden text-[12.5px] sm:inline" style={{ color: "var(--color-ink-muted)" }}>
+          <span className={"tabular hidden text-body-sm sm:inline "+("ch-color-4a0211")} >
             {t("chat.memberCount", "{n} members", { n: channel.memberIds.length })}
           </span>
         )}
@@ -386,11 +390,11 @@ function ChannelHeader({
 function DayDivider({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 px-4 py-3">
-      <span className="h-px flex-1" style={{ background: "var(--color-hairline)" }} />
-      <span className="text-[11.5px] font-medium" style={{ color: "var(--color-ink-subtle)" }}>
+      <span className={"h-px flex-1 "+("ch-background-423228")}  />
+      <span className={"text-caption font-medium "+("ch-color-094083")} >
         {label}
       </span>
-      <span className="h-px flex-1" style={{ background: "var(--color-hairline)" }} />
+      <span className={"h-px flex-1 "+("ch-background-423228")}  />
     </div>
   );
 }

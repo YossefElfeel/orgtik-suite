@@ -44,12 +44,14 @@ module.exports = function crm(S) {
   // Website leads (D-028): the website's contact and quote forms post here, server to server (the
   // WM mock forwards its public form). An existing email isn't duplicated: the request is noted on
   // that lead. The answer never says more than the id and whether it was new.
-  function publicRoutes(app) {
-    app.post("/api/leads/intake", (req, res) => {
-      const b = req.body || {};
+  function receiveIntake(b, { sourceKey, serviceRequestId } = {}) {
       const email = String(b.email || "").trim().toLowerCase();
       const name = String(b.name || "").trim();
-      if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(422).json({ success: false, statusCode: 422, code: "invalid", message: "A name and a valid email are required" });
+      if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) throw Object.assign(new Error('A name and a valid email are required.'), { status: 422, code: 'invalid_lead' });
+      if (sourceKey) {
+        const previous = db.customers.find(row => row.intakeReceipts?.[sourceKey]);
+        if (previous) return { leadId: previous.id, duplicate: previous.intakeReceipts[sourceKey].duplicate };
+      }
       const ts = nowIso();
       const context = { page: b.page || null, bundle: b.bundle || null, utm: b.utm && typeof b.utm === "object" ? b.utm : null, message: b.message ? String(b.message).slice(0, 2000) : null, locale: b.locale || null, receivedAt: ts };
       const existing = db.customers.find((c) => String(c.email || "").toLowerCase() === email);
@@ -57,7 +59,9 @@ module.exports = function crm(S) {
         existing.notes = existing.notes || [];
         existing.notes.unshift({ id: H.newId(), note: `Website request${context.page ? ` from ${context.page}` : ""}${context.message ? `: ${context.message}` : ""}`, createdAt: ts });
         existing.lastActivityAt = ts;
-        return res.status(200).json({ success: true, statusCode: 200, message: "Lead updated", data: { leadId: existing.id, duplicate: true } });
+        if (sourceKey) { existing.intakeReceipts ??= {}; existing.intakeReceipts[sourceKey] = { duplicate: true, at: ts }; }
+        if (serviceRequestId) existing.serviceRequestIds = [...new Set([...(existing.serviceRequestIds || []), serviceRequestId])];
+        return { leadId: existing.id, duplicate: true };
       }
       const c = {
         id: H.newId(), key: null, authUserId: null, preferredLanguage: ["en", "ar", "de", "fr", "it"].includes(b.locale) ? b.locale : "en", status: "new",
@@ -68,8 +72,15 @@ module.exports = function crm(S) {
         lastActivityAt: ts, createdBy: null, createdAt: ts, updatedAt: ts,
       };
       db.customers.push(c);
+      if (sourceKey) c.intakeReceipts = { [sourceKey]: { duplicate: false, at: ts } };
+      if (serviceRequestId) c.serviceRequestIds = [serviceRequestId];
       K.notify(K.adminIds(), "lead.created", { title: "New website lead", message: `${name}${c.companyName ? ` (${c.companyName})` : ""} asked to be contacted.`, data: { leadId: c.id, customerId: c.id, source: c.source } });
-      res.status(201).json({ success: true, statusCode: 201, message: "Lead received", data: { leadId: c.id, duplicate: false } });
+      return { leadId: c.id, duplicate: false };
+  }
+  function publicRoutes(app) {
+    app.post("/api/leads/intake", (req, res, next) => {
+      try { const data = receiveIntake(req.body || {}), status = data.duplicate ? 200 : 201; res.status(status).json({ success: true, statusCode: status, message: data.duplicate ? 'Lead updated' : 'Lead received', data }); }
+      catch (error) { next(error); }
     });
   }
 
@@ -253,6 +264,7 @@ module.exports = function crm(S) {
 
   // ------------------------------------------------------------------ routes
   function routes(app) {
+    require('./v3')(S).routes(app);
     const staffRoles = (req, res) => K.requireRoles(req, res, ["admin", "manager", "salesman"], "Customers cannot access this resource");
     const approvers = (req, res) => K.requireRoles(req, res, ["admin", "manager"], "Only admins and managers can do this");
     const adminOnly = (req, res) => K.requireRoles(req, res, ["admin"], "Only admins can manage users");
@@ -655,5 +667,5 @@ module.exports = function crm(S) {
     });
   }
 
-  return { routes, publicRoutes, customerOut, customerDetail, salesmanDetail, staffOut, customerSummary, salesmanStats, LEAD_STATES };
+  return { routes, publicRoutes, receiveIntake, customerOut, customerDetail, salesmanDetail, staffOut, customerSummary, salesmanStats, LEAD_STATES };
 };

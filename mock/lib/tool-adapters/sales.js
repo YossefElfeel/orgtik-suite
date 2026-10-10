@@ -81,6 +81,39 @@ function createWorkspaceRuntime(input, appModule) {
     for (const key of Object.keys(S.db)) delete S.db[key]; Object.assign(S.db, clone(command.snapshot.data.db));
     S.profilePrefs = clone(command.snapshot.data.profilePrefs);
   }
-  return { router, exportSnapshot, bootstrap, usage: () => { open(); return [{ key: "contacts", used: S.db.customers.length }, { key: "projects", used: S.db.projects.length }, { key: "leads", used: S.db.leads.length }]; }, transferOwnership, applyCommitted, dueTransitions: () => { open(); return S.db.subscriptions.flatMap(row => row.status === "cancelled" ? [] : row.installments.filter(item => !item.invoiceId && item.status !== "paid" && new Date(item.dueDate).getTime() <= (input.clock.nowMs?.() ?? input.clock.now()) + 30 * 864e5).map(item => ({ kind: "sales.schedule.due", subscriptionId: row.id, installmentNumber: item.number }))); }, stageDueTransitions() { open(); S.billing.refreshSchedules({ system: true }); }, close() { closed = true; S.io = null; } };
+  function receiveWebsiteIntake(payload, metadata) {
+    open();
+    if (workspace.id !== 'ws_orgtik' || !metadata?.sourceKey) throw Object.assign(new Error('OrgTik intake authority is required.'), { status: 403 });
+    const result = S.crm.receiveIntake(payload, metadata);
+    if (!metadata.serviceRequestId) return result;
+    const customer = S.db.customers.find(row => row.id === result.leadId), receipt = customer.intakeReceipts[metadata.sourceKey];
+    let project = receipt.projectId && S.db.projects.find(row => row.id === receipt.projectId);
+    if (!project) {
+      const actor = identity.users.find(person => ['admin', 'manager'].includes(S.core.appRole(person)));
+      if (!actor) throw Object.assign(new Error('An admitted CRM intake owner is required.'), { status: 503, code: 'orgtik_crm_unavailable' });
+      const created = S.deals.createProject({ sc: { role: 'admin', user: actor, lang: 'en' } }, { customerId: customer.id, projectName: metadata.title || payload.company || payload.name, projectDescription: payload.message, projectType: 'client_project' }, { at: input.clock.iso(input.clock.nowMs?.() ?? input.clock.now()), status: 'confirmed', actorUser: actor });
+      if (created.error) throw Object.assign(new Error(created.error), { status: 422, code: 'crm_deal_invalid' });
+      project = created.value;
+      project.source = { kind: 'website_order', reference: metadata.reference, serviceRequestId: metadata.serviceRequestId };
+      project.paidSnapshot = clone(metadata.paidSnapshot);
+      receipt.projectId = project.id;
+    }
+    return { ...result, projectId: project.id };
+  }
+  function suiteFeed(context) {
+    const base = bootstrap(context);
+    if (base.state === 'no_access') return base;
+    const user = identity.findUser(context.actor.effectiveUserId), role = S.core.appRole(user), req = { sc: { user, role, staff: S.core.staffByAuth(user.id), customer: S.core.customerByAuth(user.id), lang: 'en', displayCurrency: null } }, owned = require('../../apps/sales/v3')(S).bootstrap(req);
+    const contacts = new Set(owned.contacts.map(row => row.id)), projects = new Set(base.projects.map(row => row.id));
+    const notifications = S.db.notifications.filter(row => row.userId === user.id && (!row.data?.customerId || contacts.has(row.data.customerId)) && (!row.data?.projectId || projects.has(row.data.projectId))).map(row => ({ id: row.id, title: row.title, message: row.message, createdAt: row.createdAt, readAt: row.readAt, path: row.data?.projectId ? `/projects/${encodeURIComponent(row.data.projectId)}` : row.data?.customerId ? `/customers/${encodeURIComponent(row.data.customerId)}` : '/dashboard' }));
+    return { ...base, contacts: owned.contacts.map(row => ({ id: row.id, fullName: row.fullName, companyId: row.companyId, companyName: row.companyName, email: row.email, status: row.status, currency: row.currency, tags: row.tags, attribution: row.attribution, marketingConsent: row.marketingConsent })), projects: owned.projects.map(row => ({ id: row.id, projectName: row.projectName, status: row.status, contactId: row.contactId, won: row.won, value: row.value, estimatedValue: row.estimatedValue, currency: row.currency })), companies: owned.companies.map(row => ({ id: row.id, name: row.name })), activities: owned.activities.map(row => ({ id: row.id, title: row.text, actor: row.actorName, at: row.at, action: row.kind, path: `/customers/${encodeURIComponent(row.contactId)}` })), notifications };
+  }
+  return { router, exportSnapshot, bootstrap, suiteFeed, receiveWebsiteIntake,
+    provisioningCandidate: (context, id) => { open(); return require('../../apps/sales/v3')(S).provisioningCandidate(context, id); },
+    recordProvisioning: (context, id, receipt) => { open(); return require('../../apps/sales/v3')(S).recordProvisioning(context, id, receipt); },
+    setMarketingConsent: (context, id, value) => { bootstrap(context); return require('../../apps/sales/v3')(S).setMarketingConsent(context, id, value); },
+    marketingContact: (context, id) => { bootstrap(context); return require('../../apps/sales/v3')(S).marketingContact(context, id); },
+    createCampaignLead: (context, candidate, id, body) => { bootstrap(context); return require('../../apps/sales/v3')(S).createCampaignLead(context, candidate, id, body); },
+    usage: () => { open(); return [{ key: "contacts", used: S.db.customers.length }, { key: "projects", used: S.db.projects.length }, { key: "leads", used: S.db.leads.length }]; }, transferOwnership, applyCommitted, dueTransitions: () => { open(); return S.db.subscriptions.flatMap(row => row.status === "cancelled" ? [] : row.installments.filter(item => !item.invoiceId && item.status !== "paid" && new Date(item.dueDate).getTime() <= (input.clock.nowMs?.() ?? input.clock.now()) + 30 * 864e5).map(item => ({ kind: "sales.schedule.due", subscriptionId: row.id, installmentNumber: item.number }))); }, stageDueTransitions() { open(); S.billing.refreshSchedules({ system: true }); }, close() { closed = true; S.io = null; } };
 }
 module.exports = { createWorkspaceRuntime, SCHEMA, COUNTERS, LISTS };

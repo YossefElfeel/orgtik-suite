@@ -28,12 +28,8 @@ export function PrototypeBadge() {
   const t = useT();
   return (
     <span
-      className="hidden select-none whitespace-nowrap px-2 py-0.5 text-[10.5px] font-medium xl:inline"
-      style={{
-        background: "var(--color-paper-900)",
-        color: "var(--color-paper-200)",
-        borderRadius: "var(--radius-chip)",
-      }}
+      className={"hidden select-none whitespace-nowrap px-2 py-0.5 text-micro font-medium xl:inline "+("ch-background-db4104"+' '+"ch-color-64fbe7"+' '+"ch-border-radius-189003")}
+
     >
       {t("shell.prototype", "Prototype - mock data")}
     </span>
@@ -79,30 +75,24 @@ export function ToastHost() {
       {toasts.map((toast) => (
         <div
           key={toast.id}
-          className={`hq-floating hq-rise ${toast.kind === "knock" ? "hq-knock-pulse" : ""}`}
-          style={{ borderRadius: "var(--radius-card)", padding: 13 }}
+          className={(`hq-floating hq-rise ${toast.kind === "knock" ? "hq-knock-pulse" : ""}`)+" "+("ch-border-radius-8d459a"+' '+"ch-padding-40037d")}
+
         >
           <div className="flex items-start gap-2.5">
             {toast.kind === "knock" && (
               <span
                 aria-hidden="true"
-                className="flex shrink-0 items-center justify-center"
-                style={{
-                  width: 30,
-                  height: 30,
-                  borderRadius: "var(--radius-control)",
-                  background: "var(--color-accent-soft)",
-                  color: "var(--color-ink-brand)",
-                }}
+                className={"flex shrink-0 items-center justify-center "+("ch-width-322e3f"+' '+"ch-height-5a5909"+' '+"ch-border-radius-332348"+' '+"ch-background-1416a8"+' '+"ch-color-55f463")}
+
               >
                 <HandWaving size={16} weight="fill" />
               </span>
             )}
             <div className="min-w-0 flex-1">
-              <p className="text-[13px] font-semibold" style={{ color: "var(--color-ink)" }}>
+              <p className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
                 {say(toast.title)}
               </p>
-              <p className="mt-0.5 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+              <p className={"mt-0.5 text-body-sm "+("ch-color-4a0211")} >
                 {say(toast.body)}
               </p>
             </div>
@@ -112,7 +102,7 @@ export function ToastHost() {
               iconOnly
               label={t("shell.dismiss", "Dismiss")}
               onClick={() => dismiss(toast.id)}
-              style={{ color: "var(--color-ink-subtle)" }}
+              className={"ch-color-094083"}
             >
               <X size={13} weight="bold" aria-hidden="true" />
             </Button>

@@ -1,0 +1,131 @@
+{
+  "scope": "Ordinary Files routes, actual signed workspace identities, persisted packaged assets and protected shares in owned offset700 sandbox.",
+  "mode": "functional",
+  "checks": [
+    {
+      "name": "Exactly one ordinary shared search and bell",
+      "pass": true
+    },
+    {
+      "name": "No presentation navigation",
+      "pass": true
+    },
+    {
+      "name": "Ordinary folder creation persists actual folder",
+      "pass": true
+    },
+    {
+      "name": "Wizard creates an immutable persisted packaged sample",
+      "pass": true
+    },
+    {
+      "name": "Ordinary comment is persisted and attributed",
+      "pass": true
+    },
+    {
+      "name": "Per-person comment/edit grants persist without raising guest role",
+      "pass": true
+    },
+    {
+      "name": "Actual recipient mock notice reaches suite feed",
+      "pass": true
+    },
+    {
+      "name": "Comment grant allows actual editor comment but denies rename",
+      "pass": true
+    },
+    {
+      "name": "Guest remains read-only despite edit ACL",
+      "pass": true
+    },
+    {
+      "name": "Protected byte response /api/v1/files/3b4d73bd-9ba3-4d26-9262-4e36053d3411/versions/v1/download",
+      "pass": true
+    },
+    {
+      "name": "Protected byte response /api/v1/files/3b4d73bd-9ba3-4d26-9262-4e36053d3411/versions/v1/download",
+      "pass": true
+    },
+    {
+      "name": "New packaged version leaves v1 bytes unchanged",
+      "pass": true
+    },
+    {
+      "name": "Protected byte response /api/v1/files/3b4d73bd-9ba3-4d26-9262-4e36053d3411/versions/v2/download",
+      "pass": true
+    },
+    {
+      "name": "Current head has different actual bytes",
+      "pass": true
+    },
+    {
+      "name": "Ordinary duplicate creates a separate actual v1 record",
+      "pass": true
+    },
+    {
+      "name": "Name collision requires explicit Keep both and persists chosen resolution",
+      "pass": true
+    },
+    {
+      "name": "Starred collection uses actual person preference",
+      "pass": true
+    },
+    {
+      "name": "Recent collection follows actual file opens",
+      "pass": true
+    },
+    {
+      "name": "Saved file filters persist per actual person",
+      "pass": true
+    },
+    {
+      "name": "Density uses suite person preferences",
+      "pass": true
+    },
+    {
+      "name": "Sheets render actual protected packaged preview bytes",
+      "pass": true
+    },
+    {
+      "name": "Slides render actual protected packaged preview bytes",
+      "pass": true
+    },
+    {
+      "name": "Current storage quota disables packaged add",
+      "pass": true
+    },
+    {
+      "name": "Server independently rejects quota overflow",
+      "pass": true
+    },
+    {
+      "name": "Visible export includes versions, comments and ACL without link secrets",
+      "pass": true
+    },
+    {
+      "name": "Actual suite activity and search providers include current file",
+      "pass": true
+    },
+    {
+      "name": "No unexpected browser runtime or console errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    "library.png",
+    "sample-review.png",
+    "inspector.png",
+    "access.png",
+    "comment-role.png",
+    "guest-read-only.png",
+    "version-success.png",
+    "starred.png",
+    "sheet-preview.png",
+    "slide-preview.png",
+    "quota-full.png",
+    "export.png"
+  ],
+  "errors": [],
+  "completed": true
+}

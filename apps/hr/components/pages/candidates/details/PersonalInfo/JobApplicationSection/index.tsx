@@ -1,5 +1,5 @@
 import { Briefcase, Buildings as Building2, ChartBar as BarChart2, CheckCircle as CheckCircle2, CurrencyDollar as DollarSign } from "@phosphor-icons/react";
-import { InfoCard } from "@/components/ui/info-card";
+import { InfoCard } from "@/components/shared/EmployeeFacts";
 import type { IJobApplication } from "@/types/job";
 import { useFormatter, useTranslations } from "next-intl";
 

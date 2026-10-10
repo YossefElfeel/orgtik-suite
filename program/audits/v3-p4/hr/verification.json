@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-10",
+  "sharedBase": "76bd23f",
+  "frozenClock": "2026-10-07T09:00:00.000Z",
+  "runtime": {
+    "session": 16746,
+    "stage": "presentation-rMneB0",
+    "web": [
+      3900,
+      3901,
+      3904
+    ],
+    "api": [
+      7900,
+      7901,
+      7904,
+      7908
+    ],
+    "icons": 7999,
+    "connections": 7977
+  },
+  "validation": {
+    "productionBuild": "passed",
+    "typecheck": "passed",
+    "catalogs": {
+      "status": "passed",
+      "languages": [
+        "en",
+        "ar",
+        "de",
+        "fr",
+        "it"
+      ]
+    },
+    "retainedAndOwnerDomainTests": {
+      "passed": 50,
+      "failed": 0
+    },
+    "generatedRouteInventory": 825
+  },
+  "reports": {
+    "flow": {
+      "checks": 23,
+      "captures": 0,
+      "completed": true
+    },
+    "browser": {
+      "checks": 296,
+      "captures": 96,
+      "completed": true
+    },
+    "states": {
+      "checks": 7,
+      "captures": 6,
+      "completed": true
+    },
+    "ordinary-routes": {
+      "checks": 83,
+      "captures": 6,
+      "completed": true
+    },
+    "public": {
+      "checks": 35,
+      "captures": 8,
+      "completed": true
+    },
+    "public-readonly": {
+      "checks": 3,
+      "captures": 0,
+      "completed": true
+    },
+    "preferences": {
+      "checks": 3,
+      "captures": 1,
+      "completed": true
+    }
+  },
+  "totals": {
+    "scriptedChecks": 450,
+    "unitTests": 50,
+    "combinedChecksAndTests": 500,
+    "acceptedCaptures": 117
+  },
+  "sourceLimits": [
+    "Mail, letters, offer/signature and bank formats are simulated/sample prototype outputs.",
+    "Bulk import/candidate Hire store real pending invitations with explicit separate seat assignment.",
+    "Remaining mechanical compound/RHF/table adapters are described in README; original visual kits and alias-only wrappers are removed."
+  ],
+  "remainingActualGaps": []
+}

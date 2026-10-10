@@ -7,7 +7,7 @@ import { Button, ErrorState, LoadingState } from "@orgtik/ui";
 import { API_URL } from "@/constants/env";
 import { useAppDispatch } from "@/redux/app/hooks";
 import { switchSession } from "@/redux/features/auth/authThunks";
-import { safeRedirect } from "@/lib/safe-redirect";
+import { adaptiveEntry } from "@/lib/adaptive-entry";
 import type { IUser } from "@/types/user";
 
 export default function AuthPage() {
@@ -16,8 +16,8 @@ export default function AuthPage() {
   const t = useTranslations("Auth");
   const dispatch = useAppDispatch();
   const { confirm, success } = useAuthSuccess();
-  const first = useRef<{ code: string | null; redirect: string } | null>(null);
-  if (!first.current) first.current = { code: searchParams.get("code"), redirect: safeRedirect(searchParams.get("redirect")) };
+  const first = useRef<{ code: string | null; redirect: string | null } | null>(null);
+  if (!first.current) first.current = { code: searchParams.get("code"), redirect: searchParams.get("redirect") };
   const handoff = useHandoffSession<IUser>(API_URL, "suite", first.current.code);
   const completed = useRef(false);
   useEffect(() => {
@@ -25,7 +25,7 @@ export default function AuthPage() {
     completed.current = true;
     const value = handoff.session;
     dispatch(switchSession({ ...value, scopes: value.scopes.map(scope => ({ ...scope, permissions: scope.permissions || [] })) }));
-    confirm(() => router.replace(first.current!.redirect));
+    confirm(() => router.replace(adaptiveEntry(value.workspaceContext, first.current!.redirect)));
   }, [handoff.session, dispatch, router, confirm]);
   if (success) return success;
   if (handoff.error) {

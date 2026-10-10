@@ -12,7 +12,7 @@ export const OUT = path.join(PROGRAM, "audits", "website");
 export const ROUTES_FILE = path.join(OUT, "routes.json");
 
 const require = createRequire(import.meta.url);
-const config = require(path.join(WORKSPACE, "local-dev", "config.js"));
+const config = require(path.join(WORKSPACE, "mock", "config.js"));
 // SITE_URL points the harness at another copy of the site (the built one on tools/site/host.mjs).
 export const SITE = process.env.SITE_URL ?? config.webUrl("website");
 // SITE_DIR points at another checkout of the website (a worktree of main, for a new baseline).
@@ -141,6 +141,21 @@ export async function load(page, route) {
   await until(page, () => [...document.querySelectorAll("video")].every((v) => !v.seeking && (v.readyState >= 2 || v.networkState === 3 || !v.currentSrc)), 8000);
   // Finish in the same page-time state every run.
   if (elapsed < SETTLE_MS) await run(SETTLE_MS - elapsed);
+  await page.evaluate(async () => {
+    const roots = [document];
+    for (let index = 0; index < roots.length; index++) for (const node of roots[index].querySelectorAll('*')) if (node.shadowRoot) roots.push(node.shadowRoot);
+    await Promise.all(roots.flatMap(root => [...root.querySelectorAll('img')]).filter(img => img.complete && img.naturalWidth > 0).map(img => img.decode().catch(() => undefined)));
+    for (const video of roots.flatMap(root => [...root.querySelectorAll('video')])) {
+      // Full-page capture can trigger the site's intersection/visibility play callbacks.
+      // Keep the already approved frame visible throughout that capture.
+      video.play = () => Promise.resolve();
+      video.addEventListener('play', () => video.pause());
+    }
+  });
+  // A late autoplay callback can resume media while the final page-clock advance runs.
+  // Seek after that advance too, so both sides capture the same decoded frame.
+  await page.evaluate(() => { for (const video of document.querySelectorAll('video')) { video.pause(); try { video.currentTime = 0; } catch {} } });
+  await until(page, () => [...document.querySelectorAll('video')].every(video => video.paused && !video.seeking && (video.readyState >= 2 || video.networkState === 3 || !video.currentSrc)), 8000);
   await realWait(150); // let the last frame paint
   return rendered;
 }

@@ -9,7 +9,7 @@ import { Button, ErrorState, LoadingState } from "@orgtik/ui";
 import { API_URL } from "@/constants/env";
 import { useAppDispatch } from "@/redux/app/hooks";
 import { switchSession } from "@/redux/features/auth/authThunks";
-import { safeRedirect } from "@/lib/safe-redirect";
+import { adaptiveEntry } from "@/lib/adaptive-entry";
 import { IScopeItem, ITokens, IUser } from "@/types/user";
 import type { WorkspaceContext, StaffAccess } from "@orgtik/ui/auth";
 
@@ -21,8 +21,8 @@ export default function HandoffPage() {
   const [attempt, setAttempt] = useState(0);
   const [failure, setFailure] = useState<"expired" | "unavailable" | null>(null);
   const session = useRef<ITokens | null>(null);
-  const first = useRef<{ code: string | null; redirect: string } | null>(null);
-  if (!first.current) first.current = { code: searchParams.get("code"), redirect: safeRedirect(searchParams.get("redirect")) };
+  const first = useRef<{ code: string | null; redirect: string | null } | null>(null);
+  if (!first.current) first.current = { code: searchParams.get("code"), redirect: searchParams.get("redirect") };
   const started = useRef(-1);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function HandoffPage() {
       const { user, scopes, workspaceContext, staffAccess } = body.data as { user: IUser; scopes: IScopeItem[]; workspaceContext: WorkspaceContext | null; staffAccess: StaffAccess | null };
       if (!user?.id || !Array.isArray(scopes)) throw 503;
       dispatch(switchSession({ user, tokens, scopes, workspaceContext, staffAccess }));
-      router.replace(first.current!.redirect);
+      router.replace(adaptiveEntry(workspaceContext, first.current!.redirect));
     };
     complete().catch((status) => setFailure(status === 400 || status === 401 || status === 403 ? "expired" : "unavailable"));
   }, [attempt, dispatch, router]);

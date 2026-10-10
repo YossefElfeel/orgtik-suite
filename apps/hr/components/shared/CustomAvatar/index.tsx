@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/bindings/avatar";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
@@ -75,7 +75,7 @@ function CustomAvatar({
           )}
         >
           <AvatarImage
-            src={imgSrc || "https://github.com/shadcn.png"}
+            src={imgSrc || ""}
             alt={name}
           />
           <AvatarFallback>{fallbackText}</AvatarFallback>

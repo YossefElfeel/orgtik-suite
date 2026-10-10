@@ -40,6 +40,7 @@ const ROLE_DEFS = [
 
 // Runtime state (filled in routes()).
 let db = null;
+let v3 = null;
 let ctx = null;
 let identity = null;
 let util = null;
@@ -216,6 +217,7 @@ function boardTask(t) {
   return {
     id: t.id, columnId: t.sectionId, order: t.order, title: t.title, description: t.description ?? null, priority: t.priority,
     dueDate: t.dueDate, attachmentsCount: taskAttachments(t.id).length, commentsCount: commentsOf(t.id).length,
+    ...(v3 ? v3.metadata(t) : {}),
     assignments: t.assignments.map((a) => ({ assignee: assigneeOut(a) })),
   };
 }
@@ -243,6 +245,7 @@ function fullTask(t) {
   const blocks = db.tasks.filter((x) => x.dependsOn.includes(t.id));
   const out = {
     id: t.id, title: t.title, description: t.description ?? "", priority: t.priority, status: t.status, order: t.order,
+    ...(v3 ? v3.metadata(t) : {}),
     progress: taskProgress(t), dueDate: t.dueDate, startDate: t.startDate, sectionId: t.sectionId, projectId: t.projectId,
     members: t.assignments.filter((a) => a.assigneeType === "user").map((a) => slimUser(userById(a.assigneeId))).filter(Boolean),
     createdBy: byUser(userById(t.createdById)),
@@ -277,7 +280,7 @@ function projectCard(p) {
   const taskIds = new Set(tasks.map((t) => t.id));
   const commentIds = new Set(db.comments.filter((c) => taskIds.has(c.taskId)).map((c) => c.id));
   return {
-    id: p.id, title: p.title, description: p.description, priority: p.priority, status: p.status, isPrivate: p.isPrivate,
+    id: p.id, title: p.title, description: p.description, priority: p.priority, status: p.status, isPrivate: p.isPrivate, archivedAt: p.archivedAt || null,
     teams: p.teamIds.map(teamById).filter(Boolean).map(teamMini),
     members: p.memberIds.map(userById).filter(Boolean).map(slimUser),
     // A number: the HR dashboard's Projects page renders project.progress directly (the task-manager UI uses completedTasksPercentage).
@@ -375,16 +378,18 @@ function notifyMentions(task, comment, actor) {
 }
 function setStatus(task, status, actor) {
   if (!STATUS_FLAGS.includes(status) || task.status === status) return false;
+  if (status === 'done' && !canComplete(task)) throw Object.assign(new Error('Complete this task’s dependencies first.'), { status: 409, code: 'dependency_blocked' });
   const old = task.status;
   task.status = status;
   if (status === "done") task.completedAt = nowIso();
   else if (old === "done") task.completedAt = null;
   logActivity(task, "status_changed", actor.id, {}, STATUS_LABEL[old] || old, STATUS_LABEL[status] || status);
-  const watchers = new Set([task.createdById, ...task.assignments.filter((a) => a.assigneeType === "user").map((a) => a.assigneeId)]);
+  const watchers = new Set([task.createdById, ...(task.watcherIds || []), ...task.assignments.filter((a) => a.assigneeType === "user").map((a) => a.assigneeId)]);
   for (const uid of watchers) {
     if (uid === actor.id) continue;
     pushNotification(uid, { type: "task_status_changed", group: "all", title: "Task status updated", message: `${fullName(actor)} moved "${task.title}" to ${STATUS_LABEL[status]}`, actorId: actor.id, data: { ...taskNotifData(task), status } });
   }
+  if (status === 'done') v3?.complete(task, actor);
   return true;
 }
 function renumber(sectionId) {
@@ -392,6 +397,7 @@ function renumber(sectionId) {
 }
 // Moves a task to a (real) section at a 1-based position; keeps status in sync with the section flag.
 function placeTask(task, section, order, actor) {
+  if (section.flag === 'done' && !canComplete(task)) throw Object.assign(new Error('Complete this task’s dependencies first.'), { status: 409, code: 'dependency_blocked' });
   const from = sectionById(task.sectionId);
   const others = tasksInSection(section.id).filter((t) => t.id !== task.id);
   const pos = Math.max(0, Math.min((num(order) || others.length + 1) - 1, others.length));
@@ -504,16 +510,22 @@ function routes(app, context, options = {}) {
       const match = /^\/api\/(bookmarks|teams|projects|tasks)\/(\d+)(?:\/|$)/.exec(req.path);
       const record = match && db[match[1]].find(row => row.id === Number(match[2]));
       if (record?.custodyReadOnly) return fail(res, 423, "This record awaits ownership review.");
+      const project = record && (match[1] === 'projects' ? record : match[1] === 'tasks' ? projectById(record.projectId) : null);
+      const section = /^\/api\/tasks\/sections\/(\d+)/.exec(req.path);
+      const sectionProject = section && projectById(sectionById(section[1])?.projectId);
+      if ((project?.archivedAt || sectionProject?.archivedAt) && !/^\/api\/projects\/\d+\/restore$/.test(req.path)) return fail(res, 423, 'Restore this project before making changes.');
     }
     return next();
   });
 
+  v3 = require('./tasks/v3').create({ getDb: () => db, identity, nowIso, canSeeProject, isPM, isViewerOnly, sectionForStatus, richTask, fullTask, projectCard, placeTask, setStatus, canComplete, logActivity, pushNotification, taskNotifData, me, ok, DEFAULT_SECTIONS });
+  v3.routes(app);
   // ------------------------------------------------ projects
   app.get("/api/projects", (req, res) => {
     const u = me(req, res); if (!u) return;
     // Users outside the task_manager scope (e.g. HR/finance calling from the HR dashboard's Projects page)
     // get a read-only list of the non-private projects; every detail endpoint stays restricted.
-    let list = hasAccess(u) ? visibleProjects(u) : db.projects.filter((p) => !p.isPrivate);
+    let list = (hasAccess(u) ? visibleProjects(u) : db.projects.filter((p) => !p.isPrivate)).filter(project => req.query.archived === 'true' ? Boolean(project.archivedAt) : !project.archivedAt);
     const status = clean(req.query.status);
     if (status) list = list.filter((p) => p.status === status);
     list = util.search(list, clean(req.query.search), ["title", "description"]);
@@ -750,6 +762,7 @@ function routes(app, context, options = {}) {
     }
     const project = projectById(section.projectId);
     if (!canSeeProject(project, u)) return fail(res, 403, "You don't have access to this project");
+    if (project.archivedAt) return fail(res, 423, 'Restore this project before creating tasks.');
     if (status && section.flag !== status && section.flag !== "archive") section = sectionForStatus(project.id, status) || section;
     const created = nowIso();
     const userIds = idsFrom(b, "assignedUserIds").filter((x) => userById(x));
@@ -764,10 +777,13 @@ function routes(app, context, options = {}) {
       createdById: u.id, createdAt: created, updatedAt: created, completedAt: null, assignments: [], movedAt: null,
       dependsOn: idsFrom(b, "dependsOnTaskIds").filter((x) => taskById(x)?.projectId === project.id),
     };
+    v3.patch(task, b);
+    if (task.status === 'done' && !canComplete(task)) return fail(res, 409, 'Complete this task’s dependencies first.');
     if (task.status === "done") task.completedAt = created;
     for (const uid of userIds) task.assignments.push({ id: db.nextId("assignment"), assigneeType: "user", assigneeId: uid, assignedById: u.id, assignedAt: created });
     for (const tid of teamIds) task.assignments.push({ id: db.nextId("assignment"), assigneeType: "team", assigneeId: tid, assignedById: u.id, assignedAt: created });
     db.tasks.push(task);
+    if (task.status === 'done') v3.complete(task, u);
     logActivity(task, "created", u.id);
     for (const a of task.assignments) logActivity(task, "assigned", u.id, { assigneeName: assigneeOut(a).name }, null, assigneeOut(a).name);
     for (const f of saveFiles(req, { taskId: task.id }, u.id)) logActivity(task, "attachment_added", u.id, { filename: f.originalName, filesize: f.size });
@@ -814,6 +830,7 @@ function routes(app, context, options = {}) {
     if (!guard(res, !isViewerOnly(u), "Viewers cannot edit tasks")) return;
     const b = req.body || {};
     if (b.title !== undefined) { const v = clean(b.title); if (v.length < 2) return fail(res, 400, "Task title is required"); if (v !== t.title) { logActivity(t, "updated", u.id, { field: "title" }, t.title, v); t.title = v; } }
+    v3.patch(t, b);
     if (b.description !== undefined && clean(b.description) !== (t.description || "")) { t.description = clean(b.description); logActivity(t, "updated", u.id, { field: "description" }); }
     if (PRIORITIES.includes(b.priority) && b.priority !== t.priority) { logActivity(t, "priority_changed", u.id, {}, t.priority, b.priority); t.priority = b.priority; }
     if (b.dueDate !== undefined && toIso(b.dueDate) && toIso(b.dueDate) !== t.dueDate) {
@@ -1604,6 +1621,24 @@ function routes(app, context, options = {}) {
     exportState: () => require("./tasks/runtime-state").encode(db),
     authorizeSharedTarget,
     bootstrap: user => ({ projects: visibleProjects(user).map(projectCard), teams: db.teams.filter(team => !isClient(user) || visibleTeamIds(user).has(team.id)).map(teamMini) }),
+    suiteFeed: user => {
+      const projects = visibleProjects(user), ids = new Set(projects.map(project => project.id));
+      const visible = db.tasks.filter(task => ids.has(task.projectId) && !task.deletedAt), tasks = new Map(visible.map(task => [task.id, task]));
+      return { projects: projects.map(projectCard), tasks: visible.map(task => ({ id: task.id, projectId: task.projectId, title: task.title, status: task.status, source: task.source || null })), activities: db.activities.filter(row => tasks.has(row.taskId)).map(row => { const task = tasks.get(row.taskId), actor = userById(row.userId); return { id: row.id, title: row.details?.taskTitle || task.title, action: row.action, actor: actor ? identity.fullName(actor) : undefined, at: row.createdAt, path: `/projects/${task.projectId}/lists?task-id=${task.id}` }; }), notifications: myNotifications(user).filter(row => !row.clearedAt).map(row => ({ id: row.id, title: row.title || row.message || row.type, category: row.group === 'mentions' ? 'mentions' : 'tasks', createdAt: row.createdAt, readAt: row.readAt, path: row.data?.taskId ? `/projects/${row.data.projectId}/lists?task-id=${row.data.taskId}` : '/my-tasks/lists' })) };
+    },
+    connectedProjects: user => visibleProjects(user).filter(project => !project.archivedAt).map(project => ({ ...projectCard(project), sections: boardSections(project.id).filter(section => section.flag !== 'done').map(section => ({ id: section.id, title: section.title, flag: section.flag })) })),
+    projectAudience: (user, projectId) => { const project = projectById(projectId); if (!user || !hasAccess(user) || !project || !canSeeProject(project, user)) throw Object.assign(new Error('This visible project was not found.'), { status: 404, code: 'project_not_found' }); return { isPrivate: Boolean(project.isPrivate), userIds: identity.users.filter(person => person.isActive !== false && hasAccess(person) && canSeeProject(project, person)).map(person => person.id) }; },
+    createConnectedTask: (user, payload) => {
+      const project = projectById(payload.projectId), section = sectionById(payload.sectionId);
+      const task = v3.createTask(project, section, { ...payload, assignedUserIds: payload.assignedUserIds || [user.id] }, user);
+      task.source = payload.source;
+      for (const assignment of task.assignments) pushNotification(assignment.assigneeId, { type: 'task_created', group: 'assigned', title: task.title, message: 'A connected task was created.', data: taskNotifData(task) });
+      return fullTask(task);
+    },
+    suiteExport: user => {
+      const projects = visibleProjects(user), ids = new Set(projects.map(project => project.id)), tasks = db.tasks.filter(task => ids.has(task.projectId)), taskIds = new Set(tasks.map(task => task.id));
+      return { projects: projects.map(project => ({ ...projectDetails(project), config: project.v3Config || null, templates: project.v3Templates || [] })), tasks: tasks.map(fullTask), comments: db.comments.filter(comment => taskIds.has(comment.taskId)).map(comment => ({ id: comment.id, taskId: comment.taskId, content: comment.content, createdAt: comment.createdAt })), at: nowIso() };
+    },
     usage: () => [{ key: "tasks.projects", used: db.projects.filter(project => !project.archivedAt).length }, { key: "tasks.guests", used: identity.users.filter(user => tmRoles(user).includes("viewer")).length }],
     transferOwnership: command => {
       const { fromUserId, target, operationId } = command;

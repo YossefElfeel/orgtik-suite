@@ -4,7 +4,7 @@ import { PencilSimple as Edit2 } from "@phosphor-icons/react";
 import { IconButton } from "@/components/shared/IconButton";
 import { ColumnDef } from "@tanstack/react-table";
 import CustomAvatar from "@/components/shared/CustomAvatar";
-import StatusBadge from "@/components/shared/StatusBadge";
+import StatusBadge from "@/components/bindings/EmploymentStatus";
 import { TimeOffActionDialog } from "@/components/pages/time-off/TimeOffDialog";
 import { TimeOffRequest } from "@/types/time-off";
 import { useTranslations } from "next-intl";
@@ -92,7 +92,7 @@ export const useColumns = () => {
           id={row.original.id}
           status={row.original.status}
           trigger={
-            <IconButton label={t("tooltips.viewEdit")} variant="outline-view">
+            <IconButton label={t("tooltips.viewEdit")} variant="secondary">
               <Edit2 className="size-4" />
             </IconButton>
           }

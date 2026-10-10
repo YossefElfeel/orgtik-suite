@@ -8,12 +8,16 @@ import { toast } from "@orgtik/ui";
 import { ErrorResponse } from "@/types";
 import { errorMessage, successMessage } from "@/lib/api-feedback";
 import { readClientSession, clearClientSession, refreshClientSession, SessionRequestError } from "@orgtik/ui/auth";
+import { crmApiScope } from "@/lib/api-scope";
 
 type ApiExtraOptions = {
   skipSuccessToast?: boolean;
 };
 
 export const API_TAG_TYPES = [
+  "CrmV3",
+  "ServiceCatalog",
+  "ServiceRequests",
   "Coupons",
   "Tickets",
   "Zones",
@@ -69,12 +73,14 @@ const baseQuery = fetchBaseQuery({
 // went in the reader's language (lib/api-feedback): the API's English messages and a generic
 // "Successfully done" are no longer shown. Reads don't toast: their screens show the error.
 const baseQueryWithInterceptor: typeof baseQuery = async (args, api, extraOptions) => {
+  const scope = crmApiScope();
   let result = await baseQuery(args, api, extraOptions);
   if (result.error?.status === 401 && readClientSession()?.tokens.refreshToken) {
     try { await refreshClientSession(AUTH_API_URL); result = await baseQuery(args, api, extraOptions); }
     catch (error) { if (!(error instanceof SessionRequestError) || ![401, 403].includes(error.status)) return { error: { status: 503, data: { code: "session_unavailable" } } }; }
   }
   const method = typeof args === "string" ? "GET" : args.method || "GET";
+  if (scope && scope !== crmApiScope()) return {error:{status:409,data:{code:"workspace_changed"}}};
   const body = typeof args === "string" ? undefined : args.body;
   const options = extraOptions as ApiExtraOptions | undefined;
 

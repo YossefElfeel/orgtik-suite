@@ -1,4 +1,5 @@
 "use client";
+import {geometryClass} from "@/lib/geometry";
 
 /**
  * SOMION HQ - PERSON TILE
@@ -73,7 +74,7 @@ function PersonTileBase({ userId, isMe, listenerAt, onSelect, selected, onDragSt
     <button
       ref={ref}
       type="button"
-      className="hq-tile absolute"
+      className={("hq-tile absolute "+("ch-transform-199fce"+' '+(isMe?"ch-z-index-260e02":(selected?"ch-z-index-9ff87d":"ch-z-index-25f4b6"))+' '+"ch-border-radius-189003"+' '+(isMe?"ch-cursor-dad798":"ch-cursor-3b6a3a")))+" "+(geometryClass({left:`${presence.position.x}%`,top:`${presence.position.y}%`}))}
       data-user={userId}
       onClick={() => onSelect(userId, presence.position)}
       onMouseDown={onDragStart}
@@ -89,34 +90,15 @@ function PersonTileBase({ userId, isMe, listenerAt, onSelect, selected, onDragSt
         .filter(Boolean)
         .join(", ")}
       aria-pressed={selected}
-      style={{
-        left: `${presence.position.x}%`,
-        top: `${presence.position.y}%`,
-        transform: "translate(-50%, -50%)",
-        zIndex: isMe ? 15 : selected ? 18 : 10,
-        borderRadius: "var(--radius-chip)",
-        cursor: isMe ? "grab" : "pointer",
-      }}
+
     >
       <span
-        className={`relative flex flex-col items-center gap-1 ${justMoved ? "hq-walk" : idleOn ? "hq-idle" : ""}`}
-        style={{ animationDelay: justMoved ? "0s" : `${idleDelay}s`, animationDuration: justMoved ? undefined : `${idleDuration}s` }}
+        className={(`relative flex flex-col items-center gap-1 ${justMoved ? "hq-walk" : idleOn ? "hq-idle" : ""}`)+" "+(''+' '+'')}
+
       >
         <span
-          className="relative inline-flex"
-          style={{
-            borderRadius: "var(--radius-chip)",
-            /* The signed-in person carries a brand ring so "where am I" is
-               answerable at a glance without reading a single label. */
-            boxShadow: isMe
-              ? "0 0 0 2px var(--color-accent), 0 0 0 4px var(--color-surface)"
-              : selected
-                ? "0 0 0 2px var(--color-ink), 0 0 0 4px var(--color-surface)"
-                : justMoved
-                  ? "0 0 0 3px color-mix(in srgb, var(--color-accent) 30%, transparent)"
-                  : "0 0 0 3px var(--color-surface)",
-            transition: "box-shadow var(--duration-tile) var(--ease-out-soft)",
-          }}
+          className={"relative inline-flex "+("ch-border-radius-189003"+' '+(isMe?"ch-box-shadow-e8c289":(selected?"ch-box-shadow-7c34cb":(justMoved?"ch-box-shadow-ae3a8f":"ch-box-shadow-23f02e")))+' '+"ch-transition-bba3fe")}
+
         >
           <Avatar
             name={user.name}
@@ -131,13 +113,8 @@ function PersonTileBase({ userId, isMe, listenerAt, onSelect, selected, onDragSt
         {/* Name plate. Present at rest, not on hover: a floor you have to
             hover to read is a floor you cannot scan. */}
         <span
-          className="pointer-events-none max-w-[92px] truncate px-1.5 py-0.5 text-[10.5px] font-medium"
-          style={{
-            background: "var(--color-surface)",
-            color: "var(--color-ink)",
-            borderRadius: "var(--radius-chip)",
-            boxShadow: "var(--shadow-raise)",
-          }}
+          className={"pointer-events-none max-w-[92px] truncate px-1.5 py-0.5 text-micro font-medium "+("ch-background-751d03"+' '+"ch-color-7f7330"+' '+"ch-border-radius-189003"+' '+"ch-box-shadow-03c10c")}
+
         >
           {isMe ? t("office.youTile", "You") : <bdi>{user.name.split(" ")[0]}</bdi>}
         </span>
@@ -150,15 +127,8 @@ function PersonTileBase({ userId, isMe, listenerAt, onSelect, selected, onDragSt
           >
             {(presence.muted || mutedForMe) && (
               <span
-                className="flex items-center justify-center"
-                style={{
-                  width: 16,
-                  height: 16,
-                  borderRadius: "var(--radius-chip)",
-                  background: "var(--color-surface)",
-                  color: presence.muted ? "var(--color-danger-600)" : "var(--color-ink-muted)",
-                  boxShadow: "var(--shadow-raise)",
-                }}
+                className={"flex items-center justify-center "+("ch-width-7375d5"+' '+"ch-height-30de4a"+' '+"ch-border-radius-189003"+' '+"ch-background-751d03"+' '+(presence.muted?"ch-color-1fd63a":"ch-color-4a0211")+' '+"ch-box-shadow-03c10c")}
+
                 title={presence.muted ? t("office.mutedByModerator", "Muted by a moderator") : t("office.mutedForYou", "Muted for you")}
               >
                 <MicrophoneSlash size={10} weight="bold" />
@@ -166,15 +136,8 @@ function PersonTileBase({ userId, isMe, listenerAt, onSelect, selected, onDragSt
             )}
             {presence.deafened && (
               <span
-                className="flex items-center justify-center"
-                style={{
-                  width: 16,
-                  height: 16,
-                  borderRadius: "var(--radius-chip)",
-                  background: "var(--color-surface)",
-                  color: "var(--color-danger-600)",
-                  boxShadow: "var(--shadow-raise)",
-                }}
+                className={"flex items-center justify-center "+("ch-width-7375d5"+' '+"ch-height-30de4a"+' '+"ch-border-radius-189003"+' '+"ch-background-751d03"+' '+"ch-color-1fd63a"+' '+"ch-box-shadow-03c10c")}
+
                 title={t("office.deafenedByModerator", "Deafened by a moderator")}
               >
                 <SpeakerSlash size={10} weight="bold" />
@@ -191,15 +154,8 @@ function PersonTileBase({ userId, isMe, listenerAt, onSelect, selected, onDragSt
           >
             {(presence.muted || mutedForMe) && (
               <span
-                className="flex items-center justify-center"
-                style={{
-                  width: 16,
-                  height: 16,
-                  borderRadius: "var(--radius-chip)",
-                  background: "var(--color-surface)",
-                  color: presence.muted ? "var(--color-danger-600)" : "var(--color-ink-muted)",
-                  boxShadow: "var(--shadow-raise)",
-                }}
+                className={"flex items-center justify-center "+("ch-width-7375d5"+' '+"ch-height-30de4a"+' '+"ch-border-radius-189003"+' '+"ch-background-751d03"+' '+(presence.muted?"ch-color-1fd63a":"ch-color-4a0211")+' '+"ch-box-shadow-03c10c")}
+
                 title={presence.muted ? t("office.mutedByModerator", "Muted by a moderator") : t("office.mutedForYou", "Muted for you")}
               >
                 <MicrophoneSlash size={10} weight="bold" />
@@ -207,15 +163,8 @@ function PersonTileBase({ userId, isMe, listenerAt, onSelect, selected, onDragSt
             )}
             {presence.deafened && (
               <span
-                className="flex items-center justify-center"
-                style={{
-                  width: 16,
-                  height: 16,
-                  borderRadius: "var(--radius-chip)",
-                  background: "var(--color-surface)",
-                  color: "var(--color-danger-600)",
-                  boxShadow: "var(--shadow-raise)",
-                }}
+                className={"flex items-center justify-center "+("ch-width-7375d5"+' '+"ch-height-30de4a"+' '+"ch-border-radius-189003"+' '+"ch-background-751d03"+' '+"ch-color-1fd63a"+' '+"ch-box-shadow-03c10c")}
+
                 title={t("office.deafenedByModerator", "Deafened by a moderator")}
               >
                 <SpeakerSlash size={10} weight="bold" />
@@ -229,19 +178,13 @@ function PersonTileBase({ userId, isMe, listenerAt, onSelect, selected, onDragSt
         {level > 0.02 && (
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -top-1.5 flex items-end gap-[2px]"
-            style={{ height: 10 }}
+            className={"pointer-events-none absolute -top-1.5 flex items-end gap-[2px] "+("ch-height-6a8e05")}
+
           >
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                style={{
-                  width: 2.5,
-                  height: `${Math.max(2, level * 10 * (i === 1 ? 1 : 0.65))}px`,
-                  background: "var(--color-presence-available)",
-                  borderRadius: 2,
-                  transition: "height var(--duration-state) linear",
-                }}
+                className={("ch-width-974975"+' '+"ch-background-289564"+' '+"ch-border-radius-edd97e"+' '+"ch-transition-6b3b55")+" "+(geometryClass({height:`${Math.max(2, level * 10 * (i === 1 ? 1 : 0.65))}px`}))}
               />
             ))}
           </span>

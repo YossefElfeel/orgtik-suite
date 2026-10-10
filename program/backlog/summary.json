@@ -55,7 +55,7 @@
       "topic_candidate_not_full_coverage": 196,
       "reconciliation_only": 185
     },
-    "current_gate": "P2_library_ci",
+    "current_gate": "P3_integration_and_P4_tool_cycles",
     "criterion_note": "Topic links are candidates; original criterion acceptance is not inferred from package coverage."
   }
 }

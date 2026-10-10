@@ -7,8 +7,8 @@
 //   IAttendanceDayOff,
 // } from "@/types/attendance";
 // import { cn } from "@/lib/utils";
-// import StatusBadge from "@/components/shared/StatusBadge";
-// import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+// import StatusBadge from "@/components/bindings/EmploymentStatus";
+// import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
 
 // export const useSessionColumns = () => {
 //   return [
@@ -358,8 +358,8 @@ import {
   IAttendanceDayOff,
 } from "@/types/attendance";
 import { cn } from "@/lib/utils";
-import StatusBadge from "@/components/shared/StatusBadge";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import StatusBadge from "@/components/bindings/EmploymentStatus";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/bindings/avatar";
 import { useTranslations } from "next-intl";
 
 // Helper to get initials safely

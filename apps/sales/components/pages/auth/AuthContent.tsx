@@ -6,7 +6,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useTranslations } from "next-intl";
 import { Button, ErrorState, LoadingState } from "@orgtik/ui";
-import { SOS_URL, type IUser } from "@somion/sos-bar";
+import type { IUser } from "@somion/sos-bar";
+import { SOS_URL } from "@/constants";
 import { setUser } from "@/redux/features/auth/authSlice";
 import { APP_SCOPE, AUTH_API_URL } from "@/constants";
 

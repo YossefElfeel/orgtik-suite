@@ -1,0 +1,54 @@
+{
+  "scope": "Focused HR review: real linked Tasks status drives overall badge and steps",
+  "checks": [
+    {
+      "name": "Actual employment setup flag is complete before a new task",
+      "pass": true
+    },
+    {
+      "name": "Pending capture waits for the actual visible Task reference",
+      "pass": true
+    },
+    {
+      "name": "Pending actual Task keeps overall badge Pending",
+      "pass": true
+    },
+    {
+      "name": "Same pending steps show zero percent",
+      "pass": true
+    },
+    {
+      "name": "Empty checklist ignores the employment setup completion flag",
+      "pass": true
+    },
+    {
+      "name": "No mobile document overflow before completion",
+      "pass": true
+    },
+    {
+      "name": "Actual Tasks owner record is now done",
+      "pass": true
+    },
+    {
+      "name": "Focus refresh updates overall badge to Complete",
+      "pass": true
+    },
+    {
+      "name": "Same resolved steps now show100percent",
+      "pass": true
+    },
+    {
+      "name": "No mobile overflow after completion",
+      "pass": true
+    },
+    {
+      "name": "Task truth does not rewrite manual HR completion or setup fields",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "hr-onboarding-reviewed-pending-ar-dark-390.png",
+    "hr-onboarding-reviewed-complete-ar-dark-390.png"
+  ],
+  "completed": true
+}

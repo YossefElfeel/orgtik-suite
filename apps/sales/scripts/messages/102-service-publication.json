@@ -1,0 +1,282 @@
+{
+  "Shell.sectionServices": {
+    "en": "Services",
+    "ar": "الخدمات",
+    "de": "Services",
+    "fr": "Services",
+    "it": "Servizi"
+  },
+  "ServiceCatalog.catalogSections": {
+    "en": "Service catalog sections",
+    "ar": "أقسام كتالوج الخدمات",
+    "de": "Bereiche des Servicekatalogs",
+    "fr": "Sections du catalogue",
+    "it": "Sezioni catalogo servizi"
+  },
+  "ServiceCatalog.publicationTitle": {
+    "en": "Publish service catalog",
+    "ar": "نشر كتالوج الخدمات",
+    "de": "Servicekatalog veröffentlichen",
+    "fr": "Publier le catalogue des services",
+    "it": "Pubblica catalogo servizi"
+  },
+  "ServiceCatalog.publicationHelp": {
+    "en": "Review saved changes and real price previews, then publish now or schedule a snapshot.",
+    "ar": "راجع التغييرات المحفوظة ومعاينات الأسعار الفعلية، ثم انشر الآن أو جدوِل نسخة منها.",
+    "de": "Gespeicherte Änderungen und echte Preisvorschauen prüfen, dann sofort veröffentlichen oder einen Stand planen.",
+    "fr": "Examinez les changements et aperçus tarifaires, puis publiez ou programmez une version.",
+    "it": "Rivedi modifiche e anteprime prezzi, poi pubblica o pianifica una versione."
+  },
+  "ServiceCatalog.savedChanges": {
+    "en": "Saved changes",
+    "ar": "التغييرات المحفوظة",
+    "de": "Gespeicherte Änderungen",
+    "fr": "Modifications enregistrées",
+    "it": "Modifiche salvate"
+  },
+  "ServiceCatalog.priceChange": {
+    "en": "Monthly CHF price: {before} → {after}",
+    "ar": "السعر الشهري بالفرنك: {before} ← {after}",
+    "de": "Monatspreis CHF: {before} → {after}",
+    "fr": "Prix mensuel CHF : {before} → {after}",
+    "it": "Prezzo mensile CHF: {before} → {after}"
+  },
+  "ServiceCatalog.bundleChanges": {
+    "en": "Bundle content, recommendation or translations changed.",
+    "ar": "تغيّر محتوى الباقة أو التوصية بها أو ترجماتها.",
+    "de": "Paketinhalt, Empfehlung oder Übersetzungen geändert.",
+    "fr": "Contenu, recommandation ou traductions du forfait modifiés.",
+    "it": "Contenuti, raccomandazione o traduzioni del pacchetto modificati."
+  },
+  "ServiceCatalog.noDrafts": {
+    "en": "No saved drafts",
+    "ar": "لا توجد مسودات محفوظة",
+    "de": "Keine gespeicherten Entwürfe",
+    "fr": "Aucun brouillon enregistré",
+    "it": "Nessuna bozza salvata"
+  },
+  "ServiceCatalog.noDraftsHelp": {
+    "en": "Save offer, bundle or pricing policy changes to prepare a publication.",
+    "ar": "احفظ تغييرات العروض أو الباقات أو سياسة الأسعار للتحضير للنشر.",
+    "de": "Angebots-, Paket- oder Preisregeländerungen für eine Veröffentlichung speichern.",
+    "fr": "Enregistrez les changements d’offres, forfaits ou politique tarifaire pour préparer la publication.",
+    "it": "Salva modifiche a offerte, pacchetti o prezzi per preparare la pubblicazione."
+  },
+  "ServiceCatalog.previewTitle": {
+    "en": "Public service preview",
+    "ar": "معاينة الخدمات العامة",
+    "de": "Öffentliche Servicevorschau",
+    "fr": "Aperçu des services publics",
+    "it": "Anteprima servizi pubblici"
+  },
+  "ServiceCatalog.previewHelp": {
+    "en": "This preview resolves saved service drafts for the selected country, duration and group size.",
+    "ar": "تحسب هذه المعاينة مسودات الخدمات المحفوظة للدولة والمدة وحجم المجموعة المحدد.",
+    "de": "Diese Vorschau berechnet gespeicherte Serviceentwürfe für Land, Laufzeit und Gruppengröße.",
+    "fr": "Cet aperçu calcule les brouillons pour le pays, la durée et la taille du groupe choisis.",
+    "it": "Questa anteprima calcola le bozze per paese, durata e dimensione del gruppo scelti."
+  },
+  "ServiceCatalog.previewCountry": {
+    "en": "Country",
+    "ar": "الدولة",
+    "de": "Land",
+    "fr": "Pays",
+    "it": "Paese"
+  },
+  "ServiceCatalog.previewError": {
+    "en": "The public preview could not be loaded.",
+    "ar": "تعذر تحميل المعاينة العامة.",
+    "de": "Öffentliche Vorschau konnte nicht geladen werden.",
+    "fr": "Impossible de charger l’aperçu public.",
+    "it": "Impossibile caricare l’anteprima pubblica."
+  },
+  "ServiceCatalog.scheduleTitle": {
+    "en": "Schedule saved changes",
+    "ar": "جدولة التغييرات المحفوظة",
+    "de": "Gespeicherte Änderungen planen",
+    "fr": "Programmer les changements",
+    "it": "Pianifica modifiche salvate"
+  },
+  "ServiceCatalog.scheduleHelp": {
+    "en": "A schedule captures these saved drafts. They apply to new quotes at the selected time; later edits form new drafts.",
+    "ar": "تحفظ الجدولة نسخة من هذه المسودات. تُطبّق على عروض الأسعار الجديدة في الوقت المحدد؛ وتشكل التعديلات اللاحقة مسودات جديدة.",
+    "de": "Der Zeitplan erfasst diese Entwürfe. Sie gelten zur gewählten Zeit für neue Angebote; spätere Änderungen bilden neue Entwürfe.",
+    "fr": "La programmation capture ces brouillons pour les nouveaux devis à l’heure choisie. Les modifications ultérieures forment de nouveaux brouillons.",
+    "it": "La pianificazione acquisisce queste bozze per i nuovi preventivi all’orario scelto. Le modifiche successive creano nuove bozze."
+  },
+  "ServiceCatalog.publishDate": {
+    "en": "Publication date",
+    "ar": "تاريخ النشر",
+    "de": "Veröffentlichungsdatum",
+    "fr": "Date de publication",
+    "it": "Data pubblicazione"
+  },
+  "ServiceCatalog.publishTime": {
+    "en": "Publication time",
+    "ar": "وقت النشر",
+    "de": "Veröffentlichungszeit",
+    "fr": "Heure de publication",
+    "it": "Ora pubblicazione"
+  },
+  "ServiceCatalog.scheduleAction": {
+    "en": "Schedule publication",
+    "ar": "جدولة النشر",
+    "de": "Veröffentlichung planen",
+    "fr": "Programmer la publication",
+    "it": "Pianifica pubblicazione"
+  },
+  "ServiceCatalog.scheduledPublications": {
+    "en": "Scheduled publications",
+    "ar": "عمليات النشر المجدولة",
+    "de": "Geplante Veröffentlichungen",
+    "fr": "Publications programmées",
+    "it": "Pubblicazioni pianificate"
+  },
+  "ServiceCatalog.cancelSchedule": {
+    "en": "Cancel schedule",
+    "ar": "إلغاء الجدولة",
+    "de": "Zeitplan stornieren",
+    "fr": "Annuler la programmation",
+    "it": "Annulla pianificazione"
+  },
+  "ServiceCatalog.cancelScheduleTitle": {
+    "en": "Cancel publication on {date}?",
+    "ar": "إلغاء النشر في {date}؟",
+    "de": "Veröffentlichung am {date} stornieren?",
+    "fr": "Annuler la publication du {date} ?",
+    "it": "Annullare la pubblicazione del {date}?"
+  },
+  "ServiceCatalog.cancelScheduleImpact": {
+    "en": "This captured snapshot will not be published. Prepare fresh drafts if you want to publish these changes later.",
+    "ar": "لن تُنشر هذه النسخة المحفوظة. جهّز مسودات جديدة إذا أردت نشر التغييرات لاحقًا.",
+    "de": "Dieser erfasste Stand wird nicht veröffentlicht. Für eine spätere Veröffentlichung neue Entwürfe vorbereiten.",
+    "fr": "Cette version capturée ne sera pas publiée. Préparez de nouveaux brouillons pour publier ces changements plus tard.",
+    "it": "Questa versione acquisita non sarà pubblicata. Prepara nuove bozze per pubblicare le modifiche in seguito."
+  },
+  "ServiceCatalog.keepSchedule": {
+    "en": "Keep schedule",
+    "ar": "الإبقاء على الجدولة",
+    "de": "Zeitplan behalten",
+    "fr": "Conserver la programmation",
+    "it": "Mantieni pianificazione"
+  },
+  "ServiceCatalog.noSchedules": {
+    "en": "No scheduled publications.",
+    "ar": "لا توجد عمليات نشر مجدولة.",
+    "de": "Keine geplanten Veröffentlichungen.",
+    "fr": "Aucune publication programmée.",
+    "it": "Nessuna pubblicazione pianificata."
+  },
+  "ServiceCatalog.historyTitle": {
+    "en": "Publication history",
+    "ar": "سجل النشر",
+    "de": "Veröffentlichungsverlauf",
+    "fr": "Historique des publications",
+    "it": "Cronologia pubblicazioni"
+  },
+  "ServiceCatalog.noHistory": {
+    "en": "No publications recorded yet.",
+    "ar": "لم تُسجل عمليات نشر بعد.",
+    "de": "Noch keine Veröffentlichungen erfasst.",
+    "fr": "Aucune publication enregistrée.",
+    "it": "Nessuna pubblicazione registrata."
+  },
+  "ServiceCatalog.orgtikStaff": {
+    "en": "OrgTik staff",
+    "ar": "فريق OrgTik",
+    "de": "OrgTik-Mitarbeiter",
+    "fr": "Équipe OrgTik",
+    "it": "Personale OrgTik"
+  },
+  "ServiceCatalog.scheduleConfirm": {
+    "en": "Schedule this snapshot for {date}?",
+    "ar": "جدولة هذه النسخة في {date}؟",
+    "de": "Diesen Stand für {date} planen?",
+    "fr": "Programmer cette version pour le {date} ?",
+    "it": "Pianificare questa versione per il {date}?"
+  },
+  "ServiceCatalog.scheduleImpact": {
+    "en": "The saved changes are captured together for new quotes at that time. Existing paid orders retain their snapshots.",
+    "ar": "تُحفظ التغييرات معًا لعروض الأسعار الجديدة في ذلك الوقت. تحتفظ الطلبات المدفوعة ببياناتها الأصلية.",
+    "de": "Gespeicherte Änderungen werden gemeinsam für neue Angebote zu diesem Zeitpunkt erfasst. Bezahlte Bestellungen behalten ihre gespeicherten Werte.",
+    "fr": "Les changements sont capturés ensemble pour les nouveaux devis à cette date. Les commandes payées conservent leurs valeurs.",
+    "it": "Le modifiche sono acquisite insieme per i nuovi preventivi a quell’orario. Gli ordini pagati mantengono i valori originali."
+  },
+  "ServiceCatalog.scheduledNotice": {
+    "en": "Publication scheduled for {date}.",
+    "ar": "جُدول النشر في {date}.",
+    "de": "Veröffentlichung für {date} geplant.",
+    "fr": "Publication programmée pour le {date}.",
+    "it": "Pubblicazione pianificata per il {date}."
+  },
+  "ServiceCatalog.editPolicy": {
+    "en": "Edit service discount policy",
+    "ar": "تعديل سياسة خصومات الخدمات",
+    "de": "Service-Rabattregeln bearbeiten",
+    "fr": "Modifier les réductions des services",
+    "it": "Modifica sconti servizi"
+  },
+  "ServiceCatalog.servicePolicyHelp": {
+    "en": "For service offers, the larger duration or quantity saving applies. Drafts take effect when you publish.",
+    "ar": "يُطبق الخصم الأكبر للمدة أو العدد على عروض الخدمات. تسري المسودات عند النشر.",
+    "de": "Für Serviceangebote gilt der höhere Laufzeit- oder Mengenrabatt. Entwürfe gelten nach Veröffentlichung.",
+    "fr": "Pour les services, la plus forte réduction de durée ou de quantité s’applique. Les brouillons prennent effet à publication.",
+    "it": "Per i servizi si applica lo sconto maggiore di durata o quantità. Le bozze entrano in vigore con la pubblicazione."
+  },
+  "ServiceCatalog.durationDiscount": {
+    "en": "{months} months · saving %",
+    "ar": "{months} أشهر · الخصم %",
+    "de": "{months} Monate · Rabatt %",
+    "fr": "{months} mois · réduction %",
+    "it": "{months} mesi · sconto %"
+  },
+  "ServiceCatalog.countDiscount": {
+    "en": "{count}+ items · saving %",
+    "ar": "{count}+ عناصر · الخصم %",
+    "de": "{count}+ Positionen · Rabatt %",
+    "fr": "{count}+ articles · réduction %",
+    "it": "{count}+ elementi · sconto %"
+  },
+  "ServiceCatalog.savePolicyDraft": {
+    "en": "Save policy draft",
+    "ar": "حفظ مسودة السياسة",
+    "de": "Regelentwurf speichern",
+    "fr": "Enregistrer la politique en brouillon",
+    "it": "Salva bozza politica"
+  },
+  "ServiceCatalog.discountInvalid": {
+    "en": "Enter a saving from 0 to 60%.",
+    "ar": "أدخل خصمًا من 0 إلى 60%.",
+    "de": "Rabatt von 0 bis 60 % eingeben.",
+    "fr": "Saisissez une réduction de 0 à 60 %.",
+    "it": "Inserisci uno sconto da 0 a 60%."
+  },
+  "ServiceCatalog.futureDate": {
+    "en": "Choose a future publication within one year of the workspace clock.",
+    "ar": "اختر وقت نشر مستقبليًا خلال سنة من وقت مساحة العمل.",
+    "de": "Zukünftige Veröffentlichung innerhalb eines Jahres nach der Arbeitsbereichszeit wählen.",
+    "fr": "Choisissez une publication future dans l’année suivant l’horloge de l’espace.",
+    "it": "Scegli una pubblicazione futura entro un anno dall’orologio dello spazio."
+  },
+  "ServiceCatalog.scheduleStates.scheduled": {
+    "en": "Scheduled",
+    "ar": "مجدول",
+    "de": "Geplant",
+    "fr": "Programmé",
+    "it": "Pianificato"
+  },
+  "ServiceCatalog.scheduleStates.cancelled": {
+    "en": "Cancelled",
+    "ar": "ملغى",
+    "de": "Storniert",
+    "fr": "Annulé",
+    "it": "Annullato"
+  },
+  "ServiceCatalog.scheduleStates.published": {
+    "en": "Published",
+    "ar": "منشور",
+    "de": "Veröffentlicht",
+    "fr": "Publié",
+    "it": "Pubblicato"
+  }
+}

@@ -1,6 +1,6 @@
 "use client";
-import MainHeader from "@/components/layout/MainHeader";
-import DataTable from "@/components/shared/Table";
+import MainHeader from "@/components/layout/ResourceHeader";
+import DataTable from "@/components/bindings/ResourceTable";
 import { useColumns } from "./columns";
 import { useState } from "react";
 import { useParams } from "next/navigation";

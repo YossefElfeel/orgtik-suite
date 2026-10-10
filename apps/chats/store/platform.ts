@@ -4,13 +4,13 @@ import { readClientSession, refreshClientSession, subscribeClientSession, type W
 import type { ServerEvent } from "@/entities/events";
 import type { WorkspaceState } from "./index";
 
-type DataKey = "me" | "users" | "presence" | "floor" | "channels" | "messages" | "threadReplies" | "meetings" | "pastMeetings" | "notifications" | "insight" | "myTime" | "settings" | "historicalUsers" | "readState" | "workspaceId" | "fixtureId";
+type DataKey = "me" | "users" | "presence" | "floor" | "channels" | "messages" | "threadReplies" | "meetings" | "pastMeetings" | "notifications" | "insight" | "myTime" | "settings" | "historicalUsers" | "readState" | "workspaceId" | "fixtureId" | "now" | "typing" | "knocks";
 export type BootstrapData = Pick<WorkspaceState, DataKey> & { dataRevision: number; access: { canWrite: boolean; readOnly: boolean; roles: string[] } };
 export type SyncState = { status: "loading" | "ready" | "error" | "no_access"; namespace: string; canWrite: boolean; pending: number; errorCode?: string; uncertain?: boolean };
 type Callbacks = { clear: (state: SyncState) => void; hydrate: (data: BootstrapData, state: SyncState) => void; status: (state: SyncState) => void };
 const API = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "").replace(/\/api$/, "");
 const SOS_API = process.env.NEXT_PUBLIC_SOS_API_URL || "";
-const supported = new Set(["message.created", "message.edited", "message.deleted", "message.reaction_toggled", "message.pin_toggled", "channel.created", "channel.updated", "channel.members_added", "channel.member_removed", "channel.left", "channel.read", "channel.all_read"]);
+const supported = new Set(["message.created", "message.edited", "message.deleted", "message.reaction_toggled", "message.pin_toggled", "channel.created", "channel.updated", "channel.members_added", "channel.member_removed", "channel.left", "channel.read", "channel.all_read","channel.joined","channel.typing","message.saved_toggled","message.reminder_set","message.reminder_delivered","message.schedule_sent","message.schedule_cancelled","message.poll_voted","message.poll_closed","message.task_linked","presence.status_changed","presence.moved","presence.room_changed","presence.speaking","presence.muted","presence.deafened","room.added","room.updated","room.removed","floor.template_changed","knock.ended","knock.sent","knock.answered","knock.delivered","notification.read","notification.all_read","meeting.scheduled","meeting.chat_opened","meeting.share_changed","meeting.ended","meeting.recording_requested","meeting.recording_started","meeting.recording_declined","meeting.recording_stopped","meeting.recording_ready","meeting.guest_link_reset","meeting.guest_admitted","meeting.guest_declined","settings.updated"]);
 export const isPersistentEvent = (event: ServerEvent) => supported.has(event.type);
 let callbacks: Callbacks | null = null;
 let generation = 0, pending = 0, queue: Promise<void> = Promise.resolve(), namespace = "", writeAllowed = false;

@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 import { motion, Reorder, useDragControls } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import SelectFormEle, {
   SELECT_EMPTY_VALUE,
 } from "@/components/ui/form/select-form-element";
@@ -357,7 +357,7 @@ export function ContractStep() {
           {/* Action Buttons */}
           <Button
             type="button"
-            variant="outline"
+            variant="secondary"
             className="h-11 gap-2 rounded-xl border-border px-6 text-sm font-medium"
             onClick={handleAddClause}
           >
@@ -368,7 +368,7 @@ export function ContractStep() {
           <div className="hidden --flex items-center justify-end gap-3">
             <Button
               type="button"
-              variant="default"
+              variant="primary"
               onClick={handleSendForSignature}
               className="h-11 gap-2 rounded-xl px-6 text-sm font-medium"
             >
@@ -377,7 +377,7 @@ export function ContractStep() {
             </Button>
             <Button
               type="button"
-              variant="outline"
+              variant="secondary"
               className="h-11 gap-2 rounded-xl border-border px-6 text-sm font-medium"
             >
               {t("contract.downloadPdf")}
@@ -391,7 +391,7 @@ export function ContractStep() {
             className="min-w-32"
             type="button"
             size="lg"
-            variant="outline"
+            variant="secondary"
             onClick={onBack}
           >
             {t("nav.back")}

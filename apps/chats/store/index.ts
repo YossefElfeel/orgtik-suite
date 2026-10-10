@@ -5,7 +5,7 @@
  *
  * Hooks read confirmed workspace snapshots. Actions stage supported events
  * through the mock API; only a successful persistence response hydrates them.
- * Remaining media/presence/meeting commands are explicitly deferred.
+ * Calls, voice playback, typing and receipts are explicitly local samples.
  */
 
 import { create } from "zustand";
@@ -16,7 +16,8 @@ import { inSuite, signOutOfSuite, type SuiteSession } from "@/lib/suite-session"
 import { roleForSuiteSession } from "@/lib/roles";
 import { persistEvent, reloadWorkspace, currentWorkspaceNamespace, recoverableMessage, currentMessageScope, eventUnconfirmed, type SyncState, type BootstrapData } from "./platform";
 
-const pendingMessages = new Map<string, Message>();
+import{setWorkspaceTime}from"@/lib/time";
+const pendingMessages = new Map<string, import("@/entities/events").CreatedMessage>();
 import type {
   Channel,
   Floor,
@@ -47,6 +48,9 @@ import { msg, type Msg } from "@/lib/messages";
 
 export interface WorkspaceState {
   /* data */
+  now: string;
+  typing: Record<string,string[]>;
+  knocks: import("@/entities").Knock[];
   workspaceId: string;
   fixtureId: string | null;
   historicalUsers: { id: Id; name: string; initials: string; tint: number }[];
@@ -82,7 +86,7 @@ export interface WorkspaceState {
     fromId: Id;
     toId: Id;
     reason?: string;
-    state: "pending" | "accepted" | "declined" | "deferred" | "missed";
+    state: import("@/entities").KnockState;
   } | null;
   huddleWith: Id | null;
   /** Knocks held during Focus, plus any that went unanswered. Never dropped. */
@@ -120,7 +124,7 @@ export interface WorkspaceState {
   viewOnly: { by?: string } | null;
 
   /* the seam */
-  applyEvent: (event: ServerEvent) => void;
+  applyEvent: (event: ServerEvent) => Promise<boolean>;
   /** The suite's signed-in person takes their seat (FS-CHT-4). */
   adoptSuiteSession: (session: SuiteSession) => void;
   clearWorkspace: (state: SyncState) => void;
@@ -166,7 +170,7 @@ export interface WorkspaceState {
   removeRoom: (roomId: Id) => void;
   updateRoom: (roomId: Id, patch: Partial<Omit<Room, "id">>) => void;
   dismissHeldKnock: (id: Id) => void;
-  setViewingRole: (role: Role) => void;
+
   focusOnPerson: (userId: Id) => void;
   toggleLocalMute: (userId: Id) => void;
   setLocalVolume: (userId: Id, factor: number) => void;
@@ -183,9 +187,9 @@ export interface WorkspaceState {
   /** The room's chat, created the first time it is opened. Returns its id. */
   ensureRoomChannel: (roomId: Id) => Id;
   /** The module's state in the suite. In the product this is the SaaS layer's. */
-  setActivation: (state: "off" | "trial" | "active") => void;
-  connectIntegration: (id: "google" | "microsoft") => void;
-  disconnectIntegration: (id: "google" | "microsoft") => void;
+
+
+
   scheduleMeeting: (meeting: Meeting) => void;
   /** A new secret for the guest link; the old link stops working. */
   resetGuestLink: (meetingId: Id) => void;
@@ -248,14 +252,14 @@ const LOUD_WRITES = [
   "sendMessage", "editMessage", "deleteMessage", "toggleReaction", "togglePin", "setStatus", "moveTo", "joinRoom",
   "sendKnock", "answerKnock", "endHuddle", "createChannel", "updateChannel", "addChannelMembers", "leaveChannel",
   "createGroupDm", "openOrCreateDm", "ensureRoomChannel", "ensureMeetingChannel", "removeChannelMember", "addRoom", "removeRoom", "updateRoom", "setServerMute", "setServerDeafen",
-  "declineGuest", "setShare", "setActivation", "connectIntegration", "disconnectIntegration", "scheduleMeeting",
+  "declineGuest", "setShare", "scheduleMeeting",
   "startInstantMeeting", "resetGuestLink", "requestRecording", "startRecording", "declineRecording", "stopRecording", "endMeeting",
   "admitGuest", "updateSettings",
 ] as const;
 const QUIET_WRITES = ["markChannelRead", "markAllRead", "leaveRoom", "dismissHeldKnock"] as const;
 /** What a refused call returns: the callers of id-returning actions treat "" and null as "nothing made". */
 const REFUSED: Partial<Record<string, unknown>> = { addRoom: null, createChannel: "", createGroupDm: "", openOrCreateDm: "", ensureRoomChannel: "", ensureMeetingChannel: "", startInstantMeeting: "" };
-const PERSISTENT_ACTIONS = new Set(["sendMessage", "editMessage", "deleteMessage", "toggleReaction", "togglePin", "createChannel", "updateChannel", "addChannelMembers", "leaveChannel", "openOrCreateDm", "createGroupDm", "removeChannelMember", "markChannelRead", "markAllRead"]);
+const PERSISTENT_ACTIONS = new Set(["ensureMeetingChannel","ensureRoomChannel","setStatus","moveTo","joinRoom","leaveRoom","sendKnock","answerKnock","setServerMute","setServerDeafen","endHuddle","updateRoom","addRoom","removeRoom","markNotificationRead","markAllNotificationsRead","scheduleMeeting","startInstantMeeting","resetGuestLink","requestRecording","startRecording","declineRecording","stopRecording","endMeeting","admitGuest","declineGuest","setShare","updateSettings","sendMessage", "editMessage", "deleteMessage", "toggleReaction", "togglePin", "createChannel", "updateChannel", "addChannelMembers", "leaveChannel", "openOrCreateDm", "createGroupDm", "removeChannelMember", "markChannelRead", "markAllRead"]);
 
 function guardWrites<T extends WorkspaceState>(state: T, get: () => WorkspaceState, set: (fn: (s: WorkspaceState) => Partial<WorkspaceState>) => void): T {
   const guarded = { ...state } as Record<string, unknown>;
@@ -283,15 +287,11 @@ function guardWrites<T extends WorkspaceState>(state: T, get: () => WorkspaceSta
 }
 
 /** A guest link's secret: 24 random bytes, URL-safe. */
-export const newGuestKey = (): string => {
-  const bytes = new Uint8Array(24);
-  crypto.getRandomValues(bytes);
-  return btoa(String.fromCharCode(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
-};
-const keyed = (m: Meeting): Meeting => (m.guestKey ? m : { ...m, guestKey: newGuestKey() });
+
+
 
 const freshData = () => ({
-  workspaceId: "", fixtureId: null, historicalUsers: [], readState: {},
+  now: "", typing: {}, knocks: [],workspaceId: "", fixtureId: null, historicalUsers: [], readState: {},
   workspaceSync: { status: "loading", namespace: "", canWrite: false, pending: 0 } as SyncState,
   me: "",
   users: [] as User[], presence: [] as Presence[],
@@ -428,7 +428,7 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
     const s = get();
     const scope = currentMessageScope();
     const pendingKey = scope + ":" + channelId + ":" + (threadId || "");
-    const message: Message = pendingMessages.get(pendingKey) || recoverableMessage(channelId, threadId) || {
+    const message: import("@/entities/events").CreatedMessage = pendingMessages.get(pendingKey) || recoverableMessage(channelId, threadId) || {
       id: nextId("m"),
       channelId,
       authorId: s.me,
@@ -468,7 +468,7 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
       status === "focus" && focusMinutes
         ? new Date(Date.now() + focusMinutes * 60_000).toISOString()
         : undefined;
-    get().applyEvent({ type: "presence.status_changed", userId: get().me, status, customText, focusUntil });
+    get().applyEvent({ type: "presence.status_changed", userId: get().me, status, customText, focusUntil, focusMinutes });
   },
 
   moveTo: (position) => get().applyEvent({ type: "presence.moved", userId: get().me, position }),
@@ -550,7 +550,7 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
     if (k) get().applyEvent({ type: "knock.answered", knockId: k.id, state });
   },
 
-  endHuddle: () => set({ huddleWith: null, knock: null }),
+  endHuddle: () => {const s=get(),knock=s.knocks.find(k=>k.state==="accepted"&&(k.fromId===s.me||k.toId===s.me));if(knock)void s.applyEvent({type:"knock.ended",knockId:knock.id});},
 
   createChannel: ({ name, topic, isPrivate, memberIds }) => {
     const id = nextId("c");
@@ -681,11 +681,7 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
     );
   },
 
-  setViewingRole: (role) =>
-    set((s) => ({
-      viewingRole: role,
-      users: s.users.map((u) => (u.id === s.me ? { ...u, role } : u)),
-    })),
+
 
   ensureMeetingChannel: (meetingId) => {
     const state = get();
@@ -740,28 +736,11 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
     return channelId;
   },
 
-  setActivation: (activationState) => {
-    const current = get().settings.activation;
-    const trialEndsAt = activationState === "trial" ? new Date(Date.now() + 14 * 864e5).toISOString() : undefined;
-    get().updateSettings({
-      activation: { ...current, state: activationState, ...(trialEndsAt ? { trialEndsAt } : {}) },
-    });
-  },
 
-  connectIntegration: (id) => {
-    const settings = get().settings;
-    get().updateSettings({ integrations: { ...settings.integrations, [id]: "connecting" } });
-    /* The OAuth round trip, stood in for by a moment's wait. */
-    setTimeout(() => {
-      const now = get().settings.integrations;
-      get().updateSettings({ integrations: { ...now, [id]: "connected", account: now.account ?? "info@somion.org" } });
-    }, 700);
-  },
 
-  disconnectIntegration: (id) => {
-    const settings = get().settings;
-    get().updateSettings({ integrations: { ...settings.integrations, [id]: "off" } });
-  },
+
+
+
 
   requestRecording: (meetingId) => {
     if (!get().settings.recordingAllowed) return;
@@ -774,21 +753,7 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
 
   stopRecording: (meetingId) => {
     get().applyEvent({ type: "meeting.recording_stopped", meetingId });
-    /* Processing takes a moment, then the file lands in the File Manager. */
-    const all = [...get().meetings, ...get().pastMeetings];
-    const title = all.find((m) => m.id === meetingId)?.title ?? "Meeting";
-    setTimeout(() => {
-      get().applyEvent({
-        type: "meeting.recording_ready",
-        meetingId,
-        file: {
-          id: nextId("f"),
-          name: `${title.replace(/[^\w -]/g, "")} recording.mp4`,
-          size: "148 MB",
-          kind: "video",
-        },
-      });
-    }, 4000);
+
   },
 
   endMeeting: (meetingId, attendedIds) =>
@@ -799,15 +764,15 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
       attendedIds,
     }),
 
-  scheduleMeeting: (meeting) => get().applyEvent({ type: "meeting.scheduled", meeting: keyed(meeting) }),
+  scheduleMeeting: (meeting) => get().applyEvent({ type: "meeting.scheduled", meeting }),
 
-  resetGuestLink: (meetingId) => get().applyEvent({ type: "meeting.guest_link_reset", meetingId, guestKey: newGuestKey() }),
+  resetGuestLink: (meetingId) => get().applyEvent({ type: "meeting.guest_link_reset", meetingId,  }),
 
   startInstantMeeting: ({ title, channelId, announcement }) => {
     const s = get();
     const channel = channelId ? s.channels.find((c) => c.id === channelId) : undefined;
-    const start = new Date();
-    const id = `mt-${start.getTime().toString(36)}`;
+    const start = new Date(s.now||Date.now());
+    const id = "mt-"+crypto.randomUUID();
     s.applyEvent({
       type: "meeting.scheduled",
       meeting: {
@@ -848,17 +813,7 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
   admitGuest: (meetingId, guestEmail) =>
     get().applyEvent({ type: "meeting.guest_admitted", meetingId, guestEmail }),
 
-  updateSettings: (patch) => {
-    const before = get().settings.template;
-    set((s) => ({ settings: { ...s.settings, ...patch } }));
-    if (patch.template && patch.template !== before) {
-      get().applyEvent({
-        type: "floor.template_changed",
-        template: patch.template,
-        rooms: seed.floorTemplates[patch.template].map((r) => ({ ...r, rect: { ...r.rect } })),
-      });
-    }
-  },
+  updateSettings: (patch) => {const {template,...settings}=patch;if(Object.keys(settings).length)void get().applyEvent({type:'settings.updated',patch:settings});if(template&&template!==get().settings.template)void get().applyEvent({type:'floor.template_changed',template,rooms:seed.floorTemplates[template].map(r=>({...r,rect:{...r.rect}}))});},
 
   openThread: (messageId) => set({ openThreadId: messageId }),
 
@@ -874,14 +829,6 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
     const mine = s.presence.find((p) => p.userId === s.me);
     const room = mine?.roomId ? s.floor.rooms.find((r) => r.id === mine.roomId) : undefined;
     if (room && room.kind !== "desk") s.leaveRoom();
-    get().applyEvent({
-      type: "session.signed_out",
-      userId: s.me,
-      reason,
-      at: new Date().toISOString(),
-      ...(idleMinutes !== undefined ? { idleMinutes } : {}),
-      ...(scope ? { scope } : {}),
-    });
     /* In the suite, signing out of Chats signs out of the suite: the session is cleared and the
        next visit goes through sign-in (CHT-006). */
     if (inSuite()) void signOutOfSuite();
@@ -912,9 +859,12 @@ export const useWorkspace = create<WorkspaceState>()((set, get) => guardWrites({
   clearWorkspace: (workspaceSync) => set({ ...freshData(), workspaceSync, viewOnly: null }),
   setWorkspaceSync: (workspaceSync) => set({ workspaceSync }),
   hydrateWorkspace: (data, workspaceSync) => {
-    const keys = ["workspaceId", "fixtureId", "historicalUsers", "readState", "me", "users", "presence", "floor", "channels", "messages", "threadReplies", "meetings", "pastMeetings", "notifications", "insight", "myTime", "settings"] as const;
+    setWorkspaceTime(data.now);
+    const keys = ["now", "typing", "knocks", "workspaceId", "fixtureId", "historicalUsers", "readState", "me", "users", "presence", "floor", "channels", "messages", "threadReplies", "meetings", "pastMeetings", "notifications", "insight", "myTime", "settings"] as const;
     const patch = Object.fromEntries(keys.map(key => [key, data[key]])) as Pick<WorkspaceState, typeof keys[number]>;
-    set({ ...patch, workspaceSync, viewingRole: data.users.find(user => user.id === data.me)?.role || "member" });
+    const incoming=data.knocks?.find(k=>k.toId===data.me&&k.state==='pending')||null;const held=data.knocks?.filter(k=>k.toId===data.me&&k.state==='deferred')||[];
+    const accepted=data.knocks?.find(k=>k.state==="accepted"&&(k.fromId===data.me||k.toId===data.me));
+    set({ ...patch, huddleWith:accepted?(accepted.fromId===data.me?accepted.toId:accepted.fromId):null,knock:incoming,heldKnocks:held,workspaceSync, viewingRole: data.users.find(user => user.id === data.me)?.role || "member" });
   },
 
   adoptSuiteSession: (session) => {

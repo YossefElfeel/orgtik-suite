@@ -3,7 +3,7 @@ import { CalendarBlank as Calendar, DotsThreeVertical as MoreVertical, DownloadS
 
 import React, { useState } from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import ReusableSheet from "../shared/ResuableSheet";
 
 export default function SheetsDemo() {
@@ -27,7 +27,7 @@ export default function SheetsDemo() {
         title="File Actions"
         // description="Choose what you want to do with this file"
         trigger={
-          <Button variant="outline" className="gap-2">
+          <Button variant="secondary" className="gap-2">
             <MoreVertical className="size-4" /> Open Bottom Sheet
           </Button>
         }

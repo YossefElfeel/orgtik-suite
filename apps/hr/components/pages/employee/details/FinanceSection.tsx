@@ -3,8 +3,8 @@ import { Coins, DownloadSimple as Download, Eye, FileMinus as FileMinus2, Gift, 
 
 import { useMemo, useState } from "react";
 import { TabMenu } from "@/components/shared/TabMenu";
-import DataTable from "@/components/shared/Table";
-import { Button } from "@/components/ui/button";
+import DataTable from "@/components/bindings/ResourceTable";
+import { Button } from "@orgtik/ui";
 import type { ColumnDef } from "@tanstack/react-table";
 import { SectionCard } from "./SectionCard";
 import { StatusPill } from "./StatusPill";
@@ -17,8 +17,8 @@ import type {
   LoanTotals,
 } from "./types";
 
-import { InfoCardSkeleton } from "@/components/ui/info-card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { InfoCardSkeleton } from "@/components/shared/EmployeeFacts";
+import { Skeleton } from "@orgtik/ui";
 import { useLazyDownloadPayslipQuery } from "@/redux/features/payroll/payrollApi";
 import { useTranslations } from "next-intl";
 import { PayslipPreviewDialog } from "@/components/dialogs/PayslipPreviewDialog";
@@ -60,7 +60,7 @@ function ParoleActionCell({ id, status }: { id: number; status: string }) {
         <div>
           <Button
             variant="ghost"
-            size="icon"
+            size="sm"
             className="text-secondary hover:text-foreground h-8 w-8"
             aria-label="Preview payslip"
           >
@@ -71,7 +71,7 @@ function ParoleActionCell({ id, status }: { id: number; status: string }) {
 
       <Button
         variant="ghost"
-        size="icon"
+        size="sm"
         className="text-secondary hover:text-foreground h-8 w-8"
         onClick={handleDownload}
         disabled={isDownloading}
@@ -189,7 +189,7 @@ export function FinanceSection({
         cell: () => (
           <Button
             variant="ghost"
-            size="icon"
+            size="sm"
             className="text-secondary hover:text-foreground"
             aria-label="View bonus entry"
           >
@@ -224,7 +224,7 @@ export function FinanceSection({
         cell: () => (
           <Button
             variant="ghost"
-            size="icon"
+            size="sm"
             className="text-secondary hover:text-foreground"
             aria-label="View deduction entry"
           >
@@ -259,7 +259,7 @@ export function FinanceSection({
         cell: () => (
           <Button
             variant="ghost"
-            size="icon"
+            size="sm"
             className="text-secondary hover:text-foreground"
             aria-label="View loan entry"
           >

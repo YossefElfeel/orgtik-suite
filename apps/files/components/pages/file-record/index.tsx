@@ -7,8 +7,11 @@ import MainTitles from "@/components/shared/MainTitles";
 import { FileCard } from "@/components/shared/FileCard";
 import { fileRequest, useFileAuthority, type FileRequestError } from "@/lib/file-references";
 import type { IFile } from "@/types";
+import { FileDetails } from "@/components/workspace/FileDetails";
+import { FILES_V3, useFilesResource, type Library } from "@/components/workspace/files-api";
 export function FileRecord({ fileId, versionId }: { fileId: string; versionId?: string }) {
   const t = useTranslations("SampleFiles"), authority = useFileAuthority(), router = useRouter();
+  const library = useFilesResource<Library>(`${FILES_V3}/library`);
   const [revision, setRevision] = useState(0), [result, setResult] = useState<{ authority: string; file?: IFile; error?: FileRequestError }>({ authority: "" });
   useEffect(() => {
     const controller = new AbortController(); setResult({ authority: "" });
@@ -23,6 +26,7 @@ export function FileRecord({ fileId, versionId }: { fileId: string; versionId?: 
     <MainTitles title={t("recordTitle")}><Button variant="secondary" onClick={() => router.push("/")}>{t("back")}</Button></MainTitles>
     <ListStates status={status} empty={{ title: t("unavailable"), description: t("unavailableBody") }} forbidden={{ title: t("noAccess"), description: t("noAccessBody") }} onRetry={() => setRevision(v => v + 1)}>
       {file ? <div className="w-full max-w-sm"><FileCard file={file} /></div> : null}
+      {file ? <div className="max-w-3xl"><FileDetails fileId={fileId} versionId={versionId} samples={library.data?.samples} /></div> : null}
     </ListStates>
   </main>;
 }

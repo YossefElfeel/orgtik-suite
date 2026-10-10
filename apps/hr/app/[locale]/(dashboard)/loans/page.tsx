@@ -1,7 +1,7 @@
 "use client";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import { useGetLoansQuery } from "@/redux/features/loan/loanApi";
-import DataTable from "@/components/shared/Table";
+import DataTable from "@/components/bindings/ResourceTable";
 import { useLoanColumns } from "./columns";
 import MangmentLoansSheet from "@/components/pages/payroll/MangmentLoansSheet";
 import { useState } from "react";

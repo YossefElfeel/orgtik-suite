@@ -5,14 +5,14 @@ import { useMemo, useState } from "react";
 
 import CandidateCardsGrid, {
 } from "@/components/pages/hiring/CandidateCardsGrid";
-import { Input } from "@/components/ui/input";
+import { Input } from "@orgtik/ui";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/bindings/select";
 
 // FIXME: change it to proper type, I kept the old line
 // export type CandidateBrowserItem = CandidateItem & {

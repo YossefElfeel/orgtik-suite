@@ -1,5 +1,5 @@
 import { DownloadSimple as Download } from "@phosphor-icons/react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useTranslations } from "next-intl";
 
 export function ResumeSection({
@@ -21,13 +21,13 @@ export function ResumeSection({
 
         {resumeUrl ? (
           <a href={resumeUrl} target="_blank" rel="noreferrer">
-            <Button type="button" variant="outline" size="lg">
+            <Button type="button" variant="secondary" size="lg">
               <Download className="size-4" />
               {t("candidateDetails.downloadPdf")}
             </Button>
           </a>
         ) : (
-          <Button type="button" variant="outline" size="lg" disabled>
+          <Button type="button" variant="secondary" size="lg" disabled>
             <Download className="size-4" />
             {t("candidateDetails.resumeUnavailable")}
           </Button>

@@ -1,0 +1,131 @@
+{
+  "scope": "CRM P4 retained business, actual paid service, packaged delivery and workspace handoff",
+  "checks": [
+    {
+      "name": "Functional fixture is an actual persisted contact",
+      "pass": true
+    },
+    {
+      "name": "UI bulk assignment changes actual owner",
+      "pass": true
+    },
+    {
+      "name": "Routing rule UI persists actual eligible owner",
+      "pass": true
+    },
+    {
+      "name": "Stage ordering UI persists before won",
+      "pass": true
+    },
+    {
+      "name": "Contact arrival applies enabled actual source routing",
+      "pass": true
+    },
+    {
+      "name": "UI duplicate merge removes only unlinked prospect from active projection",
+      "pass": true
+    },
+    {
+      "name": "Offer validity/signature UI persists explicit simulation",
+      "pass": true
+    },
+    {
+      "name": "Metadata signing preserves agreed commercial status and price",
+      "pass": true
+    },
+    {
+      "name": "Actual offer PDF contains PDF bytes",
+      "pass": true
+    },
+    {
+      "name": "Service fixture is an actual succeeded immutable order and claim",
+      "pass": true
+    },
+    {
+      "name": "Paid order has actual confirmed CRM contact/deal links",
+      "pass": true
+    },
+    {
+      "name": "Paid UI does not offer a second quote",
+      "pass": true
+    },
+    {
+      "name": "Start capability follows actual paid source",
+      "pass": true
+    },
+    {
+      "name": "UI starts actual paid period",
+      "pass": true
+    },
+    {
+      "name": "Functional fixture is an actual persisted contact",
+      "pass": true
+    },
+    {
+      "name": "Packaged picker references are actual accessible versions",
+      "pass": true
+    },
+    {
+      "name": "UI delivery persists immutable packaged file and review state",
+      "pass": true
+    },
+    {
+      "name": "CRM downloads the actual delivered bytes",
+      "pass": true
+    },
+    {
+      "name": "Current recipient reads exact delivery without Files subscription",
+      "pass": true
+    },
+    {
+      "name": "Functional fixture is an actual persisted contact",
+      "pass": true
+    },
+    {
+      "name": "Paid service deal cannot bypass actual contract approval",
+      "pass": true
+    },
+    {
+      "name": "UI provisions actual workspace owned by registered customer",
+      "pass": true
+    },
+    {
+      "name": "Workspace action preserves confirmed contract price",
+      "pass": true
+    },
+    {
+      "name": "Stable UI operation retries the same real workspace",
+      "pass": true
+    },
+    {
+      "name": "Changed retry refuses another workspace",
+      "pass": true
+    },
+    {
+      "name": "Reload reads actual persisted receipt and Console deep link",
+      "pass": true
+    },
+    {
+      "name": "No application/runtime/catalog errors",
+      "pass": false,
+      "details": [
+        "Invalid or unexpected token",
+        "Loading chunk app/[locale]/layout failed.\n(missing: http://localhost:3803/_next/static/chunks/app/%5Blocale%5D/layout.js)"
+      ]
+    }
+  ],
+  "captures": [
+    "bulk-owner-outcome.png",
+    "merged-prospect-list.png",
+    "offer-document-validity-simulation.png",
+    "paid-service-start-period.png",
+    "packaged-service-delivery-download.png",
+    "actual-customer-workspace-receipt.png",
+    "depth-failure.png"
+  ],
+  "errors": [
+    "Invalid or unexpected token",
+    "Loading chunk app/[locale]/layout failed.\n(missing: http://localhost:3803/_next/static/chunks/app/%5Blocale%5D/layout.js)"
+  ],
+  "failure": "No application/runtime/catalog errors [\"Invalid or unexpected token\",\"Loading chunk app/[locale]/layout failed.\\n(missing: http://localhost:3803/_next/static/chunks/app/%5Blocale%5D/layout.js)\"]"
+}

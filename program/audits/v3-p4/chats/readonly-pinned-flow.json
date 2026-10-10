@@ -1,0 +1,45 @@
+{
+  "checks": [
+    {
+      "name": "Actual current actor context is readonly",
+      "pass": true
+    },
+    {
+      "name": "Readonly bootstrap projects exact current pinned MP4",
+      "pass": true
+    },
+    {
+      "name": "Actual readonly UI opens and decodes pinned recording",
+      "pass": true
+    },
+    {
+      "name": "Readonly source has no recording mutation CTA",
+      "pass": true
+    },
+    {
+      "name": "Readonly exact content remains 233529 pinned bytes",
+      "pass": true
+    },
+    {
+      "name": "Readonly native preview has no overflow",
+      "pass": true
+    },
+    {
+      "name": "Readonly pinned preview has no serious axe findings",
+      "pass": true
+    },
+    {
+      "name": "Readonly preview does not mutate source revision",
+      "pass": true
+    },
+    {
+      "name": "Readonly preview console is clean",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "chats-readonly-pinned-recording-en-dark-1440.png"
+  ],
+  "errors": [],
+  "completed": true
+}

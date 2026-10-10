@@ -2,7 +2,7 @@
 import { Plus } from "@phosphor-icons/react";
 
 import { ReusableDialog } from "@/components/shared/ReusableDialog/reusable-dialog";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import ComboboxFormEle from "@/components/ui/form/combobox-form-element";
 import LogoUploadField from "@/components/ui/form/logo-upload-field";
 import TextFormEle from "@/components/ui/form/text-form-element";
@@ -15,7 +15,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { TextEditor } from "@/components/ui/text-editor";
+import { TextEditor } from "@/components/shared/HrRichTextEditor";
 import { useGetDepartmentsOptionsQuery } from "@/redux/features/department/departmentApi";
 import { useCreateTicketMutation } from "@/redux/features/ticket/ticketApi";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -107,7 +107,7 @@ export function AddNewTicketDialog() {
           <Button
             type="button"
             size="lg"
-            variant="outline"
+            variant="secondary"
             className="flex-1"
             onClick={() => setOpen(false)}
           >

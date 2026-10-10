@@ -1,7 +1,7 @@
 const lib = require("./lib");
 const whiteboards = require('../../lib/whiteboard-scene');
 const MAPS = ["folders", "files", "pins", "shares", "sessions", "failures", "previewPages"];
-const OPTIONAL_MAPS = ['sampleOperations'];
+const OPTIONAL_MAPS = ['sampleOperations', 'workspaceFeatures'];
 const clone = value => JSON.parse(JSON.stringify(value));
 const validId = value => typeof value === 'string' && /^[A-Za-z0-9][A-Za-z0-9._:-]{0,199}$/.test(value) && !['constructor', 'prototype'].includes(value);
 const invalid = message => { throw Object.assign(new Error(message), { status: 503, code: "invalid_tool_snapshot" }); };
@@ -40,6 +40,7 @@ function decode(data, manifest) {
   }
   for (const [id, row] of state.files) {
     if (row.id !== id || row.folderId != null && !state.folders.has(row.folderId)) invalid("Files snapshot has an invalid file reference.");
+    if (row.accessOverride?.permissions !== undefined && (!Array.isArray(row.accessOverride.permissions) || row.accessOverride.permissions.length > 100 || row.accessOverride.permissions.some(grant => !grant || Object.keys(grant).sort().join(',') !== 'permission,userId' || !Number.isSafeInteger(grant.userId) || grant.userId < 1 || !['view', 'comment', 'edit'].includes(grant.permission)) || new Set(row.accessOverride.permissions.map(grant => grant.userId)).size !== row.accessOverride.permissions.length)) invalid('Files per-person permissions are invalid.');
     const storageValid = storage => {
       if (storage?.kind === 'asset') return Object.hasOwn(manifest, storage.key);
       if (storage?.kind !== 'whiteboard') return false;
@@ -66,6 +67,14 @@ function decode(data, manifest) {
   if (new Set(boardIds).size !== boardIds.length) invalid('A whiteboard cannot own multiple Files records.');
   for (const key of OPTIONAL_MAPS) {
     if (data[key] === undefined) continue;
+    if (key === 'workspaceFeatures') {
+      if (!Array.isArray(data[key]) || data[key].length > 20000) invalid('Files feature records are invalid.');
+      for (const pair of data[key]) {
+        if (!Array.isArray(pair) || pair.length !== 2 || !validId(pair[0]) || !/^(settings|person:\d+|comment:[\w-]+:[\w-]+|notice:[\w-]+|operation:[\w.:-]+)$/.test(pair[0]) || state[key].has(pair[0]) || !pair[1] || typeof pair[1] !== 'object' || Array.isArray(pair[1]) || JSON.stringify(pair[1]).length > 200000) invalid('Files feature record is invalid.');
+        state[key].set(pair[0], clone(pair[1]));
+      }
+      continue;
+    }
     if (!Array.isArray(data[key])) invalid('Files sample receipts are invalid.');
     for (const pair of data[key]) {
       if (!Array.isArray(pair) || pair.length !== 2 || typeof pair[0] !== 'string' || !/^[1-9]\d*:[\w.:-]{1,200}$/.test(pair[0]) || ['__proto__', 'constructor', 'prototype'].includes(pair[0].slice(pair[0].indexOf(':') + 1)) || state[key].has(pair[0]) || !pair[1] || Object.keys(pair[1]).sort().join(',') !== 'fileId,fingerprint,versionId' || !/^[a-f0-9]{64}$/.test(pair[1].fingerprint) || !validId(pair[1].fileId) || pair[1].versionId !== 'v1') invalid('Files sample receipt is invalid.');

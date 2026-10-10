@@ -80,10 +80,10 @@ export function ProfileModal({
             speaking={presence.speaking}
           />
           <div className="min-w-0 flex-1">
-            <p className="text-[14px] font-medium" style={{ color: "var(--color-ink)" }}>
+            <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
               <bdi>{user.title}</bdi>
             </p>
-            <p className="mt-0.5 text-[12.5px]" style={{ color: "var(--color-ink-muted)" }}>
+            <p className={"mt-0.5 text-body-sm "+("ch-color-4a0211")} >
               {presence.customText ?? t(`status.${presence.status}`, meta.label)}
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -98,11 +98,11 @@ export function ProfileModal({
         <dl className="flex flex-col gap-2.5">
           {room && (
             <div className="flex items-center gap-2.5">
-              <MapPin size={14} aria-hidden="true" style={{ color: "var(--color-ink-subtle)" }} />
+              <MapPin size={14} aria-hidden="true" className={"ch-color-094083"}  />
               <dt className="sr-only">{t("profile.where", "Where")}</dt>
-              <dd className="text-[13px]" style={{ color: "var(--color-ink)" }}>
+              <dd className={"text-body-sm "+("ch-color-7f7330")} >
                 <bdi>{room.name}</bdi>
-                <span className="ms-1.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                <span className={"ms-1.5 text-caption "+("ch-color-4a0211")} >
                   {t(`roomKind.${room.kind}`, ROOM_LABEL[room.kind] ?? room.kind)}
                 </span>
               </dd>
@@ -110,11 +110,11 @@ export function ProfileModal({
           )}
           {localTime && (
             <div className="flex items-center gap-2.5">
-              <Clock size={14} aria-hidden="true" style={{ color: "var(--color-ink-subtle)" }} />
+              <Clock size={14} aria-hidden="true" className={"ch-color-094083"}  />
               <dt className="sr-only">{t("profile.localTime", "Their local time")}</dt>
-              <dd className="tabular text-[13px]" style={{ color: "var(--color-ink)" }}>
+              <dd className={"tabular text-body-sm "+("ch-color-7f7330")} >
                 {localTime}
-                <span className="ms-1.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                <span className={"ms-1.5 text-caption "+("ch-color-4a0211")} >
                   {user.timezone.split("/")[1]?.replace("_", " ")}
                 </span>
               </dd>
@@ -125,12 +125,8 @@ export function ProfileModal({
         {/* The product refuses to publish activity history about a person, and
             says so here rather than leaving the absence to be noticed. */}
         <p
-          className="px-3 py-2 text-[11.5px] leading-relaxed"
-          style={{
-            background: "var(--color-surface-sunken)",
-            borderRadius: "var(--radius-control)",
-            color: "var(--color-ink-muted)",
-          }}
+          className={"px-3 py-2 text-caption leading-relaxed "+("ch-background-314b28"+' '+"ch-border-radius-332348"+' '+"ch-color-4a0211")}
+
         >
           {t(
             "profile.noHistory",
@@ -253,10 +249,10 @@ export function RoomSettingsModal({
 
   const rowStyle = { border: "1px solid var(--color-hairline-strong)", borderRadius: "var(--radius-control)" } as const;
   const toggle = (label: string, hint: string, checked: boolean, onChange: (v: boolean) => void, disabled = false) => (
-    <label className="hq-row flex cursor-pointer items-start justify-between gap-3 px-3 py-2" style={rowStyle}>
+    <label className="hq-row flex cursor-pointer items-start justify-between gap-3 px-3 py-2 border border-line-control rounded-field">
       <span className="min-w-0">
-        <span className="block text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>{label}</span>
-        <span className="mt-0.5 block text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>{hint}</span>
+        <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >{label}</span>
+        <span className={"mt-0.5 block text-caption "+("ch-color-4a0211")} >{hint}</span>
       </span>
       <input
         type="checkbox"
@@ -264,8 +260,8 @@ export function RoomSettingsModal({
         checked={checked}
         disabled={disabled}
         onChange={(e) => onChange(e.target.checked)}
-        className="mt-0.5 shrink-0"
-        style={{ width: 18, height: 18, accentColor: "var(--color-accent)" }}
+        className={"mt-0.5 shrink-0 "+("ch-width-f74111"+' '+"ch-height-ad1b79"+' '+"ch-accent-color-e56d5b")}
+
       />
     </label>
   );
@@ -285,7 +281,7 @@ export function RoomSettingsModal({
               size="sm"
               variant="ghost"
               onClick={() => setConfirmRemove(true)}
-              style={{ color: "var(--color-danger-600)", marginInlineEnd: "auto" }}
+              className={"ch-color-1fd63a"+' '+"ch-margin-inline-end-237aa8"}
             >
               {t("room.remove", "Remove room")}
             </Button>
@@ -311,22 +307,14 @@ export function RoomSettingsModal({
         />
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="room-kind" className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+          <label htmlFor="room-kind" className={"text-body-sm font-medium "+("ch-color-7f7330")} >
             {t("room.kind", "What kind of room")}
           </label>
           <select
             id="room-kind"
             value={kind}
             onChange={(e) => setKind(e.target.value as RoomKind)}
-            style={{
-              background: "var(--color-surface)",
-              border: "1px solid var(--color-hairline-strong)",
-              borderRadius: "var(--radius-control)",
-              padding: "7px 10px",
-              fontSize: "13px",
-              minHeight: 36,
-              color: "var(--color-ink)",
-            }}
+            className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-9efc87"+' '+"ch-color-7f7330"}
           >
             {ROOM_KINDS.filter((k) => k.id !== "desk" || room.kind === "desk").map((k) => (
               <option key={k.id} value={k.id}>
@@ -335,7 +323,7 @@ export function RoomSettingsModal({
             ))}
           </select>
           {spec && (
-            <span className="text-[11.5px]" style={{ color: "var(--color-ink-subtle)" }}>
+            <span className={"text-caption "+("ch-color-094083")} >
               {t(`roomKind.${spec.id}.hint`, spec.hint)}. {t("room.kindFurniture", "Changing the kind refurnishes the room.")}
             </span>
           )}
@@ -363,7 +351,7 @@ export function RoomSettingsModal({
           onChange={(e) => setCapacity(e.target.value)}
         />
 
-        <p className="pt-1 text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+        <p className={"pt-1 text-body-sm font-medium "+("ch-color-7f7330")} >
           {t("room.behaviour", "Behaviour")}
         </p>
 
@@ -400,22 +388,14 @@ export function RoomSettingsModal({
           )}
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="room-entry" className="text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+          <label htmlFor="room-entry" className={"text-body-sm font-medium "+("ch-color-7f7330")} >
             {t("room.entryStatus", "Status on entry")}
           </label>
           <select
             id="room-entry"
             value={entryStatus}
             onChange={(e) => setEntryStatus(e.target.value as typeof entryStatus)}
-            style={{
-              background: "var(--color-surface)",
-              border: "1px solid var(--color-hairline-strong)",
-              borderRadius: "var(--radius-control)",
-              padding: "7px 10px",
-              fontSize: "13px",
-              minHeight: 36,
-              color: "var(--color-ink)",
-            }}
+            className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-9efc87"+' '+"ch-color-7f7330"}
           >
             <option value="inherit">
               {t("room.entryInherit", "As the kind implies ({s})", {
@@ -437,36 +417,36 @@ export function RoomSettingsModal({
         )}
         {hoursOn && (
           <div className="flex items-end gap-3 ps-3">
-            <label className="flex flex-col gap-1 text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+            <label className={"flex flex-col gap-1 text-caption "+("ch-color-4a0211")} >
               {t("common.from", "From")}
               <input
                 type="time"
                 value={hoursFrom}
                 onChange={(e) => setHoursFrom(e.target.value)}
-                style={{ border: "1px solid var(--color-hairline-strong)", borderRadius: "var(--radius-control)", padding: "6px 9px", fontSize: "13px" }}
+                className={"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-8fb0de"+' '+"ch-font-size-ba0694"}
               />
             </label>
-            <label className="flex flex-col gap-1 text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+            <label className={"flex flex-col gap-1 text-caption "+("ch-color-4a0211")} >
               {t("common.to", "To")}
               <input
                 type="time"
                 value={hoursTo}
                 onChange={(e) => setHoursTo(e.target.value)}
-                style={{ border: "1px solid var(--color-hairline-strong)", borderRadius: "var(--radius-control)", padding: "6px 9px", fontSize: "13px" }}
+                className={"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-8fb0de"+' '+"ch-font-size-ba0694"}
               />
             </label>
           </div>
         )}
 
         <label
-          className="hq-row flex cursor-pointer items-start justify-between gap-3 px-3 py-2.5"
-          style={{ border: "1px solid var(--color-hairline-strong)", borderRadius: "var(--radius-control)" }}
+          className={"hq-row flex cursor-pointer items-start justify-between gap-3 px-3 py-2.5 "+("ch-border-8ff264"+' '+"ch-border-radius-332348")}
+
         >
           <span className="min-w-0">
-            <span className="block text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+            <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >
               {t("room.locked", "Lock this room")}
             </span>
-            <span className="mt-0.5 block text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+            <span className={"mt-0.5 block text-caption "+("ch-color-4a0211")} >
               {t("room.lockedHint", "People knock instead of walking in. Useful for a one to one.")}
             </span>
           </span>
@@ -475,8 +455,8 @@ export function RoomSettingsModal({
             role="switch"
             checked={locked}
             onChange={(e) => setLocked(e.target.checked)}
-            className="mt-0.5 shrink-0"
-            style={{ width: 18, height: 18, accentColor: "var(--color-accent)" }}
+            className={"mt-0.5 shrink-0 "+("ch-width-f74111"+' '+"ch-height-ad1b79"+' '+"ch-accent-color-e56d5b")}
+
           />
         </label>
       </div>
@@ -580,18 +560,14 @@ export function AddRoomModal({ open, onClose }: { open: boolean; onClose: () => 
         />
 
         <fieldset className="flex flex-col gap-1.5">
-          <legend className="pb-1.5 text-[12.5px] font-medium" style={{ color: "var(--color-ink)" }}>
+          <legend className={"pb-1.5 text-body-sm font-medium "+("ch-color-7f7330")} >
             {t("room.kind", "What kind of room")}
           </legend>
           {KINDS.map((k) => (
             <label
               key={k.id}
-              className="hq-row flex cursor-pointer items-start gap-2.5 px-3 py-2"
-              style={{
-                border: `1px solid ${kind === k.id ? "var(--color-accent)" : "var(--color-hairline-strong)"}`,
-                borderRadius: "var(--radius-control)",
-                background: kind === k.id ? "var(--color-accent-soft)" : "var(--color-surface)",
-              }}
+              className={"hq-row flex cursor-pointer items-start gap-2.5 px-3 py-2 "+((kind === k.id?"ch-border-c98846":"ch-border-8ff264")+' '+"ch-border-radius-332348"+' '+(kind === k.id?"ch-background-1416a8":"ch-background-751d03"))}
+
             >
               <input
                 type="radio"
@@ -601,14 +577,14 @@ export function AddRoomModal({ open, onClose }: { open: boolean; onClose: () => 
                   setKind(k.id);
                   setCapacity(String(k.capacity));
                 }}
-                className="mt-0.5"
-                style={{ accentColor: "var(--color-accent)" }}
+                className={"mt-0.5 "+("ch-accent-color-e56d5b")}
+
               />
               <span className="min-w-0">
-                <span className="block text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+                <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >
                   {t(`roomKind.${k.id}`, k.label)}
                 </span>
-                <span className="block text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+                <span className={"block text-caption "+("ch-color-4a0211")} >
                   {t(`roomKind.${k.id}.hint`, k.hint)}
                 </span>
               </span>

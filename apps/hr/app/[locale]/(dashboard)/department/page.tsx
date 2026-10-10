@@ -1,8 +1,8 @@
 "use client";
-import MainHeader from "@/components/layout/MainHeader";
+import MainHeader from "@/components/layout/ResourceHeader";
 import DepartmentCards from "@/components/pages/department/DepartmentCards";
-import DataTable from "@/components/shared/Table";
-import { Button } from "@/components/ui/button";
+import DataTable from "@/components/bindings/ResourceTable";
+import { Button } from "@orgtik/ui";
 import { useColumns } from "./columns";
 import DepartmentManagement from "@/components/pages/department/DepartmentManagement";
 import MonthYearFilter from "@/components/shared/MonthYearFilter";

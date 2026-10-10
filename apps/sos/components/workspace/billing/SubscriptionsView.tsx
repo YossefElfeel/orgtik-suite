@@ -12,6 +12,7 @@ import useWorkspace from "@/hooks/use-workspace";
 import { statusOf, type PlatformError } from "@/redux/features/platform/platformApi";
 import { useBillingLineActionMutation, useBillingPaymentMethodsQuery, useBillingSubscriptionsQuery, type SubscriptionLine } from "@/redux/features/platform/billing";
 import { LineCard, type LineIntent, type LineNotice } from "./LineCard";
+import { CancellationImpact, SubscriptionRetention } from "@/components/account/SubscriptionRetention";
 import { Money, cardExpired, useDay, useLocalized } from "./shared";
 
 // The most urgent first: what needs paying, then trials, then what's ending.
@@ -155,7 +156,7 @@ export function SubscriptionsView() {
         <ul className="flex flex-col gap-4" aria-label={t("subscriptions.listLabel")}>
           {lines.map((l) => (
             <li key={l.id}>
-              <LineCard line={l} mandatory={mandatory(l.tool)} hasWorkingCard={Boolean(card)} notice={notices[l.id]} onIntent={setIntent} />
+              <LineCard line={l} mandatory={mandatory(l.tool)} hasWorkingCard={Boolean(card)} notice={notices[l.id]} onIntent={setIntent} /><div className="mt-2 px-1"><SubscriptionRetention line={l} mandatory={mandatory(l.tool)} /></div>
             </li>
           ))}
         </ul>
@@ -168,7 +169,7 @@ export function SubscriptionsView() {
           open
           onOpenChange={(open) => !open && setIntent(null)}
           title={dialog.title}
-          impact={dialog.impact}
+          impact={intent?.kind === "cancel" ? <div className="flex flex-col gap-3">{dialog.impact}<CancellationImpact line={intent.line} /></div> : dialog.impact}
           confirmLabel={dialog.confirm}
           cancelLabel={"keep" in dialog ? dialog.keep : t("confirm.back")}
           tone={dialog.tone}

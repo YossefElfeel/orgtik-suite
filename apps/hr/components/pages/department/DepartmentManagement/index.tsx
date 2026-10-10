@@ -1,6 +1,6 @@
 import { CircleNotch as Loader2, Plus } from "@phosphor-icons/react";
 import ReusableSheet from "@/components/shared/ResuableSheet";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import SelectFormEle from "@/components/ui/form/select-form-element";
 import TextFormEle from "@/components/ui/form/text-form-element";
 import EmployeeComboBox from "@/components/ui/form/employee-combobox";
@@ -161,7 +161,7 @@ function DepartmentManagement({ department }: Props) {
         <>
           <Button
             size="lg"
-            variant="outline"
+            variant="secondary"
             onClick={() => setOpen(false)}
             disabled={isSubmitting}
           >

@@ -6,6 +6,8 @@ const { spawn, spawnSync } = require('node:child_process');
 const { createRequire } = require('node:module');
 
 const ROOT = path.resolve(__dirname, '../..');
+const portOffset = Number(process.env.ORGTIK_DEMO_PORT_OFFSET || 0);
+if (!Number.isInteger(portOffset) || portOffset < 0 || portOffset > 20000) throw new Error('ORGTIK_DEMO_PORT_OFFSET must be an integer from 0 to 20000.');
 const APPS = {
   sos: { dir: 'apps/sos', web: 3500, api: 7500 },
   tasks: { dir: 'apps/tasks', web: 3501, api: 7501 },
@@ -18,6 +20,8 @@ const APPS = {
   chats: { dir: 'apps/chats', web: 3509, api: 7509 },
   website: { dir: 'apps/website/landing-directions', web: 4597 },
 };
+for (const app of Object.values(APPS)) { app.web += portOffset; if (app.api) app.api += portOffset; }
+const iconsPort = 7599 + portOffset;
 const web = key => `http://localhost:${APPS[key].web}`;
 const api = key => `http://localhost:${APPS[key].api}`;
 const presentationPort = APPS.sos.api + 77;
@@ -41,7 +45,7 @@ console.log('OrgTik presentation sandbox · simulated data');
 console.log(`Frozen clock: ${now} · journal/accounts: memory`);
 for (const key of keys) console.log(`  ${key.padEnd(10)} ${web(key)}`);
 console.log(`  sign in    ${web('sos')}/auth/login`);
-console.log(`API ports: ${apiKeys.map(key => APPS[key].api).join(', ')} · icons: 7599`);
+console.log(`API ports: ${apiKeys.map(key => APPS[key].api).join(', ')} · icons: ${iconsPort}`);
 if (args.includes('--list') || args.includes('--dry-run')) {
   console.log('No services started or files changed.');
   process.exit(0);
@@ -75,7 +79,7 @@ function childEnv() {
     NODE_OPTIONS: '--max-http-header-size=65536',
     MOCK_JOURNAL: 'memory', MOCK_AUTH_STORE: 'memory',
     MOCK_SANDBOX: path.basename(runDir), MOCK_NOW: now, MOCK_CLOCK: 'frozen',
-    MOCK_PORT_OFFSET: '3500', ORGTIK_DEMO_RUN_DIR: runDir,
+    MOCK_PORT_OFFSET: String(3500 + portOffset), ORGTIK_DEMO_RUN_DIR: runDir,
     // Session metadata uses the existing file adapter in this private folder.
     MOCK_AUTH_FILE: path.join(runDir, 'data', 'session-metadata'),
     SUITE_WEB_URLS: JSON.stringify(Object.fromEntries(Object.keys(APPS).map(key => [key, web(key)]))),
@@ -158,7 +162,7 @@ function portFree(port) {
 }
 
 (async () => {
-  const ports = [...new Set([...keys.map(key => APPS[key].web), ...apiKeys.map(key => APPS[key].api), 7599, presentationPort])];
+  const ports = [...new Set([...keys.map(key => APPS[key].web), ...apiKeys.map(key => APPS[key].api), iconsPort, presentationPort])];
   for (const port of ports) await portFree(port);
   if (stopping) return;
   for (const key of keys) if (!fs.existsSync(path.join(ROOT, APPS[key].dir, 'node_modules'))) throw new Error(`${key}: dependencies missing. Run pnpm install first.`);

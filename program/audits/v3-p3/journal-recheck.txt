@@ -1,0 +1,9 @@
+  ok  a fresh journal records one due checkpoint and its two private fixture stores
+  ok  instance A records its two changes
+  ok  A sees its new project and folder
+  ok  a cold start (B) rebuilds A's changes with the same ids
+  ok  B's own change is numbered after A's
+  ok  another cold start (C) sees every change, nothing skipped
+  ok  the seed is identical on every instance
+  ok  a reset empties the journal and drops the changes
+journal: 8/8 passed

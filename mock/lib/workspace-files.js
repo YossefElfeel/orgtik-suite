@@ -6,8 +6,8 @@ const lib = require('../apps/files/lib');
 const boards = require('./whiteboard-scene');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
 const copy = value => JSON.parse(JSON.stringify(value));
-const SAMPLES = Object.freeze({ pdf_company_profile: 'Sample company profile.pdf', docx_runbook: 'Sample runbook.docx', txt_release_notes: 'Sample release notes.txt', png_app_home: 'Sample home screen.png', png_app_checkout: 'Sample checkout flow.png', png_dashboard_dark: 'Sample dashboard.png', jpg_mango: 'Sample product photo.jpg' });
-const TYPES = new Set(['application/pdf', 'text/plain', 'text/csv', 'text/markdown', 'application/json', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/zip', 'image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/svg+xml']);
+const SAMPLES = Object.freeze({ pdf_company_profile: 'Sample company profile.pdf', docx_runbook: 'Sample runbook.docx', txt_release_notes: 'Sample release notes.txt', png_app_home: 'Sample home screen.png', png_app_checkout: 'Sample checkout flow.png', png_dashboard_dark: 'Sample dashboard.png', jpg_mango: 'Sample product photo.jpg', mp4_app_walkthrough: 'Sample app walkthrough.mp4' });
+const TYPES = new Set(['application/pdf', 'text/plain', 'text/csv', 'text/markdown', 'application/json', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/zip', 'image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/svg+xml', 'video/mp4']);
 TYPES.add(boards.MIME);
 function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, assetDir, boardAuthority, now = () => new Date().toISOString(), fileOut }) {
   const acl = createFileAccess({ state, identity, boardAuthority });
@@ -64,6 +64,11 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
   function contentSharedFile({ actorId, fileId, versionId }) {
     const user = actor(actorId), file = record(user, fileId), selected = version(file, versionId);
     return { ...(selected.binary.bytes ? { bytes: selected.binary.bytes } : { path: selected.binary.path }), mimetype: selected.binary.mimetype, name: file.name };
+  }
+  function packageServiceDelivery({ actorId, fileId, versionId }) {
+    const user = actor(actorId), file = record(user, fileId), selected = version(file, versionId);
+    if (selected.storage.kind !== 'asset' || !selected.binary.path) throw fail(422, 'packaged_assets_only', 'Choose an immutable packaged sample asset for this delivery.');
+    return { reference: { workspaceId, fileId, versionId: selected.id }, ...metadata(file, selected), assetKey: selected.storage.key, sha256: crypto.createHash('sha256').update(fs.readFileSync(selected.binary.path)).digest('hex') };
   }
   function listSharedFiles({ actorId, search = '', page = 1, limit = 20 }) {
     const user = actor(actorId), p = typeof page === 'string' && /^\d+$/.test(page) ? Number(page) : page, size = typeof limit === 'string' && /^\d+$/.test(limit) ? Number(limit) : limit;
@@ -167,6 +172,6 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
     const binary = content({ kind: 'asset', key: 'svg_whiteboard_sample' });
     return { path: binary.path, mimetype: binary.mimetype, name: 'whiteboard-sample.svg', sample: true };
   }
-  return { listSharedFiles, resolveSharedFile, contentSharedFile, sampleCatalog, createSample, authorizeWhiteboard, createWhiteboard, saveWhiteboard, resolveWhiteboard, getVersionMetadata, previewWhiteboard, close() { closed = true; } };
+  return { listSharedFiles, resolveSharedFile, contentSharedFile, packageServiceDelivery, sampleCatalog, createSample, authorizeWhiteboard, createWhiteboard, saveWhiteboard, resolveWhiteboard, getVersionMetadata, previewWhiteboard, close() { closed = true; } };
 }
 module.exports = { createWorkspaceFiles, SAMPLES };

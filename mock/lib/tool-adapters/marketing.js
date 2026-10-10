@@ -73,6 +73,14 @@ function createWorkspaceRuntime(input, appModule) {
       if (!target) { row.ownershipArchivedAt = at; row.custodyReadOnly = true; }
       (target ? result.transferred : result.archived).push(`${key}:${row.id}`);
     }
+    const extension = db.marketingV3;
+    for (const [key, list] of Object.entries({ socialThreads: extension.socialThreads, journeys: extension.journeys, drafts: extension.drafts, testSends: extension.testSends, brandKits: Object.values(extension.brandKits), emailDesigns: Object.values(extension.emailDesigns), domains: Object.values(extension.domains) })) for (const row of list) {
+      const owner = Object.hasOwn(row, "ownerUserId") ? row.ownerUserId : row.createdBy ?? row.recordedBy ?? row.by;
+      if (Number(owner) !== command.fromUserId) continue;
+      row.ownerUserId = target?.id ?? null;
+      if (!target) { row.ownershipArchivedAt = at; row.custodyReadOnly = true; }
+      (target ? result.transferred : result.archived).push(`marketingV3.${key}:${row.id || row.senderId || row.projectId || "settings"}`);
+    }
     for (const project of db.projects) if (project.memberUserIds.includes(command.fromUserId)) project.memberUserIds = [...new Set(project.memberUserIds.filter(id => id !== command.fromUserId).concat(target ? [target.id] : []))];
     delete db.activeProject[command.fromUserId];
     db.ownershipTransfers[command.operationId] = { fingerprint, result: clone(result) };
@@ -82,6 +90,15 @@ function createWorkspaceRuntime(input, appModule) {
     open(); if (!command.snapshot) throw failure("Marketing replay requires committed snapshot effects");
     checkSnapshot(command.snapshot); state.db = clone(command.snapshot.data);
   }
-  return { router, exportSnapshot, bootstrap, transferOwnership, applyCommitted, usage: () => { open(); return [{ key: "brands", used: state.db.projects.length }, { key: "posts", used: state.db.posts.length }, { key: "campaigns", used: state.db.campaigns.length }]; }, transitionCalendar() { open(); state.transitionCalendar(); }, close() { closed = true; } };
+  function suiteFeed(context) {
+    const base = bootstrap(context);
+    if (base.state === "no_access") return base;
+    const visible = new Set(base.projects.map(row => row.id)), db = state.db;
+    const campaigns = db.campaigns.filter(row => visible.has(row.projectId)).map(row => ({ id: row.id, title: row.name, projectId: row.projectId, status: row.status, at: row.updatedAt, path: `/campaigns/${encodeURIComponent(row.id)}?projectId=${encodeURIComponent(row.projectId)}` }));
+    const posts = db.posts.filter(row => visible.has(row.projectId)).map(row => ({ id: row.id, title: row.title, projectId: row.projectId, status: row.status, at: row.updatedAt, path: `/posts/${encodeURIComponent(row.id)}?projectId=${encodeURIComponent(row.projectId)}` }));
+    const journeys = db.marketingV3.journeys.filter(row => visible.has(row.projectId)).map(row => ({ id: row.id, title: row.name, projectId: row.projectId, status: row.state, at: row.updatedAt, path: `/journeys?journey=${encodeURIComponent(row.id)}&projectId=${encodeURIComponent(row.projectId)}` }));
+    return { ...base, campaigns, posts, journeys, activities: [...campaigns, ...posts, ...journeys].map(row => ({ id: row.id, title: row.title, at: row.at, action: row.status, path: row.path })), notifications: [] };
+  }
+  return { journeyTaskCandidate: (...args) => state.v3.journeyTaskCandidate(...args), campaignCandidate: (...args) => state.v3.campaignCandidate(...args), recordAttribution: (...args) => state.v3.recordAttribution(...args), recordDelivery: (...args) => state.v3.recordDelivery(...args), router, exportSnapshot, bootstrap, suiteFeed, transferOwnership, applyCommitted, usage: () => { open(); return [{ key: "brands", used: state.db.projects.length }, { key: "posts", used: state.db.posts.length }, { key: "campaigns", used: state.db.campaigns.length }]; }, transitionCalendar() { open(); state.transitionCalendar(); }, close() { closed = true; } };
 }
 module.exports = { createWorkspaceRuntime, SCHEMA, LISTS };

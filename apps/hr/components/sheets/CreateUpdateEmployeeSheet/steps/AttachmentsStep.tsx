@@ -10,7 +10,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormField, FormItem, FormControl } from "@/components/ui/form";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { cn } from "@/lib/utils";
 import { useEmployeeWizard } from "../EmployeeWizardContext";
 import { useSearchParams } from "next/navigation";
@@ -296,7 +296,7 @@ export function AttachmentsStep() {
               </p>
               <Button
                 type="button"
-                variant="outline"
+                variant="secondary"
                 size="lg"
                 className="mt-2 py-5 px-12"
                 disabled={isUploading}
@@ -360,7 +360,7 @@ export function AttachmentsStep() {
             className="min-w-32"
             type="button"
             size="lg"
-            variant="outline"
+            variant="secondary"
             onClick={onBack}
           >
             {t("nav.back")}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import DataTable from "@/components/shared/Table";
+import DataTable from "@/components/bindings/ResourceTable";
 import EmployeeCard from "@/components/pages/employee/EmployeeCard";
 import { useGetEmployeesQuery } from "@/redux/features/employee/employeeApi";
 import { getColumns } from "./columns";

@@ -37,23 +37,8 @@ export function nextPresentationDue(due: string, recurrence: PresentationTask["r
   return date.toISOString().slice(0, 10);
 }
 // RFC4180 fields including escaped quotes and newlines. A small bounded text import, not binary upload.
-export function parsePresentationCsv(text: string): string[][] {
-  const rows: string[][] = [], row: string[] = []; let value = "", quoted = false;
-  for (let i = 0; i < text.length; i++) {
-    const char = text[i];
-    if (char === '"') {
-      if (quoted && text[i + 1] === '"') { value += '"'; i++; }
-      else if (quoted || !value) quoted = !quoted;
-      else value += char;
-    } else if (!quoted && (char === "," || char === "\n" || char === "\r")) {
-      row.push(value); value = "";
-      if (char !== ",") { if (char === "\r" && text[i + 1] === "\n") i++; if (row.some(x => x.trim())) rows.push([...row]); row.length = 0; }
-    } else value += char;
-  }
-  if (quoted) throw new Error("csv");
-  row.push(value); if (row.some(x => x.trim())) rows.push(row);
-  return rows;
-}
+export { parseTaskCsv as parsePresentationCsv } from "./task-csv";
+
 export function presentationCsv(tasks: PresentationTask[]): string {
   // Spreadsheet apps treat these prefixes as formulas even in quoted fields.
   const cell = (value: string) => `"${(/^[=+@-]/.test(value) ? "'" + value : value).replaceAll('"', '""')}"`;

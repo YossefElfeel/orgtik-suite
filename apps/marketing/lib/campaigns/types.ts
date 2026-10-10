@@ -44,7 +44,8 @@ export interface CampaignLinkedPost {
 }
 
 export interface MessagingAudienceSelection {
-  sourceType: "COMPANY" | "UPLOAD";
+  sourceType: "COMPANY" | "UPLOAD" | "CRM";
+  crmRecipientRefs?: { workspaceId: string; contactId: string }[];
   audienceId: string;
   audienceLabel?: string;
   segmentId: string;

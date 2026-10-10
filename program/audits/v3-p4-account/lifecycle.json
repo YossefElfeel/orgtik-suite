@@ -1,0 +1,58 @@
+{
+  "scope": "Ordinary Account routes with actual authority in isolated offset500 demo. Provider settings/delivery are labeled mock; no external sending or payment claims.",
+  "mode": "lifecycle",
+  "checks": [
+    {
+      "name": "New account Home has actual empty first-tool setup",
+      "pass": true
+    },
+    {
+      "name": "Owner starts actual Tasks trial from ordinary Account",
+      "pass": true
+    },
+    {
+      "name": "Actual menu theme plus language/density persist on person",
+      "pass": true
+    },
+    {
+      "name": "Signed Account→Tasks handoff carries same actual workspace and preferences",
+      "pass": true
+    },
+    {
+      "name": "Second workspace is actually selected and empty",
+      "pass": true
+    },
+    {
+      "name": "Ordinary ownership transfer uses actual successor membership",
+      "pass": true
+    },
+    {
+      "name": "Leaving selected workspace switches to remaining actual workspace",
+      "pass": true
+    },
+    {
+      "name": "Leaving last membership selects identity mode with actual sessions",
+      "pass": true
+    },
+    {
+      "name": "Personal deletion signs out and revokes actual identity token",
+      "pass": true
+    },
+    {
+      "name": "Sign out all revokes the actual realm session",
+      "pass": true
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "first-run.png",
+    "theme-handoff-tasks.png",
+    "identity.png"
+  ],
+  "errors": [],
+  "completed": true
+}

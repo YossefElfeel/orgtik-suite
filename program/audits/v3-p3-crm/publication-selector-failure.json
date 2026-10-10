@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-10",
+  "source": "ff9ea42 publication contract + CRM follow-up",
+  "checks": [
+    {
+      "name": "Canonical /catalog ordinary route works",
+      "pass": true
+    },
+    {
+      "name": "Canonical service detail editor saves and returns to catalog",
+      "pass": true
+    },
+    {
+      "name": "Service duration policy persists as draft",
+      "pass": true
+    }
+  ],
+  "captures": [],
+  "errors": [],
+  "failure": "locator.waitFor: Error: strict mode violation: getByRole('heading', { name: 'Graphic design', exact: true }) resolved to 2 elements:\n    1) <h3 dir=\"auto\" class=\"text-body font-semibold\">Graphic design</h3> aka getByRole('listitem').filter({ hasText: 'Graphic designMonthly CHF' }).getByRole('heading')\n    2) <h3 dir=\"auto\" class=\"font-display text-title-sm\">Graphic design</h3> aka getByRole('listitem').filter({ hasText: 'Graphic designCHF' }).getByRole('heading')\n\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: 'Graphic design', exact: true }) to be visible\u001b[22m\n"
+}

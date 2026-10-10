@@ -3,6 +3,7 @@
 import { useAppSelector } from "@/redux/app/hooks";
 import { salesRoleFrom, type AppRole } from "@/types/role";
 import { useClientSession, toolAccess } from "@orgtik/ui/auth";
+import { useSuite } from "@orgtik/ui";
 import type { IUser } from "@somion/sos-bar";
 
 /**
@@ -22,10 +23,11 @@ import type { IUser } from "@somion/sos-bar";
  */
 export function useRole() {
   const session = useClientSession<IUser>();
+  const snapshot = useSuite().snapshot || session?.workspaceContext;
   const storedUser = useAppSelector((state) => state.auth.user) as (Record<string, unknown> & { firstName?: string; lastName?: string; username?: string; scopes?: unknown }) | null;
   const user = session?.user || storedUser;
-  const access = toolAccess(session?.workspaceContext, "crm", session?.scopes || storedUser?.scopes);
-  const found = salesRoleFrom(session?.scopes || storedUser?.scopes, session?.workspaceContext);
+  const access = toolAccess(snapshot, "crm", session?.scopes || storedUser?.scopes);
+  const found = salesRoleFrom(session?.scopes || storedUser?.scopes, snapshot);
   const role: AppRole = found ?? "customer";
   const readOnlySession = access.readOnly;
   const fullName = user ? [user.firstName, user.lastName].filter(Boolean).join(" ").trim() || (user.username as string) || null : null;

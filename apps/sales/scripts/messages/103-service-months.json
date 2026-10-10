@@ -1,0 +1,9 @@
+{
+  "ServiceCatalog.months": {
+    "en": "{months, plural, one {# month} other {# months}}",
+    "ar": "{months, plural, zero {صفر أشهر} one {شهر واحد} two {شهران} few {# أشهر} many {# شهرًا} other {# شهر}}",
+    "de": "{months, plural, one {# Monat} other {# Monate}}",
+    "fr": "{months, plural, one {# mois} other {# mois}}",
+    "it": "{months, plural, one {# mese} other {# mesi}}"
+  }
+}

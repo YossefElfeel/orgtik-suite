@@ -11,8 +11,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Input } from "@orgtik/ui";
+import { Button } from "@orgtik/ui";
 import { DateTimeFormElement } from "@/components/ui/form/date-time-form-element";
 
 const PublicHolidaysFields: React.FC = () => {
@@ -30,7 +30,7 @@ const PublicHolidaysFields: React.FC = () => {
         <h3 className="text-lg font-semibold">{t("publicHolidays")}</h3>
         <Button
           type="button"
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => append({ name: "", date: "" })}
           className="gap-2"

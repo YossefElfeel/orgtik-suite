@@ -2,13 +2,13 @@
 import { CircleNotch as Loader2, DownloadSimple as Download, Eye, Paperclip, PencilSimple as Pencil, Plus, Trash as Trash2 } from "@phosphor-icons/react";
 
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { SectionCard } from "../SectionCard";
 import type { AttachmentItem } from "../types";
 import pdfIcon from "@/public/images/pdf.svg";
 
-import { InfoCardSkeleton } from "@/components/ui/info-card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { InfoCardSkeleton } from "@/components/shared/EmployeeFacts";
+import { Skeleton } from "@orgtik/ui";
 import { useTranslations } from "next-intl";
 import { useRef } from "react";
 import {
@@ -113,7 +113,7 @@ export function AttachmentSection({
           />
           <Button
             type="button"
-            variant="outline"
+            variant="secondary"
             size="sm"
             className="h-8 gap-1.5 rounded-lg border-border px-3 text-secondary shadow-sm hover:bg-muted"
             onClick={handleEditClick}
@@ -154,8 +154,8 @@ export function AttachmentSection({
             <div className="flex items-center gap-2">
               <Button
                 type="button"
-                variant="outline"
-                size="icon"
+                variant="secondary"
+                size="sm"
                 className="border-border bg-card text-secondary hover:bg-muted"
                 aria-label={t("attachment.viewFile", { name: file.name })}
                 onClick={() => window.open(file.url, "_blank")}
@@ -164,8 +164,8 @@ export function AttachmentSection({
               </Button>
               <Button
                 type="button"
-                variant="outline"
-                size="icon"
+                variant="secondary"
+                size="sm"
                 className="border-border bg-card text-secondary hover:bg-muted"
                 aria-label={tActions("downloadFile", { name: file.name })}
                 onClick={() => handleDownload(file.url, file.name)}
@@ -181,8 +181,8 @@ export function AttachmentSection({
                 trigger={
                   <Button
                     type="button"
-                    variant="outline"
-                    size="icon"
+                    variant="secondary"
+                    size="sm"
                     className="border-border bg-card text-destructive hover:bg-destructive/10"
                     aria-label={t("attachment.deleteFile", { name: file.name })}
                     disabled={isDeleting}

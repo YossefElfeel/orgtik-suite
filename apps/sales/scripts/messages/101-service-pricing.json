@@ -1,0 +1,128 @@
+{
+  "ServiceCatalog.pricingTitle": {
+    "en": "Service prices",
+    "ar": "أسعار الخدمات",
+    "de": "Servicepreise",
+    "fr": "Prix des services",
+    "it": "Prezzi servizi"
+  },
+  "ServiceCatalog.backCatalog": {
+    "en": "Back to catalog",
+    "ar": "العودة إلى الكتالوج",
+    "de": "Zurück zum Katalog",
+    "fr": "Retour au catalogue",
+    "it": "Torna al catalogo"
+  },
+  "ServiceCatalog.editPrices": {
+    "en": "Edit prices",
+    "ar": "تعديل الأسعار",
+    "de": "Preise bearbeiten",
+    "fr": "Modifier les prix",
+    "it": "Modifica prezzi"
+  },
+  "ServiceCatalog.overrideHelp": {
+    "en": "Country overrides take priority over zone prices. Clear a value to use the shared automatic price. All changes are saved as drafts.",
+    "ar": "تسبق أسعار الدولة أسعار المنطقة. امسح القيمة لاستخدام السعر التلقائي المشترك. تُحفظ كل التغييرات كمسودات.",
+    "de": "Länderpreise haben Vorrang vor Zonenpreisen. Wert löschen für den gemeinsamen automatischen Preis. Änderungen bleiben Entwürfe.",
+    "fr": "Les prix pays priment sur les zones. Effacez une valeur pour utiliser le prix automatique commun. Les changements restent en brouillon.",
+    "it": "I prezzi nazionali hanno priorità sulle zone. Cancella un valore per il prezzo automatico condiviso. Le modifiche restano in bozza."
+  },
+  "ServiceCatalog.regionalPrices": {
+    "en": "Zone prices",
+    "ar": "أسعار المناطق",
+    "de": "Zonenpreise",
+    "fr": "Prix par zone",
+    "it": "Prezzi per zona"
+  },
+  "ServiceCatalog.countryPrices": {
+    "en": "Country overrides",
+    "ar": "أسعار الدول المخصصة",
+    "de": "Länderpreise",
+    "fr": "Prix spécifiques par pays",
+    "it": "Prezzi nazionali personalizzati"
+  },
+  "ServiceCatalog.automatic": {
+    "en": "Automatic",
+    "ar": "تلقائي",
+    "de": "Automatisch",
+    "fr": "Automatique",
+    "it": "Automatico"
+  },
+  "ServiceCatalog.policyError": {
+    "en": "The shared pricing policy could not be loaded.",
+    "ar": "تعذر تحميل سياسة الأسعار المشتركة.",
+    "de": "Gemeinsame Preisregeln konnten nicht geladen werden.",
+    "fr": "Impossible de charger la politique tarifaire commune.",
+    "it": "Impossibile caricare la politica prezzi condivisa."
+  },
+  "ServiceCatalog.policyTitle": {
+    "en": "Duration and quantity policy",
+    "ar": "سياسة المدة والعدد",
+    "de": "Laufzeit- und Mengenregeln",
+    "fr": "Politique de durée et quantité",
+    "it": "Politica durata e quantità"
+  },
+  "ServiceCatalog.policyHelp": {
+    "en": "The public pricing resolver applies the larger duration or item-count saving, with duration winning a tie. Savings are not added together.",
+    "ar": "يطبق محرك الأسعار العام الخصم الأكبر للمدة أو عدد العناصر، وتُفضّل المدة عند التعادل. لا تُجمع الخصومات.",
+    "de": "Die öffentliche Preisberechnung nutzt den höheren Laufzeit- oder Mengenrabatt. Bei Gleichstand zählt die Laufzeit; Rabatte werden nicht addiert.",
+    "fr": "Le calcul public applique la plus forte réduction de durée ou de quantité. La durée prévaut en cas d’égalité ; les réductions ne se cumulent pas.",
+    "it": "Il calcolo pubblico applica il maggiore sconto di durata o quantità. A parità prevale la durata; gli sconti non si sommano."
+  },
+  "ServiceCatalog.durationPolicy": {
+    "en": "Duration savings",
+    "ar": "خصومات المدة",
+    "de": "Laufzeitrabatte",
+    "fr": "Réductions de durée",
+    "it": "Sconti durata"
+  },
+  "ServiceCatalog.countPolicy": {
+    "en": "Items in one group",
+    "ar": "العناصر في مجموعة واحدة",
+    "de": "Positionen in einer Gruppe",
+    "fr": "Articles dans un groupe",
+    "it": "Elementi in un gruppo"
+  },
+  "ServiceCatalog.months": {
+    "en": "{months} months",
+    "ar": "{months} أشهر",
+    "de": "{months} Monate",
+    "fr": "{months} mois",
+    "it": "{months} mesi"
+  },
+  "ServiceCatalog.items": {
+    "en": "{count}+ items",
+    "ar": "{count}+ عناصر",
+    "de": "{count}+ Positionen",
+    "fr": "{count}+ articles",
+    "it": "{count}+ elementi"
+  },
+  "ServiceRequests.assignTo": {
+    "en": "Assign delivery to",
+    "ar": "تعيين مسؤول التسليم",
+    "de": "Abwicklung zuweisen",
+    "fr": "Attribuer la livraison",
+    "it": "Assegna consegna a"
+  },
+  "ServiceRequests.staffError": {
+    "en": "Eligible staff could not be loaded.",
+    "ar": "تعذر تحميل الموظفين المؤهلين.",
+    "de": "Verfügbare Mitarbeiter konnten nicht geladen werden.",
+    "fr": "Impossible de charger les responsables éligibles.",
+    "it": "Impossibile caricare il personale idoneo."
+  },
+  "ServiceRequests.customer": {
+    "en": "Customer",
+    "ar": "العميل",
+    "de": "Kunde",
+    "fr": "Client",
+    "it": "Cliente"
+  },
+  "ServiceRequests.staff": {
+    "en": "OrgTik staff",
+    "ar": "فريق OrgTik",
+    "de": "OrgTik-Mitarbeiter",
+    "fr": "Équipe OrgTik",
+    "it": "Personale OrgTik"
+  }
+}

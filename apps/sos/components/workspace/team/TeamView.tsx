@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { CheckCircle, DotsThreeVertical, EnvelopeSimple, Plus, ShieldCheck, SquaresFour, Trash, User, UserMinus } from '@phosphor-icons/react';
-import { Avatar, Badge, Button, Card, ConfirmDialog, ErrorState, IconButton, LoadingState, Menu, MenuContent, MenuItem, MenuSeparator, MenuTrigger, PageHeader, Tag, toast, useFormatter } from '@orgtik/ui';
+import { Avatar, Badge, Button, Card, ConfirmDialog, ErrorState, IconButton, LoadingState, Menu, MenuContent, MenuItem, MenuSeparator, MenuTrigger, NoPermissionState, PageHeader, Tag, Toolbar, toast, useFormatter } from '@orgtik/ui';
 import { DataTable, type ColumnDef } from '@orgtik/ui/table';
 import useWorkspace from '@/hooks/use-workspace';
 import type { AppMe, WorkspaceRole } from '@/redux/features/platform/platformApi';
@@ -18,18 +18,19 @@ import { attemptNamespace, readActionAttempt, saveActionAttempt, uncertainResult
 import { PaginatedTable } from "@orgtik/ui/table";
 type Action = { kind: 'role'; role: Exclude<WorkspaceRole, 'owner'> } | { kind: 'access' } | { kind: 'remove' };
 const MAX_TOOLS = 2;
-export function TeamView() {
+function TeamContent() {
   const t = useTranslations('Team'), ws = useWorkspace(), me = ws.me as AppMe;
   const { data: team, isLoading, isError, refetch } = useGetTeamQuery();
   const canManage = ws.isAdmin && me.can.team && !me.workspaceContext?.actor.readOnly && me.workspace.state !== 'suspended';
   const [inviting, setInviting] = useState(false), [target, setTarget] = useState<{ member: TeamMember; action: Action } | null>(null), [problem, setProblem] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
   const columns = useColumns({ me, canManage, onAction: (member, action) => setTarget({ member, action }) });
   return <div className="flex flex-col gap-6">
     <PageHeader title={t('title')} description={t(canManage ? 'description' : 'readOnly', { name: me.workspace.name })} actions={canManage && team ? <div className="flex flex-wrap gap-2"><OwnershipTransferDialog me={me} team={team} /><Button variant="primary" startIcon={<Plus />} onClick={() => setInviting(true)}>{t('invite.open')}</Button></div> : undefined} />
     {problem && <Notice tone="danger">{problem}</Notice>}
     {isLoading ? <LoadingState rows={6} /> : isError || !team?.meta.perTool ? <ErrorState title={t('failedTitle')} description={t('failedBody')} onRetry={refetch} /> : <>
-      <SeatsSummary team={team} me={me} />
-      <DataTable label={t('tableLabel', { name: me.workspace.name })} columns={columns} data={team.items} getRowId={member => member.id} paginate empty={{ title: t('emptyTitle'), description: t('emptyBody') }} />
+      <SeatsSummary team={team} me={me} /><Toolbar label={t("title")} search={{ value: search, onChange: setSearch, label: t("title") }} />
+      <DataTable label={t('tableLabel', { name: me.workspace.name })} columns={columns} data={team.items.filter(member => `${member.name} ${member.email}`.toLowerCase().includes(search.toLowerCase()))} getRowId={member => member.id} paginate empty={{ title: t('emptyTitle'), description: t('emptyBody') }} />
       {canManage && <><Invitations me={me} /><InviteDialog open={inviting} onOpenChange={setInviting} me={me} team={team} /></>}
       {canManage && <MemberChange team={team} me={me} target={target} onClose={() => setTarget(null)} onProblem={setProblem} />}
     </>}
@@ -47,6 +48,7 @@ function SeatsSummary({ team, me }: { team: Team; me: AppMe }) {
   </Card>;
 }
 function useColumns({ me, canManage, onAction }: { me: AppMe; canManage: boolean; onAction: (member: TeamMember, action: Action) => void }) {
+  const tv = useTranslations('AccountV3');
   const t = useTranslations('Team'), tr = useTranslations('Workspace.roles'), f = useFormatter(), name = useLocalized();
   const owner = me.workspace.role === 'owner';
   return useMemo<ColumnDef<TeamMember>[]>(() => {
@@ -54,8 +56,8 @@ function useColumns({ me, canManage, onAction }: { me: AppMe; canManage: boolean
     const columns: ColumnDef<TeamMember>[] = [
       { id: 'person', header: t('colPerson'), meta: { truncate: true }, cell: ({ row }) => <span className="flex min-w-0 items-center gap-3"><Avatar name={row.original.name} size="sm" decorative /><span className="flex min-w-0 flex-col"><bdi className="truncate font-semibold text-fg">{row.original.name}{row.original.userKey === me.user.key && <span className="font-normal text-fg-muted"> ({t('you')})</span>}</bdi><span dir="ltr" className="truncate text-start text-caption text-fg-muted">{row.original.email}</span></span></span> },
       { id: 'role', header: t('colRole'), cell: ({ row }) => <span className="whitespace-nowrap">{tr(row.original.role)}</span> },
-      { id: 'status', header: t('colStatus'), cell: ({ row }) => <Badge tone={row.original.status === 'active' ? 'success' : 'warning'} emphasis="subtle" icon={row.original.status === 'active' ? <CheckCircle weight="fill" /> : <EnvelopeSimple />}>{t(row.original.status === 'active' ? 'active' : 'invited')}</Badge> },
-      { id: 'seat', header: t('colSeat'), cell: ({ row }) => <span className="text-fg-muted">{t(membershipSeatState(row.original.status) === 'assigned' ? 'seatPaid' : 'seatReserved')}</span> },
+      { id: 'status', header: t('colStatus'), cell: ({ row }) => <Badge tone={row.original.status === 'active' ? 'success' : 'warning'} emphasis="subtle" icon={row.original.status === 'active' ? <CheckCircle weight="fill" /> : <EnvelopeSimple />}>{row.original.status === 'suspended' ? tv('suspended') : row.original.status === 'removed' ? tv('removed') : t(row.original.status === 'active' ? 'active' : 'invited')}</Badge> },
+      { id: 'seat', header: t('colSeat'), cell: ({ row }) => <span className="text-fg-muted">{['suspended', 'removed'].includes(row.original.status) ? tv('accessSuspended') : t(membershipSeatState(row.original.status) === 'assigned' ? 'seatPaid' : 'seatReserved')}</span> },
       { id: 'tools', header: t('colTools'), cell: ({ row }) => { const tools = row.original.tools; if (tools === null) return <span className="text-fg-muted">{t('allTools')}</span>; if (!tools.length) return <span className="text-fg-muted">{t(row.original.status === 'active' ? 'noTools' : 'pendingTools')}</span>; return <span className="flex flex-wrap gap-1">{tools.slice(0, MAX_TOOLS).map(key => <Tag key={key}>{toolName(key)}</Tag>)}{tools.length > MAX_TOOLS && <span className="text-caption text-fg-muted">{t('moreTools', { count: tools.length - MAX_TOOLS })}</span>}</span>; } },
       { id: 'joined', header: t('colJoined'), cell: ({ row }) => <span className="whitespace-nowrap text-fg-muted">{row.original.joinedAt ? f.date(row.original.joinedAt, { dateStyle: 'medium' }) : t('notJoined')}</span> },
     ];
@@ -97,4 +99,11 @@ function MemberChange({ team, me, target, onClose, onProblem }: { team: Team; me
     <ConfirmDialog open={action?.kind === 'remove'} onOpenChange={open => !open && onClose()} title={member ? t('removeTitle', { name: member.name }) : ''} impact={member ? `${t('impact.remove', { name: member.name, workspace: me.workspace.name })} ${t('impact.releases')}` : ''} confirmLabel={t('remove')} tone="danger" onConfirm={() => member ? run({ id: member.id, status: 'removed' }, t('removed', { name: member.name })) : undefined} />
     <AccessDialog open={action?.kind === 'access'} onOpenChange={open => !open && onClose()} member={member || null} team={team} me={me} onSave={tools => member ? run({ id: member.id, tools }, t('accessChanged', { name: member.name })) : Promise.resolve()} />
   </>;
+}
+
+export function TeamView() {
+  const ws = useWorkspace(), t = useTranslations("AccountV3");
+  if (ws.error) return [401, 403].includes((ws.error as { status?: number }).status || 0) ? <NoPermissionState title={t("forbidden")} description={t("askOwner")} /> : <ErrorState title={t("loadFailed")} onRetry={ws.refetch} />;
+  if (ws.isLoading || !ws.me) return <LoadingState rows={6} />;
+  return <TeamContent />;
 }

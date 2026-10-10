@@ -9,7 +9,7 @@ const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.jso
 const server=http.createServer((req,res)=>fs.readFile(path.join(root,decodeURIComponent(req.url.split('?')[0])),(error,data)=>error?res.writeHead(404).end():res.writeHead(200,{'content-type':types[path.extname(req.url.split('?')[0])]||'application/octet-stream'}).end(data))).listen(0,'127.0.0.1');
 const port=await new Promise(resolve=>server.on('listening',()=>resolve(server.address().port))),browser=await chromium.launch(),checks=[];
 const assert=(name,pass,details)=>{checks.push({name,pass:Boolean(pass),details});if(!pass)throw Error(name+' '+JSON.stringify(details))};
-async function open(story){const{context,page}=await createVisualPage(browser);await page.goto(`http://127.0.0.1:${port}/iframe.html?id=${story}&viewMode=story&globals=theme:light;locale:en`,{waitUntil:'networkidle'});await settleVisualStory(page,'theme:light;locale:en');page.setDefaultTimeout(15000);return{context,page}}
+async function open(story){const{context,page}=await createVisualPage(browser),errors=[];page.on('pageerror',error=>errors.push(error.message));page.on('console',message=>{if(message.type()==='error')errors.push(message.text())});await page.goto(`http://127.0.0.1:${port}/iframe.html?id=${story}&viewMode=story&globals=theme:light;locale:en`,{waitUntil:'networkidle'});await settleVisualStory(page,'theme:light;locale:en');page.setDefaultTimeout(15000);return{context,page,errors}}
 try{
  {
   const{context,page}=await open('v2-lists-and-input--list-controls');
@@ -35,6 +35,11 @@ try{
  }
  {
   const{context,page}=await open('v2-prototype-and-ecosystem-patterns--ecosystem-cards');await page.getByRole('button',{name:'Request access',exact:true}).click();assert('Access request shows success only after the promise',await page.getByRole('status').innerText().then(text=>text.includes('Request saved')));await context.close();
+ }
+ {
+  const{context,page,errors}=await open('v2-communication--loader-only');
+  await page.getByRole('button',{name:'Notifications',exact:true}).click();await page.getByRole('button',{name:'Review launch brief',exact:false}).waitFor();assert('Loader-only notifications render actual fetched rows',await page.getByRole('button',{name:'Review launch brief',exact:false}).count()===1);await page.keyboard.press('Escape');
+  await page.keyboard.press('Control+k');await page.getByRole('combobox',{name:'Search your workspace'}).fill('brief');await page.getByRole('option').first().waitFor();await page.getByRole('option').first().click();assert('Loader-only command palette selects fetched result',await page.getByRole('status').innerText().then(text=>text==='Review launch brief'));assert('Loader-only defaults do not loop or emit runtime errors',errors.length===0,errors);await context.close();
  }
  console.log(JSON.stringify({checks:checks.length,all_passed:true},null,2));
 }finally{fs.mkdirSync(path.join(here,'results'),{recursive:true});fs.writeFileSync(path.join(here,'results/v2-interactions.json'),JSON.stringify({checks},null,2)+'\n');await browser.close();server.close()}

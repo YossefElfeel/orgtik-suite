@@ -26,6 +26,7 @@ const projectApi = baseApi.injectEndpoints({
         search?: string;
         limit?: number;
         status?: string;
+        archived?: string;
       }
     >({
       query: (params) => {
@@ -61,7 +62,7 @@ const projectApi = baseApi.injectEndpoints({
       projectId: number;
       search?: string;
     }>({
-      query: ({ projectId, search }) => `/projects/${projectId}?search=${search}`,
+      query: ({ projectId, search }) => ({ url: `/projects/${projectId}`, params: search ? { search } : undefined }),
       providesTags: ["Project", "Task"],
     }),
 

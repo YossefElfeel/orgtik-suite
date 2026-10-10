@@ -2,11 +2,11 @@
 import { CaretDown as CaretDownIcon, CheckCircle as CircleCheck, CircleNotch as CircleNotchIcon, DownloadSimple as DownloadSimpleIcon, FolderOpen, Ticket } from "@phosphor-icons/react";
 
 import { DashboardMetricCard } from "@/components/shared/DashboardMetricCard";
-import MainHeader from "@/components/layout/MainHeader";
-import { Button } from "@/components/ui/button";
+import MainHeader from "@/components/layout/ResourceHeader";
+import { Button } from "@orgtik/ui";
 import { useColumns } from "./columns";
 import { useListParams } from "@/hooks/useListParams";
-import DataTable from "@/components/shared/Table";
+import DataTable from "@/components/bindings/ResourceTable";
 import { ToolbarSearchAndFilter } from "@/components/shared/ToolbarSearchAndFilter";
 import {
   useGetTimeOffOverviewQuery,
@@ -49,11 +49,11 @@ export default function TimeOffPage({
       {showeHeader && (
         <MainHeader title={t("title")}>
           {/* <div className="flex items-center gap-3">
-            <Button variant="outline" size="lg">
+            <Button variant="secondary" size="lg">
               <DownloadSimpleIcon aria-hidden="true" />
               Export
             </Button>
-            <Button variant="outline" size="lg">
+            <Button variant="secondary" size="lg">
               Today
               <CaretDownIcon aria-hidden="true" />
             </Button>

@@ -7,5 +7,20 @@ export const SUITE_TOOLS = {
     chat: { scope: "hq", app: "chats", labels: { en: "Chats", ar: "المحادثات", de: "Chats", fr: "Discussions", it: "Chat" }, adminRoles: ["owner", "admin"] },
 };
 export function toolFromScope(scope) { return Object.keys(SUITE_TOOLS).find(tool => SUITE_TOOLS[tool].scope === scope || SUITE_TOOLS[tool].app === scope || tool === scope); }
-export const CONNECTOR_PAIRS = [["tasks", "files"], ["chat", "files"], ["hr", "tasks"], ["hr", "chat"], ["chat", "tasks"], ["crm", "tasks"], ["marketing", "crm"]];
+export const CONNECTOR_PAIRS = [["tasks", "files"], ["chat", "files"], ["tasks", "hr"], ["chat", "hr"], ["hr", "tasks"], ["chat", "tasks"], ["crm", "tasks"], ["crm", "files"], ["marketing", "crm"], ["marketing", "tasks"]];
+const METRICS = {
+    projects: ["Projects", "المشاريع", "Projekte", "Projets", "Progetti"],
+    guests: ["Guests", "الضيوف", "Gäste", "Invités", "Ospiti"],
+    storage_gb: ["Storage (GB)", "التخزين (غيغابايت)", "Speicher (GB)", "Stockage (Go)", "Spazio (GB)"],
+    employees: ["Employees", "الموظفون", "Mitarbeitende", "Personnel", "Dipendenti"],
+    departments: ["Departments", "الأقسام", "Abteilungen", "Départements", "Reparti"],
+    payroll_runs: ["Payroll runs", "دورات الرواتب", "Lohnläufe", "Cycles de paie", "Cicli paghe"],
+    contacts: ["Contacts", "جهات الاتصال", "Kontakte", "Contacts", "Contatti"],
+    leads: ["Leads", "العملاء المحتملون", "Leads", "Prospects", "Lead"],
+    brands: ["Brands", "العلامات التجارية", "Marken", "Marques", "Marchi"],
+    posts: ["Posts", "المنشورات", "Beiträge", "Publications", "Post"],
+    campaigns: ["Campaigns", "الحملات", "Kampagnen", "Campagnes", "Campagne"],
+    messages: ["Messages", "الرسائل", "Nachrichten", "Messages", "Messaggi"],
+};
+export function suiteMetricLabel(locale, key) { const name = key.split(".").at(-1); return METRICS[name]?.[["en", "ar", "de", "fr", "it"].indexOf(locale)] || name.replaceAll("_", " "); }
 //# sourceMappingURL=registry.js.map

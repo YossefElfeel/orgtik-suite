@@ -1,0 +1,667 @@
+{
+  "MarketingV3.queue": {
+    "en": "Posting queue",
+    "ar": "قائمة النشر",
+    "de": "Veröffentlichungswarteschlange",
+    "fr": "File de publication",
+    "it": "Coda di pubblicazione"
+  },
+  "MarketingV3.inbox": {
+    "en": "Social inbox",
+    "ar": "صندوق التواصل الاجتماعي",
+    "de": "Social-Posteingang",
+    "fr": "Boîte sociale",
+    "it": "Posta social"
+  },
+  "MarketingV3.contacts": {
+    "en": "CRM contact records",
+    "ar": "سجلات جهات اتصال إدارة العملاء",
+    "de": "CRM-Kontaktdatensätze",
+    "fr": "Fiches de contacts CRM",
+    "it": "Schede contatti CRM"
+  },
+  "MarketingV3.emailDesigner": {
+    "en": "Email designer",
+    "ar": "مصمم البريد الإلكتروني",
+    "de": "E-Mail-Designer",
+    "fr": "Concepteur d’e-mails",
+    "it": "Designer email"
+  },
+  "MarketingV3.journeys": {
+    "en": "Journeys",
+    "ar": "الرحلات",
+    "de": "Abläufe",
+    "fr": "Parcours",
+    "it": "Percorsi"
+  },
+  "MarketingV3.writing": {
+    "en": "Mock writing",
+    "ar": "كتابة تجريبية",
+    "de": "Simuliertes Schreiben",
+    "fr": "Rédaction simulée",
+    "it": "Scrittura simulata"
+  },
+  "MarketingV3.administration": {
+    "en": "Marketing administration",
+    "ar": "إدارة التسويق",
+    "de": "Marketing-Verwaltung",
+    "fr": "Administration marketing",
+    "it": "Amministrazione marketing"
+  },
+  "MarketingV3.brand": {
+    "en": "Brand settings",
+    "ar": "إعدادات الهوية",
+    "de": "Markeneinstellungen",
+    "fr": "Paramètres de marque",
+    "it": "Impostazioni del marchio"
+  },
+  "MarketingV3.senders": {
+    "en": "Senders and domains",
+    "ar": "المرسلون والنطاقات",
+    "de": "Absender und Domains",
+    "fr": "Expéditeurs et domaines",
+    "it": "Mittenti e domini"
+  },
+  "MarketingV3.crmHint": {
+    "en": "Contacts and companies are managed in CRM. Marketing keeps references and checks current consent.",
+    "ar": "تُدار جهات الاتصال والشركات في إدارة العملاء. يحتفظ التسويق بالمراجع ويتحقق من الموافقة الحالية.",
+    "de": "Kontakte und Unternehmen werden im CRM verwaltet. Marketing speichert Verweise und prüft die aktuelle Einwilligung.",
+    "fr": "Les contacts et entreprises sont gérés dans le CRM. Le marketing conserve des références et vérifie le consentement actuel.",
+    "it": "Contatti e aziende sono gestiti nel CRM. Marketing conserva riferimenti e verifica il consenso attuale."
+  },
+  "MarketingV3.required": {
+    "en": "This field is required.",
+    "ar": "هذا الحقل مطلوب.",
+    "de": "Dieses Feld ist erforderlich.",
+    "fr": "Ce champ est obligatoire.",
+    "it": "Questo campo è obbligatorio."
+  },
+  "MarketingV3.tooLong": {
+    "en": "This value is too long.",
+    "ar": "هذه القيمة طويلة جدًا.",
+    "de": "Dieser Wert ist zu lang.",
+    "fr": "Cette valeur est trop longue.",
+    "it": "Questo valore è troppo lungo."
+  },
+  "MarketingV3.invalidUrl": {
+    "en": "Enter an HTTP or HTTPS address.",
+    "ar": "أدخل عنوان HTTP أو HTTPS.",
+    "de": "Geben Sie eine HTTP- oder HTTPS-Adresse ein.",
+    "fr": "Saisissez une adresse HTTP ou HTTPS.",
+    "it": "Inserisci un indirizzo HTTP o HTTPS."
+  },
+  "MarketingV3.invalidNumber": {
+    "en": "Enter a valid nonnegative number.",
+    "ar": "أدخل رقمًا صالحًا غير سالب.",
+    "de": "Geben Sie eine gültige nichtnegative Zahl ein.",
+    "fr": "Saisissez un nombre positif ou nul valide.",
+    "it": "Inserisci un numero valido non negativo."
+  },
+  "MarketingV3.loadError": {
+    "en": "Marketing could not be loaded",
+    "ar": "تعذر تحميل التسويق",
+    "de": "Marketing konnte nicht geladen werden",
+    "fr": "Impossible de charger le marketing",
+    "it": "Impossibile caricare il marketing"
+  },
+  "MarketingV3.noAccess": {
+    "en": "Current Marketing access required",
+    "ar": "يلزم الوصول الحالي إلى التسويق",
+    "de": "Aktueller Marketing-Zugriff erforderlich",
+    "fr": "Accès marketing actuel requis",
+    "it": "Accesso attuale a Marketing richiesto"
+  },
+  "MarketingV3.emptyProject": {
+    "en": "Create your first Marketing project",
+    "ar": "أنشئ أول مشروع تسويق",
+    "de": "Erstellen Sie Ihr erstes Marketingprojekt",
+    "fr": "Créez votre premier projet marketing",
+    "it": "Crea il tuo primo progetto marketing"
+  },
+  "MarketingV3.createProject": {
+    "en": "Create project",
+    "ar": "إنشاء مشروع",
+    "de": "Projekt erstellen",
+    "fr": "Créer un projet",
+    "it": "Crea progetto"
+  },
+  "MarketingV3.save": {
+    "en": "Save",
+    "ar": "حفظ",
+    "de": "Speichern",
+    "fr": "Enregistrer",
+    "it": "Salva"
+  },
+  "MarketingV3.cancel": {
+    "en": "Cancel",
+    "ar": "إلغاء",
+    "de": "Abbrechen",
+    "fr": "Annuler",
+    "it": "Annulla"
+  },
+  "MarketingV3.close": {
+    "en": "Close",
+    "ar": "إغلاق",
+    "de": "Schließen",
+    "fr": "Fermer",
+    "it": "Chiudi"
+  },
+  "MarketingV3.saved": {
+    "en": "Saved",
+    "ar": "تم الحفظ",
+    "de": "Gespeichert",
+    "fr": "Enregistré",
+    "it": "Salvato"
+  },
+  "MarketingV3.saveError": {
+    "en": "The change could not be saved. Review and retry.",
+    "ar": "تعذر حفظ التغيير. راجعه وحاول مجددًا.",
+    "de": "Die Änderung konnte nicht gespeichert werden. Prüfen Sie sie und versuchen Sie es erneut.",
+    "fr": "La modification n’a pas été enregistrée. Vérifiez et réessayez.",
+    "it": "Impossibile salvare la modifica. Verifica e riprova."
+  },
+  "MarketingV3.search": {
+    "en": "Search records",
+    "ar": "البحث في السجلات",
+    "de": "Datensätze suchen",
+    "fr": "Rechercher des fiches",
+    "it": "Cerca schede"
+  },
+  "MarketingV3.noMatch": {
+    "en": "No matching records",
+    "ar": "لا توجد سجلات مطابقة",
+    "de": "Keine passenden Datensätze",
+    "fr": "Aucune fiche correspondante",
+    "it": "Nessuna scheda corrispondente"
+  },
+  "MarketingV3.empty": {
+    "en": "No records yet",
+    "ar": "لا توجد سجلات بعد",
+    "de": "Noch keine Datensätze",
+    "fr": "Aucune fiche pour le moment",
+    "it": "Nessuna scheda ancora"
+  },
+  "MarketingV3.name": {
+    "en": "Name",
+    "ar": "الاسم",
+    "de": "Name",
+    "fr": "Nom",
+    "it": "Nome"
+  },
+  "MarketingV3.company": {
+    "en": "Company",
+    "ar": "الشركة",
+    "de": "Unternehmen",
+    "fr": "Entreprise",
+    "it": "Azienda"
+  },
+  "MarketingV3.email": {
+    "en": "Email",
+    "ar": "البريد الإلكتروني",
+    "de": "E-Mail",
+    "fr": "E-mail",
+    "it": "Email"
+  },
+  "MarketingV3.consent": {
+    "en": "Marketing consent",
+    "ar": "موافقة التسويق",
+    "de": "Marketing-Einwilligung",
+    "fr": "Consentement marketing",
+    "it": "Consenso marketing"
+  },
+  "MarketingV3.opted_in": {
+    "en": "Opted in",
+    "ar": "وافق على الاشتراك",
+    "de": "Eingewilligt",
+    "fr": "Consentement accordé",
+    "it": "Consenso dato"
+  },
+  "MarketingV3.opted_out": {
+    "en": "Opted out",
+    "ar": "ألغى الاشتراك",
+    "de": "Abgemeldet",
+    "fr": "Désinscrit",
+    "it": "Consenso revocato"
+  },
+  "MarketingV3.unknown": {
+    "en": "Unknown",
+    "ar": "غير معروف",
+    "de": "Unbekannt",
+    "fr": "Inconnu",
+    "it": "Sconosciuto"
+  },
+  "MarketingV3.openCRM": {
+    "en": "Open actual record in CRM",
+    "ar": "فتح السجل الفعلي في إدارة العملاء",
+    "de": "Tatsächlichen Datensatz im CRM öffnen",
+    "fr": "Ouvrir la fiche réelle dans le CRM",
+    "it": "Apri la scheda reale nel CRM"
+  },
+  "MarketingV3.recordedAt": {
+    "en": "Recorded on",
+    "ar": "سُجل في",
+    "de": "Erfasst am",
+    "fr": "Enregistré le",
+    "it": "Registrato il"
+  },
+  "MarketingV3.voice": {
+    "en": "Voice",
+    "ar": "النبرة",
+    "de": "Ton",
+    "fr": "Ton",
+    "it": "Tono"
+  },
+  "MarketingV3.warm": {
+    "en": "Warm",
+    "ar": "ودودة",
+    "de": "Freundlich",
+    "fr": "Chaleureux",
+    "it": "Cordiale"
+  },
+  "MarketingV3.direct": {
+    "en": "Direct",
+    "ar": "مباشرة",
+    "de": "Direkt",
+    "fr": "Direct",
+    "it": "Diretto"
+  },
+  "MarketingV3.formal": {
+    "en": "Formal",
+    "ar": "رسمية",
+    "de": "Formell",
+    "fr": "Formel",
+    "it": "Formale"
+  },
+  "MarketingV3.audience": {
+    "en": "Audience",
+    "ar": "الجمهور",
+    "de": "Zielgruppe",
+    "fr": "Audience",
+    "it": "Pubblico"
+  },
+  "MarketingV3.proposition": {
+    "en": "Proposition",
+    "ar": "القيمة المقدمة",
+    "de": "Leistungsversprechen",
+    "fr": "Proposition",
+    "it": "Proposta"
+  },
+  "MarketingV3.companyName": {
+    "en": "Company name",
+    "ar": "اسم الشركة",
+    "de": "Unternehmensname",
+    "fr": "Nom de l’entreprise",
+    "it": "Nome dell’azienda"
+  },
+  "MarketingV3.postalAddress": {
+    "en": "Postal address",
+    "ar": "العنوان البريدي",
+    "de": "Postanschrift",
+    "fr": "Adresse postale",
+    "it": "Indirizzo postale"
+  },
+  "MarketingV3.topic": {
+    "en": "Topic",
+    "ar": "الموضوع",
+    "de": "Thema",
+    "fr": "Sujet",
+    "it": "Argomento"
+  },
+  "MarketingV3.generate": {
+    "en": "Generate mock draft",
+    "ar": "إنشاء مسودة تجريبية",
+    "de": "Simulierten Entwurf erstellen",
+    "fr": "Générer un brouillon simulé",
+    "it": "Genera una bozza simulata"
+  },
+  "MarketingV3.useDraft": {
+    "en": "Use this draft",
+    "ar": "استخدام هذه المسودة",
+    "de": "Diesen Entwurf verwenden",
+    "fr": "Utiliser ce brouillon",
+    "it": "Usa questa bozza"
+  },
+  "MarketingV3.subject": {
+    "en": "Subject",
+    "ar": "عنوان الرسالة",
+    "de": "Betreff",
+    "fr": "Objet",
+    "it": "Oggetto"
+  },
+  "MarketingV3.headline": {
+    "en": "Headline",
+    "ar": "العنوان الرئيسي",
+    "de": "Überschrift",
+    "fr": "Titre",
+    "it": "Titolo"
+  },
+  "MarketingV3.body": {
+    "en": "Body",
+    "ar": "المحتوى",
+    "de": "Inhalt",
+    "fr": "Contenu",
+    "it": "Contenuto"
+  },
+  "MarketingV3.cta": {
+    "en": "CTA label",
+    "ar": "نص زر الإجراء",
+    "de": "CTA-Text",
+    "fr": "Libellé du bouton",
+    "it": "Testo del pulsante"
+  },
+  "MarketingV3.ctaUrl": {
+    "en": "CTA address",
+    "ar": "عنوان زر الإجراء",
+    "de": "CTA-Adresse",
+    "fr": "Adresse du bouton",
+    "it": "Indirizzo del pulsante"
+  },
+  "MarketingV3.direction": {
+    "en": "Direction",
+    "ar": "الاتجاه",
+    "de": "Richtung",
+    "fr": "Direction",
+    "it": "Direzione"
+  },
+  "MarketingV3.ltr": {
+    "en": "Left to right",
+    "ar": "من اليسار إلى اليمين",
+    "de": "Von links nach rechts",
+    "fr": "De gauche à droite",
+    "it": "Da sinistra a destra"
+  },
+  "MarketingV3.rtl": {
+    "en": "Right to left",
+    "ar": "من اليمين إلى اليسار",
+    "de": "Von rechts nach links",
+    "fr": "De droite à gauche",
+    "it": "Da destra a sinistra"
+  },
+  "MarketingV3.bold": {
+    "en": "Bold",
+    "ar": "عريض",
+    "de": "Fett",
+    "fr": "Gras",
+    "it": "Grassetto"
+  },
+  "MarketingV3.italic": {
+    "en": "Italic",
+    "ar": "مائل",
+    "de": "Kursiv",
+    "fr": "Italique",
+    "it": "Corsivo"
+  },
+  "MarketingV3.bullets": {
+    "en": "Bulleted list",
+    "ar": "قائمة نقطية",
+    "de": "Aufzählung",
+    "fr": "Liste à puces",
+    "it": "Elenco puntato"
+  },
+  "MarketingV3.preview": {
+    "en": "Preview",
+    "ar": "معاينة",
+    "de": "Vorschau",
+    "fr": "Aperçu",
+    "it": "Anteprima"
+  },
+  "MarketingV3.exportHtml": {
+    "en": "Export HTML",
+    "ar": "تصدير HTML",
+    "de": "HTML exportieren",
+    "fr": "Exporter HTML",
+    "it": "Esporta HTML"
+  },
+  "MarketingV3.newTemplate": {
+    "en": "New email template",
+    "ar": "قالب بريد جديد",
+    "de": "Neue E-Mail-Vorlage",
+    "fr": "Nouveau modèle d’e-mail",
+    "it": "Nuovo modello email"
+  },
+  "MarketingV3.template": {
+    "en": "Email template",
+    "ar": "قالب البريد",
+    "de": "E-Mail-Vorlage",
+    "fr": "Modèle d’e-mail",
+    "it": "Modello email"
+  },
+  "MarketingV3.sender": {
+    "en": "Sender",
+    "ar": "المرسل",
+    "de": "Absender",
+    "fr": "Expéditeur",
+    "it": "Mittente"
+  },
+  "MarketingV3.newSender": {
+    "en": "New sender",
+    "ar": "مرسل جديد",
+    "de": "Neuer Absender",
+    "fr": "Nouvel expéditeur",
+    "it": "Nuovo mittente"
+  },
+  "MarketingV3.from": {
+    "en": "Sender email",
+    "ar": "بريد المرسل",
+    "de": "Absender-E-Mail",
+    "fr": "E-mail de l’expéditeur",
+    "it": "Email del mittente"
+  },
+  "MarketingV3.verifyDomain": {
+    "en": "Run mock domain check",
+    "ar": "تشغيل فحص نطاق تجريبي",
+    "de": "Simulierte Domainprüfung ausführen",
+    "fr": "Lancer une vérification simulée du domaine",
+    "it": "Esegui una verifica simulata del dominio"
+  },
+  "MarketingV3.verifiedMock": {
+    "en": "Verified in mock",
+    "ar": "تم التحقق في المحاكاة",
+    "de": "In Simulation bestätigt",
+    "fr": "Vérifié en simulation",
+    "it": "Verificato nella simulazione"
+  },
+  "MarketingV3.testSend": {
+    "en": "Record a mock test send to me",
+    "ar": "تسجيل إرسال اختباري تجريبي لي",
+    "de": "Simulierten Testversand an mich erfassen",
+    "fr": "Enregistrer un envoi de test simulé vers moi",
+    "it": "Registra un invio di prova simulato a me"
+  },
+  "MarketingV3.providerDeferred": {
+    "en": "External delivery is deferred. These actions record explicit local mock events.",
+    "ar": "التسليم الخارجي مؤجل. تسجل هذه الإجراءات أحداث محاكاة محلية صريحة.",
+    "de": "Externe Zustellung ist zurückgestellt. Diese Aktionen erfassen ausdrücklich lokale simulierte Ereignisse.",
+    "fr": "La livraison externe est différée. Ces actions enregistrent des événements locaux explicitement simulés.",
+    "it": "La consegna esterna è rinviata. Queste azioni registrano eventi locali esplicitamente simulati."
+  },
+  "MarketingV3.loadSample": {
+    "en": "Load sample conversation",
+    "ar": "تحميل محادثة نموذجية",
+    "de": "Beispielunterhaltung laden",
+    "fr": "Charger une conversation d’exemple",
+    "it": "Carica una conversazione di esempio"
+  },
+  "MarketingV3.reply": {
+    "en": "Reply",
+    "ar": "الرد",
+    "de": "Antwort",
+    "fr": "Réponse",
+    "it": "Risposta"
+  },
+  "MarketingV3.sendReply": {
+    "en": "Record mock reply",
+    "ar": "تسجيل رد تجريبي",
+    "de": "Simulierte Antwort erfassen",
+    "fr": "Enregistrer une réponse simulée",
+    "it": "Registra una risposta simulata"
+  },
+  "MarketingV3.campaign": {
+    "en": "Campaign",
+    "ar": "الحملة",
+    "de": "Kampagne",
+    "fr": "Campagne",
+    "it": "Campagna"
+  },
+  "MarketingV3.recipients": {
+    "en": "CRM recipients",
+    "ar": "مستلمو إدارة العملاء",
+    "de": "CRM-Empfänger",
+    "fr": "Destinataires CRM",
+    "it": "Destinatari CRM"
+  },
+  "MarketingV3.saveRecipients": {
+    "en": "Save actual recipient references",
+    "ar": "حفظ مراجع المستلمين الفعلية",
+    "de": "Tatsächliche Empfängerverweise speichern",
+    "fr": "Enregistrer les références réelles des destinataires",
+    "it": "Salva i riferimenti reali dei destinatari"
+  },
+  "MarketingV3.leadTitle": {
+    "en": "CRM deal title",
+    "ar": "عنوان صفقة إدارة العملاء",
+    "de": "CRM-Verkaufstitel",
+    "fr": "Titre de l’affaire CRM",
+    "it": "Titolo della trattativa CRM"
+  },
+  "MarketingV3.estimate": {
+    "en": "Pipeline estimate",
+    "ar": "تقدير المسار",
+    "de": "Pipeline-Schätzung",
+    "fr": "Estimation du pipeline",
+    "it": "Stima della pipeline"
+  },
+  "MarketingV3.createCRMDeal": {
+    "en": "Create actual CRM deal",
+    "ar": "إنشاء صفقة فعلية في إدارة العملاء",
+    "de": "Tatsächlichen CRM-Verkauf erstellen",
+    "fr": "Créer une affaire réelle dans le CRM",
+    "it": "Crea una trattativa reale nel CRM"
+  },
+  "MarketingV3.eligible": {
+    "en": "Eligible recipients",
+    "ar": "المستلمون المؤهلون",
+    "de": "Zulässige Empfänger",
+    "fr": "Destinataires admissibles",
+    "it": "Destinatari idonei"
+  },
+  "MarketingV3.suppressed": {
+    "en": "Suppressed recipients",
+    "ar": "المستلمون المستبعدون",
+    "de": "Unterdrückte Empfänger",
+    "fr": "Destinataires exclus",
+    "it": "Destinatari esclusi"
+  },
+  "MarketingV3.results": {
+    "en": "Campaign results",
+    "ar": "نتائج الحملة",
+    "de": "Kampagnenergebnisse",
+    "fr": "Résultats de campagne",
+    "it": "Risultati della campagna"
+  },
+  "MarketingV3.wonValue": {
+    "en": "Actual won value",
+    "ar": "القيمة الفعلية للصفقات الناجحة",
+    "de": "Tatsächlicher gewonnener Wert",
+    "fr": "Valeur réelle des affaires gagnées",
+    "it": "Valore reale delle trattative vinte"
+  },
+  "MarketingV3.newJourney": {
+    "en": "New journey",
+    "ar": "رحلة جديدة",
+    "de": "Neuer Ablauf",
+    "fr": "Nouveau parcours",
+    "it": "Nuovo percorso"
+  },
+  "MarketingV3.entry": {
+    "en": "Entry",
+    "ar": "الدخول",
+    "de": "Einstieg",
+    "fr": "Entrée",
+    "it": "Ingresso"
+  },
+  "MarketingV3.emailStep": {
+    "en": "Mock email action",
+    "ar": "إجراء بريد تجريبي",
+    "de": "Simulierte E-Mail-Aktion",
+    "fr": "Action e-mail simulée",
+    "it": "Azione email simulata"
+  },
+  "MarketingV3.wait": {
+    "en": "Wait",
+    "ar": "انتظار",
+    "de": "Warten",
+    "fr": "Attendre",
+    "it": "Attendi"
+  },
+  "MarketingV3.task": {
+    "en": "Actual linked task",
+    "ar": "مهمة مرتبطة فعلية",
+    "de": "Tatsächlich verknüpfte Aufgabe",
+    "fr": "Tâche réellement liée",
+    "it": "Attività realmente collegata"
+  },
+  "MarketingV3.days": {
+    "en": "Days",
+    "ar": "الأيام",
+    "de": "Tage",
+    "fr": "Jours",
+    "it": "Giorni"
+  },
+  "MarketingV3.addStep": {
+    "en": "Add step",
+    "ar": "إضافة خطوة",
+    "de": "Schritt hinzufügen",
+    "fr": "Ajouter une étape",
+    "it": "Aggiungi un passaggio"
+  },
+  "MarketingV3.removeStep": {
+    "en": "Remove step",
+    "ar": "إزالة خطوة",
+    "de": "Schritt entfernen",
+    "fr": "Retirer une étape",
+    "it": "Rimuovi un passaggio"
+  },
+  "MarketingV3.runDry": {
+    "en": "Run mock preview",
+    "ar": "تشغيل معاينة تجريبية",
+    "de": "Simulierte Vorschau ausführen",
+    "fr": "Lancer un aperçu simulé",
+    "it": "Esegui un’anteprima simulata"
+  },
+  "MarketingV3.createTask": {
+    "en": "Create actual linked task",
+    "ar": "إنشاء مهمة مرتبطة فعلية",
+    "de": "Tatsächlich verknüpfte Aufgabe erstellen",
+    "fr": "Créer la tâche réellement liée",
+    "it": "Crea l’attività realmente collegata"
+  },
+  "MarketingV3.onboarding": {
+    "en": "Set up your Marketing project",
+    "ar": "إعداد مشروع التسويق",
+    "de": "Marketingprojekt einrichten",
+    "fr": "Configurer le projet marketing",
+    "it": "Configura il progetto marketing"
+  },
+  "MarketingV3.reviewConnections": {
+    "en": "Review connections",
+    "ar": "مراجعة الروابط",
+    "de": "Verbindungen prüfen",
+    "fr": "Vérifier les connexions",
+    "it": "Verifica le connessioni"
+  },
+  "MarketingV3.handoffError": {
+    "en": "The destination could not be opened. Try again.",
+    "ar": "تعذر فتح الوجهة. حاول مرة أخرى.",
+    "de": "Das Ziel konnte nicht geöffnet werden. Versuchen Sie es erneut.",
+    "fr": "Impossible d’ouvrir la destination. Réessayez.",
+    "it": "Impossibile aprire la destinazione. Riprova."
+  },
+  "MarketingV3.logoutError": {
+    "en": "Sign out could not be completed. Try again.",
+    "ar": "تعذر تسجيل الخروج. حاول مرة أخرى.",
+    "de": "Die Abmeldung konnte nicht abgeschlossen werden. Versuchen Sie es erneut.",
+    "fr": "La déconnexion n’a pas pu être effectuée. Réessayez.",
+    "it": "Impossibile completare la disconnessione. Riprova."
+  }
+}

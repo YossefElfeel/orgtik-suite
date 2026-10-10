@@ -1,0 +1,5298 @@
+{
+  "scope": "CRM P4 ordinary EN/AR × themes × 1440/1024/768/390 plus five-catalog and retained-route checks",
+  "checks": [
+    {
+      "name": "contacts/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/en/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/en/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/en/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/en/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/en/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/en/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/en/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/en/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/en/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/en/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/ar/light/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/ar/light/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/ar/light/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/ar/light/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/ar/light/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/ar/dark/1440 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/1440 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/ar/dark/1024 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/1024 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/1024 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/ar/dark/768 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/768 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/768 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contacts/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contacts/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "lead-board/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "lead-board/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "companies/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "companies/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "reports/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "reports/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "configuration/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "configuration/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "deal-board/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "deal-board/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "contact-inspector/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "contact-inspector/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offer/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offer/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "project/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "project/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "delivery/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "delivery/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "offers/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "offers/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "projects/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "projects/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "salespeople/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "salespeople/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "commissions/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "commissions/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "loyalty/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "loyalty/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "activity/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "activity/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "archive/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "archive/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "people/ar/dark/390 ordinary route",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/390 no document overflow",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "people/ar/dark/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Five-catalog en/customers no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog en/customers/pipeline no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog en/reports no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog en/admin/settings no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog en/projects/pipeline no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog ar/customers no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog ar/customers/pipeline no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog ar/reports no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog ar/admin/settings no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog ar/projects/pipeline no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog de/customers no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog de/customers/pipeline no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog de/reports no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog de/admin/settings no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog de/projects/pipeline no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog fr/customers no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog fr/customers/pipeline no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog fr/reports no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog fr/admin/settings no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog fr/projects/pipeline no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog it/customers no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog it/customers/pipeline no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog it/reports no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog it/admin/settings no missing keys",
+      "pass": true
+    },
+    {
+      "name": "Five-catalog it/projects/pipeline no missing keys",
+      "pass": true
+    },
+    {
+      "name": "No application runtime/catalog/control errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "contacts-en-light-1440.png",
+    "lead-board-en-light-1440.png",
+    "companies-en-light-1440.png",
+    "reports-en-light-1440.png",
+    "configuration-en-light-1440.png",
+    "deal-board-en-light-1440.png",
+    "contact-inspector-en-light-1440.png",
+    "offer-en-light-1440.png",
+    "project-en-light-1440.png",
+    "delivery-en-light-1440.png",
+    "offers-en-light-1440.png",
+    "projects-en-light-1440.png",
+    "salespeople-en-light-1440.png",
+    "commissions-en-light-1440.png",
+    "loyalty-en-light-1440.png",
+    "activity-en-light-1440.png",
+    "archive-en-light-1440.png",
+    "people-en-light-1440.png",
+    "contacts-en-light-1024.png",
+    "lead-board-en-light-1024.png",
+    "companies-en-light-1024.png",
+    "reports-en-light-1024.png",
+    "configuration-en-light-1024.png",
+    "deal-board-en-light-1024.png",
+    "contact-inspector-en-light-1024.png",
+    "offer-en-light-1024.png",
+    "project-en-light-1024.png",
+    "delivery-en-light-1024.png",
+    "offers-en-light-1024.png",
+    "projects-en-light-1024.png",
+    "salespeople-en-light-1024.png",
+    "commissions-en-light-1024.png",
+    "loyalty-en-light-1024.png",
+    "activity-en-light-1024.png",
+    "archive-en-light-1024.png",
+    "people-en-light-1024.png",
+    "contacts-en-light-768.png",
+    "lead-board-en-light-768.png",
+    "companies-en-light-768.png",
+    "reports-en-light-768.png",
+    "configuration-en-light-768.png",
+    "deal-board-en-light-768.png",
+    "contact-inspector-en-light-768.png",
+    "offer-en-light-768.png",
+    "project-en-light-768.png",
+    "delivery-en-light-768.png",
+    "offers-en-light-768.png",
+    "projects-en-light-768.png",
+    "salespeople-en-light-768.png",
+    "commissions-en-light-768.png",
+    "loyalty-en-light-768.png",
+    "activity-en-light-768.png",
+    "archive-en-light-768.png",
+    "people-en-light-768.png",
+    "contacts-en-light-390.png",
+    "lead-board-en-light-390.png",
+    "companies-en-light-390.png",
+    "reports-en-light-390.png",
+    "configuration-en-light-390.png",
+    "deal-board-en-light-390.png",
+    "contact-inspector-en-light-390.png",
+    "offer-en-light-390.png",
+    "project-en-light-390.png",
+    "delivery-en-light-390.png",
+    "offers-en-light-390.png",
+    "projects-en-light-390.png",
+    "salespeople-en-light-390.png",
+    "commissions-en-light-390.png",
+    "loyalty-en-light-390.png",
+    "activity-en-light-390.png",
+    "archive-en-light-390.png",
+    "people-en-light-390.png",
+    "contacts-en-dark-1440.png",
+    "lead-board-en-dark-1440.png",
+    "companies-en-dark-1440.png",
+    "reports-en-dark-1440.png",
+    "configuration-en-dark-1440.png",
+    "deal-board-en-dark-1440.png",
+    "contact-inspector-en-dark-1440.png",
+    "offer-en-dark-1440.png",
+    "project-en-dark-1440.png",
+    "delivery-en-dark-1440.png",
+    "offers-en-dark-1440.png",
+    "projects-en-dark-1440.png",
+    "salespeople-en-dark-1440.png",
+    "commissions-en-dark-1440.png",
+    "loyalty-en-dark-1440.png",
+    "activity-en-dark-1440.png",
+    "archive-en-dark-1440.png",
+    "people-en-dark-1440.png",
+    "contacts-en-dark-1024.png",
+    "lead-board-en-dark-1024.png",
+    "companies-en-dark-1024.png",
+    "reports-en-dark-1024.png",
+    "configuration-en-dark-1024.png",
+    "deal-board-en-dark-1024.png",
+    "contact-inspector-en-dark-1024.png",
+    "offer-en-dark-1024.png",
+    "project-en-dark-1024.png",
+    "delivery-en-dark-1024.png",
+    "offers-en-dark-1024.png",
+    "projects-en-dark-1024.png",
+    "salespeople-en-dark-1024.png",
+    "commissions-en-dark-1024.png",
+    "loyalty-en-dark-1024.png",
+    "activity-en-dark-1024.png",
+    "archive-en-dark-1024.png",
+    "people-en-dark-1024.png",
+    "contacts-en-dark-768.png",
+    "lead-board-en-dark-768.png",
+    "companies-en-dark-768.png",
+    "reports-en-dark-768.png",
+    "configuration-en-dark-768.png",
+    "deal-board-en-dark-768.png",
+    "contact-inspector-en-dark-768.png",
+    "offer-en-dark-768.png",
+    "project-en-dark-768.png",
+    "delivery-en-dark-768.png",
+    "offers-en-dark-768.png",
+    "projects-en-dark-768.png",
+    "salespeople-en-dark-768.png",
+    "commissions-en-dark-768.png",
+    "loyalty-en-dark-768.png",
+    "activity-en-dark-768.png",
+    "archive-en-dark-768.png",
+    "people-en-dark-768.png",
+    "contacts-en-dark-390.png",
+    "lead-board-en-dark-390.png",
+    "companies-en-dark-390.png",
+    "reports-en-dark-390.png",
+    "configuration-en-dark-390.png",
+    "deal-board-en-dark-390.png",
+    "contact-inspector-en-dark-390.png",
+    "offer-en-dark-390.png",
+    "project-en-dark-390.png",
+    "delivery-en-dark-390.png",
+    "offers-en-dark-390.png",
+    "projects-en-dark-390.png",
+    "salespeople-en-dark-390.png",
+    "commissions-en-dark-390.png",
+    "loyalty-en-dark-390.png",
+    "activity-en-dark-390.png",
+    "archive-en-dark-390.png",
+    "people-en-dark-390.png",
+    "contacts-ar-light-1440.png",
+    "lead-board-ar-light-1440.png",
+    "companies-ar-light-1440.png",
+    "reports-ar-light-1440.png",
+    "configuration-ar-light-1440.png",
+    "deal-board-ar-light-1440.png",
+    "contact-inspector-ar-light-1440.png",
+    "offer-ar-light-1440.png",
+    "project-ar-light-1440.png",
+    "delivery-ar-light-1440.png",
+    "offers-ar-light-1440.png",
+    "projects-ar-light-1440.png",
+    "salespeople-ar-light-1440.png",
+    "commissions-ar-light-1440.png",
+    "loyalty-ar-light-1440.png",
+    "activity-ar-light-1440.png",
+    "archive-ar-light-1440.png",
+    "people-ar-light-1440.png",
+    "contacts-ar-light-1024.png",
+    "lead-board-ar-light-1024.png",
+    "companies-ar-light-1024.png",
+    "reports-ar-light-1024.png",
+    "configuration-ar-light-1024.png",
+    "deal-board-ar-light-1024.png",
+    "contact-inspector-ar-light-1024.png",
+    "offer-ar-light-1024.png",
+    "project-ar-light-1024.png",
+    "delivery-ar-light-1024.png",
+    "offers-ar-light-1024.png",
+    "projects-ar-light-1024.png",
+    "salespeople-ar-light-1024.png",
+    "commissions-ar-light-1024.png",
+    "loyalty-ar-light-1024.png",
+    "activity-ar-light-1024.png",
+    "archive-ar-light-1024.png",
+    "people-ar-light-1024.png",
+    "contacts-ar-light-768.png",
+    "lead-board-ar-light-768.png",
+    "companies-ar-light-768.png",
+    "reports-ar-light-768.png",
+    "configuration-ar-light-768.png",
+    "deal-board-ar-light-768.png",
+    "contact-inspector-ar-light-768.png",
+    "offer-ar-light-768.png",
+    "project-ar-light-768.png",
+    "delivery-ar-light-768.png",
+    "offers-ar-light-768.png",
+    "projects-ar-light-768.png",
+    "salespeople-ar-light-768.png",
+    "commissions-ar-light-768.png",
+    "loyalty-ar-light-768.png",
+    "activity-ar-light-768.png",
+    "archive-ar-light-768.png",
+    "people-ar-light-768.png",
+    "contacts-ar-light-390.png",
+    "lead-board-ar-light-390.png",
+    "companies-ar-light-390.png",
+    "reports-ar-light-390.png",
+    "configuration-ar-light-390.png",
+    "deal-board-ar-light-390.png",
+    "contact-inspector-ar-light-390.png",
+    "offer-ar-light-390.png",
+    "project-ar-light-390.png",
+    "delivery-ar-light-390.png",
+    "offers-ar-light-390.png",
+    "projects-ar-light-390.png",
+    "salespeople-ar-light-390.png",
+    "commissions-ar-light-390.png",
+    "loyalty-ar-light-390.png",
+    "activity-ar-light-390.png",
+    "archive-ar-light-390.png",
+    "people-ar-light-390.png",
+    "contacts-ar-dark-1440.png",
+    "lead-board-ar-dark-1440.png",
+    "companies-ar-dark-1440.png",
+    "reports-ar-dark-1440.png",
+    "configuration-ar-dark-1440.png",
+    "deal-board-ar-dark-1440.png",
+    "contact-inspector-ar-dark-1440.png",
+    "offer-ar-dark-1440.png",
+    "project-ar-dark-1440.png",
+    "delivery-ar-dark-1440.png",
+    "offers-ar-dark-1440.png",
+    "projects-ar-dark-1440.png",
+    "salespeople-ar-dark-1440.png",
+    "commissions-ar-dark-1440.png",
+    "loyalty-ar-dark-1440.png",
+    "activity-ar-dark-1440.png",
+    "archive-ar-dark-1440.png",
+    "people-ar-dark-1440.png",
+    "contacts-ar-dark-1024.png",
+    "lead-board-ar-dark-1024.png",
+    "companies-ar-dark-1024.png",
+    "reports-ar-dark-1024.png",
+    "configuration-ar-dark-1024.png",
+    "deal-board-ar-dark-1024.png",
+    "contact-inspector-ar-dark-1024.png",
+    "offer-ar-dark-1024.png",
+    "project-ar-dark-1024.png",
+    "delivery-ar-dark-1024.png",
+    "offers-ar-dark-1024.png",
+    "projects-ar-dark-1024.png",
+    "salespeople-ar-dark-1024.png",
+    "commissions-ar-dark-1024.png",
+    "loyalty-ar-dark-1024.png",
+    "activity-ar-dark-1024.png",
+    "archive-ar-dark-1024.png",
+    "people-ar-dark-1024.png",
+    "contacts-ar-dark-768.png",
+    "lead-board-ar-dark-768.png",
+    "companies-ar-dark-768.png",
+    "reports-ar-dark-768.png",
+    "configuration-ar-dark-768.png",
+    "deal-board-ar-dark-768.png",
+    "contact-inspector-ar-dark-768.png",
+    "offer-ar-dark-768.png",
+    "project-ar-dark-768.png",
+    "delivery-ar-dark-768.png",
+    "offers-ar-dark-768.png",
+    "projects-ar-dark-768.png",
+    "salespeople-ar-dark-768.png",
+    "commissions-ar-dark-768.png",
+    "loyalty-ar-dark-768.png",
+    "activity-ar-dark-768.png",
+    "archive-ar-dark-768.png",
+    "people-ar-dark-768.png",
+    "contacts-ar-dark-390.png",
+    "lead-board-ar-dark-390.png",
+    "companies-ar-dark-390.png",
+    "reports-ar-dark-390.png",
+    "configuration-ar-dark-390.png",
+    "deal-board-ar-dark-390.png",
+    "contact-inspector-ar-dark-390.png",
+    "offer-ar-dark-390.png",
+    "project-ar-dark-390.png",
+    "delivery-ar-dark-390.png",
+    "offers-ar-dark-390.png",
+    "projects-ar-dark-390.png",
+    "salespeople-ar-dark-390.png",
+    "commissions-ar-dark-390.png",
+    "loyalty-ar-dark-390.png",
+    "activity-ar-dark-390.png",
+    "archive-ar-dark-390.png",
+    "people-ar-dark-390.png"
+  ],
+  "errors": [],
+  "completed": true
+}

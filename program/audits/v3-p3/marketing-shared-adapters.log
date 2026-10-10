@@ -1,0 +1,43 @@
+✔ Marketing candidate hooks expose actual campaign/project state and CRM reference types (529.8826ms)
+✔ Marketing transaction receipts persist on actual campaigns and stable retries reject changes (466.43ms)
+✔ Marketing ordinary bootstrap only projects visible owned extension data and protects recipient changes (518.1555ms)
+✔ Marketing atomic journey task guard binds the current approved campaign and native step (554.9364ms)
+✔ lossless checkpoint compression preserves native data and historical gzip checkpoints (9.3051ms)
+[api:sos] SOS mock ready: 16 people, 5 systems, 10 conversations / 137 messages, pending invites: welcome-mariam-2026, welcome-khaled-2026, expired-invite-demo
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[journal] marketing-v3-36344: seed of 2026-10-07T09:00:00.000Z + 0 committed changes
+[api:sos] POST /api/auth/login -> 200 (70ms)
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+✔ Marketing resolves current CRM consent and creates one native attributed project (6916.6435ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 7133.2689

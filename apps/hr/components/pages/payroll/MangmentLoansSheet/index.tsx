@@ -2,7 +2,7 @@
 import { Plus } from "@phosphor-icons/react";
 
 import ReusableSheet from "@/components/shared/ResuableSheet";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import SelectFormEle, {
   SELECT_EMPTY_VALUE,
 } from "@/components/ui/form/select-form-element";
@@ -117,7 +117,7 @@ export default function MangmentLoansSheet({
         <>
           <Button
             size="lg"
-            variant="outline"
+            variant="secondary"
             type="button"
             onClick={() => handleOpenChange(false)}
           >

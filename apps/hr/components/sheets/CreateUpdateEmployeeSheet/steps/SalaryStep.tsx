@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation";
 
 import TextFormEle from "@/components/ui/form/text-form-element";
 import SelectFormEle from "@/components/ui/form/select-form-element";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { cn } from "@/lib/utils";
 import { useEmployeeWizard } from "../EmployeeWizardContext";
 import { useUpdateOnboardingStepMutation, useGetOnboardingStepQuery } from "@/redux/features/employee/employeeApi";
@@ -266,7 +266,7 @@ export function SalaryStep() {
             className="min-w-32"
             type="button"
             size="lg"
-            variant="outline"
+            variant="secondary"
             onClick={onBack}
           >
             {t("nav.back")}

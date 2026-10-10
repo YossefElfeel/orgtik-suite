@@ -8,7 +8,7 @@ import { useClientSession } from '@orgtik/ui/auth';
 import { Form } from '@/components/ui/form';
 import { Button } from '@orgtik/ui';
 import { LeaveRequestSheet as ReusableDialog } from '@/components/sheets/LeaveRequestSheet';
-import StatusBadge from '@/components/shared/StatusBadge';
+import StatusBadge from '@/components/bindings/EmploymentStatus';
 import SelectFormEle from '@/components/ui/form/select-form-element';
 import { DateTimeFormElement } from '@/components/ui/form/date-time-form-element';
 import TextFormEle from '@/components/ui/form/text-form-element';

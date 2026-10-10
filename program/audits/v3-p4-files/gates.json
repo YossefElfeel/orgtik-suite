@@ -1,0 +1,75 @@
+{
+  "scope": "Ordinary Files routes, actual signed workspace identities, persisted packaged assets and protected shares in owned offset700 sandbox.",
+  "mode": "gates",
+  "checks": [
+    {
+      "name": "Ordinary connection toggle gates Files cross-tool affordance with real server state",
+      "pass": true
+    },
+    {
+      "name": "Disabled gate has the actual connection settings destination",
+      "pass": true
+    },
+    {
+      "name": "No-access gate posts an actual person-scoped Tasks request",
+      "pass": true
+    },
+    {
+      "name": "Request does not silently grant a seat",
+      "pass": true
+    },
+    {
+      "name": "Trial gate uses the actual single-tool workspace",
+      "pass": true
+    },
+    {
+      "name": "Owner gate starts actual Tasks trial and assigns current owner",
+      "pass": true
+    },
+    {
+      "name": "Ordinary admin overview reads actual shared controls",
+      "pass": true
+    },
+    {
+      "name": "Ordinary admin billing reads actual shared controls",
+      "pass": true
+    },
+    {
+      "name": "Ordinary admin members reads actual shared controls",
+      "pass": true
+    },
+    {
+      "name": "Ordinary admin roles reads actual shared controls",
+      "pass": true
+    },
+    {
+      "name": "Ordinary admin settings reads actual shared controls",
+      "pass": true
+    },
+    {
+      "name": "Ordinary admin connections reads actual shared controls",
+      "pass": true
+    },
+    {
+      "name": "Ordinary admin import-export reads actual shared controls",
+      "pass": true
+    },
+    {
+      "name": "Ordinary admin audit reads actual shared controls",
+      "pass": true
+    },
+    {
+      "name": "No unexpected browser runtime or console errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    "connection-disabled.png",
+    "request-access.png",
+    "trial-started.png",
+    "admin-audit.png"
+  ],
+  "errors": [],
+  "completed": true
+}

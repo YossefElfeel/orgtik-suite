@@ -11,7 +11,7 @@ export default function DashboardLayout({
   return (
     <SuiteFrame>
       <NotificationsSocketHost />
-      <div className="min-h-full bg-raised">
+      <div className="min-h-full">
         <RequireRole>{children}</RequireRole>
       </div>
     </SuiteFrame>

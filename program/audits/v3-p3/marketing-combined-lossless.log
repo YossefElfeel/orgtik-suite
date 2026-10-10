@@ -1,0 +1,254 @@
+CHECKPOINT_SIZE {"raw":250,"encoded":274,"snapshots":[["marketing",97]]}
+✔ lossless checkpoint compression preserves native data and historical gzip checkpoints (13.7507ms)
+[api:sos] SOS mock ready: 16 people, 5 systems, 10 conversations / 137 messages, pending invites: welcome-mariam-2026, welcome-khaled-2026, expired-invite-demo
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[journal] marketing-v3-36404: seed of 2026-10-07T09:00:00.000Z + 0 committed changes
+CHECKPOINT_SIZE {"raw":79104,"encoded":18140,"snapshots":[]}
+[api:sos] POST /api/auth/login -> 200 (55ms)
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+CHECKPOINT_SIZE {"raw":285522,"encoded":58905,"snapshots":[["ws_orgtik:marketing",206396]]}
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+CHECKPOINT_SIZE {"raw":285722,"encoded":58989,"snapshots":[["ws_orgtik:marketing",206596]]}
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+CHECKPOINT_SIZE {"raw":680084,"encoded":133617,"snapshots":[["ws_orgtik:marketing",206596],["ws_orgtik:sales",393803]]}
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+CHECKPOINT_SIZE {"raw":682975,"encoded":134185,"snapshots":[["ws_orgtik:marketing",206980],["ws_orgtik:sales",395593]]}
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+CHECKPOINT_SIZE {"raw":683759,"encoded":134317,"snapshots":[["ws_orgtik:marketing",206980],["ws_orgtik:sales",395858]]}
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 24 projects, 18 subscriptions, 68 invoices, 46 notifications
+CHECKPOINT_SIZE {"raw":683950,"encoded":134361,"snapshots":[["ws_orgtik:marketing",206980],["ws_orgtik:sales",395858]]}
+✔ Marketing resolves current CRM consent and creates one native attributed project (5953.3473ms)
+[api:sos] SOS mock ready: 16 people, 9 systems, 10 conversations / 137 messages, pending invites: welcome-mariam-2026, welcome-khaled-2026, expired-invite-demo
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:files] seeded share "Client review - proposal": http://localhost:3002/share/5f1c7a52-9d0e-4b6a-8e1f-2a9c3b7d4e01?secret=gnQayvC_uZjsUXoreuiKqnFRJVaX3I1c
+[api:files] seeded share "Nile Foods marketing team" (password: Nile2026): http://localhost:3002/share/8c2e4f61-3b7a-4d19-9a0c-6e5f1d2b3a04?secret=lgD1c4h3ayf2n7XfT7EVBK0uuC7GIp3u
+[api:files] seeded share "Teaser preview - agency": http://localhost:3002/share/b3d9e0a7-6c21-4f58-8b4e-9f0a1c2d3e05?secret=U9Y80FJWaGTvnC3j7bZqMlZ-Em3aNYEd
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[journal] suite-v3-36432: seed of 2026-10-07T09:00:00.000Z + 0 committed changes
+CHECKPOINT_SIZE {"raw":909934,"encoded":88721,"snapshots":[]}
+[api:sos] POST /api/auth/register -> 201 (47ms)
+CHECKPOINT_SIZE {"raw":911104,"encoded":88961,"snapshots":[]}
+CHECKPOINT_SIZE {"raw":911104,"encoded":88961,"snapshots":[]}
+CHECKPOINT_SIZE {"raw":911665,"encoded":89065,"snapshots":[]}
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":912226,"encoded":89101,"snapshots":[]}
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":912446,"encoded":89165,"snapshots":[]}
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":913062,"encoded":89317,"snapshots":[["ws_signup_188924843020384:tasks",341]]}
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":913284,"encoded":89325,"snapshots":[["ws_signup_188924843020384:tasks",341]]}
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:sos] POST /api/auth/login -> 200 (45ms)
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sos] POST /api/auth/login -> 200 (40ms)
+CHECKPOINT_SIZE {"raw":914065,"encoded":89505,"snapshots":[["ws_signup_188924843020384:tasks",341]]}
+CHECKPOINT_SIZE {"raw":914512,"encoded":89581,"snapshots":[["ws_signup_188924843020384:tasks",341]]}
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+CHECKPOINT_SIZE {"raw":915027,"encoded":89993,"snapshots":[["ws_signup_188924843020384:tasks",341]]}
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":918563,"encoded":90761,"snapshots":[["ws_signup_188924843020384:tasks",3877]]}
+[api:tasks] seeded 1 projects, 3 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 3 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 3 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":919259,"encoded":90865,"snapshots":[["ws_signup_188924843020384:tasks",4573]]}
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":919482,"encoded":90897,"snapshots":[["ws_signup_188924843020384:tasks",4796]]}
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":920702,"encoded":91001,"snapshots":[["ws_signup_188924843020384:tasks",6016]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":920911,"encoded":91097,"snapshots":[["ws_signup_188924843020384:tasks",6225]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":920920,"encoded":91097,"snapshots":[["ws_signup_188924843020384:tasks",6234]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":921259,"encoded":91169,"snapshots":[["ws_signup_188924843020384:tasks",6573]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":921484,"encoded":91241,"snapshots":[["ws_signup_188924843020384:tasks",6798]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":921750,"encoded":91345,"snapshots":[["ws_signup_188924843020384:tasks",7064]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":921777,"encoded":91349,"snapshots":[["ws_signup_188924843020384:tasks",7091]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+CHECKPOINT_SIZE {"raw":922279,"encoded":91473,"snapshots":[["ws_signup_188924843020384:tasks",7593]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":922279,"encoded":91473,"snapshots":[["ws_signup_188924843020384:tasks",7593]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":922279,"encoded":91473,"snapshots":[["ws_signup_188924843020384:tasks",7593]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":922279,"encoded":91473,"snapshots":[["ws_signup_188924843020384:tasks",7593]]}
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":922887,"encoded":91541,"snapshots":[["ws_signup_188924843020384:tasks",8201]]}
+[api:tasks] seeded 1 projects, 6 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":924053,"encoded":91621,"snapshots":[["ws_signup_188924843020384:tasks",9367]]}
+[api:tasks] seeded 1 projects, 7 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 7 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":924614,"encoded":91701,"snapshots":[["ws_signup_188924843020384:tasks",9928]]}
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":924824,"encoded":91745,"snapshots":[["ws_signup_188924843020384:tasks",10138]]}
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":926008,"encoded":91849,"snapshots":[["ws_signup_188924843020384:tasks",11322]]}
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":926048,"encoded":91865,"snapshots":[["ws_signup_188924843020384:tasks",11362]]}
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":926026,"encoded":91861,"snapshots":[["ws_signup_188924843020384:tasks",11340]]}
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+CHECKPOINT_SIZE {"raw":926260,"encoded":91893,"snapshots":[["ws_signup_188924843020384:tasks",11574]]}
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+CHECKPOINT_SIZE {"raw":1188118,"encoded":122994,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",261839]]}
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+CHECKPOINT_SIZE {"raw":2719468,"encoded":282494,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",261839],["ws_orgtik:hr",1531334]]}
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+CHECKPOINT_SIZE {"raw":2722313,"encoded":283242,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",262929],["ws_orgtik:hr",1531334]]}
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+CHECKPOINT_SIZE {"raw":2739668,"encoded":288434,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",262929],["ws_orgtik:hr",1531334],["ws_orgtik:chats",17336]]}
+CHECKPOINT_SIZE {"raw":2740280,"encoded":288718,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",262929],["ws_orgtik:hr",1531334],["ws_orgtik:chats",17948]]}
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+CHECKPOINT_SIZE {"raw":2740728,"encoded":288814,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",262929],["ws_orgtik:hr",1531334],["ws_orgtik:chats",18396]]}
+CHECKPOINT_SIZE {"raw":2741282,"encoded":288926,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",262929],["ws_orgtik:hr",1531334],["ws_orgtik:chats",18950]]}
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+CHECKPOINT_SIZE {"raw":2744086,"encoded":288714,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",263993],["ws_orgtik:hr",1531334],["ws_orgtik:chats",18950]]}
+CHECKPOINT_SIZE {"raw":2744656,"encoded":288858,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",263993],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520]]}
+[api:tasks] seeded 8 projects, 68 tasks, 50 comments, 169 notifications
+CHECKPOINT_SIZE {"raw":2747454,"encoded":289582,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520]]}
+[api:tasks] seeded 8 projects, 69 tasks, 50 comments, 170 notifications
+[api:tasks] seeded 8 projects, 69 tasks, 50 comments, 170 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sos] GET /v1/public/catalog -> 200 (4ms)
+CHECKPOINT_SIZE {"raw":2747825,"encoded":289630,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520]]}
+[api:sos] GET /v1/public/catalog -> 200 (3ms)
+CHECKPOINT_SIZE {"raw":2748662,"encoded":289254,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520]]}
+[api:sos] GET /v1/public/catalog -> 200 (2ms)
+CHECKPOINT_SIZE {"raw":2749211,"encoded":289482,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520]]}
+[api:wm] POST /v2/__mock/forms-live -> 200 (2ms)
+[api:wm] GET /v2/public/site -> 200 (3ms)
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:wm] POST /v2/public/leads -> 201 (857ms)
+CHECKPOINT_SIZE {"raw":3144611,"encoded":362274,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",394771]]}
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+CHECKPOINT_SIZE {"raw":3144991,"encoded":362394,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",395151]]}
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:tasks] seeded 8 projects, 69 tasks, 50 comments, 170 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:wm] GET /v2/admin/catalog -> 200 (1ms)
+[api:sos] POST /v1/public/website-quotes -> 200 (2ms)
+CHECKPOINT_SIZE {"raw":3146348,"encoded":362746,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",395151]]}
+[api:sos] POST /v1/public/website-orders -> 200 (1ms)
+CHECKPOINT_SIZE {"raw":3148142,"encoded":363126,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",395151]]}
+[api:sos] POST /v1/app/website-orders -> 201 (2ms)
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+CHECKPOINT_SIZE {"raw":3154230,"encoded":363814,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398379]]}
+[api:sales] seeded 12 plans, 37 features, 23 customers, 24 projects, 18 subscriptions, 68 invoices, 47 notifications
+CHECKPOINT_SIZE {"raw":3154451,"encoded":363898,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600]]}
+[api:sales] seeded 12 plans, 37 features, 23 customers, 24 projects, 18 subscriptions, 68 invoices, 47 notifications
+[api:sos] POST /v1/app/website-orders -> 201 (1ms)
+CHECKPOINT_SIZE {"raw":3154651,"encoded":363898,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600]]}
+CHECKPOINT_SIZE {"raw":3154881,"encoded":364086,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600]]}
+CHECKPOINT_SIZE {"raw":3266407,"encoded":382750,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507]]}
+CHECKPOINT_SIZE {"raw":3267106,"encoded":383126,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507]]}
+CHECKPOINT_SIZE {"raw":3267375,"encoded":383002,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507]]}
+CHECKPOINT_SIZE {"raw":3268174,"encoded":382950,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507]]}
+[api:sos] GET /v1/public/catalog -> 200 (3ms)
+[api:sos] GET /v1/public/catalog -> 200 (2ms)
+CHECKPOINT_SIZE {"raw":3268493,"encoded":382994,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507]]}
+CHECKPOINT_SIZE {"raw":3269043,"encoded":383302,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507]]}
+[api:sos] GET /v1/public/catalog -> 200 (2ms)
+CHECKPOINT_SIZE {"raw":3269106,"encoded":383242,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507]]}
+CHECKPOINT_SIZE {"raw":3269284,"encoded":383466,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507]]}
+CHECKPOINT_SIZE {"raw":3270107,"encoded":383242,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507]]}
+[api:sos] GET /v1/public/catalog -> 200 (3ms)
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+CHECKPOINT_SIZE {"raw":3476522,"encoded":422946,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507],["ws_orgtik:marketing",206392]]}
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 23 customers, 24 projects, 18 subscriptions, 68 invoices, 47 notifications
+CHECKPOINT_SIZE {"raw":3476722,"encoded":423002,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398600],["ws_orgtik:files",111507],["ws_orgtik:marketing",206592]]}
+[api:sales] seeded 12 plans, 37 features, 23 customers, 24 projects, 18 subscriptions, 68 invoices, 47 notifications
+CHECKPOINT_SIZE {"raw":3477514,"encoded":423198,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",398868],["ws_orgtik:files",111507],["ws_orgtik:marketing",206592]]}
+[api:sales] seeded 12 plans, 37 features, 23 customers, 24 projects, 18 subscriptions, 68 invoices, 47 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sales] seeded 12 plans, 37 features, 23 customers, 24 projects, 18 subscriptions, 68 invoices, 47 notifications
+CHECKPOINT_SIZE {"raw":3480386,"encoded":423654,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",265057],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",400627],["ws_orgtik:files",111507],["ws_orgtik:marketing",206980]]}
+[api:sales] seeded 12 plans, 37 features, 23 customers, 25 projects, 18 subscriptions, 68 invoices, 48 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 8 projects, 69 tasks, 50 comments, 170 notifications
+CHECKPOINT_SIZE {"raw":3483454,"encoded":423986,"snapshots":[["ws_signup_188924843020384:tasks",11574],["ws_orgtik:tasks",266170],["ws_orgtik:hr",1531334],["ws_orgtik:chats",19520],["ws_orgtik:sales",400627],["ws_orgtik:files",111507],["ws_orgtik:marketing",207118]]}
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 8 projects, 70 tasks, 50 comments, 171 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+✔ ordinary suite routes persist preferences, connect trials, requests and scoped feeds (37470.1259ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 37662.7941

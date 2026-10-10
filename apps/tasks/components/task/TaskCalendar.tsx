@@ -9,7 +9,7 @@ import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { endOfMonth, endOfWeek, parseDate, startOfMonth, startOfWeek, today, type CalendarDate } from "@internationalized/date";
-import { Button, SegmentedControl, Select, formatLocale, useOrgtik, type Tone } from "@orgtik/ui";
+import { Button, ConnectedFeature, SegmentedControl, Select, formatLocale, useOrgtik, useSuite, type Tone } from "@orgtik/ui";
 import { useClientSession } from "@orgtik/ui/auth";
 import { CalendarGrid } from "@orgtik/ui/dates";
 import { usePathname, useRouter } from "@/i18n/routing";
@@ -38,6 +38,10 @@ export function TaskCalendar({
   filterByProject?: boolean;
 }) {
   const t = useTranslations("Calendar");
+  const suite = useSuite();
+  const connected = suite.connectionState("hr", "tasks", false) === "available";
+  const requestHR = () => suite.mutate("/access-requests", "POST", { tool: "hr", reason: "Show HR availability in the Tasks calendar" });
+  const trialHR = async () => { const plans = await suite.request<{ id: string; trialDays: number }[]>("/tools/hr/plans"); const plan = plans.find(row => row.trialDays > 0); if (!plan) throw new Error(t("availabilityError")); await suite.mutate("/tools/hr/trial", "POST", { planId: plan.id }); };
   const context = useClientSession()?.workspaceContext;
   const timeZone = context?.workspace.timeZone ?? "UTC";
   const namespace = availabilityNamespace(context);
@@ -68,9 +72,9 @@ export function TaskCalendar({
   const project = params.get("project");
   const fromDate = startOfWeek(view === "month" ? startOfMonth(month) : month, tag).toString();
   const toDate = endOfWeek(view === "month" ? endOfMonth(month) : month, tag).toString();
-  const availability = useGetCalendarAvailabilityQuery({ workspaceId: context?.workspace.id ?? "", timeZone, fromDate, toDate, namespace, guest: context?.member.role === "guest" }, { skip: !context, pollingInterval: 15000, skipPollingIfUnfocused: true, refetchOnMountOrArgChange: true });
+  const availability = useGetCalendarAvailabilityQuery({ workspaceId: context?.workspace.id ?? "", timeZone, fromDate, toDate, namespace, guest: context?.member.role === "guest" }, { skip: !context || !connected, pollingInterval: 15000, skipPollingIfUnfocused: true, refetchOnMountOrArgChange: true });
   // currentData belongs to this exact context/range; a failed poll must not look like no leave.
-  const items = availability.isError ? [] : availability.currentData?.items ?? [];
+  const items = !connected || availability.isError ? [] : availability.currentData?.items ?? [];
   const detail = selected?.namespace === namespace ? items.find(item => item.id === selected.id) : undefined;
   // The month can extend below the app's scroll pane. A detail action must have a visible result.
   // Focus only on a deliberate selection, never again on each background poll.
@@ -117,7 +121,7 @@ export function TaskCalendar({
           </div>
         ) : null}
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-2 text-caption text-fg-muted" aria-live="polite" aria-busy={availability.isLoading || availability.isFetching}>
+      <ConnectedFeature requires="hr" source="tasks" write={false} compact onTrial={trialHR} onRequestTool={requestHR} onRequestAccess={requestHR} billingHref={`${suite.sosUrl}/billing`} settingsHref="/admin/connections"><div className="flex flex-wrap items-center justify-between gap-2 text-caption text-fg-muted" aria-live="polite" aria-busy={availability.isLoading || availability.isFetching}>
         <p>{t("availabilityTitle")} · <bdi>{timeZone}</bdi></p>
         {availability.isError ? (
           <div className="flex flex-wrap items-center gap-2" role="alert">
@@ -125,7 +129,7 @@ export function TaskCalendar({
             <Button size="sm" variant="secondary" onClick={() => void availability.refetch()}>{t("retryAvailability")}</Button>
           </div>
         ) : <span>{availability.isLoading || !availability.currentData ? t("availabilityLoading") : items.length ? t("availabilityReadOnly") : t("availabilityEmpty")}</span>}
-      </div>
+      </div></ConnectedFeature>
       <CalendarGrid
         view={view}
         month={month}

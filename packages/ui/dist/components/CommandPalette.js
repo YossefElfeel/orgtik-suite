@@ -9,7 +9,8 @@ import { Kbd } from "./Kbd.js";
 import { Skeleton } from "./Display.js";
 import { useOrgtik } from "../provider/OrgtikProvider.js";
 import { suiteText } from "../suite/strings.js";
-export function CommandPalette({ items = [], load, onSelect }) {
+const EMPTY_ITEMS = [];
+export function CommandPalette({ items = EMPTY_ITEMS, load, onSelect }) {
     const { locale } = useOrgtik(), t = (key) => suiteText(locale, key);
     const [open, setOpen] = useState(false), [query, setQuery] = useState(""), [results, setResults] = useState(items), [busy, setBusy] = useState(false), [active, setActive] = useState(0), [error, setError] = useState();
     const id = useId(), input = useRef(null);

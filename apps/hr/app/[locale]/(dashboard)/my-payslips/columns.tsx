@@ -48,14 +48,14 @@ function MyPayslipRowActions({
   return (
     <div className="flex items-center gap-1">
       <PayslipPreviewDialog id={id} variant="employee">
-        <IconButton label={t("actions.previewPayslip")} variant="outline-view" type="button">
+        <IconButton label={t("actions.previewPayslip")} variant="secondary" type="button">
           <Eye className="size-4 text-primary" />
         </IconButton>
       </PayslipPreviewDialog>
 
       <IconButton
         label={t("actions.downloadPayslip")}
-        variant="outline-view"
+        variant="secondary"
         type="button"
         onClick={handleDownload}
         disabled={isDownloading}

@@ -1,0 +1,36 @@
+{
+  "scope": "CRM P4 retained business, actual paid service, packaged delivery and workspace handoff",
+  "checks": [
+    {
+      "name": "Functional fixture is an actual persisted contact",
+      "pass": true
+    },
+    {
+      "name": "UI bulk assignment changes actual owner",
+      "pass": true
+    },
+    {
+      "name": "Routing rule UI persists actual eligible owner",
+      "pass": true
+    },
+    {
+      "name": "Stage ordering UI persists before won",
+      "pass": true
+    },
+    {
+      "name": "Contact arrival applies enabled actual source routing",
+      "pass": true
+    },
+    {
+      "name": "UI duplicate merge removes only unlinked prospect from active projection",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "bulk-owner-outcome.png",
+    "merged-prospect-list.png",
+    "depth-failure.png"
+  ],
+  "errors": [],
+  "failure": "locator.waitFor: Timeout 120000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Local contract review recorded a simulated signature') to be visible\u001b[22m\n"
+}

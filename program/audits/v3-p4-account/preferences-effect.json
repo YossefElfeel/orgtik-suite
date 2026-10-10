@@ -1,0 +1,62 @@
+{
+  "scope": "Ordinary Account routes with actual authority in isolated offset500 demo. Provider settings/delivery are labeled mock; no external sending or payment claims.",
+  "mode": "preferences-effect",
+  "checks": [
+    {
+      "name": "Preference proof uses actual billing and Tasks notices",
+      "pass": true
+    },
+    {
+      "name": "Ordinary preference action mutes actual suite projection",
+      "pass": true
+    },
+    {
+      "name": "The ordinary shared bell reflects the saved in-app preference",
+      "pass": true
+    },
+    {
+      "name": "Adaptive Home waiting reflects muted actual notifications",
+      "pass": true
+    },
+    {
+      "name": "Re-enabling returns the exact same persisted notices",
+      "pass": true
+    },
+    {
+      "name": "Tool-category preference filters Tasks while preserving billing",
+      "pass": true
+    },
+    {
+      "name": "Re-enabled Home waiting uses the actual Tasks notification",
+      "pass": true
+    },
+    {
+      "name": "Adaptive Home activity includes actual admitted task events",
+      "pass": true
+    },
+    {
+      "name": "Actual Home activity links preserve exact Tasks record",
+      "pass": true
+    },
+    {
+      "name": "Ordinary mock API-key revoke changes actual persisted record",
+      "pass": true
+    },
+    {
+      "name": "Setup dismissal persists and updates its ordinary control",
+      "pass": true
+    },
+    {
+      "name": "No application runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "notifications-muted.png",
+    "home-muted.png",
+    "home.png"
+  ],
+  "errors": [],
+  "completed": true
+}

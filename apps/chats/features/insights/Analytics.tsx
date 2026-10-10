@@ -1,4 +1,5 @@
 "use client";
+import {geometryClass} from "@/lib/geometry";
 
 /**
  * SOMION HQ - DEEPER ANALYTICS
@@ -95,7 +96,7 @@ export function TrendChart({
         title={label}
         meta={t("insights.weeks", "{n} weeks", { n: history.length })}
       />
-      <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+      <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
         {body}
       </p>
 
@@ -110,7 +111,7 @@ export function TrendChart({
           })}
           width={W}
           height={H}
-          style={{ display: "block", maxWidth: "100%" }}
+          className={"ch-display-2a1b75"+' '+"ch-max-width-27aeb6"}
           onMouseLeave={() => setHover(null)}
         >
           {/* Solid hairline gridlines. Dashing reads as "threshold". */}
@@ -130,8 +131,8 @@ export function TrendChart({
                   x={PAD.left - 7}
                   y={y + 3}
                   textAnchor="end"
-                  style={{ fontSize: 10, fill: "var(--color-ink-subtle)" }}
-                  className="tabular"
+
+                  className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")}
                 >
                   {v}
                 </text>
@@ -175,8 +176,8 @@ export function TrendChart({
                 x={x}
                 y={H - 6}
                 textAnchor="middle"
-                className="tabular"
-                style={{ fontSize: 10, fill: "var(--color-ink-subtle)" }}
+                className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")}
+
               >
                 {h.week.split("-")[1]}
               </text>
@@ -203,7 +204,7 @@ export function TrendChart({
                 onMouseEnter={() => setHover(i)}
                 onFocus={() => setHover(i)}
                 onBlur={() => setHover(null)}
-                style={{ cursor: "default" }}
+                className={"ch-cursor-2a9295"}
               />
             );
           })}
@@ -211,11 +212,11 @@ export function TrendChart({
       </div>
 
       {showable && (
-        <p className="mt-1 text-[12px]" aria-hidden="true">
-          <span className="font-medium" style={{ color: "var(--color-ink)" }}>
+        <p className="mt-1 text-caption" aria-hidden="true">
+          <span className={"font-medium "+("ch-color-7f7330")} >
             {t("insights.week", "Week {w}", { w: showable.week })}
           </span>
-          <span style={{ color: "var(--color-ink-muted)" }}>
+          <span className={"ch-color-4a0211"} >
             {" · "}
             {t("insights.hoursInMeetings", "{h} in meetings", {
               h: formatHours(showable.meetingHours),
@@ -253,7 +254,7 @@ export function MeetingSizes({
         title={t("insights.meetingSizes", "How big the meetings were")}
         meta={t("insights.nMeetings", "{n} meetings", { n: totalCount })}
       />
-      <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+      <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
         {t(
           "insights.meetingSizesBody",
           "Hours spent, by how many people were in the room. Team totals, by size band.",
@@ -264,37 +265,33 @@ export function MeetingSizes({
         {sizes.map((s) => (
           <li key={s.band} className="flex items-center gap-3">
             <span
-              className="tabular w-[38px] shrink-0 text-[12.5px] font-medium"
-              style={{ color: "var(--color-ink)" }}
+              className={"tabular w-[38px] shrink-0 text-body-sm font-medium "+("ch-color-7f7330")}
+
             >
               {s.band}
             </span>
             <span
-              className="h-[10px] min-w-0 flex-1"
-              style={{ background: "var(--color-bar-zero)", borderRadius: "var(--radius-chip)" }}
+              className={"h-[10px] min-w-0 flex-1 "+("ch-background-5d6e34"+' '+"ch-border-radius-189003")}
+
             >
               <span
-                className="block h-full"
-                style={{
-                  width: `${(s.hours / max) * 100}%`,
-                  background: "var(--color-bar)",
-                  borderRadius: "var(--radius-chip)",
-                }}
+                className={("block h-full "+("ch-background-82a08c"+' '+"ch-border-radius-189003"))+" "+(geometryClass({width:`${(s.hours / max) * 100}%`}))}
+
               />
             </span>
             <span
-              className="tabular w-[92px] shrink-0 text-end text-[12px]"
-              style={{ color: "var(--color-ink-muted)" }}
+              className={"tabular w-[92px] shrink-0 text-end text-caption "+("ch-color-4a0211")}
+
             >
               {formatHours(s.hours)}
-              <span style={{ color: "var(--color-ink-subtle)" }}> · {s.count}</span>
+              <span className={"ch-color-094083"} > · {s.count}</span>
             </span>
           </li>
         ))}
       </ul>
 
       {biggest && (
-        <p className="mt-3.5 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+        <p className={"mt-3.5 text-caption "+("ch-color-4a0211")} >
           {t(
             "insights.sizesTakeaway",
             "Most meeting time went to groups of {band}, at {pct}% of {total}.",
@@ -334,7 +331,7 @@ export function Utilisation({
         title={t("insights.utilisation", "Room utilisation")}
         meta={`${Math.round(pct)}%`}
       />
-      <p className="pb-3 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+      <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
         {t(
           "insights.utilisationBody",
           "Hours the rooms were occupied against the hours they were available, across the working week.",
@@ -347,19 +344,14 @@ export function Utilisation({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={t("insights.utilisation", "Room utilisation")}
-        style={{ height: 12, background: "var(--color-bar-zero)", borderRadius: "var(--radius-chip)" }}
+        className={"ch-height-06c074"+' '+"ch-background-5d6e34"+' '+"ch-border-radius-189003"}
       >
         <div
-          style={{
-            width: `${pct}%`,
-            height: "100%",
-            background: "var(--color-bar)",
-            borderRadius: "var(--radius-chip)",
-          }}
+          className={("ch-height-622640"+' '+"ch-background-82a08c"+' '+"ch-border-radius-189003")+" "+(geometryClass({width:`${pct}%`}))}
         />
       </div>
 
-      <p className="tabular mt-2 text-[12px]" style={{ color: "var(--color-ink-muted)" }}>
+      <p className={"tabular mt-2 text-caption "+("ch-color-4a0211")} >
         {t("insights.utilisationOf", "{used} used of {available} available", {
           used: formatHours(used),
           available: formatHours(available),
@@ -367,7 +359,7 @@ export function Utilisation({
       </p>
 
       {/* The conclusion a reader should draw, said rather than implied. */}
-      <p className="mt-3 text-[12.5px] leading-relaxed" style={{ color: "var(--color-ink)" }}>
+      <p className={"mt-3 text-body-sm leading-relaxed "+("ch-color-7f7330")} >
         {pct < 40
           ? t(
               "insights.utilisationLow",

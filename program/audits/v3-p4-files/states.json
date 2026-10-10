@@ -1,0 +1,45 @@
+{
+  "scope": "Ordinary Files routes, actual signed workspace identities, persisted packaged assets and protected shares in owned offset700 sandbox.",
+  "mode": "states",
+  "checks": [
+    {
+      "name": "Actual zero-match query renders empty state",
+      "pass": true
+    },
+    {
+      "name": "Actual HTTP 500 renders the appropriate state",
+      "pass": true
+    },
+    {
+      "name": "Actual HTTP 403 renders the appropriate state",
+      "pass": true
+    },
+    {
+      "name": "Pending actual request renders loading state",
+      "pass": true
+    },
+    {
+      "name": "Actual persisted rename renders success state",
+      "pass": true
+    },
+    {
+      "name": "Actual View-as remains read-only and disables content creation",
+      "pass": true
+    },
+    {
+      "name": "No unexpected browser runtime or console errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    "state-empty.png",
+    "state-error.png",
+    "state-forbidden.png",
+    "state-loading.png",
+    "state-success.png",
+    "state-read-only.png"
+  ],
+  "errors": [],
+  "completed": true
+}

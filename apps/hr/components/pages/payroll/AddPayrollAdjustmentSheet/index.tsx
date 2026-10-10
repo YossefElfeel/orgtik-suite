@@ -1,7 +1,7 @@
 "use client";
 
 import ReusableSheet from "@/components/shared/ResuableSheet";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import TextFormEle from "@/components/ui/form/text-form-element";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -148,7 +148,7 @@ export default function AddPayrollAdjustmentSheet({
       trigger={trigger}
       footer={
         <>
-          <Button size="lg" variant="outline" type="button" onClick={() => setOpen(false)} disabled={isLoading}>
+          <Button size="lg" variant="secondary" type="button" onClick={() => setOpen(false)} disabled={isLoading}>
             {t("actions.cancel")}
           </Button>
           <Button

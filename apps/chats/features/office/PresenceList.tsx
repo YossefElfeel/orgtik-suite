@@ -70,8 +70,8 @@ function Group({ label, children }: { label: string; children: React.ReactNode }
   return (
     <section className="pb-1">
       <h3
-        className="px-3 pb-1 pt-3 text-[11.5px] font-semibold"
-        style={{ color: "var(--color-ink-subtle)" }}
+        className={"px-3 pb-1 pt-3 text-caption font-semibold "+("ch-color-094083")}
+
       >
         <bdi>{label}</bdi>
       </h3>
@@ -138,8 +138,8 @@ function PersonRow({
   return (
     <li>
       <div
-        className="hq-row flex items-center gap-2.5 px-3"
-        style={{ minHeight: compact ? 44 : 52 }}
+        className={"hq-row flex items-center gap-2.5 px-3 "+((compact?"ch-min-height-99fb93":"ch-min-height-5d0881"))}
+
       >
         <Avatar
           name={user.name}
@@ -150,17 +150,17 @@ function PersonRow({
           speaking={presence.speaking}
         />
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[13px] font-medium" style={{ color: "var(--color-ink)" }}>
+          <p className={"truncate text-body-sm font-medium "+("ch-color-7f7330")} >
             <bdi>{user.name}</bdi>
             {isMe && (
-              <span className="ms-1.5 text-[11.5px] font-normal" style={{ color: "var(--color-ink-subtle)" }}>
+              <span className={"ms-1.5 text-caption font-normal "+("ch-color-094083")} >
                 {t("office.you", "you")}
               </span>
             )}
           </p>
           {/* Status in words, always. The colour is a second signal, never the
               only one. */}
-          <p className="truncate text-[11.5px]" style={{ color: "var(--color-ink-muted)" }}>
+          <p className={"truncate text-caption "+("ch-color-4a0211")} >
             {presence.customText ? <bdi>{presence.customText}</bdi> : t(`status.${presence.status}`, meta.label)}
             {room && (
               <>

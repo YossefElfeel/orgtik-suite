@@ -2,7 +2,7 @@
 import { Info, Plus } from "@phosphor-icons/react";
 
 import ReusableSheet from "@/components/shared/ResuableSheet";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import TextFormEle from "@/components/ui/form/text-form-element";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -98,7 +98,7 @@ export default function AddLoanAmountSheet({ runId, employeeId, trigger }: AddLo
         <>
           <Button
             size="lg"
-            variant="outline"
+            variant="secondary"
             type="button"
             onClick={() => handleOpenChange(false)}
           >

@@ -2,7 +2,7 @@
 import { Plus } from "@phosphor-icons/react";
 
 import ReusableSheet from "@/components/shared/ResuableSheet";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import SelectFormEle from "@/components/ui/form/select-form-element";
 import { SwitchFormElement } from "@/components/ui/form/switch-form-element";
 import TextFormEle from "@/components/ui/form/text-form-element";
@@ -75,7 +75,7 @@ function SubscriptionManagement() {
       }
       footer={
         <>
-          <Button size="lg" variant="outline" onClick={() => setOpen(false)}>
+          <Button size="lg" variant="secondary" onClick={() => setOpen(false)}>
             {tSheet("actions.cancel")}
           </Button>
           <Button type="submit" form={FORM_ID} size="lg">

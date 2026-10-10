@@ -1,0 +1,63 @@
+{
+  "scope": "Ordinary Files routes, actual signed workspace identities, persisted packaged assets and protected shares in owned offset700 sandbox.",
+  "mode": "public-visual",
+  "checks": [
+    {
+      "name": "en/light/390: protected public request accessible and contained",
+      "pass": true,
+      "detail": {
+        "violations": [],
+        "overflow": false,
+        "dir": "ltr",
+        "secretCleared": true
+      }
+    },
+    {
+      "name": "en/dark/390: protected public request accessible and contained",
+      "pass": true,
+      "detail": {
+        "violations": [],
+        "overflow": false,
+        "dir": "ltr",
+        "secretCleared": true
+      }
+    },
+    {
+      "name": "ar/light/390: protected public request accessible and contained",
+      "pass": true,
+      "detail": {
+        "violations": [],
+        "overflow": false,
+        "dir": "rtl",
+        "secretCleared": true
+      }
+    },
+    {
+      "name": "ar/dark/390: protected public request accessible and contained",
+      "pass": true,
+      "detail": {
+        "violations": [],
+        "overflow": false,
+        "dir": "rtl",
+        "secretCleared": true
+      }
+    },
+    {
+      "name": "Public visual capability is actually revoked after review",
+      "pass": true
+    },
+    {
+      "name": "No unexpected browser runtime or console errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    "public-en-light-390.png",
+    "public-en-dark-390.png",
+    "public-ar-light-390.png",
+    "public-ar-dark-390.png"
+  ],
+  "errors": [],
+  "completed": true
+}

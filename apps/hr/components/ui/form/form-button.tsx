@@ -5,7 +5,7 @@
 // trigger can render it (`render={<FormButton … />}`) and pass its own children and handlers. With
 // FormControl (a Slot) in between, the trigger's children replaced the button and nothing opened.
 import type { ComponentProps } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import { useFormField } from "@/components/ui/form";
 
 export function FormButton(props: ComponentProps<typeof Button>) {

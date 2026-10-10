@@ -1,8 +1,1 @@
-import { redirect } from "@/i18n/routing";
-
-// HR opens on Attendance, in the language the address carries (/ar → /ar/attendance), not the
-// cookie's (HR-030).
-export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  redirect({ href: "/attendance", locale });
-}
+'use client';import {useTranslations} from 'next-intl';import {PageHeader,LoadingState,ErrorState,OnboardingChecklist,Button} from '@orgtik/ui';import {Link} from '@/i18n/routing';import {useHrWorkspace} from '@/hooks/useHrWorkspace';export default function HrHomePage(){const t=useTranslations('HrWorkspace'),{data,error,reload}=useHrWorkspace();return <div className='flex flex-col gap-6'><PageHeader title={t('firstRun')} description={t('firstRunBody')}/>{error?<ErrorState onRetry={()=>void reload()}/>:!data?<LoadingState rows={4}/>:<OnboardingChecklist title={t('firstRun')} steps={[{id:'people',title:t('openEmployees'),complete:data.employees.length>0,href:'/employees'},{id:'policy',title:t('openPolicies'),complete:data.policy.annual>0,href:'/people/policies'},{id:'tasks',title:t('openOnboarding'),complete:data.employees.some(e=>e.checklist.length>0),href:'/people/onboarding'}]}/>}<div className='flex flex-wrap gap-3'><Link href='/attendance' className='text-fg-brand underline'>{t('attendance')}</Link><Link href='/people/profile' className='text-fg-brand underline'>{t('profile')}</Link></div></div>;}

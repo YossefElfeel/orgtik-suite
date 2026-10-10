@@ -8,6 +8,7 @@ import { ArrowRight, CheckCircle } from "@phosphor-icons/react";
 import { Button, buttonVariants, toast } from "@orgtik/ui";
 import { buildScopeHref, CURRENT_SCOPE, type Scope } from "@/components/suite/useSuiteApps";
 import type { ToolState, WorkspaceRole } from "@/redux/features/platform/platformApi";
+import { ToolAccessAction } from "@/components/account/ToolAccessAction";
 import { platformError, useJoinWaitlistMutation } from "@/redux/features/platform/tools";
 import { useToolsError } from "./shared";
 
@@ -76,7 +77,7 @@ export function ToolActions({ tool, role, canBuy }: { tool: ActionTool; role: Wo
     case "coming_soon":
       return role === "guest" ? null : <WaitlistButton toolKey={tool.key} name={tool.name} onWaitlist={tool.onWaitlist} />;
     case "no_access":
-      return <AskOwner text={t("askAdmin")} />;
+      return <ToolAccessAction toolKey={tool.key} />;
     case "read_only":
       return (
         <>
@@ -92,8 +93,8 @@ export function ToolActions({ tool, role, canBuy }: { tool: ActionTool; role: Wo
         </>
       );
     case "not_subscribed":
-      if (!canBuy) return <AskOwner text={t("askOwner")} />;
-      return <PlansLink toolKey={tool.key} name={tool.name} variant="primary" label={tool.trialDays ? t("startTrial", { days: tool.trialDays }) : t("choosePlan")} />;
+      if (!canBuy) return <ToolAccessAction toolKey={tool.key} />;
+      return tool.trialDays ? <ToolAccessAction toolKey={tool.key} trial /> : <PlansLink toolKey={tool.key} name={tool.name} variant="primary" label={t("choosePlan")} />;
     case "trial":
       return (
         <>

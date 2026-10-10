@@ -2,10 +2,10 @@
 import { FileText } from "@phosphor-icons/react";
 
 import { useCallback, useMemo, useState } from "react";
-import DataTable from "@/components/shared/Table";
+import DataTable from "@/components/bindings/ResourceTable";
 import { SectionCard } from "../SectionCard";
-import { InfoCardSkeleton } from "@/components/ui/info-card";
-import { Skeleton } from "@/components/ui/skeleton";
+import { InfoCardSkeleton } from "@/components/shared/EmployeeFacts";
+import { Skeleton } from "@orgtik/ui";
 import { useGetEmployeePayslipsQuery, useLazyDownloadEmployeePayslipQuery } from "@/redux/features/employee/employeeApi";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";

@@ -8,7 +8,8 @@ import { Skeleton } from "./Display.js";
 import { useFormatter, useOrgtik } from "../provider/OrgtikProvider.js";
 import { suiteText } from "../suite/strings.js";
 import type { SuiteNotification } from "../suite/types.js";
-export function NotificationCenter({ items = [], load, onRead, onReadAll, onSelect }: { items?: SuiteNotification[]; load?: () => Promise<SuiteNotification[]>; onRead?: (id: string) => Promise<unknown>; onReadAll?: () => Promise<unknown>; onSelect: (item: SuiteNotification) => Promise<unknown> | void }) {
+const EMPTY_ITEMS: SuiteNotification[] = [];
+export function NotificationCenter({ items = EMPTY_ITEMS, load, onRead, onReadAll, onSelect }: { items?: SuiteNotification[]; load?: () => Promise<SuiteNotification[]>; onRead?: (id: string) => Promise<unknown>; onReadAll?: () => Promise<unknown>; onSelect: (item: SuiteNotification) => Promise<unknown> | void }) {
   const [open, setOpen] = useState(false), [records, setRecords] = useState(items), [busy, setBusy] = useState(false), [error, setError] = useState<string>();
   const { locale } = useOrgtik(), f = useFormatter(), t = (key: Parameters<typeof suiteText>[1]) => suiteText(locale, key);
   useEffect(() => setRecords(items), [items]);

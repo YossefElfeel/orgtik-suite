@@ -19,7 +19,7 @@ const projectApi = baseProjectApi.injectEndpoints({
     >({
       query: (params) => {
         return {
-          url: "/api/projects",
+          url: "/api/suite/projects",
           method: "GET",
           params,
         };

@@ -13,6 +13,8 @@ pnpm demo wm --dry-run    # Selected addresses; changes nothing
 
 The launcher reserves web ports 3500–3509 (website 4597), API ports 7500–7509 and icons 7599. If any required port is occupied it exits before starting services. It never kills an existing service. Use the printed SOS sign-in link and an existing synthetic demo persona; use a separate private browser window because localhost cookies are shared across ports.
 
+V3 parallel tool streams may set `ORGTIK_DEMO_PORT_OFFSET` (integer 0–20000). Every web/API/icon/presentation port shifts together while each run keeps its own realm and writable directory. For example, offset 200 gives SOS/Tasks 3700/3701, APIs 7700/7701, icons 7799 and the historical bridge 7777. Ordinary v3 screens use owner-domain APIs; the retained historical bridge is not their business store. Port reservations still fail before starting anything and never stop another process.
+
 Each run copies the selected frontend source into ignored `tools/demo/.runtime/presentation-*`. Dependencies are reused except for a private copy of the legacy launcher package, whose URLs point at this run. Existing frontend build output, `.env` files and installed packages are untouched. Source edits made after startup need a restart to enter the staged prototype.
 
 The unchanged mock backend gets its own sandbox, in-memory journal and accounts, and a frozen `2026-10-07T09:00:00Z` clock. Its existing session adapter writes metadata only inside that run's private folder. Remote storage/provider configuration is removed from the child environment. Configured resources, historical invoices, existing accounts and other instance clocks remain untouched.

@@ -1,0 +1,16 @@
+{
+  "MarketingV3.projectSwitchFailed": {
+    "en": "This project could not be selected. Retry with current access.",
+    "ar": "تعذّر اختيار هذا المشروع. أعد المحاولة بالصلاحية الحالية.",
+    "de": "Dieses Projekt konnte nicht ausgewählt werden. Versuchen Sie es mit aktuellem Zugriff erneut.",
+    "fr": "Impossible de sélectionner ce projet. Réessayez avec votre accès actuel.",
+    "it": "Impossibile selezionare questo progetto. Riprova con l’accesso attuale."
+  },
+  "MarketingV3.projectUnavailable": {
+    "en": "This project is not visible with your current access.",
+    "ar": "هذا المشروع غير متاح ضمن صلاحيتك الحالية.",
+    "de": "Dieses Projekt ist mit Ihrem aktuellen Zugriff nicht sichtbar.",
+    "fr": "Ce projet n’est pas visible avec votre accès actuel.",
+    "it": "Questo progetto non è visibile con il tuo accesso attuale."
+  }
+}

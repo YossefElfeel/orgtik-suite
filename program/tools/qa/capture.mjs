@@ -21,8 +21,9 @@ fs.mkdirSync(dir, { recursive: true });
 const commit = siteCommit();
 if (commit.dirty) console.log(`Note: the website has uncommitted changes (HEAD ${commit.head}).`);
 
-const browser = await chromium.launch();
-const captures = opt.append && fs.existsSync(path.join(dir,"manifest.json")) ? JSON.parse(fs.readFileSync(path.join(dir,"manifest.json"),"utf8")).captures.filter(c => !routes.includes(c.route)) : [];
+const browser = await chromium.launch(opt.renderer === 'software' ? { args: ['--disable-gpu'] } : {});
+const previous = opt.append && fs.existsSync(path.join(dir, 'manifest.json')) ? JSON.parse(fs.readFileSync(path.join(dir, 'manifest.json'), 'utf8')) : null;
+const captures = previous ? previous.captures.filter(c => !routes.includes(c.route)).map(c => ({ renderer: previous.renderer || 'default', warmPaint: previous.warmPaint === true, ...c })) : [];
 const started = Date.now();
 try {
   for (const route of routes) {
@@ -34,10 +35,11 @@ try {
       page.on("pageerror", (e) => errors.push(String(e.message || e).slice(0, 200)));
       try {
         const rendered = await load(page, route);
+        if (opt['warm-paint']) await page.screenshot({ fullPage: true, animations: 'disabled', caret: 'hide' });
         await page.screenshot({ path: path.join(dir, `${name}.png`), fullPage: true, animations: "disabled", caret: "hide" });
         const snap = await snapshot(page);
         fs.writeFileSync(path.join(dir, `${name}.json`), JSON.stringify({ route, width, rendered, errors, ...snap }, null, 2) + "\n");
-        captures.push({ name, route, width, rendered, errors: errors.length });
+        captures.push({ name, route, width, rendered, errors: errors.length, renderer: opt.renderer === 'software' ? 'software' : 'default', warmPaint: Boolean(opt['warm-paint']), mediaLock: true });
         console.log(`${name}${rendered ? "" : "  (never rendered)"}${errors.length ? `  (${errors.length} page errors)` : ""}`);
       } catch (e) {
         captures.push({ name, route, width, failed: String(e.message).split("\n")[0] });
@@ -53,7 +55,7 @@ try {
 
 fs.writeFileSync(
   path.join(dir, "manifest.json"),
-  JSON.stringify({ label: opt.label, site: SITE, commit, at: new Date().toISOString(), clock: { start: CLOCK_START.toISOString(), settleMs: SETTLE_MS }, widths, captures }, null, 2) + "\n",
+  JSON.stringify({ label: opt.label, site: SITE, commit, renderer: opt.renderer === 'software' ? 'software' : 'default', warmPaint: 'per-capture', at: new Date().toISOString(), clock: { start: CLOCK_START.toISOString(), settleMs: SETTLE_MS }, widths, captures }, null, 2) + "\n",
 );
 const failed = captures.filter((c) => c.failed || !c.rendered).length;
 console.log(`\n${captures.length} captures in ${Math.round((Date.now() - started) / 1000)}s, ${failed} failed -> audits/website/parity/${opt.label}/`);

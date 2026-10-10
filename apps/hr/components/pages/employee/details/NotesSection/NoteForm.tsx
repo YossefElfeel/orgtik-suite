@@ -3,7 +3,7 @@ import { CircleNotch as Loader2, PaperPlaneRight as Send } from "@phosphor-icons
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@orgtik/ui";
 import {
   Form,
   FormControl,
@@ -11,7 +11,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "@orgtik/ui";
 import { makeNoteSchema, type NoteFormValues } from "@/schemas/notes/notes.schema";
 import { useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
@@ -82,7 +82,7 @@ export function NoteForm({
           {onCancel && (
             <Button
               type="button"
-              variant="outline"
+              variant="secondary"
               size="sm"
               onClick={onCancel}
               disabled={isSubmitting}

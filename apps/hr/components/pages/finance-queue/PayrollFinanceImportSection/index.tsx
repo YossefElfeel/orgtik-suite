@@ -3,8 +3,8 @@ import { CircleNotch as Loader2, DownloadSimple as Download, UploadSimple as Upl
 
 import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "@/components/ui/button";
-import DataTable from "@/components/shared/Table";
+import { Button } from "@orgtik/ui";
+import DataTable from "@/components/bindings/ResourceTable";
 import {
   useGetPayrollFinanceImportBatchesQuery,
   useImportPayrollFinanceSheetMutation,
@@ -89,7 +89,7 @@ export function PayrollFinanceImportSection() {
           />
           <Button
             type="button"
-            variant="outline"
+            variant="secondary"
             onClick={handleDownloadTemplate}
             disabled={isDownloadingTemplate}
           >

@@ -216,6 +216,16 @@ export interface Message {
    * transcript for as long as the call runs.
    */
   meetingId?: Id;
+  format?: 'plain' | 'markdown' | 'rich';
+  saved?: boolean;
+  reminder?: {at:string;delivered:boolean}|null;
+  scheduledAt?: string|null;
+  scheduledTimeZone?: string|null;
+  voice?: {simulated:true;durationSeconds:number}|null;
+  poll?: {question:string;options:{id:number;label:string;count:number}[];myVote:number|null;closed:boolean}|null;
+  readBy?: Id[];
+  taskIds?: number[];
+
 }
 
 /* ---------------------------------------------------------------- meetings */
@@ -251,6 +261,8 @@ export type RecordingState =
   | "declined";
 
 export interface Meeting {
+  hostId?: Id;
+  recordingSimulated?: boolean;
   id: Id;
   title: string;
   startsAt: IsoDateTime;
@@ -299,6 +311,7 @@ export interface Meeting {
 /* ------------------------------------------------------------------- knock */
 
 export type KnockState =
+  | "ended"
   | "pending"
   | "accepted"
   | "declined"

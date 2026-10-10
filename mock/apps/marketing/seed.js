@@ -10,7 +10,7 @@ const U = { admin: 1, manager: 2, customer: 5, u12: 12, u14: 14 };
 
 function buildEmptySeed() {
   return {
-    projects: [], activeProject: {}, gallery: [], nextGalleryId: 1, labels: [], integrations: [],
+    marketingV3: require("./v3").empty(), projects: [], activeProject: {}, gallery: [], nextGalleryId: 1, labels: [], integrations: [],
     posts: [], postComments: [], campaigns: [], campaignComments: [], executions: [],
     audiences: [], segments: [], imports: [], senders: [], templates: [], competitors: [],
     oauthStates: {}, tempIntegrations: {}, ownershipTransfers: {},

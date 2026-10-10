@@ -2,7 +2,7 @@
 import { User } from "@phosphor-icons/react";
 
 import { useState } from "react";
-import { InfoCard } from "@/components/ui/info-card";
+import { InfoCard } from "@/components/shared/EmployeeFacts";
 import { useTranslations } from "next-intl";
 interface AboutSectionProps {
   about?: string;

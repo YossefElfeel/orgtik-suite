@@ -74,8 +74,9 @@ export { SuiteFrame, type SuiteFrameProps } from "./suite/SuiteFrame.js";
 export { WorkspaceSwitcher } from "./suite/WorkspaceSwitcher.js";
 export { SettingsLayout, type SettingsSection } from "./suite/SettingsLayout.js";
 export { ToolAdminLayout, type ToolAdminSection } from "./suite/ToolAdminLayout.js";
+export { ToolAdminScreen } from "./suite/ToolAdminScreen.js";
 export { suiteRequest, suiteApiRoot, SuiteRequestError } from "./suite/api.js";
 export { suiteText, type SuiteString } from "./suite/strings.js";
-export type { SuiteSnapshot, SuiteOptions, SuiteProviderProps, SuiteConnector, SuitePreferences, SuiteSearchItem, SuiteNotification, SuiteActivity, SuitePerson, ConnectionState } from "./suite/types.js";
+export type { SuiteSnapshot, SuiteOptions, SuiteProviderProps, SuiteConnector, SuitePreferences, SuiteSearchItem, SuiteNotification, SuiteActivity, SuitePerson, SuiteToolAdminData, ConnectionState } from "./suite/types.js";
 export { demoRuntime, demoRequest, type DemoRuntime, type DemoSearchItem, type DemoBridgeTask, type DemoBridgeLead } from "./demo/connections.js";
 //# sourceMappingURL=index.d.ts.map

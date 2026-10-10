@@ -9,7 +9,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { TextEditor } from "@/components/ui/text-editor";
+import { TextEditor } from "@/components/shared/HrRichTextEditor";
 import { useTranslations } from "next-intl";
 
 import { JOB_SKILL_LABEL_KEYS, JOB_SKILLS } from "../constants";

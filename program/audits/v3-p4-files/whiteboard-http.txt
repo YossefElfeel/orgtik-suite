@@ -1,0 +1,16 @@
+✔ actual board creation exposes one canonical Files JSON/zip record and persists across cold start (5500.0428ms)
+✔ standalone author, real channel and canonical meeting permissions intersect Files without admin or audience bypass (6023.9426ms)
+✔ immutable v1 Task/Chat content survives v2/v3 saves and permanent receipts return original saved version plus current head (6451.377ms)
+✔ malformed, external, image, oversized scene payloads cannot alter either store or allocate versions (3729.3232ms)
+✔ real commit outages and lost responses recover one board and saved version with original keys across cold start (6132.3434ms)
+✔ source and channel permission loss, archive, custody and public sharing cannot disclose structured boards (12069.8228ms)
+✔ Files or Chats read-only allows authorized views and refuses board creation/save without changing history (7868.2756ms)
+✔ two physical signed save candidates at the same base and realm revision commit only one immutable version (8649.7615ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 56433.0035
