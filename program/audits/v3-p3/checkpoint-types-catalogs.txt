@@ -1,0 +1,61 @@
+
+   • turbo 2.11.7
+   • Packages in scope: //, @orgtik/ui, content-dashboard-somion, docs, file-management-dashboard, marketing-management-dashboard, new-sales-dashboard, next-smoke-15, next-smoke-16, orgtik-admin, orgtik-cinematic-website, orgtik-local-dev, orgtik-website-manager, somion-hq, somion-hr-management-system, somion-task-manager, somion_new_dashboard
+   • Running typecheck, i18n:check in 17 packages
+   • Remote caching disabled, using shared worktree cache
+
+new-sales-dashboard:i18n:check: cache miss, executing b02e5923d52ee68f
+orgtik-website-manager:i18n:check: cache hit, replaying logs 0df94edcf964e08a
+orgtik-website-manager:i18n:check: $ node ../../tools/i18n/check-catalogs.mjs
+orgtik-website-manager:i18n:check: wm: 1 catalog group(s), 5 languages, keys and placeholders match
+somion-task-manager:i18n:check: cache miss, executing d6d7af1dc51e0283
+new-sales-dashboard:i18n:check: $ node ../../tools/i18n/check-catalogs.mjs
+somion-task-manager:i18n:check: $ node ../../tools/i18n/check-catalogs.mjs
+new-sales-dashboard:i18n:check: sales: 1 catalog group(s), 5 languages, keys and placeholders match
+somion-task-manager:i18n:check: tasks: 1 catalog group(s), 5 languages, keys and placeholders match
+file-management-dashboard:i18n:check: cache hit, replaying logs f1fec4fef19eeb28
+file-management-dashboard:i18n:check: $ node ../../tools/i18n/check-catalogs.mjs
+file-management-dashboard:i18n:check: files: 1 catalog group(s), 5 languages, keys and placeholders match
+somion_new_dashboard:i18n:check: cache miss, executing c7c2002b90feaad7
+@orgtik/ui:build: cache miss, executing b869ea06a5074043
+somion_new_dashboard:i18n:check: $ node ../../tools/i18n/check-catalogs.mjs
+@orgtik/ui:build: $ node scripts/build-tokens.mjs && node scripts/build-fonts.mjs && tsc -p tsconfig.build.json
+somion_new_dashboard:i18n:check: sos: 10 catalog group(s), 5 languages, keys and placeholders match
+@orgtik/ui:build: tokens: 84 primitives, 63 semantic × 2 themes, 11 type roles -> dist/
+marketing-management-dashboard:i18n:check: cache hit, replaying logs 7a929d894d40193a
+marketing-management-dashboard:i18n:check: $ node ../../tools/i18n/check-catalogs.mjs
+marketing-management-dashboard:i18n:check: marketing: 1 catalog group(s), 5 languages, keys and placeholders match
+somion-hr-management-system:i18n:check: cache miss, executing b6fc29255322e095
+@orgtik/ui:build: fonts: 14 faces, 435 KB -> fonts/, dist/fonts.css
+somion-hr-management-system:i18n:check: $ node ../../tools/i18n/check-catalogs.mjs
+somion-hr-management-system:i18n:check: hr: 1 catalog group(s), 5 languages, keys and placeholders match
+somion-hq:i18n:check: cache hit, replaying logs a1e2b5eff278d8c2
+somion-hq:i18n:check: $ node ../../tools/i18n/check-catalogs.mjs
+somion-hq:i18n:check: chats: 1 catalog group(s), 5 languages, keys and placeholders match
+orgtik-admin:i18n:check: cache hit, replaying logs e2c1cb2495cb12c7
+orgtik-admin:i18n:check: $ node ../../tools/i18n/check-catalogs.mjs
+orgtik-admin:i18n:check: admin: 11 catalog group(s), 5 languages, keys and placeholders match
+somion-hq:typecheck: cache miss, executing 4accd4a19a1ca901
+content-dashboard-somion:typecheck: cache miss, executing 6617874e0d825eb8
+somion-hq:typecheck: $ node ../../tools/next-env.cjs && tsc --noEmit
+content-dashboard-somion:typecheck: $ node ../../tools/next-env.cjs && tsc --noEmit
+orgtik-website-manager:typecheck: cache miss, executing 61e23b16f3efae65
+orgtik-website-manager:typecheck: $ node ../../tools/next-env.cjs && tsc --noEmit
+somion-task-manager:typecheck: cache miss, executing 7a64bad2b21266c5
+somion-task-manager:typecheck: $ node ../../tools/next-env.cjs && tsc --noEmit
+marketing-management-dashboard:typecheck: cache miss, executing cfbb69de19e7a334
+marketing-management-dashboard:typecheck: $ node ../../tools/next-env.cjs && tsc --noEmit
+somion-hr-management-system:typecheck: cache miss, executing e7af01a9d1a551ee
+somion-hr-management-system:typecheck: $ node ../../tools/next-env.cjs && tsc --noEmit
+orgtik-admin:typecheck: cache miss, executing 4c51d3a0c5e3b37d
+orgtik-admin:typecheck: $ node ../../tools/next-env.cjs && tsc --noEmit
+new-sales-dashboard:typecheck: cache miss, executing 81d0df14f3050afb
+new-sales-dashboard:typecheck: $ node ../../tools/next-env.cjs && tsc --noEmit
+file-management-dashboard:typecheck: cache miss, executing a005e3cb45fd210f
+file-management-dashboard:typecheck: $ node ../../tools/next-env.cjs && tsc --noEmit
+somion_new_dashboard:typecheck: cache miss, executing 5c736c9785bc7aff
+somion_new_dashboard:typecheck: $ node ../../tools/next-env.cjs && tsc --noEmit
+
+ Tasks:    20 successful, 20 total
+Cached:    5 cached, 20 total
+  Time:    1m25.917s

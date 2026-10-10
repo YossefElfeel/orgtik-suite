@@ -1,0 +1,686 @@
+$ node lib/auth.test.js && node lib/journal.test.js && node apps/admin/pricing.test.js && node --test lib/dispatch.test.js lib/journal-concurrency.test.js lib/platform-replay.test.js lib/platform-persistence-endpoints.test.js apps/admin/r0.test.js apps/admin/proration-terms.test.js apps/admin/lifecycle.test.js apps/admin/website-offers.test.js apps/wm/content-followup.test.js apps/admin/website-managed-service.test.js apps/wm/ideas.test.js apps/wm/website-alignment.test.js apps/wm/manager-improvements.test.js apps/wm/users.test.js && node test-workspace.mjs
+  ok  new account and workspace survive a fresh instance
+  ok  handoff works on another instance and includes refresh tokens
+  ok  a third instance refuses a consumed handoff
+  ok  changed password survives a cold start; old password is refused
+  ok  failed credential writes preserve the password and valid session
+  ok  business reset preserves account identity and workspace ownership
+  ok  production-style sandbox refuses account-fixture resets
+  ok  warm instances restore new customer identities before replaying their writes
+  ok  only salted hashes are stored; responses and tokens omit credentials
+  ok  deactivation survives a fresh instance
+  ok  storage failure returns 503, never invalid-credentials 401
+  ok  atomic email release allows a replacement for a deleted account
+  ok  a duplicate-email batch fails atomically
+  ok  stale account updates cannot overwrite newer credentials
+  ok  preview fixture cleanup preserves real-domain accounts
+  ok  expired handoff is refused
+  ok  Redis uses atomic account commits and single-use expiring codes
+Authentication: 17/17 passed
+  ok  a fresh journal records one due checkpoint and its two private fixture stores
+  ok  instance A records its two changes
+  ok  A sees its new project and folder
+  ok  a cold start (B) rebuilds A's changes with the same ids
+  ok  B's own change is numbered after A's
+  ok  another cold start (C) sees every change, nothing skipped
+  ok  the seed is identical on every instance
+  ok  a reset empties the journal and drops the changes
+journal: 8/8 passed
+ok  EX-1 Saudi Arabia → 45 SAR (Zone)
+ok  EX-2 UAE → 44 AED (Zone, converted)
+ok  EX-3 Kuwait → 3.700 KWD (step 0.050 up)
+ok  EX-4 Qatar → 39 QAR (Country)
+ok  EX-5 Germany → 11 EUR
+ok  EX-6 Brazil → 12 USD (Default)
+ok  EX-7 GCC Pro to 50 SAR: KSA 50 · UAE 49 · KW 4.100 · Qatar 39
+ok  EX-8 Saudi Arabia yearly → 450 SAR
+ok  EX-9 UAE yearly → 441 AED (rounded once)
+ok  EX-10 Chat Starter, 7 seats, min 3 → 70 SAR
+ok  EX-11 snapshot: 'new customers only' keeps 45 SAR on an existing line
+ok  EX-12 Egyptian billing country → 199 EGP (not the UAE price)
+ok  X1 a country in no zone → Default zone
+ok  X4 totals round to decimals, not to the step (KWD 3 decimals)
+ok  ALG-8 order: bundle → coupon → proration → tax (exclusive)
+ok  K1 fixed coupon only in its currencies; K2 never below 0
+ok  workspace currency stays locked while its country price is converted
+ok  eligible-line discounts precede remaining-period credit
+ok  cycle changes retain unused old-period credit, and surplus credit is explicit
+ok  small discounts allocate rounded cents without a negative final allocation
+
+20 pricing checks passed (spec 03 worked examples and rules).
+✔ grace remains writable until its exact end, then read-only without duplicate transitions (24.5655ms)
+✔ late lifecycle execution preserves real grace/cancellation dates rather than extending retention (4.1974ms)
+✔ downgrading never applies the previous plan's pending price or deletes recorded data (2.6951ms)
+✔ price notices use real renewal intervals and do not reserve duplicate notifications (3.0827ms)
+✔ scoped advancement preserves other workspace schedules, service deliveries and ticket deadlines (2.5196ms)
+✔ a scoped billing pass applies a published global price to every affected workspace once (2.915ms)
+✔ switching a six-month website offer starts one monthly period and credits unused paid time (4.0783ms)
+✔ changing subscription credits future website terms without multiplying the original period (0.5421ms)
+✔ legacy monthly periods and three-decimal unused credits retain their boundaries (0.3984ms)
+✔ publish endpoint keeps a future price inactive until its exact effective instant (165.5212ms)
+✔ actual publish preserves GCC grandfathering during a Europe-only decrease (42.9467ms)
+✔ new yearly cell and a decrease that increases a grandfathered line both need notice (39.8946ms)
+✔ price notice is persisted once and waits for the first renewal outside its window (44.8974ms)
+✔ ordinary checkout uses stored per-tool quantity; explicit capacity is validated (53.4211ms)
+✔ bundles and plan-specific coupons discount only eligible lines (26.701ms)
+✔ checkout discounts then prorates and credits, preserving same-cycle billing end (30.9402ms)
+✔ cycle switch credits the unused old period instead of silently ending it (12.1222ms)
+✔ a switch preserves surplus credit and a later checkout consumes it once (24.7864ms)
+✔ regional tax handles GCC inclusive, EU mock reverse charge and CH exclusive default (28.9419ms)
+✔ currency lock converts a country price into the workspace currency (12.0861ms)
+✔ KWD routes to Tap/HyperPay and never invents a Stripe fallback (27.1875ms)
+✔ custom acceptance exposes scoped full-term private plans; only paid checkout activates them (32.5128ms)
+✔ multi-tool custom quote requires explicit allocations with an exact rounded sum (20.815ms)
+✔ downgrade applies at period end, lists recorded over-limit data and never deletes it (12.2739ms)
+✔ Service Team reads only assigned requests; broader combined roles retain authorized access (11.2053ms)
+✔ confirmed subscription retry returns one paid invoice and never bypasses a revoked owner role (14.8959ms)
+✔ website full-period subscriptions report a monthly equivalent, not six times the monthly cost (5.1362ms)
+✔ an unpaid workspace can choose billing country, then its first payment locks that currency (13.3192ms)
+✔ a replaced subscription cannot qualify the new basket for its old bundle (8.1537ms)
+✔ a persisted subscription quote keeps the agreed total through new-customer price publication (17.8146ms)
+✔ successful nonce recovery survives quote expiry, while declined quotes remain reusable (29.1906ms)
+✔ subscription quotes cannot cross workspaces or silently spend changed credit (23.8121ms)
+✔ a missing USD reporting rate cannot be invented as1 on a paid invoice (9.8687ms)
+✔ Website Manager purchase creates one managed-service request and no CMS entitlement (60.1416ms)
+✔ catalog registers distinct service fulfilment and server matrices for all four terms (52.6639ms)
+✔ full-period totals round once and preserve two- and three-decimal currency precision (3.922ms)
+✔ software uses monthly Pro prices and server-selected capacity without stacking annual savings (11.0003ms)
+✔ mock region is independent of language and signed workspace billing context wins (32.0445ms)
+✔ quote rejects duplicate/unsupported selections and ignores browser monetary guesses (12.8324ms)
+✔ payment is server-confirmed before linking, retries are immutable, and failed attempts provision nothing (11.8082ms)
+✔ linking uses server amounts, is idempotent, and cannot turn website service into WM access (13.0616ms)
+✔ claim validation refuses changed currency, bad proof, legacy amounts and insufficient current role (11.3609ms)
+✔ Gulf and EU tax display is server-calculated and invoices match confirmed totals (13.4015ms)
+✔ pinned replay reproduces immutable quotes/orders and opaque claims without old login tokens (10.974ms)
+✔ signed quotes retain purchased capacity and services use platform unit rounding before full-term savings (5.5808ms)
+✔ preview decline is a persisted server attempt and production ignores the fixture header (11.3941ms)
+✔ an additional paid same-plan term preserves the existing price snapshot and appends prepaid time (6.8876ms)
+✔ hosted claims reuse the configured store credential without requiring another setup (8.4039ms)
+✔ published service cells reach public quotes only at effectiveAt, while country overrides retain precedence (17.0058ms)
+✔ ws token claim selects prices; signed workspace confirmation is owner-only and private plans are unavailable publicly (16.6212ms)
+✔ inclusive GCC paid invoices reconcile net lines plus tax to the immutable payment (14.8223ms)
+✔ raw card/CVV or nested ignored billing fields are rejected before payment state changes (5.9102ms)
+✔ only server-known bundle IDs with exact members retain their presentation (10.5249ms)
+✔ website price notices preserve the six-month renewal and full-period offer policy (14.6966ms)
+✔ translations preserve approved figures and the enabled narrative (30.5363ms)
+✔ blank dates follow the supplied mock clock (16.1622ms)
+✔ merged ideas retain their comment counts and sample threads (18.697ms)
+✔ publication and scheduling require a lead image for articles and cases (20.6638ms)
+✔ blank design case can be created without a template (27.3082ms)
+✔ blank development case can be created without a template (15.4737ms)
+✔ blank hosting case can be created without a template (14.2487ms)
+✔ blank digital-marketing case can be created without a template (15.381ms)
+✔ blank it-support case can be created without a template (23.7874ms)
+✔ blank articles and roadmap items need no template; case department is required (20.218ms)
+✔ explicit copy retains department and resets narrative and approval (17.0442ms)
+✔ narrative edits require an approver and approved figures (14.6006ms)
+✔ changing approved figures revokes approval before validation and preserves live content (15.5605ms)
+✔ invalid restored, published and scheduled sample narratives are rejected (23.2188ms)
+✔ restore cannot change narrative permission through history (15.0531ms)
+✔ test-card placeholders cannot be removed or replaced by editable figures (25.4179ms)
+✔ imported sample stories retain sample provenance and need separate approval permission (22.0207ms)
+✔ figure approval disables the sample story until an approved narrative is enabled (16.6866ms)
+✔ sample-story restore, publish and schedule enforce permission and provenance (20.1518ms)
+✔ idea submitters are masked without personal-data permission (2.1977ms)
+✔ erasure removes submitter data, increments the version and audits it (1.5558ms)
+✔ duplicate submissions reuse the idea, reject conflicting keys, and expire (0.6141ms)
+✔ demo revisions cover workflow states without changing published content or overwriting saved edits (164.1786ms)
+✔ section order, cursor and attachment metadata remain draft-only until approved and published (33.1728ms)
+✔ list APIs paginate 0/1/10/11/101 rows after combined search, workflow, timeline and language filters (447.9757ms)
+✔ roadmap creation survives state reload and leads' New and Opened sets are disjoint (155.9622ms)
+✔ idea edits check versions and hiding removes a public idea but retains details and history (44.2835ms)
+✔ SEO-only edits preserve content permissions; redirects and indexing include both policies (50.6488ms)
+✔ media uploads retain descriptions, tags, alt text and focal points through persistence (144.4702ms)
+✔ Website administrators respect central account permissions, internal membership, version checks and self-protection (375.38ms)
+✔ regeneration restores the current Partners, account setup, Imprint and Legal fields (69.5752ms)
+✔ repeated alignment produces one stable record/section without duplicating approved content (21.5381ms)
+✔ alignment preserves other approved content, language data and retained price references (11.1722ms)
+✔ loopback keeps binary payloads, cookies and redirects across fresh connections (124.5583ms)
+✔ loopback preserves literal route and query targets and refuses remote target overrides (17.196ms)
+✔ memory: two independent instances cannot both commit the final seat (9.0327ms)
+✔ file: two independent instances cannot both commit the final seat (39.357ms)
+✔ redis: two independent instances cannot both commit the final seat (6.4628ms)
+✔ memory: retries return the original result and reject altered requests (3.7535ms)
+✔ file: retries return the original result and reject altered requests (49.5992ms)
+✔ redis: retries return the original result and reject altered requests (7.0222ms)
+✔ operation fingerprints bind workspace, effective actor, method, path and body (0.8023ms)
+✔ oversize and credential-bearing receipts fail without creating persisted success (5.6641ms)
+✔ memory snapshots cannot alter the stored revision or metadata (0.4638ms)
+✔ legacy journal bytes remain readable while newer commits add optional context (11.9537ms)
+✔ corrupt files fail closed and atomic replacement failures preserve prior history (23.7854ms)
+✔ a held file lock times out without takeover, even with the fixture clock frozen (42.4026ms)
+✔ Redis lost-response retries recover one durable receipt, while pre-commit failures persist nothing (4.1982ms)
+✔ a full journal rejects new commits and missing metadata never erases history (150.1871ms)
+✔ modern paid snapshots survive cold start, token refresh, repeats and actor deactivation (6758.7694ms)
+✔ failed journal commit returns503 and rebuilds rather than exposing an unpersisted mutation (1313.5271ms)
+✔ concurrent endpoint mutations compete for the same revision and only one commits (4261.1142ms)
+✔ legacy financial IDs/amounts survive migration and later unversioned writers are fenced (3589.4187ms)
+✔ separate mock instances competing for the last seat commit one invitation and one mailbox notice (4274.3392ms)
+✔ guest KWD purchase establishes new billing once and remains immutable across cold starts (3112.4073ms)
+✔ suspended owners cannot pay and catalog presets never advertise hidden members (1513.2938ms)
+✔ frozen source bytes match their original33bd33e Git blobs (7.8087ms)
+✔ original sixteen-person membership survives current deactivation and newer signup accounts (66.191ms)
+✔ expired recorded tokens replay the exact old checkout quantity, bundle and tax money (35.4282ms)
+✔ legacy future publish immediately changes old grid exactly as the old accepted handler did (28.1019ms)
+✔ paid legacy invoice bytes remain unchanged when adopted by modern handlers and new commands (40.7718ms)
+✔ a mixed legacy-prefix/new-checkpoint boundary exports committed amounts verbatim and fences late old writers (19.4782ms)
+✔ client headers cannot enter private historical routers and missing original actors fail closed (11.0975ms)
+✔ accepted-history mismatches cannot export a partially mutated financial state (24.0859ms)
+ℹ tests 118
+ℹ suites 0
+ℹ pass 118
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 25206.6081
+✔ Chats transport retries a lost command response with one operation ID and hydrates only committed data (464.293ms)
+✔ Chats dispatches a queued command with the current token after same-context rotation (119.1196ms)
+✔ Chats keeps one command through repeated 503, a cold reload, and canonical reference serialization (167.6385ms)
+✔ Chats treats a malformed successful command response as uncertain and retains its operation (81.2817ms)
+✔ Chats discards a delayed private projection after Files permission or member epoch changes (50.3755ms)
+✔ Chats clears before switching workspace and ignores a delayed old-workspace response (57.1831ms)
+✔ Chats storage/transport failures show failure without inventing a saved message (63.4715ms)
+✔ Chats guest or revoked context clears the directory and never falls back to seeded data (80.1211ms)
+✔ Chats snapshot codec fails closed on uncovered state, counters and historical authority (7.244ms)
+✔ Chats board indexes and permanent receipts reject incomplete or copied drawing authority (3.305ms)
+✔ Chats actual routers isolate equal IDs, directory, member-only channels and spoofed authors (308.6968ms)
+✔ Chats snapshots preserve read cursors, thread/reaction state, receipts and allocator after cold start (143.8408ms)
+✔ Chats guests, global-admin-like users and read-only contexts cannot bootstrap or write beyond own grants (48.6218ms)
+✔ OrgTik historical sample is explicit, author display never enters membership; Nile stays empty (46.3263ms)
+✔ Chats custody transfers history once and archives without granting departed access (37.3516ms)
+✔ Chats receipts recheck current channel membership before returning prior success (46.8644ms)
+✔ connected task audience keeps private/group/DM messages within current admitted source readers (25.1849ms)
+✔ public source metadata is marked unrestricted while an unjoined member cannot read a private source (37.2115ms)
+✔ Public Files session cookie follows local API path and same-site policy (190.7706ms)
+✔ Public Files session cookie follows hosted prefix and HTTPS cross-site policy (65.5799ms)
+✔ empty Files store exposes no seeded files, folders, shares or people-owned pins (7.4039ms)
+✔ Files snapshot preserves nested pins, shares, sessions, failure limits, previews and metadata (7.1793ms)
+✔ Files rejects foreign asset paths, dangling references and folder cycles (1.5937ms)
+✔ Nile Files fixture contains its agreement and required ancestry only (0.473ms)
+✔ Files random-ID and capability issuance counters round-trip after records are removed (1.6377ms)
+✔ Files private graphs isolate folders, public capabilities and byte assets (305.0839ms)
+✔ Files userType/global roles do not promote a scoped guest; ownership archives are read-only (104.5038ms)
+✔ Files snapshot cold-start hydration retains hashes, counters and version metadata (70.8077ms)
+✔ HR shared hire hook excludes credentials and does not independently mutate business state (332.6177ms)
+✔ HR explicit archive protects hiring custody while preserving creator history (4698.6524ms)
+✔ Tool bootstraps cannot promote a person with only hostile global grants (242.049ms)
+✔ HR committed pending hire stores employment without granting directory or tool access (55.1752ms)
+✔ HR interleaved empty workspaces have separate departments, counters and people (378.3003ms)
+✔ HR cold-start snapshots retain deleted highest IDs and all fixture counters (4628.1657ms)
+✔ HR scoped employee cannot gain HR authority through global admin or userType (4386.6422ms)
+✔ HR hiring/offboarding/leave command prerequisites fail without partial business or identity writes (4236.2825ms)
+✔ HR ownership transfers preserve creator attribution and replay once (4400.7306ms)
+✔ ordinary HR policy, profile approval, goals and expiry mailbox persist in owner rows and survive restore (5294.04ms)
+✔ clock/correction updates effective attendance and draft payroll metrics, while retaining original session provenance (4542.9751ms)
+✔ employee private projections and manager-only commands cannot gain HR authority (4103.4589ms)
+✔ candidate offer/scorecard records and country holidays use current owner rows, and missing hire adapter cannot mutate employment (4474.6494ms)
+✔ public careers is opt-in and plan-bound, exposes only job metadata, and creates one real application with a minimal idempotent receipt (4201.2216ms)
+✔ CH/UAE sample bank layouts export approved real payroll rows and preserve their snapshot currency (5252.4969ms)
+✔ Marketing workspace-zone schedule parsing and analytics remain pure across DST (389.9297ms)
+✔ Marketing asset references are project scoped and archived authors retain attribution (1199.1419ms)
+✔ Marketing simulated callback is an explicit POST command; GET cannot consume authorization state (1053.8678ms)
+✔ Marketing empty workspaces interleave independent brands and reject foreign IDs (293.7675ms)
+✔ Marketing fixture/cold start retain all state and removed gallery ID allocator (2042.6671ms)
+✔ Marketing reviewer/global admin sees only authorized project and media; GETs stay pure (1209.0982ms)
+✔ Marketing explicit calendar transition replays idempotently outside GET; custody keeps authors (1028.9841ms)
+✔ Marketing calendar uses workspace timezone and calendar days across Zurich DST (32.272ms)
+✔ CRM sequence checks prevent reference reuse even when snapshot copies agree (2342.1254ms)
+✔ CRM explicit archive rejects edits and delayed schedule transitions repeat once (2639.2904ms)
+✔ CRM customer in an empty workspace gets explicit missing-profile state rather than implicit creation (131.5756ms)
+[api:sos] SOS mock ready: 16 people, 3 systems, 10 conversations / 137 messages, pending invites: welcome-mariam-2026, welcome-khaled-2026, expired-invite-demo
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[journal] crm-v3-32476: seed of 2026-10-07T09:00:00.000Z + 0 committed changes
+[api:sos] POST /api/auth/login -> 200 (103ms)
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sos] POST /api/auth/register -> 201 (81ms)
+[api:sales] seeded 12 plans, 37 features, 0 customers, 0 projects, 0 subscriptions, 0 invoices, 0 notifications
+[api:sales] seeded 12 plans, 37 features, 0 customers, 0 projects, 0 subscriptions, 0 invoices, 0 notifications
+[api:sales] seeded 12 plans, 37 features, 0 customers, 0 projects, 0 subscriptions, 0 invoices, 0 notifications
+[api:sales] seeded 12 plans, 37 features, 3 customers, 0 projects, 0 subscriptions, 0 invoices, 0 notifications
+✔ ordinary CRM v3 extends actual records with scoped pipeline/company/activity/import/merge persistence (11778.721ms)
+✔ CRM empty workspace retains catalog references but no customer/demo business (454.0999ms)
+✔ CRM customer GET does not provision rows and global admin cannot escalate scope (73.3381ms)
+✔ CRM fixture roundtrip preserves all counters/preferences; Nile CRM is independent and empty (2355.8955ms)
+✔ CRM ordinary reads do not run billing schedules or mutate fixture state (2716.1715ms)
+✔ CRM ownership transfer preserves customer/person/financial history and replay result (2653.5758ms)
+✔ Tasks frontend ignores privileged global and other-tool scopes (1.7746ms)
+✔ Files frontend never promotes canonical userType or flattened cross-tool roles (0.4817ms)
+✔ Files current workspace context overrides old scopes and denies stale write capabilities (0.498ms)
+✔ empty Tasks store has no demo entities and round-trips all counters after deletion (15.2553ms)
+✔ Tasks codec preserves assignments, ordering, notifications and conversations without sharing arrays (1.2079ms)
+✔ Tasks snapshots reject counters that would reuse committed IDs or uncovered fields (1.4189ms)
+✔ Nile Tasks projection keeps project one and admitted people only (39.8027ms)
+✔ Tasks and Files profile callbacks pass the verified actor and strict patch to the shared command service (300.4878ms)
+✔ Tasks role and removal adapters do not edit global grants or remove other-workspace access (43.3606ms)
+✔ A failed shared profile command returns failure without changing the person or tool snapshot (48.7602ms)
+✔ two private Tasks graphs isolate overlapping IDs and preserve deleted-highest counters across hydration (303.8723ms)
+✔ Tasks global super-admin grants cannot promote a scoped viewer (35.8405ms)
+✔ Tasks custody transfer keeps original authors and does not replay effects (57.3749ms)
+✔ tasks tab session wins over another tab’s mutable cookie hint and preserves selected context (195.973ms)
+✔ tasks cookie hint supplies credentials only; missing tool context or a mismatched person fails closed (42.8644ms)
+✔ files tab session wins over another tab’s mutable cookie hint and preserves selected context (34.5729ms)
+✔ files cookie hint supplies credentials only; missing tool context or a mismatched person fails closed (21.752ms)
+✔ WM subcodecs restore Maps/settings in place and retain deleted-highest allocators (128.2786ms)
+✔ WM module codec restores route closures, draft history, media, settings, ideas and preview grants (922.2064ms)
+✔ WM imports remove newly staged records on rollback without reseeding or mutating another holder (436.1042ms)
+✔ calendar days preserve wall time across DST instead of adding24 hours (47.0445ms)
+✔ missing wall time is rejected and overlapping time chooses earliest instant (3.1637ms)
+✔ identity and seat effects commit atomically in memory (8.4637ms)
+✔ cold-start identity and business effects share one file commit (21.1043ms)
+✔ private accepted history preserves five tool records, sequence counters and deterministic cold starts (8931.9261ms)
+✔ refused, missing-actor and modern-checkpoint histories cannot produce partial migration snapshots (11330.08ms)
+✔ historical facade has no ambient HTTP authority or account mutations outside its private request capability (1.2382ms)
+✔ WM staff history preserves anonymous accepted ideas/leads separately without network redelivery (7580.9478ms)
+✔ anonymous historical authority cannot widen beyond exact recorded public intake and two old WM fixture controls (4.5751ms)
+✔ Mailbox actions use only the current pending server-projected opaque invitation path (2.2684ms)
+✔ Mailbox display ordering leaves server delivery data unchanged (0.7814ms)
+✔ All mailbox languages cover mock delivery, denied view-as, empty/error and superseded invitations (1.8507ms)
+✔ staff reappointment cannot revive earlier staff or view-as families, while other workspace access survives (24.1234ms)
+✔ revalidation closes revoked-session and changed-membership races before a domain commit (13.6687ms)
+✔ offboarding access epoch keeps old families revoked after rehire without affecting another workspace (14.3911ms)
+✔ signed staged tokens are unusable until security persistence commits (3.3584ms)
+✔ tampering, unknown issuer/realm/header claims, unsigned and wrong token types fail (4.2048ms)
+✔ request workspace binding rejects a different header and ignores URL tokens (3.0248ms)
+✔ real expiry is independent of the frozen business clock (3.6057ms)
+✔ refresh rotates once, preserves context, and reuse revokes that family (2.4231ms)
+✔ concurrent refresh candidates cannot both remain usable (2.5062ms)
+✔ SID logout and logout-all persist across independent authority instances (6.7979ms)
+✔ current account authVersion/deactivation and workspace removal override tokens (10.6876ms)
+✔ per-workspace family revocation preserves the other workspace (2.341ms)
+✔ handoffs are hashed, destination-scoped, consumed once and recheck current access (3.7917ms)
+✔ handoff race has one winner and expired/revoked grants never mint tokens (3.6308ms)
+✔ impersonation keeps original subject and forced read-only across refresh and handoff (3.845ms)
+✔ temporary storage/read/write failure never falls back to a cached principal (2.3902ms)
+✔ concurrent prepared requests cannot share staged sessions or principal cache (20.3861ms)
+✔ staff and identity audiences remain distinct from customer data authority (2.1968ms)
+✔ workspace/staff switches create same-SID families, preserve old tabs, and logout covers them (2.6454ms)
+✔ concurrent switch families keep their own binding; view-as cannot widen context (4.181ms)
+✔ malformed account versions cannot downgrade revocation authority to zero (0.8919ms)
+✔ prepared request caches are isolated and cleared; identity rejects unsigned HTTP tokens (10.0098ms)
+✔ local key/session persistence survives a cold authority and file CAS rejects stale writes (15.7274ms)
+✔ hosted mode never supplies an unconfigured/public secret or memory fallback (0.7187ms)
+✔ Redis session stores isolate realms and compare-and-swap security revision (9.9604ms)
+✔ Redis failure/corrupt state and partial hosted credentials fail as503 (1.4835ms)
+✔ local persisted secret and security document cannot be read from another realm (13.2024ms)
+✔ a rejected registration/account commit can discard its staged security effects (8.8943ms)
+✔ Tasks public samples return byte-identical generated PDF/PNG/ZIP/text and only original fixture avatar/team IDs (344.8391ms)
+✔ Public asset classification denies metadata, unknown/dynamic files, encoded traversal and every mutation (0.624ms)
+✔ Even files present in global uploads do not expose arbitrary bytes or authenticated metadata through this router (137.74ms)
+✔ Known filenames cannot escape the configured sample folder through a filesystem link (108.0615ms)
+✔ A replaced sample-root junction cannot turn an outside directory into the public allowlist (113.4842ms)
+✔ canonical scene retains vector/text geometry, local bindings and deterministic UTF8 content (10.2883ms)
+✔ volatile reconciliation metadata and input property order do not invent drawing versions (2.2857ms)
+✔ images, external content and unchecked fields are refused rather than silently persisted (1.3236ms)
+✔ geometry, colors and local binding targets fail closed before serialization (1.0169ms)
+✔ arrow and pen scenes preserve bounded points and supported bindings (1.1643ms)
+✔ element, point and text limits reject oversized drawing inputs (8.059ms)
+✔ size limit applies to UTF8 input and expanded canonical JSON, not character counts (31.2442ms)
+✔ stored content must already be canonical and cannot redirect its content kind (1.0196ms)
+[api:sos] SOS mock ready: 16 people, 2 systems, 10 conversations / 137 messages, pending invites: welcome-mariam-2026, welcome-khaled-2026, expired-invite-demo
+[journal] account-v3-38604: seed of 2026-10-07T09:00:00.000Z + 0 committed changes
+[api:sos] POST /api/auth/register -> 201 (84ms)
+[api:sos] POST /api/auth/login -> 200 (122ms)
+[api:sos] mona.adel@orgtik.test is viewing as last-workspace@account-v3.test (read-only)
+[api:sos] POST /api/auth/login-as/198738093788515 -> 200 (16ms)
+[api:sos] POST /api/auth/exit-impersonation -> 200 (3ms)
+✔ personal account remains usable after leaving the last workspace (3823.0553ms)
+✔ HTTP billing commands preserve clock, authority, refusal receipts and read-only state across cold start (11171.8821ms)
+✔ renewal preserves purchased quantity, billing anchor, account/history and pays once (34.9444ms)
+✔ renewal failures retry exactly days1/3/5 and become read-only at day7, ended at day37 (19.2727ms)
+✔ late lifecycle preserves cancellation/grace dates and never charges an ended subscription (8.4372ms)
+✔ recovery reuses exact invoice/currency and original period, repeated lost response recovers once (12.7215ms)
+✔ current revoked/foreign/view-as authority is checked before payment receipts (9.0293ms)
+✔ missing USD rate fails closed without a charge or mutation (8.9727ms)
+✔ scheduled prices and free downgrade compose existing R0 transitions (18.3457ms)
+✔ paid downgrade renews the new plan at its original boundary; trial expiry does not charge (10.8378ms)
+✔ renewal discounts use eligible current bundles and do not reapply a one-time checkout coupon (5.5391ms)
+✔ zero credit-covered renewal, expired card and non-recurring method have honest outcomes (16.4619ms)
+✔ KWD precision and regional tax invoice lines reconcile; reductions can be cancelled (21.4138ms)
+✔ seat quote uses shared proration, paid capacity only, held price and currency rounding (13.3589ms)
+✔ capacity refuses stale reservations, expired quote, immutable private allocation and flat plan (11.7366ms)
+✔ declined capacity attempt preserves quantity and has no paid invoice; a new attempt can succeed (9.4121ms)
+✔ reductions apply at renewal only, cover reservations and use the lower stored quantity (6.7983ms)
+✔ website prepaid capacity proration preserves full-term arithmetic and original paid orders (18.4883ms)
+✔ legacy multi-line invoice charges once and recovers every allocated subscription together (9.679ms)
+✔ inconsistent legacy invoice allocations fail closed and suspended reductions do not write (9.3013ms)
+✔ missing historical debt invoice never becomes a replacement current-price charge (4.8018ms)
+✔ workspace billing runs cannot consume another workspace paid-downgrade renewal anchor (27.5123ms)
+✔ recorded earlier debt is processed even when a legacy line still has a future period end (6.9996ms)
+✔ paid downgrade reuses an already issued invoice at the preserved original renewal boundary (4.92ms)
+✔ due selection is pure, deterministic and empty after a successful frozen-time renewal (10.7564ms)
+✔ failed cycles select only unprocessed retries and exact dunning/retention boundaries (17.4295ms)
+✔ suspended and closed workspaces cannot select active renewal, trial or seat charges (4.7664ms)
+✔ completed trial, cancellation, service and ticket markers do not create repeated jobs (4.5079ms)
+✔ global price publication selects one host job and completed markers settle every scoped poll (5.1873ms)
+✔ an unavailable scheduled downgrade fails without consuming its marker or issuing a replacement charge (7.5569ms)
+[api:sos] SOS mock ready: 16 people, 8 systems, 10 conversations / 137 messages, pending invites: welcome-mariam-2026, welcome-khaled-2026, expired-invite-demo
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:files] seeded share "Client review - proposal": http://localhost:3002/share/5f1c7a52-9d0e-4b6a-8e1f-2a9c3b7d4e01?secret=gnQayvC_uZjsUXoreuiKqnFRJVaX3I1c
+[api:files] seeded share "Nile Foods marketing team" (password: Nile2026): http://localhost:3002/share/8c2e4f61-3b7a-4d19-9a0c-6e5f1d2b3a04?secret=lgD1c4h3ayf2n7XfT7EVBK0uuC7GIp3u
+[api:files] seeded share "Teaser preview - agency": http://localhost:3002/share/b3d9e0a7-6c21-4f58-8b4e-9f0a1c2d3e05?secret=U9Y80FJWaGTvnC3j7bZqMlZ-Em3aNYEd
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[journal] boundary-11612: seed of 2026-10-07T09:00:00.000Z + 0 committed changes
+[api:sos] POST /api/auth/register -> 201 (109ms)
+[api:sos] POST /api/auth/login -> 200 (152ms)
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:sos] POST /v1/app/checkout/preview -> 200 (10ms)
+[api:sos] POST /v1/app/checkout/confirm -> 201 (8ms)
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:hr] seeded 16 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:hr] seeded 16 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:hr] seeded 16 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:hr] seeded 16 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:hr] seeded 16 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:hr] seeded 16 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:sos] POST /api/auth/logout -> 200 (7ms)
+✔ HTTP workspace isolation, concurrent reservations, HR activation and logout use committed authority (21754.7307ms)
+✔ Guests cannot receive admin/owner overrides through invitation or role mutation (525.2344ms)
+✔ An unsafe historical guest grant is capped consistently in context and facade (1.6068ms)
+✔ Current role and assignment are checked before a committed-command receipt can be reused (0.8781ms)
+✔ Task-only removal releases that grant and pending reservation while preserving membership, other tools and workspaces (0.6999ms)
+✔ Self profile patches reject credentials/privileges and preserve the existing password hash (41.9934ms)
+✔ First purchase assigns an existing disabled owner grant, preserves narrow roles and cannot assign twice or exceed capacity (0.9398ms)
+✔ Person IDs use independent 48-bit secure entropy, skip collisions and fail closed after bounded exhaustion (4.4338ms)
+✔ workspace binding denies another tenant and never falls back (4.7782ms)
+✔ global identity admin claims cannot promote a local member (3.8809ms)
+✔ ownership never bypasses an assigned seat (0.9444ms)
+✔ billing grace remains writable and only its read-only line stops writes (2.007ms)
+✔ expired reservations do not consume capacity; first purchase assigns owner once (0.9685ms)
+✔ counter and RNG snapshots preserve deleted-highest-ID and next values (2.5815ms)
+[api:sos] SOS mock ready: 16 people, 3 systems, 10 conversations / 137 messages, pending invites: welcome-mariam-2026, welcome-khaled-2026, expired-invite-demo
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[journal] provision-v3-34720: seed of 2026-10-07T09:00:00.000Z + 0 committed changes
+[api:sos] POST /api/auth/login -> 200 (126ms)
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sos] POST /api/auth/register -> 201 (83ms)
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 0 customers, 0 projects, 0 subscriptions, 0 invoices, 0 notifications
+✔ an actual won CRM project provisions an empty workspace owned by its registered customer once (7731.3042ms)
+✔ custody eligibility requires a canonical active account as well as the current tool grant (5.0177ms)
+✔ custody coverage omits unavailable accounts without removing the archive option (3.9928ms)
+✔ first departed-owner request durably executes workspace offboarding before denying access, with cold restart and other-workspace isolation (19290.8066ms)
+✔ all six customer tools enforce the exact grace boundary and regain writes after idempotent recovery (14758.9851ms)
+✔ two physical instances resolve due billing through CAS once and preserve two workspace downgrade charge anchors (16622.1899ms)
+✔ an inactive late successor archives actual custody records across all six tools and survives cold restart (16648.3617ms)
+✔ a failed later tool custody transfer or offboarding CAS rolls back the whole phase without changing clock or historical data (9666.3434ms)
+✔ late loss of the last qualified OrgTik staff successor records recovery and ordinary HR rehire cannot restore staff authority (17989.4861ms)
+✔ billing storage failure does not retry and persistent CAS conflict retries once without partial invoices or clock movement (6377.8501ms)
+✔ committed offboarding remains durable when the separate billing phase fails and later recovers once (7788.3521ms)
+✔ a real winning system checkpoint restore refreshes account/platform/router references before same-request public registration and cold restart (7356.0017ms)
+✔ files actual handler keeps a lost committed request through later403 and recovers its original record (170.2994ms)
+✔ files actual handler clears a new definitive403 without inventing a record (28.2373ms)
+✔ tasks actual handler keeps a lost committed request through later403 and recovers its original record (29.7606ms)
+✔ tasks actual handler clears a new definitive403 without inventing a record (19.8583ms)
+✔ Chats actual transport retains a lost success through automatic403 and cold reload, then recovers one message (228.1494ms)
+✔ Chats actual transport clears a new definitive403 without inventing a message (54.6573ms)
+✔ real sample records are picked and referenced in private Tasks/Chats, pinned bytes and stored links persist across cold start (14528.484ms)
+✔ consumer project/channel ACL, Files grant, workspace and audience intersect before disclosure or attachment writes (12984.9155ms)
+✔ inherited and file-specific source ACL plus consumer membership are revalidated on projections, content and old receipts across cold start (15955.5904ms)
+✔ failed commits and real lost responses leave no partial references and preserve original-operation recovery across cold start (13646.3241ms)
+✔ read-only Files permits existing references while read-only consumers refuse reference writes and retain content reads (13122.028ms)
+✔ two physical processes linking the same file with the same operation record one reference and activity across cold start (13521.8877ms)
+✔ a real source ACL change between authorization and consumer CAS fences the old candidate and its original retry (12476.1443ms)
+✔ actual Chats command-cache eviction cannot duplicate a file message or bypass current Files permission after cold restart (58534.4666ms)
+✔ a real identity initialization write failure returns 503 before registration and recovers in the same process with cold-preserved account and workspace (2783.5747ms)
+✔ minimum references reject guessed workspaces, unchecked metadata and incomplete versions (3.7121ms)
+✔ Tasks router persists minimal references, recovers duplicate actions and redacts revoked metadata (266.5743ms)
+✔ Chats attachment-only messages use canonical references and retain receipts beyond the rolling command window (1031.9775ms)
+✔ Files policy follows current canonical limits and billing without lifting a role (2.0949ms)
+✔ Files policy keeps preview, unknown limit and foreign actor writes unavailable (0.4932ms)
+✔ empty workspace catalog is explicit, creation pins immutable version1 and picker has only safe metadata (82.0352ms)
+✔ legacy fixtures expose stable implicit v1 without changing metadata or another workspace (48.3046ms)
+✔ same ACL authorizes inherited and explicit reader access, then immediately hides archived or revoked records (180.7831ms)
+✔ sample retries recheck current account, roles, read-only state and destination access before receipts (49.8865ms)
+✔ sample routes reject missing references, extra byte fields and altered retries without phantom records (64.1058ms)
+✔ read-only Files permits existing references, while guests see only explicit permitted records (60.7757ms)
+✔ modeled versions never silently replace a missing pinned version with current content (52.4524ms)
+✔ strict codec preserves valid sample receipts and rejects malformed immutable version models (27.5939ms)
+✔ hire reuses identity, preserves credentials, reserves invitation and activates employment once (23.2776ms)
+✔ end date keeps access through workspace day, releases seats once and preserves other memberships (50.123ms)
+✔ offboarding owner requires a valid replacement before revoking membership (3.9248ms)
+✔ scheduled offboarding still revokes a departed owner when the proposed successor becomes inactive (3.775ms)
+✔ inactive, deleted or missing successor accounts cannot be scheduled or offered as owners (19.5751ms)
+✔ successor account deactivation after scheduling archives custody and revokes only the departed workspace (11.5015ms)
+✔ an unavailable staged HR runtime cannot invent a status-only approval or calendar cache (4.2296ms)
+✔ offboarding an unaccepted hire cancels its invitation and releases reserved capacity (3.0338ms)
+✔ offboarding options use the workspace day and equipment/final-pay actions track mock completion (5.3735ms)
+✔ hiring command refuses credentials and nested personal fields before identity or receipt effects (3.5523ms)
+✔ civil end dates use the first valid following Cairo day when midnight is missing (26.8649ms)
+✔ manual scheduling requires a current canonical actor and cannot partially alter employment (17.1657ms)
+✔ last-super-admin scheduling counts canonical internal authority, not staff hints or customer tool roles (70.3209ms)
+✔ a peer scheduled to leave by the proposed boundary cannot be the protecting super administrator (6.9866ms)
+✔ a qualified staff replacement permits departure without promoting roles or affecting another workspace (4.1744ms)
+✔ late loss of the qualified replacement records recovery once and never retains departed authority (53.4526ms)
+✔ ordinary internal employment rehire never clears a durable staff authority revocation (3.731ms)
+✔ non-super-admin internal departures also revoke historical staff authority without creating a recovery incident (1.8552ms)
+✔ customer HR changes never disclose or mutate staff protections, roles, passwords or authority markers (3.2517ms)
+✔ internal departure advances staff access epoch once without changing another person or customer membership (15.9616ms)
+✔ malformed staff epochs fail closed before a due row can alter markers, authority or employment (74.8551ms)
+✔ malformed revocation dictionaries cannot drop authority markers from a JSON checkpoint (33.1366ms)
+✔ Lost invitation result recovers one reservation and one mailbox message using its original scoped attempt (21.9187ms)
+✔ Null tool selection is frozen to currently subscribed supported tools and excludes guest HR (4.3839ms)
+✔ Only owner appoints administrators, including invitation creation; pending members cannot have access edited (5.9363ms)
+✔ Accepting a pending tool-access invitation cannot restore transferred ownership (3.8152ms)
+✔ Repeating an uncertain resend uses one rotated token and one mock notification, while cancel releases the reservation once (4.293ms)
+✔ invalid dispatch capabilities return raw Node403 twice without crashing or using a legacy fallback (518.3253ms)
+✔ signed leave commands and private tool calendars preserve authority, refusal rollback and cold-start history (47501.6061ms)
+✔ leave decisions retain manager and HR stages, attribution and the HR detail serializer (136.6634ms)
+✔ current manager relationships and tool roles authorize every decision, without mutation on refusal (45.4873ms)
+✔ create rejects forged decision fields, credentials, invalid dates and overlaps before changing counters (37.8174ms)
+✔ full, half and partial leave retain explicit duration fields without inventing uploaded files (58.0601ms)
+✔ legacy employee and partial-duration aliases remain compatible without allowing conflicting targets (35.6552ms)
+✔ pending cancellation is self or HR only, and unavailable accounts or employment cannot create leave (38.5207ms)
+✔ independent workspace graphs keep overlapping request IDs and decisions private (63.8944ms)
+✔ availability derives approved HR records and exposes only the minimal current-tool calendar schema (48.2015ms)
+✔ availability excludes inactive accounts, employment, memberships and unassigned tool seats independently (43.7506ms)
+✔ availability validates real date ranges and the93-inclusive-day bound (30.9444ms)
+✔ availability wall-clock boundaries preserve full, half, partial and DST durations (86.5141ms)
+✔ mock sender delivery is limited to current administrators and current pending token (22.3599ms)
+✔ recipient inbox hides old resend tokens and unrelated recipients without modifying business state (6.707ms)
+✔ metadata guides existing, pending and new recipients without changing account credentials (6.1448ms)
+✔ accepted business receipt never stores password or session material and consumes a reservation once (7.6465ms)
+✔ an exact ownership receipt can be confirmed by the original active admin without granting a new transfer (4.3436ms)
+✔ an active membership with a deactivated account cannot receive new workspace ownership (5.6619ms)
+✔ last-seat invitation reserves capacity and competing invitation is refused (23.9867ms)
+✔ cancel and expiry release reservations and resend cannot overbook (4.8388ms)
+✔ acceptance converts a reservation once and never resets an existing password (5.191ms)
+✔ new recipient acceptance creates one identity and one scoped membership (82.231ms)
+✔ ownership transfer changes platform authority without manufacturing tool seats (3.6928ms)
+✔ WM main boundary persists staff CMS/hashed previews and rolls back failed CAS across cold restart (19477.1562ms)
+[api:sos] SOS mock ready: 16 people, 9 systems, 10 conversations / 137 messages, pending invites: welcome-mariam-2026, welcome-khaled-2026, expired-invite-demo
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:files] seeded share "Client review - proposal": http://localhost:3002/share/5f1c7a52-9d0e-4b6a-8e1f-2a9c3b7d4e01?secret=gnQayvC_uZjsUXoreuiKqnFRJVaX3I1c
+[api:files] seeded share "Nile Foods marketing team" (password: Nile2026): http://localhost:3002/share/8c2e4f61-3b7a-4d19-9a0c-6e5f1d2b3a04?secret=lgD1c4h3ayf2n7XfT7EVBK0uuC7GIp3u
+[api:files] seeded share "Teaser preview - agency": http://localhost:3002/share/b3d9e0a7-6c21-4f58-8b4e-9f0a1c2d3e05?secret=U9Y80FJWaGTvnC3j7bZqMlZ-Em3aNYEd
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[journal] suite-v3-37812: seed of 2026-10-07T09:00:00.000Z + 0 committed changes
+[api:sos] POST /api/auth/register -> 201 (96ms)
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:sos] POST /api/auth/login -> 200 (84ms)
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:sos] POST /api/auth/login -> 200 (52ms)
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 0 projects, 0 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 3 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 3 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 3 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 4 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 0 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 5 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 6 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 7 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 7 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 1 projects, 8 tasks, 0 comments, 1 notifications
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:tasks] seeded 8 projects, 66 tasks, 50 comments, 167 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+[api:tasks] seeded 8 projects, 67 tasks, 50 comments, 168 notifications
+[api:tasks] seeded 8 projects, 68 tasks, 50 comments, 169 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sos] GET /v1/public/catalog -> 200 (8ms)
+[api:sos] GET /v1/public/catalog -> 200 (7ms)
+[api:sos] GET /v1/public/catalog -> 200 (4ms)
+[api:wm] POST /v2/__mock/forms-live -> 200 (3ms)
+[api:wm] GET /v2/public/site -> 200 (4ms)
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:wm] POST /v2/public/leads -> 201 (1670ms)
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:tasks] seeded 8 projects, 68 tasks, 50 comments, 169 notifications
+[api:hr] seeded 15 employees, 3376 Discord sessions, 7 payroll runs, 26 candidates
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:marketing] seeded 3 brands, 38 posts, 15 campaigns, 14 integrations, 27 media items
+[api:wm] GET /v2/admin/catalog -> 200 (3ms)
+[api:sos] POST /v1/public/website-quotes -> 200 (2ms)
+[api:sos] POST /v1/public/website-orders -> 200 (2ms)
+[api:sos] POST /v1/app/website-orders -> 201 (4ms)
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 46 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 24 projects, 18 subscriptions, 68 invoices, 47 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 24 projects, 18 subscriptions, 68 invoices, 47 notifications
+[api:sos] POST /v1/app/website-orders -> 201 (2ms)
+[api:sos] GET /v1/public/catalog -> 200 (4ms)
+[api:sos] GET /v1/public/catalog -> 200 (3ms)
+[api:sos] GET /v1/public/catalog -> 200 (4ms)
+[api:sos] GET /v1/public/catalog -> 200 (6ms)
+✔ ordinary suite routes persist preferences, connect trials, requests and scoped feeds (76836.9ms)
+✔ Team null selection contains only supported current subscriptions and guests exclude HR without free-seat bypass (4.9122ms)
+✔ Pending invitation attempts survive reload with exact reference/body and stay isolated by realm/workspace/actor (74.0957ms)
+✔ Team copy describes reservations and mock delivery in every language, without legacy free-guest or automatic-charge claims (3.1189ms)
+✔ actual board creation exposes one canonical Files JSON/zip record and persists across cold start (10973.5717ms)
+✔ standalone author, real channel and canonical meeting permissions intersect Files without admin or audience bypass (16626.1795ms)
+✔ immutable v1 Task/Chat content survives v2/v3 saves and permanent receipts return original saved version plus current head (14773.1392ms)
+✔ malformed, external, image, oversized scene payloads cannot alter either store or allocate versions (10581.6078ms)
+✔ real commit outages and lost responses recover one board and saved version with original keys across cold start (13520.1946ms)
+✔ source and channel permission loss, archive, custody and public sharing cannot disclose structured boards (17224.2272ms)
+✔ Files or Chats read-only allows authorized views and refuses board creation/save without changing history (11716.9598ms)
+✔ two physical signed save candidates at the same base and realm revision commit only one immutable version (11838.3416ms)
+✔ explicit board creation owns canonical immutable Files content and safe metadata (74.1912ms)
+✔ board saves append v2 without replacing pinned v1; identical scenes are no-ops (33.0259ms)
+✔ current source and Files authority are checked before scene validation or base conflicts (30.5733ms)
+✔ read-only Files retains saved reads while writes, archived content and custody content are unavailable (77.5597ms)
+✔ codec preserves all scene versions on cold restore and rejects changed hashes, heads and associations (58.1351ms)
+✔ missing source authority fails closed only for structured boards and never broadens sample access (55.2293ms)
+✔ native pinned metadata/download and labelled sample preview authorize before serving bytes (159.8622ms)
+✔ signed folder ZIP contains canonical scenes while public folder traversal and ZIP exclude boards (94.5316ms)
+✔ Files passes its actual record ID to source authority and refuses a mismatched association (72.7333ms)
+✔ recursive archive, restore, access, move and purge preflight source writes before changing any candidate (79.8256ms)
+✔ trusted Files custody archives association-ineligible boards and fails before mutation without its callback (73.3644ms)
+✔ actual BoardScreen switches dirty A to B without storing or hydrating A under B (461.9986ms)
+✔ actual Save as new copy cannot hydrate an old workspace drawing after a delayed list (146.1402ms)
+✔ actual BoardScreen retains an uncertain save through403 and recovers one original operation (138.3052ms)
+✔ a delayed successful A save never hydrates B and remains recoverable in its original view (125.38ms)
+✔ actual conflict reload retains its draft and historical mode never edits the pinned scene (118.6484ms)
+✔ actual Whiteboard unchanged vendor callbacks do not feed a parent render loop (49.8245ms)
+ℹ tests 298
+ℹ suites 0
+ℹ pass 298
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 165750.4183

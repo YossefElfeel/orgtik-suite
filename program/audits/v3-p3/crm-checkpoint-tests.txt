@@ -1,0 +1,48 @@
+[api:sos] SOS mock ready: 16 people, 3 systems, 10 conversations / 137 messages, pending invites: welcome-mariam-2026, welcome-khaled-2026, expired-invite-demo
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[journal] crm-v3-36420: seed of 2026-10-07T09:00:00.000Z + 0 committed changes
+[api:sos] POST /api/auth/login -> 200 (68ms)
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 21 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 22 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 23 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sales] seeded 12 plans, 37 features, 24 customers, 23 projects, 18 subscriptions, 68 invoices, 45 notifications
+[api:sos] POST /api/auth/register -> 201 (49ms)
+[api:sales] seeded 12 plans, 37 features, 0 customers, 0 projects, 0 subscriptions, 0 invoices, 0 notifications
+[api:sales] seeded 12 plans, 37 features, 0 customers, 0 projects, 0 subscriptions, 0 invoices, 0 notifications
+[api:sales] seeded 12 plans, 37 features, 0 customers, 0 projects, 0 subscriptions, 0 invoices, 0 notifications
+[api:sales] seeded 12 plans, 37 features, 3 customers, 0 projects, 0 subscriptions, 0 invoices, 0 notifications
+✔ ordinary CRM v3 extends actual records with scoped pipeline/company/activity/import/merge persistence (6792.2ms)
+✔ CRM empty workspace retains catalog references but no customer/demo business (277.1891ms)
+✔ CRM customer GET does not provision rows and global admin cannot escalate scope (63.9992ms)
+✔ CRM fixture roundtrip preserves all counters/preferences; Nile CRM is independent and empty (1619.9176ms)
+✔ CRM ordinary reads do not run billing schedules or mutate fixture state (1520.2982ms)
+✔ CRM ownership transfer preserves customer/person/financial history and replay result (1338.2334ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6948.6513
