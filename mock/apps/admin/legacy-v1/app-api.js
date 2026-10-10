@@ -398,7 +398,7 @@ module.exports = function appApi(app, ctx, S, H) {
       return { id: s.id, family: s.family, kind: s.kind, billing: s.billing, name: s.name, deliveryDays: s.deliveryDays, price: r ? { amount: r.amount, currency: r.currency } : null, subscriberDiscountPct: subscriber ? s.subscriberDiscountPct : 0 };
     }));
   });
-  const srOut = (r) => ({ ...require('../../../lib/service-delivery-files').projectRequest(r), service: db.services.find((s) => s.id === r.serviceId)?.name, messages: r.messages.filter((m) => !m.internal) });
+  const srOut = (r) => ({ ...r, service: db.services.find((s) => s.id === r.serviceId)?.name, messages: r.messages.filter((m) => !m.internal) });
   app.get("/v1/app/service-requests", as("member"), (req, res) => page(req, res, db.serviceRequests.filter((r) => r.workspaceId === req.p.ws.id).map(srOut)));
   app.get("/v1/app/service-requests/:id", as("member"), (req, res) => {
     const r = db.serviceRequests.find((x) => x.id === req.params.id && x.workspaceId === req.p.ws.id);

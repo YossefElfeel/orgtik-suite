@@ -420,10 +420,10 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       const S = platform().getStore(), serviceId = value => S.db.plans.some(row => row.id === value && row.service) || S.db.services.some(row => row.id === value), moved = () => res.status(410).json({ success: false, code: 'services_managed_in_crm', message: 'Manage service catalogs and delivery in the OrgTik CRM.', managedIn: 'crm', path: req.path.startsWith('/service-requests') ? '/service-requests' : '/catalog' });
       if (/^\/(?:services|service-requests)(?:\/|$)/.test(req.path)) return moved();
       if (/^\/plans(?:\/|$)/.test(req.path) && (req.body?.service === true || serviceId(req.path.split('/')[2]))) return moved();
-      if (req.path === '/price-drafts' && req.body?.changes?.some(row => serviceId(String(row.key || '').split(':')[0]))) return moved();
+      if (req.path === '/price-drafts' && Array.isArray(req.body?.changes) && req.body.changes.some(row => serviceId(String(row.key || '').split(':')[0]))) return moved();
       const draft = /^\/price-drafts\/([^/]+)\/publish$/.exec(req.path);
       if (draft && S.db.priceDrafts.find(row => row.id === draft[1])?.changes.some(row => serviceId(row.key.split(':')[0]))) return moved();
-      if (/^\/bundles(?:\/|$)/.test(req.path) && req.body?.planIds?.some(serviceId)) return moved();
+      if (/^\/bundles(?:\/|$)/.test(req.path) && Array.isArray(req.body?.planIds) && req.body.planIds.some(serviceId)) return moved();
       const country = /^\/countries\/([^/]+)$/.exec(req.path);
       if (country && req.body?.fixed) {
         const prior = S.db.countries[country[1]]?.fixed || {};
