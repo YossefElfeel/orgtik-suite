@@ -61,6 +61,8 @@ function validate(data, sequences) {
   const meetings = new Set();
   for (const meeting of [...data.meetings, ...data.pastMeetings]) {
     if (!id(meeting.id) || meetings.has(meeting.id) || !Array.isArray(meeting.participantIds) || meeting.participantIds.some(value => !id(value))) invalid('Chats saved meeting authority is invalid.');
+    if(!Array.isArray(meeting.guests))invalid('Chats meeting guests are invalid.');
+    for(const guest of meeting.guests){if(typeof guest.name!=='string'||typeof guest.email!=='string'||!['invited','lobby','admitted','declined','left'].includes(guest.state))invalid('Chats guest display record is invalid.');if(guest.visitId!==undefined&&(!id(guest.visitId)||!/^visit:guest-[\w-]+$/.test(guest.email)||!/^[a-f0-9]{64}$/.test(guest.visitProofHash||'')||!/^[a-f0-9]{64}$/.test(guest.joinFingerprint||'')||!id(guest.joinOperationId)||guest.contactEmail!==undefined&&typeof guest.contactEmail!=='string'))invalid('Chats guest visit proof is invalid.');}
     meetings.add(meeting.id);
   }
   const boards = new Set();
