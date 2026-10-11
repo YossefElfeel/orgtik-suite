@@ -47,7 +47,7 @@ const PROJECT = 2;
 const stamp = Date.now().toString(36).slice(-4);
 
 const call = async (email, method, url, body) => {
-  const token = await tokenFor(email);
+  const token = await tokenFor(email, "tasks");
   const r = await fetch(API + url, { method, headers: { Authorization: `Bearer ${token}`, ...(body ? { "Content-Type": "application/json" } : {}) }, body: body ? JSON.stringify(body) : undefined });
   return r.json().catch(() => ({}));
 };
@@ -119,7 +119,7 @@ try {
     const seen = [];
     page.on("framenavigated", (f) => f === page.mainFrame() && seen.push(f.url()));
     await step("Arrive with a one-time code", async () => {
-      const token = await tokenFor(MONA);
+      const token = await tokenFor(MONA, "tasks");
       const code = (await (await fetch(`${apiUrl("sos")}/api/auth/handoff`, { method: "POST", headers: { Authorization: `Bearer ${token}` } })).json()).data.code;
       await page.goto(`${TASKS}/${LOCALE}/auth?code=${code}`, { waitUntil: "load", timeout: 120000 });
       await page.waitForURL((u) => !u.pathname.endsWith("/auth"), { timeout: 60000 });

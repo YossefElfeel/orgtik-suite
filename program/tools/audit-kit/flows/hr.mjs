@@ -112,7 +112,7 @@ const dialog = (page) => page.getByRole("alertdialog").or(page.getByRole("dialog
 const visible = (loc) => loc.isVisible().catch(() => false);
 /** The run as the API states it, for checks the screen can't show alone. */
 async function runFor(frequency, start) {
-  const token = await tokenFor(PEOPLE.hr);
+  const token = await tokenFor(PEOPLE.hr, "hr");
   const res = await fetch(`${apiUrl("hr")}/api/payroll/runs?frequency=${frequency}`, { headers: { Authorization: `Bearer ${token}` } });
   const items = (await res.json()).data?.items ?? [];
   return items.find((r) => r.periodStart === start) ?? null;
@@ -296,7 +296,7 @@ try {
       return { ok: n === 1 && u.searchParams.has("employee_id") && !u.searchParams.has("mode"), note: `${n} sheet(s), ${u.search}` };
     });
     await step("Lea Keller exists", async () => {}, async () => {
-      const token = await tokenFor(PEOPLE.hr);
+      const token = await tokenFor(PEOPLE.hr, "hr");
       const res = await fetch(`${apiUrl("hr")}/api/employees?search=${encodeURIComponent(email)}`, { headers: { Authorization: `Bearer ${token}` } });
       const items = (await res.json()).data?.items ?? [];
       return { ok: items.length === 1, note: items[0] ? `${items[0].fullName}, ${items[0].email}` : "not found" };
@@ -335,12 +335,12 @@ try {
 
   // H3: decide on leave. Submit can't send without a choice; HR approves; the admin can act too.
   const leave = async (id) => {
-    const token = await tokenFor(PEOPLE.hr);
+    const token = await tokenFor(PEOPLE.hr, "hr");
     const res = await fetch(`${apiUrl("hr")}/api/attendance/time-offs/requests/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     return (await res.json()).data;
   };
   const pendingLeave = async (skip = []) => {
-    const token = await tokenFor(PEOPLE.hr);
+    const token = await tokenFor(PEOPLE.hr, "hr");
     const res = await fetch(`${apiUrl("hr")}/api/attendance/time-offs/requests?status=pending&limit=50`, { headers: { Authorization: `Bearer ${token}` } });
     const body = await res.json();
     const items = body.data?.items ?? body.data ?? [];
@@ -395,7 +395,7 @@ try {
 
   // H6: delete a department. The confirm names it and says what happens to its people; Cancel keeps it.
   await walk("H6-delete-department", "Delete a department", "hr", async ({ page, step }) => {
-    const token = await tokenFor(PEOPLE.hr);
+    const token = await tokenFor(PEOPLE.hr, "hr");
     const api = async (p) => (await fetch(`${apiUrl("hr")}/api${p}`, { headers: { Authorization: `Bearer ${token}` } })).json();
     const depts = (await api("/departments?limit=50")).data?.items ?? [];
     const dept = depts.find((d) => (d.employees?.length ?? 0) > 0) ?? depts[0];
@@ -439,7 +439,7 @@ try {
 
   // H8: a ticket message with markup that runs script renders as text (HR-004).
   await walk("H8-ticket-markup", "A ticket message with script doesn't run it", "hr", async ({ page, step }) => {
-    const token = await tokenFor(PEOPLE.hr);
+    const token = await tokenFor(PEOPLE.hr, "hr");
     const tickets = (await (await fetch(`${apiUrl("hr")}/api/tickets?limit=5`, { headers: { Authorization: `Bearer ${token}` } })).json()).data?.items ?? [];
     const ticket = tickets[0];
     await step("Post a message carrying script, open the ticket", async () => {

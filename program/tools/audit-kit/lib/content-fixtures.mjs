@@ -5,7 +5,7 @@ import {apiUrl} from './suite.mjs';
 import {tokenFor} from './session.mjs';
 const API=apiUrl('wm')+'/v2';
 export async function fixtureCall(email,method,p,body,version) {
- const res=await fetch(API+p,{method,headers:{authorization:`Bearer ${await tokenFor(email)}`,'content-type':'application/json',...(version!=null?{'if-match':String(version)}:{})},body:body?JSON.stringify(body):undefined});
+ const res=await fetch(API+p,{method,headers:{authorization:`Bearer ${await tokenFor(email, "wm")}`,'content-type':'application/json',...(version!=null?{'if-match':String(version)}:{})},body:body?JSON.stringify(body):undefined});
  const data=await res.json();if(!res.ok)throw new Error(`${method} ${p}: ${res.status} ${JSON.stringify(data.error)}`);return data.data;
 }
 const editor='hoda.ashraf@orgtik.test', approver='karim.hassan@orgtik.test';

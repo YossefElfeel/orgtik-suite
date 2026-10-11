@@ -49,7 +49,8 @@ const reset = await mockControlRequest({ sosApi: `${mock}/sos`, url: `${mock}/so
 if (!reset.ok) throw new Error(`Preview reset answered ${reset.status}`);
 const failures = [];
 const run = (label, fn) => {
-  try { fn(); }
+  console.log(`RUN ${label}`);
+  try { fn(); console.log(`PASS ${label}`); }
   catch (error) {
     // Child processes print acceptance details; never serialize command environments/tokens.
     const note = error.status !== undefined ? `command exited ${error.status}` : error.message;
@@ -62,7 +63,10 @@ run("hosted auth and desktop/mobile shell", () => execFileSync(process.execPath,
 // Keep every reset/clock-based suite sequential against the shared preview sandbox.
 // Backend consumers can use a stable preview alias without deploying that frontend again.
 // The readiness gate must pass before broader mutating flows start.
-for (const suite of failures.length ? [] : plan.suites) {
+for (const suite of plan.suites) {
+  // Keep the first failure actionable; later stateful flows must wait for a
+  // successful rerun. The acceptance result remains failed until every flow passes.
+  if (failures.length) break;
   const keys = [...new Set(["mock", "sos", suite.key, ...suite.requires])];
   let tokens;
   let refreshAt = 0;
@@ -81,12 +85,15 @@ for (const suite of failures.length ? [] : plan.suites) {
     const visual = JSON.parse(fs.readFileSync(output, "utf8"));
     if (!Array.isArray(visual) || visual.length !== 20 || visual.some(row => row.critical || row.serious || row.console || row.uncaught || row.overflow > 0 || row.dir !== (row.locale === "ar" ? "rtl" : "ltr") || row.lang?.split("-")[0] !== row.locale || row.brokenImages?.length)) throw new Error(`${suite.key}: VS-1 visual acceptance failed`);
   });
-  for (const flow of suite.flows) run(`${suite.key} ${flow.file}${flow.locale ? ` ${flow.locale}` : ""}`, () => {
-    const output = flow.evidence && path.join(audits, flow.evidence);
-    if (output) fs.rmSync(output, { force: true });
-    execFileSync(process.execPath, ["--import", preload, path.join(cwd, "flows", flow.file), ...flow.args], { cwd, env: access(), stdio: "inherit" });
-    if (output) assertFlowEvidence(JSON.parse(fs.readFileSync(output, "utf8")), `${suite.key} ${flow.file}`);
-  });
+  for (const flow of suite.flows) {
+    if (failures.length) break;
+    run(`${suite.key} ${flow.file}${flow.locale ? ` ${flow.locale}` : ""}`, () => {
+      const output = flow.evidence && path.join(audits, flow.evidence);
+      if (output) fs.rmSync(output, { force: true });
+      execFileSync(process.execPath, ["--import", preload, path.join(cwd, "flows", flow.file), ...flow.args], { cwd, env: access(), stdio: "inherit" });
+      if (output) assertFlowEvidence(JSON.parse(fs.readFileSync(output, "utf8")), `${suite.key} ${flow.file}`);
+    });
+  }
 }
 fs.writeFileSync(path.join(evidence, "runtime-checks.json"), JSON.stringify({ scope, consumers: plan.consumers, ok: !failures.length, failures }, null, 2) + "\n");
 if (failures.length) process.exitCode = 1;

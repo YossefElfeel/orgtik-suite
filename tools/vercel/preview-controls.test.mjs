@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import http from "node:http";
 import { test } from "node:test";
-import { mockControlRequest } from "../../program/tools/audit-kit/lib/mock-control.mjs";
-import { createAppHandoff } from "../../program/tools/audit-kit/lib/handoff.mjs";
+import { mockControlRequest, mockAdministratorToken } from "../../program/tools/audit-kit/lib/mock-control.mjs";
+import { createAppHandoff, selectAppSession } from "../../program/tools/audit-kit/lib/handoff.mjs";
 
 test("fixture cleanup cannot change canonical accounts when the journal reset loses its revision race", async () => {
   const load = createRequire(import.meta.url);
@@ -69,10 +69,25 @@ test("preview controls use current staff sessions while unauthorized requests re
       assert.equal(JSON.parse(Buffer.from(session.tokens.accessToken.split(".")[1], "base64url")).aud, audience);
       assert.equal((await send("/api/auth/handoff/exchange", { code, audience })).status, 400);
     }
+    const colleague = await send("/api/auth/login", { email: "salma.nabil@orgtik.test", password: "Local@2026" });
+    assert.equal(colleague.status, 200);
+    const colleagueId = (await colleague.json()).data.user.id;
+    const viewed = await send(`/api/auth/login-as/${colleagueId}`, { workspaceId: "ws_orgtik" }, await mockAdministratorToken(sosApi));
+    assert.equal(viewed.status, 200);
+    const viewToken = (await viewed.json()).data.tokens.accessToken;
+    const viewCode = await createAppHandoff(`${sosApi}/api`, "tasks", viewToken);
+    const viewExchange = await send("/api/auth/handoff/exchange", { code: viewCode, audience: "tool:tasks" });
+    assert.equal(viewExchange.status, 200);
+    const viewSession = (await viewExchange.json()).data;
+    assert.equal(viewSession.workspaceContext.actor.readOnly, true);
+    await assert.rejects(selectAppSession(`${sosApi}/api`, "admin", viewSession.tokens.accessToken), { status: 403 });
+    const refusedWrite = await fetch(`${base}/tasks/api/projects`, { method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${viewSession.tokens.accessToken}` }, body: JSON.stringify({ name: "Refused view-as write" }) });
+    assert.equal(refusedWrite.status, 423);
 
     const created = await send("/api/auth/register", { email: "preview-reset@orgtik.test", name: "Preview fixture", password: "PreviewFixture@2026" });
     assert.equal(created.status, 201);
     const registered = (await created.json()).data;
+    await assert.rejects(selectAppSession(`${sosApi}/api`, "wm", registered.tokens.accessToken), { status: 403 });
     const retained = await send("/api/auth/register", { email: "retained@business.org", name: "Retained account", password: "RetainedFixture@2026" });
     assert.equal(retained.status, 201);
 

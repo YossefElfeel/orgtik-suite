@@ -1,10 +1,16 @@
 // Signs a browser context in through the launcher's current, single-use code handoff.
 import { APPS, SOS_API, PASSWORD, webUrl, redact } from "./suite.mjs";
-import { createAppHandoff } from "./handoff.mjs";
+import { createAppHandoff, selectAppSession } from "./handoff.mjs";
+export { createAppHandoff } from "./handoff.mjs";
 
 const tokens = new Map();
 
-export async function tokenFor(email) {
+export async function tokenFor(email, appKey = "sos") {
+  if (appKey !== "sos") {
+    const key = `${appKey}:${email}`;
+    if (!tokens.has(key)) tokens.set(key, await selectAppSession(SOS_API, appKey, await tokenFor(email)));
+    return tokens.get(key);
+  }
   if (tokens.has(email)) return tokens.get(email);
   const res = await fetch(`${SOS_API}/auth/login`, {
     method: "POST",
