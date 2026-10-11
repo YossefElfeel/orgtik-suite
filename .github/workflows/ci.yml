@@ -48,7 +48,7 @@ jobs:
         run: node tools/vercel/configure.mjs --check
 
       - name: Deployment artifact and URL regressions
-        run: node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/verify-preview-revisions.test.mjs tools/vercel/workspace-runtime.test.mjs
+        run: node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/verify-preview-revisions.test.mjs tools/vercel/workspace-runtime.test.mjs tools/vercel/preview-controls.test.mjs
 
       - name: Typecheck, message catalogs and tests (affected packages)
         run: pnpm turbo run typecheck i18n:check test --affected --continue --concurrency=2

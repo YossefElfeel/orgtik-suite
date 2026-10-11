@@ -3,6 +3,7 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 import { mintPreviewTokens, protectedFetch } from "./preview-protection.mjs";
+import { mockControlRequest } from "../../program/tools/audit-kit/lib/mock-control.mjs";
 import { assertFlowEvidence, buildRuntimeCheckPlan, changedRuntimeFiles, previewTokenRefreshAt, resolvePreviewUrls, selectRuntimeConsumers } from "./runtime-dependencies.mjs";
 
 const root = path.resolve(import.meta.dirname, "../..");
@@ -44,7 +45,7 @@ for (const key of plan.requiredProjects) {
   if (key === "mock" && (await response.json()).data?.journal?.sandbox !== "preview") throw new Error("Runtime checks require the isolated preview data sandbox");
 }
 const firstTokens = Object.fromEntries(["mock", "sos", "website"].map(key => [urls[key], requiredTokens[urls[key]]]));
-const reset = await protectedFetch(firstTokens)(`${mock}/sos/__mock/reset`, { method: "POST" });
+const reset = await mockControlRequest({ sosApi: `${mock}/sos`, url: `${mock}/sos/__mock/reset`, body: { fixtures: true } }, protectedFetch(firstTokens));
 if (!reset.ok) throw new Error(`Preview reset answered ${reset.status}`);
 const failures = [];
 const run = (label, fn) => {

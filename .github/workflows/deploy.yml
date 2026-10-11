@@ -100,7 +100,7 @@ jobs:
           node tools/vercel/configure.mjs --check
           node program/phase-e/openapi.mjs --check
           node tools/ci/secret-scan.mjs
-          node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs
+          node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/preview-controls.test.mjs
 
   deploy:
     name: ${{ inputs.preview_projects == 'build-only' && 'Build' || 'Deploy' }} ${{ matrix.key }}

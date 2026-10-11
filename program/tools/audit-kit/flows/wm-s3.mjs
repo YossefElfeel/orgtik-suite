@@ -199,7 +199,7 @@ await run("An approved change publishes itself at its time; an old version comes
     return { ok: e.state === "scheduled" && Boolean(e.publishAt), note: `scheduled for ${e.publishAt}` };
   });
   await step(karim.page, "publishes-at-its-time", async () => {
-    await fetch(`${apiUrl("sos")}/__mock/clock/advance`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ days: 1 }) });
+    await mock.control("sos", "/__mock/clock/advance", { body: { days: 1 } });
     const e = (await api(karim.token, "/admin/entries/article/ar_02")).data;
     const pub = (await (await fetch(`${API}/public/entries/article`)).json()).data.find((x) => x.id === "ar_02");
     return { ok: e.state === "published" && pub.locales.en.excerpt.startsWith("A brand system"), note: `after a day: ${e.state}; versions ${e.versions.slice(0, 3).map((v) => v.by.name ?? v.by.key).join(", ")}` };

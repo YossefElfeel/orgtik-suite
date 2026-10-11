@@ -71,7 +71,7 @@ try{
   await form.locator('button[type=button]').first().click();await form.locator('[name=email]').fill('invalid');await form.locator('[type=submit]').click();assert.equal(await form.locator('[name=email]').evaluate(el=>el.validity.valid),false);return 'Topic and native email validation enforced.';
  });
  await check('submission failure preserves fields; retry creates a private pending idea',async()=>{
-  await fetch(API+'/__mock/forms-live',{method:'POST'});pull();await page.goto(SITE+'/roadmap',{waitUntil:'networkidle'});
+  await mock.control('wm','/v2/__mock/forms-live');pull();await page.goto(SITE+'/roadmap',{waitUntil:'networkidle'});
   const form=page.locator('form');await form.locator('button[type=button]').first().click();await form.locator('[name=name]').fill('Follow-up');await form.locator('[name=email]').fill('followup@example.test');await form.locator('[name=message]').fill('Follow-up failure retry regression.');
   let tries=0;await page.route('**/v2/public/ideas',route=>++tries===1?route.fulfill({status:503,contentType:'application/json',body:'{"error":{"code":"unavailable"}}'}):route.continue());
   await form.locator('[type=submit]').click();await page.getByText("Your message couldn't be sent. Check your connection and try again.").waitFor();assert.equal(await form.locator('[name=message]').inputValue(),'Follow-up failure retry regression.');
