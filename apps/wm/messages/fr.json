@@ -902,7 +902,16 @@
       "merged_from": "Une autre idée a été fusionnée ici",
       "hide": "Masquée",
       "edit": "Idée modifiée"
-    }
+    },
+    "source": "Source",
+    "sourceWebsite": "Site web",
+    "submitter": "Proposé par",
+    "erased": "Données personnelles effacées",
+    "masked": "Les données personnelles sont masquées pour votre rôle.",
+    "erase": "Effacer les données personnelles",
+    "eraseTitle": "Effacer les données personnelles de cette personne ?",
+    "eraseImpact": "Le nom et l’adresse e-mail seront supprimés. L’idée et son historique seront conservés. Cette action est irréversible.",
+    "sampleComments": "Commentaires de démonstration"
   },
   "Media": {
     "title": "Médias",
@@ -1652,6 +1661,9 @@
     "articleBodyHelp": "Ajoutez des sections et du texte, des images ou des vidéos entre les paragraphes. Glissez pour réordonner ou utilisez les flèches. Enregistrez avant l’aperçu.",
     "articleLanguageHelp": "Traduisez ici les textes, textes alternatifs et légendes. Les médias et l’ordre sont définis en anglais pour toutes les langues.",
     "noArticleSections": "Aucune section pour cet article. Ajoutez une section pour commencer.",
-    "articleInvalid": "Vérifiez les sections et médias. Ajoutez les fichiers manquants avant publication ; structure et médias se modifient en anglais."
+    "articleInvalid": "Vérifiez les sections et médias. Ajoutez les fichiers manquants avant publication ; structure et médias se modifient en anglais.",
+    "outline": "Plan de la page",
+    "expandSection": "Développer la section",
+    "collapseSection": "Réduire la section"
   }
 }

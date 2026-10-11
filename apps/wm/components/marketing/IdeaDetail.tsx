@@ -317,7 +317,7 @@ export function IdeaDetailContent({
                     <ConfirmDialog
                       tone="danger"
                       trigger={
-                        <Button size="sm" variant="secondary">
+                        <Button size="sm" variant="danger">
                           {t("erase")}
                         </Button>
                       }

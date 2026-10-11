@@ -144,8 +144,9 @@ export function WmFrame({ children }: { children: ReactNode }) {
   }
 
   const { user, permissions } = me.data;
-  const staffPermissions = session?.workspaceContext ? [] : session?.staffAccess?.permissions.wm || [];
-  const allowed = new Set(permissions.filter(permission => staffPermissions.includes(permission)));
+  // The staff-session gate and /admin/me already check current membership. Keep navigation
+  // aligned with current API permissions when roles have changed since this tab signed in.
+  const allowed = new Set(permissions);
   const matches = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/"));
   // Only the most specific item is current: on /seo/redirects that's Redirects, not SEO health.
   const best = nav.flatMap((x) => x.items.map((i) => i.href)).filter(matches).sort((x, y) => y.length - x.length)[0];

@@ -119,7 +119,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
               ) : null}
               <span className="flex min-w-0 flex-col">
                 <Link
-                  href={`/content/${type.area}/${c.id}?view=1&returnTo=${encodeURIComponent(url.href)}`}
+                  href={`/content/${type.area}/${c.id}?${can("content:edit") ? "" : "view=1&"}returnTo=${encodeURIComponent(url.href)}`}
                   dir="auto"
                   className="truncate font-semibold text-fg hover:underline focus-visible:outline-2 focus-visible:outline-focus"
                 >

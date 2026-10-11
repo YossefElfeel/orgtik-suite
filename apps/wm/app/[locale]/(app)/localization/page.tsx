@@ -48,7 +48,7 @@ function Matrix() {
         meta: { truncate: true },
         cell: ({ row }) => (
           <span className="flex min-w-0 flex-col">
-            <Link href={`/content/${TYPES[row.original.type].area}/${row.original.id}?view=1&returnTo=${encodeURIComponent(url.href)}`} dir="auto" className="truncate font-semibold text-fg hover:underline focus-visible:outline-2 focus-visible:outline-focus">
+            <Link href={`/content/${TYPES[row.original.type].area}/${row.original.id}?${can("content:edit") ? "" : "view=1&"}returnTo=${encodeURIComponent(url.href)}`} dir="auto" className="truncate font-semibold text-fg hover:underline focus-visible:outline-2 focus-visible:outline-focus">
               {entryName(row.original)}
             </Link>
             <span className="text-caption text-fg-subtle">{tt(`${row.original.type}.one`)}</span>
