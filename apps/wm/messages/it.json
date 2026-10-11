@@ -902,7 +902,16 @@
       "merged_from": "Un’altra idea è stata unita a questa",
       "hide": "Nascosta",
       "edit": "Idea modificata"
-    }
+    },
+    "source": "Fonte",
+    "sourceWebsite": "Sito web",
+    "submitter": "Inviato da",
+    "erased": "Dati personali cancellati",
+    "masked": "I dati personali sono nascosti per il tuo ruolo.",
+    "erase": "Cancella dati personali",
+    "eraseTitle": "Cancellare i dati personali di questa persona?",
+    "eraseImpact": "Il nome e l’indirizzo e-mail verranno rimossi. L’idea e la sua cronologia verranno conservate. Questa azione è irreversibile.",
+    "sampleComments": "Commenti di esempio"
   },
   "Media": {
     "title": "Media",
@@ -1652,6 +1661,9 @@
     "articleBodyHelp": "Aggiungi sezioni e inserisci testo, immagini o video tra i paragrafi. Trascina o usa le frecce per riordinare. Salva la bozza prima dell’anteprima.",
     "articleLanguageHelp": "Traduci qui testi, testi alternativi e didascalie. Media e ordine sono definiti in inglese per tutte le lingue.",
     "noArticleSections": "Nessuna sezione dell’articolo. Aggiungi una sezione per iniziare.",
-    "articleInvalid": "Controlla sezioni e media. Aggiungi i file mancanti prima della pubblicazione; struttura e media si modificano in inglese."
+    "articleInvalid": "Controlla sezioni e media. Aggiungi i file mancanti prima della pubblicazione; struttura e media si modificano in inglese.",
+    "outline": "Struttura della pagina",
+    "expandSection": "Espandi sezione",
+    "collapseSection": "Comprimi sezione"
   }
 }
