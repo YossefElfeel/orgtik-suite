@@ -419,8 +419,10 @@ const publishedSampleTypes = new Set<EntryType>([
   "caseStudy", "article", "roadmapItem", "review",
 ]);
 export const typeOfId = (id: string): ContentType | undefined =>
-  Object.values(TYPES).find((t) => id.startsWith(`${t.idPrefix}_`) ||
-    publishedSampleTypes.has(t.key) && id === `demo_published_${t.key}`);
+  Object.values(TYPES).find((t) =>
+    id.startsWith(`${t.idPrefix}_`) ||
+    (publishedSampleTypes.has(t.key) && id === `demo_published_${t.key}`),
+  );
 
 /** Every label key the schemas use, for the messages parity check. */
 export function labelKeys(): string[] {

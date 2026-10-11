@@ -739,7 +739,16 @@
       "merged_from": "Une autre idée a été fusionnée ici",
       "hide": "Masquée",
       "edit": "Idée modifiée"
-    }
+    },
+    "source": "Source",
+    "sourceWebsite": "Site web",
+    "submitter": "Proposé par",
+    "erased": "Données personnelles effacées",
+    "masked": "Les données personnelles sont masquées pour votre rôle.",
+    "erase": "Effacer les données personnelles",
+    "eraseTitle": "Effacer les données personnelles de cette personne ?",
+    "eraseImpact": "Le nom et l’adresse e-mail seront supprimés. L’idée et son historique seront conservés. Cette action est irréversible.",
+    "sampleComments": "Commentaires de démonstration"
   },
   "Improvements": {
     "actions": "Actions",
@@ -877,7 +886,29 @@
     "articleBodyHelp": "Ajoutez des sections et du texte, des images ou des vidéos entre les paragraphes. Glissez pour réordonner ou utilisez les flèches. Enregistrez avant l’aperçu.",
     "articleLanguageHelp": "Traduisez ici les textes, textes alternatifs et légendes. Les médias et l’ordre sont définis en anglais pour toutes les langues.",
     "noArticleSections": "Aucune section pour cet article. Ajoutez une section pour commencer.",
-    "articleInvalid": "Vérifiez les sections et médias. Ajoutez les fichiers manquants avant publication ; structure et médias se modifient en anglais."
+    "articleInvalid": "Vérifiez les sections et médias. Ajoutez les fichiers manquants avant publication ; structure et médias se modifient en anglais.",
+    "outline": "Plan de la page",
+    "expandSection": "Développer la section",
+    "collapseSection": "Réduire la section",
+    "reviewContent": "Contenu de l’avis",
+    "reviewContentHelp": "Rédigez la citation et les informations sur son auteur dans la langue sélectionnée.",
+    "reviewPhoto": "Photo de l’auteur",
+    "reviewPhotoHelp": "Choisissez un portrait ou une image de marque. Le fichier est partagé entre les langues.",
+    "reviewDisplay": "Paramètres d’affichage",
+    "reviewDisplayHelp": "Ces paramètres s’appliquent à toutes les langues. Les avis apparaissent sur le site après publication.",
+    "reviewSampleHelp": "Ajoute une mention visible d’avis de démonstration sur le site.",
+    "reviewOrderHelp": "Les nombres les plus bas apparaissent en premier.",
+    "reviewUnlinked": "Sans association",
+    "reviewPreview": "Aperçu de l’avis",
+    "reviewPreviewHelp": "Affiche cette langue et vos modifications non enregistrées.",
+    "reviewQuoteEmpty": "Aucune citation pour le moment",
+    "reviewAuthorEmpty": "Nom de l’auteur",
+    "reviewSummaryUnavailable": "Ouvrez cet avis pour consulter ses détails.",
+    "uploadImage": "Importer une image",
+    "uploadVideo": "Importer une vidéo",
+    "reviewLive": "Visible sur le site",
+    "reviewAdditionalMedia": "Médias supplémentaires",
+    "reviewAdditionalMediaHelp": "Images et vidéos facultatives affichées avec cet avis."
   },
   "Leads": {
     "title": "Demandes",

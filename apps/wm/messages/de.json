@@ -739,7 +739,16 @@
       "merged_from": "Eine andere Idee wurde hierhin zusammengeführt",
       "hide": "Ausgeblendet",
       "edit": "Idee bearbeitet"
-    }
+    },
+    "source": "Quelle",
+    "sourceWebsite": "Website",
+    "submitter": "Eingereicht von",
+    "erased": "Persönliche Daten gelöscht",
+    "masked": "Persönliche Daten sind für Ihre Rolle verborgen.",
+    "erase": "Persönliche Daten löschen",
+    "eraseTitle": "Persönliche Daten dieser Person löschen?",
+    "eraseImpact": "Name und E-Mail-Adresse werden entfernt. Die Idee und ihr Verlauf bleiben erhalten. Dies kann nicht rückgängig gemacht werden.",
+    "sampleComments": "Beispielkommentare"
   },
   "Improvements": {
     "actions": "Aktionen",
@@ -877,7 +886,29 @@
     "articleBodyHelp": "Fügen Sie Abschnitte und Text, Bilder oder Videos zwischen Absätzen hinzu. Ziehen Sie zum Sortieren oder nutzen Sie die Pfeile. Speichern Sie vor der Vorschau.",
     "articleLanguageHelp": "Übersetzen Sie hier Text, Alternativtext und Bildunterschriften. Medien und Reihenfolge werden auf Englisch für alle Sprachen festgelegt.",
     "noArticleSections": "Noch keine Artikelabschnitte. Fügen Sie einen Abschnitt hinzu.",
-    "articleInvalid": "Prüfen Sie Abschnitte und Medien. Fügen Sie vor der Veröffentlichung fehlende Dateien hinzu; Struktur und Medien werden auf Englisch geändert."
+    "articleInvalid": "Prüfen Sie Abschnitte und Medien. Fügen Sie vor der Veröffentlichung fehlende Dateien hinzu; Struktur und Medien werden auf Englisch geändert.",
+    "outline": "Seitenübersicht",
+    "expandSection": "Abschnitt ausklappen",
+    "collapseSection": "Abschnitt einklappen",
+    "reviewContent": "Bewertungsinhalt",
+    "reviewContentHelp": "Schreiben Sie das Zitat und die Angaben zum Autor in der gewählten Sprache.",
+    "reviewPhoto": "Autorenfoto",
+    "reviewPhotoHelp": "Wählen Sie ein Porträt oder Markenbild. Die Datei wird für alle Sprachen verwendet.",
+    "reviewDisplay": "Anzeigeeinstellungen",
+    "reviewDisplayHelp": "Diese Einstellungen gelten für jede Sprache. Bewertungen erscheinen nach der Veröffentlichung auf der Website.",
+    "reviewSampleHelp": "Fügt auf der Website eine sichtbare Kennzeichnung als Beispielbewertung hinzu.",
+    "reviewOrderHelp": "Kleinere Zahlen erscheinen zuerst.",
+    "reviewUnlinked": "Nicht verknüpft",
+    "reviewPreview": "Bewertungsvorschau",
+    "reviewPreviewHelp": "Zeigt diese Sprache und Ihre ungespeicherten Änderungen.",
+    "reviewQuoteEmpty": "Noch kein Zitat",
+    "reviewAuthorEmpty": "Name des Autors",
+    "reviewSummaryUnavailable": "Öffnen Sie diese Bewertung, um ihre Details zu sehen.",
+    "uploadImage": "Bild hochladen",
+    "uploadVideo": "Video hochladen",
+    "reviewLive": "Auf der Website",
+    "reviewAdditionalMedia": "Zusätzliche Medien",
+    "reviewAdditionalMediaHelp": "Optionale Bilder und Videos, die mit dieser Bewertung angezeigt werden."
   },
   "Leads": {
     "title": "Anfragen",

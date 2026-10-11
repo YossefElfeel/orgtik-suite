@@ -1,12 +1,13 @@
 "use client";
+import { RowActionsMenu } from "@/components/content/RowActionsMenu";
 
 import { ActionDialog, NEXT } from "@/components/marketing/IdeaDetail";
 import { Link, useRouter } from "@/i18n/routing";
 import { useListState } from "@/lib/useListState";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import { DotsThreeVertical, MagnifyingGlass, X } from "@phosphor-icons/react";
-import { Badge, Button, IconButton, Input, Menu, MenuContent, MenuItem, MenuLinkItem, MenuTrigger, PageHeader, StatusBadge, Tabs, TabsList, useFormatter, useStatusLabel } from "@orgtik/ui";
+import { Eye, PencilSimple, MagnifyingGlass, X } from "@phosphor-icons/react";
+import { Badge, Button, Input, MenuItem, MenuLinkItem, PageHeader, StatusBadge, Tabs, TabsList, useFormatter, useStatusLabel } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { useCan } from "@/lib/permissions";
@@ -59,14 +60,11 @@ function IdeasList() {
       { id: "votes", header: t("colVotes"), meta: { numeric: true }, cell: ({ row }) => <span className="tabular-nums">{f.number(row.original.votes)}</span> },
       { id: "submitted", header: t("colSubmitted"), meta: { numeric: true }, cell: ({ row }) => <span className="text-fg-muted">{f.date(row.original.submittedAt, { dateStyle: "medium" })}</span> },
       { id: "status", header: t("colStatus"), cell: ({ row }) => <StatusBadge entity="roadmap_idea" state={row.original.status} size="sm" /> },
-      { id: "actions", header: ti("actions"), enableSorting: false, cell: ({ row }) => <Menu>
-        <MenuTrigger render={<IconButton label={ti("actions")} icon={<DotsThreeVertical />} />} />
-        <MenuContent align="end">
-          <MenuLinkItem render={<Link href={`/marketing/ideas/${row.original.id}?returnTo=${encodeURIComponent(url.href)}`} />}>{ti("view")}</MenuLinkItem>
-          {canModerate ? <MenuLinkItem render={<Link href={`/marketing/ideas/${row.original.id}?edit=1&returnTo=${encodeURIComponent(url.href)}`} />}>{ti("edit")}</MenuLinkItem> : null}
+      { id: "actions", header: ti("actions"), enableSorting: false, cell: ({ row }) => <RowActionsMenu target={row.original.title}>
+          <MenuLinkItem icon={<Eye />} render={<Link href={`/marketing/ideas/${row.original.id}?returnTo=${encodeURIComponent(url.href)}`} />}>{ti("view")}</MenuLinkItem>
+          {canModerate ? <MenuLinkItem icon={<PencilSimple />} render={<Link href={`/marketing/ideas/${row.original.id}?edit=1&returnTo=${encodeURIComponent(url.href)}`} />}>{ti("edit")}</MenuLinkItem> : null}
           {canModerate && (NEXT[row.original.status] ?? []).includes("hide") ? <MenuItem tone="danger" onClick={() => setActing({ idea: row.original, action: "hide" })}>{t("actions.hide")}</MenuItem> : null}
-        </MenuContent>
-      </Menu> },
+        </RowActionsMenu> },
     ],
     [t, ti, f, canModerate, router, url.href],
   );

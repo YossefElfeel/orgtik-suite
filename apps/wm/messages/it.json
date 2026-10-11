@@ -739,7 +739,16 @@
       "merged_from": "Un’altra idea è stata unita a questa",
       "hide": "Nascosta",
       "edit": "Idea modificata"
-    }
+    },
+    "source": "Fonte",
+    "sourceWebsite": "Sito web",
+    "submitter": "Inviato da",
+    "erased": "Dati personali cancellati",
+    "masked": "I dati personali sono nascosti per il tuo ruolo.",
+    "erase": "Cancella dati personali",
+    "eraseTitle": "Cancellare i dati personali di questa persona?",
+    "eraseImpact": "Il nome e l’indirizzo e-mail verranno rimossi. L’idea e la sua cronologia verranno conservate. Questa azione è irreversibile.",
+    "sampleComments": "Commenti di esempio"
   },
   "Improvements": {
     "actions": "Azioni",
@@ -877,7 +886,29 @@
     "articleBodyHelp": "Aggiungi sezioni e inserisci testo, immagini o video tra i paragrafi. Trascina o usa le frecce per riordinare. Salva la bozza prima dell’anteprima.",
     "articleLanguageHelp": "Traduci qui testi, testi alternativi e didascalie. Media e ordine sono definiti in inglese per tutte le lingue.",
     "noArticleSections": "Nessuna sezione dell’articolo. Aggiungi una sezione per iniziare.",
-    "articleInvalid": "Controlla sezioni e media. Aggiungi i file mancanti prima della pubblicazione; struttura e media si modificano in inglese."
+    "articleInvalid": "Controlla sezioni e media. Aggiungi i file mancanti prima della pubblicazione; struttura e media si modificano in inglese.",
+    "outline": "Struttura della pagina",
+    "expandSection": "Espandi sezione",
+    "collapseSection": "Comprimi sezione",
+    "reviewContent": "Contenuto della recensione",
+    "reviewContentHelp": "Scrivi la citazione e i dati dell’autore nella lingua selezionata.",
+    "reviewPhoto": "Foto dell’autore",
+    "reviewPhotoHelp": "Scegli un ritratto o un’immagine del marchio. Il file è condiviso tra le lingue.",
+    "reviewDisplay": "Impostazioni di visualizzazione",
+    "reviewDisplayHelp": "Queste impostazioni valgono per tutte le lingue. Le recensioni appaiono sul sito dopo la pubblicazione.",
+    "reviewSampleHelp": "Aggiunge sul sito un’etichetta visibile di recensione di esempio.",
+    "reviewOrderHelp": "I numeri più bassi appaiono per primi.",
+    "reviewUnlinked": "Nessun collegamento",
+    "reviewPreview": "Anteprima della recensione",
+    "reviewPreviewHelp": "Mostra questa lingua e le modifiche non salvate.",
+    "reviewQuoteEmpty": "Nessuna citazione ancora",
+    "reviewAuthorEmpty": "Nome dell’autore",
+    "reviewSummaryUnavailable": "Apri questa recensione per visualizzarne i dettagli.",
+    "uploadImage": "Carica immagine",
+    "uploadVideo": "Carica video",
+    "reviewLive": "Visibile sul sito",
+    "reviewAdditionalMedia": "Media aggiuntivi",
+    "reviewAdditionalMediaHelp": "Immagini e video facoltativi mostrati con questa recensione."
   },
   "Leads": {
     "title": "Contatti",

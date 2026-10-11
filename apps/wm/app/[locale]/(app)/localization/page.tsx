@@ -1,12 +1,13 @@
 "use client";
+import { RowActionsMenu } from "@/components/content/RowActionsMenu";
 
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { IconButton, Menu, MenuContent, MenuTrigger, MenuLinkItem, Input, Card, PageHeader, Select, StatusBadge, Tabs, TabsList, useFormatter } from "@orgtik/ui";
+import { MenuLinkItem, Input, Card, PageHeader, Select, StatusBadge, Tabs, TabsList, useFormatter } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { Link } from "@/i18n/routing";
-import { DotsThree, Eye, PencilSimple } from "@phosphor-icons/react";
+import { Eye, PencilSimple } from "@phosphor-icons/react";
 import { EnableLanguage } from "@/components/content/EnableLanguage";
 import { useCan } from "@/lib/permissions";
 import { useListState } from "@/lib/useListState";
@@ -48,7 +49,7 @@ function Matrix() {
         meta: { truncate: true },
         cell: ({ row }) => (
           <span className="flex min-w-0 flex-col">
-            <Link href={`/content/${TYPES[row.original.type].area}/${row.original.id}?view=1&returnTo=${encodeURIComponent(url.href)}`} dir="auto" className="truncate font-semibold text-fg hover:underline focus-visible:outline-2 focus-visible:outline-focus">
+            <Link href={`/content/${TYPES[row.original.type].area}/${row.original.id}?${can("content:edit") ? "" : "view=1&"}returnTo=${encodeURIComponent(url.href)}`} dir="auto" className="truncate font-semibold text-fg hover:underline focus-visible:outline-2 focus-visible:outline-focus">
               {entryName(row.original)}
             </Link>
             <span className="text-caption text-fg-subtle">{tt(`${row.original.type}.one`)}</span>
@@ -68,10 +69,10 @@ function Matrix() {
           </Link>
         ),
       })),
-      { id: "actions", header: ti("actions"), cell: ({ row }) => <Menu><MenuTrigger render={<IconButton icon={<DotsThree />} label={ti("actions")} />} /><MenuContent align="end">
+      { id: "actions", header: ti("actions"), cell: ({ row }) => <RowActionsMenu target={entryName(row.original)}>
         <MenuLinkItem icon={<Eye />} render={<Link href={`/content/${TYPES[row.original.type].area}/${row.original.id}?view=1&returnTo=${encodeURIComponent(url.href)}`} />}>{ti("view")}</MenuLinkItem>
         {can("content:edit") ? <MenuLinkItem icon={<PencilSimple />} render={<Link href={`/content/${TYPES[row.original.type].area}/${row.original.id}?returnTo=${encodeURIComponent(url.href)}`} />}>{ti("edit")}</MenuLinkItem> : null}
-      </MenuContent></Menu> },
+      </RowActionsMenu> },
     ],
     [t, tt, ti, entryName, url.href, can],
   );

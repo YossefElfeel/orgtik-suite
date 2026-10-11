@@ -21,12 +21,110 @@ const { managedPageTree, SectionMedia, SharedMedia } =
 const { ArticleBlocks } = await server.ssrLoadModule(
   "/src/reference/ArticleBlocks.jsx",
 );
+const { Testimonials, reviewsFor } = await server.ssrLoadModule(
+  "/src/reference/Testimonials.jsx",
+);
 const baseline = structuredClone(snapshot.entries);
 afterEach(() => {
   snapshot.entries = structuredClone(baseline);
   delete globalThis.window;
 });
 after(() => server.close());
+
+test("testimonials retain published ordering, related badges, portraits, media and sample disclosure", () => {
+  snapshot.entries.review = [
+    {
+      id: "last",
+      position: 2,
+      relatedEntry: "sm_01",
+      sample: false,
+      image: {
+        src: "brand-cards.webp",
+        alt: { en: "Portrait" },
+        focal: { x: 20, y: 80 },
+      },
+      locales: {
+        en: {
+          name: "Author",
+          quote: "Managed quote",
+          role: "Lead",
+          company: "Company",
+        },
+      },
+      presentation: {
+        sectionMedia: { details: [{ src: "cinematic-desktop.mp4" }] },
+      },
+    },
+    {
+      id: "first",
+      position: 1,
+      sample: true,
+      locales: { en: { name: "Sample author", quote: "Sample quote" } },
+    },
+  ];
+  const html = renderToStaticMarkup(
+    h(Testimonials, { "data-cms-section": "reviews" }),
+  );
+  assert.ok(
+    html.indexOf('data-review-id="first"') <
+      html.indexOf('data-review-id="last"'),
+  );
+  assert.match(html, /testimonials__track/);
+  assert.match(html, /Software/);
+  assert.match(html, /Sample review/);
+  assert.match(html, /Five-star design preview; not a client rating/);
+  assert.equal(
+    (html.match(/ph-star/g) ?? []).length,
+    5,
+    "actual reviews do not acquire fabricated ratings",
+  );
+  assert.match(html, /src="\/assets\/brand-cards.webp" alt="Portrait"/);
+  assert.match(html, /object-position:20% 80%/);
+  assert.match(html, /<video[^>]*cinematic-desktop\.mp4[^>]*controls=""/);
+  assert.match(html, /aria-label="Previous testimonials"/);
+  assert.match(html, /aria-controls=/);
+  assert.ok(!html.includes(' scope="') && !html.includes(' project="'));
+});
+
+test("testimonials show only the requested related content without losing unassigned reviews", () => {
+  snapshot.entries.review = [
+    { id: "software", relatedEntry: "sm_01", order: 3, locales: { en: {} } },
+    { id: "service", relatedEntry: "sf_01", order: 2, locales: { en: {} } },
+    { id: "general", order: 1, locales: { en: {} } },
+  ];
+  assert.deepEqual(
+    reviewsFor("services").map((row) => row.id),
+    ["general", "service"],
+  );
+  assert.deepEqual(
+    reviewsFor("software").map((row) => row.id),
+    ["general", "software"],
+  );
+  assert.equal(reviewsFor("general").length, 3);
+  snapshot.entries.review = [];
+  assert.equal(renderToStaticMarkup(h(Testimonials)), "");
+});
+
+test("testimonials use translated copy and an RTL carousel without replacing CMS words", () => {
+  globalThis.window = { location: { pathname: "/ar" } };
+  snapshot.entries.review = [
+    {
+      id: "arabic",
+      order: 1,
+      sample: true,
+      locales: {
+        en: { quote: "English", name: "English author" },
+        ar: { quote: "رأي العميل", name: "العميل" },
+      },
+    },
+  ];
+  const html = renderToStaticMarkup(h(Testimonials, { scope: "software" }));
+  assert.match(html, /dir="rtl"/);
+  assert.match(html, /رأي العميل/);
+  assert.match(html, /تقييم تجريبي/);
+  assert.match(html, /آراء عملاء البرمجيات/);
+  assert.ok(!html.includes("English author"));
+});
 
 test("article blocks render images and videos in managed order, with captions and safe sources", () => {
   const html = renderToStaticMarkup(

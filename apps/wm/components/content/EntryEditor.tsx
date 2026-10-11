@@ -62,13 +62,13 @@ import { SectionOrder } from "./SectionOrder";
 import { SectionAttachments } from "./SectionAttachments";
 import { MediaPicker } from "@/components/media/MediaPicker";
 import sectionMap from "@/lib/cms-sections.json";
+import { ReviewEditor } from "./ReviewEditor";
 import { ArticleBodyEditor, synchronizeArticleEdits } from "./ArticleBodyEditor";
 import {
   LifecycleActions,
   VisibilityBadge,
 } from "@/components/content/Lifecycle";
 import {
-  TYPES,
   typeOfId,
   type ContentType,
   type EditorSection,
@@ -449,7 +449,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   // More sections than fit in a row (a page has up to a dozen) go in a column beside the form.
   const side = tabItems.length > 6;
   const seo = { ...(entry.content.seo[lang] ?? {}), ...(seoEdits[lang] ?? {}) };
-  const hasShared = type.neutral.length > 0 || type.image;
+  const hasShared = type.key !== "review" && (type.neutral.length > 0 || type.image);
   const lockShared = !editable || lang !== "en";
   const body = (sectionMap as Record<string, { body: string[] }>)[entry.id]?.body ?? [];
   const orderedBody = [...new Set([...presentation.sectionOrder.filter(key => body.includes(key)), ...body])];
@@ -470,11 +470,6 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         ) : null}
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        {type.key === "review" ? <>
-          <Field label={ti("sample")}><Switch aria-label={ti("sample")} checked={neutral.sample === true} disabled={lockShared} onCheckedChange={sample => setNeutralEdit(previous => ({ ...previous, sample }))} /></Field>
-          <Field label={ti("order")}><NumberField min={0} value={neutral.position ?? 0} disabled={lockShared} onValueChange={position => setNeutralEdit(previous => ({ ...previous, position: position ?? 0 }))} /></Field>
-          <Field label={ti("relatedEntry")}><Select disabled={lockShared} value={neutral.relatedEntry || "none"} onValueChange={value => setNeutralEdit(previous => ({ ...previous, relatedEntry: value === "none" ? "" : value ?? "" }))} options={[{ value: "none", label: "—" }, ...[...(relatedServices.data?.items ?? []), ...(relatedSoftware.data?.items ?? [])].map(item => ({ value: item.id, label: entryName(item) }))]} /></Field>
-        </> : null}
         {type.neutral.includes("icon") ? (
           <Field label={tl("icon")} description={t("iconHelp")}>
             <IconPicker disabled={!editable || lang !== "en"} value={neutral.icon ?? ""} onChange={icon => setNeutralEdit(previous => ({ ...previous, icon }))} />
@@ -717,8 +712,8 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
       {type.image && entry.content.image ? (
         <>
         {errors["image.src"] ? <p role="alert" className="text-body-sm text-danger">{t("errorRequired")}</p> : null}
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
-          <MediaPicker imagesOnly value={imageSrc ?? entry.content.image.src} onChange={(src, media) => { setImageSrc(src); setImageFocal(media?.focal); if (media?.alt) setAltEdits(media.alt); }} disabled={!editable || lang !== "en"} />
+        <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.65fr)]">
+          <div className="min-w-0"><MediaPicker imagesOnly value={imageSrc ?? entry.content.image.src} onChange={(src, media) => { setImageSrc(src); setImageFocal(media?.focal); if (media?.alt) setAltEdits(media.alt); }} disabled={!editable || lang !== "en"} /></div>
           <Field
             label={t("altText")}
             description={alt[lang] ? t("altHelp") : t("altMissing")}
@@ -1048,7 +1043,15 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
             {sections.map((s, i) => (
               <TabsPanel key={s.value} value={s.value}>
                 {i === 0 ? shared : null}
-                {s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "") ? <div className="grid max-w-2xl gap-4">
+                {type.key === "review" ? <ReviewEditor value={tree ?? {}} fallback={english} onChange={setTree} ctx={ctx}
+                  photo={imageSrc ?? entry.content.image?.src ?? ""} focal={imageFocal ?? entry.content.image?.focal} alt={alt[lang] ?? ""}
+                  onPhoto={(src, media) => { setImageSrc(src); setImageFocal(media?.focal); if (media?.alt) setAltEdits(media.alt); }}
+                  onAlt={value => setAltEdits(previous => ({ ...previous, [lang]: value }))}
+                  sample={neutral.sample === true} position={neutral.position ?? 0} relatedEntry={neutral.relatedEntry ?? ""}
+                  onSettings={patch => setNeutralEdit(previous => ({ ...previous, ...patch }))}
+                  relatedOptions={[...(relatedServices.data?.items ?? []), ...(relatedSoftware.data?.items ?? [])].map(item => ({ value: item.id, label: entryName(item) }))}
+                  additionalMedia={<SectionAttachments disabled={!editable || lang !== "en"} disabledReason={viewing && mayEdit ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia.details ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, details: items } })} />}
+                /> : s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "") ? <div className="grid max-w-2xl gap-4">
                   <Field label={ti("text")}><Input disabled={!editable} value={presentation.cursor.text[lang] ?? String(get(tree, "intro") && (get(tree, "intro") as Tree).div || "").replace(/<[^>]+>/g, "").trim()} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, text: { ...presentation.cursor.text, [lang]: event.target.value } } })} /></Field>
                   <Field label={ti("link")}><Input dir="ltr" disabled={!editable || lang !== "en"} value={presentation.cursor.link} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, link: event.target.value } })} /></Field>
                 </div> : references[s.value] ? <Link href={references[s.value]} className="text-fg-brand underline">{ti("manage")} {sectionName(s)}</Link> : s.value === "shared-copy" ? <SharedCopyPanel key={`${entry.id}-${lang}`} pageId={entry.id} lang={lang} readOnly={!editable} /> : type.key === "article" && s.value === "body" ? <ArticleBodyEditor ctx={ctx} value={get(tree, "sections")} onChange={value => setTree(put(tree ?? {}, "sections", value))} /> : <ValueEditor
@@ -1059,7 +1062,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                   path={s.path}
                   ctx={ctx}
                 />}
-                {s.value !== "shared-copy" && !(s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "")) && type.key !== "strings" && type.key !== "pricing" ? <SectionAttachments disabled={!editable || lang !== "en"} disabledReason={viewing ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia[s.value] ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, [s.value]: items } })} /> : null}
+                {type.key !== "review" && s.value !== "shared-copy" && !(s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "")) && type.key !== "strings" && type.key !== "pricing" ? <SectionAttachments disabled={!editable || lang !== "en"} disabledReason={viewing && mayEdit ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia[s.value] ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, [s.value]: items } })} /> : null}
               </TabsPanel>
             ))}
             {type.seo ? (

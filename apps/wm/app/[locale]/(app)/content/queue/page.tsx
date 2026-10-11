@@ -7,10 +7,12 @@ import { RequirePermission } from "@/components/frame/RequirePermission";
 import { TYPES } from "@/lib/contentTypes";
 import { useEntryName } from "@/lib/entryName";
 import { useListState } from "@/lib/useListState";
+import { useCan } from "@/lib/permissions";
 import { Link } from "@/i18n/routing";
 import { useContentQueueQuery, type EntrySummary } from "@/store/api";
 
 function Queue() {
+  const can = useCan();
   const t = useTranslations("Improvements"),
     tt = useTranslations("Types"),
     to = useTranslations("Overview");
@@ -30,7 +32,7 @@ function Queue() {
       cell: ({ row }) => (
         <Link
           className="font-semibold hover:underline"
-          href={`/content/${TYPES[row.original.type].area}/${row.original.id}?view=1&returnTo=${encodeURIComponent(url.href)}`}
+          href={`/content/${TYPES[row.original.type].area}/${row.original.id}?${can("content:edit") ? "" : "view=1&"}returnTo=${encodeURIComponent(url.href)}`}
         >
           {name(row.original)}
         </Link>

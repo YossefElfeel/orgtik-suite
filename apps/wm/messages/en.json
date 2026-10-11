@@ -739,7 +739,16 @@
       "merged_from": "Another idea merged into this one",
       "hide": "Hidden",
       "edit": "Edited idea"
-    }
+    },
+    "source": "Source",
+    "sourceWebsite": "Website",
+    "submitter": "Submitted by",
+    "erased": "Personal details erased",
+    "masked": "Personal details are masked for your role.",
+    "erase": "Erase personal details",
+    "eraseTitle": "Erase this submitter’s personal details?",
+    "eraseImpact": "The submitter’s name and email will be removed. The idea and its history will remain. This cannot be undone.",
+    "sampleComments": "Sample comments"
   },
   "Improvements": {
     "actions": "Actions",
@@ -877,7 +886,29 @@
     "articleBodyHelp": "Add sections and insert text, images, or videos between paragraphs. Drag to reorder, or use Move up and Move down. Save the draft before previewing.",
     "articleLanguageHelp": "Translate the text, alternative text, and captions here. Add media and arrange sections in English; the arrangement is shared across languages.",
     "noArticleSections": "No article sections yet. Add a section to start writing.",
-    "articleInvalid": "Check the article sections and media. Add missing files before publishing; structure and media are changed in English."
+    "articleInvalid": "Check the article sections and media. Add missing files before publishing; structure and media are changed in English.",
+    "outline": "Page outline",
+    "expandSection": "Expand section",
+    "collapseSection": "Collapse section",
+    "reviewContent": "Review content",
+    "reviewContentHelp": "Write the quote and credit its author in the selected language.",
+    "reviewPhoto": "Author photo",
+    "reviewPhotoHelp": "Select a portrait or brand image. The file is shared across languages.",
+    "reviewDisplay": "Display settings",
+    "reviewDisplayHelp": "These settings apply to every language. Reviews appear on the website after publication.",
+    "reviewSampleHelp": "Adds a visible Sample review label on the website.",
+    "reviewOrderHelp": "Lower numbers appear first.",
+    "reviewUnlinked": "Not linked",
+    "reviewPreview": "Review preview",
+    "reviewPreviewHelp": "Shows this language and your unsaved edits.",
+    "reviewQuoteEmpty": "No quote yet",
+    "reviewAuthorEmpty": "Author name",
+    "reviewSummaryUnavailable": "Open this review to see its details.",
+    "uploadImage": "Upload image",
+    "uploadVideo": "Upload video",
+    "reviewLive": "On website",
+    "reviewAdditionalMedia": "Additional media",
+    "reviewAdditionalMediaHelp": "Optional images and videos displayed with this review."
   },
   "Leads": {
     "title": "Leads",

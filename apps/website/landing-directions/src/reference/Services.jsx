@@ -4913,7 +4913,7 @@ export default class Services extends ReferencePage {
                 </section>
               </>
             )}
-            {v.isOverview && <Testimonials data-cms-section="reviews" scope={msg("Services:75")} />}
+            {v.isOverview && <Testimonials data-cms-section="reviews" scope="services" />}
             <section
               id={"closing"}
               className="closing-cta"

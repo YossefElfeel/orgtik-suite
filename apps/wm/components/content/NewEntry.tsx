@@ -50,6 +50,7 @@ export function NewEntry({
 }) {
   const t = useTranslations("Editor");
   const tt = useTranslations("Types");
+  const fields = useTranslations("Fields");
   const tf = useTranslations("Formats");
   const td = useTranslations("Departments");
   const router = useRouter();
@@ -125,7 +126,7 @@ export function NewEntry({
         </DialogHeader>
         <DialogBody className="flex flex-col gap-4">
           <Field
-            label={t("name")}
+            label={key === "review" ? fields("reviewAuthor") : t("name")}
             error={errors.name ? t("errorRequired") : undefined}
           >
             <Input

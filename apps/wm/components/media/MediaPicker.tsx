@@ -67,7 +67,7 @@ export function MediaPicker({
     selected?.kind === "video" ||
     /\.(mp4|webm)(\?|$)/i.test(value);
   return (
-    <div className="flex flex-col gap-3 rounded-field border border-line p-3">
+    <div className="flex min-w-0 flex-col gap-3 rounded-field border border-line p-3">
       {value ? (
         <div className="flex flex-wrap items-center gap-3">
           {video ? (
@@ -121,7 +121,7 @@ export function MediaPicker({
               aria-expanded={uploadingNew}
               onClick={() => setUploadingNew(!uploadingNew)}
             >
-              {t("upload")}
+              {t(imagesOnly || kind === "image" ? "uploadImage" : kind === "video" ? "uploadVideo" : "upload")}
             </Button>
           ) : null}
           {!can("media:view") && !can("media:edit") ? (
@@ -149,7 +149,7 @@ export function MediaPicker({
           ) : library.data?.items.length ? (
             <div
               aria-label={t("selectMedia")}
-              className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5"
+              className="grid grid-cols-[repeat(auto-fill,minmax(min(8rem,100%),1fr))] gap-3"
             >
               {library.data.items.map((item) => {
                 const src =
@@ -184,7 +184,7 @@ export function MediaPicker({
                       )}
                     </span>
                     <span className="flex flex-col gap-1 p-2">
-                      <span className="break-all text-body-sm font-medium text-fg">
+                      <span title={item.file} className="truncate text-body-sm font-medium text-fg">
                         {item.file}
                       </span>
                       <span className="text-caption text-fg-muted">
