@@ -31,3 +31,6 @@ The existing `program/cms/sections.json` is packaged byte-for-byte as `apps/wm/l
 ## Limits
 
 Analytics remain explicitly sampled. Translation drafts, webhooks and spam protection are bounded local mock behavior; no external provider request is made. Arbitrary uploads are not offered. Staff Website Manager has no fake customer workspace, trial or subscription; Console owns customer software and billing. Website leads carry actual source/page/UTM and CRM IDs, while a Marketing campaign selection picker is outside this editor's implemented flow. Public Arabic website launch remains deferred.
+
+
+The subsequent approved main PR51 is retained in the integrated release. See [the combined review](integrated-main/README.md) for exact stored sample-ID resolution, View/Edit, ordered article blocks, media thumbnails and original autosave recovery:22 checks/10 captures,54 targeted regressions, final types/catalogs/build. The original554/135 evidence above retains its own source hash and scope.

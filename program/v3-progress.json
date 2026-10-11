@@ -84,8 +84,8 @@
     "V3-P4-WM": {
       "status": "accepted_local_final_integration_pending",
       "ui_status": "ordinary_native_cycle_verified",
-      "current_evidence": "554 assertions/135 captures,44 native regressions, autosave/recovery, publication/media/UTM-to-CRM/current mirrors, five catalogs and final build. Combined review with newly approved main PR51 is in progress.",
-      "acceptance_evidence": "program/audits/v3-p4-wm/manifest.json"
+      "current_evidence": "554 retained native assertions/135 captures and44 regressions; combined approved-main supplement adds22 actual browser checks/10 captures and54 targeted regressions. Current persisted sample IDs resolve through exact known native types; View/Edit/article blocks/media picker coexist with original autosave recovery. Types/fivecatalogs/final build pass.",
+      "acceptance_evidence": "program/audits/v3-p4-wm/manifest.json; program/audits/v3-p4-wm/integrated-main/manifest.json"
     },
     "V3-P5": {
       "status": "accepted_local_final_integration_pending",
@@ -111,7 +111,6 @@
     ],
     "held_work": [
       "Final matched website parity on approved main2f3ca45",
-      "Bounded WM integration review preserving approved main PR51",
       "Final current CI, merge and managed existing-project production verification"
     ],
     "evidence_policy": "Each accepted cycle names current scoped source/proofs; historical407 criteria retain individual boundaries. Frozen financial/session/journal/CAS foundations and unrelated checkouts remain intact.",
