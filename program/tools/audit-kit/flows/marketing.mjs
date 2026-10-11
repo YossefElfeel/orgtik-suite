@@ -47,7 +47,7 @@ const MONA = "mona.adel@orgtik.test";
 const stamp = Date.now().toString(36).slice(-4);
 
 const call = async (email, method, url, body) => {
-  const token = await tokenFor(email);
+  const token = await tokenFor(email, "marketing");
   const r = await fetch(API + url, { method, headers: { Authorization: `Bearer ${token}`, ...(body ? { "Content-Type": "application/json" } : {}) }, body: body ? JSON.stringify(body) : undefined });
   return r.json().catch(() => ({}));
 };
@@ -183,7 +183,7 @@ try {
     const seen = [];
     page.on("framenavigated", (f) => f === page.mainFrame() && seen.push(f.url()));
     await step("Arrive with a one-time code", async () => {
-      const token = await tokenFor(MONA);
+      const token = await tokenFor(MONA, "marketing");
       const code = (await (await fetch(`${apiUrl("sos")}/api/auth/handoff`, { method: "POST", headers: { Authorization: `Bearer ${token}` } })).json()).data.code;
       await page.goto(`${MKT}/${LOCALE}/auth?code=${code}`, { waitUntil: "load", timeout: 120000 });
       await page.waitForURL((u) => !u.pathname.endsWith("/auth"), { timeout: 60000 });
@@ -195,7 +195,7 @@ try {
     });
     await step("Back doesn't reopen the hand-off", () => page.goBack().catch(() => {}), async () => !/code=/.test(page.url()) || `back went to ${redact(page.url())}`);
     await step("A forged redirect is ignored", async () => {
-      const token = await tokenFor(MONA);
+      const token = await tokenFor(MONA, "marketing");
       const code = (await (await fetch(`${apiUrl("sos")}/api/auth/handoff`, { method: "POST", headers: { Authorization: `Bearer ${token}` } })).json()).data.code;
       await page.goto(`${MKT}/${LOCALE}/auth?code=${code}&redirect=${encodeURIComponent("https://example.org/")}`, { waitUntil: "load", timeout: 120000 });
       await page.waitForURL((u) => !u.pathname.endsWith("/auth"), { timeout: 60000 });

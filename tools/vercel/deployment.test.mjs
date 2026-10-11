@@ -38,7 +38,24 @@ test("binary HLS transport segments are excluded from the TypeScript tracer", ()
   }
   assert.equal(path.matchesGlob("apps/files.js", pattern), false, "The Files API remains traced");
 });
-import { protectedFetch, mintPreviewTokens, HEADER } from "./preview-protection.mjs";
+import { protectedFetch, mintPreviewTokens, HEADER, previewShellPath } from "./preview-protection.mjs";
+
+test("availability probes use each project's public local shell rather than its protected dashboard", async () => {
+  const projects = JSON.parse(fs.readFileSync(new URL("./projects.json", import.meta.url))).projects;
+  for (const [key, project] of Object.entries(projects)) {
+    const origin = new URL(project.previewUrl).origin;
+    const request = protectedFetch({ [origin]: "fixture.token.value" }, async (url, options) => {
+      assert.equal(options.headers.get(HEADER), "fixture.token.value");
+      if (!["mock", "website", "sos"].includes(key) && new URL(url).pathname === "/") {
+        return new Response(null, { status: 307, headers: { location: projects.sos.previewUrl + "/auth" } });
+      }
+      return new Response("local shell");
+    });
+    assert.equal((await request(origin + previewShellPath(key))).status, 200);
+    if (!["mock", "website", "sos"].includes(key)) await assert.rejects(request(origin), /redirected away/);
+  }
+  assert.throws(() => previewShellPath("unknown"), /Unknown protected preview project/);
+});
 
 const parseUrl = input => execFileSync(process.execPath, [path.join(import.meta.dirname, "deploy-url.mjs")], { input, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim();
 

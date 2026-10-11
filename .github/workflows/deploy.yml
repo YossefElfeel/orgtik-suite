@@ -100,7 +100,7 @@ jobs:
           node tools/vercel/configure.mjs --check
           node program/phase-e/openapi.mjs --check
           node tools/ci/secret-scan.mjs
-          node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs
+          node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/preview-controls.test.mjs
 
   deploy:
     name: ${{ inputs.preview_projects == 'build-only' && 'Build' || 'Deploy' }} ${{ matrix.key }}
@@ -191,6 +191,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
       - uses: actions/download-artifact@v4
         if: needs.affected.outputs.verify_only != '1'
         with:
@@ -214,6 +219,8 @@ jobs:
           if [ '${{ needs.affected.outputs.verify_only }}' = 1 ]; then
             node tools/vercel/verify-preview-revisions.mjs
           fi
+          pnpm install --frozen-lockfile
+          pnpm --filter @orgtik/ui build
           cd program/tools/audit-kit
           npm ci
           npx playwright install --with-deps chromium

@@ -2,7 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
-import { mintPreviewTokens, protectedFetch } from "./preview-protection.mjs";
+import { mintPreviewTokens, protectedFetch, previewShellPath } from "./preview-protection.mjs";
+import { mockControlRequest } from "../../program/tools/audit-kit/lib/mock-control.mjs";
 import { assertFlowEvidence, buildRuntimeCheckPlan, changedRuntimeFiles, previewTokenRefreshAt, resolvePreviewUrls, selectRuntimeConsumers } from "./runtime-dependencies.mjs";
 
 const root = path.resolve(import.meta.dirname, "../..");
@@ -38,17 +39,18 @@ const requiredTokens = mintPreviewTokens(plan.requiredProjects);
 const probe = protectedFetch(requiredTokens);
 for (const key of plan.requiredProjects) {
   let response;
-  try { response = await probe(`${urls[key]}${key === "mock" ? "/sos/__mock/status" : "/"}`, { signal: AbortSignal.timeout(60000) }); }
+  try { response = await probe(`${urls[key]}${key === "mock" ? "/sos/__mock/status" : previewShellPath(key)}`, { signal: AbortSignal.timeout(60000) }); }
   catch { throw new Error(`${key}: required stable preview alias ${urls[key]} is unavailable; deploy or configure this consumer before runtime checks`); }
   if (!response.ok) throw new Error(`${key}: required stable preview alias ${urls[key]} answered ${response.status}; deploy or configure this consumer before runtime checks`);
   if (key === "mock" && (await response.json()).data?.journal?.sandbox !== "preview") throw new Error("Runtime checks require the isolated preview data sandbox");
 }
 const firstTokens = Object.fromEntries(["mock", "sos", "website"].map(key => [urls[key], requiredTokens[urls[key]]]));
-const reset = await protectedFetch(firstTokens)(`${mock}/sos/__mock/reset`, { method: "POST" });
+const reset = await mockControlRequest({ sosApi: `${mock}/sos`, url: `${mock}/sos/__mock/reset`, body: { fixtures: true } }, protectedFetch(firstTokens));
 if (!reset.ok) throw new Error(`Preview reset answered ${reset.status}`);
 const failures = [];
 const run = (label, fn) => {
-  try { fn(); }
+  console.log(`RUN ${label}`);
+  try { fn(); console.log(`PASS ${label}`); }
   catch (error) {
     // Child processes print acceptance details; never serialize command environments/tokens.
     const note = error.status !== undefined ? `command exited ${error.status}` : error.message;
@@ -61,7 +63,10 @@ run("hosted auth and desktop/mobile shell", () => execFileSync(process.execPath,
 // Keep every reset/clock-based suite sequential against the shared preview sandbox.
 // Backend consumers can use a stable preview alias without deploying that frontend again.
 // The readiness gate must pass before broader mutating flows start.
-for (const suite of failures.length ? [] : plan.suites) {
+for (const suite of plan.suites) {
+  // Keep the first failure actionable; later stateful flows must wait for a
+  // successful rerun. The acceptance result remains failed until every flow passes.
+  if (failures.length) break;
   const keys = [...new Set(["mock", "sos", suite.key, ...suite.requires])];
   let tokens;
   let refreshAt = 0;
@@ -80,12 +85,15 @@ for (const suite of failures.length ? [] : plan.suites) {
     const visual = JSON.parse(fs.readFileSync(output, "utf8"));
     if (!Array.isArray(visual) || visual.length !== 20 || visual.some(row => row.critical || row.serious || row.console || row.uncaught || row.overflow > 0 || row.dir !== (row.locale === "ar" ? "rtl" : "ltr") || row.lang?.split("-")[0] !== row.locale || row.brokenImages?.length)) throw new Error(`${suite.key}: VS-1 visual acceptance failed`);
   });
-  for (const flow of suite.flows) run(`${suite.key} ${flow.file}${flow.locale ? ` ${flow.locale}` : ""}`, () => {
-    const output = flow.evidence && path.join(audits, flow.evidence);
-    if (output) fs.rmSync(output, { force: true });
-    execFileSync(process.execPath, ["--import", preload, path.join(cwd, "flows", flow.file), ...flow.args], { cwd, env: access(), stdio: "inherit" });
-    if (output) assertFlowEvidence(JSON.parse(fs.readFileSync(output, "utf8")), `${suite.key} ${flow.file}`);
-  });
+  for (const flow of suite.flows) {
+    if (failures.length) break;
+    run(`${suite.key} ${flow.file}${flow.locale ? ` ${flow.locale}` : ""}`, () => {
+      const output = flow.evidence && path.join(audits, flow.evidence);
+      if (output) fs.rmSync(output, { force: true });
+      execFileSync(process.execPath, ["--import", preload, path.join(cwd, "flows", flow.file), ...flow.args], { cwd, env: access(), stdio: "inherit" });
+      if (output) assertFlowEvidence(JSON.parse(fs.readFileSync(output, "utf8")), `${suite.key} ${flow.file}`);
+    });
+  }
 }
 fs.writeFileSync(path.join(evidence, "runtime-checks.json"), JSON.stringify({ scope, consumers: plan.consumers, ok: !failures.length, failures }, null, 2) + "\n");
 if (failures.length) process.exitCode = 1;

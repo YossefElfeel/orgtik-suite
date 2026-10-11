@@ -127,7 +127,7 @@ await walk("B1-retry", "Retry a failed renewal: it fails, then it goes through",
     return { ok: (await line(page, "files").getByRole("button", { name: m("Billing.lines.retry") }).isVisible()) && like("Workspace.banner.payment_failed.title").test(top), note: "Files past due, payment-failed banner" };
   });
   await step("Retry: the card is declined", async () => {
-    const r = await fetch(`${PLATFORM}/v1/__mock/fail-next-payment`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ count: 1 }) });
+    const r = await mock.control("admin", "/v1/__mock/fail-next-payment", { body: { count: 1 } });
     if (!r.ok) throw new Error(`fail-next-payment -> ${r.status}`);
     await line(page, "files").getByRole("button", { name: m("Billing.lines.retry") }).click();
     await confirm(page, m("Billing.confirm.retry"));

@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { apiUrl, WORKSPACE } from "./suite.mjs";
+import { mockControlRequest } from "./mock-control.mjs";
 
 // Resetting or moving the clock rebuilds EVERY app's data, so two sessions running flows at once
 // would wipe each other's state mid-walk. A flow run holds local-dev/logs/flow.lock while it runs;
@@ -12,12 +13,8 @@ const STALE_MS = 15 * 60 * 1000;
 
 const BASE = `${apiUrl("sos")}/__mock`;
 
-async function call(method, p, body, token) {
-  const res = await fetch(BASE + p, {
-    method,
-    headers: { ...(body ? { "Content-Type": "application/json" } : {}), ...(token ? { authorization: `Bearer ${token}` } : {}) },
-    body: body ? JSON.stringify(body) : undefined,
-  });
+async function call(method, p, body) {
+  const res = method === "GET" ? await fetch(BASE + p) : await mockControlRequest({ sosApi: apiUrl("sos"), url: BASE + p, method, body });
   const json = await res.json().catch(() => ({}));
   if (!res.ok) throw new Error(`${method} ${p} -> ${res.status} ${json.message || ""}`);
   return json.data;
@@ -52,20 +49,17 @@ export const mock = {
   },
   // The Website Manager's seed without Claude's suggestions (D-038), for flows that count the gaps.
   async withoutSuggestions() {
-    const res = await fetch(`${apiUrl("wm")}/v2/__mock/without-suggestions`, { method: "POST" });
+    const res = await mock.control("wm", "/v2/__mock/without-suggestions");
     if (!res.ok) throw new Error(`without-suggestions -> ${res.status}`);
   },
   status: () => call("GET", "/status"),
+  control: (app, endpoint, options = {}) => mockControlRequest({
+    sosApi: apiUrl("sos"), url: apiUrl(app) + endpoint, target: app === "wm" ? "wm" : "admin", ...options,
+  }),
   async reset() {
     const before = (await call("GET", "/status")).generation;
-    let token;
     const fixtures = process.env.MOCK_RESET_TEST_ACCOUNTS === "1";
-    if (fixtures) {
-      const response = await fetch(`${apiUrl("sos")}/api/auth/login`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: "mona.adel@orgtik.test", password: "Local@2026" }) });
-      if (!response.ok) throw new Error("Preview fixture administrator could not sign in");
-      token = (await response.json()).data.tokens.accessToken;
-    }
-    await call("POST", "/reset", fixtures ? { fixtures: true } : undefined, token);
+    await call("POST", "/reset", fixtures ? { fixtures: true } : undefined);
     for (let i = 0; i < 60; i++) {
       await new Promise((r) => setTimeout(r, 150));
       if ((await call("GET", "/status").catch(() => ({ generation: before }))).generation > before) return;
