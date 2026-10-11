@@ -5,7 +5,7 @@
 import type { EntryContent, EntryType, LayoutSection } from "@/store/api";
 import { BLOCKS, BRIEF, type Department, type Node } from "./caseStudySchema";
 import { cmsLabelKey, cmsNodeLabels } from "./cmsLabels";
-import sectionMap from "../../../program/cms/sections.json";
+import sectionMap from "@/lib/cms-sections.json";
 
 export type Area =
   | "pages"
@@ -412,9 +412,16 @@ export const AREAS: Record<Area, EntryType[]> = {
 };
 
 export const isArea = (a: string): a is Area => a in AREAS;
+// These exact IDs come from the native published-example generator and may already be persisted.
+// Resolving them keeps their URLs and history intact; the API still checks the actual record type.
+const publishedSampleTypes = new Set<EntryType>([
+  "page", "global", "strings", "serviceFamily", "service", "softwareModule",
+  "caseStudy", "article", "roadmapItem", "review",
+]);
 export const typeOfId = (id: string): ContentType | undefined =>
   Object.values(TYPES).find((t) =>
-    id.startsWith(`${t.idPrefix}_`) || id === `demo_published_${t.key}`,
+    id.startsWith(`${t.idPrefix}_`) ||
+    (publishedSampleTypes.has(t.key) && id === `demo_published_${t.key}`),
   );
 
 /** Every label key the schemas use, for the messages parity check. */

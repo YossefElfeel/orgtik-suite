@@ -2171,6 +2171,22 @@
     "taskCancelled": "Annullato",
     "taskUnavailable": "Stato attività non disponibile",
     "projectSwitchFailed": "Impossibile selezionare questo progetto. Riprova con l’accesso attuale.",
-    "projectUnavailable": "Questo progetto non è visibile con il tuo accesso attuale."
+    "projectUnavailable": "Questo progetto non è visibile con il tuo accesso attuale.",
+    "pendingCommands": "Modifiche non confermate",
+    "pendingCommandsBody": "Una risposta è andata persa. Verifica la modifica originale prima di avviarne un’altra. Il recupero usa la stessa richiesta salvata e i tuoi accessi attuali.",
+    "recoverCommand": "Verifica la modifica originale",
+    "recoveryDenied": "Non è stato possibile confermare la modifica originale. Verifica gli accessi attuali e il record di origine, poi riprova. La richiesta salvata viene conservata.",
+    "recoverFirst": "Verifica la modifica originale non confermata prima di inviare dettagli diversi.",
+    "utmSettings": "Impostazioni UTM",
+    "marketingConfiguration": "Configurazione marketing",
+    "utmHint": "Salva le etichette predefinite del progetto per i link condivisi. Queste impostazioni non registrano visite né inviano eventi di tracciamento.",
+    "utmSource": "Sorgente UTM",
+    "utmMedium": "Mezzo UTM",
+    "utmCampaign": "Campagna UTM",
+    "utmLinkBuilder": "Crea un link con etichette",
+    "utmPageAddress": "Indirizzo della pagina",
+    "utmTaggedAddress": "Indirizzo con etichette",
+    "utmInvalidAddress": "Inserisci un indirizzo pubblico HTTP o HTTPS senza credenziali.",
+    "utmSavedDefaults": "L’indirizzo generato usa gli ultimi valori salvati e mantiene gli altri parametri e il frammento della pagina."
   }
 }

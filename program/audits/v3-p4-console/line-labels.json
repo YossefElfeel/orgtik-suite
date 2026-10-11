@@ -1,0 +1,15 @@
+{
+  "scope": "Native ordinary single-subscription quote/confirm with current server-priced amount",
+  "checks": [
+    {
+      "name": "Actual eligible per-user subscription available",
+      "pass": true
+    },
+    {
+      "name": "Native line selector shows human-readable tool and plan names",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "completed": true
+}

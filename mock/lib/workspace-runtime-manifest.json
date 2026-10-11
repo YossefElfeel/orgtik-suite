@@ -354,6 +354,7 @@
       "apps/wm/seed/website-alignment.json",
       "apps/wm/seed/website.json",
       "apps/wm/state-codec.js",
+      "apps/wm/studio.js",
       "apps/wm/suggestions.js",
       "apps/wm/users.js",
       "lib/accounts.js",

@@ -44,6 +44,7 @@ import { useMarketingRoles } from "@/lib/permissions";
 import { ProjectSwitcher } from "./ProjectSwitcher";
 import ProjectRouteGate from "./ProjectRouteGate";
 import MarketingScopeGate from "@/providers/MarketingScopeGate";
+import PendingMarketingCommands from "./PendingMarketingCommands";
 export function SuiteFrame({ children }: { children: ReactNode }) {
   const t = useTranslations("Shell"),
     tv = useTranslations("MarketingV3"),
@@ -197,6 +198,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
         <div className="mb-5">
           <ProjectSwitcher />
         </div>
+        <PendingMarketingCommands />
         <ProjectRouteGate>{children}</ProjectRouteGate>
       </MarketingScopeGate>
     </SharedSuiteFrame>

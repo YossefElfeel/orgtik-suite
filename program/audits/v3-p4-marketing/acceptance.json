@@ -1,0 +1,2451 @@
+{
+  "scope": "P4 Marketing native bounded prototype acceptance",
+  "sourceCommit": "7282bfccdb6cc8b20f50f05876e5388ae0afd8f7",
+  "sourceBranch": "feat/suite-v3-marketing",
+  "baseMain": "0eda4a866fef67456cdb0492a30ed3be2381c6be",
+  "sourceCheckpoints": {
+    "broadMatrix": "81ba1196bb9791277e889f9b30db339a2d1688d3",
+    "final": "7282bfccdb6cc8b20f50f05876e5388ae0afd8f7"
+  },
+  "matrixCoverage": {
+    "broad": "22 routes × EN/AR × light/dark × 1440/390/768/1024 = 352 captures; source81ba119",
+    "finalChanged": "Six settings/Admin routes × the same16variants =96captures; source7282bfc; remaining render markup unchanged from broad source"
+  },
+  "ownedRealm": "presentation-Qnu9VG (final); presentation-DSYw9o (broad/recovery)",
+  "frozenBackendNow": "2026-10-07T09:00:00.000Z",
+  "browserAssertions": 1927,
+  "acceptedCaptures": 504,
+  "nativeDomainTests": 19,
+  "clientCommandTests": 3,
+  "reportSummaries": [
+    {
+      "name": "functional",
+      "file": "program/audits/v3-p4-marketing/functional-report.json",
+      "checks": 15,
+      "captures": [
+        "actual-brand-context",
+        "actual-rtl-email-designer",
+        "actual-sender-domain-self-test",
+        "actual-social-inbox-reply",
+        "actual-brand-writing-draft",
+        "actual-canonical-crm-consent",
+        "actual-approved-campaign-delivery",
+        "actual-journey-approval-denial",
+        "actual-journey-task-reference",
+        "actual-native-crm-attribution-result"
+      ],
+      "scope": "Actual current Marketing UI callbacks and native CRM/Tasks transactions in owned memory fixture"
+    },
+    {
+      "name": "states",
+      "file": "program/audits/v3-p4-marketing/states-report.json",
+      "checks": 8,
+      "captures": [
+        "state-loading",
+        "state-success",
+        "state-error",
+        "state-read-only",
+        "state-no-access-project",
+        "state-empty-first-use"
+      ],
+      "scope": "Six ordinary Marketing states with actual actor/access/data and bounded transport faults"
+    },
+    {
+      "name": "admin",
+      "file": "program/audits/v3-p4-marketing/admin-report.json",
+      "checks": 34,
+      "captures": [
+        "final-admin-overview-en-1440",
+        "final-admin-members-en-1440",
+        "final-admin-roles-en-1440",
+        "final-admin-settings-en-1440",
+        "final-admin-connections-en-1440",
+        "final-admin-import-export-en-1440",
+        "final-admin-audit-en-1440",
+        "final-admin-billing-en-1440",
+        "final-admin-overview-ar-1440",
+        "final-admin-members-ar-1440",
+        "final-admin-roles-ar-1440",
+        "final-admin-settings-ar-1440",
+        "final-admin-connections-ar-1440",
+        "final-admin-import-export-ar-1440",
+        "final-admin-audit-ar-1440",
+        "final-admin-billing-ar-1440"
+      ],
+      "scope": "All eight ordinary Marketing Admin sections in native workspace authority"
+    },
+    {
+      "name": "smoke",
+      "file": "program/audits/v3-p4-marketing/smoke-report.json",
+      "checks": 21,
+      "captures": [
+        "dashboard",
+        "settings/brand",
+        "settings/senders",
+        "email-designer",
+        "social-inbox",
+        "queue",
+        "journeys",
+        "writing",
+        "our-audience/contacts",
+        "admin"
+      ],
+      "scope": "Current ordinary Marketing routes, owned offset 900 memory fixture"
+    },
+    {
+      "name": "matrix",
+      "file": "program/audits/v3-p4-marketing/matrix-report.json",
+      "checks": 1408,
+      "captures": [
+        "dashboard-en-light-1440",
+        "calendar-en-light-1440",
+        "posts-en-light-1440",
+        "queue-en-light-1440",
+        "campaigns-en-light-1440",
+        "gallery-en-light-1440",
+        "labels-en-light-1440",
+        "integrations-en-light-1440",
+        "our-reports-en-light-1440",
+        "competitors-reports-en-light-1440",
+        "our-audience-en-light-1440",
+        "our-audience-contacts-en-light-1440",
+        "settings-en-light-1440",
+        "settings-teams-en-light-1440",
+        "settings-brand-en-light-1440",
+        "settings-senders-en-light-1440",
+        "email-designer-en-light-1440",
+        "social-inbox-en-light-1440",
+        "journeys-en-light-1440",
+        "writing-en-light-1440",
+        "admin-en-light-1440",
+        "admin-connections-en-light-1440",
+        "dashboard-en-light-390",
+        "calendar-en-light-390",
+        "posts-en-light-390",
+        "queue-en-light-390",
+        "campaigns-en-light-390",
+        "gallery-en-light-390",
+        "labels-en-light-390",
+        "integrations-en-light-390",
+        "our-reports-en-light-390",
+        "competitors-reports-en-light-390",
+        "our-audience-en-light-390",
+        "our-audience-contacts-en-light-390",
+        "settings-en-light-390",
+        "settings-teams-en-light-390",
+        "settings-brand-en-light-390",
+        "settings-senders-en-light-390",
+        "email-designer-en-light-390",
+        "social-inbox-en-light-390",
+        "journeys-en-light-390",
+        "writing-en-light-390",
+        "admin-en-light-390",
+        "admin-connections-en-light-390",
+        "dashboard-en-light-768",
+        "calendar-en-light-768",
+        "posts-en-light-768",
+        "queue-en-light-768",
+        "campaigns-en-light-768",
+        "gallery-en-light-768",
+        "labels-en-light-768",
+        "integrations-en-light-768",
+        "our-reports-en-light-768",
+        "competitors-reports-en-light-768",
+        "our-audience-en-light-768",
+        "our-audience-contacts-en-light-768",
+        "settings-en-light-768",
+        "settings-teams-en-light-768",
+        "settings-brand-en-light-768",
+        "settings-senders-en-light-768",
+        "email-designer-en-light-768",
+        "social-inbox-en-light-768",
+        "journeys-en-light-768",
+        "writing-en-light-768",
+        "admin-en-light-768",
+        "admin-connections-en-light-768",
+        "dashboard-en-light-1024",
+        "calendar-en-light-1024",
+        "posts-en-light-1024",
+        "queue-en-light-1024",
+        "campaigns-en-light-1024",
+        "gallery-en-light-1024",
+        "labels-en-light-1024",
+        "integrations-en-light-1024",
+        "our-reports-en-light-1024",
+        "competitors-reports-en-light-1024",
+        "our-audience-en-light-1024",
+        "our-audience-contacts-en-light-1024",
+        "settings-en-light-1024",
+        "settings-teams-en-light-1024",
+        "settings-brand-en-light-1024",
+        "settings-senders-en-light-1024",
+        "email-designer-en-light-1024",
+        "social-inbox-en-light-1024",
+        "journeys-en-light-1024",
+        "writing-en-light-1024",
+        "admin-en-light-1024",
+        "admin-connections-en-light-1024",
+        "dashboard-en-dark-1440",
+        "calendar-en-dark-1440",
+        "posts-en-dark-1440",
+        "queue-en-dark-1440",
+        "campaigns-en-dark-1440",
+        "gallery-en-dark-1440",
+        "labels-en-dark-1440",
+        "integrations-en-dark-1440",
+        "our-reports-en-dark-1440",
+        "competitors-reports-en-dark-1440",
+        "our-audience-en-dark-1440",
+        "our-audience-contacts-en-dark-1440",
+        "settings-en-dark-1440",
+        "settings-teams-en-dark-1440",
+        "settings-brand-en-dark-1440",
+        "settings-senders-en-dark-1440",
+        "email-designer-en-dark-1440",
+        "social-inbox-en-dark-1440",
+        "journeys-en-dark-1440",
+        "writing-en-dark-1440",
+        "admin-en-dark-1440",
+        "admin-connections-en-dark-1440",
+        "dashboard-en-dark-390",
+        "calendar-en-dark-390",
+        "posts-en-dark-390",
+        "queue-en-dark-390",
+        "campaigns-en-dark-390",
+        "gallery-en-dark-390",
+        "labels-en-dark-390",
+        "integrations-en-dark-390",
+        "our-reports-en-dark-390",
+        "competitors-reports-en-dark-390",
+        "our-audience-en-dark-390",
+        "our-audience-contacts-en-dark-390",
+        "settings-en-dark-390",
+        "settings-teams-en-dark-390",
+        "settings-brand-en-dark-390",
+        "settings-senders-en-dark-390",
+        "email-designer-en-dark-390",
+        "social-inbox-en-dark-390",
+        "journeys-en-dark-390",
+        "writing-en-dark-390",
+        "admin-en-dark-390",
+        "admin-connections-en-dark-390",
+        "dashboard-en-dark-768",
+        "calendar-en-dark-768",
+        "posts-en-dark-768",
+        "queue-en-dark-768",
+        "campaigns-en-dark-768",
+        "gallery-en-dark-768",
+        "labels-en-dark-768",
+        "integrations-en-dark-768",
+        "our-reports-en-dark-768",
+        "competitors-reports-en-dark-768",
+        "our-audience-en-dark-768",
+        "our-audience-contacts-en-dark-768",
+        "settings-en-dark-768",
+        "settings-teams-en-dark-768",
+        "settings-brand-en-dark-768",
+        "settings-senders-en-dark-768",
+        "email-designer-en-dark-768",
+        "social-inbox-en-dark-768",
+        "journeys-en-dark-768",
+        "writing-en-dark-768",
+        "admin-en-dark-768",
+        "admin-connections-en-dark-768",
+        "dashboard-en-dark-1024",
+        "calendar-en-dark-1024",
+        "posts-en-dark-1024",
+        "queue-en-dark-1024",
+        "campaigns-en-dark-1024",
+        "gallery-en-dark-1024",
+        "labels-en-dark-1024",
+        "integrations-en-dark-1024",
+        "our-reports-en-dark-1024",
+        "competitors-reports-en-dark-1024",
+        "our-audience-en-dark-1024",
+        "our-audience-contacts-en-dark-1024",
+        "settings-en-dark-1024",
+        "settings-teams-en-dark-1024",
+        "settings-brand-en-dark-1024",
+        "settings-senders-en-dark-1024",
+        "email-designer-en-dark-1024",
+        "social-inbox-en-dark-1024",
+        "journeys-en-dark-1024",
+        "writing-en-dark-1024",
+        "admin-en-dark-1024",
+        "admin-connections-en-dark-1024",
+        "dashboard-ar-light-1440",
+        "calendar-ar-light-1440",
+        "posts-ar-light-1440",
+        "queue-ar-light-1440",
+        "campaigns-ar-light-1440",
+        "gallery-ar-light-1440",
+        "labels-ar-light-1440",
+        "integrations-ar-light-1440",
+        "our-reports-ar-light-1440",
+        "competitors-reports-ar-light-1440",
+        "our-audience-ar-light-1440",
+        "our-audience-contacts-ar-light-1440",
+        "settings-ar-light-1440",
+        "settings-teams-ar-light-1440",
+        "settings-brand-ar-light-1440",
+        "settings-senders-ar-light-1440",
+        "email-designer-ar-light-1440",
+        "social-inbox-ar-light-1440",
+        "journeys-ar-light-1440",
+        "writing-ar-light-1440",
+        "admin-ar-light-1440",
+        "admin-connections-ar-light-1440",
+        "dashboard-ar-light-390",
+        "calendar-ar-light-390",
+        "posts-ar-light-390",
+        "queue-ar-light-390",
+        "campaigns-ar-light-390",
+        "gallery-ar-light-390",
+        "labels-ar-light-390",
+        "integrations-ar-light-390",
+        "our-reports-ar-light-390",
+        "competitors-reports-ar-light-390",
+        "our-audience-ar-light-390",
+        "our-audience-contacts-ar-light-390",
+        "settings-ar-light-390",
+        "settings-teams-ar-light-390",
+        "settings-brand-ar-light-390",
+        "settings-senders-ar-light-390",
+        "email-designer-ar-light-390",
+        "social-inbox-ar-light-390",
+        "journeys-ar-light-390",
+        "writing-ar-light-390",
+        "admin-ar-light-390",
+        "admin-connections-ar-light-390",
+        "dashboard-ar-light-768",
+        "calendar-ar-light-768",
+        "posts-ar-light-768",
+        "queue-ar-light-768",
+        "campaigns-ar-light-768",
+        "gallery-ar-light-768",
+        "labels-ar-light-768",
+        "integrations-ar-light-768",
+        "our-reports-ar-light-768",
+        "competitors-reports-ar-light-768",
+        "our-audience-ar-light-768",
+        "our-audience-contacts-ar-light-768",
+        "settings-ar-light-768",
+        "settings-teams-ar-light-768",
+        "settings-brand-ar-light-768",
+        "settings-senders-ar-light-768",
+        "email-designer-ar-light-768",
+        "social-inbox-ar-light-768",
+        "journeys-ar-light-768",
+        "writing-ar-light-768",
+        "admin-ar-light-768",
+        "admin-connections-ar-light-768",
+        "dashboard-ar-light-1024",
+        "calendar-ar-light-1024",
+        "posts-ar-light-1024",
+        "queue-ar-light-1024",
+        "campaigns-ar-light-1024",
+        "gallery-ar-light-1024",
+        "labels-ar-light-1024",
+        "integrations-ar-light-1024",
+        "our-reports-ar-light-1024",
+        "competitors-reports-ar-light-1024",
+        "our-audience-ar-light-1024",
+        "our-audience-contacts-ar-light-1024",
+        "settings-ar-light-1024",
+        "settings-teams-ar-light-1024",
+        "settings-brand-ar-light-1024",
+        "settings-senders-ar-light-1024",
+        "email-designer-ar-light-1024",
+        "social-inbox-ar-light-1024",
+        "journeys-ar-light-1024",
+        "writing-ar-light-1024",
+        "admin-ar-light-1024",
+        "admin-connections-ar-light-1024",
+        "dashboard-ar-dark-1440",
+        "calendar-ar-dark-1440",
+        "posts-ar-dark-1440",
+        "queue-ar-dark-1440",
+        "campaigns-ar-dark-1440",
+        "gallery-ar-dark-1440",
+        "labels-ar-dark-1440",
+        "integrations-ar-dark-1440",
+        "our-reports-ar-dark-1440",
+        "competitors-reports-ar-dark-1440",
+        "our-audience-ar-dark-1440",
+        "our-audience-contacts-ar-dark-1440",
+        "settings-ar-dark-1440",
+        "settings-teams-ar-dark-1440",
+        "settings-brand-ar-dark-1440",
+        "settings-senders-ar-dark-1440",
+        "email-designer-ar-dark-1440",
+        "social-inbox-ar-dark-1440",
+        "journeys-ar-dark-1440",
+        "writing-ar-dark-1440",
+        "admin-ar-dark-1440",
+        "admin-connections-ar-dark-1440",
+        "dashboard-ar-dark-390",
+        "calendar-ar-dark-390",
+        "posts-ar-dark-390",
+        "queue-ar-dark-390",
+        "campaigns-ar-dark-390",
+        "gallery-ar-dark-390",
+        "labels-ar-dark-390",
+        "integrations-ar-dark-390",
+        "our-reports-ar-dark-390",
+        "competitors-reports-ar-dark-390",
+        "our-audience-ar-dark-390",
+        "our-audience-contacts-ar-dark-390",
+        "settings-ar-dark-390",
+        "settings-teams-ar-dark-390",
+        "settings-brand-ar-dark-390",
+        "settings-senders-ar-dark-390",
+        "email-designer-ar-dark-390",
+        "social-inbox-ar-dark-390",
+        "journeys-ar-dark-390",
+        "writing-ar-dark-390",
+        "admin-ar-dark-390",
+        "admin-connections-ar-dark-390",
+        "dashboard-ar-dark-768",
+        "calendar-ar-dark-768",
+        "posts-ar-dark-768",
+        "queue-ar-dark-768",
+        "campaigns-ar-dark-768",
+        "gallery-ar-dark-768",
+        "labels-ar-dark-768",
+        "integrations-ar-dark-768",
+        "our-reports-ar-dark-768",
+        "competitors-reports-ar-dark-768",
+        "our-audience-ar-dark-768",
+        "our-audience-contacts-ar-dark-768",
+        "settings-ar-dark-768",
+        "settings-teams-ar-dark-768",
+        "settings-brand-ar-dark-768",
+        "settings-senders-ar-dark-768",
+        "email-designer-ar-dark-768",
+        "social-inbox-ar-dark-768",
+        "journeys-ar-dark-768",
+        "writing-ar-dark-768",
+        "admin-ar-dark-768",
+        "admin-connections-ar-dark-768",
+        "dashboard-ar-dark-1024",
+        "calendar-ar-dark-1024",
+        "posts-ar-dark-1024",
+        "queue-ar-dark-1024",
+        "campaigns-ar-dark-1024",
+        "gallery-ar-dark-1024",
+        "labels-ar-dark-1024",
+        "integrations-ar-dark-1024",
+        "our-reports-ar-dark-1024",
+        "competitors-reports-ar-dark-1024",
+        "our-audience-ar-dark-1024",
+        "our-audience-contacts-ar-dark-1024",
+        "settings-ar-dark-1024",
+        "settings-teams-ar-dark-1024",
+        "settings-brand-ar-dark-1024",
+        "settings-senders-ar-dark-1024",
+        "email-designer-ar-dark-1024",
+        "social-inbox-ar-dark-1024",
+        "journeys-ar-dark-1024",
+        "writing-ar-dark-1024",
+        "admin-ar-dark-1024",
+        "admin-connections-ar-dark-1024"
+      ],
+      "scope": "Settled production Marketing ordinary routes, EN/AR, both themes, 1440/390/768/1024"
+    },
+    {
+      "name": "queue",
+      "file": "program/audits/v3-p4-marketing/queue-report.json",
+      "checks": 8,
+      "captures": [
+        "actual-native-queue-pointer-order",
+        "actual-native-queue-scheduled",
+        "actual-native-queue-draft-alternative"
+      ],
+      "scope": "Actual ordinary queue drag, keyboard alternative and native target scheduling"
+    },
+    {
+      "name": "recovery",
+      "file": "program/audits/v3-p4-marketing/recovery-report.json",
+      "checks": 8,
+      "captures": [
+        "recovery-uncertain",
+        "recovery-changed-payload-refused",
+        "recovery-confirmed"
+      ],
+      "scope": "Native accepted-but-lost response recovery through ordinary Marketing controls"
+    },
+    {
+      "name": "recovery-authority",
+      "file": "program/audits/v3-p4-marketing/recovery-authority-report.json",
+      "checks": 7,
+      "captures": [
+        "recovery-current-role-denied",
+        "recovery-role-restored-original"
+      ],
+      "scope": "Actual current role loss before prior receipt recovery, with uncertain request retained"
+    },
+    {
+      "name": "recovery-visual",
+      "file": "program/audits/v3-p4-marketing/recovery-visual-report.json",
+      "checks": 21,
+      "captures": [
+        "recovery-final-en-light-1440",
+        "recovery-final-en-light-390",
+        "recovery-final-ar-dark-1440",
+        "recovery-final-ar-dark-390"
+      ],
+      "scope": "Current saved-command recovery EN/AR, desktop/mobile, light/dark; accepted self-test response lost"
+    },
+    {
+      "name": "utm",
+      "file": "program/audits/v3-p4-marketing/utm-report.json",
+      "checks": 13,
+      "captures": [
+        "actual-native-utm-link",
+        "actual-native-admin-configuration"
+      ],
+      "scope": "Adopted native current-project UTM settings and Admin configuration destinations"
+    },
+    {
+      "name": "matrix-utm",
+      "file": "program/audits/v3-p4-marketing/matrix-utm-report.json",
+      "checks": 384,
+      "captures": [
+        "settings-en-light-1440",
+        "settings-teams-en-light-1440",
+        "settings-brand-en-light-1440",
+        "settings-senders-en-light-1440",
+        "settings-utm-en-light-1440",
+        "admin-settings-en-light-1440",
+        "settings-en-light-390",
+        "settings-teams-en-light-390",
+        "settings-brand-en-light-390",
+        "settings-senders-en-light-390",
+        "settings-utm-en-light-390",
+        "admin-settings-en-light-390",
+        "settings-en-light-768",
+        "settings-teams-en-light-768",
+        "settings-brand-en-light-768",
+        "settings-senders-en-light-768",
+        "settings-utm-en-light-768",
+        "admin-settings-en-light-768",
+        "settings-en-light-1024",
+        "settings-teams-en-light-1024",
+        "settings-brand-en-light-1024",
+        "settings-senders-en-light-1024",
+        "settings-utm-en-light-1024",
+        "admin-settings-en-light-1024",
+        "settings-en-dark-1440",
+        "settings-teams-en-dark-1440",
+        "settings-brand-en-dark-1440",
+        "settings-senders-en-dark-1440",
+        "settings-utm-en-dark-1440",
+        "admin-settings-en-dark-1440",
+        "settings-en-dark-390",
+        "settings-teams-en-dark-390",
+        "settings-brand-en-dark-390",
+        "settings-senders-en-dark-390",
+        "settings-utm-en-dark-390",
+        "admin-settings-en-dark-390",
+        "settings-en-dark-768",
+        "settings-teams-en-dark-768",
+        "settings-brand-en-dark-768",
+        "settings-senders-en-dark-768",
+        "settings-utm-en-dark-768",
+        "admin-settings-en-dark-768",
+        "settings-en-dark-1024",
+        "settings-teams-en-dark-1024",
+        "settings-brand-en-dark-1024",
+        "settings-senders-en-dark-1024",
+        "settings-utm-en-dark-1024",
+        "admin-settings-en-dark-1024",
+        "settings-ar-light-1440",
+        "settings-teams-ar-light-1440",
+        "settings-brand-ar-light-1440",
+        "settings-senders-ar-light-1440",
+        "settings-utm-ar-light-1440",
+        "admin-settings-ar-light-1440",
+        "settings-ar-light-390",
+        "settings-teams-ar-light-390",
+        "settings-brand-ar-light-390",
+        "settings-senders-ar-light-390",
+        "settings-utm-ar-light-390",
+        "admin-settings-ar-light-390",
+        "settings-ar-light-768",
+        "settings-teams-ar-light-768",
+        "settings-brand-ar-light-768",
+        "settings-senders-ar-light-768",
+        "settings-utm-ar-light-768",
+        "admin-settings-ar-light-768",
+        "settings-ar-light-1024",
+        "settings-teams-ar-light-1024",
+        "settings-brand-ar-light-1024",
+        "settings-senders-ar-light-1024",
+        "settings-utm-ar-light-1024",
+        "admin-settings-ar-light-1024",
+        "settings-ar-dark-1440",
+        "settings-teams-ar-dark-1440",
+        "settings-brand-ar-dark-1440",
+        "settings-senders-ar-dark-1440",
+        "settings-utm-ar-dark-1440",
+        "admin-settings-ar-dark-1440",
+        "settings-ar-dark-390",
+        "settings-teams-ar-dark-390",
+        "settings-brand-ar-dark-390",
+        "settings-senders-ar-dark-390",
+        "settings-utm-ar-dark-390",
+        "admin-settings-ar-dark-390",
+        "settings-ar-dark-768",
+        "settings-teams-ar-dark-768",
+        "settings-brand-ar-dark-768",
+        "settings-senders-ar-dark-768",
+        "settings-utm-ar-dark-768",
+        "admin-settings-ar-dark-768",
+        "settings-ar-dark-1024",
+        "settings-teams-ar-dark-1024",
+        "settings-brand-ar-dark-1024",
+        "settings-senders-ar-dark-1024",
+        "settings-utm-ar-dark-1024",
+        "admin-settings-ar-dark-1024"
+      ],
+      "scope": "Final UTM/settings/Admin links on production Marketing, EN/AR, both themes, 1440/390/768/1024"
+    }
+  ],
+  "acceptedCaptureFiles": [
+    "actual-approved-campaign-delivery.png",
+    "actual-brand-context.png",
+    "actual-brand-writing-draft.png",
+    "actual-canonical-crm-consent.png",
+    "actual-journey-approval-denial.png",
+    "actual-journey-task-reference.png",
+    "actual-native-admin-configuration.png",
+    "actual-native-crm-attribution-result.png",
+    "actual-native-queue-draft-alternative.png",
+    "actual-native-queue-pointer-order.png",
+    "actual-native-queue-scheduled.png",
+    "actual-native-utm-link.png",
+    "actual-rtl-email-designer.png",
+    "actual-sender-domain-self-test.png",
+    "actual-social-inbox-reply.png",
+    "final-admin-audit-ar-1440.png",
+    "final-admin-audit-en-1440.png",
+    "final-admin-billing-ar-1440.png",
+    "final-admin-billing-en-1440.png",
+    "final-admin-connections-ar-1440.png",
+    "final-admin-connections-en-1440.png",
+    "final-admin-import-export-ar-1440.png",
+    "final-admin-import-export-en-1440.png",
+    "final-admin-members-ar-1440.png",
+    "final-admin-members-en-1440.png",
+    "final-admin-overview-ar-1440.png",
+    "final-admin-overview-en-1440.png",
+    "final-admin-roles-ar-1440.png",
+    "final-admin-roles-en-1440.png",
+    "final-admin-settings-ar-1440.png",
+    "final-admin-settings-en-1440.png",
+    "matrix-admin-ar-dark-1024.png",
+    "matrix-admin-ar-dark-1440.png",
+    "matrix-admin-ar-dark-390.png",
+    "matrix-admin-ar-dark-768.png",
+    "matrix-admin-ar-light-1024.png",
+    "matrix-admin-ar-light-1440.png",
+    "matrix-admin-ar-light-390.png",
+    "matrix-admin-ar-light-768.png",
+    "matrix-admin-connections-ar-dark-1024.png",
+    "matrix-admin-connections-ar-dark-1440.png",
+    "matrix-admin-connections-ar-dark-390.png",
+    "matrix-admin-connections-ar-dark-768.png",
+    "matrix-admin-connections-ar-light-1024.png",
+    "matrix-admin-connections-ar-light-1440.png",
+    "matrix-admin-connections-ar-light-390.png",
+    "matrix-admin-connections-ar-light-768.png",
+    "matrix-admin-connections-en-dark-1024.png",
+    "matrix-admin-connections-en-dark-1440.png",
+    "matrix-admin-connections-en-dark-390.png",
+    "matrix-admin-connections-en-dark-768.png",
+    "matrix-admin-connections-en-light-1024.png",
+    "matrix-admin-connections-en-light-1440.png",
+    "matrix-admin-connections-en-light-390.png",
+    "matrix-admin-connections-en-light-768.png",
+    "matrix-admin-en-dark-1024.png",
+    "matrix-admin-en-dark-1440.png",
+    "matrix-admin-en-dark-390.png",
+    "matrix-admin-en-dark-768.png",
+    "matrix-admin-en-light-1024.png",
+    "matrix-admin-en-light-1440.png",
+    "matrix-admin-en-light-390.png",
+    "matrix-admin-en-light-768.png",
+    "matrix-calendar-ar-dark-1024.png",
+    "matrix-calendar-ar-dark-1440.png",
+    "matrix-calendar-ar-dark-390.png",
+    "matrix-calendar-ar-dark-768.png",
+    "matrix-calendar-ar-light-1024.png",
+    "matrix-calendar-ar-light-1440.png",
+    "matrix-calendar-ar-light-390.png",
+    "matrix-calendar-ar-light-768.png",
+    "matrix-calendar-en-dark-1024.png",
+    "matrix-calendar-en-dark-1440.png",
+    "matrix-calendar-en-dark-390.png",
+    "matrix-calendar-en-dark-768.png",
+    "matrix-calendar-en-light-1024.png",
+    "matrix-calendar-en-light-1440.png",
+    "matrix-calendar-en-light-390.png",
+    "matrix-calendar-en-light-768.png",
+    "matrix-campaigns-ar-dark-1024.png",
+    "matrix-campaigns-ar-dark-1440.png",
+    "matrix-campaigns-ar-dark-390.png",
+    "matrix-campaigns-ar-dark-768.png",
+    "matrix-campaigns-ar-light-1024.png",
+    "matrix-campaigns-ar-light-1440.png",
+    "matrix-campaigns-ar-light-390.png",
+    "matrix-campaigns-ar-light-768.png",
+    "matrix-campaigns-en-dark-1024.png",
+    "matrix-campaigns-en-dark-1440.png",
+    "matrix-campaigns-en-dark-390.png",
+    "matrix-campaigns-en-dark-768.png",
+    "matrix-campaigns-en-light-1024.png",
+    "matrix-campaigns-en-light-1440.png",
+    "matrix-campaigns-en-light-390.png",
+    "matrix-campaigns-en-light-768.png",
+    "matrix-competitors-reports-ar-dark-1024.png",
+    "matrix-competitors-reports-ar-dark-1440.png",
+    "matrix-competitors-reports-ar-dark-390.png",
+    "matrix-competitors-reports-ar-dark-768.png",
+    "matrix-competitors-reports-ar-light-1024.png",
+    "matrix-competitors-reports-ar-light-1440.png",
+    "matrix-competitors-reports-ar-light-390.png",
+    "matrix-competitors-reports-ar-light-768.png",
+    "matrix-competitors-reports-en-dark-1024.png",
+    "matrix-competitors-reports-en-dark-1440.png",
+    "matrix-competitors-reports-en-dark-390.png",
+    "matrix-competitors-reports-en-dark-768.png",
+    "matrix-competitors-reports-en-light-1024.png",
+    "matrix-competitors-reports-en-light-1440.png",
+    "matrix-competitors-reports-en-light-390.png",
+    "matrix-competitors-reports-en-light-768.png",
+    "matrix-dashboard-ar-dark-1024.png",
+    "matrix-dashboard-ar-dark-1440.png",
+    "matrix-dashboard-ar-dark-390.png",
+    "matrix-dashboard-ar-dark-768.png",
+    "matrix-dashboard-ar-light-1024.png",
+    "matrix-dashboard-ar-light-1440.png",
+    "matrix-dashboard-ar-light-390.png",
+    "matrix-dashboard-ar-light-768.png",
+    "matrix-dashboard-en-dark-1024.png",
+    "matrix-dashboard-en-dark-1440.png",
+    "matrix-dashboard-en-dark-390.png",
+    "matrix-dashboard-en-dark-768.png",
+    "matrix-dashboard-en-light-1024.png",
+    "matrix-dashboard-en-light-1440.png",
+    "matrix-dashboard-en-light-390.png",
+    "matrix-dashboard-en-light-768.png",
+    "matrix-email-designer-ar-dark-1024.png",
+    "matrix-email-designer-ar-dark-1440.png",
+    "matrix-email-designer-ar-dark-390.png",
+    "matrix-email-designer-ar-dark-768.png",
+    "matrix-email-designer-ar-light-1024.png",
+    "matrix-email-designer-ar-light-1440.png",
+    "matrix-email-designer-ar-light-390.png",
+    "matrix-email-designer-ar-light-768.png",
+    "matrix-email-designer-en-dark-1024.png",
+    "matrix-email-designer-en-dark-1440.png",
+    "matrix-email-designer-en-dark-390.png",
+    "matrix-email-designer-en-dark-768.png",
+    "matrix-email-designer-en-light-1024.png",
+    "matrix-email-designer-en-light-1440.png",
+    "matrix-email-designer-en-light-390.png",
+    "matrix-email-designer-en-light-768.png",
+    "matrix-gallery-ar-dark-1024.png",
+    "matrix-gallery-ar-dark-1440.png",
+    "matrix-gallery-ar-dark-390.png",
+    "matrix-gallery-ar-dark-768.png",
+    "matrix-gallery-ar-light-1024.png",
+    "matrix-gallery-ar-light-1440.png",
+    "matrix-gallery-ar-light-390.png",
+    "matrix-gallery-ar-light-768.png",
+    "matrix-gallery-en-dark-1024.png",
+    "matrix-gallery-en-dark-1440.png",
+    "matrix-gallery-en-dark-390.png",
+    "matrix-gallery-en-dark-768.png",
+    "matrix-gallery-en-light-1024.png",
+    "matrix-gallery-en-light-1440.png",
+    "matrix-gallery-en-light-390.png",
+    "matrix-gallery-en-light-768.png",
+    "matrix-integrations-ar-dark-1024.png",
+    "matrix-integrations-ar-dark-1440.png",
+    "matrix-integrations-ar-dark-390.png",
+    "matrix-integrations-ar-dark-768.png",
+    "matrix-integrations-ar-light-1024.png",
+    "matrix-integrations-ar-light-1440.png",
+    "matrix-integrations-ar-light-390.png",
+    "matrix-integrations-ar-light-768.png",
+    "matrix-integrations-en-dark-1024.png",
+    "matrix-integrations-en-dark-1440.png",
+    "matrix-integrations-en-dark-390.png",
+    "matrix-integrations-en-dark-768.png",
+    "matrix-integrations-en-light-1024.png",
+    "matrix-integrations-en-light-1440.png",
+    "matrix-integrations-en-light-390.png",
+    "matrix-integrations-en-light-768.png",
+    "matrix-journeys-ar-dark-1024.png",
+    "matrix-journeys-ar-dark-1440.png",
+    "matrix-journeys-ar-dark-390.png",
+    "matrix-journeys-ar-dark-768.png",
+    "matrix-journeys-ar-light-1024.png",
+    "matrix-journeys-ar-light-1440.png",
+    "matrix-journeys-ar-light-390.png",
+    "matrix-journeys-ar-light-768.png",
+    "matrix-journeys-en-dark-1024.png",
+    "matrix-journeys-en-dark-1440.png",
+    "matrix-journeys-en-dark-390.png",
+    "matrix-journeys-en-dark-768.png",
+    "matrix-journeys-en-light-1024.png",
+    "matrix-journeys-en-light-1440.png",
+    "matrix-journeys-en-light-390.png",
+    "matrix-journeys-en-light-768.png",
+    "matrix-labels-ar-dark-1024.png",
+    "matrix-labels-ar-dark-1440.png",
+    "matrix-labels-ar-dark-390.png",
+    "matrix-labels-ar-dark-768.png",
+    "matrix-labels-ar-light-1024.png",
+    "matrix-labels-ar-light-1440.png",
+    "matrix-labels-ar-light-390.png",
+    "matrix-labels-ar-light-768.png",
+    "matrix-labels-en-dark-1024.png",
+    "matrix-labels-en-dark-1440.png",
+    "matrix-labels-en-dark-390.png",
+    "matrix-labels-en-dark-768.png",
+    "matrix-labels-en-light-1024.png",
+    "matrix-labels-en-light-1440.png",
+    "matrix-labels-en-light-390.png",
+    "matrix-labels-en-light-768.png",
+    "matrix-our-audience-ar-dark-1024.png",
+    "matrix-our-audience-ar-dark-1440.png",
+    "matrix-our-audience-ar-dark-390.png",
+    "matrix-our-audience-ar-dark-768.png",
+    "matrix-our-audience-ar-light-1024.png",
+    "matrix-our-audience-ar-light-1440.png",
+    "matrix-our-audience-ar-light-390.png",
+    "matrix-our-audience-ar-light-768.png",
+    "matrix-our-audience-contacts-ar-dark-1024.png",
+    "matrix-our-audience-contacts-ar-dark-1440.png",
+    "matrix-our-audience-contacts-ar-dark-390.png",
+    "matrix-our-audience-contacts-ar-dark-768.png",
+    "matrix-our-audience-contacts-ar-light-1024.png",
+    "matrix-our-audience-contacts-ar-light-1440.png",
+    "matrix-our-audience-contacts-ar-light-390.png",
+    "matrix-our-audience-contacts-ar-light-768.png",
+    "matrix-our-audience-contacts-en-dark-1024.png",
+    "matrix-our-audience-contacts-en-dark-1440.png",
+    "matrix-our-audience-contacts-en-dark-390.png",
+    "matrix-our-audience-contacts-en-dark-768.png",
+    "matrix-our-audience-contacts-en-light-1024.png",
+    "matrix-our-audience-contacts-en-light-1440.png",
+    "matrix-our-audience-contacts-en-light-390.png",
+    "matrix-our-audience-contacts-en-light-768.png",
+    "matrix-our-audience-en-dark-1024.png",
+    "matrix-our-audience-en-dark-1440.png",
+    "matrix-our-audience-en-dark-390.png",
+    "matrix-our-audience-en-dark-768.png",
+    "matrix-our-audience-en-light-1024.png",
+    "matrix-our-audience-en-light-1440.png",
+    "matrix-our-audience-en-light-390.png",
+    "matrix-our-audience-en-light-768.png",
+    "matrix-our-reports-ar-dark-1024.png",
+    "matrix-our-reports-ar-dark-1440.png",
+    "matrix-our-reports-ar-dark-390.png",
+    "matrix-our-reports-ar-dark-768.png",
+    "matrix-our-reports-ar-light-1024.png",
+    "matrix-our-reports-ar-light-1440.png",
+    "matrix-our-reports-ar-light-390.png",
+    "matrix-our-reports-ar-light-768.png",
+    "matrix-our-reports-en-dark-1024.png",
+    "matrix-our-reports-en-dark-1440.png",
+    "matrix-our-reports-en-dark-390.png",
+    "matrix-our-reports-en-dark-768.png",
+    "matrix-our-reports-en-light-1024.png",
+    "matrix-our-reports-en-light-1440.png",
+    "matrix-our-reports-en-light-390.png",
+    "matrix-our-reports-en-light-768.png",
+    "matrix-posts-ar-dark-1024.png",
+    "matrix-posts-ar-dark-1440.png",
+    "matrix-posts-ar-dark-390.png",
+    "matrix-posts-ar-dark-768.png",
+    "matrix-posts-ar-light-1024.png",
+    "matrix-posts-ar-light-1440.png",
+    "matrix-posts-ar-light-390.png",
+    "matrix-posts-ar-light-768.png",
+    "matrix-posts-en-dark-1024.png",
+    "matrix-posts-en-dark-1440.png",
+    "matrix-posts-en-dark-390.png",
+    "matrix-posts-en-dark-768.png",
+    "matrix-posts-en-light-1024.png",
+    "matrix-posts-en-light-1440.png",
+    "matrix-posts-en-light-390.png",
+    "matrix-posts-en-light-768.png",
+    "matrix-queue-ar-dark-1024.png",
+    "matrix-queue-ar-dark-1440.png",
+    "matrix-queue-ar-dark-390.png",
+    "matrix-queue-ar-dark-768.png",
+    "matrix-queue-ar-light-1024.png",
+    "matrix-queue-ar-light-1440.png",
+    "matrix-queue-ar-light-390.png",
+    "matrix-queue-ar-light-768.png",
+    "matrix-queue-en-dark-1024.png",
+    "matrix-queue-en-dark-1440.png",
+    "matrix-queue-en-dark-390.png",
+    "matrix-queue-en-dark-768.png",
+    "matrix-queue-en-light-1024.png",
+    "matrix-queue-en-light-1440.png",
+    "matrix-queue-en-light-390.png",
+    "matrix-queue-en-light-768.png",
+    "matrix-settings-ar-dark-1024.png",
+    "matrix-settings-ar-dark-1440.png",
+    "matrix-settings-ar-dark-390.png",
+    "matrix-settings-ar-dark-768.png",
+    "matrix-settings-ar-light-1024.png",
+    "matrix-settings-ar-light-1440.png",
+    "matrix-settings-ar-light-390.png",
+    "matrix-settings-ar-light-768.png",
+    "matrix-settings-brand-ar-dark-1024.png",
+    "matrix-settings-brand-ar-dark-1440.png",
+    "matrix-settings-brand-ar-dark-390.png",
+    "matrix-settings-brand-ar-dark-768.png",
+    "matrix-settings-brand-ar-light-1024.png",
+    "matrix-settings-brand-ar-light-1440.png",
+    "matrix-settings-brand-ar-light-390.png",
+    "matrix-settings-brand-ar-light-768.png",
+    "matrix-settings-brand-en-dark-1024.png",
+    "matrix-settings-brand-en-dark-1440.png",
+    "matrix-settings-brand-en-dark-390.png",
+    "matrix-settings-brand-en-dark-768.png",
+    "matrix-settings-brand-en-light-1024.png",
+    "matrix-settings-brand-en-light-1440.png",
+    "matrix-settings-brand-en-light-390.png",
+    "matrix-settings-brand-en-light-768.png",
+    "matrix-settings-en-dark-1024.png",
+    "matrix-settings-en-dark-1440.png",
+    "matrix-settings-en-dark-390.png",
+    "matrix-settings-en-dark-768.png",
+    "matrix-settings-en-light-1024.png",
+    "matrix-settings-en-light-1440.png",
+    "matrix-settings-en-light-390.png",
+    "matrix-settings-en-light-768.png",
+    "matrix-settings-senders-ar-dark-1024.png",
+    "matrix-settings-senders-ar-dark-1440.png",
+    "matrix-settings-senders-ar-dark-390.png",
+    "matrix-settings-senders-ar-dark-768.png",
+    "matrix-settings-senders-ar-light-1024.png",
+    "matrix-settings-senders-ar-light-1440.png",
+    "matrix-settings-senders-ar-light-390.png",
+    "matrix-settings-senders-ar-light-768.png",
+    "matrix-settings-senders-en-dark-1024.png",
+    "matrix-settings-senders-en-dark-1440.png",
+    "matrix-settings-senders-en-dark-390.png",
+    "matrix-settings-senders-en-dark-768.png",
+    "matrix-settings-senders-en-light-1024.png",
+    "matrix-settings-senders-en-light-1440.png",
+    "matrix-settings-senders-en-light-390.png",
+    "matrix-settings-senders-en-light-768.png",
+    "matrix-settings-teams-ar-dark-1024.png",
+    "matrix-settings-teams-ar-dark-1440.png",
+    "matrix-settings-teams-ar-dark-390.png",
+    "matrix-settings-teams-ar-dark-768.png",
+    "matrix-settings-teams-ar-light-1024.png",
+    "matrix-settings-teams-ar-light-1440.png",
+    "matrix-settings-teams-ar-light-390.png",
+    "matrix-settings-teams-ar-light-768.png",
+    "matrix-settings-teams-en-dark-1024.png",
+    "matrix-settings-teams-en-dark-1440.png",
+    "matrix-settings-teams-en-dark-390.png",
+    "matrix-settings-teams-en-dark-768.png",
+    "matrix-settings-teams-en-light-1024.png",
+    "matrix-settings-teams-en-light-1440.png",
+    "matrix-settings-teams-en-light-390.png",
+    "matrix-settings-teams-en-light-768.png",
+    "matrix-social-inbox-ar-dark-1024.png",
+    "matrix-social-inbox-ar-dark-1440.png",
+    "matrix-social-inbox-ar-dark-390.png",
+    "matrix-social-inbox-ar-dark-768.png",
+    "matrix-social-inbox-ar-light-1024.png",
+    "matrix-social-inbox-ar-light-1440.png",
+    "matrix-social-inbox-ar-light-390.png",
+    "matrix-social-inbox-ar-light-768.png",
+    "matrix-social-inbox-en-dark-1024.png",
+    "matrix-social-inbox-en-dark-1440.png",
+    "matrix-social-inbox-en-dark-390.png",
+    "matrix-social-inbox-en-dark-768.png",
+    "matrix-social-inbox-en-light-1024.png",
+    "matrix-social-inbox-en-light-1440.png",
+    "matrix-social-inbox-en-light-390.png",
+    "matrix-social-inbox-en-light-768.png",
+    "matrix-utm-admin-settings-ar-dark-1024.png",
+    "matrix-utm-admin-settings-ar-dark-1440.png",
+    "matrix-utm-admin-settings-ar-dark-390.png",
+    "matrix-utm-admin-settings-ar-dark-768.png",
+    "matrix-utm-admin-settings-ar-light-1024.png",
+    "matrix-utm-admin-settings-ar-light-1440.png",
+    "matrix-utm-admin-settings-ar-light-390.png",
+    "matrix-utm-admin-settings-ar-light-768.png",
+    "matrix-utm-admin-settings-en-dark-1024.png",
+    "matrix-utm-admin-settings-en-dark-1440.png",
+    "matrix-utm-admin-settings-en-dark-390.png",
+    "matrix-utm-admin-settings-en-dark-768.png",
+    "matrix-utm-admin-settings-en-light-1024.png",
+    "matrix-utm-admin-settings-en-light-1440.png",
+    "matrix-utm-admin-settings-en-light-390.png",
+    "matrix-utm-admin-settings-en-light-768.png",
+    "matrix-utm-settings-ar-dark-1024.png",
+    "matrix-utm-settings-ar-dark-1440.png",
+    "matrix-utm-settings-ar-dark-390.png",
+    "matrix-utm-settings-ar-dark-768.png",
+    "matrix-utm-settings-ar-light-1024.png",
+    "matrix-utm-settings-ar-light-1440.png",
+    "matrix-utm-settings-ar-light-390.png",
+    "matrix-utm-settings-ar-light-768.png",
+    "matrix-utm-settings-brand-ar-dark-1024.png",
+    "matrix-utm-settings-brand-ar-dark-1440.png",
+    "matrix-utm-settings-brand-ar-dark-390.png",
+    "matrix-utm-settings-brand-ar-dark-768.png",
+    "matrix-utm-settings-brand-ar-light-1024.png",
+    "matrix-utm-settings-brand-ar-light-1440.png",
+    "matrix-utm-settings-brand-ar-light-390.png",
+    "matrix-utm-settings-brand-ar-light-768.png",
+    "matrix-utm-settings-brand-en-dark-1024.png",
+    "matrix-utm-settings-brand-en-dark-1440.png",
+    "matrix-utm-settings-brand-en-dark-390.png",
+    "matrix-utm-settings-brand-en-dark-768.png",
+    "matrix-utm-settings-brand-en-light-1024.png",
+    "matrix-utm-settings-brand-en-light-1440.png",
+    "matrix-utm-settings-brand-en-light-390.png",
+    "matrix-utm-settings-brand-en-light-768.png",
+    "matrix-utm-settings-en-dark-1024.png",
+    "matrix-utm-settings-en-dark-1440.png",
+    "matrix-utm-settings-en-dark-390.png",
+    "matrix-utm-settings-en-dark-768.png",
+    "matrix-utm-settings-en-light-1024.png",
+    "matrix-utm-settings-en-light-1440.png",
+    "matrix-utm-settings-en-light-390.png",
+    "matrix-utm-settings-en-light-768.png",
+    "matrix-utm-settings-senders-ar-dark-1024.png",
+    "matrix-utm-settings-senders-ar-dark-1440.png",
+    "matrix-utm-settings-senders-ar-dark-390.png",
+    "matrix-utm-settings-senders-ar-dark-768.png",
+    "matrix-utm-settings-senders-ar-light-1024.png",
+    "matrix-utm-settings-senders-ar-light-1440.png",
+    "matrix-utm-settings-senders-ar-light-390.png",
+    "matrix-utm-settings-senders-ar-light-768.png",
+    "matrix-utm-settings-senders-en-dark-1024.png",
+    "matrix-utm-settings-senders-en-dark-1440.png",
+    "matrix-utm-settings-senders-en-dark-390.png",
+    "matrix-utm-settings-senders-en-dark-768.png",
+    "matrix-utm-settings-senders-en-light-1024.png",
+    "matrix-utm-settings-senders-en-light-1440.png",
+    "matrix-utm-settings-senders-en-light-390.png",
+    "matrix-utm-settings-senders-en-light-768.png",
+    "matrix-utm-settings-teams-ar-dark-1024.png",
+    "matrix-utm-settings-teams-ar-dark-1440.png",
+    "matrix-utm-settings-teams-ar-dark-390.png",
+    "matrix-utm-settings-teams-ar-dark-768.png",
+    "matrix-utm-settings-teams-ar-light-1024.png",
+    "matrix-utm-settings-teams-ar-light-1440.png",
+    "matrix-utm-settings-teams-ar-light-390.png",
+    "matrix-utm-settings-teams-ar-light-768.png",
+    "matrix-utm-settings-teams-en-dark-1024.png",
+    "matrix-utm-settings-teams-en-dark-1440.png",
+    "matrix-utm-settings-teams-en-dark-390.png",
+    "matrix-utm-settings-teams-en-dark-768.png",
+    "matrix-utm-settings-teams-en-light-1024.png",
+    "matrix-utm-settings-teams-en-light-1440.png",
+    "matrix-utm-settings-teams-en-light-390.png",
+    "matrix-utm-settings-teams-en-light-768.png",
+    "matrix-utm-settings-utm-ar-dark-1024.png",
+    "matrix-utm-settings-utm-ar-dark-1440.png",
+    "matrix-utm-settings-utm-ar-dark-390.png",
+    "matrix-utm-settings-utm-ar-dark-768.png",
+    "matrix-utm-settings-utm-ar-light-1024.png",
+    "matrix-utm-settings-utm-ar-light-1440.png",
+    "matrix-utm-settings-utm-ar-light-390.png",
+    "matrix-utm-settings-utm-ar-light-768.png",
+    "matrix-utm-settings-utm-en-dark-1024.png",
+    "matrix-utm-settings-utm-en-dark-1440.png",
+    "matrix-utm-settings-utm-en-dark-390.png",
+    "matrix-utm-settings-utm-en-dark-768.png",
+    "matrix-utm-settings-utm-en-light-1024.png",
+    "matrix-utm-settings-utm-en-light-1440.png",
+    "matrix-utm-settings-utm-en-light-390.png",
+    "matrix-utm-settings-utm-en-light-768.png",
+    "matrix-writing-ar-dark-1024.png",
+    "matrix-writing-ar-dark-1440.png",
+    "matrix-writing-ar-dark-390.png",
+    "matrix-writing-ar-dark-768.png",
+    "matrix-writing-ar-light-1024.png",
+    "matrix-writing-ar-light-1440.png",
+    "matrix-writing-ar-light-390.png",
+    "matrix-writing-ar-light-768.png",
+    "matrix-writing-en-dark-1024.png",
+    "matrix-writing-en-dark-1440.png",
+    "matrix-writing-en-dark-390.png",
+    "matrix-writing-en-dark-768.png",
+    "matrix-writing-en-light-1024.png",
+    "matrix-writing-en-light-1440.png",
+    "matrix-writing-en-light-390.png",
+    "matrix-writing-en-light-768.png",
+    "recovery-changed-payload-refused.png",
+    "recovery-confirmed.png",
+    "recovery-current-role-denied.png",
+    "recovery-final-ar-dark-1440.png",
+    "recovery-final-ar-dark-390.png",
+    "recovery-final-en-light-1440.png",
+    "recovery-final-en-light-390.png",
+    "recovery-role-restored-original.png",
+    "recovery-uncertain.png",
+    "smoke-admin-en-light-1440.png",
+    "smoke-dashboard-en-light-1440.png",
+    "smoke-email-designer-en-light-1440.png",
+    "smoke-journeys-en-light-1440.png",
+    "smoke-our-audience-contacts-en-light-1440.png",
+    "smoke-queue-en-light-1440.png",
+    "smoke-settings-brand-en-light-1440.png",
+    "smoke-settings-senders-en-light-1440.png",
+    "smoke-social-inbox-en-light-1440.png",
+    "smoke-writing-en-light-1440.png",
+    "state-empty-first-use.png",
+    "state-error.png",
+    "state-loading.png",
+    "state-no-access-project.png",
+    "state-read-only.png",
+    "state-success.png"
+  ],
+  "sourceFiles": [
+    {
+      "file": "apps/marketing/.cursor/rules/dialogs.mdc",
+      "sha256": "f5a6790e45c358a9c2982115d0f6250be69f51c9cc22204bb79fa326fde9eefb"
+    },
+    {
+      "file": "apps/marketing/.gitignore",
+      "sha256": "0ee02ab444f52ed439e65e6002b9a192eff71e91e098114f25385f5558ed7582"
+    },
+    {
+      "file": "apps/marketing/AGENTS.md",
+      "sha256": "c16b78bb27d7ca9ec0282e560c9934314135edb598a2ef71f5241d429d6cc3f4"
+    },
+    {
+      "file": "apps/marketing/README.md",
+      "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/admin/[[...section]]/page.tsx",
+      "sha256": "70c0f7ebd10aa0835b0cb34f9ee9f5c4a67c40344b75b7a560445143bdf12d21"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/boost/columns.tsx",
+      "sha256": "c175df05756d560de38bc92c169736d802297b29239e98ffb678f6fca0ab04da"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/boost/page.tsx",
+      "sha256": "4903e1884437e3daabb956cfada8fc60ed3b8719533b7151d55437013f12d524"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/calendar/page.tsx",
+      "sha256": "c9eee2e607f74c6f49171fb08d6343e2e8f942e439a722561d0f9f805467132b"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/campaigns/[id]/page.tsx",
+      "sha256": "fe9921b6570a03b46541563a1b6b57e5ad834b8b2663799d9f126b4b67e4ef4d"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/campaigns/columns.tsx",
+      "sha256": "64c6650445336618646c2a7264260c0903751b56cd7b0bcd3b0e93d56acd0967"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/campaigns/new/[type]/[step]/page.tsx",
+      "sha256": "6ec9cd2c06a1569c1e4e24984ee5894c14bb8984d0e48fbe98ddd7cea9138518"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/campaigns/new/layout.tsx",
+      "sha256": "597cec28f10c746b849fefd2f824ff033a6a231f450050d634a026d8d44f3801"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/campaigns/new/page.tsx",
+      "sha256": "b80a1efbd54447489b37a4b28474224d11585093e8404321e74c6023b12ea57a"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/campaigns/page.tsx",
+      "sha256": "d9f4efc9f63bc3a19bbb8aa745fbede4e3ff4f7242cc8bdd3d3f52ffb2fad963"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/competitors-reports/[id]/page.tsx",
+      "sha256": "af1f8a3443987189bf2252123e51fb1c60fd007afc0ddb11c70731bee8e45135"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/competitors-reports/page.tsx",
+      "sha256": "c22f8ff89ae0c7ad8aed817d8b62ed919fdf1ec7607b8928dffbe141da3dd982"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/dashboard/page.tsx",
+      "sha256": "62ebebde3c9fb6d5fa4833fb84040602935dc1c3cf308cf14270394f647658c9"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/email-designer/page.tsx",
+      "sha256": "228d3d1f5b1c8f093e5e1a03c4c32ebd1163a5ec4e82c6e2c6e37df1ef1276f8"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/gallery/page.tsx",
+      "sha256": "22377e16380fe5a531232f7ac319aa70fd3e84100fa63827389f637a0b72f31b"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/integrations/(details)/platform/[platformid]/callback/page.tsx",
+      "sha256": "98ab3af87bb0e9c5c74a1fa84d4d4a8d8627473df6c58c3b66f1e510d65ab643"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/integrations/(details)/platform/[platformid]/page.tsx",
+      "sha256": "cc0152bc5ed2c6c6c360314ee5f72aac095ce2ed495d7d56534313716b924185"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/integrations/page.tsx",
+      "sha256": "74deb9665bf136e05498179af96e34728b45ea4ab3c2f9d1daf62c5f4bd9e37d"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/integrations/wizard/[platform]/[step]/page.tsx",
+      "sha256": "0b11b0d6420673dd239c8e115c9ba7048e864ef8591e8dbead995de45700b2b9"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/journeys/page.tsx",
+      "sha256": "2902aede3d1f89524777c7f6b3c09a3b2fe49d31fa55435c0539766b62d38c31"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/labels/columns.tsx",
+      "sha256": "e74a633917f8eb2617400687c4852693c1c7d16a67d5406f7559783435f68dcd"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/labels/page.tsx",
+      "sha256": "1e37db34dc57ca3978811052f8e84c94bd6dd44af005f15d518180bbb13bdfb1"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/layout.tsx",
+      "sha256": "0f2049cecfb04158bfe1f5219ec15b5bc0b1f807fa32fa5358d4862dde93cfd7"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/our-audience/contacts/page.tsx",
+      "sha256": "eb35fec0a19b5f5c71dc04823fca38a2d8c14a97a97902a0b23a946bdc5b9f92"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/our-audience/page.tsx",
+      "sha256": "d6e78ecafa7365460f294a38d01d37574313d994d007947b0a2b58e3f5558081"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/our-reports/[id]/layout.tsx",
+      "sha256": "5de61317d177a759eb80481347c0cad18cde91bbd4e11588dd483e83a6771cb8"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/our-reports/[id]/page.tsx",
+      "sha256": "baafa7b8b8bbee98727707871f2e2bbcf9efeb74e47b0ac791a6d5e6452213bd"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/our-reports/[id]/reports/followers/page.tsx",
+      "sha256": "f905e9c5bc7b29d4d4d2084e8632201d712dd24c2c704cba88ba8251d5b4ba6a"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/our-reports/[id]/reports/mentions/page.tsx",
+      "sha256": "462afb6170344975f62e79c050fce6763e0f74872f947d5a4ab974aa928bcad7"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/our-reports/[id]/reports/page.tsx",
+      "sha256": "ba9569b8d6f1f936c27c11e321f06c4d70e5cb635e70585f148c788992ff9027"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/our-reports/page.tsx",
+      "sha256": "0e5f97d3ea8512da918007587621e6d08926a218cfd564f77d625c0e0998f633"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/posts/[id]/edit/page.tsx",
+      "sha256": "e71fdecc79ff5656c2adf229299351429f2b9598787137f9cce6cdf451f72d7f"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/posts/[id]/page.tsx",
+      "sha256": "b475ab87028dbe4ebb269d2e5e3df4f387e8f518b1befc0d3855f1c0a8d34694"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/posts/columns.tsx",
+      "sha256": "7cfdc0b8e234b8362d4e940f558c398a70012bfe9f229d3a3739ad58be51ca8a"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/posts/create-post/page.tsx",
+      "sha256": "9fdac8b2fff3f6084fd47c7283b1de32038c1f29bddd0c93506da400ccfab92c"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/posts/page.tsx",
+      "sha256": "e5324ef322bd58d4ea278de6ba6abbca7d95551244a3fff1eb35e388e5b4cb5f"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/presentation/page.tsx",
+      "sha256": "f880a097a12d806e0e7e485d4a2e444fc8f88c5510e2bd34a77c9553238e8e76"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/queue/page.tsx",
+      "sha256": "65c4fc5ed9169b4a2662f89c3eabf60af9447db24d7be241d5f13dccc551ef1b"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/settings/brand/page.tsx",
+      "sha256": "81ae362d298613c0e0c7f49af9e3674e9cbd7375f439b41f949f53ba7a48b89c"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/settings/layout.tsx",
+      "sha256": "10e30d1f02d772986a598aa84be4d40fa898f0e6964acf589ecd0370dd69731b"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/settings/page.tsx",
+      "sha256": "67adf80b20bf484929cdc6bfb5849ebe528a719ff4a423e6344631ccdad0592c"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/settings/senders/page.tsx",
+      "sha256": "6037675a45c2b1d529a213e706b1eac7d543f94492c5f7ef9fd685fb23219470"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/settings/teams/page.tsx",
+      "sha256": "74736db4fa084de04e79b53901d231e15c66356cd0da0df3736a85d97e0da46d"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/settings/utm/page.tsx",
+      "sha256": "dee64ede2d7d51ac646516453b803adf1375314ce3dd4b9860400332cad2ea4b"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/social-inbox/page.tsx",
+      "sha256": "93929a601ab5f544d3b14eb68e516430b6073f27f0aa03ddf9b6e395b378cb03"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/(dashboard)/writing/page.tsx",
+      "sha256": "077dfea084a04fa7766fd5a11fa64d1c2bde37abf6a96352d5a88dd60b519e50"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/[...rest]/page.tsx",
+      "sha256": "fa9aca4c852b0e2df471faed17a7dfac4effbc73a4ffcfec4ae6cf175160625e"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/auth/not-allowed/page.tsx",
+      "sha256": "3c871aee2ee8d0019458aed16d91273c30e8cb97e08186b7f3a757f6331c40ed"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/auth/page.tsx",
+      "sha256": "13e8b918115e65a7d5b7b5c0def2676087e7ea966d2ecd5900dc58f3af06cd46"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/error.tsx",
+      "sha256": "3e50360b49ac616af8732b4c9d0e2261b015b230cb120a4b5b3e93ff5c3f1cdf"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/globals.css",
+      "sha256": "7d9155ff2783923ecccf381887396cb9cdd9d26776dc966f359b77c98698862a"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/layout.tsx",
+      "sha256": "a357b6269ba91b7bd67258ec79d12b1f66ceb80fcb57b274d56f854894b8dd56"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/not-found.tsx",
+      "sha256": "83e5e9a47913361f625ca04129fa519e99d35e1e9f4ba55215acbe71283b4c12"
+    },
+    {
+      "file": "apps/marketing/app/[locale]/page.tsx",
+      "sha256": "fdc8769c19799834be0da38b631bcd5638b5cd898cb543f85263868a831dc1ce"
+    },
+    {
+      "file": "apps/marketing/app/favicon.ico",
+      "sha256": "3dbc7db18f79668797b2fca8023ba09d6d44881b12aa2fe98b0ccb582c567c6d"
+    },
+    {
+      "file": "apps/marketing/audience-import-sample.csv",
+      "sha256": "826d841b6a18c140a018be01e31b1b025cc8ae182d3c63c7ff0afb4608b147ba"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/AddApproversDialog/index.tsx",
+      "sha256": "14d7955d8ab859f7f32a022b0de84dbbc5376d99077b82bda2bf35a582039cc6"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/AddPaidSocialAdDialog/index.tsx",
+      "sha256": "ad089c0ea73e9d6a669a95ef67311e9561d0471b92dee09547f8c42f3c60a865"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/AddResponsiveSearchAdDialog/index.tsx",
+      "sha256": "6ce287082a1c4e046c82aed3d2ff1ceb8be6f3ba2ce377cbae61ef7158e98e0a"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/AddSocialMediaPlatformDialog/index.tsx",
+      "sha256": "18a7645ac737704c2339420cc3fc871b4b70d8a283c252b132bcf98df9e5553a"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/CreateAudienceSegmentDialog/index.tsx",
+      "sha256": "f8c23719f66541189f43aba1ca4e93c48e6a1e17177d176b741b31a49a23855d"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/CreateSocialMediaPostDialog/index.tsx",
+      "sha256": "2d8530af99cf139063e766440645e5f6145bfccfe62c10092b2a1f12f291d53f"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/MessagingMessagePreviewDialog/index.tsx",
+      "sha256": "32a497088e63dd8f72f29f01d262c8ec5dac6796414dcf99a28e799c8ebcfff7"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/PickSocialMediaPostDialog/index.tsx",
+      "sha256": "63d772a3166d81886820e6c47295dcf78106cbc015807251440698af14bc5f64"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/ResponsiveSearchAdPreviewDialog/index.tsx",
+      "sha256": "b52769be6e6218899843907891fe84f9b0d6075628fd3f321529b527acf3ede7"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/SocialMediaPostCreativeActions/index.tsx",
+      "sha256": "524b5a10fe1a56668be818797d9f57d681dbde6777d9ec6e08f1a86b187e0ad2"
+    },
+    {
+      "file": "apps/marketing/components/dialogs/SocialMediaPostPreviewDialog/index.tsx",
+      "sha256": "c033d176c151d8c2a054515e6a3d3a1a9221ae4c5d80a9ae0de1e43a279fdcd3"
+    },
+    {
+      "file": "apps/marketing/components/layout/SettingsSidebar/index.tsx",
+      "sha256": "7b0294da4abf85c90f512d792c8a410116a4e50720c92d072a60be82780d3fd7"
+    },
+    {
+      "file": "apps/marketing/components/pages/auth/AuthContent.tsx",
+      "sha256": "5b13395fa5bf1fca5905e5fa02a38167536d404d3dc5236b74fb1ec7deeef9d7"
+    },
+    {
+      "file": "apps/marketing/components/pages/brand-settings/index.tsx",
+      "sha256": "d629e64869e2f36dd95611e9856efdb3a80497a391d658a5411e6725343c3150"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaign-engagement/CampaignMessage.tsx",
+      "sha256": "d9b40d8c9a8c5a28d08ac5bd3d367e3ea04d2e29652955033991501ae2b1bdea"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaign-engagement/index.tsx",
+      "sha256": "5ba65a9ce09778d0ccf8241b2ed31c52354c913d101857b20120e25baf2eee34"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/CampaignStepContent.tsx",
+      "sha256": "bbe7e83eae90914713351cfc00a8e273fe69f6485456ed6b2055cced94bc5e5a"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/CampaignWizard.tsx",
+      "sha256": "a00555ed4c4be679dfc342166da60bda9a393fc4c76d6647060bab37c42070e1"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/CancelCampaignButton/index.tsx",
+      "sha256": "6db6bfc9d6aa2372ec3a8f445ea1b844d0b44a995e81fdb654aa9c31d4972330"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/StepFrame.tsx",
+      "sha256": "f9faff45ce031cbd7f717229da21d7d12e92dcb5eb5af20dce07902cf7959596"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/steps/DetailsStep.tsx",
+      "sha256": "7d46a72dd278ff10007df026ff4f0b4a3ed8d83f2211a248834d5c1ecccc05c6"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/steps/ReviewStep.tsx",
+      "sha256": "e13f93c597cfde2603537f9677e701e0a86a8190449a10a3a6fdac0cee04f5f8"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/steps/google/AdGroupsStep.tsx",
+      "sha256": "9cba98c444efb70b3cafe7f1361e8d2ad50ca78eedeeff0d631202c81621b657"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/steps/google/SettingsStep.tsx",
+      "sha256": "d8f8f09584ae43a4d9add23492f6d6b8b469745bd8e3200adbf31156b87c99bf"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/steps/messaging/AudienceStep.tsx",
+      "sha256": "46fe5772a8c67237b1e3a38be149fa7604d6f170ed0ac9b8ae285aeba4632eab"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/steps/messaging/MessageStep.tsx",
+      "sha256": "49b273d27e269685739d10e2af52f50d42d3ab41e493c5bc5a3d5d64fb5d1921"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/steps/paid/AdSetsStep.tsx",
+      "sha256": "ea26b7ba125b6a94b5c3c73e8f7c9927708cc7804beb3db605556a6f590a2617"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/steps/paid/SettingsStep.tsx",
+      "sha256": "fe11d90b6e9616aece129fa0f4ff87ad01134c2e5f509e731ed875a18386fb21"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/create/steps/social/PostsStep.tsx",
+      "sha256": "b131564cdc5302763bb5faba9b451826d865ee010237e8df9534ee06bad3abdc"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/details/ApprovalPanel.tsx",
+      "sha256": "077728fd715dd9ec6784607c5c0b88dba9770a28b6c216d9c3c9ee137a50b4bd"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/details/CampaignDetailsView.tsx",
+      "sha256": "31caf37673f3443833f22ddad3b5cb261147979f3394db93e8b91a4ba4aa466d"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/details/CommentsPanel.tsx",
+      "sha256": "d63cb332acc6179aea6301a737af6b79b73df94202f514c17212c8b9f44ec8da"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/shared/Approvers.tsx",
+      "sha256": "8486106d62dfc06c0b1853e74f8dac9fc6965988c371029d66e83430f641d814"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/shared/AudienceFields.tsx",
+      "sha256": "a6a16971255d2a7839a59ba9f5f5596ae9f4f0affc60864d081cad560d0eeab8"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/shared/CampaignSummary.tsx",
+      "sha256": "7c66cc4f02149757147525c62560d82e1bb1a6e859d3bc59e0173a6b5e42d18e"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/shared/Choice.tsx",
+      "sha256": "a44100587eaf83b37348b0daf80a56ab73ced7397a7121bb7c86e4050f58cd48"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/shared/KeywordEditor.tsx",
+      "sha256": "cfa09eb23da74aaa80cbcf821da7e90d14491615be227798e33d7b4c0e30d3d7"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/shared/ScheduleFields.tsx",
+      "sha256": "a1cd26bc6a962cc42e57b2d1d716f5a53853f6224bebfb71dfa2668faca5127d"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/shared/TagInput.tsx",
+      "sha256": "084d299bd08852c8f7407f5a4a0ccc010eb09b1f3bcf96006f1f7e280bb1be25"
+    },
+    {
+      "file": "apps/marketing/components/pages/campaigns/shared/ZonedDateTimeField.tsx",
+      "sha256": "1169f6e8c8d906f2214d17380ea10e493c653e676b3a30312be37548981e47e1"
+    },
+    {
+      "file": "apps/marketing/components/pages/competitorsReports/CompetitorDetail.tsx",
+      "sha256": "d42c2d9d83cd526230b359de781dca97cf104d14a36c03f9be7774e0f53f2269"
+    },
+    {
+      "file": "apps/marketing/components/pages/competitorsReports/CompetitorsReport.tsx",
+      "sha256": "55f2060a914bc4abc6249642bff4080487bc032645890cf2fdd17a9fb9f265a4"
+    },
+    {
+      "file": "apps/marketing/components/pages/competitorsReports/shared.ts",
+      "sha256": "b2fd8920dbfb63ada47adba0a664fed877505ae2df7ac06658d37b925ad801ab"
+    },
+    {
+      "file": "apps/marketing/components/pages/contact-records/index.tsx",
+      "sha256": "aa7a617795cca1bc98218190c53046252bcc999d7295fa3c088cb1b407a93493"
+    },
+    {
+      "file": "apps/marketing/components/pages/email-designer/index.tsx",
+      "sha256": "dbfba5e934dad4b25e8ee64dbb2ee433c98eea382e27dc24b595228968e27da2"
+    },
+    {
+      "file": "apps/marketing/components/pages/home/Dashboard.tsx",
+      "sha256": "333650d95e5011fa59a82f2ac16bbb9859bbc0be41574c136392a2ac03d3f0f2"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/connect/ConnectWizard.tsx",
+      "sha256": "6dce09235e4da1e10506abbebda7a4e144b31b484117b68ab6b14d83dcd6a903"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/connect/OAuthReturn.tsx",
+      "sha256": "671d329f642acc35cdf7283b80d721e4da914eddfb61167e2e0c209976588e15"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/connect/StepAuthorize.tsx",
+      "sha256": "50741938e8bbe3c854c32b8afbbfc748d04b0c209634f000f4f810bae19f6b37"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/connect/StepResources.tsx",
+      "sha256": "68ae513d83f75281c0e032f7faa4ef682b81749df710cba9a61b4496be5c4eb6"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/connect/StepReview.tsx",
+      "sha256": "040c0de7893c3317d4b260d118da830ae32657a522abfc56bbab7543ef65a597"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/connect/connect-session.ts",
+      "sha256": "17aedcab29e3c452c74d354a0bd01a6e2afe5a74e9a9622749b16ca737fb0094"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/connect/useStartConnect.ts",
+      "sha256": "09fda9f66fc51d2d705b897c6b34c8d73b98eb7b9d56eba404fe773eb6d65599"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/details/AudiencePanel.tsx",
+      "sha256": "99d893a4ef601cb4b7ea8cb35aa4f78195ca9a7b9a48d4334c02f12f440a4723"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/details/ConnectionPanel.tsx",
+      "sha256": "50bd72a007104437bde9021a4a8b43a960765c8914173da2c15cba82a24c4c48"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/details/IntegrationDetail.tsx",
+      "sha256": "36a84eec19fab7b522d2c667be1084d6d5f7b84ca4ef054caff373b44fb89c89"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/details/OverviewPanel.tsx",
+      "sha256": "c3b47dcd3cfe2c1e1426e49645cb322bc44e4c083a1a9386676116c31100a4d3"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/details/RecentPostsPanel.tsx",
+      "sha256": "26580257dc217ba261ca3f308449448ba4f046b8497162670020a5a0aca04717"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/hub/AvailablePlatforms.tsx",
+      "sha256": "7e3cbb8b1f9dc1a0976e7931ccf379ef020eb27a84aaa90902c4e9f481699ccd"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/hub/ConnectedAccounts.tsx",
+      "sha256": "09ff1f95fb1b407111600eea6b22afaf0cf963df684e58281c7b8321bb1616bb"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/hub/IntegrationsHub.tsx",
+      "sha256": "92c1952ce184f23ad8d538ac298555e04b820c673dfdf2a82dc99695a7c390ec"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/platforms.ts",
+      "sha256": "6b6fa2ca15dc9880b7dbaf55223658b7cdcc0294ddee8e393f335ad7a418ad4a"
+    },
+    {
+      "file": "apps/marketing/components/pages/integrations/shared.ts",
+      "sha256": "57b2f0d2100f239358ee772de0e17cb68b4066bd572c2b783661ce015f8f1c0c"
+    },
+    {
+      "file": "apps/marketing/components/pages/journeys/JourneyTask.tsx",
+      "sha256": "2910682e3e8707d936b7a738e959198828ff13b1294484f0d707f77ec30768d6"
+    },
+    {
+      "file": "apps/marketing/components/pages/journeys/index.tsx",
+      "sha256": "f5424f2c2085549c8607633e50e82295bd40e70b78175ee9c01187afad9f3817"
+    },
+    {
+      "file": "apps/marketing/components/pages/labels/LabelFormDialog/index.tsx",
+      "sha256": "1c29377114e78b9caab150c7b936fad248e64ab8c9b0a285cffb8dbfb36fc3c3"
+    },
+    {
+      "file": "apps/marketing/components/pages/mock-writing/index.tsx",
+      "sha256": "fcf6f1f399f7f4f314532e93f2d2256989edc63ac15ddb68c7975cdfcd4415ac"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/OurReports.tsx",
+      "sha256": "817f93e4ef37f4b8dc2b1163d5010cae939873585165fc959e813278b77645b3"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/ProfilesReport.tsx",
+      "sha256": "32b5a12adc1af0b85c52851b5b585134c033599be46a5c9a2f371ae011b37b92"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/ReportOverview.tsx",
+      "sha256": "b195259c926a1d410fb7977e18a9658a1310dc3951205fc7d4e0ab8fdab9e29d"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/profile/ProfilePosts.tsx",
+      "sha256": "47fb5f24f0fdfc6adc82b26e6fd4deefc9a585a0ed2f1f5a071db05a8b8fd68f"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/profile/ProfileReportFrame.tsx",
+      "sha256": "fe296673d88688731efa9dedfd10a1c91340ec7113547e778028679aa8db6446"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/profile/ProfileSections.tsx",
+      "sha256": "6de41bbc34c2f93f6025ca152cc990f7687d31f7e0b67be2a6fe5f04495d2efe"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/shared/ExportButton.tsx",
+      "sha256": "94567834977769a27a9c32532c96fdb728c6954e1badd0d5d4fe827fc21a0247"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/shared/PeriodControl.tsx",
+      "sha256": "11cd505f7df0f99e74ff4b2692b509f1d1efa603f827956d5cf3c2105fa87e5a"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/shared/SearchField.tsx",
+      "sha256": "96280bbf2156d3485ebf3ae1ed879c7841230ff55cd7772ae6a8fd3041481493"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/shared/accounts.ts",
+      "sha256": "c98d85f8f267c7e21690ff8cac57d8d8d1bc5f845f301e987b6630b6610912dc"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/shared/metrics.tsx",
+      "sha256": "bbb2d81f9c3c019bdc16c14ed7f709e6be973de1c6ffa96bc0585412c7c2be07"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/shared/period.ts",
+      "sha256": "2e0fc51b129254a8b69618bd7046c42c43b72954e4332ded8092739454ffc8eb"
+    },
+    {
+      "file": "apps/marketing/components/pages/ourReports/shared/tableSort.ts",
+      "sha256": "e078a0f86ba6e155e6c89bb6f5e4fa8dac3e21e2f5e4449ef7ce7d4e8859f715"
+    },
+    {
+      "file": "apps/marketing/components/pages/posting-queue/index.tsx",
+      "sha256": "a11974b719d0dd85f4b601b7df5b4a72545a48f7c01b3bf8293e4b8825c8cbcd"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/CreatePost/ContentStep.tsx",
+      "sha256": "4e610b72bb12eaeccd258c5a4e3b73b4120697b1caf7ce9d5398543b2c3938f8"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/CreatePost/MediaStep.tsx",
+      "sha256": "114735a90b93d3728bf421ba0b4f2b66dfe65fc92ddaa0ab7cef82404cffe227"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/CreatePost/PostComposer.tsx",
+      "sha256": "7704cf8ff788b7776af4ec7f190894683172668fef6aa28298f2196b2e804c59"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/CreatePost/ScheduleStep.tsx",
+      "sha256": "d12f0cd22edbfa7c7e016a4d6c073797d60afc733d83fdffac952b5d86ef1668"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/CreatePost/draft.ts",
+      "sha256": "d9f942d6d714ed2073655573ee389cfa127eae91008d78828d01c227d6c6f91e"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/DeletePostDialog/index.tsx",
+      "sha256": "ac713305a6930a0a47bda821a7210d60bdbc8b509194f292cae4980ecd9d3fef"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/PostsFilter/index.tsx",
+      "sha256": "1a820e83ae5b7fe97729ef0a21a9dc460aa8d6c84bc6d26cedeb69386994776d"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/calendar/PostsCalendar.tsx",
+      "sha256": "56450822f0f65c22c07cd88d3a9f8111fd5cb68c9e3704af976de924b0984265"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/details/BoostDialog.tsx",
+      "sha256": "e208d7f67db8b837b51234f2a64a1f0e63d122058cfa0e511095b4bb24885f0a"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/details/PostApprovals.tsx",
+      "sha256": "88beccbf940abe36e9a32ea8c1012b8821356b279b2d573003dd99207d971c72"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/details/PostComments.tsx",
+      "sha256": "b7400425ea2f9a6a7e8febb2ecadaa8c70dcd94fe60ee466743509a44e222f51"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/details/PostContentCard.tsx",
+      "sha256": "b13091fb58d5bdeea10feb05339c47d3bf63842fba81332291d05c39ecbdab96"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/details/PostDetailsView.tsx",
+      "sha256": "a291f52f8b6c8cd7ca95d6253fe05e6fde3f3f185864b95249586a33c8dcfc5a"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/details/PostPerformance.tsx",
+      "sha256": "4bfe8e152db15d463d0095f560e9a9bbe8f1e77bda60324a6fdad49581a8fc42"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/details/PostPreview.tsx",
+      "sha256": "56c267b9ed1f34f609cbd11bbf14270c47e8d008ebe8854d8822927cfae56c09"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/details/PostScheduleCard.tsx",
+      "sha256": "0eb449057e4842b9cdcd70d3683711b2007a3d40b2f56fae172163bd5ab764de"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/details/PostStatusBanner.tsx",
+      "sha256": "44957e358af871efe3737a2ce6c50ab03da2ce58fa0812efa03d3bf1fa05e5f4"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/media/MediaLibraryPage.tsx",
+      "sha256": "bd5a07a94680af48092f9beb3df9124938a3435c1b7bf4ebcd20653ebe80e266"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/media/MediaPicker.tsx",
+      "sha256": "9973dddabe48d0f2103279813bd0dbde77fb4616887a2a06fb603c557fa45e84"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/media/MediaThumb.tsx",
+      "sha256": "2272e41c36d4a06c9ea55394b7b762e15fce99a3ab12890c64a4fcaf4727eb97"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/media/useMediaLibrary.ts",
+      "sha256": "f7e8d6be0aac844ae7763661bd4cf5f0ce67925a236941974343a3e104ccedcc"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/our-audience/CreateSegmentDialog.tsx",
+      "sha256": "897b21dd1654aead77543da6a1b4689db526ece94ba09a6c9983dc62c676e999"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/our-audience/OurAudience.tsx",
+      "sha256": "b6434ff33a5afc9b6cbaa66d0378491998849aa8c7c79e2881285ff2cfbdd1a5"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/shared/AvatarStack.tsx",
+      "sha256": "8b4baec993bd0ad3d6ae4f8c9118fb3f8510d30d19f61e596956d3e8076d3907"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/shared/LabelTag.tsx",
+      "sha256": "54be5f5d307a724895e239d328fcce6382f55c0d5a92bfe606286d674ef845dd"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/shared/PostStatusBadge.tsx",
+      "sha256": "a3b9048c739aace304cfcd50c5acdf127e52235ca50c01b17f0a466c5add786b"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/shared/media.ts",
+      "sha256": "ab1b3d3a1d98ce2e23d0fd5ac9dde332d89eee6a15397d3d845eb663573ff0ab"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/shared/useList.ts",
+      "sha256": "5344d0d0d2914dd0332123d7634dc3c56c937f7d63f5df88734c6132fa53e983"
+    },
+    {
+      "file": "apps/marketing/components/pages/posts/shared/zone.ts",
+      "sha256": "c81bbe883687dddf726969e15a39a8b1ef0656b4de7d6ffa2cd9cb7e1fe46642"
+    },
+    {
+      "file": "apps/marketing/components/pages/project/ProjectFormDialog.tsx",
+      "sha256": "7490ea1873cfea9a950aa9c6e0d425f2135d61d0ab77a842d93343eab24d7432"
+    },
+    {
+      "file": "apps/marketing/components/pages/project/avatar/index.tsx",
+      "sha256": "84dc2c527105e0a2a434be36a1aa29e7a5e01ce8cce3d7e859e954023d00e3f8"
+    },
+    {
+      "file": "apps/marketing/components/pages/project/updateProject/DeleteProject.tsx",
+      "sha256": "5ed0e3a0947d828af61231b3e4c9e561b1269603021a97b6b348cb293d72921a"
+    },
+    {
+      "file": "apps/marketing/components/pages/project/updateProject/index.tsx",
+      "sha256": "060af6db9ba408ee035cc4eca13b319069e5f6688519e4360f43e56cb94fcda1"
+    },
+    {
+      "file": "apps/marketing/components/pages/senders/index.tsx",
+      "sha256": "651c3e3e48bf06dd3db30d3dc0be8131b23f1bcf29564faf207ae96eeb2be6bd"
+    },
+    {
+      "file": "apps/marketing/components/pages/settings/ProjectSettings.tsx",
+      "sha256": "a301f68da1629bd4a7cd29e57418638b824b769526dd8674b077394c1c5bd73b"
+    },
+    {
+      "file": "apps/marketing/components/pages/settings/Team/TeamMembers.tsx",
+      "sha256": "fd959b152d393d079a06d73cfddc001051ef97db87d417a8ffc1dc4a5ed703ae"
+    },
+    {
+      "file": "apps/marketing/components/pages/social-inbox/index.tsx",
+      "sha256": "bee86c5ce4e974ca128217e463f91434abbf3dfc0843e23e5ec4ca08614a7a8d"
+    },
+    {
+      "file": "apps/marketing/components/pages/utm-settings/index.tsx",
+      "sha256": "feb0bc5474d4bc226d2e999f58404021a94e7b9a67124500668dc750fd05406a"
+    },
+    {
+      "file": "apps/marketing/components/shared/ButtonLink.tsx",
+      "sha256": "6599d112a8a2e7a6d67202a026411f83130dfead95728f153b5aff71da68deb4"
+    },
+    {
+      "file": "apps/marketing/components/shared/FormDialog.tsx",
+      "sha256": "eedba81e8d807e7ec988df7aad976d753e09a6e033ccf47acd869504e08aa0d7"
+    },
+    {
+      "file": "apps/marketing/components/shared/MarketingOnboarding/index.tsx",
+      "sha256": "05acedbbdbca8a3dadd5ee035759ddb7befc0bc80056e27e444c2aee0f075f19"
+    },
+    {
+      "file": "apps/marketing/components/shared/MarketingProjectFrame/index.tsx",
+      "sha256": "619accf139169f0bb8ed3de20bf02fa4ae81d312f2b438729465ffba4c0320b6"
+    },
+    {
+      "file": "apps/marketing/components/shared/MarketingStatus.tsx",
+      "sha256": "81b743785c235bc5d1d932983ecb59f8c5753de58e8d95a20861ad1276b72990"
+    },
+    {
+      "file": "apps/marketing/components/shared/PlatformBadge.tsx",
+      "sha256": "d0d7930b1e8a0b465281bd4c3a0b95d06d67a32a7f5f7defc54ad0bd38a9d0c4"
+    },
+    {
+      "file": "apps/marketing/components/suite/PendingMarketingCommands/index.tsx",
+      "sha256": "e5102bb961145dc42299f57baa74ae8b37bcc37a6d6f5da2ce1963bac1d7e43c"
+    },
+    {
+      "file": "apps/marketing/components/suite/ProjectRouteGate.tsx",
+      "sha256": "f409263b5b59989dfe3c2c80143368e50469de7b8ac39160ceb3d2d8828c1d48"
+    },
+    {
+      "file": "apps/marketing/components/suite/ProjectSwitcher.tsx",
+      "sha256": "b86aaa598d242963fb8f12f3ffb55fc79f057916ce6f5500b64a35cc5463e565"
+    },
+    {
+      "file": "apps/marketing/components/suite/SuiteFrame.tsx",
+      "sha256": "fa2cae4f59849c108b21294239468ea96a6538fe6e7527c32db72d5a729d460f"
+    },
+    {
+      "file": "apps/marketing/constants/campaigns.ts",
+      "sha256": "bc3b5b637942a60a1300684acd0a3c2d2762a8e28a57f016202947fd3480fb0f"
+    },
+    {
+      "file": "apps/marketing/constants/countries.ts",
+      "sha256": "a9584190e082d1647b995e81b5e39e1df2d30076e7ca5050dbd270779933defa"
+    },
+    {
+      "file": "apps/marketing/constants/env.ts",
+      "sha256": "81b16593290a494432864aca1d1778b4de787f94b3767f7232e3e301692177c5"
+    },
+    {
+      "file": "apps/marketing/constants/index.ts",
+      "sha256": "a0c195f6700b400adce5565a8879878242625624ae432536490dc5176879931c"
+    },
+    {
+      "file": "apps/marketing/docs/orgtik-rebrand-migration-plan.md",
+      "sha256": "05435bdf730acb3512ebea24851caf320e3e29c6d0d683ba72cd1da8e3d6a2a4"
+    },
+    {
+      "file": "apps/marketing/hooks/useActiveProject.ts",
+      "sha256": "ba9377bb579718c7a316415ad9f6e6f03e5dc4f68fe0a383516b3d4b561c3d2e"
+    },
+    {
+      "file": "apps/marketing/hooks/useCampaignStepNavigation.tsx",
+      "sha256": "3a55c351884b680429d450f1ad1cde95282311bf7205b097800c4c0d967437ab"
+    },
+    {
+      "file": "apps/marketing/i18n/request.ts",
+      "sha256": "910e0e8ad7f559edb33e53554d7a58240912fdadd31531e5b10fb37fda510f1c"
+    },
+    {
+      "file": "apps/marketing/i18n/routing.ts",
+      "sha256": "3ff86626acbf7e533b63341c1308bdfdb16292a5ec10927115bc8a16d778660d"
+    },
+    {
+      "file": "apps/marketing/lib/api-feedback.ts",
+      "sha256": "4f9dd6f74bb155573b82926f8b8460c15884a3445c57ee6b559fed6110b9b20e"
+    },
+    {
+      "file": "apps/marketing/lib/bidi.ts",
+      "sha256": "76e8c14c27b0d8e56cd6b73a8c33f70bf29e39b0d946c64a308c94065060de33"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/google-search/onboarding.ts",
+      "sha256": "d4ff90c354e0fea47020f14bd15b3a5b1337b92fbd1f463d17a15416bc2a5fbe"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/google-search/targets.ts",
+      "sha256": "87442d173cf663803e1c164b31c90c87a8cfc8d6594341b8404e60ca8ad13c80"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/integrations.ts",
+      "sha256": "4557979ee336f6b5d21cce65e50d2139e2fca60f48b14dcaf06b2af7a6b33a83"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/labels.ts",
+      "sha256": "ec8ea65427f6e8d1762df4a5b6bfbc0f75df2bc04e2781c48d2b4621e196a7fa"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/messaging/guess-import-columns.ts",
+      "sha256": "09f9aafbc25e118f48d2e9ffa57040b8054783880ff4f9c960e38d5d37d7fdb1"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/messaging/onboarding.ts",
+      "sha256": "99feff20e40f72873f4bcf923070c324408d4883b653e865610126af170c649b"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/messaging/templates.ts",
+      "sha256": "866e515260b09ec1ccf021044d2d66d09b8ee8bb637b18a466da0bf7c209dac3"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/paid-social.ts",
+      "sha256": "15ec096ead9c0ab29d89f35e5eae32e48115c1d62b122028ad061b8332532ba1"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/routing.ts",
+      "sha256": "639f1bb7b4b5dd746cb49d51d7b2cf1dbaa9eae0fde754cdfa14c1e03981a241"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/schedule.ts",
+      "sha256": "4a33fe57e70786888354cba5bb93170f60533d69ec40e60ad31a030389a04da5"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/types.ts",
+      "sha256": "fae35a2afc83a9e61e015b2ae2245c267bbea6f66c9b2ce530b0c1931a17a762"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/use-draft.ts",
+      "sha256": "ce10a7cf3c3fc44cde51feefda2c4e6a4c61bb1343b4703305035ae9308b1798"
+    },
+    {
+      "file": "apps/marketing/lib/campaigns/workflow.ts",
+      "sha256": "45a5d8b50a98cba8d624276a3f89c82031c3cc63350488c64cadc9a22ba2ebd9"
+    },
+    {
+      "file": "apps/marketing/lib/command-recovery.ts",
+      "sha256": "fde3363afbc767ed37eb1c0f87167e0886b7af128b1f67eb5ca562a13cc69cf1"
+    },
+    {
+      "file": "apps/marketing/lib/documents.ts",
+      "sha256": "a089d21bd033800f75b90e5e1f6f1aaf8368efb3d91f05fa820975a58e4985ca"
+    },
+    {
+      "file": "apps/marketing/lib/is-uuid.ts",
+      "sha256": "0347d9fca8e30ee386e54c99c342281f546bbe9a124c4599866a93d8c85bdfe4"
+    },
+    {
+      "file": "apps/marketing/lib/marketing-v3.ts",
+      "sha256": "971d126367f6efcdbc6e310df0dc932b291b3f340f295a823fefdc04ef1b3262"
+    },
+    {
+      "file": "apps/marketing/lib/permissions.ts",
+      "sha256": "6b23a1bc48245caf5fd66fec6464a8c70112bdbe91267df58f81834291497a52"
+    },
+    {
+      "file": "apps/marketing/lib/project-context.ts",
+      "sha256": "b0d4a97fc40d9412ba11cad8481c3c8ca58aad215af61696fbbb811e03f421b0"
+    },
+    {
+      "file": "apps/marketing/lib/request-scope.ts",
+      "sha256": "edcd43c8f023b1976b53fa0d7a9f7be3efad46e662ae4bb972e9617ef15fdbe1"
+    },
+    {
+      "file": "apps/marketing/lib/roles.ts",
+      "sha256": "c61c8e6606578b34ba8ec22d00a57d5ef4624dfb0f1e398ea6168de5c0956a8b"
+    },
+    {
+      "file": "apps/marketing/lib/session.ts",
+      "sha256": "92129ee5f5e8242693fb60b7bfc0a285411fe27b92f44edcfa947eabcccc05be"
+    },
+    {
+      "file": "apps/marketing/lib/suite-navigation.ts",
+      "sha256": "8e674dad90b7a3737342ef68091280edcfd26d719105bfb62e2ae473fe1aeb48"
+    },
+    {
+      "file": "apps/marketing/messages/ar.json",
+      "sha256": "f990aed60127eb71aadb9c1403e67a049876c4788b88dc0ef1fcd0ab1f286c95"
+    },
+    {
+      "file": "apps/marketing/messages/de.json",
+      "sha256": "93df4c3eba341f2eba4bc622842d97ca376d524cd62949c0903925acc82ef0e7"
+    },
+    {
+      "file": "apps/marketing/messages/en.json",
+      "sha256": "4e3fdf7ebe444cd099063067249b3199700153ab66289b0ebe3cf578cece1c3b"
+    },
+    {
+      "file": "apps/marketing/messages/fr.json",
+      "sha256": "2517a746217fccbcc57744b81f52a10c05042caab5c65d5f380ffac0ab70cf2f"
+    },
+    {
+      "file": "apps/marketing/messages/it.json",
+      "sha256": "b32b30e68c6aaef54df4870b901bbd389b0b774bd40ab251b2f04ff31e9c5da0"
+    },
+    {
+      "file": "apps/marketing/next.config.ts",
+      "sha256": "5fac46f74ddbb9f5f3fdef1786406fdad6831c650c152400b95a05cf9381f3e1"
+    },
+    {
+      "file": "apps/marketing/package.json",
+      "sha256": "451e6743b75af1723b5bceed43c3d7556a1656afeca6da52575dd8762c267ff3"
+    },
+    {
+      "file": "apps/marketing/postcss.config.mjs",
+      "sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde"
+    },
+    {
+      "file": "apps/marketing/providers/MarketingScopeGate/index.tsx",
+      "sha256": "abbe522bdc877fdc7961cbc5625e6af169b5a4d2ebc01f047a0dd8d4625d484e"
+    },
+    {
+      "file": "apps/marketing/providers/api-feedback.tsx",
+      "sha256": "b13fc0ef8d3dbe253ea1577daac1227c3d22072c5a3d24a06e181344d7ba3fad"
+    },
+    {
+      "file": "apps/marketing/providers/redux-provider.tsx",
+      "sha256": "e5e0201146c7100f5ff270d9817bf6dd9d5d5d17f600d86367c7ac1374f91fba"
+    },
+    {
+      "file": "apps/marketing/proxy.ts",
+      "sha256": "b070f22fff3d4beb948137e13e412f77feff02642b8f66609634dd07ac2b046e"
+    },
+    {
+      "file": "apps/marketing/redux/app/baseApi.ts",
+      "sha256": "9e58b33b89baac46e92273f7aca2e027f8af7dabb3dbbca6ecf5e15500a810dc"
+    },
+    {
+      "file": "apps/marketing/redux/app/hooks.ts",
+      "sha256": "10ca27e079a452ff50658ca5dee21012e8b8d9444d6287cc86055af761d34cd4"
+    },
+    {
+      "file": "apps/marketing/redux/app/store.ts",
+      "sha256": "a3b85f0d0eb06012c371860cc2efc9530c267aa86818dd6efd9ff5cff79aff80"
+    },
+    {
+      "file": "apps/marketing/redux/features/audiences/audiencesApi.ts",
+      "sha256": "eabbad02ce8c03965c05ba87cc5e5f0317ad066ef4c06d6034909613fa02b14e"
+    },
+    {
+      "file": "apps/marketing/redux/features/auth/authSlice.ts",
+      "sha256": "ef93cbab6f7a76649e33e42a1111b0379ee09dd8a58ec364415b77fddffcfae7"
+    },
+    {
+      "file": "apps/marketing/redux/features/boost/boostApi.ts",
+      "sha256": "9cc58fa926790703b93788116eec5001b81095a6f4a87c9d5812e7a96464fc3f"
+    },
+    {
+      "file": "apps/marketing/redux/features/campaigns/campaignFormSlice.ts",
+      "sha256": "c77e4210cb671dbc7092e1652816e64f5c58f9563cec206954e24aa2fa60a3a8"
+    },
+    {
+      "file": "apps/marketing/redux/features/campaigns/campaignsApi.ts",
+      "sha256": "fab0f02937badfa29bcc025a7ab91affecb5b3854953e70f20bd7fcb4a00b558"
+    },
+    {
+      "file": "apps/marketing/redux/features/integrations/integrationsApi.ts",
+      "sha256": "545c2272226ef10428ed7a319afa42494447a66d7927969ecc4a885483f7d138"
+    },
+    {
+      "file": "apps/marketing/redux/features/labels/labelsApi.ts",
+      "sha256": "a7b46f3848978935157813cb6c0250f9140fd2d93614efcefee2e411a0ae1a16"
+    },
+    {
+      "file": "apps/marketing/redux/features/marketing-v3/marketingApi.ts",
+      "sha256": "c5209adb84d1fd785e0c1f1bc9f0b17c4164dbc38bcdf081ca49644e0ac3af70"
+    },
+    {
+      "file": "apps/marketing/redux/features/messaging/messagingApi.ts",
+      "sha256": "a7645cd800748f956beddd4f7b72755d1bd0cdd28077b80d97ac5ebc15df5dd8"
+    },
+    {
+      "file": "apps/marketing/redux/features/posts/galleryApi.ts",
+      "sha256": "7ec779fc9a2e72bb59130597a8f5a48f08237934da00268c50e2cc8c65d17ce7"
+    },
+    {
+      "file": "apps/marketing/redux/features/posts/postsApi.ts",
+      "sha256": "e876428e3af8d55f4f9db0a140f88364a2e6561e1ff00b73cfa166ee54ed86f6"
+    },
+    {
+      "file": "apps/marketing/redux/features/projects/projectApi.ts",
+      "sha256": "67649f715072e7c99c1afbaef78ba397691e36c4c85d20a1b548e7c5f4371812"
+    },
+    {
+      "file": "apps/marketing/redux/features/reports/reportsApi.ts",
+      "sha256": "40a172c64c1a1e7926ee62e55e01b919f1766fcd824434fe22b6ddfcfba7a497"
+    },
+    {
+      "file": "apps/marketing/schemas/marketing-v3.ts",
+      "sha256": "9b9ecf813eb9e1f5a85d80d08af63bee058934936a0358e21c156e4ac24ee9bd"
+    },
+    {
+      "file": "apps/marketing/scripts/add-messages.py",
+      "sha256": "53788dd43b8e8c9cd5d32f5bb2aaebe49519c5adbbca92941c36ceff4a959226"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/01-foundations.json",
+      "sha256": "80aab424c4a984aa18fff7df3c364478cc96ffddb25a97ba702c9b52d34dc621"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/02-errors-feedback.json",
+      "sha256": "9c8d5896e5f31296a42bb3c6c4d9d4f05c7d96a7e52d57fb66df3a25959a68c4"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/03-shell.json",
+      "sha256": "306c498e22c6b82ae490aa1a7fd6382d5f3aae7fe3706eeaddf330bb0901f60a"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/04-status.json",
+      "sha256": "14c39b5b057c67bd82bd6fa10e31cbd703c9c72c513167260f11ff544b12c02d"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/05-fix-de-boost.json",
+      "sha256": "a8cdb58181331ed4bbdf17bbe3a8f7b25d546f150671eb8609b7c6302570bff8"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/06-stepper.json",
+      "sha256": "64e4bc0141e5f8bc41fbea1056b64a2fa02f52333571879e5908bb6689f6c6f1"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/07-feedback-integrations.json",
+      "sha256": "1109fdeca898431b7bc70d98481434dc2e82f939e3d43ac73f3a01c5e8c1cefd"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/08-feedback-posts.json",
+      "sha256": "a19004c5065c3f807ee5c06411ce8e2cf4c41310d7936811387597701712fc51"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/10-posts.json",
+      "sha256": "a6a5fade436b44cef5efec046d4d01ceccd30da351e2f93433a33c76504c620a"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/100-presentation-brand-journey.json",
+      "sha256": "3d266c3c0095796e644bbe769a33d033122e1a5c91748240277bd25ee8342761"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/101-marketing-v3.json",
+      "sha256": "72a4c17af5f42d71deced9353e3a6bea6c2a6d67043172bfc34afacad38e746e"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/102-marketing-workflows.json",
+      "sha256": "ee4077df17e3c24b6fbbffc9363253b25fa91e562c7a4c5c836bc12521230dbe"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/103-marketing-compatibility.json",
+      "sha256": "02ccbb2b2503f8f37d3fd1782d1d1b333e6621403978e594f5f4137b46e59099"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/104-marketing-assets.json",
+      "sha256": "40c32efa5463288b871da2fc1212fc625c830eb1dc8bb2ee2b97e42ece21e66d"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/105-marketing-task-status.json",
+      "sha256": "66bacd019074d83cf923216dfe35b90066c5304db434990ffe599672e3a86f5e"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/106-marketing-project-launch.json",
+      "sha256": "d92e7c4aedcaa2c7cebed682e7ef032beb29373d6eaab6e9e2b55eec50705f54"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/11-composer.json",
+      "sha256": "af2434aa00793ee0df58a5c3d97f22e9f2b1fdc3c2b20f66f0624bf9b4689beb"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/12-post-details.json",
+      "sha256": "03c65085464ebe19bc0ed5e2cadd0e88e525036e3d97da9a0ec8098c6a49099f"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/13-calendar-boost.json",
+      "sha256": "10f996d9d6343a18be148f88272d56b39b58966144219a28b4f96ac8bf16b18f"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/14-media-labels.json",
+      "sha256": "450d16664fd3c82fc457f687a6e839d695c8f48d2d9c42af96233c506bfd496b"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/15-media-plurals.json",
+      "sha256": "47fd8c061d1985d9426856d5d29fc022dc16dff5f10a9515331e5c5ee1808f9b"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/19-command-recovery.json",
+      "sha256": "cd296a4d7209f3f2965aaf7e6753aa54eb88c0a41cef6b89a72d9732b1c3c5c3"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/20-campaigns.json",
+      "sha256": "28396e05860e89a7b6efb456917b9f2c7322bd82356a8b4a2b24f7dba178341e"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/20-utm-settings.json",
+      "sha256": "7ab535fcda7bb4bea0cce323d2993c3114b156c8e48397c8895473d66673ab09"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/21-campaign-wizard.json",
+      "sha256": "78c1e13a3d95d757e507c72e92a01a126560b1760934160a28d45597893e263d"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/22-wizard-google.json",
+      "sha256": "3f4832a7bd02d876e8a8496f33b783f4f47d919a4f45f7b1f988590ef38b2cf9"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/23-wizard-paid-social.json",
+      "sha256": "315db7a2855d7d98c853649fe48c2cde725f31ef0f7f7a10f8cdee93ad27d092"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/24-wizard-messaging.json",
+      "sha256": "5779a793cb981888f783baac5e7769e74df5f556a9ce79854f181bbafd2d8bc6"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/25-campaign-dialogs.json",
+      "sha256": "b7fdad9e0151a7a4890f8b4bceee6e0aac6d610dd41cc9646643ffb6fe346f84"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/26-campaign-enums.json",
+      "sha256": "fdb9cc0bc63d6a91981bf9a436f7551693e1a08d1f1f3cb68a0915e38c7f5366"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/30-integrations-settings.json",
+      "sha256": "8499e2c6252156c076e5fef93be745db05ed2af870894177368d15a3800e796a"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/40-insights.json",
+      "sha256": "c6f114895adfc934e3bbe1ea3a36931c261bbaf856639b6afe420b3605c99974"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/90-glossary-fixes.json",
+      "sha256": "6d6ea7114056b03adc0285384e3dad907b16fcefdba81dba75a958e31897940d"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/91-remove-stepper.json",
+      "sha256": "a674f056fb882d31bbfae9995f10daab3957a22b0a93b5f91ac9bfeb98e73c50"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/94-presentation.json",
+      "sha256": "c8413419d6230e603d0b7290637b2c2463e017474211647e6b963ab185bf2867"
+    },
+    {
+      "file": "apps/marketing/scripts/messages/99-presentation-website-campaign.json",
+      "sha256": "2ed240179a2f9a0d628f91c18c9700d8eedf82a0f5ae4eb1cb7004f3094c3c1e"
+    },
+    {
+      "file": "apps/marketing/scripts/update-sos-bar.ps1",
+      "sha256": "7ebf9856e9c5a2b59755da88f2eb500422d9221ad53ab6611385b38c553c83e0"
+    },
+    {
+      "file": "apps/marketing/tsconfig.json",
+      "sha256": "be18523b23b78b6e1a876ddd107d330f0168bddf09d751b57e0b5edce69c66f3"
+    },
+    {
+      "file": "apps/marketing/types/audiences.ts",
+      "sha256": "4078ca254a0443f3cc443406c34082360159962c231f2c11e24b563d3f97d373"
+    },
+    {
+      "file": "apps/marketing/types/boost.ts",
+      "sha256": "d04afa9d0c17e86f50a64a1826578f439af79c7d9d5e4c12cc6645a644e0bfb9"
+    },
+    {
+      "file": "apps/marketing/types/campaignTypes.ts",
+      "sha256": "c3cc2b46af45bed4ed8ac03398e0fba145ce02bd714b49915c7908cdca5acb8a"
+    },
+    {
+      "file": "apps/marketing/types/campaigns.ts",
+      "sha256": "c7faf2b8a3a804878291246cc352c0d8ae852520798347e1eee05c635c375b02"
+    },
+    {
+      "file": "apps/marketing/types/index.ts",
+      "sha256": "56cb7c3c992fe0546fe82fb17c2e7622f7aec7c51c720ff37e69d34736cb3724"
+    },
+    {
+      "file": "apps/marketing/types/integrations.ts",
+      "sha256": "187dfbcd04c6df1294398ed69d57f58744e54d7802499101dcbf96bad3a3aad6"
+    },
+    {
+      "file": "apps/marketing/types/label.ts",
+      "sha256": "37e02983cab78d30f63a312a6282c6209520995102060d9543c30465ee995145"
+    },
+    {
+      "file": "apps/marketing/types/marketing-v3.ts",
+      "sha256": "42a719ed28701a545de090fb25d726b424f7abed8850bc8bce0705b5758ae190"
+    },
+    {
+      "file": "apps/marketing/types/messaging.ts",
+      "sha256": "5df8ba33d16af927b659ccf8c64db372056ed62a3c8a83e1b6ad36caf3365211"
+    },
+    {
+      "file": "apps/marketing/types/post.ts",
+      "sha256": "9e945e2e1cbdf9ac4938c88cb35ce6f5a9208d87506dbed0755ee629c8dbe162"
+    },
+    {
+      "file": "apps/marketing/types/projects.ts",
+      "sha256": "5a8c5637ab379499768d50c73cd3147aeb76f3ea8ee61274d0c20ebee222d68f"
+    },
+    {
+      "file": "apps/marketing/types/reports.ts",
+      "sha256": "f939dce189445c771f6f190db2ca3cd7deeee158560ba898b163ba72c979c5ac"
+    },
+    {
+      "file": "apps/marketing/types/user.ts",
+      "sha256": "b5f99761e26d07e22fd26b5cf866689773edea9be6efb83a4a0aa32f284d49a9"
+    },
+    {
+      "file": "apps/marketing/vercel.json",
+      "sha256": "ca7c396540c04562972a878873e320680ad098254c1be8132c9a9644f2401c3a"
+    },
+    {
+      "file": "mock/apps/marketing.js",
+      "sha256": "44f079a47ad67d9c10b9c438229b44638498eda7be6c0974cb458ed11f8c692e"
+    },
+    {
+      "file": "mock/apps/marketing/analytics.js",
+      "sha256": "a1eaa6f15d2a9c142c9edcf7f9fed5c0451e1d3dd6648dde0e555cd9a7c9e3ed"
+    },
+    {
+      "file": "mock/apps/marketing/catalog.js",
+      "sha256": "3d6753dc66708f76fa25ae7ee1a409db4ebeffbcd35d29f72ccf27e9a3192bce"
+    },
+    {
+      "file": "mock/apps/marketing/lib.js",
+      "sha256": "f43f12422d973741ae73cece6158f335b2379ec66e0a2cb9a00bb7f0c13d3835"
+    },
+    {
+      "file": "mock/apps/marketing/media.js",
+      "sha256": "c5ba566c3c8eafa6bbb4da74c27d32310789845e4829c5b6ec4ae469ed73cfc7"
+    },
+    {
+      "file": "mock/apps/marketing/roles.js",
+      "sha256": "2911befea6394017b9baf10986cbd3b765f13d467ff30e0a83255273185d6957"
+    },
+    {
+      "file": "mock/apps/marketing/routes/audience.js",
+      "sha256": "97e0b4447c825bb9661dc3666072384c3d41a05a4f8d7c2628dc33443c57efee"
+    },
+    {
+      "file": "mock/apps/marketing/routes/campaigns.js",
+      "sha256": "74919fe9494992644d072df89d65c3b75a6fa90e7183220bfacaf5e1c7f5a3cb"
+    },
+    {
+      "file": "mock/apps/marketing/routes/common.js",
+      "sha256": "52b20dd888df0fa06221521b4ee9551d6511b20c30dc3cf853ae00fd00a42612"
+    },
+    {
+      "file": "mock/apps/marketing/routes/insights.js",
+      "sha256": "03de849e73b786cf992e4f917d3c8025e606cf835d2c00261cf66a08d040cdd2"
+    },
+    {
+      "file": "mock/apps/marketing/routes/integrations.js",
+      "sha256": "3b2f8da27e33ff13f4fdf82596c18cec4299e1460032d2e4d84818dbbb6b3a4d"
+    },
+    {
+      "file": "mock/apps/marketing/routes/library.js",
+      "sha256": "387461beed2c9c52ef8c2c24436df7b7d319cc1d379d553e8cac35a4292f08d3"
+    },
+    {
+      "file": "mock/apps/marketing/routes/posts.js",
+      "sha256": "7a6efb0045cdb81cb8cecef87235d6edcf8d7a5def5a30c29f926839859a3854"
+    },
+    {
+      "file": "mock/apps/marketing/routes/projects.js",
+      "sha256": "c3ef7654fc7fe68892a4acfcc410fa2d38c3583c62ba5b076d392a544e9478e7"
+    },
+    {
+      "file": "mock/apps/marketing/runtime-boundaries.test.js",
+      "sha256": "f246548f7a6d993e8ef135565aaa572c0845fce2fa97389356dcfd8ff1d51736"
+    },
+    {
+      "file": "mock/apps/marketing/seed.js",
+      "sha256": "02369a30aa22ce113aecd31746aae9a36493a95f36b949a204a2d97e9c92fe29"
+    },
+    {
+      "file": "mock/apps/marketing/v3-features.js",
+      "sha256": "ae35f2450bb41200701048bde68dd318689145f9d63eb49e05363d4eb9e77c1b"
+    },
+    {
+      "file": "mock/apps/marketing/v3-features.test.js",
+      "sha256": "7820422aa82bf4b588c5681c4d52780ddca429543cf28ebd543ed83375012ef4"
+    },
+    {
+      "file": "mock/apps/marketing/v3-queue.js",
+      "sha256": "767a7bc4640a74fbed8c2028f69f9fab703b9376bb0a3f69cd3cc5c6ecfc1499"
+    },
+    {
+      "file": "mock/apps/marketing/v3.js",
+      "sha256": "8845f155d0e53af01c42a203c9536d286e4956265721afe3ccf65ab8c28bacfa"
+    },
+    {
+      "file": "mock/apps/marketing/v3.test.js",
+      "sha256": "856ba8df11b60c0cac1b4e468d5881c6141b8237342659588133a96ead09a72d"
+    },
+    {
+      "file": "mock/apps/marketing/views.js",
+      "sha256": "b20c3257aa5dd32a017819e068768ef4c4fa1e82b4640ae3755d720da1ad6a9e"
+    },
+    {
+      "file": "mock/apps/marketing/workspace-runtime.test.js",
+      "sha256": "23a7bfd91ffb1799ea1ea862bf7d72454e3046d04ee8e35da58c43d625f99185"
+    }
+  ],
+  "checks": {
+    "typecheck": "final-typecheck.log",
+    "fiveCatalogs": "final-catalogs.log",
+    "productionBuild": "final-production-build.log",
+    "nativeAndClient": "native-tests.log",
+    "detector": [
+      "impeccable-detect.json",
+      "recovery-impeccable-detect.json",
+      "utm-impeccable-detect.json"
+    ]
+  },
+  "limitations": [
+    "This package proves local native prototype behavior, not production providers.",
+    "Aggregate browser assertions are not independent backlog criteria.",
+    "Before/failure artifacts are retained for diagnosis and excluded from acceptance totals.",
+    "Actual campaign CRM attribution/results are proved; WM page builder/picker and external tracking are not claimed."
+  ]
+}

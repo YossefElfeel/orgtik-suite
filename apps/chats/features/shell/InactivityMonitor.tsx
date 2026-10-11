@@ -171,7 +171,7 @@ export function InactivityMonitor() {
         </p>
         <div aria-hidden="true" className={"mt-3 h-1 w-full overflow-hidden "+("ch-background-314b28"+' '+"ch-border-radius-189003")} >
           <div
-            className={("ch-height-622640"+' '+"ch-background-3f17cb"+' '+"ch-transition-f17a3a")+" "+(geometryClass({width:`${(secondsLeft / (WARN_MS / 1000)) * 100}%`}))}
+            className={("w-full origin-left rtl:origin-right ch-height-622640"+' '+"ch-background-3f17cb"+' '+"ch-transition-f17a3a")+" "+(geometryClass({transform:`scaleX(${secondsLeft / (WARN_MS / 1000)})`}))}
           />
         </div>
         <div className="mt-4 flex flex-wrap items-center justify-between gap-2">

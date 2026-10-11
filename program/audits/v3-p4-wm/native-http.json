@@ -1,0 +1,482 @@
+{
+  "checks": [
+    {
+      "name": "POST /api/auth/login succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/users?search=wm-v3-editor@qa.test succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/users succeeds",
+      "pass": true
+    },
+    {
+      "name": "PATCH /v2/admin/users/17 succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /api/auth/login succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/users?search=wm-v3-reviewer@qa.test succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/users succeeds",
+      "pass": true
+    },
+    {
+      "name": "PATCH /v2/admin/users/18 succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /api/auth/login succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/users?search=wm-v3-viewer@qa.test succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/users succeeds",
+      "pass": true
+    },
+    {
+      "name": "PATCH /v2/admin/users/19 succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /api/auth/login succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/overview succeeds",
+      "pass": true
+    },
+    {
+      "name": "current editor permissions come from actual native role",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/entries/page/pg_partners succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/entries/pg_partners/autosave succeeds",
+      "pass": true
+    },
+    {
+      "name": "actual autosave retains old live value",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/entries/pg_partners/autosave succeeds",
+      "pass": true
+    },
+    {
+      "name": "lost response replay returns the same actual version",
+      "pass": true
+    },
+    {
+      "name": "same operation changed body refused",
+      "pass": true
+    },
+    {
+      "name": "stale autosave refused",
+      "pass": true
+    },
+    {
+      "name": "viewer autosave refused",
+      "pass": true
+    },
+    {
+      "name": "canonical prices cannot autosave",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/comments succeeds",
+      "pass": true
+    },
+    {
+      "name": "comment actual author preserved",
+      "pass": true,
+      "details": {
+        "key": "sos-u17",
+        "name": "WM Editor"
+      }
+    },
+    {
+      "name": "viewer cannot comment",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/comments succeeds",
+      "pass": true
+    },
+    {
+      "name": "comment replay does not create a second record",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/webhooks succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/webhooks/hook_3 succeeds",
+      "pass": true
+    },
+    {
+      "name": "webhook test is explicit local mock delivery",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/releases succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/releases/release_5 succeeds",
+      "pass": true
+    },
+    {
+      "name": "creator/editor cannot approve",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/releases/release_5 succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/releases/release_5 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/entries/page/pg_partners succeeds",
+      "pass": true
+    },
+    {
+      "name": "approved release changes actual published CMS content",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/webhooks succeeds",
+      "pass": true
+    },
+    {
+      "name": "native publication records configured local receipt",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/releases/release_5 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/entries/page/pg_partners succeeds",
+      "pass": true
+    },
+    {
+      "name": "rollback restores exact retained published content",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/translations succeeds",
+      "pass": true
+    },
+    {
+      "name": "translation starts as explicit mock draft",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/translations/translation_11 succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/translations/translation_11 succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/translations/translation_11 succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/entries/page/pg_partners succeeds",
+      "pass": true
+    },
+    {
+      "name": "translation reviewed using current native locale state without publishing",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/media/samples succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/media/md_23 succeeds",
+      "pass": true
+    },
+    {
+      "name": "imported original SHA-256 matches canonical bytes",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/media/md_23/replace succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/media/md_23 succeeds",
+      "pass": true
+    },
+    {
+      "name": "replacement keeps v1 exact bytes and v2 distinct",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/media/tags succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/media/md_23 succeeds",
+      "pass": true
+    },
+    {
+      "name": "bulk tags are native persisted metadata",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/catalog?country=CH succeeds",
+      "pass": true
+    },
+    {
+      "name": "current canonical mirrors use actual owner links",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/catalog?country=CH succeeds",
+      "pass": true
+    },
+    {
+      "name": "viewer mirror cannot borrow privileged launch links",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/notifications succeeds",
+      "pass": true
+    },
+    {
+      "name": "review notifications refer to current native entry paths",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/notifications/read succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/notifications succeeds",
+      "pass": true
+    },
+    {
+      "name": "read-all retained per actual actor",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/preferences succeeds",
+      "pass": true
+    },
+    {
+      "name": "PATCH /v2/admin/studio/preferences succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/preferences succeeds",
+      "pass": true
+    },
+    {
+      "name": "shared staff appearance persists native preference",
+      "pass": true
+    },
+    {
+      "name": "PATCH /v2/admin/studio/preferences succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/search?q=partners succeeds",
+      "pass": true
+    },
+    {
+      "name": "search refers to actual native entry",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/setup succeeds",
+      "pass": true
+    },
+    {
+      "name": "onboarding derives native actual edits/import/review",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/studio/setup succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/setup succeeds",
+      "pass": true
+    },
+    {
+      "name": "onboarding dismissal persists for current person",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/entries/legalDocument/lg_privacy succeeds",
+      "pass": true
+    },
+    {
+      "name": "PATCH /v2/admin/entries/legalDocument/lg_privacy succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/entries/legalDocument/lg_privacy/transitions succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/entries/legalDocument/lg_privacy/transitions succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/admin/entries/legalDocument/lg_privacy/transitions succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/public/site succeeds",
+      "pass": true
+    },
+    {
+      "name": "privacy version comes from separately reviewed retained native legal revision",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/settings/site succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/forms succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/public/leads succeeds",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/forms succeeds",
+      "pass": true
+    },
+    {
+      "name": "honeypot refuses creating a retained or CRM submission",
+      "pass": true
+    },
+    {
+      "name": "POST /v2/public/leads succeeds",
+      "pass": true
+    },
+    {
+      "name": "actual website lead receives canonical CRM handoff",
+      "pass": true,
+      "details": {
+        "id": "ld_06",
+        "formsMode": "live",
+        "sales": {
+          "state": "sent",
+          "leadId": "83a33bee-8b29-43ad-99c7-94205fd53e7f",
+          "duplicate": false,
+          "managedIn": "crm",
+          "at": "2026-10-07T09:00:00.000Z"
+        }
+      }
+    },
+    {
+      "name": "GET /v2/admin/leads/ld_06 succeeds",
+      "pass": true
+    },
+    {
+      "name": "retained website record preserves actual page/UTM and owner handoff",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/lead-target/ld_06 succeeds",
+      "pass": true
+    },
+    {
+      "name": "current actor opens only the actual admitted CRM contact",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/lead-target/ld_06 succeeds",
+      "pass": true
+    },
+    {
+      "name": "viewer cannot reuse privileged intake owner CRM visibility",
+      "pass": true
+    },
+    {
+      "name": "WM cannot assign the CRM canonical lead",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/studio/notifications succeeds",
+      "pass": true
+    },
+    {
+      "name": "actual form notification visible to current staff",
+      "pass": true
+    },
+    {
+      "name": "GET /v2/admin/users?search=wm-v3-editor@qa.test succeeds",
+      "pass": true
+    },
+    {
+      "name": "PATCH /v2/admin/users/17 succeeds",
+      "pass": true
+    },
+    {
+      "name": "Original receipt cannot bypass current role loss",
+      "pass": true
+    },
+    {
+      "name": "PATCH /v2/admin/users/17 succeeds",
+      "pass": true
+    },
+    {
+      "name": "POST /api/auth/login succeeds",
+      "pass": true
+    },
+    {
+      "name": "Re-authenticated viewer cannot replay old editor write",
+      "pass": true
+    }
+  ],
+  "actors": {
+    "admin": 1,
+    "editor": {
+      "id": 17,
+      "email": "wm-v3-editor@qa.test"
+    },
+    "reviewer": {
+      "id": 18,
+      "email": "wm-v3-reviewer@qa.test"
+    },
+    "viewer": {
+      "id": 19,
+      "email": "wm-v3-viewer@qa.test"
+    }
+  },
+  "records": {
+    "commentId": "comment_1",
+    "releaseId": "release_5",
+    "translationId": "translation_11",
+    "mediaId": "md_23",
+    "leadId": "ld_06"
+  },
+  "completed": true
+}

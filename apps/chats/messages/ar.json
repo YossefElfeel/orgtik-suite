@@ -934,7 +934,7 @@
   "settings.ownerOnly": "للمالك فقط",
   "settings.people": "الأشخاص والأدوار",
   "settings.peopleCount": "{n, plural, =0 {لا أحد} one {شخص واحد} two {شخصان} few {# أشخاص} many {# شخصًا} other {# شخص}}",
-  "settings.plan": "الباقة",
+  "settings.plan": "خطة",
   "settings.planActive": "مفعّلة. الباقة وحد المستخدمين يأتيان من المنظومة.",
   "settings.planOff": "غير مفعّلة.",
   "settings.planOpen": "الباقة والتفعيل",
@@ -1401,5 +1401,6 @@
   "v3.knockOffer": "عايز يتكلم",
   "v3.acceptKnock": "قبول المحادثة",
   "v3.declineKnock": "رفض",
-  "v3.deferKnock": "بعدين"
+  "v3.deferKnock": "بعدين",
+  "v3.loadingTasks": "جارٍ تحميل المهام المرتبطة…"
 }

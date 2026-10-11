@@ -26,10 +26,13 @@ import {
 import { leadSchema } from "@/schemas/marketing-v3";
 import type { CanonicalDirectory, CampaignResults } from "@/types/marketing-v3";
 import { openMarketingSuiteDestination } from "@/lib/suite-navigation";
+import { marketingSuiteCommand } from "@/lib/command-recovery";
+import { useProjectContext } from "@/lib/project-context";
 export default function CampaignEngagement({ id }: { id: string }) {
   const t = useTranslations("MarketingV3"),
     f = useFormatter(),
     suite = useSuite(),
+    project = useProjectContext(),
     query = useMarketingCampaignQuery(id),
     [change, state] = useMarketingChangeMutation(),
     [directory, setDirectory] = useState<CanonicalDirectory>(),
@@ -179,10 +182,12 @@ export default function CampaignEngagement({ id }: { id: string }) {
                   setBusy(true);
                   try {
                     operation.current ||= crypto.randomUUID();
-                    await suite.mutate(
-                      `/marketing/campaigns/${encodeURIComponent(id)}/lead`,
-                      "POST",
+                    const path = `/marketing/campaigns/${encodeURIComponent(id)}/lead`;
+                    await marketingSuiteCommand(
+                      project.id,
+                      path,
                       { ...body, operationId: operation.current },
+                      (original) => suite.mutate(path, "POST", original),
                     );
                     operation.current = undefined;
                     form.reset({ contactId: "", title: "", estimate: 0 });

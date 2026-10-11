@@ -1,6 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { WmDispatch } from "@/store";
+import { useDispatch } from "react-redux";
+import { ElementComments } from "@/components/studio/ElementComments";
+import { StudioFeedback } from "@/components/studio/StudioUI";
+import { useStudioAction, StudioError } from "@/lib/studio";
 import { useSearchParams } from "next/navigation";
 import { Link, useRouter } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
@@ -56,9 +61,9 @@ import { IconPicker } from "./IconPicker";
 import { SectionOrder } from "./SectionOrder";
 import { SectionAttachments } from "./SectionAttachments";
 import { MediaPicker } from "@/components/media/MediaPicker";
+import sectionMap from "@/lib/cms-sections.json";
 import { ReviewEditor } from "./ReviewEditor";
 import { ArticleBodyEditor, synchronizeArticleEdits } from "./ArticleBodyEditor";
-import sectionMap from "../../../../program/cms/sections.json";
 import {
   LifecycleActions,
   VisibilityBadge,
@@ -73,6 +78,7 @@ import { useEntryName } from "@/lib/entryName";
 import { useCan } from "@/lib/permissions";
 import { safeReturn } from "@/lib/useListState";
 import {
+  api,
   statusOf,
   useApproveFiguresMutation,
   useEntriesQuery,
@@ -155,7 +161,12 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   const presentation = presentationEdit ?? entry.content.presentation ?? { sectionOrder: [], sectionMedia: {}, cursor: { text: {}, link: "" } };
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [stale, setStale] = useState<{ by: string } | null>(null);
-  const [save, saving] = useSaveEntryMutation();
+  const savingAction = useStudioAction("entry:"+entry.id);
+  const [saveLegacy,legacySaving] = useSaveEntryMutation();
+  const saving = {isLoading:savingAction.busy||legacySaving.isLoading};
+  const dispatch = useDispatch<WmDispatch>();
+  const v3 = useTranslations("WmV3");
+  const [autosaving,setAutosaving] = useState(true);
   const [transition, moving] = useTransitionEntryMutation();
   const [approveFigures] = useApproveFiguresMutation();
   // Services live under their family's address; articles are filed under a family.
@@ -264,7 +275,16 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
     else toast.error(t("saveFailed"));
   };
 
-  const saveAll = async () => {
+  const editStamp = JSON.stringify({edits,seoEdits,slugEdit,neutralEdit,altEdits,imageSrc,imageFocal,presentationEdit});
+  const latestEdit = useRef(editStamp);
+  latestEdit.current = editStamp;
+  const acceptSaved = (result:unknown,stamp?:string) => {
+    const value=result as Entry;
+    dispatch(api.util.upsertQueryData("entry",{type:entry.type,id:entry.id},value));
+    dispatch(api.util.invalidateTags(["EntryList","Overview","Seo","Media","MediaList"]));
+    if(stamp && latestEdit.current===stamp){setEdits({});setSeoEdits({});setSlugEdit(null);setNeutralEdit({});setAltEdits({});setImageSrc(null);setImageFocal(undefined);setPresentationEdit(undefined);}
+  };
+  const saveRestricted = async () => {
     setErrors({});
     let version = entry.version;
     try {
@@ -274,7 +294,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         const s = l === "en" ? slugEdit : null;
         if (!fields && !seo && s === null) continue;
         version = (
-          await save({
+          await saveLegacy({
             ...ref,
             version,
             patch: { locale: l, fields, seo, slug: s ?? undefined },
@@ -287,7 +307,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
           image: Object.keys(altEdits).length || imageSrc !== null ? { alt, ...(imageSrc !== null ? { src: imageSrc, focal: imageFocal } : {}) } : undefined,
           presentation: presentationEdit,
         };
-        version = (await save({ ...ref, version, patch }).unwrap()).version;
+        version = (await saveLegacy({ ...ref, version, patch }).unwrap()).version;
       }
       setEdits({});
       setSeoEdits({});
@@ -302,6 +322,21 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
       onError(e);
     }
   };
+
+  const makePatches = () => {
+    const patches=[];
+    for(const l of LOCALES){const fields=edits[l],seo=seoEdits[l],slug=l==="en"?slugEdit:null;if(fields||seo||slug!==null)patches.push({locale:l,fields,seo,slug:slug??undefined});}
+    if(Object.keys(neutralEdit).length||Object.keys(altEdits).length||imageSrc!==null||presentationEdit)patches.push({neutral:Object.keys(neutralEdit).length?neutralEdit:undefined,image:Object.keys(altEdits).length||imageSrc!==null?{alt,...(imageSrc!==null?{src:imageSrc,focal:imageFocal}:{})}:undefined,presentation:presentationEdit});
+    return patches;
+  };
+  const saveAll = async () => {
+    if(managedIn || ["pricing","legalDocument","service","softwareModule","serviceFamily"].includes(entry.type))return saveRestricted();
+    setErrors({});
+    const stamp=editStamp;
+    const patches=makePatches();
+    try{const result=await savingAction.run<Entry>("/studio/entries/"+entry.id+"/autosave",{version:entry.version,patches});acceptSaved(result,stamp);}catch(error){if(error instanceof StudioError&&error.status===412)setStale({by:""});else if(!(error instanceof StudioError&&error.uncertain))onError(error);}
+  };
+  useEffect(()=>{if(!dirty||!autosaving||savingAction.busy||savingAction.pending||savingAction.error||!editable&&!seoEditable||managedIn||["pricing","legalDocument","service","softwareModule","serviceFamily"].includes(entry.type))return;const timer=setTimeout(()=>void saveAll(),1200);return()=>clearTimeout(timer);},[editStamp,autosaving,savingAction.busy,savingAction.pending,savingAction.error,entry.version,editable,seoEditable,managedIn]);
 
   const act = (action: Transition, note?: string) =>
     transition({ ...ref, version: entry.version, action, note }).unwrap();
@@ -813,6 +848,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         }
       />
 
+      {!viewing && !managedIn && !["pricing","legalDocument","service","softwareModule","serviceFamily"].includes(entry.type)?<><div className="flex flex-wrap items-center gap-3"><Switch checked={autosaving} onCheckedChange={setAutosaving} aria-label={v3("autosave")}/><span className="text-body-sm text-fg-muted">{v3(savingAction.busy?"autosaving":"autosave")}</span></div><StudioFeedback action={savingAction} onRetry={value=>acceptSaved(value,JSON.stringify((savingAction.pending?.body as {patches?:unknown})?.patches)===JSON.stringify(makePatches())?editStamp:undefined)}/></>:null}
       {viewing ? <div className="flex flex-wrap items-center justify-between gap-3 rounded-field border border-line bg-info-subtle p-4"><p className="text-body-sm text-info">{ti(mayEdit ? "viewModeHelp" : "viewOnlyHelp")}</p>{mayEdit ? <Button size="sm" variant="secondary" onClick={() => router.replace(editHref)}>{ti("edit")}</Button> : null}</div> : null}
 
       {!seoOnly && body.length > 1 ? <SectionOrder items={orderedBody.map(key => ({ key, label: sections.find(section => section.value === key) ? sectionName(sections.find(section => section.value === key)!) : key === "reviews" ? ti("reviews") : key === "questions" ? ti("faqQuestions") : key }))} disabled={!editable || lang !== "en"} onChange={sectionOrder => setPresentationEdit({ ...presentation, sectionOrder })} /> : null}
@@ -1136,6 +1172,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         </div>
       ) : null}
 
+      {!viewing && !managedIn && !["pricing","legalDocument","service","softwareModule","serviceFamily"].includes(entry.type)?<ElementComments entryId={entry.id} anchor={section==="seo"?"seo":sections.find(s=>s.value===section)?.path||"entry"} locale={lang} editable={editable||seoEditable}/>:null}
       <ConfirmDialog
         open={Boolean(stale)}
         onOpenChange={(o) => !o && setStale(null)}

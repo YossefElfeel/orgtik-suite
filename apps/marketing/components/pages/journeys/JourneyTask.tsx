@@ -17,7 +17,9 @@ import {
 import { RHFField } from "@orgtik/ui/rhf";
 import { taskSchema } from "@/schemas/marketing-v3";
 import { openMarketingSuiteDestination } from "@/lib/suite-navigation";
-import {marketingTaskState} from "@/lib/marketing-v3";
+import { marketingTaskState } from "@/lib/marketing-v3";
+import { marketingSuiteCommand } from "@/lib/command-recovery";
+import { useProjectContext } from "@/lib/project-context";
 import type {
   Journey,
   JourneyStep,
@@ -37,6 +39,7 @@ export default function JourneyTask({
 }) {
   const t = useTranslations("MarketingV3"),
     suite = useSuite(),
+    project = useProjectContext(),
     [projects, setProjects] = useState<TaskProject[]>(),
     [refs, setRefs] = useState<TaskReference[]>([]),
     [error, setError] = useState(false),
@@ -57,7 +60,9 @@ export default function JourneyTask({
     if (!available) return;
     setError(false);
     Promise.all([
-      suite.request<TaskProject[]>(`/tasks/projects?source=marketing&sourceId=${encodeURIComponent(journey.campaignId)}`),
+      suite.request<TaskProject[]>(
+        `/tasks/projects?source=marketing&sourceId=${encodeURIComponent(journey.campaignId)}`,
+      ),
       step.taskIds?.length
         ? suite.request<TaskReference[]>(
             `/tasks/references?source=marketing&sourceId=${encodeURIComponent(journey.campaignId)}&ids=${step.taskIds.join(",")}`,
@@ -127,7 +132,7 @@ export default function JourneyTask({
                 setBusy(true);
                 try {
                   operation.current ||= crypto.randomUUID();
-                  await suite.mutate("/tasks", "POST", {
+                  const command = {
                     ...body,
                     projectId: Number(body.projectId),
                     sectionId: Number(body.sectionId),
@@ -136,7 +141,13 @@ export default function JourneyTask({
                     journeyId: journey.id,
                     stepId: step.id,
                     operationId: operation.current,
-                  });
+                  };
+                  await marketingSuiteCommand(
+                    project.id,
+                    "/tasks",
+                    command,
+                    (body) => suite.mutate("/tasks", "POST", body),
+                  );
                   operation.current = undefined;
                   form.setValue("title", "");
                   onCreated();
@@ -206,7 +217,20 @@ export default function JourneyTask({
                 className="flex flex-wrap items-center justify-between gap-3 py-3"
               >
                 <span dir="auto">{row.title}</span>
-                {marketingTaskState(row.status)?<StatusBadge entity="task" state={marketingTaskState(row.status)!}/>:<span className="text-caption text-fg-muted">{row.status==="on_hold"?t("taskOnHold"):row.status==="cancelled"?t("taskCancelled"):t("taskUnavailable")}</span>}
+                {marketingTaskState(row.status) ? (
+                  <StatusBadge
+                    entity="task"
+                    state={marketingTaskState(row.status)!}
+                  />
+                ) : (
+                  <span className="text-caption text-fg-muted">
+                    {row.status === "on_hold"
+                      ? t("taskOnHold")
+                      : row.status === "cancelled"
+                        ? t("taskCancelled")
+                        : t("taskUnavailable")}
+                  </span>
+                )}
                 <Button
                   variant="secondary"
                   size="sm"

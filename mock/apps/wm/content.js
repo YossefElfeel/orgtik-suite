@@ -469,6 +469,24 @@ function makeStore(now, { demo = false } = {}) {
     return { entry: e };
   }
 
+  // Release rollback accepts only a server-retained, already published revision. New wording
+  // still uses the existing separate-editor approval workflow; mirrors/legal/prices stay outside bundles.
+  function rollbackPublished(e, who, version, { can } = {}) {
+    if (!can?.("content:approve")) return { status: 403, code: "forbidden", required: "content:approve" };
+    if (mirrored(e) || ["pricing", "legalDocument", "service", "softwareModule", "serviceFamily"].includes(e.type)) return MIRRORED;
+    if (e.draft || !e.live || e.workflow.state !== "published") return { status: 409, code: "wrong_state" };
+    const previous = version == null ? null : e.versions.find(row => row.version === version && row.state === "published");
+    if (version != null && !previous) return { status: 422, code: "published_version_required" };
+    const value = clone(previous?.content || e.live);
+    e.live = previous ? value : null;
+    e.draft = previous ? null : value;
+    e.workflow = { ...e.workflow, version: e.workflow.version + 1, state: previous ? "published" : "draft", visibility: previous ? e.workflow.visibility : "not_on_site", updatedAt: now(), updatedBy: who.key, lastEditor: previous ? e.workflow.lastEditor : who.key, publishedAt: previous ? now() : null };
+    e.translation = Object.fromEntries(LOCALES.map(locale => [locale, value.locales?.[locale] && Object.keys(value.locales[locale]).length ? previous ? "published" : "in_progress" : "not_started"]));
+    e.versions.unshift({ version: e.workflow.version, state: e.workflow.state, at: now(), by: who.key, action: "rollback_published", fromVersion: version, content: clone(value) });
+    log(who.key, "rollback_published", e, { fromVersion: version });
+    return { entry: e };
+  }
+
   // Sample figures become approved project results (claims:approve; D-032, website AGENTS.md).
   function approveFigures(e, who) {
     const c = e.draft ?? clone(e.live);
@@ -624,7 +642,7 @@ function makeStore(now, { demo = false } = {}) {
     else if (demo && incoming.demoVersion < 2) require("./seed/demo-states").publishedExamples({ entries, audit, now });
     if (demo && incoming.demoVersion < 3) require("./seed/demo-states").populateTranslationExamples(entries);
   };
-  return { ensureDemo, create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES, exportState, importState, validateState };
+  return { ensureDemo, create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, rollbackPublished, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES, exportState, importState, validateState };
 }
 
 module.exports = { makeStore, TRANSITIONS, TYPES };

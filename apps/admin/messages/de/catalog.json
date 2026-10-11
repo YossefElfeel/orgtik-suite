@@ -1,7 +1,7 @@
 {
   "Catalog": {
     "allTools": "Alle Tools",
-    "plansArea": "Pläne und Funktionen",
+    "plansArea": "Tarife und Funktionen",
     "status": {
       "coming_soon": "Demnächst",
       "beta": "Beta",
@@ -57,7 +57,7 @@
       "colOrder": "Reihenfolge",
       "colTool": "Tool",
       "colStatus": "Status",
-      "colPlans": "Pläne",
+      "colPlans": "Tarife",
       "colWorkspaces": "Arbeitsbereiche",
       "colWaitlist": "Warteliste",
       "colActions": "Aktionen",
@@ -146,7 +146,7 @@
       "plansCount": "{count, plural, =0 {Keine Pläne} one {# Plan} other {# Pläne}}"
     },
     "plans": {
-      "title": "Pläne",
+      "title": "Tarife",
       "areaTitle": "Pläne und Funktionen",
       "titleFor": "Pläne von {name}",
       "description": "Die Pläne jedes Tools und wie viele Arbeitsbereiche sie nutzen. Preise stehen im Preisraster.",
@@ -154,7 +154,7 @@
       "empty": "Noch keine Pläne",
       "emptyFor": "Dieses Tool hat noch keine Pläne",
       "filterTool": "Pläne zeigen von",
-      "colPlan": "Plan",
+      "colPlan": "Tarif",
       "colTool": "Tool",
       "colTier": "Stufe",
       "colUnit": "Preismodell",

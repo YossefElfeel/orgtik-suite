@@ -1,0 +1,17 @@
+{
+  "scope": "Actual accepted reply whose response is lost, then page reload and ordinary resend",
+  "requests": [
+    {
+      "body": "Lost-response reload proof",
+      "operationId": "314ecbeb-e357-417b-a332-7d2187e83ad9"
+    },
+    {
+      "body": "Lost-response reload proof",
+      "operationId": "48b961cb-6484-4586-8bf9-b44d6301d609"
+    }
+  ],
+  "acceptedStatus": 200,
+  "persistedCopies": 2,
+  "distinctOperations": 2,
+  "demonstratedDuplication": true
+}

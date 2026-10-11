@@ -1,0 +1,12 @@
+{"baseline":true,"frame":0,"pixel":[34,30,41,255],"style":{"border":"1px solid rgba(255, 255, 255, 0.17)","bounds":976.5625}}
+{"baseline":true,"frame":1,"pixel":[34,30,41,255],"style":{"border":"1px solid rgba(255, 255, 255, 0.17)","bounds":976.5625}}
+{"baseline":true,"frame":2,"pixel":[34,30,41,255],"style":{"border":"1px solid rgba(255, 255, 255, 0.17)","bounds":976.5625}}
+{"baseline":true,"frame":3,"pixel":[34,30,41,255],"style":{"border":"1px solid rgba(255, 255, 255, 0.17)","bounds":976.5625}}
+{"baseline":false,"frame":0,"pixel":[34,30,41,255],"style":{"border":"1px solid rgba(255, 255, 255, 0.17)","bounds":976.5625}}
+{"baseline":false,"frame":1,"pixel":[34,30,41,255],"style":{"border":"1px solid rgba(255, 255, 255, 0.17)","bounds":976.5625}}
+{"baseline":false,"frame":2,"pixel":[34,30,41,255],"style":{"border":"1px solid rgba(255, 255, 255, 0.17)","bounds":976.5625}}
+{"baseline":false,"frame":3,"pixel":[34,30,41,255],"style":{"border":"1px solid rgba(255, 255, 255, 0.17)","bounds":976.5625}}
+Exact pair 0 true
+Exact pair 1 true
+Exact pair 2 true
+Exact pair 3 true

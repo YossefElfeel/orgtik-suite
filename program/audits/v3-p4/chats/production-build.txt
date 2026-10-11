@@ -1,0 +1,48 @@
+$ next build
+   ▲ Next.js 15.5.25
+   - Experiments (use with caution):
+     · optimizePackageImports
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 81s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/18) ...
+   Generating static pages (4/18)
+   Generating static pages (8/18)
+   Generating static pages (13/18)
+ ✓ Generating static pages (18/18)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /                                      135 B         105 kB
+├ ƒ /_not-found                            135 B         105 kB
+├ ƒ /[locale]/auth                       10.8 kB         182 kB
+├ ƒ /guest/[token]                       4.85 kB         227 kB
+├ ƒ /hq/activate                           135 B         105 kB
+├ ƒ /hq/admin/[[...section]]              9.7 kB         239 kB
+├ ƒ /hq/chat                             9.77 kB         288 kB
+├ ƒ /hq/chat/[channelId]                 8.63 kB         519 kB
+├ ƒ /hq/chat/catch-up                    8.46 kB         218 kB
+├ ƒ /hq/chat/search                      6.21 kB         215 kB
+├ ƒ /hq/insights                         51.3 kB         332 kB
+├ ƒ /hq/insights/transparency            9.94 kB         212 kB
+├ ƒ /hq/me                                4.3 kB         214 kB
+├ ƒ /hq/meetings                           245 B         533 kB
+├ ƒ /hq/meetings/[meetingId]               243 B         533 kB
+├ ƒ /hq/meetings/[meetingId]/call        24.1 kB         533 kB
+├ ƒ /hq/office                           32.1 kB         550 kB
+├ ƒ /hq/settings                           12 kB         221 kB
+├ ƒ /hq/settings/emails                  3.67 kB         206 kB
+├ ƒ /hq/setup                            6.51 kB         264 kB
+├ ƒ /hq/whiteboard                       13.3 kB         457 kB
+├ ƒ /presentation                        14.2 kB         434 kB
+└ ƒ /tasks/[taskId]                      5.67 kB         450 kB
++ First Load JS shared by all             105 kB
+  ├ chunks/4221-f5771f558ca68046.js      46.7 kB
+  ├ chunks/8d8b5b03-accd0e53cd9b2846.js  54.2 kB
+  └ other shared chunks (total)          4.19 kB
+
+
+ƒ  (Dynamic)  server-rendered on demand

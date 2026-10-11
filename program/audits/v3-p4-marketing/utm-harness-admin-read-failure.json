@@ -1,0 +1,46 @@
+{
+  "scope": "Adopted native current-project UTM settings and Admin configuration destinations",
+  "checks": [
+    {
+      "name": "Ordinary UTM Save uses native project command",
+      "pass": true
+    },
+    {
+      "name": "Defaults retain actual project and actor provenance",
+      "pass": true
+    },
+    {
+      "name": "Generated URL preserves existing query/fragment and encodes saved labels",
+      "pass": true,
+      "details": "https://example.test/services?country=CH&utm_source=service+newsletter&utm_medium=email&utm_campaign=current+service+%26+delivery#details"
+    },
+    {
+      "name": "Non-public URL cannot produce a share link",
+      "pass": true
+    },
+    {
+      "name": "URL credentials are refused",
+      "pass": true
+    },
+    {
+      "name": "Invalid native defaults refused",
+      "pass": true
+    },
+    {
+      "name": "Rejected save leaves actual previous settings unchanged",
+      "pass": true
+    },
+    {
+      "name": "Native defaults recover after browser reload",
+      "pass": true
+    },
+    {
+      "name": "Admin settings opens actual Brand settings",
+      "pass": false
+    }
+  ],
+  "captures": [],
+  "errors": [],
+  "projectId": "59e7c413-7210-42e7-ab44-df71ee59cc8a",
+  "failure": "Admin settings opens actual Brand settings undefined"
+}

@@ -1,0 +1,1 @@
+$ node ../../tools/next-env.cjs && tsc --noEmit

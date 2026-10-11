@@ -1,0 +1,144 @@
+{
+  "scope": "Ordinary Console source checkpoint; owned offset1100 mock runtime",
+  "checks": [
+    {
+      "name": "Actual staff Console landing uses one search and bell",
+      "pass": true
+    },
+    {
+      "name": "Ordinary route loaded: /billing",
+      "pass": true
+    },
+    {
+      "name": "Contained page: /billing",
+      "pass": true
+    },
+    {
+      "name": "No serious/critical axe: /billing",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Ordinary route loaded: /releases",
+      "pass": true
+    },
+    {
+      "name": "Contained page: /releases",
+      "pass": true
+    },
+    {
+      "name": "No serious/critical axe: /releases",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Ordinary route loaded: /ecosystem",
+      "pass": true
+    },
+    {
+      "name": "Contained page: /ecosystem",
+      "pass": true
+    },
+    {
+      "name": "No serious/critical axe: /ecosystem",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Ordinary route loaded: /staff/security",
+      "pass": true
+    },
+    {
+      "name": "Contained page: /staff/security",
+      "pass": true
+    },
+    {
+      "name": "No serious/critical axe: /staff/security",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Ordinary route loaded: /staff/invitations",
+      "pass": true
+    },
+    {
+      "name": "Contained page: /staff/invitations",
+      "pass": true
+    },
+    {
+      "name": "No serious/critical axe: /staff/invitations",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Ordinary route loaded: /tickets/targets",
+      "pass": true
+    },
+    {
+      "name": "Contained page: /tickets/targets",
+      "pass": true
+    },
+    {
+      "name": "No serious/critical axe: /tickets/targets",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Ordinary route loaded: /tax/checks",
+      "pass": true
+    },
+    {
+      "name": "Contained page: /tax/checks",
+      "pass": true
+    },
+    {
+      "name": "No serious/critical axe: /tax/checks",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Ordinary route loaded: /catalog/software",
+      "pass": true
+    },
+    {
+      "name": "Contained page: /catalog/software",
+      "pass": true
+    },
+    {
+      "name": "No serious/critical axe: /catalog/software",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Ordinary route loaded: /setup",
+      "pass": true
+    },
+    {
+      "name": "Contained page: /setup",
+      "pass": true
+    },
+    {
+      "name": "No serious/critical axe: /setup",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "No runtime/catalog errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "billing-en-light-1440.png",
+    "releases-en-light-1440.png",
+    "ecosystem-en-light-1440.png",
+    "staff-security-en-light-1440.png",
+    "staff-invitations-en-light-1440.png",
+    "tickets-targets-en-light-1440.png",
+    "tax-checks-en-light-1440.png",
+    "catalog-software-en-light-1440.png",
+    "setup-en-light-1440.png"
+  ],
+  "errors": [],
+  "completed": true
+}

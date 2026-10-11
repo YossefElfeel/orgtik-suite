@@ -1,0 +1,203 @@
+{
+  "scope": "Accepted native billing and staff-invitation portion; View-as is separately accepted in view-as.json",
+  "checks": [
+    {
+      "name": "Actual callback /v1/admin/console/billing/manual-retry",
+      "pass": true,
+      "details": {
+        "data": {
+          "invoiceId": "inv_1075",
+          "paused": true,
+          "scope": "manual_staff_attempts"
+        },
+        "meta": {}
+      }
+    },
+    {
+      "name": "Paused native staff attempts disable payment retry",
+      "pass": true
+    },
+    {
+      "name": "Actual callback /v1/admin/console/billing/manual-retry",
+      "pass": true,
+      "details": {
+        "data": {
+          "invoiceId": "inv_1075",
+          "paused": false,
+          "scope": "manual_staff_attempts"
+        },
+        "meta": {}
+      }
+    },
+    {
+      "name": "Actual callback /v1/admin/console/billing/notice",
+      "pass": true,
+      "details": {
+        "data": {
+          "id": "console_notice_1076",
+          "workspaceId": "ws_nile",
+          "delivery": "mock"
+        },
+        "meta": {}
+      }
+    },
+    {
+      "name": "Actual callback /v1/admin/console/billing/pay-links",
+      "pass": true,
+      "details": {
+        "data": {
+          "id": "paylink_1079",
+          "invoiceId": "inv_1075",
+          "workspaceId": "ws_nile",
+          "createdAt": "2026-10-07T09:00:00.000Z",
+          "expiresAt": "2026-10-14T09:00:00.000Z",
+          "state": "active",
+          "by": 1,
+          "path": "/billing/pay/paylink_1079"
+        },
+        "meta": {}
+      }
+    },
+    {
+      "name": "Actual invoice owns the created payment link",
+      "pass": true
+    },
+    {
+      "name": "Lost response committed the actual owner invoice once",
+      "pass": true
+    },
+    {
+      "name": "Reload recovers exactly the original payment body",
+      "pass": true
+    },
+    {
+      "name": "Original payment recovery does not create a second charge",
+      "pass": true
+    },
+    {
+      "name": "Actual callback /v1/admin/console/billing/invoices/inv_1075/action",
+      "pass": true,
+      "details": {
+        "data": {
+          "id": "inv_1075",
+          "number": "INV-2026-001054",
+          "workspaceId": "ws_nile",
+          "kind": "manual",
+          "state": "partially_refunded",
+          "currency": "EGP",
+          "issuedAt": "2026-10-07T09:00:00.000Z",
+          "dueAt": "2026-10-14T09:00:00.000Z",
+          "lines": [
+            {
+              "label": "Actual native owner payment link",
+              "amount": 50
+            }
+          ],
+          "subtotal": 50,
+          "taxLabel": "VAT 14%",
+          "tax": 7,
+          "total": 57,
+          "payments": [
+            {
+              "id": "pay_1080",
+              "amount": 57,
+              "currency": "EGP",
+              "method": "card",
+              "gateway": "gw_retry",
+              "at": "2026-10-07T09:00:00.000Z",
+              "status": "succeeded",
+              "usdRate": 48.5,
+              "usdAmount": 1.18,
+              "by": "customer",
+              "reference": null
+            }
+          ],
+          "creditNotes": [
+            {
+              "id": "cn_1081",
+              "number": "CN-2026-000016",
+              "amount": 5,
+              "reason": "Ordinary native credit-note proof",
+              "at": "2026-10-07T09:00:00.000Z",
+              "by": "admin"
+            }
+          ],
+          "refunded": 5,
+          "createdBy": "admin",
+          "paidAt": "2026-10-07T09:00:00.000Z"
+        },
+        "meta": {}
+      }
+    },
+    {
+      "name": "Ordinary refund creates native credit note with original issued money",
+      "pass": true
+    },
+    {
+      "name": "Actual callback /v1/admin/console/staff/invitations",
+      "pass": true,
+      "details": {
+        "data": {
+          "id": "staffinvite_1082",
+          "userId": 9,
+          "email": "ahmed.tarek@orgtik.test",
+          "name": "Ahmed Tarek",
+          "roles": [
+            "support"
+          ],
+          "state": "pending",
+          "createdAt": "2026-10-07T09:00:00.000Z",
+          "expiresAt": "2026-10-14T09:00:00.000Z",
+          "invitedBy": 1,
+          "path": "/staff-invitations"
+        },
+        "meta": {}
+      }
+    },
+    {
+      "name": "Staff invitation displays human role labels",
+      "pass": true
+    },
+    {
+      "name": "Actual callback /v1/app/staff-invitations/staffinvite_1082/accept",
+      "pass": true,
+      "details": {
+        "data": {
+          "id": "staffinvite_1082",
+          "userId": 9,
+          "email": "ahmed.tarek@orgtik.test",
+          "name": "Ahmed Tarek",
+          "roles": [
+            "support"
+          ],
+          "state": "accepted",
+          "createdAt": "2026-10-07T09:00:00.000Z",
+          "expiresAt": "2026-10-14T09:00:00.000Z",
+          "invitedBy": 1,
+          "path": "/staff-invitations",
+          "acceptedAt": "2026-10-07T09:00:00.000Z",
+          "sessionAction": "signed_out"
+        },
+        "meta": {}
+      }
+    },
+    {
+      "name": "Actual staff acceptance ends the old session before access is reused",
+      "pass": true
+    },
+    {
+      "name": "Accepted native staff person can select Console after fresh login",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "native-billing-recovery-controls.png",
+    "native-owner-pay-link-recovered-390.png",
+    "native-invoice-credit-note.png",
+    "native-staff-invitation.png",
+    "native-staff-invitation-recipient-390.png"
+  ],
+  "errors": [],
+  "completed": true,
+  "provenance": "First17 native callbacks passed at04bb112; later View-as harness locator failure preserved in billing-handoffs-confirmation-locator-failure.json. Final recovery/current-role tests independently passed at94aea6d."
+}

@@ -1,0 +1,31 @@
+{
+  "beforeLabel": "v3-current-main-before",
+  "afterLabel": "v3-current-main-after",
+  "names": [
+    "legal__1440",
+    "legal_imprint__1440",
+    "legal_partners__768",
+    "legal_partners__1440",
+    "legal_privacy__390",
+    "services__390",
+    "services__768",
+    "services_design__1440",
+    "services_design_graphic-design__1440",
+    "services_design_web-and-app-design__1440",
+    "services_development__768",
+    "services_hosting__390",
+    "services_it-support__1440",
+    "services_it-support_software-support__768",
+    "services_it-support_software-support__1440",
+    "services_it-support_website-management__390",
+    "services_it-support_website-management__1440",
+    "services_marketing_digital-advertising-switzerland__390",
+    "services_marketing_seo-services__768",
+    "services_marketing_seo-services__1440",
+    "services_marketing_social-media-marketing__390",
+    "software_hr__1440",
+    "software_marketing__1440",
+    "software_plans__1440"
+  ],
+  "protocol": "Same browser, fresh contexts, all-compositor-stages flush, three full-page warm paints per source."
+}
