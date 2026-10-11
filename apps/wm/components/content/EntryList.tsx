@@ -14,7 +14,7 @@ import {
 } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { LanguageDots } from "@/components/content/LanguageDots";
-import { NewEntry } from "@/components/content/NewEntry";
+import { CollectionOrder } from "./CollectionOrder";
 import { PricingAuthority } from "@/components/content/PricingAuthority";
 import { ReviewSummary, ReviewOrder } from "@/components/content/ReviewSummary";
 import { EntryActions } from "@/components/content/EntryActions";
@@ -39,7 +39,6 @@ import {
  */
 // Where the site's design takes a list of any length, entries can be added; elsewhere the design
 // has a place for each one (the five families, their services, the six modules).
-const CREATABLE = new Set<EntryType>(["article", "caseStudy", "roadmapItem", "review"]);
 const FIXED_SET = new Set<EntryType>([
   "serviceFamily",
   "service",
@@ -76,7 +75,6 @@ export function EntryList({ type: key }: { type: EntryType }) {
     search: search || undefined,
     ...(filterKey && filter !== "all" ? { [filterKey]: filter } : {}),
   });
-  const templates = useEntriesQuery({ type: key, pageSize: 100 }, { skip: !CREATABLE.has(key) || !can("content:edit") });
   const needsFamilies =
     key === "service" || key === "article" || key === "serviceFamily";
   const families = useEntriesQuery(
@@ -376,7 +374,8 @@ export function EntryList({ type: key }: { type: EntryType }) {
   return (
     <div className="flex flex-col gap-4">
       {key === "pricing" || key === "softwareModule" ? <PricingAuthority historical={key === "pricing"} /> : null}
-      <div className="flex flex-wrap items-center gap-3">
+      {["service", "caseStudy", "article"].includes(key) ? <CollectionOrder type={key} disabled={!can("content:edit")} /> : null}
+      <div className="wm-table-filters">
         <Input
           size="sm"
           type="search"
@@ -385,7 +384,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
           aria-label={tt(`${key}.search`)}
           placeholder={tt(`${key}.search`)}
           startIcon={<MagnifyingGlass className="size-4" />}
-          className="w-full sm:w-72"
+          className="wm-search"
         />
         <Select className={key === "review" ? "w-full sm:w-52" : undefined} size="sm" label={t("colState")} aria-label={t("colState")} value={url.get("state", "all")} onValueChange={state => url.set({ state })} options={[{ value: "all", label: ti("all") }, ...(["draft", "in_review", "approved", "scheduled", "published"] as const).map(value => ({ value, label: <StatusBadge entity="cms_revision" state={value} size="sm" /> }))]} />
         {key === "page" ? <Select size="sm" label={t("colLanguages")} aria-label={t("colLanguages")} value={url.get("missingLanguages", "all")} onValueChange={missingLanguages => url.set({ missingLanguages })} options={[{ value: "all", label: ti("all") }, { value: "true", label: ti("missingLanguages") }]} /> : null}
@@ -404,9 +403,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
             className="w-56"
           />
         ) : null}
-        {CREATABLE.has(key) && can("content:edit") ? (
-          <NewEntry type={key} entries={templates.data?.items ?? []} />
-        ) : null}
+
       </div>
       {FIXED_SET.has(key) ? (
         <p className="-mt-1 text-body-sm text-fg-muted">{t("fixedSet")}</p>

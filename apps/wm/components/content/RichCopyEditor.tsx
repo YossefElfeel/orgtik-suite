@@ -66,7 +66,7 @@ export function RichCopyEditor({
   return (
     <div className="flex flex-col gap-2">
       {parts.map((part, index) =>
-        part.fixed || (!part.text && parts.length > 1) ? null : long ? (
+        part.fixed || (!part.text.trim() && parts.length > 1) ? null : long ? (
           <Textarea
             key={index}
             rows={2}

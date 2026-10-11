@@ -9,7 +9,6 @@ import {
   Input,
   NumberField,
   Select,
-  Switch,
   Textarea,
 } from "@orgtik/ui";
 import { MediaPicker } from "@/components/media/MediaPicker";
@@ -181,23 +180,7 @@ export function ReviewEditor({
           <p className="mt-1 text-body-sm text-fg-muted">
             {t("reviewDisplayHelp")}
           </p>
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-4 rounded-field bg-sunken p-3">
-            <div className="min-w-0 flex-1">
-              <label htmlFor="review-sample" className="text-label">
-                {t("sample")}
-              </label>
-              <p className="mt-1 text-caption text-fg-muted">
-                {t("reviewSampleHelp")}
-              </p>
-            </div>
-            <Switch
-              id="review-sample"
-              aria-label={t("sample")}
-              checked={sample}
-              disabled={locked}
-              onCheckedChange={(sample) => onSettings({ sample })}
-            />
-          </div>
+          <div role="note" className="mt-4 rounded-field bg-sunken p-3"><p className="text-label">{t("sample")}: {sample ? t("yes") : t("no")}</p><p className="mt-1 text-caption text-fg-muted">{t("reviewSampleReadOnly")}</p></div>
           <div className="mt-4 grid gap-4 sm:grid-cols-[10rem_minmax(0,1fr)]">
             <Field label={t("order")} description={t("reviewOrderHelp")}>
               <NumberField

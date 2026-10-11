@@ -108,7 +108,7 @@ function SiteForm({ site }: { site: SiteSettings }) {
             const r = site.readiness[l.code];
             return (
               <li key={l.code} className="grid items-center gap-3 py-3 sm:grid-cols-[10rem_1fr_auto_auto]">
-                <span className="text-start font-semibold text-fg"><bdi lang={l.code} dir={l.code === "ar" ? "rtl" : "ltr"}>{NATIVE[l.code]}</bdi></span>
+                <span className="text-start font-semibold text-fg"><bdi lang={l.code} dir={l.code === "ar" ? "rtl" : "ltr"}>{NATIVE[l.code] ?? new Intl.DisplayNames([l.code],{type:"language"}).of(l.code)}</bdi></span>
                 <Progress value={r ? Math.round((r.done / Math.max(1, r.total)) * 100) : 0} label={<span className="text-caption text-fg-muted">{t("readiness", { done: r?.done ?? 0, total: r?.total ?? 0 })}</span>} />
                 <label className="inline-flex items-center gap-2 text-body-sm text-fg">
                   <Switch checked={l.enabled} disabled={!canLocales || l.code === "en"} onCheckedChange={(v) => setLocale(l.code, { enabled: v, ...(v ? {} : { public: false }) })} aria-label={t("enabledFor", { language: NATIVE[l.code] })} />

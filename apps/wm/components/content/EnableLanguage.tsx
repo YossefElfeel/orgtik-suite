@@ -32,11 +32,8 @@ export function EnableLanguage() {
   const [code, setCode] = useState<string | null>(null);
   const { data } = useSiteQuery(undefined, { skip: !allowed });
   const [save, saving] = useUpdateSiteMutation();
-  const options =
-    data?.locales
-      .filter((locale) => !locale.enabled)
-      .map((locale) => ({ value: locale.code, label: names[locale.code] })) ??
-    [];
+  const candidates = { ...names, es: "Español", pt: "Português", nl: "Nederlands" };
+  const options = Object.entries(candidates).filter(([code])=>!data?.locales.some(locale=>locale.code===code && locale.enabled)).map(([value,label])=>({value,label}));
   return (
     <>
       <Button
@@ -55,6 +52,7 @@ export function EnableLanguage() {
             <p className="mb-4 text-body-sm text-fg-muted">
               {t(options.length ? "enableLanguageHelp" : "allLanguagesEnabled")}
             </p>
+            <p className="mb-4 text-body-sm text-fg-muted">{t("languageFlow")}</p>
             {options.length ? (
               <Field label={ts("languages")}>
                 <Select
@@ -75,11 +73,7 @@ export function EnableLanguage() {
                   await save({
                     version: data.version,
                     patch: {
-                      locales: data.locales.map((locale) =>
-                        locale.code === code
-                          ? { ...locale, enabled: true }
-                          : locale,
-                      ),
+                      locales: data.locales.some(locale=>locale.code===code) ? data.locales.map(locale=>locale.code===code ? {...locale,enabled:true} : locale) : [...data.locales,{code:code as typeof data.locales[number]["code"],enabled:true,public:false}],
                     },
                   }).unwrap();
                   toast.success(ts("saved"));

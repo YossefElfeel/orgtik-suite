@@ -71,11 +71,8 @@ function Library() {
 
       />
       <PackagedMedia ids={picked} reload={refetch}/>
-      <Tabs value={issue} onValueChange={(v) => setIssue(v as IssueTab)}>
-        <TabsList items={ISSUES.map((x) => ({ value: x, label: t(`issues.${x}`), ...(x === "all" ? {} : { count: counts[x as MediaIssue] ?? 0 }) }))} />
-      </Tabs>
-      <div className="flex flex-wrap items-center gap-3">
-        <Input size="sm" type="search" value={search} onChange={(e) => setSearch(e.target.value)} aria-label={t("search")} placeholder={t("search")} startIcon={<MagnifyingGlass className="size-4" />} className="w-full sm:w-72" />
+      <div className="wm-table-filters"><Select size="sm" aria-label={t("issues.all")} value={issue} onValueChange={value=>setIssue((value??"all") as IssueTab)} options={ISSUES.map(value=>({value,label:t(`issues.${value}`)}))} />
+        <Input size="sm" type="search" value={search} onChange={(e) => setSearch(e.target.value)} aria-label={t("search")} placeholder={t("search")} startIcon={<MagnifyingGlass className="size-4" />} className="wm-search" />
         <Select size="sm" aria-label={t("kind")} value={kind} onValueChange={(v) => setKind(v ?? "all")} options={["all", "image", "vector", "video"].map((k) => ({ value: k, label: t(`kinds.${k}`) }))} className="w-44" />
       </div>
       {isLoading ? (

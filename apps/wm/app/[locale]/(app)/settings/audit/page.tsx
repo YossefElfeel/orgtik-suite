@@ -36,7 +36,7 @@ function AuditLog() {
           const a = row.original;
           const ty = typeOfId(a.entry);
           return ty ? (
-            <Link href={`/content/${ty.area}/${a.targetName ?? a.entry}`} dir="ltr" className="text-body-sm text-fg hover:underline focus-visible:outline-2 focus-visible:outline-focus">
+            <Link href={`/content/${ty.area}/${a.entry}`} dir="ltr" className="text-body-sm text-fg hover:underline focus-visible:outline-2 focus-visible:outline-focus">
               {a.targetName ?? a.entry}
               {a.locale ? ` · ${a.locale}` : ""}
             </Link>
@@ -53,14 +53,14 @@ function AuditLog() {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader title={t("title")} description={t("description")} />
-      <div className="flex flex-wrap items-center gap-3"><Input className="max-w-sm" aria-label={ti("search")} placeholder={ti("search")} value={url.get("search")} onChange={e => url.set({ search: e.target.value })} />
-        <Select size="sm" label={t("kind")} aria-label={t("kind")} value={kind} onValueChange={(v) => setKind(v ?? "all")} options={KINDS.map((k) => ({ value: k, label: t(`kinds.${k}`) }))} className="w-52" />
+      <div className="wm-table-filters"><Input size="sm" className="wm-search" aria-label={ti("search")} placeholder={ti("search")} value={url.get("search")} onChange={e => url.set({ search: e.target.value })} />
+        <Select size="sm" label={t("kind")} aria-label={t("kind")} value={kind} onValueChange={(v) => setKind(v ?? "all")} options={KINDS.map((k) => ({ value: k, label: k === "all" ? ti("all") : t(`kinds.${k}`) }))} className="w-52" />
         <Select
           size="sm"
           label={t("colWho")} aria-label={t("colWho")}
           value={by}
           onValueChange={(v) => setBy(v ?? "all")}
-          options={[{ value: "all", label: t("everyone") }, ...(members.data?.items ?? []).map((m) => ({ value: m.key, label: <bdi dir="auto">{m.name}</bdi> }))]}
+          options={[{ value: "all", label: ti("all") }, ...(members.data?.items ?? []).map((m) => ({ value: m.key, label: <bdi dir="auto">{m.name}</bdi> }))]}
           className="w-56"
         />
       </div>

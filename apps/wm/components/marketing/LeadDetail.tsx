@@ -62,7 +62,7 @@ export function LeadDetail({ id }: { id: string }) {
           <p role="note" className="text-body-sm text-fg-muted">{v3("leadReadOnly")}</p>{target.data?.canOpen&&target.data.url?<a href={target.data.url} className={buttonVariants({variant:"secondary"})}>{v3("openCRM")}</a>:<p role="status" className="text-body-sm text-fg-muted">{v3("crmAccessPending")}</p>}
           <section
             aria-labelledby="lead-contact"
-            className="flex flex-col gap-1 text-body-sm"
+            className="rounded-card border border-line bg-raised p-5 text-body-sm"
           >
             <h3 id="lead-contact" className="text-label text-fg">
               {t("contactTitle")}
@@ -73,7 +73,7 @@ export function LeadDetail({ id }: { id: string }) {
                 {t("masked")}
               </p>
             ) : null}
-            <dl className="grid grid-cols-[8rem_1fr] gap-x-3 gap-y-1">
+            <dl className="mt-4 grid grid-cols-[minmax(5rem,8rem)_minmax(0,1fr)] gap-x-4 gap-y-3 [&_dd]:break-words">
               <dt className="text-fg-muted">{t("email")}</dt>
               <dd dir="ltr" className="text-start text-fg">
                 {lead.email || "—"}
@@ -90,7 +90,7 @@ export function LeadDetail({ id }: { id: string }) {
           </section>
           <section
             aria-labelledby="lead-message"
-            className="flex flex-col gap-1"
+            className="rounded-card border border-line bg-raised p-5"
           >
             <h3 id="lead-message" className="text-label text-fg">
               {t("message")}

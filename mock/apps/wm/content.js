@@ -90,9 +90,11 @@ function loadSeed() {
 }
 
 function makeStore(now, { demo = false } = {}) {
+  const LOCALES = ["en", "ar", "de", "fr", "it"];
   const seed = loadSeed();
   const entries = new Map();
   const audit = [];
+  const managerOrders = {};
   for (const cs of [...seed.caseStudies, ...seed.entries]) {
     const { id, type, siteId, order, workflow, translation, legalVersions, ...rest } = cs;
     const neutral = Object.fromEntries(NEUTRAL.filter((k) => k in rest && ["department", "format", "parent"].includes(k)).map((k) => [k, rest[k]]));
@@ -622,11 +624,13 @@ function makeStore(now, { demo = false } = {}) {
     return { currency: live?.currency ?? "CHF", priceMode: live?.priceMode ?? "indicative", managedIn: live?.managedIn ?? null, modules: Object.fromEntries((live?.locales.en.items ?? []).map((m) => [m.id, { monthly: m.monthly }])) };
   };
   const ensureDemo = () => { if (demo) require("./seed/demo-states").contentExamples({ entries, audit, ideas, now }); };
-  const exportState = () => clone({ cmsVersion: 1, demoVersion: 3, entries: [...entries], audit, ideas: [...ideas] });
+  const exportState = () => clone({ cmsVersion: 1, demoVersion: 3, entries: [...entries], audit, managerOrders, contentLocales: LOCALES, ideas: [...ideas] });
   const validateState = value => {
     const incoming = codec.object(value), rows = codec.mapRows(incoming.entries), ideas_ = codec.mapRows(incoming.ideas);
     if (!Array.isArray(incoming.audit) || rows.some(([, row]) => !row.workflow || !Array.isArray(row.versions) || !row.translation || !TYPES.includes(row.type))) throw codec.fail("Website Manager content state is incomplete.");
-    return { cmsVersion: incoming.cmsVersion ?? 0, demoVersion: incoming.demoVersion ?? 0, entries: rows, audit: clone(incoming.audit), ideas: ideas_ };
+    const orders = incoming.managerOrders ?? {}, locales = incoming.contentLocales ?? ["en","ar","de","fr","it"];
+    if (!orders || typeof orders !== "object" || Array.isArray(orders) || Object.entries(orders).some(([type,ids])=>!["service","caseStudy","article"].includes(type) || !Array.isArray(ids) || ids.length>1000 || ids.some(id=>typeof id!=="string") || new Set(ids).size!==ids.length) || !Array.isArray(locales) || !locales.includes("en") || new Set(locales).size!==locales.length || locales.some(locale=>!["en","ar","de","fr","it","es","pt","nl"].includes(locale))) throw codec.fail("Website Manager preferences are invalid.");
+    return { cmsVersion: incoming.cmsVersion ?? 0, demoVersion: incoming.demoVersion ?? 0, entries: rows, audit: clone(incoming.audit), managerOrders: clone(incoming.managerOrders ?? {}), contentLocales: incoming.contentLocales ?? ["en","ar","de","fr","it"], ideas: ideas_ };
   };
   const importState = value => {
     const incoming = validateState(value);
@@ -637,12 +641,16 @@ function makeStore(now, { demo = false } = {}) {
     for (const entry of entries.values()) for (const content of [entry.live, entry.draft].filter(Boolean)) {
       if (entry.type === "page") content.presentation ??= { sectionOrder: [], sectionMedia: {}, cursor: { text: {}, link: "" } };
     }
+    for(const key of Object.keys(managerOrders)) delete managerOrders[key];
+    Object.assign(managerOrders,incoming.managerOrders);
+    LOCALES.splice(0,LOCALES.length,...incoming.contentLocales);
+    for(const [,row] of incoming.entries) for(const locale of Object.keys((row.draft ?? row.live)?.locales ?? {})) if(!LOCALES.includes(locale))LOCALES.push(locale);
     codec.replaceMap(ideas, incoming.ideas); audit.splice(0, audit.length, ...incoming.audit);
     if (incoming.demoVersion < 1) ensureDemo();
     else if (demo && incoming.demoVersion < 2) require("./seed/demo-states").publishedExamples({ entries, audit, now });
     if (demo && incoming.demoVersion < 3) require("./seed/demo-states").populateTranslationExamples(entries);
   };
-  return { ensureDemo, create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, rollbackPublished, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES, exportState, importState, validateState };
+  return { managerOrders, ensureDemo, create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, rollbackPublished, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES, exportState, importState, validateState };
 }
 
 module.exports = { makeStore, TRANSITIONS, TYPES };

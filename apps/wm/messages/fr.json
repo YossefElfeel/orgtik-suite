@@ -118,7 +118,8 @@
       "user_create": "Compte créé",
       "user_update": "Compte mis à jour",
       "user_roles": "Rôles du site modifiés",
-      "sample_revision": "Révision de démonstration ajoutée"
+      "sample_revision": "Révision de démonstration ajoutée",
+      "manager_order": "Réorganisé les éléments du gestionnaire"
     }
   },
   "Auth": {
@@ -643,7 +644,24 @@
     "reviewAuthor": "Auteur",
     "reviewRole": "Fonction",
     "reviewCompany": "Entreprise",
-    "reviewQuote": "Témoignage"
+    "reviewQuote": "Témoignage",
+    "header": "Titre",
+    "headerAccent": "Titre – accent",
+    "subheading": "Sous-titre",
+    "button": "Bouton",
+    "button1": "Bouton 1",
+    "button2": "Bouton 2",
+    "button1Link": "Lien du bouton 1",
+    "button2Link": "Lien du bouton 2",
+    "buildGrow": "Construire et grandir",
+    "runBetter": "Mieux fonctionner",
+    "sectionIntro": "Introduction de la section",
+    "purpose": "Objectif",
+    "goal1": "Objectif 01",
+    "goal2": "Objectif 02",
+    "goal3": "Objectif 03",
+    "overview": "Vue d’ensemble",
+    "rotationWord": "Texte défilant"
   },
   "Formats": {
     "design": "Journal de design",
@@ -908,7 +926,23 @@
     "uploadVideo": "Importer une vidéo",
     "reviewLive": "Visible sur le site",
     "reviewAdditionalMedia": "Médias supplémentaires",
-    "reviewAdditionalMediaHelp": "Images et vidéos facultatives affichées avec cet avis."
+    "reviewAdditionalMediaHelp": "Images et vidéos facultatives affichées avec cet avis.",
+    "yes": "Oui",
+    "no": "Non",
+    "reviewSampleReadOnly": "Vous pouvez voir ce réglage, mais pas le modifier.",
+    "orderEntries": "Organiser les éléments",
+    "orderHelp": "Glissez les éléments ou utilisez les flèches, puis enregistrez leur ordre.",
+    "saveOrder": "Enregistrer l’ordre",
+    "orderSaved": "Ordre enregistré",
+    "orderFailed": "Échec de l’enregistrement. Réessayez.",
+    "orderConflict": "La liste a changé. Rechargez-la.",
+    "languageFlow": "Choisissez une langue, puis préparez les traductions à vérifier. Les nouvelles langues commencent en brouillons privés.",
+    "rolesSearch": "Rechercher des permissions",
+    "allRoles": "Tous les rôles",
+    "allCapabilities": "Toutes les permissions",
+    "rotationNote": "Rotating words are used in the Home hero. Other pages use fixed headings.",
+    "rotationSourceHelp": "Ces textes défilants utilisent les titres des éléments ci-dessous. Ouvrez un élément pour gérer son titre.",
+    "templateField": "Cette valeur est fixée par le modèle du site et affichée ici à titre de référence."
   },
   "Leads": {
     "title": "Demandes",
@@ -1455,7 +1489,9 @@
     "arabicNote": "L’arabe sur le site est le même design en miroir ; le rendre public attend la validation des pages en miroir.",
     "errorLocales": {
       "english_public": "L’anglais reste public.",
-      "public_needs_enabled": "Une langue publique doit être activée."
+      "public_needs_enabled": "Une langue publique doit être activée.",
+      "invalid": "Choisissez une langue prise en charge et une visibilité valide.",
+      "translation_not_ready": "Cette langue est disponible pour les brouillons. L’accès public nécessite sa prise en charge sur le site."
     },
     "errorRequired": "Ce champ est requis.",
     "errorTemplate": "Gardez {page} dedans.",

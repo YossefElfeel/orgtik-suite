@@ -26,12 +26,14 @@ export function MediaPicker({
   onChange,
   disabled = false,
   imagesOnly = false,
+  iconOnly = false,
   kind,
 }: {
   value: string;
   onChange: (src: string, media?: MediaItem) => void;
   disabled?: boolean;
   imagesOnly?: boolean;
+  iconOnly?: boolean;
   kind?: "image" | "video";
 }) {
   const t = useTranslations("Improvements");
@@ -42,7 +44,7 @@ export function MediaPicker({
   const [files, setFiles] = useState<File[]>([]);
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
-  const [choosing, setChoosing] = useState(!value);
+  const [choosing, setChoosing] = useState(!value && !iconOnly);
   const [uploadingNew, setUploadingNew] = useState(false);
   const library = useMediaQuery(
     {
@@ -121,7 +123,7 @@ export function MediaPicker({
               aria-expanded={uploadingNew}
               onClick={() => setUploadingNew(!uploadingNew)}
             >
-              {t(imagesOnly || kind === "image" ? "uploadImage" : kind === "video" ? "uploadVideo" : "upload")}
+              {t(imagesOnly || iconOnly || kind === "image" ? "uploadImage" : kind === "video" ? "uploadVideo" : "upload")}
             </Button>
           ) : null}
           {!can("media:view") && !can("media:edit") ? (
@@ -151,7 +153,7 @@ export function MediaPicker({
               aria-label={t("selectMedia")}
               className="grid grid-cols-[repeat(auto-fill,minmax(min(8rem,100%),1fr))] gap-3"
             >
-              {library.data.items.map((item) => {
+              {library.data.items.filter(item => !iconOnly || /\.(svg|png)$/i.test(item.file)).map((item) => {
                 const src =
                   item.source === "upload" ? libraryUrl(item) : item.file;
                 return (
@@ -220,7 +222,7 @@ export function MediaPicker({
             value={files}
             onChange={setFiles}
             accept={
-              kind === "video"
+              iconOnly ? "image/png,image/svg+xml" : kind === "video"
                 ? "video/mp4,video/webm"
                 : imagesOnly || kind === "image"
                   ? "image/png,image/jpeg,image/webp"

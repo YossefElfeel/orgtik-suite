@@ -118,9 +118,9 @@ function Users() {
           </div>
         }
       />
-      <div className="flex flex-wrap gap-3">
+      <div className="wm-table-filters">
         <Input
-          className="max-w-sm"
+          className="wm-search"
           aria-label={t("search")}
           placeholder={t("search")}
           value={url.get("search")}

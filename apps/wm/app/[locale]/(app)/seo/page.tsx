@@ -89,13 +89,10 @@ function Health() {
           </Card>
         </div>
       ) : null}
-      <div className="flex flex-wrap gap-3">
-        <Input aria-label={ti("search")} placeholder={ti("search")} value={url.get("search")} onChange={e => url.set({ search: e.target.value })} className="max-w-sm" />
-        <Select label={ti("type")} value={url.get("kind", "all")} onValueChange={kind => url.set({ kind })} options={[{ value: "all", label: ti("all") }, ...Object.values(TYPES).filter(type => type.seo).map(type => ({ value: type.key, label: tt(`${type.key}.many`) }))]} />
+      <div className="wm-table-filters"><Select size="sm" aria-label={t("healthTitle")} value={check} onValueChange={value=>setCheck((value??"all") as SeoCheck|"all")} options={[{value:"all",label:t("all")},...CHECKS.map(value=>({value,label:t(`checks.${value}`)}))]} />
+        <Input size="sm" aria-label={ti("search")} placeholder={ti("search")} value={url.get("search")} onChange={e => url.set({ search: e.target.value })} className="wm-search" />
+        <Select size="sm" label={ti("type")} value={url.get("kind", "all")} onValueChange={kind => url.set({ kind })} options={[{ value: "all", label: ti("all") }, ...Object.values(TYPES).filter(type => type.seo).map(type => ({ value: type.key, label: tt(`${type.key}.many`) }))]} />
       </div>
-      <Tabs value={check} onValueChange={(v) => setCheck(v as SeoCheck | "all")}>
-        <TabsList items={[{ value: "all", label: t("all") }, ...CHECKS.filter((c) => (counts?.[c] ?? 0) > 0 || c === check).map((c) => ({ value: c, label: t(`checks.${c}`), count: counts?.[c] ?? 0 }))]} />
-      </Tabs>
       <DataTable
         label={t("healthTitle")}
         columns={columns.map(column => ({ ...column, enableSorting: false }))}

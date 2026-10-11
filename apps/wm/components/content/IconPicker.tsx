@@ -1,6 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Select } from "@orgtik/ui";
+import { Button } from "@orgtik/ui";
+import { MediaPicker } from "@/components/media/MediaPicker";
+import { mediaUrl } from "@/lib/env";
 import {
   ArrowsClockwise,
   Browser,
@@ -68,22 +70,16 @@ export function IconPicker({
   disabled?: boolean;
 }) {
   const t = useTranslations("Fields");
-  const options = Object.entries(icons).map(([key, Icon]) => ({
-    value: key,
-    label: (
-      <span className="inline-flex items-center gap-2">
-        <Icon aria-hidden className="size-5" />
-        <span>{key.replace(/^ph-/, "").replaceAll("-", " ")}</span>
-      </span>
-    ),
-  }));
+  const Selected = Object.hasOwn(icons, value) ? icons[value as keyof typeof icons] : undefined;
   return (
-    <Select
-      aria-label={t("icon")}
-      disabled={disabled}
-      value={value}
-      onValueChange={(next) => next && onChange(next)}
-      options={options}
-    />
+    <div className="flex flex-col gap-3">
+      <div aria-label={t("icon")} className="flex size-14 items-center justify-center rounded-field border border-line bg-sunken">
+        {Selected ? <Selected className="size-8" aria-hidden /> : value ? <img src={mediaUrl(value)} alt={t("icon")} className="size-8 object-contain" /> : null}
+      </div>
+      <div role="group" aria-label={t("icon")} className="flex flex-wrap gap-2">
+        {Object.entries(icons).map(([key, Icon]) => <Button key={key} size="sm" variant={key === value ? "primary" : "secondary"} disabled={disabled} aria-label={key.replace(/^ph-/, "").replaceAll("-", " ")} aria-pressed={key === value} onClick={() => onChange(key)} className="size-10 p-0"><Icon aria-hidden className="size-6" /></Button>)}
+      </div>
+      <MediaPicker iconOnly value={Selected ? "" : value} onChange={onChange} disabled={disabled} />
+    </div>
   );
 }

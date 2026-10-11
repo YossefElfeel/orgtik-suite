@@ -5,6 +5,7 @@
 import type { EntryContent, EntryType, LayoutSection } from "@/store/api";
 import { BLOCKS, BRIEF, type Department, type Node } from "./caseStudySchema";
 import { cmsLabelKey, cmsNodeLabels } from "./cmsLabels";
+import managerPages from "@/lib/manager-pages.json";
 import sectionMap from "@/lib/cms-sections.json";
 
 export type Area =
@@ -94,6 +95,7 @@ function layoutSections(e: SectionSource): EditorSection[] {
     string,
     Record<string, unknown>
   >;
+  const manager = (managerPages as Record<string, { editor: string[]; labels?: Record<string,string>; fields?: Record<string, {label:string}>; headerOnly?: string[] }>)[e.id ?? ""];
   const sections = (e.content?.layout ?? []).map((sec: LayoutSection): EditorSection => {
     if (sec.kind === "data")
       return {
@@ -103,12 +105,12 @@ function layoutSections(e: SectionSource): EditorSection[] {
         node: cmsNodeLabels(sec.node),
       };
     const fields = Object.fromEntries(
-      sec.slots.map((slot) => [
+      sec.slots.filter(slot => !manager?.headerOnly?.includes(sec.key) || ["div", "h1", "h2", "p"].includes(slot.key)).map((slot) => [
         slot.key,
         {
           kind: "rich",
           fixedValues: slot.fixedValues,
-          label: SLOT_LABEL[slot.kind] ?? "slotText",
+          label: slot.kind === "heading" ? "header" : slot.kind === "paragraph" ? "subheading" : slot.key === "div" ? "description" : SLOT_LABEL[slot.kind] ?? "slotText",
           long: String(en[sec.key]?.[slot.key] ?? "").length > 60,
           hint: slot.href
             ? { key: "link", values: { href: slot.href } }
@@ -130,12 +132,19 @@ function layoutSections(e: SectionSource): EditorSection[] {
     };
   });
   const mapping = (sectionMap as Record<string, { groups?: Record<string, string[]> }>)[e.id ?? ""];
-  if (!mapping?.groups) return sections;
-  const groups = mapping.groups;
+  const visible = manager ? sections.filter(section => manager.editor.includes(section.value)) : sections;
+  if (!mapping?.groups && !manager) return sections;
+  const groups = mapping?.groups ?? {};
   const grouped = new Set(Object.values(groups).flatMap(keys => keys.slice(1)));
-  return sections.filter(section => !grouped.has(section.value)).map(section => {
+  const result: EditorSection[] = visible.filter(section => !grouped.has(section.value)).map(section => {
     const groupKeys = groups[section.value];
     return !groupKeys ? section : { ...section, path: "", node: { kind: "group", fields: Object.fromEntries(groupKeys.flatMap(key => { const child = sections.find(item => item.value === key); return child ? [[key, child.node]] : []; })) } };
+  });
+  if (!manager) return result;
+  return manager.editor.flatMap<EditorSection>(key => {
+    const custom = manager.fields?.[key];
+    const section = result.find(item => item.value === key);
+    return custom ? [{value:key,path:"",label:custom.label,node:{kind:"group" as const,fields:{}}}] : section ? [{...section,label:manager.labels?.[key] ?? section.label}] : [];
   });
 }
 
@@ -303,7 +312,8 @@ export const TYPES: Record<EntryType, ContentType> = {
     idPrefix: "sv",
     sections: () => [
       {
-        value: "details",
+        value: "overview",
+        labelKey: "overview",
         node: group({
           name: text("name"),
           outcome: long("outcome"),

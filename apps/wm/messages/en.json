@@ -118,7 +118,8 @@
       "user_create": "Created account",
       "user_update": "Updated account",
       "user_roles": "Changed website roles",
-      "sample_revision": "Added sample revision"
+      "sample_revision": "Added sample revision",
+      "manager_order": "Reordered manager entries"
     }
   },
   "Auth": {
@@ -643,7 +644,24 @@
     "reviewAuthor": "Author",
     "reviewRole": "Role",
     "reviewCompany": "Company",
-    "reviewQuote": "Quote"
+    "reviewQuote": "Quote",
+    "header": "Header",
+    "headerAccent": "Header — accent",
+    "subheading": "Subheading",
+    "button": "Button",
+    "button1": "Button 1",
+    "button2": "Button 2",
+    "button1Link": "Button 1 link",
+    "button2Link": "Button 2 link",
+    "buildGrow": "Build & grow",
+    "runBetter": "Run it better",
+    "sectionIntro": "Section introduction",
+    "purpose": "Purpose",
+    "goal1": "Goal 01",
+    "goal2": "Goal 02",
+    "goal3": "Goal 03",
+    "overview": "Overview",
+    "rotationWord": "Rotating word"
   },
   "Formats": {
     "design": "Design journal",
@@ -908,7 +926,23 @@
     "uploadVideo": "Upload video",
     "reviewLive": "On website",
     "reviewAdditionalMedia": "Additional media",
-    "reviewAdditionalMediaHelp": "Optional images and videos displayed with this review."
+    "reviewAdditionalMediaHelp": "Optional images and videos displayed with this review.",
+    "yes": "Yes",
+    "no": "No",
+    "reviewSampleReadOnly": "You can view this setting but cannot edit it.",
+    "orderEntries": "Arrange entries",
+    "orderHelp": "Drag items to arrange them, or use the arrow buttons. Save the order when finished.",
+    "saveOrder": "Save order",
+    "orderSaved": "Order saved",
+    "orderFailed": "Could not save the order. Try again.",
+    "orderConflict": "The list changed. Reload before arranging again.",
+    "languageFlow": "Choose a language, then prepare translations for review. New languages start as private drafts.",
+    "rolesSearch": "Search capabilities",
+    "allRoles": "All roles",
+    "allCapabilities": "All capabilities",
+    "rotationNote": "Rotating words are used in the Home hero. Other pages use fixed headings.",
+    "rotationSourceHelp": "These scrolling words use the titles of the entries below. Open an entry to manage its title.",
+    "templateField": "This value is fixed by the website template and is shown here for reference."
   },
   "Leads": {
     "title": "Leads",
@@ -1455,7 +1489,9 @@
     "arabicNote": "Arabic on the website is the same design mirrored; making it public waits for the owner’s sign-off of the mirrored pages.",
     "errorLocales": {
       "english_public": "English stays public.",
-      "public_needs_enabled": "A public language has to be enabled."
+      "public_needs_enabled": "A public language has to be enabled.",
+      "invalid": "Choose a supported language and valid visibility settings.",
+      "translation_not_ready": "This new language is available for translation drafts. Public access requires website language support."
     },
     "errorRequired": "This is required.",
     "errorTemplate": "Keep {page} in it.",
@@ -1584,7 +1620,7 @@
     },
     "serviceFamily": {
       "one": "Service family",
-      "many": "Service Families",
+      "many": "Service families",
       "search": "Search service families",
       "empty": "No service families yet",
       "emptyBody": "Service families come from the website’s services page.",

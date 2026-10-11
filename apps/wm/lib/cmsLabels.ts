@@ -28,6 +28,7 @@ const aliases: Record<string, string> = {
 export const cmsLabelKey = (label: string) => aliases[label] ?? label;
 
 export function cmsNodeLabels(node: Node): Node {
+  if (node.kind === "text" && node.label === "icon") return { ...node, kind: "icon" };
   const translated = { ...node, ...(node.label ? { label: cmsLabelKey(node.label) } : {}) };
   if (translated.kind === "group") return { ...translated, fields: Object.fromEntries(Object.entries(translated.fields).map(([key, child]) => [key, cmsNodeLabels(child)])) };
   if (translated.kind === "list") return { ...translated, itemLabel: cmsLabelKey(translated.itemLabel), item: cmsNodeLabels(translated.item) };
