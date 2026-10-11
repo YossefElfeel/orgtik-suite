@@ -1664,6 +1664,25 @@
     "articleInvalid": "Prüfen Sie Abschnitte und Medien. Fügen Sie vor der Veröffentlichung fehlende Dateien hinzu; Struktur und Medien werden auf Englisch geändert.",
     "outline": "Seitenübersicht",
     "expandSection": "Abschnitt ausklappen",
-    "collapseSection": "Abschnitt einklappen"
+    "collapseSection": "Abschnitt einklappen",
+    "reviewContent": "Bewertungsinhalt",
+    "reviewContentHelp": "Schreiben Sie das Zitat und die Angaben zum Autor in der gewählten Sprache.",
+    "reviewPhoto": "Autorenfoto",
+    "reviewPhotoHelp": "Wählen Sie ein Porträt oder Markenbild. Die Datei wird für alle Sprachen verwendet.",
+    "reviewDisplay": "Anzeigeeinstellungen",
+    "reviewDisplayHelp": "Diese Einstellungen gelten für jede Sprache. Bewertungen erscheinen nach der Veröffentlichung auf der Website.",
+    "reviewSampleHelp": "Fügt auf der Website eine sichtbare Kennzeichnung als Beispielbewertung hinzu.",
+    "reviewOrderHelp": "Kleinere Zahlen erscheinen zuerst.",
+    "reviewUnlinked": "Nicht verknüpft",
+    "reviewPreview": "Bewertungsvorschau",
+    "reviewPreviewHelp": "Zeigt diese Sprache und Ihre ungespeicherten Änderungen.",
+    "reviewQuoteEmpty": "Noch kein Zitat",
+    "reviewAuthorEmpty": "Name des Autors",
+    "reviewSummaryUnavailable": "Öffnen Sie diese Bewertung, um ihre Details zu sehen.",
+    "uploadImage": "Bild hochladen",
+    "uploadVideo": "Video hochladen",
+    "reviewLive": "Auf der Website",
+    "reviewAdditionalMedia": "Zusätzliche Medien",
+    "reviewAdditionalMediaHelp": "Optionale Bilder und Videos, die mit dieser Bewertung angezeigt werden."
   }
 }

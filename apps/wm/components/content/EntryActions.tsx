@@ -1,16 +1,15 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { DotsThree, Eye, PencilSimple, Trash } from "@phosphor-icons/react";
+import { Eye, PencilSimple, Trash } from "@phosphor-icons/react";
 import {
   ConfirmDialog,
-  IconButton,
-  Menu,
-  MenuContent,
+  MenuSeparator,
   MenuItem,
   MenuLinkItem,
-  MenuTrigger,
 } from "@orgtik/ui";
+import { RowActionsMenu } from "./RowActionsMenu";
+import { useEntryName } from "@/lib/entryName";
 import { Link } from "@/i18n/routing";
 import { useCan } from "@/lib/permissions";
 import { TYPES } from "@/lib/contentTypes";
@@ -25,6 +24,7 @@ export function EntryActions({
 }) {
   const t = useTranslations("Improvements");
   const can = useCan();
+  const name = useEntryName();
   const [deleting, setDeleting] = useState(false);
   const [remove] = useDeleteEntryMutation();
   const href = `/content/${TYPES[entry.type].area}/${entry.id}?returnTo=${encodeURIComponent(returnTo)}`;
@@ -33,33 +33,26 @@ export function EntryActions({
     entry.visibility === "not_on_site";
   return (
     <span onClick={(event) => event.stopPropagation()}>
-      <Menu>
-        <MenuTrigger
-          render={<IconButton label={t("actions")} icon={<DotsThree />} />}
-        />
-        <MenuContent align="end">
-          <MenuLinkItem
-            render={<Link href={`${href}&view=1`} />}
-            icon={<Eye />}
-          >
-            {t("view")}
+      <RowActionsMenu target={name(entry)}>
+        <MenuLinkItem render={<Link href={`${href}&view=1`} />} icon={<Eye />}>
+          {t("view")}
+        </MenuLinkItem>
+        {can("content:edit") ? (
+          <MenuLinkItem render={<Link href={href} />} icon={<PencilSimple />}>
+            {t("edit")}
           </MenuLinkItem>
-          {can("content:edit") ? (
-            <MenuLinkItem render={<Link href={href} />} icon={<PencilSimple />}>
-              {t("edit")}
-            </MenuLinkItem>
-          ) : null}
-          <MenuItem
-            icon={<Trash />}
-            tone="danger"
-            disabled={!can("content:edit") || !deletable}
-            title={!deletable ? t("protectedDelete") : undefined}
-            onClick={() => setDeleting(true)}
-          >
-            {t("delete")}
-          </MenuItem>
-        </MenuContent>
-      </Menu>
+        ) : null}
+        <MenuSeparator />
+        <MenuItem
+          icon={<Trash />}
+          tone="danger"
+          disabled={!can("content:edit") || !deletable}
+          title={!deletable ? t("protectedDelete") : undefined}
+          onClick={() => setDeleting(true)}
+        >
+          {t("delete")}
+        </MenuItem>
+      </RowActionsMenu>
       <ConfirmDialog
         open={deleting}
         onOpenChange={setDeleting}

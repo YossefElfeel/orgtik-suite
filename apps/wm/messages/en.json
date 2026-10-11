@@ -1664,6 +1664,25 @@
     "articleInvalid": "Check the article sections and media. Add missing files before publishing; structure and media are changed in English.",
     "outline": "Page outline",
     "expandSection": "Expand section",
-    "collapseSection": "Collapse section"
+    "collapseSection": "Collapse section",
+    "reviewContent": "Review content",
+    "reviewContentHelp": "Write the quote and credit its author in the selected language.",
+    "reviewPhoto": "Author photo",
+    "reviewPhotoHelp": "Select a portrait or brand image. The file is shared across languages.",
+    "reviewDisplay": "Display settings",
+    "reviewDisplayHelp": "These settings apply to every language. Reviews appear on the website after publication.",
+    "reviewSampleHelp": "Adds a visible Sample review label on the website.",
+    "reviewOrderHelp": "Lower numbers appear first.",
+    "reviewUnlinked": "Not linked",
+    "reviewPreview": "Review preview",
+    "reviewPreviewHelp": "Shows this language and your unsaved edits.",
+    "reviewQuoteEmpty": "No quote yet",
+    "reviewAuthorEmpty": "Author name",
+    "reviewSummaryUnavailable": "Open this review to see its details.",
+    "uploadImage": "Upload image",
+    "uploadVideo": "Upload video",
+    "reviewLive": "On website",
+    "reviewAdditionalMedia": "Additional media",
+    "reviewAdditionalMediaHelp": "Optional images and videos displayed with this review."
   }
 }

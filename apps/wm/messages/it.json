@@ -1664,6 +1664,25 @@
     "articleInvalid": "Controlla sezioni e media. Aggiungi i file mancanti prima della pubblicazione; struttura e media si modificano in inglese.",
     "outline": "Struttura della pagina",
     "expandSection": "Espandi sezione",
-    "collapseSection": "Comprimi sezione"
+    "collapseSection": "Comprimi sezione",
+    "reviewContent": "Contenuto della recensione",
+    "reviewContentHelp": "Scrivi la citazione e i dati dell’autore nella lingua selezionata.",
+    "reviewPhoto": "Foto dell’autore",
+    "reviewPhotoHelp": "Scegli un ritratto o un’immagine del marchio. Il file è condiviso tra le lingue.",
+    "reviewDisplay": "Impostazioni di visualizzazione",
+    "reviewDisplayHelp": "Queste impostazioni valgono per tutte le lingue. Le recensioni appaiono sul sito dopo la pubblicazione.",
+    "reviewSampleHelp": "Aggiunge sul sito un’etichetta visibile di recensione di esempio.",
+    "reviewOrderHelp": "I numeri più bassi appaiono per primi.",
+    "reviewUnlinked": "Nessun collegamento",
+    "reviewPreview": "Anteprima della recensione",
+    "reviewPreviewHelp": "Mostra questa lingua e le modifiche non salvate.",
+    "reviewQuoteEmpty": "Nessuna citazione ancora",
+    "reviewAuthorEmpty": "Nome dell’autore",
+    "reviewSummaryUnavailable": "Apri questa recensione per visualizzarne i dettagli.",
+    "uploadImage": "Carica immagine",
+    "uploadVideo": "Carica video",
+    "reviewLive": "Visibile sul sito",
+    "reviewAdditionalMedia": "Media aggiuntivi",
+    "reviewAdditionalMediaHelp": "Immagini e video facoltativi mostrati con questa recensione."
   }
 }
