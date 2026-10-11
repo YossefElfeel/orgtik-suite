@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
-import { mintPreviewTokens, protectedFetch } from "./preview-protection.mjs";
+import { mintPreviewTokens, protectedFetch, previewShellPath } from "./preview-protection.mjs";
 import { mockControlRequest } from "../../program/tools/audit-kit/lib/mock-control.mjs";
 import { assertFlowEvidence, buildRuntimeCheckPlan, changedRuntimeFiles, previewTokenRefreshAt, resolvePreviewUrls, selectRuntimeConsumers } from "./runtime-dependencies.mjs";
 
@@ -39,7 +39,7 @@ const requiredTokens = mintPreviewTokens(plan.requiredProjects);
 const probe = protectedFetch(requiredTokens);
 for (const key of plan.requiredProjects) {
   let response;
-  try { response = await probe(`${urls[key]}${key === "mock" ? "/sos/__mock/status" : "/"}`, { signal: AbortSignal.timeout(60000) }); }
+  try { response = await probe(`${urls[key]}${key === "mock" ? "/sos/__mock/status" : previewShellPath(key)}`, { signal: AbortSignal.timeout(60000) }); }
   catch { throw new Error(`${key}: required stable preview alias ${urls[key]} is unavailable; deploy or configure this consumer before runtime checks`); }
   if (!response.ok) throw new Error(`${key}: required stable preview alias ${urls[key]} answered ${response.status}; deploy or configure this consumer before runtime checks`);
   if (key === "mock" && (await response.json()).data?.journal?.sandbox !== "preview") throw new Error("Runtime checks require the isolated preview data sandbox");

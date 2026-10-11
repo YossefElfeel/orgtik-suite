@@ -9,6 +9,13 @@ const manifest = JSON.parse(fs.readFileSync(new URL("./projects.json", import.me
 export const HEADER = "x-vercel-trusted-oidc-idp-token";
 const allowed = new Set(Object.values(manifest.projects).map(project => new URL(project.previewUrl).origin));
 
+// Customer tool homepages can redirect an unsigned visitor to SOS. Their local
+// sign-in shell proves availability without sending preview access to that origin.
+export function previewShellPath(key) {
+  if (!manifest.projects[key]) throw new Error(`Unknown protected preview project: ${key}`);
+  return ["mock", "website"].includes(key) ? "/" : key === "sos" ? "/auth" : "/en/auth";
+}
+
 export function mintPreviewTokens(keys, run = execFileSync) {
   if (!process.env.VERCEL_TOKEN) throw new Error("The approved VERCEL_TOKEN is required for protected preview checks");
   if (!/^[A-Za-z0-9_=-]+$/.test(process.env.VERCEL_TOKEN)) throw new Error("Vercel credential has an unexpected format");
