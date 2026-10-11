@@ -1,6 +1,6 @@
-// Signs a browser context in to an app the way the SoSBar launcher does: get a token from
-// the identity API, then open the app's /auth?token= hand-off page and let it store the session.
-import { APPS, SOS_API, PASSWORD, webUrl } from "./suite.mjs";
+// Signs a browser context in through the launcher's current, single-use code handoff.
+import { APPS, SOS_API, PASSWORD, webUrl, redact } from "./suite.mjs";
+import { createAppHandoff } from "./handoff.mjs";
 
 const tokens = new Map();
 
@@ -25,15 +25,16 @@ const leftAuth = (url) => {
 
 export async function signIn(context, appKey, email) {
   const token = await tokenFor(email);
+  const code = await createAppHandoff(SOS_API, appKey, token);
   const page = await context.newPage();
   const started = Date.now();
   try {
-    await page.goto(webUrl(appKey) + APPS[appKey].auth + encodeURIComponent(token), { waitUntil: "load", timeout: 120000 });
+    await page.goto(webUrl(appKey) + APPS[appKey].auth + encodeURIComponent(code), { waitUntil: "load", timeout: 120000 });
     await page.waitForURL(leftAuth, { timeout: 60000 }).catch(() => {});
     const landed = page.url();
     const p = new URL(landed).pathname;
     const ok = leftAuth(landed) && !/not-allowed|\/login/.test(p);
-    return { ok, landed, ms: Date.now() - started };
+    return { ok, landed: redact(landed), ms: Date.now() - started };
   } finally {
     await page.close();
   }

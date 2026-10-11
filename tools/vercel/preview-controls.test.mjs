@@ -3,6 +3,7 @@ import { createRequire } from "node:module";
 import http from "node:http";
 import { test } from "node:test";
 import { mockControlRequest } from "../../program/tools/audit-kit/lib/mock-control.mjs";
+import { createAppHandoff } from "../../program/tools/audit-kit/lib/handoff.mjs";
 
 test("fixture cleanup cannot change canonical accounts when the journal reset loses its revision race", async () => {
   const load = createRequire(import.meta.url);
@@ -42,7 +43,7 @@ test("preview controls use current staff sessions while unauthorized requests re
     MOCK_SESSION_SECRET: "synthetic-preview-controls-signing-key-32-bytes",
     KV_REST_API_URL: "", KV_REST_API_TOKEN: "", UPSTASH_REDIS_REST_URL: "", UPSTASH_REDIS_REST_TOKEN: "",
   });
-  process.argv.push("--only=sos,admin,wm");
+  process.argv.push("--only=sos,admin,wm,tasks");
   const load = createRequire(import.meta.url);
   const server = http.createServer(load("../../mock/api/index.js"));
   await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
@@ -59,6 +60,15 @@ test("preview controls use current staff sessions while unauthorized requests re
     const suiteToken = (await login.json()).data.tokens.accessToken;
     assert.equal((await send("/__mock/reset", {}, suiteToken)).status, 403);
     assert.equal((await send("/__mock/reset", { fixtures: true }, suiteToken)).status, 403);
+    for (const target of ["sos", "tasks", "admin", "wm"]) {
+      const code = await createAppHandoff(`${sosApi}/api`, target, suiteToken);
+      const audience = target === "sos" ? "suite" : ["admin", "wm"].includes(target) ? `staff:${target}` : `tool:${target}`;
+      const exchanged = await send("/api/auth/handoff/exchange", { code, audience });
+      assert.equal(exchanged.status, 200, target);
+      const session = (await exchanged.json()).data;
+      assert.equal(JSON.parse(Buffer.from(session.tokens.accessToken.split(".")[1], "base64url")).aud, audience);
+      assert.equal((await send("/api/auth/handoff/exchange", { code, audience })).status, 400);
+    }
 
     const created = await send("/api/auth/register", { email: "preview-reset@orgtik.test", name: "Preview fixture", password: "PreviewFixture@2026" });
     assert.equal(created.status, 201);
