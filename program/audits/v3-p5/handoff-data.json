@@ -1,5 +1,5 @@
 {
-  "scope": "Completed nine local/frontend/persisted mock tool cycles; current approved-source parity, integration CI and hosted deployment are remaining Root gates.",
+  "scope": "All nine adopted local/frontend/persisted mock tool cycles and final approved-source168-pair parity are accepted. Final current-head CI, merge and hosted rollout remain revision-specific release gates.",
   "criteria": [
     {
       "id": "SR-002",
@@ -4960,6 +4960,6 @@
       "evidence": "../v3-p4-wm/README.md"
     }
   ],
-  "parityEvidence": "../v3-p3/catalog-parity-review.json",
-  "parityStatus": "الـ parity النهائي على الكود الموافق عليه لسه بوابة الدمج عند Root. الدليل السابق مربوط بنسخته، ومش ادعاء إن المقارنة الجديدة خلصت."
+  "parityEvidence": "../v3-p3/catalog-parity-current-main.json",
+  "parityStatus": "الـ parity النهائي نجح: 168/168 بدون فرق pixels أو نص أو headings أو accessibility. المقارنة على كود main الموافق عليه 2f3ca45; المحاولات المرفوضة محفوظة."
 }

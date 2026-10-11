@@ -34,8 +34,8 @@ const tools = sources.map(([name, manifest, verification, behavior, evidence]) =
 assert.equal(input('program/audits/v3-p4/chats/verification.json').totals.scriptedChecks, 673);
 assert.equal(input('program/audits/v3-p4-marketing/acceptance.json').browserAssertions, 1927);
 assert.equal(input('program/audits/v3-p4-wm/manifest.json').accepted, true);
-const parity = 'program/audits/v3-p3/catalog-parity-review.json';
-const data = { scope: 'Completed nine local/frontend/persisted mock tool cycles; current approved-source parity, integration CI and hosted deployment are remaining Root gates.', criteria, tools, parityEvidence: relative(parity), parityStatus: 'الـ parity النهائي على الكود الموافق عليه لسه بوابة الدمج عند Root. الدليل السابق مربوط بنسخته، ومش ادعاء إن المقارنة الجديدة خلصت.' };
+const parity = 'program/audits/v3-p3/catalog-parity-current-main.json';
+const data = { scope: 'All nine adopted local/frontend/persisted mock tool cycles and final approved-source168-pair parity are accepted. Final current-head CI, merge and hosted rollout remain revision-specific release gates.', criteria, tools, parityEvidence: relative(parity), parityStatus: 'الـ parity النهائي نجح: 168/168 بدون فرق pixels أو نص أو headings أو accessibility. المقارنة على كود main الموافق عليه 2f3ca45; المحاولات المرفوضة محفوظة.' };
 fs.writeFileSync(`${directory}/handoff-data.json`, JSON.stringify(data, null, 2) + '\n');
 const htmlFile = `${directory}/handoff.html`;
 let html = fs.readFileSync(htmlFile, 'utf8').replace(/\n  <script type="application\/json" id="handoffData">[\s\S]*?<\/script>/, '');

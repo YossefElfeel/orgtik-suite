@@ -1,0 +1,1875 @@
+{
+  "label": "v3-current-main-after",
+  "site": "http://localhost:4611",
+  "commit": {
+    "head": "58fe1e1",
+    "dirty": true
+  },
+  "adapter": {
+    "reference": null,
+    "sha256": "c99c240f493c88e569274db03ae0fbf2a178096daf7675803371f676aae49c20"
+  },
+  "renderer": "software",
+  "warmPaint": "per-capture",
+  "at": "2026-10-11T00:12:35.977Z",
+  "clock": {
+    "start": "2026-09-29T06:00:00.000Z",
+    "settleMs": 15000
+  },
+  "widths": [
+    390,
+    768,
+    1440
+  ],
+  "captures": [
+    {
+      "name": "home__390",
+      "route": "/",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "home__768",
+      "route": "/",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "home__1440",
+      "route": "/",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "about__390",
+      "route": "/about",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "about__768",
+      "route": "/about",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "about__1440",
+      "route": "/about",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "cart__390",
+      "route": "/cart",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "cart__768",
+      "route": "/cart",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "cart__1440",
+      "route": "/cart",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "checkout__390",
+      "route": "/checkout",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "checkout__768",
+      "route": "/checkout",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "checkout__1440",
+      "route": "/checkout",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "contact__390",
+      "route": "/contact",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "contact__768",
+      "route": "/contact",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "contact__1440",
+      "route": "/contact",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "faq__390",
+      "route": "/faq",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "faq__768",
+      "route": "/faq",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "faq__1440",
+      "route": "/faq",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights__390",
+      "route": "/insights",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights__768",
+      "route": "/insights",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights__1440",
+      "route": "/insights",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_brand-system-that-scales__390",
+      "route": "/insights/brand-system-that-scales",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_brand-system-that-scales__768",
+      "route": "/insights/brand-system-that-scales",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_brand-system-that-scales__1440",
+      "route": "/insights/brand-system-that-scales",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_campaigns-with-a-system__390",
+      "route": "/insights/campaigns-with-a-system",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_campaigns-with-a-system__768",
+      "route": "/insights/campaigns-with-a-system",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_campaigns-with-a-system__1440",
+      "route": "/insights/campaigns-with-a-system",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_connected-digital-system__390",
+      "route": "/insights/connected-digital-system",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_connected-digital-system__768",
+      "route": "/insights/connected-digital-system",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_connected-digital-system__1440",
+      "route": "/insights/connected-digital-system",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_designing-for-change__390",
+      "route": "/insights/designing-for-change",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_designing-for-change__768",
+      "route": "/insights/designing-for-change",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_designing-for-change__1440",
+      "route": "/insights/designing-for-change",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_frontend-performance-budget__390",
+      "route": "/insights/frontend-performance-budget",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_frontend-performance-budget__768",
+      "route": "/insights/frontend-performance-budget",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_frontend-performance-budget__1440",
+      "route": "/insights/frontend-performance-budget",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_managed-hosting-questions__390",
+      "route": "/insights/managed-hosting-questions",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_managed-hosting-questions__768",
+      "route": "/insights/managed-hosting-questions",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "insights_managed-hosting-questions__1440",
+      "route": "/insights/managed-hosting-questions",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal__390",
+      "route": "/legal",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal__768",
+      "route": "/legal",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal__1440",
+      "route": "/legal",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:18:18.717Z"
+    },
+    {
+      "name": "legal_imprint__390",
+      "route": "/legal/imprint",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal_imprint__768",
+      "route": "/legal/imprint",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal_imprint__1440",
+      "route": "/legal/imprint",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw",
+        "--disable-skia-runtime-opts",
+        "--force-color-profile=srgb"
+      ],
+      "warmPaintCount": 3,
+      "animations": "allow",
+      "capturedAt": "2026-10-11T00:25:53.608Z"
+    },
+    {
+      "name": "legal_partners__390",
+      "route": "/legal/partners",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal_partners__768",
+      "route": "/legal/partners",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:18:30.892Z"
+    },
+    {
+      "name": "legal_partners__1440",
+      "route": "/legal/partners",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "default",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [],
+      "warmPaintCount": 1,
+      "animations": "allow",
+      "capturedAt": "2026-10-11T00:30:39.246Z"
+    },
+    {
+      "name": "legal_privacy__390",
+      "route": "/legal/privacy",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:18:42.966Z"
+    },
+    {
+      "name": "legal_privacy__768",
+      "route": "/legal/privacy",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal_privacy__1440",
+      "route": "/legal/privacy",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal_sitemap__390",
+      "route": "/legal/sitemap",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal_sitemap__768",
+      "route": "/legal/sitemap",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal_sitemap__1440",
+      "route": "/legal/sitemap",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal_terms__390",
+      "route": "/legal/terms",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal_terms__768",
+      "route": "/legal/terms",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "legal_terms__1440",
+      "route": "/legal/terms",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "plans__390",
+      "route": "/plans",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "plans__768",
+      "route": "/plans",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "plans__1440",
+      "route": "/plans",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "roadmap__390",
+      "route": "/roadmap",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "roadmap__768",
+      "route": "/roadmap",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "roadmap__1440",
+      "route": "/roadmap",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services__390",
+      "route": "/services",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:18:58.744Z"
+    },
+    {
+      "name": "services__768",
+      "route": "/services",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:19:17.355Z"
+    },
+    {
+      "name": "services__1440",
+      "route": "/services",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_design__390",
+      "route": "/services/design",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_design__768",
+      "route": "/services/design",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_design__1440",
+      "route": "/services/design",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:19:27.597Z"
+    },
+    {
+      "name": "services_design_brand-development__390",
+      "route": "/services/design/brand-development",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_design_brand-development__768",
+      "route": "/services/design/brand-development",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_design_brand-development__1440",
+      "route": "/services/design/brand-development",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_design_graphic-design__390",
+      "route": "/services/design/graphic-design",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_design_graphic-design__768",
+      "route": "/services/design/graphic-design",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_design_graphic-design__1440",
+      "route": "/services/design/graphic-design",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:19:38.769Z"
+    },
+    {
+      "name": "services_design_web-and-app-design__390",
+      "route": "/services/design/web-and-app-design",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_design_web-and-app-design__768",
+      "route": "/services/design/web-and-app-design",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_design_web-and-app-design__1440",
+      "route": "/services/design/web-and-app-design",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:19:50.526Z"
+    },
+    {
+      "name": "services_development__390",
+      "route": "/services/development",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_development__768",
+      "route": "/services/development",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:19:59.407Z"
+    },
+    {
+      "name": "services_development__1440",
+      "route": "/services/development",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_development_custom-app-development__390",
+      "route": "/services/development/custom-app-development",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_development_custom-app-development__768",
+      "route": "/services/development/custom-app-development",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_development_custom-app-development__1440",
+      "route": "/services/development/custom-app-development",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_development_web-development__390",
+      "route": "/services/development/web-development",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_development_web-development__768",
+      "route": "/services/development/web-development",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_development_web-development__1440",
+      "route": "/services/development/web-development",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_hosting__390",
+      "route": "/services/hosting",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:20:06.792Z"
+    },
+    {
+      "name": "services_hosting__768",
+      "route": "/services/hosting",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_hosting__1440",
+      "route": "/services/hosting",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_hosting_managed-hosting__390",
+      "route": "/services/hosting/managed-hosting",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_hosting_managed-hosting__768",
+      "route": "/services/hosting/managed-hosting",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_hosting_managed-hosting__1440",
+      "route": "/services/hosting/managed-hosting",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_it-support__390",
+      "route": "/services/it-support",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_it-support__768",
+      "route": "/services/it-support",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_it-support__1440",
+      "route": "/services/it-support",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:20:17.331Z"
+    },
+    {
+      "name": "services_it-support_software-support__390",
+      "route": "/services/it-support/software-support",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_it-support_software-support__768",
+      "route": "/services/it-support/software-support",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:20:27.830Z"
+    },
+    {
+      "name": "services_it-support_software-support__1440",
+      "route": "/services/it-support/software-support",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:20:39.599Z"
+    },
+    {
+      "name": "services_it-support_website-management__390",
+      "route": "/services/it-support/website-management",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:20:48.643Z"
+    },
+    {
+      "name": "services_it-support_website-management__768",
+      "route": "/services/it-support/website-management",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_it-support_website-management__1440",
+      "route": "/services/it-support/website-management",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:21:00.505Z"
+    },
+    {
+      "name": "services_marketing__390",
+      "route": "/services/marketing",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_marketing__768",
+      "route": "/services/marketing",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_marketing__1440",
+      "route": "/services/marketing",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_marketing_digital-advertising-switzerland__390",
+      "route": "/services/marketing/digital-advertising-switzerland",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:21:09.604Z"
+    },
+    {
+      "name": "services_marketing_digital-advertising-switzerland__768",
+      "route": "/services/marketing/digital-advertising-switzerland",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_marketing_digital-advertising-switzerland__1440",
+      "route": "/services/marketing/digital-advertising-switzerland",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_marketing_seo-services__390",
+      "route": "/services/marketing/seo-services",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_marketing_seo-services__768",
+      "route": "/services/marketing/seo-services",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:21:19.940Z"
+    },
+    {
+      "name": "services_marketing_seo-services__1440",
+      "route": "/services/marketing/seo-services",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:21:31.627Z"
+    },
+    {
+      "name": "services_marketing_social-media-marketing__390",
+      "route": "/services/marketing/social-media-marketing",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:21:40.477Z"
+    },
+    {
+      "name": "services_marketing_social-media-marketing__768",
+      "route": "/services/marketing/social-media-marketing",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "services_marketing_social-media-marketing__1440",
+      "route": "/services/marketing/social-media-marketing",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "sign-in__390",
+      "route": "/sign-in",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "sign-in__768",
+      "route": "/sign-in",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "sign-in__1440",
+      "route": "/sign-in",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "sign-up__390",
+      "route": "/sign-up",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "sign-up__768",
+      "route": "/sign-up",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "sign-up__1440",
+      "route": "/sign-up",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software__390",
+      "route": "/software",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software__768",
+      "route": "/software",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software__1440",
+      "route": "/software",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_crm__390",
+      "route": "/software/crm",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_crm__768",
+      "route": "/software/crm",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_crm__1440",
+      "route": "/software/crm",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_files__390",
+      "route": "/software/files",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_files__768",
+      "route": "/software/files",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_files__1440",
+      "route": "/software/files",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_hr__390",
+      "route": "/software/hr",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_hr__768",
+      "route": "/software/hr",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_hr__1440",
+      "route": "/software/hr",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:21:52.340Z"
+    },
+    {
+      "name": "software_marketing__390",
+      "route": "/software/marketing",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_marketing__768",
+      "route": "/software/marketing",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_marketing__1440",
+      "route": "/software/marketing",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:22:04.253Z"
+    },
+    {
+      "name": "software_plans__390",
+      "route": "/software/plans",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_plans__768",
+      "route": "/software/plans",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_plans__1440",
+      "route": "/software/plans",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true,
+      "paired": true,
+      "rendererArgs": [
+        "--disable-gpu",
+        "--run-all-compositor-stages-before-draw"
+      ],
+      "warmPaintCount": 3,
+      "capturedAt": "2026-10-11T00:22:13.750Z"
+    },
+    {
+      "name": "software_plans_single_annual_hr__390",
+      "route": "/software/plans/single/annual/hr",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_plans_single_annual_hr__768",
+      "route": "/software/plans/single/annual/hr",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_plans_single_annual_hr__1440",
+      "route": "/software/plans/single/annual/hr",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_tasks__390",
+      "route": "/software/tasks",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_tasks__768",
+      "route": "/software/tasks",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_tasks__1440",
+      "route": "/software/tasks",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_website__390",
+      "route": "/software/website",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_website__768",
+      "route": "/software/website",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "software_website__1440",
+      "route": "/software/website",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work__390",
+      "route": "/work",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work__768",
+      "route": "/work",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work__1440",
+      "route": "/work",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_campaign-growth-system__390",
+      "route": "/work/campaign-growth-system",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_campaign-growth-system__768",
+      "route": "/work/campaign-growth-system",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_campaign-growth-system__1440",
+      "route": "/work/campaign-growth-system",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_connected-platform-concept__390",
+      "route": "/work/connected-platform-concept",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_connected-platform-concept__768",
+      "route": "/work/connected-platform-concept",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_connected-platform-concept__1440",
+      "route": "/work/connected-platform-concept",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_managed-digital-presence__390",
+      "route": "/work/managed-digital-presence",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_managed-digital-presence__768",
+      "route": "/work/managed-digital-presence",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_managed-digital-presence__1440",
+      "route": "/work/managed-digital-presence",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_orgtik-identity-system__390",
+      "route": "/work/orgtik-identity-system",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_orgtik-identity-system__768",
+      "route": "/work/orgtik-identity-system",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_orgtik-identity-system__1440",
+      "route": "/work/orgtik-identity-system",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_support-continuity-system__390",
+      "route": "/work/support-continuity-system",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_support-continuity-system__768",
+      "route": "/work/support-continuity-system",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "work_support-continuity-system__1440",
+      "route": "/work/support-continuity-system",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "audit-missing-page__390",
+      "route": "/audit-missing-page",
+      "width": 390,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "audit-missing-page__768",
+      "route": "/audit-missing-page",
+      "width": 768,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    },
+    {
+      "name": "audit-missing-page__1440",
+      "route": "/audit-missing-page",
+      "width": 1440,
+      "rendered": true,
+      "errors": 0,
+      "renderer": "software",
+      "warmPaint": true,
+      "mediaLock": true
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "beforeLabel": "v3-current-main-before",
+  "afterLabel": "v3-current-main-after",
+  "names": [
+    "legal_partners__1440"
+  ],
+  "protocol": "Same browser, fresh contexts, all-compositor-stages flush, three full-page warm paints per source."
+}

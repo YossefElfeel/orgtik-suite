@@ -3,7 +3,7 @@
   "owner_instruction": "continue till finish the remaining plan, then merge and deploy everything",
   "gate_policy": "All adopted Tier A/B ordinary native cycles and P5 local handoff are accepted. Owner explicitly authorizes merge/deploy; final approved-source parity, current integrated CI and existing-project production smoke must pass before completion.",
   "deployment": "managed_vercel_active_final_release_pending",
-  "current_phase": "P5_final_integration_gates",
+  "current_phase": "P5_accepted_ready_for_final_merge_deploy",
   "packages": {
     "V3-P0": {
       "status": "merged_owner_continue_authorized",
@@ -28,10 +28,10 @@
       "acceptance_evidence": "program/audits/v3-p3/README.md; program/audits/v3-p3/marketing-transactions.md"
     },
     "V3-P3-CATALOG": {
-      "status": "accepted_native_publication_final_approved_source_parity_pending",
+      "status": "accepted_final_approved_source_parity_verified",
       "ui_status": "publication_230_checks_56_captures_verified",
-      "current_evidence": "Canonical CRM publication and final CRM ordinary tool cycle accepted locally (1,316 checks/334 captures). Paid customer+confirmed deal, actual paid source/start guard and packaged delivery bytes verified. Data-only website adapter passes16items/11bundles/five catalogs and168/168 strict pixel/text/ARIA pairs at390/768/1440. Console service writes retired; final Console software metadata and WM mirrors remain pending.",
-      "acceptance_evidence": "program/audits/v3-p3/README.md; program/audits/website/parity/diff-v3-catalog-final-before-vs-v3-catalog-final-after.md"
+      "current_evidence": "Canonical CRM/Console ownership, actual WM mirrors and nativeJ19/J20 are accepted. Final approved-main2f3ca45 comparison passes168/168 strict pixel/text/headings/ARIA pairs with exact hashes; all per-capture renderer/paint settings matched, rejected diagnostics retained.",
+      "acceptance_evidence": "program/audits/v3-p3/catalog-parity-current-main.json"
     },
     "V3-P4-TASKS": {
       "status": "merged_local_and_ci_verified",
@@ -110,8 +110,7 @@
       "WM"
     ],
     "held_work": [
-      "Final matched website parity on approved main2f3ca45",
-      "Final current CI, merge and managed existing-project production verification"
+      "Final current-head CI, merge and managed existing-project production verification"
     ],
     "evidence_policy": "Each accepted cycle names current scoped source/proofs; historical407 criteria retain individual boundaries. Frozen financial/session/journal/CAS foundations and unrelated checkouts remain intact.",
     "merge_commit": "2f7aaa8f686661e477ca559ae32554212cb7d9ab",
