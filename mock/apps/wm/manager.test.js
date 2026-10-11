@@ -4,6 +4,24 @@ const {makeStore}=require('./content');
 const {makeOps}=require('./ops');
 const {config,sourceIds,savePageDraft,orderOf}=require('./manager');
 const now=()=> '2026-10-11T09:00:00.000Z';
+test('packaged manager configuration matches the editor schema',()=>{
+ assert.deepEqual(config,require('../../../apps/wm/lib/manager-pages.json'));
+});
+test('manager runtime loads and saves drafts without the frontend checkout',()=>{
+ const fs=require('node:fs'),os=require('node:os'),path=require('node:path');
+ const root=fs.mkdtempSync(path.join(os.tmpdir(),'wm-manager-runtime-'));
+ try {
+  const folder=path.join(root,'wm');
+  fs.cpSync(__dirname,folder,{recursive:true,filter:file=>!file.includes(path.sep+'uploads')&&!file.endsWith('.test.js')});
+  const {makeStore: packagedStore}=require(path.join(folder,'content.js'));
+  const manager=require(path.join(folder,'manager.js')),store=packagedStore(now),source=store.entries.get('st_about');
+  const result=manager.savePageDraft(store,'pg_about',[{id:source.id,version:source.workflow.version,patches:[{locale:'en',fields:{b3:{...source.live.locales.en.b3,s5:'Packaged purpose'}}}]}],{key:'admin'},now);
+  assert.ok(result.data);assert.equal(store.entries.get(source.id).draft.locales.en.b3.s5,'Packaged purpose');
+ } finally {
+  const relative=path.relative(os.tmpdir(),root);assert.ok(relative.startsWith('wm-manager-runtime-')&&!relative.includes(path.sep));
+  fs.rmSync(root,{recursive:true,force:true});
+ }
+});
 test('page hero sources map to existing canonical fields',()=>{
  const store=makeStore(now);
  for(const [id,page] of Object.entries(config))for(const section of Object.values(page.fields??{}))for(const field of section.fields){

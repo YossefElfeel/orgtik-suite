@@ -1,6 +1,7 @@
 // Manager-only presentation and edits. Public content is never changed by ordering.
 const crypto = require("node:crypto");
-const config = require("../../../apps/wm/lib/manager-pages.json");
+// Packaged copy of apps/wm/lib/manager-pages.json; parity is checked before deployment.
+const config = require("./seed/manager-pages.json");
 const { makeStore } = require("./content");
 function sourceIds(id) {
   return [...new Set(Object.values(config[id]?.fields ?? {}).flatMap(section => section.fields.map(field => field.record)))].filter(key=>key!==id);
