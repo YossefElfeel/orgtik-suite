@@ -47,7 +47,7 @@ const results = [],
 async function check(name, fn) {
   if (
     interactions &&
-    !/^(View mode|article builder|Current staff|Insights design|Overview chart|Arabic)/.test(
+    !/^(View mode|article builder|Current staff|Insights design|Sample entry|Overview chart|Arabic)/.test(
       name,
     )
   )
@@ -285,6 +285,51 @@ for (const route of routes)
       });
     return { heading: await page.locator("h1").first().innerText(), tables };
   });
+await check(
+  "Sample entry details open under their declared content areas",
+  async () => {
+    const areas = {
+      page: "pages",
+      global: "global",
+      strings: "strings",
+      serviceFamily: "services",
+      service: "services",
+      softwareModule: "software",
+      caseStudy: "work",
+      article: "insights",
+      roadmapItem: "roadmap",
+      review: "reviews",
+    };
+    const opened = [];
+    for (const [type, area] of Object.entries(areas)) {
+      const rows = (await call(`/admin/entries/${type}?pageSize=100`)).data;
+      const sample = rows.find((row) => row.id === `demo_published_${type}`);
+      if (!sample) continue;
+      await go(`/content/${area}/${sample.id}?view=1`);
+      const content = await page.locator("main").innerText();
+      assert.ok(
+        !/does not exist|doesn.t exist|Something went wrong/.test(content),
+        `${type}: sample detail is missing`,
+      );
+      assert.equal(
+        await page.locator("h1").first().innerText(),
+        sample.name,
+        `${type}: expected the sample record heading`,
+      );
+      assert.ok(
+        content.includes("You are viewing this record.") ||
+          content.includes(
+            "This content is read-only for your role or managed in its source system.",
+          ),
+        `${type}: expected readable View mode`,
+      );
+      opened.push(type);
+    }
+    assert.ok(opened.includes("caseStudy"));
+    return opened;
+  },
+);
+
 await check(
   "View mode exposes Edit, retains list state, and explains empty media",
   async () => {

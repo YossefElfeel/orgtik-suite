@@ -413,7 +413,9 @@ export const AREAS: Record<Area, EntryType[]> = {
 
 export const isArea = (a: string): a is Area => a in AREAS;
 export const typeOfId = (id: string): ContentType | undefined =>
-  Object.values(TYPES).find((t) => id.startsWith(`${t.idPrefix}_`));
+  Object.values(TYPES).find((t) =>
+    id.startsWith(`${t.idPrefix}_`) || id === `demo_published_${t.key}`,
+  );
 
 /** Every label key the schemas use, for the messages parity check. */
 export function labelKeys(): string[] {
