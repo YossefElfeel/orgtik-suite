@@ -1,19 +1,16 @@
 "use client";
+import { RowActionsMenu } from "@/components/content/RowActionsMenu";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   Badge,
   Button,
-  IconButton,
   Input,
-  Menu,
-  MenuContent,
   MenuItem,
-  MenuTrigger,
   PageHeader,
   Select,
 } from "@orgtik/ui";
-import { DotsThree, Eye, PencilSimple } from "@phosphor-icons/react";
+import { Eye, PencilSimple } from "@phosphor-icons/react";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { UserForm } from "@/components/users/UserForm";
@@ -82,11 +79,7 @@ function Users() {
       id: "actions",
       header: t("actions"),
       cell: ({ row }) => (
-        <Menu>
-          <MenuTrigger
-            render={<IconButton label={t("actions")} icon={<DotsThree />} />}
-          />
-          <MenuContent align="end">
+        <RowActionsMenu target={row.original.name}>
             <MenuItem icon={<Eye />} onClick={() => setViewing(row.original)}>
               {t("view")}
             </MenuItem>
@@ -98,8 +91,7 @@ function Users() {
                 {t("edit")}
               </MenuItem>
             ) : null}
-          </MenuContent>
-        </Menu>
+          </RowActionsMenu>
       ),
     },
   ];

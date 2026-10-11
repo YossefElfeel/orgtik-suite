@@ -1,12 +1,13 @@
 "use client";
+import { RowActionsMenu } from "@/components/content/RowActionsMenu";
 
 
 import { Link, useRouter } from "@/i18n/routing";
 import { useListState } from "@/lib/useListState";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
-import { DotsThreeVertical, DownloadSimple, MagnifyingGlass, X } from "@phosphor-icons/react";
-import { Badge, Button, IconButton, Input, Menu, MenuContent, MenuLinkItem, MenuTrigger, PageHeader, StatusBadge, Tabs, TabsList, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
+import { DownloadSimple, Eye, PencilSimple, MagnifyingGlass, X } from "@phosphor-icons/react";
+import { Badge, Button, Input, MenuLinkItem, PageHeader, StatusBadge, Tabs, TabsList, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { useCan } from "@/lib/permissions";
@@ -58,7 +59,7 @@ function LeadsList() {
       { id: "owner", header: t("owner"), cell: ({ row }) => <span className="text-fg-muted"><bdi dir="auto">{row.original.owner?.name ?? t("noOwner")}</bdi></span> },
       { id: "created", header: t("colCreated"), meta: { numeric: true }, cell: ({ row }) => <span className="text-fg-muted">{f.date(row.original.createdAt, { dateStyle: "medium" })}</span> },
       { id: "status", header: t("colStatus"), cell: ({ row }) => <StatusBadge entity="lead" state={row.original.status} size="sm" /> },
-      { id: "actions", header: ti("actions"), enableSorting: false, cell: ({ row }) => <Menu><MenuTrigger render={<IconButton label={ti("actions")} icon={<DotsThreeVertical />} />} /><MenuContent align="end"><MenuLinkItem render={<Link href={`/marketing/leads/${row.original.id}?returnTo=${encodeURIComponent(url.href)}`} />}>{ti("view")}</MenuLinkItem>{can("marketing:edit") ? <MenuLinkItem render={<Link href={`/marketing/leads/${row.original.id}?edit=1&returnTo=${encodeURIComponent(url.href)}`} />}>{ti("edit")}</MenuLinkItem> : null}</MenuContent></Menu> },
+      { id: "actions", header: ti("actions"), enableSorting: false, cell: ({ row }) => <RowActionsMenu target={row.original.name}><MenuLinkItem icon={<Eye />} render={<Link href={`/marketing/leads/${row.original.id}?returnTo=${encodeURIComponent(url.href)}`} />}>{ti("view")}</MenuLinkItem>{can("marketing:edit") ? <MenuLinkItem icon={<PencilSimple />} render={<Link href={`/marketing/leads/${row.original.id}?edit=1&returnTo=${encodeURIComponent(url.href)}`} />}>{ti("edit")}</MenuLinkItem> : null}</RowActionsMenu> },
     ],
     [t, ti, f, can, router, url.href],
   );

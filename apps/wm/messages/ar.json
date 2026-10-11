@@ -1664,6 +1664,25 @@
     "articleInvalid": "تحقق من أقسام المقال والوسائط. أضف الملفات الناقصة قبل النشر؛ تُغير البنية والوسائط بالإنجليزية.",
     "outline": "مخطط الصفحة",
     "expandSection": "توسيع القسم",
-    "collapseSection": "طي القسم"
+    "collapseSection": "طي القسم",
+    "reviewContent": "محتوى التقييم",
+    "reviewContentHelp": "اكتب الاقتباس وبيانات صاحبه باللغة المحددة.",
+    "reviewPhoto": "صورة صاحب التقييم",
+    "reviewPhotoHelp": "اختر صورة شخصية أو صورة العلامة التجارية. الملف مشترك بين اللغات.",
+    "reviewDisplay": "إعدادات العرض",
+    "reviewDisplayHelp": "تسري هذه الإعدادات على كل اللغات. تظهر التقييمات على الموقع بعد النشر.",
+    "reviewSampleHelp": "يضيف علامة تقييم تجريبي ظاهرة على الموقع.",
+    "reviewOrderHelp": "تظهر الأرقام الأقل أولًا.",
+    "reviewUnlinked": "غير مرتبط",
+    "reviewPreview": "معاينة التقييم",
+    "reviewPreviewHelp": "تعرض اللغة الحالية والتعديلات غير المحفوظة.",
+    "reviewQuoteEmpty": "لا يوجد اقتباس بعد",
+    "reviewAuthorEmpty": "اسم صاحب التقييم",
+    "reviewSummaryUnavailable": "افتح التقييم لعرض تفاصيله.",
+    "uploadImage": "رفع صورة",
+    "uploadVideo": "رفع فيديو",
+    "reviewLive": "ظاهر على الموقع",
+    "reviewAdditionalMedia": "وسائط إضافية",
+    "reviewAdditionalMediaHelp": "صور وفيديوهات اختيارية تُعرض مع هذا التقييم."
   }
 }

@@ -12,7 +12,7 @@ import { useDeleteEntryMutation, useSetEntryVisibilityMutation, type ApiError, t
 
 const FIXED = new Set(["page", "global", "strings", "pricing"]);
 
-export function VisibilityBadge({ entry }: { entry: Entry }) {
+export function VisibilityBadge({ entry }: { entry: Pick<Entry, "visibility"> }) {
   const t = useTranslations("Editor");
   if (entry.visibility === "not_on_site") return <Badge tone="info">{t("notOnSite")}</Badge>;
   if (entry.visibility === "archived") return <Badge tone="neutral">{t("offSite")}</Badge>;
@@ -32,7 +32,7 @@ export function LifecycleActions({ entry, address, listing, area }: { entry: Ent
   if (entry.visibility === "not_on_site" && can("content:edit"))
     return (
       <ConfirmDialog
-        trigger={<Button variant="ghost" startIcon={<Trash />}>{t("deleteEntry")}</Button>}
+        trigger={<Button variant="ghost" className="text-danger hover:bg-danger-subtle" startIcon={<Trash />}>{t("deleteEntry")}</Button>}
         tone="danger"
         title={t("deleteTitle")}
         impact={t("deleteImpact")}
@@ -48,7 +48,7 @@ export function LifecycleActions({ entry, address, listing, area }: { entry: Ent
   if (entry.visibility === "live" && can("content:approve"))
     return (
       <ConfirmDialog
-        trigger={<Button variant="ghost" startIcon={<EyeSlash />}>{t("takeOff")}</Button>}
+        trigger={<Button variant="ghost" className="text-danger hover:bg-danger-subtle" startIcon={<EyeSlash />}>{t("takeOff")}</Button>}
         tone="danger"
         title={t("takeOffTitle")}
         impact={address && listing ? t("takeOffImpact", { address, listing }) : t("takeOffImpactNoAddress")}

@@ -16,6 +16,7 @@ import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { LanguageDots } from "@/components/content/LanguageDots";
 import { NewEntry } from "@/components/content/NewEntry";
 import { PricingAuthority } from "@/components/content/PricingAuthority";
+import { ReviewSummary, ReviewOrder } from "@/components/content/ReviewSummary";
 import { EntryActions } from "@/components/content/EntryActions";
 import { useListState } from "@/lib/useListState";
 import { useCan } from "@/lib/permissions";
@@ -50,6 +51,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
   const can = useCan();
   const tt = useTranslations("Types");
   const tf = useTranslations("Formats");
+  const fields = useTranslations("Fields");
   const f = useFormatter();
   const type = TYPES[key];
   const ti = useTranslations("Improvements");
@@ -101,13 +103,14 @@ export function EntryList({ type: key }: { type: EntryType }) {
     const cols: ColumnDef<EntrySummary, any>[] = [
       {
         id: "name",
-        header: t("colName"),
+        header: key === "review" ? fields("reviewAuthor") : t("colName"),
         meta: { truncate: true },
         cell: ({ row }) => {
           const c = row.original;
           const family = c.parent
             ? familyById.get(c.parent)?.slug.en
             : undefined;
+          if (key === "review") return <ReviewSummary entry={c} href={`/content/reviews/${c.id}?${can("content:edit") ? "" : "view=1&"}returnTo=${encodeURIComponent(url.href)}`} />;
           return (
             <span className="inline-flex max-w-full items-center gap-3">
               {c.image ? (
@@ -139,6 +142,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
         },
       },
     ];
+    if (key === "review") cols.push({ id: "order", header: ti("order"), meta: { width: "4.5rem" }, cell: ({row}) => <ReviewOrder entry={row.original} /> });
     if (key === "caseStudy") {
       cols.push({
         id: "format",
@@ -337,6 +341,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
     tf,
     f,
     key,
+    fields,
     type,
     entryName,
     familyById,
@@ -382,7 +387,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
           startIcon={<MagnifyingGlass className="size-4" />}
           className="w-full sm:w-72"
         />
-        <Select size="sm" label={t("colState")} aria-label={t("colState")} value={url.get("state", "all")} onValueChange={state => url.set({ state })} options={[{ value: "all", label: ti("all") }, ...(["draft", "in_review", "approved", "scheduled", "published"] as const).map(value => ({ value, label: <StatusBadge entity="cms_revision" state={value} size="sm" /> }))]} />
+        <Select className={key === "review" ? "w-full sm:w-52" : undefined} size="sm" label={t("colState")} aria-label={t("colState")} value={url.get("state", "all")} onValueChange={state => url.set({ state })} options={[{ value: "all", label: ti("all") }, ...(["draft", "in_review", "approved", "scheduled", "published"] as const).map(value => ({ value, label: <StatusBadge entity="cms_revision" state={value} size="sm" /> }))]} />
         {key === "page" ? <Select size="sm" label={t("colLanguages")} aria-label={t("colLanguages")} value={url.get("missingLanguages", "all")} onValueChange={missingLanguages => url.set({ missingLanguages })} options={[{ value: "all", label: ti("all") }, { value: "true", label: ti("missingLanguages") }]} /> : null}
         {key === "roadmapItem" ? <>
           <Select size="sm" label={ti("deliveryStatus")} aria-label={ti("deliveryStatus")} value={url.get("deliveryStatus", "all")} onValueChange={deliveryStatus => url.set({ deliveryStatus })} options={[{ value: "all", label: ti("all") }, ...(["open", "planned", "in_progress", "shipped"] as const).map(value => ({ value, label: <StatusBadge entity="roadmap_idea" state={value} size="sm" /> }))]} />

@@ -1,10 +1,12 @@
 "use client";
+import { RowActionsMenu } from "@/components/content/RowActionsMenu";
 
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowRight, DotsThree, Eye, PencilSimple, Plus, Trash } from "@phosphor-icons/react";
+import { ArrowRight, Eye, PencilSimple, Plus, Trash } from "@phosphor-icons/react";
 import {
-  Menu, MenuTrigger, MenuContent, MenuItem,
+  MenuSeparator,
+  MenuItem,
   Badge,
   Button,
   ConfirmDialog,
@@ -16,7 +18,6 @@ import {
   DialogHeader,
   DialogTitle,
   Field,
-  IconButton,
   Input,
   PageHeader,
   Select,
@@ -126,11 +127,12 @@ function Redirects() {
         id: "actions",
         header: ti("actions"),
         meta: { numeric: true },
-        cell: ({ row }) => <Menu><MenuTrigger render={<IconButton label={ti("actions")} icon={<DotsThree />} />} /><MenuContent align="end">
+        cell: ({ row }) => <RowActionsMenu target={row.original.from}>
           <MenuItem icon={<Eye />} onClick={() => setViewing(row.original)}>{ti("view")}</MenuItem>
           <MenuItem icon={<PencilSimple />} disabled={!editable} onClick={() => setEditing({ ...row.original, note: row.original.note ?? "" })}>{ti("edit")}</MenuItem>
+          <MenuSeparator />
           <MenuItem icon={<Trash />} tone="danger" disabled={!editable} onClick={() => setDeleting(row.original)}>{ti("delete")}</MenuItem>
-        </MenuContent></Menu>,
+        </RowActionsMenu>,
       },
     ],
     [t, ti, editable],
