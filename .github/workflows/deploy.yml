@@ -204,6 +204,11 @@ jobs:
       - name: Install Vercel CLI for ephemeral preview access
         if: github.event_name != 'push' && inputs.environment != 'production' && (needs.deploy.result == 'success' || needs.affected.outputs.verify_only == '1')
         run: npm install --global vercel@54.7.1
+      - name: Select recorded mock preview for readiness verification
+        if: needs.affected.outputs.verify_only == '1'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: node tools/vercel/preview-pin.mjs pin
       - name: Preview golden flows and visual checks
         if: github.event_name != 'push' && inputs.environment != 'production' && (needs.deploy.result == 'success' || needs.affected.outputs.verify_only == '1')
         env:
@@ -225,6 +230,11 @@ jobs:
           npm ci
           npx playwright install --with-deps chromium
           node ../../../tools/vercel/preview-checks.mjs
+      - name: Restore shared mock preview after readiness verification
+        if: always() && needs.affected.outputs.verify_only == '1'
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: node tools/vercel/preview-pin.mjs restore
       - name: Upload preview acceptance evidence
         if: always() && github.event_name != 'push' && inputs.environment != 'production'
         uses: actions/upload-artifact@v4
