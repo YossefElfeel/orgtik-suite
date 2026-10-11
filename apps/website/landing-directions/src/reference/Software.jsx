@@ -3896,7 +3896,7 @@ export default class Software extends ReferencePage {
                 </section>
               </>
             )}
-            {v.isOverview && <Testimonials data-cms-section="reviews" scope={msg("Software:57")} />}
+            {v.isOverview && <Testimonials data-cms-section="reviews" scope="software" />}
             <section
               id={"closing"}
               className="closing-cta"
