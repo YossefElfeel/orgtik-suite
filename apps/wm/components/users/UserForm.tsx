@@ -152,7 +152,7 @@ export function UserForm({
                     <Checkbox
                       key={role.key}
                       checked={form.roles.includes(role.key)}
-                      disabled={readOnly || (self && role.key === "wm_admin")}
+                      disabled={readOnly || (role.protected && !accounts) || (self && ["wm_admin", "wm_owner", "wm_super_admin"].includes(role.key) && form.roles.includes(role.key))}
                       onCheckedChange={(checked) =>
                         setForm({
                           ...form,

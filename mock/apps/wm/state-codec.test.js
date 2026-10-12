@@ -56,7 +56,10 @@ test("WM module codec restores route closures, draft history, media, settings, i
     const idea = await http.call(0, "POST", "/v2/public/ideas", ideaBody, { "idempotency-key": "persistent-idea" }); assert.equal(idea.status, 201); submittedIdea = { body: ideaBody, id: idea.body.data.id };
     const lead = await http.call(0, "POST", "/v2/public/leads", { ...ideaBody, message: "Persistent lead" }); assert.equal(lead.status, 201); assert.equal(lead.body.data.sales.state, "deferred"); assert.equal(first.deliveries.length, 1);
     const grant = await http.call(0, "POST", "/v2/admin/preview-token", {}); assert.equal(grant.status, 200); token = grant.body.data.token;
-    snapshot = first.hooks.exportState(); assert.equal(JSON.stringify(snapshot).includes(token), false); assert.equal(wm.validatePreviewGrant(token).issuerKey, "admin");
+    const roles = await http.call(0, "GET", "/v2/admin/roles");
+    const editorRole = roles.body.data.find(role => role.key === "wm_editor");
+    assert.equal((await http.call(0, "PATCH", "/v2/admin/roles/wm_editor", { permissions: ["content:view"] }, { "if-match": editorRole.version })).status, 200);
+    snapshot = first.hooks.exportState(); assert.deepEqual(snapshot.data.roles.wm_editor, ["content:view"]); assert.equal(JSON.stringify(snapshot).includes(token), false); assert.equal(wm.validatePreviewGrant(token).issuerKey, "admin");
     const before = clone(snapshot), invalid = clone(snapshot); invalid.data.content.audit.push({ action: "must-not-import" }); invalid.sequences.nextMedia = 0;
     assert.throws(() => first.hooks.importState(invalid), error => error.code === "wm_state_unavailable"); assert.deepEqual(first.hooks.exportState(), before);
     assert.throws(() => first.hooks.importState({ ...snapshot, realm: "foreign" })); assert.throws(() => first.hooks.importState({ ...snapshot, version: 99 }));

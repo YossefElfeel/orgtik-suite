@@ -1,6 +1,7 @@
 "use client";
+import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button } from "@orgtik/ui";
+import { Button, Input } from "@orgtik/ui";
 import { MediaPicker } from "@/components/media/MediaPicker";
 import { mediaUrl } from "@/lib/env";
 import {
@@ -8,6 +9,7 @@ import {
   Browser,
   CalendarBlank,
   CalendarCheck,
+  CaretDown,
   ChartLineUp,
   CheckSquare,
   CirclesThreePlus,
@@ -21,6 +23,7 @@ import {
   IdentificationBadge,
   Lifebuoy,
   ListChecks,
+  MagnifyingGlass,
   Megaphone,
   Note,
   Palette,
@@ -70,16 +73,29 @@ export function IconPicker({
   disabled?: boolean;
 }) {
   const t = useTranslations("Fields");
+  const [search, setSearch] = useState("");
   const Selected = Object.hasOwn(icons, value) ? icons[value as keyof typeof icons] : undefined;
+  const query = search.trim().toLowerCase().replace(/^ph-/, "").replaceAll("-", " ");
+  const filtered = Object.entries(icons).filter(([key]) =>
+    key.replace(/^ph-/, "").replaceAll("-", " ").includes(query),
+  );
   return (
-    <div className="flex flex-col gap-3">
-      <div aria-label={t("icon")} className="flex size-14 items-center justify-center rounded-field border border-line bg-sunken">
-        {Selected ? <Selected className="size-8" aria-hidden /> : value ? <img src={mediaUrl(value)} alt={t("icon")} className="size-8 object-contain" /> : null}
+    <details className="group rounded-field border border-line">
+      <summary className="flex cursor-pointer list-none items-center gap-3 rounded-field p-3 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus [&::-webkit-details-marker]:hidden">
+        <span aria-label={t("icon")} className="flex size-10 shrink-0 items-center justify-center rounded-field border border-line bg-sunken">
+          {Selected ? <Selected className="size-8" aria-hidden /> : value ? <img src={mediaUrl(value)} alt={t("icon")} className="size-8 object-contain" /> : null}
+        </span>
+        <span className="flex-1 text-body-sm font-medium">{t("chooseIcon")}</span>
+        <CaretDown aria-hidden className="size-4 transition-transform group-open:rotate-180" />
+      </summary>
+      <div className="flex flex-col gap-3 border-t border-line p-3">
+        <Input type="search" size="sm" aria-label={t("searchIcons")} placeholder={t("searchIcons")} startIcon={<MagnifyingGlass className="size-4" />} value={search} onChange={event => setSearch(event.target.value)} />
+        <div role="group" aria-label={t("icon")} className="flex flex-wrap gap-2">
+          {filtered.map(([key, Icon]) => <Button key={key} size="sm" variant={key === value ? "primary" : "secondary"} disabled={disabled} title={key.replace(/^ph-/, "").replaceAll("-", " ")} aria-label={key.replace(/^ph-/, "").replaceAll("-", " ")} aria-pressed={key === value} onClick={() => onChange(key)} className="size-10 p-0"><Icon aria-hidden className="size-6" /></Button>)}
+        </div>
+        {!filtered.length ? <p role="status" className="text-body-sm text-fg-muted">{t("noIcons")}</p> : null}
+        <MediaPicker iconOnly value={Selected ? "" : value} onChange={onChange} disabled={disabled} />
       </div>
-      <div role="group" aria-label={t("icon")} className="flex flex-wrap gap-2">
-        {Object.entries(icons).map(([key, Icon]) => <Button key={key} size="sm" variant={key === value ? "primary" : "secondary"} disabled={disabled} aria-label={key.replace(/^ph-/, "").replaceAll("-", " ")} aria-pressed={key === value} onClick={() => onChange(key)} className="size-10 p-0"><Icon aria-hidden className="size-6" /></Button>)}
-      </div>
-      <MediaPicker iconOnly value={Selected ? "" : value} onChange={onChange} disabled={disabled} />
-    </div>
+    </details>
   );
 }

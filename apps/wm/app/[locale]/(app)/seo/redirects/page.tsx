@@ -93,6 +93,7 @@ function Redirects() {
   const [viewing, setViewing] = useState<Redirect | null>(null);
   const [deleting, setDeleting] = useState<Redirect | null>(null);
   const editable = can("seo:edit");
+  const creatable = can("seo:create"), deletable = can("seo:delete");
   const { data, isLoading, error, refetch } = useRedirectsQuery({ search: url.get("search"), kind: url.get("kind"), page: url.page, pageSize: 10 });
   const [remove] = useDeleteRedirectMutation();
   const [editing, setEditing] = useState<Draft | null>(null);
@@ -131,11 +132,11 @@ function Redirects() {
           <MenuItem icon={<Eye />} onClick={() => setViewing(row.original)}>{ti("view")}</MenuItem>
           <MenuItem icon={<PencilSimple />} disabled={!editable} onClick={() => setEditing({ ...row.original, note: row.original.note ?? "" })}>{ti("edit")}</MenuItem>
           <MenuSeparator />
-          <MenuItem icon={<Trash />} tone="danger" disabled={!editable} onClick={() => setDeleting(row.original)}>{ti("delete")}</MenuItem>
+          <MenuItem icon={<Trash />} tone="danger" disabled={!deletable} onClick={() => setDeleting(row.original)}>{ti("delete")}</MenuItem>
         </RowActionsMenu>,
       },
     ],
-    [t, ti, editable],
+    [t, ti, editable, deletable],
   );
 
   const status = isLoading ? "loading" : error ? (statusOf(error) === 403 ? "forbidden" : "error") : "ready";
@@ -144,7 +145,7 @@ function Redirects() {
       <PageHeader
         title={t("redirectsTitle")}
         description={t("redirectsDescription")}
-        actions={editable ? <Button startIcon={<Plus />} onClick={() => setEditing({ from: "", to: "", code: 301, note: "" })}>{t("addRedirect")}</Button> : null}
+        actions={creatable ? <Button startIcon={<Plus />} onClick={() => setEditing({ from: "", to: "", code: 301, note: "" })}>{t("addRedirect")}</Button> : null}
       />
       <div className="wm-table-filters">
         <Input aria-label={ti("search")} placeholder={ti("search")} value={url.get("search")} onChange={e => url.set({ search: e.target.value })} className="wm-search" />
