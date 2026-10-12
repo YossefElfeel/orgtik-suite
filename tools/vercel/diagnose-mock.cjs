@@ -2,6 +2,26 @@
 // request bodies, tokens or checkpoints, or issue storage mutations.
 const path = require('node:path'), os = require('node:os'), fs = require('node:fs');
 async function main() {
+  // The CLI's dotenv export can omit integration values. Use Vercel's documented
+  // authenticated GET endpoints for ordinary encrypted variables only; never
+  // change Secret protections or print any values.
+  if (process.env.VERCEL_TOKEN && process.env.VERCEL_PROJECT_ID && process.env.VERCEL_ORG_ID) {
+    const base = `https://api.vercel.com`, query = `?teamId=${encodeURIComponent(process.env.VERCEL_ORG_ID)}`;
+    const get = async route => {
+      const response = await fetch(base + route + query, { headers: { authorization: `Bearer ${process.env.VERCEL_TOKEN}` }, signal: AbortSignal.timeout(20000) });
+      if (!response.ok) throw new Error(`Vercel configuration read answered ${response.status}`);
+      return response.json();
+    };
+    const project = encodeURIComponent(process.env.VERCEL_PROJECT_ID);
+    const { envs } = await get(`/v10/projects/${project}/env`);
+    for (const variable of envs || []) {
+      if (!['KV_REST_API_URL', 'KV_REST_API_TOKEN'].includes(variable.key) || !variable.target?.includes('production')) continue;
+      console.log(JSON.stringify({ variable: variable.key, type: variable.type }));
+      if (variable.type === 'sensitive' || variable.type === 'secret') continue;
+      const resolved = await get(`/v1/projects/${project}/env/${encodeURIComponent(variable.id)}`);
+      if (typeof resolved.value === 'string' && resolved.value) process.env[variable.key] = resolved.value;
+    }
+  }
   process.env.ORGTIK_MOCK_NO_LISTEN = '1';
   const config = require('../../mock/config');
   config.dataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'orgtik-diagnose-'));
