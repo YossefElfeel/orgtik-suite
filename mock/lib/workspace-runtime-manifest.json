@@ -350,6 +350,7 @@
       "apps/wm/manager.js",
       "apps/wm/ops.js",
       "apps/wm/permissions.js",
+      "apps/wm/roles.js",
       "apps/wm/seed/demo-states.js",
       "apps/wm/seed/manager-improvements.js",
       "apps/wm/seed/manager-pages.json",

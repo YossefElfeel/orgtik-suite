@@ -87,6 +87,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: node tools/dev/old-layout-links.mjs
+      - name: Validate the runtime source manifest
+        run: node tools/dev/workspace-manifest.mjs --check
       - name: Validate the production revision before deploying
         env:
           TURBO_SCM_BASE: ${{ github.event.before || inputs.base_revision || 'origin/main^' }}
