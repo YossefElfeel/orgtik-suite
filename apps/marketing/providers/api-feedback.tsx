@@ -26,24 +26,19 @@ const QUIET = new Set([
 ]);
 
 const nameIn = (data: unknown, args: unknown): string | undefined => {
-  const d = (data as { data?: { title?: unknown; name?: unknown } } | undefined)
-    ?.data;
+  const d = (data as { data?: { title?: unknown; name?: unknown } } | undefined)?.data;
   const a = args as { title?: unknown; name?: unknown } | undefined;
-  for (const v of [d?.title, d?.name, a?.title, a?.name])
-    if (typeof v === "string" && v.trim()) return isolate(v.trim());
+  for (const v of [d?.title, d?.name, a?.title, a?.name]) if (typeof v === "string" && v.trim()) return isolate(v.trim());
   return undefined;
 };
 const countIn = (args: unknown) => {
-  const a = args as
-    | { reviewerIds?: unknown[]; userIds?: unknown[]; ids?: unknown[] }
-    | undefined;
+  const a = args as { reviewerIds?: unknown[]; userIds?: unknown[]; ids?: unknown[] } | undefined;
   const list = a?.reviewerIds ?? a?.userIds ?? a?.ids;
   return Array.isArray(list) ? list.length : 1;
 };
 
 export function ApiFeedback() {
   const t = useTranslations("Feedback");
-  const recovery = useTranslations("MarketingV3");
 
   useEffect(() => {
     setApiFeedback({
@@ -52,19 +47,14 @@ export function ApiFeedback() {
         const name = nameIn(data, args);
         switch (endpoint) {
           case "createProject":
-            return name
-              ? t("projectCreated", { name })
-              : t("projectCreatedPlain");
+            return name ? t("projectCreated", { name }) : t("projectCreatedPlain");
           case "deleteProject":
             return t("projectDeleted");
           case "createCampaign":
             return t("campaignCreated");
           case "publishCampaign":
             // A campaign with approvers is sent for approval, not published, until they approve.
-            return (data as { data?: { workflowState?: string } } | undefined)
-              ?.data?.workflowState === "AWAITING_REVIEW"
-              ? t("approvalRequested")
-              : t("campaignPublished");
+            return (data as { data?: { workflowState?: string } } | undefined)?.data?.workflowState === "AWAITING_REVIEW" ? t("approvalRequested") : t("campaignPublished");
           case "deleteCampaign":
             return t("campaignDeleted");
           case "requestCampaignApproval":
@@ -96,16 +86,10 @@ export function ApiFeedback() {
           case "syncIntegration":
             return t("synced");
           case "toggleIntegrationStatus":
-            return (data as { data?: { isConnected?: boolean } } | undefined)
-              ?.data?.isConnected === false
-              ? t("integrationTurnedOff")
-              : t("integrationTurnedOn");
+            return (data as { data?: { isConnected?: boolean } } | undefined)?.data?.isConnected === false ? t("integrationTurnedOff") : t("integrationTurnedOn");
           case "boostPost":
             // A boost the platform refused answers 201 with status FAILED; the dialog says so itself.
-            return (data as { data?: { status?: string } } | undefined)?.data
-              ?.status === "FAILED"
-              ? null
-              : t("boostStarted");
+            return (data as { data?: { status?: string } } | undefined)?.data?.status === "FAILED" ? null : t("boostStarted");
           case "uploadMedia":
             return t("mediaUploaded");
           case "deleteMedia":
@@ -126,9 +110,7 @@ export function ApiFeedback() {
           case "commitAudienceImport":
             return t("contactsImported");
           case "createAudienceSegment":
-            return name
-              ? t("segmentCreated", { name })
-              : t("segmentCreatedPlain");
+            return name ? t("segmentCreated", { name }) : t("segmentCreatedPlain");
           case "deleteAudienceSegment":
             return t("segmentDeleted");
           case "createTemplate":
@@ -138,19 +120,11 @@ export function ApiFeedback() {
         }
       },
       error: ({ endpoint, status, code }: FeedbackContext) => {
-        if (code === "recover_original_first") return recovery("recoverFirst");
         // A View as session (D-017) may look but not change anything.
         if (code === "read_only") return t("readOnly");
         // The label dialog says a duplicate name next to the field.
-        if (
-          status === 409 &&
-          (endpoint === "createLabel" ||
-            endpoint === "createNewLabel" ||
-            endpoint === "updateLabel")
-        )
-          return null;
-        if (status === 409 && endpoint === "publishNow")
-          return t("publishNowConflict");
+        if (status === 409 && (endpoint === "createLabel" || endpoint === "createNewLabel" || endpoint === "updateLabel")) return null;
+        if (status === 409 && endpoint === "publishNow") return t("publishNowConflict");
         switch (status) {
           case 403:
             return t("forbidden");
@@ -174,7 +148,7 @@ export function ApiFeedback() {
       },
     });
     return () => setApiFeedback(null);
-  }, [t, recovery]);
+  }, [t]);
 
   return null;
 }

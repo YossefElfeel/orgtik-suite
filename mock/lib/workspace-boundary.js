@@ -437,7 +437,6 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       if (principal()?.readOnly || workspace().state === "suspended") throw failure(423, "workspace_read_only", "This workspace is read-only.");
     };
     const route = fn => (req, res, next) => { try { const result = fn(req); if (result?.then) result.then(data => answer(res, data), next); else answer(res, result); } catch (error) { next(error); } };
-    require('../apps/admin/console-v3').create({ getStore: () => platform().getStore(), identity: identityFor(), principal, applyDb: db => platform().importState({ ...platform().exportState(), db }), afterStaffAcceptance: async req => { await authority.logout(identityFor().tokenFrom(req), false); frame.accountSessionExit = true; return { sessionAction: 'signed_out' }; } }).routes(app);
     const ownedPeople = () => {
       const context = ownContext();
       if (!context) return principal() ? [principal().user] : [];
@@ -509,11 +508,9 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     }));
     app.use('/v1/admin', (req, res, next) => {
       if (['GET', 'HEAD', 'OPTIONS'].includes(req.method)) return next();
-      const S = platform().getStore(), serviceId = value => require('../apps/admin/catalog-ownership').isServiceCatalogId(S, value), moved = () => res.status(410).json({ success: false, code: 'services_managed_in_crm', message: 'Manage service catalogs and delivery in the OrgTik CRM.', managedIn: 'crm', path: req.path.startsWith('/service-requests') ? '/service-requests' : '/catalog' });
-      const pausedRetry = /^\/invoices\/([^/]+)\/retry$/.exec(req.path);
-      if (pausedRetry && S.db.consoleV3?.manualRetryPauses?.[pausedRetry[1]]) return res.status(409).json({ error: { code: 'manual_retry_paused', message: 'Resume staff retry attempts before trying this invoice.' } });
+      const S = platform().getStore(), serviceId = value => S.db.plans.some(row => row.id === value && row.service) || S.db.services.some(row => row.id === value), moved = () => res.status(410).json({ success: false, code: 'services_managed_in_crm', message: 'Manage service catalogs and delivery in the OrgTik CRM.', managedIn: 'crm', path: req.path.startsWith('/service-requests') ? '/service-requests' : '/catalog' });
       if (/^\/(?:services|service-requests)(?:\/|$)/.test(req.path)) return moved();
-      if (/^\/plans(?:\/|$)/.test(req.path) && (req.body?.service === true && !S.db.websiteOffers.some(offer => offer.kind === 'software' && offer.serviceId === req.path.split('/')[2]) || serviceId(req.path.split('/')[2]))) return moved();
+      if (/^\/plans(?:\/|$)/.test(req.path) && (req.body?.service === true || serviceId(req.path.split('/')[2]))) return moved();
       if (req.path === '/price-drafts' && Array.isArray(req.body?.changes) && req.body.changes.some(row => serviceId(String(row.key || '').split(':')[0]))) return moved();
       const draft = /^\/price-drafts\/([^/]+)\/publish$/.exec(req.path);
       if (draft && S.db.priceDrafts.find(row => row.id === draft[1])?.changes.some(row => serviceId(row.key.split(':')[0]))) return moved();

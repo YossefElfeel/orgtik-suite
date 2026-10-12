@@ -184,7 +184,7 @@ function PersonTileBase({ userId, isMe, listenerAt, onSelect, selected, onDragSt
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className={("h-2.5 origin-bottom ch-width-974975"+' '+"ch-background-289564"+' '+"ch-border-radius-edd97e"+' '+"ch-transition-6b3b55")+" "+(geometryClass({transform:`scaleY(${Math.max(0.2, level * (i === 1 ? 1 : 0.65))})`}))}
+                className={("ch-width-974975"+' '+"ch-background-289564"+' '+"ch-border-radius-edd97e"+' '+"ch-transition-6b3b55")+" "+(geometryClass({height:`${Math.max(2, level * 10 * (i === 1 ? 1 : 0.65))}px`}))}
               />
             ))}
           </span>

@@ -21,7 +21,7 @@ export default function useWorkspace() {
   const me = useAppMeQuery(undefined, { skip: !accessToken || !!isAdmin || !!isWebsiteManager, pollingInterval: 30000, refetchOnFocus: true });
   useEffect(() => {
     const fresh = me.data?.workspaceContext;
-    if (!fresh || !user || !accessToken || !workspaceContext || readClientSession()?.tokens.accessToken !== accessToken || workspaceContext.workspace.id !== fresh.workspace.id || workspaceContext.actor.userId !== fresh.actor.userId || workspaceContext.actor.effectiveUserId !== fresh.actor.effectiveUserId || workspaceContext.actor.readOnly !== fresh.actor.readOnly || JSON.stringify(fresh) === JSON.stringify(workspaceContext)) return;
+    if (!fresh || !user || !accessToken || readClientSession()?.tokens.accessToken !== accessToken || workspaceContext && workspaceContext.workspace.id !== fresh.workspace.id || JSON.stringify(fresh) === JSON.stringify(workspaceContext)) return;
     dispatch(updateUserAndScopes({ user, workspaceContext: fresh, scopes: scopesFromContext(fresh).map(scope => ({ ...scope, permissions: scope.permissions || [] })) }));
   }, [me.data, accessToken, workspaceContext, user, dispatch]);
   const switchTo = useCallback(

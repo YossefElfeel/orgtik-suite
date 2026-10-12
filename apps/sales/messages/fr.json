@@ -264,7 +264,7 @@
     "italic": "Italique",
     "underline": "Souligné",
     "strike": "Barré",
-    "quote": "Devis",
+    "quote": "Citation",
     "undo": "Annuler",
     "redo": "Refaire",
     "more": "plus",
@@ -318,7 +318,7 @@
     "rewards": "Récompenses",
     "invoices": "Factures",
     "offers": "Offres",
-    "tickets": "Tickets d’assistance",
+    "tickets": "Billets",
     "activityFeed": "Fil d'activité",
     "commissions": "Commissions",
     "profile": "Profil",
@@ -1106,7 +1106,7 @@
     "cardLast4": "4 derniers chiffres de la carte"
   },
   "tickets": {
-    "title": "Tickets d’assistance",
+    "title": "Billets",
     "titleCustomer": "Tickets de support",
     "descriptionCustomer": "Posez des questions ou signalez des problèmes — ouvrez un ticket pour discuter avec notre équipe.",
     "descriptionStaff": "Ouvrez un ticket pour voir la conversation, assigner un responsable et résoudre.",

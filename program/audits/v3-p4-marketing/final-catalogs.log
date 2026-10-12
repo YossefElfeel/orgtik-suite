@@ -1,2 +1,0 @@
-$ node ../../tools/i18n/check-catalogs.mjs
-marketing: 1 catalog group(s), 5 languages, keys and placeholders match

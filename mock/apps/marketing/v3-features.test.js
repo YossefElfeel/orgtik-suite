@@ -9,19 +9,6 @@ function fixture(options={}) {
  const instance=seed.graph.load().createWorkspaceRuntime(input);
  return {...seed,instance,contacts,close(){instance.close();seed.close();}};
 }
-test('Marketing UTM defaults persist on the native project and pure reads reject unauthorized or invalid writes',async()=>{
- const f=fixture(),http=await harness([f]);
- try{
-  const before=plain(f.instance.exportSnapshot()),empty=await http.call(0,'GET','/v3/utm');assert.equal(empty.status,200);assert.equal(empty.json.data.settings.source,'');assert.deepEqual(plain(f.instance.exportSnapshot()),before);
-  const body={source:'service newsletter',medium:'email',campaign:'current service & delivery'};
-  const saved=await http.call(0,'PATCH','/v3/utm',body);assert.equal(saved.status,200);const snapshot=plain(f.instance.exportSnapshot()),project=snapshot.data.projects.find(p=>p.id===saved.json.data.projectId);assert.equal(project.utmDefaults.campaign,body.campaign);assert.equal(project.utmDefaults.recordedBy,f.identity.users[0].id);
-  assert.equal((await http.call(0,'GET','/v3/utm')).json.data.settings.source,body.source);assert.deepEqual(plain(f.instance.exportSnapshot()),snapshot);
-  for(const invalid of [{...body,source:'x'.repeat(121)},{...body,medium:'email\nprivate'},{...body,unexpected:'no'}]){assert.equal((await http.call(0,'PATCH','/v3/utm',invalid)).status,422);assert.deepEqual(plain(f.instance.exportSnapshot()),snapshot);}
-  assert.equal((await http.call(0,'PATCH','/v3/utm',body,{'x-user':String(f.identity.findByKey('u14').id)})).status,403);assert.deepEqual(plain(f.instance.exportSnapshot()),snapshot);
-  assert.equal((await http.call(0,'GET','/v3/utm?projectId=not-visible')).status,404);assert.deepEqual(plain(f.instance.exportSnapshot()),snapshot);
-  project.custodyReadOnly=true;f.instance.applyCommitted({snapshot});const archived=plain(f.instance.exportSnapshot());assert.equal((await http.call(0,'PATCH','/v3/utm',body)).status,403);assert.deepEqual(plain(f.instance.exportSnapshot()),archived);
- }finally{await http.close();}
-});
 test('Marketing sender/designer exports actual escaped RTL bytes and retries recover one self-test event',async()=>{
  const f=fixture(),http=await harness([f]);
  try{

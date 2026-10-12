@@ -2321,7 +2321,7 @@
       "rejected": "Rifiutati",
       "tickets": "Ticket",
       "configuration": "Configurazione",
-      "payroll": "Paghe",
+      "payroll": "Lohn",
       "myPayslips": "Le mie buste paga",
       "loans": "Hilfsleihen",
       "financeQueue": "Coda pagamenti"
@@ -3050,7 +3050,7 @@
     "formHint": "Changes are saved in this workspace.",
     "saveError": "The change could not be saved. Review your entries and try again.",
     "cancel": "Cancel",
-    "save": "Salva",
+    "save": "Save",
     "careers": "Careers",
     "careersIntro": "Published openings in this workspace.",
     "applicationSent": "Application submitted",

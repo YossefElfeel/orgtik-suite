@@ -6,13 +6,12 @@ import { assertFlowEvidence, buildRuntimeCheckPlan, changedRuntimeFiles, preview
 
 const select = (changedFiles, deployedKeys = ["mock"]) => selectRuntimeConsumers({ changedFiles, deployedKeys });
 const sandbox = "https://orgtik-suite-mock-preview.vercel.app";
-const activeConsumers = runtimeDependencies.consumers.filter(key => !projectManifest.projects[key].retired);
 
 test("shared mock, server and UI changes test all runtime consumers without deploying them", () => {
   for (const file of ["mock/lib/auth-store.js", "mock/server.js", "mock/api/index.js", "mock/config.js", "packages/ui/src/components/button.tsx"]) {
-    assert.deepEqual(select([file]).consumers, activeConsumers, file);
+    assert.deepEqual(select([file]).consumers, runtimeDependencies.consumers, file);
   }
-  assert.deepEqual(select(["mock/apps/new-tool/router.js"]).consumers, activeConsumers, "An unmapped new mock module cannot silently skip consumers");
+  assert.deepEqual(select(["mock/apps/new-tool/router.js"]).consumers, runtimeDependencies.consumers, "An unmapped new mock module cannot silently skip consumers");
 });
 
 test("platform routes exercise Admin, USR/SOS and website with only mock deployed", () => {
@@ -24,7 +23,7 @@ test("platform routes exercise Admin, USR/SOS and website with only mock deploye
 });
 
 test("platform access, seat and lifecycle changes cover customer tool consumers", () => {
-  for (const file of ["mock/apps/admin/app-api.js", "mock/apps/admin/lifecycle.js", "mock/apps/admin/store.js"]) assert.deepEqual(select([file]).consumers, activeConsumers);
+  for (const file of ["mock/apps/admin/app-api.js", "mock/apps/admin/lifecycle.js", "mock/apps/admin/store.js"]) assert.deepEqual(select([file]).consumers, runtimeDependencies.consumers);
 });
 
 test("tool backend routes include declared integration consumers and merge deployed frontends", () => {
@@ -36,7 +35,7 @@ test("tool backend routes include declared integration consumers and merge deplo
 });
 
 test("manual mock-only deployments remain covered without a source diff", () => {
-  assert.deepEqual(select([]).consumers, activeConsumers);
+  assert.deepEqual(select([]).consumers, runtimeDependencies.consumers);
 });
 
 test("milestone mode retains exactly the hosted auth/layout gate", () => {
@@ -70,18 +69,10 @@ test("ADM and WM use their own locale scenarios once; all declared runners exist
     assert.ok(fs.existsSync(path.resolve(import.meta.dirname, "../../program/tools/audit-kit/flows", flow.file)), flow.file);
     assert.ok(!flow.evidence?.includes("{locale}"));
   }
-  assert.ok(!plan.suites.some(row => row.key === "content"));
-  assert.ok(!plan.requiredProjects.includes("content"));
-});
-
-test("retired Content cannot re-enter shared or directly selected preview acceptance", () => {
-  for (const selection of [select(["mock/server.js"]), select(["apps/content/app/page.tsx"], ["content"]), select([])]) {
-    assert.ok(!selection.consumers.includes("content"));
-    assert.ok(!buildRuntimeCheckPlan(selection).requiredProjects.includes("content"));
-  }
-  const map = structuredClone(runtimeDependencies);
-  map.suites.sos.requires.push("content");
-  assert.throws(() => buildRuntimeCheckPlan(select(["apps/sos/app/page.tsx"], ["sos"]), map), /content: retired project cannot be required/);
+  const content = plan.suites.find(row => row.key === "content");
+  assert.equal(content.coverage, "frozen-visual-smoke");
+  assert.equal(content.visualRoute, "/");
+  assert.match(content.note, /no golden flow exists/);
 });
 
 test("missing golden coverage and unknown scope/projects fail instead of silently passing", () => {

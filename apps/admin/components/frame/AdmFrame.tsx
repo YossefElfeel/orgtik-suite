@@ -1,4 +1,5 @@
 "use client";
+import { demoRuntime } from "@orgtik/ui";
 
 import { useEffect, useState, type ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
@@ -29,17 +30,14 @@ import {
   Bank,
   Ticket,
 } from "@phosphor-icons/react";
-import { Badge, Button, ErrorState, NoPermissionState, Sidebar, Spinner, SuiteFrame, Toaster, UserMenu, type Locale, type SidebarSection } from "@orgtik/ui";
+import { AppRail, Badge, Button, ErrorState, NoPermissionState, Sidebar, Spinner, SuiteShell, Toaster, UserMenu, type Locale, type SidebarSection } from "@orgtik/ui";
 import { routing, usePathname, useRouter } from "@/i18n/routing";
 import { SOS_URL } from "@/lib/env";
 import { clearToken, getToken, signOutStaff } from "@/lib/session";
 import { useClientSession } from "@orgtik/ui/auth";
 import { statusOf, useMeQuery } from "@/store/api";
-import { CURRENT_SCOPE } from "@/components/suite/useSuiteApps";
+import { CURRENT_SCOPE, useSuiteApps } from "@/components/suite/useSuiteApps";
 import { CenteredState } from "./CenteredState";
-import { consoleRequest } from "@/lib/console";
-import { PendingCommands } from '@/components/console/PendingCommands';
-import { StaffPreferences } from '@/components/console/StaffPreferences';
 
 type NavItem = { key: string; href: string; icon: ReactNode; permission: string; external?: boolean };
 type NavSection = { label?: string; items: NavItem[] };
@@ -47,17 +45,16 @@ type NavSection = { label?: string; items: NavItem[] };
 /** Spec 02's areas, each shown only to roles that can view its module (the API checks again). */
 export function useNav(): NavSection[] {
   const t = useTranslations("Nav");
-  const v3 = useTranslations("ConsoleV3");
+  const operationsText = useTranslations("Operations");
   return [
+    ...(process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1" ? [{ items: [{ key: operationsText("heading"), href: "/presentation", icon: <Table />, permission: "overview:view" }] }] : []),
     { items: [{ key: t("overview"), href: "/", icon: <SquaresFour />, permission: "overview:view" }] },
     {
       label: t("sections.catalog"),
       items: [
         { key: t("tools"), href: "/tools", icon: <Toolbox />, permission: "tools:view" },
-        { key: v3("softwareCatalog"), href: "/catalog/software", icon: <Package />, permission: "tools:view" },
         { key: t("plans"), href: "/plans", icon: <Stack />, permission: "plans:view" },
         { key: t("waitlist"), href: "/waitlist", icon: <ListChecks />, permission: "waitlist:view" },
-        { key: v3("releases"), href: "/releases", icon: <Article />, permission: "tools:view" },
       ],
     },
     {
@@ -75,7 +72,6 @@ export function useNav(): NavSection[] {
         { key: t("bundles"), href: "/bundles", icon: <Package />, permission: "bundles:view" },
         { key: t("coupons"), href: "/coupons", icon: <Percent />, permission: "bundles:view" },
         { key: t("tax"), href: "/tax", icon: <Bank />, permission: "tax:view" },
-        { key: v3("taxChecks"), href: "/tax/checks", icon: <Receipt />, permission: "tax:view" },
       ],
     },
     {
@@ -85,20 +81,22 @@ export function useNav(): NavSection[] {
         { key: t("migrations"), href: "/migrations", icon: <Swap />, permission: "workspaces:view" },
         { key: t("customPlans"), href: "/custom-plans", icon: <Handshake />, permission: "workspaces:view" },
         { key: t("invoices"), href: "/invoices", icon: <Invoice />, permission: "billing:view" },
-        { key: v3("billingOperations"), href: "/billing", icon: <Receipt />, permission: "billing:view" },
       ],
     },
     {
-      label: v3("support"),
+      label: t("sections.delivery"),
       items: [
+        { key: t("services"), href: "/services", icon: <Coins />, permission: "services:view" },
+        { key: t("serviceRequests"), href: "/service-requests", icon: <Receipt />, permission: "services:view" },
         { key: t("tickets"), href: "/tickets", icon: <Headset />, permission: "tickets:view" },
-        { key: v3("ticketTargets"), href: "/tickets/targets", icon: <ClockCounterClockwise />, permission: "tickets:view" },
       ],
     },
     {
-      label: v3("ecosystem"),
+      label: t("sections.website"),
       items: [
-        { key: v3("connectors"), href: "/ecosystem", icon: <Swap />, permission: "workspaces:view" },
+        // ADM-27 and ADM-28 are the Website Manager's (D-019, D-029): through SOS, which signs the person in there.
+        { key: t("content"), href: `${SOS_URL}/go/website_manager?redirect=${encodeURIComponent("/content/pages")}`, icon: <Article />, permission: "content:view", external: true },
+        { key: t("suggestions"), href: `${SOS_URL}/go/website_manager?redirect=${encodeURIComponent("/marketing/ideas")}`, icon: <Lightbulb />, permission: "suggestions:view", external: true },
       ],
     },
     {
@@ -106,9 +104,6 @@ export function useNav(): NavSection[] {
       items: [
         { key: t("reports"), href: "/reports", icon: <ChartBar />, permission: "reports:view" },
         { key: t("staff"), href: "/staff", icon: <UserList />, permission: "staff:view" },
-        { key: v3("invitations"), href: "/staff/invitations", icon: <EnvelopeSimple />, permission: "staff:view" },
-        { key: v3("staffSecurity"), href: "/staff/security", icon: <GearSix />, permission: "overview:view" },
-        { key: v3("setup"), href: "/setup", icon: <ListChecks />, permission: "overview:view" },
         { key: t("templates"), href: "/templates", icon: <EnvelopeSimple />, permission: "templates:view" },
         { key: t("settings"), href: "/settings", icon: <GearSix />, permission: "settings:view" },
         { key: t("audit"), href: "/audit", icon: <Ticket />, permission: "settings:view" },
@@ -138,6 +133,7 @@ export function AdmFrame({ children }: { children: ReactNode }) {
   }, [token, router]);
 
   const me = useMeQuery(undefined, { skip: !token });
+  const apps = useSuiteApps(token ?? null);
   const nav = useNav();
 
   useEffect(() => {
@@ -191,17 +187,12 @@ export function AdmFrame({ children }: { children: ReactNode }) {
     .filter((s) => s.items.length);
 
   return (
-    <SuiteFrame
-      snapshot={null}
-      currentScope={CURRENT_SCOPE}
-      currentHref={`/${locale}`}
-      sosUrl={SOS_URL}
-      width="wide"
-      breadcrumbs={[{ label: "OrgTik", href: SOS_URL }, { label: t("name") }]}
-      search={{ load: (query, signal) => consoleRequest(`/search?q=${encodeURIComponent(query)}`, { signal }), onSelect: item => router.push(item.path) }}
-      notifications={{ load: () => consoleRequest('/notifications'), onSelect: item => router.push(item.path), onRead: id => consoleRequest('/notifications/read', { method: 'POST', body: { ids: [id] } }), onReadAll: () => consoleRequest('/notifications/read', { method: 'POST', body: { all: true } }) }}
+    <SuiteShell
+      demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "admin", onLocaleChange: (next) => router.replace(pathname, { locale: next }) }}
+      rail={<AppRail apps={apps} current={CURRENT_SCOPE} homeHref={SOS_URL} />}
       sidebar={<Sidebar title={t("name")} sections={sections} />}
-      banner={
+      topBar={{
+        start: (
           <span className="inline-flex flex-wrap items-center gap-1.5">
             <span className="sr-only">{t("rolesLabel")}</span>
             {roles.filter(r => session?.staffAccess?.roles.admin?.includes(r.key)).map((r) => (
@@ -210,8 +201,8 @@ export function AdmFrame({ children }: { children: ReactNode }) {
               </Badge>
             ))}
           </span>
-      }
-      userMenu={
+        ),
+        end: (
           <UserMenu
             name={`${user.firstName} ${user.lastName}`}
             email={user.email}
@@ -221,14 +212,13 @@ export function AdmFrame({ children }: { children: ReactNode }) {
               void signOutStaff().then(() => window.location.assign(SOS_URL)).catch(() => setSignOutFailed(true));
             }}
           />
-      }
+        ),
+      }}
     >
-      <PendingCommands />
-      <StaffPreferences />
-      {children}
+      <div className="mx-auto w-full max-w-7xl p-4 md:p-8">{children}</div>
       {signOutFailed && <ErrorState size="compact" title={ta("offlineTitle")} description={ta("offlineBody")} onRetry={() => { setSignOutFailed(false); void signOutStaff().then(() => window.location.assign(SOS_URL)).catch(() => setSignOutFailed(true)); }} />}
       <Toaster />
-    </SuiteFrame>
+    </SuiteShell>
   );
 }
 

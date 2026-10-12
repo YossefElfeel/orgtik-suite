@@ -1,9 +1,9 @@
 {
   "updated_at": "2026-10-11",
-  "owner_instruction": "continue till finish the remaining plan, then merge and deploy everything",
-  "gate_policy": "All adopted Tier A/B ordinary native cycles and P5 local handoff are accepted. Owner explicitly authorizes merge/deploy; final approved-source parity, current integrated CI and existing-project production smoke must pass before completion.",
-  "deployment": "managed_vercel_active_final_release_pending",
-  "current_phase": "P5_accepted_ready_for_final_merge_deploy",
+  "owner_instruction": "continue till finish; merge all finished work; resume deploy on vercel",
+  "gate_policy": "Owner authorizes continued implementation through P5 and explicitly resumed managed Vercel deployment on2026-10-11. Deploy validated merged main only; unfinished isolated tool work remains outside the rollout.",
+  "deployment": "resumed_managed_vercel_rollout_in_progress",
+  "current_phase": "P3_integration_and_P4_tool_cycles",
   "packages": {
     "V3-P0": {
       "status": "merged_owner_continue_authorized",
@@ -22,16 +22,16 @@
       "ui_status": "storybook_v2_reviewed"
     },
     "V3-P3-ECO": {
-      "status": "accepted_native_integration_final_ci_pending",
+      "status": "ordinary_adapters_in_progress",
       "ui_status": "tool_migration_in_progress",
       "current_evidence": "Actual connectors/trials/access, Account identity/actions and signed adaptive Home, native feeds/preferences, won CRM customer-owned workspace, public careers and private Chat audience guards are verified. Native Marketing consent/attribution/current CRM results/currency and campaign Tasks pass current-role/connector/receipt checks; the cumulative all-tool journey passes after a documented lossless codec repair with the journal cap unchanged. Remaining tool provider/UI acceptance is in progress.",
       "acceptance_evidence": "program/audits/v3-p3/README.md; program/audits/v3-p3/marketing-transactions.md"
     },
     "V3-P3-CATALOG": {
-      "status": "accepted_final_approved_source_parity_verified",
+      "status": "ordinary_catalog_and_website_parity_verified_mirrors_pending",
       "ui_status": "publication_230_checks_56_captures_verified",
-      "current_evidence": "Canonical CRM/Console ownership, actual WM mirrors and nativeJ19/J20 are accepted. Final approved-main2f3ca45 comparison passes168/168 strict pixel/text/headings/ARIA pairs with exact hashes; all per-capture renderer/paint settings matched, rejected diagnostics retained.",
-      "acceptance_evidence": "program/audits/v3-p3/catalog-parity-current-main.json"
+      "current_evidence": "Canonical CRM publication and final CRM ordinary tool cycle accepted locally (1,316 checks/334 captures). Paid customer+confirmed deal, actual paid source/start guard and packaged delivery bytes verified. Data-only website adapter passes16items/11bundles/five catalogs and168/168 strict pixel/text/ARIA pairs at390/768/1440. Console service writes retired; final Console software metadata and WM mirrors remain pending.",
+      "acceptance_evidence": "program/audits/v3-p3/README.md; program/audits/website/parity/diff-v3-catalog-final-before-vs-v3-catalog-final-after.md"
     },
     "V3-P4-TASKS": {
       "status": "merged_local_and_ci_verified",
@@ -58,10 +58,9 @@
       "acceptance_evidence": "program/audits/v3-p4-crm/README.md; program/audits/v3-p4-crm/manifest.json"
     },
     "V3-P4-CHATS": {
-      "status": "accepted_local_final_integration_pending",
-      "ui_status": "ordinary_native_cycle_verified",
-      "current_evidence": "673 native checks/171 accepted captures, original command reload recovery, ordinary eight Admin/onboarding/connected/states, five catalogs and final build.",
-      "acceptance_evidence": "program/audits/v3-p4/chats/verification.json"
+      "status": "ordinary_tool_cycle_in_progress",
+      "ui_status": "chats_stream_in_progress",
+      "current_evidence": "Chats source candidate cb8e8bc: ordinary Tier A/B, guest admission, recording references, feeds, Admin/onboarding and zero inline source styles implemented. Seventeen native UI checks,19 combined HTTP checks,24 domain tests and14 retained regressions passed; final states/matrix/recording proof and production build remain pending."
     },
     "V3-P4-FILES": {
       "status": "merged_local_and_ci_verified",
@@ -70,49 +69,40 @@
       "acceptance_evidence": "program/audits/v3-p4-files/README.md; program/audits/v3-p4-files/manifest.json"
     },
     "V3-P4-MARKETING": {
-      "status": "accepted_local_final_integration_pending",
-      "ui_status": "ordinary_native_cycle_verified",
-      "current_evidence": "1927 checks/504 unique accepted captures,22 tests, native CRM consent/results, UTM defaults, queue callbacks, original recovery/current authority, five catalogs and final build.",
-      "acceptance_evidence": "program/audits/v3-p4-marketing/acceptance.json"
+      "status": "ordinary_tool_cycle_in_progress",
+      "ui_status": "marketing_stream_in_progress",
+      "current_evidence": "Native campaign/journey persistence and owned feature hooks implemented; canonical CRM consent/attribution/current results/currency and actual Marketing Tasks shared adapters verified. Ordinary UI and complete responsive tool acceptance remain in progress."
     },
     "V3-P4-CONSOLE": {
-      "status": "accepted_local_final_integration_pending",
-      "ui_status": "ordinary_native_cycle_verified",
-      "current_evidence": "684 accepted checks/183 unique captures,two native HTTP regressions, nine native single-line quote/confirm checks, owner response loss/later423 recovery, staff invitation/reauthentication, View-as entry/exit, fresh PDF render, J20 lifecycle, five catalogs and final build.",
-      "acceptance_evidence": "program/audits/v3-p4-console/verification.json"
+      "status": "ordinary_tool_cycle_in_progress",
+      "ui_status": "console_stream_in_progress",
+      "current_evidence": "Isolated Console branch has actual staff SuiteFrame/search/notices/preferences, releases, current cohorts/setup/mock verification, canonical software metadata, immutable invoice PDFs/series, native single-line quote/confirm, exports and ticket SLA hooks. Expanded HTTP proof passes; remaining native pay-link/invitation/handoff and ordinary UI/matrix/build acceptance remain pending."
     },
     "V3-P4-WM": {
-      "status": "accepted_local_final_integration_pending",
-      "ui_status": "ordinary_native_cycle_verified",
-      "current_evidence": "554 retained native assertions/135 captures and44 regressions; combined approved-main supplement adds22 actual browser checks/10 captures and54 targeted regressions. Current persisted sample IDs resolve through exact known native types; View/Edit/article blocks/media picker coexist with original autosave recovery. Types/fivecatalogs/final build pass.",
-      "acceptance_evidence": "program/audits/v3-p4-wm/manifest.json; program/audits/v3-p4-wm/integrated-main/manifest.json"
-    },
-    "V3-P5": {
-      "status": "accepted_local_final_integration_pending",
-      "ui_status": "nine_cycle_consistency_and_before_after_verified",
-      "current_evidence": "All407 original criterion IDs/titles qualified,191 historical CRM findings reconciled,72-feature map and J1-J20 guides.37 handoff checks/four captures pass. Final approved-main source parity remains a distinct Root gate.",
-      "acceptance_evidence": "program/audits/v3-p5/README.md; program/audits/v3-p5/handoff.html"
+      "status": "ordinary_tool_cycle_in_progress",
+      "ui_status": "wm_stream_in_progress",
+      "current_evidence": "Shared current-staff preferences and canonical owner links are committed. The isolated WM worktree contains ordinary content workflow and autosave/comments/webhook changes; source and full browser acceptance remain uncommitted and are preserved outside this completed-work merge."
     }
   },
   "integration": {
-    "status": "local_packages_accepted_final_gates_in_progress",
-    "branch": "feat/suite-v3-finish",
-    "pull_request": 52,
+    "status": "merged_current_ci_verified",
+    "branch": "feat/suite-v3-ecosystem",
+    "pull_request": 49,
     "completed_cycles": [
       "Tasks",
       "Account",
       "HR",
       "CRM",
-      "Chats",
-      "Files",
-      "Marketing",
-      "Console",
-      "WM"
+      "Files"
     ],
     "held_work": [
-      "Final current-head CI, merge and managed existing-project production verification"
+      "Console ordinary acceptance and uncommitted catalog fix",
+      "WM ordinary source and acceptance",
+      "Chats uncommitted final UI refinements and acceptance evidence",
+      "Marketing uncommitted final acceptance evidence",
+      "P5 final reconciliation"
     ],
-    "evidence_policy": "Each accepted cycle names current scoped source/proofs; historical407 criteria retain individual boundaries. Frozen financial/session/journal/CAS foundations and unrelated checkouts remain intact.",
+    "evidence_policy": "Committed source improvements are integrated; a tool cycle is accepted only with its complete scoped evidence. Unfinished sibling worktrees remain intact.",
     "merge_commit": "2f7aaa8f686661e477ca559ae32554212cb7d9ab",
     "ci_run": 38088515260
   },

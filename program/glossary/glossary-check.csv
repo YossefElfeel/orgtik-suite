@@ -1,128 +1,49 @@
 ﻿concept,lang,chosen,found,app,key
-admin,ar,مسؤول,الإدارة,sos,Suite.apps.platform_admin
-admin,ar,مسؤول,أدمن,sos,AccountV3.roles.admin
-admin,ar,مسؤول,الإدارة,tasks,Suite.apps.platform_admin
-admin,ar,مسؤول,الإدارة,sales,Suite.apps.platform_admin
-admin,ar,مسؤول,Admin,hr,Offboarding.tools.adm
-admin,ar,مسؤول,الإدارة,admin,common.Suite.platform_admin
-admin,ar,مسؤول,الإدارة,wm,Suite.platform_admin
-admin,it,Amministratore,Admin,sos,Suite.apps.platform_admin
-admin,it,Amministratore,Admin,sos,People.types.admin
-admin,it,Amministratore,Admin,sos,usr/invitations.WorkspaceInvite.roles.admin
-admin,it,Amministratore,Admin,tasks,Suite.apps.platform_admin
-admin,it,Amministratore,Admin,sales,Suite.apps.platform_admin
-admin,it,Amministratore,Admin,hr,Offboarding.tools.adm
-admin,it,Amministratore,Admin,admin,common.Suite.platform_admin
-admin,it,Amministratore,Admin,admin,customers.Customers.role.admin
-admin,it,Amministratore,Admin,wm,Suite.platform_admin
-beta,ar,إصدار تجريبي,تجريبي,sos,AccountV3.toolStates.beta
-beta,ar,إصدار تجريبي,تجريبية,admin,catalog.Catalog.status.beta
-billing,ar,الفوترة,دورة الفوترة,hr,subscriptionsTable.columns.billing
-billing,ar,الفوترة,دورة الفوترة,hr,subscriptionsSheet.fields.billing
-billing,de,Abrechnung,Billing,hr,HrWorkspace.billing
-billing,de,Abrechnung,Billing,chats,suite.billing
-billing,fr,Facturation,Billing,hr,HrWorkspace.billing
-billing,fr,Facturation,Billing,chats,suite.billing
-billing,it,Fatturazione,Billing,hr,HrWorkspace.billing
-billing,it,Fatturazione,Billing,chats,suite.billing
-bundle,ar,حزمة أدوات,الباقات المجمّعة,admin,commerce.Commerce.bundles.title
+admin,ar,مسؤول,مدير,sales,userManagement.roleAdmin
+admin,ar,مسؤول,المديرين,sales,userManagement.admins
+admin,ar,مسؤول,مدير,sales,users.roles.admin
 bundle,de,Bundle,Bündel,sales,nav.bundles
-bundle,de,Bundle,Pakete,admin,commerce.Commerce.bundles.title
-bundle,de,Bundle,Pakete,admin,common.Nav.bundles
-bundle,de,Bundle,Bündel,wm,Fields.bundle
-bundle,de,Bundle,Pakete,wm,Fields.bundles
-bundle,fr,Offre groupée,Packs,admin,commerce.Commerce.bundles.title
-bundle,fr,Offre groupée,Packs,admin,common.Nav.bundles
-bundle,fr,Offre groupée,Bouquet,wm,Fields.bundle
-bundle,it,Bundle,Pacchetti,admin,commerce.Commerce.bundles.title
-bundle,it,Bundle,Pacchetti,admin,common.Nav.bundles
-bundle,it,Bundle,Pacchetto,wm,Fields.bundle
-bundle,it,Bundle,Pacchetti,wm,Fields.bundles
-cancel,de,Abbrechen,Kündigen,sos,usr/billing.Billing.lines.cancel
-cancel,de,Abbrechen,Cancel,hr,HrWorkspace.cancel
-cancel,fr,Annuler,Résilier,sos,usr/billing.Billing.lines.cancel
-cancel,fr,Annuler,Cancel,hr,HrWorkspace.cancel
-cancel,it,Annulla,Cancel,hr,HrWorkspace.cancel
-company,ar,الشركة,الجهة,wm,Site.organization
-company,de,Unternehmen,Firmen,sales,nav.companies
-company,de,Unternehmen,Firma,sales,Customers.form.company
-company,de,Unternehmen,Firma,sales,Customers.business.company
-company,de,Unternehmen,Firma,sales,Offers.customerCompany
-company,de,Unternehmen,Firma,sales,Projects.company
-company,de,Unternehmen,Firma,sales,Team.salespeople.colCompany
-company,de,Unternehmen,Firma,sales,Team.loyalty.colCompany
-company,de,Unternehmen,Firma,sales,Presentation.company
-company,de,Unternehmen,Firma,sales,CrmV3.company
-company,de,Unternehmen,Firmen,sales,CrmV3.companiesTitle
 company,de,Unternehmen,Firma,hr,calendar.scheduleMeeting.tabs.company
-company,de,Unternehmen,Firma,wm,Leads.company
-company,de,Unternehmen,Organisation,wm,Site.organization
-company,fr,Entreprise,Organisation,wm,Site.organization
-company,it,Azienda,Organizzazione,wm,Site.organization
-contact,ar,جهة اتصال,التواصل,sales,Customers.list.colContact
-contact,ar,جهة اتصال,بيانات التواصل,sales,Customers.form.contactSection
-contact,ar,جهة اتصال,بيانات الاتصال,hr,employeeDetails.sections.contact
-contact,ar,جهة اتصال,تواصل معنا,wm,EntryNames.pg_contact
-contact,ar,جهة اتصال,تواصل معنا,wm,EntryNames.st_contact
-contact,ar,جهة اتصال,التواصل,wm,Leads.contactTitle
-coupon,ar,كوبون خصم,رمز الخصم,sos,usr/tools.Tools.checkout.codeTitle
-coupon,ar,كوبون خصم,القسائم,admin,common.Nav.coupons
-coupon,de,Gutscheincode,Rabattcode,sos,usr/tools.Tools.checkout.codeTitle
-coupon,fr,Code promo,Code de réduction,sos,usr/tools.Tools.checkout.codeTitle
 coupon,fr,Code promo,Coupons,sales,nav.coupons
+coupon,fr,Code promo,Coupon,sales,projects.coupon
 coupon,fr,Code promo,Coupon,sales,planManagement.subscribe.coupon
-coupon,fr,Code promo,Coupons,admin,commerce.Commerce.coupons.title
-coupon,fr,Code promo,Coupons,admin,common.Nav.coupons
 coupon,it,Codice sconto,Coupon,sales,nav.coupons
+coupon,it,Codice sconto,Coupon,sales,projects.coupon
 coupon,it,Codice sconto,Coupon,sales,planManagement.subscribe.coupon
-coupon,it,Codice sconto,Coupon,admin,commerce.Commerce.coupons.title
-coupon,it,Codice sconto,Coupon,admin,common.Nav.coupons
-create,ar,إنشاء,جديد,sos,AccountV3.feedbackNew
 create,ar,إنشاء,جديد,sales,common.new
-create,ar,إنشاء,جديد,sales,ServiceRequests.states.new
-create,ar,إنشاء,جديد,sales,CrmV3.stageStates.new
-create,ar,إنشاء,جديد,hr,statusBadge.new
-create,ar,إنشاء,جديد,admin,customers.Customers.customPlans.state.new
-create,de,Erstellen,Neu,sos,AccountV3.feedbackNew
+create,ar,إنشاء,جديد,sales,customers.statusNew
 create,de,Erstellen,Neu,sales,common.new
-create,de,Erstellen,Neu,sales,ServiceRequests.states.new
-create,de,Erstellen,Neu,sales,CrmV3.stageStates.new
-create,de,Erstellen,Neu,hr,statusBadge.new
-create,de,Erstellen,Neu,admin,customers.Customers.customPlans.state.new
-create,fr,Créer,Nouveau,sos,AccountV3.feedbackNew
+create,de,Erstellen,Neu,sales,customers.statusNew
+create,de,Erstellen,Neu hinzufügen,content,BlogsPage.add_new
+create,de,Erstellen,Neu,content,ContactsPage.filter_new
+create,de,Erstellen,Neu,content,ContactsPage.status_new
 create,fr,Créer,Nouveau,sales,common.new
-create,fr,Créer,Nouveau,sales,ServiceRequests.states.new
-create,fr,Créer,Nouveau,sales,CrmV3.stageStates.new
-create,fr,Créer,Nouveau,hr,statusBadge.new
-create,fr,Créer,Nouvelle,admin,customers.Customers.customPlans.state.new
-create,it,Crea,Nuovo,sos,AccountV3.feedbackNew
+create,fr,Créer,Nouveau,sales,customers.statusNew
+create,fr,Créer,Ajouter nouveau,content,BlogsPage.add_new
+create,fr,Créer,Nouveau,content,ContactsPage.filter_new
+create,fr,Créer,Nouveau,content,ContactsPage.status_new
 create,it,Crea,Nuovo,sales,common.new
-create,it,Crea,Nuovo,sales,ServiceRequests.states.new
-create,it,Crea,Nuovo,sales,CrmV3.stageStates.new
-create,it,Crea,Nuovo,hr,statusBadge.new
-create,it,Crea,Nuova,admin,customers.Customers.customPlans.state.new
-currency,de,Währung,Currency,hr,HrWorkspace.currency
-currency,fr,Devise,Currency,hr,HrWorkspace.currency
-currency,it,Valuta,Currency,hr,HrWorkspace.currency
+create,it,Crea,Nuovo,sales,customers.statusNew
+create,it,Crea,Aggiungi nuovo,content,BlogsPage.add_new
+create,it,Crea,Nuovo,content,ContactsPage.filter_new
+create,it,Crea,Nuovo,content,ContactsPage.status_new
 dashboard,ar,لوحة التحكم,لوحة القيادة,sales,nav.dashboard
+dashboard,de,Dashboard,Übersicht,content,dashboard
 deal,de,Deal,Angebote,sales,nav.deals
 deal,fr,Affaire,Offres,sales,nav.deals
+deal,fr,Affaire,Contrat,sales,offers.deal
 deal,it,Trattativa,Offerte,sales,nav.deals
+deal,it,Trattativa,Accordo,sales,offers.deal
 delete,fr,Supprimer,Suppression,hr,createUpdateEmployee.permissions.actions.delete
-department,de,Abteilung,Bereich,sales,ServiceCatalog.department
-department,de,Abteilung,Department,hr,HrWorkspace.department
-department,de,Abteilung,Bereich,wm,Editor.department
-department,fr,Département,Service,sos,Profile.department
-department,fr,Département,Service,sales,Projects.department
-department,fr,Département,Service,sales,Team.salespeople.department
-department,fr,Département,Service,sales,Team.users.colDepartment
-department,fr,Département,Service,sales,Team.users.department
-department,fr,Département,Service,sales,Team.profile.department
-department,fr,Département,Department,hr,HrWorkspace.department
+department,it,Reparto,Dipartimento,sales,projects.form.department
 department,it,Reparto,Dipartimento,sales,planManagement.columnDepartment
 department,it,Reparto,Dipartimento,sales,planManagement.filterDepartment
 department,it,Reparto,Dipartimento,sales,planManagement.form.department
 department,it,Reparto,Dipartimenti,sales,planManagement.departments.title
+department,it,Reparto,Dipartimento,sales,salesman.department
+department,it,Reparto,Dipartimento,sales,userManagement.columnDepartment
+department,it,Reparto,Dipartimento,sales,userManagement.fieldDepartment
+department,it,Reparto,Dipartimento,sales,profile.department
 department,it,Reparto,Dipartimento,hr,createUpdateEmployee.fields.department
 department,it,Reparto,Dipartimento,hr,createUpdateEmployee.placeholders.department
 department,it,Reparto,Dipartimento,hr,timeOffTable.columns.department
@@ -134,94 +55,30 @@ department,it,Reparto,Dipartimenti,hr,calendar.sidebar.departments
 department,it,Reparto,Dipartimento,hr,calendar.scheduleMeeting.tabs.department
 department,it,Reparto,Dipartimento,hr,departmentPage.title
 department,it,Reparto,Dipartimento,hr,departmentPage.cards.totalDepartments.fallbackName
-department,it,Reparto,Department,hr,HrWorkspace.department
-edit,ar,تعديل,تحرير,files,FilesV3.edit
-employee,ar,موظف,ملف موظف,hr,employees.details.activity.entities.employee
-employee,de,Mitarbeiter,Mitarbeitende Person,hr,calendar.timeOff.employee
-employee,de,Mitarbeiter,Person,hr,HrPresentation.employee
-employee,fr,Employé,Personnel,sos,AccountV3.metrics.employees
-employee,fr,Employé,Salariés,sos,usr/tools.Tools.features.hr.employees.name
-employee,fr,Employé,Collaborateur,hr,calendar.timeOff.employee
-employee,fr,Employé,Salarié,hr,HrPresentation.employee
-file,ar,ملف,Files,hr,Offboarding.tools.files
-file,de,Datei,Files,sos,AccountPresentation.toolfiles
-file,de,Datei,Files,hr,Offboarding.tools.files
-file,fr,Fichier,Files,sos,AccountPresentation.toolfiles
-file,fr,Fichier,Files,hr,Offboarding.tools.files
-filter,ar,تصفية,عوامل التصفية,chats,insights.filters
-lead,ar,عميل محتمل,قائد فريق,hr,createUpdateEmployee.options.experienceLevel.lead
-lead,ar,عميل محتمل,المقدمة,wm,Fields.lead
-lead,de,Lead,Anfragen,wm,Nav.leads
-lead,de,Lead,Anfragen,wm,Overview.leadsSample
-lead,de,Lead,Einleitung,wm,Fields.lead
-lead,de,Lead,Anfragen,wm,Leads.title
-lead,de,Lead,Anfrage,wm,Leads.colLead
-lead,de,Lead,Anfragen,wm,Audit.kinds.lead
-lead,de,Lead,Anfragen,wm,Improvements.capabilityGroups.leads
-lead,fr,Prospect,Lead,hr,createUpdateEmployee.options.experienceLevel.lead
-lead,fr,Prospect,Demandes,wm,Nav.leads
-lead,fr,Prospect,Demandes,wm,Overview.leadsSample
-lead,fr,Prospect,Chapeau,wm,Fields.lead
-lead,fr,Prospect,Demandes,wm,Leads.title
-lead,fr,Prospect,Demande,wm,Leads.colLead
-lead,fr,Prospect,Demandes,wm,Audit.kinds.lead
-lead,fr,Prospect,Demandes,wm,Improvements.capabilityGroups.leads
-lead,it,Lead,Contatti,wm,Nav.leads
-lead,it,Lead,Richieste,wm,Overview.leadsSample
-lead,it,Lead,Sottotitolo,wm,Fields.lead
-lead,it,Lead,Contatti,wm,Leads.title
-lead,it,Lead,Contatto,wm,Leads.colLead
-lead,it,Lead,Contatti,wm,Audit.kinds.lead
-lead,it,Lead,Contatti,wm,Improvements.capabilityGroups.leads
-leave,ar,إجازة,مغادرة,marketing,CampaignWizard.cancelConfirm
-leave,ar,إجازة,مغادرة,chats,call.leave
-leave,ar,إجازة,مغادرة,chats,office.leaveAction
 leave,de,Abwesenheit,Urlaub,hr,sidebar.items.timeOff
-leave,de,Abwesenheit,Verlassen,marketing,CampaignWizard.cancelConfirm
-leave,de,Abwesenheit,Verlassen,chats,call.leave
-leave,de,Abwesenheit,Verlassen,chats,office.leaveAction
-leave,fr,Congé,Absence,hr,calendar.eventKinds.timeOff
-leave,fr,Congé,Quitter,marketing,CampaignWizard.cancelConfirm
-leave,fr,Congé,Quitter,chats,call.leave
-leave,fr,Congé,Quitter,chats,office.leaveAction
 leave,it,Assenza,Congedi,hr,timeOffPage.title
 leave,it,Assenza,Permessi,hr,attendanceTable.sections.leave
 leave,it,Assenza,Ferie,hr,calendar.eventTypes.timeOff
 leave,it,Assenza,Permessi,hr,sidebar.items.timeOff
-leave,it,Assenza,Esci,marketing,CampaignWizard.cancelConfirm
-leave,it,Assenza,Esci,chats,call.leave
-leave,it,Assenza,Esci,chats,office.leaveAction
-owner,ar,المالك,المسؤول,sales,CrmV3.owner
-owner,ar,المالك,المسؤول,wm,Leads.owner
-owner,de,Inhaber,Eigentümer,sos,AccountPresentation.setupOwner
-owner,de,Inhaber,Eigentümer,sos,AccountV3.roles.owner
-owner,de,Inhaber,Verantwortlich,sales,CrmV3.owner
-owner,de,Inhaber,Zuständig,wm,Leads.owner
-owner,de,Inhaber,Verantwortlich,chats,card.owner
-owner,de,Inhaber,Verantwortlich,chats,task.owner
-owner,fr,Propriétaire,Responsable,sales,CrmV3.owner
-owner,fr,Propriétaire,Responsable,wm,Leads.owner
-owner,it,Proprietario,Responsabile,sales,CrmV3.owner
-owner,it,Proprietario,Responsabile,wm,Leads.owner
 payment,ar,دفعة,المدفوعات,sales,planManagement.filterPayments
-payment,ar,دفعة,طريقة الدفع,sales,SalesArchive.columnPaymentType
-payment,ar,دفعة,المدفوعات,admin,billing.Billing.detail.payments
-payment,ar,دفعة,المدفوعات,admin,system.System.reports.payments
-payroll,ar,الرواتب,قسائم الرواتب,hr,employees.details.sections.payslips
-payroll,ar,الرواتب,قسائم الرواتب,hr,employees.details.payslips.title
 payroll,de,Lohnabrechnung,Abrechnung,hr,payroll.title
 payroll,fr,Paie,Fiches de paie,hr,employees.details.sections.payslips
 payroll,fr,Paie,Fiches de paie,hr,employees.details.payslips.title
-payroll,it,Paghe,Buste paga,sos,usr/tools.Tools.features.hr.payroll.name
+payroll,fr,Paie,Lohn,hr,sidebar.items.payroll
 payroll,it,Paghe,Buste paga,hr,employees.details.sections.payslips
 payroll,it,Paghe,Buste paga,hr,employees.details.payslips.title
 payroll,it,Paghe,Libro paga,hr,payroll.title
-permission,ar,صلاحية,الإذن,files,FilesV3.permission
-permission,fr,Autorisation,Permission,files,FilesV3.permission
-permission,it,Autorizzazione,Permesso,files,FilesV3.permission
+payroll,it,Paghe,Lohn,hr,sidebar.items.payroll
 permission,it,Autorizzazione,Permessi,hr,createUpdateEmployee.steps.permissions.nav
 permission,it,Autorizzazione,Permessi,hr,createUpdateEmployee.steps.permissions.heading
 plan,de,Tarif,Pläne,sales,nav.plans
+plan,de,Tarif,Pläne,sales,archive.columnPlans
+plan,de,Tarif,Plan,sales,archive.columnPlan
+plan,de,Tarif,Pläne,sales,archive.resource.plans
+plan,de,Tarif,Pläne,sales,customers.projectsPlans
+plan,de,Tarif,Pläne,sales,projects.details.plans
+plan,de,Tarif,Plan,sales,projects.planLabel
+plan,de,Tarif,Pläne,sales,projects.steps.plans
 plan,de,Tarif,Pläne,sales,planManagement.title
 plan,de,Tarif,Pläne,sales,planManagement.titleSmall
 plan,de,Tarif,Pläne,sales,planManagement.tabs.plans
@@ -229,10 +86,15 @@ plan,de,Tarif,Plan,sales,packages.columnPlan
 plan,de,Tarif,Pläne,sales,packages.plansStats
 plan,de,Tarif,Plan,sales,subscriptions.columnPlan
 plan,de,Tarif,Plan,sales,invoices.columnPlan
-plan,de,Tarif,Pläne,sales,Customers.projects.plans
-plan,de,Tarif,Pläne,sales,Team.salespeople.colPlans
-plan,de,Tarif,Plan,sales,Team.salespeople.chartPlan
+plan,de,Tarif,Pläne,sales,offers.plans
 plan,fr,Formule,Plans,sales,nav.plans
+plan,fr,Formule,Plans,sales,archive.columnPlans
+plan,fr,Formule,Plan,sales,archive.columnPlan
+plan,fr,Formule,Plans,sales,archive.resource.plans
+plan,fr,Formule,Forfaits,sales,customers.projectsPlans
+plan,fr,Formule,Plans,sales,projects.details.plans
+plan,fr,Formule,plan,sales,projects.planLabel
+plan,fr,Formule,Plans,sales,projects.steps.plans
 plan,fr,Formule,Plans,sales,planManagement.title
 plan,fr,Formule,Plans,sales,planManagement.titleSmall
 plan,fr,Formule,Plans,sales,planManagement.tabs.plans
@@ -240,200 +102,96 @@ plan,fr,Formule,Plan,sales,packages.columnPlan
 plan,fr,Formule,Plans,sales,packages.plansStats
 plan,fr,Formule,Plan,sales,subscriptions.columnPlan
 plan,fr,Formule,Plan,sales,invoices.columnPlan
-plan,fr,Formule,Offres,sales,Team.salespeople.colPlans
-plan,fr,Formule,Offre,sales,Team.salespeople.chartPlan
-plan,fr,Formule,Offre,admin,console.ConsoleV3.plan
+plan,fr,Formule,Plans,sales,offers.plans
+post,fr,Publication,articles,content,BlogsPage.posts
+post,it,Post,articoli,content,BlogsPage.posts
 price,ar,السعر,التسعير,sales,planManagement.details.pricing
-price,ar,السعر,التسعير,admin,catalog.Catalog.plans.colUnit
-price,ar,السعر,التسعير,admin,common.Nav.sections.pricing
-price,ar,السعر,تسعير,wm,Types.pricing.one
-price,ar,السعر,التسعير,wm,Types.pricing.many
 price,fr,Prix,Tarification,sales,planManagement.details.pricing
 price,fr,Prix,Tarifs,hr,test1.footer2.links.pricing
-price,fr,Prix,Tarification,admin,catalog.Catalog.plans.colUnit
-price,fr,Prix,Tarifs,admin,common.Nav.sections.pricing
-price,fr,Prix,Tarifs,wm,Types.pricing.one
-price,fr,Prix,Tarifs,wm,Types.pricing.many
-project,it,Progetto,Project,chats,v3.project
-quote,ar,عرض سعر,اقتباس,wm,Fields.slotQuote
-quote,ar,عرض سعر,نص التقييم,wm,Fields.reviewQuote
-quote,de,Angebot,Zitat,wm,Fields.slotQuote
-quote,de,Angebot,Zitat,wm,Fields.reviewQuote
-quote,fr,Devis,Citation,wm,Fields.slotQuote
-quote,fr,Devis,Témoignage,wm,Fields.reviewQuote
-quote,it,Preventivo,Citazione,wm,Fields.slotQuote
-quote,it,Preventivo,Testimonianza,wm,Fields.reviewQuote
-refund,ar,استرداد,المبالغ المستردة,sos,usr/billing.Billing.invoice.refunds
-refund,ar,استرداد,المبالغ المستردة,admin,system.System.reports.refunds
-refund,de,Rückerstattung,Erstattungen,sos,usr/billing.Billing.invoice.refunds
+quote,ar,عرض سعر,اقتباس,sales,common.quote
+quote,de,Angebot,Zitat,sales,common.quote
+quote,fr,Devis,Citation,sales,common.quote
+quote,it,Preventivo,Citazione,sales,common.quote
 refund,de,Rückerstattung,Erstatten,sales,common.refund
-refund,de,Rückerstattung,Erstatten,admin,billing.Billing.actions.refund
-refund,de,Rückerstattung,Erstattung,admin,customers.Customers.audit.invoice_refund
-refund,de,Rückerstattung,Erstattungen,admin,system.System.reports.refunds
-remove,fr,Retirer,Supprimer,sos,usr/billing.Billing.cards.remove
 remove,fr,Retirer,Supprimer,sales,common.remove
-remove,fr,Retirer,Supprimer,sales,Presentation.remove
-role,ar,الدور,المنصب,wm,Fields.reviewRole
-role,de,Rolle,Position,wm,Fields.reviewRole
-role,fr,Rôle,Fonction,wm,Fields.reviewRole
-save,ar,حفظ,حفظ التغييرات,sos,Person.save
-save,ar,حفظ,حفظ التغييرات,sos,Systems.save
-save,ar,حفظ,حفظ التعديلات,tasks,TasksPresentation.save
 save,ar,حفظ,حفظ التغييرات,sales,common.saveChanges
 save,ar,حفظ,حفظ التغييرات,sales,planManagement.categories.saveChanges
 save,ar,حفظ,حفظ التغييرات,sales,planManagement.departments.saveChanges
 save,ar,حفظ,حفظ التغييرات,sales,planManagement.durations.saveChanges
 save,ar,حفظ,حفظ التغييرات,sales,planManagement.features.saveChanges
 save,ar,حفظ,حفظ التغييرات,sales,planManagement.zones.saveChanges
-save,ar,حفظ,حفظ التغييرات,sales,Customers.edit.submit
-save,ar,حفظ,حفظ التغييرات,sales,Team.salespeople.save
-save,ar,حفظ,حفظ التغييرات,hr,createUpdateEmployee.nav.save
-save,ar,حفظ,حفظ التغييرات,hr,ticketStatusCard.saveChanges
-save,ar,حفظ,حفظ التغييرات,hr,loans.details.fields.saveChanges
-save,ar,حفظ,حفظ التغييرات,hr,configuration.saveChanges
-save,ar,حفظ,حفظ التغييرات,hr,departmentPage.management.sheet.footer.saveChanges
-save,ar,حفظ,حفظ التغييرات,marketing,PostComposer.saveChanges
-save,de,Speichern,Änderungen speichern,sos,Person.save
-save,de,Speichern,Änderungen speichern,sos,Systems.save
-save,de,Speichern,Änderungen speichern,tasks,TasksPresentation.save
+save,ar,حفظ,حفظ التغييرات,sales,loyalty.saveChanges
+save,de,Speichern,Änderungen speichern,tasks,Profile.buttons.saveChanges
+save,de,Speichern,Änderungen speichern,tasks,NewTaskSheet.saveChanges
+save,de,Speichern,Änderungen speichern,tasks,UpdateTaskSheet.buttons.save
 save,de,Speichern,Änderungen speichern,sales,common.saveChanges
 save,de,Speichern,Änderungen speichern,sales,planManagement.categories.saveChanges
 save,de,Speichern,Änderungen speichern,sales,planManagement.departments.saveChanges
 save,de,Speichern,Änderungen speichern,sales,planManagement.durations.saveChanges
 save,de,Speichern,Änderungen speichern,sales,planManagement.features.saveChanges
 save,de,Speichern,Änderungen speichern,sales,planManagement.zones.saveChanges
-save,de,Speichern,Änderungen speichern,sales,Customers.edit.submit
-save,de,Speichern,Änderungen speichern,sales,Team.salespeople.save
+save,de,Speichern,Änderungen speichern,sales,loyalty.saveChanges
 save,de,Speichern,Änderungen speichern,hr,createUpdateEmployee.nav.save
 save,de,Speichern,Änderungen speichern,hr,ticketStatusCard.saveChanges
 save,de,Speichern,Änderungen speichern,hr,loans.details.fields.saveChanges
 save,de,Speichern,Änderungen speichern,hr,configuration.saveChanges
 save,de,Speichern,Änderungen speichern,hr,departmentPage.management.sheet.footer.saveChanges
-save,de,Speichern,Änderungen speichern,marketing,PostComposer.saveChanges
-save,de,Speichern,Save,admin,console.ConsoleV3.save
+save,de,Speichern,Änderungen speichern,content,BlogsPage.save_changes
+save,de,Speichern,Änderungen speichern,content,ReviewsPage.save_changes_btn
+save,de,Speichern,Änderungen speichern,content,ProjectsPage.save_btn
+save,de,Speichern,Änderungen speichern,content,ServicesPage.save_changes
+save,de,Speichern,Änderungen speichern,content,ContentPage.save_changes
+save,de,Speichern,Änderungen speichern,content,SeoPage.save_changes
+save,de,Speichern,Änderungen speichern,content,SitemapPage.save_changes_btn
 save,fr,Enregistrer,Enregistrer les modifications,sales,common.saveChanges
 save,fr,Enregistrer,Enregistrer les modifications,sales,planManagement.categories.saveChanges
 save,fr,Enregistrer,Enregistrer les modifications,sales,planManagement.departments.saveChanges
 save,fr,Enregistrer,Enregistrer les modifications,sales,planManagement.durations.saveChanges
 save,fr,Enregistrer,Enregistrer les modifications,sales,planManagement.features.saveChanges
 save,fr,Enregistrer,Enregistrer les modifications,sales,planManagement.zones.saveChanges
+save,fr,Enregistrer,Enregistrer les modifications,sales,loyalty.saveChanges
 save,fr,Enregistrer,Enregistrer les modifications,hr,createUpdateEmployee.nav.save
 save,fr,Enregistrer,Enregistrer les modifications,hr,ticketStatusCard.saveChanges
 save,fr,Enregistrer,Enregistrer les modifications,hr,loans.details.fields.saveChanges
 save,fr,Enregistrer,Enregistrer les modifications,hr,configuration.saveChanges
 save,fr,Enregistrer,Enregistrer les modifications,hr,departmentPage.management.sheet.footer.saveChanges
-save,fr,Enregistrer,Enregistrer les modifications,marketing,PostComposer.saveChanges
-save,fr,Enregistrer,Save,admin,console.ConsoleV3.save
-save,it,Salva,Salva modifiche,sos,Person.save
-save,it,Salva,Salva modifiche,sos,Systems.save
-save,it,Salva,Salva modifiche,tasks,TasksPresentation.save
+save,fr,Enregistrer,Enregistrer les modifications,content,ReviewsPage.save_changes_btn
+save,fr,Enregistrer,Enregistrer les modifications,content,ProjectsPage.save_btn
+save,fr,Enregistrer,Enregistrer les modifications,content,ServicesPage.save_changes
+save,fr,Enregistrer,Enregistrer les modifications,content,ContentPage.save_changes
+save,fr,Enregistrer,Enregistrer les modifications,content,SeoPage.save_changes
+save,fr,Enregistrer,Enregistrer les modifications,content,SitemapPage.save_changes_btn
 save,it,Salva,Salva modifiche,sales,common.saveChanges
 save,it,Salva,Salva modifiche,sales,planManagement.categories.saveChanges
 save,it,Salva,Salva modifiche,sales,planManagement.departments.saveChanges
 save,it,Salva,Salva modifiche,sales,planManagement.durations.saveChanges
 save,it,Salva,Salva modifiche,sales,planManagement.features.saveChanges
 save,it,Salva,Salva modifiche,sales,planManagement.zones.saveChanges
-save,it,Salva,Salva modifiche,sales,Customers.edit.submit
-save,it,Salva,Salva le modifiche,sales,Team.salespeople.save
+save,it,Salva,Salva modifiche,sales,loyalty.saveChanges
 save,it,Salva,Salva modifiche,hr,createUpdateEmployee.nav.save
 save,it,Salva,Salva modifiche,hr,ticketStatusCard.saveChanges
 save,it,Salva,Salva modifiche,hr,loans.details.fields.saveChanges
 save,it,Salva,Salva Modifiche,hr,configuration.saveChanges
 save,it,Salva,Salva modifiche,hr,departmentPage.management.sheet.footer.saveChanges
-save,it,Salva,Salva modifiche,marketing,PostComposer.saveChanges
-save,it,Salva,Save,admin,console.ConsoleV3.save
-seat,de,Nutzerlizenz,Plätze,sos,usr/billing.Billing.summary.seats
-seat,de,Nutzerlizenz,Plätze,admin,customers.Customers.list.colSeats
-seat,de,Nutzerlizenz,Plätze,admin,customers.Customers.detail.seats
-seat,de,Nutzerlizenz,Plätze,admin,pricing.Pricing.preview.seats
-seat,fr,Siège,Places,sos,usr/billing.Billing.summary.seats
-seat,fr,Siège,Places,admin,customers.Customers.list.colSeats
-seat,fr,Siège,Places,admin,customers.Customers.detail.seats
-seat,fr,Siège,Places,admin,pricing.Pricing.preview.seats
-seat,it,Licenza utente,Posti,sos,usr/billing.Billing.summary.seats
-seat,it,Licenza utente,Posti,admin,customers.Customers.list.colSeats
-seat,it,Licenza utente,Posti,admin,customers.Customers.detail.seats
-seat,it,Licenza utente,Posti,admin,pricing.Pricing.preview.seats
-service_package,ar,باقة خدمات,حزمة,admin,services.Services.catalogue.kinds.package
+save,it,Salva,Salva modifiche,content,ReviewsPage.save_changes_btn
+save,it,Salva,Salva modifiche,content,ProjectsPage.save_btn
+save,it,Salva,Salva modifiche,content,ServicesPage.save_changes
+save,it,Salva,Salva modifiche,content,ContentPage.save_changes
+save,it,Salva,Salva modifiche,content,SeoPage.save_changes
+save,it,Salva,Salva modifiche,content,SitemapPage.save_changes_btn
+service_package,ar,باقة خدمات,الحزم,sales,archive.resource.packages
 service_package,de,Servicepaket,Pakete,sales,nav.packages
+service_package,de,Servicepaket,Pakete,sales,archive.resource.packages
 service_package,de,Servicepaket,Pakete,sales,packages.title
-service_package,de,Servicepaket,Pakete,sales,SalesArchive.resource.packages
-service_package,de,Servicepaket,Festpreis,admin,services.Services.catalogue.kinds.package
-service_package,de,Servicepaket,Paket,wm,Fields.package
-service_package,de,Servicepaket,Pakete,wm,Fields.packages
-service_package,fr,Forfait de services,Formule,wm,Fields.package
-service_package,fr,Forfait de services,Formules,wm,Fields.packages
-settings,fr,Paramètres,Réglages,wm,Audit.kinds.settings
 submit,ar,تقديم,إرسال,sales,common.submit
-submit,ar,تقديم,إرسال,hr,jobs.addJobSheet.submit
 submit,de,Einreichen,Absenden,hr,jobs.addJobSheet.submit
-task,ar,مهمة,Tasks,hr,Offboarding.tools.tasks
-task,de,Aufgabe,Tasks,sos,AccountPresentation.tooltasks
-task,de,Aufgabe,Tasks,hr,Offboarding.tools.tasks
-task,fr,Tâche,Tasks,sos,AccountPresentation.tooltasks
-task,fr,Tâche,Tasks,hr,Offboarding.tools.tasks
-task,it,Attività,Tasks,sos,AccountPresentation.tooltasks
-task,it,Attività,Tasks,hr,Offboarding.tools.tasks
-task,it,Attività,Compito,wm,Fields.task
+team,it,Team,squadra,sales,offers.teamRole
+team,it,Team,Squadra,sales,offers.actorTeam
 ticket,de,Support-Ticket,Tickets,sales,nav.tickets
 ticket,de,Support-Ticket,Tickets,sales,tickets.title
-ticket,de,Support-Ticket,Tickets,sales,SalesActivity.category.tickets
-ticket,de,Support-Ticket,Ticket,hr,employees.details.activity.entities.ticket
 ticket,de,Support-Ticket,Tickets,hr,ticketsPage.title
 ticket,de,Support-Ticket,Tickets,hr,sidebar.items.tickets
-ticket,de,Support-Ticket,Ticket,admin,support.Support.list.ticket
-ticket,de,Support-Ticket,Ticket,wm,Fields.ticket
-tool,ar,أداة,الأداة,sos,People.filterTool
-tool,ar,أداة,الأدوات,sos,People.colTools
-tool,ar,أداة,الأدوات,sos,Person.tools
-tool,ar,أداة,الأداة,sos,Access.tool
-tool,ar,أداة,الأدوات,sos,AccountPresentation.setupTools
-tool,ar,أداة,الأداة,sos,usr/team.Team.seats.tool
-tool,ar,أداة,الأدوات,sos,usr/team.Team.access.which
-tool,ar,أداة,الأدوات,sos,usr/tools.Tools.custom.tools
-tool,ar,أداة,الأدوات,admin,catalog.Catalog.tools.title
-tool,ar,أداة,الأداة,admin,catalog.Catalog.tools.colTool
-tool,ar,أداة,الأداة,admin,catalog.Catalog.features.tool
-tool,ar,أداة,الأداة,admin,catalog.Catalog.plans.colTool
-tool,ar,أداة,الأداة,admin,catalog.Catalog.planForm.tool
-tool,ar,أداة,الأداة,admin,catalog.Catalog.waitlist.colTool
-tool,ar,أداة,الأدوات,admin,common.Nav.tools
-tool,ar,أداة,الأداة,admin,console.ConsoleV3.tool
-tool,ar,أداة,الأداة,admin,customers.Customers.list.tool
-tool,ar,أداة,الأدوات,admin,customers.Customers.list.colTools
-tool,ar,أداة,الأداة,admin,pricing.Pricing.grid.tool
-tool,ar,أداة,الأداة,admin,system.System.reports.tool
-tool,fr,Outil,Tool,admin,console.ConsoleV3.tool
-tool,it,Strumento,Tool,admin,console.ConsoleV3.tool
-trial,ar,فترة تجربة,تجربة,sos,AccountV3.toolStates.trial
-trial,ar,فترة تجربة,التجربة,admin,catalog.Catalog.plans.colTrial
-trial,ar,فترة تجربة,تجربة,chats,settings.trialChip
-trial,de,Testphase,Testversion,sos,AccountV3.toolStates.trial
-user,de,Benutzer,Personen,sos,usr/tools.Tools.features.general.users.name
-workspace,ar,مساحة عمل,Workspace,hr,Offboarding.tools.usr
-workspace,ar,مساحة عمل,Workspaces,admin,console.ConsoleV3.workspaces
-workspace,de,Arbeitsbereich,Workspace,hr,Offboarding.tools.usr
-workspace,de,Arbeitsbereich,Workspace,admin,billing.Billing.list.workspace
-workspace,de,Arbeitsbereich,Workspace,admin,billing.Billing.list.colWorkspace
-workspace,de,Arbeitsbereich,Workspace,admin,billing.Billing.create.workspace
-workspace,de,Arbeitsbereich,Workspace,admin,billing.Billing.detail.workspace
-workspace,de,Arbeitsbereich,Workspaces,admin,console.ConsoleV3.workspaces
-workspace,de,Arbeitsbereich,Workspaces,admin,customers.Customers.list.title
-workspace,de,Arbeitsbereich,Workspace,admin,customers.Customers.list.colWorkspace
-workspace,de,Arbeitsbereich,Workspace,admin,customers.Customers.migrations.colWorkspace
-workspace,de,Arbeitsbereich,Workspace,admin,customers.Customers.customPlans.colWorkspace
-workspace,de,Arbeitsbereich,Workspace,admin,services.Services.requests.workspace
-workspace,fr,Espace de travail,Workspace,hr,Offboarding.tools.usr
-workspace,fr,Espace de travail,Workspaces,admin,console.ConsoleV3.workspaces
-workspace,it,Spazio di lavoro,Workspace,hr,Offboarding.tools.usr
-workspace,it,Spazio di lavoro,Workspace,admin,billing.Billing.list.workspace
-workspace,it,Spazio di lavoro,Workspace,admin,billing.Billing.list.colWorkspace
-workspace,it,Spazio di lavoro,Workspace,admin,billing.Billing.create.workspace
-workspace,it,Spazio di lavoro,Workspace,admin,billing.Billing.detail.workspace
-workspace,it,Spazio di lavoro,Workspaces,admin,console.ConsoleV3.workspaces
-workspace,it,Spazio di lavoro,Workspace,admin,customers.Customers.list.title
-workspace,it,Spazio di lavoro,Workspace,admin,customers.Customers.list.colWorkspace
-workspace,it,Spazio di lavoro,Workspace,admin,customers.Customers.migrations.colWorkspace
-workspace,it,Spazio di lavoro,Workspace,admin,customers.Customers.customPlans.colWorkspace
-workspace,it,Spazio di lavoro,Workspace,admin,services.Services.requests.workspace
+ticket,fr,Ticket d'assistance,Billets,sales,nav.tickets
+ticket,fr,Ticket d'assistance,Billets,sales,tickets.title
 zone,ar,منطقة,النطاقات,sales,planManagement.tabs.zones
+zone,ar,منطقة,النطاق,sales,salesman.zone

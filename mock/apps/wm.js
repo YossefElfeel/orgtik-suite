@@ -25,7 +25,7 @@ function previewGrant(holder, token) {
 function exportHolder(holder) {
   if (!holder) throw codec.fail("Website Manager has not been initialized.");
   const library = holder.lib.exportState(), ops = holder.ops.exportState();
-  return { schema: SCHEMA, version: 1, realm: holder.realm, data: { content: holder.store.exportState(), library: library.data, ops: ops.data, previews: codec.copy([...holder.previews]), submissions: holder.submissions.exportState(), studio: holder.studio?.exportState() || null }, sequences: { ...library.sequences, ...ops.sequences } };
+  return { schema: SCHEMA, version: 1, realm: holder.realm, data: { content: holder.store.exportState(), library: library.data, ops: ops.data, previews: codec.copy([...holder.previews]), submissions: holder.submissions.exportState() }, sequences: { ...library.sequences, ...ops.sequences } };
 }
 function importHolder(holder, snapshot) {
   if (!holder || snapshot?.schema !== SCHEMA || snapshot.version !== 1 || snapshot.realm !== holder.realm) throw codec.fail("Website Manager snapshot belongs to another realm or version.");
@@ -35,9 +35,8 @@ function importHolder(holder, snapshot) {
   const ops = holder.ops.validateState({ data: snapshot.data?.ops, sequences: snapshot.sequences });
   const submissions = holder.submissions.validateState(snapshot.data?.submissions);
   const previews = codec.mapRows(snapshot.data?.previews, { ids: false });
-  const studio = holder.studio?.validateState(snapshot.data?.studio, content);
   if (previews.some(([hash, grant]) => !/^[a-f0-9]{64}$/.test(hash) || !["string", "number"].includes(typeof grant.by) || !Number.isFinite(Date.parse(grant.expiresAt)))) throw codec.fail("Website preview grants are incomplete.");
-  holder.store.importState(content); holder.lib.importState(library); holder.ops.importState(ops); holder.submissions.importState(submissions); codec.replaceMap(holder.previews, previews); if (studio) holder.studio.importState(studio);
+  holder.store.importState(content); holder.lib.importState(library); holder.ops.importState(ops); holder.submissions.importState(submissions); codec.replaceMap(holder.previews, previews);
 }
 
 const SCOPE = "website_manager";
@@ -122,7 +121,7 @@ module.exports = {
     store.ensureDemo();
     const analytics = require("./wm/analytics").makeAnalytics({ store, lib, ops, now: () => new Date().toISOString() });
     // Scheduled publishing happens when anyone asks: the mock has no background jobs.
-    app.use("/v2", (req, res, next) => (lib.keepAddresses({ key: "scheduler" }, () => store.tick()), holder.studio?.observe(), next()));
+    app.use("/v2", (req, res, next) => (lib.keepAddresses({ key: "scheduler" }, () => store.tick()), next()));
     const who = (req) => ({ key: req.who.user.key });
     const TYPES = new Set(require("./wm/content").TYPES);
 
@@ -193,11 +192,12 @@ module.exports = {
       ok(res, { ...d, versions: d.versions.map((v) => ({ ...v, by: person(v.by) })) }, {}, status);
     };
 
-    const studio = require("./wm/studio").create({ store, lib, ops, identity, ctx: { ...ctx, uploadsDir: UPLOADS } });
-    holder.studio = studio;
-    studio.routes(app, { need, ok, fail });
-
     const manager = require("./wm/manager");
+    app.post("/v2/admin/studio/page-draft/:id", need("content:edit"), (req, res) => {
+      const result = manager.savePageDraft(store, req.params.id, req.body?.commands, {key: req.who.user.key}, () => new Date().toISOString());
+      if (result.status) return fail(res, result.status, result.code, "Check the draft and try again.", {fieldErrors: result.fieldErrors});
+      send(res, store.entries.get(req.params.id));
+    });
     app.get("/v2/admin/manager/pages/:id", need("content:view"), (req,res)=> {
       if(!manager.config[req.params.id]) return fail(res,404,"not_found","Page not found.");
       const records=manager.sourceIds(req.params.id).map(id=>store.detail(store.entries.get(id))).map(value=>({...value,updatedBy:person(value.updatedBy),versions:value.versions.map(row=>({...row,by:person(row.by)}))}));
@@ -261,21 +261,21 @@ module.exports = {
       const r = store.create(req.params.type, who(req), req.body ?? {});
       if (r.status) return fail(res, r.status, r.code, r.message ?? r.code);
       if (r.errors) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: r.errors });
-      studio.observe(); send(res, r.entry, 201);
+      send(res, r.entry, 201);
     });
     app.post("/v2/admin/entries/:type/:id/visibility", need("content:view"), (req, res) => {
       const e = entryOr404(req, res);
       if (!e || !fresh(req, res, e)) return;
       const r = lib.keepAddresses(who(req), () => store.setVisibility(e, who(req), String(req.body?.action ?? ""), { can: (p) => req.who.permissions.includes(p) }));
       if (r.status) return fail(res, r.status, r.code, r.message ?? r.code, { required: r.required });
-      studio.observe(); send(res, e);
+      send(res, e);
     });
     app.delete("/v2/admin/entries/:type/:id", need("content:edit"), (req, res) => {
       const e = entryOr404(req, res);
       if (!e) return;
       const r = store.remove(e, who(req));
       if (r.status) return fail(res, r.status, r.code, r.message ?? r.code);
-      studio.cleanupEntry(e.id); res.status(204).end();
+      res.status(204).end();
     });
     app.patch("/v2/admin/entries/:type/:id", need("content:view"), editsEntry, (req, res) => {
       const e = entryOr404(req, res);
@@ -286,7 +286,7 @@ module.exports = {
       const r = store.save(e, who(req), req.body ?? {}, { can: (x) => req.who.permissions.includes(x) });
       if (r.status) return fail(res, r.status, r.code, r.message ?? r.code, { required: r.required });
       if (r.errors) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: r.errors });
-      studio.observe(); send(res, e);
+      send(res, e);
     });
 
     app.post("/v2/admin/entries/:type/:id/transitions", need("content:view"), (req, res) => {
@@ -294,7 +294,7 @@ module.exports = {
       if (!e || !fresh(req, res, e)) return;
       const r = lib.keepAddresses(who(req), () => store.transition(e, who(req), String(req.body?.action ?? ""), { can: (p) => req.who.permissions.includes(p), note: req.body?.note, publishAt: req.body?.publishAt }));
       if (r.status) return fail(res, r.status, r.code, r.message ?? r.code, { required: r.required, fieldErrors: r.fieldErrors });
-      studio.observe(); send(res, e);
+      send(res, e);
     });
 
     app.post("/v2/admin/entries/:type/:id/translation", need("localization:view"), (req, res) => {
@@ -302,7 +302,7 @@ module.exports = {
       if (!e || !fresh(req, res, e)) return;
       const r = store.translate(e, who(req), String(req.body?.locale ?? ""), String(req.body?.action ?? ""), { can: (p) => req.who.permissions.includes(p) });
       if (r.status) return fail(res, r.status, r.code, r.message ?? r.code, { required: r.required });
-      studio.observe(); send(res, e);
+      send(res, e);
     });
     app.get("/v2/admin/entries/:type/:id/versions/:n", need("content:view"), (req, res) => {
       const e = entryOr404(req, res);
@@ -316,7 +316,7 @@ module.exports = {
       if (!e || !fresh(req, res, e)) return;
       const r = store.restore(e, who(req), req.body?.version, {can: (p) => req.who.permissions.includes(p)});
       if (r.status) return fail(res, r.status, r.code, r.message ?? "Cannot restore this version.", {required:r.required,fieldErrors:r.fieldErrors});
-      studio.observe(); send(res, e);
+      send(res, e);
     });
     // Every entry's languages at once (the localization matrix).
     app.get("/v2/admin/localization", need("localization:view"), (req, res) => {
@@ -328,7 +328,7 @@ module.exports = {
       if (!e || !fresh(req, res, e)) return;
       const r = store.approveFigures(e, who(req));
       if (r.status) return fail(res, r.status, r.code, r.code);
-      studio.observe(); send(res, e);
+      send(res, e);
     });
 
     app.get("/v2/admin/audit", need("settings:view"), (req, res) => {
@@ -403,27 +403,47 @@ module.exports = {
       const l = leadOr404(req, res);
       if (l) ok(res, leadOut(req, l));
     });
-    app.post("/v2/admin/leads/:id/move", need("marketing:edit"), (req, res) => fail(res, 423, "managed_in_crm", "CRM owns contacts and the current pipeline."));
-    app.post("/v2/admin/leads/:id/assign", need("marketing:edit"), (req, res) => fail(res, 423, "managed_in_crm", "CRM owns contacts and the current pipeline."));
-    app.post("/v2/admin/leads/:id/notes", need("marketing:edit"), (req, res) => fail(res, 423, "managed_in_crm", "CRM owns contacts and the current pipeline."));
-    app.delete("/v2/admin/leads/:id/personal-data", need("marketing:edit"), (req, res) => fail(res, 423, "managed_in_crm", "CRM owns contacts and the current pipeline."));
+    app.post("/v2/admin/leads/:id/move", need("marketing:edit"), (req, res) => {
+      const l = leadOr404(req, res);
+      if (!l || !leadFresh(req, res, l)) return;
+      const r = ops.move(l, who(req), String(req.body?.action ?? ""), req.body ?? {});
+      if (r.status) return fail(res, r.status, r.code, r.message ?? r.code, { fieldErrors: r.fieldErrors });
+      ok(res, leadOut(req, l));
+    });
+    app.post("/v2/admin/leads/:id/assign", need("marketing:edit"), (req, res) => {
+      const l = leadOr404(req, res);
+      if (!l || !leadFresh(req, res, l)) return;
+      ops.assign(l, who(req), req.body?.owner ?? null);
+      ok(res, leadOut(req, l));
+    });
+    app.post("/v2/admin/leads/:id/notes", need("marketing:edit"), (req, res) => {
+      const l = leadOr404(req, res);
+      if (!l) return;
+      const r = ops.note(l, who(req), req.body?.text);
+      if (r.status) return fail(res, r.status, r.code, "Write a note first.", { fieldErrors: r.fieldErrors });
+      ok(res, leadOut(req, l));
+    });
+    app.delete("/v2/admin/leads/:id/personal-data", need("marketing:edit"), (req, res) => {
+      if (!pii(req)) return fail(res, 403, "forbidden", "Erasing personal data needs leads:pii.", { required: "leads:pii" });
+      const l = leadOr404(req, res);
+      if (!l) return;
+      ops.erase(l, who(req));
+      ok(res, leadOut(req, l));
+    });
     app.get('/v2/admin/catalog', need('content:view'), (req, res) => {
       if (!ctx.catalogMirror) return fail(res, 503, 'catalog_unavailable', 'The catalog mirror is unavailable.');
-      ok(res, ctx.catalogMirror({ country: req.query.country || "CH" }));
+      ok(res, ctx.catalogMirror());
     });
     // The website's contact form (S6). Answers 201 with the lead's id, or 422 with what's missing.
     app.post("/v2/public/leads", async (req, res) => {
       if (ops.site.formsMode !== "live") return fail(res, 409, "forms_preview", "The website's forms are in preview.");
       if (String(req.body?.privacyVersion ?? "") !== privacyInForce()) return fail(res, 409, "privacy_outdated", "The privacy notice changed; reload the page.");
-      const protectedResult = studio.protectForm(req);
-      if (protectedResult) return ok(res, protectedResult);
       const r = ops.submit(req.body ?? {});
       if (r.fieldErrors) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: r.fieldErrors });
       // D-028: Sales owns the pipeline. The lead is handed to Sales' intake (server to server); a
       // duplicate email becomes a note on the existing Sales lead. If Sales is down, the lead
       // stays here with the failure recorded, so nothing is lost.
       r.lead.handoff = await toSales(r.lead, req.body ?? {});
-      studio.leadNotice();
       ok(res, { id: r.lead.id, formsMode: ops.site.formsMode, sales: r.lead.handoff }, {}, 201);
     });
     async function toSales(l, body) {
@@ -607,10 +627,10 @@ module.exports = {
       if (!m) return;
       const r = lib.removeMedia(m, who(req));
       if (r.status) return fail(res, r.status, r.code, r.message, { count: r.count });
-      studio.cleanupMedia(m.id); res.status(204).end();
+      res.status(204).end();
     });
     app.get("/v2/media/:file", (req, res) => {
-      if (![...lib.media.values()].some(media => media.source === "upload" && media.file === req.params.file) && !studio.publicMediaFile(req.params.file)) return res.status(404).end();
+      if (![...lib.media.values()].some(media => media.source === "upload" && media.file === req.params.file)) return res.status(404).end();
       const f = path.join(UPLOADS, path.basename(req.params.file));
       if (!fs.existsSync(f)) return res.status(404).end();
       res.sendFile(f);

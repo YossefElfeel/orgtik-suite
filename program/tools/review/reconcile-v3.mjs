@@ -133,21 +133,6 @@ export function reconcileV3({ check = false } = {}) {
   const columns = ['status', 'release_packages', 'mapping_basis', 'status_evidence', 'verified_at', 'v3_package'];
   for (const column of columns) if (!backlog.columns.includes(column)) backlog.columns.push(column);
   backlog.rows = backlog.rows.map(row => ({ ...row, ...classify(row) }));
-  const criterionFile = path.join(PROGRAM, 'audits/v3-p5/criterion-dispositions.csv');
-  let criterionDate = DATE;
-  if (fs.existsSync(criterionFile)) {
-    const reviewed = parseCsv(fs.readFileSync(criterionFile, 'utf8')).rows;
-    const allowed = new Set(['accepted_v3_mock', 'bounded_v3_with_external_deferral', 'retained_contract_rechecked', 'historical_scope_not_adopted', 'superseded_owner_or_policy', 'deferred_tier_c']);
-    const byId = new Map(reviewed.map(row => [row.id, row]));
-    if (reviewed.length !== 407 || byId.size !== 407) throw Error('P5 criterion review must retain every original ID exactly once.');
-    for (const column of ['v3_current_behavior', 'v3_remaining_boundary', 'v3_evidence_checks']) if (!backlog.columns.includes(column)) backlog.columns.push(column);
-    backlog.rows = backlog.rows.map(row => {
-      const finding = byId.get(row.id);
-      if (!finding || finding.title !== row.title || !allowed.has(finding.disposition) || !finding.evidence || !finding.checks || !finding.remaining_boundary || finding.v3_scope !== row.v3_package) throw Error(`Unqualified or changed P5 criterion: ${row.id}`);
-      criterionDate = finding.reviewed_at;
-      return { ...row, status: finding.disposition, mapping_basis: 'criterion_reviewed_v3', status_evidence: finding.evidence, verified_at: finding.reviewed_at, v3_current_behavior: finding.current_behavior, v3_remaining_boundary: finding.remaining_boundary, v3_evidence_checks: finding.checks };
-    });
-  }
   for (const row of backlog.rows) {
     for (const id of [...row.release_packages.split(';'), row.v3_package]) if (!ids.has(id)) throw Error(`${row.id} links unknown package ${id}`);
     if (!row.status || !row.status_evidence) throw Error(`${row.id} has no qualified status/evidence`);
@@ -158,7 +143,7 @@ export function reconcileV3({ check = false } = {}) {
   const summaryFile = path.join(PROGRAM, 'backlog/summary.json');
   const summary = JSON.parse(fs.readFileSync(summaryFile, 'utf8'));
   const by = key => backlog.rows.reduce((counts, row) => { counts[row[key]] = (counts[row[key]] || 0) + 1; return counts; }, {});
-  summary.v3 = { reconciled_at: criterionDate, source_revision: progress.source_revision || null, evidence_registry: fs.existsSync(criterionFile) ? 'program/audits/v3-p5/criterion-dispositions.csv' : null, historical_packages: 129, new_packages: packages.length, total_packages: ids.size, byStatus: by('status'), byMappingBasis: by('mapping_basis'), current_gate: progress.current_phase || 'P0_report_review', criterion_note: 'Every P5 finding retains its individual current behavior, evidence checks and remaining boundary. A reviewed finding is not blanket full production acceptance.' };
+  summary.v3 = { reconciled_at: DATE, source_revision: 'c7c7e1fe6771fe487521c03d48bec5608b0747c1', historical_packages: 129, new_packages: packages.length, total_packages: ids.size, byStatus: by('status'), byMappingBasis: by('mapping_basis'), current_gate: progress.current_phase || 'P0_report_review', criterion_note: 'Topic links are candidates; original criterion acceptance is not inferred from package coverage.' };
   const outputs = [[backlogFile, writeCsv(backlog.columns, backlog.rows)], [releaseFile, writeCsv(release.columns, release.rows)], [summaryFile, JSON.stringify(summary, null, 2) + '\n']];
   for (const [file, text] of outputs) {
     if (check) { if (fs.readFileSync(file, 'utf8') !== text) throw Error(`Stale v3 overlay: ${path.relative(PROGRAM, file)}`); }

@@ -8,26 +8,9 @@ import type {
   CampaignCandidate,
   QueuePost,
 } from "@/types/marketing-v3";
-const unwrap = <T>(response: { data: T }) => response.data;
+const unwrap = <T,>(response: { data: T }) => response.data;
 export const marketingV3Api = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    marketingUtmDefaults: builder.query<
-      {
-        projectId: string;
-        settings: {
-          source: string;
-          medium: string;
-          campaign: string;
-          recordedBy?: number;
-          recordedAt?: string;
-        };
-      },
-      void
-    >({
-      query: () => "/v3/utm",
-      transformResponse: unwrap,
-      providesTags: ["MarketingV3", "ActiveProject"],
-    }),
     marketingQueue: builder.query<QueuePost[], void>({
       query: () => "/v3/queue",
       transformResponse: unwrap<QueuePost[]>,
@@ -87,7 +70,6 @@ export const marketingV3Api = baseApi.injectEndpoints({
   }),
 });
 export const {
-  useMarketingUtmDefaultsQuery,
   useMarketingQueueQuery,
   useMarketingCampaignQuery,
   useMarketingBootstrapQuery,

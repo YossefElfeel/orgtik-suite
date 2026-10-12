@@ -34,8 +34,7 @@ AR_WEAK = set("اويىةأإآءؤئ")
 
 
 def norm(s):
-    # Typographic punctuation does not change a term's meaning.
-    return s.strip().rstrip(":.").lower().replace("’", "'").replace("‘", "'").replace("‑", "-")
+    return s.strip().rstrip(":.").lower()
 
 
 def skeleton(word):

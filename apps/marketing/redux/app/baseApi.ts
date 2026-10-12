@@ -12,11 +12,6 @@ import {
 } from "@orgtik/ui/auth";
 import { SOS_API_URL } from "@/constants/env";
 import { marketingRequestScope } from "@/lib/request-scope";
-import {
-  prepareMarketingCommand,
-  settleMarketingCommand,
-  MarketingRecoveryRequired,
-} from "@/lib/command-recovery";
 
 // Define error response type
 export interface ErrorResponse {
@@ -58,41 +53,9 @@ const baseQueryWithInterceptor: typeof baseQuery = async (
   // other error. The old interceptor read `error.data.msg` and threw when there was no data, so a
   // stopped API crashed the screen (MKT-007).
   const requestScope = marketingRequestScope();
-  let command;
-  if (typeof args !== "string" && args.method === "POST") {
-    const query = (api.getState() as RootState).api.queries[
-      "getActiveProject(undefined)"
-    ];
-    const active = query?.data as { data?: { id?: string } } | undefined;
-    try {
-      command = prepareMarketingCommand(
-        "native",
-        active?.data?.id || null,
-        args.url,
-        args.body,
-      );
-      if (command) args = { ...args, body: command.body };
-    } catch (error) {
-      if (error instanceof MarketingRecoveryRequired) {
-        const message = errorMessage({
-          endpoint: "marketingRecovery",
-          args: undefined,
-          status: 409,
-          code: "recover_original_first",
-        });
-        if (message) toast.error(message);
-        return {
-          error: { status: 409, data: { code: "recover_original_first" } },
-        };
-      }
-      throw error;
-    }
-  }
   let result = await baseQuery(args, api, extraOptions);
-  if (requestScope !== marketingRequestScope()) {
-    settleMarketingCommand(command);
+  if (requestScope !== marketingRequestScope())
     return { error: { status: 409, data: { code: "scope_changed" } } };
-  }
   if (
     result.error?.status === 401 &&
     readClientSession()?.tokens.refreshToken
@@ -104,19 +67,14 @@ const baseQueryWithInterceptor: typeof baseQuery = async (
       if (
         !(error instanceof SessionRequestError) ||
         ![401, 403].includes(error.status)
-      ) {
-        settleMarketingCommand(command);
+      )
         return {
           error: { status: 503, data: { code: "session_unavailable" } },
         };
-      }
     }
   }
-  if (requestScope !== marketingRequestScope()) {
-    settleMarketingCommand(command);
+  if (requestScope !== marketingRequestScope())
     return { error: { status: 409, data: { code: "scope_changed" } } };
-  }
-  settleMarketingCommand(command, result.error?.status || 200);
   const method = typeof args === "string" ? "GET" : args.method || "GET";
   const body = typeof args === "string" ? undefined : args.body;
 
