@@ -38,7 +38,24 @@ test("binary HLS transport segments are excluded from the TypeScript tracer", ()
   }
   assert.equal(path.matchesGlob("apps/files.js", pattern), false, "The Files API remains traced");
 });
-import { protectedFetch, mintPreviewTokens, HEADER } from "./preview-protection.mjs";
+import { protectedFetch, mintPreviewTokens, HEADER, previewShellPath } from "./preview-protection.mjs";
+
+test("availability probes use each project's public local shell rather than its protected dashboard", async () => {
+  const projects = JSON.parse(fs.readFileSync(new URL("./projects.json", import.meta.url))).projects;
+  for (const [key, project] of Object.entries(projects)) {
+    const origin = new URL(project.previewUrl).origin;
+    const request = protectedFetch({ [origin]: "fixture.token.value" }, async (url, options) => {
+      assert.equal(options.headers.get(HEADER), "fixture.token.value");
+      if (!["mock", "website", "sos"].includes(key) && new URL(url).pathname === "/") {
+        return new Response(null, { status: 307, headers: { location: projects.sos.previewUrl + "/auth" } });
+      }
+      return new Response("local shell");
+    });
+    assert.equal((await request(origin + previewShellPath(key))).status, 200);
+    if (!["mock", "website", "sos"].includes(key)) await assert.rejects(request(origin), /redirected away/);
+  }
+  assert.throws(() => previewShellPath("unknown"), /Unknown protected preview project/);
+});
 
 const parseUrl = input => execFileSync(process.execPath, [path.join(import.meta.dirname, "deploy-url.mjs")], { input, encoding: "utf8", stdio: ["pipe", "pipe", "pipe"] }).trim();
 
@@ -115,6 +132,18 @@ test("a protected redirect cannot send its credential to Vercel sign-in or anoth
   });
   await assert.rejects(request(origin), /redirected away/);
   assert.equal(calls, 1);
+});
+
+test("HR readiness reaches its auth shell without forwarding its credential to SOS", async () => {
+  const origin = "https://orgtik-suite-hr-preview.vercel.app", requests = [];
+  const request = protectedFetch({ [origin]: "fixture.token.value" }, async (url, init) => {
+    requests.push({ url: String(url), token: init.headers.get(HEADER) });
+    return new URL(url).pathname === "/en/auth" ? new Response("HR auth") : new Response(null, { status: 307, headers: { location: "https://orgtik-suite-sos-preview.vercel.app/go/hr_system" } });
+  });
+  assert.equal((await request(origin + previewShellPath("hr"))).status, 200);
+  assert.deepEqual(requests, [{ url: origin + "/en/auth", token: "fixture.token.value" }]);
+  await assert.rejects(request(origin + "/"), /redirected away/);
+  assert.equal(requests.length, 2, "The SOS redirect must never receive the HR credential");
 });
 
 test("preview OIDC uses the project token subcommand and the existing preview mock project", () => {

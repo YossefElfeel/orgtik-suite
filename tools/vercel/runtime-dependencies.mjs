@@ -6,14 +6,6 @@ import { execFileSync } from "node:child_process";
 export const runtimeDependencies = JSON.parse(fs.readFileSync(new URL("./runtime-dependencies.json", import.meta.url), "utf8"));
 export const projectManifest = JSON.parse(fs.readFileSync(new URL("./projects.json", import.meta.url), "utf8"));
 
-/** Probe a session-free app entry without following a tool's sign-in redirect to SOS. */
-export function previewReadinessPath(key, projects = projectManifest.projects) {
-  if (!projects[key] || projects[key].retired) throw new Error(`Unknown active preview project: ${key}`);
-  if (key === "mock") return "/sos/__mock/status";
-  if (key === "hr") return "/en/auth";
-  return "/";
-}
-
 function relativePath(value) {
   if (typeof value !== "string") throw new Error("Changed paths must be strings");
   const normalized = value.replaceAll("\\", "/").replace(/^\.\//, "");

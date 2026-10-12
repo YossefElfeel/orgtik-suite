@@ -2,32 +2,11 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
 import { test } from "node:test";
-import { assertFlowEvidence, buildRuntimeCheckPlan, changedRuntimeFiles, previewReadinessPath, previewTokenRefreshAt, projectManifest, resolvePreviewUrls, runtimeDependencies, selectRuntimeConsumers } from "./runtime-dependencies.mjs";
-import { HEADER, protectedFetch } from "./preview-protection.mjs";
+import { assertFlowEvidence, buildRuntimeCheckPlan, changedRuntimeFiles, previewTokenRefreshAt, projectManifest, resolvePreviewUrls, runtimeDependencies, selectRuntimeConsumers } from "./runtime-dependencies.mjs";
 
 const select = (changedFiles, deployedKeys = ["mock"]) => selectRuntimeConsumers({ changedFiles, deployedKeys });
 const sandbox = "https://orgtik-suite-mock-preview.vercel.app";
 const activeConsumers = runtimeDependencies.consumers.filter(key => !projectManifest.projects[key].retired);
-
-test("preview readiness uses HR's session-free auth entry and preserves other project probes", () => {
-  assert.equal(previewReadinessPath("hr"), "/en/auth");
-  assert.equal(previewReadinessPath("mock"), "/sos/__mock/status");
-  for (const key of activeConsumers.filter(key => key !== "hr")) assert.equal(previewReadinessPath(key), "/");
-  assert.throws(() => previewReadinessPath("unknown"), /Unknown active/);
-  assert.throws(() => previewReadinessPath("content"), /Unknown active/);
-});
-
-test("HR readiness reaches the auth page while cross-origin credential redirects remain refused", async () => {
-  const origin = projectManifest.projects.hr.previewUrl, requests = [];
-  const request = protectedFetch({ [origin]: "fixture.token.value" }, async (url, init) => {
-    requests.push({url:String(url),token:init.headers.get(HEADER)});
-    return new URL(url).pathname === "/en/auth" ? new Response("HR auth") : new Response(null, {status:307,headers:{location:projectManifest.projects.sos.previewUrl + "/go/hr_system"}});
-  });
-  assert.equal((await request(origin + previewReadinessPath("hr"))).status, 200);
-  assert.deepEqual(requests, [{url:origin+"/en/auth",token:"fixture.token.value"}]);
-  await assert.rejects(request(origin + "/"), /redirected away/);
-  assert.equal(requests.length, 2, "The SOS redirect must never receive the HR credential");
-});
 
 test("shared mock, server and UI changes test all runtime consumers without deploying them", () => {
   for (const file of ["mock/lib/auth-store.js", "mock/server.js", "mock/api/index.js", "mock/config.js", "packages/ui/src/components/button.tsx"]) {

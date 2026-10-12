@@ -167,14 +167,12 @@ function controlRoutes(app) {
       // Only CI's explicit preview reset can clear reserved test-domain fixtures. Production
       // and ordinary data resets always preserve accounts, including non-test preview users.
       if (req.body?.fixtures === true) {
-        const identity = require("./lib/identity");
-        const user = identity.userFromReq(req);
-        if (sandbox !== "preview" || !user || !identity.userScopes(user).some(scope => scope.scope === "global" && scope.roles.includes("super_admin"))) {
+        const principal = workspaceBoundary.currentPrincipal(req);
+        if (sandbox !== "preview" || principal?.readOnly || principal?.claims.mode !== "staff" || principal?.claims.aud !== "staff:admin" || !principal?.context.staffAccess?.roles.admin?.includes("super_admin")) {
           return res.status(403).json({ success: false, message: "Test account resets are restricted to preview administrators." });
         }
-        await accountStore.resetTestFixtures();
       }
-      await resetData("POST /__mock/reset");
+      await resetData("POST /__mock/reset", { fixtures: req.body?.fixtures === true });
       res.json({ success: true, message: "Every app's data was reset", data: { generation: state.generation } });
     } catch (error) { next(error); }
   });
@@ -537,10 +535,13 @@ async function saveClock() {
   persist.applied = committed.sequence;
 }
 
-async function resetData(reason) {
+async function resetData(reason, { fixtures = false } = {}) {
   if (!store) { scheduleReset(reason); return; }
+  // Redis identity lives in the account store; file/memory identity is owned by
+  // the journal after workspace initialization and must reset in the same CAS.
+  if (fixtures && store.kind === "redis") await accountStore.resetTestFixtures();
   const meta = newMeta();
-  await store.reset(meta, { expectedEpoch: persist.epoch, expectedRevision: persist.applied });
+  await store.reset(meta, { expectedEpoch: persist.epoch, expectedRevision: persist.applied, resetTestFixtures: fixtures && store.kind !== "redis" });
   await restore(meta, []);
   console.log(`[mock] data reset (${reason}); journal epoch ${meta.epoch}`);
 }

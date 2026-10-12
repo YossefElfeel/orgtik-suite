@@ -1,8 +1,8 @@
 {
   "profile": "readiness",
   "projects": {
-    "mock": { "sha": "33bd33e35d176adc20f0beb9a65f26c78628d38e", "run": "37602899004", "paths": ["mock/", "vercel.json", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".npmrc", "tools/vercel/copy-mock-runtime.mjs", "tools/vercel/check-mock-bundle.mjs"] },
-    "sos": { "sha": "33bd33e35d176adc20f0beb9a65f26c78628d38e", "run": "37602899004", "paths": ["apps/sos/", "packages/ui/", "vercel.json", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".npmrc", "tools/vercel-prebuild.cjs", "tools/vercel/validate-env.cjs"] },
-    "website": { "sha": "b35f55ca789b0a03171e6811b44c5e338e653ad7", "run": "37598757790", "paths": ["apps/website/", "vercel.json", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".npmrc", "tools/vercel/validate-env.cjs"] }
+    "mock": {"sha":"c45a170e127afb61bb8e3c232fc43059b99f3110","run":"38133567081","paths":["mock/","vercel.json","package.json","pnpm-lock.yaml","pnpm-workspace.yaml",".npmrc","tools/vercel/copy-mock-runtime.mjs","tools/vercel/check-mock-bundle.mjs"],"deploymentUrl":"https://orgtik-suite-mock-preview-jrepglir6-yossef-elfeels-projects.vercel.app"},
+    "sos": {"sha":"d70c62394f569d272faeddf0b2eb2f9bdbecbf60","run":"38129924076","paths":["apps/sos/","packages/ui/","vercel.json","package.json","pnpm-lock.yaml","pnpm-workspace.yaml",".npmrc","tools/vercel-prebuild.cjs","tools/vercel/validate-env.cjs"]},
+    "website": {"sha":"d70c62394f569d272faeddf0b2eb2f9bdbecbf60","run":"38129924076","paths":["apps/website/","vercel.json","package.json","pnpm-lock.yaml","pnpm-workspace.yaml",".npmrc","tools/vercel/validate-env.cjs"]}
   }
 }
