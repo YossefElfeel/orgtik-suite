@@ -43,7 +43,7 @@ const stamp = Date.now().toString(36);
 try {
   await mock.reset();
   await step("Forms live in the Website Manager", async () => {
-    const r = await mock.control("wm", "/v2/__mock/forms-live");
+    const r = await fetch(`${WM}/__mock/forms-live`, { method: "POST" });
     const d = (await r.json()).data;
     if (d.forms.mode !== "live" || !d.forms.privacyVersion) throw new Error(JSON.stringify(d));
     return `privacy ${d.forms.privacyVersion} in force`;

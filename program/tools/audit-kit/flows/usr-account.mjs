@@ -215,7 +215,7 @@ await walk("U2-service", "Request, quote, accept, pay, approve the delivery", MO
     await confirm.waitFor({ state: "hidden", timeout: 8000 });
   }, async () => ({ ok: await visible(main(page).getByRole("button", { name: m("Services.detail.payAmount") })), note: m("Services.detail.toPayTitle") }));
   await step("A declined payment is said, with the way to the cards (402)", async () => {
-    const r = await mock.control("admin", "/v1/__mock/fail-next-payment", { body: { count: 1 } });
+    const r = await fetch(`${PLATFORM}/__mock/fail-next-payment`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ count: 1 }) });
     if (!r.ok) throw new Error(`fail-next-payment ${r.status}`);
     await main(page).getByRole("button", { name: m("Services.detail.payAmount") }).click();
     const confirm = page.getByRole("alertdialog");

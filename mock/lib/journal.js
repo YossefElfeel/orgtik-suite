@@ -122,9 +122,6 @@ function resetData(data, meta, expected) {
   expectedState(expected);
   assertCurrent(data, expected);
   if (!meta?.epoch || meta.epoch === expected.expectedEpoch) throw new TypeError("Journal reset requires a new epoch");
-  if (expected.resetTestFixtures === true) {
-    data.identityAccounts = Object.fromEntries(Object.entries(data.identityAccounts || {}).filter(([, raw]) => !/\.test$|@example\.com$/i.test(JSON.parse(raw).user.email)));
-  }
   data.meta = copy(meta); data.log = []; data.operations = {};
   return { meta: copy(data.meta), revision: 0, entries: [] };
 }

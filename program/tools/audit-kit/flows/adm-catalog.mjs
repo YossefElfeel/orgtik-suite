@@ -32,7 +32,7 @@ const browser = await chromium.launch();
 const results = [];
 
 const api = async (email, p) => {
-  const res = await fetch(`${API}${p}`, { headers: { authorization: `Bearer ${await tokenFor(email, "admin")}` } });
+  const res = await fetch(`${API}${p}`, { headers: { authorization: `Bearer ${await tokenFor(email)}` } });
   return (await res.json()).data;
 };
 // The browser logs a failed fetch it was asked to make (a 404 for an unknown key): those are expected answers, not errors.

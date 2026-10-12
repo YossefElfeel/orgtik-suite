@@ -10,7 +10,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { chromium } from "playwright";
 import { AUDITS, AUDIT_TZ, SOS_API, WORKSPACE, redact, webUrl } from "../lib/suite.mjs";
-import { signIn, tokenFor, createAppHandoff } from "../lib/session.mjs";
+import { signIn, tokenFor } from "../lib/session.mjs";
 import { settle, watch } from "../lib/checks.mjs";
 
 const arg = (name, fallback) => {
@@ -276,11 +276,11 @@ await walk("C6-search", "Search, on a desk and on a phone", async ({ page, step 
 // C7: View as Aya from SOS's API, open Chats with that session: read-only, said in the reader's
 // language; Stop viewing comes back as Mona (D-017).
 await walk("C7-view-as", "View as someone in Chats", async ({ page, step }) => {
-  const admin = await tokenFor(AS, "admin");
+  const admin = await tokenFor(AS);
   const users = await (await fetch(`${SOS_API}/users?search=aya`, { headers: { Authorization: `Bearer ${admin}` } })).json();
   const aya = (users.data?.items ?? users.data)[0];
-  const ro = (await (await fetch(`${SOS_API}/auth/login-as/${aya.id}`, { method: "POST", headers: { Authorization: `Bearer ${admin}`, "content-type": "application/json" }, body: JSON.stringify({ workspaceId: "ws_orgtik" }) })).json()).data.tokens.accessToken;
-  const code = await createAppHandoff(SOS_API, "chats", ro);
+  const ro = (await (await fetch(`${SOS_API}/auth/login-as/${aya.id}`, { method: "POST", headers: { Authorization: `Bearer ${admin}` } })).json()).data.tokens.accessToken;
+  const code = (await (await fetch(`${SOS_API}/auth/handoff`, { method: "POST", headers: { Authorization: `Bearer ${ro}` } })).json()).data.code;
   await step("Open Chats with the viewing session", async () => {
     await page.goto(`${HQ}/${LOCALE}/auth?code=${code}&redirect=/hq/chat/c-design`, { waitUntil: "load" });
     await page.waitForURL((u) => u.pathname === "/hq/chat/c-design", { timeout: 30000 });

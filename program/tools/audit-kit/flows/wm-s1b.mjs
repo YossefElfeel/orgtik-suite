@@ -13,7 +13,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { AUDITS, webUrl, apiUrl } from "../lib/suite.mjs";
 import { mock } from "../lib/mock.mjs";
-import { tokenFor, createAppHandoff } from "../lib/session.mjs";
+import { tokenFor } from "../lib/session.mjs";
 import { settle } from "../lib/checks.mjs";
 const audit = await auditState("wm-s1b.mjs");
 try {
@@ -33,8 +33,8 @@ async function as(email) {
   const page = await ctx.newPage();
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  const token = await tokenFor(email, "wm");
-  await page.goto(`${WM}/en/auth?code=${encodeURIComponent(await createAppHandoff(apiUrl("sos") + "/api", "wm", token))}`, { waitUntil: "load" });
+  const token = await tokenFor(email);
+  await page.goto(`${WM}/en/auth?token=${encodeURIComponent(token)}`, { waitUntil: "load" });
   await page.getByRole("heading", { level: 1, name: "Overview" }).waitFor({ timeout: 30000 });
   return { ctx, page, token, errors };
 }

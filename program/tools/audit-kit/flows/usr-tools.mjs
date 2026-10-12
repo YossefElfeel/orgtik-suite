@@ -194,7 +194,7 @@ await walk("T2-checkout", "Tasks Pro: code, failed payment, pay, invoice", NOUR,
     return { ok: applied, note: applied ? `applied; total ${await page.locator("[data-total]").first().innerText()}` : "code not applied" };
   });
   await step("The next payment fails", async () => {
-    const r = await mock.control("admin", "/v1/__mock/fail-next-payment", { body: {} });
+    const r = await fetch(`${apiUrl("admin")}/v1/__mock/fail-next-payment`, { method: "POST", headers: { "content-type": "application/json" }, body: "{}" });
     if (!r.ok) throw new Error(`fail-next-payment ${r.status}`);
     await page.getByRole("button", { name: new RegExp(m("Tools.checkout.pay", { total: "" }).trim()) }).click();
   }, async () => {
