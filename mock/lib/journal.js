@@ -30,6 +30,7 @@ const { performance } = require("node:perf_hooks");
 
 const MAX_ENTRIES = Number(process.env.MOCK_JOURNAL_MAX || 5000);
 const MAX_BODY = 512 * 1024; // Upstash's free tier refuses requests over 1 MB
+const SNAPSHOT_PAGE_ENTRIES = 8;
 
 // Changes that are never recorded: the mock's own controls, and anything carrying a password or
 // creating a session (sign-up accounts already travel sealed inside their tokens).
@@ -212,7 +213,13 @@ function fileStore(file, { io = fs, lockTimeoutMs = 5000 } = {}) {
 // Lua scripts keep the snapshot, CAS append/receipt and reset atomic across Redis instances.
 const SNAPSHOT = `-- orgtik-journal-snapshot-v1
 local meta = redis.call('GET', KEYS[1])
-return {meta or '', redis.call('LLEN', KEYS[2]), redis.call('LRANGE', KEYS[2], ARGV[1], '-1')}`;
+local revision = redis.call('LLEN', KEYS[2])
+return {meta or '', revision, redis.call('LRANGE', KEYS[2], ARGV[1], math.min(tonumber(ARGV[2]), revision - 1))}`;
+const SNAPSHOT_PAGE = `-- orgtik-journal-snapshot-page-v1
+local meta = redis.call('GET', KEYS[1]) or ''
+local revision = redis.call('LLEN', KEYS[2])
+if meta ~= ARGV[1] or revision < tonumber(ARGV[2]) then return {0, {}} end
+return {1, redis.call('LRANGE', KEYS[2], ARGV[3], math.min(tonumber(ARGV[4]), tonumber(ARGV[2]) - 1))}`;
 const INITIALIZE = `-- orgtik-journal-initialize-v1
 local meta = redis.call('GET', KEYS[1])
 if meta then return meta end
@@ -302,21 +309,42 @@ return 1`;
 function redisStore(url, token, prefix, { fetch: request = globalThis.fetch } = {}) {
   const metaKey = `${prefix}:meta`, logKey = `${prefix}:log`, operationsKey = `${prefix}:operations`;
   async function pipeline(commands) {
+    let storageFailure = 'transport';
     try {
       const response = await request(`${url.replace(/\/$/, "")}/pipeline`, {
         method: "POST", headers: { authorization: `Bearer ${token}`, "content-type": "application/json" },
         body: JSON.stringify(commands), signal: AbortSignal.timeout(10000),
       });
-      if (!response.ok) throw unavailable();
+      if (!response.ok) { storageFailure = `http_${response.status}`; throw unavailable(); }
       const out = await response.json();
-      if (!Array.isArray(out) || out.length !== commands.length || out.some(row => !row || row.error || !Object.hasOwn(row, "result"))) throw unavailable();
+      if (!Array.isArray(out) || out.length !== commands.length || out.some(row => !row || row.error || !Object.hasOwn(row, "result"))) {
+        const errors = Array.isArray(out) ? out.map(row => typeof row?.error === 'string' ? row.error : '').join(' ') : '';
+        storageFailure = /max.*(?:size|bytes)|too large/i.test(errors) ? 'size_limit' : /NOPERM|unauthorized|invalid.*token/i.test(errors) ? 'permissions' : /quota|limit.*exceed|budget/i.test(errors) ? 'quota' : errors ? 'redis_command' : 'response_format';
+        throw unavailable();
+      }
       return out.map(row => row.result);
-    } catch { throw unavailable(); }
+    } catch { throw Object.assign(unavailable(), { storageFailure }); }
   }
   const evaluate = async (script, keys, args) => (await pipeline([["EVAL", script, String(keys.length), ...keys, ...args]]))[0];
   const snapshot = async (from = 0) => {
-    const [meta, revision, entries] = await evaluate(SNAPSHOT, [metaKey, logKey], [String(from)]);
-    return { meta: meta ? JSON.parse(meta) : null, revision: Number(revision), entries: entries || [] };
+    if (!Number.isSafeInteger(from) || from < 0) throw new TypeError('Journal snapshot offset must be a non-negative integer');
+    // Keep each response bounded. A journal can contain many compressed domain snapshots.
+    // Pin the first revision, permit append-only growth, and retry if a reset changes its epoch.
+    for (let attempt = 0; attempt < 3; attempt++) {
+      const [meta, rawRevision, first] = await evaluate(SNAPSHOT, [metaKey, logKey], [String(from), String(from + SNAPSHOT_PAGE_ENTRIES - 1)]);
+      const revision = Number(rawRevision), entries = first || [];
+      if (!Number.isSafeInteger(revision) || revision < 0 || !Array.isArray(entries) || entries.length !== Math.min(SNAPSHOT_PAGE_ENTRIES, Math.max(0, revision - from))) throw unavailable('Journal snapshot is incomplete.');
+      let consistent = true;
+      for (let offset = from + entries.length; offset < revision; offset += SNAPSHOT_PAGE_ENTRIES) {
+        const end = Math.min(offset + SNAPSHOT_PAGE_ENTRIES, revision);
+        const [valid, page] = await evaluate(SNAPSHOT_PAGE, [metaKey, logKey], [meta || '', String(revision), String(offset), String(end - 1)]);
+        if (Number(valid) !== 1) { consistent = false; break; }
+        if (!Array.isArray(page) || page.length !== end - offset) throw unavailable('Journal snapshot is incomplete.');
+        entries.push(...page);
+      }
+      if (consistent) return { meta: meta ? JSON.parse(meta) : null, revision, entries };
+    }
+    throw unavailable('Journal changed repeatedly while loading its snapshot. Please try again.');
   };
   return {
     kind: "redis",
