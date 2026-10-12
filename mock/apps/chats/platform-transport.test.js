@@ -15,14 +15,35 @@ function data(workspaceId, revision = 0, messages = []) {
   return { workspaceId, me: '1', dataRevision: revision, access: { canWrite: true, readOnly: false, roles: ['owner'] }, users: [{ id: '1' }], historicalUsers: [], floor: { rooms: [] }, channels: [], messages };
 }
 const response = (value, status = 200) => ({ ok: status < 400, status, json: async () => status < 400 ? { success: true, data: value } : { success: false, code: value } });
-function load(fetch, initial = session(), storage = new Map()) {
+function load(fetch, initial = session(), storage = new Map(), env = { NEXT_PUBLIC_API_URL: 'http://fixture.test/chats' }) {
   let current = initial;
   const listeners = new Set(), module = { exports: {} }, effects = [];
   const source = compiler.transpileModule(fs.readFileSync(file, 'utf8'), { compilerOptions: { module: compiler.ModuleKind.CommonJS, target: compiler.ScriptTarget.ES2022 } }).outputText;
-  vm.runInNewContext(source, { module, exports: module.exports, process: { env: { NEXT_PUBLIC_API_URL: 'http://fixture.test/chats' } }, crypto: crypto.webcrypto, fetch, sessionStorage: { getItem: key => storage.get(key) || null, setItem: (key, value) => storage.set(key, value) }, window: { setInterval() { return 1; }, clearInterval() {} }, require(name) { if (name !== '@orgtik/ui/auth') throw new Error('Unexpected runtime import: ' + name); return { readClientSession: () => current, refreshClientSession: async () => current, subscribeClientSession(listener) { listeners.add(listener); return () => listeners.delete(listener); } }; } });
+  const apiModule = { exports: {} };
+  const apiSource = compiler.transpileModule(fs.readFileSync(path.resolve(__dirname, '../../../apps/chats/lib/api-url.ts'), 'utf8'), { compilerOptions: { module: compiler.ModuleKind.CommonJS, target: compiler.ScriptTarget.ES2022 } }).outputText;
+  vm.runInNewContext(apiSource, { module: apiModule, exports: apiModule.exports, URL, process: { env } });
+  vm.runInNewContext(source, { module, exports: module.exports, process: { env }, crypto: crypto.webcrypto, fetch, sessionStorage: { getItem: key => storage.get(key) || null, setItem: (key, value) => storage.set(key, value) }, window: { setInterval() { return 1; }, clearInterval() {} }, require(name) { if (name === '@/lib/api-url') return apiModule.exports; if (name !== '@orgtik/ui/auth') throw new Error('Unexpected runtime import: ' + name); return { readClientSession: () => current, refreshClientSession: async () => current, subscribeClientSession(listener) { listeners.add(listener); return () => listeners.delete(listener); } }; } });
   const transport = module.exports, close = transport.startWorkspacePlatform({ clear: state => effects.push({ clear: plain(state) }), status: state => effects.push({ status: plain(state) }), hydrate: (data, state) => effects.push({ data: plain(data), status: plain(state) }) });
   return { transport, effects, close, switch(next) { current = next; for (const listener of listeners) listener(); } };
 }
+
+test('Chats loads and saves through its namespace when an older hosted project only configured SOS', async () => {
+  const requests = [];
+  const runtime = load(async (url, options) => {
+    requests.push({ url, options });
+    return response(data('a', options.method === 'POST' ? 1 : 0));
+  }, session(), new Map(), { NEXT_PUBLIC_SOS_API_URL: 'https://mock.fixture.test/sos/api' });
+  try {
+    await settle();
+    assert.equal(runtime.effects.at(-1).status.status, 'ready');
+    assert.equal(await runtime.transport.persistEvent({ type: 'message.created', message: { channelId: 'chat', text: 'Saved' } }), true);
+    assert.deepEqual(requests.map(row => row.url), ['https://mock.fixture.test/chats/api/hq/bootstrap', 'https://mock.fixture.test/chats/api/hq/commands']);
+    for (const { options } of requests) {
+      assert.equal(options.headers.Authorization, 'Bearer unit-only-token');
+      assert.equal(options.headers['X-Workspace'], 'a');
+    }
+  } finally { runtime.close(); }
+});
 
 test('Chats transport retries a lost command response with one operation ID and hydrates only committed data', async () => {
   const requests = [], commits = new Map(); let loss = true;

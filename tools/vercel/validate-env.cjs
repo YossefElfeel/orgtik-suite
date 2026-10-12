@@ -11,7 +11,7 @@ const requirements = {
   hr: { NEXT_PUBLIC_API_URL: "/hr/api", NEXT_PUBLIC_SOS_API_URL: "/sos/api", SUITE_SOS_URL: "", SUITE_SOS_API: "/sos/api" },
   marketing: { NEXT_PUBLIC_API_URL: "/marketing/api", NEXT_PUBLIC_SOS_API_URL: "/sos", SUITE_SOS_URL: "", SUITE_SOS_API: "/sos/api" },
   content: { NEXT_PUBLIC_API_URL: "/content/api", SUITE_SOS_URL: "", SUITE_SOS_API: "/sos/api" },
-  chats: { NEXT_PUBLIC_SOS_API_URL: "/sos/api", NEXT_PUBLIC_SOS_URL: "" },
+  chats: { NEXT_PUBLIC_API_URL: "/chats", NEXT_PUBLIC_SOS_API_URL: "/sos/api", NEXT_PUBLIC_SOS_URL: "" },
   wm: { NEXT_PUBLIC_WM_API_URL: "/wm", NEXT_PUBLIC_SOS_API_URL: "/sos", NEXT_PUBLIC_SOS_URL: "", NEXT_PUBLIC_WEBSITE_URL: "" },
   admin: { NEXT_PUBLIC_ADMIN_API_URL: "/admin", NEXT_PUBLIC_SOS_API_URL: "/sos", NEXT_PUBLIC_SOS_URL: "", NEXT_PUBLIC_WM_URL: "" },
   website: { VITE_SUITE_API: "/sos/api", VITE_SUITE_URL: "", VITE_CRM_PORTAL_URL: "", VITE_CMS_API: "/wm/v2", VITE_WM_ORIGIN: "" },
@@ -19,6 +19,11 @@ const requirements = {
 
 function validate(project, env = process.env) {
   if (!env.VERCEL) return;
+  // Older Chats deployments only configured the shared SOS endpoint. The
+  // client derives its own namespace from this same hosted mock origin.
+  if (project === "chats" && !env.NEXT_PUBLIC_API_URL && env.NEXT_PUBLIC_SOS_API_URL) {
+    try { env = { ...env, NEXT_PUBLIC_API_URL: new URL("/chats", env.NEXT_PUBLIC_SOS_API_URL).href }; } catch {}
+  }
   const errors = [];
   const check = (name, suffix) => {
     let url;

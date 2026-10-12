@@ -78,9 +78,11 @@ function chatHarness() {
   const response = (payload, status = 200) => ({ ok: status < 400, status, json: async () => status < 400 ? { success: true, data: payload } : { success: false, code: payload } });
   function load() {
     const module = { exports: {} };
+    const apiModule = { exports: {} };
+    vm.runInNewContext(compile(fs.readFileSync(path.join(repo, 'apps/chats/lib/api-url.ts'), 'utf8')), { module: apiModule, exports: apiModule.exports, URL, process: { env: { NEXT_PUBLIC_API_URL: 'http://isolated.fixture/chats' } } });
     vm.runInNewContext(compile(fs.readFileSync(path.join(repo, 'apps/chats/store/platform.ts'), 'utf8')), {
       module, exports: module.exports, crypto: crypto.webcrypto, process: { env: { NEXT_PUBLIC_API_URL: 'http://isolated.fixture/chats' } }, window: { setInterval() { return 1; }, clearInterval() {} }, sessionStorage: { getItem: key => storage.get(key) || null, setItem: (key, value) => storage.set(key, value) },
-      require(name) { assert.equal(name, '@orgtik/ui/auth'); return { readClientSession: () => current, refreshClientSession: async () => current, subscribeClientSession: () => () => {} }; },
+      require(name) { if (name === '@/lib/api-url') return apiModule.exports; assert.equal(name, '@orgtik/ui/auth'); return { readClientSession: () => current, refreshClientSession: async () => current, subscribeClientSession: () => () => {} }; },
       async fetch(_url, options) {
         if (options.method === 'GET') return response(data());
         writes.push(plain(options)); const key = options.headers['Idempotency-Key'];

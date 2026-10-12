@@ -3,7 +3,8 @@
 import { readClientSession, refreshClientSession, subscribeClientSession } from "@orgtik/ui/auth";
 import { useSyncExternalStore } from "react";
 import { SOS_API_URL } from "@/lib/suite-session";
-const ORIGIN = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "").replace(/\/api$/, "");
+import { CHATS_API_URL } from "@/lib/api-url";
+const ORIGIN = CHATS_API_URL;
 const SOS_API = SOS_API_URL;
 
 export type FileReference = { workspaceId: string; fileId: string; versionId: string };

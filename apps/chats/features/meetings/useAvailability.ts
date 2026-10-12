@@ -4,8 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 import { readClientSession, refreshClientSession, useClientSession } from "@orgtik/ui/auth";
 import { SOS_API_URL } from "@/lib/suite-session";
 import { availabilityNamespace, validateAvailability, type AvailabilityData } from "@/lib/calendar-availability";
+import { CHATS_API_URL } from "@/lib/api-url";
 
-const API = (process.env.NEXT_PUBLIC_API_URL || "").replace(/\/$/, "").replace(/\/api$/, "");
+const API = CHATS_API_URL;
 type State = { key: string; status: "loading" | "ready" | "error"; data: AvailabilityData | null };
 
 /** Own-tool authority, bounded polling, and no previous-workspace data while a read is pending. */

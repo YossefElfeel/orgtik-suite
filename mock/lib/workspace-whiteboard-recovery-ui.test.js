@@ -128,7 +128,7 @@ function environment() {
       if (name === 'next/navigation') return { useSearchParams: () => r.react.useMemo(() => new URLSearchParams(navigationSearch), [navigationSearch]) };
       if (name === '@/components/ui/Primitives') return { Skeleton: 'Skeleton' };
       if (name.endsWith('.css')) return {};
-      const mapped = { '@/lib/file-references': 'apps/chats/lib/file-references.ts', './file-references': 'apps/chats/lib/file-references.ts', '@/lib/whiteboard-scene': 'apps/chats/lib/whiteboard-scene.ts', './whiteboard-scene': 'apps/chats/lib/whiteboard-scene.ts', '@/lib/whiteboards': 'apps/chats/lib/whiteboards.ts' }[name];
+      const mapped = { '@/lib/api-url': 'apps/chats/lib/api-url.ts', '@/lib/file-references': 'apps/chats/lib/file-references.ts', './file-references': 'apps/chats/lib/file-references.ts', '@/lib/whiteboard-scene': 'apps/chats/lib/whiteboard-scene.ts', './whiteboard-scene': 'apps/chats/lib/whiteboard-scene.ts', '@/lib/whiteboards': 'apps/chats/lib/whiteboards.ts' }[name];
       if (!mapped) throw new Error('Unexpected UI module import: ' + name); return load(mapped);
     } });
     cache.set(relative, module.exports); return module.exports;

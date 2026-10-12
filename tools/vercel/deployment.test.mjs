@@ -7,6 +7,7 @@ import { test } from "node:test";
 import { checkMockBundle } from "./check-mock-bundle.mjs";
 import { copyMockRuntime } from "./copy-mock-runtime.mjs";
 import { selectDeploymentProjects } from './deployment-policy.mjs';
+import './validate-env.test.cjs';
 
 test('automatic rollouts select affected existing projects and exclude retired Content', () => {
   const projects = JSON.parse(fs.readFileSync(new URL('./projects.json', import.meta.url))).projects;
