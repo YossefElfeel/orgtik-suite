@@ -60,7 +60,7 @@ async function run(title, who, fn) {
 }
 
 const call = async (who, method, p, body) => {
-  const res = await fetch(API + p, { method, headers: { authorization: `Bearer ${await tokenFor(EMAIL[who], "admin")}`, ...(body ? { "content-type": "application/json" } : {}) }, body: body ? JSON.stringify(body) : undefined });
+  const res = await fetch(API + p, { method, headers: { authorization: `Bearer ${await tokenFor(EMAIL[who])}`, ...(body ? { "content-type": "application/json" } : {}) }, body: body ? JSON.stringify(body) : undefined });
   const json = await res.json().catch(() => ({}));
   return { status: res.status, data: json.data, error: json.error };
 };

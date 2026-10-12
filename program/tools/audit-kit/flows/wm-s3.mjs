@@ -14,7 +14,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { AUDITS, webUrl, apiUrl } from "../lib/suite.mjs";
 import { mock } from "../lib/mock.mjs";
-import { tokenFor, createAppHandoff } from "../lib/session.mjs";
+import { tokenFor } from "../lib/session.mjs";
 import { settle } from "../lib/checks.mjs";
 const audit = await auditState("wm-s3.mjs");
 try {
@@ -36,8 +36,8 @@ async function as(email) {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("console", (m) => m.type() === "error" && !/status of 4(03|09|12|22)/.test(m.text()) && errors.push(m.text().slice(0, 160)));
-  const token = await tokenFor(email, "wm");
-  await page.goto(`${WM}/en/auth?code=${encodeURIComponent(await createAppHandoff(apiUrl("sos") + "/api", "wm", token))}`, { waitUntil: "load" });
+  const token = await tokenFor(email);
+  await page.goto(`${WM}/en/auth?token=${encodeURIComponent(token)}`, { waitUntil: "load" });
   await page.getByRole("heading", { level: 1, name: "Overview" }).waitFor({ timeout: 30000 });
   return { ctx, page, token, errors };
 }
@@ -128,7 +128,7 @@ await run("A lead moves through the pipeline; personal data is for those allowed
     await confirm.getByRole("button", { name: "Erase personal data" }).click();
     await dina.page.getByText("Personal data erased").first().waitFor();
     const l = (await api(dina.token, "/admin/leads/ld_01")).data;
-    const audit = (await api((await tokenFor("mona.adel@orgtik.test", "wm")), "/admin/audit?type=lead")).data.map((a) => a.action);
+    const audit = (await api((await tokenFor("mona.adel@orgtik.test")), "/admin/audit?type=lead")).data.map((a) => a.action);
     return { ok: l.erased && l.email === "" && l.notes[0].text === "—" && audit.includes("lead_erase"), note: "erased and recorded in the audit log" };
   });
   await step(null, "no-errors", async () => ({ ok: dina.errors.length === 0, note: dina.errors[0] ?? "clean" }));
@@ -199,7 +199,7 @@ await run("An approved change publishes itself at its time; an old version comes
     return { ok: e.state === "scheduled" && Boolean(e.publishAt), note: `scheduled for ${e.publishAt}` };
   });
   await step(karim.page, "publishes-at-its-time", async () => {
-    await mock.control("sos", "/__mock/clock/advance", { body: { days: 1 } });
+    await fetch(`${apiUrl("sos")}/__mock/clock/advance`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ days: 1 }) });
     const e = (await api(karim.token, "/admin/entries/article/ar_02")).data;
     const pub = (await (await fetch(`${API}/public/entries/article`)).json()).data.find((x) => x.id === "ar_02");
     return { ok: e.state === "published" && pub.locales.en.excerpt.startsWith("A brand system"), note: `after a day: ${e.state}; versions ${e.versions.slice(0, 3).map((v) => v.by.name ?? v.by.key).join(", ")}` };

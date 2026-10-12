@@ -9,8 +9,8 @@ import {auditState} from "../lib/audit-state.mjs";
 import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
-import { AUDITS, PASSWORD, webUrl, apiUrl } from "../lib/suite.mjs";
-import { tokenFor, createAppHandoff } from "../lib/session.mjs";
+import { AUDITS, PASSWORD, webUrl } from "../lib/suite.mjs";
+import { tokenFor } from "../lib/session.mjs";
 import { settle, watch } from "../lib/checks.mjs";
 const audit = await auditState("wm-s0.mjs");
 try {
@@ -50,8 +50,8 @@ async function run(title, fn) {
 }
 
 const handoff = async (page, email) => {
-  const token = await tokenFor(email, "wm");
-  await page.goto(`${WM}/en/auth?code=${encodeURIComponent(await createAppHandoff(apiUrl("sos") + "/api", "wm", token))}`, { waitUntil: "load" });
+  const token = await tokenFor(email);
+  await page.goto(`${WM}/en/auth?token=${encodeURIComponent(token)}`, { waitUntil: "load" });
   return token;
 };
 const navLinks = (page) => page.getByRole("navigation", { name: /main navigation/i }).getByRole("link").allInnerTexts();
@@ -94,11 +94,11 @@ await run("Viewer: no Settings in the navigation; the page itself says which per
   });
 });
 
-await run("Not a member (Omar, sales): staff context cannot be issued", async (page, step) => {
+await run("Not a member (Omar, sales): the no-access page, with a way back", async (page, step) => {
+  await handoff(page, "omar.farouk@orgtik.test");
   await step("no-access", async () => {
-    try { await tokenFor("omar.farouk@orgtik.test", "wm"); }
-    catch (error) { return { ok: error.status === 403, note: "The current API refuses Website Manager staff access before a handoff is issued" }; }
-    return { ok: false, note: "A non-member received Website Manager staff authority" };
+    await page.getByText(/don't have access to the Website Manager/i).waitFor({ timeout: 20000 });
+    return { ok: (await page.getByRole("button", { name: /back to orgtik/i }).count()) === 1, note: "no-access page with Back to OrgTik" };
   });
 });
 

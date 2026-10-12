@@ -16,7 +16,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { AUDITS, webUrl, apiUrl } from "../lib/suite.mjs";
 import { mock } from "../lib/mock.mjs";
-import { tokenFor, createAppHandoff } from "../lib/session.mjs";
+import { tokenFor } from "../lib/session.mjs";
 import { settle } from "../lib/checks.mjs";
 const audit = await auditState("wm-s2.mjs");
 try {
@@ -38,8 +38,8 @@ async function as(email) {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("console", (m) => m.type() === "error" && !/status of 4(09|12|22)/.test(m.text()) && errors.push(m.text().slice(0, 160)));
-  const token = await tokenFor(email, "wm");
-  await page.goto(`${WM}/en/auth?code=${encodeURIComponent(await createAppHandoff(apiUrl("sos") + "/api", "wm", token))}`, { waitUntil: "load" });
+  const token = await tokenFor(email);
+  await page.goto(`${WM}/en/auth?token=${encodeURIComponent(token)}`, { waitUntil: "load" });
   await page.getByRole("heading", { level: 1, name: "Overview" }).waitFor({ timeout: 30000 });
   return { ctx, page, token, errors };
 }

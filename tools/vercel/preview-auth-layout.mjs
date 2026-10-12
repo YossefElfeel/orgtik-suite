@@ -6,7 +6,6 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { randomUUID } from "node:crypto";
 import { pathToFileURL } from "node:url";
-import { mockAdministratorToken } from "../../program/tools/audit-kit/lib/mock-control.mjs";
 
 const root = path.resolve(import.meta.dirname, "../..");
 const load = createRequire(path.join(root, "program/tools/audit-kit/package.json"));
@@ -80,8 +79,7 @@ try {
     assert.equal(signedIn.status, 200);
     assert.equal(signedIn.body.data.user.id, id);
     assert.equal((await api("GET", "/sos/v1/app/me", null, signedIn.body.data.tokens.accessToken)).body.data.workspace.id, workspace);
-    const staffToken = await mockAdministratorToken(`${mock}/sos`);
-    assert.equal((await api("PATCH", `/admin/v1/admin/people/${id}/status`, { isActive: false }, staffToken)).status, 200);
+    assert.equal((await api("PATCH", `/sos/api/users/${id}`, { isActive: false }, seedToken)).status, 200);
     assert.equal((await login(freshEmail, changedPassword)).status, 403);
   });
 
