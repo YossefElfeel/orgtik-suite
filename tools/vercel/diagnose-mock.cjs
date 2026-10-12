@@ -7,6 +7,11 @@ async function main() {
   config.dataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'orgtik-diagnose-'));
   const journal = require('../../mock/lib/journal');
   const picked = journal.pickStore(config);
+  console.log(JSON.stringify({ storageConfiguration: {
+    url: Boolean(process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL),
+    token: Boolean(process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN),
+    variableNames: Object.keys(process.env).filter(name => /KV_|REDIS|UPSTASH|MOCK_|SUITE_WEB/.test(name)),
+  } }));
   if (picked.store?.kind !== 'redis') throw new Error('A configured Redis store is required.');
   const saved = await picked.store.snapshot(0);
   if (!saved.meta) throw new Error('Journal metadata is missing; nothing was changed.');
