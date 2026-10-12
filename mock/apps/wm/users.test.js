@@ -119,6 +119,8 @@ test("Website administrators respect central account permissions, internal membe
   );
   const staff = listed.data.find((user) => user.key === "staff"),
     self = listed.data.find((user) => user.key === "webadmin");
+  for (const role of ["wm_owner", "wm_super_admin"])
+    assert.equal((await call("PATCH", "/3", { roles: [role] }, staff.version)).status, 403);
   assert.equal(
     (await call("PATCH", "/3", { active: false }, staff.version)).status,
     403,

@@ -135,7 +135,7 @@ export type Overview = {
   };
 };
 
-export type Role = { key: string; label: string; permissions: string[] };
+export type Role = { key: string; label: string; permissions: string[]; version: string; protected: boolean };
 
 export type Person = { key: string; name: string | null };
 export type Page<T> = {
@@ -702,6 +702,7 @@ export const api = createApi({
     "Audit",
     "Site",
     "Users",
+    "Roles",
   ],
   endpoints: (b) => ({
     pageSources: b.query<Entry[], string>({query: id => "/admin/manager/pages/" + id, providesTags: ["Entry"]}),
@@ -719,7 +720,20 @@ export const api = createApi({
     analytics: b.query<Analytics, AnalyticsPeriod>({
       query: (period) => `/admin/analytics?period=${period}`,
     }),
-    roles: b.query<Role[], void>({ query: () => "/admin/roles" }),
+    roles: b.query<Role[], void>({ query: () => "/admin/roles", providesTags: ["Roles"] }),
+    updateRole: b.mutation<Role, { key: string; version: string; permissions: string[] }>({
+      query: ({ key, version, permissions }) => ({ url: `/admin/roles/${key}`, method: "PATCH", headers: { "if-match": version }, body: { permissions } }),
+      async onQueryStarted(_request, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(api.util.updateQueryData("roles", undefined, roles => {
+            const index = roles.findIndex(role => role.key === data.key);
+            if (index >= 0) roles[index] = data;
+          }));
+        } catch { /* The editor shows the save error. */ }
+      },
+      invalidatesTags: ["Roles", "Me", "Users", "Audit"],
+    }),
     pricing: b.query<Pricing, void>({ query: () => "/admin/pricing" }),
     entries: b.query<
       Page<EntrySummary>,
@@ -1124,6 +1138,7 @@ export const {
   useOverviewQuery,
   useAnalyticsQuery,
   useRolesQuery,
+  useUpdateRoleMutation,
   usePricingQuery,
   useEntriesQuery,
   useEntryQuery,

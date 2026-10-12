@@ -46,7 +46,7 @@ export function EntryActions({
         <MenuItem
           icon={<Trash />}
           tone="danger"
-          disabled={!can("content:edit") || !deletable}
+          disabled={!can("content:delete") || !deletable}
           title={!deletable ? t("protectedDelete") : undefined}
           onClick={() => setDeleting(true)}
         >

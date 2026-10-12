@@ -180,8 +180,8 @@ function registerUsers(
         );
       if (
         user.id === actor.id &&
-        rolesOf(user).includes("wm_admin") &&
-        !body.roles.includes("wm_admin")
+        ["wm_admin", "wm_owner", "wm_super_admin"].some(role => rolesOf(user).includes(role)) &&
+        !["wm_admin", "wm_owner", "wm_super_admin"].some(role => body.roles.includes(role))
       )
         return fail(
           res,
@@ -189,6 +189,8 @@ function registerUsers(
           "self_lockout",
           "You cannot remove your own administration access.",
         );
+      if (!capabilities(identity, actor).accounts && ["wm_owner", "wm_super_admin"].some(role => body.roles.includes(role) !== rolesOf(user).includes(role)))
+        return fail(res, 403, "suite_admin_required", "Only central super administrators can assign owner or super administrator access.");
       const workspace = S?.workspace("ws_orgtik");
       const member = workspace?.members.find(
         (member) => member.userKey === user.key,

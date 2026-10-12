@@ -89,45 +89,53 @@ export function MediaPicker({
           <span className="min-w-0 flex-1 break-all text-body-sm text-fg-muted">
             {selected?.file ?? value.split("/").pop()}
           </span>
-          {selected && can("media:edit") ? (
-            <Link
-              href={`/media/${selected.id}`}
-              className="text-body-sm text-fg-brand underline"
-            >
-              {t("edit")}
-            </Link>
-          ) : null}
-          {!disabled ? (
-            <Button variant="danger" size="sm" onClick={() => onChange("")}>
-              {t("remove")}
-            </Button>
-          ) : null}
         </div>
       ) : null}
-      {!disabled ? (
-        <div className="flex flex-wrap gap-2">
-          {can("media:view") ? (
-            <Button
-              variant="secondary"
-              size="sm"
-              aria-expanded={choosing}
-              onClick={() => setChoosing(!choosing)}
-            >
-              {value ? t("replaceMedia") : t("selectMedia")}
-            </Button>
+      {!disabled || (value && selected && can("media:edit")) ? (
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          {!disabled ? (
+            <div className="flex flex-wrap items-center gap-2">
+              {can("media:view") ? (
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  aria-expanded={choosing}
+                  onClick={() => setChoosing(!choosing)}
+                >
+                  {value ? t("replaceMedia") : t("selectMedia")}
+                </Button>
+              ) : null}
+              {can("media:create") ? (
+                <Button
+                  variant="secondary"
+                  size="sm"
+                  aria-expanded={uploadingNew}
+                  onClick={() => setUploadingNew(!uploadingNew)}
+                >
+                  {t(imagesOnly || iconOnly || kind === "image" ? "uploadImage" : kind === "video" ? "uploadVideo" : "upload")}
+                </Button>
+              ) : null}
+              {!can("media:view") && !can("media:create") ? (
+                <p className="text-body-sm text-fg-muted">{t("mediaPermission")}</p>
+              ) : null}
+            </div>
           ) : null}
-          {can("media:edit") ? (
-            <Button
-              variant="secondary"
-              size="sm"
-              aria-expanded={uploadingNew}
-              onClick={() => setUploadingNew(!uploadingNew)}
-            >
-              {t(imagesOnly || iconOnly || kind === "image" ? "uploadImage" : kind === "video" ? "uploadVideo" : "upload")}
-            </Button>
-          ) : null}
-          {!can("media:view") && !can("media:edit") ? (
-            <p className="text-body-sm text-fg-muted">{t("mediaPermission")}</p>
+          {value ? (
+            <div className="ms-auto flex items-center gap-3">
+              {selected && can("media:edit") ? (
+                <Link
+                  href={`/media/${selected.id}`}
+                  className="text-body-sm text-fg-brand underline"
+                >
+                  {t("edit")}
+                </Link>
+              ) : null}
+              {!disabled ? (
+                <Button variant="danger" size="sm" onClick={() => onChange("")}>
+                  {t("remove")}
+                </Button>
+              ) : null}
+            </div>
           ) : null}
         </div>
       ) : null}
@@ -215,7 +223,7 @@ export function MediaPicker({
           ) : null}
         </>
       ) : null}
-      {!disabled && uploadingNew && can("media:edit") ? (
+      {!disabled && uploadingNew && can("media:create") ? (
         <div className="flex flex-col gap-3 border-t border-line pt-3">
           <FileField
             label={tm("file")}

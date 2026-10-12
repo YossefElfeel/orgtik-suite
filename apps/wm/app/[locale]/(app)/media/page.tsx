@@ -111,7 +111,7 @@ function Library() {
       <PageHeader
         title={t("title")}
         description={t("description")}
-        actions={can("media:edit") ? <Button startIcon={<UploadSimple />} onClick={() => setUploading(true)}>{t("upload")}</Button> : null}
+        actions={can("media:create") ? <Button startIcon={<UploadSimple />} onClick={() => setUploading(true)}>{t("upload")}</Button> : null}
       />
       <div className="wm-table-filters"><Select size="sm" aria-label={t("issues.all")} value={issue} onValueChange={value=>setIssue((value??"all") as IssueTab)} options={ISSUES.map(value=>({value,label:t(`issues.${value}`)}))} />
         <Input size="sm" type="search" value={search} onChange={(e) => setSearch(e.target.value)} aria-label={t("search")} placeholder={t("search")} startIcon={<MagnifyingGlass className="size-4" />} className="wm-search" />

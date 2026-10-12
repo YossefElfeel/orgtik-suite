@@ -25,18 +25,19 @@ function previewGrant(holder, token) {
 function exportHolder(holder) {
   if (!holder) throw codec.fail("Website Manager has not been initialized.");
   const library = holder.lib.exportState(), ops = holder.ops.exportState();
-  return { schema: SCHEMA, version: 1, realm: holder.realm, data: { content: holder.store.exportState(), library: library.data, ops: ops.data, previews: codec.copy([...holder.previews]), submissions: holder.submissions.exportState() }, sequences: { ...library.sequences, ...ops.sequences } };
+  return { schema: SCHEMA, version: 1, realm: holder.realm, data: { content: holder.store.exportState(), library: library.data, ops: ops.data, previews: codec.copy([...holder.previews]), submissions: holder.submissions.exportState(), roles: codec.copy(holder.roleOverrides) }, sequences: { ...library.sequences, ...ops.sequences } };
 }
 function importHolder(holder, snapshot) {
   if (!holder || snapshot?.schema !== SCHEMA || snapshot.version !== 1 || snapshot.realm !== holder.realm) throw codec.fail("Website Manager snapshot belongs to another realm or version.");
   // Validate every part before mutating any live closure.
   const content = holder.store.validateState(snapshot.data?.content);
+  const roles = require("./wm/roles").validateRoleOverrides(snapshot.data?.roles);
   const library = holder.lib.validateState({ data: snapshot.data?.library, sequences: snapshot.sequences });
   const ops = holder.ops.validateState({ data: snapshot.data?.ops, sequences: snapshot.sequences });
   const submissions = holder.submissions.validateState(snapshot.data?.submissions);
   const previews = codec.mapRows(snapshot.data?.previews, { ids: false });
   if (previews.some(([hash, grant]) => !/^[a-f0-9]{64}$/.test(hash) || !["string", "number"].includes(typeof grant.by) || !Number.isFinite(Date.parse(grant.expiresAt)))) throw codec.fail("Website preview grants are incomplete.");
-  holder.store.importState(content); holder.lib.importState(library); holder.ops.importState(ops); holder.submissions.importState(submissions); codec.replaceMap(holder.previews, previews);
+  holder.store.importState(content); holder.lib.importState(library); holder.ops.importState(ops); holder.submissions.importState(submissions); codec.replaceMap(holder.previews, previews); codec.replaceObject(holder.roleOverrides, roles);
 }
 
 const SCOPE = "website_manager";
@@ -68,6 +69,7 @@ module.exports = {
 
   routes(app, ctx) {
     const { identity } = ctx;
+    const roleOverrides = {};
     const rid = () => crypto.randomUUID();
     const ok = (res, data, meta = {}, status = 200) => res.status(status).json({ data, meta });
     const fail = (res, status, code, message, extra = {}) => res.status(status).json({ error: { code, message, requestId: rid(), ...extra } });
@@ -80,7 +82,7 @@ module.exports = {
       if (!u) return fail(res, 401, "unauthenticated", "Sign in again."), null;
       const roles = rolesOf(u);
       if (!roles.length) return fail(res, 403, "forbidden", "You don't have access to the Website Manager."), null;
-      return { user: u, roles, permissions: permissionsFor(roles) };
+      return { user: u, roles, permissions: permissionsFor(roles, roleOverrides) };
     }
     const can = (who, permission) => who.permissions.includes(permission);
     // Guards a route by permission: 403 with the missing permission named, so the UI can say why.
@@ -114,7 +116,7 @@ module.exports = {
     const submissions = require("./wm/ideas").ideaSubmissions(store.ideas);
     const realm = ctx.realm || ctx.config?.sandbox || process.env.MOCK_SANDBOX || "demo";
     if (!/^[\w-]{1,100}$/.test(realm)) throw codec.fail("Invalid Website Manager realm.");
-    const holder = { realm, store, lib, ops, previews, submissions, ctx };
+    const holder = { realm, store, lib, ops, previews, submissions, roleOverrides, ctx };
     internal = holder;
     // Claude's suggestions for G2's gaps (D-038): drafts for review, never published by themselves.
     require("./wm/suggestions").applySuggestions({ store, media: lib.media, now: () => new Date().toISOString() });
@@ -256,7 +258,7 @@ module.exports = {
       if (onlySeo && p.includes("seo:edit")) return next();
       return fail(res, 403, "forbidden", "Changing this needs content:edit.", { required: "content:edit" });
     };
-    app.post("/v2/admin/entries/:type", need("content:edit"), (req, res) => {
+    app.post("/v2/admin/entries/:type", need("content:create"), (req, res) => {
       if (!TYPES.has(req.params.type)) return fail(res, 404, "unknown_type", `No content type ${req.params.type}.`);
       const r = store.create(req.params.type, who(req), req.body ?? {});
       if (r.status) return fail(res, r.status, r.code, r.message ?? r.code);
@@ -270,7 +272,7 @@ module.exports = {
       if (r.status) return fail(res, r.status, r.code, r.message ?? r.code, { required: r.required });
       send(res, e);
     });
-    app.delete("/v2/admin/entries/:type/:id", need("content:edit"), (req, res) => {
+    app.delete("/v2/admin/entries/:type/:id", need("content:delete"), (req, res) => {
       const e = entryOr404(req, res);
       if (!e) return;
       const r = store.remove(e, who(req));
@@ -367,7 +369,7 @@ module.exports = {
       const rows = identity.users
         .map((u) => ({ u, roles: rolesOf(u) }))
         .filter((x) => x.roles.length)
-        .map(({ u, roles }) => ({ key: u.key, name: identity.fullName(u), roles, permissions: permissionsFor(roles) }));
+        .map(({ u, roles }) => ({ key: u.key, name: identity.fullName(u), roles, permissions: permissionsFor(roles, roleOverrides) }));
       ok(res, rows, { total: rows.length, page: 1, pageSize: rows.length });
     });
 
@@ -613,7 +615,7 @@ module.exports = {
     });
     const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 15 * 1024 * 1024 } });
     const ACCEPT = ["image/webp", "image/png", "image/jpeg", "image/svg+xml", "video/mp4", "video/webm"];
-    app.post("/v2/admin/media", need("media:edit"), (req, res, next) => upload.single("file")(req, res, error => error ? fail(res, 422, "invalid", "The upload is incomplete or exceeds 15 MB.", { fieldErrors: { file: "invalid" } }) : next()), (req, res) => {
+    app.post("/v2/admin/media", need("media:create"), (req, res, next) => upload.single("file")(req, res, error => error ? fail(res, 422, "invalid", "The upload is incomplete or exceeds 15 MB.", { fieldErrors: { file: "invalid" } }) : next()), (req, res) => {
       if (!req.file) return fail(res, 422, "invalid", "Choose a file to upload.", { fieldErrors: { file: "required" } });
       if (!ACCEPT.includes(req.file.mimetype)) return fail(res, 422, "invalid", "This kind of file can't go on the website.", { fieldErrors: { file: "type" } });
       let tags;
@@ -622,7 +624,7 @@ module.exports = {
       if (typeof description !== "string" || description.length > 2000 || !Array.isArray(tags) || tags.length > 30 || tags.some(tag => typeof tag !== "string" || tag.length > 80)) return fail(res, 422, "invalid", "Invalid media metadata.");
       ok(res, mediaOf(lib.addUpload(who(req), req.file, { description: description.trim(), tags: [...new Set(tags.map(tag => tag.trim()).filter(Boolean))] }), true), {}, 201);
     });
-    app.delete("/v2/admin/media/:id", need("media:edit"), (req, res) => {
+    app.delete("/v2/admin/media/:id", need("media:delete"), (req, res) => {
       const m = mediaOr404(req, res);
       if (!m) return;
       const r = lib.removeMedia(m, who(req));
@@ -659,7 +661,7 @@ module.exports = {
       const { rows: out, meta } = page(req, rows);
       ok(res, out, meta);
     });
-    app.post("/v2/admin/seo/redirects", need("seo:edit"), (req, res) => {
+    app.post("/v2/admin/seo/redirects", need("seo:create"), (req, res) => {
       const r = lib.saveRedirect(who(req), req.body ?? {});
       if (r.errors) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: r.errors });
       ok(res, r.redirect, {}, 201);
@@ -674,7 +676,7 @@ module.exports = {
       if (r.errors) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: r.errors });
       ok(res, r.redirect);
     });
-    app.delete("/v2/admin/seo/redirects/:id", need("seo:edit"), (req, res) => {
+    app.delete("/v2/admin/seo/redirects/:id", need("seo:delete"), (req, res) => {
       const x = redirectOr404(req, res);
       if (!x) return;
       lib.removeRedirect(x, who(req));
@@ -750,9 +752,8 @@ module.exports = {
     // Admin approval, which arrives with the pricing editor.
     app.get("/v2/admin/pricing", need("content:view"), (req, res) => ok(res, store.pricing()));
 
-    app.get("/v2/admin/roles", need("settings:view"), (req, res) => {
-      ok(res, Object.entries(ROLES).map(([key, r]) => ({ key, label: r.label, permissions: r.permissions })));
-    });
+    require("./wm/roles").registerRoles(app, { identity, store, overrides: roleOverrides, need, ok, fail });
+
     return { exportState: () => exportHolder(holder), importState: snapshot => importHolder(holder, snapshot) };
   },
 };

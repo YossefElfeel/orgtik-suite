@@ -140,7 +140,7 @@ function Editor({ m }: { m: MediaItem }) {
             >
               {t("copyAddress")}
             </Button>
-            {editable ? (
+            {can("media:delete") ? (
               <ConfirmDialog
                 trigger={<Button variant="secondary" startIcon={<Trash />}>{t("delete")}</Button>}
                 tone="danger"
