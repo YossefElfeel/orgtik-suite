@@ -36,7 +36,7 @@
   <div class="hero">
     <div class="eyebrow">للـ PM وفريق الديزاين والتطوير · خطة v3</div>
     <h1>كل أداة لوحدها قوية.<br>ومع بعض، سويت واحدة.</h1>
-    <p>دي نسخة التحليل الأصلية بتاريخ 9 أكتوبر. التنفيذ الحالي نقل الميزات المعتمدة للشاشات اليومية، ووحّد الإيكوسيستم والديزاين سيستم، وفصل إدارة الخدمات عن الأدوات. تقرير التسليم قبل/بعد مرتبط من أول التقرير.</p>
+    <p>الأساس موجود، بس كتير من تجربة المنتج لسه في صفحات العرض. المرحلة الجاية تدخل الميزات في الشاشات اليومية، وتوحّد الشكل والربط حسب اشتراك كل عميل، وتفصل إدارة الخدمات عن إدارة الأدوات.</p>
     <div class="hero-meta"><span class="badge">نفس البراند</span><span class="badge">تصميم الويبسايت ثابت</span><span class="badge">Mock prototype</span><span class="muted small">المرجع: <code>origin/main · c7c7e1f</code></span></div>
   </div>
   <div class="metrics" aria-label="أهم خمس نتائج من التحليل">
@@ -46,13 +46,13 @@
     <div class="metric"><strong class="latin">2</strong><span>كيت قديم في HR وCRM</span><small>مصدر التفاوت مع المكتبة</small></div>
     <div class="metric"><strong class="latin" style="font-size:27px">Arial</strong><span>بديل الخط اللاتيني الحالي</span><small>الهدف: IBM Plex Sans</small></div>
   </div>
-  <nav class="index" aria-label="أقسام التقرير"><a href="audits/v3-p5/handoff.html">تقرير التسليم قبل/بعد</a><a href="audits/v3-p1/specimens.html">لقطات P1 الفعلية</a><a href="#summary">الخلاصة</a><a href="#scorecard">حالة الأدوات</a><a href="#architecture">مين بيدير إيه</a><a href="#design">اتجاه الديزاين</a><a href="#scope">النطاق والأولويات</a><a href="#roadmap">المراحل</a><a href="#decisions">القرارات والدليل</a></nav>
+  <nav class="index" aria-label="أقسام التقرير"><a href="audits/v3-p1/specimens.html">لقطات P1 الفعلية</a><a href="#summary">الخلاصة</a><a href="#scorecard">حالة الأدوات</a><a href="#architecture">مين بيدير إيه</a><a href="#design">اتجاه الديزاين</a><a href="#scope">النطاق والأولويات</a><a href="#roadmap">المراحل</a><a href="#decisions">القرارات والدليل</a></nav>
 
   <section id="summary">
     <div class="section-head"><span class="number">01</span><h2>المشكلة الأساسية: التجربة مش في مكانها.</h2></div>
     <p class="lead">حسب التحليل: 9 ميزات في الشاشات الحقيقية، و3 متقسّمين، و60 في <code>/presentation</code> بس. وجود تغطية UI للـ 72 التزام مش معناه إنهم متاحين في الاستخدام العادي.</p>
     <div class="customer-pair"><article><h3>نبني على اللي اتعمل</h3><p>اشتراكات ومقاعد وصلاحيات workspace حقيقية جوه الـ mock. بيانات منفصلة لكل عميل، وFiles references وboards، وربط الإجازات والـ hiring/offboarding. فحوص Storybook وRTL والحالات موجودة.</p></article><article><h3>نصلّح التجربة اليومية</h3><p>البحث والجرس والمهام من الشات والمتابعة من CRM ينتقلوا من demo bridge لمصدر الأداة. الربط يشرح سبب عدم الإتاحة، والدخول يختار أداة واحدة أو Home حسب الوصول.</p></article></div>
-    <div class="callout"><strong>الشغل UI + mock flows.</strong><p>الدفع والبريد والـ AI والمكالمات والتوقيع والتقديم التنظيمي يفضلوا محاكاة واضحة. حدود الـ session والـ workspace والـ journal تتفضل محفوظة. النشر المدار على Vercel اتفتح بموافقتك الصريحة يوم 11 أكتوبر؛ إصدار التسليم بيتنشر بعد اكتمال فحوص الدمج.</p></div>
+    <div class="callout"><strong>الشغل UI + mock flows.</strong><p>الدفع والبريد والـ AI والمكالمات والتوقيع والتقديم التنظيمي يفضلوا محاكاة واضحة. حدود الـ session والـ workspace والـ journal تتفضل محفوظة. مفيش نشر جديد من المرحلة دي.</p></div>
     <p class="small muted">الأرقام المصنّفة فوق من الخطة اللي اتبعتت، مش تدقيق تشغيل جديد لكل ميزة. مراجعة P0 أكدت من الكود شرط 404، والـ bridge المنفصل، وحدود أوامر الربط، وملكية الكتالوج. <a href="v3-feasibility.md">تفاصيل المراجعة</a>.</p>
   </section>
 

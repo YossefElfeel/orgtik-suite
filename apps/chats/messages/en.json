@@ -1401,6 +1401,5 @@
   "v3.knockOffer": "Wants to talk",
   "v3.acceptKnock": "Accept huddle",
   "v3.declineKnock": "Decline",
-  "v3.deferKnock": "Later",
-  "v3.loadingTasks": "Loading linked Tasks…"
+  "v3.deferKnock": "Later"
 }

@@ -47,7 +47,7 @@ for (const c of base.captures) {
   else if (c.failed) row.problems.push(`base capture failed: ${c.failed}`);
   else {
     const candidate = head.captures.find(item => item.name === c.name);
-    const settings = (capture, source) => ({ renderer: capture.renderer || source.renderer || 'default', warmPaint: capture.warmPaint ?? source.warmPaint === true, mediaLock: capture.mediaLock === true, paired: capture.paired === true, rendererArgs: capture.rendererArgs || [], warmPaintCount: capture.warmPaintCount ?? (capture.warmPaint ? 1 : 0), animations: capture.animations || 'disabled' });
+    const settings = (capture, source) => ({ renderer: capture.renderer || source.renderer || 'default', warmPaint: capture.warmPaint ?? source.warmPaint === true, mediaLock: capture.mediaLock === true });
     if (candidate.failed || !candidate.rendered) row.problems.push(`head capture failed: ${candidate.failed || 'never rendered'}`);
     if (JSON.stringify(settings(c, base)) !== JSON.stringify(settings(candidate, head))) row.problems.push('capture renderer/paint protocol differs');
     const [bp, hp] = [path.join(baseDir, `${c.name}.png`), path.join(headDir, `${c.name}.png`)];

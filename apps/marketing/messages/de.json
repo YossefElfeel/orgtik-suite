@@ -2171,22 +2171,6 @@
     "taskCancelled": "Abgebrochen",
     "taskUnavailable": "Aufgabenstatus nicht verfügbar",
     "projectSwitchFailed": "Dieses Projekt konnte nicht ausgewählt werden. Versuchen Sie es mit aktuellem Zugriff erneut.",
-    "projectUnavailable": "Dieses Projekt ist mit Ihrem aktuellen Zugriff nicht sichtbar.",
-    "pendingCommands": "Unbestätigte Änderungen",
-    "pendingCommandsBody": "Eine Antwort ging verloren. Prüfen Sie die ursprüngliche Änderung, bevor Sie eine weitere starten. Die Wiederherstellung nutzt dieselbe gespeicherte Anfrage und Ihre aktuellen Rechte.",
-    "recoverCommand": "Ursprüngliche Änderung prüfen",
-    "recoveryDenied": "Die ursprüngliche Änderung konnte nicht bestätigt werden. Prüfen Sie Ihre aktuellen Rechte und den Quelldatensatz und versuchen Sie es erneut. Die gespeicherte Anfrage bleibt erhalten.",
-    "recoverFirst": "Prüfen Sie die ursprüngliche unbestätigte Änderung, bevor Sie andere Angaben senden.",
-    "utmSettings": "UTM-Einstellungen",
-    "marketingConfiguration": "Marketing-Konfiguration",
-    "utmHint": "Speichern Sie die Standardbezeichnungen dieses Projekts für geteilte Links. Diese Einstellungen erfassen keine Besuche und senden keine Tracking-Ereignisse.",
-    "utmSource": "UTM-Quelle",
-    "utmMedium": "UTM-Medium",
-    "utmCampaign": "UTM-Kampagne",
-    "utmLinkBuilder": "Link mit Kennzeichnungen erstellen",
-    "utmPageAddress": "Seitenadresse",
-    "utmTaggedAddress": "Adresse mit Kennzeichnungen",
-    "utmInvalidAddress": "Geben Sie eine öffentliche HTTP- oder HTTPS-Adresse ohne Zugangsdaten ein.",
-    "utmSavedDefaults": "Die erzeugte Adresse verwendet die zuletzt gespeicherten Standardwerte und erhält andere Abfragewerte sowie den Seitenabschnitt."
+    "projectUnavailable": "Dieses Projekt ist mit Ihrem aktuellen Zugriff nicht sichtbar."
   }
 }

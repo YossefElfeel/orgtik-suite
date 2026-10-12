@@ -934,7 +934,7 @@
   "settings.ownerOnly": "solo proprietario",
   "settings.people": "Persone e ruoli",
   "settings.peopleCount": "{n, plural, one {# persona} other {# persone}}",
-  "settings.plan": "Piano",
+  "settings.plan": "Abbonamento",
   "settings.planActive": "Attivato. Il livello e il limite di utenti arrivano dalla suite.",
   "settings.planOff": "Non attivo.",
   "settings.planOpen": "Abbonamento e attivazione",
@@ -1342,7 +1342,7 @@
   "v3.queued": "Queued",
   "v3.deliverNow": "Deliver sample now",
   "v3.saved": "Saved",
-  "v3.save": "Salva",
+  "v3.save": "Save",
   "v3.remind": "Remind me",
   "v3.toTask": "Create Task",
   "v3.readBy": "Read by {names}",
@@ -1401,6 +1401,5 @@
   "v3.knockOffer": "Wants to talk",
   "v3.acceptKnock": "Accept huddle",
   "v3.declineKnock": "Decline",
-  "v3.deferKnock": "Later",
-  "v3.loadingTasks": "Caricamento delle attività collegate…"
+  "v3.deferKnock": "Later"
 }

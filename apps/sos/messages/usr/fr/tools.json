@@ -43,7 +43,7 @@
       "failed": "Les outils n’ont pas pu être chargés"
     },
     "plans": {
-      "title": "Formules",
+      "title": "Offres",
       "pricesFor": "Les offres par place utilisent {count, plural, one {# place achetée} other {# places achetées}}, en {currency}.",
       "cycle": "Périodicité de facturation",
       "monthly": "Mensuel",
@@ -206,7 +206,7 @@
       "codeApplied": "Code <c>{code}</c> appliqué",
       "removeCode": "Retirer le code de réduction",
       "summary": "Récapitulatif",
-      "subtotal": "Formules",
+      "subtotal": "Offres",
       "creditIncluded": "Avoir",
       "bundle": "{name} ({pct} % de remise)",
       "coupon": "Code <c>{code}</c>",

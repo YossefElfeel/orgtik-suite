@@ -9,7 +9,6 @@ import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { listStatus, useCountryName } from "@/components/system/kit";
 import { useReportsQuery, type ReportPayment } from "@/store/system";
-import { Metrics } from '@/components/console/Metrics';
 
 const TOOLS = ["general", "tasks", "files", "chat", "hr", "crm", "marketing", "email", "website", "hosting"];
 const GATEWAYS: Record<string, string> = { gw_paymob: "Paymob", gw_fawry: "Fawry", gw_moyasar: "Moyasar", gw_checkout: "Checkout.com", gw_knet: "KNET", gw_stripe: "Stripe" };
@@ -57,7 +56,6 @@ function Reports() {
   return (
     <div className="flex flex-col gap-8">
       <PageHeader title={t("reports.title")} description={t("reports.description")} status={<Badge tone="info">{t("reports.allUsd")}</Badge>} />
-      <Metrics />
       <section aria-labelledby="rp-numbers" aria-busy={isLoading || undefined} className="flex flex-col gap-4">
         <h2 id="rp-numbers" className="sr-only">
           {t("reports.numbers")}

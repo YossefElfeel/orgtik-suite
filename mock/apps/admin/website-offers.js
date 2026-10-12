@@ -90,13 +90,11 @@ function publicCatalog(S, resolved) {
   });
   return {
     currency, decimals, region: clone(resolved.region), policy: pricingPolicy,
-    releaseStates: Object.fromEntries(S.db.tools.map(tool => [tool.key, tool.status])),
     paymentMethods: ["card", ...(resolved.region.country === "CH" && currency === "CHF" ? ["twint"] : []), "paypal"],
     bundles: clone(S.db.websiteOfferBundles.filter(bundle => bundle.ids.every(id => available.some(offer => offer.id === id)))),
     items: available.map(offer => {
       const base = priceBase(S, offer, resolved.workspace);
-      const releaseState = offer.tool ? S.db.tools.find(tool => tool.key === offer.tool)?.status : undefined;
-      return { ...(releaseState ? { releaseState } : {}), id: offer.id, kind: offer.kind, name: base.name.en, names: base.name, fulfillment: offer.fulfillment, managedIn: offer.kind === 'service' ? 'crm' : 'console', ...(offer.publishedAt ? { publishedAt: offer.publishedAt } : {}), ...(offer.description ? { descriptions: clone(offer.description) } : {}), ...(offer.capabilities ? { capabilities: clone(offer.capabilities) } : {}), ...(offer.department ? { department: offer.department } : {}), ...(offer.departmentName ? { departmentNames: clone(offer.departmentName) } : {}), ...(offer.icon ? { icon: offer.icon } : {}), monthlyMinor: Math.round(base.monthly * 10 ** decimals), unitMinor: Math.round(base.unit * 10 ** decimals), quantity: base.quantity, perUser: base.perUser, currency, decimals, prices: Object.fromEntries(MONTHS.map(months => [months, Object.fromEntries(BANDS.map(count => [count, priceLine(base, offer, months, count)]))])) };
+      return { id: offer.id, kind: offer.kind, name: base.name.en, names: base.name, fulfillment: offer.fulfillment, managedIn: offer.kind === 'service' ? 'crm' : 'console', ...(offer.description ? { descriptions: clone(offer.description) } : {}), ...(offer.capabilities ? { capabilities: clone(offer.capabilities) } : {}), ...(offer.department ? { department: offer.department } : {}), ...(offer.departmentName ? { departmentNames: clone(offer.departmentName) } : {}), ...(offer.icon ? { icon: offer.icon } : {}), monthlyMinor: Math.round(base.monthly * 10 ** decimals), unitMinor: Math.round(base.unit * 10 ** decimals), quantity: base.quantity, perUser: base.perUser, currency, decimals, prices: Object.fromEntries(MONTHS.map(months => [months, Object.fromEntries(BANDS.map(count => [count, priceLine(base, offer, months, count)]))])) };
     }),
   };
 }

@@ -762,6 +762,11 @@ export const api = createApi({
       invalidatesTags: ["EntryList", "Overview", "Seo", "Media", "MediaList"],
       onQueryStarted: putEntry,
     }),
+    saveManagerPage: b.mutation<Entry, EntryRef & {commands: {id: string; version: number; patches: EntryPatch[]}[]}>({
+      query: ({id, commands}) => ({url: "/admin/studio/page-draft/" + id, method: "POST", body: {commands}}),
+      invalidatesTags: ["Entry", "EntryList", "Overview", "Seo", "Media", "MediaList"],
+      onQueryStarted: putEntry,
+    }),
     createEntry: b.mutation<
       Entry,
       {
@@ -1123,6 +1128,7 @@ export const {
   useEntriesQuery,
   useEntryQuery,
   useSaveEntryMutation,
+  useSaveManagerPageMutation,
   useTransitionEntryMutation,
   useCreateEntryMutation,
   useSetEntryVisibilityMutation,

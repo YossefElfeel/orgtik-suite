@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowRight, Lock, LockOpen, Plus, Timer } from "@phosphor-icons/react";
 import { Badge, Button, ErrorState, LoadingState, PageHeader, STATUS_MATRIX, StatusBadge, useFormatter, type StatusEntity } from "@orgtik/ui";
@@ -12,7 +12,6 @@ import { NewInvoiceDialog } from "@/components/billing/NewInvoiceDialog";
 import { ExtendTrialDialog } from "./ExtendTrialDialog";
 import { DateText, Facts, Money, Nothing, Section, useRegionNames, useToolName } from "./shared";
 import { ViewAsNotice, WorkspaceActions } from "./WorkspaceActions";
-import { LineEditor } from '@/components/console/LineEditor';
 
 // The status matrix names some states differently from the API: map them, else show a plain badge.
 const ALIAS: Record<string, string> = { waiting_for_you: "awaiting_reply", in_review: "customer_review" };
@@ -115,7 +114,6 @@ export function WorkspaceDetail({ id }: { id: string }) {
   const editable = can("workspaces:edit");
   const billing = can("billing:view");
   const { data: ws, isLoading, error, refetch } = useWorkspaceQuery(id);
-  useEffect(() => { const update = () => { void refetch(); }; window.addEventListener('orgtik-console-change', update); return () => window.removeEventListener('orgtik-console-change', update); }, [refetch]);
   const [extending, setExtending] = useState<Line | null>(null);
   const [viewAs, setViewAs] = useState<ViewAsResult | null>(null);
   const [invoicing, setInvoicing] = useState(false);
@@ -419,7 +417,6 @@ export function WorkspaceDetail({ id }: { id: string }) {
         </div>
       </div>
       {invoicing ? <NewInvoiceDialog workspaceId={ws.id} onClose={() => setInvoicing(false)} /> : null}
-      {can('billing:edit') && <LineEditor workspaceId={ws.id} />}
       {extending ? <ExtendTrialDialog workspaceId={ws.id} line={extending} onClose={() => setExtending(null)} /> : null}
     </div>
   );

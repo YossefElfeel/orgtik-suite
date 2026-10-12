@@ -243,7 +243,7 @@ export function RankedBars({
             </span>
             <span className={"h-[10px] min-w-0 flex-1 "+("ch-background-5d6e34"+' '+"ch-border-radius-189003")} >
               <span
-                className={("block h-full w-full origin-left rtl:origin-right "+((quiet?"ch-background-e9b63d":"ch-background-82a08c")+' '+"ch-border-radius-189003"+' '+"ch-transition-a79bda"))+" "+(geometryClass({transform:`scaleX(${r.value / max})`}))}
+                className={("block h-full "+((quiet?"ch-background-e9b63d":"ch-background-82a08c")+' '+"ch-border-radius-189003"+' '+"ch-transition-a79bda"))+" "+(geometryClass({width:`${(r.value / max) * 100}%`}))}
 
               />
             </span>

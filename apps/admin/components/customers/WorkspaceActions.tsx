@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowSquareOut, DotsThreeVertical, Eye, NotePencil, Pause, Play, XCircle } from "@phosphor-icons/react";
 import { Button, ConfirmDialog, IconButton, Menu, MenuContent, MenuItem, MenuTrigger, toast } from "@orgtik/ui";
 import { useWorkspaceActionMutation, type ViewAsResult, type WorkspaceDetail } from "@/store/customers";
 import { useErrorText } from "./shared";
-import { openWorkspaceViewAs } from '@/lib/console-view-as';
 
 type Asking = "suspend" | "reactivate" | "cancel" | "view_as" | "note" | null;
 
@@ -16,6 +15,7 @@ type Asking = "suspend" | "reactivate" | "cancel" | "view_as" | "note" | null;
  */
 export function WorkspaceActions({ ws, onViewAs }: { ws: WorkspaceDetail; onViewAs: (r: ViewAsResult) => void }) {
   const t = useTranslations("Customers");
+  const locale = useLocale();
   const errorText = useErrorText();
   const [act] = useWorkspaceActionMutation();
   const [asking, setAsking] = useState<Asking>(null);
@@ -118,10 +118,19 @@ export function WorkspaceActions({ ws, onViewAs }: { ws: WorkspaceDetail; onView
         reason={{ label: t("reason"), required: true }}
         confirmLabel={t("actions.viewAsConfirm")}
         onConfirm={({ reason }) =>
-          openWorkspaceViewAs(ws.id, reason || '')
+          act({ id: ws.id, action: "view_as", reason })
+            .unwrap()
             .then((r) => {
-              if (r.url) window.open(r.url, '_blank', 'noopener,noreferrer');
-              onViewAs(r);
+              const original = r as ViewAsResult;
+              const presentation = process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1";
+              const result = presentation && original.readOnly ? { ...original, url: `${window.location.origin}/${locale}/presentation/view-as?workspace=${encodeURIComponent(original.workspaceId || ws.id)}&readOnly=true` } : original;
+              if (result.url) {
+                // The existing staff session belongs to this tab. The prototype keeps it;
+                // the customer's identity and the production View as flow stay unchanged.
+                if (presentation && result.readOnly) window.location.assign(result.url);
+                else window.open(result.url, "_blank", "noopener,noreferrer");
+              }
+              onViewAs(result);
             })
             .catch((e) => {
               toast.error(errorText(e));

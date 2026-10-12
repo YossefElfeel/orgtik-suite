@@ -33,24 +33,29 @@
     "T6": "Polish: copy, accessibility, responsive, performance"
   },
   "v3": {
-    "reconciled_at": "2026-10-11",
-    "source_revision": null,
-    "evidence_registry": "program/audits/v3-p5/criterion-dispositions.csv",
+    "reconciled_at": "2026-10-09",
+    "source_revision": "c7c7e1fe6771fe487521c03d48bec5608b0747c1",
     "historical_packages": 129,
     "new_packages": 16,
     "total_packages": 145,
     "byStatus": {
-      "retained_contract_rechecked": 32,
-      "accepted_v3_mock": 107,
-      "superseded_owner_or_policy": 11,
-      "bounded_v3_with_external_deferral": 81,
-      "deferred_tier_c": 17,
-      "historical_scope_not_adopted": 159
+      "implemented_local_acceptance_bounded": 7,
+      "implemented_mock_bounded": 8,
+      "resolved_decision_delivery_move_pending": 1,
+      "criterion_recheck_pending": 381,
+      "deferred_website_design_scope": 1,
+      "implemented_guard_ui_gap": 1,
+      "implemented_catalog_expansion_pending": 1,
+      "presentation_only_migration_pending": 5,
+      "implemented_reference_scope_broader_pending": 1,
+      "implemented_persistence_live_delivery_deferred": 1
     },
     "byMappingBasis": {
-      "criterion_reviewed_v3": 407
+      "reviewed_finding": 26,
+      "topic_candidate_not_full_coverage": 196,
+      "reconciliation_only": 185
     },
-    "current_gate": "P5_accepted_ready_for_final_merge_deploy",
-    "criterion_note": "Every P5 finding retains its individual current behavior, evidence checks and remaining boundary. A reviewed finding is not blanket full production acceptance."
+    "current_gate": "P3_integration_and_P4_tool_cycles",
+    "criterion_note": "Topic links are candidates; original criterion acceptance is not inferred from package coverage."
   }
 }

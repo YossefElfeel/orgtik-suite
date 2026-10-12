@@ -1,51 +1,45 @@
-# OrgTik v3 stakeholder and developer guide
+# OrgTik stakeholder prototype
 
-The v3 prototype places the approved Tier A/B features in ordinary signed workspace screens. Account/Home adapts to the actual tool set; shared search, notifications, activity, preferences and connections read current owner-domain records. The original 72 commitment IDs remain in [the feature map](prototype-feature-map.md). [The twenty journeys](prototype-journeys.md) describe native paths and their evidence limits.
+Nine tools and all72 approved UI commitments are mapped under [D-073](decisions/D-073.md). The fifteen walkthroughs now have local presentation coverage with explicit limits. This is a senior UI/UX reference for the PM and developers; full production release acceptance remains pending. [A36](phase-f/amendment-A36.md) records the hosted stakeholder rollout and its scoped verification. Payments, mail, AI, analytics, signatures and calls are labelled simulations.
 
-This is a frontend and persisted mock prototype under D-073/D-075. Payments, email/push, AI, analytics, social delivery, signatures, calls and regulatory checks are labelled simulations. Arbitrary uploads, production providers and public Arabic website launch remain deferred. The user's October 11 instruction authorizes the remaining merge and Vercel deployment; final integration CI and hosted smoke identify the released revision separately from tool-cycle local acceptance.
+Validated merge baseline: `0337413` through PR38 (2026-10-08). Final implementation PR38 passed CI and merged. The maintained amendments A33/A34 record this boundary; this guide does not imply all changes are already on main.
 
-## Run the ordinary prototype
+## Run and present
 
-Use an isolated checkout of the final integrated branch. `pnpm demo --list` shows the addresses; `pnpm demo <tools>` starts SOS and selected ordinary tools with a private memory store and frozen `2026-10-07T09:00:00Z` business clock. `ORGTIK_DEMO_PORT_OFFSET` selects unused ports. Sign in through SOS with the existing synthetic accounts documented in `mock/README.md`; this guide does not reproduce credentials.
+The runnable checkout for this delivery is `C:/Users/yosse/Projects/New sass/orgtik-suite-r2-whiteboards`. The separately maintained `orgtik-suite-v2/program` documents mirror this handoff; its older runtime WIP is preserved.
 
-The launcher stages its own source and dependencies. Warm the target auth page before minting its short-lived one-use handoff. The native handoff exchanges the code for a current signed person/workspace/tool context. A purchase, trial or assigned seat opens the actual tool; a new customer receives an empty workspace.
+From the runnable checkout, run `pnpm demo --list` for addresses, then `pnpm demo <tools>` for an isolated memory-backed, fixed-clock dataset. SOS starts with the selected tools; use existing synthetic accounts from `mock/README.md` in a private browser window. No passwords are reproduced here. Existing configured resources and user previews are preserved. The authorized hosted prototype is available at [Suite](https://orgtik-suite-sos.vercel.app/presentation), [Website](https://orgtik-suite-website.vercel.app) and [CMS](https://orgtik-suite-wm.vercel.app/en/content/pages/pg_partners). Use existing synthetic accounts and the Demo Panel; automatic deployment remains paused.
 
-The [Suite](https://orgtik-suite-sos.vercel.app), [Website](https://orgtik-suite-website.vercel.app) and [internal Website Manager](https://orgtik-suite-wm.vercel.app) use existing hosted resources. Do not reset hosted data or advance its clock to reproduce a local scenario. Deployment health/login checks do not establish production business/provider acceptance.
+The shared Demo Panel switches presentation persona/workspace, six states, language, theme, digits and timezone. Persona changes are visual simulations, not account impersonation. Reset scene resets selectors; tool reset restores only its presentation records. Never reset existing shared/production business data or advance its clock for a demonstration.
 
-Historical `/presentation` pages are isolated references, absent from ordinary navigation. Demo Panel/persona/state selectors cannot authorize native records or permissions. Acceptance uses genuine source rows, actual readonly actors and controlled transport failures in owned local browser contexts.
+## Screen map
 
-## Ordinary screen map
+| Tool | Presentation and retained screens | Evidence/limits |
+|---|---|---|
+| Tasks | `/[locale]/presentation`; retained Dashboard/My Tasks/project views | Filters incl. priority/due, edit/repeat/labels, three presets/save template, CSV/bulk status/priority, Files/search/notices; Tasks depth22/eight captures + template/channel matrix and connected coverage. Task presentation records are separate from actual private Dashboard data. |
+| Files | `/[locale]/presentation`; retained workspace Files/whiteboards | Packaged assets, versions/conflicts/access/quota/comments/bulk/drag/filter; versioned Tasks/Chats picks. Arbitrary uploads deferred. |
+| Chats | `/presentation`; retained chat/office/whiteboard | History, membership/read-by, formatting, saved/reminders/custom schedule, versioned Files and Tasks; call/media and external delivery simulated. |
+| HR | `/[locale]/presentation`; `/employees`, `/calendar`, `/time-off`, payroll/offboarding | Current-directory employee reference → three mock Tasks; retained hire/accept/access/leave/calendar J7 nine; ownership/equipment J15 six with custody fixture limit. Bank/mail samples simulated. |
+| Sales | `/[locale]/presentation`; retained CRM details | Connected intake/follow-ups/pipeline/routing/quotes/reports; company/field detail UI accepted with shared feature-detail evidence. Real provisioning/signatures deferred. |
+| Marketing | `/[locale]/presentation` | Campaign consent/results, WM/Sales attribution, rich RTL email, inbox/queue, journey/brand-kit source. Focused journey/brand-kit UI acceptance passes shared feature-detail evidence. |
+| WM | `/[locale]/presentation`; `/content/pages/pg_partners` | Actual mock CMS publish/reload/fallback retained; studio bundles/media/translation/form outcomes simulated. Internal OrgTik tool; purchase creates a managed-service request. |
+| ADM | `/[locale]/presentation`; catalog/pricing/workspaces/reports/invoices/service requests | Dunning/grace/currency/credit/paylink/tax/support/export mock scenes; per-entity series14; customer preview14 preserves staff session. No live financial/regulatory integration. |
+| Account | `/presentation`; `/team`, `/mailbox`, `/billing`, `/support`, `/services/requests` | Setup/limits/export/UI verification policy, sample PDF/contacts; account61 package proof; retained invite/ownership/support/service UI. |
 
-| Tool | Main ordinary surfaces | Native ownership and connections |
-| --- | --- | --- |
-| Tasks | Dashboard, My tasks, project list/board/timeline, inspector, tool Admin | Tasks/templates/labels/rules/time; pinned Files and current Chats/HR connections. |
-| Account | Home, tools, team, usage, account settings, billing, product help | Canonical identity/membership/capacity, person preferences, guarded actions and owner-domain projections. |
-| HR | Employees, self-service/directory/My team, attendance, leave, payroll, recruiting, reports, Admin | Employee-owned records/current directory; actual onboarding Tasks, guarded Files and hire/departure custody. |
-| CRM | Contacts/companies/projects/pipelines, activity/reports, service catalog/delivery, Admin | Canonical contact/consent; real follow-up Tasks, immutable quote samples, actual won/customer workspace and paid-service receipt. |
-| Chats | `/hq/office`, conversations, meetings, whiteboard, settings/setup/Admin | Native history/membership, original-operation recovery, actual Tasks, pinned Files/vector boards and bounded anonymous meeting lobby. |
-| Files | Library/folders/detail, shared/starred/recent/trash, protected share/request entry, Admin | Immutable packaged bytes/versions, per-person ACL, comments/quota and protected visitor sample submission. |
-| Marketing | Current project dashboard, campaigns/email, social inbox/queue, journeys, brand/writing, Admin | Fresh canonical CRM references/consent, native leads/results/journey Tasks, explicit local send/analytics/AI samples. |
-| OrgTik Console | Billing, software catalog/plans/pricing, workspaces, reports/tickets/staff, releases/setup/ecosystem | Platform staff, software and native financial reducers; actual customer pay-link/invitation and readonly View as handoffs. |
-| Website Manager | Content/editor/review, media/forms/analytics/releases, staff settings/catalog mirrors | Internal OrgTik CMS. Guarded CRM/Console owner links; mirrors cannot edit their owners' masters. |
+## Demonstration routes
 
-Customer service requests/delivery belong to CRM under D-079. Account exposes the actual customer projection. A paid managed-service order retains its original period/receipt and does not require a second quote. Retired Console service routes explain ownership and link to CRM.
+Start with [the fifteen scripts and coverage boundaries](prototype-journeys.md), then use [the exact72-feature map](prototype-feature-map.md) for developer detail. J1 verifies an actual mock paid order before account linking, matching CHF16 receipt/invoice and purchased empty Tasks Dashboard; the first task remains a client presentation reference. J2 demonstrates actual invitation acceptance/tool entry. J7 uses the newly hired directory person for onboarding and approved leave. J10 completes the retained support and managed-service round trip.
 
-## Connections and authority
+J3 lifecycle and J12 customer view are expressly simulated UI flows. J11 reuses accepted unchanged CMS source rather than claiming a fresh full-suite run. J15 covers successor ownership, employment and equipment/final-pay; its empty-owned-record fixture does not prove task/file custody or other-workspace protection. Shared reports covering several journeys are not additive assertion totals or independent end-to-end runs.
 
-Cross-tool controls use current connection state: ready, tool absent, access needed or connector disabled. An absent tool offers its actual trial; an unadmitted member submits a pending access request; a disabled connector links to Administration → Connections. A trial or approved request refreshes the signed grant before source writes.
+## Developer handoff
 
-Customer tool Admin supplies overview, members/seats, roles, settings, connections, import/export, audit and billing, with native tool settings/import. Platform staff administration stays in Console. Existing authority rechecks person, effective actor, workspace, source audience and readonly ceiling, including before replaying a prior success.
+`tools/demo/connections.cjs` provides the local memory-backed bridge. The hosted `/presentation` handler stores synthetic task/lead/File-reference/search/notification records in a separate namespace in the existing configured store. `demoRequest` returns `{simulated:true,data}` and carries the chosen presentation scene. Existing backend accounts, invoices, identity, sessions and CMS publishing remain separate and frozen. HR directory picking reads the existing current-workspace API and copies identity/email/currency into a local onboarding reference; it does not update HR salary or membership.
 
-CRM owns contact/company masters and service prices, zones/countries, 1/3/6/12-month policy, quantities, bundles/publication. Console owns software lifecycle/prices. Internal Website Manager consumes readonly mirrors. The bounded website purchase-catalog overlay reads published native data; website markup/CSS/design stay frozen and require strict before/after parity.
+The feature map specifies each record/action shape and future backend requirement. Existing handoff/refresh/workspace APIs are reused; frontend cold-entry warm-ups avoid issuing short-lived codes before target compilation. The mock transport does not establish production persistence, authorization, delivery, concurrency or regulatory guarantees.
 
-## Review and handoff
+## Deferred acceptance
 
-Cycle READMEs/manifests link ordinary functional checks, native six states, source hashes, five catalogs and EN/AR × light/dark ×390/768/1024/1440 captures. Diagnostics, failed harness attempts and superseded captures are excluded. Shared reports are not independent end-to-end assertion totals.
+Focused Sales company and Marketing journey/brand-kit golden UI evidence passes 80 scoped checks and23 captures, including functional paths, locale/theme/width and digit-format checks; its real backend/provider behavior remains pending. Final code integration/CI and independent closure review passed in PR38; [A34](phase-f/amendment-A34.md) records local UI/mock delivery closure. Tasks priority/due filtering, editing and bulk status/priority now have22 scoped checks/eight captures. Hosted acceptance, live media/payment/mail/AI/analytics/social/signature providers, arbitrary binary uploads, regulatory submissions and public Arabic website launch remain deferred. Security/backend hardening is outside this prototype task.
 
-The [P5 evidence policy](audits/v3-p5/evidence-policy.md) and criterion register preserve all407 original IDs/details. Individual dispositions identify accepted v3 mock behavior, external deferral, retained frozen contract, superseded owner/policy or functionality outside the adopted scope. Reviewed finding count does not mean new-feature or production-acceptance count.
-
-D-071 immutable Files and D-072 board/version/CAS/custody remain mandatory. D-073 financial bytes stay unchanged; narrow actual-screen adapters and the documented lossless checkpoint codec preserve existing money/session/journal rules.
-
-Ordinary UI uses current signed owner APIs. Shared useSuite/SuiteFrame collects visible native source links and current person preferences; owner adapters validate actual writes and relations. Synthetic demoRequest bridges remain isolated historical walkthroughs.
-
-Future production work can follow these source/receipt/access contracts. External delivery/media/storage/conversion, production scheduling, security/regulatory hardening and native-language editorial review are separate. Optional Figma-from-code is outside required P5 unless requested.
+Evidence: [final core/tools/catalog/entity](audits/prototype-final/README.md), [business/public/lifecycle](audits/prototype-business-closure/README.md), [shared Account/customer preview](audits/prototype-shared-account/README.md). Original benchmark ratings and spec statuses remain historical; the new presentation columns/overlays track UI coverage separately.

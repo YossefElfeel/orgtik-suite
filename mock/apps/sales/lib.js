@@ -132,7 +132,7 @@ const pdfSafe = (s) =>
     .replace(/\)/g, "\\)");
 
 // Minimal multi-page PDF (Helvetica). `lines` entries are strings or { text, bold, size, gap }.
-function makePdf(title, lines, { subtitle, footerBrand = 'OrgTik Sales' } = {}) {
+function makePdf(title, lines, { subtitle } = {}) {
   const pages = [];
   let items = [];
   let y = 0;
@@ -175,7 +175,7 @@ function makePdf(title, lines, { subtitle, footerBrand = 'OrgTik Sales' } = {}) 
       if (it.line) ops.push(`0.8 0.8 0.85 RG 1 w 50 ${it.y} m 545 ${it.y} l S`);
       else ops.push(`BT /${it.f} ${it.s} Tf 0.12 0.12 0.2 rg ${it.x} ${it.y} Td (${pdfSafe(it.t)}) Tj ET`);
     }
-    ops.push(`BT /F1 8 Tf 0.5 0.5 0.55 rg 50 30 Td (${pdfSafe(`${footerBrand} - local mock document - page ${idx + 1} of ${pages.length}`)}) Tj ET`);
+    ops.push(`BT /F1 8 Tf 0.5 0.5 0.55 rg 50 30 Td (${pdfSafe(`OrgTik Sales - local mock document - page ${idx + 1} of ${pages.length}`)}) Tj ET`);
     const stream = ops.join("\n");
     const contentId = add(`<< /Length ${Buffer.byteLength(stream, "latin1")} >>\nstream\n${stream}\nendstream`);
     const pageId = add(`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 595 ${pageHeight}] /Resources << /Font << /F1 ${f1} 0 R /F2 ${f2} 0 R >> >> /Contents ${contentId} 0 R >>`);

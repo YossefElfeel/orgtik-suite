@@ -40,14 +40,14 @@ function makeLibrary({ seed, store, now, uploads, demo = false }) {
   // ---- media ----
   // Every place an entry names the file: { entry, type, name, field, ownAlt } (live and draft).
   function usesOf(m) {
-    const files = [m.file, ...(m.retainedFiles || [])];
+    const base = m.file.split("/").pop();
     const uses = [];
     for (const e of store.entries.values()) {
       const seen = new Set();
       for (const c of [e.live, e.draft].filter(Boolean)) {
         (function walk(v, at, parent) {
           if (typeof v === "string") {
-            if (files.some(file => v === file || v === file.split("/").pop() || v.endsWith(`/assets/${file}`) || v.endsWith(`/media/${file}`))) {
+            if (v === m.file || v === base || v.endsWith(`/assets/${m.file}`) || v.endsWith(`/media/${m.file}`)) {
               if (!seen.has(at)) {
                 seen.add(at);
                 uses.push({ entry: e.id, type: e.type, name: plain(c.locales.en?.name ?? c.name ?? e.id), field: at.replace(/^\./, ""), ownAlt: Boolean(parent?.alt?.en?.trim()) });

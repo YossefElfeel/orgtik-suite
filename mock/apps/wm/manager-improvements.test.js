@@ -534,3 +534,23 @@ test("media uploads retain descriptions, tags, alt text and focal points through
   assert.deepEqual(detail.data.focal, { x: 25, y: 75 });
   assert.equal((await fetch(f.base + detail.data.url)).status, 200);
 });
+
+test("newer manager page draft saves survive rollback with permission, atomicity and published content intact", async (t) => {
+  const f = await fixture(t);
+  const before = f.hooks.exportState();
+  const original = before.data.content.entries.find(([id]) => id === "pg_about")[1];
+  const command = {id: original.id, version: original.workflow.version, patches: [{locale: "en", fields: {hero: {...original.live.locales.en.hero, button1Href: "/contact"}}}]};
+  f.as("wm_viewer");
+  assert.equal((await f.call("/admin/studio/page-draft/pg_about", "POST", {commands: [command]})).status, 403);
+  assert.deepEqual(f.hooks.exportState(), before);
+  f.as("wm_admin");
+  const saved = await f.call("/admin/studio/page-draft/pg_about", "POST", {commands: [command]});
+  assert.equal(saved.status, 200);
+  assert.ok(saved.data.version > original.workflow.version);
+  const after = f.hooks.exportState();
+  const changed = after.data.content.entries.find(([id]) => id === "pg_about")[1];
+  assert.equal(changed.draft.locales.en.hero.button1Href, "/contact");
+  assert.deepEqual(after.data.content.entries.map(([id, entry]) => [id, entry.live]), before.data.content.entries.map(([id, entry]) => [id, entry.live]));
+  assert.equal((await f.call("/admin/studio/page-draft/pg_about", "POST", {commands: [command]})).status, 412);
+  assert.deepEqual(f.hooks.exportState(), after);
+});

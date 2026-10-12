@@ -2443,7 +2443,7 @@
       "rejected": "Rejetés",
       "tickets": "Tickets",
       "configuration": "Configuration",
-      "payroll": "Paie",
+      "payroll": "Lohn",
       "myPayslips": "Mes fiches de paie",
       "loans": "Hilfsleihen",
       "financeQueue": "File d'attente des paiements"
@@ -3050,7 +3050,7 @@
     "formHint": "Changes are saved in this workspace.",
     "saveError": "The change could not be saved. Review your entries and try again.",
     "cancel": "Cancel",
-    "save": "Enregistrer",
+    "save": "Save",
     "careers": "Careers",
     "careersIntro": "Published openings in this workspace.",
     "applicationSent": "Application submitted",
