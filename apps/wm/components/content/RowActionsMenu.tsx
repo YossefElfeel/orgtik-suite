@@ -20,7 +20,7 @@ export function RowActionsMenu({
         <MenuTrigger
           render={
             <Button
-              variant="secondary"
+              variant="ghost"
               size="sm"
               shape="control"
               aria-label={target ? `${t("actions")}: ${target}` : t("actions")}

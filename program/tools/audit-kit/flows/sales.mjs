@@ -13,7 +13,7 @@ import path from "node:path";
 import { chromium } from "playwright";
 import { AUDITS, AUDIT_TZ, PASSWORD, WORKSPACE, redact, webUrl, apiUrl } from "../lib/suite.mjs";
 import { mock } from "../lib/mock.mjs";
-import { signIn, tokenFor, createAppHandoff } from "../lib/session.mjs";
+import { signIn, tokenFor } from "../lib/session.mjs";
 import { settle, watch } from "../lib/checks.mjs";
 
 const arg = (name, fallback) => {
@@ -51,7 +51,7 @@ const OMAR = "omar.farouk@orgtik.test"; // salesman of Nile Foods (Nour)
 const stamp = Date.now().toString(36).slice(-4);
 
 const call = async (email, method, url, body) => {
-  const token = await tokenFor(email, "sales");
+  const token = await tokenFor(email);
   const r = await fetch(API + url, { method, headers: { Authorization: `Bearer ${token}`, ...(body ? { "Content-Type": "application/json" } : {}) }, body: body ? JSON.stringify(body) : undefined });
   return r.json().catch(() => ({}));
 };
@@ -127,7 +127,7 @@ try {
     const seen = [];
     page.on("framenavigated", (f) => f === page.mainFrame() && seen.push(f.url()));
     await step("Arrive with a one-time code", async () => {
-      const token = await tokenFor(MONA, "sales");
+      const token = await tokenFor(MONA);
       const code = (await (await fetch(`${apiUrl("sos")}/api/auth/handoff`, { method: "POST", headers: { Authorization: `Bearer ${token}` } })).json()).data.code;
       await page.goto(`${APP}/${LOCALE}/auth?code=${code}`, { waitUntil: "load", timeout: 120000 });
       await page.waitForURL((u) => !u.pathname.endsWith("/auth"), { timeout: 60000 });
@@ -139,7 +139,7 @@ try {
     });
     await step("Back doesn't reopen the hand-off", () => page.goBack().catch(() => {}), async () => !/code=/.test(page.url()) || `back went to ${redact(page.url())}`);
     await step("A forged redirect is ignored", async () => {
-      const token = await tokenFor(MONA, "sales");
+      const token = await tokenFor(MONA);
       const code = (await (await fetch(`${apiUrl("sos")}/api/auth/handoff`, { method: "POST", headers: { Authorization: `Bearer ${token}` } })).json()).data.code;
       await page.goto(`${APP}/${LOCALE}/auth?code=${code}&redirect=${encodeURIComponent("https://example.org/")}`, { waitUntil: "load", timeout: 120000 });
       await page.waitForURL((u) => !u.pathname.endsWith("/auth"), { timeout: 60000 });
@@ -388,10 +388,9 @@ try {
   await walk("S7-view-as", "View as, read-only", null, async ({ page, step }) => {
     const omarId = (await (await fetch(`${apiUrl("sos")}/api/auth/me`, { headers: { Authorization: `Bearer ${await tokenFor(OMAR)}` } })).json()).data?.user?.id;
     await step("Start View as from SOS and open Sales", async () => {
-      const r = await (await fetch(`${apiUrl("sos")}/api/auth/login-as/${omarId}`, { method: "POST", headers: { Authorization: `Bearer ${await tokenFor(MONA, "admin")}`, "content-type": "application/json" }, body: JSON.stringify({ workspaceId: "ws_orgtik" }) })).json();
+      const r = await (await fetch(`${apiUrl("sos")}/api/auth/login-as/${omarId}`, { method: "POST", headers: { Authorization: `Bearer ${await tokenFor(MONA)}` } })).json();
       const token = r.data?.tokens?.accessToken ?? r.data?.accessToken;
-      const code = await createAppHandoff(apiUrl("sos") + "/api", "sales", token);
-      await page.goto(`${APP}/${LOCALE}/auth?code=${encodeURIComponent(code)}`, { waitUntil: "load", timeout: 120000 });
+      await page.goto(`${APP}/${LOCALE}/auth?token=${encodeURIComponent(token)}`, { waitUntil: "load", timeout: 120000 });
       await page.waitForURL((u) => !u.pathname.endsWith("/auth"), { timeout: 60000 });
       await settle(page);
     }, async () => {

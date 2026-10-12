@@ -58,7 +58,7 @@ async function run(title, who, fn) {
 }
 
 const api = async (who, p) => {
-  const res = await fetch(API + p, { headers: { authorization: `Bearer ${await tokenFor(EMAIL[who], "admin")}` } });
+  const res = await fetch(API + p, { headers: { authorization: `Bearer ${await tokenFor(EMAIL[who])}` } });
   return (await res.json()).data;
 };
 const open = async (page, l, route) => {

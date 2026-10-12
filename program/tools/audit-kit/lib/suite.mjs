@@ -21,16 +21,16 @@ export const SOS_API = `${config.apiUrl("sos")}/api`;
 // How the launcher opens each app: SOS takes the token at /auth, the rest at /{locale}/auth.
 // `locale` says whether the app's own routes carry the /en prefix.
 export const APPS = {
-  sos: { auth: "/auth?code=", locale: false },
-  tasks: { auth: "/en/auth?code=", locale: true },
-  files: { auth: "/en/auth?code=", locale: true },
-  sales: { auth: "/en/auth?code=", locale: true },
-  hr: { auth: "/en/auth?code=", locale: true },
-  marketing: { auth: "/en/auth?code=", locale: true },
-  content: { auth: "/en/auth?code=", locale: true },
-  chats: { auth: "/en/auth?code=", locale: false },
-  wm: { auth: "/en/auth?code=", locale: true }, // Website Manager (D-034)
-  admin: { auth: "/en/auth?code=", locale: true }, // OrgTik Admin (Phase E, D-011)
+  sos: { auth: "/auth?token=", locale: false },
+  tasks: { auth: "/en/auth?token=", locale: true },
+  files: { auth: "/en/auth?token=", locale: true },
+  sales: { auth: "/en/auth?token=", locale: true },
+  hr: { auth: "/en/auth?token=", locale: true },
+  marketing: { auth: "/en/auth?token=", locale: true },
+  content: { auth: "/en/auth?token=", locale: true },
+  chats: { auth: "/en/auth?token=", locale: false },
+  wm: { auth: "/en/auth?token=", locale: true }, // Website Manager (D-034)
+  admin: { auth: "/en/auth?token=", locale: true }, // OrgTik Admin (Phase E, D-011)
 };
 
 // The frozen instant audits run at, unless told otherwise (09:00 in Cairo, the test users' zone).
@@ -75,7 +75,7 @@ export const freeMB = () => {
 export const MIN_FREE_MB = 400;
 
 // Audit output is committed, so secrets in URLs are masked before anything is written.
-export const redact = (url) => String(url || "").replace(/([?&](?:access_?token|token|code|secret|password)=)[^&#]+/gi, "$1[redacted]");
+export const redact = (url) => String(url || "").replace(/([?&](?:access_?token|token|secret|password)=)[^&#]+/gi, "$1[redacted]");
 
 // The kit's CSVs: UTF-8 with a BOM (Excel), every field quoted, "" for a quote inside one.
 export function readCsv(file) {
