@@ -5,6 +5,10 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
+      diagnose_mock:
+        description: Read-only production backend restoration diagnostics
+        type: boolean
+        default: false
       base_revision:
         description: Base revision for a manually verified work package
         type: string
@@ -17,7 +21,33 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  diagnose-mock:
+    if: github.event_name == 'workflow_dispatch' && inputs.diagnose_mock == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install backend diagnostic dependencies
+        working-directory: mock
+        run: npm install --ignore-scripts --package-lock=false
+      - name: Read production configuration and replay without writes
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: team_Ypx8oiLDZi3PBNi8ht8fYPsm
+          VERCEL_PROJECT_ID: prj_74P0VeIbDAIyUy8u5r6h91mwai1o
+        run: |
+          cd mock
+          npx --yes vercel@54.7.1 env pull "$RUNNER_TEMP/mock-production.env" --environment=production --yes --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+          cd ..
+          node --env-file="$RUNNER_TEMP/mock-production.env" tools/vercel/diagnose-mock.cjs
+
   checks:
+    if: inputs.diagnose_mock != true
     runs-on: ubuntu-latest
     timeout-minutes: 30
     outputs:
