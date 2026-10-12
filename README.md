@@ -41,8 +41,18 @@ changed (decision D-052, `program/plan-v2.md`).
 
 ## How the hosted prototype is wired
 
-- **Vercel** builds a project only when the project, or a workspace package it uses, changed
-  (`turbo query affected` in each `vercel.json`, written by `node tools/vercel/configure.mjs`).
+- **Automatic Vercel deployments** run through `.github/workflows/deploy.yml`; native Git
+  deployments remain disabled. `tools/vercel/affected.mjs` selects changed app folders and
+  their workspace dependents. A change in `apps/wm/` deploys only Website Manager; a change
+  in `mock/` deploys only the API, with runtime consumers checked separately. Shared UI
+  changes deploy dashboards that use `@orgtik/ui`. Program records, acceptance evidence,
+  documentation outside app folders and workflow edits do not redeploy the suite.
+  Dependency lockfile, workspace/toolchain configuration and patch changes conservatively
+  deploy all active projects. Retired Content is always excluded. Main pushes compare the
+  previous and new commit; pull requests compare from their merge base. Invalid or missing
+  revision history fails selection instead of falling back to a full rollout. The workflow
+  summary lists the selected projects. Explicit manual project and milestone scopes remain
+  available.
 - **Mock API**: `mock/api/index.js` serves each app's API under its key, e.g.
   `https://orgtik-suite-mock.vercel.app/sos/api/...`. `MOCK_PUBLIC_URL` and `SUITE_WEB_URLS`
   (JSON `{key: origin}`) tell it where everything lives. With a journal store connected (Upstash

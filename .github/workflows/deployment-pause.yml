@@ -1,4 +1,4 @@
-name: Deployment pause configuration
+name: Deployment configuration
 on:
   pull_request:
   push:
@@ -14,3 +14,5 @@ jobs:
       - name: Validate every configured Git deployment is disabled
         run: |
           node -e "const fs=require('fs');for(const dir of ['admin','chats','content','files','hr','marketing','sales','sos','tasks','wm'].map(n=>'apps/'+n).concat(['apps/website/landing-directions','mock'])){const c=JSON.parse(fs.readFileSync(dir+'/vercel.json','utf8'));if(c.git?.deploymentEnabled!==false)throw Error(dir)}"
+      - name: Verify changed-project deployment selection
+        run: node --test tools/vercel/changed-projects.test.mjs

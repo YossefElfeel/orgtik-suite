@@ -21,7 +21,7 @@ on:
         type: string
         default: ""
       preview_projects:
-        description: Preview scope (production always uses the affected graph)
+        description: Preview scope (automatic runs deploy changed projects and workspace dependents)
         type: choice
         options: [affected, milestone, verify-readiness, build-only]
         default: affected
@@ -48,12 +48,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
       - id: affected
         env:
           DEPLOY_ENV: ${{ (github.event_name == 'push' || inputs.environment == 'production') && 'production' || 'preview' }}
@@ -69,12 +63,14 @@ jobs:
           else
             node tools/vercel/affected.mjs > affected.json
           fi
+          node -e 'const p=JSON.parse(require("fs").readFileSync("affected.json"));require("fs").appendFileSync(process.env.GITHUB_STEP_SUMMARY,"Deployment scope: " + (p.map(p=>p.key).join(", ") || "no changed deployable projects") + "\n")'
           echo "verify_only=$PREVIEW_VERIFY_ONLY" >> "$GITHUB_OUTPUT"
           echo "matrix=$(node -e 'const fs=require("fs");console.log(JSON.stringify({include:JSON.parse(fs.readFileSync("affected.json"))}))')" >> "$GITHUB_OUTPUT"
           echo "count=$(node -e 'console.log(JSON.parse(require("fs").readFileSync("affected.json")).length)')" >> "$GITHUB_OUTPUT"
 
   production-validation:
-    if: github.event_name == 'push' || inputs.environment == 'production'
+    needs: affected
+    if: needs.affected.outputs.count != '0' && (github.event_name == 'push' || inputs.environment == 'production')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -100,7 +96,7 @@ jobs:
           node tools/vercel/configure.mjs --check
           node program/phase-e/openapi.mjs --check
           node tools/ci/secret-scan.mjs
-          node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/preview-controls.test.mjs
+          node --test tools/vercel/changed-projects.test.mjs tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/preview-controls.test.mjs
 
   deploy:
     name: ${{ inputs.preview_projects == 'build-only' && 'Build' || 'Deploy' }} ${{ matrix.key }}
