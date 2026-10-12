@@ -38,7 +38,11 @@ function fakeRedis() {
     const [script, count, ...rest] = params;
     const keys = rest.slice(0, Number(count)), argv = rest.slice(Number(count));
     const [metaKey, logKey, operationsKey] = keys;
-    if (script.includes("orgtik-journal-snapshot-v1")) return [values.get(metaKey) || "", list(logKey).length, list(logKey).slice(Number(argv[0]))];
+    if (script.includes("orgtik-journal-snapshot-v1")) return [values.get(metaKey) || "", list(logKey).length, list(logKey).slice(Number(argv[0]), Number(argv[1]) + 1)];
+    if (script.includes("orgtik-journal-snapshot-page-v1")) {
+      if ((values.get(metaKey) || '') !== argv[0] || list(logKey).length < Number(argv[1])) return [0, []];
+      return [1, list(logKey).slice(Number(argv[2]), Math.min(Number(argv[3]) + 1, Number(argv[1])))];
+    }
     if (script.includes("orgtik-journal-initialize-v1")) {
       if (values.has(metaKey)) return values.get(metaKey);
       if (list(logKey).length) return "";
@@ -228,6 +232,80 @@ test("Redis lost-response retries recover one durable receipt, while pre-commit 
   assert.deepEqual(retry.result, operation().result);
   backend.malformed = true;
   await assert.rejects(a.commit(entry(), expected(initial, operation())), { status: 503 });
+});
+
+test('Redis cold-start snapshots larger than a transport response limit remain complete and bounded', async () => {
+  const backend = fakeRedis(), rows = Array.from({ length: 55 }, (_, index) => JSON.stringify({ index, checkpoint: 'x'.repeat(240000) }));
+  const rawFetch = backend.fetch;
+  let largest = 0;
+  backend.fetch = async (...args) => {
+    const response = await rawFetch(...args), result = await response.json();
+    const bytes = Buffer.byteLength(JSON.stringify(result)); largest = Math.max(largest, bytes);
+    if (bytes > 10 * 1024 * 1024) return { ok: false, status: 413 };
+    return { ok: true, json: async () => result };
+  };
+  const store = redisStore('https://fixture.invalid', 'fixture-only', 'fixture:paged', { fetch: backend.fetch });
+  await store.initialize(meta('epoch-a'));
+  for (const row of rows) await store.push(JSON.parse(row));
+  const snapshot = await store.snapshot();
+  assert.equal(snapshot.revision, 55);
+  assert.deepEqual(snapshot.entries.map(JSON.parse), rows.map(JSON.parse));
+  assert.ok(largest < 4 * 1024 * 1024, 'Every response stays below the provider limit');
+  assert.deepEqual((await store.poll(50)).entries.map(JSON.parse), rows.slice(50).map(JSON.parse));
+  assert.deepEqual((await store.snapshot(55)).entries, []);
+});
+
+test('Redis paged snapshots pin append-only revisions and restart cleanly after an epoch reset', async () => {
+  const backend = fakeRedis(), rawFetch = backend.fetch;
+  const store = redisStore('https://fixture.invalid', 'fixture-only', 'fixture:paged-race', { fetch: (...args) => backend.fetch(...args) });
+  await store.initialize(meta('epoch-a'));
+  for (let index = 0; index < 20; index++) await store.push({ epoch: 'epoch-a', index });
+  let append = true;
+  backend.fetch = async (...args) => {
+    const response = await rawFetch(...args), command = JSON.parse(args[1].body)[0];
+    if (append && command[1]?.includes('orgtik-journal-snapshot-v1')) {
+      append = false; await store.push({ epoch: 'epoch-a', index: 20 });
+    }
+    return response;
+  };
+  const pinned = await store.snapshot();
+  assert.equal(pinned.revision, 20);
+  assert.deepEqual(pinned.entries.map(row => JSON.parse(row).index), Array.from({ length: 20 }, (_, index) => index));
+  let reset = true;
+  backend.fetch = async (...args) => {
+    const response = await rawFetch(...args), command = JSON.parse(args[1].body)[0];
+    if (reset && command[1]?.includes('orgtik-journal-snapshot-v1')) {
+      reset = false;
+      await store.reset(meta('epoch-b'), { expectedEpoch: 'epoch-a', expectedRevision: 21 });
+      for (let index = 0; index < 12; index++) await store.push({ epoch: 'epoch-b', index });
+    }
+    return response;
+  };
+  const fresh = await store.snapshot();
+  assert.equal(fresh.meta.epoch, 'epoch-b'); assert.equal(fresh.revision, 12);
+  assert.ok(fresh.entries.every(row => JSON.parse(row).epoch === 'epoch-b'));
+});
+
+test('Redis paged snapshots reject incomplete pages and repeated resets without disclosing provider replies', async () => {
+  const backend = fakeRedis(), rawFetch = backend.fetch;
+  const store = redisStore('https://fixture.invalid', 'fixture-only', 'fixture:paged-failure', { fetch: (...args) => backend.fetch(...args) });
+  await store.initialize(meta('epoch-a'));
+  for (let index = 0; index < 12; index++) await store.push({ index });
+  backend.fetch = async (...args) => {
+    const response = await rawFetch(...args), command = JSON.parse(args[1].body)[0];
+    return command[1]?.includes('orgtik-journal-snapshot-page-v1') ? { ok: true, json: async () => [{ result: [1, []] }] } : response;
+  };
+  await assert.rejects(store.snapshot(), { status: 503 });
+  backend.fetch = async (...args) => {
+    const response = await rawFetch(...args), command = JSON.parse(args[1].body)[0];
+    return command[1]?.includes('orgtik-journal-snapshot-page-v1') ? { ok: true, json: async () => [{ result: [0, []] }] } : response;
+  };
+  await assert.rejects(store.snapshot(), { status: 503 });
+  backend.fetch = async () => ({ ok: true, json: async () => [{ error: 'NOPERM private fixture credential' }] });
+  await assert.rejects(store.snapshot(), error => error.status === 503 && error.storageFailure === 'permissions' && !JSON.stringify(error).includes('private fixture credential') && !error.message.includes('private fixture credential'));
+  backend.fetch = async () => ({ ok: false, status: 413 });
+  await assert.rejects(store.snapshot(), { status: 503, storageFailure: 'http_413' });
+  await assert.rejects(store.snapshot(-1), /non-negative integer/);
 });
 
 test("a full journal rejects new commits and missing metadata never erases history", async () => {
