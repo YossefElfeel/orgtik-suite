@@ -43,6 +43,8 @@ jobs:
         run: |
           cd mock
           npx --yes vercel@54.7.1 env pull "$RUNNER_TEMP/mock-production.env" --environment=production --yes --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+          npx --yes vercel@54.7.1 env ls production --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
+          npx --yes vercel@54.7.1 logs --environment production --no-branch --level error --since 4h --limit 5 --expand --token="$VERCEL_TOKEN" --scope=yossef-elfeels-projects
           cd ..
           node --env-file="$RUNNER_TEMP/mock-production.env" tools/vercel/diagnose-mock.cjs
 
