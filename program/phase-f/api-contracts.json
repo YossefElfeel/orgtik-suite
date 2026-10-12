@@ -10567,12 +10567,24 @@
       "app": "wm",
       "method": "GET",
       "path": "/v2/admin/roles",
-      "source": "apps/wm.js",
+      "source": "apps/wm/roles.js",
       "authorization": {
         "audience": "staff:wm or staff:admin for this route",
         "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
         "permission": "current OrgTik staff permission and current internal membership",
         "writes": "read"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "PATCH",
+      "path": "/v2/admin/roles/:key",
+      "source": "apps/wm/roles.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
       }
     },
     {

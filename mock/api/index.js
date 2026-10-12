@@ -20,6 +20,7 @@ module.exports = async (req, res) => {
   try {
     await ready();
   } catch (e) {
+    console.error("[journal] start failed:", e);
     res.statusCode = 503;
     res.setHeader("content-type", "application/json");
     res.setHeader("access-control-allow-origin", "*");
