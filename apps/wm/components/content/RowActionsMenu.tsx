@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
-import { CaretDown } from "@phosphor-icons/react";
+import { DotsThreeVertical } from "@phosphor-icons/react";
 import { Button, Menu, MenuContent, MenuGroup, MenuTrigger } from "@orgtik/ui";
 
 /** A visible, consistently sized entry point for every dashboard row menu. */
@@ -24,15 +24,9 @@ export function RowActionsMenu({
               size="sm"
               shape="control"
               aria-label={target ? `${t("actions")}: ${target}` : t("actions")}
-              className="group min-w-28 border-line-control bg-brand-subtle text-fg-brand hover:border-focus data-[popup-open]:border-action-primary data-[popup-open]:bg-action-primary data-[popup-open]:text-on-action-primary"
-              endIcon={
-                <CaretDown
-                  aria-hidden
-                  className="size-4 transition-transform group-data-[popup-open]:rotate-180 motion-reduce:transition-none"
-                />
-              }
+              className="size-9 p-0"
             >
-              {t("actions")}
+              <DotsThreeVertical aria-hidden className="size-5" />
             </Button>
           }
         />

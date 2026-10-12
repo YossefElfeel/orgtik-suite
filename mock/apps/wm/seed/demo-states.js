@@ -162,6 +162,10 @@ function contentExamples({ entries, audit, ideas, now }) {
     }
   }
   publishedExamples({ entries, audit, now });
+  for(const [type,action,entry] of [["page","save","pg_home"],["page","submit","pg_home"],["page","approve","pg_home"],["page","publish","pg_home"],["page","request_changes","pg_home"],["page","discard","pg_home"],["page","schedule","pg_home"],["page","unschedule","pg_home"],["page","restore","pg_home"],["page","approve_figures","pg_home"],["page","translation_submit","pg_home"],["page","translation_approve","pg_home"],["page","translation_reopen","pg_home"],["media","media_delete","md_01"],["redirect","redirect_update","rd_demo_manager"],["lead","leads_export","ld_05"],["lead","lead_note","ld_05"],["lead","lead_contact","ld_05"],["lead","lead_qualify","ld_05"],["lead","lead_unqualify","ld_05"],["lead","lead_quote","ld_05"],["lead","lead_win","ld_05"],["lead","lead_lose","ld_05"],["lead","lead_spam","ld_05"],["lead","lead_duplicate","ld_05"],["lead","lead_reopen","ld_05"],["idea","idea_plan","idea_01"],["idea","idea_start","idea_01"],["idea","idea_ship","idea_01"],["idea","idea_decline","idea_01"],["idea","idea_merge","idea_01"],["user","user_roles","sample_user"],["media","media_upload","md_01"],["media","media_update","md_02"],["redirect","redirect_create","rd_demo_manager"],["redirect","redirect_delete","rd_demo_retired"],["idea","idea_publish","idea_01"],["idea","idea_hide","idea_02"],["lead","lead_assign","ld_05"],["lead","lead_erase","ld_sample_erased"],["settings","site_settings","site"],["settings","search_visibility","site"],["user","user_create","sample_user"],["user","user_update","sample_user"]]) {
+    const sampleId="audit_example_"+action;
+    if(!audit.some(event=>event.sampleId===sampleId))audit.push({at:now(),by:"admin",type,action,entry,sample:true,sampleId,targetName:"Sample "+type+" activity"});
+  }
   // Translation examples only touch untouched seed translations.
   const translations = ["needs_review", "outdated", "in_progress"];
   [...entries.values()]

@@ -134,6 +134,18 @@ test("a protected redirect cannot send its credential to Vercel sign-in or anoth
   assert.equal(calls, 1);
 });
 
+test("HR readiness reaches its auth shell without forwarding its credential to SOS", async () => {
+  const origin = "https://orgtik-suite-hr-preview.vercel.app", requests = [];
+  const request = protectedFetch({ [origin]: "fixture.token.value" }, async (url, init) => {
+    requests.push({ url: String(url), token: init.headers.get(HEADER) });
+    return new URL(url).pathname === "/en/auth" ? new Response("HR auth") : new Response(null, { status: 307, headers: { location: "https://orgtik-suite-sos-preview.vercel.app/go/hr_system" } });
+  });
+  assert.equal((await request(origin + previewShellPath("hr"))).status, 200);
+  assert.deepEqual(requests, [{ url: origin + "/en/auth", token: "fixture.token.value" }]);
+  await assert.rejects(request(origin + "/"), /redirected away/);
+  assert.equal(requests.length, 2, "The SOS redirect must never receive the HR credential");
+});
+
 test("preview OIDC uses the project token subcommand and the existing preview mock project", () => {
   const previous = process.env.VERCEL_TOKEN;
   process.env.VERCEL_TOKEN = "fixture-token";

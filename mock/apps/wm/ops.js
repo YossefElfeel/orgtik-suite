@@ -181,7 +181,10 @@ function makeOps({ store, now }) {
     if (next.organization.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(next.organization.email)) errors["organization.email"] = "email";
     if (patch.locales) {
       if (!can("locales:enable")) return { status: 403, code: "forbidden", required: "locales:enable" };
-      next.locales = next.locales.map((l) => ({ ...l, ...(patch.locales.find((p) => p.code === l.code) ?? {}) }));
+      if(!Array.isArray(patch.locales) || new Set(patch.locales.map(locale=>locale.code)).size!==patch.locales.length || patch.locales.some(locale=>!['en','ar','de','fr','it','es','pt','nl'].includes(locale.code) || typeof locale.enabled!=='boolean' || typeof locale.public!=='boolean'))return {errors:{locales:'invalid'}};
+      next.locales = next.locales.map(l=>({...l,...(patch.locales.find(p=>p.code===l.code)??{})})).concat(patch.locales.filter(l=>!next.locales.some(existing=>existing.code===l.code)));
+      // New manager languages start private; publishing website translations is separate.
+      if(next.locales.some(locale=>!['en','ar','de','fr','it'].includes(locale.code) && locale.public)) errors.locales='translation_not_ready';
       if (!next.locales.find((l) => l.code === "en")?.public) errors.locales = "english_public";
       for (const l of next.locales) if (l.public && !l.enabled) errors.locales = "public_needs_enabled";
     }
@@ -191,6 +194,7 @@ function makeOps({ store, now }) {
       if (!privacy?.legalVersions?.some((v) => v.effectiveFrom)) errors.formsMode = "privacy_first";
     }
     if (Object.keys(errors).length) return { errors };
+    for(const locale of next.locales) if(!store.LOCALES.includes(locale.code))store.LOCALES.push(locale.code);
     Object.assign(site, next, { version: site.version + 1, updatedAt: now(), updatedBy: who.key });
     store.audit.unshift({ at: now(), by: who.key, action: "site_settings", entry: "site", type: "settings" });
     return { site };
@@ -202,7 +206,7 @@ function makeOps({ store, now }) {
     if (!Number.isSafeInteger(site_.version) || !Array.isArray(site_.locales) || !site_.organization) throw codec.fail("Website Manager site settings are incomplete.");
     return { data: { leads: rows, site: site_, demoVersion: incoming.data.demoVersion ?? 0 }, sequences: { nextLead: codec.sequence(incoming.sequences?.nextLead, rows, "ld") } };
   };
-  const importState = value => { const incoming = validateState(value); codec.replaceMap(leads, incoming.data.leads); codec.replaceObject(site, incoming.data.site); nextLead = incoming.sequences.nextLead; if (incoming.data.demoVersion < 1) require("./seed/demo-states").leadExamples(leads, now); };
+  const importState = value => { const incoming = validateState(value); codec.replaceMap(leads, incoming.data.leads); codec.replaceObject(site, incoming.data.site); for(const locale of site.locales)if(!store.LOCALES.includes(locale.code))store.LOCALES.push(locale.code); nextLead = incoming.sequences.nextLead; if (incoming.data.demoVersion < 1) require("./seed/demo-states").leadExamples(leads, now); };
   return { leads, view, move, assign, note, erase, submit, csv, OPEN, LEAD_ACTIONS, site, readiness, updateSite, exportState, importState, validateState };
 }
 

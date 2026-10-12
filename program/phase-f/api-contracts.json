@@ -10697,6 +10697,18 @@
     },
     {
       "app": "wm",
+      "method": "POST",
+      "path": "/page-draft/:id",
+      "source": "apps/wm/studio.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
       "method": "GET",
       "path": "/preferences",
       "source": "apps/wm/studio.js",
@@ -11155,6 +11167,42 @@
       "app": "wm",
       "method": "GET",
       "path": "/v2/admin/localization",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "GET",
+      "path": "/v2/admin/manager/order/:type",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "read"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "PUT",
+      "path": "/v2/admin/manager/order/:type",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "GET",
+      "path": "/v2/admin/manager/pages/:id",
       "source": "apps/wm.js",
       "authorization": {
         "audience": "staff:wm or staff:admin for this route",

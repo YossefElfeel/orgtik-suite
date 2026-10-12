@@ -118,7 +118,8 @@
       "user_create": "Konto erstellt",
       "user_update": "Konto aktualisiert",
       "user_roles": "Website-Rollen geändert",
-      "sample_revision": "Beispielrevision hinzugefügt"
+      "sample_revision": "Beispielrevision hinzugefügt",
+      "manager_order": "Manager-Einträge neu angeordnet"
     }
   },
   "Auth": {
@@ -643,7 +644,24 @@
     "reviewAuthor": "Autor",
     "reviewRole": "Position",
     "reviewCompany": "Unternehmen",
-    "reviewQuote": "Zitat"
+    "reviewQuote": "Zitat",
+    "header": "Überschrift",
+    "headerAccent": "Überschrift – Akzent",
+    "subheading": "Untertitel",
+    "button": "Button",
+    "button1": "Button 1",
+    "button2": "Button 2",
+    "button1Link": "Link für Button 1",
+    "button2Link": "Link für Button 2",
+    "buildGrow": "Aufbauen & wachsen",
+    "runBetter": "Besser arbeiten",
+    "sectionIntro": "Abschnittseinleitung",
+    "purpose": "Zweck",
+    "goal1": "Ziel 01",
+    "goal2": "Ziel 02",
+    "goal3": "Ziel 03",
+    "overview": "Übersicht",
+    "rotationWord": "Lauftext"
   },
   "Formats": {
     "design": "Design-Journal",
@@ -908,7 +926,23 @@
     "uploadVideo": "Video hochladen",
     "reviewLive": "Auf der Website",
     "reviewAdditionalMedia": "Zusätzliche Medien",
-    "reviewAdditionalMediaHelp": "Optionale Bilder und Videos, die mit dieser Bewertung angezeigt werden."
+    "reviewAdditionalMediaHelp": "Optionale Bilder und Videos, die mit dieser Bewertung angezeigt werden.",
+    "yes": "Ja",
+    "no": "Nein",
+    "reviewSampleReadOnly": "Sie können diese Einstellung sehen, aber nicht bearbeiten.",
+    "orderEntries": "Einträge anordnen",
+    "orderHelp": "Ziehen Sie Einträge oder nutzen Sie die Pfeile. Speichern Sie anschließend die Reihenfolge.",
+    "saveOrder": "Reihenfolge speichern",
+    "orderSaved": "Reihenfolge gespeichert",
+    "orderFailed": "Speichern fehlgeschlagen. Versuchen Sie es erneut.",
+    "orderConflict": "Die Liste hat sich geändert. Laden Sie sie erneut.",
+    "languageFlow": "Wählen Sie eine Sprache und bereiten Sie Übersetzungen zur Prüfung vor. Neue Sprachen beginnen als private Entwürfe.",
+    "rolesSearch": "Berechtigungen suchen",
+    "allRoles": "Alle Rollen",
+    "allCapabilities": "Alle Berechtigungen",
+    "rotationNote": "Rotating words are used in the Home hero. Other pages use fixed headings.",
+    "rotationSourceHelp": "Diese Lauftexte verwenden die Titel der Einträge unten. Öffnen Sie einen Eintrag, um seinen Titel zu verwalten.",
+    "templateField": "Dieser Wert ist in der Website-Vorlage festgelegt und wird hier zur Orientierung angezeigt."
   },
   "Leads": {
     "title": "Anfragen",
@@ -1455,7 +1489,9 @@
     "arabicNote": "Arabisch auf der Website ist dasselbe Design gespiegelt; öffentlich wird es erst nach der Freigabe der gespiegelten Seiten.",
     "errorLocales": {
       "english_public": "Englisch bleibt öffentlich.",
-      "public_needs_enabled": "Eine öffentliche Sprache muss aktiviert sein."
+      "public_needs_enabled": "Eine öffentliche Sprache muss aktiviert sein.",
+      "invalid": "Wählen Sie eine unterstützte Sprache und gültige Sichtbarkeit.",
+      "translation_not_ready": "Diese Sprache ist für Übersetzungsentwürfe verfügbar. Öffentlicher Zugriff erfordert Sprachunterstützung der Website."
     },
     "errorRequired": "Das ist erforderlich.",
     "errorTemplate": "{page} muss darin bleiben.",
@@ -1584,7 +1620,7 @@
     },
     "serviceFamily": {
       "one": "Leistungsbereich",
-      "many": "Leistungsgruppen",
+      "many": "Servicefamilien",
       "search": "Leistungsbereiche durchsuchen",
       "empty": "Noch keine Leistungsbereiche",
       "emptyBody": "Leistungsbereiche stammen von der Leistungsseite der Website.",

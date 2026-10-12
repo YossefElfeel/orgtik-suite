@@ -7,7 +7,7 @@ import { useListState } from "@/lib/useListState";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { DownloadSimple, Eye, PencilSimple, MagnifyingGlass, X } from "@phosphor-icons/react";
-import { Badge, Button, Input, MenuLinkItem, PageHeader, StatusBadge, Tabs, TabsList, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
+import { Badge, Button, Input, MenuLinkItem, PageHeader, StatusBadge, Select, Tabs, TabsList, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { useCan } from "@/lib/permissions";
@@ -75,10 +75,7 @@ function LeadsList() {
           </Button>
         }
       />
-      <Tabs value={tab} onValueChange={(v) => setTab(v as Tab)}>
-        <TabsList items={TABS.map((x) => ({ value: x, label: x === "open" ? ti("opened") : x === "closed" ? t("closed") : statusLabel("lead", x), count: countOf(x) }))} />
-      </Tabs>
-      <Input size="sm" type="search" value={search} onChange={(e) => setSearch(e.target.value)} aria-label={t("search")} placeholder={data?.pii ? t("search") : t("searchMasked")} startIcon={<MagnifyingGlass className="size-4" />} className="w-full sm:w-80" />
+      <div className="wm-table-filters"><Input size="sm" type="search" value={search} onChange={(e) => setSearch(e.target.value)} aria-label={t("search")} placeholder={data?.pii ? t("search") : t("searchMasked")} startIcon={<MagnifyingGlass className="size-4" />} className="wm-search" /><Select size="sm" aria-label={t("title")} value={tab} onValueChange={value=>setTab((value??"open") as Tab)} options={TABS.map(value=>({value,label:value==="open"?ti("opened"):value==="closed"?t("closed"):statusLabel("lead",value)}))} /></div>
       <DataTable
         mode="server"
         rowCount={data?.total ?? 0}

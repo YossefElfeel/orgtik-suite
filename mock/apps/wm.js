@@ -197,6 +197,26 @@ module.exports = {
     holder.studio = studio;
     studio.routes(app, { need, ok, fail });
 
+    const manager = require("./wm/manager");
+    app.get("/v2/admin/manager/pages/:id", need("content:view"), (req,res)=> {
+      if(!manager.config[req.params.id]) return fail(res,404,"not_found","Page not found.");
+      const records=manager.sourceIds(req.params.id).map(id=>store.detail(store.entries.get(id))).map(value=>({...value,updatedBy:person(value.updatedBy),versions:value.versions.map(row=>({...row,by:person(row.by)}))}));
+      ok(res,records);
+    });
+    app.get("/v2/admin/manager/order/:type",need("content:view"),(req,res)=>{
+      if(!["service","caseStudy","article"].includes(req.params.type))return fail(res,404,"not_found","List not found.");
+      ok(res,manager.orderOf(store,req.params.type));
+    });
+    app.put("/v2/admin/manager/order/:type",need("content:edit"),(req,res)=>{
+      const type=req.params.type;
+      if(!["service","caseStudy","article"].includes(type))return fail(res,404,"not_found","List not found.");
+      const current=manager.orderOf(store,type),ids=req.body?.ids;
+      if(req.body?.version!==current.version)return fail(res,412,"stale","The list changed. Reload and try again.");
+      if(!Array.isArray(ids)||ids.length!==current.ids.length||new Set(ids).size!==ids.length||ids.some(id=>!current.ids.includes(id)))return fail(res,422,"invalid_fields","Include each entry once.");
+      store.managerOrders[type]=[...ids];
+      store.audit.unshift({at:new Date().toISOString(),by:req.who.user.key,action:"manager_order",entry:type,type:"settings"});
+      ok(res,manager.orderOf(store,type));
+    });
     app.get("/v2/admin/entries/:type", need("content:view"), (req, res) => {
       if (!TYPES.has(req.params.type)) return fail(res, 404, "unknown_type", `No content type ${req.params.type}.`);
       const q = String(req.query.search ?? "").trim().toLowerCase();
@@ -214,6 +234,7 @@ module.exports = {
       if (req.query.year) rows = rows.filter(r => String(r.year) === String(req.query.year));
       // Services sort inside their family, like the website lists them.
       rows.sort((a, b) => String(a.parent ?? "").localeCompare(String(b.parent ?? "")) || a.order - b.order);
+      if(store.managerOrders[req.params.type]) {const order=manager.orderOf(store,req.params.type).ids;rows.sort((a,b)=>order.indexOf(a.id)-order.indexOf(b.id));}
       const sort = String(req.query.sort ?? "");
       const field = ({ name: "name", state: "state", updated: "updatedAt" })[sort.replace(/^-/, "")];
       if (field) rows.sort((a, b) => String(a[field]).localeCompare(String(b[field])) * (sort.startsWith("-") ? -1 : 1));

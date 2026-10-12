@@ -71,6 +71,12 @@ function create({store,lib,ops,identity,ctx,now=()=>new Date().toISOString()}) {
   const route=(permission,fn,change=false,authorize)=>([guard(permission),(req,res)=>{try{authorize?.(req,req.who);const value=change?receipt(req,req.who,()=>fn(req,req.who)):fn(req,req.who);ok(res,value);}catch(error){sendError(res,error.status||503,error.code||'studio_unavailable','Check this action and try again.',{required:error.required,fieldErrors:error.fieldErrors});}}]);
   const prefix='/v2/admin/studio';
   app.get(prefix+'/overview',...route('overview:view',(req,who)=>({entries:[...store.entries.values()].filter(eligible).map(e=>({...store.summary(e),path:entryPath(e)})),samples:SAMPLES.map(row=>({id:row.id,name:row.name,bytes:fs.statSync(row.filename).size})),releases:state.releases.map(releaseOut),translations:state.translations.map(row=>({...copy(row),name:store.entries.has(row.entryId)?nameOf(entry(row.entryId)):row.entryId})),permissions:who.permissions,now:now()})));
+  app.post(prefix+'/page-draft/:id',...route('content:edit',(req,who)=>{
+    const result=require('./manager').savePageDraft(store,req.params.id,req.body?.commands,{key:who.user.key},now);
+    if(result.status)throw fail(result.status,result.code,{fieldErrors:result.fieldErrors});
+    observe();const detail=result.data;
+    return {...detail,updatedBy:person(detail.updatedBy),versions:detail.versions.map(row=>({...row,by:person(row.by)}))};
+  },true));
   app.post(prefix+'/entries/:id/autosave',...route('content:view',(req,who)=>autosave(who,req.params.id,req.body),true,(req,who)=>{const e=entry(req.params.id);guardEntry(e);const patches=req.body?.patches;if(!Array.isArray(patches)||!patches.length||patches.length>6)throw fail(422,'invalid_fields');const seoOnly=patches.every(p=>p&&typeof p==='object'&&p.seo&&Object.keys(p).every(key=>['locale','seo','note'].includes(key)));need(who,seoOnly&&!can(who,'content:edit')?'seo:edit':'content:edit');}));
   app.get(prefix+'/preferences',...route('content:view',()=>{if(!ctx.staffPreferences)throw fail(503,'preferences_unavailable');return ctx.staffPreferences.current();}));
   app.patch(prefix+'/preferences',...route('content:view',req=>{if(!ctx.staffPreferences)throw fail(503,'preferences_unavailable');return ctx.staffPreferences.save(req.body); }));

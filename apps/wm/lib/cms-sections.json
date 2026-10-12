@@ -13,9 +13,10 @@
       "closing"
     ],
     "groups": {
-      "hero": ["hero", "heroWords"],
-      "services": ["services", "homeServices"],
-      "approach": ["approach"]
+      "services": [
+        "services",
+        "homeServices"
+      ]
     },
     "references": {
       "partners": "/content/pages/pg_partners",
@@ -23,11 +24,16 @@
     }
   },
   "pg_services": {
-    "body": ["hero", "families", "all-services", "approach", "reviews"],
-    "groups": {
-      "families": ["families", "stories"]
-    },
-    "views": ["services-list"],
+    "body": [
+      "hero",
+      "families",
+      "all-services",
+      "reviews"
+    ],
+    "groups": {},
+    "views": [
+      "services-list"
+    ],
     "references": {
       "reviews": "/content/reviews"
     }
@@ -37,70 +43,125 @@
       "hero",
       "workspace",
       "capabilities",
-      "demo",
-      "section-1",
-      "section-2",
       "reviews"
     ],
     "groups": {
-      "workspace": ["workspace", "context", "flow"],
-      "section-1": ["section-1", "planSteps"]
+      "workspace": [
+        "workspace",
+        "context",
+        "flow"
+      ]
     },
     "references": {
       "reviews": "/content/reviews"
     }
   },
   "pg_work": {
-    "body": ["projects", "gallery"],
+    "body": [
+      "projects",
+      "reviews"
+    ],
     "groups": {},
-    "views": ["hero"]
+    "views": [
+      "hero"
+    ],
+    "references": {
+      "reviews": "/content/reviews"
+    }
   },
   "pg_about": {
-    "body": ["hero", "purpose", "journey", "capabilities"],
+    "body": [
+      "hero",
+      "purpose",
+      "journey",
+      "reviews"
+    ],
     "groups": {
-      "journey": ["journey", "journeySteps"],
-      "capabilities": ["capabilities", "capabilityRoutes"]
+      "journey": [
+        "journey",
+        "journeySteps"
+      ]
+    },
+    "references": {
+      "reviews": "/content/reviews"
     }
   },
   "pg_insights": {
-    "body": ["articles"],
+    "body": [
+      "articles"
+    ],
     "groups": {},
-    "views": ["article", "hero"]
+    "views": [
+      "article",
+      "hero"
+    ],
+    "references": {}
   },
   "pg_contact": {
-    "body": ["hero"],
+    "body": [
+      "hero"
+    ],
     "groups": {
-      "hero": ["hero", "enquiry", "paths", "topics"]
+      "hero": [
+        "hero",
+        "enquiry",
+        "paths",
+        "topics"
+      ]
     }
   },
   "pg_roadmap": {
-    "body": ["hero", "timeline", "community", "submit-idea"],
+    "body": [
+      "hero",
+      "timeline",
+      "community",
+      "submit-idea"
+    ],
     "groups": {},
-    "dialogs": ["section-1"]
+    "dialogs": [
+      "section-1"
+    ]
   },
   "pg_legal": {
-    "body": ["hero"],
+    "body": [
+      "hero"
+    ],
     "groups": {
-      "hero": ["hero", "legal"]
+      "hero": [
+        "hero",
+        "legal"
+      ]
     }
   },
   "pg_signIn": {
-    "body": ["signin"],
+    "body": [
+      "signin"
+    ],
     "groups": {}
   },
   "pg_faq": {
-    "body": ["hero", "questions"],
+    "body": [
+      "hero",
+      "questions"
+    ],
     "groups": {}
   },
   "pg_partners": {
-    "body": ["intro", "partners"],
+    "body": [
+      "intro",
+      "partners"
+    ],
     "groups": {}
   },
   "pg_plans": {
     "body": [],
     "shared": {
       "record": "gl_commerce",
-      "prefixes": ["purchasePlans-", "purchaseUI-", "purchaseControls-"]
+      "prefixes": [
+        "purchasePlans-",
+        "purchaseUI-",
+        "purchaseControls-"
+      ]
     },
     "dependentSteps": true
   },
@@ -108,7 +169,10 @@
     "body": [],
     "shared": {
       "record": "gl_commerce",
-      "prefixes": ["purchaseCart-", "purchaseControls-"]
+      "prefixes": [
+        "purchaseCart-",
+        "purchaseControls-"
+      ]
     },
     "dependentSteps": true
   },
@@ -116,7 +180,10 @@
     "body": [],
     "shared": {
       "record": "gl_commerce",
-      "prefixes": ["purchaseCheckout-", "paymentDetails-"]
+      "prefixes": [
+        "purchaseCheckout-",
+        "paymentDetails-"
+      ]
     },
     "dependentSteps": true
   },
@@ -124,21 +191,33 @@
     "body": [],
     "shared": {
       "record": "pg_signIn",
-      "prefixes": ["signin"]
+      "prefixes": [
+        "signin"
+      ]
     },
     "dependentSteps": true
   },
   "gl_header": {
     "body": [],
     "groups": {},
-    "consumers": ["navigation", "header", "menu"]
+    "consumers": [
+      "navigation",
+      "header",
+      "menu"
+    ]
   },
   "gl_footer": {
     "body": [],
     "groups": {
-      "footer": ["footer", "explore", "start"]
+      "footer": [
+        "footer",
+        "explore",
+        "start"
+      ]
     },
-    "consumers": ["shared footers"]
+    "consumers": [
+      "shared footers"
+    ]
   },
   "gl_components": {
     "body": [],
@@ -149,7 +228,10 @@
         "caseStudy-story"
       ]
     },
-    "consumers": ["CaseStudy", "ServiceWork"]
+    "consumers": [
+      "CaseStudy",
+      "ServiceWork"
+    ]
   },
   "gl_commerce": {
     "body": [],
@@ -168,16 +250,24 @@
   "gl_socials": {
     "body": [],
     "groups": {},
-    "consumers": ["header", "footer"]
+    "consumers": [
+      "header",
+      "footer"
+    ]
   },
   "gl_process": {
     "body": [],
     "groups": {},
-    "consumers": ["Home", "Services"]
+    "consumers": [
+      "Home",
+      "Services"
+    ]
   },
   "gl_caseFormats": {
     "body": [],
     "groups": {},
-    "consumers": ["CaseStudy"]
+    "consumers": [
+      "CaseStudy"
+    ]
   }
 }

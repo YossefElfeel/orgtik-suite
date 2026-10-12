@@ -61,6 +61,10 @@ import { IconPicker } from "./IconPicker";
 import { SectionOrder } from "./SectionOrder";
 import { SectionAttachments } from "./SectionAttachments";
 import { MediaPicker } from "@/components/media/MediaPicker";
+import managerPages from "@/lib/manager-pages.json";
+import { PageFields, PageCards, type PageField } from "./PageFields";
+import { RotationWords } from "./RotationWords";
+import { CollectionOrder } from "./CollectionOrder";
 import sectionMap from "@/lib/cms-sections.json";
 import { ReviewEditor } from "./ReviewEditor";
 import { ArticleBodyEditor, synchronizeArticleEdits } from "./ArticleBodyEditor";
@@ -83,9 +87,11 @@ import {
   useApproveFiguresMutation,
   useEntriesQuery,
   useEntryQuery,
+  usePageSourcesQuery,
   useIndexingQuery,
   useMediaQuery,
   useMeQuery,
+  useSiteQuery,
   useSaveEntryMutation,
   useTransitionEntryMutation,
   type ApiError,
@@ -139,12 +145,18 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   const images = useMediaQuery({ kind: "image", pageSize: 100 });
   const indexing = useIndexingQuery(undefined, { skip: !can("seo:view") });
   const me = useMeQuery();
+  const site = useSiteQuery();
+  const contentLocales = (site.data?.locales.filter(locale=>locale.enabled).map(locale=>locale.code) ?? LOCALES) as Locale[];
+  const languageName = (locale:string) => NATIVE[locale as Locale] ?? new Intl.DisplayNames([locale],{type:"language"}).of(locale) ?? locale;
+  const pageConfig = (managerPages as Record<string, {fields?: Record<string,{label:string;fields:PageField[]}>; rotationSource?: "service"|"softwareModule"|"caseStudy"|"article"; staticRotation?: string[]; collections?: Record<string, "service"|"caseStudy"|"article">}>)[entry.id];
+  const sourceQuery = usePageSourcesQuery(entry.id, {skip: !pageConfig || seoOnly});
+  const [sourceEdits, setSourceEdits] = useState<Record<string, Partial<Record<Locale, Tree>>>>({});
   const references = (sectionMap as Record<string, { references?: Record<string, string> }>)[entry.id]?.references ?? {};
   const sections: EditorSection[] = seoOnly ? [] : [...type.sections(entry), ...Object.keys(references).map(value => ({ value, path: "", label: ti(value), node: { kind: "group" as const, fields: {} } })), ...(SHARED_PAGES[entry.id] ? [{ value: "shared-copy", path: "", label: ti("sharedCopy"), node: { kind: "group" as const, fields: {} } }] : [])];
   // ?lang=ar opens the editor in that language (from the localization matrix).
   const asked = useSearchParams().get("lang") as Locale | null;
   const [lang, setLang] = useState<Locale>(
-    asked && LOCALES.includes(asked) ? asked : "en",
+    asked && (contentLocales.includes(asked) || ["es","pt","nl"].includes(asked)) ? asked : "en",
   );
   const [section, setSection] = useState<string>(seoOnly ? "seo" : params.get("section") ?? sections[0]?.value ?? "seo");
   // Unsaved edits per language, over the entry's current content.
@@ -166,7 +178,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   const saving = {isLoading:savingAction.busy||legacySaving.isLoading};
   const dispatch = useDispatch<WmDispatch>();
   const v3 = useTranslations("WmV3");
-  const [autosaving,setAutosaving] = useState(true);
+  const [autosaving,setAutosaving] = useState(entry.type !== "page");
   const [transition, moving] = useTransitionEntryMutation();
   const [approveFigures] = useApproveFiguresMutation();
   // Services live under their family's address; articles are filed under a family.
@@ -186,7 +198,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   const neutral = { ...entry.content, ...neutralEdit };
   const alt = { ...(entry.content.image?.alt ?? {}), ...altEdits };
   const dirty =
-    [edits, seoEdits, neutralEdit, altEdits].some(
+    [edits, seoEdits, neutralEdit, altEdits, sourceEdits].some(
       (o) => Object.keys(o).length > 0,
     ) || slugEdit !== null || imageSrc !== null || Boolean(presentationEdit);
   // Retained catalog mirrors are read-only. Current prices are owned by the platform.
@@ -275,20 +287,20 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
     else toast.error(t("saveFailed"));
   };
 
-  const editStamp = JSON.stringify({edits,seoEdits,slugEdit,neutralEdit,altEdits,imageSrc,imageFocal,presentationEdit});
+  const editStamp = JSON.stringify({sourceEdits,edits,seoEdits,slugEdit,neutralEdit,altEdits,imageSrc,imageFocal,presentationEdit});
   const latestEdit = useRef(editStamp);
   latestEdit.current = editStamp;
   const acceptSaved = (result:unknown,stamp?:string) => {
     const value=result as Entry;
     dispatch(api.util.upsertQueryData("entry",{type:entry.type,id:entry.id},value));
     dispatch(api.util.invalidateTags(["EntryList","Overview","Seo","Media","MediaList"]));
-    if(stamp && latestEdit.current===stamp){setEdits({});setSeoEdits({});setSlugEdit(null);setNeutralEdit({});setAltEdits({});setImageSrc(null);setImageFocal(undefined);setPresentationEdit(undefined);}
+    if(stamp && latestEdit.current===stamp){setEdits({});setSeoEdits({});setSlugEdit(null);setNeutralEdit({});setAltEdits({});setImageSrc(null);setImageFocal(undefined);setPresentationEdit(undefined);setSourceEdits({});}
   };
   const saveRestricted = async () => {
     setErrors({});
     let version = entry.version;
     try {
-      for (const l of LOCALES) {
+      for (const l of contentLocales) {
         const fields = edits[l];
         const seo = seoEdits[l];
         const s = l === "en" ? slugEdit : null;
@@ -325,11 +337,16 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
 
   const makePatches = () => {
     const patches=[];
-    for(const l of LOCALES){const fields=edits[l],seo=seoEdits[l],slug=l==="en"?slugEdit:null;if(fields||seo||slug!==null)patches.push({locale:l,fields,seo,slug:slug??undefined});}
+    for(const l of contentLocales){const fields=edits[l],seo=seoEdits[l],slug=l==="en"?slugEdit:null;if(fields||seo||slug!==null)patches.push({locale:l,fields,seo,slug:slug??undefined});}
     if(Object.keys(neutralEdit).length||Object.keys(altEdits).length||imageSrc!==null||presentationEdit)patches.push({neutral:Object.keys(neutralEdit).length?neutralEdit:undefined,image:Object.keys(altEdits).length||imageSrc!==null?{alt,...(imageSrc!==null?{src:imageSrc,focal:imageFocal}:{})}:undefined,presentation:presentationEdit});
     return patches;
   };
   const saveAll = async () => {
+    if (pageConfig && !seoOnly && editable) {
+      const commands = [{id:entry.id,version:entry.version,patches:makePatches()}, ...(sourceQuery.data ?? []).filter(item=>sourceEdits[item.id]).map(item=>({id:item.id,version:item.version,patches:Object.entries(sourceEdits[item.id]).map(([locale,fields])=>({locale,fields}))}))].filter(command=>command.patches.length);
+      try {const result = await savingAction.run<Entry>("/studio/page-draft/"+entry.id,{commands}); acceptSaved(result,editStamp); dispatch(api.util.invalidateTags(["Entry"])); toast.success(t("saved"));} catch (error) {if(error instanceof StudioError && error.status===412)setStale({by:""});else onError(error);}
+      return;
+    }
     if(managedIn || ["pricing","legalDocument","service","softwareModule","serviceFamily"].includes(entry.type))return saveRestricted();
     setErrors({});
     const stamp=editStamp;
@@ -426,7 +443,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
 
   const setTree = (next: Tree) => setEdits(current => {
     const result = { ...current, [lang]: next };
-    if (type.key === "article" && lang === "en" && next.sections) for (const locale of LOCALES) {
+    if (type.key === "article" && lang === "en" && next.sections) for (const locale of contentLocales) {
       if (locale !== "en" && current[locale]) result[locale] = { ...current[locale], sections: synchronizeArticleEdits(next.sections, (current.en ?? english).sections, current[locale]?.sections) };
     }
     return result;
@@ -439,15 +456,16 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
       : t.has(`tabs.${s.value}`)
         ? t(`tabs.${s.value}`)
         : t("sectionFallback", { key: s.value }));
+  const orderKeys = [...presentation.sectionOrder, ...sections.map(item=>item.value)];
   const tabItems = [
-    ...sections.map((s) => ({
+    ...[...sections].sort((a,b)=>orderKeys.indexOf(a.value)-orderKeys.indexOf(b.value)).map((s) => ({
       value: s.value,
       label: <span dir="auto">{sectionName(s)}</span>,
     })),
     ...(type.seo ? [{ value: "seo", label: t("tabs.seo") }] : []),
   ];
   // More sections than fit in a row (a page has up to a dozen) go in a column beside the form.
-  const side = tabItems.length > 6;
+  const side = entry.id === "pg_about" || tabItems.length > 6;
   const seo = { ...(entry.content.seo[lang] ?? {}), ...(seoEdits[lang] ?? {}) };
   const hasShared = type.key !== "review" && (type.neutral.length > 0 || type.image);
   const lockShared = !editable || lang !== "en";
@@ -736,8 +754,11 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
     </section>
   ) : null;
 
+  const returnToView = () => { const query = new URLSearchParams(params.toString()); query.set("view", "1"); router.replace(`${seoOnly ? "/seo/content" : `/content/${type.area}`}/${entry.id}?${query}`); };
+  const discardLocal = () => {setEdits({});setSourceEdits({});setSeoEdits({});setSlugEdit(null);setNeutralEdit({});setAltEdits({});setImageSrc(null);setImageFocal(undefined);setPresentationEdit(undefined);setErrors({});returnToView();};
+
   return (
-    <div className="flex flex-col gap-6 pb-24">
+    <div className="wm-entry-editor flex flex-col gap-6 pb-24">
 
       <PageHeader
         breadcrumb={[
@@ -767,7 +788,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
           </span>
         }
         actions={
-          <>
+          <div className="ms-auto flex flex-wrap justify-end gap-2">
             {viewing && mayEdit ? <Button onClick={() => router.replace(editHref)}>{ti("edit")}</Button> : null}
             <Button
               variant="ghost"
@@ -827,7 +848,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                 title={t("discardTitle")}
                 impact={t("discardImpact")}
                 confirmLabel={t("discardConfirm")}
-                onConfirm={() => act("discard")}
+                onConfirm={async () => { await act("discard"); returnToView(); }}
               />
             ) : null}
             {state === "in_review" && canApprove && !dirty ? (
@@ -843,13 +864,14 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                 onConfirm={({ reason }) => act("request_changes", reason)}
               />
             ) : null}
+            {!viewing && editable && !dirty && !entry.hasDraft ? <Button variant="secondary" onClick={discardLocal}>{t("discard")}</Button> : null}
             {primary}
-          </>
+          </div>
         }
       />
 
       {!viewing && !managedIn && !["pricing","legalDocument","service","softwareModule","serviceFamily"].includes(entry.type)?<><div className="flex flex-wrap items-center gap-3"><Switch checked={autosaving} onCheckedChange={setAutosaving} aria-label={v3("autosave")}/><span className="text-body-sm text-fg-muted">{v3(savingAction.busy?"autosaving":"autosave")}</span></div><StudioFeedback action={savingAction} onRetry={value=>acceptSaved(value,JSON.stringify((savingAction.pending?.body as {patches?:unknown})?.patches)===JSON.stringify(makePatches())?editStamp:undefined)}/></>:null}
-      {viewing ? <div className="flex flex-wrap items-center justify-between gap-3 rounded-field border border-line bg-info-subtle p-4"><p className="text-body-sm text-info">{ti(mayEdit ? "viewModeHelp" : "viewOnlyHelp")}</p>{mayEdit ? <Button size="sm" variant="secondary" onClick={() => router.replace(editHref)}>{ti("edit")}</Button> : null}</div> : null}
+      {viewing ? <div className="flex flex-wrap items-center justify-between gap-3 rounded-field border border-line bg-info-subtle p-4"><p className="text-body-sm text-info">{ti(mayEdit ? "viewModeHelp" : "viewOnlyHelp")}</p></div> : null}
 
       {!seoOnly && body.length > 1 ? <SectionOrder items={orderedBody.map(key => ({ key, label: sections.find(section => section.value === key) ? sectionName(sections.find(section => section.value === key)!) : key === "reviews" ? ti("reviews") : key === "questions" ? ti("faqQuestions") : key }))} disabled={!editable || lang !== "en"} onChange={sectionOrder => setPresentationEdit({ ...presentation, sectionOrder })} /> : null}
 
@@ -959,12 +981,12 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
       <Tabs value={lang} onValueChange={(v) => setLang(v as Locale)}>
         <TabsList
           variant="contained"
-          items={LOCALES.map((l) => ({
+          items={contentLocales.map((l) => ({
             value: l,
             label: (
               <span className="inline-flex items-center gap-1.5">
                 <span lang={l} dir={l === "ar" ? "rtl" : "ltr"}>
-                  {NATIVE[l]}
+                  {languageName(l)}
                 </span>
                 {edits[l] || seoEdits[l] || altEdits[l] ? (
                   <span
@@ -1054,7 +1076,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                 /> : s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "") ? <div className="grid max-w-2xl gap-4">
                   <Field label={ti("text")}><Input disabled={!editable} value={presentation.cursor.text[lang] ?? String(get(tree, "intro") && (get(tree, "intro") as Tree).div || "").replace(/<[^>]+>/g, "").trim()} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, text: { ...presentation.cursor.text, [lang]: event.target.value } } })} /></Field>
                   <Field label={ti("link")}><Input dir="ltr" disabled={!editable || lang !== "en"} value={presentation.cursor.link} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, link: event.target.value } })} /></Field>
-                </div> : references[s.value] ? <Link href={references[s.value]} className="text-fg-brand underline">{ti("manage")} {sectionName(s)}</Link> : s.value === "shared-copy" ? <SharedCopyPanel key={`${entry.id}-${lang}`} pageId={entry.id} lang={lang} readOnly={!editable} /> : type.key === "article" && s.value === "body" ? <ArticleBodyEditor ctx={ctx} value={get(tree, "sections")} onChange={value => setTree(put(tree ?? {}, "sections", value))} /> : <ValueEditor
+                </div> : s.value === "rotation-words" && pageConfig?.rotationSource ? <RotationWords type={pageConfig.rotationSource} /> : pageConfig?.fields?.[s.value] ? (sourceQuery.isLoading ? <LoadingState rows={4} /> : sourceQuery.error ? <ErrorState onRetry={sourceQuery.refetch} /> : <PageFields fields={pageConfig.fields[s.value].fields} records={[entry, ...(sourceQuery.data ?? [])]} lang={lang} edits={{...sourceEdits,[entry.id]:edits}} onChange={(id,words)=>id===entry.id ? setTree(words) : setSourceEdits(previous=>({...previous,[id]:{...previous[id],[lang]:words}}))} ctx={ctx} />) : (entry.id === "pg_home" && s.value === "two-sides" || entry.id === "pg_about" && s.value === "purpose") ? <PageCards pageId={entry.id} section={s.value} node={s.node} value={get(tree,s.path)} onChange={value=>setTree(put(tree ?? {},s.path,value))} ctx={ctx} /> : references[s.value] ? <Link href={references[s.value]} className="text-fg-brand underline">{ti("manage")} {sectionName(s)}</Link> : s.value === "shared-copy" ? <SharedCopyPanel key={`${entry.id}-${lang}`} pageId={entry.id} lang={lang} readOnly={!editable} /> : type.key === "article" && s.value === "body" ? <ArticleBodyEditor ctx={ctx} value={get(tree, "sections")} onChange={value => setTree(put(tree ?? {}, "sections", value))} /> : <ValueEditor
                   node={s.node}
                   value={get(tree, s.path)}
                   fallback={lang === "en" ? undefined : get(english, s.path)}
@@ -1062,6 +1084,8 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                   path={s.path}
                   ctx={ctx}
                 />}
+                {s.value === "rotation-words" && pageConfig?.staticRotation ? <ul className="mt-4 flex flex-wrap gap-2">{pageConfig.staticRotation.map(word=><li key={word} className="rounded-field bg-sunken px-3 py-2 text-body-sm text-fg-muted">{word}</li>)}</ul> : null}
+                {pageConfig?.collections?.[s.value] ? <CollectionOrder type={pageConfig.collections[s.value]} disabled={!editable || lang !== "en"} /> : null}
                 {type.key !== "review" && s.value !== "shared-copy" && !(s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "")) && type.key !== "strings" && type.key !== "pricing" ? <SectionAttachments disabled={!editable || lang !== "en"} disabledReason={viewing && mayEdit ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia[s.value] ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, [s.value]: items } })} /> : null}
               </TabsPanel>
             ))}
@@ -1151,16 +1175,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
             <div className="flex gap-2">
               <Button
                 variant="ghost"
-                onClick={() => (
-                  setEdits({}),
-                  setSeoEdits({}),
-                  setSlugEdit(null),
-                  setNeutralEdit({}),
-                  setAltEdits({}),
-                  setImageSrc(null),
-                  setPresentationEdit(undefined),
-                  setErrors({})
-                )}
+                onClick={discardLocal}
               >
                 {t("discard")}
               </Button>

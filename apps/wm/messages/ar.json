@@ -118,7 +118,8 @@
       "user_create": "إنشاء حساب",
       "user_update": "تحديث حساب",
       "user_roles": "تغيير أدوار الموقع",
-      "sample_revision": "إضافة مراجعة تجريبية"
+      "sample_revision": "إضافة مراجعة تجريبية",
+      "manager_order": "أعاد ترتيب عناصر المدير"
     }
   },
   "Auth": {
@@ -643,7 +644,24 @@
     "reviewAuthor": "الكاتب",
     "reviewRole": "المنصب",
     "reviewCompany": "الشركة",
-    "reviewQuote": "نص التقييم"
+    "reviewQuote": "نص التقييم",
+    "header": "العنوان",
+    "headerAccent": "تكملة العنوان",
+    "subheading": "العنوان الفرعي",
+    "button": "الزر",
+    "button1": "الزر 1",
+    "button2": "الزر 2",
+    "button1Link": "رابط الزر 1",
+    "button2Link": "رابط الزر 2",
+    "buildGrow": "البناء والنمو",
+    "runBetter": "تشغيل أفضل",
+    "sectionIntro": "مقدمة القسم",
+    "purpose": "الهدف",
+    "goal1": "الهدف 01",
+    "goal2": "الهدف 02",
+    "goal3": "الهدف 03",
+    "overview": "نظرة عامة",
+    "rotationWord": "كلمة متحركة"
   },
   "Formats": {
     "design": "يوميات التصميم",
@@ -908,7 +926,23 @@
     "uploadVideo": "رفع فيديو",
     "reviewLive": "ظاهر على الموقع",
     "reviewAdditionalMedia": "وسائط إضافية",
-    "reviewAdditionalMediaHelp": "صور وفيديوهات اختيارية تُعرض مع هذا التقييم."
+    "reviewAdditionalMediaHelp": "صور وفيديوهات اختيارية تُعرض مع هذا التقييم.",
+    "yes": "نعم",
+    "no": "لا",
+    "reviewSampleReadOnly": "يمكنك عرض هذا الإعداد ولكن لا يمكنك تعديله.",
+    "orderEntries": "ترتيب العناصر",
+    "orderHelp": "اسحب العناصر لترتيبها، أو استخدم أزرار الأسهم. احفظ الترتيب عند الانتهاء.",
+    "saveOrder": "حفظ الترتيب",
+    "orderSaved": "تم حفظ الترتيب",
+    "orderFailed": "تعذّر حفظ الترتيب. حاول مجددًا.",
+    "orderConflict": "تغيّرت القائمة. أعد تحميلها قبل الترتيب.",
+    "languageFlow": "اختر لغة ثم جهّز الترجمات للمراجعة. تبدأ اللغات الجديدة كمسودات خاصة.",
+    "rolesSearch": "البحث في الصلاحيات",
+    "allRoles": "كل الأدوار",
+    "allCapabilities": "كل الصلاحيات",
+    "rotationNote": "Rotating words are used in the Home hero. Other pages use fixed headings.",
+    "rotationSourceHelp": "تستخدم الكلمات المتحركة عناوين العناصر التالية. افتح العنصر لإدارة عنوانه.",
+    "templateField": "هذه القيمة ثابتة في قالب الموقع وتظهر هنا للرجوع إليها."
   },
   "Leads": {
     "title": "العملاء المحتملون",
@@ -1455,7 +1489,9 @@
     "arabicNote": "العربية على الموقع هي التصميم نفسه معكوسًا، وجعلها عامة ينتظر اعتماد المالك للصفحات المعكوسة.",
     "errorLocales": {
       "english_public": "تبقى الإنجليزية عامة.",
-      "public_needs_enabled": "يجب تفعيل اللغة العامة."
+      "public_needs_enabled": "يجب تفعيل اللغة العامة.",
+      "invalid": "اختر لغة مدعومة وإعدادات ظهور صحيحة.",
+      "translation_not_ready": "هذه اللغة متاحة لمسودات الترجمة. إتاحتها للعامة تتطلب دعم اللغة على الموقع."
     },
     "errorRequired": "هذا مطلوب.",
     "errorTemplate": "أبقِ {page} فيه.",

@@ -93,10 +93,10 @@ function IndexingView() {
         <p>{ti("indexingHelp")}</p><p>{ti("sitemapHelp")}</p><p>{ti("canonicalHelp")}</p><p>{ti("robotsHelp")}</p>
         <a className="text-link underline" href="https://developers.google.com/search/docs/crawling-indexing/block-indexing" target="_blank" rel="noreferrer">{ti("googleGuidance")}</a>
       </Card>
-      <div className="flex flex-wrap gap-3">
-        <Input aria-label={ti("search")} placeholder={ti("search")} value={url.get("search")} onChange={e => url.set({ search: e.target.value })} className="max-w-sm" />
-        <Select label={ti("type")} value={url.get("type", "all")} onValueChange={type => url.set({ type })} options={[{ value: "all", label: ti("all") }, ...types.map(type => ({ value: type, label: tt(`${type}.many`) }))]} />
-        <Select label={ti("indexing")} value={url.get("policy", "all")} onValueChange={policy => url.set({ policy })} options={[{ value: "all", label: ti("all") }, { value: "index", label: "index" }, { value: "noindex", label: "noindex" }]} />
+      <div className="wm-table-filters">
+        <Input size="sm" aria-label={ti("search")} placeholder={ti("search")} value={url.get("search")} onChange={e => url.set({ search: e.target.value })} className="wm-search" />
+        <Select size="sm" label={ti("type")} value={url.get("type", "all")} onValueChange={type => url.set({ type })} options={[{ value: "all", label: ti("all") }, ...types.map(type => ({ value: type, label: tt(`${type}.many`) }))]} />
+        <Select size="sm" label={ti("indexing")} value={url.get("policy", "all")} onValueChange={policy => url.set({ policy })} options={[{ value: "all", label: ti("all") }, { value: "index", label: "index" }, { value: "noindex", label: "noindex" }]} />
       </div>
       <section aria-labelledby="sitemap" className="flex flex-col gap-3">
         <h2 id="sitemap" className="font-display text-title-sm text-fg">{t("sitemapTitle", { count: data.sitemap.length })}</h2>

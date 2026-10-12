@@ -7,7 +7,7 @@ import { useListState } from "@/lib/useListState";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Eye, PencilSimple, MagnifyingGlass, X } from "@phosphor-icons/react";
-import { Badge, Button, Input, MenuItem, MenuLinkItem, PageHeader, StatusBadge, Tabs, TabsList, useFormatter, useStatusLabel } from "@orgtik/ui";
+import { Badge, Button, Input, Select, MenuItem, MenuLinkItem, PageHeader, StatusBadge, Tabs, TabsList, useFormatter, useStatusLabel } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { useCan } from "@/lib/permissions";
@@ -73,10 +73,7 @@ function IdeasList() {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader title={t("title")} description={t("description")} />
-      <Tabs value={tab} onValueChange={(v) => setTab(v as Tab)}>
-        <TabsList items={TABS.map((x) => ({ value: x, label: x === "closed" ? t("closed") : x === "open" ? ti("opened") : statusLabel("roadmap_idea", x), count: countOf(x) }))} />
-      </Tabs>
-      <Input
+      <div className="wm-table-filters"><Input
         size="sm"
         type="search"
         value={search}
@@ -84,8 +81,8 @@ function IdeasList() {
         aria-label={t("search")}
         placeholder={t("search")}
         startIcon={<MagnifyingGlass className="size-4" />}
-        className="w-full sm:w-72"
-      />
+        className="wm-search"
+      /><Select size="sm" aria-label={t("title")} value={tab} onValueChange={value=>setTab((value??"pending") as Tab)} options={TABS.map(value=>({value,label:value === "closed" ? t("closed") : value === "open" ? ti("opened") : statusLabel("roadmap_idea",value)}))} /></div>
       <DataTable
         mode="server"
         rowCount={data?.total ?? 0}

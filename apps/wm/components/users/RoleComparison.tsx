@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { Badge, PageHeader } from "@orgtik/ui";
+import { useState } from "react";
+import { Badge, Input, PageHeader, Select } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { useMeQuery, useRolesQuery } from "@/store/api";
 
@@ -38,6 +39,8 @@ export function RoleComparison() {
   const me = useMeQuery();
   const query = useRolesQuery();
   const mine = new Set(me.data?.roles.map((role) => role.key));
+  const [search, setSearch] = useState("");
+  const [roleKey, setRoleKey] = useState("all");
   const rows = MODULES.map((key) => ({
     key,
     label: ti(`capabilityGroups.${key}`),
@@ -50,7 +53,7 @@ export function RoleComparison() {
         <span className="font-semibold">{row.original.label}</span>
       ),
     },
-    ...(query.data ?? []).map((role) => ({
+    ...(query.data ?? []).filter(role=>roleKey==="all"||role.key===roleKey).map((role) => ({
       id: role.key,
       header: () => (
         <div className="flex flex-col gap-1">
@@ -96,12 +99,14 @@ export function RoleComparison() {
   ];
   return (
     <div className="flex flex-col gap-6">
-      <PageHeader title={t("title")} description={ti("roleComparisonHelp")} />
+      <PageHeader title={ti("roleComparison")} description={ti("roleComparisonHelp")} />
+      <div className="wm-table-filters"><Input size="sm" className="wm-search" aria-label={ti("rolesSearch")} placeholder={ti("rolesSearch")} value={search} onChange={event=>setSearch(event.target.value)} /><Select size="sm" aria-label={ti("allRoles")} value={roleKey} onValueChange={value=>setRoleKey(value??"all")} options={[{value:"all",label:ti("allRoles")},...(query.data??[]).map(role=>({value:role.key,label:tr(role.key)}))]} /></div>
+      <div className="flex flex-wrap gap-3" aria-label={ti("roleComparison")}><Badge tone="neutral">{ti("view")}</Badge><Badge tone="success">{ti("edit")}</Badge><Badge tone="brand">{ti("approve")} / {ti("manage")}</Badge></div>
       <DataTable
         empty={{ title: ti("noResults") }}
         label={ti("roleComparison")}
         columns={columns.map((column) => ({ ...column, enableSorting: false }))}
-        data={rows}
+        data={rows.filter(row=>row.label.toLowerCase().includes(search.toLowerCase()))}
         getRowId={(row) => row.key}
         status={query.isLoading ? "loading" : query.isError ? "error" : "ready"}
         onRetry={query.refetch}

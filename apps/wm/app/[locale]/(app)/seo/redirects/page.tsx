@@ -146,8 +146,8 @@ function Redirects() {
         description={t("redirectsDescription")}
         actions={editable ? <Button startIcon={<Plus />} onClick={() => setEditing({ from: "", to: "", code: 301, note: "" })}>{t("addRedirect")}</Button> : null}
       />
-      <div className="flex flex-wrap gap-3">
-        <Input aria-label={ti("search")} placeholder={ti("search")} value={url.get("search")} onChange={e => url.set({ search: e.target.value })} className="max-w-sm" />
+      <div className="wm-table-filters">
+        <Input aria-label={ti("search")} placeholder={ti("search")} value={url.get("search")} onChange={e => url.set({ search: e.target.value })} className="wm-search" />
         <Select label={ti("kind")} value={url.get("kind", "all")} onValueChange={kind => url.set({ kind })} options={[{ value: "all", label: ti("all") }, { value: "301", label: t("code301") }, { value: "302", label: t("code302") }]} />
       </div>
       <DataTable mode="server" rowCount={data?.total ?? 0} pagination={{ pageIndex: url.page - 1, pageSize: 10 }} onPaginationChange={update => url.set({ page: (typeof update === "function" ? update({ pageIndex: url.page - 1, pageSize: 10 }) : update).pageIndex + 1 })} label={t("redirectsTitle")} columns={columns.map(column => ({ ...column, enableSorting: false }))} data={data?.items ?? []} getRowId={(r) => r.id} status={status} paginate onRetry={refetch} empty={{ title: t("noRedirects") }} />

@@ -118,7 +118,8 @@
       "user_create": "Account creato",
       "user_update": "Account aggiornato",
       "user_roles": "Ruoli del sito modificati",
-      "sample_revision": "Revisione dimostrativa aggiunta"
+      "sample_revision": "Revisione dimostrativa aggiunta",
+      "manager_order": "Riordinato le voci del gestore"
     }
   },
   "Auth": {
@@ -643,7 +644,24 @@
     "reviewAuthor": "Autore",
     "reviewRole": "Ruolo",
     "reviewCompany": "Azienda",
-    "reviewQuote": "Testimonianza"
+    "reviewQuote": "Testimonianza",
+    "header": "Titolo",
+    "headerAccent": "Titolo – accento",
+    "subheading": "Sottotitolo",
+    "button": "Pulsante",
+    "button1": "Pulsante 1",
+    "button2": "Pulsante 2",
+    "button1Link": "Link del pulsante 1",
+    "button2Link": "Link del pulsante 2",
+    "buildGrow": "Costruire e crescere",
+    "runBetter": "Lavorare meglio",
+    "sectionIntro": "Introduzione della sezione",
+    "purpose": "Scopo",
+    "goal1": "Obiettivo 01",
+    "goal2": "Obiettivo 02",
+    "goal3": "Obiettivo 03",
+    "overview": "Panoramica",
+    "rotationWord": "Testo scorrevole"
   },
   "Formats": {
     "design": "Diario di design",
@@ -908,7 +926,23 @@
     "uploadVideo": "Carica video",
     "reviewLive": "Visibile sul sito",
     "reviewAdditionalMedia": "Media aggiuntivi",
-    "reviewAdditionalMediaHelp": "Immagini e video facoltativi mostrati con questa recensione."
+    "reviewAdditionalMediaHelp": "Immagini e video facoltativi mostrati con questa recensione.",
+    "yes": "Sì",
+    "no": "No",
+    "reviewSampleReadOnly": "Puoi vedere questa impostazione, ma non modificarla.",
+    "orderEntries": "Ordina le voci",
+    "orderHelp": "Trascina le voci o usa le frecce, poi salva l’ordine.",
+    "saveOrder": "Salva ordine",
+    "orderSaved": "Ordine salvato",
+    "orderFailed": "Salvataggio non riuscito. Riprova.",
+    "orderConflict": "L’elenco è cambiato. Ricaricalo.",
+    "languageFlow": "Scegli una lingua, poi prepara le traduzioni per la revisione. Le nuove lingue iniziano come bozze private.",
+    "rolesSearch": "Cerca autorizzazioni",
+    "allRoles": "Tutti i ruoli",
+    "allCapabilities": "Tutte le autorizzazioni",
+    "rotationNote": "Rotating words are used in the Home hero. Other pages use fixed headings.",
+    "rotationSourceHelp": "Questi testi scorrevoli usano i titoli delle voci seguenti. Apri una voce per gestirne il titolo.",
+    "templateField": "Questo valore è fisso nel modello del sito ed è mostrato qui come riferimento."
   },
   "Leads": {
     "title": "Contatti",
@@ -1455,7 +1489,9 @@
     "arabicNote": "L’arabo sul sito è lo stesso design specchiato; renderlo pubblico attende l’approvazione delle pagine specchiate.",
     "errorLocales": {
       "english_public": "L’inglese resta pubblico.",
-      "public_needs_enabled": "Una lingua pubblica deve essere attiva."
+      "public_needs_enabled": "Una lingua pubblica deve essere attiva.",
+      "invalid": "Scegli una lingua supportata e una visibilità valida.",
+      "translation_not_ready": "Questa lingua è disponibile per le bozze. L’accesso pubblico richiede il supporto della lingua sul sito."
     },
     "errorRequired": "Campo obbligatorio.",
     "errorTemplate": "Mantieni {page}.",
