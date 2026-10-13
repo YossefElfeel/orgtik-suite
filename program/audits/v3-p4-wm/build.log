@@ -1,0 +1,55 @@
+$ next build
+▲ Next.js 16.3.7 (Turbopack)
+✓ Running next.config.ts took 101ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1665ms
+  Running TypeScript ...
+  Finished TypeScript in 8.3s ...
+  Collecting page data using 11 workers ...
+  Generating static pages using 11 workers (0/118) ...
+  Generating static pages using 11 workers (29/118)
+  Generating static pages using 11 workers (58/118)
+  Generating static pages using 11 workers (88/118)
+✓ Generating static pages using 11 workers (118/118) in 1065ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /[locale]
+├ ƒ /[locale]/admin/[[...section]]
+├ ƒ /[locale]/auth
+├ ƒ /[locale]/catalog/services
+├ ƒ /[locale]/catalog/software
+├ ƒ /[locale]/content/[area]
+├ ƒ /[locale]/content/[area]/[id]
+├ ƒ /[locale]/content/queue
+├ ƒ /[locale]/go/[target]
+├ ƒ /[locale]/localization
+├ ƒ /[locale]/localization/drafts
+├ ƒ /[locale]/marketing/[kind]/[id]
+├ ƒ /[locale]/marketing/forms
+├ ƒ /[locale]/marketing/ideas
+├ ƒ /[locale]/marketing/leads
+├ ƒ /[locale]/media
+├ ƒ /[locale]/media/[id]
+├ ƒ /[locale]/preview
+├ ƒ /[locale]/releases
+├ ƒ /[locale]/seo
+├ ƒ /[locale]/seo/content/[id]
+├ ƒ /[locale]/seo/indexing
+├ ƒ /[locale]/seo/redirects
+├ ƒ /[locale]/settings/audit
+├ ƒ /[locale]/settings/roles
+├ ƒ /[locale]/settings/site
+├ ƒ /[locale]/settings/users
+├ ƒ /[locale]/settings/webhooks
+├ ƒ /[locale]/setup
+└ ƒ /[locale]/signed-out
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand

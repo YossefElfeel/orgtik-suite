@@ -1,0 +1,23 @@
+{
+  "checks": [
+    "native rich text persisted",
+    "native poll vote persisted",
+    "native personal save persisted",
+    "native reminder queued",
+    "native reminder delivered",
+    "native voice is explicit sample",
+    "native playback is explicitly simulated",
+    "native queue uses workspace zone",
+    "native queued message hidden from another member",
+    "native delivery removes queue",
+    "native picker creates and links real Task",
+    "search query opens real thread reply",
+    "anonymous native guest reaches actual lobby",
+    "actual signed host admits native guest",
+    "guest did not enter canonical directory",
+    "private guest proofs are stripped",
+    "native flow console is clean"
+  ],
+  "errors": [],
+  "total": 17
+}

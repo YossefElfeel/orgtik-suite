@@ -362,3 +362,15 @@ test("website price notices preserve the six-month renewal and full-period offer
   assert.equal(line.scheduled.snapshot.amount, 540, "Six months at100 with10% duration savings, without subscription annual/bundle savings");
   assert.equal(JSON.stringify(f.S.db.invoices.at(-1)), invoice, "The original paid invoice stays immutable");
 });
+
+test("public software lifecycle follows current Console status without changing prices", async () => {
+  const f = fixture();
+  const before = (await f.call("GET", "/v1/public/catalog", null)).body.data;
+  assert.equal(before.releaseStates.chat, "beta");
+  const changed = await f.call("PATCH", "/v1/admin/tools/chat", { status: "live" }, { authorization: "Bearer admin" });
+  assert.equal(changed.status, 200);
+  const after = (await f.call("GET", "/v1/public/catalog", null)).body.data;
+  assert.equal(after.releaseStates.chat, "live");
+  assert.deepEqual(after.items, before.items);
+  assert.deepEqual(after.bundles, before.bundles);
+});

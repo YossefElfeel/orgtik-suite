@@ -236,7 +236,7 @@ module.exports = function adminApi(app, ctx, S, H) {
 
   // ---- ADM-12 grid, drafts and publishing; ADM-13 preview; ADM-14 log ----
   app.get("/v1/admin/grid", need("pricing:view"), (req, res) => {
-    const plans = db.plans.filter((p) => !p.service && p.tier !== "free" && (!req.query.tool || p.tool === req.query.tool));
+    const plans = db.plans.filter((p) => !require('./catalog-ownership').isServiceCatalogId(S, p.id) && p.tier !== "free" && (!req.query.tool || p.tool === req.query.tool || db.websiteOffers?.some(offer => offer.kind === 'software' && offer.id === req.query.tool && offer.serviceId === p.id)));
     const open = db.priceDrafts.find((d) => d.state === "draft");
     // Who a draft would reach if published to existing customers: their lines, counted now.
     const reach = (d) => {
@@ -246,7 +246,7 @@ module.exports = function adminApi(app, ctx, S, H) {
     const draft = open ? { ...open, affects: reach(open) } : undefined;
     ok(res, {
       zones: db.zones.filter((z) => z.active),
-      plans: plans.map((p) => ({ id: p.id, tool: p.tool, name: p.name, perUser: p.perUser, defaultUsd: p.defaultUsd, cells: Object.fromEntries(db.zones.map((z) => [z.id, { monthly: db.grid[`${p.id}:monthly:${z.id}`] ?? null, yearly: db.grid[`${p.id}:yearly:${z.id}`] ?? null }])) })),
+      plans: plans.map((p) => ({ id: p.id, tool: p.tool || db.websiteOffers?.find(offer => offer.kind === 'software' && offer.serviceId === p.id)?.id, name: p.name, perUser: p.perUser, defaultUsd: p.defaultUsd, cells: Object.fromEntries(db.zones.map((z) => [z.id, { monthly: db.grid[`${p.id}:monthly:${z.id}`] ?? null, yearly: db.grid[`${p.id}:yearly:${z.id}`] ?? null }])) })),
       draft,
       priceVersion: db.priceVersion,
     });

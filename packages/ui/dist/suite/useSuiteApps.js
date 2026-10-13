@@ -21,8 +21,10 @@ export function useSuiteApps({ currentScope, currentHref, sosUrl, onNavigate }) 
         const query = workspaceId ? `?workspaceId=${encodeURIComponent(workspaceId)}` : "";
         apps.push(item(definition.scope, definition.labels[locale], definition.scope === currentScope ? currentHref : `${root}/go/${definition.scope}${query}`, SUITE_ICONS[tool]));
     }
-    for (const staff of suite.session?.staffAccess?.apps || [])
-        apps.push(item(staff === "admin" ? "platform_admin" : "website_manager", staff === "admin" ? "OrgTik Console" : "Website Manager", `${root}/go/${staff === "admin" ? "platform_admin" : "website_manager"}`, staff === "admin" ? _jsx(GearSix, {}) : _jsx(Browser, {})));
+    for (const staff of suite.session?.staffAccess?.apps || []) {
+        const scope = staff === "admin" ? "platform_admin" : "website_manager";
+        apps.push(item(scope, staff === "admin" ? "OrgTik Console" : "Website Manager", scope === currentScope ? currentHref : `${root}/go/${scope}`, staff === "admin" ? _jsx(GearSix, {}) : _jsx(Browser, {})));
+    }
     if (suite.isOwner)
         apps.push(item("add_tool", suiteText(locale, "addTool"), `${root}/tools`, _jsx(Plus, {})));
     return apps;

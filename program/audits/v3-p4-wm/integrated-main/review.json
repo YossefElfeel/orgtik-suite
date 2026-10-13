@@ -1,0 +1,113 @@
+{
+  "base": "5853dae",
+  "scope": "Combined native v3 studio and approved PR51 editor/media changes",
+  "checks": [
+    {
+      "name": "Native sample demo_published_serviceFamily keeps deployed ID",
+      "pass": true
+    },
+    {
+      "name": "Native sample demo_published_serviceFamily opens actual typed editor",
+      "pass": true
+    },
+    {
+      "name": "Native sample demo_published_softwareModule keeps deployed ID",
+      "pass": true
+    },
+    {
+      "name": "Native sample demo_published_softwareModule opens actual typed editor",
+      "pass": true
+    },
+    {
+      "name": "Native sample demo_published_caseStudy keeps deployed ID",
+      "pass": true
+    },
+    {
+      "name": "Native sample demo_published_caseStudy opens actual typed editor",
+      "pass": true
+    },
+    {
+      "name": "Native sample demo_published_article keeps deployed ID",
+      "pass": true
+    },
+    {
+      "name": "Native sample demo_published_article opens actual typed editor",
+      "pass": true
+    },
+    {
+      "name": "View notice and authorized Edit coexist with native v3 controls",
+      "pass": true
+    },
+    {
+      "name": "Edit action retains actual language/section/list return",
+      "pass": true
+    },
+    {
+      "name": "Integrated original recovery uses identical key/body without duplicate revision",
+      "pass": true
+    },
+    {
+      "name": "Combined article blocks save through native bounded studio reducer",
+      "pass": true
+    },
+    {
+      "name": "New media picker and article block order survive ordinary reload",
+      "pass": true
+    },
+    {
+      "name": "en/1440 no overflow",
+      "pass": true
+    },
+    {
+      "name": "en/1440 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Arabic mobile editor exposes actual thumbnail picker",
+      "pass": true
+    },
+    {
+      "name": "ar/390 no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Arabic View/Edit notice retains native read-only controls",
+      "pass": true
+    },
+    {
+      "name": "ar/390 no overflow",
+      "pass": true
+    },
+    {
+      "name": "ar/390 no serious/critical axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "Combined flow has no runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "sample-serviceFamily.png",
+    "sample-softwareModule.png",
+    "sample-caseStudy.png",
+    "sample-article.png",
+    "view-mode-en.png",
+    "integrated-autosave-uncertain.png",
+    "integrated-autosave-recovered.png",
+    "article-media-en-1440.png",
+    "article-media-ar-390.png",
+    "view-mode-ar-390.png"
+  ],
+  "errors": [],
+  "articleId": "ar_07",
+  "completed": true
+}

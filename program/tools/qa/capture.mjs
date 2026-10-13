@@ -10,9 +10,17 @@
 import fs from "node:fs";
 import path from "node:path";
 import { chromium } from "playwright";
+import { execFileSync } from "node:child_process";
+import crypto from "node:crypto";
 import { CLOCK_START, OUT, SETTLE_MS, SITE, VIEWPORTS, args, load, newContext, readRoutes, siteCommit, slug, snapshot } from "./lib/site.mjs";
 
 const opt = args({ label: "check" });
+const adapterPath = "apps/website/landing-directions/src/reference/purchase-catalog.js";
+const adapterReference = opt["adapter-ref"] ? String(opt["adapter-ref"]) : null;
+const adapterBytes = adapterReference
+  ? execFileSync("git", ["show", `${adapterReference}:${adapterPath}`])
+  : fs.readFileSync(adapterPath);
+const adapter = { reference: adapterReference, sha256: crypto.createHash("sha256").update(adapterBytes).digest("hex") };
 const widths = opt.widths ? String(opt.widths).split(",").map(Number) : Object.keys(VIEWPORTS).map(Number);
 const routes = readRoutes().filter((r) => (!opt.only || r.includes(String(opt.only))) && (!opt.exact || String(opt.exact).split(",").includes(r)) && (!opt.exclude || r !== String(opt.exclude)));
 const dir = path.join(OUT, "parity", String(opt.label));
@@ -30,6 +38,9 @@ try {
     for (const width of widths) {
       const name = `${slug(route)}__${width}`;
       const context = await newContext(browser, width);
+      // Compare an exact approved data-adapter blob against current source while every
+      // other website file, native fixture and capture protocol remains identical.
+      if (adapterReference) await context.route(/\/src\/reference\/purchase-catalog\.js(?:\?|$)/, route => route.fulfill({ status: 200, contentType: "text/javascript", body: adapterBytes }));
       const page = await context.newPage();
       const errors = [];
       page.on("pageerror", (e) => errors.push(String(e.message || e).slice(0, 200)));
@@ -55,7 +66,7 @@ try {
 
 fs.writeFileSync(
   path.join(dir, "manifest.json"),
-  JSON.stringify({ label: opt.label, site: SITE, commit, renderer: opt.renderer === 'software' ? 'software' : 'default', warmPaint: 'per-capture', at: new Date().toISOString(), clock: { start: CLOCK_START.toISOString(), settleMs: SETTLE_MS }, widths, captures }, null, 2) + "\n",
+  JSON.stringify({ label: opt.label, site: SITE, commit, adapter, renderer: opt.renderer === 'software' ? 'software' : 'default', warmPaint: 'per-capture', at: new Date().toISOString(), clock: { start: CLOCK_START.toISOString(), settleMs: SETTLE_MS }, widths, captures }, null, 2) + "\n",
 );
 const failed = captures.filter((c) => c.failed || !c.rendered).length;
 console.log(`\n${captures.length} captures in ${Math.round((Date.now() - started) / 1000)}s, ${failed} failed -> audits/website/parity/${opt.label}/`);

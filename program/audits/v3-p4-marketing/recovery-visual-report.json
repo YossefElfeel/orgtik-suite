@@ -1,0 +1,126 @@
+{
+  "scope": "Current saved-command recovery EN/AR, desktop/mobile, light/dark; accepted self-test response lost",
+  "checks": [
+    {
+      "name": "en actual self-test accepted before response loss",
+      "pass": true
+    },
+    {
+      "name": "recovery-final-en-light-1440 contained",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "recovery-final-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "recovery-final-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "recovery-final-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "recovery-final-en-light-390 contained",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "recovery-final-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "recovery-final-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "recovery-final-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "en explicit current self-test recovery returns original receipt",
+      "pass": true
+    },
+    {
+      "name": "ar actual self-test accepted before response loss",
+      "pass": true
+    },
+    {
+      "name": "recovery-final-ar-dark-1440 contained",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "recovery-final-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "recovery-final-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "recovery-final-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "recovery-final-ar-dark-390 contained",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "recovery-final-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "recovery-final-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "recovery-final-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "ar explicit current self-test recovery returns original receipt",
+      "pass": true
+    },
+    {
+      "name": "No recovery visual runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "recovery-final-en-light-1440",
+    "recovery-final-en-light-390",
+    "recovery-final-ar-dark-1440",
+    "recovery-final-ar-dark-390"
+  ],
+  "errors": [],
+  "completed": true
+}

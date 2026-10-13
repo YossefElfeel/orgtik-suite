@@ -1,0 +1,11 @@
+{
+  "checks": [
+    "native recording stores actual pinned MP4",
+    "native pinned video preview decodes",
+    "content is actual MP4 bytes",
+    "unrelated caller file refused",
+    "anonymous private recording refused"
+  ],
+  "errors": [],
+  "total": 5
+}

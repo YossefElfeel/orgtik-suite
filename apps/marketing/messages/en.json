@@ -2171,6 +2171,22 @@
     "taskCancelled": "Cancelled",
     "taskUnavailable": "Task status unavailable",
     "projectSwitchFailed": "This project could not be selected. Retry with current access.",
-    "projectUnavailable": "This project is not visible with your current access."
+    "projectUnavailable": "This project is not visible with your current access.",
+    "pendingCommands": "Unconfirmed changes",
+    "pendingCommandsBody": "A response was lost. Check the original change before starting another. Recovery uses the same saved request and your current access.",
+    "recoverCommand": "Check original change",
+    "recoveryDenied": "The original change could not be confirmed. Check your current access and source record, then try again. The saved request is retained.",
+    "recoverFirst": "Check the original unconfirmed change before submitting different details.",
+    "utmSettings": "UTM settings",
+    "marketingConfiguration": "Marketing configuration",
+    "utmHint": "Save this project's default labels for shared links. These settings do not record visits or send tracking events.",
+    "utmSource": "UTM source",
+    "utmMedium": "UTM medium",
+    "utmCampaign": "UTM campaign",
+    "utmLinkBuilder": "Build a tagged link",
+    "utmPageAddress": "Page address",
+    "utmTaggedAddress": "Tagged address",
+    "utmInvalidAddress": "Enter a public HTTP or HTTPS address without credentials.",
+    "utmSavedDefaults": "The generated address uses the last saved defaults and preserves other query values and the page fragment."
   }
 }

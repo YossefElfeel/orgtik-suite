@@ -17,7 +17,10 @@ export function useSuiteApps({ currentScope, currentHref, sosUrl, onNavigate }: 
   const item = (id: string, label: string, href: string, icon: RailApp["icon"]) => ({ id, label, href, icon, ...(onNavigate && id !== currentScope ? { onNavigate: () => onNavigate(href) } : {}) });
   if (tools.length >= 2) apps.push(item("global", suiteText(locale, "home"), root || "/", <House />));
   for (const tool of tools) { const definition = SUITE_TOOLS[tool]; const query = workspaceId ? `?workspaceId=${encodeURIComponent(workspaceId)}` : ""; apps.push(item(definition.scope, definition.labels[locale], definition.scope === currentScope ? currentHref : `${root}/go/${definition.scope}${query}`, SUITE_ICONS[tool as ToolKey])); }
-  for (const staff of suite.session?.staffAccess?.apps || []) apps.push(item(staff === "admin" ? "platform_admin" : "website_manager", staff === "admin" ? "OrgTik Console" : "Website Manager", `${root}/go/${staff === "admin" ? "platform_admin" : "website_manager"}`, staff === "admin" ? <GearSix /> : <Browser />));
+  for (const staff of suite.session?.staffAccess?.apps || []) {
+    const scope = staff === "admin" ? "platform_admin" : "website_manager";
+    apps.push(item(scope, staff === "admin" ? "OrgTik Console" : "Website Manager", scope === currentScope ? currentHref : `${root}/go/${scope}`, staff === "admin" ? <GearSix /> : <Browser />));
+  }
   if (suite.isOwner) apps.push(item("add_tool", suiteText(locale, "addTool"), `${root}/tools`, <Plus />));
   return apps;
 }

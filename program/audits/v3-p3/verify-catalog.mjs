@@ -3,7 +3,7 @@ import { createRequire } from 'node:module';
 import { CATALOG, BUNDLES, TERM_SAVINGS, countSaving, installPublicCatalog, findItem, findBundle } from '../../../apps/website/landing-directions/src/reference/purchase-catalog.js';
 const require = createRequire(import.meta.url), seed = require('../../../mock/apps/admin/seed-website-offers.js');
 const copy = value => JSON.parse(JSON.stringify(value));
-const presentation = () => CATALOG.map(({ monthlyMinor, ...item }) => item);
+const presentation = () => CATALOG.map(({ monthlyMinor, releaseState, ...item }) => item);
 const initial = copy(presentation()), initialBundles = copy(BUNDLES);
 const data = { currency: 'CHF', decimals: 2, items: seed.offers.map(offer => ({ id: offer.id, kind: offer.kind, names: offer.name, monthlyMinor: offer.monthlyCHF * 100 })), bundles: seed.bundles };
 installPublicCatalog(data);

@@ -20,6 +20,7 @@ export function selectRuntimeConsumers({ changedFiles = [], deployedKeys = [], s
   const reasons = {};
   const add = (key, reason) => {
     if (!map.consumers.includes(key) || !projects[key]) throw new Error(`Runtime dependency references unknown consumer: ${key}`);
+    if (projects[key].retired) return;
     selected.add(key);
     (reasons[key] ??= []).push(reason);
   };
@@ -61,7 +62,10 @@ export function buildRuntimeCheckPlan(selection, map = runtimeDependencies, proj
     });
     suites.push({ key, coverage: suite.coverage, note: suite.note, requires: suite.requires || [], visualRoute: suite.visualRoute, flows });
   }
-  for (const key of required) if (!projects[key]) throw new Error(`Missing required preview project: ${key}`);
+  for (const key of required) {
+    if (!projects[key]) throw new Error(`Missing required preview project: ${key}`);
+    if (projects[key].retired) throw new Error(`${key}: retired project cannot be required for preview acceptance`);
+  }
   return { ...selection, suites, requiredProjects: [...required] };
 }
 

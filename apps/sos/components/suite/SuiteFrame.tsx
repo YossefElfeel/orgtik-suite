@@ -21,7 +21,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   const identityOnly = mounted && !workspaceContext && !staffAccess;
   const at = (path: string) => path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(path + "/");
   const item = (href: string, label: string, icon: ReactNode): SidebarItem => ({ href, label, icon, active: at(href) });
-  const items: SidebarItem[] = identityOnly ? [item("/account/identity", tv("chooseWorkspace"), <House />)] : [item("/", t("home"), <House />), item(workspaceContext ? "/account/security" : "/account/identity", tv("account"), <UserCircle />)];
+  const items: SidebarItem[] = identityOnly ? [item("/account/identity", tv("chooseWorkspace"), <House />)] : [item("/", t("home"), <House />), item(mounted && workspaceContext ? "/account/security" : "/account/identity", tv("account"), <UserCircle />)];
   const sections: SidebarSection[] = [{ items }];
   if (mounted && ws.me) {
     items.push(item("/tools", tw("tools"), <Storefront />), item("/usage", tv("usage"), <SquaresFour />), { ...item("/notifications", tw("notifications"), <Bell />), count: ws.me.unread || undefined });

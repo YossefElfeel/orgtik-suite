@@ -29,15 +29,16 @@ WORKSPACE = PROGRAM.parent
 OUT = PROGRAM / "glossary"
 
 APPS = {
-    "sos": "somion-sos-frontend-main",
-    "tasks": "task-manager-front-main",
-    "files": "file-manager-dashboard-main",
-    "sales": "sales-dashboardv2-main",
-    "hr": "somion-hr-dashboard-main",
-    "marketing": "digital-marketing-frontend-main",
-    "content": "content-dashboard-somion-main",
-    "chats": "somion-hq",
-    "website": "orgtik-website/landing-directions",
+    "sos": "apps/sos",
+    "tasks": "apps/tasks",
+    "files": "apps/files",
+    "sales": "apps/sales",
+    "hr": "apps/hr",
+    "marketing": "apps/marketing",
+    "admin": "apps/admin",
+    "wm": "apps/wm",
+    "chats": "apps/chats",
+    "website": "apps/website/landing-directions",
 }
 LANGS = ["de", "fr", "it", "ar"]
 SKIP_DIRS = {"node_modules", ".next", ".git", "dist", "build", "public", "messages", "mock", "local-dev"}
@@ -152,10 +153,25 @@ def flatten(obj, prefix=""):
 def catalogs(app_dir):
     msgs = app_dir / "messages"
     out = {}
-    for lang in ["en", *LANGS]:
-        f = msgs / f"{lang}.json"
-        if f.exists():
-            out[lang] = dict(flatten(json.loads(f.read_text(encoding="utf-8"))))
+    # The monorepo has both messages/en.json and grouped messages/usr/en/*.json.
+    # Use the same namespace for language siblings, and retain every catalog group.
+    for f in sorted(msgs.rglob("*.json")):
+        relative = f.relative_to(msgs)
+        for lang in ["en", *LANGS]:
+            parts = list(relative.parts)
+            if f.stem == lang:
+                namespace = parts[:-1]
+            elif lang in parts[:-1]:
+                namespace = [part for part in parts[:-1] if part != lang] + [f.stem]
+            else:
+                continue
+            prefix = "/".join(namespace)
+            target = out.setdefault(lang, {})
+            for key, value in flatten(json.loads(f.read_text(encoding="utf-8-sig"))):
+                qualified = f"{prefix}.{key}" if prefix else key
+                if qualified in target:
+                    raise ValueError(f"Duplicate catalog key: {app_dir.name}/{lang}/{qualified}")
+                target[qualified] = value
     return out
 
 

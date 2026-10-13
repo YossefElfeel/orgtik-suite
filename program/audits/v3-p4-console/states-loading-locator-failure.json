@@ -1,0 +1,15 @@
+{
+  "scope": "Ordinary native billing and actual account/staff handoffs in owned offset1100 fixture",
+  "checks": [
+    {
+      "name": "Actual native publication list starts empty",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "state-native-empty.png",
+    "states-failure.png"
+  ],
+  "errors": [],
+  "failure": "locator.waitFor: Timeout 120000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByText('Loading current Console data', { exact: true }) to be visible\u001b[22m\n"
+}

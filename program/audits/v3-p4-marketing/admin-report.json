@@ -1,0 +1,290 @@
+{
+  "scope": "All eight ordinary Marketing Admin sections in native workspace authority",
+  "checks": [
+    {
+      "name": "en/overview one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "en/overview accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "ltr"
+        }
+      }
+    },
+    {
+      "name": "en/members one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "en/members accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "ltr"
+        }
+      }
+    },
+    {
+      "name": "en/roles one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "en/roles accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "ltr"
+        }
+      }
+    },
+    {
+      "name": "en/settings one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "en/settings accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "ltr"
+        }
+      }
+    },
+    {
+      "name": "en/connections one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "en/connections accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "ltr"
+        }
+      }
+    },
+    {
+      "name": "en/import-export one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "en/import-export accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "ltr"
+        }
+      }
+    },
+    {
+      "name": "en/audit one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "en/audit accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "ltr"
+        }
+      }
+    },
+    {
+      "name": "en/billing one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "en/billing accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "ltr"
+        }
+      }
+    },
+    {
+      "name": "Admin export contains actual native Marketing workspace records",
+      "pass": true
+    },
+    {
+      "name": "ar/overview one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "ar/overview accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "rtl"
+        }
+      }
+    },
+    {
+      "name": "ar/members one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "ar/members accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "rtl"
+        }
+      }
+    },
+    {
+      "name": "ar/roles one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "ar/roles accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "rtl"
+        }
+      }
+    },
+    {
+      "name": "ar/settings one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "ar/settings accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "rtl"
+        }
+      }
+    },
+    {
+      "name": "ar/connections one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "ar/connections accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "rtl"
+        }
+      }
+    },
+    {
+      "name": "ar/import-export one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "ar/import-export accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "rtl"
+        }
+      }
+    },
+    {
+      "name": "ar/audit one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "ar/audit accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "rtl"
+        }
+      }
+    },
+    {
+      "name": "ar/billing one ordinary heading",
+      "pass": true
+    },
+    {
+      "name": "ar/billing accessible and within width",
+      "pass": true,
+      "details": {
+        "violations": [],
+        "bounds": {
+          "client": 1440,
+          "scroll": 1440,
+          "dir": "rtl"
+        }
+      }
+    },
+    {
+      "name": "No Admin runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "final-admin-overview-en-1440",
+    "final-admin-members-en-1440",
+    "final-admin-roles-en-1440",
+    "final-admin-settings-en-1440",
+    "final-admin-connections-en-1440",
+    "final-admin-import-export-en-1440",
+    "final-admin-audit-en-1440",
+    "final-admin-billing-en-1440",
+    "final-admin-overview-ar-1440",
+    "final-admin-members-ar-1440",
+    "final-admin-roles-ar-1440",
+    "final-admin-settings-ar-1440",
+    "final-admin-connections-ar-1440",
+    "final-admin-import-export-ar-1440",
+    "final-admin-audit-ar-1440",
+    "final-admin-billing-ar-1440"
+  ],
+  "errors": [],
+  "completed": true
+}

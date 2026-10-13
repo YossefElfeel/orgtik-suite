@@ -42,6 +42,10 @@ Run the whole suite locally with `pnpm dev:local`, or double-click
 account is `mona.adel@orgtik.test`, password `Local@2026`. Ctrl+C stops a run
 started in the terminal. Local data persists under `.vercel/dev/mock`.
 
+For an isolated parallel preview, set `ORGTIK_LOCAL_PORT` to another free port.
+`ORGTIK_LOCAL_HOST=127.0.0.1` also isolates browser cookies from a preview using
+`localhost`. Each worktree keeps its own local dataset and process marker.
+
 This is an interactive prototype: the mock simulates application data and
 actions locally. Mona has platform and Website Manager super-admin roles, plus
 admin access to all six workspace tools. Her launcher exposes all nine apps

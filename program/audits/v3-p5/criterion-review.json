@@ -1,0 +1,15 @@
+{
+  "originalCriteria": 407,
+  "exactOriginalTitlesRetained": true,
+  "explicitEvidenceReviews": 255,
+  "scopeBoundaryReviews": 152,
+  "dispositionCounts": {
+    "retained_contract_rechecked": 32,
+    "accepted_v3_mock": 107,
+    "superseded_owner_or_policy": 11,
+    "bounded_v3_with_external_deferral": 81,
+    "deferred_tier_c": 17,
+    "historical_scope_not_adopted": 159
+  },
+  "conclusion": "Every original ID received an individual qualified disposition. Reviewed count is not full production acceptance. Historical fields/policies outside adopted scope remain visible."
+}
