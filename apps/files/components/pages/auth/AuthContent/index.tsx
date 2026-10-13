@@ -1,5 +1,5 @@
 "use client";
-import { useAuthSuccess, useHandoffSession, setClientSession } from '@orgtik/ui/auth';
+import { appRelativePath, useAuthSuccess, useHandoffSession, setClientSession } from '@orgtik/ui/auth';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDispatch } from 'react-redux';
@@ -21,7 +21,7 @@ export default function AuthContent() {
     try {
       const auth = verifiedAuth(session); accepted.current = true;
       setClientSession(session); dispatch(setUser({ user: auth.user!, token: auth.token! }));
-      const base = window.location.pathname.replace(/\/auth\/?$/, ''), to = first.current.redirect;
+      const base = appRelativePath(window.location.pathname).replace(/\/auth\/?$/, ''), to = appRelativePath(first.current.redirect);
       confirm(() => router.replace(/^\/(en|ar|de|fr|it)(\/|$)/.test(to) ? to : `${base}${to === '/' ? '' : to}` || '/'));
     } catch { setDenied(true); }
   }, [session, confirm, dispatch, router]);

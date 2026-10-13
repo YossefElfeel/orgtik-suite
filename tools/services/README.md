@@ -50,12 +50,14 @@ the OrgTik workspace before exchanging its app session.
 Startup also points the older frontends' installed launcher dependency at
 localhost, keeping app links and logout inside the local prototype.
 
-The launcher uses an isolated configuration directory beside the repository
-because CLI 63's development service discovery chooses the Git-root config even
-when `--local-config` points at the local template. Source and dependencies are
-linked into that directory; production deployment configs stay in the repo.
+The launcher runs a small local router and one file-backed mock process. It
+builds the shared UI once, then starts each frontend when first opened, using
+Turbopack for Next.js. API requests go straight to the mock rather than through
+a frontend compilation and Vercel's development proxy. All public app prefixes
+and the existing local dataset stay the same. The first visit to a new page
+still compiles that page; subsequent visits reuse the development cache.
 
-`vercel.dev.json` is the reviewed all-services template for local development.
+`vercel.dev.json` is the reviewed all-services template for Vercel Services.
 `tools/services/projects.mjs` generates the ten deployment configs at the repo
 root, so service roots resolve relative to the repository. Regenerate after
 changing the template, and check that the generated files are current:
@@ -66,8 +68,8 @@ pnpm dev:local
 ```
 
 Use Node.js 22.13 or newer and the repository's pnpm 11.3.0. No Vercel account
-or Redis connection is required for this local command. The pinned CLI may be
-downloaded by `npx` on first use; it runs only the development server locally.
+or Redis connection is required for this local command. It uses the installed
+workspace dependencies and does not download or start the Vercel CLI.
 
 After changing the service template, regenerate the deployment profiles with
 `node tools/services/projects.mjs` and check them with
