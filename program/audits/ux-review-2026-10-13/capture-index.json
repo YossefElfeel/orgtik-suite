@@ -1,0 +1,520 @@
+[
+  {
+    "name": "02-wm-overview-en",
+    "url": "http://127.0.0.1:3400/wm/en",
+    "headings": [
+      "  - heading \"Overview\" [level=1]"
+    ],
+    "note": "Mona: staff super admin, full launcher and restored navigation"
+  },
+  {
+    "name": "03-wm-admin-en",
+    "url": "http://127.0.0.1:3400/wm/en/admin",
+    "headings": [
+      "  - heading \"Website Manager administration\" [level=1]"
+    ],
+    "note": "Restored staff administration, actual super-admin role, 8 admin sections"
+  },
+  {
+    "name": "04-wm-services-en",
+    "url": "http://127.0.0.1:3400/wm/en/catalog/services",
+    "headings": [
+      "  - heading \"Service catalog\" [level=1]"
+    ],
+    "note": "Canonical services mirror and CRM launch"
+  },
+  {
+    "name": "05-wm-software-en",
+    "url": "http://127.0.0.1:3400/wm/en/catalog/software",
+    "headings": [
+      "  - heading \"Software catalog\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "06-wm-translations-en",
+    "url": "http://127.0.0.1:3400/wm/en/localization/drafts",
+    "headings": [
+      "  - heading \"Translation drafts\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "07-wm-forms-en",
+    "url": "http://127.0.0.1:3400/wm/en/marketing/forms",
+    "headings": [
+      "  - heading \"Form protection\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "08-wm-releases-en",
+    "url": "http://127.0.0.1:3400/wm/en/releases",
+    "headings": [
+      "  - heading \"Releases\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "09-wm-webhooks-en",
+    "url": "http://127.0.0.1:3400/wm/en/settings/webhooks",
+    "headings": [
+      "  - heading \"Publish webhooks\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "10-wm-setup-en",
+    "url": "http://127.0.0.1:3400/wm/en/setup",
+    "headings": [
+      "  - heading \"Getting started\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "11-wm-media-en",
+    "url": "http://127.0.0.1:3400/wm/en/media",
+    "headings": [
+      "  - heading \"Media\" [level=1]"
+    ],
+    "note": "Compact filters and restored packaged import/tag actions"
+  },
+  {
+    "name": "12-wm-admin-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/admin",
+    "headings": [
+      "  - heading \"إدارة Website Manager\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "13-wm-services-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/catalog/services",
+    "headings": [
+      "  - heading \"كتالوج الخدمات\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "14-wm-software-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/catalog/software",
+    "headings": [
+      "  - heading \"كتالوج البرامج\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "15-wm-translations-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/localization/drafts",
+    "headings": [
+      "  - heading \"مسودات الترجمة\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "16-wm-forms-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/marketing/forms",
+    "headings": [
+      "  - heading \"حماية النماذج\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "17-wm-releases-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/releases",
+    "headings": [
+      "  - heading \"الإصدارات\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "18-wm-webhooks-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/settings/webhooks",
+    "headings": [
+      "  - heading \"إشعارات النشر\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "19-wm-setup-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/setup",
+    "headings": [
+      "  - heading \"خطوات البداية\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "20-wm-media-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/media",
+    "headings": [
+      "  - heading \"الوسائط\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "21-console-overview-ar",
+    "url": "http://127.0.0.1:3400/admin/ar",
+    "headings": [
+      "  - heading \"نظرة عامة\" [level=1]"
+    ],
+    "note": "Mona super-admin, restored Console sidebar"
+  },
+  {
+    "name": "22-console-billing-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/billing",
+    "headings": [
+      "  - heading \"عمليات الفوترة\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "23-console-software-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/catalog/software",
+    "headings": [
+      "  - heading \"كتالوج الأدوات\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "24-console-ecosystem-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/ecosystem",
+    "headings": [
+      "  - heading \"سجل الروابط\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "24-console-ecosystem-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/ecosystem",
+    "headings": [
+      "  - heading \"سجل الروابط\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "22-console-billing-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/billing",
+    "headings": [
+      "  - heading \"عمليات الفوترة\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "23-console-software-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/catalog/software",
+    "headings": [
+      "  - heading \"كتالوج الأدوات\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "25-console-releases-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/releases",
+    "headings": [
+      "  - heading \"الإصدارات والإعلانات\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "26-console-setup-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/setup",
+    "headings": [
+      "  - heading \"إعداد الكونـسول\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "27-console-invitations-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/staff/invitations",
+    "headings": [
+      "  - heading \"دعوات فريق المنصة\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "28-console-security-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/staff/security",
+    "headings": [
+      "  - heading \"تحقق من خطوتين بالمحاكاة\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "29-console-tax-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/tax/checks",
+    "headings": [
+      "  - heading \"فحص أرقام الضرايب بالمحاكاة\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "30-console-ticket-targets-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/tickets/targets",
+    "headings": [
+      "  - heading \"مواعيد الرد على التذاكر\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "31-console-services-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/services",
+    "headings": [
+      "  - heading \"الإدارة في CRM\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "32-console-requests-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/service-requests",
+    "headings": [
+      "  - heading \"الإدارة في CRM\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "33-console-billing-en",
+    "url": "http://127.0.0.1:3400/admin/en/billing",
+    "headings": [
+      "  - heading \"Billing operations\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "34-console-software-en",
+    "url": "http://127.0.0.1:3400/admin/en/catalog/software",
+    "headings": [
+      "  - heading \"Software catalog\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "35-console-ecosystem-en",
+    "url": "http://127.0.0.1:3400/admin/en/ecosystem",
+    "headings": [
+      "  - heading \"Connections registry\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "36-console-releases-en",
+    "url": "http://127.0.0.1:3400/admin/en/releases",
+    "headings": [
+      "  - heading \"Releases and announcements\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "37-console-setup-en",
+    "url": "http://127.0.0.1:3400/admin/en/setup",
+    "headings": [
+      "  - heading \"Console setup\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "38-console-invitations-en",
+    "url": "http://127.0.0.1:3400/admin/en/staff/invitations",
+    "headings": [
+      "  - heading \"Staff invitations\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "39-console-security-en",
+    "url": "http://127.0.0.1:3400/admin/en/staff/security",
+    "headings": [
+      "  - heading \"Mock two-step verification\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "40-console-tax-en",
+    "url": "http://127.0.0.1:3400/admin/en/tax/checks",
+    "headings": [
+      "  - heading \"Mock tax ID checks\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "41-console-ticket-targets-en",
+    "url": "http://127.0.0.1:3400/admin/en/tickets/targets",
+    "headings": [
+      "  - heading \"Ticket response targets\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "42-console-services-en",
+    "url": "http://127.0.0.1:3400/admin/en/services",
+    "headings": [
+      "  - heading \"Managed in CRM\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "43-console-requests-en",
+    "url": "http://127.0.0.1:3400/admin/en/service-requests",
+    "headings": [
+      "  - heading \"Managed in CRM\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "44-console-overview-en",
+    "url": "http://127.0.0.1:3400/admin/en",
+    "headings": [
+      "  - heading \"Overview\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "45-tasks-mona-en",
+    "url": "http://127.0.0.1:3400/tasks/en",
+    "headings": [
+      "  - heading \"Dashboard\" [level=1]"
+    ],
+    "note": "Restored Console staff launcher preserves Mona’s workspace access"
+  },
+  {
+    "name": "46-account-mona-home-en",
+    "url": "http://127.0.0.1:3400/sos",
+    "headings": [
+      "  - heading \"OrgTik Egypt\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "47-account-billing-en",
+    "url": "http://127.0.0.1:3400/sos/billing",
+    "headings": [
+      "  - heading \"Subscriptions\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "48-account-invoices-en",
+    "url": "http://127.0.0.1:3400/sos/billing/invoices",
+    "headings": [
+      "  - heading \"Invoices\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "49-owner-unpaid-invoice-en",
+    "url": "http://127.0.0.1:3400/sos/billing/invoices/inv_1030",
+    "headings": [
+      "  - heading \"Invoice INV-2026-001044\" [level=1]"
+    ],
+    "note": "Unpaid invoice has print action but no direct owner payment CTA"
+  },
+  {
+    "name": "50-console-payment-drawer-en",
+    "url": "http://127.0.0.1:3400/admin/en/billing",
+    "headings": [
+      "  - heading [level=1]: Billing operations"
+    ],
+    "note": "Prototype invoice recovery and owner-link controls"
+  },
+  {
+    "name": "51-owner-pay-link-en",
+    "url": "http://127.0.0.1:3400/sos/billing/pay/paylink_1057",
+    "headings": [
+      "  - heading \"Invoice payment link\" [level=1]"
+    ],
+    "note": "Staff-issued owner link resolves against the current owned workspace"
+  },
+  {
+    "name": "52-owner-pay-link-ar",
+    "url": "http://127.0.0.1:3400/sos/billing/pay/paylink_1057",
+    "headings": [
+      "  - heading \"Invoice payment link\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "53-account-staff-invitations-ar",
+    "url": "http://127.0.0.1:3400/sos/staff-invitations",
+    "headings": [
+      "  - heading \"دعوات فريق OrgTik\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "52-owner-pay-link-ar",
+    "url": "http://127.0.0.1:3400/sos/billing/pay/paylink_1057",
+    "headings": [
+      "  - heading \"رابط دفع الفاتورة\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "54-account-staff-invitations-en",
+    "url": "http://127.0.0.1:3400/sos/staff-invitations",
+    "headings": [
+      "  - heading \"OrgTik staff invitations\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "55-marketing-mona-en",
+    "url": "http://127.0.0.1:3400/marketing/en/dashboard",
+    "headings": [
+      "  - heading \"Nile Foods\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "56-marketing-utm-en",
+    "url": "http://127.0.0.1:3400/marketing/en/settings/utm",
+    "headings": [
+      "  - heading \"Settings\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "57-marketing-utm-ar",
+    "url": "http://127.0.0.1:3400/marketing/ar/settings/utm",
+    "headings": [
+      "  - heading \"الإعدادات\" [level=1]"
+    ],
+    "note": ""
+  },
+  {
+    "name": "58-chats-office-en",
+    "url": "http://127.0.0.1:3400/chats/hq/office",
+    "headings": [
+      "  - heading \"Office\" [level=1]"
+    ],
+    "note": "Restored native office; real device media permissions were not requested"
+  },
+  {
+    "name": "59-chats-office-current-en",
+    "url": "http://127.0.0.1:3400/chats/hq/office",
+    "note": ""
+  },
+  {
+    "name": "60-chats-admin-en",
+    "url": "http://127.0.0.1:3400/chats/hq/admin",
+    "note": ""
+  },
+  {
+    "name": "61-chats-settings-en",
+    "url": "http://127.0.0.1:3400/chats/hq/settings",
+    "note": ""
+  },
+  {
+    "name": "62-chats-settings-ar",
+    "url": "http://127.0.0.1:3400/chats/hq/settings",
+    "note": ""
+  },
+  {
+    "name": "63-chats-office-ar",
+    "url": "http://127.0.0.1:3400/chats/hq/office",
+    "note": ""
+  },
+  {
+    "name": "64-chats-admin-ar",
+    "url": "http://127.0.0.1:3400/chats/hq/admin",
+    "note": ""
+  }
+]
