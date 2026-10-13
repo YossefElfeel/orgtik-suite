@@ -100,11 +100,13 @@ test("function inventory distinguishes deferred Next.js routes from dedicated fu
 
 test("gateway uses the runtime binding, preserves authentication/body/query, and streams the response", async () => {
   const before = process.env.ORGTIK_MOCK_URL, fetchBefore = globalThis.fetch;
+  const body = JSON.stringify({ mode: "staff", target: "wm" });
   process.env.ORGTIK_MOCK_URL = "https://private.invalid/service/mock/";
   try {
     globalThis.fetch = async (url, init) => {
       assert.equal(url.href, "https://private.invalid/service/mock/sos/api/auth/login?mode=staff");
       assert.equal(init.headers.get("authorization"), "Bearer fixture-only");
+      assert.equal(init.headers.get("content-length"), String(Buffer.byteLength(body)));
       assert.equal(init.headers.get("x-workspace"), "w1");
       assert.equal(init.headers.get("idempotency-key"), "operation-1");
       assert.equal(init.headers.get("x-mock-replay"), null);
@@ -113,7 +115,7 @@ test("gateway uses the runtime binding, preserves authentication/body/query, and
       assert.deepEqual(await new Response(init.body).json(), { mode: "staff", target: "wm" });
       return Response.json({ data: { result: "fixture" } }, { status: 401 });
     };
-    const result = await proxyBackend(new Request("https://public.invalid/sos/api/backend/sos/api/auth/login?mode=staff", { method: "POST", headers: { authorization: "Bearer fixture-only", "content-type": "application/json", "x-workspace": "w1", "idempotency-key": "operation-1", "x-mock-replay": "1", cookie: "untrusted" }, body: JSON.stringify({ mode: "staff", target: "wm" }) }));
+    const result = await proxyBackend(new Request("https://public.invalid/sos/api/backend/sos/api/auth/login?mode=staff", { method: "POST", headers: { authorization: "Bearer fixture-only", "content-type": "application/json", "content-length": String(Buffer.byteLength(body)), "x-workspace": "w1", "idempotency-key": "operation-1", "x-mock-replay": "1", cookie: "untrusted" }, body }));
     assert.equal(result.status, 401);
     assert.equal(result.headers.get("cache-control"), "no-store");
     assert.deepEqual(await result.json(), { data: { result: "fixture" } });
