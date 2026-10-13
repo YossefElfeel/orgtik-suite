@@ -8,12 +8,16 @@ Double-click `start-local.cmd` in the project root, or:
 
 ```sh
 pnpm install --frozen-lockfile
-pnpm --filter orgtik-local-dev start
+pnpm dev:local
 ```
 
-Then open **http://localhost:3013/auth**, sign in with a test account below, choose a workspace and use the launcher. New accounts begin with empty workspace stores. The launcher sends a one-time destination code; URLs do not carry session tokens. The website needs no sign-in.
+Then open **http://localhost:3000/sos/auth/login** and sign in with a test account below. The nine tools use `/admin`, `/chats`, `/files`, `/hr`, `/marketing`, `/sales`, `/sos`, `/tasks` and `/wm` on that address; the website is at `/`. The mock runs locally and persists the separate `services-local` dataset under `.vercel/dev/mock`. The launcher sends a one-time destination code; URLs do not carry session tokens. The website needs no sign-in.
 
-Stop everything with Ctrl+C (or close the window).
+Stop a terminal run with Ctrl+C (or close its window). If the suite is already running, the command reports its address and starts no duplicate.
+
+The following port map belongs to the older standalone harness, started with
+`pnpm --filter orgtik-local-dev start`. The whole-suite launcher above uses port
+3000 and app prefixes instead.
 
 | App | URL | Mock API |
 | --- | --- | --- |
@@ -30,7 +34,9 @@ Stop everything with Ctrl+C (or close the window).
 | Website Manager (internal CMS) | http://localhost:3007 | http://localhost:4007 |
 | Admin back-office (ADM) | http://localhost:3008 | http://localhost:4008 |
 
-Hosted projects are already configured. Reuse their existing Redis/credential configuration; do not create replacements. All12 native Git deployments and the deployment workflow remain paused by the owner. Quota reset does not enable deployment. Linux CI and hosted release acceptance are tracked separately.
+Local startup does not use hosted Redis credentials. Optional hosted releases
+are manual; their profiles and existing Redis integration are documented in
+`tools/services/README.md`. Linux CI and hosted release acceptance are tracked separately.
 
 Run only some apps: `node start-all.js tasks,files` (SOS always starts, since it is the login).
 

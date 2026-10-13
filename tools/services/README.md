@@ -37,17 +37,33 @@ omitted from the deployment.
 
 ## Configuration and local development
 
+Run the whole suite locally with `pnpm dev:local`, or double-click
+`start-local.cmd`. Open `http://localhost:3000/sos/auth/login`; Mona's local test
+account is `mona.adel@orgtik.test`, password `Local@2026`. Ctrl+C stops a run
+started in the terminal. Local data persists under `.vercel/dev/mock`.
+
+The launcher uses an isolated configuration directory beside the repository
+because CLI 63's development service discovery chooses the Git-root config even
+when `--local-config` points at the local template. Source and dependencies are
+linked into that directory; production deployment configs stay in the repo.
+
 `vercel.dev.json` is the reviewed all-services template for local development.
 `tools/services/projects.mjs` generates the ten deployment configs at the repo
 root, so service roots resolve relative to the repository. Regenerate after
 changing the template, and check that the generated files are current:
 
 ```sh
-node tools/services/projects.mjs
-node tools/services/projects.mjs --check
 pnpm install --frozen-lockfile
-npx --yes vercel@63.1.2 --local-config vercel.dev.json dev -L --listen 3000
+pnpm dev:local
 ```
+
+Use Node.js 22.13 or newer and the repository's pnpm 11.3.0. No Vercel account
+or Redis connection is required for this local command. The pinned CLI may be
+downloaded by `npx` on first use; it runs only the development server locally.
+
+After changing the service template, regenerate the deployment profiles with
+`node tools/services/projects.mjs` and check them with
+`node tools/services/projects.mjs --check`.
 
 Local Services use the isolated `services-local` file dataset under
 `.vercel/dev/mock`, never production Redis. Node middleware is required because
@@ -55,6 +71,9 @@ Services does not support Edge function output. App prefixes also apply to
 assets and native browser navigation. Tab sessions use separate keys per app.
 
 ## Production release
+
+Cloud releases are manual. Publishing local changes does not start a Vercel
+deployment. Run the Services workflow on `main` explicitly for a cloud release.
 
 The main-only workflow validates the reviewed source, then builds and deploys
 the nine frontend/private-backend projects with a maximum of two parallel jobs.
