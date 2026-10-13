@@ -1,8 +1,8 @@
 // Read-only application checks plus temporary sign-in/handoff sessions in the
 // isolated Services dataset. Never resets or mutates business records.
 import { execFileSync } from "node:child_process";
+import nodePath from "node:path";
 import { apps } from "./config.cjs";
-import { configFilename } from "./projects.mjs";
 const base = process.argv[2];
 if (!base || !/^https?:\/\//.test(base)) throw new Error("Provide the Services deployment URL.");
 const viaCli = process.argv.includes("--via-cli");
@@ -12,8 +12,13 @@ if (service && !apps.includes(service)) throw new Error("Unknown frontend servic
 async function request(path, init = {}) {
   if (!viaCli) return fetch(new URL(path, base), { ...init, redirect: "manual", signal: AbortSignal.timeout(60000) });
   if (init.method || init.headers || init.body) throw new Error("Protected staging checks use GET routes only.");
-  const argv = ["--global-config", process.env.ORGTIK_VERCEL_CONFIG, "--scope", "team_Ypx8oiLDZi3PBNi8ht8fYPsm", "--local-config", configFilename(service || "website"), "curl", path, "--deployment", base, "--", "--silent", "--show-error", "--max-time", "60", "--write-out", "\n%{http_code}"];
-  const raw = execFileSync("vercel", argv, { encoding: "utf8", maxBuffer: 5 * 1024 * 1024 });
+  // CLI 63's curl parser forwards global flags to system curl. Use its standard
+  // XDG credential directory and a full URL, which resolves the owning project
+  // for protected access without --scope or --local-config arguments.
+  const authDirectory = process.env.ORGTIK_VERCEL_CONFIG;
+  if (!authDirectory || nodePath.basename(authDirectory) !== "com.vercel.cli") throw new Error("The reviewed staging credential directory is required.");
+  const argv = ["curl", new URL(path, base).href, "--", "--silent", "--show-error", "--max-time", "60", "--write-out", "\n%{http_code}"];
+  const raw = execFileSync("vercel", argv, { encoding: "utf8", maxBuffer: 5 * 1024 * 1024, env: { ...process.env, XDG_DATA_HOME: nodePath.dirname(authDirectory) } });
   const split = raw.lastIndexOf("\n"), status = Number(raw.slice(split + 1));
   return new Response(raw.slice(0, split), { status });
 }

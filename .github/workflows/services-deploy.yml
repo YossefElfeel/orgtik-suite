@@ -82,7 +82,7 @@ jobs:
       - name: Remove transient CLI credentials
         if: always()
         run: |
-          if [ -n "$ORGTIK_VERCEL_CONFIG" ] && [ "$ORGTIK_VERCEL_CONFIG" = "$RUNNER_TEMP/orgtik-services-cli" ]; then
+          if [ -n "$ORGTIK_VERCEL_CONFIG" ] && [ "$ORGTIK_VERCEL_CONFIG" = "$RUNNER_TEMP/orgtik-services-cli/com.vercel.cli" ]; then
             rm -f "$ORGTIK_VERCEL_CONFIG/auth.json"
           fi
 
@@ -122,6 +122,6 @@ jobs:
       - name: Remove transient CLI credentials
         if: always()
         run: |
-          if [ -n "$ORGTIK_VERCEL_CONFIG" ] && [ "$ORGTIK_VERCEL_CONFIG" = "$RUNNER_TEMP/orgtik-services-cli" ]; then
+          if [ -n "$ORGTIK_VERCEL_CONFIG" ] && [ "$ORGTIK_VERCEL_CONFIG" = "$RUNNER_TEMP/orgtik-services-cli/com.vercel.cli" ]; then
             rm -f "$ORGTIK_VERCEL_CONFIG/auth.json"
           fi

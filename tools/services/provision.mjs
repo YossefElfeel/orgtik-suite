@@ -88,7 +88,7 @@ fs.writeFileSync(".vercel/project.json", JSON.stringify({ orgId: team, projectId
 
 // Vercel's CLI consumes auth.json; put it in a private temporary directory,
 // rather than passing --token through OS arguments or build manifests.
-const authDirectory = path.join(process.env.RUNNER_TEMP, "orgtik-services-cli");
+const authDirectory = path.join(process.env.RUNNER_TEMP, "orgtik-services-cli", "com.vercel.cli");
 fs.mkdirSync(authDirectory, { recursive: true, mode: 0o700 });
 fs.writeFileSync(path.join(authDirectory, "auth.json"), JSON.stringify({ token }), { mode: 0o600 });
 fs.appendFileSync(process.env.GITHUB_ENV, `ORGTIK_VERCEL_CONFIG=${authDirectory}\n`);
