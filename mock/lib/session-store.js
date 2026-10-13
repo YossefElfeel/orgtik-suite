@@ -129,7 +129,8 @@ function pickStore(config, options = {}) {
   const url = env.KV_REST_API_URL || env.UPSTASH_REDIS_REST_URL, credential = env.KV_REST_API_TOKEN || env.UPSTASH_REDIS_REST_TOKEN;
   const secret = options.secret || env.MOCK_SESSION_SECRET || env.MOCK_AUTH_SECRET;
   if (url && credential) return redisStore(url, credential, { realm, secret });
-  if (config.hosted || env.VERCEL || url || credential) return { kind: "unavailable", realm, async signingKey() { throw unavailable(); }, async read() { throw unavailable(); }, async compareAndSwap() { throw unavailable(); } };
+  const localServices = env.ORGTIK_SERVICES_DEV === "1" && env.VERCEL_ENV === "development";
+  if (!localServices && (config.hosted || env.VERCEL || url || credential)) return { kind: "unavailable", realm, async signingKey() { throw unavailable(); }, async read() { throw unavailable(); }, async compareAndSwap() { throw unavailable(); } };
   const file = options.file || (env.MOCK_AUTH_FILE ? `${env.MOCK_AUTH_FILE}.sessions` : path.join(config.dataDir, "journal", "security", `${realm}.json`));
   return fileStore(file, { realm, secret });
 }

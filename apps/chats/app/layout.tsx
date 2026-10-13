@@ -7,6 +7,7 @@ import { ACCENT_BOOT_SCRIPT } from "@/lib/appearance";
 import { I18nProvider } from "@/lib/i18n";
 import { formatMessage } from "@/lib/messages";
 import { readLocale, readMessages } from "@/lib/server-i18n";
+import { appPath } from "@orgtik/ui/auth";
 
 /* Every tab says where you are, in the reader's language: "#design · Chats". */
 export async function generateMetadata(): Promise<Metadata> {
@@ -17,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { default: `${name} · OrgTik`, template: `%s · ${name}` },
     description: m["app.description"] ?? "Team chat, calls and a virtual office, with every conversation attached to the work it belongs to.",
     applicationName: name,
-    manifest: "/manifest.webmanifest",
+    manifest: appPath("/manifest.webmanifest"),
     appleWebApp: { capable: true, title: name, statusBarStyle: "default" },
   };
 }

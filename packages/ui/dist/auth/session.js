@@ -1,6 +1,8 @@
 "use client";
 import { useSyncExternalStore } from "react";
-const KEY = "orgtik.tab-session.v1", EVENT = "orgtik:session-changed";
+// Apps on one origin still keep independent tab sessions (especially staff vs
+// customer contexts). A one-time handoff remains the only transfer mechanism.
+const KEY = "orgtik.tab-session.v1" + (process.env.NEXT_PUBLIC_BASE_PATH || ""), EVENT = "orgtik:session-changed";
 let snapshot = null, seen;
 export function readClientSession() {
     if (typeof window === "undefined")

@@ -1,3 +1,4 @@
+import { appRelativePath } from "@orgtik/ui/auth";
 export const SOS_URL =
   process.env.NEXT_PUBLIC_SOS_URL ||
   (process.env.NODE_ENV === "production"
@@ -17,4 +18,4 @@ export const APP_SCOPE = "digital_marketing";
  * were on (a path in Marketing only; SOS checks it).
  */
 export const signInAgainUrl = (path: string) =>
-  `${SOS_URL}/go/${APP_SCOPE}?redirect=${encodeURIComponent(path)}`;
+  `${SOS_URL}/go/${APP_SCOPE}?redirect=${encodeURIComponent(appRelativePath(path))}`;

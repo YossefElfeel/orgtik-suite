@@ -7,7 +7,7 @@ import { SuccessResponse } from "@/types";
 import { deleteCookie, getCookie } from "cookies-next";
 import { TOKEN_COOKIE, USER_COOKIE } from "@/constants";
 import { setUser, logoutUser, setTokens } from "../features/auth/authSlice";
-import { readClientSession, setClientSession, refreshClientSession, SessionRequestError } from "@orgtik/ui/auth";
+import { appPath, appRelativePath, readClientSession, setClientSession, refreshClientSession, SessionRequestError } from "@orgtik/ui/auth";
 import type { IUser } from "@/types/user";
 
 const handleUserLogout = (api: any) => {
@@ -15,12 +15,12 @@ const handleUserLogout = (api: any) => {
   api.dispatch(baseApi.util.resetApiState());
   deleteCookie(TOKEN_COOKIE);
   deleteCookie(USER_COOKIE);
-  const currentPath = window.location.pathname + window.location.search;
+  const currentPath = appRelativePath(window.location.pathname + window.location.search);
   const isAuthRoute = currentPath.split("?")[0].split("/")[1] === "auth";
   if (isAuthRoute) return;
-  window.location.href = `/auth/login?redirect=${encodeURIComponent(
+  window.location.href = appPath(`/auth/login?redirect=${encodeURIComponent(
     currentPath
-  )}`;
+  )}`);
 };
 
 // Define a custom fetchBaseQuery

@@ -30,12 +30,12 @@ export function proxy(req: NextRequest) {
   }
 
   if (isAuthRoute && token && !handingOver && pathWithoutLocale !== "/auth/not-allowed") {
-    return NextResponse.redirect(new URL(`/${locale}`, req.url));
+    return NextResponse.redirect(new URL(`${req.nextUrl.basePath}/${locale}`, req.url));
   }
 
   return intlMiddleware(req);
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
 };

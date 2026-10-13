@@ -25,7 +25,7 @@ export function proxy(req: NextRequest) {
 
   const signedIn = Boolean(req.cookies.get(TOKEN_COOKIE)?.value);
   if (!signedIn) return NextResponse.redirect(new URL(signInAgainUrl(pathname + req.nextUrl.search)));
-  if (!readRoleFromRequest(req)) return NextResponse.redirect(new URL(`/${locale}/auth/not-allowed`, req.url));
+  if (!readRoleFromRequest(req)) return NextResponse.redirect(new URL(`${req.nextUrl.basePath}/${locale}/auth/not-allowed`, req.url));
 
   return intlMiddleware(req);
 }

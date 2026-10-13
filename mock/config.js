@@ -25,15 +25,18 @@ const icons = { port: 4099 + offset };
 // Hosted prototype (Vercel): one function serves every API under /<key>, and each web app has
 // its own domain. MOCK_PUBLIC_URL is the function's origin; SUITE_WEB_URLS is a JSON map
 // {key: origin}. Writable data goes to /tmp there, since the deployment itself is read-only.
-const PUBLIC = (process.env.MOCK_PUBLIC_URL || "").replace(/\/$/, "");
+const services = process.env.ORGTIK_SERVICES === "1";
+const servicesConfig = services ? require("../tools/services/config.cjs") : null;
+const PUBLIC = (services ? `${servicesConfig.publicOrigin()}/sos/api/backend` : process.env.MOCK_PUBLIC_URL || "").replace(/\/$/, "");
 let WEB = {};
 try {
   WEB = JSON.parse(process.env.SUITE_WEB_URLS || "{}");
 } catch {
   WEB = {};
 }
+if (services) WEB = servicesConfig.webUrls();
 const hosted = Boolean(PUBLIC);
-const dataDir = process.env.VERCEL ? "/tmp/orgtik-mock" : __dirname;
+const dataDir = process.env.ORGTIK_SERVICES_DEV === "1" ? require("node:path").resolve(__dirname, "../.vercel/dev/mock") : process.env.VERCEL ? "/tmp/orgtik-mock" : __dirname;
 
 const webUrl = (key) => (WEB[key] ? WEB[key].replace(/\/$/, "") : `http://localhost:${apps[key].web}`);
 const apiUrl = (key) => (hosted ? `${PUBLIC}/${key}` : `http://localhost:${apps[key].api}`);

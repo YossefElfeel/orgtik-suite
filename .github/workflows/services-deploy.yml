@@ -1,0 +1,97 @@
+name: Deploy Services project
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - vercel.json
+      - tools/services/**
+      - apps/**
+      - mock/**
+      - packages/ui/**
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - package.json
+      - .github/workflows/services-deploy.yml
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment for the confirmed new Services project
+        type: choice
+        options: [production, preview]
+        default: production
+
+permissions:
+  contents: read
+
+concurrency:
+  group: orgtik-suite-services-${{ inputs.environment || 'production' }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment: production
+    env:
+      DEPLOY_ENV: ${{ inputs.environment || 'production' }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa
+      - run: pnpm install --frozen-lockfile
+      - name: Validate the reviewed source
+        run: |
+          pnpm --filter @orgtik/ui run build
+          pnpm turbo run typecheck i18n:check --filter='!docs' --filter='!content-dashboard-somion' --continue --concurrency=2
+          node --test tools/services/services.test.mjs packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs packages/ui/src/auth/urls.test.mjs
+          node --test mock/lib/session-store.test.js mock/lib/session-authority.test.js mock/lib/journal-concurrency.test.js
+          node tools/ci/secret-scan.mjs
+      - run: npm install --global vercel@63.1.2
+      - name: Configure only the confirmed Services project
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: node tools/services/provision.mjs
+      - name: Pull Services project build settings
+        run: vercel --global-config "$ORGTIK_VERCEL_CONFIG" --scope team_Ypx8oiLDZi3PBNi8ht8fYPsm pull --yes --environment="$DEPLOY_ENV"
+      - name: Build all services
+        run: |
+          if [ "$DEPLOY_ENV" = production ]; then
+            vercel --global-config "$ORGTIK_VERCEL_CONFIG" --scope team_Ypx8oiLDZi3PBNi8ht8fYPsm build --prod
+          else
+            vercel --global-config "$ORGTIK_VERCEL_CONFIG" --scope team_Ypx8oiLDZi3PBNi8ht8fYPsm build
+          fi
+      - name: Preserve and verify the mock runtime
+        run: |
+          pnpm --filter orgtik-local-dev --prod deploy .vercel/mock-runtime
+          node tools/services/package-mock.mjs
+      - name: Stage the deployment
+        run: |
+          if [ "$DEPLOY_ENV" = production ]; then
+            vercel --global-config "$ORGTIK_VERCEL_CONFIG" --scope team_Ypx8oiLDZi3PBNi8ht8fYPsm deploy --prebuilt --archive=tgz --prod --skip-domain > services-deploy-output.txt
+          else
+            vercel --global-config "$ORGTIK_VERCEL_CONFIG" --scope team_Ypx8oiLDZi3PBNi8ht8fYPsm deploy --prebuilt --archive=tgz > services-deploy-output.txt
+          fi
+          node tools/vercel/deploy-url.mjs < services-deploy-output.txt > services-deploy-url.txt
+      - name: Promote the verified production build
+        if: env.DEPLOY_ENV == 'production'
+        run: |
+          url=$(cat services-deploy-url.txt)
+          node tools/services/verify-hosted.mjs "$url" --via-cli
+          vercel --global-config "$ORGTIK_VERCEL_CONFIG" --scope team_Ypx8oiLDZi3PBNi8ht8fYPsm promote "$url" --yes
+          node tools/services/verify-hosted.mjs https://orgtik-suite-services.vercel.app
+      - name: Record release URL
+        run: |
+          url=$(cat services-deploy-url.txt)
+          echo "Services deployment: $url" >> "$GITHUB_STEP_SUMMARY"
+      - name: Remove transient CLI credentials
+        if: always()
+        run: |
+          if [ -n "$ORGTIK_VERCEL_CONFIG" ] && [ "$ORGTIK_VERCEL_CONFIG" = "$RUNNER_TEMP/orgtik-services-cli" ]; then
+            rm -f "$ORGTIK_VERCEL_CONFIG/auth.json"
+          fi

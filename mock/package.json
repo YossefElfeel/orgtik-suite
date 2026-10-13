@@ -2,8 +2,10 @@
   "name": "orgtik-local-dev",
   "version": "1.0.0",
   "private": true,
+  "main": "index.js",
   "description": "Runs all OrgTik frontends locally against a mock backend (no online APIs).",
   "scripts": {
+    "dev": "node services-dev.cjs",
     "api": "node server.js",
     "patch": "node patch.js",
     "unpatch": "node patch.js --restore",

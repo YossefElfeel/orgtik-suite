@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { servicesNextConfig } from "../../tools/services/config.cjs";
 
 const nextConfig: NextConfig = {
+  ...servicesNextConfig("tasks"),
   reactStrictMode: false,
   // A production build can sit next to the dev server's output (NEXT_DIST_DIR=.next-prod).
   distDir: process.env.NEXT_DIST_DIR || ".next",

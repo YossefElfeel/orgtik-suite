@@ -1,5 +1,5 @@
 "use client";
-import { clearClientSession, readClientSession, setClientSession, signOutSession, SessionRequestError, type AuthEnvelope } from "@orgtik/ui/auth";
+import { appUrl, clearClientSession, readClientSession, setClientSession, signOutSession, SessionRequestError, type AuthEnvelope } from "@orgtik/ui/auth";
 import { SOS_API, SOS_URL } from "./env";
 export const STAFF_TARGET = "wm" as const;
 export function getToken(): string | null {
@@ -20,7 +20,7 @@ export async function signOutStaff() {
   clearToken();
 }
 export const staffSignInHref = () => {
-  const url = new URL("/auth/login", SOS_URL);
+  const url = appUrl(SOS_URL, "/auth/login");
   url.searchParams.set("mode", "staff"); url.searchParams.set("target", STAFF_TARGET);
   url.searchParams.set("redirect", "/go/website_manager");
   return url.toString();

@@ -53,7 +53,9 @@ export async function GET(req: NextRequest) {
   const isApiUpload = (u: string) => {
     try {
       const url = new URL(u);
-      return url.origin === apiOrigin && url.pathname.startsWith("/uploads/");
+      const configured = new URL(process.env.NEXT_PUBLIC_API_URL || "");
+      const prefix = configured.pathname.replace(/\/$/, "");
+      return url.origin === apiOrigin && (url.pathname.startsWith(`${prefix}/uploads/`) || (process.env.NEXT_PUBLIC_SUITE_SERVICES === "1" && url.pathname.startsWith("/sos/api/backend/tasks/uploads/")));
     } catch {
       return false;
     }
@@ -73,7 +75,15 @@ export async function GET(req: NextRequest) {
     // The bearer token goes to the API's own uploads only, never to another allowed host.
     const headers: HeadersInit = token && isApiUpload(target) ? { Authorization: `Bearer ${token}` } : {};
     try {
-      const r = await fetch(target, { headers, cache: "no-store" });
+      let upstreamUrl = target;
+      if (process.env.NEXT_PUBLIC_SUITE_SERVICES === "1" && isApiUpload(target)) {
+        if (!process.env.ORGTIK_MOCK_URL) throw new Error("Missing mock service binding");
+        const publicUrl = new URL(target);
+        const path = publicUrl.pathname.split("/api/backend/")[1];
+        if (!path?.startsWith("tasks/uploads/")) throw new Error("Invalid attachment path");
+        upstreamUrl = new URL(path + publicUrl.search, process.env.ORGTIK_MOCK_URL.replace(/\/$/, "") + "/").href;
+      }
+      const r = await fetch(upstreamUrl, { headers, cache: "no-store", redirect: "error" });
       if (r.ok) {
         upstream = r;
         break;
