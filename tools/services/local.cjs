@@ -46,6 +46,14 @@ async function main() {
     MOCK_AUTH_STORE: "file", MOCK_JOURNAL: "file", MOCK_SANDBOX: "services-local",
     VERCEL_TELEMETRY_DISABLED: "1", NEXT_TELEMETRY_DISABLED: "1",
   });
+  // Older frontends still use the installed sos-bar's URL constants. Patch
+  // them before starting any app so navigation and logout stay in this run.
+  const launcherEnv = { ...env, SUITE_SOS_URL: `${origin}/sos`, SUITE_SOS_API: `${origin}/sos/api/backend/sos/api` };
+  for (const key of require("./config.cjs").apps) {
+    const result = spawnSync(process.execPath, [path.join(root, "tools/vercel-prebuild.cjs")], { cwd: path.join(root, "apps", key), env: launcherEnv, stdio: "inherit", windowsHide: true });
+    if (result.error) throw result.error;
+    if (result.status !== 0) throw new Error(`Could not configure ${key}'s local launcher.`);
+  }
   console.log(`Starting the local website, nine apps and file-backed mock at ${origin}\nCtrl+C stops this run.`);
   const child = spawn(process.platform === "win32" ? "npx.cmd" : "npx", ["--yes", "vercel@63.1.2", "dev", "-L", "--listen", "127.0.0.1:3000", "--yes"], {
     cwd: workspace, env, stdio: "inherit", windowsHide: true, shell: process.platform === "win32",

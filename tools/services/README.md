@@ -47,6 +47,8 @@ actions locally. Mona has platform and Website Manager super-admin roles, plus
 admin access to all six workspace tools. Her launcher exposes all nine apps
 even when she signs in directly to a staff app. Opening a workspace tool selects
 the OrgTik workspace before exchanging its app session.
+Startup also points the older frontends' installed launcher dependency at
+localhost, keeping app links and logout inside the local prototype.
 
 The launcher uses an isolated configuration directory beside the repository
 because CLI 63's development service discovery chooses the Git-root config even
