@@ -1,10 +1,10 @@
 # OrgTik suite
 
-All OrgTik frontends in one repository, deployed on Vercel as a clickable prototype. A mock API
-stands in for the real backend. Since 2026-10-07 this repository is the only place the suite is
+All OrgTik frontends in one repository, runnable locally with a file-backed mock API.
+Optional Vercel deployment profiles are also retained. Since 2026-10-07 this repository is the only place the suite is
 changed (decision D-052, `program/plan-v2.md`).
 
-| Folder | What it is | Vercel project |
+| Folder | What it is | Legacy Vercel project |
 |---|---|---|
 | `apps/sos` | SOS hub: sign-in, launcher, people, USR customer dashboard | `orgtik-suite-sos` |
 | `apps/tasks` | Tasks | `orgtik-suite-tasks` |
@@ -25,8 +25,12 @@ changed (decision D-052, `program/plan-v2.md`).
 
 ## Working here
 
-- **Install:** `pnpm install` (pnpm 11, see `packageManager`). One lockfile for everything.
-- **Run locally:** `pnpm dev:mock` for the mock, then `pnpm --filter <package> dev` per app. Each
+- **Install:** use Node.js 22.13 or newer, then `pnpm install --frozen-lockfile`
+  (pnpm 11.3.0, see `packageManager`). One lockfile for everything.
+- **Run the whole suite locally:** `pnpm dev:local` or double-click `start-local.cmd`.
+  Open `http://localhost:3000/sos/auth/login`; all nine apps and the website use a local file-backed mock.
+  Local test account: `mona.adel@orgtik.test`, password `Local@2026`. No Vercel account or Redis setup is required.
+- **Develop individual apps:** `pnpm dev:mock` for the mock, then `pnpm --filter <package> dev` per app. Each
   app's `.env.local` (git-ignored) points it at `http://localhost:40xx`; `node mock/patch.js` points
   the old launcher package at localhost.
 - **Check:** `pnpm turbo run typecheck i18n:check test` (add `--affected` to check only what changed);
@@ -36,24 +40,16 @@ changed (decision D-052, `program/plan-v2.md`).
   it in one pull request.
 - **Program tools** (`program/tools/**`) still use the old folder names; run
   `node tools/dev/old-layout-links.mjs` once to create them as git-ignored links.
-- **Work:** branch `<area>/<topic>` → pull request → Vercel preview + checks → merge. Never push to
+- **Work:** branch `<area>/<topic>` → pull request → checks → merge. Never push to
   `main` directly. Parallel sessions use their own git worktree.
 
-## How the hosted prototype is wired
+## Optional hosted configuration
 
-- **Automatic Vercel deployments** run through `.github/workflows/deploy.yml`; native Git
-  deployments remain disabled. `tools/vercel/affected.mjs` selects changed app folders and
-  their workspace dependents. A change in `apps/wm/` deploys only Website Manager; a change
-  in `mock/` deploys only the API, with runtime consumers checked separately. Shared UI
-  changes deploy dashboards that use `@orgtik/ui`. Program records, acceptance evidence,
-  documentation outside app folders and workflow edits do not redeploy the suite.
-  Dependency lockfile, workspace/toolchain configuration and patch changes conservatively
-  deploy all active projects. Retired Content is always excluded. Main pushes compare the
-  previous and new commit; pull requests compare from their merge base. Invalid or missing
-  revision history fails selection instead of falling back to a full rollout. The workflow
-  summary lists the selected projects. Explicit manual project and milestone scopes remain
-  available.
-- **Mock API**: `mock/api/index.js` serves each app's API under its key, e.g.
+- **Cloud releases are manual:** `.github/workflows/services-deploy.yml` runs only when
+  explicitly dispatched on `main`. Its project profiles and private backend bindings are
+  documented in [tools/services/README.md](tools/services/README.md). The legacy deployment
+  matrix skips automatic releases while the root configuration uses Services.
+- **Legacy hosted mock API**: `mock/api/index.js` serves each app's API under its key, e.g.
   `https://orgtik-suite-mock.vercel.app/sos/api/...`. `MOCK_PUBLIC_URL` and `SUITE_WEB_URLS`
   (JSON `{key: origin}`) tell it where everything lives. With a journal store connected (Upstash
   Redis, D-053) its data survives cold starts; see `mock/README.md`.

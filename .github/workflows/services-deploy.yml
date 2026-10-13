@@ -1,9 +1,6 @@
 name: Deploy split Services projects
 
 on:
-  push:
-    branches: [main]
-    paths: ["vercel*.json", "tools/services/**", "apps/**", "mock/**", "packages/ui/**", "pnpm-lock.yaml", "pnpm-workspace.yaml", "package.json", ".github/workflows/services-deploy.yml"]
   workflow_dispatch:
 
 permissions:
