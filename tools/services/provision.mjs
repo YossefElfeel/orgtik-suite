@@ -17,7 +17,10 @@ async function api(endpoint, method = "GET", body, allow404 = false) {
     const code = typeof error?.code === "string" && /^[a-zA-Z0-9_-]{1,100}$/.test(error.code) ? ` ${error.code}` : "";
     throw new Error(`Vercel ${method} ${url.pathname} failed (${response.status}${code}); provider values are omitted.`);
   }
-  return response.json();
+  const payload = await response.text();
+  if (!payload.trim()) return null;
+  try { return JSON.parse(payload); }
+  catch { throw new Error(`Vercel ${method} ${url.pathname} returned malformed JSON; provider values are omitted.`); }
 }
 
 let project = await api(`/v9/projects/${name}`, "GET", undefined, true);
