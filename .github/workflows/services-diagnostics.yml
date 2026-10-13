@@ -1,0 +1,35 @@
+name: Inspect Services runtime errors
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        type: choice
+        required: true
+        options: [admin, chats, files, hr, marketing, sales, sos, tasks, wm]
+      deployment:
+        type: string
+        required: true
+        description: Existing deployment URL for the selected confirmed project
+permissions:
+  contents: read
+jobs:
+  inspect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: production
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+      - run: npm install --global vercel@63.1.2
+      - name: Read the confirmed deployment's runtime diagnostics
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          SERVICE: ${{ inputs.service }}
+          DEPLOYMENT: ${{ inputs.deployment }}
+        run: node tools/vercel/services-diagnostics.mjs
+      - name: Remove transient CLI credentials
+        if: always()
+        run: rm -f "$RUNNER_TEMP/orgtik-services-diagnostics/auth.json"
