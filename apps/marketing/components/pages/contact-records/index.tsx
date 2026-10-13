@@ -18,6 +18,8 @@ import { useRouter, usePathname } from "@/i18n/routing";
 import { openMarketingSuiteDestination } from "@/lib/suite-navigation";
 import MarketingProjectFrame from "@/components/shared/MarketingProjectFrame";
 import { useMarketingRoles } from "@/lib/permissions";
+import { marketingSuiteCommand } from "@/lib/command-recovery";
+import { useProjectContext } from "@/lib/project-context";
 import type {
   CanonicalDirectory,
   CanonicalContact,
@@ -26,6 +28,7 @@ export default function ContactRecords() {
   const t = useTranslations("MarketingV3"),
     f = useFormatter(),
     suite = useSuite(),
+    project = useProjectContext(),
     can = useMarketingRoles(),
     params = useSearchParams(),
     router = useRouter(),
@@ -133,11 +136,16 @@ export default function ContactRecords() {
                 onValueChange={async (state) => {
                   setBusy(row.original.id);
                   try {
-                    await suite.mutate("/crm/consent", "POST", {
-                      contactId: row.original.id,
-                      state,
-                      operationId: crypto.randomUUID(),
-                    });
+                    await marketingSuiteCommand(
+                      project.id,
+                      "/crm/consent",
+                      {
+                        contactId: row.original.id,
+                        state,
+                        operationId: crypto.randomUUID(),
+                      },
+                      (body) => suite.mutate("/crm/consent", "POST", body),
+                    );
                     setVersion((v) => v + 1);
                   } catch {
                     setError(true);

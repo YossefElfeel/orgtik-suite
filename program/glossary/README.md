@@ -12,16 +12,16 @@
 | File | What it is | Made by |
 |---|---|---|
 | `glossary.csv` | **What's correct.** One row per concept: definition, the term in EN/AR/DE/FR/IT, forbidden synonyms, a usage rule, spec sources, status and review notes | By hand (v0, session 5) |
-| `term-usage.md` / `.csv` | **What we have.** How every app names each concept today, per language, with counts | `python tools/term_usage.py` |
-| `glossary-check.md` / `.csv` | **What to change.** Every catalog label that differs from the chosen term, with its app and message key: each app's terminology fix list for its wave | `python tools/glossary_check.py` |
+| `term-usage.md` / `.csv` | **What we have.** How every app names each concept today, per language, with counts | `python program/tools/term_usage.py` |
+| `glossary-check.md` / `.csv` | **What to change.** Every catalog label that differs from the chosen term, with its app and message key: each app's terminology fix list for its wave | `python program/tools/glossary_check.py` |
 
 **To regenerate:**
 1. Edit `glossary.csv`.
-2. Run `python tools/term_usage.py`, then `python tools/glossary_check.py`.
+2. Run `python program/tools/term_usage.py`, then `python program/tools/glossary_check.py`.
 
 ## Status of v0
 
-Every row is **proposed**. Approval steps:
+D-025 already approves German/French plan terms, generic German forms and the one-word Save label. Other entries retain their documented proposed/native-review status. Approval steps:
 1. **You** review the concepts and English terms (G0).
 2. **The PM** confirms the commercial terms (packet 01, Q-007).
 3. **Native reviewers** check AR (MSA), DE, FR and IT at gate G1a. Rows whose `review_notes` say "Native review" have a specific doubt.
@@ -84,3 +84,7 @@ Statuses (Active, Pending, Cancelled …) are in `../status-matrix/`, because on
 4. **"Save" everywhere**; "Save changes" is dropped.
 
 The other rows stay proposed until the PM (packet 01, Q-007) and native reviewers (G1a) confirm them.
+
+## V3 current-source review
+
+The scanners now use the monorepo apps and every grouped five-language catalog, including ordinary Account, Console and Website Manager. Earlier196-label output came from the pre-monorepo inventory and is historical. Candidate counts are terminology comparisons, not proven defects: navigation Administration differs correctly from the Admin role, testimonial quotations differ correctly from price Quotes, and specialized Save actions keep their object. Native reviewers still own unapproved editorial choices. The P5 disposition artifact records the scoped meaning corrections and accepted D025 choices separately from proposed aliases/context. Website marketing copy stays frozen.

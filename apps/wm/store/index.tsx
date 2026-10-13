@@ -11,6 +11,8 @@ const makeStore = () =>
     middleware: (getDefault) => getDefault().concat(api.middleware),
   });
 
+export type WmDispatch = ReturnType<typeof makeStore>["dispatch"];
+
 /** One store per browser tab (and per request on the server), never shared between people. */
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [store] = useState(makeStore);

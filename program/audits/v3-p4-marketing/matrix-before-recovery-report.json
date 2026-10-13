@@ -1,0 +1,8457 @@
+{
+  "scope": "Settled production Marketing ordinary routes, EN/AR, both themes, 1440/390/768/1024",
+  "checks": [
+    {
+      "name": "dashboard-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "dashboard-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "calendar-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "posts-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "queue-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "campaigns-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "gallery-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "labels-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "integrations-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-reports-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "competitors-reports-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-contacts-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-teams-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-brand-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-senders-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "email-designer-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "social-inbox-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "journeys-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "writing-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-en-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-connections-en-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "dashboard-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "calendar-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "posts-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "queue-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "campaigns-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "gallery-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "labels-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "integrations-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-reports-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "competitors-reports-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-contacts-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-teams-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-brand-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-senders-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "email-designer-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "social-inbox-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "journeys-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "writing-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-en-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-connections-en-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "dashboard-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "calendar-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "posts-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "queue-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "campaigns-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "gallery-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "labels-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "integrations-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-reports-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "competitors-reports-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-contacts-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-teams-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-brand-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-senders-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "email-designer-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "social-inbox-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "journeys-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "writing-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-en-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-connections-en-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "dashboard-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "calendar-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "posts-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "queue-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "campaigns-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "gallery-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "labels-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "integrations-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-reports-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "competitors-reports-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-contacts-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-teams-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-brand-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-senders-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "email-designer-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "social-inbox-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "journeys-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "writing-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-en-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-connections-en-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "dashboard-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "calendar-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "posts-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "queue-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "campaigns-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "gallery-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "labels-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "integrations-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-reports-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "competitors-reports-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-contacts-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-teams-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-brand-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-senders-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "email-designer-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "social-inbox-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "journeys-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "writing-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-en-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-connections-en-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "dashboard-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "calendar-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "posts-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "queue-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "campaigns-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "gallery-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "labels-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "integrations-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-reports-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "competitors-reports-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-contacts-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-teams-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-brand-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-senders-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "email-designer-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "social-inbox-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "journeys-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "writing-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-en-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-connections-en-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "dashboard-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "calendar-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "posts-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "queue-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "campaigns-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "gallery-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "labels-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "integrations-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-reports-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "competitors-reports-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-contacts-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-teams-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-brand-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-senders-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "email-designer-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "social-inbox-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "journeys-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "writing-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-en-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-connections-en-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "dashboard-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "calendar-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "posts-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "queue-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "campaigns-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "gallery-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "labels-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "integrations-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-reports-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "competitors-reports-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-contacts-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-teams-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-brand-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-senders-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "email-designer-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "social-inbox-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "journeys-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "writing-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-en-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "ltr",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-connections-en-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-en-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "dashboard-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "calendar-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "posts-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "queue-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "campaigns-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "gallery-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "labels-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "integrations-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-reports-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "competitors-reports-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-contacts-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-teams-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-brand-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-senders-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "email-designer-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "social-inbox-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "journeys-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "writing-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-ar-light-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-connections-ar-light-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-light-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-light-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "dashboard-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "calendar-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "posts-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "queue-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "campaigns-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "gallery-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "labels-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "integrations-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-reports-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "competitors-reports-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-contacts-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-teams-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-brand-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-senders-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "email-designer-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "social-inbox-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "journeys-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "writing-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-ar-light-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-connections-ar-light-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-light-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-light-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "dashboard-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "calendar-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "posts-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "queue-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "campaigns-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "gallery-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "labels-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "integrations-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-reports-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "competitors-reports-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-contacts-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-teams-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-brand-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-senders-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "email-designer-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "social-inbox-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "journeys-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "writing-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-ar-light-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-connections-ar-light-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-light-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-light-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "dashboard-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "calendar-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "posts-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "queue-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "campaigns-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "gallery-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "labels-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "integrations-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-reports-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "competitors-reports-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "our-audience-contacts-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-teams-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-brand-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "settings-senders-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "email-designer-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "social-inbox-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "journeys-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "writing-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-ar-light-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "light"
+      }
+    },
+    {
+      "name": "admin-connections-ar-light-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-light-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-light-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "dashboard-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "calendar-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "posts-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "queue-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "campaigns-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "gallery-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "labels-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "integrations-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-reports-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "competitors-reports-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-teams-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-brand-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-senders-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "email-designer-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "social-inbox-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "journeys-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "writing-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-ar-dark-1440 width",
+      "pass": true,
+      "details": {
+        "client": 1440,
+        "scroll": 1440,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-connections-ar-dark-1440 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-dark-1440 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-dark-1440 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "dashboard-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "calendar-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "posts-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "queue-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "campaigns-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "gallery-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "labels-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "integrations-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-reports-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "competitors-reports-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-teams-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-brand-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-senders-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "email-designer-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "social-inbox-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "journeys-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "writing-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-ar-dark-390 width",
+      "pass": true,
+      "details": {
+        "client": 390,
+        "scroll": 390,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-connections-ar-dark-390 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-dark-390 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-dark-390 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "dashboard-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "calendar-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "posts-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "queue-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "campaigns-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "gallery-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "labels-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "integrations-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-reports-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "competitors-reports-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-teams-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-brand-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-senders-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "email-designer-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "social-inbox-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "journeys-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "writing-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-ar-dark-768 width",
+      "pass": true,
+      "details": {
+        "client": 768,
+        "scroll": 768,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-connections-ar-dark-768 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-dark-768 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-dark-768 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "dashboard-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "dashboard-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "dashboard-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "calendar-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "calendar-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "calendar-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "posts-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "posts-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "posts-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "queue-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "queue-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "queue-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "campaigns-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "campaigns-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "campaigns-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "gallery-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "gallery-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "gallery-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "labels-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "labels-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "labels-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "integrations-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "integrations-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "integrations-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-reports-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-reports-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-reports-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "competitors-reports-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "competitors-reports-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "competitors-reports-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "our-audience-contacts-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-teams-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-teams-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-teams-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-brand-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-brand-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-brand-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "settings-senders-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "settings-senders-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "settings-senders-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "email-designer-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "email-designer-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "email-designer-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "social-inbox-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "social-inbox-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "social-inbox-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "journeys-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "journeys-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "journeys-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "writing-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "writing-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "writing-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    },
+    {
+      "name": "admin-connections-ar-dark-1024 width",
+      "pass": true,
+      "details": {
+        "client": 1024,
+        "scroll": 1024,
+        "dir": "rtl",
+        "theme": "dark"
+      }
+    },
+    {
+      "name": "admin-connections-ar-dark-1024 one heading",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-dark-1024 direction/theme",
+      "pass": true
+    },
+    {
+      "name": "admin-connections-ar-dark-1024 axe",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "dashboard-en-light-1440",
+    "calendar-en-light-1440",
+    "posts-en-light-1440",
+    "queue-en-light-1440",
+    "campaigns-en-light-1440",
+    "gallery-en-light-1440",
+    "labels-en-light-1440",
+    "integrations-en-light-1440",
+    "our-reports-en-light-1440",
+    "competitors-reports-en-light-1440",
+    "our-audience-en-light-1440",
+    "our-audience-contacts-en-light-1440",
+    "settings-en-light-1440",
+    "settings-teams-en-light-1440",
+    "settings-brand-en-light-1440",
+    "settings-senders-en-light-1440",
+    "email-designer-en-light-1440",
+    "social-inbox-en-light-1440",
+    "journeys-en-light-1440",
+    "writing-en-light-1440",
+    "admin-en-light-1440",
+    "admin-connections-en-light-1440",
+    "dashboard-en-light-390",
+    "calendar-en-light-390",
+    "posts-en-light-390",
+    "queue-en-light-390",
+    "campaigns-en-light-390",
+    "gallery-en-light-390",
+    "labels-en-light-390",
+    "integrations-en-light-390",
+    "our-reports-en-light-390",
+    "competitors-reports-en-light-390",
+    "our-audience-en-light-390",
+    "our-audience-contacts-en-light-390",
+    "settings-en-light-390",
+    "settings-teams-en-light-390",
+    "settings-brand-en-light-390",
+    "settings-senders-en-light-390",
+    "email-designer-en-light-390",
+    "social-inbox-en-light-390",
+    "journeys-en-light-390",
+    "writing-en-light-390",
+    "admin-en-light-390",
+    "admin-connections-en-light-390",
+    "dashboard-en-light-768",
+    "calendar-en-light-768",
+    "posts-en-light-768",
+    "queue-en-light-768",
+    "campaigns-en-light-768",
+    "gallery-en-light-768",
+    "labels-en-light-768",
+    "integrations-en-light-768",
+    "our-reports-en-light-768",
+    "competitors-reports-en-light-768",
+    "our-audience-en-light-768",
+    "our-audience-contacts-en-light-768",
+    "settings-en-light-768",
+    "settings-teams-en-light-768",
+    "settings-brand-en-light-768",
+    "settings-senders-en-light-768",
+    "email-designer-en-light-768",
+    "social-inbox-en-light-768",
+    "journeys-en-light-768",
+    "writing-en-light-768",
+    "admin-en-light-768",
+    "admin-connections-en-light-768",
+    "dashboard-en-light-1024",
+    "calendar-en-light-1024",
+    "posts-en-light-1024",
+    "queue-en-light-1024",
+    "campaigns-en-light-1024",
+    "gallery-en-light-1024",
+    "labels-en-light-1024",
+    "integrations-en-light-1024",
+    "our-reports-en-light-1024",
+    "competitors-reports-en-light-1024",
+    "our-audience-en-light-1024",
+    "our-audience-contacts-en-light-1024",
+    "settings-en-light-1024",
+    "settings-teams-en-light-1024",
+    "settings-brand-en-light-1024",
+    "settings-senders-en-light-1024",
+    "email-designer-en-light-1024",
+    "social-inbox-en-light-1024",
+    "journeys-en-light-1024",
+    "writing-en-light-1024",
+    "admin-en-light-1024",
+    "admin-connections-en-light-1024",
+    "dashboard-en-dark-1440",
+    "calendar-en-dark-1440",
+    "posts-en-dark-1440",
+    "queue-en-dark-1440",
+    "campaigns-en-dark-1440",
+    "gallery-en-dark-1440",
+    "labels-en-dark-1440",
+    "integrations-en-dark-1440",
+    "our-reports-en-dark-1440",
+    "competitors-reports-en-dark-1440",
+    "our-audience-en-dark-1440",
+    "our-audience-contacts-en-dark-1440",
+    "settings-en-dark-1440",
+    "settings-teams-en-dark-1440",
+    "settings-brand-en-dark-1440",
+    "settings-senders-en-dark-1440",
+    "email-designer-en-dark-1440",
+    "social-inbox-en-dark-1440",
+    "journeys-en-dark-1440",
+    "writing-en-dark-1440",
+    "admin-en-dark-1440",
+    "admin-connections-en-dark-1440",
+    "dashboard-en-dark-390",
+    "calendar-en-dark-390",
+    "posts-en-dark-390",
+    "queue-en-dark-390",
+    "campaigns-en-dark-390",
+    "gallery-en-dark-390",
+    "labels-en-dark-390",
+    "integrations-en-dark-390",
+    "our-reports-en-dark-390",
+    "competitors-reports-en-dark-390",
+    "our-audience-en-dark-390",
+    "our-audience-contacts-en-dark-390",
+    "settings-en-dark-390",
+    "settings-teams-en-dark-390",
+    "settings-brand-en-dark-390",
+    "settings-senders-en-dark-390",
+    "email-designer-en-dark-390",
+    "social-inbox-en-dark-390",
+    "journeys-en-dark-390",
+    "writing-en-dark-390",
+    "admin-en-dark-390",
+    "admin-connections-en-dark-390",
+    "dashboard-en-dark-768",
+    "calendar-en-dark-768",
+    "posts-en-dark-768",
+    "queue-en-dark-768",
+    "campaigns-en-dark-768",
+    "gallery-en-dark-768",
+    "labels-en-dark-768",
+    "integrations-en-dark-768",
+    "our-reports-en-dark-768",
+    "competitors-reports-en-dark-768",
+    "our-audience-en-dark-768",
+    "our-audience-contacts-en-dark-768",
+    "settings-en-dark-768",
+    "settings-teams-en-dark-768",
+    "settings-brand-en-dark-768",
+    "settings-senders-en-dark-768",
+    "email-designer-en-dark-768",
+    "social-inbox-en-dark-768",
+    "journeys-en-dark-768",
+    "writing-en-dark-768",
+    "admin-en-dark-768",
+    "admin-connections-en-dark-768",
+    "dashboard-en-dark-1024",
+    "calendar-en-dark-1024",
+    "posts-en-dark-1024",
+    "queue-en-dark-1024",
+    "campaigns-en-dark-1024",
+    "gallery-en-dark-1024",
+    "labels-en-dark-1024",
+    "integrations-en-dark-1024",
+    "our-reports-en-dark-1024",
+    "competitors-reports-en-dark-1024",
+    "our-audience-en-dark-1024",
+    "our-audience-contacts-en-dark-1024",
+    "settings-en-dark-1024",
+    "settings-teams-en-dark-1024",
+    "settings-brand-en-dark-1024",
+    "settings-senders-en-dark-1024",
+    "email-designer-en-dark-1024",
+    "social-inbox-en-dark-1024",
+    "journeys-en-dark-1024",
+    "writing-en-dark-1024",
+    "admin-en-dark-1024",
+    "admin-connections-en-dark-1024",
+    "dashboard-ar-light-1440",
+    "calendar-ar-light-1440",
+    "posts-ar-light-1440",
+    "queue-ar-light-1440",
+    "campaigns-ar-light-1440",
+    "gallery-ar-light-1440",
+    "labels-ar-light-1440",
+    "integrations-ar-light-1440",
+    "our-reports-ar-light-1440",
+    "competitors-reports-ar-light-1440",
+    "our-audience-ar-light-1440",
+    "our-audience-contacts-ar-light-1440",
+    "settings-ar-light-1440",
+    "settings-teams-ar-light-1440",
+    "settings-brand-ar-light-1440",
+    "settings-senders-ar-light-1440",
+    "email-designer-ar-light-1440",
+    "social-inbox-ar-light-1440",
+    "journeys-ar-light-1440",
+    "writing-ar-light-1440",
+    "admin-ar-light-1440",
+    "admin-connections-ar-light-1440",
+    "dashboard-ar-light-390",
+    "calendar-ar-light-390",
+    "posts-ar-light-390",
+    "queue-ar-light-390",
+    "campaigns-ar-light-390",
+    "gallery-ar-light-390",
+    "labels-ar-light-390",
+    "integrations-ar-light-390",
+    "our-reports-ar-light-390",
+    "competitors-reports-ar-light-390",
+    "our-audience-ar-light-390",
+    "our-audience-contacts-ar-light-390",
+    "settings-ar-light-390",
+    "settings-teams-ar-light-390",
+    "settings-brand-ar-light-390",
+    "settings-senders-ar-light-390",
+    "email-designer-ar-light-390",
+    "social-inbox-ar-light-390",
+    "journeys-ar-light-390",
+    "writing-ar-light-390",
+    "admin-ar-light-390",
+    "admin-connections-ar-light-390",
+    "dashboard-ar-light-768",
+    "calendar-ar-light-768",
+    "posts-ar-light-768",
+    "queue-ar-light-768",
+    "campaigns-ar-light-768",
+    "gallery-ar-light-768",
+    "labels-ar-light-768",
+    "integrations-ar-light-768",
+    "our-reports-ar-light-768",
+    "competitors-reports-ar-light-768",
+    "our-audience-ar-light-768",
+    "our-audience-contacts-ar-light-768",
+    "settings-ar-light-768",
+    "settings-teams-ar-light-768",
+    "settings-brand-ar-light-768",
+    "settings-senders-ar-light-768",
+    "email-designer-ar-light-768",
+    "social-inbox-ar-light-768",
+    "journeys-ar-light-768",
+    "writing-ar-light-768",
+    "admin-ar-light-768",
+    "admin-connections-ar-light-768",
+    "dashboard-ar-light-1024",
+    "calendar-ar-light-1024",
+    "posts-ar-light-1024",
+    "queue-ar-light-1024",
+    "campaigns-ar-light-1024",
+    "gallery-ar-light-1024",
+    "labels-ar-light-1024",
+    "integrations-ar-light-1024",
+    "our-reports-ar-light-1024",
+    "competitors-reports-ar-light-1024",
+    "our-audience-ar-light-1024",
+    "our-audience-contacts-ar-light-1024",
+    "settings-ar-light-1024",
+    "settings-teams-ar-light-1024",
+    "settings-brand-ar-light-1024",
+    "settings-senders-ar-light-1024",
+    "email-designer-ar-light-1024",
+    "social-inbox-ar-light-1024",
+    "journeys-ar-light-1024",
+    "writing-ar-light-1024",
+    "admin-ar-light-1024",
+    "admin-connections-ar-light-1024",
+    "dashboard-ar-dark-1440",
+    "calendar-ar-dark-1440",
+    "posts-ar-dark-1440",
+    "queue-ar-dark-1440",
+    "campaigns-ar-dark-1440",
+    "gallery-ar-dark-1440",
+    "labels-ar-dark-1440",
+    "integrations-ar-dark-1440",
+    "our-reports-ar-dark-1440",
+    "competitors-reports-ar-dark-1440",
+    "our-audience-ar-dark-1440",
+    "our-audience-contacts-ar-dark-1440",
+    "settings-ar-dark-1440",
+    "settings-teams-ar-dark-1440",
+    "settings-brand-ar-dark-1440",
+    "settings-senders-ar-dark-1440",
+    "email-designer-ar-dark-1440",
+    "social-inbox-ar-dark-1440",
+    "journeys-ar-dark-1440",
+    "writing-ar-dark-1440",
+    "admin-ar-dark-1440",
+    "admin-connections-ar-dark-1440",
+    "dashboard-ar-dark-390",
+    "calendar-ar-dark-390",
+    "posts-ar-dark-390",
+    "queue-ar-dark-390",
+    "campaigns-ar-dark-390",
+    "gallery-ar-dark-390",
+    "labels-ar-dark-390",
+    "integrations-ar-dark-390",
+    "our-reports-ar-dark-390",
+    "competitors-reports-ar-dark-390",
+    "our-audience-ar-dark-390",
+    "our-audience-contacts-ar-dark-390",
+    "settings-ar-dark-390",
+    "settings-teams-ar-dark-390",
+    "settings-brand-ar-dark-390",
+    "settings-senders-ar-dark-390",
+    "email-designer-ar-dark-390",
+    "social-inbox-ar-dark-390",
+    "journeys-ar-dark-390",
+    "writing-ar-dark-390",
+    "admin-ar-dark-390",
+    "admin-connections-ar-dark-390",
+    "dashboard-ar-dark-768",
+    "calendar-ar-dark-768",
+    "posts-ar-dark-768",
+    "queue-ar-dark-768",
+    "campaigns-ar-dark-768",
+    "gallery-ar-dark-768",
+    "labels-ar-dark-768",
+    "integrations-ar-dark-768",
+    "our-reports-ar-dark-768",
+    "competitors-reports-ar-dark-768",
+    "our-audience-ar-dark-768",
+    "our-audience-contacts-ar-dark-768",
+    "settings-ar-dark-768",
+    "settings-teams-ar-dark-768",
+    "settings-brand-ar-dark-768",
+    "settings-senders-ar-dark-768",
+    "email-designer-ar-dark-768",
+    "social-inbox-ar-dark-768",
+    "journeys-ar-dark-768",
+    "writing-ar-dark-768",
+    "admin-ar-dark-768",
+    "admin-connections-ar-dark-768",
+    "dashboard-ar-dark-1024",
+    "calendar-ar-dark-1024",
+    "posts-ar-dark-1024",
+    "queue-ar-dark-1024",
+    "campaigns-ar-dark-1024",
+    "gallery-ar-dark-1024",
+    "labels-ar-dark-1024",
+    "integrations-ar-dark-1024",
+    "our-reports-ar-dark-1024",
+    "competitors-reports-ar-dark-1024",
+    "our-audience-ar-dark-1024",
+    "our-audience-contacts-ar-dark-1024",
+    "settings-ar-dark-1024",
+    "settings-teams-ar-dark-1024",
+    "settings-brand-ar-dark-1024",
+    "settings-senders-ar-dark-1024",
+    "email-designer-ar-dark-1024",
+    "social-inbox-ar-dark-1024",
+    "journeys-ar-dark-1024",
+    "writing-ar-dark-1024",
+    "admin-ar-dark-1024",
+    "admin-connections-ar-dark-1024"
+  ],
+  "errors": [],
+  "completed": true
+}

@@ -1,0 +1,31 @@
+{
+  "scope": "Actual staff menu before late native preference projection",
+  "checks": [
+    {
+      "name": "Actual staff menu writes guarded native preference",
+      "pass": true
+    },
+    {
+      "name": "Late saved light projection preserves explicit dark menu choice",
+      "pass": true
+    },
+    {
+      "name": "Exactly one native staff menu preference write",
+      "pass": true
+    },
+    {
+      "name": "Native current staff record stores dark",
+      "pass": true
+    },
+    {
+      "name": "Fresh ordinary Console reload adopts native dark preference",
+      "pass": true
+    },
+    {
+      "name": "No runtime errors",
+      "pass": true
+    }
+  ],
+  "errors": [],
+  "completed": true
+}

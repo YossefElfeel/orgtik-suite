@@ -52,7 +52,7 @@ function makeOps({ store, now }) {
   require("./seed/demo-states").leadExamples(leads, now);
   const log = (who, action, id, extra = {}) => store.audit.unshift({ at: now(), by: who, action, entry: id, type: "lead", ...extra });
 
-  const view = (l, canPii) => (canPii || l.erased ? l : { ...l, name: mask(l.name), email: maskEmail(l.email), phone: l.phone ? mask(l.phone, 4) : "", masked: true });
+  const view = (l, canPii) => (canPii || l.erased ? l : { ...l, name: mask(l.name), email: maskEmail(l.email), phone: l.phone ? mask(l.phone, 4) : "", company: l.company ? "—" : "", message: l.message ? "—" : "", notes: l.notes.map(note => ({ ...note, text: "—" })), masked: true });
 
   function move(l, who, action, input = {}) {
     const rule = LEAD_ACTIONS[action];

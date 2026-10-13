@@ -22,6 +22,7 @@ export default function SettingsLayout({ children }: { children: ReactNode }) {
             { label: t("team"), path: "/settings/teams" },
             { label: tv("brand"), path: "/settings/brand" },
             { label: tv("senders"), path: "/settings/senders" },
+            { label: tv("utmSettings"), path: "/settings/utm" },
           ]}
         />
         <div className="min-w-0 flex-1">{children}</div>

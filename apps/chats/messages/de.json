@@ -1342,7 +1342,7 @@
   "v3.queued": "Queued",
   "v3.deliverNow": "Deliver sample now",
   "v3.saved": "Saved",
-  "v3.save": "Save",
+  "v3.save": "Speichern",
   "v3.remind": "Remind me",
   "v3.toTask": "Create Task",
   "v3.readBy": "Read by {names}",
@@ -1401,5 +1401,6 @@
   "v3.knockOffer": "Wants to talk",
   "v3.acceptKnock": "Accept huddle",
   "v3.declineKnock": "Decline",
-  "v3.deferKnock": "Later"
+  "v3.deferKnock": "Later",
+  "v3.loadingTasks": "Verknüpfte Aufgaben werden geladen…"
 }

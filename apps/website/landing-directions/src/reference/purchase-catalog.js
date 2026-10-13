@@ -198,8 +198,9 @@ export function installPublicCatalog(data, { locale = typeof document === "undef
     );
     Object.assign(item, BASE_PRESENTATION.get(item.id));
     item.monthlyMinor = priced?.monthlyMinor ?? null;
+    item.releaseState = priced?.releaseState ?? null;
     const localized = value => value?.[locale] ?? value?.en;
-    if (item.kind === "service" && localized(priced?.names)) item.name = localized(priced.names);
+    if ((item.kind === "service" || priced?.publishedAt) && localized(priced?.names)) item.name = localized(priced.names);
     if (localized(priced?.descriptions)) item.description = localized(priced.descriptions);
     if (Array.isArray(localized(priced?.capabilities))) item.capabilities = [...localized(priced.capabilities)];
     if (priced?.department) item.department = priced.department;

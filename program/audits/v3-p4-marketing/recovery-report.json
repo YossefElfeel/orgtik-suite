@@ -1,0 +1,56 @@
+{
+  "scope": "Native accepted-but-lost response recovery through ordinary Marketing controls",
+  "checks": [
+    {
+      "name": "Native server accepted one event before response was lost",
+      "pass": true
+    },
+    {
+      "name": "Reload retains original body and operation, without tokens or HTML",
+      "pass": true
+    },
+    {
+      "name": "Changed payload is blocked before another network mutation",
+      "pass": true
+    },
+    {
+      "name": "Explicit recovery returns native prior receipt",
+      "pass": true
+    },
+    {
+      "name": "Recovery reuses exactly the original operation/body",
+      "pass": true
+    },
+    {
+      "name": "Recovery persists exactly one event",
+      "pass": true
+    },
+    {
+      "name": "Confirmed receipt clears saved pending operation",
+      "pass": true
+    },
+    {
+      "name": "No runtime errors",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "recovery-uncertain",
+    "recovery-changed-payload-refused",
+    "recovery-confirmed"
+  ],
+  "requests": [
+    {
+      "body": "Recovered original reply after reload 20840",
+      "operationId": "1d869ddf-92ce-4f31-b205-dbe851993037"
+    },
+    {
+      "body": "Recovered original reply after reload 20840",
+      "operationId": "1d869ddf-92ce-4f31-b205-dbe851993037"
+    }
+  ],
+  "errors": [],
+  "acceptedStatus": 200,
+  "completed": true
+}

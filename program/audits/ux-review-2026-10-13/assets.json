@@ -1,0 +1,1402 @@
+[
+  {
+    "file": "shots/01-mona-signin-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 37612,
+    "sha256": "de8789e0f808832a8e79409420eb35955a521f213aceceb1bec2df5a4064140d"
+  },
+  {
+    "file": "shots/02-wm-overview-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 57143,
+    "sha256": "66d7bedd4afafebafc7d1fb2ef2b6ceadec9ddafbf339e902f59894e5a3e0af4"
+  },
+  {
+    "file": "shots/03-wm-admin-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 49750,
+    "sha256": "3017710e3ac6bb6c098ca4576d292bc78c8fa9b8c74919f58875c098fc62c27f"
+  },
+  {
+    "file": "shots/04-wm-services-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 62350,
+    "sha256": "dce4be947716f6a06fbb6aa8c89c1c204cbfc6123d538bf25b8fab4cc7a1d3e0"
+  },
+  {
+    "file": "shots/05-wm-software-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 60294,
+    "sha256": "8918421818b77cd95cfe74e7db8c931f1e111f30b5df02d4d1af112262108c6c"
+  },
+  {
+    "file": "shots/06-wm-translations-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 56980,
+    "sha256": "c6c2165ea2d95dfe65781eb9e3b2aa7b4ee3c79e5d6219cd8827abaedc803f7d"
+  },
+  {
+    "file": "shots/07-wm-forms-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 46849,
+    "sha256": "f888a7643c35b7361f49b528cf2b844b01ce3a606815c9fe184a1426946cf2ad"
+  },
+  {
+    "file": "shots/08-wm-releases-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 55918,
+    "sha256": "e16376a22b123817e5800726f8e3b3a4a28692686c73f93f307c55971ad5c393"
+  },
+  {
+    "file": "shots/09-wm-webhooks-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 58595,
+    "sha256": "152bc393d3e89af304ab99a006257df19cf2ec7d63d105fd10fdd16da2b1e644"
+  },
+  {
+    "file": "shots/10-wm-setup-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 57596,
+    "sha256": "3a95d0d99568d475e2cb878860aef0bb48a50c66774daf3cb71bb6a3c8e0620c"
+  },
+  {
+    "file": "shots/100-hr-department-delete-cancel-boundary-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 53505,
+    "sha256": "6e9396b922f424df4b362bd8b6a36e827e457f67e912ebf944cae8ac44d0e0ca"
+  },
+  {
+    "file": "shots/101-sos-ar-dark-390.jpg",
+    "format": "jpg",
+    "height": 843,
+    "width": 390,
+    "bytes": 28263,
+    "sha256": "1b72d39035a4b4041ea2cc488d46345cc86db8f9ed1a53c65ed325b343048970"
+  },
+  {
+    "file": "shots/102-hr-employee-edit-noop-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 40905,
+    "sha256": "576d65274dd2af1a83182434a3a9f456adb5e633cad3a1abe1b1ced74a0fcc39"
+  },
+  {
+    "file": "shots/103-tasks-ar-dark-390.jpg",
+    "format": "jpg",
+    "height": 843,
+    "width": 390,
+    "bytes": 26544,
+    "sha256": "6b4394b760f08a1f2e05edc809ee8357b2efc5be22bbdcc2895b09e35cdbdffc"
+  },
+  {
+    "file": "shots/104-files-ar-dark-390.jpg",
+    "format": "jpg",
+    "height": 843,
+    "width": 390,
+    "bytes": 38397,
+    "sha256": "6b554af52fe7bec37d41c4044bda366efd11d4e1f1983ce47eccde59c5385d17"
+  },
+  {
+    "file": "shots/105-hr-ar-dark-390.jpg",
+    "format": "jpg",
+    "height": 843,
+    "width": 390,
+    "bytes": 24464,
+    "sha256": "042c81e10134bb87e6821139130c5632312f57757343f1e72744cc52c783f5d7"
+  },
+  {
+    "file": "shots/106-chats-room-saved-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 53704,
+    "sha256": "5cc6b2d9be1f19be0b0f1079a0d8017c8a4845c13957a3251e0393c4149a453c"
+  },
+  {
+    "file": "shots/107-chats-room-remove-cancel-boundary-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 56317,
+    "sha256": "38d4c0033150fe00c18475cabaf6c78bd61205d46e9bdb8ecdd335e766b091e3"
+  },
+  {
+    "file": "shots/108-chats-meetings-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 28213,
+    "sha256": "1e5080b47b4edb5882954000f60818f975aff59dea03bf3e724cf9a103ed2c66"
+  },
+  {
+    "file": "shots/109-chats-whiteboard-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 28517,
+    "sha256": "cade28c96590cc5cca4d9754867e050f47665f06ae0784ab04ee8abdf4d15563"
+  },
+  {
+    "file": "shots/11-wm-media-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 70492,
+    "sha256": "c98bcfd357eb45e1405157e00c2b5db72861d93b7fd16f593ad342356b03c015"
+  },
+  {
+    "file": "shots/110-crm-ar-dark-390.jpg",
+    "format": "jpg",
+    "height": 844,
+    "width": 390,
+    "bytes": 31664,
+    "sha256": "ed6215725dc32382cbffd58e2c3c9c9d1d609e42aa24593493d156bc807f13be"
+  },
+  {
+    "file": "shots/111-chats-insights-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 38925,
+    "sha256": "d13b1ab7ac866516cc711a7ac37d45ba121e75e9c1a337aaa70234a67a8820ed"
+  },
+  {
+    "file": "shots/112-marketing-ar-dark-390.jpg",
+    "format": "jpg",
+    "height": 843,
+    "width": 390,
+    "bytes": 35002,
+    "sha256": "b2350f2241b9a87f408c83e9c9e745fda5a55a88b1c1a2730a1786a0441b4bd5"
+  },
+  {
+    "file": "shots/113-chats-ar-dark-390.jpg",
+    "format": "jpg",
+    "height": 843,
+    "width": 390,
+    "bytes": 39395,
+    "sha256": "32484a4a5b3dd5d4dc9bb378e82362bcc1369e71f1f9c0b706a3454a27aa8112"
+  },
+  {
+    "file": "shots/114-chats-channel-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 56994,
+    "sha256": "bb9234b23a06f5f9aefe3680e77149c30e7633477e7b8d53c68d4e910e6e3b00"
+  },
+  {
+    "file": "shots/115-hr-admin-roles-localized-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 31516,
+    "sha256": "7f74f03e6bb3127319c3425c8707d5bbd2c4946f647e2f82d8644d5822af8f98"
+  },
+  {
+    "file": "shots/116-console-ar-dark-390.jpg",
+    "format": "jpg",
+    "height": 843,
+    "width": 390,
+    "bytes": 24762,
+    "sha256": "834b14672d2e074feaa793aef9a9d323e9aa11ab30e0b56721fe9358a7e17ba6"
+  },
+  {
+    "file": "shots/117-wm-ar-dark-390.jpg",
+    "format": "jpg",
+    "height": 844,
+    "width": 390,
+    "bytes": 28630,
+    "sha256": "99e7a9267e589882590587445122c66b3816dfcab535f737960069e284cc6e8b"
+  },
+  {
+    "file": "shots/118-marketing-admin-settings-localized-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 31941,
+    "sha256": "a547a3276c77a42f9b5f29df8b95241e2755403fb6429edaebc6ca80273b8876"
+  },
+  {
+    "file": "shots/119-website-cart-ar-390.jpg",
+    "format": "jpg",
+    "height": 844,
+    "width": 390,
+    "bytes": 35553,
+    "sha256": "c185dc94b35df6252f01164a42754d2ed43d433960bacdb90f8fbc20b6cc63c6"
+  },
+  {
+    "file": "shots/12-wm-admin-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 43108,
+    "sha256": "e2ff31fc0580d04b93308d69c990d0f60d5530b137d73ee52cc6fc30c9d4c042"
+  },
+  {
+    "file": "shots/120-hr-employees-ar-dark-390.jpg",
+    "format": "jpg",
+    "height": 844,
+    "width": 390,
+    "bytes": 47623,
+    "sha256": "2a4e8145d4269e12a9b1193fe9f2149206bf9b896704d5896066ee80e281b1be"
+  },
+  {
+    "file": "shots/121-crm-admin-settings-localized-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 31683,
+    "sha256": "6c8035e615259f1e26afee32bcfae72f6a0ce1eead54ebdb9f006a3403327a68"
+  },
+  {
+    "file": "shots/13-wm-services-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 55277,
+    "sha256": "bd5e3fe41e807a52be06e0593d65833e7921551889709ab87416fe7904aceac4"
+  },
+  {
+    "file": "shots/14-wm-software-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 54154,
+    "sha256": "081f4d2a6a11a53fce86232c4b25398b09097fe97a4140c9e6dacb2d1ca93e93"
+  },
+  {
+    "file": "shots/15-wm-translations-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 50436,
+    "sha256": "af9230854fcb2da421a06aaca7755ca64ec7e33fb25f31b418e5ad9f245f3c3b"
+  },
+  {
+    "file": "shots/16-wm-forms-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 42122,
+    "sha256": "d4c35b6c502ff8541588513dde7eee0ddd568a0ad25b352d263d6bcceed3cef9"
+  },
+  {
+    "file": "shots/17-wm-releases-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 51784,
+    "sha256": "24896fa9c81a524533294e480a05585ed10b8bef861fd0836070765bf646c22f"
+  },
+  {
+    "file": "shots/18-wm-webhooks-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 50898,
+    "sha256": "08141e02d0705740ed714d9a0acdf99b6e82bbfc780349cdc35daf0e7e29b569"
+  },
+  {
+    "file": "shots/19-wm-setup-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 51082,
+    "sha256": "e74c2d3fc5b75195f73597c815516560921c3961b7cdaf96ecce3a4c78624e13"
+  },
+  {
+    "file": "shots/20-wm-media-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 65341,
+    "sha256": "ddd08cfd7787c6c6f90707254c3554b333e5f262f9e4957d201925cd9c92a739"
+  },
+  {
+    "file": "shots/21-console-overview-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 64049,
+    "sha256": "58b93f2de4f58b466c2a563fe9118143bc15ebf628812df9353f4a28147b4c93"
+  },
+  {
+    "file": "shots/22-console-billing-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 82395,
+    "sha256": "a2b524323b045abc208d23f0b89d250486f2bae0d101918b164541ce316475b9"
+  },
+  {
+    "file": "shots/23-console-software-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 62849,
+    "sha256": "a7d76d69c9c819c58c186251552bcb71ab8b2be923fc9138b12139604350851e"
+  },
+  {
+    "file": "shots/24-console-ecosystem-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 64197,
+    "sha256": "c1164c4b4eec77b02916a7ee5ff76f5ef003ef7332f9ac4965f8d78fadd89b12"
+  },
+  {
+    "file": "shots/25-console-releases-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 57081,
+    "sha256": "0af3ac95ab53581afa74ba7c7fff9d2cf3e3f9849a84be65a26c07f0b47f73d9"
+  },
+  {
+    "file": "shots/26-console-setup-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 57526,
+    "sha256": "f45c00f6b1afe58a40252588a55efe127f987e69e5813bad86965ea6d82df6eb"
+  },
+  {
+    "file": "shots/27-console-invitations-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 57292,
+    "sha256": "270017eca61f671169383fef996968345824ab6d1412f875659e60a5ee692b4f"
+  },
+  {
+    "file": "shots/28-console-security-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 47392,
+    "sha256": "17f5c0b420d79fb92addab0da6846e50829e9b980a2073210b0b70a3785f2eca"
+  },
+  {
+    "file": "shots/29-console-tax-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 53222,
+    "sha256": "057657bd4d21f210e8658a963c9bd66c259c2ecc5da2c83e2ecb7446ca5dcea1"
+  },
+  {
+    "file": "shots/30-console-ticket-targets-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 70636,
+    "sha256": "3325a3d4312fea79a858bb174011dc4e252b1000ef7d7c406f5110c956d21b24"
+  },
+  {
+    "file": "shots/31-console-services-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 40321,
+    "sha256": "6d07e4bb3a5ce2bc2ce1387c2207d159b3b028d422ea9d6039cfef1d2a6b83f9"
+  },
+  {
+    "file": "shots/32-console-requests-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 40321,
+    "sha256": "6d07e4bb3a5ce2bc2ce1387c2207d159b3b028d422ea9d6039cfef1d2a6b83f9"
+  },
+  {
+    "file": "shots/33-console-billing-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 86198,
+    "sha256": "118da4e0037898c5bc2e9c13c04d4e6fb9e866e63a33f93e5046737f39e16c31"
+  },
+  {
+    "file": "shots/34-console-software-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 66648,
+    "sha256": "aa4eb66f42d9293db1a246bc42a95939fc918508d6ad9ae0ea8ca32167812d5e"
+  },
+  {
+    "file": "shots/35-console-ecosystem-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 71806,
+    "sha256": "e8a906cdc6908da302a4d4fbdfe15400f7f158bcd03242f20ce3029fe1de9856"
+  },
+  {
+    "file": "shots/36-console-releases-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 59843,
+    "sha256": "7a13cd9e196d56d8951a77fc6f8bd1519bf97cae78425583e17a2318316826d4"
+  },
+  {
+    "file": "shots/37-console-setup-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 63060,
+    "sha256": "0f60adfa706b31bfe70b97d6b00cedea04a09d4bbb64fae6f6d56101bd663153"
+  },
+  {
+    "file": "shots/38-console-invitations-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 61101,
+    "sha256": "b144b13a6f8cea34571c7f7e71f2e766a7ddb7ce5df26b1fc836f821c71e2356"
+  },
+  {
+    "file": "shots/39-console-security-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 50199,
+    "sha256": "a30e76d7d7abbc6399fd89bc5985a8015e3841ee31b132a511406d33f80f0ef6"
+  },
+  {
+    "file": "shots/40-console-tax-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 53386,
+    "sha256": "26070ab3680e1a6b09847db70a245162dc76a5cefcbab0f06c14f499bdf0ced4"
+  },
+  {
+    "file": "shots/41-console-ticket-targets-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 74800,
+    "sha256": "fc5dac1d338a49deeaad8452178a78898ac4277aebe033aec62208ac6b84f6a7"
+  },
+  {
+    "file": "shots/42-console-services-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 40715,
+    "sha256": "36b026e1e79592de6ee6823ee57cd5134abf330e64059524651b04bc7b0b1194"
+  },
+  {
+    "file": "shots/43-console-requests-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 40715,
+    "sha256": "36b026e1e79592de6ee6823ee57cd5134abf330e64059524651b04bc7b0b1194"
+  },
+  {
+    "file": "shots/44-console-overview-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 66066,
+    "sha256": "b295bf0a503066231e2fa859e1a493e91f9581429f62fd2817a47b10a4e28901"
+  },
+  {
+    "file": "shots/45-tasks-mona-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 80453,
+    "sha256": "b031a49bcf33125122c12c72e840a6da1bcf036fe5c91dcbdc9972e5da9d2521"
+  },
+  {
+    "file": "shots/46-account-mona-home-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 72284,
+    "sha256": "9a8bfbb574ca928436288375906a74d7c7a6473e279c996a8fd0dbb84b082f45"
+  },
+  {
+    "file": "shots/47-account-billing-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 76276,
+    "sha256": "e56d3e1c9b44c923ee172c21abd71e4a24058f7f2ab59bc4572aaff361769d56"
+  },
+  {
+    "file": "shots/48-account-invoices-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 74955,
+    "sha256": "f0f78105c99614d2bb2f7b3ba201727f53995971cb757c7e0650aad68b8be709"
+  },
+  {
+    "file": "shots/49-owner-unpaid-invoice-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 72922,
+    "sha256": "060b1bf5e22311f76a7a1143c3b8e0b5fd443473304b9986a9647c9358a2f56a"
+  },
+  {
+    "file": "shots/50-console-payment-drawer-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 76494,
+    "sha256": "86fa9e88133c3f1da0881afbe888d46fadebcc154fb6a190d076e8419925252e"
+  },
+  {
+    "file": "shots/51-owner-pay-link-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 57917,
+    "sha256": "8f24b8aed8b4db572227bdae3c1dceadd73ec09611a7c699ef856ed7f05ffe41"
+  },
+  {
+    "file": "shots/52-owner-pay-link-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 55322,
+    "sha256": "8481f39933a868d8848bfaff03fdc91f1c837d4f8a69a63f016f1d29fd9aada3"
+  },
+  {
+    "file": "shots/53-account-staff-invitations-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 35364,
+    "sha256": "580745750e7a228763c8c33127e201ec37847c11e5d72203d9ba7e8220cc3c84"
+  },
+  {
+    "file": "shots/54-account-staff-invitations-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 37336,
+    "sha256": "1af924de118c258e0004a13cfd98fc7de9a39031da1a134fc3fcb0d8de39d1a7"
+  },
+  {
+    "file": "shots/55-marketing-mona-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 67947,
+    "sha256": "7acafa3ef3945f0fc87d7f814853daf6c5384f5b010aa4957655c6f3e9b1a11f"
+  },
+  {
+    "file": "shots/56-marketing-utm-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 59918,
+    "sha256": "d8722f755cd1f5ae4c382d72d79f75e7390126562b009213ae7a5cfa77765034"
+  },
+  {
+    "file": "shots/57-marketing-utm-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 56715,
+    "sha256": "ed3ad34bafb64d2b4a3f01b4771c9d7774b6a741059dfc49cfcc8a06a327004c"
+  },
+  {
+    "file": "shots/58-chats-office-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 91961,
+    "sha256": "a2fa5a9fe9907a8f828c944df9599e8b75ffe8e00d8644ab52f0929b7c42befc"
+  },
+  {
+    "file": "shots/59-chats-office-current-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 91766,
+    "sha256": "ae856e4c9ddfe97cacf15358ef439b26bb139c71a7a7685dffd2b03a4208db2f"
+  },
+  {
+    "file": "shots/60-chats-admin-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 45253,
+    "sha256": "7cc2d4f7c03757850fbcf6e31fe25e8e308e13791bf1de3b373124d2e67f8e00"
+  },
+  {
+    "file": "shots/61-chats-settings-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 62358,
+    "sha256": "a21bf2804bb48306caebc74005a53cc7c573826865f7a5cca47979b0569f076d"
+  },
+  {
+    "file": "shots/62-chats-settings-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 58089,
+    "sha256": "fba3901bbaec7c4ef4dd286b479972cc5e891444dceb7ca8be1e10f286d0a608"
+  },
+  {
+    "file": "shots/63-chats-office-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 90434,
+    "sha256": "4b1f3e9d553b6b744144f2b61fad185b0b4410619a8c82ec38b14edcf4818087"
+  },
+  {
+    "file": "shots/64-chats-admin-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 43970,
+    "sha256": "f7a5279f00e6443e7b9de0e5f0adddf1710a3cba7552d8e57d9882bdd1e53d3d"
+  },
+  {
+    "file": "shots/65-wm-setup-fixed-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 58437,
+    "sha256": "7318b74d7de639cdd0f70b97e3a02467d53f5a8451be77fecd876b6708784e86"
+  },
+  {
+    "file": "shots/66-wm-setup-open-pages-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 87253,
+    "sha256": "9c022d1cf4def3c1d9ff16081d9997e2d68adccc0219b7ebce884ff014e93ea9"
+  },
+  {
+    "file": "shots/67-wm-setup-fixed-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 52773,
+    "sha256": "f85fc5eed850ab686f479cbf037ff669eee7e4db72c8b2e00937f1a93e3b97cd"
+  },
+  {
+    "file": "shots/68-wm-setup-open-pages-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 84371,
+    "sha256": "f6ad0cbcdd9b293092672afc238cbdfcaec389f585998a9affbab390f836aad4"
+  },
+  {
+    "file": "shots/69-console-setup-fixed-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 57526,
+    "sha256": "f45c00f6b1afe58a40252588a55efe127f987e69e5813bad86965ea6d82df6eb"
+  },
+  {
+    "file": "shots/70-console-setup-open-tools-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 72901,
+    "sha256": "39896183f6f7e5857a327883fbd278a9a66868ecfa82b0520df47e49f9de8192"
+  },
+  {
+    "file": "shots/71-console-setup-fixed-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 63060,
+    "sha256": "0f60adfa706b31bfe70b97d6b00cedea04a09d4bbb64fae6f6d56101bd663153"
+  },
+  {
+    "file": "shots/72-console-setup-open-tools-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 78765,
+    "sha256": "9d845ff41352cb3a7f464dcb8c76dde7b472411575eac238f6ed65a2051dfedc"
+  },
+  {
+    "file": "shots/73-tasks-mona-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 79026,
+    "sha256": "50e9aeacfe6444c53d8c2caa9dc1efa2b71c6d3990035ede77c483566f6acfea"
+  },
+  {
+    "file": "shots/74-tasks-admin-mona-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 52609,
+    "sha256": "00ab221aa7a0b77b0e0487f8dcb05de43bea91e05f7b31953d458bd787db7b0a"
+  },
+  {
+    "file": "shots/75-nour-owner-home-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 63985,
+    "sha256": "808f4d4e3807025d55898431e1d2bb8e86ac5456335a60a3e1cfa2a021a1caf0"
+  },
+  {
+    "file": "shots/76-task-create-fixture-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 58793,
+    "sha256": "23b779517ac342bfd67cfeee70b89f954d2ed9de82b4245991d76fb52ce11663"
+  },
+  {
+    "file": "shots/77-owner-invite-files-only-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 66024,
+    "sha256": "116a5d2c0ffefa80dc251b2560a6580317e51d88a4af92ba0cd878296679e0f3"
+  },
+  {
+    "file": "shots/78-task-created-detail-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 65940,
+    "sha256": "0d26c86382145b2a840ec88aacd2360c80894d76271d741f2f111f006f67cedb"
+  },
+  {
+    "file": "shots/79-task-edit-saved-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 67296,
+    "sha256": "ef284e8ae31421c55746b9e3cd1bae32d28359d8f9fd2d9732215ffdf81b2a7f"
+  },
+  {
+    "file": "shots/80-task-delete-confirmation-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 75791,
+    "sha256": "b5d68e1450c41f2b744d6e1435e7400d9d4be3d63a075b7b0257202086cc3e47"
+  },
+  {
+    "file": "shots/81-member-invite-review-ar.jpg",
+    "format": "jpg",
+    "height": 712,
+    "width": 1265,
+    "bytes": 48350,
+    "sha256": "e8b83bd570bae8a31e3bfcdc150bb0c87e0b6bb6e675da814440b59a13ef76aa"
+  },
+  {
+    "file": "shots/82-nour-not-yours-hr-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 14444,
+    "sha256": "78d77f4d204a06ab6adde3cab743562e1d61831006a2016f2e57d483ad24c823"
+  },
+  {
+    "file": "shots/83-member-accepted-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 38527,
+    "sha256": "7ab5e5d81b8a90c737d525c3181a88b22d9ecef39fa325b86063dff012fab926"
+  },
+  {
+    "file": "shots/84-files-mona-main-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 101344,
+    "sha256": "9035d5982e7deff86a055334c8af3e9c247ba4252cad1c65c391ab44abfa34d9"
+  },
+  {
+    "file": "shots/85-member-first-run-home-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 43887,
+    "sha256": "2ab190dbabdc10832abef226d640ae22fb2e749656854ce9c44a25e1d17c1728"
+  },
+  {
+    "file": "shots/86-nour-billing-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 65498,
+    "sha256": "8114a841c6762e638b8648fe48dcf1303a543cb6bf8c5a9179904533e7c0adbf"
+  },
+  {
+    "file": "shots/87-files-only-member-no-home-rail-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 59603,
+    "sha256": "53dde244373f78096e51c530f88440f5a18bcf3d8e30e79c084658612f62d58a"
+  },
+  {
+    "file": "shots/88-nour-account-security-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 61423,
+    "sha256": "76fb5005212dc4ce0c9489ed25dd9c4c49c1b8307e731247a88f163579a96eb3"
+  },
+  {
+    "file": "shots/89-folder-rename-archive-confirmation-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 68359,
+    "sha256": "4e232037b1ed5879bd24a153369e7ca8c0538ce844be354c14705de3ea11dfb5"
+  },
+  {
+    "file": "shots/90-folder-archive-trash-view-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 78527,
+    "sha256": "4c22508050a30d4b33bb62db9b3f6cad25de5e91202cbb93714a11584cdc9781"
+  },
+  {
+    "file": "shots/92-member-signout-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 38631,
+    "sha256": "d0a9ba385becfe0ab747dbeec0c2b9ec15a5013893eaf129abbeab1103d24bea"
+  },
+  {
+    "file": "shots/93-files-admin-localized-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 52117,
+    "sha256": "379c356e389b94a0d1b05574068f8f58a990cdeea33c394e109b614691ae2a16"
+  },
+  {
+    "file": "shots/94-files-admin-roles-localized-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 58837,
+    "sha256": "f470402b82d5dfa5718931bbbc2252ba216b270a9e6f9cb18f32488e26e6e399"
+  },
+  {
+    "file": "shots/95-folder-recovery-panel-fixed-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 79174,
+    "sha256": "85a1c8651d3aa337b65e1bc19ddcc108f367c94bfdf32bc28f80a0c515431f6a"
+  },
+  {
+    "file": "shots/96-folder-restored-success-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 104366,
+    "sha256": "0057dbcecda07b6a1ad214e6338d561d148705fa6ddf3ed52eb2128c55830afe"
+  },
+  {
+    "file": "shots/97-nour-signout-ar.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 38631,
+    "sha256": "d0a9ba385becfe0ab747dbeec0c2b9ec15a5013893eaf129abbeab1103d24bea"
+  },
+  {
+    "file": "shots/98-hr-mona-main-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 30640,
+    "sha256": "5e5edb97a2b96d840f6d0df3505c37e6bab33a277277f8c75f383e648fac4324"
+  },
+  {
+    "file": "shots/99-hr-department-edited-ar.jpg",
+    "format": "jpg",
+    "height": 668,
+    "width": 870,
+    "bytes": 36644,
+    "sha256": "30be6000aa655c5bab882a0b8b991ab5814b647939018002a4c8d1f2a23ad844"
+  },
+  {
+    "file": "shots/assessment-a-website/w01-home-en.jpg",
+    "format": "jpg",
+    "height": 673,
+    "width": 1521,
+    "bytes": 77200,
+    "sha256": "b4306c6e1c69faa38d7d8e60f2fa45c20d06fca598bc2d8c3b796be32e12fe66"
+  },
+  {
+    "file": "shots/assessment-a-website/w02-signup-empty-en.jpg",
+    "format": "jpg",
+    "height": 1599,
+    "width": 1520,
+    "bytes": 104927,
+    "sha256": "6bbf2e58bf4adbf42db1ddd272a1504a0b0c4a36975654eb328aea5ed977585c"
+  },
+  {
+    "file": "shots/assessment-a-website/w03-signup-workspace-handoff-en.jpg",
+    "format": "jpg",
+    "height": 679,
+    "width": 1536,
+    "bytes": 49535,
+    "sha256": "e925cf70992e35013b52e6510f4624dfde74743caf8f39e7b92f5e7024cec6c2"
+  },
+  {
+    "file": "shots/assessment-a-website/w04-software-tasks-selection-en.jpg",
+    "format": "jpg",
+    "height": 673,
+    "width": 1521,
+    "bytes": 96026,
+    "sha256": "9aa949b79edb5f1dad035bb9ee426467e89a1f4b52fdb9829a430f812b11bf99"
+  },
+  {
+    "file": "shots/assessment-a-website/w05-added-to-cart-en.jpg",
+    "format": "jpg",
+    "height": 673,
+    "width": 1521,
+    "bytes": 93051,
+    "sha256": "966f3066b000a5f1089355f17dd88acc1946738bd9b32fc66de7e5db812da309"
+  },
+  {
+    "file": "shots/assessment-a-website/w06-cart-en.jpg",
+    "format": "jpg",
+    "height": 673,
+    "width": 1521,
+    "bytes": 61957,
+    "sha256": "817a5affc97cefdec15d8b67799f2c0bb204d66ad8ff8ce2c909b11bc0a79138"
+  },
+  {
+    "file": "shots/assessment-a-website/w07-cart-language-ar-still-en.jpg",
+    "format": "jpg",
+    "height": 673,
+    "width": 1521,
+    "bytes": 61994,
+    "sha256": "e6491e8db2b16a6e3b2d6e8d41d331fc36bce229d53d0b3fe37c98efde5ffdb2"
+  },
+  {
+    "file": "shots/assessment-a-website/w08-cart-ar-route.jpg",
+    "format": "jpg",
+    "height": 673,
+    "width": 1521,
+    "bytes": 61088,
+    "sha256": "3fb40b3e31ec2b222a5f8005a5bca6c255144fa1a836bd659bda304090bb38b1"
+  },
+  {
+    "file": "shots/assessment-a-website/w09-checkout-ar-prices-unavailable.jpg",
+    "format": "jpg",
+    "height": 1413,
+    "width": 1520,
+    "bytes": 126487,
+    "sha256": "4da8ad8f9e2b5005144a7cdfcb4047af56f3c7dbcbc19467849dfd68922b8781"
+  },
+  {
+    "file": "shots/assessment-a-website/w10-checkout-en-prices-unavailable.jpg",
+    "format": "jpg",
+    "height": 1413,
+    "width": 1520,
+    "bytes": 127660,
+    "sha256": "a18dea57a9452dd4c908899d7c2700a544ab7e9dd96dd7be7973a7995fdd53f7"
+  },
+  {
+    "file": "shots/assessment-a-website/w11-checkout-simulated-paypal-en.jpg",
+    "format": "jpg",
+    "height": 673,
+    "width": 1521,
+    "bytes": 78175,
+    "sha256": "bcd6f7910d53f2f15ab26d96069607cd5ba4377f17c4e9783103a5dd2270d862"
+  },
+  {
+    "file": "shots/assessment-a-website/w12-postfix-valid-quote-en.jpg",
+    "format": "jpg",
+    "height": 728,
+    "width": 1521,
+    "bytes": 90234,
+    "sha256": "9566b594ddd2d4375049d1eed31fa2eaca500beeec5033324b2e2c0a45bd0fab"
+  },
+  {
+    "file": "shots/assessment-a-website/w13-postfix-purchase-confirmed-en.jpg",
+    "format": "jpg",
+    "height": 728,
+    "width": 1521,
+    "bytes": 81993,
+    "sha256": "e9a1157d97f28520daedd8368047c9c45c45af02e22893dfd7d530120fcb33ad"
+  },
+  {
+    "file": "shots/assessment-a-website/w14-postfix-tasks-handoff-en.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 59118,
+    "sha256": "168ce7b784be7f117793bcc21f0fa000f08d3ca93809e7d6ee71b6d847ef7317"
+  },
+  {
+    "file": "shots/assessment-a-website/w15-postfix-paid-invoice-en.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 51642,
+    "sha256": "467d275dd6dd6adadef7d4fcb043536480fb2e737685e88c7459b1385749644d"
+  },
+  {
+    "file": "shots/assessment-a-website/w16-postfix-invoice-detail-en.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 69253,
+    "sha256": "6456e74ac4a8144ce46bc174e61e5c5ac6d42899df2e53a2a27ae51a7419c227"
+  },
+  {
+    "file": "shots/assessment-a/01-wm-overview.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 57143,
+    "sha256": "66d7bedd4afafebafc7d1fb2ef2b6ceadec9ddafbf339e902f59894e5a3e0af4"
+  },
+  {
+    "file": "shots/assessment-a/02-wm-translation-picker.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 64760,
+    "sha256": "0da83cd68b5b141932ec5077b2b6b8d775840f24ce4666619d9f23827b43f9d1"
+  },
+  {
+    "file": "shots/assessment-a/03-wm-translation-elements.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 61907,
+    "sha256": "e9fe1baf8bdec41041cab34e457193fac1b8ba3be1729fe47d5dbee731ff7dd1"
+  },
+  {
+    "file": "shots/assessment-a/04-wm-releases-top.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 58703,
+    "sha256": "34eec1e03769e8e703e9ed48847c99831b9811f08abe5349ffc6b5ae539f921e"
+  },
+  {
+    "file": "shots/assessment-a/05-wm-releases-bottom.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 51418,
+    "sha256": "c32169d372e2fa895fd699b7a6629256f318a85b6d903c1553179700c7eb9889"
+  },
+  {
+    "file": "shots/assessment-a/06-console-billing.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 86439,
+    "sha256": "9185ef30a24fd09c2146ed5a741083598a4a0353f0223f4bbf5eab3aaad3f0ab"
+  },
+  {
+    "file": "shots/assessment-a/07-console-payment-recovery.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 77467,
+    "sha256": "e21dd37751550750e09a2c61fffdda0538ec5e6d3e7e34c3bc7004c3b8632c97"
+  },
+  {
+    "file": "shots/assessment-a/08-console-refund-context.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 70845,
+    "sha256": "7fb3cdeff73965f11d0b9741e020cf2cfb56e2accce59c206645f61d8a96c11e"
+  },
+  {
+    "file": "shots/assessment-a/09-console-setup.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 63352,
+    "sha256": "d3baf2876fb7df4293ce7640b12674911e8f9d1ff3f6e975c43ca179990af886"
+  },
+  {
+    "file": "shots/assessment-a/a01-translations-start-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 56980,
+    "sha256": "c6c2165ea2d95dfe65781eb9e3b2aa7b4ee3c79e5d6219cd8827abaedc803f7d"
+  },
+  {
+    "file": "shots/assessment-a/a02-translation-fields-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 61899,
+    "sha256": "421af7f400b787590fc675fd2491b4571cbb15b288cf7c69c9d9570440d2ab8a"
+  },
+  {
+    "file": "shots/assessment-a/a03-releases-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 58703,
+    "sha256": "34eec1e03769e8e703e9ed48847c99831b9811f08abe5349ffc6b5ae539f921e"
+  },
+  {
+    "file": "shots/assessment-a/a04-media-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 69151,
+    "sha256": "369cd868d562c4faf8d8b0808c855844fd71eb954b1d176f36f4edfbdd03b2e8"
+  },
+  {
+    "file": "shots/assessment-a/a05-console-billing-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 86439,
+    "sha256": "9185ef30a24fd09c2146ed5a741083598a4a0353f0223f4bbf5eab3aaad3f0ab"
+  },
+  {
+    "file": "shots/assessment-a/a06-console-payment-drawer-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 76515,
+    "sha256": "93d2dbfcc81648ae2feac2c0099193489482b31a7b9ccc32864b2f40f23bd6ee"
+  },
+  {
+    "file": "shots/assessment-a/a07-console-setup-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 63352,
+    "sha256": "d3baf2876fb7df4293ce7640b12674911e8f9d1ff3f6e975c43ca179990af886"
+  },
+  {
+    "file": "shots/assessment-a/a08-setup-checklist-404.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 8708,
+    "sha256": "5ea758ff0e24554d746c1549163bd87d3137f03e5381b96e414df9fedcbf72a2"
+  },
+  {
+    "file": "shots/assessment-a/a09-localization-matrix-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 87204,
+    "sha256": "71681c52a3cdb9d4bc98d39c744ebb66282aa77a91fa619f30aad350eb407b2b"
+  },
+  {
+    "file": "shots/assessment-b-tools/01-crm-main.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 105932,
+    "sha256": "a95b9010d6ceab596850d36f3542836f1fbfbb15c478fb1a35340ef7794870e5"
+  },
+  {
+    "file": "shots/assessment-b-tools/02-crm-admin.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 64021,
+    "sha256": "66adf416f4a6e8813e7bc3207814cadb849cab3b414c1100bf3a731748afb7dc"
+  },
+  {
+    "file": "shots/assessment-b-tools/03-crm-create-form.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 76452,
+    "sha256": "8b53d592c712e7b45a62f92e5bbee594e4f65388e9819fb85f939e7c3d9e8f78"
+  },
+  {
+    "file": "shots/assessment-b-tools/04-crm-created-inspector.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 85583,
+    "sha256": "a4183dbfc6b23c1f49351c4795dedbbd9d9b594f776e232dee3cb3c724a8be2f"
+  },
+  {
+    "file": "shots/assessment-b-tools/05-crm-edit-form.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 82310,
+    "sha256": "1fe8ab12035b0cfc35a71a4ac9e5d084d4ff32c9bbf103853cdcf93e4aebee77"
+  },
+  {
+    "file": "shots/assessment-b-tools/06-crm-edit-validation.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 84713,
+    "sha256": "89e10ec84852eb38b894358e91c4a1d3e9f7952aa1620977707fc2b8eb11c069"
+  },
+  {
+    "file": "shots/assessment-b-tools/07-crm-edit-saved.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 82887,
+    "sha256": "cf3baffdd7d7ab71b890ab73d7df19273a5ecaa841d3a60e2cd9c54daa2d5579"
+  },
+  {
+    "file": "shots/assessment-b-tools/08-crm-delete-confirmation.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 78773,
+    "sha256": "e61279b6adfec68463818a079766ab100216b3beac3070f003609f65d2ef7888"
+  },
+  {
+    "file": "shots/assessment-b-tools/09-marketing-main.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 76861,
+    "sha256": "a95cbc4b2202a94ab60dafd9176c280d836b725036fbbdb36ca870849288878b"
+  },
+  {
+    "file": "shots/assessment-b-tools/10-marketing-admin.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 66047,
+    "sha256": "118b93cd90da7d5de40891b1703bdc7dae5fe857f5caf945a18b65e610b1e1da"
+  },
+  {
+    "file": "shots/assessment-b-tools/11-marketing-label-create-form.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 70884,
+    "sha256": "05b205e7c5b6cf6ad765b546c169355acab0af11b76f0286f59641989306b5d7"
+  },
+  {
+    "file": "shots/assessment-b-tools/12-marketing-label-created.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 78059,
+    "sha256": "3b9ccd92d3caeb92c70f9f00f2c2a8357b93de6b16c00b23a5c4850c8b74106a"
+  },
+  {
+    "file": "shots/assessment-b-tools/13-marketing-label-edit-form.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 74033,
+    "sha256": "be1a9a089b458d3bca216fafb9cfe41eedcb2d14c06b170687000257b16cfd7f"
+  },
+  {
+    "file": "shots/assessment-b-tools/14-marketing-label-edited.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 76930,
+    "sha256": "2c65f126cbbdabb2ac9fffa9cb22c32d7c950a1df248cdadc95d1e4f6eae706d"
+  },
+  {
+    "file": "shots/assessment-b-tools/15-marketing-delete-confirmation.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 73809,
+    "sha256": "0b197f245c397cb07b311aacf247be5c47272979c99045ccf714a5d165ff61a6"
+  },
+  {
+    "file": "shots/assessment-b-tools/16-marketing-retained-after-reload.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 77952,
+    "sha256": "bba01834afac197ea8503bc5c50f87eedeffcbbe49c26446106aba0c45366b77"
+  },
+  {
+    "file": "shots/assessment-b-tools/17-crm-retained-after-revisit.jpg",
+    "format": "jpg",
+    "height": 735,
+    "width": 1536,
+    "bytes": 82887,
+    "sha256": "cf3baffdd7d7ab71b890ab73d7df19273a5ecaa841d3a60e2cd9c54daa2d5579"
+  },
+  {
+    "file": "shots/assessment-b/console-billing-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 90381,
+    "sha256": "af5edded6315c9c5ca99c517c07e8905ccb3f51bc1f9009a06720c8717780bb2"
+  },
+  {
+    "file": "shots/assessment-b/console-billing-refund-sheet-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 72549,
+    "sha256": "89d887db433a727e94ca3894e9af71bff379d12f2d71df8b77ebe2369aca9f54"
+  },
+  {
+    "file": "shots/assessment-b/wm-releases-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 59768,
+    "sha256": "04625aa466103f27b107632257f53f41241ad0da11805a700da4d508900b33c7"
+  },
+  {
+    "file": "shots/assessment-b/wm-translation-drafts-en.jpg",
+    "format": "jpg",
+    "height": 720,
+    "width": 1280,
+    "bytes": 56763,
+    "sha256": "e509ccccacde9a4dca5c1b4e1e64de72a08a1706852357a7bb6d280ad8e4319b"
+  }
+]

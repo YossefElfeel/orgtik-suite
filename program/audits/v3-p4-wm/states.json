@@ -1,0 +1,43 @@
+{
+  "checks": [
+    {
+      "name": "Viewer has actual read-only role affordance",
+      "pass": true
+    },
+    {
+      "name": "Actual viewer route permission denied",
+      "pass": true
+    },
+    {
+      "name": "Native filtered-empty response has recovery action",
+      "pass": true
+    },
+    {
+      "name": "Actual pending resource renders accessible loading state",
+      "pass": true
+    },
+    {
+      "name": "Resource unavailable renders actual error and retry control",
+      "pass": true
+    },
+    {
+      "name": "Retry recovers ordinary native resource",
+      "pass": true
+    },
+    {
+      "name": "Signed-out ordinary state offers actual SOS sign in",
+      "pass": true
+    }
+  ],
+  "captures": [
+    "state-read-only-viewer.png",
+    "state-no-permission.png",
+    "state-empty-native-query.png",
+    "state-loading-resource.png",
+    "state-resource-unavailable.png",
+    "state-resource-recovered.png",
+    "state-signed-out.png"
+  ],
+  "errors": [],
+  "completed": true
+}

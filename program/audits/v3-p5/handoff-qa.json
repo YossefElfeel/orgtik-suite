@@ -1,0 +1,165 @@
+{
+  "checks": [
+    {
+      "name": "1440/light: nine source cycle rows",
+      "pass": true
+    },
+    {
+      "name": "1440/light: initial criteria50",
+      "pass": true
+    },
+    {
+      "name": "1440/light: actual table cells padded",
+      "pass": true
+    },
+    {
+      "name": "1440/light: actual section padding",
+      "pass": true
+    },
+    {
+      "name": "1440/light: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "1440/light: serious/critical axe",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "1440/light: exact finding search",
+      "pass": true
+    },
+    {
+      "name": "1440/light: exact TierC filter17",
+      "pass": true
+    },
+    {
+      "name": "1440/light: real before image",
+      "pass": true
+    },
+    {
+      "name": "1440/dark: nine source cycle rows",
+      "pass": true
+    },
+    {
+      "name": "1440/dark: initial criteria50",
+      "pass": true
+    },
+    {
+      "name": "1440/dark: actual table cells padded",
+      "pass": true
+    },
+    {
+      "name": "1440/dark: actual section padding",
+      "pass": true
+    },
+    {
+      "name": "1440/dark: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "1440/dark: serious/critical axe",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "1440/dark: exact finding search",
+      "pass": true
+    },
+    {
+      "name": "1440/dark: exact TierC filter17",
+      "pass": true
+    },
+    {
+      "name": "1440/dark: real before image",
+      "pass": true
+    },
+    {
+      "name": "390/light: nine source cycle rows",
+      "pass": true
+    },
+    {
+      "name": "390/light: initial criteria50",
+      "pass": true
+    },
+    {
+      "name": "390/light: actual table cells padded",
+      "pass": true
+    },
+    {
+      "name": "390/light: actual section padding",
+      "pass": true
+    },
+    {
+      "name": "390/light: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "390/light: serious/critical axe",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "390/light: exact finding search",
+      "pass": true
+    },
+    {
+      "name": "390/light: exact TierC filter17",
+      "pass": true
+    },
+    {
+      "name": "390/light: real before image",
+      "pass": true
+    },
+    {
+      "name": "390/dark: nine source cycle rows",
+      "pass": true
+    },
+    {
+      "name": "390/dark: initial criteria50",
+      "pass": true
+    },
+    {
+      "name": "390/dark: actual table cells padded",
+      "pass": true
+    },
+    {
+      "name": "390/dark: actual section padding",
+      "pass": true
+    },
+    {
+      "name": "390/dark: no document overflow",
+      "pass": true
+    },
+    {
+      "name": "390/dark: serious/critical axe",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "390/dark: exact finding search",
+      "pass": true
+    },
+    {
+      "name": "390/dark: exact TierC filter17",
+      "pass": true
+    },
+    {
+      "name": "390/dark: real before image",
+      "pass": true
+    },
+    {
+      "name": "No resource or runtime errors",
+      "pass": true,
+      "detail": []
+    }
+  ],
+  "captures": [
+    "handoff-ar-light-1440.png",
+    "handoff-ar-dark-1440.png",
+    "handoff-ar-light-390.png",
+    "handoff-ar-dark-390.png"
+  ],
+  "errors": [],
+  "completed": true
+}

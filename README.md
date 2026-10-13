@@ -32,6 +32,9 @@ changed (decision D-052, `program/plan-v2.md`).
   Local test account: `mona.adel@orgtik.test`, password `Local@2026`. Mona is the prototype's super admin,
   with all nine apps and their admin controls. Data and actions are simulated and saved locally;
   no production backend, Vercel account or Redis setup is required.
+  Local checkout creates its own signing key in the ignored file
+  `.vercel/local-suite/orders.key` and reuses it across restarts. Keep that file with
+  the local mock dataset so existing prototype order claims remain valid.
 - **Develop individual apps:** `pnpm dev:mock` for the mock, then `pnpm --filter <package> dev` per app. Each
   app's `.env.local` (git-ignored) points it at `http://localhost:40xx`; `node mock/patch.js` points
   the old launcher package at localhost.

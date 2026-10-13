@@ -1,6 +1,6 @@
 {
   "App": {
-    "name": "إدارة OrgTik",
+    "name": "OrgTik Console",
     "rolesLabel": "أدوارك في فريق OrgTik",
     "roles": {
       "super_admin": "مدير عام",

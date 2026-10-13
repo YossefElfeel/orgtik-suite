@@ -3,7 +3,7 @@ import { routing } from "./routing";
 
 // Messages are one file per area (messages/<locale>/<area>.json) so areas can be built in parallel
 // without touching the same file; each file is one namespace named after it.
-const AREAS = ["common", "overview", "catalog", "pricing", "commerce", "customers", "billing", "services", "support", "system", "presentation"] as const;
+const AREAS = ["common", "overview", "catalog", "pricing", "commerce", "customers", "billing", "services", "support", "system", "presentation", "console"] as const;
 
 export default getRequestConfig(async ({ requestLocale }) => {
   let locale = await requestLocale;

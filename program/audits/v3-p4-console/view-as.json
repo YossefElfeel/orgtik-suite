@@ -1,0 +1,28 @@
+{
+  "scope": "Ordinary native billing and actual account/staff handoffs in owned offset1100 fixture",
+  "checks": [
+    {
+      "name": "Ordinary View-as opens actual Account rather than a presentation route",
+      "pass": true
+    },
+    {
+      "name": "Source Console remains its original staff view",
+      "pass": true
+    },
+    {
+      "name": "Native View-as exit succeeds",
+      "pass": true
+    },
+    {
+      "name": "No runtime errors in native billing and handoffs",
+      "pass": true,
+      "details": []
+    }
+  ],
+  "captures": [
+    "native-owner-view-as.png",
+    "native-owner-view-as-exited.png"
+  ],
+  "errors": [],
+  "completed": true
+}

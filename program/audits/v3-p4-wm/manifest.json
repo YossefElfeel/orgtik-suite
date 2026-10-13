@@ -1,0 +1,1352 @@
+{
+  "schema": "orgtik.v3.tool.acceptance",
+  "version": 1,
+  "tool": "wm",
+  "sourceCommit": "e19df219b7fa6f23bce6f3cc723eb86dad2a5829",
+  "integrationBase": "0eda4a8",
+  "scope": "Ordinary internal staff CMS; content-only studio with canonical CRM/Console references",
+  "accepted": true,
+  "assertions": 554,
+  "browserAssertions": 444,
+  "httpAssertions": 110,
+  "nativeRegressions": 44,
+  "acceptedCaptures": 135,
+  "reports": [
+    {
+      "name": "native-http",
+      "report": "program/audits/v3-p4-wm/native-http.json",
+      "sha256": "8f940e1f635d507e08b0a87e3619fa3c9ddc9ce14badb333e2eb2459beb5f2a1",
+      "checks": 110,
+      "captures": []
+    },
+    {
+      "name": "probe",
+      "report": "program/audits/v3-p4-wm/probe.json",
+      "sha256": "1a4ecb2e4d4ca5e8da8c5363e6655e1bb3cf8e565f5aca60c739da5362bbe39f",
+      "checks": 25,
+      "captures": [
+        "native-releases-initial.png",
+        "probe-setup.png",
+        "probe-localization-drafts.png",
+        "probe-settings-webhooks.png",
+        "probe-marketing-forms.png",
+        "probe-catalog-services.png",
+        "probe-catalog-software.png",
+        "probe-admin.png",
+        "probe-admin-roles.png",
+        "probe-admin-connections.png",
+        "probe-media.png",
+        "probe-content-pages-pg_partners.png"
+      ]
+    },
+    {
+      "name": "functional",
+      "report": "program/audits/v3-p4-wm/functional.json",
+      "sha256": "231e943c9df37cfd42701aa7dafe04b6b282061e11d5bd4fea0256d7f1b57324",
+      "checks": 10,
+      "captures": [
+        "functional-editor-ready.png",
+        "autosave-lost-response.png",
+        "autosave-recovery-after-reload.png",
+        "autosave-recovered.png",
+        "native-element-comment.png",
+        "native-webhook-created.png",
+        "native-webhook-delivery.png",
+        "native-release-created.png",
+        "native-search-entry.png"
+      ]
+    },
+    {
+      "name": "matrix",
+      "report": "program/audits/v3-p4-wm/matrix.json",
+      "sha256": "2a7fb1893eac46f005ff869e9281c461fc14ee419b476b9cdbff308c5d52450b",
+      "checks": 394,
+      "captures": [
+        "matrix-releases-en-light-1440.png",
+        "matrix-settings-webhooks-en-light-1440.png",
+        "matrix-localization-drafts-en-light-1440.png",
+        "matrix-catalog-services-en-light-1440.png",
+        "matrix-media-md_23-en-light-1440.png",
+        "matrix-admin-connections-en-light-1440.png",
+        "matrix-releases-en-light-1024.png",
+        "matrix-settings-webhooks-en-light-1024.png",
+        "matrix-localization-drafts-en-light-1024.png",
+        "matrix-catalog-services-en-light-1024.png",
+        "matrix-media-md_23-en-light-1024.png",
+        "matrix-admin-connections-en-light-1024.png",
+        "matrix-releases-en-light-768.png",
+        "matrix-settings-webhooks-en-light-768.png",
+        "matrix-localization-drafts-en-light-768.png",
+        "matrix-catalog-services-en-light-768.png",
+        "matrix-media-md_23-en-light-768.png",
+        "matrix-admin-connections-en-light-768.png",
+        "matrix-releases-en-light-390.png",
+        "matrix-settings-webhooks-en-light-390.png",
+        "matrix-localization-drafts-en-light-390.png",
+        "matrix-catalog-services-en-light-390.png",
+        "matrix-media-md_23-en-light-390.png",
+        "matrix-admin-connections-en-light-390.png",
+        "matrix-releases-en-dark-1440.png",
+        "matrix-settings-webhooks-en-dark-1440.png",
+        "matrix-localization-drafts-en-dark-1440.png",
+        "matrix-catalog-services-en-dark-1440.png",
+        "matrix-media-md_23-en-dark-1440.png",
+        "matrix-admin-connections-en-dark-1440.png",
+        "matrix-releases-en-dark-1024.png",
+        "matrix-settings-webhooks-en-dark-1024.png",
+        "matrix-localization-drafts-en-dark-1024.png",
+        "matrix-catalog-services-en-dark-1024.png",
+        "matrix-media-md_23-en-dark-1024.png",
+        "matrix-admin-connections-en-dark-1024.png",
+        "matrix-releases-en-dark-768.png",
+        "matrix-settings-webhooks-en-dark-768.png",
+        "matrix-localization-drafts-en-dark-768.png",
+        "matrix-catalog-services-en-dark-768.png",
+        "matrix-media-md_23-en-dark-768.png",
+        "matrix-admin-connections-en-dark-768.png",
+        "matrix-releases-en-dark-390.png",
+        "matrix-settings-webhooks-en-dark-390.png",
+        "matrix-localization-drafts-en-dark-390.png",
+        "matrix-catalog-services-en-dark-390.png",
+        "matrix-media-md_23-en-dark-390.png",
+        "matrix-admin-connections-en-dark-390.png",
+        "matrix-releases-ar-light-1440.png",
+        "matrix-settings-webhooks-ar-light-1440.png",
+        "matrix-localization-drafts-ar-light-1440.png",
+        "matrix-catalog-services-ar-light-1440.png",
+        "matrix-media-md_23-ar-light-1440.png",
+        "matrix-admin-connections-ar-light-1440.png",
+        "matrix-releases-ar-light-1024.png",
+        "matrix-settings-webhooks-ar-light-1024.png",
+        "matrix-localization-drafts-ar-light-1024.png",
+        "matrix-catalog-services-ar-light-1024.png",
+        "matrix-media-md_23-ar-light-1024.png",
+        "matrix-admin-connections-ar-light-1024.png",
+        "matrix-releases-ar-light-768.png",
+        "matrix-settings-webhooks-ar-light-768.png",
+        "matrix-localization-drafts-ar-light-768.png",
+        "matrix-catalog-services-ar-light-768.png",
+        "matrix-media-md_23-ar-light-768.png",
+        "matrix-admin-connections-ar-light-768.png",
+        "matrix-releases-ar-light-390.png",
+        "matrix-settings-webhooks-ar-light-390.png",
+        "matrix-localization-drafts-ar-light-390.png",
+        "matrix-catalog-services-ar-light-390.png",
+        "matrix-media-md_23-ar-light-390.png",
+        "matrix-admin-connections-ar-light-390.png",
+        "matrix-releases-ar-dark-1440.png",
+        "matrix-settings-webhooks-ar-dark-1440.png",
+        "matrix-localization-drafts-ar-dark-1440.png",
+        "matrix-catalog-services-ar-dark-1440.png",
+        "matrix-media-md_23-ar-dark-1440.png",
+        "matrix-admin-connections-ar-dark-1440.png",
+        "matrix-releases-ar-dark-1024.png",
+        "matrix-settings-webhooks-ar-dark-1024.png",
+        "matrix-localization-drafts-ar-dark-1024.png",
+        "matrix-catalog-services-ar-dark-1024.png",
+        "matrix-media-md_23-ar-dark-1024.png",
+        "matrix-admin-connections-ar-dark-1024.png",
+        "matrix-releases-ar-dark-768.png",
+        "matrix-settings-webhooks-ar-dark-768.png",
+        "matrix-localization-drafts-ar-dark-768.png",
+        "matrix-catalog-services-ar-dark-768.png",
+        "matrix-media-md_23-ar-dark-768.png",
+        "matrix-admin-connections-ar-dark-768.png",
+        "matrix-releases-ar-dark-390.png",
+        "matrix-settings-webhooks-ar-dark-390.png",
+        "matrix-localization-drafts-ar-dark-390.png",
+        "matrix-catalog-services-ar-dark-390.png",
+        "matrix-media-md_23-ar-dark-390.png",
+        "matrix-admin-connections-ar-dark-390.png",
+        "catalog-de-setup.png",
+        "catalog-de-catalog-software.png",
+        "catalog-de-marketing-forms.png",
+        "catalog-fr-setup.png",
+        "catalog-fr-catalog-software.png",
+        "catalog-fr-marketing-forms.png",
+        "catalog-it-setup.png",
+        "catalog-it-catalog-software.png",
+        "catalog-it-marketing-forms.png"
+      ]
+    },
+    {
+      "name": "states",
+      "report": "program/audits/v3-p4-wm/states.json",
+      "sha256": "6e16d3d6919a0b04f041d51a455ca6fb49844727f993bfb01074cb8196b31d69",
+      "checks": 7,
+      "captures": [
+        "state-read-only-viewer.png",
+        "state-no-permission.png",
+        "state-empty-native-query.png",
+        "state-loading-resource.png",
+        "state-resource-unavailable.png",
+        "state-resource-recovered.png",
+        "state-signed-out.png"
+      ]
+    },
+    {
+      "name": "preferences",
+      "report": "program/audits/v3-p4-wm/preferences.json",
+      "sha256": "5b322411c02fd8dd053cca103b02b9fc934251965cbaa652cd01698f0f92b646",
+      "checks": 5,
+      "captures": [
+        "native-early-theme-choice.png"
+      ]
+    },
+    {
+      "name": "media-control",
+      "report": "program/audits/v3-p4-wm/media-control.json",
+      "sha256": "1242ffdb86abda88eb3a0a208e0193f03dabca08caed0acf47ae1adbb62a12f7",
+      "checks": 3,
+      "captures": [
+        "native-media-replaced.png"
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "file": "program/audits/v3-p4-wm/native-releases-initial.png",
+      "sha256": "ef8cec12301a9cc287d022c6d8130c563fdb71e6966e6bacd2b5a0d150d28a28"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-setup.png",
+      "sha256": "24dd6b63f7fd3642f58087da91483ecc537091ff963fde28e6c2fed785ece52d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-localization-drafts.png",
+      "sha256": "f71fdde98104b757e2beace35a0ab96995aa8624023417a8acb3f117d5b6fa62"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-settings-webhooks.png",
+      "sha256": "0423d47125d9fd7b9a894d5d8d133902e3f4e50b0341d7be47c22f371c52e27d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-marketing-forms.png",
+      "sha256": "6af84ea28f133b1ea4790e7982574535808c77ca02667b9caa424d0b10408352"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-catalog-services.png",
+      "sha256": "d13e2ecc001462f51e93797b0c41d79552e1f43b2d5d98870ca66b46a5645534"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-catalog-software.png",
+      "sha256": "7e9d89090237933d43467853fefee13526fff4db3d6ca4d25bb4e22c6067e00a"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-admin.png",
+      "sha256": "7c8b79290f8e21b63eb3f586ffb1dfd8372435bc6e1222fed7e30a493f748c94"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-admin-roles.png",
+      "sha256": "8c000c91f3a09df31682a127420e4497e64db906e691d0afc8e9379dbaecee99"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-admin-connections.png",
+      "sha256": "a0ec3d818c55331a6d2077d5eae9720ea2dd3cbc315ef33532399bc94261b796"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-media.png",
+      "sha256": "37e91c2224d89e694c31da14f47033cdf874ea9e15df2238c0d232140b80009f"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/probe-content-pages-pg_partners.png",
+      "sha256": "0e2cb2d93dbc72ec22e1dd5b775f87ece75fdebd9d4d6e2eceae026e766e5007"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/functional-editor-ready.png",
+      "sha256": "6d3879847a4fd83076b0a648c409bc4b3e482bb342c19aec81b973537a73caf4"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/autosave-lost-response.png",
+      "sha256": "15ecb323d77218324a2297bbe0127c789b7c81273eefa8ddf4b0894db5e93f2e"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/autosave-recovery-after-reload.png",
+      "sha256": "ca14cd9b330a7584a70b97d5f4f81b0b1e39a01dcbaf401fa90c9b773f1a8cef"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/autosave-recovered.png",
+      "sha256": "70b90bcf37f3107ee04359c7a216b42612798db72d2f4eb7b6702df8242d64db"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/native-element-comment.png",
+      "sha256": "c0661a018c500d3f39bde6047515f888484f6884a0526f2cecc964a0470e1215"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/native-webhook-created.png",
+      "sha256": "8983603fbd0233f7842a696cf91b77e18405be21f69b0ca3135482c43597dab4"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/native-webhook-delivery.png",
+      "sha256": "3be6ebff3fadc1063ced5bab5413030caae5cc2be187dcab3bab8298f82a254d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/native-release-created.png",
+      "sha256": "4cfb308d2faa70619e8236fcd9c39944d725f9540525e35b8a2b2fdcad51ffae"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/native-search-entry.png",
+      "sha256": "23f9446c039aeee182bbb3346a18bd21b660fd5b9ac4f7a18a1dc317fd82553c"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-en-light-1440.png",
+      "sha256": "36220257fea7ad0e9ea5adac983b20552d1e7ebf38b17be05d40023d14a69605"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-en-light-1440.png",
+      "sha256": "0cab8d07358d7106bef9112bae1519b59be8ef538cc83c66951ef1c28bd5528f"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-en-light-1440.png",
+      "sha256": "07fe8df66fc5444c0fcac41082a427b18c21c21e4312d505fb8fe8fa46582d7a"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-en-light-1440.png",
+      "sha256": "654a2b7a4427f54a5b39cb6f77fc5f854c31f9c491eb2c26c73c17b25574d1ee"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-en-light-1440.png",
+      "sha256": "e979bfbbbaaf1f8eb53509072ff70c42eddac2c6ecdb35c349498fbe128a44df"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-en-light-1440.png",
+      "sha256": "afbc421dd9dc04fdd8c7bc2fefd04f7ce555ffd2aba19d14a0add1388d0db63a"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-en-light-1024.png",
+      "sha256": "42a931384eaa56e0ffb210c4a44e3bca4823a03720db15d655d0b6d7b2509552"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-en-light-1024.png",
+      "sha256": "2b70e786b9c110a38e4936e88dc45c72a14c5fe7e5fcac6455cf50c56c1fe556"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-en-light-1024.png",
+      "sha256": "d10225273697dfe6e539be3490276749bac587afec2860451b1eb599215eca78"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-en-light-1024.png",
+      "sha256": "cbaf0ccfab6be18a06fcb49703cb32b61c4198b187266d59952102e77a15fe12"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-en-light-1024.png",
+      "sha256": "f6505bdf193f5cfce19721126f69934e5a86f5d1459509db39c07679d7112e9f"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-en-light-1024.png",
+      "sha256": "9261ef4643dc1039b0468cb124d09f9734a9514dfbcbe607e9b1c523cfb426e8"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-en-light-768.png",
+      "sha256": "16482a1c3c80224a44ceecf7d2433afd3546f172a475a686c2b7d1452440008e"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-en-light-768.png",
+      "sha256": "52672e2489be21b7a23fc0e456f86a60dcea9be29f78d66fb23ddf1849616872"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-en-light-768.png",
+      "sha256": "bcd6e078ba560cad2a44c3f8c7b2defc1e8ba5ad8c975a54d5a4af9118499bb6"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-en-light-768.png",
+      "sha256": "d4484b92a31ef6d7c5343da8bd1b46eceb89f66463f9f8834140ad9b3b132a31"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-en-light-768.png",
+      "sha256": "2c8001948fe21a764baebb36afbd35ba5af269d26e57bdbb22d072d969a3c31e"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-en-light-768.png",
+      "sha256": "b98871d5a7b806dc1cad7c78eaff2bbb789dd4bf7a9cb549535db7f3a1c3b739"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-en-light-390.png",
+      "sha256": "355c80ac5c2ec39d5f44079efcbc7af3bee052afec0b41dc82213818b9fba26e"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-en-light-390.png",
+      "sha256": "f53d4a545e408ab4b28c2725dbc3663fcad0c8510c81d67f70f465ba9ab726e2"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-en-light-390.png",
+      "sha256": "d3c4b4d204a4f18e4608799c5850d411c4bea7daa2e3b499ad6f39f64d327aed"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-en-light-390.png",
+      "sha256": "a1a5d005977cc689e853c41486d2e299ce07ccbd8b4a6d64235c8ada334c1881"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-en-light-390.png",
+      "sha256": "6721d097f11fa42b92aeeb16b9048a9a4e15844281ea35b10a21f956ae3d1c0d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-en-light-390.png",
+      "sha256": "acd8bedb39246a7e096c25370a4826a99839da2c4767694ad7f07a1d3e9c2ee9"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-en-dark-1440.png",
+      "sha256": "0ed4f1bb28229fbfe515b7744f9c47ee6fd1d4c8ad12d0cd337a87746b590f8d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-en-dark-1440.png",
+      "sha256": "0be73ee854b192e60326e74e516785927a2acd534253c516116c2241764f8324"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-en-dark-1440.png",
+      "sha256": "c5c42e3e695652c9a764fbccc03d7c0890a49cedcef874eca65cddea46b26ac1"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-en-dark-1440.png",
+      "sha256": "36f032765558f5452d270d74ace6ad148606fb3fd9b8dfe89b0b2897dfeeedbf"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-en-dark-1440.png",
+      "sha256": "cc25d3950d6ba4d655829adaa2d441569fb493909dfe728a2fb845fd86c74285"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-en-dark-1440.png",
+      "sha256": "76756bd28a8765ab0924018d50ff1a0f72a6761d6cd4ab09b24f6bd7d0be21fc"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-en-dark-1024.png",
+      "sha256": "e230e0fa6b4783f633186b6f8915161382c724be8ad4830add374a891ba85405"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-en-dark-1024.png",
+      "sha256": "c75ff81e79599331d8a5e806d2b73727c2392b9f290d2feb362423afc4200c79"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-en-dark-1024.png",
+      "sha256": "47979dd15a54e9b1089616cc25b4630f227f15edbf9c970ce7b09a253bb26b91"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-en-dark-1024.png",
+      "sha256": "5497fa0c5f0fda8414c80f047044c51beb8a725f037a46cea7fef1a33bb465f6"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-en-dark-1024.png",
+      "sha256": "f0cdc8b89712294afeb9fb257d8b732c2c5caf6137fb9866f19f8a7da4da05cb"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-en-dark-1024.png",
+      "sha256": "b383e081fb6526ed5a0b2f85f4ef2907581c7f87a62eb390d6d0389ec984b7a1"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-en-dark-768.png",
+      "sha256": "d18b0ce1dea5c572142d3c6dc26dd4e5fc993202e1ebea67a23aab21155072ec"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-en-dark-768.png",
+      "sha256": "401071c1e5f756f42b2173a4521082f6fec10a2500668ff323e58a6e4bb90285"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-en-dark-768.png",
+      "sha256": "64bc1fbbd12600f79de847d5719889fae75b5351f454b215b501bba55e155f18"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-en-dark-768.png",
+      "sha256": "1ad811302c6ea7dc783866d611c0f927825c8757926297047482eb907629e51b"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-en-dark-768.png",
+      "sha256": "ce24f379cf1bf69013c9917fbedf4e25109f3adcbd4d13bd99cf5a7c46759197"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-en-dark-768.png",
+      "sha256": "65e00e4735731e0c276331a815436823e30575605f0fbeb85988a0b7cb1d8274"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-en-dark-390.png",
+      "sha256": "0187471e19175ea0a0a839d894015bffce8ed24d6ad41780272ff9db5178fa7b"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-en-dark-390.png",
+      "sha256": "74fe3024bd466b564de47bb8f482ae1c9148e28701e54a8052f0974cedcc9f54"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-en-dark-390.png",
+      "sha256": "4678dfb1a5f9610276f49d587b75f13127f5921ee1b33a9621ae498d9592d1e8"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-en-dark-390.png",
+      "sha256": "815db837ed3ea66311ce6974bf8db2c1dc8caa0cc52140b7c9f136a9ff328182"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-en-dark-390.png",
+      "sha256": "34df8acc6059b9067ba4c1570f38d9c2897477ce1f25a38ab2e82b269adcc015"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-en-dark-390.png",
+      "sha256": "dd5f809957ed4cc3279756139c9de12509549600670958bd0a8faca4169dba0b"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-ar-light-1440.png",
+      "sha256": "0d81f13591bd2c485f2ce18507302ec12724b87bfbde32fec104192b23685835"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-ar-light-1440.png",
+      "sha256": "4a95c6ca9985eb359902016a279349db14c1d4b13b2746d1c6a332e80242a6fd"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-ar-light-1440.png",
+      "sha256": "78415c47184da03d46c8428e68d374565e046ab3a99222d964e6607910fa8c95"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-ar-light-1440.png",
+      "sha256": "3015722960117b24c115ed93d7796e9b73685cd665e9e99b7e300701a073a930"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-ar-light-1440.png",
+      "sha256": "75beaa8e6b7b77c81580c6dfde571a8a3eacf446a65d70aee84e3cbe7d2c7455"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-ar-light-1440.png",
+      "sha256": "63abaef87173bb82d258820006747ca2225b154721993d313afb27f309b1fec8"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-ar-light-1024.png",
+      "sha256": "64ae94b3aab49fa89f598cb77acd5278e24e433748f30e10768796ca7a3f04b4"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-ar-light-1024.png",
+      "sha256": "dd811c43963f820faa7006e5ab7fd81f1a1cbd2d4ee04512886adf518d9d74d8"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-ar-light-1024.png",
+      "sha256": "e0ec41c342cc760917f5946401a3d7e0bd73866268035826c0c3209893bdf15e"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-ar-light-1024.png",
+      "sha256": "4e8096064eba42b9076a39556b6ef454de1d2a39008f903d4ac1afe7ebdb55c9"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-ar-light-1024.png",
+      "sha256": "20c8a142487e9bb156efeb448cddf8393bf5c697bb8fea2529dadffce995bc7d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-ar-light-1024.png",
+      "sha256": "1fc3939b1aa0b12c1ccf55f4e465ae92cc24dd1bba38e15da4e68ee138438c41"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-ar-light-768.png",
+      "sha256": "aa00e7f7528bc403297bf5f8ff563492bcddd6d8fabcb3512c46eebb3343b6f0"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-ar-light-768.png",
+      "sha256": "367fd40a08d4b4a07345a847719015ba46acbf5e73a47d43733e5d696529fffd"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-ar-light-768.png",
+      "sha256": "03fe6618a83bab51429e35107f27bc91bad00daad6ef0809487b6aad545d4d84"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-ar-light-768.png",
+      "sha256": "d170c5d357e68b1e5b20ba492c314b9a5faeda5facf418b68acfca33cac9487b"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-ar-light-768.png",
+      "sha256": "6e5d02d21c055e959f28932dbf317693a9c78a26cefaa0eb4cd0e612efa15375"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-ar-light-768.png",
+      "sha256": "8b0a5d1ef1a23525e6c228976e76fd5d9a465d23a92d7187036d1441a0745004"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-ar-light-390.png",
+      "sha256": "0ed6bb97c296673a0e146bc38a7ac0652587d1e9118a60bd188b8112d5bbc8c7"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-ar-light-390.png",
+      "sha256": "af3bed1aa0b059953d570b4e7c82ab835b580d2b391727b4c4fb41be40a9acb4"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-ar-light-390.png",
+      "sha256": "84687dd7cb96a7b839e66f48d842635fd133a763d04b169f051512197086061e"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-ar-light-390.png",
+      "sha256": "cc9eb4f7a45f21c2c457da56e7bd1f444be8358c88e85ebfd0a3ec3205e32cec"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-ar-light-390.png",
+      "sha256": "f5db3f814fee81862485d065b69906ff2f68538622562769dccb45dcbd9aed34"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-ar-light-390.png",
+      "sha256": "cf3dee02ae777693515093d9f42b94af7f5436e70c9d87ed1aec7f16276d806d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-ar-dark-1440.png",
+      "sha256": "8ff7209d48e5032521cef293bc4c8e99cca6b75c8bc3583ca37e243589d3568d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-ar-dark-1440.png",
+      "sha256": "f157b58c9030f81dcae89af7d98a7172d9c195131b98349b596e51da3525eced"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-ar-dark-1440.png",
+      "sha256": "576227b9c067d92f7d12cc4ac1ce0073ba69fdc95ee19422186893975ae41e59"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-ar-dark-1440.png",
+      "sha256": "1cb03669287d83d1574f1f3885aeb714c7b6cc415bc622aa68f3c776477ee03a"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-ar-dark-1440.png",
+      "sha256": "97f6141fc9fe4d5093ce90ca439330c347e2dbbce737acd2edcd443f03321b08"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-ar-dark-1440.png",
+      "sha256": "a732c9c3cdd897e8c611396a218aae36e1d5175c2422a41ad035275f8cd074d5"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-ar-dark-1024.png",
+      "sha256": "5ab6b375314184e5fe850b4e2cee2086e1225102439c08692bbbc3208c3c5beb"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-ar-dark-1024.png",
+      "sha256": "9ded65fa684208bb2e7819d374fe3d786e025f17f8d2ca852fac635e76a6c291"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-ar-dark-1024.png",
+      "sha256": "706caa156c3be5f90ebf04250f71d06d38abc51033609af5cdc8b11c447c3330"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-ar-dark-1024.png",
+      "sha256": "a785eb59f628b5f691d5efabf5dd497e681ab0cb2a583a23fb1d1ca35947cf05"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-ar-dark-1024.png",
+      "sha256": "c824bfc69779b4e0ee63a93808b6b614974f5d65d838d81783cd42098d6344d4"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-ar-dark-1024.png",
+      "sha256": "75efda17570f865544a3e5dda2198a1ef00cd37090a9d57ac34c04c143357ac5"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-ar-dark-768.png",
+      "sha256": "ac3b61b3049a3644462afd03880872b7f6ee4ad9f27c54ffccf735779c390a8c"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-ar-dark-768.png",
+      "sha256": "d7fe1390c0aaae4922fa0bfe33c51d3f830e69368a4aa9220128386d14f51cb2"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-ar-dark-768.png",
+      "sha256": "0b458efc59ecab96c8ffa2f066360f168f65b6907e829ec417bd8d51bd90a34a"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-ar-dark-768.png",
+      "sha256": "3021c7540ed838598f3c7642d3690ca4ed331cb9f488e4a300007adf20e79096"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-ar-dark-768.png",
+      "sha256": "3df00b45a17df08460fe4194b58f8a0c477a80be37724bceefb41855c0447c92"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-ar-dark-768.png",
+      "sha256": "cf4053958b7f4a6c4ce5eca513c2a596574a7f2d8d4bbf38c6377f9076328de1"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-releases-ar-dark-390.png",
+      "sha256": "4b757a5eebf7ed698cf405eea15498150bb6767e4dad3e78b5754510692fb62e"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-settings-webhooks-ar-dark-390.png",
+      "sha256": "bde823f2f47fd80fc90330bf938b218dfef08134cd2265b41bf56bd833011562"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-localization-drafts-ar-dark-390.png",
+      "sha256": "b29ef7eb5142d46c8a5b17c9b433d98aaef9bede1ca20ffd940762054bef3b22"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-catalog-services-ar-dark-390.png",
+      "sha256": "5afdcd4aed34d4b96f85b4fcd03c426194139b1248c6f02d5792a7f137283cc2"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-media-md_23-ar-dark-390.png",
+      "sha256": "96fefb3afb6a0b5562e986db37444cddcb2c7a6c6d37cbb6f9e6d5b769a0b449"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/matrix-admin-connections-ar-dark-390.png",
+      "sha256": "2211d1ad29e8394463444981f1fc8f4809956d974399c859e57d0388e1d5a66a"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/catalog-de-setup.png",
+      "sha256": "4af32f33ccea655152198acc0f13d94b8dc356b595a6eeaff5b2f8fa7230cdf7"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/catalog-de-catalog-software.png",
+      "sha256": "55882ac6fd9980615d0b54164e3b05bacd0a14449d30caaa15cf429d1660b564"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/catalog-de-marketing-forms.png",
+      "sha256": "ffaed92243faa3af7d22f8c29a1532f36e8e805021dc5733a1aa375851623b5d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/catalog-fr-setup.png",
+      "sha256": "5af1f963126f3ceabee34464dd78a80a6fb4b41da4ce47cafb226b806d0ec8ab"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/catalog-fr-catalog-software.png",
+      "sha256": "7ebbf863efbd19b7a4f63c90fab038aca77e6f8a7806bc81d7f8e3f699a038df"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/catalog-fr-marketing-forms.png",
+      "sha256": "715cecae79cf1b5d6913b6a79701859e282404c51e37fe689261fc829bc2b24d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/catalog-it-setup.png",
+      "sha256": "7c6a25d10fcee6e8b6da6f8410d1c0b3184c013e93856cc221d2c516db2728a7"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/catalog-it-catalog-software.png",
+      "sha256": "78a50adccd74e8449b2a0cf08ff97989cc5ef52a78fd45a042abb9ca3f3e350d"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/catalog-it-marketing-forms.png",
+      "sha256": "60edf54fbde85d7cfeac1d76fff6c36c7b27d4cdf4583f311bb736ada555385f"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/state-read-only-viewer.png",
+      "sha256": "297aac03170e61c9c0ad3434acc200e2b60a2e85fd96ae371b1b1212c11c97ab"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/state-no-permission.png",
+      "sha256": "cd85c86c568d072063c9fabac08e3920ae1d322df0ada9686203bb15522f3034"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/state-empty-native-query.png",
+      "sha256": "9a52ef78a6eae0f5caf10a13b2c502d6b98c94994cd5819bd1af8af0cc0d3fb1"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/state-loading-resource.png",
+      "sha256": "dc6f3bcaa98fc7e28b60e64a027c323b569d239b5fb4bbb3669cd10884c0ab67"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/state-resource-unavailable.png",
+      "sha256": "a3ca88dc93d61332e7ce32f688aa97a69e387dbe850b005ba468f478e0694f49"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/state-resource-recovered.png",
+      "sha256": "36220257fea7ad0e9ea5adac983b20552d1e7ebf38b17be05d40023d14a69605"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/state-signed-out.png",
+      "sha256": "787c5ab0f67393c18e85498381e1429e0e85a6afa9cde8e73050f7ef45dff53e"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/native-early-theme-choice.png",
+      "sha256": "ee2fbe0ece9210191f04717b592ae90fef0258957f8d8f01276a3a79f2547172"
+    },
+    {
+      "file": "program/audits/v3-p4-wm/native-media-replaced.png",
+      "sha256": "7aeddaa3e0422039febe6b6ffcef0bc3f5d3d6cf735a8ee40f8b1890add6e24e"
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "apps/wm/.gitignore",
+      "sha256": "6c061eeb3cff7317b08f53888d4675172c70d7bd6c81ec19df6e9b2a9018a9ef"
+    },
+    {
+      "file": "apps/wm/AGENTS.md",
+      "sha256": "63f2c50380ed6303237cce215ce27af1d620d094c215e28d1b1538a3c070e3bb"
+    },
+    {
+      "file": "apps/wm/CLAUDE.md",
+      "sha256": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49"
+    },
+    {
+      "file": "apps/wm/README.md",
+      "sha256": "94f454c2f3ea403d8fa1743f5f407d172473b6ffe3a8bd21dd359cb9c946e0ce"
+    },
+    {
+      "file": "apps/wm/app/(redirect)/layout.tsx",
+      "sha256": "70baf8d3716b6c6318ff2e8207405cfa92ead340d882a9f8a56209022a0989e4"
+    },
+    {
+      "file": "apps/wm/app/(redirect)/page.tsx",
+      "sha256": "6aef1e6730b3c610c2373eec35a29ca3b1e0514bad89366e72a093522775bcd2"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/admin/[[...section]]/page.tsx",
+      "sha256": "f68a621a35de815b73b8d08104e45f81071a106e5f42cf053fbd2527a439fa87"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/catalog/services/page.tsx",
+      "sha256": "0db87832e3bcc7ffa74e3f7f50b430c0f283a0ceb47f685f6b6f97409639b578"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/catalog/software/page.tsx",
+      "sha256": "40be427e05c842ec1a1473e3a44ec8ae6ecf356a00981e11cc48d07e633f1636"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/content/[area]/[id]/page.tsx",
+      "sha256": "36c2c2b61e10d8b8b0daf526806b27f7e9c5b8b5027a02787b89d91b26ac00a5"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/content/[area]/page.tsx",
+      "sha256": "445a50bd79f14b1799bd8190cb5953249c29e3537c6122ad1d1328e296d2e055"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/content/queue/page.tsx",
+      "sha256": "1807420f98ba777d2fbcf321e271ff2bd14443e2c8e898cd779b8eb5edc49379"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/layout.tsx",
+      "sha256": "e80f16a5f3787af9cca2823933a1c15af73be3904a3b3c2f8868810da9d23f7e"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/localization/drafts/page.tsx",
+      "sha256": "8141ca51371141a8646f9078e14e50e3d7a07d453d33bc9725f726177d753023"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/localization/page.tsx",
+      "sha256": "a0d3d793ea9e56d12c285a8cda0847ff62c0b034a9bb39b9d9ab41a68ee69869"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/marketing/[kind]/[id]/page.tsx",
+      "sha256": "4bf834b207978d0ecb65dc26ad2a83bd3035e03502fa28e751e1d341687adf0f"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/marketing/forms/page.tsx",
+      "sha256": "95157613c969be4dbf99eb7d475f8fb8d5448d89eb0c7b14e6313f46507ea417"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/marketing/ideas/page.tsx",
+      "sha256": "98c5779e6b290e69eaf3a9086e9b6f810bbec7961f2bc2f730595da389bf0cdc"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/marketing/leads/page.tsx",
+      "sha256": "53a5e227919023dac2cfd7507a42c4ffe891ad66b2aabdb8d7b72b4d01ba66d2"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/media/[id]/page.tsx",
+      "sha256": "ac112cf507372da4051793c8b04ac7c93406d622cab7bb63ae649979775bfbb4"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/media/page.tsx",
+      "sha256": "2e732cf9feab3a455f35f73f5caaabb7177bd874b0b4819733264c798cd160c3"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/page.tsx",
+      "sha256": "26536b7cf99b046f7d781a1699f2870de5d597501b9e5d494c1123f501f6394a"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/preview/page.tsx",
+      "sha256": "f2ae5fc1b69aa7c5f65109b6b0d025fcc13133aeb721f9e055782ac9fc5915fc"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/releases/page.tsx",
+      "sha256": "e363c0d760fae5a458f2487442ce7527efc7f1a74e568cbcfe78bacf824919b5"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/seo/content/[id]/page.tsx",
+      "sha256": "8855742d198d5024db1e2f16bb8134206f856cc6ae8a6d65641fae2eb69ddb6e"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/seo/indexing/page.tsx",
+      "sha256": "452fcb9f8f0c9b09a35352e96582f6dfe22026932a9e1105d881bdb47a73dd19"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/seo/page.tsx",
+      "sha256": "7fd6c7967f59b1883507aa088451e6114c3bebc371c32b7d624f32e3f370806e"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/seo/redirects/page.tsx",
+      "sha256": "0dd0b56d2689b8c9db4bcfe98863ff3786cc446ff19d07c3b5dc0b38f1a58d06"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/settings/audit/page.tsx",
+      "sha256": "5ffccd1b2521554c856ad40fac927af3c8b9006b6fe476eb7d104e3b6075cfa8"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/settings/roles/page.tsx",
+      "sha256": "6d8898de8638ee2921c480ebc1218ab554bcc69fa9227c222bc200f8af22c172"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/settings/site/page.tsx",
+      "sha256": "98c0307f425931a4ff1171adf334c851da4908e4dd330be2305904dd5e8aca6a"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/settings/users/page.tsx",
+      "sha256": "737be8db69dc024a96b6a214bef518b134fffb3f7ed29c100da1a0795da59c26"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/settings/webhooks/page.tsx",
+      "sha256": "a8bd274f731ad966b1015ac6d621cec1030a8e1963bb73e5e70c8caf5c086f54"
+    },
+    {
+      "file": "apps/wm/app/[locale]/(app)/setup/page.tsx",
+      "sha256": "fa00bdd68026f28b65a9ca4e937038f17e93ef63151c0f2d495b5995cdb19366"
+    },
+    {
+      "file": "apps/wm/app/[locale]/auth/page.tsx",
+      "sha256": "a3a5ebd72f7abf2d58743f171a26d7283b2293199fffb07455250142fd0acc42"
+    },
+    {
+      "file": "apps/wm/app/[locale]/go/[target]/page.tsx",
+      "sha256": "72c643538cc7855b93bb96c8b2f08c0657b448ba5dda2488f853ed4173300d5a"
+    },
+    {
+      "file": "apps/wm/app/[locale]/layout.tsx",
+      "sha256": "e86eb5761f5d61895a780d39c8ada01486268bfebd4b56febd276dcca14bcde9"
+    },
+    {
+      "file": "apps/wm/app/[locale]/signed-out/page.tsx",
+      "sha256": "b56cff3cf54ed302758d06745a9108a99c2ab4a56da145978537826005d43215"
+    },
+    {
+      "file": "apps/wm/app/globals.css",
+      "sha256": "8be0f202e121117755ddd629907dda805ee40496d2b61a29a3b7bfe80512879b"
+    },
+    {
+      "file": "apps/wm/components/content/BlockEditor.tsx",
+      "sha256": "16e1bda86b9cd80d7b7a6bf9fa3af137796f6452b54db5a0b087960dae8ffbd0"
+    },
+    {
+      "file": "apps/wm/components/content/EditorExtras.tsx",
+      "sha256": "0a7fecca384ea7b99256a7dfb89e5186896ca1bf9c2006d4632d35c16f8c6492"
+    },
+    {
+      "file": "apps/wm/components/content/EnableLanguage.tsx",
+      "sha256": "58058c08c7965a370d69b38210bc3bb6fbea99cb275c73d0b9d9ebbcd0310d32"
+    },
+    {
+      "file": "apps/wm/components/content/EntryActions.tsx",
+      "sha256": "3c9e646cf697cb741bb4ce238640f8bfb618b70d83204ce4578bb645d1d53162"
+    },
+    {
+      "file": "apps/wm/components/content/EntryEditor.tsx",
+      "sha256": "49d5cc57188d5500f6e2abda542d4508b06aa477445257438552f129017b979d"
+    },
+    {
+      "file": "apps/wm/components/content/EntryList.tsx",
+      "sha256": "efa648eff2735fde250df6b140ef7dc6ff3d3b90c9e3663b1621991ab35d38b1"
+    },
+    {
+      "file": "apps/wm/components/content/IconPicker.tsx",
+      "sha256": "f9d8648e0a3bc9271bfcb04791dbcd5aee95df5de2c1cce02c1604a2a269e34e"
+    },
+    {
+      "file": "apps/wm/components/content/LanguageDots.tsx",
+      "sha256": "904b9ab91404f7580024253257b9f9d80718e275e3402cf9af5e4bb3b3b7417e"
+    },
+    {
+      "file": "apps/wm/components/content/Lifecycle.tsx",
+      "sha256": "2947f9ff53471a2e0333220d92abb6a274aa4905e1a23a221d40b4503e5f1a41"
+    },
+    {
+      "file": "apps/wm/components/content/NewEntry.tsx",
+      "sha256": "19d6909fc5861c80f6dfd0d5196c23eae25f88667e0637b177927cffc364d6aa"
+    },
+    {
+      "file": "apps/wm/components/content/PricingAuthority.tsx",
+      "sha256": "f3fdc5072b5942d5e204c592c5a1e0ec36ede8f2cc5b85fb3b0b4943566463b4"
+    },
+    {
+      "file": "apps/wm/components/content/RichCopyEditor.tsx",
+      "sha256": "57d61ddd63108a993b91b3eca27b2209fe4fecf20d53891d2c12e5309c0f3a9e"
+    },
+    {
+      "file": "apps/wm/components/content/SectionAttachments.tsx",
+      "sha256": "020033966cf8634df9e20c1ec410b76c91cf357777c8397938ecb0dae2676c50"
+    },
+    {
+      "file": "apps/wm/components/content/SectionOrder.tsx",
+      "sha256": "7115d45df85052b28f168cb37b0913a57f01f4742bc1fdfa35d6bd6761699beb"
+    },
+    {
+      "file": "apps/wm/components/content/SeoPanel.tsx",
+      "sha256": "f2d166ec76604a0cc72b3fe7671cf39c14f8f94dc34a55eefd6e7fb15e6cdec9"
+    },
+    {
+      "file": "apps/wm/components/content/SharedCopyPanel.tsx",
+      "sha256": "f099e77af5e9f221194a3692eb37444fde7d01e6e61f0c8181993738329757a3"
+    },
+    {
+      "file": "apps/wm/components/frame/CenteredState.tsx",
+      "sha256": "1d428dcab8a11924ff39f4ae757cbfe0a381e04833c0914e34f4238b8b7b1825"
+    },
+    {
+      "file": "apps/wm/components/frame/RequirePermission.tsx",
+      "sha256": "fe4db1afffcf7cd3267648584e764b22fdabc06ec7b0007b50dea5c6633dac12"
+    },
+    {
+      "file": "apps/wm/components/frame/WmFrame.tsx",
+      "sha256": "2758743173d6c4e9d0e88ecbd7d04c054df93d1ee06d8a5de3395c32d3695473"
+    },
+    {
+      "file": "apps/wm/components/marketing/IdeaDetail.tsx",
+      "sha256": "876a2ed7ed909e8111c2c731402900a8c787e07b64362ead3b18feb526c96d5a"
+    },
+    {
+      "file": "apps/wm/components/marketing/LeadDetail.tsx",
+      "sha256": "289e2caacfe89232e7d0671355483c7c0ec7962b4de7972f4631a5875ee40e9a"
+    },
+    {
+      "file": "apps/wm/components/marketing/LifecycleProgress.tsx",
+      "sha256": "8085a8ea4525d82b6737bfb1c5bccd5c9e7520d6239ccf7a10c27ec8a9886574"
+    },
+    {
+      "file": "apps/wm/components/media/MediaPicker.tsx",
+      "sha256": "4ec9090462f07a2749ca8183f87dfe548ab487d8c50d3d7f233f597619e31c17"
+    },
+    {
+      "file": "apps/wm/components/media/Thumb.tsx",
+      "sha256": "7be0d275d55f51ab141c5130d6d6cc5df82550f934f391ac253ef5b91e2a4be8"
+    },
+    {
+      "file": "apps/wm/components/overview/RankingChart.tsx",
+      "sha256": "9ec04e67d92291068dd86bc9da7da1ea804c9e13fd73f0e206481f8de5e1ad0c"
+    },
+    {
+      "file": "apps/wm/components/overview/WebsiteNumbers.tsx",
+      "sha256": "2c189d84575d863c8dafd403cb9e5289cc445a43e36fd3f15431764b28057d55"
+    },
+    {
+      "file": "apps/wm/components/studio/CatalogMirror.tsx",
+      "sha256": "d19c1da28d88c9caa1f4c613bb3d6c54d4e2493d420816f222eab8b7898ac4d7"
+    },
+    {
+      "file": "apps/wm/components/studio/ElementComments.tsx",
+      "sha256": "7f3f70222724e9cabba8f845997f0f58ebb9da45bb8a0a90ebaf29407da478bc"
+    },
+    {
+      "file": "apps/wm/components/studio/FormChecks.tsx",
+      "sha256": "3071f18da52378e21c608c99d8f9f14802d8063f45c1d64cc027ff6f79bf0aa1"
+    },
+    {
+      "file": "apps/wm/components/studio/PackagedMedia.tsx",
+      "sha256": "4b6ab103a5bffec50ed12d6c7978ff452394796466e914106aadb1fe00f8a980"
+    },
+    {
+      "file": "apps/wm/components/studio/Releases.tsx",
+      "sha256": "7982b52651a33549185f8a0458e992c60aa508300471e0dcaa5190c9c2409723"
+    },
+    {
+      "file": "apps/wm/components/studio/Setup.tsx",
+      "sha256": "831719af4a81e14f6b20dc8fba99f66f64cc33252217502868cc57e253ec1996"
+    },
+    {
+      "file": "apps/wm/components/studio/StaffAdministration.tsx",
+      "sha256": "a796e94fc8e2f80b99c97d99a155b9c2a41386c0359f943d3e421b5ecebd7a20"
+    },
+    {
+      "file": "apps/wm/components/studio/StaffAppearance.tsx",
+      "sha256": "4ae0330fa330fa99188e31fe86b9089667dbe5aa5aee99c5aeed122abb03372c"
+    },
+    {
+      "file": "apps/wm/components/studio/StudioUI.tsx",
+      "sha256": "ea77e51eae62d2aee651e3dda566cb9e60e04442076840345328109c861d7dab"
+    },
+    {
+      "file": "apps/wm/components/studio/TranslationDrafts.tsx",
+      "sha256": "f86238b5021f40eedfd05b2a79554bdb9eb52d051181e1c8c4b7bf3ea51ae3be"
+    },
+    {
+      "file": "apps/wm/components/studio/Webhooks.tsx",
+      "sha256": "ed9cd5a36f9ac62cc6ca68db96a4294761bf7692baf7612943e0b975e1d6f9f2"
+    },
+    {
+      "file": "apps/wm/components/users/RoleComparison.tsx",
+      "sha256": "9dd0a75e0ed12529f29c8b90b11e513dfc0922afb70580586a0d6f44a96d0c6b"
+    },
+    {
+      "file": "apps/wm/components/users/UserForm.tsx",
+      "sha256": "9b2b42fa68e5383b43ad800aaff3f706fc1a01ca6e01f4b071c85a29a572092b"
+    },
+    {
+      "file": "apps/wm/i18n/request.ts",
+      "sha256": "227b4f450adad667f333829744bc044d3a1d32ee1360d029cad4f26c3997d8fd"
+    },
+    {
+      "file": "apps/wm/i18n/routing.ts",
+      "sha256": "572358aa5f5b1b14be9931670258fe965f571d7d09b41c5ccfa1667f753061d3"
+    },
+    {
+      "file": "apps/wm/lib/caseStudySchema.ts",
+      "sha256": "410719de97a5a4f68174bd9ab364a5d7478e348ddb4f4b861bb4ee3e680765ea"
+    },
+    {
+      "file": "apps/wm/lib/cms-sections.json",
+      "sha256": "c83c28b2591405df5127f04af1e0e95a8671bd02f7173194a52a35d49eea8c98"
+    },
+    {
+      "file": "apps/wm/lib/cmsLabels.ts",
+      "sha256": "0870e045fd82579e5622436a55de1fb1808e46b401e5217d71ed6e4c43e13db2"
+    },
+    {
+      "file": "apps/wm/lib/contentTypes.ts",
+      "sha256": "dad5711967bd2cf847164b878fd81cbb372cb9ca515869ea30f2a392e4a8b6dc"
+    },
+    {
+      "file": "apps/wm/lib/entryName.ts",
+      "sha256": "7e4193f69182790b2dd5bf16875d0f4db315b52ba376d9131f63a213fff08a68"
+    },
+    {
+      "file": "apps/wm/lib/env.ts",
+      "sha256": "628cce809fd853d6ad3b97387d78d8b5fabcbaee6ec5aa98486cf838f700a99d"
+    },
+    {
+      "file": "apps/wm/lib/permissions.ts",
+      "sha256": "3662be5c4e34ee646536acc163bb72ac002dd318e626f10966473e4cba80f138"
+    },
+    {
+      "file": "apps/wm/lib/richCopy.ts",
+      "sha256": "95461b53b074840b13d9a08b47d4613292c64b2f78ed624e8dc4179ddc219bf9"
+    },
+    {
+      "file": "apps/wm/lib/session.ts",
+      "sha256": "ef91e1031f5e9a8d9aacab76023c0701ec2f455a4aaa3951ec6e7bc04a9aead8"
+    },
+    {
+      "file": "apps/wm/lib/studio.ts",
+      "sha256": "3478f6d447a9c730d58d07671540e3e7c1054747c9f83204bb4fc1e627af6036"
+    },
+    {
+      "file": "apps/wm/lib/useListState.ts",
+      "sha256": "df027b47955847e62f8235cf61de07a82ce9cd0d7db0b8d77683f9c1840fbbdf"
+    },
+    {
+      "file": "apps/wm/messages/ar.json",
+      "sha256": "08671aaa0aad9d912bdfad1657f0267006c94343946dc141903407e3c8bc906e"
+    },
+    {
+      "file": "apps/wm/messages/de.json",
+      "sha256": "d4bec87fe6cf92080fbf57e0033052a8fe8d5ddae3f15cb239397f07e75f3bc7"
+    },
+    {
+      "file": "apps/wm/messages/en.json",
+      "sha256": "88fb102451e5acaaa5a001380f6898fab2c4d7e6a7b1e3dfa38633f48a1219c4"
+    },
+    {
+      "file": "apps/wm/messages/fr.json",
+      "sha256": "2288ac73bdf6456543b5638b6fdc5af029cfb1d8525c421b5d2a23c5a0d79523"
+    },
+    {
+      "file": "apps/wm/messages/it.json",
+      "sha256": "cc61d240de13f74fe6dd4316939dd372a7cf4989baba802ccff8580d9b94542e"
+    },
+    {
+      "file": "apps/wm/next.config.ts",
+      "sha256": "20e3f47858d9e4ebeee3d936e1bc828c88dcfefb1ea5484cee0c7f6c182affd0"
+    },
+    {
+      "file": "apps/wm/package.json",
+      "sha256": "e1044ad63225da0f8a6e24886388560d14af4a26f160ce081975c6bd4f011d7d"
+    },
+    {
+      "file": "apps/wm/postcss.config.mjs",
+      "sha256": "b783348d5618047d0f37e12acd15c5a2c5f02809d8711e0764c9cea52750346c"
+    },
+    {
+      "file": "apps/wm/proxy.ts",
+      "sha256": "cdee8ebcc8e0f63aa418e61e556f8cfae9c1bef760aad1eccba7882eb508536f"
+    },
+    {
+      "file": "apps/wm/public/samples/brand-v1.svg",
+      "sha256": "0be48aafa0ff4d4beff8a9183ae05caab0bc4dc3d53c358f25523864633073cf"
+    },
+    {
+      "file": "apps/wm/public/samples/brand-v2.svg",
+      "sha256": "68d7da19b9e8ab06758858c866da59220acfe41354fd4d787d34e213cc874748"
+    },
+    {
+      "file": "apps/wm/scripts/messages/92-suite-admin.json",
+      "sha256": "d218daf44d414e505942b058d3ccb0bb258fa879ce0144a22a946950e2c60d93"
+    },
+    {
+      "file": "apps/wm/scripts/messages/93-presentation-campaign.json",
+      "sha256": "910553362f71a0149c6d958419e22a8a0305b75cfd946c3e9f46bedf69ca212c"
+    },
+    {
+      "file": "apps/wm/store/api.ts",
+      "sha256": "f9fac75050cf00d803f8202af8fda21f5e13ce5983be8145aa1107fe16fa5394"
+    },
+    {
+      "file": "apps/wm/store/index.tsx",
+      "sha256": "74c30915bed211932efc0ae5578962d51a79ab48dce86ddf91de551886c4345c"
+    },
+    {
+      "file": "apps/wm/tsconfig.json",
+      "sha256": "0dd6cb258725005dbd422bda52293e7bb7abb3785b2420b75fe83afbfcc71d08"
+    },
+    {
+      "file": "apps/wm/vercel.json",
+      "sha256": "f639c68d4030370695780a6e59f6b8c2703b58c073f075ef0e4404c49edbdff9"
+    },
+    {
+      "file": "mock/apps/wm.js",
+      "sha256": "ae19dbbb5ecf91283a9df9ee1645c0d6fd104a15e2a10b47ab84d90453e2f55e"
+    },
+    {
+      "file": "mock/apps/wm/analytics.js",
+      "sha256": "b275d8adc5b8a8eadbc709b1521f07e7903995561fcb2115a6a18961f8781b6c"
+    },
+    {
+      "file": "mock/apps/wm/content-followup.test.js",
+      "sha256": "80cbd4226736868aa9a2fdcc84ef39a318072a8b1fcb2de7d61bf7f63a7958f9"
+    },
+    {
+      "file": "mock/apps/wm/content.js",
+      "sha256": "0fba0ea87a46dc1f6cae6ae36e0fd892ab9dd5eff240e4ec8144fd0b4a3e643c"
+    },
+    {
+      "file": "mock/apps/wm/defaults.js",
+      "sha256": "6e6c55ee4d774b387ceaa4bb5ddce5610d81b42b5b848e4ece5cb74d3cd985a6"
+    },
+    {
+      "file": "mock/apps/wm/ideas.js",
+      "sha256": "3764b748c7bed0f487a24413c6157144d1d6a21b33bd5f4e6f90ceb5471ddde9"
+    },
+    {
+      "file": "mock/apps/wm/ideas.test.js",
+      "sha256": "260b308cd7fcdaaa84febbfcf8280e16bb47e3cea589e3a08ae04e5915bcbf26"
+    },
+    {
+      "file": "mock/apps/wm/library.js",
+      "sha256": "6bed9a7347026089be3da10be27858ec8048bf92e45f05dcd7c2f7230ebdd247"
+    },
+    {
+      "file": "mock/apps/wm/manager-improvements.test.js",
+      "sha256": "4fa356a91e5ed8b9bc799123958e8e765b83ba63f6ab813dcbb64eb3eedffa1c"
+    },
+    {
+      "file": "mock/apps/wm/ops.js",
+      "sha256": "4decb5090063babc428ae877fb9f4d30e653ecd557c4c70450bcede38f09b17a"
+    },
+    {
+      "file": "mock/apps/wm/permissions.js",
+      "sha256": "e36337246d2f5d951b33d949c72172f8a8aebbd965524c09317bd0366f7ea3c0"
+    },
+    {
+      "file": "mock/apps/wm/seed/build.mjs",
+      "sha256": "02afb1f358c763ae266b75e63de3a9dd090f21cebf79df640e4c402823d800e3"
+    },
+    {
+      "file": "mock/apps/wm/seed/catalog.mjs",
+      "sha256": "7079469b9a0f15f0020467b64b9fe4d79ff93b4fe85a48dace56cbcdf717445e"
+    },
+    {
+      "file": "mock/apps/wm/seed/copy.mjs",
+      "sha256": "ab04aa8f616918418d39cde275b33bf7e81cf3454ebacfb836c37998eb711326"
+    },
+    {
+      "file": "mock/apps/wm/seed/demo-states.js",
+      "sha256": "c629053b06190db804bbfcf773a9776262d7973ecd9c649aa4848367f00c505a"
+    },
+    {
+      "file": "mock/apps/wm/seed/fields.mjs",
+      "sha256": "77c1163d079ef5685efdd7267568bf3eee5a1c93673ad0fbe33fb9ef17336231"
+    },
+    {
+      "file": "mock/apps/wm/seed/idea-comments.mjs",
+      "sha256": "967e23ed66de2ffd303252243c03b1c1f6b91bb6b50520d6853d950563d7b85c"
+    },
+    {
+      "file": "mock/apps/wm/seed/manager-improvements.js",
+      "sha256": "fe5e24c7ccc9eb50ffb9bdd3db530ba530a6032d41ac6bb6a52a6364ada77865"
+    },
+    {
+      "file": "mock/apps/wm/seed/media.mjs",
+      "sha256": "6f48167524e794c9ab14b40b48d4415f2d1340408c850f491e8bf349553c2cd9"
+    },
+    {
+      "file": "mock/apps/wm/seed/pages.mjs",
+      "sha256": "392c1ec068a375faa4f2a224fc4c08950f02058e31391a674fc7ba579c6b9373"
+    },
+    {
+      "file": "mock/apps/wm/seed/platform-pricing.mjs",
+      "sha256": "3378f1035ea39da738cea14910db29906f7cc922a93edf6d4dde9f14420d57cb"
+    },
+    {
+      "file": "mock/apps/wm/seed/pricing.mjs",
+      "sha256": "45eb2cc7222644d31f4bd316466fe67ffc35d639db0c4b0318973b5cef3012c2"
+    },
+    {
+      "file": "mock/apps/wm/seed/seo.mjs",
+      "sha256": "799a41c968fa3f33f5ba6c68c3dc9e80f60e9566d3e010bab20c9834841dae30"
+    },
+    {
+      "file": "mock/apps/wm/seed/source-overrides.mjs",
+      "sha256": "a2d98e879a88164e21fe58d6d56be8a0f1e80f3d574111ac29612855d8c9cb75"
+    },
+    {
+      "file": "mock/apps/wm/seed/strings.mjs",
+      "sha256": "6bad614411b009f50d6d13ebc71fd335b8b1c9042c4df18ecfa2708dc92ba6dd"
+    },
+    {
+      "file": "mock/apps/wm/seed/website-alignment.json",
+      "sha256": "c777d93f723e100d0b7956b45c81cd3e335db474037089337ef4279bf514823a"
+    },
+    {
+      "file": "mock/apps/wm/seed/website-alignment.mjs",
+      "sha256": "70ed9ea87a526c47a8eba709a84d46e71f2a13d736d582d629a1fcc9add8665c"
+    },
+    {
+      "file": "mock/apps/wm/seed/website.json",
+      "sha256": "c37ef896f26f742178a0fa045174fde754de0ab43a810278ef28338dd07dafd6"
+    },
+    {
+      "file": "mock/apps/wm/state-codec.js",
+      "sha256": "288b6c59d2cdadfb8c7043ca1a57fba1e36ddc64b78dde7d7df87f8f1013db69"
+    },
+    {
+      "file": "mock/apps/wm/state-codec.test.js",
+      "sha256": "720cc5c025f2ed64e1d3cb4e62b918ccbf4bb0779b219fda182c0afba9ed371c"
+    },
+    {
+      "file": "mock/apps/wm/studio.js",
+      "sha256": "ad890d20882d42b0bb9538111c4a70000e7a973d1785293982d1ba65aa35bf4f"
+    },
+    {
+      "file": "mock/apps/wm/studio.test.js",
+      "sha256": "04eb9d34496f18e9e8ee4bba36c5f96507ae5b37187b361707601e99fc76a69c"
+    },
+    {
+      "file": "mock/apps/wm/suggestions.js",
+      "sha256": "cb3b34cfaf4b3bbcde89803206fbb53a2acfde06496eac3a43db42f97d34d6d9"
+    },
+    {
+      "file": "mock/apps/wm/users.js",
+      "sha256": "02a299bec71d163163bfc135e2939ebb795cc5667938ca852bce35e8220ebd58"
+    },
+    {
+      "file": "mock/apps/wm/users.test.js",
+      "sha256": "a895b226d406d9b7a126c00555fbf31ccc44bcc32449333ab8c8e11404c7e6bc"
+    },
+    {
+      "file": "mock/apps/wm/website-alignment.test.js",
+      "sha256": "ddfbcce9f106029f65a9e32c91c2e60860f883614fa50d644b0b77f70c1ea32d"
+    }
+  ],
+  "protected": {
+    "websiteTree": "5fe0be3a8132fba7b4f5ef67a6b87ecedf1064d4",
+    "websiteAndLegacyDiff": [],
+    "cmsSectionsSha256": "c83c28b2591405df5127f04af1e0e95a8671bd02f7173194a52a35d49eea8c98"
+  },
+  "checks": {
+    "build": true,
+    "types": true,
+    "fiveCatalogs": true,
+    "detector": [],
+    "seriousOrCriticalAxe": 0,
+    "overflow": 0,
+    "unexpectedRuntimeErrors": 0
+  },
+  "excludedCaptures": [
+    "probe-failure.png",
+    "matrix-failure.png"
+  ],
+  "limits": [
+    "External analytics, spam, translation and publish webhook providers remain deferred; mock results are explicit.",
+    "Arbitrary uploads are not offered in this cycle; provided media samples retain canonical bytes.",
+    "Website Manager is an internal staff surface; customer subscriptions and billing stay in Console.",
+    "Website/UTM intake is native; this editor does not offer a Marketing campaign selection picker.",
+    "Website markup, CSS and content files were not changed.",
+    "No auth, journal, original CMS CAS or financial legacy code was changed."
+  ]
+}

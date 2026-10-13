@@ -2,6 +2,7 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import ArchivedFolders from "@/components/pages/archived-files/ArchivedFolders";
 import {
   Archive,
   File,
@@ -588,8 +589,8 @@ function FileWorkspaceContent({
           <span className="text-caption text-fg-muted">{t("dragBody")}</span>
         </div>
       ) : null}
-      {showFolders && view !== "trash" ? (
-        <AllFiles
+      {showFolders ? (
+        view === "trash" ? <ArchivedFolders /> : <AllFiles
           parentId={folder === "*" || folder === "" ? undefined : folder}
         />
       ) : null}

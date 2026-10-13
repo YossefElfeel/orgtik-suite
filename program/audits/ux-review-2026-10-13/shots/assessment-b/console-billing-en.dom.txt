@@ -1,0 +1,293 @@
+- button "Open Next.js Dev Tools":
+- alert: Billing operations
+- link "Skip to content":
+  - /url: "#ot-main"
+- navigation "Apps":
+  - link "OrgTik":
+    - /url: /admin/en
+    - img "OrgTik"
+  - link "Home":
+    - /url: http://127.0.0.1:3400/sos
+    - generic: Home
+  - link "Tasks":
+    - /url: http://127.0.0.1:3400/sos/go/task_manager?workspaceId=ws_orgtik
+    - generic: Tasks
+  - link "Files":
+    - /url: http://127.0.0.1:3400/sos/go/file_manager?workspaceId=ws_orgtik
+    - generic: Files
+  - link "HR":
+    - /url: http://127.0.0.1:3400/sos/go/hr_system?workspaceId=ws_orgtik
+    - generic: HR
+  - link "CRM":
+    - /url: http://127.0.0.1:3400/sos/go/sales?workspaceId=ws_orgtik
+    - generic: CRM
+  - link "Marketing":
+    - /url: http://127.0.0.1:3400/sos/go/digital_marketing?workspaceId=ws_orgtik
+    - generic: Marketing
+  - link "Chats":
+    - /url: http://127.0.0.1:3400/sos/go/hq?workspaceId=ws_orgtik
+    - generic: Chats
+  - link "OrgTik Console":
+    - /url: /admin/en
+    - generic: OrgTik Console
+  - link "Website Manager":
+    - /url: http://127.0.0.1:3400/sos/go/website_manager
+    - generic: Website Manager
+- button "Collapse navigation":
+- navigation "Main navigation":
+  - generic: OrgTik Console
+  - link "Overview":
+    - /url: /admin/en
+    - generic: Overview
+  - generic: Catalog
+  - link "Tools":
+    - /url: /admin/en/tools
+    - generic: Tools
+  - link "Software catalog":
+    - /url: /admin/en/catalog/software
+    - generic: Software catalog
+  - link "Plans and features":
+    - /url: /admin/en/plans
+    - generic: Plans and features
+  - link "Waitlist":
+    - /url: /admin/en/waitlist
+    - generic: Waitlist
+  - link "Releases and announcements":
+    - /url: /admin/en/releases
+    - generic: Releases and announcements
+  - generic: Pricing
+  - link "Price grid":
+    - /url: /admin/en/pricing
+    - generic: Price grid
+  - link "Zones and countries":
+    - /url: /admin/en/pricing/zones
+    - generic: Zones and countries
+  - link "Currencies and rates":
+    - /url: /admin/en/pricing/currencies
+    - generic: Currencies and rates
+  - link "Pricing log":
+    - /url: /admin/en/pricing/log
+    - generic: Pricing log
+  - generic: Offers and tax
+  - link "Bundles":
+    - /url: /admin/en/bundles
+    - generic: Bundles
+  - link "Coupons":
+    - /url: /admin/en/coupons
+    - generic: Coupons
+  - link "Tax and gateways":
+    - /url: /admin/en/tax
+    - generic: Tax and gateways
+  - link "Mock tax ID checks":
+    - /url: /admin/en/tax/checks
+    - generic: Mock tax ID checks
+  - generic: Customers
+  - link "Workspaces":
+    - /url: /admin/en/workspaces
+    - generic: Workspaces
+  - link "Migrations":
+    - /url: /admin/en/migrations
+    - generic: Migrations
+  - link "Custom plans":
+    - /url: /admin/en/custom-plans
+    - generic: Custom plans
+  - link "Invoices":
+    - /url: /admin/en/invoices
+    - generic: Invoices
+  - link "Billing operations" [active]:
+    - /url: /admin/en/billing
+    - generic: Billing operations
+  - generic: Support
+  - link "Support tickets":
+    - /url: /admin/en/tickets
+    - generic: Support tickets
+  - link "Ticket response targets":
+    - /url: /admin/en/tickets/targets
+    - generic: Ticket response targets
+  - generic: Ecosystem
+  - link "Connections registry":
+    - /url: /admin/en/ecosystem
+    - generic: Connections registry
+  - generic: System
+  - link "Reports":
+    - /url: /admin/en/reports
+    - generic: Reports
+  - link "Staff and roles":
+    - /url: /admin/en/staff
+    - generic: Staff and roles
+  - link "Staff invitations":
+    - /url: /admin/en/staff/invitations
+    - generic: Staff invitations
+  - link "Staff security":
+    - /url: /admin/en/staff/security
+    - generic: Staff security
+  - link "Console setup":
+    - /url: /admin/en/setup
+    - generic: Console setup
+  - link "Templates":
+    - /url: /admin/en/templates
+    - generic: Templates
+  - link "Settings":
+    - /url: /admin/en/settings
+    - generic: Settings
+  - link "Audit log":
+    - /url: /admin/en/audit
+    - generic: Audit log
+- banner:
+  - navigation "Breadcrumb":
+    - list:
+      - link "OrgTik":
+        - /url: http://127.0.0.1:3400/sos
+      - generic: OrgTik Console
+  - button "Search your workspace":
+  - button "Notifications":
+  - button "Account":
+    - generic: MA
+- generic: Your staff roles
+- generic: Super Admin
+- main:
+  - heading "Billing operations" [level=1]
+  - paragraph: Review current invoices, recover mock payments and preserve issued document amounts.
+  - generic: Simulated
+  - region "Invoices":
+    - searchbox "Find invoice or workspace"
+    - button "Export invoice CSV":
+      - generic: Export invoice CSV
+    - button "Export accounting CSV":
+      - generic: Export accounting CSV
+  - button "Columns":
+    - generic: Columns
+  - table "Invoices":
+    - rowgroup:
+      - row "Invoice Resize column Invoice Workspace Resize column Workspace Status Resize column Status Total Resize column Total Staff retries Resize column Staff retries":
+        - columnheader "Invoice Resize column Invoice":
+          - button "Invoice":
+            - text: Invoice
+          - separator "Resize column Invoice"
+        - columnheader "Workspace Resize column Workspace":
+          - button "Workspace":
+            - text: Workspace
+          - separator "Resize column Workspace"
+        - columnheader "Status Resize column Status":
+          - text: Status
+          - separator "Resize column Status"
+        - columnheader "Total Resize column Total":
+          - text: Total
+          - separator "Resize column Total"
+        - columnheader "Staff retries Resize column Staff retries":
+          - text: Staff retries
+          - separator "Resize column Staff retries"
+    - rowgroup:
+      - row "INV-2026-001041 OrgTik Egypt Paid EGP 7,635.72 Enabled":
+        - cell "INV-2026-001041":
+          - button "INV-2026-001041":
+            - generic: INV-2026-001041
+        - cell "OrgTik Egypt"
+        - cell "Paid":
+          - generic: Paid
+        - cell "EGP 7,635.72"
+        - cell "Enabled"
+      - row "INV-2026-001042 OrgTik Egypt Paid EGP 7,635.72 Enabled":
+        - cell "INV-2026-001042":
+          - button "INV-2026-001042":
+            - generic: INV-2026-001042
+        - cell "OrgTik Egypt"
+        - cell "Paid":
+          - generic: Paid
+        - cell "EGP 7,635.72"
+        - cell "Enabled"
+      - row "INV-2026-001043 OrgTik Egypt Paid EGP 7,635.72 Enabled":
+        - cell "INV-2026-001043":
+          - button "INV-2026-001043":
+            - generic: INV-2026-001043
+        - cell "OrgTik Egypt"
+        - cell "Paid":
+          - generic: Paid
+        - cell "EGP 7,635.72"
+        - cell "Enabled"
+      - row "INV-2026-001044 OrgTik Egypt Open EGP 7,635.72 Enabled":
+        - cell "INV-2026-001044":
+          - button "INV-2026-001044":
+            - generic: INV-2026-001044
+        - cell "OrgTik Egypt"
+        - cell "Open":
+          - generic: Open
+        - cell "EGP 7,635.72"
+        - cell "Enabled"
+      - row "INV-2026-001045 Nile Foods Paid EGP 112.86 Enabled":
+        - cell "INV-2026-001045":
+          - button "INV-2026-001045":
+            - generic: INV-2026-001045
+        - cell "Nile Foods"
+        - cell "Paid":
+          - generic: Paid
+        - cell "EGP 112.86"
+        - cell "Enabled"
+      - row "INV-2026-001046 Gulf Retail Partially refunded AED 632.10 Enabled":
+        - cell "INV-2026-001046":
+          - button "INV-2026-001046":
+            - generic: INV-2026-001046
+        - cell "Gulf Retail"
+        - cell "Partially refunded":
+          - generic: Partially refunded
+        - cell "AED 632.10"
+        - cell "Enabled"
+      - row "INV-2026-001047 Spree Studio Past due €19.04 Enabled":
+        - cell "INV-2026-001047":
+          - button "INV-2026-001047":
+            - generic: INV-2026-001047
+        - cell "Spree Studio"
+        - cell "Past due":
+          - generic: Past due
+        - cell "€19.04"
+        - cell "Enabled"
+      - row "INV-2026-001048 Desert Logistics Void KWD 3.700 Enabled":
+        - cell "INV-2026-001048":
+          - button "INV-2026-001048":
+            - generic: INV-2026-001048
+        - cell "Desert Logistics"
+        - cell "Void":
+          - generic: Void
+        - cell "KWD 3.700"
+        - cell "Enabled"
+      - row "INV-2026-001049 Gulf Retail Draft AED 1,575.00 Enabled":
+        - cell "INV-2026-001049":
+          - button "INV-2026-001049":
+            - generic: INV-2026-001049
+        - cell "Gulf Retail"
+        - cell "Draft":
+          - generic: Draft
+        - cell "AED 1,575.00"
+        - cell "Enabled"
+  - generic: 1–9 of 9
+  - generic: Rows per page
+  - combobox "Rows per page":
+    - generic: "10"
+  - textbox: "10"
+  - navigation "Pagination":
+    - button "Previous page" [disabled]:
+    - generic: "1"
+    - button "Next page" [disabled]:
+  - heading "Invoice document series" [level=2]
+  - generic: Billing country code
+  - textbox "Billing country code"
+  - generic: Series prefix
+  - textbox "Series prefix"
+  - generic: Next document number
+  - spinbutton "Next document number": "1"
+  - button "Save series":
+    - generic: Save series
+  - list
+  - heading "Card expiry reminders" [level=2]
+  - paragraph:
+    - text: Spree Studio ·
+    - generic: 3184 · 05/26
+  - button "Record mock reminder":
+    - generic: Record mock reminder
+  - heading "Payment links" [level=2]
+  - link "INV-2026-001044":
+    - /url: http://127.0.0.1:3400/sos/billing/pay/paylink_1057
+  - generic: Active · 20 Oct 2026
+  - button "Revoke link":
+    - generic: Revoke link
+- region "Notifications"

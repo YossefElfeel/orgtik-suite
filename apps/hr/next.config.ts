@@ -14,7 +14,7 @@ const nextConfig: NextConfig = {
       ? { remotePatterns: [{ protocol: "http" as const, hostname: "localhost" }], dangerouslyAllowLocalIP: true }
       : { remotePatterns: [{ protocol: "https" as const, hostname: "*.vercel.app" }] }), // hosted prototype mock API
   },
-  allowedDevOrigins: ['devdashhr.somion.org'],
+  allowedDevOrigins: ['devdashhr.somion.org', ...(process.env.ORGTIK_SERVICES_DEV === '1' ? ['localhost', '127.0.0.1'] : [])],
 };
 
 const withNextIntl = createNextIntlPlugin();

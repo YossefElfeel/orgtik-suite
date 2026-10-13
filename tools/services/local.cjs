@@ -4,8 +4,13 @@ const net = require("node:net");
 const { spawn, spawnSync } = require("node:child_process");
 const { createLocalRouter } = require("./local-router.cjs");
 const { apps, clientEnvironment } = require("./config.cjs");
+const { localOrderKey } = require("./local-order-key.cjs");
 const root = path.resolve(__dirname, "../..");
-const origin = "http://localhost:3000";
+const localPort = Number(process.env.ORGTIK_LOCAL_PORT || 3000);
+if (!Number.isInteger(localPort) || localPort < 1024 || localPort > 65535) throw new Error("ORGTIK_LOCAL_PORT must be an integer from 1024 to 65535.");
+const localHost = process.env.ORGTIK_LOCAL_HOST || "localhost";
+if (!["localhost", "127.0.0.1"].includes(localHost)) throw new Error("ORGTIK_LOCAL_HOST must be localhost or 127.0.0.1.");
+const origin = `http://${localHost}:${localPort}`;
 const stateFile = path.join(root, ".vercel/local-suite/running.json");
 const children = new Set();
 let stopping = false, server;
@@ -33,13 +38,13 @@ function freePort(port = 0) {
 }
 async function main() {
   if (!fs.existsSync(path.join(root, "node_modules", ".modules.yaml"))) throw new Error("Install dependencies first: pnpm install --frozen-lockfile");
-  try { await freePort(3000); }
+  try { await freePort(localPort); }
   catch (error) {
     if (error.code !== "EADDRINUSE") throw error;
     let state;
     try { state = JSON.parse(fs.readFileSync(stateFile, "utf8")); if (!Number.isInteger(state.pid) || state.pid < 1) throw new Error("Invalid process marker"); process.kill(state.pid, 0); }
-    catch { throw new Error("Port 3000 is occupied. The existing process was left running."); }
-    if (state.url !== origin || state.runtime !== "native") throw new Error("A previous local launcher is running on port 3000. Stop that run before restarting.");
+    catch { throw new Error(`Port ${localPort} is occupied. The existing process was left running.`); }
+    if (state.url !== origin || state.runtime !== "native") throw new Error(`A previous local launcher is running on port ${localPort}. Stop that run before restarting.`);
     const response = await fetch(`${origin}/sos/api/backend/wm/v2/public/site`, { signal: AbortSignal.timeout(10000) });
     if (!response.ok || response.headers.get("x-orgtik-local-runtime") !== "native") throw new Error("The existing local suite needs attention; no second copy was started.");
     console.log(`OrgTik is already running at ${origin}\nSign in: ${origin}/sos/auth/login`);
@@ -49,6 +54,7 @@ async function main() {
   Object.assign(process.env, {
     SUITE_SERVICES_PUBLIC_URL: origin, ORGTIK_SERVICES: "1", ORGTIK_SERVICES_DEV: "1", VERCEL_ENV: "development",
     MOCK_AUTH_STORE: "file", MOCK_JOURNAL: "file", MOCK_SANDBOX: "services-local",
+    MOCK_WEBSITE_ORDER_SECRET: localOrderKey(path.join(root, ".vercel/local-suite/orders.key")),
     NEXT_TELEMETRY_DISABLED: "1", NODE_ENV: "development",
   });
   // Build the injected library once, rather than once per frontend.
@@ -93,7 +99,7 @@ async function main() {
     });
   }
   server = createLocalRouter({ startService, mock });
-  await new Promise((resolve, reject) => { server.once("error", reject); server.listen(3000, "127.0.0.1", resolve); });
+  await new Promise((resolve, reject) => { server.once("error", reject); server.listen(localPort, "127.0.0.1", resolve); });
   fs.mkdirSync(path.dirname(stateFile), { recursive: true });
   fs.writeFileSync(stateFile, JSON.stringify({ pid: process.pid, url: origin, runtime: "native", config: "tools/services/config.cjs" }, null, 2));
   console.log(`OrgTik local prototype ready: ${origin}\nApps start when opened; mock data stays in .vercel/dev/mock.\nCtrl+C stops this run.`);

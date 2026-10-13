@@ -14,14 +14,14 @@ import type { IUser } from "@/types/user";
 import { updateUserAndScopes } from "@/redux/features/auth/authSlice";
 
 export default function useWorkspace() {
-  const { accessToken, workspaceContext, user, isAdmin, isWebsiteManager } = useUser();
+  const { accessToken, workspaceContext, user } = useUser();
   const [switching, setSwitching] = useState(false);
   const [switchError, setSwitchError] = useState(false);
   const dispatch = useAppDispatch();
-  const me = useAppMeQuery(undefined, { skip: !accessToken || !!isAdmin || !!isWebsiteManager, pollingInterval: 30000, refetchOnFocus: true });
+  const me = useAppMeQuery(undefined, { skip: !accessToken || !workspaceContext, pollingInterval: 30000, refetchOnFocus: true });
   useEffect(() => {
     const fresh = me.data?.workspaceContext;
-    if (!fresh || !user || !accessToken || readClientSession()?.tokens.accessToken !== accessToken || workspaceContext && workspaceContext.workspace.id !== fresh.workspace.id || JSON.stringify(fresh) === JSON.stringify(workspaceContext)) return;
+    if (!fresh || !user || !accessToken || !workspaceContext || readClientSession()?.tokens.accessToken !== accessToken || workspaceContext.workspace.id !== fresh.workspace.id || workspaceContext.actor.userId !== fresh.actor.userId || workspaceContext.actor.effectiveUserId !== fresh.actor.effectiveUserId || workspaceContext.actor.readOnly !== fresh.actor.readOnly || JSON.stringify(fresh) === JSON.stringify(workspaceContext)) return;
     dispatch(updateUserAndScopes({ user, workspaceContext: fresh, scopes: scopesFromContext(fresh).map(scope => ({ ...scope, permissions: scope.permissions || [] })) }));
   }, [me.data, accessToken, workspaceContext, user, dispatch]);
   const switchTo = useCallback(

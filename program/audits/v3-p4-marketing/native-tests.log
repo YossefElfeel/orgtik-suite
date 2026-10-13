@@ -1,0 +1,30 @@
+✔ Marketing workspace-zone schedule parsing and analytics remain pure across DST (190.1502ms)
+✔ Marketing asset references are project scoped and archived authors retain attribution (761.8294ms)
+✔ Marketing simulated callback is an explicit POST command; GET cannot consume authorization state (609.7401ms)
+✔ Marketing UTM defaults persist on the native project and pure reads reject unauthorized or invalid writes (984.6089ms)
+✔ Marketing sender/designer exports actual escaped RTL bytes and retries recover one self-test event (601.9041ms)
+✔ Marketing mock send checks current consent, approval and template version without CRM master copies (485.4016ms)
+✔ Marketing queue changes native target schedules/order and leaves locked or foreign records unchanged (467.256ms)
+✔ Marketing brand voice, writing, social reply and journey dry run persist actual actor events once (395.7838ms)
+✔ Marketing current feed visibility and extension custody preserve attribution while denying changes (357.522ms)
+✔ Marketing ordinary messaging constructor saves canonical CRM references and retires duplicate imports (355.4464ms)
+✔ Marketing candidate hooks expose actual campaign/project state and CRM reference types (755.4733ms)
+✔ Marketing transaction receipts persist on actual campaigns and stable retries reject changes (628.7608ms)
+✔ Marketing ordinary bootstrap only projects visible owned extension data and protects recipient changes (486.6858ms)
+✔ Marketing atomic journey task guard binds the current approved campaign and native step (487.5391ms)
+✔ Marketing empty workspaces interleave independent brands and reject foreign IDs (215.4424ms)
+✔ Marketing fixture/cold start retain all state and removed gallery ID allocator (1295.1031ms)
+✔ Marketing reviewer/global admin sees only authorized project and media; GETs stay pure (446.9803ms)
+✔ Marketing explicit calendar transition replays idempotently outside GET; custody keeps authors (480.0973ms)
+✔ Marketing calendar uses workspace timezone and calendar days across Zurich DST (16.1024ms)
+✔ original uncertain command blocks changed input and survives later definitive denial (171.0157ms)
+✔ saved command is partitioned by current actor, project and source action (46.8214ms)
+✔ late suite success after an actor or project switch retains original uncertain request instead of adopting it (58.5733ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4138.1258

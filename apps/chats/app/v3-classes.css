@@ -83,7 +83,7 @@
 .ch-background-e9b63d {background:var(--color-paper-500);}
 .ch-display-60e32d {display:inline-block;}
 .ch-width-fbf353 {width:12px;}
-.ch-transition-a79bda {transition:width var(--duration-state) var(--ease-out-soft);}
+.ch-transition-a79bda {transition:transform var(--duration-state) var(--ease-out-soft);}
 .ch-height-6a8e05 {height:10px;}
 .ch-width-208c98 {width:2px;}
 .ch-height-30de4a {height:16px;}
@@ -138,8 +138,8 @@
 .ch-width-6ac132 {width:42%;}
 .ch-background-3a24e5 {background:var(--color-paper-300);}
 .ch-height-38bc9b {height:72px;}
-.ch-border-inline-start-844669 {border-inline-start:3px solid var(--color-paper-500);}
-.ch-border-inline-start-f158c3 {border-inline-start:3px solid var(--color-accent);}
+.ch-border-inline-start-844669 {border-inline-start:1px solid var(--color-paper-500);}
+.ch-border-inline-start-f158c3 {border-inline-start:1px solid var(--color-accent);}
 .ch-min-width-af5b40 {min-width:760px;}
 .ch-grid-template-columns-3fb748 {grid-template-columns:52px repeat(7, minmax(0, 1fr));}
 .ch-letter-spacing-47bb2f {letter-spacing:0.04em;}
@@ -161,7 +161,7 @@
 .ch-max-width-d350dc {max-width:62ch;}
 .ch-margin-top-7a21c6 {margin-top:2px;}
 .ch-background-289564 {background:var(--color-presence-available);}
-.ch-transition-a0e1b3 {transition:width 90ms linear;}
+.ch-transition-a0e1b3 {transition:transform 90ms linear;}
 .ch-font-family-84a226 {font-family:var(--font-mono);}
 .ch-text-overflow-2bf148 {text-overflow:ellipsis;}
 .ch-max-width-91a84c {max-width:46ch;}
@@ -226,7 +226,7 @@
 .ch-box-shadow-23f02e {box-shadow:0 0 0 3px var(--color-surface);}
 .ch-transition-bba3fe {transition:box-shadow var(--duration-tile) var(--ease-out-soft);}
 .ch-width-974975 {width:2.5px;}
-.ch-transition-6b3b55 {transition:height var(--duration-state) linear;}
+.ch-transition-6b3b55 {transition:transform var(--duration-state) linear;}
 .ch-position-d461c9 {position:relative;}
 .ch-position-bb6a43 {position:absolute;}
 .ch-left-261659 {left:2px;}
@@ -312,7 +312,7 @@
 .ch-min-height-ac51e5 {min-height:30px;}
 .ch-font-weight-7e3a94 {font-weight:400;}
 .ch-background-0c6c0f {background:rgb(var(--shadow-ink) / 0.18);}
-.ch-transition-f17a3a {transition:width 1s linear;}
+.ch-transition-f17a3a {transition:transform 1s linear;}
 .ch-padding-bottom-e22ead {padding-bottom:env(safe-area-inset-bottom);}
 .ch-width-2acaf3 {width:200px;}
 .ch-border-radius-0abaf1 {border-radius:var(--radius-object-lg);}

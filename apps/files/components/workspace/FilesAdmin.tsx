@@ -33,13 +33,13 @@ const sections = [
   "audit",
 ];
 export function FilesAdmin() {
-  const params = useParams<{ section?: string[] }>(),
+  const params = useParams<{ locale: string; section?: string[] }>(),
     selected = params.section?.[0] || "overview",
     active = (
       sections.includes(selected) ? selected : "overview"
     ) as ToolAdminSection;
   return (
-    <ToolAdminScreen tool="files" active={active}>
+    <ToolAdminScreen tool="files" active={active} basePath={`/${params.locale}/admin`}>
       {active === "settings" ? (
         <FilesSettings />
       ) : active === "import-export" ? (

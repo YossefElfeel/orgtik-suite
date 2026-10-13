@@ -1,121 +1,20 @@
 "use client";
 
+import { useStudio } from "@/lib/studio";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { DotsThreeVertical, EyeSlash } from "@phosphor-icons/react";
-import { Badge, LoadingState, ErrorState, EmptyState, Button, ConfirmDialog, Field, IconButton, Menu, MenuContent, MenuItem, MenuTrigger, Select, StatusBadge, Textarea, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
+import { buttonVariants, Badge, LoadingState, ErrorState, EmptyState, Button, ConfirmDialog, Field, IconButton, Menu, MenuContent, MenuItem, MenuTrigger, Select, StatusBadge, Textarea, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
 
 
 import { useCan } from "@/lib/permissions";
 import { LifecycleProgress } from "./LifecycleProgress";
 import { statusOf, useAssignLeadMutation, useEraseLeadMutation, useLeadQuery, useMembersQuery, useMoveLeadMutation, useNoteLeadMutation, type ApiError, type Lead, type LeadAction, type LeadStatus } from "@/store/api";
 
-// What can happen next (status matrix: lead). The first is the main action.
-const NEXT: Partial<Record<LeadStatus, LeadAction[]>> = {
-  new: ["contact", "qualify", "unqualify", "spam", "duplicate"],
-  contacted: ["qualify", "unqualify", "lose"],
-  qualified: ["quote", "lose"],
-  quoted: ["win", "lose"],
-  unqualified: ["reopen"],
-};
-const NEEDS_REASON: LeadAction[] = ["unqualify", "lose"];
-
-function useMove(lead: Lead) {
-  const t = useTranslations("Leads");
-  const [move] = useMoveLeadMutation();
-  return (action: LeadAction, extra: { reason?: string; of?: string } = {}) =>
-    move({ id: lead.id, version: lead.version, action, ...extra })
-      .unwrap()
-      .then(() => toast.success(t(`done.${action}`)))
-      .catch((e: ApiError) => {
-        toast.error(e.status === 412 ? t("stale") : t("failed"));
-        throw e;
-      });
-}
-
-/** The actions a lead's status allows; the ones that close it ask why. */
-export function LeadActions({
-  lead,
-  compact,
-}: {
-  lead: Lead;
-  compact?: boolean;
-}) {
-  const t = useTranslations("Leads");
-  const run = useMove(lead);
-  const [asking, setAsking] = useState<LeadAction | null>(null);
-  const next = NEXT[lead.status] ?? [];
-  if (!next.length) return null;
-  const [main, ...more] = next;
-  const start = (a: LeadAction) =>
-    NEEDS_REASON.includes(a) || a === "duplicate"
-      ? setAsking(a)
-      : run(a).catch(() => {});
-  return (
-    <span className="inline-flex items-center gap-1">
-      <Button
-        size="sm"
-        variant={compact ? "secondary" : "primary"}
-        onClick={() => start(main)}
-      >
-        {t(`actions.${main}`)}
-      </Button>
-      {more.length ? (
-        <Menu>
-          <MenuTrigger
-            render={
-              <IconButton
-                size="sm"
-                variant="ghost"
-                label={t("moreFor", { topic: lead.topic })}
-                icon={<DotsThreeVertical weight="bold" />}
-              />
-            }
-          />
-          <MenuContent align="end">
-            {more.map((a) => (
-              <MenuItem
-                key={a}
-                tone={a === "spam" ? "danger" : "default"}
-                onClick={() => start(a)}
-              >
-                {t(`actions.${a}`)}
-              </MenuItem>
-            ))}
-          </MenuContent>
-        </Menu>
-      ) : null}
-      {asking ? (
-        <ConfirmDialog
-          open
-          onOpenChange={(o) => !o && setAsking(null)}
-          tone="primary"
-          title={t(`confirm.${asking}`)}
-          impact={t(`impact.${asking}`)}
-          reason={
-            asking === "duplicate"
-              ? {
-                  label: t("duplicateOf"),
-                  required: true,
-                  placeholder: "ld_01",
-                }
-              : { label: t("reason"), required: true }
-          }
-          confirmLabel={t(`actions.${asking}`)}
-          onConfirm={({ reason }) =>
-            run(
-              asking,
-              asking === "duplicate" ? { of: reason.trim() } : { reason },
-            ).then(() => setAsking(null))
-          }
-        />
-      ) : null}
-    </span>
-  );
-}
-
 export function LeadDetail({ id }: { id: string }) {
   const t = useTranslations("Leads");
+  const v3 = useTranslations("WmV3");
+  const target = useStudio<{canOpen:boolean;url:string|null}>("/studio/lead-target/"+id);
   const f = useFormatter();
   const can = useCan();
   const { data: lead, isLoading, error, refetch } = useLeadQuery(id);
@@ -128,7 +27,7 @@ export function LeadDetail({ id }: { id: string }) {
   if (isLoading) return <LoadingState rows={5} />;
   if (statusOf(error) === 404) return <EmptyState title={t("noMatch")} />;
   if (error || !lead) return <ErrorState onRetry={refetch} />;
-  const editable = can("marketing:edit");
+  const editable = false;
   const owners = (members.data?.items ?? []).filter((m) =>
     m.permissions.includes("marketing:edit"),
   );
@@ -160,7 +59,7 @@ export function LeadDetail({ id }: { id: string }) {
             ).map((key) => ({ key, label: statusLabel("lead", key) }))}
             outcome={<StatusBadge entity="lead" state={lead.status} />}
           />
-          {editable ? <LeadActions lead={lead} /> : null}
+          <p role="note" className="text-body-sm text-fg-muted">{v3("leadReadOnly")}</p>{target.data?.canOpen&&target.data.url?<a href={target.data.url} className={buttonVariants({variant:"secondary"})}>{v3("openCRM")}</a>:<p role="status" className="text-body-sm text-fg-muted">{v3("crmAccessPending")}</p>}
           <section
             aria-labelledby="lead-contact"
             className="rounded-card border border-line bg-raised p-5 text-body-sm"
@@ -338,7 +237,7 @@ export function LeadDetail({ id }: { id: string }) {
               ))}
             </ol>
           </section>
-          {can("leads:pii") && !lead.erased ? (
+          {editable && can("leads:pii") && !lead.erased ? (
             <ConfirmDialog
               trigger={
                 <Button variant="ghost" className="self-start text-danger">

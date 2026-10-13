@@ -1,0 +1,155 @@
+[
+  {
+    "name": "01-crm-main",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/01-crm-main.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/sales/en",
+    "width": 1536
+  },
+  {
+    "name": "02-crm-admin",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/02-crm-admin.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/sales/en/admin",
+    "width": 1536
+  },
+  {
+    "name": "03-crm-create-filled",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/03-crm-create-filled.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/sales/en/customers?new=1",
+    "width": 1536
+  },
+  {
+    "name": "04-crm-created-inspector",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/04-crm-created-inspector.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/sales/en/customers?contact=17554fd1-a998-4c75-8540-a1cadb6261fd",
+    "width": 1536
+  },
+  {
+    "name": "05-crm-edit-form",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/05-crm-edit-form.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/sales/en/customers/17554fd1-a998-4c75-8540-a1cadb6261fd",
+    "width": 1536
+  },
+  {
+    "name": "06-crm-edit-validation",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/06-crm-edit-validation.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/sales/en/customers/17554fd1-a998-4c75-8540-a1cadb6261fd",
+    "width": 1536
+  },
+  {
+    "name": "07-crm-edit-saved",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/07-crm-edit-saved.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/sales/en/customers/17554fd1-a998-4c75-8540-a1cadb6261fd",
+    "width": 1536
+  },
+  {
+    "name": "08-crm-delete-confirmation",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/08-crm-delete-confirmation.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/sales/en/customers/17554fd1-a998-4c75-8540-a1cadb6261fd",
+    "width": 1536
+  },
+  {
+    "name": "09-marketing-main",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/09-marketing-main.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/marketing/en/dashboard",
+    "width": 1536
+  },
+  {
+    "name": "10-marketing-admin",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/10-marketing-admin.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/marketing/en/admin",
+    "width": 1536
+  },
+  {
+    "name": "11-marketing-label-create-form",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/11-marketing-label-create-form.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/marketing/en/labels",
+    "width": 1536
+  },
+  {
+    "name": "12-marketing-label-created",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/12-marketing-label-created.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/marketing/en/labels",
+    "width": 1536
+  },
+  {
+    "name": "13-marketing-label-edit-form",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/13-marketing-label-edit-form.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/marketing/en/labels",
+    "width": 1536
+  },
+  {
+    "name": "14-marketing-label-edited",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/14-marketing-label-edited.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/marketing/en/labels",
+    "width": 1536
+  },
+  {
+    "name": "15-marketing-delete-confirmation",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/15-marketing-delete-confirmation.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/marketing/en/labels",
+    "width": 1536
+  },
+  {
+    "name": "16-marketing-retained-after-reload",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/16-marketing-retained-after-reload.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/marketing/en/labels",
+    "width": 1536
+  },
+  {
+    "name": "17-crm-retained-after-revisit",
+    "path": "C:/Users/yosse/Projects/New sass/orgtik-suite-restore-v3/program/audits/ux-review-2026-10-13/shots/assessment-b-tools/17-crm-retained-after-revisit.jpg",
+    "dir": "ltr",
+    "height": 735,
+    "lang": "en",
+    "url": "http://127.0.0.1:3400/sales/en/customers/17554fd1-a998-4c75-8540-a1cadb6261fd",
+    "width": 1536
+  }
+]

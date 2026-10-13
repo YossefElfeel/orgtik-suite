@@ -11,6 +11,14 @@ const require = createRequire(import.meta.url);
 const { apps, clientEnvironment, packages, servicesNextConfig, webUrls } = require("./config.cjs");
 const config = JSON.parse(fs.readFileSync(new URL("../../vercel.dev.json", import.meta.url)));
 
+test("isolated local previews allow only their loopback development origins", () => {
+  const local = servicesNextConfig("wm", { ORGTIK_SERVICES: "1", ORGTIK_SERVICES_DEV: "1", SUITE_SERVICES_PUBLIC_URL: "http://127.0.0.1:3400" });
+  assert.deepEqual(local.allowedDevOrigins, ["localhost", "127.0.0.1"]);
+  assert.equal(local.env.NEXT_PUBLIC_SOS_URL, "http://127.0.0.1:3400/sos");
+  const hosted = servicesNextConfig("wm", { ORGTIK_SERVICES: "1", SUITE_SERVICES_PUBLIC_URL: "https://suite.fixture.test" });
+  assert.equal(hosted.allowedDevOrigins, undefined);
+});
+
 test("each frontend project retains its private binding and the website gateway preserves every public prefix", () => {
   const gateway = configurationFor("website");
   assert.deepEqual(Object.keys(gateway.services), ["website"]);
