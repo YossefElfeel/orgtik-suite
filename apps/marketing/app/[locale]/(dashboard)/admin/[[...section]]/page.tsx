@@ -4,7 +4,7 @@ import { ToolAdminScreen } from "@orgtik/ui";
 import { useTranslations } from "next-intl";
 import { ButtonLink } from "@/components/shared/ButtonLink";
 export default function MarketingAdmin() {
-  const params = useParams<{ section?: string[] }>();
+  const params = useParams<{ locale: string; section?: string[] }>();
   const t = useTranslations("MarketingV3");
   return (
     <ToolAdminScreen
@@ -23,7 +23,7 @@ export default function MarketingAdmin() {
           ] as const
         ).find((value) => value === params.section?.[0]) || "overview"
       }
-      basePath="/admin"
+      basePath={`/${params.locale}/admin`}
     >
       {params.section?.[0] === "settings" ? (
         <section className="flex flex-col gap-3 border-t border-line pt-4">

@@ -53,7 +53,7 @@ jobs:
       - name: Services routing and private gateway regressions
         run: |
           node tools/services/projects.mjs --check
-          node --test tools/services/services.test.mjs tools/services/local-router.test.cjs
+          node --test tools/services/services.test.mjs tools/services/local-router.test.cjs tools/services/local-order-key.test.cjs
 
       - name: Typecheck, message catalogs and tests (affected packages)
         run: pnpm turbo run typecheck i18n:check test --affected --continue --concurrency=2

@@ -4,6 +4,7 @@ const net = require("node:net");
 const { spawn, spawnSync } = require("node:child_process");
 const { createLocalRouter } = require("./local-router.cjs");
 const { apps, clientEnvironment } = require("./config.cjs");
+const { localOrderKey } = require("./local-order-key.cjs");
 const root = path.resolve(__dirname, "../..");
 const localPort = Number(process.env.ORGTIK_LOCAL_PORT || 3000);
 if (!Number.isInteger(localPort) || localPort < 1024 || localPort > 65535) throw new Error("ORGTIK_LOCAL_PORT must be an integer from 1024 to 65535.");
@@ -53,6 +54,7 @@ async function main() {
   Object.assign(process.env, {
     SUITE_SERVICES_PUBLIC_URL: origin, ORGTIK_SERVICES: "1", ORGTIK_SERVICES_DEV: "1", VERCEL_ENV: "development",
     MOCK_AUTH_STORE: "file", MOCK_JOURNAL: "file", MOCK_SANDBOX: "services-local",
+    MOCK_WEBSITE_ORDER_SECRET: localOrderKey(path.join(root, ".vercel/local-suite/orders.key")),
     NEXT_TELEMETRY_DISABLED: "1", NODE_ENV: "development",
   });
   // Build the injected library once, rather than once per frontend.
