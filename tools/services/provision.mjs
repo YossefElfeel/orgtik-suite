@@ -27,27 +27,45 @@ if (project.name !== name || project.accountId !== team || !project.id?.startsWi
 if (project.rootDirectory && project.rootDirectory !== ".") throw new Error("Services project must use the repository root.");
 if (project.nodeVersion !== "22.x") await api(`/v9/projects/${project.id}`, "PATCH", { nodeVersion: "22.x" });
 
-const source = await api(`/v10/projects/${sourceProject}/env?decrypt=true`);
+const source = await api(`/v10/projects/${sourceProject}/env`);
 const rows = Array.isArray(source) ? source : source.envs || [];
-// Match the current CLI's Production-only environment export. New Secret rows
-// can omit values from the environment-list endpoint, even with decrypt=true.
-const exported = await api(`/v3/env/pull/${sourceProject}/production?source=vercel-cli:env:pull`);
-const production = exported.env || {};
 const keys = ["KV_REST_API_URL", "KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"];
+const inEnvironment = (row, target) => !row.gitBranch && (Array.isArray(row.target) ? row.target.includes(target) : row.target === target);
+const hasPair = values => [["KV_REST_API_URL", "KV_REST_API_TOKEN"], ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"]].some(pair => pair.every(key => values.some(row => row.key === key)));
 const copy = [];
-// Reuse only a complete, existing Production store configuration. Branch-only
-// Preview overrides and all earlier client URLs are intentionally excluded.
-for (const key of keys) {
-  const row = rows.find(row => row.key === key && !row.gitBranch && row.target?.includes("production"));
-  const value = production[key] || (row?.decrypted === true ? row.value : undefined);
-  if (typeof value === "string" && value && value !== "[SENSITIVE]") copy.push({ key, value, type: "encrypted", target: ["production", "preview"] });
-}
-if (!(copy.some(row => row.key === "KV_REST_API_URL") && copy.some(row => row.key === "KV_REST_API_TOKEN")) && !(copy.some(row => row.key === "UPSTASH_REDIS_REST_URL") && copy.some(row => row.key === "UPSTASH_REDIS_REST_TOKEN"))) {
-  for (const key of keys) {
-    const row = rows.find(row => row.key === key && !row.gitBranch && row.target?.includes("production"));
-    console.log(`${key}: production row ${Boolean(row)}, usable export ${copy.some(row => row.key === key)}, integration hint ${row?.contentHint?.type || "none"}, store ID ${row?.contentHint?.storeId || "none"}`);
+const managed = rows.filter(row => keys.includes(row.key) && inEnvironment(row, "production") && row.contentHint?.type === "integration-store-secret");
+const stores = [...new Set(managed.map(row => row.contentHint.storeId))];
+if (hasPair(managed)) {
+  if (stores.length !== 1 || !/^store_[a-zA-Z0-9]+$/.test(stores[0])) throw new Error("The existing Redis integration is ambiguous.");
+  const storeId = stores[0];
+  const connected = await api(`/v1/storage/stores/${storeId}/connections`);
+  const connections = connected.connections || [];
+  const origins = connections.filter(row => row.projectId === sourceProject && row.environments?.includes("production"));
+  if (origins.length !== 1) throw new Error("The Redis store is not uniquely connected to the existing Production mock.");
+  const destinations = connections.filter(row => row.projectId === project.id);
+  if (destinations.length === 0) {
+    // Same API and prefix option as Vercel CLI connectResourceToProject. Vercel
+    // provisions its managed Secrets directly; no credential is read or copied.
+    await api(`/v1/storage/stores/${storeId}/connections`, "POST", {
+      projectId: project.id, type: "integration", envVarEnvironments: ["production", "preview"],
+      ...(typeof origins[0].envVarPrefix === "string" ? { envVarPrefix: origins[0].envVarPrefix } : {}),
+    });
+  } else if (!["production", "preview"].every(target => destinations.some(row => row.environments?.includes(target)))) {
+    throw new Error("The new project's existing Redis connection does not cover both confirmed environments.");
   }
-  throw new Error("The existing Production Redis configuration is unavailable; no replacement store was created.");
+  const target = await api(`/v10/projects/${project.id}/env`);
+  const targetRows = Array.isArray(target) ? target : target.envs || [];
+  if (!["production", "preview"].every(env => hasPair(targetRows.filter(row => inEnvironment(row, env))))) throw new Error("The connected Redis integration did not provide both required credential pairs.");
+  console.log(`Connected the existing Redis integration ${storeId} to the confirmed new project; managed Secrets remain private.`);
+} else {
+  // Legacy manually configured variables can use the effective Production-only
+  // export. Do not copy branch overrides or a provider's redacted placeholder.
+  const exported = await api(`/v3/env/pull/${sourceProject}/production?source=vercel-cli:env:pull`);
+  for (const key of keys) {
+    const value = exported.env?.[key];
+    if (typeof value === "string" && value && value !== "[SENSITIVE]") copy.push({ key, value, type: "encrypted", target: ["production", "preview"] });
+  }
+  if (!hasPair(copy)) throw new Error("The existing Production Redis configuration is unavailable; no replacement store was created.");
 }
 copy.push(
   { key: "MOCK_SANDBOX", value: "services-production", type: "plain", target: ["production"] },
