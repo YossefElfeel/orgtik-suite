@@ -38,8 +38,11 @@ const stores = [...new Set(managed.map(row => row.contentHint.storeId))];
 if (hasPair(managed)) {
   if (stores.length !== 1 || !/^store_[a-zA-Z0-9]+$/.test(stores[0])) throw new Error("The existing Redis integration is ambiguous.");
   const storeId = stores[0];
-  const connected = await api(`/v1/storage/stores/${storeId}/connections`);
-  const connections = connected.connections || [];
+  const resource = await api(`/v1/storage/stores/${storeId}`);
+  if (resource.store?.id !== storeId) throw new Error("The existing Redis resource identity does not match.");
+  // The CLI uses projectsMetadata here; the connections endpoint instead
+  // returns display rows with nested project details.
+  const connections = resource.store.projectsMetadata || [];
   const origins = connections.filter(row => row.projectId === sourceProject && row.environments?.includes("production"));
   if (origins.length !== 1) throw new Error("The Redis store is not uniquely connected to the existing Production mock.");
   const destinations = connections.filter(row => row.projectId === project.id);
