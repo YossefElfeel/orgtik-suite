@@ -42,6 +42,12 @@ Run the whole suite locally with `pnpm dev:local`, or double-click
 account is `mona.adel@orgtik.test`, password `Local@2026`. Ctrl+C stops a run
 started in the terminal. Local data persists under `.vercel/dev/mock`.
 
+This is an interactive prototype: the mock simulates application data and
+actions locally. Mona has platform and Website Manager super-admin roles, plus
+admin access to all six workspace tools. Her launcher exposes all nine apps
+even when she signs in directly to a staff app. Opening a workspace tool selects
+the OrgTik workspace before exchanging its app session.
+
 The launcher uses an isolated configuration directory beside the repository
 because CLI 63's development service discovery chooses the Git-root config even
 when `--local-config` points at the local template. Source and dependencies are

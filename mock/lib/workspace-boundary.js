@@ -22,12 +22,12 @@ const failure = (status, code, message) => Object.assign(new Error(message), { s
 function createWorkspaceBoundary({ realm, config, store, accountStore, platform, identity: identityFor, dispatch, persist, util, makeCtx, staffAvailable = () => true }) {
   const requests = new AsyncLocalStorage(), privateFrames = new Map();
   let initialized = false;
-  const contextService = snapshot => createContextService({ realm, identity: identityFor(), platform: () => snapshot ? { db: snapshot.db, workspace: id => snapshot.db.workspaces.find(row => row.id === id), now: () => clock.now() } : platform().getStore() });
+  const contextService = (snapshot, grants) => createContextService({ realm, identity: grants ? { ...identityFor(), grants } : identityFor(), platform: () => snapshot ? { db: snapshot.db, workspace: id => snapshot.db.workspaces.find(row => row.id === id), now: () => clock.now() } : platform().getStore() });
   const sessionStore = sessionStorage.pickStore(config, { realm });
   const authority = createSessionAuthority({
     realm, store: sessionStore,
     loadUser: async id => { const accounts = await accountStore.accounts(), raw = accounts.get(String(id)); return raw ? JSON.parse(raw).user : identityFor().findUser(id); },
-    resolveWorkspace: (user, options) => contextService(options.revalidate ? options.frame?.authorizationSnapshot : undefined).resolveWorkspace(user, options),
+    resolveWorkspace: (user, options) => contextService(options.revalidate ? options.frame?.authorizationSnapshot : undefined, options.revalidate ? options.frame?.authorizationGrants : undefined).resolveWorkspace(user, options),
     contextFor: (user, options) => {
       const exiting = options.principal?.readOnly && String(user.id) === String(options.principal.actor.id) && /^\/api\/auth\/exit-impersonation(?:$|\?)/.test(options.request?.path || options.request?.url || '');
       if (exiting) return contextService().contextFor(user, { ...options, extra: { ...options.extra, exitImpersonation: true } });
@@ -527,6 +527,11 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       const p = principal(); if (!p) return res.status(401).json({ success: false, code: "unauthenticated" });
       const names = new Set(p.context.scopes.map(scope => scope.scope));
       const descriptors = identityFor().scopes.filter(scope => names.has(scope.name));
+      const launch = p.context.staffAccess?.toolLaunch;
+      if (!p.context.workspaceContext && launch) for (const tool of launch.tools) {
+        const scope = identityFor().scopeByName(TOOL_DEFINITIONS[tool]?.scope);
+        if (scope && !names.has(scope.name)) { descriptors.push({ ...scope, mode: "workspace", workspaceId: launch.workspaceId }); names.add(scope.name); }
+      }
       for (const key of p.context.staffAccess?.apps || []) {
         const scope = identityFor().scopeByName(key === "admin" ? "platform_admin" : "website_manager");
         if (scope && !names.has(scope.name)) descriptors.push({ ...scope, mode: "staff", target: key });
@@ -687,6 +692,9 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       const refresh = /^\/api\/auth\/refresh(?:$|\?)/.test(url);
       frame = await authority.prepareRequest(req, { audience: publicCms || cmsPreview || taskSample ? undefined : expectedAudience(key, url), allowAnonymous: anonymous, ...(authPublic || publicFile || publicCms || cmsPreview || taskSample ? { token: null } : {}), ...(refresh ? { token: json.refreshToken, type: "refresh" } : {}) });
       frame.authorizationSnapshot = platformBefore;
+      // Candidate self-role edits must not become their own authorization source
+      // or make an authorized edit look like an external authority change.
+      frame.authorizationGrants = clone(identity.grants);
       const principal = frame.principal;
       const cmsUpload = key === 'wm' && req.method === 'POST' && /^\/v2\/admin\/media(?:$|\?)/.test(url);
       if (['POST', 'PUT', 'PATCH'].includes(req.method) && /multipart\/form-data|application\/octet-stream/i.test(req.headers['content-type'] || '') && !cmsUpload) throw failure(501, 'packaged_assets_only', 'Choose a packaged sample asset in this prototype.');

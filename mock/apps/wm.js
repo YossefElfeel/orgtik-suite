@@ -58,7 +58,7 @@ module.exports = {
   // D-034: who holds which Website Manager role.
   grants: {
     [SCOPE]: {
-      admin: ["wm_admin"],
+      admin: ["wm_super_admin"],
       manager: ["wm_approver"],
       u14: ["wm_editor"],
       u12: ["wm_marketing"],

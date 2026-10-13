@@ -1,4 +1,11 @@
 export const TOOL_SCOPES = { tasks: "task_manager", files: "file_manager", hr: "hr_system", crm: "sales", marketing: "digital_marketing", chat: "hq" };
+/** Navigation metadata never supplies the active tool's authorization context. */
+export function staffToolLaunch(session) {
+    const access = session?.staffAccess, launch = access?.toolLaunch;
+    if (session?.workspaceContext || !access?.roles.admin?.includes("super_admin") || !launch?.workspaceId)
+        return undefined;
+    return { workspaceId: launch.workspaceId, tools: [...new Set(launch.tools.filter(tool => Object.hasOwn(TOOL_SCOPES, tool)))] };
+}
 export function toolAccess(context, key, fallback) {
     if (context) {
         const own = context.tools[key];

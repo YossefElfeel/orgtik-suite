@@ -1,6 +1,12 @@
-import type { ScopeGrant, ToolAccess, ToolKey, WorkspaceContext } from "./types.js";
+import type { AuthEnvelope, ScopeGrant, StaffAccess, ToolAccess, ToolKey, WorkspaceContext } from "./types.js";
 
 export const TOOL_SCOPES: Record<ToolKey, string> = { tasks: "task_manager", files: "file_manager", hr: "hr_system", crm: "sales", marketing: "digital_marketing", chat: "hq" };
+/** Navigation metadata never supplies the active tool's authorization context. */
+export function staffToolLaunch(session: AuthEnvelope | null | undefined): StaffAccess["toolLaunch"] {
+  const access = session?.staffAccess, launch = access?.toolLaunch;
+  if (session?.workspaceContext || !access?.roles.admin?.includes("super_admin") || !launch?.workspaceId) return undefined;
+  return { workspaceId: launch.workspaceId, tools: [...new Set(launch.tools.filter(tool => Object.hasOwn(TOOL_SCOPES, tool)))] };
+}
 export function toolAccess(context: WorkspaceContext | null | undefined, key: ToolKey, fallback?: unknown): ToolAccess {
   if (context) {
     const own = context.tools[key];

@@ -11,7 +11,7 @@ import { useClientSession } from "@orgtik/ui/auth";
 /** SOS is the suite's home: its scope is "global". */
 export const CURRENT_SCOPE = "global";
 
-export type Scope = { id: number; name: string; displayName: string; domain: string; isActive: boolean; description?: string; mode?: "staff" | "workspace"; target?: "admin" | "wm" };
+export type Scope = { id: number; name: string; displayName: string; domain: string; isActive: boolean; description?: string; mode?: "staff" | "workspace"; target?: "admin" | "wm"; workspaceId?: string };
 
 // D-008: Phosphor everywhere. The scopes carry iconify ids; the rail ignores them.
 export const APP_ICONS: Record<string, JSX.Element> = {
@@ -32,7 +32,8 @@ export const APP_ICONS: Record<string, JSX.Element> = {
  * (FS-SOS-2, lib/handoff). The address carries no token.
  */
 export function buildScopeHref(scope: Scope, workspaceId?: string): string {
-  return `/go/${encodeURIComponent(scope.name)}${workspaceId ? `?workspaceId=${encodeURIComponent(workspaceId)}` : ""}`;
+  const selected = scope.mode === "staff" ? undefined : scope.workspaceId || workspaceId;
+  return `/go/${encodeURIComponent(scope.name)}${selected ? `?workspaceId=${encodeURIComponent(selected)}` : ""}`;
 }
 
 let cache: { token: string; key: string; scopes: Scope[] } | null = null;

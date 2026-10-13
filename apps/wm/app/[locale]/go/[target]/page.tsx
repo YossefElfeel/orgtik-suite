@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { appPath, appUrl, staffTargetToken, handoffCode, SessionRequestError, useClientSession } from "@orgtik/ui/auth";
+import { appPath, appUrl, staffTargetToken, staffToolLaunch, switchWorkspace, TOOL_SCOPES, handoffCode, SessionRequestError, useClientSession } from "@orgtik/ui/auth";
 import { Button, ErrorState, NoPermissionState, Spinner } from "@orgtik/ui";
 import { CenteredState } from "@/components/frame/CenteredState";
 import { SOS_API, SOS_URL } from "@/lib/env";
@@ -15,9 +15,22 @@ export default function StaffGoPage() {
   useEffect(() => {
     const token = getToken();
     if (token && !session) return;
-    if (!token || (target !== "admin" && target !== "wm") || !session?.staffAccess?.apps.includes(target)) { setError(new SessionRequestError(403, "staff_access_required")); return; }
+    const launch = staffToolLaunch(session), tool = launch?.tools.find(tool => tool === target);
+    const staff = (target === "admin" || target === "wm") && session?.staffAccess?.apps.includes(target);
+    if (!token || (!staff && !tool)) { setError(new SessionRequestError(403, "staff_access_required")); return; }
     setError(null);
     pending.current ??= (async () => {
+      if (tool && launch) {
+        const workspace = await switchWorkspace(SOS_API, token, launch.workspaceId);
+        const code = await handoffCode(SOS_API, workspace.tokens.accessToken, "suite");
+        if (getToken() !== token) throw new SessionRequestError(409, "session_changed");
+        const destination = appUrl(SOS_URL, "/auth/handoff");
+        destination.searchParams.set("code", code);
+        destination.searchParams.set("redirect", `/go/${TOOL_SCOPES[tool]}?workspaceId=${encodeURIComponent(launch.workspaceId)}`);
+        window.location.assign(destination.toString());
+        return;
+      }
+      if (target !== "admin" && target !== "wm") throw new SessionRequestError(403, "staff_access_required");
       const destinationToken = await staffTargetToken(SOS_API, token, target);
       const code = await handoffCode(SOS_API, destinationToken, target === "admin" ? "staff:admin" : "staff:wm");
       if (getToken() !== token) throw new SessionRequestError(409, "session_changed");

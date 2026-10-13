@@ -29,7 +29,9 @@ changed (decision D-052, `program/plan-v2.md`).
   (pnpm 11.3.0, see `packageManager`). One lockfile for everything.
 - **Run the whole suite locally:** `pnpm dev:local` or double-click `start-local.cmd`.
   Open `http://localhost:3000/sos/auth/login`; all nine apps and the website use a local file-backed mock.
-  Local test account: `mona.adel@orgtik.test`, password `Local@2026`. No Vercel account or Redis setup is required.
+  Local test account: `mona.adel@orgtik.test`, password `Local@2026`. Mona is the prototype's super admin,
+  with all nine apps and their admin controls. Data and actions are simulated and saved locally;
+  no production backend, Vercel account or Redis setup is required.
 - **Develop individual apps:** `pnpm dev:mock` for the mock, then `pnpm --filter <package> dev` per app. Each
   app's `.env.local` (git-ignored) points it at `http://localhost:40xx`; `node mock/patch.js` points
   the old launcher package at localhost.

@@ -1,6 +1,6 @@
 // Runtime only. Never import this handler from middleware or a client bundle.
 const namespaces = new Set(["sos", "tasks", "files", "hr", "sales", "marketing", "chats", "wm", "admin"]);
-const forwarded = ["accept", "accept-language", "authorization", "content-type", "content-length", "range", "if-range", "if-none-match", "x-workspace", "idempotency-key", "x-operation-id"];
+const forwarded = ["accept", "accept-language", "authorization", "content-type", "content-length", "range", "if-range", "if-match", "if-none-match", "x-workspace", "idempotency-key", "x-operation-id"];
 const responseHeaders = ["content-type", "content-disposition", "content-length", "content-range", "accept-ranges", "etag", "last-modified"];
 const failure = (status: number, code: string) => Response.json({ success: false, statusCode: status, code }, { status, headers: { "cache-control": "no-store" } });
 

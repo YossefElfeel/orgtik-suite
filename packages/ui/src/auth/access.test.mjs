@@ -1,8 +1,18 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { toolAccess } from "./access.ts";
+import { toolAccess, staffToolLaunch } from "./access.ts";
 
 const context = () => ({ version: 1, realm: "test", workspace: { id: "ws_a", name: "A", kind: "customer", state: "active", timeZone: "Africa/Cairo" }, actor: { userId: 1, effectiveUserId: 1, readOnly: false }, member: { id: "m", role: "owner", revision: 1 }, revision: 1, tools: {} });
+test("super-admin staff navigation exposes assigned tools without authorizing a staff token in them", () => {
+  const session = { user: { id: 1 }, tokens: { accessToken: "fixture" }, scopes: [{ scope: "website_manager", roles: ["wm_super_admin"] }], workspaceContext: null, staffAccess: { actorUserId: 1, apps: ["admin", "wm"], roles: { admin: ["super_admin"] }, permissions: {}, toolLaunch: { workspaceId: "ws_orgtik", tools: ["tasks", "hr", "tasks"] } } };
+  assert.deepEqual(staffToolLaunch(session), { workspaceId: "ws_orgtik", tools: ["tasks", "hr"] });
+  assert.equal(toolAccess(null, "hr", session.scopes).hasAccess, false);
+  session.workspaceContext = context();
+  assert.equal(staffToolLaunch(session), undefined, "a customer tab retains its own context");
+  session.workspaceContext = null;
+  session.staffAccess.roles.admin = ["support"];
+  assert.equal(staffToolLaunch(session), undefined);
+});
 test("global and another tool's admin roles cannot grant customer access", () => {
   assert.equal(toolAccess(null, "crm", [{ scope: "global", roles: ["super_admin"] }, { scope: "hr_system", roles: ["super_admin"] }]).hasAccess, false);
   assert.equal(toolAccess(null, "crm", [{ scope: "sales", roles: ["manager"] }]).roles[0], "manager");
