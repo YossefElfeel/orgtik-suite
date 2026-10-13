@@ -9,7 +9,7 @@ const env = { ...process.env, ORGTIK_SERVICES: "1", ...clientEnvironment(key) };
 env.SUITE_SOS_URL = `${publicOrigin()}/sos`;
 env.SUITE_SOS_API = `${publicOrigin()}/${key === "website" ? "sos" : key}/api/backend/sos/api`;
 const run = (command, args, cwd = root) => {
-  const result = spawnSync(command, args, { cwd, env, stdio: "inherit", shell: process.platform === "win32" });
+  const result = spawnSync(command, args, { cwd, env, stdio: "inherit", shell: process.platform === "win32" && command !== process.execPath });
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status || 1);
 };
