@@ -48,4 +48,4 @@ Duplicated CSV implementations and opaque Chats CSS were cleaned up. Content see
 
 ## Release record
 
-Local browser journeys passed on 2026-10-14, including the loaded 36-view matrix. Reserved ephemeral ports are rejected before starting Next; the discovered Chats startup failure has a focused regression. PR checks, merge and hosted verification remain the release steps.
+Local browser journeys passed on 2026-10-14, including the loaded 36-view matrix. Reserved ephemeral ports are rejected before starting Next; the discovered Chats startup failure has a focused regression. PR #84 passed source checks and customer/staff journeys. The library run rendered 366 combinations with zero accessibility, console or overflow findings; 24 intentional sidebar label-wrap changes were reviewed and re-rendered locally. All 24 local images match the CI candidates exactly, with changed pixels confined to the rail; their default references were updated. Merge and hosted verification remain the release steps.
