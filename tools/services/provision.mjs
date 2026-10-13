@@ -29,15 +29,26 @@ if (project.nodeVersion !== "22.x") await api(`/v9/projects/${project.id}`, "PAT
 
 const source = await api(`/v10/projects/${sourceProject}/env?decrypt=true`);
 const rows = Array.isArray(source) ? source : source.envs || [];
+// Match the current CLI's Production-only environment export. New Secret rows
+// can omit values from the environment-list endpoint, even with decrypt=true.
+const exported = await api(`/v3/env/pull/${sourceProject}/production?source=vercel-cli:env:pull`);
+const production = exported.env || {};
 const keys = ["KV_REST_API_URL", "KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"];
 const copy = [];
 // Reuse only a complete, existing Production store configuration. Branch-only
 // Preview overrides and all earlier client URLs are intentionally excluded.
 for (const key of keys) {
   const row = rows.find(row => row.key === key && !row.gitBranch && row.target?.includes("production"));
-  if (row && typeof row.value === "string" && row.value) copy.push({ key, value: row.value, type: "encrypted", target: ["production", "preview"] });
+  const value = production[key] || (row?.decrypted === true ? row.value : undefined);
+  if (typeof value === "string" && value && value !== "Sensitive value unavailable") copy.push({ key, value, type: "encrypted", target: ["production", "preview"] });
 }
-if (!(copy.some(row => row.key === "KV_REST_API_URL") && copy.some(row => row.key === "KV_REST_API_TOKEN")) && !(copy.some(row => row.key === "UPSTASH_REDIS_REST_URL") && copy.some(row => row.key === "UPSTASH_REDIS_REST_TOKEN"))) throw new Error("The existing Production Redis configuration is unavailable; no replacement store was created.");
+if (!(copy.some(row => row.key === "KV_REST_API_URL") && copy.some(row => row.key === "KV_REST_API_TOKEN")) && !(copy.some(row => row.key === "UPSTASH_REDIS_REST_URL") && copy.some(row => row.key === "UPSTASH_REDIS_REST_TOKEN"))) {
+  for (const key of keys) {
+    const row = rows.find(row => row.key === key && !row.gitBranch && row.target?.includes("production"));
+    console.log(`${key}: production row ${Boolean(row)}, usable export ${copy.some(row => row.key === key)}, integration hint ${row?.contentHint?.type || "none"}, store ID ${row?.contentHint?.storeId || "none"}`);
+  }
+  throw new Error("The existing Production Redis configuration is unavailable; no replacement store was created.");
+}
 copy.push(
   { key: "MOCK_SANDBOX", value: "services-production", type: "plain", target: ["production"] },
   { key: "MOCK_SANDBOX", value: "services-preview", type: "plain", target: ["preview"] },
