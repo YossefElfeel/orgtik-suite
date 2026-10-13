@@ -1,5 +1,7 @@
 # OrgTik: run everything locally
 
+The consolidated startup and preview guide is [program/local-prototype.md](../program/local-prototype.md).
+
 Runs the suite applications and website against the persistent mock backend. Customer data belongs to the selected workspace; ADM and WM use OrgTik staff context. Providers, payments and delivery are simulated. The current roadmap/evidence is in `program/plan-v2-execution.md` and `program/phase-f/README.md`.
 
 ## Start

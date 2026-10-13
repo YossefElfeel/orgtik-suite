@@ -12,7 +12,7 @@ function requireToolAdmin(context, tool) {
   if (!connectors.admitted(access) || !['owner', 'admin'].includes(context.member.role) && !access.roles.some(role => ADMIN_ROLES[tool]?.includes(role))) throw fail(403, 'tool_admin_required', 'Ask this tool’s administrator.');
   return access;
 }
-function preferences(actor) { return clone(actor.profile?.suitePreferences || { density: 'comfortable' }); }
+function preferences(actor, workspace) { return clone({ density: 'comfortable', ...(workspace?.defaultLanguage ? { language: workspace.defaultLanguage } : {}), ...(actor.profile?.suitePreferences || {}) }); }
 function savePreferences(actor, patch) {
   const allowed = ['theme', 'density', 'language', 'savedViews', 'notificationPreferences'];
   if (!patch || typeof patch !== 'object' || Array.isArray(patch) || Object.keys(patch).some(key => !allowed.includes(key)) || JSON.stringify(patch).length > 50000) throw fail(422, 'invalid_preferences', 'Check the preference values.');
@@ -54,7 +54,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     return out;
   }
   function notifications() {
-    const rows = S.db.notifications.filter(row => row.workspaceId === workspace.id && row.userKey === actor.key).map(row => ({ id: `account:${row.id}`, tool: 'account', category: /billing|invoice|payment|subscription|renewal|refund|credit|price|trial/.test(row.kind || '') ? 'billing' : undefined, title: row.title, path: '/notifications', at: row.at, read: Boolean(row.read) }));
+    const rows = S.db.notifications.filter(row => row.workspaceId === workspace.id && row.userKey === actor.key).map(row => ({ id: `account:${row.id}`, tool: 'account', kind: row.kind, category: /billing|invoice|payment|subscription|renewal|refund|credit|price|trial/.test(row.kind || '') ? 'billing' : undefined, title: row.title, path: '/notifications', at: row.at, read: Boolean(row.read) }));
     for (const { tool, data } of snapshots()) for (const row of data.notifications || []) rows.push({ id: `${tool}:${row.id}`, tool, category: row.category || (/mention/.test(row.kind || row.type || '') ? 'mentions' : tool), title: row.title || row.message || row.type, path: row.path || '/', at: row.createdAt || row.at, read: Boolean(row.readAt || row.read) });
     for (const request of workspace.suite?.requests || []) if (request.userId === actor.id || ['owner', 'admin'].includes(context.member.role)) rows.push({ id: `request:${request.id}:${request.state}`, tool: 'account', title: `${request.tool}: ${request.state}`, path: '/team?tab=requests', at: request.decidedAt || request.at, read: false });
     const reads = workspace.suite?.notificationReads?.[actor.id] || [], settings = preferences(actor).notificationPreferences || {};
@@ -67,10 +67,10 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
       const line = workspace.lines.find(row => row.tool === tool && !['ended', 'deleted'].includes(row.state)), plan = S.db.plans.find(row => row.id === line?.planId);
       toolPlans[tool] = { name: plan?.name?.[preferences(actor).language] || plan?.name?.en || '', limits: clone(plan?.limits || {}), usage: Object.fromEntries((runtimeFor(tool).usage?.() || []).map(row => [row.key, row.used])), trialEndsAt: line?.trialEndsAt || null };
     }
-    return { ...ctx, connectors: connectors.list(workspace, ctx), preferences: preferences(actor), now: S.iso(S.now()), toolPlans, entry: admittedTools().length === 1 ? `/go/${TOOL_DEFINITIONS[admittedTools()[0]].scope}` : '/' };
+    return { ...ctx, connectors: connectors.list(workspace, ctx), preferences: preferences(actor, workspace), now: S.iso(S.now()), toolPlans, entry: admittedTools().length === 1 ? `/go/${TOOL_DEFINITIONS[admittedTools()[0]].scope}` : '/' };
   }
   app.get('/api/suite/bootstrap', read(bootstrap));
-  app.get('/api/suite/preferences', read(() => preferences(actor)));
+  app.get('/api/suite/preferences', read(() => preferences(actor, workspace)));
   app.patch('/api/suite/preferences', write(req => savePreferences(actor, req.body)));
   app.get('/api/suite/connectors', read(() => connectors.list(workspace, currentContext())));
   app.patch('/api/suite/connectors/:id', write(req => connectors.configure(S, workspace, actor, currentContext(), req.params.id, req.body.enabled)));
@@ -79,6 +79,12 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
   app.get('/api/suite/access-requests', read(() => (workspace.suite?.requests || []).filter(row => row.userId === actor.id || ['owner', 'admin'].includes(context.member.role))));
   app.post('/api/suite/access-requests', write(req => connectors.requestAccess(S, workspace, actor, currentContext(), req.body)));
   app.post('/api/suite/access-requests/:id/:decision', write(req => connectors.decideAccess(S, identity, workspace, actor, currentContext(), req.params.id, req.params.decision)));
+  const filesContext = () => {const ctx=currentContext();if(!connectors.admitted(ctx.tools.files))throw fail(403,'files_access_required','Your current Files assignment is required.');return ctx;};
+  app.get('/api/suite/files/picker',read(req=>{const ctx=filesContext();return runtimeFor('files').listSharedFiles({actorId:ctx.actor.effectiveUserId,search:String(req.query.search||''),page:1,limit:Number(req.query.limit||100)});}));
+  app.get('/api/suite/files/:fileId/versions/:versionId/content',(req,res,next)=>{try{const ctx=filesContext(),content=runtimeFor('files').contentSharedFile({actorId:ctx.actor.effectiveUserId,fileId:req.params.fileId,versionId:req.params.versionId});res.set('Cache-Control','private, no-store').set('X-Content-Type-Options','nosniff').attachment(content.name).type(content.mimetype);if(content.bytes)res.send(content.bytes);else res.sendFile(content.path,error=>{if(error)next(error);});}catch(error){next(error);}});
+  const ticketFor = id => {const ctx=currentContext(),row=S.db.tickets.find(row=>row.id===id&&row.workspaceId===workspace.id);if(!row||!['owner','admin'].includes(ctx.member.role)&&row.openedBy!==actor.key)throw fail(404,'ticket_not_found','This ticket is unavailable.');return row;};
+  app.get('/api/suite/support/tickets/:id/files',read(req=>{const row=ticketFor(req.params.id),ctx=currentContext();return(row.fileRefs||[]).map(reference=>{try{filesContext();const file=runtimeFor('files').resolveSharedFile({actorId:ctx.actor.effectiveUserId,...reference});return{reference,name:file.name,state:'available'};}catch(error){if([403,404,410].includes(error.status))return{reference,name:'',state:'unavailable'};throw error;}});}));
+  app.put('/api/suite/support/tickets/:id/files',write(req=>{const row=ticketFor(req.params.id),ctx=filesContext(),refs=req.body.refs;if(row.state==='closed'||!Array.isArray(refs)||refs.length>10)throw fail(422,'invalid_attachments','Choose up to ten current Files versions.');const values=refs.map(value=>require('./workspace-file-references').reference(value,workspace.id));for(const reference of values)runtimeFor('files').resolveSharedFile({actorId:ctx.actor.effectiveUserId,...reference});row.fileRefs=[...new Map(values.map(value=>[`${value.fileId}:${value.versionId}`,value])).values()];row.updatedAt=S.iso(S.now());S.log(actor.key,'support_files_updated',row.id,{workspaceId:workspace.id});return row.fileRefs;}));
   app.get('/api/suite/people', read(() => workspace.members.filter(row => row.status === 'active' && (context.member.role !== 'guest' || row.userKey === actor.key)).map(row => { const user = identity.findByKey(row.userKey); return { id: String(user?.id || row.id), memberId: row.id, name: user ? identity.fullName(user) : row.name, email: user?.email || row.email, avatar: user?.avatar || null }; })));
   app.get('/api/suite/crm/directory', read(req => {
     const ctx = currentContext(); connectors.requireConnection(workspace, ctx, 'marketing', 'crm');
@@ -194,7 +200,7 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
       res.set('Cache-Control', 'private, no-store').set('X-Content-Type-Options', 'nosniff').attachment(content.name).type(content.mimetype).sendFile(content.path, error => { if (error) next(error); });
     } catch (error) { next(error); }
   });
-  app.post('/api/suite/tasks', write(req => {
+  function createConnectedTask(req) {
     const ctx = currentContext(), body = req.body, source = body.source;
     if (!['chat', 'crm', 'hr', 'marketing'].includes(source) || typeof body.sourceId !== 'string' && typeof body.sourceId !== 'number') throw fail(422, 'invalid_source', 'Choose a current source record.');
     connectors.requireConnection(workspace, ctx, source, 'tasks', { targetWrite: true });
@@ -223,6 +229,19 @@ function createSuiteRouter({ S, identity, principal, runtimeFor, command, accoun
     workspace.commandOperations ??= {}; workspace.commandOperations[key] = { fingerprint: operation.fingerprint, result: clone(result) };
     S.log(actor.key, 'connected_task_created', String(task.id), { workspaceId: workspace.id, source, sourceId: body.sourceId });
     return result;
+  }
+  app.post('/api/suite/tasks', write(createConnectedTask));
+  app.get('/api/suite/crm/recipes',read(()=>runtimeFor('crm').recipes(currentContext())));
+  app.put('/api/suite/crm/recipes',write(req=>runtimeFor('crm',true).configureRecipes(currentContext(),req.body.recipes)));
+  app.post('/api/suite/crm/recipes/run',write(req=>{
+    const ctx=currentContext(),source=runtimeFor('crm',true),pending=source.pendingRecipes(ctx);
+    for(const {recipe,event}of pending){const operationId=`recipe:${recipe.id}:${event.id}`;try{const result=createConnectedTask({...req,body:{source:'crm',sourceType:event.sourceType||'contact',sourceId:event.sourceId||event.contactId,title:recipe.title,projectId:recipe.projectId,sectionId:recipe.sectionId,priority:'medium',operationId},get:name=>name.toLowerCase()==='idempotency-key'?operationId:req.get(name)});source.recordRecipe(ctx,{recipeId:recipe.id,eventId:event.id,contactId:event.contactId,state:'created',taskId:result.task.id,path:result.path,at:S.iso(S.now())});S.db.notifications.unshift({id:S.id('nt'),workspaceId:workspace.id,userKey:actor.key,kind:'crm_recipe',title:recipe.title,at:S.iso(S.now()),read:false});}catch(error){if(!error.status||error.status>=500)throw error;source.recordRecipe(ctx,{recipeId:recipe.id,eventId:event.id,contactId:event.contactId,state:'blocked',code:error.code||'destination_unavailable',at:S.iso(S.now())});}}
+    return source.recipes(ctx);
+  }));
+  app.get('/api/suite/approvals', read(() => {
+    const ctx = currentContext(), rows = admittedTools().flatMap(tool => (runtimeFor(tool).suiteApprovals?.(ctx) || []).map(row => ({ ...row, id: `${tool}:${row.id}`, tool })));
+    if (['owner','admin'].includes(ctx.member.role) && !ctx.actor.readOnly) for (const request of workspace.suite?.requests || []) if (request.state === 'pending') rows.push({ id: 'account:' + request.id, tool: 'account', sourceTool: request.tool, kind: 'access_request', title: identity.fullName(identity.findUser(request.userId)) || request.reason || '', path: '/team?tab=requests', at: request.at });
+    return rows.sort((a,b) => String(b.at || '').localeCompare(String(a.at || '')));
   }));
   app.get('/api/suite/search', read(req => { const query = String(req.query.q || '').toLocaleLowerCase().slice(0, 200); return query ? searchItems().filter(row => row.title.toLocaleLowerCase().includes(query)).slice(0, 50) : []; }));
   app.get('/api/suite/notifications', read(notifications));

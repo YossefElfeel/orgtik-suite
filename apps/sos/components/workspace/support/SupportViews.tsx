@@ -16,6 +16,7 @@ import { statusOf, type AppMe } from "@/redux/features/platform/platformApi";
 import { useCreateTicketMutation, useGetTicketQuery, useGetTicketsQuery, useTicketActionMutation, type Ticket, type TicketCategory, type TicketState } from "@/redux/features/platform/support";
 import { fieldErrorsOf, usePlatformProblem } from "@/components/workspace/account/problems";
 import { Notice } from "@/components/workspace/account/Notice";
+import { TicketFiles } from "@/components/account/TicketFiles";
 import { Composer, Thread } from "./Thread";
 
 const PAGE_SIZE = 10;
@@ -230,6 +231,7 @@ export function TicketDetail() {
       {tk.state === "waiting_for_you" ? <Notice tone="warning">{tk.autoCloseAt ? t("waitingUntil", { date: day(tk.autoCloseAt) }) : t("waiting")}</Notice> : null}
       <Card className="flex max-w-4xl flex-col gap-4">
         <h2 className="font-display text-title-sm text-fg">{t("conversation")}</h2>
+        <TicketFiles ticketId={tk.id} />
         <Thread
           label={t("conversation")}
           empty={t("noMessages")}

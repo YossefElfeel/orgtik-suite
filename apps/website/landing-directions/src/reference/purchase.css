@@ -548,7 +548,11 @@
 }
 .purchase-summary dd {
   margin: 0;
-  white-space: nowrap;
+  min-width: 0;
+  max-width: 65%;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: end;
 }
 .purchase-summary a:not(.commerce-action) {
   color: #e0bfff;

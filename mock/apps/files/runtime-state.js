@@ -42,6 +42,7 @@ function decode(data, manifest) {
     if (row.id !== id || row.folderId != null && !state.folders.has(row.folderId)) invalid("Files snapshot has an invalid file reference.");
     if (row.accessOverride?.permissions !== undefined && (!Array.isArray(row.accessOverride.permissions) || row.accessOverride.permissions.length > 100 || row.accessOverride.permissions.some(grant => !grant || Object.keys(grant).sort().join(',') !== 'permission,userId' || !Number.isSafeInteger(grant.userId) || grant.userId < 1 || !['view', 'comment', 'edit'].includes(grant.permission)) || new Set(row.accessOverride.permissions.map(grant => grant.userId)).size !== row.accessOverride.permissions.length)) invalid('Files per-person permissions are invalid.');
     const storageValid = storage => {
+      if (storage?.kind === 'local') return Object.keys(storage).sort().join() === 'key,kind' && require('../../lib/local-file-assets').validKey(storage.key);
       if (storage?.kind === 'asset') return Object.hasOwn(manifest, storage.key);
       if (storage?.kind !== 'whiteboard') return false;
       try { whiteboards.readWhiteboardStorage(storage); return true; } catch { return false; }

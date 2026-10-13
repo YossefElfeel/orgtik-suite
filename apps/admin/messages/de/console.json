@@ -143,6 +143,17 @@
     "capabilities": "Funktionen, eine pro Zeile",
     "auditExport": "Audit-CSV exportieren",
     "workspaceExport": "Arbeitsbereiche als CSV exportieren",
-    "scheduleLowerPlan": "Niedrigeren Tarif zur Verlängerung planen"
+    "scheduleLowerPlan": "Niedrigeren Tarif zur Verlängerung planen",
+    "connectorDescriptions": {
+      "tasks-files": "Dateiversionen an Aufgaben anheften.",
+      "chat-files": "Dateiversionen und Whiteboards teilen.",
+      "tasks-hr": "Genehmigte Abwesenheit im Kalender zeigen.",
+      "chat-hr": "Abwesenheit im Chat-Kalender zeigen.",
+      "hr-tasks": "Onboarding-Aufgaben und Projekte verbinden.",
+      "crm-tasks": "Folgeaufgaben aus CRM-Daten erstellen.",
+      "crm-files": "Dateiversionen für Lieferungen nutzen.",
+      "chat-tasks": "Aufgaben aus Nachrichten erstellen.",
+      "marketing-crm": "Kampagnenkontakte und Zuordnung verbinden."
+    }
   }
 }

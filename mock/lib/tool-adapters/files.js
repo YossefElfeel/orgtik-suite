@@ -55,6 +55,17 @@ function createWorkspaceRuntime(input, tool, manifest) {
   };
   router.get('/api/v1/files/:fileId/versions/:versionId/download', versionBytes(false));
   router.get('/api/v1/files/:fileId/versions/:versionId/preview', versionBytes(true));
+  router.post('/api/v1/files/local-upload', express.raw({ type: 'application/vnd.orgtik.local-upload', limit: '10mb' }), ownRoute((req, user) => {
+    const local = require('../local-file-assets'); if (!local.enabled()) throw Object.assign(new Error('Local files only.'), { status: 501, code: 'local_files_only' });
+    const parentId = req.get('x-folder-id') || null;
+    shared.authorizeWhiteboard({ actorId: user.id, parentId, write: true });
+    if (!Buffer.isBuffer(req.body)) throw Object.assign(new Error('Choose file bytes.'), { status: 422, code: 'invalid_local_file' });
+    const operationId = req.get('idempotency-key');
+    if (typeof operationId !== 'string' || !/^[a-zA-Z0-9_-]{8,100}$/.test(operationId)) throw Object.assign(new Error('A stable upload operation is required.'), { status: 422, code: 'invalid_operation_id' });
+    if (!state.sampleOperations?.has(`${user.id}:${operationId}`)) features.quota(req.body.length);
+    const row = local.register({ realm, workspaceId: input.workspace.id, name: decodeURIComponent(req.get('x-file-name') || ''), mimetype: req.get('x-file-type'), bytes: req.body });
+    return shared.createSample({ actorId: user.id, sampleId: 'local:' + row.key, parentId, operationId });
+  }));
   created = true;
   const hooks = tool.routes(router, { ...ctx, identity: input.identity, workspaceServices: input.services, commands: input.services.commands }, { state, seedAt: input.initialization.seedAt });
   shared = createWorkspaceFiles({ state, identity: input.identity, workspaceId: input.workspace.id, realm, manifest, assetDir: path.resolve(__dirname, '../../apps/files/assets'), boardAuthority: ctx.boardAuthority, now: () => new Date().toISOString(), fileOut: hooks.serializeFile });

@@ -92,7 +92,7 @@ export function SearchView({ query }: { query: string }) {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <header
-        className={"shrink-0 px-4 py-2.5 "+("ch-background-a8869d")}
+        className={"shrink-0 px-4 py-2.5 "+("ch-background-transparent")}
 
       >
       <Button
@@ -122,10 +122,10 @@ export function SearchView({ query }: { query: string }) {
           />
         </form>
         <div className="flex items-baseline gap-2.5">
-          <h1 className={"hq-title "+("ch-color-7f7330")} >
+          <h1 className={"hq-title "+("ch-color-var---color-ink")} >
             {t("search.title", "Search")}
           </h1>
-          <span className={"tabular text-body-sm "+("ch-color-4a0211")} >
+          <span className={"tabular text-body-sm "+("ch-color-var---color-ink-muted")} >
             {t("search.resultsFor", "{n} results for “{q}”", { n: total, q: query })}
           </span>
         </div>
@@ -138,10 +138,10 @@ export function SearchView({ query }: { query: string }) {
               variant={filter === f.id ? "secondary" : "ghost"}
               onClick={() => setFilter(f.id)}
               aria-pressed={filter === f.id}
-              className={(filter === f.id?"ch-background-1416a8"+' '+"ch-color-55f463"+' '+"ch-border-color-c4235e":"")}
+              className={(filter === f.id?"ch-background-var---color-accent-soft"+' '+"ch-color-var---color-ink-brand"+' '+"ch-border-color-transparent":"")}
             >
               {f.label}
-              <span className={"tabular "+("ch-opacity-383082")} >
+              <span className={"tabular "+("ch-opacity-0-7")} >
                 {f.n}
               </span>
             </Button>
@@ -166,7 +166,7 @@ export function SearchView({ query }: { query: string }) {
           <div className="mx-auto w-full max-w-[720px] px-4 py-4">
             {filter !== "people" && (
               <div className="flex flex-wrap items-center gap-2 pb-4" role="group" aria-label={t("search.narrow", "Narrow the results")}>
-                <select value={inChannel} onChange={(e) => setInChannel(e.target.value)} aria-label={t("search.inChannel", "In")} className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-7aab68"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-dace99"+' '+"ch-color-7f7330"} >
+                <select value={inChannel} onChange={(e) => setInChannel(e.target.value)} aria-label={t("search.inChannel", "In")} className={"ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-6px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-32px"+' '+"ch-color-var---color-ink"} >
                   <option value="">{t("search.anyChannel", "Any conversation")}</option>
                   {channels
                     .filter((c) => !c.archived)
@@ -176,7 +176,7 @@ export function SearchView({ query }: { query: string }) {
                       </option>
                     ))}
                 </select>
-                <select value={fromId} onChange={(e) => setFromId(e.target.value)} aria-label={t("search.from", "From")} className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-7aab68"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-dace99"+' '+"ch-color-7f7330"} >
+                <select value={fromId} onChange={(e) => setFromId(e.target.value)} aria-label={t("search.from", "From")} className={"ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-6px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-32px"+' '+"ch-color-var---color-ink"} >
                   <option value="">{t("search.anyone", "Anyone")}</option>
                   {users.map((u) => (
                     <option key={u.id} value={u.id}>
@@ -184,14 +184,14 @@ export function SearchView({ query }: { query: string }) {
                     </option>
                   ))}
                 </select>
-                <select value={when} onChange={(e) => setWhen(e.target.value as typeof when)} aria-label={t("search.when", "When")} className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-7aab68"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-dace99"+' '+"ch-color-7f7330"} >
+                <select value={when} onChange={(e) => setWhen(e.target.value as typeof when)} aria-label={t("search.when", "When")} className={"ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-6px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-32px"+' '+"ch-color-var---color-ink"} >
                   <option value="any">{t("search.anyTime", "Any time")}</option>
                   <option value="today">{t("search.today", "Today")}</option>
                   <option value="week">{t("search.week", "Last 7 days")}</option>
                   <option value="month">{t("search.month", "Last 30 days")}</option>
                 </select>
-                <label className={"flex cursor-pointer items-center gap-1.5 text-body-sm "+("ch-color-7f7330")} >
-                  <input type="checkbox" checked={hasFile} onChange={(e) => setHasFile(e.target.checked)} className={"ch-width-eb53b5"+' '+"ch-height-946a99"+' '+"ch-accent-color-e56d5b"}  />
+                <label className={"flex cursor-pointer items-center gap-1.5 text-body-sm "+("ch-color-var---color-ink")} >
+                  <input type="checkbox" checked={hasFile} onChange={(e) => setHasFile(e.target.checked)} className={"ch-width-14px"+' '+"ch-height-14px"+' '+"ch-accent-color-var---color-accent"}  />
                   {t("search.hasFile", "Has a file")}
                 </label>
                 {narrowed && (
@@ -225,14 +225,14 @@ export function SearchView({ query }: { query: string }) {
                   <li key={file.id}>
                     <Link
                       href={`/hq/chat/${message.channelId}#${message.id}`}
-                      className={"hq-row flex items-center gap-2.5 px-3 py-2.5 "+("ch-border-radius-8d459a"+' '+"ch-border-5065d4"+' '+"ch-background-751d03")}
+                      className={"hq-row flex items-center gap-2.5 px-3 py-2.5 "+("ch-border-radius-var---radius-card"+' '+"ch-border-1px-solid-var---color-hairline"+' '+"ch-background-var---color-surface")}
 
                     >
-                      <FileText size={16} aria-hidden="true" className={"ch-color-4a0211"}  />
-                      <span className={"flex-1 truncate text-body-sm font-medium "+("ch-color-7f7330")} >
+                      <FileText size={16} aria-hidden="true" className={"ch-color-var---color-ink-muted"}  />
+                      <span className={"flex-1 truncate text-body-sm font-medium "+("ch-color-var---color-ink")} >
                         <bdi>{file.name}</bdi>
                       </span>
-                      <span className={"tabular text-caption "+("ch-color-094083")} >
+                      <span className={"tabular text-caption "+("ch-color-var---color-ink-subtle")} >
                         {file.size}
                       </span>
                     </Link>
@@ -250,15 +250,15 @@ export function SearchView({ query }: { query: string }) {
                     <li key={m.id}>
                       <Link
                         href={`/hq/chat/${m.channelId}#${m.id}`}
-                        className={"hq-row flex flex-col gap-1.5 px-3 py-2.5 "+("ch-border-radius-8d459a"+' '+"ch-border-5065d4"+' '+"ch-background-751d03")}
+                        className={"hq-row flex flex-col gap-1.5 px-3 py-2.5 "+("ch-border-radius-var---radius-card"+' '+"ch-border-1px-solid-var---color-hairline"+' '+"ch-background-var---color-surface")}
 
                       >
                         <span className="flex items-center gap-2">
-                          <Hash size={12} weight="bold" aria-hidden="true" className={"ch-color-094083"}  />
-                          <span className={"text-caption font-medium "+("ch-color-4a0211")} >
+                          <Hash size={12} weight="bold" aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
+                          <span className={"text-caption font-medium "+("ch-color-var---color-ink-muted")} >
                             <bdi>{channel?.name}</bdi>
                           </span>
-                          <span className={"tabular ms-auto text-caption "+("ch-color-094083")} >
+                          <span className={"tabular ms-auto text-caption "+("ch-color-var---color-ink-subtle")} >
                             {formatRelative(m.createdAt)}
                           </span>
                         </span>
@@ -266,7 +266,7 @@ export function SearchView({ query }: { query: string }) {
                           {author && (
                             <Avatar name={author.name} initials={author.initials} tint={author.tint} size={20} hideStatus />
                           )}
-                          <span className={"min-w-0 flex-1 text-body-sm leading-snug "+("ch-color-7f7330")} >
+                          <span className={"min-w-0 flex-1 text-body-sm leading-snug "+("ch-color-var---color-ink")} >
                             <bdi><Highlight text={m.text} term={q} /></bdi>
                           </span>
                         </span>
@@ -286,7 +286,7 @@ export function SearchView({ query }: { query: string }) {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="pb-5">
-      <h2 className={"pb-2 text-body-sm font-semibold "+("ch-color-7f7330")} >
+      <h2 className={"pb-2 text-body-sm font-semibold "+("ch-color-var---color-ink")} >
         {title}
       </h2>
       <ul className="flex flex-col gap-2">{children}</ul>
@@ -320,17 +320,17 @@ function PersonResult({
       <button
         type="button"
         onClick={() => router.push(`/hq/chat/${openDm(userId)}`)}
-        className={"hq-row flex w-full items-center gap-2.5 px-3 py-2.5 text-start "+("ch-border-radius-8d459a"+' '+"ch-border-5065d4"+' '+"ch-background-751d03"+' '+"ch-min-height-5d0881")}
+        className={"hq-row flex w-full items-center gap-2.5 px-3 py-2.5 text-start "+("ch-border-radius-var---radius-card"+' '+"ch-border-1px-solid-var---color-hairline"+' '+"ch-background-var---color-surface"+' '+"ch-min-height-52px")}
 
       >
         <Avatar name={name} initials={initials} tint={tint} status={presence?.status} size={28} />
-        <span className={"flex-1 text-body-sm font-medium "+("ch-color-7f7330")} >
+        <span className={"flex-1 text-body-sm font-medium "+("ch-color-var---color-ink")} >
           {name}
         </span>
-        <span className={"hidden text-caption sm:inline "+("ch-color-4a0211")} >
+        <span className={"hidden text-caption sm:inline "+("ch-color-var---color-ink-muted")} >
           {title}
         </span>
-        <span className={"text-caption font-medium "+("ch-color-55f463")} >
+        <span className={"text-caption font-medium "+("ch-color-var---color-ink-brand")} >
           {t("search.message", "Message")}
         </span>
       </button>
@@ -344,7 +344,7 @@ function Highlight({ text, term }: { text: string; term: string }) {
   return (
     <>
       {text.slice(0, i)}
-      <mark className={"ch-background-1416a8"+' '+"ch-color-55f463"+' '+"ch-font-weight-eed0f8"} >
+      <mark className={"ch-background-var---color-accent-soft"+' '+"ch-color-var---color-ink-brand"+' '+"ch-font-weight-600"} >
         {text.slice(i, i + term.length)}
       </mark>
       {text.slice(i + term.length)}

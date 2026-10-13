@@ -39,6 +39,7 @@ import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import AllFiles from "@/components/shared/AllFiles";
 import CreateFolderDialog from "@/components/dialogs/CreateFolderDialog";
 import { Link, useRouter } from "@/i18n/routing";
+import { LocalFileUpload } from "./LocalFileUpload";
 import { FileRequestError } from "@/lib/file-references";
 import { FileDetails } from "./FileDetails";
 import {
@@ -314,7 +315,7 @@ function FileWorkspaceContent({
                 : view,
         );
   return (
-    <main className="flex min-w-0 flex-col gap-5">
+    <section className="flex min-w-0 flex-col gap-5">
       <header className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-caption font-semibold uppercase tracking-wider text-fg-brand">
@@ -335,6 +336,7 @@ function FileWorkspaceContent({
           >
             {t("createFolder")}
           </Button>
+          {view !== "trash" && data.policy.localUploads ? <LocalFileUpload parentId={folder === "*" ? null : folder || null} disabled={!data.canWrite || full} onSaved={resource.reload} /> : null}
           {view !== "trash" ? (
             <Button
               startIcon={<Plus />}
@@ -531,7 +533,7 @@ function FileWorkspaceContent({
         }
       />
       {view !== "trash" ? (
-        <div className="flex flex-wrap gap-2" aria-label={t("moveTargets")}>
+        <details className="rounded-field border border-line p-3"><summary className="cursor-pointer text-body-sm font-semibold">{t("moveTargets")}</summary><div className="mt-3 flex max-h-48 flex-wrap gap-2 overflow-y-auto" aria-label={t("moveTargets")}>
           <Button size="sm" variant="ghost" onClick={() => setFolder("*")}>
             {t("allFolders")}
           </Button>
@@ -570,7 +572,7 @@ function FileWorkspaceContent({
               {item.name}
             </Button>
           ))}
-        </div>
+        </div></details>
       ) : null}
       {data.canWrite ? (
         <div className="flex flex-wrap items-center gap-3">
@@ -766,7 +768,7 @@ function FileWorkspaceContent({
         onOpenChange={setRequestOpen}
         library={data}
       />
-    </main>
+    </section>
   );
 }
 function SampleWizard({

@@ -10,7 +10,7 @@ const script = `(function(){try{var m=document.cookie.match(/(?:^|; )${THEME_COO
  * set `data-theme` itself; the script makes static and cached pages right too.)
  */
 export function ThemeScript({ nonce }) {
-    return _jsx("script", { nonce: nonce, dangerouslySetInnerHTML: { __html: script } });
+    return _jsx("script", { async: true, nonce: nonce, dangerouslySetInnerHTML: { __html: script } });
 }
 /** The theme a cookie value names ("dark" or "light"); the default for anything else. */
 export function themeFrom(cookieValue) {

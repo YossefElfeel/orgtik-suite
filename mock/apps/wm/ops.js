@@ -40,12 +40,7 @@ function sampleLeads(now) {
 const mask = (s, keep = 1) => (s ? s.slice(0, keep) + "•".repeat(Math.max(3, s.length - keep)) : s);
 const maskEmail = (e) => (e ? e.replace(/^(.)(.*)(@.*)$/, (_, a, b, c) => a + "•".repeat(Math.max(3, b.length)) + c) : e);
 // A cell that starts like a formula runs as one in a spreadsheet: prefix it (CSV injection).
-const cell = (v) => {
-  const s = String(v ?? "");
-  const safe = /^[=+\-@\t\r]/.test(s) ? `'${s}` : s;
-  return /[",\n;]/.test(safe) ? `"${safe.replace(/"/g, '""')}"` : safe;
-};
-
+const { csvCell: cell } = require("../../lib/csv");
 function makeOps({ store, now }) {
   const leads = new Map(sampleLeads(now).map((l) => [l.id, l]));
   let nextLead = leads.size + 1;

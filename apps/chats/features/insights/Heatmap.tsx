@@ -67,10 +67,10 @@ export function Heatmap({
     <div>
       <div className="flex items-center justify-between gap-3 pb-3">
         <div>
-          <h3 className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
+          <h3 className={"text-body-sm font-semibold "+("ch-color-var---color-ink")} >
             {title ?? t("insights.availabilityTitle", "When the team is around")}
           </h3>
-          <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
+          <p className={"mt-0.5 text-caption "+("ch-color-var---color-ink-muted")} >
             {body ??
               t("insights.availabilityBody", "People present at each hour, across the whole team of {n}.", {
                 n: cohortSize,
@@ -85,20 +85,20 @@ export function Heatmap({
 
       {showTable ? (
         <div className="overflow-x-auto">
-          <PaginatedTable><table className={"w-full text-caption "+("ch-border-collapse-454826")} >
+          <PaginatedTable><table className={"w-full text-caption "+("ch-border-collapse-collapse")} >
             <caption className="sr-only">
               {t("insights.availabilityTitle", "When the team is around")}
             </caption>
             <thead>
               <tr>
-                <th scope="col" className={"p-1.5 text-start "+("ch-color-4a0211")} >
+                <th scope="col" className={"p-1.5 text-start "+("ch-color-var---color-ink-muted")} >
                   {t("insights.day", "Day")}
                 </th>
                 {hours.map((h) => (
                   <th
                     key={h}
                     scope="col"
-                    className={"tabular p-1.5 text-end "+("ch-color-4a0211"+' '+"ch-font-weight-02a2d3")}
+                    className={"tabular p-1.5 text-end "+("ch-color-var---color-ink-muted"+' '+"ch-font-weight-500")}
 
                   >
                     {String(h).padStart(2, "0")}
@@ -108,12 +108,12 @@ export function Heatmap({
             </thead>
             <tbody>
               {grid.map((row, d) => (
-                <tr key={d} className={"ch-border-top-c9ce2a"} >
-                  <th scope="row" className={"p-1.5 text-start font-medium "+("ch-color-7f7330")} >
+                <tr key={d} className={"ch-border-top-1px-solid-var---color-hairline"} >
+                  <th scope="row" className={"p-1.5 text-start font-medium "+("ch-color-var---color-ink")} >
                     {dayLabel(d)}
                   </th>
                   {hours.map((h) => (
-                    <td key={h} className={"tabular p-1.5 text-end "+("ch-color-7f7330")} >
+                    <td key={h} className={"tabular p-1.5 text-end "+("ch-color-var---color-ink")} >
                       {row[h] ?? 0}
                     </td>
                   ))}
@@ -124,7 +124,7 @@ export function Heatmap({
         </div>
       ) : (
         <div className="overflow-x-auto pb-1">
-          <div className={"relative "+("ch-min-width-512bf9")} >
+          <div className={"relative "+("ch-min-width-520px")} >
             {/* Hour axis, recessive. Every third hour is labelled; a number on
                 every column is noise, not information. */}
             <div
@@ -134,7 +134,7 @@ export function Heatmap({
               {hours.map((h) => (
                 <span
                   key={h}
-                  className={"tabular flex-1 text-center text-micro "+("ch-color-094083")}
+                  className={"tabular flex-1 text-center text-micro "+("ch-color-var---color-ink-subtle")}
 
                 >
                   {h % 3 === 0 ? String(h).padStart(2, "0") : ""}
@@ -145,7 +145,7 @@ export function Heatmap({
             {grid.map((row, d) => (
               <div key={d} className="mt-[2px] flex items-center gap-[2px]">
                 <span
-                  className={"w-[32px] shrink-0 text-micro font-medium "+("ch-color-4a0211")}
+                  className={"w-[32px] shrink-0 text-micro font-medium "+("ch-color-var---color-ink-muted")}
 
                 >
                   {dayLabel(d)}
@@ -158,7 +158,7 @@ export function Heatmap({
                       key={h}
                       tabIndex={0}
                       role="img"
-                      className={("flex-1 "+("ch-height-ca02a9"+' '+"ch-border-radius-edd97e"+' '+(hovered?.d === d && hovered?.h === h?"ch-outline-c5700c":(index > 0?"ch-outline-153950":"ch-outline-f9b4dc"))+' '+(hovered?.d === d && hovered?.h === h?"ch-outline-offset-1f2868":"ch-outline-offset-ce7a09")))+" "+('ch-heat-'+index)}
+                      className={("flex-1 "+("ch-height-22px"+' '+"ch-border-radius-var---ot-radius-field"+' '+(hovered?.d === d && hovered?.h === h?"ch-outline-2px-solid-var---color-ink":(index > 0?"ch-outline-1px-solid-color-mix-in-srgb-var---color-scale-4-12pct-transparent":"ch-outline-none"))+' '+(hovered?.d === d && hovered?.h === h?"ch-outline-offset-1px":"ch-outline-offset-0")))+" "+('ch-heat-'+index)}
                       onMouseEnter={() => setHovered({ d, h })}
                       onMouseLeave={() => setHovered(null)}
                       onFocus={() => setHovered({ d, h })}
@@ -181,13 +181,13 @@ export function Heatmap({
                 describes is worse than one that does not move. */}
             <div className="mt-2.5 h-[18px]" aria-hidden="true">
               {hovered && (
-                <p className={"text-caption "+("ch-color-7f7330")} >
+                <p className={"text-caption "+("ch-color-var---color-ink")} >
                   <span className="font-medium">{dayLabel(hovered.d)}</span>
-                  <span className={"tabular "+("ch-color-4a0211")} >
+                  <span className={"tabular "+("ch-color-var---color-ink-muted")} >
                     {" "}
                     {String(hovered.h).padStart(2, "0")}:00
                   </span>
-                  <span className={"ch-color-4a0211"} > · </span>
+                  <span className={"ch-color-var---color-ink-muted"} > · </span>
                   <span className="font-medium">
                     {t("insights.cellPeople", "{n} of {total} people", {
                       n: grid[hovered.d]?.[hovered.h] ?? 0,
@@ -200,16 +200,16 @@ export function Heatmap({
 
             {/* Legend with real numbers, not just a gradient bar. */}
             <div className="mt-1 flex items-center gap-2">
-              <span className={"text-micro "+("ch-color-094083")} >
+              <span className={"text-micro "+("ch-color-var---color-ink-subtle")} >
                 {t("insights.nobody", "nobody")}
               </span>
               <span className="flex gap-[2px]">
-                <span className={"ch-width-7375d5"+' '+"ch-height-b9986b"+' '+"ch-background-1f1dc1"+' '+"ch-border-radius-edd97e"}  />
+                <span className={"ch-width-16px"+' '+"ch-height-9px"+' '+"ch-background-var---color-scale-empty"+' '+"ch-border-radius-var---ot-radius-field"}  />
                 {RAMP.map((c) => (
-                  <span key={c} className={("ch-width-7375d5"+' '+"ch-height-b9986b"+' '+"ch-border-radius-edd97e")+" "+('ch-heat-'+(RAMP.indexOf(c)+1))}  />
+                  <span key={c} className={("ch-width-16px"+' '+"ch-height-9px"+' '+"ch-border-radius-var---ot-radius-field")+" "+('ch-heat-'+(RAMP.indexOf(c)+1))}  />
                 ))}
               </span>
-              <span className={"tabular text-micro "+("ch-color-094083")} >
+              <span className={"tabular text-micro "+("ch-color-var---color-ink-subtle")} >
                 {t("insights.upTo", "up to {n}", { n: max })}
               </span>
             </div>

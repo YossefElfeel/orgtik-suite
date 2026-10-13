@@ -1,0 +1,485 @@
+{
+  "Roadmap.saveError": {
+    "en": "Could not save. Your changes are still here. Try again.",
+    "ar": "تعذر الحفظ. لا تزال تغييراتك موجودة. حاول مجددًا.",
+    "de": "Speichern fehlgeschlagen. Ihre Änderungen bleiben erhalten.",
+    "fr": "Enregistrement impossible. Vos modifications sont conservées.",
+    "it": "Salvataggio non riuscito. Le modifiche sono conservate."
+  },
+  "Roadmap.saved": {
+    "en": "Saved",
+    "ar": "تم الحفظ",
+    "de": "Gespeichert",
+    "fr": "Enregistré",
+    "it": "Salvato"
+  },
+  "Roadmap.search": {
+    "en": "Search",
+    "ar": "بحث",
+    "de": "Suchen",
+    "fr": "Rechercher",
+    "it": "Cerca"
+  },
+  "Roadmap.noMatch": {
+    "en": "No matching results",
+    "ar": "لا توجد نتائج مطابقة",
+    "de": "Keine passenden Ergebnisse",
+    "fr": "Aucun résultat correspondant",
+    "it": "Nessun risultato corrispondente"
+  },
+  "Roadmap.selectedLimit": {
+    "en": "{count} / {limit} selected",
+    "ar": "تم تحديد {count} من {limit}",
+    "de": "{count} / {limit} ausgewählt",
+    "fr": "{count} / {limit} sélectionnés",
+    "it": "{count} / {limit} selezionati"
+  },
+  "Roadmap.reviewFirst": {
+    "en": "Complete this step before marking it reviewed.",
+    "ar": "أكمل هذه الخطوة قبل وضع علامة المراجعة.",
+    "de": "Schließen Sie diesen Schritt vor der Prüfung ab.",
+    "fr": "Terminez cette étape avant la vérification.",
+    "it": "Completa questo passaggio prima della verifica."
+  },
+  "Roadmap.chooseLoan": {
+    "en": "Choose an active loan",
+    "ar": "اختر قرضًا نشطًا",
+    "de": "Aktives Darlehen auswählen",
+    "fr": "Choisir un prêt actif",
+    "it": "Scegli un prestito attivo"
+  },
+  "Roadmap.noLoans": {
+    "en": "No active loans for this employee",
+    "ar": "لا توجد قروض نشطة لهذا الموظف",
+    "de": "Keine aktiven Darlehen für diese Person",
+    "fr": "Aucun prêt actif pour cette personne",
+    "it": "Nessun prestito attivo per questa persona"
+  },
+  "Roadmap.loanAmount": {
+    "en": "Enter a positive amount within the remaining balance.",
+    "ar": "أدخل مبلغًا موجبًا ضمن الرصيد المتبقي.",
+    "de": "Positiven Betrag innerhalb des Restbetrags eingeben.",
+    "fr": "Saisissez un montant positif ne dépassant pas le solde.",
+    "it": "Inserisci un importo positivo entro il saldo residuo."
+  },
+  "Roadmap.payInvoice": {
+    "en": "Pay this invoice · simulated",
+    "ar": "دفع هذه الفاتورة · محاكاة",
+    "de": "Rechnung bezahlen · simuliert",
+    "fr": "Payer cette facture · simulation",
+    "it": "Paga questa fattura · simulazione"
+  },
+  "Roadmap.approvals": {
+    "en": "Approvals",
+    "ar": "الموافقات",
+    "de": "Freigaben",
+    "fr": "Approbations",
+    "it": "Approvazioni"
+  },
+  "Roadmap.noApprovals": {
+    "en": "Nothing needs your approval",
+    "ar": "لا توجد عناصر تحتاج موافقتك",
+    "de": "Keine ausstehenden Freigaben",
+    "fr": "Aucune approbation en attente",
+    "it": "Nessuna approvazione in attesa"
+  },
+  "Roadmap.review": {
+    "en": "Review in source app",
+    "ar": "مراجعة في التطبيق المصدر",
+    "de": "In Quellanwendung prüfen",
+    "fr": "Vérifier dans l’application source",
+    "it": "Esamina nell’app di origine"
+  },
+  "Roadmap.allTools": {
+    "en": "All tools",
+    "ar": "كل الأدوات",
+    "de": "Alle Anwendungen",
+    "fr": "Toutes les applications",
+    "it": "Tutte le applicazioni"
+  },
+  "Roadmap.defaultLanguage": {
+    "en": "Default language",
+    "ar": "اللغة الافتراضية",
+    "de": "Standardsprache",
+    "fr": "Langue par défaut",
+    "it": "Lingua predefinita"
+  },
+  "Roadmap.timeZone": {
+    "en": "Time zone",
+    "ar": "المنطقة الزمنية",
+    "de": "Zeitzone",
+    "fr": "Fuseau horaire",
+    "it": "Fuso orario"
+  },
+  "Roadmap.logo": {
+    "en": "Workspace logo",
+    "ar": "شعار مساحة العمل",
+    "de": "Arbeitsbereichslogo",
+    "fr": "Logo de l’espace",
+    "it": "Logo dello spazio"
+  },
+  "Roadmap.chooseFile": {
+    "en": "Choose a local file",
+    "ar": "اختر ملفًا محليًا",
+    "de": "Lokale Datei auswählen",
+    "fr": "Choisir un fichier local",
+    "it": "Scegli un file locale"
+  },
+  "Roadmap.attachments": {
+    "en": "Files attachments",
+    "ar": "مرفقات الملفات",
+    "de": "Dateianhänge",
+    "fr": "Pièces jointes",
+    "it": "Allegati"
+  },
+  "Roadmap.upload": {
+    "en": "Add local file",
+    "ar": "إضافة ملف محلي",
+    "de": "Lokale Datei hinzufügen",
+    "fr": "Ajouter un fichier local",
+    "it": "Aggiungi file locale"
+  },
+  "Roadmap.localOnly": {
+    "en": "Stored in this local prototype",
+    "ar": "محفوظ في هذا النموذج المحلي",
+    "de": "In diesem lokalen Prototyp gespeichert",
+    "fr": "Stocké dans ce prototype local",
+    "it": "Archiviato in questo prototipo locale"
+  },
+  "Roadmap.assignee": {
+    "en": "Assignee",
+    "ar": "المسؤول",
+    "de": "Zuständig",
+    "fr": "Responsable",
+    "it": "Assegnatario"
+  },
+  "Roadmap.dueDate": {
+    "en": "Due date",
+    "ar": "تاريخ الاستحقاق",
+    "de": "Fälligkeitsdatum",
+    "fr": "Échéance",
+    "it": "Scadenza"
+  },
+  "Roadmap.editTeam": {
+    "en": "Edit team",
+    "ar": "تعديل الفريق",
+    "de": "Team bearbeiten",
+    "fr": "Modifier l’équipe",
+    "it": "Modifica squadra"
+  },
+  "Roadmap.removeMember": {
+    "en": "Remove from this team",
+    "ar": "إزالة من هذا الفريق",
+    "de": "Aus diesem Team entfernen",
+    "fr": "Retirer de cette équipe",
+    "it": "Rimuovi da questa squadra"
+  },
+  "Roadmap.removeBookmark": {
+    "en": "Remove bookmark",
+    "ar": "إزالة الإشارة المرجعية",
+    "de": "Lesezeichen entfernen",
+    "fr": "Retirer le favori",
+    "it": "Rimuovi segnalibro"
+  },
+  "Roadmap.moveBefore": {
+    "en": "Move earlier",
+    "ar": "نقل إلى السابق",
+    "de": "Nach vorne verschieben",
+    "fr": "Déplacer avant",
+    "it": "Sposta prima"
+  },
+  "Roadmap.moveAfter": {
+    "en": "Move later",
+    "ar": "نقل إلى التالي",
+    "de": "Nach hinten verschieben",
+    "fr": "Déplacer après",
+    "it": "Sposta dopo"
+  },
+  "Roadmap.customFields": {
+    "en": "Employee custom fields",
+    "ar": "حقول الموظفين المخصصة",
+    "de": "Benutzerdefinierte Mitarbeiterfelder",
+    "fr": "Champs personnalisés des employés",
+    "it": "Campi personalizzati dei dipendenti"
+  },
+  "Roadmap.dailyOverview": {
+    "en": "Today at work",
+    "ar": "العمل اليوم",
+    "de": "Heute bei der Arbeit",
+    "fr": "Aujourd’hui au travail",
+    "it": "Oggi al lavoro"
+  },
+  "Roadmap.exportChat": {
+    "en": "Export channel history",
+    "ar": "تصدير سجل القناة",
+    "de": "Kanalverlauf exportieren",
+    "fr": "Exporter l’historique du canal",
+    "it": "Esporta cronologia canale"
+  },
+  "Roadmap.searchEmoji": {
+    "en": "Search emoji",
+    "ar": "بحث عن رمز تعبيري",
+    "de": "Emoji suchen",
+    "fr": "Rechercher un émoji",
+    "it": "Cerca emoji"
+  },
+  "Roadmap.tags": {
+    "en": "Tags",
+    "ar": "الوسوم",
+    "de": "Tags",
+    "fr": "Étiquettes",
+    "it": "Tag"
+  },
+  "Roadmap.stage": {
+    "en": "CRM stage",
+    "ar": "مرحلة إدارة العملاء",
+    "de": "CRM-Phase",
+    "fr": "Étape CRM",
+    "it": "Fase CRM"
+  },
+  "Roadmap.engagement": {
+    "en": "Engagement",
+    "ar": "التفاعل",
+    "de": "Interaktion",
+    "fr": "Engagement",
+    "it": "Coinvolgimento"
+  },
+  "Roadmap.audiencePreview": {
+    "en": "Matching audience preview",
+    "ar": "معاينة الجمهور المطابق",
+    "de": "Vorschau der passenden Zielgruppe",
+    "fr": "Aperçu de l’audience correspondante",
+    "it": "Anteprima pubblico corrispondente"
+  },
+  "Roadmap.automation": {
+    "en": "Deal follow-up recipes",
+    "ar": "قواعد متابعة الصفقات",
+    "de": "Regeln zur Geschäftsnachverfolgung",
+    "fr": "Règles de suivi des affaires",
+    "it": "Regole di follow-up delle trattative"
+  },
+  "Roadmap.enabled": {
+    "en": "Enabled",
+    "ar": "مفعّل",
+    "de": "Aktiviert",
+    "fr": "Activé",
+    "it": "Attivato"
+  },
+  "Roadmap.title": {
+    "en": "Title",
+    "ar": "العنوان",
+    "de": "Titel",
+    "fr": "Titre",
+    "it": "Titolo"
+  },
+  "Roadmap.add": {
+    "en": "Add",
+    "ar": "إضافة",
+    "de": "Hinzufügen",
+    "fr": "Ajouter",
+    "it": "Aggiungi"
+  },
+  "Roadmap.save": {
+    "en": "Save",
+    "ar": "حفظ",
+    "de": "Speichern",
+    "fr": "Enregistrer",
+    "it": "Salva"
+  },
+  "Roadmap.remove": {
+    "en": "Remove",
+    "ar": "إزالة",
+    "de": "Entfernen",
+    "fr": "Retirer",
+    "it": "Rimuovi"
+  },
+  "Roadmap.type": {
+    "en": "Type",
+    "ar": "النوع",
+    "de": "Typ",
+    "fr": "Type",
+    "it": "Tipo"
+  },
+  "Roadmap.text": {
+    "en": "Text",
+    "ar": "نص",
+    "de": "Text",
+    "fr": "Texte",
+    "it": "Testo"
+  },
+  "Roadmap.date": {
+    "en": "Date",
+    "ar": "تاريخ",
+    "de": "Datum",
+    "fr": "Date",
+    "it": "Data"
+  },
+  "Roadmap.choices": {
+    "en": "Comma-separated choices",
+    "ar": "خيارات مفصولة بفواصل",
+    "de": "Optionen, durch Kommas getrennt",
+    "fr": "Choix séparés par des virgules",
+    "it": "Opzioni separate da virgole"
+  },
+  "Roadmap.number": {
+    "en": "Number",
+    "ar": "رقم",
+    "de": "Zahl",
+    "fr": "Nombre",
+    "it": "Numero"
+  },
+  "Roadmap.empty": {
+    "en": "No items yet",
+    "ar": "لا توجد عناصر بعد",
+    "de": "Noch keine Einträge",
+    "fr": "Aucun élément",
+    "it": "Nessun elemento"
+  },
+  "Roadmap.fileError": {
+    "en": "Choose a supported file within the size limit.",
+    "ar": "اختر ملفًا مدعومًا ضمن حد الحجم.",
+    "de": "Unterstützte Datei innerhalb des Größenlimits auswählen.",
+    "fr": "Choisissez un fichier pris en charge respectant la taille limite.",
+    "it": "Scegli un formato supportato entro il limite di dimensione."
+  },
+  "Roadmap.deliveredMock": {
+    "en": "Mock delivery recorded",
+    "ar": "تم تسجيل تسليم محاكى",
+    "de": "Simulierte Zustellung erfasst",
+    "fr": "Livraison simulée enregistrée",
+    "it": "Consegna simulata registrata"
+  },
+  "Roadmap.notDeliveredMock": {
+    "en": "No mock delivery recorded",
+    "ar": "لم يُسجل تسليم محاكى",
+    "de": "Keine simulierte Zustellung erfasst",
+    "fr": "Aucune livraison simulée enregistrée",
+    "it": "Nessuna consegna simulata registrata"
+  },
+  "Roadmap.cancel": {
+    "en": "Cancel",
+    "ar": "إلغاء",
+    "de": "Abbrechen",
+    "fr": "Annuler",
+    "it": "Annulla"
+  },
+  "Roadmap.project": {
+    "en": "Tasks project",
+    "ar": "مشروع المهام",
+    "de": "Aufgabenprojekt",
+    "fr": "Projet de tâches",
+    "it": "Progetto attività"
+  },
+  "Roadmap.section": {
+    "en": "Board section",
+    "ar": "قسم اللوحة",
+    "de": "Board-Bereich",
+    "fr": "Section du tableau",
+    "it": "Sezione della bacheca"
+  },
+  "Roadmap.run": {
+    "en": "Run local recipes",
+    "ar": "تشغيل القواعد المحلية",
+    "de": "Lokale Regeln ausführen",
+    "fr": "Exécuter les règles locales",
+    "it": "Esegui regole locali"
+  },
+  "Roadmap.pendingDraft": {
+    "en": "Unsaved changes are retained on this computer.",
+    "ar": "تُحتفظ بالتغييرات غير المحفوظة على هذا الجهاز.",
+    "de": "Nicht gespeicherte Änderungen bleiben auf diesem Computer erhalten.",
+    "fr": "Les modifications non enregistrées sont conservées sur cet ordinateur.",
+    "it": "Le modifiche non salvate restano su questo computer."
+  },
+  "Roadmap.trialNotice": {
+    "en": "Your trial is ending",
+    "ar": "توشك الفترة التجريبية على الانتهاء",
+    "de": "Ihre Testphase endet",
+    "fr": "Votre essai se termine",
+    "it": "Il periodo di prova sta terminando"
+  },
+  "Roadmap.paymentNotice": {
+    "en": "Payment needs attention",
+    "ar": "يتطلب الدفع مراجعة",
+    "de": "Zahlung erfordert Aufmerksamkeit",
+    "fr": "Un paiement nécessite votre attention",
+    "it": "Un pagamento richiede attenzione"
+  },
+  "Roadmap.priceNotice": {
+    "en": "Pricing update",
+    "ar": "تحديث الأسعار",
+    "de": "Preisänderung",
+    "fr": "Mise à jour des prix",
+    "it": "Aggiornamento prezzi"
+  },
+  "Roadmap.serviceNotice": {
+    "en": "Service request updated",
+    "ar": "تم تحديث طلب الخدمة",
+    "de": "Serviceanfrage aktualisiert",
+    "fr": "Demande de service mise à jour",
+    "it": "Richiesta di servizio aggiornata"
+  },
+  "Roadmap.noTaxChecks": {
+    "en": "No tax checks yet",
+    "ar": "لا توجد فحوصات ضريبية بعد",
+    "de": "Noch keine Steuerprüfungen",
+    "fr": "Aucune vérification fiscale",
+    "it": "Nessuna verifica fiscale"
+  },
+  "Roadmap.anyEngagement": {
+    "en": "Any engagement",
+    "ar": "أي تفاعل",
+    "de": "Beliebige Interaktion",
+    "fr": "Toute interaction",
+    "it": "Qualsiasi coinvolgimento"
+  },
+  "Roadmap.mentionNotice": {
+    "en": "You were mentioned",
+    "ar": "تمت الإشارة إليك",
+    "de": "Sie wurden erwähnt",
+    "fr": "Vous avez été mentionné",
+    "it": "Ti hanno menzionato"
+  },
+  "Roadmap.replyNotice": {
+    "en": "New reply",
+    "ar": "رد جديد",
+    "de": "Neue Antwort",
+    "fr": "Nouvelle réponse",
+    "it": "Nuova risposta"
+  },
+  "Roadmap.contractNotice": {
+    "en": "Contract awaiting review",
+    "ar": "عقد ينتظر المراجعة",
+    "de": "Vertrag wartet auf Prüfung",
+    "fr": "Contrat à examiner",
+    "it": "Contratto in attesa di revisione"
+  },
+  "Roadmap.ticketNotice": {
+    "en": "New support ticket",
+    "ar": "تذكرة دعم جديدة",
+    "de": "Neues Supportticket",
+    "fr": "Nouveau ticket de support",
+    "it": "Nuovo ticket di assistenza"
+  },
+  "Roadmap.offerNotice": {
+    "en": "New offer request",
+    "ar": "طلب عرض جديد",
+    "de": "Neue Angebotsanfrage",
+    "fr": "Nouvelle demande de devis",
+    "it": "Nuova richiesta di offerta"
+  },
+  "Roadmap.deleteTeam": {
+    "en": "Delete team",
+    "ar": "حذف الفريق",
+    "de": "Team löschen",
+    "fr": "Supprimer l’équipe",
+    "it": "Elimina squadra"
+  },
+  "Roadmap.deleteTeamImpact": {
+    "en": "Removes this team and its bookmarks. Projects and tasks remain; team assignments are removed.",
+    "ar": "يزيل الفريق وإشاراته المرجعية. تبقى المشاريع والمهام وتُزال إسنادات الفريق.",
+    "de": "Entfernt das Team und seine Lesezeichen. Projekte und Aufgaben bleiben; Teamzuweisungen entfallen.",
+    "fr": "Supprime l’équipe et ses favoris. Les projets et tâches restent ; les affectations d’équipe sont retirées.",
+    "it": "Elimina la squadra e i preferiti. Progetti e attività restano; vengono rimosse le assegnazioni alla squadra."
+  }
+}

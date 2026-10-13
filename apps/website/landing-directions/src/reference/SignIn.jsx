@@ -1,12 +1,12 @@
 import { managedPageTree } from "../content/managed-page";
 import { content } from "../content";
-import { bare } from "../content/locale";
+import { bare, withLocale } from "../content/locale";
 import React from "react";
 import { LanguageMenu } from "./LanguageMenu";
 import { AccountControl } from "./AccountControl";
 import { CartLink } from "./CartControls";
 import { ReferencePage } from "./ReferencePage";
-import { routeHash, setRoute, toSiteHref } from "./navigation";
+import { routeHash, toSiteHref } from "./navigation";
 import { attr, run } from "../content/copy";
 import { msg } from "../content/strings";
 import {
@@ -30,6 +30,7 @@ export default class SignIn extends ReferencePage {
     done:
       bare(window.location.pathname) !== "/sign-up" && !!getPreviewCustomer(),
     error: "",
+    signingIn: false,
     hoverCard: null,
     narrow: window.innerWidth < 900,
     xwide: window.innerWidth >= 1180,
@@ -539,7 +540,7 @@ export default class SignIn extends ReferencePage {
       const path = mode === "signup" ? "/sign-up" : "/sign-in";
       if (bare(window.location.pathname) !== path && window.__orgNav) {
         accountTabToFocus = mode;
-        window.__orgNav(path);
+        window.__orgNav(withLocale(path) + window.location.search);
         return;
       }
       this.setState({ mode, done: false, error: "" }, () => {
@@ -631,18 +632,18 @@ export default class SignIn extends ReferencePage {
         // Reset password continues in the suite: it sends the code, its page takes the new password.
         if (rec) {
           if (this.signingIn) return;
-          this.signingIn = true;
+          this.signingIn = true; this.setState({ signingIn: true });
           resetInSuite(em)
             .then((href) => window.location.assign(href))
             .catch(() => {
-              this.signingIn = false;
+              this.signingIn = false; this.setState({ signingIn: false });
               this.setState({ error: msg("SuiteSignIn:2") });
             });
           return;
         }
         // Sign in and Create account open the suite, signed in with that account.
         if (this.signingIn) return;
-        this.signingIn = true;
+        this.signingIn = true; this.setState({ signingIn: true });
         (signup
           ? signUpToSuite({ name, email: em, password: pw })
           : signInToSuite(em, pw)
@@ -653,10 +654,11 @@ export default class SignIn extends ReferencePage {
               email: em,
               company: "",
             });
-            window.location.assign(href);
+            const returnToCart = new URLSearchParams(window.location.search).get("returnTo") === "cart";
+            if (returnToCart) this.nav(withLocale("/cart")); else window.location.assign(href);
           })
           .catch((err) => {
-            this.signingIn = false;
+            this.signingIn = false; this.setState({ signingIn: false });
             this.setState({
               error:
                 err.message === "credentials"
@@ -1256,6 +1258,7 @@ export default class SignIn extends ReferencePage {
                     {v.showForm && (
                       <>
                         <form
+                          aria-busy={this.state.signingIn}
                           onSubmit={v.submit}
                           noValidate
                           style={{
@@ -1400,6 +1403,7 @@ export default class SignIn extends ReferencePage {
                           )}
                           <button
                             type={"submit"}
+                            disabled={this.state.signingIn}
                             style={{
                               display: "flex",
                               justifyContent: "space-between",

@@ -132,7 +132,7 @@ export default function PayrollDetailsDraftSheet({
       mode: adj.mode || "fixed",
     }));
 
-  const loanDeductions: SalaryItem[] = (itemData?.loanApplications || []).map(
+  const loanDeductions: SalaryItem[] = (itemData?.loanApplications || []).filter((loan: { appliedAmount: number }) => loan.appliedAmount > 0).map(
     (loan: any) => ({
       id: loan.id.toString(),
       title: loan.notes || t("draftSheet.loanInstallmentAuto"),
@@ -179,7 +179,7 @@ export default function PayrollDetailsDraftSheet({
         },
       }).unwrap();
     } catch (error) {
-      console.error("Failed to update adjustment:", error);
+      throw error;
     }
   };
 
@@ -199,7 +199,7 @@ export default function PayrollDetailsDraftSheet({
         },
       }).unwrap();
     } catch (err) {
-      console.error("Failed to update loan application", err);
+      throw err;
     }
   };
 
@@ -407,7 +407,7 @@ export default function PayrollDetailsDraftSheet({
             isBonus={false}
             formatCurrency={formatCurrency}
             onUpdateItem={handleUpdateLoanDeduction}
-            onDeleteItem={() => {}}
+            onDeleteItem={(id) => updateLoanApplication({ id: Number(id), body: { appliedAmount: 0 } }).unwrap()}
             currencySymbol={currency ?? ""}
             status={status}
             runId={runId}
@@ -499,7 +499,7 @@ interface EditableRowProps {
   formatCurrency: (value: number) => string;
   currencySymbol: string;
   status: string;
-  onSave: (data: { title: string; amount: number }) => void;
+  onSave: (data: { title: string; amount: number }) => Promise<unknown> | void;
   /** Runs the delete; the confirm waits for it. */
   onDelete: () => Promise<unknown> | void;
 }
@@ -515,7 +515,7 @@ function EditableRow({
 }: EditableRowProps) {
   const [isEditing, setIsEditing] = useState(false);
   const tDelete = useTranslations("payroll.adjustmentRow");
-  const t = useTranslations("payroll");
+  const t = useTranslations("payroll"), r = useTranslations("Roadmap");
 const isDraft = status === "draft" || status === "change_requested";
 
   const form = useForm<SalaryItemFormValues>({
@@ -526,20 +526,24 @@ const isDraft = status === "draft" || status === "change_requested";
     },
   });
 
-  const onSubmit = (values: SalaryItemFormValues) => {
+  const onSubmit = async (values: SalaryItemFormValues) => {
     const finalAmount = isBonus
       ? Number(values.amount)
       : -Math.abs(Number(values.amount));
-    onSave({ title: values.title, amount: finalAmount || 0 });
-    setIsEditing(false);
+    try {
+      await onSave({ title: values.title, amount: finalAmount || 0 });
+      setIsEditing(false);
+    } catch { form.setError("root", { message: r("saveError") }); }
   };
 
   if (isEditing && isDraft) {
     return (
       <form
+        aria-busy={form.formState.isSubmitting}
         onSubmit={form.handleSubmit(onSubmit)}
         className="p-3 flex items-center justify-between gap-4 bg-sunken first:rounded-t-xl last:rounded-b-xl"
       >
+        {form.formState.errors.root ? <p role="alert" className="text-caption text-danger">{form.formState.errors.root.message}</p> : null}
         <Form {...form}>
           <div className="flex flex-1 items-center gap-2">
             <div className="w-[100px] shrink-0">
@@ -570,6 +574,7 @@ const isDraft = status === "draft" || status === "change_requested";
         <div className="flex gap-1.5 shrink-0">
           <button
             type="submit"
+            disabled={form.formState.isSubmitting}
             aria-label={t("draftSheet.saveItem")}
             title={t("draftSheet.saveItem")}
             className="p-1.5 text-success hover:bg-success-subtle border border-line rounded-lg transition-colors"
@@ -578,6 +583,7 @@ const isDraft = status === "draft" || status === "change_requested";
           </button>
           <button
             type="button"
+            disabled={form.formState.isSubmitting}
             aria-label={t("adjustmentSheet.actions.cancel")}
             title={t("adjustmentSheet.actions.cancel")}
             onClick={() => {

@@ -80,10 +80,10 @@ export function ProfileModal({
             speaking={presence.speaking}
           />
           <div className="min-w-0 flex-1">
-            <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+            <p className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
               <bdi>{user.title}</bdi>
             </p>
-            <p className={"mt-0.5 text-body-sm "+("ch-color-4a0211")} >
+            <p className={"mt-0.5 text-body-sm "+("ch-color-var---color-ink-muted")} >
               {presence.customText ?? t(`status.${presence.status}`, meta.label)}
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-2">
@@ -98,11 +98,11 @@ export function ProfileModal({
         <dl className="flex flex-col gap-2.5">
           {room && (
             <div className="flex items-center gap-2.5">
-              <MapPin size={14} aria-hidden="true" className={"ch-color-094083"}  />
+              <MapPin size={14} aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
               <dt className="sr-only">{t("profile.where", "Where")}</dt>
-              <dd className={"text-body-sm "+("ch-color-7f7330")} >
+              <dd className={"text-body-sm "+("ch-color-var---color-ink")} >
                 <bdi>{room.name}</bdi>
-                <span className={"ms-1.5 text-caption "+("ch-color-4a0211")} >
+                <span className={"ms-1.5 text-caption "+("ch-color-var---color-ink-muted")} >
                   {t(`roomKind.${room.kind}`, ROOM_LABEL[room.kind] ?? room.kind)}
                 </span>
               </dd>
@@ -110,11 +110,11 @@ export function ProfileModal({
           )}
           {localTime && (
             <div className="flex items-center gap-2.5">
-              <Clock size={14} aria-hidden="true" className={"ch-color-094083"}  />
+              <Clock size={14} aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
               <dt className="sr-only">{t("profile.localTime", "Their local time")}</dt>
-              <dd className={"tabular text-body-sm "+("ch-color-7f7330")} >
+              <dd className={"tabular text-body-sm "+("ch-color-var---color-ink")} >
                 {localTime}
-                <span className={"ms-1.5 text-caption "+("ch-color-4a0211")} >
+                <span className={"ms-1.5 text-caption "+("ch-color-var---color-ink-muted")} >
                   {user.timezone.split("/")[1]?.replace("_", " ")}
                 </span>
               </dd>
@@ -125,7 +125,7 @@ export function ProfileModal({
         {/* The product refuses to publish activity history about a person, and
             says so here rather than leaving the absence to be noticed. */}
         <p
-          className={"px-3 py-2 text-caption leading-relaxed "+("ch-background-314b28"+' '+"ch-border-radius-332348"+' '+"ch-color-4a0211")}
+          className={"px-3 py-2 text-caption leading-relaxed "+("ch-background-var---color-surface-sunken"+' '+"ch-border-radius-var---radius-control"+' '+"ch-color-var---color-ink-muted")}
 
         >
           {t(
@@ -251,8 +251,8 @@ export function RoomSettingsModal({
   const toggle = (label: string, hint: string, checked: boolean, onChange: (v: boolean) => void, disabled = false) => (
     <label className="hq-row flex cursor-pointer items-start justify-between gap-3 px-3 py-2 border border-line-control rounded-field">
       <span className="min-w-0">
-        <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >{label}</span>
-        <span className={"mt-0.5 block text-caption "+("ch-color-4a0211")} >{hint}</span>
+        <span className={"block text-body-sm font-medium "+("ch-color-var---color-ink")} >{label}</span>
+        <span className={"mt-0.5 block text-caption "+("ch-color-var---color-ink-muted")} >{hint}</span>
       </span>
       <input
         type="checkbox"
@@ -260,7 +260,7 @@ export function RoomSettingsModal({
         checked={checked}
         disabled={disabled}
         onChange={(e) => onChange(e.target.checked)}
-        className={"mt-0.5 shrink-0 "+("ch-width-f74111"+' '+"ch-height-ad1b79"+' '+"ch-accent-color-e56d5b")}
+        className={"mt-0.5 shrink-0 "+("ch-width-18px"+' '+"ch-height-18px"+' '+"ch-accent-color-var---color-accent")}
 
       />
     </label>
@@ -281,7 +281,7 @@ export function RoomSettingsModal({
               size="sm"
               variant="ghost"
               onClick={() => setConfirmRemove(true)}
-              className={"ch-color-1fd63a"+' '+"ch-margin-inline-end-237aa8"}
+              className={"ch-color-var---color-danger-600"+' '+"ch-margin-inline-end-auto"}
             >
               {t("room.remove", "Remove room")}
             </Button>
@@ -307,14 +307,14 @@ export function RoomSettingsModal({
         />
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="room-kind" className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+          <label htmlFor="room-kind" className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
             {t("room.kind", "What kind of room")}
           </label>
           <select
             id="room-kind"
             value={kind}
             onChange={(e) => setKind(e.target.value as RoomKind)}
-            className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-9efc87"+' '+"ch-color-7f7330"}
+            className={"ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-7px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-36px"+' '+"ch-color-var---color-ink"}
           >
             {ROOM_KINDS.filter((k) => k.id !== "desk" || room.kind === "desk").map((k) => (
               <option key={k.id} value={k.id}>
@@ -323,7 +323,7 @@ export function RoomSettingsModal({
             ))}
           </select>
           {spec && (
-            <span className={"text-caption "+("ch-color-094083")} >
+            <span className={"text-caption "+("ch-color-var---color-ink-subtle")} >
               {t(`roomKind.${spec.id}.hint`, spec.hint)}. {t("room.kindFurniture", "Changing the kind refurnishes the room.")}
             </span>
           )}
@@ -351,7 +351,7 @@ export function RoomSettingsModal({
           onChange={(e) => setCapacity(e.target.value)}
         />
 
-        <p className={"pt-1 text-body-sm font-medium "+("ch-color-7f7330")} >
+        <p className={"pt-1 text-body-sm font-medium "+("ch-color-var---color-ink")} >
           {t("room.behaviour", "Behaviour")}
         </p>
 
@@ -388,14 +388,14 @@ export function RoomSettingsModal({
           )}
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="room-entry" className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+          <label htmlFor="room-entry" className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
             {t("room.entryStatus", "Status on entry")}
           </label>
           <select
             id="room-entry"
             value={entryStatus}
             onChange={(e) => setEntryStatus(e.target.value as typeof entryStatus)}
-            className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-9efc87"+' '+"ch-color-7f7330"}
+            className={"ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-7px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-36px"+' '+"ch-color-var---color-ink"}
           >
             <option value="inherit">
               {t("room.entryInherit", "As the kind implies ({s})", {
@@ -417,36 +417,36 @@ export function RoomSettingsModal({
         )}
         {hoursOn && (
           <div className="flex items-end gap-3 ps-3">
-            <label className={"flex flex-col gap-1 text-caption "+("ch-color-4a0211")} >
+            <label className={"flex flex-col gap-1 text-caption "+("ch-color-var---color-ink-muted")} >
               {t("common.from", "From")}
               <input
                 type="time"
                 value={hoursFrom}
                 onChange={(e) => setHoursFrom(e.target.value)}
-                className={"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-8fb0de"+' '+"ch-font-size-ba0694"}
+                className={"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-6px-9px"+' '+"ch-font-size-var---ot-type-body-sm-size"}
               />
             </label>
-            <label className={"flex flex-col gap-1 text-caption "+("ch-color-4a0211")} >
+            <label className={"flex flex-col gap-1 text-caption "+("ch-color-var---color-ink-muted")} >
               {t("common.to", "To")}
               <input
                 type="time"
                 value={hoursTo}
                 onChange={(e) => setHoursTo(e.target.value)}
-                className={"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-8fb0de"+' '+"ch-font-size-ba0694"}
+                className={"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-6px-9px"+' '+"ch-font-size-var---ot-type-body-sm-size"}
               />
             </label>
           </div>
         )}
 
         <label
-          className={"hq-row flex cursor-pointer items-start justify-between gap-3 px-3 py-2.5 "+("ch-border-8ff264"+' '+"ch-border-radius-332348")}
+          className={"hq-row flex cursor-pointer items-start justify-between gap-3 px-3 py-2.5 "+("ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control")}
 
         >
           <span className="min-w-0">
-            <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >
+            <span className={"block text-body-sm font-medium "+("ch-color-var---color-ink")} >
               {t("room.locked", "Lock this room")}
             </span>
-            <span className={"mt-0.5 block text-caption "+("ch-color-4a0211")} >
+            <span className={"mt-0.5 block text-caption "+("ch-color-var---color-ink-muted")} >
               {t("room.lockedHint", "People knock instead of walking in. Useful for a one to one.")}
             </span>
           </span>
@@ -455,7 +455,7 @@ export function RoomSettingsModal({
             role="switch"
             checked={locked}
             onChange={(e) => setLocked(e.target.checked)}
-            className={"mt-0.5 shrink-0 "+("ch-width-f74111"+' '+"ch-height-ad1b79"+' '+"ch-accent-color-e56d5b")}
+            className={"mt-0.5 shrink-0 "+("ch-width-18px"+' '+"ch-height-18px"+' '+"ch-accent-color-var---color-accent")}
 
           />
         </label>
@@ -560,13 +560,13 @@ export function AddRoomModal({ open, onClose }: { open: boolean; onClose: () => 
         />
 
         <fieldset className="flex flex-col gap-1.5">
-          <legend className={"pb-1.5 text-body-sm font-medium "+("ch-color-7f7330")} >
+          <legend className={"pb-1.5 text-body-sm font-medium "+("ch-color-var---color-ink")} >
             {t("room.kind", "What kind of room")}
           </legend>
           {KINDS.map((k) => (
             <label
               key={k.id}
-              className={"hq-row flex cursor-pointer items-start gap-2.5 px-3 py-2 "+((kind === k.id?"ch-border-c98846":"ch-border-8ff264")+' '+"ch-border-radius-332348"+' '+(kind === k.id?"ch-background-1416a8":"ch-background-751d03"))}
+              className={"hq-row flex cursor-pointer items-start gap-2.5 px-3 py-2 "+((kind === k.id?"ch-border-1px-solid-var---color-accent":"ch-border-1px-solid-var---color-hairline-strong")+' '+"ch-border-radius-var---radius-control"+' '+(kind === k.id?"ch-background-var---color-accent-soft":"ch-background-var---color-surface"))}
 
             >
               <input
@@ -577,14 +577,14 @@ export function AddRoomModal({ open, onClose }: { open: boolean; onClose: () => 
                   setKind(k.id);
                   setCapacity(String(k.capacity));
                 }}
-                className={"mt-0.5 "+("ch-accent-color-e56d5b")}
+                className={"mt-0.5 "+("ch-accent-color-var---color-accent")}
 
               />
               <span className="min-w-0">
-                <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >
+                <span className={"block text-body-sm font-medium "+("ch-color-var---color-ink")} >
                   {t(`roomKind.${k.id}`, k.label)}
                 </span>
-                <span className={"block text-caption "+("ch-color-4a0211")} >
+                <span className={"block text-caption "+("ch-color-var---color-ink-muted")} >
                   {t(`roomKind.${k.id}.hint`, k.hint)}
                 </span>
               </span>

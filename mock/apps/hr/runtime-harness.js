@@ -42,7 +42,7 @@ function runtime(appKey, workspaceId, options = {}) {
   const owned = [];
   const walk = dir => { for (const entry of fs.readdirSync(dir, { withFileTypes: true })) { const file = path.join(dir, entry.name); if (entry.isDirectory()) walk(file); else if (/\.(js|json)$/.test(entry.name)) owned.push(path.relative(path.resolve(__dirname, "../.."), file).replace(/\\/g, "/")); } };
   walk(path.resolve(__dirname, "..", appKey));
-  const manifest = [`apps/${appKey}.js`, `lib/tool-adapters/${appKey}.js`, 'lib/business-calendar.js', 'lib/clock.js', ...owned];
+  const manifest = [`apps/${appKey}.js`, `lib/tool-adapters/${appKey}.js`, 'lib/business-calendar.js', 'lib/clock.js', 'lib/csv.js', 'lib/local-file-assets.js', ...owned];
   const graph = createPrivateModuleGraph({ appKey, identity, config, util, Date: BusinessDate, manifest });
   const upload = () => (req, res, next) => String(req.headers["content-type"] || "").startsWith("multipart/") ? res.status(501).json({ code: "sample_assets_only" }) : next();
   const ctx = { key: appKey, realm: "adapter-tests", workspaceId, config, identity, util, uploadsDir: root, log() {}, upload: { any: upload, single: upload, array: upload, none: upload }, apiUrl: config.apiUrl, webUrl: config.webUrl, fileUrl: name => `${config.apiUrl(appKey)}/uploads/${encodeURIComponent(name)}` };

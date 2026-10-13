@@ -33,10 +33,10 @@ export function MeScreen() {
         <div className="flex items-center gap-3">
           <Avatar name={me.name} initials={me.initials} tint={me.tint} status={status} size={56} />
           <div className="min-w-0">
-            <h1 className={"hq-title truncate "+("ch-color-7f7330")} >
+            <h1 className={"hq-title truncate "+("ch-color-var---color-ink")} >
               <bdi>{me.name}</bdi>
             </h1>
-            <p className={"truncate text-body-sm "+("ch-color-4a0211")} >
+            <p className={"truncate text-body-sm "+("ch-color-var---color-ink-muted")} >
               <bdi>{me.title}</bdi>
             </p>
           </div>
@@ -52,19 +52,19 @@ export function MeScreen() {
                 <button
                   key={s}
                   onClick={() => setStatus(s, undefined, s === "focus" ? 50 : undefined)}
-                  className={"hq-row flex items-center gap-2.5 px-3 text-start "+("ch-min-height-fdd09d"+' '+(active?"ch-border-c98846":"ch-border-8ff264")+' '+"ch-border-radius-332348"+' '+(active?"ch-background-1416a8":"ch-background-751d03"))}
+                  className={"hq-row flex items-center gap-2.5 px-3 text-start "+("ch-min-height-48px"+' '+(active?"ch-border-1px-solid-var---color-accent":"ch-border-1px-solid-var---color-hairline-strong")+' '+"ch-border-radius-var---radius-control"+' '+(active?"ch-background-var---color-accent-soft":"ch-background-var---color-surface"))}
 
                   aria-pressed={active}
                 >
                   <span
                     aria-hidden="true"
-                    className={("ch-width-5e26c9"+' '+"ch-height-6a8e05"+' '+"ch-border-radius-189003")+" "+('ch-status-mark-'+meta.id+' '+'ch-status-mark-'+meta.id)}
+                    className={("ch-width-10px"+' '+"ch-height-10px"+' '+"ch-border-radius-var---radius-chip")+" "+('ch-status-mark-'+meta.id+' '+'ch-status-mark-'+meta.id)}
                   />
                   <span className="flex-1">
-                    <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >
+                    <span className={"block text-body-sm font-medium "+("ch-color-var---color-ink")} >
                       {t(`status.${s}`, meta.label)}
                     </span>
-                    <span className={"block text-caption "+("ch-color-4a0211")} >
+                    <span className={"block text-caption "+("ch-color-var---color-ink-muted")} >
                       {t(`status.${s}.desc`, meta.description)}
                     </span>
                   </span>
@@ -78,7 +78,7 @@ export function MeScreen() {
           <SectionHead title={t("me.preferences", "Preferences")} />
           <Panel>
             <label className="flex cursor-pointer items-center justify-between gap-4 py-1">
-              <span className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+              <span className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
                 {t("settings.sounds", "Interface sounds")}
               </span>
               <input
@@ -89,14 +89,14 @@ export function MeScreen() {
                   update({ soundsEnabled: e.target.checked });
                   setAudioEnabled(e.target.checked);
                 }}
-                className={"ch-width-0f6c53"+' '+"ch-height-44a2f4"+' '+"ch-accent-color-e56d5b"}
+                className={"ch-width-20px"+' '+"ch-height-20px"+' '+"ch-accent-color-var---color-accent"}
               />
             </label>
-            <div className={"my-2 "+("ch-border-top-c9ce2a")}  />
-            <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+            <div className={"my-2 "+("ch-border-top-1px-solid-var---color-hairline")}  />
+            <p className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
               {t("appearance.accent", "System colour")}
             </p>
-            <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
+            <p className={"mt-0.5 text-caption "+("ch-color-var---color-ink-muted")} >
               {t("appearance.accentShort", "Yours only, on this device.")}
             </p>
             <div className="mt-2">

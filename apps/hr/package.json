@@ -8,7 +8,8 @@
     "i18n:check": "node ../../tools/i18n/check-catalogs.mjs",
     "build": "next build",
     "start": "next start",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lint": "node ../../tools/ci/lint.mjs --app=hr"
   },
   "dependencies": {
     "@base-ui/react": "1.8.0",

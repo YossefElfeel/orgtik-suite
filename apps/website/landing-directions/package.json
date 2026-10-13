@@ -10,7 +10,8 @@
     "test:cart": "node tests/cart.test.mjs",
     "test": "node tests/cart.test.mjs && node tests/suite-session.test.mjs && node --test tests/published-content.test.mjs tests/managed-page.test.mjs",
     "format": "prettier --write src index.html vite.config.mjs",
-    "format:check": "prettier --check src index.html vite.config.mjs"
+    "format:check": "prettier --check src index.html vite.config.mjs",
+    "lint": "node ../../../tools/ci/lint.mjs --app=website/landing-directions"
   },
   "dependencies": {
     "@vitejs/plugin-react": "5.0.4",

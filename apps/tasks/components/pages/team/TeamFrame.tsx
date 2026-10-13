@@ -8,6 +8,7 @@ import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { LockKey, MagnifyingGlass } from "@phosphor-icons/react";
 import { EmptyState, ErrorState, NoPermissionState, PageHeader, Skeleton } from "@orgtik/ui";
+import ManageTeamDialog from "@/components/dialogs/teams/ManageTeamDialog";
 import { PageTabs } from "@/components/shared/PageTabs";
 import { ButtonLink } from "@/components/shared/ButtonLink";
 import { useGetTeamDetailsQuery } from "@/redux/features/teams/teamsApi";
@@ -49,6 +50,7 @@ export function TeamFrame({ children }: { children: ReactNode }) {
           breadcrumb={[{ label: t("teams"), href: "/teams" }, { label: <bdi>{team.name}</bdi> }]}
           title={<span dir="auto">{team.name}</span>}
           description={team.description ? <span dir="auto">{team.description}</span> : undefined}
+          actions={<ManageTeamDialog key={team.id} team={team} />}
         />
       )}
       <PageTabs label={t("sections")} tabs={TABS.map((tab) => ({ href: `/teams/${id}/${tab}`, label: t(`tabs.${tab}`) }))} />

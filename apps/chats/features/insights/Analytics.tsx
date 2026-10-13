@@ -96,7 +96,7 @@ export function TrendChart({
         title={label}
         meta={t("insights.weeks", "{n} weeks", { n: history.length })}
       />
-      <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
+      <p className={"pb-3 text-caption "+("ch-color-var---color-ink-muted")} >
         {body}
       </p>
 
@@ -111,7 +111,7 @@ export function TrendChart({
           })}
           width={W}
           height={H}
-          className={"ch-display-2a1b75"+' '+"ch-max-width-27aeb6"}
+          className={"ch-display-block"+' '+"ch-max-width-100pct"}
           onMouseLeave={() => setHover(null)}
         >
           {/* Solid hairline gridlines. Dashing reads as "threshold". */}
@@ -132,7 +132,7 @@ export function TrendChart({
                   y={y + 3}
                   textAnchor="end"
 
-                  className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")}
+                  className={"tabular "+("ch-font-size-var---ot-type-micro-size"+' '+"ch-fill-var---color-ink-subtle")}
                 >
                   {v}
                 </text>
@@ -176,7 +176,7 @@ export function TrendChart({
                 x={x}
                 y={H - 6}
                 textAnchor="middle"
-                className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")}
+                className={"tabular "+("ch-font-size-var---ot-type-micro-size"+' '+"ch-fill-var---color-ink-subtle")}
 
               >
                 {h.week.split("-")[1]}
@@ -204,7 +204,7 @@ export function TrendChart({
                 onMouseEnter={() => setHover(i)}
                 onFocus={() => setHover(i)}
                 onBlur={() => setHover(null)}
-                className={"ch-cursor-2a9295"}
+                className={"ch-cursor-default"}
               />
             );
           })}
@@ -213,10 +213,10 @@ export function TrendChart({
 
       {showable && (
         <p className="mt-1 text-caption" aria-hidden="true">
-          <span className={"font-medium "+("ch-color-7f7330")} >
+          <span className={"font-medium "+("ch-color-var---color-ink")} >
             {t("insights.week", "Week {w}", { w: showable.week })}
           </span>
-          <span className={"ch-color-4a0211"} >
+          <span className={"ch-color-var---color-ink-muted"} >
             {" · "}
             {t("insights.hoursInMeetings", "{h} in meetings", {
               h: formatHours(showable.meetingHours),
@@ -254,7 +254,7 @@ export function MeetingSizes({
         title={t("insights.meetingSizes", "How big the meetings were")}
         meta={t("insights.nMeetings", "{n} meetings", { n: totalCount })}
       />
-      <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
+      <p className={"pb-3 text-caption "+("ch-color-var---color-ink-muted")} >
         {t(
           "insights.meetingSizesBody",
           "Hours spent, by how many people were in the room. Team totals, by size band.",
@@ -265,33 +265,33 @@ export function MeetingSizes({
         {sizes.map((s) => (
           <li key={s.band} className="flex items-center gap-3">
             <span
-              className={"tabular w-[38px] shrink-0 text-body-sm font-medium "+("ch-color-7f7330")}
+              className={"tabular w-[38px] shrink-0 text-body-sm font-medium "+("ch-color-var---color-ink")}
 
             >
               {s.band}
             </span>
             <span
-              className={"h-[10px] min-w-0 flex-1 "+("ch-background-5d6e34"+' '+"ch-border-radius-189003")}
+              className={"h-[10px] min-w-0 flex-1 "+("ch-background-var---color-bar-zero"+' '+"ch-border-radius-var---radius-chip")}
 
             >
               <span
-                className={("block h-full "+("ch-background-82a08c"+' '+"ch-border-radius-189003"))+" "+(geometryClass({width:`${(s.hours / max) * 100}%`}))}
+                className={("block h-full "+("ch-background-var---color-bar"+' '+"ch-border-radius-var---radius-chip"))+" "+(geometryClass({width:`${(s.hours / max) * 100}%`}))}
 
               />
             </span>
             <span
-              className={"tabular w-[92px] shrink-0 text-end text-caption "+("ch-color-4a0211")}
+              className={"tabular w-[92px] shrink-0 text-end text-caption "+("ch-color-var---color-ink-muted")}
 
             >
               {formatHours(s.hours)}
-              <span className={"ch-color-094083"} > · {s.count}</span>
+              <span className={"ch-color-var---color-ink-subtle"} > · {s.count}</span>
             </span>
           </li>
         ))}
       </ul>
 
       {biggest && (
-        <p className={"mt-3.5 text-caption "+("ch-color-4a0211")} >
+        <p className={"mt-3.5 text-caption "+("ch-color-var---color-ink-muted")} >
           {t(
             "insights.sizesTakeaway",
             "Most meeting time went to groups of {band}, at {pct}% of {total}.",
@@ -331,7 +331,7 @@ export function Utilisation({
         title={t("insights.utilisation", "Room utilisation")}
         meta={`${Math.round(pct)}%`}
       />
-      <p className={"pb-3 text-caption "+("ch-color-4a0211")} >
+      <p className={"pb-3 text-caption "+("ch-color-var---color-ink-muted")} >
         {t(
           "insights.utilisationBody",
           "Hours the rooms were occupied against the hours they were available, across the working week.",
@@ -344,14 +344,14 @@ export function Utilisation({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={t("insights.utilisation", "Room utilisation")}
-        className={"ch-height-06c074"+' '+"ch-background-5d6e34"+' '+"ch-border-radius-189003"}
+        className={"ch-height-12px"+' '+"ch-background-var---color-bar-zero"+' '+"ch-border-radius-var---radius-chip"}
       >
         <div
-          className={("ch-height-622640"+' '+"ch-background-82a08c"+' '+"ch-border-radius-189003")+" "+(geometryClass({width:`${pct}%`}))}
+          className={("ch-height-100pct"+' '+"ch-background-var---color-bar"+' '+"ch-border-radius-var---radius-chip")+" "+(geometryClass({width:`${pct}%`}))}
         />
       </div>
 
-      <p className={"tabular mt-2 text-caption "+("ch-color-4a0211")} >
+      <p className={"tabular mt-2 text-caption "+("ch-color-var---color-ink-muted")} >
         {t("insights.utilisationOf", "{used} used of {available} available", {
           used: formatHours(used),
           available: formatHours(available),
@@ -359,7 +359,7 @@ export function Utilisation({
       </p>
 
       {/* The conclusion a reader should draw, said rather than implied. */}
-      <p className={"mt-3 text-body-sm leading-relaxed "+("ch-color-7f7330")} >
+      <p className={"mt-3 text-body-sm leading-relaxed "+("ch-color-var---color-ink")} >
         {pct < 40
           ? t(
               "insights.utilisationLow",

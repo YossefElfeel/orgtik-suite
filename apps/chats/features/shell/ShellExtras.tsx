@@ -28,7 +28,7 @@ export function PrototypeBadge() {
   const t = useT();
   return (
     <span
-      className={"hidden select-none whitespace-nowrap px-2 py-0.5 text-micro font-medium xl:inline "+("ch-background-db4104"+' '+"ch-color-64fbe7"+' '+"ch-border-radius-189003")}
+      className={"hidden select-none whitespace-nowrap px-2 py-0.5 text-micro font-medium xl:inline "+("ch-background-var---color-paper-900"+' '+"ch-color-var---color-paper-200"+' '+"ch-border-radius-var---radius-chip")}
 
     >
       {t("shell.prototype", "Prototype - mock data")}
@@ -75,24 +75,24 @@ export function ToastHost() {
       {toasts.map((toast) => (
         <div
           key={toast.id}
-          className={(`hq-floating hq-rise ${toast.kind === "knock" ? "hq-knock-pulse" : ""}`)+" "+("ch-border-radius-8d459a"+' '+"ch-padding-40037d")}
+          className={(`hq-floating hq-rise ${toast.kind === "knock" ? "hq-knock-pulse" : ""}`)+" "+("ch-border-radius-var---radius-card"+' '+"ch-padding-13px")}
 
         >
           <div className="flex items-start gap-2.5">
             {toast.kind === "knock" && (
               <span
                 aria-hidden="true"
-                className={"flex shrink-0 items-center justify-center "+("ch-width-322e3f"+' '+"ch-height-5a5909"+' '+"ch-border-radius-332348"+' '+"ch-background-1416a8"+' '+"ch-color-55f463")}
+                className={"flex shrink-0 items-center justify-center "+("ch-width-30px"+' '+"ch-height-30px"+' '+"ch-border-radius-var---radius-control"+' '+"ch-background-var---color-accent-soft"+' '+"ch-color-var---color-ink-brand")}
 
               >
                 <HandWaving size={16} weight="fill" />
               </span>
             )}
             <div className="min-w-0 flex-1">
-              <p className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
+              <p className={"text-body-sm font-semibold "+("ch-color-var---color-ink")} >
                 {say(toast.title)}
               </p>
-              <p className={"mt-0.5 text-body-sm "+("ch-color-4a0211")} >
+              <p className={"mt-0.5 text-body-sm "+("ch-color-var---color-ink-muted")} >
                 {say(toast.body)}
               </p>
             </div>
@@ -102,7 +102,7 @@ export function ToastHost() {
               iconOnly
               label={t("shell.dismiss", "Dismiss")}
               onClick={() => dismiss(toast.id)}
-              className={"ch-color-094083"}
+              className={"ch-color-var---color-ink-subtle"}
             >
               <X size={13} weight="bold" aria-hidden="true" />
             </Button>

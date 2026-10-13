@@ -28,6 +28,7 @@ function clientEnvironment(key, env = process.env) {
     VITE_SUITE_API: `${identity}/api`, VITE_CMS_API: `${gateway}/wm/v2`, VITE_WM_ORIGIN: origin,
   };
   return {
+    NEXT_PUBLIC_DEMO_PANEL: "1",
     NEXT_PUBLIC_BASE_PATH: `/${key}`,
     NEXT_PUBLIC_SUITE_SERVICES: "1",
     NEXT_PUBLIC_API_URL: ["sos", "sales", "hr", "marketing"].includes(key) ? `${own}/api` : own,
@@ -42,6 +43,6 @@ function clientEnvironment(key, env = process.env) {
 }
 function servicesNextConfig(key, env = process.env) {
   if (env.ORGTIK_SERVICES !== "1" && !env.VERCEL_DEV_PORT) return {};
-  return { basePath: `/${key}`, env: clientEnvironment(key, env), experimental: { optimizePackageImports: ["@phosphor-icons/react"] }, ...(env.ORGTIK_SERVICES_DEV === "1" ? { allowedDevOrigins: ["localhost", "127.0.0.1"] } : {}) };
+  return { basePath: `/${key}`, env: clientEnvironment(key, env), ...(["chats", "tasks"].includes(key) && env.ORGTIK_LOCAL_PREVIEW_BUILD === "1" ? { webpack: config => { config.cache = false; return config; } } : {}), experimental: { optimizePackageImports: ["@phosphor-icons/react"] }, ...(env.ORGTIK_SERVICES_DEV === "1" ? { allowedDevOrigins: ["localhost", "127.0.0.1"] } : {}) };
 }
 module.exports = { apps, packages, publicOrigin, webUrls, clientEnvironment, servicesNextConfig };

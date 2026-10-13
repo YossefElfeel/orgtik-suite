@@ -32,7 +32,7 @@ export function MobileTabs() {
   return (
     <nav
       aria-label={t("nav.label", "Chats sections")}
-      className={"flex shrink-0 md:hidden "+("ch-background-751d03"+' '+"ch-border-top-c9ce2a"+' '+"ch-padding-bottom-e22ead")}
+      className={"flex shrink-0 md:hidden "+("ch-background-var---color-surface"+' '+"ch-border-top-1px-solid-var---color-hairline"+' '+"ch-padding-bottom-env-safe-area-inset-bottom")}
 
     >
       {tabs.map(({ href, match, label, Icon, count, mention }) => {
@@ -42,7 +42,7 @@ export function MobileTabs() {
             key={href}
             href={href}
             aria-current={active ? "page" : undefined}
-            className={"relative flex flex-1 flex-col items-center justify-center gap-0.5 "+("ch-min-height-5d0881"+' '+(active?"ch-color-55f463":"ch-color-4a0211"))}
+            className={"relative flex flex-1 flex-col items-center justify-center gap-0.5 "+("ch-min-height-52px"+' '+(active?"ch-color-var---color-ink-brand":"ch-color-var---color-ink-muted"))}
 
           >
             <span className="relative">

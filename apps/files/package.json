@@ -9,7 +9,7 @@
     "test": "node --test lib/file-references.test.cjs",
     "i18n:check": "node ../../tools/i18n/check-catalogs.mjs",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "node ../../tools/ci/lint.mjs --app=files"
   },
   "dependencies": {
     "@internationalized/date": "3.12.4",
@@ -30,7 +30,9 @@
     "react-hook-form": "7.71.2",
     "react-redux": "9.2.0",
     "recharts": "3.8.0",
-    "tailwind-merge": "3.7.0"
+    "tailwind-merge": "3.7.0",
+    "@hookform/resolvers": "5.2.2",
+    "zod": "4.3.6"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "4.2.1",

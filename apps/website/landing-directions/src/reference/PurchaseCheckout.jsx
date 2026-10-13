@@ -397,12 +397,12 @@ function Confirmation({ order, crm, onCRM, customer, onRestart }) {
           </p>
         )}
         {existingAccount && (
-          <PurchaseAction href="/sign-in" secondary>
+          <PurchaseAction href="/sign-in?returnTo=cart" secondary>
             {msg("PurchaseSetup:9")}
           </PurchaseAction>
         )}
         {!customer?.email && (
-          <PurchaseAction href="/sign-up" secondary>
+          <PurchaseAction href="/sign-up?returnTo=cart" secondary>
             {msg("PurchaseCheckout:7")}
           </PurchaseAction>
         )}

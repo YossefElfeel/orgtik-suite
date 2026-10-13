@@ -7,9 +7,10 @@ import { useEmployeeLabels } from "@/hooks/useEmploymentTypeLabel";
 type PersonalInfoSectionProps = {
   personalInfo?: IPersonalInformation;
   isLoading?: boolean;
+  onEdit?: () => void;
 };
 
-export function PersonalInfoSection({ personalInfo, isLoading }: PersonalInfoSectionProps) {
+export function PersonalInfoSection({ personalInfo, isLoading, onEdit }: PersonalInfoSectionProps) {
   const t = useTranslations("employees.details.sections");
   const tFields = useTranslations("createUpdateEmployee.fields");
   const tPersonal = useTranslations("employees.details.personal");
@@ -23,7 +24,7 @@ export function PersonalInfoSection({ personalInfo, isLoading }: PersonalInfoSec
     <InfoCard
       title={t("personal")}
       icon={User}
-      onEdit={() => { }}
+      onEdit={onEdit}
       items={[
         {
           id: "full-name",

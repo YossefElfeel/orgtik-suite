@@ -1,3 +1,7 @@
+# Local use
+
+Use [program/local-prototype.md](../../program/local-prototype.md) for development, prebuilt preview, data persistence and performance checks. The configuration below is retained for optional hosted releases.
+
 # OrgTik Services on separate Hobby projects
 
 The owner confirmed this split after Vercel rejected the combined deployment's

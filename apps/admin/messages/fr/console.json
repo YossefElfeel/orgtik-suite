@@ -143,6 +143,17 @@
     "capabilities": "Fonctionnalités, une par ligne",
     "auditExport": "Exporter le journal en CSV",
     "workspaceExport": "Exporter les espaces en CSV",
-    "scheduleLowerPlan": "Planifier une offre inférieure au renouvellement"
+    "scheduleLowerPlan": "Planifier une offre inférieure au renouvellement",
+    "connectorDescriptions": {
+      "tasks-files": "Lier des versions de fichiers aux tâches.",
+      "chat-files": "Partager fichiers et tableaux.",
+      "tasks-hr": "Afficher les absences approuvées.",
+      "chat-hr": "Afficher les absences dans le calendrier chat.",
+      "hr-tasks": "Créer des tâches d’intégration et lier les projets.",
+      "crm-tasks": "Créer des tâches de suivi CRM.",
+      "crm-files": "Utiliser les fichiers pour les livrables.",
+      "chat-tasks": "Créer des tâches depuis les messages.",
+      "marketing-crm": "Lier contacts et attribution de campagne."
+    }
   }
 }

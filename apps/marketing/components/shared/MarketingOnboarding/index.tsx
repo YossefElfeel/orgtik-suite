@@ -43,11 +43,11 @@ export default function MarketingOnboarding() {
   ];
   if (steps.every((row) => row.complete)) return null;
   return (
-    <div className="flex flex-col gap-3">
+    <details className="flex flex-col gap-3"><summary className="cursor-pointer text-body-sm font-semibold">{t("onboarding")}</summary>
       <p className="max-w-prose text-body-sm text-fg-muted">
         {t("onboardingHint")}
       </p>
       <OnboardingChecklist title={t("onboarding")} steps={steps} />
-    </div>
+    </details>
   );
 }

@@ -175,11 +175,11 @@ export function SectionHead({
   return (
     <div className="flex items-baseline justify-between gap-4 pb-3">
       <div className="flex items-baseline gap-2.5 min-w-0">
-        <h2 className={"hq-title truncate "+("ch-color-7f7330")} >
+        <h2 className={"hq-title truncate "+("ch-color-var---color-ink")} >
           {title}
         </h2>
         {meta && (
-          <span className={"tabular shrink-0 text-caption "+("ch-color-4a0211")} >
+          <span className={"tabular shrink-0 text-caption "+("ch-color-var---color-ink-muted")} >
             {meta}
           </span>
         )}

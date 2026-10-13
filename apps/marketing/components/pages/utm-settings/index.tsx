@@ -1,10 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Button, ErrorState, Field, Input, LoadingState } from "@orgtik/ui";
+import { Button, ErrorState, Field, Input, LoadingState, retainedDraftKey, readRetainedDraft, writeRetainedDraft, clearRetainedDraft } from "@orgtik/ui";
 import { RHFField } from "@orgtik/ui/rhf";
 import { useMarketingRoles } from "@/lib/permissions";
 import {
@@ -30,9 +30,15 @@ export default function UtmSettings() {
     ),
     defaultValues: { source: "", medium: "", campaign: "" },
   });
+  const draftKey = retainedDraftKey("marketing-utm:" + (query.data?.projectId || "")), initialized = useRef<string>("");
   useEffect(() => {
-    if (query.data) form.reset(query.data.settings);
-  }, [query.data, form]);
+    if (!query.data || !draftKey || initialized.current === draftKey) return;
+    const retained = readRetainedDraft(draftKey);
+    const valid = retained && typeof retained === "object" && ["source", "medium", "campaign"].every(key => typeof (retained as Record<string, unknown>)[key] === "string");
+    form.reset(valid ? retained as Defaults : query.data.settings); initialized.current = draftKey;
+  }, [query.data, draftKey, form]);
+  useEffect(() => { const subscription = form.watch(() => { if (draftKey && initialized.current === draftKey) writeRetainedDraft(draftKey, form.getValues()); }); return () => subscription.unsubscribe(); }, [draftKey, form]);
+  const draftValues = form.watch();
   let generated = "";
   if (address && query.data) {
     try {
@@ -44,7 +50,7 @@ export default function UtmSettings() {
         address.length <= 2000
       ) {
         for (const key of ["source", "medium", "campaign"] as const) {
-          const value = query.data.settings[key];
+          const value = draftValues[key];
           if (value) url.searchParams.set(`utm_${key}`, value);
           else url.searchParams.delete(`utm_${key}`);
         }
@@ -69,6 +75,7 @@ export default function UtmSettings() {
             onSubmit={form.handleSubmit(async (body) => {
               try {
                 await save({ path: "/v3/utm", method: "PATCH", body }).unwrap();
+                form.reset(body); clearRetainedDraft(draftKey);
               } catch {}
             })}
           >

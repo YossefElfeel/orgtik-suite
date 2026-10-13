@@ -4,11 +4,13 @@ const crypto = require('node:crypto');
 const { createFileAccess } = require('../apps/files/access');
 const lib = require('../apps/files/lib');
 const boards = require('./whiteboard-scene');
+const localAssets = require('./local-file-assets');
 const fail = (status, code, message) => Object.assign(new Error(message), { status, code });
 const copy = value => JSON.parse(JSON.stringify(value));
 const SAMPLES = Object.freeze({ pdf_company_profile: 'Sample company profile.pdf', docx_runbook: 'Sample runbook.docx', txt_release_notes: 'Sample release notes.txt', png_app_home: 'Sample home screen.png', png_app_checkout: 'Sample checkout flow.png', png_dashboard_dark: 'Sample dashboard.png', jpg_mango: 'Sample product photo.jpg', mp4_app_walkthrough: 'Sample app walkthrough.mp4' });
 const TYPES = new Set(['application/pdf', 'text/plain', 'text/csv', 'text/markdown', 'application/json', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/zip', 'image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/svg+xml', 'video/mp4']);
 TYPES.add(boards.MIME);
+for (const mimetype of ['text/plain','text/csv','text/markdown','application/json','application/zip']) TYPES.add(mimetype);
 function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, assetDir, boardAuthority, now = () => new Date().toISOString(), fileOut }) {
   const acl = createFileAccess({ state, identity, boardAuthority });
   state.sampleOperations ||= new Map();
@@ -25,6 +27,7 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
     return user;
   }
   function content(storage) {
+    if (storage?.kind === "local") return localAssets.content({ realm, workspaceId, key: storage.key });
     if (storage?.kind === 'whiteboard') {
       const value = boards.readWhiteboardStorage(storage);
       return { bytes: Buffer.from(value.json, 'utf8'), mimetype: boards.MIME, size: value.size };
@@ -92,7 +95,7 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
   function createSample({ actorId, sampleId, parentId = null, operationId }) {
     const user = actor(actorId, true);
     if (typeof operationId !== 'string' || !/^[\w.:-]{1,200}$/.test(operationId) || ['__proto__', 'constructor', 'prototype'].includes(operationId)) throw fail(422, 'operation_id_required', 'Supply the original sample creation reference.');
-    if (typeof sampleId !== 'string' || !Object.hasOwn(SAMPLES, sampleId)) throw fail(422, 'invalid_sample', 'Choose a packaged sample from the catalog.');
+    if (typeof sampleId !== 'string' || !Object.hasOwn(SAMPLES, sampleId) && (!sampleId.startsWith('local:') || !localAssets.metadata({ realm, workspaceId, key: sampleId.slice(6) }))) throw fail(422, 'invalid_sample', 'Choose a packaged sample from the catalog.');
     const parent = parentId === null ? null : typeof parentId === 'string' && state.folders.get(parentId);
     if (parentId !== null && (!parent || parent.deletedAt || acl.chain(parent).some(row => row.deletedAt || row.custodyReadOnly))) throw fail(404, 'folder_not_found', 'The destination folder is unavailable.');
     if (parent && !acl.folderCaps(user, parent).canWrite) throw fail(403, 'folder_write_required', 'You cannot create a sample in that folder.');
@@ -102,8 +105,10 @@ function createWorkspaceFiles({ state, identity, workspaceId, realm, manifest, a
       const file = record(user, prior.fileId); version(file, prior.versionId);
       return { ...fileOut(file, user), workspaceId, fileId: file.id, versionId: prior.versionId, version: 1 };
     }
-    const binary = content({ kind: 'asset', key: sampleId }), timestamp = now(), id = lib.newId(), name = SAMPLES[sampleId];
-    const file = { id, name, originalName: name, ownerId: user.id, size: binary.size, mimeType: binary.mimetype, folderId: parent?.id || null, isUsed: false, usedNote: null, usedAt: null, usedBy: null, createdAt: timestamp, updatedAt: timestamp, deletedAt: null, archivedBy: null, archiveBatch: null, storage: { kind: 'asset', key: sampleId }, accessOverride: null, currentVersionId: 'v1', versions: [{ id: 'v1', number: 1, createdAt: timestamp, createdById: user.id, originalName: name, size: binary.size, mimeType: binary.mimetype, storage: { kind: 'asset', key: sampleId } }] };
+    const local = sampleId.startsWith('local:') ? localAssets.metadata({ realm, workspaceId, key: sampleId.slice(6) }) : null;
+    const storage = local ? { kind: 'local', key: local.key } : { kind: 'asset', key: sampleId };
+    const binary = content(storage), timestamp = now(), id = lib.newId(), name = local ? local.name : SAMPLES[sampleId];
+    const file = { id, name, originalName: name, ownerId: user.id, size: binary.size, mimeType: binary.mimetype, folderId: parent?.id || null, isUsed: false, usedNote: null, usedAt: null, usedBy: null, createdAt: timestamp, updatedAt: timestamp, deletedAt: null, archivedBy: null, archiveBatch: null, storage: copy(storage), accessOverride: null, currentVersionId: 'v1', versions: [{ id: 'v1', number: 1, createdAt: timestamp, createdById: user.id, originalName: name, size: binary.size, mimeType: binary.mimetype, storage: copy(storage) }] };
     state.files.set(id, file);
     state.activities.unshift({ id: lib.newId(), scope: 'file_manager', actorId: String(user.id), action: 'sample_created', entityType: 'file', entityId: id, metadata: { sampleId, parentId }, createdAt: timestamp, ip: '', userAgent: '' });
     state.sampleOperations.set(receiptKey, { fingerprint, fileId: id, versionId: 'v1' });

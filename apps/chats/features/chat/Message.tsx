@@ -100,7 +100,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
     return (
       <div className="px-4 py-1.5 ps-[52px]">
         <span
-          className={"inline-block px-2 py-1 text-caption italic "+("ch-background-314b28"+' '+"ch-color-094083"+' '+"ch-border-radius-332348")}
+          className={"inline-block px-2 py-1 text-caption italic "+("ch-background-var---color-surface-sunken"+' '+"ch-color-var---color-ink-subtle"+' '+"ch-border-radius-var---radius-control")}
 
         >
           {t("chat.deleted", "This message was deleted.")}
@@ -122,7 +122,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
   return (
     <article
       id={message.id}
-      className={"hq-msg group relative px-4 py-1 "+((mentionsMe?"ch-background-1416a8"+' '+"ch-border-radius-332348":""))}
+      className={"hq-msg group relative px-4 py-1 "+((mentionsMe?"ch-background-var---color-accent-soft"+' '+"ch-border-radius-var---radius-control":""))}
 
     >
       <div className="flex gap-3">
@@ -137,7 +137,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
             />
           ) : (
             <span
-              className={"tabular block pt-0.5 text-end text-micro opacity-0 transition-opacity group-hover:opacity-100 "+("ch-color-094083")}
+              className={"tabular block pt-0.5 text-end text-micro opacity-0 transition-opacity group-hover:opacity-100 "+("ch-color-var---color-ink-subtle")}
 
             >
               {formatTime(message.createdAt)}
@@ -148,14 +148,14 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
         <div className="min-w-0 flex-1">
           {!grouped && (
             <div className="flex items-baseline gap-2">
-              <span className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
+              <span className={"text-body-sm font-semibold "+("ch-color-var---color-ink")} >
                 <bdi>{author.name}</bdi>
               </span>
-              <span className={"tabular text-caption "+("ch-color-094083")} >
+              <span className={"tabular text-caption "+("ch-color-var---color-ink-subtle")} >
                 {formatTime(message.createdAt)}
               </span>
               {message.pinned && (
-                <span className={"flex items-center gap-1 text-micro "+("ch-color-4a0211")} >
+                <span className={"flex items-center gap-1 text-micro "+("ch-color-var---color-ink-muted")} >
                   <PushPin size={10} weight="fill" aria-hidden="true" />
                   {t("chat.pinned", "Pinned")}
                 </span>
@@ -191,7 +191,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                 }}
                 rows={1}
                 aria-label={t("chat.editing", "Edit your message")}
-                className={"w-full resize-none "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-14f075"+' '+"ch-font-size-ba0694"+' '+"ch-line-height-afef7d"+' '+"ch-color-7f7330")}
+                className={"w-full resize-none "+("ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-8px-11px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-line-height-1-55"+' '+"ch-color-var---color-ink")}
 
               />
               <div className="flex items-center gap-2">
@@ -215,7 +215,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                 >
                   {t("common.cancel", "Cancel")}
                 </Button>
-                <span className={"text-caption "+("ch-color-094083")} >
+                <span className={"text-caption "+("ch-color-var---color-ink-subtle")} >
                   {t("chat.escapeToCancel", "Escape to cancel")}
                 </span>
               </div>
@@ -223,10 +223,10 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
           ) : (
             <>
               {/* What people wrote reads in its own direction: an English message stays LTR in Arabic. */}
-              <div dir="auto" className={"whitespace-pre-wrap text-body-sm leading-[1.55] "+("ch-color-7f7330")} >
+              <div dir="auto" className={"whitespace-pre-wrap text-body-sm leading-[1.55] "+("ch-color-var---color-ink")} >
                 {message.format==="rich"?<RichMessage text={message.text}/>:renderText(message.text, users, openPerson)}
                 {message.editedAt && (
-                  <span className={"ms-1.5 text-micro "+("ch-color-094083")} >
+                  <span className={"ms-1.5 text-micro "+("ch-color-var---color-ink-subtle")} >
                     {t("chat.edited", "(edited)")}
                   </span>
                 )}
@@ -248,19 +248,19 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                   <button
                     type="button"
                     onClick={() => setPreview(f)}
-                    className={"hq-btn inline-flex items-center gap-2 px-2.5 py-1.5 text-start "+("ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-background-751d03"+' '+"ch-min-height-87483b")}
+                    className={"hq-btn inline-flex items-center gap-2 px-2.5 py-1.5 text-start "+("ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-background-var---color-surface"+' '+"ch-min-height-34px")}
 
                   >
-                    <FileText size={15} aria-hidden="true" className={"ch-color-4a0211"}  />
-                    <span className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+                    <FileText size={15} aria-hidden="true" className={"ch-color-var---color-ink-muted"}  />
+                    <span className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
                       <bdi>{f.state === "unavailable" ? t("fileReferences.unavailable", "File unavailable") : f.name}</bdi>
                     </span>
-                    <span className={"tabular text-caption "+("ch-color-094083")} >
+                    <span className={"tabular text-caption "+("ch-color-var---color-ink-subtle")} >
                       {f.state === "unavailable" ? "" : typeof f.bytes === "number" ? format.bytes(f.bytes) : f.size}
                     </span>
                     {/* Attachments live in the File Manager. HQ owns no second
                         store, which is why this says where the file actually is. */}
-                    <span className={"text-micro "+("ch-color-094083")} >
+                    <span className={"text-micro "+("ch-color-var---color-ink-subtle")} >
                       {t("chat.inFileManager", "in Files")}
                     </span>
                   </button>
@@ -277,7 +277,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                   <li key={r.emoji}>
                     <button
                       onClick={() => toggleReaction(message.id, r.emoji)}
-                      className={"hq-btn flex items-center gap-1 px-1.5 py-0.5 text-caption "+((mine?"ch-background-1416a8":"ch-background-314b28")+' '+(mine?"ch-border-c98846":"ch-border-52e799")+' '+"ch-border-radius-189003"+' '+"ch-color-7f7330")}
+                      className={"hq-btn flex items-center gap-1 px-1.5 py-0.5 text-caption "+((mine?"ch-background-var---color-accent-soft":"ch-background-var---color-surface-sunken")+' '+(mine?"ch-border-1px-solid-var---color-accent":"ch-border-1px-solid-transparent")+' '+"ch-border-radius-var---radius-chip"+' '+"ch-color-var---color-ink")}
 
                       aria-pressed={mine}
                       aria-label={t("chat.reactionCount", "{emoji}, {n} people", {
@@ -286,7 +286,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                       })}
                     >
                       <span aria-hidden="true">{r.emoji}</span>
-                      <span className={"tabular "+("ch-color-4a0211")} >
+                      <span className={"tabular "+("ch-color-var---color-ink-muted")} >
                         {r.userIds.length}
                       </span>
                     </button>
@@ -301,7 +301,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
           {message.replyCount > 0 && onOpenThread && (
             <button
               onClick={() => onOpenThread(message.id)}
-              className={"hq-btn mt-1.5 flex items-center gap-2 px-1.5 py-1 text-body-sm font-medium "+("ch-color-55f463"+' '+"ch-border-radius-332348")}
+              className={"hq-btn mt-1.5 flex items-center gap-2 px-1.5 py-1 text-body-sm font-medium "+("ch-color-var---color-ink-brand"+' '+"ch-border-radius-var---radius-control")}
 
             >
               <AvatarStack people={replyPeople} size={20} max={3} />
@@ -317,7 +317,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
 
       {/* Hover actions */}
       <div
-        className={"hq-msg-actions absolute end-3 top-0 flex items-center gap-0.5 p-0.5 "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-box-shadow-03c10c")}
+        className={"hq-msg-actions absolute end-3 top-0 flex items-center gap-0.5 p-0.5 "+("ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-box-shadow-var---shadow-raise")}
 
       >
         {showPicker ? (
@@ -329,7 +329,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                   toggleReaction(message.id, emoji);
                   setShowPicker(false);
                 }}
-                className={"hq-btn px-1.5 py-0.5 text-body-sm "+("ch-border-radius-332348")}
+                className={"hq-btn px-1.5 py-0.5 text-body-sm "+("ch-border-radius-var---radius-control")}
 
                 aria-label={t("chat.reactWith", "React with {emoji}", { emoji })}
               >
@@ -345,7 +345,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
               iconOnly
               label={t("chat.react", "Add reaction")}
               onClick={() => setShowPicker(true)}
-              className={"ch-color-4a0211"}
+              className={"ch-color-var---color-ink-muted"}
             >
               <Smiley size={15} aria-hidden="true" />
             </Button>
@@ -356,7 +356,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                 iconOnly
                 label={t("chat.replyInThread", "Reply in thread")}
                 onClick={() => onOpenThread(message.id)}
-                className={"ch-color-4a0211"}
+                className={"ch-color-var---color-ink-muted"}
               >
                 <ChatTeardropText size={15} aria-hidden="true" />
               </Button>
@@ -367,7 +367,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
               iconOnly
               label={message.pinned ? t("chat.unpin", "Unpin") : t("chat.pin", "Pin to channel")}
               onClick={() => togglePin(message.id)}
-              className={(message.pinned?"ch-color-55f463":"ch-color-4a0211")}
+              className={(message.pinned?"ch-color-var---color-ink-brand":"ch-color-var---color-ink-muted")}
             >
               <PushPin size={15} weight={message.pinned ? "fill" : "regular"} aria-hidden="true" />
             </Button>
@@ -382,7 +382,7 @@ function MessageBase({ message, grouped, onOpenThread }: MessageProps) {
                 aria-expanded={menuOpen}
                 aria-haspopup="menu"
                 onClick={() => setMenuOpen((v) => !v)}
-                className={"ch-color-4a0211"}
+                className={"ch-color-var---color-ink-muted"}
               >
                 <DotsThree size={15} weight="bold" aria-hidden="true" />
               </Button>}
@@ -500,7 +500,7 @@ function renderText(
             key={`${hit.id}-${i}`}
             type="button"
             onClick={() => onOpen(hit.id)}
-            className={"hq-btn "+("ch-background-1416a8"+' '+"ch-color-55f463"+' '+"ch-font-weight-eed0f8"+' '+"ch-padding-d5b924"+' '+"ch-margin-be0044"+' '+"ch-line-height-013d00"+' '+"ch-border-radius-a360d0")}
+            className={"hq-btn "+("ch-background-var---color-accent-soft"+' '+"ch-color-var---color-ink-brand"+' '+"ch-font-weight-600"+' '+"ch-padding-3px-4px"+' '+"ch-margin-3px--1px"+' '+"ch-line-height-inherit"+' '+"ch-border-radius-var---radius-object-sm")}
 
           >
             @{hit.name}
@@ -521,7 +521,7 @@ function linkify(text: string): React.ReactNode {
     i < urls.length
       ? [
           part,
-          <a key={`u-${i}`} href={urls[i]} target="_blank" rel="noreferrer noopener" className={"ch-color-55f463"+' '+"ch-text-decoration-36ec74"} >
+          <a key={`u-${i}`} href={urls[i]} target="_blank" rel="noreferrer noopener" className={"ch-color-var---color-ink-brand"+' '+"ch-text-decoration-underline"} >
             {urls[i]}
           </a>,
         ]

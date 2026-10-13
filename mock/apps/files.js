@@ -277,6 +277,7 @@ module.exports = {
     // bytes of a stored file: { path } for sendFile
     function storedPath(file) {
       if (file.storage.kind === 'whiteboard') throw Object.assign(new Error('A structured board does not have an uploaded path.'), { status: 503, code: 'invalid_whiteboard_content' });
+      if (file.storage.kind === "local") return require("../lib/local-file-assets").content({ realm: ctx.realm, workspaceId: identity.workspaceId, key: file.storage.key }).path;
       if (file.storage.kind === "upload") return file.storage.path;
       return path.join(ASSET_DIR, MANIFEST[file.storage.key].file);
     }

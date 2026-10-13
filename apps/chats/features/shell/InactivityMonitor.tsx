@@ -145,18 +145,18 @@ export function InactivityMonitor() {
   };
 
   return (
-    <div className={"fixed inset-0 z-[70] flex items-center justify-center p-4 "+("ch-background-0c6c0f")} >
+    <div className={"fixed inset-0 z-[70] flex items-center justify-center p-4 "+("ch-background-rgb-var---shadow-ink-0-18")} >
       <div
         role="alertdialog"
         aria-live="assertive"
         aria-label={t("inactivity.title", "Still there?")}
-        className={"hq-floating hq-rise w-full max-w-[380px] p-5 "+("ch-border-radius-8d459a"+' '+"ch-background-751d03")}
+        className={"hq-floating hq-rise w-full max-w-[380px] p-5 "+("ch-border-radius-var---radius-card"+' '+"ch-background-var---color-surface")}
 
       >
-        <h2 className={"hq-title "+("ch-color-7f7330")} >
+        <h2 className={"hq-title "+("ch-color-var---color-ink")} >
           {t("inactivity.title", "Still there?")}
         </h2>
-        <p className={"mt-1.5 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
+        <p className={"mt-1.5 text-body-sm leading-relaxed "+("ch-color-var---color-ink-muted")} >
           {scope === "computer"
             ? t(
                 "inactivity.bodyComputer",
@@ -169,9 +169,9 @@ export function InactivityMonitor() {
                 { n: minutes ?? 0, s: secondsLeft },
               )}
         </p>
-        <div aria-hidden="true" className={"mt-3 h-1 w-full overflow-hidden "+("ch-background-314b28"+' '+"ch-border-radius-189003")} >
+        <div aria-hidden="true" className={"mt-3 h-1 w-full overflow-hidden "+("ch-background-var---color-surface-sunken"+' '+"ch-border-radius-var---radius-chip")} >
           <div
-            className={("w-full origin-left rtl:origin-right ch-height-622640"+' '+"ch-background-3f17cb"+' '+"ch-transition-f17a3a")+" "+(geometryClass({transform:`scaleX(${secondsLeft / (WARN_MS / 1000)})`}))}
+            className={("w-full origin-left rtl:origin-right ch-height-100pct"+' '+"ch-background-var---color-accent"+' '+"ch-transition-transform-1s-linear")+" "+(geometryClass({transform:`scaleX(${secondsLeft / (WARN_MS / 1000)})`}))}
           />
         </div>
         <div className="mt-4 flex flex-wrap items-center justify-between gap-2">

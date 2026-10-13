@@ -118,7 +118,7 @@ export function MeetingLinkRow({
           value={link}
           aria-label={t("meetings.meetingLink", "Meeting link")}
           onFocus={(e) => e.currentTarget.select()}
-          className={"min-w-0 flex-1 basis-[220px] px-2.5 py-2 text-caption "+("ch-background-314b28"+' '+"ch-border-52e799"+' '+"ch-border-radius-332348"+' '+"ch-color-7f7330"+' '+"ch-font-family-84a226"+' '+"ch-text-overflow-2bf148")}
+          className={"min-w-0 flex-1 basis-[220px] px-2.5 py-2 text-caption "+("ch-background-var---color-surface-sunken"+' '+"ch-border-1px-solid-transparent"+' '+"ch-border-radius-var---radius-control"+' '+"ch-color-var---color-ink"+' '+"ch-font-family-var---font-mono"+' '+"ch-text-overflow-ellipsis")}
 
         />
         <div className="flex shrink-0 items-center gap-2">
@@ -165,7 +165,7 @@ export function MeetingLinkRow({
         {copied === "done" ? t("meetings.linkCopied", "Link copied") : copied === "blocked" ? blockedHint : ""}
       </span>
       {copied === "blocked" && (
-        <p aria-hidden="true" className={"text-caption "+("ch-color-4a0211")} >
+        <p aria-hidden="true" className={"text-caption "+("ch-color-var---color-ink-muted")} >
           {blockedHint}
         </p>
       )}
@@ -207,15 +207,15 @@ export function InviteCard({
           onClose();
         }
       }}
-      className={"hq-rise absolute bottom-3 start-3 z-20 flex w-[min(400px,calc(100%-24px))] flex-col gap-3 p-4 "+("ch-background-751d03"+' '+"ch-border-5065d4"+' '+"ch-border-radius-8d459a"+' '+"ch-box-shadow-3d74b9")}
+      className={"hq-rise absolute bottom-3 start-3 z-20 flex w-[min(400px,calc(100%-24px))] flex-col gap-3 p-4 "+("ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline"+' '+"ch-border-radius-var---radius-card"+' '+"ch-box-shadow-var---shadow-float")}
 
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h2 id="invite-card-title" className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
+          <h2 id="invite-card-title" className={"text-body-sm font-semibold "+("ch-color-var---color-ink")} >
             {ready ? t("call.readyTitle", "Your meeting is ready") : t("call.inviteTitle", "Invite people")}
           </h2>
-          <p className={"mt-1 text-body-sm leading-relaxed "+("ch-color-4a0211"+' '+"ch-max-width-91a84c")} >
+          <p className={"mt-1 text-body-sm leading-relaxed "+("ch-color-var---color-ink-muted"+' '+"ch-max-width-46ch")} >
             {ready
               ? t("call.readyBody", "Send this link to whoever should be in it.")
               : t("call.inviteBody", "Send this link to anyone you want in the call.")}{" "}
@@ -256,12 +256,12 @@ export function MeetingMessageCard({ meetingId }: { meetingId: string }) {
 
   return (
     <div
-      className={"mt-1.5 flex max-w-[480px] items-center gap-3 px-3 py-2.5 "+("ch-border-5065d4"+' '+"ch-border-radius-332348"+' '+"ch-background-751d03")}
+      className={"mt-1.5 flex max-w-[480px] items-center gap-3 px-3 py-2.5 "+("ch-border-1px-solid-var---color-hairline"+' '+"ch-border-radius-var---radius-control"+' '+"ch-background-var---color-surface")}
 
     >
       <span
         aria-hidden="true"
-        className={"flex shrink-0 items-center justify-center "+("ch-width-82b9d8"+' '+"ch-height-268b76"+' '+"ch-border-radius-332348"+' '+"ch-background-314b28"+' '+"ch-color-4a0211")}
+        className={"flex shrink-0 items-center justify-center "+("ch-width-32px"+' '+"ch-height-32px"+' '+"ch-border-radius-var---radius-control"+' '+"ch-background-var---color-surface-sunken"+' '+"ch-color-var---color-ink-muted")}
 
       >
         <VideoCamera size={16} weight={live ? "fill" : "regular"} />
@@ -270,17 +270,17 @@ export function MeetingMessageCard({ meetingId }: { meetingId: string }) {
         {meeting ? (
           <Link
             href={`/hq/meetings/${meeting.id}`}
-            className={"block truncate text-body-sm font-medium "+("ch-color-7f7330"+' '+"ch-text-decoration-80d654")}
+            className={"block truncate text-body-sm font-medium "+("ch-color-var---color-ink"+' '+"ch-text-decoration-none")}
 
           >
             <bdi>{meeting.title}</bdi>
           </Link>
         ) : (
-          <span className={"block truncate text-body-sm font-medium "+("ch-color-7f7330")} >
+          <span className={"block truncate text-body-sm font-medium "+("ch-color-var---color-ink")} >
             {t("meetings.gone", "This meeting is not here")}
           </span>
         )}
-        <span className={"tabular block truncate text-caption "+("ch-color-4a0211")} >
+        <span className={"tabular block truncate text-caption "+("ch-color-var---color-ink-muted")} >
           {status}
         </span>
       </span>

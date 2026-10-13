@@ -73,15 +73,15 @@ export function MeetingsView() {
       {/* On a phone the actions take a line of their own rather than
           crushing the title into the tabs. */}
       <header
-        className={"flex shrink-0 flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-2.5 "+("ch-background-a8869d")}
+        className={"flex shrink-0 flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-2.5 "+("ch-background-transparent")}
 
       >
         <div className="flex items-center gap-3">
-          <h1 className={"hq-title "+("ch-color-7f7330")} >
+          <h1 className={"hq-title "+("ch-color-var---color-ink")} >
             {t("meetings.title", "Meetings")}
           </h1>
           <div
-            className={"flex items-center gap-0.5 p-0.5 "+("ch-background-314b28"+' '+"ch-border-radius-332348")}
+            className={"flex items-center gap-0.5 p-0.5 "+("ch-background-var---color-surface-sunken"+' '+"ch-border-radius-var---radius-control")}
 
             role="group"
           >
@@ -92,7 +92,7 @@ export function MeetingsView() {
                 variant={tab === x.id ? "secondary" : "ghost"}
                 onClick={() => setTab(x.id)}
                 aria-pressed={tab === x.id}
-                className={(tab === x.id?"ch-box-shadow-03c10c":"")}
+                className={(tab === x.id?"ch-box-shadow-var---shadow-raise":"")}
               >
                 {x.label}
               </Button>
@@ -180,7 +180,7 @@ function MeetingRow({ meeting, past }: { meeting: Meeting; past: boolean }) {
 
   return (
     <li
-      className={"hq-row relative flex flex-col gap-2.5 px-3.5 py-3 "+("ch-background-751d03"+' '+(soon?"ch-border-c98846":"ch-border-5065d4")+' '+"ch-border-radius-8d459a")}
+      className={"hq-row relative flex flex-col gap-2.5 px-3.5 py-3 "+("ch-background-var---color-surface"+' '+(soon?"ch-border-1px-solid-var---color-accent":"ch-border-1px-solid-var---color-hairline")+' '+"ch-border-radius-var---radius-card")}
 
     >
       <div className="flex flex-col gap-2.5">
@@ -191,7 +191,7 @@ function MeetingRow({ meeting, past }: { meeting: Meeting; past: boolean }) {
                 href={`/hq/meetings/${meeting.id}`}
                 className="min-w-0 after:absolute after:inset-0 after:content-['']"
               >
-                <h3 className={"truncate text-body-sm font-semibold "+("ch-color-7f7330")} >
+                <h3 className={"truncate text-body-sm font-semibold "+("ch-color-var---color-ink")} >
                   <bdi>{meeting.title}</bdi>
                 </h3>
               </Link>
@@ -203,7 +203,7 @@ function MeetingRow({ meeting, past }: { meeting: Meeting; past: boolean }) {
               {meeting.recordingState === "ready" && <Chip>{t("meetings.recorded", "Recorded")}</Chip>}
               {meeting.recurrence === "weekly" && <Chip>{t("meetings.weekly", "Weekly")}</Chip>}
             </div>
-            <p className={"tabular mt-0.5 text-body-sm "+("ch-color-4a0211")} >
+            <p className={"tabular mt-0.5 text-body-sm "+("ch-color-var---color-ink-muted")} >
               {past ? `${formatShortDay(meeting.startsAt, timeZone)} · ` : ""}
               {formatRange(meeting.startsAt, meeting.endsAt, timeZone)}
               {room && (<>{" · "}<bdi>{room.name}</bdi></>)}
@@ -287,24 +287,24 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
   return (
     <div className="min-h-0 flex-1 overflow-y-auto">
       <div className="mx-auto w-full max-w-[760px] px-5 py-6">
-        <Link href="/hq/meetings" className={"text-body-sm "+("ch-color-4a0211")} >
+        <Link href="/hq/meetings" className={"text-body-sm "+("ch-color-var---color-ink-muted")} >
           {t("meetings.back", "Back to meetings")}
         </Link>
 
-        <h1 className={"hq-display mt-3 "+("ch-color-7f7330")} >
+        <h1 className={"hq-display mt-3 "+("ch-color-var---color-ink")} >
           <bdi>{meeting.title}</bdi>
         </h1>
-        <p className={"tabular mt-1 text-body-sm "+("ch-color-4a0211")} >
+        <p className={"tabular mt-1 text-body-sm "+("ch-color-var---color-ink-muted")} >
           {formatShortDay(meeting.startsAt, timeZone)} · {formatRange(meeting.startsAt, meeting.endsAt, timeZone)}
           {room && (<>{" · "}<bdi>{room.name}</bdi></>)}
         </p>
         {meeting.description && (
-          <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-7f7330"+' '+"ch-max-width-d350dc")} >
+          <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-var---color-ink"+' '+"ch-max-width-62ch")} >
             {meeting.description}
           </p>
         )}
         {meeting.recurrence === "weekly" && (
-          <p className={"mt-1 text-body-sm "+("ch-color-4a0211")} >
+          <p className={"mt-1 text-body-sm "+("ch-color-var---color-ink-muted")} >
             {t("meetings.repeatsWeekly", "Repeats weekly. Each week is its own meeting, with its own notes.")}
           </p>
         )}
@@ -321,7 +321,7 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
           {!ended && (
           <Link
             href={`/hq/meetings/${meeting.id}/call`}
-            className={"hq-btn inline-flex items-center gap-1.5 px-3.5 text-body-sm font-medium "+("ch-min-height-9efc87"+' '+"ch-background-3f17cb"+' '+"ch-color-7b8a5e"+' '+"ch-border-radius-332348")}
+            className={"hq-btn inline-flex items-center gap-1.5 px-3.5 text-body-sm font-medium "+("ch-min-height-36px"+' '+"ch-background-var---color-accent"+' '+"ch-color-var---color-ink-inverse"+' '+"ch-border-radius-var---radius-control")}
 
           >
             <VideoCamera size={14} weight="fill" aria-hidden="true" />
@@ -339,10 +339,10 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
               return (
                 <li key={id} className="flex items-center gap-2.5">
                   <Avatar name={u.name} initials={u.initials} tint={u.tint} size={28} hideStatus />
-                  <span className={"text-body-sm "+("ch-color-7f7330")} >
+                  <span className={"text-body-sm "+("ch-color-var---color-ink")} >
                     <bdi>{u.name}</bdi>
                   </span>
-                  <span className={"text-caption "+("ch-color-4a0211")} >
+                  <span className={"text-caption "+("ch-color-var---color-ink-muted")} >
                     <bdi>{u.title}</bdi>
                   </span>
                 </li>
@@ -351,12 +351,12 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
             {meeting.guests.map((g) => (
               <li key={g.email} className="flex items-center gap-2.5">
                 <Avatar name={g.name} initials={g.name.slice(0, 2).toUpperCase()} tint={3} size={28} guest hideStatus />
-                <span className={"text-body-sm "+("ch-color-7f7330")} >
+                <span className={"text-body-sm "+("ch-color-var---color-ink")} >
                   <bdi>{g.name}</bdi>
                 </span>
                 <Chip>{t("call.guest", "Guest")}</Chip>
                 {g.company && (
-                  <span className={"text-caption "+("ch-color-4a0211")} >
+                  <span className={"text-caption "+("ch-color-var---color-ink-muted")} >
                     <bdi>{g.company}</bdi>
                   </span>
                 )}
@@ -371,7 +371,7 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
           <section className="mt-6">
             <SectionHead title={t("meetings.meetingLink", "Meeting link")} />
             <Panel>
-              <p className={"text-body-sm leading-relaxed "+("ch-color-4a0211"+' '+"ch-max-width-5119b9")} >
+              <p className={"text-body-sm leading-relaxed "+("ch-color-var---color-ink-muted"+' '+"ch-max-width-68ch")} >
                 {t("meetings.linkLead", "Send this link to anyone outside the workspace.")} {linkPolicy}{" "}
                 {t("meetings.linkBranding", "The page carries your branding, never a third party's.")}
               </p>
@@ -386,7 +386,7 @@ export function MeetingDetail({ meetingId }: { meetingId: string }) {
           <section className="mt-6">
             <SectionHead title={t("meetings.notes", "Notes")} meta={formatTime(meeting.endsAt, timeZone)} />
             <Panel>
-              <p className={"text-body-sm leading-relaxed "+("ch-color-7f7330"+' '+"ch-max-width-5119b9")} >
+              <p className={"text-body-sm leading-relaxed "+("ch-color-var---color-ink"+' '+"ch-max-width-68ch")} >
                 {meeting.notes}
               </p>
             </Panel>

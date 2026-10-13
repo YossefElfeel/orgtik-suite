@@ -14,8 +14,7 @@ export function useSuiteApps({ currentScope, currentHref, sosUrl, onNavigate }) 
     const workspaceId = suite.session?.workspaceContext?.workspace.id || launch?.workspaceId;
     const root = sosUrl.replace(/\/$/, ""), apps = [];
     const item = (id, label, href, icon) => ({ id, label, href, icon, ...(onNavigate && id !== currentScope ? { onNavigate: () => onNavigate(href) } : {}) });
-    if (tools.length >= 2)
-        apps.push(item("global", suiteText(locale, "home"), root || "/", _jsx(House, {})));
+    apps.push(item("global", suiteText(locale, "home"), root || "/", _jsx(House, {})));
     for (const tool of tools) {
         const definition = SUITE_TOOLS[tool];
         const query = workspaceId ? `?workspaceId=${encodeURIComponent(workspaceId)}` : "";

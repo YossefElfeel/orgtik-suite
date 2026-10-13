@@ -37,22 +37,22 @@ export function SignedOutScreen() {
       : t("signedOut.manual", "You signed out.");
 
   return (
-    <div className={"flex h-[100dvh] w-full items-center justify-center p-6 "+("ch-background-8473a7")} >
-      <div className={"hq-raised w-full max-w-[420px] p-6 "+("ch-border-radius-8d459a"+' '+"ch-background-751d03")} >
+    <div className={"flex h-[100dvh] w-full items-center justify-center p-6 "+("ch-background-var---color-ground")} >
+      <div className={"hq-raised w-full max-w-[420px] p-6 "+("ch-border-radius-var---radius-card"+' '+"ch-background-var---color-surface")} >
         <span
           aria-hidden="true"
-          className={"inline-flex items-center justify-center "+("ch-width-d6db40"+' '+"ch-height-3a4095"+' '+"ch-border-radius-332348"+' '+"ch-background-1416a8"+' '+"ch-color-55f463")}
+          className={"inline-flex items-center justify-center "+("ch-width-40px"+' '+"ch-height-40px"+' '+"ch-border-radius-var---radius-control"+' '+"ch-background-var---color-accent-soft"+' '+"ch-color-var---color-ink-brand")}
 
         >
           <SignOut size={20} weight="bold" />
         </span>
-        <h1 className={"hq-display mt-4 "+("ch-color-7f7330")} >
+        <h1 className={"hq-display mt-4 "+("ch-color-var---color-ink")} >
           {t("signedOut.title", "Signed out")}
         </h1>
-        <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
+        <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-var---color-ink-muted")} >
           {why}
         </p>
-        <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-094083")} >
+        <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-var---color-ink-subtle")} >
           {t(
             "signedOut.record",
             "Your status is Offline to colleagues. The time of your last input stayed on this device and was not sent anywhere.",
@@ -61,7 +61,7 @@ export function SignedOutScreen() {
         <Button variant="primary" className="mt-5 w-full" onClick={signIn}>
           {t("signedOut.again", "Sign in again")}
         </Button>
-        <p className={"mt-3 text-center text-caption "+("ch-color-094083")} >
+        <p className={"mt-3 text-center text-caption "+("ch-color-var---color-ink-subtle")} >
           {t("signedOut.proto", "Prototype: in the product this is the {ws} sign-in.", { ws: name })}
         </p>
       </div>

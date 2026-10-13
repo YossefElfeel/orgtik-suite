@@ -1,10 +1,11 @@
 "use client";
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Button, ErrorState, LoadingState, NoPermissionState, buttonVariants } from "@orgtik/ui";
 import { profileFor, SessionRequestError } from "@orgtik/ui/auth";
+import { adaptiveEntry } from "@/lib/adaptive-entry";
 import { AuthPanel } from "@/components/auth/AuthPanel";
 import { API_URL } from "@/constants/env";
 import useUser from "@/hooks/use-user";
@@ -18,7 +19,7 @@ import { InvitationAccountForm, type InvitationAccount } from "./InvitationAccou
 import { InvitationSummary } from "./InvitationSummary";
 
 export function WorkspaceInvitation({ token }: { token: string }) {
-  const t = useTranslations("WorkspaceInvite"), router = useRouter(), dispatch = useAppDispatch(), mounted = useMounted();
+  const t = useTranslations("WorkspaceInvite"), router = useRouter(), search = useSearchParams(), dispatch = useAppDispatch(), mounted = useMounted();
   const { user, accessToken, workspaceContext } = useUser();
   const valid = /^[A-Za-z0-9_-]{16,100}$/.test(token);
   const metadata = useWorkspaceInvitationQuery(token, { skip: !valid || !mounted, refetchOnMountOrArgChange: true });
@@ -27,7 +28,7 @@ export function WorkspaceInvitation({ token }: { token: string }) {
   const operation = useRef<string | null>(null), busy = useRef(false);
   const invitation = metadata.data;
   const matching = mounted && !!user?.email && user.email.toLowerCase() === invitation?.email.toLowerCase();
-  const signIn = `/auth/login?switch=1&redirect=${encodeURIComponent(`/invite/${encodeURIComponent(token)}`)}`;
+  const signIn = `/auth/login?switch=1&redirect=${encodeURIComponent(`/invite/${encodeURIComponent(token)}${search.get("redirect") ? "?redirect=" + encodeURIComponent(search.get("redirect")!) : ""}`)}`;
   const home = <Link href="/" className={buttonVariants({ variant: "secondary" })}>{t("home")}</Link>;
   async function submit(values?: InvitationAccount, openAfter = false) {
     if (busy.current) return;
@@ -52,7 +53,7 @@ export function WorkspaceInvitation({ token }: { token: string }) {
       const session = await profileFor<IUser>(API_URL, result.tokens);
       if (session.workspaceContext?.workspace.id !== result.workspaceId || Number(session.user.id) !== result.userId) throw new SessionRequestError(503, "invitation_context_mismatch");
       dispatch(switchSession({ ...session, scopes: session.scopes.map(scope => ({ ...scope, permissions: scope.permissions || [] })) }));
-      router.replace("/");
+      router.replace(adaptiveEntry(session.workspaceContext, search.get("redirect")));
     } catch (error) {
       const needsSignIn = error instanceof SessionRequestError && [401, 403].includes(error.status);
       setProblem(needsSignIn ? "signInRequired" : "openFailed");

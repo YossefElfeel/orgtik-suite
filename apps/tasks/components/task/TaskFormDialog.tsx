@@ -9,13 +9,14 @@ import { useEffect, useMemo, useState, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
 import { X } from "@phosphor-icons/react";
-import { Button, Input, MultiSelect, Select, Textarea, toast } from "@orgtik/ui";
+import { Button, Input, MultiSelect, Select, Textarea, RichTextEditor, toast } from "@orgtik/ui";
 import { DatePicker } from "@orgtik/ui/dates";
 import { RHFField } from "@orgtik/ui/rhf";
 import { FormDialog } from "@/components/shared/FormDialog";
 import { useRouter } from "@/i18n/routing";
 import { useGetAllProjectsQuery, useGetProjectDetailsQuery } from "@/redux/features/projects/projectsApi";
 import { useCreateTaskMutation, useGetTaskQuery, useMoveTaskMutation, useUpdateTaskMutation } from "@/redux/features/task/taskApi";
+import { editableDescription } from "@/lib/rich-description";
 import { dueDayKey } from "@/lib/dates";
 import { isolate } from "@/lib/bidi";
 
@@ -193,7 +194,7 @@ export default function TaskFormDialog({
         rules={{ validate: (v: string) => v.trim().length >= 2 || t("nameRequired") }}
         render={(field) => <Input dir="auto" autoFocus {...field} />}
       />
-      <RHFField control={form.control} name="description" label={t("description")} optional render={(field) => <Textarea dir="auto" rows={4} maxRows={12} {...field} />} />
+      <RHFField control={form.control} name="description" label={t("description")} optional render={(field) => <RichTextEditor label={t("description")} value={editableDescription(field.value)} onChange={field.onChange} onBlur={field.onBlur} maxLength={10000} />} />
       <div className="grid gap-5 sm:grid-cols-2">
         <RHFField
           control={form.control}

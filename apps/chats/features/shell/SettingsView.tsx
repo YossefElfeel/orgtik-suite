@@ -80,7 +80,7 @@ export function SettingsView() {
       <div className="mx-auto flex w-full max-w-[1000px] gap-8 px-5 py-6">
         <SectionNav items={NAV.filter((n) => n.show !== false)} />
         <div className="min-w-0 max-w-[720px] flex-1">
-        <h1 className={"hq-display "+("ch-color-7f7330")} >
+        <h1 className={"hq-display "+("ch-color-var---color-ink")} >
           {t("settings.title", "Chats settings")}
         </h1>
 
@@ -88,7 +88,7 @@ export function SettingsView() {
             but every control is inert and the reason is said once, here. */}
         {!can.manageSettings && (
           <p
-            className={"mt-3 px-3.5 py-2.5 text-body-sm leading-relaxed "+("ch-background-314b28"+' '+"ch-border-radius-8d459a"+' '+"ch-color-4a0211")}
+            className={"mt-3 px-3.5 py-2.5 text-body-sm leading-relaxed "+("ch-background-var---color-surface-sunken"+' '+"ch-border-radius-var---radius-card"+' '+"ch-color-var---color-ink-muted")}
 
           >
             {t(
@@ -105,10 +105,10 @@ export function SettingsView() {
           <SectionHead title={t("settings.appearance", "Appearance")} />
           <Panel>
             <div className="py-1">
-              <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+              <p className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
                 {t("appearance.accent", "System colour")}
               </p>
-              <p className={"mt-0.5 text-caption leading-relaxed "+("ch-color-4a0211"+' '+"ch-max-width-28c433")} >
+              <p className={"mt-0.5 text-caption leading-relaxed "+("ch-color-var---color-ink-muted"+' '+"ch-max-width-58ch")} >
                 {t(
                   "appearance.accentHint",
                   "Yours only, on this device. Teal, amber, violet and blue are reserved for presence, so they are not offered: an accent that looked like a status would be read as one.",
@@ -125,7 +125,7 @@ export function SettingsView() {
           <SectionHead title={t("settings.floor", "Floor")} />
           <Panel>
             <fieldset>
-              <legend className={"pb-2 text-body-sm "+("ch-color-4a0211")} >
+              <legend className={"pb-2 text-body-sm "+("ch-color-var---color-ink-muted")} >
                 {t("settings.templateLegend", "Choose the layout that fits the team. You can change it later.")}
               </legend>
               <div className="flex flex-col gap-1.5">
@@ -134,7 +134,7 @@ export function SettingsView() {
                   return (
                     <label
                       key={tpl.id}
-                      className={"hq-row flex cursor-pointer items-center gap-2.5 px-3 py-2.5 "+((active?"ch-border-c98846":"ch-border-8ff264")+' '+"ch-border-radius-332348"+' '+(active?"ch-background-1416a8":"ch-background-751d03"))}
+                      className={"hq-row flex cursor-pointer items-center gap-2.5 px-3 py-2.5 "+((active?"ch-border-1px-solid-var---color-accent":"ch-border-1px-solid-var---color-hairline-strong")+' '+"ch-border-radius-var---radius-control"+' '+(active?"ch-background-var---color-accent-soft":"ch-background-var---color-surface"))}
 
                     >
                       <input
@@ -143,12 +143,12 @@ export function SettingsView() {
                         checked={active}
                         onChange={() => update({ template: tpl.id })}
                         disabled={!can.manageSettings}
-                        className={"ch-accent-color-e56d5b"}
+                        className={"ch-accent-color-var---color-accent"}
                       />
-                      <span className={"flex-1 text-body-sm font-medium "+("ch-color-7f7330")} >
+                      <span className={"flex-1 text-body-sm font-medium "+("ch-color-var---color-ink")} >
                         {t(`template.${tpl.id}`, tpl.label)}
                       </span>
-                      <span className={"text-caption "+("ch-color-4a0211")} >
+                      <span className={"text-caption "+("ch-color-var---color-ink-muted")} >
                         {t(`template.${tpl.id}.capacity`, tpl.capacity)}
                       </span>
                     </label>
@@ -241,10 +241,10 @@ export function SettingsView() {
             <Divider />
             <div className="flex items-center justify-between gap-4 py-2.5">
               <div className="min-w-0">
-                <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+                <p className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
                   {t("settings.retention", "Message retention")}
                 </p>
-                <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
+                <p className={"mt-0.5 text-caption "+("ch-color-var---color-ink-muted")} >
                   {t("settings.retentionHint", "Deleting reaches the search index and stored media, not just the screen.")}
                 </p>
               </div>
@@ -254,7 +254,7 @@ export function SettingsView() {
                 onChange={(e) =>
                   update({ retentionDays: e.target.value === "forever" ? null : Number(e.target.value) })
                 }
-                className={"shrink-0 "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"+' '+"ch-color-7f7330")}
+                className={"shrink-0 "+("ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-7px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-34px"+' '+"ch-color-var---color-ink")}
 
                 aria-label={t("settings.retention", "Message retention")}
               >
@@ -420,7 +420,7 @@ export function SettingsView() {
         <section id="s-integrations" className="mt-6">
           <SectionHead title={t("settings.integrations", "Integrations")} />
           <Panel>
-            <p className={"pb-2 text-body-sm "+("ch-color-4a0211")} >
+            <p className={"pb-2 text-body-sm "+("ch-color-var---color-ink-muted")} >
               {t("settings.integrationsBody", "External providers are unavailable in this local prototype. Scheduled workspace meetings remain saved here.")}
             </p>
             <IntegrationRow id="google" label={<bdi>Google Calendar</bdi>} />
@@ -432,7 +432,7 @@ export function SettingsView() {
         <section id="s-access" className="mt-6">
           <SectionHead title={t("settings.access", "Access")} meta={t("settings.accessMeta", "who may do what")} />
           <Panel>
-            <p className={"pb-2 text-body-sm "+("ch-color-4a0211")} >
+            <p className={"pb-2 text-body-sm "+("ch-color-var---color-ink-muted")} >
               {t("settings.accessBody", "These narrow what members may do. Admins and the owner keep everything; a guest never gains anything here.")}
             </p>
             <Choice
@@ -484,7 +484,7 @@ export function SettingsView() {
                 disabled={ro}
                 aria-label={t("settings.workspaceName", "Name")}
                 onBlur={(e) => e.target.value.trim() && update({ name: e.target.value.trim() })}
-                className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"+' '+"ch-width-2acaf3"}
+                className={"ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-7px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-34px"+' '+"ch-width-200px"}
               />
             </Row>
             <Divider />
@@ -513,7 +513,7 @@ export function SettingsView() {
             meta={t("settings.fromSaas", "from the Business OS")}
           />
           <Panel>
-            <p className={"pb-3 text-body-sm "+("ch-color-4a0211")} >
+            <p className={"pb-3 text-body-sm "+("ch-color-var---color-ink-muted")} >
               {t(
                 "settings.directoryNote",
                 "Chats does not keep its own list of people. Adding someone, removing them, or changing a role happens once, in the Business OS, and applies to all seven modules.",
@@ -523,14 +523,14 @@ export function SettingsView() {
               {users.slice(0, 5).map((u) => (
                 <li key={u.id} className="flex items-center gap-2.5 py-1">
                   <Avatar name={u.name} initials={u.initials} tint={u.tint} size={28} hideStatus />
-                  <span className={"flex-1 truncate text-body-sm "+("ch-color-7f7330")} >
+                  <span className={"flex-1 truncate text-body-sm "+("ch-color-var---color-ink")} >
                     <bdi>{u.name}</bdi>
                   </span>
                   <Chip>{t(`role.${u.role}`, ROLE_LABEL[u.role])}</Chip>
                 </li>
               ))}
             </ul>
-            <p className={"tabular pt-2 text-caption "+("ch-color-094083")} >
+            <p className={"tabular pt-2 text-caption "+("ch-color-var---color-ink-subtle")} >
               {t("settings.andMore", "and {n} more", { n: users.length - 5 })}
             </p>
             <Button
@@ -555,10 +555,10 @@ export function SettingsView() {
             <Panel>
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
-                  <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+                  <p className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
                     {t("settings.runSetup", "Run setup again")}
                   </p>
-                  <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
+                  <p className={"mt-0.5 text-caption "+("ch-color-var---color-ink-muted")} >
                     {t(
                       "settings.runSetupHint",
                       "The five-step guide from the first day: name, floor, rooms, people, defaults. Nothing is changed until you finish it.",
@@ -580,7 +580,7 @@ export function SettingsView() {
         <section id="s-transparency" className="mt-6 pb-4">
           <SectionHead title={t("settings.transparency", "Transparency")} />
           <Panel>
-            <p className={"text-body-sm "+("ch-color-4a0211")} >
+            <p className={"text-body-sm "+("ch-color-var---color-ink-muted")} >
               {t(
                 "settings.transparencyBody",
                 "Every member can read exactly what Chats records about them. The page reflects the settings above as you change them.",
@@ -619,11 +619,11 @@ function QuietHours({
     <div className="py-2.5">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <p className={"flex items-center gap-2 text-body-sm font-medium "+("ch-color-7f7330")} >
+          <p className={"flex items-center gap-2 text-body-sm font-medium "+("ch-color-var---color-ink")} >
             {t("settings.quietHours", "Quiet hours")}
             {activeNow && <Chip tone="accent">{t("settings.quietNow", "On now")}</Chip>}
           </p>
-          <p className={"mt-0.5 text-caption leading-relaxed "+("ch-color-4a0211"+' '+"ch-max-width-28c433")} >
+          <p className={"mt-0.5 text-caption leading-relaxed "+("ch-color-var---color-ink-muted"+' '+"ch-max-width-58ch")} >
             {t(
               "settings.quietHoursHint",
               "Nothing interrupts you between these times. Knocks are held and delivered when the window closes, so nothing is lost - it just waits.",
@@ -636,7 +636,7 @@ function QuietHours({
           checked={on}
           onChange={(e) => onChange(e.target.checked ? { from, to } : null)}
           aria-label={t("settings.quietHours", "Quiet hours")}
-          className={"mt-0.5 shrink-0 "+("ch-width-f74111"+' '+"ch-height-ad1b79"+' '+"ch-accent-color-e56d5b")}
+          className={"mt-0.5 shrink-0 "+("ch-width-18px"+' '+"ch-height-18px"+' '+"ch-accent-color-var---color-accent")}
 
         />
       </div>
@@ -644,30 +644,30 @@ function QuietHours({
       {on && (
         <div className="mt-3 flex flex-wrap items-end gap-3">
           <label className="flex flex-col gap-1">
-            <span className={"text-caption "+("ch-color-4a0211")} >
+            <span className={"text-caption "+("ch-color-var---color-ink-muted")} >
               {t("settings.quietFrom", "From")}
             </span>
             <input
               type="time"
               value={from}
               onChange={(e) => onChange({ from: e.target.value, to })}
-              className={"tabular "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"+' '+"ch-color-7f7330")}
+              className={"tabular "+("ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-7px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-34px"+' '+"ch-color-var---color-ink")}
 
             />
           </label>
           <label className="flex flex-col gap-1">
-            <span className={"text-caption "+("ch-color-4a0211")} >
+            <span className={"text-caption "+("ch-color-var---color-ink-muted")} >
               {t("settings.quietTo", "To")}
             </span>
             <input
               type="time"
               value={to}
               onChange={(e) => onChange({ from, to: e.target.value })}
-              className={"tabular "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"+' '+"ch-color-7f7330")}
+              className={"tabular "+("ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-7px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-34px"+' '+"ch-color-var---color-ink")}
 
             />
           </label>
-          <p className={"pb-2 text-caption "+("ch-color-094083")} >
+          <p className={"pb-2 text-caption "+("ch-color-var---color-ink-subtle")} >
             {from > to
               ? t("settings.quietOvernight", "Overnight, across midnight.")
               : t("settings.quietSameDay", "Within the same day.")}
@@ -694,7 +694,7 @@ function SectionNav({ items }: { items: { id: string; label: string }[] }) {
                 e.preventDefault();
                 document.getElementById(it.id)?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
-              className={"hq-row block px-2.5 py-1.5 text-body-sm "+("ch-border-radius-332348"+' '+"ch-color-4a0211")}
+              className={"hq-row block px-2.5 py-1.5 text-body-sm "+("ch-border-radius-var---radius-control"+' '+"ch-color-var---color-ink-muted")}
 
             >
               {it.label}
@@ -711,11 +711,11 @@ function Row({ label, hint, children }: { label: React.ReactNode; hint?: string;
   return (
     <div className="flex items-center justify-between gap-4 py-2.5">
       <div className="min-w-0">
-        <p className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+        <p className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
           {label}
         </p>
         {hint && (
-          <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
+          <p className={"mt-0.5 text-caption "+("ch-color-var---color-ink-muted")} >
             {hint}
           </p>
         )}
@@ -746,7 +746,7 @@ function Choice({
       <div
         role="radiogroup"
         aria-label={label}
-        className={"flex items-center gap-0.5 p-0.5 "+("ch-background-314b28"+' '+"ch-border-radius-332348")}
+        className={"flex items-center gap-0.5 p-0.5 "+("ch-background-var---color-surface-sunken"+' '+"ch-border-radius-var---radius-control")}
 
       >
         {options.map(([v, l]) => (
@@ -757,7 +757,7 @@ function Choice({
             aria-checked={value === v}
             disabled={disabled}
             onClick={() => onChange(v)}
-            className={"hq-btn px-2.5 text-body-sm font-medium "+("ch-min-height-4f3317"+' '+"ch-border-radius-0abaf1"+' '+(value === v?"ch-background-751d03":"ch-background-a8869d")+' '+(value === v?"ch-color-7f7330":"ch-color-4a0211")+' '+(value === v?"ch-box-shadow-03c10c":"ch-box-shadow-ce3f2c"))}
+            className={"hq-btn px-2.5 text-body-sm font-medium "+("ch-min-height-28px"+' '+"ch-border-radius-var---radius-object-lg"+' '+(value === v?"ch-background-var---color-surface":"ch-background-transparent")+' '+(value === v?"ch-color-var---color-ink":"ch-color-var---color-ink-muted")+' '+(value === v?"ch-box-shadow-var---shadow-raise":"ch-box-shadow-none"))}
 
           >
             {l}
@@ -791,7 +791,7 @@ function SelectRow({
         disabled={disabled}
         onChange={(e) => onChange(e.target.value)}
         aria-label={label}
-        className={"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b"+' '+"ch-color-7f7330"}
+        className={"ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-7px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-34px"+' '+"ch-color-var---color-ink"}
       >
         {options.map(([v, l]) => (
           <option key={v} value={v}>
@@ -819,10 +819,10 @@ function Toggle({
   return (
     <label className="flex cursor-pointer items-start justify-between gap-4 py-2.5">
       <span className="min-w-0">
-        <span className={"block text-body-sm font-medium "+("ch-color-7f7330")} >
+        <span className={"block text-body-sm font-medium "+("ch-color-var---color-ink")} >
           {label}
         </span>
-        <span className={"mt-0.5 block text-caption leading-relaxed "+("ch-color-4a0211")} >
+        <span className={"mt-0.5 block text-caption leading-relaxed "+("ch-color-var---color-ink-muted")} >
           {hint}
         </span>
       </span>
@@ -832,7 +832,7 @@ function Toggle({
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
         disabled={disabled}
-        className={"mt-0.5 shrink-0 "+("ch-width-f74111"+' '+"ch-height-ad1b79"+' '+"ch-accent-color-e56d5b")}
+        className={"mt-0.5 shrink-0 "+("ch-width-18px"+' '+"ch-height-18px"+' '+"ch-accent-color-var---color-accent")}
 
       />
     </label>
@@ -840,7 +840,7 @@ function Toggle({
 }
 
 function Divider() {
-  return <span className={"block h-px "+("ch-background-423228")}  />;
+  return <span className={"block h-px "+("ch-background-var---color-hairline")}  />;
 }
 
 /**

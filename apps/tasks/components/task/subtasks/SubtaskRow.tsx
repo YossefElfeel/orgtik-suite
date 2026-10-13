@@ -16,6 +16,7 @@ import {
   MenuTrigger,
   cn,
 } from "@orgtik/ui";
+import { SubtaskMetadata } from "./SubtaskMetadata";
 import { isolate } from "@/lib/bidi";
 import type { ISetupItem } from "@/types/tasks";
 
@@ -190,8 +191,9 @@ export function SubtaskRow({
         />
       )}
 
+      <SubtaskMetadata subtask={subtask} readOnly={readOnly} />
       {!readOnly && !editing ? (
-        <Menu onOpenChangeComplete={runPending}>
+      <Menu onOpenChangeComplete={runPending}>
           <MenuTrigger
             ref={triggerRef}
             render={

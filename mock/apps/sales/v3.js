@@ -577,6 +577,7 @@ module.exports = function crmV3(S) {
           "lost_reason_required",
           "Describe why the lead was lost.",
         );
+      const changed = pipelineFor(row).id !== pipeline.id || stageFor(row).id !== stage.id;
       row.crmPipelineId = pipeline.id;
       row.crmStageId = stage.id;
       row.status = stage.status;
@@ -585,7 +586,7 @@ module.exports = function crmV3(S) {
         stage.status === "lost"
           ? String(body.lostReason || row.lostReason).slice(0, 2000)
           : null;
-      event(req, row, "stage", "Pipeline stage changed", {
+      if (changed) event(req, row, "stage", "Pipeline stage changed", {
         pipelineId: pipeline.id,
         stageId: stage.id,
       });
@@ -761,9 +762,12 @@ module.exports = function crmV3(S) {
             "confirm_contract_first",
             "Confirm the actual contract before marking this deal won.",
           );
+        const changed = current.pipelineId !== pipeline.id || current.stageId !== stage.id;
         row.crmPipelineId = pipeline.id;
         row.crmStageId = stage.id;
         row.crmProbability = stage.probability;
+        const contact = db.customers.find(item => item.id === row.customerId);
+        if (changed && contact) event(req, contact, "stage", "Deal stage changed", { pipelineId: pipeline.id, stageId: stage.id, sourceType: "project", sourceId: row.id });
         return projectOut(req, row);
       }),
     );

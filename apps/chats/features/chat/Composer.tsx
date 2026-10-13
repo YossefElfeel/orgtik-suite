@@ -22,7 +22,8 @@ import { useT } from "@/lib/i18n";
 import type { FileRef } from "@/entities";
 import { FilesPicker } from "./FilesPicker";
 import { fileScope, fileAuthority as currentAuthority, useFileAuthority, type FilePickerItem } from "@/lib/file-references";
-import { useFormatter } from "@orgtik/ui";
+import { useFormatter, retainedDraftKey, readRetainedDraft, writeRetainedDraft } from "@orgtik/ui";
+import { EMOJI_SEARCH } from "@/lib/emoji";
 
 /** Files the File Manager would offer. Replaced by its picker endpoint. */
 /** A small, deliberate set. A full emoji index is a search problem, not a
@@ -37,6 +38,7 @@ const EMOJI = [
    still there after a trip to another channel. In the product they sync;
    in the prototype they last the session. */
 const drafts = new Map<string, string>();
+function storedDraft(key: string): { text: string; attachments: FileRef[] } { const value = readRetainedDraft(retainedDraftKey("chat:" + key)); if (value && typeof value === "object" && typeof (value as { text?: unknown }).text === "string") { const draft = value as { text: string; attachments?: FileRef[] }; return { text: draft.text, attachments: Array.isArray(draft.attachments) ? draft.attachments : [] }; } return { text: "", attachments: [] }; }
 
 interface ComposerProps {
   channelId: string;
@@ -59,19 +61,20 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
   const [sending, setSending] = useState(false), [unconfirmed, setUnconfirmed] = useState(false);
   const [sendError, setSendError] = useState(false);
   const t = useT();
-  const [text, setText] = useState(() => (scopedDraftKey ? drafts.get(scopedDraftKey) ?? "" : ""));
+  const [text, setText] = useState(() => (scopedDraftKey ? drafts.get(scopedDraftKey) ?? storedDraft(scopedDraftKey).text : ""));
   useEffect(() => {
     if (!scopedDraftKey || draftScope !== scopedDraftKey) return;
     if (text) drafts.set(scopedDraftKey, text);
     else drafts.delete(scopedDraftKey);
   }, [scopedDraftKey, draftScope, text]);
   const [attachments, setAttachments] = useState<FileRef[]>([]);
-  useEffect(() => { const pending = recoverableMessage(channelId, threadId); setText(pending?.text || drafts.get(scopedDraftKey) || ""); setAttachments(pending?.attachments || []); setUnconfirmed(Boolean(pending)); setSendError(Boolean(pending)); setDraftScope(scopedDraftKey); }, [scopedDraftKey, channelId, threadId]);
+  useEffect(() => { const pending = recoverableMessage(channelId, threadId); setText(pending?.text || drafts.get(scopedDraftKey) || storedDraft(scopedDraftKey).text); setAttachments(pending?.attachments || storedDraft(scopedDraftKey).attachments); setUnconfirmed(Boolean(pending)); setSendError(Boolean(pending)); setDraftScope(scopedDraftKey); }, [scopedDraftKey, channelId, threadId]);
   const [mentionQuery, setMentionQuery] = useState<string | null>(null);
   const [activeMention, setActiveMention] = useState(0);
   const listId = useId();
   const [showFiles, setShowFiles] = useState(false);
-  const [showEmoji, setShowEmoji] = useState(false);
+  const [showEmoji, setShowEmoji] = useState(false), [emojiQuery, setEmojiQuery] = useState("");
+  useEffect(() => { if (draftScope === scopedDraftKey && !unconfirmed) writeRetainedDraft(retainedDraftKey("chat:" + scopedDraftKey), { text, attachments }); }, [draftScope, scopedDraftKey, text, attachments, unconfirmed]);
   const areaRef = useRef<HTMLTextAreaElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -141,7 +144,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
   if (disabled) {
     return (
       <div
-        className={"mx-4 mb-4 flex items-center justify-center px-4 py-3 text-body-sm "+("ch-background-314b28"+' '+"ch-border-5065d4"+' '+"ch-border-radius-8d459a"+' '+"ch-color-4a0211")}
+        className={"mx-4 mb-4 flex items-center justify-center px-4 py-3 text-body-sm "+("ch-background-var---color-surface-sunken"+' '+"ch-border-1px-solid-var---color-hairline"+' '+"ch-border-radius-var---radius-card"+' '+"ch-color-var---color-ink-muted")}
 
       >
         {disabledReason ?? t("chat.archived", "This channel is archived. It stays searchable.")}
@@ -156,7 +159,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
           id={listId}
           role="listbox"
           aria-label={t("chat.mentionList", "People to mention")}
-          className={"absolute bottom-full z-30 mb-1.5 w-[260px] overflow-hidden p-1 "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-8d459a"+' '+"ch-box-shadow-3d74b9")}
+          className={"absolute bottom-full z-30 mb-1.5 w-[260px] overflow-hidden p-1 "+("ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-card"+' '+"ch-box-shadow-var---shadow-float")}
 
         >
           {matches.map((u, i) => (
@@ -167,14 +170,14 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => applyMention(u.id)}
                 data-active={i === activeMention ? "true" : undefined}
-                className={"hq-row flex w-full items-center gap-2 px-2 py-1.5 text-start "+("ch-border-radius-332348")}
+                className={"hq-row flex w-full items-center gap-2 px-2 py-1.5 text-start "+("ch-border-radius-var---radius-control")}
 
               >
                 <Avatar name={u.name} initials={u.initials} tint={u.tint} size={20} hideStatus />
-                <span className={"text-body-sm "+("ch-color-7f7330")} >
+                <span className={"text-body-sm "+("ch-color-var---color-ink")} >
                   <bdi>{u.name}</bdi>
                 </span>
-                <span className={"ms-auto truncate text-caption "+("ch-color-094083")} >
+                <span className={"ms-auto truncate text-caption "+("ch-color-var---color-ink-subtle")} >
                   <bdi>{u.title}</bdi>
                 </span>
               </button>
@@ -187,13 +190,14 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
 
       {showEmoji && (
         <div
-          className={"hq-floating hq-rise absolute bottom-full z-30 mb-1.5 w-[228px] p-2 "+("ch-border-radius-8d459a")}
+          className={"hq-floating hq-rise absolute bottom-full z-30 mb-1.5 w-[228px] p-2 "+("ch-border-radius-var---radius-card")}
 
           role="dialog"
           aria-label={t("chat.emoji", "Add emoji")}
         >
-          <div className="grid grid-cols-6 gap-1">
-            {EMOJI.map((e) => (
+          <input className="mb-2 w-full rounded-field border border-line bg-raised px-2 py-2 text-body-sm" type="search" aria-label={t("roadmap.searchEmoji", "Search emoji")} placeholder={t("roadmap.searchEmoji", "Search emoji")} value={emojiQuery} onChange={event => setEmojiQuery(event.target.value)} />
+          <div className="grid max-h-56 grid-cols-6 gap-1 overflow-y-auto">
+            {EMOJI_SEARCH.filter(([emoji, aliases]) => !emojiQuery || (emoji + " " + aliases).toLocaleLowerCase().includes(emojiQuery.toLocaleLowerCase())).map(([e]) => (
               <button
                 key={e}
                 onClick={() => {
@@ -201,7 +205,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
                   setShowEmoji(false);
                   areaRef.current?.focus();
                 }}
-                className={"hq-btn flex items-center justify-center text-title-sm "+("ch-height-268b76"+' '+"ch-border-radius-332348")}
+                className={"hq-btn flex items-center justify-center text-title-sm "+("ch-height-32px"+' '+"ch-border-radius-var---radius-control")}
 
                 aria-label={t("chat.insertEmoji", "Insert {emoji}", { emoji: e })}
               >
@@ -214,15 +218,15 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
 
       {sendError ? <p role="alert" className="mb-2 text-body-sm text-danger">{unconfirmed ? t("fileReferences.messageUnconfirmed", "Message delivery is unconfirmed. Retry to recover the same message before editing.") : t("fileReferences.messageRefused", "The message was not saved. Review your file access and try again.")}</p> : null}
       <div
-        className={"flex flex-col "+("ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-8d459a")}
+        className={"flex flex-col "+("ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-card")}
 
       >
         {draftScope === scopedDraftKey && attachments.length > 0 && (
-          <ul className={"flex flex-wrap gap-1.5 border-b p-2 "+("ch-border-color-407eb5")} >
+          <ul className={"flex flex-wrap gap-1.5 border-b p-2 "+("ch-border-color-var---color-hairline")} >
             {attachments.map((f) => (
               <li key={f.id}>
                 <span
-                  className={"flex items-center gap-1.5 px-2 py-1 text-caption "+("ch-background-314b28"+' '+"ch-border-radius-332348")}
+                  className={"flex items-center gap-1.5 px-2 py-1 text-caption "+("ch-background-var---color-surface-sunken"+' '+"ch-border-radius-var---radius-control")}
 
                 >
                   <bdi>{f.name || t("fileReferences.selected", "Selected file")}</bdi>
@@ -232,7 +236,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
                     aria-label={t("chat.removeAttachment", "Remove {name}", { name: f.name })}
                     className="hq-btn"
                   >
-                    <X size={11} weight="bold" aria-hidden="true" className={"ch-color-094083"}  />
+                    <X size={11} weight="bold" aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
                   </button>
                 </span>
               </li>
@@ -282,7 +286,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
           rows={1}
           placeholder={placeholder}
           aria-label={placeholder}
-          className={"w-full resize-none bg-transparent px-3 pt-2.5 text-body-sm leading-[1.55] outline-none "+("ch-color-7f7330"+' '+"ch-min-height-fd2692")}
+          className={"w-full resize-none bg-transparent px-3 pt-2.5 text-body-sm leading-[1.55] outline-none "+("ch-color-var---color-ink"+' '+"ch-min-height-40px")}
 
         />
 
@@ -298,7 +302,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
                 setShowFiles((v) => !v);
                 setShowEmoji(false);
               }}
-              className={"ch-color-094083"}
+              className={"ch-color-var---color-ink-subtle"}
             >
               <Paperclip size={16} aria-hidden="true" />
             </Button>
@@ -309,7 +313,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
               disabled={sending || unconfirmed}
               label={t("chat.mention", "Mention someone")}
               onClick={() => onChange(`${text}${text.endsWith(" ") || !text ? "" : " "}@`)}
-              className={"ch-color-094083"}
+              className={"ch-color-var---color-ink-subtle"}
             >
               <At size={16} aria-hidden="true" />
             </Button>
@@ -324,7 +328,7 @@ export function Composer({ channelId, threadId, placeholder, draftKey, disabled,
                 setShowEmoji((v) => !v);
                 setShowFiles(false);
               }}
-              className={"ch-color-094083"}
+              className={"ch-color-var---color-ink-subtle"}
             >
               <Smiley size={16} aria-hidden="true" />
             </Button>

@@ -53,7 +53,7 @@ export function ChatIndexView() {
       <NewMessageModal open={messaging} onClose={() => setMessaging(false)} />
 
       <div className="mx-auto w-full max-w-[640px] px-4 py-4">
-        <h1 className={"hq-title "+("ch-color-7f7330")} >
+        <h1 className={"hq-title "+("ch-color-var---color-ink")} >
           {t("chat.conversations", "Conversations")}
         </h1>
 
@@ -61,11 +61,11 @@ export function ChatIndexView() {
           <li>
             <Link
               href="/hq/chat/catch-up"
-              className={"hq-row flex items-center gap-3 px-3 "+("ch-border-radius-332348"+' '+"ch-min-height-fdd09d")}
+              className={"hq-row flex items-center gap-3 px-3 "+("ch-border-radius-var---radius-control"+' '+"ch-min-height-48px")}
 
             >
-              <Tray size={18} aria-hidden="true" className={"ch-color-55f463"}  />
-              <span className={"flex-1 text-body-sm font-medium "+("ch-color-7f7330")} >
+              <Tray size={18} aria-hidden="true" className={"ch-color-var---color-ink-brand"}  />
+              <span className={"flex-1 text-body-sm font-medium "+("ch-color-var---color-ink")} >
                 {t("chat.catchUp", "Catch up")}
               </span>
               <Count value={needsYou} mention />
@@ -74,11 +74,11 @@ export function ChatIndexView() {
           <li>
             <Link
               href="/hq/chat/search?q="
-              className={"hq-row flex items-center gap-3 px-3 "+("ch-border-radius-332348"+' '+"ch-min-height-fdd09d")}
+              className={"hq-row flex items-center gap-3 px-3 "+("ch-border-radius-var---radius-control"+' '+"ch-min-height-48px")}
 
             >
-              <MagnifyingGlass size={18} aria-hidden="true" className={"ch-color-4a0211"}  />
-              <span className={"flex-1 text-body-sm "+("ch-color-7f7330")} >
+              <MagnifyingGlass size={18} aria-hidden="true" className={"ch-color-var---color-ink-muted"}  />
+              <span className={"flex-1 text-body-sm "+("ch-color-var---color-ink")} >
                 {t("chat.search", "Search")}
               </span>
             </Link>
@@ -97,23 +97,23 @@ export function ChatIndexView() {
             <li key={c.id}>
               <Link
                 href={`/hq/chat/${c.id}`}
-                className={"hq-row flex items-center gap-3 px-3 "+("ch-border-radius-332348"+' '+"ch-min-height-2fdc54")}
+                className={"hq-row flex items-center gap-3 px-3 "+("ch-border-radius-var---radius-control"+' '+"ch-min-height-46px")}
 
               >
                 {c.kind === "private" ? (
-                  <Lock size={16} aria-hidden="true" className={"ch-color-094083"}  />
+                  <Lock size={16} aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
                 ) : (
-                  <Hash size={16} aria-hidden="true" className={"ch-color-094083"}  />
+                  <Hash size={16} aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
                 )}
                 <span className="min-w-0 flex-1">
                   <span
-                    className={(`block truncate text-body-sm ${c.unread > 0 ? "font-semibold" : ""}`)+" "+("ch-color-7f7330")}
+                    className={(`block truncate text-body-sm ${c.unread > 0 ? "font-semibold" : ""}`)+" "+("ch-color-var---color-ink")}
 
                   >
                     <bdi>{c.name}</bdi>
                   </span>
                   {c.topic && (
-                    <span className={"block truncate text-caption "+("ch-color-4a0211")} >
+                    <span className={"block truncate text-caption "+("ch-color-var---color-ink-muted")} >
                       <bdi>{c.topic}</bdi>
                     </span>
                   )}
@@ -136,16 +136,16 @@ export function ChatIndexView() {
               <li key={c.id}>
                 <Link
                   href={`/hq/chat/${c.id}`}
-                  className={"hq-row flex items-center gap-3 px-3 "+("ch-border-radius-332348"+' '+"ch-min-height-2fdc54")}
+                  className={"hq-row flex items-center gap-3 px-3 "+("ch-border-radius-var---radius-control"+' '+"ch-min-height-46px")}
 
                 >
                   {other ? (
                     <Avatar name={other.name} initials={other.initials} tint={other.tint} size={28} hideStatus />
                   ) : (
-                    <UsersThree size={16} aria-hidden="true" className={"ch-color-094083"}  />
+                    <UsersThree size={16} aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
                   )}
                   <span
-                    className={(`min-w-0 flex-1 truncate text-body-sm ${c.unread > 0 ? "font-semibold" : ""}`)+" "+("ch-color-7f7330")}
+                    className={(`min-w-0 flex-1 truncate text-body-sm ${c.unread > 0 ? "font-semibold" : ""}`)+" "+("ch-color-var---color-ink")}
 
                   >
                     <bdi>{c.name}</bdi>
@@ -164,7 +164,7 @@ export function ChatIndexView() {
 function Heading({ label, children }: { label: string; children?: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between pb-1 pt-5 ps-3 pe-1">
-      <span className={"text-caption font-semibold uppercase "+("ch-color-094083"+' '+"ch-letter-spacing-c5cfcd")} >
+      <span className={"text-caption font-semibold uppercase "+("ch-color-var---color-ink-subtle"+' '+"ch-letter-spacing-0-05em")} >
         {label}
       </span>
       {children}

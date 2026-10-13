@@ -1,3 +1,4 @@
+import { csvCell } from "@orgtik/ui";
 /**
  * SOMION HQ - ANALYTICS
  *
@@ -396,7 +397,7 @@ export function bucketize(daily: DailyRow[]): { mode: "day" | "week"; buckets: B
 export function toCsv(daily: DailyRow[]): string {
   const head = ["date", "people_here", "hours_here", "meetings", "meeting_hours", "focus_hours", "messages"];
   const lines = daily.map((r) =>
-    [r.date, r.activePeople, r.presentHours.toFixed(2), r.meetingCount, r.meetingHours.toFixed(2), r.focusHours.toFixed(2), r.messages].join(","),
+    [r.date, r.activePeople, r.presentHours.toFixed(2), r.meetingCount, r.meetingHours.toFixed(2), r.focusHours.toFixed(2), r.messages].map(csvCell).join(","),
   );
-  return [head.join(","), ...lines].join("\n");
+  return [head.map(csvCell).join(","), ...lines].join("\r\n");
 }

@@ -1,3 +1,4 @@
+import { csvCell } from "@orgtik/ui";
 import type { CrmContact, CrmContactInput, CrmLabel } from "@/types/crm-v3";
 export const crmLabel = (value: CrmLabel | undefined, locale: string) =>
   typeof value === "string" ? value : value?.[locale] || value?.en || "";
@@ -15,7 +16,7 @@ export function crmTaskState(value: string) {
 }
 export function crmCsv(contacts: CrmContact[]) {
   const quote = (value: unknown) =>
-    `"${String(value ?? "").replaceAll('"', '""')}"`;
+    csvCell(value);
   return [
     ["name", "email", "company", "phone", "country", "value", "source", "tags"],
     ...contacts.map((row) => [

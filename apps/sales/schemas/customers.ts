@@ -11,10 +11,10 @@ export const customerFormSchema = (t: T) =>
   z.object({
     fullName: z.string().trim().min(1, t("nameRequired")),
     email: z.string().trim().min(1, t("emailRequired")).email(t("emailInvalid")),
-    phoneNumber: z.string().trim().min(1, t("phoneRequired")),
-    address: z.string().trim().min(1, t("addressRequired")),
+    phoneNumber: z.string().trim(),
+    address: z.string().trim(),
     countryCode: z.string().trim().regex(/^[A-Z]{2}$/, t("countryRequired")),
-    companyName: z.string().trim().min(1, t("companyRequired")),
+    companyName: z.string().trim(),
     commercialRegistrationNumber: z.string().trim(),
     website: z
       .string()

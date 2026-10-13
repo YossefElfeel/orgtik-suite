@@ -2,10 +2,10 @@
 
 // Add a link the team uses often (a spec, a design file). Its fields and their errors are
 // translated (the zod messages were English), and the files are the library's FileField.
-import { useState, type ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { FileField, Input, Textarea } from "@orgtik/ui";
+import { Input, Textarea } from "@orgtik/ui";
 import { RHFField } from "@orgtik/ui/rhf";
 import { FormDialog } from "@/components/shared/FormDialog";
 import { useAddBookmarkMutation } from "@/redux/features/bookmark/bookmarkApi";
@@ -24,17 +24,11 @@ export default function AddBookmarkDialog({ teamId, trigger }: { teamId: number;
   const t = useTranslations("BookmarkForm");
   const [addBookmark] = useAddBookmarkMutation();
   const form = useForm<Values>({ defaultValues: { link: "", title: "", description: "" } });
-  const [files, setFiles] = useState<File[]>([]);
 
   const onSubmit = async () => {
     if (!(await form.trigger())) throw new Error("invalid");
     const v = form.getValues();
-    const body = new FormData();
-    files.forEach((f) => body.append("attachments", f));
-    body.append("link", v.link.trim());
-    body.append("title", v.title.trim());
-    if (v.description.trim()) body.append("description", v.description.trim());
-    body.append("teamId", String(teamId));
+    const body = { title: v.title.trim(), description: v.description.trim(), link: v.link.trim(), teamId };
     await addBookmark(body).unwrap();
   };
 
@@ -47,7 +41,6 @@ export default function AddBookmarkDialog({ teamId, trigger }: { teamId: number;
       onSubmit={onSubmit}
       onClosed={() => {
         form.reset();
-        setFiles([]);
       }}
     >
       <RHFField
@@ -60,7 +53,6 @@ export default function AddBookmarkDialog({ teamId, trigger }: { teamId: number;
       />
       <RHFField control={form.control} name="title" label={t("name")} required rules={{ validate: (v: string) => Boolean(v.trim()) || t("nameRequired") }} render={(field) => <Input dir="auto" {...field} />} />
       <RHFField control={form.control} name="description" label={t("description")} optional render={(field) => <Textarea dir="auto" rows={2} maxRows={6} {...field} />} />
-      <FileField label={t("files")} multiple maxFiles={5} maxSize={10 * 1024 * 1024} value={files} onChange={setFiles} />
     </FormDialog>
   );
 }

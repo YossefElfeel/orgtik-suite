@@ -23,10 +23,13 @@ changed (decision D-052, `program/plan-v2.md`).
 | `program` | Plan, decisions, specs, audits and their tools | — |
 | `tests/next-smoke-*` | Next 15/16 smoke apps for the library | — |
 
+For the supported launcher, prebuilt preview, data locations and checks, see [the local prototype guide](program/local-prototype.md).
+
 ## Working here
 
 - **Install:** use Node.js 22.13 or newer, then `pnpm install --frozen-lockfile`
   (pnpm 11.3.0, see `packageManager`). One lockfile for everything.
+- **Prebuilt walkthrough:** `pnpm build:local`, then `pnpm preview:local`. Stop development before building.
 - **Run the whole suite locally:** `pnpm dev:local` or double-click `start-local.cmd`.
   Open `http://localhost:3000/sos/auth/login`; all nine apps and the website use a local file-backed mock.
   Local test account: `mona.adel@orgtik.test`, password `Local@2026`. Mona is the prototype's super admin,

@@ -53,7 +53,7 @@ jobs:
       - name: Services routing and private gateway regressions
         run: |
           node tools/services/projects.mjs --check
-          node --test tools/services/services.test.mjs tools/services/local-router.test.cjs tools/services/local-order-key.test.cjs
+          node --test tools/services/services.test.mjs tools/services/local-router.test.cjs tools/services/local-order-key.test.cjs tools/services/local-ports.test.cjs
 
       - name: Typecheck, message catalogs and tests (affected packages)
         run: pnpm turbo run typecheck i18n:check test --affected --continue --concurrency=2
@@ -77,6 +77,11 @@ jobs:
         run: node tools/ci/runtime-consumers.mjs
         env:
           TURBO_SCM_BASE: ${{ github.event.pull_request.base.sha || github.event.before || inputs.base_revision || 'origin/main' }}
+
+      - name: Active-app lint and local roadmap regressions
+        run: |
+          pnpm lint
+          node --test mock/lib/workspace-roadmap.test.js mock/lib/workspace-csv.test.js mock/apps/marketing/segments.test.js mock/lib/workspace-local-assets.test.js packages/ui/src/lib/retained-draft.test.mjs
 
       - name: Detect library changes
         id: library
@@ -128,4 +133,25 @@ jobs:
           name: library-visual-evidence
           path: apps/docs/tests/results/
           if-no-files-found: ignore
+          retention-days: 7
+
+  local-journeys:
+    name: Local customer and staff browser journeys
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter somion-hq exec playwright install --with-deps chromium
+      - run: pnpm test:journeys
+      - name: Upload journey evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: local-journeys
+          path: .vercel/journey-results/
           retention-days: 7

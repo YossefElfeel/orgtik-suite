@@ -106,7 +106,7 @@ function resolveWorkspaceContext(S, identity, user, { realm = "demo", workspaceI
   }
   return {
     version: 1, realm,
-    workspace: { id: workspace.id, name: workspace.name, kind: workspace.kind || "customer", state: workspace.state, timeZone: workspace.timeZone || "Africa/Cairo" },
+    workspace: { id: workspace.id, name: workspace.name, kind: workspace.kind || "customer", state: workspace.state, timeZone: workspace.timeZone || "Africa/Cairo", defaultLanguage: workspace.defaultLanguage || "en" },
     actor: { userId: actorUserId, effectiveUserId: user.id, readOnly: Boolean(readOnly), ...(actorUserId !== user.id ? { impersonatedBy: actorUserId } : {}) },
     member: { id: member.id, role: member.role, revision: member.revision || 1, accessEpoch: member.accessEpoch || 0 }, tools, revision: workspace.authorityRevision || 1,
   };

@@ -54,8 +54,8 @@ export function useSuite() {
     const accessibleTools = (Object.keys(SUITE_TOOLS) as ToolKey[]).filter(tool => canRead(toolState(tool)?.access));
     const isOwner = snapshot?.member.role === "owner" && !snapshot.actor.readOnly;
     const canAdmin = (tool: ToolKey) => canRead(toolState(tool)?.access) && Boolean(["owner", "admin"].includes(snapshot?.member.role || "") || toolState(tool)?.roles.some(role => SUITE_TOOLS[tool].adminRoles.includes(role)));
-    const request = async <T,>(path: string, method: "GET" | "POST" | "PATCH" | "DELETE" = "GET", body?: unknown) => { if (!options.apiUrl) throw new Error("The suite API is unavailable."); return suiteRequest<T>(options.apiUrl, path, { method, body }); };
-    const mutate = async <T,>(path: string, method: "POST" | "PATCH" | "DELETE", body?: unknown) => { const result = await request<T>(path, method, body); await options.refresh?.(); return result; };
+    const request = async <T,>(path: string, method: "GET" | "POST" | "PATCH" | "PUT" | "DELETE" = "GET", body?: unknown) => { if (!options.apiUrl) throw new Error("The suite API is unavailable."); return suiteRequest<T>(options.apiUrl, path, { method, body }); };
+    const mutate = async <T,>(path: string, method: "POST" | "PATCH" | "PUT" | "DELETE", body?: unknown) => { const result = await request<T>(path, method, body); await options.refresh?.(); return result; };
     return { ...options, snapshot, session, request, mutate, toolState, hasTool, accessibleTools, isOwner, canAdmin, loading: options.loading ?? (!snapshot && !session), seat: (tool: ToolKey) => toolState(tool)?.seats, connectionState: (target: ToolKey, source = options.currentTool, write = true, targetWrite = false) => connectionState(snapshot ?? null, source, target, write, targetWrite), canConnect: (source: ToolKey, target: ToolKey) => connectionState(snapshot ?? null, source, target, false) === "available" };
   }, [options, snapshot, session]);
 }

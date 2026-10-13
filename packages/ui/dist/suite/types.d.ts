@@ -51,6 +51,7 @@ export type SuiteSearchItem = {
     subtitle?: string;
 };
 export type SuiteNotification = SuiteSearchItem & {
+    kind?: string;
     read: boolean;
     at: string;
 };

@@ -447,11 +447,13 @@ export interface ISalaryInformation {
 }
 
 export interface SalaryInformationSectionProps {
+  onEdit?: () => void;
   salaryInformation?: ISalaryInformation;
   isLoading?: boolean;
 }
 
 export interface BankInformationSectionProps {
+  onEdit?: () => void;
   paymentDetails?: IPaymentDetails;
   salaryInformation?: ISalaryInformation;
   isLoading?: boolean;

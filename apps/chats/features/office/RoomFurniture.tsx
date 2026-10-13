@@ -99,18 +99,18 @@ function Solid({
   children?: React.ReactNode;
 }) {
   return (
-    <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + depth}))} >
+    <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h + depth}))} >
       {/* contact shadow: tight and low, so the object reads as resting */}
       <span
-        className={("ch-position-bb6a43"+' '+"ch-left-261659"+' '+"ch-right-3748d4"+' '+"ch-height-83ca52"+' '+"ch-border-radius-9eaa9c"+' '+"ch-background-43fd7b"+' '+"ch-filter-e0c7b4")+" "+(geometryClass({top:depth + h - 5}))}
+        className={("ch-position-absolute"+' '+"ch-inset-inline-start-2px"+' '+"ch-inset-inline-end-2px"+' '+"ch-height-8px"+' '+"ch-border-radius-50pct"+' '+"ch-background-rgb-var---shadow-ink-0-13"+' '+"ch-filter-blur-4px")+" "+(geometryClass({top:depth + h - 5}))}
       />
       {/* side face */}
       <span
-        className={("ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa")+" "+(materialClass(material,'side')+' '+furnitureRadius(radius)+' '+geometryClass({top:depth,height:h}))}
+        className={("ch-position-absolute"+' '+"ch-inset-inline-0")+" "+(materialClass(material,'side')+' '+furnitureRadius(radius)+' '+geometryClass({top:depth,height:h}))}
       />
       {/* top face, lit from the upper left */}
       <span
-        className={("ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-top-0d4406"+' '+"ch-box-shadow-caed6f")+" "+(materialClass(material,'top')+' '+furnitureRadius(radius)+' '+geometryClass({height:h}))}
+        className={("ch-position-absolute"+' '+"ch-inset-inline-0"+' '+"ch-top-0"+' '+"ch-box-shadow-var---shadow-lit")+" "+(materialClass(material,'top')+' '+furnitureRadius(radius)+' '+geometryClass({height:h}))}
       >
         {children}
       </span>
@@ -134,7 +134,7 @@ function Flat({
 }) {
   return (
     <span
-      className={("ch-display-2a1b75")+" "+(flatPaint(background)+' '+furnitureRadius(radius)+' '+(shadow?'ch-furniture-inlay-shadow':'')+' '+geometryClass({width:w,height:h}))}
+      className={("ch-display-block")+" "+(flatPaint(background)+' '+furnitureRadius(radius)+' '+(shadow?'ch-furniture-inlay-shadow':'')+' '+geometryClass({width:w,height:h}))}
     />
   );
 }
@@ -143,7 +143,7 @@ function Flat({
 function Leaf({ x, y, size, tone }: { x: number; y: number; size: number; tone: string }) {
   return (
     <span
-      className={("ch-position-bb6a43"+' '+"ch-border-radius-9eaa9c")+" "+('ch-leaf'+' '+geometryClass({left:x,top:y,width:size,height:size}))}
+      className={("ch-position-absolute"+' '+"ch-border-radius-50pct")+" "+('ch-leaf'+' '+geometryClass({left:x,top:y,width:size,height:size}))}
     />
   );
 }
@@ -158,22 +158,22 @@ function Shape({ kind }: { kind: PieceKind }) {
         <Solid w={w} h={h} depth={d} radius="var(--radius-object)" material={OAK}>
           {/* a monitor and a notebook, so a desk reads as a workstation */}
           <span
-            className={("ch-position-bb6a43"+' '+"ch-left-635b13"+' '+"ch-top-95a770"+' '+"ch-transform-1b8ae7"+' '+"ch-height-1d9069"+' '+"ch-background-6ccfa0"+' '+"ch-border-radius-84df20")+" "+(geometryClass({width:w * 0.44}))}
+            className={("ch-position-absolute"+' '+"ch-inset-inline-start-50pct"+' '+"ch-top-3px"+' '+"ch-transform-translateX--50pct"+' '+"ch-height-4px"+' '+"ch-background-var---mat-metal-side"+' '+"ch-border-radius-var---radius-object-xs")+" "+(geometryClass({width:w * 0.44}))}
           />
           <span
-            className={"ch-position-bb6a43"+' '+"ch-right-e20f42"+' '+"ch-bottom-ce3bb6"+' '+"ch-width-74b3e7"+' '+"ch-height-b9986b"+' '+"ch-background-98f40e"+' '+"ch-border-10b2bf"+' '+"ch-border-radius-84df20"}
+            className={"ch-position-absolute"+' '+"ch-inset-inline-end-6px"+' '+"ch-bottom-4px"+' '+"ch-width-13px"+' '+"ch-height-9px"+' '+"ch-background-var---mat-metal-top"+' '+"ch-border-1px-solid-var---mat-metal-side"+' '+"ch-border-radius-var---radius-object-xs"}
           />
         </Solid>
       );
 
     case "chair":
       return (
-        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + d + 4}))} >
+        <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h + d + 4}))} >
           {/* the back, a low bar behind the seat */}
           <span
-            className={("ch-position-bb6a43"+' '+"ch-left-51b783"+' '+"ch-right-8074b2"+' '+"ch-top-0d4406"+' '+"ch-height-925e0a"+' '+"ch-border-radius-a360d0")+" "+('ch-material-soft-side')}
+            className={("ch-position-absolute"+' '+"ch-inset-inline-start-1px"+' '+"ch-inset-inline-end-1px"+' '+"ch-top-0"+' '+"ch-height-5px"+' '+"ch-border-radius-var---radius-object-sm")+" "+('ch-material-soft-side')}
           />
-          <span className={"ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-top-95a770"} >
+          <span className={"ch-position-absolute"+' '+"ch-inset-inline-0"+' '+"ch-top-3px"} >
             <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={SOFT} />
           </span>
         </span>
@@ -190,17 +190,17 @@ function Shape({ kind }: { kind: PieceKind }) {
 
     case "sofa":
       return (
-        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + d + 6}))} >
+        <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h + d + 6}))} >
           <span
-            className={("ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-top-0d4406"+' '+"ch-height-b9986b"+' '+"ch-border-radius-6300ab")+" "+('ch-material-soft-side')}
+            className={("ch-position-absolute"+' '+"ch-inset-inline-0"+' '+"ch-top-0"+' '+"ch-height-9px"+' '+"ch-border-radius-var---radius-object-lg-var---radius-object-lg-0-0")+" "+('ch-material-soft-side')}
           />
-          <span className={"ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-top-64f465"} >
+          <span className={"ch-position-absolute"+' '+"ch-inset-inline-0"+' '+"ch-top-5px"} >
             <Solid w={w} h={h} depth={d} radius="var(--radius-object-lg)" material={SOFT}>
               <span
-                className={("ch-position-bb6a43"+' '+"ch-left-8bfc9d"+' '+"ch-top-288ddb"+' '+"ch-border-radius-a360d0"+' '+"ch-opacity-51faa6")+" "+('ch-material-soft-top'+' '+geometryClass({width:w / 2 - 8,height:h - 8}))}
+                className={("ch-position-absolute"+' '+"ch-inset-inline-start-5px"+' '+"ch-top-4px"+' '+"ch-border-radius-var---radius-object-sm"+' '+"ch-opacity-0-8")+" "+('ch-material-soft-top'+' '+geometryClass({width:w / 2 - 8,height:h - 8}))}
               />
               <span
-                className={("ch-position-bb6a43"+' '+"ch-right-8188c1"+' '+"ch-top-288ddb"+' '+"ch-border-radius-a360d0"+' '+"ch-opacity-51faa6")+" "+('ch-material-soft-top'+' '+geometryClass({width:w / 2 - 8,height:h - 8}))}
+                className={("ch-position-absolute"+' '+"ch-inset-inline-end-5px"+' '+"ch-top-4px"+' '+"ch-border-radius-var---radius-object-sm"+' '+"ch-opacity-0-8")+" "+('ch-material-soft-top'+' '+geometryClass({width:w / 2 - 8,height:h - 8}))}
               />
             </Solid>
           </span>
@@ -209,8 +209,8 @@ function Shape({ kind }: { kind: PieceKind }) {
 
     case "plant":
       return (
-        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h}))} >
-          <span className={("ch-position-bb6a43"+' '+"ch-bottom-ad3760")+" "+(geometryClass({left:(w - 20) / 2}))} >
+        <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h}))} >
+          <span className={("ch-position-absolute"+' '+"ch-bottom-0")+" "+(geometryClass({left:(w - 20) / 2}))} >
             <Solid
               w={20}
               h={11}
@@ -227,12 +227,12 @@ function Shape({ kind }: { kind: PieceKind }) {
 
     case "cooler":
       return (
-        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h}))} >
-          <span className={"ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-bottom-ad3760"} >
+        <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h}))} >
+          <span className={"ch-position-absolute"+' '+"ch-inset-inline-0"+' '+"ch-bottom-0"} >
             <Solid w={w} h={20} depth={d} radius="var(--radius-object-sm)" material={METAL} />
           </span>
           {/* the bottle: glass, so it reads as water */}
-          <span className={"ch-position-bb6a43"+' '+"ch-left-f7bcc1"+' '+"ch-top-0d4406"} >
+          <span className={"ch-position-absolute"+' '+"ch-inset-inline-start-3px"+' '+"ch-top-0"} >
             <Solid
               w={w - 6}
               h={15}
@@ -248,7 +248,7 @@ function Shape({ kind }: { kind: PieceKind }) {
       return (
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={METAL}>
           <span
-            className={"ch-position-bb6a43"+' '+"ch-inset-inline-58baad"+' '+"ch-bottom-ce3bb6"+' '+"ch-height-ba2ef8"+' '+"ch-background-ea65cd"+' '+"ch-border-radius-84df20"+' '+"ch-opacity-e1549f"}
+            className={"ch-position-absolute"+' '+"ch-inset-inline-6px"+' '+"ch-bottom-4px"+' '+"ch-height-7px"+' '+"ch-background-var---color-paper-800"+' '+"ch-border-radius-var---radius-object-xs"+' '+"ch-opacity-0-5"}
           />
         </Solid>
       );
@@ -258,12 +258,12 @@ function Shape({ kind }: { kind: PieceKind }) {
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={OAK}>
           {/* books: alternating warm tones, low chroma */}
           <span
-            className={"ch-position-bb6a43"+' '+"ch-inset-a4522e"+' '+"ch-display-75816c"+' '+"ch-flex-direction-06c8b5"+' '+"ch-gap-d76768"}
+            className={"ch-position-absolute"+' '+"ch-inset-5px-3px"+' '+"ch-display-flex"+' '+"ch-flex-direction-column"+' '+"ch-gap-4px"}
           >
             {[0, 1, 2, 3].map((i) => (
               <span
                 key={i}
-                className={"ch-flex-97445a"+' '+(i % 2?"ch-background-b80482":"ch-background-941d54")+' '+"ch-border-radius-84df20"+' '+"ch-opacity-31c9f8"}
+                className={"ch-flex-1"+' '+(i % 2?"ch-background-var---mat-pot":"ch-background-var---mat-metal")+' '+"ch-border-radius-var---radius-object-xs"+' '+"ch-opacity-0-75"}
               />
             ))}
           </span>
@@ -283,11 +283,11 @@ function Shape({ kind }: { kind: PieceKind }) {
       return (
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={METAL}>
           <span
-            className={"ch-position-bb6a43"+' '+"ch-inset-inline-5d1292"+' '+"ch-top-64f465"+' '+"ch-height-925e0a"+' '+"ch-background-6ccfa0"+' '+"ch-border-radius-84df20"}
+            className={"ch-position-absolute"+' '+"ch-inset-inline-5px"+' '+"ch-top-5px"+' '+"ch-height-5px"+' '+"ch-background-var---mat-metal-side"+' '+"ch-border-radius-var---radius-object-xs"}
           />
           {/* the output tray */}
           <span
-            className={"ch-position-bb6a43"+' '+"ch-inset-inline-c245e3"+' '+"ch-bottom-ce3bb6"+' '+"ch-height-cc3d9d"+' '+"ch-background-7f0f18"+' '+"ch-border-radius-84df20"}
+            className={"ch-position-absolute"+' '+"ch-inset-inline-7px"+' '+"ch-bottom-4px"+' '+"ch-height-6px"+' '+"ch-background-var---color-paper-0"+' '+"ch-border-radius-var---radius-object-xs"}
           />
         </Solid>
       );
@@ -299,9 +299,9 @@ function Shape({ kind }: { kind: PieceKind }) {
       return (
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={OAK}>
           {/* slats */}
-          <span className={"ch-position-bb6a43"+' '+"ch-inset-8a9728"+' '+"ch-display-75816c"+' '+"ch-flex-direction-06c8b5"+' '+"ch-gap-206a0d"} >
+          <span className={"ch-position-absolute"+' '+"ch-inset-3px-4px"+' '+"ch-display-flex"+' '+"ch-flex-direction-column"+' '+"ch-gap-2px"} >
             {[0, 1].map((i) => (
-              <span key={i} className={"ch-flex-97445a"+' '+"ch-background-45587b"+' '+"ch-border-radius-edd97e"+' '+"ch-opacity-f76fbb"}  />
+              <span key={i} className={"ch-flex-1"+' '+"ch-background-var---mat-oak-side"+' '+"ch-border-radius-var---ot-radius-field"+' '+"ch-opacity-0-35"}  />
             ))}
           </span>
         </Solid>
@@ -309,10 +309,10 @@ function Shape({ kind }: { kind: PieceKind }) {
 
     case "mic":
       return (
-        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + 8}))} >
+        <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h + 8}))} >
           {/* the stand */}
           <span
-            className={("ch-position-bb6a43"+' '+"ch-top-288ddb"+' '+"ch-width-208c98"+' '+"ch-background-6ccfa0"+' '+"ch-border-radius-edd97e")+" "+(geometryClass({left:w / 2 - 1,height:h}))}
+            className={("ch-position-absolute"+' '+"ch-top-4px"+' '+"ch-width-2px"+' '+"ch-background-var---mat-metal-side"+' '+"ch-border-radius-var---ot-radius-field")+" "+(geometryClass({left:w / 2 - 1,height:h}))}
           />
           <Solid w={w} h={h} depth={d} radius="50%" material={METAL} />
         </span>
@@ -320,10 +320,10 @@ function Shape({ kind }: { kind: PieceKind }) {
 
     case "lamp":
       return (
-        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + 8}))} >
+        <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h + 8}))} >
           {/* the pool of light it casts, which is the point of drawing a lamp */}
           <span
-            className={("ch-position-bb6a43"+' '+"ch-left-da3c8d"+' '+"ch-top-fc3d0d"+' '+"ch-border-radius-9eaa9c"+' '+"ch-background-bfd524")+" "+(geometryClass({width:w + 20,height:h + 20}))}
+            className={("ch-position-absolute"+' '+"ch-inset-inline-start-10px"+' '+"ch-top-6px"+' '+"ch-border-radius-50pct"+' '+"ch-background-radial-gradient-circle-rgb-255-246-214-0-55-transparent-70pct")+" "+(geometryClass({width:w + 20,height:h + 20}))}
           />
           <Solid w={w} h={h} depth={8} radius="50%" material={POT} />
         </span>
@@ -335,16 +335,16 @@ function Shape({ kind }: { kind: PieceKind }) {
        the wall, and every rug in the room is laid facing it. */
     case "mihrab":
       return (
-        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h + d}))} >
+        <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h + d}))} >
           <span
-            className={("ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-background-45587b")+" "+('ch-furniture-arch'+' '+geometryClass({top:d,height:h}))}
+            className={("ch-position-absolute"+' '+"ch-inset-inline-0"+' '+"ch-background-var---mat-oak-side")+" "+('ch-furniture-arch'+' '+geometryClass({top:d,height:h}))}
           />
           <span
-            className={("ch-position-bb6a43"+' '+"ch-inset-inline-76a6aa"+' '+"ch-top-0d4406"+' '+"ch-background-c8b21e"+' '+"ch-box-shadow-caed6f")+" "+('ch-furniture-arch'+' '+geometryClass({height:h}))}
+            className={("ch-position-absolute"+' '+"ch-inset-inline-0"+' '+"ch-top-0"+' '+"ch-background-linear-gradient-150deg-var---mat-oak-top-var---mat-oak-78pct"+' '+"ch-box-shadow-var---shadow-lit")+" "+('ch-furniture-arch'+' '+geometryClass({height:h}))}
           />
           {/* the recess itself, darker because it is a niche */}
           <span
-            className={("ch-position-bb6a43"+' '+"ch-top-95a770"+' '+"ch-background-45587b"+' '+"ch-opacity-31c9f8")+" "+('ch-furniture-arch'+' '+geometryClass({left:w * 0.28,width:w * 0.44,height:h - 3}))}
+            className={("ch-position-absolute"+' '+"ch-top-3px"+' '+"ch-background-var---mat-oak-side"+' '+"ch-opacity-0-75")+" "+('ch-furniture-arch'+' '+geometryClass({left:w * 0.28,width:w * 0.44,height:h - 3}))}
           />
         </span>
       );
@@ -353,7 +353,7 @@ function Shape({ kind }: { kind: PieceKind }) {
        primitive: no extrusion, no contact shadow. */
     case "prayer-rug":
       return (
-        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h}))} >
+        <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h}))} >
           <Flat
             w={w}
             h={h}
@@ -364,10 +364,10 @@ function Shape({ kind }: { kind: PieceKind }) {
           {/* The woven arch at the head of the rug, which points to the qibla.
               It is why a prayer rug is recognisable at this size at all. */}
           <span
-            className={("ch-position-bb6a43"+' '+"ch-top-64f465"+' '+"ch-border-b019fd"+' '+"ch-opacity-94ec8e")+" "+('ch-furniture-arch'+' '+geometryClass({left:w * 0.26,width:w * 0.48,height:h * 0.3}))}
+            className={("ch-position-absolute"+' '+"ch-top-5px"+' '+"ch-border-1-5px-solid-var---mat-pot-side"+' '+"ch-opacity-0-55")+" "+('ch-furniture-arch'+' '+geometryClass({left:w * 0.26,width:w * 0.48,height:h * 0.3}))}
           />
           <span
-            className={"ch-position-bb6a43"+' '+"ch-inset-inline-5d1292"+' '+"ch-bottom-4c6900"+' '+"ch-height-32ec1b"+' '+"ch-background-d760d2"+' '+"ch-border-radius-edd97e"+' '+"ch-opacity-c4c3c1"}
+            className={"ch-position-absolute"+' '+"ch-inset-inline-5px"+' '+"ch-bottom-5px"+' '+"ch-height-2px"+' '+"ch-background-var---mat-pot-side"+' '+"ch-border-radius-var---ot-radius-field"+' '+"ch-opacity-0-4"}
           />
         </span>
       );
@@ -375,11 +375,11 @@ function Shape({ kind }: { kind: PieceKind }) {
     case "shoe-rack":
       return (
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={OAK}>
-          <span className={"ch-position-bb6a43"+' '+"ch-inset-45f6cf"+' '+"ch-display-75816c"+' '+"ch-gap-fce9b2"} >
+          <span className={"ch-position-absolute"+' '+"ch-inset-4px-4px"+' '+"ch-display-flex"+' '+"ch-gap-3px"} >
             {[0, 1, 2].map((i) => (
               <span
                 key={i}
-                className={"ch-flex-97445a"+' '+"ch-background-45587b"+' '+"ch-border-radius-84df20"+' '+"ch-opacity-e1549f"}
+                className={"ch-flex-1"+' '+"ch-background-var---mat-oak-side"+' '+"ch-border-radius-var---radius-object-xs"+' '+"ch-opacity-0-5"}
               />
             ))}
           </span>
@@ -389,11 +389,11 @@ function Shape({ kind }: { kind: PieceKind }) {
     case "book-shelf-low":
       return (
         <Solid w={w} h={h} depth={d} radius="var(--radius-object-sm)" material={OAK}>
-          <span className={"ch-position-bb6a43"+' '+"ch-inset-5d3566"+' '+"ch-display-75816c"+' '+"ch-gap-206a0d"} >
+          <span className={"ch-position-absolute"+' '+"ch-inset-4px-5px"+' '+"ch-display-flex"+' '+"ch-gap-2px"} >
             {[0, 1, 2, 3, 4].map((i) => (
               <span
                 key={i}
-                className={"ch-flex-97445a"+' '+(i % 2?"ch-background-b80482":"ch-background-941d54")+' '+"ch-border-radius-84df20"+' '+"ch-opacity-383082"}
+                className={"ch-flex-1"+' '+(i % 2?"ch-background-var---mat-pot":"ch-background-var---mat-metal")+' '+"ch-border-radius-var---radius-object-xs"+' '+"ch-opacity-0-7"}
               />
             ))}
           </span>
@@ -406,10 +406,10 @@ function Shape({ kind }: { kind: PieceKind }) {
     /* A doorway: a gap of floor cut into the wall, with a swing arc. */
     case "door":
       return (
-        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h}))} >
+        <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h}))} >
           <Flat w={w} h={h} radius="var(--radius-object-sm)" background="var(--color-floor)" />
           <span
-            className={"ch-position-bb6a43"+' '+"ch-left-261659"+' '+"ch-top-0d4406"+' '+"ch-width-cefbfe"+' '+"ch-height-ca02a9"+' '+"ch-border-inline-start-4c0f32"+' '+"ch-border-bottom-ec165b"+' '+"ch-border-end-start-radius-ad032a"+' '+"ch-opacity-94ec8e"}
+            className={"ch-position-absolute"+' '+"ch-inset-inline-start-2px"+' '+"ch-top-0"+' '+"ch-width-22px"+' '+"ch-height-22px"+' '+"ch-border-inline-start-1px-solid-var---color-paper-400"+' '+"ch-border-bottom-1px-solid-var---color-paper-400"+' '+"ch-border-end-start-radius-22px"+' '+"ch-opacity-0-55"}
           />
         </span>
       );
@@ -420,10 +420,10 @@ function Shape({ kind }: { kind: PieceKind }) {
     case "window-v": {
       const horizontal = kind === "window-h";
       return (
-        <span className={("ch-position-d461c9"+' '+"ch-display-2a1b75")+" "+(geometryClass({width:w,height:h}))} >
+        <span className={("ch-position-relative"+' '+"ch-display-block")+" "+(geometryClass({width:w,height:h}))} >
           <span
             aria-hidden="true"
-            className={("ch-position-bb6a43"+' '+(horizontal?"ch-left-7a2402":"ch-left-ced581")+' '+(horizontal?"ch-top-0d4406":"ch-top-c4e8b6")+' '+(horizontal?"ch-background-c1c007":"ch-background-70edd5")+' '+"ch-pointer-events-8b1364")+" "+(geometryClass({width:horizontal ? w + 28 : 64,height:horizontal ? 64 : h + 28}))}
+            className={("ch-position-absolute"+' '+(horizontal?"ch-inset-inline-start-14px":"ch-inset-inline-start-0")+' '+(horizontal?"ch-top-0":"ch-top-14px")+' '+(horizontal?"ch-background-radial-gradient-ellipse-at-50pct-0pct-var---light-window-transparent-70pct":"ch-background-radial-gradient-ellipse-at-0pct-50pct-var---light-window-transparent-70pct")+' '+"ch-pointer-events-none")+" "+(geometryClass({width:horizontal ? w + 28 : 64,height:horizontal ? 64 : h + 28}))}
           />
           <Flat
             w={w}
@@ -448,13 +448,13 @@ function RoomFurnitureBase({ roomId, kind }: { roomId: string; kind: string }) {
   return (
     <span
       aria-hidden="true"
-      className={"pointer-events-none absolute inset-0 overflow-hidden "+("ch-border-radius-9d9174")}
+      className={"pointer-events-none absolute inset-0 overflow-hidden "+("ch-border-radius-var---radius-room")}
 
     >
       {pieces.map((piece: Piece, i: number) => (
         <span
           key={`${piece.kind}-${i}`}
-          className={("absolute "+("ch-line-height-3c11d0"))+" "+(geometryClass({left:`${piece.x}%`,top:`${piece.y}%`,transform:`translate(-50%, -50%) rotate(${piece.rot ?? 0}deg) scale(${piece.scale ?? 1})`}))}
+          className={("absolute "+("ch-line-height-0"))+" "+(geometryClass({left:`${piece.x}%`,top:`${piece.y}%`,transform:`translate(-50%, -50%) rotate(${piece.rot ?? 0}deg) scale(${piece.scale ?? 1})`}))}
 
         >
           <Shape kind={piece.kind} />

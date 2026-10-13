@@ -64,7 +64,7 @@ function WalkHint() {
 
   return (
     <p
-      className={"pointer-events-none absolute bottom-3 start-3 flex items-center gap-1.5 text-caption "+("ch-color-094083")}
+      className={"pointer-events-none absolute bottom-3 start-3 flex items-center gap-1.5 text-caption "+("ch-color-var---color-ink-subtle")}
 
     >
       <Key>&#8593;</Key>
@@ -81,7 +81,7 @@ function WalkHint() {
 function Key({ children }: { children: React.ReactNode }) {
   return (
     <span
-      className={"inline-flex items-center justify-center "+("ch-min-width-1cf0f5"+' '+"ch-height-a8970c"+' '+"ch-padding-764011"+' '+"ch-border-radius-edd97e"+' '+"ch-border-8ff264"+' '+"ch-background-751d03"+' '+"ch-font-size-dc3e3c"+' '+"ch-line-height-85779e")}
+      className={"inline-flex items-center justify-center "+("ch-min-width-17px"+' '+"ch-height-17px"+' '+"ch-padding-0-3px"+' '+"ch-border-radius-var---ot-radius-field"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-background-var---color-surface"+' '+"ch-font-size-var---ot-type-micro-size"+' '+"ch-line-height-1")}
 
     >
       {children}
@@ -623,7 +623,7 @@ export function FloorCanvas() {
         ref={surfaceRef}
         onClick={onSurfaceClick}
         onMouseDown={onPanStart}
-        className={("relative min-h-0 flex-1 overflow-hidden "+("ch-transform-origin-8825fb"+' '+(panning?"ch-transition-2ed754":"ch-transition-064c3b")+' '+"ch-background-7d822f"+' '+"ch-background-size-3de776"+' '+"ch-box-shadow-e06688"+' '+(panning?"ch-cursor-cf4aa2":(spaceHeld?"ch-cursor-dad798":"ch-cursor-2a9295"))))+" "+((daylightOn?'ch-floor-'+(hour<6||hour>=20?'night':hour<11?'morning':hour<16?'noon':'evening'):'ch-floor-grid')+' '+geometryClass({transform:`translate(${view.x}px, ${view.y}px) scale(${view.scale})`}))}
+        className={("relative min-h-0 flex-1 overflow-hidden "+("ch-transform-origin-center-center"+' '+(panning?"ch-transition-none":"ch-transition-transform-180ms-var---ease-out-soft")+' '+"ch-background-var---color-floor"+' '+"ch-background-size-auto-24px-24px"+' '+"ch-box-shadow-inset-0-1px-3px-rgb-var---shadow-ink-0-05"+' '+(panning?"ch-cursor-grabbing":(spaceHeld?"ch-cursor-grab":"ch-cursor-default"))))+" "+((daylightOn?'ch-floor-'+(hour<6||hour>=20?'night':hour<11?'morning':hour<16?'noon':'evening'):'ch-floor-grid')+' '+geometryClass({transform:`translate(${view.x}px, ${view.y}px) scale(${view.scale})`}))}
 
         role="application"
         aria-label={t("office.canvas", "Office floor. Walk with the arrow keys or W A S D; entering a room connects its audio. Rooms and people are also focusable: Enter opens, Escape leaves.")}
@@ -652,7 +652,7 @@ export function FloorCanvas() {
                 });
               }}
               onMouseLeave={() => setHoverRoom(null)}
-              className={("hq-room absolute flex flex-col p-2.5 text-start "+((mine?"ch-border-c98846":"ch-border-f84093")+' '+"ch-border-radius-9d9174"+' '+"ch-cursor-3b6a3a"))+" "+('ch-room-'+room.kind+' '+'ch-room-'+room.kind+' '+(mine?'ch-room-current':'ch-room-rest')+' '+geometryClass({left:`${room.rect.x}%`,top:`${room.rect.y}%`,width:`${room.rect.w}%`,height:`${room.rect.h}%`}))}
+              className={("hq-room absolute flex flex-col p-2.5 text-start "+((mine?"ch-border-1px-solid-var---color-accent":"ch-border-1px-solid-var---color-wall")+' '+"ch-border-radius-var---radius-room"+' '+"ch-cursor-pointer"))+" "+('ch-room-'+room.kind+' '+'ch-room-'+room.kind+' '+(mine?'ch-room-current':'ch-room-rest')+' '+geometryClass({left:`${room.rect.x}%`,top:`${room.rect.y}%`,width:`${room.rect.w}%`,height:`${room.rect.h}%`}))}
 
               aria-label={t("office.enterRoom", "{name}, {kind}, {n} of {cap} people. {action}.", {
                 name: room.name,
@@ -666,7 +666,7 @@ export function FloorCanvas() {
 
               <span className="relative flex w-full items-baseline justify-between gap-2">
                 <span
-                  className={"relative truncate text-micro font-semibold uppercase "+("ch-color-ad649f"+' '+"ch-letter-spacing-0015ec")}
+                  className={"relative truncate text-micro font-semibold uppercase "+("ch-color-var---color-floor-label"+' '+"ch-letter-spacing-0-06em")}
 
                 >
                   <bdi>{room.name}</bdi>
@@ -674,16 +674,16 @@ export function FloorCanvas() {
                 <span className="flex shrink-0 items-baseline gap-1">
                   {/* One number per room, set large against a small label. */}
                   <span
-                    className={"tabular text-title-sm font-semibold leading-none "+((count > 0?"ch-color-7f7330":"ch-color-1a360f")+' '+"ch-letter-spacing-1314f6")}
+                    className={"tabular text-title-sm font-semibold leading-none "+((count > 0?"ch-color-var---color-ink":"ch-color-var---color-paper-500")+' '+"ch-letter-spacing-0-03em")}
 
                   >
                     {count}
                   </span>
-                  <span className={"text-micro "+("ch-color-094083")} >
+                  <span className={"text-micro "+("ch-color-var---color-ink-subtle")} >
                     {full ? t("office.full", "full") : t("office.ofCapacity", "of {cap}", { cap: room.capacity })}
                   </span>
                   {room.locked && (
-                    <LockSimple size={11} weight="bold" aria-hidden="true" className={"ch-color-094083"+' '+"ch-margin-inline-start-7179d7"}  />
+                    <LockSimple size={11} weight="bold" aria-hidden="true" className={"ch-color-var---color-ink-subtle"+' '+"ch-margin-inline-start-2px"}  />
                   )}
                 </span>
               </span>
@@ -702,11 +702,11 @@ export function FloorCanvas() {
                 if (!shown) return null;
                 return (
                   <span
-                    className={"relative mt-1 flex max-w-full items-center gap-1.5 self-start truncate px-1.5 py-0.5 text-micro font-medium "+("ch-border-radius-189003"+' '+(live?"ch-background-65ec3a":"ch-background-314b28")+' '+(live?"ch-color-d19c7f":"ch-color-4a0211"))}
+                    className={"relative mt-1 flex max-w-full items-center gap-1.5 self-start truncate px-1.5 py-0.5 text-micro font-medium "+("ch-border-radius-var---radius-chip"+' '+(live?"ch-background-var---color-presence-meeting-soft":"ch-background-var---color-surface-sunken")+' '+(live?"ch-color-var---color-presence-meeting":"ch-color-var---color-ink-muted"))}
 
                     title={shown.title}
                   >
-                    {live && <span aria-hidden="true" className={"ch-width-2c7cba"+' '+"ch-height-cc3d9d"+' '+"ch-border-radius-189003"+' '+"ch-background-be5c13"}  />}
+                    {live && <span aria-hidden="true" className={"ch-width-6px"+' '+"ch-height-6px"+' '+"ch-border-radius-var---radius-chip"+' '+"ch-background-currentColor"}  />}
                     <span className="truncate">
                       {live
                         ? t("office.meetingUntil", "{title} · until {time}", { title: shown.title, time: formatTime(shown.endsAt) })
@@ -720,7 +720,7 @@ export function FloorCanvas() {
                   zero in it takes attention that belongs on the people. */}
               {count === 0 && room.kind !== "desk" && (
                 <span
-                  className={"pointer-events-none absolute inset-x-0 bottom-3 z-[1] mx-auto w-fit px-2 py-1 text-center text-micro leading-snug "+("ch-color-094083"+' '+"ch-background-afcf07"+' '+"ch-border-radius-332348"+' '+"ch-max-width-326d05")}
+                  className={"pointer-events-none absolute inset-x-0 bottom-3 z-[1] mx-auto w-fit px-2 py-1 text-center text-micro leading-snug "+("ch-color-var---color-ink-subtle"+' '+"ch-background-color-mix-in-srgb-var---color-surface-82pct-transparent"+' '+"ch-border-radius-var---radius-control"+' '+"ch-max-width-calc-100pct---16px")}
 
                 >
                   {room.locked
@@ -748,7 +748,7 @@ export function FloorCanvas() {
                   is the expectation; the desk area not doing so is the thing
                   worth saying, and it is the product's cost model in one line. */}
               {room.kind === "desk" && (
-                <span className={"relative mt-auto text-micro "+("ch-color-094083")} >
+                <span className={"relative mt-auto text-micro "+("ch-color-var---color-ink-subtle")} >
                   {t("office.deskHint", "Open floor. Audio connects in rooms, not here.")}
                 </span>
               )}
@@ -760,7 +760,7 @@ export function FloorCanvas() {
         {clusters.length > 0 && (
           <svg
             aria-hidden="true"
-            className={"pointer-events-none absolute inset-0 "+("ch-z-index-d12f69")}
+            className={"pointer-events-none absolute inset-0 "+("ch-z-index-5")}
             width={size.w}
             height={size.h}
 
@@ -822,7 +822,7 @@ export function FloorCanvas() {
         {drag && (
           <span
             aria-hidden="true"
-            className={("pointer-events-none absolute "+("ch-width-8fb32a"+' '+"ch-height-69c02c"+' '+"ch-transform-199fce"+' '+"ch-border-radius-189003"+' '+"ch-border-cdcbe1"+' '+"ch-background-f85f90"+' '+"ch-z-index-6dac52"))+" "+(geometryClass({left:`${drag.x}%`,top:`${drag.y}%`}))}
+            className={("pointer-events-none absolute "+("ch-width-44px"+' '+"ch-height-44px"+' '+"ch-transform-translate--50pct--50pct"+' '+"ch-border-radius-var---radius-chip"+' '+"ch-border-2px-dashed-var---color-accent"+' '+"ch-background-color-mix-in-srgb-var---color-accent-10pct-transparent"+' '+"ch-z-index-20"))+" "+(geometryClass({left:`${drag.x}%`,top:`${drag.y}%`}))}
 
           />
         )}
@@ -863,18 +863,18 @@ export function FloorCanvas() {
         return (
           <div
             role="tooltip"
-            className={("hq-floating hq-rise pointer-events-none absolute z-[36] w-[220px] p-2.5 "+((hoverRoom.above?"ch-transform-08a22e":"ch-transform-ead9ec")+' '+"ch-border-radius-332348"))+" "+(geometryClass({left:hoverRoom.x,top:hoverRoom.y}))}
+            className={("hq-floating hq-rise pointer-events-none absolute z-[36] w-[220px] p-2.5 "+((hoverRoom.above?"ch-transform-translate--50pct-calc--100pct---8px":"ch-transform-translate--50pct-8px")+' '+"ch-border-radius-var---radius-control"))+" "+(geometryClass({left:hoverRoom.x,top:hoverRoom.y}))}
 
           >
             <p className="flex items-baseline justify-between gap-2">
-              <span className={"truncate text-body-sm font-semibold "+("ch-color-7f7330")} >
+              <span className={"truncate text-body-sm font-semibold "+("ch-color-var---color-ink")} >
                 <bdi>{room.name}</bdi>
               </span>
-              <span className={"tabular shrink-0 text-micro "+("ch-color-094083")} >
+              <span className={"tabular shrink-0 text-micro "+("ch-color-var---color-ink-subtle")} >
                 {inside.length}/{room.capacity}
               </span>
             </p>
-            <p className={"mt-0.5 text-micro "+("ch-color-4a0211")} >
+            <p className={"mt-0.5 text-micro "+("ch-color-var---color-ink-muted")} >
               {t(`roomKind.${room.kind}`, ROOM_LABEL[room.kind] ?? room.kind)}
               {" · "}
               {room.locked
@@ -884,28 +884,28 @@ export function FloorCanvas() {
                   : t("office.hoverQuiet", "quiet room, no audio")}
             </p>
             {room.purpose && (
-              <p className={"mt-1 text-caption "+("ch-color-7f7330")} >
+              <p className={"mt-1 text-caption "+("ch-color-var---color-ink")} >
                 <bdi>{room.purpose}</bdi>
               </p>
             )}
             {room.hours && (
-              <p className={"mt-1 text-micro "+("ch-color-4a0211")} >
+              <p className={"mt-1 text-micro "+("ch-color-var---color-ink-muted")} >
                 {t("office.hoverHours", "Open {from} to {to}", { from: room.hours.from, to: room.hours.to })}
               </p>
             )}
             {inside.length > 0 && roomHidesOccupants(room) ? (
-              <p className={"mt-1.5 text-micro "+("ch-color-4a0211")} >
+              <p className={"mt-1.5 text-micro "+("ch-color-var---color-ink-muted")} >
                 {t("office.hoverHidden", "{n} inside. This room does not name who.", { n: inside.length })}
               </p>
             ) : inside.length > 0 ? (
               <div className="mt-2 flex items-center gap-2">
                 <AvatarStack people={inside.map(({ user }) => user)} size={20} max={5} />
-                <span className={"truncate text-micro "+("ch-color-7f7330")} >
+                <span className={"truncate text-micro "+("ch-color-var---color-ink")} >
                   {inside.map(({ user }) => user.name.split(" ")[0]).join(", ")}
                 </span>
               </div>
             ) : (
-              <p className={"mt-1.5 text-micro "+("ch-color-094083")} >
+              <p className={"mt-1.5 text-micro "+("ch-color-var---color-ink-subtle")} >
                 {t("office.hoverEmpty", "Nobody in here right now")}
               </p>
             )}
@@ -917,11 +917,11 @@ export function FloorCanvas() {
           says what to do while it fills. */}
       {othersOnline === 0 && (
         <div className="pointer-events-none absolute inset-x-0 top-5 z-[34] flex justify-center px-4">
-          <div className={"hq-floating pointer-events-auto max-w-[440px] p-4 "+("ch-border-radius-8d459a"+' '+"ch-background-751d03")} role="status" >
-            <p className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
+          <div className={"hq-floating pointer-events-auto max-w-[440px] p-4 "+("ch-border-radius-var---radius-card"+' '+"ch-background-var---color-surface")} role="status" >
+            <p className={"text-body-sm font-semibold "+("ch-color-var---color-ink")} >
               {t("office.firstTitle", "You are the first one in today")}
             </p>
-            <p className={"mt-1 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
+            <p className={"mt-1 text-body-sm leading-relaxed "+("ch-color-var---color-ink-muted")} >
               {t("office.firstBody", "The floor fills as people sign in. Until then, set a status so they know how to find you, or bring the rest of the team in.")}
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
@@ -942,31 +942,31 @@ export function FloorCanvas() {
         {view.scale !== 1 && (
           <button
             onClick={resetView}
-            className={"hq-btn hq-floating pointer-events-auto tabular px-2.5 text-caption font-medium "+("ch-border-radius-332348"+' '+"ch-min-height-4f3317"+' '+"ch-color-4a0211")}
+            className={"hq-btn hq-floating pointer-events-auto tabular px-2.5 text-caption font-medium "+("ch-border-radius-var---radius-control"+' '+"ch-min-height-28px"+' '+"ch-color-var---color-ink-muted")}
 
           >
             {t("office.resetZoom", "Reset · {n}%", { n: Math.round(view.scale * 100) })}
           </button>
         )}
         <div
-          className={"hq-floating pointer-events-auto flex flex-col overflow-hidden "+("ch-border-radius-332348")}
+          className={"hq-floating pointer-events-auto flex flex-col overflow-hidden "+("ch-border-radius-var---radius-control")}
 
         >
           <button
             onClick={() => zoomBy(0.25)}
             disabled={view.scale >= 2.5}
             aria-label={t("office.zoomIn", "Zoom in")}
-            className={"hq-btn flex items-center justify-center "+("ch-width-322e3f"+' '+"ch-height-3a8bc5"+' '+"ch-color-4a0211")}
+            className={"hq-btn flex items-center justify-center "+("ch-width-30px"+' '+"ch-height-28px"+' '+"ch-color-var---color-ink-muted")}
 
           >
             <Plus size={13} weight="bold" aria-hidden="true" />
           </button>
-          <span aria-hidden="true" className={"ch-height-fb237a"+' '+"ch-background-423228"}  />
+          <span aria-hidden="true" className={"ch-height-1px"+' '+"ch-background-var---color-hairline"}  />
           <button
             onClick={() => zoomBy(-0.25)}
             disabled={view.scale <= 1}
             aria-label={t("office.zoomOut", "Zoom out")}
-            className={"hq-btn flex items-center justify-center "+("ch-width-322e3f"+' '+"ch-height-3a8bc5"+' '+"ch-color-4a0211")}
+            className={"hq-btn flex items-center justify-center "+("ch-width-30px"+' '+"ch-height-28px"+' '+"ch-color-var---color-ink-muted")}
 
           >
             <Minus size={13} weight="bold" aria-hidden="true" />

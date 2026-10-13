@@ -53,7 +53,7 @@ const teamsApi = baseApi.injectEndpoints({
     }),
 
     // create team
-    createTeam: builder.mutation<SuccessResponse<ITeam>, FormData>({
+    createTeam: builder.mutation<SuccessResponse<ITeam>, FormData | { name: string; description: string }>({
       query: (body) => ({
         url: "/teams",
         method: "POST",
@@ -65,7 +65,7 @@ const teamsApi = baseApi.injectEndpoints({
     // update team
     updateTeam: builder.mutation<
       SuccessResponse<ITeam>,
-      { id: number; body: FormData }
+      { id: number; body: FormData | { name: string; description: string } }
     >({
       query: ({ id, body }) => ({
         url: `/teams/${id}`,

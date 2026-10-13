@@ -413,7 +413,7 @@ function makeViews(ctx, getDb) {
     const db = getDb();
     const pool = audienceId ? db.audiences.filter((a) => a.id === audienceId) : s.audienceId ? db.audiences.filter((a) => a.id === s.audienceId) : db.audiences.filter((a) => a.projectId === s.projectId);
     const base = pool.reduce((sum, a) => sum + a.contactsCount, 0);
-    return { id: s.id, name: s.name, description: s.description || null, rules: s.rules || {}, audienceId: s.audienceId || null, matchingContactsCount: Math.round(base * selectivity(s.rules)), createdAt: s.createdAt, updatedAt: s.updatedAt };
+    return { id: s.id, name: s.name, description: s.description || null, rules: s.rules || {}, audienceId: s.audienceId || null, matchingContactsCount: null, createdAt: s.createdAt, updatedAt: s.updatedAt };
   }
   const senderView = (s) => ({ id: s.id, channel: s.channel, name: s.name, isActive: s.isActive, configuration: s.configuration, createdByUserId: s.createdByUserId, createdAt: s.createdAt, updatedAt: s.updatedAt });
   const templateView = (t) => ({ id: t.id, projectId: t.projectId, channel: t.channel, senderConfigId: t.senderConfigId, name: t.name, subject: t.subject ?? null, body: t.body, variables: t.variables || [], providerData: t.providerData || {}, isActive: t.isActive, createdByUserId: t.createdByUserId, createdAt: t.createdAt, updatedAt: t.updatedAt });

@@ -96,7 +96,7 @@ export function DiscussButton({
       {/* Participants are proposed from the record itself, so starting a
           conversation does not begin with choosing an audience. */}
       {!existing && suggestedParticipants.length > 0 && (
-        <p className={"flex items-center gap-1.5 text-caption "+("ch-color-094083")} >
+        <p className={"flex items-center gap-1.5 text-caption "+("ch-color-var---color-ink-subtle")} >
           {t("discuss.willInclude", "Will include")}
           {suggestedParticipants.map((id) => (
             <SuggestedPerson key={id} userId={id} />
@@ -113,7 +113,7 @@ function SuggestedPerson({ userId }: { userId: string }) {
   return (
     <span className="inline-flex items-center gap-1">
       <Avatar name={user.name} initials={user.initials} tint={user.tint} size={20} hideStatus />
-      <span className={"ch-color-4a0211"} ><bdi>{user.name.split(" ")[0]}</bdi></span>
+      <span className={"ch-color-var---color-ink-muted"} ><bdi>{user.name.split(" ")[0]}</bdi></span>
     </span>
   );
 }
@@ -135,7 +135,7 @@ export function ObjectConversations({ object }: { object: ObjectRef }) {
 
   if (threads.length === 0) {
     return (
-      <p className={"text-body-sm "+("ch-color-4a0211")} >
+      <p className={"text-body-sm "+("ch-color-var---color-ink-muted")} >
         {t("discuss.none", "No conversations yet.")}
       </p>
     );
@@ -150,14 +150,14 @@ export function ObjectConversations({ object }: { object: ObjectRef }) {
               openThread(m.id);
               router.push(`/hq/chat/${m.channelId}`);
             }}
-            className={"hq-row flex w-full items-center gap-2 px-2.5 py-2 text-start "+("ch-border-5065d4"+' '+"ch-border-radius-332348"+' '+"ch-background-751d03")}
+            className={"hq-row flex w-full items-center gap-2 px-2.5 py-2 text-start "+("ch-border-1px-solid-var---color-hairline"+' '+"ch-border-radius-var---radius-control"+' '+"ch-background-var---color-surface")}
 
           >
-            <ChatTeardropText size={14} aria-hidden="true" className={"ch-color-4a0211"}  />
-            <span className={"min-w-0 flex-1 truncate text-body-sm "+("ch-color-7f7330")} >
+            <ChatTeardropText size={14} aria-hidden="true" className={"ch-color-var---color-ink-muted"}  />
+            <span className={"min-w-0 flex-1 truncate text-body-sm "+("ch-color-var---color-ink")} >
               <bdi>{m.text}</bdi>
             </span>
-            <span className={"tabular shrink-0 text-caption "+("ch-color-094083")} >
+            <span className={"tabular shrink-0 text-caption "+("ch-color-var---color-ink-subtle")} >
               {m.replyCount > 0
                 ? t("chat.nReplies", "{n} replies", { n: m.replyCount })
                 : formatRelative(m.createdAt)}

@@ -8,13 +8,17 @@
   "scripts": {
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
-    "lint": "turbo run lint",
+    "lint": "node tools/ci/lint.mjs",
     "test": "turbo run test",
     "i18n:check": "turbo run i18n:check",
     "dev:mock": "pnpm --filter orgtik-local-dev api",
     "dev:local": "node tools/services/local.cjs",
     "demo": "node tools/demo/start.cjs",
-    "ui:build": "turbo run build --filter=@orgtik/ui"
+    "ui:build": "turbo run build --filter=@orgtik/ui",
+    "build:local": "node tools/services/build-local.cjs",
+    "preview:local": "node tools/services/local.cjs --preview",
+    "test:journeys": "node tools/ci/local-journeys.mjs",
+    "measure:local": "node tools/services/measure-local.mjs"
   },
   "devDependencies": {
     "turbo": "^2.11.7"

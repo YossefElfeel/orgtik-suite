@@ -143,6 +143,17 @@
     "capabilities": "Capabilities, one per line",
     "auditExport": "Export audit CSV",
     "workspaceExport": "Export workspace CSV",
-    "scheduleLowerPlan": "Schedule lower plan for renewal"
+    "scheduleLowerPlan": "Schedule lower plan for renewal",
+    "connectorDescriptions": {
+      "tasks-files": "Pin Files versions to tasks.",
+      "chat-files": "Share pinned Files versions and whiteboards.",
+      "tasks-hr": "Show approved HR availability in Tasks calendars.",
+      "chat-hr": "Show approved HR availability in Chats calendars.",
+      "hr-tasks": "Create onboarding tasks and link projects.",
+      "crm-tasks": "Create follow-up tasks from CRM records.",
+      "crm-files": "Use packaged Files versions for service delivery.",
+      "chat-tasks": "Create Tasks records from messages.",
+      "marketing-crm": "Connect campaign contacts and attribution."
+    }
   }
 }

@@ -10,6 +10,7 @@ type EmployeeInfoSectionProps = {
   joinDateLabel: string;
   employeeId: string;
   isLoading?: boolean;
+  onEdit?: () => void;
 };
 
 export function EmployeeInfoSection({
@@ -17,6 +18,7 @@ export function EmployeeInfoSection({
   joinDateLabel,
   employeeId,
   isLoading,
+  onEdit,
 }: EmployeeInfoSectionProps) {
   const t = useTranslations("employees.details.sections");
   const tFields = useTranslations("createUpdateEmployee.fields");
@@ -29,7 +31,7 @@ export function EmployeeInfoSection({
     <InfoCard
       title={t("employee")}
       icon={Briefcase}
-      onEdit={() => {}}
+      onEdit={onEdit}
       items={[
         {
           id: "emp-id",

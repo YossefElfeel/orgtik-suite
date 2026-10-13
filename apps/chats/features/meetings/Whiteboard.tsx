@@ -32,7 +32,7 @@ const Excalidraw = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className={"flex h-full w-full flex-col gap-3 p-4 "+("ch-background-751d03")} >
+      <div className={"flex h-full w-full flex-col gap-3 p-4 "+("ch-background-var---color-surface")} >
         <Skeleton className="h-4 w-44"/>
         <Skeleton className="h-52 w-full"/>
       </div>
@@ -82,7 +82,7 @@ export function Whiteboard({ scene, readOnly = false, onChange, onIssue }: { sce
     return () => watch.disconnect();
   }, [t]);
   return (
-    <div ref={box} onDragOverCapture={event => event.preventDefault()} onDropCapture={event => { event.preventDefault(); event.stopPropagation(); onIssue?.("unsupported_content"); }} onKeyDownCapture={event => { if ((event.ctrlKey || event.metaKey) && ["o", "k"].includes(event.key.toLowerCase())) { event.preventDefault(); event.stopPropagation(); onIssue?.("unsupported_content"); } }} className={"h-full w-full [&_.default-sidebar-trigger]:hidden! [&_[data-testid=toolbar-embeddable]]:hidden! [&_[data-testid=toolbar-magicframe]]:hidden! "+("ch-background-751d03")} >
+    <div ref={box} onDragOverCapture={event => event.preventDefault()} onDropCapture={event => { event.preventDefault(); event.stopPropagation(); onIssue?.("unsupported_content"); }} onKeyDownCapture={event => { if ((event.ctrlKey || event.metaKey) && ["o", "k"].includes(event.key.toLowerCase())) { event.preventDefault(); event.stopPropagation(); onIssue?.("unsupported_content"); } }} className={"h-full w-full [&_.default-sidebar-trigger]:hidden! [&_[data-testid=toolbar-embeddable]]:hidden! [&_[data-testid=toolbar-magicframe]]:hidden! "+("ch-background-var---color-surface")} >
       <Excalidraw
         /* Excalidraw's API takes literal colours, not CSS variables, so these two are the one place
            raw hex appears outside the token file: the brand's raised surface and ink (light). In the

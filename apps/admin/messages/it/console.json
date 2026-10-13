@@ -143,6 +143,17 @@
     "capabilities": "Funzionalità, una per riga",
     "auditExport": "Esporta registro CSV",
     "workspaceExport": "Esporta spazi CSV",
-    "scheduleLowerPlan": "Programma piano inferiore al rinnovo"
+    "scheduleLowerPlan": "Programma piano inferiore al rinnovo",
+    "connectorDescriptions": {
+      "tasks-files": "Collega versioni file alle attività.",
+      "chat-files": "Condividi file e lavagne.",
+      "tasks-hr": "Mostra assenze approvate nei calendari.",
+      "chat-hr": "Mostra assenze nei calendari chat.",
+      "hr-tasks": "Crea attività onboarding e collega progetti.",
+      "crm-tasks": "Crea attività follow-up CRM.",
+      "crm-files": "Usa versioni file per consegne.",
+      "chat-tasks": "Crea attività dai messaggi.",
+      "marketing-crm": "Collega contatti e attribuzione campagne."
+    }
   }
 }

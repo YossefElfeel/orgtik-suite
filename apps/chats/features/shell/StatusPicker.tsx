@@ -83,26 +83,26 @@ export function StatusPicker() {
         aria-expanded={open}
         aria-haspopup="dialog"
         aria-label={t("status.button", "Your status: {status}", { status: presence?.customText ? presence.customText : t(`status.${status}`, meta.label) })}
-        className={"hq-btn flex items-center gap-2 ps-2.5 pe-2 "+("ch-min-height-87483b"+' '+"ch-border-radius-189003"+' '+"ch-border-8ff264"+' '+"ch-background-751d03")}
+        className={"hq-btn flex items-center gap-2 ps-2.5 pe-2 "+("ch-min-height-34px"+' '+"ch-border-radius-var---radius-chip"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-background-var---color-surface")}
 
       >
         {/* The account menu next to it shows who you are; this button is your status alone. */}
         <PresenceMark status={status} px={14} />
-        <span className={"hidden text-body-sm font-medium sm:inline "+("ch-color-7f7330")} >
+        <span className={"hidden text-body-sm font-medium sm:inline "+("ch-color-var---color-ink")} >
           {presence?.customText ? presence.customText : t(`status.${status}`, meta.label)}
         </span>
-        <CaretDown size={12} weight="bold" aria-hidden="true" className={"ch-color-094083"}  />
+        <CaretDown size={12} weight="bold" aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
       </button>
 
       {open && (
         <div
           role="dialog"
           aria-label={t("status.dialog", "Set your status")}
-          className={"hq-floating hq-rise hq-dropdown absolute end-0 z-50 mt-2 w-[290px] p-2 "+("ch-border-radius-8d459a")}
+          className={"hq-floating hq-rise hq-dropdown absolute end-0 z-50 mt-2 w-[290px] p-2 "+("ch-border-radius-var---radius-card")}
 
         >
           <div className="p-1.5">
-            <label htmlFor="status-note" className={"text-caption font-medium "+("ch-color-7f7330")} >
+            <label htmlFor="status-note" className={"text-caption font-medium "+("ch-color-var---color-ink")} >
               {t("status.noteLabel", "What are you up to?")}
             </label>
             <input
@@ -119,10 +119,10 @@ export function StatusPicker() {
               }}
               aria-describedby="status-note-hint"
               placeholder={t("status.notePlaceholder", "Optional")}
-              className={"mt-1.5 w-full "+("ch-background-314b28"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-padding-d1b3a3"+' '+"ch-font-size-ba0694"+' '+"ch-min-height-87483b")}
+              className={"mt-1.5 w-full "+("ch-background-var---color-surface-sunken"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-padding-7px-10px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-min-height-34px")}
 
             />
-            <span id="status-note-hint" className={"mt-1 block text-caption "+("ch-color-094083")} >
+            <span id="status-note-hint" className={"mt-1 block text-caption "+("ch-color-var---color-ink-subtle")} >
               {t("status.noteHint", "Press Enter to save it with your current status, or pick a new status below.")}
             </span>
           </div>
@@ -137,7 +137,7 @@ export function StatusPicker() {
                   setCustomText("");
                   setOpen(false);
                 }}
-                className={"ch-color-4a0211"}
+                className={"ch-color-var---color-ink-muted"}
               >
                 {t("status.clear", "Clear “{text}”", { text: presence.customText })}
               </Button>
@@ -152,7 +152,7 @@ export function StatusPicker() {
                 <li key={s}>
                   <button
                     onClick={() => (s === "focus" ? undefined : choose(s))}
-                    className={"hq-row flex w-full items-start gap-2.5 p-2 text-start "+("ch-border-radius-332348"+' '+"ch-min-height-99fb93")}
+                    className={"hq-row flex w-full items-start gap-2.5 p-2 text-start "+("ch-border-radius-var---radius-control"+' '+"ch-min-height-44px")}
 
                     aria-current={isCurrent ? "true" : undefined}
                     disabled={s === "focus"}
@@ -160,19 +160,19 @@ export function StatusPicker() {
                   >
                     <span
                       aria-hidden="true"
-                      className={("mt-1 inline-block shrink-0 "+("ch-width-6adec4"+' '+"ch-height-b9986b"+' '+"ch-border-radius-189003"))+" "+('ch-status-mark-'+m.id+' '+'ch-status-mark-'+m.id)}
+                      className={("mt-1 inline-block shrink-0 "+("ch-width-9px"+' '+"ch-height-9px"+' '+"ch-border-radius-var---radius-chip"))+" "+('ch-status-mark-'+m.id+' '+'ch-status-mark-'+m.id)}
 
                     />
                     <span className="flex min-w-0 flex-col">
-                      <span className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+                      <span className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
                         {t(`status.${s}`, m.label)}
                       </span>
-                      <span className={"text-caption leading-snug "+("ch-color-4a0211")} >
+                      <span className={"text-caption leading-snug "+("ch-color-var---color-ink-muted")} >
                         {t(`status.${s}.desc`, m.description)}
                       </span>
                     </span>
                     {isCurrent && (
-                      <Check size={14} weight="bold" aria-hidden="true" className={"ch-color-55f463"+' '+"ch-margin-inline-start-8c5865"}  />
+                      <Check size={14} weight="bold" aria-hidden="true" className={"ch-color-var---color-ink-brand"+' '+"ch-margin-inline-start-auto"}  />
                     )}
                   </button>
                 </li>
@@ -182,12 +182,12 @@ export function StatusPicker() {
 
           {/* Focus is the only status that needs a duration, so it gets its own
               row of choices rather than a nested menu. */}
-          <div className={"mt-1 border-t p-2 "+("ch-border-color-407eb5")} >
+          <div className={"mt-1 border-t p-2 "+("ch-border-color-var---color-hairline")} >
             <div className="flex items-baseline justify-between">
-              <span className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+              <span className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
                 {t("status.focus", "Focus")}
               </span>
-              <span className={"text-caption "+("ch-color-4a0211")} >
+              <span className={"text-caption "+("ch-color-var---color-ink-muted")} >
                 {t("status.focus.hint", "Knocks are held")}
               </span>
             </div>
@@ -200,7 +200,7 @@ export function StatusPicker() {
             </div>
           </div>
 
-          <div className={"mt-1 border-t p-2 "+("ch-border-color-407eb5")} >
+          <div className={"mt-1 border-t p-2 "+("ch-border-color-var---color-hairline")} >
             <Button
               variant="ghost"
               size="sm"

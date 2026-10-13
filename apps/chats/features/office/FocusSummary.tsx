@@ -25,20 +25,20 @@ export function FocusSummary() {
   return (
     <div
       role="status"
-      className={"hq-floating hq-rise absolute bottom-4 start-4 z-[45] w-[290px] p-3.5 "+("ch-border-radius-8d459a")}
+      className={"hq-floating hq-rise absolute bottom-4 start-4 z-[45] w-[290px] p-3.5 "+("ch-border-radius-var---radius-card")}
 
     >
       <div className="flex items-start justify-between gap-2">
         <div>
-          <p className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
+          <p className={"text-body-sm font-semibold "+("ch-color-var---color-ink")} >
             {t("focus.done", "Focus finished")}
           </p>
-          <p className={"mt-0.5 text-caption "+("ch-color-4a0211")} >
+          <p className={"mt-0.5 text-caption "+("ch-color-var---color-ink-muted")} >
             {t("focus.held", "Here is what was held while you were heads down.")}
           </p>
         </div>
         <Button variant="ghost" size="sm" iconOnly label={t("shell.dismiss", "Dismiss")} onClick={clear}>
-          <X size={13} weight="bold" aria-hidden="true" className={"ch-color-094083"}  />
+          <X size={13} weight="bold" aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
         </Button>
       </div>
 
@@ -51,7 +51,7 @@ export function FocusSummary() {
       <Link
         href="/hq/chat/catch-up"
         onClick={clear}
-        className={"hq-btn mt-3 inline-flex w-full items-center justify-center px-3 py-2 text-body-sm font-medium "+("ch-background-3f17cb"+' '+"ch-color-7b8a5e"+' '+"ch-border-radius-332348")}
+        className={"hq-btn mt-3 inline-flex w-full items-center justify-center px-3 py-2 text-body-sm font-medium "+("ch-background-var---color-accent"+' '+"ch-color-var---color-ink-inverse"+' '+"ch-border-radius-var---radius-control")}
 
       >
         {t("focus.catchUp", "Catch up")}
@@ -64,12 +64,12 @@ function SummaryRow({ n, label }: { n: number; label: string }) {
   return (
     <li className="flex items-baseline gap-2">
       <span
-        className={"tabular text-body font-semibold leading-none "+("ch-color-7f7330"+' '+"ch-min-width-385704")}
+        className={"tabular text-body font-semibold leading-none "+("ch-color-var---color-ink"+' '+"ch-min-width-18px")}
 
       >
         {n}
       </span>
-      <span className={"text-body-sm "+("ch-color-4a0211")} >
+      <span className={"text-body-sm "+("ch-color-var---color-ink-muted")} >
         {label}
       </span>
     </li>
