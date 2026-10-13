@@ -48,7 +48,7 @@ if (hasPair(managed)) {
     // provisions its managed Secrets directly; no credential is read or copied.
     await api(`/v1/storage/stores/${storeId}/connections`, "POST", {
       projectId: project.id, type: "integration", envVarEnvironments: ["production", "preview"],
-      ...(origins[0].envVarPrefix === undefined ? {} : { envVarPrefix: origins[0].envVarPrefix }),
+      ...(typeof origins[0].envVarPrefix === "string" ? { envVarPrefix: origins[0].envVarPrefix } : {}),
     });
   } else if (!["production", "preview"].every(target => destinations.some(row => row.environments?.includes(target)))) {
     throw new Error("The new project's existing Redis connection does not cover both confirmed environments.");
