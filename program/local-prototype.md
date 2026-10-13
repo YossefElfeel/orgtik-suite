@@ -43,7 +43,7 @@ pnpm test:journeys
 
 Shared lint covers active apps with one rule set. `tools/ci/lint-baseline.json` records existing findings from GitHub main `72a68708`; new findings fail. This is a gate against additional debt, not a claim that the legacy source is lint-clean. The retired Content frontend is outside this gate.
 
-`test:journeys` runs Chromium against a local launcher, using disposable test identities. It covers Mona's tool cards, handoff paths, a team form, Arabic mobile layout and a single-tool owner's Home link. Screenshots and timing results are ignored under `.vercel/journey-results`. Set `ORGTIK_JOURNEY_ORIGIN` to an already-running isolated local origin to reuse it. The CI workflow runs the same journeys and retains their evidence.
+`test:journeys` runs Chromium against a prebuilt local launcher, using disposable test identities. It covers Mona's tool cards, handoff paths, a team form, Arabic mobile layout and a single-tool owner's Home link. Screenshots and timing results are ignored under `.vercel/journey-results`. Set `ORGTIK_JOURNEY_ORIGIN` to an already-running isolated local origin to reuse it. The CI workflow builds SOS and Tasks for these representative journeys and runs the same checks and retains their evidence.
 
 Measure startup, HTTP documents and API latency separately from browser hydration:
 

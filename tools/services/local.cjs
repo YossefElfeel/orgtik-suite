@@ -13,6 +13,8 @@ const localHost = process.env.ORGTIK_LOCAL_HOST || "localhost";
 if (!["localhost", "127.0.0.1"].includes(localHost)) throw new Error("ORGTIK_LOCAL_HOST must be localhost or 127.0.0.1.");
 const origin = `http://${localHost}:${localPort}`;
 const preview = process.argv.includes("--preview");
+const previewOnly = process.argv.find(value => value.startsWith("--preview-services="))?.split("=")[1].split(",");
+if (previewOnly && (!preview || previewOnly.some(key => !apps.includes(key) && key !== "website"))) throw Error("Choose supported prebuilt services.");
 const stateFile = path.join(root, ".vercel/local-suite/running.json");
 function recordRun(startupMs) {
   fs.mkdirSync(path.dirname(stateFile), { recursive: true });
@@ -59,7 +61,7 @@ async function main() {
     MOCK_WEBSITE_ORDER_SECRET: localOrderKey(path.join(root, ".vercel/local-suite/orders.key")),
     NEXT_TELEMETRY_DISABLED: "1", NODE_ENV: "development",
   });
-  if (preview) { const compiled = require("./build-local.cjs"); if (!compiled.ready(origin)) await compiled.build(origin); }
+  if (preview) { const compiled = require("./build-local.cjs"); if (!compiled.ready(origin, previewOnly)) await compiled.build(origin, previewOnly); }
   // Build the injected library once, rather than once per frontend.
   const build = preview ? { status: 0 } : spawnSync(process.platform === "win32" ? "pnpm.cmd" : "pnpm", ["--filter", "@orgtik/ui", "run", "build"], { cwd: root, env: process.env, stdio: "inherit", windowsHide: true, shell: process.platform === "win32" });
   if (build.error) throw build.error;

@@ -8,15 +8,16 @@ function sourceDigest() {
   for (const file of [...new Set(files)].sort()) if (fs.existsSync(path.join(root, file))) hash.update(file).update(fs.readFileSync(path.join(root, file)));
   return hash.digest('hex');
 }
-function ready(origin) {
-  try { const value = JSON.parse(fs.readFileSync(marker, 'utf8')); return value.origin === origin && value.digest === sourceDigest() && [...apps.map(key => `apps/${key}/.next/BUILD_ID`), 'apps/website/landing-directions/dist/client/index.html'].every(file => fs.existsSync(path.join(root, file))); } catch { return false; }
+function ready(origin, selected = [...apps, "website"]) {
+  try { const value = JSON.parse(fs.readFileSync(marker, 'utf8')); return value.origin === origin && value.digest === sourceDigest() && selected.map(key => key === "website" ? "apps/website/landing-directions/dist/client/index.html" : `apps/${key}/.next/BUILD_ID`).every(file => fs.existsSync(path.join(root, file))); } catch { return false; }
 }
-async function build(origin) {
+async function build(origin, selected = [...apps, "website"]) {
+  if (!Array.isArray(selected) || !selected.length || selected.some(key => !apps.includes(key) && key !== "website")) throw Error("Choose supported preview services.");
   const environment = { ...process.env, SUITE_SERVICES_PUBLIC_URL: origin, VERCEL_ENV: 'development', ORGTIK_SERVICES: '1', ORGTIK_SERVICES_DEV: '1', ORGTIK_LOCAL_PREVIEW_BUILD: '1', NEXT_TELEMETRY_DISABLED: '1' };
   const executable = process.platform === 'win32' ? 'pnpm.cmd' : 'pnpm';
   const ui = spawnSync(executable, ['--filter', '@orgtik/ui', 'build'], { cwd: root, env: environment, stdio: 'inherit', windowsHide: true, shell: process.platform === 'win32' });
   if (ui.error || ui.status !== 0) throw ui.error || Error('Shared UI build failed.');
-  const queue = [...apps, 'website'];
+  const queue = [...selected];
   async function worker() {
     while (queue.length) {
       const key = queue.shift(), env = { ...environment, ...clientEnvironment(key, environment), NODE_ENV: 'production', SUITE_SOS_URL: `${origin}/sos`, SUITE_SOS_API: `${origin}/sos/api/backend/sos/api` };
@@ -37,7 +38,7 @@ async function build(origin) {
     }
   }
   await worker();
-  fs.mkdirSync(path.dirname(marker), { recursive: true }); fs.writeFileSync(marker, JSON.stringify({ origin, digest: sourceDigest(), builtAt: new Date().toISOString() }, null, 2));
+  fs.mkdirSync(path.dirname(marker), { recursive: true }); fs.writeFileSync(marker, JSON.stringify({ origin, digest: sourceDigest(), services: selected, builtAt: new Date().toISOString() }, null, 2));
 }
 module.exports = { ready, build, sourceDigest };
 if (require.main === module) {

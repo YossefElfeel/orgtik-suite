@@ -22,11 +22,11 @@ async function login(context,email,password){
 try {
   if(!origin){
     const probe=net.createServer();await new Promise(resolve=>probe.listen(0,'127.0.0.1',resolve));const port=probe.address().port;await new Promise(resolve=>probe.close(resolve));origin=`http://127.0.0.1:${port}`;
-    child=spawn(process.execPath,['tools/services/local.cjs'],{cwd:root,env:{...process.env,ORGTIK_LOCAL_PORT:String(port),ORGTIK_LOCAL_HOST:'127.0.0.1'},stdio:['ignore','pipe','pipe'],windowsHide:true});
+    child=spawn(process.execPath,['tools/services/local.cjs','--preview','--preview-services=sos,tasks'],{cwd:root,env:{...process.env,ORGTIK_LOCAL_PORT:String(port),ORGTIK_LOCAL_HOST:'127.0.0.1'},stdio:['ignore','pipe','pipe'],windowsHide:true});
     let ready=false,exited=false;const log=fs.createWriteStream(path.join(output,'launcher.log'));
     for(const stream of [child.stdout,child.stderr])stream.on('data',chunk=>{log.write(chunk);if(String(chunk).includes('OrgTik local prototype ready:'))ready=true;});
     child.on('exit',()=>exited=true);
-    const deadline=Date.now()+180000;while(!ready){if(exited||Date.now()>deadline)throw Error('Local launcher failed; see launcher.log');await new Promise(resolve=>setTimeout(resolve,250));}
+    const deadline=Date.now()+900000;while(!ready){if(exited||Date.now()>deadline)throw Error('Local launcher failed; see launcher.log');await new Promise(resolve=>setTimeout(resolve,250));}
   }
   if(!/^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(origin))throw Error('Journeys require a local suite.');
   browser=await chromium.launch({headless:true});
