@@ -17,5 +17,6 @@ export function middleware(request: NextRequest) {
 // Next 15.5 drops a matcher with a dot pattern in its lookahead (next-intl's "/((?!api|_next|_vercel|.*\..*).*)")
 // without a word, and the middleware stops running; this one is the app's original.
 export const config = {
+  runtime: "nodejs",
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico|public|icons|images).*)"],
 };
