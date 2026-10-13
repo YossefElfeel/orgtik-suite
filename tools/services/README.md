@@ -1,94 +1,81 @@
-# OrgTik as one Vercel Services project
+# OrgTik Services on separate Hobby projects
 
-The repository-root `vercel.json` is for a new project named **orgtik-suite-services**.
-Its root directory must be the repository root, not an individual app folder.
-Vercel Services is in beta. Use **Vercel CLI 63.1.2** or a newer compatible version;
-the previously used 54.7.1 CLI rejects `services`.
+The owner confirmed this split after Vercel rejected the combined deployment's
+serverless function count. Each project must stay within **12 functions**. The
+release checks the compiled artifact before uploading; service count alone does
+not establish the function count.
 
-## Confirmed public routes and bindings
-
-| Service | Source | Public path | Runtime binding |
+| Vercel project | Config | Public service/path | Private service/binding |
 | --- | --- | --- | --- |
-| admin | apps/admin | /admin | mock via ORGTIK_MOCK_URL |
-| chats | apps/chats | /chats | mock via ORGTIK_MOCK_URL |
-| files | apps/files | /files | mock via ORGTIK_MOCK_URL |
-| hr | apps/hr | /hr | mock via ORGTIK_MOCK_URL |
-| marketing | apps/marketing | /marketing | mock via ORGTIK_MOCK_URL |
-| sales | apps/sales | /sales | mock via ORGTIK_MOCK_URL |
-| sos | apps/sos | /sos | mock via ORGTIK_MOCK_URL |
-| tasks | apps/tasks | /tasks | mock via ORGTIK_MOCK_URL |
-| wm | apps/wm | /wm | mock via ORGTIK_MOCK_URL |
-| website | apps/website/landing-directions | / (catch-all, last) | none: static browser app |
-| mock | mock | internal; no public rewrite | none |
+| orgtik-suite-services | vercel.json | website at /; router for every app prefix | none |
+| orgtik-suite-services-admin | vercel.admin.json | admin at /admin | admin → mock, ORGTIK_MOCK_URL |
+| orgtik-suite-services-chats | vercel.chats.json | chats at /chats | chats → mock, ORGTIK_MOCK_URL |
+| orgtik-suite-services-files | vercel.files.json | files at /files | files → mock, ORGTIK_MOCK_URL |
+| orgtik-suite-services-hr | vercel.hr.json | hr at /hr | hr → mock, ORGTIK_MOCK_URL |
+| orgtik-suite-services-marketing | vercel.marketing.json | marketing at /marketing | marketing → mock, ORGTIK_MOCK_URL |
+| orgtik-suite-services-sales | vercel.sales.json | sales at /sales | sales → mock, ORGTIK_MOCK_URL |
+| orgtik-suite-services-sos | vercel.sos.json | sos at /sos | sos → mock, ORGTIK_MOCK_URL |
+| orgtik-suite-services-tasks | vercel.tasks.json | tasks at /tasks | tasks → mock, ORGTIK_MOCK_URL |
+| orgtik-suite-services-wm | vercel.wm.json | wm at /wm | wm → mock, ORGTIK_MOCK_URL |
 
-`packages/ui` is a build dependency, not a deployable Next.js app. Storybook
-(`apps/docs`) is omitted from this customer-facing deployment. The retired
-Content app (`apps/content`) is omitted. The owner confirmed this layout.
+Vercel service bindings target services within the same project. Each frontend
+therefore has its own internal instance of the existing mock application. No
+public rewrite targets `mock`. All instances use the same confirmed Redis store
+and datasets: `services-production` for Production and `services-preview` for
+Preview. Persistent state and signing authority are shared through Redis.
 
-Each Next.js service exposes `/SERVICE/api/backend/NAMESPACE/...`. That Route
-Handler forwards the existing bearer token, workspace and idempotency headers
-to its bound `mock` service. It streams uploads/downloads, preserves upstream
-status codes, disables response caching, excludes mock-control URLs, and does
-not trust client-supplied destinations or replay headers. Backend authorization
-continues to verify the account and requested operation.
+The public website/router forwards app prefixes to their frontend project
+domains. Browser URLs, API paths and session handoffs retain the shared origin
+`https://orgtik-suite-services.vercel.app`. The static website calls the public
+SOS gateway; each frontend gateway calls its bound private mock. Binding URLs
+are never used in builds, middleware or client bundles. Do not set
+`ORGTIK_MOCK_URL` manually.
 
-The Vite website uses the SOS gateway for identity, purchasing and published CMS
-requests. This is a browser call to the public SOS service, not a server-side
-binding. Binding URLs are not used during builds, in middleware, or in client
-bundles. Do **not** configure `ORGTIK_MOCK_URL` manually.
+`packages/ui` remains a library. Storybook and the retired Content frontend are
+omitted from the deployment.
 
-## Environment
+## Configuration and local development
 
-For the new project, configure the existing persistent store integration using
-either `KV_REST_API_URL` and `KV_REST_API_TOKEN`, or
-`UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`. Never commit their values.
-The provisioning script reuses the existing Redis integration with the confirmed
-separate datasets: `MOCK_SANDBOX=services-production` in Production and
-`MOCK_SANDBOX=services-preview` in Preview. An unconfigured hosted store fails closed.
-
-`SUITE_SERVICES_PUBLIC_URL` is optional. It must be an origin with no path:
-for example the new project's production domain. When omitted, the build uses
-the current deployment's `VERCEL_URL`; all app links and browser APIs then point
-at that same deployment. Local development defaults to `http://localhost:3000`.
-Do not carry the old per-app `NEXT_PUBLIC_*`, `VITE_*`, `SUITE_WEB_URLS` or
-`MOCK_PUBLIC_URL` values into this new project. The service build/config helpers
-derive these from the single public origin.
-
-The mock's conventional Express entrypoint is `mock/index.js`, which delegates
-to the existing shared API handler. Existing per-app `vercel.json` files and the
-separate-project deployment workflow remain available for the earlier layout;
-they do not define the new root deployment.
-
-## Local verification
+`vercel.dev.json` is the reviewed all-services template for local development.
+`tools/services/projects.mjs` generates the ten deployment configs at the repo
+root, so service roots resolve relative to the repository. Regenerate after
+changing the template, and check that the generated files are current:
 
 ```sh
+node tools/services/projects.mjs
+node tools/services/projects.mjs --check
 pnpm install --frozen-lockfile
-pnpm --filter @orgtik/ui run build
-node --test tools/services/services.test.mjs packages/ui/src/auth/urls.test.mjs
-npx --yes vercel@63.1.2 dev -L --listen 3000
+npx --yes vercel@63.1.2 --local-config vercel.dev.json dev -L --listen 3000
 ```
 
-`vercel dev` starts all services and injects the bindings. The mock's explicit
-dev command uses the isolated `services-local` dataset under `.vercel/dev/mock`,
-with file persistence, and never uses production Redis. Next.js base paths also
-prefix framework assets; native browser navigation and session handoffs retain
-the app prefix. Customer and staff app sessions have separate sessionStorage
-keys even on one origin. Website prerendered routes, CMS redirects, and genuine
-not-found behavior are retained.
+Local Services use the isolated `services-local` file dataset under
+`.vercel/dev/mock`, never production Redis. Node middleware is required because
+Services does not support Edge function output. App prefixes also apply to
+assets and native browser navigation. Tab sessions use separate keys per app.
 
-Open `/sos/auth/login`, sign in using a seeded test account, then launch another
-tool. Staff Website Manager entry is
-`/sos/auth/login?mode=staff&target=wm&redirect=%2Fgo%2Fwebsite_manager`.
+## Production release
 
-## Release
+The main-only workflow validates the reviewed source, then builds and deploys
+the nine frontend/private-backend projects with a maximum of two parallel jobs.
+Each artifact preserves original backend assets and dependencies, rejects Edge
+output, and stops if it contains more than twelve functions. Each frontend is
+staged, its entry route and bound CMS gateway checked, and then promoted.
 
-The owner confirmed the service names, public paths, private backend and caller
-bindings above. Fetch GitHub `main` again before releasing. Use a reviewed commit based
-on that latest main, link only the new project and configure its persistent
-store. Build/validate the Services artifact before assigning its production URL.
-All services deploy together, so this release is one deployment rather than
-the earlier per-project matrix. The owning team's daily deployment limit still
-applies; creating a new project does not reset it.
+The website/router deploys after all frontend jobs succeed. Its staged routing
+is checked before promotion; public staff sign-in and Website Manager handoff
+are checked afterward. It retains the website's prerendered routes and genuine
+404 responses. This workflow releases Production; the separate Preview dataset
+is configured for future Preview releases.
+
+Provisioning creates only the confirmed project names. It attaches the existing
+Redis integration directly, preserving managed Secrets and the original
+connection's variable prefix. Credential values are never exported. The shared
+public origin is set in each project's `SUITE_SERVICES_PUBLIC_URL`. Earlier
+per-app URL settings are not copied. Existing standalone projects remain
+available; automatic legacy deployment matrices are skipped.
+
+The team-wide daily deployment limit still applies to these separate projects.
+Creating a project does not reset that limit.
 
 Official references: [Services](https://vercel.com/docs/services),
 [routing](https://vercel.com/docs/services/routing),

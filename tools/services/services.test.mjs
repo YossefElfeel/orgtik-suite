@@ -3,9 +3,26 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { createRequire } from "node:module";
 import { proxyBackend } from "./proxy.ts";
+import { configurationFor, frontendProjects, projectName, configFilename } from "./projects.mjs";
+import { assertHobbyLimit } from "./check-artifact.mjs";
 const require = createRequire(import.meta.url);
 const { apps, clientEnvironment, packages, servicesNextConfig, webUrls } = require("./config.cjs");
-const config = JSON.parse(fs.readFileSync(new URL("../../vercel.json", import.meta.url)));
+const config = JSON.parse(fs.readFileSync(new URL("../../vercel.dev.json", import.meta.url)));
+
+test("each frontend project retains its private binding and the website gateway preserves every public prefix", () => {
+  const gateway = configurationFor("website");
+  assert.deepEqual(Object.keys(gateway.services), ["website"]);
+  for (const app of frontendProjects) {
+    const value = configurationFor(app);
+    assert.deepEqual(Object.keys(value.services), [app, "mock"]);
+    assert.deepEqual(value.services[app].bindings, [{ type: "service", service: "mock", format: "url", env: "ORGTIK_MOCK_URL" }]);
+    assert.deepEqual(value.rewrites, [{ source: `/${app}/:path*`, destination: { service: app } }]);
+    assert.equal(gateway.rewrites.find(rule => rule.source === `/${app}/:path*`).destination, `https://${projectName(app)}.vercel.app/${app}/:path*`);
+    assert.equal(configFilename(app), `vercel.${app}.json`);
+  }
+  assert.deepEqual(gateway.rewrites.at(-1), { source: "/(.*)", destination: { service: "website" } });
+  assert.throws(() => configurationFor("mock"), /Unknown deployment/);
+});
 
 test("public routes select every active frontend, including its bare base path, and never expose mock", () => {
   const route = path => config.rewrites.find(rule => rule.source === "/(.*)" || path === rule.source.split("/:")[0] || path.startsWith(rule.source.split("/:")[0] + "/"))?.destination.service;
@@ -43,6 +60,11 @@ test("build URLs point at the same deployment and never require or publish a bin
   assert.equal(clientEnvironment("website", env).VITE_WM_ORIGIN, "https://suite-preview.example");
   assert.deepEqual(servicesNextConfig("sos", {}), {});
   assert.throws(() => webUrls({ VERCEL: "1", SUITE_SERVICES_PUBLIC_URL: "http://localhost:3000" }), /HTTPS/);
+});
+
+test("the upload guard accepts twelve functions and blocks an oversized split project", () => {
+  assert.doesNotThrow(() => assertHobbyLimit({ total: 12, counts: { sos: 11, mock: 1 } }));
+  assert.throws(() => assertHobbyLimit({ total: 13, counts: { sos: 12, mock: 1 } }), /Upload was stopped/);
 });
 
 test("gateway uses the runtime binding, preserves authentication/body/query, and streams the response", async () => {

@@ -4,141 +4,6 @@
     "fra1"
   ],
   "services": {
-    "admin": {
-      "root": "apps/admin",
-      "framework": "nextjs",
-      "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
-      "buildCommand": "node ../../tools/services/run.cjs build admin",
-      "devCommand": "node ../../tools/services/run.cjs dev admin",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "mock",
-          "format": "url",
-          "env": "ORGTIK_MOCK_URL"
-        }
-      ]
-    },
-    "chats": {
-      "root": "apps/chats",
-      "framework": "nextjs",
-      "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
-      "buildCommand": "node ../../tools/services/run.cjs build chats",
-      "devCommand": "node ../../tools/services/run.cjs dev chats",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "mock",
-          "format": "url",
-          "env": "ORGTIK_MOCK_URL"
-        }
-      ]
-    },
-    "files": {
-      "root": "apps/files",
-      "framework": "nextjs",
-      "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
-      "buildCommand": "node ../../tools/services/run.cjs build files",
-      "devCommand": "node ../../tools/services/run.cjs dev files",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "mock",
-          "format": "url",
-          "env": "ORGTIK_MOCK_URL"
-        }
-      ]
-    },
-    "hr": {
-      "root": "apps/hr",
-      "framework": "nextjs",
-      "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
-      "buildCommand": "node ../../tools/services/run.cjs build hr",
-      "devCommand": "node ../../tools/services/run.cjs dev hr",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "mock",
-          "format": "url",
-          "env": "ORGTIK_MOCK_URL"
-        }
-      ]
-    },
-    "marketing": {
-      "root": "apps/marketing",
-      "framework": "nextjs",
-      "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
-      "buildCommand": "node ../../tools/services/run.cjs build marketing",
-      "devCommand": "node ../../tools/services/run.cjs dev marketing",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "mock",
-          "format": "url",
-          "env": "ORGTIK_MOCK_URL"
-        }
-      ]
-    },
-    "sales": {
-      "root": "apps/sales",
-      "framework": "nextjs",
-      "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
-      "buildCommand": "node ../../tools/services/run.cjs build sales",
-      "devCommand": "node ../../tools/services/run.cjs dev sales",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "mock",
-          "format": "url",
-          "env": "ORGTIK_MOCK_URL"
-        }
-      ]
-    },
-    "sos": {
-      "root": "apps/sos",
-      "framework": "nextjs",
-      "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
-      "buildCommand": "node ../../tools/services/run.cjs build sos",
-      "devCommand": "node ../../tools/services/run.cjs dev sos",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "mock",
-          "format": "url",
-          "env": "ORGTIK_MOCK_URL"
-        }
-      ]
-    },
-    "tasks": {
-      "root": "apps/tasks",
-      "framework": "nextjs",
-      "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
-      "buildCommand": "node ../../tools/services/run.cjs build tasks",
-      "devCommand": "node ../../tools/services/run.cjs dev tasks",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "mock",
-          "format": "url",
-          "env": "ORGTIK_MOCK_URL"
-        }
-      ]
-    },
-    "wm": {
-      "root": "apps/wm",
-      "framework": "nextjs",
-      "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
-      "buildCommand": "node ../../tools/services/run.cjs build wm",
-      "devCommand": "node ../../tools/services/run.cjs dev wm",
-      "bindings": [
-        {
-          "type": "service",
-          "service": "mock",
-          "format": "url",
-          "env": "ORGTIK_MOCK_URL"
-        }
-      ]
-    },
     "website": {
       "root": "apps/website/landing-directions",
       "framework": "vite",
@@ -228,77 +93,44 @@
           ]
         }
       ]
-    },
-    "mock": {
-      "root": "mock",
-      "framework": "express",
-      "entrypoint": "index.js",
-      "devCommand": "node services-dev.cjs",
-      "installCommand": "cd .. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
-      "functions": {
-        "index.js": {
-          "includeFiles": "{apps,lib,api}/**",
-          "maxDuration": 60,
-          "memory": 2048,
-          "excludeFiles": "**/apps/files/assets/hls/**/*.ts"
-        }
-      }
     }
   },
   "rewrites": [
     {
       "source": "/admin/:path*",
-      "destination": {
-        "service": "admin"
-      }
+      "destination": "https://orgtik-suite-services-admin.vercel.app/admin/:path*"
     },
     {
       "source": "/chats/:path*",
-      "destination": {
-        "service": "chats"
-      }
+      "destination": "https://orgtik-suite-services-chats.vercel.app/chats/:path*"
     },
     {
       "source": "/files/:path*",
-      "destination": {
-        "service": "files"
-      }
+      "destination": "https://orgtik-suite-services-files.vercel.app/files/:path*"
     },
     {
       "source": "/hr/:path*",
-      "destination": {
-        "service": "hr"
-      }
+      "destination": "https://orgtik-suite-services-hr.vercel.app/hr/:path*"
     },
     {
       "source": "/marketing/:path*",
-      "destination": {
-        "service": "marketing"
-      }
+      "destination": "https://orgtik-suite-services-marketing.vercel.app/marketing/:path*"
     },
     {
       "source": "/sales/:path*",
-      "destination": {
-        "service": "sales"
-      }
+      "destination": "https://orgtik-suite-services-sales.vercel.app/sales/:path*"
     },
     {
       "source": "/sos/:path*",
-      "destination": {
-        "service": "sos"
-      }
+      "destination": "https://orgtik-suite-services-sos.vercel.app/sos/:path*"
     },
     {
       "source": "/tasks/:path*",
-      "destination": {
-        "service": "tasks"
-      }
+      "destination": "https://orgtik-suite-services-tasks.vercel.app/tasks/:path*"
     },
     {
       "source": "/wm/:path*",
-      "destination": {
-        "service": "wm"
-      }
+      "destination": "https://orgtik-suite-services-wm.vercel.app/wm/:path*"
     },
     {
       "source": "/(.*)",
