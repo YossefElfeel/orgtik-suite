@@ -9,7 +9,7 @@ function sourceDigest() {
   return hash.digest('hex');
 }
 function ready(origin, selected = [...apps, "website"]) {
-  try { const value = JSON.parse(fs.readFileSync(marker, 'utf8')); return value.origin === origin && value.digest === sourceDigest() && selected.map(key => key === "website" ? "apps/website/landing-directions/dist/client/index.html" : `apps/${key}/.next/BUILD_ID`).every(file => fs.existsSync(path.join(root, file))); } catch { return false; }
+  try { const value = JSON.parse(fs.readFileSync(marker, 'utf8')); return value.origin === origin && value.digest === sourceDigest() && selected.every(key => value.services?.includes(key)) && selected.map(key => key === "website" ? "apps/website/landing-directions/dist/client/index.html" : `apps/${key}/.next/BUILD_ID`).every(file => fs.existsSync(path.join(root, file))); } catch { return false; }
 }
 async function build(origin, selected = [...apps, "website"]) {
   if (!Array.isArray(selected) || !selected.length || selected.some(key => !apps.includes(key) && key !== "website")) throw Error("Choose supported preview services.");
