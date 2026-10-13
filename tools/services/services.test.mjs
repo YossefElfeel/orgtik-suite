@@ -1,10 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { createRequire } from "node:module";
 import { proxyBackend } from "./proxy.ts";
 import { configurationFor, frontendProjects, projectName, configFilename } from "./projects.mjs";
-import { assertHobbyLimit } from "./check-artifact.mjs";
+import { assertHobbyLimit, inspectFunctions } from "./check-artifact.mjs";
 const require = createRequire(import.meta.url);
 const { apps, clientEnvironment, packages, servicesNextConfig, webUrls } = require("./config.cjs");
 const config = JSON.parse(fs.readFileSync(new URL("../../vercel.dev.json", import.meta.url)));
@@ -65,6 +67,35 @@ test("build URLs point at the same deployment and never require or publish a bin
 test("the upload guard accepts twelve functions and blocks an oversized split project", () => {
   assert.doesNotThrow(() => assertHobbyLimit({ total: 12, counts: { sos: 11, mock: 1 } }));
   assert.throws(() => assertHobbyLimit({ total: 13, counts: { sos: 12, mock: 1 } }), /Upload was stopped/);
+});
+
+test("function inventory distinguishes deferred Next.js routes from dedicated functions and rejects Edge output", () => {
+  const output = fs.mkdtempSync(path.join(os.tmpdir(), "services-functions-"));
+  const write = (service, name, config) => {
+    const folder = path.join(output, service, "functions", `${name}.func`);
+    fs.mkdirSync(folder, { recursive: true });
+    fs.writeFileSync(path.join(folder, ".vc-config.json"), JSON.stringify(config));
+  };
+  try {
+    for (let i = 0; i < 20; i++) write("admin", `page-${i}`, { runtime: "nodejs22.x", framework: { slug: "nextjs" }, experimentalAllowBundling: true });
+    write("mock", "index", { runtime: "nodejs22.x" });
+    const inventory = inspectFunctions(output);
+    assert.equal(inventory.total, 21);
+    assert.equal(inventory.dedicated, 1);
+    assert.deepEqual(inventory.deferred, { admin: 20 });
+    assert.doesNotThrow(() => assertHobbyLimit(inventory));
+    fs.symlinkSync(path.join(output, "admin/functions/page-0.func"), path.join(output, "admin/functions/alias.func"), process.platform === "win32" ? "junction" : "dir");
+    assert.equal(inspectFunctions(output).total, 21, "function aliases must not increase the inventory");
+    // An unknown framework cannot opt out of the dedicated-function guard.
+    for (let i = 0; i < 12; i++) write("mock", `api-${i}`, { runtime: "nodejs22.x", experimentalAllowBundling: true });
+    assert.throws(() => assertHobbyLimit(inspectFunctions(output)), /13 dedicated functions/);
+    write("admin", "edge", { runtime: "edge" });
+    assert.throws(() => inspectFunctions(output), /cannot deploy Edge/);
+  } finally {
+    const relative = path.relative(os.tmpdir(), output);
+    assert.ok(relative.startsWith("services-functions-") && !relative.includes(path.sep));
+    fs.rmSync(output, { recursive: true, force: true });
+  }
 });
 
 test("gateway uses the runtime binding, preserves authentication/body/query, and streams the response", async () => {

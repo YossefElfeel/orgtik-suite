@@ -2,8 +2,9 @@
 
 The owner confirmed this split after Vercel rejected the combined deployment's
 serverless function count. Each project must stay within **12 functions**. The
-release checks the compiled artifact before uploading; service count alone does
-not establish the function count.
+release checks the compiled artifact before uploading. Next.js route artifacts
+marked for deferred bundling are grouped by Vercel during deployment; neither
+service count nor route count establishes the final function count.
 
 | Vercel project | Config | Public service/path | Private service/binding |
 | --- | --- | --- | --- |
@@ -58,7 +59,9 @@ assets and native browser navigation. Tab sessions use separate keys per app.
 The main-only workflow validates the reviewed source, then builds and deploys
 the nine frontend/private-backend projects with a maximum of two parallel jobs.
 Each artifact preserves original backend assets and dependencies, rejects Edge
-output, and stops if it contains more than twelve functions. Each frontend is
+output, and stops if it contains more than twelve dedicated functions. It lists
+Next.js routes awaiting provider bundling separately; Vercel must accept their
+final bundled function count before any promotion. Each frontend is
 staged, its entry route and bound CMS gateway checked, and then promoted.
 
 The website/router deploys after all frontend jobs succeed. Its staged routing
