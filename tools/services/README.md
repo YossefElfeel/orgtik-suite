@@ -117,7 +117,9 @@ is configured for future Preview releases.
 Provisioning creates only the confirmed project names. It attaches the existing
 Redis integration directly, preserving managed Secrets and the original
 connection's variable prefix. Credential values are never exported. The shared
-public origin is set in each project's `SUITE_SERVICES_PUBLIC_URL`. Earlier
+mock journal can also be reconnected by its confirmed resource identity if the
+old source project was deleted; provisioning never creates replacement storage.
+The shared public origin is set in each project's `SUITE_SERVICES_PUBLIC_URL`. Earlier
 per-app URL settings are not copied. Existing standalone projects remain
 available; automatic legacy deployment matrices are skipped.
 

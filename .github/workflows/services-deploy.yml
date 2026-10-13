@@ -28,7 +28,7 @@ jobs:
           node tools/services/projects.mjs --check
           pnpm --filter @orgtik/ui run build
           pnpm turbo run typecheck i18n:check --filter='!docs' --filter='!content-dashboard-somion' --continue --concurrency=2
-          node --test tools/services/services.test.mjs packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs packages/ui/src/auth/urls.test.mjs
+          node --test tools/services/services.test.mjs tools/services/redis-connection.test.mjs packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs packages/ui/src/auth/urls.test.mjs
           node --test mock/lib/session-store.test.js mock/lib/session-authority.test.js mock/lib/journal-concurrency.test.js
           node tools/ci/secret-scan.mjs
 
