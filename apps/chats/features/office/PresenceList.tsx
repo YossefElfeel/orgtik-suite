@@ -70,7 +70,7 @@ function Group({ label, children }: { label: string; children: React.ReactNode }
   return (
     <section className="pb-1">
       <h3
-        className={"px-3 pb-1 pt-3 text-caption font-semibold "+("ch-color-094083")}
+        className={"px-3 pb-1 pt-3 text-caption font-semibold "+("ch-color-var---color-ink-subtle")}
 
       >
         <bdi>{label}</bdi>
@@ -138,7 +138,7 @@ function PersonRow({
   return (
     <li>
       <div
-        className={"hq-row flex items-center gap-2.5 px-3 "+((compact?"ch-min-height-99fb93":"ch-min-height-5d0881"))}
+        className={"hq-row flex items-center gap-2.5 px-3 "+((compact?"ch-min-height-44px":"ch-min-height-52px"))}
 
       >
         <Avatar
@@ -150,17 +150,17 @@ function PersonRow({
           speaking={presence.speaking}
         />
         <div className="min-w-0 flex-1">
-          <p className={"truncate text-body-sm font-medium "+("ch-color-7f7330")} >
+          <p className={"truncate text-body-sm font-medium "+("ch-color-var---color-ink")} >
             <bdi>{user.name}</bdi>
             {isMe && (
-              <span className={"ms-1.5 text-caption font-normal "+("ch-color-094083")} >
+              <span className={"ms-1.5 text-caption font-normal "+("ch-color-var---color-ink-subtle")} >
                 {t("office.you", "you")}
               </span>
             )}
           </p>
           {/* Status in words, always. The colour is a second signal, never the
               only one. */}
-          <p className={"truncate text-caption "+("ch-color-4a0211")} >
+          <p className={"truncate text-caption "+("ch-color-var---color-ink-muted")} >
             {presence.customText ? <bdi>{presence.customText}</bdi> : t(`status.${presence.status}`, meta.label)}
             {room && (
               <>

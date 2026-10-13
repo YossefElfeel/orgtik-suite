@@ -92,32 +92,32 @@ export function PeopleFilter({
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="dialog"
         aria-expanded={open}
-        className={"hq-btn flex items-center gap-2 ps-2.5 pe-2 "+("ch-min-height-87483b"+' '+"ch-border-radius-332348"+' '+"ch-border-8ff264"+' '+"ch-background-751d03"+' '+"ch-font-size-ba0694"+' '+"ch-color-7f7330")}
+        className={"hq-btn flex items-center gap-2 ps-2.5 pe-2 "+("ch-min-height-34px"+' '+"ch-border-radius-var---radius-control"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-background-var---color-surface"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-color-var---color-ink")}
 
       >
-        <UsersThree size={14} aria-hidden="true" className={"ch-color-4a0211"}  />
+        <UsersThree size={14} aria-hidden="true" className={"ch-color-var---color-ink-muted"}  />
         <span className="font-medium">{buttonLabel}</span>
         {short !== null && <Chip tone="accent">{t("people.tooFewChip", "below {n}", { n: minCohort })}</Chip>}
-        <CaretDown size={11} weight="bold" aria-hidden="true" className={"ch-color-094083"}  />
+        <CaretDown size={11} weight="bold" aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
       </button>
 
       {open && (
         <div
           role="dialog"
           aria-label={t("people.title", "Choose people")}
-          className={"hq-floating hq-rise hq-dropdown absolute start-0 z-50 mt-2 flex w-[340px] flex-col "+("ch-border-radius-8d459a"+' '+"ch-background-751d03")}
+          className={"hq-floating hq-rise hq-dropdown absolute start-0 z-50 mt-2 flex w-[340px] flex-col "+("ch-border-radius-var---radius-card"+' '+"ch-background-var---color-surface")}
 
         >
           <div className="p-2">
             <label className="relative block">
-              <MagnifyingGlass size={13} aria-hidden="true" className={"absolute start-2.5 top-1/2 -translate-y-1/2 "+("ch-color-094083")}  />
+              <MagnifyingGlass size={13} aria-hidden="true" className={"absolute start-2.5 top-1/2 -translate-y-1/2 "+("ch-color-var---color-ink-subtle")}  />
               <input
                 ref={searchRef}
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 aria-label={t("people.search", "Search people")}
                 placeholder={t("people.search", "Search people")}
-                className={"w-full ps-8 pe-2 "+("ch-min-height-dace99"+' '+"ch-font-size-ba0694"+' '+"ch-color-7f7330"+' '+"ch-background-314b28"+' '+"ch-border-52e799"+' '+"ch-border-radius-332348")}
+                className={"w-full ps-8 pe-2 "+("ch-min-height-32px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-color-var---color-ink"+' '+"ch-background-var---color-surface-sunken"+' '+"ch-border-1px-solid-transparent"+' '+"ch-border-radius-var---radius-control")}
 
               />
             </label>
@@ -130,7 +130,7 @@ export function PeopleFilter({
                     type="button"
                     aria-pressed={on}
                     onClick={() => onChange(qk.ids)}
-                    className={"hq-btn px-2.5 text-caption font-medium "+("ch-min-height-4ce73c"+' '+"ch-border-radius-189003"+' '+(on?"ch-border-c98846":"ch-border-8ff264")+' '+(on?"ch-background-1416a8":"ch-background-751d03")+' '+"ch-color-7f7330")}
+                    className={"hq-btn px-2.5 text-caption font-medium "+("ch-min-height-26px"+' '+"ch-border-radius-var---radius-chip"+' '+(on?"ch-border-1px-solid-var---color-accent":"ch-border-1px-solid-var---color-hairline-strong")+' '+(on?"ch-background-var---color-accent-soft":"ch-background-var---color-surface")+' '+"ch-color-var---color-ink")}
 
                   >
                     {qk.label}
@@ -144,7 +144,7 @@ export function PeopleFilter({
             role="listbox"
             aria-multiselectable="true"
             aria-label={t("people.list", "People")}
-            className={"max-h-[280px] overflow-y-auto border-t px-1 py-1 "+("ch-border-color-407eb5")}
+            className={"max-h-[280px] overflow-y-auto border-t px-1 py-1 "+("ch-border-color-var---color-hairline")}
 
           >
             {shown.map((u) => {
@@ -156,22 +156,22 @@ export function PeopleFilter({
                     role="option"
                     aria-selected={on}
                     onClick={() => toggle(u.id)}
-                    className={"hq-row flex w-full items-center gap-2.5 px-2 text-start "+("ch-min-height-fd2692"+' '+"ch-border-radius-332348")}
+                    className={"hq-row flex w-full items-center gap-2.5 px-2 text-start "+("ch-min-height-40px"+' '+"ch-border-radius-var---radius-control")}
 
                   >
                     <Avatar name={u.name} initials={u.initials} tint={u.tint} size={28} hideStatus />
                     <span className="min-w-0 flex-1">
-                      <span className={"block truncate text-body-sm font-medium "+("ch-color-7f7330")} >
+                      <span className={"block truncate text-body-sm font-medium "+("ch-color-var---color-ink")} >
                         <bdi>{u.name}</bdi>
-                        {u.id === me && <span className={"ch-color-094083"} > · {t("people.you", "you")}</span>}
+                        {u.id === me && <span className={"ch-color-var---color-ink-subtle"} > · {t("people.you", "you")}</span>}
                       </span>
-                      <span className={"block truncate text-caption "+("ch-color-4a0211")} >
+                      <span className={"block truncate text-caption "+("ch-color-var---color-ink-muted")} >
                         <bdi>{u.title}</bdi>
                       </span>
                     </span>
                     <span
                       aria-hidden="true"
-                      className={"inline-flex items-center justify-center "+("ch-width-f74111"+' '+"ch-height-ad1b79"+' '+"ch-border-radius-edd97e"+' '+(on?"ch-border-9cf269":"ch-border-0ff7e9")+' '+(on?"ch-background-3f17cb":"ch-background-a8869d")+' '+"ch-color-7b8a5e")}
+                      className={"inline-flex items-center justify-center "+("ch-width-18px"+' '+"ch-height-18px"+' '+"ch-border-radius-var---ot-radius-field"+' '+(on?"ch-border-1-5px-solid-var---color-accent":"ch-border-1-5px-solid-var---color-hairline-strong")+' '+(on?"ch-background-var---color-accent":"ch-background-transparent")+' '+"ch-color-var---color-ink-inverse")}
 
                     >
                       {on && <Check size={11} weight="bold" />}
@@ -181,14 +181,14 @@ export function PeopleFilter({
               );
             })}
             {shown.length === 0 && (
-              <li className={"px-3 py-3 text-body-sm "+("ch-color-4a0211")} >
+              <li className={"px-3 py-3 text-body-sm "+("ch-color-var---color-ink-muted")} >
                 {t("people.none", "Nobody matches.")}
               </li>
             )}
           </ul>
 
-          <div className={"flex items-center gap-2 border-t p-2 "+("ch-border-color-407eb5")} >
-            <span className={"tabular min-w-0 flex-1 text-caption "+((short !== null?"ch-color-7f7330":"ch-color-4a0211"))} >
+          <div className={"flex items-center gap-2 border-t p-2 "+("ch-border-color-var---color-hairline")} >
+            <span className={"tabular min-w-0 flex-1 text-caption "+((short !== null?"ch-color-var---color-ink":"ch-color-var---color-ink-muted"))} >
               {short !== null
                 ? t("people.needMore", "{n} selected. Team numbers need at least {min}, or only you.", { n: short, min: minCohort })
                 : isEveryone

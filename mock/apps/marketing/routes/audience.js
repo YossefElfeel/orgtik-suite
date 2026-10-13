@@ -48,20 +48,18 @@ module.exports = function audienceRoutes(app, { ctx, getDb, views, h }) {
     const list = getDb().segments.filter((s) => s.projectId === project.id && (!audienceId || !s.audienceId || s.audienceId === audienceId) && textMatch(req.query.q || req.query.search, s.name, s.description))
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     const { items, meta } = paginate(list, req.query, 50);
-    send(res, { items: items.map((s) => views.segmentView(s, audienceId)), meta }, "Segments fetched successfully");
+    return Promise.all(items.map(segment=>require("../segments").preview({ctx,db:getDb(),project,rules:segment.rules,audienceId:segment.audienceId}).then(value=>({...views.segmentView(segment,audienceId),matchingContactsCount:value.total})).catch(()=>({...views.segmentView(segment,audienceId),matchingContactsCount:null})))).then(rows=>send(res,{items:rows,meta},"Segments fetched successfully"));
   }));
 
-  const cleanRules = (r = {}) => ({
-    ...(r.source ? { source: String(r.source).trim() } : {}), ...(r.type ? { type: String(r.type).trim() } : {}),
-    ...(r.interest ? { interest: String(r.interest).trim() } : {}), ...(r.qualifiedOnly ? { qualifiedOnly: true } : {}),
-  });
+  const { cleanRules, preview } = require('../segments');
+  app.post('/audiences/segments/preview',h.handle((req,res,u,project)=>preview({ctx,db:getDb(),project,rules:req.body.rules,audienceId:req.body.audienceId}).then(value=>send(res,value,'Current CRM audience preview')).catch(error=>res.status(error.status||503).json({success:false,code:error.code||'segment_unavailable',message:error.message}))));
 
   app.post("/audiences/segments", h.handle((req, res, u, project) => {
     const name = String(req.body?.name || "").trim();
     if (!name) return error(res, 422, "Segment name is required", { errors: { name: ["Segment name is required"] } });
     const s = { id: newId(), projectId: project.id, audienceId: req.body?.audienceId || null, name, description: req.body?.description?.trim() || null, rules: cleanRules(req.body?.rules), createdAt: nowIso(), updatedAt: nowIso() };
     getDb().segments.push(s);
-    send(res, views.segmentView(s), "Segment created successfully", 201);
+    return preview({ctx,db:getDb(),project,rules:s.rules,audienceId:s.audienceId}).then(value=>send(res,{...views.segmentView(s),matchingContactsCount:value.total},"Segment created successfully",201)).catch(()=>send(res,{...views.segmentView(s),matchingContactsCount:null},"Segment created successfully",201));
   }));
 
   app.patch("/audiences/segments/:id", h.handle((req, res, u, project) => {

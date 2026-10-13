@@ -114,6 +114,7 @@ export function LocalizedField({
           dir={directionOf(active)}
           aria-label={`${label} (${NATIVE[active]})`}
           aria-invalid={errors?.[active] ? true : undefined}
+          aria-describedby={errors?.[active] || description || state(active) === "fallback" ? `${id}-help-${active}` : undefined}
           aria-required={required.includes(active) || undefined}
           value={value[active] ?? ""}
           placeholder={state(active) === "fallback" && value[fallback] ? value[fallback] : undefined}
@@ -126,14 +127,14 @@ export function LocalizedField({
           )}
         />
         {errors?.[active] ? (
-          <p className="flex items-center gap-1 text-caption text-danger">
+          <p id={`${id}-help-${active}`} role="alert" className="flex items-center gap-1 text-caption text-danger">
             <WarningCircle aria-hidden="true" weight="fill" className="size-[1.1em]" />
             {errors[active]}
           </p>
         ) : state(active) === "fallback" ? (
-          <p className="text-caption text-fg-subtle">{t("localeFallback", { language: NATIVE[fallback] })}</p>
+          <p id={`${id}-help-${active}`} className="text-caption text-fg-subtle">{t("localeFallback", { language: NATIVE[fallback] })}</p>
         ) : description ? (
-          <p className="text-caption text-fg-muted">{description}</p>
+          <p id={`${id}-help-${active}`} className="text-caption text-fg-muted">{description}</p>
         ) : null}
         </BaseTabs.Panel>
       </BaseTabs.Root>

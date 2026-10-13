@@ -4,16 +4,9 @@
 // "Share › Send report", which sent nothing and asked for the format as free text (MKT-069).
 import { useTranslations } from "next-intl";
 import { Export } from "@phosphor-icons/react";
-import { Button, toast } from "@orgtik/ui";
+import { Button, toast, csvCell as cell } from "@orgtik/ui";
 
 export type CsvCell = string | number | null | undefined;
-
-const cell = (v: CsvCell) => {
-  let s = v == null ? "" : String(v);
-  // A text cell starting with = + - @ is a formula to a spreadsheet: keep it text.
-  if (typeof v === "string" && /^[=+\-@\t\r]/.test(s)) s = `'${s}`;
-  return /[",;\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-};
 
 export function downloadCsv(fileName: string, head: string[], rows: CsvCell[][]) {
   // The BOM makes spreadsheet apps read the file as UTF-8 (Arabic names stay readable).

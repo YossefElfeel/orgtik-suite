@@ -114,7 +114,7 @@ export function OurAudience() {
         accessorFn: (a) => a.contactsCount ?? 0,
         enableSorting: false,
         meta: { numeric: true },
-        cell: ({ getValue }) => f.number(getValue() as number),
+        cell: ({ getValue }) => typeof getValue() === "number" ? f.number(getValue() as number) : "—",
       },
       {
         id: "updated",
@@ -197,10 +197,10 @@ export function OurAudience() {
       {
         id: "matching",
         header: t("colMatching"),
-        accessorFn: (s) => s.matchingContactsCount ?? 0,
+        accessorFn: (s) => s.matchingContactsCount,
         enableSorting: false,
         meta: { numeric: true },
-        cell: ({ getValue }) => f.number(getValue() as number),
+        cell: ({ getValue }) => typeof getValue() === "number" ? f.number(getValue() as number) : "—",
       },
       {
         id: "created",

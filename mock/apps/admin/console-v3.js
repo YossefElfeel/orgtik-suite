@@ -161,7 +161,10 @@ function create({ getStore, identity, principal, applyDb, afterStaffAcceptance }
       const row = data.payLinks.find(link => link.id === req.params.id); if (!row) throw fail(404, 'pay_link_not_found', 'This pay link was not found.'); row.state = 'revoked'; log(p, 'pay_link_revoked', row.invoiceId); return clone(row);
     })));
     function ownerPayLink(req, write = false) {
-      const p = principal(), context = p?.context.workspaceContext, link = state().payLinks.find(row => row.id === req.params.id), invoice = link && S().db.invoices.find(row => row.id === link.invoiceId);
+      const p = principal(), context = p?.context.workspaceContext;
+      const direct = req.params.id.startsWith('invoice:') ? S().db.invoices.find(row => row.id === req.params.id.slice(8) && row.workspaceId === context?.workspace.id) : null;
+      const link = direct ? { id: req.params.id, invoiceId: direct.id, workspaceId: direct.workspaceId, state: 'active', expiresAt: null, scope: 'owner_invoice', path: `/billing/pay/${encodeURIComponent(req.params.id)}` } : state().payLinks.find(row => row.id === req.params.id);
+      const invoice = link && S().db.invoices.find(row => row.id === link.invoiceId);
       if (!context || context.member.role !== 'owner' || !link || !invoice || context.workspace.id !== link.workspaceId) throw fail(404, 'pay_link_not_found', 'Open this link as the current workspace owner.');
       if (write && (p.readOnly || S().workspace(link.workspaceId).state === 'suspended')) throw fail(423, 'workspace_read_only', 'Review this workspace before payment.');
       if (link.state !== 'active' || Date.parse(link.expiresAt) <= S().now()) throw fail(410, 'pay_link_expired', 'Ask for a new current payment link.');

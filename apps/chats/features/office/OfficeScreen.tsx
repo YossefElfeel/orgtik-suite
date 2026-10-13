@@ -51,14 +51,14 @@ export function OfficeScreen() {
     <div className="flex min-h-0 flex-1 flex-col">
       <ChatsOnboarding/>
       <header
-        className={"flex shrink-0 items-center justify-between gap-3 px-4 py-2.5 "+("ch-background-a8869d")}
+        className={"flex shrink-0 items-center justify-between gap-3 px-4 py-2.5 "+("ch-background-transparent")}
 
       >
         <div className="flex items-baseline gap-2.5">
-          <h1 className={"hq-title "+("ch-color-7f7330")} >
+          <h1 className={"hq-title "+("ch-color-var---color-ink")} >
             {t("office.title", "Office")}
           </h1>
-          <span className={"tabular text-body-sm "+("ch-color-4a0211")} >
+          <span className={"tabular text-body-sm "+("ch-color-var---color-ink-muted")} >
             {t("office.aroundCount", "{n} around", { n: online })}
           </span>
         </div>
@@ -67,7 +67,7 @@ export function OfficeScreen() {
         {!isNarrow && <ThisWeekPanel />}
         {!isNarrow && (
           <div
-            className={"flex items-center gap-0.5 p-0.5 "+("ch-background-314b28"+' '+"ch-border-radius-332348")}
+            className={"flex items-center gap-0.5 p-0.5 "+("ch-background-var---color-surface-sunken"+' '+"ch-border-radius-var---radius-control")}
 
             role="group"
             aria-label={t("office.viewToggle", "Office view")}
@@ -77,7 +77,7 @@ export function OfficeScreen() {
               size="sm"
               onClick={() => setView("floor")}
               aria-pressed={view === "floor"}
-              className={(view === "floor"?"ch-box-shadow-03c10c":"")}
+              className={(view === "floor"?"ch-box-shadow-var---shadow-raise":"")}
             >
               <MapTrifold size={13} weight="bold" aria-hidden="true" />
               {t("office.floorView", "Floor")}
@@ -87,7 +87,7 @@ export function OfficeScreen() {
               size="sm"
               onClick={() => setView("list")}
               aria-pressed={view === "list"}
-              className={(view === "list"?"ch-box-shadow-03c10c":"")}
+              className={(view === "list"?"ch-box-shadow-var---shadow-raise":"")}
             >
               <ListBullets size={13} weight="bold" aria-hidden="true" />
               {t("office.listView", "List")}
@@ -105,7 +105,7 @@ export function OfficeScreen() {
         ) : (
           <div className="min-h-0 flex-1 overflow-y-auto">
             {isNarrow && (
-              <p className={"px-3 pt-3 text-caption "+("ch-color-4a0211")} >
+              <p className={"px-3 pt-3 text-caption "+("ch-color-var---color-ink-muted")} >
                 {t(
                   "office.mobileNote",
                   "The floor plan is a desktop view. Everyone is listed here, grouped by room.",

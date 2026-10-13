@@ -51,13 +51,13 @@ export function ModuleNav() {
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={"hq-row flex items-center gap-2.5 px-2.5 "+("ch-border-radius-332348"+' '+"ch-min-height-87483b"+' '+(active?"ch-color-55f463":"ch-color-7f7330")+' '+(active?"ch-background-1416a8":"ch-background-a8869d")+' '+(active?"ch-font-weight-eed0f8":"ch-font-weight-02a2d3")+' '+"ch-font-size-ba0694")}
+                className={"hq-row flex items-center gap-2.5 px-2.5 "+("ch-border-radius-var---radius-control"+' '+"ch-min-height-34px"+' '+(active?"ch-color-var---color-ink-brand":"ch-color-var---color-ink")+' '+(active?"ch-background-var---color-accent-soft":"ch-background-transparent")+' '+(active?"ch-font-weight-600":"ch-font-weight-500")+' '+"ch-font-size-var---ot-type-body-sm-size")}
 
               >
                 <Icon size={17} weight={active ? "fill" : "regular"} aria-hidden="true" />
                 <span className="min-w-0 flex-1 truncate">{label}</span>
                 {meta && (
-                  <span className={"tabular text-caption "+("ch-color-094083")} >
+                  <span className={"tabular text-caption "+("ch-color-var---color-ink-subtle")} >
                     {meta}
                   </span>
                 )}

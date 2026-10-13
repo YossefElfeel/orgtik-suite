@@ -57,10 +57,10 @@ export function MeetingSummary({ meeting }: { meeting: Meeting }) {
   return (
     <Panel className="mb-5">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
-        <h2 className={"hq-title "+("ch-color-7f7330")} >
+        <h2 className={"hq-title "+("ch-color-var---color-ink")} >
           {t("meetings.afterTitle", "After the meeting")}
         </h2>
-        <span className={"tabular text-caption "+("ch-color-094083")} >
+        <span className={"tabular text-caption "+("ch-color-var---color-ink-subtle")} >
           {t("meetings.endedAt", "Ended {time}, {day}", {
             time: formatTime(meeting.endedAt),
             day: formatShortDay(meeting.endedAt),
@@ -75,19 +75,19 @@ export function MeetingSummary({ meeting }: { meeting: Meeting }) {
         >
           <span className="flex flex-wrap items-center gap-2">
             <AvatarStack people={attended} size={20} max={5} />
-            <span className={"tabular text-body-sm "+("ch-color-7f7330")} >
+            <span className={"tabular text-body-sm "+("ch-color-var---color-ink")} >
               {t("meetings.ofInvited", "{n} of {total}", { n: attended.length, total: invitedCount })}
             </span>
           </span>
           {/* Who did not come is said plainly rather than left to arithmetic,
               but nobody is named: an absence is not a performance record. */}
           {missing > 0 && (
-            <span className={"mt-1 block text-caption "+("ch-color-094083")} >
+            <span className={"mt-1 block text-caption "+("ch-color-var---color-ink-subtle")} >
               {t("meetings.didNotJoin", "{n} invited did not join", { n: missing })}
             </span>
           )}
           {guests.length > 0 && (
-            <span className={"mt-1 block text-caption "+("ch-color-094083")} >
+            <span className={"mt-1 block text-caption "+("ch-color-var---color-ink-subtle")} >
               {t("meetings.plusGuests", "plus {n} guest", { n: guests.length })}
             </span>
           )}
@@ -97,7 +97,7 @@ export function MeetingSummary({ meeting }: { meeting: Meeting }) {
           icon={<ChatCircle size={14} aria-hidden="true" />}
           label={t("meetings.ranFor", "Ran for")}
         >
-          <span className={"tabular text-body-sm "+("ch-color-7f7330")} >
+          <span className={"tabular text-body-sm "+("ch-color-var---color-ink")} >
             {formatDuration(ranSeconds)}
           </span>
         </Stat>
@@ -110,7 +110,7 @@ export function MeetingSummary({ meeting }: { meeting: Meeting }) {
         </Stat>
       </dl>
 
-      <div className={"mt-5 flex flex-wrap gap-2 "+("ch-border-top-c9ce2a"+' '+"ch-padding-top-76a4e5")} >
+      <div className={"mt-5 flex flex-wrap gap-2 "+("ch-border-top-1px-solid-var---color-hairline"+' '+"ch-padding-top-16px")} >
         {/* The two things that actually carry a meeting forward. Both go to
             somewhere that already exists rather than opening a notes field
             nobody returns to. */}
@@ -149,7 +149,7 @@ function Stat({
   return (
     <div>
       <dt
-        className={"flex items-center gap-1.5 text-caption font-medium "+("ch-color-094083")}
+        className={"flex items-center gap-1.5 text-caption font-medium "+("ch-color-var---color-ink-subtle")}
 
       >
         {icon}
@@ -168,14 +168,14 @@ function RecordingState({ meeting }: { meeting: Meeting }) {
   if(state==="ready"||state==="processing")return <RecordingReference meeting={meeting}/>;
   if (state === "declined") {
     return (
-      <span className={"text-body-sm "+("ch-color-4a0211")} >
+      <span className={"text-body-sm "+("ch-color-var---color-ink-muted")} >
         {t("meetings.recordingDeclined", "Not recorded. Someone declined.")}
       </span>
     );
   }
 
   return (
-    <span className={"text-body-sm "+("ch-color-4a0211")} >
+    <span className={"text-body-sm "+("ch-color-var---color-ink-muted")} >
       {t("meetings.notRecorded", "Not recorded.")}
     </span>
   );

@@ -87,8 +87,12 @@ export function startWorkspacePlatform(next: Callbacks): () => void {
   };
   bind();
   const unsubscribe = subscribeClientSession(bind);
-  const timer = window.setInterval(() => { if (!pending && !permissionBlocked) void reloadWorkspace(); }, 5000);
-  return () => { unsubscribe(); window.clearInterval(timer); generation++; callbacks = null; namespace = ""; pending = 0; };
+  let refreshing = false;
+  const refresh = () => { if (globalThis.document?.visibilityState === "hidden" || pending || permissionBlocked || refreshing) return; refreshing = true; void reloadWorkspace().finally(() => { refreshing = false; }); };
+  const timer = window.setInterval(refresh, 10000);
+  globalThis.document?.addEventListener("visibilitychange", refresh);
+  window.addEventListener?.("focus", refresh);
+  return () => { unsubscribe(); window.clearInterval(timer); globalThis.document?.removeEventListener("visibilitychange", refresh); window.removeEventListener?.("focus", refresh); generation++; callbacks = null; namespace = ""; pending = 0; };
 }
 
 /** Commands are staged in order; only a committed API response changes business data. */

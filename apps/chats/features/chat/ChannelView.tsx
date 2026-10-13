@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useSearchParams,useRouter } from "next/navigation";
 import { Hash, Lock, PushPin, UserPlus, UsersThree, ArrowLeft, VideoCamera } from "@phosphor-icons/react";
 import { Message } from "./Message";
+import { ExportChannel } from "./ExportChannel";
 import {ChannelTools} from "./ChatFeatures";
 import { Composer } from "./Composer";
 import { ThreadPanel } from "./ThreadPanel";
@@ -139,15 +140,15 @@ export function ChannelView({ channelId }: { channelId: string }) {
   return (
     <div className="flex min-h-0 flex-1">
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
-        <ChannelHeader channelId={channelId} onOpenDetails={() => setDetailsOpen(true)} />
+        <ChannelHeader channelId={channelId} onOpenDetails={() => setDetailsOpen(true)} /><div className="flex justify-end px-4 py-2"><ExportChannel channelId={channelId}/></div>
 
         {pinned.length > 0 && (
           <div
-            className={"flex items-center gap-2 px-4 py-1.5 "+("ch-background-314b28"+' '+"ch-border-bottom-9cb2f4")}
+            className={"flex items-center gap-2 px-4 py-1.5 "+("ch-background-var---color-surface-sunken"+' '+"ch-border-bottom-1px-solid-var---color-hairline")}
 
           >
-            <PushPin size={12} weight="fill" aria-hidden="true" className={"ch-color-4a0211"}  />
-            <span className={"truncate text-caption "+("ch-color-4a0211")} >
+            <PushPin size={12} weight="fill" aria-hidden="true" className={"ch-color-var---color-ink-muted"}  />
+            <span className={"truncate text-caption "+("ch-color-var---color-ink-muted")} >
               {pinned[0]?.text}
             </span>
           </div>
@@ -207,7 +208,7 @@ export function ChannelView({ channelId }: { channelId: string }) {
           on a phone, where Back and Close return to the messages. */}
       {(openThreadId || detailsOpen) && (
         <div
-          className={"fixed inset-0 z-[60] flex xl:static xl:inset-auto xl:z-auto xl:w-[380px] xl:shrink-0 "+("ch-border-inline-start-c791b2"+' '+"ch-background-751d03")}
+          className={"fixed inset-0 z-[60] flex xl:static xl:inset-auto xl:z-auto xl:w-[380px] xl:shrink-0 "+("ch-border-inline-start-1px-solid-var---color-hairline"+' '+"ch-background-var---color-surface")}
 
         >
           {/* Details was asked for last, so it shows; closing it brings the
@@ -238,13 +239,13 @@ function ChannelStart({ channelId, onAddPeople }: { channelId: string; onAddPeop
   return (
     <div className="px-4 pb-4 pt-6">
       <h2
-        className={"text-title-sm font-semibold tracking-[-0.02em] "+("ch-color-7f7330")}
+        className={"text-title-sm font-semibold tracking-[-0.02em] "+("ch-color-var---color-ink")}
 
       >
         {/* A channel name keeps its # on the right side in any direction. */}
         <bdi>{isDm ? channel.name : `#${channel.name}`}</bdi>
       </h2>
-      <p className={"mt-1.5 max-w-[62ch] text-body-sm leading-relaxed "+("ch-color-4a0211")} >
+      <p className={"mt-1.5 max-w-[62ch] text-body-sm leading-relaxed "+("ch-color-var---color-ink-muted")} >
         {isDm
           ? t("chat.startDm", "This is the beginning of your conversation with {name}.", {
               name: channel.name,
@@ -260,7 +261,7 @@ function ChannelStart({ channelId, onAddPeople }: { channelId: string; onAddPeop
       {!isDm && (
         <div className="mt-3 flex flex-wrap items-center gap-2.5">
           <AvatarStack people={members} size={28} max={6} />
-          <span className={"text-body-sm "+("ch-color-4a0211")} >
+          <span className={"text-body-sm "+("ch-color-var---color-ink-muted")} >
             {t("chat.memberCount", "{n} members", { n: members.length })}
           </span>
           <Button size="sm" onClick={onAddPeople}>
@@ -326,14 +327,14 @@ function ChannelHeader({
 
   return (
     <header
-      className={"flex shrink-0 items-center justify-between gap-3 px-4 py-2.5 "+("ch-background-a8869d")}
+      className={"flex shrink-0 items-center justify-between gap-3 px-4 py-2.5 "+("ch-background-transparent")}
 
     >
       {/* Below lg there is no sidebar to click, so the header carries the way
           back to the list of conversations. */}
       <Link
         href="/hq/chat"
-        className={"hq-btn me-1 inline-flex items-center gap-1 text-body-sm font-medium lg:hidden "+("ch-color-4a0211"+' '+"ch-min-height-dace99"+' '+"ch-padding-inline-e566f8"+' '+"ch-border-radius-332348")}
+        className={"hq-btn me-1 inline-flex items-center gap-1 text-body-sm font-medium lg:hidden "+("ch-color-var---color-ink-muted"+' '+"ch-min-height-32px"+' '+"ch-padding-inline-6px"+' '+"ch-border-radius-var---radius-control")}
 
         aria-label={t("chat.backToList", "Back to conversations")}
       >
@@ -350,15 +351,15 @@ function ChannelHeader({
             size={28}
           />
         ) : (
-          <Icon size={16} weight="bold" aria-hidden="true" className={"ch-color-4a0211"}  />
+          <Icon size={16} weight="bold" aria-hidden="true" className={"ch-color-var---color-ink-muted"}  />
         )}
         <div className="min-w-0">
-          <h1 className={"hq-title truncate "+("ch-color-7f7330")} >
+          <h1 className={"hq-title truncate "+("ch-color-var---color-ink")} >
             <bdi>{channel.kind === "public" || channel.kind === "private" ? `#${channel.name}` : channel.name}</bdi>
           </h1>
         </div>
         {channel.topic && (
-          <span className={"hidden truncate text-body-sm md:inline "+("ch-color-4a0211")} >
+          <span className={"hidden truncate text-body-sm md:inline "+("ch-color-var---color-ink-muted")} >
             <bdi>{channel.topic}</bdi>
           </span>
         )}
@@ -368,7 +369,7 @@ function ChannelHeader({
         {/* On a phone the count gives its room to the channel's name; the
             conversation's opening line still carries it. */}
         {!isDm && (
-          <span className={"tabular hidden text-body-sm sm:inline "+("ch-color-4a0211")} >
+          <span className={"tabular hidden text-body-sm sm:inline "+("ch-color-var---color-ink-muted")} >
             {t("chat.memberCount", "{n} members", { n: channel.memberIds.length })}
           </span>
         )}
@@ -390,11 +391,11 @@ function ChannelHeader({
 function DayDivider({ label }: { label: string }) {
   return (
     <div className="flex items-center gap-3 px-4 py-3">
-      <span className={"h-px flex-1 "+("ch-background-423228")}  />
-      <span className={"text-caption font-medium "+("ch-color-094083")} >
+      <span className={"h-px flex-1 "+("ch-background-var---color-hairline")}  />
+      <span className={"text-caption font-medium "+("ch-color-var---color-ink-subtle")} >
         {label}
       </span>
-      <span className={"h-px flex-1 "+("ch-background-423228")}  />
+      <span className={"h-px flex-1 "+("ch-background-var---color-hairline")}  />
     </div>
   );
 }

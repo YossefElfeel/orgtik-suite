@@ -3,12 +3,15 @@
 // A task's description as people wrote it, with its links and mentions. Links open outside the app
 // and only for web and mail addresses; a mention reads as the person's name. The old renderer linked
 // mentions to a people page Tasks doesn't have (TASKS-041).
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+import { isRichDescription, richDescription } from "@/lib/rich-description";
 
 type Person = { id: number | string; firstName?: string; lastName?: string };
 const TOKEN = /(@\[(\d+)\])|((?:https?:\/\/|www\.)[^\s<>()]+|mailto:[^\s<>()]+)/g;
 
 export function RichText({ text, people = [], className }: { text: string; people?: Person[]; className?: string }) {
+  const [rich, setRich] = useState<ReactNode[] | null>(null);
+  useEffect(() => { setRich(isRichDescription(text) ? richDescription(text) : null); }, [text]);
   const nodes: ReactNode[] = [];
   let last = 0;
   for (const m of text.matchAll(TOKEN)) {
@@ -35,6 +38,7 @@ export function RichText({ text, people = [], className }: { text: string; peopl
     last = at + m[0].length;
   }
   if (last < text.length) nodes.push(text.slice(last));
+  if (isRichDescription(text)) return <div dir="auto" className={className || "ot-rich-text text-body text-fg"}>{rich || text.replace(/<[^>]*>/g, "")}</div>;
   return (
     <p dir="auto" className={className ?? "whitespace-pre-wrap text-body text-fg"}>
       {nodes}

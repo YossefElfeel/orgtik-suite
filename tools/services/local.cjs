@@ -5,13 +5,22 @@ const { spawn, spawnSync } = require("node:child_process");
 const { createLocalRouter } = require("./local-router.cjs");
 const { apps, clientEnvironment } = require("./config.cjs");
 const { localOrderKey } = require("./local-order-key.cjs");
+const began = Date.now(), serviceMetrics = {};
 const root = path.resolve(__dirname, "../..");
 const localPort = Number(process.env.ORGTIK_LOCAL_PORT || 3000);
 if (!Number.isInteger(localPort) || localPort < 1024 || localPort > 65535) throw new Error("ORGTIK_LOCAL_PORT must be an integer from 1024 to 65535.");
 const localHost = process.env.ORGTIK_LOCAL_HOST || "localhost";
 if (!["localhost", "127.0.0.1"].includes(localHost)) throw new Error("ORGTIK_LOCAL_HOST must be localhost or 127.0.0.1.");
 const origin = `http://${localHost}:${localPort}`;
+const preview = process.argv.includes("--preview");
+const previewOnly = process.argv.find(value => value.startsWith("--preview-services="))?.split("=")[1].split(",");
+if (previewOnly && (!preview || previewOnly.some(key => !apps.includes(key) && key !== "website"))) throw Error("Choose supported prebuilt services.");
 const stateFile = path.join(root, ".vercel/local-suite/running.json");
+function recordRun(startupMs) {
+  fs.mkdirSync(path.dirname(stateFile), { recursive: true });
+  let before = {}; try { before = JSON.parse(fs.readFileSync(stateFile, "utf8")); } catch {}
+  fs.writeFileSync(stateFile, JSON.stringify({ pid: process.pid, url: origin, runtime: "native", mode: preview ? "preview" : "development", config: "tools/services/config.cjs", startupMs: startupMs ?? before.startupMs, rssBytes: process.memoryUsage().rss, services: serviceMetrics }, null, 2));
+}
 const children = new Set();
 let stopping = false, server;
 
@@ -29,13 +38,8 @@ function stop(code = 0) {
 process.on("SIGINT", () => stop());
 process.on("SIGTERM", () => stop());
 
-function freePort(port = 0) {
-  return new Promise((resolve, reject) => {
-    const probe = net.createServer();
-    probe.once("error", reject);
-    probe.listen(port, "127.0.0.1", () => { const value = probe.address().port; probe.close(() => resolve(value)); });
-  });
-}
+const { availableLocalPort: freePort } = require('./local-ports.cjs');
+
 async function main() {
   if (!fs.existsSync(path.join(root, "node_modules", ".modules.yaml"))) throw new Error("Install dependencies first: pnpm install --frozen-lockfile");
   try { await freePort(localPort); }
@@ -44,7 +48,7 @@ async function main() {
     let state;
     try { state = JSON.parse(fs.readFileSync(stateFile, "utf8")); if (!Number.isInteger(state.pid) || state.pid < 1) throw new Error("Invalid process marker"); process.kill(state.pid, 0); }
     catch { throw new Error(`Port ${localPort} is occupied. The existing process was left running.`); }
-    if (state.url !== origin || state.runtime !== "native") throw new Error(`A previous local launcher is running on port ${localPort}. Stop that run before restarting.`);
+    if (state.url !== origin || state.runtime !== "native" || (state.mode || "development") !== (preview ? "preview" : "development")) throw new Error(`A previous local launcher is running on port ${localPort}. Stop that run before restarting.`);
     const response = await fetch(`${origin}/sos/api/backend/wm/v2/public/site`, { signal: AbortSignal.timeout(10000) });
     if (!response.ok || response.headers.get("x-orgtik-local-runtime") !== "native") throw new Error("The existing local suite needs attention; no second copy was started.");
     console.log(`OrgTik is already running at ${origin}\nSign in: ${origin}/sos/auth/login`);
@@ -57,8 +61,9 @@ async function main() {
     MOCK_WEBSITE_ORDER_SECRET: localOrderKey(path.join(root, ".vercel/local-suite/orders.key")),
     NEXT_TELEMETRY_DISABLED: "1", NODE_ENV: "development",
   });
+  if (preview) { const compiled = require("./build-local.cjs"); if (!compiled.ready(origin, previewOnly)) await compiled.build(origin, previewOnly); }
   // Build the injected library once, rather than once per frontend.
-  const build = spawnSync(process.platform === "win32" ? "pnpm.cmd" : "pnpm", ["--filter", "@orgtik/ui", "run", "build"], { cwd: root, env: process.env, stdio: "inherit", windowsHide: true, shell: process.platform === "win32" });
+  const build = preview ? { status: 0 } : spawnSync(process.platform === "win32" ? "pnpm.cmd" : "pnpm", ["--filter", "@orgtik/ui", "run", "build"], { cwd: root, env: process.env, stdio: "inherit", windowsHide: true, shell: process.platform === "win32" });
   if (build.error) throw build.error;
   if (build.status !== 0) throw new Error("Shared UI build failed.");
   const launcherEnv = { ...process.env, SUITE_SOS_URL: `${origin}/sos`, SUITE_SOS_API: `${origin}/sos/api/backend/sos/api` };
@@ -70,13 +75,14 @@ async function main() {
   const mock = require(path.join(root, "mock/index.js"));
   await require(path.join(root, "mock/server.js")).ready();
   async function startService(key) {
+    const startedAt = Date.now();
     const cwd = path.join(root, key === "website" ? "apps/website/landing-directions" : `apps/${key}`);
     const port = await freePort();
-    const env = { ...process.env, ...clientEnvironment(key), PORT: String(port) };
+    const env = { ...process.env, ...clientEnvironment(key), NODE_ENV: preview ? "production" : "development", PORT: String(port) };
     const script = key === "website" ? path.join(path.dirname(require.resolve("vite/package.json", { paths: [cwd] })), "bin/vite.js") : require.resolve("next/dist/bin/next", { paths: [cwd] });
     // Next normalizes loopback IPs to localhost in middleware URLs. Use that
     // same hostname for its listener and proxy so locale rewrites stay internal.
-    const args = key === "website" ? ["--host", "localhost", "--port", String(port), "--strictPort"] : ["dev", "--turbopack", "--hostname", "localhost", "--port", String(port)];
+    const args = key === "website" ? [...(preview ? ["preview"] : []), "--host", "localhost", "--port", String(port), "--strictPort"] : [preview ? "start" : "dev", ...(!preview ? ["--turbopack"] : []), "--hostname", "localhost", "--port", String(port)];
     console.log(`[local] Starting ${key} on demand`);
     const child = spawn(process.execPath, [script, ...args], { cwd, env, stdio: ["ignore", "pipe", "pipe"], windowsHide: true, detached: process.platform !== "win32" });
     children.add(child);
@@ -92,7 +98,7 @@ async function main() {
           for (const line of lines) {
             console.log(`[${key}] ${line}`);
             const clean = line.replace(/\x1b\[[0-9;]*m/g, "");
-            if ((key === "website" ? /Local:\s+http/ : /Ready in/).test(clean)) { clearTimeout(timeout); resolve(port); }
+            if ((key === "website" ? /Local:\s+http/ : /Ready in/).test(clean)) { clearTimeout(timeout); serviceMetrics[key] = { pid: child.pid, port, readyMs: Date.now() - startedAt }; recordRun(); resolve(port); }
           }
         });
       }
@@ -100,8 +106,8 @@ async function main() {
   }
   server = createLocalRouter({ startService, mock });
   await new Promise((resolve, reject) => { server.once("error", reject); server.listen(localPort, "127.0.0.1", resolve); });
-  fs.mkdirSync(path.dirname(stateFile), { recursive: true });
-  fs.writeFileSync(stateFile, JSON.stringify({ pid: process.pid, url: origin, runtime: "native", config: "tools/services/config.cjs" }, null, 2));
+  recordRun(Date.now() - began);
+  setInterval(() => recordRun(), 5000).unref();
   console.log(`OrgTik local prototype ready: ${origin}\nApps start when opened; mock data stays in .vercel/dev/mock.\nCtrl+C stops this run.`);
 }
 main().catch(error => { console.error(error.message); if (server || children.size) stop(1); else process.exitCode = 1; });

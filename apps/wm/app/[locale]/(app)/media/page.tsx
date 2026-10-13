@@ -69,7 +69,7 @@ function Library() {
         title={t("title")}
         description={t("description")}
       />
-      <PackagedMedia ids={picked} reload={refetch}/>
+      <details className="rounded-field border border-line p-4"><summary className="cursor-pointer text-body-sm font-semibold">{v3("packagedMedia")}</summary><PackagedMedia ids={picked} reload={refetch}/></details>
       <div className="wm-table-filters"><Select size="sm" aria-label={t("issues.all")} value={issue} onValueChange={value=>setIssue((value??"all") as IssueTab)} options={ISSUES.map(value=>({value,label:t(`issues.${value}`)}))} />
         <Input size="sm" type="search" value={search} onChange={(e) => setSearch(e.target.value)} aria-label={t("search")} placeholder={t("search")} startIcon={<MagnifyingGlass className="size-4" />} className="wm-search" />
         <Select size="sm" aria-label={t("kind")} value={kind} onValueChange={(v) => setKind(v ?? "all")} options={["all", "image", "vector", "video"].map((k) => ({ value: k, label: t(`kinds.${k}`) }))} className="w-44" />

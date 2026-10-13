@@ -6,7 +6,8 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Globe, Plus, UserPlus } from "@phosphor-icons/react";
-import { Button, Card, CardHeader, EmptyState, LoadingState, MultiSelect } from "@orgtik/ui";
+import { Button, Card, CardHeader, ConfirmDialog, EmptyState, LoadingState, MultiSelect } from "@orgtik/ui";
+import { useDeleteBookmarkMutation } from "@/redux/features/bookmark/bookmarkApi";
 import { Link } from "@/i18n/routing";
 import AddBookmarkDialog from "@/components/dialogs/teams/AddBookmarkDialog";
 import { FormDialog } from "@/components/shared/FormDialog";
@@ -49,7 +50,7 @@ function AddPeople({ teamId, current }: { teamId: number; current: number[] }) {
 }
 
 export default function TeamOverview() {
-  const t = useTranslations("TeamOverview");
+  const t = useTranslations("TeamOverview"), r = useTranslations("Roadmap"), [removeBookmark] = useDeleteBookmarkMutation();
   const id = useTeamId() ?? 0;
   const { isManager } = useTaskRoles();
   const { data } = useGetTeamDetailsQuery(id);
@@ -80,7 +81,7 @@ export default function TeamOverview() {
           {bookmarks.length ? (
             <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {bookmarks.map((b) => (
-                <li key={b.id}>
+                <li key={b.id} className="flex flex-col gap-2">
                   <a
                     href={b.link}
                     target="_blank"
@@ -102,6 +103,7 @@ export default function TeamOverview() {
                       </span>
                     </span>
                   </a>
+                  {isManager ? <ConfirmDialog trigger={<Button size="sm" variant="ghost">{r("removeBookmark")}</Button>} title={r("removeBookmark")} impact={b.title} confirmLabel={r("removeBookmark")} onConfirm={() => removeBookmark(b.id).unwrap()} /> : null}
                 </li>
               ))}
             </ul>

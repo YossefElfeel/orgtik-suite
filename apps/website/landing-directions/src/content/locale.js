@@ -42,7 +42,7 @@ export function withLocale(path, locale = currentLocale()) {
 export function shown(locale) {
   if (locale === "en") return true;
   if ((siteSettings()?.publicLocales ?? ["en"]).includes(locale)) return true;
-  return Boolean(import.meta.env?.DEV) || isPreview();
+  return Boolean(import.meta.env?.DEV) || isPreview() || typeof window !== "undefined" && ["localhost", "127.0.0.1"].includes(window.location.hostname);
 }
 
 /** A record's words in the current language, else English (only reachable where `shown`). */

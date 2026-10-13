@@ -8,7 +8,7 @@ export type StaffAccess = { actorUserId: number; apps: ("admin" | "wm")[]; roles
 export type WorkspaceContext = {
   version: 1;
   realm: string;
-  workspace: { id: string; name: string; kind: "customer" | "orgtik_internal"; state: "active" | "past_due" | "suspended" | "cancelled" | "deleted"; timeZone: string };
+  workspace: { id: string; name: string; kind: "customer" | "orgtik_internal"; state: "active" | "past_due" | "suspended" | "cancelled" | "deleted"; timeZone: string; defaultLanguage?: string };
   actor: { userId: number; effectiveUserId: number; readOnly: boolean; impersonatedBy?: number };
   member: { id: string; role: MemberRole; revision: number; accessEpoch?: number };
   tools: Partial<Record<ToolKey, { scope: string; roles: string[]; access: AccessState; canWrite: boolean; reason?: string; seats: { capacity: number | null; assigned: number; reserved: number; available: number | null } }>>;

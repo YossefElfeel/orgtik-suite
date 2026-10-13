@@ -237,7 +237,7 @@ function richTask(t) {
   if (t.endTime) out.endTime = t.endTime;
   return out;
 }
-const subtaskOut = (s) => ({ id: s.id, title: s.title, isCompleted: s.isCompleted, order: s.order, createdBy: byUser(userById(s.createdById)), createdAt: s.createdAt, updatedAt: s.updatedAt });
+const subtaskOut = (s) => ({ taskId: s.taskId, assigneeId: s.assigneeId || null, dueDate: s.dueDate || null, id: s.id, title: s.title, isCompleted: s.isCompleted, order: s.order, createdBy: byUser(userById(s.createdById)), createdAt: s.createdAt, updatedAt: s.updatedAt });
 function fullTask(t) {
   const sec = sectionById(t.sectionId);
   const p = projectById(t.projectId);
@@ -996,6 +996,13 @@ function routes(app, context, options = {}) {
     const t = loadTask(req, res, u, s.taskId); if (!t) return;
     if (!guard(res, !isViewerOnly(u), "Viewers cannot edit subtasks")) return;
     const b = req.body || {};
+    if (b.assigneeId !== undefined) {
+      const id = b.assigneeId === null ? null : Number(b.assigneeId), person = id && userById(id), project = projectById(t.projectId);
+      if (id !== null && (!Number.isSafeInteger(id) || !person || ![...project.memberIds, ...project.teamIds.flatMap(teamMemberIds)].includes(id))) return fail(res, 422, "Choose a current project member");
+    }
+    if (b.dueDate !== undefined && b.dueDate !== null && (typeof b.dueDate !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(b.dueDate) || !Number.isFinite(Date.parse(b.dueDate)) || new Date(b.dueDate).toISOString().slice(0,10) !== b.dueDate)) return fail(res, 422, "Choose a valid due date");
+    if (b.assigneeId !== undefined) s.assigneeId = b.assigneeId === null ? null : Number(b.assigneeId);
+    if (b.dueDate !== undefined) s.dueDate = b.dueDate;
     if (b.title !== undefined && clean(b.title) && clean(b.title) !== s.title) { logActivity(t, "subtask_updated", u.id, { subtaskTitle: clean(b.title) }, s.title, clean(b.title)); s.title = clean(b.title); }
     if (b.isCompleted !== undefined) {
       const v = b.isCompleted === true || b.isCompleted === "true";

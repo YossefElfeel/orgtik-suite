@@ -2,13 +2,7 @@
 // names correctly; every cell quoted; and a cell that starts like a formula (= + - @, a tab or a
 // carriage return) is prefixed with an apostrophe, so a spreadsheet shows it instead of running it.
 
-const FORMULA_START = /^[=+\-@\t\r]/;
-
-function cell(value: unknown): string {
-  const text = value == null ? "" : String(value);
-  const safe = FORMULA_START.test(text) ? `'${text}` : text;
-  return `"${safe.replace(/"/g, '""')}"`;
-}
+import { csvCell as cell } from "@orgtik/ui";
 
 export function toCsv(header: string[], rows: unknown[][]): string {
   return "﻿" + [header, ...rows].map((r) => r.map(cell).join(",")).join("\r\n") + "\r\n";

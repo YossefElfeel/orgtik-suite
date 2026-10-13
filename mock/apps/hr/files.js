@@ -309,8 +309,7 @@ function readXlsx(buf) {
 }
 
 // ---------------- CSV ----------------
-const csvCell = (v) => { const s = v == null ? "" : String(v); return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
-const csv = (rows) => rows.map((r) => r.map(csvCell).join(",")).join("\r\n") + "\r\n";
+const { csv } = require("../../lib/csv");
 function readCsv(text) {
   const rows = [];
   let row = [], cell = "", q = false;

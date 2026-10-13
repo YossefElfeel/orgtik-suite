@@ -81,7 +81,7 @@ export function MediaDock() {
     <>
     {roomPanel && myRoomId && <RoomPanel roomId={myRoomId} onClose={() => setRoomPanel(false)} />}
     <div
-      className={"hq-floating hq-rise absolute inset-x-0 bottom-4 z-[40] mx-auto flex w-fit items-center gap-2 px-2.5 py-2 "+("ch-border-radius-189003")}
+      className={"hq-floating hq-rise absolute inset-x-0 bottom-4 z-[40] mx-auto flex w-fit items-center gap-2 px-2.5 py-2 "+("ch-border-radius-var---radius-chip")}
 
       role="region"
       aria-label={t("office.mediaDock", "Audio controls")}
@@ -89,25 +89,25 @@ export function MediaDock() {
       <div className="flex items-center gap-2 ps-1.5 pe-1">
         <span
           aria-hidden="true"
-          className={"ch-width-0b4791"+' '+"ch-height-ba2ef8"+' '+"ch-border-radius-189003"+' '+(link === "ok"?"ch-background-289564":(link === "connecting"?"ch-background-98a161":"ch-background-adbce8"))}
+          className={"ch-width-7px"+' '+"ch-height-7px"+' '+"ch-border-radius-var---radius-chip"+' '+(link === "ok"?"ch-background-var---color-presence-available":(link === "connecting"?"ch-background-var---color-presence-busy":"ch-background-var---color-danger-600"))}
         />
-        <span className={"whitespace-nowrap text-body-sm font-medium "+("ch-color-7f7330")} >
+        <span className={"whitespace-nowrap text-body-sm font-medium "+("ch-color-var---color-ink")} >
           {title}
         </span>
         {link === "ok" ? (
-          <span className={"tabular text-caption "+("ch-color-094083")} >
+          <span className={"tabular text-caption "+("ch-color-var---color-ink-subtle")} >
             {formatDuration(seconds)}
           </span>
         ) : link === "connecting" ? (
-          <span className={"text-caption "+("ch-color-4a0211")}  aria-live="polite">
+          <span className={"text-caption "+("ch-color-var---color-ink-muted")}  aria-live="polite">
             {t("call.connecting", "Connecting…")}
           </span>
         ) : (
-          <span className={"flex items-center gap-1 text-caption "+("ch-color-1fd63a")}  aria-live="polite">
+          <span className={"flex items-center gap-1 text-caption "+("ch-color-var---color-danger-600")}  aria-live="polite">
             {t("call.linkProblem", "Connection problem")}
             <button
               type="button"
-              className={"hq-btn inline-flex items-center gap-1 px-1.5 font-medium "+("ch-min-height-d2ae29"+' '+"ch-border-radius-189003"+' '+"ch-color-7f7330")}
+              className={"hq-btn inline-flex items-center gap-1 px-1.5 font-medium "+("ch-min-height-24px"+' '+"ch-border-radius-var---radius-chip"+' '+"ch-color-var---color-ink")}
 
               onClick={() => {
                 resumeAudio();
@@ -123,7 +123,7 @@ export function MediaDock() {
       </div>
 
       {/* Who else is here, and who is talking. */}
-      <div className={"flex items-center gap-1 border-x px-2 "+("ch-border-color-407eb5")} >
+      <div className={"flex items-center gap-1 border-x px-2 "+("ch-border-color-var---color-hairline")} >
         {huddleWith && partner ? (
           <Avatar name={partner.name} initials={partner.initials} tint={partner.tint} size={28} hideStatus />
         ) : (
@@ -147,7 +147,7 @@ export function MediaDock() {
           iconOnly
           label={muted ? t("call.unmute", "Unmute") : t("call.mute", "Mute")}
           onClick={() => setMuted((m) => !m)}
-          className={(muted?"ch-color-1fd63a":"ch-color-7f7330")}
+          className={(muted?"ch-color-var---color-danger-600":"ch-color-var---color-ink")}
         >
           {muted ? <MicrophoneSlash size={17} weight="fill" aria-hidden="true" /> : <Microphone size={17} aria-hidden="true" />}
         </Button>
@@ -157,7 +157,7 @@ export function MediaDock() {
           label={selfDeafened ? t("call.undeafen", "Hear the room again") : t("call.deafen", "Deafen: hear nobody")}
           aria-pressed={selfDeafened}
           onClick={() => setSelfDeafened(!selfDeafened)}
-          className={(selfDeafened?"ch-color-1fd63a":"ch-color-7f7330")}
+          className={(selfDeafened?"ch-color-var---color-danger-600":"ch-color-var---color-ink")}
         >
           {selfDeafened ? <SpeakerSlash size={17} weight="fill" aria-hidden="true" /> : <SpeakerHigh size={17} aria-hidden="true" />}
         </Button>
@@ -166,7 +166,7 @@ export function MediaDock() {
           iconOnly
           label={cameraOn ? t("call.cameraOff", "Turn camera off") : t("call.cameraOn", "Turn camera on")}
           onClick={() => setCameraOn((c) => !c)}
-          className={(cameraOn?"ch-color-7f7330":"ch-color-094083")}
+          className={(cameraOn?"ch-color-var---color-ink":"ch-color-var---color-ink-subtle")}
         >
           {cameraOn ? <VideoCamera size={17} weight="fill" aria-hidden="true" /> : <VideoCameraSlash size={17} aria-hidden="true" />}
         </Button>
@@ -176,7 +176,7 @@ export function MediaDock() {
           label={share.stream ? t("call.stopShare", "Stop sharing") : t("call.share", "Share your screen")}
           aria-pressed={Boolean(share.stream)}
           onClick={() => (share.stream ? share.stop() : void share.start())}
-          className={(share.stream?"ch-color-55f463":"ch-color-094083")}
+          className={(share.stream?"ch-color-var---color-ink-brand":"ch-color-var---color-ink-subtle")}
         >
           <MonitorArrowUp size={17} weight={share.stream ? "fill" : "regular"} aria-hidden="true" />
         </Button>
@@ -187,7 +187,7 @@ export function MediaDock() {
             label={t("room.open", "Room details")}
             aria-pressed={roomPanel}
             onClick={() => setRoomPanel((v) => !v)}
-            className={(roomPanel?"ch-color-55f463":"ch-color-7f7330")}
+            className={(roomPanel?"ch-color-var---color-ink-brand":"ch-color-var---color-ink")}
           >
             <Users size={17} aria-hidden="true" />
           </Button>

@@ -15,7 +15,7 @@ import useWorkspace from "@/hooks/use-workspace";
 import { API_URL } from "@/constants/env";
 import { useWorkspaceBanners } from "./WorkspaceBanners";
 export function SuiteFrame({ children }: { children: ReactNode }) {
-  const t = useTranslations("Nav"), ts = useTranslations("Suite"), tv = useTranslations("AccountV3"), tw = useTranslations("Workspace.nav"), workspaceText = useTranslations("Workspace"), mailboxText = useTranslations("Mailbox"), uiText = useStrings();
+  const roadmap = useTranslations("Roadmap"), t = useTranslations("Nav"), ts = useTranslations("Suite"), tv = useTranslations("AccountV3"), tw = useTranslations("Workspace.nav"), workspaceText = useTranslations("Workspace"), mailboxText = useTranslations("Mailbox"), uiText = useStrings();
   const pathname = usePathname(), router = useRouter(), dispatch = useAppDispatch(), mounted = useMounted(), { user, isAdmin, isWebsiteManager, workspaceContext, staffAccess } = useUser(), ws = useWorkspace(), { isImpersonating } = useImpersonation();
   const [logout] = useLogoutMutation(), [exitImpersonation, { isLoading: exiting }] = useExitImpersonationMutation(), signOutBusy = useRef(false);
   const identityOnly = mounted && !workspaceContext && !staffAccess;
@@ -24,7 +24,7 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
   const items: SidebarItem[] = identityOnly ? [item("/account/identity", tv("chooseWorkspace"), <House />)] : [item("/", t("home"), <House />), item(mounted && workspaceContext ? "/account/security" : "/account/identity", tv("account"), <UserCircle />)];
   const sections: SidebarSection[] = [{ items }];
   if (mounted && ws.me) {
-    items.push(item("/tools", tw("tools"), <Storefront />), item("/usage", tv("usage"), <SquaresFour />), { ...item("/notifications", tw("notifications"), <Bell />), count: ws.me.unread || undefined });
+    items.push(item("/approvals", roadmap("approvals"), <Check />), item("/tools", tw("tools"), <Storefront />), item("/usage", tv("usage"), <SquaresFour />), { ...item("/notifications", tw("notifications"), <Bell />), count: ws.me.unread || undefined });
     if (ws.role !== "guest") items.push(item("/team", tw("team"), <UsersFour />), item("/services", tw("services"), <Briefcase />), item("/support", tw("support"), <Headset />));
     items.push(item("/product/help", tv("help"), <Headset />));
     if (ws.isOwner) sections.push({ label: tw("billingSection"), items: [item("/billing", tw("subscriptions"), <Receipt />), item("/billing/invoices", tw("invoices"), <Invoice />), item("/billing/payment-methods", tw("paymentMethods"), <CreditCard />), item("/billing/details", tw("billingDetails"), <GearSix />), item("/billing/contacts", tv("billingContacts"), <EnvelopeSimple />)] }, { label: tw("settingsSection"), items: [item("/workspace", tw("workspaceSettings"), <GearSix />)] });

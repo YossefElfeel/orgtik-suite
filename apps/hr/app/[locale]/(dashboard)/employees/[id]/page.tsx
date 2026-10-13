@@ -21,6 +21,9 @@ import type {
   AttachmentItem,
   ActivityItem,
 } from "@/components/pages/employee/details/types";
+import { useUserRoles } from "@/hooks/useUserRoles";
+import { useRouter } from "@/i18n/routing";
+import { ErrorState, NoPermissionState } from "@orgtik/ui";
 import { useParams } from "next/navigation";
 import { useMemo } from "react";
 import { useFormatter, useTranslations } from "next-intl";
@@ -40,8 +43,10 @@ function getInitials(name: string) {
 
 export default function EmployeeDetailsPage() {
   const params = useParams<{ locale: string; id: string }>();
-  const { data: employeeRes, isLoading } = useGetEmployeeQuery(params.id);
+  const { data: employeeRes, isLoading, error, refetch } = useGetEmployeeQuery(params.id);
   const employee = employeeRes?.data;
+  const router = useRouter(), { canWrite, hasRole } = useUserRoles();
+  const editSection = (step: string) => canWrite && (hasRole("hr") || hasRole("super_admin")) ? () => router.push(`/employees?mode=edit&employee_id=${encodeURIComponent(params.id)}&step=${step}`) : undefined;
 
   const { data: activityLogsRes, isLoading: isActivitiesLoading } =
     useGetActivityLogsQuery({ performedBy: params.id });
@@ -101,6 +106,9 @@ export default function EmployeeDetailsPage() {
     return formatDate(d);
   }, [params.locale, employee?.employeeInformation?.joinDate]);
 
+  const status = (error as { status?: number } | undefined)?.status;
+  if (status === 403) return <NoPermissionState />;
+  if (error && status !== 404) return <ErrorState onRetry={() => void refetch()} />;
   if (!isLoading && !employee) {
     return (
       <div className="flex h-full items-center justify-center min-h-[400px]">
@@ -145,25 +153,30 @@ export default function EmployeeDetailsPage() {
       <section className="main-padding flex-1 pb-10">
         <div className="border bg-gray rounded-2xl space-y-6 p-6">
           <PersonalInfoSection
+            onEdit={editSection("personal")}
             personalInfo={employee?.personalInformation}
             isLoading={isLoading}
           />
           <EmployeeInfoSection
+            onEdit={editSection("employee")}
             employeeInfo={employee?.employeeInformation}
             joinDateLabel={joinDateLabel}
             employeeId={employee?.employeeCode || "-"}
             isLoading={isLoading}
           />
           <SkillsSection
+            onEdit={editSection("employee")}
             skills={employee?.employeeInformation?.skills || []}
             isLoading={isLoading}
           />
           <BankInfoSection
+            onEdit={editSection("bank")}
             paymentDetails={employee?.paymentDetails}
             salaryInformation={employee?.salaryInformation}
             isLoading={isLoading}
           />
           <SalaryInformationSection
+            onEdit={editSection("salary")}
             salaryInformation={employee?.salaryInformation}
             isLoading={isLoading}
           />

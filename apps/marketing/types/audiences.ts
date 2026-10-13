@@ -1,6 +1,9 @@
 import type { ICampaignMeta } from "@/types/campaigns";
 
 export interface IAudienceSegmentRules {
+  tags?: string[];
+  stageId?: string;
+  engagement?: "any" | "delivered_mock" | "not_delivered_mock";
   source?: string;
   type?: string;
   interest?: string;
@@ -14,7 +17,7 @@ export interface IAudienceSegment {
   rules: IAudienceSegmentRules;
   /** The audience the segment narrows; null means every audience of the project. */
   audienceId?: string | null;
-  matchingContactsCount?: number;
+  matchingContactsCount?: number | null;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -93,3 +96,6 @@ export interface IAudienceImportCommitResult {
   audienceId?: string | null;
   audience?: ICompanyAudience;
 }
+
+export type SegmentForm = { name: string; description: string; audienceId: string; source: string; type: string; interest: string; qualifiedOnly: boolean; tags: string; stageId: string; engagement: "any" | "delivered_mock" | "not_delivered_mock" };
+export type SegmentPreview = { workspaceId: string; simulatedEngagement: true; total: number; contacts: { id: string; name: string; email: string; stageId: string; tags: string[]; consent: string; deliveredMock: boolean }[] };

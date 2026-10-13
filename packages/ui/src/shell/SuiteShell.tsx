@@ -22,7 +22,7 @@ export function AppRail({ apps, current, homeHref = "/" }: { apps: RailApp[]; cu
   const t = useStrings();
   const { Link } = useOrgtik();
   return (
-    <nav aria-label={t("apps")} className="flex h-full min-h-0 w-[76px] flex-col items-center gap-1 overflow-y-auto bg-chrome py-3 text-fg-on-chrome [&>a]:shrink-0">
+    <nav aria-label={t("apps")} className="flex h-full min-h-0 w-[76px] flex-col items-center gap-1 overflow-y-auto overflow-x-hidden bg-chrome py-3 text-fg-on-chrome [&>a]:shrink-0">
       <Link href={homeHref} className="mb-3 grid size-11 place-items-center rounded-field focus-visible:outline-2 focus-visible:outline-focus">
         <Logo variant="mark" tone="brand" className="h-8" />
       </Link>
@@ -35,7 +35,7 @@ export function AppRail({ apps, current, homeHref = "/" }: { apps: RailApp[]; cu
             onClick={app.onNavigate ? event => { if (!event.metaKey && !event.ctrlKey && !event.shiftKey && event.button === 0) { event.preventDefault(); app.onNavigate?.(); } } : undefined}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "relative flex w-[64px] flex-col items-center gap-1 rounded-field px-1 py-2 text-micro text-fg-on-chrome-muted transition-colors",
+              "relative flex w-full min-w-0 flex-col items-center gap-1 rounded-field px-1 py-2 text-micro text-fg-on-chrome-muted transition-colors",
               "hover:bg-[color-mix(in_oklab,var(--ot-fg-on-chrome)_8%,transparent)] hover:text-fg-on-chrome",
               "focus-visible:outline-2 focus-visible:outline-focus aria-[current=page]:text-fg-on-chrome",
             )}
@@ -49,7 +49,7 @@ export function AppRail({ apps, current, homeHref = "/" }: { apps: RailApp[]; cu
             >
               {app.icon}
             </span>
-            <span className="w-full truncate text-center">{app.label}</span>
+            <span className="w-full break-words text-center leading-tight">{app.label}</span>
             {app.badge ? <span className="absolute end-2 top-1.5">{app.badge}</span> : null}
           </Link>
         );

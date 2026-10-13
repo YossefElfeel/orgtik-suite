@@ -21,7 +21,13 @@ const eligible = entry => entry && !current(entry)?.managedIn && !['pricing','le
 const nameOf = entry => plain(current(entry)?.locales?.en?.name || current(entry)?.name || entry.id);
 const entryPath = entry => '/content/'+AREA[entry.type]+'/'+entry.id;
 function location(tree, pointer) { const parts=text(pointer,250).split('.');let node=tree;for(const key of parts.slice(0,-1)){if(['__proto__','prototype','constructor'].includes(key)||!node||typeof node!=='object'||!Object.hasOwn(node,key))throw fail(422,'invalid_element');node=node[key];}const key=parts.at(-1);if(['__proto__','prototype','constructor'].includes(key)||!node||typeof node!=='object'||!Object.hasOwn(node,key))throw fail(422,'invalid_element');return {node,key,value:node[key]}; }
-function strings(tree, prefix='', out=[]) { if(typeof tree==='string'&&tree.trim()&&tree.length<=2000&&!/(^|[.@])(id|slug|icon|logo|url|website|src|href|file|path)$/i.test(prefix)&&! /^(https?:|mailto:|tel:|\/)/.test(tree))out.push({path:prefix,text:tree});else if(tree&&typeof tree==='object')for(const [key,value]of Object.entries(tree))if(!['__proto__','prototype','constructor'].includes(key))strings(value,prefix?prefix+'.'+key:key,out);return out.slice(0,300); }
+function strings(tree, prefix='', out=[]) {
+ const structural=/(^|\.)(id|slug|icon|logo|url|website|src|href|file|path|kind|type|layout|className|class|style|colour|color|mimeType|format|createdAt|updatedAt)(\.|$)/i;
+ const asset=/\.(svg|png|jpe?g|webp|gif|avif|mp4|webm|woff2?|css|js|json)(?:[?#].*)?$/i;
+ if(typeof tree==='string'&&tree.trim()&&tree.length<=2000&&!structural.test(prefix)&&!asset.test(tree)&&! /^(https?:|mailto:|tel:|\/|#[0-9a-f]{3,8}$)/i.test(tree)&&!/<[^>]+>/.test(tree)) out.push({path:prefix,text:tree});
+ else if(tree&&typeof tree==='object')for(const [key,value]of Object.entries(tree))if(!['__proto__','prototype','constructor'].includes(key))strings(value,prefix?prefix+'.'+key:key,out);
+ return out.slice(0,300);
+}
 const simulatedTranslation=(source,locale)=>{const known={ar:'نعمل معًا بشكل أفضل',de:'Besser zusammenarbeiten',fr:'Mieux travailler ensemble',it:'Lavorare meglio insieme',en:'Work better together'};return source.trim().toLowerCase()==='work better together'?known[locale]:({ar:'مسودة محاكاة',de:'Simulierter Entwurf',fr:'Brouillon simulé',it:'Bozza simulata',en:'Simulated draft'}[locale]+': '+source);};
 function defaults(store) { return {version:1,next:1,comments:[],releases:[],translations:[],webhooks:[],webhookReceipts:[],notices:[],mediaVersions:{},operations:[],observed:Object.fromEntries([...store.entries].map(([id,e])=>[id,{version:e.workflow.version,state:e.draft?e.workflow.state:'published'}])),formAttempts:[],setupDismissals:[]}; }
 function create({store,lib,ops,identity,ctx,now=()=>new Date().toISOString()}) {

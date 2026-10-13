@@ -83,7 +83,7 @@ export function LinesChart({
         height={height}
         role="img"
         aria-label={ariaLabel}
-        className={"ch-display-2a1b75"+' '+"ch-max-width-27aeb6"}
+        className={"ch-display-block"+' '+"ch-max-width-100pct"}
         onMouseLeave={() => setHover(null)}
       >
         {ticks.map((v) => {
@@ -91,7 +91,7 @@ export function LinesChart({
           return (
             <g key={v}>
               <line x1={PAD.left} x2={W - PAD.right} y1={y} y2={y} stroke="var(--color-hairline)" strokeWidth={1} />
-              <text x={PAD.left - 8} y={y + 3} textAnchor="end" className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")} >
+              <text x={PAD.left - 8} y={y + 3} textAnchor="end" className={"tabular "+("ch-font-size-var---ot-type-micro-size"+' '+"ch-fill-var---color-ink-subtle")} >
                 {compact(v)}
               </text>
             </g>
@@ -138,7 +138,7 @@ export function LinesChart({
               x={x}
               y={height - 7}
               textAnchor={i === 0 ? "start" : i === n - 1 ? "end" : "middle"}
-              className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")}
+              className={"tabular "+("ch-font-size-var---ot-type-micro-size"+' '+"ch-fill-var---color-ink-subtle")}
 
             >
               {l}
@@ -162,7 +162,7 @@ export function LinesChart({
               onMouseEnter={() => setHover(i)}
               onFocus={() => setHover(i)}
               onBlur={() => setHover(null)}
-              className={"ch-cursor-2a9295"}
+              className={"ch-cursor-default"}
             />
           );
         })}
@@ -172,32 +172,32 @@ export function LinesChart({
       {hover !== null && (
         <div
           aria-hidden="true"
-          className={("pointer-events-none absolute z-10 px-2.5 py-2 "+("ch-top-0d4406"+' '+"ch-min-width-b62dc2"+' '+"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-box-shadow-85f924"+' '+"ch-font-size-b9bb0f"))+" "+(geometryClass({left:Math.min(Math.max(xy(hover, 0)[0] - 60, 0), W - 140)}))}
+          className={("pointer-events-none absolute z-10 px-2.5 py-2 "+("ch-top-0"+' '+"ch-min-width-130px"+' '+"ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-box-shadow-var---shadow-panel"+' '+"ch-font-size-var---ot-type-caption-size"))+" "+(geometryClass({left:Math.min(Math.max(xy(hover, 0)[0] - 60, 0), W - 140)}))}
 
         >
-          <p className={"font-medium "+("ch-color-7f7330")} >
+          <p className={"font-medium "+("ch-color-var---color-ink")} >
             {labels[hover]}
           </p>
           {series.map((s) => (
             <p key={s.id} className="mt-0.5 flex items-center gap-1.5">
               <span
                 aria-hidden="true"
-                className={"ch-width-5e26c9"+' '+"ch-height-32ec1b"+' '+(s.tone === "accent"?"ch-background-82a08c":"ch-background-e9b63d")+' '+"ch-display-60e32d"}
+                className={"ch-width-10px"+' '+"ch-height-2px"+' '+(s.tone === "accent"?"ch-background-var---color-bar":"ch-background-var---color-paper-500")+' '+"ch-display-inline-block"}
               />
-              <span className={"tabular font-semibold "+("ch-color-7f7330")} >
+              <span className={"tabular font-semibold "+("ch-color-var---color-ink")} >
                 {format(s.values[hover] ?? 0)}
               </span>
-              <span className={"ch-color-4a0211"} >{s.label}</span>
+              <span className={"ch-color-var---color-ink-muted"} >{s.label}</span>
             </p>
           ))}
         </div>
       )}
 
       {series.length > 1 && (
-        <ul className={"mt-1 flex flex-wrap gap-x-4 gap-y-1 text-caption "+("ch-color-4a0211")} >
+        <ul className={"mt-1 flex flex-wrap gap-x-4 gap-y-1 text-caption "+("ch-color-var---color-ink-muted")} >
           {series.map((s) => (
             <li key={s.id} className="flex items-center gap-1.5">
-              <span aria-hidden="true" className={"ch-width-fbf353"+' '+"ch-height-32ec1b"+' '+(s.tone === "accent"?"ch-background-82a08c":"ch-background-e9b63d")+' '+"ch-display-60e32d"}  />
+              <span aria-hidden="true" className={"ch-width-12px"+' '+"ch-height-2px"+' '+(s.tone === "accent"?"ch-background-var---color-bar":"ch-background-var---color-paper-500")+' '+"ch-display-inline-block"}  />
               {s.label}
             </li>
           ))}
@@ -238,18 +238,18 @@ export function RankedBars({
         const quiet = emphasis !== undefined && emphasis !== r.id;
         return (
           <li key={r.id} className="flex items-center gap-3">
-            <span className={"w-[112px] shrink-0 truncate text-body-sm "+("ch-color-7f7330")}  title={r.label}>
+            <span className={"w-[112px] shrink-0 truncate text-body-sm "+("ch-color-var---color-ink")}  title={r.label}>
               <bdi>{r.label}</bdi>
             </span>
-            <span className={"h-[10px] min-w-0 flex-1 "+("ch-background-5d6e34"+' '+"ch-border-radius-189003")} >
+            <span className={"h-[10px] min-w-0 flex-1 "+("ch-background-var---color-bar-zero"+' '+"ch-border-radius-var---radius-chip")} >
               <span
-                className={("block h-full w-full origin-left rtl:origin-right "+((quiet?"ch-background-e9b63d":"ch-background-82a08c")+' '+"ch-border-radius-189003"+' '+"ch-transition-a79bda"))+" "+(geometryClass({transform:`scaleX(${r.value / max})`}))}
+                className={("block h-full w-full origin-left rtl:origin-right "+((quiet?"ch-background-var---color-paper-500":"ch-background-var---color-bar")+' '+"ch-border-radius-var---radius-chip"+' '+"ch-transition-transform-var---duration-state-var---ease-out-soft"))+" "+(geometryClass({transform:`scaleX(${r.value / max})`}))}
 
               />
             </span>
-            <span className={"tabular w-[96px] shrink-0 text-end text-caption "+("ch-color-4a0211")} >
+            <span className={"tabular w-[96px] shrink-0 text-end text-caption "+("ch-color-var---color-ink-muted")} >
               {format(r.value)}
-              {r.meta && <span className={"ch-color-094083"} > · {r.meta}</span>}
+              {r.meta && <span className={"ch-color-var---color-ink-subtle"} > · {r.meta}</span>}
             </span>
           </li>
         );
@@ -277,10 +277,10 @@ export function Meter({
   return (
     <div>
       <div className="flex items-baseline justify-between gap-3">
-        <span className={"text-body-sm font-medium "+("ch-color-7f7330")} >
+        <span className={"text-body-sm font-medium "+("ch-color-var---color-ink")} >
           {label}
         </span>
-        <span className={"tabular text-body-sm font-semibold "+("ch-color-7f7330")} >
+        <span className={"tabular text-body-sm font-semibold "+("ch-color-var---color-ink")} >
           {Math.round(pct)}%
         </span>
       </div>
@@ -290,19 +290,19 @@ export function Meter({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={label}
-        className={"relative mt-1.5 "+("ch-height-6a8e05"+' '+"ch-background-5d6e34"+' '+"ch-border-radius-189003")}
+        className={"relative mt-1.5 "+("ch-height-10px"+' '+"ch-background-var---color-bar-zero"+' '+"ch-border-radius-var---radius-chip")}
 
       >
-        <div className={("ch-height-622640"+' '+"ch-background-82a08c"+' '+"ch-border-radius-189003")+" "+(geometryClass({width:`${pct}%`}))}  />
+        <div className={("ch-height-100pct"+' '+"ch-background-var---color-bar"+' '+"ch-border-radius-var---radius-chip")+" "+(geometryClass({width:`${pct}%`}))}  />
         {target !== undefined && (
           <span
             aria-hidden="true"
-            className={("absolute top-[-3px] "+("ch-width-208c98"+' '+"ch-height-30de4a"+' '+"ch-background-c5a814"+' '+"ch-border-radius-edd97e"))+" "+(geometryClass({left:`${target * 100}%`}))}
+            className={("absolute top-[-3px] "+("ch-width-2px"+' '+"ch-height-16px"+' '+"ch-background-var---color-ink"+' '+"ch-border-radius-var---ot-radius-field"))+" "+(geometryClass({left:`${target * 100}%`}))}
 
           />
         )}
       </div>
-      <p className={"mt-1.5 text-caption "+("ch-color-4a0211")} >
+      <p className={"mt-1.5 text-caption "+("ch-color-var---color-ink-muted")} >
         {caption}
       </p>
     </div>
@@ -353,11 +353,11 @@ export function Columns({
 
   return (
     <div ref={wrapRef} className="relative">
-      <svg viewBox={`0 0 ${W} ${height}`} width={W} height={height} role="img" aria-label={ariaLabel} className={"ch-display-2a1b75"+' '+"ch-max-width-27aeb6"}  onMouseLeave={() => setHover(null)}>
+      <svg viewBox={`0 0 ${W} ${height}`} width={W} height={height} role="img" aria-label={ariaLabel} className={"ch-display-block"+' '+"ch-max-width-100pct"}  onMouseLeave={() => setHover(null)}>
         {ticks.map((v) => (
           <g key={v}>
             <line x1={PAD.left} x2={W - PAD.right} y1={y(v)} y2={y(v)} stroke="var(--color-hairline)" strokeWidth={1} />
-            <text x={PAD.left - 8} y={y(v) + 3} textAnchor="end" className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")} >
+            <text x={PAD.left - 8} y={y(v) + 3} textAnchor="end" className={"tabular "+("ch-font-size-var---ot-type-micro-size"+' '+"ch-fill-var---color-ink-subtle")} >
               {compact(v)}
             </text>
           </g>
@@ -375,7 +375,7 @@ export function Columns({
                 d={quiet ? `M${x},${PAD.top + plotH - 2} h${barW} v2 h-${barW} z` : `M${x},${top + r} a${r},${r} 0 0 1 ${r},-${r} h${barW - 2 * r} a${r},${r} 0 0 1 ${r},${r} v${h - r} h-${barW} z`}
                 fill={quiet ? "var(--color-bar-zero)" : hover === i ? "var(--color-scale-3)" : "var(--color-bar)"}
               />
-              <text x={x + barW / 2} y={height - 7} textAnchor="middle" className={"tabular "+("ch-font-size-dc3e3c"+' '+"ch-fill-897b87")} >
+              <text x={x + barW / 2} y={height - 7} textAnchor="middle" className={"tabular "+("ch-font-size-var---ot-type-micro-size"+' '+"ch-fill-var---color-ink-subtle")} >
                 {d.label}
               </text>
               <rect
@@ -390,7 +390,7 @@ export function Columns({
                 onMouseEnter={() => setHover(i)}
                 onFocus={() => setHover(i)}
                 onBlur={() => setHover(null)}
-                className={"ch-cursor-2a9295"}
+                className={"ch-cursor-default"}
               />
             </g>
           );
@@ -399,13 +399,13 @@ export function Columns({
       {hover !== null && data[hover] && (
         <div
           aria-hidden="true"
-          className={("pointer-events-none absolute z-10 px-2.5 py-1.5 "+("ch-top-0d4406"+' '+"ch-min-width-e79a03"+' '+"ch-background-751d03"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-box-shadow-85f924"+' '+"ch-font-size-b9bb0f"))+" "+(geometryClass({left:Math.min(Math.max(PAD.left + hover * slot + slot / 2 - 50, 0), W - 110)}))}
+          className={("pointer-events-none absolute z-10 px-2.5 py-1.5 "+("ch-top-0"+' '+"ch-min-width-100px"+' '+"ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-box-shadow-var---shadow-panel"+' '+"ch-font-size-var---ot-type-caption-size"))+" "+(geometryClass({left:Math.min(Math.max(PAD.left + hover * slot + slot / 2 - 50, 0), W - 110)}))}
 
         >
-          <span className={"tabular font-semibold "+("ch-color-7f7330")} >
+          <span className={"tabular font-semibold "+("ch-color-var---color-ink")} >
             {format(data[hover].value)}
           </span>
-          <span className={"ch-color-4a0211"} > {data[hover].label}</span>
+          <span className={"ch-color-var---color-ink-muted"} > {data[hover].label}</span>
         </div>
       )}
     </div>

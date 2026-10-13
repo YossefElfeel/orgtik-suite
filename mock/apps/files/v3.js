@@ -74,6 +74,7 @@ function create({
     const safety = settings().safetyBytes;
     return {
       ...current,
+      localUploads: require("../../lib/local-file-assets").enabled(),
       usedBytes: retainedBytes(),
       purgeDueCount: purgeDue().length,
       effectiveBytes:

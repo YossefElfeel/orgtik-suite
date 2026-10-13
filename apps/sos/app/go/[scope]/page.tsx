@@ -15,6 +15,7 @@ import { handoffHref } from "@/lib/handoff";
 import useUser from "@/hooks/use-user";
 import { useMounted } from "@/hooks/use-mounted";
 import { switchWorkspace, TOOL_SCOPES } from "@orgtik/ui/auth";
+import { ToolRecovery } from "@/components/account/ToolRecovery";
 import { API_URL } from "@/constants/env";
 
 export default function OpenAppPage() {
@@ -61,7 +62,7 @@ export default function OpenAppPage() {
   return (
     <main className="grid min-h-dvh place-items-center bg-canvas p-4">
       {problem === "notYours" ? (
-        <NoPermissionState titleAs="h1" title={t("notYoursTitle", { name })} description={t("notYoursBody")} action={home} />
+        <NoPermissionState titleAs="h1" title={t("notYoursTitle", { name })} description={t("notYoursBody")} action={<div className="flex flex-col gap-3"><ToolRecovery scope={scope} />{home}</div>} />
       ) : problem === "failed" || failed ? (
         <ErrorState
           titleAs="h1"

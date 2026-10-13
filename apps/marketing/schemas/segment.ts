@@ -1,0 +1,2 @@
+import { z } from "zod";
+export const segmentSchema = (required: string) => z.object({ name: z.string().trim().min(1, required).max(120), description: z.string().max(2000), audienceId: z.string(), source: z.string().max(120), type: z.string().max(120), interest: z.string().max(120), qualifiedOnly: z.boolean(), tags: z.string().max(2400), stageId: z.string().max(120), engagement: z.enum(["any", "delivered_mock", "not_delivered_mock"]) });

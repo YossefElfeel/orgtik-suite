@@ -145,6 +145,8 @@ export const taskApi = baseApi.injectEndpoints({
       {
         subTaskId: number;
         subTask: {
+          assigneeId?: number | null;
+          dueDate?: string | null;
           title?: string;
           isCompleted?: boolean;
         };

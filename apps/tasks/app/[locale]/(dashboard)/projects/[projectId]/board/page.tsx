@@ -18,7 +18,7 @@ import { AvatarStack } from "@/components/shared/AvatarStack";
 import TaskFormDialog from "@/components/task/TaskFormDialog";
 import { SectionFormDialog } from "@/components/dialogs/projects/SectionFormDialog";
 import { useProjectId } from "@/components/pages/projects/ProjectFrame";
-import { useDeleteProjectSectionMutation, useGetProjectArchiveTasksQuery, useGetProjectBoardQuery, useGetProjectByIdQuery } from "@/redux/features/projects/projectsApi";
+import { useUpdateProjectSectionMutation, useDeleteProjectSectionMutation, useGetProjectArchiveTasksQuery, useGetProjectBoardQuery, useGetProjectByIdQuery } from "@/redux/features/projects/projectsApi";
 import { useMoveTaskMutation } from "@/redux/features/task/taskApi";
 import { useTaskRoles } from "@/lib/permissions";
 import { daysUntil, dueDay } from "@/lib/dates";
@@ -92,6 +92,8 @@ export default function BoardPage() {
   const archive = useGetProjectArchiveTasksQuery(id, { skip: !id || !showArchive });
   const [move] = useMoveTaskMutation();
   const [removeSection] = useDeleteProjectSectionMutation();
+  const [reorderSection, reordering] = useUpdateProjectSectionMutation();
+  const r = useTranslations("Roadmap");
   const [search, setSearch] = useState(q);
   useEffect(() => {
     if (search.trim() === q) return;
@@ -202,6 +204,8 @@ export default function BoardPage() {
                 if (!c || c.flag === "archive") return null;
                 return (
                   <>
+                    <MenuItem disabled={reordering.isLoading || c.order <= 1} onClick={() => void reorderSection({ projectId: id, sectionId: c.id, order: c.order - 1, color: c.color, title: c.title }).unwrap().catch(() => {})}>{r("moveBefore")}</MenuItem>
+                    <MenuItem disabled={reordering.isLoading || c.order >= cols.filter(column => column.flag !== "archive").length} onClick={() => void reorderSection({ projectId: id, sectionId: c.id, order: c.order + 1, color: c.color, title: c.title }).unwrap().catch(() => {})}>{r("moveAfter")}</MenuItem>
                     <MenuItem icon={<PencilSimple />} onClick={() => setEditing(c)}>
                       {t("editSection")}
                     </MenuItem>

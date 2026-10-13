@@ -37,6 +37,7 @@ export type WorkspaceContext = {
         kind: "customer" | "orgtik_internal";
         state: "active" | "past_due" | "suspended" | "cancelled" | "deleted";
         timeZone: string;
+        defaultLanguage?: string;
     };
     actor: {
         userId: number;

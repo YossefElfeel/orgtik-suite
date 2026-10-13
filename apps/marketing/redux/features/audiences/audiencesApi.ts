@@ -1,5 +1,6 @@
 import { baseApi, SuccessResponse } from "@/redux/app/baseApi";
 import type {
+  SegmentPreview,
   IAudienceImportCommitResult,
   IAudienceImportPreview,
   IAudienceSegment,
@@ -14,6 +15,7 @@ import type {
 
 export const audiencesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    previewSegment: builder.mutation<SuccessResponse<SegmentPreview>, { rules: import("@/types/audiences").IAudienceSegmentRules; audienceId: string | null }>({ query: body => ({ url: "/audiences/segments/preview", method: "POST", body }) }),
     listCompanyAudiences: builder.query<
       SuccessResponse<ICompanyAudienceListResponse>,
       ICompanyAudienceListParams | void
@@ -102,6 +104,7 @@ export const audiencesApi = baseApi.injectEndpoints({
 });
 
 export const {
+  usePreviewSegmentMutation,
   useListCompanyAudiencesQuery,
   useListAudienceSegmentsQuery,
   useCreateAudienceSegmentMutation,

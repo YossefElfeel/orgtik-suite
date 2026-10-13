@@ -53,8 +53,8 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
     return (
       <Frame muted>
         <div className="flex items-center gap-2">
-          <Warning size={15} aria-hidden="true" className={"ch-color-094083"}  />
-          <span className={"text-body-sm "+("ch-color-4a0211")} >
+          <Warning size={15} aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
+          <span className={"text-body-sm "+("ch-color-var---color-ink-muted")} >
             {t("card.noPermission", "This conversation is about a record you cannot open.")}
           </span>
         </div>
@@ -66,8 +66,8 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
     return (
       <Frame muted>
         <div className="flex items-center gap-2">
-          <Warning size={15} aria-hidden="true" className={"ch-color-094083"}  />
-          <span className={"text-body-sm "+("ch-color-4a0211")} >
+          <Warning size={15} aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
+          <span className={"text-body-sm "+("ch-color-var---color-ink-muted")} >
             {t("card.deleted", "{title} was deleted. The conversation is kept.", { title: object.title })}
           </span>
         </div>
@@ -80,7 +80,7 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
       <div className="flex items-start gap-2.5">
         <span
           aria-hidden="true"
-          className={"flex shrink-0 items-center justify-center "+("ch-width-a81a9e"+' '+"ch-height-3a8bc5"+' '+"ch-border-radius-332348"+' '+"ch-background-314b28"+' '+"ch-color-4a0211")}
+          className={"flex shrink-0 items-center justify-center "+("ch-width-28px"+' '+"ch-height-28px"+' '+"ch-border-radius-var---radius-control"+' '+"ch-background-var---color-surface-sunken"+' '+"ch-color-var---color-ink-muted")}
 
         >
           <Icon size={15} weight="bold" />
@@ -88,7 +88,7 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
 
         <div className="min-w-0 flex-1">
           <div className="flex items-baseline gap-2">
-            <span className={"text-micro font-medium "+("ch-color-094083")} >
+            <span className={"text-micro font-medium "+("ch-color-var---color-ink-subtle")} >
               {moduleLabel(object.module)}
             </span>
             {object.state === "stale" && (
@@ -96,7 +96,7 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
             )}
           </div>
 
-          <p className={"mt-0.5 truncate text-body-sm font-semibold "+("ch-color-7f7330")} >
+          <p className={"mt-0.5 truncate text-body-sm font-semibold "+("ch-color-var---color-ink")} >
             <bdi>{object.title}</bdi>
           </p>
 
@@ -108,11 +108,11 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
             {object.due && <Meta label={t("card.due", "Due")} value={formatShortDay(object.due)} />}
             {owner && (
               <span className="flex items-center gap-1.5">
-                <span className={"text-micro "+("ch-color-094083")} >
+                <span className={"text-micro "+("ch-color-var---color-ink-subtle")} >
                   {t("card.owner", "Owner")}
                 </span>
                 <Avatar name={owner.name} initials={owner.initials} tint={owner.tint} size={20} hideStatus />
-                <span className={"text-caption "+("ch-color-7f7330")} >
+                <span className={"text-caption "+("ch-color-var---color-ink")} >
                   <bdi>{owner.name.split(" ")[0]}</bdi>
                 </span>
               </span>
@@ -123,7 +123,7 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
         {!compact && object.type === "task" && (
           <Link
             href={`/tasks/${object.id}`}
-            className={"hq-btn flex shrink-0 items-center gap-1 px-2 text-caption font-medium "+("ch-min-height-4f3317"+' '+"ch-color-4a0211"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348")}
+            className={"hq-btn flex shrink-0 items-center gap-1 px-2 text-caption font-medium "+("ch-min-height-28px"+' '+"ch-color-var---color-ink-muted"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control")}
 
           >
             {t("card.open", "Open")}
@@ -141,7 +141,7 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
                 t("card.otherModuleBody", "In the product, Open goes to the record in its own module of the Business OS. That module is not part of this prototype."),
               )
             }
-            className={"hq-btn flex shrink-0 items-center gap-1 px-2 text-caption font-medium "+("ch-min-height-4f3317"+' '+"ch-color-4a0211"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348")}
+            className={"hq-btn flex shrink-0 items-center gap-1 px-2 text-caption font-medium "+("ch-min-height-28px"+' '+"ch-color-var---color-ink-muted"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control")}
 
           >
             {t("card.open", "Open")}
@@ -156,7 +156,7 @@ export function ContextCard({ object, compact = false }: { object: ObjectRef; co
 function Frame({ children, muted = false }: { children: React.ReactNode; muted?: boolean }) {
   return (
     <div
-      className={"p-2.5 "+((muted?"ch-background-314b28":"ch-background-751d03")+' '+"ch-border-8ff264"+' '+"ch-border-radius-8d459a")}
+      className={"p-2.5 "+((muted?"ch-background-var---color-surface-sunken":"ch-background-var---color-surface")+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-card")}
 
     >
       {children}
@@ -176,10 +176,10 @@ const MODULE_KEYS: Record<string, string> = {
 function Meta({ label, value }: { label: string; value: string }) {
   return (
     <span className="flex items-baseline gap-1.5">
-      <span className={"text-micro "+("ch-color-094083")} >
+      <span className={"text-micro "+("ch-color-var---color-ink-subtle")} >
         {label}
       </span>
-      <span className={"text-caption font-medium "+("ch-color-7f7330")} >
+      <span className={"text-caption font-medium "+("ch-color-var---color-ink")} >
         <bdi>{value}</bdi>
       </span>
     </span>

@@ -85,6 +85,7 @@ export interface TaskResponse {
   success: boolean;
   message: string;
   data: {
+    projectId: number;
     id: number;
     title: string;
     description: string;
@@ -177,6 +178,9 @@ export interface ICreatedBy {
 }
 
 export interface ISetupItem {
+  taskId?: number;
+  assigneeId?: number | null;
+  dueDate?: string | null;
   id: number;
   title: string;
   isCompleted: boolean;

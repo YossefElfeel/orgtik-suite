@@ -4,10 +4,10 @@
 // is the library's FileField (a real file input with a drop zone, sizes and types checked and named
 // when refused); the old one was an invisible input under a button. Errors are translated, and a
 // failed request keeps the dialog open (it used to be uncaught, TASKS-005).
-import { useState, type ReactElement } from "react";
+import { type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
-import { FileField, Input, Textarea } from "@orgtik/ui";
+import { Input, Textarea } from "@orgtik/ui";
 import { RHFField } from "@orgtik/ui/rhf";
 import { FormDialog } from "@/components/shared/FormDialog";
 import { useCreateTeamMutation } from "@/redux/features/teams/teamsApi";
@@ -18,15 +18,11 @@ export default function CreateTeamDialog({ trigger }: { trigger: ReactElement })
   const t = useTranslations("TeamForm");
   const [createTeam] = useCreateTeamMutation();
   const form = useForm<Values>({ defaultValues: { name: "", description: "" } });
-  const [picture, setPicture] = useState<File[]>([]);
 
   const onSubmit = async () => {
     if (!(await form.trigger())) throw new Error("invalid");
     const v = form.getValues();
-    const body = new FormData();
-    body.append("name", v.name.trim());
-    body.append("description", v.description.trim());
-    if (picture[0]) body.append("teamImage", picture[0]);
+    const body = { name: v.name.trim(), description: v.description.trim() };
     await createTeam(body).unwrap();
   };
 
@@ -40,7 +36,6 @@ export default function CreateTeamDialog({ trigger }: { trigger: ReactElement })
       onSubmit={onSubmit}
       onClosed={() => {
         form.reset();
-        setPicture([]);
       }}
     >
       <RHFField
@@ -52,7 +47,6 @@ export default function CreateTeamDialog({ trigger }: { trigger: ReactElement })
         render={(field) => <Input dir="auto" autoFocus {...field} />}
       />
       <RHFField control={form.control} name="description" label={t("about")} optional render={(field) => <Textarea dir="auto" rows={3} maxRows={8} {...field} />} />
-      <FileField label={t("picture")} description={t("pictureHint")} accept="image/png,image/jpeg,image/webp" maxSize={2 * 1024 * 1024} value={picture} onChange={setPicture} />
     </FormDialog>
   );
 }

@@ -12,6 +12,7 @@ import { ButtonLink } from "@/components/shared/ButtonLink";
 import type { AppMe } from "@/redux/features/platform/platformApi";
 import { useDeleteWorkspaceMutation, useRenameWorkspaceMutation } from "@/redux/features/platform/account";
 import { fieldErrorsOf, usePlatformProblem } from "./problems";
+import { WorkspaceBranding } from "@/components/account/WorkspaceBranding";
 import { Notice } from "./Notice";
 
 const NAME_MAX = 80;
@@ -66,36 +67,7 @@ export function WorkspaceSettings() {
     <div className="flex flex-col gap-6">
       <PageHeader title={t("title")} description={t("description", { name: me.workspace.name })} />
 
-      <Section title={t("generalTitle")} description={t("generalBody")}>
-        <form
-          className="flex flex-col gap-4"
-          noValidate
-          onSubmit={(e) => {
-            e.preventDefault();
-            save();
-          }}
-        >
-          <Field label={t("name")} required error={nameError ?? undefined} description={t("nameHint")}>
-            <Input value={name} maxLength={NAME_MAX} dir="auto" required onChange={(e) => setName(e.target.value)} />
-          </Field>
-          <dl className="grid grid-cols-[auto_minmax(0,1fr)] gap-x-4 gap-y-2 text-body-sm">
-            <dt className="text-fg-muted">{t("currency")}</dt>
-            <dd dir="ltr" className="text-end text-fg">
-              {me.workspace.currency}
-            </dd>
-            <dt className="text-fg-muted">{t("address")}</dt>
-            <dd dir="ltr" className="truncate text-end text-fg">
-              {me.workspace.slug}
-            </dd>
-          </dl>
-          {renameFailed ? <Notice tone="danger">{renameFailed}</Notice> : null}
-          <div className="flex justify-end">
-            <Button type="submit" variant="primary" loading={saving} disabled={name.trim() === me.workspace.name}>
-              {t("save")}
-            </Button>
-          </div>
-        </form>
-      </Section>
+      <Section title={t("generalTitle")} description={t("generalBody")}><WorkspaceBranding /></Section>
 
       <Section title={t("deleteTitle")} description={t("deleteBody")} danger>
         {cancelled ? (

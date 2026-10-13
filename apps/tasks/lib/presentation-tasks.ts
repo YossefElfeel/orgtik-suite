@@ -1,3 +1,4 @@
+import { csvCell } from "@orgtik/ui";
 /** Client-only presentation adapter. Nothing here writes to the existing Tasks API. */
 export type PresentationTask = {
   id: string; title: string; status: "todo" | "doing" | "done";
@@ -41,6 +42,6 @@ export { parseTaskCsv as parsePresentationCsv } from "./task-csv";
 
 export function presentationCsv(tasks: PresentationTask[]): string {
   // Spreadsheet apps treat these prefixes as formulas even in quoted fields.
-  const cell = (value: string) => `"${(/^[=+@-]/.test(value) ? "'" + value : value).replaceAll('"', '""')}"`;
+  const cell = csvCell;
   return [["title", "owner", "status", "label", "due", "recurrence"], ...tasks.map(t => [t.title, t.owner, t.status, t.label, t.due, t.recurrence])].map(row => row.map(cell).join(",")).join("\r\n");
 }

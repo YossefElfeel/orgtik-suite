@@ -7,18 +7,19 @@ import { useEffect, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { useTranslations } from "next-intl";
 import { Printer } from "@phosphor-icons/react";
-import { Badge, Button, Card, ErrorState, LoadingState, PageHeader, StatusBadge, useFormatter, useStatusLabel } from "@orgtik/ui";
+import { Badge, Button, Card, ErrorState, LoadingState, PageHeader, StatusBadge, useFormatter, useSuite, useStatusLabel } from "@orgtik/ui";
 import { statusOf } from "@/redux/features/platform/platformApi";
 import { useBillingInvoiceQuery, useBillingSubscriptionsQuery, type Invoice, type SubscriptionLine } from "@/redux/features/platform/billing";
 import { ButtonLink } from "@/components/shared/ButtonLink";
 import { Money, useCountryName, useDay, useLocalized, useTaxName } from "./shared";
+import useWorkspace from "@/hooks/use-workspace";
 import { RefundRequestPanel } from "@/components/account/AccountBilling";
 import { PaginatedTable } from "@orgtik/ui/table";
 
 export function InvoiceView({ id }: { id: string }) {
   const t = useTranslations("Billing.invoice");
   const tb = useTranslations("Billing");
-  const tv = useTranslations("AccountV3");
+  const tv = useTranslations("AccountV3"), r = useTranslations("Roadmap"), ws = useWorkspace(), suite = useSuite();
   const { data, isLoading, isError, error, refetch } = useBillingInvoiceQuery(id);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -34,10 +35,10 @@ export function InvoiceView({ id }: { id: string }) {
         breadcrumb={[{ label: tb("invoices.title"), href: "/billing/invoices" }, { label: <span dir="ltr">{data.number}</span> }]}
         title={t("title", { number: data.number })}
         status={<StatusBadge entity="invoice" state={data.state} viewer="customer" />}
-        actions={
+        actions={<div className="flex flex-wrap gap-2">{ws.isOwner && !suite.session?.workspaceContext?.actor.readOnly && !["suspended", "deleted", "cancelled"].includes(ws.me?.workspace.state || "") && ["open", "past_due"].includes(data.state) ? <ButtonLink href={`/billing/pay/${encodeURIComponent("invoice:" + data.id)}`}>{r("payInvoice")}</ButtonLink> : null}
           <Button variant="secondary" startIcon={<Printer />} onClick={() => window.print()}>
             {tv("invoicePdf")}
-          </Button>
+          </Button></div>
         }
       />
       <Card padding="none" className="overflow-hidden">

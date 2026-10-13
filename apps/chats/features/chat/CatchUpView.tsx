@@ -32,14 +32,14 @@ export function CatchUpView() {
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <header
-        className={"flex shrink-0 items-center justify-between gap-3 px-4 py-2.5 "+("ch-background-a8869d")}
+        className={"flex shrink-0 items-center justify-between gap-3 px-4 py-2.5 "+("ch-background-transparent")}
 
       >
         <div className="flex items-baseline gap-2.5">
-          <h1 className={"hq-title "+("ch-color-7f7330")} >
+          <h1 className={"hq-title "+("ch-color-var---color-ink")} >
             {t("catchup.title", "Catch up")}
           </h1>
-          <span className={"tabular text-body-sm "+("ch-color-4a0211")} >
+          <span className={"tabular text-body-sm "+("ch-color-var---color-ink-muted")} >
             {t("catchup.count", "{n} things need you", { n: total })}
           </span>
         </div>
@@ -79,14 +79,14 @@ export function CatchUpView() {
                     <li key={c.id}>
                       <Link
                         href={`/hq/chat/${c.id}`}
-                        className={"hq-row flex items-center gap-2.5 px-3 py-2.5 "+("ch-background-751d03"+' '+"ch-border-5065d4"+' '+"ch-border-radius-8d459a")}
+                        className={"hq-row flex items-center gap-2.5 px-3 py-2.5 "+("ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline"+' '+"ch-border-radius-var---radius-card")}
 
                       >
-                        <ChatCircle size={16} aria-hidden="true" className={"ch-color-4a0211"}  />
-                        <span className={"flex-1 text-body-sm font-medium "+("ch-color-7f7330")} >
+                        <ChatCircle size={16} aria-hidden="true" className={"ch-color-var---color-ink-muted"}  />
+                        <span className={"flex-1 text-body-sm font-medium "+("ch-color-var---color-ink")} >
                           <bdi>{c.name}</bdi>
                         </span>
-                        <span className={"tabular text-caption "+("ch-color-4a0211")} >
+                        <span className={"tabular text-caption "+("ch-color-var---color-ink-muted")} >
                           {t("catchup.unreadCount", "{n} unread", { n: c.unread })}
                         </span>
                       </Link>
@@ -123,12 +123,12 @@ function MentionRow({ message }: { message: Message }) {
     <li>
       <Link
         href={`/hq/chat/${message.channelId}`}
-        className={"hq-row flex flex-col gap-2 px-3 py-2.5 "+("ch-background-751d03"+' '+"ch-border-5065d4"+' '+"ch-border-radius-8d459a")}
+        className={"hq-row flex flex-col gap-2 px-3 py-2.5 "+("ch-background-var---color-surface"+' '+"ch-border-1px-solid-var---color-hairline"+' '+"ch-border-radius-var---radius-card")}
 
       >
         <div className="flex items-center gap-2">
-          <At size={13} weight="bold" aria-hidden="true" className={"ch-color-55f463"}  />
-          <span className={"text-caption font-medium "+("ch-color-4a0211")} >
+          <At size={13} weight="bold" aria-hidden="true" className={"ch-color-var---color-ink-brand"}  />
+          <span className={"text-caption font-medium "+("ch-color-var---color-ink-muted")} >
             <bdi>
               {channel
                 ? channel.kind === "public" || channel.kind === "private"
@@ -137,7 +137,7 @@ function MentionRow({ message }: { message: Message }) {
                 : ""}
             </bdi>
           </span>
-          <span className={"tabular ms-auto text-caption "+("ch-color-094083")} >
+          <span className={"tabular ms-auto text-caption "+("ch-color-var---color-ink-subtle")} >
             {formatRelative(message.createdAt)}
           </span>
         </div>
@@ -146,7 +146,7 @@ function MentionRow({ message }: { message: Message }) {
 
         <div className="flex items-start gap-2.5">
           <Avatar name={author.name} initials={author.initials} tint={author.tint} size={28} hideStatus />
-          <p className={"min-w-0 flex-1 text-body-sm leading-snug "+("ch-color-7f7330")} >
+          <p className={"min-w-0 flex-1 text-body-sm leading-snug "+("ch-color-var---color-ink")} >
             <span className="font-semibold"><bdi>{author.name.split(" ")[0]}</bdi>: </span>
             <bdi>{message.text}</bdi>
           </p>

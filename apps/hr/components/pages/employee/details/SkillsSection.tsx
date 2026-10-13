@@ -7,8 +7,9 @@ import { useEmployeeLabels } from "@/hooks/useEmploymentTypeLabel";
 type SkillsSectionProps = {
     skills: string[];
     isLoading?: boolean;
+  onEdit?: () => void;
 };
-export function SkillsSection({ skills = [], isLoading }: SkillsSectionProps) {
+export function SkillsSection({ skills = [], isLoading, onEdit }: SkillsSectionProps) {
     const t = useTranslations("employees.details.sections");
     const labels = useEmployeeLabels();
     if (isLoading) {
@@ -18,7 +19,7 @@ export function SkillsSection({ skills = [], isLoading }: SkillsSectionProps) {
         </div>
       </InfoCardSkeleton>);
     }
-    return (<InfoCard title={t("skills")} icon={User} onEdit={() => { }}>
+    return (<InfoCard title={t("skills")} icon={User} onEdit={onEdit}>
       <div className="flex flex-wrap gap-2">
         {skills?.map((skill) => (<Badge key={skill} className="px-3 py-1.5 text-sm font-normal text-secondary border-border">
             {labels.skillCode(skill) ?? <bdi>{skill}</bdi>}

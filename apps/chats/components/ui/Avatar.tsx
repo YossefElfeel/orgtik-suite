@@ -58,7 +58,7 @@ export function PresenceMark({ status, px }: { status: Status; px: number }) {
       height={px}
       viewBox="0 0 16 16"
       aria-hidden="true"
-      className={"ch-display-2a1b75"}
+      className={"ch-display-block"}
     >
       {/* A ground disc so the mark reads on any surface it lands on. */}
       <circle cx="8" cy="8" r="8" fill="var(--color-surface)" />

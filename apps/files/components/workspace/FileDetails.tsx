@@ -213,7 +213,7 @@ export function FileDetails({
           </p>
         )}
         {!file.deletedAt && version ? (
-          /spreadsheet|presentation|excel|powerpoint/.test(version.mimeType) ? (
+          /^(text\/|application\/json$)/.test(version.mimeType) ? <ProtectedText path={previewFile.url} /> : /spreadsheet|presentation|excel|powerpoint/.test(version.mimeType) ? (
             <PackagedPreview fileId={fileId} versionId={version.id} />
           ) : (
             <div className="mt-3">
@@ -221,7 +221,7 @@ export function FileDetails({
             </div>
           )
         ) : null}
-        {canWrite && !file.whiteboard ? (
+        {canWrite && !file.whiteboard && currentSamples.length > 0 ? (
           <form
             className="mt-4 flex flex-col gap-3"
             onSubmit={(event) => {
@@ -721,4 +721,12 @@ function ProtectedPage({ path, label }: { path: string; label: string }) {
       className="h-auto w-full rounded-field border border-line"
     />
   ) : null;
+}
+
+function ProtectedText({ path }: { path: string }) {
+  const object = useProtectedObjectUrl(path), [text, setText] = useState<{ url: string; value: string }>();
+  useEffect(() => { if (!object.objectUrl) return; let live = true; const url = object.objectUrl; void fetch(url).then(response => response.text()).then(value => { if (live) setText({ url, value: value.slice(0, 250000) }); }); return () => { live = false; }; }, [object.objectUrl]);
+  if (object.loading) return <LoadingState rows={2} />;
+  if (object.error) return <ErrorState size="compact" />;
+  return text?.url === object.objectUrl ? <pre dir="auto" className="max-h-96 overflow-auto whitespace-pre-wrap break-words rounded-field border border-line bg-sunken p-4 text-body-sm">{text.value}</pre> : null;
 }

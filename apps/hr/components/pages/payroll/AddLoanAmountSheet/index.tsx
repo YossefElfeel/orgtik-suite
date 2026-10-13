@@ -1,160 +1,35 @@
 "use client";
-import { Info, Plus } from "@phosphor-icons/react";
-
-import ReusableSheet from "@/components/shared/ResuableSheet";
-import { Button } from "@orgtik/ui";
-import TextFormEle from "@/components/ui/form/text-form-element";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
-import { z } from "zod";
-
+import { Button, Field, Select, Input, ErrorState, LoadingState, EmptyState, useFormatter } from "@orgtik/ui";
+import { RHFField } from "@orgtik/ui/rhf";
+import ReusableSheet from "@/components/shared/ResuableSheet";
+import { useGetLoansQuery } from "@/redux/features/loan/loanApi";
 import { useAddPayrollLoanToRunMutation } from "@/redux/features/payroll/payrollApi";
-
-const FORM_ID = "payroll-loan-add-amount-form";
-
-type FormValues = {
-  totalLoans: number;
-  paidMonthly: number;
-  addedAmount: number;
-  remainingAmount: number;
-};
-
-type AddLoanAmountSheetProps = {
-  runId?: number;
-  employeeId?: number;
-  trigger?: React.ReactNode;
-};
-
-export default function AddLoanAmountSheet({ runId, employeeId, trigger }: AddLoanAmountSheetProps) {
-  const t = useTranslations("payroll.loanDetail.addAmountSheet");
-  const [open, setOpen] = useState(false);
-
-  const [addLoanToRun, { isLoading }] = useAddPayrollLoanToRunMutation();
-
-  const schema = z.object({
-    totalLoans: z.number(),
-    paidMonthly: z.number(),
-    addedAmount: z.number().min(0, t("validation.addedMin")),
-    remainingAmount: z.number(),
-  });
-
-  const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      totalLoans: 30000,
-      paidMonthly: 15000,
-      addedAmount: 15000,
-      remainingAmount: 15000,
-    },
-  });
-
-  async function onSubmit(data: FormValues) {
-    if (!runId || !employeeId) return;
-    try {
-      await addLoanToRun({
-        runId,
-        body: {
-          employeeId,
-          loanId: 1, // Placeholder: in a real app, this would come from the specific loan being added
-          amount: data.addedAmount,
-          notes: "Added via payroll dashboard",
-        },
-      }).unwrap();
-      handleOpenChange(false);
-    } catch (error) {
-      console.error("Failed to add loan to run:", error);
-    }
-  }
-
-  function handleOpenChange(next: boolean) {
-    setOpen(next);
-    if (!next) {
-      form.reset({
-        totalLoans: 30000,
-        paidMonthly: 15000,
-        addedAmount: 15000,
-        remainingAmount: 15000,
-      });
-    }
-  }
-
-  return (
-    <ReusableSheet
-      open={open}
-      onOpenChange={handleOpenChange}
-      side="right"
-      title={t("title")}
-      trigger={
-        trigger || (
-          <Button size="lg">
-            <Plus className="size-4.5" />
-            {t("trigger")}
-          </Button>
-        )
-      }
-      footer={
-        <>
-          <Button
-            size="lg"
-            variant="secondary"
-            type="button"
-            onClick={() => handleOpenChange(false)}
-          >
-            {t("actions.cancel")}
-          </Button>
-          <Button type="submit" form={FORM_ID} size="lg">
-            {t("actions.submit")}
-          </Button>
-        </>
-      }
-    >
-      <FormProvider {...form}>
-        <form
-          id={FORM_ID}
-          className="space-y-6"
-          onSubmit={form.handleSubmit(onSubmit)}
-        >
-          <TextFormEle
-            form={form}
-            name="totalLoans"
-            label={t("fields.totalLoans")}
-            type="number"
-            readOnly
-            disabled
-          />
-          <TextFormEle
-            form={form}
-            name="paidMonthly"
-            label={t("fields.paidMonthly")}
-            type="number"
-            readOnly
-            disabled
-          />
-          <TextFormEle
-            form={form}
-            name="addedAmount"
-            label={t("fields.addedAmount")}
-            type="number"
-            placeholder={t("fields.addedAmountPlaceholder")}
-          />
-          <div className="space-y-1.5">
-            <TextFormEle
-              form={form}
-              name="remainingAmount"
-              label={t("fields.remainingAmount")}
-              type="number"
-              readOnly
-              disabled
-            />
-            <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <Info className="size-3.5 shrink-0" aria-hidden />
-              {t("helper.remainingCalculated")}
-            </p>
-          </div>
-        </form>
-      </FormProvider>
-    </ReusableSheet>
-  );
+import { loanAmountSchema } from "@/schemas/payroll/loan-amount.schemas";
+import type { LoanAmountProps, LoanAmountValues } from "@/types/loan-amount";
+const FORM_ID = "payroll-selected-loan";
+export default function AddLoanAmountSheet({ runId, employeeId, trigger }: LoanAmountProps) {
+  const t = useTranslations("payroll.loanDetail.addAmountSheet"), r = useTranslations("Roadmap"), f = useFormatter();
+  const [open, setOpen] = useState(false), [add, state] = useAddPayrollLoanToRunMutation();
+  const loans = useGetLoansQuery({ employeeId, status: "active", limit: 100 }, { skip: !open || !employeeId });
+  const form = useForm<LoanAmountValues>({ resolver: zodResolver(loanAmountSchema(r("loanAmount"))), defaultValues: { loanId: "", amount: 0 } });
+  const available = (loans.data?.data.items || []).filter(loan => loan.remainingAmount > 0);
+  const selected = available.find(loan => String(loan.id) === form.watch("loanId"));
+  const amount = form.watch("amount");
+  const close = (value: boolean) => { if (state.isLoading) return; setOpen(value); if (!value) form.reset(); };
+  return <ReusableSheet open={open} onOpenChange={close} title={t("title")} trigger={trigger || <Button>{t("trigger")}</Button>} footer={<><Button variant="secondary" disabled={state.isLoading} onClick={() => close(false)}>{t("actions.cancel")}</Button><Button form={FORM_ID} type="submit" loading={state.isLoading} disabled={!selected || !runId || !employeeId}>{t("actions.submit")}</Button></>}>
+    {loans.isLoading ? <LoadingState rows={3} /> : loans.isError ? <ErrorState onRetry={() => void loans.refetch()} /> : !available.length ? <EmptyState title={r("noLoans")} /> : <form id={FORM_ID} className="flex flex-col gap-5" onSubmit={form.handleSubmit(async values => {
+      if (!selected || !runId || !employeeId || values.amount > selected.remainingAmount) { form.setError("amount", { message: r("loanAmount") }); return; }
+      try { await add({ runId, body: { employeeId, loanId: selected.id, amount: values.amount } }).unwrap(); setOpen(false); form.reset(); }
+      catch { form.setError("root", { message: r("saveError") }); }
+    })}>
+      <Field label={r("chooseLoan")} error={form.formState.errors.loanId?.message}><Select value={form.watch("loanId")} options={available.map(loan => ({ value: String(loan.id), label: `${loan.title} · ${f.money(loan.remainingAmount, loan.currency)}` }))} onValueChange={value => { const loan = available.find(row => String(row.id) === value); form.setValue("loanId", value || "", { shouldValidate: true }); form.setValue("amount", loan ? Math.min(loan.installmentAmount, loan.remainingAmount) : 0, { shouldValidate: true }); }} /></Field>
+      {selected ? <dl className="grid grid-cols-2 gap-3 text-body-sm"><dt>{t("fields.totalLoans")}</dt><dd><bdi>{f.money(selected.principalAmount, selected.currency)}</bdi></dd><dt>{t("fields.remainingAmount")}</dt><dd><bdi>{f.money(Math.max(0, selected.remainingAmount - (Number.isFinite(amount) ? amount : 0)), selected.currency)}</bdi></dd></dl> : null}
+      <RHFField control={form.control} name="amount" label={t("fields.addedAmount")} required render={({ value, onChange, ...field }) => <Input {...field} type="number" min={0.01} step="0.01" max={selected?.remainingAmount} value={Number.isFinite(value) ? value : ""} onChange={event => onChange(event.target.valueAsNumber)} />} />
+      {form.formState.errors.root ? <p role="alert" className="text-danger">{form.formState.errors.root.message}</p> : null}
+    </form>}
+  </ReusableSheet>;
 }

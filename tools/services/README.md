@@ -1,3 +1,7 @@
+# Local use
+
+Use [program/local-prototype.md](../../program/local-prototype.md) for development, prebuilt preview, data persistence and performance checks. The configuration below is retained for optional hosted releases.
+
 # OrgTik Services on separate Hobby projects
 
 The owner confirmed this split after Vercel rejected the combined deployment's
@@ -97,7 +101,7 @@ Cloud releases are manual. Publishing local changes does not start a Vercel
 deployment. Run the Services workflow on `main` explicitly for a cloud release.
 
 The main-only workflow validates the reviewed source, then builds and deploys
-the nine frontend/private-backend projects with a maximum of two parallel jobs.
+the nine frontend/private-backend projects in parallel on independent runners.
 Each artifact preserves original backend assets and dependencies, rejects Edge
 output, and stops if it contains more than twelve dedicated functions. It lists
 Next.js routes awaiting provider bundling separately; Vercel must accept their
@@ -113,7 +117,9 @@ is configured for future Preview releases.
 Provisioning creates only the confirmed project names. It attaches the existing
 Redis integration directly, preserving managed Secrets and the original
 connection's variable prefix. Credential values are never exported. The shared
-public origin is set in each project's `SUITE_SERVICES_PUBLIC_URL`. Earlier
+mock journal can also be reconnected by its confirmed resource identity if the
+old source project was deleted; provisioning never creates replacement storage.
+The shared public origin is set in each project's `SUITE_SERVICES_PUBLIC_URL`. Earlier
 per-app URL settings are not copied. Existing standalone projects remain
 available; automatic legacy deployment matrices are skipped.
 

@@ -19,6 +19,7 @@ import { handoffHref } from "@/lib/handoff";
 import { API_URL } from "@/constants/env";
 import { PASSWORD_MAX, PASSWORD_MIN } from "@/lib/password";
 import { AuthPanel } from "@/components/auth/AuthPanel";
+import { LOCALE_COOKIE, isLocale } from "@/i18n/config";
 import { useMounted } from "@/hooks/use-mounted";
 
 const EmailField = createRHFField(Input);
@@ -56,6 +57,11 @@ export default function LoginPage() {
       const staffTarget = requestedMode === "staff" && (requestedTarget === "admin" || requestedTarget === "wm") ? requestedTarget : null;
       const response = await login({ ...data, ...(staffTarget ? { mode: "staff", target: staffTarget } as const : {}) }).unwrap();
       const user = response?.data?.user;
+      const defaultLanguage = response.data.workspaceContext?.workspace.defaultLanguage;
+      if (!document.cookie.split(";").some(value => value.trim().startsWith(LOCALE_COOKIE + "=")) && isLocale(defaultLanguage)) {
+        document.cookie = `${LOCALE_COOKIE}=${defaultLanguage}; path=/; max-age=31536000; SameSite=Lax`;
+        router.refresh();
+      }
       // Customers land in their workspace (USR, D-011): Sales is a CRM, opened from the rail.
       // Sent here by another suite app after its session ended: back to that page in that app,
       // through a one-time code (TASKS-021). Only the person's own apps qualify.

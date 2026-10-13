@@ -12,6 +12,7 @@ import { cn } from "@orgtik/ui";
 import useWorkspace from "@/hooks/use-workspace";
 import { useGetNotificationsQuery, useMarkNotificationsReadMutation, type AppNotification } from "@/redux/features/platform/account";
 import { usePlatformProblem } from "./problems";
+import { notificationTitle } from "./notification-text";
 import { Notice } from "./Notice";
 
 const ICONS: Record<string, React.ReactNode> = {
@@ -34,6 +35,7 @@ const dayKey = (iso: string) => {
 };
 
 export function NotificationsView() {
+  const roadmap = useTranslations("Roadmap");
   const t = useTranslations("Account.notifications");
   const f = useFormatter();
   const ws = useWorkspace();
@@ -137,11 +139,11 @@ export function NotificationsView() {
                             {!n.read ? <span aria-hidden="true" className="size-2 shrink-0 rounded-pill bg-action-brand" /> : null}
                             {href ? (
                               <Link href={href} dir="auto" className={cn("break-words text-body text-fg underline-offset-2 hover:underline", !n.read && "font-semibold")} onClick={() => !n.read && markRead([n.id])}>
-                                {n.title}
+                                {notificationTitle(n, roadmap)}
                               </Link>
                             ) : (
                               <span dir="auto" className={cn("break-words text-body text-fg", !n.read && "font-semibold")}>
-                                {n.title}
+                                {notificationTitle(n, roadmap)}
                               </span>
                             )}
                           </p>
@@ -153,7 +155,7 @@ export function NotificationsView() {
                           <Button size="sm" variant="ghost" startIcon={<Check />} onClick={() => markRead([n.id])}>
                             {t("markOne")}
                             <span className="sr-only">
-                              : <span dir="auto">{n.title}</span>
+                              : <span dir="auto">{notificationTitle(n, roadmap)}</span>
                             </span>
                           </Button>
                         ) : null}

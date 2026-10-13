@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { ArrowUp, ArrowDown } from "@phosphor-icons/react";
+import CrmRecipes from "@/components/CrmRecipes";
 import ConfigDialog from "@/components/dialogs/crm/ConfigDialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -329,6 +330,7 @@ export default function CrmSettings() {
           onClose={() => setKind(undefined)}
         />
       ) : null}
-    </div>
+    <CrmRecipes crm={data} />
+</div>
   );
 }

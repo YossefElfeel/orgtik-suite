@@ -184,14 +184,14 @@ export function CallStage({
   const remoteShare = meeting.sharingUserId && meeting.sharingUserId !== me.id ? meeting.sharingUserId : null;
 
   return (
-    <div className={"flex min-h-0 flex-1 flex-col "+("ch-background-db4104")} >
+    <div className={"flex min-h-0 flex-1 flex-col "+("ch-background-var---color-paper-900")} >
       <p className="px-4 pt-3"><Badge>{t("v3.sampleCall","Local sample call · no live media service")}</Badge></p>
       <header className="flex shrink-0 items-center justify-between gap-3 px-4 py-2.5">
         <div className="flex min-w-0 items-baseline gap-2.5">
-          <h1 className={"truncate text-body-sm font-semibold "+("ch-color-343ada")} >
+          <h1 className={"truncate text-body-sm font-semibold "+("ch-color-var---color-paper-100")} >
             <bdi>{meeting.title}</bdi>
           </h1>
-          <span className={"tabular text-caption "+("ch-color-1a360f")} >
+          <span className={"tabular text-caption "+("ch-color-var---color-paper-500")} >
             {formatDuration(seconds)}
           </span>
         </div>
@@ -199,7 +199,7 @@ export function CallStage({
           <Chip tone="danger">
             <span
               aria-hidden="true"
-              className={"ch-width-0b4791"+' '+"ch-height-ba2ef8"+' '+"ch-border-radius-189003"+' '+"ch-background-adbce8"+' '+"ch-display-60e32d"}
+              className={"ch-width-7px"+' '+"ch-height-7px"+' '+"ch-border-radius-var---radius-chip"+' '+"ch-background-var---color-danger-600"+' '+"ch-display-inline-block"}
             />
             {t("call.recording", "Recording")}
           </Chip>
@@ -223,18 +223,18 @@ export function CallStage({
               urgent than anything else on this screen. */}
           {waiting.length > 0 && (
             <div
-              className={"mb-3 flex flex-wrap items-center gap-3 px-3 py-2.5 "+("ch-background-ea65cd"+' '+"ch-border-radius-8d459a"+' '+"ch-border-9c1a9f")}
+              className={"mb-3 flex flex-wrap items-center gap-3 px-3 py-2.5 "+("ch-background-var---color-paper-800"+' '+"ch-border-radius-var---radius-card"+' '+"ch-border-1px-solid-var---color-paper-700")}
 
             >
               {waiting.map((g) => (
                 <div key={g.email} className="flex flex-1 items-center gap-2.5">
                   <Avatar name={g.name} initials={initialsOf(g.name)} tint={3} size={28} guest hideStatus />
                   <div className="min-w-0 flex-1">
-                    <p className={"truncate text-body-sm font-medium "+("ch-color-343ada")} >
+                    <p className={"truncate text-body-sm font-medium "+("ch-color-var---color-paper-100")} >
                       {t("call.waiting", "{name} is waiting", { name: g.name })}
                     </p>
                     {g.company && (
-                      <p className={"truncate text-caption "+("ch-color-1a360f")} >
+                      <p className={"truncate text-caption "+("ch-color-var---color-paper-500")} >
                         {g.company}
                       </p>
                     )}
@@ -242,7 +242,7 @@ export function CallStage({
                   <Button variant="primary" size="sm" onClick={() => admitGuest(meeting.id, g.email)}>
                     {t("call.admit", "Admit")}
                   </Button>
-                  <Button size="sm" variant="ghost" onClick={() => declineGuest(meeting.id, g.email)} className={"ch-color-343ada"} >
+                  <Button size="sm" variant="ghost" onClick={() => declineGuest(meeting.id, g.email)} className={"ch-color-var---color-paper-100"} >
                     {t("call.decline", "Decline")}
                   </Button>
                 </div>
@@ -254,10 +254,10 @@ export function CallStage({
             /* Someone else's screen: the view from the other side of the
                presenter. The share fills the stage; people become a strip. */
             <div className="flex min-h-0 flex-1 flex-col gap-2">
-              <div className={"relative min-h-0 flex-1 overflow-hidden "+("ch-background-781b0e"+' '+"ch-border-radius-8d459a")} >
+              <div className={"relative min-h-0 flex-1 overflow-hidden "+("ch-background-var---color-paper-950"+' '+"ch-border-radius-var---radius-card")} >
                 <RemoteShare title={meeting.title} />
                 <span
-                  className={"absolute start-3 top-3 px-2 py-1 text-caption font-medium "+("ch-background-db4104"+' '+"ch-color-343ada"+' '+"ch-border-radius-189003")}
+                  className={"absolute start-3 top-3 px-2 py-1 text-caption font-medium "+("ch-background-var---color-paper-900"+' '+"ch-color-var---color-paper-100"+' '+"ch-border-radius-var---radius-chip")}
 
                 >
                   {t("call.theirShare", "{name} is sharing their screen", { name: sharer?.name ?? "" })}
@@ -275,7 +275,7 @@ export function CallStage({
           ) : sharing ? (
             <div className="flex min-h-0 flex-1 flex-col gap-2">
               <div
-                className={"relative min-h-0 flex-1 overflow-hidden "+("ch-background-781b0e"+' '+"ch-border-radius-8d459a")}
+                className={"relative min-h-0 flex-1 overflow-hidden "+("ch-background-var---color-paper-950"+' '+"ch-border-radius-var---radius-card")}
 
               >
                 <video
@@ -286,7 +286,7 @@ export function CallStage({
                   aria-label={t("call.yourScreen", "Your shared screen")}
                 />
                 <span
-                  className={"absolute start-3 top-3 px-2 py-1 text-caption font-medium "+("ch-background-db4104"+' '+"ch-color-343ada"+' '+"ch-border-radius-189003")}
+                  className={"absolute start-3 top-3 px-2 py-1 text-caption font-medium "+("ch-background-var---color-paper-900"+' '+"ch-color-var---color-paper-100"+' '+"ch-border-radius-var---radius-chip")}
 
                 >
                   {t("call.youAreSharing", "You are sharing your screen")}
@@ -302,7 +302,7 @@ export function CallStage({
               </div>
             </div>
           ) : panel === "board" ? (
-            <div className={"min-h-0 flex-1 overflow-hidden "+("ch-border-radius-8d459a")} >
+            <div className={"min-h-0 flex-1 overflow-hidden "+("ch-border-radius-var---radius-card")} >
               <BoardScreen meetingId={meeting.id} embedded />
             </div>
           ) : view === "speaker" && participants.length > 1 ? (
@@ -332,7 +332,7 @@ export function CallStage({
             </div>
           ) : (
             <div
-              className={("grid min-h-0 flex-1 gap-2 "+("ch-grid-auto-rows-5a7d9d"))+" "+(geometryClass({gridTemplateColumns:`repeat(${gridColumns(participants.length + admitted.length)}, minmax(0, 1fr))`}))}
+              className={("grid min-h-0 flex-1 gap-2 "+("ch-grid-auto-rows-1fr"))+" "+(geometryClass({gridTemplateColumns:`repeat(${gridColumns(participants.length + admitted.length)}, minmax(0, 1fr))`}))}
 
             >
               <SelfTile camera={camera} selfRef={selfRef} muted={muted} />
@@ -350,11 +350,11 @@ export function CallStage({
 
         {(panel === "people" || panel === "chat") && (
           <aside
-            className={"hidden w-[300px] shrink-0 flex-col lg:flex "+("ch-background-751d03"+' '+"ch-border-inline-start-c791b2")}
+            className={"hidden w-[300px] shrink-0 flex-col lg:flex "+("ch-background-var---color-surface"+' '+"ch-border-inline-start-1px-solid-var---color-hairline")}
 
           >
             <header
-              className={"flex items-center justify-between px-3 py-2.5 "+("ch-border-bottom-9cb2f4")}
+              className={"flex items-center justify-between px-3 py-2.5 "+("ch-border-bottom-1px-solid-var---color-hairline")}
 
             >
               <strong className="text-body-sm">
@@ -371,7 +371,7 @@ export function CallStage({
                     so everyone sees it and the person is told. */}
                 {can.moderate && participants.length > 1 && (
                   <div className="flex items-center justify-between gap-2 px-2 pb-2">
-                    <span className={"text-caption "+("ch-color-4a0211")} >
+                    <span className={"text-caption "+("ch-color-var---color-ink-muted")} >
                       {t("call.hostControls", "Host controls")}
                     </span>
                     <Button size="sm" onClick={() => participants.filter((id) => id !== me.id).forEach((id) => setServerMute(id, true))}>
@@ -429,7 +429,7 @@ export function CallStage({
         }
       >
         <div className="flex flex-col gap-3">
-          <p className={"text-body-sm leading-relaxed "+("ch-color-7f7330"+' '+"ch-max-width-cc7c20")} >
+          <p className={"text-body-sm leading-relaxed "+("ch-color-var---color-ink"+' '+"ch-max-width-56ch")} >
             {t(
               "call.consentBody",
               "Everyone in the call, including guests, is shown a recording indicator for as long as it runs. Ask them out loud before you start.",
@@ -441,13 +441,13 @@ export function CallStage({
               t("call.consentPoint2", "It follows the workspace retention setting like any other file."),
               t("call.consentPoint3", "Anyone in the call can ask you to stop, and stopping is immediate."),
             ].map((line) => (
-              <li key={line} className={"flex gap-2 text-body-sm "+("ch-color-4a0211")} >
+              <li key={line} className={"flex gap-2 text-body-sm "+("ch-color-var---color-ink-muted")} >
                 <span aria-hidden="true">&middot;</span>
                 <span>{line}</span>
               </li>
             ))}
           </ul>
-          <p className={"text-body-sm "+("ch-color-4a0211")} >
+          <p className={"text-body-sm "+("ch-color-var---color-ink-muted")} >
             {t("call.consentWho", "In the call: {names}.", {
               names: [
                 ...participants.map((id) => allUsers.find((u) => u.id === id)?.name ?? id),
@@ -566,7 +566,7 @@ export function CallStage({
             open={confirmEnd}
             onOpenChange={setConfirmEnd}
             trigger={
-              <Button variant="ghost" className={"ms-2 "+("ch-color-343ada")} >
+              <Button variant="ghost" className={"ms-2 "+("ch-color-var---color-paper-100")} >
                 {t("call.endForAll", "End for everyone")}
               </Button>
             }
@@ -626,7 +626,7 @@ function SelfTile({
           ref={selfRef}
           muted
           playsInline
-          className={"h-full w-full object-cover "+("ch-transform-ff7784")}
+          className={"h-full w-full object-cover "+("ch-transform-scaleX--1")}
 
           aria-label={t("call.yourCamera", "Your camera")}
         />
@@ -634,7 +634,7 @@ function SelfTile({
         <div className="flex h-full w-full flex-col items-center justify-center gap-2">
           <Avatar name={me.name} initials={me.initials} tint={me.tint} size={small ? 28 : 56} hideStatus />
           {!small && camera.error && (
-            <p className={"px-3 text-center text-caption "+("ch-color-1a360f")} >
+            <p className={"px-3 text-center text-caption "+("ch-color-var---color-paper-500")} >
               {camera.error === "denied"
                 ? t("call.cameraDenied", "Camera blocked. Audio still works.")
                 : t("call.cameraMissing", "No camera found. Audio still works.")}
@@ -674,7 +674,7 @@ function GuestTile({ name, company }: { name: string; company?: string }) {
 function TileFrame({ children, small = false }: { children: React.ReactNode; small?: boolean }) {
   return (
     <div
-      className={"relative overflow-hidden "+("ch-background-ea65cd"+' '+"ch-border-radius-8d459a"+' '+(small?"ch-min-height-511dd9":"ch-min-height-2faa5e")+' '+(small?"":"ch-height-622640")+' '+(small?"ch-width-7fd2ee":"")+' '+(small?"ch-flex-shrink-6ee066":""))}
+      className={"relative overflow-hidden "+("ch-background-var---color-paper-800"+' '+"ch-border-radius-var---radius-card"+' '+(small?"ch-min-height-84px":"ch-min-height-120px")+' '+(small?"":"ch-height-100pct")+' '+(small?"ch-width-132px":"")+' '+(small?"ch-flex-shrink-0":""))}
 
     >
       {children}
@@ -687,7 +687,7 @@ function TileLabel({ name, muted, guest }: { name: string; muted?: boolean; gues
   return (
     <div className="absolute bottom-2 start-2 flex items-center gap-1.5">
       <span
-        className={"max-w-[180px] truncate px-2 py-0.5 text-caption font-medium "+("ch-background-781b0e"+' '+"ch-color-343ada"+' '+"ch-border-radius-189003")}
+        className={"max-w-[180px] truncate px-2 py-0.5 text-caption font-medium "+("ch-background-var---color-paper-950"+' '+"ch-color-var---color-paper-100"+' '+"ch-border-radius-var---radius-chip")}
 
       >
         {name}
@@ -695,11 +695,11 @@ function TileLabel({ name, muted, guest }: { name: string; muted?: boolean; gues
       {guest && <Chip>{t("call.guest", "Guest")}</Chip>}
       {muted && (
         <span
-          className={"flex items-center justify-center "+("ch-width-0f6c53"+' '+"ch-height-44a2f4"+' '+"ch-border-radius-189003"+' '+"ch-background-adbce8")}
+          className={"flex items-center justify-center "+("ch-width-20px"+' '+"ch-height-20px"+' '+"ch-border-radius-var---radius-chip"+' '+"ch-background-var---color-danger-600")}
 
           title={t("call.muted", "Muted")}
         >
-          <MicrophoneSlash size={11} weight="fill" aria-hidden="true" className={"ch-color-7b8a5e"}  />
+          <MicrophoneSlash size={11} weight="fill" aria-hidden="true" className={"ch-color-var---color-ink-inverse"}  />
         </span>
       )}
     </div>
@@ -717,10 +717,10 @@ function PersonRow({ userId, isMe, handUp, canMute }: { userId: string; isMe: bo
       <Avatar name={user.name} initials={user.initials} tint={user.tint} size={28} hideStatus />
       <span className="flex-1 text-body-sm">
         <bdi>{user.name}</bdi>
-        {isMe && <span className={"ch-color-094083"} > ({t("office.you", "you")})</span>}
-        {muted && <span className={"ch-color-094083"} > · {t("call.mutedByHost", "muted")}</span>}
+        {isMe && <span className={"ch-color-var---color-ink-subtle"} > ({t("office.you", "you")})</span>}
+        {muted && <span className={"ch-color-var---color-ink-subtle"} > · {t("call.mutedByHost", "muted")}</span>}
       </span>
-      {handUp && <Hand size={14} weight="fill" aria-hidden="true" className={"ch-color-3d9ecb"}  />}
+      {handUp && <Hand size={14} weight="fill" aria-hidden="true" className={"ch-color-var---color-presence-busy"}  />}
       {canMute && !isMe && (
         <Button size="sm" variant="ghost" onClick={() => setServerMute(userId, !muted)}>
           {muted ? t("call.unmute", "Unmute") : t("call.mute", "Mute")}
@@ -741,7 +741,7 @@ function MeetingChat({ channelId }: { channelId: string }) {
 
   if (messages.length === 0) {
     return (
-      <p className={"p-2 text-body-sm leading-relaxed "+("ch-color-4a0211")} >
+      <p className={"p-2 text-body-sm leading-relaxed "+("ch-color-var---color-ink-muted")} >
         {t("call.chatEmpty", "Messages sent here stay with the meeting, and are still here afterwards.")}
       </p>
     );
@@ -789,7 +789,7 @@ function DockButton({
         ? { "aria-pressed": active }
         : { "aria-expanded": expanded, ...(expanded && controls ? { "aria-controls": controls } : {}) })}
       title={label}
-      className={"hq-btn flex items-center justify-center "+("ch-width-d6db40"+' '+"ch-height-3a4095"+' '+"ch-border-radius-332348"+' '+(danger?"ch-background-adbce8":(active?"ch-background-f7c51f":"ch-background-ea65cd"))+' '+"ch-color-343ada"+' '+"ch-border-2eda1d")}
+      className={"hq-btn flex items-center justify-center "+("ch-width-40px"+' '+"ch-height-40px"+' '+"ch-border-radius-var---radius-control"+' '+(danger?"ch-background-var---color-danger-600":(active?"ch-background-var---color-paper-700":"ch-background-var---color-paper-800"))+' '+"ch-color-var---color-paper-100"+' '+"ch-border-none")}
 
     >
       {children}
@@ -825,25 +825,25 @@ function RemoteShare({ title }: { title: string }) {
   return (
     <div className="flex h-full w-full items-center justify-center p-6" aria-hidden="true">
       <div
-        className={"flex h-full w-full max-w-[880px] flex-col overflow-hidden "+("ch-background-751d03"+' '+"ch-border-radius-332348"+' '+"ch-box-shadow-85f924")}
+        className={"flex h-full w-full max-w-[880px] flex-col overflow-hidden "+("ch-background-var---color-surface"+' '+"ch-border-radius-var---radius-control"+' '+"ch-box-shadow-var---shadow-panel")}
 
       >
-        <div className={"flex items-center gap-2 px-3 py-2 "+("ch-border-bottom-9cb2f4")} >
+        <div className={"flex items-center gap-2 px-3 py-2 "+("ch-border-bottom-1px-solid-var---color-hairline")} >
           {[0, 1, 2].map((i) => (
-            <span key={i} className={"ch-width-0c3340"+' '+"ch-height-83ca52"+' '+"ch-border-radius-189003"+' '+"ch-background-7731cf"}  />
+            <span key={i} className={"ch-width-8px"+' '+"ch-height-8px"+' '+"ch-border-radius-var---radius-chip"+' '+"ch-background-var---color-paper-400"}  />
           ))}
-          <span className={"ms-2 text-caption "+("ch-color-4a0211")} >
+          <span className={"ms-2 text-caption "+("ch-color-var---color-ink-muted")} >
             {title} · invoice-template-v2.fig
           </span>
         </div>
         <div className="flex flex-1 flex-col gap-3 p-6">
-          <span className={"ch-width-6ac132"+' '+"ch-height-ad1b79"+' '+"ch-border-radius-edd97e"+' '+"ch-background-3a24e5"}  />
+          <span className={"ch-width-42pct"+' '+"ch-height-18px"+' '+"ch-border-radius-var---ot-radius-field"+' '+"ch-background-var---color-paper-300"}  />
           {[92, 84, 88, 60, 76, 40].map((w, i) => (
-            <span key={i} className={("ch-height-6a8e05"+' '+"ch-border-radius-edd97e"+' '+"ch-background-314b28")+" "+(geometryClass({width:`${w}%`}))}  />
+            <span key={i} className={("ch-height-10px"+' '+"ch-border-radius-var---ot-radius-field"+' '+"ch-background-var---color-surface-sunken")+" "+(geometryClass({width:`${w}%`}))}  />
           ))}
           <div className="mt-2 grid grid-cols-3 gap-3">
             {[0, 1, 2].map((i) => (
-              <span key={i} className={"ch-height-38bc9b"+' '+"ch-border-radius-edd97e"+' '+"ch-background-314b28"}  />
+              <span key={i} className={"ch-height-72px"+' '+"ch-border-radius-var---ot-radius-field"+' '+"ch-background-var---color-surface-sunken"}  />
             ))}
           </div>
         </div>

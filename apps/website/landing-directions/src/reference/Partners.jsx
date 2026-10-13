@@ -27,7 +27,7 @@ export function PartnerStrip() {
     );
     observer.observe(section.current);
     const resize = new ResizeObserver(() =>
-      setScrollable(group.current.scrollWidth > rail.current.clientWidth),
+      setScrollable(Boolean(group.current && rail.current && group.current.scrollWidth > rail.current.clientWidth)),
     );
     resize.observe(rail.current);
     resize.observe(group.current);

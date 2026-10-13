@@ -41,6 +41,7 @@ export type FilePolicy = {
   purgeDueCount: number;
   canWrite: boolean;
   canAcceptSamples: boolean;
+  localUploads?: boolean;
   shareLinks: boolean;
   billingReadOnly: boolean;
   readOnly: boolean;

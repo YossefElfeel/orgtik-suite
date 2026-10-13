@@ -73,10 +73,10 @@ export function EmailPreviews() {
         <Button size="sm" variant="ghost" href="/hq/settings">
           {t("email.back", "Back to settings")}
         </Button>
-        <h1 className={"hq-display mt-3 "+("ch-color-7f7330")} >
+        <h1 className={"hq-display mt-3 "+("ch-color-var---color-ink")} >
           {t("email.title", "The emails Chats sends")}
         </h1>
-        <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-4a0211"+' '+"ch-max-width-d350dc")} >
+        <p className={"mt-2 text-body-sm leading-relaxed "+("ch-color-var---color-ink-muted"+' '+"ch-max-width-62ch")} >
           {t(
             "email.intro",
             "Four, and only while the person is away. Each says why it came and links to the setting that controls it. Switch the language to see the longer locales stretch the subject lines.",
@@ -96,35 +96,35 @@ export function EmailPreviews() {
             <Panel key={m.id}>
               <div className="flex items-center justify-between gap-3">
                 <Chip>{m.kind}</Chip>
-                <span className={"text-caption "+("ch-color-094083")} >
+                <span className={"text-caption "+("ch-color-var---color-ink-subtle")} >
                   {t("email.from", "From {ws} Chats <hq@somion.org>", { ws: name })}
                 </span>
               </div>
-              <p className={"mt-3 text-body font-semibold "+("ch-color-7f7330")} >
+              <p className={"mt-3 text-body font-semibold "+("ch-color-var---color-ink")} >
                 {m.subject}
               </p>
-              <p className={"text-body-sm "+("ch-color-094083")} >
+              <p className={"text-body-sm "+("ch-color-var---color-ink-subtle")} >
                 {m.preheader}
               </p>
-              <div className={"mt-4 px-4 py-4 "+("ch-background-314b28"+' '+"ch-border-radius-332348")} >
-                <p className={"text-body-sm leading-relaxed "+("ch-color-7f7330")} >
+              <div className={"mt-4 px-4 py-4 "+("ch-background-var---color-surface-sunken"+' '+"ch-border-radius-var---radius-control")} >
+                <p className={"text-body-sm leading-relaxed "+("ch-color-var---color-ink")} >
                   {m.body}
                 </p>
                 {m.quote && (
                   <p
-                    className={"mt-3 border-s-2 ps-3 text-body-sm italic leading-relaxed "+("ch-border-color-be0af9"+' '+"ch-color-7f7330")}
+                    className={"mt-3 border-s-2 ps-3 text-body-sm italic leading-relaxed "+("ch-border-color-var---color-accent"+' '+"ch-color-var---color-ink")}
 
                   >
                     <bdi>{m.quote}</bdi>
                   </p>
                 )}
                 <span
-                  className={"mt-4 inline-block px-4 py-2 text-body-sm font-semibold "+("ch-background-3f17cb"+' '+"ch-color-7b8a5e"+' '+"ch-border-radius-332348")}
+                  className={"mt-4 inline-block px-4 py-2 text-body-sm font-semibold "+("ch-background-var---color-accent"+' '+"ch-color-var---color-ink-inverse"+' '+"ch-border-radius-var---radius-control")}
 
                 >
                   {m.cta}
                 </span>
-                <p className={"mt-4 text-caption leading-relaxed "+("ch-color-094083")} >
+                <p className={"mt-4 text-caption leading-relaxed "+("ch-color-var---color-ink-subtle")} >
                   {m.why} {t("email.settingsLink", "Notification settings · Unsubscribe from this kind")}
                 </p>
               </div>

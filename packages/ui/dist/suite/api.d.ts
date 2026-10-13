@@ -5,7 +5,7 @@ export declare class SuiteRequestError extends Error {
 }
 export declare const suiteApiRoot: (base: string) => string;
 export declare function suiteRequest<T>(base: string, path: string, options?: {
-    method?: "GET" | "POST" | "PATCH" | "DELETE";
+    method?: "GET" | "POST" | "PATCH" | "PUT" | "DELETE";
     body?: unknown;
     signal?: AbortSignal;
     keepalive?: boolean;

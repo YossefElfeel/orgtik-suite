@@ -1,4 +1,5 @@
 "use client";
+import { csvCell } from "@orgtik/ui";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { DownloadSimple, Plus, UploadSimple } from "@phosphor-icons/react";
@@ -20,7 +21,7 @@ import type { IProjectTask } from "@/types/tasks";
 type Row = IProjectTask & Partial<TaskMetadata> & { sectionId?: number; startDate?: string; project?: { id: number; name?: string; title?: string } };
 type Filters = { q: string; status: string; owner: string; priority: string; label: string; due: string };
 const initial: Filters = { q: "", status: "all", owner: "all", priority: "all", label: "all", due: "all" };
-const csvCell = (value: unknown) => { const text = String(value ?? ""); return `"${(/^[=+@-]/.test(text) ? "'" + text : text).replaceAll('"', '""')}"`; };
+
 export function TaskWorkbench({ sections, projectId, loading, error, onRetry, readOnly = false }: { sections: TaskSection[]; projectId?: number; loading: boolean; error?: { status?: number | string }; onRetry: () => void; readOnly?: boolean }) {
   const t = useTranslations("TasksV3"), tf = useTranslations("TaskList"), tp = useTranslations("Priority"), suite = useSuite(), f = useFormatter(), statusLabel = useStatusLabel();
   const { canEdit } = useTaskRoles();

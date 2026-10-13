@@ -29,17 +29,17 @@ export function ThreadPanel({ parentId, onClose }: { parentId: string; onClose: 
   if (!parent) return null;
 
   return (
-    <div className={"flex min-h-0 w-full flex-col "+("ch-background-751d03")} >
+    <div className={"flex min-h-0 w-full flex-col "+("ch-background-var---color-surface")} >
       <header
-        className={"flex shrink-0 items-center justify-between gap-2 px-4 py-2.5 "+("ch-border-bottom-9cb2f4")}
+        className={"flex shrink-0 items-center justify-between gap-2 px-4 py-2.5 "+("ch-border-bottom-1px-solid-var---color-hairline")}
 
       >
         <div className="min-w-0">
-          <h2 className={"text-body-sm font-semibold "+("ch-color-7f7330")} >
+          <h2 className={"text-body-sm font-semibold "+("ch-color-var---color-ink")} >
             {t("thread.title", "Thread")}
           </h2>
           {channel && (
-            <p className={"truncate text-caption "+("ch-color-094083")} >
+            <p className={"truncate text-caption "+("ch-color-var---color-ink-subtle")} >
               {channel.kind === "public" || channel.kind === "private"
                 ? `#${channel.name}`
                 : channel.name}
@@ -51,7 +51,7 @@ export function ThreadPanel({ parentId, onClose }: { parentId: string; onClose: 
             {following ? t("thread.following", "Following") : t("thread.follow", "Follow")}
           </Button>
           <Button variant="ghost" size="sm" iconOnly label={t("common.close", "Close")} onClick={onClose}>
-            <X size={14} weight="bold" aria-hidden="true" className={"ch-color-094083"}  />
+            <X size={14} weight="bold" aria-hidden="true" className={"ch-color-var---color-ink-subtle"}  />
           </Button>
         </div>
       </header>
@@ -62,12 +62,12 @@ export function ThreadPanel({ parentId, onClose }: { parentId: string; onClose: 
         <Message message={parent} grouped={false} />
 
         <div className="flex items-center gap-3 px-4 py-2">
-          <span className={"text-caption font-medium "+("ch-color-094083")} >
+          <span className={"text-caption font-medium "+("ch-color-var---color-ink-subtle")} >
             {replies.length === 1
               ? t("chat.oneReply", "1 reply")
               : t("chat.nReplies", "{n} replies", { n: replies.length })}
           </span>
-          <span className={"h-px flex-1 "+("ch-background-423228")}  />
+          <span className={"h-px flex-1 "+("ch-background-var---color-hairline")}  />
         </div>
 
         {replies.map((r, i) => (
@@ -82,12 +82,12 @@ export function ThreadPanel({ parentId, onClose }: { parentId: string; onClose: 
       {/* A reply can go to the channel too, for the people who are not in
           the thread. It is the same message sent twice, which is what the
           person asked for. */}
-      <label className={"flex cursor-pointer items-center gap-2 px-4 pt-2 text-caption "+("ch-color-4a0211")} >
+      <label className={"flex cursor-pointer items-center gap-2 px-4 pt-2 text-caption "+("ch-color-var---color-ink-muted")} >
         <input
           type="checkbox"
           checked={alsoSend}
           onChange={(e) => setAlsoSend(e.target.checked)}
-          className={"ch-width-eb53b5"+' '+"ch-height-946a99"+' '+"ch-accent-color-e56d5b"}
+          className={"ch-width-14px"+' '+"ch-height-14px"+' '+"ch-accent-color-var---color-accent"}
         />
         {t("thread.alsoSend", "Also send to {channel}", {
           channel: channel ? (channel.kind === "public" || channel.kind === "private" ? `#${channel.name}` : channel.name) : "",

@@ -1,4 +1,5 @@
 "use client";
+import { RecipeRunner } from "@/components/CrmRecipes/RecipeRunner";
 import { type ReactNode, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Archive, Kanban, Briefcase, CrownSimple, FileText, Pulse, SquaresFour, UserCircle, UserGear, UsersThree, Wallet, IdentificationBadge, Storefront, Truck, GearSix } from "@phosphor-icons/react";
@@ -42,6 +43,6 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
     demo={{ runtime: demoRuntime(process.env.NEXT_PUBLIC_DEMO_API, process.env.NEXT_PUBLIC_DEMO_WEB_URLS, process.env.NEXT_PUBLIC_DEMO_SOS_API), enabled: process.env.NODE_ENV === "development" || process.env.NEXT_PUBLIC_DEMO_PANEL === "1", appKey: "sales", onLocaleChange: next => router.replace(pathname, { locale: next }) }}
     sidebar={<Sidebar title={ts("appName")} sections={sections} />}
     userMenu={user ? <UserMenu name={fullName || ""} email={String(user.email || "")} avatarSrc={typeof user.avatar === "string" ? user.avatar : undefined} locales={routing.locales as readonly Locale[]} onLocaleChange={next => router.replace(pathname, { locale: next })} onSignOut={signOut}><MenuLinkItem href={`/${locale}/profile`} icon={<UserCircle />}>{t("profile")}</MenuLinkItem></UserMenu> : null}>
-    {logoutError ? <p role="alert" className="mb-4 text-body-sm text-danger">{te("logoutUnavailable")}</p> : null}{navigationError ? <p role="alert" className="mb-4 text-body-sm text-danger">{te("handoffUnavailable")}</p> : null}<CrmScopeGate>{canAccessRoute(role, pathname) ? children : <NoPermissionState titleAs="h1" title={te("noAccessTitle")} description={te("noAccessBody")} />}</CrmScopeGate>
+    {logoutError ? <p role="alert" className="mb-4 text-body-sm text-danger">{te("logoutUnavailable")}</p> : null}{navigationError ? <p role="alert" className="mb-4 text-body-sm text-danger">{te("handoffUnavailable")}</p> : null}<RecipeRunner /><CrmScopeGate>{canAccessRoute(role, pathname) ? children : <NoPermissionState titleAs="h1" title={te("noAccessTitle")} description={te("noAccessBody")} />}</CrmScopeGate>
   </SharedSuiteFrame>;
 }

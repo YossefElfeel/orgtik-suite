@@ -26,6 +26,7 @@ export function SalaryInformationSectionSkeleton() {
 export function SalaryInformationSection({
   salaryInformation,
   isLoading,
+  onEdit,
 }: SalaryInformationSectionProps) {
   const t = useTranslations("employees.details.salary");
   const tPayment = useTranslations("createUpdateEmployee.options.paymentTypes");
@@ -49,7 +50,7 @@ export function SalaryInformationSection({
     <InfoCard
       title={t("title")}
       icon={RefreshCw}
-      onEdit={() => {}}
+      onEdit={onEdit}
       gridClassName="min-w-0 max-sm:[&>div]:grid max-sm:[&>div]:grid-cols-[1.25rem_minmax(0,1fr)] max-sm:[&>div]:gap-y-1 max-sm:[&>div>p]:w-auto max-sm:[&>div>div]:col-start-2 [&>div>div]:[overflow-wrap:anywhere]"
       items={[
         {

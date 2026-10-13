@@ -51,18 +51,18 @@ export function PeopleStrip() {
           key={g.key}
           role="group"
           aria-label={g.label}
-          className={"flex shrink-0 items-center gap-1 px-1.5 py-1 "+((gi % 2?"ch-background-a8869d":"ch-background-314b28")+' '+"ch-border-radius-189003")}
+          className={"flex shrink-0 items-center gap-1 px-1.5 py-1 "+((gi % 2?"ch-background-transparent":"ch-background-var---color-surface-sunken")+' '+"ch-border-radius-var---radius-chip")}
 
         >
           <span
-            className={"me-0.5 max-w-[88px] truncate ps-1 text-micro font-semibold uppercase "+("ch-color-094083"+' '+"ch-letter-spacing-c5cfcd")}
+            className={"me-0.5 max-w-[88px] truncate ps-1 text-micro font-semibold uppercase "+("ch-color-var---color-ink-subtle"+' '+"ch-letter-spacing-0-05em")}
 
           >
             <bdi>{g.label}</bdi>
           </span>
           {g.hidden ? (
             <span
-              className={"tabular px-2 text-caption font-medium "+("ch-color-4a0211"+' '+"ch-line-height-87dfa8")}
+              className={"tabular px-2 text-caption font-medium "+("ch-color-var---color-ink-muted"+' '+"ch-line-height-34px")}
 
               title={t("office.hiddenRoom", "This room does not name who is inside")}
             >
@@ -73,13 +73,13 @@ export function PeopleStrip() {
               key={user.id}
               type="button"
               onClick={() => focusOn(user.id)}
-              className={"hq-btn flex items-center justify-center "+("ch-width-fb6a31"+' '+"ch-height-1ebb58"+' '+"ch-border-radius-189003")}
+              className={"hq-btn flex items-center justify-center "+("ch-width-34px"+' '+"ch-height-34px"+' '+"ch-border-radius-var---radius-chip")}
 
               title={t("office.findPerson", "Find {name} on the floor", { name: user.name })}
               aria-label={t("office.findPerson", "Find {name} on the floor", { name: user.name })}
             >
               <span
-                className={"ch-border-radius-189003"+' '+(user.id === me?"ch-box-shadow-f2b06b":"ch-box-shadow-f112e5")+' '+"ch-display-f984c5"}
+                className={"ch-border-radius-var---radius-chip"+' '+(user.id === me?"ch-box-shadow-0-0-0-2px-var---color-accent-0-0-0-3px-var---color-surface":"ch-box-shadow-0-0-0-2px-var---color-surface")+' '+"ch-display-inline-flex"}
               >
                 <Avatar
                   name={user.name}

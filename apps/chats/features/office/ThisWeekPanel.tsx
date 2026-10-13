@@ -37,7 +37,7 @@ export function ThisWeekPanel() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        className={"hq-btn flex items-center gap-1.5 px-2.5 "+("ch-min-height-4f3317"+' '+"ch-font-size-ba0694"+' '+"ch-font-weight-02a2d3"+' '+"ch-color-4a0211"+' '+"ch-border-8ff264"+' '+"ch-border-radius-332348"+' '+"ch-background-751d03")}
+        className={"hq-btn flex items-center gap-1.5 px-2.5 "+("ch-min-height-28px"+' '+"ch-font-size-var---ot-type-body-sm-size"+' '+"ch-font-weight-500"+' '+"ch-color-var---color-ink-muted"+' '+"ch-border-1px-solid-var---color-hairline-strong"+' '+"ch-border-radius-var---radius-control"+' '+"ch-background-var---color-surface")}
 
       >
         <span>{t("insights.thisWeek", "This week")}</span>
@@ -45,17 +45,17 @@ export function ThisWeekPanel() {
           size={12}
           weight="bold"
           aria-hidden="true"
-          className={"ch-color-094083"+' '+(open?"ch-transform-6e88a8":"ch-transform-e48099")+' '+"ch-transition-25ab2b"}
+          className={"ch-color-var---color-ink-subtle"+' '+(open?"ch-transform-rotate-180deg":"ch-transform-none")+' '+"ch-transition-transform-var---duration-state-var---ease-out-soft"}
         />
       </button>
 
       {open && (
         <div
-          className={"hq-floating hq-rise absolute end-0 z-50 mt-2 w-[236px] px-3 pb-3 pt-3 "+("ch-border-radius-8d459a")}
+          className={"hq-floating hq-rise absolute end-0 z-50 mt-2 w-[236px] px-3 pb-3 pt-3 "+("ch-border-radius-var---radius-card")}
 
         >
           {suppressed ? (
-            <p className={"text-caption "+("ch-color-4a0211")} >
+            <p className={"text-caption "+("ch-color-var---color-ink-muted")} >
               {t("insights.tooFew", "Not enough members to show team numbers. At least {n} are needed.", {
                 n: MIN_COHORT,
               })}
@@ -75,7 +75,7 @@ export function ThisWeekPanel() {
               number about people. It is not buried in settings. */}
           <Link
             href="/hq/insights/transparency"
-            className={"mt-3 inline-flex items-center gap-1.5 text-caption font-medium "+("ch-color-55f463")}
+            className={"mt-3 inline-flex items-center gap-1.5 text-caption font-medium "+("ch-color-var---color-ink-brand")}
 
           >
             <Info size={12} weight="bold" aria-hidden="true" />
@@ -90,10 +90,10 @@ export function ThisWeekPanel() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-baseline justify-between gap-2">
-      <dt className={"text-caption "+("ch-color-4a0211")} >
+      <dt className={"text-caption "+("ch-color-var---color-ink-muted")} >
         {label}
       </dt>
-      <dd className={"tabular text-body-sm font-semibold "+("ch-color-7f7330")} >
+      <dd className={"tabular text-body-sm font-semibold "+("ch-color-var---color-ink")} >
         {value}
       </dd>
     </div>

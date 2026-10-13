@@ -34,10 +34,10 @@ export function Minimap({ rooms, people, viewport, aspect, onJump }: Props) {
         onJump((e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height);
       }}
       aria-label={t("office.minimap", "Map of the whole floor. Click to look there.")}
-      className={("hq-floating relative block overflow-hidden "+("ch-width-8b0acd"+' '+"ch-border-radius-332348"+' '+"ch-cursor-840b5e"+' '+"ch-padding-41d7d7"))+" "+(geometryClass({height:H}))}
+      className={("hq-floating relative block overflow-hidden "+("ch-width-156px"+' '+"ch-border-radius-var---radius-control"+' '+"ch-cursor-crosshair"+' '+"ch-padding-0"))+" "+(geometryClass({height:H}))}
 
     >
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" width={W} height={H} aria-hidden="true" className={"ch-display-2a1b75"} >
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" width={W} height={H} aria-hidden="true" className={"ch-display-block"} >
         <rect x="0" y="0" width="100" height="100" fill="var(--color-floor)" />
         {rooms.map((r) => (
           <rect

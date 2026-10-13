@@ -15,7 +15,7 @@ export function useSuiteApps({ currentScope, currentHref, sosUrl, onNavigate }: 
   const workspaceId = suite.session?.workspaceContext?.workspace.id || launch?.workspaceId;
   const root = sosUrl.replace(/\/$/, ""), apps: RailApp[] = [];
   const item = (id: string, label: string, href: string, icon: RailApp["icon"]) => ({ id, label, href, icon, ...(onNavigate && id !== currentScope ? { onNavigate: () => onNavigate(href) } : {}) });
-  if (tools.length >= 2) apps.push(item("global", suiteText(locale, "home"), root || "/", <House />));
+  apps.push(item("global", suiteText(locale, "home"), root || "/", <House />));
   for (const tool of tools) { const definition = SUITE_TOOLS[tool]; const query = workspaceId ? `?workspaceId=${encodeURIComponent(workspaceId)}` : ""; apps.push(item(definition.scope, definition.labels[locale], definition.scope === currentScope ? currentHref : `${root}/go/${definition.scope}${query}`, SUITE_ICONS[tool as ToolKey])); }
   for (const staff of suite.session?.staffAccess?.apps || []) {
     const scope = staff === "admin" ? "platform_admin" : "website_manager";

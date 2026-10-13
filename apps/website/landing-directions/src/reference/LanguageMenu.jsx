@@ -1,5 +1,6 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import "./language-menu.css";
+import { currentLocale, shown, bare, withLocale } from "../content/locale.js";
 import { msg } from "../content/strings";
 
 const LANGUAGES = [
@@ -10,7 +11,7 @@ const LANGUAGES = [
 
 export function LanguageMenu({ compact = false, className = "" }) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(msg("LanguageMenu:7"));
+  const [selected, setSelected] = useState(currentLocale().toUpperCase());
   const rootRef = useRef(null);
   const triggerRef = useRef(null);
   const panelId = useId();
@@ -62,7 +63,7 @@ export function LanguageMenu({ compact = false, className = "" }) {
         <div id={panelId} className="language-menu__panel">
           <p className="language-menu__heading">Language</p>
           <div className="language-menu__options" aria-label="Language options">
-            {LANGUAGES.map((language) => (
+            {LANGUAGES.filter(language => shown(language.code.toLowerCase())).map((language) => (
               <button
                 key={language.code}
                 type="button"
@@ -70,6 +71,7 @@ export function LanguageMenu({ compact = false, className = "" }) {
                 aria-pressed={selected === language.code}
                 onClick={() => {
                   setSelected(language.code);
+                  window.location.assign(withLocale(bare(window.location.pathname), language.code.toLowerCase()) + window.location.search + window.location.hash);
                   setOpen(false);
                   triggerRef.current?.focus();
                 }}

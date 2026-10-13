@@ -7,7 +7,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "node ../../tools/ci/lint.mjs --app=chats",
     "typecheck": "node ../../tools/next-env.cjs && tsc --noEmit",
     "i18n:check": "node ../../tools/i18n/check-catalogs.mjs",
     "test": "node --experimental-strip-types --test features/meetings/calendar-availability.test.mjs lib/api-url.test.cjs lib/open-file-reference.test.cjs lib/whiteboard-scene.test.cjs",

@@ -3,9 +3,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { projectName, publicOrigin } from "./projects.mjs";
+import { ensureRedisConnection } from "./redis-connection.mjs";
 const key = process.argv[2] || "website";
 const team = "team_Ypx8oiLDZi3PBNi8ht8fYPsm", name = projectName(key);
 const sourceProject = "prj_74P0VeIbDAIyUy8u5r6h91mwai1o";
+// Existing free mock journal, verified in the team's Storage UI on 2026-10-14.
+const confirmedStore = "store_9fSF6RF2vRVS2OxK";
 const token = process.env.VERCEL_TOKEN;
 if (process.env.GITHUB_ACTIONS !== "true" || !token || !process.env.RUNNER_TEMP) throw new Error("Use the reviewed Services deployment workflow with its existing CI credentials.");
 
@@ -34,6 +37,11 @@ if (project.nodeVersion !== "22.x") await api(`/v9/projects/${project.id}`, "PAT
 
 const copy = [];
 if (key !== "website") {
+  const sourceProjectExists = await api(`/v9/projects/${sourceProject}`, "GET", undefined, true);
+  if (!sourceProjectExists) {
+    await ensureRedisConnection(api, { storeId: confirmedStore, projectId: project.id });
+    console.log("Reconnected the existing confirmed mock journal; the deleted source project is not required.");
+  } else {
   const source = await api(`/v10/projects/${sourceProject}/env`);
   const rows = Array.isArray(source) ? source : source.envs || [];
   const keys = ["KV_REST_API_URL", "KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"];
@@ -51,20 +59,7 @@ if (key !== "website") {
     const connections = resource.store.projectsMetadata || [];
     const origins = connections.filter(row => row.projectId === sourceProject && row.environments?.includes("production"));
     if (origins.length !== 1) throw new Error("The Redis store is not uniquely connected to the existing Production mock.");
-    const destinations = connections.filter(row => row.projectId === project.id);
-    if (destinations.length === 0) {
-      // Same API and prefix option as Vercel CLI connectResourceToProject. Vercel
-      // provisions its managed Secrets directly; no credential is read or copied.
-      await api(`/v1/storage/stores/${storeId}/connections`, "POST", {
-        projectId: project.id, type: "integration", envVarEnvironments: ["production", "preview"],
-        ...(typeof origins[0].envVarPrefix === "string" ? { envVarPrefix: origins[0].envVarPrefix } : {}),
-      });
-    } else if (!["production", "preview"].every(target => destinations.some(row => row.environments?.includes(target)))) {
-      throw new Error("The new project's existing Redis connection does not cover both confirmed environments.");
-    }
-    const target = await api(`/v10/projects/${project.id}/env`);
-    const targetRows = Array.isArray(target) ? target : target.envs || [];
-    if (!["production", "preview"].every(env => hasPair(targetRows.filter(row => inEnvironment(row, env))))) throw new Error("The connected Redis integration did not provide both required credential pairs.");
+    await ensureRedisConnection(api, { storeId, projectId: project.id, envVarPrefix: origins[0].envVarPrefix });
     console.log(`Connected the existing Redis integration ${storeId} to the confirmed new project; managed Secrets remain private.`);
   } else {
     // Legacy manually configured variables can use the effective Production-only
@@ -75,6 +70,7 @@ if (key !== "website") {
       if (typeof value === "string" && value && value !== "[SENSITIVE]") copy.push({ key, value, type: "encrypted", target: ["production", "preview"] });
     }
     if (!hasPair(copy)) throw new Error("The existing Production Redis configuration is unavailable; no replacement store was created.");
+  }
   }
 }
 copy.push(
