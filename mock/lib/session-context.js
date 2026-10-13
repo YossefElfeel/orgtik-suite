@@ -10,7 +10,15 @@ function createContextService({ realm, identity, platform }) {
     for (const value of [platform().db.staffAuthorityRevocations, platform().db.staffAccessEpochs]) if (value !== undefined && (!value || typeof value !== 'object' || Array.isArray(value))) throw fail('staff_authority_unavailable', 503);
     if (Object.hasOwn(platform().db.staffAuthorityRevocations || {}, user.key)) return { actorUserId: user.id, apps: [], roles: {}, permissions: {} };
     const admin = platform().db.staffRoles?.[user.key] || [], wm = identity.grants.website_manager?.[user.key]?.roles || [];
-    return { actorUserId: user.id, accessEpoch: platform().db.staffAccessEpochs?.[user.key] ?? 0, apps: [...(admin.length ? ["admin"] : []), ...(wm.length ? ["wm"] : [])], roles: { ...(admin.length ? { admin: [...admin] } : {}), ...(wm.length ? { wm: [...wm] } : {}) }, permissions: { ...(admin.length ? { admin: permissionsFor(admin) } : {}), ...(wm.length ? { wm: wmPermissionsFor(wm) } : {}) } };
+    const access = { actorUserId: user.id, accessEpoch: platform().db.staffAccessEpochs?.[user.key] ?? 0, apps: [...(admin.length ? ["admin"] : []), ...(wm.length ? ["wm"] : [])], roles: { ...(admin.length ? { admin: [...admin] } : {}), ...(wm.length ? { wm: [...wm] } : {}) }, permissions: { ...(admin.length ? { admin: permissionsFor(admin) } : {}), ...(wm.length ? { wm: wmPermissionsFor(wm) } : {}) } };
+    // A staff family remains bound to its staff audience. Launcher metadata lets
+    // current super administrators open their assigned OrgTik workspace tools
+    // through an explicit workspace switch, without granting tenant access.
+    if (admin.includes("super_admin") && !["deleted", "cancelled"].includes(internal.state)) {
+      const context = resolveWorkspaceContext(platform(), identity, user, { realm, workspaceId: internal.id });
+      access.toolLaunch = { workspaceId: internal.id, tools: Object.entries(context.tools).filter(([, tool]) => !["no_access", "not_subscribed"].includes(tool.access)).map(([key]) => key) };
+    }
+    return access;
   }
   function resolveWorkspace(user, { workspaceId, mode, audience = "suite", readOnly = false, actor = user }) {
     const access = staffAccess(actor);

@@ -66,6 +66,8 @@ jobs:
         run: node packages/ui/scripts/check-v2.mjs && node packages/ui/scripts/check-viz.mjs
       - name: Shared tab session and access regressions
         run: node --test packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs packages/ui/src/auth/urls.test.mjs
+      - name: Super-admin launcher and permission boundaries
+        run: node --test mock/lib/session-context.test.js mock/lib/mona-super-admin.test.js
       - name: Workspace source manifest and API contracts match
         run: |
           node tools/dev/workspace-manifest.mjs --check

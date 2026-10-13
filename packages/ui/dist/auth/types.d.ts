@@ -23,6 +23,10 @@ export type StaffAccess = {
         admin?: string[];
         wm?: string[];
     };
+    toolLaunch?: {
+        workspaceId: string;
+        tools: ToolKey[];
+    };
 };
 export type WorkspaceContext = {
     version: 1;

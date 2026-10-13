@@ -14,7 +14,7 @@ import { useAppLabel, useMyScopes } from "@/components/suite/useSuiteApps";
 import { handoffHref } from "@/lib/handoff";
 import useUser from "@/hooks/use-user";
 import { useMounted } from "@/hooks/use-mounted";
-import { switchWorkspace } from "@orgtik/ui/auth";
+import { switchWorkspace, TOOL_SCOPES } from "@orgtik/ui/auth";
 import { API_URL } from "@/constants/env";
 
 export default function OpenAppPage() {
@@ -22,13 +22,13 @@ export default function OpenAppPage() {
   const scope = String(useParams().scope ?? "");
   // Where to land in the app (its own path only, e.g. /hq/chat/c-design): passed on with the code.
   const query = useSearchParams();
-  const requestedWorkspace = query.get("workspaceId");
   const landing = (query.get("redirect") ?? "").replace(/[\t\n\r]/g, "");
   const path = landing.startsWith("/") && !landing.startsWith("//") && !landing.startsWith("/\\") ? landing : "";
   const locale = useLocale();
   const mounted = useMounted();
   const appLabel = useAppLabel();
-  const { accessToken, workspaceContext } = useUser();
+  const { accessToken, workspaceContext, staffAccess } = useUser();
+  const requestedWorkspace = query.get("workspaceId") || (!workspaceContext && Object.values(TOOL_SCOPES).includes(scope) ? staffAccess?.toolLaunch?.workspaceId : null);
   const [problem, setProblem] = useState<"notYours" | "failed" | null>(null);
   const [attempt, setAttempt] = useState(0);
   const requestKey = `${accessToken ?? ""}:${requestedWorkspace ?? ""}:${attempt}`;

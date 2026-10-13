@@ -4,7 +4,7 @@ export type MemberRole = "owner" | "admin" | "member" | "guest";
 export type Audience = "identity" | "suite" | `tool:${"tasks" | "files" | "hr" | "sales" | "marketing" | "chats"}` | "staff:admin" | "staff:wm";
 export type ScopeGrant = { scope: string; roles: string[]; permissions?: string[] };
 export type SessionTokens = { accessToken: string; refreshToken: string; expiresIn: number };
-export type StaffAccess = { actorUserId: number; apps: ("admin" | "wm")[]; roles: { admin?: string[]; wm?: string[] }; permissions: { admin?: string[]; wm?: string[] } };
+export type StaffAccess = { actorUserId: number; apps: ("admin" | "wm")[]; roles: { admin?: string[]; wm?: string[] }; permissions: { admin?: string[]; wm?: string[] }; toolLaunch?: { workspaceId: string; tools: ToolKey[] } };
 export type WorkspaceContext = {
   version: 1;
   realm: string;

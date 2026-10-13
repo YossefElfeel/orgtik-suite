@@ -1,14 +1,18 @@
 "use client";
-import { Browser, House, ShieldCheck } from "@phosphor-icons/react";
+import { Browser, ChartLineUp, ChatsCircle, CheckSquareOffset, Folder, House, Megaphone, ShieldCheck, UsersThree } from "@phosphor-icons/react";
 import { useLocale, useTranslations } from "next-intl";
-import { useClientSession } from "@orgtik/ui/auth";
+import { staffToolLaunch, TOOL_SCOPES, useClientSession } from "@orgtik/ui/auth";
 import type { RailApp } from "@orgtik/ui";
 import { SOS_URL } from "@/lib/env";
 export const CURRENT_SCOPE = "platform_admin";
 export function useSuiteApps(_token: string | null): RailApp[] {
   const session = useClientSession(), t = useTranslations("Suite"), locale = useLocale();
   const apps = session?.staffAccess?.apps || [];
-  return [{ id: "global", label: t("global"), href: SOS_URL, icon: <House /> }, ...apps.map(target => ({
+  const launch = staffToolLaunch(session);
+  const icons = { tasks: <CheckSquareOffset />, files: <Folder />, hr: <UsersThree />, crm: <ChartLineUp />, marketing: <Megaphone />, chat: <ChatsCircle /> };
+  return [{ id: "global", label: t("global"), href: SOS_URL, icon: <House /> }, ...(launch?.tools || []).map(tool => ({
+    id: TOOL_SCOPES[tool], label: t(TOOL_SCOPES[tool]), href: "/" + locale + "/go/" + tool, icon: icons[tool],
+  })), ...apps.map(target => ({
     id: target === "admin" ? "platform_admin" : "website_manager",
     label: t(target === "admin" ? "platform_admin" : "website_manager"),
     href: target === "admin" ? "/" + locale : "/" + locale + "/go/" + target,
