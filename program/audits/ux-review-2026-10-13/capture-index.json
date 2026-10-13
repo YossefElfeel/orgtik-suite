@@ -5,7 +5,11 @@
     "headings": [
       "  - heading \"Overview\" [level=1]"
     ],
-    "note": "Mona: staff super admin, full launcher and restored navigation"
+    "note": "Mona: staff super admin, full launcher and restored navigation",
+    "file": "shots/02-wm-overview-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "03-wm-admin-en",
@@ -13,7 +17,11 @@
     "headings": [
       "  - heading \"Website Manager administration\" [level=1]"
     ],
-    "note": "Restored staff administration, actual super-admin role, 8 admin sections"
+    "note": "Restored staff administration, actual super-admin role, 8 admin sections",
+    "file": "shots/03-wm-admin-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "04-wm-services-en",
@@ -21,7 +29,11 @@
     "headings": [
       "  - heading \"Service catalog\" [level=1]"
     ],
-    "note": "Canonical services mirror and CRM launch"
+    "note": "Canonical services mirror and CRM launch",
+    "file": "shots/04-wm-services-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "05-wm-software-en",
@@ -29,7 +41,11 @@
     "headings": [
       "  - heading \"Software catalog\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/05-wm-software-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "06-wm-translations-en",
@@ -37,7 +53,11 @@
     "headings": [
       "  - heading \"Translation drafts\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/06-wm-translations-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "07-wm-forms-en",
@@ -45,7 +65,11 @@
     "headings": [
       "  - heading \"Form protection\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/07-wm-forms-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "08-wm-releases-en",
@@ -53,7 +77,11 @@
     "headings": [
       "  - heading \"Releases\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/08-wm-releases-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "09-wm-webhooks-en",
@@ -61,7 +89,11 @@
     "headings": [
       "  - heading \"Publish webhooks\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/09-wm-webhooks-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "10-wm-setup-en",
@@ -69,7 +101,11 @@
     "headings": [
       "  - heading \"Getting started\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/10-wm-setup-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "11-wm-media-en",
@@ -77,7 +113,11 @@
     "headings": [
       "  - heading \"Media\" [level=1]"
     ],
-    "note": "Compact filters and restored packaged import/tag actions"
+    "note": "Compact filters and restored packaged import/tag actions",
+    "file": "shots/11-wm-media-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "12-wm-admin-ar",
@@ -85,7 +125,11 @@
     "headings": [
       "  - heading \"إدارة Website Manager\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/12-wm-admin-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "13-wm-services-ar",
@@ -93,7 +137,11 @@
     "headings": [
       "  - heading \"كتالوج الخدمات\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/13-wm-services-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "14-wm-software-ar",
@@ -101,7 +149,11 @@
     "headings": [
       "  - heading \"كتالوج البرامج\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/14-wm-software-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "15-wm-translations-ar",
@@ -109,7 +161,11 @@
     "headings": [
       "  - heading \"مسودات الترجمة\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/15-wm-translations-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "16-wm-forms-ar",
@@ -117,7 +173,11 @@
     "headings": [
       "  - heading \"حماية النماذج\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/16-wm-forms-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "17-wm-releases-ar",
@@ -125,7 +185,11 @@
     "headings": [
       "  - heading \"الإصدارات\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/17-wm-releases-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "18-wm-webhooks-ar",
@@ -133,7 +197,11 @@
     "headings": [
       "  - heading \"إشعارات النشر\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/18-wm-webhooks-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "19-wm-setup-ar",
@@ -141,7 +209,11 @@
     "headings": [
       "  - heading \"خطوات البداية\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/19-wm-setup-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "20-wm-media-ar",
@@ -149,7 +221,11 @@
     "headings": [
       "  - heading \"الوسائط\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/20-wm-media-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "21-console-overview-ar",
@@ -157,7 +233,11 @@
     "headings": [
       "  - heading \"نظرة عامة\" [level=1]"
     ],
-    "note": "Mona super-admin, restored Console sidebar"
+    "note": "Mona super-admin, restored Console sidebar",
+    "file": "shots/21-console-overview-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "22-console-billing-ar",
@@ -165,7 +245,11 @@
     "headings": [
       "  - heading \"عمليات الفوترة\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/22-console-billing-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "23-console-software-ar",
@@ -173,7 +257,11 @@
     "headings": [
       "  - heading \"كتالوج الأدوات\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/23-console-software-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "24-console-ecosystem-ar",
@@ -181,31 +269,11 @@
     "headings": [
       "  - heading \"سجل الروابط\" [level=1]"
     ],
-    "note": ""
-  },
-  {
-    "name": "24-console-ecosystem-ar",
-    "url": "http://127.0.0.1:3400/admin/ar/ecosystem",
-    "headings": [
-      "  - heading \"سجل الروابط\" [level=1]"
-    ],
-    "note": ""
-  },
-  {
-    "name": "22-console-billing-ar",
-    "url": "http://127.0.0.1:3400/admin/ar/billing",
-    "headings": [
-      "  - heading \"عمليات الفوترة\" [level=1]"
-    ],
-    "note": ""
-  },
-  {
-    "name": "23-console-software-ar",
-    "url": "http://127.0.0.1:3400/admin/ar/catalog/software",
-    "headings": [
-      "  - heading \"كتالوج الأدوات\" [level=1]"
-    ],
-    "note": ""
+    "note": "",
+    "file": "shots/24-console-ecosystem-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "25-console-releases-ar",
@@ -213,7 +281,11 @@
     "headings": [
       "  - heading \"الإصدارات والإعلانات\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/25-console-releases-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "26-console-setup-ar",
@@ -221,7 +293,11 @@
     "headings": [
       "  - heading \"إعداد الكونـسول\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/26-console-setup-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "27-console-invitations-ar",
@@ -229,7 +305,11 @@
     "headings": [
       "  - heading \"دعوات فريق المنصة\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/27-console-invitations-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "28-console-security-ar",
@@ -237,7 +317,11 @@
     "headings": [
       "  - heading \"تحقق من خطوتين بالمحاكاة\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/28-console-security-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "29-console-tax-ar",
@@ -245,7 +329,11 @@
     "headings": [
       "  - heading \"فحص أرقام الضرايب بالمحاكاة\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/29-console-tax-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "30-console-ticket-targets-ar",
@@ -253,7 +341,11 @@
     "headings": [
       "  - heading \"مواعيد الرد على التذاكر\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/30-console-ticket-targets-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "31-console-services-ar",
@@ -261,7 +353,11 @@
     "headings": [
       "  - heading \"الإدارة في CRM\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/31-console-services-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "32-console-requests-ar",
@@ -269,7 +365,11 @@
     "headings": [
       "  - heading \"الإدارة في CRM\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/32-console-requests-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "33-console-billing-en",
@@ -277,7 +377,11 @@
     "headings": [
       "  - heading \"Billing operations\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/33-console-billing-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "34-console-software-en",
@@ -285,7 +389,11 @@
     "headings": [
       "  - heading \"Software catalog\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/34-console-software-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "35-console-ecosystem-en",
@@ -293,7 +401,11 @@
     "headings": [
       "  - heading \"Connections registry\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/35-console-ecosystem-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "36-console-releases-en",
@@ -301,7 +413,11 @@
     "headings": [
       "  - heading \"Releases and announcements\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/36-console-releases-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "37-console-setup-en",
@@ -309,7 +425,11 @@
     "headings": [
       "  - heading \"Console setup\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/37-console-setup-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "38-console-invitations-en",
@@ -317,7 +437,11 @@
     "headings": [
       "  - heading \"Staff invitations\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/38-console-invitations-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "39-console-security-en",
@@ -325,7 +449,11 @@
     "headings": [
       "  - heading \"Mock two-step verification\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/39-console-security-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "40-console-tax-en",
@@ -333,7 +461,11 @@
     "headings": [
       "  - heading \"Mock tax ID checks\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/40-console-tax-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "41-console-ticket-targets-en",
@@ -341,7 +473,11 @@
     "headings": [
       "  - heading \"Ticket response targets\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/41-console-ticket-targets-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "42-console-services-en",
@@ -349,7 +485,11 @@
     "headings": [
       "  - heading \"Managed in CRM\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/42-console-services-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "43-console-requests-en",
@@ -357,7 +497,11 @@
     "headings": [
       "  - heading \"Managed in CRM\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/43-console-requests-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "44-console-overview-en",
@@ -365,7 +509,11 @@
     "headings": [
       "  - heading \"Overview\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/44-console-overview-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "45-tasks-mona-en",
@@ -373,7 +521,11 @@
     "headings": [
       "  - heading \"Dashboard\" [level=1]"
     ],
-    "note": "Restored Console staff launcher preserves Mona’s workspace access"
+    "note": "Restored Console staff launcher preserves Mona’s workspace access",
+    "file": "shots/45-tasks-mona-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "46-account-mona-home-en",
@@ -381,7 +533,11 @@
     "headings": [
       "  - heading \"OrgTik Egypt\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/46-account-mona-home-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "47-account-billing-en",
@@ -389,7 +545,11 @@
     "headings": [
       "  - heading \"Subscriptions\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/47-account-billing-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "48-account-invoices-en",
@@ -397,7 +557,11 @@
     "headings": [
       "  - heading \"Invoices\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/48-account-invoices-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "49-owner-unpaid-invoice-en",
@@ -405,7 +569,11 @@
     "headings": [
       "  - heading \"Invoice INV-2026-001044\" [level=1]"
     ],
-    "note": "Unpaid invoice has print action but no direct owner payment CTA"
+    "note": "Unpaid invoice has print action but no direct owner payment CTA",
+    "file": "shots/49-owner-unpaid-invoice-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "50-console-payment-drawer-en",
@@ -413,7 +581,11 @@
     "headings": [
       "  - heading [level=1]: Billing operations"
     ],
-    "note": "Prototype invoice recovery and owner-link controls"
+    "note": "Prototype invoice recovery and owner-link controls",
+    "file": "shots/50-console-payment-drawer-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "51-owner-pay-link-en",
@@ -421,23 +593,11 @@
     "headings": [
       "  - heading \"Invoice payment link\" [level=1]"
     ],
-    "note": "Staff-issued owner link resolves against the current owned workspace"
-  },
-  {
-    "name": "52-owner-pay-link-ar",
-    "url": "http://127.0.0.1:3400/sos/billing/pay/paylink_1057",
-    "headings": [
-      "  - heading \"Invoice payment link\" [level=1]"
-    ],
-    "note": ""
-  },
-  {
-    "name": "53-account-staff-invitations-ar",
-    "url": "http://127.0.0.1:3400/sos/staff-invitations",
-    "headings": [
-      "  - heading \"دعوات فريق OrgTik\" [level=1]"
-    ],
-    "note": ""
+    "note": "Staff-issued owner link resolves against the current owned workspace",
+    "file": "shots/51-owner-pay-link-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "52-owner-pay-link-ar",
@@ -445,7 +605,23 @@
     "headings": [
       "  - heading \"رابط دفع الفاتورة\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/52-owner-pay-link-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "53-account-staff-invitations-ar",
+    "url": "http://127.0.0.1:3400/sos/staff-invitations",
+    "headings": [
+      "  - heading \"دعوات فريق OrgTik\" [level=1]"
+    ],
+    "note": "",
+    "file": "shots/53-account-staff-invitations-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "54-account-staff-invitations-en",
@@ -453,7 +629,11 @@
     "headings": [
       "  - heading \"OrgTik staff invitations\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/54-account-staff-invitations-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "55-marketing-mona-en",
@@ -461,7 +641,11 @@
     "headings": [
       "  - heading \"Nile Foods\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/55-marketing-mona-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "56-marketing-utm-en",
@@ -469,7 +653,11 @@
     "headings": [
       "  - heading \"Settings\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/56-marketing-utm-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "57-marketing-utm-ar",
@@ -477,7 +665,11 @@
     "headings": [
       "  - heading \"الإعدادات\" [level=1]"
     ],
-    "note": ""
+    "note": "",
+    "file": "shots/57-marketing-utm-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "58-chats-office-en",
@@ -485,36 +677,568 @@
     "headings": [
       "  - heading \"Office\" [level=1]"
     ],
-    "note": "Restored native office; real device media permissions were not requested"
+    "note": "Restored native office; real device media permissions were not requested",
+    "file": "shots/58-chats-office-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "59-chats-office-current-en",
     "url": "http://127.0.0.1:3400/chats/hq/office",
-    "note": ""
+    "note": "",
+    "file": "shots/59-chats-office-current-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "60-chats-admin-en",
     "url": "http://127.0.0.1:3400/chats/hq/admin",
-    "note": ""
+    "note": "",
+    "file": "shots/60-chats-admin-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "61-chats-settings-en",
     "url": "http://127.0.0.1:3400/chats/hq/settings",
-    "note": ""
+    "note": "",
+    "file": "shots/61-chats-settings-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "62-chats-settings-ar",
     "url": "http://127.0.0.1:3400/chats/hq/settings",
-    "note": ""
+    "note": "",
+    "file": "shots/62-chats-settings-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "63-chats-office-ar",
     "url": "http://127.0.0.1:3400/chats/hq/office",
-    "note": ""
+    "note": "",
+    "file": "shots/63-chats-office-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
   },
   {
     "name": "64-chats-admin-ar",
     "url": "http://127.0.0.1:3400/chats/hq/admin",
-    "note": ""
+    "note": "",
+    "file": "shots/64-chats-admin-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "65-wm-setup-fixed-en",
+    "url": "http://127.0.0.1:3400/wm/en/setup",
+    "note": "",
+    "file": "shots/65-wm-setup-fixed-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "66-wm-setup-open-pages-en",
+    "url": "http://127.0.0.1:3400/wm/en/content/pages",
+    "note": "Replaced initial loading capture with settled data",
+    "file": "shots/66-wm-setup-open-pages-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "67-wm-setup-fixed-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/setup",
+    "note": "",
+    "file": "shots/67-wm-setup-fixed-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "68-wm-setup-open-pages-ar",
+    "url": "http://127.0.0.1:3400/wm/ar/content/pages",
+    "note": "",
+    "file": "shots/68-wm-setup-open-pages-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "69-console-setup-fixed-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/setup",
+    "note": "",
+    "file": "shots/69-console-setup-fixed-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "70-console-setup-open-tools-ar",
+    "url": "http://127.0.0.1:3400/admin/ar/tools",
+    "note": "",
+    "file": "shots/70-console-setup-open-tools-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "71-console-setup-fixed-en",
+    "url": "http://127.0.0.1:3400/admin/en/setup",
+    "note": "",
+    "file": "shots/71-console-setup-fixed-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "72-console-setup-open-tools-en",
+    "url": "http://127.0.0.1:3400/admin/en/tools",
+    "note": "",
+    "file": "shots/72-console-setup-open-tools-en.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "73-tasks-mona-ar",
+    "url": "http://127.0.0.1:3400/tasks/ar",
+    "note": "",
+    "file": "shots/73-tasks-mona-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "74-tasks-admin-mona-ar",
+    "url": "http://127.0.0.1:3400/tasks/ar/admin",
+    "note": "",
+    "file": "shots/74-tasks-admin-mona-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "75-nour-owner-home-ar",
+    "url": "http://127.0.0.1:3400/sos",
+    "note": "Replaced wrong-tab capture with verified Nour owner view",
+    "file": "shots/75-nour-owner-home-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "76-task-create-fixture-ar",
+    "url": "http://127.0.0.1:3400/tasks/ar/projects/1/lists",
+    "note": "",
+    "file": "shots/76-task-create-fixture-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "77-owner-invite-files-only-ar",
+    "url": "http://127.0.0.1:3400/sos/team",
+    "note": "",
+    "file": "shots/77-owner-invite-files-only-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "78-task-created-detail-ar",
+    "url": "http://127.0.0.1:3400/tasks/ar/projects/1/lists?task-id=1067",
+    "note": "",
+    "file": "shots/78-task-created-detail-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "79-task-edit-saved-ar",
+    "url": "http://127.0.0.1:3400/tasks/ar/projects/1/lists?task-id=1067",
+    "note": "",
+    "file": "shots/79-task-edit-saved-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "80-task-delete-confirmation-ar",
+    "url": "http://127.0.0.1:3400/tasks/ar/projects/1/lists?task-id=1067",
+    "note": "Final irreversible delete was not submitted; confirmation and cancel were verified.",
+    "file": "shots/80-task-delete-confirmation-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "81-member-invite-review-ar",
+    "url": "http://127.0.0.1:3400/sos/invite/[redacted]",
+    "note": "",
+    "file": "shots/81-member-invite-review-ar.jpg",
+    "width": 1265,
+    "height": 712,
+    "format": "jpg"
+  },
+  {
+    "name": "82-nour-not-yours-hr-ar",
+    "url": "http://127.0.0.1:3400/sos/go/hr_system",
+    "note": "",
+    "file": "shots/82-nour-not-yours-hr-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "83-member-accepted-ar",
+    "url": "http://127.0.0.1:3400/sos/invite/[redacted]",
+    "note": "",
+    "file": "shots/83-member-accepted-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "84-files-mona-main-ar",
+    "url": "http://127.0.0.1:3400/files/ar",
+    "note": "",
+    "file": "shots/84-files-mona-main-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "85-member-first-run-home-ar",
+    "url": "http://127.0.0.1:3400/sos",
+    "note": "Files-only invitation opens Home; checklist still asks for a task.",
+    "file": "shots/85-member-first-run-home-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "86-nour-billing-ar",
+    "url": "http://127.0.0.1:3400/sos/billing",
+    "note": "",
+    "file": "shots/86-nour-billing-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "87-files-only-member-no-home-rail-ar",
+    "url": "http://127.0.0.1:3400/files/ar",
+    "note": "",
+    "file": "shots/87-files-only-member-no-home-rail-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "88-nour-account-security-ar",
+    "url": "http://127.0.0.1:3400/sos/account/security",
+    "note": "",
+    "file": "shots/88-nour-account-security-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "89-folder-rename-archive-confirmation-ar",
+    "url": "http://127.0.0.1:3400/files/ar",
+    "note": "",
+    "file": "shots/89-folder-rename-archive-confirmation-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "90-folder-archive-trash-view-ar",
+    "url": "http://127.0.0.1:3400/files/ar/archived-files",
+    "note": "Archived empty fixture is absent from the native trash view; recovery availability is under source review.",
+    "file": "shots/90-folder-archive-trash-view-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "92-member-signout-ar",
+    "url": "http://127.0.0.1:3400/sos/auth/login?redirect=%2Fprofile",
+    "note": "",
+    "file": "shots/92-member-signout-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "93-files-admin-localized-ar",
+    "url": "http://127.0.0.1:3400/files/ar/admin",
+    "note": "",
+    "file": "shots/93-files-admin-localized-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "94-files-admin-roles-localized-ar",
+    "url": "http://127.0.0.1:3400/files/ar/admin/roles",
+    "note": "",
+    "file": "shots/94-files-admin-roles-localized-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "95-folder-recovery-panel-fixed-ar",
+    "url": "http://127.0.0.1:3400/files/ar/archived-files",
+    "note": "",
+    "file": "shots/95-folder-recovery-panel-fixed-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "96-folder-restored-success-ar",
+    "url": "http://127.0.0.1:3400/files/ar",
+    "note": "",
+    "file": "shots/96-folder-restored-success-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "97-nour-signout-ar",
+    "url": "http://127.0.0.1:3400/sos/auth/login",
+    "note": "",
+    "file": "shots/97-nour-signout-ar.jpg",
+    "width": 1280,
+    "height": 720,
+    "format": "jpg"
+  },
+  {
+    "name": "98-hr-mona-main-ar",
+    "url": "http://127.0.0.1:3400/hr/ar",
+    "note": "AR HR main, actual870x668; intermediate desktop pane size, not1280x720",
+    "file": "shots/98-hr-mona-main-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "99-hr-department-edited-ar",
+    "url": "http://127.0.0.1:3400/hr/ar/department/9",
+    "note": "AR actual 870x668; saved fixture department edit",
+    "file": "shots/99-hr-department-edited-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "100-hr-department-delete-cancel-boundary-ar",
+    "url": "http://127.0.0.1:3400/hr/ar/department",
+    "note": "Permanent delete reviewed; canceled and retained",
+    "file": "shots/100-hr-department-delete-cancel-boundary-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "101-sos-ar-dark-390",
+    "url": "http://127.0.0.1:3400/sos",
+    "note": "Actual390x844 AR RTL dark Mona; settled menu closed",
+    "file": "shots/101-sos-ar-dark-390.jpg",
+    "width": 390,
+    "height": 843,
+    "format": "jpg"
+  },
+  {
+    "name": "102-hr-employee-edit-noop-ar",
+    "url": "http://127.0.0.1:3400/hr/ar/employees/3",
+    "note": "Job information Edit clicked; no dialog or edit form",
+    "file": "shots/102-hr-employee-edit-noop-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "103-tasks-ar-dark-390",
+    "url": "http://127.0.0.1:3400/tasks/ar",
+    "note": "Actual390x844 AR RTL dark Mona",
+    "file": "shots/103-tasks-ar-dark-390.jpg",
+    "width": 390,
+    "height": 843,
+    "format": "jpg"
+  },
+  {
+    "name": "104-files-ar-dark-390",
+    "url": "http://127.0.0.1:3400/files/ar",
+    "note": "Actual390x844 AR RTL dark; folder chips displace list",
+    "file": "shots/104-files-ar-dark-390.jpg",
+    "width": 390,
+    "height": 843,
+    "format": "jpg"
+  },
+  {
+    "name": "105-hr-ar-dark-390",
+    "url": "http://127.0.0.1:3400/hr/ar",
+    "note": "Actual390x844 AR RTL dark HR main",
+    "file": "shots/105-hr-ar-dark-390.jpg",
+    "width": 390,
+    "height": 843,
+    "format": "jpg"
+  },
+  {
+    "name": "106-chats-room-saved-ar",
+    "url": "http://127.0.0.1:3400/chats/hq/office",
+    "note": "Saved local mock room rename; no media permissions granted",
+    "file": "shots/106-chats-room-saved-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "107-chats-room-remove-cancel-boundary-ar",
+    "url": "http://127.0.0.1:3400/chats/hq/office",
+    "note": "Removal confirmation inspected and canceled",
+    "file": "shots/107-chats-room-remove-cancel-boundary-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "108-chats-meetings-ar",
+    "url": "http://127.0.0.1:3400/chats/hq/meetings",
+    "note": "Current restored meetings list; no live meeting joined",
+    "file": "shots/108-chats-meetings-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "109-chats-whiteboard-ar",
+    "url": "http://127.0.0.1:3400/chats/hq/whiteboard",
+    "note": "Restored native drawing editor loaded; external imports explicitly deferred",
+    "file": "shots/109-chats-whiteboard-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "110-crm-ar-dark-390",
+    "url": "http://127.0.0.1:3400/sales/ar",
+    "note": "Actual390x844 AR RTL dark; settled no navigation during capture",
+    "file": "shots/110-crm-ar-dark-390.jpg",
+    "width": 390,
+    "height": 844,
+    "format": "jpg"
+  },
+  {
+    "name": "111-chats-insights-ar",
+    "url": "http://127.0.0.1:3400/chats/hq/insights",
+    "note": "Aggregate-only insights disclosure and empty metrics; no individual surveillance",
+    "file": "shots/111-chats-insights-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "112-marketing-ar-dark-390",
+    "url": "http://127.0.0.1:3400/marketing/ar/dashboard",
+    "note": "Actual390x844 AR RTL dark Marketing",
+    "file": "shots/112-marketing-ar-dark-390.jpg",
+    "width": 390,
+    "height": 843,
+    "format": "jpg"
+  },
+  {
+    "name": "113-chats-ar-dark-390",
+    "url": "http://127.0.0.1:3400/chats/hq/office",
+    "note": "Actual390x844 AR RTL dark; responsive people list replaces floor",
+    "file": "shots/113-chats-ar-dark-390.jpg",
+    "width": 390,
+    "height": 843,
+    "format": "jpg"
+  },
+  {
+    "name": "114-chats-channel-ar",
+    "url": "http://127.0.0.1:3400/chats/hq/chat/c-general",
+    "note": "Native channel log and mock composer; no external message sent",
+    "file": "shots/114-chats-channel-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "115-hr-admin-roles-localized-ar",
+    "url": "http://127.0.0.1:3400/hr/ar/admin/roles",
+    "note": "Admin hop retained /hr/ar/admin/roles",
+    "file": "shots/115-hr-admin-roles-localized-ar.jpg",
+    "width": 870,
+    "height": 668,
+    "format": "jpg"
+  },
+  {
+    "name": "116-console-ar-dark-390",
+    "url": "http://127.0.0.1:3400/admin/ar",
+    "note": "Actual390x844 AR RTL dark Console via direct SOS gateway",
+    "file": "shots/116-console-ar-dark-390.jpg",
+    "width": 390,
+    "height": 843,
+    "format": "jpg"
+  },
+  {
+    "name": "117-wm-ar-dark-390",
+    "url": "http://127.0.0.1:3400/wm/ar",
+    "note": "Actual390x844 AR RTL dark full viewport; Mona super-admin",
+    "width": 390,
+    "height": 844,
+    "file": "shots/117-wm-ar-dark-390.jpg",
+    "format": "jpg"
+  },
+  {
+    "name": "118-marketing-admin-settings-localized-ar",
+    "url": "http://127.0.0.1:3400/marketing/ar/admin/settings",
+    "note": "Admin hop retained /marketing/ar/admin/settings",
+    "width": 870,
+    "height": 668,
+    "file": "shots/118-marketing-admin-settings-localized-ar.jpg",
+    "format": "jpg"
+  },
+  {
+    "name": "119-website-cart-ar-390",
+    "url": "http://127.0.0.1:3400/ar/cart",
+    "note": "Actual390x844 AR URL RTL; website light commerce theme remains, not shared dark preference",
+    "width": 390,
+    "height": 844,
+    "file": "shots/119-website-cart-ar-390.jpg",
+    "format": "jpg"
+  },
+  {
+    "name": "120-hr-employees-ar-dark-390",
+    "url": "http://127.0.0.1:3400/hr/ar/employees",
+    "note": "Actual390x844 RTL dark; localized onboarding link resolved correctly",
+    "width": 390,
+    "height": 844,
+    "file": "shots/120-hr-employees-ar-dark-390.jpg",
+    "format": "jpg"
+  },
+  {
+    "name": "121-crm-admin-settings-localized-ar",
+    "url": "http://127.0.0.1:3400/sales/ar/admin/settings",
+    "note": "Admin hop retained /sales/ar/admin/settings",
+    "width": 870,
+    "height": 668,
+    "file": "shots/121-crm-admin-settings-localized-ar.jpg",
+    "format": "jpg"
   }
 ]

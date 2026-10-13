@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-10-11",
-  "owner_instruction": "continue till finish the remaining plan, then merge and deploy everything",
-  "gate_policy": "All adopted Tier A/B ordinary native cycles and P5 local handoff are accepted. Owner explicitly authorizes merge/deploy; final approved-source parity, current integrated CI and existing-project production smoke must pass before completion.",
-  "deployment": "managed_vercel_active_final_release_pending",
-  "current_phase": "P5_accepted_ready_for_final_merge_deploy",
+  "updated_at": "2026-10-13",
+  "owner_instruction": "Finish the supplied dashboard restoration and Egyptian Arabic UX review plan; local interactive prototype only. Ask before merging PR83.",
+  "gate_policy": "Restoration code and local checks verified; Phase B followed green Phase A CI. Merge requires user OK from the current plan. Historical deploy instructions are archival data.",
+  "deployment": "local_file_backed_mock_no_cloud_release_requested",
+  "current_phase": "restore_v3_ux_review_ready_awaiting_merge_confirmation",
   "packages": {
     "V3-P0": {
       "status": "merged_owner_continue_authorized",
@@ -135,5 +135,44 @@
     "concurrency": 2,
     "retired_content_excluded": true,
     "status": "production_validation_in_progress"
+  },
+  "historical_status_before_restore": {
+    "updated_at": "2026-10-11",
+    "owner_instruction": "continue till finish the remaining plan, then merge and deploy everything",
+    "gate_policy": "All adopted Tier A/B ordinary native cycles and P5 local handoff are accepted. Owner explicitly authorizes merge/deploy; final approved-source parity, current integrated CI and existing-project production smoke must pass before completion.",
+    "deployment": "managed_vercel_active_final_release_pending",
+    "current_phase": "P5_accepted_ready_for_final_merge_deploy"
+  },
+  "current_review": {
+    "branch": "restore/v3-dashboards",
+    "base_revision": "6432ef262fafbb235141d670af9724c3d0138c17",
+    "pull_request": 83,
+    "report": "program/audits/ux-review-2026-10-13/README.md",
+    "findings": 44,
+    "verified_fixes": 7,
+    "remaining_findings": 37,
+    "personas": [
+      "Mona super_admin",
+      "Nour owner",
+      "invited Files-only member",
+      "new website signup"
+    ],
+    "mobile_viewport": "390x844",
+    "workspace_integration": "330/330 passed",
+    "targeted_regressions": "58/58 passed",
+    "order_key_regressions": "23/23 passed",
+    "local_routing_key_regressions": "15/15 passed",
+    "last_code_ci": {
+      "revision": "6c4e09a3",
+      "run": 38432564782,
+      "status": "success",
+      "checks_duration": "6m5s",
+      "windows_visuals_duration": "13m29s"
+    },
+    "current_report_ci": "See PR83 Checks for the published report head",
+    "lint": "Existing root lint debt documented; not passed",
+    "merge": "Requires user confirmation",
+    "deployment_authorized": false,
+    "local_audit_process": "Stopped at handoff; main checkout/processes untouched"
   }
 }

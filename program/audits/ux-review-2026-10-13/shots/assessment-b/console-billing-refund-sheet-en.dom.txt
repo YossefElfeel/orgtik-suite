@@ -1,0 +1,312 @@
+- button "Open Next.js Dev Tools":
+- alert: Billing operations
+- link:
+  - /url: "#ot-main"
+  - text: Skip to content
+- navigation:
+  - link:
+    - /url: /admin/en
+  - link:
+    - /url: http://127.0.0.1:3400/sos
+    - generic: Home
+  - link:
+    - /url: http://127.0.0.1:3400/sos/go/task_manager?workspaceId=ws_orgtik
+    - generic: Tasks
+  - link:
+    - /url: http://127.0.0.1:3400/sos/go/file_manager?workspaceId=ws_orgtik
+    - generic: Files
+  - link:
+    - /url: http://127.0.0.1:3400/sos/go/hr_system?workspaceId=ws_orgtik
+    - generic: HR
+  - link:
+    - /url: http://127.0.0.1:3400/sos/go/sales?workspaceId=ws_orgtik
+    - generic: CRM
+  - link:
+    - /url: http://127.0.0.1:3400/sos/go/digital_marketing?workspaceId=ws_orgtik
+    - generic: Marketing
+  - link:
+    - /url: http://127.0.0.1:3400/sos/go/hq?workspaceId=ws_orgtik
+    - generic: Chats
+  - link:
+    - /url: /admin/en
+    - generic: OrgTik Console
+  - link:
+    - /url: http://127.0.0.1:3400/sos/go/website_manager
+    - generic: Website Manager
+- button:
+- navigation:
+  - generic: OrgTik Console
+  - link:
+    - /url: /admin/en
+    - generic: Overview
+  - generic: Catalog
+  - link:
+    - /url: /admin/en/tools
+    - generic: Tools
+  - link:
+    - /url: /admin/en/catalog/software
+    - generic: Software catalog
+  - link:
+    - /url: /admin/en/plans
+    - generic: Plans and features
+  - link:
+    - /url: /admin/en/waitlist
+    - generic: Waitlist
+  - link:
+    - /url: /admin/en/releases
+    - generic: Releases and announcements
+  - generic: Pricing
+  - link:
+    - /url: /admin/en/pricing
+    - generic: Price grid
+  - link:
+    - /url: /admin/en/pricing/zones
+    - generic: Zones and countries
+  - link:
+    - /url: /admin/en/pricing/currencies
+    - generic: Currencies and rates
+  - link:
+    - /url: /admin/en/pricing/log
+    - generic: Pricing log
+  - generic: Offers and tax
+  - link:
+    - /url: /admin/en/bundles
+    - generic: Bundles
+  - link:
+    - /url: /admin/en/coupons
+    - generic: Coupons
+  - link:
+    - /url: /admin/en/tax
+    - generic: Tax and gateways
+  - link:
+    - /url: /admin/en/tax/checks
+    - generic: Mock tax ID checks
+  - generic: Customers
+  - link:
+    - /url: /admin/en/workspaces
+    - generic: Workspaces
+  - link:
+    - /url: /admin/en/migrations
+    - generic: Migrations
+  - link:
+    - /url: /admin/en/custom-plans
+    - generic: Custom plans
+  - link:
+    - /url: /admin/en/invoices
+    - generic: Invoices
+  - link:
+    - /url: /admin/en/billing
+    - generic: Billing operations
+  - generic: Support
+  - link:
+    - /url: /admin/en/tickets
+    - generic: Support tickets
+  - link:
+    - /url: /admin/en/tickets/targets
+    - generic: Ticket response targets
+  - generic: Ecosystem
+  - link:
+    - /url: /admin/en/ecosystem
+    - generic: Connections registry
+  - generic: System
+  - link:
+    - /url: /admin/en/reports
+    - generic: Reports
+  - link:
+    - /url: /admin/en/staff
+    - generic: Staff and roles
+  - link:
+    - /url: /admin/en/staff/invitations
+    - generic: Staff invitations
+  - link:
+    - /url: /admin/en/staff/security
+    - generic: Staff security
+  - link:
+    - /url: /admin/en/setup
+    - generic: Console setup
+  - link:
+    - /url: /admin/en/templates
+    - generic: Templates
+  - link:
+    - /url: /admin/en/settings
+    - generic: Settings
+  - link:
+    - /url: /admin/en/audit
+    - generic: Audit log
+- banner:
+  - navigation:
+    - list:
+      - link:
+        - /url: http://127.0.0.1:3400/sos
+        - text: OrgTik
+      - generic: OrgTik Console
+  - button:
+  - button:
+  - button:
+    - generic: MA
+- generic: Your staff roles
+- generic: Super Admin
+- main:
+  - heading [level=1]: Billing operations
+  - paragraph: Review current invoices, recover mock payments and preserve issued document amounts.
+  - generic: Simulated
+  - region:
+    - searchbox
+    - button:
+      - generic: Export invoice CSV
+    - button:
+      - generic: Export accounting CSV
+  - button:
+    - generic: Columns
+  - table:
+    - rowgroup:
+      - row:
+        - columnheader:
+          - button:
+            - text: Invoice
+          - separator
+        - columnheader:
+          - button:
+            - text: Workspace
+          - separator
+        - columnheader:
+          - text: Status
+          - separator
+        - columnheader:
+          - text: Total
+          - separator
+        - columnheader:
+          - text: Staff retries
+          - separator
+    - rowgroup:
+      - row:
+        - cell:
+          - button:
+            - generic: INV-2026-001041
+        - cell: OrgTik Egypt
+        - cell:
+          - generic: Paid
+        - cell: EGP 7,635.72
+        - cell: Enabled
+      - row:
+        - cell:
+          - button:
+            - generic: INV-2026-001042
+        - cell: OrgTik Egypt
+        - cell:
+          - generic: Paid
+        - cell: EGP 7,635.72
+        - cell: Enabled
+      - row:
+        - cell:
+          - button:
+            - generic: INV-2026-001043
+        - cell: OrgTik Egypt
+        - cell:
+          - generic: Paid
+        - cell: EGP 7,635.72
+        - cell: Enabled
+      - row:
+        - cell:
+          - button:
+            - generic: INV-2026-001044
+        - cell: OrgTik Egypt
+        - cell:
+          - generic: Open
+        - cell: EGP 7,635.72
+        - cell: Enabled
+      - row:
+        - cell:
+          - button:
+            - generic: INV-2026-001045
+        - cell: Nile Foods
+        - cell:
+          - generic: Paid
+        - cell: EGP 112.86
+        - cell: Enabled
+      - row:
+        - cell:
+          - button:
+            - generic: INV-2026-001046
+        - cell: Gulf Retail
+        - cell:
+          - generic: Partially refunded
+        - cell: AED 632.10
+        - cell: Enabled
+      - row:
+        - cell:
+          - button:
+            - generic: INV-2026-001047
+        - cell: Spree Studio
+        - cell:
+          - generic: Past due
+        - cell: €19.04
+        - cell: Enabled
+      - row:
+        - cell:
+          - button:
+            - generic: INV-2026-001048
+        - cell: Desert Logistics
+        - cell:
+          - generic: Void
+        - cell: KWD 3.700
+        - cell: Enabled
+      - row:
+        - cell:
+          - button:
+            - generic: INV-2026-001049
+        - cell: Gulf Retail
+        - cell:
+          - generic: Draft
+        - cell: AED 1,575.00
+        - cell: Enabled
+  - generic: 1–9 of 9
+  - generic: Rows per page
+  - combobox:
+    - generic: "10"
+  - textbox: "10"
+  - navigation:
+    - button [disabled]:
+    - generic: "1"
+    - button [disabled]:
+  - heading [level=2]: Invoice document series
+  - generic: Billing country code
+  - textbox
+  - generic: Series prefix
+  - textbox
+  - generic: Next document number
+  - spinbutton: "1"
+  - button:
+    - generic: Save series
+  - heading [level=2]: Card expiry reminders
+  - paragraph:
+    - text: Spree Studio ·
+    - generic: 3184 · 05/26
+  - button:
+    - generic: Record mock reminder
+  - heading [level=2]: Payment links
+  - link:
+    - /url: http://127.0.0.1:3400/sos/billing/pay/paylink_1057
+    - text: INV-2026-001044
+  - generic: Active · 20 Oct 2026
+  - button:
+    - generic: Revoke link
+- region "Notifications"
+- dialog "INV-2026-001041":
+  - heading "INV-2026-001041" [level=2]
+  - paragraph: OrgTik Egypt · EGP 7,635.72
+  - generic: Paid
+  - link "Open invoice details" [active]:
+    - /url: /admin/en/invoices/inv_1024
+  - button "Record invoice document":
+    - generic: Record invoice document
+  - button "Download PDF":
+    - generic: Download PDF
+  - heading "Credit note" [level=3]
+  - generic: Amount
+  - spinbutton "Amount": "0"
+  - generic: Audit reason
+  - textbox "Audit reason"
+  - button "Record mock refund":
+    - generic: Record mock refund
+  - button "Close":

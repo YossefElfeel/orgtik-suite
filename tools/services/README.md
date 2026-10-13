@@ -42,6 +42,13 @@ Run the whole suite locally with `pnpm dev:local`, or double-click
 account is `mona.adel@orgtik.test`, password `Local@2026`. Ctrl+C stops a run
 started in the terminal. Local data persists under `.vercel/dev/mock`.
 
+The launcher generates a random local checkout signing key at
+`.vercel/local-suite/orders.key` and reuses it across restarts. It is ignored by
+Git and never needs a hosted credential. Keep it with the local mock dataset;
+a corrupt key stops checkout startup rather than silently replacing the signing
+authority and invalidating existing order claims. Hosted signing requirements
+remain unchanged.
+
 For an isolated parallel preview, set `ORGTIK_LOCAL_PORT` to another free port.
 `ORGTIK_LOCAL_HOST=127.0.0.1` also isolates browser cookies from a preview using
 `localhost`. Each worktree keeps its own local dataset and process marker.
