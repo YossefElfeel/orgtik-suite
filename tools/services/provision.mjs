@@ -12,14 +12,20 @@ async function api(endpoint, method = "GET", body, allow404 = false) {
   url.searchParams.set("teamId", team);
   const response = await fetch(url, { method, headers: { authorization: `Bearer ${token}`, "content-type": "application/json" }, ...(body === undefined ? {} : { body: JSON.stringify(body) }), signal: AbortSignal.timeout(30000) });
   if (allow404 && response.status === 404) return null;
-  if (!response.ok) throw new Error(`Vercel ${method} ${url.pathname} failed (${response.status}); provider replies are omitted.`);
+  if (!response.ok) {
+    const error = (await response.json().catch(() => null))?.error;
+    const code = typeof error?.code === "string" && /^[a-zA-Z0-9_-]{1,100}$/.test(error.code) ? ` ${error.code}` : "";
+    throw new Error(`Vercel ${method} ${url.pathname} failed (${response.status}${code}); provider values are omitted.`);
+  }
   return response.json();
 }
 
 let project = await api(`/v9/projects/${name}`, "GET", undefined, true);
-if (!project) project = await api("/v11/projects", "POST", { name, framework: null, rootDirectory: null, nodeVersion: "22.x" });
+// nodeVersion is an update field, not accepted by the create-project endpoint.
+if (!project) project = await api("/v11/projects", "POST", { name, framework: null });
 if (project.name !== name || project.accountId !== team || !project.id?.startsWith("prj_")) throw new Error("New Services project ownership does not match the confirmed target.");
 if (project.rootDirectory && project.rootDirectory !== ".") throw new Error("Services project must use the repository root.");
+if (project.nodeVersion !== "22.x") await api(`/v9/projects/${project.id}`, "PATCH", { nodeVersion: "22.x" });
 
 const source = await api(`/v10/projects/${sourceProject}/env?decrypt=true`);
 const rows = Array.isArray(source) ? source : source.envs || [];
