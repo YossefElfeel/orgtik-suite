@@ -101,7 +101,7 @@ Cloud releases are manual. Publishing local changes does not start a Vercel
 deployment. Run the Services workflow on `main` explicitly for a cloud release.
 
 The main-only workflow validates the reviewed source, then builds and deploys
-the nine frontend/private-backend projects with a maximum of two parallel jobs.
+the nine frontend/private-backend projects in parallel on independent runners.
 Each artifact preserves original backend assets and dependencies, rejects Edge
 output, and stops if it contains more than twelve dedicated functions. It lists
 Next.js routes awaiting provider bundling separately; Vercel must accept their
