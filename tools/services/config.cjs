@@ -42,6 +42,6 @@ function clientEnvironment(key, env = process.env) {
 }
 function servicesNextConfig(key, env = process.env) {
   if (env.ORGTIK_SERVICES !== "1" && !env.VERCEL_DEV_PORT) return {};
-  return { basePath: `/${key}`, env: clientEnvironment(key, env) };
+  return { basePath: `/${key}`, env: clientEnvironment(key, env), experimental: { optimizePackageImports: ["@phosphor-icons/react"] } };
 }
 module.exports = { apps, packages, publicOrigin, webUrls, clientEnvironment, servicesNextConfig };

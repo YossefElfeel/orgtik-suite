@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import {
+  appRelativePath,
   useAuthSuccess,
   useHandoffSession,
   setClientSession,
@@ -57,8 +58,8 @@ export default function AuthContent() {
         token: handoff.session.tokens.accessToken,
       }),
     );
-    const base = window.location.pathname.replace(/\/auth\/?$/, "");
-    const to = first.current!.redirect;
+    const base = appRelativePath(window.location.pathname).replace(/\/auth\/?$/, "");
+    const to = appRelativePath(first.current!.redirect);
     confirm(() =>
       router.replace(
         /^\/(en|ar|de|fr|it)(\/|$)/.test(to)
