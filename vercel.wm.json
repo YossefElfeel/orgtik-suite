@@ -1,0 +1,46 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "regions": [
+    "fra1"
+  ],
+  "services": {
+    "wm": {
+      "root": "apps/wm",
+      "framework": "nextjs",
+      "installCommand": "cd ../.. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
+      "buildCommand": "node ../../tools/services/run.cjs build wm",
+      "devCommand": "node ../../tools/services/run.cjs dev wm",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "mock",
+          "format": "url",
+          "env": "ORGTIK_MOCK_URL"
+        }
+      ]
+    },
+    "mock": {
+      "root": "mock",
+      "framework": "express",
+      "entrypoint": "index.js",
+      "devCommand": "node services-dev.cjs",
+      "installCommand": "cd .. && npx --yes pnpm@11.3.0 install --frozen-lockfile",
+      "functions": {
+        "index.js": {
+          "includeFiles": "{apps,lib,api}/**",
+          "maxDuration": 60,
+          "memory": 2048,
+          "excludeFiles": "**/apps/files/assets/hls/**/*.ts"
+        }
+      }
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/wm/:path*",
+      "destination": {
+        "service": "wm"
+      }
+    }
+  ]
+}

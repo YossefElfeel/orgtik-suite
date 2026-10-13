@@ -4,11 +4,6 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 const output = path.resolve(".vercel/output/services/mock");
-const servicesOutput = path.resolve(".vercel/output/services");
-for (const file of fs.readdirSync(servicesOutput, { recursive: true }).filter(file => file.endsWith(".vc-config.json"))) {
-  const config = JSON.parse(fs.readFileSync(path.join(servicesOutput, file), "utf8"));
-  if (config.runtime === "edge") throw new Error(`Services cannot deploy Edge output: ${file}. Configure Node.js runtime before uploading.`);
-}
 const functions = path.join(output, "functions");
 if (!fs.existsSync(functions)) throw new Error("Mock Services function artifact is missing.");
 const files = fs.readdirSync(functions, { recursive: true }).filter(file => file.endsWith(".vc-config.json"));

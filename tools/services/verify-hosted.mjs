@@ -2,32 +2,38 @@
 // isolated Services dataset. Never resets or mutates business records.
 import { execFileSync } from "node:child_process";
 import { apps } from "./config.cjs";
+import { configFilename } from "./projects.mjs";
 const base = process.argv[2];
 if (!base || !/^https?:\/\//.test(base)) throw new Error("Provide the Services deployment URL.");
 const viaCli = process.argv.includes("--via-cli");
+const selectedService = process.argv[process.argv.indexOf("--service") + 1];
+const service = process.argv.includes("--service") ? selectedService : null;
+if (service && !apps.includes(service)) throw new Error("Unknown frontend service.");
 async function request(path, init = {}) {
   if (!viaCli) return fetch(new URL(path, base), { ...init, redirect: "manual", signal: AbortSignal.timeout(60000) });
   if (init.method || init.headers || init.body) throw new Error("Protected staging checks use GET routes only.");
-  const argv = ["--global-config", process.env.ORGTIK_VERCEL_CONFIG, "--scope", "team_Ypx8oiLDZi3PBNi8ht8fYPsm", "curl", path, "--deployment", base, "--", "--silent", "--show-error", "--max-time", "60", "--write-out", "\n%{http_code}"];
+  const argv = ["--global-config", process.env.ORGTIK_VERCEL_CONFIG, "--scope", "team_Ypx8oiLDZi3PBNi8ht8fYPsm", "--local-config", configFilename(service || "website"), "curl", path, "--deployment", base, "--", "--silent", "--show-error", "--max-time", "60", "--write-out", "\n%{http_code}"];
   const raw = execFileSync("vercel", argv, { encoding: "utf8", maxBuffer: 5 * 1024 * 1024 });
   const split = raw.lastIndexOf("\n"), status = Number(raw.slice(split + 1));
   return new Response(raw.slice(0, split), { status });
 }
 function check(condition, message) { if (!condition) throw new Error(message); }
-for (const app of apps) {
+for (const app of service ? [service] : apps) {
   const path = app === "sos" ? "/sos/auth/login?mode=staff&target=wm&redirect=%2Fgo%2Fwebsite_manager" : `/${app}/en/auth`;
   const response = await request(path);
   check(response.status === 200 || [307, 308].includes(response.status), `${app} entry returned ${response.status}`);
   console.log(`${app}: entry route ${response.status}`);
 }
-const website = await request("/");
-check(website.status === 200, `Website returned ${website.status}`);
+if (!service) {
+  const website = await request("/");
+  check(website.status === 200, `Website returned ${website.status}`);
+}
 const direct = await request("/mock/sos/api/auth/login");
 // Vite's development server can return the website shell for unknown paths.
 check(direct.status === 404 || (!base.startsWith("https:") && (await direct.text()).includes("<html")), "Internal mock acquired an unexpected public route");
-const publicCms = await request("/sos/api/backend/wm/v2/public/site");
+const publicCms = await request(`/${service || "sos"}/api/backend/wm/v2/public/site`);
 check(publicCms.status === 200, `CMS gateway unavailable (${publicCms.status})`);
-if (viaCli) {
+if (viaCli || service) {
   console.log("Protected staged service routing verified; production sign-in runs after promotion.");
 } else {
   const api = "/sos/api/backend/sos/api";
