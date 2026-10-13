@@ -39,6 +39,8 @@ test("build URLs point at the same deployment and never require or publish a bin
     assert.equal(value.env.NEXT_PUBLIC_SOS_URL, urls.sos);
   }
   assert.equal(clientEnvironment("website", env).VITE_CMS_API, "https://suite-preview.example/sos/api/backend/wm/v2");
+  // postMessage compares event.origin, which never includes the WM path prefix.
+  assert.equal(clientEnvironment("website", env).VITE_WM_ORIGIN, "https://suite-preview.example");
   assert.deepEqual(servicesNextConfig("sos", {}), {});
   assert.throws(() => webUrls({ VERCEL: "1", SUITE_SERVICES_PUBLIC_URL: "http://localhost:3000" }), /HTTPS/);
 });

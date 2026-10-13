@@ -25,7 +25,7 @@ function clientEnvironment(key, env = process.env) {
   const own = `${gateway}/${key}`, identity = `${gateway}/sos`;
   if (key === "website") return {
     VITE_SUITE_URL: urls.sos, VITE_CRM_PORTAL_URL: urls.sos,
-    VITE_SUITE_API: `${identity}/api`, VITE_CMS_API: `${gateway}/wm/v2`, VITE_WM_ORIGIN: urls.wm,
+    VITE_SUITE_API: `${identity}/api`, VITE_CMS_API: `${gateway}/wm/v2`, VITE_WM_ORIGIN: origin,
   };
   return {
     NEXT_PUBLIC_BASE_PATH: `/${key}`,
