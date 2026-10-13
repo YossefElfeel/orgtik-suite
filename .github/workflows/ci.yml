@@ -50,6 +50,9 @@ jobs:
       - name: Deployment artifact and URL regressions
         run: node --test tools/vercel/deployment.test.mjs tools/vercel/runtime-dependencies.test.mjs tools/vercel/verify-preview-revisions.test.mjs tools/vercel/workspace-runtime.test.mjs
 
+      - name: Services routing and private gateway regressions
+        run: node --test tools/services/services.test.mjs
+
       - name: Typecheck, message catalogs and tests (affected packages)
         run: pnpm turbo run typecheck i18n:check test --affected --continue --concurrency=2
         env:
@@ -60,7 +63,7 @@ jobs:
       - name: DS v2 contrast, neutral and chart palette gates
         run: node packages/ui/scripts/check-v2.mjs && node packages/ui/scripts/check-viz.mjs
       - name: Shared tab session and access regressions
-        run: node --test packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs
+        run: node --test packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs packages/ui/src/auth/urls.test.mjs
       - name: Workspace source manifest and API contracts match
         run: |
           node tools/dev/workspace-manifest.mjs --check

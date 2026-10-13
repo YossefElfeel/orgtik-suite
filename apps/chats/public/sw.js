@@ -7,8 +7,8 @@
  * would only produce confusing behaviour in front of an audience.
  */
 
-const SHELL_CACHE = "somion-hq-shell-v1";
-const SHELL_ASSETS = ["/manifest.webmanifest", "/icon-192.png", "/icon-512.png"];
+const SHELL_CACHE = "somion-hq-shell-v2:" + self.registration.scope;
+const SHELL_ASSETS = ["manifest.webmanifest", "icon-192.png", "icon-512.png"].map(path => new URL(path, self.registration.scope).pathname);
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(SHELL_CACHE).then((c) => c.addAll(SHELL_ASSETS)));
@@ -19,7 +19,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches
       .keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== SHELL_CACHE).map((k) => caches.delete(k))))
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith("somion-hq-shell-") && k !== SHELL_CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim()),
   );
 });

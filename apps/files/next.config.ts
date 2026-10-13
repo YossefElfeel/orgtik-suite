@@ -1,9 +1,11 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { servicesNextConfig } from "../../tools/services/config.cjs";
 
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+  ...servicesNextConfig("files"),
   // The registered local Files handoff uses this loopback alias in development.
   allowedDevOrigins: ["127.0.0.1"],
   images: {

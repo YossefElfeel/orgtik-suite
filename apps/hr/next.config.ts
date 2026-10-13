@@ -1,11 +1,13 @@
 import { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
+import { servicesNextConfig } from "../../tools/services/config.cjs";
 
 
 // Local development: allow next/image to load files served by the local mock API (http://localhost:4004/uploads/...).
 const localApi = process.env.NEXT_PUBLIC_API_URL?.startsWith("http://localhost");
 
 const nextConfig: NextConfig = {
+  ...servicesNextConfig("hr"),
   images: {
     domains: ["devbackhr.somion.org"],
     ...(localApi

@@ -1,4 +1,4 @@
-import { readClientSession, setClientSession, clearClientSession, profileFor, signOutSession, sessionRequest, toolAccess, type ScopeGrant, type SessionTokens, type StaffAccess, type WorkspaceContext } from "@orgtik/ui/auth";
+import { appPath, appRelativePath, readClientSession, setClientSession, clearClientSession, profileFor, signOutSession, sessionRequest, toolAccess, type ScopeGrant, type SessionTokens, type StaffAccess, type WorkspaceContext } from "@orgtik/ui/auth";
 
 export const SOS_API_URL = process.env.NEXT_PUBLIC_SOS_API_URL || "";
 export const SOS_URL = process.env.NEXT_PUBLIC_SOS_URL || "";
@@ -31,10 +31,10 @@ export async function exchangeCode(code: string): Promise<string> {
   pendingTokens.set(data.tokens.accessToken, data.tokens);
   return data.tokens.accessToken;
 }
-export const suiteEntryUrl = (): string => { const here = typeof window === "undefined" ? "" : `${window.location.pathname}${window.location.search}`; return here && here !== "/" ? `${SOS_URL}/go/hq?redirect=${encodeURIComponent(here)}` : `${SOS_URL}/go/hq`; };
+export const suiteEntryUrl = (): string => { const here = typeof window === "undefined" ? "" : appRelativePath(`${window.location.pathname}${window.location.search}`); return here && here !== "/" ? `${SOS_URL}/go/hq?redirect=${encodeURIComponent(here)}` : `${SOS_URL}/go/hq`; };
 export async function signOutOfSuite(): Promise<void> { const session = readSuiteSession(); if (session) await signOutSession(SOS_API_URL, session.token); clearSuiteSession(); window.location.assign(`${SOS_URL}/auth/login`); }
 export async function stopViewing(): Promise<void> {
   const session = readSuiteSession(); if (!session) return;
   const value = await sessionRequest<{ tokens: SessionTokens }>(SOS_API_URL, "/auth/exit-impersonation", session.token, {});
-  pendingTokens.set(value.tokens.accessToken, value.tokens); writeSuiteSession(await sessionFor(value.tokens.accessToken)); window.location.assign("/hq/office");
+  pendingTokens.set(value.tokens.accessToken, value.tokens); writeSuiteSession(await sessionFor(value.tokens.accessToken)); window.location.assign(appPath("/hq/office"));
 }

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
-import { staffTargetToken, handoffCode, SessionRequestError, useClientSession } from "@orgtik/ui/auth";
+import { appPath, appUrl, staffTargetToken, handoffCode, SessionRequestError, useClientSession } from "@orgtik/ui/auth";
 import { Button, ErrorState, NoPermissionState, Spinner } from "@orgtik/ui";
 import { CenteredState } from "@/components/frame/CenteredState";
 import { SOS_API, SOS_URL } from "@/lib/env";
@@ -21,8 +21,8 @@ export default function StaffGoPage() {
       const destinationToken = await staffTargetToken(SOS_API, token, target);
       const code = await handoffCode(SOS_API, destinationToken, target === "admin" ? "staff:admin" : "staff:wm");
       if (getToken() !== token) throw new SessionRequestError(409, "session_changed");
-      const origin = target === "admin" ? process.env.NEXT_PUBLIC_ADMIN_URL || "http://localhost:3008" : window.location.origin;
-      const destination = new URL("/" + locale + "/auth", origin); destination.searchParams.set("code", code);
+      const origin = target === "admin" ? process.env.NEXT_PUBLIC_ADMIN_URL || "http://localhost:3008" : window.location.origin + appPath("/");
+      const destination = appUrl(origin, "/" + locale + "/auth"); destination.searchParams.set("code", code);
       window.location.assign(destination.toString());
     })().catch(reason => { pending.current = null; throw reason; });
     let live = true;

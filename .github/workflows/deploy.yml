@@ -57,7 +57,10 @@ jobs:
           TURBO_SCM_HEAD: HEAD
           PREVIEW_VERIFY_ONLY: ${{ github.event_name != 'push' && inputs.environment != 'production' && (inputs.preview_projects == 'verify-readiness' || contains(github.event.pull_request.labels.*.name, 'preview:verify-only')) && '1' || '0' }}
         run: |
-          if [ "$PREVIEW_VERIFY_ONLY" = 1 ]; then
+          if [ "$GITHUB_EVENT_NAME" != workflow_dispatch ] && [ -f vercel.json ] && node -e 'process.exit(require("./vercel.json").services ? 0 : 1)'; then
+            echo '[]' > affected.json
+            echo 'Repository uses the new Services project; skipping the legacy project matrix.' >> "$GITHUB_STEP_SUMMARY"
+          elif [ "$PREVIEW_VERIFY_ONLY" = 1 ]; then
             node tools/vercel/verify-preview-revisions.mjs
             echo '[]' > affected.json
           else

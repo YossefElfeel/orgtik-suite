@@ -5,6 +5,7 @@ import {
   resolveAttachmentUpstreamUrls,
 } from "@/lib/attachmentDownloadUrls";
 import { toast } from "@orgtik/ui";
+import { appPath } from "@orgtik/ui/auth";
 
 // The failure message in the reader's language; ApiFeedback sets it once the language is known.
 let failedText = "Download failed";
@@ -102,7 +103,7 @@ export async function downloadAttachmentFile(
     return;
   }
 
-  const proxyUrl = `/api/attachment-download?u=${encodeURIComponent(fileUrl)}&name=${encodeURIComponent(filename)}`;
+  const proxyUrl = appPath(`/api/attachment-download?u=${encodeURIComponent(fileUrl)}&name=${encodeURIComponent(filename)}`);
 
   try {
     const response = await fetch(proxyUrl, {

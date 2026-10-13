@@ -9,12 +9,15 @@ export function getOriginFromDomain(domain: string): string | null {
   }
 }
 
-/** True when the configured domain resolves to the same origin as the current page. */
+/** True only for this app, including its base path in a Services deployment. */
 export function isSameOriginDomain(
   domain: string,
   currentOrigin = typeof window !== "undefined" ? window.location.origin : undefined
 ): boolean {
   if (!currentOrigin) return false;
   const targetOrigin = getOriginFromDomain(domain);
-  return targetOrigin !== null && targetOrigin === currentOrigin;
+  if (targetOrigin === null || targetOrigin !== currentOrigin) return false;
+  try {
+    return new URL(domain).pathname.replace(/\/$/, "") === (process.env.NEXT_PUBLIC_BASE_PATH || "");
+  } catch { return false; }
 }

@@ -1,11 +1,13 @@
 import path from "path";
 import { fileURLToPath } from "url";
+import { servicesNextConfig } from "../../tools/services/config.cjs";
 
 const projectRoot = path.dirname(fileURLToPath(import.meta.url));
 const nextIntlConfigPath = path.resolve(projectRoot, "i18n/request.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  ...servicesNextConfig("sales"),
   turbopack: {
     resolveAlias: {
       "next-intl/config": "./i18n/request.ts",

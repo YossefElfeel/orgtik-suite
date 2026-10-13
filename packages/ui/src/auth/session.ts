@@ -1,8 +1,11 @@
 "use client";
 import { useSyncExternalStore } from "react";
 import type { AuthEnvelope, SessionPerson, WorkspaceContext } from "./types.js";
+declare const process: { env: { NEXT_PUBLIC_BASE_PATH?: string } };
 
-const KEY = "orgtik.tab-session.v1", EVENT = "orgtik:session-changed";
+// Apps on one origin still keep independent tab sessions (especially staff vs
+// customer contexts). A one-time handoff remains the only transfer mechanism.
+const KEY = "orgtik.tab-session.v1" + (process.env.NEXT_PUBLIC_BASE_PATH || ""), EVENT = "orgtik:session-changed";
 let snapshot: AuthEnvelope | null = null, seen: string | null | undefined;
 export function readClientSession<User extends SessionPerson = SessionPerson>(): AuthEnvelope<User> | null {
   if (typeof window === "undefined") return null;

@@ -32,7 +32,7 @@ export function proxy(req: NextRequest) {
   }
   const signedIn = Boolean(req.cookies.get(TOKEN_COOKIE)?.value) && scopes.length > 0;
   if (!signedIn) return NextResponse.redirect(new URL(signInAgainUrl(pathname + req.nextUrl.search)));
-  if (!permissionsFor(scopes).hasAccess) return NextResponse.redirect(new URL(`/${locale}/auth/not-allowed`, req.url));
+  if (!permissionsFor(scopes).hasAccess) return NextResponse.redirect(new URL(`${req.nextUrl.basePath}/${locale}/auth/not-allowed`, req.url));
 
   return intlMiddleware(req);
 }

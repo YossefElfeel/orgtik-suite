@@ -1,5 +1,7 @@
+import { servicesNextConfig } from "../../tools/services/config.cjs";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  ...servicesNextConfig("chats"),
   reactStrictMode: true,
   transpilePackages: ['@excalidraw/excalidraw'],
   experimental: {

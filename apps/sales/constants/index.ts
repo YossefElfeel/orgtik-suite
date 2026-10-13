@@ -1,4 +1,5 @@
 import { SOS_URL as DEFAULT_SOS_URL } from "@somion/sos-bar";
+import { appRelativePath } from "@orgtik/ui/auth";
 
 export const SOS_URL = process.env.NEXT_PUBLIC_SOS_URL || DEFAULT_SOS_URL;
 
@@ -23,7 +24,7 @@ export const APP_SCOPE = "sales";
  * The way back into Sales after a sign-in: SOS's /go/sales signs the person in if needed, then
  * hands off to Sales with this path, so they land on the page they were on (SAL-016 in the log).
  */
-export const signInAgainUrl = (path: string) => `${SOS_URL}/go/${APP_SCOPE}?redirect=${encodeURIComponent(path)}`;
+export const signInAgainUrl = (path: string) => `${SOS_URL}/go/${APP_SCOPE}?redirect=${encodeURIComponent(appRelativePath(path))}`;
 
 /** Where a signed-out person goes when there's no page to come back to. */
 export const AUTH_REDIRECT_URL = SOS_URL;
