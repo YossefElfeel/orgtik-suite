@@ -40,7 +40,7 @@ const copy = [];
 for (const key of keys) {
   const row = rows.find(row => row.key === key && !row.gitBranch && row.target?.includes("production"));
   const value = production[key] || (row?.decrypted === true ? row.value : undefined);
-  if (typeof value === "string" && value && value !== "Sensitive value unavailable") copy.push({ key, value, type: "encrypted", target: ["production", "preview"] });
+  if (typeof value === "string" && value && value !== "[SENSITIVE]") copy.push({ key, value, type: "encrypted", target: ["production", "preview"] });
 }
 if (!(copy.some(row => row.key === "KV_REST_API_URL") && copy.some(row => row.key === "KV_REST_API_TOKEN")) && !(copy.some(row => row.key === "UPSTASH_REDIS_REST_URL") && copy.some(row => row.key === "UPSTASH_REDIS_REST_TOKEN"))) {
   for (const key of keys) {
