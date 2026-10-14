@@ -48,6 +48,9 @@ try {
   await page.getByRole('link',{name:'Open tool',exact:true}).first().click();await page.waitForURL(url=>url.pathname.startsWith('/tasks/'),{timeout:120000});
   assert.equal(new URL(page.url()).origin,origin);assert.ok(!new URL(page.url()).pathname.match(/tasks\/[^/]+\/tasks/));
   await page.getByRole('link',{name:'Home',exact:true}).first().waitFor({timeout:120000});await capture(page,'mona-tasks-en');
+  const chart=page.getByRole('figure',{name:'Open tasks by project',exact:true});
+  await chart.waitFor({timeout:60000});await chart.getByRole('button',{name:'Table',exact:true}).click();
+  await chart.getByText('Nile Foods E-commerce Revamp',{exact:true}).waitFor({timeout:60000});
   await visit(page,'/tasks/en/teams','team form');
   const taskCatalog=JSON.parse(fs.readFileSync(path.join(root,'apps/tasks/messages/en.json'),'utf8'));
   const label=taskCatalog.TeamList.create;

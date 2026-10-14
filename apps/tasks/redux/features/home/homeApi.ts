@@ -4,7 +4,7 @@ import { IDashboardData } from "@/types/home";
 
 const homeApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getDashboardAnalytics: builder.query<SuccessResponse<IDashboardData>, void>(
+    getDashboardAnalytics: builder.query<SuccessResponse<IDashboardData>, string>(
       {
         query: (params) => ({
           url: "/analytics/dashboard",

@@ -10,6 +10,7 @@ import { ErrorState, PageHeader, Stat, useStatusLabel, useFormatter } from "@org
 import { BarChart, DonutChart, LineChart } from "@orgtik/ui/charts";
 import { useGetDashboardAnalyticsQuery } from "@/redux/features/home/homeApi";
 import { TaskOnboarding } from "@/components/task/TaskOnboarding";
+import { useFileAuthority } from "@/lib/file-references";
 
 type Card = { key: "open" | "completed" | "total" | "overdue"; value: number; percentage: number };
 type StatusRow = { status: "todo" | "in_progress" | "in_review" | "done" | "backlog"; count: number };
@@ -28,7 +29,8 @@ export default function TasksDashboard() {
   const tp = useTranslations("Priority");
   const statusLabel = useStatusLabel();
   const f = useFormatter();
-  const { data, isLoading, isError, refetch } = useGetDashboardAnalyticsQuery();
+  const authority = useFileAuthority();
+  const { data, isLoading, isError, refetch } = useGetDashboardAnalyticsQuery(authority, { skip: !authority });
   const d = data?.data as unknown as Dashboard | undefined;
 
   if (isError) return <ErrorState size="page" title={t("errorTitle")} description={t("errorBody")} onRetry={() => refetch()} />;

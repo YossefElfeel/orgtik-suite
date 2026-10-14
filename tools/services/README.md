@@ -104,6 +104,7 @@ This mode verifies every public frontend upstream and releases the website/route
 without rebuilding nine apps. Full releases remain the default.
 `target=sos` updates only the launcher and then verifies/publishes the shared site,
 when the other eight frontend/mock deployments already match application source.
+`target=tasks` provides the same focused release for Tasks.
 
 The main-only workflow validates the reviewed source, then builds and deploys
 the nine frontend/private-backend projects in parallel on independent runners.
