@@ -26,7 +26,10 @@ export function configurationFor(key) {
       ? { website: development.services.website }
       : { [key]: development.services[key], mock: development.services.mock },
     rewrites: key === "website"
-      ? [...frontendProjects.map(app => ({ source: `/${app}/:path*`, destination: `https://${projectName(app)}.vercel.app/${app}/:path*` })), { source: "/(.*)", destination: { service: "website" } }]
+      ? [...frontendProjects.flatMap(app => {
+        const destination = `https://${projectName(app)}.vercel.app/${app}`;
+        return [{ source: `/${app}`, destination }, { source: `/${app}/`, destination }, { source: `/${app}/:path*`, destination: `${destination}/:path*` }];
+      }), { source: "/(.*)", destination: { service: "website" } }]
       : [{ source: `/${key}/:path*`, destination: { service: key } }],
   };
 }

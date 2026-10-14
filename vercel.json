@@ -97,36 +97,108 @@
   },
   "rewrites": [
     {
+      "source": "/admin",
+      "destination": "https://orgtik-suite-services-admin.vercel.app/admin"
+    },
+    {
+      "source": "/admin/",
+      "destination": "https://orgtik-suite-services-admin.vercel.app/admin"
+    },
+    {
       "source": "/admin/:path*",
       "destination": "https://orgtik-suite-services-admin.vercel.app/admin/:path*"
+    },
+    {
+      "source": "/chats",
+      "destination": "https://orgtik-suite-services-chats.vercel.app/chats"
+    },
+    {
+      "source": "/chats/",
+      "destination": "https://orgtik-suite-services-chats.vercel.app/chats"
     },
     {
       "source": "/chats/:path*",
       "destination": "https://orgtik-suite-services-chats.vercel.app/chats/:path*"
     },
     {
+      "source": "/files",
+      "destination": "https://orgtik-suite-services-files.vercel.app/files"
+    },
+    {
+      "source": "/files/",
+      "destination": "https://orgtik-suite-services-files.vercel.app/files"
+    },
+    {
       "source": "/files/:path*",
       "destination": "https://orgtik-suite-services-files.vercel.app/files/:path*"
+    },
+    {
+      "source": "/hr",
+      "destination": "https://orgtik-suite-services-hr.vercel.app/hr"
+    },
+    {
+      "source": "/hr/",
+      "destination": "https://orgtik-suite-services-hr.vercel.app/hr"
     },
     {
       "source": "/hr/:path*",
       "destination": "https://orgtik-suite-services-hr.vercel.app/hr/:path*"
     },
     {
+      "source": "/marketing",
+      "destination": "https://orgtik-suite-services-marketing.vercel.app/marketing"
+    },
+    {
+      "source": "/marketing/",
+      "destination": "https://orgtik-suite-services-marketing.vercel.app/marketing"
+    },
+    {
       "source": "/marketing/:path*",
       "destination": "https://orgtik-suite-services-marketing.vercel.app/marketing/:path*"
+    },
+    {
+      "source": "/sales",
+      "destination": "https://orgtik-suite-services-sales.vercel.app/sales"
+    },
+    {
+      "source": "/sales/",
+      "destination": "https://orgtik-suite-services-sales.vercel.app/sales"
     },
     {
       "source": "/sales/:path*",
       "destination": "https://orgtik-suite-services-sales.vercel.app/sales/:path*"
     },
     {
+      "source": "/sos",
+      "destination": "https://orgtik-suite-services-sos.vercel.app/sos"
+    },
+    {
+      "source": "/sos/",
+      "destination": "https://orgtik-suite-services-sos.vercel.app/sos"
+    },
+    {
       "source": "/sos/:path*",
       "destination": "https://orgtik-suite-services-sos.vercel.app/sos/:path*"
     },
     {
+      "source": "/tasks",
+      "destination": "https://orgtik-suite-services-tasks.vercel.app/tasks"
+    },
+    {
+      "source": "/tasks/",
+      "destination": "https://orgtik-suite-services-tasks.vercel.app/tasks"
+    },
+    {
       "source": "/tasks/:path*",
       "destination": "https://orgtik-suite-services-tasks.vercel.app/tasks/:path*"
+    },
+    {
+      "source": "/wm",
+      "destination": "https://orgtik-suite-services-wm.vercel.app/wm"
+    },
+    {
+      "source": "/wm/",
+      "destination": "https://orgtik-suite-services-wm.vercel.app/wm"
     },
     {
       "source": "/wm/:path*",
