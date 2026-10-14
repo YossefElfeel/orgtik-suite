@@ -31,6 +31,12 @@ if (websiteStaging) {
   console.log(`Protected website and ${result.frontends} public frontend upstreams verified; shared-domain routes and sign-in run after promotion.`);
 } else {
 for (const app of service ? [service] : apps) {
+  if (!viaCli) {
+    for (const basePath of [`/${app}`, `/${app}/`]) {
+      const entry = await request(basePath);
+      check(entry.status === 200 || [307, 308].includes(entry.status), `${app} base ${basePath} returned ${entry.status}`);
+    }
+  }
   const path = app === "sos" ? "/sos/auth/login?mode=staff&target=wm&redirect=%2Fgo%2Fwebsite_manager" : `/${app}/en/auth`;
   const response = await request(path);
   check(response.status === 200 || [307, 308].includes(response.status), `${app} entry returned ${response.status}`);

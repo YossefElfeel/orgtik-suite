@@ -28,6 +28,11 @@ test("each frontend project retains its private binding and the website gateway 
     assert.deepEqual(value.services[app].bindings, [{ type: "service", service: "mock", format: "url", env: "ORGTIK_MOCK_URL" }]);
     assert.deepEqual(value.rewrites, [{ source: `/${app}/:path*`, destination: { service: app } }]);
     assert.equal(gateway.rewrites.find(rule => rule.source === `/${app}/:path*`).destination, `https://${projectName(app)}.vercel.app/${app}/:path*`);
+    for (const basePath of [`/${app}`, `/${app}/`]) {
+      const rule = gateway.rewrites.find(rule => rule.source === basePath);
+      assert.equal(rule?.destination, `https://${projectName(app)}.vercel.app/${app}`);
+      assert.ok(gateway.rewrites.indexOf(rule) < gateway.rewrites.findIndex(rule => rule.source === `/${app}/:path*`));
+    }
     assert.equal(configFilename(app), `vercel.${app}.json`);
   }
   assert.deepEqual(gateway.rewrites.at(-1), { source: "/(.*)", destination: { service: "website" } });
