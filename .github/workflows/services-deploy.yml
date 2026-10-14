@@ -2,6 +2,12 @@ name: Deploy split Services projects
 
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: Release the whole suite, or only the website after unchanged frontends were verified
+        type: choice
+        default: full
+        options: [full, website]
 
 permissions:
   contents: read
@@ -28,12 +34,13 @@ jobs:
           node tools/services/projects.mjs --check
           pnpm --filter @orgtik/ui run build
           pnpm turbo run typecheck i18n:check --filter='!docs' --filter='!content-dashboard-somion' --continue --concurrency=2
-          node --test tools/services/services.test.mjs tools/services/redis-connection.test.mjs tools/services/runtime-entry.test.mjs packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs packages/ui/src/auth/urls.test.mjs
+          node --test tools/services/services.test.mjs tools/services/redis-connection.test.mjs tools/services/runtime-entry.test.mjs tools/services/website-staging.test.mjs packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs packages/ui/src/auth/urls.test.mjs
           node --test mock/lib/session-store.test.js mock/lib/session-authority.test.js mock/lib/journal-concurrency.test.js
           node tools/ci/secret-scan.mjs
 
   frontend:
     needs: validate
+    if: inputs.target != 'website'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     environment: production
@@ -85,6 +92,7 @@ jobs:
 
   website:
     needs: [validate, frontend]
+    if: always() && needs.validate.result == 'success' && (needs.frontend.result == 'success' || (inputs.target == 'website' && needs.frontend.result == 'skipped'))
     runs-on: ubuntu-latest
     timeout-minutes: 30
     environment: production
@@ -112,7 +120,7 @@ jobs:
       - name: Verify routing, promote the shared domain, and verify staff sign-in
         run: |
           url=$(cat services-deploy-url.txt)
-          node tools/services/verify-hosted.mjs "$url" --via-cli
+          node tools/services/verify-hosted.mjs "$url" --via-cli --website-staging
           vercel --global-config "$ORGTIK_VERCEL_CONFIG" --scope team_Ypx8oiLDZi3PBNi8ht8fYPsm promote "$url" --yes
           node tools/services/verify-hosted.mjs https://orgtik-suite-services.vercel.app
           echo "Website/router deployment: $url" >> "$GITHUB_STEP_SUMMARY"
