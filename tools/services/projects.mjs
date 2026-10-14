@@ -25,6 +25,13 @@ export function configurationFor(key) {
     services: key === "website"
       ? { website: development.services.website }
       : { [key]: development.services[key], mock: development.services.mock },
+    ...(key === "website" ? { redirects: [
+      { source: "/sos/", destination: "/sos", permanent: false },
+      ...frontendProjects.filter(app => app !== "sos").flatMap(app => [
+        ...[`/${app}`, `/${app}/`].map(source => ({ source, has: [{ type: "cookie", key: "NEXT_LOCALE", value: "(?<locale>en|ar|de|fr|it)" }], destination: `/${app}/:locale`, permanent: false })),
+        ...[`/${app}`, `/${app}/`].map(source => ({ source, destination: `/${app}/en`, permanent: false })),
+      ]),
+    ] } : {}),
     rewrites: key === "website"
       ? [...frontendProjects.flatMap(app => {
         const destination = `https://${projectName(app)}.vercel.app/${app}`;

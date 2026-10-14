@@ -32,6 +32,16 @@ test("each frontend project retains its private binding and the website gateway 
       const rule = gateway.rewrites.find(rule => rule.source === basePath);
       assert.equal(rule?.destination, `https://${projectName(app)}.vercel.app/${app}`);
       assert.ok(gateway.rewrites.indexOf(rule) < gateway.rewrites.findIndex(rule => rule.source === `/${app}/:path*`));
+      if (app !== "sos") {
+        const localized = gateway.redirects.find(rule => rule.source === basePath && rule.has);
+        assert.equal(localized.destination, `/${app}/:locale`);
+        const locale = new RegExp(`^${localized.has[0].value}$`);
+        for (const value of ["en", "ar", "de", "fr", "it"]) assert.equal(locale.exec(value)?.groups.locale, value);
+        assert.equal(locale.test("en/../../sos"), false);
+        const fallback = gateway.redirects.find(rule => rule.source === basePath && !rule.has);
+        assert.equal(fallback.destination, `/${app}/en`);
+        assert.ok(gateway.redirects.indexOf(localized) < gateway.redirects.indexOf(fallback));
+      }
     }
     assert.equal(configFilename(app), `vercel.${app}.json`);
   }

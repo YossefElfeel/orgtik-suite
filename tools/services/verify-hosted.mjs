@@ -35,6 +35,10 @@ for (const app of service ? [service] : apps) {
     for (const basePath of [`/${app}`, `/${app}/`]) {
       const entry = await request(basePath);
       check(entry.status === 200 || [307, 308].includes(entry.status), `${app} base ${basePath} returned ${entry.status}`);
+      if (!service && [307, 308].includes(entry.status)) {
+        const location = entry.headers.get("location");
+        check(location && new URL(location, base).origin === new URL(base).origin, `${app} base redirect left the shared domain`);
+      }
     }
   }
   const path = app === "sos" ? "/sos/auth/login?mode=staff&target=wm&redirect=%2Fgo%2Fwebsite_manager" : `/${app}/en/auth`;

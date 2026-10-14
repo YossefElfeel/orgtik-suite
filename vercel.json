@@ -95,6 +95,285 @@
       ]
     }
   },
+  "redirects": [
+    {
+      "source": "/sos/",
+      "destination": "/sos",
+      "permanent": false
+    },
+    {
+      "source": "/admin",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/admin/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/admin/",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/admin/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin/en",
+      "permanent": false
+    },
+    {
+      "source": "/admin/",
+      "destination": "/admin/en",
+      "permanent": false
+    },
+    {
+      "source": "/chats",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/chats/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/chats/",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/chats/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/chats",
+      "destination": "/chats/en",
+      "permanent": false
+    },
+    {
+      "source": "/chats/",
+      "destination": "/chats/en",
+      "permanent": false
+    },
+    {
+      "source": "/files",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/files/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/files/",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/files/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/files",
+      "destination": "/files/en",
+      "permanent": false
+    },
+    {
+      "source": "/files/",
+      "destination": "/files/en",
+      "permanent": false
+    },
+    {
+      "source": "/hr",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/hr/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/hr/",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/hr/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/hr",
+      "destination": "/hr/en",
+      "permanent": false
+    },
+    {
+      "source": "/hr/",
+      "destination": "/hr/en",
+      "permanent": false
+    },
+    {
+      "source": "/marketing",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/marketing/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/marketing/",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/marketing/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/marketing",
+      "destination": "/marketing/en",
+      "permanent": false
+    },
+    {
+      "source": "/marketing/",
+      "destination": "/marketing/en",
+      "permanent": false
+    },
+    {
+      "source": "/sales",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/sales/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/sales/",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/sales/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/sales",
+      "destination": "/sales/en",
+      "permanent": false
+    },
+    {
+      "source": "/sales/",
+      "destination": "/sales/en",
+      "permanent": false
+    },
+    {
+      "source": "/tasks",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/tasks/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/tasks/",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/tasks/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/tasks",
+      "destination": "/tasks/en",
+      "permanent": false
+    },
+    {
+      "source": "/tasks/",
+      "destination": "/tasks/en",
+      "permanent": false
+    },
+    {
+      "source": "/wm",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/wm/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/wm/",
+      "has": [
+        {
+          "type": "cookie",
+          "key": "NEXT_LOCALE",
+          "value": "(?<locale>en|ar|de|fr|it)"
+        }
+      ],
+      "destination": "/wm/:locale",
+      "permanent": false
+    },
+    {
+      "source": "/wm",
+      "destination": "/wm/en",
+      "permanent": false
+    },
+    {
+      "source": "/wm/",
+      "destination": "/wm/en",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     {
       "source": "/admin",
