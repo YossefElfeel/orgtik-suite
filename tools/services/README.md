@@ -99,6 +99,9 @@ assets and native browser navigation. Tab sessions use separate keys per app.
 
 Cloud releases are manual. Publishing local changes does not start a Vercel
 deployment. Run the Services workflow on `main` explicitly for a cloud release.
+Choose `target=website` only when unchanged frontends already passed their release.
+This mode verifies every public frontend upstream and releases the website/router
+without rebuilding nine apps. Full releases remain the default.
 
 The main-only workflow validates the reviewed source, then builds and deploys
 the nine frontend/private-backend projects in parallel on independent runners.
@@ -108,8 +111,10 @@ Next.js routes awaiting provider bundling separately; Vercel must accept their
 final bundled function count before any promotion. Each frontend is
 staged, its entry route and bound CMS gateway checked, and then promoted.
 
-The website/router deploys after all frontend jobs succeed. Its staged routing
-is checked before promotion; public staff sign-in and Website Manager handoff
+The website/router deploys after all frontend jobs succeed. The protected staged
+website and ordinary public upstreams are checked separately, so a protection
+bypass for one project never propagates to another. Complete shared-domain routes,
+public staff sign-in and Website Manager handoff
 are checked afterward. It retains the website's prerendered routes and genuine
 404 responses. This workflow releases Production; the separate Preview dataset
 is configured for future Preview releases.

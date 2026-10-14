@@ -3,12 +3,15 @@
 import { execFileSync } from "node:child_process";
 import nodePath from "node:path";
 import { apps } from "./config.cjs";
+import { verifyWebsiteStaging } from "./website-staging.mjs";
 const base = process.argv[2];
 if (!base || !/^https?:\/\//.test(base)) throw new Error("Provide the Services deployment URL.");
 const viaCli = process.argv.includes("--via-cli");
 const selectedService = process.argv[process.argv.indexOf("--service") + 1];
 const service = process.argv.includes("--service") ? selectedService : null;
 if (service && !apps.includes(service)) throw new Error("Unknown frontend service.");
+const websiteStaging = process.argv.includes("--website-staging");
+if (websiteStaging && (!viaCli || service)) throw new Error("Website staging requires its protected CLI check without a frontend selection.");
 async function request(path, init = {}) {
   if (!viaCli) return fetch(new URL(path, base), { ...init, redirect: "manual", signal: AbortSignal.timeout(60000) });
   if (init.method || init.headers || init.body) throw new Error("Protected staging checks use GET routes only.");
@@ -23,6 +26,10 @@ async function request(path, init = {}) {
   return new Response(raw.slice(0, split), { status });
 }
 function check(condition, message) { if (!condition) throw new Error(message); }
+if (websiteStaging) {
+  const result = await verifyWebsiteStaging({ protectedRequest: request, publicRequest: url => fetch(url, { redirect: "manual", signal: AbortSignal.timeout(60000) }) });
+  console.log(`Protected website and ${result.frontends} public frontend upstreams verified; shared-domain routes and sign-in run after promotion.`);
+} else {
 for (const app of service ? [service] : apps) {
   const path = app === "sos" ? "/sos/auth/login?mode=staff&target=wm&redirect=%2Fgo%2Fwebsite_manager" : `/${app}/en/auth`;
   const response = await request(path);
@@ -58,4 +65,5 @@ if (viaCli || service) {
   await post("/auth/logout", {}, exchanged.tokens.accessToken);
   // The exchanged token belongs to the original session; one logout revokes both.
   console.log("Staff sign-in, bound gateway and Website Manager handoff verified.");
+}
 }
