@@ -33,8 +33,9 @@ function startOfToday() {
 // ISO string for today + dayOffset at hh:mm local time.
 function at(dayOffset, hh = 10, mm = 0) {
   if (calendar) {
-    const p = calendar.parts(calendar.addCalendarDays(calendar.dayStart(), dayOffset));
-    return calendar.iso(calendar.fromWall({ ...p, hour: hh, minute: mm, second: 0 }));
+    // Select the civil date before resolving the requested hour. Cairo can skip
+    // midnight when DST starts, even though the seed's later hour is valid.
+    return calendarDay(ymd(calendar.dayStart()), dayOffset, hh, mm).toISOString();
   }
   const d = startOfToday();
   d.setDate(d.getDate() + dayOffset);
