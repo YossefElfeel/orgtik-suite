@@ -27,6 +27,7 @@ export function MediaPicker({
   disabled = false,
   imagesOnly = false,
   iconOnly = false,
+  alwaysOpen = false,
   kind,
 }: {
   value: string;
@@ -34,6 +35,8 @@ export function MediaPicker({
   disabled?: boolean;
   imagesOnly?: boolean;
   iconOnly?: boolean;
+  /** Show the library directly, including when an existing image is selected. */
+  alwaysOpen?: boolean;
   kind?: "image" | "video";
 }) {
   const t = useTranslations("Improvements");
@@ -45,6 +48,7 @@ export function MediaPicker({
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
   const [choosing, setChoosing] = useState(!value && !iconOnly);
+  const libraryOpen = alwaysOpen || choosing;
   const [uploadingNew, setUploadingNew] = useState(false);
   const library = useMediaQuery(
     {
@@ -53,7 +57,7 @@ export function MediaPicker({
       search,
       kind: kind ?? (imagesOnly ? "image" : undefined),
     },
-    { skip: disabled || !choosing || !can("media:view") },
+    { skip: disabled || !libraryOpen || !can("media:view") },
   );
   const [upload, uploading] = useUploadMediaMutation();
   const selection = useMediaQuery(
@@ -62,7 +66,7 @@ export function MediaPicker({
   );
   const selected = selection.data?.items.find(
     (item) =>
-      (item.source === "upload" ? libraryUrl(item) : item.file) === value,
+      (item.source === "upload" ? libraryUrl(item) : item.file) === value || [item.file, ...(item.retainedFiles ?? [])].some(file => value === file || value.endsWith(`/assets/${file}`) || value.endsWith(`/media/${file}`)),
   );
   const video =
     kind === "video" ||
@@ -81,7 +85,7 @@ export function MediaPicker({
             />
           ) : (
             <img
-              src={mediaUrl(value)}
+              src={selected ? libraryUrl(selected) : mediaUrl(value)}
               alt={selected?.alt.en ?? ""}
               className="h-28 max-w-full rounded-field object-contain"
             />
@@ -95,7 +99,7 @@ export function MediaPicker({
         <div className="flex flex-wrap items-center justify-between gap-3">
           {!disabled ? (
             <div className="flex flex-wrap items-center gap-2">
-              {can("media:view") ? (
+              {!alwaysOpen && can("media:view") ? (
                 <Button
                   variant="secondary"
                   size="sm"
@@ -139,7 +143,7 @@ export function MediaPicker({
           ) : null}
         </div>
       ) : null}
-      {!disabled && choosing && can("media:view") ? (
+      {!disabled && libraryOpen && can("media:view") ? (
         <>
           <Input
             type="search"

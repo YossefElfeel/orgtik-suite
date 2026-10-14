@@ -125,7 +125,7 @@ module.exports = {
     const analytics = require("./wm/analytics").makeAnalytics({ store, lib, ops, now: () => new Date().toISOString() });
     // Scheduled publishing happens when anyone asks: the mock has no background jobs.
     app.use("/v2", (req, res, next) => (lib.keepAddresses({ key: "scheduler" }, () => store.tick()), holder.studio?.observe(), next()));
-    const who = (req) => ({ key: req.who.user.key });
+    const who = (req) => ({ key: req.who.user.key, roles: req.who.roles });
     const TYPES = new Set(require("./wm/content").TYPES);
 
     app.get("/v2/admin/overview", need("overview:view"), (req, res) => {
@@ -188,11 +188,12 @@ module.exports = {
       const u = identity.findByKey(key);
       return { key, name: u ? identity.fullName(u) : key };
     };
-    const named = (row) => ({ ...row, updatedBy: person(row.updatedBy) });
+    const contentOut = value => lib.resolveMedia(value, ctx.apiUrl("wm"));
+    const named = (row) => ({ ...row, ...(row.image ? {image:contentOut(row.image)} : {}), updatedBy: person(row.updatedBy) });
     const send = (res, e, status = 200) => {
       res.set("ETag", String(e.workflow.version));
       const d = named(store.detail(e));
-      ok(res, { ...d, versions: d.versions.map((v) => ({ ...v, by: person(v.by) })) }, {}, status);
+      ok(res, { ...d, content:contentOut(d.content), live:d.live ? contentOut(d.live) : null, versions: d.versions.map((v) => ({ ...v, by: person(v.by) })) }, {}, status);
     };
 
     const studio = require("./wm/studio").create({ store, lib, ops, identity, ctx: { ...ctx, uploadsDir: UPLOADS } });
@@ -225,7 +226,7 @@ module.exports = {
       const state = String(req.query.state ?? "");
       const dept = String(req.query.department ?? "");
       const parent = String(req.query.parent ?? "");
-      let rows = [...store.entries.values()].filter((e) => e.type === req.params.type).map((e) => named(store.summary(e)));
+      let rows = [...store.entries.values()].filter((e) => e.type === req.params.type && e.id !== "gl_components").map((e) => named(store.summary(e)));
       if (q) rows = rows.filter((r) => r.name.toLowerCase().includes(q) || Object.values(r.slug).some((sl) => sl?.includes(q)));
       if (state) rows = rows.filter((r) => r.state === state);
       if (dept) rows = rows.filter((r) => r.department === dept);
@@ -350,7 +351,7 @@ module.exports = {
 
     // What the website reads (D-012: at runtime, with a last-known-good copy). Live content only.
     app.get("/v2/public/case-studies", (req, res) => {
-      ok(res, [...store.entries.values()].filter((e) => e.type === "caseStudy" && e.workflow.visibility === "live").sort((a, b) => a.order - b.order).map((e) => ({ id: e.id, department: e.department, format: e.format, ...e.live })));
+      ok(res, [...store.entries.values()].filter((e) => e.type === "caseStudy" && e.workflow.visibility === "live").sort((a, b) => a.order - b.order).map((e) => ({ id: e.id, department: e.department, format: e.format, ...contentOut(e.live) })));
     });
 
     const page = (req, rows) => {
@@ -557,7 +558,7 @@ module.exports = {
     });
     // Every published version of a legal document, newest first (plan: legal versions).
     app.get("/v2/public/legal/:key/versions", (req, res) => {
-      const e = store.entries.get(`lg_${req.params.key}`);
+      const e = [...store.entries.values()].find(entry => entry.type === "legalDocument" && entry.live?.slug?.en === req.params.key);
       if (!e) return fail(res, 404, "not_found", "No such legal document.");
       ok(res, e.legalVersions.map((v) => ({ ...v, by: undefined })));
     });
@@ -572,7 +573,7 @@ module.exports = {
       let rows = [...lib.media.values()].map((m) => mediaOf(m));
       if (kind) rows = rows.filter((m) => m.kind === kind);
       if (issue) rows = rows.filter((m) => issue === "attention" ? m.issues.some(value => value !== "unused") : m.issues.includes(issue));
-      if (q) rows = rows.filter((m) => `${m.file} ${m.description ?? ""} ${(m.tags ?? []).join(" ")} ${Object.values(m.alt).join(" ")}`.toLowerCase().includes(q));
+      if (q) rows = rows.filter((m) => `${m.file} ${(m.retainedFiles ?? []).join(" ")} ${m.description ?? ""} ${(m.tags ?? []).join(" ")} ${Object.values(m.alt).join(" ")}`.toLowerCase().includes(q));
       const counts = {};
       for (const m of [...lib.media.values()].map((x) => lib.mediaOut(x))) for (const i of m.issues) counts[i] = (counts[i] ?? 0) + 1;
       counts.attention = [...lib.media.values()].filter(m => lib.mediaOut(m).issues.some(issue => issue !== "unused")).length;
@@ -594,6 +595,14 @@ module.exports = {
       ok(res, mediaOf(m, true));
     });
     const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 15 * 1024 * 1024 } });
+    app.post("/v2/admin/media/:id/replace", need("media:edit"), (req, res, next) => upload.single("file")(req, res, error => error ? fail(res, 422, "invalid_image", "Choose a PNG, JPEG or WebP image up to 15 MB.") : next()), async (req, res) => {
+      try {
+        const m = await studio.replaceImage(req.who, req.params.id, req.file, Number(req.get("if-match")));
+        ok(res, mediaOf(m, true));
+      } catch (error) {
+        fail(res, error.status || 503, error.code || "replacement_failed", "The image was not replaced.");
+      }
+    });
     const ACCEPT = ["image/webp", "image/png", "image/jpeg", "image/svg+xml", "video/mp4", "video/webm"];
     app.post("/v2/admin/media", need("media:create"), (req, res, next) => upload.single("file")(req, res, error => error ? fail(res, 422, "invalid", "The upload is incomplete or exceeds 15 MB.", { fieldErrors: { file: "invalid" } }) : next()), (req, res) => {
       if (!req.file) return fail(res, 422, "invalid", "Choose a file to upload.", { fieldErrors: { file: "required" } });
@@ -611,8 +620,12 @@ module.exports = {
       if (r.status) return fail(res, r.status, r.code, r.message, { count: r.count });
       studio.cleanupMedia(m.id); res.status(204).end();
     });
-    app.get("/v2/media/:file", (req, res) => {
-      if (![...lib.media.values()].some(media => media.source === "upload" && media.file === req.params.file) && !studio.publicMediaFile(req.params.file)) return res.status(404).end();
+    app.get("/v2/media/:file", async (req, res) => {
+      if (![...lib.media.values()].some(media => media.source === "upload" && (media.file === req.params.file || media.retainedFiles?.includes(req.params.file))) && !studio.publicMediaFile(req.params.file)) return res.status(404).end();
+      try {
+        const content = await studio.imageContent(req.params.file);
+        if (content) return res.type(content.mimeType).send(content.bytes);
+      } catch { return fail(res, 503, "media_content_unavailable", "This image is unavailable."); }
       const f = path.join(UPLOADS, path.basename(req.params.file));
       if (!fs.existsSync(f)) return res.status(404).end();
       res.sendFile(f);
@@ -717,7 +730,7 @@ module.exports = {
       if (!TYPES.has(req.params.type)) return fail(res, 404, "unknown_type", `No content type ${req.params.type}.`);
       const rows = [...store.entries.values()].filter((e) => e.type === req.params.type && e.workflow.visibility !== "archived");
       rows.sort((a, b) => String(a.parent ?? "").localeCompare(String(b.parent ?? "")) || a.order - b.order);
-      ok(res, rows.map((e) => ({ id: e.id, order: e.order, ...(e.parent ? { parent: e.parent } : {}), ...(e.department ? { department: e.department, format: e.format } : {}), ...(e.draft ?? e.live), preview: { state: e.draft ? e.workflow.state : "published", onSite: e.workflow.visibility === "live" } })));
+      ok(res, rows.map((e) => ({ id: e.id, order: e.order, ...(e.parent ? { parent: e.parent } : {}), ...(e.department ? { department: e.department, format: e.format } : {}), ...contentOut(e.draft ?? e.live), preview: { state: e.draft ? e.workflow.state : "published", onSite: e.workflow.visibility === "live" } })));
     });
 
     // Every type the same way; the website's adapters rebuild its own shapes from these.
@@ -725,7 +738,7 @@ module.exports = {
       if (!TYPES.has(req.params.type)) return fail(res, 404, "unknown_type", `No content type ${req.params.type}.`);
       const rows = [...store.entries.values()].filter((e) => e.type === req.params.type && e.workflow.visibility === "live");
       rows.sort((a, b) => String(a.parent ?? "").localeCompare(String(b.parent ?? "")) || a.order - b.order);
-      ok(res, rows.map((e) => ({ id: e.id, order: e.order, ...(e.parent ? { parent: e.parent } : {}), ...(e.department ? { department: e.department, format: e.format } : {}), ...e.live })));
+      ok(res, rows.map((e) => ({ id: e.id, order: e.order, ...(e.parent ? { parent: e.parent } : {}), ...(e.department ? { department: e.department, format: e.format } : {}), ...contentOut(e.live) })));
     });
 
     // Prices shown on the website (plan: Pricing). Read-only here: numbers need pricing:edit and

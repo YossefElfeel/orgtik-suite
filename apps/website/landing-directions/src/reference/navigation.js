@@ -29,7 +29,7 @@ const VIEW_TO_PATH = {
   "/work": [[/^\/project\/([^/]+)$/, (m) => `/work/${m[1]}`]],
   "/insights": [[/^\/article\/([^/]+)$/, (m) => `/insights/${m[1]}`]],
   "/legal": [
-    [/^\/(imprint|privacy|terms|partners|sitemap)$/, (m) => `/legal/${m[1]}`],
+    [/^\/([a-z0-9]+(?:-[a-z0-9]+)*)$/, (m) => `/legal/${m[1]}`],
   ],
 };
 const PATH_TO_VIEW = {

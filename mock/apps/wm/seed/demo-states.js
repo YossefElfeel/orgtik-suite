@@ -1,5 +1,6 @@
 // Repeatable examples. Published content is retained; existing user revisions always win.
 const clone = (value) => JSON.parse(JSON.stringify(value));
+const { blankContent } = require("../defaults");
 const TYPES = [
   "page",
   "global",
@@ -12,6 +13,52 @@ const TYPES = [
   "roadmapItem",
   "review",
 ];
+function legalExamples({ entries, audit, now }) {
+  const at = now();
+  const states = ["draft", "in_review", "approved", "scheduled"];
+  const labels = ["Draft", "In review", "Approved", "Scheduled"];
+  const publishAt = new Date(Date.parse(at) + 365 * 86400000).toISOString();
+  for (const [index, state] of states.entries()) {
+    const id = `lg_demo_${state}`;
+    if (entries.has(id)) continue;
+    const name = `Sample legal document (${labels[index]})`;
+    const content = blankContent("legalDocument", undefined, at);
+    content.slug.en = `sample-legal-${state.replaceAll("_", "-")}`;
+    content.effectiveFrom = (state === "scheduled" ? publishAt : at).slice(0, 10);
+    content.locales.en = {
+      name,
+      summary: "Mock content for reviewing the legal document workflow.",
+      sections: [{
+        heading: "Workflow example",
+        body: "This sample document demonstrates editing, review, approval, and scheduling in Website Manager. Replace this mock text before using it as a legal document.",
+      }],
+    };
+    content.seo.en = { title: name, description: content.locales.en.summary, robots: "noindex", inSitemap: false };
+    const versions = states.slice(0, index + 1).map((stage, step) => ({
+      version: step + 1,
+      state: stage,
+      at,
+      by: step < 2 ? "manager" : "admin",
+      note: `Sample ${stage.replaceAll("_", " ")} revision for testing the legal workflow.`,
+      content: clone(content),
+      ...(stage === "scheduled" ? { publishAt } : {}),
+    })).reverse();
+    const entry = {
+      marks: {}, id, type: "legalDocument", siteId: "orgtik", demoState: true,
+      order: Math.max(0, ...[...entries.values()].filter(row => row.type === "legalDocument").map(row => row.order)) + 1,
+      live: null, draft: content,
+      workflow: {
+        state, visibility: "not_on_site", version: index + 1,
+        updatedAt: at, updatedBy: versions[0].by, publishedAt: null, lastEditor: "manager",
+        ...(state === "scheduled" ? { publishAt } : {}),
+      },
+      translation: Object.fromEntries(["en", "ar", "de", "fr", "it"].map(locale => [locale, locale === "en" ? "in_progress" : "not_started"])),
+      versions, legalVersions: [], translators: {},
+    };
+    entries.set(id, entry);
+    audit.unshift({ at, by: entry.workflow.updatedBy, action: "sample_revision", entry: id, type: entry.type, version: entry.workflow.version, targetName: name, sample: true });
+  }
+}
 function publishedExamples({ entries, audit, now }) {
   for (const type of TYPES) {
     const rows = [...entries.values()].filter((entry) => entry.type === type);
@@ -162,6 +209,7 @@ function contentExamples({ entries, audit, ideas, now }) {
     }
   }
   publishedExamples({ entries, audit, now });
+  legalExamples({ entries, audit, now });
   for(const [type,action,entry] of [["page","save","pg_home"],["page","submit","pg_home"],["page","approve","pg_home"],["page","publish","pg_home"],["page","request_changes","pg_home"],["page","discard","pg_home"],["page","schedule","pg_home"],["page","unschedule","pg_home"],["page","restore","pg_home"],["page","approve_figures","pg_home"],["page","translation_submit","pg_home"],["page","translation_approve","pg_home"],["page","translation_reopen","pg_home"],["media","media_delete","md_01"],["redirect","redirect_update","rd_demo_manager"],["lead","leads_export","ld_05"],["lead","lead_note","ld_05"],["lead","lead_contact","ld_05"],["lead","lead_qualify","ld_05"],["lead","lead_unqualify","ld_05"],["lead","lead_quote","ld_05"],["lead","lead_win","ld_05"],["lead","lead_lose","ld_05"],["lead","lead_spam","ld_05"],["lead","lead_duplicate","ld_05"],["lead","lead_reopen","ld_05"],["idea","idea_plan","idea_01"],["idea","idea_start","idea_01"],["idea","idea_ship","idea_01"],["idea","idea_decline","idea_01"],["idea","idea_merge","idea_01"],["user","user_roles","sample_user"],["media","media_upload","md_01"],["media","media_update","md_02"],["redirect","redirect_create","rd_demo_manager"],["redirect","redirect_delete","rd_demo_retired"],["idea","idea_publish","idea_01"],["idea","idea_hide","idea_02"],["lead","lead_assign","ld_05"],["lead","lead_erase","ld_sample_erased"],["settings","site_settings","site"],["settings","search_visibility","site"],["user","user_create","sample_user"],["user","user_update","sample_user"]]) {
     const sampleId="audit_example_"+action;
     if(!audit.some(event=>event.sampleId===sampleId))audit.push({at:now(),by:"admin",type,action,entry,sample:true,sampleId,targetName:"Sample "+type+" activity"});
@@ -300,6 +348,7 @@ function redirectExamples(redirects, now) {
 }
 module.exports = {
   contentExamples,
+  legalExamples,
   publishedExamples,
   populateTranslationExamples,
   leadExamples,

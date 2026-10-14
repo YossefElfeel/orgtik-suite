@@ -98,10 +98,12 @@ export type MultiSelectProps<V extends string = string> = Common<V> & {
   value?: V[];
   defaultValue?: V[];
   onValueChange?: (value: V[]) => void;
+  /** Let selected chips wrap onto additional rows without changing default control density. */
+  growWithSelection?: boolean;
 };
 
 /** Pick several (people to share with, tags). Chosen items show as removable chips. */
-export function MultiSelect<V extends string = string>({ options, value, defaultValue, onValueChange, placeholder, size, emptyText, className, "aria-label": ariaLabel, ...props }: MultiSelectProps<V>) {
+export function MultiSelect<V extends string = string>({ options, value, defaultValue, onValueChange, placeholder, size, emptyText, className, growWithSelection = false, "aria-label": ariaLabel, ...props }: MultiSelectProps<V>) {
   const t = useStrings();
   const { locale } = useOrgtik();
   const byValue = useMemo(() => new Map(options.map((o) => [o.value, o])), [options]);
@@ -118,14 +120,14 @@ export function MultiSelect<V extends string = string>({ options, value, default
       onValueChange={(os) => onValueChange?.((os as ComboOption<V>[]).map((o) => o.value))}
       {...props}
     >
-      <BaseCombobox.Chips className={cn(controlFrame({ size }), "flex h-auto min-h-control-md flex-wrap items-center gap-1.5 px-2 py-1.5", className)}>
+      <BaseCombobox.Chips className={cn(controlFrame({ size: growWithSelection ? null : size }), "flex h-auto min-h-control-md flex-wrap items-center gap-1.5 px-2 py-1.5", growWithSelection && (size === "sm" ? "min-h-control-sm text-body-sm" : size === "lg" ? "min-h-control-lg text-body-lg" : "min-h-control-md text-body"), className)}>
         <BaseCombobox.Value>
           {(chosen: ComboOption<V>[]) => (
             <>
               {chosen.map((o) => (
-                <BaseCombobox.Chip key={o.value} className="inline-flex h-7 items-center gap-1 rounded-pill bg-brand-subtle ps-2.5 pe-1 text-body-sm text-fg-brand outline-hidden focus-visible:outline-2 focus-visible:outline-focus">
-                  <span dir="auto">{o.label}</span>
-                  <BaseCombobox.ChipRemove aria-label={t("removeItem", { label: o.label })} className="grid size-5 place-items-center rounded-pill hover:bg-hover">
+                <BaseCombobox.Chip key={o.value} className="inline-flex h-7 min-w-0 max-w-full items-center gap-1 rounded-pill bg-brand-subtle ps-2.5 pe-1 text-body-sm text-fg-brand outline-hidden focus-visible:outline-2 focus-visible:outline-focus">
+                  <span dir="auto" className="truncate" title={o.label}>{o.label}</span>
+                  <BaseCombobox.ChipRemove aria-label={t("removeItem", { label: o.label })} className="grid size-5 shrink-0 place-items-center rounded-pill hover:bg-hover">
                     <X aria-hidden="true" className="size-3" />
                   </BaseCombobox.ChipRemove>
                 </BaseCombobox.Chip>

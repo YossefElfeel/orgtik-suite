@@ -75,6 +75,21 @@ function makeLibrary({ seed, store, now, uploads, demo = false }) {
     const uses = usesOf(m);
     return { ...m, usage: uses.length + m.templateUses.length, issues: issuesOf(m, uses), ...(withUses ? { uses } : {}) };
   }
+  // Resolve retained file references at read time; saved content and old revisions stay intact.
+  function resolveMedia(value, base) {
+    const replacements = [...media.values()].filter(m => m.source === 'upload' && m.retainedFiles?.length);
+    if (!replacements.length) return value;
+    const walk = v => {
+      if (typeof v === 'string') {
+        const m = replacements.find(m => [m.file, ...m.retainedFiles].some(file => v === file || v.endsWith(`/assets/${file}`) || v.endsWith(`/media/${file}`)));
+        return m ? `${base.replace(/\/$/, '')}/v2/media/${encodeURIComponent(m.file)}` : v;
+      }
+      if (Array.isArray(v)) return v.map(walk);
+      if (v && typeof v === 'object') return Object.fromEntries(Object.entries(v).map(([key, child]) => [key, walk(child)]));
+      return v;
+    };
+    return walk(value);
+  }
   function updateMedia(m, who, patch) {
     const next = clone(m);
     const errors = {};
@@ -306,7 +321,7 @@ function makeLibrary({ seed, store, now, uploads, demo = false }) {
     return { data: { media: rows, redirects: redirects_, settings: settings_, demoVersion: incoming.data.demoVersion ?? 0 }, sequences: { nextMedia: codec.sequence(incoming.sequences?.nextMedia, rows, "md"), nextRedirect: codec.sequence(incoming.sequences?.nextRedirect, redirects_, "rd") } };
   };
   const importState = value => { const incoming = validateState(value); codec.replaceMap(media, incoming.data.media); codec.replaceMap(redirects, incoming.data.redirects); codec.replaceObject(settings, incoming.data.settings); nextMedia = incoming.sequences.nextMedia; nextRedirect = incoming.sequences.nextRedirect; if (incoming.data.demoVersion < 1) ensureDemo(); };
-  return { media, redirects, settings, mediaOut, updateMedia, addUpload, removeMedia, health, CHECKS, saveRedirect, removeRedirect, sitemap, indexingUrls, robots, setVisibility, RIGHTS, keepAddresses, previewAddresses, exportState, importState, validateState };
+  return { media, redirects, settings, mediaOut, resolveMedia, updateMedia, addUpload, removeMedia, health, CHECKS, saveRedirect, removeRedirect, sitemap, indexingUrls, robots, setVisibility, RIGHTS, keepAddresses, previewAddresses, exportState, importState, validateState };
 }
 
 module.exports = { makeLibrary };

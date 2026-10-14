@@ -8,11 +8,13 @@ export function SectionAttachments({
   onChange,
   disabled,
   disabledReason,
+  alwaysOpen = false,
 }: {
   items: MediaRef[];
   onChange: (items: MediaRef[]) => void;
   disabled: boolean;
   disabledReason?: string;
+  alwaysOpen?: boolean;
 }) {
   const t = useTranslations("Improvements");
   return (
@@ -31,6 +33,7 @@ export function SectionAttachments({
         {items.map((item, index) => (
           <MediaPicker
             key={index}
+            alwaysOpen={alwaysOpen}
             value={item.src}
             disabled={disabled}
             onChange={(src, media) =>
@@ -52,6 +55,7 @@ export function SectionAttachments({
         ))}
         {!disabled && items.length < 10 ? (
           <MediaPicker
+            alwaysOpen={alwaysOpen}
             value=""
             onChange={(src, media) =>
               src &&

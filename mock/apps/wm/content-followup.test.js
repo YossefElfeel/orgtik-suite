@@ -4,6 +4,78 @@ const {makeStore}=require('./content');
 const {DEPARTMENTS,blankContent}=require('./defaults');
 const who={key:'editor'}, approver={key:'approver'}, all={can:()=>true};
 const make=()=>makeStore(()=> '2026-10-05T10:00:00.000Z');
+
+test('new legal documents start private, copy wording without approval history, and validate their addresses',()=>{
+ const s=make(),template=s.entries.get('lg_privacy'),before=structuredClone(template);
+ const e=s.create('legalDocument',who,{name:'Cookie policy',slug:'cookie-policy'}).entry;
+ assert.equal(e.type,'legalDocument');assert.equal(e.live,null);assert.equal(e.workflow.state,'draft');assert.equal(e.workflow.visibility,'not_on_site');
+ assert.deepEqual(e.legalVersions,[]);assert.equal(e.draft.versionLabel,'1.0');assert.equal(e.draft.effectiveFrom,null);assert.deepEqual(e.draft.locales.en,{name:'Cookie policy',summary:'',sections:[]});
+ const copy=s.create('legalDocument',who,{name:'Privacy copy',slug:'privacy-copy',from:template.id}).entry;
+ assert.deepEqual(copy.draft.locales.en.sections,template.live.locales.en.sections);assert.equal(copy.draft.versionLabel,'1.0');assert.equal(copy.draft.effectiveFrom,null);assert.deepEqual(copy.legalVersions,[]);assert.deepEqual(template,before);
+ for(const slug of ['privacy','cookie-policy','partners','sitemap','index'])assert.equal(s.create('legalDocument',who,{name:'Duplicate',slug}).errors['slug.en'],'slug_taken');
+ assert.equal(s.create('legalDocument',who,{name:'Missing address',slug:''}).errors['slug.en'],'required');
+ assert.equal(s.create('legalDocument',who,{name:'Bad address',slug:'not/a/slug'}).errors['slug.en'],'slug_format');
+ const restored=make();restored.importState(s.exportState());assert.deepEqual(restored.detail(restored.entries.get(e.id)),s.detail(e));
+ assert.ok(s.remove(e,who).ok);assert.equal(s.entries.has(e.id),false);
+});
+
+test('new legal documents require separate legal approval and retain immutable published versions',()=>{
+ const s=make(),e=s.create('legalDocument',who,{name:'Additional terms',slug:'additional-terms'}).entry;
+ const fields={summary:'Local flow fixture',sections:[{heading:'Scope',body:'Test wording'}]};
+ assert.ok(s.save(e,who,{locale:'en',fields},all).entry);assert.ok(s.transition(e,who,'submit',all).entry);
+ assert.equal(s.transition(e,approver,'approve',{can:p=>p!=='legal:approve'}).required,'legal:approve');
+ assert.equal(s.transition(e,{...who,roles:['wm_admin']},'approve',all).code,'four_eyes');
+ assert.ok(s.transition(e,approver,'approve',all).entry);
+ assert.equal(s.transition(e,approver,'publish',all).fieldErrors.effectiveFrom,'required');assert.equal(e.live,null);
+ assert.ok(s.save(e,who,{neutral:{effectiveFrom:'2026-10-05'}},all).entry);
+ for(const action of ['submit','approve','publish'])assert.ok(s.transition(e,action==='submit'?who:approver,action,all).entry);
+ assert.equal(e.workflow.visibility,'live');assert.equal(e.legalVersions.length,1);const published=structuredClone(e.legalVersions[0]);
+ assert.equal(s.remove(e,who).code,'published_before');
+ assert.ok(s.save(e,who,{locale:'en',fields:{summary:'Revised wording'}},all).entry);assert.deepEqual(e.legalVersions[0],published);assert.equal(e.live.locales.en.summary,'Local flow fixture');
+ for(const action of ['submit','approve'])assert.ok(s.transition(e,action==='submit'?who:approver,action,all).entry);
+ assert.equal(s.transition(e,approver,'publish',all).fieldErrors.versionLabel,'version_exists');
+ assert.ok(s.save(e,who,{neutral:{versionLabel:'1.1'}},all).entry);
+ for(const action of ['submit','approve','publish'])assert.ok(s.transition(e,action==='submit'?who:approver,action,all).entry);
+ assert.equal(e.legalVersions.length,2);assert.deepEqual(e.legalVersions[1],published);assert.equal(e.live.locales.en.summary,'Revised wording');
+});
+
+test('review category changes persist as drafts and publish through the existing workflow',()=>{
+ const s=make(),e=s.entries.get('rv_01'),live=structuredClone(e.live);
+ assert.ok(s.save(e,who,{neutral:{category:'software'}},all).entry);
+ assert.equal(e.draft.category,'software');assert.deepEqual(e.live,live);
+ const restored=make();restored.importState(s.exportState());assert.equal(restored.entries.get(e.id).draft.category,'software');
+ assert.ok(s.transition(e,who,'submit',all).entry);
+ assert.ok(s.transition(e,approver,'approve',all).entry);
+ assert.ok(s.transition(e,approver,'publish',all).entry);
+ assert.equal(e.live.category,'software');assert.equal(e.draft,null);
+ const version=e.workflow.version;
+ assert.equal(s.save(e,who,{neutral:{category:'other'}},all).errors.category,'invalid');
+ assert.equal(e.workflow.version,version);assert.equal(e.live.category,'software');
+ assert.equal(s.create('review',who,{name:'Category fixture'}).entry.draft.category,'services');
+});
+test('review page selections preserve legacy links, persist and publish multiple targets, and clear completely',()=>{
+ const s=make(),e=s.entries.get('rv_01'),live=structuredClone(e.live);
+ const ids=['serviceFamily','service','softwareModule'].map(type=>[...s.entries.values()].find(row=>row.type===type).id);
+ assert.ok(s.save(e,who,{neutral:{relatedEntry:ids[0]}},all).entry);
+ assert.deepEqual(e.draft.relatedEntries,[ids[0]]);
+ assert.ok(s.save(e,who,{neutral:{relatedEntries:ids}},all).entry);
+ assert.deepEqual(e.draft.relatedEntries,ids);assert.equal(e.draft.relatedEntry,ids[0]);assert.deepEqual(e.live,live);
+ const restored=make();restored.importState(s.exportState());assert.deepEqual(restored.entries.get(e.id).draft.relatedEntries,ids);
+ for(const action of ['submit','approve','publish']) assert.ok(s.transition(e,action==='submit'?who:approver,action,all).entry);
+ assert.deepEqual(e.live.relatedEntries,ids);assert.equal(e.draft,null);
+ assert.ok(s.save(e,who,{neutral:{relatedEntries:[]}},all).entry);
+ assert.deepEqual(e.draft.relatedEntries,[]);assert.equal(e.draft.relatedEntry,'');assert.deepEqual(e.live.relatedEntries,ids);
+ assert.deepEqual(s.create('review',who,{name:'Pages fixture'}).entry.draft.relatedEntries,[]);
+});
+
+test('review page selections reject invalid, duplicate and non-catalog targets without altering the entry',()=>{
+ const s=make(),e=s.entries.get('rv_01'),before=structuredClone(e);
+ for(const value of ['sm_01',null,['unknown'],['sm_01','sm_01'],['pg_home'],[7]]){
+  assert.equal(s.save(e,who,{neutral:{relatedEntries:value}},all).errors.relatedEntries,'invalid');
+  assert.deepEqual(e,before);
+ }
+});
+
 test('translations preserve approved figures and the enabled narrative',()=>{
  const s=make(),e=s.entries.get('cs_01');s.approveFigures(e,approver);
  s.save(e,approver,{neutral:{narrativePublished:true}},all);

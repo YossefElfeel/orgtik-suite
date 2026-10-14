@@ -46,7 +46,6 @@ function useNav(): NavSection[] {
         { key: t("global"), href: "/content/global", icon: <Globe />, permission: "content:view" },
         { key: t("strings"), href: "/content/strings", icon: <TextAa />, permission: "content:view" },
         { key: t("translations"), href: "/localization", icon: <Translate />, permission: "localization:view" },
-        { key: v3("translationDrafts"), href: "/localization/drafts", icon: <Translate />, permission: "localization:view" },
         { key: t("preview"), href: "/preview", icon: <Monitor />, permission: "content:view" },
       ],
     },
@@ -76,13 +75,11 @@ function useNav(): NavSection[] {
         { key: t("roadmap"), href: "/content/roadmap", icon: <MapTrifold />, permission: "content:view" },
         { key: t("leads"), href: "/marketing/leads", icon: <Tray />, permission: "marketing:view" },
         { key: t("ideas"), href: "/marketing/ideas", icon: <Lightbulb />, permission: "marketing:view" },
-        { key: v3("formChecks"), href: "/marketing/forms", icon: <Tray />, permission: "marketing:view" },
       ],
     },
     {
       label: t("sections.settings"),
       items: [
-        { key: v3("administration"), href: "/admin", icon: <GearSix />, permission: "overview:view" },
         { key: t("site"), href: "/settings/site", icon: <GearSix />, permission: "settings:view" },
         { key: t("team"), href: "/settings/roles", icon: <Key />, permission: "settings:view" },
         { key: ti("userManagement"), href: "/settings/users", icon: <Key />, permission: "users:view" },

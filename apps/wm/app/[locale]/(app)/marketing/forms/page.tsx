@@ -1,3 +1,6 @@
-import {RequirePermission} from "@/components/frame/RequirePermission";
-import {FormChecks} from "@/components/studio/FormChecks";
-export default function Page(){return <RequirePermission permission="marketing:view"><FormChecks/></RequirePermission>;}
+import { redirect } from "@/i18n/routing";
+
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  redirect({ href: "/marketing/leads", locale });
+}

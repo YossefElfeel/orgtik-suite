@@ -3,7 +3,7 @@
 import type { ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { DotsThreeVertical } from "@phosphor-icons/react";
-import { Button, Menu, MenuContent, MenuGroup, MenuTrigger } from "@orgtik/ui";
+import { Button, Menu, MenuContent, MenuTrigger } from "@orgtik/ui";
 
 /** A visible, consistently sized entry point for every dashboard row menu. */
 export function RowActionsMenu({
@@ -31,17 +31,7 @@ export function RowActionsMenu({
           }
         />
         <MenuContent align="end" className="min-w-52">
-          <MenuGroup
-            label={
-              target ? (
-                <span dir="auto" className="block max-w-72 truncate text-fg">
-                  {target}
-                </span>
-              ) : undefined
-            }
-          >
-            {children}
-          </MenuGroup>
+          {children}
         </MenuContent>
       </Menu>
     </span>

@@ -122,7 +122,7 @@ export function NewEntry({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{tt(`${key}.new`)}</DialogTitle>
-          <DialogDescription>{t("newBody")}</DialogDescription>
+          <DialogDescription>{t(key === "legalDocument" ? "newLegalBody" : "newBody")}</DialogDescription>
         </DialogHeader>
         <DialogBody className="flex flex-col gap-4">
           <Field
@@ -161,7 +161,7 @@ export function NewEntry({
           ) : null}
           <Field
             label={t("startFrom")}
-            description={t("startFromHelp")}
+            description={t(key === "legalDocument" ? "legalStartFromHelp" : "startFromHelp")}
             error={errors.from ? t("errorRequired") : undefined}
           >
             <Select

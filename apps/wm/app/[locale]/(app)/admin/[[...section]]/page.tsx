@@ -1,5 +1,20 @@
-"use client";
-import {useParams,notFound} from "next/navigation";
-import {RequirePermission} from "@/components/frame/RequirePermission";
-import {StaffAdministration} from "@/components/studio/StaffAdministration";
-export default function Page(){const params=useParams<{section?:string[]}>(),active=params.section?.[0]||"overview";if((params.section?.length||0)>1||!["overview","members","roles","settings","connections","import-export","audit","billing"].includes(active))notFound();return <RequirePermission permission="overview:view"><StaffAdministration active={active}/></RequirePermission>;}
+import { notFound } from "next/navigation";
+import { redirect } from "@/i18n/routing";
+
+const destinations: Record<string, string> = {
+  overview: "/",
+  members: "/settings/users",
+  roles: "/settings/roles",
+  settings: "/settings/site",
+  connections: "/settings/site",
+  "import-export": "/media",
+  audit: "/settings/audit",
+  billing: "/catalog/software",
+};
+
+export default async function Page({ params }: { params: Promise<{ locale: string; section?: string[] }> }) {
+  const { locale, section } = await params;
+  const destination = destinations[section?.[0] ?? "overview"];
+  if ((section?.length ?? 0) > 1 || !destination) notFound();
+  redirect({ href: destination, locale });
+}

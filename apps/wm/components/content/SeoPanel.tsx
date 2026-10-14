@@ -73,6 +73,7 @@ export function SeoPanel({
   errors,
   can,
   onChange,
+  fullWidthFields = false,
 }: {
   lang: Locale;
   seo: SeoBlock;
@@ -90,6 +91,7 @@ export function SeoPanel({
   errors: Record<string, string>;
   can: { edit: boolean; canonical: boolean; jsonLd: boolean };
   onChange: (patch: Partial<SeoBlock>) => void;
+  fullWidthFields?: boolean;
 }) {
   const t = useTranslations("Seo.block");
   const title = seo.title ?? "";
@@ -133,7 +135,7 @@ export function SeoPanel({
   };
 
   return (
-    <div className="grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)]">
+    <div className={fullWidthFields ? "grid min-w-0 gap-4" : "grid gap-4 xl:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)]"}>
       <div className="flex min-w-0 flex-col gap-4">
         <Section icon={<MagnifyingGlass />} title={t("search")}>
           {/* The result as a search engine shows it: address, title and description, cut where they'd be cut.
@@ -210,7 +212,7 @@ export function SeoPanel({
           {siteHidden ? (
             <p className="rounded-field bg-warning-subtle px-3 py-2 text-body-sm text-warning">{t("siteHidden")}</p>
           ) : null}
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className={fullWidthFields ? "grid min-w-0 gap-4" : "grid gap-4 sm:grid-cols-2"}>
             <Field label={t("robots")}>
               <Select
                 readOnly={!can.edit}
@@ -264,7 +266,7 @@ export function SeoPanel({
         </Section>
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className={fullWidthFields ? "grid min-w-0 items-start gap-4 sm:grid-cols-2" : "flex flex-col gap-4"}>
         <Section icon={<CheckCircle />} title={t("checks")} aside={<span className="text-body-sm text-fg-muted tabular-nums">{t("checksDone", { done, total: checks.length })}</span>}>
           <ul className="flex flex-col gap-2">
             {checks.map((c) => (

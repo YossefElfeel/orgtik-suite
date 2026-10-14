@@ -39,7 +39,7 @@ export default class Legal extends ReferencePage {
     if (h === "" || h === "/") return { view: "index" };
     if (h.charAt(0) !== "/") return null;
     const p = h.slice(1).split("/");
-    if (["imprint", "privacy", "terms", "partners"].indexOf(p[0]) >= 0)
+    if (p.length === 1 && (Object.hasOwn(this.LG, p[0]) || p[0] === "partners"))
       return { view: p[0] };
     return { view: "index" };
   }
@@ -535,9 +535,7 @@ export default class Legal extends ReferencePage {
       asidePos: s.narrow ? "static" : "sticky",
       docCols: s.narrow ? "minmax(0,1fr)" : "220px minmax(0,1fr)",
       tabs: [
-        ["imprint", msg("Legal:11")],
-        ["privacy", msg("Legal:12")],
-        ["terms", "Terms and conditions"],
+        ...Object.entries(this.LG).map(([slug, document]) => [slug, document.title]),
         ["partners", info.title],
       ].map((t) => {
         const on = k === t[0];

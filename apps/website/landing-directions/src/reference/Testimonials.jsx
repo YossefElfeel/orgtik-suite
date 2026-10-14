@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useId, useRef, useState } from "react";
 import snapshot from "../content/snapshot";
 import { currentLocale, dirOf, wordsOf } from "../content/locale";
+import { routeOf } from "../content/heads";
 import { SectionMedia } from "../content/managed-page";
 import "./cms-content.css";
 import "./testimonials.css";
@@ -114,35 +115,42 @@ const labels = {
   },
 };
 
-function relatedTo(entry) {
-  for (const type of [
-    "serviceFamily",
-    "service",
-    "softwareModule",
-    "caseStudy",
-  ]) {
-    const record = (snapshot.entries[type] ?? []).find(
-      (row) => row.id === entry.relatedEntry,
-    );
-    if (record) {
-      const words = wordsOf(record.locales) ?? {};
-      return {
-        kind: type === "softwareModule" ? "software" : "services",
-        name: words.name ?? words.title ?? record.name,
-      };
+function relatedIds(entry) {
+  return entry.relatedEntries ?? (entry.relatedEntry ? [entry.relatedEntry] : []);
+}
+
+function relatedTo(entry, pagePath) {
+  const ids = pagePath ? [routeOf(pagePath)?.entry.id] : relatedIds(entry);
+  for (const id of ids) {
+    for (const type of ["serviceFamily", "service", "softwareModule", "caseStudy"]) {
+      const record = (snapshot.entries[type] ?? []).find(row => row.id === id);
+      if (record) {
+        const words = wordsOf(record.locales) ?? {};
+        return {
+          kind: type === "softwareModule" ? "software" : "services",
+          name: words.name ?? words.title ?? record.name,
+        };
+      }
     }
   }
   return null;
 }
 
-/** Read from the published snapshot; generic reviews remain usable on either overview. */
-export function reviewsFor(scope) {
+function categoryOf(entry) {
+  return ["services", "software"].includes(entry.category)
+    ? entry.category
+    : relatedTo(entry)?.kind;
+}
+
+/** Read the selected category; legacy reviews retain their related-content fallback. */
+export function reviewsFor(scope, pagePath) {
+  const targetId = pagePath ? routeOf(pagePath)?.entry.id : null;
   return (snapshot.entries.review ?? [])
     .filter(
-      (entry) =>
+      (entry) => pagePath ? Boolean(targetId && relatedIds(entry).includes(targetId)) :
         !["services", "software"].includes(scope) ||
-        !relatedTo(entry) ||
-        relatedTo(entry).kind === scope,
+        !categoryOf(entry) ||
+        categoryOf(entry) === scope,
     )
     .slice()
     .sort(
@@ -276,13 +284,14 @@ function useTestimonials(count, rtl) {
 
 export function Testimonials({
   scope = "general",
+  pagePath,
   project,
   className = "",
   ...props
 }) {
   const locale = currentLocale();
   const label = labels[locale] ?? labels.en;
-  const reviews = reviewsFor(scope);
+  const reviews = reviewsFor(scope, pagePath);
   const carousel = useTestimonials(reviews.length, dirOf(locale) === "rtl");
   const headingId = useId();
   const trackId = useId();
@@ -328,7 +337,8 @@ export function Testimonials({
         >
           {reviews.map((entry) => {
             const words = wordsOf(entry.locales) ?? {};
-            const related = relatedTo(entry);
+            const related = relatedTo(entry, pagePath);
+            const category = categoryOf(entry);
             return (
               <figure
                 key={entry.id}
@@ -340,9 +350,9 @@ export function Testimonials({
                   <div className="testimonials__category">
                     <span>{related?.name ?? label.reviews}</span>
                     <span
-                      className={`testimonials__tag${related?.kind === "software" ? " testimonials__tag--software" : ""}`}
+                      className={`testimonials__tag${category === "software" ? " testimonials__tag--software" : ""}`}
                     >
-                      {related ? label[related.kind] : label.review}
+                      {category ? label[category] : label.review}
                     </span>
                   </div>
                 </div>

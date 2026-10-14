@@ -243,6 +243,7 @@ export type EntryContent = {
   sample?: boolean;
   position?: number;
   relatedEntry?: string;
+  relatedEntries?: string[];
   narrativePublished?: boolean;
   sampleNarrativePublished?: boolean;
   /** Pages and Global: an internal name and the layout. */
@@ -385,6 +386,7 @@ export type NeutralPatch = Partial<
     | "sample"
     | "position"
     | "relatedEntry"
+    | "relatedEntries"
   >
 >;
 
@@ -499,6 +501,7 @@ export type RightsStatus =
 export type MediaIssue =
   "noAlt" | "altSuggested" | "rightsUnknown" | "rightsExpiring" | "unused";
 export type MediaItem = {
+  retainedFiles?: string[];
   description?: string;
   tags?: string[];
   id: string;
@@ -922,6 +925,17 @@ export const api = createApi({
       },
       invalidatesTags: ["MediaList", "Overview"],
     }),
+    replaceMedia: b.mutation<MediaItem, { id: string; version: number; file: File }>({
+      query: ({id, version, file}) => {
+        const body = new FormData();
+        body.append("file", file);
+        return {url:`/admin/media/${id}/replace`, method:"POST", body, headers:{"if-match":String(version)}};
+      },
+      invalidatesTags: ["Media", "MediaList", "Entry", "EntryList", "Overview", "Seo"],
+      async onQueryStarted({id}, {dispatch, queryFulfilled}) {
+        try { const {data} = await queryFulfilled; dispatch(api.util.upsertQueryData("mediaItem", id, data)); } catch { /* The replacement dialog preserves the selected file for retry. */ }
+      },
+    }),
     deleteMedia: b.mutation<void, string>({
       query: (id) => ({ url: `/admin/media/${id}`, method: "DELETE" }),
       invalidatesTags: ["MediaList", "Overview"],
@@ -1152,6 +1166,7 @@ export const {
   useMediaItemQuery,
   useUpdateMediaMutation,
   useUploadMediaMutation,
+  useReplaceMediaMutation,
   useDeleteMediaMutation,
   useSeoHealthQuery,
   useRedirectsQuery,

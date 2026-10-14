@@ -3896,7 +3896,7 @@ export default class Software extends ReferencePage {
                 </section>
               </>
             )}
-            {v.isOverview && <Testimonials data-cms-section="reviews" scope="software" />}
+            {(v.isOverview || v.isProduct) && <Testimonials data-cms-section="reviews" scope="software" pagePath={v.isProduct ? `/software/${this.state.route.id}` : undefined} key={this.state.route.id ?? "overview"} />}
             <section
               id={"closing"}
               className="closing-cta"

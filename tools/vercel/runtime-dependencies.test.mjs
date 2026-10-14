@@ -1,12 +1,38 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import os from "node:os";
+import { createRequire } from "node:module";
 import { test } from "node:test";
+import { copyWmImageOriginals } from "./wm-media-assets.mjs";
 import { assertFlowEvidence, buildRuntimeCheckPlan, changedRuntimeFiles, previewTokenRefreshAt, projectManifest, resolvePreviewUrls, runtimeDependencies, selectRuntimeConsumers } from "./runtime-dependencies.mjs";
 
 const select = (changedFiles, deployedKeys = ["mock"]) => selectRuntimeConsumers({ changedFiles, deployedKeys });
 const sandbox = "https://orgtik-suite-mock-preview.vercel.app";
 const activeConsumers = runtimeDependencies.consumers.filter(key => !projectManifest.projects[key].retired);
+
+test("isolated WM runtime can replace a seeded image and retain its exact original bytes", async t => {
+  const runtime = fs.mkdtempSync(path.join(os.tmpdir(), "wm-image-runtime-"));
+  t.after(() => {
+    assert.ok(path.basename(runtime).startsWith("wm-image-runtime-") && path.dirname(runtime) === os.tmpdir());
+    fs.rmSync(runtime, { recursive: true, force: true });
+  });
+  const files = copyWmImageOriginals(runtime);
+  const modulePath = path.join(runtime, "apps/wm/media-replacement.js");
+  fs.copyFileSync(new URL("../../mock/apps/wm/media-replacement.js", import.meta.url), modulePath);
+  fs.copyFileSync(new URL("../../mock/apps/wm/image-storage.js", import.meta.url), path.join(runtime, "apps/wm/image-storage.js"));
+  const { replaceImage } = createRequire(import.meta.url)(modulePath);
+  const uploadsDir = path.join(runtime, "uploads"), state = {mediaVersions:{}}, store = {audit:[]};
+  const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScLbtAAAAABJRU5ErkJggg==", "base64");
+  assert.equal(files.length, 6);
+  for (const [index, file] of files.entries()) {
+    const key = `md_${index + 1}`, original = fs.readFileSync(new URL(`../../apps/website/landing-directions/public/assets/${file}`, import.meta.url));
+    const media = {id:key, file, version:1, kind:"image", source:"website"};
+    await replaceImage({lib:{media:new Map([[key, media]])}, state, store, uploadsDir, now:()=>"2026-10-14T00:00:00Z", who:{user:{key:"fixture"}}, key, file:{buffer:png, mimetype:"image/png", originalname:"new.png"}, version:1});
+    assert.equal(media.version, 2);
+    assert.deepEqual(fs.readFileSync(path.join(uploadsDir, state.mediaVersions[key][0].file)), original);
+  }
+});
 
 test("shared mock, server and UI changes test all runtime consumers without deploying them", () => {
   for (const file of ["mock/lib/auth-store.js", "mock/server.js", "mock/api/index.js", "mock/config.js", "packages/ui/src/components/button.tsx"]) {

@@ -34,6 +34,10 @@ export type EditorContext = {
   readOnly: boolean;
   structureLocked: boolean;
   numbersLocked: boolean;
+  /** Work lets editors select media directly from the visible library. */
+  mediaAlwaysOpen?: boolean;
+  /** Insights fields occupy one full-width row each. */
+  fullWidthFields?: boolean;
   /** Field errors from the API, keyed by path ("name", "approach.steps.0.title"). */
   errors: Record<string, string>;
 };
@@ -45,6 +49,8 @@ type Props = {
   onChange: (v: unknown) => void;
   path: string;
   ctx: EditorContext;
+  /** Name each list item's card from its content, keeping the stored list unchanged. */
+  cardTitleKey?: string;
 };
 
 /** An empty value of a node's shape, for "Add step". */
@@ -133,6 +139,7 @@ export function ValueEditor({
   onChange,
   path,
   ctx,
+  cardTitleKey,
 }: Props) {
   const label = useLabel();
   const inline = useInline();
@@ -152,7 +159,7 @@ export function ValueEditor({
 
   switch (node.kind) {
     case "image":
-      return <Field label={label(node.label)}><MediaPicker imagesOnly value={str(value)} onChange={onChange} disabled={ctx.readOnly || ctx.numbersLocked} /></Field>;
+      return <Field label={label(node.label)}><MediaPicker imagesOnly alwaysOpen={ctx.mediaAlwaysOpen} value={str(value)} onChange={onChange} disabled={ctx.readOnly || ctx.numbersLocked} /></Field>;
     case "icon":
       return <Field label={label(node.label)}><IconPicker value={str(value)} onChange={onChange} disabled={ctx.readOnly || ctx.numbersLocked} /></Field>;
     case "text":
@@ -240,9 +247,9 @@ export function ValueEditor({
               label={label(node.label)}
               error={error}
               description={hintOf(node)}
-              className={node.long ? "sm:col-span-2" : undefined}
+              className={node.long && !ctx.fullWidthFields ? "sm:col-span-2" : undefined}
             >
-              <RichCopyEditor value={str(value)} fallback={str(fallback)} onChange={onChange} disabled={ctx.readOnly} lang={ctx.lang} label={label(node.label)} long={node.long} fixedValues={node.fixedValues} />
+              <RichCopyEditor value={str(value)} fallback={str(fallback)} onChange={onChange} disabled={ctx.readOnly} lang={ctx.lang} label={label(node.label)} long={node.long} fixedValues={node.fixedValues} singleField={node.label === "header" || node.label === "headerAccent" || node.hint?.key === "heading"} />
               {node.fixedValues ? (
                 <div role="note" className="mt-2 text-body-sm text-fg-muted">
                   <p>{tw("fixedValuesHelp")}</p>
@@ -267,7 +274,7 @@ export function ValueEditor({
             <Field
               label={label(node.label)}
               error={error}
-              className="sm:col-span-2"
+              className={ctx.fullWidthFields ? undefined : "sm:col-span-2"}
             >
               <Textarea
                 value={str(value)}
@@ -322,7 +329,7 @@ export function ValueEditor({
             {label(node.label)}
           </legend>
           <p className="mb-1.5 text-body-sm text-fg-muted">{tw("linesHelp")}</p>
-          <div className="grid gap-2 sm:grid-cols-2">
+          <div className={ctx.fullWidthFields ? "grid min-w-0 gap-2" : "grid gap-2 sm:grid-cols-2"}>
             {[0, 1].map((i) => (
               <Input
                 key={i}
@@ -398,7 +405,7 @@ export function ValueEditor({
       const pair = Array.isArray(value) ? (value as unknown[]) : ["", ""];
       const fb = Array.isArray(fallback) ? (fallback as unknown[]) : [];
       return (
-        <div className="grid gap-2 sm:grid-cols-2">
+        <div className={ctx.fullWidthFields ? "grid min-w-0 gap-2" : "grid gap-2 sm:grid-cols-2"}>
           <Field label={label(node.first)}>
             <Input
               value={str(pair[0])}
@@ -437,8 +444,10 @@ export function ValueEditor({
       return (
         <fieldset
           className={cn(
-            "grid gap-4 sm:grid-cols-2",
-            node.label && "sm:col-span-2 rounded-card border border-line p-4",
+            "grid min-w-0 gap-4",
+            !ctx.fullWidthFields && "sm:grid-cols-2",
+            node.label && "rounded-card border border-line p-4",
+            node.label && !ctx.fullWidthFields && "sm:col-span-2",
           )}
         >
           {node.label ? (
@@ -450,9 +459,9 @@ export function ValueEditor({
             <div
               key={k}
               className={cn(
-                ["longtext", "lines", "group", "list", "series"].includes(
+                !ctx.fullWidthFields && (["longtext", "lines", "group", "list", "series"].includes(
                   n.kind,
-                ) && "sm:col-span-2",
+                ) || n.kind === "rich" && (n.label === "description" || n.label === "header" || n.label === "headerAccent" || n.hint?.key === "heading")) ? "sm:col-span-2" : undefined,
               )}
             >
               <ValueEditor
@@ -488,7 +497,7 @@ export function ValueEditor({
       };
       return (
         <section aria-labelledby={id} className="flex flex-col gap-3">
-          <h3 id={id} className="text-label text-fg">
+          <h3 id={id} className={cn("text-label text-fg", cardTitleKey && "sr-only")}>
             {label(node.label)}
           </h3>
           {items.length === 0 ? (
@@ -541,14 +550,18 @@ export function ValueEditor({
               ) : (
                 <li
                   key={i}
-                  className="flex flex-col gap-3 rounded-card border border-line bg-raised p-4"
+                  className={cn("flex min-w-0 flex-col gap-3 rounded-card border border-line bg-raised p-4", cardTitleKey && "gap-4 p-5")}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-caption font-semibold text-fg-muted">
-                      {item} {i + 1}
-                    </span>
+                    {cardTitleKey ? (
+                      <h4 className="min-w-0 text-title-sm font-semibold text-fg">
+                        {str(at(v, cardTitleKey)) || str(at(fb[i], cardTitleKey)) || `${item} ${i + 1}`}
+                      </h4>
+                    ) : (
+                      <span className="text-caption font-semibold text-fg-muted">{item} {i + 1}</span>
+                    )}
                     {fixed ? null : (
-                      <span className="flex items-center gap-1">
+                      <span className="flex shrink-0 items-center gap-1">
                         <IconButton
                           size="sm"
                           label={tw("moveUp", { item: inItem, n: i + 1 })}

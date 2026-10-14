@@ -11465,6 +11465,18 @@
     },
     {
       "app": "wm",
+      "method": "POST",
+      "path": "/v2/admin/media/:id/replace",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
       "method": "GET",
       "path": "/v2/admin/members",
       "source": "apps/wm.js",

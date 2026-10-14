@@ -25,7 +25,7 @@ export function ReviewSummary({
   const text = (key: string) =>
     typeof words?.[key] === "string" ? (words[key] as string) : "";
   return (
-    <div className="flex min-w-0 items-start gap-3 py-1">
+    <div className="flex min-w-0 items-center gap-3 py-3">
       {entry.image?.src ? (
         <img
           src={mediaUrl(entry.image.src)}

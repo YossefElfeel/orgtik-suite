@@ -4,6 +4,7 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { restoreRuntimeEntry } from "./runtime-entry.mjs";
+import { copyWmImageOriginals } from "../vercel/wm-media-assets.mjs";
 const output = path.resolve(".vercel/output/services/mock");
 const functions = path.join(output, "functions");
 if (!fs.existsSync(functions)) throw new Error("Mock Services function artifact is missing.");
@@ -24,6 +25,7 @@ if (path.relative(folder, mockRoot).startsWith("..")) throw new Error("Mock runt
 fs.mkdirSync(mockRoot, { recursive: true });
 fs.cpSync(runtime, mockRoot, { recursive: true, dereference: false, verbatimSymlinks: true });
 restoreRuntimeEntry(runtime, entry, folder);
+copyWmImageOriginals(mockRoot);
 // The config imports the shared public-origin helper relative to mock/config.js.
 const shared = path.resolve(mockRoot, "../tools/services");
 if (path.relative(folder, shared).startsWith("..")) {

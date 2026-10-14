@@ -1,3 +1,15 @@
+## New legal documents — 2026-10-14
+
+Website Manager's Legal collection supports creating blank documents and copies. Keep new drafts private, give each document its own address and legal version history, and preserve the separate legal approval before publication. Render newly published documents at their managed `/legal/<slug>` address and in the legal document navigation.
+
+## Review page selection — 2026-10-14
+
+Reviews support multiple related service families, services, and software products. Keep the selected pages shared across languages and show a published review on each selected detail page, without showing it on unselected detail pages. Preserve legacy single links, allow removing all links, and keep the category badge independent from page selections. Changes use the existing draft, preview, and publication workflow.
+
+## Review category control — 2026-10-14
+
+Website Manager reviews have a Services/Software category dropdown that controls the testimonial badge and category-specific overview placement. Keep it shared across languages, show unsaved changes in the CMS preview, and publish changes through the existing review workflow. For legacy reviews without a selected category, retain the related-entry classification and keep unassigned reviews available in both overviews.
+
 ## Flexible Insights content — 2026-10-11
 
 The user requested adding more sections and placing images freely in the article editor, including `/content/insights/ar_02`. Insights articles support ordered sections with text, image, and video blocks between paragraphs. Keep existing paragraph content compatible, retain captions and alternative text, and render the saved order in both draft previews and the published website. Structure and media are shared across the five languages; translated text follows stable section/block identifiers. Preserve the existing cinematic article typography.

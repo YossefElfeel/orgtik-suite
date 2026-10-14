@@ -29,7 +29,7 @@ export function EntryActions({
   const [remove] = useDeleteEntryMutation();
   const href = `/content/${TYPES[entry.type].area}/${entry.id}?returnTo=${encodeURIComponent(returnTo)}`;
   const deletable =
-    ["article", "caseStudy", "roadmapItem", "review"].includes(entry.type) &&
+    ["article", "caseStudy", "roadmapItem", "review", "legalDocument"].includes(entry.type) &&
     entry.visibility === "not_on_site";
   return (
     <span onClick={(event) => event.stopPropagation()}>

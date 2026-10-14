@@ -5,6 +5,7 @@ import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { mockFunction } from "./check-mock-bundle.mjs";
 import { copyWorkspaceRuntime } from './workspace-runtime.mjs';
+import { copyWmImageOriginals } from './wm-media-assets.mjs';
 
 export function copyMockRuntime(runtime = ".vercel/mock-runtime", output = ".vercel/output") {
   const source = path.join(fs.realpathSync(runtime), "node_modules");
@@ -28,6 +29,7 @@ export function copyMockRuntime(runtime = ".vercel/mock-runtime", output = ".ver
   fs.cpSync(source, destination, { recursive: true, dereference: false, verbatimSymlinks: true });
   console.log("mock: copied isolated production dependencies into the function");
   console.log(`mock: restored ${copyWorkspaceRuntime(folder).length} owned workspace sources byte-for-byte`);
+  copyWmImageOriginals(path.join(folder, "mock"));
   // Vercel interprets HLS transport-stream .ts files as TypeScript while tracing. Restore the
   // complete reviewed sample asset tree after tracing; these bytes are runtime media, not code.
   const assets = path.resolve(import.meta.dirname, "../../mock/apps/files/assets");

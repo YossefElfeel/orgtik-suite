@@ -19,7 +19,8 @@ function blankContent(type, department, at = new Date().toISOString()) {
   if (type === 'caseStudy') return {...base,narrativePublished:false,sampleNarrativePublished:false,provenance:{figures:'sample',sampleLabel:{en:'Sample figures'}},image:{src:'',alt:{}},gallery:[],locales:{en:caseWords(department)}};
   if (type === 'article') return {...base,category:'design',publishedOn:at.slice(0,10),readingMinutes:1,image:{src:'',alt:{}},locales:{en:{name:'',excerpt:'',takeaways:[],sections:[]}}};
   if (type === 'roadmapItem') return {...base,slug:{},seo:{},status:'open',period:'next',year:at.slice(0,4),progress:0,locales:{en:{name:'',body:'',timing:'',theme:''}}};
-  if (type === 'review') return {...base,slug:{},seo:{},sample:true,relatedEntry:'',position:0,image:{src:'',alt:{}},locales:{en:{name:'',role:'',company:'',quote:''}}};
+  if (type === 'review') return {...base,slug:{},seo:{},sample:true,category:'services',relatedEntry:'',relatedEntries:[],position:0,image:{src:'',alt:{}},locales:{en:{name:'',role:'',company:'',quote:''}}};
+  if (type === 'legalDocument') return {...base,versionLabel:'1.0',effectiveFrom:null,locales:{en:{name:'',summary:'',sections:[]}}};
   throw new Error('Unsupported blank content type');
 }
 module.exports = {DEPARTMENTS,caseWords,blankContent};

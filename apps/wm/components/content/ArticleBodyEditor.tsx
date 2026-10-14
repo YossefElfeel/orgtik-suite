@@ -177,11 +177,11 @@ export function ArticleBodyEditor({
           {t("noArticleSections")}
         </p>
       ) : null}
-      <div className="grid items-start gap-6 xl:grid-cols-[11rem_minmax(0,1fr)]">
+      <div className={ctx.fullWidthFields ? "grid min-w-0 items-start gap-6" : "grid items-start gap-6 xl:grid-cols-[11rem_minmax(0,1fr)]"}>
         {sections.length ? (
           <nav
             aria-label={t("outline")}
-            className="rounded-card border border-line bg-raised p-3 xl:sticky xl:top-4"
+            className={ctx.fullWidthFields ? "rounded-card border border-line bg-raised p-3" : "rounded-card border border-line bg-raised p-3 xl:sticky xl:top-4"}
           >
             <div className="mb-3 flex items-center gap-2 text-label">
               <Stack aria-hidden className="text-fg-brand" />
@@ -471,7 +471,7 @@ export function ArticleBodyEditor({
                               </p>
                             ) : null
                           ) : (
-                            <div className="grid gap-3 sm:grid-cols-2">
+                            <div className={ctx.fullWidthFields ? "grid min-w-0 gap-3" : "grid gap-3 sm:grid-cols-2"}>
                               <Field label={t("altText")}>
                                 <Input
                                   value={block.alt ?? ""}

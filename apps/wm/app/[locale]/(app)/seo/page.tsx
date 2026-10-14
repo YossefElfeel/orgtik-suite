@@ -89,8 +89,9 @@ function Health() {
           </Card>
         </div>
       ) : null}
-      <div className="wm-table-filters"><Select size="sm" aria-label={t("healthTitle")} value={check} onValueChange={value=>setCheck((value??"all") as SeoCheck|"all")} options={[{value:"all",label:t("all")},...CHECKS.map(value=>({value,label:t(`checks.${value}`)}))]} />
+      <div className="wm-table-filters">
         <Input size="sm" aria-label={ti("search")} placeholder={ti("search")} value={url.get("search")} onChange={e => url.set({ search: e.target.value })} className="wm-search" />
+        <Select size="sm" aria-label={t("healthTitle")} value={check} onValueChange={value=>setCheck((value??"all") as SeoCheck|"all")} options={[{value:"all",label:t("all")},...CHECKS.map(value=>({value,label:t(`checks.${value}`)}))]} />
         <Select size="sm" label={ti("type")} value={url.get("kind", "all")} onValueChange={kind => url.set({ kind })} options={[{ value: "all", label: ti("all") }, ...Object.values(TYPES).filter(type => type.seo).map(type => ({ value: type.key, label: tt(`${type.key}.many`) }))]} />
       </div>
       <DataTable
