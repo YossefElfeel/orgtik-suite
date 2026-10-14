@@ -72,8 +72,17 @@ if (viaCli || service) {
   check(exchanged?.tokens?.accessToken, "WM handoff did not return a session");
   const wm = await request("/wm/api/backend/wm/v2/admin/me", { headers: { authorization: `Bearer ${exchanged.tokens.accessToken}` } });
   check(wm.status === 200, `WM session verification returned ${wm.status}`);
-  await post("/auth/logout", {}, exchanged.tokens.accessToken);
-  // The exchanged token belongs to the original session; one logout revokes both.
-  console.log("Staff sign-in, bound gateway and Website Manager handoff verified.");
+  const customer = await post("/auth/workspace", { mode: "workspace", workspaceId: "ws_orgtik" }, exchanged.tokens.accessToken);
+  check(customer?.tokens?.accessToken, "Mona workspace admission did not return a session");
+  for (const path of ["/account/bootstrap", "/activity", "/notifications"]) {
+    const response = await request(`${api}/suite${path}`, { headers: { authorization: `Bearer ${customer.tokens.accessToken}`, "x-workspace": "ws_orgtik" } });
+    check(response.status === 200, `Mona account ${path} returned ${response.status}`);
+    const value = (await response.json()).data;
+    check(path === "/account/bootstrap" ? value?.permissions?.owner && value?.permissions?.admin : Array.isArray(value), `Mona account ${path} returned incomplete data`);
+  }
+  await post("/auth/logout", {}, customer.tokens.accessToken);
+  const cleanup = await request(`${api}/auth/logout`, { method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${exchanged.tokens.accessToken}` }, body: "{}" });
+  check([200, 401].includes(cleanup.status), `Staff session cleanup returned ${cleanup.status}`);
+  console.log("Staff sign-in, Website Manager handoff, Mona owner admission, account bootstrap and cross-app feeds verified.");
 }
 }
