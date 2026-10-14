@@ -146,13 +146,37 @@ test("Website administrators respect central account permissions, internal membe
     (await call("PATCH", "/3", { roles: ["wm_seo"] }, staff.version)).status,
     412,
   );
-  const unchanged = await call(
+  let unchanged = await call(
     "PATCH",
     "/3",
     { roles: ["wm_viewer"] },
     changed.data.version,
   );
   assert.equal(platform.db.staffAccessEpochs.staff, 1);
+  // Role access can pause independently of the suite account and preserves assignments.
+  assert.equal((await call("PATCH", "/3", {rolePaused:"yes",roles:["wm_seo"]}, unchanged.data.version)).status,422);
+  assert.deepEqual(identity.grants.website_manager.staff.roles,["wm_viewer"],"invalid pause cannot partially change roles");
+  assert.equal((await call("PATCH", "/2", {rolePaused:true}, self.version)).code,"self_lockout");
+  const paused=await call("PATCH", "/3", {rolePaused:true}, unchanged.data.version);
+  assert.equal(paused.status,200);assert.equal(paused.data.rolePaused,true);assert.equal(paused.data.active,true);
+  assert.deepEqual(paused.data.roles,["wm_viewer"]);assert.equal(users[2].authVersion,undefined);
+  assert.equal(platform.db.staffAccessEpochs.staff,2);
+  assert.equal((await call("PATCH", "/3", {rolePaused:false}, unchanged.data.version)).status,412);
+  const rolesWhilePaused=await call("PATCH", "/3", {roles:["wm_seo"]}, paused.data.version);
+  assert.equal(rolesWhilePaused.data.rolePaused,true,"changing a paused assignment does not resume it");
+  const inactive=await call("PATCH", "/3", {active:false}, rolesWhilePaused.data.version,"admin");
+  assert.equal(inactive.data.active,false);assert.equal(inactive.data.rolePaused,true);
+  const resumed=await call("PATCH", "/3", {rolePaused:false}, inactive.data.version);
+  assert.equal(resumed.data.rolePaused,false);assert.equal(resumed.data.active,false,"resuming a role cannot reactivate the account");
+  unchanged=await call("PATCH", "/3", {active:true}, resumed.data.version,"admin");
+  const epoch=platform.db.staffAccessEpochs.staff;
+  unchanged=await call("PATCH", "/3", {rolePaused:false}, unchanged.data.version);
+  assert.equal(platform.db.staffAccessEpochs.staff,epoch,"a repeated resume does not revoke sessions again");
+  const adminGrant=identity.grants.website_manager.admin.roles;identity.grants.website_manager.admin.roles=["wm_owner"];
+  const protectedUser=(await call("GET", "")).data.find(row=>row.key==="admin");
+  assert.equal((await call("PATCH", "/1", {rolePaused:true},protectedUser.version)).status,403);
+  identity.grants.website_manager.admin.roles=adminGrant;
+  assert.ok(audit.some(event=>event.action==="user_role_pause"));assert.ok(audit.some(event=>event.action==="user_role_resume"));
   workspace.members.find((member) => member.userKey === "staff").status =
     "inactive";
   assert.equal(

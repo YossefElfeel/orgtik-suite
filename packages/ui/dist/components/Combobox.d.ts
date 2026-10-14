@@ -21,12 +21,14 @@ type Common<V extends string> = VariantProps<typeof controlFrame> & {
     className?: string;
 };
 export type ComboboxProps<V extends string = string> = Common<V> & {
+    /** Size the popup independently when the input shares its row with other controls. */
+    popupClassName?: string;
     value?: V | null;
     defaultValue?: V | null;
     onValueChange?: (value: V | null) => void;
 };
 /** Pick one from many by typing (people, folders, countries). For a short fixed list use Select. */
-export declare function Combobox<V extends string = string>({ options, value, defaultValue, onValueChange, placeholder, size, emptyText, className, "aria-label": ariaLabel, ...props }: ComboboxProps<V>): import("react").JSX.Element;
+export declare function Combobox<V extends string = string>({ options, value, defaultValue, onValueChange, placeholder, size, emptyText, className, popupClassName, "aria-label": ariaLabel, ...props }: ComboboxProps<V>): import("react").JSX.Element;
 export type MultiSelectProps<V extends string = string> = Common<V> & {
     value?: V[];
     defaultValue?: V[];

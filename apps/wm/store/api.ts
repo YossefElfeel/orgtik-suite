@@ -111,7 +111,7 @@ export type Me = {
     email: string;
     avatar: string | null;
   };
-  roles: { key: string; label: string }[];
+  roles: { key: string; label: string; labelOverridden?: boolean }[];
   permissions: string[];
   site: {
     id: string;
@@ -135,7 +135,7 @@ export type Overview = {
   };
 };
 
-export type Role = { key: string; label: string; permissions: string[]; version: string; protected: boolean };
+export type Role = { key: string; label: string; permissions: string[]; version: string; protected: boolean; builtin: boolean; labelOverridden: boolean; assignedCount: number };
 
 export type Person = { key: string; name: string | null };
 export type Page<T> = {
@@ -335,6 +335,8 @@ export type Idea = {
   id: string;
   status: IdeaStatus;
   theme: string;
+  category: "new_project" | "product_idea" | "service_improvement" | "hosting_support" | null;
+  tags: string[];
   title: string;
   body: string;
   votes: number;
@@ -346,6 +348,7 @@ export type Idea = {
   source?: string;
   submitter?: { name?: string; email?: string; privacyVersion: string; erased?: boolean; masked?: boolean };
   commentPreview?: { id: string; author: string; body: string }[];
+  discussion?: IdeaComment[];
   reason?: string;
   link?: string;
   mergedInto?: string;
@@ -360,10 +363,22 @@ export type Idea = {
     into?: string;
   }[];
 };
+export type IdeaComment = {
+  id: string;
+  author: string;
+  email?: string;
+  body: string;
+  status: "pending" | "approved" | "hidden";
+  submittedAt: string;
+  version: number;
+  masked?: boolean;
+  reason?: string;
+};
 export type IdeaAction =
   "publish" | "plan" | "start" | "ship" | "decline" | "merge" | "hide";
 export type IdeaPage = Page<Idea> & {
   counts: Partial<Record<IdeaStatus, number>>;
+  tags: string[];
 };
 
 /** Language-neutral fields an editor may change. */
@@ -686,7 +701,7 @@ const putEntry = async (
   }
 };
 
-export type SuiteUser = { id: number; key: string; name: string; firstName: string; lastName: string; email: string; active: boolean; roles: string[]; version: string };
+export type SuiteUser = { id: number; key: string; name: string; firstName: string; lastName: string; email: string; active: boolean; rolePaused: boolean; roles: string[]; version: string };
 
 export const api = createApi({
   reducerPath: "wm",
@@ -714,7 +729,7 @@ export const api = createApi({
     contentQueue: b.query<Page<EntrySummary>, { state?: string; mine?: string; search?: string; page?: number; pageSize?: number }>({ query: params => ({ url: "/admin/queue", params }), providesTags: ["EntryList", "Overview"] }),
     users: b.query<Page<SuiteUser>, { search?: string; status?: string; role?: string; page?: number; pageSize?: number }>({ query: params => ({ url: "/admin/users", params }), providesTags: ["Users"] }),
     createUser: b.mutation<SuiteUser, { firstName: string; lastName: string; email: string; password: string }>({ query: body => ({ url: "/admin/users", method: "POST", body }), invalidatesTags: ["Users", "Audit"] }),
-    updateUser: b.mutation<SuiteUser, { id: number; version: string; patch: Partial<Pick<SuiteUser, "firstName" | "lastName" | "email" | "active" | "roles">> }>({ query: ({ id, version, patch }) => ({ url: `/admin/users/${id}`, method: "PATCH", headers: { "if-match": version }, body: patch }), invalidatesTags: ["Users", "Audit", "Me"] }),
+    updateUser: b.mutation<SuiteUser, { id: number; version: string; patch: Partial<Pick<SuiteUser, "firstName" | "lastName" | "email" | "active" | "roles" | "rolePaused">> }>({ query: ({ id, version, patch }) => ({ url: `/admin/users/${id}`, method: "PATCH", headers: { "if-match": version }, body: patch }), invalidatesTags: ["Users", "Roles", "Audit", "Me"] }),
     me: b.query<Me, void>({ query: () => "/admin/me", providesTags: ["Me"] }),
     overview: b.query<Overview, void>({
       query: () => "/admin/overview",
@@ -724,8 +739,16 @@ export const api = createApi({
       query: (period) => `/admin/analytics?period=${period}`,
     }),
     roles: b.query<Role[], void>({ query: () => "/admin/roles", providesTags: ["Roles"] }),
-    updateRole: b.mutation<Role, { key: string; version: string; permissions: string[] }>({
-      query: ({ key, version, permissions }) => ({ url: `/admin/roles/${key}`, method: "PATCH", headers: { "if-match": version }, body: { permissions } }),
+    createRole: b.mutation<Role, { label: string; permissions: string[] }>({
+      query: body => ({ url: "/admin/roles", method: "POST", body }),
+      invalidatesTags: ["Roles", "Audit"],
+    }),
+    deleteRole: b.mutation<void, { key: string; version: string }>({
+      query: ({ key, version }) => ({ url: `/admin/roles/${key}`, method: "DELETE", headers: { "if-match": version } }),
+      invalidatesTags: ["Roles", "Audit"],
+    }),
+    updateRole: b.mutation<Role, { key: string; version: string; permissions: string[]; label?: string }>({
+      query: ({ key, version, permissions, label }) => ({ url: `/admin/roles/${key}`, method: "PATCH", headers: { "if-match": version }, body: { permissions, ...(label !== undefined ? { label } : {}) } }),
       async onQueryStarted(_request, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -739,7 +762,7 @@ export const api = createApi({
     }),
     pricing: b.query<Pricing, void>({ query: () => "/admin/pricing" }),
     entries: b.query<
-      Page<EntrySummary>,
+      Page<EntrySummary> & { years?: string[] },
       {
         type: EntryType;
         search?: string;
@@ -842,19 +865,23 @@ export const api = createApi({
     }),
     ideas: b.query<
       IdeaPage,
-      { status?: string; search?: string; page?: number; pageSize?: number }
+      { status?: string; search?: string; category?: string; tag?: string; page?: number; pageSize?: number }
     >({
       query: (params) => ({ url: "/admin/ideas", params }),
       providesTags: ["Ideas"],
     }),
     idea: b.query<Idea, string>({ query: id => `/admin/ideas/${id}`, providesTags: ["Ideas"] }),
-    editIdea: b.mutation<Idea, { id: string; version: number; title: string; body: string; theme: string }>({
+    editIdea: b.mutation<Idea, { id: string; version: number; title: string; body: string; tags: string[]; category: Idea["category"] }>({
       query: ({ id, version, ...body }) => ({ url: `/admin/ideas/${id}`, method: "PATCH", headers: { "if-match": String(version) }, body }),
       invalidatesTags: ["Ideas", "Overview", "Audit"],
     }),
     eraseIdea: b.mutation<Idea, { id: string; version: number }>({
       query: ({ id, version }) => ({ url: `/admin/ideas/${id}/erase`, method: "POST", headers: { "if-match": String(version) } }),
       invalidatesTags: ["Ideas"],
+    }),
+    moderateIdeaComment: b.mutation<Idea, { id: string; commentId: string; version: number; action: "approve" | "hide"; reason?: string }>({
+      query: ({ id, commentId, version, ...body }) => ({ url: `/admin/ideas/${id}/comments/${commentId}/moderate`, method: "POST", headers: { "if-match": String(version) }, body }),
+      invalidatesTags: ["Ideas", "Audit"],
     }),
     moderateIdea: b.mutation<
       Idea,
@@ -1148,6 +1175,8 @@ export const {
   useAnalyticsQuery,
   useRolesQuery,
   useUpdateRoleMutation,
+  useCreateRoleMutation,
+  useDeleteRoleMutation,
   usePricingQuery,
   useEntriesQuery,
   useEntryQuery,
@@ -1162,6 +1191,7 @@ export const {
   useEditIdeaMutation,
   useModerateIdeaMutation,
   useEraseIdeaMutation,
+  useModerateIdeaCommentMutation,
   useMediaQuery,
   useMediaItemQuery,
   useUpdateMediaMutation,

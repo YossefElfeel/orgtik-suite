@@ -29,7 +29,6 @@ import {
   toast,
   useFormatter,
 } from "@orgtik/ui";
-import { PackagedMedia } from "@/components/studio/PackagedMedia";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { Link, useRouter } from "@/i18n/routing";
 import { Thumb } from "@/components/media/Thumb";
@@ -50,7 +49,6 @@ function Library() {
   const setIssue = (issue: string) => url.set({ issue });
   const setKind = (kind: string) => url.set({ kind });
   const setSearch = (search: string) => url.set({ search });
-  const v3 = useTranslations("WmV3");
   const { data, isLoading, error, refetch, isFetching } = useMediaQuery({ issue: issue === "all" ? undefined : issue, kind: kind === "all" ? undefined : kind, search: search || undefined, page: url.page, pageSize: 10 });
   useEffect(() => {
     if (data && !isFetching && url.page > Math.max(1, Math.ceil(data.total / 10))) url.set({ page: Math.max(1, Math.ceil(data.total / 10)) });
@@ -65,7 +63,6 @@ function Library() {
         title={t("title")}
         description={t("description")}
       />
-      <details className="rounded-field border border-line p-4"><summary className="cursor-pointer text-body-sm font-semibold">{v3("packagedMedia")}</summary><PackagedMedia reload={refetch}/></details>
       <div className="wm-table-filters">
         <Input size="sm" type="search" value={search} onChange={(e) => setSearch(e.target.value)} aria-label={t("search")} placeholder={t("search")} startIcon={<MagnifyingGlass className="size-4" />} className="wm-search" />
         <Select size="sm" aria-label={t("issues.all")} value={issue} onValueChange={value=>setIssue((value??"all") as IssueTab)} options={ISSUES.map(value=>({value,label:t(`issues.${value}`)}))} />

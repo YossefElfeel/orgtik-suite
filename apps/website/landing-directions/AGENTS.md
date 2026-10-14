@@ -52,6 +52,10 @@ Keep the horizontal idea-board scrollbar slim, rounded, and coloured with the ex
 
 Remove the "Frontend preview · nothing is sent" form note. Roadmap submissions go to Website Manager's Ideas queue as private pending entries. Show success only after the CMS accepts them; preserve inputs on failures, allow retry, and prevent duplicate requests while sending. Use the existing configurable CMS forms setting, enabled for this local integration. Keep sample voting/comments labelled and do not publish submitted ideas automatically. This supersedes earlier Roadmap instructions that submissions send nothing.
 
+## Roadmap suggestions and moderated visitor comments — 2026-10-15
+
+The owner requested visitor comments with moderation. Suggestions enter Website Manager Ideas as private pending records and appear on the community roadmap only after publication. Visitors may comment on visible ideas with explicit privacy consent; only approved comments and author names become public, never email addresses. Pending and hidden comments remain private in Ideas. Retain stable retry keys, input values on failures, moderation persistence and per-idea discussion links. Refresh moderated ideas/comments when the website regains focus. Keep sample discussions separately labelled and do not describe real submissions as demo content. This supersedes the read-only sample-comment limitation below.
+
 ## Roadmap comment buttons — 2026-10-05
 
 Clicking an idea's comment count opens its comment list in the existing accessible dialog. Keep the idea-specific sample discussion and visible sample labels; a count without a comment list is insufficient. Retain local preview behavior and CMS-backed content, without introducing real commenting infrastructure.

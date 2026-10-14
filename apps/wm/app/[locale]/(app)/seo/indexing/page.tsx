@@ -101,7 +101,7 @@ function IndexingView() {
       <section aria-labelledby="sitemap" className="flex flex-col gap-3">
         <h2 id="sitemap" className="font-display text-title-sm text-fg">{t("sitemapTitle", { count: data.sitemap.length })}</h2>
         <p className="text-body-sm text-fg-muted">{t("sitemapNote")}</p>
-        <DataTable label={t("sitemapTitle", { count: data.sitemap.length })} columns={columns} data={rows} getRowId={(r) => `${r.id}-${r.locale}`} pagination={{ pageIndex: url.page - 1, pageSize: 10 }} onPaginationChange={update => url.set({ page: (typeof update === "function" ? update({ pageIndex: url.page - 1, pageSize: 10 }) : update).pageIndex + 1 })} status="ready" paginate empty={{ title: t("sitemapEmpty") }} />
+        <DataTable className="[&_tbody_td]:py-2" label={t("sitemapTitle", { count: data.sitemap.length })} columns={columns} data={rows} getRowId={(r) => `${r.id}-${r.locale}`} pagination={{ pageIndex: url.page - 1, pageSize: 10 }} onPaginationChange={update => url.set({ page: (typeof update === "function" ? update({ pageIndex: url.page - 1, pageSize: 10 }) : update).pageIndex + 1 })} status="ready" paginate empty={{ title: t("sitemapEmpty") }} />
       </section>
 
       <section aria-labelledby="robots" className="flex flex-col gap-3">

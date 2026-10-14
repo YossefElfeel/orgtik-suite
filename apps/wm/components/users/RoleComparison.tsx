@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Plus, MagnifyingGlass } from "@phosphor-icons/react";
+import { Plus, MagnifyingGlass, PencilSimple } from "@phosphor-icons/react";
 import {
-  Badge,
   Button,
   Checkbox,
   ErrorState,
@@ -22,7 +21,7 @@ import {
   useUpdateRoleMutation,
   type ApiError,
 } from "@/store/api";
-import { AssignRoleDialog } from "./AssignRoleDialog";
+import { RoleDefinitionDialog } from "./RoleDefinitionDialog";
 
 type Draft = { permissions: string[]; version: string };
 export function RoleComparison() {
@@ -37,14 +36,16 @@ export function RoleComparison() {
   const [selected, setSelected] = useState<string | null>(null);
   const [drafts, setDrafts] = useState<Record<string, Draft>>({});
   const [search, setSearch] = useState("");
-  const [assigning, setAssigning] = useState(false);
+  const [dialog, setDialog] = useState<"add" | "edit" | null>(null);
   const [problem, setProblem] = useState("");
   const roles = query.data ?? [];
   const role =
     roles.find((r) => r.key === (selected ?? me.data?.roles[0]?.key)) ??
     roles[0];
-  const label = (key: string) =>
-    tr.has(key) ? tr(key) : (roles.find((r) => r.key === key)?.label ?? key);
+  const label = (key: string) => {
+    const role = roles.find(r => r.key === key);
+    return !role?.labelOverridden && tr.has(key) ? tr(key) : role?.label ?? key;
+  };
   const groupLabel = (key: string) =>
     key === "roles"
       ? t("title")
@@ -117,15 +118,16 @@ export function RoleComparison() {
     }
   };
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex min-w-0 flex-col gap-6">
       <PageHeader
         title={t("title")}
         description={t("description")}
         actions={
-          can("users:manage") ? (
-            <Button startIcon={<Plus />} onClick={() => setAssigning(true)}>
-              {t("addRole")}
-            </Button>
+          can("roles:manage") ? (
+            <>
+              <Button variant="secondary" startIcon={<PencilSimple />} disabled={!editable || updating.isLoading} onClick={() => setDialog("edit")}>{t("editRole")}</Button>
+              <Button startIcon={<Plus />} onClick={() => setDialog("add")}>{t("addRole")}</Button>
+            </>
           ) : undefined
         }
       />
@@ -135,52 +137,16 @@ export function RoleComparison() {
         <ErrorState onRetry={query.refetch} />
       ) : role ? (
         <>
-          <div className="overflow-x-auto">
-            <Tabs
-              value={role.key}
-              onValueChange={(value) => {
-                setSelected(value);
-                setProblem("");
-              }}
-            >
-              <TabsList
-                items={roles.map((r) => ({
-                  value: r.key,
-                  label: (
-                    <span className="inline-flex items-center gap-2">
-                      {label(r.key)}
-                      {drafts[r.key] ? (
-                        <span
-                          aria-label={t("unsaved")}
-                          className="size-1.5 rounded-full bg-fg-brand"
-                        />
-                      ) : null}
-                    </span>
-                  ),
-                }))}
-              />
-            </Tabs>
-          </div>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <h2 className="text-title-sm font-semibold">{label(role.key)}</h2>
-              {mine ? (
-                <Badge tone="brand" size="sm">
-                  {t("yourRole")}
-                </Badge>
-              ) : null}
-            </div>
-            <Input
-              size="sm"
-              className="w-full sm:max-w-xs"
-              type="search"
-              aria-label={t("search")}
-              placeholder={t("search")}
-              startIcon={<MagnifyingGlass className="size-4" />}
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-            />
-          </div>
+          <Input
+            size="sm"
+            className="w-full"
+            type="search"
+            aria-label={t("search")}
+            placeholder={t("search")}
+            startIcon={<MagnifyingGlass className="size-4" />}
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
           {!editable ? (
             <p className="text-body-sm text-fg-muted">
               {t(role.protected ? "protectedRole" : "readOnly")}
@@ -191,108 +157,136 @@ export function RoleComparison() {
               {problem}
             </p>
           ) : null}
-          <div className="overflow-x-auto rounded-card border border-line bg-raised">
-            <table
-              className="w-full min-w-[48rem] text-body-sm"
-              aria-label={t("matrix", { role: label(role.key) })}
-            >
-              <thead className="bg-sunken text-fg-muted">
-                <tr>
-                  <th
-                    scope="col"
-                    className="sticky start-0 z-10 min-w-52 bg-sunken px-4 py-3 text-start font-medium"
-                  >
-                    {ti("capability")}
-                  </th>
-                  {ROLE_ACTIONS.map((action) => (
+          <div className="flex min-w-0 flex-col gap-3">
+            <div className="overflow-x-auto">
+              <Tabs
+                value={role.key}
+                onValueChange={(value) => {
+                  setSelected(value);
+                  setProblem("");
+                }}
+              >
+                <TabsList
+                  items={roles.map((r) => ({
+                    value: r.key,
+                    label: (
+                      <span className="inline-flex items-center gap-2">
+                        {label(r.key)}
+                        {drafts[r.key] ? (
+                          <span
+                            aria-label={t("unsaved")}
+                            className="size-1.5 rounded-full bg-fg-brand"
+                          />
+                        ) : null}
+                      </span>
+                    ),
+                  }))}
+                />
+              </Tabs>
+            </div>
+            <div className="overflow-x-auto rounded-card border border-line bg-raised">
+              <table
+                className="w-full min-w-[48rem] text-body-sm"
+                aria-label={t("matrix", { role: label(role.key) })}
+              >
+                <thead className="bg-sunken text-fg-muted">
+                  <tr>
                     <th
                       scope="col"
-                      key={action}
-                      className="px-4 py-3 text-center font-medium"
+                      className="sticky start-0 z-10 min-w-52 bg-sunken px-4 py-3 text-start font-medium"
                     >
-                      {t(action)}
+                      {ti("capability")}
                     </th>
-                  ))}
-                  <th scope="col" className="px-4 py-3 text-end font-medium">
-                    {t("action")}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {!rows.length ? (
-                  <tr>
-                    <td
-                      colSpan={7}
-                      className="px-4 py-8 text-center text-fg-muted"
-                    >
-                      {ti("noResults")}
-                    </td>
-                  </tr>
-                ) : null}
-                {rows.map((group) => {
-                  const items = Object.values(group.actions);
-                  const all = items.every((p) => permissions.has(p));
-                  return (
-                    <tr key={group.key} className="border-t border-line">
+                    {ROLE_ACTIONS.map((action) => (
                       <th
-                        scope="row"
-                        className="sticky start-0 bg-raised px-4 py-4 text-start font-medium"
+                        scope="col"
+                        key={action}
+                        className="px-4 py-3 text-center font-medium"
                       >
-                        {groupLabel(group.key)}
+                        {t(action)}
                       </th>
-                      {ROLE_ACTIONS.map((action) => {
-                        const p = group.actions[action];
-                        return (
-                          <td key={action} className="px-4 py-4 text-center">
-                            {p ? (
-                              <div className="flex justify-center">
-                                <Checkbox
-                                  aria-label={`${label(role.key)}: ${groupLabel(group.key)} — ${t(action)}`}
-                                  checked={permissions.has(p)}
-                                  disabled={locked(p)}
-                                  onCheckedChange={(checked) =>
-                                    change([p], checked)
-                                  }
-                                />
-                              </div>
-                            ) : (
-                              <span
-                                className="text-fg-subtle"
-                                aria-label={t("unavailable")}
-                              >
-                                —
-                              </span>
-                            )}
-                          </td>
-                        );
-                      })}
-                      <td className="px-4 py-3 text-end">
-                        <Button
-                          size="sm"
-                          variant="link"
-                          disabled={
-                            !editable ||
-                            updating.isLoading ||
-                            (all && items.some(locked))
-                          }
-                          aria-label={`${t(all ? "clearAll" : "activateAll")}: ${groupLabel(group.key)}`}
-                          onClick={() => change(items, !all)}
-                        >
-                          {t(all ? "clearAll" : "activateAll")}
-                        </Button>
+                    ))}
+                    <th scope="col" className="px-4 py-3 text-end font-medium">
+                      {t("action")}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {!rows.length ? (
+                    <tr>
+                      <td
+                        colSpan={7}
+                        className="px-4 py-8 text-center text-fg-muted"
+                      >
+                        {ti("noResults")}
                       </td>
                     </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                  ) : null}
+                  {rows.map((group) => {
+                    const items = Object.values(group.actions);
+                    const all = items.every((p) => permissions.has(p));
+                    return (
+                      <tr key={group.key} className="border-t border-line">
+                        <th
+                          scope="row"
+                          className="sticky start-0 bg-raised px-4 py-4 text-start font-medium"
+                        >
+                          {groupLabel(group.key)}
+                        </th>
+                        {ROLE_ACTIONS.map((action) => {
+                          const p = group.actions[action];
+                          return (
+                            <td key={action} className="px-4 py-4 text-center">
+                              {p ? (
+                                <div className="flex justify-center">
+                                  <Checkbox
+                                    aria-label={`${label(role.key)}: ${groupLabel(group.key)} — ${t(action)}`}
+                                    checked={permissions.has(p)}
+                                    disabled={locked(p)}
+                                    onCheckedChange={(checked) =>
+                                      change([p], checked)
+                                    }
+                                  />
+                                </div>
+                              ) : (
+                                <span
+                                  className="text-fg-subtle"
+                                  aria-label={t("unavailable")}
+                                >
+                                  —
+                                </span>
+                              )}
+                            </td>
+                          );
+                        })}
+                        <td className="px-4 py-3 text-end">
+                          <Button
+                            size="sm"
+                            variant="link"
+                            disabled={
+                              !editable ||
+                              updating.isLoading ||
+                              (all && items.some(locked))
+                            }
+                            aria-label={`${t(all ? "clearAll" : "activateAll")}: ${groupLabel(group.key)}`}
+                            onClick={() => change(items, !all)}
+                          >
+                            {t(all ? "clearAll" : "activateAll")}
+                          </Button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
           {editable ? (
-            <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="sticky bottom-0 z-20 flex flex-wrap items-center justify-between gap-3 border-t border-line bg-raised px-4 py-3">
               <p role="status" className="text-body-sm text-fg-muted">
                 {t(dirty ? "unsavedHelp" : "savedHelp")}
               </p>
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <Button
                   variant="secondary"
                   disabled={!draft || updating.isLoading}
@@ -312,10 +306,15 @@ export function RoleComparison() {
           ) : null}
         </>
       ) : null}
-      {assigning ? (
-        <AssignRoleDialog
-          roleKey={role?.key}
-          onClose={() => setAssigning(false)}
+      {dialog ? (
+        <RoleDefinitionDialog
+          role={dialog === "edit" ? role : undefined}
+          initialPermissions={dialog === "edit" ? draft?.permissions : undefined}
+          initialVersion={dialog === "edit" ? draft?.version : undefined}
+          lockedPermissions={dialog === "edit" && mine ? ["roles:manage", "users:manage", "settings:view"].filter(permission => role?.permissions.includes(permission)) : []}
+          onClose={() => setDialog(null)}
+          onSaved={saved => {if(dialog === "edit") reset();setSelected(saved.key);setDialog(null);}}
+          onDeleted={() => {reset();setSelected(null);setDialog(null);}}
         />
       ) : null}
     </div>

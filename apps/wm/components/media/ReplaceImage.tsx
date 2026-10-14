@@ -46,7 +46,7 @@ export function ReplaceImage({ media, disabled }: { media: MediaItem; disabled: 
           {error ? <p role="alert" className="text-body-sm text-danger">{error}</p> : null}
         </DialogBody>
         <DialogFooter>
-          <Button variant="ghost" disabled={replacing.isLoading} onClick={() => { setOpen(false); setFiles([]); setError(undefined); }}>{t("cancel")}</Button>
+          <Button variant="secondary" disabled={replacing.isLoading} onClick={() => { setOpen(false); setFiles([]); setError(undefined); }}>{t("cancel")}</Button>
           <Button disabled={!files.length} loading={replacing.isLoading} onClick={submit}>{t("replaceImage")}</Button>
         </DialogFooter>
       </DialogContent>

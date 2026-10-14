@@ -2,20 +2,20 @@
 import { RowActionsMenu } from "@/components/content/RowActionsMenu";
 
 import { ActionDialog, NEXT } from "@/components/marketing/IdeaDetail";
+import { IDEA_CATEGORIES, IdeaTags } from "@/components/marketing/IdeaTags";
 import { Link, useRouter } from "@/i18n/routing";
 import { useListState } from "@/lib/useListState";
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Eye, PencilSimple, MagnifyingGlass, X } from "@phosphor-icons/react";
-import { Badge, Button, Input, Select, MenuItem, MenuLinkItem, PageHeader, StatusBadge, Tabs, TabsList, useFormatter, useStatusLabel } from "@orgtik/ui";
+import { Badge, Button, Input, Select, MenuItem, MenuLinkItem, PageHeader, StatusBadge, useFormatter, useStatusLabel } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { useCan } from "@/lib/permissions";
 import { statusOf, useIdeasQuery, type Idea, type IdeaAction } from "@/store/api";
 
-// The tabs: what needs a decision first, then the public lifecycle, then everything closed.
-const TABS = ["pending", "open", "planned", "in_progress", "shipped", "closed"] as const;
-type Tab = (typeof TABS)[number];
+const STATUSES = ["all", "pending", "open", "planned", "in_progress", "shipped", "closed"] as const;
+type StatusFilter = (typeof STATUSES)[number];
 function IdeasList() {
   const t = useTranslations("Ideas");
   const f = useFormatter();
@@ -28,12 +28,20 @@ function IdeasList() {
   const ti = useTranslations("Improvements");
   const search = url.get("search");
   const setSearch = (search: string) => url.set({ search });
-  const tab = (url.get("status", "pending")) as Tab;
-  const setTab = (status: Tab) => url.set({ status });
+  const statusFilter = url.get("status", "all") as StatusFilter;
+  const setStatusFilter = (status: StatusFilter) => url.set({ status });
+  const tag = url.get("tag", url.get("theme")), category = url.get("category");
+  const setTag = (value: string | null) => {
+    const [path, query = ""] = url.href.split("?");
+    const next = new URLSearchParams(query);
+    next.delete("page"); next.delete("theme");
+    if (!value || value === "all") next.delete("tag");
+    else next.set("tag", value.slice(4));
+    router.replace(`${path}${next.size ? `?${next}` : ""}`, { scroll: false });
+  };
   const [acting, setActing] = useState<{ idea: Idea; action: IdeaAction } | null>(null);
-  const { data, isLoading, error, refetch, isFetching } = useIdeasQuery({ status: tab, search: search || undefined, page: url.page, pageSize: 10 });
-  const counts = data?.counts ?? {};
-  const countOf = (x: Tab) => (x === "closed" ? (counts.declined ?? 0) + (counts.merged ?? 0) + (counts.hidden ?? 0) : counts[x] ?? 0);
+  const { data, isLoading, error, refetch, isFetching } = useIdeasQuery({ status: statusFilter === "all" ? undefined : statusFilter, search: search || undefined, tag: tag || undefined, category: category || undefined, page: url.page, pageSize: 10 }, { refetchOnFocus: true, refetchOnReconnect: true, refetchOnMountOrArgChange: true });
+  const tags = [...new Map([...(data?.tags ?? []), ...(tag ? [tag] : [])].map(value => [value.toLowerCase(), value])).values()].sort((a, b) => a.localeCompare(b));
 
   const columns = useMemo<ColumnDef<Idea, any>[]>(
     () => [
@@ -50,13 +58,15 @@ function IdeasList() {
                   {x.title}
                 </Link>
                 {x.sample ? <Badge size="sm">{t("sample")}</Badge> : null}
+                {x.discussion?.some(comment => comment.status === "pending") ? <Badge size="sm" tone="warning">{t("discussion.waiting", { count: x.discussion.filter(comment => comment.status === "pending").length })}</Badge> : null}
               </span>
               <span dir="auto" className="max-w-full truncate text-caption text-fg-subtle">{x.body}</span>
             </span>
           );
         },
       },
-      { id: "theme", header: t("colTheme"), cell: ({ row }) => <span dir="auto" className="text-fg-muted">{row.original.theme}</span> },
+      { id: "category", header: t("colCategory"), cell: ({ row }) => <span className="text-fg-muted">{t(`categories.${row.original.category ?? "unassigned"}`)}</span> },
+      { id: "tags", header: t("colTags"), cell: ({ row }) => <IdeaTags tags={row.original.tags} empty={t("noTags")} /> },
       { id: "votes", header: t("colVotes"), meta: { numeric: true }, cell: ({ row }) => <span className="tabular-nums">{f.number(row.original.votes)}</span> },
       { id: "submitted", header: t("colSubmitted"), meta: { numeric: true }, cell: ({ row }) => <span className="text-fg-muted">{f.date(row.original.submittedAt, { dateStyle: "medium" })}</span> },
       { id: "status", header: t("colStatus"), cell: ({ row }) => <StatusBadge entity="roadmap_idea" state={row.original.status} size="sm" /> },
@@ -73,16 +83,22 @@ function IdeasList() {
   return (
     <div className="flex flex-col gap-6">
       <PageHeader title={t("title")} description={t("description")} />
-      <div className="wm-table-filters"><Input
-        size="sm"
-        type="search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        aria-label={t("search")}
-        placeholder={t("search")}
-        startIcon={<MagnifyingGlass className="size-4" />}
-        className="wm-search"
-      /><Select size="sm" aria-label={t("title")} value={tab} onValueChange={value=>setTab((value??"pending") as Tab)} options={TABS.map(value=>({value,label:value === "closed" ? t("closed") : value === "open" ? ti("opened") : statusLabel("roadmap_idea",value)}))} /></div>
+      <div className="wm-table-filters">
+        <Input size="sm" type="search" value={search} onChange={(event) => setSearch(event.target.value)} aria-label={t("search")} placeholder={t("search")} startIcon={<MagnifyingGlass className="size-4" />} className="wm-search" />
+        <Select
+          size="sm"
+          label={t("colStatus")}
+          aria-label={t("colStatus")}
+          value={statusFilter}
+          onValueChange={value => setStatusFilter((value ?? "all") as StatusFilter)}
+          options={STATUSES.map(value => ({
+            value,
+            label: value === "all" ? ti("all") : value === "closed" ? t("closed") : value === "open" ? ti("opened") : statusLabel("roadmap_idea", value),
+          }))}
+        />
+        <Select size="sm" className="md:basis-64!" label={t("colCategory")} aria-label={t("colCategory")} value={category || "all"} onValueChange={value => url.set({ category: value })} options={[{ value: "all", label: ti("all") }, { value: "unassigned", label: t("categories.unassigned") }, ...IDEA_CATEGORIES.map(value => ({ value, label: t(`categories.${value}`) }))]} />
+        <Select size="sm" label={t("colTags")} aria-label={t("colTags")} value={tag ? `tag:${tag}` : "all"} onValueChange={setTag} options={[{ value: "all", label: ti("all") }, ...tags.map(value => ({ value: `tag:${value}`, label: value }))]} />
+      </div>
       <DataTable
         mode="server"
         rowCount={data?.total ?? 0}
@@ -95,18 +111,18 @@ function IdeasList() {
         status={status}
         paginate
         onRetry={refetch}
-        className={isFetching && !isLoading ? "opacity-70" : undefined}
+        className={`[&_tbody_td]:py-2 ${isFetching && !isLoading ? "opacity-70" : ""}`}
         empty={
-          search
+          search || tag || category
             ? {
                 title: t("noMatch"),
                 action: (
-                  <Button size="sm" variant="secondary" startIcon={<X />} onClick={() => setSearch("")}>
-                    {t("clear")}
+                  <Button size="sm" variant="secondary" startIcon={<X />} onClick={() => url.set({ search: "", tag: "", theme: "", category: "", status: "" })}>
+                    {t("clearFilters")}
                   </Button>
                 ),
               }
-            : { title: t(`empty.${tab}`) }
+            : { title: t(`empty.${statusFilter}`) }
         }
       />
 

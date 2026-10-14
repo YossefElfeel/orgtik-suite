@@ -1,6 +1,6 @@
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
-const { ideaView, eraseSubmitter, ideaSubmissions } = require('./ideas');
+const { ideaView, eraseSubmitter, ideaSubmissions, ideaCategory, ideaTags } = require('./ideas');
 test('idea submitters are masked without personal-data permission', () => {
   const idea = { submitter: { name: 'Visitor', email: 'visitor@example.test', privacyVersion: '0.2' } };
   const masked = ideaView(idea, false);
@@ -24,4 +24,14 @@ test('duplicate submissions reuse the idea, reject conflicting keys, and expire'
   assert.equal(submissions.duplicate({ ...body, email: body.email.toLowerCase() }).id, 'test');
   assert.equal(submissions.duplicate({ ...body, message: 'Different idea' }, 'key').conflict, true);
   clock = 600000;assert.equal(submissions.duplicate(body, 'key'), null);
+});
+test('legacy topic tags and submitted form categories remain distinct without rewriting stored ideas', () => {
+  const legacy = { theme: 'SaaS products' }, snapshot = structuredClone(legacy);
+  assert.deepEqual(ideaTags(legacy), ['SaaS products']); assert.equal(ideaCategory(legacy), null); assert.deepEqual(legacy, snapshot);
+  assert.equal(ideaCategory({ theme: 'A product idea' }), 'product_idea'); assert.deepEqual(ideaTags({ theme: 'A product idea' }), []);
+  assert.equal(ideaCategory({ theme: 'فكرة منتج' }), 'product_idea');
+  assert.equal(ideaCategory({ theme: 'Custom translated label', category: 'hosting_support' }), 'hosting_support');
+  assert.equal(ideaCategory({ theme: 'A product idea', category: null }), null);
+  assert.deepEqual(ideaTags({ theme: 'SaaS products', tags: [] }), []);
+  assert.equal(ideaCategory({ theme: 'constructor' }), null); assert.deepEqual(ideaTags({ theme: '__proto__' }), ['__proto__']);
 });

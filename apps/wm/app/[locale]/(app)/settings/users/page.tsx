@@ -14,6 +14,7 @@ import { Eye, PencilSimple } from "@phosphor-icons/react";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { UserForm } from "@/components/users/UserForm";
+import { UserRolePauseAction, UserStatusSwitch } from "@/components/users/UserAccessActions";
 import { SOS_URL } from "@/lib/env";
 import { useCan } from "@/lib/permissions";
 import { useListState } from "@/lib/useListState";
@@ -31,6 +32,10 @@ function Users() {
   const url = useListState();
   const me = useMeQuery();
   const roles = useRolesQuery();
+  const roleLabel = (key: string) => {
+    const role = roles.data?.find(role => role.key === key);
+    return !role?.labelOverridden && tr.has(key) ? tr(key) : role?.label ?? key;
+  };
   const query = useUsersQuery({
     search: url.get("search"),
     status: url.get("status"),
@@ -62,9 +67,7 @@ function Users() {
       id: "active",
       header: t("status"),
       cell: ({ row }) => (
-        <Badge tone={row.original.active ? "success" : "neutral"}>
-          {t(row.original.active ? "active" : "inactive")}
-        </Badge>
+        <UserStatusSwitch user={row.original} />
       ),
     },
     {
@@ -72,7 +75,7 @@ function Users() {
       header: t("websiteRoles"),
       cell: ({ row }) =>
         row.original.roles.length
-          ? row.original.roles.map((role) => tr(role)).join(" · ")
+          ? <span className="inline-flex flex-wrap items-center gap-2"><span>{row.original.roles.map(roleLabel).join(" · ")}</span>{row.original.rolePaused ? <Badge tone="warning">{t("rolePaused")}</Badge> : null}</span>
           : t("noAccess"),
     },
     {
@@ -91,6 +94,7 @@ function Users() {
                 {t("edit")}
               </MenuItem>
             ) : null}
+            <UserRolePauseAction user={row.original} />
           </RowActionsMenu>
       ),
     },
@@ -101,7 +105,7 @@ function Users() {
         title={t("userManagement")}
         description={t("userManagementHelp")}
         actions={
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
             <Button
               variant="secondary"
               onClick={() =>
@@ -136,14 +140,14 @@ function Users() {
           }))}
         />
         <Select
-          label={t("websiteRoles")}
+          label={t("rolesFilter")}
           value={url.get("role", "all")}
           onValueChange={(role) => url.set({ role })}
           options={[
             { value: "all", label: t("all") },
             ...(roles.data ?? []).map((role) => ({
               value: role.key,
-              label: tr(role.key),
+              label: roleLabel(role.key),
             })),
           ]}
         />

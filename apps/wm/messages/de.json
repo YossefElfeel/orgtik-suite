@@ -62,7 +62,8 @@
       "idea": "Ideen",
       "lead": "Anfragen",
       "settings": "Einstellungen",
-      "user": "Benutzerverwaltung"
+      "user": "Benutzerverwaltung",
+      "role": "Rollen"
     },
     "everyone": "Alle",
     "colWhen": "Wann",
@@ -120,7 +121,12 @@
       "user_roles": "Website-Rollen geändert",
       "sample_revision": "Beispielrevision hinzugefügt",
       "manager_order": "Manager-Einträge neu angeordnet",
-      "role_permissions": "Rollenberechtigungen geändert"
+      "role_permissions": "Rollenberechtigungen geändert",
+      "role_create": "Rolle erstellt",
+      "role_update": "Rolle geändert",
+      "role_delete": "Rolle gelöscht",
+      "user_role_pause": "Rollenzugriff pausiert",
+      "user_role_resume": "Rollenzugriff fortgesetzt"
     }
   },
   "Auth": {
@@ -142,6 +148,20 @@
     "it-support": "IT-Support"
   },
   "Editor": {
+    "caseStudyDisplay": {
+      "title": "Darstellung der Fallstudie",
+      "card": "Nur Projektkarte",
+      "cardHelp": "Zeige die Projektkarte ohne die vollständige Geschichte oder Ergebnisse.",
+      "sample": "Vollständige Geschichte · Beispielergebnisse",
+      "sampleHelp": "Zeige die Geschichte und Ergebnisse mit sichtbaren Beispielkennzeichnungen.",
+      "sampleUnavailable": "Verfügbar, solange die Ergebnisse als Beispiele gekennzeichnet sind.",
+      "approved": "Vollständige Geschichte · freigegebene Ergebnisse",
+      "approvedHelp": "Zeige die Geschichte mit bestätigten Projektergebnissen.",
+      "approvedUnavailable": "Bestätige zuerst die Ergebnisse, um diese Option zu nutzen.",
+      "publication": "Speichere den Entwurf und schließe Prüfung und Veröffentlichung ab, um diese Auswahl anzuwenden.",
+      "permission": "Nur eine Person mit Inhaltsfreigabe kann die Darstellung der Fallstudie ändern.",
+      "saveBeforeConfirm": "Speichere oder verwerfe deine Änderungen, bevor du die Ergebnisse bestätigst."
+    },
     "department": "Bereich",
     "allDepartments": "Alle Bereiche",
     "state": "Status",
@@ -194,10 +214,10 @@
     "staleTitle": "Jemand anderes hat dies geändert",
     "staleBody": "{who} hat während Ihrer Bearbeitung eine neuere Fassung gespeichert. Laden Sie neu; Ihre ungespeicherten Änderungen gehen verloren.",
     "reload": "Neu laden",
-    "figuresBanner": "Diese Zahlen sind Beispiele. Geben Sie die Ergebnisse frei, bevor Sie die Erzählung aktivieren und veröffentlichen.",
-    "approveFigures": "Zahlen bestätigen",
+    "figuresBanner": "Diese Ergebnisse sind Beispiele. Zeige sie mit Beispielkennzeichnungen oder bestätige die vom Kunden freigegebenen Ergebnisse für die freigegebene Geschichte.",
+    "approveFigures": "Ergebnisse bestätigen",
     "approveFiguresTitle": "Diese Zahlen als echte Ergebnisse bestätigen?",
-    "approveFiguresImpact": "Bestätigen Sie nur vom Kunden freigegebene Ergebnisse. Dies entsperrt den Schalter; die Veröffentlichung erfordert weiterhin eine Prüfung.",
+    "approveFiguresImpact": "Bestätige nur vom Kunden freigegebene Ergebnisse. Dadurch wird „Vollständige Geschichte · freigegebene Ergebnisse“ verfügbar. Wähle die Option, speichere den Entwurf und schließe Prüfung und Veröffentlichung ab.",
     "approveFiguresAck": "Der Kunde hat diese Zahlen freigegeben.",
     "sampleLabel": "Beispiel-Hinweis auf der Website",
     "versions": "Versionen",
@@ -678,7 +698,7 @@
   },
   "Ideas": {
     "title": "Ideen",
-    "description": "Vorschläge aus dem öffentlichen Roadmap-Formular. Ausstehende Ideen bleiben privat; Abstimmungen sind eine lokale Seitenvorschau.",
+    "description": "Website-Vorschläge erscheinen hier als private Ideen zur Prüfung. Veröffentliche eine Idee auf der Community-Roadmap und moderiere hier ihre Besucherkommentare. Stimmen bleiben in der Browsersitzung des Besuchers.",
     "closed": "Geschlossen",
     "search": "Ideen durchsuchen",
     "tableLabel": "Ideen",
@@ -698,7 +718,8 @@
       "planned": "Noch nichts geplant",
       "in_progress": "Nichts in Arbeit",
       "shipped": "Noch nichts ausgeliefert",
-      "closed": "Keine geschlossenen Ideen"
+      "closed": "Keine geschlossenen Ideen",
+      "all": "Noch keine Ideen"
     },
     "actions": {
       "publish": "Zur Abstimmung freigeben",
@@ -727,7 +748,7 @@
       "hide": "„{title}“ ausblenden?"
     },
     "impact": {
-      "publish": "Die Idee erscheint mit Beispielzahlen und lokaler Abstimmung auf der Roadmap. Kommentare sind Beispielzahlen.",
+      "publish": "Die Idee erscheint in der Spalte Offen der Community-Roadmap. Besucherkommentare bleiben bis zur Freigabe hier privat.",
       "plan": "Die Roadmap zeigt die Idee als geplant. Abstimmungen bleiben eine lokale Vorschau.",
       "start": "Die Roadmap-Seite zeigt sie als in Arbeit.",
       "ship": "Die Roadmap-Seite zeigt sie als ausgeliefert, mit einem Link zum Ergebnis.",
@@ -762,7 +783,9 @@
       "merge": "Mit einer anderen Idee zusammengeführt",
       "merged_from": "Eine andere Idee wurde hierhin zusammengeführt",
       "hide": "Ausgeblendet",
-      "edit": "Idee bearbeitet"
+      "edit": "Idee bearbeitet",
+      "comment_approve": "Kommentar freigegeben",
+      "comment_hide": "Kommentar ausgeblendet"
     },
     "source": "Quelle",
     "sourceWebsite": "Website",
@@ -772,7 +795,45 @@
     "erase": "Persönliche Daten löschen",
     "eraseTitle": "Persönliche Daten dieser Person löschen?",
     "eraseImpact": "Name und E-Mail-Adresse werden entfernt. Die Idee und ihr Verlauf bleiben erhalten. Dies kann nicht rückgängig gemacht werden.",
-    "sampleComments": "Beispielkommentare"
+    "sampleComments": "Beispielkommentare",
+    "discussion": {
+      "title": "Besucherkommentare",
+      "status": "Status",
+      "all": "Alle",
+      "pending": "Ausstehend",
+      "approved": "Freigegeben",
+      "hidden": "Ausgeblendet",
+      "help": "Nur freigegebene Kommentare erscheinen unter dieser Idee auf der Website. Ausstehende und ausgeblendete Kommentare bleiben privat. Beispieldiskussionen werden getrennt aufgeführt.",
+      "empty": "Keine Besucherkommentare mit diesem Status.",
+      "waiting": "{count, plural, one {# Kommentar zu prüfen} other {# Kommentare zu prüfen}}",
+      "approve": "Kommentar freigeben",
+      "decline": "Kommentar ablehnen",
+      "hide": "Kommentar ausblenden",
+      "approveTitle": "Diesen Kommentar freigeben?",
+      "hideTitle": "Diesen Kommentar ausblenden?",
+      "approveImpact": "Der Name und der Kommentar erscheinen in der öffentlichen Diskussion dieser Idee. Die E-Mail-Adresse bleibt privat.",
+      "hideImpact": "Der Kommentar bleibt im Website Manager und wird aus der öffentlichen Diskussion entfernt.",
+      "reason": "Grund",
+      "saved": "Kommentar aktualisiert",
+      "refresh": "Kommentare aktualisieren",
+      "declineTitle": "Diesen Kommentar ablehnen?",
+      "declineImpact": "Dieser Kommentar bleibt im Website Manager privat und wird nicht veröffentlicht."
+    },
+    "colCategory": "Kategorie",
+    "colTags": "Tags",
+    "noTags": "Keine Tags",
+    "categoryHelp": "Die im Vorschlagsformular der Website gewählte Kategorie. Sie kann hier korrigiert werden.",
+    "tagsHelp": "Füge bis zu 10 Themen-Tags hinzu. Bestätige jeden Tag mit Enter oder Komma; maximal 100 Zeichen pro Tag.",
+    "tagsPlaceholder": "Tag hinzufügen",
+    "tagsError": "Verwende bis zu 10 Tags mit jeweils höchstens 100 Zeichen.",
+    "clearFilters": "Filter löschen",
+    "categories": {
+      "unassigned": "Nicht angegeben",
+      "new_project": "Ein neues Projekt",
+      "product_idea": "Eine Produktidee",
+      "service_improvement": "Eine Serviceverbesserung",
+      "hosting_support": "Hosting und Support"
+    }
   },
   "Improvements": {
     "actions": "Aktionen",
@@ -850,7 +911,7 @@
     "noResults": "Keine passenden Einträge",
     "websiteRoles": "Rollen im Website Manager",
     "websiteRolesHelp": "Gewähren Sie Zugriff auf den Website Manager. Andere App-Rollen werden zentral verwaltet. Ohne Rollen entfällt der Zugriff.",
-    "newAccount": "Konto erstellen",
+    "newAccount": "Benutzer hinzufügen",
     "editAccount": "Konto und Zugriff bearbeiten",
     "centralUsers": "Zentrale Benutzerverwaltung",
     "centralAccountsHelp": "Ihre Rolle verwaltet den Website-Zugriff. Zentrale Administratoren verwalten Kontodaten und Aktivierung.",
@@ -951,9 +1012,29 @@
     "allCapabilities": "Alle Berechtigungen",
     "rotationNote": "Rotating words are used in the Home hero. Other pages use fixed headings.",
     "rotationSourceHelp": "Diese Lauftexte verwenden die Titel der Einträge unten. Öffnen Sie einen Eintrag, um seinen Titel zu verwalten.",
-    "templateField": "Dieser Wert ist in der Website-Vorlage festgelegt und wird hier zur Orientierung angezeigt."
+    "templateField": "Dieser Wert ist in der Website-Vorlage festgelegt und wird hier zur Orientierung angezeigt.",
+    "saveChanges": "Änderungen speichern",
+    "rolesFilter": "Rollen",
+    "pauseRoleAccess": "Rollenzugriff pausieren",
+    "resumeRoleAccess": "Rollenzugriff fortsetzen",
+    "roleAccessPaused": "Rollenzugriff auf Website Manager pausiert.",
+    "roleAccessResumed": "Rollenzugriff auf Website Manager fortgesetzt.",
+    "rolePaused": "Pausiert",
+    "accountStatusStale": "Dieses Konto wurde geändert. Die Liste wurde aktualisiert; bitte erneut versuchen.",
+    "allYears": "Alle Jahre"
   },
   "Leads": {
+    "crm": {
+      "openRecord": "Im CRM öffnen",
+      "openContacts": "CRM-Kontakte öffnen",
+      "notLinked": "Diese Anfrage hat noch keinen verknüpften CRM-Datensatz. Öffne die CRM-Kontakte, um fortzufahren.",
+      "recordUnavailable": "Der verknüpfte CRM-Datensatz ist nicht verfügbar. Du kannst die CRM-Kontakte durchsuchen.",
+      "accessRequired": "Du benötigst CRM-Zugriff im OrgTik-Arbeitsbereich. Wende dich an einen Administrator.",
+      "unavailable": "Das OrgTik-CRM ist derzeit nicht verfügbar.",
+      "openFailed": "CRM konnte nicht geöffnet werden. Versuche es erneut.",
+      "checkFailed": "Der CRM-Zugriff konnte nicht geprüft werden. Versuche es erneut.",
+      "retry": "Erneut versuchen"
+    },
     "title": "Anfragen",
     "description": "Anfragen aus den Formularen der Website, in der einen Pipeline des Vertriebs, mit Seite, Auswahl und Kampagne.",
     "export": "CSV exportieren",
@@ -971,7 +1052,8 @@
       "qualified": "Keine qualifizierten Anfragen",
       "quoted": "Keine offenen Angebote",
       "won": "Noch nichts gewonnen",
-      "closed": "Nichts geschlossen"
+      "closed": "Nichts geschlossen",
+      "all": "Noch keine Anfragen"
     },
     "colLead": "Anfrage",
     "colTopic": "Thema",
@@ -1178,7 +1260,8 @@
     },
     "copyAddress": "Adresse kopieren",
     "copied": "Adresse kopiert.",
-    "copyFailed": "Kopieren nicht möglich. Öffnen Sie die Datei und kopieren Sie die Adresse dort."
+    "copyFailed": "Kopieren nicht möglich. Öffnen Sie die Datei und kopieren Sie die Adresse dort.",
+    "translation": "Übersetzung"
   },
   "Nav": {
     "overview": "Übersicht",
@@ -1814,7 +1897,7 @@
     "stale_translation_source": "Der Ausgangstext wurde geändert. Einen neuen Entwurf erzeugen.",
     "operation_conflict": "Dieser Wiederherstellungsschlüssel gehört zu einem anderen Befehl.",
     "release_draft_required": "Jedes Element benötigt einen gespeicherten Entwurf.",
-    "setupBody": "Die Checkliste nutzt Ihre tatsächlichen Änderungen, Medienimporte, Prüfungen und aktiven Webhooks.",
+    "setupBody": "Deine Checkliste berücksichtigt Inhaltsänderungen, Medienaktualisierungen und Inhaltsprüfungen.",
     "dismissSetup": "Checkliste ausblenden",
     "showSetup": "Checkliste anzeigen",
     "autosave": "Entwürfe automatisch speichern",
@@ -1866,13 +1949,13 @@
     },
     "setupStep": {
       "content": "Inhalte bearbeiten",
-      "media": "Medien importieren",
+      "media": "Medien prüfen",
       "review": "Prüfung einreichen",
       "webhook": "Mock-Webhook aktivieren"
     },
     "setupHint": {
       "content": "Ersten Entwurf speichern",
-      "media": "Mitgelieferte Beispiele verwenden",
+      "media": "Aktualisiere die Beschreibung, Tags oder Nutzungsrechte einer Datei.",
       "review": "Entwürfe für eine andere Person bündeln",
       "webhook": "Simulierte Veröffentlichungsbelege erfassen"
     },
@@ -1943,7 +2026,22 @@
     "searching": "Benutzer werden gesucht…",
     "noUsers": "Keine Benutzer gefunden. Suchen Sie nach Name oder E-Mail.",
     "userSearchFailed": "Benutzer konnten nicht geladen werden.",
-    "retry": "Erneut versuchen"
+    "retry": "Erneut versuchen",
+    "editRole": "Rolle bearbeiten",
+    "saveChanges": "Änderungen speichern",
+    "deleteRole": "Rolle löschen",
+    "roleName": "Rollenname",
+    "definitionHelp": "Benennen Sie die Rolle und wählen Sie ihre Berechtigungen. Rollen werden in der Benutzerverwaltung zugewiesen.",
+    "definitionStale": "Diese Rolle wurde geändert. Schließen Sie den Dialog und öffnen Sie ihn erneut, um die aktuelle Version zu laden.",
+    "invalidRoleName": "Geben Sie einen eindeutigen Rollennamen mit 1–100 Zeichen ein.",
+    "roleInUse": "Diese Rolle ist Benutzern zugewiesen. Weisen Sie ihnen vor dem Löschen andere Rollen zu.",
+    "builtinRole": "Integrierte Rollen können bearbeitet, aber nicht gelöscht werden.",
+    "roleFailed": "Die Rolle konnte nicht gespeichert oder gelöscht werden. Versuchen Sie es erneut.",
+    "roleSaved": "Rolle gespeichert",
+    "roleDeleted": "Rolle gelöscht",
+    "deleteRoleTitle": "{role} löschen?",
+    "deleteRoleImpact": "Die Rolle und ihre Berechtigungen werden entfernt. Nur nicht zugewiesene benutzerdefinierte Rollen können gelöscht werden.",
+    "roleLimit": "Es sind bis zu 100 benutzerdefinierte Rollen möglich. Löschen Sie zuerst eine ungenutzte Rolle."
   },
   "Roadmap": {
     "saveError": "Speichern fehlgeschlagen. Ihre Änderungen bleiben erhalten.",

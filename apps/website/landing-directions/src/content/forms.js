@@ -9,16 +9,28 @@ const API = import.meta.env?.VITE_CMS_API ?? "http://localhost:4007/v2";
 
 export const formsLive = () => snapshot.site?.forms?.mode === "live";
 
-async function post(path, body) {
+async function post(path, body, requestId) {
   const r = await fetch(`${API}/public/${path}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      ...(requestId ? { "Idempotency-Key": requestId } : {}),
+    },
     body: JSON.stringify({
       ...body,
       privacyVersion: snapshot.site?.forms?.privacyVersion ?? "",
     }),
+    signal: AbortSignal.timeout(15000),
   });
-  if (!r.ok) throw new Error(`${path} ${r.status}`);
+  if (!r.ok) {
+    const error = new Error(`${path} ${r.status}`);
+    try {
+      error.code = (await r.json()).error?.code;
+    } catch {
+      /* Status still identifies a failed submission. */
+    }
+    throw error;
+  }
   return r.json();
 }
 
@@ -39,8 +51,51 @@ export async function sendLead({ name, email, message, topic }) {
 }
 
 /** A roadmap idea. Resolves only after the CMS accepts it into its moderation queue. */
-export async function sendIdea({ name, email, message, topic }) {
-  return post("ideas", { name, email, message, topic });
+export async function sendIdea(
+  { name, email, message, topic, category, consent },
+  requestId,
+) {
+  if (consent !== true) throw new Error("ideas consent required");
+  const result = await post(
+    "ideas",
+    { name, email, message, topic, ...(category ? { category } : {}), consent },
+    requestId,
+  );
+  if (
+    !result?.data?.id ||
+    ![
+      "pending",
+      "open",
+      "planned",
+      "in_progress",
+      "shipped",
+      "declined",
+      "hidden",
+      "merged",
+    ].includes(result.data.status)
+  ) {
+    throw new Error("ideas invalid receipt");
+  }
+  return result;
+}
+
+export async function sendIdeaComment(
+  id,
+  { name, email, message, consent },
+  requestId,
+) {
+  if (consent !== true) throw new Error("comments consent required");
+  const result = await post(
+    `ideas/${encodeURIComponent(id)}/comments`,
+    { name, email, message, consent },
+    requestId,
+  );
+  if (
+    !result?.data?.id ||
+    !["pending", "approved", "hidden"].includes(result.data.status)
+  )
+    throw new Error("comments invalid receipt");
+  return result;
 }
 
 const utmOf = (search) =>

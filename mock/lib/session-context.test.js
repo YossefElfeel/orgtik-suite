@@ -27,3 +27,24 @@ test("launcher visibility respects assignment, subscription and current staff au
   delete f.S.db.staffAuthorityRevocations; f.member.status = "offboarded";
   assert.deepEqual(f.service.staffAccess(f.user).apps, []);
 });
+
+test("Staff role permissions use current Website Manager definitions without changing other staff authority", () => {
+  const f=fixture(),grants={current:["content:view"]};
+  f.identity.grants.website_manager.admin.roles=["wm_custom_fixture"];
+  f.identity.websiteManagerRoleAccess={permissionsFor:roles=>roles.includes("wm_custom_fixture")?[...grants.current]:[]};
+  assert.deepEqual(f.service.staffAccess(f.user).permissions.wm,["content:view"]);
+  grants.current.push("content:edit");assert.deepEqual(f.service.staffAccess(f.user).permissions.wm,["content:view","content:edit"]);
+  assert.ok(f.service.staffAccess(f.user).permissions.admin.includes("workspaces:edit"));
+});
+
+test("Pausing WM roles removes staff access without removing assignments or other apps",()=>{
+ const f=fixture(),original=[...f.identity.grants.website_manager.admin.roles];
+ f.identity.grants.website_manager.admin.rolePaused=true;
+ const paused=f.service.staffAccess(f.user);
+ assert.equal(paused.apps.includes("wm"),false);assert.equal(paused.roles.wm,undefined);assert.equal(paused.permissions.wm,undefined);
+ assert.ok(paused.apps.includes("admin"));assert.ok(paused.toolLaunch.tools.length);
+ assert.deepEqual(f.identity.grants.website_manager.admin.roles,original);
+ assert.throws(()=>f.service.resolveWorkspace(f.user,{mode:"staff",audience:"staff:wm",workspaceId:null}),{code:"staff_access_denied"});
+ f.identity.grants.website_manager.admin.rolePaused=false;
+ assert.deepEqual(f.service.staffAccess(f.user).roles.wm,original);
+});

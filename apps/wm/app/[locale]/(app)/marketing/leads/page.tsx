@@ -7,14 +7,14 @@ import { useListState } from "@/lib/useListState";
 import { useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { DownloadSimple, Eye, PencilSimple, MagnifyingGlass, X } from "@phosphor-icons/react";
-import { Badge, Button, Input, MenuLinkItem, PageHeader, StatusBadge, Select, Tabs, TabsList, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
+import { Badge, Button, Input, MenuLinkItem, PageHeader, StatusBadge, Select, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { useCan } from "@/lib/permissions";
 import { downloadLeads, statusOf, useLeadsQuery, type Lead } from "@/store/api";
 
-const TABS = ["new", "open", "contacted", "qualified", "quoted", "won", "closed"] as const;
-type Tab = (typeof TABS)[number];
+const STATUSES = ["all", "new", "open", "contacted", "qualified", "quoted", "won", "closed"] as const;
+type StatusFilter = (typeof STATUSES)[number];
 function LeadsList() {
   const t = useTranslations("Leads");
   const f = useFormatter();
@@ -26,12 +26,9 @@ function LeadsList() {
   const ti = useTranslations("Improvements");
   const search = url.get("search");
   const setSearch = (search: string) => url.set({ search });
-  const tab = (url.get("status", "new")) as Tab;
-  const setTab = (status: Tab) => url.set({ status });
-  const { data, isLoading, error, refetch, isFetching } = useLeadsQuery({ status: tab, search: search || undefined, page: url.page, pageSize: 10 });
-  const counts = data?.counts ?? {};
-  const countOf = (x: Tab) =>
-    x === "open" ? (["contacted", "qualified", "quoted"] as const).reduce((n, k) => n + (counts[k] ?? 0), 0) : x === "closed" ? (["lost", "unqualified", "spam", "duplicate"] as const).reduce((n, k) => n + (counts[k] ?? 0), 0) : counts[x] ?? 0;
+  const statusFilter = url.get("status", "all") as StatusFilter;
+  const setStatusFilter = (status: StatusFilter) => url.set({ status });
+  const { data, isLoading, error, refetch, isFetching } = useLeadsQuery({ status: statusFilter === "all" ? undefined : statusFilter, search: search || undefined, page: url.page, pageSize: 10 });
 
   const columns = useMemo<ColumnDef<Lead, any>[]>(
     () => [
@@ -75,7 +72,20 @@ function LeadsList() {
           </Button>
         }
       />
-      <div className="wm-table-filters"><Input size="sm" type="search" value={search} onChange={(e) => setSearch(e.target.value)} aria-label={t("search")} placeholder={data?.pii ? t("search") : t("searchMasked")} startIcon={<MagnifyingGlass className="size-4" />} className="wm-search" /><Select size="sm" aria-label={t("title")} value={tab} onValueChange={value=>setTab((value??"open") as Tab)} options={TABS.map(value=>({value,label:value==="open"?ti("opened"):value==="closed"?t("closed"):statusLabel("lead",value)}))} /></div>
+      <div className="wm-table-filters">
+        <Input size="sm" type="search" value={search} onChange={(event) => setSearch(event.target.value)} aria-label={t("search")} placeholder={data?.pii ? t("search") : t("searchMasked")} startIcon={<MagnifyingGlass className="size-4" />} className="wm-search" />
+        <Select
+          size="sm"
+          label={t("colStatus")}
+          aria-label={t("colStatus")}
+          value={statusFilter}
+          onValueChange={value => setStatusFilter((value ?? "all") as StatusFilter)}
+          options={STATUSES.map(value => ({
+            value,
+            label: value === "all" ? ti("all") : value === "open" ? ti("opened") : value === "closed" ? t("closed") : statusLabel("lead", value),
+          }))}
+        />
+      </div>
       <DataTable
         mode="server"
         rowCount={data?.total ?? 0}
@@ -89,7 +99,7 @@ function LeadsList() {
         paginate
         onRetry={refetch}
         className={isFetching && !isLoading ? "opacity-70" : undefined}
-        empty={search ? { title: t("noMatch"), action: <Button size="sm" variant="secondary" startIcon={<X />} onClick={() => setSearch("")}>{t("clear")}</Button> } : { title: t(`empty.${tab}`) }}
+        empty={search ? { title: t("noMatch"), action: <Button size="sm" variant="secondary" startIcon={<X />} onClick={() => setSearch("")}>{t("clear")}</Button> } : { title: t(`empty.${statusFilter}`) }}
       />
 
     </div>

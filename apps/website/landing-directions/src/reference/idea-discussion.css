@@ -1,0 +1,147 @@
+.idea-discussion {
+  margin-top: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.idea-discussion h3 {
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 600;
+}
+.idea-discussion-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+  display: grid;
+  gap: 12px;
+}
+.idea-discussion-list li {
+  padding: 16px 18px;
+  border: 1px solid #ffffff26;
+  border-radius: 16px;
+  background: #ffffff05;
+  overflow-wrap: anywhere;
+}
+.idea-discussion-list li p {
+  color: #f6f1fa;
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.idea-discussion-list li .idea-discussion-author {
+  color: #d4b7ec;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.idea-discussion-note {
+  margin-top: 8px;
+  color: #cfc2db;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.idea-discussion-samples {
+  margin-top: 16px;
+  color: #cfc2db;
+}
+.idea-discussion-samples summary {
+  cursor: pointer;
+  padding: 8px 0;
+}
+.idea-discussion form {
+  margin-top: 24px;
+  border-top: 1px solid #ffffff26;
+  padding-top: 24px;
+}
+.idea-discussion fieldset {
+  display: grid;
+  gap: 16px;
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+.idea-discussion-contact {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.idea-discussion label {
+  display: grid;
+  gap: 8px;
+  color: #d4b7ec;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.idea-discussion input:not([type="checkbox"]),
+.idea-discussion textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid #ffffff40;
+  border-radius: 14px;
+  background: #ffffff08;
+  color: #f6f1fa;
+  font: inherit;
+}
+.idea-discussion textarea {
+  resize: vertical;
+}
+.idea-discussion .idea-discussion-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #cfc2db;
+}
+.idea-discussion-consent input {
+  flex-shrink: 0;
+  margin-top: 5px;
+  accent-color: #d4b7ec;
+}
+.idea-discussion a {
+  color: #d4b7ec;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.idea-discussion-submit,
+.idea-discussion-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  justify-self: start;
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.idea-discussion-submit {
+  background: #eee3f7;
+  color: #28123b;
+}
+.idea-discussion-secondary {
+  border: 1px solid #ffffff40;
+  color: #f6f1fa;
+  margin-top: 12px;
+}
+.idea-discussion :focus-visible {
+  outline: 2px solid #d4b7ec;
+  outline-offset: 3px;
+}
+.idea-discussion-error {
+  color: #ffbccb;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.idea-discussion-received {
+  margin-top: 24px;
+  color: #d4b7ec;
+  line-height: 1.6;
+}
+.idea-discussion fieldset:disabled {
+  opacity: 0.7;
+}
+@media (max-width: 560px) {
+  .idea-discussion-contact {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

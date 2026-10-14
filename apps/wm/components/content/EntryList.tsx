@@ -10,6 +10,8 @@ import {
   Progress,
   Select,
   StatusBadge,
+  Tabs,
+  TabsList,
   useFormatter,
 } from "@orgtik/ui";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
@@ -58,6 +60,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
   const entryName = useEntryName();
   const search = url.get("search");
   const filter = url.get("filter", "all");
+  const year = url.get("year");
   const setSearch = (search: string) => url.set({ search });
   const setFilter = (filter: string) => url.set({ filter });
   const filterKey =
@@ -70,11 +73,13 @@ export function EntryList({ type: key }: { type: EntryType }) {
     missingLanguages: url.get("missingLanguages") || undefined,
     deliveryStatus: url.get("deliveryStatus") || undefined,
     period: url.get("period") || undefined,
-    year: url.get("year") || undefined,
+    year: year || undefined,
     sort: url.get("sort") || undefined,
     search: search || undefined,
     ...(filterKey && filter !== "all" ? { [filterKey]: filter } : {}),
   });
+  const roadmapYears = useMemo(() => [...new Set([...(data?.years ?? []), ...(year ? [year] : [])])].sort(), [data?.years, year]);
+  const yearTabs = roadmapYears.length <= 3;
   const needsFamilies =
     key === "service" || key === "article" || key === "serviceFamily";
   const families = useEntriesQuery(
@@ -221,7 +226,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
             ) : null}
             <span className="text-caption text-fg-subtle">
               {row.original.period ? t(`periods.${row.original.period}`) : null}{" "}
-              Â· <span dir="ltr">{row.original.year}</span>
+              · <span dir="ltr">{row.original.year}</span>
             </span>
           </span>
         ),
@@ -377,7 +382,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
         {key === "roadmapItem" ? <>
           <Select size="sm" label={ti("deliveryStatus")} aria-label={ti("deliveryStatus")} value={url.get("deliveryStatus", "all")} onValueChange={deliveryStatus => url.set({ deliveryStatus })} options={[{ value: "all", label: ti("all") }, ...(["open", "planned", "in_progress", "shipped"] as const).map(value => ({ value, label: <StatusBadge entity="roadmap_idea" state={value} size="sm" /> }))]} />
           <Select size="sm" label={t("colTimeline")} aria-label={t("colTimeline")} value={url.get("period", "all")} onValueChange={period => url.set({ period })} options={[{ value: "all", label: ti("all") }, ...["past", "now", "next"].map(value => ({ value, label: t(`periods.${value}`) }))]} />
-          <Input size="sm" type="number" aria-label={ti("year")} placeholder={ti("year")} value={url.get("year")} onChange={event => url.set({ year: event.target.value })} className="w-28" />
+          {!yearTabs ? <Select size="sm" label={ti("year")} value={year || "all"} onValueChange={year => url.set({ year })} options={[{ value: "all", label: ti("allYears") }, ...roadmapYears.map(value => ({ value, label: <span dir="ltr">{value}</span> }))]} /> : null}
         </> : null}
         {filterOptions ? (
           <Select
@@ -391,6 +396,11 @@ export function EntryList({ type: key }: { type: EntryType }) {
         ) : null}
 
       </div>
+      {key === "roadmapItem" && yearTabs ? (
+        <Tabs role="group" aria-label={ti("year")} value={year || "all"} onValueChange={year => url.set({ year })}>
+          <TabsList items={[{ value: "all", label: ti("allYears") }, ...roadmapYears.map(value => ({ value, label: <span dir="ltr">{value}</span> }))]} />
+        </Tabs>
+      ) : null}
       {FIXED_SET.has(key) ? (
         <p className="-mt-1 text-body-sm text-fg-muted">{t("fixedSet")}</p>
       ) : null}
@@ -408,7 +418,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
         status={status}
         paginate
         onRetry={refetch}
-        className={isFetching && !isLoading ? "opacity-70" : undefined}
+        className={[key === "roadmapItem" ? "[&_tbody_td]:py-2" : "", isFetching && !isLoading ? "opacity-70" : ""].filter(Boolean).join(" ") || undefined}
         empty={
           filtered
             ? {

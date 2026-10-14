@@ -108,7 +108,8 @@ export function SharedCopyPanel({
           }}
         />
       ) : null}
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
+        {!locked && Object.keys(edits).length ? <Button variant="secondary" disabled={saving.isLoading} onClick={() => setEditsByLang(previous => ({...previous, [lang]: {}}))}>{te("cancel")}</Button> : null}
         {!locked ? (
           <Button
             disabled={!Object.keys(edits).length}

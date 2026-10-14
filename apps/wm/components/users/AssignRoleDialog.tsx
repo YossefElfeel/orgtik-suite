@@ -165,7 +165,7 @@ export function AssignRoleDialog({
                 .filter((r) => !r.protected || me?.identity.accounts)
                 .map((r) => ({
                   value: r.key,
-                  label: tr.has(r.key) ? tr(r.key) : r.label,
+                  label: !r.labelOverridden && tr.has(r.key) ? tr(r.key) : r.label,
                 }))}
             />
           </Field>

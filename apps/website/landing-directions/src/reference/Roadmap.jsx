@@ -1,6 +1,13 @@
 import { managedPageTree, SectionMedia } from "../content/managed-page";
 import { content } from "../content";
-import { SEND_FAILED, sendIdea } from "../content/forms";
+import { sendIdea } from "../content/forms";
+import { IdeaDiscussion } from "./IdeaDiscussion";
+import {
+  communityText,
+  refreshCommunity,
+  submissionError,
+} from "../content/roadmap-community";
+import { isPreview } from "../content/preview";
 import { SiteHeader } from "./SiteHeader";
 import React from "react";
 import { LanguageMenu } from "./LanguageMenu";
@@ -20,7 +27,7 @@ export default class Roadmap extends ReferencePage {
         ...this.rootRef.current
           .querySelector('[role="dialog"]')
           .querySelectorAll(
-            'button, a[href], input, select, textarea, [tabindex="0"]',
+            'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex="0"]',
           ),
       ];
       const first = elements[0],
@@ -51,6 +58,7 @@ export default class Roadmap extends ReferencePage {
     active: null,
     copied: false,
     topic: "",
+    category: "",
     ideaSent: false,
     ideaSending: false,
     ideaErr: "",
@@ -115,6 +123,28 @@ export default class Roadmap extends ReferencePage {
     this.srcMO.observe(root, { childList: true, subtree: true });
     this.afterView(true);
     window.addEventListener("keydown", this.onKey);
+    this.refreshCommunity = async () => {
+      if (isPreview()) return;
+      this.communityAbort?.abort();
+      const controller = new AbortController();
+      this.communityAbort = controller;
+      const timeout = setTimeout(() => controller.abort(), 5000);
+      try {
+        await refreshCommunity({ signal: controller.signal });
+        this.IDEAS = content.IDEAS();
+        this.setState(({ active }) => {
+          if (active?.kind !== "c") return {};
+          const latest = this.IDEAS.find((idea) => idea.id === active.id);
+          return { active: latest ? { ...active, ...latest } : null };
+        });
+      } catch {
+        /* Keep the last available board while the connection recovers. */
+      } finally {
+        clearTimeout(timeout);
+      }
+    };
+    window.addEventListener("focus", this.refreshCommunity);
+    this.refreshCommunity();
   }
   componentDidUpdate(pp, ps) {
     pp = pp || {};
@@ -142,6 +172,8 @@ export default class Roadmap extends ReferencePage {
   }
   componentWillUnmount() {
     super.componentWillUnmount();
+    this.communityAbort?.abort();
+    window.removeEventListener("focus", this.refreshCommunity);
     window.removeEventListener("keydown", this.onKey);
     window.removeEventListener("scroll", this.onScroll);
     window.removeEventListener("resize", this.measure);
@@ -718,7 +750,7 @@ export default class Roadmap extends ReferencePage {
         msg("Roadmap:18"),
         msg("Roadmap:19"),
         msg("Roadmap:20"),
-      ].map((t) => {
+      ].map((t, index) => {
         const on = s.topic === t;
         return {
           label: t,
@@ -726,7 +758,17 @@ export default class Roadmap extends ReferencePage {
           bg: on ? "#190B25" : "#FFFFFF",
           c: on ? "#F6F1FA" : "#190B25",
           border: on ? "#190B25" : "#190B2526",
-          pick: () => this.setState({ topic: t, ideaErr: "" }),
+          pick: () =>
+            this.setState({
+              topic: t,
+              category: [
+                "new_project",
+                "product_idea",
+                "service_improvement",
+                "hosting_support",
+              ][index],
+              ideaErr: "",
+            }),
         };
       }),
       ideaForm: !s.ideaSent,
@@ -752,6 +794,22 @@ export default class Roadmap extends ReferencePage {
           });
           return;
         }
+        const consent = f.get("consent") === "on";
+        if (!consent) {
+          this.setState({ ideaErr: communityText().required });
+          return;
+        }
+        const submission = {
+          name: n,
+          email: em,
+          message: m,
+          topic: this.state.topic,
+          category: this.state.category,
+          consent,
+        };
+        const payload = JSON.stringify(submission);
+        if (this.ideaRequest?.payload !== payload)
+          this.ideaRequest = { payload, id: crypto.randomUUID() };
         const done = () =>
           this.setState({
             ideaSent: true,
@@ -760,10 +818,13 @@ export default class Roadmap extends ReferencePage {
             ideaName: n.split(" ")[0],
           });
         this.setState({ ideaSending: true, ideaErr: "" });
-        sendIdea({ name: n, email: em, message: m, topic: this.state.topic })
+        sendIdea(submission, this.ideaRequest.id)
           .then(done)
-          .catch(() =>
-            this.setState({ ideaErr: SEND_FAILED, ideaSending: false }),
+          .catch((error) =>
+            this.setState({
+              ideaErr: submissionError(error),
+              ideaSending: false,
+            }),
           );
       },
       goTL: (e) => {
@@ -775,13 +836,22 @@ export default class Roadmap extends ReferencePage {
         this.go("community");
       },
       ideaReset: () =>
-        this.setState({ ideaSent: false, ideaErr: "", topic: "" }),
+        this.setState({
+          ideaSent: false,
+          ideaErr: "",
+          topic: "",
+          category: "",
+        }),
       hasActive: !!A,
       closeDlg: () => this.setState({ active: null }),
       stop: (e) => e.stopPropagation(),
       dlg: A
         ? {
-            eyebrow: msg("Roadmap:23", [A.status, A.theme]),
+            eyebrow:
+              A.kind === "m" || content.IDEA_SAMPLE(A.id)
+                ? msg("Roadmap:23", [A.status, A.theme])
+                : `${A.status} · ${A.theme}`,
+            sampleNote: A.kind === "m" || content.IDEA_SAMPLE(A.id),
             title: A.title,
             body: A.body,
             media: A.media ?? [],
@@ -926,8 +996,8 @@ export default class Roadmap extends ReferencePage {
 
   render() {
     const v = this.renderVals();
-    return (
-      managedPageTree(<>
+    return managedPageTree(
+      <>
         <div
           ref={v.rootRef}
           data-screen-label={"Roadmap"}
@@ -990,7 +1060,8 @@ export default class Roadmap extends ReferencePage {
           <SiteHeader />
 
           <main id={"top"}>
-            <section data-cms-section="hero"
+            <section
+              data-cms-section="hero"
               className="purchase-surface"
               style={{
                 paddingTop: 136,
@@ -1004,10 +1075,11 @@ export default class Roadmap extends ReferencePage {
                 <p>{run("pg_roadmap|hero|p", 0)}</p>
               </div>
               <p role="note" style={{ maxWidth: 760, lineHeight: 1.7 }}>
-                {run("pg_roadmap|hero|p-2", 0)}
+                {communityText().introNote}
               </p>
             </section>
-            <section data-cms-section="timeline"
+            <section
+              data-cms-section="timeline"
               id={"timeline"}
               style={{ padding: "var(--section-space) 0" }}
             >
@@ -1778,7 +1850,8 @@ export default class Roadmap extends ReferencePage {
                 )}
               </div>
             </section>
-            <section data-cms-section="community"
+            <section
+              data-cms-section="community"
               id={"community"}
               style={{
                 padding: "var(--section-space) 0",
@@ -2076,21 +2149,23 @@ export default class Roadmap extends ReferencePage {
                                     gap: "10px",
                                   }}
                                 >
-                                  <span
-                                    style={{
-                                      padding: "4px 10px",
-                                      borderRadius: "999px",
-                                      border: "1px solid #ffffff26",
-                                      fontSize: "11px",
-                                      fontWeight: "700",
-                                      letterSpacing: ".06em",
-                                      textTransform: "uppercase",
-                                      color: "#D4B7EC",
-                                      whiteSpace: "nowrap",
-                                    }}
-                                  >
-                                    {cd.theme}
-                                  </span>
+                                  {cd.theme && (
+                                    <span
+                                      style={{
+                                        padding: "4px 10px",
+                                        borderRadius: "999px",
+                                        border: "1px solid #ffffff26",
+                                        fontSize: "11px",
+                                        fontWeight: "700",
+                                        letterSpacing: ".06em",
+                                        textTransform: "uppercase",
+                                        color: "#D4B7EC",
+                                        whiteSpace: "nowrap",
+                                      }}
+                                    >
+                                      {cd.theme}
+                                    </span>
+                                  )}
                                   <button
                                     onClick={cd.vote}
                                     aria-pressed={cd.vPressed}
@@ -2210,11 +2285,12 @@ export default class Roadmap extends ReferencePage {
                     }}
                     className={"ph ph-info"}
                   ></i>
-                  <span>{run("pg_roadmap|community|div-3", 3)}</span>
+                  <span>{communityText().boardNote}</span>
                 </div>
               </div>
             </section>
-            <section data-cms-section="submit-idea"
+            <section
+              data-cms-section="submit-idea"
               id={"submit-idea"}
               style={{
                 background:
@@ -2575,6 +2651,8 @@ export default class Roadmap extends ReferencePage {
                             {"Your name"}
                             <input
                               name={"name"}
+                              required
+                              maxLength={100}
                               type={"text"}
                               placeholder={attr(
                                 "pg_roadmap|submit-idea|input@placeholder",
@@ -2607,6 +2685,8 @@ export default class Roadmap extends ReferencePage {
                             {"Email address"}
                             <input
                               name={"email"}
+                              required
+                              maxLength={254}
                               type={"email"}
                               placeholder={attr(
                                 "pg_roadmap|submit-idea|input@placeholder-2",
@@ -2640,6 +2720,8 @@ export default class Roadmap extends ReferencePage {
                           {"Message"}
                           <textarea
                             name={"message"}
+                            required
+                            maxLength={5000}
                             rows={"5"}
                             placeholder={attr(
                               "pg_roadmap|submit-idea|textarea@placeholder",
@@ -2658,6 +2740,43 @@ export default class Roadmap extends ReferencePage {
                             }}
                             className={"reference-state-180"}
                           ></textarea>
+                        </label>
+                        <label
+                          style={{
+                            display: "flex",
+                            alignItems: "flex-start",
+                            gap: 10,
+                            fontSize: 14,
+                            lineHeight: 1.6,
+                            color: "#4A3A57",
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            name="consent"
+                            required
+                            disabled={v.ideaSending}
+                            style={{
+                              accentColor: "#6C3CAA",
+                              marginTop: 4,
+                              flexShrink: 0,
+                            }}
+                          />
+                          <span>
+                            {communityText().consent}{" "}
+                            <a
+                              href={toSiteHref("/legal/privacy")}
+                              target="_blank"
+                              rel="noreferrer"
+                              style={{
+                                color: "#6C3CAA",
+                                textDecoration: "underline",
+                              }}
+                            >
+                              {communityText().privacy}
+                            </a>
+                            .
+                          </span>
                         </label>
                         {v.hasIdeaErr && (
                           <>
@@ -2785,7 +2904,7 @@ export default class Roadmap extends ReferencePage {
                             color: "#4A3A57",
                           }}
                         >
-                          {run("pg_roadmap|submit-idea|p-2", 1)}
+                          {communityText().pending}
                         </p>
                         <button
                           onClick={v.ideaReset}
@@ -3018,85 +3137,11 @@ export default class Roadmap extends ReferencePage {
                     <SectionMedia items={v.dlg.media} />
 
                     {v.dlg.hasComments && (
-                      <section data-cms-section="section-1"
-                        aria-labelledby="rm-comments-title"
-                        data-idea-comments=""
-                        style={{ marginTop: 22 }}
-                      >
-                        <h3
-                          id="rm-comments-title"
-                          style={{ fontSize: 20, fontWeight: 600 }}
-                        >
-                          {run("pg_roadmap|section-1|h3", 0)}
-                        </h3>
-                        <p
-                          role="note"
-                          style={{
-                            marginTop: 8,
-                            color: "#CFC2DB",
-                            fontSize: 14,
-                            lineHeight: 1.6,
-                          }}
-                        >
-                          {run("pg_roadmap|section-1|p", 0)}
-                        </p>
-                        {v.dlg.commentThread.length ? (
-                          <ol
-                            style={{
-                              listStyle: "none",
-                              padding: 0,
-                              margin: "16px 0 0",
-                              display: "grid",
-                              gap: 12,
-                            }}
-                          >
-                            {v.dlg.commentThread.map((comment) => (
-                              <li
-                                key={comment.id}
-                                data-idea-comment={comment.id}
-                                style={{
-                                  padding: "16px 18px",
-                                  border: "1px solid #ffffff26",
-                                  borderRadius: 16,
-                                  background: "#ffffff05",
-                                  overflowWrap: "anywhere",
-                                }}
-                              >
-                                <p
-                                  style={{
-                                    color: "#D4B7EC",
-                                    fontSize: 13,
-                                    fontWeight: 600,
-                                  }}
-                                >
-                                  {comment.author}
-                                </p>
-                                <p
-                                  style={{
-                                    marginTop: 8,
-                                    color: "#F6F1FA",
-                                    fontSize: 16,
-                                    lineHeight: 1.6,
-                                  }}
-                                >
-                                  {comment.body}
-                                </p>
-                              </li>
-                            ))}
-                          </ol>
-                        ) : (
-                          <p
-                            style={{
-                              marginTop: 16,
-                              color: "#CFC2DB",
-                              fontSize: 16,
-                              lineHeight: 1.6,
-                            }}
-                          >
-                            {run("pg_roadmap|section-1|p-2", 0)}
-                          </p>
-                        )}
-                      </section>
+                      <IdeaDiscussion
+                        key={this.state.active.id}
+                        ideaId={this.state.active.id}
+                        comments={v.dlg.commentThread}
+                      />
                     )}
                     <div
                       style={{
@@ -3229,33 +3274,35 @@ export default class Roadmap extends ReferencePage {
                         </React.Fragment>
                       ))}
                     </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: "10px",
-                        alignItems: "flex-start",
-                        marginTop: "20px",
-                        padding: "14px 16px",
-                        borderRadius: "14px",
-                        border: "1px dashed #ffffff33",
-                        fontFamily: "Arial,Helvetica,sans-serif",
-                        fontSize: "14px",
-                        lineHeight: "1.5",
-                        color: "#CFC2DB",
-                      }}
-                    >
-                      <i
-                        aria-hidden={true}
+                    {v.dlg.sampleNote && (
+                      <div
                         style={{
-                          fontSize: "16px",
-                          color: "#D4B7EC",
-                          flexShrink: "0",
-                          marginTop: "1px",
+                          display: "flex",
+                          gap: "10px",
+                          alignItems: "flex-start",
+                          marginTop: "20px",
+                          padding: "14px 16px",
+                          borderRadius: "14px",
+                          border: "1px dashed #ffffff33",
+                          fontFamily: "Arial,Helvetica,sans-serif",
+                          fontSize: "14px",
+                          lineHeight: "1.5",
+                          color: "#CFC2DB",
                         }}
-                        className={"ph ph-info"}
-                      ></i>
-                      <span>{run("pg_roadmap|intro|div-2", 3)}</span>
-                    </div>
+                      >
+                        <i
+                          aria-hidden={true}
+                          style={{
+                            fontSize: "16px",
+                            color: "#D4B7EC",
+                            flexShrink: "0",
+                            marginTop: "1px",
+                          }}
+                          className={"ph ph-info"}
+                        ></i>
+                        <span>{run("pg_roadmap|intro|div-2", 3)}</span>
+                      </div>
+                    )}
                     <div
                       style={{
                         display: "flex",
@@ -3701,7 +3748,8 @@ export default class Roadmap extends ReferencePage {
             </div>
           </footer>
         </div>
-      </>, "pg_roadmap")
+      </>,
+      "pg_roadmap",
     );
   }
 }

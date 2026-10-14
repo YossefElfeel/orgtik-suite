@@ -194,7 +194,7 @@ export function NewEntry({
           ) : null}
         </DialogBody>
         <DialogFooter>
-          <Button variant="ghost" onClick={() => setOpen(false)}>
+          <Button variant="secondary" disabled={creating.isLoading} onClick={() => setOpen(false)}>
             {t("cancel")}
           </Button>
           <Button loading={creating.isLoading} onClick={submit}>
