@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
+import { restoreRuntimeEntry } from "./runtime-entry.mjs";
 const output = path.resolve(".vercel/output/services/mock");
 const functions = path.join(output, "functions");
 if (!fs.existsSync(functions)) throw new Error("Mock Services function artifact is missing.");
@@ -22,6 +23,7 @@ const mockRoot = path.resolve(folder, mockPrefix);
 if (path.relative(folder, mockRoot).startsWith("..")) throw new Error("Mock runtime root leaves the function.");
 fs.mkdirSync(mockRoot, { recursive: true });
 fs.cpSync(runtime, mockRoot, { recursive: true, dereference: false, verbatimSymlinks: true });
+restoreRuntimeEntry(runtime, entry, folder);
 // The config imports the shared public-origin helper relative to mock/config.js.
 const shared = path.resolve(mockRoot, "../tools/services");
 if (path.relative(folder, shared).startsWith("..")) {
@@ -36,6 +38,7 @@ if (path.relative(folder, shared).startsWith("..")) {
 }
 if (!fs.existsSync(entry)) throw new Error("Packaged Express handler is missing.");
 const load = createRequire(path.join(mockRoot, "index.js"));
+if (typeof load(entry) !== "function" || typeof load(path.join(mockRoot, "api/index.js")) !== "function") throw new Error("Packaged mock entry or API handler is not callable.");
 for (const dependency of ["express", "cors", "multer", "socket.io", "@iconify/utils"]) {
   const resolved = fs.realpathSync(load.resolve(dependency));
   if (path.relative(folder, resolved).startsWith("..")) throw new Error(`Packaged ${dependency} resolves outside the function.`);
@@ -48,4 +51,4 @@ for (const tree of ["apps", "lib"]) {
     if (!fs.existsSync(packaged) || digest(source) !== digest(packaged)) throw new Error(`Mock source/asset differs in Services artifact: ${tree}/${file}`);
   }
 }
-console.log("Services mock: isolated dependencies and original runtime/asset bytes verified.");
+console.log(`Services mock: declared entry ${config.handler}, callable handlers, isolated dependencies and original runtime/asset bytes verified.`);
