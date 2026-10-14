@@ -129,6 +129,7 @@ const put = (tree: Tree, path: string, v: unknown): Tree =>
 function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentType; seoOnly?: boolean }) {
   const t = useTranslations("Editor");
   const ti = useTranslations("Improvements");
+  const nav = useTranslations("Nav");
   const tp = useTranslations("Preview");
   const router = useRouter();
   const tt = useTranslations("Types");
@@ -183,7 +184,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   const [approveFigures] = useApproveFiguresMutation();
   // Services live under their family's address; articles are filed under a family.
   const needsFamilies =
-    type.key === "service" || type.neutral.includes("category");
+    type.key === "service" || type.key === "review" || type.neutral.includes("category");
   const relatedServices = useEntriesQuery({ type: "service", pageSize: 100 }, { skip: type.key !== "review" });
   const relatedSoftware = useEntriesQuery({ type: "softwareModule", pageSize: 100 }, { skip: type.key !== "review" });
   const families = useEntriesQuery(
@@ -196,6 +197,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   const english = entry.content.locales.en as Tree;
   const tree = edits[lang] ?? saved;
   const neutral = { ...entry.content, ...neutralEdit };
+  const reviewRelatedEntries = neutral.relatedEntries ?? (neutral.relatedEntry ? [neutral.relatedEntry] : []);
   const alt = { ...(entry.content.image?.alt ?? {}), ...altEdits };
   const dirty =
     [edits, seoEdits, neutralEdit, altEdits, sourceEdits].some(
@@ -228,10 +230,14 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
     readOnly: !editable,
     structureLocked: lang !== "en" || !editable || pricesLocked,
     numbersLocked: lang !== "en" || !editable || pricesLocked,
+    mediaAlwaysOpen: type.key === "caseStudy",
+    fullWidthFields: type.key === "article",
     errors,
   };
   const lastEditor = entry.lastEditor ?? entry.versions.find((v) => v.state === "draft")?.by.key;
   const mine = entry.hasDraft && lastEditor === me.data?.user.key;
+  const ownPageApproval = type.key === "page" && me.data?.roles.some(role => ["wm_admin", "wm_super_admin", "wm_owner"].includes(role.key));
+  const needsAnotherApprover = mine && !ownPageApproval;
   const areaTitle = seoOnly ? ti("seoHealth") : ta(`${type.area}.title`);
   const entryName = useEntryName();
   const name = entryName(entry) || String(english?.name ?? "");
@@ -382,8 +388,8 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
     if (state === "in_review" && canApprove)
       return (
         <Button
-          disabled={mine}
-          title={mine ? t("fourEyes") : undefined}
+          disabled={needsAnotherApprover}
+          title={needsAnotherApprover ? t("fourEyes") : undefined}
           onClick={() => act("approve").catch(onError)}
         >
           {t("approve")}
@@ -487,7 +493,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
           <p className="text-body-sm text-fg-muted">{t("sharedNote")}</p>
         ) : null}
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className={ctx.fullWidthFields ? "grid min-w-0 gap-4" : "grid gap-4 sm:grid-cols-2"}>
         {type.neutral.includes("icon") ? (
           <Field label={tl("icon")} description={t("iconHelp")}>
             <IconPicker disabled={!editable || lang !== "en"} value={neutral.icon ?? ""} onChange={icon => setNeutralEdit(previous => ({ ...previous, icon }))} />
@@ -730,8 +736,8 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
       {type.image && entry.content.image ? (
         <>
         {errors["image.src"] ? <p role="alert" className="text-body-sm text-danger">{t("errorRequired")}</p> : null}
-        <div className="grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.65fr)]">
-          <div className="min-w-0"><MediaPicker imagesOnly value={imageSrc ?? entry.content.image.src} onChange={(src, media) => { setImageSrc(src); setImageFocal(media?.focal); if (media?.alt) setAltEdits(media.alt); }} disabled={!editable || lang !== "en"} /></div>
+        <div className={ctx.fullWidthFields ? "grid min-w-0 items-start gap-4" : "grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.65fr)]"}>
+          <div className="min-w-0"><MediaPicker imagesOnly alwaysOpen={type.key === "caseStudy"} value={imageSrc ?? entry.content.image.src} onChange={(src, media) => { setImageSrc(src); setImageFocal(media?.focal); if (media?.alt) setAltEdits(media.alt); }} disabled={!editable || lang !== "en"} /></div>
           <Field
             label={t("altText")}
             description={alt[lang] ? t("altHelp") : t("altMissing")}
@@ -842,7 +848,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                 </DialogBody>
               </SheetContent>
             </Sheet>
-            {entry.hasDraft && editable && !dirty ? (
+            {entry.hasDraft && entry.live && editable && !dirty ? (
               <ConfirmDialog
                 trigger={<Button variant="secondary">{t("discard")}</Button>}
                 title={t("discardTitle")}
@@ -877,7 +883,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
 
       {type.key === "pricing" || type.key === "softwareModule" ? <PricingAuthority historical={type.key === "pricing"} /> : null}
 
-      {mine && state === "in_review" ? (
+      {needsAnotherApprover && state === "in_review" ? (
         <p className="rounded-field bg-info-subtle px-3 py-2 text-body-sm text-info">
           {t("fourEyes")}
         </p>
@@ -1069,14 +1075,15 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                   photo={imageSrc ?? entry.content.image?.src ?? ""} focal={imageFocal ?? entry.content.image?.focal} alt={alt[lang] ?? ""}
                   onPhoto={(src, media) => { setImageSrc(src); setImageFocal(media?.focal); if (media?.alt) setAltEdits(media.alt); }}
                   onAlt={value => setAltEdits(previous => ({ ...previous, [lang]: value }))}
-                  sample={neutral.sample === true} position={neutral.position ?? 0} relatedEntry={neutral.relatedEntry ?? ""}
+                  sample={neutral.sample === true} position={neutral.position ?? 0} relatedEntries={reviewRelatedEntries}
+                  category={neutral.category ?? (reviewRelatedEntries.length ? typeOfId(reviewRelatedEntries[0])?.key === "softwareModule" ? "software" : "services" : "")}
                   onSettings={patch => setNeutralEdit(previous => ({ ...previous, ...patch }))}
-                  relatedOptions={[...(relatedServices.data?.items ?? []), ...(relatedSoftware.data?.items ?? [])].map(item => ({ value: item.id, label: entryName(item) }))}
+                  relatedOptions={[...(families.data?.items ?? []), ...(relatedServices.data?.items ?? []), ...(relatedSoftware.data?.items ?? [])].map(item => ({ value: item.id, label: entryName(item), hint: nav(item.type === "softwareModule" ? "software" : "services") }))}
                   additionalMedia={<SectionAttachments disabled={!editable || lang !== "en"} disabledReason={viewing && mayEdit ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia.details ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, details: items } })} />}
                 /> : s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "") ? <div className="grid max-w-2xl gap-4">
                   <Field label={ti("text")}><Input disabled={!editable} value={presentation.cursor.text[lang] ?? String(get(tree, "intro") && (get(tree, "intro") as Tree).div || "").replace(/<[^>]+>/g, "").trim()} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, text: { ...presentation.cursor.text, [lang]: event.target.value } } })} /></Field>
                   <Field label={ti("link")}><Input dir="ltr" disabled={!editable || lang !== "en"} value={presentation.cursor.link} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, link: event.target.value } })} /></Field>
-                </div> : s.value === "rotation-words" && pageConfig?.rotationSource ? <RotationWords type={pageConfig.rotationSource} /> : pageConfig?.fields?.[s.value] ? (sourceQuery.isLoading ? <LoadingState rows={4} /> : sourceQuery.error ? <ErrorState onRetry={sourceQuery.refetch} /> : <PageFields fields={pageConfig.fields[s.value].fields} records={[entry, ...(sourceQuery.data ?? [])]} lang={lang} edits={{...sourceEdits,[entry.id]:edits}} onChange={(id,words)=>id===entry.id ? setTree(words) : setSourceEdits(previous=>({...previous,[id]:{...previous[id],[lang]:words}}))} ctx={ctx} />) : (entry.id === "pg_home" && s.value === "two-sides" || entry.id === "pg_about" && s.value === "purpose") ? <PageCards pageId={entry.id} section={s.value} node={s.node} value={get(tree,s.path)} onChange={value=>setTree(put(tree ?? {},s.path,value))} ctx={ctx} /> : references[s.value] ? <Link href={references[s.value]} className="text-fg-brand underline">{ti("manage")} {sectionName(s)}</Link> : s.value === "shared-copy" ? <SharedCopyPanel key={`${entry.id}-${lang}`} pageId={entry.id} lang={lang} readOnly={!editable} /> : type.key === "article" && s.value === "body" ? <ArticleBodyEditor ctx={ctx} value={get(tree, "sections")} onChange={value => setTree(put(tree ?? {}, "sections", value))} /> : <ValueEditor
+                </div> : s.value === "rotation-words" && pageConfig?.rotationSource ? <RotationWords type={pageConfig.rotationSource} /> : pageConfig?.fields?.[s.value] ? (sourceQuery.isLoading ? <LoadingState rows={4} /> : sourceQuery.error ? <ErrorState onRetry={sourceQuery.refetch} /> : <PageFields fields={pageConfig.fields[s.value].fields} records={[entry, ...(sourceQuery.data ?? [])]} lang={lang} edits={{...sourceEdits,[entry.id]:edits}} onChange={(id,words)=>id===entry.id ? setTree(words) : setSourceEdits(previous=>({...previous,[id]:{...previous[id],[lang]:words}}))} ctx={ctx} cardTitle={entry.id === "pg_home" ? tl("sectionIntro") : undefined} />) : (entry.id === "pg_home" && ["two-sides", "work", "services", "software", "approach", "closing", "faqs"].includes(s.value) || entry.id === "pg_about" && s.value === "purpose") ? <PageCards pageId={entry.id} section={s.value} node={s.node} value={get(tree,s.path)} fallback={get(english,s.path)} onChange={value=>setTree(put(tree ?? {},s.path,value))} ctx={ctx} /> : references[s.value] ? <Link href={references[s.value]} className="text-fg-brand underline">{ti("manage")} {sectionName(s)}</Link> : s.value === "shared-copy" ? <SharedCopyPanel key={`${entry.id}-${lang}`} pageId={entry.id} lang={lang} readOnly={!editable} /> : type.key === "article" && s.value === "body" ? <ArticleBodyEditor ctx={ctx} value={get(tree, "sections")} onChange={value => setTree(put(tree ?? {}, "sections", value))} /> : <ValueEditor
                   node={s.node}
                   value={get(tree, s.path)}
                   fallback={lang === "en" ? undefined : get(english, s.path)}
@@ -1086,12 +1093,12 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                 />}
                 {s.value === "rotation-words" && pageConfig?.staticRotation ? <ul className="mt-4 flex flex-wrap gap-2">{pageConfig.staticRotation.map(word=><li key={word} className="rounded-field bg-sunken px-3 py-2 text-body-sm text-fg-muted">{word}</li>)}</ul> : null}
                 {pageConfig?.collections?.[s.value] ? <CollectionOrder type={pageConfig.collections[s.value]} disabled={!editable || lang !== "en"} /> : null}
-                {type.key !== "review" && s.value !== "shared-copy" && !(s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "")) && type.key !== "strings" && type.key !== "pricing" ? <SectionAttachments disabled={!editable || lang !== "en"} disabledReason={viewing && mayEdit ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia[s.value] ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, [s.value]: items } })} /> : null}
+                {type.key !== "review" && s.value !== "shared-copy" && !(s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "")) && type.key !== "strings" && type.key !== "pricing" ? <SectionAttachments alwaysOpen={type.key === "caseStudy"} disabled={!editable || lang !== "en"} disabledReason={viewing && mayEdit ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia[s.value] ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, [s.value]: items } })} /> : null}
               </TabsPanel>
             ))}
             {type.seo ? (
               <TabsPanel value="seo">
-                <div className="mb-4 grid max-w-2xl gap-4">
+                <div className={ctx.fullWidthFields ? "mb-4 grid min-w-0 gap-4" : "mb-4 grid max-w-2xl gap-4"}>
                   {lang === "en" ? (
                     <Field
                       label={t("slug")}
@@ -1128,6 +1135,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                 </div>
                 <SeoPanel
                   key={lang}
+                  fullWidthFields={ctx.fullWidthFields}
                   lang={lang}
                   seo={seo as SeoBlock}
                   english={(entry.content.seo.en ?? {}) as SeoBlock}

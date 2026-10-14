@@ -1,2 +1,6 @@
-import { TranslationDrafts } from "@/components/studio/TranslationDrafts";
-export default function Page(){return <TranslationDrafts/>;}
+import { redirect } from "@/i18n/routing";
+
+export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  redirect({ href: "/localization", locale });
+}

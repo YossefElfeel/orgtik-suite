@@ -28,6 +28,7 @@ const baseline = structuredClone(snapshot.entries);
 afterEach(() => {
   snapshot.entries = structuredClone(baseline);
   delete globalThis.window;
+  delete globalThis.location;
 });
 after(() => server.close());
 
@@ -110,6 +111,7 @@ test("testimonials use translated copy and an RTL carousel without replacing CMS
   snapshot.entries.review = [
     {
       id: "arabic",
+      category: "software",
       order: 1,
       sample: true,
       locales: {
@@ -123,7 +125,64 @@ test("testimonials use translated copy and an RTL carousel without replacing CMS
   assert.match(html, /رأي العميل/);
   assert.match(html, /تقييم تجريبي/);
   assert.match(html, /آراء عملاء البرمجيات/);
+  assert.match(html, /testimonials__tag--software[^>]*>البرمجيات<\/span>/);
   assert.ok(!html.includes("English author"));
+});
+
+test("the selected review category controls its badge and overview placement without a related entry", () => {
+  snapshot.entries.review = [
+    { id: "services", category: "services", relatedEntry: "sm_01", order: 1, locales: { en: { name: "Service author", quote: "Service feedback" } } },
+    { id: "software", category: "software", order: 2, locales: { en: { name: "Software author", quote: "Software feedback" } } },
+    { id: "legacy", order: 3, locales: { en: { name: "Legacy author", quote: "Existing feedback" } } },
+  ];
+  assert.deepEqual(reviewsFor("services").map(row => row.id), ["services", "legacy"]);
+  assert.deepEqual(reviewsFor("software").map(row => row.id), ["software", "legacy"]);
+  const html = renderToStaticMarkup(h(Testimonials));
+  assert.match(html, /class="testimonials__tag">Services<\/span>/);
+  assert.match(html, /testimonials__tag--software[^>]*>Software<\/span>/);
+  assert.equal(reviewsFor("general").length, 3);
+});
+
+test("a review appears on every selected detail page, keeps its badge, and does not leak to other detail pages", () => {
+  const family = snapshot.entries.serviceFamily[0];
+  const service = snapshot.entries.service.find(row => row.parent === family.id);
+  const software = snapshot.entries.softwareModule[0];
+  const paths = [`/services/${family.slug.en}`, `/services/${family.slug.en}/${service.slug.en}`, `/software/${software.slug.en}`];
+  snapshot.entries.review = [
+    { id: "selected", category: "services", relatedEntries: [family.id, service.id, software.id], position: 1, locales: { en: { name: "Client", quote: "Shared page feedback" } } },
+    { id: "legacy", relatedEntry: software.id, position: 2, locales: { en: { name: "Legacy", quote: "Legacy feedback" } } },
+    { id: "cleared", relatedEntries: [], relatedEntry: software.id, position: 3, locales: { en: {} } },
+    { id: "unlinked", position: 4, locales: { en: {} } },
+  ];
+  for (const path of paths) {
+    assert.ok(reviewsFor("software", path).some(row => row.id === "selected"));
+    const html = renderToStaticMarkup(h(Testimonials, { scope: "software", pagePath: path }));
+    assert.match(html, /Shared page feedback/);
+    assert.match(html, /class="testimonials__tag">Services<\/span>/);
+    assert.ok(!html.includes('data-review-id="cleared"') && !html.includes('data-review-id="unlinked"'));
+    assert.ok(!html.includes(' pagePath="'));
+  }
+  assert.deepEqual(reviewsFor("software", paths[2]).map(row => row.id), ["selected", "legacy"]);
+  assert.deepEqual(reviewsFor("services", "/services/missing"), []);
+  const otherSoftware = snapshot.entries.softwareModule[1];
+  assert.deepEqual(reviewsFor("software", `/software/${otherSoftware.slug.en}`), []);
+  assert.equal(reviewsFor("general").length, 4);
+});
+
+test("the actual service and software detail routes render their selected reviews", async () => {
+  const events = new EventTarget();
+  const family = snapshot.entries.serviceFamily.find(row => row.slug.en === "design");
+  const service = snapshot.entries.service.find(row => row.parent === family.id && row.slug.en === "web-and-app-design");
+  const software = snapshot.entries.softwareModule.find(row => row.slug.en === "hr");
+  snapshot.entries.review = [{ id: "multi-page", relatedEntries: [family.id, service.id, software.id], locales: { en: { name: "Client", quote: "Selected page quote" } } }];
+  for (const [module, path] of [["Services", "/services/design"], ["Services", "/services/design/web-and-app-design"], ["Software", "/software/hr"]]) {
+    globalThis.window = { addEventListener: events.addEventListener.bind(events), removeEventListener: events.removeEventListener.bind(events), dispatchEvent: events.dispatchEvent.bind(events), innerWidth: 1440, location: { pathname: path, hash: "", search: "" } };
+    globalThis.location = window.location = new URL(path, "https://orgtik.ch");
+    const { default: Page } = await server.ssrLoadModule(`/src/reference/${module}.jsx`);
+    const html = renderToStaticMarkup(h(Page));
+    assert.match(html, /data-review-id="multi-page"/);
+    assert.match(html, /Selected page quote/);
+  }
 });
 
 test("article blocks render images and videos in managed order, with captions and safe sources", () => {
@@ -289,6 +348,19 @@ test("shared attachments stay scoped and Arabic images use Arabic alternative te
   assert.match(html, /alt="سلة المشتريات"/);
   assert.doesNotMatch(html, /checkout\.webp/);
   assert.equal(renderToStaticMarkup(h(SectionMedia, { items: [] })), "");
+});
+
+test("new legal documents render their own URL and appear in the document navigation", async () => {
+  snapshot.entries.legalDocument.push({id:"lg_new",slug:{en:"additional-policy"},locales:{en:{name:"Additional policy",summary:"Managed legal introduction",sections:[{heading:"Additional scope",body:"Managed legal wording"}]}},seo:{en:{}}});
+  globalThis.window = {innerWidth:1440,location:{pathname:"/legal/additional-policy",hash:"",search:""}};
+  const {default:Legal}=await server.ssrLoadModule("/src/reference/Legal.jsx");
+  const {viewToPath}=await server.ssrLoadModule("/src/reference/navigation.js");
+  const html=renderToStaticMarkup(h(Legal));
+  assert.match(html,/Additional policy/);assert.match(html,/Managed legal introduction/);assert.match(html,/Managed legal wording/);
+  assert.equal(viewToPath("/legal","#/additional-policy"),"/legal/additional-policy");
+  const page=new Legal({});assert.equal(page.parseRoute("#/additional-policy").view,"additional-policy");
+  assert.ok(page.renderVals().tabs.some(tab=>tab.label==="Additional policy"&&tab.sel==="true"));
+  assert.equal(page.parseRoute("#/unknown-policy").view,"index");
 });
 
 test("the actual Partners route applies its own order and intro/profile attachments", async () => {

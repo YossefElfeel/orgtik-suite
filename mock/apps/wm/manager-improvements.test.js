@@ -121,6 +121,7 @@ test("demo revisions cover workflow states without changing published content or
     "article",
     "roadmapItem",
     "review",
+    "legalDocument",
   ]) {
     const states = new Set(
       [...store.entries.values()]
@@ -137,9 +138,10 @@ test("demo revisions cover workflow states without changing published content or
       assert.ok(states.has(state), `${type}: ${state}`);
   }
   assert.deepEqual(
-    [...store.entries.values()].map((entry) => [entry.id, entry.live]),
+    published.map(([id]) => [id, store.entries.get(id).live]),
     published,
   );
+  assert.ok([...store.entries.values()].filter(entry => entry.id.startsWith("lg_demo_")).every(entry => entry.live === null));
   const entry = store.entries.get("pg_home");
   assert.ok(
     store.save(
@@ -284,6 +286,91 @@ async function fixture(t) {
   };
 }
 
+test("legal workflow examples migrate saved demos, survive edits, and populate each state filter", async (t) => {
+  const source = makeStore(now, { demo: true });
+  source.ensureDemo();
+  const legacy = source.exportState();
+  legacy.demoVersion = 3;
+  legacy.entries = legacy.entries.filter(([id]) => !id.startsWith("lg_demo_"));
+  legacy.audit = legacy.audit.filter(event => !event.entry?.startsWith("lg_demo_"));
+  const existing = structuredClone(legacy.entries);
+  const restored = makeStore(now, { demo: true });
+  restored.importState(legacy);
+  for (const [id, entry] of existing) assert.deepEqual(restored.entries.get(id), entry);
+  for (const state of ["draft", "in_review", "approved", "scheduled"]) {
+    const entry = restored.entries.get(`lg_demo_${state}`);
+    assert.equal(restored.summary(entry).state, state);
+    assert.equal(entry.live, null);
+    assert.equal(entry.workflow.visibility, "not_on_site");
+    assert.deepEqual(entry.legalVersions, []);
+    assert.ok(entry.draft.locales.en.sections.length);
+    assert.deepEqual(entry.versions[0].content, entry.draft);
+    assert.equal(entry.versions[0].state, state);
+  }
+  assert.ok(Date.parse(restored.entries.get("lg_demo_scheduled").workflow.publishAt) > Date.parse(now()));
+  const draft = restored.entries.get("lg_demo_draft");
+  assert.ok(restored.save(draft, editor, { locale: "en", fields: { summary: "Keep my edited sample" } }, all).entry);
+  assert.ok(restored.transition(draft, editor, "submit", all).entry);
+  const saved = restored.exportState();
+  restored.importState(saved);
+  restored.ensureDemo();
+  assert.deepEqual(restored.exportState(), saved);
+  const withoutDemo = makeStore(now);
+  withoutDemo.importState(legacy);
+  assert.ok(![...withoutDemo.entries.keys()].some(id => id.startsWith("lg_demo_")));
+
+  const f = await fixture(t);
+  for (const state of ["draft", "in_review", "approved", "scheduled"]) {
+    const result = await f.call(`/admin/entries/legalDocument?state=${state}`);
+    assert.equal(result.status, 200);
+    assert.ok(result.data.some(entry => entry.id === `lg_demo_${state}`));
+    assert.ok(result.data.every(entry => entry.state === state));
+    const detail = await f.call(`/admin/entries/legalDocument/lg_demo_${state}`);
+    assert.equal(detail.status, 200);
+    assert.equal(detail.data.content.versionLabel, "1.0");
+  }
+  const publicRows = await f.call("/public/entries/legalDocument");
+  assert.equal(publicRows.status, 200);
+  assert.ok(!publicRows.data.some(entry => entry.id.startsWith("lg_demo_")));
+});
+
+test("page self-approval uses authenticated administrative roles, preserves live content, and rejects forged roles", async (t) => {
+  const f = await fixture(t);
+  let revision = 0;
+  const prepare = async (role, type = "page", id = "pg_about") => {
+    f.as(role, "own-page-editor");
+    const before = (await f.call(`/admin/entries/${type}/${id}`)).data;
+    const presentation = structuredClone(before.content.presentation ?? { sectionOrder: [], sectionMedia: {}, cursor: { text: {}, link: "" } });
+    presentation.cursor.text.en = `Approval fixture ${++revision}`;
+    const saved = await f.call(`/admin/entries/${type}/${id}`, "PATCH", { presentation }, before.version);
+    assert.equal(saved.status, 200);
+    const submitted = await f.call(`/admin/entries/${type}/${id}/transitions`, "POST", { action: "submit" }, saved.data.version);
+    assert.equal(submitted.status, 200);
+    return { before, submitted: submitted.data };
+  };
+  for (const role of ["wm_admin", "wm_super_admin", "wm_owner"]) {
+    const { before, submitted } = await prepare(role);
+    const result = await f.call("/admin/entries/page/pg_about/transitions", "POST", { action: "approve" }, submitted.version);
+    assert.equal(result.status, 200, role);
+    assert.equal(result.data.state, "approved");
+    assert.deepEqual(result.data.live, before.live);
+    assert.ok(result.data.hasDraft);
+  }
+  const { submitted } = await prepare("wm_approver");
+  const denied = await f.call("/admin/entries/page/pg_about/transitions", "POST", { action: "approve", roles: ["wm_admin"], ownPageApproval: true }, submitted.version);
+  assert.equal(denied.status, 409);
+  assert.equal(denied.error.code, "four_eyes");
+  assert.equal((await f.call("/admin/entries/page/pg_about")).data.state, "in_review");
+  f.as("wm_editor", "own-page-editor");
+  assert.equal((await f.call("/admin/entries/page/pg_about/transitions", "POST", { action: "approve", roles: ["wm_admin"] }, submitted.version)).status, 403);
+  f.as("wm_approver", "different-reviewer");
+  assert.equal((await f.call("/admin/entries/page/pg_about/transitions", "POST", { action: "approve" }, submitted.version)).status, 200);
+  const global = await prepare("wm_admin", "global", "gl_footer");
+  const otherType = await f.call("/admin/entries/global/gl_footer/transitions", "POST", { action: "approve" }, global.submitted.version);
+  assert.equal(otherType.status, 409);
+  assert.equal(otherType.error.code, "four_eyes");
+});
+
 test("list APIs paginate 0/1/10/11/101 rows after combined search, workflow, timeline and language filters", async (t) => {
   const f = await fixture(t),
     snapshot = f.hooks.exportState();
@@ -344,6 +431,36 @@ test("list APIs paginate 0/1/10/11/101 rows after combined search, workflow, tim
       ),
     ),
   );
+});
+
+test("legal creation is permission-gated, survives reload and exposes published version history by its chosen slug", async (t) => {
+  const f = await fixture(t);
+  f.as("wm_viewer");
+  assert.equal((await f.call("/admin/entries/legalDocument", "POST", { name: "Denied", slug: "denied" })).status, 403);
+  f.as("wm_editor");
+  const created = await f.call("/admin/entries/legalDocument", "POST", { name: "Additional policy", slug: "additional-policy", from: "lg_privacy" });
+  assert.equal(created.status, 201);
+  const id = created.data.id, route = `/admin/entries/legalDocument/${id}`;
+  assert.equal(created.data.visibility, "not_on_site");assert.deepEqual(created.data.legalVersions, []);
+  assert.equal((await f.call("/public/legal/additional-policy/versions")).status, 404);
+  assert.ok(!(await f.call("/public/entries/legalDocument")).data.some(row => row.id === id));
+  f.hooks.importState(f.hooks.exportState());
+  let entry = (await f.call(route)).data;
+  assert.equal(entry.content.slug.en, "additional-policy");assert.equal(entry.versionLabel, "1.0");
+  entry = (await f.call(route, "PATCH", { neutral: { effectiveFrom: "2026-10-08" } }, entry.version)).data;
+  entry = (await f.call(route + "/transitions", "POST", { action: "submit" }, entry.version)).data;
+  f.as("wm_admin", "legal-reviewer");
+  for (const action of ["approve", "publish"]) {
+    const result = await f.call(route + "/transitions", "POST", { action }, entry.version);
+    assert.equal(result.status, 200);entry = result.data;
+  }
+  assert.ok((await f.call("/public/entries/legalDocument")).data.some(row => row.id === id));
+  const versions = await f.call("/public/legal/additional-policy/versions");
+  assert.equal(versions.status, 200);assert.equal(versions.data[0].versionLabel, "1.0");assert.equal(versions.data[0].effectiveFrom, "2026-10-08");
+  assert.equal((await f.call(route, "DELETE")).status, 409);
+  const unused = await f.call("/admin/entries/legalDocument", "POST", { name: "Unused policy", slug: "unused-policy" });
+  assert.equal(unused.status, 201);assert.equal((await f.call(`/admin/entries/legalDocument/${unused.data.id}`, "DELETE")).status, 204);
+  assert.equal((await f.call("/public/legal/privacy/versions")).status, 200);
 });
 
 test("roadmap creation survives state reload and leads' New and Opened sets are disjoint", async (t) => {
@@ -498,6 +615,79 @@ test("SEO-only edits preserve content permissions; redirects and indexing includ
     ),
   );
   assert.ok(localized.every((row) => row.inSitemap === sitemap.has(row.loc)));
+});
+
+test("website images can be replaced without losing metadata, references or immutable original bytes", async (t) => {
+  const f = await fixture(t), id = "md_01", route = `/admin/media/${id}`;
+  const initial = (await f.call(route)).data;
+  const edited = await f.call(route, "PATCH", {description:"Preserved description",tags:["retained"],alt:{en:"Preserved alternative text"},rights:{status:"owned"},focal:{x:30,y:70}}, initial.version);
+  const before = edited.data, original = fs.readFileSync(path.resolve(__dirname, "../../../apps/website/landing-directions/public/assets", initial.file));
+  const snapshot = f.hooks.exportState();
+  const story = snapshot.data.content.entries.find(([key]) => key === "cs_01")[1];
+  story.live.image.src = initial.file;
+  f.hooks.importState(snapshot);
+  const publishedStory = structuredClone(story);
+  const png = Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScLbtAAAAABJRU5ErkJggg==", "base64");
+  const replace = async (bytes, mime, version) => {
+    const body = new FormData();body.set("file",new Blob([bytes],{type:mime}),"replacement."+(mime === "image/webp" ? "webp" : "png"));
+    const response = await fetch(f.base+"/v2"+route+"/replace",{method:"POST",body,headers:{"if-match":String(version)}});
+    return {status:response.status,...await response.json()};
+  };
+  f.as("wm_viewer");assert.equal((await replace(png,"image/png",before.version)).status,403);
+  f.as("wm_editor");assert.equal((await replace(png,"image/png",before.version-1)).status,412);
+  assert.equal((await replace(Buffer.from("Not an image"),"image/png",before.version)).status,422);
+  assert.equal((await replace(png,"text/plain",before.version)).status,422);
+  assert.equal((await f.call(route)).data.file,before.file);
+  const replacement = await replace(png,"image/png",before.version);
+  assert.equal(replacement.status,200);const media=replacement.data;
+  assert.equal(media.id,id);assert.equal(media.version,before.version+1);assert.equal(media.source,"upload");assert.equal(media.width,1);assert.equal(media.height,1);
+  for(const key of ["description","tags","alt","rights","focal","usage","templateUses"])assert.deepEqual(media[key],before[key],key);
+  assert.ok(media.retainedFiles.includes(initial.file));
+  assert.ok((await f.call(`/admin/media?search=${initial.file}`)).data.some(row=>row.id===id));
+  const publicStory=(await f.call("/public/entries/caseStudy")).data.find(row=>row.id==="cs_01");assert.ok(publicStory.image.src.endsWith("/v2/media/"+media.file));
+  assert.ok((await f.call("/admin/entries/caseStudy/cs_01")).data.content.image.src.endsWith("/v2/media/"+media.file));
+  let history=(await f.call(`/admin/studio/media/${id}`)).data;assert.equal(history.versions.length,2);assert.equal(history.canReplace,false);
+  assert.deepEqual(Buffer.from(await(await fetch(f.base+"/v2/media/"+media.file)).arrayBuffer()),png);
+  const firstVersion=history.versions[0];assert.deepEqual(Buffer.from(await(await fetch(f.base+firstVersion.path)).arrayBuffer()),original);
+  const webp=fs.readFileSync(path.resolve(__dirname,"../../../apps/website/landing-directions/public/assets/brand-glass.webp"));
+  const next=await replace(webp,"image/webp",media.version);assert.equal(next.status,200);assert.equal(next.data.width,1920);assert.equal(next.data.height,1072);
+  history=(await f.call(`/admin/studio/media/${id}`)).data;assert.equal(history.versions.length,3);
+  assert.deepEqual(Buffer.from(await(await fetch(f.base+firstVersion.path)).arrayBuffer()),original);
+  assert.deepEqual(Buffer.from(await(await fetch(f.base+history.versions[1].path)).arrayBuffer()),png);
+  f.hooks.importState(f.hooks.exportState());
+  assert.equal((await f.call(route)).data.file,next.data.file);
+  const storedStory=f.hooks.exportState().data.content.entries.find(([key])=>key==="cs_01")[1];assert.deepEqual(storedStory,publishedStory);
+  assert.equal((await f.call(route,"DELETE")).status,409);
+});
+
+test("hosted replacement bytes survive a cold start, stay realm scoped and reject corrupt or unavailable storage", async (t) => {
+  const {imageStorage} = require('./image-storage');
+  const {replaceImage} = require('./media-replacement');
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'wm-image-storage-'));
+  t.after(() => { assert.equal(path.dirname(root), os.tmpdir()); assert.ok(path.basename(root).startsWith('wm-image-storage-')); fs.rmSync(root,{recursive:true,force:true}); });
+  const database = new Map(), env = {KV_REST_API_URL:'https://storage.fixture.test', KV_REST_API_TOKEN:'fixture-only'};
+  const fetcher = async (url, init) => {
+    assert.equal(url, env.KV_REST_API_URL);
+    assert.ok(Buffer.byteLength(init.body) < 1024*1024);
+    const [command,key,value] = JSON.parse(init.body);
+    if (command === 'SET') database.set(key,value);
+    return Response.json({result:command === 'SET' ? 'OK' : database.get(key) ?? null});
+  };
+  const file = 'md_01-v2-original.png', bytes = Buffer.alloc(640*1024, 7);
+  const row = {file,bytes:bytes.length,hash:require('node:crypto').createHash('sha256').update(bytes).digest('hex')};
+  await imageStorage({uploadsDir:path.join(root,'writer'),realm:'first',hosted:true,env,fetcher}).write(file,bytes);
+  const cold = imageStorage({uploadsDir:path.join(root,'cold'),realm:'first',hosted:true,env,fetcher});
+  assert.deepEqual(await cold.read(row),bytes);
+  await assert.rejects(imageStorage({uploadsDir:path.join(root,'other'),realm:'other',hosted:true,env,fetcher}).read(row),{code:'media_content_unavailable'});
+  database.set([...database.keys()][0],Buffer.from('corrupt').toString('base64'));
+  await assert.rejects(cold.read(row),{code:'media_content_unavailable'});
+  const imageStore = imageStorage({uploadsDir:path.join(root,'unavailable'),hosted:true,env:{}});
+  await assert.rejects(imageStore.write(file,bytes),{code:'media_content_unavailable'});
+  assert.equal(fs.existsSync(path.join(root,'unavailable',file)),false);
+  const media = {id:'md_01',file:'brand-cards.webp',version:1,kind:'image',source:'website'}, before=structuredClone(media), state={mediaVersions:{}}, store={audit:[]};
+  const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIHWP4z8DwHwAFgAI/ScLbtAAAAABJRU5ErkJggg==','base64');
+  await assert.rejects(replaceImage({lib:{media:new Map([[media.id,media]])},state,store,uploadsDir:path.join(root,'unavailable'),imageStore,now:()=>now(),who:{user:{key:'fixture'}},key:media.id,file:{buffer:png,mimetype:'image/png',originalname:'new.png'},version:1}),{code:'media_content_unavailable'});
+  assert.deepEqual(media,before);assert.deepEqual(state,{mediaVersions:{}});assert.deepEqual(store,{audit:[]});
 });
 
 test("media uploads retain descriptions, tags, alt text and focal points through persistence", async (t) => {

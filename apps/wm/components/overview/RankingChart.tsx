@@ -11,7 +11,6 @@ export function RankingChart({
   valueLabel,
   label,
   loading,
-  minRows = 8,
 }: {
   title: string;
   description?: string;
@@ -19,7 +18,6 @@ export function RankingChart({
   valueLabel: string;
   label: string;
   loading: boolean;
-  minRows?: number;
 }) {
   const t = useTranslations("Improvements");
   const f = useFormatter();
@@ -34,8 +32,8 @@ export function RankingChart({
     },
   ];
   return (
-    <Card className="flex min-w-0 flex-col gap-5">
-      <header className="flex min-h-16 flex-col gap-1">
+    <Card className="flex min-w-0 flex-col gap-4">
+      <header className="flex flex-col gap-1">
         <h3 className="font-display text-title-sm text-fg">{title}</h3>
         <p className="text-body-sm text-fg-muted">
           {description || valueLabel}
@@ -44,15 +42,14 @@ export function RankingChart({
       <div
         aria-label={title}
         role="img"
-        className="flex flex-col gap-3"
-        style={{ minHeight: minRows * 36 }}
+        className="grid grid-cols-[fit-content(40%)_minmax(0,1fr)] gap-3"
       >
         {loading ? (
-          <Skeleton className="h-64 w-full" />
+          <Skeleton className="col-span-2 h-64 w-full" />
         ) : !rows.length ? (
           <p
             role="status"
-            className="py-8 text-center text-body-sm text-fg-muted"
+            className="col-span-2 py-8 text-center text-body-sm text-fg-muted"
           >
             {t("noResults")}
           </p>
@@ -60,10 +57,10 @@ export function RankingChart({
           rows.map((row, index) => (
             <div
               key={row.label}
-              className="grid min-h-6 grid-cols-[minmax(6rem,35%)_1fr] items-center gap-3 text-body-sm"
+              className="col-span-2 grid min-h-6 grid-cols-subgrid items-center text-body-sm"
             >
-              <span dir="auto" className="text-end text-fg-muted">
-                {row.label}
+              <span className="min-w-0 break-words text-start text-fg-muted">
+                <bdi>{row.label}</bdi>
               </span>
               <div className="pe-12">
                 <div

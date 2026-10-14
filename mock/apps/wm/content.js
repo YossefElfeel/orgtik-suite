@@ -147,8 +147,8 @@ function makeStore(now, { demo = false } = {}) {
       period: c.period,
       year: c.year,
       progress: c.progress,
-      versionLabel: e.legalVersions?.[0]?.versionLabel,
-      effectiveFrom: e.legalVersions?.[0]?.effectiveFrom,
+      versionLabel: c.versionLabel ?? e.legalVersions?.[0]?.versionLabel,
+      effectiveFrom: c.effectiveFrom ?? e.legalVersions?.[0]?.effectiveFrom,
       // Pages, Global and Strings: how many texts they hold.
       slots: c.layout ? c.layout.reduce((n, x) => n + (x.kind === "copy" ? x.slots.length : 1), 0) : undefined,
       slug: c.slug,
@@ -188,7 +188,9 @@ function makeStore(now, { demo = false } = {}) {
     if (e?.type === "review") {
       if (typeof content.sample !== "boolean") errors.sample = "required";
       if (!Number.isInteger(content.position) || content.position < 0) errors.position = "out_of_range";
+      if (content.category !== undefined && !["services", "software"].includes(content.category)) errors.category = "invalid";
       if (content.relatedEntry && !["service", "serviceFamily", "softwareModule"].includes(entries.get(content.relatedEntry)?.type)) errors.relatedEntry = "invalid";
+      if (content.relatedEntries !== undefined && (!Array.isArray(content.relatedEntries) || new Set(content.relatedEntries).size !== content.relatedEntries.length || content.relatedEntries.some(id => typeof id !== "string" || !["service", "serviceFamily", "softwareModule"].includes(entries.get(id)?.type)))) errors.relatedEntries = "invalid";
     }
     if (e?.type === "caseStudy") {
       if (typeof content.narrativePublished !== "boolean") errors.narrativePublished = "required";
@@ -222,6 +224,7 @@ function makeStore(now, { demo = false } = {}) {
     }
     for (const [l, s] of Object.entries(content.slug ?? {})) {
       if (s && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(s)) errors[`slug.${l}`] = "slug_format";
+      else if (s && e?.type === "legalDocument" && ["partners", "sitemap", "index"].includes(s)) errors[`slug.${l}`] = "slug_taken";
       // Two entries at one address: the same slug among siblings (a service's are its family's).
       else if (s && e && e.type !== "page") {
         const taken = [...entries.values()].some((x) => x.id !== e.id && x.type === e.type && (x.parent ?? null) === (e.parent ?? null) && [x.draft, x.live].some((c) => c?.slug?.[l] === s));
@@ -256,11 +259,9 @@ function makeStore(now, { demo = false } = {}) {
 
   // ---- new entries, and taking them off the site (plan: "a separate public lifecycle of
   // unpublished / published / archived") ----
-  // Only where the website's design takes a list of any length: articles, case studies and
-  // roadmap items. Families, services and modules have a fixed place in the design.
-  const CREATABLE = { article: "ar", caseStudy: "cs", roadmapItem: "rm", review: "rv" };
-  // A new entry starts as a copy of one the site already shows, so it has every field its page
-  // needs; only English, and off the site until it's published.
+  // Collections that accept new entries; catalog families, services and modules remain fixed.
+  const CREATABLE = { article: "ar", caseStudy: "cs", roadmapItem: "rm", review: "rv", legalDocument: "lg" };
+  // Start blank or copy an existing entry, in English and private until publication.
   function create(type, who, { name, slug, from, department } = {}) {
     const prefix = CREATABLE[type];
     if (!prefix) return { status: 405, code: "not_creatable", message: "The site's design has a fixed number of these." };
@@ -279,6 +280,8 @@ function makeStore(now, { demo = false } = {}) {
     if (content.provenance) content.provenance = { figures: "sample", sampleLabel: clone(content.provenance.sampleLabel) };
     if (type === "caseStudy") content.narrativePublished = false;
     if (type === "caseStudy") content.sampleNarrativePublished = false;
+    // A copied legal document is a new document, with its own approval and version history.
+    if (type === "legalDocument") Object.assign(content, { versionLabel: "1.0", effectiveFrom: null });
     const taken = new Set([...entries.keys()]);
     let n = 1;
     while (taken.has(`${prefix}_${String(n).padStart(2, "0")}`)) n += 1;
@@ -296,6 +299,7 @@ function makeStore(now, { demo = false } = {}) {
       workflow: { state: "draft", visibility: "not_on_site", version: 1, updatedAt: now(), updatedBy: who.key, publishedAt: null, lastEditor: who.key },
       translation: Object.fromEntries(LOCALES.map((l) => [l, l === "en" ? "in_progress" : "not_started"])),
       versions: [],
+      ...(type === "legalDocument" ? { legalVersions: [] } : {}),
       translators: {},
     };
     const v = validate(content, e);
@@ -374,7 +378,10 @@ function makeStore(now, { demo = false } = {}) {
     if (patch.image) next.image = { ...next.image, ...patch.image };
     if (patch.presentation) next.presentation = { ...(next.presentation ?? {}), ...clone(patch.presentation) };
     if (e.type === "review" && patch.neutral) {
-      for (const key of ["sample", "position", "relatedEntry"]) if (key in patch.neutral) next[key] = clone(patch.neutral[key]);
+      for (const key of ["sample", "position", "relatedEntry", "relatedEntries", "category"]) if (key in patch.neutral) next[key] = clone(patch.neutral[key]);
+      // Preserve the first link for older clients; an empty list explicitly clears every link.
+      if (Array.isArray(patch.neutral.relatedEntries)) next.relatedEntry = patch.neutral.relatedEntries[0] ?? "";
+      else if ("relatedEntry" in patch.neutral && !("relatedEntries" in patch.neutral)) next.relatedEntries = patch.neutral.relatedEntry ? [patch.neutral.relatedEntry] : [];
     }
     // Language-neutral fields an editor may change (the rest is structure: department, parent).
     for (const k of EDITABLE_NEUTRAL) if (patch.neutral && k in patch.neutral && k in next) next[k] = patch.neutral[k];
@@ -445,8 +452,9 @@ function makeStore(now, { demo = false } = {}) {
       if (last && c.versionLabel === last.versionLabel) fieldErrors.versionLabel = "version_exists";
       if (Object.keys(fieldErrors).length) return { status: 422, code: "legal_version", message: "A new legal version needs its own number and an effective date.", fieldErrors };
     }
-    // Four-eyes: whoever made the last change can't approve it themselves.
-    if (action === "approve" && e.workflow.lastEditor === who.key) return { status: 409, code: "four_eyes", message: "Someone else has to approve your own change." };
+    // Website administrators may approve their own pages. Roles come from authenticated membership.
+    const ownPageApproval = e.type === "page" && who.roles?.some(role => ["wm_admin", "wm_super_admin", "wm_owner"].includes(role));
+    if (action === "approve" && e.workflow.lastEditor === who.key && !ownPageApproval) return { status: 409, code: "four_eyes", message: "Someone else has to approve your own change." };
     if (action === "request_changes" && !String(note ?? "").trim()) return { status: 422, code: "note_required", fieldErrors: { note: "required" } };
     if (action === "discard" && !e.live) return { status: 409, code: "never_published", message: "This was never published: delete it instead." };
     if (action === "discard") {
@@ -624,7 +632,7 @@ function makeStore(now, { demo = false } = {}) {
     return { currency: live?.currency ?? "CHF", priceMode: live?.priceMode ?? "indicative", managedIn: live?.managedIn ?? null, modules: Object.fromEntries((live?.locales.en.items ?? []).map((m) => [m.id, { monthly: m.monthly }])) };
   };
   const ensureDemo = () => { if (demo) require("./seed/demo-states").contentExamples({ entries, audit, ideas, now }); };
-  const exportState = () => clone({ cmsVersion: 1, demoVersion: 3, entries: [...entries], audit, managerOrders, contentLocales: LOCALES, ideas: [...ideas] });
+  const exportState = () => clone({ cmsVersion: 1, demoVersion: 4, entries: [...entries], audit, managerOrders, contentLocales: LOCALES, ideas: [...ideas] });
   const validateState = value => {
     const incoming = codec.object(value), rows = codec.mapRows(incoming.entries), ideas_ = codec.mapRows(incoming.ideas);
     if (!Array.isArray(incoming.audit) || rows.some(([, row]) => !row.workflow || !Array.isArray(row.versions) || !row.translation || !TYPES.includes(row.type))) throw codec.fail("Website Manager content state is incomplete.");
@@ -649,6 +657,7 @@ function makeStore(now, { demo = false } = {}) {
     if (incoming.demoVersion < 1) ensureDemo();
     else if (demo && incoming.demoVersion < 2) require("./seed/demo-states").publishedExamples({ entries, audit, now });
     if (demo && incoming.demoVersion < 3) require("./seed/demo-states").populateTranslationExamples(entries);
+    if (demo && incoming.demoVersion < 4) require("./seed/demo-states").legalExamples({ entries, audit, now });
   };
   return { managerOrders, ensureDemo, create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, rollbackPublished, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES, exportState, importState, validateState };
 }

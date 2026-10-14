@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { FilmStrip, MagnifyingGlass, UploadSimple, X } from "@phosphor-icons/react";
 import {
-  Checkbox,
   Badge,
   Button,
   Dialog,
@@ -35,7 +34,6 @@ import { RequirePermission } from "@/components/frame/RequirePermission";
 import { Link, useRouter } from "@/i18n/routing";
 import { Thumb } from "@/components/media/Thumb";
 import { useListState } from "@/lib/useListState";
-import { useCan } from "@/lib/permissions";
 import { statusOf, useMediaQuery, useUploadMediaMutation, type ApiError, type MediaIssue } from "@/store/api";
 
 const ISSUES = ["all", "attention", "noAlt", "altSuggested", "rightsUnknown", "rightsExpiring", "unused"] as const;
@@ -45,7 +43,6 @@ const ACCEPT = "image/webp,image/png,image/jpeg,image/svg+xml,video/mp4,video/we
 function Library() {
   const t = useTranslations("Media");
   const f = useFormatter();
-  const can = useCan();
   const url = useListState();
   const issue = url.get("issue", "all") as IssueTab;
   const kind = url.get("kind", "all");
@@ -53,7 +50,6 @@ function Library() {
   const setIssue = (issue: string) => url.set({ issue });
   const setKind = (kind: string) => url.set({ kind });
   const setSearch = (search: string) => url.set({ search });
-  const [picked,setPicked] = useState<string[]>([]);
   const v3 = useTranslations("WmV3");
   const { data, isLoading, error, refetch, isFetching } = useMediaQuery({ issue: issue === "all" ? undefined : issue, kind: kind === "all" ? undefined : kind, search: search || undefined, page: url.page, pageSize: 10 });
   useEffect(() => {
@@ -69,9 +65,10 @@ function Library() {
         title={t("title")}
         description={t("description")}
       />
-      <details className="rounded-field border border-line p-4"><summary className="cursor-pointer text-body-sm font-semibold">{v3("packagedMedia")}</summary><PackagedMedia ids={picked} reload={refetch}/></details>
-      <div className="wm-table-filters"><Select size="sm" aria-label={t("issues.all")} value={issue} onValueChange={value=>setIssue((value??"all") as IssueTab)} options={ISSUES.map(value=>({value,label:t(`issues.${value}`)}))} />
+      <details className="rounded-field border border-line p-4"><summary className="cursor-pointer text-body-sm font-semibold">{v3("packagedMedia")}</summary><PackagedMedia reload={refetch}/></details>
+      <div className="wm-table-filters">
         <Input size="sm" type="search" value={search} onChange={(e) => setSearch(e.target.value)} aria-label={t("search")} placeholder={t("search")} startIcon={<MagnifyingGlass className="size-4" />} className="wm-search" />
+        <Select size="sm" aria-label={t("issues.all")} value={issue} onValueChange={value=>setIssue((value??"all") as IssueTab)} options={ISSUES.map(value=>({value,label:t(`issues.${value}`)}))} />
         <Select size="sm" aria-label={t("kind")} value={kind} onValueChange={(v) => setKind(v ?? "all")} options={["all", "image", "vector", "video"].map((k) => ({ value: k, label: t(`kinds.${k}`) }))} className="w-44" />
       </div>
       {isLoading ? (
@@ -96,7 +93,6 @@ function Library() {
         <ul aria-label={t("title")} aria-busy={isFetching || undefined} className="grid grid-cols-[repeat(auto-fill,minmax(min(14rem,100%),1fr))] gap-4">
           {data.items.map((m) => (
             <li key={m.id} className="flex min-w-0 flex-col gap-2">
-              {can("media:edit")?<Checkbox label={v3("selectMedia",{file:m.file})} checked={picked.includes(m.id)} onCheckedChange={checked=>setPicked(old=>checked?[...old,m.id]:old.filter(id=>id!==m.id))}/>:null}
               <Link
                 href={`/media/${m.id}?returnTo=${encodeURIComponent(url.href)}`}
                 className="group flex h-full flex-col overflow-hidden rounded-card border border-line bg-raised transition-colors hover:border-line-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"

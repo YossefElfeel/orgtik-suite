@@ -7,6 +7,7 @@ import {
   Badge,
   Field,
   Input,
+  MultiSelect,
   NumberField,
   Select,
   Textarea,
@@ -29,7 +30,8 @@ export function ReviewEditor({
   onAlt,
   sample,
   position,
-  relatedEntry,
+  relatedEntries,
+  category,
   onSettings,
   relatedOptions,
   additionalMedia,
@@ -45,18 +47,21 @@ export function ReviewEditor({
   onAlt: (value: string) => void;
   sample: boolean;
   position: number;
-  relatedEntry: string;
+  relatedEntries: string[];
+  category: string;
   onSettings: (patch: {
     sample?: boolean;
     position?: number;
-    relatedEntry?: string;
+    relatedEntries?: string[];
+    category?: string;
   }) => void;
-  relatedOptions: { value: string; label: string }[];
+  relatedOptions: { value: string; label: string; hint?: string }[];
   additionalMedia: ReactNode;
 }) {
   const t = useTranslations("Improvements"),
     tf = useTranslations("Fields"),
-    te = useTranslations("Editor");
+    te = useTranslations("Editor"),
+    nav = useTranslations("Nav");
   const text = (key: string) =>
     typeof value[key] === "string" ? (value[key] as string) : "";
   const hint = (key: string) =>
@@ -121,6 +126,17 @@ export function ReviewEditor({
               </Field>
             ))}
           </div>
+          <Field label={tf("category")} description={[t("reviewCategoryHelp"), ctx.lang !== "en" ? te("sharedNote") : ""].filter(Boolean).join(" ")}>
+            <Select
+              value={category || null}
+              disabled={locked}
+              onValueChange={category => category && onSettings({ category })}
+              options={[
+                { value: "services", label: nav("services") },
+                { value: "software", label: nav("software") },
+              ]}
+            />
+          </Field>
         </div>
         <section
           className="mt-6 min-w-0 border-t border-line pt-6"
@@ -192,19 +208,13 @@ export function ReviewEditor({
                 }
               />
             </Field>
-            <Field optional label={t("relatedEntry")}>
-              <Select
+            <Field optional label={t("relatedEntry")} description={t("reviewRelatedHelp")} error={ctx.errors.relatedEntries ? t("reviewRelatedInvalid") : undefined}>
+              <MultiSelect
                 disabled={locked}
-                value={relatedEntry || "none"}
-                onValueChange={(value) =>
-                  onSettings({
-                    relatedEntry: value === "none" ? "" : (value ?? ""),
-                  })
-                }
-                options={[
-                  { value: "none", label: t("reviewUnlinked") },
-                  ...relatedOptions,
-                ]}
+                value={relatedEntries}
+                onValueChange={relatedEntries => onSettings({ relatedEntries })}
+                options={relatedOptions}
+                placeholder={t("reviewUnlinked")}
               />
             </Field>
           </div>
@@ -223,6 +233,11 @@ export function ReviewEditor({
         <p className="mt-1 text-caption text-fg-muted">
           {t("reviewPreviewHelp")}
         </p>
+        {category === "services" || category === "software" ? (
+          <Badge className="mt-4" tone={category === "software" ? "success" : "brand"}>
+            {nav(category)}
+          </Badge>
+        ) : null}
         <Quotes
           aria-hidden
           className="mb-3 mt-6 size-8 text-fg-brand"

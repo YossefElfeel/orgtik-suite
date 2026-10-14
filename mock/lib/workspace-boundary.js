@@ -699,7 +699,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       // or make an authorized edit look like an external authority change.
       frame.authorizationGrants = clone(identity.grants);
       const principal = frame.principal;
-      const cmsUpload = key === 'wm' && req.method === 'POST' && /^\/v2\/admin\/media(?:$|\?)/.test(url);
+      const cmsUpload = key === 'wm' && req.method === 'POST' && /^\/v2\/admin\/media(?:\/md_\d+\/replace)?(?:$|\?)/.test(url);
       if (['POST', 'PUT', 'PATCH'].includes(req.method) && /multipart\/form-data|application\/octet-stream/i.test(req.headers['content-type'] || '') && !cmsUpload) throw failure(501, 'packaged_assets_only', 'Choose a packaged sample asset in this prototype.');
       if (cmsPreview) {
         const token = /^Preview (\S+)$/.exec(req.headers.authorization || '')?.[1];

@@ -237,10 +237,8 @@ export const TYPES: Record<EntryType, ContentType> = {
     neutral: ["versionLabel", "effectiveFrom"],
     image: false,
     figures: false,
-    // Today the documents open at /legal#/<key>; S3 gives them real addresses.
     path: (slug) => `/legal/${slug}`,
     seo: true,
-    fixedAddress: true,
   },
   roadmapItem: {
     key: "roadmapItem",

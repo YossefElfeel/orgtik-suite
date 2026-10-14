@@ -110,7 +110,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
             : undefined;
           if (key === "review") return <ReviewSummary entry={c} href={`/content/reviews/${c.id}?${can("content:edit") ? "" : "view=1&"}returnTo=${encodeURIComponent(url.href)}`} />;
           return (
-            <span className="inline-flex max-w-full items-center gap-3">
+            <span className="flex max-w-full items-center gap-3 py-2">
               {c.image ? (
                 <img
                   src={mediaUrl(c.image.src)}
@@ -150,20 +150,6 @@ export function EntryList({ type: key }: { type: EntryType }) {
             {row.original.department ? tf(row.original.department) : null}
           </span>
         ),
-      });
-      cols.push({
-        id: "figures",
-        header: t("colFigures"),
-        cell: ({ row }) =>
-          row.original.figures === "sample" ? (
-            <Badge tone="warning" size="sm">
-              {t("figuresSample")}
-            </Badge>
-          ) : (
-            <Badge tone="success" size="sm">
-              {t("figuresApproved")}
-            </Badge>
-          ),
       });
     }
     if (key === "service")

@@ -9,7 +9,8 @@
     "start": "next start -p 3007",
     "typecheck": "node ../../tools/next-env.cjs && tsc --noEmit",
     "i18n:check": "node ../../tools/i18n/check-catalogs.mjs",
-    "lint": "node ../../tools/ci/lint.mjs --app=wm"
+    "lint": "node ../../tools/ci/lint.mjs --app=wm",
+    "test": "node --experimental-strip-types --test lib/richCopy.test.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "5.2.2",

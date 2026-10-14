@@ -26,7 +26,7 @@ function AreaPage() {
   const can = useCan();
   const asked = params.get("type") as EntryType | null;
   const current = asked && types.includes(asked) ? asked : types[0];
-  const creatable = ["article", "caseStudy", "roadmapItem", "review"].includes(current);
+  const creatable = ["article", "caseStudy", "roadmapItem", "review", "legalDocument"].includes(current);
   const templates = useEntriesQuery({type:current,pageSize:100},{skip:!creatable || !can("content:create")});
   return (
     <div className="flex flex-col gap-6">

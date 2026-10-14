@@ -2,7 +2,7 @@
 import { createElement, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Input, Textarea } from "@orgtik/ui";
-import { copyParts, readableCopy } from "@/lib/richCopy";
+import { copyParts, copyText, readableCopy, replaceCopyText } from "@/lib/richCopy";
 
 function FormattedCopy({
   value,
@@ -50,6 +50,7 @@ export function RichCopyEditor({
   label,
   long,
   fixedValues,
+  singleField = false,
 }: {
   value: string;
   fallback?: string;
@@ -59,13 +60,17 @@ export function RichCopyEditor({
   label: string;
   long?: boolean;
   fixedValues?: string[];
+  singleField?: boolean;
 }) {
   const t = useTranslations("Improvements");
   const source = value || fallback;
   const parts = copyParts(source);
+  const wholeText = singleField ? copyText(source) : "";
   return (
     <div className="flex flex-col gap-2">
-      {parts.map((part, index) =>
+      {singleField ? (
+        <Textarea rows={2} aria-label={label} lang={lang} dir="auto" disabled={disabled} value={wholeText} onChange={event => onChange(replaceCopyText(source, event.target.value))} />
+      ) : parts.map((part, index) =>
         part.fixed || (!part.text.trim() && parts.length > 1) ? null : long ? (
           <Textarea
             key={index}

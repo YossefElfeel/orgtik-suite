@@ -4913,7 +4913,7 @@ export default class Services extends ReferencePage {
                 </section>
               </>
             )}
-            {v.isOverview && <Testimonials data-cms-section="reviews" scope="services" />}
+            <Testimonials data-cms-section="reviews" scope="services" pagePath={v.isOverview ? undefined : `/services/${this.state.route.fam}${this.state.route.svc ? `/${this.state.route.svc}` : ""}`} key={this.routeKey(this.state.route)} />
             <section
               id={"closing"}
               className="closing-cta"

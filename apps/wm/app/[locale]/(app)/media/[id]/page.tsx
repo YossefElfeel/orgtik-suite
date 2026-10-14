@@ -29,6 +29,7 @@ import { DatePicker } from "@orgtik/ui/dates";
 import { MediaHistory } from "@/components/studio/PackagedMedia";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { Thumb } from "@/components/media/Thumb";
+import { ReplaceImage } from "@/components/media/ReplaceImage";
 import { Link, useRouter } from "@/i18n/routing";
 import { typeOfId } from "@/lib/contentTypes";
 import { useEntryName } from "@/lib/entryName";
@@ -106,7 +107,7 @@ function Editor({ m }: { m: MediaItem }) {
     <div className="flex flex-col gap-6 pb-24">
       <PageHeader
         breadcrumb={[{ label: t("title"), href: `/${uiLocale}${returnTo}` }, { label: <span dir="ltr">{m.file}</span> }]}
-        title={<span dir="ltr">{m.file.split("/").pop()}</span>}
+        title={<span dir="ltr" className="break-all">{m.file.split("/").pop()}</span>}
         description={
           <span className="inline-flex flex-wrap items-center gap-2">
             <span>{t(`kindOne.${m.kind}`)}</span>
@@ -144,6 +145,7 @@ function Editor({ m }: { m: MediaItem }) {
             >
               {t("copyAddress")}
             </Button>
+            {editable && m.kind === "image" ? <ReplaceImage media={m} disabled={dirty || saving.isLoading} /> : null}
             {can("media:delete") ? (
               <ConfirmDialog
                 trigger={<Button variant="secondary" startIcon={<Trash />}>{t("delete")}</Button>}
@@ -268,7 +270,7 @@ function Editor({ m }: { m: MediaItem }) {
         </div>
       </div>
 
-      <MediaHistory id={m.id} version={m.version} reload={()=>dispatch(api.util.invalidateTags(["Media","MediaList"]))}/>
+      <MediaHistory key={m.version} id={m.id} version={m.version} reload={()=>dispatch(api.util.invalidateTags(["Media","MediaList"]))}/>
       {dirty && editable ? (
         <div className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-raised/95 px-4 py-3 shadow-overlay backdrop-blur lg:ps-[340px]">
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
