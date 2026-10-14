@@ -86,7 +86,6 @@ function useNav(): NavSection[] {
         { key: t("audit"), href: "/settings/audit", icon: <ListChecks />, permission: "settings:view" },
         { key: v3("webhooks"), href: "/settings/webhooks", icon: <GearSix />, permission: "settings:view" },
         { key: v3("releases"), href: "/releases", icon: <Stack />, permission: "content:view" },
-        { key: v3("setup"), href: "/setup", icon: <ListChecks />, permission: "overview:view" },
       ],
     },
   ];

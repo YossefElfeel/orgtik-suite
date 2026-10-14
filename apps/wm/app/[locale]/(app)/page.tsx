@@ -36,7 +36,7 @@ export default function OverviewPage() {
   return (
     <div className="flex flex-col gap-8">
       <PageHeader title={t("title")} description={t("description")} status={<span className="inline-flex items-center gap-1.5 text-body-sm text-fg-muted"><Globe aria-hidden="true" className="size-4" />{t("yourRoles", { roles })}</span>} />
-      <Setup compact/>
+      <Setup />
       <section aria-labelledby="queue-heading" aria-busy={isLoading || undefined} className="flex flex-col gap-4">
         <h2 id="queue-heading" className="font-display text-title-sm text-fg">{t("queue")}</h2>
         {isError ? (
