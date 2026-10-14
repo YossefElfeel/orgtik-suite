@@ -31,8 +31,10 @@ export type MultiSelectProps<V extends string = string> = Common<V> & {
     value?: V[];
     defaultValue?: V[];
     onValueChange?: (value: V[]) => void;
+    /** Let selected chips wrap onto additional rows without changing default control density. */
+    growWithSelection?: boolean;
 };
 /** Pick several (people to share with, tags). Chosen items show as removable chips. */
-export declare function MultiSelect<V extends string = string>({ options, value, defaultValue, onValueChange, placeholder, size, emptyText, className, "aria-label": ariaLabel, ...props }: MultiSelectProps<V>): import("react").JSX.Element;
+export declare function MultiSelect<V extends string = string>({ options, value, defaultValue, onValueChange, placeholder, size, emptyText, className, growWithSelection, "aria-label": ariaLabel, ...props }: MultiSelectProps<V>): import("react").JSX.Element;
 export {};
 //# sourceMappingURL=Combobox.d.ts.map

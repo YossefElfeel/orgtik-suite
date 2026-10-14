@@ -210,6 +210,7 @@ export function ReviewEditor({
             </Field>
             <Field optional label={t("relatedEntry")} description={t("reviewRelatedHelp")} error={ctx.errors.relatedEntries ? t("reviewRelatedInvalid") : undefined}>
               <MultiSelect
+                growWithSelection
                 disabled={locked}
                 value={relatedEntries}
                 onValueChange={relatedEntries => onSettings({ relatedEntries })}
