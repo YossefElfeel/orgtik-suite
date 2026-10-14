@@ -13,6 +13,10 @@ const AuthRoutes = [
   "/auth/handoff",
 ];
 export function middleware(request: NextRequest) {
+  // Services use the validated tab session and signed API admission. Cookie
+  // hints are unreliable across the shared-domain proxy; the dashboard's client
+  // gate handles guests while every API still validates current access.
+  if (request.nextUrl.basePath === "/sos") return NextResponse.next();
   const token = request.cookies.get(TOKEN_COOKIE)?.value;
   const { pathname } = request.nextUrl;
   const isAuthRoute = AuthRoutes.includes(pathname);

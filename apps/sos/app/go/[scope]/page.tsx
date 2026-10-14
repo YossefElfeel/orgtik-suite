@@ -5,7 +5,7 @@
 // replaces itself with the app, so Back returns to where you were. If the app is turned off or
 // not yours, or the hand-off fails, it says so with a way home.
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams, useSearchParams, useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { ArrowClockwise } from "@phosphor-icons/react";
 import { Button, ErrorState, NoPermissionState, Spinner } from "@orgtik/ui";
@@ -14,11 +14,12 @@ import { useAppLabel, useMyScopes } from "@/components/suite/useSuiteApps";
 import { handoffHref } from "@/lib/handoff";
 import useUser from "@/hooks/use-user";
 import { useMounted } from "@/hooks/use-mounted";
-import { switchWorkspace, TOOL_SCOPES } from "@orgtik/ui/auth";
+import { switchWorkspace, TOOL_SCOPES, useClientSession } from "@orgtik/ui/auth";
 import { ToolRecovery } from "@/components/account/ToolRecovery";
 import { API_URL } from "@/constants/env";
 
 export default function OpenAppPage() {
+  const tabSession = useClientSession(), router = useRouter();
   const t = useTranslations("Open");
   const scope = String(useParams().scope ?? "");
   // Where to land in the app (its own path only, e.g. /hq/chat/c-design): passed on with the code.
@@ -27,6 +28,12 @@ export default function OpenAppPage() {
   const path = landing.startsWith("/") && !landing.startsWith("//") && !landing.startsWith("/\\") ? landing : "";
   const locale = useLocale();
   const mounted = useMounted();
+  useEffect(() => {
+    if (mounted && !tabSession?.tokens.accessToken) {
+      const path = window.location.pathname.replace(/^\/sos(?=\/|$)/, "") || "/";
+      router.replace(`/auth/login?redirect=${encodeURIComponent(path + window.location.search)}`);
+    }
+  }, [mounted, tabSession?.tokens.accessToken, router]);
   const appLabel = useAppLabel();
   const { accessToken, workspaceContext, staffAccess } = useUser();
   const requestedWorkspace = query.get("workspaceId") || (!workspaceContext && Object.values(TOOL_SCOPES).includes(scope) ? staffAccess?.toolLaunch?.workspaceId : null);

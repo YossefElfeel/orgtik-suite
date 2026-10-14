@@ -30,14 +30,23 @@ try {
   }
   if(!/^http:\/\/(127\.0\.0\.1|localhost):\d+$/.test(origin))throw Error('Journeys require a local suite.');
   browser=await chromium.launch({headless:true});
+  const guest=await browser.newContext();const guestPage=await guest.newPage();
+  await guestPage.goto(origin+'/sos/go/task_manager?workspaceId=ws_orgtik',{waitUntil:'domcontentloaded'});
+  await guestPage.waitForURL(url=>url.pathname==='/sos/auth/login',{timeout:120000});
+  assert.equal(new URL(guestPage.url()).searchParams.get('redirect'),'/go/task_manager?workspaceId=ws_orgtik');await guest.close();
   const context=await browser.newContext({viewport:{width:1280,height:800},locale:'en-GB'});
   await context.addCookies([{name:'NEXT_LOCALE',value:'en',url:origin}]);
   const page=await login(context,'mona.adel@orgtik.test','Local@2026');
   await page.getByRole('heading',{name:'Your tools',exact:true}).waitFor({timeout:60000});
   const cards=page.locator('#ot-main li').filter({has:page.getByRole('link',{name:'Open tool',exact:true})});
   assert.equal(await cards.count(),6);assert.equal(await cards.locator('svg').count(),6);await capture(page,'mona-home-en');
+  // The shared-domain proxy can omit legacy cookie hints. Admission must still
+  // use this tab's signed session, rather than sending Mona through login again.
+  await context.clearCookies({ name: /^SOMION_SOS\./ });
+  await page.reload({waitUntil:'domcontentloaded'});
+  await page.getByRole('heading',{name:'Your tools',exact:true}).waitFor({timeout:60000});
   await page.getByRole('link',{name:'Open tool',exact:true}).first().click();await page.waitForURL(url=>url.pathname.startsWith('/tasks/'),{timeout:120000});
-  assert.ok(!new URL(page.url()).pathname.match(/tasks\/[^/]+\/tasks/));
+  assert.equal(new URL(page.url()).origin,origin);assert.ok(!new URL(page.url()).pathname.match(/tasks\/[^/]+\/tasks/));
   await page.getByRole('link',{name:'Home',exact:true}).first().waitFor({timeout:120000});await capture(page,'mona-tasks-en');
   await visit(page,'/tasks/en/teams','team form');
   const taskCatalog=JSON.parse(fs.readFileSync(path.join(root,'apps/tasks/messages/en.json'),'utf8'));
