@@ -102,6 +102,8 @@ deployment. Run the Services workflow on `main` explicitly for a cloud release.
 Choose `target=website` only when unchanged frontends already passed their release.
 This mode verifies every public frontend upstream and releases the website/router
 without rebuilding nine apps. Full releases remain the default.
+`target=sos` updates only the launcher and then verifies/publishes the shared site,
+when the other eight frontend/mock deployments already match application source.
 
 The main-only workflow validates the reviewed source, then builds and deploys
 the nine frontend/private-backend projects in parallel on independent runners.
