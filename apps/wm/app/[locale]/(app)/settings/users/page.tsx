@@ -1,21 +1,23 @@
 "use client";
 import { RowActionsMenu } from "@/components/content/RowActionsMenu";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import {
   Badge,
   Button,
   Input,
   MenuItem,
+  MenuSeparator,
   PageHeader,
   Select,
 } from "@orgtik/ui";
-import { Eye, PencilSimple } from "@phosphor-icons/react";
+import { Eye, PencilSimple, Trash } from "@phosphor-icons/react";
 import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { UserForm } from "@/components/users/UserForm";
-import { UserRolePauseAction, UserStatusSwitch } from "@/components/users/UserAccessActions";
-import { SOS_URL } from "@/lib/env";
+import { UserStatusSwitch } from "@/components/users/UserAccessActions";
+import { CentralUsersAction } from "@/components/users/CentralUsersAction";
+import { UserDeleteDialog } from "@/components/users/UserDeleteDialog";
 import { useCan } from "@/lib/permissions";
 import { useListState } from "@/lib/useListState";
 import {
@@ -43,8 +45,18 @@ function Users() {
     page: url.page,
     pageSize: 10,
   });
+  const latestUsers = useRef(query);
+  latestUsers.current = query;
+  const refreshStaleUser = async () => {
+    const alreadyFetching = latestUsers.current.isFetching;
+    await latestUsers.current.refetch().unwrap();
+    // A refetch can join a request started before the stale response. Once that
+    // request settles, require a fresh response before permitting a new dialog.
+    if (alreadyFetching) await latestUsers.current.refetch().unwrap();
+  };
   const [editing, setEditing] = useState<SuiteUser | "new" | null>(null);
   const [viewing, setViewing] = useState<SuiteUser | null>(null);
+  const [deleting, setDeleting] = useState<SuiteUser | null>(null);
   const columns: ColumnDef<SuiteUser>[] = [
     {
       id: "name",
@@ -94,7 +106,12 @@ function Users() {
                 {t("edit")}
               </MenuItem>
             ) : null}
-            <UserRolePauseAction user={row.original} />
+            {can("users:manage") && me.data?.identity.accounts ? <>
+              <MenuSeparator />
+              <MenuItem icon={<Trash />} tone="danger" disabled={row.original.id === me.data.user.id || query.isFetching || Boolean(query.error)} title={row.original.id === me.data.user.id ? t("deleteOwnUserBlocked") : undefined} onClick={() => setDeleting(row.original)}>
+                {t("delete")}
+              </MenuItem>
+            </> : null}
           </RowActionsMenu>
       ),
     },
@@ -106,14 +123,7 @@ function Users() {
         description={t("userManagementHelp")}
         actions={
           <div className="flex flex-wrap gap-3">
-            <Button
-              variant="secondary"
-              onClick={() =>
-                window.open(`${SOS_URL}/people`, "_blank", "noopener")
-              }
-            >
-              {t("centralUsers")}
-            </Button>
+            <CentralUsersAction allowed={Boolean(me.data?.identity.accounts)} />
             {can("users:manage") && me.data?.identity.accounts ? (
               <Button onClick={() => setEditing("new")}>
                 {t("newAccount")}
@@ -182,6 +192,7 @@ function Users() {
           onClose={() => setEditing(null)}
         />
       ) : null}
+      {deleting ? <UserDeleteDialog user={deleting} onStale={refreshStaleUser} onClose={() => setDeleting(null)} onDeleted={() => { setDeleting(null); if ((query.data?.items.length ?? 0) === 1 && url.page > 1) url.set({page: url.page - 1}); }} /> : null}
     </div>
   );
 }

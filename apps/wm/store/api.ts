@@ -135,9 +135,10 @@ export type Overview = {
   };
 };
 
-export type Role = { key: string; label: string; permissions: string[]; version: string; protected: boolean; builtin: boolean; labelOverridden: boolean; assignedCount: number };
+export type Role = { key: string; label: string; permissions: string[]; version: string; protected: boolean; builtin: boolean; labelOverridden: boolean; assignedCount: number; deletable?: boolean; deleteImpact?: { assignedCount: number; usersLosingAccess: number; includesCurrentUser: boolean } };
 
 export type Person = { key: string; name: string | null };
+export type InternalNote = { id: string; at: string; by: Person; text: string; editedAt?: string };
 export type Page<T> = {
   items: T[];
   page: number;
@@ -349,6 +350,7 @@ export type Idea = {
   submitter?: { name?: string; email?: string; privacyVersion: string; erased?: boolean; masked?: boolean };
   commentPreview?: { id: string; author: string; body: string }[];
   discussion?: IdeaComment[];
+  notes?: InternalNote[];
   reason?: string;
   link?: string;
   mergedInto?: string;
@@ -368,7 +370,7 @@ export type IdeaComment = {
   author: string;
   email?: string;
   body: string;
-  status: "pending" | "approved" | "hidden";
+  status: "pending" | "approved" | "hidden" | "deleted";
   submittedAt: string;
   version: number;
   masked?: boolean;
@@ -728,7 +730,8 @@ export const api = createApi({
     saveManagerOrder: b.mutation<{ids:string[];version:string},{type:EntryType;ids:string[];version:string}>({query:({type,...body})=>({url:"/admin/manager/order/"+type,method:"PUT",body}),invalidatesTags:["EntryList","Audit"]}),
     contentQueue: b.query<Page<EntrySummary>, { state?: string; mine?: string; search?: string; page?: number; pageSize?: number }>({ query: params => ({ url: "/admin/queue", params }), providesTags: ["EntryList", "Overview"] }),
     users: b.query<Page<SuiteUser>, { search?: string; status?: string; role?: string; page?: number; pageSize?: number }>({ query: params => ({ url: "/admin/users", params }), providesTags: ["Users"] }),
-    createUser: b.mutation<SuiteUser, { firstName: string; lastName: string; email: string; password: string }>({ query: body => ({ url: "/admin/users", method: "POST", body }), invalidatesTags: ["Users", "Audit"] }),
+    createUser: b.mutation<SuiteUser, { firstName: string; lastName: string; email: string; password: string; roles: string[] }>({ query: body => ({ url: "/admin/users", method: "POST", body }), invalidatesTags: ["Users", "Roles", "Audit"] }),
+    deleteUser: b.mutation<void, { id: number; version: string }>({ query: ({ id, version }) => ({ url: `/admin/users/${id}`, method: "DELETE", headers: { "if-match": version } }), invalidatesTags: ["Users", "Roles", "Audit", "Me"] }),
     updateUser: b.mutation<SuiteUser, { id: number; version: string; patch: Partial<Pick<SuiteUser, "firstName" | "lastName" | "email" | "active" | "roles" | "rolePaused">> }>({ query: ({ id, version, patch }) => ({ url: `/admin/users/${id}`, method: "PATCH", headers: { "if-match": version }, body: patch }), invalidatesTags: ["Users", "Roles", "Audit", "Me"] }),
     me: b.query<Me, void>({ query: () => "/admin/me", providesTags: ["Me"] }),
     overview: b.query<Overview, void>({
@@ -745,7 +748,7 @@ export const api = createApi({
     }),
     deleteRole: b.mutation<void, { key: string; version: string }>({
       query: ({ key, version }) => ({ url: `/admin/roles/${key}`, method: "DELETE", headers: { "if-match": version } }),
-      invalidatesTags: ["Roles", "Audit"],
+      invalidatesTags: ["Roles", "Users", "Me", "Audit"],
     }),
     updateRole: b.mutation<Role, { key: string; version: string; permissions: string[]; label?: string }>({
       query: ({ key, version, permissions, label }) => ({ url: `/admin/roles/${key}`, method: "PATCH", headers: { "if-match": version }, body: { permissions, ...(label !== undefined ? { label } : {}) } }),
@@ -879,8 +882,20 @@ export const api = createApi({
       query: ({ id, version }) => ({ url: `/admin/ideas/${id}/erase`, method: "POST", headers: { "if-match": String(version) } }),
       invalidatesTags: ["Ideas"],
     }),
-    moderateIdeaComment: b.mutation<Idea, { id: string; commentId: string; version: number; action: "approve" | "hide"; reason?: string }>({
+    moderateIdeaComment: b.mutation<Idea, { id: string; commentId: string; version: number; action: "approve" | "hide" | "delete" | "restore"; reason?: string }>({
       query: ({ id, commentId, version, ...body }) => ({ url: `/admin/ideas/${id}/comments/${commentId}/moderate`, method: "POST", headers: { "if-match": String(version) }, body }),
+      invalidatesTags: ["Ideas", "Audit"],
+    }),
+    noteIdea: b.mutation<Idea, { id: string; version: number; text: string }>({
+      query: ({ id, version, text }) => ({ url: `/admin/ideas/${id}/notes`, method: "POST", headers: { "if-match": String(version) }, body: { text } }),
+      invalidatesTags: ["Ideas", "Audit"],
+    }),
+    editIdeaNote: b.mutation<Idea, { id: string; version: number; noteId: string; text: string }>({
+      query: ({ id, version, noteId, text }) => ({ url: `/admin/ideas/${id}/notes/${noteId}`, method: "PATCH", headers: { "if-match": String(version) }, body: { text } }),
+      invalidatesTags: ["Ideas", "Audit"],
+    }),
+    deleteIdeaNote: b.mutation<Idea, { id: string; version: number; noteId: string }>({
+      query: ({ id, version, noteId }) => ({ url: `/admin/ideas/${id}/notes/${noteId}`, method: "DELETE", headers: { "if-match": String(version) } }),
       invalidatesTags: ["Ideas", "Audit"],
     }),
     moderateIdea: b.mutation<
@@ -1191,6 +1206,9 @@ export const {
   useEditIdeaMutation,
   useModerateIdeaMutation,
   useEraseIdeaMutation,
+  useNoteIdeaMutation,
+  useEditIdeaNoteMutation,
+  useDeleteIdeaNoteMutation,
   useModerateIdeaCommentMutation,
   useMediaQuery,
   useMediaItemQuery,
@@ -1226,6 +1244,7 @@ export const {
   useContentQueueQuery,
   useUsersQuery,
   useCreateUserMutation,
+  useDeleteUserMutation,
   useUpdateUserMutation,
 } = api;
 

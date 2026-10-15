@@ -1,4 +1,5 @@
 const crypto = require("node:crypto");
+const { isDeepStrictEqual } = require("node:util");
 const { offers, bundles } = require("./seed-website-offers");
 const { advance } = require("./lifecycle");
 const MONTHS = [1, 3, 6, 12], BANDS = [1, 2, 3, 5], DURATION = { 1: 0, 3: 5, 6: 10, 12: 15 };
@@ -23,6 +24,18 @@ function registerCatalog(S) {
       S.db.countries.CH.fixed ??= {};
       S.db.countries.CH.fixed[`${offer.serviceId}:monthly`] ??= offer.monthlyCHF;
     }
+  }
+  if ((S.db.websiteOfferPublicationExamplesVersion ?? 0) < 1) {
+    // Backfill only unchanged legacy seed rows. An explicit clear, retained draft,
+    // edited offer or removed offer belongs to its owner and must not be reseeded.
+    for (const seed of offers.filter(row => row.publishedBy === "seed" && row.publishedAt)) {
+      const offer = S.db.websiteOffers.find(row => row.id === seed.id);
+      if (!offer || ["draft", "publishedAt", "publishedBy"].some(key => Object.hasOwn(offer, key))) continue;
+      const { publishedAt, publishedBy, ...baseline } = seed;
+      if (isDeepStrictEqual(offer, baseline)) Object.assign(offer, { publishedAt, publishedBy });
+    }
+    // Persist this even when every row is skipped; later owner edits are never revisited.
+    S.db.websiteOfferPublicationExamplesVersion = 1;
   }
   return S.db.websiteOffers;
 }

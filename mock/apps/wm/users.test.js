@@ -5,6 +5,11 @@ const assert = require("node:assert/strict"),
 const { registerUsers } = require("./users"),
   { permissionsFor } = require("./permissions");
 const { setPassword, passwordMatches } = require("../../lib/auth-store");
+// Native HTTP accepts every OS-selected ephemeral port, including fetch's denylist.
+const request = (url, {body, ...options}) => new Promise((resolve,reject) => {
+  const req=http.request(url,options,res=>{let text='';res.setEncoding('utf8');res.on('data',chunk=>{text+=chunk;});res.on('end',()=>resolve({status:res.statusCode,text:async()=>text}));res.on('error',reject);});
+  req.on('error',reject);req.end(body);
+});
 
 test("Website administrators respect central account permissions, internal membership, version checks and self-protection", async (t) => {
   const users = ["admin", "webadmin", "staff", "customer"].map(
@@ -44,7 +49,7 @@ test("Website administrators respect central account permissions, internal membe
     logs = [],
     audit = [];
   const platform = {
-    db: {},
+    db: {workspaces:[workspace],invoices:[]},
     workspace: () => workspace,
     id: () => "member-new",
     iso: (value) => new Date(value).toISOString(),
@@ -84,7 +89,7 @@ test("Website administrators respect central account permissions, internal membe
       }),
   );
   const call = async (method, route, body, version, actor = "webadmin") => {
-    const response = await fetch(
+    const response = await request(
       `http://127.0.0.1:${server.address().port}/v2/admin/users${route}`,
       {
         method,
@@ -203,4 +208,46 @@ test("Website administrators respect central account permissions, internal membe
   assert.ok(audit.some((event) => event.action === "user_create"));
   assert.ok(audit.some((event) => event.action === "user_roles"));
   assert.ok(logs.length >= 2);
+  const prior=JSON.stringify({users,grants:identity.grants,db:platform.db});
+  assert.equal((await call('DELETE','/'+created.data.id,undefined,created.data.version)).code,'suite_admin_required');
+  assert.equal((await call('DELETE','/'+created.data.id,undefined,'stale','admin')).status,412);
+  const myself=(await call('GET','',undefined,undefined,'admin')).data.find(user=>user.key==='admin');
+  assert.equal((await call('DELETE','/1',undefined,myself.version,'admin')).code,'self_lockout');
+  assert.equal(JSON.stringify({users,grants:identity.grants,db:platform.db}),prior,'denied deletions cannot change accounts or authority');
+  assert.equal((await call('DELETE','/'+created.data.id,undefined,created.data.version,'admin')).status,204);
+  assert.equal(raw.isActive,false);assert.ok(raw.deletedAt);assert.equal(raw.authVersion,1);
+  assert.ok(users.includes(raw),'soft deletion retains the exact person row');
+  assert.ok(Object.values(identity.grants).every(scope=>!scope[raw.key]));
+  assert.ok(!(await call('GET','',undefined,undefined,'admin')).data.some(user=>user.id===raw.id));
+  assert.equal((await call('DELETE','/'+raw.id,undefined,created.data.version,'admin')).status,404);
+  assert.ok(audit.some(event=>event.action==='user_delete'&&event.entry===raw.key));
+});
+
+test('canonical account deletion protects administrators, ownership and invoices, and retains business history',()=>{
+  const {deleteIdentityUser}=require('../../lib/accounts');
+  const people=['actor','target','backup','peer'].map((key,index)=>({id:index+1,key,isActive:true,firstName:key,lastName:'Fixture',email:key+'@fixture.test',authVersion:2}));
+  const [actor,target,backup]=people;
+  const identity={users:people,findByKey:key=>people.find(person=>person.key===key),grants:{global:{actor:{roles:['super_admin']},target:{roles:['super_admin']},backup:{roles:[]}},website_manager:{target:{roles:['wm_viewer'],permissions:[]}},sales:{target:{roles:['manager'],permissions:[]}}}};
+  const membership=(key,role='member')=>({id:'member-'+key,userKey:key,role,status:'active',revision:3,accessEpoch:4,toolGrants:{files:{assigned:true,roles:['file_editor']}}});
+  const internal={id:'ws_orgtik',kind:'orgtik_internal',state:'active',authorityRevision:7,members:people.map(person=>membership(person.key)),lines:[{id:'billed-files',tool:'files',seats:5}]};
+  const owned={id:'owned',state:'active',authorityRevision:2,members:[membership(target.key,'owner')],lines:[{id:'closed-billed-line',state:'ended'}]};
+  const other={id:'other',state:'active',members:[membership('peer','owner')],lines:[{id:'other-billed-line',seats:8}]};
+  const logs=[],S={db:{workspaces:[internal,owned,other],invoices:[{id:'open-invoice',workspaceId:'owned',state:'open',amount:1250}],staffRoles:{actor:['support'],target:['super_admin'],backup:['super_admin']},staffAccessEpochs:{target:5}},workspace:id=>S.db.workspaces.find(row=>row.id===id),now:()=>Date.parse('2026-10-15T09:00:00Z'),iso:at=>new Date(at).toISOString(),log:(...entry)=>logs.push(entry)};
+  const snapshot=()=>JSON.stringify({people,grants:identity.grants,db:S.db,logs});
+  const refused=code=>{const before=snapshot();assert.throws(()=>deleteIdentityUser(identity,{user:target,actor,platform:S}),{code});assert.equal(snapshot(),before,'refusal must not partially delete the account');};
+  backup.isActive=false;refused('active_super_admin_required');
+  backup.isActive=true;internal.members.find(member=>member.userKey==='backup').role='guest';refused('active_super_admin_required');
+  internal.members.find(member=>member.userKey==='backup').role='member';S.db.staffAuthorityRevocations={backup:{at:'2026-10-14T00:00:00Z'}};refused('active_super_admin_required');
+  delete S.db.staffAuthorityRevocations.backup;refused('ownership_transfer_required');
+  owned.state='cancelled';refused('unpaid_invoices');
+  S.db.invoices[0].state='paid';const beforeMissing=snapshot();assert.throws(()=>deleteIdentityUser(identity,{user:target,actor,platform:null}),{code:'account_authority_unavailable'});assert.equal(snapshot(),beforeMissing);
+  target.authVersion=Number.MAX_SAFE_INTEGER;refused('account_authority_unavailable');target.authVersion=2;
+  const business=structuredClone({invoices:S.db.invoices,lines:S.db.workspaces.map(row=>row.lines),other}),remainingGrants=structuredClone(identity.grants.global.actor),staffRoles=structuredClone(S.db.staffRoles),targetId=target.id;
+  deleteIdentityUser(identity,{user:target,actor,platform:S});
+  assert.equal(identity.findByKey('target'),target);assert.equal(target.id,targetId);assert.equal(target.firstName,'target');assert.equal(target.authVersion,3);assert.equal(target.deletedAt,'2026-10-15T09:00:00.000Z');assert.equal(target.isActive,false);
+  assert.ok(Object.values(identity.grants).every(scope=>!scope.target));assert.deepEqual(identity.grants.global.actor,remainingGrants);assert.deepEqual(S.db.staffRoles,staffRoles);
+  assert.deepEqual({invoices:S.db.invoices,lines:S.db.workspaces.map(row=>row.lines),other},business);
+  for(const row of [internal,owned]){const member=row.members.find(member=>member.userKey==='target');assert.equal(member.status,'removed');assert.equal(member.accessEpoch,5);assert.equal(member.revision,4);assert.equal(member.toolGrants.files.assigned,false);assert.deepEqual(member.toolGrants.files.roles,['file_editor']);}
+  assert.equal(S.db.staffAccessEpochs.target,6);assert.deepEqual(logs,[[actor.key,'account_deleted',String(target.id)]]);
+  const after=snapshot();assert.throws(()=>deleteIdentityUser(identity,{user:target,actor,platform:S}),{code:'not_found'});assert.equal(snapshot(),after);
 });

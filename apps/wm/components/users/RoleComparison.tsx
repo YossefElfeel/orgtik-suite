@@ -312,6 +312,7 @@ export function RoleComparison() {
           initialPermissions={dialog === "edit" ? draft?.permissions : undefined}
           initialVersion={dialog === "edit" ? draft?.version : undefined}
           lockedPermissions={dialog === "edit" && mine ? ["roles:manage", "users:manage", "settings:view"].filter(permission => role?.permissions.includes(permission)) : []}
+          assignedToMe={dialog === "edit" && mine}
           onClose={() => setDialog(null)}
           onSaved={saved => {if(dialog === "edit") reset();setSelected(saved.key);setDialog(null);}}
           onDeleted={() => {reset();setSelected(null);setDialog(null);}}

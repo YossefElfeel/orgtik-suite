@@ -194,4 +194,4 @@ function offboardingAction({ S, workspace, actor, payload }) {
   row.actions ??= []; row.actions.push({ action: payload.action, actorUserId: actor.id, at: S.iso(S.now()), note: payload.note || null });
   S.log(actor.key, 'offboarding_action', row.id, { workspaceId: workspace.id, action: payload.action }); return row;
 }
-module.exports = { hire, validateHirePayload, approveLeave, leaveCommand, activateEmployee, offboard, runOffboarding, endInstant, offboardingOptions, offboardingAction };
+module.exports = { hire, validateHirePayload, approveLeave, leaveCommand, activateEmployee, offboard, runOffboarding, endInstant, offboardingOptions, offboardingAction, qualifiedSuperAdmins };

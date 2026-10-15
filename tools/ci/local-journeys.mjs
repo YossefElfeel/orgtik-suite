@@ -66,6 +66,20 @@ try {
   await page.setViewportSize({width:390,height:844});await capture(page,'mona-home-ar-mobile');
   assert.equal(await page.locator('html').getAttribute('dir'),'rtl');
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+1);assert.equal(overflow,false);
+  // A bookmarked central directory must prepare verified administration access,
+  // rather than deny a super admin who signed in to her ordinary workspace.
+  const centralContext=await browser.newContext({viewport:{width:1280,height:800}});
+  await centralContext.addCookies([{name:'NEXT_LOCALE',value:'en',url:origin}]);
+  const centralPage=await login(centralContext,'mona.adel@orgtik.test','Local@2026');
+  await visit(centralPage,'/sos/people','central people');
+  await centralPage.getByRole('heading',{name:'People',exact:true}).waitFor({timeout:60000});
+  await centralPage.locator('tbody tr').filter({hasText:/@/}).first().waitFor({timeout:60000});
+  const centralSession=await centralPage.evaluate(()=>JSON.parse(sessionStorage.getItem('orgtik.tab-session.v1/sos')));
+  assert.equal(centralSession.workspaceContext,null);
+  assert.ok(centralSession.staffAccess.permissions.admin.includes('staff:view'));
+  assert.equal(await centralPage.getByRole('link',{name:'Team',exact:true}).count(),0);
+  assert.equal(await centralPage.getByRole('link',{name:'Subscriptions',exact:true}).count(),0);
+  await capture(centralPage,'mona-central-people');await centralContext.close();
   const register=await context.request.post(origin+'/sos/api/backend/sos/api/auth/register',{data:{email:`journey-${Date.now()}@orgtik.test`,name:'Journey owner',password:'LocalJourney2026!'}});assert.equal(register.status(),201);
   const account=(await register.json()).data;
   const trial=await context.request.post(origin+'/sos/api/backend/sos/api/suite/tools/tasks/trial',{headers:{authorization:'Bearer '+account.tokens.accessToken},data:{planId:'tasks_pro'}});assert.equal(trial.status(),200);

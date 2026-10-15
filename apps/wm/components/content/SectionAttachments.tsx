@@ -9,21 +9,33 @@ export function SectionAttachments({
   disabled,
   disabledReason,
   alwaysOpen = false,
+  pageCard = false,
+  title,
+  description,
 }: {
   items: MediaRef[];
   onChange: (items: MediaRef[]) => void;
   disabled: boolean;
   disabledReason?: string;
   alwaysOpen?: boolean;
+  pageCard?: boolean;
+  title?: string;
+  description?: string;
 }) {
   const t = useTranslations("Improvements");
   return (
-    <details open className="mt-6 rounded-card border border-line p-4">
+    <details
+      open
+      className={`mt-6 rounded-card border border-line bg-raised ${pageCard ? "p-5" : "p-4"}`}
+    >
       <summary className="cursor-pointer text-label">
-        {t("media")}
+        {title ?? t("media")}
         {items.length ? ` (${items.length})` : ""}
       </summary>
       <div className="mt-3 flex flex-col gap-3">
+        {description ? (
+          <p className="text-body-sm text-fg-muted">{description}</p>
+        ) : null}
         {disabledReason ? (
           <p className="text-body-sm text-fg-muted">{disabledReason}</p>
         ) : null}

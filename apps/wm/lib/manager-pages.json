@@ -73,10 +73,7 @@
       }
     },
     "groups": {
-      "services": [
-        "services",
-        "homeServices"
-      ]
+      "services": ["services", "homeServices"]
     },
     "references": {
       "partners": "/content/pages/pg_partners",
@@ -86,13 +83,15 @@
   "pg_services": {
     "editor": [
       "hero",
+      "rotation-words",
       "families",
       "all-services",
       "ready-made-bundles",
       "bundle",
+      "stories",
       "department-bundles",
-      "reviews",
-      "rotation-words"
+      "approach",
+      "reviews"
     ],
     "labels": {
       "hero": "Hero"
@@ -235,17 +234,57 @@
     "collections": {
       "all-services": "service"
     },
-    "rotationSource": "service"
+    "rotationSource": "service",
+    "supplemental": {
+      "approach": {
+        "titleKey": "discovery.servicesApproachTitle",
+        "fields": [
+          {
+            "record": "st_services",
+            "path": "b5.s2",
+            "label": "description"
+          },
+          {
+            "record": "st_services",
+            "path": "b5.s4",
+            "label": "header"
+          },
+          {
+            "record": "st_services",
+            "path": "b5.s6",
+            "label": "headerAccent"
+          },
+          {
+            "record": "st_services",
+            "path": "b5.s3",
+            "label": "description"
+          },
+          {
+            "record": "st_services",
+            "path": "b5.s5",
+            "label": "header"
+          },
+          {
+            "record": "st_services",
+            "path": "b5.s7",
+            "label": "headerAccent"
+          }
+        ]
+      }
+    }
   },
   "pg_software": {
     "editor": [
       "hero",
+      "rotation-words",
       "workspace",
       "ready-made-bundles",
       "bundle",
       "capabilities",
-      "reviews",
-      "rotation-words"
+      "demo",
+      "section-1",
+      "section-2",
+      "reviews"
     ],
     "labels": {
       "hero": "Hero",
@@ -354,11 +393,8 @@
       }
     },
     "groups": {
-      "workspace": [
-        "workspace",
-        "context",
-        "flow"
-      ]
+      "workspace": ["workspace", "context", "flow"],
+      "section-1": ["section-1", "planSteps"]
     },
     "references": {
       "reviews": "/content/reviews"
@@ -368,8 +404,10 @@
   "pg_work": {
     "editor": [
       "projects",
-      "status-card",
+      "gallery",
+      "hero",
       "reviews",
+      "status-card",
       "rotation-words"
     ],
     "fields": {
@@ -404,10 +442,11 @@
   "pg_about": {
     "editor": [
       "hero",
+      "rotation-words",
       "purpose",
       "journey",
-      "reviews",
-      "rotation-words"
+      "capabilities",
+      "reviews"
     ],
     "labels": {
       "hero": "Hero"
@@ -491,31 +530,18 @@
       }
     },
     "groups": {
-      "journey": [
-        "journey",
-        "journeySteps"
-      ]
+      "journey": ["journey", "journeySteps"]
     },
     "references": {
       "reviews": "/content/reviews"
     },
-    "staticRotation": [
-      "Strategy",
-      "Design",
-      "Operations"
-    ]
+    "staticRotation": ["Strategy", "Design", "Operations"]
   },
   "pg_insights": {
-    "editor": [
-      "articles",
-      "rotation-words"
-    ],
+    "editor": ["articles", "article", "hero", "rotation-words"],
     "collections": {
       "articles": "article"
     },
-    "headerOnly": [
-      "articles"
-    ],
     "rotationSource": "article",
     "fields": {
       "rotation-words": {
@@ -525,10 +551,7 @@
     }
   },
   "pg_contact": {
-    "editor": [
-      "hero",
-      "rotation-words"
-    ],
+    "editor": ["hero", "rotation-words"],
     "fields": {
       "rotation-words": {
         "label": "Rotating words",
@@ -551,9 +574,93 @@
         ]
       }
     },
-    "staticRotation": [
-      "Explore software",
-      "Get ongoing care"
-    ]
+    "staticRotation": ["Explore software", "Get ongoing care"],
+    "supplemental": {
+      "hero": {
+        "titleKey": "support.contactHeading",
+        "fields": [
+          {
+            "record": "st_contact",
+            "path": "b1.s2",
+            "label": "header"
+          },
+          {
+            "record": "st_contact",
+            "path": "b1.s3",
+            "label": "headerAccent"
+          },
+          {
+            "record": "st_contact",
+            "path": "b1.s4",
+            "label": "subheading"
+          }
+        ]
+      }
+    }
+  },
+  "pg_signIn": {
+    "editor": ["intro", "signin"],
+    "supplemental": {
+      "signin": {
+        "titleKey": "support.accountModeCopy",
+        "fields": [
+          {
+            "record": "st_signIn",
+            "path": "b1.s7",
+            "label": "header"
+          },
+          {
+            "record": "st_signIn",
+            "path": "b2.s1",
+            "label": "button"
+          },
+          {
+            "record": "st_signIn",
+            "path": "b2.s2",
+            "label": "header"
+          },
+          {
+            "record": "st_signIn",
+            "path": "b2.s3",
+            "label": "header"
+          },
+          {
+            "record": "st_signIn",
+            "path": "b2.s4",
+            "label": "subheading"
+          },
+          {
+            "record": "st_signIn",
+            "path": "b2.s5",
+            "label": "subheading"
+          },
+          {
+            "record": "st_signIn",
+            "path": "b2.s6",
+            "label": "subheading"
+          },
+          {
+            "record": "st_signIn",
+            "path": "b2.s7",
+            "label": "button"
+          },
+          {
+            "record": "st_signIn",
+            "path": "b2.s8",
+            "label": "button"
+          },
+          {
+            "record": "st_signIn",
+            "path": "b2.s21",
+            "label": "button"
+          },
+          {
+            "record": "st_signIn",
+            "path": "b2.s22",
+            "label": "button"
+          }
+        ]
+      }
+    }
   }
 }

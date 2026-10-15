@@ -11273,6 +11273,18 @@
     },
     {
       "app": "wm",
+      "method": "POST",
+      "path": "/v2/admin/ideas/:id/notes",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
       "method": "GET",
       "path": "/v2/admin/leads",
       "source": "apps/wm.js",
@@ -11731,6 +11743,18 @@
       "app": "wm",
       "method": "POST",
       "path": "/v2/admin/users",
+      "source": "apps/wm/users.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "DELETE",
+      "path": "/v2/admin/users/:id",
       "source": "apps/wm/users.js",
       "authorization": {
         "audience": "staff:wm or staff:admin for this route",

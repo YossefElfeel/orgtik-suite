@@ -33,11 +33,11 @@ export function IdeaComments({
   const [filter, setFilter] = useState("all");
   const [acting, setActing] = useState<{
     comment: IdeaComment;
-    action: "approve" | "hide";
+    action: "approve" | "hide" | "delete" | "restore";
   } | null>(null);
   const [moderate, result] = useModerateIdeaCommentMutation();
-  const comments = (idea.discussion ?? []).filter(
-    (comment) => filter === "all" || comment.status === filter,
+  const comments = (idea.discussion ?? []).filter((comment) =>
+    filter === "all" ? comment.status !== "deleted" : comment.status === filter,
   );
   const declining =
     acting?.action === "hide" && acting.comment.status === "pending";
@@ -65,10 +65,12 @@ export function IdeaComments({
             label={t("status")}
             value={filter}
             onValueChange={(value) => setFilter(value ?? "all")}
-            options={["all", "pending", "approved", "hidden"].map((value) => ({
-              value,
-              label: t(value),
-            }))}
+            options={["all", "pending", "approved", "hidden", "deleted"].map(
+              (value) => ({
+                value,
+                label: t(value),
+              }),
+            )}
           />
         </div>
       </div>
@@ -130,7 +132,8 @@ export function IdeaComments({
               ) : null}
               {can("marketing:edit") ? (
                 <div className="flex flex-wrap gap-2">
-                  {comment.status !== "approved" ? (
+                  {comment.status !== "approved" &&
+                  comment.status !== "deleted" ? (
                     <Button
                       size="sm"
                       variant="secondary"
@@ -140,7 +143,8 @@ export function IdeaComments({
                       {t("approve")}
                     </Button>
                   ) : null}
-                  {comment.status !== "hidden" ? (
+                  {comment.status !== "hidden" &&
+                  comment.status !== "deleted" ? (
                     <Button
                       size="sm"
                       variant={
@@ -152,6 +156,22 @@ export function IdeaComments({
                       {t(comment.status === "pending" ? "decline" : "hide")}
                     </Button>
                   ) : null}
+                  <Button
+                    size="sm"
+                    variant={
+                      comment.status === "deleted" ? "secondary" : "danger"
+                    }
+                    disabled={disabled || result.isLoading}
+                    onClick={() =>
+                      setActing({
+                        comment,
+                        action:
+                          comment.status === "deleted" ? "restore" : "delete",
+                      })
+                    }
+                  >
+                    {t(comment.status === "deleted" ? "restore" : "delete")}
+                  </Button>
                 </div>
               ) : null}
             </li>
@@ -167,23 +187,31 @@ export function IdeaComments({
           open
           onOpenChange={(open) => !open && setActing(null)}
           title={t(
-            declining
-              ? "declineTitle"
-              : acting.action === "approve"
-                ? "approveTitle"
-                : "hideTitle",
+            acting.action === "delete"
+              ? "deleteTitle"
+              : acting.action === "restore"
+                ? "restoreTitle"
+                : declining
+                  ? "declineTitle"
+                  : acting.action === "approve"
+                    ? "approveTitle"
+                    : "hideTitle",
           )}
           impact={t(
-            declining
-              ? "declineImpact"
-              : acting.action === "approve"
-                ? "approveImpact"
-                : "hideImpact",
+            acting.action === "delete"
+              ? "deleteImpact"
+              : acting.action === "restore"
+                ? "restoreImpact"
+                : declining
+                  ? "declineImpact"
+                  : acting.action === "approve"
+                    ? "approveImpact"
+                    : "hideImpact",
           )}
           tone={
-            declining
+            declining || acting.action === "delete"
               ? "danger"
-              : acting.action === "approve"
+              : acting.action === "approve" || acting.action === "restore"
                 ? "primary"
                 : "warning"
           }

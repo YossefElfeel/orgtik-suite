@@ -14,7 +14,7 @@ function mounted(folder, { realm = "wm-codec", active = true, permitted = true }
   const deliveries = [];
   const hooks = wm.routes(app, { realm, identity, uploadsDir: folder, config: { apiUrl: () => "http://unavailable.fixture.invalid" }, apiUrl: () => "http://unavailable.fixture.invalid", webUrl: () => "http://website.fixture.invalid", log() {}, workspaceBoundary: true, staffAccessForPerson: () => ({permissions:{wm:require('./permissions').permissionsFor(['wm_admin'])}}), previewIssuerAllowed: () => permitted, async salesLeadDelivery(payload, metadata) { deliveries.push({ payload, metadata }); return { state: "deferred", code: "orgtik_crm_intake_pending" }; } });
   app.use((error, _req, res, _next) => res.status(error.status || 500).json({ code: error.code, message: error.message }));
-  return { app, hooks, actor, deliveries };
+  return { app, hooks, actor, identity, deliveries };
 }
 async function serve(fixtures) {
   const app = express(); fixtures.forEach((fixture, index) => app.use(`/${index}`, fixture.app));
@@ -101,4 +101,32 @@ test("Role definitions and grants persist together, restore atomically, and acce
     }
     const legacy=clone(snapshot);delete legacy.data.roleDefinitions;delete legacy.data.roles[role.key];first.hooks.importState(legacy);assert.deepEqual(first.hooks.exportState().data.roleDefinitions,{});
   }finally{await http.close();cleanup(folder);}
+});
+
+test("Deleted built-in and custom roles stay unavailable after a holder restart, and invalid tombstones fail atomically", async () => {
+  const folder=fs.mkdtempSync(path.join(os.tmpdir(),'orgtik-wm-codec-')),first=mounted(folder),http=await serve([first]);
+  let snapshot;
+  try {
+    const created=await http.call(0,'POST','/v2/admin/roles',{label:'Temporary reviewer',permissions:['content:view']});assert.equal(created.status,201);
+    assert.equal((await http.call(0,'DELETE','/v2/admin/roles/'+created.body.data.key,undefined,{'if-match':created.body.data.version})).status,204);
+    const editor=(await http.call(0,'GET','/v2/admin/roles')).body.data.find(role=>role.key==='wm_editor');
+    const renamed=await http.call(0,'PATCH','/v2/admin/roles/wm_editor',{label:'Deleted editor',permissions:['content:view']},{'if-match':editor.version});assert.equal(renamed.status,200);
+    assert.equal((await http.call(0,'DELETE','/v2/admin/roles/wm_editor',undefined,{'if-match':renamed.body.data.version})).status,204);
+    snapshot=first.hooks.exportState();assert.equal(snapshot.data.roleDeletions.wm_editor,true);assert.equal(snapshot.data.roleDeletions[created.body.data.key],true);
+    assert.equal(snapshot.data.roles.wm_editor,undefined);assert.equal(snapshot.data.roleDefinitions.wm_editor,undefined);
+    for(const mutate of [state=>{state.data.roleDeletions.wm_super_admin=true},state=>{state.data.roleDeletions.wm_viewer=false},state=>{state.data.roleDeletions.unknown=true},state=>{state.data.roleDefinitions.wm_editor={label:'Resurrected editor'}},state=>{state.data.roles.wm_editor=['content:view']}]){
+      const invalid=clone(snapshot);invalid.data.content.audit.unshift({action:'must-not-import'});mutate(invalid);
+      assert.throws(()=>first.hooks.importState(invalid),{code:'wm_state_unavailable'});assert.deepEqual(first.hooks.exportState(),snapshot);
+    }
+  } finally {await http.close();}
+  const restored=mounted(folder),second=await serve([restored]);
+  try {
+    restored.hooks.importState(snapshot);assert.deepEqual(restored.hooks.exportState(),snapshot);
+    const roles=(await second.call(0,'GET','/v2/admin/roles')).body.data;
+    assert.ok(!roles.some(role=>snapshot.data.roleDeletions[role.key]));assert.ok(roles.some(role=>role.key==='wm_super_admin'));
+    assert.deepEqual(restored.identity.websiteManagerRoleAccess.roleKeysFor(['wm_editor']),[]);
+    assert.deepEqual(restored.identity.websiteManagerRoleAccess.permissionsFor(['wm_editor']),[]);
+    const legacy=clone(snapshot);delete legacy.data.roleDeletions;restored.hooks.importState(legacy);
+    assert.deepEqual(restored.hooks.exportState().data.roleDeletions,{});
+  } finally {await second.close();cleanup(folder);}
 });

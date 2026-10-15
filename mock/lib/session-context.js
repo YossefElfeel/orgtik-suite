@@ -9,7 +9,7 @@ function createContextService({ realm, identity, platform }) {
     if (!internal?.members.some(member => member.userKey === user.key && member.status === 'active' && member.role !== 'guest')) return { actorUserId: user.id, apps: [], roles: {}, permissions: {} };
     for (const value of [platform().db.staffAuthorityRevocations, platform().db.staffAccessEpochs]) if (value !== undefined && (!value || typeof value !== 'object' || Array.isArray(value))) throw fail('staff_authority_unavailable', 503);
     if (Object.hasOwn(platform().db.staffAuthorityRevocations || {}, user.key)) return { actorUserId: user.id, apps: [], roles: {}, permissions: {} };
-    const admin = platform().db.staffRoles?.[user.key] || [], wmGrant = identity.grants.website_manager?.[user.key], wm = wmGrant?.rolePaused ? [] : wmGrant?.roles || [];
+    const admin = platform().db.staffRoles?.[user.key] || [], wmGrant = identity.grants.website_manager?.[user.key], wmRoles = wmGrant?.rolePaused ? [] : wmGrant?.roles || [], wm = identity.websiteManagerRoleAccess?.roleKeysFor?.(wmRoles) ?? wmRoles;
     const access = { actorUserId: user.id, accessEpoch: platform().db.staffAccessEpochs?.[user.key] ?? 0, apps: [...(admin.length ? ["admin"] : []), ...(wm.length ? ["wm"] : [])], roles: { ...(admin.length ? { admin: [...admin] } : {}), ...(wm.length ? { wm: [...wm] } : {}) }, permissions: { ...(admin.length ? { admin: permissionsFor(admin) } : {}), ...(wm.length ? { wm: identity.websiteManagerRoleAccess?.permissionsFor(wm) ?? wmPermissionsFor(wm) } : {}) } };
     // A staff family remains bound to its staff audience. Launcher metadata lets
     // current super administrators open their assigned OrgTik workspace tools

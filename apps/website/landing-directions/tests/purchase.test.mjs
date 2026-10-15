@@ -25,7 +25,7 @@ test('published Console software names overlay without changing the equal-fixtur
   const software = CATALOG.find(item => item.kind === 'software'), original = software.name;
   const names = { en: 'Approved software label', ar: 'اسم الأداة المنشور', de: 'Veröffentlichter Softwarename', fr: 'Nom du logiciel publié', it: 'Nome software pubblicato' };
   try {
-    const items = approvedCatalog.items.map(item => item.id === software.id ? { ...item, names } : item);
+    const items = approvedCatalog.items.map(item => item.id === software.id ? { ...item, names, publishedAt: null } : item);
     installPublicCatalog({ ...approvedCatalog, items }, { locale: 'en' }); assert.equal(software.name, original);
     for (const locale of ['en', 'ar', 'de', 'fr', 'it']) { installPublicCatalog({ ...approvedCatalog, items: items.map(item => item.id === software.id ? { ...item, publishedAt: '2026-10-07T09:00:00Z' } : item) }, { locale }); assert.equal(software.name, names[locale]); }
   } finally { installPublicCatalog(approvedCatalog); }

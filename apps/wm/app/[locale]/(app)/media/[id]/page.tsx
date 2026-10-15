@@ -211,12 +211,14 @@ function Editor({ m }: { m: MediaItem }) {
           ) : null}
         </section>
 
-        <div className="flex flex-col gap-6">
-          <Field label={ti("description")}><Textarea disabled={!editable} maxLength={2000} value={description} onChange={event => setDescription(event.target.value)} /></Field>
-          <Field label={ti("tags")}><Input disabled={!editable} value={tags} onChange={event => setTags(event.target.value)} /></Field>
-          {m.kind !== "video" ? (
-            <LocalizedField label={t("translation")} description={t("altHelp")} value={alt} onChange={(v) => setAlt(v)} required={["en"]} multiline errors={undefined} />
-          ) : null}
+        <div className="flex min-w-0 flex-col gap-6">
+          <div className="flex min-w-0 flex-col gap-4 rounded-card border border-line bg-raised p-4 sm:p-5">
+            <Field label={ti("description")}><Textarea disabled={!editable} maxLength={2000} value={description} onChange={event => setDescription(event.target.value)} /></Field>
+            <Field label={ti("tags")}><Input disabled={!editable} value={tags} onChange={event => setTags(event.target.value)} /></Field>
+            {m.kind !== "video" ? (
+              <LocalizedField label={t("translation")} description={t("altHelp")} value={alt} onChange={(v) => setAlt(v)} required={["en"]} multiline errors={undefined} />
+            ) : null}
+          </div>
 
           <section aria-labelledby="rights" className="flex flex-col gap-4 rounded-card border border-line bg-raised p-4">
             <h2 id="rights" className="text-label text-fg">{t("rights")}</h2>

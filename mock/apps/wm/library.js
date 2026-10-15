@@ -32,7 +32,7 @@ function makeLibrary({ seed, store, now, uploads, demo = false }) {
   const settings = clone(seed.seo?.settings ?? { visibility: "noindex", canonicalHost: "https://orgtik.ch", publicLocales: ["en"], version: 1, history: [] });
   let nextMedia = media.size + 1;
   let nextRedirect = redirects.size + 1;
-  const ensureDemo = () => { if (demo) require("./seed/demo-states").redirectExamples(redirects, now); };
+  const ensureDemo = () => { if (demo) { require("./seed/demo-states").redirectExamples(redirects, now); require("./seed/workflow-examples").mediaExamples(media); } };
   ensureDemo();
   const current = (e) => e.draft ?? e.live;
   const log = (who, action, id, type, extra = {}) => store.audit.unshift({ at: now(), by: who, action, entry: id, type, ...extra });
@@ -314,13 +314,13 @@ function makeLibrary({ seed, store, now, uploads, demo = false }) {
     return { settings };
   }
 
-  const exportState = () => ({ data: clone({ media: [...media], redirects: [...redirects], settings, demoVersion: 1 }), sequences: { nextMedia, nextRedirect } });
+  const exportState = () => ({ data: clone({ media: [...media], redirects: [...redirects], settings, demoVersion: 2 }), sequences: { nextMedia, nextRedirect } });
   const validateState = value => {
     const incoming = codec.object(value), rows = codec.mapRows(incoming.data?.media), redirects_ = codec.mapRows(incoming.data?.redirects), settings_ = codec.object(incoming.data?.settings);
     if (!Number.isSafeInteger(settings_.version) || !Array.isArray(settings_.history) || !Array.isArray(settings_.publicLocales)) throw codec.fail("Website Manager SEO settings are incomplete.");
     return { data: { media: rows, redirects: redirects_, settings: settings_, demoVersion: incoming.data.demoVersion ?? 0 }, sequences: { nextMedia: codec.sequence(incoming.sequences?.nextMedia, rows, "md"), nextRedirect: codec.sequence(incoming.sequences?.nextRedirect, redirects_, "rd") } };
   };
-  const importState = value => { const incoming = validateState(value); codec.replaceMap(media, incoming.data.media); codec.replaceMap(redirects, incoming.data.redirects); codec.replaceObject(settings, incoming.data.settings); nextMedia = incoming.sequences.nextMedia; nextRedirect = incoming.sequences.nextRedirect; if (incoming.data.demoVersion < 1) ensureDemo(); };
+  const importState = value => { const incoming = validateState(value); codec.replaceMap(media, incoming.data.media); codec.replaceMap(redirects, incoming.data.redirects); codec.replaceObject(settings, incoming.data.settings); nextMedia = incoming.sequences.nextMedia; nextRedirect = incoming.sequences.nextRedirect; if (incoming.data.demoVersion < 1) ensureDemo(); else if (demo && incoming.data.demoVersion < 2) require("./seed/workflow-examples").mediaExamples(media); };
   return { media, redirects, settings, mediaOut, resolveMedia, updateMedia, addUpload, removeMedia, health, CHECKS, saveRedirect, removeRedirect, sitemap, indexingUrls, robots, setVisibility, RIGHTS, keepAddresses, previewAddresses, exportState, importState, validateState };
 }
 
