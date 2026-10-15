@@ -636,8 +636,8 @@ function makeStore(now, { demo = false } = {}) {
     const live = entries.get("pr_software")?.live;
     return { currency: live?.currency ?? "CHF", priceMode: live?.priceMode ?? "indicative", managedIn: live?.managedIn ?? null, modules: Object.fromEntries((live?.locales.en.items ?? []).map((m) => [m.id, { monthly: m.monthly }])) };
   };
-  const ensureDemo = () => { if (demo) require("./seed/demo-states").contentExamples({ entries, audit, ideas, now }); };
-  const exportState = () => clone({ cmsVersion: 1, demoVersion: 4, entries: [...entries], audit, managerOrders, contentLocales: LOCALES, ideas: [...ideas] });
+  const ensureDemo = () => { if (demo) { require("./seed/demo-states").contentExamples({ entries, audit, ideas, now }); require("./seed/workflow-examples").contentExamples({ entries, audit, ideas, now }); } };
+  const exportState = () => clone({ cmsVersion: 1, demoVersion: 5, entries: [...entries], audit, managerOrders, contentLocales: LOCALES, ideas: [...ideas] });
   const validateState = value => {
     const incoming = codec.object(value), rows = codec.mapRows(incoming.entries), ideas_ = codec.mapRows(incoming.ideas);
     if (!Array.isArray(incoming.audit) || rows.some(([, row]) => !row.workflow || !Array.isArray(row.versions) || !row.translation || !TYPES.includes(row.type))) throw codec.fail("Website Manager content state is incomplete.");
@@ -668,6 +668,7 @@ function makeStore(now, { demo = false } = {}) {
     else if (demo && incoming.demoVersion < 2) require("./seed/demo-states").publishedExamples({ entries, audit, now });
     if (demo && incoming.demoVersion < 3) require("./seed/demo-states").populateTranslationExamples(entries);
     if (demo && incoming.demoVersion < 4) require("./seed/demo-states").legalExamples({ entries, audit, now });
+    if (demo && incoming.demoVersion < 5) require("./seed/workflow-examples").contentExamples({ entries, audit, ideas, now });
   };
   return { managerOrders, ensureDemo, create, setVisibility, remove, CREATABLE, seed, tick, translate, versionOf, restore, entries, audit, ideas, moderate, rollbackPublished, IDEA_ACTIONS, VISIBLE, pricing, summary, detail, save, transition, approveFigures, queue, LOCALES, exportState, importState, validateState };
 }

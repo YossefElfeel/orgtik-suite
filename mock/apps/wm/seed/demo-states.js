@@ -239,6 +239,7 @@ function contentExamples({ entries, audit, ideas, now }) {
         status,
         sample: true,
         votes: 0,
+        comments: 0,
         version: 1,
         createdAt: at,
         history: [
@@ -260,6 +261,8 @@ function contentExamples({ entries, audit, ideas, now }) {
           ? { mergedInto: base.id }
           : { reason: "Sample moderation outcome" }),
       };
+      delete row.commentPreview;
+      delete row.discussion;
       ideas.set(id, row);
       audit.unshift({
         at,
