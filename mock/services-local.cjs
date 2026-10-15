@@ -4,7 +4,6 @@ process.env.VERCEL_ENV = "development";
 process.env.MOCK_SANDBOX = "services-local";
 process.env.MOCK_AUTH_STORE = "file";
 process.env.MOCK_JOURNAL = "file";
-delete process.env.KV_REST_API_URL;
-delete process.env.KV_REST_API_TOKEN;
-delete process.env.UPSTASH_REDIS_REST_URL;
-delete process.env.UPSTASH_REDIS_REST_TOKEN;
+for (const key of Object.keys(process.env)) {
+  if (/^(KV_|UPSTASH_|REDIS_|SUPABASE_)/i.test(key) || key === "MOCK_PERSISTENCE") delete process.env[key];
+}

@@ -2,6 +2,8 @@
 // Vercel instances by recording every successful change and replaying it after the seed.
 //
 // Store (first match wins):
+//   MOCK_PERSISTENCE=supabase + SUPABASE_URL + SUPABASE_SECRET_KEY
+//                         private server-only Postgres RPCs; explicit opt-in wins over Redis
 //   KV_REST_API_URL + KV_REST_API_TOKEN, or UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN
 //                         Upstash Redis over REST (the Vercel Marketplace integration sets these)
 //   MOCK_JOURNAL=file     a JSON file in the data directory (local tests of a "cold start")
@@ -403,6 +405,8 @@ function redisStore(url, token, prefix, { fetch: request = globalThis.fetch } = 
 
 function pickStore(config) {
   const env = process.env;
+  if (env.MOCK_PERSISTENCE === "supabase") return { sandbox: env.MOCK_SANDBOX || "demo", store: supabaseStore({ env }) };
+  if (env.MOCK_PERSISTENCE && env.MOCK_PERSISTENCE !== "redis") throw unavailable("Unknown persistence provider.");
   const sandbox = (env.MOCK_SANDBOX || "demo").replace(/[^\w-]/g, "");
   const prefix = `orgtik:mock:${sandbox}`;
   const url = env.KV_REST_API_URL || env.UPSTASH_REDIS_REST_URL;
@@ -411,6 +415,84 @@ function pickStore(config) {
   if (env.MOCK_JOURNAL === "file") return { sandbox, store: fileStore(path.join(config.dataDir, "journal", `${sandbox}.json`)) };
   if (env.MOCK_JOURNAL === "memory") return { sandbox, store: memoryStore() };
   return { sandbox, store: null };
+}
+
+// Supabase RPCs execute the account delta, append and operation receipt in one
+// Postgres transaction. Each paged snapshot pins the metadata and revision.
+function supabaseStore(options = {}) {
+  const client = options.client || require("./supabase-client").supabaseClient(options);
+  const checked = async (action, payload, allowed = ["ok"]) => {
+    const reply = await client.rpc(action, payload);
+    if (reply.status === "account_conflict") throw Object.assign(new Error("Account changed concurrently."), { status: 409, code: "account_conflict" });
+    if (["conflict", "operation_conflict"].includes(reply.status)) throw conflict(reply.status === "operation_conflict" ? reply.status : undefined);
+    if (reply.status === "full") throw unavailable("Journal is full. Nothing was committed.");
+    if (!allowed.includes(reply.status)) throw unavailable();
+    return reply;
+  };
+  const receipt = reply => {
+    if (!Number.isSafeInteger(reply.sequence) || reply.sequence < 1) throw unavailable();
+    return { sequence: reply.sequence, replayed: reply.status === "duplicate", ...(Object.hasOwn(reply, "result") ? { result: reply.result } : {}) };
+  };
+  async function snapshot(from = 0) {
+    if (!Number.isSafeInteger(from) || from < 0) throw new TypeError("Invalid snapshot offset");
+    for (let retry = 0; retry < 4; retry++) {
+      let page = await client.rpc("journal_snapshot", { from });
+      if (page.status !== "ok" || !Number.isSafeInteger(page.revision) || page.revision < 0 || !Array.isArray(page.entries)) throw unavailable();
+      const { meta, revision } = page, entries = [...page.entries];
+      let cursor = Math.min(from, revision), restart = false;
+      for (;;) {
+        if (page.entries.some(raw => typeof raw !== "string") || !Number.isSafeInteger(page.next) || page.next !== cursor + page.entries.length || page.next > revision) throw unavailable();
+        cursor = page.next;
+        if (cursor === revision) return { meta, revision, entries };
+        if (!page.entries.length) throw unavailable();
+        page = await client.rpc("journal_snapshot", { from: cursor, meta, revision });
+        if (page.status === "conflict") { restart = true; break; }
+        if (page.status !== "ok" || page.revision !== revision || JSON.stringify(page.meta) !== JSON.stringify(meta) || !Array.isArray(page.entries)) throw unavailable();
+        entries.push(...page.entries);
+      }
+      if (!restart) throw unavailable();
+    }
+    throw unavailable("Journal changed repeatedly while loading its snapshot. Please try again.");
+  }
+  return {
+    kind: "supabase", atomicIdentity: true,
+    async getMeta() { const { meta } = await checked("journal_get_meta", {}); if (meta !== null && (!meta || typeof meta.epoch !== "string" || !meta.epoch)) throw unavailable(); return meta; },
+    async setMeta(meta) { await checked("journal_set_meta", { meta }); },
+    async initialize(meta) { const reply = await checked("journal_initialize", { meta }); if (typeof reply.meta?.epoch !== "string" || !reply.meta.epoch) throw unavailable(); return reply.meta; },
+    async read(from = 0) { return (await snapshot(from)).entries; },
+    async push(entry) { const current = await snapshot(); return (await this.commit(entry, { expectedEpoch: current.meta?.epoch, expectedRevision: current.revision })).sequence; },
+    async clear() { await checked("journal_clear", {}); },
+    snapshot, poll: snapshot,
+    async commit(entry, expected) {
+      const { raw, operation } = prepareCommit(entry, expected);
+      const changes = expected.identity?.changes;
+      if (expected.identity) {
+        if (!Array.isArray(changes) || new Set(changes.map(change => String(change.id))).size !== changes.length) throw new TypeError("Invalid identity transaction");
+        for (const change of changes) {
+          const record = JSON.parse(change.value);
+          if (String(record.user?.id) !== String(change.id) || record.user.password !== undefined) throw new TypeError("Unsafe identity delta");
+        }
+        if (Buffer.byteLength(JSON.stringify(changes)) + Buffer.byteLength(raw) > MAX_BODY) throw unavailable("Atomic change exceeds the persistence limit.");
+      }
+      const reply = await checked("journal_commit", { expectedEpoch: expected.expectedEpoch, expectedRevision: expected.expectedRevision, raw, maxEntries: MAX_ENTRIES, operation, identity: expected.identity ? { changes } : null }, ["ok", "duplicate"]);
+      if (reply.status === "ok" && reply.sequence !== expected.expectedRevision + 1) throw unavailable();
+      return receipt(reply);
+    },
+    async lookupOperation(operation, { expectedEpoch } = {}) {
+      if (typeof expectedEpoch !== "string" || !expectedEpoch) throw new TypeError("Operation lookup requires expectedEpoch");
+      const normalized = operationMetadata(operation);
+      if (!normalized) throw new TypeError("Operation lookup requires operation metadata");
+      const reply = await checked("journal_lookup", { expectedEpoch, key: normalized.key, fingerprint: normalized.receipt.fingerprint }, ["missing", "duplicate"]);
+      return reply.status === "missing" ? null : receipt(reply);
+    },
+    async reset(meta, expected) {
+      expectedState(expected);
+      if (!meta?.epoch || meta.epoch === expected.expectedEpoch) throw new TypeError("Journal reset requires a new epoch");
+      const reply = await checked("journal_reset", { meta, expectedEpoch: expected.expectedEpoch, expectedRevision: expected.expectedRevision });
+      if (reply.meta?.epoch !== meta.epoch || reply.revision !== 0 || !Array.isArray(reply.entries) || reply.entries.length) throw unavailable();
+      return { meta: reply.meta, revision: 0, entries: [] };
+    },
+  };
 }
 
 const recordable = (method, url) => CHANGES.has(method) && !NOT_RECORDED.test(url);
@@ -445,4 +527,4 @@ function makeLock() {
   };
 }
 
-module.exports = { pickStore, recordable, recordHeaders, redactBody, makeLock, MAX_ENTRIES, MAX_BODY, memoryStore, fileStore, redisStore };
+module.exports = { pickStore, recordable, recordHeaders, redactBody, makeLock, MAX_ENTRIES, MAX_BODY, memoryStore, fileStore, redisStore, supabaseStore };

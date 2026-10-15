@@ -184,6 +184,8 @@ return 1`, "2", accountsKey, emailsKey]);
 
 function pickStore(config) {
   const env = process.env;
+  if (env.MOCK_PERSISTENCE === "supabase") return supabaseStore({ env });
+  if (env.MOCK_PERSISTENCE && env.MOCK_PERSISTENCE !== "redis") throw Object.assign(new Error("Unknown persistence provider."), { status: 503 });
   const sandbox = (env.MOCK_SANDBOX || "demo").replace(/[^\w-]/g, "");
   const url = env.KV_REST_API_URL || env.UPSTASH_REDIS_REST_URL;
   const token = env.KV_REST_API_TOKEN || env.UPSTASH_REDIS_REST_TOKEN;
@@ -196,4 +198,23 @@ function pickStore(config) {
   return localStore();
 }
 
-module.exports = { pickStore, snapshot, setPassword, passwordMatches, localStore, redisStore };
+function supabaseStore(options = {}) {
+  const client = options.client || require("./supabase-client").supabaseClient(options);
+  async function rpc(action, payload = {}) {
+    const reply = await client.rpc(action, payload);
+    if (reply.status === "account_conflict" || reply.status === "conflict") throw conflict();
+    if (reply.status !== "ok") throw Object.assign(new Error("Account service unavailable. Please retry."), { status: 503 });
+    return reply;
+  }
+  return {
+    kind: "supabase",
+    async accounts() { const { accounts } = await rpc("accounts_read"); if (!accounts || typeof accounts !== "object" || Array.isArray(accounts) || Object.values(accounts).some(raw => typeof raw !== "string")) throw Object.assign(new Error("Account service unavailable."), { status: 503 }); return new Map(Object.entries(accounts)); },
+    async commit(changes) { if (changes.length) await rpc("accounts_commit", { changes }); },
+    async resetTestFixtures() { await rpc("accounts_reset_test_fixtures"); },
+    async putHandoff(code, value) { await rpc("handoff_put", { key: codeKey(code), value, expiresAt: Math.min(value.expiresAt, RealDate.now() + 60000) }); },
+    async takeHandoff(code) { return (await rpc("handoff_take", { key: codeKey(code) })).value ?? null; },
+    async claimLegacy(code, expiresAt) { return (await rpc("claim_legacy", { key: codeKey(code), expiresAt })).claimed === true; },
+  };
+}
+
+module.exports = { pickStore, snapshot, setPassword, passwordMatches, localStore, redisStore, supabaseStore };

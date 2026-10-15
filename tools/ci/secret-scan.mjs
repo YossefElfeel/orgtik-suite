@@ -13,6 +13,7 @@ const PATTERNS = [
   ["Slack token", /\bxox[abprs]-[A-Za-z0-9-]{10,}/],
   ["Upstash/Vercel KV token", /\b(KV_REST_API_TOKEN|UPSTASH_REDIS_REST_TOKEN)\s*[=:]\s*["']?[A-Za-z0-9=_-]{20,}/],
   ["Vercel token", /\bVERCEL_TOKEN\s*[=:]\s*["']?[A-Za-z0-9]{20,}/],
+  ["Supabase secret key", /\bsb_secret_[A-Za-z0-9_-]{20,}\b/],
 ];
 const SKIP = /(^|\/)(pnpm-lock\.yaml|package-lock\.json)$|\.(png|jpe?g|gif|webp|avif|ico|pdf|zip|tgz|woff2?|ttf|otf|mp4|webm|docx)$/i;
 

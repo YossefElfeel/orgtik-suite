@@ -53,7 +53,7 @@ jobs:
       - name: Services routing and private gateway regressions
         run: |
           node tools/services/projects.mjs --check
-          node --test tools/services/services.test.mjs tools/services/local-router.test.cjs tools/services/local-order-key.test.cjs tools/services/local-ports.test.cjs
+          node --test tools/services/services.test.mjs tools/services/persistence-environment.test.mjs tools/services/provision.test.mjs tools/services/local-router.test.cjs tools/services/local-order-key.test.cjs tools/services/local-ports.test.cjs
 
       - name: Typecheck, message catalogs and tests (affected packages)
         run: pnpm turbo run typecheck i18n:check test --affected --continue --concurrency=2
@@ -68,6 +68,8 @@ jobs:
         run: node --test packages/ui/src/auth/client.test.mjs packages/ui/src/auth/access.test.mjs packages/ui/src/auth/urls.test.mjs
       - name: Super-admin launcher and permission boundaries
         run: node --test mock/lib/session-context.test.js mock/lib/mona-super-admin.test.js
+      - name: Supabase persistence and private media contracts
+        run: node --test mock/lib/supabase-client.test.js mock/lib/supabase-stores.test.js mock/apps/wm/image-storage.test.js
       - name: Workspace source manifest and API contracts match
         run: |
           node tools/dev/workspace-manifest.mjs --check

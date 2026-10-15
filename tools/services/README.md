@@ -25,9 +25,11 @@ service count nor route count establishes the final function count.
 
 Vercel service bindings target services within the same project. Each frontend
 therefore has its own internal instance of the existing mock application. No
-public rewrite targets `mock`. All instances use the same confirmed Redis store
+public rewrite targets `mock`. All instances use the same persistence provider
 and datasets: `services-production` for Production and `services-preview` for
-Preview. Persistent state and signing authority are shared through Redis.
+Preview. Supabase is selected explicitly; legacy deployments continue using the
+confirmed Redis store until that switch is configured. Persistent state and
+signing authority must be shared across all nine backend instances.
 
 The public website/router forwards app prefixes to their frontend project
 domains. Browser URLs, API paths and session handoffs retain the shared origin
@@ -91,7 +93,9 @@ After changing the service template, regenerate the deployment profiles with
 `node tools/services/projects.mjs --check`.
 
 Local Services use the isolated `services-local` file dataset under
-`.vercel/dev/mock`, never production Redis. Node middleware is required because
+`.vercel/dev/mock`. The launcher removes inherited Supabase, Redis and hosted
+configuration before loading the mock, so local work cannot write to a cloud
+dataset. Node middleware is required because
 Services does not support Edge function output. App prefixes also apply to
 assets and native browser navigation. Tab sessions use separate keys per app.
 
@@ -122,17 +126,93 @@ are checked afterward. It retains the website's prerendered routes and genuine
 404 responses. This workflow releases Production; the separate Preview dataset
 is configured for future Preview releases.
 
-Provisioning creates only the confirmed project names. It attaches the existing
-Redis integration directly, preserving managed Secrets and the original
-connection's variable prefix. Credential values are never exported. The shared
-mock journal can also be reconnected by its confirmed resource identity if the
-old source project was deleted; provisioning never creates replacement storage.
+Provisioning creates only the confirmed project names. With Supabase selected,
+the configure step receives credentials from GitHub Actions `production`
+environment secrets
+and validates the complete persistence configuration. It writes the backend key
+and signing secret as **sensitive** Vercel environment variables on each
+frontend/private-backend project, so subsequent API/CLI exports cannot read
+them back. The provider name and project URL are ordinary configuration. Values
+stay in memory; logs, workflow summaries and generated project files contain no
+credentials. The public website/router project and other workflow steps never
+receive the Supabase environment secrets. No source-project secret export is used.
+
+Without Supabase selected, provisioning attaches the existing Redis integration
+directly, preserving managed Secrets and the original connection's variable
+prefix. The shared mock journal can also be reconnected by its confirmed
+resource identity if the old Redis source project was deleted. Provisioning
+does not create, reset, delete or upgrade any database or storage plan.
 The shared public origin is set in each project's `SUITE_SERVICES_PUBLIC_URL`. Earlier
 per-app URL settings are not copied. Existing standalone projects remain
 available; automatic legacy deployment matrices are skipped.
 
 The team-wide daily deployment limit still applies to these separate projects.
 Creating a project does not reset that limit.
+
+## Supabase configuration and migration
+
+Use a dedicated Supabase project on the Free plan. Do not reuse an unrelated
+project. In the GitHub deployment environment named `production`, set variable
+`MOCK_PERSISTENCE=supabase` and secrets `SUPABASE_URL`, `SUPABASE_SECRET_KEY` and
+`MOCK_SESSION_SECRET`. The workflow
+passes them only to the frontend configure step, which sets the corresponding
+server variables below. None may have a `NEXT_PUBLIC_` or `VITE_` prefix:
+
+| Variable | Required value |
+| --- | --- |
+| `MOCK_PERSISTENCE` | `supabase` |
+| `SUPABASE_URL` | The dedicated project's HTTPS `https://<project-ref>.supabase.co` origin |
+| `SUPABASE_SECRET_KEY` | A backend secret key (`sb_secret_...`), preferred |
+| `MOCK_SESSION_SECRET` | Shared signing authority, at least 32 UTF-8 bytes; preserve it when importing sessions |
+
+`SUPABASE_SERVICE_ROLE_KEY` remains a compatibility input for a legacy
+`service_role` JWT belonging to the same project. Provisioning normalizes either
+input into `SUPABASE_SECRET_KEY`; a preferred secret key takes precedence over
+retained legacy credentials. An `anon` or publishable key cannot serve the
+backend. Missing, redacted or malformed Supabase configuration stops the
+release when the provider is selected; provisioning does not silently reconnect
+Redis in its place. An unset provider environment variable retains Redis even if
+Supabase secrets are already prepared for a later migration. Keep Vercel's
+sensitive protection enabled; credentials do not need to be readable by the CLI.
+
+Before enabling the deployment environment's Supabase selection:
+
+1. Install and verify the reviewed database migration and private media storage.
+   Confirm public/anonymous callers cannot read persistence records or uploaded
+   objects. Run the adapter's concurrency and rollback checks against an
+   isolated test realm.
+2. Stop hosted writes for the migration window. Export and back up the existing
+   journal, operation receipts, identity accounts, session state, presentation
+   settings and uploaded media. Preserve the signing secret so migrated sessions
+   keep their authority. Verify exported and imported record counts and media
+   hashes before switching traffic.
+3. If Upstash denies reads because of its current plan limit, retain the existing
+   database and leave the production switch pending until a usable export or
+   backup is available. With explicit owner authorization, start with the current
+   mock fixtures instead: use a fresh realm and new signing authority, bootstrap
+   it once before parallel deployment, and retain the old provider untouched.
+   This option does not carry over hosted edits, accounts or sessions.
+4. Store the three deployment environment secrets securely and set its provider
+   variable only after the import or authorized fresh dataset is verified.
+   Run a **full** Services release so all nine
+   backend instances move together. The current workflow promotes frontend
+   projects individually; keep writes paused until every frontend and the shared
+   website have passed their health checks.
+5. Verify sign-in, account changes, a Website Manager content edit and uploaded
+   media after promotion, then reopen writes. Keep the source export and old
+   Redis integration for rollback.
+
+Production and Preview use separate realms in the same project. Preview is not
+a backup. Rolling back requires verified, current data on the old provider:
+setting the deployment environment variable `MOCK_PERSISTENCE=redis` and releasing all
+backends does not copy newer Supabase writes back into Redis. Do not roll back
+while writes are active.
+
+The [Supabase Free plan](https://supabase.com/pricing) has finite database,
+storage and transfer quotas and can pause inactive projects. It cannot guarantee
+unlimited free operation. Check usage before importing and during operation;
+retain an external export because Free does not include automatic backups. No
+paid upgrade or automatic billing change is part of provisioning.
 
 Official references: [Services](https://vercel.com/docs/services),
 [routing](https://vercel.com/docs/services/routing),

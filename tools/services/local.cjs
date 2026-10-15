@@ -54,7 +54,7 @@ async function main() {
     console.log(`OrgTik is already running at ${origin}\nSign in: ${origin}/sos/auth/login`);
     return;
   }
-  for (const key of Object.keys(process.env)) if (/^(KV_|UPSTASH_|REDIS_|VERCEL|MOCK_|ORGTIK_MOCK_|NEXT_PUBLIC_|VITE_|SUITE_)/i.test(key)) delete process.env[key];
+  for (const key of Object.keys(process.env)) if (/^(KV_|UPSTASH_|REDIS_|SUPABASE_|VERCEL|MOCK_|ORGTIK_MOCK_|NEXT_PUBLIC_|VITE_|SUITE_)/i.test(key)) delete process.env[key];
   Object.assign(process.env, {
     SUITE_SERVICES_PUBLIC_URL: origin, ORGTIK_SERVICES: "1", ORGTIK_SERVICES_DEV: "1", VERCEL_ENV: "development",
     MOCK_AUTH_STORE: "file", MOCK_JOURNAL: "file", MOCK_SANDBOX: "services-local",

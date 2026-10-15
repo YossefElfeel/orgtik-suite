@@ -253,6 +253,27 @@ test("hosted claims reuse the configured store credential without requiring anot
   } finally { for (const name of names) { if (previous[name] === undefined) delete process.env[name]; else process.env[name] = previous[name]; } }
 });
 
+test("Supabase-only hosted checkout derives a separate claim key from the shared authority", async () => {
+  const names = ["MOCK_PERSISTENCE", "MOCK_SESSION_SECRET", "MOCK_HANDOFF_SECRET", "MOCK_WEBSITE_ORDER_SECRET", "KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_TOKEN"];
+  const previous = Object.fromEntries(names.map(name => [name, process.env[name]]));
+  try {
+    names.forEach(name => delete process.env[name]);
+    process.env.MOCK_PERSISTENCE = "supabase";
+    process.env.MOCK_SESSION_SECRET = "isolated-supabase-authority-for-order-test";
+    const f = fixture({ hosted: true, orderSecret: null });
+    const quote = await f.quote([group("software", ["files"])]);
+    assert.equal(quote.status, 200);
+    const order = await f.pay(quote.body.data.quoteId, "supabase-only-key");
+    assert.equal(order.status, 200);
+    assert.equal(order.body.data.paymentStatus, "succeeded");
+    assert.ok(!JSON.stringify(order.body).includes(process.env.MOCK_SESSION_SECRET));
+    assert.equal((await f.link(order.body.data)).status, 200);
+    delete process.env.MOCK_SESSION_SECRET;
+    process.env.KV_REST_API_TOKEN = "fixture-unused";
+    assert.equal((await f.quote([group("software", ["files"])] )).status, 503);
+  } finally { for (const name of names) { if (previous[name] === undefined) delete process.env[name]; else process.env[name] = previous[name]; } }
+});
+
 test("published service cells reach public quotes only at effectiveAt, while country overrides retain precedence", async () => {
   const f = fixture(), staff = { authorization: "Bearer admin" }, visitor = { "x-mock-country": "SA" };
   const planId = "svc_web_graphic_design", cart = [group("service", ["design/graphic-design"], 3)];

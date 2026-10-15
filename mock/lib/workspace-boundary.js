@@ -361,7 +361,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     if (initialized) return;
     const before = await accountStore.accounts();
     identityFor().hydrate(before);
-    if (store.kind !== "redis") {
+    if (store.kind !== "redis" && !store.atomicIdentity) {
       await store.initializeIdentity(new Map([...authStorage.snapshot(identityFor()), ...before]));
       accountStore.accounts = () => store.identityAccounts();
     } else {
