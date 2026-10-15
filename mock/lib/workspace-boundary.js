@@ -432,6 +432,10 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const answer = (res, data, message = "Success") => res.json({ success: true, statusCode: 200, message, data });
     const safeUser = user => identityFor().publicUser(user);
     const ownContext = () => principal()?.context.workspaceContext;
+    const centralDirectory = () => {
+      const p = principal();
+      return p?.claims.mode === 'staff' && p.claims.aud === 'staff:admin' && !p.readOnly && p.context.staffAccess?.permissions.admin?.includes('staff:view');
+    };
     const workspace = () => {
       const context = ownContext();
       if (!context) throw failure(403, "workspace_required", "Choose a workspace to continue.");
@@ -623,7 +627,10 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       const ws = workspace();
       return Object.fromEntries(Object.keys(TOOL_DEFINITIONS).map(tool => [tool, seatCounts(platform().getStore(), ws, tool)]));
     }));
-    app.get(["/api/users", "/api/users/all", "/api/staff"], (req, res) => {
+    app.get(["/api/users", "/api/users/all", "/api/staff"], (req, res, next) => {
+      // Only the verified administration family may reach the global directory.
+      // Workspace tabs keep their scoped projection, even for the same person.
+      if (centralDirectory() && req.path !== '/api/staff') return next();
       if (!ownContext()) return res.status(403).json({ success: false, code: "workspace_required" });
       const data = ownedPeople().map(user => ({ id: user.id, key: user.key, firstName: user.firstName, lastName: user.lastName, email: user.email, avatar: user.avatar, isActive: user.isActive }));
       answer(res, data);
@@ -632,7 +639,8 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       const p = principal(); if (!p) return res.status(401).json({ success: false });
       answer(res, { ...safeUser(p.user), scopes: p.context.scopes, workspaceContext: p.context.workspaceContext, staffAccess: p.context.staffAccess });
     });
-    app.get("/api/users/:id", (req, res) => {
+    app.get("/api/users/:id", (req, res, next) => {
+      if (centralDirectory()) return next();
       const user = ownedPeople().find(row => String(row.id) === req.params.id);
       if (!user) return res.status(404).json({ success: false, message: "This person was not found in your workspace." });
       answer(res, user.id === principal()?.user.id ? safeUser(user) : { id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, avatar: user.avatar });
@@ -777,6 +785,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
       for (const related of relatedRuntimes.values()) registry.commit(related);
       const after = platform().exportState(), workspaceState = registry.exportState(), staffState = exportStaffState();
       const changes = [...authStorage.snapshot(identity)].filter(([id, value]) => saved.get(id) !== value).map(([id, value]) => ({ id, value, expected: saved.get(id) ?? null }));
+      const deletedAccounts = changes.filter(change => JSON.parse(change.value).user.deletedAt && !(change.expected && JSON.parse(change.expected).user.deletedAt)).map(change => Number(change.id));
       const changed = JSON.stringify(after) !== JSON.stringify(platformBefore) || JSON.stringify(workspaceState) !== JSON.stringify(runtimesBefore) || JSON.stringify(staffState) !== JSON.stringify(staffBefore) || changes.length;
       if (changed) {
         const identityEffect = { changes, ...(store.kind === "redis" ? { accountsKey: `orgtik:identity:${realm}:accounts`, emailsKey: `orgtik:identity:${realm}:emails` } : {}) };
@@ -785,6 +794,12 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
         commitAttempted = true;
         const committed = await store.commit(entry, { expectedEpoch: persist.epoch, expectedRevision: persist.applied, identity: identityEffect });
         persist.applied = committed.sequence; persist.modern = true; persist.workspaceModern = true;
+        // Dispatch finishes before the checkpoint commits. Disconnect live chat
+        // only after deletion is durable, so a rejected commit leaves it intact.
+        for (const id of deletedAccounts) {
+          try { require('../apps/sos').cleanupDeletedUser?.(id); }
+          catch { console.warn('[accounts] Committed deletion could not disconnect a live chat connection.'); }
+        }
       }
       await authority.commitPending(frame);
       return send(result);

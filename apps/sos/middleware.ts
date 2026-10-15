@@ -11,6 +11,7 @@ const AuthRoutes = [
   "/auth/redirecting",
   "/auth/invite",
   "/auth/handoff",
+  "/auth/staff",
 ];
 export function middleware(request: NextRequest) {
   // Services use the validated tab session and signed API admission. Cookie
@@ -36,6 +37,7 @@ export function middleware(request: NextRequest) {
     pathname !== "/auth/redirecting" &&
     pathname !== "/auth/invite" &&
     pathname !== "/auth/handoff" &&
+    pathname !== "/auth/staff" &&
     pathname !== "/auth/reset-password" &&
     !(pathname === "/auth/login" && request.nextUrl.searchParams.get("switch") === "1") &&
     !staffLogin &&

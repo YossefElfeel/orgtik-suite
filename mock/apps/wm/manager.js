@@ -4,7 +4,7 @@ const crypto = require("node:crypto");
 const config = require("./seed/manager-pages.json");
 const { makeStore } = require("./content");
 function sourceIds(id) {
-  return [...new Set(Object.values(config[id]?.fields ?? {}).flatMap(section => section.fields.map(field => field.record)))].filter(key=>key!==id);
+  return [...new Set([...Object.values(config[id]?.fields ?? {}),...Object.values(config[id]?.supplemental ?? {})].flatMap(section => section.fields.map(field => field.record)))].filter(key=>key!==id);
 }
 function orderOf(store, type) {
   const rows = [...store.entries.values()].filter(entry=>entry.type===type).sort((a,b)=>a.order-b.order);

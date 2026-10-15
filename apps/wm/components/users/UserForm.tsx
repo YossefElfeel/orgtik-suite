@@ -37,7 +37,8 @@ export function UserForm({
   const tr = useTranslations("Roles");
   const te = useTranslations("Editor");
   const { data: me } = useMeQuery();
-  const { data: roles = [] } = useRolesQuery();
+  const roleQuery = useRolesQuery();
+  const roles = roleQuery.data ?? [];
   const [form, setForm] = useState({
     firstName: user?.firstName ?? "",
     lastName: user?.lastName ?? "",
@@ -47,13 +48,21 @@ export function UserForm({
     roles: user?.roles ?? [],
   });
   const [problem, setProblem] = useState("");
+  const [roleProblem, setRoleProblem] = useState(false);
   const [create, creating] = useCreateUserMutation();
   const [update, updating] = useUpdateUserMutation();
   const accounts = Boolean(me?.identity.accounts);
   const busy = creating.isLoading || updating.isLoading;
-  const self = user?.id === me?.user.id;
+  const self = Boolean(user && user.id === me?.user.id);
+  const rolesUnavailable = roleQuery.isFetching || roleQuery.isError || !roleQuery.data;
+  const rolesChanged = !user || form.roles.length !== user.roles.length || form.roles.some(key => !user.roles.includes(key));
+  const unavailableRoleSelected = !rolesUnavailable && rolesChanged && form.roles.some(key => !roles.some(role => role.key === key));
+  const roleSelectionBlocked = unavailableRoleSelected || (form.roles.length > 0 && rolesChanged && rolesUnavailable);
+  const hasLockedRole = form.roles.some(key => roles.some(role => role.key === key && role.protected && !accounts));
   const save = async () => {
+    if (readOnly || busy || roleSelectionBlocked) return;
     setProblem("");
+    setRoleProblem(false);
     try {
       if (user)
         await update({
@@ -77,11 +86,14 @@ export function UserForm({
           lastName: form.lastName,
           email: form.email,
           password: form.password,
+          roles: form.roles,
         }).unwrap();
       toast.success(te("saved"));
       onClose();
     } catch (error) {
       const e = error as ApiError;
+      const invalidRoles = e.code === "invalid_roles" || Boolean(e.fieldErrors?.roles);
+      if (invalidRoles) setRoleProblem(true);
       setProblem(
         e.status === 412
           ? t("accountStale")
@@ -89,9 +101,11 @@ export function UserForm({
             ? t("selfLockout")
             : e.code === "internal_member_required"
               ? t("internalMemberRequired")
-              : e.status === 422
-                ? t("accountInvalid")
-                : te("saveFailed"),
+              : invalidRoles
+                ? ""
+                : e.status === 422
+                  ? t("accountInvalid")
+                  : te("saveFailed"),
       );
     }
   };
@@ -118,7 +132,7 @@ export function UserForm({
             <Field key={key} label={t(key)}>
               <Input
                 type={key === "email" ? "email" : "text"}
-                disabled={readOnly || !accounts}
+                disabled={readOnly || !accounts || busy}
                 value={form[key]}
                 onChange={(e) => setForm({ ...form, [key]: e.target.value })}
               />
@@ -129,46 +143,63 @@ export function UserForm({
               <Input
                 type="password"
                 autoComplete="new-password"
+                disabled={busy}
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
               />
             </Field>
           ) : (
-            <>
-              <label className="flex items-center gap-3">
-                <Switch
-                  checked={form.active}
-                  disabled={readOnly || !accounts || self}
-                  onCheckedChange={(active) => setForm({ ...form, active })}
-                />
-                {t("activeAccount")}
-              </label>
-              <Field
-                label={t("websiteRoles")}
-                description={t("websiteRolesHelp")}
-                group
-              >
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {roles.map((role) => (
-                    <Checkbox
-                      key={role.key}
-                      checked={form.roles.includes(role.key)}
-                      disabled={readOnly || (role.protected && !accounts) || (self && ["wm_admin", "wm_owner", "wm_super_admin"].includes(role.key) && form.roles.includes(role.key))}
-                      onCheckedChange={(checked) =>
-                        setForm({
-                          ...form,
-                          roles: checked
-                            ? [...form.roles, role.key]
-                            : form.roles.filter((key) => key !== role.key),
-                        })
-                      }
-                      label={!role.labelOverridden && tr.has(role.key) ? tr(role.key) : role.label}
-                    />
-                  ))}
-                </div>
-              </Field>
-            </>
+            <label className="flex items-center gap-3">
+              <Switch
+                checked={form.active}
+                disabled={readOnly || !accounts || self || busy}
+                onCheckedChange={(active) => setForm({ ...form, active })}
+              />
+              {t("activeAccount")}
+            </label>
           )}
+          <Field
+            label={t("rolesFilter")}
+            description={t("websiteRolesHelp")}
+            error={roleProblem || unavailableRoleSelected ? t("userRolesInvalid") : undefined}
+            group
+          >
+            {roleQuery.isFetching ? <p role="status" className="text-body-sm text-fg-muted">{t("userRolesLoading")}</p> : null}
+            {roleQuery.isError ? <p role="alert" className="text-body-sm text-danger">{t("userRolesLoadFailed")}</p> : null}
+            {roleQuery.isError || roleProblem || unavailableRoleSelected ? <Button className="self-start" variant="link" size="sm" disabled={busy} loading={roleQuery.isFetching} onClick={() => void roleQuery.refetch()}>{t("userRolesRetry")}</Button> : null}
+            <div className="grid gap-3 pt-1 sm:grid-cols-2" aria-busy={roleQuery.isFetching || undefined}>
+              <Checkbox
+                className="sm:col-span-2"
+                label={t("noAccess")}
+                description={t("noAccessHelp")}
+                checked={form.roles.length === 0}
+                disabled={readOnly || busy || self || hasLockedRole || Boolean(user && rolesUnavailable)}
+                onCheckedChange={checked => {
+                  if (checked) {
+                    setForm(previous => ({ ...previous, roles: [] }));
+                    setRoleProblem(false);
+                  }
+                }}
+              />
+              {roles.map((role) => (
+                <Checkbox
+                  key={role.key}
+                  checked={form.roles.includes(role.key)}
+                  disabled={readOnly || busy || rolesUnavailable || (role.protected && !accounts) || (self && ["wm_admin", "wm_owner", "wm_super_admin"].includes(role.key) && form.roles.includes(role.key))}
+                  onCheckedChange={(checked) => {
+                    setRoleProblem(false);
+                    setForm(previous => ({
+                      ...previous,
+                      roles: checked
+                        ? [...new Set([...previous.roles, role.key])]
+                        : previous.roles.filter((key) => key !== role.key),
+                    }));
+                  }}
+                  label={!role.labelOverridden && tr.has(role.key) ? tr(role.key) : role.label}
+                />
+              ))}
+            </div>
+          </Field>
         </DialogBody>
         <DialogFooter>
           <Button variant="secondary" disabled={busy} onClick={onClose}>
@@ -181,7 +212,8 @@ export function UserForm({
                 !form.firstName.trim() ||
                 !form.lastName.trim() ||
                 !form.email.trim() ||
-                (!user && form.password.length < 8)
+                (!user && form.password.length < 8) ||
+                roleSelectionBlocked
               }
               onClick={save}
             >

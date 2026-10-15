@@ -1,9 +1,10 @@
-const { createIdentityUser } = require("../../lib/accounts");
-const { ROLES, permissionsFor } = require("./permissions");
+const { createIdentityUser, deleteIdentityUser } = require("../../lib/accounts");
+const { ROLES, permissionsFor, availableRoleKeys } = require("./permissions");
 const { createHash } = require("node:crypto");
 
 function capabilities(identity, actor) {
   return {
+    atomicAccountSetup: true,
     accounts: Boolean(
       identity.grants?.global?.[actor.key]?.roles.includes("super_admin"),
     ),
@@ -17,6 +18,7 @@ function registerUsers(
     store,
     definitions = {},
     overrides = {},
+    deletions = {},
     need,
     ok,
     fail,
@@ -25,7 +27,7 @@ function registerUsers(
   },
 ) {
   const rolesOf = (user) =>
-    identity.grants.website_manager?.[user.key]?.roles ?? [];
+    availableRoleKeys(identity.grants.website_manager?.[user.key]?.roles ?? [], definitions, deletions);
   const versionOf = (user) =>
     createHash("sha256")
       .update(
@@ -116,23 +118,61 @@ function registerUsers(
         "suite_admin_required",
         "Suite account administration requires a central super administrator.",
       );
-    const errors = validAccount(req.body ?? {});
+    const body = req.body ?? {};
+    const errors = validAccount(body);
+    if (body.active !== undefined && typeof body.active !== "boolean")
+      errors.active = "invalid";
     if (Object.keys(errors).length)
       return fail(res, 422, "invalid", "Check the account fields.", {
         fieldErrors: errors,
       });
-    const body = req.body;
+    // Optional initial access is validated before account creation. This keeps an
+    // interrupted installer from leaving an active, unconfigured account behind.
+    if (
+      body.roles !== undefined &&
+      (!Array.isArray(body.roles) ||
+        body.roles.some((role) => deletions[role] || !Object.hasOwn(ROLES, role) && !Object.hasOwn(definitions, role)) ||
+        new Set(body.roles).size !== body.roles.length)
+    )
+      return fail(res, 422, "invalid_roles", "Choose valid Website Manager roles.");
+    const roles = body.roles ?? [];
+    if (body.rolePaused !== undefined) {
+      if (typeof body.rolePaused !== "boolean")
+        return fail(res, 422, "invalid_pause", "Choose a valid role access state.");
+      if (!roles.length)
+        return fail(res, 409, "role_required", "Assign a role before pausing its access.");
+    }
+    const S = platform(), workspace = roles.length ? S?.workspace("ws_orgtik") : null;
+    if (roles.length && !workspace)
+      return fail(res, 409, "internal_member_required", "Restore active internal membership in the central suite first.");
     const user = createIdentityUser(identity, {
       firstName: body.firstName.trim(),
       lastName: body.lastName.trim(),
       email: body.email.trim().toLowerCase(),
       username: `staff-${identity.users.reduce((n, row) => Math.max(n, row.id), 0) + 1}`,
       password: body.password,
+      isActive: body.active,
       userType: "employee",
       keyPrefix: "sos-u",
     });
     (identity.grants.global ||= {})[user.key] = { roles: [], permissions: [] };
     log(req.who.user, "user_create", user);
+    if (roles.length) {
+      workspace.members.push({
+        id: S.id("member"), userKey: user.key,
+        name: identity.fullName(user), email: user.email,
+        role: "member", status: "active", tools: [], toolGrants: {},
+        joinedAt: S.iso(S.now()), accessEpoch: 0,
+      });
+      workspace.authorityRevision = (workspace.authorityRevision || 0) + 1;
+      (identity.grants.website_manager ||= {})[user.key] = {
+        roles: [...roles], permissions: [], rolePaused: body.rolePaused === true,
+      };
+      S.db.staffAccessEpochs ||= {};
+      S.db.staffAccessEpochs[user.key] = body.rolePaused ? 2 : 1;
+      log(req.who.user, "user_roles", user);
+      if (body.rolePaused) log(req.who.user, "user_role_pause", user);
+    }
     ok(res, view(user), {}, 201);
   });
   app.patch("/v2/admin/users/:id", need("users:manage"), (req, res) => {
@@ -180,7 +220,7 @@ function registerUsers(
     if (body.roles !== undefined) {
       if (
         !Array.isArray(body.roles) ||
-        body.roles.some((role) => !Object.hasOwn(ROLES, role) && !Object.hasOwn(definitions, role)) ||
+        body.roles.some((role) => deletions[role] || !Object.hasOwn(ROLES, role) && !Object.hasOwn(definitions, role)) ||
         new Set(body.roles).size !== body.roles.length
       )
         return fail(
@@ -203,8 +243,8 @@ function registerUsers(
       if (!capabilities(identity, actor).accounts && ["wm_owner", "wm_super_admin"].some(role => body.roles.includes(role) !== rolesOf(user).includes(role)))
         return fail(res, 403, "suite_admin_required", "Only central super administrators can assign owner or super administrator access.");
       if (user.id === actor.id) {
-        const next = permissionsFor(body.roles, overrides);
-        if (["roles:manage", "users:manage", "settings:view"].some(permission => (req.who.permissions ?? permissionsFor(rolesOf(actor), overrides)).includes(permission) && !next.includes(permission)))
+        const next = permissionsFor(body.roles, overrides, deletions);
+        if (["roles:manage", "users:manage", "settings:view"].some(permission => (req.who.permissions ?? permissionsFor(rolesOf(actor), overrides, deletions)).includes(permission) && !next.includes(permission)))
           return fail(res, 409, "self_lockout", "You cannot remove your own administration access.");
       }
       const workspace = S?.workspace("ws_orgtik");
@@ -281,6 +321,20 @@ function registerUsers(
     }
     user.updatedAt = new Date().toISOString();
     ok(res, view(user));
+  });
+  app.delete("/v2/admin/users/:id", need("users:manage"), (req, res) => {
+    if (!capabilities(identity, req.who.user).accounts)
+      return fail(res, 403, "suite_admin_required", "Suite account administration requires a central super administrator.");
+    const user = identity.findUser(Number(req.params.id));
+    if (!user || user.deletedAt) return fail(res, 404, "not_found", "Account not found.");
+    if (req.get("if-match") !== versionOf(user)) return fail(res, 412, "stale", "This account changed. Reload it before deleting.");
+    try {
+      deleteIdentityUser(identity, {user,actor:req.who.user,platform:platform()});
+      log(req.who.user, "user_delete", user);
+      res.status(204).end();
+    } catch(error) {
+      fail(res, error.status || 503, error.code || "account_authority_unavailable", error.status ? error.message : "Account deletion is temporarily unavailable.");
+    }
   });
 }
 module.exports = { registerUsers, capabilities };

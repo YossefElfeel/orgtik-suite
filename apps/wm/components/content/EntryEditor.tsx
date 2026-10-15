@@ -12,7 +12,6 @@ import { useLocale, useTranslations } from "next-intl";
 import {
   ClockCounterClockwise,
   Flask,
-  Monitor,
   Translate,
 } from "@phosphor-icons/react";
 import {
@@ -64,10 +63,19 @@ import { SectionOrder } from "./SectionOrder";
 import { SectionAttachments } from "./SectionAttachments";
 import { MediaPicker } from "@/components/media/MediaPicker";
 import managerPages from "@/lib/manager-pages.json";
-import { PageFields, PageCards, type PageField } from "./PageFields";
+import { PageFields, PageCards, PageSectionCard, PagePlacementHint, type PageField } from "./PageFields";
+import { pageMediaPlacement, pageSectionPlacement, resolvedPageFieldPlacement } from "@/lib/pagePlacement";
+import { pagePreviewHref } from "@/lib/pagePreview";
+import { SectionPreviewLink } from "./SectionPreviewLink";
+import { CaseStudyFormatLabels } from "./CaseStudyFormatLabels";
+import { caseFormatExamples, caseFormatPreviewHref } from "@/lib/caseFormatLabels";
+import { CommerceNavigation, CommerceSection } from "./CommerceEditor";
+import { commerceNavigation, commercePresentation } from "@/lib/commerceEditor";
+import { commercePreviewHref } from "@/lib/commercePreview";
 import { RotationWords } from "./RotationWords";
 import { CollectionOrder } from "./CollectionOrder";
 import sectionMap from "@/lib/cms-sections.json";
+import { orderEditorSections } from "@/lib/editorSectionOrder";
 import { ReviewEditor } from "./ReviewEditor";
 import { ArticleBodyEditor, synchronizeArticleEdits } from "./ArticleBodyEditor";
 import {
@@ -139,6 +147,9 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   const tn = useTranslations("NoAccess");
   const tf = useTranslations("Formats");
   const tl = useTranslations("Fields");
+  const caseLabels = useTranslations("CaseStudyLabels");
+  const purchasing = useTranslations("PurchasingEditor");
+  const placementText = useTranslations("PagePlacement");
   const f = useFormatter();
   const uiLocale = useLocale();
   const permitted = useCan();
@@ -151,7 +162,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   const site = useSiteQuery();
   const contentLocales = (site.data?.locales.filter(locale=>locale.enabled).map(locale=>locale.code) ?? LOCALES) as Locale[];
   const languageName = (locale:string) => NATIVE[locale as Locale] ?? new Intl.DisplayNames([locale],{type:"language"}).of(locale) ?? locale;
-  const pageConfig = (managerPages as Record<string, {fields?: Record<string,{label:string;fields:PageField[]}>; rotationSource?: "service"|"softwareModule"|"caseStudy"|"article"; staticRotation?: string[]; collections?: Record<string, "service"|"caseStudy"|"article">}>)[entry.id];
+  const pageConfig = (managerPages as Record<string, {fields?: Record<string,{label:string;fields:PageField[]}>; supplemental?: Record<string,{titleKey?:string;fields:PageField[]}>; rotationSource?: "service"|"softwareModule"|"caseStudy"|"article"; staticRotation?: string[]; collections?: Record<string, "service"|"caseStudy"|"article">}>)[entry.id];
   const sourceQuery = usePageSourcesQuery(entry.id, {skip: !pageConfig || seoOnly});
   const [sourceEdits, setSourceEdits] = useState<Record<string, Partial<Record<Locale, Tree>>>>({});
   const references = (sectionMap as Record<string, { references?: Record<string, string> }>)[entry.id]?.references ?? {};
@@ -161,7 +172,8 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   const [lang, setLang] = useState<Locale>(
     asked && (contentLocales.includes(asked) || ["es","pt","nl"].includes(asked)) ? asked : "en",
   );
-  const [section, setSection] = useState<string>(seoOnly ? "seo" : params.get("section") ?? sections[0]?.value ?? "seo");
+  const [section, setSection] = useState<string>(seoOnly ? "seo" : params.get("section") ?? (entry.id === "gl_commerce" ? commerceNavigation(sections)[0]?.sections[0]?.value : orderEditorSections(entry.id, sections, entry.content.presentation?.sectionOrder)[0]?.value) ?? "seo");
+  const [sharedPreviewSection, setSharedPreviewSection] = useState<string | null>(null);
   // Unsaved edits per language, over the entry's current content.
   const [edits, setEdits] = useState<Partial<Record<Locale, Tree>>>({});
   const [seoEdits, setSeoEdits] = useState<Partial<Record<Locale, SeoBlock>>>(
@@ -189,6 +201,9 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
     type.key === "service" || type.key === "review" || type.neutral.includes("category");
   const relatedServices = useEntriesQuery({ type: "service", pageSize: 100 }, { skip: type.key !== "review" });
   const relatedSoftware = useEntriesQuery({ type: "softwareModule", pageSize: 100 }, { skip: type.key !== "review" });
+  const caseStudies = useEntriesQuery({ type: "caseStudy", pageSize: 100 }, { skip: entry.id !== "gl_caseFormats" });
+  const formatExamples = caseFormatExamples(caseStudies.data?.items ?? []);
+  const formatExample = Object.values(formatExamples)[0];
   const families = useEntriesQuery(
     { type: "serviceFamily", pageSize: 100 },
     { skip: !needsFamilies },
@@ -260,6 +275,18 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
           string
         >
       )[type.key] ?? "/");
+  const previewHref = (target = section === "shared-copy" ? sharedPreviewSection ?? "seo" : section): string | undefined => {
+    const placement = pageSectionPlacement(entry.id, target);
+    if (placement?.preview === false) return undefined;
+    if (SHARED_PAGES[entry.id]?.id === "gl_commerce" && target !== "seo") return commercePreviewHref(target, lang);
+    return entry.id === "gl_commerce"
+      ? commercePreviewHref(target, lang) ?? `/preview?path=%2Fplans&lang=${lang}`
+      : entry.id === "gl_caseFormats" && formatExample
+      ? caseFormatPreviewHref(formatExample, lang)
+      : type.key === "page"
+      ? pagePreviewHref({ pageId: entry.id, section: target, locale: lang, path: previewPath })
+      : `/preview?path=${encodeURIComponent(previewPath)}&lang=${lang}${placement?.previewTarget ? `&section=${encodeURIComponent(placement.previewTarget)}` : ""}`;
+  };
 
   // Leaving with unsaved edits asks first (the browser's own prompt).
   useEffect(() => {
@@ -458,15 +485,20 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
   });
   // A section is named by the page's own heading, a field name, or the editor's tab name.
   const sectionName = (s: EditorSection) =>
-    (s.label === "Custom Cursor" || s.label === "View project" ? ti("customCursor") : s.label) ??
+    pageSectionPlacement(entry.id, s.value)?.title ? placementText(pageSectionPlacement(entry.id, s.value)!.title) : entry.id === "gl_commerce" ? purchasing(commercePresentation(s.value).titleKey) : (s.label === "Custom Cursor" || s.label === "View project" ? ti("customCursor") : s.label) ??
     (s.labelKey && tl.has(s.labelKey)
       ? tl(s.labelKey)
       : t.has(`tabs.${s.value}`)
         ? t(`tabs.${s.value}`)
         : t("sectionFallback", { key: s.value }));
-  const orderKeys = [...presentation.sectionOrder, ...sections.map(item=>item.value)];
+  const purchasingMediaDescription = (key: string) => {
+    if (key.startsWith("siteHeader-") || key.startsWith("accountControl-")) return purchasing("mediaHeader");
+    if (key === "commerceLayout-footer") return purchasing("mediaFooter");
+    const screen = key.startsWith("purchasePlans-") ? "plans" : key.startsWith("purchaseCart-") ? "cart" : key.startsWith("purchaseCheckout-") || key.startsWith("paymentDetails-") ? "checkout" : undefined;
+    return screen ? purchasing("mediaPage", { page: purchasing(`screens.${screen}`) }) : purchasing("mediaAcross");
+  };
   const tabItems = [
-    ...[...sections].sort((a,b)=>orderKeys.indexOf(a.value)-orderKeys.indexOf(b.value)).map((s) => ({
+    ...orderEditorSections(entry.id, sections, presentation.sectionOrder).map((s) => ({
       value: s.value,
       label: <span dir="auto">{sectionName(s)}</span>,
     })),
@@ -482,6 +514,12 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
 
   // What every language shares (icon, date, family...) and the image with its description in this
   // language. Shared fields are set in English; the description is per language.
+  const sharedField = (path: string, label: string, description?: string) => {
+    const placement = resolvedPageFieldPlacement(entry.id, section, entry.id, path, placementText);
+    const descriptions = [...new Set([placement?.hint, description].filter((value): value is string => Boolean(value)))];
+    return { label: placement?.label ?? label, description: descriptions.length ? descriptions.join(" ") : undefined };
+  };
+  const sharedImagePlacement = resolvedPageFieldPlacement(entry.id, section, entry.id, "image.src", placementText);
   const shared = hasShared ? (
     <section
       aria-labelledby="shared"
@@ -497,12 +535,12 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
       </div>
       <div className={ctx.fullWidthFields ? "grid min-w-0 gap-4" : "grid gap-4 sm:grid-cols-2"}>
         {type.neutral.includes("icon") ? (
-          <Field label={tl("icon")} description={t("iconHelp")}>
+          <Field {...sharedField("icon", tl("icon"), t("iconHelp"))}>
             <IconPicker disabled={!editable || lang !== "en"} value={neutral.icon ?? ""} onChange={icon => setNeutralEdit(previous => ({ ...previous, icon }))} />
           </Field>
         ) : null}
         {type.neutral.includes("category") ? (
-          <Field label={tl("articleCategory")}>
+          <Field {...sharedField("category", tl("articleCategory"))}>
             <Select
               readOnly={!editable || lang !== "en"}
               value={neutral.category ?? ""}
@@ -518,11 +556,11 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         ) : null}
         {type.neutral.includes("publishedOn") ? (
           <Field
-            label={tl("publishedOn")}
+            {...sharedField("publishedOn", tl("publishedOn"))}
             error={errors.publishedOn ? t("errorRequired") : undefined}
           >
             <DatePicker
-              aria-label={tl("publishedOn")}
+              aria-label={sharedField("publishedOn", tl("publishedOn")).label}
               disabled={!editable || lang !== "en"}
               value={neutral.publishedOn ?? null}
               onChange={(v) =>
@@ -533,7 +571,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         ) : null}
         {type.neutral.includes("readingMinutes") ? (
           <Field
-            label={tl("readingMinutes")}
+            {...sharedField("readingMinutes", tl("readingMinutes"))}
             error={errors.readingMinutes ? t("errorRequired") : undefined}
           >
             <NumberField
@@ -552,7 +590,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
           </Field>
         ) : null}
         {type.neutral.includes("priceMode") ? (
-          <Field label={tl("priceMode")} description={t("priceModeHelp")}>
+          <Field {...sharedField("priceMode", tl("priceMode"), t("priceModeHelp"))}>
             <Select
               readOnly={lockShared || pricesLocked}
               value={neutral.priceMode ?? "indicative"}
@@ -578,7 +616,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         ) : null}
         {type.neutral.includes("status") ? (
           <Field
-            label={tl("roadmapStatus")}
+            {...sharedField("status", tl("roadmapStatus"))}
             error={errors.status ? t("errorRequired") : undefined}
           >
             <Select
@@ -599,7 +637,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         ) : null}
         {type.neutral.includes("period") ? (
           <Field
-            label={tl("period")}
+            {...sharedField("period", tl("period"))}
             error={errors.period ? t("errorRequired") : undefined}
           >
             <Select
@@ -617,11 +655,11 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         ) : null}
         {type.neutral.includes("year") ? (
           <Field
-            label={tl("year")}
+            {...sharedField("year", tl("year"))}
             error={errors.year ? t("errorYear") : undefined}
           >
             <YearPicker
-              label={tl("year")}
+              label={sharedField("year", tl("year")).label}
               disabled={lockShared}
               value={neutral.year ?? ""}
               onValueChange={(year) =>
@@ -632,7 +670,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         ) : null}
         {type.neutral.includes("progress") ? (
           <Field
-            label={tl("progress")}
+            {...sharedField("progress", tl("progress"))}
             error={
               errors.progress
                 ? t("errorRange", { min: 0, max: 100 })
@@ -654,8 +692,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         ) : null}
         {type.neutral.includes("versionLabel") ? (
           <Field
-            label={tl("versionLabel")}
-            description={t("versionHelp")}
+            {...sharedField("versionLabel", tl("versionLabel"), t("versionHelp"))}
             error={
               errors.versionLabel
                 ? errors.versionLabel === "version_exists"
@@ -676,11 +713,11 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         ) : null}
         {type.neutral.includes("effectiveFrom") ? (
           <Field
-            label={tl("effectiveFrom")}
+            {...sharedField("effectiveFrom", tl("effectiveFrom"))}
             error={errors.effectiveFrom ? t("errorEffectiveFrom") : undefined}
           >
             <DatePicker
-              aria-label={tl("effectiveFrom")}
+              aria-label={sharedField("effectiveFrom", tl("effectiveFrom")).label}
               disabled={lockShared}
               value={neutral.effectiveFrom ?? null}
               onChange={(v) =>
@@ -737,10 +774,9 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         <>
         {errors["image.src"] ? <p role="alert" className="text-body-sm text-danger">{t("errorRequired")}</p> : null}
         <div className={ctx.fullWidthFields ? "grid min-w-0 items-start gap-4" : "grid min-w-0 items-start gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(16rem,0.65fr)]"}>
-          <div className="min-w-0"><MediaPicker imagesOnly alwaysOpen={type.key === "caseStudy"} value={imageSrc ?? entry.content.image.src} onChange={(src, media) => { setImageSrc(src); setImageFocal(media?.focal); if (media?.alt) setAltEdits(media.alt); }} disabled={!editable || lang !== "en"} /></div>
+          <div className="min-w-0">{sharedImagePlacement ? <div className="mb-2 flex flex-col gap-1"><h4 className="text-label text-fg">{sharedImagePlacement.label}</h4>{sharedImagePlacement.hint ? <p className="text-body-sm text-fg-muted">{sharedImagePlacement.hint}</p> : null}</div> : null}<MediaPicker imagesOnly alwaysOpen={type.key === "caseStudy"} value={imageSrc ?? entry.content.image.src} onChange={(src, media) => { setImageSrc(src); setImageFocal(media?.focal); if (media?.alt) setAltEdits(media.alt); }} disabled={!editable || lang !== "en"} /></div>
           <Field
-            label={t("altText")}
-            description={alt[lang] ? t("altHelp") : t("altMissing")}
+            {...sharedField("image.alt", t("altText"), alt[lang] ? t("altHelp") : t("altMissing"))}
             className="min-w-0 flex-1"
           >
             <Textarea
@@ -773,7 +809,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         ]}
         title={<span dir="auto">{name}</span>}
         description={
-          entry.department ? tf(entry.department) : tt(`${type.key}.one`)
+          type.key === "page" ? undefined : entry.id === "gl_commerce" ? purchasing("summary") : entry.id === "gl_caseFormats" ? caseLabels("summary") : entry.department ? tf(entry.department) : tt(`${type.key}.one`)
         }
         status={
           <span className="flex flex-wrap items-center gap-2">
@@ -796,15 +832,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
         actions={
           <div className="ms-auto flex flex-wrap justify-end gap-2">
             {viewing && mayEdit ? <Button onClick={() => router.replace(editHref)}>{ti("edit")}</Button> : null}
-            <Button
-              variant="ghost"
-              startIcon={<Monitor />}
-              onClick={() =>
-                router.push(`/preview?path=${encodeURIComponent(previewPath)}`)
-              }
-            >
-              {tp("button")}
-            </Button>
+            <SectionPreviewLink href={previewHref() ?? "/preview"} disabled={!previewHref() || entry.id === "gl_caseFormats" && !formatExample || entry.id === "gl_commerce" && !commercePreviewHref(section, lang)} />
             {!viewing && !seoOnly ? <LifecycleActions
               entry={entry}
               area={type.area}
@@ -1001,7 +1029,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
               : undefined
           }
         >
-          {side ? (
+          {side && entry.id === "gl_commerce" ? <CommerceNavigation sections={sections} active={section} onSelect={setSection} /> : side ? (
             <>
               {/* On a phone the column would push the form out of sight: a picker instead. */}
               <Select
@@ -1030,7 +1058,9 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
             {sections.map((s, i) => (
               <TabsPanel key={s.value} value={s.value}>
                 {i === 0 ? shared : null}
-                {type.key === "review" ? <ReviewEditor value={tree ?? {}} fallback={english} onChange={setTree} ctx={ctx}
+                <PagePlacementHint pageId={entry.id} section={s.value} />
+                {pageConfig?.supplemental?.[s.value] ? (sourceQuery.isLoading ? <LoadingState rows={3} /> : sourceQuery.error ? <ErrorState onRetry={sourceQuery.refetch} /> : <div className="mb-5"><PageFields pageId={entry.id} section={s.value} fields={pageConfig.supplemental[s.value].fields} records={[entry, ...(sourceQuery.data ?? [])]} lang={lang} edits={{...sourceEdits,[entry.id]:edits}} onChange={(id,words)=>id===entry.id ? setTree(words) : setSourceEdits(previous=>({...previous,[id]:{...previous[id],[lang]:words}}))} ctx={ctx} cardTitle={placementText(pageConfig.supplemental[s.value].titleKey ?? "common.headingCard")} previewHref={previewHref(s.value)} /></div>) : null}
+                {entry.id === "gl_commerce" ? <CommerceSection section={s} previewHref={(key, cardId, context) => commercePreviewHref(key, lang, cardId, context)} renderFields={node => <ValueEditor node={node} value={get(tree, s.path)} fallback={lang === "en" ? undefined : get(english, s.path)} onChange={value => setTree(put(tree ?? {}, s.path, value))} path={s.path} ctx={ctx} />} /> : type.key === "review" ? <ReviewEditor value={tree ?? {}} fallback={english} onChange={setTree} ctx={ctx}
                   photo={imageSrc ?? entry.content.image?.src ?? ""} focal={imageFocal ?? entry.content.image?.focal} alt={alt[lang] ?? ""}
                   onPhoto={(src, media) => { setImageSrc(src); setImageFocal(media?.focal); if (media?.alt) setAltEdits(media.alt); }}
                   onAlt={value => setAltEdits(previous => ({ ...previous, [lang]: value }))}
@@ -1039,10 +1069,11 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                   onSettings={patch => setNeutralEdit(previous => ({ ...previous, ...patch }))}
                   relatedOptions={[...(families.data?.items ?? []), ...(relatedServices.data?.items ?? []), ...(relatedSoftware.data?.items ?? [])].map(item => ({ value: item.id, label: entryName(item), hint: nav(item.type === "softwareModule" ? "software" : "services") }))}
                   additionalMedia={<SectionAttachments disabled={!editable || lang !== "en"} disabledReason={viewing && mayEdit ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia.details ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, details: items } })} />}
-                /> : s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "") ? <div className="grid max-w-2xl gap-4">
-                  <Field label={ti("text")}><Input disabled={!editable} value={presentation.cursor.text[lang] ?? String(get(tree, "intro") && (get(tree, "intro") as Tree).div || "").replace(/<[^>]+>/g, "").trim()} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, text: { ...presentation.cursor.text, [lang]: event.target.value } } })} /></Field>
-                  <Field label={ti("link")}><Input dir="ltr" disabled={!editable || lang !== "en"} value={presentation.cursor.link} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, link: event.target.value } })} /></Field>
-                </div> : s.value === "rotation-words" && pageConfig?.rotationSource ? <RotationWords type={pageConfig.rotationSource} /> : pageConfig?.fields?.[s.value] ? (sourceQuery.isLoading ? <LoadingState rows={4} /> : sourceQuery.error ? <ErrorState onRetry={sourceQuery.refetch} /> : <PageFields fields={pageConfig.fields[s.value].fields} records={[entry, ...(sourceQuery.data ?? [])]} lang={lang} edits={{...sourceEdits,[entry.id]:edits}} onChange={(id,words)=>id===entry.id ? setTree(words) : setSourceEdits(previous=>({...previous,[id]:{...previous[id],[lang]:words}}))} ctx={ctx} cardTitle={entry.id === "pg_home" ? tl("sectionIntro") : undefined} />) : (entry.id === "pg_home" && ["two-sides", "work", "services", "software", "approach", "closing", "faqs"].includes(s.value) || entry.id === "pg_about" && s.value === "purpose") ? <PageCards pageId={entry.id} section={s.value} node={s.node} value={get(tree,s.path)} fallback={get(english,s.path)} onChange={value=>setTree(put(tree ?? {},s.path,value))} ctx={ctx} /> : references[s.value] ? <Link href={references[s.value]} className="text-fg-brand underline">{ti("manage")} {sectionName(s)}</Link> : s.value === "shared-copy" ? <SharedCopyPanel key={`${entry.id}-${lang}`} pageId={entry.id} lang={lang} readOnly={!editable} /> : type.key === "article" && s.value === "body" ? <ArticleBodyEditor ctx={ctx} value={get(tree, "sections")} onChange={value => setTree(put(tree ?? {}, "sections", value))} /> : <ValueEditor
+                /> : entry.id === "gl_caseFormats" && s.value === "formats" ? <CaseStudyFormatLabels node={s.node} value={get(tree, s.path)} fallback={lang === "en" ? undefined : get(english, s.path)} onChange={value => setTree(put(tree ?? {}, s.path, value))} ctx={ctx} examples={formatExamples} loading={caseStudies.isLoading} failed={Boolean(caseStudies.error)} onRetry={caseStudies.refetch} /> : s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "") ? <PageSectionCard title={sectionName(s)} previewHref={previewHref(s.value)}>
+                  <Field label={placementText("common.cursorText")} description={placementText("common.cursorTextHint")}><Input disabled={!editable} value={presentation.cursor.text[lang] ?? String(get(tree, "intro") && (get(tree, "intro") as Tree).div || "").replace(/<[^>]+>/g, "").trim()} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, text: { ...presentation.cursor.text, [lang]: event.target.value } } })} /></Field>
+                  <Field label={placementText("common.cursorLink")} description={placementText("common.cursorLinkHint")}><Input dir="ltr" disabled={!editable || lang !== "en"} value={presentation.cursor.link} onChange={event => setPresentationEdit({ ...presentation, cursor: { ...presentation.cursor, link: event.target.value } })} /></Field>
+                </PageSectionCard> : s.value === "rotation-words" && pageConfig?.rotationSource ? <PageSectionCard title={sectionName(s)} previewHref={previewHref(s.value)}><RotationWords type={pageConfig.rotationSource} /></PageSectionCard> : pageConfig?.fields?.[s.value] ? (sourceQuery.isLoading ? <LoadingState rows={4} /> : sourceQuery.error ? <ErrorState onRetry={sourceQuery.refetch} /> : <PageFields pageId={entry.id} section={s.value} fields={pageConfig.fields[s.value].fields} records={[entry, ...(sourceQuery.data ?? [])]} lang={lang} edits={{...sourceEdits,[entry.id]:edits}} onChange={(id,words)=>id===entry.id ? setTree(words) : setSourceEdits(previous=>({...previous,[id]:{...previous[id],[lang]:words}}))} ctx={ctx} cardTitle={sectionName(s)} previewHref={previewHref(s.value)} />) : (entry.id === "pg_home" && ["two-sides", "work", "services", "software", "approach", "closing", "faqs"].includes(s.value) || entry.id === "pg_about" && s.value === "purpose") ? <PageCards pageId={entry.id} section={s.value} title={sectionName(s)} previewHref={previewHref} path={s.path} node={s.node} value={get(tree,s.path)} fallback={get(english,s.path)} onChange={value=>setTree(put(tree ?? {},s.path,value))} ctx={ctx} /> : references[s.value] ? <PageSectionCard title={sectionName(s)} previewHref={previewHref(s.value)}><Link href={references[s.value]} className="text-fg-brand underline">{ti("manage")} {sectionName(s)}</Link></PageSectionCard> : s.value === "shared-copy" ? <SharedCopyPanel key={`${entry.id}-${lang}`} pageId={entry.id} lang={lang} readOnly={!editable} onActiveSectionChange={setSharedPreviewSection} previewHref={previewHref} /> : type.key === "page" ? <PageCards pageId={entry.id} section={s.value} title={sectionName(s)} previewHref={previewHref} path={s.path} node={s.node} value={get(tree,s.path)} fallback={lang === "en" ? undefined : get(english,s.path)} onChange={value=>setTree(put(tree ?? {},s.path,value))} ctx={ctx} /> : type.key === "article" && s.value === "body" ? <ArticleBodyEditor ctx={ctx} value={get(tree, "sections")} onChange={value => setTree(put(tree ?? {}, "sections", value))} /> : pageSectionPlacement(entry.id, s.value) ? <PageCards pageId={entry.id} section={s.value} title={sectionName(s)} previewHref={previewHref} path={s.path} node={s.node} value={get(tree,s.path)} fallback={lang === "en" ? undefined : get(english,s.path)} onChange={value=>setTree(put(tree ?? {},s.path,value))} ctx={ctx} /> : <ValueEditor
+                  surface
                   node={s.node}
                   value={get(tree, s.path)}
                   fallback={lang === "en" ? undefined : get(english, s.path)}
@@ -1052,12 +1083,16 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                 />}
                 {s.value === "rotation-words" && pageConfig?.staticRotation ? <ul className="mt-4 flex flex-wrap gap-2">{pageConfig.staticRotation.map(word=><li key={word} className="rounded-field bg-sunken px-3 py-2 text-body-sm text-fg-muted">{word}</li>)}</ul> : null}
                 {pageConfig?.collections?.[s.value] ? <CollectionOrder type={pageConfig.collections[s.value]} disabled={!editable || lang !== "en"} /> : null}
-                {type.key !== "review" && s.value !== "shared-copy" && !(s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "")) && type.key !== "strings" && type.key !== "pricing" ? <SectionAttachments alwaysOpen={type.key === "caseStudy"} disabled={!editable || lang !== "en"} disabledReason={viewing && mayEdit ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia[s.value] ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, [s.value]: items } })} /> : null}
+                {type.key !== "review" && s.value !== "shared-copy" && !(s.value === "intro" && ["Custom Cursor", "View project"].includes(s.label ?? "")) && type.key !== "strings" && type.key !== "pricing" ? <SectionAttachments title={entry.id === "gl_commerce" ? purchasing("mediaTitle") : entry.id === "gl_caseFormats" ? caseLabels("mediaTitle") : type.key === "page" ? `${sectionName(s)} · ${ti("media")}` : undefined} description={entry.id === "gl_commerce" ? purchasingMediaDescription(s.value) : entry.id === "gl_caseFormats" ? caseLabels("mediaHelp") : type.key === "page" || type.key === "global" ? placementText(pageMediaPlacement(entry.id, s.value)) : undefined} pageCard={type.key === "page" || entry.id === "gl_caseFormats" || entry.id === "gl_commerce"} alwaysOpen={type.key === "caseStudy"} disabled={!editable || lang !== "en"} disabledReason={viewing && mayEdit ? ti("mediaViewHelp") : !editable ? ti("viewOnlyHelp") : lang !== "en" ? ti("mediaLanguageHelp") : undefined} items={presentation.sectionMedia[s.value] ?? []} onChange={items => setPresentationEdit({ ...presentation, sectionMedia: { ...presentation.sectionMedia, [s.value]: items } })} /> : null}
               </TabsPanel>
             ))}
             {type.seo ? (
-              <TabsPanel value="seo">
-                <div className={ctx.fullWidthFields ? "mb-4 grid min-w-0 gap-4" : "mb-4 grid max-w-2xl gap-4"}>
+              <TabsPanel value="seo"><PagePlacementHint pageId={entry.id} section="seo" />
+                {lang === "en" ? <div className={type.key === "page" ? "mb-5 grid min-w-0 gap-4 rounded-card border border-line bg-raised p-5" : ctx.fullWidthFields ? "mb-4 grid min-w-0 gap-4 rounded-card border border-line bg-raised p-4 sm:p-5" : "mb-4 grid max-w-2xl gap-4 rounded-card border border-line bg-raised p-4 sm:p-5"}>
+                  {type.key === "page" ? <div className="flex items-start justify-between gap-4">
+                    <h3 className="min-w-0 text-title-sm font-semibold text-fg">{t("tabs.seo")}</h3>
+                    <SectionPreviewLink href={previewHref("seo") ?? "/preview"} label={`${tp("button")} · ${t("tabs.seo")}`} iconOnly />
+                  </div> : null}
                   {lang === "en" ? (
                     <Field
                       label={t("slug")}
@@ -1091,7 +1126,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                       />
                     </Field>
                   ) : null}
-                </div>
+                </div> : null}
                 <SeoPanel
                   key={lang}
                   fullWidthFields={ctx.fullWidthFields}

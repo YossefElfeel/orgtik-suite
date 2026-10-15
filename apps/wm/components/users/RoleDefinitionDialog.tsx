@@ -7,11 +7,12 @@ import { Button, Checkbox, ConfirmDialog, Dialog, DialogBody, DialogContent, Dia
 import { CAPABILITY_GROUPS, ROLE_ACTIONS } from "@/lib/roleCapabilities";
 import { useCreateRoleMutation, useDeleteRoleMutation, useUpdateRoleMutation, type ApiError, type Role } from "@/store/api";
 
-export function RoleDefinitionDialog({ role: initialRole, initialPermissions, initialVersion, lockedPermissions = [], onClose, onSaved, onDeleted }: {
+export function RoleDefinitionDialog({ role: initialRole, initialPermissions, initialVersion, lockedPermissions = [], assignedToMe = false, onClose, onSaved, onDeleted }: {
   role?: Role;
   initialPermissions?: string[];
   initialVersion?: string;
   lockedPermissions?: string[];
+  assignedToMe?: boolean;
   onClose: () => void;
   onSaved: (role: Role) => void;
   onDeleted: () => void;
@@ -27,12 +28,16 @@ export function RoleDefinitionDialog({ role: initialRole, initialPermissions, in
   const [update, updating] = useUpdateRoleMutation();
   const [remove, removing] = useDeleteRoleMutation();
   const busy = creating.isLoading || updating.isLoading || removing.isLoading;
+  const deleteProtected = role?.key === "wm_super_admin";
+  const assignedCount = role?.deleteImpact?.assignedCount ?? role?.assignedCount ?? 0;
+  const usersLosingAccess = role?.deleteImpact?.usersLosingAccess ?? 0;
+  const includesCurrentUser = role?.deleteImpact?.includesCurrentUser ?? assignedToMe;
   const groupLabel = (key: string) => key === "roles" ? t("title") : key === "structuredData" ? ti("structuredData") : ti(`capabilityGroups.${key}`);
   const groups = CAPABILITY_GROUPS.filter(group => groupLabel(group.key).toLocaleLowerCase().includes(search.trim().toLocaleLowerCase()));
   const changed = !role || name.trim() !== role.label || [...permissions].sort().join() !== [...role.permissions].sort().join();
   const report = (error: unknown) => {
     const e = error as ApiError;
-    setProblem(e.status === 412 ? t("definitionStale") : e.code === "self_lockout" ? ti("selfLockout") : e.code === "invalid_label" ? t("invalidRoleName") : e.code === "role_in_use" ? t("roleInUse") : e.code === "builtin_role" ? t("builtinRole") : e.code === "role_limit" ? t("roleLimit") : t("roleFailed"));
+    setProblem(e.status === 412 ? t("definitionStale") : e.code === "self_lockout" ? ti("selfLockout") : e.code === "invalid_label" ? t("invalidRoleName") : e.code === "protected_role" ? t("deleteProtected") : e.code === "role_limit" ? t("roleLimit") : t("roleFailed"));
   };
   const save = async () => {
     setProblem("");
@@ -44,10 +49,10 @@ export function RoleDefinitionDialog({ role: initialRole, initialPermissions, in
     } catch (error) { report(error); }
   };
   const deleteRole = async () => {
-    if (!role) return;
+    if (!role || deleteProtected || busy) return;
     setProblem("");
     try {
-      await remove({key: role.key, version}).unwrap();
+      await remove({key: role.key, version: role.version}).unwrap();
       toast.success(t("roleDeleted"));
       onDeleted();
     } catch (error) { report(error); throw error; }
@@ -74,10 +79,10 @@ export function RoleDefinitionDialog({ role: initialRole, initialPermissions, in
           </fieldset>)}
           {!groups.length ? <p role="status" className="text-body-sm text-fg-muted">{ti("noResults")}</p> : null}
         </div>
-        {role?.builtin ? <p className="text-body-sm text-fg-muted">{t("builtinRole")}</p> : role && role.assignedCount > 0 ? <p className="text-body-sm text-fg-muted">{t("roleInUse")}</p> : null}
+        {deleteProtected ? <p className="text-body-sm text-fg-muted">{t("deleteProtected")}</p> : assignedCount > 0 ? <p className="text-body-sm text-fg-muted">{t("assignedRoleHelp", {count: assignedCount})}</p> : null}
       </DialogBody>
       <DialogFooter>
-        {role ? <ConfirmDialog title={t("deleteRoleTitle", {role: role.label})} impact={t("deleteRoleImpact")} confirmLabel={t("deleteRole")} onConfirm={deleteRole} trigger={<Button className="me-auto" variant="danger" startIcon={<Trash />} disabled={busy || role.builtin || role.assignedCount > 0}>{t("deleteRole")}</Button>} /> : null}
+        {role ? <ConfirmDialog title={t("deleteRoleTitle", {role: role.label})} impact={<span className="flex flex-col gap-3"><span>{t("deleteRoleImpact")}</span>{assignedCount > 0 ? <span>{t("assignedRoleHelp", {count: assignedCount})}</span> : null}{usersLosingAccess > 0 ? <span>{t("deleteRoleAccessImpact", {count: usersLosingAccess})}</span> : null}{includesCurrentUser ? <span>{t("deleteOwnRoleImpact")}</span> : null}</span>} confirmLabel={t("deleteRole")} onConfirm={deleteRole} trigger={<Button className="me-auto" variant="danger" startIcon={<Trash />} disabled={busy || deleteProtected}>{t("deleteRole")}</Button>} /> : null}
         <Button variant="secondary" disabled={busy} onClick={onClose}>{t("cancel")}</Button>
         <Button disabled={busy || !name.trim() || !changed} loading={creating.isLoading || updating.isLoading} onClick={save}>{t(role ? "saveChanges" : "addRole")}</Button>
       </DialogFooter>

@@ -8,5 +8,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <RequireRole role="admin">{children}</RequireRole>;
+  return <RequireRole role="admin" permission="staff:view">{children}</RequireRole>;
 }

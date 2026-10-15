@@ -1,5 +1,6 @@
 {
   "Auth": {
+    "accountChanged": "Il tuo account è cambiato durante l’apertura di questa pagina. Continua con l’account attuale.",
     "title": "Accedi a OrgTik",
     "subtitle": "Un solo account per tutte le app del tuo spazio di lavoro.",
     "email": "E-mail",

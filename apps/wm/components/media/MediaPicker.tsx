@@ -27,7 +27,6 @@ export function MediaPicker({
   disabled = false,
   imagesOnly = false,
   iconOnly = false,
-  alwaysOpen = false,
   kind,
 }: {
   value: string;
@@ -35,7 +34,7 @@ export function MediaPicker({
   disabled?: boolean;
   imagesOnly?: boolean;
   iconOnly?: boolean;
-  /** Show the library directly, including when an existing image is selected. */
+  /** Retained for existing callers; editable pickers always show the library. */
   alwaysOpen?: boolean;
   kind?: "image" | "video";
 }) {
@@ -47,8 +46,6 @@ export function MediaPicker({
   const [files, setFiles] = useState<File[]>([]);
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState("");
-  const [choosing, setChoosing] = useState(!value && !iconOnly);
-  const libraryOpen = alwaysOpen || choosing;
   const [uploadingNew, setUploadingNew] = useState(false);
   const library = useMediaQuery(
     {
@@ -57,7 +54,7 @@ export function MediaPicker({
       search,
       kind: kind ?? (imagesOnly ? "image" : undefined),
     },
-    { skip: disabled || !libraryOpen || !can("media:view") },
+    { skip: disabled || !can("media:view") },
   );
   const [upload, uploading] = useUploadMediaMutation();
   const selection = useMediaQuery(
@@ -99,16 +96,6 @@ export function MediaPicker({
         <div className="flex flex-wrap items-center justify-between gap-3">
           {!disabled ? (
             <div className="flex flex-wrap items-center gap-2">
-              {!alwaysOpen && can("media:view") ? (
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  aria-expanded={choosing}
-                  onClick={() => setChoosing(!choosing)}
-                >
-                  {value ? t("replaceMedia") : t("selectMedia")}
-                </Button>
-              ) : null}
               {can("media:create") ? (
                 <Button
                   variant="secondary"
@@ -143,7 +130,7 @@ export function MediaPicker({
           ) : null}
         </div>
       ) : null}
-      {!disabled && libraryOpen && can("media:view") ? (
+      {!disabled && can("media:view") ? (
         <>
           <Input
             type="search"
@@ -172,11 +159,8 @@ export function MediaPicker({
                   <button
                     type="button"
                     key={item.id}
-                    aria-pressed={value === src}
-                    onClick={() => {
-                      onChange(src, item);
-                      setChoosing(false);
-                    }}
+                    aria-pressed={value === src || selected?.id === item.id}
+                    onClick={() => onChange(src, item)}
                     className="group flex min-w-0 flex-col overflow-hidden rounded-field border border-line bg-raised text-start hover:border-fg-brand focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fg-brand aria-pressed:border-fg-brand"
                   >
                     <span className="flex aspect-video w-full items-center justify-center overflow-hidden bg-sunken">
@@ -276,7 +260,6 @@ export function MediaPicker({
                 setDescription("");
                 setTags("");
                 setUploadingNew(false);
-                setChoosing(false);
               } catch {
                 toast.error(tm("failed"));
               }

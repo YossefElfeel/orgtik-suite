@@ -15,7 +15,7 @@ export const DEPARTMENTS: Department[] = [
 /** A line of help under a field, from messages Editor.hints.* (e.g. where a link goes). */
 export type Hint = { key: string; values?: Record<string, string | number> };
 
-export type Node =
+export type Node = (
   | {
       kind: "text" | "longtext" | "color" | "image" | "icon";
       label: string;
@@ -57,7 +57,17 @@ export type Node =
       second: string;
       secondKind: "text" | "number";
     }
-  | { kind: "series"; label: string; first: string; second: string };
+  | { kind: "series"; label: string; first: string; second: string }
+) & {
+  /** Resolved editor guidance; never changes the schema's source label or saved values. */
+  displayLabel?: string;
+  placement?: string;
+  placementState?: "unused" | "conditional" | "assistive" | "review";
+  firstDisplayLabel?: string;
+  secondDisplayLabel?: string;
+  firstPlacement?: string;
+  secondPlacement?: string;
+};
 
 const text = (label: string): Node => ({ kind: "text", label });
 const long = (label: string): Node => ({ kind: "longtext", label });

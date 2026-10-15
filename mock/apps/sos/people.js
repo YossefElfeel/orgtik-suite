@@ -150,21 +150,14 @@ function register(app, S, H, R) {
     H.send(res, H.personView(u), "User type updated successfully");
   });
 
-  app.delete("/api/users/:id", (req, res) => {
+  app.delete("/api/users/:id", (req, res, next) => {
     const admin = H.adminUser(req, res);
     if (!admin) return;
     const u = H.findLiveUser(req.params.id);
     if (!u) return H.fail(req, res, 404, "User not found");
-    if (u.id === admin.id) return H.fail(req, res, 400, "You cannot delete your own account");
-    // Soft delete: the record stays in identity.users so other apps' references still resolve, but the
-    // account loses every scope, cannot sign in and disappears from SOS lists.
-    S.deletedUserIds.add(u.id);
-    u.deletedAt = nowIso();
-    u.isActive = false;
-    u.updatedAt = nowIso();
-    R.removeAllGrants(u);
-    S.cms?.removeMemberEverywhere(u.id);
-    S.chat?.disconnectUser(u.id);
+    try {
+      require('../../lib/accounts').deleteIdentityUser(identity, {user:u,actor:admin,platform:require('../admin').getStore()});
+    } catch(error) { return next(error); }
     S.log(`user deleted: ${u.email} (id ${u.id}) by ${admin.email}`);
     H.send(res, { message: "User deleted successfully" }, "User deleted successfully");
   });

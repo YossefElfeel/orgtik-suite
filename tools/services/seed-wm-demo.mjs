@@ -59,6 +59,8 @@ export async function installDemo({origin,hosted=false,email='mona.adel@orgtik.t
     const me=(await request('/admin/me')).data;
     if(!me?.identity?.accounts||!['roles:manage','users:manage','marketing:view'].every(permission=>me.permissions?.includes(permission)))
       throw new Error('A central mock administrator with role, user and marketing access is required.');
+    if(me.identity.atomicAccountSetup!==true)
+      throw new Error('Update the mock runtime before installing accounts; atomic initial account access is required.');
     const roles=(await request('/admin/roles')).data;
     if(!Array.isArray(roles))throw new Error('Mock roles inventory is unavailable.');
     const users=await list('/admin/users'),leads=await list('/admin/leads');
@@ -83,11 +85,19 @@ export async function installDemo({origin,hosted=false,email='mona.adel@orgtik.t
       if(prior){report.preservedUsers.push({id:prior.id,email:prior.email});continue;}
       const role=roles.find(role=>role.key===fixture.role||role.label===fixture.role);
       if(!role)throw new Error('The demo user role is unavailable.');
-      const account=(await request('/admin/users',{method:'POST',body:{firstName:fixture.firstName,lastName:fixture.lastName,email:fixture.email,password:accountPassword}})).data;
-      if(!account?.id||!account.version)throw new Error('The demo account creation receipt is incomplete; inspect User Management before retrying.');
-      const updated=(await request('/admin/users/'+account.id,{method:'PATCH',version:account.version,body:{roles:[role.key],active:fixture.active,rolePaused:fixture.rolePaused}})).data;
-      if(!updated||updated.active!==fixture.active||updated.rolePaused!==fixture.rolePaused)throw new Error('The new demo account state could not be confirmed.');
-      report.createdUsers.push({id:updated.id,email:updated.email,active:updated.active,rolePaused:updated.rolePaused});
+      let account;
+      try {
+        account=(await request('/admin/users',{method:'POST',body:{firstName:fixture.firstName,lastName:fixture.lastName,email:fixture.email,password:accountPassword,roles:[role.key],active:fixture.active,rolePaused:fixture.rolePaused}})).data;
+      } catch(error) {
+        // Creation and initial access commit together. A lost success reply, or
+        // another creator winning this email, never requires modifying the user.
+        const retained=(await list('/admin/users')).find(user=>user.email.toLowerCase()===fixture.email);
+        if(!retained)throw error;
+        report.preservedUsers.push({id:retained.id,email:retained.email});continue;
+      }
+      if(!account?.id||!account.version||!Array.isArray(account.roles)||!samePermissions(account.roles,[role.key])||account.active!==fixture.active||account.rolePaused!==fixture.rolePaused)
+        throw new Error('The atomic demo account creation receipt is incomplete; inspect User Management before retrying.');
+      report.createdUsers.push({id:account.id,email:account.email,active:account.active,rolePaused:account.rolePaused});
     }
     if(!lead) {
       const body={name:'Demo Lina · Northstar Studio',email:'crm-linked@wm-demo.example.test',company:'Mock Northstar Studio',topic:'Brand & design',message:'Mock workflow example: refresh the fictional Northstar Studio identity and packaging. This is test data, not a customer enquiry.',page:'/contact',consent:true,privacyVersion:site.forms.privacyVersion,context:{mockFixture:DEMO_LEAD_KEY}};

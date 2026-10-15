@@ -1,8 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { PauseCircle, PlayCircle } from "@phosphor-icons/react";
-import { Badge, MenuItem, Switch, toast } from "@orgtik/ui";
+import { Badge, Switch, toast } from "@orgtik/ui";
 import { useCan } from "@/lib/permissions";
 import { useMeQuery, useUpdateUserMutation, type ApiError, type SuiteUser } from "@/store/api";
 
@@ -29,13 +28,4 @@ export function UserStatusSwitch({user}: {user: SuiteUser}) {
     <Switch aria-label={`${t("activeAccount")}: ${user.name}`} checked={user.active} disabled={!access.allowed || !access.accounts || access.self || access.busy} aria-busy={access.busy || undefined} onCheckedChange={active => void access.change({active})} />
     <Badge tone={user.active ? "success" : "neutral"}>{t(user.active ? "active" : "inactive")}</Badge>
   </div>;
-}
-
-export function UserRolePauseAction({user}: {user: SuiteUser}) {
-  const t = useTranslations("Improvements"), access = useUserAccess(user);
-  if (!access.allowed) return null;
-  const protectedRole = user.roles.some(role => ["wm_owner", "wm_super_admin"].includes(role));
-  return <MenuItem icon={user.rolePaused ? <PlayCircle /> : <PauseCircle />} disabled={access.busy || access.self || !user.roles.length || (protectedRole && !access.accounts)} onClick={() => void access.change({rolePaused: !user.rolePaused})}>
-    {t(user.rolePaused ? "resumeRoleAccess" : "pauseRoleAccess")}
-  </MenuItem>;
 }

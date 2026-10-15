@@ -4,6 +4,7 @@
 // the first render. Outside such a frame nothing here runs, and the site renders from the snapshot
 // as always.
 import snapshot from "./snapshot.js";
+import { focusPreviewSection } from "./preview-focus.js";
 
 const WM = import.meta.env?.VITE_WM_ORIGIN ?? "http://localhost:3007";
 const API = import.meta.env?.VITE_CMS_API ?? "http://localhost:4007/v2";
@@ -68,6 +69,20 @@ export async function loadPreview() {
       }),
     );
     for (const [t, drafts] of got) lay(t, drafts);
+    let sectionState = {};
+    focusPreviewSection(window, (state) => {
+      sectionState = state;
+      window.parent.postMessage(
+        {
+          type: "orgtik:preview-state",
+          path: window.location.pathname,
+          overflow:
+            document.documentElement.scrollWidth > window.innerWidth + 1,
+          ...sectionState,
+        },
+        parentOrigin,
+      );
+    });
     // Tell the frame what the page came out as: its address and whether it fits its width.
     // Checked every second, sent when it changes (the visitor may click around inside the frame).
     let last = "";
@@ -77,6 +92,7 @@ export async function loadPreview() {
         path: window.location.pathname,
         title: document.title,
         overflow: document.documentElement.scrollWidth > window.innerWidth + 1,
+        ...sectionState,
       };
       const key = JSON.stringify(state);
       if (key !== last) window.parent.postMessage(state, parentOrigin);

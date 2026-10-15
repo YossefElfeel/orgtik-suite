@@ -50,13 +50,17 @@ function moderateComment(idea, commentId, version, action, reason, by, now) {
   const comment = idea.discussion?.find(comment => comment.id === commentId);
   if (!comment) return { status: 404, code: 'not_found' };
   if (Number(version) !== comment.version) return { status: 412, code: 'stale' };
-  if (!['approve', 'hide'].includes(action)) return { status: 400, code: 'unknown_action' };
+  if (!['approve', 'hide', 'delete', 'restore'].includes(action)) return { status: 400, code: 'unknown_action' };
+  // A retained deletion must be restored privately before it can be published again.
+  if ((comment.status === 'deleted' && action !== 'restore') || (comment.status !== 'deleted' && action === 'restore')) return { status: 409, code: 'wrong_state' };
   if (action === 'hide' && (typeof reason !== 'string' || !reason.trim() || reason.length > 1000)) return { status: 422, code: 'invalid', fieldErrors: { reason: 'required' } };
-  const next = action === 'approve' ? 'approved' : 'hidden';
+  const next = action === 'approve' ? 'approved' : action === 'delete' ? 'deleted' : 'hidden';
   if (comment.status === next) return { status: 409, code: 'wrong_state' };
-  Object.assign(comment, { status: next, version: comment.version + 1, moderatedAt: now, moderatedBy: by, reason: action === 'hide' ? reason.trim() : undefined });
+  const from = comment.status;
+  (comment.moderationHistory ??= []).unshift({ at: now, by, action, from, to: next, ...(action === 'hide' ? { reason: reason.trim() } : {}) });
+  Object.assign(comment, { status: next, version: comment.version + 1, moderatedAt: now, moderatedBy: by, reason: action === 'hide' ? reason.trim() : action === 'approve' ? undefined : comment.reason });
   idea.version += 1;
-  idea.history.unshift({ at: now, by, action: `comment_${action}`, from: idea.status, to: idea.status });
+  idea.history.unshift({ at: now, by, action: `comment_${action}`, commentId, from: idea.status, to: idea.status });
   return { comment };
 }
 

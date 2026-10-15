@@ -1,7 +1,7 @@
 "use client";
 import {useMemo, useState} from "react";
 import {useLocale,useTranslations} from "next-intl";
-import {Badge,Button,Field,Input,PageHeader,Select,buttonVariants,useFormatter} from "@orgtik/ui";
+import {Badge,Button,Input,PageHeader,Select,buttonVariants,useFormatter} from "@orgtik/ui";
 import {MagnifyingGlass} from "@phosphor-icons/react";
 import {DataTable, type ColumnDef} from "@orgtik/ui/table";
 import {useStudio,type CatalogItem,type CatalogMirror as Mirror} from "@/lib/studio";
@@ -63,8 +63,8 @@ export function CatalogMirror({kind}: {kind: "service" | "software"}) {
   return <div className="flex min-w-0 flex-col gap-6">
     <PageHeader title={title} description={t("catalogReadOnly")} />
     <div className="grid gap-4 sm:grid-cols-[minmax(0,1fr)_16rem]">
-      <Field label={searchLabel}><Input type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder={searchLabel} startIcon={<MagnifyingGlass />} /></Field>
-      <Field label={t("country")}><Select value={country} onValueChange={value => setCountry(value || "CH")} options={data.countries.map(value => ({value, label: countryNames.of(value) ?? value}))} /></Field>
+      <Input type="search" aria-label={searchLabel} value={search} onChange={event => setSearch(event.target.value)} placeholder={searchLabel} startIcon={<MagnifyingGlass />} />
+      <Select label={t("country")} value={country} onValueChange={value => setCountry(value || "CH")} options={data.countries.map(value => ({value, label: countryNames.of(value) ?? value}))} />
     </div>
     <DataTable label={title} columns={columns} data={filtered} getRowId={row => row.id} paginate={false}
       empty={words.length ? {title: t("catalogNoMatch"), description: t("catalogNoMatchBody"), action: <Button variant="secondary" size="sm" onClick={() => setSearch("")}>{t("catalogClearSearch")}</Button>} : {title: t("noOffers")}} />

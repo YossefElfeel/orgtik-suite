@@ -364,6 +364,7 @@
       "apps/wm/library.js",
       "apps/wm/manager.js",
       "apps/wm/media-replacement.js",
+      "apps/wm/notes.js",
       "apps/wm/ops.js",
       "apps/wm/permissions.js",
       "apps/wm/roles.js",

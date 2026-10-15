@@ -10,7 +10,7 @@
     "typecheck": "node ../../tools/next-env.cjs && tsc --noEmit",
     "i18n:check": "node ../../tools/i18n/check-catalogs.mjs",
     "lint": "node ../../tools/ci/lint.mjs --app=wm",
-    "test": "node --experimental-strip-types --test lib/richCopy.test.mjs"
+    "test": "node --experimental-strip-types --test lib/richCopy.test.mjs lib/centralUsers.test.mjs lib/legacyStringLabels.test.mjs lib/caseFormatLabels.test.cjs lib/commerceEditor.test.cjs lib/commercePreview.test.cjs lib/editorSectionOrder.test.cjs lib/pageCardGroups.test.cjs lib/pagePreview.test.cjs lib/sectionPreviewTab.test.cjs lib/pagePlacement.test.cjs"
   },
   "dependencies": {
     "@hookform/resolvers": "5.2.2",

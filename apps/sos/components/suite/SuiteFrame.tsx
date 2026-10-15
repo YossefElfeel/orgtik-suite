@@ -30,7 +30,10 @@ export function SuiteFrame({ children }: { children: ReactNode }) {
     if (ws.isOwner) sections.push({ label: tw("billingSection"), items: [item("/billing", tw("subscriptions"), <Receipt />), item("/billing/invoices", tw("invoices"), <Invoice />), item("/billing/payment-methods", tw("paymentMethods"), <CreditCard />), item("/billing/details", tw("billingDetails"), <GearSix />), item("/billing/contacts", tv("billingContacts"), <EnvelopeSimple />)] }, { label: tw("settingsSection"), items: [item("/workspace", tw("workspaceSettings"), <GearSix />)] });
   }
   const admins: SidebarItem[] = [];
-  if (mounted && isAdmin) admins.push(item("/people", t("people"), <UsersThree />), item("/systems", t("systems"), <SquaresFour />));
+  if (mounted && isAdmin) {
+    if (staffAccess?.permissions.admin?.includes("staff:view")) admins.push(item("/people", t("people"), <UsersThree />));
+    admins.push(item("/systems", t("systems"), <SquaresFour />));
+  }
   if (mounted && (isWebsiteManager || isAdmin)) admins.push(item("/content", t("content"), <Globe />));
   if (admins.length) sections.push({ label: tw("adminSection"), items: admins });
   if (mounted && user && !identityOnly) items.push(item("/mailbox", mailboxText("nav"), <EnvelopeSimple />));

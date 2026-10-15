@@ -52,6 +52,7 @@ export function EntryList({ type: key }: { type: EntryType }) {
   const can = useCan();
   const tt = useTranslations("Types");
   const tf = useTranslations("Formats");
+  const departments = useTranslations("Departments");
   const fields = useTranslations("Fields");
   const f = useFormatter();
   const type = TYPES[key];
@@ -343,8 +344,8 @@ export function EntryList({ type: key }: { type: EntryType }) {
   const filterOptions =
     key === "caseStudy"
       ? [
-          { value: "all", label: t("allDepartments") },
-          ...DEPARTMENTS.map((d) => ({ value: d, label: tf(d) })),
+          { value: "all", label: ti("all") },
+          ...DEPARTMENTS.map((d) => ({ value: d, label: departments(d) })),
         ]
       : key === "service"
         ? [
@@ -387,11 +388,12 @@ export function EntryList({ type: key }: { type: EntryType }) {
         {filterOptions ? (
           <Select
             size="sm"
+            label={key === "caseStudy" ? t("department") : undefined}
             aria-label={key === "caseStudy" ? t("department") : t("family")}
             value={filter}
             onValueChange={(v) => setFilter(v ?? "all")}
             options={filterOptions}
-            className="w-56"
+            className={key === "caseStudy" ? "wm-filter-hug" : "w-56"}
           />
         ) : null}
 

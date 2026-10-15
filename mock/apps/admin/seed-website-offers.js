@@ -15,6 +15,12 @@ const offers = [
   ...[["hr", "hr_pro"], ["crm", "crm_pro"], ["files", "files_pro"], ["tasks", "tasks_pro"], ["marketing", "marketing_pro"]].map(([id, planId]) => ({ id, kind: "software", planId, tool: id, fulfillment: "tool" })),
   { ...service("website", 29, "svc_web_managed_website", names("Website management", "إدارة المواقع", "Website-Verwaltung", "Gestion de site web", "Gestione sito web")), kind: "software" },
 ];
+// Publication examples retain their existing catalog identities and owner-managed prices.
+// The other offers stay unmarked so the read-only mirror demonstrates both states.
+for (const offer of offers) if (["design/graphic-design", "development/web-development", "hr", "crm"].includes(offer.id)) {
+  offer.publishedAt = "2026-10-01T09:00:00.000Z";
+  offer.publishedBy = "seed";
+}
 // Presentation metadata only; these presets never contain prices or discount arithmetic.
 const bundle = (id, kind, name, ids) => ({ id, kind, name, ids });
 const bundles = [

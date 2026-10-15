@@ -8,7 +8,6 @@ import { DataTable, type ColumnDef } from "@orgtik/ui/table";
 import { RequirePermission } from "@/components/frame/RequirePermission";
 import { Link } from "@/i18n/routing";
 import { Eye, PencilSimple } from "@phosphor-icons/react";
-import { EnableLanguage } from "@/components/content/EnableLanguage";
 import { useCan } from "@/lib/permissions";
 import { useListState } from "@/lib/useListState";
 import { TYPES } from "@/lib/contentTypes";
@@ -83,7 +82,7 @@ function Matrix() {
   const status = isLoading ? "loading" : error ? (statusOf(error) === 403 ? "forbidden" : "error") : "ready";
   return (
     <div className="flex flex-col gap-6">
-      <PageHeader title={t("title")} description={t("description")} actions={<EnableLanguage />} />
+      <PageHeader title={t("title")} description={t("description")} />
       {data ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
           {languages.map((l) => {

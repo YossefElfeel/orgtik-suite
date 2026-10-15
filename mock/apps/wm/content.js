@@ -152,7 +152,8 @@ function makeStore(now, { demo = false } = {}) {
       // Pages, Global and Strings: how many texts they hold.
       slots: c.layout ? c.layout.reduce((n, x) => n + (x.kind === "copy" ? x.slots.length : 1), 0) : undefined,
       slug: c.slug,
-      image: c.image,
+      // Blank drafts keep their editable image field, but have no thumbnail yet.
+      image: typeof c.image?.src === "string" && c.image.src.trim() ? c.image : undefined,
       order: e.order,
       state: e.draft ? e.workflow.state : "published",
       visibility: e.workflow.visibility,
@@ -644,7 +645,8 @@ function makeStore(now, { demo = false } = {}) {
     if (ideas_.some(([, idea]) => Object.keys(require('./idea-classification').classificationErrors(idea)).length)) throw codec.fail("Website idea categories or tags are invalid.");
     for (const [, idea] of ideas_) if (idea.discussion !== undefined && (!Array.isArray(idea.discussion) || idea.discussion.length > 1000 || new Set(idea.discussion.map(comment => comment?.id)).size !== idea.discussion.length || idea.discussion.some(comment =>
       !comment || !["id", "author", "email", "body", "privacyVersion"].every(key => typeof comment[key] === "string") || !comment.id ||
-      !["pending", "approved", "hidden"].includes(comment.status) || !Number.isInteger(comment.version) || comment.version < 1 || !Number.isFinite(Date.parse(comment.submittedAt)) ||
+      !["pending", "approved", "hidden", "deleted"].includes(comment.status) || !Number.isInteger(comment.version) || comment.version < 1 || !Number.isFinite(Date.parse(comment.submittedAt)) ||
+      (comment.moderationHistory !== undefined && (!Array.isArray(comment.moderationHistory) || comment.moderationHistory.some(event => !event || !Number.isFinite(Date.parse(event.at)) || typeof event.by !== "string" || !["approve", "hide", "delete", "restore"].includes(event.action) || !["pending", "approved", "hidden", "deleted"].includes(event.from) || !["approved", "hidden", "deleted"].includes(event.to) || (event.reason !== undefined && (typeof event.reason !== "string" || event.reason.length > 1000))))) ||
       ["fingerprint", "requestKey"].some(key => comment[key] !== undefined && !/^[a-f0-9]{64}$/.test(comment[key]))))) throw codec.fail("Website idea discussion state is incomplete.");
     const orders = incoming.managerOrders ?? {}, locales = incoming.contentLocales ?? ["en","ar","de","fr","it"];
     if (!orders || typeof orders !== "object" || Array.isArray(orders) || Object.entries(orders).some(([type,ids])=>!["service","caseStudy","article"].includes(type) || !Array.isArray(ids) || ids.length>1000 || ids.some(id=>typeof id!=="string") || new Set(ids).size!==ids.length) || !Array.isArray(locales) || !locales.includes("en") || new Set(locales).size!==locales.length || locales.some(locale=>!["en","ar","de","fr","it","es","pt","nl"].includes(locale))) throw codec.fail("Website Manager preferences are invalid.");

@@ -28,10 +28,13 @@ for (const role of Object.values(ROLES)) {
   }
 }
 const PERMISSIONS = [...new Set(Object.values(ROLES).flatMap(role => role.permissions))];
-function permissionsFor(roleNames, overrides = {}) {
+function availableRoleKeys(roleNames, definitions = {}, deletions = {}) {
+  return [...new Set(roleNames)].filter(key => !deletions[key] && (Object.hasOwn(ROLES, key) || Object.hasOwn(definitions, key)));
+}
+function permissionsFor(roleNames, overrides = {}, deletions = {}) {
   const set = new Set();
-  for (const r of roleNames) for (const p of overrides[r] ?? ROLES[r]?.permissions ?? []) set.add(p);
+  for (const r of roleNames) if (!deletions[r]) for (const p of overrides[r] ?? ROLES[r]?.permissions ?? []) set.add(p);
   return [...set].sort();
 }
 
-module.exports = { MODULES, SPECIALS, ROLES, PERMISSIONS, permissionsFor };
+module.exports = { MODULES, SPECIALS, ROLES, PERMISSIONS, permissionsFor, availableRoleKeys };

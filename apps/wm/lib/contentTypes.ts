@@ -7,6 +7,7 @@ import { BLOCKS, BRIEF, type Department, type Node } from "./caseStudySchema";
 import { cmsLabelKey, cmsNodeLabels } from "./cmsLabels";
 import managerPages from "@/lib/manager-pages.json";
 import sectionMap from "@/lib/cms-sections.json";
+import { isLegacyStrings, legacyStringSectionLabel, legacyStringSlotLabel } from "./legacyStringLabels";
 
 export type Area =
   | "pages"
@@ -91,11 +92,12 @@ const SLOT_LABEL: Record<string, string> = {
   message: "slotMessage",
 };
 function layoutSections(e: SectionSource): EditorSection[] {
+  const legacyStrings = isLegacyStrings(e.id);
   const en = (e.content?.locales?.en ?? {}) as Record<
     string,
     Record<string, unknown>
   >;
-  const manager = (managerPages as Record<string, { editor: string[]; labels?: Record<string,string>; fields?: Record<string, {label:string}>; headerOnly?: string[] }>)[e.id ?? ""];
+  const manager = (managerPages as Record<string, { editor: string[]; labels?: Record<string,string>; fields?: Record<string, {label:string}>; groups?: Record<string,string[]>; headerOnly?: string[] }>)[e.id ?? ""];
   const sections = (e.content?.layout ?? []).map((sec: LayoutSection): EditorSection => {
     if (sec.kind === "data")
       return {
@@ -119,13 +121,16 @@ function layoutSections(e: SectionSource): EditorSection[] {
               : slot.context
                 ? { key: "usedIn", values: { where: slot.context } }
                 : undefined,
+          ...(legacyStrings ? legacyStringSlotLabel(e.id!, sec.key, slot.key, slot.context) : {}),
         } as Node,
       ]),
     );
     return {
       value: sec.key,
       path: sec.key,
-      ...(sec.label && cmsLabelKey(sec.label) !== sec.label
+      ...(legacyStrings
+        ? { labelKey: legacyStringSectionLabel(e.id!, sec.key) }
+        : sec.label && cmsLabelKey(sec.label) !== sec.label
         ? { labelKey: cmsLabelKey(sec.label) }
         : { label: sec.label ?? undefined }),
       node: { kind: "group", fields },
@@ -134,7 +139,7 @@ function layoutSections(e: SectionSource): EditorSection[] {
   const mapping = (sectionMap as Record<string, { groups?: Record<string, string[]> }>)[e.id ?? ""];
   const visible = manager ? sections.filter(section => manager.editor.includes(section.value)) : sections;
   if (!mapping?.groups && !manager) return sections;
-  const groups = mapping?.groups ?? {};
+  const groups = { ...mapping?.groups, ...manager?.groups };
   const grouped = new Set(Object.values(groups).flatMap(keys => keys.slice(1)));
   const result: EditorSection[] = visible.filter(section => !grouped.has(section.value)).map(section => {
     const groupKeys = groups[section.value];

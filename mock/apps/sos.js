@@ -23,6 +23,11 @@ const { createChat } = require("./sos/chat");
 const S = { deletedUserIds: new Set(), nsp: null, assets: {}, invites: [], people: null, cms: null, chat: null, log: (...a) => console.log("[api:sos]", ...a) };
 
 module.exports = {
+  // Called by the outer journal boundary only after an account deletion commits.
+  cleanupDeletedUser: userId => {
+    S.cms?.removeMemberEverywhere(userId);
+    S.chat?.disconnectUser(userId);
+  },
   scopes: [],
 
   grants: {

@@ -1,12 +1,23 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button, ErrorState, LoadingState, Select, toast } from "@orgtik/ui";
+import {
+  Button,
+  ErrorState,
+  Field,
+  LoadingState,
+  Select,
+  toast,
+} from "@orgtik/ui";
 import { Link } from "@/i18n/routing";
 import { TYPES } from "@/lib/contentTypes";
 import { useCan } from "@/lib/permissions";
 import { useEntryQuery, useSaveEntryMutation, type Locale } from "@/store/api";
-import { ValueEditor } from "./BlockEditor";
+import { commercePresentation } from "@/lib/commerceEditor";
+import { commercePreviewHref } from "@/lib/commercePreview";
+import { PageCards } from "./PageFields";
+import { ValueEditor, type EditorContext } from "./BlockEditor";
+import { CommerceSection } from "./CommerceEditor";
 
 export const SHARED_PAGES: Record<string, { id: string; prefixes: string[] }> =
   {
@@ -31,10 +42,14 @@ export function SharedCopyPanel({
   pageId,
   lang,
   readOnly,
+  onActiveSectionChange,
+  previewHref,
 }: {
   pageId: string;
   lang: Locale;
   readOnly: boolean;
+  onActiveSectionChange?: (section: string | null) => void;
+  previewHref?: (section: string) => string | undefined;
 }) {
   const source = SHARED_PAGES[pageId];
   const type = source.id.startsWith("pg_") ? "page" : "global";
@@ -58,58 +73,108 @@ export function SharedCopyPanel({
   }, [editsByLang]);
   const t = useTranslations("Improvements");
   const te = useTranslations("Editor");
+  const purchasing = useTranslations("PurchasingEditor");
   const can = useCan();
+  const sections = query.data
+    ? TYPES[type]
+        .sections({ ...query.data, id: undefined })
+        .filter((item) =>
+          source.prefixes.some((prefix) => item.value.startsWith(prefix)),
+        )
+        .sort(
+          (a, b) =>
+            source.prefixes.findIndex((prefix) => a.value.startsWith(prefix)) -
+            source.prefixes.findIndex((prefix) => b.value.startsWith(prefix)),
+        )
+    : [];
+  const active = sections.find((item) => item.value === section) ?? sections[0];
+  useEffect(() => {
+    onActiveSectionChange?.(active?.value ?? null);
+  }, [active?.value, onActiveSectionChange]);
   if (query.isLoading) return <LoadingState rows={3} />;
   if (!query.data || query.error) return <ErrorState onRetry={query.refetch} />;
   const entry = query.data;
-  const sections = TYPES[type]
-    .sections({ ...entry, id: undefined })
-    .filter((item) =>
-      source.prefixes.some((prefix) => item.value.startsWith(prefix)),
-    )
-    .sort(
-      (a, b) =>
-        source.prefixes.findIndex((prefix) => a.value.startsWith(prefix)) -
-        source.prefixes.findIndex((prefix) => b.value.startsWith(prefix)),
-    );
-  const active = sections.find((item) => item.value === section) ?? sections[0];
   const tree = { ...entry.content.locales[lang], ...edits };
   const locked = readOnly || !can("content:edit");
+  const ctx: EditorContext = {
+    lang,
+    readOnly: locked,
+    structureLocked: locked || lang !== "en",
+    numbersLocked: locked || lang !== "en",
+    errors: {},
+  };
+  const changeSection = (path: string, value: unknown) =>
+    setEditsByLang((previous) => ({
+      ...previous,
+      [lang]: { ...previous[lang], [path]: value },
+    }));
   return (
     <section className="flex flex-col gap-4">
       <p className="text-body-sm text-fg-muted">{t("sharedCopyHint")}</p>
-      <Select
-        aria-label={t("sharedCopy")}
-        value={active?.value}
-        onValueChange={setSection}
-        options={sections.map((item) => ({
-          value: item.value,
-          label: item.label ?? item.value,
-        }))}
-      />
-      {active ? (
-        <ValueEditor
-          node={active.node}
-          value={tree[active.path]}
-          fallback={entry.content.locales.en?.[active.path]}
-          path={active.path}
-          onChange={(value) =>
-            setEditsByLang((previous) => ({
-              ...previous,
-              [lang]: { ...previous[lang], [active.path]: value },
-            }))
-          }
-          ctx={{
-            lang,
-            readOnly: locked,
-            structureLocked: locked || lang !== "en",
-            numbersLocked: locked || lang !== "en",
-            errors: {},
-          }}
+      <Field label={te("section")}>
+        <Select
+          aria-label={te("section")}
+          value={active?.value}
+          onValueChange={setSection}
+          options={sections.map((item) => ({
+            value: item.value,
+            label:
+              source.id === "gl_commerce"
+                ? purchasing(commercePresentation(item.value).titleKey)
+                : (item.label ?? item.value),
+          }))}
         />
+      </Field>
+      {active ? (
+        source.id === "gl_commerce" ? (
+          <CommerceSection
+            section={active}
+            previewHref={(key, cardId, context) =>
+              commercePreviewHref(key, lang, cardId, context)
+            }
+            renderFields={(node) => (
+              <ValueEditor
+                node={node}
+                value={tree[active.path]}
+                fallback={
+                  lang === "en"
+                    ? undefined
+                    : entry.content.locales.en?.[active.path]
+                }
+                path={active.path}
+                onChange={(value) => changeSection(active.path, value)}
+                ctx={ctx}
+              />
+            )}
+          />
+        ) : (
+          <PageCards
+            pageId={pageId}
+            sourceRecordId={source.id}
+            section={active.value}
+            title={active.label}
+            previewHref={previewHref}
+            node={active.node}
+            value={tree[active.path]}
+            fallback={entry.content.locales.en?.[active.path]}
+            path={active.path}
+            onChange={(value) => changeSection(active.path, value)}
+            ctx={ctx}
+          />
+        )
       ) : null}
       <div className="flex flex-wrap items-center gap-3">
-        {!locked && Object.keys(edits).length ? <Button variant="secondary" disabled={saving.isLoading} onClick={() => setEditsByLang(previous => ({...previous, [lang]: {}}))}>{te("cancel")}</Button> : null}
+        {!locked && Object.keys(edits).length ? (
+          <Button
+            variant="secondary"
+            disabled={saving.isLoading}
+            onClick={() =>
+              setEditsByLang((previous) => ({ ...previous, [lang]: {} }))
+            }
+          >
+            {te("cancel")}
+          </Button>
+        ) : null}
         {!locked ? (
           <Button
             disabled={!Object.keys(edits).length}

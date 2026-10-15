@@ -1,5 +1,6 @@
 {
   "Auth": {
+    "accountChanged": "Your account changed while this page was opening. Continue with your current account.",
     "title": "Sign in to OrgTik",
     "subtitle": "One account for every app in your workspace.",
     "email": "Email",

@@ -41,6 +41,26 @@ test('all three display choices have separate private synthetic case studies and
   }
 });
 
+test('blank draft summaries omit invalid thumbnails without changing retained drafts, images or deletions',()=>{
+  const store=demo();
+  for(const mode of ['card','sample','approved']){
+    const row=store.entries.get('cs_demo_display_'+mode),before=clone(row);
+    assert.equal(store.summary(row).image,undefined);
+    assert.deepEqual(row,before,'projection cannot rewrite the retained mock example');
+    assert.deepEqual(store.detail(row).content.image,{src:'',alt:{}},'the editable blank image field remains available');
+  }
+  const article=store.create('article',{key:'admin'},{name:'A new draft',slug:'a-new-draft'}).entry;
+  assert.ok(article);assert.equal(store.summary(article).image,undefined);
+  article.draft.image.src='  ';const empty=clone(article);assert.equal(store.summary(article).image,undefined);assert.deepEqual(article,empty);
+  const edited=store.entries.get('cs_demo_display_card');
+  const saved=store.save(edited,{key:'admin'},{locale:'en',image:{src:'brand-tablet.webp',alt:{en:'My retained image'}}},{can:()=>true});assert.ok(saved.entry,JSON.stringify(saved));
+  const retained=clone(edited);assert.deepEqual(store.summary(edited).image,edited.draft.image);assert.deepEqual(edited,retained);
+  assert.deepEqual(store.summary(store.entries.get('cs_01')).image,store.entries.get('cs_01').draft?.image??store.entries.get('cs_01').live.image);
+  store.remove(store.entries.get('cs_demo_display_sample'),{key:'admin'});
+  const snapshot=store.exportState(),restored=demo();restored.importState(snapshot);
+  assert.deepEqual(restored.exportState(),snapshot);assert.ok(!restored.entries.has('cs_demo_display_sample'));assert.deepEqual(restored.entries.get(edited.id),retained);
+});
+
 test('migration upgrades only untouched mock ideas and preserves edited, real, deleted and already-moderated data',()=>{
   const store=makeStore(now,{demo:true});
   require('./seed/demo-states').contentExamples({entries:store.entries,audit:store.audit,ideas:store.ideas,now});

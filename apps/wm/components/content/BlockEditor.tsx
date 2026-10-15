@@ -51,6 +51,8 @@ type Props = {
   ctx: EditorContext;
   /** Name each list item's card from its content, keeping the stored list unchanged. */
   cardTitleKey?: string;
+  /** Give a standalone form group its own surface; nested fields keep their existing grouping. */
+  surface?: boolean;
 };
 
 /** An empty value of a node's shape, for "Add step". */
@@ -94,9 +96,9 @@ const at = (v: unknown, k: string | number) =>
     ? (v as Record<string | number, unknown>)[k]
     : undefined;
 
-function useLabel() {
+function useLabel(node?: Node) {
   const t = useTranslations("Fields");
-  return (key: string) => (t.has(key) ? t(key) : key);
+  return (key: string) => node?.displayLabel && "label" in node && node.label === key ? node.displayLabel : (t.has(key) ? t(key) : key);
 }
 
 /** A field name as it reads inside a sentence: "Add paragraph", but "Absatz hinzufügen" and "Add KPI". */
@@ -140,14 +142,16 @@ export function ValueEditor({
   path,
   ctx,
   cardTitleKey,
+  surface = false,
 }: Props) {
-  const label = useLabel();
+  const label = useLabel(node);
   const inline = useInline();
   const tw = useTranslations("Editor");
+  const placementText = useTranslations("PagePlacement");
   const id = useId();
   // Values in hints are addresses and marks: isolated (LRI…PDI) so they keep their order in RTL.
   const iso = (v: string | number) => `\u2066${v}\u2069`;
-  const hintOf = (n: Node) =>
+  const hintOf = (n: Node) => [n.placement,
     "hint" in n && n.hint
       ? tw(
           `hints.${n.hint.key}`,
@@ -155,13 +159,19 @@ export function ValueEditor({
             Object.entries(n.hint.values ?? {}).map(([k, v]) => [k, iso(v)]),
           ),
         )
-      : undefined;
+      : undefined].filter(Boolean).join(" · ") || undefined;
+
+  if (surface && node.kind !== "group" && node.kind !== "list") return (
+    <div className="min-w-0 rounded-card border border-line bg-raised p-4 sm:p-5">
+      <ValueEditor node={node} value={value} fallback={fallback} onChange={onChange} path={path} ctx={ctx} cardTitleKey={cardTitleKey} />
+    </div>
+  );
 
   switch (node.kind) {
     case "image":
-      return <Field label={label(node.label)}><MediaPicker imagesOnly alwaysOpen={ctx.mediaAlwaysOpen} value={str(value)} onChange={onChange} disabled={ctx.readOnly || ctx.numbersLocked} /></Field>;
+      return <Field label={label(node.label)} description={hintOf(node)}><MediaPicker imagesOnly alwaysOpen={ctx.mediaAlwaysOpen} value={str(value)} onChange={onChange} disabled={ctx.readOnly || ctx.numbersLocked} /></Field>;
     case "icon":
-      return <Field label={label(node.label)}><IconPicker value={str(value)} onChange={onChange} disabled={ctx.readOnly || ctx.numbersLocked} /></Field>;
+      return <Field label={label(node.label)} description={hintOf(node)}><IconPicker value={str(value)} onChange={onChange} disabled={ctx.readOnly || ctx.numbersLocked} /></Field>;
     case "text":
     case "color":
       return (
@@ -206,7 +216,7 @@ export function ValueEditor({
       return (
         <Field
           label={label(node.label)}
-          description={ctx.numbersLocked ? tw("sharedNote") : undefined}
+          description={[hintOf(node), ctx.numbersLocked ? tw("sharedNote") : undefined].filter(Boolean).join(" · ") || undefined}
         >
           <Switch
             checked={value === true}
@@ -274,6 +284,7 @@ export function ValueEditor({
             <Field
               label={label(node.label)}
               error={error}
+              description={hintOf(node)}
               className={ctx.fullWidthFields ? undefined : "sm:col-span-2"}
             >
               <Textarea
@@ -293,7 +304,7 @@ export function ValueEditor({
       return (
         <Field
           label={label(node.label)}
-          description={ctx.numbersLocked ? tw("numbersNote") : undefined}
+          description={[hintOf(node), ctx.numbersLocked ? tw("numbersNote") : undefined].filter(Boolean).join(" · ") || undefined}
         >
           <NumberField
             value={typeof value === "number" ? value : null}
@@ -328,7 +339,7 @@ export function ValueEditor({
           <legend className="mb-1.5 text-label text-fg">
             {label(node.label)}
           </legend>
-          <p className="mb-1.5 text-body-sm text-fg-muted">{tw("linesHelp")}</p>
+          <p className="mb-1.5 text-body-sm text-fg-muted">{[hintOf(node), tw("linesHelp")].filter(Boolean).join(" · ")}</p>
           <div className={ctx.fullWidthFields ? "grid min-w-0 gap-2" : "grid gap-2 sm:grid-cols-2"}>
             {[0, 1].map((i) => (
               <Input
@@ -358,7 +369,7 @@ export function ValueEditor({
         ? (fallback as unknown[]).map(str)
         : [];
       return (
-        <Field label={label(node.label)} description={tw("tagsHelp")}>
+        <Field label={label(node.label)} description={[hintOf(node), tw("tagsHelp")].filter(Boolean).join(" · ")}>
           <Textarea
             value={items.join("\n")}
             placeholder={fb.join("\n") || undefined}
@@ -383,7 +394,7 @@ export function ValueEditor({
       return (
         <Field
           label={label(node.label)}
-          description={ctx.numbersLocked ? tw("numbersNote") : undefined}
+          description={[hintOf(node), ctx.numbersLocked ? tw("numbersNote") : undefined].filter(Boolean).join(" · ") || undefined}
         >
           <Input
             dir="ltr"
@@ -406,7 +417,8 @@ export function ValueEditor({
       const fb = Array.isArray(fallback) ? (fallback as unknown[]) : [];
       return (
         <div className={ctx.fullWidthFields ? "grid min-w-0 gap-2" : "grid gap-2 sm:grid-cols-2"}>
-          <Field label={label(node.first)}>
+          {hintOf(node) ? <p className={cn("text-body-sm text-fg-muted", !ctx.fullWidthFields && "sm:col-span-2")}>{hintOf(node)}</p> : null}
+          <Field label={node.firstDisplayLabel ?? label(node.first)} description={node.firstPlacement !== node.placement ? node.firstPlacement : undefined}>
             <Input
               value={str(pair[0])}
               placeholder={str(fb[0]) || undefined}
@@ -416,7 +428,7 @@ export function ValueEditor({
               onChange={(e) => onChange([e.target.value, pair[1]])}
             />
           </Field>
-          <Field label={label(node.second)}>
+          <Field label={node.secondDisplayLabel ?? label(node.second)} description={node.secondPlacement !== node.placement ? node.secondPlacement : undefined}>
             <Input
               value={str(pair[1])}
               placeholder={str(fb[1]) || undefined}
@@ -440,13 +452,16 @@ export function ValueEditor({
           ctx={ctx}
         />
       );
-    case "group":
+    case "group": {
+      const fields = Object.entries(node.fields);
+      const retained = fields.filter(([, child]) => child.placementState === "unused");
       return (
         <fieldset
           className={cn(
             "grid min-w-0 gap-4",
             !ctx.fullWidthFields && "sm:grid-cols-2",
-            node.label && "rounded-card border border-line p-4",
+            node.label && !surface && "rounded-card border border-line bg-raised p-4",
+            surface && "rounded-card border border-line bg-raised p-4 sm:p-5",
             node.label && !ctx.fullWidthFields && "sm:col-span-2",
           )}
         >
@@ -455,7 +470,8 @@ export function ValueEditor({
               {label(node.label)}
             </legend>
           ) : null}
-          {Object.entries(node.fields).map(([k, n]) => (
+          {hintOf(node) ? <p className={cn("text-body-sm text-fg-muted", !ctx.fullWidthFields && "sm:col-span-2")}>{hintOf(node)}</p> : null}
+          {fields.filter(([, child]) => child.placementState !== "unused").map(([k, n]) => (
             <div
               key={k}
               className={cn(
@@ -476,8 +492,14 @@ export function ValueEditor({
               />
             </div>
           ))}
+          {retained.length ? <details className={cn("min-w-0 border-t border-line pt-4", !ctx.fullWidthFields && "sm:col-span-2")}>
+            <summary className="cursor-pointer text-body font-semibold text-fg outline-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus">{placementText("common.retainedTitle")}</summary>
+            <p className="mt-2 text-body-sm text-fg-muted">{placementText("common.retainedHelp")}</p>
+            <div className="mt-4"><ValueEditor node={{kind:"group",fields:Object.fromEntries(retained.map(([key, child])=>[key,{...child,placementState:undefined}]))}} value={value} fallback={fallback} onChange={onChange} path={path} ctx={ctx} /></div>
+          </details> : null}
         </fieldset>
       );
+    }
     case "list": {
       const items = Array.isArray(value) ? (value as unknown[]) : [];
       const fb = Array.isArray(fallback) ? (fallback as unknown[]) : [];
@@ -496,10 +518,11 @@ export function ValueEditor({
         onChange(next);
       };
       return (
-        <section aria-labelledby={id} className="flex flex-col gap-3">
+        <section aria-labelledby={id} className={cn("flex min-w-0 flex-col gap-3", surface && LEAF.includes(node.item.kind) && "rounded-card border border-line bg-raised p-4 sm:p-5")}>
           <h3 id={id} className={cn("text-label text-fg", cardTitleKey && "sr-only")}>
             {label(node.label)}
           </h3>
+          {hintOf(node) ? <p className="max-w-prose text-body-sm text-fg-muted">{hintOf(node)}</p> : null}
           {items.length === 0 ? (
             <p className="text-body-sm text-fg-subtle">{tw("emptyList")}</p>
           ) : null}
@@ -626,7 +649,7 @@ function SeriesEditor({
   onChange,
   ctx,
 }: Props & { node: Extract<Node, { kind: "series" }> }) {
-  const label = useLabel();
+  const label = useLabel(node);
   const inline = useInline();
   const tw = useTranslations("Editor");
   const id = useId();
@@ -638,6 +661,7 @@ function SeriesEditor({
       <h3 id={id} className="text-label text-fg">
         {label(node.label)}
       </h3>
+      {node.placement ? <p className="max-w-prose text-body-sm text-fg-muted">{node.placement}</p> : null}
       {points.length ? (
         <div
           aria-hidden="true"
@@ -661,8 +685,8 @@ function SeriesEditor({
           aria-hidden="true"
           className="grid grid-cols-[1fr_8rem_2rem] gap-2 text-caption text-fg-muted"
         >
-          <span>{label(node.first)}</span>
-          <span>{label(node.second)}</span>
+          <span>{node.firstDisplayLabel ?? label(node.first)}</span>
+          <span>{node.secondDisplayLabel ?? label(node.second)}</span>
         </div>
       ) : null}
       <ol className="flex flex-col gap-2">
@@ -672,7 +696,7 @@ function SeriesEditor({
             className="grid grid-cols-[1fr_8rem_2rem] items-center gap-2"
           >
             <Input
-              aria-label={`${label(node.first)} ${i + 1}`}
+              aria-label={`${node.firstDisplayLabel ?? label(node.first)} ${i + 1}`}
               value={String(p[0] ?? "")}
               placeholder={String(fb[i]?.[0] ?? "") || undefined}
               disabled={ctx.readOnly}
@@ -685,7 +709,7 @@ function SeriesEditor({
               }
             />
             <NumberField
-              aria-label={`${label(node.second)} ${i + 1}`}
+              aria-label={`${node.secondDisplayLabel ?? label(node.second)} ${i + 1}`}
               steppers={false}
               value={Number(p[1]) || 0}
               readOnly={ctx.numbersLocked || ctx.readOnly}

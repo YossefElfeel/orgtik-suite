@@ -7,6 +7,7 @@
     "build": "next build --turbopack",
     "typecheck": "node ../../tools/next-env.cjs && tsc --noEmit",
     "i18n:check": "node ../../tools/i18n/check-catalogs.mjs",
+    "test": "node --experimental-strip-types --test lib/staff-entry.test.mjs",
     "start": "next start -p 3013",
     "lint": "node ../../tools/ci/lint.mjs --app=sos"
   },

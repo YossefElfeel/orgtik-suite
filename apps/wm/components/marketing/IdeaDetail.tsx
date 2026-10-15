@@ -10,6 +10,7 @@ import { LoadingState, ErrorState, EmptyState, Textarea, Button, ConfirmDialog, 
 import { useCan } from "@/lib/permissions";
 import { LifecycleProgress } from "./LifecycleProgress";
 import { IdeaComments } from "./IdeaComments";
+import { IdeaNotes } from "./IdeaNotes";
 import { IDEA_CATEGORIES, IdeaTags } from "./IdeaTags";
 import { useIdeaQuery, useEditIdeaMutation } from "@/store/api";
 import {
@@ -221,7 +222,7 @@ export function IdeaDetailContent({
             outcome={<StatusBadge entity="roadmap_idea" state={idea.status} />}
           />
           {editing && can("marketing:edit") ? (
-            <fieldset disabled={saving.isLoading} className="flex min-w-0 flex-col gap-3">
+            <fieldset disabled={saving.isLoading} className="flex min-w-0 flex-col gap-4 rounded-card border border-line bg-raised p-4 sm:p-5">
               <Field label={t("colIdea")}>
                 <Input
                   maxLength={180}
@@ -354,6 +355,7 @@ export function IdeaDetailContent({
             </section>
           ) : null}
           <IdeaComments idea={idea} onRefresh={onClose} disabled={editing || saving.isLoading} />
+          <IdeaNotes idea={idea} disabled={editing || saving.isLoading} />
           {idea.commentPreview?.length ? (
             <section
               className="flex flex-col gap-2"

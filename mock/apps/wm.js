@@ -5,7 +5,7 @@
 // from the website (apps/wm/seed/build.mjs -> seed/website.json), starting with case studies.
 const crypto = require("crypto");
 const fs = require("fs");
-const { ROLES, permissionsFor } = require("./wm/permissions");
+const { ROLES, permissionsFor, availableRoleKeys } = require("./wm/permissions");
 const { makeStore } = require("./wm/content");
 const { makeLibrary } = require("./wm/library");
 const { makeOps } = require("./wm/ops");
@@ -25,21 +25,22 @@ function previewGrant(holder, token) {
 function exportHolder(holder) {
   if (!holder) throw codec.fail("Website Manager has not been initialized.");
   const library = holder.lib.exportState(), ops = holder.ops.exportState();
-  return { schema: SCHEMA, version: 1, realm: holder.realm, data: { content: holder.store.exportState(), library: library.data, ops: ops.data, previews: codec.copy([...holder.previews]), submissions: holder.submissions.exportState(), roles: codec.copy(holder.roleOverrides), roleDefinitions: codec.copy(holder.roleDefinitions), studio: holder.studio?.exportState() || null }, sequences: { ...library.sequences, ...ops.sequences } };
+  return { schema: SCHEMA, version: 1, realm: holder.realm, data: { content: holder.store.exportState(), library: library.data, ops: ops.data, previews: codec.copy([...holder.previews]), submissions: holder.submissions.exportState(), roles: codec.copy(holder.roleOverrides), roleDefinitions: codec.copy(holder.roleDefinitions), roleDeletions: codec.copy(holder.roleDeletions), studio: holder.studio?.exportState() || null }, sequences: { ...library.sequences, ...ops.sequences } };
 }
 function importHolder(holder, snapshot) {
   if (!holder || snapshot?.schema !== SCHEMA || snapshot.version !== 1 || snapshot.realm !== holder.realm) throw codec.fail("Website Manager snapshot belongs to another realm or version.");
   // Validate every part before mutating any live closure.
   const content = holder.store.validateState(snapshot.data?.content);
-  const definitions = require("./wm/roles").validateRoleDefinitions(snapshot.data?.roleDefinitions);
-  const roles = require("./wm/roles").validateRoleOverrides(snapshot.data?.roles, definitions);
+  const deletions = require("./wm/roles").validateRoleDeletions(snapshot.data?.roleDeletions);
+  const definitions = require("./wm/roles").validateRoleDefinitions(snapshot.data?.roleDefinitions, deletions);
+  const roles = require("./wm/roles").validateRoleOverrides(snapshot.data?.roles, definitions, deletions);
   const library = holder.lib.validateState({ data: snapshot.data?.library, sequences: snapshot.sequences });
   const ops = holder.ops.validateState({ data: snapshot.data?.ops, sequences: snapshot.sequences });
   const submissions = holder.submissions.validateState(snapshot.data?.submissions);
   const previews = codec.mapRows(snapshot.data?.previews, { ids: false });
   const studio = holder.studio?.validateState(snapshot.data?.studio, content);
   if (previews.some(([hash, grant]) => !/^[a-f0-9]{64}$/.test(hash) || !["string", "number"].includes(typeof grant.by) || !Number.isFinite(Date.parse(grant.expiresAt)))) throw codec.fail("Website preview grants are incomplete.");
-  holder.store.importState(content); holder.lib.importState(library); holder.ops.importState(ops); holder.submissions.importState(submissions); codec.replaceMap(holder.previews, previews); codec.replaceObject(holder.roleOverrides, roles); codec.replaceObject(holder.roleDefinitions, definitions); if (studio) holder.studio.importState(studio);
+  holder.store.importState(content); holder.lib.importState(library); holder.ops.importState(ops); holder.submissions.importState(submissions); codec.replaceMap(holder.previews, previews); codec.replaceObject(holder.roleOverrides, roles); codec.replaceObject(holder.roleDefinitions, definitions); codec.replaceObject(holder.roleDeletions, deletions); if (studio) holder.studio.importState(studio);
 }
 
 const SCOPE = "website_manager";
@@ -73,12 +74,14 @@ module.exports = {
     const { identity } = ctx;
     const roleOverrides = {};
     const roleDefinitions = {};
-    identity.websiteManagerRoleAccess = { permissionsFor: roles => permissionsFor(roles, roleOverrides) };
+    const roleDeletions = {};
+    const activeRoleKeys = roles => availableRoleKeys(roles, roleDefinitions, roleDeletions);
+    identity.websiteManagerRoleAccess = { roleKeysFor: activeRoleKeys, permissionsFor: roles => permissionsFor(activeRoleKeys(roles), roleOverrides, roleDeletions) };
     const rid = () => crypto.randomUUID();
     const ok = (res, data, meta = {}, status = 200) => res.status(status).json({ data, meta });
     const fail = (res, status, code, message, extra = {}) => res.status(status).json({ error: { code, message, requestId: rid(), ...extra } });
 
-    const rolesOf = (u) => identity.userScopes(u).find((s) => s.scope === SCOPE)?.roles ?? [];
+    const rolesOf = (u) => activeRoleKeys(identity.userScopes(u).find((s) => s.scope === SCOPE)?.roles ?? []);
 
     // Every /v2/admin call: a valid token (401), then membership of the scope (403).
     function member(req, res) {
@@ -87,7 +90,7 @@ module.exports = {
       const roles = rolesOf(u);
       if (identity.grants?.website_manager?.[u.key]?.rolePaused) return fail(res, 403, "wm_role_paused", "Your Website Manager role access is paused."), null;
       if (!roles.length) return fail(res, 403, "forbidden", "You don't have access to the Website Manager."), null;
-      return { user: u, roles, permissions: permissionsFor(roles, roleOverrides) };
+      return { user: u, roles, permissions: permissionsFor(roles, roleOverrides, roleDeletions) };
     }
     const can = (who, permission) => who.permissions.includes(permission);
     // Guards a route by permission: 403 with the missing permission named, so the UI can say why.
@@ -121,7 +124,7 @@ module.exports = {
     const submissions = require("./wm/ideas").ideaSubmissions(store.ideas);
     const realm = ctx.realm || ctx.config?.sandbox || process.env.MOCK_SANDBOX || "demo";
     if (!/^[\w-]{1,100}$/.test(realm)) throw codec.fail("Invalid Website Manager realm.");
-    const holder = { realm, store, lib, ops, previews, submissions, roleOverrides, roleDefinitions, ctx };
+    const holder = { realm, store, lib, ops, previews, submissions, roleOverrides, roleDefinitions, roleDeletions, ctx };
     internal = holder;
     // Claude's suggestions for G2's gaps (D-038): drafts for review, never published by themselves.
     require("./wm/suggestions").applySuggestions({ store, media: lib.media, now: () => new Date().toISOString() });
@@ -370,12 +373,12 @@ module.exports = {
       const result = page(req, rows); ok(res, result.rows, result.meta);
     });
     // ---- members: who works in the Website Manager (for owners of leads, audit filters) ----
-    require("./wm/users").registerUsers(app, { identity, store, definitions: roleDefinitions, overrides: roleOverrides, need, ok, fail, page });
+    require("./wm/users").registerUsers(app, { identity, store, definitions: roleDefinitions, overrides: roleOverrides, deletions: roleDeletions, need, ok, fail, page });
     app.get("/v2/admin/members", need("content:view"), (req, res) => {
       const rows = identity.users
         .map((u) => ({ u, roles: rolesOf(u) }))
         .filter((x) => x.roles.length)
-        .map(({ u, roles }) => ({ key: u.key, name: identity.fullName(u), roles, permissions: permissionsFor(roles, roleOverrides) }));
+        .map(({ u, roles }) => ({ key: u.key, name: identity.fullName(u), roles, permissions: permissionsFor(roles, roleOverrides, roleDeletions) }));
       ok(res, rows, { total: rows.length, page: 1, pageSize: rows.length });
     });
 
@@ -469,7 +472,24 @@ module.exports = {
 
     // ---- roadmap ideas: community submissions and their moderation ----
     const { ideaView, eraseSubmitter, publicIdea, submissionErrors, submitComment, moderateComment, ideaCategory, ideaTags, classificationErrors, cleanTags } = require("./wm/ideas");
-    const ideaOut = (req, x) => ({ ...ideaView(x, pii(req)), history: x.history.map((h) => ({ ...h, by: person(h.by === "visitor" ? null : h.by) })) });
+    const { ensureNotes, addNote: addInternalNote, changeNote } = require("./wm/notes");
+    const ideaOut = (req, x) => ({ ...ideaView(x, pii(req)), notes: ensureNotes(x).map(n => ({ ...n, by: person(n.by) })), history: x.history.map((h) => ({ ...h, by: person(h.by === "visitor" ? null : h.by) })) });
+    app.post("/v2/admin/ideas/:id/notes", need("marketing:edit"), (req, res) => {
+      const idea = store.ideas.get(req.params.id);
+      if (!idea) return fail(res, 404, "not_found", "This idea does not exist.");
+      if (Number(req.get("if-match")) !== idea.version) return fail(res, 412, "stale", "This idea changed since you opened it.");
+      const result = addInternalNote(idea, req.body?.text, who(req).key, new Date().toISOString(), store.audit, "idea");
+      if (result.status) return fail(res, result.status, result.code, "Write a note of up to 5000 characters.", { fieldErrors: result.fieldErrors });
+      ok(res, ideaOut(req, idea));
+    });
+    for (const method of ["patch", "delete"]) app[method]("/v2/admin/ideas/:id/notes/:noteId", need("marketing:edit"), (req, res) => {
+      const idea = store.ideas.get(req.params.id);
+      if (!idea) return fail(res, 404, "not_found", "This idea does not exist.");
+      if (Number(req.get("if-match")) !== idea.version) return fail(res, 412, "stale", "This idea changed since you opened it.");
+      const result = changeNote(idea, req.params.noteId, method === "patch" ? "edit" : "delete", req.body?.text, who(req).key, new Date().toISOString(), store.audit, "idea");
+      if (result.status) return fail(res, result.status, result.code, "The note could not be updated.", { fieldErrors: result.fieldErrors });
+      ok(res, ideaOut(req, idea));
+    });
     app.get("/v2/admin/ideas/:id", need("marketing:view"), (req, res) => {
       const idea = store.ideas.get(req.params.id);
       if (!idea) return fail(res, 404, "not_found", "This idea does not exist.");
@@ -772,7 +792,7 @@ module.exports = {
     // Admin approval, which arrives with the pricing editor.
     app.get("/v2/admin/pricing", need("content:view"), (req, res) => ok(res, store.pricing()));
 
-    require("./wm/roles").registerRoles(app, { identity, store, overrides: roleOverrides, definitions: roleDefinitions, need, ok, fail });
+    require("./wm/roles").registerRoles(app, { identity, store, overrides: roleOverrides, definitions: roleDefinitions, deletions: roleDeletions, need, ok, fail });
 
     return { exportState: () => exportHolder(holder), importState: snapshot => importHolder(holder, snapshot) };
   },

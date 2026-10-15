@@ -64,6 +64,22 @@ Repeating the installer finds its existing lead by a retained context marker,
 preserves any edited demo accounts, and creates no duplicate intake. The older
 unlinked sample leads remain useful for the CRM contacts-list fallback.
 
+The current mock runtime advertises atomic initial account access. The installer
+requires that capability before writing anything. Account creation accepts the
+optional `roles`, `active` and `rolePaused` fields, validates them all first, then
+creates the account and its internal Website Manager assignment in one request.
+No billing lines or tool assignments are added. Omitting these fields preserves
+the normal Add user behavior. A lost creation response is recovered by listing
+the retained account without editing it; a rejected request leaves no partial
+account, so the installer can safely be retried after an outage.
+
+Deleting a role removes that assignment from its users while preserving their
+other roles, account state and tool access. Only Super admin is undeletable.
+Deleted built-in and custom keys remain recorded in the saved mock state and
+cannot be reassigned or restored by a runtime restart. Confirmation counts and
+role versions include current assignments so a changed assignment requires a
+fresh confirmation.
+
 Run regression checks with:
 
 ```text

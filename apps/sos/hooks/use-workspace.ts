@@ -38,11 +38,17 @@ export default function useWorkspace() {
     },
     [dispatch, accessToken, switching],
   );
-  const role = workspaceContext?.member.role ?? me.data?.workspace.role;
+  // A skipped RTK query can retain its last result after entering staff mode.
+  // Only expose data that still belongs to this tab's verified workspace actor.
+  const current = workspaceContext && me.data?.workspace.id === workspaceContext.workspace.id &&
+    me.data.workspaceContext?.actor.userId === workspaceContext.actor.userId &&
+    me.data.workspaceContext.actor.effectiveUserId === workspaceContext.actor.effectiveUserId &&
+    me.data.workspaceContext.actor.readOnly === workspaceContext.actor.readOnly ? me.data : undefined;
+  const role = workspaceContext?.member.role;
   return {
-    me: me.data,
-    isLoading: me.isLoading,
-    error: me.error,
+    me: current,
+    isLoading: Boolean(workspaceContext) && me.isLoading,
+    error: workspaceContext ? me.error : undefined,
     refetch: me.refetch,
     role,
     /** Owner: billing, plans and payments (spec 05 §1). */

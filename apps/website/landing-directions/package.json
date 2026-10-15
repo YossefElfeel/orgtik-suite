@@ -8,7 +8,7 @@
     "build": "vite build && node scripts/prerender-heads.mjs",
     "preview": "vite preview",
     "test:cart": "node tests/cart.test.mjs",
-    "test": "node tests/cart.test.mjs && node tests/suite-session.test.mjs && node --test tests/published-content.test.mjs tests/managed-page.test.mjs tests/roadmap-form.test.mjs tests/roadmap-community.test.mjs",
+    "test": "node tests/cart.test.mjs && node tests/suite-session.test.mjs && node --test tests/published-content.test.mjs tests/managed-page.test.mjs tests/roadmap-form.test.mjs tests/roadmap-community.test.mjs tests/preview-focus.test.mjs",
     "format": "prettier --write src index.html vite.config.mjs",
     "format:check": "prettier --check src index.html vite.config.mjs",
     "lint": "node ../../../tools/ci/lint.mjs --app=website/landing-directions"

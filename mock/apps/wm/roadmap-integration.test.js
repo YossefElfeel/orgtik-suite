@@ -72,9 +72,57 @@ test('website suggestions and moderated comments share the retained CMS idea and
   assert.equal((await call(moderatePath, 'POST', { action: 'hide', reason: 'Off topic' }, { 'if-match': '1' })).status, 412);
   assert.equal((await call(moderatePath, 'POST', { action: 'hide', reason: 'Off topic' }, { 'if-match': '2' })).status, 200);
   assert.deepEqual((await publicRows()).find(idea => idea.id === id).discussion, []); assert.equal((await detail()).data.discussion[0].status, 'hidden');
+  role = 'wm_viewer';
+  assert.equal((await call(moderatePath, 'POST', { action: 'delete' }, { 'if-match': '3' })).status, 403);
+  assert.equal((await detail()).data.discussion[0].status, 'hidden');
+  role = 'wm_admin';
+  assert.equal((await call(moderatePath, 'POST', { action: 'delete' })).status, 412);
+  assert.equal((await call(moderatePath, 'POST', { action: 'delete' }, { 'if-match': '2' })).status, 412);
+  const deleted = await call(moderatePath, 'POST', { action: 'delete' }, { 'if-match': '3' });
+  assert.equal(deleted.status, 200); assert.equal(deleted.data.discussion[0].status, 'deleted');
+  assert.equal(deleted.data.history[0].action, 'comment_delete'); assert.equal(deleted.data.history[0].commentId, commentId);
+  assert.equal(deleted.data.discussion[0].body, commentPayload.message);
+  assert.equal((await publicRows()).find(idea => idea.id === id).comments, 0);
+  const retainedDeletion = hooks.exportState(); hooks.importState(retainedDeletion);
+  assert.equal((await detail()).data.discussion[0].status, 'deleted');
+  assert.equal((await call(commentPath, 'POST', commentPayload, { 'idempotency-key': 'comment-retry' })).data.id, commentId);
+  assert.equal((await detail()).data.discussion.length, 1);
+  assert.deepEqual((await publicRows()).find(idea => idea.id === id).discussion, []);
+  assert.equal((await call(moderatePath, 'POST', { action: 'approve' }, { 'if-match': '4' })).status, 409);
+  role = 'wm_viewer';
+  assert.equal((await call(moderatePath, 'POST', { action: 'restore' }, { 'if-match': '4' })).status, 403);
+  role = 'wm_admin';
+  assert.equal((await call(moderatePath, 'POST', { action: 'restore' }, { 'if-match': '3' })).status, 412);
+  const restored = await call(moderatePath, 'POST', { action: 'restore' }, { 'if-match': '4' });
+  assert.equal(restored.status, 200); assert.equal(restored.data.discussion[0].status, 'hidden');
+  assert.deepEqual((await publicRows()).find(idea => idea.id === id).discussion, []);
+  assert.equal((await call(moderatePath, 'POST', { action: 'approve' }, { 'if-match': '5' })).status, 200);
+  assert.equal((await publicRows()).find(idea => idea.id === id).comments, 1);
   idea = (await detail()).data;
   assert.equal((await call(`/admin/ideas/${id}/moderate`, 'POST', { action: 'hide', reason: 'Closed test' }, { 'if-match': String(idea.version) })).status, 200);
   assert.equal((await call(commentPath, 'POST', commentPayload)).status, 404); assert.ok(!(await publicRows()).some(idea => idea.id === id));
+});
+
+test('deleted visitor comments and their retry receipts remain private through merging and cold restoration', () => {
+  const at = '2026-10-15T13:00:00.000Z', store = makeStore(() => at);
+  const [source, target] = [...store.ideas.values()].filter(idea => store.VISIBLE.includes(idea.status)).slice(0, 2);
+  const input = { name: 'Visitor', email: 'deleted-private@fixture.test', message: 'Retained deleted content.', consent: true, privacyVersion: '0.2' };
+  const comment = submitComment(source, input, 'retained-deletion-retry', at).comment;
+  moderateComment(source, comment.id, 1, 'approve', undefined, 'moderator', at);
+  moderateComment(source, comment.id, 2, 'delete', undefined, 'moderator', at);
+  assert.ok(store.moderate(source, { key: 'moderator' }, 'merge', { into: target.id }).idea);
+  assert.equal(source.discussion.length, 0);
+  const restored = makeStore(() => at); restored.importState(store.exportState()); const row = restored.ideas.get(target.id);
+  const retained = row.discussion.find(item => item.id === comment.id);
+  assert.equal(retained.status, 'deleted'); assert.equal(retained.body, input.message); assert.equal(retained.moderationHistory.length, 2);
+  assert.equal(submitComment(row, input, 'retained-deletion-retry', at).comment.id, retained.id);
+  assert.equal(row.discussion.length, 1); assert.deepEqual(publicIdea(row).discussion, []);
+  assert.ok(!JSON.stringify(publicIdea(row)).includes(input.email)); assert.ok(!JSON.stringify(publicIdea(row)).includes(input.message));
+  const before = restored.exportState(), invalid = structuredClone(before);
+  invalid.ideas.find(([id]) => id === target.id)[1].discussion[0].moderationHistory[0].to = 'unknown';
+  assert.throws(() => restored.importState(invalid), /discussion state/); assert.deepEqual(restored.exportState(), before);
+  assert.equal(moderateComment(row, retained.id, retained.version, 'restore', undefined, 'moderator', at).comment.status, 'hidden');
+  assert.deepEqual(publicIdea(row).discussion, []);
 });
 
 test('discussion moderation, privacy and retry receipts survive merges and cold content restoration', () => {
