@@ -4,11 +4,13 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-import { LoadingState, ErrorState, EmptyState, Textarea, Button, ConfirmDialog, Dialog, DialogBody, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, Field, Input, Select, StatusBadge, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
+import { LoadingState, ErrorState, EmptyState, Textarea, Button, ConfirmDialog, Dialog, DialogBody, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, Field, Input, Select, StatusBadge, TagInput, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
 
 
 import { useCan } from "@/lib/permissions";
 import { LifecycleProgress } from "./LifecycleProgress";
+import { IdeaComments } from "./IdeaComments";
+import { IDEA_CATEGORIES, IdeaTags } from "./IdeaTags";
 import { useIdeaQuery, useEditIdeaMutation } from "@/store/api";
 import {
   statusOf,
@@ -87,7 +89,7 @@ export function ActionDialog({
             </Field>
           </DialogBody>
           <DialogFooter>
-            <Button variant="ghost" onClick={onClose}>
+            <Button variant="secondary" onClick={onClose}>
               {t("cancel")}
             </Button>
             <Button
@@ -111,7 +113,7 @@ export function ActionDialog({
     <ConfirmDialog
       open
       onOpenChange={(o) => !o && onClose()}
-      tone={action === "hide" ? "danger" : "primary"}
+      tone={action === "decline" ? "danger" : action === "hide" ? "warning" : "primary"}
       title={t(`confirm.${action}`, { title: idea.title })}
       impact={t(`impact.${action}`)}
       reason={asks}
@@ -138,16 +140,18 @@ export function IdeaDetailContent({
   const [fields, setFields] = useState({
     title: idea.title,
     body: idea.body,
-    theme: idea.theme,
+    tags: idea.tags,
+    category: idea.category,
   });
   const [save, saving] = useEditIdeaMutation();
   const [acting, setActing] = useState<IdeaAction | null>(null);
   const f = useFormatter();
   const can = useCan();
   const [erase] = useEraseIdeaMutation();
+  const tagsInvalid = fields.tags.length > 10 || fields.tags.some(tag => tag.trim().length > 100);
   return (
-    <div className="flex max-w-5xl flex-col gap-6">
-      <div>
+    <div className="flex w-full min-w-0 flex-col gap-6">
+      <div className="flex min-w-0 flex-col gap-5">
         <header>
           <h1 className="mb-3 font-display text-title-lg">
             <span dir="auto">{idea.title}</span>
@@ -159,11 +163,46 @@ export function IdeaDetailContent({
                 state={idea.status}
                 size="sm"
               />
-              <span dir="auto">{idea.theme}</span>
+              <span>{t("colCategory")}: {t(`categories.${idea.category ?? "unassigned"}`)}</span>
+              <IdeaTags tags={idea.tags} empty={t("noTags")} />
             </span>
           </div>
         </header>
         <div className="flex flex-col gap-5">
+          {can("marketing:edit") ? (
+            <div className="flex flex-wrap gap-2">
+              <Button
+                variant="secondary"
+                disabled={saving.isLoading}
+                onClick={() => {
+                  setFields({
+                    title: idea.title,
+                    body: idea.body,
+                    tags: idea.tags,
+                    category: idea.category,
+                  });
+                  setEditing((value) => !value);
+                }}
+              >
+                {editing ? t("cancel") : ti("edit")}
+              </Button>
+              {(NEXT[idea.status] ?? []).map((action) => (
+                <Button
+                  key={action}
+                  variant={
+                    action === "decline"
+                      ? "danger"
+                      : action === "hide" ? "warning"
+                      : "secondary"
+                  }
+                  disabled={editing || saving.isLoading}
+                  onClick={() => setActing(action)}
+                >
+                  {t(`actions.${action}`)}
+                </Button>
+              ))}
+            </div>
+          ) : null}
           <LifecycleProgress
             label={t("history")}
             current={idea.status}
@@ -181,38 +220,8 @@ export function IdeaDetailContent({
             }))}
             outcome={<StatusBadge entity="roadmap_idea" state={idea.status} />}
           />
-          {can("marketing:edit") ? (
-            <div className="flex flex-wrap gap-2">
-              <Button
-                variant="secondary"
-                onClick={() => {
-                  setFields({
-                    title: idea.title,
-                    body: idea.body,
-                    theme: idea.theme,
-                  });
-                  setEditing((value) => !value);
-                }}
-              >
-                {ti("edit")}
-              </Button>
-              {(NEXT[idea.status] ?? []).map((action) => (
-                <Button
-                  key={action}
-                  variant={
-                    action === "hide" || action === "decline"
-                      ? "warning"
-                      : "secondary"
-                  }
-                  onClick={() => setActing(action)}
-                >
-                  {t(`actions.${action}`)}
-                </Button>
-              ))}
-            </div>
-          ) : null}
           {editing && can("marketing:edit") ? (
-            <div className="flex flex-col gap-3">
+            <fieldset disabled={saving.isLoading} className="flex min-w-0 flex-col gap-3">
               <Field label={t("colIdea")}>
                 <Input
                   maxLength={180}
@@ -238,21 +247,20 @@ export function IdeaDetailContent({
                   }
                 />
               </Field>
-              <Field label={t("colTheme")}>
-                <Input
-                  maxLength={100}
-                  value={fields.theme}
-                  onChange={(event) =>
-                    setFields((previous) => ({
-                      ...previous,
-                      theme: event.target.value,
-                    }))
-                  }
-                />
+              <Field label={t("colCategory")} description={t("categoryHelp")}>
+                <Select aria-label={t("colCategory")} value={fields.category ?? "unassigned"} onValueChange={value => setFields(previous => ({ ...previous, category: value === "unassigned" ? null : value as Idea["category"] }))} options={[{ value: "unassigned", label: t("categories.unassigned") }, ...IDEA_CATEGORIES.map(value => ({ value, label: t(`categories.${value}`) }))]} />
               </Field>
+              <Field label={t("colTags")} description={t("tagsHelp")} error={tagsInvalid ? t("tagsError") : undefined}>
+                <div className="min-w-0 [&_li]:max-w-full [&_li_span]:min-w-0 [&_li_span]:break-words">
+                  <TagInput label={t("colTags")} value={fields.tags} max={10} disabled={saving.isLoading} placeholder={t("tagsPlaceholder")} onChange={tags => setFields(previous => ({ ...previous, tags }))} />
+                </div>
+              </Field>
+              <div className="flex flex-wrap gap-2">
+              <Button variant="secondary" disabled={saving.isLoading} onClick={() => { setFields({title: idea.title, body: idea.body, tags: idea.tags, category: idea.category}); setEditing(false); }}>{t("cancel")}</Button>
               <Button
                 className="self-start"
                 loading={saving.isLoading}
+                disabled={tagsInvalid}
                 onClick={async () => {
                   try {
                     await save({
@@ -269,9 +277,10 @@ export function IdeaDetailContent({
                   }
                 }}
               >
-                {te("save")}
+                {ti("saveChanges")}
               </Button>
-            </div>
+              </div>
+            </fieldset>
           ) : null}
           {acting ? (
             <ActionDialog
@@ -344,6 +353,7 @@ export function IdeaDetailContent({
               )}
             </section>
           ) : null}
+          <IdeaComments idea={idea} onRefresh={onClose} disabled={editing || saving.isLoading} />
           {idea.commentPreview?.length ? (
             <section
               className="flex flex-col gap-2"
@@ -426,7 +436,7 @@ export function IdeaDetailContent({
 }
 
 export function IdeaDetail({ id }: { id: string }) {
-  const query = useIdeaQuery(id);
+  const query = useIdeaQuery(id, { refetchOnMountOrArgChange: true });
   const t = useTranslations("Ideas");
   if (query.isLoading) return <LoadingState rows={5} />;
   if (statusOf(query.error) === 404) return <EmptyState title={t("noMatch")} />;

@@ -63,16 +63,20 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
   }
   function crmLeadTarget({ leadId } = {}) {
     const request = requests.getStore(), p = currentPrincipal(), S = platform().getStore(), identity = identityFor(), person = p && identity.findUser(p.user.id), workspace = S.workspace('ws_orgtik');
-    if (!request || !person || p.claims.mode !== 'staff' || p.claims.aud !== 'staff:wm' || !p.context.staffAccess?.permissions.wm?.includes('content:view') || typeof leadId !== 'string' || !/^[\w-]{1,160}$/.test(leadId)) throw failure(403, 'wm_lead_context_required', 'Choose an actual Website Manager lead reference.');
-    const path = `/customers/${encodeURIComponent(leadId)}`, base = { workspaceId: workspace?.id || null, leadId, scope: 'sales', path, canOpen: false, reason: 'crm_read_access_required', url: null };
-    if (!workspace || workspace.kind !== 'orgtik_internal' || ['deleted', 'cancelled'].includes(workspace.state)) return { ...base, reason: 'orgtik_crm_unavailable' };
+    if (!request || !person || p.claims.mode !== 'staff' || p.claims.aud !== 'staff:wm' || !p.context.staffAccess?.permissions.wm?.includes('marketing:view') || (leadId !== undefined && (typeof leadId !== 'string' || !/^[\w-]{1,160}$/.test(leadId)))) throw failure(403, 'wm_lead_context_required', 'Choose an actual Website Manager lead reference.');
+    const base = { workspaceId: workspace?.id || null, leadId: leadId || null, scope: 'sales', path: '/customers', destination: 'list', canOpen: false, reason: 'crm_read_access_required', url: null };
+    if (!workspace || workspace.kind !== 'orgtik_internal' || ['suspended', 'deleted', 'cancelled'].includes(workspace.state)) return { ...base, reason: 'orgtik_crm_unavailable' };
     let context;
     try { context = require('./workspace-context').resolveWorkspaceContext(S, identity, person, { realm, workspaceId: workspace.id, actorUserId: p.actor.id, audience: 'sales' }); } catch (error) { if ([403, 404].includes(error.status)) return base; throw error; }
     if (!require('./connectors').admitted(context.tools.crm)) return base;
-    let runtime = request.suiteReadRuntimes.get('sales'); if (!runtime) { runtime = registry.create(workspace.id, 'sales'); request.suiteReadRuntimes.set('sales', runtime); }
-    if (!runtime.suiteFeed(context).contacts.some(row => row.id === leadId)) return { ...base, reason: 'crm_record_unavailable' };
+    let found = false;
+    if (leadId) {
+      let runtime = request.suiteReadRuntimes.get('sales'); if (!runtime) { runtime = registry.create(workspace.id, 'sales'); request.suiteReadRuntimes.set('sales', runtime); }
+      found = runtime.suiteFeed(context).contacts.some(row => row.id === leadId);
+    }
+    const path = found ? `/customers/${encodeURIComponent(leadId)}` : '/customers';
     const query = new URLSearchParams({ workspaceId: workspace.id, redirect: path });
-    return { ...base, canOpen: true, reason: null, url: `${config.webUrl('sos')}/go/sales?${query}` };
+    return { ...base, path, destination: found ? 'record' : 'list', canOpen: true, reason: found ? null : leadId ? 'crm_record_unavailable' : 'crm_delivery_pending', url: `${config.webUrl('sos')}/go/sales?${query}` };
   }
   function internalCrmRuntime(request) {
     const S = platform().getStore(), workspace = S.workspace('ws_orgtik');
@@ -682,7 +686,7 @@ function createWorkspaceBoundary({ realm, config, store, accountStore, platform,
     const url = req.url || "/", authPublic = /^\/api\/auth\/(login|register|handoff\/exchange)(?:$|\?)/.test(url);
     const publicFile = key === 'files' && /^\/api\/v1\/public\/shares\/([\w-]+)(?:$|\/|\?)/.exec(url);
     const taskSample = key === 'tasks' && isTaskSampleRequest(req);
-    const publicCms = key === 'wm' && (['GET', 'HEAD'].includes(req.method) && /^\/v2\/(?:public(?:\/|$)|media\/[^/]+(?:$|\?))/.test(url) || req.method === 'POST' && /^\/v2\/public\/(leads|ideas)(?:$|\?)/.test(url));
+    const publicCms = key === 'wm' && (['GET', 'HEAD'].includes(req.method) && /^\/v2\/(?:public(?:\/|$)|media\/[^/]+(?:$|\?))/.test(url) || req.method === 'POST' && /^\/v2\/public\/(?:leads|ideas(?:\/[\w-]+\/comments)?)(?:$|\?)/.test(url));
     const cmsPreview = key === 'wm' && ['GET', 'HEAD'].includes(req.method) && /^\/v2\/preview\/entries\/[\w-]+(?:$|\?)/.test(url);
     const anonymous = authPublic || publicFile || taskSample || publicCms || cmsPreview || /^\/v1\/public\//.test(url) || /^\/(__health|__mock\/status|__mock\/clock)(?:$|\?)/.test(url);
     let frame, runtime, commitAttempted = false;

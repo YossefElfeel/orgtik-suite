@@ -58,6 +58,8 @@ import { SeoPanel, type SeoBlock } from "@/components/content/SeoPanel";
 import { PricingAuthority } from "@/components/content/PricingAuthority";
 import { SharedCopyPanel, SHARED_PAGES } from "@/components/content/SharedCopyPanel";
 import { IconPicker } from "./IconPicker";
+import { YearPicker } from "./YearPicker";
+import { CaseStudyDisplay } from "./CaseStudyDisplay";
 import { SectionOrder } from "./SectionOrder";
 import { SectionAttachments } from "./SectionAttachments";
 import { MediaPicker } from "@/components/media/MediaPicker";
@@ -618,14 +620,12 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
             label={tl("year")}
             error={errors.year ? t("errorYear") : undefined}
           >
-            <Input
-              dir="ltr"
-              inputMode="numeric"
-              maxLength={4}
-              readOnly={lockShared}
+            <YearPicker
+              label={tl("year")}
+              disabled={lockShared}
               value={neutral.year ?? ""}
-              onChange={(e) =>
-                setNeutralEdit((n) => ({ ...n, year: e.target.value }))
+              onValueChange={(year) =>
+                setNeutralEdit((n) => ({ ...n, year: year ?? "" }))
               }
             />
           </Field>
@@ -870,7 +870,7 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
                 onConfirm={({ reason }) => act("request_changes", reason)}
               />
             ) : null}
-            {!viewing && editable && !dirty && !entry.hasDraft ? <Button variant="secondary" onClick={discardLocal}>{t("discard")}</Button> : null}
+            {!viewing && editable && !dirty && !entry.hasDraft ? <Button variant="secondary" onClick={discardLocal}>{t("cancel")}</Button> : null}
             {primary}
           </div>
         }
@@ -911,11 +911,12 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
           />
           <p className="min-w-0 flex-1 text-body-sm text-fg">
             {t("figuresBanner")}
+            {dirty ? <span className="mt-1 block text-caption">{t("caseStudyDisplay.saveBeforeConfirm")}</span> : null}
           </p>
           {can("claims:approve") ? (
             <ConfirmDialog
               trigger={
-                <Button size="sm" variant="secondary">
+                <Button size="sm" variant="secondary" disabled={dirty || saving.isLoading || savingAction.busy || Boolean(savingAction.pending)}>
                   {t("approveFigures")}
                 </Button>
               }
@@ -933,55 +934,13 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
       ) : null}
 
       {type.key === "caseStudy" ? (
-        <div className="flex flex-col gap-3 rounded-card border border-line bg-surface px-4 py-3">
-          <Field
-            label={t("narrativeTitle")}
-            description={
-              !can("content:approve")
-                ? t("narrativePermission")
-                : entry.figures === "sample"
-                  ? t("narrativeSamples")
-                  : t("narrativeHelp")
-            }
-            error={
-              errors.narrativePublished ? t(errors.narrativePublished === "narrative_needs_approved_figures" ? "errorNarrativeFigures" : "errorRequired") : undefined
-            }
-          >
-            <Switch
-              checked={neutral.narrativePublished === true}
-              disabled={!can("content:approve") || entry.figures === "sample"}
-              onCheckedChange={(narrativePublished) =>
-                setNeutralEdit((p) => ({ ...p, narrativePublished }))
-              }
-              aria-label={t("narrativeTitle")}
-            />
-          </Field>
-          {entry.figures === "sample" || errors.sampleNarrativePublished ? (
-            <Field
-              label={t("sampleNarrativeTitle")}
-              description={t("sampleNarrativeHelp")}
-              error={
-                errors.sampleNarrativePublished
-                  ? t(errors.sampleNarrativePublished === "sample_narrative_needs_sample_figures" ? "errorSampleNarrative" : "errorRequired")
-                  : undefined
-              }
-            >
-              <Switch
-                checked={neutral.sampleNarrativePublished === true}
-                disabled={!can("content:approve") || entry.figures !== "sample"}
-                onCheckedChange={(sampleNarrativePublished) =>
-                  setNeutralEdit((p) => ({ ...p, sampleNarrativePublished }))
-                }
-                aria-label={t("sampleNarrativeTitle")}
-              />
-            </Field>
-          ) : null}
-          {!neutral.narrativePublished && !neutral.sampleNarrativePublished ? (
-            <p role="note" className="text-body-sm text-fg-muted">
-              {t("narrativeDisabled")}
-            </p>
-          ) : null}
-        </div>
+        <CaseStudyDisplay
+          mode={neutral.narrativePublished === true ? "approved" : neutral.sampleNarrativePublished === true ? "sample" : "card"}
+          approved={entry.figures === "approved"}
+          disabled={!editable || !can("content:approve")}
+          error={errors.narrativePublished ? t(errors.narrativePublished === "narrative_needs_approved_figures" ? "errorNarrativeFigures" : "errorRequired") : errors.sampleNarrativePublished ? t(errors.sampleNarrativePublished === "sample_narrative_needs_sample_figures" ? "errorSampleNarrative" : "errorRequired") : undefined}
+          onChange={mode => setNeutralEdit(previous => ({ ...previous, narrativePublished: mode === "approved", sampleNarrativePublished: mode === "sample" }))}
+        />
       ) : null}
 
       <Tabs value={lang} onValueChange={(v) => setLang(v as Locale)}>
@@ -1182,10 +1141,11 @@ function Editor({ entry, type, seoOnly = false }: { entry: Entry; type: ContentT
             </span>
             <div className="flex gap-2">
               <Button
-                variant="ghost"
+                variant="secondary"
+                disabled={saving.isLoading}
                 onClick={discardLocal}
               >
-                {t("discard")}
+                {t("cancel")}
               </Button>
               <Button loading={saving.isLoading} onClick={saveAll}>
                 {t("save")}

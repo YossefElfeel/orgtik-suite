@@ -1,20 +1,49 @@
 "use client";
 
-import { useStudio } from "@/lib/studio";
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { DotsThreeVertical, EyeSlash } from "@phosphor-icons/react";
-import { buttonVariants, Badge, LoadingState, ErrorState, EmptyState, Button, ConfirmDialog, Field, IconButton, Menu, MenuContent, MenuItem, MenuTrigger, Select, StatusBadge, Textarea, toast, useFormatter, useStatusLabel } from "@orgtik/ui";
-
+import {
+  Badge,
+  LoadingState,
+  ErrorState,
+  EmptyState,
+  Button,
+  ConfirmDialog,
+  Field,
+  IconButton,
+  Menu,
+  MenuContent,
+  MenuItem,
+  MenuTrigger,
+  Select,
+  StatusBadge,
+  Textarea,
+  toast,
+  useFormatter,
+  useStatusLabel,
+} from "@orgtik/ui";
 
 import { useCan } from "@/lib/permissions";
 import { LifecycleProgress } from "./LifecycleProgress";
-import { statusOf, useAssignLeadMutation, useEraseLeadMutation, useLeadQuery, useMembersQuery, useMoveLeadMutation, useNoteLeadMutation, type ApiError, type Lead, type LeadAction, type LeadStatus } from "@/store/api";
+import { CrmLeadAction } from "./CrmLeadAction";
+import {
+  statusOf,
+  useAssignLeadMutation,
+  useEraseLeadMutation,
+  useLeadQuery,
+  useMembersQuery,
+  useMoveLeadMutation,
+  useNoteLeadMutation,
+  type ApiError,
+  type Lead,
+  type LeadAction,
+  type LeadStatus,
+} from "@/store/api";
 
 export function LeadDetail({ id }: { id: string }) {
   const t = useTranslations("Leads");
   const v3 = useTranslations("WmV3");
-  const target = useStudio<{canOpen:boolean;url:string|null}>("/studio/lead-target/"+id);
   const f = useFormatter();
   const can = useCan();
   const { data: lead, isLoading, error, refetch } = useLeadQuery(id);
@@ -33,19 +62,24 @@ export function LeadDetail({ id }: { id: string }) {
   );
   const ctx = lead.context;
   return (
-    <div className="flex max-w-5xl flex-col gap-6">
+    <div className="flex w-full min-w-0 flex-col gap-6">
       <div>
-        <header>
-          <h1 className="mb-3 font-display text-title-lg">
-            <span dir="auto">{lead.erased ? t("erasedName") : lead.name}</span>
-          </h1>
-          <div>
-            <span className="inline-flex flex-wrap items-center gap-2">
-              <StatusBadge entity="lead" state={lead.status} size="sm" />
-              <span dir="auto">{lead.topic}</span>
-              {lead.sample ? <Badge size="sm">{t("sample")}</Badge> : null}
-            </span>
+        <header className="mb-5 flex flex-wrap items-start justify-between gap-4">
+          <div className="min-w-0 flex-1">
+            <h1 className="mb-3 font-display text-title-lg">
+              <span dir="auto">
+                {lead.erased ? t("erasedName") : lead.name}
+              </span>
+            </h1>
+            <div>
+              <span className="inline-flex flex-wrap items-center gap-2">
+                <StatusBadge entity="lead" state={lead.status} size="sm" />
+                <span dir="auto">{lead.topic}</span>
+                {lead.sample ? <Badge size="sm">{t("sample")}</Badge> : null}
+              </span>
+            </div>
           </div>
+          <CrmLeadAction key={lead.id} id={lead.id} />
         </header>
         <div className="flex flex-col gap-5">
           <LifecycleProgress
@@ -59,7 +93,9 @@ export function LeadDetail({ id }: { id: string }) {
             ).map((key) => ({ key, label: statusLabel("lead", key) }))}
             outcome={<StatusBadge entity="lead" state={lead.status} />}
           />
-          <p role="note" className="text-body-sm text-fg-muted">{v3("leadReadOnly")}</p>{target.data?.canOpen&&target.data.url?<a href={target.data.url} className={buttonVariants({variant:"secondary"})}>{v3("openCRM")}</a>:<p role="status" className="text-body-sm text-fg-muted">{v3("crmAccessPending")}</p>}
+          <p role="note" className="text-body-sm text-fg-muted">
+            {v3("leadReadOnly")}
+          </p>
           <section
             aria-labelledby="lead-contact"
             className="rounded-card border border-line bg-raised p-5 text-body-sm"

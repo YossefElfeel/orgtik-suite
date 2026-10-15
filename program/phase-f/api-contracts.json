@@ -11238,6 +11238,18 @@
     {
       "app": "wm",
       "method": "POST",
+      "path": "/v2/admin/ideas/:id/comments/:commentId/moderate",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "POST",
       "path": "/v2/admin/ideas/:id/erase",
       "source": "apps/wm.js",
       "authorization": {
@@ -11561,6 +11573,30 @@
     },
     {
       "app": "wm",
+      "method": "POST",
+      "path": "/v2/admin/roles",
+      "source": "apps/wm/roles.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "DELETE",
+      "path": "/v2/admin/roles/:key",
+      "source": "apps/wm/roles.js",
+      "authorization": {
+        "audience": "staff:wm or staff:admin for this route",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current OrgTik staff permission and current internal membership",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
       "method": "PATCH",
       "path": "/v2/admin/roles/:key",
       "source": "apps/wm/roles.js",
@@ -11779,6 +11815,18 @@
       "app": "wm",
       "method": "POST",
       "path": "/v2/public/ideas",
+      "source": "apps/wm.js",
+      "authorization": {
+        "audience": "public published content or validated public form",
+        "workspaceBinding": "OrgTik internal or identity context; no customer workspace privilege",
+        "permission": "current tool grant and app record/role guard",
+        "writes": "current write capability; billing and impersonation restrictions"
+      }
+    },
+    {
+      "app": "wm",
+      "method": "POST",
+      "path": "/v2/public/ideas/:id/comments",
       "source": "apps/wm.js",
       "authorization": {
         "audience": "public published content or validated public form",

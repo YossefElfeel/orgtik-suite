@@ -724,3 +724,34 @@ test("media uploads retain descriptions, tags, alt text and focal points through
   assert.deepEqual(detail.data.focal, { x: 25, y: 75 });
   assert.equal((await fetch(f.base + detail.data.url)).status, 200);
 });
+
+test("roadmap year navigation covers the whole collection and stays stable across filters and pages", async (t) => {
+  const f = await fixture(t), snapshot = f.hooks.exportState();
+  const template = structuredClone(snapshot.data.content.entries.find(([id]) => id === "rm_01")[1]);
+  snapshot.data.content.entries = snapshot.data.content.entries.filter(([, row]) => row.type !== "roadmapItem");
+  for (let n = 0; n < 104; n++) {
+    const row = structuredClone(template);
+    row.id = `rm_year_fixture_${n}`;
+    row.order = n;
+    row.draft = structuredClone(row.live);
+    row.draft.locales.en.name = `Year navigation fixture ${n}`;
+    row.draft.year = n < 100 ? "2025" : ["2024", "2026", "2050", "2025"][n - 100];
+    row.workflow.state = "draft";
+    snapshot.data.content.entries.push([row.id, row]);
+  }
+  f.hooks.importState(snapshot);
+  const expected = ["2024", "2025", "2026", "2050"];
+  for (const query of ["pageSize=1", "page=11", "year=2025", "search=absent", "year=1999&state=published&period=next"]) {
+    const result = await f.call(`/admin/entries/roadmapItem?${query}`);
+    assert.equal(result.status, 200);
+    assert.deepEqual(result.meta.years, expected, query);
+  }
+  const filtered = await f.call("/admin/entries/roadmapItem?year=2050");
+  assert.equal(filtered.meta.total, 1);
+  assert.equal(filtered.data[0].year, "2050");
+  const reduced = structuredClone(snapshot);
+  reduced.data.content.entries = reduced.data.content.entries.filter(([, row]) => row.type !== "roadmapItem" || row.draft.year !== "2050");
+  f.hooks.importState(reduced);
+  assert.deepEqual((await f.call("/admin/entries/roadmapItem")).meta.years, ["2024", "2025", "2026"]);
+  assert.equal((await f.call("/admin/entries/page")).meta.years, undefined);
+});

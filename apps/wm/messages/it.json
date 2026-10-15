@@ -62,7 +62,8 @@
       "idea": "Idee",
       "lead": "Contatti",
       "settings": "Impostazioni",
-      "user": "Gestione utenti"
+      "user": "Gestione utenti",
+      "role": "Ruoli"
     },
     "everyone": "Tutti",
     "colWhen": "Quando",
@@ -120,7 +121,12 @@
       "user_roles": "Ruoli del sito modificati",
       "sample_revision": "Revisione dimostrativa aggiunta",
       "manager_order": "Riordinato le voci del gestore",
-      "role_permissions": "Autorizzazioni del ruolo modificate"
+      "role_permissions": "Autorizzazioni del ruolo modificate",
+      "role_create": "Ruolo creato",
+      "role_update": "Ruolo modificato",
+      "role_delete": "Ruolo eliminato",
+      "user_role_pause": "Accesso del ruolo sospeso",
+      "user_role_resume": "Accesso del ruolo ripristinato"
     }
   },
   "Auth": {
@@ -142,6 +148,20 @@
     "it-support": "Supporto IT"
   },
   "Editor": {
+    "caseStudyDisplay": {
+      "title": "Visualizzazione del caso studio",
+      "card": "Solo scheda del progetto",
+      "cardHelp": "Mostra la scheda del progetto senza la storia completa o i risultati.",
+      "sample": "Storia completa · risultati di esempio",
+      "sampleHelp": "Mostra la storia e i risultati con etichette di esempio visibili.",
+      "sampleUnavailable": "Disponibile finché i risultati sono indicati come esempi.",
+      "approved": "Storia completa · risultati approvati",
+      "approvedHelp": "Mostra la storia con i risultati confermati del progetto.",
+      "approvedUnavailable": "Conferma prima i risultati per utilizzare questa opzione.",
+      "publication": "Salva la bozza, poi completa la revisione e la pubblicazione per applicare questa scelta.",
+      "permission": "Solo chi può approvare i contenuti può modificare la visualizzazione del caso studio.",
+      "saveBeforeConfirm": "Salva o annulla le modifiche prima di confermare i risultati."
+    },
     "department": "Reparto",
     "allDepartments": "Tutti i reparti",
     "state": "Stato",
@@ -194,10 +214,10 @@
     "staleTitle": "Qualcun altro ha modificato questo contenuto",
     "staleBody": "{who} ha salvato una versione più recente mentre modificavi. Ricarica per vederla; le modifiche non salvate andranno perse.",
     "reload": "Ricarica",
-    "figuresBanner": "Queste cifre sono esempi. Approva i risultati prima di attivare e pubblicare il racconto.",
-    "approveFigures": "Conferma i dati",
+    "figuresBanner": "Questi risultati sono esempi. Puoi mostrarli con le etichette di esempio oppure confermare i risultati approvati dal cliente per utilizzare la storia approvata.",
+    "approveFigures": "Conferma i risultati",
     "approveFiguresTitle": "Confermare questi dati come risultati reali?",
-    "approveFiguresImpact": "Conferma solo risultati approvati dal cliente. Il comando si sblocca; la pubblicazione richiede ancora una revisione.",
+    "approveFiguresImpact": "Conferma solo i risultati approvati dal cliente. Sarà disponibile l’opzione «Storia completa · risultati approvati». Selezionala, salva la bozza, poi completa la revisione e la pubblicazione.",
     "approveFiguresAck": "Il cliente ha approvato questi dati.",
     "sampleLabel": "Etichetta di esempio sul sito",
     "versions": "Versioni",
@@ -678,7 +698,7 @@
   },
   "Ideas": {
     "title": "Idee",
-    "description": "Suggerimenti dal modulo pubblico della roadmap. Le idee in attesa restano private; il voto è una simulazione locale nella pagina.",
+    "description": "I suggerimenti del sito arrivano qui come idee private in attesa di revisione. Pubblica un’idea sulla roadmap della community, poi modera qui i commenti dei visitatori. I voti restano nella sessione del browser.",
     "closed": "Chiuse",
     "search": "Cerca idee",
     "tableLabel": "Idee",
@@ -698,7 +718,8 @@
       "planned": "Ancora niente di pianificato",
       "in_progress": "Niente in corso",
       "shipped": "Ancora niente di rilasciato",
-      "closed": "Nessuna idea chiusa"
+      "closed": "Nessuna idea chiusa",
+      "all": "Ancora nessuna idea"
     },
     "actions": {
       "publish": "Pubblica per il voto",
@@ -727,7 +748,7 @@
       "hide": "Nascondere «{title}»?"
     },
     "impact": {
-      "publish": "L’idea appare nella roadmap con conteggi di esempio e votazione locale. I commenti sono conteggi di esempio.",
+      "publish": "L’idea appare nella colonna Aperto della roadmap della community. I commenti restano privati fino all’approvazione qui.",
       "plan": "La roadmap mostra l’idea come pianificata. Il voto resta una simulazione locale.",
       "start": "La pagina la mostra come in corso.",
       "ship": "La pagina la mostra come rilasciata, con un link al risultato.",
@@ -762,7 +783,9 @@
       "merge": "Unita a un’altra idea",
       "merged_from": "Un’altra idea è stata unita a questa",
       "hide": "Nascosta",
-      "edit": "Idea modificata"
+      "edit": "Idea modificata",
+      "comment_approve": "Commento approvato",
+      "comment_hide": "Commento nascosto"
     },
     "source": "Fonte",
     "sourceWebsite": "Sito web",
@@ -772,7 +795,45 @@
     "erase": "Cancella dati personali",
     "eraseTitle": "Cancellare i dati personali di questa persona?",
     "eraseImpact": "Il nome e l’indirizzo e-mail verranno rimossi. L’idea e la sua cronologia verranno conservate. Questa azione è irreversibile.",
-    "sampleComments": "Commenti di esempio"
+    "sampleComments": "Commenti di esempio",
+    "discussion": {
+      "title": "Commenti dei visitatori",
+      "status": "Stato",
+      "all": "Tutti",
+      "pending": "In attesa",
+      "approved": "Approvato",
+      "hidden": "Nascosto",
+      "help": "Solo i commenti approvati appaiono sotto questa idea sul sito. I commenti in attesa e nascosti restano privati. Le discussioni di esempio sono elencate separatamente.",
+      "empty": "Nessun commento dei visitatori con questo stato.",
+      "waiting": "{count, plural, one {# commento da esaminare} other {# commenti da esaminare}}",
+      "approve": "Approva commento",
+      "decline": "Rifiuta commento",
+      "hide": "Nascondi commento",
+      "approveTitle": "Approvare questo commento?",
+      "hideTitle": "Nascondere questo commento?",
+      "approveImpact": "Il nome e il commento appaiono nella discussione pubblica di questa idea. L’e-mail resta privata.",
+      "hideImpact": "Il commento resta in Website Manager e viene rimosso dalla discussione pubblica.",
+      "reason": "Motivo",
+      "saved": "Commento aggiornato",
+      "refresh": "Aggiorna commenti",
+      "declineTitle": "Rifiutare questo commento?",
+      "declineImpact": "Questo commento resta privato in Website Manager e non sarà pubblicato."
+    },
+    "colCategory": "Categoria",
+    "colTags": "Tag",
+    "noTags": "Nessun tag",
+    "categoryHelp": "La categoria scelta nel modulo di suggerimento del sito. Puoi correggerla qui.",
+    "tagsHelp": "Aggiungi fino a 10 tag tematici. Premi Invio o virgola dopo ogni tag; massimo 100 caratteri per tag.",
+    "tagsPlaceholder": "Aggiungi un tag",
+    "tagsError": "Usa fino a 10 tag di non oltre 100 caratteri ciascuno.",
+    "clearFilters": "Cancella filtri",
+    "categories": {
+      "unassigned": "Non specificata",
+      "new_project": "Un nuovo progetto",
+      "product_idea": "Un’idea di prodotto",
+      "service_improvement": "Un miglioramento del servizio",
+      "hosting_support": "Hosting e assistenza"
+    }
   },
   "Improvements": {
     "actions": "Azioni",
@@ -850,7 +911,7 @@
     "noResults": "Nessuna voce corrispondente",
     "websiteRoles": "Ruoli di Website Manager",
     "websiteRolesHelp": "Concedi l’accesso a Website Manager. Gli altri ruoli sono gestiti centralmente. Senza ruoli, l’accesso viene rimosso.",
-    "newAccount": "Crea account",
+    "newAccount": "Aggiungi utente",
     "editAccount": "Modifica account e accesso",
     "centralUsers": "Gestione centrale degli utenti",
     "centralAccountsHelp": "Il tuo ruolo gestisce l’accesso al sito. Gli amministratori centrali gestiscono i dati e l’attivazione degli account.",
@@ -951,9 +1012,29 @@
     "allCapabilities": "Tutte le autorizzazioni",
     "rotationNote": "Rotating words are used in the Home hero. Other pages use fixed headings.",
     "rotationSourceHelp": "Questi testi scorrevoli usano i titoli delle voci seguenti. Apri una voce per gestirne il titolo.",
-    "templateField": "Questo valore è fisso nel modello del sito ed è mostrato qui come riferimento."
+    "templateField": "Questo valore è fisso nel modello del sito ed è mostrato qui come riferimento.",
+    "saveChanges": "Salva modifiche",
+    "rolesFilter": "Ruoli",
+    "pauseRoleAccess": "Sospendi accesso del ruolo",
+    "resumeRoleAccess": "Ripristina accesso del ruolo",
+    "roleAccessPaused": "Accesso del ruolo a Website Manager sospeso.",
+    "roleAccessResumed": "Accesso del ruolo a Website Manager ripristinato.",
+    "rolePaused": "Sospeso",
+    "accountStatusStale": "Questo account è cambiato. L’elenco è stato aggiornato; riprova.",
+    "allYears": "Tutti gli anni"
   },
   "Leads": {
+    "crm": {
+      "openRecord": "Apri in CRM",
+      "openContacts": "Apri i contatti CRM",
+      "notLinked": "Questa richiesta non ha ancora un record CRM collegato. Apri i contatti CRM per continuare.",
+      "recordUnavailable": "Il record CRM collegato non è disponibile. Puoi consultare i contatti CRM.",
+      "accessRequired": "È necessario l’accesso al CRM nello spazio OrgTik. Contatta un amministratore.",
+      "unavailable": "Il CRM OrgTik non è attualmente disponibile.",
+      "openFailed": "Impossibile aprire CRM. Riprova.",
+      "checkFailed": "Impossibile verificare l’accesso al CRM. Riprova.",
+      "retry": "Riprova"
+    },
     "title": "Contatti",
     "description": "Le richieste dai moduli del sito, nell’unica pipeline delle vendite, con pagina, selezione e campagna di provenienza.",
     "export": "Esporta CSV",
@@ -971,7 +1052,8 @@
       "qualified": "Nessun contatto qualificato",
       "quoted": "Nessun preventivo in attesa",
       "won": "Ancora niente di vinto",
-      "closed": "Niente di chiuso"
+      "closed": "Niente di chiuso",
+      "all": "Ancora nessun contatto"
     },
     "colLead": "Contatto",
     "colTopic": "Argomento",
@@ -1178,7 +1260,8 @@
     },
     "copyAddress": "Copia indirizzo",
     "copied": "Indirizzo copiato.",
-    "copyFailed": "Copia non riuscita. Apri il file e copia l’indirizzo da lì."
+    "copyFailed": "Copia non riuscita. Apri il file e copia l’indirizzo da lì.",
+    "translation": "Traduzione"
   },
   "Nav": {
     "overview": "Panoramica",
@@ -1814,7 +1897,7 @@
     "stale_translation_source": "Il testo originale è cambiato. Genera una nuova bozza.",
     "operation_conflict": "Questa chiave di recupero appartiene a un altro comando.",
     "release_draft_required": "Ogni voce richiede una bozza salvata.",
-    "setupBody": "La lista segue modifiche, importazioni, revisioni e webhook attivi effettivi.",
+    "setupBody": "La lista segue le modifiche ai contenuti, gli aggiornamenti dei media e le revisioni dei contenuti.",
     "dismissSetup": "Nascondi lista",
     "showSetup": "Mostra lista",
     "autosave": "Salvataggio automatico",
@@ -1866,13 +1949,13 @@
     },
     "setupStep": {
       "content": "Modifica contenuti",
-      "media": "Importa media",
+      "media": "Verifica i media",
       "review": "Invia revisione",
       "webhook": "Attiva webhook simulato"
     },
     "setupHint": {
       "content": "Salva la prima bozza",
-      "media": "Usa gli esempi inclusi",
+      "media": "Aggiorna la descrizione, i tag o i diritti di un file.",
       "review": "Raggruppa bozze per un altro revisore",
       "webhook": "Registra ricevute simulate"
     },
@@ -1943,7 +2026,22 @@
     "searching": "Ricerca utenti…",
     "noUsers": "Nessun utente trovato. Cerca per nome o e-mail.",
     "userSearchFailed": "Impossibile caricare gli utenti.",
-    "retry": "Riprova"
+    "retry": "Riprova",
+    "editRole": "Modifica ruolo",
+    "saveChanges": "Salva modifiche",
+    "deleteRole": "Elimina ruolo",
+    "roleName": "Nome del ruolo",
+    "definitionHelp": "Assegna un nome al ruolo e scegli le autorizzazioni. Assegna i ruoli alle persone in Gestione utenti.",
+    "definitionStale": "Questo ruolo è cambiato. Chiudi e riapri la finestra per caricare la versione più recente.",
+    "invalidRoleName": "Inserisci un nome di ruolo univoco da 1 a 100 caratteri.",
+    "roleInUse": "Questo ruolo è assegnato a utenti. Riassegna i loro ruoli prima di eliminarlo.",
+    "builtinRole": "I ruoli predefiniti possono essere modificati, ma non eliminati.",
+    "roleFailed": "Impossibile salvare o eliminare il ruolo. Riprova.",
+    "roleSaved": "Ruolo salvato",
+    "roleDeleted": "Ruolo eliminato",
+    "deleteRoleTitle": "Eliminare {role}?",
+    "deleteRoleImpact": "Il ruolo e le sue autorizzazioni verranno rimossi. È possibile eliminare solo i ruoli personalizzati non assegnati.",
+    "roleLimit": "Sono supportati fino a 100 ruoli personalizzati. Elimina prima un ruolo inutilizzato."
   },
   "Roadmap": {
     "saveError": "Salvataggio non riuscito. Le modifiche sono conservate.",

@@ -32,7 +32,7 @@ export default function OverviewPage() {
   const me = useMeQuery();
   const { data, isLoading, isError, refetch } = useOverviewQuery();
   // Each language joins a list its own way ("Admin and Editor", «مسؤول ومحرر»).
-  const roles = new Intl.ListFormat(locale, { type: "conjunction" }).format(me.data?.roles.map((r) => (tr.has(r.key) ? tr(r.key) : r.label)) ?? []);
+  const roles = new Intl.ListFormat(locale, { type: "conjunction" }).format(me.data?.roles.map((r) => (!r.labelOverridden && tr.has(r.key) ? tr(r.key) : r.label)) ?? []);
   return (
     <div className="flex flex-col gap-8">
       <PageHeader title={t("title")} description={t("description")} status={<span className="inline-flex items-center gap-1.5 text-body-sm text-fg-muted"><Globe aria-hidden="true" className="size-4" />{t("yourRoles", { roles })}</span>} />

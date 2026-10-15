@@ -337,7 +337,18 @@ export const content = {
         comments: i.comments,
       })),
   IDEA_COMMENTS: (id) =>
-    clone(snapshot.ideas.find((idea) => idea.id === id)?.commentPreview ?? []),
+    clone([
+      ...(
+        snapshot.ideas.find((idea) => idea.id === id)?.commentPreview ?? []
+      ).map((comment) => ({ ...comment, sample: true })),
+      ...(snapshot.ideas.find((idea) => idea.id === id)?.discussion ?? []).map(
+        (comment) => ({ ...comment, sample: false }),
+      ),
+    ]),
+  IDEA_SAMPLE: (id) => {
+    const idea = snapshot.ideas.find((idea) => idea.id === id);
+    return idea?.sample ?? Boolean(idea?.commentPreview?.length);
+  },
   // Legal.jsx
   LG: () =>
     Object.fromEntries(

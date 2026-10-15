@@ -50,6 +50,7 @@ export function UserForm({
   const [create, creating] = useCreateUserMutation();
   const [update, updating] = useUpdateUserMutation();
   const accounts = Boolean(me?.identity.accounts);
+  const busy = creating.isLoading || updating.isLoading;
   const self = user?.id === me?.user.id;
   const save = async () => {
     setProblem("");
@@ -95,7 +96,7 @@ export function UserForm({
     }
   };
   return (
-    <Dialog open onOpenChange={(open) => !open && onClose()}>
+    <Dialog open onOpenChange={(open) => !open && !busy && onClose()}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
@@ -161,7 +162,7 @@ export function UserForm({
                             : form.roles.filter((key) => key !== role.key),
                         })
                       }
-                      label={tr(role.key)}
+                      label={!role.labelOverridden && tr.has(role.key) ? tr(role.key) : role.label}
                     />
                   ))}
                 </div>
@@ -170,7 +171,7 @@ export function UserForm({
           )}
         </DialogBody>
         <DialogFooter>
-          <Button variant="secondary" onClick={onClose}>
+          <Button variant="secondary" disabled={busy} onClick={onClose}>
             {te("cancel")}
           </Button>
           {!readOnly ? (
@@ -184,7 +185,7 @@ export function UserForm({
               }
               onClick={save}
             >
-              {te("save")}
+              {t(user ? "saveChanges" : "newAccount")}
             </Button>
           ) : null}
         </DialogFooter>

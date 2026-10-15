@@ -86,3 +86,19 @@ test("WM imports remove newly staged records on rollback without reseeding or mu
     assert.throws(() => b.hooks.importState(before), error => error.status === 503);
   } finally { cleanup(aFolder); cleanup(bFolder); }
 });
+
+test("Role definitions and grants persist together, restore atomically, and accept older snapshots", async () => {
+  const folder=fs.mkdtempSync(path.join(os.tmpdir(),"orgtik-wm-codec-")),first=mounted(folder),http=await serve([first]);
+  try {
+    const created=await http.call(0,"POST","/v2/admin/roles",{label:"Persistent reviewer",permissions:["settings:view","content:view"]});assert.equal(created.status,201);const role=created.body.data;
+    const snapshot=first.hooks.exportState();assert.equal(snapshot.data.roleDefinitions[role.key].label,role.label);
+    assert.deepEqual(snapshot.data.roles[role.key],role.permissions);
+    assert.equal((await http.call(0,"PATCH","/v2/admin/roles/"+role.key,{label:"Changed reviewer",permissions:[]},{"if-match":role.version})).status,200);
+    first.hooks.importState(snapshot);assert.deepEqual(first.hooks.exportState(),snapshot);
+    const restored=(await http.call(0,"GET","/v2/admin/roles")).body.data.find(row=>row.key===role.key);assert.equal(restored.label,role.label);assert.equal(restored.version,role.version);
+    for(const mutate of [state=>{delete state.data.roles[role.key]},state=>{state.data.roleDefinitions[role.key].label="Admin"},state=>{state.data.roleDefinitions[role.key].permissions=["bad"]}]){
+      const invalid=clone(snapshot);mutate(invalid);assert.throws(()=>first.hooks.importState(invalid),{code:"wm_state_unavailable"});assert.deepEqual(first.hooks.exportState(),snapshot);
+    }
+    const legacy=clone(snapshot);delete legacy.data.roleDefinitions;delete legacy.data.roles[role.key];first.hooks.importState(legacy);assert.deepEqual(first.hooks.exportState().data.roleDefinitions,{});
+  }finally{await http.close();cleanup(folder);}
+});

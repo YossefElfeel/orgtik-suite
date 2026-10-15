@@ -10,7 +10,7 @@ import { useListState } from "@/lib/useListState";
 import { typeOfId } from "@/lib/contentTypes";
 import { statusOf, useAuditQuery, useMembersQuery, type AuditEvent } from "@/store/api";
 
-const KINDS = ["all", "content", "media", "redirect", "idea", "lead", "settings", "user"] as const;
+const KINDS = ["all", "content", "media", "redirect", "idea", "lead", "settings", "user", "role"] as const;
 
 // Who did what, when: every save, review, publish and setting, newest first. Append-only.
 function AuditLog() {

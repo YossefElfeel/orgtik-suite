@@ -3,7 +3,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { AppWindow, ArrowsSplit, GearSix, ListChecks, Translate, Tray, Article, ArrowSquareOut, Briefcase, Browsers, Globe, Heartbeat, Images, Key, Lightbulb, MagnifyingGlass, MapTrifold, Scales, SquaresFour, Stack, Tag, TextAa, Monitor } from "@phosphor-icons/react";
+import { AppWindow, ArrowsSplit, GearSix, ListChecks, Translate, Tray, Article, ArrowSquareOut, Briefcase, Browsers, Globe, Heartbeat, Images, Key, Lightbulb, MagnifyingGlass, MapTrifold, Scales, SquaresFour, Stack, Tag, Monitor } from "@phosphor-icons/react";
 import {
   Badge,
   Button,
@@ -44,7 +44,6 @@ function useNav(): NavSection[] {
       items: [
         { key: t("pages"), href: "/content/pages", icon: <Browsers />, permission: "content:view" },
         { key: t("global"), href: "/content/global", icon: <Globe />, permission: "content:view" },
-        { key: t("strings"), href: "/content/strings", icon: <TextAa />, permission: "content:view" },
         { key: t("translations"), href: "/localization", icon: <Translate />, permission: "localization:view" },
         { key: t("preview"), href: "/preview", icon: <Monitor />, permission: "content:view" },
       ],
@@ -84,7 +83,6 @@ function useNav(): NavSection[] {
         { key: t("team"), href: "/settings/roles", icon: <Key />, permission: "settings:view" },
         { key: ti("userManagement"), href: "/settings/users", icon: <Key />, permission: "users:view" },
         { key: t("audit"), href: "/settings/audit", icon: <ListChecks />, permission: "settings:view" },
-        { key: v3("webhooks"), href: "/settings/webhooks", icon: <GearSix />, permission: "settings:view" },
         { key: v3("releases"), href: "/releases", icon: <Stack />, permission: "content:view" },
       ],
     },
@@ -181,7 +179,7 @@ export function WmFrame({ children }: { children: ReactNode }) {
       breadcrumbs={[{label:"OrgTik",href:SOS_URL},{label:t("name")}]}
       search={{load:(query,signal)=>wmRequest(`/studio/search?q=${encodeURIComponent(query)}`,{signal}),onSelect:item=>router.push(item.path)}}
       notifications={{load:()=>wmRequest("/studio/notifications"),onSelect:item=>router.push(item.path),onRead:id=>wmRequest("/studio/notifications/read",{body:{ids:[id]}}),onReadAll:()=>wmRequest("/studio/notifications/read",{body:{all:true}})}}
-      banner={<div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2"><div className="flex flex-wrap gap-2">{(session?.staffAccess?.roles.wm||[]).map(role=><Badge key={role} tone="brand" size="sm">{tr.has(role)?tr(role):role}</Badge>)}</div><Button variant="ghost" size="sm" onClick={()=>appearance.setDensity(appearance.preferences.density==="compact"?"comfortable":"compact")}>{v3(appearance.preferences.density==="compact"?"comfortable":"compact")}</Button></div>}
+      banner={<div className="flex flex-wrap gap-2 px-4 py-2">{me.data.roles.map(role=><Badge key={role.key} tone="brand" size="sm">{!role.labelOverridden&&tr.has(role.key)?tr(role.key):role.label}</Badge>)}</div>}
       sidebar={<Sidebar title={t("name")} sections={sections} />}
       userMenu={<UserMenu name={`${user.firstName} ${user.lastName}`} email={user.email} avatarSrc={user.avatar??undefined} locales={routing.locales as readonly Locale[]} onLocaleChange={appearance.changeLocale} onSignOut={()=>{void signOutStaff().then(()=>window.location.assign(SOS_URL)).catch(()=>setSignOutFailed(true));}}/>}
     >

@@ -26,6 +26,7 @@ const names = {
 export function EnableLanguage() {
   const t = useTranslations("Improvements");
   const ts = useTranslations("Site");
+  const te = useTranslations("Editor");
   const can = useCan();
   const allowed = can("locales:enable") && can("settings:edit");
   const [open, setOpen] = useState(false);
@@ -43,7 +44,7 @@ export function EnableLanguage() {
       >
         {t("addLanguage")}
       </Button>
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={open} onOpenChange={value => { if (!saving.isLoading) { setOpen(value); if (!value) setCode(null); } }}>
         <DialogContent size="sm">
           <DialogHeader>
             <DialogTitle>{t("addLanguage")}</DialogTitle>
@@ -64,6 +65,7 @@ export function EnableLanguage() {
             ) : null}
           </DialogBody>
           <DialogFooter>
+            <Button variant="secondary" disabled={saving.isLoading} onClick={() => { setOpen(false); setCode(null); }}>{te("cancel")}</Button>
             <Button
               disabled={!code || !data}
               loading={saving.isLoading}

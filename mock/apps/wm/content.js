@@ -535,6 +535,7 @@ function makeStore(now, { demo = false } = {}) {
     if (rule.needs === "into") {
       target = ideas.get(String(input.into ?? ""));
       if (!target || target.id === idea.id || !VISIBLE.includes(target.status)) fieldErrors.into = "required";
+      else if ((target.discussion?.length ?? 0) + (idea.discussion?.length ?? 0) > 1000) fieldErrors.into = "discussion_full";
     }
     if (Object.keys(fieldErrors).length) return { status: 422, code: "invalid", fieldErrors };
     const from = idea.status;
@@ -548,6 +549,10 @@ function makeStore(now, { demo = false } = {}) {
       target.votes += idea.votes;
       target.comments += idea.comments;
       if (idea.commentPreview?.length) target.commentPreview = [...(target.commentPreview ?? []), ...clone(idea.commentPreview)];
+      if (idea.discussion?.length) {
+        target.discussion = [...(target.discussion ?? []), ...idea.discussion];
+        idea.discussion = [];
+      }
       target.version += 1;
       target.history.unshift({ at: now(), by: who.key, action: "merged_from", from: idea.id });
     }
@@ -636,6 +641,11 @@ function makeStore(now, { demo = false } = {}) {
   const validateState = value => {
     const incoming = codec.object(value), rows = codec.mapRows(incoming.entries), ideas_ = codec.mapRows(incoming.ideas);
     if (!Array.isArray(incoming.audit) || rows.some(([, row]) => !row.workflow || !Array.isArray(row.versions) || !row.translation || !TYPES.includes(row.type))) throw codec.fail("Website Manager content state is incomplete.");
+    if (ideas_.some(([, idea]) => Object.keys(require('./idea-classification').classificationErrors(idea)).length)) throw codec.fail("Website idea categories or tags are invalid.");
+    for (const [, idea] of ideas_) if (idea.discussion !== undefined && (!Array.isArray(idea.discussion) || idea.discussion.length > 1000 || new Set(idea.discussion.map(comment => comment?.id)).size !== idea.discussion.length || idea.discussion.some(comment =>
+      !comment || !["id", "author", "email", "body", "privacyVersion"].every(key => typeof comment[key] === "string") || !comment.id ||
+      !["pending", "approved", "hidden"].includes(comment.status) || !Number.isInteger(comment.version) || comment.version < 1 || !Number.isFinite(Date.parse(comment.submittedAt)) ||
+      ["fingerprint", "requestKey"].some(key => comment[key] !== undefined && !/^[a-f0-9]{64}$/.test(comment[key]))))) throw codec.fail("Website idea discussion state is incomplete.");
     const orders = incoming.managerOrders ?? {}, locales = incoming.contentLocales ?? ["en","ar","de","fr","it"];
     if (!orders || typeof orders !== "object" || Array.isArray(orders) || Object.entries(orders).some(([type,ids])=>!["service","caseStudy","article"].includes(type) || !Array.isArray(ids) || ids.length>1000 || ids.some(id=>typeof id!=="string") || new Set(ids).size!==ids.length) || !Array.isArray(locales) || !locales.includes("en") || new Set(locales).size!==locales.length || locales.some(locale=>!["en","ar","de","fr","it","es","pt","nl"].includes(locale))) throw codec.fail("Website Manager preferences are invalid.");
     return { cmsVersion: incoming.cmsVersion ?? 0, demoVersion: incoming.demoVersion ?? 0, entries: rows, audit: clone(incoming.audit), managerOrders: clone(incoming.managerOrders ?? {}), contentLocales: incoming.contentLocales ?? ["en","ar","de","fr","it"], ideas: ideas_ };

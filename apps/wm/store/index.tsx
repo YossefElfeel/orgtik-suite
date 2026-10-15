@@ -2,6 +2,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
+import { setupListeners } from "@reduxjs/toolkit/query";
 import { api } from "./api";
 import { readClientSession, subscribeClientSession } from "@orgtik/ui/auth";
 
@@ -16,6 +17,7 @@ export type WmDispatch = ReturnType<typeof makeStore>["dispatch"];
 /** One store per browser tab (and per request on the server), never shared between people. */
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [store] = useState(makeStore);
+  useEffect(() => setupListeners(store.dispatch), [store]);
   useEffect(() => {
     const key = () => { const session = readClientSession(); return JSON.stringify({ user: session?.user, staffAccess: session?.staffAccess, workspace: session?.workspaceContext?.workspace.id }); };
     let previous = key();

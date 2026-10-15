@@ -25,20 +25,21 @@ function previewGrant(holder, token) {
 function exportHolder(holder) {
   if (!holder) throw codec.fail("Website Manager has not been initialized.");
   const library = holder.lib.exportState(), ops = holder.ops.exportState();
-  return { schema: SCHEMA, version: 1, realm: holder.realm, data: { content: holder.store.exportState(), library: library.data, ops: ops.data, previews: codec.copy([...holder.previews]), submissions: holder.submissions.exportState(), roles: codec.copy(holder.roleOverrides), studio: holder.studio?.exportState() || null }, sequences: { ...library.sequences, ...ops.sequences } };
+  return { schema: SCHEMA, version: 1, realm: holder.realm, data: { content: holder.store.exportState(), library: library.data, ops: ops.data, previews: codec.copy([...holder.previews]), submissions: holder.submissions.exportState(), roles: codec.copy(holder.roleOverrides), roleDefinitions: codec.copy(holder.roleDefinitions), studio: holder.studio?.exportState() || null }, sequences: { ...library.sequences, ...ops.sequences } };
 }
 function importHolder(holder, snapshot) {
   if (!holder || snapshot?.schema !== SCHEMA || snapshot.version !== 1 || snapshot.realm !== holder.realm) throw codec.fail("Website Manager snapshot belongs to another realm or version.");
   // Validate every part before mutating any live closure.
   const content = holder.store.validateState(snapshot.data?.content);
-  const roles = require("./wm/roles").validateRoleOverrides(snapshot.data?.roles);
+  const definitions = require("./wm/roles").validateRoleDefinitions(snapshot.data?.roleDefinitions);
+  const roles = require("./wm/roles").validateRoleOverrides(snapshot.data?.roles, definitions);
   const library = holder.lib.validateState({ data: snapshot.data?.library, sequences: snapshot.sequences });
   const ops = holder.ops.validateState({ data: snapshot.data?.ops, sequences: snapshot.sequences });
   const submissions = holder.submissions.validateState(snapshot.data?.submissions);
   const previews = codec.mapRows(snapshot.data?.previews, { ids: false });
   const studio = holder.studio?.validateState(snapshot.data?.studio, content);
   if (previews.some(([hash, grant]) => !/^[a-f0-9]{64}$/.test(hash) || !["string", "number"].includes(typeof grant.by) || !Number.isFinite(Date.parse(grant.expiresAt)))) throw codec.fail("Website preview grants are incomplete.");
-  holder.store.importState(content); holder.lib.importState(library); holder.ops.importState(ops); holder.submissions.importState(submissions); codec.replaceMap(holder.previews, previews); codec.replaceObject(holder.roleOverrides, roles); if (studio) holder.studio.importState(studio);
+  holder.store.importState(content); holder.lib.importState(library); holder.ops.importState(ops); holder.submissions.importState(submissions); codec.replaceMap(holder.previews, previews); codec.replaceObject(holder.roleOverrides, roles); codec.replaceObject(holder.roleDefinitions, definitions); if (studio) holder.studio.importState(studio);
 }
 
 const SCOPE = "website_manager";
@@ -71,6 +72,8 @@ module.exports = {
   routes(app, ctx) {
     const { identity } = ctx;
     const roleOverrides = {};
+    const roleDefinitions = {};
+    identity.websiteManagerRoleAccess = { permissionsFor: roles => permissionsFor(roles, roleOverrides) };
     const rid = () => crypto.randomUUID();
     const ok = (res, data, meta = {}, status = 200) => res.status(status).json({ data, meta });
     const fail = (res, status, code, message, extra = {}) => res.status(status).json({ error: { code, message, requestId: rid(), ...extra } });
@@ -82,6 +85,7 @@ module.exports = {
       const u = identity.userFromReq(req);
       if (!u) return fail(res, 401, "unauthenticated", "Sign in again."), null;
       const roles = rolesOf(u);
+      if (identity.grants?.website_manager?.[u.key]?.rolePaused) return fail(res, 403, "wm_role_paused", "Your Website Manager role access is paused."), null;
       if (!roles.length) return fail(res, 403, "forbidden", "You don't have access to the Website Manager."), null;
       return { user: u, roles, permissions: permissionsFor(roles, roleOverrides) };
     }
@@ -101,7 +105,7 @@ module.exports = {
       const u = identity.publicUser(who.user);
       ok(res, {
         user: { id: u.id, key: who.user.key, firstName: u.firstName, lastName: u.lastName, email: u.email, avatar: u.avatar ?? null },
-        roles: who.roles.map((r) => ({ key: r, label: ROLES[r]?.label ?? r })),
+        roles: who.roles.map((r) => ({ key: r, label: roleDefinitions[r]?.label ?? ROLES[r]?.label ?? r, labelOverridden: Boolean(roleDefinitions[r]) })),
         permissions: who.permissions,
         identity: require("./wm/users").capabilities(identity, who.user),
         site: { id: "orgtik", name: "orgtik.ch", locales: ["en", "ar", "de", "fr", "it"], publicLocales: ["en"] },
@@ -117,7 +121,7 @@ module.exports = {
     const submissions = require("./wm/ideas").ideaSubmissions(store.ideas);
     const realm = ctx.realm || ctx.config?.sandbox || process.env.MOCK_SANDBOX || "demo";
     if (!/^[\w-]{1,100}$/.test(realm)) throw codec.fail("Invalid Website Manager realm.");
-    const holder = { realm, store, lib, ops, previews, submissions, roleOverrides, ctx };
+    const holder = { realm, store, lib, ops, previews, submissions, roleOverrides, roleDefinitions, ctx };
     internal = holder;
     // Claude's suggestions for G2's gaps (D-038): drafts for review, never published by themselves.
     require("./wm/suggestions").applySuggestions({ store, media: lib.media, now: () => new Date().toISOString() });
@@ -227,6 +231,7 @@ module.exports = {
       const dept = String(req.query.department ?? "");
       const parent = String(req.query.parent ?? "");
       let rows = [...store.entries.values()].filter((e) => e.type === req.params.type && e.id !== "gl_components").map((e) => named(store.summary(e)));
+      const years = req.params.type === "roadmapItem" ? [...new Set(rows.map(row => String(row.year ?? "")).filter(year => /^\d{4}$/.test(year)))].sort() : undefined;
       if (q) rows = rows.filter((r) => r.name.toLowerCase().includes(q) || Object.values(r.slug).some((sl) => sl?.includes(q)));
       if (state) rows = rows.filter((r) => r.state === state);
       if (dept) rows = rows.filter((r) => r.department === dept);
@@ -243,7 +248,7 @@ module.exports = {
       if (field) rows.sort((a, b) => String(a[field]).localeCompare(String(b[field])) * (sort.startsWith("-") ? -1 : 1));
       const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 10));
       const page = Math.max(1, Number(req.query.page) || 1);
-      ok(res, rows.slice((page - 1) * pageSize, page * pageSize), { page, pageSize, total: rows.length });
+      ok(res, rows.slice((page - 1) * pageSize, page * pageSize), { page, pageSize, total: rows.length, ...(years ? { years } : {}) });
     });
 
     app.get("/v2/admin/entries/:type/:id", need("content:view"), (req, res) => {
@@ -365,7 +370,7 @@ module.exports = {
       const result = page(req, rows); ok(res, result.rows, result.meta);
     });
     // ---- members: who works in the Website Manager (for owners of leads, audit filters) ----
-    require("./wm/users").registerUsers(app, { identity, store, need, ok, fail, page });
+    require("./wm/users").registerUsers(app, { identity, store, definitions: roleDefinitions, overrides: roleOverrides, need, ok, fail, page });
     app.get("/v2/admin/members", need("content:view"), (req, res) => {
       const rows = identity.users
         .map((u) => ({ u, roles: rolesOf(u) }))
@@ -463,7 +468,7 @@ module.exports = {
     });
 
     // ---- roadmap ideas: community submissions and their moderation ----
-    const { ideaView, eraseSubmitter } = require("./wm/ideas");
+    const { ideaView, eraseSubmitter, publicIdea, submissionErrors, submitComment, moderateComment, ideaCategory, ideaTags, classificationErrors, cleanTags } = require("./wm/ideas");
     const ideaOut = (req, x) => ({ ...ideaView(x, pii(req)), history: x.history.map((h) => ({ ...h, by: person(h.by === "visitor" ? null : h.by) })) });
     app.get("/v2/admin/ideas/:id", need("marketing:view"), (req, res) => {
       const idea = store.ideas.get(req.params.id);
@@ -474,10 +479,13 @@ module.exports = {
       const idea = store.ideas.get(req.params.id);
       if (!idea) return fail(res, 404, "not_found", "This idea does not exist.");
       if (Number(req.get("if-match")) !== idea.version) return fail(res, 412, "stale", "This idea changed since you opened it.", { current: idea.version });
-      const patch = req.body ?? {}, errors = {};
+      const patch = req.body ?? {}, errors = classificationErrors(patch);
       for (const [field, max] of Object.entries({ title: 180, body: 5000, theme: 100 })) if (field in patch && (typeof patch[field] !== "string" || !patch[field].trim() || patch[field].length > max)) errors[field] = "invalid";
       if (Object.keys(errors).length) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors: errors });
       for (const field of ["title", "body", "theme"]) if (field in patch) idea[field] = patch[field].trim();
+      if ('tags' in patch) idea.tags = cleanTags(patch.tags);
+      else if ('theme' in patch) idea.tags = [patch.theme.trim()];
+      if ('category' in patch) idea.category = patch.category;
       idea.version += 1;
       const at = new Date().toISOString(), by = who(req).key;
       idea.history.unshift({ at, by, action: "edit", from: idea.status, to: idea.status });
@@ -488,15 +496,19 @@ module.exports = {
       const status = String(req.query.status ?? "");
       const q = String(req.query.search ?? "").trim().toLowerCase();
       let rows = [...store.ideas.values()];
+      const tags = [...new Map(rows.flatMap(ideaTags).map(tag => [tag.toLowerCase(), tag])).values()].sort((a, b) => a.localeCompare(b));
+      const tag = String(req.query.tag ?? req.query.theme ?? '').trim().toLowerCase(), category = String(req.query.category ?? '');
+      if (tag) rows = rows.filter(idea => ideaTags(idea).some(value => value.toLowerCase() === tag));
+      if (category) rows = rows.filter(idea => (ideaCategory(idea) ?? 'unassigned') === category);
       if (status) rows = rows.filter((x) => (status === "closed" ? ["declined", "merged", "hidden"].includes(x.status) : x.status === status));
-      if (q) rows = rows.filter((x) => `${x.title} ${x.body} ${x.theme}`.toLowerCase().includes(q));
+      if (q) rows = rows.filter((x) => `${x.title} ${x.body} ${ideaTags(x).join(' ')} ${(ideaCategory(x) ?? '').replaceAll('_', ' ')} ${ideaCategory(x) ? x.theme : ''}`.toLowerCase().includes(q));
       // Waiting ones first by age (oldest first), then the rest by votes.
       rows.sort((a, b) => (a.status === "pending" && b.status === "pending" ? a.submittedAt.localeCompare(b.submittedAt) : b.votes - a.votes));
       const counts = {};
       for (const x of store.ideas.values()) counts[x.status] = (counts[x.status] ?? 0) + 1;
       const pageSize = Math.min(100, Math.max(1, Number(req.query.pageSize) || 10));
       const page = Math.max(1, Number(req.query.page) || 1);
-      ok(res, rows.slice((page - 1) * pageSize, page * pageSize).map(x => ideaOut(req, x)), { page, pageSize, total: rows.length, counts });
+      ok(res, rows.slice((page - 1) * pageSize, page * pageSize).map(x => ideaOut(req, x)), { page, pageSize, total: rows.length, counts, tags });
     });
     app.post("/v2/admin/ideas/:id/moderate", need("marketing:edit"), (req, res) => {
       const idea = store.ideas.get(req.params.id);
@@ -518,26 +530,41 @@ module.exports = {
     });
     // What the roadmap page shows: moderated ideas only, most wanted first.
     app.get("/v2/public/ideas", (req, res) => {
-      ok(res, [...store.ideas.values()].filter((x) => store.VISIBLE.includes(x.status)).sort((a, b) => b.votes - a.votes).map(({ id, order, status, theme, title, body, votes, comments, commentPreview, link }) => ({ id, order, status, theme, title, body, votes, comments, ...(commentPreview ? { commentPreview } : {}), ...(link ? { link } : {}) })));
+      res.set("Cache-Control", "no-store");
+      ok(res, [...store.ideas.values()].filter((x) => store.VISIBLE.includes(x.status)).sort((a, b) => b.votes - a.votes).map(publicIdea));
+    });
+    app.post("/v2/public/ideas/:id/comments", (req, res) => {
+      const idea = store.ideas.get(req.params.id);
+      if (!idea || !store.VISIBLE.includes(idea.status)) return fail(res, 404, "not_found", "This discussion is unavailable.");
+      if (ops.site.formsMode !== "live") return fail(res, 409, "forms_preview", "The website's forms are paused.");
+      if (String(req.body?.privacyVersion ?? "") !== privacyInForce()) return fail(res, 409, "privacy_outdated", "The privacy notice changed; reload the page.");
+      const result = submitComment(idea, req.body ?? {}, req.get("idempotency-key"), new Date().toISOString());
+      if (result.status) return fail(res, result.status, result.code, "The comment could not be submitted.", { fieldErrors: result.fieldErrors });
+      ok(res, { id: result.comment.id, status: result.comment.status, ...(result.duplicate ? { duplicate: true } : {}) }, {}, result.duplicate ? 200 : 201);
+    });
+    app.post("/v2/admin/ideas/:id/comments/:commentId/moderate", need("marketing:edit"), (req, res) => {
+      const idea = store.ideas.get(req.params.id);
+      if (!idea) return fail(res, 404, "not_found", "This idea does not exist.");
+      const at = new Date().toISOString(), by = who(req).key;
+      const result = moderateComment(idea, req.params.commentId, req.get("if-match"), req.body?.action, req.body?.reason, by, at);
+      if (result.status) return fail(res, result.status, result.code, "The comment could not be moderated.", { fieldErrors: result.fieldErrors });
+      store.audit.unshift({ at, by, action: "idea_edit", entry: idea.id, type: "idea", version: idea.version, note: `Comment ${req.body.action}` });
+      ok(res, ideaOut(req, idea));
     });
     // The roadmap's "suggest an idea" form (S6, D-041). A suggestion waits for moderation
     // (pending, not on the page); who sent it is kept for the team, never shown publicly.
     app.post("/v2/public/ideas", (req, res) => {
       const b = req.body ?? {};
-      const fieldErrors = {};
+      const fieldErrors = submissionErrors(b);
       const name = String(b.name ?? "").trim();
       const email = String(b.email ?? "").trim();
       const message = String(b.message ?? "").trim();
       const theme = String(b.topic ?? "").trim();
-      if (!theme) fieldErrors.topic = "required";
-      if (!name) fieldErrors.name = "required";
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fieldErrors.email = "email";
-      if (!message) fieldErrors.message = "required";
-      if (b.consent !== true) fieldErrors.consent = "required";
       if (Object.keys(fieldErrors).length) return fail(res, 422, "invalid", "Some fields need attention.", { fieldErrors });
       if (ops.site.formsMode !== "live") return fail(res, 409, "forms_preview", "The website's forms are in preview.");
       if (String(b.privacyVersion ?? "") !== privacyInForce()) return fail(res, 409, "privacy_outdated", "The privacy notice changed; reload the page.");
-      const submission = { name, email, message, topic: theme, privacyVersion: String(b.privacyVersion), consent: true };
+      const category = b.category ?? ideaCategory({ theme });
+      const submission = { name, email, message, topic: theme, ...(b.category ? { category: b.category } : {}), privacyVersion: String(b.privacyVersion), consent: true };
       const key = req.get("idempotency-key");
       const duplicate = submissions.duplicate(submission, key);
       if (duplicate?.conflict) return fail(res, 409, "idempotency_conflict", "This request key was already used for another idea.");
@@ -548,7 +575,7 @@ module.exports = {
       const at = new Date().toISOString();
       const title = message.split(/(?<=[.!?])\s/)[0].slice(0, 90);
       store.ideas.set(id, {
-        id, status: "pending", theme, title, body: message, votes: 0, comments: 0, submittedAt: at,
+        id, status: "pending", theme, category, tags: [], title, body: message, votes: 0, comments: 0, submittedAt: at,
         order: store.ideas.size + 1, source: "website", version: 1,
         submitter: { name, email, privacyVersion: String(b.privacyVersion ?? "") },
         history: [{ at, by: "visitor", action: "submitted", to: "pending" }],
@@ -745,7 +772,7 @@ module.exports = {
     // Admin approval, which arrives with the pricing editor.
     app.get("/v2/admin/pricing", need("content:view"), (req, res) => ok(res, store.pricing()));
 
-    require("./wm/roles").registerRoles(app, { identity, store, overrides: roleOverrides, need, ok, fail });
+    require("./wm/roles").registerRoles(app, { identity, store, overrides: roleOverrides, definitions: roleDefinitions, need, ok, fail });
 
     return { exportState: () => exportHolder(holder), importState: snapshot => importHolder(holder, snapshot) };
   },

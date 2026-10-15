@@ -52,7 +52,7 @@ function RedirectDialog({ initial, onClose }: { initial: Draft; onClose: () => v
       });
   };
   return (
-    <Dialog open onOpenChange={(o) => !o && onClose()}>
+    <Dialog open onOpenChange={(o) => !o && !saving.isLoading && onClose()}>
       <DialogContent size="sm">
         <DialogHeader>
           <DialogTitle>{t(initial.id ? "editRedirect" : "addRedirect")}</DialogTitle>
@@ -73,7 +73,7 @@ function RedirectDialog({ initial, onClose }: { initial: Draft; onClose: () => v
           </Field>
         </DialogBody>
         <DialogFooter>
-          <Button variant="ghost" onClick={onClose}>
+          <Button variant="secondary" disabled={saving.isLoading} onClick={onClose}>
             {t("cancel")}
           </Button>
           <Button loading={saving.isLoading} disabled={!d.from || !d.to} onClick={submit}>

@@ -25,8 +25,8 @@ export type ConfirmDialogProps = {
   /** The verb and object, matching the title: "Delete files". Never "OK" or "Yes". */
   confirmLabel: ReactNode;
   cancelLabel?: ReactNode;
-  /** danger for irreversible loss; primary for reversible changes such as Archive. */
-  tone?: "danger" | "primary";
+  /** danger for loss or rejection; warning for caution; primary for routine changes. */
+  tone?: "danger" | "warning" | "primary";
   /** Adds "This can't be undone." under the impact. */
   irreversible?: boolean;
   /** Asks for a reason, stored with the action (e.g. a refund or a decline). */

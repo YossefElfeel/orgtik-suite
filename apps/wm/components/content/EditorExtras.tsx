@@ -188,7 +188,7 @@ export function ScheduleButton({ onSchedule, onError }: { onSchedule: (publishAt
           </Field>
         </DialogBody>
         <DialogFooter>
-          <Button variant="ghost" onClick={() => setOpen(false)}>
+          <Button variant="secondary" disabled={busy} onClick={() => setOpen(false)}>
             {t("cancel")}
           </Button>
           <Button disabled={!date} loading={busy} onClick={submit}>

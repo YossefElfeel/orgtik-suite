@@ -29,12 +29,12 @@ type Common<V extends string> = VariantProps<typeof controlFrame> & {
   className?: string;
 };
 
-function Popup<V extends string>({ emptyText }: { emptyText?: ReactNode }) {
+function Popup<V extends string>({ emptyText, className }: { emptyText?: ReactNode; className?: string }) {
   const t = useStrings();
   return (
     <BaseCombobox.Portal>
       <BaseCombobox.Positioner sideOffset={6} className="z-50 outline-none">
-        <BaseCombobox.Popup className={cn(floatingPopup, "max-h-[min(var(--available-height),22rem)] w-(--anchor-width) overflow-y-auto p-1")}>
+        <BaseCombobox.Popup className={cn(floatingPopup, "max-h-[min(var(--available-height),22rem)] w-(--anchor-width) overflow-y-auto p-1", className)}>
           <BaseCombobox.Empty className="px-3 py-2 text-body-sm text-fg-subtle empty:hidden">{emptyText ?? t("noResults")}</BaseCombobox.Empty>
           <BaseCombobox.List>
             {(o: ComboOption<V>) => (
@@ -58,13 +58,15 @@ function Popup<V extends string>({ emptyText }: { emptyText?: ReactNode }) {
 }
 
 export type ComboboxProps<V extends string = string> = Common<V> & {
+  /** Size the popup independently when the input shares its row with other controls. */
+  popupClassName?: string;
   value?: V | null;
   defaultValue?: V | null;
   onValueChange?: (value: V | null) => void;
 };
 
 /** Pick one from many by typing (people, folders, countries). For a short fixed list use Select. */
-export function Combobox<V extends string = string>({ options, value, defaultValue, onValueChange, placeholder, size, emptyText, className, "aria-label": ariaLabel, ...props }: ComboboxProps<V>) {
+export function Combobox<V extends string = string>({ options, value, defaultValue, onValueChange, placeholder, size, emptyText, className, popupClassName, "aria-label": ariaLabel, ...props }: ComboboxProps<V>) {
   const { locale } = useOrgtik();
   const byValue = useMemo(() => new Map(options.map((o) => [o.value, o])), [options]);
   const t = useStrings();
@@ -89,7 +91,7 @@ export function Combobox<V extends string = string>({ options, value, defaultVal
           <CaretDown aria-hidden="true" className="size-4" />
         </BaseCombobox.Trigger>
       </div>
-      <Popup<V> emptyText={emptyText} />
+      <Popup<V> emptyText={emptyText} className={popupClassName} />
     </BaseCombobox.Root>
   );
 }

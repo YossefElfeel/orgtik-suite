@@ -62,7 +62,8 @@
       "idea": "Ideas",
       "lead": "Leads",
       "settings": "Settings",
-      "user": "User Management"
+      "user": "User Management",
+      "role": "Roles"
     },
     "everyone": "Everyone",
     "colWhen": "When",
@@ -120,7 +121,12 @@
       "user_roles": "Changed website roles",
       "sample_revision": "Added sample revision",
       "manager_order": "Reordered manager entries",
-      "role_permissions": "Changed role permissions"
+      "role_permissions": "Changed role permissions",
+      "role_create": "Created a role",
+      "role_update": "Changed a role",
+      "role_delete": "Deleted a role",
+      "user_role_pause": "Paused role access",
+      "user_role_resume": "Resumed role access"
     }
   },
   "Auth": {
@@ -142,6 +148,20 @@
     "it-support": "IT support"
   },
   "Editor": {
+    "caseStudyDisplay": {
+      "title": "Case study display",
+      "card": "Project card only",
+      "cardHelp": "Show the project card without the full story or results.",
+      "sample": "Full story · sample results",
+      "sampleHelp": "Show the story and results with visible sample labels.",
+      "sampleUnavailable": "Available while the results are marked as samples.",
+      "approved": "Full story · approved results",
+      "approvedHelp": "Show the story with confirmed project results.",
+      "approvedUnavailable": "Confirm results first to use this option.",
+      "publication": "Save your draft, then complete review and publication to apply this choice.",
+      "permission": "Only a content approver can change how the case study appears.",
+      "saveBeforeConfirm": "Save or cancel your changes before confirming results."
+    },
     "department": "Department",
     "allDepartments": "All departments",
     "state": "State",
@@ -194,10 +214,10 @@
     "staleTitle": "Someone else changed this",
     "staleBody": "{who} saved a newer version while you were editing. Reload to see it; your unsaved changes will be lost.",
     "reload": "Reload",
-    "figuresBanner": "These figures are samples. Approve the results before enabling and publishing the narrative.",
-    "approveFigures": "Confirm figures",
+    "figuresBanner": "These results are samples. You can show them with sample labels, or confirm client-approved results to use the approved story.",
+    "approveFigures": "Confirm results",
     "approveFiguresTitle": "Confirm these figures as real results?",
-    "approveFiguresImpact": "Confirm only results approved by the client. This unlocks the narrative switch; publication still requires review.",
+    "approveFiguresImpact": "Confirm only results approved by the client. This makes “Full story · approved results” available. Choose it, save the draft, then complete review and publication.",
     "approveFiguresAck": "The client has approved these numbers.",
     "sampleLabel": "Sample label on the site",
     "versions": "Versions",
@@ -678,7 +698,7 @@
   },
   "Ideas": {
     "title": "Ideas",
-    "description": "Suggestions from the public roadmap form. Pending ideas remain private; public voting is a page-local preview.",
+    "description": "Website suggestions arrive here as private pending ideas. Publish an idea to show it on the community roadmap, then moderate its visitor comments here. Voting stays in the visitor’s browser session.",
     "closed": "Closed",
     "search": "Search ideas",
     "tableLabel": "Ideas",
@@ -698,7 +718,8 @@
       "planned": "Nothing planned yet",
       "in_progress": "Nothing in progress",
       "shipped": "Nothing shipped yet",
-      "closed": "No closed ideas"
+      "closed": "No closed ideas",
+      "all": "No ideas yet"
     },
     "actions": {
       "publish": "Publish for voting",
@@ -727,7 +748,7 @@
       "hide": "Hide “{title}”?"
     },
     "impact": {
-      "publish": "It appears on the roadmap with example counts and page-local voting. Comments are sample counts.",
+      "publish": "The idea appears in the Open column of the community roadmap. Visitor comments remain private until approved here.",
       "plan": "The roadmap shows it as planned. Voting remains a local preview.",
       "start": "The roadmap page shows it as in progress.",
       "ship": "The roadmap page shows it as shipped, with a link to what came out of it.",
@@ -762,7 +783,9 @@
       "merge": "Merged into another idea",
       "merged_from": "Another idea merged into this one",
       "hide": "Hidden",
-      "edit": "Edited idea"
+      "edit": "Edited idea",
+      "comment_approve": "Approved a comment",
+      "comment_hide": "Hid a comment"
     },
     "source": "Source",
     "sourceWebsite": "Website",
@@ -772,7 +795,45 @@
     "erase": "Erase personal details",
     "eraseTitle": "Erase this submitter’s personal details?",
     "eraseImpact": "The submitter’s name and email will be removed. The idea and its history will remain. This cannot be undone.",
-    "sampleComments": "Sample comments"
+    "sampleComments": "Sample comments",
+    "discussion": {
+      "title": "Visitor comments",
+      "status": "Status",
+      "all": "All",
+      "pending": "Pending",
+      "approved": "Approved",
+      "hidden": "Hidden",
+      "help": "Only approved comments appear on the website under this idea. Pending and hidden comments stay private. Sample discussions are listed separately.",
+      "empty": "No visitor comments match this status.",
+      "waiting": "{count, plural, one {# comment to review} other {# comments to review}}",
+      "approve": "Approve comment",
+      "decline": "Decline comment",
+      "hide": "Hide comment",
+      "approveTitle": "Approve this comment?",
+      "hideTitle": "Hide this comment?",
+      "approveImpact": "The author’s name and comment appear in this idea’s public discussion. The email remains private.",
+      "hideImpact": "This comment stays in Website Manager and is removed from the public discussion.",
+      "reason": "Reason",
+      "saved": "Comment updated",
+      "refresh": "Refresh comments",
+      "declineTitle": "Decline this comment?",
+      "declineImpact": "This comment remains private in Website Manager and will not be published."
+    },
+    "colCategory": "Category",
+    "colTags": "Tags",
+    "noTags": "No tags",
+    "categoryHelp": "The category selected in the website’s suggestion form. You can correct it here.",
+    "tagsHelp": "Add up to 10 topic tags. Press Enter or comma after each tag; each can contain up to 100 characters.",
+    "tagsPlaceholder": "Add a tag",
+    "tagsError": "Use up to 10 tags, with no more than 100 characters each.",
+    "clearFilters": "Clear filters",
+    "categories": {
+      "unassigned": "Not specified",
+      "new_project": "A new project",
+      "product_idea": "A product idea",
+      "service_improvement": "A service improvement",
+      "hosting_support": "Hosting and support"
+    }
   },
   "Improvements": {
     "actions": "Actions",
@@ -850,7 +911,7 @@
     "noResults": "No matching records",
     "websiteRoles": "Website Manager roles",
     "websiteRolesHelp": "Grant access to Website Manager. Other app roles are managed centrally. Removing all roles removes Website Manager access.",
-    "newAccount": "Create account",
+    "newAccount": "Add user",
     "editAccount": "Edit account & access",
     "centralUsers": "Central user management",
     "centralAccountsHelp": "Your role can manage website access. Central administrators manage suite account details and activation.",
@@ -951,9 +1012,29 @@
     "allCapabilities": "All capabilities",
     "rotationNote": "Rotating words are used in the Home hero. Other pages use fixed headings.",
     "rotationSourceHelp": "These scrolling words use the titles of the entries below. Open an entry to manage its title.",
-    "templateField": "This value is fixed by the website template and is shown here for reference."
+    "templateField": "This value is fixed by the website template and is shown here for reference.",
+    "saveChanges": "Save changes",
+    "rolesFilter": "Roles",
+    "pauseRoleAccess": "Pause role access",
+    "resumeRoleAccess": "Resume role access",
+    "roleAccessPaused": "Website Manager role access paused.",
+    "roleAccessResumed": "Website Manager role access resumed.",
+    "rolePaused": "Paused",
+    "accountStatusStale": "This account changed. The list was refreshed; try again.",
+    "allYears": "All years"
   },
   "Leads": {
+    "crm": {
+      "openRecord": "Open in CRM",
+      "openContacts": "Open CRM contacts",
+      "notLinked": "This submission has no linked CRM record yet. Open CRM contacts to continue.",
+      "recordUnavailable": "The linked CRM record is unavailable. You can browse CRM contacts instead.",
+      "accessRequired": "You need CRM access in the OrgTik workspace. Contact an administrator.",
+      "unavailable": "The OrgTik CRM is currently unavailable.",
+      "openFailed": "Couldn’t open CRM. Try again.",
+      "checkFailed": "CRM access could not be checked. Try again.",
+      "retry": "Retry"
+    },
     "title": "Leads",
     "description": "Enquiries from the website’s forms, in the one pipeline Sales works from, with the page, selection and campaign each came with.",
     "export": "Export CSV",
@@ -971,7 +1052,8 @@
       "qualified": "No qualified leads",
       "quoted": "No quotes out",
       "won": "Nothing won yet",
-      "closed": "Nothing closed"
+      "closed": "Nothing closed",
+      "all": "No leads yet"
     },
     "colLead": "Lead",
     "colTopic": "Topic",
@@ -1178,7 +1260,8 @@
     },
     "copyAddress": "Copy address",
     "copied": "Address copied.",
-    "copyFailed": "Couldn’t copy. Open the file and copy its address from there."
+    "copyFailed": "Couldn’t copy. Open the file and copy its address from there.",
+    "translation": "Translation"
   },
   "Nav": {
     "overview": "Overview",
@@ -1814,7 +1897,7 @@
     "stale_translation_source": "The source changed. Generate a new translation draft.",
     "operation_conflict": "This recovery key belongs to a different command.",
     "release_draft_required": "Every release item must have a saved draft.",
-    "setupBody": "Your checklist uses your actual content edits, media imports, reviews and enabled webhooks.",
+    "setupBody": "Your checklist follows your content edits, media updates, and content reviews.",
     "dismissSetup": "Dismiss checklist",
     "showSetup": "Show checklist",
     "autosave": "Autosave drafts",
@@ -1866,13 +1949,13 @@
     },
     "setupStep": {
       "content": "Edit content",
-      "media": "Import media",
+      "media": "Review media",
       "review": "Submit review",
       "webhook": "Enable mock webhook"
     },
     "setupHint": {
       "content": "Save your first actual draft",
-      "media": "Use provided samples in the library",
+      "media": "Update a file’s description, tags, or rights.",
       "review": "Bundle saved drafts for another reviewer",
       "webhook": "Record simulated publication receipts"
     },
@@ -1943,7 +2026,22 @@
     "searching": "Searching users…",
     "noUsers": "No users match. Search by name or email.",
     "userSearchFailed": "Users could not be loaded.",
-    "retry": "Try again"
+    "retry": "Try again",
+    "editRole": "Edit role",
+    "saveChanges": "Save changes",
+    "deleteRole": "Delete role",
+    "roleName": "Role name",
+    "definitionHelp": "Name this role and choose its permissions. Assign roles to people in User Management.",
+    "definitionStale": "This role changed. Close this dialog and reopen it to load the latest version.",
+    "invalidRoleName": "Enter a unique role name with 1–100 characters.",
+    "roleInUse": "This role is assigned to users. Reassign them before deleting it.",
+    "builtinRole": "Built-in roles can be edited but cannot be deleted.",
+    "roleFailed": "The role could not be saved or deleted. Try again.",
+    "roleSaved": "Role saved",
+    "roleDeleted": "Role deleted",
+    "deleteRoleTitle": "Delete {role}?",
+    "deleteRoleImpact": "The role and its permissions will be removed. Only unassigned custom roles can be deleted.",
+    "roleLimit": "Up to 100 custom roles are supported. Delete an unused role first."
   },
   "Roadmap": {
     "saveError": "Could not save. Your changes are still here. Try again.",

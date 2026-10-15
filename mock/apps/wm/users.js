@@ -1,5 +1,5 @@
 const { createIdentityUser } = require("../../lib/accounts");
-const { ROLES } = require("./permissions");
+const { ROLES, permissionsFor } = require("./permissions");
 const { createHash } = require("node:crypto");
 
 function capabilities(identity, actor) {
@@ -15,6 +15,8 @@ function registerUsers(
   {
     identity,
     store,
+    definitions = {},
+    overrides = {},
     need,
     ok,
     fail,
@@ -34,6 +36,7 @@ function registerUsers(
           user.email,
           user.isActive,
           rolesOf(user),
+          Boolean(identity.grants.website_manager?.[user.key]?.rolePaused),
         ]),
       )
       .digest("hex");
@@ -46,6 +49,7 @@ function registerUsers(
     email: user.email,
     active: user.isActive,
     roles: rolesOf(user),
+    rolePaused: Boolean(identity.grants.website_manager?.[user.key]?.rolePaused),
     version: versionOf(user),
   });
   const log = (actor, action, user) => {
@@ -166,10 +170,17 @@ function registerUsers(
           "You cannot deactivate yourself.",
         );
     }
+    if (body.rolePaused !== undefined) {
+      const nextRoles = Array.isArray(body.roles) ? body.roles : rolesOf(user);
+      if (typeof body.rolePaused !== "boolean") return fail(res, 422, "invalid_pause", "Choose a valid role access state.");
+      if (!nextRoles.length) return fail(res, 409, "role_required", "Assign a role before pausing its access.");
+      if (user.id === actor.id && body.rolePaused) return fail(res, 409, "self_lockout", "You cannot pause your own Website Manager access.");
+      if (!capabilities(identity, actor).accounts && [...rolesOf(user), ...nextRoles].some(role => ["wm_owner", "wm_super_admin"].includes(role))) return fail(res, 403, "suite_admin_required", "Only central super administrators can pause protected roles.");
+    }
     if (body.roles !== undefined) {
       if (
         !Array.isArray(body.roles) ||
-        body.roles.some((role) => !Object.hasOwn(ROLES, role)) ||
+        body.roles.some((role) => !Object.hasOwn(ROLES, role) && !Object.hasOwn(definitions, role)) ||
         new Set(body.roles).size !== body.roles.length
       )
         return fail(
@@ -191,6 +202,11 @@ function registerUsers(
         );
       if (!capabilities(identity, actor).accounts && ["wm_owner", "wm_super_admin"].some(role => body.roles.includes(role) !== rolesOf(user).includes(role)))
         return fail(res, 403, "suite_admin_required", "Only central super administrators can assign owner or super administrator access.");
+      if (user.id === actor.id) {
+        const next = permissionsFor(body.roles, overrides);
+        if (["roles:manage", "users:manage", "settings:view"].some(permission => (req.who.permissions ?? permissionsFor(rolesOf(actor), overrides)).includes(permission) && !next.includes(permission)))
+          return fail(res, 409, "self_lockout", "You cannot remove your own administration access.");
+      }
       const workspace = S?.workspace("ws_orgtik");
       const member = workspace?.members.find(
         (member) => member.userKey === user.key,
@@ -233,6 +249,7 @@ function registerUsers(
         JSON.stringify([...body.roles].sort())
       ) {
         (identity.grants.website_manager ||= {})[user.key] = {
+          ...identity.grants.website_manager?.[user.key],
           roles: [...body.roles],
           permissions: [],
         };
@@ -242,6 +259,14 @@ function registerUsers(
             (S.db.staffAccessEpochs[user.key] || 0) + 1;
         }
         log(actor, "user_roles", user);
+      }
+    }
+    if (body.rolePaused !== undefined) {
+      const grant = identity.grants.website_manager[user.key];
+      if (Boolean(grant.rolePaused) !== body.rolePaused) {
+        grant.rolePaused = body.rolePaused;
+        if (S) { S.db.staffAccessEpochs ||= {}; S.db.staffAccessEpochs[user.key] = (S.db.staffAccessEpochs[user.key] || 0) + 1; }
+        log(actor, body.rolePaused ? "user_role_pause" : "user_role_resume", user);
       }
     }
     if (accountEdit) {

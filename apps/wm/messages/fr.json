@@ -62,7 +62,8 @@
       "idea": "Idées",
       "lead": "Demandes",
       "settings": "Réglages",
-      "user": "Gestion des utilisateurs"
+      "user": "Gestion des utilisateurs",
+      "role": "Rôles"
     },
     "everyone": "Tout le monde",
     "colWhen": "Quand",
@@ -120,7 +121,12 @@
       "user_roles": "Rôles du site modifiés",
       "sample_revision": "Révision de démonstration ajoutée",
       "manager_order": "Réorganisé les éléments du gestionnaire",
-      "role_permissions": "Autorisations du rôle modifiées"
+      "role_permissions": "Autorisations du rôle modifiées",
+      "role_create": "Rôle créé",
+      "role_update": "Rôle modifié",
+      "role_delete": "Rôle supprimé",
+      "user_role_pause": "Accès du rôle suspendu",
+      "user_role_resume": "Accès du rôle rétabli"
     }
   },
   "Auth": {
@@ -142,6 +148,20 @@
     "it-support": "Support informatique"
   },
   "Editor": {
+    "caseStudyDisplay": {
+      "title": "Affichage de l’étude de cas",
+      "card": "Carte du projet uniquement",
+      "cardHelp": "Afficher la carte du projet sans le récit complet ni les résultats.",
+      "sample": "Récit complet · résultats d’exemple",
+      "sampleHelp": "Afficher le récit et les résultats avec des mentions d’exemple visibles.",
+      "sampleUnavailable": "Disponible tant que les résultats sont indiqués comme exemples.",
+      "approved": "Récit complet · résultats approuvés",
+      "approvedHelp": "Afficher le récit avec les résultats confirmés du projet.",
+      "approvedUnavailable": "Confirmez d’abord les résultats pour utiliser cette option.",
+      "publication": "Enregistrez le brouillon, puis terminez la révision et la publication pour appliquer ce choix.",
+      "permission": "Seul un responsable d’approbation du contenu peut modifier l’affichage de l’étude de cas.",
+      "saveBeforeConfirm": "Enregistrez ou annulez vos modifications avant de confirmer les résultats."
+    },
     "department": "Département",
     "allDepartments": "Tous les départements",
     "state": "État",
@@ -194,10 +214,10 @@
     "staleTitle": "Quelqu’un d’autre a modifié ceci",
     "staleBody": "{who} a enregistré une version plus récente pendant votre modification. Rechargez pour la voir ; vos modifications non enregistrées seront perdues.",
     "reload": "Recharger",
-    "figuresBanner": "Ces chiffres sont des exemples. Approuvez les résultats avant d’activer et publier le récit.",
-    "approveFigures": "Confirmer les chiffres",
+    "figuresBanner": "Ces résultats sont des exemples. Affichez-les avec cette mention ou confirmez les résultats approuvés par le client pour utiliser le récit approuvé.",
+    "approveFigures": "Confirmer les résultats",
     "approveFiguresTitle": "Confirmer ces chiffres comme résultats réels ?",
-    "approveFiguresImpact": "Confirmez uniquement les résultats approuvés par le client. Cela débloque le récit ; sa publication exige toujours une validation.",
+    "approveFiguresImpact": "Confirmez uniquement les résultats approuvés par le client. L’option « Récit complet · résultats approuvés » devient disponible. Sélectionnez-la, enregistrez le brouillon, puis terminez la révision et la publication.",
     "approveFiguresAck": "Le client a approuvé ces chiffres.",
     "sampleLabel": "Mention d’exemple sur le site",
     "versions": "Versions",
@@ -678,7 +698,7 @@
   },
   "Ideas": {
     "title": "Idées",
-    "description": "Suggestions du formulaire public de la feuille de route. Les idées en attente restent privées ; le vote est une simulation locale dans la page.",
+    "description": "Les suggestions du site arrivent ici sous forme d’idées privées à examiner. Publiez une idée sur la feuille de route communautaire, puis modérez ici ses commentaires. Les votes restent dans la session du navigateur.",
     "closed": "Fermées",
     "search": "Rechercher des idées",
     "tableLabel": "Idées",
@@ -698,7 +718,8 @@
       "planned": "Rien de prévu pour l’instant",
       "in_progress": "Rien en cours",
       "shipped": "Rien de livré pour l’instant",
-      "closed": "Aucune idée fermée"
+      "closed": "Aucune idée fermée",
+      "all": "Aucune idée pour le moment"
     },
     "actions": {
       "publish": "Publier pour le vote",
@@ -727,7 +748,7 @@
       "hide": "Masquer « {title} » ?"
     },
     "impact": {
-      "publish": "L’idée apparaît avec des chiffres d’exemple et un vote local dans la page. Les commentaires sont des chiffres d’exemple.",
+      "publish": "L’idée apparaît dans la colonne Ouvert de la feuille de route communautaire. Les commentaires restent privés jusqu’à leur approbation ici.",
       "plan": "La feuille de route indique que l’idée est prévue. Le vote reste une simulation locale.",
       "start": "La page la montre comme en cours.",
       "ship": "La page la montre comme livrée, avec un lien vers le résultat.",
@@ -762,7 +783,9 @@
       "merge": "Fusionnée avec une autre idée",
       "merged_from": "Une autre idée a été fusionnée ici",
       "hide": "Masquée",
-      "edit": "Idée modifiée"
+      "edit": "Idée modifiée",
+      "comment_approve": "Commentaire approuvé",
+      "comment_hide": "Commentaire masqué"
     },
     "source": "Source",
     "sourceWebsite": "Site web",
@@ -772,7 +795,45 @@
     "erase": "Effacer les données personnelles",
     "eraseTitle": "Effacer les données personnelles de cette personne ?",
     "eraseImpact": "Le nom et l’adresse e-mail seront supprimés. L’idée et son historique seront conservés. Cette action est irréversible.",
-    "sampleComments": "Commentaires de démonstration"
+    "sampleComments": "Commentaires de démonstration",
+    "discussion": {
+      "title": "Commentaires des visiteurs",
+      "status": "Statut",
+      "all": "Tous",
+      "pending": "En attente",
+      "approved": "Approuvé",
+      "hidden": "Masqué",
+      "help": "Seuls les commentaires approuvés apparaissent sous cette idée sur le site. Les commentaires en attente et masqués restent privés. Les discussions d’exemple sont présentées séparément.",
+      "empty": "Aucun commentaire de visiteur avec ce statut.",
+      "waiting": "{count, plural, one {# commentaire à examiner} other {# commentaires à examiner}}",
+      "approve": "Approuver le commentaire",
+      "decline": "Refuser le commentaire",
+      "hide": "Masquer le commentaire",
+      "approveTitle": "Approuver ce commentaire ?",
+      "hideTitle": "Masquer ce commentaire ?",
+      "approveImpact": "Le nom et le commentaire apparaissent dans la discussion publique de cette idée. L’adresse e-mail reste privée.",
+      "hideImpact": "Ce commentaire reste dans Website Manager et est retiré de la discussion publique.",
+      "reason": "Motif",
+      "saved": "Commentaire mis à jour",
+      "refresh": "Actualiser les commentaires",
+      "declineTitle": "Refuser ce commentaire ?",
+      "declineImpact": "Ce commentaire reste privé dans Website Manager et ne sera pas publié."
+    },
+    "colCategory": "Catégorie",
+    "colTags": "Tags",
+    "noTags": "Aucun tag",
+    "categoryHelp": "La catégorie choisie dans le formulaire de suggestion du site. Vous pouvez la corriger ici.",
+    "tagsHelp": "Ajoutez jusqu’à 10 tags thématiques. Appuyez sur Entrée ou sur une virgule après chaque tag ; 100 caractères maximum par tag.",
+    "tagsPlaceholder": "Ajouter un tag",
+    "tagsError": "Utilisez jusqu’à 10 tags de 100 caractères maximum chacun.",
+    "clearFilters": "Effacer les filtres",
+    "categories": {
+      "unassigned": "Non précisée",
+      "new_project": "Un nouveau projet",
+      "product_idea": "Une idée de produit",
+      "service_improvement": "Une amélioration de service",
+      "hosting_support": "Hébergement et assistance"
+    }
   },
   "Improvements": {
     "actions": "Actions",
@@ -850,7 +911,7 @@
     "noResults": "Aucune entrée correspondante",
     "websiteRoles": "Rôles du gestionnaire de site",
     "websiteRolesHelp": "Accordez l’accès au gestionnaire de site. Les autres rôles sont gérés au niveau central. Sans rôle, l’accès est retiré.",
-    "newAccount": "Créer un compte",
+    "newAccount": "Ajouter un utilisateur",
     "editAccount": "Modifier le compte et l’accès",
     "centralUsers": "Gestion centrale des utilisateurs",
     "centralAccountsHelp": "Votre rôle gère l’accès au site. Les administrateurs centraux gèrent les comptes et leur activation.",
@@ -951,9 +1012,29 @@
     "allCapabilities": "Toutes les permissions",
     "rotationNote": "Rotating words are used in the Home hero. Other pages use fixed headings.",
     "rotationSourceHelp": "Ces textes défilants utilisent les titres des éléments ci-dessous. Ouvrez un élément pour gérer son titre.",
-    "templateField": "Cette valeur est fixée par le modèle du site et affichée ici à titre de référence."
+    "templateField": "Cette valeur est fixée par le modèle du site et affichée ici à titre de référence.",
+    "saveChanges": "Enregistrer les modifications",
+    "rolesFilter": "Rôles",
+    "pauseRoleAccess": "Suspendre l’accès du rôle",
+    "resumeRoleAccess": "Rétablir l’accès du rôle",
+    "roleAccessPaused": "Accès du rôle à Website Manager suspendu.",
+    "roleAccessResumed": "Accès du rôle à Website Manager rétabli.",
+    "rolePaused": "Suspendu",
+    "accountStatusStale": "Ce compte a changé. La liste a été actualisée ; réessayez.",
+    "allYears": "Toutes les années"
   },
   "Leads": {
+    "crm": {
+      "openRecord": "Ouvrir dans CRM",
+      "openContacts": "Ouvrir les contacts CRM",
+      "notLinked": "Cette demande n’a pas encore de fiche CRM associée. Ouvrez les contacts CRM pour continuer.",
+      "recordUnavailable": "La fiche CRM associée est indisponible. Vous pouvez parcourir les contacts CRM.",
+      "accessRequired": "Vous devez avoir accès au CRM dans l’espace OrgTik. Contactez un administrateur.",
+      "unavailable": "Le CRM OrgTik est actuellement indisponible.",
+      "openFailed": "Impossible d’ouvrir CRM. Réessayez.",
+      "checkFailed": "L’accès au CRM n’a pas pu être vérifié. Réessayez.",
+      "retry": "Réessayer"
+    },
     "title": "Demandes",
     "description": "Les demandes des formulaires du site, dans le pipeline unique des ventes, avec la page, la sélection et la campagne d’origine.",
     "export": "Exporter en CSV",
@@ -971,7 +1052,8 @@
       "qualified": "Aucune demande qualifiée",
       "quoted": "Aucun devis en attente",
       "won": "Rien de gagné pour l’instant",
-      "closed": "Rien de fermé"
+      "closed": "Rien de fermé",
+      "all": "Aucune demande pour le moment"
     },
     "colLead": "Demande",
     "colTopic": "Sujet",
@@ -1178,7 +1260,8 @@
     },
     "copyAddress": "Copier l’adresse",
     "copied": "Adresse copiée.",
-    "copyFailed": "Copie impossible. Ouvrez le fichier et copiez son adresse depuis là."
+    "copyFailed": "Copie impossible. Ouvrez le fichier et copiez son adresse depuis là.",
+    "translation": "Traduction"
   },
   "Nav": {
     "overview": "Vue d’ensemble",
@@ -1814,7 +1897,7 @@
     "stale_translation_source": "Le texte source a changé. Générez un nouveau brouillon.",
     "operation_conflict": "Cette clé de récupération appartient à une autre commande.",
     "release_draft_required": "Chaque élément doit avoir un brouillon enregistré.",
-    "setupBody": "Votre liste suit vos modifications, imports, validations et webhooks activés.",
+    "setupBody": "Votre liste suit les modifications de contenu, les mises à jour des médias et les révisions de contenu.",
     "dismissSetup": "Masquer la liste",
     "showSetup": "Afficher la liste",
     "autosave": "Enregistrement automatique",
@@ -1866,13 +1949,13 @@
     },
     "setupStep": {
       "content": "Modifier le contenu",
-      "media": "Importer des médias",
+      "media": "Vérifier les médias",
       "review": "Soumettre une validation",
       "webhook": "Activer un webhook simulé"
     },
     "setupHint": {
       "content": "Enregistrez votre premier brouillon",
-      "media": "Utilisez les exemples fournis",
+      "media": "Mettez à jour la description, les étiquettes ou les droits d’un fichier.",
       "review": "Regroupez des brouillons pour une autre personne",
       "webhook": "Enregistrez des reçus simulés"
     },
@@ -1943,7 +2026,22 @@
     "searching": "Recherche d’utilisateurs…",
     "noUsers": "Aucun utilisateur trouvé. Recherchez par nom ou adresse e-mail.",
     "userSearchFailed": "Impossible de charger les utilisateurs.",
-    "retry": "Réessayer"
+    "retry": "Réessayer",
+    "editRole": "Modifier le rôle",
+    "saveChanges": "Enregistrer les modifications",
+    "deleteRole": "Supprimer le rôle",
+    "roleName": "Nom du rôle",
+    "definitionHelp": "Nommez ce rôle et choisissez ses autorisations. Attribuez les rôles dans la gestion des utilisateurs.",
+    "definitionStale": "Ce rôle a changé. Fermez cette fenêtre et rouvrez-la pour charger la dernière version.",
+    "invalidRoleName": "Saisissez un nom de rôle unique de 1 à 100 caractères.",
+    "roleInUse": "Ce rôle est attribué à des utilisateurs. Réattribuez leurs rôles avant de le supprimer.",
+    "builtinRole": "Les rôles intégrés peuvent être modifiés, mais pas supprimés.",
+    "roleFailed": "Le rôle n’a pas pu être enregistré ou supprimé. Réessayez.",
+    "roleSaved": "Rôle enregistré",
+    "roleDeleted": "Rôle supprimé",
+    "deleteRoleTitle": "Supprimer {role} ?",
+    "deleteRoleImpact": "Le rôle et ses autorisations seront supprimés. Seuls les rôles personnalisés non attribués peuvent être supprimés.",
+    "roleLimit": "Vous pouvez créer jusqu’à 100 rôles personnalisés. Supprimez d’abord un rôle inutilisé."
   },
   "Roadmap": {
     "saveError": "Enregistrement impossible. Vos modifications sont conservées.",

@@ -51,6 +51,7 @@ function Editor({ m }: { m: MediaItem }) {
   const t = useTranslations("Media");
   const returnTo = safeReturn(useSearchParams().get("returnTo"), "/media");
   const ti = useTranslations("Improvements");
+  const te = useTranslations("Editor");
   const [description, setDescription] = useState(m.description ?? "");
   const [tags, setTags] = useState((m.tags ?? []).join(", "));
   const tp = useTranslations("EntryNames");
@@ -214,7 +215,7 @@ function Editor({ m }: { m: MediaItem }) {
           <Field label={ti("description")}><Textarea disabled={!editable} maxLength={2000} value={description} onChange={event => setDescription(event.target.value)} /></Field>
           <Field label={ti("tags")}><Input disabled={!editable} value={tags} onChange={event => setTags(event.target.value)} /></Field>
           {m.kind !== "video" ? (
-            <LocalizedField label={t("altText")} description={t("altHelp")} value={alt} onChange={(v) => setAlt(v)} required={["en"]} multiline errors={undefined} />
+            <LocalizedField label={t("translation")} description={t("altHelp")} value={alt} onChange={(v) => setAlt(v)} required={["en"]} multiline errors={undefined} />
           ) : null}
 
           <section aria-labelledby="rights" className="flex flex-col gap-4 rounded-card border border-line bg-raised p-4">
@@ -276,11 +277,11 @@ function Editor({ m }: { m: MediaItem }) {
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
             <span className="text-body-sm font-semibold text-fg">{t("unsaved")}</span>
             <div className="flex gap-2">
-              <Button variant="ghost" onClick={() => (setAlt(m.alt), setRights(m.rights), setFocal(m.focal), setDescription(m.description||""), setTags((m.tags||[]).join(", ")), setErrors({}))}>
-                {t("discard")}
+              <Button variant="secondary" disabled={saving.isLoading} onClick={() => (setAlt(m.alt), setRights(m.rights), setFocal(m.focal), setDescription(m.description||""), setTags((m.tags||[]).join(", ")), setErrors({}))}>
+                {te("cancel")}
               </Button>
               <Button loading={saving.isLoading} onClick={onSave}>
-                {t("save")}
+                {ti("saveChanges")}
               </Button>
             </div>
           </div>

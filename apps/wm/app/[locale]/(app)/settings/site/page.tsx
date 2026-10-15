@@ -14,6 +14,7 @@ const formOf = (s: SiteSettings): Form => ({ siteName: s.siteName, titleTemplate
 function SiteForm({ site }: { site: SiteSettings }) {
   const t = useTranslations("Site");
   const ti = useTranslations("Improvements");
+  const te = useTranslations("Editor");
   const can = useCan();
   const editable = can("settings:edit");
   const canLocales = editable && can("locales:enable");
@@ -130,11 +131,11 @@ function SiteForm({ site }: { site: SiteSettings }) {
           <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
             <span className="text-body-sm font-semibold text-fg">{t("unsaved")}</span>
             <div className="flex gap-2">
-              <Button variant="ghost" onClick={() => (setForm(formOf(site)), setErrors({}))}>
-                {t("discard")}
+              <Button variant="secondary" disabled={saving.isLoading} onClick={() => (setForm(formOf(site)), setErrors({}))}>
+                {te("cancel")}
               </Button>
               <Button loading={saving.isLoading} onClick={onSave}>
-                {t("save")}
+                {ti("saveChanges")}
               </Button>
             </div>
           </div>
