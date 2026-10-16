@@ -4,8 +4,32 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { execFileSync } from "node:child_process";
 import { restoreRuntimeEntry } from "./runtime-entry.mjs";
 const load = createRequire(import.meta.url);
+
+test("framework discovery needs no sensitive credentials and HTTP requests fail closed without them", () => {
+  const source = `
+    const assert=require('node:assert/strict');
+    process.env.MOCK_PERSISTENCE='supabase';
+    process.env.SUPABASE_URL='https://project.supabase.co';
+    process.env.SUPABASE_SECRET_KEY='[SENSITIVE]';
+    process.env.MOCK_SESSION_SECRET='[SENSITIVE]';
+    process.env.VERCEL_ENV='production';delete process.env.VERCEL_DEV_PORT;
+    assert.equal(typeof require('./mock/index.js'),'function');
+    const handler=require('./mock/api/index.js');
+    assert.equal(typeof handler,'function');
+    assert.equal(require.cache[require.resolve('./mock/server.js')],undefined);
+    let status,body;const headers={};
+    const res={set statusCode(value){status=value},setHeader(k,v){headers[k]=v},end(value){body=value}};
+    console.error=()=>{};
+    handler({method:'GET',url:'/wm/v2/public/site',headers:{}},res).then(()=>{
+      assert.equal(status,503);assert.equal(JSON.parse(body).message,'[mock] data store unavailable');
+      assert.ok(!body.includes('[SENSITIVE]'));
+    }).catch(()=>{process.exitCode=1});
+  `;
+  execFileSync(process.execPath, ["-e", source], { cwd: path.resolve(import.meta.dirname, "../.."), stdio: "pipe" });
+});
 test("the renamed declared entry uses restored handlers instead of stale compiled aliases", () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "orgtik-runtime-entry-"));
   try {

@@ -15,7 +15,8 @@ function deriveKey(secret, realm) {
   return Buffer.from(crypto.hkdfSync("sha256", bytes, Buffer.from(realm), Buffer.from("orgtik-session-authority:v1"), 32));
 }
 function validDocument(doc, realm) {
-  if (doc?.schema !== 1 || doc.realm !== realm || !Number.isSafeInteger(doc.revision) || doc.revision < 0 || !doc.state?.sessions || !doc.state?.families || !doc.state?.handoffs) throw unavailable();
+  const map = value => value !== null && typeof value === "object" && !Array.isArray(value);
+  if (doc?.schema !== 1 || doc.realm !== realm || !Number.isSafeInteger(doc.revision) || doc.revision < 0 || !map(doc.state) || !["sessions", "families", "handoffs", "userVersions"].every(key => map(doc.state[key]))) throw unavailable();
   return doc;
 }
 
@@ -128,6 +129,8 @@ function pickStore(config, options = {}) {
   if (!/^[\w-]{1,100}$/.test(realm)) throw unavailable();
   const url = env.KV_REST_API_URL || env.UPSTASH_REDIS_REST_URL, credential = env.KV_REST_API_TOKEN || env.UPSTASH_REDIS_REST_TOKEN;
   const secret = options.secret || env.MOCK_SESSION_SECRET || env.MOCK_AUTH_SECRET;
+  if (env.MOCK_PERSISTENCE === "supabase") return supabaseStore({ ...options, env, realm, secret });
+  if (env.MOCK_PERSISTENCE && env.MOCK_PERSISTENCE !== "redis") throw unavailable();
   if (url && credential) return redisStore(url, credential, { realm, secret });
   const localServices = env.ORGTIK_SERVICES_DEV === "1" && env.VERCEL_ENV === "development";
   if (!localServices && (config.hosted || env.VERCEL || url || credential)) return { kind: "unavailable", realm, async signingKey() { throw unavailable(); }, async read() { throw unavailable(); }, async compareAndSwap() { throw unavailable(); } };
@@ -135,4 +138,27 @@ function pickStore(config, options = {}) {
   return fileStore(file, { realm, secret });
 }
 
-module.exports = { emptyState, memoryStore, fileStore, redisStore, pickStore, deriveKey };
+function supabaseStore(options = {}) {
+  const client = options.client || require("./supabase-client").supabaseClient(options);
+  const realm = options.realm || client.realm;
+  const key = deriveKey(options.secret || options.env?.MOCK_SESSION_SECRET || process.env.MOCK_SESSION_SECRET, realm);
+  return {
+    kind: "supabase", realm,
+    async signingKey() { return Buffer.from(key); },
+    async read() {
+      const reply = await client.rpc("security_read");
+      if (reply.status !== "ok") throw unavailable();
+      return reply.document === null ? { schema: 1, realm, revision: 0, state: emptyState() } : clone(validDocument(reply.document, realm));
+    },
+    async compareAndSwap(expectedRevision, state) {
+      if (!Number.isSafeInteger(expectedRevision) || expectedRevision < 0) throw new TypeError("Invalid security revision");
+      const document = validDocument({ schema: 1, realm, revision: expectedRevision + 1, state: clone(state) }, realm);
+      const reply = await client.rpc("security_cas", { expectedRevision, document });
+      if (reply.status === "conflict") throw conflict();
+      if (reply.status !== "ok" || reply.document?.revision !== expectedRevision + 1) throw unavailable();
+      return clone(validDocument(reply.document, realm));
+    },
+  };
+}
+
+module.exports = { emptyState, memoryStore, fileStore, redisStore, pickStore, deriveKey, supabaseStore };

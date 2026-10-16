@@ -129,10 +129,11 @@ Other startup switches: `MOCK_STRICT_SCOPES=1` turns strict access on from the s
 
 ## Data that survives restarts (the write journal, D-053)
 
-Local mode defaults to a persistent journal file. Hosted mode reuses the configured Redis store and fails closed if account/session persistence is unavailable. Versioned compressed checkpoints preserve platform, workspace and internal CMS state; account changes share the domain CAS and security records stay separate. Bearer tokens/passwords do not enter business history.
+Local mode defaults to a persistent journal file. Hosted mode uses the selected Supabase or Redis store and fails closed if account/session persistence is unavailable. Versioned compressed checkpoints preserve platform, workspace and internal CMS state; account changes share the domain CAS and security records stay separate. Bearer tokens/passwords do not enter business history.
 
 | Setting | Effect |
 |---|---|
+| `MOCK_PERSISTENCE=supabase` + `SUPABASE_URL` + `SUPABASE_SECRET_KEY` + `MOCK_SESSION_SECRET` | Private Postgres RPCs and private Storage. Apply the migration in `supabase/migrations` first; server keys never go to browser variables. This explicit selection takes precedence over retained Redis credentials. |
 | `KV_REST_API_URL` + `KV_REST_API_TOKEN` (or `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`) | Upstash Redis. The Vercel Marketplace integration sets these on the mock project. |
 | `MOCK_JOURNAL=file` | A file in `journal/<sandbox>.json`. Useful for trying a "cold start" locally. |
 | `MOCK_JOURNAL=memory` | In this process only (tests). |
@@ -141,7 +142,7 @@ Local mode defaults to a persistent journal file. Hosted mode reuses the configu
 - **How it stays identical:** fixtures use the journal's initialization instant. Current operations restore committed snapshots; historical input-only tool/financial prefixes use private reducers. Invalid or conflicting history fails503 rather than losing data.
 - **Concurrency:** requests serialize locally and commit against the shared epoch/revision across instances. Failed speculative work is discarded; scoped receipts prevent repeating accepted effects.
 - **Status and reset:** `GET /__mock/status` reports journal state. Authorized fixture resets are for isolated verification only. Production verification must never reset business data or advance the clock.
-- **Limits:**5,000 changes per sandbox (`MOCK_JOURNAL_MAX`),512KB compressed journal entries and16MB decoded snapshots. Oversized persistence returns failure. Arbitrary binary uploads remain deferred; use packaged sample assets.
+- **Limits:**5,000 changes per sandbox (`MOCK_JOURNAL_MAX`),512KB compressed journal entries and16MB decoded snapshots. Oversized persistence returns failure. Website Manager images use separate private storage, with a15MiB per-file limit. Provider database, storage and transfer quotas still apply; see the deployment guide in `tools/services/README.md`.
 - **Test:** `node lib/journal.test.js` (cold starts in separate processes, 8 checks).
 
 ## Known issues that come from the apps themselves

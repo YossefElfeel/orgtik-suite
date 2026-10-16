@@ -140,6 +140,11 @@ function groupsQuote(S, groups, resolved) {
 function secret(ctx) {
   const value = ctx.websiteOrderSecret || process.env.MOCK_WEBSITE_ORDER_SECRET || process.env.MOCK_HANDOFF_SECRET;
   if (value) return value;
+  if (process.env.MOCK_PERSISTENCE === "supabase") {
+    const authority = process.env.MOCK_SESSION_SECRET;
+    if (typeof authority !== "string" || Buffer.byteLength(authority) < 32) throw error(503, "order_service_unavailable", "The hosted mock persistent order store is unavailable.");
+    return crypto.createHmac("sha256", authority).update("orgtik:website-orders:claim-key:v1").digest("hex");
+  }
   // Reuse the already-required persistent-store credential with a separate purpose. The
   // credential and derived key never enter an order, log, URL or response; no new setup.
   const storeToken = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;

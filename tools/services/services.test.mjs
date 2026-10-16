@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import vm from "node:vm";
 import { createRequire } from "node:module";
 import { proxyBackend } from "./proxy.ts";
 import { configurationFor, frontendProjects, projectName, configFilename } from "./projects.mjs";
@@ -10,6 +11,15 @@ import { assertHobbyLimit, inspectFunctions } from "./check-artifact.mjs";
 const require = createRequire(import.meta.url);
 const { apps, clientEnvironment, packages, servicesNextConfig, webUrls } = require("./config.cjs");
 const config = JSON.parse(fs.readFileSync(new URL("../../vercel.dev.json", import.meta.url)));
+
+test("both local Services launchers discard inherited cloud persistence credentials", () => {
+  const env = { MOCK_PERSISTENCE: "supabase", SUPABASE_URL: "private-origin", SUPABASE_SECRET_KEY: "private-key", KV_REST_API_TOKEN: "private-redis", UPSTASH_REDIS_REST_TOKEN: "private-redis" };
+  vm.runInNewContext(fs.readFileSync(new URL("../../mock/services-local.cjs", import.meta.url), "utf8"), { process: { env } });
+  assert.equal(env.MOCK_JOURNAL, "file"); assert.equal(env.MOCK_AUTH_STORE, "file");
+  assert.ok(!Object.keys(env).some(key => /^(KV_|UPSTASH_|REDIS_|SUPABASE_)/.test(key) || key === "MOCK_PERSISTENCE"));
+  const native = fs.readFileSync(new URL("./local.cjs", import.meta.url), "utf8");
+  assert.ok(native.includes("SUPABASE_|") && native.includes("MOCK_|"));
+});
 
 test("isolated local previews allow only their loopback development origins", () => {
   const local = servicesNextConfig("wm", { ORGTIK_SERVICES: "1", ORGTIK_SERVICES_DEV: "1", SUITE_SERVICES_PUBLIC_URL: "http://127.0.0.1:3400" });
@@ -90,6 +100,15 @@ test("build URLs point at the same deployment and never require or publish a bin
 test("the upload guard accepts twelve functions and blocks an oversized split project", () => {
   assert.doesNotThrow(() => assertHobbyLimit({ total: 12, counts: { sos: 11, mock: 1 } }));
   assert.throws(() => assertHobbyLimit({ total: 13, counts: { sos: 12, mock: 1 } }), /Upload was stopped/);
+});
+
+test("persistence keys never enter any frontend or website client environment", () => {
+  const env = { ORGTIK_SERVICES: "1", SUITE_SERVICES_PUBLIC_URL: "https://suite.fixture.test", MOCK_PERSISTENCE: "supabase", SUPABASE_URL: "https://private-provider.fixture", SUPABASE_SECRET_KEY: "private-secret-fixture", SUPABASE_SERVICE_ROLE_KEY: "private-legacy-fixture", MOCK_SESSION_SECRET: "private-signing-fixture" };
+  for (const key of [...apps, "website"]) {
+    const published = JSON.stringify(clientEnvironment(key, env));
+    assert.ok(!published.includes("private-"), `${key} client environment must exclude persistence credentials`);
+    if (key !== "website") assert.ok(!JSON.stringify(servicesNextConfig(key, env)).includes("private-"));
+  }
 });
 
 test("function inventory distinguishes deferred Next.js routes from dedicated functions and rejects Edge output", () => {

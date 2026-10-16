@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { projectName, publicOrigin } from "./projects.mjs";
 import { ensureRedisConnection } from "./redis-connection.mjs";
+import { supabaseEnvironment } from "./persistence-environment.mjs";
 const key = process.argv[2] || "website";
 const team = "team_Ypx8oiLDZi3PBNi8ht8fYPsm", name = projectName(key);
 const sourceProject = "prj_74P0VeIbDAIyUy8u5r6h91mwai1o";
@@ -37,40 +38,47 @@ if (project.nodeVersion !== "22.x") await api(`/v9/projects/${project.id}`, "PAT
 
 const copy = [];
 if (key !== "website") {
-  const sourceProjectExists = await api(`/v9/projects/${sourceProject}`, "GET", undefined, true);
-  if (!sourceProjectExists) {
-    await ensureRedisConnection(api, { storeId: confirmedStore, projectId: project.id });
-    console.log("Reconnected the existing confirmed mock journal; the deleted source project is not required.");
+  const supabase = supabaseEnvironment(process.env);
+  if (supabase) {
+    copy.push(...supabase);
+    console.log("Configured shared Supabase persistence from CI secrets with sensitive credential protection; existing Redis connections remain unchanged.");
   } else {
-  const source = await api(`/v10/projects/${sourceProject}/env`);
-  const rows = Array.isArray(source) ? source : source.envs || [];
-  const keys = ["KV_REST_API_URL", "KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"];
-  const inEnvironment = (row, target) => !row.gitBranch && (Array.isArray(row.target) ? row.target.includes(target) : row.target === target);
-  const hasPair = values => [["KV_REST_API_URL", "KV_REST_API_TOKEN"], ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"]].some(pair => pair.every(key => values.some(row => row.key === key)));
-  const managed = rows.filter(row => keys.includes(row.key) && inEnvironment(row, "production") && row.contentHint?.type === "integration-store-secret");
-  const stores = [...new Set(managed.map(row => row.contentHint.storeId))];
-  if (hasPair(managed)) {
-    if (stores.length !== 1 || !/^store_[a-zA-Z0-9]+$/.test(stores[0])) throw new Error("The existing Redis integration is ambiguous.");
-    const storeId = stores[0];
-    const resource = await api(`/v1/storage/stores/${storeId}`);
-    if (resource.store?.id !== storeId) throw new Error("The existing Redis resource identity does not match.");
-    // The CLI uses projectsMetadata here; the connections endpoint instead
-    // returns display rows with nested project details.
-    const connections = resource.store.projectsMetadata || [];
-    const origins = connections.filter(row => row.projectId === sourceProject && row.environments?.includes("production"));
-    if (origins.length !== 1) throw new Error("The Redis store is not uniquely connected to the existing Production mock.");
-    await ensureRedisConnection(api, { storeId, projectId: project.id, envVarPrefix: origins[0].envVarPrefix });
-    console.log(`Connected the existing Redis integration ${storeId} to the confirmed new project; managed Secrets remain private.`);
-  } else {
-    // Legacy manually configured variables can use the effective Production-only
-    // export. Do not copy branch overrides or a provider's redacted placeholder.
-    const exported = await api(`/v3/env/pull/${sourceProject}/production?source=vercel-cli:env:pull`);
-    for (const key of keys) {
-      const value = exported.env?.[key];
-      if (typeof value === "string" && value && value !== "[SENSITIVE]") copy.push({ key, value, type: "encrypted", target: ["production", "preview"] });
+    copy.push({ key: "MOCK_PERSISTENCE", value: "redis", type: "plain", target: ["production", "preview"] });
+    const sourceProjectExists = await api(`/v9/projects/${sourceProject}`, "GET", undefined, true);
+    if (!sourceProjectExists) {
+      await ensureRedisConnection(api, { storeId: confirmedStore, projectId: project.id });
+      console.log("Reconnected the existing confirmed mock journal; the deleted source project is not required.");
+    } else {
+      const source = await api(`/v10/projects/${sourceProject}/env`);
+      const rows = Array.isArray(source) ? source : source.envs || [];
+      const keys = ["KV_REST_API_URL", "KV_REST_API_TOKEN", "UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"];
+      const inEnvironment = (row, target) => !row.gitBranch && (Array.isArray(row.target) ? row.target.includes(target) : row.target === target);
+      const hasPair = values => [["KV_REST_API_URL", "KV_REST_API_TOKEN"], ["UPSTASH_REDIS_REST_URL", "UPSTASH_REDIS_REST_TOKEN"]].some(pair => pair.every(key => values.some(row => row.key === key)));
+      const managed = rows.filter(row => keys.includes(row.key) && inEnvironment(row, "production") && row.contentHint?.type === "integration-store-secret");
+      const stores = [...new Set(managed.map(row => row.contentHint.storeId))];
+      if (hasPair(managed)) {
+        if (stores.length !== 1 || !/^store_[a-zA-Z0-9]+$/.test(stores[0])) throw new Error("The existing Redis integration is ambiguous.");
+        const storeId = stores[0];
+        const resource = await api(`/v1/storage/stores/${storeId}`);
+        if (resource.store?.id !== storeId) throw new Error("The existing Redis resource identity does not match.");
+        // The CLI uses projectsMetadata here; the connections endpoint instead
+        // returns display rows with nested project details.
+        const connections = resource.store.projectsMetadata || [];
+        const origins = connections.filter(row => row.projectId === sourceProject && row.environments?.includes("production"));
+        if (origins.length !== 1) throw new Error("The Redis store is not uniquely connected to the existing Production mock.");
+        await ensureRedisConnection(api, { storeId, projectId: project.id, envVarPrefix: origins[0].envVarPrefix });
+        console.log(`Connected the existing Redis integration ${storeId} to the confirmed new project; managed Secrets remain private.`);
+      } else {
+        // Legacy manually configured variables can use the effective Production-only
+        // export. Do not copy branch overrides or a provider's redacted placeholder.
+        const exported = await api(`/v3/env/pull/${sourceProject}/production?source=vercel-cli:env:pull`);
+        for (const key of keys) {
+          const value = exported.env?.[key];
+          if (typeof value === "string" && value && value !== "[SENSITIVE]") copy.push({ key, value, type: "encrypted", target: ["production", "preview"] });
+        }
+        if (!hasPair(copy)) throw new Error("The existing Production Redis configuration is unavailable; no replacement store was created.");
+      }
     }
-    if (!hasPair(copy)) throw new Error("The existing Production Redis configuration is unavailable; no replacement store was created.");
-  }
   }
 }
 copy.push(
@@ -89,4 +97,4 @@ fs.mkdirSync(authDirectory, { recursive: true, mode: 0o700 });
 fs.writeFileSync(path.join(authDirectory, "auth.json"), JSON.stringify({ token }), { mode: 0o600 });
 fs.appendFileSync(process.env.GITHUB_ENV, `ORGTIK_VERCEL_CONFIG=${authDirectory}\n`);
 fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `Services project: ${name} (${project.id})\n\nProduction dataset: services-production; Preview dataset: services-preview.\n`);
-console.log(`Configured ${name} in the confirmed team; existing Redis credentials remain private.`);
+console.log(`Configured ${name} in the confirmed team; persistence credentials remain private.`);

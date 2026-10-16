@@ -3,22 +3,33 @@
 // With a journal store configured (lib/journal.js, D-053) the data survives cold starts and is the
 // same on every instance; without one it lives in memory and resets on a cold start.
 process.env.ORGTIK_MOCK_NO_LISTEN = "1";
-const {createPresentationHandler}=require('../lib/presentation');
-const {presentationStorage}=require('../lib/presentation-storage');
-const presentation=createPresentationHandler(presentationStorage());
-const { slots, handle, ready } = require("../server");
+// Framework discovery and artifact verification import this module without
+// runtime-only sensitive variables. Initialize storage only for an HTTP request.
+let runtime;
+function loadRuntime() {
+  if (!runtime) {
+    const {createPresentationHandler}=require('../lib/presentation');
+    const {presentationStorage}=require('../lib/presentation-storage');
+    const presentation=createPresentationHandler(presentationStorage());
+    runtime = { ...require("../server"), presentation };
+  }
+  return runtime;
+}
 
 module.exports = async (req, res) => {
-  if (/^\/presentation(?:\/|\?|$)/.test(req.url||'')) {
-    req.url=req.url.replace(/^\/presentation/,'')||'/';
-    return presentation(req,res);
-  }
   if (req.method === "OPTIONS") {
     res.writeHead(204, { "access-control-allow-origin": req.headers.origin || "*", "access-control-allow-methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS", "access-control-allow-headers": req.headers["access-control-request-headers"] || "content-type,authorization", "access-control-allow-credentials": "true", vary: "Origin" });
     return res.end();
   }
+  let slots, handle;
   try {
-    await ready();
+    const current = loadRuntime();
+    ({slots, handle} = current);
+    if (/^\/presentation(?:\/|\?|$)/.test(req.url||'')) {
+      req.url=req.url.replace(/^\/presentation/,'')||'/';
+      return await current.presentation(req,res);
+    }
+    await current.ready();
   } catch (e) {
     console.error("[journal] start failed:", e);
     res.statusCode = 503;
